@@ -2,7 +2,7 @@
 <openerp>
     <data noupdate="0">
         <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form">
-            <field name="name">mail.compose.message.form (mail_attach_attachment)</field>
+            <field name="name">mail.compose.message.form (mail_attach_existing_attachment)</field>
             <field name="model">mail.compose.message</field>
             <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
             <field name="arch" type="xml">
