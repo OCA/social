@@ -14,6 +14,22 @@ To install this module, you need to:
 
  * Click on install
 
+Configuration and Usage
+=======================
+
+To configure this module, you need to:
+
+* Adding some attachments on an object 
+
+.. figure:: static/description/attachment.png
+   :alt: Attachment on purchase order
+
+* Then, by sending the object via email, you can select the attachment added earlier
+
+.. figure:: static/description/ex_mail_compose_message.png
+   :alt: Sends the Purchase Order by email
+
+
 Bug Tracker
 ===========
 
