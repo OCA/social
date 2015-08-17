@@ -19,7 +19,7 @@
 #
 ##############################################################################
 {
-    'name': "Social Media Icon Extension",
+    'name': "Xing Social Media Icon Extension",
     'summary': """Xing Extension for the social media icons from the odoo
     core""",
     'author': "bloopark systems GmbH & Co. KG, "
