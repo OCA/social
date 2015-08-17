@@ -33,6 +33,7 @@
     'license': 'AGPL-3',
     'depends': [
         'mail',
+        'document',
     ],
     'data': [
         'wizard/mail_compose_message_view.xml',
