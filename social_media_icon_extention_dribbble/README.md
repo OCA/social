@@ -17,11 +17,6 @@ Dribbble
 
 </center>
 
-Additional Info:
-----------------
-	
-    This Addon will load the current CSS Version 4.4.0 from Fontawesome in the assets (29KB).
-
 Integration example:
 --------------------
 
