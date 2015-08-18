@@ -12,10 +12,10 @@ Installation
 
 To install this module, you need to:
 
- * Click on install
+* Click on install
 
-Configuration and Usage
-=======================
+Usage
+=====
 
 To configure this module, you need to:
 
@@ -29,10 +29,14 @@ To configure this module, you need to:
 .. figure:: static/description/ex_mail_compose_message.png
    :alt: Sends the Purchase Order by email
 
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/205/8.0
+
 Known issues / Roadmap
 ======================
 
-The module only allows the addition of attachments linked to the object.
+* The module only allows the addition of attachments linked to the object.
 
 Bug Tracker
 ===========

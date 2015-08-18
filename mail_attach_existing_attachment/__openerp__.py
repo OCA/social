@@ -28,7 +28,7 @@
         Adding attachment on the object by sending this one""",
     'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
     'website': "http://acsone.eu",
-    'category': 'Uncategorized',
+    'category': 'Social Network',
     'version': '8.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
