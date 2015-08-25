@@ -23,7 +23,7 @@
 {
     'name': "Customizable unsubscribe link on mass mailing emails",
     'category': 'Marketing',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     'depends': [
         'mass_mailing',
     ],
