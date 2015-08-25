@@ -1,17 +1,12 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
+====================================================
 Customizable unsubscribe link on mass mailing emails
 ====================================================
 
 With this module you can set a custom unsubscribe link append at bottom of mass
 mailing emails.
-
-
-Installation
-============
-
-Nothing special to do
 
 
 Configuration
@@ -29,11 +24,13 @@ For example:
 
 Additionally, you can disable this link if you set this parameter to 'False'
 
+If this parameter (mass_mailing.unsubscribe.label) is not set (or set to '')
+default 'Click to unsubscribe' link will appear. This default text is
+translatable via Settings > Translations > Application Terms > Translated terms
+
 
 Usage
 =====
-
-Nothing special to do
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -43,8 +40,15 @@ Nothing special to do
 Known issues / Roadmap
 ======================
 
-* This custom html is not translatable, so you can define the same text in
-several languages
+* This custom html is not translatable, so as a suggestion, you can define
+the same text in several languages in several lines. For example:
+
+For example:
+```
+<small>[EN] You can unsubscribe <a href="%(url)s">here</a></small><br/>
+<small>[ES] Puedes darte de baja <a href="%(url)s">aquí</a></small>
+
+```
 
 
 Bug Tracker
