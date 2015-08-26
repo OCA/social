@@ -17,10 +17,11 @@ and add a 'mass_mailing.unsubscribe.label' parameter with html to set at bottom
 of mass emailing emails. Including '%(url)s' variable where unsubscribe link
 
 For example:
-```
-<small>You can unsubscribe <a href="%(url)s">here</a></small>
 
-```
+.. code:: html
+
+  <small>You can unsubscribe <a href="%(url)s">here</a></small>
+
 
 Additionally, you can disable this link if you set this parameter to 'False'
 
@@ -41,14 +42,14 @@ Known issues / Roadmap
 ======================
 
 * This custom html is not translatable, so as a suggestion, you can define
-the same text in several languages in several lines. For example:
+  the same text in several languages in several lines.
 
 For example:
-```
-<small>[EN] You can unsubscribe <a href="%(url)s">here</a></small><br/>
-<small>[ES] Puedes darte de baja <a href="%(url)s">aquí</a></small>
 
-```
+.. code:: html
+
+  <small>[EN] You can unsubscribe <a href="%(url)s">here</a></small><br/>
+  <small>[ES] Puedes darte de baja <a href="%(url)s">aquí</a></small>
 
 
 Bug Tracker
