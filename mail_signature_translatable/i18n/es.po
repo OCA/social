@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#   * mail_signature_multilang
+#   * mail_signature_translatable
 #
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: mail_signature_multilang
-#: model:ir.model,name:mail_signature_multilang.model_res_users
+#. module: mail_signature_translatable
+#: model:ir.model,name:mail_signature_translatable.model_res_users
 msgid "Users"
 msgstr "Usuarios"
