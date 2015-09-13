@@ -4,25 +4,24 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-20 02:49+0000\n"
 "PO-Revision-Date: 2017-06-20 02:49+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2017\n"
-"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Spanish (Colombia) (https://www.transifex.com/oca/teams/23907/es_CO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Language: es_CO\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction
 msgid "Action Needed"
-msgstr "Potreben ukrep"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
@@ -36,81 +35,80 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_details_required
 msgid "Check to ask for more details when this reason is selected."
 msgstr ""
-"Označite, da bi zahtevali več podrobnosti v primeru izbire tega razloga."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_create_uid
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_create_uid
 msgid "Created by"
-msgstr "Ustvaril"
+msgstr "Creado por"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_create_date
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_create_date
 msgid "Created on"
-msgstr "Ustvarjeno"
+msgstr "Creado"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_date
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_last_post
 msgid "Date of the last message posted on the record."
-msgstr "Datum zadnjega objavljenega sporočila na zapisu."
+msgstr "Fecha del último mensaje publicado en el registro."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_details
 msgid "Details"
-msgstr "Podrobnosti"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_details_required
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_details_required
 msgid "Details required"
-msgstr "Zahtevane podrobnosti"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_display_name
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_display_name
 msgid "Display Name"
-msgstr "Prikazni naziv"
+msgstr "Nombre Público"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_mass_mailing_list_not_cross_unsubscriptable
 msgid "Don't show this list in the other unsubscriptions"
-msgstr "Ne prikaži tega seznama pri drugih odjavah"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_email
 msgid "Email"
-msgstr "E-pošta"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
 msgid "Email Thread"
-msgstr "E-poštni niz"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_follower_ids
 msgid "Followers"
-msgstr "Sledilci"
+msgstr "Seguidores"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_channel_ids
 msgid "Followers (Channels)"
-msgstr "Sledilci (kanali)"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_partner_ids
 msgid "Followers (Partners)"
-msgstr "Sledilci (partnerji)"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Group by"
-msgstr "Združi po"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
@@ -120,17 +118,17 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
 msgid "I did not request this"
-msgstr "Tega nisem zahteval"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_too_many
 msgid "I get too many emails"
-msgstr "Dobivam preveč sporočil"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_interested
 msgid "I'm not interested"
-msgstr "Me ne zanima"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_id
@@ -141,12 +139,12 @@ msgstr "ID"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread
 msgid "If checked new messages require your attention."
-msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_mass_mailing_list_not_cross_unsubscriptable
@@ -155,42 +153,39 @@ msgid ""
 "other mailing list, in the section: 'Is there any other mailing list you "
 "want to leave?'"
 msgstr ""
-"Če označite to polje, ta seznam ne bo prikazan pri odjavljanju iz drugih "
-"poštnih seznamov v odseku: 'Se želite odjaviti še iz katerega poštnega "
-"seznama?'"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_is_follower
 msgid "Is Follower"
-msgstr "Je sledilec"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_last_post
 msgid "Last Message Date"
-msgstr "Datum zadnjega sporočila"
+msgstr "Fecha del Último Mensaje"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription___last_update
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason___last_update
 msgid "Last Modified on"
-msgstr "Zadnjič spremenjeno"
+msgstr "Última Modificación el"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_write_uid
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_write_uid
 msgid "Last Updated by"
-msgstr "Zadnji posodobil"
+msgstr "Actualizado por"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_write_date
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_write_date
 msgid "Last Updated on"
-msgstr "Zadnjič posodobljeno"
+msgstr "Actualizado"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
 msgid "Mailing List"
-msgstr "Poštni seznam"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
@@ -200,18 +195,18 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
 msgid "Mass Mailing"
-msgstr "Masovno razpošiljanje"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_mass_mailing_id
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Mass mailing"
-msgstr "Masovna pošta"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_mass_mailing_id
 msgid "Mass mailing from which he was unsubscribed."
-msgstr "Masovna pošta od katere je bil odjavljen."
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_content
@@ -226,47 +221,47 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_ids
 msgid "Messages"
-msgstr "Sporočila"
+msgstr "Mensajes"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Month"
-msgstr "Mesec"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_details
 msgid "More details on why the unsubscription was made."
-msgstr "Več podrobnosti o razlogih za odjavo."
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_name
 msgid "Name"
-msgstr "Naziv"
+msgstr "Nombre"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction_counter
 msgid "Number of Actions"
-msgstr "Število ukrepov"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction_counter
 msgid "Number of messages which requires an action"
-msgstr "Število sporočil, ki zahtevajo ukrep"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread_counter
 msgid "Number of unread messages"
-msgstr "Število neprebranih sporočil"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_other
 msgid "Other reason"
-msgstr "Drugi razlogi"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mail
 msgid "Outgoing Mails"
-msgstr "Izhodna pošta"
+msgstr "Correos Salientes"
 
 #. module: mass_mailing_custom_unsubscribe
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:56
@@ -277,80 +272,80 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_sequence
 msgid "Position of the reason in the list."
-msgstr "Položaj razloga v seznamu."
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Reason"
-msgstr "Razlog"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_sequence
 msgid "Sequence"
-msgstr "Zaporedje"
+msgstr "Secuencia"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
 msgid "Thank you!"
-msgstr "Hvala!"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread
 msgid "Unread Messages"
-msgstr "Neprebrana sporočila"
+msgstr "Mensajes sin Leer"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread_counter
 msgid "Unread Messages Counter"
-msgstr "Števec neprebranih sporočil"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
 msgid "Unsubscribe now"
-msgstr "Odjavi se zdaj"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_unsubscriber_id
 msgid "Unsubscriber"
-msgstr "Odjavitelj"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.actions.act_window,name:mass_mailing_custom_unsubscribe.mail_unsubscription_reason_action
 #: model:ir.ui.menu,name:mass_mailing_custom_unsubscribe.mail_unsubscription_reason_menu
 msgid "Unsubscription Reasons"
-msgstr "Razlogi za odjavo"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.actions.act_window,name:mass_mailing_custom_unsubscribe.mail_unsubscription_action
 #: model:ir.ui.menu,name:mass_mailing_custom_unsubscribe.mail_unsubscription_menu
 msgid "Unsubscriptions"
-msgstr "Odjave"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_website_message_ids
 msgid "Website Messages"
-msgstr "Sporočila iz spletne strani"
+msgstr "Mensajes del Sitio Web"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_website_message_ids
 msgid "Website communication history"
-msgstr "Kronologija komunikacij spletne strani"
+msgstr "Historial de comunicación del sitio web"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_unsubscriber_id
 msgid "Who was unsubscribed."
-msgstr "Kdo se je odjavil."
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id
 msgid "Why the unsubscription was made."
-msgstr "Zakaj je prišlo do odjave."
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Year"
-msgstr "Leto"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
