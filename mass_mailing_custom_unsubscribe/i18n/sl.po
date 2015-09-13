@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_attach_existing_attachment
+# * mass_mailing_custom_unsubscribe
 # 
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
@@ -18,17 +18,13 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#. module: mail_attach_existing_attachment
-#: field:mail.compose.message,object_attachment_ids:0
-msgid "Attachments"
-msgstr "Priponke"
+#. module: mass_mailing_custom_unsubscribe
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_mail.py:37
+#, python-format
+msgid "Click to unsubscribe"
+msgstr "Klikni za odjavo"
 
-#. module: mail_attach_existing_attachment
-#: field:mail.compose.message,can_attach_attachment:0
-msgid "Can Attach Attachment"
-msgstr "Lahko pripenja priponke"
-
-#. module: mail_attach_existing_attachment
-#: model:ir.model,name:mail_attach_existing_attachment.model_mail_compose_message
-msgid "Email composition wizard"
-msgstr "Čarovnik za sestavljanje e-pošte"
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Izhodna pošta"
