@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- © 2014-2015 Grupo ESOC <www.grupoesoc.es>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<template id="assets_backend"
+          name="Mail forward assets"
+          inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+        <link rel="stylesheet"
+              href="/mail_forward/static/src/css/mail_forward.css"/>
+        <script type="text/javascript"
+                src="/mail_forward/static/src/js/mail_forward.js"/>
+    </xpath>
+</template>
+
+</data>
+</openerp>
