@@ -1,0 +1,12 @@
+/* © 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ */
+
+.openerp .oe_mail .oe_msg .oe_msg_icons .oe_full_expand:hover a{
+    color: #BBBAFF;
+    text-shadow: 0px 1px #7C7BAD,
+                 0px -1px #7C7BAD,
+                 -1px 0px #7C7BAD,
+                 1px 0px #7C7BAD,
+                 0px 3px 3px rgba(0, 0, 0, 0.1);
+}

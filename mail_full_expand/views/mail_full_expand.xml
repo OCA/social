@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- © 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<record id="view" model="ir.ui.view">
+    <field name="name">mail.message.full_expand</field>
+    <field name="model">mail.message</field>
+    <field name="arch" type="xml">
+        <form string="Message" version="7.0">
+            <group>
+                <field name="author_id" readonly="1"/>
+                <field name="email_from" readonly="1"/>
+                <field name="date" readonly="1"/>
+                <field name="partner_ids"
+                       widget="many2many_tags"
+                       readonly="1"/>
+                <field name="notified_partner_ids"
+                       widget="many2many_tags"
+                       readonly="1"/>
+            </group>
+            <h1><field name="subject" readonly="1"/></h1>
+            <field name="body" readonly="1"/>
+            <field name="attachment_ids"
+                   widget="many2many_binary"
+                   readonly="1"/>
+        </form>
+    </field>
+</record>
+
+<record id="act_window" model="ir.actions.act_window">
+    <field name="name">Read Full Email</field>
+    <field name="res_model">mail.message</field>
+    <field name="src_model">mail.message</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="view_id" ref="view"/>
+    <field name="view_type">form</field>
+    <field name="view_mode">form</field>
+    <field name="target">new</field>
+</record>
+
+</data>
+</openerp>
