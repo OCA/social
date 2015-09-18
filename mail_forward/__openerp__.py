@@ -5,9 +5,9 @@
 {
     "name": "Message Forward",
     "summary": "Add option to forward messages",
-    "version": "8.0.6.0.0",
+    "version": "8.0.7.0.0",
     "category": "Social Network",
-    "website": "http://www.grupoesoc.es, https://odoo-community.org/",
+    "website": "https://odoo-community.org/",
     "author": "Grupo ESOC, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
@@ -17,8 +17,9 @@
         "web",
     ],
     "data": [
-        "wizard/mail_forward.xml",
         "views/assets.xml",
+        "views/res_request_link.xml",
+        "wizard/mail_forward.xml",
     ],
     "qweb": [
         "static/src/xml/mail_forward.xml",

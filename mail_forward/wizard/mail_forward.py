@@ -11,22 +11,8 @@ class MailForwardComposeMessage(models.TransientModel):
     It duplicates the message and optionally attaches it to another object
     of the database and sends it to another recipients than the original one.
     """
-
     _name = "mail_forward.compose.message"
     _inherits = {"mail.compose.message": "original_wizard_id"}
-
-    _models = [
-        "crm.lead",
-        "crm.meeting",
-        "crm.phonecall",
-        "mail.group",
-        "note.note",
-        "product.product",
-        "project.project",
-        "project.task",
-        "res.partner",
-        "sale.order",
-    ]
 
     @api.model
     def default_get(self, fields):
@@ -39,7 +25,6 @@ class MailForwardComposeMessage(models.TransientModel):
 
         This method fixes that by getting it from the context if available.
         """
-
         result = self.original_wizard_id.default_get(fields)
 
         if "subject" in result and "default_subject" in self.env.context:
@@ -49,23 +34,16 @@ class MailForwardComposeMessage(models.TransientModel):
 
     @api.model
     def models(self):
-        """Get allowed models and their names.
-
-        It searches for the models on the database, so if modules are not
-        installed, models will not be shown.
-        """
-
-        model_objs = self.env["ir.model"].search(
-            [("model", "in", self.env.context.get("model_list",
-                                                  self._models))],
+        """Get allowed models and their names."""
+        model_objs = self.env["res.request.link"].search(
+            [("mail_forward_target", "=", True)],
             order="name")
-        return [(m.model, m.name) for m in model_objs]
+        return [(m.object, m.name) for m in model_objs]
 
     @api.one
     @api.onchange("destination_object_id")
     def change_destination_object(self):
         """Update some fields for the new message."""
-
         if self.destination_object_id:
             self.model = self.destination_object_id._name
             self.res_id = self.destination_object_id.id
@@ -84,7 +62,6 @@ class MailForwardComposeMessage(models.TransientModel):
     @api.one
     def send_mail(self):
         """Send mail and execute the attachment relocation if needed."""
-
         # Let the original wizard do de hard work
         result = self.original_wizard_id.send_mail()
 

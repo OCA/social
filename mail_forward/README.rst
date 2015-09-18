@@ -9,31 +9,30 @@ Message forward
 This module was written to extend the functionality of mails to support
 forwarding them to another contact or database object.
 
-* **To another object of the database:**
-  * All its followers are notified according to their settings.
-* **To other contacts:**
-  * They recieve the forwarded message according to the usual notification
-    rules of Odoo.
+* **To another object of the database:** All its followers are notified
+  according to their settings.
 
-Installation
-============
+* **To other contacts:** They recieve the forwarded message according to the
+  usual notification rules of Odoo.
 
-When installed, this module allows forwarding to the following database
-objects:
+Configuration
+=============
 
-* ``crm.lead``
-* ``crm.meeting``
-* ``crm.phonecall``
-* ``mail.group``
-* ``note.note``
-* ``product.product``
-* ``project.project``
-* ``project.task``
-* ``res.partner``
-* ``sale.order``
+When installed, this module allows forwarding to a limited selection of
+database models, that will get automatically updated when you install other
+modules.
 
-Of course, if some of those are not available in your database, they will be
-hidden until you install the module that adds them.
+This list can be customized by a user that has *Technical Features* permission.
+To do it:
+
+* Go to *Settings > Technical > Database Structure > Referenceable Models*.
+
+* Any model there with *Mail forward target* enabled will appear in the list of
+  models that can get forwarded messages.
+
+  * If you want to *remove* a model from the list, it's usually better to just
+    *disable* its check box instead of deleting it, because that record might
+    be used by other modules.
 
 Usage
 =====
@@ -75,7 +74,7 @@ Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_. In
 case of trouble, please check there if your issue has already been reported. If
 you spotted it first, help us smashing it by providing a detailed and welcomed
 feedback `here
-<https://github.com/OCA/social/issues/new?body=module:%20mail_forward%0Aversion:%208.0.6.0.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+<https://github.com/OCA/social/issues/new?body=module:%20mail_forward%0Aversion:%208.0.7.0.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 
 Credits
