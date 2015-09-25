@@ -1,9 +1,9 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
-====================================================
-Customizable unsubscribe link on mass mailing emails
-====================================================
+==========================================================
+Customizable unsubscription process on mass mailing emails
+==========================================================
 
 With this module you can set a custom unsubscribe link append at bottom of mass
 mailing emails.
@@ -12,22 +12,27 @@ mailing emails.
 Configuration
 =============
 
-To configure unsubscribe label go to Setting > Technical > Parameters > System parameters
-and add a 'mass_mailing.unsubscribe.label' parameter with html to set at bottom
-of mass emailing emails. Including '%(url)s' variable where unsubscribe link
+To configure unsubscribe label go to *Setting > Technical > Parameters > System
+parameters* and add a 'mass_mailing.unsubscribe.label' parameter with html to
+set at bottom of mass emailing emails. Including ``%(url)s`` variable where
+unsubscribe link.
 
-For example:
+For example::
 
-.. code:: html
+    <small>You can unsubscribe <a href="%(url)s">here</a></small>
 
-  <small>You can unsubscribe <a href="%(url)s">here</a></small>
+Additionally, you can disable this link if you set this parameter to ``False``.
 
+If this parameter (``mass_mailing.unsubscribe.label``) is not set (or set to
+``''``) default 'Click to unsubscribe' link will appear. This default text is
+translatable via *Settings > Translations > Application Terms > Translated
+terms*.
 
-Additionally, you can disable this link if you set this parameter to 'False'
+Also your unsubscriptors will recieve a beautier good bye page. You can
+customize it clicking here **after installing the module**:
 
-If this parameter (mass_mailing.unsubscribe.label) is not set (or set to '')
-default 'Click to unsubscribe' link will appear. This default text is
-translatable via Settings > Translations > Application Terms > Translated terms
+* `Unsubscription successful </page/mass_mail_unsubscription_success>`_.
+* `Unsubscription failed </page/mass_mail_unsubscription_failure>`_.
 
 
 Usage
@@ -69,6 +74,7 @@ Contributors
 
 * Rafael Blasco <rafabn@antiun.com>
 * Antonio Espinosa <antonioea@antiun.com>
+* Jairo Llopis <yajo.sk8@gmail.com>
 
 Maintainer
 ----------
