@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<openerp>
+<data>
+
+<template name="Unsubscription worked"
+          id="website.mass_mail_unsubscription_success"
+          page="True">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="jumbotron mt16 mb16">
+                <div class="container">
+                    <h1>
+                        You were successfully unsubscribed from our
+                        mailing list.
+                    </h1>
+                    <h3 class="text-muted">
+                        It's sad to see you go, but if you love
+                        something, let it go.
+                    </h3>
+                    <p>
+                        However, we are open to suggestions. Please tell us
+                        why you left.
+                    </p>
+                    <p>
+                        <a class="btn btn-primary btn-lg"
+                           href="/page/website.contactus">Contact us</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </t>
+</template>
+
+<template name="Unsubscription failed"
+          id="website.mass_mail_unsubscription_failure"
+          page="True">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="jumbotron mt16 mb16">
+                <div class="container">
+                    <h1>
+                        There was an error processing your unsubscription
+                        request.
+                    </h1>
+                    <p>
+                        We apologize for the inconvenience. You can contact us
+                        and we will handle your unsubscription manually.
+                    </p>
+                    <p>Thanks for your patience.</p>
+                    <p>
+                        <a class="btn btn-primary btn-lg"
+                           href="/page/website.contactus">Contact us</a>
+                    </p>
+                </div>
+            </section>
+        </div>
+    </t>
+</template>
+
+</data>
+</openerp>
