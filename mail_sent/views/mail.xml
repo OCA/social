@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+    <record id="action" model="ir.actions.client">
+        <field name="name">Sent</field>
+        <field name="tag">mail.wall</field>
+        <field name="res_model">mail.message</field>
+        <field name="context">{
+          'default_model': 'res.users',
+          'default_res_id': uid,
+          'thread_model': 'res.partner',
+        }</field>
+        <field name="params" eval="&quot;{
+            'domain': [
+                ('author_id.user_ids', 'in', [uid]),
+            ],
+            'view_mailbox': True,
+            'read_action': 'read',
+            'show_compose_message': False,
+        }&quot;"/>
+        <field name="help" type="html">
+            <p><b>No sent messages.</b></p>
+            <p>This list contains messages sent by you.</p>
+        </field>
+    </record>
+
+    <menuitem id="menu"
+              action="action"
+              parent="mail.mail_feeds"
+              groups="base.group_user"/>
+</data>
+</openerp>
