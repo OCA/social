@@ -11,7 +11,7 @@ class MailForwardComposeMessage(models.TransientModel):
     It duplicates the message and optionally attaches it to another object
     of the database and sends it to another recipients than the original one.
     """
-    _name = "mail_forward.compose.message"
+    _name = "mail_forward.compose_message"
     _inherits = {"mail.compose.message": "original_wizard_id"}
 
     @api.model

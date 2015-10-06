@@ -8,7 +8,7 @@
 
 <record id="compose_form" model="ir.ui.view">
     <field name="name">Forward Email Form</field>
-    <field name="model">mail_forward.compose.message</field>
+    <field name="model">mail_forward.compose_message</field>
     <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
     <field name="arch" type="xml">
         <data>
@@ -51,7 +51,7 @@
 
 <record id="compose_action" model="ir.actions.act_window">
     <field name="name">Forward Email</field>
-    <field name="res_model">mail_forward.compose.message</field>
+    <field name="res_model">mail_forward.compose_message</field>
     <field name="src_model">mail.message</field>
     <field name="type">ir.actions.act_window</field>
     <field name="view_id" ref="compose_form"/>

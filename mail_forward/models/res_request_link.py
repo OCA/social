@@ -5,7 +5,7 @@
 from openerp import fields, models
 
 
-class IrModel(models.Model):
+class ResRequestLink(models.Model):
     _inherit = "res.request.link"
 
     mail_forward_target = fields.Boolean(

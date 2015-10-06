@@ -18,8 +18,8 @@
     ],
     "data": [
         "views/assets.xml",
+        "views/compose_message.xml",
         "views/res_request_link.xml",
-        "wizard/mail_forward.xml",
     ],
     "qweb": [
         "static/src/xml/mail_forward.xml",
