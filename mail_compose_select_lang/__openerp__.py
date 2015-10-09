@@ -6,7 +6,7 @@
 
 {
     'name': 'Select language in mail compose window',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     'category': 'Marketing',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
               'Antiun Ingeniería S.L.,'
