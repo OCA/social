@@ -33,7 +33,7 @@ class MailForwardComposeMessage(models.TransientModel):
         return result
 
     @api.model
-    def models(self):
+    def _get_model_selection(self):
         """Get allowed models and their names."""
         model_objs = self.env["res.request.link"].search(
             [("mail_forward_target", "=", True)],
@@ -77,7 +77,7 @@ class MailForwardComposeMessage(models.TransientModel):
         return result
 
     destination_object_id = fields.Reference(
-        models,
+        _get_model_selection,
         "Destination object",
         help="Object where the forwarded message will be attached")
 
