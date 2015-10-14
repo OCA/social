@@ -23,7 +23,7 @@
 {
     'name': "Customizable unsubscription process on mass mailing emails",
     'category': 'Marketing',
-    'version': '8.0.2.0.0',
+    'version': '8.0.1.1.0',
     'depends': [
         'mass_mailing',
         'website_crm',

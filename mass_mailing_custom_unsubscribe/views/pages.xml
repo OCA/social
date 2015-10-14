@@ -11,7 +11,7 @@
                 <div class="container">
                     <h1>
                         You were successfully unsubscribed from our
-                        mailing list
+                        mailing list.
                     </h1>
                     <h3 class="text-muted">
                         It's sad to see you go, but if you love
@@ -40,10 +40,10 @@
                 <div class="container">
                     <h1>
                         There was an error processing your unsubscription
-                        request
+                        request.
                     </h1>
                     <p>
-                        We apologize for the inconvinience. You can contact us
+                        We apologize for the inconvenience. You can contact us
                         and we will handle your unsubscription manually.
                     </p>
                     <p>Thanks for your patience.</p>
