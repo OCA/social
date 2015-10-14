@@ -38,4 +38,5 @@
     'data': [
         'wizard/mail_compose_message_view.xml',
     ],
+    'installable': False,
 }
