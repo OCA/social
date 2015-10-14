@@ -5,17 +5,17 @@
 Customizable unsubscription process on mass mailing emails
 ==========================================================
 
-With this module you can set a custom unsubscribe link append at bottom of mass
-mailing emails.
+With this module you can set a custom unsubscribe link appended at the bottom
+of mass mailing emails.
 
 
 Configuration
 =============
 
-To configure unsubscribe label go to *Setting > Technical > Parameters > System
-parameters* and add a 'mass_mailing.unsubscribe.label' parameter with html to
-set at bottom of mass emailing emails. Including ``%(url)s`` variable where
-unsubscribe link.
+To configure unsubscribe label go to *Settings > Technical > Parameters >
+System parameters* and add a ``mass_mailing.unsubscribe.label`` parameter
+with HTML to set at the bottom of mass emailing emails. Including ``%(url)s``
+variable where unsubscribe link.
 
 For example::
 
@@ -23,12 +23,12 @@ For example::
 
 Additionally, you can disable this link if you set this parameter to ``False``.
 
-If this parameter (``mass_mailing.unsubscribe.label``) is not set (or set to
-``''``) default 'Click to unsubscribe' link will appear. This default text is
+If this parameter (``mass_mailing.unsubscribe.label``) does not exist, the
+default 'Click to unsubscribe' link will appear, with the advantage that it is
 translatable via *Settings > Translations > Application Terms > Translated
 terms*.
 
-Also your unsubscriptors will recieve a beautier good bye page. You can
+Also your unsubscriptors will recieve a beautier goodbye page. You can
 customize it clicking here **after installing the module**:
 
 * `Unsubscription successful </page/mass_mail_unsubscription_success>`_.
@@ -46,7 +46,7 @@ Usage
 Known issues / Roadmap
 ======================
 
-* This custom html is not translatable, so as a suggestion, you can define
+* This custom HTML is not translatable, so as a suggestion, you can define
   the same text in several languages in several lines.
 
 For example:
