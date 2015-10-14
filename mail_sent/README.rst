@@ -35,6 +35,10 @@ social/issues/new?body=module:%20 mail_sent%0Aversion:%20
 Credits
 =======
 
+* Thanks to `Danny Allen <http://dannya.com/>`_ and `Openclipart
+  <https://openclipart.org>`_ for `the icon
+  <https://openclipart.org/detail/110941/folder-sent-mail>`_.
+
 Contributors
 ------------
 
