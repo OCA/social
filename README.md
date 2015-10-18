@@ -16,7 +16,8 @@ addon | version | summary
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 | Select language in mail compose window
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.0.0 | Customizable unsubscribe link on mass mailing emails
+[mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.1.0 | Customizable unsubscription process on mass mailing emails
 
 [//]: # (end addons)
 
