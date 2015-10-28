@@ -19,6 +19,15 @@ statistics related with a mass mailing message
 Usage
 =====
 
+- Go to Marketing/ Mass Mailing
+- Create
+- Set a Subject
+- Send the email
+- Check the sent email and open it
+- Go to Smart Buttons (number of sent emails, Received, opened, replied)
+- check now you can see subject; email_from; email_to; sent date, opened date
+
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/205/8.0
