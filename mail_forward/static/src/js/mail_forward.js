@@ -13,7 +13,7 @@ openerp.mail_forward = function (instance) {
 
         on_message_forward: function () {
             // Generate email subject as possible from record_name and subject
-            var subject = ["FWD"];
+            var subject = [_t("FWD")];
             if (this.record_name && (this.show_record_name ||
                                      this.parent_id))
             {
