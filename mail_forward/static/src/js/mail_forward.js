@@ -31,15 +31,26 @@ openerp.mail_forward = function (instance) {
             }
 
             // Get necessary fields from the forwarded message
+            var header = [
+                "----------" + _t("Forwarded message") + "----------",
+                _t("From: ") + this.author_id[1],
+                _t("Date: ") + this.date,
+            ];
+            if (this.subject) {
+                header.push(_t("Subject: ") + this.subject);
+            }
+            if (this.email_to) {
+                header.push(_t("To: ") + this.email_to);
+            }
+            if (this.email_cc) {
+                header.push(_t("CC: ") + this.email_cc);
+            }
+            header = header.map(_.str.escapeHTML).join("<br/>")
+
             var context = {
                 default_attachment_ids: attachment_ids,
                 default_body:
-                    "<p><i>----------" +
-                    _t("Forwarded message") +
-                    "----------<br/>" +
-                    _t("From:") + " " +
-                    _.str.escapeHTML(this.author_id[1]) + "<br/>" +
-                    _t("Date:") + " " + this.date + "</i></p><br/>" +
+                    "<p><i>" + header + "</i></p><br/>" +
                     this.body,
                 default_model: this.model,
                 default_res_id: this.res_id,
