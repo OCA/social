@@ -2,6 +2,7 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
  */
 
+"use strict";
 openerp.mail_forward = function (instance) {
     var _t = instance.web._t;
     instance.mail.ThreadMessage.include({
@@ -26,7 +27,7 @@ openerp.mail_forward = function (instance) {
 
             // Get only ID from the attachments
             var attachment_ids = [];
-            for (n in this.attachment_ids) {
+            for (var n in this.attachment_ids) {
                 attachment_ids.push(this.attachment_ids[n].id);
             }
 
