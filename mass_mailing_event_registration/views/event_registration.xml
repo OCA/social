@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+<openerp>
+<data>
+
+<record id="email_template_event_registration" model="email.template">
+    <field name="name">Event Registration Mass Mail</field>
+    <field name="model_id" ref="event.model_event_registration"/>
+    <field name="auto_delete" eval="True"/>
+    <field name="partner_to">${object.partner_id.id}</field>
+    <field name="email_to">${object.email}</field>
+</record>
+
+<act_window name="Mass mailing to partners"
+    res_model="mail.compose.message"
+    src_model="event.registration"
+    view_mode="form"
+    multi="True"
+    target="new"
+    key2="client_action_multi"
+    id="action_event_registration_mass_mail"
+    context="{
+        'default_composition_mode': 'mass_mail',
+        'default_partner_to': '${object.partner_id.id or \'\'}',
+        'default_use_template': True,
+        'default_template_id': ref('email_template_event_registration')
+    }"/>
+
+<act_window name="Add to mailing list"
+    res_model="event.registration.mail.list.wizard"
+    src_model="event.registration"
+    view_mode="form"
+    multi="True"
+    target="new"
+    key2="client_action_multi"
+    id="action_event_registration_mail_list"/>
+
+<record id="view_registration_search" model="ir.ui.view">
+    <field name="name">Marketing - Registrations Search</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_registration_search"/>
+    <field name="arch" type="xml">
+        <filter string="New" position="before">
+            <filter string="Available for mass mailing"
+                name='not_opt_out' domain="[('opt_out', '=', False)]"
+                help="Registrations that did not ask not to be included in mass mailing campaigns"/>
+            <separator/>
+        </filter>
+    </field>
+</record>
+
+<record id="view_event_registration_tree" model="ir.ui.view">
+    <field name="name">Marketing - Registrations Tree</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_event_registration_tree"/>
+    <field name="arch" type="xml">
+        <field name="email" position="after">
+            <field name="opt_out"/>
+        </field>
+    </field>
+</record>
+
+<record id="view_event_registration_form" model="ir.ui.view">
+    <field name="name">Marketing - Registrations Form</field>
+    <field name="model">event.registration</field>
+    <field name="inherit_id" ref="event.view_event_registration_form"/>
+    <field name="arch" type="xml">
+        <label for="email" position="before">
+            <field name="opt_out"/>
+        </label>
+    </field>
+</record>
+
+</data>
+</openerp>
