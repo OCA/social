@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <template id="opt_blog_rc_follow_us_extra"
+              name="Extra Social Links"
+              inherit_id="website_blog.opt_blog_rc_follow_us">
+      <xpath expr="//h2[@class='mt4']"
+             position="after">
+
+        <a t-att-href="website.social_tripadvisor"
+           t-if="website.social_tripadvisor">
+          <i class="fa fa-tripadvisor"></i>
+        </a>
+
+      </xpath>
+    </template>
+
+  </data>
+</openerp>
