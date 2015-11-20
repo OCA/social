@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <template id="footer_default_extra"
+              inherit_id="website.footer_default">
+      <xpath expr="//a[6]"
+             position="after">
+
+        <a t-att-href="website.social_xing"
+           t-if="website.social_xing">
+          <i class="fa fa-xing"/>
+        </a>
+
+      </xpath>
+    </template>
+
+  </data>
+</openerp>
