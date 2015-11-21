@@ -14,10 +14,14 @@ addon | version | summary
 --- | --- | ---
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 8.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 | Select language in mail compose window
+[mail_forward](mail_forward/) | 8.0.7.0.0 | Add option to forward messages
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.1.0 | Customizable unsubscription process on mass mailing emails
+[social_media_dribbble](social_media_dribbble/) | 8.0.1.0.0 | Dribbble Extension for the social media icons from the odoo core
+[social_media_tripadvisor](social_media_tripadvisor/) | 8.0.1.0.0 | Tripadvisor Extension for the social media icons from the odoo core
+[social_media_xing](social_media_xing/) | 8.0.1.0.0 | Xing Extension for the social media icons from the odoo core
 
 [//]: # (end addons)
 
