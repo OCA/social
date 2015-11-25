@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="mail.followers.subtype">
+        <t t-jquery="table" t-operation="append">
+            <tr class="oe_custom_notification" t-att-style="record.followed ? '' : 'display: none'" t-attf-id="custom_notification_#{record.id}#{dialog ? '_dialog' : ''}" t-att-data-id="record.id">
+                <td />
+                <td>
+                    <fieldset class="oe_custom_notification_mail">
+                        <legend>Mail notifications</legend>
+                        <div>
+                            <input type="radio" t-att-checked="record.force_mail=='default' ? 'checked' : null" t-attf-name="custom_notification_mail_#{record.id}" t-attf-id="custom_notification_mail_default_#{record.id}#{dialog ? '_dialog' : ''}" value="default" />
+                            <label t-attf-for="custom_notification_mail_default_#{record.id}#{dialog ? '_dialog' : ''}">Use default mail preferences</label>
+                        </div>
+                        <div>
+                            <input type="radio" t-att-checked="record.force_mail=='force_yes' ? 'checked' : null" t-attf-name="custom_notification_mail_#{record.id}" t-attf-id="custom_notification_mail_force_#{record.id}#{dialog ? '_dialog' : ''}" value="force_yes" />
+                            <label t-attf-for="custom_notification_mail_force_#{record.id}#{dialog ? '_dialog' : ''}">Force sending mails</label>
+                        </div>
+                        <div>
+                            <input type="radio" t-att-checked="record.force_mail=='force_no' ? 'checked' : null" t-attf-name="custom_notification_mail_#{record.id}" t-attf-id="custom_notification_mail_force_no_#{record.id}#{dialog ? '_dialog' : ''}" value="force_no" />
+                            <label t-attf-for="custom_notification_mail_force_no_#{record.id}#{dialog ? '_dialog' : ''}">Force not sending mails</label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="oe_custom_notification_own">
+                        <legend>Own messages</legend>
+                        <div>
+                            <input type="radio" t-att-checked="!record.force_own ? 'checked' : null" t-attf-name="custom_notification_own_#{record.id}" t-attf-id="custom_notification_own_no_#{record.id}#{dialog ? '_dialog' : ''}" value="" />
+                            <label t-attf-for="custom_notification_own_no_#{record.id}#{dialog ? '_dialog' : ''}">No notification</label>
+                        </div>
+                        <div>
+                            <input type="radio" t-att-checked="record.force_own ? 'checked' : null" t-attf-name="custom_notification_own_#{record.id}" t-attf-id="custom_notification_own_yes_#{record.id}#{dialog ? '_dialog' : ''}" value="1" />
+                            <label t-attf-for="custom_notification_own_yes_#{record.id}#{dialog ? '_dialog' : ''}">Notify me</label>
+                        </div>
+                    </fieldset>
+                </td>
+            </tr>
+        </t>
+    </t>
+</template>
