@@ -1,0 +1,22 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mass_mailing_confirm
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-27 17:46+0000\n"
+"PO-Revision-Date: 2015-11-27 17:46+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mass_mailing_confirm
+#: view:mail.mass_mailing:mass_mailing_confirm.view_mail_mass_mailing_popup_form
+msgid "Are you sure?"
+msgstr "¿Estás seguro?"
+

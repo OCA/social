@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2015 Antiun Ingenieria S.L. - Antonio Espinosa
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+<data>
+
+<record id="view_mail_mass_mailing_popup_form" model="ir.ui.view">
+    <field name="name">mass.mailing.form</field>
+    <field name="model">mail.mass_mailing</field>
+    <field name="priority">90</field>
+    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+    <field name="arch" type="xml">
+
+        <xpath expr="//header/button[4]" position="attributes">
+            <attribute name="confirm">Are you sure?</attribute>
+        </xpath>
+        <xpath expr="//header/button[3]" position="attributes">
+            <attribute name="confirm">Are you sure?</attribute>
+        </xpath>
+
+    </field>
+</record>
+
+</data>
+</openerp>
