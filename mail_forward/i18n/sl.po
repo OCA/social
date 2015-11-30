@@ -1,0 +1,167 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_forward
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-21 02:16+0000\n"
+"PO-Revision-Date: 2015-11-22 09:01+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:25
+#, python-format
+msgid "(No subject)"
+msgstr "(ni zadeve)"
+
+#. module: mail_forward
+#: help:res.request.link,mail_forward_target:0
+msgid "Allow to forward mails to this model."
+msgstr "Dovoli posredovanje pošte na ta model."
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,move_attachments:0
+msgid ""
+"Attachments will be assigned to the chosen destination object and you will "
+"be able to pick them from its 'Attachments' button, but they will not be "
+"there for the current object if any. In any case you can always open it from"
+" the message itself."
+msgstr "Priponke bodo dodeljene izbranemu ciljnemu objektu, da jih boste lahko izbirali preko gumba 'Priponke', a ne bo jih na voljo za trenutni (če kateri) objekt. V vsakem primeru pa jih lahko odprete iz samega sporočila."
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:47
+#, python-format
+msgid "CC: "
+msgstr "CC: "
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:38
+#, python-format
+msgid "Date: "
+msgstr "Datum:"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,destination_object_id:0
+msgid "Destination object"
+msgstr "Ciljni objekt"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:16
+#, python-format
+msgid "FWD"
+msgstr "FWD"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/xml/mail_forward.xml:10
+#, python-format
+msgid "Forward"
+msgstr "Posreduj"
+
+#. module: mail_forward
+#: model:ir.actions.act_window,name:mail_forward.compose_action
+msgid "Forward Email"
+msgstr "Posredovanje e-pošte"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:36
+#, python-format
+msgid "Forwarded message"
+msgstr "Posredovano sporočilo"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:37
+#, python-format
+msgid "From: "
+msgstr "Od:"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: mail_forward
+#: field:res.request.link,mail_forward_target:0
+msgid "Mail forward target"
+msgstr "Cilj posredovanja pošte"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,move_attachments:0
+msgid "Move attachments"
+msgstr "Premik priponk"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,destination_object_id:0
+msgid "Object where the forwarded message will be attached"
+msgstr "Objekt, kamor bo posredovano sporočilo pripeto"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,original_wizard_id:0
+msgid "Original message compose wizard"
+msgstr "Čarovnik za sestavljanje izvornega sporočila"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:41
+#, python-format
+msgid "Subject: "
+msgstr "Zadeva:"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:44
+#, python-format
+msgid "To: "
+msgstr "Za:"
+
+#. module: mail_forward
+#: view:mail_forward.compose_message:mail_forward.compose_form
+msgid ""
+"{\n"
+"                    'invisible': [('destination_object_id', '=', False)]\n"
+"                }"
+msgstr "{\n                    'invisible': [('destination_object_id', '=', False)]\n                }"
+
+#. module: mail_forward
+#: view:mail_forward.compose_message:mail_forward.compose_form
+msgid ""
+"{\n"
+"                    'required': [('destination_object_id', '=', False)]\n"
+"                }"
+msgstr "{\n                    'required': [('destination_object_id', '=', False)]\n                }"

@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_restrict_follower_selection
+# 
+# Translators:
+# John Toro <johntoro@gmail.com>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-21 02:16+0000\n"
+"PO-Revision-Date: 2015-11-03 17:18+0000\n"
+"Last-Translator: John Toro <johntoro@gmail.com>\n"
+"Language-Team: Spanish (Colombia) (http://www.transifex.com/oca/OCA-social-8-0/language/es_CO/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_CO\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.actions.act_window,name:mail_restrict_follower_selection.action_setup
+msgid "Configure the restriction on followers"
+msgstr "Configurar la restricción en seguidores"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
+msgid "Invite wizard"
+msgstr "Asistente de Invitación"

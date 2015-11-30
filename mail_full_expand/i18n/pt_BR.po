@@ -1,0 +1,36 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_full_expand
+# 
+# Translators:
+# Wagner Pereira <wagner@wagner.pereira.nom.br>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-21 02:16+0000\n"
+"PO-Revision-Date: 2015-11-03 16:51+0000\n"
+"Last-Translator: Wagner Pereira <wagner@wagner.pereira.nom.br>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mail_full_expand
+#. openerp-web
+#: code:addons/mail_full_expand/static/src/xml/mail_full_expand.xml:10
+#, python-format
+msgid "Fully expand"
+msgstr "Expandir totalmente"
+
+#. module: mail_full_expand
+#: view:mail.message:mail_full_expand.view
+msgid "Message"
+msgstr "Mensagem"
+
+#. module: mail_full_expand
+#: model:ir.actions.act_window,name:mail_full_expand.act_window
+msgid "Read Full Email"
+msgstr "Ler Todo o Email"
