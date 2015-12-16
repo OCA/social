@@ -26,6 +26,13 @@ customizations your users already have done.
 Usage
 =====
 
+To use this module, for example you need to:
+
+- Go to Sales -> Sales -> Customers
+- Go Inside any customer and in the right-botton corner press "Follow" button
+- Unfold Following menu and check new functionality with "mail notificacions"
+
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
     :alt: Try me on Runbot
     :target: https://runbot.odoo-community.org/runbot/205/8.0
