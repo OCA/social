@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+    <t t-extend="mail.thread.message">
+        <t t-jquery=".oe_msg_icons" t-operation="append">
+            <span t-attf-class="oe_mail_open">
+                <a title="Open in new window" class="oe_e">ò</a>
+            </span>
+        </t>
+    </t>
+</template>
