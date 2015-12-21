@@ -23,7 +23,7 @@
     'summary': 'Open mail in new window',
     'version': '8.0.1.0.0',
     "category": "Social Network",
-    'website': 'http://www.initos.com, https://odoo-community.org',
+    'website': 'https://odoo-community.org',
     'author': 'initOS GmbH, Odoo Community Association (OCA)',
     "license": "AGPL-3",
     'application': False,
