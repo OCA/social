@@ -19,7 +19,7 @@ class MailMail(models.Model):
             email_list += email_to
         return email_list
 
-    @api.multi
+    @api.model
     def create(self, vals):
         mail = super(MailMail, self).create(vals)
         if vals.get('statistics_ids'):
