@@ -1,3 +1,6 @@
+/* © 2015 initOS GmbH (<http://www.initos.com>)
+*  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+*/
 
 openerp.mail_read_new_window = function (instance) {
     var _t = instance.web._t,
