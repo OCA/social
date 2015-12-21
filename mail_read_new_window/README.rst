@@ -12,6 +12,10 @@ opening messages in a new window and allow you to read its full content.
 This module adds a button to all messages to open them in a new browser window
 with their full contents.
 
+See also:
+'mail_full_expand' module to open mail in a new modal dialog on top of your
+current window.
+
 Usage
 =====
 

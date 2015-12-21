@@ -19,6 +19,9 @@ receive a mail with predefined width and cannot read it.
 This module adds a button to all messages to read them in a floating window
 with their full contents.
 
+See also:
+'mail_read_new_window' module to open mail in a new browser window.
+
 Usage
 =====
 
