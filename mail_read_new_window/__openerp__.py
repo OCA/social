@@ -21,7 +21,7 @@
 {
     'name': 'Mail open in new window',
     'summary': 'Open mail in new window',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     "category": "Social Network",
     'website': 'http://www.initos.com, https://odoo-community.org',
     'author': 'initOS GmbH, Odoo Community Association (OCA)',
