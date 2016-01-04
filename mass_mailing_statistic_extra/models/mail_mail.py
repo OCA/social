@@ -30,4 +30,4 @@ class MailMail(models.Model):
                     'email_to': ';'.join(email_list),
                     'subject': mail.subject,
                 })
-        return mail
+        return mail_id
