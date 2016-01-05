@@ -7,8 +7,9 @@
     "summary": "Add option to forward messages",
     "version": "8.0.7.0.0",
     "category": "Social Network",
-    "website": "https://odoo-community.org/",
-    "author": "Grupo ESOC, Odoo Community Association (OCA)",
+    "website": "https://grupoesoc.es",
+    "author": "Grupo ESOC Ingeniería de Servicios, "
+              "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
