@@ -19,6 +19,7 @@ addon | version | summary
 [mail_read_new_window](mail_read_new_window/) | 8.0.1.0.0 | Open mail in a new window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
+[marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.1.0 | Customizable unsubscription process on mass mailing emails
 [mass_mailing_statistic_extra](mass_mailing_statistic_extra/) | 8.0.1.0.0 | Mail statistics extra info
 [social_media_dribbble](social_media_dribbble/) | 8.0.1.0.0 | Dribbble Extension for the social media icons from the odoo core

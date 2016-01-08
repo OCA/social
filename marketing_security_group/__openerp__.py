@@ -3,7 +3,7 @@
 # See README.rst file on addon root folder for more details
 
 {
-    'name': "Mail statistics extra info",
+    'name': "Marketing extra security rules",
     'category': 'Marketing',
     'version': '8.0.1.0.0',
     'depends': [
@@ -11,13 +11,12 @@
     ],
     'external_dependencies': {},
     'data': [
-        'views/mass_mailing.xml',
+        'security/ir.model.access.csv',
+        'security/mail_mass_mailing_security.xml',
     ],
     'author': 'Antiun Ingeniería S.L., '
               'Odoo Community Association (OCA)',
     'website': 'http://www.antiun.com',
     'license': 'AGPL-3',
-    'demo': [],
-    'test': [],
     'installable': True,
 }
