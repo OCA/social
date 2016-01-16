@@ -2,25 +2,19 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-================
-Mail full expand
-================
+=======================
+Mail open in new window
+=======================
 
 This module was written to extend the functionality of messaging to support
-expanding messages in a big window and allow you to read its full content.
+opening messages in a new window and allow you to read its full content.
 
-Odoo automatically tries to remove blockquotes and signatures from received
-mails. That is useful because it removes lots of distraction, but sometimes it
-removes important information.
-
-Also, messages are narrow to fit in the conversations views, but sometimes you
-receive a mail with predefined width and cannot read it.
-
-This module adds a button to all messages to read them in a floating window
+This module adds a button to all messages to open them in a new browser window
 with their full contents.
 
 See also:
-'mail_read_new_window' module to open mail in a new browser window.
+'mail_full_expand' module to open mail in a new modal dialog on top of your
+current window.
 
 Usage
 =====
@@ -28,11 +22,7 @@ Usage
 To use this module, you need to:
 
 * Go to any view with a message thread.
-* Click the *Fully expand* button (two arrows indicating separate directions).
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/8.0
+* Click the *Open in new window* button (two overlayed windows indicating a new window).
 
 For further information, please visit:
 
@@ -52,7 +42,7 @@ Credits
 Contributors
 ------------
 
-* Jairo Llopis <j.llopis@grupoesoc.es>
+* Peter Hahn <peter.hahn@initos.com>
 
 Maintainer
 ----------

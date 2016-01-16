@@ -16,6 +16,7 @@ addon | version | summary
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 | Select language in mail compose window
 [mail_forward](mail_forward/) | 8.0.7.0.0 | Add option to forward messages
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
+[mail_read_new_window](mail_read_new_window/) | 8.0.1.0.0 | Open mail in a new window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
