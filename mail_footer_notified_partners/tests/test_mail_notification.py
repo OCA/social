@@ -2,10 +2,10 @@
 # © 2016 ACSONE SA/NV <https://acsone.eu>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from anybox.testing.openerp import SharedSetupTransactionCase
+import openerp.tests.common as common
 
 
-class TestMailNotification(SharedSetupTransactionCase):
+class TestMailNotification(common.TransactionCase):
 
     def setUp(self):
         super(TestMailNotification, self).setUp()
