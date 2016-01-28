@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 # © 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import SUPERUSER_ID, api, models
-from openerp.addons.mail.mail_thread import mail_thread
+from openerp import api, models
 
 
-class MailThread(models.Model):
-    _inherit = 'mail.thread'
+class MailThread(models.AbstractModel):
+    _inherit = ['base.patch.models.mixin', 'mail.thread']
+    _name = 'mail.thread'
 
     @api.multi
     def _get_subscription_data(self, name, args, user_pid=None):
@@ -78,31 +78,3 @@ class MailThread(models.Model):
                 'force_own_subtype_ids': [(6, 0, ids_with_value(
                     data, 'force_own', '1'))]
             }),
-
-    def _register_hook(self, cr):
-        model_ids = self.pool['ir.model'].search(cr, SUPERUSER_ID, [])
-        rebuilt = []
-        for model in self.pool['ir.model'].browse(cr, SUPERUSER_ID, model_ids):
-            if model.model not in self.pool:
-                continue
-            model_object = self.pool[model.model]
-            if not isinstance(model_object, mail_thread):
-                continue
-            if isinstance(model_object, MailThread):
-                continue
-            bases = list(model_object.__class__.__bases__)
-            if MailThread not in bases:
-                bases.insert(1, MailThread)
-            class_dict = dict(model_object.__dict__)
-            class_dict['_inherit'] = model_object._name
-            new_model_class = type(model_object._name, tuple(bases),
-                                   class_dict)
-            new_model = new_model_class._build_model(self.pool, cr)
-            self.pool.models[model.model] = new_model
-            new_model._prepare_setup(cr, SUPERUSER_ID)
-            new_model._setup_base(cr, SUPERUSER_ID, False)
-            new_model._setup_fields(cr, SUPERUSER_ID)
-            rebuilt.append(new_model)
-        for model in rebuilt:
-            model._setup_complete(cr, SUPERUSER_ID)
-        return super(MailThread, self)._register_hook(cr)
