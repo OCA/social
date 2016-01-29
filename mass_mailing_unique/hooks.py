@@ -17,27 +17,27 @@ def pre_init_hook(cr):
     errors = list()
 
     # Search for duplicates in emails
-    cr.execute("""SELECT c.email, l.name AS list, COUNT(c.id) AS duplicates
+    cr.execute("""SELECT c.email, l.name, COUNT(c.id)
                   FROM
                     mail_mass_mailing_contact AS c
                     INNER JOIN mail_mass_mailing_list AS l ON c.list_id = l.id
                   GROUP BY l.name, l.id, c.email
                   HAVING COUNT(c.id) > 1""")
-    for result in cr.dictfetchall():
+    for result in cr.fetchall():
         errors.append(
-            _("%(email)s appears %(duplicates)d times in list %(list)s") %
-            result)
+            _("{0} appears {2} times in list {1}.").format(*result))
 
     # Search for duplicates in list's name
-    cr.execute("""SELECT name, COUNT(id) as duplicates
+    cr.execute("""SELECT name, COUNT(id)
                   FROM mail_mass_mailing_list
                   GROUP BY name
                   HAVING COUNT(id) > 1""")
-    for result in cr.dictfetchall():
+    for result in cr.fetchall():
         errors.append(
-            _("there are %(duplicates)d lists with name %(name)s") % result)
+            _("There are {1} lists with name {0}.").format(*result))
 
     # Abort if duplicates are found
     if errors:
         raise ValidationError(
-            _("Fix this before installing: %s.") % ", ".join(errors))
+            _("Fix this before installing:") +
+            "".join("\n" + e for e in errors))

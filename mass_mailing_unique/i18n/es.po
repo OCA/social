@@ -6,22 +6,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-25 09:40+0000\n"
-"PO-Revision-Date: 2016-01-25 10:42+0100\n"
+"POT-Creation-Date: 2016-01-29 12:37+0100\n"
+"PO-Revision-Date: 2016-01-29 12:38+0100\n"
 "Last-Translator: Jairo Llopis <j.llopis@grupoesoc.es>\n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: \n"
-"Language: es\n"
 "X-Generator: Poedit 1.8.5\n"
-
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/__init__.py:29
-#, python-format
-msgid "%(email)s appears %(duplicates)d times in list %(list)s"
-msgstr "%(email)s aparece %(duplicates)d veces en la lista %(list)s"
 
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.list:0
@@ -34,10 +28,10 @@ msgid "Cannot have the same email more than once in the same list."
 msgstr "No se puede tener el mismo email varias veces en la misma lista."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/__init__.py:44
+#: code:addons/mass_mailing_unique/hooks.py:42
 #, python-format
-msgid "Fix this before installing: %s."
-msgstr "Arregle esto antes de instalar: %s."
+msgid "Fix this before installing:"
+msgstr "Arregle esto antes de instalar:"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
@@ -50,7 +44,13 @@ msgid "Mass Mailing Contact"
 msgstr "Contacto de envío masivo"
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/__init__.py:39
+#: code:addons/mass_mailing_unique/hooks.py:37
 #, python-format
-msgid "there are %(duplicates)d lists with name %(name)s"
-msgstr "hay %(duplicates)d listas con el nombre %(name)s"
+msgid "There are {1} lists with name {0}."
+msgstr "Hay {1} listas con el nombre {0}."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:28
+#, python-format
+msgid "{0} appears {2} times in list {1}."
+msgstr "{0} aparece {2} veces en la lista {1}."
