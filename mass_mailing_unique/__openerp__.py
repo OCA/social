@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "pre_init_hook": "require_no_duplicates",
+    "pre_init_hook": "pre_init_hook",
     "images": [
         "images/error-duplicated-email.png",
         "images/error-duplicated-list.png",
