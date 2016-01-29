@@ -14,6 +14,7 @@ addon | version | summary
 --- | --- | ---
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 8.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 | Select language in mail compose window
+[mail_footer_notified_partners](mail_footer_notified_partners/) | 8.0.1.0.0 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_forward](mail_forward/) | 8.0.7.0.0 | Add option to forward messages
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
 [mail_read_new_window](mail_read_new_window/) | 8.0.1.0.0 | Open mail in new window
