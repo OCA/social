@@ -24,11 +24,21 @@
         },
 
         change: function(color) {
+            var oldcolor = this.$target.css("background-color"),
+                sides = ["top", "bottom", "left", "right"];
             this.$target.css("background-color", color);
 
             // Old-school bgcolor attribute if the element already had one
             if (this.$target.attr("bgcolor")) {
                 this.$target.attr("bgcolor", color);
+            }
+
+            // Match border colors if it was the same
+            for (var n in sides) {
+                var property = "border-" + sides[n] + "-color";
+                if (this.$target.css(property) == oldcolor) {
+                    this.$target.css(property, color);
+                }
             }
         },
     });
