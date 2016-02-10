@@ -19,5 +19,5 @@ msgstr ""
 
 #. module: website_mail_snippet_bg_color
 #: view:website:website_mail.email_designer_snippets
-msgid "Choose Background Color"
+msgid "Pick Background Color"
 msgstr "Escoger el color de fondo"

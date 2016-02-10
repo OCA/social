@@ -5,16 +5,16 @@
 (function ($) {
     var snippet = openerp.website.snippet;
 
-    snippet.options.bg_color_chooser = snippet.Option.extend({
+    snippet.options.bg_color_picker = snippet.Option.extend({
         start: function () {
             var self = this;
             self._super();
-            return self.$el.find(".js_bg_color_chooser").click(function(){
-                return self.choose();
+            return self.$el.find(".js_bg_color_picker").click(function(){
+                return self.pick();
             });
         },
 
-        choose: function() {
+        pick: function() {
             var self = this;
             return CKEDITOR.instances.wrapwrap.getColorFromDialog(
                 function(color){

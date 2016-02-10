@@ -8,7 +8,7 @@
 <template id="assets_editor" inherit_id="website.assets_editor">
     <xpath expr=".">
         <script type="text/javascript"
-                src="/website_mail_snippet_bg_color/static/src/js/bg_color_chooser.js"/>
+                src="/website_mail_snippet_bg_color/static/src/js/bg_color_picker.js"/>
     </xpath>
 </template>
 

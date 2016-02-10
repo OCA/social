@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 =======================================
-Email Snippets Background Color Chooser
+Email Snippets Background Color Picker
 =======================================
 
 This module extends the functionality of the website mail designer to support
@@ -18,7 +18,7 @@ To use this module, you need to:
    ``mass_mailing``.
 #. Edit an email with the website mail designer.
 #. Drag & drop any snippet into the mail body.
-#. Choose *Customize > Choose Background Color*.
+#. Click *Customize > Pick Background Color*.
 #. Pick any color, or enter its HTML code in the box, or press *Clear* to
    remove it.
 #. Press OK.
