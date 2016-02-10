@@ -7,7 +7,7 @@ Email Snippets Background Color Picker
 =======================================
 
 This module extends the functionality of the website mail designer to support
-setting a custom background color to any snippet and allow you to customize it.
+setting a custom background color to any snippet allowing you to customize it.
 
 Usage
 =====
@@ -18,8 +18,8 @@ To use this module, you need to:
    ``mass_mailing``.
 #. Edit an email with the website mail designer.
 #. Drag & drop any snippet into the mail body.
-#. Click *Customize > Pick Background Color*.
-#. Pick any color, or enter its HTML code in the box, or press *Clear* to
+#. Click on *Customize > Pick Background Color*.
+#. Pick any color, or enter its HTML code in the box. Press *Clear* to
    remove it.
 #. Press OK.
 
