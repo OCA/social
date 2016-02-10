@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record id="portal_welcome_email" model="email.template">
+    <field name="name">Portal Welcome Email</field>
+    <field name="email_from">${object.company_id.name}&lt;${object.company_id.email}&gt;</field>
+    <field name="subject">Your account at ${object.company_id.name}</field>
+    <field name="email_to">${object.email}</field>
+    <field name="lang">${object.lang}</field>
+    <field name="model_id" ref="base.model_res_users"/>
+    <field name="auto_delete" eval="True"/>
+    <field name="body_html">
+        <![CDATA[
+<p>Dear ${object.name},&nbsp;</p>
+<p>You have been given access to ${object.company_id.name}'s ${ctx['portal']}.</p>
+<p>Your login account data is:</p>
+<blockquote style="margin: 0 0 0 40px; border: none; padding: 0px;">
+    <div>
+        Username: <strong>${ctx['login']}</strong>&nbsp;
+    </div>
+    <div>
+        Portal: ${ctx['portal_url']}&nbsp;
+    </div>
+    <div>
+        Database: ${ctx['db']}&nbsp;
+    </div>
+</blockquote>
+<br/>
+You can set or change your password via the following url:<br/>
+${ctx['signup_url']}<br/>
+<p>${ctx['welcome_message']}</p>
+<pre>
+--
+Automatic Email.
+${object.company_id.name or ''}
+</pre>]]>
+    </field>
+</record>
+</data>
+</openerp>
