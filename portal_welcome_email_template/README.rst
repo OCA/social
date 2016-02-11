@@ -8,7 +8,7 @@ Portal Welcome Email Template
 
 This module extends the functionality of portal module to allow customize the
 email message sent to customer in email template section.
-The email sent is sent to queue.
+The sent email is enqueued instead of being directly processed.
 
 Usage
 =====
