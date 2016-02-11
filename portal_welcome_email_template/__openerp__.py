@@ -5,7 +5,8 @@
 
 {
     "name": "Portal Welcome Email Template",
-    "summary": "Use an email template for send portal invitation",
+    "summary": "Adds an customizable email template for portal user "
+               "invitation",
     "version": "8.0.1.0.0",
     "category": "Tools",
     "website": "https://odoo-community.org/",
