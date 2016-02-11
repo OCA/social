@@ -10,12 +10,16 @@ class TestWelcomeEmailTemplate(TransactionCase):
 
     def setUp(self):
         super(TestWelcomeEmailTemplate, self).setUp()
-        self.partner_obj = self.env['res.partner']
-        self.partner = self.env.ref('base.res_partner_address_4')
+        partner_obj = self.env['res.partner']
+        self.partner = partner_obj.create({
+            'name': 'partner_test',
+            'email': 'test@example.com',
+        })
 
         self.wiz_portal_access = self.env['portal.wizard'].create({
             'user_ids': [(0, 0, {
                 'partner_id': self.partner.id,
+                'email': self.partner.email,
                 'in_portal': True,
             })],
         })
