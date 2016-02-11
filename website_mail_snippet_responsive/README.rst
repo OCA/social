@@ -11,9 +11,9 @@ responsive layout and allow you to read those mails comfortably in a mobile
 mail client.
 
 Well... actually this is not really responsive. It is pseudo-responsive.
-Responsiveness in current mail clients sucks a lot, so these templates are very
-verbose to ensure compatibility in most scenarios. Ideas are taken from
-https://css-tricks.com/ideas-behind-responsive-emails/.
+Responsiveness in current mail clients is years behind browsers', so these
+templates are very verbose to ensure compatibility in most scenarios. Ideas are
+taken from https://css-tricks.com/ideas-behind-responsive-emails/.
 
 Installation
 ============
@@ -30,7 +30,8 @@ To use this module, you need to:
 #. Install any module that makes use of the website mail designer, such as
    ``mass_mailing``.
 #. Edit an email with the website mail designer.
-#. You have a new collection of snippets. Use them as usual.
+#. You have a new collection of snippets under *Email Design* section. Use them
+   as usual.
 
 If you choose the *Horizontal Separator* snippet, you will be able to set its
 height too. For that, you will have to aim carefully to click inside the green
@@ -43,8 +44,9 @@ line, and then use the option that will float above it.
 Known issues / Roadmap
 ======================
 
-* Snippet code sucks, but that's because mail client HTML engines suck. I
-  hope we will be able to improve this as mail clients keep improving.
+* Snippet is ugly, but that's because mail client HTML engines usually lack
+  many of the modern CSS and HTML features. I hope we will be able to improve
+  this as mail clients keep improving.
 * To set the *Horizontal Separator* height, you have to click inside it, which
   will insert a ``<br type="_moz"/>`` in Firefox, that will make it seem like
   its height is at least like a caret, even if you set a lower value. Do not
