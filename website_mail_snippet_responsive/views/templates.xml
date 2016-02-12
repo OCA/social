@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antiun Ingeniería S.L. - Jairo Llopis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<template id="snippet">
+    <div>
+        <div class="oe_snippet_thumbnail">
+            <img
+                class="oe_snippet_thumbnail_img"
+                t-attf-src="/website_mail_snippet_responsive/static/src/img/#{image}.png"/>
+            <span
+                t-esc="title"
+                class="oe_snippet_thumbnail_title"/>
+        </div>
+        <div
+            class="oe_snippet_body"
+            style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
+            <table
+                style="width: 100%; max-width: 570px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
+                cellpadding="0"
+                cellspacing="0"
+                align="center"
+                bgcolor="#FFFFFF">
+                <t t-raw="0"/>
+            </table>
+        </div>
+    </div>
+</template>
+
+</data>
+</openerp>
