@@ -24,9 +24,11 @@ addon | version | summary
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.1.0 | Customizable unsubscription process on mass mailing emails
 [mass_mailing_statistic_extra](mass_mailing_statistic_extra/) | 8.0.1.0.0 | Mail statistics extra info
 [mass_mailing_unique](mass_mailing_unique/) | 8.0.1.0.0 | Avoids duplicate mailing lists and contacts
+[portal_welcome_email_template](portal_welcome_email_template/) | 8.0.1.0.0 | Adds an customizable email template for portal user invitation
 [social_media_dribbble](social_media_dribbble/) | 8.0.1.0.0 | Dribbble Extension for the social media icons from the odoo core
 [social_media_tripadvisor](social_media_tripadvisor/) | 8.0.1.0.0 | Tripadvisor Extension for the social media icons from the odoo core
 [social_media_xing](social_media_xing/) | 8.0.1.0.0 | Xing Extension for the social media icons from the odoo core
+[website_mail_snippet_bg_color](website_mail_snippet_bg_color/) | 8.0.1.0.0 | Set any background color for any mail editor snippet
 
 [//]: # (end addons)
 
