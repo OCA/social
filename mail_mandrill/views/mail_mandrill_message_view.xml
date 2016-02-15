@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="view_mail_mandrill_message_form">
+    <field name="name">mail.mandrill.message.form</field>
+    <field name="model">mail.mandrill.message</field>
+    <field name="arch" type="xml">
+        <form string="Mandrill email message">
+            <header>
+                <field name="state" widget="statusbar"/>
+            </header>
+            <sheet>
+                <group>
+                    <field name="name"/>
+                    <field name="tags"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="mandrill_id"/>
+                        <field name="recipient"/>
+                        <field name="sender"/>
+                    </group>
+                    <group>
+                        <field name="timestamp"/>
+                        <field name="time"/>
+                        <field name="date"/>
+                    </group>
+                </group>
+                <group attrs="{'invisible': [('bounce_type', '=', False)]}">
+                    <field name="bounce_type"/>
+                    <field name="bounce_description"/>
+                </group>
+                <label for="metadata"/>
+                <div>
+                    <field name="metadata"/>
+                </div>
+                <label for="event_ids"/>
+                <div>
+                    <field name="event_ids">
+                        <tree string="Mandrill email events" colors="grey:event_type in ('deferral');black:event_type in ('send');red:event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject');blue:event_type in ('unsub', 'click', 'open')">
+                            <field name="time"/>
+                            <field name="event_type"/>
+                            <field name="ip"/>
+                            <field name="url"/>
+                            <field name="user_country_id" string="Country"/>
+                            <field name="os_family" string="OS"/>
+                            <field name="ua_family" string="User agent"/>
+                        </tree>
+                    </field>
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_mandrill_message_tree">
+    <field name="name">mail.mandrill.message.tree</field>
+    <field name="model">mail.mandrill.message</field>
+    <field name="arch" type="xml">
+        <tree string="Mandrill emails" colors="grey:state in (False, 'deferred');black:state in ('sent');green:state in ('opened');red:state in ('rejected', 'spam', 'bounced', 'soft-bounced');blue:state in ('unsub')">
+            <field name="state" invisible="1"/>
+            <field name="time"/>
+            <field name="date" invisible="1"/>
+            <field name="name"/>
+            <field name="sender" string="Sender"/>
+            <field name="recipient" string="Recipient"/>
+            <field name="tags" string="Tags"/>
+        </tree>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_mandrill_message_search">
+    <field name="name">mail.mandrill.message.search</field>
+    <field name="model">mail.mandrill.message</field>
+    <field name="arch" type="xml">
+        <search string="Mandrill email Search">
+            <field name="sender" string="Email"
+                   filter_domain="['|', ('sender','ilike',self), ('recipient','ilike',self)]"/>
+            <field name="name" string="Subject"/>
+            <field name="time" string="Time"/>
+            <field name="date" string="Date"/>
+            <filter name="deferred" string="Deferred" domain="[('state', '=', 'deferred')]"/>
+            <filter name="sent" string="Sent" domain="[('state', 'in', ('sent', 'opened'))]"/>
+            <filter name="unsub" string="Unsubscribed" domain="[('state', '=', 'unsub')]"/>
+            <filter name="exception" string="Failed"
+                    domain="[('state', 'in', ('rejected', 'spam', 'bounced', 'soft-bounced'))]"/>
+            <separator/>
+            <group expand="0" string="Group By">
+                <filter string="State" domain="[]" context="{'group_by': 'state'}"/>
+                <filter string="Subject" domain="[]" context="{'group_by': 'name'}"/>
+                <filter string="Sender" domain="[]" context="{'group_by': 'sender'}"/>
+                <filter string="Month" domain="[]" context="{'group_by': 'date'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+
+<record id="action_view_mail_mandrill_message" model="ir.actions.act_window">
+    <field name="name">Mandrill emails</field>
+    <field name="res_model">mail.mandrill.message</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_mail_mandrill_message_search"/>
+</record>
+
+<!-- Add menu entry in Settings/Email -->
+<menuitem name="Mandrill emails" id="menu_mail_mandrill_message"
+          parent="base.menu_email"
+          action="action_view_mail_mandrill_message"/>
+
+</data>
+</openerp>

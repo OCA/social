@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_mail_mandrill_message_group_user","mail_mandrill_message group_user","model_mail_mandrill_message","base.group_user",1,0,0,0
+"access_mail_mandrill_event_group_user","mail_mandrill_event group_user","model_mail_mandrill_event","base.group_user",1,0,0,0
+"access_mail_mandrill_message_group_system","mail_mandrill_message group_system","model_mail_mandrill_message","base.group_system",1,1,1,1
+"access_mail_mandrill_event_group_system","mail_mandrill_event group_system","model_mail_mandrill_event","base.group_system",1,1,1,1
