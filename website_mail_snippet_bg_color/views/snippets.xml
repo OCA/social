@@ -10,8 +10,7 @@
     <xpath expr="//div[@id='snippet_options']">
         <div
             data-snippet-option-id='bg_color_picker'
-            data-selector="[data-oe-field='body_html'] > div,
-                           .oe_snippet_body,
+            data-selector="[data-oe-field='body_html'] > *,
                            .bg_color_picker"
             data-selector-siblings="[data-oe-field='body_html'] > *"
             data-selector-children="[data-oe-field='body_html']">
