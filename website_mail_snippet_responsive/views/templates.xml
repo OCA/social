@@ -18,11 +18,6 @@
         <div
             class="oe_snippet_body"
             style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
-            <!--[if gte mso]>
-                <style type="text/css">
-                .fluid { width: 600px !important; }
-                </style>
-            <![endif]-->
             <table class="fluid" align="center" cellpadding="0" cellspacing="0" style="max-width: 600px; border-collapse: collapse; background: inherit; color: inherit;">
                 <tbody>
                     <tr>

@@ -51,6 +51,17 @@ Known issues / Roadmap
   will insert a ``<br type="_moz"/>`` in Firefox, that will make it seem like
   its height is at least like a caret, even if you set a lower value. Do not
   worry, it goes away when you press *Save*.
+* Some elements do not render with the proper width in MS Outlook. This should
+  be added inside each snippet to make them work::
+
+      <!--[if gte mso]>
+          <style type="text/css">
+          .fluid { width: 600px !important; }
+          </style>
+      <![endif]-->
+
+  But right now the view parser eats comments, and if you avoid that then
+  CKEditor will eat them, so there's not an easy solution for now.
 
 Bug Tracker
 ===========
