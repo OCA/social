@@ -13,9 +13,6 @@
             <t t-set="title">Image + Text + Button (3 columns)</t>
                <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"></td>
-                </tr>
-                <tr>
                     <!-- FIRST COLUMN -->
                     <td style="padding: 0;" valign="top">
                     <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 32%; min-width:182px;">
@@ -66,9 +63,9 @@
                             </tr>
                         </tbody>
                     </table>
-        
+
                     <!-- SECOND COLUMN -->
-        
+
                   <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 32%; min-width:182px;">
                         <tbody>
                             <tr>
@@ -117,9 +114,9 @@
                             </tr>
                         </tbody>
                     </table>
-        
+
                     <!-- THIRD COLUMN -->
-        
+
                     <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 32%; min-width:182px;">
                         <tbody>
                             <tr>

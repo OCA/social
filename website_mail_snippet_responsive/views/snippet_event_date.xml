@@ -11,10 +11,7 @@
         <t t-call="website_mail_snippet_responsive.snippet">
             <t t-set="image" t-value="'snippet_event_date'"/>
             <t t-set="title">Date + Text + Button (2 columns)</t>
-                        <tbody>
-                <tr>
-                    <td bgcolor="#ECECEC" height="10"></td>
-                </tr>
+              <tbody>
                 <tr>
                     <td style="padding:0 20px;">
                     <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -51,28 +48,28 @@
                                             </table>
                                             </td>
                                         </tr>
-                                        
+
                                     </tbody>
                                 </table>
                                 </td>
                             </tr>
                         </tbody>
                     </table>
-        
+
                     <!-- RIGHT COLUMN -->
-        
+
                     <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 50%;  min-width:285px;">
                         <tbody>
                             <tr>
                                 <td style="padding: 20px 0 20px 20px;">
                                 <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF">
                                     <tbody>
-                                        
+
                                         <tr>
                                             <td style="padding:0;">
                                             <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                 <tbody>
-                                                    
+
                                                     <tr>
                                                         <td align="left" style="padding: 0 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
                                                     </tr>

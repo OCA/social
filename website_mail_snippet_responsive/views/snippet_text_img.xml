@@ -13,9 +13,6 @@
             <t t-set="title">Left Text and Button, Right Image</t>
             <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"></td>
-                </tr>
-                <tr>
                     <td style="padding: 0;" valign="top">
                         <!-- LEFT COLUMN -->
                         <table border="0" cellpadding="0" cellspacing="0" align="left" width="50%">
