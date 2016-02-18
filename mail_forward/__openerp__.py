@@ -5,7 +5,7 @@
 {
     "name": "Message Forward",
     "summary": "Add option to forward messages",
-    "version": "8.0.7.0.0",
+    "version": "8.0.7.0.1",
     "category": "Social Network",
     "website": "https://grupoesoc.es",
     "author": "Grupo ESOC Ingeniería de Servicios, "
