@@ -17,6 +17,7 @@ addon | version | summary
 [mail_footer_notified_partners](mail_footer_notified_partners/) | 8.0.1.0.0 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_forward](mail_forward/) | 8.0.7.0.0 | Add option to forward messages
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
+[mail_mandrill](mail_mandrill/) | 8.0.1.0.0 | Mandrill mail events integration
 [mail_read_new_window](mail_read_new_window/) | 8.0.1.0.0 | Open mail in new window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
