@@ -25,12 +25,15 @@
             <t t-set="title">Horizontal Separator</t>
             <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"/>
+                    <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
                 </tr>
                 <tr>
-                    <td bgcolor="#00B518"
+                    <td style="background-color: #00B518;"
                         height="5"
                         class="bg_color_picker vertical_resizable"/>
+                </tr>
+                <tr>
+                    <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
                 </tr>
             </tbody>
         </t>
