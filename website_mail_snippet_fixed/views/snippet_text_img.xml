@@ -13,12 +13,12 @@
             <t t-set="title">Left Text and Button, Right Image</t>
             <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"></td>
+                    <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
                 </tr>
                 <tr>
                     <td style="padding: 0;" valign="top">
                         <!-- LEFT COLUMN -->
-                        <table border="0" cellpadding="0" cellspacing="0" align="left" width="50%">
+                        <table style="width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
                             <tbody>
                                 <tr>
                                     <td style="padding: 20px;">
@@ -57,14 +57,14 @@
                         </table>
 
                         <!-- RIGHT COLUMN -->
-                        <table border="0" cellpadding="0" cellspacing="0" align="left" width="50%">
+                        <table style="min-width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
                             <tbody>
                                 <tr>
                                     <td style="padding: 20px;">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tbody>
                                                 <tr>
-                                                    <td align="center" valign="middle"><a href="#" target="_blank"><img src="http://placehold.it/245x150/333333/ffffff?text=width 245px" style="display: block; color: #000000; font-family: Arial, sans-serif; font-size: 9pt; width: 100%; min-width:245px;" border="0"/></a></td>
+                                                    <td align="center" valign="middle"><a href="#" target="_blank"><img src="http://placehold.it/240x150/333333/ffffff?text=width 240px" style="display: block; color: #000000; font-family: Arial, sans-serif; font-size: 9pt; width: 100%; width:240px;" border="0"/></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>

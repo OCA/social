@@ -13,19 +13,19 @@
             <t t-set="title">Left Image, Right Text + Button</t>
             <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"></td>
+                    <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
                 </tr>
                 <tr>
                     <td style="padding: 0;" valign="top">
                         <!-- LEFT COLUMN -->
-                        <table style="width: 50%; min-width:285px;" border="0" cellpadding="0" cellspacing="0" align="left">
+                        <table style="width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
                             <tbody>
                                 <tr>
                                     <td style="padding: 20px;">
                                         <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                             <tbody>
                                                 <tr>
-                                                    <td align="center" valign="middle"><a href="#" target="_blank"><img src="http://placehold.it/245x150/333333/ffffff?text=width 245px" style="display: block; color: #000000; font-family: Arial, sans-serif; font-size: 9pt; width: 100%; min-width:245px; max-width: none; height:auto;" border="0"/></a></td>
+                                                    <td align="center" valign="middle"><a href="#" target="_blank"><img src="http://placehold.it/240x150/333333/ffffff?text=width 240px" style="display: block; color: #000000; font-family: Arial, sans-serif; font-size: 9pt; width: 100%; width:240px; height:auto;" border="0"/></a></td>
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -35,7 +35,7 @@
                         </table>
 
                         <!-- RIGHT COLUMN -->
-                        <table style="width: 50%; min-width:285px;" border="0" cellpadding="0" cellspacing="0" align="left">
+                        <table style="min-width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
                             <tbody>
                                 <tr>
                                     <td style="padding: 20px;">

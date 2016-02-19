@@ -19,11 +19,11 @@
             class="oe_snippet_body"
             style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
             <table
-                style="width: 100%; max-width: 570px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
+                style="width: 560px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
                 cellpadding="0"
                 cellspacing="0"
                 align="center"
-                bgcolor="#FFFFFF">
+                class="bg_color_picker">
                 <t t-raw="0"/>
             </table>
         </div>
