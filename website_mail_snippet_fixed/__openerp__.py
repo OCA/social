@@ -2,7 +2,7 @@
 # © 2016 Antiun Ingeniería S.L. - Jairo Llopis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    "name": "Extra Layout Snippets for Writing Emails",
+    "name": "Fixed-Width Layout Snippets for Writing Emails",
     "summary": "560px width extra building blocks",
     "version": "8.0.1.0.0",
     "category": "Marketing",
@@ -15,10 +15,9 @@
         "images/snippets.png",
     ],
     "depends": [
-        "website_mail",
+        "website_mail_snippet_vertical_resize_base",
     ],
     "data": [
-        "views/assets.xml",
         "views/templates.xml",
         "views/snippet_1_col.xml",
         "views/snippet_2_cols.xml",
