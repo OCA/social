@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* website_mail_snippet_responsive
+# 	* website_mail_snippet_fixed
 #
 msgid ""
 msgstr ""
@@ -17,60 +17,60 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 1.8.6\n"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Big image + Text + Button (1 column)"
 msgstr "Imagen grande + texto + botón (1 columna)"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Change Height"
 msgstr "Cambiar altura"
 
-#. module: website_mail_snippet_responsive
+#. module: website_mail_snippet_fixed
 #. openerp-web
-#: code:addons/website_mail_snippet_responsive/static/src/js/vertical_resize.js:23
+#: code:addons/website_mail_snippet_fixed/static/src/js/vertical_resize.js:23
 #, python-format
 msgid "Element height in pixels"
 msgstr "Altura del elemento en píxeles"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Horizontal Separator"
 msgstr "Separador horizontal"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Image + Text + Button (2 columns)"
 msgstr "Imagen + texto + botón (2 columnas)"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Image + Text + Button (3 columns)"
 msgstr "Imagen + texto + botón (3 columnas)"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Integer ut tempor lectus. Vivamus at gravida arcu."
 msgstr "Integer ut tempor lectus. Vivamus at gravida arcu."
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Learn more"
 msgstr "Aprenda más"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Left Image, Right Text + Button"
 msgstr "Imagen a la izquierda, texto + botón a la derecha"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Left Text and Button, Right Image"
 msgstr "Texto + botón a la izquierda, imagen a la derecha"
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid ""
 "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a "
 "ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a "
@@ -80,19 +80,19 @@ msgstr ""
 "ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a "
 "est. Aenean at mollis ipsum."
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "News Item"
 msgstr "Noticia del boletín"
 
-#. module: website_mail_snippet_responsive
+#. module: website_mail_snippet_fixed
 #. openerp-web
-#: code:addons/website_mail_snippet_responsive/static/src/js/vertical_resize.js:22
+#: code:addons/website_mail_snippet_fixed/static/src/js/vertical_resize.js:22
 #, python-format
 msgid "Set element height"
 msgstr ""
 
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
+#. module: website_mail_snippet_fixed
+#: view:website:560px_section
 msgid "Title"
 msgstr "Título"
