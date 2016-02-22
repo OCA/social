@@ -15,10 +15,9 @@
         "images/snippets.png",
     ],
     "depends": [
-        "website_mail",
+        "website_mail_snippet_vertical_resize_base",
     ],
     "data": [
-        "views/assets.xml",
         "views/templates.xml",
         "views/snippet_1_col.xml",
         "views/snippet_2_cols.xml",
