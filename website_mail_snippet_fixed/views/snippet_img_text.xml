@@ -8,7 +8,7 @@
 <template id="snippet_img_text"
           inherit_id="560px_section">
     <xpath expr=".">
-        <t t-call="website_mail_snippet_responsive.snippet">
+        <t t-call="website_mail_snippet_fixed.snippet">
             <t t-set="image" t-value="'snippet_img_text'"/>
             <t t-set="title">Left Image, Right Text + Button</t>
             <tbody>
