@@ -18,21 +18,14 @@
         <div
             class="oe_snippet_body"
             style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
-            <table class="fluid" align="center" cellpadding="0" cellspacing="0" style="max-width: 600px; border-collapse: collapse; background: inherit; color: inherit;">
-                <tbody>
-                    <tr>
-                        <td class="bg_color_picker" style="background-color:#ececec; padding:10px 15px 0 15px;">
-                            <table
-                                style="width: 100%; max-width: 570px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
-                                cellpadding="0"
-                                cellspacing="0"
-                                align="center"
-                                bgcolor="#FFFFFF">
-                                <t t-raw="0"/>
-                            </table>
-                        </td>
-                    </tr>
-                </tbody>
+            <table
+                style="width: 100%; max-width: 570px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
+                class="bg_color_picker"
+                cellpadding="0"
+                cellspacing="0"
+                align="center"
+                bgcolor="#FFFFFF">
+                <t t-raw="0"/>
             </table>
         </div>
     </div>
