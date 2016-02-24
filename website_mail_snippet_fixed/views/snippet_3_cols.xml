@@ -21,7 +21,7 @@
                      <tbody>
                        <tr>
                         <td style="padding: 20px 10px 20px 20px;">
-                            <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF" width="160">
+                            <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="160">
                                 <tbody>
                                     <tr>
                                         <td><a href="#" target="_blank"><img src="http://placehold.it/160x160/aaaaaa/ffffff?text=width%20160px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;width: 100%; width:160px;" border="0" width="160"/></a></td>
@@ -49,7 +49,7 @@
                                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                                     <tbody>
                                                                                         <tr>
-                                                                                            <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank">Learn more</a></td>
+                                                                                            <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
                                                                                         </tr>
                                                                                     </tbody>
                                                                                 </table>
@@ -76,7 +76,7 @@
                     <tbody>
                         <tr>
                             <td style="padding: 20px 10px 20px 10px;">
-                                <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF" width="160">
+                                <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="160">
                                     <tbody>
                                         <tr>
                                             <td><a href="#" target="_blank"><img src="http://placehold.it/160x160/aaaaaa/ffffff?text=width%20160px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;width: 100%; width:160px;" border="0" width="160"/></a></td>
@@ -102,7 +102,7 @@
                                                                                     <table border="0" cellpadding="0" cellspacing="0">
                                                                                         <tbody>
                                                                                             <tr>
-                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank">Learn more</a></td>
+                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
@@ -129,7 +129,7 @@
                         <tbody>
                             <tr>
                                 <td style="padding: 20px 20px 20px 10px;">
-                                    <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF" width="160">
+                                    <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="160">
                                         <tbody>
                                             <tr>
                                                 <td><a href="#" target="_blank"><img src="http://placehold.it/160x160/aaaaaa/ffffff?text=width%20160px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;width: 100%; width:160px;" border="0" width="160"/></a></td>
@@ -157,7 +157,7 @@
                                                                                         <table border="0" cellpadding="0" cellspacing="0">
                                                                                             <tbody>
                                                                                                 <tr>
-                                                                                                    <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank">Learn more</a></td>
+                                                                                                    <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
