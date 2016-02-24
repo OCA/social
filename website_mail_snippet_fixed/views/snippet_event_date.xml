@@ -5,7 +5,7 @@
 <openerp>
 <data>
 
-<template id="snippet_img_text"
+<template id="snippet_event_date"
           inherit_id="560px_section">
     <xpath expr=".">
         <t t-call="website_mail_snippet_fixed.snippet">
