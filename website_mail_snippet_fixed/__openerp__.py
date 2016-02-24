@@ -22,6 +22,7 @@
         "views/snippet_1_col.xml",
         "views/snippet_2_cols.xml",
         "views/snippet_3_cols.xml",
+        "views/snippet_event_date.xml",
         "views/snippet_hr.xml",
         "views/snippet_img_text.xml",
         "views/snippet_text_img.xml",
