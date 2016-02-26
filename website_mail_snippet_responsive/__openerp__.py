@@ -27,5 +27,6 @@
         "views/snippet_hr.xml",
         "views/snippet_img_text.xml",
         "views/snippet_text_img.xml",
+        "views/res_config_view.xml",
     ],
 }
