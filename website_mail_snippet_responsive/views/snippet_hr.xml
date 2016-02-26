@@ -13,10 +13,7 @@
             <t t-set="title">Horizontal Separator</t>
             <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"/>
-                </tr>
-                <tr>
-                    <td bgcolor="#00B518"
+                    <td t-attf-bgcolor="#{website.mail_button_color}"
                         height="5"
                         class="bg_color_picker vertical_resizable"/>
                 </tr>

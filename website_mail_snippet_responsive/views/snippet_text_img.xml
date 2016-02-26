@@ -13,9 +13,6 @@
             <t t-set="title">Left Text and Button, Right Image</t>
             <tbody>
                 <tr>
-                    <td bgcolor="#ECECEC" height="10"></td>
-                </tr>
-                <tr>
                     <td style="padding: 0;" valign="top">
                         <!-- LEFT COLUMN -->
                         <table border="0" cellpadding="0" cellspacing="0" align="left" width="50%">
@@ -39,7 +36,7 @@
                                                                         <table border="0" cellpadding="0" cellspacing="0">
                                                                             <tbody>
                                                                                 <tr>
-                                                                                    <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank" class="bg_color_picker">Learn more</a></td>
+                                                                                    <td align="center"><a href="#" t-attf-style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #{website.mail_button_color}; border-top: 10px solid #{website.mail_button_color}; border-bottom: 10px solid #{website.mail_button_color}; border-left: 20px solid #{website.mail_button_color}; border-right: 20px solid #{website.mail_button_color}; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank" class="bg_color_picker">Learn more</a></td>
                                                                                 </tr>
                                                                             </tbody>
                                                                         </table>
