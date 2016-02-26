@@ -22,6 +22,16 @@ This module is prepared to be compatible with module ``website_mail_bg_color``.
 If you install it, you will be able to change snippets' background colors, but
 it is not required.
 
+Configuration
+=============
+
+To change the default background color for buttons:
+
+* Go to *Settings > Configuration > Website Settings > Mail >
+  Mail button color*.
+* Input `any valid CSS2 color value
+  <https://www.w3.org/TR/CSS2/syndata.html#value-def-color>`_.
+
 Usage
 =====
 
@@ -51,6 +61,17 @@ Known issues / Roadmap
   will insert a ``<br type="_moz"/>`` in Firefox, that will make it seem like
   its height is at least like a caret, even if you set a lower value. Do not
   worry, it goes away when you press *Save*.
+* Some elements do not render with the proper width in MS Outlook. This should
+  be added inside each snippet to make them work::
+
+      <!--[if gte mso]>
+          <style type="text/css">
+          .fluid { width: 600px !important; }
+          </style>
+      <![endif]-->
+
+  But right now the view parser eats comments, and if you avoid that then
+  CKEditor will eat them, so there's not an easy solution for now.
 
 Bug Tracker
 ===========

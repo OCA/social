@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antiun Ingeniería S.L. - Jairo Llopis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<template id="snippet_event_date"
+          inherit_id="website_mail.email_designer_snippets">
+    <xpath expr="//div[@id='snippet_email_structure']">
+        <t t-call="website_mail_snippet_responsive.snippet">
+            <t t-set="image" t-value="'snippet_event_date'"/>
+            <t t-set="title">Date + Text + Button (2 columns)</t>
+              <tbody>
+                <tr>
+                    <td style="padding:0 20px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tbody>
+                            <tr>
+                                <td align="left" style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;">Title</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding: 0;" valign="top"><!-- LEFT COLUMN -->
+                    <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 50%; min-width:285px;">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 20px 0 20px 20px;">
+                                <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#000000">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding:1px;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="200" height="200" style="background:#FFFFFF">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="center" style="font-size: 65pt; line-height:50pt; font-weight: bold; font-family: Arial, sans-serif; color: #000000; padding: 30px 0 0 0;">07</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" style="padding: 10px 0 0 0; font-size: 16pt; font-weight: bold;  letter-spaccing:2px; text-transform: uppercase; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">December</td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" style="padding: 0 0 30px 0; font-size: 16pt; font-weight: bold;  letter-spaccing:2px; text-transform: uppercase; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">18:00</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </td>
+                                        </tr>
+
+                                    </tbody>
+                                </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- RIGHT COLUMN -->
+
+                    <table align="left" border="0" cellpadding="0" cellspacing="0" style="width: 50%;  min-width:285px;">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 20px 0 20px 20px;">
+                                <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF">
+                                    <tbody>
+
+                                        <tr>
+                                            <td style="padding:0;">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tbody>
+
+                                                    <tr>
+                                                        <td align="left" style="padding: 0 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td align="left">
+                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <tbody>
+                                                    <tr>
+                                                        <td align="left" style="padding: 25px 0;">
+                                                        <table border="0" cellpadding="0" cellspacing="0">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td align="center"><a href="#" t-attf-style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #{website.mail_button_color}; border-top: 10px solid #{website.mail_button_color}; border-bottom: 10px solid #{website.mail_button_color}; border-left: 20px solid #{website.mail_button_color}; border-right: 20px solid #{website.mail_button_color}; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </td>
+                </tr>
+            </tbody>
+        </t>
+    </xpath>
+</template>
+
+</data>
+</openerp>
