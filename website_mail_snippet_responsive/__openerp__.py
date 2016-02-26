@@ -4,7 +4,7 @@
 {
     "name": "Responsive Layout Snippets for Writing Emails",
     "summary": "Well... pseudo-responsive (see description)",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.1.0",
     "category": "Marketing",
     "website": "http://www.antiun.com",
     "author": "Antiun Ingeniería S.L., Odoo Community Association (OCA)",
@@ -19,6 +19,7 @@
     ],
     "data": [
         "views/assets.xml",
+        "views/res_config_view.xml",
         "views/templates.xml",
         "views/snippet_1_col.xml",
         "views/snippet_2_cols.xml",
@@ -27,6 +28,5 @@
         "views/snippet_hr.xml",
         "views/snippet_img_text.xml",
         "views/snippet_text_img.xml",
-        "views/res_config_view.xml",
     ],
 }

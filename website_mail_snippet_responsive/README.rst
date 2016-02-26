@@ -22,6 +22,16 @@ This module is prepared to be compatible with module ``website_mail_bg_color``.
 If you install it, you will be able to change snippets' background colors, but
 it is not required.
 
+Configuration
+=============
+
+To change the default background color for buttons:
+
+* Go to *Settings > Configuration > Website Settings > Mail >
+  Mail button color*.
+* Input `any valid CSS2 color value
+  <https://www.w3.org/TR/CSS2/syndata.html#value-def-color>`_.
+
 Usage
 =====
 
