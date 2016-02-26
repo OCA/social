@@ -48,7 +48,7 @@ Credits
 Images
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+* FontAwesome: `Icon <http://fontawesome.io/icon/arrows-v/>`_.
 
 Contributors
 ------------
