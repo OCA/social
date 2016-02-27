@@ -31,7 +31,7 @@ addon | version | summary
 [social_media_tripadvisor](social_media_tripadvisor/) | 8.0.1.0.0 | Tripadvisor Extension for the social media icons from the odoo core
 [social_media_xing](social_media_xing/) | 8.0.1.0.0 | Xing Extension for the social media icons from the odoo core
 [website_mail_snippet_bg_color](website_mail_snippet_bg_color/) | 8.0.1.0.0 | Set any background color for any mail editor snippet
-[website_mail_snippet_responsive](website_mail_snippet_responsive/) | 8.0.1.0.0 | Well... pseudo-responsive (see description)
+[website_mail_snippet_responsive](website_mail_snippet_responsive/) | 8.0.1.1.0 | Well... pseudo-responsive (see description)
 
 [//]: # (end addons)
 
