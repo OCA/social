@@ -1,0 +1,386 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_mandrill
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-27 01:40+0000\n"
+"PO-Revision-Date: 2016-02-27 16:56+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: mail_mandrill
+#: help:mail.mandrill.message,state:0
+msgid ""
+" * The 'Sent' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
+" * The 'Opened' status indicates that message was opened or clicked by recipient.\n"
+" * The 'Rejected' status indicates that recipient email address is blacklisted by Mandrill. It is recomended to delete this email address.\n"
+" * The 'Spam' status indicates that Mandrill consider this message as spam.\n"
+" * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
+" * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
+" * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
+msgstr " * Stanje 'Poslano' pomeni, da je bilo sporočilo uspešno dostavljeno prejemnikovemu Mail Exchange (MX) strežniku.\n * Stanje 'Odprto' pomeni, da je prejemnik sporočilo odprl ali kliknil.\n * Stanje 'Zavrnjeno' pomeni, da  je prejemnikov e-poštni naslov blokiran z Mandrill. Priporoča se izbris tega e-poštnega naslova.\n * Stanje 'Spam' pomeni, da Mandrill to sporočilo obravnava kot neželeno pošto.\n * Stanje 'Izpisan' pomeni, da je prejemnik zahteval izpis iz prejemnikov tega sporočila.\n * Stanje 'Odbito' pomeni, da je bilo sporočilo odbito s strani prejemnikovega Mail Exchange (MX) strežnika.\n * Stanje 'Mehko odbito' pomeni, da je bilo sporočilo 'mehko' odbito s strani prejemnikovega Mail Exchange (MX) strežnika.\n"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Bounce"
+msgstr "Odboj"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,bounce_description:0
+msgid "Bounce description"
+msgstr "Opis odboja"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,bounce_type:0
+msgid "Bounce type"
+msgstr "Tip odboja"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.message,state:0
+msgid "Bounced"
+msgstr "Odbito"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Click"
+msgstr "Kilk"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Clicked"
+msgstr "Kliknjeno"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,url:0
+msgid "Clicked URL"
+msgstr "Kliknjena URL"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "Country"
+msgstr "Država"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,create_uid:0
+#: field:mail.mandrill.message,create_uid:0
+msgid "Created by"
+msgstr "Ustvaril"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,create_date:0
+#: field:mail.mandrill.message,create_date:0
+msgid "Created on"
+msgstr "Ustvarjeno"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Date"
+msgstr "Datum"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Deferral"
+msgstr "Odložitev"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: selection:mail.mandrill.message,state:0
+msgid "Deferred"
+msgstr "Odloženo"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Email"
+msgstr "E-pošta"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,event_type:0
+msgid "Event type"
+msgstr "Tip dogodka"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Failed"
+msgstr "Neuspelo"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Group By"
+msgstr "Združi po"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Hard bounce"
+msgstr "Trdo odbito"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,id:0 field:mail.mandrill.message,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,mobile:0
+msgid "Is mobile?"
+msgstr "Mobilno?"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,write_uid:0
+#: field:mail.mandrill.message,write_uid:0
+msgid "Last Updated by"
+msgstr "Zadnji posodobil"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,write_date:0
+#: field:mail.mandrill.message,write_date:0
+msgid "Last Updated on"
+msgstr "Zadnjič posodobljeno"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,timestamp:0
+#: field:mail.mandrill.message,timestamp:0
+msgid "Mandrill UTC timestamp"
+msgstr "Mandrill UTC časovni žig"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,date:0 field:mail.mandrill.message,date:0
+msgid "Mandrill date"
+msgstr "Mandrill datum"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Mandrill email Search"
+msgstr "Mandrill iskanje e-pošte"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_form
+msgid "Mandrill email event"
+msgstr "Mandrill e-poštni dogodek"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "Mandrill email events"
+msgstr "Mandrill e-poštni dogodki"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "Mandrill email message"
+msgstr "Mandrill e-poštno sporočilo"
+
+#. module: mail_mandrill
+#: model:ir.actions.act_window,name:mail_mandrill.action_view_mail_mandrill_message
+#: model:ir.ui.menu,name:mail_mandrill.menu_mail_mandrill_message
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+msgid "Mandrill emails"
+msgstr "Mandrill e-pošta"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Mandrill event Search"
+msgstr "Mandrill iskanje dogodka"
+
+#. module: mail_mandrill
+#: model:ir.actions.act_window,name:mail_mandrill.action_view_mail_mandrill_event
+#: model:ir.ui.menu,name:mail_mandrill.menu_mail_mandrill_event
+#: field:mail.mandrill.message,event_ids:0
+msgid "Mandrill events"
+msgstr "Mandrill dogodki"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,mandrill_id:0
+msgid "Mandrill message ID"
+msgstr "Mandrill ID sporočila"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,time:0 field:mail.mandrill.message,time:0
+msgid "Mandrill time"
+msgstr "Mandrill čas"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,message_id:0
+msgid "Message"
+msgstr "Sporočilo"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+msgid "Message subject"
+msgstr "Predmet sporočila"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,metadata:0
+msgid "Metadata"
+msgstr "Metadata"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Month"
+msgstr "Mesec"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Open"
+msgstr "Odpri"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: selection:mail.mandrill.message,state:0
+msgid "Opened"
+msgstr "Odprto"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,os_family:0
+msgid "Operating system family"
+msgstr "Družina operacijskega sistema"
+
+#. module: mail_mandrill
+#: model:ir.model,name:mail_mandrill.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Izhodna pošta"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+msgid "Recipient"
+msgstr "Prejemnik"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,recipient:0
+msgid "Recipient email"
+msgstr "Prejemnikova e-pošta"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: selection:mail.mandrill.message,state:0
+msgid "Rejected"
+msgstr "Zavrnjeno"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Send"
+msgstr "Pošlji"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+msgid "Sender"
+msgstr "Pošiljatelj"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,sender:0
+msgid "Sender email"
+msgstr "Pošiljateljeva e-pošta"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: selection:mail.mandrill.message,state:0
+msgid "Sent"
+msgstr "Poslano"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Soft bounce"
+msgstr "Mehki odboj"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.message,state:0
+msgid "Soft bounced"
+msgstr "Mehko odbito"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: selection:mail.mandrill.message,state:0
+msgid "Spam"
+msgstr "Spam"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: field:mail.mandrill.message,state:0
+msgid "State"
+msgstr "Stanje"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: field:mail.mandrill.message,name:0
+msgid "Subject"
+msgstr "Zadeva"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+#: field:mail.mandrill.message,tags:0
+msgid "Tags"
+msgstr "Oznake"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Time"
+msgstr "Čas"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Type"
+msgstr "Tip"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "URL"
+msgstr "URL"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Unsubscribe"
+msgstr "Odjava"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: selection:mail.mandrill.message,state:0
+msgid "Unsubscribed"
+msgstr "Odjavljeno"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,ip:0
+msgid "User IP"
+msgstr "Uporabnikov IP"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+#: field:mail.mandrill.event,user_agent:0
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "User agent"
+msgstr "Uporabnikov odjemalec"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,ua_family:0
+msgid "User agent family"
+msgstr "Družina uporabnikovih odjemalcev"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: field:mail.mandrill.event,ua_type:0
+msgid "User agent type"
+msgstr "Tip uporabnikovega odjemalca"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,user_country_id:0
+msgid "User country"
+msgstr "Država uporabnika"
