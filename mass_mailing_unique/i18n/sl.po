@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_unique
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-27 01:40+0000\n"
+"PO-Revision-Date: 2016-02-27 16:56+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.list:0
+msgid "Cannot have more than one lists with the same name."
+msgstr "Imate lahko le en seznam z istim imenom."
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.contact:0
+msgid "Cannot have the same email more than once in the same list."
+msgstr "Isti e-poštni naslov imate lahko le enkrat v istem seznamu."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:42
+#, python-format
+msgid "Fix this before installing:"
+msgstr "Popravite pred namestitvijo:"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr "Poštni seznam"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Stik masovne pošte"
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:37
+#, python-format
+msgid "There are {1} lists with name {0}."
+msgstr "{1} seznamov z imenom {0}."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:28
+#, python-format
+msgid "{0} appears {2} times in list {1}."
+msgstr "{0} se pojavi {2} krat v seznamu {1}."

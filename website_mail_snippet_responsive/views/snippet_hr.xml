@@ -7,18 +7,6 @@
 
 <template id="snippet_hr"
           inherit_id="website_mail.email_designer_snippets">
-    <xpath expr="//div[@id='snippet_options']">
-        <div
-            data-snippet-option-id='vertical_resize'
-            data-selector=".vertical_resizable">
-            <li>
-                <a href="#" class="button js_vertical_resize">
-                    Change Height
-                </a>
-            </li>
-        </div>
-    </xpath>
-
     <xpath expr="//div[@id='snippet_email_structure']">
         <t t-call="website_mail_snippet_responsive.snippet">
             <t t-set="image" t-value="'snippet_hr'"/>
