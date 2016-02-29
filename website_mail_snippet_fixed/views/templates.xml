@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antiun Ingeniería S.L. - Jairo Llopis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<!-- Section with 560px width snippets -->
+<template id="560px_section_add"
+          inherit_id="website_mail.email_designer_snippets">
+    <xpath expr="//a[@href='#snippet_email_structure']/.." position="after">
+        <li>
+            <a href="#snippet_email_560px" data-toggle="tab">
+                Fixed 560px Width
+            </a>
+        </li>
+    </xpath>
+
+    <xpath expr="//div[@id='snippet_email_structure']" position="after">
+        <div id="snippet_email_560px" class="tab-pane fade">
+            <t t-call="website_mail_snippet_fixed.560px_section"/>
+        </div>
+    </xpath>
+</template>
+
+<template id="560px_section"/>
+
+<!-- Base structure for all snippets -->
+<template id="snippet">
+    <div>
+        <div class="oe_snippet_thumbnail">
+            <img
+                class="oe_snippet_thumbnail_img"
+                t-attf-src="/website_mail_snippet_fixed/static/src/img/#{image}.png"/>
+            <span
+                t-esc="title"
+                class="oe_snippet_thumbnail_title"/>
+        </div>
+        <div
+            class="oe_snippet_body"
+            style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
+            <table
+                style="width: 560px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
+                cellpadding="0"
+                cellspacing="0"
+                align="center"
+                class="bg_color_picker">
+                <t t-raw="0"/>
+            </table>
+        </div>
+    </div>
+</template>
+
+</data>
+</openerp>

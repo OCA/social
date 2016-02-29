@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antiun Ingeniería S.L. - Jairo Llopis
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<template id="snippet_hr"
+          inherit_id="560px_section">
+    <xpath expr=".">
+        <t t-call="website_mail_snippet_fixed.snippet">
+            <t t-set="image" t-value="'snippet_hr'"/>
+            <t t-set="title">Horizontal Separator</t>
+            <tbody>
+                <tr>
+                    <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
+                </tr>
+                <tr>
+                    <td style="background-color: #00B518;"
+                        height="5"
+                        class="bg_color_picker vertical_resizable"/>
+                </tr>
+                <tr>
+                    <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
+                </tr>
+            </tbody>
+        </t>
+    </xpath>
+</template>
+
+</data>
+</openerp>
