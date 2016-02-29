@@ -13,6 +13,9 @@
             <t t-set="title">Big image + Text + Button (1 column)</t>
             <tbody>
                 <tr>
+                    <td align="left" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 10px 20px;">Title</td>
+                </tr>
+                <tr>
                     <td><a href="#" target="_blank"><img src="http://placehold.it/560x200/aaaaaa/ffffff?text=width 560px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 560px;" border="0" width="570"/> </a></td>
                 </tr>
                 <tr>
