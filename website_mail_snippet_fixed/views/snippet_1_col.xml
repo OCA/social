@@ -13,7 +13,7 @@
             <t t-set="title">Big image + Text + Button (1 column)</t>
             <tbody>
                 <tr>
-                    <td><a href="#" target="_blank"><img src="http://placehold.it/560x200/333333/ffffff?text=width 560px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 560px;" border="0"/> </a></td>
+                    <td><a href="#" target="_blank"><img src="http://placehold.it/560x200/aaaaaa/ffffff?text=width 560px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 560px;" border="0" width="570"/> </a></td>
                 </tr>
                 <tr>
                     <td style="padding:0 20px;">

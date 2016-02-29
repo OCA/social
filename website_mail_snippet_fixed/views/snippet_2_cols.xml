@@ -19,10 +19,10 @@
                             <tbody>
                                 <tr>
                                     <td style="padding: 20px 10px 20px 20px;">
-                                        <table style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF" cellpadding="0" cellspacing="0" align="center" class="bg_color_picker">
+                                        <table style="border-collapse:collapse;background:inherit;color:inherit;" cellpadding="0" cellspacing="0" align="center">
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="#" target="_blank"><img src="http://placehold.it/250x200/333333/ffffff?text=width 250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 250px;" width="250" border="0"/></a></td>
+                                                    <td><a href="#" target="_blank"><img src="http://placehold.it/250x200/aaaaaa/ffffff?text=width 250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 250px;" width="250" border="0"/></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="padding:0;">
@@ -63,16 +63,17 @@
                                 </tr>
                             </tbody>
                         </table>
-
+                        </td>
+                        <td style="padding: 0;" valign="top">
                         <!-- RIGHT COLUMN -->
                         <table style="width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
                             <tbody>
                                 <tr>
                                     <td style="padding: 20px 20px 20px 10px;">
-                                        <table style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF" cellpadding="0" cellspacing="0" align="center" class="bg_color_picker">
+                                        <table style="border-collapse:collapse;background:inherit;color:inherit;" cellpadding="0" cellspacing="0" align="center">
                                             <tbody>
                                                 <tr>
-                                                    <td><a href="#" target="_blank"><img src="http://placehold.it/250x200/333333/ffffff?text=width 250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 50% width: 250px;" width="250" border="0"/></a></td>
+                                                    <td><a href="#" target="_blank"><img src="http://placehold.it/250x200/aaaaaa/ffffff?text=width 250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 50% width: 250px;" width="250" border="0"/></a></td>
                                                 </tr>
                                                 <tr>
                                                     <td style="padding:0;">
