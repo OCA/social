@@ -5,7 +5,7 @@ from openerp import models, api, fields
 class MassMailing(models.Model):
     _inherit = "mail.mass_mailing"
 
-    keep_archives = fields.Boolean('Keep Archives')
+    keep_archives = fields.Boolean()
 
 
 class MailComposeMessage(models.Model):
@@ -22,7 +22,7 @@ class MailComposeMessage(models.Model):
                 wizard.model in [item[0] for item in self.env[
                     'mail.mass_mailing']._get_mailing_model()]:
             mass_mailing = wizard.mass_mailing_id
-            # opcion solo desde mass mailing, no para composiciones que creen
+            # option only from mass mailing, not for compositions create
             # mass mailings
             if mass_mailing:
                 for res_id in res_ids:
