@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 01:40+0000\n"
-"PO-Revision-Date: 2016-02-26 16:20+0000\n"
+"POT-Creation-Date: 2016-03-07 01:55+0000\n"
+"PO-Revision-Date: 2016-02-29 07:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-social-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -24,11 +24,6 @@ msgstr "Big image + Text + Button (1 column)"
 
 #. module: website_mail_snippet_responsive
 #: view:website:website_mail.email_designer_snippets
-msgid "Change Height"
-msgstr "Change Height"
-
-#. module: website_mail_snippet_responsive
-#: view:website:website_mail.email_designer_snippets
 msgid "Date + Text + Button (2 columns)"
 msgstr "Date + Text + Button (2 columns)"
 
@@ -36,13 +31,6 @@ msgstr "Date + Text + Button (2 columns)"
 #: view:website:website_mail.email_designer_snippets
 msgid "December"
 msgstr "December"
-
-#. module: website_mail_snippet_responsive
-#. openerp-web
-#: code:addons/website_mail_snippet_responsive/static/src/js/vertical_resize.js:23
-#, python-format
-msgid "Element height in pixels"
-msgstr "Element height in pixels"
 
 #. module: website_mail_snippet_responsive
 #: view:website:website_mail.email_designer_snippets
@@ -102,13 +90,6 @@ msgstr "Mail button color"
 #: view:website:website_mail.email_designer_snippets
 msgid "News Item"
 msgstr "News Item"
-
-#. module: website_mail_snippet_responsive
-#. openerp-web
-#: code:addons/website_mail_snippet_responsive/static/src/js/vertical_resize.js:22
-#, python-format
-msgid "Set element height"
-msgstr "Set element height"
 
 #. module: website_mail_snippet_responsive
 #: view:website:website_mail.email_designer_snippets
