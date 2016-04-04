@@ -11,18 +11,19 @@ class MailComposeMessage(models.TransientModel):
     @api.model
     def default_get(self, fields_list):
         res = super(MailComposeMessage, self).default_get(fields_list)
-        if self.env.context.get('mail_post_autofollow'):
-            res['autofollow_recipients'] = True
+        res.setdefault(
+            'autofollow_recipients',
+            self.env.context.get('mail_post_autofollow', False))
         return res
 
-    autofollow_recipients = fields.Boolean()
+    autofollow_recipients = fields.Boolean(
+        string='Make recipients followers',
+        help="""if checked, the additional recipients will be added as\
+        followers on the related object""")
 
     @api.multi
     def send_mail(self):
         for wizard in self:
-            if wizard.autofollow_recipients:
-                wizard = wizard.with_context(mail_post_autofollow=True)
-            else:
-                wizard = wizard.with_context(mail_post_autofollow=False)
-            super(MailComposeMessage, wizard).send_mail()
+            super(MailComposeMessage, wizard.with_context(
+                mail_post_autofollow=wizard.autofollow_recipients)).send_mail()
         return {'type': 'ir.actions.act_window_close'}
