@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': "Mail optional autofollow",
-
     'summary': """
         Choose if you want to automatically add new recipients as followers
         on mail.compose.message""",
