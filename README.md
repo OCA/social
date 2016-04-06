@@ -20,6 +20,7 @@ addon | version | summary
 [mail_forward](mail_forward/) | 8.0.7.0.0 | Add option to forward messages
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
 [mail_mandrill](mail_mandrill/) | 8.0.1.0.0 | Mandrill mail events integration
+[mail_optional_autofollow](mail_optional_autofollow/) | 8.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_read_new_window](mail_read_new_window/) | 8.0.1.0.0 | Open mail in new window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
