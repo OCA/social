@@ -45,6 +45,8 @@ class MailNotification(models.Model):
                     message_values = message_values[0]
                 custom_values.update(message_values)
             message_id = message.subtype_id.template_id.send_mail(this.id)
+            if 'mail_message_id' in custom_values:
+                custom_values.pop('mail_message_id')
             self.env['mail.mail'].browse(message_id).write(custom_values)
             message_ids.append(message_id)
         return message_ids or True
