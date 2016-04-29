@@ -12,6 +12,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[email_template_qweb](email_template_qweb/) | 8.0.1.0.0 | Use the QWeb templating mechanism for emails
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 8.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 | Select language in mail compose window
 [mail_debrand](mail_debrand/) | 8.0.1.0.0 | Remove Odoo branding from email footers
