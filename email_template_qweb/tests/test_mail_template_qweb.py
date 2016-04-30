@@ -4,11 +4,14 @@
 from openerp.tests.common import TransactionCase
 
 
-class TestEmailTemplateQweb(TransactionCase):
+class TestMailTemplateQweb(TransactionCase):
     def test_email_template_qweb(self):
         template = self.env.ref('email_template_qweb.email_template_demo1')
-        mail_values = template.generate_email_batch(
-            template.id, [self.env.user.id])
+        mail_values = template.generate_email([self.env.user.id])
         self.assertTrue(
             # this comes from the called template if everything worked
-            '<footer>' in mail_values[self.env.user.id]['body_html'])
+            '<footer>' in mail_values[self.env.user.id]['body_html'],
+            'Did not rcv rendered template in response. Got: \n%s\n' % (
+                mail_values[self.env.user.id]['body_html']
+            )
+        )

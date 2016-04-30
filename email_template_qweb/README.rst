@@ -47,6 +47,7 @@ Contributors
 ------------
 
 * Holger Brunn <hbrunn@therp.nl>
+* Dave Lasley <dave@laslabs.com>
 
 Maintainer
 ----------
