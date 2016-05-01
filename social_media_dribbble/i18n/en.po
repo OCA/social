@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 02:16+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2015-11-20 13:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-social-8-0/language/en/)\n"
@@ -19,6 +19,7 @@ msgstr ""
 
 #. module: social_media_dribbble
 #: field:website,social_dribbble:0
+#: field:website.config.settings,social_dribbble:0
 msgid "Dribbble Account"
 msgstr "Dribbble Account"
 

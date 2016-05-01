@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-07 01:55+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2016-02-29 07:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-social-8-0/language/en/)\n"
@@ -83,6 +83,7 @@ msgstr "Mail"
 #. module: website_mail_snippet_responsive
 #: field:website,mail_button_color:0
 #: view:website.config.settings:website_mail_snippet_responsive.view_website_config_settings
+#: field:website.config.settings,mail_button_color:0
 msgid "Mail button color"
 msgstr "Mail button color"
 

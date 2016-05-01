@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 01:40+0000\n"
-"PO-Revision-Date: 2016-02-26 16:19+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"PO-Revision-Date: 2016-04-28 14:40+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-social-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -60,6 +60,12 @@ msgstr "Created on"
 #: view:mail.message.subtype:mail_follower_custom_notification.view_mail_message_subtype_form
 msgid "Custom notifications"
 msgstr "Custom notifications"
+
+#. module: mail_follower_custom_notification
+#: field:base.patch.models.mixin,display_name:0
+#: field:mail.subtype.assign.custom.notifications,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_followers
@@ -115,6 +121,12 @@ msgstr "Force yes"
 #: field:mail.subtype.assign.custom.notifications,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: mail_follower_custom_notification
+#: field:base.patch.models.mixin,__last_update:0
+#: field:mail.subtype.assign.custom.notifications,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,write_uid:0

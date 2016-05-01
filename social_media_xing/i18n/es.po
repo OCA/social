@@ -3,12 +3,24 @@
 # * social_media_xing
 # 
 # Translators:
+# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
+# Antonio Trueba, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Bole <bole@dajmi5.com>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012
+# Gustavo Lepri <gustavolepri@gmail.com>, 2015
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# John Toro <johntoro@gmail.com>, 2015
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
+# Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 01:37+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2016-02-05 12:46+0000\n"
 "Last-Translator: Antonio Trueba\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-social-8-0/language/es/)\n"
@@ -24,7 +36,7 @@ msgid "Website"
 msgstr "Sitio web"
 
 #. module: social_media_xing
-#: field:website,social_xing:0
+#: field:website,social_xing:0 field:website.config.settings,social_xing:0
 msgid "Xing Account"
 msgstr "Cuenta Xing"
 

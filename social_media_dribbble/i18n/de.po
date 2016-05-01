@@ -3,12 +3,21 @@
 # * social_media_dribbble
 # 
 # Translators:
+# Antonio Trueba, 2016
+# Carles Antoli <carlesantoli@hotmail.com>, 2015
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012,2014
+# Giacomo <giacomo.spettoli@gmail.com>, 2015
+# Giedrius Slavinskas <giedrius@inovera.lt>, 2012
+# Hotellook, 2014
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-17 01:37+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2016-01-18 15:40+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
@@ -20,6 +29,7 @@ msgstr ""
 
 #. module: social_media_dribbble
 #: field:website,social_dribbble:0
+#: field:website.config.settings,social_dribbble:0
 msgid "Dribbble Account"
 msgstr "Dribbble-Konto"
 

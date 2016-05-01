@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 14:42+0000\n"
-"PO-Revision-Date: 2015-09-04 14:42+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"PO-Revision-Date: 2016-04-28 14:41+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-social-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -24,6 +24,17 @@ msgid "Click to unsubscribe"
 msgstr "Click to unsubscribe"
 
 #. module: mass_mailing_custom_unsubscribe
+#: field:mail.mail,path:0
+msgid "Discussion Path"
+msgstr "Discussion Path"
+
+#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mail
 msgid "Outgoing Mails"
 msgstr "Outgoing Mails"
+
+#. module: mass_mailing_custom_unsubscribe
+#: help:mail.mail,path:0
+msgid ""
+"Used to display messages in a paragraph-based chatter using a unique path;"
+msgstr "Used to display messages in a paragraph-based chatter using a unique path;"
