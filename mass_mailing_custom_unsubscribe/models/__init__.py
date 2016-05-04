@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
-# Python source code encoding : https://www.python.org/dev/peps/pep-0263/
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# © 2015 Antiun Ingeniería S.L. (http://www.antiun.com)
+# © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from . import mail_mail
+from . import mail_mail, mail_unsubscription

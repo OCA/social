@@ -29,6 +29,11 @@
         'website_crm',
     ],
     'data': [
+        'security/ir.model.access.csv',
+        'data/mail.unsubscription.reason.csv',
+        'views/assets.xml',
+        'views/mail_unsubscription_reason_view.xml',
+        'views/mail_unsubscription_view.xml',
         'views/pages.xml',
     ],
     'author': 'Antiun Ingeniería S.L., '

@@ -3,7 +3,7 @@
 <data>
 
 <template name="Unsubscription worked"
-          id="website.mass_mail_unsubscription_success"
+          id="success"
           page="True">
     <t t-call="website.layout">
         <div id="wrap" class="oe_structure oe_empty">
@@ -32,7 +32,7 @@
 </template>
 
 <template name="Unsubscription failed"
-          id="website.mass_mail_unsubscription_failure"
+          id="failure"
           page="True">
     <t t-call="website.layout">
         <div id="wrap" class="oe_structure oe_empty">
@@ -51,6 +51,75 @@
                         <a class="btn btn-primary btn-lg"
                            href="/page/website.contactus">Contact us</a>
                     </p>
+                </div>
+            </section>
+        </div>
+    </t>
+</template>
+
+<template id="reason_form"
+          name="Unsubscription Reason Form">
+    <t t-call="website.layout">
+        <div id="wrap" class="oe_structure oe_empty">
+            <section class="mt16 mb16">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-12 text-center mt16 mb32">
+                            <h2>
+                                Hello,
+                                <t t-esc="contact_name"/>
+                            </h2>
+                            <h3 class="text-muted">
+                                You are trying to unsubscribe from any massive mailings sent to followers of
+                                <t t-esc="origin_model_name"/>
+                                <t t-esc="origin_name"/>
+                            </h3>
+                        </div>
+                        <div class="col-md-12 mb16 mt16">
+                            But before continuing, could you please tell us why do you want to unsubscribe?
+                        </div>
+                        <form
+                            id="reason_form"
+                            class="col-md-12 mb16 mt16"
+                            t-attf-action="/mail/mailing/#{mailing_id.id}/unsubscribe"
+                            method="post">
+                            <input
+                                type="hidden"
+                                name="db"
+                                t-att-value="env.cr.dbname"/>
+                            <input
+                                type="hidden"
+                                name="res_id"
+                                t-att-value="res_id"/>
+                            <input
+                                type="hidden"
+                                name="email"
+                                t-att-value="email"/>
+                            <t t-foreach="reason_ids" t-as="reason">
+                                <div class="radio">
+                                    <label>
+                                        <input
+                                            type="radio"
+                                            name="reason_id"
+                                            t-att-data-details-required="reason.details_required"
+                                            t-att-value="reason.id"/>
+                                        <t t-esc="reason.display_name"/>
+                                    </label>
+                                </div>
+                            </t>
+                            <textarea
+                                name="details"
+                                class="form-control"
+                                placeholder="Anything else you want to say before you leave?"
+                                rows="3"/>
+                            <div class="col-md-12 mb16 mt16">
+                                <button type="submit" class="btn btn-danger">
+                                    Unsubscribe now
+                                </button>
+                                <p class="help-block">Thank you!</p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </section>
         </div>
