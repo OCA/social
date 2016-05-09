@@ -25,9 +25,18 @@
                                 ('details_required', '=', True),
                             ],
                         }"/>
+                    <field name="details_required" invisible="True"/>
                 </group>
-                <div class="oe_chatter"/>
             </sheet>
+            <div class="oe_chatter">
+                <field
+                    name="message_follower_ids"
+                    widget="mail_followers"
+                    groups="base.group_user"/>
+               <field
+                   name="message_ids"
+                   widget="mail_thread"/>
+           </div>
         </form>
     </field>
 </record>
@@ -66,6 +75,9 @@
                 <filter
                     string="Year"
                     context="{'group_by': 'date:year'}"/>
+                <filter
+                    string="Reason"
+                    context="{'group_by': 'reason_id'}"/>
                 <filter
                     string="Mass mailing"
                     context="{'group_by': 'mass_mailing_id'}"/>

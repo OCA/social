@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime
-from openerp import api, fields, models
+from openerp import _, api, fields, models
 from .. import exceptions
 
 
@@ -16,10 +16,11 @@ class MailUnsubscription(models.Model):
         default=lambda self: self._default_date(),
         required=True)
     email = fields.Char(
-        required=True,)
+        required=True)
     mass_mailing_id = fields.Many2one(
         "mail.mass_mailing",
         "Mass mailing",
+        required=True,
         help="Mass mailing from which he was unsubscribed.")
     unsubscriber_id = fields.Reference(
         lambda self: self._selection_unsubscriber_id(),
@@ -54,8 +55,9 @@ class MailUnsubscription(models.Model):
     def _check_details_needed(self):
         """Ensure details are given if required."""
         for s in self:
-            if not s.details and s.reason_id.details_required:
-                raise exceptions.DetailsRequiredError()
+            if not s.details and s.details_required:
+                raise exceptions.DetailsRequiredError(
+                    _("This reason requires an explanation."))
 
 
 class MailUnsubscriptionReason(models.Model):
@@ -64,7 +66,8 @@ class MailUnsubscriptionReason(models.Model):
 
     name = fields.Char(
         index=True,
-        translate=True)
+        translate=True,
+        required=True)
     details_required = fields.Boolean(
         help="Check to ask for more details when this reason is selected.")
     sequence = fields.Integer(

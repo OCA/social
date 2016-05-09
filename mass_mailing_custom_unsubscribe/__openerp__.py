@@ -23,7 +23,7 @@
 {
     'name': "Customizable unsubscription process on mass mailing emails",
     'category': 'Marketing',
-    'version': '8.0.1.1.0',
+    'version': '8.0.2.0.0',
     'depends': [
         'mass_mailing',
         'website_crm',
@@ -35,6 +35,11 @@
         'views/mail_unsubscription_reason_view.xml',
         'views/mail_unsubscription_view.xml',
         'views/pages.xml',
+    ],
+    'images': [
+        'images/failure.png',
+        'images/form.png',
+        'images/success.png',
     ],
     'author': 'Antiun Ingeniería S.L., '
               'Odoo Community Association (OCA)',

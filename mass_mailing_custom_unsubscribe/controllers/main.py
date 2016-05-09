@@ -44,8 +44,7 @@ class CustomUnsuscribe(MassMailController):
         :param int res_id:
             ID of the unsubscriptor.
         """
-        contact_fname = "name"
-        email_fname = related_fname = origin_fname = None
+        email_fname = origin_name = None
         domain = [("id", "=", res_id)]
         record_ids = request.env[mailing_id.mailing_model].sudo()
 
@@ -60,23 +59,10 @@ class CustomUnsuscribe(MassMailController):
             # Trying to unsubscribe without email? Bad boy...
             raise exceptions.AccessDenied()
 
-        # Special cases for some models
         if record_ids._name == "mail.mass_mailing.contact":
             domain.append(
                 ("list_id", "in",
                  [l.id for l in mailing_id.contact_list_ids]))
-            related_fname = "list_id"
-            origin_fname = "display_name"
-        elif record_ids._name == "crm.lead":
-            origin_fname = "name"
-            contact_fname = "contact_name"
-        elif record_ids._name == "hr.applicant":
-            related_fname = "job_id"
-            origin_fname = "name"
-        elif record_ids._name == "event.registration":
-            # In case you install OCA's event_registration_mass_mailing
-            related_fname = "event_id"
-            origin_fname = "name"
 
         # Unsubscription targets
         record_ids = record_ids.search(domain)
@@ -85,13 +71,41 @@ class CustomUnsuscribe(MassMailController):
             # Trying to unsubscribe with fake criteria? Bad boy...
             raise exceptions.AccessDenied()
 
+        # Special data to load for some models
+        specials = {
+            "mail.mass_mailing.contact": {
+                "related": "list_id",
+                "origin": "display_name",
+            },
+            "crm.lead": {
+                "origin": "name",
+                "contact": "contact_name",
+            },
+            "hr.applicant": {
+                "related": "job_id",
+                "origin": "name",
+            },
+            # In case you install OCA's event_registration_mass_mailing
+            "event.registration": {
+                "related": "event_id",
+                "origin": "name",
+            },
+        }
+        fnames = specials.get(record_ids._name, dict())
+
         # Get data to identify the source of the unsubscription
         first = record_ids[:1]
-        contact_name = first[contact_fname]
-        first = first[related_fname] if related_fname else first
+        contact_name = first[fnames.get("contact_fname", "name")]
         origin_model_name = request.env["ir.model"].search(
             [("model", "=", first._name)]).name
-        origin_name = first[origin_fname]
+        try:
+            first = first[fnames["related"]]
+        except KeyError:
+            pass
+        try:
+            origin_name = first[fnames["origin"]]
+        except KeyError:
+            pass
 
         # Get available reasons
         reason_ids = (
@@ -126,6 +140,7 @@ class CustomUnsuscribe(MassMailController):
                             (mailing.mailing_model, res_id)),
                         "reason_id": int(post["reason_id"]),
                         "details": post.get("details", False),
+                        "mass_mailing_id": mailing_id,
                     })
 
             # Should provide details, go back to form

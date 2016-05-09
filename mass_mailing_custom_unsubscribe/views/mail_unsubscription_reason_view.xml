@@ -47,7 +47,7 @@
 
 <act_window
     id="mail_unsubscription_reason_action"
-    name="Unsubscriptions"
+    name="Unsubscription Reasons"
     res_model="mail.unsubscription.reason"/>
 
 <menuitem
