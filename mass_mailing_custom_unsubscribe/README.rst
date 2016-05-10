@@ -9,8 +9,8 @@ With this module you can set a custom unsubscribe link appended at the bottom
 of mass mailing emails.
 
 It also displays a beautiful and simple unsubscription form when somebody
-unsubscribes, to let you know why he left; and then displays to him a beautiful
-and customizable goodbye message.
+unsubscribes, to let you know why; and then displays a beautiful and
+customizable goodbye message.
 
 Configuration
 =============
