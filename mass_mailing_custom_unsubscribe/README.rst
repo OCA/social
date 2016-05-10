@@ -71,6 +71,8 @@ Known issues / Roadmap
 
 * This custom HTML is not translatable, so as a suggestion, you can define
   the same text in several languages in several lines.
+* If you use the ``website_multi`` module, you will probably find that the
+  views are not visible by default. Private module, not our problem.
 
 For example:
 

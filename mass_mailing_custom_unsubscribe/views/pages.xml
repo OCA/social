@@ -56,14 +56,6 @@
     </t>
 </template>
 
-<!-- Make the pages above reachable, somehow page="True" does not work -->
-<record id="success" model="ir.ui.view">
-    <field name="key">mass_mailing_custom_unsubscribe.success</field>
-</record>
-<record id="failure" model="ir.ui.view">
-    <field name="key">mass_mailing_custom_unsubscribe.failure</field>
-</record>
-
 <template id="reason_form"
           name="Unsubscription Reason Form">
     <t t-call="website.layout">
