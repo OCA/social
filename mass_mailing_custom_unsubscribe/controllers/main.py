@@ -61,8 +61,7 @@ class CustomUnsuscribe(MassMailController):
 
         if record_ids._name == "mail.mass_mailing.contact":
             domain.append(
-                ("list_id", "in",
-                 [l.id for l in mailing_id.contact_list_ids]))
+                ("list_id", "in", mailing_id.contact_list_ids.ids))
 
         # Unsubscription targets
         record_ids = record_ids.search(domain)

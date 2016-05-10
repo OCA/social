@@ -2,7 +2,6 @@
 # © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
 from openerp import _, api, fields, models
 from .. import exceptions
 
@@ -26,15 +25,15 @@ class MailUnsubscription(models.Model):
         lambda self: self._selection_unsubscriber_id(),
         "Unsubscriber",
         required=True,
-        help="Who he was unsubscribed.")
+        help="Who was unsubscribed.")
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
         "Reason",
         ondelete="restrict",
         required=True,
-        help="Why he was unsubscribed.")
+        help="Why the unsubscription was made.")
     details = fields.Char(
-        help="More details on why he was unsubscribed.")
+        help="More details on why the unsubscription was made.")
     details_required = fields.Boolean(
         related="reason_id.details_required")
     success = fields.Boolean(
@@ -43,7 +42,7 @@ class MailUnsubscription(models.Model):
 
     @api.model
     def _default_date(self):
-        return datetime.now()
+        return fields.Datetime.now()
 
     @api.model
     def _selection_unsubscriber_id(self):

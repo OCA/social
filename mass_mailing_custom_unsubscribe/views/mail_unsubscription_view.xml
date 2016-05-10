@@ -18,24 +18,17 @@
                     <field name="email"/>
                     <field name="success"/>
                     <field name="reason_id"/>
-                    <field
-                        name="details"
-                        attrs="{
-                            'required': [
-                                ('details_required', '=', True),
-                            ],
-                        }"/>
+                    <field name="details"
+                           attrs="{'required': [('details_required', '=', True)]}"/>
                     <field name="details_required" invisible="True"/>
                 </group>
             </sheet>
             <div class="oe_chatter">
-                <field
-                    name="message_follower_ids"
-                    widget="mail_followers"
-                    groups="base.group_user"/>
-               <field
-                   name="message_ids"
-                   widget="mail_thread"/>
+                <field name="message_follower_ids"
+                       widget="mail_followers"
+                       groups="base.group_user"/>
+                <field name="message_ids"
+                       widget="mail_thread"/>
            </div>
         </form>
     </field>
@@ -69,35 +62,28 @@
             <field name="details"/>
             <separator/>
             <group string="Group by">
-                <filter
-                    string="Month"
-                    context="{'group_by': 'date:month'}"/>
-                <filter
-                    string="Year"
-                    context="{'group_by': 'date:year'}"/>
-                <filter
-                    string="Reason"
-                    context="{'group_by': 'reason_id'}"/>
-                <filter
-                    string="Mass mailing"
-                    context="{'group_by': 'mass_mailing_id'}"/>
-                <filter
-                    string="Success"
-                    context="{'group_by': 'success'}"/>
+                <filter string="Month"
+                        context="{'group_by': 'date:month'}"/>
+                <filter string="Year"
+                        context="{'group_by': 'date:year'}"/>
+                <filter string="Reason"
+                        context="{'group_by': 'reason_id'}"/>
+                <filter string="Mass mailing"
+                        context="{'group_by': 'mass_mailing_id'}"/>
+                <filter string="Success"
+                        context="{'group_by': 'success'}"/>
             </group>
         </search>
     </field>
 </record>
 
-<act_window
-    id="mail_unsubscription_action"
-    name="Unsubscriptions"
-    res_model="mail.unsubscription"/>
+<act_window id="mail_unsubscription_action"
+            name="Unsubscriptions"
+            res_model="mail.unsubscription"/>
 
-<menuitem
-    id="mail_unsubscription_menu"
-    parent="mass_mailing.mass_mailing_campaign"
-    action="mail_unsubscription_action"/>
+<menuitem id="mail_unsubscription_menu"
+          parent="mass_mailing.mass_mailing_campaign"
+          action="mail_unsubscription_action"/>
 
 </data>
 </openerp>

@@ -48,7 +48,7 @@ they are going to unsubscribe. To do it:
 Unsubscription Goodbye Message
 ------------------------------
 
-Your unsubscriptors will recieve a beautier goodbye page. You can customize it
+Your unsubscriptors will receive a beautier goodbye page. You can customize it
 with these links **after installing the module**:
 
 * `Unsubscription successful </page/mass_mailing_custom_unsubscribe.successs>`_.
