@@ -70,31 +70,10 @@ class CustomUnsuscribe(MassMailController):
             # Trying to unsubscribe with fake criteria? Bad boy...
             raise exceptions.AccessDenied()
 
-        # Special data to load for some models
-        specials = {
-            "mail.mass_mailing.contact": {
-                "related": "list_id",
-                "origin": "display_name",
-            },
-            "crm.lead": {
-                "origin": "name",
-                "contact": "contact_name",
-            },
-            "hr.applicant": {
-                "related": "job_id",
-                "origin": "name",
-            },
-            # In case you install OCA's event_registration_mass_mailing
-            "event.registration": {
-                "related": "event_id",
-                "origin": "name",
-            },
-        }
-        fnames = specials.get(record_ids._name, dict())
-
         # Get data to identify the source of the unsubscription
+        fnames = self.unsubscription_special_fnames(record_ids._name)
         first = record_ids[:1]
-        contact_name = first[fnames.get("contact_fname", "name")]
+        contact_name = first[fnames.get("contact", "name")]
         origin_model_name = request.env["ir.model"].search(
             [("model", "=", first._name)]).name
         try:
@@ -120,6 +99,54 @@ class CustomUnsuscribe(MassMailController):
             "record_ids": record_ids,
             "res_id": res_id,
         }
+
+    def unsubscription_special_fnames(self, model):
+        """Define special field names to generate the unsubscription qcontext.
+
+        :return dict:
+            Special fields will depend on the model, so this method should
+            return something like::
+
+                {
+                    "related": "parent_id",
+                    "origin": "display_name",
+                    "contact": "contact_name",
+                }
+
+            Where:
+
+            - ``model.name`` is the technical name of the model.
+            - ``related`` indicates the name of a field in ``model.name`` that
+              contains a :class:`openerp.fields.Many2one` field which is
+              considered what the user is unsubscribing from.
+            - ``origin``: is the name of the field that contains the name of
+              what the user is unsubscribing from.
+            - ``contact`` is the name of the field that contains the name of
+              the user that is unsubscribing.
+
+            Missing keys will mean that nothing special is required for that
+            model and it will use the default values.
+        """
+        specials = {
+            "mail.mass_mailing.contact": {
+                "related": "list_id",
+                "origin": "display_name",
+            },
+            "crm.lead": {
+                "origin": "name",
+                "contact": "contact_name",
+            },
+            "hr.applicant": {
+                "related": "job_id",
+                "origin": "name",
+            },
+            # In case you install OCA's event_registration_mass_mailing
+            "event.registration": {
+                "related": "event_id",
+                "origin": "name",
+            },
+        }
+        return specials.get(model, dict())
 
     @route(auth="public", website=True)
     def mailing(self, mailing_id, email=None, res_id=None, **post):
