@@ -10,6 +10,15 @@ from .. import exceptions as _ex
 
 
 class CustomUnsuscribe(MassMailController):
+    def _mailing_list_contacts_by_email(self, email):
+        """Gets the mailing list contacts by email.
+
+        This should not be displayed to the final user if security validations
+        have not been matched.
+        """
+        return request.env["mail.mass_mailing.contact"].search(
+            [("email", "=", email), ("opt_out", "=", False)])
+
     def unsubscription_reason(self, mailing_id, email, res_id,
                               qcontext_extra=None):
         """Get the unsubscription reason form.
@@ -21,7 +30,7 @@ class CustomUnsuscribe(MassMailController):
             Email to be unsubscribed.
 
         :param int res_id:
-            ID of the unsubscriptor.
+            ID of the unsubscriber.
 
         :param dict qcontext_extra:
             Additional dictionary to pass to the view.
@@ -42,7 +51,7 @@ class CustomUnsuscribe(MassMailController):
             Email to be unsubscribed.
 
         :param int res_id:
-            ID of the unsubscriptor.
+            ID of the unsubscriber.
         """
         email_fname = origin_name = None
         domain = [("id", "=", res_id)]
@@ -53,15 +62,19 @@ class CustomUnsuscribe(MassMailController):
         elif "email" in record_ids._fields:
             email_fname = "email"
 
-        if email_fname and email:
-            domain.append((email_fname, "ilike", email))
-        else:
+        if not (email_fname and email):
             # Trying to unsubscribe without email? Bad boy...
             raise exceptions.AccessDenied()
+
+        domain.append((email_fname, "ilike", email))
+
+        # Search additional mailing lists for the unsubscriber
+        additional_contacts = self._mailing_list_contacts_by_email(email)
 
         if record_ids._name == "mail.mass_mailing.contact":
             domain.append(
                 ("list_id", "in", mailing_id.contact_list_ids.ids))
+            additional_contacts -= record_ids
 
         # Unsubscription targets
         record_ids = record_ids.search(domain)
@@ -90,6 +103,7 @@ class CustomUnsuscribe(MassMailController):
             request.env["mail.unsubscription.reason"].search([]))
 
         return {
+            "additional_contact_ids": additional_contacts,
             "contact_name": contact_name,
             "email": email,
             "mailing_id": mailing_id,
@@ -152,35 +166,58 @@ class CustomUnsuscribe(MassMailController):
     def mailing(self, mailing_id, email=None, res_id=None, **post):
         """Display a confirmation form to get the unsubscription reason."""
         mailing = request.env["mail.mass_mailing"].sudo().browse(mailing_id)
+        contact = request.env["mail.mass_mailing.contact"].sudo()
+        unsubscription = request.env["mail.unsubscription"].sudo()
 
         if not post.get("reason_id"):
             # We need to know why you leave, get to the form
             return self.unsubscription_reason(mailing, email, res_id)
-        else:
-            # Save reason and details
+
+        # Save reason and details
+        try:
+            with request.env.cr.savepoint():
+                records = unsubscription.create({
+                    "email": email,
+                    "unsubscriber_id": ",".join(
+                        (mailing.mailing_model, res_id)),
+                    "reason_id": int(post["reason_id"]),
+                    "details": post.get("details", False),
+                    "mass_mailing_id": mailing_id,
+                })
+
+        # Should provide details, go back to form
+        except _ex.DetailsRequiredError:
+            return self.unsubscription_reason(
+                mailing, email, res_id,
+                {"error_details_required": True})
+
+        # Unsubscribe from additional lists
+        for key, value in post.iteritems():
             try:
-                with request.env.cr.savepoint():
-                    record = request.env["mail.unsubscription"].sudo().create({
+                label, list_id = key.split(",")
+                if label != "list_id":
+                    raise ValueError
+                list_id = int(list_id)
+            except ValueError:
+                pass
+            else:
+                contact_id = contact.browse(int(value))
+                if contact_id.list_id.id == list_id:
+                    contact_id.opt_out = True
+                    records += unsubscription.create({
                         "email": email,
-                        "unsubscriber_id": ",".join(
-                            (mailing.mailing_model, res_id)),
+                        "unsubscriber_id": ",".join((contact._name, value)),
                         "reason_id": int(post["reason_id"]),
                         "details": post.get("details", False),
                         "mass_mailing_id": mailing_id,
                     })
 
-            # Should provide details, go back to form
-            except _ex.DetailsRequiredError:
-                return self.unsubscription_reason(
-                    mailing, email, res_id,
-                    {"error_details_required": True})
+        # All is OK, unsubscribe
+        result = super(CustomUnsuscribe, self).mailing(
+            mailing_id, email, res_id, **post)
+        records.write({"success": result.data == "OK"})
 
-            # All is OK, unsubscribe
-            result = super(CustomUnsuscribe, self).mailing(
-                mailing_id, email, res_id, **post)
-            record.success = result.data == "OK"
-
-            # Redirect to the result
-            path = "/page/mass_mailing_custom_unsubscribe.%s" % (
-                "success" if record.success else "failure")
-            return local_redirect(path)
+        # Redirect to the result
+        path = "/page/mass_mailing_custom_unsubscribe.%s" % (
+            "success" if result.data == "OK" else "failure")
+        return local_redirect(path)

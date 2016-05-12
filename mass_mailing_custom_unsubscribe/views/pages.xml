@@ -61,7 +61,11 @@
     <t t-call="website.layout">
         <div id="wrap" class="oe_structure oe_empty">
             <section class="mt16 mb16">
-                <div class="container">
+                <form
+                    id="reason_form"
+                    class="container"
+                    t-attf-action="/mail/mailing/#{mailing_id.id}/unsubscribe"
+                    method="post">
                     <div class="row">
                         <div class="col-md-12 text-center mt16 mb32">
                             <h2>
@@ -77,14 +81,26 @@
                                 </t>
                             </h3>
                         </div>
-                        <div class="col-md-12 mb16 mt16">
+                        <div t-if="additional_contact_ids"
+                             class="col-md-12 mt16">
+                            Is there any other mailing list you want to leave?
+                            <t t-foreach="additional_contact_ids"
+                               t-as="contact">
+                                <div class="checkbox">
+                                    <label>
+                                        <input
+                                            t-attf-name="list_id,#{contact.list_id.id}"
+                                            type="checkbox"
+                                            t-att-value="contact.id"/>
+                                        <t t-esc="contact.list_id.display_name"/>
+                                    </label>
+                                </div>
+                            </t>
+                        </div>
+                        <div class="col-md-12 mt16">
                             But before continuing, could you please tell us why do you want to unsubscribe?
                         </div>
-                        <form
-                            id="reason_form"
-                            class="col-md-12 mb16 mt16"
-                            t-attf-action="/mail/mailing/#{mailing_id.id}/unsubscribe"
-                            method="post">
+                        <div class="col-md-12 mb16">
                             <input
                                 type="hidden"
                                 name="db"
@@ -122,9 +138,9 @@
                                 </button>
                                 <p class="help-block">Thank you!</p>
                             </div>
-                        </form>
+                        </div>
                     </div>
-                </div>
+                </form>
             </section>
         </div>
     </t>

@@ -42,6 +42,7 @@
         'images/success.png',
     ],
     'author': 'Antiun Ingeniería S.L., '
+              'Tecnativa,'
               'Odoo Community Association (OCA)',
     'website': 'http://www.antiun.com',
     'license': 'AGPL-3',
