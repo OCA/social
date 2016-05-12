@@ -30,6 +30,7 @@
     ],
     'data': [
         'security/ir.model.access.csv',
+        'data/install_salt.xml',
         'data/mail.unsubscription.reason.csv',
         'views/assets.xml',
         'views/mail_unsubscription_reason_view.xml',

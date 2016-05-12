@@ -6,7 +6,6 @@
 
 import urlparse
 import urllib
-
 from openerp import models
 from openerp.tools.translate import _
 
@@ -26,7 +25,11 @@ class MailMail(models.Model):
                 'params': urllib.urlencode({
                     'db': cr.dbname,
                     'res_id': mail.res_id,
-                    'email': email_to
+                    'email': email_to,
+                    'hash': self.env["mail.mass_mailing"].hash_create(
+                        mail.mailing_id.id,
+                        mail.res_id,
+                        email_to),
                 })
             }
         )

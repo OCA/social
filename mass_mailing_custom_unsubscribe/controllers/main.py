@@ -165,7 +165,13 @@ class CustomUnsuscribe(MassMailController):
     @route(auth="public", website=True)
     def mailing(self, mailing_id, email=None, res_id=None, **post):
         """Display a confirmation form to get the unsubscription reason."""
-        mailing = request.env["mail.mass_mailing"].sudo().browse(mailing_id)
+        mailing = request.env["mail.mass_mailing"]
+
+        # Trying to unsubscribe with fake hash? Bad boy...
+        if post.get("hash") != mailing.hash_create(mailing_id, res_id, email):
+            raise exceptions.AccessDenied()
+
+        mailing = mailing.sudo().browse(mailing_id)
         contact = request.env["mail.mass_mailing.contact"].sudo()
         unsubscription = request.env["mail.unsubscription"].sudo()
 
