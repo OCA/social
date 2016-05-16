@@ -14,7 +14,7 @@ class MailMassMailing(models.Model):
     def _init_salt_create(self):
         """Create a salt to secure the unsubscription URLs."""
         icp = self.env["ir.config_parameter"]
-        key = "mass_mailing_custom_unsubscribe.salt"
+        key = "mass_mailing.salt"
         salt = icp.get_param(key)
         if salt is False:
             salt = str(uuid4())
@@ -27,8 +27,7 @@ class MailMassMailing(models.Model):
         :return None/str:
             Secure hash, or ``None`` if the system parameter is empty.
         """
-        salt = self.env["ir.config_parameter"].get_param(
-            "mass_mailing_custom_unsubscribe.salt")
+        salt = self.env["ir.config_parameter"].get_param("mass_mailing.salt")
         if not salt:
             return None
         source = (self.env.cr.dbname, mailing_id, res_id, email, salt)

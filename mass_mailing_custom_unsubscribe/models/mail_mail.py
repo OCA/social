@@ -26,7 +26,7 @@ class MailMail(models.Model):
                     'db': cr.dbname,
                     'res_id': mail.res_id,
                     'email': email_to,
-                    'hash': self.env["mail.mass_mailing"].hash_create(
+                    'token': self.env["mail.mass_mailing"].hash_create(
                         mail.mailing_id.id,
                         mail.res_id,
                         email_to),

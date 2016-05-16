@@ -168,7 +168,7 @@ class CustomUnsuscribe(MassMailController):
         mailing = request.env["mail.mass_mailing"]
 
         # Trying to unsubscribe with fake hash? Bad boy...
-        if post.get("hash") != mailing.hash_create(mailing_id, res_id, email):
+        if post.get("token") != mailing.hash_create(mailing_id, res_id, email):
             raise exceptions.AccessDenied()
 
         mailing = mailing.sudo().browse(mailing_id)
