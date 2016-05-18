@@ -48,16 +48,16 @@ class MailNotification(models.Model):
 
         return footer
 
-    @api.one
+    @api.model
     def _notify(
-            self, partners_to_notify=None, force_send=False,
+            self, message_id, partners_to_notify=None, force_send=False,
             user_signature=True):
         ctx = self.env.context.copy()
         if not self.env.context.get('mail_notify_noemail'):
             ctx.update({
                 'partners_to_notify': partners_to_notify,
             })
-        return super(MailNotification, self._model)._notify(
-            self.env.cr, self.env.uid, self.id,
+        return super(MailNotification, self)._notify(
+            message_id,
             partners_to_notify=partners_to_notify,
             force_send=force_send, user_signature=user_signature, context=ctx)
