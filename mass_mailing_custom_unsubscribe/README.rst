@@ -72,15 +72,24 @@ Known issues / Roadmap
 
 * This custom HTML is not translatable, so as a suggestion, you can define
   the same text in several languages in several lines.
-* If you use the ``website_multi`` module, you will probably find that the
-  views are not visible by default. Private module, not our problem.
 
-For example:
+  For example:
 
 .. code:: html
 
   <small>[EN] You can unsubscribe <a href="%(url)s">here</a></small><br/>
   <small>[ES] Puedes darte de baja <a href="%(url)s">aquí</a></small>
+
+* If you use the ``website_multi`` module, you will probably find that the
+  views are not visible by default.
+* This module adds a security hash for mass mailing unsubscription URLs, which
+  makes to not work anymore URLs of mass mailing messages sent before its
+  installation. If you need backwards compatibility, disable this security
+  feature by emptying the ``mass_mailing.salt`` system parameter. To avoid
+  breaking current installations, you will not get a salt if you are upgrading
+  the addon. If you want a salt, create the above system parameter and assign a
+  random value to it.
+* Security should be patched upstream.
 
 Bug Tracker
 ===========
@@ -88,19 +97,10 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/social/issues/new?body=module:%20mass_mailing_custom_unsubscribe%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
-
-Known Issues / Roadmap
-======================
-
-* This module adds a security hash for mass mailing unsubscription URLs, which
-  makes URLs of mass mailing messages sent before its installation not work
-  anymore. If you need backwards compatibility, disable this security feature
-  by emptying the ``mass_mailing_custom_unsubscribe.salt`` system parameter.
-  To avoid breaking current instalations, you will not get a salt if you are
-  upgrading the addon. If you want a salt, create the above system parameter
-  and assign a random value to it.
-* Security should be patched upstream.
+`here <https://github.com/OCA/
+social/issues/new?body=module:%20
+mass_mailing_custom_unsubscribe%0Aversion:%20
+8.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Credits
 =======
