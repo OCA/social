@@ -23,7 +23,8 @@ To configure this module, you need to:
   about via ``${object.record}``. To generate links to the record, use
   ``${object.record_access_link}``.
 
-Also have a look at the demo template for the minimal fields you should set.
+Also have a look at the template assigned by default to the discussion subtype
+for the minimal fields you should set.
 
 Usage
 =====

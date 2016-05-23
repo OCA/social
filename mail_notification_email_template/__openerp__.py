@@ -12,11 +12,9 @@
         'mail',
         'email_template',
     ],
-    "demo": [
-        "demo/email_template.xml",
-        "demo/mail_message_subtype.xml",
-    ],
     "data": [
+        "data/email_template.xml",
+        "data/mail_message_subtype.xml",
         "views/mail_message_subtype.xml",
     ],
 }

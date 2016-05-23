@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
-    <data>
+    <data noupdate="1">
         <record id="template" model="email.template">
             <field name="name">Template for discussion notifications</field>
             <field name="model_id" ref="mail.model_mail_notification" />
