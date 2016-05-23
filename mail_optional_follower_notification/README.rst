@@ -6,11 +6,9 @@
 Mail optional follower notifications
 ====================================
 
-
-
 This module adds the possibility to choose if you want to automatically
 notify followers on mail.compose.message. By default, Odoo notify
-automatically all followers
+automatically all followers.
 
 Usage
 =====
@@ -28,8 +26,6 @@ This field it's initialized to true to keep the standard behavior.
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/205/8.0
-
-For further information, please visit:
 
  * https://www.odoo.com/forum/help-1
 

@@ -10,7 +10,7 @@
                     <field name="notify_followers" />
                 </xpath>
                 <xpath expr="//div[field[@name='partner_ids']]/span[2]" position="inside">
-                    <span attrs="{'invisible': [('notify_followers', '=', True)]}" style="color: red;"> - Warning : Followers will not be notified but they can access the notification directly from the document</span>
+                    <span attrs="{'invisible': [('notify_followers', '=', True)]}" style="color: red;"> - Warning : Followers will not be notified but they can access the notification directly from the document (if they are allowed to)</span>
                 </xpath>
             </field>
         </record>

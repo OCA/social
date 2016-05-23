@@ -2,7 +2,7 @@
 # Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    'name': "Mail optional follower notifications",
+    'name': "Mail optional follower notification",
 
     'summary': """
         Choose if you want to automatically notify followers
