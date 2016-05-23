@@ -7,7 +7,7 @@
 {
     'name': 'Mass Mailing Keep Archives',
     'version': '8.0.0.0.0',
-    'author': 'ADHOC SA',
+    'author': 'ADHOC SA, Odoo Community Association (OCA)',
     'website': 'www.adhoc.com.ar',
     'license': 'AGPL-3',
     'depends': [
