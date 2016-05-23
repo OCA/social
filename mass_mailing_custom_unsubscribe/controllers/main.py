@@ -22,7 +22,7 @@ class CustomUnsuscribe(MassMailController):
             ("list_id.not_cross_unsubscriptable", "=", False),
         ])
 
-    def unsubscription_reason(self, mailing_id, email, res_id,
+    def unsubscription_reason(self, mailing_id, email, res_id, token,
                               qcontext_extra=None):
         """Get the unsubscription reason form.
 
@@ -38,13 +38,13 @@ class CustomUnsuscribe(MassMailController):
         :param dict qcontext_extra:
             Additional dictionary to pass to the view.
         """
-        values = self.unsubscription_qcontext(mailing_id, email, res_id)
+        values = self.unsubscription_qcontext(mailing_id, email, res_id, token)
         values.update(qcontext_extra or dict())
         return request.website.render(
             "mass_mailing_custom_unsubscribe.reason_form",
             values)
 
-    def unsubscription_qcontext(self, mailing_id, email, res_id):
+    def unsubscription_qcontext(self, mailing_id, email, res_id, token):
         """Get rendering context for unsubscription form.
 
         :param mail.mass_mailing mailing_id:
@@ -117,6 +117,7 @@ class CustomUnsuscribe(MassMailController):
             "reason_ids": reason_ids,
             "record_ids": record_ids,
             "res_id": res_id,
+            "token": token,
         }
 
     def unsubscription_special_fnames(self, model):
@@ -182,7 +183,8 @@ class CustomUnsuscribe(MassMailController):
 
         if not post.get("reason_id"):
             # We need to know why you leave, get to the form
-            return self.unsubscription_reason(mailing, email, res_id)
+            return self.unsubscription_reason(
+                mailing, email, res_id, post.get("token"))
 
         # Save reason and details
         try:
@@ -199,7 +201,7 @@ class CustomUnsuscribe(MassMailController):
         # Should provide details, go back to form
         except _ex.DetailsRequiredError:
             return self.unsubscription_reason(
-                mailing, email, res_id,
+                mailing, email, res_id, post.get("token"),
                 {"error_details_required": True})
 
         # Unsubscribe from additional lists
