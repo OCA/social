@@ -3,13 +3,18 @@
 # * mail_forward
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 02:16+0000\n"
-"PO-Revision-Date: 2015-11-22 09:01+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"PO-Revision-Date: 2016-05-01 05:11+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -26,9 +31,31 @@ msgid "(No subject)"
 msgstr "(ni zadeve)"
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,active_domain:0
+msgid "Active domain"
+msgstr "Aktivna domena"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,partner_ids:0
+msgid "Additional Contacts"
+msgstr "Dodatni stiki"
+
+#. module: mail_forward
 #: help:res.request.link,mail_forward_target:0
 msgid "Allow to forward mails to this model."
 msgstr "Dovoli posredovanje pošte na ta model."
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,no_auto_thread:0
+msgid ""
+"Answers do not go in the original document' discussion thread. This has an "
+"impact on the generated message-id."
+msgstr "Odgovori ne gredo v nit razprave izvornega dokumenta. To vpliva na ustvarjeni ID sporočila."
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,attachment_ids:0
+msgid "Attachments"
+msgstr "Priponke"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,move_attachments:0
@@ -40,11 +67,48 @@ msgid ""
 msgstr "Priponke bodo dodeljene izbranemu ciljnemu objektu, da jih boste lahko izbirali preko gumba 'Priponke', a ne bo jih na voljo za trenutni (če kateri) objekt. V vsakem primeru pa jih lahko odprete iz samega sporočila."
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,author_id:0
+msgid "Author"
+msgstr "Avtor"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,author_id:0
+msgid ""
+"Author of the message. If not set, email_from may hold an email address that"
+" did not match any partner."
+msgstr "Avtor sporočila. Če ni nastavljen, lahko email_from vsebuje e-poštni naslov, ki se ne ujema z nobenim partnerjem."
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,author_avatar:0
+msgid "Author's Avatar"
+msgstr "Avtorjev avatar"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,body:0
+msgid "Automatically sanitized HTML contents"
+msgstr "Samodejno prečiščena HTML vsebina"
+
+#. module: mail_forward
 #. openerp-web
 #: code:addons/mail_forward/static/src/js/mail_forward.js:47
 #, python-format
 msgid "CC: "
 msgstr "CC: "
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,child_ids:0
+msgid "Child Messages"
+msgstr "Podrejena sporočila"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,composition_mode:0
+msgid "Composition mode"
+msgstr "Način sestavljanja"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,body:0
+msgid "Contents"
+msgstr "Vsebina"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_uid:0
@@ -57,6 +121,21 @@ msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: mail_forward
+#: help:mail_forward.compose_message,starred:0
+msgid "Current user has a starred notification linked to this message"
+msgstr "Trenutni uporabnik ima z zvezdico označeno obvestilo vezano na to sporočilo"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,to_read:0
+msgid "Current user has an unread notification linked to this message"
+msgstr "Trenutni uporabnik ima neprebrano obvestilo vezano na to sporočilo"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,date:0
+msgid "Date"
+msgstr "Datum"
+
+#. module: mail_forward
 #. openerp-web
 #: code:addons/mail_forward/static/src/js/mail_forward.js:38
 #, python-format
@@ -67,6 +146,18 @@ msgstr "Datum:"
 #: field:mail_forward.compose_message,destination_object_id:0
 msgid "Destination object"
 msgstr "Ciljni objekt"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,email_from:0
+msgid ""
+"Email address of the sender. This field is set when no matching partner is "
+"found for incoming emails."
+msgstr "E-poštni naslov pošiljatelja. To polje se nastavi, kadar ni ujemajočega se partnerja za vhodno e-pošto."
 
 #. module: mail_forward
 #. openerp-web
@@ -95,6 +186,11 @@ msgid "Forwarded message"
 msgstr "Posredovano sporočilo"
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,email_from:0
+msgid "From"
+msgstr "Od"
+
+#. module: mail_forward
 #. openerp-web
 #: code:addons/mail_forward/static/src/js/mail_forward.js:37
 #, python-format
@@ -107,6 +203,16 @@ msgid "ID"
 msgstr "ID"
 
 #. module: mail_forward
+#: help:mail_forward.compose_message,parent_id:0
+msgid "Initial thread message."
+msgstr "Začetno sporočilo niti"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
+
+#. module: mail_forward
 #: field:mail_forward.compose_message,write_uid:0
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
@@ -117,14 +223,71 @@ msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,is_log:0
+msgid "Log an Internal Note"
+msgstr "Zabeleži interno opombo"
+
+#. module: mail_forward
 #: field:res.request.link,mail_forward_target:0
 msgid "Mail forward target"
 msgstr "Cilj posredovanja pošte"
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,record_name:0
+msgid "Message Record Name"
+msgstr "Naziv zapisa sporočila"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,type:0
+msgid ""
+"Message type: email for email message, notification for system message, "
+"comment for other messages such as user replies"
+msgstr "Tip sporočila: e-pošta za e-poštno sporočilo, obvestilo za sistemsko obvestilo, komentar za druga sporočila, kot npr. odgovori uporabnika."
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,message_id:0
+msgid "Message unique identifier"
+msgstr "Unikatni identifikator sporočila"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,message_id:0
+msgid "Message-Id"
+msgstr "ID sporočila"
+
+#. module: mail_forward
 #: field:mail_forward.compose_message,move_attachments:0
 msgid "Move attachments"
 msgstr "Premik priponk"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,record_name:0
+msgid "Name get of the related document."
+msgstr "Pridobljeni naziv vezanega dokumenta."
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,no_auto_thread:0
+msgid "No threading for answers"
+msgstr "Odgovori ne gredo v nit razprave."
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,notification_ids:0
+msgid "Notifications"
+msgstr "Obvestila"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,notified_partner_ids:0
+msgid "Notified partners"
+msgstr "Obveščeni partnerji"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,notify:0
+msgid "Notify followers"
+msgstr "Obvesti sledilce"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,notify:0
+msgid "Notify followers of the document (mass post only)"
+msgstr "Obvesti sledilce dokumenta (le masovna pošta)"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,destination_object_id:0
@@ -137,6 +300,54 @@ msgid "Original message compose wizard"
 msgstr "Čarovnik za sestavljanje izvornega sporočila"
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,mail_server_id:0
+msgid "Outgoing mail server"
+msgstr "Strežnik za izhodno pošto"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,parent_id:0
+msgid "Parent Message"
+msgstr "Nadrejeno sporočilo"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,notified_partner_ids:0
+msgid ""
+"Partners that have a notification pushing this message in their mailboxes"
+msgstr "Partnerji, ki usmerjajo to sporočilo v svoje poštne predale"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,res_id:0
+msgid "Related Document ID"
+msgstr "ID povezanega dokumenta"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,model:0
+msgid "Related Document Model"
+msgstr "Model povezanega dokumenta"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,reply_to:0
+msgid ""
+"Reply email address. Setting the reply_to bypasses the automatic thread "
+"creation."
+msgstr "E-poštni naslov za odgovor. Nastavitev reply_to zaobide samodejno ustvarjanje niti."
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,reply_to:0
+msgid "Reply-To"
+msgstr "Odgovori na"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,starred:0
+msgid "Starred"
+msgstr "Označeno z zvezdico"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,subject:0
+msgid "Subject"
+msgstr "Zadeva"
+
+#. module: mail_forward
 #. openerp-web
 #: code:addons/mail_forward/static/src/js/mail_forward.js:41
 #, python-format
@@ -144,11 +355,58 @@ msgid "Subject: "
 msgstr "Zadeva:"
 
 #. module: mail_forward
+#: field:mail_forward.compose_message,subtype_id:0
+msgid "Subtype"
+msgstr "Podtip"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,notification_ids:0
+msgid ""
+"Technical field holding the message notifications. Use notified_partner_ids "
+"to access notified partners."
+msgstr "Tehnično polje, ki vsebuje sporočilna obvestila. Uporabi notified_partner_ids za dostop do obveščenih partnerjev."
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,to_read:0
+msgid "To read"
+msgstr "Za branje"
+
+#. module: mail_forward
 #. openerp-web
 #: code:addons/mail_forward/static/src/js/mail_forward.js:44
 #, python-format
 msgid "To: "
 msgstr "Za:"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,type:0
+msgid "Type"
+msgstr "Tip"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,use_active_domain:0
+msgid "Use active domain"
+msgstr "Uporabi aktivno domeno"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,template_id:0
+msgid "Use template"
+msgstr "Uporabi predlogo"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,vote_user_ids:0
+msgid "Users that voted for this message"
+msgstr "Uporabniki, ki so glasovali za to sporočilo"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,vote_user_ids:0
+msgid "Votes"
+msgstr "Glasovi"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,is_log:0
+msgid "Whether the message is an internal note (comment mode only)"
+msgstr "Ali je sporočilo interna opomba (le v načinu komentiranja)"
 
 #. module: mail_forward
 #: view:mail_forward.compose_message:mail_forward.compose_form

@@ -3,13 +3,20 @@
 # * mail_follower_custom_notification
 # 
 # Translators:
+# Antonio Trueba, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
+# Gustavo Lepri <gustavolepri@gmail.com>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 01:40+0000\n"
-"PO-Revision-Date: 2016-02-27 16:56+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"PO-Revision-Date: 2016-04-30 06:12+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -61,6 +68,12 @@ msgstr "Ustvarjeno"
 #: view:mail.message.subtype:mail_follower_custom_notification.view_mail_message_subtype_form
 msgid "Custom notifications"
 msgstr "Obvestila po meri"
+
+#. module: mail_follower_custom_notification
+#: field:base.patch.models.mixin,display_name:0
+#: field:mail.subtype.assign.custom.notifications,display_name:0
+msgid "Display Name"
+msgstr "Prikazni naziv"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_followers
@@ -116,6 +129,12 @@ msgstr "Vsili da"
 #: field:mail.subtype.assign.custom.notifications,id:0
 msgid "ID"
 msgstr "ID"
+
+#. module: mail_follower_custom_notification
+#: field:base.patch.models.mixin,__last_update:0
+#: field:mail.subtype.assign.custom.notifications,__last_update:0
+msgid "Last Modified on"
+msgstr "Zadnjič spremenjeno"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,write_uid:0

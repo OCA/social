@@ -9,6 +9,7 @@
 <record id="view" model="ir.ui.view">
     <field name="name">mail.message.full_expand</field>
     <field name="model">mail.message</field>
+    <field name="priority">22</field>
     <field name="arch" type="xml">
         <form string="Message" version="7.0">
             <group>

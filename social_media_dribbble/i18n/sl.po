@@ -3,12 +3,18 @@
 # * social_media_dribbble
 # 
 # Translators:
+# danimaribeiro <danimaribeiro@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011-2012
+# Hotellook, 2014
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-11-21 02:16+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2015-11-22 09:01+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
@@ -20,6 +26,7 @@ msgstr ""
 
 #. module: social_media_dribbble
 #: field:website,social_dribbble:0
+#: field:website.config.settings,social_dribbble:0
 msgid "Dribbble Account"
 msgstr "Dribbble račun"
 

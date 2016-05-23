@@ -3,13 +3,19 @@
 # * mass_mailing_custom_unsubscribe
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Hotellook, 2014
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+# Leonardo J. Caballero G. <leonardocaballero@gmail.com>, 2016
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
+# Miku Laitinen <miku.laitinen@gmail.com>, 2015
+# Paolo Valier, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-04 14:42+0000\n"
-"PO-Revision-Date: 2015-09-07 14:25+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"PO-Revision-Date: 2016-04-30 06:12+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -25,6 +31,17 @@ msgid "Click to unsubscribe"
 msgstr "Klikni za odjavo"
 
 #. module: mass_mailing_custom_unsubscribe
+#: field:mail.mail,path:0
+msgid "Discussion Path"
+msgstr "Pot do razprave"
+
+#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mail
 msgid "Outgoing Mails"
 msgstr "Izhodna pošta"
+
+#. module: mass_mailing_custom_unsubscribe
+#: help:mail.mail,path:0
+msgid ""
+"Used to display messages in a paragraph-based chatter using a unique path;"
+msgstr "Uporabljeno za prikaz sporočil v sklopu razgovora na osnovi odstavkov z uporabo unikatne poti;"

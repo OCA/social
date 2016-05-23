@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-02-27 01:40+0000\n"
-"PO-Revision-Date: 2016-02-26 16:19+0000\n"
+"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"PO-Revision-Date: 2016-04-28 14:41+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-social-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -101,6 +101,12 @@ msgid "Deferred"
 msgstr "Deferred"
 
 #. module: mail_mandrill
+#: field:mail.mandrill.event,display_name:0
+#: field:mail.mandrill.message,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Email"
 msgstr "Email"
@@ -136,6 +142,12 @@ msgstr "ID"
 #: field:mail.mandrill.event,mobile:0
 msgid "Is mobile?"
 msgstr "Is mobile?"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,__last_update:0
+#: field:mail.mandrill.message,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,write_uid:0
