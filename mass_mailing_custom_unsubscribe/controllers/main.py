@@ -16,8 +16,11 @@ class CustomUnsuscribe(MassMailController):
         This should not be displayed to the final user if security validations
         have not been matched.
         """
-        return request.env["mail.mass_mailing.contact"].search(
-            [("email", "=", email), ("opt_out", "=", False)])
+        return request.env["mail.mass_mailing.contact"].search([
+            ("email", "=", email),
+            ("opt_out", "=", False),
+            ("list_id.not_cross_unsubscriptable", "=", False),
+        ])
 
     def unsubscription_reason(self, mailing_id, email, res_id,
                               qcontext_extra=None):
@@ -74,10 +77,12 @@ class CustomUnsuscribe(MassMailController):
         if record_ids._name == "mail.mass_mailing.contact":
             domain.append(
                 ("list_id", "in", mailing_id.contact_list_ids.ids))
-            additional_contacts -= record_ids
 
         # Unsubscription targets
         record_ids = record_ids.search(domain)
+
+        if record_ids._name == "mail.mass_mailing.contact":
+            additional_contacts -= record_ids
 
         if not record_ids:
             # Trying to unsubscribe with fake criteria? Bad boy...

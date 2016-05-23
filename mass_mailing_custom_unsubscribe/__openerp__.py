@@ -34,6 +34,7 @@
         'data/mail.unsubscription.reason.csv',
         'views/assets.xml',
         'views/mail_unsubscription_reason_view.xml',
+        'views/mail_mass_mailing_list_view.xml',
         'views/mail_unsubscription_view.xml',
         'views/pages.xml',
     ],

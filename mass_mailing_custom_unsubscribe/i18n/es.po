@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-19 21:16+0000\n"
-"PO-Revision-Date: 2016-05-19 21:16+0000\n"
+"POT-Creation-Date: 2016-05-23 14:21+0000\n"
+"PO-Revision-Date: 2016-05-23 14:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -32,7 +32,7 @@ msgid "Check to ask for more details when this reason is selected."
 msgstr "Marcar para pedir más detalles cuando está razón se selecciona."
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_mail.py:40
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_mail.py:39
 #, python-format
 msgid "Click to unsubscribe"
 msgstr "Haga click para darse de baja"
@@ -81,6 +81,11 @@ msgstr "Detalles requeridos"
 #: field:mail.unsubscription.reason,display_name:0
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: mass_mailing_custom_unsubscribe
+#: field:mail.mass_mailing.list,not_cross_unsubscriptable:0
+msgid "Don't show this list in the other unsubscriptions"
+msgstr "No mostrar esta lista en las otras desuscripciones"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,email:0
@@ -144,6 +149,11 @@ msgid "If this is unchecked, it indicates some failure happened in the unsubscri
 msgstr "Si no está marcado, indica que algún fallo ha ocurrido en el proceso de desuscripción."
 
 #. module: mass_mailing_custom_unsubscribe
+#: help:mail.mass_mailing.list,not_cross_unsubscriptable:0
+msgid "If you mark this field, this list won't be shown when unsubscribing from other mailing list, in the section: 'Is there any other mailing list you want to leave?'"
+msgstr "Si marca esta casilla, esta lista no será mostrada cuando se desuscriba de otra lista de correo, en la sección: '¿Hay alguna otra lista de correo que quiera dejar?'"
+
+#. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_is_follower:0
 msgid "Is a Follower"
 msgstr "Es un seguidor"
@@ -186,6 +196,11 @@ msgstr "Última actualización por"
 #: field:mail.unsubscription.reason,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización en"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr "Lista de correo"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
@@ -362,5 +377,5 @@ msgstr "Fue desuscrito correctamente de nuestra\n"
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
 msgid "sent to followers of"
-msgstr "enviado a los seguidores de"
+msgstr "enviados a los seguidores de"
 
