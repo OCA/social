@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_optional_follower_notifications
+#	* mail_optional_follower_notification
 #
 msgid ""
 msgstr ""
@@ -15,27 +15,27 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: mail_optional_follower_notifications
-#: view:mail.compose.message:mail_optional_follower_notifications.email_compose_message_wizard_inherit_form
+#. module: mail_optional_follower_notification
+#: view:mail.compose.message:mail_optional_follower_notification.email_compose_message_wizard_inherit_form
 msgid "- Warning : Followers will not be notified but they can access the notification directly from the document"
 msgstr ""
 
-#. module: mail_optional_follower_notifications
-#: model:ir.model,name:mail_optional_follower_notifications.model_mail_compose_message
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
 msgid "Email composition wizard"
 msgstr ""
 
-#. module: mail_optional_follower_notifications
-#: model:ir.model,name:mail_optional_follower_notifications.model_mail_message
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_message
 msgid "Message"
 msgstr ""
 
-#. module: mail_optional_follower_notifications
-#: model:ir.model,name:mail_optional_follower_notifications.model_mail_notification
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_notification
 msgid "Notifications"
 msgstr ""
 
-#. module: mail_optional_follower_notifications
+#. module: mail_optional_follower_notification
 #: field:mail.compose.message,notify_followers:0
 msgid "Notify followers"
 msgstr ""
