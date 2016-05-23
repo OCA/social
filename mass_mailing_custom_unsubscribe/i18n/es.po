@@ -23,7 +23,7 @@ msgstr "¿Algo más que quiera decir antes de irse?"
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
 msgid "But before continuing, could you please tell us why do you want to unsubscribe?"
-msgstr "Pero antes de continuar, ¿podría decirnos por qué quiere desuscribirse?"
+msgstr "Pero antes de continuar, ¿podría decirnos por qué quiere darse de baja?"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,details_required:0
@@ -151,7 +151,7 @@ msgstr "Si no está marcado, indica que algún fallo ha ocurrido en el proceso d
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.mass_mailing.list,not_cross_unsubscriptable:0
 msgid "If you mark this field, this list won't be shown when unsubscribing from other mailing list, in the section: 'Is there any other mailing list you want to leave?'"
-msgstr "Si marca esta casilla, esta lista no será mostrada cuando se desuscriba de otra lista de correo, en la sección: '¿Hay alguna otra lista de correo que quiera dejar?'"
+msgstr "Si marca esta casilla, esta lista no será mostrada cuando se dé de baja de otra lista de correo, en la sección: '¿Hay alguna otra lista de correo que quiera dejar?'"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_is_follower:0
@@ -216,7 +216,7 @@ msgstr "Envío masivo"
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,mass_mailing_id:0
 msgid "Mass mailing from which he was unsubscribed."
-msgstr "Envío masivo del que ha sido desuscrito."
+msgstr "Envío masivo del que ha sido dado de baja."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_ids:0
@@ -236,7 +236,7 @@ msgstr "Mes"
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,details:0
 msgid "More details on why the unsubscription was made."
-msgstr "Más detalles de por qué se hizo la desuscripción."
+msgstr "Más detalles de por qué se dio de baja."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription.reason,name:0
@@ -311,7 +311,7 @@ msgstr "Mensajes sin leer"
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
 msgid "Unsubscribe now"
-msgstr "Desuscribir ahora"
+msgstr "Darse de baja ahora"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,unsubscriber_id:0
@@ -350,12 +350,12 @@ msgstr "Historial de comunicación del sitio web"
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,unsubscriber_id:0
 msgid "Who was unsubscribed."
-msgstr "Quién fue desuscrito."
+msgstr "Quién se dio de baja."
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,reason_id:0
 msgid "Why the unsubscription was made."
-msgstr "Por qué se desuscribió."
+msgstr "Por qué se dio de baja."
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
@@ -365,13 +365,13 @@ msgstr "Año"
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
 msgid "You are trying to unsubscribe from all massive mailings"
-msgstr "Está intentando desuscribirse de todos los envíos masivos"
+msgstr "Está intentando darse de baja de todos los envíos masivos"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.success
 msgid "You were successfully unsubscribed from our\n"
 "                        mailing list."
-msgstr "Fue desuscrito correctamente de nuestra\n"
+msgstr "Fue dado de baja correctamente de nuestra\n"
 "                        lista de correo."
 
 #. module: mass_mailing_custom_unsubscribe

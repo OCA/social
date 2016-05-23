@@ -76,8 +76,9 @@
                                 You are trying to unsubscribe from all massive mailings
                                 <t t-if="origin_name">
                                     sent to followers of
-                                    <t t-esc="origin_model_name"/>
-                                    <t t-esc="origin_name"/>
+                                    <br/>
+                                    <br/>
+                                    <i><span>"</span><t t-esc="origin_name"/><span>"</span></i>
                                 </t>
                             </h3>
                         </div>
