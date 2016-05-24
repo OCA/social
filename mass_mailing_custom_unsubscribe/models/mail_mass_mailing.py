@@ -18,7 +18,7 @@ class MailMassMailing(models.Model):
         salt = icp.get_param(key)
         if salt is False:
             salt = str(uuid4())
-            icp.set_param(key, salt)
+            icp.set_param(key, salt, ["base.group_erp_manager"])
 
     @api.model
     def hash_create(self, mailing_id, res_id, email):
@@ -27,7 +27,8 @@ class MailMassMailing(models.Model):
         :return None/str:
             Secure hash, or ``None`` if the system parameter is empty.
         """
-        salt = self.env["ir.config_parameter"].get_param("mass_mailing.salt")
+        salt = self.env["ir.config_parameter"].sudo().get_param(
+            "mass_mailing.salt")
         if not salt:
             return None
         source = (self.env.cr.dbname, mailing_id, res_id, email, salt)

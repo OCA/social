@@ -90,7 +90,8 @@ Known issues / Roadmap
   breaking current installations, you will not get a salt if you are upgrading
   the addon. If you want a salt, create the above system parameter and assign a
   random value to it.
-* Security should be patched upstream.
+* Security should be patched upstream. Remove security features in the version
+  where https://github.com/odoo/odoo/pull/12040 gets merged (if it does).
 
 Bug Tracker
 ===========
