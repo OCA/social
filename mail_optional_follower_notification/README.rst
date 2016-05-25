@@ -25,7 +25,7 @@ This field it's initialized to true to keep the standard behavior.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/8.0
+   :target: https://runbot.odoo-community.org/runbot/205/9.0
 
  * https://www.odoo.com/forum/help-1
 
@@ -45,6 +45,7 @@ Contributors
 ------------
 
 * Adrien Peiffer <adrien.peiffer@acsone.eu>
+* Laurent Mignon <laurent.mignon@acsone.eu>
 
 Maintainer
 ----------
