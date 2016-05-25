@@ -16,9 +16,9 @@ class TestMailNotificationEmailTemplate(TransactionCase):
         ])
         self.env.ref('mail.group_all_employees').message_post(
             body='hello world', type='comment', subtype='mail.mt_comment')
-        notification = self.env['mail.mail'].search([
+        notifications = self.env['mail.mail'].search([
             ('recipient_ids', '=', demo_partner.id),
         ]) - demo_partner_mails
-        self.assertTrue(notification)
+        self.assertTrue(notifications)
         # check that our template was used
-        self.assertTrue('<h2>Dear ' in notification.body)
+        self.assertTrue('<h2>Dear ' in n.body for n in notifications)
