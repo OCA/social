@@ -6,7 +6,7 @@ from openerp.tests.common import TransactionCase
 
 class TestMailNotificationEmailTemplate(TransactionCase):
     def test_mail_notification_email_template(self):
-        # demo data install a template for discussions, so we simply post
+        # we install a template for discussions, so we simply post
         # something somewhere. We know the demo user is subscribed on the
         # whole company group
         demo_partner = self.env.ref('base.partner_demo')
