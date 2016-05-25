@@ -10,8 +10,8 @@ class TestAttachExistingAttachment(common.TransactionCase):
     def setUp(self):
         super(TestAttachExistingAttachment, self).setUp()
         self.partner_obj = self.env['res.partner']
-        self.partner_01 = self.env.ref('base.res_partner_11')
-        self.partner_02 = self.env.ref('base.res_partner_address_20')
+        self.partner_01 = self.env.ref('base.res_partner_10')
+        self.partner_02 = self.env.ref('base.res_partner_address_17')
 
     def test_send_email_attachment(self):
         ctx = self.env.context.copy()
