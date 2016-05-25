@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form">
+            <field name="name">mail.compose.message.form (mail_optional_autofollow)</field>
+            <field name="model">mail.compose.message</field>
+            <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[field[@name='partner_ids']]/span[2]" position="before">
+                    <field name="notify_followers" />
+                </xpath>
+                <xpath expr="//div[field[@name='partner_ids']]/span[2]" position="inside">
+                    <span attrs="{'invisible': [('notify_followers', '=', True)]}" style="color: red;"> - Warning : Followers will not be notified but they can access the notification directly from the document (if they are allowed to)</span>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
