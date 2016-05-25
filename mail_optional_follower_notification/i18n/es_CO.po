@@ -1,0 +1,45 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_optional_follower_notification
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-26 02:42+0000\n"
+"PO-Revision-Date: 2016-05-25 14:10+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Colombia) (http://www.transifex.com/oca/OCA-social-8-0/language/es_CO/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_CO\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_optional_follower_notification
+#: view:mail.compose.message:mail_optional_follower_notification.email_compose_message_wizard_inherit_form
+msgid ""
+"- Warning : Followers will not be notified but they can access the "
+"notification directly from the document (if they are allowed to)"
+msgstr ""
+
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente de redacción de E-mail"
+
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_message
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_notification
+msgid "Notifications"
+msgstr ""
+
+#. module: mail_optional_follower_notification
+#: field:mail.compose.message,notify_followers:0
+msgid "Notify followers"
+msgstr ""
