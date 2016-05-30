@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": ";;;AAKI,2BAAa;EACT,KAAK,EAAE,GAAG;AAGV,mDAAkB;EACd,OAAO,EAAE,IAAI",
+"sources": ["website_mass_mailing_name.sass"],
+"names": [],
+"file": "website_mass_mailing_name.css"
+}
