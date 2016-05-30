@@ -16,6 +16,10 @@ class MailTemplate(models.Model):
 
     @api.multi
     def generate_email(self, res_ids, fields=None):
+        multi_mode = True
+        if isinstance(res_ids, (int, long)):
+            res_ids = [res_ids]
+            multi_mode = False
         result = super(MailTemplate, self).generate_email(
             res_ids, fields=fields
         )
@@ -32,4 +36,4 @@ class MailTemplate(models.Model):
                     result[record_id]['body'] = tools.html_sanitize(
                         result[record_id]['body_html']
                     )
-        return result
+        return multi_mode and result or result[res_ids[0]]
