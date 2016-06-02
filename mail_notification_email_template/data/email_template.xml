@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="template" model="email.template">
+            <field name="name">Template for discussion notifications</field>
+            <field name="model_id" ref="mail.model_mail_notification" />
+            <field name="subject">${object.message_id.subject|safe}</field>
+            <field name="body_html"><![CDATA[
+                <h2>Dear ${object.partner_id.name},</h2>
+                <p>there's a new message on <a href="${object.record_access_link}">${object.record.name}</a>:</p>
+                ${object.message_id.body|safe}
+                ]]>
+            </field>
+            <field name="email_from">${object.message_id.email_from|safe}</field>
+            <field name="partner_to">${object.partner_id.ids|join(',')}</field>
+        </record>
+    </data>
+</openerp>
