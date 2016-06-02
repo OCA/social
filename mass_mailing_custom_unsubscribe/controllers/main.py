@@ -16,7 +16,7 @@ class CustomUnsuscribe(MassMailController):
         This should not be displayed to the final user if security validations
         have not been matched.
         """
-        return request.env["mail.mass_mailing.contact"].search([
+        return request.env["mail.mass_mailing.contact"].sudo().search([
             ("email", "=", email),
             ("opt_out", "=", False),
             ("list_id.not_cross_unsubscriptable", "=", False),
