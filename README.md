@@ -21,6 +21,7 @@ addon | version | summary
 [mail_forward](mail_forward/) | 8.0.7.0.0 | Add option to forward messages
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 | Expand mail in a big window
 [mail_mandrill](mail_mandrill/) | 8.0.1.0.0 | Mandrill mail events integration
+[mail_notification_email_template](mail_notification_email_template/) | 8.0.1.0.0 | Allows to configure message subtypes with mail templates
 [mail_optional_autofollow](mail_optional_autofollow/) | 8.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 8.0.1.0.0 | Choose if you want to automatically notify followers on mail.compose.message
 [mail_read_new_window](mail_read_new_window/) | 8.0.1.0.0 | Open mail in new window
@@ -28,6 +29,7 @@ addon | version | summary
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.1.0 | Customizable unsubscription process on mass mailing emails
+[mass_mailing_keep_archives](mass_mailing_keep_archives/) | 8.0.0.0.0 | Mass Mailing Keep Archives
 [mass_mailing_statistic_extra](mass_mailing_statistic_extra/) | 8.0.1.0.0 | Mail statistics extra info
 [mass_mailing_unique](mass_mailing_unique/) | 8.0.1.0.0 | Avoids duplicate mailing lists and contacts
 [portal_welcome_email_template](portal_welcome_email_template/) | 8.0.1.0.0 | Adds an customizable email template for portal user invitation
