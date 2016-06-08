@@ -44,14 +44,15 @@ class MailComposeMessage(models.TransientModel):
         relation='mail_compose_message_ir_attachments_object_rel',
         column1='wizard_id', column2='attachment_id', string='Attachments')
 
-    @api.model
-    def get_mail_values(self, wizard, res_ids):
-        res = super(MailComposeMessage, self).get_mail_values(wizard, res_ids)
-        if wizard.object_attachment_ids.ids and wizard.model and\
-                len(res_ids) == 1:
-            for res_id in res_ids:
-                if not res[res_id].get('attachment_ids'):
-                    res[res_id]['attachment_ids'] = []
-                res[res_id]['attachment_ids'].extend(
-                    wizard.object_attachment_ids.ids)
+    @api.multi
+    def get_mail_values(self, res_ids):
+        res = super(MailComposeMessage, self).get_mail_values(res_ids)
+        for wizard in self:
+            if wizard.object_attachment_ids.ids and wizard.model and\
+                    len(res_ids) == 1:
+                for res_id in res_ids:
+                    if not res[res_id].get('attachment_ids'):
+                        res[res_id]['attachment_ids'] = []
+                    res[res_id]['attachment_ids'].extend(
+                        wizard.object_attachment_ids.ids)
         return res
