@@ -26,7 +26,9 @@
     'name': "Mail Attach Existing Attachment",
     'summary': """
         Adding attachment on the object by sending this one""",
-    'author': "ACSONE SA/NV,Odoo Community Association (OCA)",
+    'author': "ACSONE SA/NV,"
+              "Tecnativa,"
+              "Odoo Community Association (OCA)",
     'website': "http://acsone.eu",
     'category': 'Social Network',
     'version': '9.0.1.0.0',

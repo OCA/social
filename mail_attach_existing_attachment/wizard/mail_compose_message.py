@@ -47,12 +47,11 @@ class MailComposeMessage(models.TransientModel):
     @api.multi
     def get_mail_values(self, res_ids):
         res = super(MailComposeMessage, self).get_mail_values(res_ids)
-        for wizard in self:
-            if wizard.object_attachment_ids.ids and wizard.model and\
-                    len(res_ids) == 1:
-                for res_id in res_ids:
-                    if not res[res_id].get('attachment_ids'):
-                        res[res_id]['attachment_ids'] = []
-                    res[res_id]['attachment_ids'].extend(
-                        wizard.object_attachment_ids.ids)
+        if self.object_attachment_ids.ids and self.model and\
+                len(res_ids) == 1:
+            for res_id in res_ids:
+                if not res[res_id].get('attachment_ids'):
+                    res[res_id]['attachment_ids'] = []
+                res[res_id]['attachment_ids'].extend(
+                    self.object_attachment_ids.ids)
         return res
