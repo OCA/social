@@ -46,7 +46,8 @@ class MailTrackingEmail(models.Model):
         ('soft-bounced', 'Soft bounced'),
     ], string='State', index=True, readonly=True, default=False,
         help=" * The 'Error' status indicates that there was an error "
-             "when trying to sent the email, for example, 'No valid recipient'\n"
+             "when trying to sent the email, for example, "
+             "'No valid recipient'\n"
              " * The 'Sent' status indicates that message was succesfully "
              "sent via outgoing email server (SMTP).\n"
              " * The 'Delivered' status indicates that message was "
