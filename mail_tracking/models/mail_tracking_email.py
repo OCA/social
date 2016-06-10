@@ -19,7 +19,7 @@ class MailTrackingEmail(models.Model):
     _rec_name = 'name'
     _description = 'MailTracking email'
 
-    name = fields.Char(string="Subject", readonly=True)
+    name = fields.Char(string="Subject", readonly=True, index=True)
     timestamp = fields.Float(
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
@@ -38,7 +38,7 @@ class MailTrackingEmail(models.Model):
         ('deferred', 'Deferred'),
         ('sent', 'Sent'),
         ('delivered', 'Delivered'),
-        ('opened', 'Opened'),
+        ('opened', 'Open'),
         ('rejected', 'Rejected'),
         ('spam', 'Spam'),
         ('unsub', 'Unsubscribed'),
@@ -46,12 +46,12 @@ class MailTrackingEmail(models.Model):
         ('soft-bounced', 'Soft bounced'),
     ], string='State', index=True, readonly=True, default=False,
         help=" * The 'Error' status indicates that there was an error "
-             "when try to sent the email, for example, 'No valid recipient'\n"
+             "when trying to sent the email, for example, 'No valid recipient'\n"
              " * The 'Sent' status indicates that message was succesfully "
              "sent via outgoing email server (SMTP).\n"
              " * The 'Delivered' status indicates that message was "
              "succesfully delivered to recipient Mail Exchange (MX) server.\n"
-             " * The 'Opened' status indicates that message was opened or "
+             " * The 'Open' status indicates that message was opened or "
              "clicked by recipient.\n"
              " * The 'Rejected' status indicates that recipient email "
              "address is blacklisted by outgoing email server (SMTP). "

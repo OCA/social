@@ -43,14 +43,14 @@
 <t t-extend="mail.thread.message">
     <t t-jquery="span[t-attf-class='oe_partner_follower']" t-operation="append">
         <t t-set='tracking' t-value='widget.partner_trackings[partner[0]]'/>
-        <t t-if="widget.options.show_link and tracking[1]">
+        <t t-if="tracking[1]">
             <span class="mail_tracking oe_mail_action_tracking"
                   t-att-data-tracking="tracking[1]"
                   t-attf-title="Status: #{tracking[0]}">
                <t t-call="mail.tracking.status"/>
            </span>
         </t>
-        <t t-if="!(widget.options.show_link and tracking[1])">
+        <t t-if="!tracking[1]">
             <span class="mail_tracking" t-attf-title="Status: #{tracking[0]}">
                 <t t-call="mail.tracking.status"/>
             </span>

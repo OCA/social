@@ -1,7 +1,6 @@
 /* © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
 
-if (typeof window.jQuery === 'undefined') { throw new Error('Requires jQuery'); }
 (function ($, window, document) {
     'use strict';
 
@@ -46,6 +45,10 @@ if (typeof window.jQuery === 'undefined') { throw new Error('Requires jQuery'); 
             });
         };
 
+        // Tricky way to guarantee that this module is loaded always
+        // after mail module.
+        // When --load=web,mail_tracking is specified in init script, then
+        // web and mail_tracking are the first modules to load in JS
         if (instance.mail.MessageCommon === undefined) {
             instance.mail = function(instance) {
                 instance.mail = mail_orig;

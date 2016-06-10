@@ -30,7 +30,7 @@ class MailTrackingEvent(models.Model):
         ('deferral', 'Deferral'),
         ('hard_bounce', 'Hard bounce'),
         ('soft_bounce', 'Soft bounce'),
-        ('open', 'Opened'),
+        ('open', 'Open'),
         ('click', 'Clicked'),
         ('spam', 'Spam'),
         ('unsub', 'Unsubscribed'),
