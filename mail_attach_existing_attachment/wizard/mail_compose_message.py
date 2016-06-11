@@ -35,7 +35,7 @@ class MailComposeMessage(models.TransientModel):
         if res.get('res_id') and res.get('model') and \
                 res.get('composition_mode', '') != 'mass_mail' and\
                 not res.get('can_attach_attachment'):
-            res['can_attach_attachment'] = True
+            res['can_attach_attachment'] = True  # pragma: no cover
         return res
 
     can_attach_attachment = fields.Boolean(string='Can Attach Attachment')
@@ -48,8 +48,6 @@ class MailComposeMessage(models.TransientModel):
     def get_mail_values(self, res_ids):
         res = super(MailComposeMessage, self).get_mail_values(res_ids)
         if self.object_attachment_ids.ids and self.model and len(res_ids) == 1:
-            if not res[res_ids[0]].get('attachment_ids'):
-                res[res_ids[0]]['attachment_ids'] = []
-            res[res_ids[0]]['attachment_ids'].extend(
+            res[res_ids[0]].setdefault('attachment_ids', []).extend(
                 self.object_attachment_ids.ids)
         return res
