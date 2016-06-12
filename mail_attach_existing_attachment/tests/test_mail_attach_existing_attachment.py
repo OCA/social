@@ -44,6 +44,6 @@ class TestAttachExistingAttachment(common.TransactionCase):
                 'object_attachment_ids': [(6, 0, [attach1.id])]
                 }
         mail = self.env['mail.compose.message'].create(vals)
-        values = mail.get_mail_values(mail, [self.partner_01.id])
+        values = mail.get_mail_values([self.partner_01.id])
         self.assertTrue(attach1.id in
                         values[self.partner_01.id]['attachment_ids'])

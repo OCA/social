@@ -3,32 +3,32 @@
 # * mail_attach_existing_attachment
 # 
 # Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
+# Bole <bole@dajmi5.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-13 02:44+0000\n"
-"PO-Revision-Date: 2016-06-13 03:11+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-9-0/language/sl/)\n"
+"PO-Revision-Date: 2016-06-14 11:29+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/OCA-social-9-0/language/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Language: hr\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: mail_attach_existing_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_object_attachment_ids
 msgid "Attachments"
-msgstr "Priponke"
+msgstr "Privitci"
 
 #. module: mail_attach_existing_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_can_attach_attachment
 msgid "Can Attach Attachment"
-msgstr "Lahko pripenja priponke"
+msgstr "Može pridružiti privitak"
 
 #. module: mail_attach_existing_attachment
 #: model:ir.model,name:mail_attach_existing_attachment.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "Čarovnik za sestavljanje e-pošte"
+msgstr "Čarobnjak za sastavljanje maila"
