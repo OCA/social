@@ -6,12 +6,12 @@
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 msgid ""
 msgstr ""
-"Project-Id-Version: social (8.0)\n"
+"Project-Id-Version: social (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-09-30 16:56+0000\n"
-"PO-Revision-Date: 2015-09-18 19:58+0000\n"
-"Last-Translator: Armando Vulcano Junior <vulcano@uol.com.br>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-8-0/language/pt_BR/)\n"
+"POT-Creation-Date: 2016-06-13 02:44+0000\n"
+"PO-Revision-Date: 2016-06-13 03:11+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-9-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mail_attach_existing_attachment
-#: field:mail.compose.message,object_attachment_ids:0
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_object_attachment_ids
 msgid "Attachments"
 msgstr "Anexos"
 
 #. module: mail_attach_existing_attachment
-#: field:mail.compose.message,can_attach_attachment:0
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_can_attach_attachment
 msgid "Can Attach Attachment"
 msgstr "Pode Anexar Anexo"
 
