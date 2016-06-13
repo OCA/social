@@ -11,8 +11,8 @@ class TestMailOptionalFollowernotifications(common.TransactionCase):
         super(TestMailOptionalFollowernotifications, self).setUp()
         self.partner_obj = self.env['res.partner']
         self.partner_01 = self.env.ref('base.res_partner_2')
-        self.partner_02 = self.env.ref('base.res_partner_13')
-        self.partner_03 = self.env.ref('base.res_partner_5')
+        self.partner_02 = self.env.ref('base.res_partner_3')
+        self.partner_03 = self.env.ref('base.res_partner_4')
 
     def test_send_email_optional_follower_notifications(self):
         ctx = self.env.context.copy()
