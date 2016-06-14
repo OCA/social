@@ -20,7 +20,8 @@ class MailTrackingEvent(models.Model):
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
     time = fields.Datetime(string="Time", readonly=True)
-    date = fields.Date(string="Date", readonly=True)
+    date = fields.Date(
+        string="Date", readonly=True, compute="_compute_date", store=True)
     tracking_email_id = fields.Many2one(
         string='Message', readonly=True,
         comodel_name='mail.tracking.email')
@@ -46,6 +47,13 @@ class MailTrackingEvent(models.Model):
     ua_type = fields.Char(string='User agent type', readonly=True)
     user_country_id = fields.Many2one(string='User country', readonly=True,
                                       comodel_name='res.country')
+
+    @api.multi
+    @api.depends('time')
+    def _compute_date(self):
+        for email in self:
+            email.date = fields.Date.to_string(
+                fields.Date.from_string(email.time))
 
     def _process_action(self, tracking_email, metadata, event_type, state):
         ts = time.time()

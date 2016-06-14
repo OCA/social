@@ -24,7 +24,8 @@ class MailTrackingEmail(models.Model):
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
     time = fields.Datetime(string="Time", readonly=True)
-    date = fields.Date(string="Date", readonly=True)
+    date = fields.Date(
+        string="Date", readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
         string="Message", comodel_name='mail.message', readonly=True)
     mail_id = fields.Many2one(
@@ -75,6 +76,13 @@ class MailTrackingEmail(models.Model):
     tracking_event_ids = fields.One2many(
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
+
+    @api.multi
+    @api.depends('time')
+    def _compute_date(self):
+        for email in self:
+            email.date = fields.Date.to_string(
+                fields.Date.from_string(email.time))
 
     def _get_mail_tracking_img(self):
         base_url = self.env['ir.config_parameter'].get_param('web.base.url')
@@ -140,7 +148,6 @@ class MailTrackingEmail(models.Model):
             'recipient': message['To'],
             'timestamp': '%.6f' % ts,
             'time': fields.Datetime.to_string(dt),
-            'date': fields.Date.to_string(dt),
             'tracking_email_id': self.id,
             'event_type': 'sent',
             'smtp_server': smtp_server,

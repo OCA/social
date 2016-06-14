@@ -22,7 +22,6 @@ class MailMail(models.Model):
             'name': email.get('subject', False),
             'timestamp': '%.6f' % ts,
             'time': fields.Datetime.to_string(dt),
-            'date': fields.Date.to_string(dt),
             'mail_id': mail.id if mail else False,
             'mail_message_id': mail.mail_message_id.id if mail else False,
             'partner_id': partner.id if partner else False,
