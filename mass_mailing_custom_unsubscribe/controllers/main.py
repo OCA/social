@@ -172,10 +172,12 @@ class CustomUnsuscribe(MassMailController):
     def mailing(self, mailing_id, email=None, res_id=None, **post):
         """Display a confirmation form to get the unsubscription reason."""
         mailing = request.env["mail.mass_mailing"]
+        path = "/page/mass_mailing_custom_unsubscribe.%s"
+        good_token = mailing.hash_create(mailing_id, res_id, email)
 
         # Trying to unsubscribe with fake hash? Bad boy...
-        if post.get("token") != mailing.hash_create(mailing_id, res_id, email):
-            raise exceptions.AccessDenied()
+        if good_token and post.get("token") != good_token:
+            return local_redirect(path % "failure")
 
         mailing = mailing.sudo().browse(mailing_id)
         contact = request.env["mail.mass_mailing.contact"].sudo()
@@ -231,6 +233,5 @@ class CustomUnsuscribe(MassMailController):
         records.write({"success": result.data == "OK"})
 
         # Redirect to the result
-        path = "/page/mass_mailing_custom_unsubscribe.%s" % (
-            "success" if result.data == "OK" else "failure")
-        return local_redirect(path)
+        return local_redirect(path % ("success" if result.data == "OK"
+                                      else "failure"))
