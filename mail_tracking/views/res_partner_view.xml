@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="view_partner_form">
+    <field name="name">Partner Form with tracking emails</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <div class="oe_right oe_button_box" position="inside">
+            <button name="%(mail_tracking.action_view_mail_tracking_email)d"
+                    context="{'search_default_recipient': email,
+                              'default_recipient': email}"
+                    type="action"
+                    class="oe_stat_button oe_inline"
+                    icon="fa-envelope-o"
+                    attrs="{'invisible': [('email', '=', False)]}">
+                <field name="tracking_emails_count"
+                       widget="statinfo"
+                       string="Tracking emails"/>
+            </button>
+        </div>
+        <field name="email" position="after">
+            <field name="email_score" widget="progressbar"
+                   attrs="{'invisible': [('email', '=', False)]}"/>
+        </field>
+    </field>
+</record>
+
+</data>
+</openerp>
