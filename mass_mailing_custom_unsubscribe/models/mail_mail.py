@@ -18,18 +18,25 @@ class MailMail(models.Model):
         m_config = self.env['ir.config_parameter']
         base_url = m_config.get_param('web.base.url')
         config_msg = m_config.get_param('mass_mailing.unsubscribe.label')
+        params = {
+            'db': self.env.cr.dbname,
+            'res_id': mail.res_id,
+            'email': email_to,
+            'token': self.env["mail.mass_mailing"].hash_create(
+                mail.mailing_id.id,
+                mail.res_id,
+                email_to),
+        }
+
+        # Avoid `token=None` in URL
+        if not params["token"]:
+            del params["token"]
+
+        # Generate URL
         url = urlparse.urljoin(
             base_url, 'mail/mailing/%(mailing_id)s/unsubscribe?%(params)s' % {
                 'mailing_id': mail.mailing_id.id,
-                'params': urllib.urlencode({
-                    'db': self.env.cr.dbname,
-                    'res_id': mail.res_id,
-                    'email': email_to,
-                    'token': self.env["mail.mass_mailing"].hash_create(
-                        mail.mailing_id.id,
-                        mail.res_id,
-                        email_to),
-                })
+                'params': urllib.urlencode(params),
             }
         )
         html = ''
