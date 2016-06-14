@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<template>
+
+<t t-name="mail.tracking.status">
+    <t t-if="tracking[0] == 'unknown'">
+        <span class="mail_tracking_unknown">
+            <i class="fa fa-ban"></i>
+        </span>
+    </t>
+    <t t-if="tracking[0] == 'waiting'">
+        <span class="mail_tracking_waiting mail_tracking_pointer">
+            <i class="fa fa-clock-o"></i>
+        </span>
+    </t>
+    <t t-if="tracking[0] == 'error'">
+        <span class="mail_tracking_error mail_tracking_pointer">
+            <i class="fa fa-remove"></i>
+        </span>
+    </t>
+    <t t-if="tracking[0] == 'sent'">
+        <span class="mail_tracking_sent mail_tracking_pointer">
+            <i class="fa fa-check"></i>
+        </span>
+    </t>
+    <t t-if="tracking[0] == 'delivered'">
+        <span class="fa-stack mail_tracking_delivered mail_tracking_pointer">
+            <i class="fa fa-check fa-stack-1x" style="margin-left:1px"></i>
+            <i class="fa fa-check fa-inverse fa-stack-1x" style="margin-left:-2px;"></i>
+            <i class="fa fa-check fa-stack-1x" style="margin-left:-3px"></i>
+        </span>
+    </t>
+    <t t-if="tracking[0] == 'opened'">
+        <span class="fa-stack mail_tracking_opened mail_tracking_pointer">
+            <i class="fa fa-check fa-stack-1x" style="margin-left:1px"></i>
+            <i class="fa fa-check fa-inverse fa-stack-1x" style="margin-left:-2px;"></i>
+            <i class="fa fa-check fa-stack-1x" style="margin-left:-3px"></i>
+        </span>
+    </t>
+</t>
+
+<t t-extend="mail.thread.message">
+    <t t-jquery="span[t-attf-class='oe_partner_follower']" t-operation="append">
+        <t t-set='tracking' t-value='widget.partner_trackings[partner[0]]'/>
+        <t t-if="tracking[1]">
+            <span class="mail_tracking oe_mail_action_tracking"
+                  t-att-data-tracking="tracking[1]"
+                  t-attf-title="Status: #{tracking[0]}">
+               <t t-call="mail.tracking.status"/>
+           </span>
+        </t>
+        <t t-if="!tracking[1]">
+            <span class="mail_tracking" t-attf-title="Status: #{tracking[0]}">
+                <t t-call="mail.tracking.status"/>
+            </span>
+        </t>
+    </t>
+</t>
+
+</template>
