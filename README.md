@@ -41,6 +41,7 @@ addon | version | summary
 [website_mail_snippet_responsive](website_mail_snippet_responsive/) | 8.0.2.1.0 | Well... pseudo-responsive (see description)
 [website_mail_snippet_table_edit](website_mail_snippet_table_edit/) | 8.0.1.0.0 | Allows you to edit any <tr> element in any snippet/template
 [website_mail_snippet_vertical_resize_base](website_mail_snippet_vertical_resize_base/) | 8.0.1.0.0 | Allow input of height in pixels with just a class
+[website_mass_mailing_name](website_mass_mailing_name/) | 8.0.1.0.0 | Ask for name when subscribing, and create and/or link partner
 
 [//]: # (end addons)
 
