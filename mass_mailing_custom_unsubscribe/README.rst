@@ -86,7 +86,7 @@ Known issues / Roadmap
 * This module adds a security hash for mass mailing unsubscription URLs, which
   makes to not work anymore URLs of mass mailing messages sent before its
   installation. If you need backwards compatibility, disable this security
-  feature by emptying the ``mass_mailing.salt`` system parameter. To avoid
+  feature by removing the ``mass_mailing.salt`` system parameter. To avoid
   breaking current installations, you will not get a salt if you are upgrading
   the addon. If you want a salt, create the above system parameter and assign a
   random value to it.
