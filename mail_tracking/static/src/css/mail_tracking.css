@@ -1,0 +1,13 @@
+/* © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
+
+.mail_tracking span {
+    color: #909090;
+}
+.mail_tracking_pointer {
+    cursor: pointer;
+}
+
+.mail_tracking span.mail_tracking_opened {
+    color: #a34a8b;
+}
