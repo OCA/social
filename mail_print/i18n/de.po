@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_print
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-10 13:16+0000\n"
+"PO-Revision-Date: 2016-06-10 15:18+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: mail_print
+#: view:website:mail_print.mail_message
+msgid "Attachments"
+msgstr "Anhänge"
+
+#. module: mail_print
+#: view:website:mail_print.mail_message
+msgid "Date:"
+msgstr "Datum:"
+
+#. module: mail_print
+#: model:ir.actions.report.xml,name:mail_print.mail_message_pdf
+msgid "Email"
+msgstr "Email"
+
+#. module: mail_print
+#: view:website:mail_print.mail_message
+msgid "From:"
+msgstr "Von:"
+
+#. module: mail_print
+#: view:website:mail_print.mail_message
+msgid "Subject:"
+msgstr "Betreff:"
+
+#. module: mail_print
+#: view:website:mail_print.mail_message
+msgid "To:"
+msgstr "An:"

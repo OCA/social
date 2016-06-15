@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="mail_message">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.internal_layout">
+                        <div class="page">
+                            <style>
+                                .table1 {width: 50%}
+                                .table2 {width: 100%}
+                                .font {font-family: Helvetica, sans-serif;font-size: 10pt}
+                                .bold {font-weight: bold}
+                                .space {padding-right: 0.3em;}
+                            </style>
+                            <table class="table1 table-condensed">
+                                <tr>
+                                    <td class="font bold"><span>From:</span></td>
+                                    <td class="font"><u><span t-field="o.email_from"/></u></td>
+                                </tr>
+                                <tr>
+                                    <td class="font bold"><span>To:</span></td>
+                                    <td class="font" t-foreach="o.partner_ids" t-as="p"><span t-field="p.name"/> <t t-if="p.email"> <u><span t-field="p.email"></span></u></t></td>
+                                </tr>
+                                <tr>
+                                    <td class="font bold"><span>Subject:</span></td>
+                                    <td class="font"><span t-field="o.subject"/></td>
+                                </tr>
+                                <tr>
+                                    <td class="font bold"><span>Date:</span></td>
+                                    <td class="font"><span t-field="o.date"/></td>
+                                </tr>
+                            </table>
+                            <div style ="height: 1cm"> </div>
+                            <table class="table2 table-condensed">
+                                <tr>
+                                    <td class="font"><span t-field="o.body"/></td>
+                                </tr>
+                            </table>
+                            <t t-if="o.attachment_ids" >
+                                <div style ="height: 2cm"> </div>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <td class="font bold"><span>Attachments</span></td>
+                                    </tr>
+                                    <tr t-foreach="o.attachment_ids" t-as="l">
+                                        <td class="font"><span t-field="l.name"/></td>
+                                        <td class="font"><span class="space" t-field="l.file_size"></span><span>Bytes</span></td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>
