@@ -10,7 +10,7 @@ This module makes pdf reports from the Emails, so the user will be able to print
 Usage
 =====
 
-* go to ...
+* go to Technical -> Email -> Messages -> select the Email -> Print
 
 
 Bug Tracker
