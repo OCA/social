@@ -6,7 +6,7 @@
             <field name="inherit_id" ref="mail.view_mail_message_subtype_form" />
             <field name="arch" type="xml">
                 <field name="description" position="after">
-                    <field name="template_id" context="{'default_model_id': %(mail.model_mail_message_subtype)d}" />
+                    <field name="template_id" context="{'default_model_id': %(mail.model_mail_notification)d}" />
                 </field>
             </field>
         </record>

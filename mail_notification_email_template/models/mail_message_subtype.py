@@ -9,6 +9,6 @@ class MailMessageSubtype(models.Model):
 
     template_id = fields.Many2one(
         'email.template', string='Notification template',
-        domain=[('model_id.model', '=', 'mail.message.subtype')],
+        domain=[('model_id.model', '=', 'mail.notification')],
         help='This template will be used to render notifications sent out '
         'for this subtype')
