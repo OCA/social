@@ -16,7 +16,7 @@ class TestEmailTemplate(common.TransactionCase):
             'type': 'qweb',
             'arch': """\
 <?xml version="1.0"?>
-<t t-name="email_template_multi_report.test_report_template">
+<t t-name="mail_template_multi_report.test_report_template">
     <t t-call="report.html_container">
         <t t-call="report.internal_layout">
             <div class="page">
@@ -28,7 +28,7 @@ class TestEmailTemplate(common.TransactionCase):
         })
 
         model_data = self.env['ir.model.data'].create({
-            'module': 'email_template_multi_report',
+            'module': 'mail_template_multi_report',
             'model': 'ir.ui.view',
             'name': 'test_report_template',
             'res_id': self.report_view.id,
@@ -40,7 +40,7 @@ class TestEmailTemplate(common.TransactionCase):
             'name': 'Test Report 1',
             'model': 'res.partner',
             'report_type': 'qweb-html',
-            'report_name': 'email_template_multi_report.test_report_template',
+            'report_name': 'mail_template_multi_report.test_report_template',
         })
 
         self.template = self.env['email.template'].create({
