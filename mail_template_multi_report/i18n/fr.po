@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* email_template_multi_report
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-23 18:31+0000\n"
+"PO-Revision-Date: 2016-06-23 14:35-0500\n"
+"Last-Translator: David Dufresne <david.dufresne@savoirfairelinux.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: email_template_multi_report
+#: help:email.template.report.line,condition:0
+msgid ""
+"An expression evaluated to determine if the report is to be attached to the "
+"email. If blank, the report will always be attached."
+msgstr ""
+"Une expression évaluée pour déterminer si le rapport doit être attaché au "
+"courriel. Si vide, le rapport sera toujours attaché."
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,condition:0
+msgid "Condition"
+msgstr "Condition"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,template_id:0
+msgid "Email Template"
+msgstr "Modèle de courriel"
+
+#. module: email_template_multi_report
+#: model:ir.model,name:email_template_multi_report.model_email_template_report_line
+msgid "Email Template Report Line"
+msgstr "Ligne de rapport de modèle de courriel"
+
+#. module: email_template_multi_report
+#: model:ir.model,name:email_template_multi_report.model_email_template
+msgid "Email Templates"
+msgstr "Modèles de courriel"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Mis-à-jour par"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,write_date:0
+msgid "Last Updated on"
+msgstr "Mis-à-jour le"
+
+#. module: email_template_multi_report
+#: help:email.template.report.line,report_name:0
+msgid ""
+"Name to use for the generated report file (may contain placeholders)\n"
+"The extension can be omitted and will then come from the report type."
+msgstr ""
+"Nom à utiliser pour le fichier de rapport généré (peut contenir des "
+"variables)\n"
+"L'extension peut être omise: celle du rapport sera utilisée."
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,report_template_id:0
+msgid "Optional report to print and attach"
+msgstr "Rapport facultatif à imprimer et à joindre"
+
+#. module: email_template_multi_report
+#: field:email.template,report_line_ids:0
+msgid "Other Reports"
+msgstr "Autres rapports"
+
+#. module: email_template_multi_report
+#: field:email.template.report.line,report_name:0
+msgid "Report Filename"
+msgstr "Nom du fichier du rapport"
