@@ -3,7 +3,7 @@
    :alt: License: AGPL-3
 
 ============================
-Email Template Multi Reports
+Mail Template Multi Reports
 ============================
 
 This module adds the option to generate more than one report in an email template.
@@ -19,9 +19,6 @@ To configure this module, you need to:
 2. In the email template form view, go to the Advanced Settings tab.
 3. Add extra reports in the Other Reports field.
 
-The other reports added to the template do not support legacy reports such as rml.
-Only qweb reports are available for now.
-
 If the field Condition is filled, then the report will attached depending on
 the evaluation of the condition.
 
@@ -33,6 +30,12 @@ Open a email template wizard and select your template. Your extra reports are ad
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
+
+Known issues / Roadmap
+======================
+
+The other reports added to the template do not support legacy reports such as rml.
+Only qweb reports are available for now.
 
 
 Bug Tracker
