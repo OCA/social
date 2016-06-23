@@ -23,14 +23,12 @@ class EmailTemplate(models.Model):
         template = self.browse(template_id)
 
         for report_line in template.report_line_ids:
-
             records = self.env[template.model_id.model].browse(res_ids)
 
             for rec in records:
                 condition = report_line.condition
 
                 if condition and condition.strip():
-
                     condition_result = self.render_template(
                         condition, template.model, rec.id)
 
