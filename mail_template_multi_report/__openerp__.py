@@ -14,6 +14,7 @@
         'email_template',
     ],
     'data': [
+        'security/ir.model.access.csv',
         'views/email_template.xml',
     ],
     'installable': True,
