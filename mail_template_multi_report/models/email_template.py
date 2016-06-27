@@ -21,6 +21,7 @@ class EmailTemplate(models.Model):
             template_id, res_ids, fields=fields)
 
         template = self.browse(template_id)
+        report_ext = '.pdf'
 
         for report_line in template.report_line_ids:
             records = self.env[template.model_id.model].browse(res_ids)
@@ -42,17 +43,13 @@ class EmailTemplate(models.Model):
                 report_service = report.report_name
 
                 result = self.env['report'].get_pdf(rec, report_service)
-                report_format = 'pdf'
-
                 result = base64.b64encode(result)
 
                 if not report_name:
                     report_name = 'report.' + report_service
 
-                ext = "." + report_format
-
-                if not report_name.endswith(ext):
-                    report_name += ext
+                if not report_name.endswith(report_ext):
+                    report_name += report_ext
 
                 results[rec.id].setdefault('attachments', [])
                 results[rec.id]['attachments'].append((report_name, result))
