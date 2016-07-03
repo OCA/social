@@ -1,0 +1,66 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_notification_email_template
+# 
+# Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-30 01:07+0000\n"
+"PO-Revision-Date: 2016-06-17 14:21+0000\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mail_notification_email_template
+#: model:email.template,body_html:mail_notification_email_template.template
+msgid ""
+"\n"
+"                <h2>Dear ${object.partner_id.name},</h2>\n"
+"                <p>there's a new message on <a href=\"${object.record_access_link}\">${object.record.name}</a>:</p>\n"
+"                ${object.message_id.body|safe}\n"
+"                \n"
+"            "
+msgstr "\n                <h2>Cher ${object.partner_id.name},</h2>\n                <p>il y'a un nouveau message sur <a href=\"${object.record_access_link}\">${object.record.name}</a>:</p>\n                ${object.message_id.body|safe}\n                \n            "
+
+#. module: mail_notification_email_template
+#: model:email.template,subject:mail_notification_email_template.template
+msgid "${object.message_id.subject|safe}"
+msgstr "${object.message_id.subject|safe}"
+
+#. module: mail_notification_email_template
+#: model:ir.model,name:mail_notification_email_template.model_mail_message_subtype
+msgid "Message subtypes"
+msgstr "Message de sous types"
+
+#. module: mail_notification_email_template
+#: field:mail.message.subtype,template_id:0
+msgid "Notification template"
+msgstr "Modèle de notification"
+
+#. module: mail_notification_email_template
+#: model:ir.model,name:mail_notification_email_template.model_mail_notification
+msgid "Notifications"
+msgstr "Notifications"
+
+#. module: mail_notification_email_template
+#: field:mail.notification,record:0
+msgid "Record"
+msgstr "Enregistrement"
+
+#. module: mail_notification_email_template
+#: field:mail.notification,record_access_link:0
+msgid "Record access link"
+msgstr "Lien d'accès à l'enregistrement"
+
+#. module: mail_notification_email_template
+#: help:mail.message.subtype,template_id:0
+msgid ""
+"This template will be used to render notifications sent out for this subtype"
+msgstr "Ce modèle sera utilisé pour envoyer les notifications pour ce sous-type"
