@@ -5,7 +5,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "8.0.1.0.0",
+    "version": "8.0.2.0.0",
     "category": "Social Network",
     "website": "http://www.tecnativa.com",
     "author": "Tecnativa, "
@@ -23,8 +23,10 @@
         "views/assets.xml",
         "views/mail_tracking_email_view.xml",
         "views/mail_tracking_event_view.xml",
+        "views/res_partner_view.xml",
     ],
     "qweb": [
         "static/src/xml/mail_tracking.xml",
-    ]
+    ],
+    "post_init_hook": "post_init_hook",
 }
