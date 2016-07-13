@@ -8,7 +8,7 @@
     <field name="name">mail.tracking.email.form</field>
     <field name="model">mail.tracking.email</field>
     <field name="arch" type="xml">
-        <form string="MailTracking event">
+        <form string="MailTracking event" create="false" edit="false" delete="false">
             <header>
                 <field name="state" widget="statusbar"/>
             </header>
@@ -63,13 +63,14 @@
     <field name="name">mail.tracking.email.tree</field>
     <field name="model">mail.tracking.email</field>
     <field name="arch" type="xml">
-        <tree string="MailTracking emails" colors="grey:state in (False, 'deferred');black:state in ('sent', 'delivered');green:state in ('opened');red:state in ('rejected', 'spam', 'bounced', 'soft-bounced');blue:state in ('unsub')">
-            <field name="state" invisible="1"/>
+        <tree string="MailTracking emails" create="false" edit="false" delete="false"
+              colors="grey:state in (False, 'deferred');black:state in ('sent', 'delivered');green:state in ('opened');red:state in ('rejected', 'spam', 'bounced', 'soft-bounced');blue:state in ('unsub')">
             <field name="time"/>
             <field name="date" invisible="1"/>
             <field name="name"/>
             <field name="sender" string="Sender"/>
             <field name="recipient" string="Recipient"/>
+            <field name="state"/>
         </tree>
     </field>
 </record>
@@ -79,8 +80,10 @@
     <field name="model">mail.tracking.email</field>
     <field name="arch" type="xml">
         <search string="MailTracking email search">
-            <field name="sender" string="Email"
+            <field name="display_name" string="Email"
                    filter_domain="['|', ('sender', 'ilike', self), ('recipient', 'ilike', self)]"/>
+            <field name="sender" string="Sender"/>
+            <field name="recipient" string="Sender"/>
             <field name="name" string="Subject"/>
             <field name="time" string="Time"/>
             <field name="date" string="Date"/>

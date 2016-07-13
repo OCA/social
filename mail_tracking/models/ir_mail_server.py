@@ -24,7 +24,7 @@ class IrMailServer(models.Model):
         if match:
             try:
                 tracking_email_id = int(match.group(1))
-            except:
+            except:  # pragma: no cover
                 pass
         return tracking_email_id
 
@@ -61,7 +61,7 @@ class IrMailServer(models.Model):
             mail_server = mail_server_ids[0] if mail_server_ids else None
         if mail_server:
             smtp_server_used = mail_server.smtp_host
-        else:
+        else:  # pragma: no cover
             smtp_server_used = smtp_server or tools.config.get('smtp_server')
         return smtp_server_used
 
