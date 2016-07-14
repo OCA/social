@@ -12,12 +12,10 @@ class MailMail(models.Model):
     def _tracking_email_prepare(self, mail, partner, email):
         res = super(MailMail, self)._tracking_email_prepare(
             mail, partner, email)
-
         res['mail_id_int'] = mail.id
         res['mass_mailing_id'] = mail.mailing_id.id
-        res['mail_stats_id'] = mail.statistics_ids[0].id \
+        res['mail_stats_id'] = mail.statistics_ids[:1].id \
             if mail.statistics_ids else False
-
         return res
 
     @api.model

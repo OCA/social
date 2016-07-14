@@ -25,11 +25,6 @@ Usage
    :target: https://runbot.odoo-community.org/runbot/205/8.0
 
 
-Known issues / Roadmap
-======================
-
-* ...
-
 Bug Tracker
 ===========
 

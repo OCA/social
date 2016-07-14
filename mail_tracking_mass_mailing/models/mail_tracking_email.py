@@ -24,9 +24,18 @@ class MailTrackingEmail(models.Model):
     @api.model
     def create(self, vals):
         tracking = super(MailTrackingEmail, self).create(vals)
+        # Link mail statistics with this tracking
         if tracking.mail_stats_id:
             tracking.mail_stats_id.write(
                 self._statistics_link_prepare(tracking))
-            if tracking.mail_stats_id.partner_id and not tracking.partner_id:
+            # Get partner from mail statistics
+            # if mass_mailing_partner addon installed
+            if ('partner_id' in tracking.mail_stats_id._fields and
+                    tracking.mail_stats_id.partner_id and
+                    not tracking.partner_id):
                 tracking.partner_id = tracking.mail_stats_id.partner_id.id
+        # Add this tracking to mass mailing contacts with this recipient
+        self.tracking_ids_recalculate(
+            'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
+            tracking.recipient_address, new_tracking=tracking)
         return tracking
