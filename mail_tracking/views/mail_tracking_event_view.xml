@@ -41,6 +41,12 @@
                         <field name="os_family"/>
                     </group>
                 </group>
+                <group string="Error"
+                       attrs="{'invisible': [('error_type', '=', False)]}">
+                    <field name="error_type"/>
+                    <field name="error_description"/>
+                    <field name="error_details"/>
+                </group>
             </sheet>
         </form>
     </field>

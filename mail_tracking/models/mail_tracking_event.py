@@ -47,6 +47,9 @@ class MailTrackingEvent(models.Model):
     ua_type = fields.Char(string='User agent type', readonly=True)
     user_country_id = fields.Many2one(string='User country', readonly=True,
                                       comodel_name='res.country')
+    error_type = fields.Char(string='Error type', readonly=True)
+    error_description = fields.Char(string='Error description', readonly=True)
+    error_details = fields.Text(string='Error details', readonly=True)
 
     @api.multi
     @api.depends('time')
@@ -55,26 +58,79 @@ class MailTrackingEvent(models.Model):
             email.date = fields.Date.to_string(
                 fields.Date.from_string(email.time))
 
-    def _process_action(self, tracking_email, metadata, event_type, state):
+    def _process_data(self, tracking_email, metadata, event_type, state):
         ts = time.time()
         dt = datetime.utcfromtimestamp(ts)
-        tracking_email.sudo().write({'state': state})
         return {
             'recipient': metadata.get('recipient', tracking_email.recipient),
-            'timestamp': metadata.get('ts', ts),
+            'timestamp': metadata.get('timestamp', ts),
             'time': metadata.get('time', fields.Datetime.to_string(dt)),
             'date': metadata.get('date', fields.Date.to_string(dt)),
             'tracking_email_id': tracking_email.id,
             'event_type': event_type,
             'ip': metadata.get('ip', False),
+            'url': metadata.get('url', False),
             'user_agent': metadata.get('user_agent', False),
             'mobile': metadata.get('mobile', False),
             'os_family': metadata.get('os_family', False),
             'ua_family': metadata.get('ua_family', False),
             'ua_type': metadata.get('ua_type', False),
             'user_country_id': metadata.get('user_country_id', False),
+            'error_type': metadata.get('error_type', False),
+            'error_description': metadata.get('error_description', False),
+            'error_details': metadata.get('error_details', False),
         }
+
+    def _process_status(self, tracking_email, metadata, event_type, state):
+        tracking_email.sudo().write({'state': state})
+        return self._process_data(tracking_email, metadata, event_type, state)
+
+    def _process_bounce(self, tracking_email, metadata, event_type, state):
+        tracking_email.sudo().write({
+            'state': state,
+            'bounce_type': metadata.get('bounce_type', False),
+            'bounce_description': metadata.get('bounce_description', False),
+        })
+        return self._process_data(tracking_email, metadata, event_type, state)
+
+    @api.model
+    def process_delivered(self, tracking_email, metadata):
+        return self._process_status(
+            tracking_email, metadata, 'delivered', 'delivered')
+
+    @api.model
+    def process_deferral(self, tracking_email, metadata):
+        return self._process_status(
+            tracking_email, metadata, 'deferral', 'deferred')
+
+    @api.model
+    def process_hard_bounce(self, tracking_email, metadata):
+        return self._process_bounce(
+            tracking_email, metadata, 'hard_bounce', 'bounced')
+
+    @api.model
+    def process_soft_bounce(self, tracking_email, metadata):
+        return self._process_bounce(
+            tracking_email, metadata, 'soft_bounce', 'soft-bounced')
 
     @api.model
     def process_open(self, tracking_email, metadata):
-        return self._process_action(tracking_email, metadata, 'open', 'opened')
+        return self._process_status(tracking_email, metadata, 'open', 'opened')
+
+    @api.model
+    def process_click(self, tracking_email, metadata):
+        return self._process_status(
+            tracking_email, metadata, 'click', 'opened')
+
+    @api.model
+    def process_spam(self, tracking_email, metadata):
+        return self._process_status(tracking_email, metadata, 'spam', 'spam')
+
+    @api.model
+    def process_unsub(self, tracking_email, metadata):
+        return self._process_status(tracking_email, metadata, 'unsub', 'unsub')
+
+    @api.model
+    def process_reject(self, tracking_email, metadata):
+        return self._process_status(
+            tracking_email, metadata, 'reject', 'rejected')
