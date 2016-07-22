@@ -65,6 +65,7 @@ class TestMailMail(TransactionCase):
     def test_get_unsubscribe_url_false_config_msg(self, urllib, urlparse):
         """ It should return default config msg when none supplied """
         expects = ['uri', False]
+        urlparse.urljoin.return_value = expects[0]
         with mock.patch.object(self.Model, 'env') as env:
             env['ir.config_paramater'].get_param.side_effect = expects
             res = self.Model._get_unsubscribe_url(
@@ -84,6 +85,7 @@ class TestMailMail(TransactionCase):
     def test_get_unsubscribe_url_with_config_msg(self, urllib, urlparse):
         """ It should return config message w/ URL formatted """
         expects = ['uri', 'test %(url)s']
+        urlparse.urljoin.return_value = expects[0]
         with mock.patch.object(self.Model, 'env') as env:
             env['ir.config_paramater'].get_param.side_effect = expects
             res = self.Model._get_unsubscribe_url(
