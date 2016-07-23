@@ -9,7 +9,7 @@ from openerp.addons.mass_mailing.controllers.main import MassMailController
 from .. import exceptions as _ex
 
 
-class CustomUnsuscribe(MassMailController):
+class CustomUnsubscribe(MassMailController):
     def _mailing_list_contacts_by_email(self, email):
         """Gets the mailing list contacts by email.
 
@@ -228,7 +228,7 @@ class CustomUnsuscribe(MassMailController):
                     })
 
         # All is OK, unsubscribe
-        result = super(CustomUnsuscribe, self).mailing(
+        result = super(CustomUnsubscribe, self).mailing(
             mailing_id, email, res_id, **post)
         records.write({"success": result.data == "OK"})
 
