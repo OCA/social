@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# Python source code encoding : https://www.python.org/dev/peps/pep-0263/
-##############################################################################
-# For copyright and license notices, see __openerp__.py file in root directory
-##############################################################################
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 from . import mail_mail
+from . import mail_mass_mailing
+from . import mail_mass_mailing_list
+from . import mail_unsubscription

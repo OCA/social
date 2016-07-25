@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+<record id="mail_unsubscription_view_form" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Form</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="date"/>
+                    <field name="mass_mailing_id"/>
+                    <field name="unsubscriber_id"/>
+                    <field name="email"/>
+                    <field name="success"/>
+                    <field name="reason_id"/>
+                    <field name="details"
+                           attrs="{'required': [('details_required', '=', True)]}"/>
+                    <field name="details_required" invisible="True"/>
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"
+                       widget="mail_followers"
+                       groups="base.group_user"/>
+                <field name="message_ids"
+                       widget="mail_thread"/>
+           </div>
+        </form>
+    </field>
+</record>
+
+<record id="mail_unsubscription_view_tree" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Tree</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="date"/>
+            <field name="mass_mailing_id"/>
+            <field name="unsubscriber_id"/>
+            <field name="email" invisible="True"/>
+            <field name="reason_id"/>
+            <field name="details" invisible="True"/>
+        </tree>
+    </field>
+</record>
+
+<record id="mail_unsubscription_view_search" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Search</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="mass_mailing_id"/>
+            <field name="unsubscriber_id"/>
+            <field name="email"/>
+            <field name="success"/>
+            <field name="reason_id"/>
+            <field name="details"/>
+            <separator/>
+            <group string="Group by">
+                <filter string="Month"
+                        context="{'group_by': 'date:month'}"/>
+                <filter string="Year"
+                        context="{'group_by': 'date:year'}"/>
+                <filter string="Reason"
+                        context="{'group_by': 'reason_id'}"/>
+                <filter string="Mass mailing"
+                        context="{'group_by': 'mass_mailing_id'}"/>
+                <filter string="Success"
+                        context="{'group_by': 'success'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<act_window id="mail_unsubscription_action"
+            name="Unsubscriptions"
+            res_model="mail.unsubscription"/>
+
+<menuitem id="mail_unsubscription_menu"
+          parent="mass_mailing.mass_mailing_campaign"
+          action="mail_unsubscription_action"/>
+
+</data>
+</openerp>
