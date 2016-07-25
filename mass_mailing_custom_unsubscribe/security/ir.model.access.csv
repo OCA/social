@@ -1,0 +1,6 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"read_unsubscription_reason_public","Public users can read unsubscription reasons","model_mail_unsubscription_reason","base.group_public",1,0,0,0
+"read_unsubscription_reason_employee","Employee users can read unsubscription reasons","model_mail_unsubscription_reason","base.group_user",1,0,0,0
+"write_unsubscription_reason","Mass mailing managers can manage unsubscription reasons","model_mail_unsubscription_reason","mass_mailing.group_mass_mailing_campaign",1,1,1,1
+"read_unsubscription","Marketing users can read unsubscriptions","model_mail_unsubscription","marketing.group_marketing_user",1,0,0,0
+"write_unsubscription","Mass mailing managers can manage unsubscriptions","model_mail_unsubscription","mass_mailing.group_mass_mailing_campaign",1,1,1,1
