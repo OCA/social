@@ -1,0 +1,5 @@
+"id","name","sequence","details_required"
+"reason_not_interested","I'm not interested",10,"False"
+"reason_not_requested","I did not request this",20,"False"
+"reason_too_many","I get too many emails",30,"False"
+"reason_other","Other reason",100,"True"
