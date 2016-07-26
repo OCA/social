@@ -30,7 +30,7 @@ addon | version | summary
 [mail_template_multi_report](mail_template_multi_report/) | 8.0.1.0.0 | Multiple Reports in Email Templates
 [mail_tracking](mail_tracking/) | 8.0.1.0.0 | Email tracking system for all mails sent
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.1.0 | Customizable unsubscription process on mass mailing emails
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.2.0.0 | Customizable unsubscription process on mass mailing emails
 [mass_mailing_keep_archives](mass_mailing_keep_archives/) | 8.0.0.0.0 | Mass Mailing Keep Archives
 [mass_mailing_statistic_extra](mass_mailing_statistic_extra/) | 8.0.1.0.0 | Mail statistics extra info
 [mass_mailing_unique](mass_mailing_unique/) | 8.0.1.0.0 | Avoids duplicate mailing lists and contacts
