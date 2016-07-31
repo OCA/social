@@ -1,23 +1,27 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_tracking
-#
+# * mail_tracking
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-07 19:45+0000\n"
-"PO-Revision-Date: 2016-06-07 19:45+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-07-26 00:45+0000\n"
+"PO-Revision-Date: 2016-07-26 00:45+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_tracking
 #: help:mail.tracking.email,state:0
-msgid " * The 'Error' status indicates that there was an error when trying to sent the email, for example, 'No valid recipient'\n"
+msgid ""
+" * The 'Error' status indicates that there was an error when trying to sent the email, for example, 'No valid recipient'\n"
 " * The 'Sent' status indicates that message was succesfully sent via outgoing email server (SMTP).\n"
 " * The 'Delivered' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
 " * The 'Open' status indicates that message was opened or clicked by recipient.\n"
@@ -26,64 +30,55 @@ msgid " * The 'Error' status indicates that there was an error when trying to se
 " * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
 " * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
 " * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
-""
-msgstr " * 'Error' indica que ha habido un error al intentar el envío del email, por ejemplo, 'Email de destino no válido'\n"
-" * 'Enviado' indica que el email se ha envíado correctamente al servidor de correo saliente (SMTP)\n"
-" * 'Entregado' indica que el email se ha entregado al servidor de correo del destinatario (MX)\n"
-" * 'Abierto' indica que el destinatario ha abierto o clicado en el email\n"
-" * 'Rechazado' indica que la dirección del destinatario esta en una lista negra en el servidor de correo saliente (SMTP)\n"
-" * 'Spam' indica que el servidor de correo saliente (SMTP) considera el email como spam\n"
-" * 'Desuscrito' indica que el destinatarios ha solicitado desuscribirse desde este email\n"
-" * 'Rebotado' indica que el email no ha sido aceptado por el servidor de correo del destinatario (MX)\n"
-" * 'Rebotado leve' indica que el email no ha sido aceptado por motivos temporales por el servidor de correo del destinatario (MX)\n"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
-msgstr "Rebote"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,bounce_description:0
 msgid "Bounce description"
-msgstr "Descripción del rebote"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,bounce_type:0
 msgid "Bounce type"
-msgstr "Tipo de rebote"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Bounced"
-msgstr "Rebotado"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
-msgstr "Clic"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Clicked"
-msgstr "Clicado"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,url:0
 msgid "Clicked URL"
-msgstr "URL clicada"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
-msgstr "País"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_uid:0
 #: field:mail.tracking.event,create_uid:0
 msgid "Created by"
-msgstr "Creado por"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_date:0
@@ -102,13 +97,13 @@ msgstr "Fecha"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Deferral"
-msgstr "Retraso"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 msgid "Deferred"
-msgstr "Retrasado"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -116,13 +111,13 @@ msgstr "Retrasado"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Delivered"
-msgstr "Entregado"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,display_name:0
 #: field:mail.tracking.event,display_name:0
 msgid "Display Name"
-msgstr "Nombre a mostrar"
+msgstr "Nombre mostrado"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -133,55 +128,54 @@ msgstr "Correo electrónico"
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Error"
-msgstr "Error"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,error_smtp_server:0
 msgid "Error SMTP server"
-msgstr "Error del servidor SMTP"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,error_description:0
 msgid "Error description"
-msgstr "Descripción del error"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,error_type:0
 msgid "Error type"
-msgstr "Tipo de error"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,event_type:0
 msgid "Event type"
-msgstr "Tipo de evento"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Failed"
-msgstr "Ha fallado"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
-msgstr "Agrupar por"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Hard bounce"
-msgstr "Rebote duro"
+msgstr ""
 
 #. module: mail_tracking
-#: field:mail.tracking.email,id:0
-#: field:mail.tracking.event,id:0
+#: field:mail.tracking.email,id:0 field:mail.tracking.event,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,mobile:0
 msgid "Is mobile?"
-msgstr "¿Es desde móvil?"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,__last_update:0
@@ -190,10 +184,9 @@ msgid "Last Modified on"
 msgstr "Última modificación en"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,write_uid:0
-#: field:mail.tracking.event,write_uid:0
+#: field:mail.tracking.email,write_uid:0 field:mail.tracking.event,write_uid:0
 msgid "Last Updated by"
-msgstr "Última modificación por"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,write_date:0
@@ -204,36 +197,36 @@ msgstr "Última actualización en"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
 msgid "MailTracking email"
-msgstr "MailTracking email"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 msgid "MailTracking email search"
-msgstr "MailTracking email search"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_email
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
 msgid "MailTracking emails"
-msgstr "MailTracking emails"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_event
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_form
 msgid "MailTracking event"
-msgstr "MailTracking event"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "MailTracking event search"
-msgstr "MailTracking event search"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "MailTracking events"
-msgstr "MailTracking events"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -241,14 +234,14 @@ msgstr "MailTracking events"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,tracking_email_id:0
 msgid "Message"
-msgstr "Mensaje"
+msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:31
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:30
 #, python-format
 msgid "Message tracking"
-msgstr "Seguimiento de mensaje"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -257,64 +250,60 @@ msgid "Month"
 msgstr "Mes"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-msgid "Open"
-msgstr "Abrir"
-
-#. module: mail_tracking
 #: selection:mail.tracking.email,state:0
+#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
-msgstr "Abierto"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,os_family:0
 msgid "Operating system family"
-msgstr "Familia de sistema operativo"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_mail
 msgid "Outgoing Mails"
-msgstr "Emails de salida"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,partner_id:0
 msgid "Partner"
-msgstr "Empresa"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,recipient:0
 msgid "Recipient"
-msgstr "Destinatario"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,recipient:0
 msgid "Recipient email"
-msgstr "Email del destinatario"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Rejected"
-msgstr "Rechazado"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,smtp_server:0
 msgid "SMTP server"
-msgstr "Servidor SMTP"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
 msgid "Sender"
-msgstr "Remitente"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.email,sender:0
 msgid "Sender email"
-msgstr "Email del remitente"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -322,35 +311,35 @@ msgstr "Email del remitente"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Sent"
-msgstr "Enviar"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Soft bounce"
-msgstr "Rebote suave"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Soft bounced"
-msgstr "Rebotado suave"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Spam"
-msgstr "Spam"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,state:0
 msgid "State"
-msgstr "Estado"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,name:0
 msgid "Subject"
-msgstr "Asunto"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -358,52 +347,51 @@ msgstr "Asunto"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,time:0
 msgid "Time"
-msgstr "Hora"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 msgid "Tracking emails"
-msgstr "Emails de seguimiento"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_event
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
 #: field:mail.tracking.email,tracking_event_ids:0
 msgid "Tracking events"
-msgstr "Eventos de seguimiento"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
-msgstr "Tipo"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
-msgstr "URL"
+msgstr ""
 
 #. module: mail_tracking
-#: field:mail.tracking.email,timestamp:0
-#: field:mail.tracking.event,timestamp:0
+#: field:mail.tracking.email,timestamp:0 field:mail.tracking.event,timestamp:0
 msgid "UTC timestamp"
-msgstr "Tiempo UTC"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Unsubscribe"
-msgstr "Desuscribirse"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
-msgstr "Desuscrito"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,ip:0
 msgid "User IP"
-msgstr "IP usuario"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
@@ -411,20 +399,20 @@ msgstr "IP usuario"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 #: field:mail.tracking.event,user_agent:0
 msgid "User agent"
-msgstr "Aplicación del usuario"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,ua_family:0
 msgid "User agent family"
-msgstr "Familia de la aplicación del usuario"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,ua_type:0
 msgid "User agent type"
-msgstr "Tipo de aplicación del usuario"
+msgstr ""
 
 #. module: mail_tracking
 #: field:mail.tracking.event,user_country_id:0
 msgid "User country"
-msgstr "País del usuario"
+msgstr ""
