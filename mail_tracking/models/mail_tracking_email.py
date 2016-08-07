@@ -5,6 +5,7 @@
 import logging
 import urlparse
 import time
+import re
 from datetime import datetime
 
 from openerp import models, api, fields, tools
@@ -16,10 +17,13 @@ _logger = logging.getLogger(__name__)
 class MailTrackingEmail(models.Model):
     _name = "mail.tracking.email"
     _order = 'time desc'
-    _rec_name = 'name'
+    _rec_name = 'display_name'
     _description = 'MailTracking email'
 
     name = fields.Char(string="Subject", readonly=True, index=True)
+    display_name = fields.Char(
+        string="Display name", readonly=True, store=True,
+        compute="_compute_display_name")
     timestamp = fields.Float(
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
@@ -33,6 +37,9 @@ class MailTrackingEmail(models.Model):
     partner_id = fields.Many2one(
         string="Partner", comodel_name='res.partner', readonly=True)
     recipient = fields.Char(string='Recipient email', readonly=True)
+    recipient_address = fields.Char(
+        string='Recipient email address', readonly=True, store=True,
+        compute='_compute_recipient_address')
     sender = fields.Char(string='Sender email', readonly=True)
     state = fields.Selection([
         ('error', 'Error'),
@@ -77,12 +84,98 @@ class MailTrackingEmail(models.Model):
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
 
+    @api.model
+    def tracking_ids_recalculate(self, model, email_field, tracking_field,
+                                 email, new_tracking=None):
+        objects = self.env[model].search([
+            (email_field, '=ilike', email),
+        ])
+        for obj in objects:
+            trackings = obj[tracking_field]
+            if new_tracking:
+                trackings |= new_tracking
+            trackings = trackings._email_score_tracking_filter()
+            if set(obj[tracking_field].ids) != set(trackings.ids):
+                if trackings:
+                    obj.write({
+                        tracking_field: [(6, False, trackings.ids)]
+                    })
+                else:
+                    obj.write({
+                        tracking_field: [(5, False, False)]
+                    })
+        return True
+
+    @api.model
+    def _tracking_ids_to_write(self, email):
+        trackings = self.env['mail.tracking.email'].search([
+            ('recipient_address', '=ilike', email)
+        ])
+        trackings = trackings._email_score_tracking_filter()
+        if trackings:
+            return [(6, False, trackings.ids)]
+        else:
+            return [(5, False, False)]
+
+    @api.multi
+    def _email_score_tracking_filter(self):
+        """Default email score filter for tracking emails"""
+        # Consider only last 10 tracking emails
+        return self.sorted(key=lambda r: r.time, reverse=True)[:10]
+
+    @api.multi
+    def email_score(self):
+        """Default email score algorimth"""
+        score = 50.0
+        trackings = self._email_score_tracking_filter()
+        for tracking in trackings:
+            if tracking.state in ('error',):
+                score -= 50.0
+            elif tracking.state in ('rejected', 'spam', 'bounced'):
+                score -= 25.0
+            elif tracking.state in ('soft-bounced', 'unsub'):
+                score -= 10.0
+            elif tracking.state in ('delivered',):
+                score += 5.0
+            elif tracking.state in ('opened',):
+                score += 10.0
+        if score > 100.0:
+            score = 100.0
+        return score
+
+    @api.multi
+    @api.depends('recipient')
+    def _compute_recipient_address(self):
+        for email in self:
+            matches = re.search(r'<(.*@.*)>', email.recipient)
+            if matches:
+                email.recipient_address = matches.group(1)
+            else:
+                email.recipient_address = email.recipient
+
+    @api.multi
+    @api.depends('name', 'recipient')
+    def _compute_display_name(self):
+        for email in self:
+            parts = [email.name]
+            if email.recipient:
+                parts.append(email.recipient)
+            email.display_name = ' - '.join(parts)
+
     @api.multi
     @api.depends('time')
     def _compute_date(self):
         for email in self:
             email.date = fields.Date.to_string(
                 fields.Date.from_string(email.time))
+
+    @api.model
+    def create(self, vals):
+        tracking = super(MailTrackingEmail, self).create(vals)
+        self.tracking_ids_recalculate(
+            'res.partner', 'email', 'tracking_email_ids',
+            tracking.recipient_address, new_tracking=tracking)
+        return tracking
 
     def _get_mail_tracking_img(self):
         base_url = self.env['ir.config_parameter'].get_param('web.base.url')
@@ -159,15 +252,23 @@ class MailTrackingEmail(models.Model):
         method = getattr(m_event, 'process_' + event_type, None)
         if method and hasattr(method, '__call__'):
             return method(self, metadata)
-        else:
+        else:  # pragma: no cover
             _logger.info('Unknown event type: %s' % event_type)
         return False
 
     @api.multi
-    def event_process(self, event_type, metadata):
+    def event_create(self, event_type, metadata):
         event_ids = self.env['mail.tracking.event']
         for tracking_email in self:
             vals = tracking_email._event_prepare(event_type, metadata)
             if vals:
                 event_ids += event_ids.sudo().create(vals)
         return event_ids
+
+    @api.model
+    def event_process(self, request, post, metadata, event_type=None):
+        # Generic event process hook, inherit it and
+        # - return 'OK' if processed
+        # - return 'NONE' if this request is not for you
+        # - return 'ERROR' if any error
+        return 'NONE'  # pragma: no cover
