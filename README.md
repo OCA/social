@@ -28,7 +28,7 @@ addon | version | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
 [mail_template_multi_report](mail_template_multi_report/) | 8.0.1.0.0 | Multiple Reports in Email Templates
-[mail_tracking](mail_tracking/) | 8.0.1.0.0 | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 8.0.2.0.0 | Email tracking system for all mails sent
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.2.0.0 | Customizable unsubscription process on mass mailing emails
 [mass_mailing_keep_archives](mass_mailing_keep_archives/) | 8.0.0.0.0 | Mass Mailing Keep Archives
