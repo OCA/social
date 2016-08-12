@@ -19,12 +19,12 @@ This addon will be automatically installed when 'mail_tracking' and
 Usage
 =====
 
-From mail statistic object, you'll can see:
+From mail statistic object, you can see:
 - Email tracking state
 - Email related tracking object
 - Email related tracking events
 
-From mass mailing contact, you'll can see:
+From mass mailing contact, you can see:
 - Email score, in order to clean up your lists from bad score emails
 
 As a bonus feature, you have a new checkbox 'Avoid resend' in mass mailing,

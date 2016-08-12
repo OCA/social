@@ -20,9 +20,7 @@ def post_init_hook(cr, registry):
             "Recalculating 'tracking_email_ids' in "
             "'mail.mass_mailing.contact' model for %d email addresses",
             len(emails))
-        n = 0
-        for email in emails:
-            n += 1
+        for n, email in enumerate(emails):
             env['mail.tracking.email'].tracking_ids_recalculate(
                 'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
                 email)

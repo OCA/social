@@ -44,6 +44,11 @@ msgid "Avoid resend"
 msgstr "Avoid resend"
 
 #. module: mail_tracking_mass_mailing
+#: help:mail.mass_mailing,avoid_resend:0
+msgid "Avoid to send this mass mailing email twice to the same recipient"
+msgstr "Avoid to send this mass mailing email twice to the same recipient"
+
+#. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "Country"
 msgstr "Country"

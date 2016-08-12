@@ -9,7 +9,10 @@ from openerp.exceptions import Warning as UserError
 class MailMassMailing(models.Model):
     _inherit = 'mail.mass_mailing'
 
-    avoid_resend = fields.Boolean(string="Avoid resend")
+    avoid_resend = fields.Boolean(
+        string="Avoid resend",
+        help="Avoid to send this mass mailing email twice "
+             "to the same recipient")
 
     @api.model
     def get_recipients(self, mailing):
