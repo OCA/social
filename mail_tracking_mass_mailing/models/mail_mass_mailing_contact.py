@@ -16,7 +16,7 @@ class MailMassMailingContact(models.Model):
         compute="_compute_email_score", store=True, readonly=True)
 
     @api.one
-    @api.depends('tracking_email_ids.state')
+    @api.depends('tracking_email_ids', 'tracking_email_ids.state')
     def _compute_email_score(self):
         self.email_score = self.tracking_email_ids.email_score()
 

@@ -6,8 +6,7 @@
 Mail tracking for mass mailing
 ==============================
 
-This module is a glue addon when 'mail_tracking' and 'mass_mailing' are
-both installed
+Links mail statistics objects with mail tracking objects.
 
 
 Installation
@@ -19,6 +18,21 @@ This addon will be automatically installed when 'mail_tracking' and
 
 Usage
 =====
+
+From mail statistic object, you'll can see:
+- Email tracking state
+- Email related tracking object
+- Email related tracking events
+
+From mass mailing contact, you'll can see:
+- Email score, in order to clean up your lists from bad score emails
+
+As a bonus feature, you have a new checkbox 'Avoid resend' in mass mailing,
+in order to not send twice the same email to the same recipient. This is very
+useful when you want to resend the mass mailing after changing selection
+recipients. Notice that recipient selection could be a domain over a model, so
+result ids could change over the time. With this flag you can send
+the same email several times but only once to each recipient.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
