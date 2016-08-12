@@ -2,7 +2,7 @@
 # © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api, fields
+from openerp import models, api, fields, _
 from openerp.exceptions import Warning as UserError
 
 
@@ -22,7 +22,7 @@ class MailMassMailing(models.Model):
             res_ids = list(set(res_ids).difference(
                 already_sent.mapped('res_id')))
             if not res_ids:
-                raise UserError(
+                raise UserError(_(
                     "There is no more recipients to send and 'Avoid resend' "
-                    "option is enabled")
+                    "option is enabled"))
         return res_ids
