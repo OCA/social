@@ -26,5 +26,5 @@ def post_init_hook(cr, registry):
             env['mail.tracking.email'].tracking_ids_recalculate(
                 'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
                 email)
-            if n % 500 == 0:
+            if n % 500 == 0:  # pragma: no cover
                 _logger.info("   Recalculated %d of %d", n, len(emails))

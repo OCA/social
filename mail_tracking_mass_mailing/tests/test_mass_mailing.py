@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.tests.common import TransactionCase
+from openerp.exceptions import Warning as UserError
 
 
 # One test case per method
@@ -42,6 +43,8 @@ class TestMassMailing(TransactionCase):
     def test_avoid_resend_enable(self):
         self.mailing.avoid_resend = True
         self.resend_mass_mailing(1, 2)
+        with self.assertRaises(UserError):
+            self.mailing.send_mail()
 
     def test_avoid_resend_disable(self):
         self.mailing.avoid_resend = False
@@ -70,3 +73,14 @@ class TestMassMailing(TransactionCase):
             tracking_email.event_create('open', metadata)
             self.assertTrue(stat.opened)
             self.assertEqual(stat.tracking_state, 'opened')
+
+    def test_contact_tracking_emails(self):
+        self.mailing.send_mail()
+        for stat in self.mailing.statistics_ids:
+            if stat.mail_mail_id:
+                stat.mail_mail_id.send()
+        self.assertEqual(len(self.contact_a.tracking_email_ids), 1)
+        self.contact_a.email = 'other_contact_a@example.com'
+        self.assertEqual(len(self.contact_a.tracking_email_ids), 0)
+        self.contact_a.email = 'contact_a@example.com'
+        self.assertEqual(len(self.contact_a.tracking_email_ids), 1)
