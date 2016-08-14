@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 00:45+0000\n"
-"PO-Revision-Date: 2016-07-26 00:45+0000\n"
+"POT-Creation-Date: 2016-08-08 00:45+0000\n"
+"PO-Revision-Date: 2016-08-08 00:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
@@ -114,16 +114,25 @@ msgid "Delivered"
 msgstr ""
 
 #. module: mail_tracking
-#: field:mail.tracking.email,display_name:0
 #: field:mail.tracking.event,display_name:0
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: mail_tracking
+#: field:mail.tracking.email,display_name:0
+msgid "Display name"
+msgstr ""
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,mail_id:0
 msgid "Email"
 msgstr "Correo electrónico"
+
+#. module: mail_tracking
+#: field:res.partner,email_score:0
+msgid "Email score"
+msgstr ""
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
@@ -267,6 +276,7 @@ msgid "Outgoing Mails"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_res_partner
 #: field:mail.tracking.email,partner_id:0
 msgid "Partner"
 msgstr ""
@@ -281,6 +291,11 @@ msgstr ""
 #. module: mail_tracking
 #: field:mail.tracking.email,recipient:0
 msgid "Recipient email"
+msgstr ""
+
+#. module: mail_tracking
+#: field:mail.tracking.email,recipient_address:0
+msgid "Recipient email address"
 msgstr ""
 
 #. module: mail_tracking
@@ -351,7 +366,14 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
+#: view:res.partner:mail_tracking.view_partner_form
+#: field:res.partner,tracking_email_ids:0
 msgid "Tracking emails"
+msgstr ""
+
+#. module: mail_tracking
+#: field:res.partner,tracking_emails_count:0
+msgid "Tracking emails count"
 msgstr ""
 
 #. module: mail_tracking

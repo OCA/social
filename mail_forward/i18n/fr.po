@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-30 01:07+0000\n"
-"PO-Revision-Date: 2016-06-17 15:20+0000\n"
-"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
+"POT-Creation-Date: 2016-08-08 00:45+0000\n"
+"PO-Revision-Date: 2016-08-12 10:14+0000\n"
+"Last-Translator: dglucose <eric.lemesre@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,7 +29,7 @@ msgstr "(Pas de sujet)"
 #. module: mail_forward
 #: field:mail_forward.compose_message,active_domain:0
 msgid "Active domain"
-msgstr "Domaine acitf"
+msgstr "Domaine actif"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,partner_ids:0
@@ -45,7 +46,7 @@ msgstr "Autorisé le transfert des courriels pour ce modèle"
 msgid ""
 "Answers do not go in the original document' discussion thread. This has an "
 "impact on the generated message-id."
-msgstr ""
+msgstr "Les réponses ne vont pas dans le fil de discussion du document original. Ceci a un impact sur le message-id généré."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,attachment_ids:0
@@ -71,7 +72,7 @@ msgstr "Auteur"
 msgid ""
 "Author of the message. If not set, email_from may hold an email address that"
 " did not match any partner."
-msgstr "Auteur du message. Si non mis le champ email_from sera utilsié comme adresse qui ne correspondra à aucun partenaire."
+msgstr "Auteur du message. S'il n'est pas indiqué, email_from peux contenir une adresse électronique ne correspondant à aucun partenaire."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,author_avatar:0
@@ -81,7 +82,7 @@ msgstr "Avatar de l'auteur"
 #. module: mail_forward
 #: help:mail_forward.compose_message,body:0
 msgid "Automatically sanitized HTML contents"
-msgstr ""
+msgstr "Nettoyer automatiquement les contenus HTML"
 
 #. module: mail_forward
 #. openerp-web
@@ -93,37 +94,37 @@ msgstr "CC: "
 #. module: mail_forward
 #: field:mail_forward.compose_message,child_ids:0
 msgid "Child Messages"
-msgstr "Messages enfant"
+msgstr "Messages enfants"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,composition_mode:0
 msgid "Composition mode"
-msgstr ""
+msgstr "Mode de composition"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,body:0
 msgid "Contents"
-msgstr "Contenus"
+msgstr "Contenu"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_uid:0
 msgid "Created by"
-msgstr "créé par"
+msgstr "Créée par"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_date:0
 msgid "Created on"
-msgstr "Créé le"
+msgstr "Créée le"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,starred:0
 msgid "Current user has a starred notification linked to this message"
-msgstr ""
+msgstr "L'utilisateur actuel a une notification \"favori\" associée à ce message"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,to_read:0
 msgid "Current user has an unread notification linked to this message"
-msgstr ""
+msgstr "L'utilisateur actuel a une notification non-lue liée à ce message."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,date:0
@@ -140,19 +141,19 @@ msgstr "Date:"
 #. module: mail_forward
 #: field:mail_forward.compose_message,destination_object_id:0
 msgid "Destination object"
-msgstr ""
+msgstr "Objet de destination"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,display_name:0
 msgid "Display Name"
-msgstr "Nom affiché"
+msgstr "Nom à afficher"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,email_from:0
 msgid ""
 "Email address of the sender. This field is set when no matching partner is "
 "found for incoming emails."
-msgstr ""
+msgstr "Adresse courriel de l'expéditeur. Ce champ est défini dans les courriels entrants quand aucun partenaire ne correspond."
 
 #. module: mail_forward
 #. openerp-web
@@ -166,19 +167,19 @@ msgstr "TR"
 #: code:addons/mail_forward/static/src/xml/mail_forward.xml:10
 #, python-format
 msgid "Forward"
-msgstr ""
+msgstr "Transférer"
 
 #. module: mail_forward
 #: model:ir.actions.act_window,name:mail_forward.compose_action
 msgid "Forward Email"
-msgstr ""
+msgstr "transférer le courriel"
 
 #. module: mail_forward
 #. openerp-web
 #: code:addons/mail_forward/static/src/js/mail_forward.js:36
 #, python-format
 msgid "Forwarded message"
-msgstr ""
+msgstr "Messages transférés"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,email_from:0
@@ -200,7 +201,7 @@ msgstr "ID"
 #. module: mail_forward
 #: help:mail_forward.compose_message,parent_id:0
 msgid "Initial thread message."
-msgstr ""
+msgstr "Message initial du fil."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,__last_update:0
@@ -210,17 +211,17 @@ msgstr "Dernière modification le"
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_uid:0
 msgid "Last Updated by"
-msgstr "Dernière mise à jour par"
+msgstr "Dernière modification par"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_date:0
 msgid "Last Updated on"
-msgstr "Dernière mise à jour le"
+msgstr "Modifié le"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,is_log:0
 msgid "Log an Internal Note"
-msgstr ""
+msgstr "Laisser une note interne"
 
 #. module: mail_forward
 #: field:res.request.link,mail_forward_target:0
@@ -230,39 +231,39 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,record_name:0
 msgid "Message Record Name"
-msgstr ""
+msgstr "Nom de l'enregistrement du message"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,type:0
 msgid ""
 "Message type: email for email message, notification for system message, "
 "comment for other messages such as user replies"
-msgstr ""
+msgstr "Type de message : \"Courriel\" pour les courriers électroniques, \"Notification\" pour les messages du système, \"Commentaire\" pour les autres messages tels que les réponses des utilisateurs"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,message_id:0
 msgid "Message unique identifier"
-msgstr ""
+msgstr "Identifiant unique de message"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,message_id:0
 msgid "Message-Id"
-msgstr ""
+msgstr "ID du message"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,move_attachments:0
 msgid "Move attachments"
-msgstr ""
+msgstr "Déplacer les pièces jointes"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,record_name:0
 msgid "Name get of the related document."
-msgstr ""
+msgstr "Nom obtenu pour le document relié."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,no_auto_thread:0
 msgid "No threading for answers"
-msgstr ""
+msgstr "Pas de suivi dans le fil pour les réponses"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,notification_ids:0
@@ -272,17 +273,17 @@ msgstr "Notifications"
 #. module: mail_forward
 #: field:mail_forward.compose_message,notified_partner_ids:0
 msgid "Notified partners"
-msgstr ""
+msgstr "Partenaires notifiés"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,notify:0
 msgid "Notify followers"
-msgstr "Notifier les abonnés"
+msgstr "Avertir les abonnés"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,notify:0
 msgid "Notify followers of the document (mass post only)"
-msgstr ""
+msgstr "Avertir les abonnés de ce document (publipostage uniquement)"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,destination_object_id:0
@@ -297,50 +298,50 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,mail_server_id:0
 msgid "Outgoing mail server"
-msgstr ""
+msgstr "Serveur courriel sortant"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,parent_id:0
 msgid "Parent Message"
-msgstr ""
+msgstr "Message parent"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,notified_partner_ids:0
 msgid ""
 "Partners that have a notification pushing this message in their mailboxes"
-msgstr ""
+msgstr "Partenaires ayant une notification qui publie ce message dans leur courrier entrant"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,res_id:0
 msgid "Related Document ID"
-msgstr ""
+msgstr "ID du document associé"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,model:0
 msgid "Related Document Model"
-msgstr ""
+msgstr "Modèle de document concerné"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,reply_to:0
 msgid ""
 "Reply email address. Setting the reply_to bypasses the automatic thread "
 "creation."
-msgstr ""
+msgstr "Adresse courriel de réponse. Définir le champ reply_to contourne la création automatique de fil."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,reply_to:0
 msgid "Reply-To"
-msgstr "Répondre-à"
+msgstr "Répondre à"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,starred:0
 msgid "Starred"
-msgstr "Suivi"
+msgstr "Favori"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,subject:0
 msgid "Subject"
-msgstr "Sujet"
+msgstr "Objet"
 
 #. module: mail_forward
 #. openerp-web
@@ -359,12 +360,12 @@ msgstr "Sous-type"
 msgid ""
 "Technical field holding the message notifications. Use notified_partner_ids "
 "to access notified partners."
-msgstr ""
+msgstr "Champ technique contenant les notifications du message. Utiliser notified_partner_ids pour accéder aux partenaires notifiés."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,to_read:0
 msgid "To read"
-msgstr ""
+msgstr "À lire"
 
 #. module: mail_forward
 #. openerp-web
@@ -381,7 +382,7 @@ msgstr "Type"
 #. module: mail_forward
 #: field:mail_forward.compose_message,use_active_domain:0
 msgid "Use active domain"
-msgstr ""
+msgstr "Utiliser un domaine actif"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,template_id:0
@@ -391,7 +392,7 @@ msgstr "Utiliser un modèle"
 #. module: mail_forward
 #: help:mail_forward.compose_message,vote_user_ids:0
 msgid "Users that voted for this message"
-msgstr ""
+msgstr "Utilisateurs ayant voté pour ce message"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,vote_user_ids:0
@@ -401,7 +402,7 @@ msgstr "Votes"
 #. module: mail_forward
 #: help:mail_forward.compose_message,is_log:0
 msgid "Whether the message is an internal note (comment mode only)"
-msgstr ""
+msgstr "Si un message est une note interne (en mode commentaire seulement)"
 
 #. module: mail_forward
 #: view:mail_forward.compose_message:mail_forward.compose_form
