@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="view_mail_tracking_email_form">
+    <field name="name">Add mass mailing and mail stadistics</field>
+    <field name="model">mail.tracking.email</field>
+    <field name="inherit_id" ref="mail_tracking.view_mail_tracking_email_form"/>
+    <field name="arch" type="xml">
+        <field name="date" position="after">
+            <field name="mass_mailing_id"/>
+            <field name="mail_stats_id"/>
+        </field>
+    </field>
+</record>
+
+</data>
+</openerp>

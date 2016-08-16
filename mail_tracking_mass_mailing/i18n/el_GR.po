@@ -1,0 +1,146 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_tracking_mass_mailing
+# 
+# Translators:
+# Kostas Goutoudis <goutoudis@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>, 2016\n"
+"Language-Team: Greek (Greece) (https://www.transifex.com/oca/teams/23907/el_GR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: el_GR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing,avoid_resend:0
+msgid "Avoid resend"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mass_mailing,avoid_resend:0
+msgid "Avoid to send this mass mailing email twice to the same recipient"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+msgid "Country"
+msgstr "Χώρα"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mail,path:0
+msgid "Discussion Path"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
+msgid "Email Statistics"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mass_mailing.contact:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
+#: field:mail.mass_mailing.contact,email_bounced:0
+msgid "Email bounced"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing.contact,email_score:0
+msgid "Email score"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
+msgid "Emails"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
+msgid "Events"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mail_id_int:0
+msgid "Mail ID"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mail_stats_id:0
+msgid "Mail statistics"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
+#: field:mail.mail.statistics,mail_tracking_id:0
+msgid "Mail tracking"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_email
+msgid "Mail tracking emails"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_event
+msgid "Mail tracking events"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
+msgid "MailTracking email"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mass_mailing_id:0
+#: field:mail.tracking.event,mass_mailing_id:0
+msgid "Mass mailing"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
+msgid "Outgoing Mails"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: code:addons/mail_tracking_mass_mailing/models/mail_mass_mailing.py:28
+#, python-format
+msgid ""
+"There is no more recipients to send and 'Avoid resend' option is enabled"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: field:mail.mail.statistics,tracking_event_ids:0
+msgid "Tracking events"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mail,path:0
+msgid ""
+"Used to display messages in a paragraph-based chatter using a unique path;"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+msgid "User agent"
+msgstr ""
