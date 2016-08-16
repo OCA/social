@@ -1,0 +1,129 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_tracking_mass_mailing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-12 10:39+0000\n"
+"PO-Revision-Date: 2016-08-12 10:39+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mail.statistics,tracking_state:0
+msgid " * The 'Error' status indicates that there was an error when trying to sent the email, for example, 'No valid recipient'\n"
+" * The 'Sent' status indicates that message was succesfully sent via outgoing email server (SMTP).\n"
+" * The 'Delivered' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
+" * The 'Open' status indicates that message was opened or clicked by recipient.\n"
+" * The 'Rejected' status indicates that recipient email address is blacklisted by outgoing email server (SMTP). It is recomended to delete this email address.\n"
+" * The 'Spam' status indicates that outgoing email server (SMTP) consider this message as spam.\n"
+" * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
+" * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
+" * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
+""
+msgstr " * 'Error' indica que ha habido un error al intentar el envío del email, por ejemplo, 'Email de destino no válido'\n"
+" * 'Enviado' indica que el email se ha envíado correctamente al servidor de correo saliente (SMTP)\n"
+" * 'Entregado' indica que el email se ha entregado al servidor de correo del destinatario (MX)\n"
+" * 'Abierto' indica que el destinatario ha abierto o clicado en el email\n"
+" * 'Rechazado' indica que la dirección del destinatario esta en una lista negra en el servidor de correo saliente (SMTP)\n"
+" * 'Spam' indica que el servidor de correo saliente (SMTP) considera el email como spam\n"
+" * 'Desuscrito' indica que el destinatarios ha solicitado desuscribirse desde este email\n"
+" * 'Rebotado' indica que el email no ha sido aceptado por el servidor de correo del destinatario (MX)\n"
+" * 'Rebotado leve' indica que el email no ha sido aceptado por motivos temporales por el servidor de correo del destinatario (MX)\n"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing,avoid_resend:0
+msgid "Avoid resend"
+msgstr "Evitar reenvios"
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mass_mailing,avoid_resend:0
+msgid "Avoid to send this mass mailing email twice to the same recipient"
+msgstr "Evitar que se envíe este correo masivo dos veces al mismo destinatario"
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+msgid "Country"
+msgstr "País"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
+msgid "Email Statistics"
+msgstr "Estadísticas del email"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing.contact,email_score:0
+msgid "Email score"
+msgstr "Reputación del email"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mail_id_int:0
+msgid "Mail ID"
+msgstr "Mail ID"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mail_stats_id:0
+msgid "Mail statistics"
+msgstr "Estadísticas del email"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mail.statistics,mail_tracking_id:0
+msgid "Mail tracking"
+msgstr "Seguimiento del email"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
+msgid "MailTracking email"
+msgstr "MailTracking email"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr "MailTracking event"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr "Envío masivo"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Contacto de envío masivo"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mass_mailing_id:0
+msgid "Mass mailing"
+msgstr "Envío masivo"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Correos salientes"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mail.statistics,tracking_state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing.contact,tracking_email_ids:0
+msgid "Tracking emails"
+msgstr "Emails de seguimiento"
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: field:mail.mail.statistics,tracking_event_ids:0
+msgid "Tracking events"
+msgstr "Eventos de seguimiento"
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+msgid "User agent"
+msgstr "Aplicación del usuario"
