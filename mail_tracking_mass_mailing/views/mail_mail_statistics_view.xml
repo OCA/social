@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="view_mail_mail_statistics_form">
+    <field name="name">Add tracking email info</field>
+    <field name="model">mail.mail.statistics</field>
+    <field name="inherit_id" ref="mass_mailing.view_mail_mail_statistics_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//form" position="inside">
+            <group>
+                <field name="mail_tracking_id" />
+            </group>
+            <label for="tracking_event_ids"/>
+            <div>
+                <field name="tracking_event_ids">
+                    <tree string="Tracking events" colors="grey:event_type in ('deferral');black:event_type in ('send');red:event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject');blue:event_type in ('unsub', 'click', 'open')">
+                        <field name="time"/>
+                        <field name="event_type"/>
+                        <field name="ip"/>
+                        <field name="url"/>
+                        <field name="user_country_id" string="Country"/>
+                        <field name="os_family" string="OS"/>
+                        <field name="ua_family" string="User agent"/>
+                    </tree>
+                </field>
+            </div>
+        </xpath>
+    </field>
+</record>
+
+</data>
+</openerp>
