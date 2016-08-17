@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-extend="mail.thread.message">
+        <t t-jquery="div[class=oe_msg_center] div[class=oe_msg_icons]" t-operation="append">
+            <span class='oe_mail_print'><a title="Print Email" class="oe_e">&lt;</a></span>
+        </t>
+    </t>
+</templates>

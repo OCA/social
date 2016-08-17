@@ -14,9 +14,14 @@
     'depends': [
         'report',
         'mail',
+        'web',
         ],
     'data': [
         'report.xml',
         'views/mail_message_report.xml',
+        'views/templates.xml',
         ],
+    'qweb': [
+        'static/src/xml/mail.xml',
+    ],
 }

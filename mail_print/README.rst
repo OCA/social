@@ -28,6 +28,7 @@ Contributors
 ------------
 
 * Rami Alwafaie <rami.alwafaie@initos.com>
+* Mathias Francke <mathias.francke@initos.com>
 
 Maintainer
 ----------
