@@ -11,6 +11,7 @@ Usage
 =====
 
 * go to Technical -> Email -> Messages -> select the Email -> Print
+* Emails can be also downloaded directly from The Messaging dashboard
 
 
 Bug Tracker
