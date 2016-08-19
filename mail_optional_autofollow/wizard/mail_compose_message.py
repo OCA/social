@@ -22,8 +22,9 @@ class MailComposeMessage(models.TransientModel):
         followers on the related object""")
 
     @api.multi
-    def send_mail(self):
+    def send_mail(self, auto_commit=False):
         for wizard in self:
             super(MailComposeMessage, wizard.with_context(
-                mail_post_autofollow=wizard.autofollow_recipients)).send_mail()
-        return {'type': 'ir.actions.act_window_close'}
+                mail_post_autofollow=wizard.autofollow_recipients)).send_mail(
+                    auto_commit=auto_commit)
+        return True
