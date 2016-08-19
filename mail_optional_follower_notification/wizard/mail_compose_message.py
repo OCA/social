@@ -11,9 +11,10 @@ class MailComposeMessage(models.TransientModel):
     notify_followers = fields.Boolean(default=True)
 
     @api.multi
-    def send_mail(self):
+    def send_mail(self, auto_commit=False):
         for wizard in self:
             wizard = wizard.with_context(
                 notify_followers=wizard.notify_followers)
-            super(MailComposeMessage, wizard).send_mail()
+            super(MailComposeMessage, wizard).send_mail(
+                auto_commit=auto_commit)
         return {'type': 'ir.actions.act_window_close'}
