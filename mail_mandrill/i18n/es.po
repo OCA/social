@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -16,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 00:45+0000\n"
-"PO-Revision-Date: 2016-07-25 11:00+0000\n"
+"POT-Creation-Date: 2016-08-17 02:42+0000\n"
+"PO-Revision-Date: 2016-08-16 07:16+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-social-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +79,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_uid:0
@@ -333,7 +334,7 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,state:0
 msgid "State"
-msgstr ""
+msgstr "Estado"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -387,7 +388,7 @@ msgstr ""
 #: field:mail.mandrill.event,user_agent:0
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "User agent"
-msgstr ""
+msgstr "Aplicación del usuario"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,ua_family:0

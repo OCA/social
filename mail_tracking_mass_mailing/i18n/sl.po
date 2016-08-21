@@ -1,0 +1,155 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_tracking_mass_mailing
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-17 02:42+0000\n"
+"PO-Revision-Date: 2016-08-17 02:42+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2016\n"
+"Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mail.statistics,tracking_state:0
+msgid ""
+" * The 'Error' status indicates that there was an error when trying to sent the email, for example, 'No valid recipient'\n"
+" * The 'Sent' status indicates that message was succesfully sent via outgoing email server (SMTP).\n"
+" * The 'Delivered' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
+" * The 'Open' status indicates that message was opened or clicked by recipient.\n"
+" * The 'Rejected' status indicates that recipient email address is blacklisted by outgoing email server (SMTP). It is recomended to delete this email address.\n"
+" * The 'Spam' status indicates that outgoing email server (SMTP) consider this message as spam.\n"
+" * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
+" * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
+" * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
+msgstr ""
+" * Stanje 'Napaka' pomeni, da je prišlo do napake pri pošiljanju e-pošte, npr. 'Ni veljavnih prejemnikov'\n"
+" * Stanje 'Poslano' pomeni, da je bilo sporočilo uspešno poslano preko izhodnega e-poštnega strežnika (SMTP).\n"
+" * Stanje 'Dostavljeno' pomeni, da je bilo sporočilo uspešno dostavljeno na prejemnikov Mail Exchange (MX) strežnik.\n"
+" * Stanje 'Odprto' pomeni, da je prejemnik sporočilo odprl ali kliknil.\n"
+" * Stanje 'Zavrnjeno' pomeni, da je prejemnikov e-poštni naslov na črni listi odhodnega e-poštnega strežnika (SMTP). Priporočeno je, da se ta e-poštni naslov izbriše.\n"
+" * Stanje 'Neželjeno' pomeni, da izhodni strežnik (SMTP) obravnava to sporočilo kot neželjeno pošto.\n"
+" * Stanje 'Izpisan' pomeni, da je prejemnik zahteval izpis iz seznama prejemnikov tega sporočila.\n"
+" * Stanje 'Odbito' pomeni, da je bilo sporočilo odbito s strani prejemnikovega Mail Exchange (MX) strežnika.\n"
+" * Stanje 'Mehko odbito' pomeni, da je bilo sporočilo 'mehko' odbito s strani prejemnikovega Mail Exchange (MX) strežnika.\n"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing,avoid_resend:0
+msgid "Avoid resend"
+msgstr "Izogibaj se ponovnemu pošiljanju"
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mass_mailing,avoid_resend:0
+msgid "Avoid to send this mass mailing email twice to the same recipient"
+msgstr "Izogibaj se dvakratnemu masovnemu pošiljanju istemu prejemniku."
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+msgid "Country"
+msgstr "Država"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mail,path:0
+msgid "Discussion Path"
+msgstr "Pot do razprave"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
+msgid "Email Statistics"
+msgstr "Statistika e-pošte"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing.contact,email_score:0
+msgid "Email score"
+msgstr "Točkovanje e-pošte"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mail_id_int:0
+msgid "Mail ID"
+msgstr "ID pošte"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mail_stats_id:0
+msgid "Mail statistics"
+msgstr "Poštna statistika"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mail.statistics,mail_tracking_id:0
+msgid "Mail tracking"
+msgstr "Sledenje pošte"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
+msgid "MailTracking email"
+msgstr "Sledenje e-pošte"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr "Dogodek sledenja e-pošte"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr "Masovno razpošiljanje"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Stik masovne pošte"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.tracking.email,mass_mailing_id:0
+msgid "Mass mailing"
+msgstr "Masovna pošta"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Izhodna pošta"
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mail.statistics,tracking_state:0
+msgid "State"
+msgstr "Stanje"
+
+#. module: mail_tracking_mass_mailing
+#: code:addons/mail_tracking_mass_mailing/models/mail_mass_mailing.py:28
+#, python-format
+msgid ""
+"There is no more recipients to send and 'Avoid resend' option is enabled"
+msgstr ""
+"Ni več potencialnih prejemnikov, pa tudi opcija 'Izogibaj se ponovnemu "
+"pošiljanju' je omogočena."
+
+#. module: mail_tracking_mass_mailing
+#: field:mail.mass_mailing.contact,tracking_email_ids:0
+msgid "Tracking emails"
+msgstr "Sledilna e-pošta"
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: field:mail.mail.statistics,tracking_event_ids:0
+msgid "Tracking events"
+msgstr "Sledilni dogodki"
+
+#. module: mail_tracking_mass_mailing
+#: help:mail.mail,path:0
+msgid ""
+"Used to display messages in a paragraph-based chatter using a unique path;"
+msgstr ""
+"Uporabljeno za prikaz sporočil v sklopu razgovora na osnovi odstavkov z "
+"uporabo unikatne poti;"
+
+#. module: mail_tracking_mass_mailing
+#: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+msgid "User agent"
+msgstr "Uporabnikov odjemalec"
