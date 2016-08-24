@@ -10,13 +10,13 @@
         <field name="model">mail.compose.message</field>
         <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
         <field name="arch" type="xml">
-            <button name="save_as_template">
+            <button name="send_mail_action" position="after">
                 <field name="partner_count" attrs="{'invisible': True}"/>
                 <button icon="fa-file-pdf-o"
                         type="object"
                         name="download_pdf"
-                        string="Print PDF"
-                        class="pull-right btn-default"
+                        string="Download Letter"
+                        class="btn-default"
                         help="Save as a PDF file"
                         attrs="{'invisible': [('partner_count', '!=', 1)]}"/>
             </button>
