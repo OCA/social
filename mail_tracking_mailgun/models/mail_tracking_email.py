@@ -4,7 +4,6 @@
 
 import hashlib
 import hmac
-import threading
 from datetime import datetime
 from openerp import models, api, fields
 
@@ -19,16 +18,18 @@ class MailTrackingEmail(models.Model):
         country = False
         if country_code:
             country = self.env['res.country'].search([
-                ('code', '=ilike', country_code),
+                ('code', '=', country_code.capitalize()),
             ])
         if country:
             return country.id
         return False
 
+    @property
     def _mailgun_mandatory_fields(self):
         return ('event', 'timestamp', 'token', 'signature',
                 'tracking_email_id', 'odoo_db')
 
+    @property
     def _mailgun_event_type_mapping(self):
         return {
             # Mailgun event type: tracking event type
@@ -41,13 +42,14 @@ class MailTrackingEmail(models.Model):
             'dropped': 'reject',
         }
 
+    @property
     def _mailgun_supported_event_types(self):
-        return self._mailgun_event_type_mapping().keys()
+        return self._mailgun_event_type_mapping.keys()
 
     def _mailgun_event_type_verify(self, event):
         event = event or {}
         mailgun_event_type = event.get('event')
-        if mailgun_event_type not in self._mailgun_supported_event_types():
+        if mailgun_event_type not in self._mailgun_supported_event_types:
             _logger.info("Mailgun: event type '%s' not supported",
                          mailgun_event_type)
             return False
@@ -76,8 +78,8 @@ class MailTrackingEmail(models.Model):
             signature = event.get('signature')
             event_digest = self._mailgun_signature(api_key, timestamp, token)
             if signature != event_digest:
-                _logger.info("Mailgun: Invalid signature '%s' != '%s'",
-                             signature, event_digest)
+                _logger.error("Mailgun: Invalid signature '%s' != '%s'",
+                              signature, event_digest)
                 return False
         # OK, signature is valid
         return True
@@ -85,7 +87,7 @@ class MailTrackingEmail(models.Model):
     def _db_verify(self, event):
         event = event or {}
         odoo_db = event.get('odoo_db')
-        current_db = getattr(threading.currentThread(), 'dbname', None)
+        current_db = self.env.cr.dbname
         if odoo_db != current_db:
             _logger.info("Mailgun: Database '%s' is not the current database",
                          odoo_db)
@@ -152,12 +154,12 @@ class MailTrackingEmail(models.Model):
         tracking = False
         tracking_email_id = event.get('tracking_email_id', False)
         if tracking_email_id and tracking_email_id.isdigit():
-            tracking = self.search([('id', '=', tracking_email_id)])
+            tracking = self.search([('id', '=', tracking_email_id)], limit=1)
         return tracking
 
     def _event_is_from_mailgun(self, event):
         event = event or {}
-        return all([k in event for k in self._mailgun_mandatory_fields()])
+        return all([k in event for k in self._mailgun_mandatory_fields])
 
     @api.model
     def event_process(self, request, post, metadata, event_type=None):
@@ -174,7 +176,7 @@ class MailTrackingEmail(models.Model):
                 res = 'OK'
         if res == 'OK':
             mailgun_event_type = post.get('event')
-            mapped_event_type = self._mailgun_event_type_mapping().get(
+            mapped_event_type = self._mailgun_event_type_mapping.get(
                 mailgun_event_type) or event_type
             if not mapped_event_type:  # pragma: no cover
                 res = 'ERROR: Bad event'

@@ -2,7 +2,6 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import threading
 from openerp.tests.common import TransactionCase
 
 
@@ -28,8 +27,8 @@ class TestMailgun(TransactionCase):
         self.api_key = u'key-12345678901234567890123456789012'
         self.token = u'f1349299097a51b9a7d886fcb5c2735b426ba200ada6e9e149'
         self.timestamp = u'1471021089'
-        self.signature = u'%s' % self.env['mail.tracking.email'].\
-            _mailgun_signature(self.api_key, self.timestamp, self.token)
+        self.signature = ('4fb6d4dbbe10ce5d620265dcd7a3c0b8'
+                          'ca0dede1433103891bc1ae4086e9d5b2')
         self.env['ir.config_parameter'].set_param(
             'mailgun.apikey', self.api_key)
         self.event = {
@@ -42,7 +41,7 @@ class TestMailgun(TransactionCase):
             'domain': u'example.com',
             'message-headers': u'[]',
             'recipient': self.recipient,
-            'odoo_db': getattr(threading.currentThread(), 'dbname', None),
+            'odoo_db': self.env.cr.dbname,
             'tracking_email_id': u'%s' % self.tracking_email.id
         }
         self.metadata = {
@@ -91,9 +90,9 @@ class TestMailgun(TransactionCase):
         self.assertEqual('ERROR: Invalid DB', response)
 
     def test_bad_ts(self):
-        timestamp = u'7a',  # Now time will be used instead
-        signature = u'%s' % self.env['mail.tracking.email'].\
-            _mailgun_signature(self.api_key, timestamp, self.token)
+        timestamp = u'7a'  # Now time will be used instead
+        signature = ('06cc05680f6e8110e59b41152b2d1c0f'
+                     '1045d755ef2880ff922344325c89a6d4')
         self.event.update({
             'event': u'delivered',
             'timestamp': timestamp,

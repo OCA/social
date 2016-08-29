@@ -8,10 +8,10 @@ Mail tracking for Mailgun
 
 This module integrates mail_tracking events with Mailgun webhooks.
 
-Mailgun (https://www.mailgun.com/) is a service that provides an e-mail 
-sending infrastructure through an SMTP server or via API. You can also 
-query that API for seeing statistics of your sent e-mails, or provide 
-hooks that processes the status changes in real time, which is the 
+Mailgun (https://www.mailgun.com/) is a service that provides an e-mail
+sending infrastructure through an SMTP server or via API. You can also
+query that API for seeing statistics of your sent e-mails, or provide
+hooks that processes the status changes in real time, which is the
 function used here.
 
 Configuration
@@ -20,14 +20,14 @@ Configuration
 You must configure Mailgun webhooks in order to receive mail events:
 
 1. Got a Mailgun account and validate your sending domain.
-2. Go to Webhook tab and configure this URL for each event you want to track:
+2. Go to Webhook tab and configure the below URL for each event:
 
 .. code:: html
 
    https://<your_domain>/mail/tracking/all/<your_database>
 
-Replace '<your_domain>' by your Odoo install domain name
-and '<your_database>' by your database name.
+Replace '<your_domain>' with your Odoo install domain name
+and '<your_database>' with your database name.
 
 In order to validate Mailgun webhooks you have to save Mailgun api_key in
 a system parameter named 'mailgun.apikey'. You can find Mailgun api_key in your
