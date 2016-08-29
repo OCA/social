@@ -18,7 +18,7 @@ class MailTrackingEmail(models.Model):
         country = False
         if country_code:
             country = self.env['res.country'].search([
-                ('code', '=', country_code.capitalize()),
+                ('code', '=', country_code.upper()),
             ])
         if country:
             return country.id

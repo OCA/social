@@ -154,6 +154,7 @@ class TestMailgun(TransactionCase):
         self.assertEqual(event.ua_family, ua_family)
         self.assertEqual(event.ua_type, ua_type)
         self.assertEqual(event.mobile, False)
+        self.assertEqual(event.user_country_id.code, 'US')
 
     # https://documentation.mailgun.com/user_manual.html#tracking-clicks
     def test_event_clicked(self):
