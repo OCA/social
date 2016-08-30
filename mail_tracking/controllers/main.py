@@ -17,7 +17,7 @@ def _env_get(db):
         reg = registry(db)
     except OperationalError:
         _logger.warning("Selected BD '%s' not found", db)
-    except:
+    except:  # pragma: no cover
         _logger.warning("Selected BD '%s' connection error", db)
     if reg:
         return api.Environment(reg.cursor(), SUPERUSER_ID, {})
@@ -29,10 +29,10 @@ class MailTrackingController(http.Controller):
     def _request_metadata(self):
         request = http.request.httprequest
         return {
-            'ip': request.remote_addr,
-            'user_agent': request.user_agent,
-            'os_family': request.user_agent.platform,
-            'ua_family': request.user_agent.browser,
+            'ip': request.remote_addr or False,
+            'user_agent': request.user_agent or False,
+            'os_family': request.user_agent.platform or False,
+            'ua_family': request.user_agent.browser or False,
         }
 
     @http.route('/mail/tracking/all/<string:db>',
