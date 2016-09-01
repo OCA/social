@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="mail_message">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="report.internal_layout">
+                        <div class="page">
+                            <style>
+                                .space {padding-right: 0.3em;}
+                            </style>
+                            <table class="table-condensed">
+                                <tr>
+                                    <th>From:</th>
+                                    <td><u><span t-field="o.email_from"/></u></td>
+                                </tr>
+                                <tr>
+                                    <th>To:</th>
+                                    <td t-foreach="o.partner_ids" t-as="p"><span t-field="p.name"/> <t t-if="p.email"> <u><span t-field="p.email"></span></u></t></td>
+                                </tr>
+                                <tr>
+                                    <th>Subject:</th>
+                                    <td><span t-field="o.subject"/></td>
+                                </tr>
+                                <tr>
+                                    <th><span>Date:</span></th>
+                                    <td><span t-field="o.date"/></td>
+                                </tr>
+                            </table>
+                            <div style ="height: 1cm"> </div>
+                            <table class="table-condensed">
+                                <tr>
+                                    <td><span t-field="o.body"/></td>
+                                </tr>
+                            </table>
+                            <t t-if="o.attachment_ids" >
+                                <div style ="height: 2cm"> </div>
+                                <table class="table table-condensed">
+                                    <tr>
+                                        <th>Attachments</th>
+                                    </tr>
+                                    <tr t-foreach="o.attachment_ids" t-as="l">
+                                        <td><span t-field="l.name"/></td>
+                                        <td><span class="space" t-field="l.file_size"></span><span>Bytes</span></td>
+                                    </tr>
+                                </table>
+                            </t>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</openerp>

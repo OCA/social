@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+ <openerp>
+     <data>
+         <template id="assets_backend" name="mail_print assets" inherit_id="web.assets_backend">
+             <xpath expr="." position="inside">
+                 <script type="text/javascript" src="/mail_print/static/src/js/mail.js"></script>
+                 <link rel="stylesheet" href="/mail_print/static/src/css/mail.css"/>
+             </xpath>
+         </template>
+     </data>
+</openerp>

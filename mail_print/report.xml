@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <report
+                id="mail_message_pdf"
+                model="mail.message"
+                string="Email"
+                report_type="qweb-pdf"
+                name="mail_print.mail_message"
+                file="mail_print.mail_message"
+        />
+
+    </data>
+</openerp>
