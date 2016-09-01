@@ -12,13 +12,12 @@ class MailMassMailingContact(models.Model):
         string="Tracking emails", comodel_name="mail.tracking.email",
         readonly=True)
     email_score = fields.Float(
-        string="Email score",
-        compute="_compute_email_score", store=True, readonly=True)
+        string="Email score", readonly=True, default=50.0)
 
-    @api.one
-    @api.depends('tracking_email_ids', 'tracking_email_ids.state')
-    def _compute_email_score(self):
-        self.email_score = self.tracking_email_ids.email_score()
+    @api.multi
+    def email_score_calculate(self):
+        for contact in self:
+            contact.email_score = contact.tracking_email_ids.email_score()
 
     @api.multi
     def write(self, vals):

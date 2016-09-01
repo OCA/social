@@ -5,7 +5,7 @@
 {
     "name": "Mail tracking for mass mailing",
     "summary": "Improve mass mailing email tracking",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.0.1",
     "category": "Social Network",
     "website": "http://www.tecnativa.com",
     "author": "Tecnativa, "
@@ -24,5 +24,5 @@
         "views/mail_mass_mailing_view.xml",
         "views/mail_mass_mailing_contact_view.xml",
     ],
-    "post_init_hook": "post_init_hook",
+    "pre_init_hook": "pre_init_hook",
 }

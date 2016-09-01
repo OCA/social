@@ -15,13 +15,12 @@ class ResPartner(models.Model):
         string="Tracking emails count", store=True, readonly=True,
         compute="_compute_tracking_emails_count")
     email_score = fields.Float(
-        string="Email score",
-        compute="_compute_email_score", store=True, readonly=True)
+        string="Email score", readonly=True, default=50.0)
 
-    @api.one
-    @api.depends('tracking_email_ids.state')
-    def _compute_email_score(self):
-        self.email_score = self.tracking_email_ids.email_score()
+    @api.multi
+    def email_score_calculate(self):
+        for partner in self:
+            partner.email_score = partner.tracking_email_ids.email_score()
 
     @api.one
     @api.depends('tracking_email_ids')
