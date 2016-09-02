@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+    <record model="ir.ui.view" id="mail_compose_message_form_view">
+        <field name="name">mail.compose.message.form (in mail_as_letter)</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+        <field name="arch" type="xml">
+            <button name="send_mail_action" position="after">
+                <field name="partner_count" attrs="{'invisible': True}"/>
+                <button icon="fa-file-pdf-o"
+                        type="object"
+                        name="download_pdf"
+                        string="Download Letter"
+                        class="btn-default"
+                        help="Save as a PDF file"
+                        attrs="{'invisible': [('partner_count', '!=', 1)]}"/>
+            </button>
+        </field>
+    </record>
+
+</data>
+</openerp>

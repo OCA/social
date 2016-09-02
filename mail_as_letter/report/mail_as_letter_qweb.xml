@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+  <data>
+
+    <record id="qweb_mail_pdf_export" model="ir.actions.report.xml">
+      <field name="name">mail_as_letter</field>
+      <field name="model">mail.compose.message</field>
+      <field name="type">ir.actions.report.xml</field>
+      <field name="report_name">mail_as_letter.report_mail_print</field>
+      <field name="report_type">qweb-pdf</field>
+      <field name="paperformat_id" eval="ref('report.paperformat_euro')"/>
+      <field name="auto" eval="False"/>
+    </record>
+    
+    <template id="mail_print">
+      <t t-call="report.external_layout">
+        <div class="page">
+          <div class="oe_structure"/>
+            <t t-foreach="o.partner_ids" t-as="p">
+              <div class="col-xs-5 col-xs-offset-7">
+                <address t-field="o.partner_ids"
+                         t-field-options='{"widget": "contact", 
+                                           "fields": ["address", "name"],
+                                           "no_marker": true}' />
+              </div>
+            </t>
+            <br/>
+            <p>
+              <b>Subject : <span t-field="o.subject" /></b>
+            </p>
+            <br/>
+            <p>
+              <span class="email_preview" t-raw="o.body" />
+            </p>
+        </div>
+      </t>
+    </template>
+    
+    <template id="report_mail_print">
+      <t t-call="report.html_container">
+        <t t-foreach="docs" t-as="o">
+          <t t-call="mail_as_letter.mail_print"/>
+        </t>
+      </t>
+    </template>
+
+  </data>
+</openerp>
