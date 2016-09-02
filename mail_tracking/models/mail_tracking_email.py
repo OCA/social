@@ -13,8 +13,8 @@ import openerp.addons.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 
-EVENT_OPEN_DELTA = 10
-EVENT_CLICK_DELTA = 5
+EVENT_OPEN_DELTA = 10  # seconds
+EVENT_CLICK_DELTA = 5  # seconds
 
 
 class MailTrackingEmail(models.Model):
@@ -293,7 +293,7 @@ class MailTrackingEmail(models.Model):
                 if partners:
                     partners.email_score_calculate()
             else:
-                _logger.info("Concurrent event '%s' discarded", event_type)
+                _logger.debug("Concurrent event '%s' discarded", event_type)
         return event_ids
 
     @api.model
