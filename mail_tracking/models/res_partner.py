@@ -19,6 +19,12 @@ class ResPartner(models.Model):
 
     @api.multi
     def email_score_calculate(self):
+        # This is not a compute method because is causing a inter-block
+        # in mail_tracking_email PostgreSQL table
+        # We suspect that tracking_email write to state field block that
+        # table and then inside write ORM try to read from DB
+        # tracking_email_ids because it's not in cache.
+        # PostgreSQL blocks read because we have not committed yet the write
         for partner in self:
             partner.email_score = partner.tracking_email_ids.email_score()
 
