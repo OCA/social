@@ -72,7 +72,6 @@ class TestMassMailing(TransactionCase):
             }
             tracking_email.event_create('open', metadata)
             self.assertTrue(stat.opened)
-            self.assertEqual(stat.tracking_state, 'opened')
 
     def _tracking_email_bounce(self, event_type, state):
         self.mailing.send_mail()
@@ -89,7 +88,6 @@ class TestMassMailing(TransactionCase):
             }
             tracking_email.event_create(event_type, metadata)
             self.assertTrue(stat.bounced)
-            self.assertEqual(stat.tracking_state, state)
 
     def test_tracking_email_hard_bounce(self):
             self._tracking_email_bounce('hard_bounce', 'bounced')
