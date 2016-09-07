@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data noupdate="1">
+
+<record id="sending_batch_size" model="ir.config_parameter" forcecreate="True">
+    <field name="key">mail.mass_mailing.sending.batch_size</field>
+    <field name="value">500</field>
+    <field name="group_ids" eval="[(6, False, [ref('base.group_system')])]" />
+</record>
+
+</data>
+</openerp>

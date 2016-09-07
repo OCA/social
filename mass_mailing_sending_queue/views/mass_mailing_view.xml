@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+<record model="ir.ui.view" id="view_mail_mass_mailing_form">
+    <field name="name">Add pending emails to be sent</field>
+    <field name="model">mail.mass_mailing</field>
+    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+    <field name="arch" type="xml">
+        <xpath expr="//button[@name='send_mail'][1]" position="attributes">
+            <attribute name="attrs">{'invisible': ['|', ('state', 'in', ('done', 'sending')), ('body_html', '=', False)]}</attribute>
+            <attribute name="context">{'sending_queue_enabled': True}</attribute>
+        </xpath>
+        <xpath expr="//button[@name='send_mail'][2]" position="attributes">
+            <attribute name="attrs">{'invisible': ['|', ('state', 'not in', ('done', )), ('body_html', '=', False)]}</attribute>
+            <attribute name="context">{'sending_queue_enabled': True}</attribute>
+        </xpath>
+        <xpath expr="div[@class='oe_form_box_info oe_text_center']" position="attributes">
+            <attribute name="attrs">{'invisible': [('pending_count', '=', 0)]}</attribute>
+        </xpath>
+        <field name="scheduled" position="attributes">
+            <attribute name="invisible">1</attribute>
+        </field>
+        <field name="scheduled" position="after">
+            <field name="pending_count" class="oe_inline"/>
+        </field>
+        <notebook position="inside">
+            <page string="Sending tasks">
+                <field name="mass_mailing_sending_ids" nolabel="1">
+                    <tree string="Sending tasks">
+                        <field name="date_start"/>
+                        <field name="state"/>
+                        <field name="pending_count"/>
+                        <field name="sending_count"/>
+                        <field name="sent_count"/>
+                        <field name="failed_count"/>
+                    </tree>
+                </field>
+            </page>
+        </notebook>
+    </field>
+</record>
+
+</data>
+</openerp>
