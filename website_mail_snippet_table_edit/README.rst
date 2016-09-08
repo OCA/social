@@ -36,8 +36,9 @@ To use this module, you need to:
 Known issues / Roadmap
 ======================
 
-* You cannot drag & drop table rows among tables, and that's because of the
-  inner design of Odoo's drag & drop engine, that does not allow that easily.
+* You cannot drag & drop table rows among tables, unless you install
+  `website_less <https://www.odoo.com/apps/modules/8.0/website_less/>`_.
+* New mail editor engine in Odoo 9.0+ makes this module unnecessary there.
 
 Bug Tracker
 ===========
