@@ -13,6 +13,9 @@ import openerp.addons.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 
+EVENT_OPEN_DELTA = 10  # seconds
+EVENT_CLICK_DELTA = 5  # seconds
+
 
 class MailTrackingEmail(models.Model):
     _name = "mail.tracking.email"
@@ -104,7 +107,7 @@ class MailTrackingEmail(models.Model):
                     obj.write({
                         tracking_field: [(5, False, False)]
                     })
-        return True
+        return objects
 
     @api.model
     def _tracking_ids_to_write(self, email):
@@ -256,13 +259,41 @@ class MailTrackingEmail(models.Model):
             _logger.info('Unknown event type: %s' % event_type)
         return False
 
+    def _concurrent_events(self, event_type, metadata):
+        m_event = self.env['mail.tracking.event']
+        self.ensure_one()
+        concurrent_event_ids = False
+        if event_type in {'open', 'click'}:
+            ts = metadata.get('timestamp', time.time())
+            delta = EVENT_OPEN_DELTA if event_type == 'open' \
+                else EVENT_CLICK_DELTA
+            domain = [
+                ('timestamp', '>=', ts - delta),
+                ('timestamp', '<=', ts + delta),
+                ('tracking_email_id', '=', self.id),
+                ('event_type', '=', event_type),
+            ]
+            if event_type == 'click':
+                domain.append(('url', '=', metadata.get('url', False)))
+            concurrent_event_ids = m_event.search(domain)
+        return concurrent_event_ids
+
     @api.multi
     def event_create(self, event_type, metadata):
         event_ids = self.env['mail.tracking.event']
         for tracking_email in self:
-            vals = tracking_email._event_prepare(event_type, metadata)
-            if vals:
-                event_ids += event_ids.sudo().create(vals)
+            other_ids = tracking_email._concurrent_events(event_type, metadata)
+            if not other_ids:
+                vals = tracking_email._event_prepare(event_type, metadata)
+                if vals:
+                    event_ids += event_ids.sudo().create(vals)
+                partners = self.tracking_ids_recalculate(
+                    'res.partner', 'email', 'tracking_email_ids',
+                    tracking_email.recipient_address)
+                if partners:
+                    partners.email_score_calculate()
+            else:
+                _logger.debug("Concurrent event '%s' discarded", event_type)
         return event_ids
 
     @api.model
