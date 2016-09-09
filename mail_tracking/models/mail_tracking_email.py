@@ -167,7 +167,7 @@ class MailTrackingEmail(models.Model):
     @api.depends('name', 'recipient')
     def _compute_display_name(self):
         for email in self:
-            parts = [email.name]
+            parts = [email.name or '']
             if email.recipient:
                 parts.append(email.recipient)
             email.display_name = ' - '.join(parts)
@@ -225,13 +225,14 @@ class MailTrackingEmail(models.Model):
 
     def _message_partners_check(self, message, message_id):
         mail_message = self.mail_message_id
-        partners = mail_message.notified_partner_ids | mail_message.partner_ids
+        partners = (
+            mail_message.needaction_partner_ids | mail_message.partner_ids)
         if (self.partner_id and self.partner_id not in partners):
             # If mail_message haven't tracking partner, then
-            # add it in order to see his trackking status in chatter
+            # add it in order to see his tracking status in chatter
             if mail_message.subtype_id:
                 mail_message.sudo().write({
-                    'notified_partner_ids': [(4, self.partner_id.id)],
+                    'needaction_partner_ids': [(4, self.partner_id.id)],
                 })
             else:
                 mail_message.sudo().write({
