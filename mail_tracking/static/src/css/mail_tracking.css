@@ -11,3 +11,11 @@
 .mail_tracking span.mail_tracking_opened {
     color: #a34a8b;
 }
+
+.o_mail_thread .o_thread_message .o_thread_message_core .o_mail_info {
+    margin: 0;
+}
+
+.o_mail_thread .o_thread_message .o_thread_message_core .o_mail_tracking {
+    margin: 0 0 2px 0;
+}
