@@ -65,19 +65,20 @@ class TestMailTracking(TransactionCase):
         self.assertTrue(tracking_email)
         self.assertEqual(tracking_email.state, 'sent')
         # message_dict read by web interface
-        message_dict = self.env['mail.message'].message_read(message.id)
-        # First item is message content
-        self.assertTrue(len(message_dict) > 0)
-        message_dict = message_dict[0]
+        message_dict = message.message_read()
+        # First item in threads is message content
+        message_dict = message_dict['threads'][0][0]
         self.assertTrue(len(message_dict['partner_ids']) > 0)
         # First partner is recipient
         partner_id = message_dict['partner_ids'][0][0]
         self.assertEqual(partner_id, self.recipient.id)
-        status = message_dict['partner_trackings'][str(partner_id)]
+        status = message_dict['partner_trackings'][0]
         # Tracking status must be sent and
         # mail tracking must be the one search before
         self.assertEqual(status[0], 'sent')
         self.assertEqual(status[1], tracking_email.id)
+        self.assertEqual(status[2], self.recipient.display_name)
+        self.assertEqual(status[3], self.recipient.id)
         # And now open the email
         metadata = {
             'ip': '127.0.0.1',
@@ -88,11 +89,11 @@ class TestMailTracking(TransactionCase):
         tracking_email.event_create('open', metadata)
         self.assertEqual(tracking_email.state, 'opened')
 
-    def mail_send(self):
+    def mail_send(self, recipient):
         mail = self.env['mail.mail'].create({
             'subject': 'Test subject',
             'email_from': 'from@domain.com',
-            'email_to': 'to@domain.com',
+            'email_to': recipient,
             'body_html': '<p>This is a test message</p>',
         })
         mail.send()
@@ -106,7 +107,7 @@ class TestMailTracking(TransactionCase):
         controller = MailTrackingController()
         db = self.env.cr.dbname
         image = base64.decodestring(BLANK)
-        mail, tracking = self.mail_send()
+        mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
         with mock.patch(mock_request) as mock_func:
@@ -115,7 +116,7 @@ class TestMailTracking(TransactionCase):
             self.assertEqual(image, res.response[0])
 
     def test_concurrent_open(self):
-        mail, tracking = self.mail_send()
+        mail, tracking = self.mail_send(self.recipient.email)
         ts = time.time()
         metadata = {
             'ip': '127.0.0.1',
@@ -146,7 +147,7 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(len(opens), 2)
 
     def test_concurrent_click(self):
-        mail, tracking = self.mail_send()
+        mail, tracking = self.mail_send(self.recipient.email)
         ts = time.time()
         metadata = {
             'ip': '127.0.0.1',
@@ -188,10 +189,65 @@ class TestMailTracking(TransactionCase):
     def test_smtp_error(self):
         with mock.patch(mock_send_email) as mock_func:
             mock_func.side_effect = Warning('Test error')
-            mail, tracking = self.mail_send()
+            mail, tracking = self.mail_send(self.recipient.email)
             self.assertEqual('error', tracking.state)
             self.assertEqual('Warning', tracking.error_type)
             self.assertEqual('Test error', tracking.error_description)
+
+    def test_partner_email_change(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('open', {})
+        orig_score = self.recipient.email_score
+        orig_email = self.recipient.email
+        self.recipient.email = orig_email + '2'
+        self.assertEqual(50.0, self.recipient.email_score)
+        self.recipient.email = orig_email
+        self.assertEqual(orig_score, self.recipient.email_score)
+
+    def test_process_hard_bounce(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('hard_bounce', {})
+        self.assertEqual('bounced', tracking.state)
+
+    def test_process_soft_bounce(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('soft_bounce', {})
+        self.assertEqual('soft-bounced', tracking.state)
+
+    def test_process_delivered(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('delivered', {})
+        self.assertEqual('delivered', tracking.state)
+
+    def test_process_deferral(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('deferral', {})
+        self.assertEqual('deferred', tracking.state)
+
+    def test_process_spam(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('spam', {})
+        self.assertEqual('spam', tracking.state)
+
+    def test_process_unsub(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('unsub', {})
+        self.assertEqual('unsub', tracking.state)
+
+    def test_process_reject(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('reject', {})
+        self.assertEqual('rejected', tracking.state)
+
+    def test_process_open(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('open', {})
+        self.assertEqual('opened', tracking.state)
+
+    def test_process_click(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.event_create('click', {})
+        self.assertEqual('opened', tracking.state)
 
     def test_db(self):
         db = self.env.cr.dbname

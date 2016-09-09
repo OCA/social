@@ -36,7 +36,7 @@ class MailTrackingController(http.Controller):
         }
 
     @http.route('/mail/tracking/all/<string:db>',
-                type='http', auth='none')
+                type='http', auth='none', csrf=False)
     def mail_tracking_all(self, db, **kw):
         env = _env_get(db)
         if not env:
@@ -49,7 +49,7 @@ class MailTrackingController(http.Controller):
         return response
 
     @http.route('/mail/tracking/event/<string:db>/<string:event_type>',
-                type='http', auth='none')
+                type='http', auth='none', csrf=False)
     def mail_tracking_event(self, db, event_type, **kw):
         env = _env_get(db)
         if not env:
