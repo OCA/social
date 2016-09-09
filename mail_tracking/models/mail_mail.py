@@ -12,8 +12,7 @@ from openerp import models, api, fields
 class MailMail(models.Model):
     _inherit = 'mail.mail'
 
-    @api.model
-    def _tracking_email_prepare(self, mail, partner, email):
+    def _tracking_email_prepare(self, partner, email):
         ts = time.time()
         dt = datetime.utcfromtimestamp(ts)
         email_to_list = email.get('email_to', [])
@@ -22,22 +21,16 @@ class MailMail(models.Model):
             'name': email.get('subject', False),
             'timestamp': '%.6f' % ts,
             'time': fields.Datetime.to_string(dt),
-            'mail_id': mail.id if mail else False,
-            'mail_message_id': mail.mail_message_id.id if mail else False,
+            'mail_id': self.id,
+            'mail_message_id': self.mail_message_id.id,
             'partner_id': partner.id if partner else False,
             'recipient': email_to,
-            'sender': mail.email_from,
+            'sender': self.email_from,
         }
 
-    @api.model
-    def send_get_email_dict(self, mail, partner=None):
-        email = super(MailMail, self).send_get_email_dict(
-            mail, partner=partner)
-        m_tracking = self.env['mail.tracking.email']
-        tracking_email = False
-        if mail:
-            vals = self._tracking_email_prepare(mail, partner, email)
-            tracking_email = m_tracking.sudo().create(vals)
-        if tracking_email:
-            email = tracking_email.tracking_img_add(email)
-        return email
+    @api.multi
+    def send_get_email_dict(self, partner=None):
+        email = super(MailMail, self).send_get_email_dict(partner=partner)
+        vals = self._tracking_email_prepare(partner, email)
+        tracking_email = self.env['mail.tracking.email'].sudo().create(vals)
+        return tracking_email.tracking_img_add(email)
