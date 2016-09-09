@@ -3,26 +3,18 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-from openerp import api, SUPERUSER_ID
+try:
+    from openerp.addons.mail_tracking.hooks import column_add_with_value
+except ImportError:
+    column_add_with_value = False
 
 _logger = logging.getLogger(__name__)
 
 
-def post_init_hook(cr, registry):
-    with api.Environment.manage():
-        env = api.Environment(cr, SUPERUSER_ID, {})
-        # Recalculate all mass_mailing contacts tracking_email_ids
-        contacts = env['mail.mass_mailing.contact'].search([
-            ('email', '!=', False),
-        ])
-        emails = contacts.mapped('email')
-        _logger.info(
-            "Recalculating 'tracking_email_ids' in "
-            "'mail.mass_mailing.contact' model for %d email addresses",
-            len(emails))
-        for n, email in enumerate(emails):
-            env['mail.tracking.email'].tracking_ids_recalculate(
-                'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
-                email)
-            if n % 500 == 0:  # pragma: no cover
-                _logger.info("   Recalculated %d of %d", n, len(emails))
+def pre_init_hook(cr):
+    if column_add_with_value:
+        _logger.info("Creating mail.mass_mailing.contact.email_score column "
+                     "with value 50.0")
+        column_add_with_value(
+            cr, 'mail_mass_mailing_contact', 'email_score', 'double precision',
+            50.0)

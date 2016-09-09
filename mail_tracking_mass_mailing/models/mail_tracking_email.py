@@ -39,3 +39,14 @@ class MailTrackingEmail(models.Model):
             'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
             tracking.recipient_address, new_tracking=tracking)
         return tracking
+
+    @api.multi
+    def event_create(self, event_type, metadata):
+        res = super(MailTrackingEmail, self).event_create(event_type, metadata)
+        for tracking_email in self:
+            contacts = self.tracking_ids_recalculate(
+                'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
+                tracking_email.recipient_address)
+            if contacts:
+                contacts.email_score_calculate()
+        return res

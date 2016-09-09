@@ -14,5 +14,3 @@ class MailMailStatistics(models.Model):
     tracking_event_ids = fields.One2many(
         string="Tracking events", comodel_name='mail.tracking.event',
         related='mail_tracking_id.tracking_event_ids', readonly=True)
-    tracking_state = fields.Selection(
-        string="State", related='mail_tracking_id.state', store=True)

@@ -72,7 +72,34 @@ class TestMassMailing(TransactionCase):
             }
             tracking_email.event_create('open', metadata)
             self.assertTrue(stat.opened)
-            self.assertEqual(stat.tracking_state, 'opened')
+
+    def _tracking_email_bounce(self, event_type, state):
+        self.mailing.send_mail()
+        for stat in self.mailing.statistics_ids:
+            if stat.mail_mail_id:
+                stat.mail_mail_id.send()
+            tracking_email = self.env['mail.tracking.email'].search([
+                ('mail_id_int', '=', stat.mail_mail_id_int),
+            ])
+            # And now mark the email as bounce
+            metadata = {
+                'bounce_type': '499',
+                'bounce_description': 'Unable to connect to MX servers',
+            }
+            tracking_email.event_create(event_type, metadata)
+            self.assertTrue(stat.bounced)
+
+    def test_tracking_email_hard_bounce(self):
+            self._tracking_email_bounce('hard_bounce', 'bounced')
+
+    def test_tracking_email_soft_bounce(self):
+            self._tracking_email_bounce('soft_bounce', 'soft-bounced')
+
+    def test_tracking_email_reject(self):
+            self._tracking_email_bounce('reject', 'rejected')
+
+    def test_tracking_email_spam(self):
+            self._tracking_email_bounce('spam', 'spam')
 
     def test_contact_tracking_emails(self):
         self.mailing.send_mail()
