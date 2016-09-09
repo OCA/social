@@ -126,6 +126,13 @@ class MailTrackingEmail(models.Model):
         # Consider only last 10 tracking emails
         return self.sorted(key=lambda r: r.time, reverse=True)[:10]
 
+    @api.model
+    def email_score_from_email(self, email):
+        trackings = self.env['mail.tracking.email'].search([
+            ('recipient_address', '=ilike', email)
+        ])
+        return trackings.email_score()
+
     @api.multi
     def email_score(self):
         """Default email score algorimth"""
