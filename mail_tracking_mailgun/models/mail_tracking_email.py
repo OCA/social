@@ -42,16 +42,12 @@ class MailTrackingEmail(models.Model):
             'dropped': 'reject',
         }
 
-    @property
-    def _mailgun_supported_event_types(self):
-        return self._mailgun_event_type_mapping.keys()
-
     def _mailgun_event_type_verify(self, event):
         event = event or {}
         mailgun_event_type = event.get('event')
-        if mailgun_event_type not in self._mailgun_supported_event_types:
-            _logger.info("Mailgun: event type '%s' not supported",
-                         mailgun_event_type)
+        if mailgun_event_type not in self._mailgun_event_type_mapping:
+            _logger.error("Mailgun: event type '%s' not supported",
+                          mailgun_event_type)
             return False
         # OK, event type is valid
         return True
@@ -66,12 +62,12 @@ class MailTrackingEmail(models.Model):
         event = event or {}
         api_key = self.env['ir.config_parameter'].get_param('mailgun.apikey')
         if not api_key:
-            _logger.info("No Mailgun api key configured. "
-                         "Please add 'mailgun.apikey' to System parameters "
-                         "to enable Mailgun authentication webhoook requests. "
-                         "More info at: "
-                         "https://documentation.mailgun.com/user_manual.html"
-                         "#webhooks")
+            _logger.warning("No Mailgun api key configured. "
+                            "Please add 'mailgun.apikey' to System parameters "
+                            "to enable Mailgun authentication webhoook "
+                            "requests. More info at: "
+                            "https://documentation.mailgun.com/"
+                            "user_manual.html#webhooks")
         else:
             timestamp = event.get('timestamp')
             token = event.get('token')
@@ -89,8 +85,8 @@ class MailTrackingEmail(models.Model):
         odoo_db = event.get('odoo_db')
         current_db = self.env.cr.dbname
         if odoo_db != current_db:
-            _logger.info("Mailgun: Database '%s' is not the current database",
-                         odoo_db)
+            _logger.error("Mailgun: Database '%s' is not the current database",
+                          odoo_db)
             return False
         # OK, DB is current
         return True
@@ -124,7 +120,7 @@ class MailTrackingEmail(models.Model):
                 metadata[k] = event[v]
         # Special field mapping
         metadata.update({
-            'mobile': event.get('device-type') in ('mobile', 'tablet'),
+            'mobile': event.get('device-type') in {'mobile', 'tablet'},
             'user_country_id': self._country_search(
                 event.get('country', False)),
         })
