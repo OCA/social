@@ -3,22 +3,34 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-from openerp import api, SUPERUSER_ID
+from psycopg2.extensions import AsIs
 
 _logger = logging.getLogger(__name__)
 
 
-def post_init_hook(cr, registry):
-    with api.Environment.manage():
-        env = api.Environment(cr, SUPERUSER_ID, {})
-        # Recalculate all partner tracking_email_ids
-        partners = env['res.partner'].search([
-            ('email', '!=', False),
-        ])
-        emails = partners.mapped('email')
-        _logger.info(
-            "Recalculating 'tracking_email_ids' in 'res.partner' "
-            "model for %d email addresses", len(emails))
-        for email in emails:
-            env['mail.tracking.email'].tracking_ids_recalculate(
-                'res.partner', 'email', 'tracking_email_ids', email)
+def column_exists(cr, table, column):
+    cr.execute("""
+        SELECT column_name
+        FROM information_schema.columns
+        WHERE table_name = %s AND column_name = %s""", (table, column))
+    return bool(cr.fetchall())
+
+
+def column_add_with_value(cr, table, column, field_type, value):
+    if not column_exists(cr, table, column):
+        cr.execute("""
+            ALTER TABLE %s
+            ADD COLUMN %s %s""", (AsIs(table), AsIs(column), AsIs(field_type)))
+        cr.execute("""
+            UPDATE %s SET %s = %s""", (AsIs(table), AsIs(column), value))
+
+
+def pre_init_hook(cr):
+    _logger.info("Creating res.partner.tracking_emails_count column "
+                 "with value 0")
+    column_add_with_value(
+        cr, "res_partner", "tracking_emails_count", "integer", 0)
+    _logger.info("Creating res.partner.email_score column "
+                 "with value 50.0")
+    column_add_with_value(
+        cr, "res_partner", "email_score", "double precision", 50.0)

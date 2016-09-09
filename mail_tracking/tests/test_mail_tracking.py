@@ -4,9 +4,9 @@
 
 import mock
 import base64
+import time
 from openerp.tests.common import TransactionCase
-from openerp.addons.mail_tracking.controllers.main import \
-    MailTrackingController, BLANK
+from ..controllers.main import MailTrackingController, BLANK
 
 mock_request = 'openerp.http.request'
 mock_send_email = ('openerp.addons.base.ir.ir_mail_server.'
@@ -113,6 +113,77 @@ class TestMailTracking(TransactionCase):
             mock_func.return_value = type('obj', (object,), self.request)
             res = controller.mail_tracking_open(db, tracking.id)
             self.assertEqual(image, res.response[0])
+
+    def test_concurrent_open(self):
+        mail, tracking = self.mail_send()
+        ts = time.time()
+        metadata = {
+            'ip': '127.0.0.1',
+            'user_agent': 'Odoo Test/1.0',
+            'os_family': 'linux',
+            'ua_family': 'odoo',
+            'timestamp': ts,
+        }
+        # First open event
+        tracking.event_create('open', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'open'
+        )
+        self.assertEqual(len(opens), 1)
+        # Concurrent open event
+        metadata['timestamp'] = ts + 2
+        tracking.event_create('open', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'open'
+        )
+        self.assertEqual(len(opens), 1)
+        # Second open event
+        metadata['timestamp'] = ts + 350
+        tracking.event_create('open', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'open'
+        )
+        self.assertEqual(len(opens), 2)
+
+    def test_concurrent_click(self):
+        mail, tracking = self.mail_send()
+        ts = time.time()
+        metadata = {
+            'ip': '127.0.0.1',
+            'user_agent': 'Odoo Test/1.0',
+            'os_family': 'linux',
+            'ua_family': 'odoo',
+            'timestamp': ts,
+            'url': 'https://www.example.com/route/1',
+        }
+        # First click event (URL 1)
+        tracking.event_create('click', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'click'
+        )
+        self.assertEqual(len(opens), 1)
+        # Concurrent click event (URL 1)
+        metadata['timestamp'] = ts + 2
+        tracking.event_create('click', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'click'
+        )
+        self.assertEqual(len(opens), 1)
+        # Second click event (URL 1)
+        metadata['timestamp'] = ts + 350
+        tracking.event_create('click', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'click'
+        )
+        self.assertEqual(len(opens), 2)
+        # Concurrent click event (URL 2)
+        metadata['timestamp'] = ts + 2
+        metadata['url'] = 'https://www.example.com/route/2'
+        tracking.event_create('click', metadata)
+        opens = tracking.tracking_event_ids.filtered(
+            lambda r: r.event_type == 'click'
+        )
+        self.assertEqual(len(opens), 3)
 
     def test_smtp_error(self):
         with mock.patch(mock_send_email) as mock_func:

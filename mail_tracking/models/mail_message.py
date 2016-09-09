@@ -46,7 +46,7 @@ class MailMessage(models.Model):
                     tracking_email = self.env['mail.tracking.email'].search([
                         ('mail_message_id', '=', mail_message_id),
                         ('partner_id', '=', partner_id),
-                    ])
+                    ], limit=1)
                     status = self._partner_tracking_status_get(tracking_email)
                     partner_trackings[str(partner_id)] = (
                         status, tracking_email.id)
