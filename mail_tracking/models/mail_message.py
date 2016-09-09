@@ -3,8 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp import models, api
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class MailMessage(models.Model):
@@ -33,22 +31,49 @@ class MailMessage(models.Model):
             status = tracking_status_map.get(tracking_email_status, 'unknown')
         return status
 
+    @api.multi
+    def tracking_status(self):
+        res = {}
+        for message in self:
+            partner_trackings = []
+            partners_already = self.env['res.partner']
+            partners = self.env['res.partner']
+            trackings = self.env['mail.tracking.email'].search([
+                ('mail_message_id', '=', message.id),
+            ])
+            # Search all trackings for this message
+            for tracking in trackings:
+                status = self._partner_tracking_status_get(tracking)
+                recipient = (
+                    tracking.partner_id.display_name or tracking.recipient)
+                partner_trackings.append((
+                    status, tracking.id, recipient, tracking.partner_id.id))
+                if tracking.partner_id:
+                    partners_already |= tracking.partner_id
+            # Search all recipients for this message
+            if message.partner_ids:
+                partners |= message.partner_ids
+            if message.needaction_partner_ids:
+                partners |= message.needaction_partner_ids
+            # Remove recipients already included
+            partners -= partners_already
+            for partner in partners:
+                # If there is partners not included, then status is 'unknown'
+                partner_trackings.append((
+                    'unknown', False, partner.display_name, partner.id))
+            res[message.id] = partner_trackings
+        return res
+
     @api.model
     def _message_read_dict_postprocess(self, messages, message_tree):
         res = super(MailMessage, self)._message_read_dict_postprocess(
             messages, message_tree)
+        mail_message_ids = {m.get('id') for m in messages if m.get('id')}
+        mail_messages = self.browse(mail_message_ids)
+        partner_trackings = mail_messages.tracking_status()
         for message_dict in messages:
             mail_message_id = message_dict.get('id', False)
             if mail_message_id:
-                partner_trackings = {}
-                for partner in message_dict.get('partner_ids', []):
-                    partner_id = partner[0]
-                    tracking_email = self.env['mail.tracking.email'].search([
-                        ('mail_message_id', '=', mail_message_id),
-                        ('partner_id', '=', partner_id),
-                    ], limit=1)
-                    status = self._partner_tracking_status_get(tracking_email)
-                    partner_trackings[str(partner_id)] = (
-                        status, tracking_email.id)
-            message_dict['partner_trackings'] = partner_trackings
+                message_dict['partner_trackings'] = \
+                    partner_trackings[mail_message_id]
         return res
