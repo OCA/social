@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
-<openerp>
-<data>
+<odoo>
 
 <record model="ir.ui.view" id="view_mail_tracking_event_form">
     <field name="name">mail.tracking.event.form</field>
@@ -121,5 +120,4 @@
           action="action_view_mail_tracking_event"/>
 
 
-</data>
-</openerp>
+</odoo>
