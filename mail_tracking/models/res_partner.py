@@ -40,6 +40,7 @@ class ResPartner(models.Model):
     def write(self, vals):
         email = vals.get('email')
         if email is not None:
-            vals['tracking_email_ids'] = \
-                self.env['mail.tracking.email']._tracking_ids_to_write(email)
+            m_track = self.env['mail.tracking.email']
+            vals['tracking_email_ids'] = m_track._tracking_ids_to_write(email)
+            vals['email_score'] = m_track.email_score_from_email(email)
         return super(ResPartner, self).write(vals)
