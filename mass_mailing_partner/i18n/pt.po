@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: crm (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-02 14:15+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"PO-Revision-Date: 2016-11-25 14:58+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-crm-8-0/language/pt_BR/)\n"
+"Language-Team: Portuguese (http://www.transifex.com/oca/OCA-crm-8-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_partner
 #: view:partner.mail.list.wizard:mass_mailing_partner.partner_mail_list_wizard_form
@@ -30,7 +30,7 @@ msgstr ""
 #. module: mass_mailing_partner
 #: view:partner.mail.list.wizard:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Cancel"
-msgstr "Cancel"
+msgstr "Cancelar"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_partner_mail_list_wizard
@@ -51,7 +51,7 @@ msgstr "Criado em"
 #. module: mass_mailing_partner
 #: field:partner.mail.list.wizard,display_name:0
 msgid "Display Name"
-msgstr "Nome para Mostrar"
+msgstr "Nome"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mail_statistics
@@ -66,17 +66,17 @@ msgstr "ID"
 #. module: mass_mailing_partner
 #: field:partner.mail.list.wizard,__last_update:0
 msgid "Last Modified on"
-msgstr "Última atualização em"
+msgstr "Modificado a última vez por"
 
 #. module: mass_mailing_partner
 #: field:partner.mail.list.wizard,write_uid:0
 msgid "Last Updated by"
-msgstr "Última atualização por"
+msgstr "Atualizado pela última vez por"
 
 #. module: mass_mailing_partner
 #: field:partner.mail.list.wizard,write_date:0
 msgid "Last Updated on"
-msgstr "Última atualização em"
+msgstr "Atualizado pela última vez em"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_list
