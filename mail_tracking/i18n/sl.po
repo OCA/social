@@ -4,14 +4,13 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-02 02:43+0000\n"
-"PO-Revision-Date: 2016-09-02 02:43+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>, 2016\n"
+"POT-Creation-Date: 2016-09-17 02:47+0000\n"
+"PO-Revision-Date: 2016-09-17 02:47+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: mail_tracking
-#: help:mail.tracking.email,state:0
+#: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email_state
 msgid ""
 " * The 'Error' status indicates that there was an error when trying to sent the email, for example, 'No valid recipient'\n"
 " * The 'Sent' status indicates that message was succesfully sent via outgoing email server (SMTP).\n"
@@ -43,17 +42,17 @@ msgstr ""
 " * Stanje 'Mehko odbito' pomeni, da je bilo sporočilo 'mehko' odbito s strani prejemnikovega Mail Exchange (MX) strežnika.\n"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
 msgstr "Odboj"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,bounce_description:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_bounce_description
 msgid "Bounce description"
 msgstr "Opis odboja"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,bounce_type:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_bounce_type
 msgid "Bounce type"
 msgstr "Tip odboja"
 
@@ -63,7 +62,7 @@ msgid "Bounced"
 msgstr "Odbito"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
 msgstr "Kilk"
 
@@ -73,34 +72,34 @@ msgid "Clicked"
 msgstr "Kliknjeno"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,url:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_url
 msgid "Clicked URL"
 msgstr "Kliknjena URL"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
 msgstr "Država"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,create_uid:0
-#: field:mail.tracking.event,create_uid:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_uid
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_uid
 msgid "Created by"
 msgstr "Ustvaril"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,create_date:0
-#: field:mail.tracking.event,create_date:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: field:mail.tracking.email,date:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: field:mail.tracking.event,date:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_date
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Date"
 msgstr "Datum"
 
@@ -110,82 +109,82 @@ msgid "Deferral"
 msgstr "Odložitev"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 msgid "Deferred"
 msgstr "Odloženo"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Delivered"
 msgstr "Dostavljeno"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,display_name:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_display_name
 msgid "Display Name"
 msgstr "Prikazni naziv"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,display_name:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
 msgid "Display name"
 msgstr "Prikazni naziv"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: field:mail.tracking.email,mail_id:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_id
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Email"
 msgstr "E-pošta"
 
 #. module: mail_tracking
-#: field:res.partner,email_score:0
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
 msgid "Email score"
 msgstr "Točkovanje e-pošte"
 
 #. module: mail_tracking
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_form
 msgid "Error"
 msgstr "Napaka"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,error_smtp_server:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_smtp_server
 msgid "Error SMTP server"
 msgstr "Napaka SMTP strežnika"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,error_description:0
-#: field:mail.tracking.event,error_description:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_description
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_description
 msgid "Error description"
 msgstr "Opis napake"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,error_details:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_details
 msgid "Error details"
 msgstr "Podrobnosti o napaki"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,error_type:0
-#: field:mail.tracking.event,error_type:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_type
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_type
 msgid "Error type"
 msgstr "Tip napake"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,event_type:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_event_type
 msgid "Event type"
 msgstr "Tip dogodka"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Failed"
 msgstr "Neuspelo"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
 msgstr "Združi po"
 
@@ -195,29 +194,36 @@ msgid "Hard bounce"
 msgstr "Trdo odbito"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,id:0 field:mail.tracking.event,id:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_id
 msgid "ID"
 msgstr "ID"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,mobile:0
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+msgid "IP"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_mobile
 msgid "Is mobile?"
 msgstr "Mobilno?"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,__last_update:0
-#: field:mail.tracking.event,__last_update:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email___last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event___last_update
 msgid "Last Modified on"
 msgstr "Zadnjič spremenjeno"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,write_uid:0 field:mail.tracking.event,write_uid:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_uid
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_uid
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,write_date:0
-#: field:mail.tracking.event,write_date:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
@@ -227,64 +233,71 @@ msgid "MailTracking email"
 msgstr "Sledenje e-pošte"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "MailTracking email search"
 msgstr "Iskalnik sledenja e-pošte"
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_email
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 msgid "MailTracking emails"
 msgstr "Sporočila sledenja"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_event
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_form
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 msgid "MailTracking event"
 msgstr "Dogodek sledenja e-pošte"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "MailTracking event search"
 msgstr "Iskalnik dogodkov sledenja e-pošte"
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "MailTracking events"
 msgstr "Dogodki sledenja e-pošte"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
-#: field:mail.tracking.email,mail_message_id:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: field:mail.tracking.event,tracking_email_id:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_message_id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_tracking_email_id
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Message"
 msgstr "Sporočilo"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:30
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:53
 #, python-format
 msgid "Message tracking"
 msgstr "Sledenje sporočila"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Month"
 msgstr "Mesec"
 
 #. module: mail_tracking
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
+msgid "OS"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
 msgstr "Odprto"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,os_family:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_os_family
 msgid "Operating system family"
 msgstr "Družina operacijskega sistema"
 
@@ -295,24 +308,24 @@ msgstr "Izhodna pošta"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
-#: field:mail.tracking.email,partner_id:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_partner_id
 msgid "Partner"
 msgstr "Partner"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: field:mail.tracking.event,recipient:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Recipient"
 msgstr "Prejemnik"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,recipient:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient
 msgid "Recipient email"
 msgstr "Prejemnikova e-pošta"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,recipient_address:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient_address
 msgid "Recipient email address"
 msgstr "Prejemnikova e-pošta"
 
@@ -323,25 +336,25 @@ msgid "Rejected"
 msgstr "Zavrnjeno"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,smtp_server:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_smtp_server
 msgid "SMTP server"
 msgstr "SMTP strežnik"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 msgid "Sender"
 msgstr "Pošiljatelj"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,sender:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_sender
 msgid "Sender email"
 msgstr "Pošiljateljeva e-pošta"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Sent"
 msgstr "Poslano"
@@ -363,96 +376,116 @@ msgid "Spam"
 msgstr "Spam"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: field:mail.tracking.email,state:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_state
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "State"
 msgstr "Stanje"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: field:mail.tracking.email,name:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_name
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Subject"
 msgstr "Zadeva"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
-#: field:mail.tracking.email,time:0
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: field:mail.tracking.event,time:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_time
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_time
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Time"
 msgstr "Čas"
 
 #. module: mail_tracking
+#. openerp-web
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:46
+#, python-format
+msgid "To:"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_email_ids
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
-#: view:res.partner:mail_tracking.view_partner_form
-#: field:res.partner,tracking_email_ids:0
+#: model:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
 msgstr "Sledilna e-pošta"
 
 #. module: mail_tracking
-#: field:res.partner,tracking_emails_count:0
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_emails_count
 msgid "Tracking emails count"
 msgstr "Števec sledenja e-pošte"
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_tracking_event_ids
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_event
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
-#: field:mail.tracking.email,tracking_event_ids:0
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 msgid "Tracking events"
 msgstr "Sledilni dogodki"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#. openerp-web
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:33
+#, python-format
+msgid "Tracking partner"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
 msgstr "Tip"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
 msgstr "URL"
 
 #. module: mail_tracking
-#: field:mail.tracking.email,timestamp:0 field:mail.tracking.event,timestamp:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_timestamp
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_timestamp
 msgid "UTC timestamp"
 msgstr "UTC časovni žig"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Unsubscribe"
 msgstr "Odjava"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
 msgstr "Odjavljeno"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,ip:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ip
 msgid "User IP"
 msgstr "Uporabnikov IP"
 
 #. module: mail_tracking
-#: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
-#: field:mail.tracking.event,user_agent:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_agent
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "User agent"
 msgstr "Uporabnikov odjemalec"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,ua_family:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ua_family
 msgid "User agent family"
 msgstr "Družina uporabnikovih odjemalcev"
 
 #. module: mail_tracking
-#: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
-#: field:mail.tracking.event,ua_type:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ua_type
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "User agent type"
 msgstr "Tip uporabnikovega odjemalca"
 
 #. module: mail_tracking
-#: field:mail.tracking.event,user_country_id:0
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_country_id
 msgid "User country"
 msgstr "Država uporabnika"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_ir_mail_server
+msgid "ir.mail_server"
+msgstr ""
