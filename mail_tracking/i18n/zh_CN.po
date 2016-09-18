@@ -4,19 +4,21 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Jeffery Chenn <jeffery9@gmail.com>, 2016
+# zeng <z_fy@live.cn>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-17 02:47+0000\n"
 "PO-Revision-Date: 2016-09-17 02:47+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Last-Translator: zeng <z_fy@live.cn>, 2016\n"
+"Language-Team: Chinese (China) (https://www.transifex.com/oca/teams/23907/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: zh_CN\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email_state
@@ -78,13 +80,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "创建人"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
 msgid "Created on"
-msgstr "Creado en"
+msgstr "创建时间"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
@@ -92,7 +94,7 @@ msgstr "Creado en"
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Date"
-msgstr "Fecha"
+msgstr "日期"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -116,7 +118,7 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_display_name
 msgid "Display Name"
-msgstr "Nombre mostrado"
+msgstr "显示名称"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
@@ -127,7 +129,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_id
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Email"
-msgstr "Correo electrónico"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
@@ -171,13 +173,13 @@ msgstr ""
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Failed"
-msgstr ""
+msgstr "失败"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
-msgstr ""
+msgstr "分组"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -188,7 +190,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_id
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -204,19 +206,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email___last_update
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event___last_update
 msgid "Last Modified on"
-msgstr "Última modificación en"
+msgstr "最后修改时间"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "最后更新人"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
 msgid "Last Updated on"
-msgstr "Última actualización en"
+msgstr "最后更新时间"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
@@ -271,7 +273,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Month"
-msgstr "Mes"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
@@ -301,7 +303,7 @@ msgstr ""
 #: model:ir.model,name:mail_tracking.model_res_partner
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_partner_id
 msgid "Partner"
-msgstr ""
+msgstr "业务伙伴"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient
@@ -370,7 +372,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_state
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_name
@@ -422,7 +424,7 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
-msgstr ""
+msgstr "类型"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
