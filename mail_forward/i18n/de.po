@@ -3,17 +3,18 @@
 # * mail_forward
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Chanseok <kcsgoodboy@gmail.com>, 2014
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Chul Park <parkchul@nate.com>, 2015
 # David10000 <gameness@naver.com>, 2014
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012-2013
 # Gil <gedwarp@gmail.com>, 2014
-# Hongseob Lee <shevious@gmail.com>, 2015
+# kmooc <shevious@gmail.com>, 2015
 # Hongseob Lee <shevreg@yahoo.com>, 2015
 # jeon <bluerespect@nate.com>, 2014
 # JiyeonLee <leejiyeon00@gmail.com>, 2014
@@ -34,12 +35,13 @@
 # Sujin Lee <sujinlee.me@gmail.com>, 2014
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-30 02:47+0000\n"
-"PO-Revision-Date: 2016-04-28 14:40+0000\n"
+"POT-Creation-Date: 2016-09-14 07:21+0000\n"
+"PO-Revision-Date: 2016-09-18 08:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +177,7 @@ msgstr "Zielobjekt"
 #. module: mail_forward
 #: field:mail_forward.compose_message,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,email_from:0
@@ -235,7 +237,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_uid:0

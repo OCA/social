@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-30 02:47+0000\n"
-"PO-Revision-Date: 2016-04-28 14:40+0000\n"
+"POT-Creation-Date: 2016-09-14 07:21+0000\n"
+"PO-Revision-Date: 2016-09-09 12:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -107,12 +107,12 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat el"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,starred:0
@@ -194,7 +194,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,parent_id:0
@@ -209,12 +209,12 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera Actualització per"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera Actualització el"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,is_log:0

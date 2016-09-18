@@ -4,7 +4,9 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -15,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-02 02:43+0000\n"
-"PO-Revision-Date: 2016-09-01 23:55+0000\n"
+"POT-Creation-Date: 2016-09-14 07:21+0000\n"
+"PO-Revision-Date: 2016-09-18 08:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -112,7 +114,7 @@ msgstr ""
 #: field:mail.mandrill.event,display_name:0
 #: field:mail.mandrill.message,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
@@ -155,7 +157,7 @@ msgstr ""
 #: field:mail.mandrill.event,__last_update:0
 #: field:mail.mandrill.message,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,write_uid:0

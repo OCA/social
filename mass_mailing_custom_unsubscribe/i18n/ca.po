@@ -3,7 +3,7 @@
 # * mass_mailing_custom_unsubscribe
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2015-2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015-2016
 # Alejandro Santana <alejandrosantana@anubia.es>, 2015
 # Antonio Trueba, 2016
 # Carles Antoli <carlesantoli@hotmail.com>, 2015-2016
@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 00:45+0000\n"
-"PO-Revision-Date: 2016-07-25 10:59+0000\n"
+"POT-Creation-Date: 2016-09-14 07:21+0000\n"
+"PO-Revision-Date: 2016-09-09 12:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -59,13 +59,13 @@ msgstr ""
 #: field:mail.unsubscription,create_uid:0
 #: field:mail.unsubscription.reason,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,create_date:0
 #: field:mail.unsubscription.reason,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat el"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,date:0
@@ -86,11 +86,6 @@ msgstr ""
 #: field:mail.unsubscription,details_required:0
 #: field:mail.unsubscription.reason,details_required:0
 msgid "Details required"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
-#: field:mail.mail,path:0
-msgid "Discussion Path"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
@@ -154,7 +149,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,id:0 field:mail.unsubscription.reason,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_unread:0
@@ -213,13 +208,13 @@ msgstr ""
 #: field:mail.unsubscription,write_uid:0
 #: field:mail.unsubscription.reason,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera Actualització per"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,write_date:0
 #: field:mail.unsubscription.reason,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera Actualització el"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
@@ -352,12 +347,6 @@ msgstr ""
 #: model:ir.actions.act_window,name:mass_mailing_custom_unsubscribe.mail_unsubscription_action
 #: model:ir.ui.menu,name:mass_mailing_custom_unsubscribe.mail_unsubscription_menu
 msgid "Unsubscriptions"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
-#: help:mail.mail,path:0
-msgid ""
-"Used to display messages in a paragraph-based chatter using a unique path;"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
