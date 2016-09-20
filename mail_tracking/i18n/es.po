@@ -119,6 +119,11 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: mail_tracking
+#: field:mail.tracking.email,display_name:0
+msgid "Display name"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
 msgid "Display name"
 msgstr ""
@@ -398,6 +403,11 @@ msgstr ""
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 #: model:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
+msgstr ""
+
+#. module: mail_tracking
+#: field:res.partner,tracking_emails_count:0
+msgid "Tracking emails count"
 msgstr ""
 
 #. module: mail_tracking
