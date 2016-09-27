@@ -30,7 +30,6 @@
                         'title': _t("Message tracking"),
                     };
                     instance.webclient.action_manager.do_push_state(state);
-                    console.log('tracking_email_id = ' + tracking_email_id);
                     var action = {
                         type:'ir.actions.act_window',
                         view_type: 'form',
