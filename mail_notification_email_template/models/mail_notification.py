@@ -65,5 +65,5 @@ class MailNotification(models.Model):
                 }),
                 this.partner_id
             )
-            for a in etree.HTML(link_html).xpath('//a[@href]'):
+            for a in etree.HTML(link_html or '<html/>').xpath('//a[@href]'):
                 this.record_access_link = a.get('href')
