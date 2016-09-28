@@ -30,7 +30,8 @@ Adds a BCC field to mail templates and uses them to send a separate
 """,
     'version': '0.1',
     'license': 'AGPL-3',
-    'author': 'Juan Formoso <jfv@anubia.es>, Tom Palan <thomas@palan.at>',
+    'author': """Juan Formoso <jfv@anubia.es>,
+        Tom Palan <thomas@palan.at>, Odoo Community Association (OCA)""",
     'website': 'http://www.anubia.es',
     'category': 'Mail',
     'depends': [
