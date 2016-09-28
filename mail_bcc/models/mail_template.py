@@ -108,7 +108,6 @@ class MailTemplate(models.Model):
 
         return multi_mode and results or results[res_ids[0]]
 
-
     @api.multi
     def generate_recipients(self, results, res_ids):
         """Generates the recipients of the template. Default values can ben generated

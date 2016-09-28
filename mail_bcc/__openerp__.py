@@ -23,12 +23,8 @@
 
 {
     'name': 'Mail BCC',
-    'summary': 'Blind Carbon Copy available on mails',
-    'description': """
-Adds a BCC field to mail templates and uses them to send a separate
- copy of the mail to the BCC recipient.
-""",
-    'version': '0.1',
+    'summary': 'Blind Carbon Copy for mail templates',
+    'version': '9.0.1.0.0',
     'license': 'AGPL-3',
     'author': """Juan Formoso <jfv@anubia.es>,
         Tom Palan <thomas@palan.at>, Odoo Community Association (OCA)""",
