@@ -6,7 +6,6 @@
 
 import base64
 import logging
-from email.utils import formataddr
 
 import psycopg2
 

@@ -5,19 +5,11 @@
 ################################################################
 
 import base64
-import copy
-import datetime
-import dateutil.relativedelta as relativedelta
 import logging
-import lxml
-import urlparse
-import openerp
-from urllib import urlencode, quote as quote
 
-from openerp import _, api, fields, models, SUPERUSER_ID
+from openerp import api, fields, models
 from openerp import tools
 from openerp import report as odoo_report
-from openerp.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
@@ -47,7 +39,7 @@ class MailTemplate(models.Model):
             multi_mode = False
         if fields is None:
             fields = ['subject', 'body_html', 'email_from', 'email_to', 'partner_to', 'email_cc', 'reply_to']
-	fields = fields + ['email_bcc']
+        fields = fields + ['email_bcc']
 
         res_ids_to_templates = self.get_email_template_batch(res_ids)
 
@@ -68,7 +60,7 @@ class MailTemplate(models.Model):
                     getattr(template, field), template.model, template_res_ids,
                     post_process=(field == 'body_html'))
                 for res_id, field_value in generated_field_values.iteritems():
-	                results.setdefault(res_id, dict())[field] = field_value
+                    results.setdefault(res_id, dict())[field] = field_value
             # compute recipients
             if any(field in fields for field in ['email_to', 'partner_to', 'email_cc']):
                 results = template.generate_recipients(results, template_res_ids)
@@ -145,4 +137,3 @@ class MailTemplate(models.Model):
                 partner_ids += self.env['res.partner'].sudo().browse(tpl_partner_ids).exists().ids
             results[res_id]['partner_ids'] = partner_ids
         return results
-

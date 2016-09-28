@@ -25,7 +25,8 @@
     'name': 'Mail BCC',
     'summary': 'Blind Carbon Copy available on mails',
     'description': """
-Adds a BCC field to mail templates and uses them to send a separate copy of the mail to the BCC recipient.
+Adds a BCC field to mail templates and uses them to send a separate
+ copy of the mail to the BCC recipient.
 """,
     'version': '0.1',
     'license': 'AGPL-3',
@@ -36,7 +37,7 @@ Adds a BCC field to mail templates and uses them to send a separate copy of the 
         'mail',
     ],
     'data': [
-      "views/views.xml"
+        'views/views.xml'
     ],
     'demo': [],
     'test': [],
