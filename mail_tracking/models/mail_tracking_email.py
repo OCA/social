@@ -49,7 +49,7 @@ class MailTrackingEmail(models.Model):
         ('deferred', 'Deferred'),
         ('sent', 'Sent'),
         ('delivered', 'Delivered'),
-        ('opened', 'Open'),
+        ('opened', 'Opened'),
         ('rejected', 'Rejected'),
         ('spam', 'Spam'),
         ('unsub', 'Unsubscribed'),
@@ -63,7 +63,7 @@ class MailTrackingEmail(models.Model):
              "sent via outgoing email server (SMTP).\n"
              " * The 'Delivered' status indicates that message was "
              "succesfully delivered to recipient Mail Exchange (MX) server.\n"
-             " * The 'Open' status indicates that message was opened or "
+             " * The 'Opened' status indicates that message was opened or "
              "clicked by recipient.\n"
              " * The 'Rejected' status indicates that recipient email "
              "address is blacklisted by outgoing email server (SMTP). "
