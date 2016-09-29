@@ -49,7 +49,7 @@ class MailTrackingEmail(models.Model):
         ('deferred', 'Deferred'),
         ('sent', 'Sent'),
         ('delivered', 'Delivered'),
-        ('opened', 'Open'),
+        ('opened', 'Opened'),
         ('rejected', 'Rejected'),
         ('spam', 'Spam'),
         ('unsub', 'Unsubscribed'),
