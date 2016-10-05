@@ -22,7 +22,7 @@ class IrMailServer(models.Model):
 
         ir_config_parameter = self.pool.get("ir.config_parameter")
         config_email_bcc = ir_config_parameter.get_param(cr, uid,
-                                                         "mail.always_bcc_to")
+                                                         "base_mail_bcc.bcc_to")
 
         if config_email_bcc:
             config_email_bcc = config_email_bcc.encode('ascii')

@@ -6,7 +6,7 @@
 BCC all emails
 ==============
 
-This module extends the email meachnism to allow for sending a blind carbon copy (BCC) 
+This module extends the email mechanism to allow for sending a blind carbon copy (BCC)
 of all outgoing emails to configurable e-mail addresses.
 
 Configuration
@@ -15,7 +15,7 @@ Configuration
 To configure this module, you need to:
 
 * Go to Settings > Parameters > System Parameters
-* Create a new entry with key `mail.always_bcc_to` and set the desired e-mail addresses for BCC as value. This value must be comma-separated list of valid e-mail addresses.
+* Create a new entry with key `base_mail_bcc.bcc_to` and set the desired e-mail addresses for BCC as value. This value must be a comma-separated list of valid e-mail addresses.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
