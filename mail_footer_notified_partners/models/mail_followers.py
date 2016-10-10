@@ -57,7 +57,7 @@ class MailNotification(models.Model):
             ctx.update({
                 'partners_to_notify': partners_to_notify,
             })
-        return super(MailNotification, self)._notify(
+        return super(MailNotification, self.with_context(ctx))._notify(
             message_id,
             partners_to_notify=partners_to_notify,
-            force_send=force_send, user_signature=user_signature, context=ctx)
+            force_send=force_send, user_signature=user_signature)
