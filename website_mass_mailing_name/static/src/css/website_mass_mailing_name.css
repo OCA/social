@@ -3,7 +3,7 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 .js_subscribe .form-control {
   width: 50%; }
-.js_subscribe[data-subscribe=on] .js_subscribe_name {
+.js_subscribe[data-subscribe="on"] .js_subscribe_name:not([disabled]) {
   display: none; }
 
 /*# sourceMappingURL=website_mass_mailing_name.css.map */
