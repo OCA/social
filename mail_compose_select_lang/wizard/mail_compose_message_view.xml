@@ -5,17 +5,20 @@
         <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form_lang">
             <field name="name">mail.compose.message.form.lang</field>
             <field name="model">mail.compose.message</field>
-            <field name="inherit_id" ref="email_template.email_compose_message_wizard_inherit_form" />
+            <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='template_id']/.." position="before">
-                    <div>Force language
+                    <span attrs="{'invisible': [('template_id', '=', False)]}">
+                        <label for="lang"/>
                         <field name="lang"
                                class="oe_inline"
                                options="{'no_create': True}"
-                               on_change="onchange_lang(lang, template_id, composition_mode, model, res_id, context)"
                                 />
-                    </div>
-                </xpath>
+                        <span class="alert alert-warning" attrs="{'invisible': [('lang', '=', False)]}">
+                           <i class="fa fa-exclamation-triangle"/> Attached documents will not be translated.
+                       </span>
+                   </span>
+               </xpath>
             </field>
         </record>
 
