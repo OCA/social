@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
+import threading
 import urlparse
 import time
 import re
@@ -30,7 +31,7 @@ class MailTrackingEmail(models.Model):
     timestamp = fields.Float(
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
-    time = fields.Datetime(string="Time", readonly=True)
+    time = fields.Datetime(string="Time", readonly=True, index=True)
     date = fields.Date(
         string="Date", readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
@@ -42,7 +43,7 @@ class MailTrackingEmail(models.Model):
     recipient = fields.Char(string='Recipient email', readonly=True)
     recipient_address = fields.Char(
         string='Recipient email address', readonly=True, store=True,
-        compute='_compute_recipient_address')
+        compute='_compute_recipient_address', index=True)
     sender = fields.Char(string='Sender email', readonly=True)
     state = fields.Selection([
         ('error', 'Error'),
@@ -87,58 +88,32 @@ class MailTrackingEmail(models.Model):
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
 
-    @api.model
-    def tracking_ids_recalculate(self, model, email_field, tracking_field,
-                                 email, new_tracking=None):
-        objects = self.env[model].search([
-            (email_field, '=ilike', email),
-        ])
-        for obj in objects:
-            trackings = obj[tracking_field]
-            if new_tracking:
-                trackings |= new_tracking
-            trackings = trackings._email_score_tracking_filter()
-            if set(obj[tracking_field].ids) != set(trackings.ids):
-                if trackings:
-                    obj.write({
-                        tracking_field: [(6, False, trackings.ids)]
-                    })
-                else:
-                    obj.write({
-                        tracking_field: [(5, False, False)]
-                    })
-        return objects
+    def _email_score_tracking_filter(self, domain, order='time desc',
+                                     limit=10):
+        """Default tracking search. Ready to be inherited."""
+        return self.search(domain, limit=limit, order=order)
 
     @api.model
-    def _tracking_ids_to_write(self, email):
-        trackings = self.env['mail.tracking.email'].search([
-            ('recipient_address', '=ilike', email)
-        ])
-        trackings = trackings._email_score_tracking_filter()
-        if trackings:
-            return [(6, False, trackings.ids)]
-        else:
-            return [(5, False, False)]
-
-    @api.multi
-    def _email_score_tracking_filter(self):
-        """Default email score filter for tracking emails"""
-        # Consider only last 10 tracking emails
-        return self.sorted(key=lambda r: r.time, reverse=True)[:10]
+    def email_is_bounced(self, email):
+        return len(self._email_score_tracking_filter([
+            ('recipient_address', '=ilike', email),
+            ('state', 'in', ('error', 'rejected', 'spam', 'bounced')),
+        ])) > 0
 
     @api.model
     def email_score_from_email(self, email):
-        trackings = self.env['mail.tracking.email'].search([
+        return self._email_score_tracking_filter([
             ('recipient_address', '=ilike', email)
-        ])
-        return trackings.email_score()
+        ]).email_score()
 
     @api.multi
     def email_score(self):
-        """Default email score algorimth"""
+        """Default email score algorimth. Ready to be inherited
+
+        Must return a value beetwen 0.0 and 100.0
+        """
         score = 50.0
-        trackings = self._email_score_tracking_filter()
-        for tracking in trackings:
+        for tracking in self:
             if tracking.state in ('error',):
                 score -= 50.0
             elif tracking.state in ('rejected', 'spam', 'bounced'):
@@ -146,11 +121,13 @@ class MailTrackingEmail(models.Model):
             elif tracking.state in ('soft-bounced', 'unsub'):
                 score -= 10.0
             elif tracking.state in ('delivered',):
-                score += 5.0
+                score += 1.0
             elif tracking.state in ('opened',):
-                score += 10.0
+                score += 5.0
         if score > 100.0:
             score = 100.0
+        if score < 0.0:
+            score = 0.0
         return score
 
     @api.multi
@@ -167,7 +144,7 @@ class MailTrackingEmail(models.Model):
     @api.depends('name', 'recipient')
     def _compute_display_name(self):
         for email in self:
-            parts = [email.name]
+            parts = [email.name or '']
             if email.recipient:
                 parts.append(email.recipient)
             email.display_name = ' - '.join(parts)
@@ -178,14 +155,6 @@ class MailTrackingEmail(models.Model):
         for email in self:
             email.date = fields.Date.to_string(
                 fields.Date.from_string(email.time))
-
-    @api.model
-    def create(self, vals):
-        tracking = super(MailTrackingEmail, self).create(vals)
-        self.tracking_ids_recalculate(
-            'res.partner', 'email', 'tracking_email_ids',
-            tracking.recipient_address, new_tracking=tracking)
-        return tracking
 
     def _get_mail_tracking_img(self):
         base_url = self.env['ir.config_parameter'].get_param('web.base.url')
@@ -203,6 +172,13 @@ class MailTrackingEmail(models.Model):
             })
 
     @api.multi
+    def _partners_email_bounced_set(self, reason):
+        for tracking_email in self:
+            self.env['res.partner'].search([
+                ('email', '=ilike', tracking_email.recipient_address)
+            ]).email_bounced_set(tracking_email, reason)
+
+    @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
         self.sudo().write({
             'error_smtp_server': tools.ustr(smtp_server),
@@ -210,6 +186,7 @@ class MailTrackingEmail(models.Model):
             'error_description': tools.ustr(exception),
             'state': 'error',
         })
+        self.sudo()._partners_email_bounced_set('error')
         return True
 
     @api.multi
@@ -228,7 +205,7 @@ class MailTrackingEmail(models.Model):
         partners = mail_message.notified_partner_ids | mail_message.partner_ids
         if (self.partner_id and self.partner_id not in partners):
             # If mail_message haven't tracking partner, then
-            # add it in order to see his trackking status in chatter
+            # add it in order to see his tracking status in chatter
             if mail_message.subtype_id:
                 mail_message.sudo().write({
                     'notified_partner_ids': [(4, self.partner_id.id)],
@@ -287,6 +264,7 @@ class MailTrackingEmail(models.Model):
 
     @api.multi
     def event_create(self, event_type, metadata):
+        testing = getattr(threading.currentThread(), 'testing', False)
         event_ids = self.env['mail.tracking.event']
         for tracking_email in self:
             other_ids = tracking_email._concurrent_events(event_type, metadata)
@@ -294,13 +272,13 @@ class MailTrackingEmail(models.Model):
                 vals = tracking_email._event_prepare(event_type, metadata)
                 if vals:
                     event_ids += event_ids.sudo().create(vals)
-                partners = self.tracking_ids_recalculate(
-                    'res.partner', 'email', 'tracking_email_ids',
-                    tracking_email.recipient_address)
-                if partners:
-                    partners.email_score_calculate()
+                    # Commit to DB to release exclusive lock
+                    if not testing:
+                        self.env.cr.commit()
             else:
                 _logger.debug("Concurrent event '%s' discarded", event_type)
+        if event_type in {'hard_bounce', 'spam', 'reject'}:
+            self.sudo()._partners_email_bounced_set(event_type)
         return event_ids
 
     @api.model

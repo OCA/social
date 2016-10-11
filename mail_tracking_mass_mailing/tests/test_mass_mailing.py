@@ -8,8 +8,8 @@ from openerp.exceptions import Warning as UserError
 
 # One test case per method
 class TestMassMailing(TransactionCase):
-    def setUp(self):
-        super(TestMassMailing, self).setUp()
+    def setUp(self, *args, **kwargs):
+        super(TestMassMailing, self).setUp(*args, **kwargs)
         self.list = self.env['mail.mass_mailing.list'].create({
             'name': 'Test mail tracking',
         })
@@ -90,24 +90,24 @@ class TestMassMailing(TransactionCase):
             self.assertTrue(stat.bounced)
 
     def test_tracking_email_hard_bounce(self):
-            self._tracking_email_bounce('hard_bounce', 'bounced')
+        self._tracking_email_bounce('hard_bounce', 'bounced')
 
     def test_tracking_email_soft_bounce(self):
-            self._tracking_email_bounce('soft_bounce', 'soft-bounced')
+        self._tracking_email_bounce('soft_bounce', 'soft-bounced')
 
     def test_tracking_email_reject(self):
-            self._tracking_email_bounce('reject', 'rejected')
+        self._tracking_email_bounce('reject', 'rejected')
 
     def test_tracking_email_spam(self):
-            self._tracking_email_bounce('spam', 'spam')
+        self._tracking_email_bounce('spam', 'spam')
 
     def test_contact_tracking_emails(self):
-        self.mailing.send_mail()
-        for stat in self.mailing.statistics_ids:
-            if stat.mail_mail_id:
-                stat.mail_mail_id.send()
-        self.assertEqual(len(self.contact_a.tracking_email_ids), 1)
+        self._tracking_email_bounce('hard_bounce', 'bounced')
+        self.assertTrue(self.contact_a.email_bounced)
+        self.assertTrue(self.contact_a.email_score < 50.0)
         self.contact_a.email = 'other_contact_a@example.com'
-        self.assertEqual(len(self.contact_a.tracking_email_ids), 0)
+        self.assertFalse(self.contact_a.email_bounced)
+        self.assertTrue(self.contact_a.email_score == 50.0)
         self.contact_a.email = 'contact_a@example.com'
-        self.assertEqual(len(self.contact_a.tracking_email_ids), 1)
+        self.assertTrue(self.contact_a.email_bounced)
+        self.assertTrue(self.contact_a.email_score < 50.0)

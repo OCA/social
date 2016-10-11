@@ -5,10 +5,10 @@
 import mock
 import base64
 import time
+from openerp import http
 from openerp.tests.common import TransactionCase
 from ..controllers.main import MailTrackingController, BLANK
 
-mock_request = 'openerp.http.request'
 mock_send_email = ('openerp.addons.base.ir.ir_mail_server.'
                    'ir_mail_server.send_email')
 
@@ -22,11 +22,9 @@ class FakeUserAgent(object):
         return 'Test suite'
 
 
-# One test case per method
 class TestMailTracking(TransactionCase):
-    # Use case : Prepare some data for current test case
-    def setUp(self):
-        super(TestMailTracking, self).setUp()
+    def setUp(self, *args, **kwargs):
+        super(TestMailTracking, self).setUp(*args, **kwargs)
         self.sender = self.env['res.partner'].create({
             'name': 'Test sender',
             'email': 'sender@example.com',
@@ -37,12 +35,22 @@ class TestMailTracking(TransactionCase):
             'email': 'recipient@example.com',
             'notify_email': 'always',
         })
-        self.request = {
+        self.last_request = http.request
+        http.request = type('obj', (object,), {
+            'db': self.env.cr.dbname,
+            'env': self.env,
+            'endpoint': type('obj', (object,), {
+                'routing': [],
+            }),
             'httprequest': type('obj', (object,), {
                 'remote_addr': '123.123.123.123',
                 'user_agent': FakeUserAgent(),
             }),
-        }
+        })
+
+    def tearDown(self, *args, **kwargs):
+        http.request = self.last_request
+        return super(TestMailTracking, self).tearDown(*args, **kwargs)
 
     def test_message_post(self):
         # This message will generate a notification for recipient
@@ -109,10 +117,8 @@ class TestMailTracking(TransactionCase):
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
-        with mock.patch(mock_request) as mock_func:
-            mock_func.return_value = type('obj', (object,), self.request)
-            res = controller.mail_tracking_open(db, tracking.id)
-            self.assertEqual(image, res.response[0])
+        res = controller.mail_tracking_open(db, tracking.id)
+        self.assertEqual(image, res.response[0])
 
     def test_concurrent_open(self):
         mail, tracking = self.mail_send(self.recipient.email)
@@ -251,11 +257,9 @@ class TestMailTracking(TransactionCase):
     def test_db(self):
         db = self.env.cr.dbname
         controller = MailTrackingController()
-        with mock.patch(mock_request) as mock_func:
-            mock_func.return_value = type('obj', (object,), self.request)
-            not_found = controller.mail_tracking_all('not_found_db')
-            self.assertEqual('NOT FOUND', not_found.response[0])
-            none = controller.mail_tracking_all(db)
-            self.assertEqual('NONE', none.response[0])
-            none = controller.mail_tracking_event(db, 'open')
-            self.assertEqual('NONE', none.response[0])
+        not_found = controller.mail_tracking_all('not_found_db')
+        self.assertEqual('NOT FOUND', not_found.response[0])
+        none = controller.mail_tracking_all(db)
+        self.assertEqual('NONE', none.response[0])
+        none = controller.mail_tracking_event(db, 'open')
+        self.assertEqual('NONE', none.response[0])

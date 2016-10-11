@@ -11,17 +11,37 @@ _logger = logging.getLogger(__name__)
 BLANK = 'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 
-def _env_get(db):
+def _env_get(db, callback, tracking_id, event_type, **kw):
+    res = 'NOT FOUND'
     reg = False
-    try:
-        reg = registry(db)
-    except OperationalError:
-        _logger.warning("Selected BD '%s' not found", db)
-    except:  # pragma: no cover
-        _logger.warning("Selected BD '%s' connection error", db)
-    if reg:
-        return api.Environment(reg.cursor(), SUPERUSER_ID, {})
-    return False
+    current = http.request.db and db == http.request.db
+    env = current and http.request.env
+    if not env:
+        try:
+            reg = registry(db)
+        except OperationalError:
+            _logger.warning("Selected BD '%s' not found", db)
+        except:  # pragma: no cover
+            _logger.warning("Selected BD '%s' connection error", db)
+        if reg:
+            _logger.info("Creating a new environment for database '%s'", db)
+            env = api.Environment(reg.cursor(), SUPERUSER_ID, {})
+    else:
+        # make sudo when reusing environment
+        env = env(user=SUPERUSER_ID)
+    if env:
+        try:
+            res = callback(env, tracking_id, event_type, **kw)
+            if not current:
+                env.cr.commit()
+        except Exception as e:
+            if not current:
+                env.cr.rollback()
+            raise e
+        finally:
+            if not current:
+                env.cr.close()
+    return res
 
 
 class MailTrackingController(http.Controller):
@@ -35,49 +55,37 @@ class MailTrackingController(http.Controller):
             'ua_family': request.user_agent.browser or False,
         }
 
+    def _tracking_open(self, env, tracking_id, event_type, **kw):
+        tracking_email = env['mail.tracking.email'].search([
+            ('id', '=', tracking_id),
+        ])
+        if tracking_email:
+            metadata = self._request_metadata()
+            tracking_email.event_create('open', metadata)
+        else:
+            _logger.warning(
+                "MailTracking email '%s' not found", tracking_id)
+
+    def _tracking_event(self, env, tracking_id, event_type, **kw):
+        metadata = self._request_metadata()
+        return env['mail.tracking.email'].event_process(
+            http.request, kw, metadata, event_type=event_type)
+
     @http.route('/mail/tracking/all/<string:db>',
                 type='http', auth='none')
     def mail_tracking_all(self, db, **kw):
-        env = _env_get(db)
-        if not env:
-            return 'NOT FOUND'
-        metadata = self._request_metadata()
-        response = env['mail.tracking.email'].event_process(
-            http.request, kw, metadata)
-        env.cr.commit()
-        env.cr.close()
-        return response
+        return _env_get(db, self._tracking_event, None, None, **kw)
 
     @http.route('/mail/tracking/event/<string:db>/<string:event_type>',
                 type='http', auth='none')
     def mail_tracking_event(self, db, event_type, **kw):
-        env = _env_get(db)
-        if not env:
-            return 'NOT FOUND'
-        metadata = self._request_metadata()
-        response = env['mail.tracking.email'].event_process(
-            http.request, kw, metadata, event_type=event_type)
-        env.cr.commit()
-        env.cr.close()
-        return response
+        return _env_get(db, self._tracking_event, None, event_type, **kw)
 
     @http.route('/mail/tracking/open/<string:db>'
                 '/<int:tracking_email_id>/blank.gif',
                 type='http', auth='none')
     def mail_tracking_open(self, db, tracking_email_id, **kw):
-        env = _env_get(db)
-        if env:
-            tracking_email = env['mail.tracking.email'].search([
-                ('id', '=', tracking_email_id),
-            ])
-            if tracking_email:
-                metadata = self._request_metadata()
-                tracking_email.event_create('open', metadata)
-            else:
-                _logger.warning(
-                    "MailTracking email '%s' not found", tracking_email_id)
-            env.cr.commit()
-            env.cr.close()
+        _env_get(db, self._tracking_open, tracking_email_id, None, **kw)
 
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()

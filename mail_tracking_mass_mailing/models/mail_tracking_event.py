@@ -2,11 +2,15 @@
 # © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
+from openerp import api, fields, models
 
 
 class MailTrackingEvent(models.Model):
     _inherit = "mail.tracking.event"
+
+    mass_mailing_id = fields.Many2one(
+        string="Mass mailing", comodel_name='mail.mass_mailing', readonly=True,
+        related='tracking_email_id.mass_mailing_id', store=True)
 
     @api.model
     def process_open(self, tracking_email, metadata):

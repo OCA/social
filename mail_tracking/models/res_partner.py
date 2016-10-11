@@ -8,39 +8,40 @@ from openerp import models, api, fields
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    tracking_email_ids = fields.Many2many(
-        string="Tracking emails", comodel_name="mail.tracking.email",
-        readonly=True)
     tracking_emails_count = fields.Integer(
-        string="Tracking emails count", store=True, readonly=True,
+        string="Tracking emails count", readonly=True, store=False,
         compute="_compute_tracking_emails_count")
+    email_bounced = fields.Boolean(string="Email bounced")
     email_score = fields.Float(
-        string="Email score", readonly=True, default=50.0)
+        string="Email score", readonly=True, store=False,
+        compute='_compute_email_score')
 
     @api.multi
-    def email_score_calculate(self):
-        # This is not a compute method because is causing a inter-block
-        # in mail_tracking_email PostgreSQL table
-        # We suspect that tracking_email write to state field block that
-        # table and then inside write ORM try to read from DB
-        # tracking_email_ids because it's not in cache.
-        # PostgreSQL blocks read because we have not committed yet the write
-        for partner in self:
-            partner.email_score = partner.tracking_email_ids.email_score()
+    @api.depends('email')
+    def _compute_email_score(self):
+        for partner in self.filtered('email'):
+            partner.email_score = self.env['mail.tracking.email'].\
+                email_score_from_email(partner.email)
 
-    @api.one
-    @api.depends('tracking_email_ids')
+    @api.multi
+    @api.depends('email')
     def _compute_tracking_emails_count(self):
-        self.tracking_emails_count = self.env['mail.tracking.email'].\
-            search_count([
-                ('recipient_address', '=ilike', self.email)
-            ])
+        for partner in self:
+            partner.tracking_emails_count = self.env['mail.tracking.email'].\
+                search_count([
+                    ('recipient_address', '=ilike', partner.email)
+                ])
+
+    @api.multi
+    def email_bounced_set(self, tracking_email, reason):
+        """Inherit this method to make any other actions to partners"""
+        return self.write({'email_bounced': True})
 
     @api.multi
     def write(self, vals):
         email = vals.get('email')
         if email is not None:
-            m_track = self.env['mail.tracking.email']
-            vals['tracking_email_ids'] = m_track._tracking_ids_to_write(email)
-            vals['email_score'] = m_track.email_score_from_email(email)
+            vals['email_bounced'] = (
+                bool(email) and
+                self.env['mail.tracking.email'].email_is_bounced(email))
         return super(ResPartner, self).write(vals)
