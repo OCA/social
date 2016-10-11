@@ -10,7 +10,7 @@
             <field name="body_html" position="before">
                 <group attrs="{'invisible': [('body_type', '!=', 'qweb')]}">
                     <field name="body_view_id" attrs="{'required': [('body_type', '=', 'qweb')]}" />
-                    <field name="body_view_arch" attrs="{'required': [('body_type', '=', 'qweb')], 'invisible': [('body_view_id', '=', False)]}" />
+                    <field name="body_view_arch" widget="ace" attrs="{'required': [('body_type', '=', 'qweb')], 'invisible': [('body_view_id', '=', False)]}" />
                 </group>
             </field>
             <field name="body_html" position="attributes">
