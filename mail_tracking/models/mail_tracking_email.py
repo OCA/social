@@ -167,7 +167,7 @@ class MailTrackingEmail(models.Model):
     @api.depends('name', 'recipient')
     def _compute_display_name(self):
         for email in self:
-            parts = [email.name]
+            parts = [email.name or '']
             if email.recipient:
                 parts.append(email.recipient)
             email.display_name = ' - '.join(parts)
