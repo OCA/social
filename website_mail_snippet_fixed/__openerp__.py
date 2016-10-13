@@ -4,10 +4,12 @@
 {
     "name": "Fixed-Width Layout Snippets for Writing Emails",
     "summary": "560px width extra building blocks",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.0.1",
     "category": "Marketing",
-    "website": "http://www.antiun.com",
-    "author": "Antiun Ingeniería S.L., Odoo Community Association (OCA)",
+    "website": "https://www.tecnativa.com",
+    "author": "Antiun Ingeniería S.L., "
+              "Tecnativa, "
+              "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
@@ -18,6 +20,7 @@
         "website_mail_snippet_vertical_resize_base",
     ],
     "data": [
+        "views/assets.xml",
         "views/templates.xml",
         "views/snippet_1_col.xml",
         "views/snippet_2_cols.xml",
