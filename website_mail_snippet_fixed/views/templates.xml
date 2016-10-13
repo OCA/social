@@ -21,6 +21,12 @@
             <t t-call="website_mail_snippet_fixed.560px_section"/>
         </div>
     </xpath>
+
+    <xpath expr="//*[@id='snippet_options']" position="inside">
+        <div
+            data-snippet-option-id='fixed_560px'
+            data-selector=".fixed_560px"/>
+    </xpath>
 </template>
 
 <template id="560px_section"/>
@@ -37,7 +43,7 @@
                 class="oe_snippet_thumbnail_title"/>
         </div>
         <div
-            class="oe_snippet_body"
+            class="oe_snippet_body fixed_560px"
             style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
             <table
                 style="width: 560px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
