@@ -33,6 +33,7 @@ class MailNotification(models.Model):
                 continue
             custom_values = {
                 'references': message.parent_id.message_id,
+                'author_id': message.author_id.id
             }
             if message.res_id and hasattr(
                 self.env[message.model], 'message_get_email_values'
