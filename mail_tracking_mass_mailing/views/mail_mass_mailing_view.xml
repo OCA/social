@@ -15,5 +15,32 @@
     </field>
 </record>
 
+<record model="ir.actions.act_window" id="action_view_mail_tracking_email">
+    <field name="name">Mail tracking emails</field>
+    <field name="res_model">mail.tracking.email</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('mass_mailing_id', '!=', False)]</field>
+</record>
+
+<record model="ir.actions.act_window" id="action_view_mail_tracking_event">
+    <field name="name">Mail tracking events</field>
+    <field name="res_model">mail.tracking.event</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="domain">[('mass_mailing_id', '!=', False)]</field>
+</record>
+
+<menuitem name="Mail tracking" id="mail_tracking_menu"
+          parent="base.marketing_menu" sequence="50"/>
+
+<menuitem name="Emails" id="mail_tracking_email_menu"
+          parent="mail_tracking_menu" sequence="1"
+          action="action_view_mail_tracking_email"/>
+
+<menuitem name="Events" id="mail_tracking_event_menu"
+          parent="mail_tracking_menu" sequence="2"
+          action="action_view_mail_tracking_event"/>
+
 </data>
 </openerp>

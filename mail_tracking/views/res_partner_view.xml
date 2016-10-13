@@ -25,7 +25,22 @@
         <field name="email" position="after">
             <field name="email_score" widget="progressbar"
                    attrs="{'invisible': [('email', '=', False)]}"/>
+           <field name="email_bounced"
+                  attrs="{'invisible': [('email', '=', False)]}"/>
         </field>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_res_partner_filter">
+    <field name="name">Filter bounced partners</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter"/>
+    <field name="arch" type="xml">
+        <filter name="type_company" position="after">
+            <separator/>
+            <filter string="Email bounced" name="email_bounced"
+                    domain="[('email', '!=' , False), ('email_bounced', '=', True)]"/>
+        </filter>
     </field>
 </record>
 

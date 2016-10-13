@@ -8,21 +8,27 @@ from openerp import models, api, fields
 class MailMassMailingContact(models.Model):
     _inherit = 'mail.mass_mailing.contact'
 
-    tracking_email_ids = fields.Many2many(
-        string="Tracking emails", comodel_name="mail.tracking.email",
-        readonly=True)
+    email_bounced = fields.Boolean(string="Email bounced")
     email_score = fields.Float(
-        string="Email score", readonly=True, default=50.0)
+        string="Email score", readonly=True, store=False,
+        compute='_compute_email_score')
 
     @api.multi
-    def email_score_calculate(self):
-        for contact in self:
-            contact.email_score = contact.tracking_email_ids.email_score()
+    @api.depends('email')
+    def _compute_email_score(self):
+        for contact in self.filtered('email'):
+            contact.email_score = self.env['mail.tracking.email'].\
+                email_score_from_email(contact.email)
+
+    @api.multi
+    def email_bounced_set(self, tracking_email, reason):
+        return self.write({'email_bounced': True})
 
     @api.multi
     def write(self, vals):
         email = vals.get('email')
         if email is not None:
-            vals['tracking_email_ids'] = \
-                self.env['mail.tracking.email']._tracking_ids_to_write(email)
+            vals['email_bounced'] = (
+                bool(email) and
+                self.env['mail.tracking.email'].email_is_bounced(email))
         return super(MailMassMailingContact, self).write(vals)

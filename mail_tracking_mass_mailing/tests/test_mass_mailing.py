@@ -2,14 +2,17 @@
 # © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import mock
 from openerp.tests.common import TransactionCase
 from openerp.exceptions import Warning as UserError
 
+mock_send_email = ('openerp.addons.base.ir.ir_mail_server.'
+                   'ir_mail_server.send_email')
 
-# One test case per method
+
 class TestMassMailing(TransactionCase):
-    def setUp(self):
-        super(TestMassMailing, self).setUp()
+    def setUp(self, *args, **kwargs):
+        super(TestMassMailing, self).setUp(*args, **kwargs)
         self.list = self.env['mail.mass_mailing.list'].create({
             'name': 'Test mail tracking',
         })
@@ -49,6 +52,21 @@ class TestMassMailing(TransactionCase):
     def test_avoid_resend_disable(self):
         self.mailing.avoid_resend = False
         self.resend_mass_mailing(1, 3)
+
+    def test_smtp_error(self):
+        with mock.patch(mock_send_email) as mock_func:
+            mock_func.side_effect = Warning('Test error')
+            self.mailing.send_mail()
+            for stat in self.mailing.statistics_ids:
+                if stat.mail_mail_id:
+                    stat.mail_mail_id.send()
+                tracking = self.env['mail.tracking.email'].search([
+                    ('mail_id_int', '=', stat.mail_mail_id_int),
+                ])
+                self.assertEqual('error', tracking.state)
+                self.assertEqual('Warning', tracking.error_type)
+                self.assertEqual('Test error', tracking.error_description)
+            self.assertTrue(self.contact_a.email_bounced)
 
     def test_tracking_email_link(self):
         self.mailing.send_mail()
@@ -90,24 +108,24 @@ class TestMassMailing(TransactionCase):
             self.assertTrue(stat.bounced)
 
     def test_tracking_email_hard_bounce(self):
-            self._tracking_email_bounce('hard_bounce', 'bounced')
+        self._tracking_email_bounce('hard_bounce', 'bounced')
 
     def test_tracking_email_soft_bounce(self):
-            self._tracking_email_bounce('soft_bounce', 'soft-bounced')
+        self._tracking_email_bounce('soft_bounce', 'soft-bounced')
 
     def test_tracking_email_reject(self):
-            self._tracking_email_bounce('reject', 'rejected')
+        self._tracking_email_bounce('reject', 'rejected')
 
     def test_tracking_email_spam(self):
-            self._tracking_email_bounce('spam', 'spam')
+        self._tracking_email_bounce('spam', 'spam')
 
     def test_contact_tracking_emails(self):
-        self.mailing.send_mail()
-        for stat in self.mailing.statistics_ids:
-            if stat.mail_mail_id:
-                stat.mail_mail_id.send()
-        self.assertEqual(len(self.contact_a.tracking_email_ids), 1)
+        self._tracking_email_bounce('hard_bounce', 'bounced')
+        self.assertTrue(self.contact_a.email_bounced)
+        self.assertTrue(self.contact_a.email_score < 50.0)
         self.contact_a.email = 'other_contact_a@example.com'
-        self.assertEqual(len(self.contact_a.tracking_email_ids), 0)
+        self.assertFalse(self.contact_a.email_bounced)
+        self.assertTrue(self.contact_a.email_score == 50.0)
         self.contact_a.email = 'contact_a@example.com'
-        self.assertEqual(len(self.contact_a.tracking_email_ids), 1)
+        self.assertTrue(self.contact_a.email_bounced)
+        self.assertTrue(self.contact_a.email_score < 50.0)

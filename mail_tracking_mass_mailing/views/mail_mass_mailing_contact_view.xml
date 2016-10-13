@@ -10,8 +10,21 @@
     <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_tree"/>
     <field name="arch" type="xml">
         <field name="opt_out" position="after">
+            <field name="email_bounced"/>
             <field name="email_score" widget="progressbar"/>
         </field>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
+    <field name="name">Filter bounced contacts</field>
+    <field name="model">mail.mass_mailing.contact</field>
+    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_search"/>
+    <field name="arch" type="xml">
+        <filter name="not_opt_out" position="after">
+            <filter string="Email bounced" name="email_bounced"
+                    domain="[('email_bounced', '=', True)]"/>
+        </filter>
     </field>
 </record>
 

@@ -17,6 +17,7 @@ class MailTrackingEmail(models.Model):
 
     @api.model
     def _statistics_link_prepare(self, tracking):
+        """Inherit this method to link other object to mail.mail.statistics"""
         return {
             'mail_tracking_id': tracking.id,
         }
@@ -28,25 +29,25 @@ class MailTrackingEmail(models.Model):
         if tracking.mail_stats_id:
             tracking.mail_stats_id.write(
                 self._statistics_link_prepare(tracking))
-            # Get partner from mail statistics
-            # if mass_mailing_partner addon installed
-            if ('partner_id' in tracking.mail_stats_id._fields and
-                    tracking.mail_stats_id.partner_id and
-                    not tracking.partner_id):
-                tracking.partner_id = tracking.mail_stats_id.partner_id.id
-        # Add this tracking to mass mailing contacts with this recipient
-        self.tracking_ids_recalculate(
-            'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
-            tracking.recipient_address, new_tracking=tracking)
         return tracking
+
+    @api.multi
+    def _contacts_email_bounced_set(self, reason):
+        for tracking_email in self:
+            self.env['mail.mass_mailing.contact'].search([
+                ('email', '=ilike', tracking_email.recipient_address)
+            ]).email_bounced_set(tracking_email, reason)
+
+    @api.multi
+    def smtp_error(self, mail_server, smtp_server, exception):
+        res = super(MailTrackingEmail, self).smtp_error(
+            mail_server, smtp_server, exception)
+        self._contacts_email_bounced_set('error')
+        return res
 
     @api.multi
     def event_create(self, event_type, metadata):
         res = super(MailTrackingEmail, self).event_create(event_type, metadata)
-        for tracking_email in self:
-            contacts = self.tracking_ids_recalculate(
-                'mail.mass_mailing.contact', 'email', 'tracking_email_ids',
-                tracking_email.recipient_address)
-            if contacts:
-                contacts.email_score_calculate()
+        if event_type in {'hard_bounce', 'spam', 'reject'}:
+            self._contacts_email_bounced_set(event_type)
         return res
