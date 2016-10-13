@@ -30,6 +30,9 @@ def _env_get(db, callback, tracking_id, event_type, **kw):
         # make sudo when reusing environment
         env = env(user=SUPERUSER_ID)
     if env:
+        # This try-except-finally is equivalent to a with statement
+        # We assure that new created cursor si commit/rollback/close
+        # in any case
         try:
             res = callback(env, tracking_id, event_type, **kw)
             if not current:

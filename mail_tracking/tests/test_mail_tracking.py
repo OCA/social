@@ -119,6 +119,13 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(mail.email_from, tracking.sender)
         res = controller.mail_tracking_open(db, tracking.id)
         self.assertEqual(image, res.response[0])
+        # Two events: sent and open
+        self.assertEqual(2, len(tracking.tracking_event_ids))
+        # Fake event: tracking_email_id = False
+        res = controller.mail_tracking_open(db, False)
+        self.assertEqual(image, res.response[0])
+        # Two events again because no tracking_email_id found for False
+        self.assertEqual(2, len(tracking.tracking_event_ids))
 
     def test_concurrent_open(self):
         mail, tracking = self.mail_send(self.recipient.email)
@@ -198,31 +205,38 @@ class TestMailTracking(TransactionCase):
             self.assertEqual('error', tracking.state)
             self.assertEqual('Warning', tracking.error_type)
             self.assertEqual('Test error', tracking.error_description)
+            self.assertTrue(self.recipient.email_bounced)
 
     def test_partner_email_change(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('open', {})
         orig_score = self.recipient.email_score
+        orig_count = self.recipient.tracking_emails_count
         orig_email = self.recipient.email
         self.recipient.email = orig_email + '2'
         self.assertEqual(50.0, self.recipient.email_score)
+        self.assertEqual(0, self.recipient.tracking_emails_count)
         self.recipient.email = orig_email
         self.assertEqual(orig_score, self.recipient.email_score)
+        self.assertEqual(orig_count, self.recipient.tracking_emails_count)
 
     def test_process_hard_bounce(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('hard_bounce', {})
         self.assertEqual('bounced', tracking.state)
+        self.assertTrue(self.recipient.email_score < 50.0)
 
     def test_process_soft_bounce(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('soft_bounce', {})
         self.assertEqual('soft-bounced', tracking.state)
+        self.assertTrue(self.recipient.email_score < 50.0)
 
     def test_process_delivered(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('delivered', {})
         self.assertEqual('delivered', tracking.state)
+        self.assertTrue(self.recipient.email_score > 50.0)
 
     def test_process_deferral(self):
         mail, tracking = self.mail_send(self.recipient.email)
@@ -233,26 +247,38 @@ class TestMailTracking(TransactionCase):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('spam', {})
         self.assertEqual('spam', tracking.state)
+        self.assertTrue(self.recipient.email_score < 50.0)
 
     def test_process_unsub(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('unsub', {})
         self.assertEqual('unsub', tracking.state)
+        self.assertTrue(self.recipient.email_score < 50.0)
 
     def test_process_reject(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('reject', {})
         self.assertEqual('rejected', tracking.state)
+        self.assertTrue(self.recipient.email_score < 50.0)
 
     def test_process_open(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('open', {})
         self.assertEqual('opened', tracking.state)
+        self.assertTrue(self.recipient.email_score > 50.0)
 
     def test_process_click(self):
         mail, tracking = self.mail_send(self.recipient.email)
         tracking.event_create('click', {})
         self.assertEqual('opened', tracking.state)
+        self.assertTrue(self.recipient.email_score > 50.0)
+
+    def test_process_several_bounce(self):
+        for i in range(1, 10):
+            mail, tracking = self.mail_send(self.recipient.email)
+            tracking.event_create('hard_bounce', {})
+            self.assertEqual('bounced', tracking.state)
+        self.assertEqual(0.0, self.recipient.email_score)
 
     def test_db(self):
         db = self.env.cr.dbname

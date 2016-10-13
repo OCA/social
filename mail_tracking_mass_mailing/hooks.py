@@ -5,7 +5,7 @@
 import logging
 try:
     from openerp.addons.mail_tracking.hooks import column_add_with_value
-except ImportError:
+except ImportError:  # pragma: no cover
     column_add_with_value = False
 
 _logger = logging.getLogger(__name__)

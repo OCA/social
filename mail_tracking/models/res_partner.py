@@ -8,10 +8,14 @@ from openerp import models, api, fields
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
+    # tracking_emails_count and email_score are non-store fields in order
+    # to improve performance
+    # email_bounced is store=True and index=True field in order to filter
+    # in tree view for processing bounces easier
     tracking_emails_count = fields.Integer(
         string="Tracking emails count", readonly=True, store=False,
         compute="_compute_tracking_emails_count")
-    email_bounced = fields.Boolean(string="Email bounced")
+    email_bounced = fields.Boolean(string="Email bounced", index=True)
     email_score = fields.Float(
         string="Email score", readonly=True, store=False,
         compute='_compute_email_score')
@@ -35,7 +39,8 @@ class ResPartner(models.Model):
     @api.multi
     def email_bounced_set(self, tracking_email, reason):
         """Inherit this method to make any other actions to partners"""
-        return self.write({'email_bounced': True})
+        partners = self.filtered(lambda r: not r.email_bounced)
+        return partners.write({'email_bounced': True})
 
     @api.multi
     def write(self, vals):
