@@ -17,33 +17,23 @@ def _env_get(db, callback, tracking_id, event_type, **kw):
     current = http.request.db and db == http.request.db
     env = current and http.request.env
     if not env:
-        try:
-            reg = registry(db)
-        except OperationalError:
-            _logger.warning("Selected BD '%s' not found", db)
-        except:  # pragma: no cover
-            _logger.warning("Selected BD '%s' connection error", db)
-        if reg:
-            _logger.info("Creating a new environment for database '%s'", db)
-            env = api.Environment(reg.cursor(), SUPERUSER_ID, {})
+        with api.Environment.manage():
+            try:
+                reg = registry(db)
+            except OperationalError:
+                _logger.warning("Selected BD '%s' not found", db)
+            except:  # pragma: no cover
+                _logger.warning("Selected BD '%s' connection error", db)
+            if reg:
+                _logger.info("New environment for database '%s'", db)
+                with reg.cursor() as new_cr:
+                    new_env = api.Environment(new_cr, SUPERUSER_ID, {})
+                    res = callback(env, tracking_id, event_type, **kw)
+                    new_env.cr.commit()
     else:
         # make sudo when reusing environment
         env = env(user=SUPERUSER_ID)
-    if env:
-        # This try-except-finally is equivalent to a with statement
-        # We assure that new created cursor si commit/rollback/close
-        # in any case
-        try:
-            res = callback(env, tracking_id, event_type, **kw)
-            if not current:
-                env.cr.commit()
-        except Exception as e:
-            if not current:
-                env.cr.rollback()
-            raise e
-        finally:
-            if not current:
-                env.cr.close()
+        res = callback(env, tracking_id, event_type, **kw)
     return res
 
 
