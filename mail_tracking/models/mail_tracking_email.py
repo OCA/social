@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-import threading
 import urlparse
 import time
 import re
@@ -24,7 +23,7 @@ class MailTrackingEmail(models.Model):
     _rec_name = 'display_name'
     _description = 'MailTracking email'
 
-    # This table is going to growth fast and to infinite, so we index:
+    # This table is going to grow fast and to infinite, so we index:
     # - name: Search in tree view
     # - time: default order fields
     # - recipient_address: Used for email_store calculation (non-store)
@@ -93,6 +92,7 @@ class MailTrackingEmail(models.Model):
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
 
+    @api.model
     def _email_score_tracking_filter(self, domain, order='time desc',
                                      limit=10):
         """Default tracking search. Ready to be inherited."""
@@ -111,6 +111,20 @@ class MailTrackingEmail(models.Model):
             ('recipient_address', '=ilike', email)
         ]).email_score()
 
+    @api.model
+    def _email_score_weights(self):
+        """Default email score weights. Ready to be inherited"""
+        return {
+            'error': -50.0,
+            'rejected': -25.0,
+            'spam': -25.0,
+            'bounced': -25.0,
+            'soft-bounced': -10.0,
+            'unsub': -10.0,
+            'delivered': 1.0,
+            'opened': 5.0,
+        }
+
     @api.multi
     def email_score(self):
         """Default email score algorimth. Ready to be inherited
@@ -120,21 +134,13 @@ class MailTrackingEmail(models.Model):
         - Unknown reputation: Value 50.0
         - Good reputation: Value between 50.0 and 100.0
         """
+        weights = self._email_score_weights()
         score = 50.0
         for tracking in self:
-            if tracking.state in ('error',):
-                score -= 50.0
-            elif tracking.state in ('rejected', 'spam', 'bounced'):
-                score -= 25.0
-            elif tracking.state in ('soft-bounced', 'unsub'):
-                score -= 10.0
-            elif tracking.state in ('delivered',):
-                score += 1.0
-            elif tracking.state in ('opened',):
-                score += 5.0
+            score += weights.get(tracking.state, 0.0)
         if score > 100.0:
             score = 100.0
-        if score < 0.0:
+        elif score < 0.0:
             score = 0.0
         return score
 
@@ -272,7 +278,6 @@ class MailTrackingEmail(models.Model):
 
     @api.multi
     def event_create(self, event_type, metadata):
-        testing = getattr(threading.currentThread(), 'testing', False)
         event_ids = self.env['mail.tracking.event']
         for tracking_email in self:
             other_ids = tracking_email._concurrent_events(event_type, metadata)
@@ -280,9 +285,6 @@ class MailTrackingEmail(models.Model):
                 vals = tracking_email._event_prepare(event_type, metadata)
                 if vals:
                     event_ids += event_ids.sudo().create(vals)
-                    # Commit to DB to release exclusive lock
-                    if not testing:
-                        self.env.cr.commit()  # pragma: no cover
             else:
                 _logger.debug("Concurrent event '%s' discarded", event_type)
         if event_type in {'hard_bounce', 'spam', 'reject'}:
