@@ -28,7 +28,7 @@ def _env_get(db, callback, tracking_id, event_type, **kw):
                 _logger.info("New environment for database '%s'", db)
                 with reg.cursor() as new_cr:
                     new_env = api.Environment(new_cr, SUPERUSER_ID, {})
-                    res = callback(env, tracking_id, event_type, **kw)
+                    res = callback(new_env, tracking_id, event_type, **kw)
                     new_env.cr.commit()
     else:
         # make sudo when reusing environment
