@@ -24,6 +24,11 @@ class MailTrackingEmail(models.Model):
     _rec_name = 'display_name'
     _description = 'MailTracking email'
 
+    # This table is going to growth fast and to infinite, so we index:
+    # - name: Search in tree view
+    # - time: default order fields
+    # - recipient_address: Used for email_store calculation (non-store)
+    # - state: Search and group_by in tree view
     name = fields.Char(string="Subject", readonly=True, index=True)
     display_name = fields.Char(
         string="Display name", readonly=True, store=True,
@@ -111,6 +116,9 @@ class MailTrackingEmail(models.Model):
         """Default email score algorimth. Ready to be inherited
 
         Must return a value beetwen 0.0 and 100.0
+        - Bad reputation: Value between 0 and 50.0
+        - Unknown reputation: Value 50.0
+        - Good reputation: Value between 50.0 and 100.0
         """
         score = 50.0
         for tracking in self:
@@ -275,7 +283,7 @@ class MailTrackingEmail(models.Model):
                     event_ids += event_ids.sudo().create(vals)
                     # Commit to DB to release exclusive lock
                     if not testing:
-                        self.env.cr.commit()
+                        self.env.cr.commit()  # pragma: no cover
             else:
                 _logger.debug("Concurrent event '%s' discarded", event_type)
         if event_type in {'hard_bounce', 'spam', 'reject'}:
