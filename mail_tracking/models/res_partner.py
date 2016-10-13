@@ -13,12 +13,9 @@ class ResPartner(models.Model):
     # email_bounced is store=True and index=True field in order to filter
     # in tree view for processing bounces easier
     tracking_emails_count = fields.Integer(
-        string="Tracking emails count", readonly=True,
-        compute="_compute_tracking_emails_count")
-    email_bounced = fields.Boolean(string="Email bounced", index=True)
-    email_score = fields.Float(
-        string="Email score", readonly=True,
-        compute='_compute_email_score')
+        compute='_compute_tracking_emails_count', readonly=True)
+    email_bounced = fields.Boolean(index=True)
+    email_score = fields.Float(compute='_compute_email_score', readonly=True)
 
     @api.multi
     @api.depends('email')
