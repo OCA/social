@@ -4,7 +4,6 @@
 odoo.define('mail_tracking.partner_tracking', function(require){
 "use strict";
 
-var $ = require('$');
 var core = require('web.core');
 var session = require('web.session');
 var Model = require('web.Model');
@@ -26,7 +25,7 @@ chat_manager.make_message = function(data) {
 
 ChatThread.include({
     on_tracking_partner_click: function (event) {
-        var partner_id = $(event.currentTarget).data('partner');
+        var partner_id = this.$el.find(event.currentTarget).data('partner');
         var state = {
             'model': 'res.partner',
             'id': partner_id,
