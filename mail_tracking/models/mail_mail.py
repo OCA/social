@@ -6,7 +6,7 @@ import time
 from datetime import datetime
 from email.utils import COMMASPACE
 
-from openerp import models, api, fields
+from odoo import models, fields
 
 
 class MailMail(models.Model):
@@ -18,7 +18,7 @@ class MailMail(models.Model):
         email_to_list = email.get('email_to', [])
         email_to = COMMASPACE.join(email_to_list)
         return {
-            'name': email.get('subject', False),
+            'name': self.subject,
             'timestamp': '%.6f' % ts,
             'time': fields.Datetime.to_string(dt),
             'mail_id': self.id,
@@ -28,7 +28,6 @@ class MailMail(models.Model):
             'sender': self.email_from,
         }
 
-    @api.multi
     def send_get_email_dict(self, partner=None):
         email = super(MailMail, self).send_get_email_dict(partner=partner)
         vals = self._tracking_email_prepare(partner, email)
