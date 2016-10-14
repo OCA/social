@@ -10,7 +10,7 @@
               'Odoo Community Association (OCA)',
     'website': "http://acsone.eu",
     'category': 'Social Network',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
         'mail',
@@ -18,5 +18,5 @@
     'data': [
         'wizard/mail_compose_message_view.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
