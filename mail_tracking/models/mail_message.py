@@ -44,7 +44,7 @@ class MailMessage(models.Model):
             for tracking in trackings:
                 status = self._partner_tracking_status_get(tracking)
                 recipient = (
-                    tracking.partner_id.display_name or tracking.recipient)
+                    tracking.partner_id.name or tracking.recipient)
                 partner_trackings.append((
                     status, tracking.id, recipient, tracking.partner_id.id))
                 if tracking.partner_id:
@@ -59,7 +59,7 @@ class MailMessage(models.Model):
             for partner in partners:
                 # If there is partners not included, then status is 'unknown'
                 partner_trackings.append((
-                    'unknown', False, partner.display_name, partner.id))
+                    'unknown', False, partner.name, partner.id))
             res[message.id] = partner_trackings
         return res
 
