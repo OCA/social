@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_mass_mailing_sending_admin,mail_mass_mailing_sending group_marketing_user,model_mail_mass_mailing_sending,base.group_user,1,1,1,0
+manage_mail_mass_mailing_sending_admin,mail_mass_mailing_sending group_system,model_mail_mass_mailing_sending,base.group_system,1,1,1,1

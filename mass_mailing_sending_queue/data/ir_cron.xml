@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data noupdate="1">
+
+<record id="cronjob" model="ir.cron">
+    <field name="name">Mass mailing sending queue</field>
+    <field name="interval_type">minutes</field>
+    <field name="interval_number">1</field>
+    <field name="numbercall">-1</field>
+    <field name="model">mail.mass_mailing.sending</field>
+    <field name="function">cron</field>
+    <field name="nextcall">2016-01-01</field>
+</record>
+
+</data>
+</openerp>
