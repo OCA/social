@@ -20,7 +20,7 @@
 ##############################################################################
 {
     "name": "Restrict follower selection",
-    "version": "8.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Therp BV,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Social Network",
@@ -33,7 +33,7 @@
         "data/ir_actions.xml",
     ],
     "auto_install": False,
-    'installable': False,
+    'installable': True,
     "application": False,
     "external_dependencies": {
         'python': [],
