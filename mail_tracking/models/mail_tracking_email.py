@@ -171,7 +171,9 @@ class MailTrackingEmail(models.Model):
                 fields.Date.from_string(email.time))
 
     def _get_mail_tracking_img(self):
-        base_url = self.env['ir.config_parameter'].get_param('web.base.url')
+        m_config = self.env['ir.config_parameter']
+        base_url = (m_config.get_param('mail_tracking.base.url') or
+                    m_config.get_param('web.base.url'))
         path_url = (
             'mail/tracking/open/%(db)s/%(tracking_email_id)s/blank.gif' % {
                 'db': self.env.cr.dbname,
