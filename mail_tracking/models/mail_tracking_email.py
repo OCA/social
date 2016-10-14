@@ -8,8 +8,8 @@ import time
 import re
 from datetime import datetime
 
-from openerp import models, api, fields, tools
-import openerp.addons.decimal_precision as dp
+from odoo import models, api, fields, tools
+import odoo.addons.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
 
@@ -26,7 +26,7 @@ class MailTrackingEmail(models.Model):
     name = fields.Char(string="Subject", readonly=True, index=True)
     display_name = fields.Char(
         string="Display name", readonly=True, store=True,
-        compute="_compute_display_name")
+        compute="_compute_tracking_display_name")
     timestamp = fields.Float(
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
@@ -120,7 +120,6 @@ class MailTrackingEmail(models.Model):
         else:
             return [(5, False, False)]
 
-    @api.multi
     def _email_score_tracking_filter(self):
         """Default email score filter for tracking emails"""
         # Consider only last 10 tracking emails
@@ -133,7 +132,6 @@ class MailTrackingEmail(models.Model):
         ])
         return trackings.email_score()
 
-    @api.multi
     def email_score(self):
         """Default email score algorimth"""
         score = 50.0
@@ -153,7 +151,6 @@ class MailTrackingEmail(models.Model):
             score = 100.0
         return score
 
-    @api.multi
     @api.depends('recipient')
     def _compute_recipient_address(self):
         for email in self:
@@ -163,16 +160,14 @@ class MailTrackingEmail(models.Model):
             else:
                 email.recipient_address = email.recipient
 
-    @api.multi
     @api.depends('name', 'recipient')
-    def _compute_display_name(self):
+    def _compute_tracking_display_name(self):
         for email in self:
             parts = [email.name or '']
             if email.recipient:
                 parts.append(email.recipient)
             email.display_name = ' - '.join(parts)
 
-    @api.multi
     @api.depends('time')
     def _compute_date(self):
         for email in self:
@@ -202,7 +197,6 @@ class MailTrackingEmail(models.Model):
                 'tracking_email_id': self.id,
             })
 
-    @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
         self.sudo().write({
             'error_smtp_server': tools.ustr(smtp_server),
@@ -212,7 +206,6 @@ class MailTrackingEmail(models.Model):
         })
         return True
 
-    @api.multi
     def tracking_img_add(self, email):
         self.ensure_one()
         tracking_url = self._get_mail_tracking_img()
@@ -240,7 +233,6 @@ class MailTrackingEmail(models.Model):
                 })
         return True
 
-    @api.multi
     def _tracking_sent_prepare(self, mail_server, smtp_server, message,
                                message_id):
         self.ensure_one()
@@ -286,7 +278,6 @@ class MailTrackingEmail(models.Model):
             concurrent_event_ids = m_event.search(domain)
         return concurrent_event_ids
 
-    @api.multi
     def event_create(self, event_type, metadata):
         event_ids = self.env['mail.tracking.event']
         for tracking_email in self:

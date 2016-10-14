@@ -5,12 +5,12 @@
 import mock
 import base64
 import time
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 from ..controllers.main import MailTrackingController, BLANK
 
-mock_request = 'openerp.http.request'
-mock_send_email = ('openerp.addons.base.ir.ir_mail_server.'
-                   'ir_mail_server.send_email')
+mock_request = 'odoo.http.request'
+mock_send_email = ('odoo.addons.base.ir.ir_mail_server.'
+                   'IrMailServer.send_email')
 
 
 class FakeUserAgent(object):
@@ -50,7 +50,7 @@ class TestMailTracking(TransactionCase):
             'subject': 'Message test',
             'author_id': self.sender.id,
             'email_from': self.sender.email,
-            'type': 'comment',
+            'message_type': 'comment',
             'model': 'res.partner',
             'res_id': self.recipient.id,
             'partner_ids': [(4, self.recipient.id)],
@@ -65,9 +65,7 @@ class TestMailTracking(TransactionCase):
         self.assertTrue(tracking_email)
         self.assertEqual(tracking_email.state, 'sent')
         # message_dict read by web interface
-        message_dict = message.message_read()
-        # First item in threads is message content
-        message_dict = message_dict['threads'][0][0]
+        message_dict = message.message_format()[0]
         self.assertTrue(len(message_dict['partner_ids']) > 0)
         # First partner is recipient
         partner_id = message_dict['partner_ids'][0][0]
