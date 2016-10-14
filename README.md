@@ -29,7 +29,7 @@ addon | version | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
 [mail_template_multi_report](mail_template_multi_report/) | 8.0.1.0.0 | Multiple Reports in Email Templates
-[mail_tracking](mail_tracking/) | 8.0.2.0.2 | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 8.0.3.0.0 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 8.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 8.0.1.0.1 | Improve mass mailing email tracking
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
@@ -42,7 +42,7 @@ addon | version | summary
 [social_media_tripadvisor](social_media_tripadvisor/) | 8.0.1.0.0 | Tripadvisor Extension for the social media icons from the odoo core
 [social_media_xing](social_media_xing/) | 8.0.1.0.0 | Xing Extension for the social media icons from the odoo core
 [website_mail_snippet_bg_color](website_mail_snippet_bg_color/) | 8.0.1.0.0 | Set any background color for any mail editor snippet
-[website_mail_snippet_fixed](website_mail_snippet_fixed/) | 8.0.1.0.0 | 560px width extra building blocks
+[website_mail_snippet_fixed](website_mail_snippet_fixed/) | 8.0.1.0.1 | 560px width extra building blocks
 [website_mail_snippet_responsive](website_mail_snippet_responsive/) | 8.0.2.1.0 | Well... pseudo-responsive (see description)
 [website_mail_snippet_table_edit](website_mail_snippet_table_edit/) | 8.0.1.0.0 | Allows you to edit any <tr> element in any snippet/template
 [website_mail_snippet_vertical_resize_base](website_mail_snippet_vertical_resize_base/) | 8.0.1.0.0 | Allow input of height in pixels with just a class
