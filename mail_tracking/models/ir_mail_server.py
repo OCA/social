@@ -4,7 +4,7 @@
 
 import re
 import threading
-from openerp import models, api, tools
+from odoo import models, api, tools
 
 
 class IrMailServer(models.Model):

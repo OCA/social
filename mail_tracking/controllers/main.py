@@ -4,7 +4,7 @@
 
 import werkzeug
 from psycopg2 import OperationalError
-from openerp import api, http, registry, SUPERUSER_ID
+from odoo import api, http, registry, SUPERUSER_ID
 import logging
 _logger = logging.getLogger(__name__)
 

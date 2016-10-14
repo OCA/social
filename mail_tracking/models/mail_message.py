@@ -2,7 +2,7 @@
 # © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api
+from odoo import models, api
 
 
 class MailMessage(models.Model):
@@ -31,7 +31,6 @@ class MailMessage(models.Model):
             status = tracking_status_map.get(tracking_email_status, 'unknown')
         return status
 
-    @api.multi
     def tracking_status(self):
         res = {}
         for message in self:
