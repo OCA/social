@@ -2,7 +2,7 @@
 # © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, api, fields
+from odoo import models, api, fields
 
 
 class ResPartner(models.Model):
@@ -17,7 +17,6 @@ class ResPartner(models.Model):
     email_score = fields.Float(
         string="Email score", readonly=True, default=50.0)
 
-    @api.multi
     def email_score_calculate(self):
         # This is not a compute method because is causing a inter-block
         # in mail_tracking_email PostgreSQL table
@@ -28,15 +27,14 @@ class ResPartner(models.Model):
         for partner in self:
             partner.email_score = partner.tracking_email_ids.email_score()
 
-    @api.one
     @api.depends('tracking_email_ids')
     def _compute_tracking_emails_count(self):
-        self.tracking_emails_count = self.env['mail.tracking.email'].\
-            search_count([
-                ('recipient_address', '=ilike', self.email)
-            ])
+        for partner in self:
+            partner.tracking_emails_count = self.env['mail.tracking.email'].\
+                search_count([
+                    ('recipient_address', '=ilike', partner.email)
+                ])
 
-    @api.multi
     def write(self, vals):
         email = vals.get('email')
         if email is not None:
