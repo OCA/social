@@ -29,12 +29,13 @@ addon | version | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sent](mail_sent/) | 8.0.1.0.0 | Provide a view of sent mails
 [mail_template_multi_report](mail_template_multi_report/) | 8.0.1.0.0 | Multiple Reports in Email Templates
-[mail_tracking](mail_tracking/) | 8.0.3.0.0 | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 8.0.3.0.1 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 8.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 8.0.1.0.1 | Improve mass mailing email tracking
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.2.0.0 | Customizable unsubscription process on mass mailing emails
 [mass_mailing_keep_archives](mass_mailing_keep_archives/) | 8.0.0.0.0 | Mass Mailing Keep Archives
+[mass_mailing_sending_queue](mass_mailing_sending_queue/) | 8.0.1.0.0 | A new queue for sending mass mailing
 [mass_mailing_statistic_extra](mass_mailing_statistic_extra/) | 8.0.1.0.0 | Mail statistics extra info
 [mass_mailing_unique](mass_mailing_unique/) | 8.0.1.0.0 | Avoids duplicate mailing lists and contacts
 [portal_welcome_email_template](portal_welcome_email_template/) | 8.0.1.0.0 | Adds an customizable email template for portal user invitation
