@@ -17,7 +17,8 @@ def post_init_hook(cr, registry):
         # ACTION 1: Match existing contacts
         contact_model = env['mail.mass_mailing.contact']
         partner_model = env['res.partner']
-        contacts = contact_model.search([('email', '!=', False)])
+        contacts = contact_model.with_context(
+            active_test=False).search([('email', '!=', False)])
         _logger.info('Trying to match %d contacts to partner by email',
                      len(contacts))
         for contact in contacts:
