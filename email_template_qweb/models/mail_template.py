@@ -33,6 +33,10 @@ class MailTemplate(models.Model):
                             'email_template': this,
                         })
                     )
+                    if isinstance(result[record_id]['body_html'], unicode):
+                        result[record_id]['body_html'] = (
+                            result[record_id]['body_html'].decode('utf-8')
+                        )
                     result[record_id]['body'] = tools.html_sanitize(
                         result[record_id]['body_html']
                     )
