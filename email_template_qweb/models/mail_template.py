@@ -27,18 +27,17 @@ class MailTemplate(models.Model):
             if this.body_type == 'qweb' and\
                     (not fields or 'body_html' in fields):
                 for record in self.env[this.model].browse(record_id):
-                    result[record_id]['body_html'] = self.render_post_process(
-                        this.body_view_id.render({
-                            'object': record,
-                            'email_template': this,
-                        })
-                    )
+                    body_html = this.body_view_id.render({
+                        'object': record,
+                        'email_template': this,
+                    })
                     # Some wizards, like when sending a sales order, need this
                     # fix to display accents correctly
                     if isinstance(result[record_id]['body_html'], unicode):
-                        result[record_id]['body_html'] = (
-                            result[record_id]['body_html'].decode('utf-8')
-                        )
+                        body_html = body_html.decode('utf-8')
+                    result[record_id]['body_html'] = self.render_post_process(
+                        body_html
+                    )
                     result[record_id]['body'] = tools.html_sanitize(
                         result[record_id]['body_html']
                     )
