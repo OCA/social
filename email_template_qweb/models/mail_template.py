@@ -33,7 +33,7 @@ class MailTemplate(models.Model):
                     })
                     # Some wizards, like when sending a sales order, need this
                     # fix to display accents correctly
-                    if isinstance(result[record_id]['body_html'], unicode):
+                    if not isinstance(body_html, unicode):
                         body_html = body_html.decode('utf-8')
                     result[record_id]['body_html'] = self.render_post_process(
                         body_html
