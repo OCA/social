@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data noupdate="0">
         <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form">
             <field name="name">mail.compose.message.form (mail_optional_autofollow)</field>
@@ -15,4 +15,4 @@
             </field>
         </record>
     </data>
-</openerp>
+</odoo>
