@@ -19,6 +19,7 @@
     ],
     "data": [
         "data/tracking_data.xml",
+        "security/mail_tracking_email_security.xml",
         "security/ir.model.access.csv",
         "views/assets.xml",
         "views/mail_tracking_email_view.xml",
