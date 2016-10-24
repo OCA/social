@@ -52,6 +52,31 @@ class TestMailTracking(TransactionCase):
         http.request = self.last_request
         return super(TestMailTracking, self).tearDown(*args, **kwargs)
 
+    def test_email_lower(self):
+        self.recipient.write({'email': 'UPPER@example.com'})
+        self.assertEqual('upper@example.com', self.recipient.email)
+
+    def test_empty_email(self):
+        self.recipient.write({'email_bounced': True})
+        self.recipient.write({'email': False})
+        self.assertEqual(False, self.recipient.email)
+        self.assertEqual(False, self.recipient.email_bounced)
+        self.recipient.write({'email_bounced': True})
+        self.recipient.write({'email': ''})
+        self.assertEqual(False, self.recipient.email)
+        self.assertEqual(False, self.recipient.email_bounced)
+        self.assertEqual(
+            False,
+            self.env['mail.tracking.email'].email_is_bounced(False))
+        self.assertEqual(
+            0.,
+            self.env['mail.tracking.email'].email_score_from_email(False))
+
+    def test_recipient_address_compute(self):
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.write({'recipient': False})
+        self.assertEqual(False, tracking.recipient_address)
+
     def test_message_post(self):
         # This message will generate a notification for recipient
         message = self.env['mail.message'].create({
