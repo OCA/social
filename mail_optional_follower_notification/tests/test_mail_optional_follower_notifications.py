@@ -35,7 +35,7 @@ class TestMailOptionalFollowernotifications(common.TransactionCase):
         self.assertEqual(len(res.ids), 1)
         message = self.env['mail.message']
         for record in res:
-            if record.notified_partner_ids.ids == [self.partner_03.id] and\
+            if record.needaction_partner_ids.ids == [self.partner_03.id] and\
                     record.partner_ids.ids == [self.partner_03.id]:
                 message += record
         self.assertEqual(len(message.ids), 0)
@@ -48,7 +48,7 @@ class TestMailOptionalFollowernotifications(common.TransactionCase):
              ('res_id', '=', self.partner_01.id)])
         message = self.env['mail.message']
         for record in res:
-            if record.notified_partner_ids.ids == [self.partner_03.id] and\
+            if record.needaction_partner_ids.ids == [self.partner_03.id] and\
                     record.partner_ids.ids == [self.partner_03.id]:
                 message += record
         self.assertEqual(len(message.ids), 1)

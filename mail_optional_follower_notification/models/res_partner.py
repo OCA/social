@@ -15,4 +15,4 @@ class ResPartner(models.Model):
                 self.env.context.get('force_partners_to_notify')
             self = self.filtered(lambda p: p.id in partners_to_notify)
         super(ResPartner, self)._notify(
-            message, force_send=False, user_signature=True)
+            message, force_send=force_send, user_signature=user_signature)
