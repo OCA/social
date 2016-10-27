@@ -10,4 +10,4 @@ class WebsiteConfigSettings(TransientModel):
     _inherit = 'website.config.settings'
 
     social_pinterest = fields.Char('Pinterest Account',
-                                  related='website_id.social_pinterest')
+                                   related='website_id.social_pinterest')
