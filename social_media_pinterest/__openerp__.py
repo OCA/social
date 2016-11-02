@@ -11,17 +11,13 @@
     'license': 'AGPL-3',
     'category': 'Social Media',
     'version': '8.0.1.0.0',
-
     'depends': [
         'base',
         'website',
-        'website_blog'
     ],
-
     'data': [
         'views/website_templates.xml',
         'views/website_views.xml',
-        'views/website_blog_template.xml',
         'views/res_config.xml',
     ],
 }

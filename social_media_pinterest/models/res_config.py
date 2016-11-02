@@ -1,11 +1,10 @@
 # -*- coding: utf-8 -*-
 # © 2016 Diagram Software S.L.
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
-from openerp.models import TransientModel
-from openerp import fields
+from openerp import fields, models
 
 
-class WebsiteConfigSettings(TransientModel):
+class WebsiteConfigSettings(models.TransientModel):
 
     _inherit = 'website.config.settings'
 
