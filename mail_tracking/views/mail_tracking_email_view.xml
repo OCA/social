@@ -82,7 +82,7 @@
             <field name="display_name" string="Email"
                    filter_domain="['|', ('sender', 'ilike', self), ('recipient', 'ilike', self)]"/>
             <field name="sender" string="Sender"/>
-            <field name="recipient" string="Sender"/>
+            <field name="recipient" string="Recipient"/>
             <field name="name" string="Subject"/>
             <field name="time" string="Time"/>
             <field name="date" string="Date"/>
