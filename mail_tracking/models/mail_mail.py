@@ -39,5 +39,5 @@ class MailMail(models.Model):
             vals = self._tracking_email_prepare(mail, partner, email)
             tracking_email = m_tracking.sudo().create(vals)
         if tracking_email:
-            email = tracking_email.tracking_img_add(email)
+            email = tracking_email.tracking_email_add(email)
         return email
