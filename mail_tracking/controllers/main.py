@@ -3,6 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import werkzeug
+import urlparse
+import urllib
 from psycopg2 import OperationalError
 from openerp import api, http, registry, SUPERUSER_ID
 import logging
@@ -48,13 +50,23 @@ class MailTrackingController(http.Controller):
             'ua_family': request.user_agent.browser or False,
         }
 
-    def _tracking_open(self, env, tracking_id, event_type, **kw):
+    def _tracking_click_get_url(self):
+        url = http.request.httprequest.url
+        qs = urlparse.parse_qs(urlparse.urlparse(url).query)
+        if qs['url']:
+            return urllib.unquote(qs['url'][0])
+        else:
+            _logger.warning("MailTracking email missing redirect url")
+
+    def _tracking_email(self, env, tracking_id, event_type, **kw):
         tracking_email = env['mail.tracking.email'].search([
             ('id', '=', tracking_id),
         ])
         if tracking_email:
             metadata = self._request_metadata()
-            tracking_email.event_create('open', metadata)
+            if event_type == 'click':
+                metadata['url'] = self._tracking_click_get_url()
+            tracking_email.event_create(event_type, metadata)
         else:
             _logger.warning(
                 "MailTracking email '%s' not found", tracking_id)
@@ -78,10 +90,19 @@ class MailTrackingController(http.Controller):
                 '/<int:tracking_email_id>/blank.gif',
                 type='http', auth='none')
     def mail_tracking_open(self, db, tracking_email_id, **kw):
-        _env_get(db, self._tracking_open, tracking_email_id, None, **kw)
+        _env_get(db, self._tracking_email, tracking_email_id, 'open', **kw)
 
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()
         response.mimetype = 'image/gif'
         response.data = BLANK.decode('base64')
+        return response
+
+    @http.route('/mail/tracking/click/<string:db>/<int:tracking_email_id>',
+                type='http', auth='none')
+    def mail_tracking_click(self, db, tracking_email_id, **kw):
+        _env_get(db, self._tracking_email, tracking_email_id, 'click', **kw)
+        response = werkzeug.wrappers.Response()
+        response.status = '301'
+        response.headers['Location'] = self._tracking_click_get_url()
         return response

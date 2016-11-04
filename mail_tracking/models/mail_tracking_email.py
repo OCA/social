@@ -4,6 +4,7 @@
 
 import logging
 import urlparse
+import urllib
 import time
 import re
 from datetime import datetime
@@ -170,22 +171,60 @@ class MailTrackingEmail(models.Model):
             email.date = fields.Date.to_string(
                 fields.Date.from_string(email.time))
 
-    def _get_mail_tracking_img(self):
+    def _get_mail_tracking_url(self, event_type):
         m_config = self.env['ir.config_parameter']
         base_url = (m_config.get_param('mail_tracking.base.url') or
                     m_config.get_param('web.base.url'))
         path_url = (
-            'mail/tracking/open/%(db)s/%(tracking_email_id)s/blank.gif' % {
+            'mail/tracking/%(event)s/%(db)s/%(tracking_email_id)s' % {
+                'event': event_type,
                 'db': self.env.cr.dbname,
                 'tracking_email_id': self.id,
             })
-        track_url = urlparse.urljoin(base_url, path_url)
+        return urlparse.urljoin(base_url, path_url)
+
+    def _get_mail_tracking_img(self):
+        track_url = self._get_mail_tracking_url('open')+'/'+'blank.gif'
         return (
             '<img src="%(url)s" alt="" '
             'data-odoo-tracking-email="%(tracking_email_id)s"/>' % {
                 'url': track_url,
                 'tracking_email_id': self.id,
             })
+
+    def _tracking_img_add(self, email):
+        tracking_img = self._get_mail_tracking_img()
+        if tracking_img:
+            body = tools.append_content_to_html(
+                email.get('body', ''), tracking_img, plaintext=False,
+                container_tag='div')
+            email['body'] = body
+        return email
+
+    def _get_mail_tracking_link(self, tracking_url, anchor, href):
+        querystring = urllib.urlencode({'url': href})
+        new_link = urlparse.urljoin(tracking_url, '?%s' % querystring)
+        return anchor.replace(href, new_link)
+
+    def _tracking_links_add(self, email):
+        tracking_url = self._get_mail_tracking_url('click')
+        if tracking_url:
+            email['body'] = re.sub(
+                r'(?i)<a[^>]*(?:href=(["\'])(.*?)\1)[^>]*>',
+                lambda g: self._get_mail_tracking_link(
+                    tracking_url,
+                    g.group(0),
+                    g.group(2)),
+                email['body']
+            )
+        return email
+
+    @api.multi
+    def tracking_email_add(self, email):
+        self.ensure_one()
+        email = self._tracking_img_add(email)
+        email = self._tracking_links_add(email)
+        return email
 
     @api.multi
     def _partners_email_bounced_set(self, reason):
@@ -204,17 +243,6 @@ class MailTrackingEmail(models.Model):
         })
         self.sudo()._partners_email_bounced_set('error')
         return True
-
-    @api.multi
-    def tracking_img_add(self, email):
-        self.ensure_one()
-        tracking_url = self._get_mail_tracking_img()
-        if tracking_url:
-            body = tools.append_content_to_html(
-                email.get('body', ''), tracking_url, plaintext=False,
-                container_tag='div')
-            email['body'] = body
-        return email
 
     def _message_partners_check(self, message, message_id):
         mail_message = self.mail_message_id
