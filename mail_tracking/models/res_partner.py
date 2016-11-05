@@ -28,10 +28,12 @@ class ResPartner(models.Model):
     @api.depends('email')
     def _compute_tracking_emails_count(self):
         for partner in self:
-            partner.tracking_emails_count = self.env['mail.tracking.email'].\
-                search_count([
-                    ('recipient_address', '=ilike', partner.email)
+            count = 0
+            if partner.email:
+                count = self.env['mail.tracking.email'].search_count([
+                    ('recipient_address', '=', partner.email.lower())
                 ])
+            partner.tracking_emails_count = count
 
     @api.multi
     def email_bounced_set(self, tracking_email, reason):
