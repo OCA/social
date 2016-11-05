@@ -45,6 +45,7 @@ class ResPartner(models.Model):
     def write(self, vals):
         email = vals.get('email')
         if email is not None:
+            vals['email'] = email.lower() if email else False
             vals['email_bounced'] = (
                 bool(email) and
                 self.env['mail.tracking.email'].email_is_bounced(email))
