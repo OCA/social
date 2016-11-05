@@ -152,11 +152,12 @@ class MailTrackingEmail(models.Model):
     @api.depends('recipient')
     def _compute_recipient_address(self):
         for email in self:
-            matches = re.search(r'<(.*@.*)>', email.recipient)
-            if matches:
-                email.recipient_address = matches.group(1).lower()
-            elif email.recipient:
-                email.recipient_address = email.recipient.lower()
+            if email.recipient:
+                matches = re.search(r'<(.*@.*)>', email.recipient)
+                if matches:
+                    email.recipient_address = matches.group(1).lower()
+                else:
+                    email.recipient_address = email.recipient.lower()
             else:
                 email.recipient_address = False
 
