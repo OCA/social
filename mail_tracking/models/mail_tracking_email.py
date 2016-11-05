@@ -100,16 +100,20 @@ class MailTrackingEmail(models.Model):
 
     @api.model
     def email_is_bounced(self, email):
-        return len(self._email_score_tracking_filter([
-            ('recipient_address', '=ilike', email),
-            ('state', 'in', ('error', 'rejected', 'spam', 'bounced')),
-        ])) > 0
+        if email:
+            return len(self._email_score_tracking_filter([
+                ('recipient_address', '=', email.lower()),
+                ('state', 'in', ('error', 'rejected', 'spam', 'bounced')),
+            ])) > 0
+        return False
 
     @api.model
     def email_score_from_email(self, email):
-        return self._email_score_tracking_filter([
-            ('recipient_address', '=ilike', email)
-        ]).email_score()
+        if email:
+            return self._email_score_tracking_filter([
+                ('recipient_address', '=', email.lower())
+            ]).email_score()
+        return 0.
 
     @api.model
     def _email_score_weights(self):
@@ -150,9 +154,11 @@ class MailTrackingEmail(models.Model):
         for email in self:
             matches = re.search(r'<(.*@.*)>', email.recipient)
             if matches:
-                email.recipient_address = matches.group(1)
+                email.recipient_address = matches.group(1).lower()
+            elif email.recipient:
+                email.recipient_address = email.recipient.lower()
             else:
-                email.recipient_address = email.recipient
+                email.recipient_address = False
 
     @api.multi
     @api.depends('name', 'recipient')
