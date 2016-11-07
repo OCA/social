@@ -30,62 +30,6 @@ class TestMassMailingEvent(TransactionCase):
             ('code', '=', 'open'),
         ])
 
-    def test_event_registration(self):
-        day_1 = (datetime.now() + timedelta(days=-4)).strftime(
-            '%Y-%m-%d 8:00:00')
-        day_2 = (datetime.now() + timedelta(days=-2)).strftime(
-            '%Y-%m-%d 18:00:00')
-        other_event = self.env['event.event'].create({
-            'name': 'Test other event',
-            'date_begin': day_1,
-            'date_end': day_2,
-        })
-        registration_a = self.env['event.registration'].create({
-            'event_id': other_event.id,
-            'email': 'partner_a@example.org',
-            'nb_register': 1,
-            'state': 'draft',
-        })
-        registration_b = self.env['event.registration'].create({
-            'event_id': other_event.id,
-            'email': 'partner_b@example.org',
-            'nb_register': 1,
-            'state': 'draft',
-        })
-        domain = [
-            ('id', 'in', [registration_a.id, registration_b.id]),
-            ('opt_out', '=', False),
-        ]
-        mass_mailing = self.env['mail.mass_mailing'].create({
-            'name': 'Test subject',
-            'email_from': 'from@example.com',
-            'mailing_model': 'event.registration',
-            'mailing_domain': str(domain),
-            'body_html': '<p>Test email body</p>',
-            'reply_to_mode': 'email',
-        })
-        m_registration = self.env['event.registration'].with_context(
-            exclude_mass_mailing=mass_mailing.id)
-        self.assertEqual(
-            [registration_a.id, registration_b.id],
-            mass_mailing.get_recipients(mass_mailing))
-        self.assertEqual(2, m_registration.search_count(domain))
-        mass_mailing.write({
-            'event_id': self.event.id,
-            'exclude_event_state_ids': [(6, False, self.states_all.ids)],
-        })
-        self.assertEqual(
-            [registration_b.id],
-            mass_mailing.get_recipients(mass_mailing))
-        self.assertEqual(1, m_registration.search_count(domain))
-        mass_mailing.write({
-            'exclude_event_state_ids': [(6, False, self.state_confirmed.ids)],
-        })
-        self.assertEqual(
-            [registration_a.id, registration_b.id],
-            mass_mailing.get_recipients(mass_mailing))
-        self.assertEqual(2, m_registration.search_count(domain))
-
     def test_mailing_contact(self):
         contact_list = self.env['mail.mass_mailing.list'].create({
             'name': 'Test list',
