@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data>
+
+<record id="event_draft" model="event.registration.state">
+    <field name="name">Unconfirmed</field>
+    <field name="code">draft</field>
+</record>
+
+<record id="event_cancel" model="event.registration.state">
+    <field name="name">Cancelled</field>
+    <field name="code">cancel</field>
+</record>
+
+<record id="event_open" model="event.registration.state">
+    <field name="name">Confirmed</field>
+    <field name="code">open</field>
+</record>
+
+<record id="event_done" model="event.registration.state">
+    <field name="name">Attended</field>
+    <field name="code">done</field>
+</record>
+
+</data>
+</openerp>
