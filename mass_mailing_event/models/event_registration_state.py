@@ -5,8 +5,8 @@
 from openerp import models, fields
 
 
-class EventState(models.Model):
-    _name = 'event.state'
+class EventRegistrationState(models.Model):
+    _name = 'event.registration.state'
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)

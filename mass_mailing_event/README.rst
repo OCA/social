@@ -6,16 +6,15 @@
 Mass mailing event
 ==================
 
-This module links mass mailing with event in order to exclude recipients that
-are already registered, confirmed, cancelled, attended, or a combination of
-these states, when the mass mailing is sent.
+This module links ``mass_mailing`` with ``event`` in order to exclude
+recipients that are already registered, confirmed, cancelled, attended, or a
+combination of these states, when the mass mailing is sent.
 
 Usage
 =====
 
-In a mass mailing, user can set an event related and exclude some selected
-recipients. Those who has an email address that have already registered in
-that event.
+In a mass mailing, users can set an event related and exclude the recipients who
+have an email address already registered in that event.
 
 This is useful in this scenario:
 

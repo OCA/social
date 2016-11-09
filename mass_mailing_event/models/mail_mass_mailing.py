@@ -35,12 +35,12 @@ class MailMassMailing(models.Model):
     _inherit = 'mail.mass_mailing'
 
     def _default_exclude_event_state_ids(self):
-        return self.env['event.state'].search([])
+        return self.env['event.registration.state'].search([])
 
     event_id = fields.Many2one(
         string="Event related", comodel_name='event.event')
     exclude_event_state_ids = fields.Many2many(
-        comodel_name='event.state',
+        comodel_name='event.registration.state',
         string="Exclude", default=_default_exclude_event_state_ids)
 
     @api.model
