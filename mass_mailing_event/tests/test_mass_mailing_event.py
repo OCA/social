@@ -25,8 +25,8 @@ class TestMassMailingEvent(TransactionCase):
             'nb_register': 1,
             'state': 'draft',
         })
-        self.states_all = self.env['event.state'].search([])
-        self.state_confirmed = self.env['event.state'].search([
+        self.states_all = self.env['event.registration.state'].search([])
+        self.state_confirmed = self.env['event.registration.state'].search([
             ('code', '=', 'open'),
         ])
 

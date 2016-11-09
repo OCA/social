@@ -16,22 +16,22 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mass_mailing_event
-#: field:event.state,code:0
+#: field:event.registration.state,code:0
 msgid "Code"
 msgstr "Código"
 
 #. module: mass_mailing_event
-#: field:event.state,create_uid:0
+#: field:event.registration.state,create_uid:0
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: mass_mailing_event
-#: field:event.state,create_date:0
+#: field:event.registration.state,create_date:0
 msgid "Created on"
 msgstr "Creado en"
 
 #. module: mass_mailing_event
-#: field:event.state,display_name:0
+#: field:event.registration.state,display_name:0
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -51,22 +51,22 @@ msgid "Exclude"
 msgstr "Excluir"
 
 #. module: mass_mailing_event
-#: field:event.state,id:0
+#: field:event.registration.state,id:0
 msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_event
-#: field:event.state,__last_update:0
+#: field:event.registration.state,__last_update:0
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
 #. module: mass_mailing_event
-#: field:event.state,write_uid:0
+#: field:event.registration.state,write_uid:0
 msgid "Last Updated by"
 msgstr "Última actualización por"
 
 #. module: mass_mailing_event
-#: field:event.state,write_date:0
+#: field:event.registration.state,write_date:0
 msgid "Last Updated on"
 msgstr "Última actualización en"
 
@@ -81,7 +81,7 @@ msgid "Mass Mailing Contact"
 msgstr "Contacto"
 
 #. module: mass_mailing_event
-#: field:event.state,name:0
+#: field:event.registration.state,name:0
 msgid "Name"
 msgstr "Nombre"
 
