@@ -16,7 +16,7 @@ addon | version | summary
 [mail_as_letter](mail_as_letter/) | 9.0.1.0.0 | This module allows to download a mail message as a pdf letter.
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 9.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_optional_autofollow](mail_optional_autofollow/) | 9.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
-[mail_tracking](mail_tracking/) | 9.0.2.1.0 | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 9.0.3.0.0 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 
 Unported addons
