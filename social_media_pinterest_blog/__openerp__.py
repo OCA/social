@@ -5,14 +5,12 @@
     'name': "Pinterest Social Media Icon Extension for blog",
     'summary': """Pinterest Extension for the social media icons from the
     odoo core""",
-    'author': "Diagram Software, S.L."
-    "Odoo Community Association (OCA)",
+    'author': "Diagram Software S.L., Odoo Community Association (OCA)",
     'website': "http://www.diagram.es",
     'license': 'AGPL-3',
     'category': 'Social Media',
     'version': '8.0.1.0.0',
     'depends': [
-        'base',
         'social_media_pinterest',
         'website',
         'website_blog'

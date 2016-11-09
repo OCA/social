@@ -22,7 +22,7 @@ Configuration
 Usage
 =====
 
-- Normal social icons:
+- Normal social icons::
 
     <a t-att-href="website.social_facebook" t-if="website.social_facebook"><i class="fa fa-facebook-square"/></a>
     
@@ -61,6 +61,7 @@ Images
 ------
 
 * Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+* Pinterest: `Brand guidelines <https://business.pinterest.com/en/brand-guidelines\#brand-basics>`_ `Icons <https://business.pinterest.com/sites/business/files/pinterest_badge.zip>`_.
 
 Contributors
 ------------
