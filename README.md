@@ -34,6 +34,7 @@ addon | version | summary
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 8.0.1.0.1 | Improve mass mailing email tracking
 [marketing_security_group](marketing_security_group/) | 8.0.1.0.0 | Marketing extra security rules
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.2.0.0 | Customizable unsubscription process on mass mailing emails
+[mass_mailing_event](mass_mailing_event/) | 8.0.1.0.0 | Link mass mailing with event for excluding recipients
 [mass_mailing_keep_archives](mass_mailing_keep_archives/) | 8.0.0.0.0 | Mass Mailing Keep Archives
 [mass_mailing_sending_queue](mass_mailing_sending_queue/) | 8.0.1.0.0 | A new queue for sending mass mailing
 [mass_mailing_statistic_extra](mass_mailing_statistic_extra/) | 8.0.1.0.0 | Mail statistics extra info
