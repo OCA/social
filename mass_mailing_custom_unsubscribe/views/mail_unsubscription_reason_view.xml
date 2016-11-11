@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
-<data>
+<odoo>
 
 <record id="mail_unsubscription_reason_view_form" model="ir.ui.view">
     <field name="name">Mail Unsubscription Reason Form</field>
@@ -52,9 +51,7 @@
 
 <menuitem
     id="mail_unsubscription_reason_menu"
-    parent="mass_mailing.marketing_configuration"
-    groups="mass_mailing.group_mass_mailing_campaign"
+    parent="mass_mailing.menu_mass_mailing_configuration"
     action="mail_unsubscription_reason_action"/>
 
-</data>
-</openerp>
+</odoo>
