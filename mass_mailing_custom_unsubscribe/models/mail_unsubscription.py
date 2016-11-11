@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import _, api, fields, models
@@ -36,9 +36,6 @@ class MailUnsubscription(models.Model):
         help="More details on why the unsubscription was made.")
     details_required = fields.Boolean(
         related="reason_id.details_required")
-    success = fields.Boolean(
-        help="If this is unchecked, it indicates some failure happened in the "
-             "unsubscription process.")
 
     @api.model
     def _default_date(self):
@@ -53,10 +50,10 @@ class MailUnsubscription(models.Model):
     @api.constrains("details", "reason_id")
     def _check_details_needed(self):
         """Ensure details are given if required."""
-        for s in self:
-            if not s.details and s.details_required:
+        for one in self:
+            if not one.details and one.details_required:
                 raise exceptions.DetailsRequiredError(
-                    _("This reason requires an explanation."))
+                    _("Please provide details on why you are unsubscribing."))
 
 
 class MailUnsubscriptionReason(models.Model):

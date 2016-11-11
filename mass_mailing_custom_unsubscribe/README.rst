@@ -1,39 +1,19 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
 ==========================================================
 Customizable unsubscription process on mass mailing emails
 ==========================================================
 
-With this module you can set a custom unsubscribe link appended at the bottom
-of mass mailing emails.
+This addon extends the unsubscription form to let you:
 
-It also displays a beautiful and simple unsubscription form when somebody
-unsubscribes, to let you know why and let the user unsubscribe form another
-mailing lists at the same time; and then displays a beautiful and customizable
-goodbye message.
+- Choose which mailing lists are not cross-unsubscriptable when unsubscribing
+  from a different one.
+- Know why and when a contact as been unsubscribed from a mass mailing.
 
 Configuration
 =============
-
-Unsubscription Message In Mail Footer
--------------------------------------
-
-To configure unsubscribe label go to *Settings > Technical > Parameters >
-System parameters* and add a ``mass_mailing.unsubscribe.label`` parameter
-with HTML to set at the bottom of mass emailing emails. Including ``%(url)s``
-variable where unsubscribe link.
-
-For example::
-
-    <small>You can unsubscribe <a href="%(url)s">here</a></small>
-
-Additionally, you can disable this link if you set this parameter to ``False``.
-
-If this parameter (``mass_mailing.unsubscribe.label``) does not exist, the
-default 'Click to unsubscribe' link will appear, with the advantage that it is
-translatable via *Settings > Translations > Application Terms > Translated
-terms*.
 
 Unsubscription Reasons
 ----------------------
@@ -46,63 +26,44 @@ they are going to unsubscribe. To do it:
 #. If *Details required* is enabled, they will have to fill a text area to
    continue.
 
-Unsubscription Goodbye Message
-------------------------------
-
-Your unsubscriptors will receive a beautier goodbye page. You can customize it
-with these links **after installing the module**:
-
-* `Unsubscription successful </page/mass_mailing_custom_unsubscribe.successs>`_.
-* `Unsubscription failed </page/mass_mailing_custom_unsubscribe.failure>`_.
-
 Usage
 =====
 
-Once configured, just send mass mailings as usual.
+Once configured:
 
-If somebody gets unsubscribed, you will see logs about that under
-*Marketing > Mass Mailing > Unsubscriptions*.
+#. Go to *Mass Mailing > Mailings > Mass Mailings > Create*.
+#. Edit your mass mailing at wish, but remember to add a snippet from
+   *Footers*, so people have an *Unsubscribe* link.
+#. Send it.
+#. If somebody gets unsubscribed, you will see logs about that under
+   *Mass Mailing > Mailings > Unsubscriptions*.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/8.0
+   :target: https://runbot.odoo-community.org/runbot/205/9.0
 
 Known issues / Roadmap
 ======================
 
-* This needs tests.
-* This custom HTML is not translatable, so as a suggestion, you can define
-  the same text in several languages in several lines.
-
-  For example:
-
-.. code:: html
-
-  <small>[EN] You can unsubscribe <a href="%(url)s">here</a></small><br/>
-  <small>[ES] Puedes darte de baja <a href="%(url)s">aquí</a></small>
-
-* If you use the ``website_multi`` module, you will probably find that the
-  views are not visible by default.
 * This module adds a security hash for mass mailing unsubscription URLs, which
-  makes to not work anymore URLs of mass mailing messages sent before its
-  installation. If you need backwards compatibility, disable this security
-  feature by removing the ``mass_mailing.salt`` system parameter. To avoid
-  breaking current installations, you will not get a salt if you are upgrading
-  the addon. If you want a salt, create the above system parameter and assign a
-  random value to it.
-* Security should be patched upstream. Remove security features in the version
-  where https://github.com/odoo/odoo/pull/12040 gets merged (if it does).
+  disables insecure URLs from mass mailing messages sent before its
+  installation. This can be a problem, but anyway you'd get that problem in
+  Odoo 11.0, so at least this addon will be forward-compatible with it.
+* This module replaces AJAX submission core implementation from the mailing
+  list management form, because it is impossible to extend it. When
+  https://github.com/odoo/odoo/pull/14386 gets merged (which upstreams most
+  needed changes), this addon will need a refactoring (mostly removing
+  duplicated functionality and depending on it instead of replacing it). In the
+  mean time, there is a little chance that this introduces some
+  incompatibilities with other addons that depend on ``website_mass_mailing``.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
-In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/
-social/issues/new?body=module:%20
-mass_mailing_custom_unsubscribe%0Aversion:%20
-8.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/social/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smashing it by providing a detailed and welcomed feedback.
 
 Credits
 =======
@@ -110,9 +71,9 @@ Credits
 Contributors
 ------------
 
-* Rafael Blasco <rafabn@antiun.com>
-* Antonio Espinosa <antonioea@antiun.com>
-* Jairo Llopis <yajo.sk8@gmail.com>
+* Rafael Blasco <rafael.blasco@tecnativa.com>
+* Antonio Espinosa <antonio.espinosa@tecnativa.com>
+* Jairo Llopis <jairo.llopis@tecnativa.com>
 
 Maintainer
 ----------
