@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<openerp>
+<data noupdate="1">
+
+    <record id="reason_not_interested"
+            model="mail.unsubscription.reason"
+            forcecreate="False">
+        <field name="name">I'm not interested</field>
+        <field name="sequence">10</field>
+        <field name="details_required" eval="False"/>
+    </record>
+
+    <record id="reason_not_requested"
+            model="mail.unsubscription.reason"
+            forcecreate="False">
+        <field name="name">I did not request this</field>
+        <field name="sequence">20</field>
+        <field name="details_required" eval="False"/>
+    </record>
+
+    <record id="reason_too_many"
+            model="mail.unsubscription.reason"
+            forcecreate="False">
+        <field name="name">I get too many emails</field>
+        <field name="sequence">30</field>
+        <field name="details_required" eval="False"/>
+    </record>
+
+    <record id="reason_other"
+            model="mail.unsubscription.reason"
+            forcecreate="False">
+        <field name="name">Other reason</field>
+        <field name="sequence">100</field>
+        <field name="details_required" eval="True"/>
+    </record>
+
+</data>
+</openerp>
