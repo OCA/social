@@ -225,6 +225,8 @@ class MailTrackingEmail(models.Model):
         return email
 
     def _message_partners_check(self, message, message_id):
+        if not self.mail_message_id.exists():  # pragma: no cover
+            return True
         mail_message = self.mail_message_id
         partners = (
             mail_message.needaction_partner_ids | mail_message.partner_ids)
