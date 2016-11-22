@@ -224,7 +224,14 @@ class MailTrackingEmail(models.Model):
         return email
 
     def _message_partners_check(self, message, message_id):
-        mail_message = self.mail_message_id
+        mail_message = None
+        try:
+            mail_message = self.mail_message_id
+        except:
+            # In some cases, this record is deleted and an exception raise
+            pass
+        if not mail_message:
+            return True
         partners = (
             mail_message.needaction_partner_ids | mail_message.partner_ids)
         if (self.partner_id and self.partner_id not in partners):
