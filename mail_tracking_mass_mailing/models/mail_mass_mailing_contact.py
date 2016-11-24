@@ -21,8 +21,9 @@ class MailMassMailingContact(models.Model):
                 email_score_from_email(contact.email)
 
     @api.multi
-    def email_bounced_set(self, tracking_email, reason):
-        return self.write({'email_bounced': True})
+    def email_bounced_set(self, tracking_emails, reason, event=None):
+        contacts = self.filtered(lambda r: not r.email_bounced)
+        return contacts.write({'email_bounced': True})
 
     @api.multi
     def write(self, vals):

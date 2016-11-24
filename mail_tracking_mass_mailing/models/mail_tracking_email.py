@@ -32,11 +32,16 @@ class MailTrackingEmail(models.Model):
         return tracking
 
     @api.multi
-    def _contacts_email_bounced_set(self, reason):
-        for tracking_email in self:
+    def _contacts_email_bounced_set(self, reason, event=None):
+        recipients = []
+        if event and event.recipient_address:
+            recipients.append(event.recipient_address)
+        else:
+            recipients = list(filter(None, self.mapped('recipient_address')))
+        for recipient in recipients:
             self.env['mail.mass_mailing.contact'].search([
-                ('email', '=ilike', tracking_email.recipient_address)
-            ]).email_bounced_set(tracking_email, reason)
+                ('email', '=ilike', recipient)
+            ]).email_bounced_set(self, reason, event=event)
 
     @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
