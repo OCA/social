@@ -298,11 +298,12 @@ class MailTrackingEmail(models.Model):
             if not other_ids:
                 vals = tracking_email._event_prepare(event_type, metadata)
                 if vals:
-                    event = event_ids.sudo().create(vals)
+                    events = event_ids.sudo().create(vals)
                     if event_type in {'hard_bounce', 'spam', 'reject'}:
-                        self.sudo()._partners_email_bounced_set(
-                            event_type, event=event)
-                    event_ids += event
+                        for event in events:
+                            self.sudo()._partners_email_bounced_set(
+                                event_type, event=event)
+                    event_ids += events
             else:
                 _logger.debug("Concurrent event '%s' discarded", event_type)
         return event_ids
