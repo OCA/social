@@ -10,10 +10,30 @@ This module extends the functionality of portal module to allow customize the
 email message sent to customer in email template section.
 The sent email is enqueued instead of being directly processed.
 
+Installation
+============
+
+To install this module, you need to:
+
+#. Just install the module.
+
+Configuration
+=============
+
+To configure this module, you need to:
+
+#. No configuration nedeed.
+
+.. figure:: path/to/local/image.png
+   :alt: alternative description
+   :width: 600 px
+
 Usage
 =====
 
-To modify the email sent go to *Settings > Email > Email Template* and search
+To use this module, you need to:
+
+#. Go to modify the email sent go to *Settings > Email > Email Template* and search
 'Portal Welcome Email'. You can rewrite the template.
 Variables are stored into ctx, example: *ctx['portal_url']*
 
@@ -26,10 +46,17 @@ Variables list:
 * ctx['signup_url']
 * ctx['welcome_message']
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/205/9.0
+
+.. repo_id is available in https://github.com/OCA/maintainer-tools/blob/master/tools/repos_with_ids.txt
+.. branch is "9.0" for example
+
+Known issues / Roadmap
+======================
+
+* ...
 
 Bug Tracker
 ===========
@@ -55,6 +82,13 @@ Contributors
 
 * Carlos Dauden <carlos@incaser.es>
 * Sergio Teruel <sergio@incaser.es>
+
+Funders
+-------
+
+The development of this module has been financially supported by:
+
+* Tecnativa
 
 Maintainer
 ----------
