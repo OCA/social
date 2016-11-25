@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# License AGPL-3: Antiun Ingenieria S.L. - Antonio Espinosa
-# See README.rst file on addon root folder for more details
+# © 2016 Tecnativa S.L. - Vicent Cubells
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': "Marketing extra security rules",
+    'name': "Mass mailing security group",
     'category': 'Marketing',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'depends': [
         'mass_mailing',
     ],
@@ -14,9 +14,9 @@
         'security/ir.model.access.csv',
         'security/mail_mass_mailing_security.xml',
     ],
-    'author': 'Antiun Ingeniería S.L., '
+    'author': 'Tecnativa, '
               'Odoo Community Association (OCA)',
-    'website': 'http://www.antiun.com',
+    'website': 'http://www.tecnativa.com',
     'license': 'AGPL-3',
     'installable': True,
 }
