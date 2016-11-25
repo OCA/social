@@ -2,6 +2,7 @@
 # © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+import re
 import time
 from datetime import datetime
 
@@ -16,6 +17,9 @@ class MailTrackingEvent(models.Model):
     _description = 'MailTracking event'
 
     recipient = fields.Char(string="Recipient", readonly=True)
+    recipient_address = fields.Char(
+        string='Recipient email address', readonly=True, store=True,
+        compute='_compute_recipient_address', index=True)
     timestamp = fields.Float(
         string='UTC timestamp', readonly=True,
         digits=dp.get_precision('MailTracking Timestamp'))
@@ -51,6 +55,20 @@ class MailTrackingEvent(models.Model):
     error_description = fields.Char(string='Error description', readonly=True)
     error_details = fields.Text(string='Error details', readonly=True)
 
+    @api.multi
+    @api.depends('recipient')
+    def _compute_recipient_address(self):
+        for email in self:
+            if email.recipient:
+                matches = re.search(r'<(.*@.*)>', email.recipient)
+                if matches:
+                    email.recipient_address = matches.group(1).lower()
+                else:
+                    email.recipient_address = email.recipient.lower()
+            else:
+                email.recipient_address = False
+
+    @api.multi
     @api.depends('time')
     def _compute_date(self):
         for email in self:
