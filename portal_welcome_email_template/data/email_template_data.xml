@@ -2,7 +2,7 @@
 <openerp>
 <data>
 
-<record id="portal_welcome_email" model="email.template">
+<record id="portal_welcome_email" model="mail.template">
     <field name="name">Portal Welcome Email</field>
     <field name="email_from">${object.company_id.name}&lt;${object.company_id.email}&gt;</field>
     <field name="subject">Your account at ${object.company_id.name}</field>

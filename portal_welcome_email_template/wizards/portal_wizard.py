@@ -9,14 +9,13 @@ from openerp import models, api
 class WizardUser(models.TransientModel):
     _inherit = 'portal.wizard.user'
 
-    @api.model
-    def _send_email(self, wizard_user):
-        # determine subject and body in the portal user's language
-        user = self._retrieve_user(wizard_user)
+    @api.multi
+    def _send_email(self):
+        user = self.user_id
         portal_url = user.partner_id.with_context(
             lang=user.lang,
             signup_force_type_in_url=''
-            )._get_signup_url_for_action()[user.partner_id.id]
+        )._get_signup_url_for_action()[user.partner_id.id]
         user.partner_id.with_context(
             lang=user.lang, signup_force_type_in_url='').signup_prepare()
 
@@ -28,8 +27,8 @@ class WizardUser(models.TransientModel):
             'login': user.login,
             'portal_url': portal_url,
             'db': self.env.cr.dbname,
-            'portal': wizard_user.wizard_id.portal_id.name,
+            'portal': self.wizard_id.portal_id.name,
             'signup_url': user.signup_url,
-            'welcome_message': wizard_user.wizard_id.welcome_message or '',
+            'welcome_message': self.wizard_id.welcome_message or '',
         })
         return template.with_context(ctx).send_mail(user.id)

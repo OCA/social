@@ -7,18 +7,18 @@
     "name": "Portal Welcome Email Template",
     "summary": "Adds an customizable email template for portal user "
                "invitation",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "category": "Tools",
     "website": "https://odoo-community.org/",
     'author': 'Incaser Informatica S.L., '
               'Odoo Community Association (OCA)',
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
     "depends": [
         "portal",
     ],
     "data": [
         "data/email_template_data.xml",
     ],
+    "application": False,
+    "installable": True,
 }
