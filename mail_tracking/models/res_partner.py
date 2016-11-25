@@ -35,7 +35,7 @@ class ResPartner(models.Model):
             partner.tracking_emails_count = count
 
     @api.multi
-    def email_bounced_set(self, tracking_email, reason):
+    def email_bounced_set(self, tracking_emails, reason, event=None):
         """Inherit this method to make any other actions to partners"""
         partners = self.filtered(lambda r: not r.email_bounced)
         return partners.write({'email_bounced': True})

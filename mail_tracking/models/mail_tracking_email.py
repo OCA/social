@@ -190,12 +190,19 @@ class MailTrackingEmail(models.Model):
                 'tracking_email_id': self.id,
             })
 
-    def _partners_email_bounced_set(self, reason):
-        for tracking_email in self:
+    @api.multi
+    def _partners_email_bounced_set(self, reason, event=None):
+        recipients = []
+        if event and event.recipient_address:
+            recipients.append(event.recipient_address)
+        else:
+            recipients = list(filter(None, self.mapped('recipient_address')))
+        for recipient in recipients:
             self.env['res.partner'].search([
-                ('email', '=ilike', tracking_email.recipient_address)
-            ]).email_bounced_set(tracking_email, reason)
+                ('email', '=ilike', recipient)
+            ]).email_bounced_set(self, reason, event=event)
 
+    @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
         self.sudo().write({
             'error_smtp_server': tools.ustr(smtp_server),
@@ -206,6 +213,7 @@ class MailTrackingEmail(models.Model):
         self.sudo()._partners_email_bounced_set('error')
         return True
 
+    @api.multi
     def tracking_img_add(self, email):
         self.ensure_one()
         tracking_url = self._get_mail_tracking_img()
@@ -233,6 +241,7 @@ class MailTrackingEmail(models.Model):
                 })
         return True
 
+    @api.multi
     def _tracking_sent_prepare(self, mail_server, smtp_server, message,
                                message_id):
         self.ensure_one()
@@ -278,6 +287,7 @@ class MailTrackingEmail(models.Model):
             concurrent_event_ids = m_event.search(domain)
         return concurrent_event_ids
 
+    @api.multi
     def event_create(self, event_type, metadata):
         event_ids = self.env['mail.tracking.event']
         for tracking_email in self:
@@ -285,11 +295,14 @@ class MailTrackingEmail(models.Model):
             if not other_ids:
                 vals = tracking_email._event_prepare(event_type, metadata)
                 if vals:
-                    event_ids += event_ids.sudo().create(vals)
+                    events = event_ids.sudo().create(vals)
+                    if event_type in {'hard_bounce', 'spam', 'reject'}:
+                        for event in events:
+                            self.sudo()._partners_email_bounced_set(
+                                event_type, event=event)
+                    event_ids += events
             else:
                 _logger.debug("Concurrent event '%s' discarded", event_type)
-        if event_type in {'hard_bounce', 'spam', 'reject'}:
-            self.sudo()._partners_email_bounced_set(event_type)
         return event_ids
 
     @api.model
