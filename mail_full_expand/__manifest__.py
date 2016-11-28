@@ -5,13 +5,13 @@
 {
     "name": "Mail full expand",
     "summary": "Expand mail in a big window",
-    "version": "8.0.3.0.0",
+    "version": "10.0.1.0.0",
     "category": "Social Network",
     "website": "http://www.grupoesoc.es, https://odoo-community.org/",
     "author": "Grupo ESOC, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
-    'installable': False,
+    'installable': True,
     "depends": [
         "mail",
         "web",

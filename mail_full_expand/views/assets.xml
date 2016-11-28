@@ -11,7 +11,7 @@
           inherit_id="web.assets_backend">
     <xpath expr="." position="inside">
         <link rel="stylesheet"
-              href="/mail_full_expand/static/src/css/mail_full_expand.css"/>
+              href="/mail_full_expand/static/src/css/mail_full_expand.less"/>
         <script type="text/javascript"
                 src="/mail_full_expand/static/src/js/mail_full_expand.js"/>
     </xpath>
