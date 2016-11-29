@@ -3,47 +3,47 @@
 # * email_template_qweb
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# Niki Waibel <niki.waibel@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-29 14:24+0000\n"
 "PO-Revision-Date: 2016-11-29 14:24+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Spanish (Mexico) (https://www.transifex.com/oca/teams/23907/es_MX/)\n"
+"Last-Translator: Niki Waibel <niki.waibel@gmail.com>, 2016\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_MX\n"
+"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview_body_type
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template_body_type
 msgid "Body templating engine"
-msgstr ""
+msgstr "Nachrichtenvorlagen Generator"
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview_body_view_id
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template_body_view_id
 msgid "Body view"
-msgstr "Vista del cuerpo"
+msgstr "Nachrichtenansicht"
 
 #. module: email_template_qweb
 #: model:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
 msgid "Dear"
-msgstr "Querido"
+msgstr "Sehr geehrter"
 
 #. module: email_template_qweb
 #: model:ir.model,name:email_template_qweb.model_email_template_preview
 msgid "Email Template Preview"
-msgstr ""
+msgstr "E-Mail Vorlagenansicht"
 
 #. module: email_template_qweb
 #: model:ir.model,name:email_template_qweb.model_mail_template
 msgid "Email Templates"
-msgstr "Plantillas de Correo Electrónico"
+msgstr "E-Mail Vorlagen"
 
 #. module: email_template_qweb
 #: selection:email_template.preview,body_type:0
@@ -60,15 +60,15 @@ msgstr "QWeb"
 #. module: email_template_qweb
 #: model:mail.template,subject:email_template_qweb.email_template_demo1
 msgid "QWeb demo email"
-msgstr "Correo QWeb de demo"
+msgstr "QWeb Demo-E-Mail"
 
 #. module: email_template_qweb
 #: model:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
 msgid "This is an email template using qweb."
-msgstr "Esta es una plantilla de correo utilizando qweb"
+msgstr "Dies ist eine E-Mail-Vorlage aus qweb."
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview_body_view_arch
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template_body_view_arch
 msgid "View Architecture"
-msgstr ""
+msgstr "Zeige Stilarten"
