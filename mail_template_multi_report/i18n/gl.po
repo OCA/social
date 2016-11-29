@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:21+0000\n"
-"PO-Revision-Date: 2016-09-14 07:21+0000\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 18:06+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Galician (https://www.transifex.com/oca/teams/23907/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -68,7 +68,7 @@ msgstr "ID"
 #. module: mail_template_multi_report
 #: field:email.template.report.line,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,write_uid:0
