@@ -3,14 +3,13 @@
 # * mail_tracking
 # 
 # Translators:
-# John Toro <johntoro@gmail.com>, 2016
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-17 02:47+0000\n"
-"PO-Revision-Date: 2016-09-17 02:47+0000\n"
+"POT-Creation-Date: 2016-11-28 14:12+0000\n"
+"PO-Revision-Date: 2016-11-28 14:12+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (Colombia) (https://www.transifex.com/oca/teams/23907/es_CO/)\n"
 "MIME-Version: 1.0\n"
@@ -25,7 +24,7 @@ msgid ""
 " * The 'Error' status indicates that there was an error when trying to sent the email, for example, 'No valid recipient'\n"
 " * The 'Sent' status indicates that message was succesfully sent via outgoing email server (SMTP).\n"
 " * The 'Delivered' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
-" * The 'Open' status indicates that message was opened or clicked by recipient.\n"
+" * The 'Opened' status indicates that message was opened or clicked by recipient.\n"
 " * The 'Rejected' status indicates that recipient email address is blacklisted by outgoing email server (SMTP). It is recomended to delete this email address.\n"
 " * The 'Spam' status indicates that outgoing email server (SMTP) consider this message as spam.\n"
 " * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
@@ -79,13 +78,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
@@ -117,7 +116,7 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre Público"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
@@ -128,6 +127,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_id
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Email"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_bounced
+#: model:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
+msgid "Email bounced"
 msgstr ""
 
 #. module: mail_tracking
@@ -178,7 +183,7 @@ msgstr ""
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupar por"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -205,19 +210,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email___last_update
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Actualizado por"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Actualizado"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
@@ -283,9 +288,13 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
+msgstr ""
+
+#. module: mail_tracking
+#: selection:mail.tracking.email,state:0
+msgid "Opened"
 msgstr ""
 
 #. module: mail_tracking
@@ -306,6 +315,7 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient
+#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Recipient"
@@ -318,6 +328,7 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient_address
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient_address
 msgid "Recipient email address"
 msgstr ""
 
@@ -395,7 +406,6 @@ msgid "To:"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_email_ids
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 #: model:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
@@ -423,7 +433,7 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
