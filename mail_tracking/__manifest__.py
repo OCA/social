@@ -5,20 +5,21 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "category": "Social Network",
     "website": "http://www.tecnativa.com",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
-    'installable': False,
+    'installable': True,
     "depends": [
         "decimal_precision",
         "mail",
     ],
     "data": [
         "data/tracking_data.xml",
+        "security/mail_tracking_email_security.xml",
         "security/ir.model.access.csv",
         "views/assets.xml",
         "views/mail_tracking_email_view.xml",

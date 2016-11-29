@@ -5,8 +5,8 @@
 import time
 from datetime import datetime
 
-from openerp import models, api, fields
-import openerp.addons.decimal_precision as dp
+from odoo import models, api, fields
+import odoo.addons.decimal_precision as dp
 
 
 class MailTrackingEvent(models.Model):
@@ -23,7 +23,7 @@ class MailTrackingEvent(models.Model):
     date = fields.Date(
         string="Date", readonly=True, compute="_compute_date", store=True)
     tracking_email_id = fields.Many2one(
-        string='Message', readonly=True,
+        string='Message', readonly=True, required=True, ondelete='cascade',
         comodel_name='mail.tracking.email')
     event_type = fields.Selection(string='Event type', selection=[
         ('sent', 'Sent'),
@@ -51,7 +51,6 @@ class MailTrackingEvent(models.Model):
     error_description = fields.Char(string='Error description', readonly=True)
     error_details = fields.Text(string='Error details', readonly=True)
 
-    @api.multi
     @api.depends('time')
     def _compute_date(self):
         for email in self:
