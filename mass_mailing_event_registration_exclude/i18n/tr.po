@@ -1,0 +1,100 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_event
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-24 06:25+0000\n"
+"Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016\n"
+"Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: tr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,code:0
+msgid "Code"
+msgstr "Kodu"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,create_uid:0
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,create_date:0
+msgid "Created on"
+msgstr "Oluşturuldu"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,display_name:0
+msgid "Display Name"
+msgstr "Görünen İsim"
+
+#. module: mass_mailing_event
+#: model:ir.model,name:mass_mailing_event.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: mass_mailing_event
+#: field:mail.mass_mailing,event_id:0
+msgid "Event related"
+msgstr ""
+
+#. module: mass_mailing_event
+#: field:mail.mass_mailing,exclude_event_state_ids:0
+msgid "Exclude"
+msgstr ""
+
+#. module: mass_mailing_event
+#: field:event.registration.state,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,__last_update:0
+msgid "Last Modified on"
+msgstr "Son değişiklik"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,write_uid:0
+msgid "Last Updated by"
+msgstr "Son güncelleyen"
+
+#. module: mass_mailing_event
+#: field:event.registration.state,write_date:0
+msgid "Last Updated on"
+msgstr "Son güncellenme"
+
+#. module: mass_mailing_event
+#: model:ir.model,name:mass_mailing_event.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: mass_mailing_event
+#: model:ir.model,name:mass_mailing_event.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr ""
+
+#. module: mass_mailing_event
+#: field:event.registration.state,name:0
+msgid "Name"
+msgstr "Adı"
+
+#. module: mass_mailing_event
+#: model:ir.model,name:mass_mailing_event.model_res_partner
+msgid "Partner"
+msgstr "İş Ortağı"
+
+#. module: mass_mailing_event
+#: view:mail.mass_mailing:mass_mailing_event.view_mail_mass_mailing_form
+msgid "{'search_default_not_opt_out': 1, 'exclude_mass_mailing': active_id}"
+msgstr ""
