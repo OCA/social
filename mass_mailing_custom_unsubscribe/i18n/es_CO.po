@@ -3,22 +3,23 @@
 # * mass_mailing_custom_unsubscribe
 # 
 # Translators:
-# Ahmet Altınışık <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Hotellook, 2014
 # Isabelle RICHARD <isabellerichard89@gmail.com>, 2015
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
 # John Toro <johntoro@gmail.com>, 2015
-# LS Development <ls.development.nc@gmail.com>, 2016
+# Lixon Jean-Yves <ls.development.nc@gmail.com>, 2016
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 00:45+0000\n"
-"PO-Revision-Date: 2016-07-25 10:59+0000\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-10-11 09:49+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Colombia) (http://www.transifex.com/oca/OCA-social-8-0/language/es_CO/)\n"
 "MIME-Version: 1.0\n"
@@ -61,13 +62,13 @@ msgstr ""
 #: field:mail.unsubscription,create_uid:0
 #: field:mail.unsubscription.reason,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,create_date:0
 #: field:mail.unsubscription.reason,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,date:0
@@ -77,7 +78,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_last_post:0
 msgid "Date of the last message posted on the record."
-msgstr ""
+msgstr "Fecha del último mensaje publicado en el registro."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,details:0
@@ -91,15 +92,10 @@ msgid "Details required"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: field:mail.mail,path:0
-msgid "Discussion Path"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,display_name:0
 #: field:mail.unsubscription.reason,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre Público"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.mass_mailing.list,not_cross_unsubscriptable:0
@@ -119,7 +115,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_follower_ids:0
 msgid "Followers"
-msgstr ""
+msgstr "Seguidores"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
@@ -156,12 +152,12 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,id:0 field:mail.unsubscription.reason,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr ""
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,success:0
@@ -203,25 +199,25 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_last_post:0
 msgid "Last Message Date"
-msgstr ""
+msgstr "Fecha del Último Mensaje"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,__last_update:0
 #: field:mail.unsubscription.reason,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,write_uid:0
 #: field:mail.unsubscription.reason,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Actualizado por"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,write_date:0
 #: field:mail.unsubscription.reason,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Actualizado"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
@@ -247,12 +243,12 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_ids:0
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_ids:0
 msgid "Messages and communication history"
-msgstr ""
+msgstr "Historial de mensajes y de comunicación"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
@@ -267,7 +263,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription.reason,name:0
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_other
@@ -293,7 +289,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription.reason,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Secuencia"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
@@ -332,7 +328,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Mensajes sin Leer"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
@@ -357,12 +353,6 @@ msgid "Unsubscriptions"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: help:mail.mail,path:0
-msgid ""
-"Used to display messages in a paragraph-based chatter using a unique path;"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.failure
 msgid ""
 "We apologize for the inconvenience. You can contact us\n"
@@ -372,12 +362,12 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,website_message_ids:0
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensajes del Sitio Web"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,website_message_ids:0
 msgid "Website communication history"
-msgstr ""
+msgstr "Historial de comunicación del sitio web"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,unsubscriber_id:0

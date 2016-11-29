@@ -3,14 +3,14 @@
 # * mail_template_multi_report
 # 
 # Translators:
-# John Toro <johntoro@gmail.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-30 01:07+0000\n"
-"PO-Revision-Date: 2016-06-30 01:07+0000\n"
-"Last-Translator: John Toro <johntoro@gmail.com>, 2016\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (Colombia) (https://www.transifex.com/oca/teams/23907/es_CO/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -33,17 +33,17 @@ msgstr ""
 #. module: mail_template_multi_report
 #: field:email.template.report.line,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre Público"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,template_id:0
@@ -63,22 +63,22 @@ msgstr "Plantilla de E-mails"
 #. module: mail_template_multi_report
 #: field:email.template.report.line,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Actualizado por"
 
 #. module: mail_template_multi_report
 #: field:email.template.report.line,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Actualizado"
 
 #. module: mail_template_multi_report
 #: help:email.template.report.line,report_name:0

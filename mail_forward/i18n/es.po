@@ -3,6 +3,7 @@
 # * mail_forward
 # 
 # Translators:
+# Carles Antoli <carlesantoli@hotmail.com>, 2016
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
@@ -16,9 +17,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-26 00:45+0000\n"
-"PO-Revision-Date: 2016-07-25 11:00+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"Last-Translator: Carles Antoli <carlesantoli@hotmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-social-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,12 +37,12 @@ msgstr "(Sin asunto)"
 #. module: mail_forward
 #: field:mail_forward.compose_message,active_domain:0
 msgid "Active domain"
-msgstr ""
+msgstr "Dominio activo"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,partner_ids:0
 msgid "Additional Contacts"
-msgstr ""
+msgstr "Contactos adicionales"
 
 #. module: mail_forward
 #: help:res.request.link,mail_forward_target:0
@@ -53,7 +54,7 @@ msgstr "Permitir reenviar correos a este modelo."
 msgid ""
 "Answers do not go in the original document' discussion thread. This has an "
 "impact on the generated message-id."
-msgstr ""
+msgstr "Las respuestas no van en el documento original del hilo de discusión. Esto tiene un impacto en el mensaje-id generado."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,attachment_ids:0
@@ -72,7 +73,7 @@ msgstr "Los adjuntos se asignarán al objeto de destino escogido y podrá escoge
 #. module: mail_forward
 #: field:mail_forward.compose_message,author_id:0
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,author_id:0
@@ -106,12 +107,12 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,composition_mode:0
 msgid "Composition mode"
-msgstr ""
+msgstr "Modo de composición"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,body:0
 msgid "Contents"
-msgstr ""
+msgstr "Contenido"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_uid:0
@@ -208,7 +209,7 @@ msgstr "ID"
 #. module: mail_forward
 #: help:mail_forward.compose_message,parent_id:0
 msgid "Initial thread message."
-msgstr ""
+msgstr "Hilo del mensaje inicial"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,__last_update:0
@@ -255,7 +256,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,message_id:0
 msgid "Message-Id"
-msgstr ""
+msgstr "Mensaje-id"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,move_attachments:0
@@ -384,7 +385,7 @@ msgstr "Para: "
 #. module: mail_forward
 #: field:mail_forward.compose_message,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,use_active_domain:0

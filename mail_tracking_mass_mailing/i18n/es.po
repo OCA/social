@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Gelo Joga Landoo <gj@landoo.es>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:21+0000\n"
-"PO-Revision-Date: 2016-09-14 07:21+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"Last-Translator: Gelo Joga Landoo <gj@landoo.es>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -45,9 +46,25 @@ msgid "Email Statistics"
 msgstr "Estadísticas del email"
 
 #. module: mail_tracking_mass_mailing
+#: view:mail.mass_mailing.contact:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
+#: field:mail.mass_mailing.contact,email_bounced:0
+msgid "Email bounced"
+msgstr "E mail rebotado"
+
+#. module: mail_tracking_mass_mailing
 #: field:mail.mass_mailing.contact,email_score:0
 msgid "Email score"
 msgstr "Reputación del email"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
+msgid "Emails"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
+msgid "Events"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: field:mail.tracking.email,mail_id_int:0
@@ -60,9 +77,20 @@ msgid "Mail statistics"
 msgstr "Estadísticas del email"
 
 #. module: mail_tracking_mass_mailing
+#: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
 #: field:mail.mail.statistics,mail_tracking_id:0
 msgid "Mail tracking"
 msgstr "Seguimiento del email"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_email
+msgid "Mail tracking emails"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_event
+msgid "Mail tracking events"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
@@ -86,6 +114,7 @@ msgstr "Contacto de envío masivo"
 
 #. module: mail_tracking_mass_mailing
 #: field:mail.tracking.email,mass_mailing_id:0
+#: field:mail.tracking.event,mass_mailing_id:0
 msgid "Mass mailing"
 msgstr "Envío masivo"
 
@@ -100,11 +129,6 @@ msgstr "Correos salientes"
 msgid ""
 "There is no more recipients to send and 'Avoid resend' option is enabled"
 msgstr ""
-
-#. module: mail_tracking_mass_mailing
-#: field:mail.mass_mailing.contact,tracking_email_ids:0
-msgid "Tracking emails"
-msgstr "Emails de seguimiento"
 
 #. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form

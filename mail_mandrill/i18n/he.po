@@ -1,0 +1,397 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_mandrill
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-10-11 09:51+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Hebrew (http://www.transifex.com/oca/OCA-social-8-0/language/he/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: he\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_mandrill
+#: help:mail.mandrill.message,state:0
+msgid ""
+" * The 'Sent' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
+" * The 'Opened' status indicates that message was opened or clicked by recipient.\n"
+" * The 'Rejected' status indicates that recipient email address is blacklisted by Mandrill. It is recomended to delete this email address.\n"
+" * The 'Spam' status indicates that Mandrill consider this message as spam.\n"
+" * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
+" * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
+" * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Bounce"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,bounce_description:0
+msgid "Bounce description"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,bounce_type:0
+msgid "Bounce type"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.message,state:0
+msgid "Bounced"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Click"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Clicked"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,url:0
+msgid "Clicked URL"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "Country"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,create_uid:0
+#: field:mail.mandrill.message,create_uid:0
+msgid "Created by"
+msgstr "נוצר על ידי"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,create_date:0
+#: field:mail.mandrill.message,create_date:0
+msgid "Created on"
+msgstr "נוצר ב-"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Date"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Deferral"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: selection:mail.mandrill.message,state:0
+msgid "Deferred"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,display_name:0
+#: field:mail.mandrill.message,display_name:0
+msgid "Display Name"
+msgstr "השם המוצג"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Email"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,event_type:0
+msgid "Event type"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Failed"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Group By"
+msgstr "קבץ לפי"
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Hard bounce"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,id:0 field:mail.mandrill.message,id:0
+msgid "ID"
+msgstr "מזהה"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,mobile:0
+msgid "Is mobile?"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,__last_update:0
+#: field:mail.mandrill.message,__last_update:0
+msgid "Last Modified on"
+msgstr "תאריך שינוי אחרון"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,write_uid:0
+#: field:mail.mandrill.message,write_uid:0
+msgid "Last Updated by"
+msgstr "עודכן לאחרונה על ידי"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,write_date:0
+#: field:mail.mandrill.message,write_date:0
+msgid "Last Updated on"
+msgstr "עודכן לאחרונה על"
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,timestamp:0
+#: field:mail.mandrill.message,timestamp:0
+msgid "Mandrill UTC timestamp"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,date:0 field:mail.mandrill.message,date:0
+msgid "Mandrill date"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Mandrill email Search"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_form
+msgid "Mandrill email event"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "Mandrill email events"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "Mandrill email message"
+msgstr ""
+
+#. module: mail_mandrill
+#: model:ir.actions.act_window,name:mail_mandrill.action_view_mail_mandrill_message
+#: model:ir.ui.menu,name:mail_mandrill.menu_mail_mandrill_message
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+msgid "Mandrill emails"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Mandrill event Search"
+msgstr ""
+
+#. module: mail_mandrill
+#: model:ir.actions.act_window,name:mail_mandrill.action_view_mail_mandrill_event
+#: model:ir.ui.menu,name:mail_mandrill.menu_mail_mandrill_event
+#: field:mail.mandrill.message,event_ids:0
+msgid "Mandrill events"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,mandrill_id:0
+msgid "Mandrill message ID"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,time:0 field:mail.mandrill.message,time:0
+msgid "Mandrill time"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,message_id:0
+msgid "Message"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+msgid "Message subject"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,metadata:0
+msgid "Metadata"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Month"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Open"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: selection:mail.mandrill.message,state:0
+msgid "Opened"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,os_family:0
+msgid "Operating system family"
+msgstr ""
+
+#. module: mail_mandrill
+#: model:ir.model,name:mail_mandrill.model_mail_mail
+msgid "Outgoing Mails"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+msgid "Recipient"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,recipient:0
+msgid "Recipient email"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: selection:mail.mandrill.message,state:0
+msgid "Rejected"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Send"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+msgid "Sender"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.message,sender:0
+msgid "Sender email"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: selection:mail.mandrill.message,state:0
+msgid "Sent"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+msgid "Soft bounce"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.message,state:0
+msgid "Soft bounced"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: selection:mail.mandrill.message,state:0
+msgid "Spam"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: field:mail.mandrill.message,state:0
+msgid "State"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: field:mail.mandrill.message,name:0
+msgid "Subject"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
+#: field:mail.mandrill.message,tags:0
+msgid "Tags"
+msgstr "תגיות"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+msgid "Time"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Type"
+msgstr "סוג"
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "URL"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+msgid "Unsubscribe"
+msgstr ""
+
+#. module: mail_mandrill
+#: selection:mail.mandrill.event,event_type:0
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
+#: selection:mail.mandrill.message,state:0
+msgid "Unsubscribed"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,ip:0
+msgid "User IP"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
+#: field:mail.mandrill.event,user_agent:0
+#: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
+msgid "User agent"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,ua_family:0
+msgid "User agent family"
+msgstr ""
+
+#. module: mail_mandrill
+#: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
+#: field:mail.mandrill.event,ua_type:0
+msgid "User agent type"
+msgstr ""
+
+#. module: mail_mandrill
+#: field:mail.mandrill.event,user_country_id:0
+msgid "User country"
+msgstr ""

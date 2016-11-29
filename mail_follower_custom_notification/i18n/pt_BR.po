@@ -4,8 +4,10 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2013
@@ -20,8 +22,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:21+0000\n"
-"PO-Revision-Date: 2016-09-08 13:36+0000\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 14:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +45,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_own:0
@@ -78,7 +80,7 @@ msgstr ""
 #: field:base.patch.models.mixin,display_name:0
 #: field:mail.subtype.assign.custom.notifications,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome para Mostrar"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_followers
@@ -88,7 +90,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Processo Email"
 
 #. module: mail_follower_custom_notification
 #: field:mail.followers,force_mail_subtype_ids:0
@@ -139,7 +141,7 @@ msgstr "Identificação"
 #: field:base.patch.models.mixin,__last_update:0
 #: field:mail.subtype.assign.custom.notifications,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,write_uid:0
@@ -237,4 +239,4 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
 msgid "or"
-msgstr ""
+msgstr "ou"

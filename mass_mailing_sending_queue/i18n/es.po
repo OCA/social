@@ -1,19 +1,23 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mass_mailing_sending_queue
-#
+# * mass_mailing_sending_queue
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-08 13:56+0000\n"
-"PO-Revision-Date: 2016-09-08 13:56+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2016\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_sending_queue
 #: field:mail.mass_mailing.sending,create_uid:0
@@ -26,9 +30,24 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,date_end:0
+msgid "Date end"
+msgstr "Fecha de fin"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,date_start:0
+msgid "Date start"
+msgstr "Fecha inicio"
+
+#. module: mass_mailing_sending_queue
 #: field:mail.mass_mailing.sending,display_name:0
 msgid "Display Name"
 msgstr "Nombre mostrado"
+
+#. module: mass_mailing_sending_queue
+#: selection:mail.mass_mailing.sending,state:0
+msgid "Draft"
+msgstr "Borrador"
 
 #. module: mass_mailing_sending_queue
 #: model:ir.model,name:mass_mailing_sending_queue.model_mail_mail_statistics
@@ -36,25 +55,25 @@ msgid "Email Statistics"
 msgstr "Estadísticas de correo electrónico"
 
 #. module: mass_mailing_sending_queue
-#: field:mail.mass_mailing.sending,failed:0
-msgid "Emails failed"
-msgstr "Correos electrónicos fallidos"
-
-#. module: mass_mailing_sending_queue
-#: field:mail.mass_mailing.sending,sending:0
-msgid "Emails sending"
-msgstr "Emails enviándose"
-
-#. module: mass_mailing_sending_queue
-#: field:mail.mass_mailing.sending,sent:0
-msgid "Emails sent"
-msgstr "Emails enviados"
-
-#. module: mass_mailing_sending_queue
 #: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
 #: selection:mail.mass_mailing.sending,state:0
 msgid "Enqueued"
 msgstr "En cola"
+
+#. module: mass_mailing_sending_queue
+#: selection:mail.mass_mailing.sending,state:0
+msgid "Error"
+msgstr "Error"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,error:0
+msgid "Error message"
+msgstr "Mensaje de error"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,failed_count:0
+msgid "Failed mails"
+msgstr "Correos fallidos"
 
 #. module: mass_mailing_sending_queue
 #: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
@@ -82,6 +101,11 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,sending_count:0
+msgid "Mails to be sent"
+msgstr "Correos a ser enviados"
+
+#. module: mass_mailing_sending_queue
 #: model:ir.model,name:mass_mailing_sending_queue.model_mail_mass_mailing
 msgid "Mass Mailing"
 msgstr "Envío masivo"
@@ -107,21 +131,25 @@ msgid "Mass mailing sendings"
 msgstr "Envíos de correo masivo"
 
 #. module: mass_mailing_sending_queue
-#: field:mail.mass_mailing,pending:0
+#: model:ir.model,name:mass_mailing_sending_queue.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Correo saliente"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing,pending_count:0
 msgid "Pending"
 msgstr "Pendiente"
 
 #. module: mass_mailing_sending_queue
-#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:23
-#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing_sending.py:67
+#: field:mail.mass_mailing.sending,pending_count:0
+msgid "Pending recipients"
+msgstr "Destinatarios pendientes"
+
+#. module: mass_mailing_sending_queue
+#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:61
 #, python-format
 msgid "Please select recipients."
 msgstr "Por favor, seleccione algún destinatario"
-
-#. module: mass_mailing_sending_queue
-#: field:mail.mass_mailing.sending,pending:0
-msgid "Recipients pending"
-msgstr "Destinatarios pendientes"
 
 #. module: mass_mailing_sending_queue
 #: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
@@ -129,10 +157,18 @@ msgid "Running"
 msgstr "Ejecutándose"
 
 #. module: mass_mailing_sending_queue
+#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:33
 #: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
 #: selection:mail.mass_mailing.sending,state:0
+#, python-format
 msgid "Sending"
 msgstr "Enviando"
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+#: field:mail.mass_mailing,mass_mailing_sending_ids:0
+msgid "Sending tasks"
+msgstr "Tareas de envío"
 
 #. module: mass_mailing_sending_queue
 #: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
@@ -141,16 +177,49 @@ msgid "Sent"
 msgstr "Enviado"
 
 #. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,sent_count:0
+msgid "Sent mails"
+msgstr "Correos enviados"
+
+#. module: mass_mailing_sending_queue
 #: field:mail.mass_mailing.sending,state:0
 msgid "State"
 msgstr "Estado"
 
 #. module: mass_mailing_sending_queue
-#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
-msgid "recipients pending for creating email."
-msgstr "destinatarios pendientes de crear el correo electrónico."
+#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:53
+#, python-format
+msgid ""
+"There is another sending task running. Please, be patient. You can see all "
+"the sending tasks in 'Sending tasks' tab"
+msgstr ""
+"Ya hay otra tarea de envío en curso. Por favor, sea paciente. Puede ver "
+"todas las tareas de envío en la pestaña \"Tareas de envío\"."
 
 #. module: mass_mailing_sending_queue
 #: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
-msgid "{'invisible': [('scheduled', '=', 0), ('pending', '=', 0)]}"
-msgstr "{'invisible': [('scheduled', '=', 0), ('pending', '=', 0)]}"
+msgid ""
+"{'invisible': ['|', ('state', 'in', ('done', 'sending')), ('body_html', '=',"
+" False)]}"
+msgstr ""
+"{'invisible': ['|', ('state', 'in', ('done', 'sending')), ('body_html', '=',"
+" False)]}"
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid ""
+"{'invisible': ['|', ('state', 'not in', ('done', )), ('body_html', '=', "
+"False)]}"
+msgstr ""
+"{'invisible': ['|', ('state', 'not in', ('done', )), ('body_html', '=', "
+"False)]}"
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid "{'invisible': [('pending_count', '=', 0)]}"
+msgstr "{'invisible': [('pending_count', '=', 0)]}"
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid "{'sending_queue_enabled': True}"
+msgstr "{'sending_queue_enabled': True}"

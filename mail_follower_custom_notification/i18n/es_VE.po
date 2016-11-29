@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:21+0000\n"
-"PO-Revision-Date: 2016-09-09 12:26+0000\n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-social-8-0/language/es_VE/)\n"
 "MIME-Version: 1.0\n"
@@ -49,12 +49,12 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creado en"
 
 #. module: mail_follower_custom_notification
 #: view:mail.message.subtype:mail_follower_custom_notification.view_mail_message_subtype_form
@@ -65,7 +65,7 @@ msgstr ""
 #: field:base.patch.models.mixin,display_name:0
 #: field:mail.subtype.assign.custom.notifications,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar nombre"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_followers
@@ -120,23 +120,23 @@ msgstr ""
 #: field:base.patch.models.mixin,id:0
 #: field:mail.subtype.assign.custom.notifications,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_follower_custom_notification
 #: field:base.patch.models.mixin,__last_update:0
 #: field:mail.subtype.assign.custom.notifications,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Modificada por última vez"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización realizada por"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizacion en"
 
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_mail:0

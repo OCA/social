@@ -1,0 +1,38 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * social_media_xing
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2015-11-20 13:42+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Czech (http://www.transifex.com/oca/OCA-social-8-0/language/cs/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: cs\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+
+#. module: social_media_xing
+#: model:ir.model,name:social_media_xing.model_website
+msgid "Website"
+msgstr "Webová stránka"
+
+#. module: social_media_xing
+#: field:website,social_xing:0 field:website.config.settings,social_xing:0
+msgid "Xing Account"
+msgstr ""
+
+#. module: social_media_xing
+#: view:website:social_media_xing.view_website_form_extra
+msgid "http://www.xing.com"
+msgstr ""
+
+#. module: social_media_xing
+#: view:website.config.settings:social_media_xing.view_website_config_settings_ext
+msgid "https://www.xing.com"
+msgstr ""

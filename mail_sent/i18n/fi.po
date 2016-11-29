@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_sent
+# 
+# Translators:
+# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-09-29 13:24+0000\n"
+"Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
+"Language-Team: Finnish (http://www.transifex.com/oca/OCA-social-8-0/language/fi/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fi\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_sent
+#: model:ir.actions.client,help:mail_sent.action
+msgid ""
+"<p><b>No sent messages.</b></p>\n"
+"            <p>This list contains messages sent by you.</p>\n"
+"        "
+msgstr "<p><b>Ei lähetettyjä viestejä.</b></p>\n<p>Tässä näkymässä näkyy sinun lähettämäsi viestit.</p>"
+
+#. module: mail_sent
+#: model:ir.actions.client,name:mail_sent.action
+#: model:ir.ui.menu,name:mail_sent.menu
+msgid "Sent"
+msgstr "Lähetetty"

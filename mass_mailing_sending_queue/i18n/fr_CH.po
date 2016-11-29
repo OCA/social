@@ -1,0 +1,218 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_sending_queue
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: French (Switzerland) (https://www.transifex.com/oca/teams/23907/fr_CH/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr_CH\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,date_end:0
+msgid "Date end"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,date_start:0
+msgid "Date start"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: selection:mail.mass_mailing.sending,state:0
+msgid "Draft"
+msgstr "Brouillon"
+
+#. module: mass_mailing_sending_queue
+#: model:ir.model,name:mass_mailing_sending_queue.model_mail_mail_statistics
+msgid "Email Statistics"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+#: selection:mail.mass_mailing.sending,state:0
+msgid "Enqueued"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: selection:mail.mass_mailing.sending,state:0
+msgid "Error"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,error:0
+msgid "Error message"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,failed_count:0
+msgid "Failed mails"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+msgid "Group By"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,write_uid:0
+msgid "Last Updated by"
+msgstr "Modifié par"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,write_date:0
+msgid "Last Updated on"
+msgstr "Modifié le"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,sending_count:0
+msgid "Mails to be sent"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: model:ir.model,name:mass_mailing_sending_queue.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+#: field:mail.mass_mailing.sending,mass_mailing_id:0
+msgid "Mass mailing"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: model:ir.ui.menu,name:mass_mailing_sending_queue.menu_mass_mailing_sending
+#: field:mail.mail.statistics,mass_mailing_sending_id:0
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_form
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+msgid "Mass mailing sending"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: model:ir.actions.act_window,name:mass_mailing_sending_queue.action_view_mail_mass_mailing_sending
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_tree
+msgid "Mass mailing sendings"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: model:ir.model,name:mass_mailing_sending_queue.model_mail_mail
+msgid "Outgoing Mails"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing,pending_count:0
+msgid "Pending"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,pending_count:0
+msgid "Pending recipients"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:61
+#, python-format
+msgid "Please select recipients."
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+msgid "Running"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:33
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+#: selection:mail.mass_mailing.sending,state:0
+#, python-format
+msgid "Sending"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+#: field:mail.mass_mailing,mass_mailing_sending_ids:0
+msgid "Sending tasks"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing.sending:mass_mailing_sending_queue.view_mail_mass_mailing_sending_search
+#: selection:mail.mass_mailing.sending,state:0
+msgid "Sent"
+msgstr "Envoyé"
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,sent_count:0
+msgid "Sent mails"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: field:mail.mass_mailing.sending,state:0
+msgid "State"
+msgstr "Etat"
+
+#. module: mass_mailing_sending_queue
+#: code:addons/mass_mailing_sending_queue/models/mail_mass_mailing.py:53
+#, python-format
+msgid ""
+"There is another sending task running. Please, be patient. You can see all "
+"the sending tasks in 'Sending tasks' tab"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid ""
+"{'invisible': ['|', ('state', 'in', ('done', 'sending')), ('body_html', '=',"
+" False)]}"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid ""
+"{'invisible': ['|', ('state', 'not in', ('done', )), ('body_html', '=', "
+"False)]}"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid "{'invisible': [('pending_count', '=', 0)]}"
+msgstr ""
+
+#. module: mass_mailing_sending_queue
+#: view:mail.mass_mailing:mass_mailing_sending_queue.view_mail_mass_mailing_form
+msgid "{'sending_queue_enabled': True}"
+msgstr ""
