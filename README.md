@@ -18,14 +18,14 @@ addon | version | summary
 [mail_full_expand](mail_full_expand/) | 10.0.1.0.0 | Expand mail in a big window
 [mail_optional_autofollow](mail_optional_autofollow/) | 10.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 10.0.1.0.0 | Define a domain from which followers can be selected
+[mail_tracking](mail_tracking/) | 10.0.1.0.0 | Email tracking system for all mails sent
+[mail_tracking_mailgun](mail_tracking_mailgun/) | 10.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 (unported) | Select language in mail compose window
-[mail_tracking](mail_tracking/) | 9.0.1.0.0 (unported) | Email tracking system for all mails sent
-[mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.0.0 (unported) | Mail tracking and Mailgun webhooks integration
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.0.0 (unported) | Customizable unsubscribe link on mass mailing emails
 
 [//]: # (end addons)
