@@ -1,13 +1,16 @@
 # -*- coding: utf-8 -*-
-# © 2015 Grupo ESOC Ingeniería de Servicios, S.L.U. - Jairo Llopis
+# Copyright 2015 Grupo ESOC Ingeniería de Servicios, S.L.U. - Jairo Llopis
+# Copyright 2016 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 {
     "name": "Unique records for mass mailing",
     "summary": "Avoids duplicate mailing lists and contacts",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "category": "Marketing",
-    "website": "https://grupoesoc.es",
-    "author": "Grupo ESOC Ingeniería de Servicios, "
+    "website": "https://tecnativa.com",
+    "author": "Grupo ESOC Ingeniería de Servicios,"
+              "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
