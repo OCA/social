@@ -1,61 +1,652 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Antiun Ingeniería S.L. - Jairo Llopis
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     Copyright 2016 Vicent Cubells <vicent.cubells@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
-<data>
+<odoo>
 
 <!-- Section with 560px width snippets -->
 <template id="560px_section_add"
-          inherit_id="website_mail.email_designer_snippets">
-    <xpath expr="//a[@href='#snippet_email_structure']/.." position="after">
+          inherit_id="mass_mailing.email_designer_snippets">
+    <xpath expr="//a[@href='#email_designer_default_footer']/.." position="after">
         <li>
-            <a href="#snippet_email_560px" data-toggle="tab">
-                Fixed 560px Width
+            <a href="#snippet_email_560px" class="scroll-link">
+                <span class="fa-stack fa-lg">
+                    <i class="fa fa-square fa-stack-2x fa-inverse"></i>
+                    <i class="fa fa-align-justify fa-stack-1x" style=" margin-top: 0.7em; height: 0.9em; display: inline-block; overflow: hidden;"></i>
+                    <i class="fa fa-arrows-h fa-stack-1x text-muted" style="display: inline-block; font-size: 0.6em; margin-top: -0.15em;"></i>
+                </span>
             </a>
         </li>
     </xpath>
+    <xpath expr="//div[@id='email_designer_default_footer']" position="after">
+        <div id="snippet_email_560px" class="o_panel">
+            <div class="o_panel_header">
+                <span class="fa-stack">
+                    <i class="fa fa-align-justify fa-stack-1x" style=" margin-top: 0.7em; height: 0.9em; display: inline-block; overflow: hidden;"></i>
+                    <i class="fa fa-arrows-h fa-stack-1x" style="display: inline-block; font-size: 0.6em; margin-top: -0.15em;"></i>
+                </span> Fixed 560px Width
+            </div>
+        </div>
+        <div class="o_panel_body">
+            <div name="Big image + Text + Button (1 column)" class="basic_theme o_snippet_1_col">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                            <tr>
+                                <td align="left" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 10px 20px;">Title</td>
+                            </tr>
+                            <tr>
+                                <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/560x200/aaaaaa/ffffff?text=width 560px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 560px;" border="0" width="570"/> </a></td>
+                            </tr>
+                            <tr>
+                                <td style="padding:0 20px;">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;" align="left">Title</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding: 20px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;" align="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td align="left">
+                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 25px 20px;" align="left">
+                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div name="Image + Text + Button (2 columns)" class="basic_theme o_snippet_2_cols">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                            <tr>
+                                <td align="left" colspan="2" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 0 20px;">Title</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;" valign="top">
+                                    <!-- LEFT COLUMN -->
+                                    <table style="width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 10px 20px 20px;" valign="top">
+                                                    <table style="border-collapse:collapse;background:inherit;color:inherit;" cellpadding="0" cellspacing="0" align="center">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/250x200/aaaaaa/ffffff?text=width 250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 250px;" width="250" border="0"/></a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:0;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;" align="left">Title</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="padding: 20px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;" align="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="padding: 25px 0;" align="left">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank" class="bg_color_picker">Learn more</a></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    </td>
+                                    <td style="padding: 0;" valign="top">
+                                    <!-- RIGHT COLUMN -->
+                                    <table style="width:280px;" border="0" cellpadding="0" cellspacing="0" align="left">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 20px 20px 10px;" valign="top">
+                                                    <table style="border-collapse:collapse;background:inherit;color:inherit;" cellpadding="0" cellspacing="0" align="center">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/250x200/aaaaaa/ffffff?text=width 250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 50% width: 250px;" width="250" border="0"/></a></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td style="padding:0;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;" align="left">Title</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="padding: 20px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;" align="left">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td align="left">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="padding: 25px 0;" align="left">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" target="_blank" class="bg_color_picker">Learn more</a></td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div name="Image + Text + Button (3 columns)" class="basic_theme o_snippet_3_cols">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                        <tr>
+                            <td align="left" colspan="3" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 0 20px;">Title</td>
+                        </tr>
+                        <tr><!-- FIRST COLUMN -->
+                            <td style="padding: 0;" valign="top">
+                                <table align="left" border="0" cellpadding="0" cellspacing="0">
+                                 <tbody>
+                                   <tr>
+                                    <td style="padding: 20px 10px 20px 20px;" valign="top">
+                                        <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="160">
+                                            <tbody>
+                                                <tr>
+                                                    <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/160x160/aaaaaa/ffffff?text=width%20160px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;width: 100%; width:160px;" border="0" width="160"/></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="padding:0;">
+                                                        <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;" align="left">Title</td>
+                                                                </tr>
 
-    <xpath expr="//div[@id='snippet_email_structure']" position="after">
-        <div id="snippet_email_560px" class="tab-pane fade">
-            <t t-call="website_mail_snippet_fixed.560px_section"/>
+                                                                <tr>
+                                                                    <td align="left" style="padding: 20px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">
+
+                                                                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                                                    </tr>
+
+                                                                    <tr>
+                                                                        <td align="left">
+                                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                <tbody>
+                                                                                    <tr>
+                                                                                        <td style="padding: 25px 0px;" align="left">
+                                                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                                                <tbody>
+                                                                                                    <tr>
+                                                                                                        <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                                                    </tr>
+                                                                                                </tbody>
+                                                                                            </table>
+                                                                                        </td>
+                                                                                    </tr>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                        <!-- SECOND COLUMN -->
+                        <td style="padding: 0;" valign="top">
+                            <table align="left" border="0" cellpadding="0" cellspacing="0">
+                                <tbody>
+                                    <tr>
+                                        <td style="padding: 20px 10px 20px 10px;" valign="top">
+                                            <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="160">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/160x160/aaaaaa/ffffff?text=width%20160px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;width: 100%; width:160px;" border="0" width="160"/></a></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="padding:0;">
+                                                            <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;" align="left">Title</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td align="left" style="padding: 20px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">
+
+                                                                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td align="left">
+                                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                    <tbody>
+                                                                                        <tr>
+                                                                                            <td style="padding: 25px 0px;" align="left">
+                                                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                                                    <tbody>
+                                                                                                        <tr>
+                                                                                                            <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                                                        </tr>
+                                                                                                    </tbody>
+                                                                                                </table>
+                                                                                            </td>
+                                                                                        </tr>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                            <!-- THIRD COLUMN -->
+                            <td style="padding: 0;" valign="top">
+                                <table align="left" border="0" cellpadding="0" cellspacing="0">
+                                    <tbody>
+                                        <tr>
+                                            <td style="padding: 20px 20px 20px 10px;" valign="top">
+                                                <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="160">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/160x160/aaaaaa/ffffff?text=width%20160px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;width: 100%; width:160px;" border="0" width="160"/></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding:0;">
+                                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 30px;" align="left">Title</td>
+                                                                        </tr>
+
+                                                                        <tr>
+                                                                            <td align="left" style="padding: 20px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">
+
+                                                                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed varius, leo a ullamcorper feugiat, ante purus sodales justo, a faucibus libero lacus a est. Aenean at mollis ipsum.</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td style="padding: 25px 0px;" align="left">
+                                                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div name="Date + Text + Button (2 columns)" class="basic_theme o_snippet_event_date">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                            <tr>
+                                <td align="left" colspan="2" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 0 20px;">Title</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;" valign="top"><!-- LEFT COLUMN -->
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="50%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 0 20px 40px;">
+                                                    <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#000000">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="padding:1px;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="200" height="200" style="background:#FFFFFF">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td align="center" style="font-size: 65pt; text-align: center; line-height:50pt; font-weight: bold; font-family: Arial, sans-serif; color: #000000; padding: 30px 0 0 0;">07</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center" style="padding: 10px 0 0 0; font-size: 16pt; text-align: center; font-weight: bold;  letter-spaccing:2px; text-transform: uppercase; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">December</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td align="center" style="padding: 0 0 30px 0; font-size: 16pt; text-align: center; font-weight: bold;  letter-spaccing:2px; text-transform: uppercase; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">18:00</td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <!-- RIGHT COLUMN -->
+                                <td>
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="50%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 20px 20px 10px;">
+                                                    <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="250">
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td style="padding:0;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 10px;" align="left">Event Title</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left" style="padding: 10px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td style="padding: 25px 0;" align="left">
+                                                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div name="Horizontal Separator" class="basic_theme o_snippet_hr">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                            <tr>
+                                <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #00B518;"
+                                    height="5"
+                                    class="bg_color_picker vertical_resizable"/>
+                            </tr>
+                            <tr>
+                                <td style="background-color: #ECECEC;" class="bg_color_picker" height="10"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div name="Left Image, Right Text + Button" class="basic_theme o_snippet_img_text">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                            <tr>
+                                <td align="left" colspan="2" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 0 20px;">Title</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;" valign="top"><!-- LEFT COLUMN -->
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="50%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 10px 20px 20px;">
+                                                    <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="250">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/250x200/aaaaaa/ffffff?text=width%20250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 250px;" border="0" width="250"/></a></td>
+                                                            </tr>
+
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <!-- RIGHT COLUMN -->
+                                <td>
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="50%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 20px 20px 10px;" valign="top">
+                                                    <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="250">
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td style="padding:0;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 10px;" align="left">News Item</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left" style="padding: 10px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td style="padding: 25px 0;" align="left">
+                                                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div name="Left Text and Button, Right Image" class="basic_theme o_snippet_text_img">
+                <div class="snippet_row bg-color" style="padding:0px;width:600px;margin:auto;background: #fff repeat top /100%;color:#777777">
+                    <table width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;background:inherit;color:inherit">
+                        <tbody>
+                            <tr>
+                                <td align="left" colspan="2" style="font-size: 11pt; font-family: Arial, sans-serif; font-weight: bold; color: #000; padding: 20px 10px 0 20px;">Title</td>
+                            </tr>
+                            <tr>
+                                <td style="padding: 0;" valign="top"><!-- LEFT COLUMN -->
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="50%">
+                                        <tbody>
+                                            <tr>
+                                                <td style="padding: 20px 10px 20px 20px;" valign="top">
+                                                    <table align="center" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit;" width="250">
+                                                        <tbody>
+
+                                                            <tr>
+                                                                <td style="padding:0;">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                        <tbody>
+                                                                            <tr>
+                                                                                <td style="font-size: 18pt; font-family: Arial, sans-serif; color: #000000; padding-top: 10px;" align="left">News Item</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left" style="padding: 10px 0 0 0; font-size: 9pt; line-height: 20px; font-family: Arial, sans-serif; color: #000000;">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                                                            </tr>
+
+                                                                            <tr>
+                                                                                <td align="left">
+                                                                                    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td style="padding: 25px 0;" align="left">
+                                                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                                                        <tbody>
+                                                                                                            <tr>
+                                                                                                                <td align="center"><a href="#" style="font-size: 9pt; font-family: Arial, sans-serif; font-weight: normal; color: #ffffff; text-decoration: none; background-color: #00B518; border-top: 10px solid #00B518; border-bottom: 10px solid #00B518; border-left: 20px solid #00B518; border-right: 20px solid #00B518; border-radius: 3px; -webkit-border-radius: 3px; -moz-border-radius: 3px; display: inline-block;" class="bg_color_picker" target="_blank">Learn more</a></td>
+                                                                                                            </tr>
+                                                                                                        </tbody>
+                                                                                                    </table>
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </td>
+                                                                            </tr>
+                                                                        </tbody>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </td>
+                                <!-- RIGHT COLUMN -->
+                                <td>
+                                    <table align="left" border="0" cellpadding="0" cellspacing="0" width="50%">
+                                        <tbody>
+                                            <tr><td style="padding: 20px 20px 20px 10px;">
+                                                <table align="center" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" style="border-collapse:collapse;background:inherit;color:inherit; background:#FFFFFF" width="250">
+                                                    <tbody>
+                                                        <tr>
+                                                            <td style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt;"><a href="#" target="_blank"><img src="http://placehold.it/250x200/aaaaaa/ffffff?text=width%20250px" style="display: block; color: #000000;  font-family: Arial, sans-serif; font-size: 9pt; width: 250px;" border="0" width="250"/></a></td>
+                                                        </tr>
+
+                                                    </tbody>
+                                                </table>
+                                            </td></tr>
+
+
+                                        </tbody>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </xpath>
 
-    <xpath expr="//*[@id='snippet_options']" position="inside">
-        <div
-            data-snippet-option-id='fixed_560px'
-            data-selector=".fixed_560px"/>
-    </xpath>
 </template>
 
-<template id="560px_section"/>
-
-<!-- Base structure for all snippets -->
-<template id="snippet">
-    <div>
-        <div class="oe_snippet_thumbnail">
-            <img
-                class="oe_snippet_thumbnail_img"
-                t-attf-src="/website_mail_snippet_fixed/static/src/img/#{image}.png"/>
-            <span
-                t-esc="title"
-                class="oe_snippet_thumbnail_title"/>
-        </div>
-        <div
-            class="oe_snippet_body fixed_560px"
-            style="padding:0px; width:100%; background-color:#ececec; color:rgb(0,0,0); line-height:20px; font-family:Arial,sans-serif; font-size:9pt">
-            <table
-                style="width: 560px; border-collapse: collapse; background: inherit; color: inherit; background: #FFFFFF"
-                cellpadding="0"
-                cellspacing="0"
-                align="center"
-                class="bg_color_picker">
-                <t t-raw="0"/>
-            </table>
-        </div>
-    </div>
-</template>
-
-</data>
-</openerp>
+</odoo>

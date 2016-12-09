@@ -1,0 +1,22 @@
+/* ---- thumbnail ----  */
+.oe_snippet.o_snippet_1_col .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_1_col.png");
+}
+.oe_snippet.o_snippet_2_cols .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_2_cols.png");
+}
+.oe_snippet.o_snippet_3_cols .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_3_cols.png");
+}
+.oe_snippet.o_snippet_event_date .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_event_date.png");
+}
+.oe_snippet.o_snippet_hr .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_hr.png");
+}
+.oe_snippet.o_snippet_text_img .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_text_img.png");
+}
+.oe_snippet.o_snippet_img_text .oe_snippet_thumbnail_img {
+    background-image: url("/website_mail_snippet_fixed/static/src/img/snippet_img_text.png");
+}
