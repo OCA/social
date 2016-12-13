@@ -3,13 +3,13 @@
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
 odoo.define('openerp.website.snippet.options.fixed_560px', function (require) {
-"use strict";
+    "use strict";
 
-var core = require('web.core');
-var options = require('web_editor.snippets.options');
+    var core = require('web.core');
+    var options = require('web_editor.snippets.options');
 
 
-openerp.website.snippet.options.fixed_560px = openerp.website.snippet.Option.extend({
+    openerp.website.snippet.options.fixed_560px = openerp.website.snippet.Option.extend({
         // Remove attributes added by Odoo at drop time, to avoid him to try
         // to overwrite the snippet view itself instead of just replacing the
         // email/template body.
@@ -26,6 +26,7 @@ openerp.website.snippet.options.fixed_560px = openerp.website.snippet.Option.ext
             for (var n in bad_attrs) {
                 var att = bad_attrs[n];
                 this.$target.find("[" + att + "]").removeAttr(att);
-            }},
-});
+            }
+        }
+    });
 });

@@ -634,8 +634,6 @@
                                                     </tbody>
                                                 </table>
                                             </td></tr>
-
-
                                         </tbody>
                                     </table>
                                 </td>
@@ -646,7 +644,11 @@
             </div>
         </div>
     </xpath>
-
+    <xpath expr="//*[@id='snippet_options']" position="inside">
+        <div
+            data-js='fixed_560px'
+            data-selector=".fixed_560px"/>
+    </xpath>
 </template>
 
 </odoo>

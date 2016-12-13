@@ -5,7 +5,7 @@
 
 <odoo>
 
-    <template id="assets_backend_560px" name="560px_assets" inherit_id="web_editor.assets_editor">
+    <template id="assets_editor" name="560px_assets" inherit_id="web_editor.assets_editor">
         <xpath expr="." position="inside">
             <link rel="stylesheet" href="/website_mail_snippet_fixed/static/src/css/fixed_560px.css"/>
             <script type="text/javascript" src="/website_mail_snippet_fixed/static/src/js/fixed_560px.js"/>
