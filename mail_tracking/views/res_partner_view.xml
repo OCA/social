@@ -13,7 +13,7 @@
                     context="{'search_default_recipient': email,
                               'default_recipient': email}"
                     type="action"
-                    class="oe_stat_button oe_inline"
+                    class="oe_stat_button"
                     icon="fa-envelope-o"
                     attrs="{'invisible': [('email', '=', False)]}">
                 <field name="tracking_emails_count"
