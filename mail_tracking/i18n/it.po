@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Paolo Valier <paolo.valier@hotmail.it>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-30 03:36+0000\n"
-"PO-Revision-Date: 2016-11-30 03:36+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2016-12-14 19:07+0000\n"
+"PO-Revision-Date: 2016-12-14 19:07+0000\n"
+"Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2016\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,7 +122,7 @@ msgstr "Nome da visualizzare"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
 msgid "Display name"
-msgstr ""
+msgstr "Nome da visualizzare"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_id
@@ -204,7 +205,7 @@ msgstr "ID"
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_mobile
@@ -295,12 +296,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
-msgstr ""
+msgstr "Aperto"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Aperto"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_os_family
@@ -346,7 +347,7 @@ msgstr "Rifiutata"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_smtp_server
 msgid "SMTP server"
-msgstr ""
+msgstr "Server SMTP"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -408,7 +409,7 @@ msgstr ""
 #: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:46
 #, python-format
 msgid "To:"
-msgstr ""
+msgstr "A:"
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
@@ -454,19 +455,19 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Disiscrivi"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
-msgstr ""
+msgstr "Disiscritto"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ip
 msgid "User IP"
-msgstr ""
+msgstr "IP Utente"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_agent
