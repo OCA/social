@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (9.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-06-13 02:44+0000\n"
+"POT-Creation-Date: 2016-12-14 19:06+0000\n"
 "PO-Revision-Date: 2016-06-12 23:57+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-9-0/language/de/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: mail_attach_existing_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_object_attachment_ids
 msgid "Attachments"
-msgstr ""
+msgstr "Anhänge"
 
 #. module: mail_attach_existing_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_can_attach_attachment
