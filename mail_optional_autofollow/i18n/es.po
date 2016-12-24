@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 07:09+0000\n"
+"POT-Creation-Date: 2016-11-29 17:50+0000\n"
 "PO-Revision-Date: 2016-04-05 07:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-social-8-0/language/es/)\n"
@@ -25,11 +25,11 @@ msgstr "Asistente composición Correo Electrónico"
 #. module: mail_optional_autofollow
 #: field:mail.compose.message,autofollow_recipients:0
 msgid "Make recipients followers"
-msgstr ""
+msgstr "Hacer seguidores a los destinatarios"
 
 #. module: mail_optional_autofollow
 #: help:mail.compose.message,autofollow_recipients:0
 msgid ""
 "if checked, the additional recipients will be added as        followers on "
 "the related object"
-msgstr ""
+msgstr "Si está marcado, los destinatarios adicionales serán añadidos como seguidores en el objeto relacionado."

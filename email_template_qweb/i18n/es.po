@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-30 02:47+0000\n"
+"POT-Creation-Date: 2016-12-10 06:24+0000\n"
 "PO-Revision-Date: 2016-04-28 14:40+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-social-8-0/language/es/)\n"
@@ -20,17 +20,17 @@ msgstr ""
 #. module: email_template_qweb
 #: field:email.template,body_type:0
 msgid "Body templating engine"
-msgstr ""
+msgstr "Motor de plantillas del cuerpo"
 
 #. module: email_template_qweb
 #: field:email.template,body_view_id:0
 msgid "Body view"
-msgstr ""
+msgstr "Vista del cuerpo"
 
 #. module: email_template_qweb
 #: view:website:email_template_qweb.view_email_template_demo1
 msgid "Dear"
-msgstr ""
+msgstr "Estimado"
 
 #. module: email_template_qweb
 #: model:ir.model,name:email_template_qweb.model_email_template
@@ -40,27 +40,27 @@ msgstr "Plantillas Correo Electrónico"
 #. module: email_template_qweb
 #: selection:email.template,body_type:0
 msgid "Jinja2"
-msgstr ""
+msgstr "Jinja2"
 
 #. module: email_template_qweb
 #: selection:email.template,body_type:0
 msgid "QWeb"
-msgstr ""
+msgstr "QWeb"
 
 #. module: email_template_qweb
 #: model:email.template,subject:email_template_qweb.email_template_demo1
 msgid "QWeb demo email"
-msgstr ""
+msgstr "Correo demo QWeb"
 
 #. module: email_template_qweb
 #: view:website:email_template_qweb.view_email_template_demo1
 msgid "This is an email template using qweb."
-msgstr ""
+msgstr "Esto es una plantilla de correo electrónico usando QWeb."
 
 #. module: email_template_qweb
 #: field:email.template,body_view_arch:0
 msgid "View Architecture"
-msgstr ""
+msgstr "Arquitectura de la vista"
 
 #. module: email_template_qweb
 #: view:email.template:email_template_qweb.email_template_form
