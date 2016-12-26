@@ -4,19 +4,20 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro Castro Silva <pedrocs@exo.pt>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2017-05-17 01:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"POT-Creation-Date: 2017-12-02 13:17+0000\n"
+"PO-Revision-Date: 2017-12-02 13:17+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
+"Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_optional_follower_notification
 #: model:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_inherit_form
@@ -30,7 +31,7 @@ msgstr ""
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "Assistente de Composição de Email"
+msgstr ""
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_message
@@ -45,4 +46,4 @@ msgstr ""
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_res_partner
 msgid "Partner"
-msgstr "Parceiro"
+msgstr "Entidade"
