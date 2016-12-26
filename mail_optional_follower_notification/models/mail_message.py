@@ -26,6 +26,5 @@ class MailMessage(models.Model):
             user_signature=user_signature)
         if not self.env.context.get('notify_followers'):
             # Needaction only for recipients
-            self.needaction_partner_ids =  [(6, 0, self.partner_ids.ids)]
+            self.needaction_partner_ids = [(6, 0, self.partner_ids.ids)]
         return res
-
