@@ -4,18 +4,19 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Quentin THEURET <odoo@kerpeo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2017-05-17 01:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
+"POT-Creation-Date: 2017-07-22 09:45+0000\n"
+"PO-Revision-Date: 2017-07-22 09:45+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: pt_BR\n"
+"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mail_optional_follower_notification
@@ -26,23 +27,27 @@ msgid ""
 "can access the notification directly from the document (if they are allowed "
 "to)</span>"
 msgstr ""
+"<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" "
+"style=\"color: red;\">- Attention : les abonnés ne seront pas notifié mais "
+"ils peuvent avoir accès à la notification directement depuis le document (si"
+" ils sont autorisés à le faire) </span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "Assistente de Composição de Email"
+msgstr "Assistant de composition de courriel"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_message
 msgid "Message"
-msgstr "Mensagem"
+msgstr "Message"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message_notify_followers
 msgid "Notify followers"
-msgstr ""
+msgstr "Notifier les abonnés"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_res_partner
 msgid "Partner"
-msgstr "Parceiro"
+msgstr "Partenaire"
