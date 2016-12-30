@@ -36,6 +36,7 @@ def _custom_fields_view_get(self, view_id=None, view_type='form',
             res['arch'] = etree.tostring(doc)
     return res
 
+
 models.BaseModel.fields_view_get = _custom_fields_view_get
 
 
