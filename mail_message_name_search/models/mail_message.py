@@ -31,8 +31,8 @@ def _custom_fields_view_get(self, view_id=None, view_type='form',
                     'type': 'many2one',
                     'relation': 'mail.message',
                     'string': 'Messages',
-                    }
-                })
+                }
+            })
             res['arch'] = etree.tostring(doc)
     return res
 
