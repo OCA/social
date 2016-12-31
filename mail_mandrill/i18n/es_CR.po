@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-10-11 09:48+0000\n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-27 08:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Costa Rica) (http://www.transifex.com/oca/OCA-social-8-0/language/es_CR/)\n"
 "MIME-Version: 1.0\n"
@@ -75,7 +75,7 @@ msgstr ""
 #: field:mail.mandrill.event,create_uid:0
 #: field:mail.mandrill.message,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_date:0
@@ -153,13 +153,13 @@ msgstr ""
 #: field:mail.mandrill.event,write_uid:0
 #: field:mail.mandrill.message,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,write_date:0
 #: field:mail.mandrill.message,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,timestamp:0

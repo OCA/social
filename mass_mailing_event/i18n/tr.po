@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-24 06:25+0000\n"
 "Last-Translator: Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016\n"
 "Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Oluşturuldu"
 #. module: mass_mailing_event
 #: field:event.registration.state,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: mass_mailing_event
 #: model:ir.model,name:mass_mailing_event.model_event_registration
@@ -62,7 +62,7 @@ msgstr "ID"
 #. module: mass_mailing_event
 #: field:event.registration.state,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: mass_mailing_event
 #: field:event.registration.state,write_uid:0

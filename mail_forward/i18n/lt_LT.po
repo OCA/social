@@ -1,0 +1,419 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_forward
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Lithuanian (Lithuania) (http://www.transifex.com/oca/OCA-social-8-0/language/lt_LT/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: lt_LT\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:25
+#, python-format
+msgid "(No subject)"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,active_domain:0
+msgid "Active domain"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,partner_ids:0
+msgid "Additional Contacts"
+msgstr ""
+
+#. module: mail_forward
+#: help:res.request.link,mail_forward_target:0
+msgid "Allow to forward mails to this model."
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,no_auto_thread:0
+msgid ""
+"Answers do not go in the original document' discussion thread. This has an "
+"impact on the generated message-id."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,attachment_ids:0
+msgid "Attachments"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,move_attachments:0
+msgid ""
+"Attachments will be assigned to the chosen destination object and you will "
+"be able to pick them from its 'Attachments' button, but they will not be "
+"there for the current object if any. In any case you can always open it from"
+" the message itself."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,author_id:0
+msgid "Author"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,author_id:0
+msgid ""
+"Author of the message. If not set, email_from may hold an email address that"
+" did not match any partner."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,author_avatar:0
+msgid "Author's Avatar"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,body:0
+msgid "Automatically sanitized HTML contents"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:47
+#, python-format
+msgid "CC: "
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,child_ids:0
+msgid "Child Messages"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,composition_mode:0
+msgid "Composition mode"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,body:0
+msgid "Contents"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,create_uid:0
+msgid "Created by"
+msgstr "Sukūrė"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,create_date:0
+msgid "Created on"
+msgstr "Sukurta"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,starred:0
+msgid "Current user has a starred notification linked to this message"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,to_read:0
+msgid "Current user has an unread notification linked to this message"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,date:0
+msgid "Date"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:38
+#, python-format
+msgid "Date: "
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,destination_object_id:0
+msgid "Destination object"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,display_name:0
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,email_from:0
+msgid ""
+"Email address of the sender. This field is set when no matching partner is "
+"found for incoming emails."
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:16
+#, python-format
+msgid "FWD"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/xml/mail_forward.xml:10
+#, python-format
+msgid "Forward"
+msgstr ""
+
+#. module: mail_forward
+#: model:ir.actions.act_window,name:mail_forward.compose_action
+msgid "Forward Email"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:36
+#, python-format
+msgid "Forwarded message"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,email_from:0
+msgid "From"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:37
+#, python-format
+msgid "From: "
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,parent_id:0
+msgid "Initial thread message."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,write_uid:0
+msgid "Last Updated by"
+msgstr "Paskutinį kartą atnaujino"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,write_date:0
+msgid "Last Updated on"
+msgstr "Paskutinį kartą atnaujinta"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,is_log:0
+msgid "Log an Internal Note"
+msgstr ""
+
+#. module: mail_forward
+#: field:res.request.link,mail_forward_target:0
+msgid "Mail forward target"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,record_name:0
+msgid "Message Record Name"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,type:0
+msgid ""
+"Message type: email for email message, notification for system message, "
+"comment for other messages such as user replies"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,message_id:0
+msgid "Message unique identifier"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,message_id:0
+msgid "Message-Id"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,move_attachments:0
+msgid "Move attachments"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,record_name:0
+msgid "Name get of the related document."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,no_auto_thread:0
+msgid "No threading for answers"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,notification_ids:0
+msgid "Notifications"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,notified_partner_ids:0
+msgid "Notified partners"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,notify:0
+msgid "Notify followers"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,notify:0
+msgid "Notify followers of the document (mass post only)"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,destination_object_id:0
+msgid "Object where the forwarded message will be attached"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,original_wizard_id:0
+msgid "Original message compose wizard"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,mail_server_id:0
+msgid "Outgoing mail server"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,parent_id:0
+msgid "Parent Message"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,notified_partner_ids:0
+msgid ""
+"Partners that have a notification pushing this message in their mailboxes"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,res_id:0
+msgid "Related Document ID"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,model:0
+msgid "Related Document Model"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,reply_to:0
+msgid ""
+"Reply email address. Setting the reply_to bypasses the automatic thread "
+"creation."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,reply_to:0
+msgid "Reply-To"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,starred:0
+msgid "Starred"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,subject:0
+msgid "Subject"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:41
+#, python-format
+msgid "Subject: "
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,subtype_id:0
+msgid "Subtype"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,notification_ids:0
+msgid ""
+"Technical field holding the message notifications. Use notified_partner_ids "
+"to access notified partners."
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,to_read:0
+msgid "To read"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:44
+#, python-format
+msgid "To: "
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,type:0
+msgid "Type"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,use_active_domain:0
+msgid "Use active domain"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,template_id:0
+msgid "Use template"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,vote_user_ids:0
+msgid "Users that voted for this message"
+msgstr ""
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,vote_user_ids:0
+msgid "Votes"
+msgstr ""
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,is_log:0
+msgid "Whether the message is an internal note (comment mode only)"
+msgstr ""
+
+#. module: mail_forward
+#: view:mail_forward.compose_message:mail_forward.compose_form
+msgid ""
+"{\n"
+"                    'invisible': [('destination_object_id', '=', False)]\n"
+"                }"
+msgstr ""
+
+#. module: mail_forward
+#: view:mail_forward.compose_message:mail_forward.compose_form
+msgid ""
+"{\n"
+"                    'required': [('destination_object_id', '=', False)]\n"
+"                }"
+msgstr ""

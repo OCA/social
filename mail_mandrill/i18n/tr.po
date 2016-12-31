@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-30 21:48+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-social-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "Country"
-msgstr ""
+msgstr "Ülke"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_uid:0
@@ -104,12 +104,12 @@ msgstr ""
 #: field:mail.mandrill.event,display_name:0
 #: field:mail.mandrill.message,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Email"
-msgstr ""
+msgstr "Eposta"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,event_type:0
@@ -120,7 +120,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Failed"
-msgstr ""
+msgstr "Başarısız"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -147,7 +147,7 @@ msgstr ""
 #: field:mail.mandrill.event,__last_update:0
 #: field:mail.mandrill.message,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,write_uid:0
@@ -348,12 +348,12 @@ msgstr ""
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search

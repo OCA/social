@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-30 18:54+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-social-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,attachment_ids:0
 msgid "Attachments"
-msgstr ""
+msgstr "Ekler"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,move_attachments:0
@@ -144,7 +144,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,email_from:0
@@ -204,7 +204,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_uid:0
@@ -375,7 +375,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipi"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,use_active_domain:0

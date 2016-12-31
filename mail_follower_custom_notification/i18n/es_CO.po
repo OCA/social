@@ -4,10 +4,13 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2016
 # Antonio Trueba, 2016
 # Armando Vulcano Junior <vulcano@uol.com.br>, 2015
 # bossnm11 <bossnm11@gmail.com>, 2014
 # Chanseok <kcsgoodboy@naver.com>, 2014
+# Chanseok <kcsgoodboy@naver.com>, 2014
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Chul Park <parkchul@nate.com>, 2015
 # David10000 <gameness@naver.com>, 2014
@@ -20,6 +23,7 @@
 # Jong-Dae Park <jdpark7@gmail.com>, 2013
 # Kevin Min <gr326887@graded.br>, 2015
 # KimKyudong <choemh@nate.com>, 2014
+# kmooc <shevious@gmail.com>, 2015
 # mariana1201 <gogo3135@naver.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015
 # Nicole <dlruddk1112@gmail.com>, 2014
@@ -33,12 +37,13 @@
 # Sujin Lee <sujinlee.me@gmail.com>, 2014
 # Sunah Lim <whitetree70@snu.ac.kr>, 2013
 # Young C. Kim, 2015
+# Young C. Kim, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-10-11 09:49+0000\n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Colombia) (http://www.transifex.com/oca/OCA-social-8-0/language/es_CO/)\n"
 "MIME-Version: 1.0\n"
@@ -60,7 +65,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_own:0

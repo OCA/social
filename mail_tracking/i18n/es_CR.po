@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"POT-Creation-Date: 2016-12-24 06:25+0000\n"
+"PO-Revision-Date: 2016-12-24 06:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/teams/23907/es_CR/)\n"
 "MIME-Version: 1.0\n"
@@ -78,7 +78,7 @@ msgstr ""
 #: field:mail.tracking.email,create_uid:0
 #: field:mail.tracking.event,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_date:0
@@ -209,13 +209,13 @@ msgstr ""
 #. module: mail_tracking
 #: field:mail.tracking.email,write_uid:0 field:mail.tracking.event,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualización por"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,write_date:0
 #: field:mail.tracking.event,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualización en"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
@@ -297,7 +297,7 @@ msgstr ""
 #: model:ir.model,name:mail_tracking.model_res_partner
 #: field:mail.tracking.email,partner_id:0
 msgid "Partner"
-msgstr ""
+msgstr "Empresa"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
