@@ -15,20 +15,26 @@ _base_fields_view_get = models.BaseModel.fields_view_get
 @api.model
 def _custom_fields_view_get(self, view_id=None, view_type='form',
                             toolbar=False, submenu=False):
+    """
+    Override to add message_ids field in all the objects
+    that inherits mail.thread
+    """
     # Tricky super call
     res = _base_fields_view_get(self, view_id=view_id, view_type=view_type,
                                 toolbar=toolbar, submenu=submenu)
     if view_type == 'search' and self._fields.get('message_ids'):
         doc = etree.XML(res['arch'])
         for node in doc.xpath("//field[1]"):
+            # Add message_ids in search view
             elem = etree.Element('field', {
                 'name': 'message_ids',
                 'domain': "[('model','=', %s)]" % self._model
             })
             node.addnext(elem)
+            # Register message_ids in fields
             res['fields'].update({
                 'message_ids': {
-                    'type': 'many2one',
+                    'type': 'one2many',
                     'relation': 'mail.message',
                     'string': 'Messages',
                 }
@@ -46,6 +52,7 @@ class MailMessage(models.Model):
 
     @api.model
     def name_search(self, name='', args=None, operator='ilike', limit=100):
+        """Override to search on multiple fields"""
         args = args or []
         domain = ['|', '|', ('record_name', operator, name),
                   ('subject', operator, name), ('body', operator, name)]
