@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Mail tracking for mass mailing",
     "summary": "Improve mass mailing email tracking",
-    "version": "8.0.1.0.1",
+    "version": "9.0.1.0.0",
     "category": "Social Network",
     "website": "http://www.tecnativa.com",
     "author": "Tecnativa, "
