@@ -20,17 +20,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_tracking_mass_mailing
-#: field:mail.mass_mailing,avoid_resend:0
-msgid "Avoid resend"
-msgstr "Evitar reenvios"
-
-#. module: mail_tracking_mass_mailing
-#: help:mail.mass_mailing,avoid_resend:0
-msgid "Avoid to send this mass mailing email twice to the same recipient"
-msgstr ""
-"Evitar que se envíe este correo masivo dos veces al mismo destinatario"
-
-#. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "Country"
 msgstr "País"
@@ -122,13 +111,6 @@ msgstr "Envío masivo"
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
 msgid "Outgoing Mails"
 msgstr "Correos salientes"
-
-#. module: mail_tracking_mass_mailing
-#: code:addons/mail_tracking_mass_mailing/models/mail_mass_mailing.py:28
-#, python-format
-msgid ""
-"There is no more recipients to send and 'Avoid resend' option is enabled"
-msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
