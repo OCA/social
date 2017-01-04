@@ -36,6 +36,7 @@ class MailThread(models.AbstractModel):
         compute="_compute_message_content",
         search='_search_message_content')
 
+
 _base_fields_view_get = models.BaseModel.fields_view_get
 
 

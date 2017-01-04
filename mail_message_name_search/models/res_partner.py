@@ -4,5 +4,10 @@
 # © 2016 Serpent Consulting Services Pvt. Ltd. (<http://www.serpentcs.com>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from . import mail_message
-from . import res_partner
+from openerp import models
+
+
+class ResPartner(models.Model):
+
+    _name = 'res.partner'
+    _inherit = ['res.partner', 'mail.thread']
