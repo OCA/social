@@ -42,6 +42,10 @@ _base_fields_view_get = models.BaseModel.fields_view_get
 @api.model
 def _custom_fields_view_get(self, view_id=None, view_type='form',
                             toolbar=False, submenu=False):
+    """
+    Override to add message_ids field in all the objects
+    that inherits mail.thread
+    """
     # Tricky super call
     res = _base_fields_view_get(self, view_id=view_id, view_type=view_type,
                                 toolbar=toolbar, submenu=submenu)
@@ -55,6 +59,7 @@ def _custom_fields_view_get(self, view_id=None, view_type='form',
         })
 
         for node in doc.xpath("//field[1]"):
+            # Add message_ids in search view
             elem = etree.Element('field', {
                 'name': 'message_content',
             })
