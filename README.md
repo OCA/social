@@ -20,6 +20,7 @@ addon | version | summary
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mass_mailing_partner](mass_mailing_partner/) | 9.0.1.0.0 | Link partners with mass-mailing
 [mass_mailing_security_group](mass_mailing_security_group/) | 9.0.1.0.0 | Mass mailing security group
+[mass_mailing_unique](mass_mailing_unique/) | 9.0.1.0.0 | Avoids duplicate mailing lists and contacts
 
 Unported addons
 ---------------
