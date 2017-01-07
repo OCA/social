@@ -1,21 +1,22 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* mass_mailing_unique
-#
+# * mass_mailing_unique
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-01-29 12:37+0100\n"
-"PO-Revision-Date: 2016-01-29 12:38+0100\n"
-"Last-Translator: Jairo Llopis <j.llopis@grupoesoc.es>\n"
-"Language-Team: \n"
-"Language: es\n"
+"POT-Creation-Date: 2017-01-04 03:40+0000\n"
+"PO-Revision-Date: 2017-01-04 03:40+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 1.8.5\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.list:0
@@ -28,7 +29,7 @@ msgid "Cannot have the same email more than once in the same list."
 msgstr "No se puede tener el mismo email varias veces en la misma lista."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:42
+#: code:addons/mass_mailing_unique/hooks.py:44
 #, python-format
 msgid "Fix this before installing:"
 msgstr "Arregle esto antes de instalar:"
@@ -44,13 +45,13 @@ msgid "Mass Mailing Contact"
 msgstr "Contacto de envío masivo"
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:37
+#: code:addons/mass_mailing_unique/hooks.py:39
 #, python-format
 msgid "There are {1} lists with name {0}."
 msgstr "Hay {1} listas con el nombre {0}."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:28
+#: code:addons/mass_mailing_unique/hooks.py:30
 #, python-format
 msgid "{0} appears {2} times in list {1}."
 msgstr "{0} aparece {2} veces en la lista {1}."
