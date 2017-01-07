@@ -1,0 +1,103 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_template_multi_report
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-31 08:49+0000\n"
+"PO-Revision-Date: 2016-12-31 08:49+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: French (Canada) (https://www.transifex.com/oca/teams/23907/fr_CA/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr_CA\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mail_template_multi_report
+#: help:email.template.report.line,condition:0
+msgid ""
+"An expression evaluated to determine if the report is to be attached to the "
+"email. If blank, the report will always be attached."
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,condition:0
+msgid "Condition"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,create_uid:0
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,create_date:0
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,display_name:0
+msgid "Display Name"
+msgstr "Afficher le nom"
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,template_id:0
+msgid "Email Template"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: model:ir.model,name:mail_template_multi_report.model_email_template_report_line
+msgid "Email Template Report Line"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: model:ir.model,name:mail_template_multi_report.model_email_template
+msgid "Email Templates"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,id:0
+msgid "ID"
+msgstr "Identifiant"
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,__last_update:0
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,write_uid:0
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,write_date:0
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: mail_template_multi_report
+#: help:email.template.report.line,report_name:0
+msgid ""
+"Name to use for the generated report file (may contain placeholders)\n"
+"The extension can be omitted and will then come from the report type."
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,report_template_id:0
+msgid "Optional report to print and attach"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template,report_line_ids:0
+msgid "Other Reports"
+msgstr ""
+
+#. module: mail_template_multi_report
+#: field:email.template.report.line,report_name:0
+msgid "Report Filename"
+msgstr ""
