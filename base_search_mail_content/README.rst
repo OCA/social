@@ -3,43 +3,45 @@
    :alt: License: AGPL-3
 
 ========================
-Mail message name search
+Base Search Mail Content
 ========================
 
-This module adds the capability to search for mail messages by subject or
-body of the message. This will be useful in models that make intense use of
-messages, like project issues or helpdesk tickets.
+This module adds the capability to find any object (e.g. project issues or
+helpdesk ticket) based on the conversation threads associated to them.
 
-This module will add dynamically the message_ids to the search view of 
-any model that inherits from the mail.thread and will incorporate the
-capability to search for content in the mail messages.
+This will be useful in models that make intense use of messages,
+like project issues or helpdesk tickets.
 
+A project issue or helpdesk ticket can contain tens of mails or notes
+associated, based on the feedback that the person responsible for the ticket
+maintains, including conversations with the person that raised the issue.
+
+A user may often want to find issues or tickets, based on the past
+conversations that were recorded, as much as he/she needs to search
+in their mail for past conversations.
+
+This module will add dynamically a field 'message_content' to the search view of
+any model that inherits from the mail.thread.
+
+The current search capabilities include searching into the subject, body,
+email from, reply to and record name.
 
 Installation
 ============
 
 This module depends on the module 'base_search_fuzzy' to ensure that
 searches on emails are based on indexes. Please read carefully the install
-instructions https://github.com/OCA/server-tools/blob/9.0/base_search_fuzzy/README.rst
+instructions:
+https://github.com/OCA/server-tools/blob/9.0/base_search_fuzzy/README.rst
 
 This module installs by default the indexes that are required to
 perform the searches on mail messages.
 
-
-Configuration
-=============
-
-No configuration is needed.
-
 Usage
 =====
 
-A project issue or helpdesk ticket can contain tens of mails associated,
-based on the conversations that the person responsible for the ticket
-maintains with the person that raised the issue. One need to search
-in mail messages, as much as he/she needs to search in their mail for
-past conversations. So this module will be useful for the user to search
-messages by subject or body.
+Go to any model that contains a chatter (e.g. Partners, Leads, ...). Search
+for content in field 'Message Content'.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -66,6 +68,9 @@ Contributors
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* Lois Rilo Antelo <lois.rilo@eficent.com>
+* Aaron Henriquez <ahenriquez@eficent.com>
+
 
 Maintainer
 ----------
