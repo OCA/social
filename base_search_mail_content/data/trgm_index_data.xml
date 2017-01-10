@@ -20,5 +20,17 @@
                    search="[('model','=','mail.message'),('name','=','record_name')]"/>
         </record>
 
+        <record id="email_from_gin_idx" model="trgm.index">
+            <field name="index_type">gin</field>
+            <field name="field_id"
+                   search="[('model','=','mail.message'),('name','=','email_from')]"/>
+        </record>
+
+        <record id="reply_to_gin_idx" model="trgm.index">
+            <field name="index_type">gin</field>
+            <field name="field_id"
+                   search="[('model','=','mail.message'),('name','=','reply_to')]"/>
+        </record>
+
     </data>
 </openerp>
