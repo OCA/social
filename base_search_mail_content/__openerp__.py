@@ -5,14 +5,15 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Mail message name search",
+    "name": "Base Mail Search Content",
     "version": "9.0.1.0.0",
     "author": "Eficent,"
               "SerpentCS,"
               "Odoo Community Association (OCA)",
     "website": "http://www.eficent.com",
     "category": "Social",
-    "data": ["data/trgm_index_data.xml"],
+    "data": ["data/trgm_index_data.xml",
+             "views/trgm_index_view.xml"],
     "depends": ["mail",
                 "base_search_fuzzy"],
     "license": "AGPL-3",
