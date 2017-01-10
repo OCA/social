@@ -7,7 +7,7 @@
 from openerp import models
 
 
-class ResPartner(models.Model):
+class Partner(models.Model):
 
     _name = 'res.partner'
     _inherit = ['res.partner', 'mail.thread']
