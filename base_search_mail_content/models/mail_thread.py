@@ -15,9 +15,11 @@ class MailThread(models.AbstractModel):
     _inherit = 'mail.thread'
 
     def _search_message_content(self, operator, value):
-        domain = [('model', '=', self._name), '|', '|',
+        domain = [('model', '=', self._name), '|', '|', '|', '|',
                   ('record_name', operator, value),
-                  ('subject', operator, value), ('body', operator, value)]
+                  ('subject', operator, value), ('body', operator, value),
+                  ('email_from', operator, value),
+                  ('reply_to', operator, value)]
 
         if operator in expression.NEGATIVE_TERM_OPERATORS:
             domain = domain[2:]
