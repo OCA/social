@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:21+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -70,7 +70,7 @@ msgstr "Creat el"
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,date:0
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_last_post:0
@@ -92,7 +92,7 @@ msgstr ""
 #: field:mail.unsubscription,display_name:0
 #: field:mail.unsubscription.reason,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.mass_mailing.list,not_cross_unsubscriptable:0
@@ -102,7 +102,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,email:0
 msgid "Email"
-msgstr ""
+msgstr "Correu electrònic"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
@@ -202,7 +202,7 @@ msgstr ""
 #: field:mail.unsubscription,__last_update:0
 #: field:mail.unsubscription.reason,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,write_uid:0
@@ -219,18 +219,18 @@ msgstr "Darrera Actualització el"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
 msgid "Mailing List"
-msgstr ""
+msgstr "Llista d'enviament"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
 msgid "Mass Mailing"
-msgstr ""
+msgstr "Correu massiu"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 #: field:mail.unsubscription,mass_mailing_id:0
 msgid "Mass mailing"
-msgstr ""
+msgstr "Correu massiu"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,mass_mailing_id:0
@@ -250,7 +250,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Month"
-msgstr ""
+msgstr "Mes"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,details:0
@@ -286,7 +286,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription.reason,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Seqüència"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search

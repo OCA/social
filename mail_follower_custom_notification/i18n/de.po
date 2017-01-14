@@ -16,8 +16,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-13 09:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -175,7 +175,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: field:mail.message.subtype,custom_notification_model_ids:0
 msgid "Models"
-msgstr ""
+msgstr "Datenmodelle"
 
 #. module: mail_follower_custom_notification
 #. openerp-web

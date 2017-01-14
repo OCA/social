@@ -4,6 +4,7 @@
 # 
 # Translators:
 # Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
+# Ahmet Altinisik <aaltinisik@altinkaya.com.tr>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -14,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-14 07:21+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -39,22 +40,22 @@ msgstr ""
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Bounce"
-msgstr ""
+msgstr "Rebotar"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,bounce_description:0
 msgid "Bounce description"
-msgstr ""
+msgstr "Descripció del rebot"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,bounce_type:0
 msgid "Bounce type"
-msgstr ""
+msgstr "Tipus de rebot"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.message,state:0
 msgid "Bounced"
-msgstr ""
+msgstr "Rebotat"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -76,7 +77,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "Country"
-msgstr ""
+msgstr "País"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_uid:0
@@ -94,51 +95,51 @@ msgstr "Creat el"
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Date"
-msgstr ""
+msgstr "Data"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Deferral"
-msgstr ""
+msgstr "Diferiment"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: selection:mail.mandrill.message,state:0
 msgid "Deferred"
-msgstr ""
+msgstr "Diferit"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,display_name:0
 #: field:mail.mandrill.message,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Email"
-msgstr ""
+msgstr "Correu electrònic"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,event_type:0
 msgid "Event type"
-msgstr ""
+msgstr "Tipus d'esdeveniment"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Failed"
-msgstr ""
+msgstr "Fracassat"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Group By"
-msgstr ""
+msgstr "Agrupat per"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Hard bounce"
-msgstr ""
+msgstr "Rebot dur"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,id:0 field:mail.mandrill.message,id:0
@@ -148,13 +149,13 @@ msgstr "ID"
 #. module: mail_mandrill
 #: field:mail.mandrill.event,mobile:0
 msgid "Is mobile?"
-msgstr ""
+msgstr "És mòbil?"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,__last_update:0
 #: field:mail.mandrill.message,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,write_uid:0
@@ -249,23 +250,23 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Month"
-msgstr ""
+msgstr "Mes"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Open"
-msgstr ""
+msgstr "Obert"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Obert"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,os_family:0
 msgid "Operating system family"
-msgstr ""
+msgstr "Família del sistema operatiu"
 
 #. module: mail_mandrill
 #: model:ir.model,name:mail_mandrill.model_mail_mail
@@ -275,18 +276,18 @@ msgstr "Correus sortints"
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
 msgid "Recipient"
-msgstr ""
+msgstr "Beneficiari"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,recipient:0
 msgid "Recipient email"
-msgstr ""
+msgstr "Correu electrònic beneficiari"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Rejected"
-msgstr ""
+msgstr "Rebutjat"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -297,12 +298,12 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
 msgid "Sender"
-msgstr ""
+msgstr "Remitent"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,sender:0
 msgid "Sender email"
-msgstr ""
+msgstr "Correu electrònic del remitent"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
@@ -314,31 +315,31 @@ msgstr "Enviat"
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Soft bounce"
-msgstr ""
+msgstr "Rebot suau"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.message,state:0
 msgid "Soft bounced"
-msgstr ""
+msgstr "Rebotat suau"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Spam"
-msgstr ""
+msgstr "Correu no desitjat"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,state:0
 msgid "State"
-msgstr ""
+msgstr "Estat"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,name:0
 msgid "Subject"
-msgstr ""
+msgstr "Assumpte"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
@@ -350,22 +351,22 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Time"
-msgstr ""
+msgstr "Hora"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Type"
-msgstr ""
+msgstr "Tipus"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Donar-se de baixa"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
@@ -377,7 +378,7 @@ msgstr ""
 #. module: mail_mandrill
 #: field:mail.mandrill.event,ip:0
 msgid "User IP"
-msgstr ""
+msgstr "IP del usuari"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -385,7 +386,7 @@ msgstr ""
 #: field:mail.mandrill.event,user_agent:0
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "User agent"
-msgstr ""
+msgstr "Agent de l'usuari"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,ua_family:0
@@ -401,4 +402,4 @@ msgstr ""
 #. module: mail_mandrill
 #: field:mail.mandrill.event,user_country_id:0
 msgid "User country"
-msgstr ""
+msgstr "País de l'usuari"

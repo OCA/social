@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-10-11 09:50+0000\n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-13 09:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Macedonian (http://www.transifex.com/oca/OCA-social-8-0/language/mk/)\n"
 "MIME-Version: 1.0\n"
@@ -62,7 +62,7 @@ msgstr "Креирано на"
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,date:0
 msgid "Date"
-msgstr ""
+msgstr "Датум"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_last_post:0

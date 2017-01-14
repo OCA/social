@@ -3,14 +3,13 @@
 # * mail_tracking
 # 
 # Translators:
-# Kaloyan Naumov <kaloyan@lumnus.net>, 2016
 # OCA Transbot <transbot@odoo-community.org>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 18:06+0000\n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-07 07:31+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Bulgarian (https://www.transifex.com/oca/teams/23907/bg/)\n"
 "MIME-Version: 1.0\n"
@@ -93,7 +92,7 @@ msgstr "Създадено на"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,date:0
 msgid "Date"
-msgstr ""
+msgstr "Дата"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0

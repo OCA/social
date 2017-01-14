@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_unique
+# 
+# Translators:
+# Carles Antoli <carlesantoli@hotmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-09 16:58+0000\n"
+"Last-Translator: Carles Antoli <carlesantoli@hotmail.com>\n"
+"Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: ca\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.list:0
+msgid "Cannot have more than one lists with the same name."
+msgstr "No es pot tenir més d'una llista amb el mateix nom."
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.contact:0
+msgid "Cannot have the same email more than once in the same list."
+msgstr "No es pot tenir el mateix correu electrònic més d'una vegada en la mateixa llista."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:42
+#, python-format
+msgid "Fix this before installing:"
+msgstr "Solucionar això abans d'instal·lar:"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr "Llista d'enviament"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Contactes del correu massiu"
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:37
+#, python-format
+msgid "There are {1} lists with name {0}."
+msgstr "Hi ha {1} llistes amb el nom {0}."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:28
+#, python-format
+msgid "{0} appears {2} times in list {1}."
+msgstr "{0} apareix  {2} vegades en la llista {1}."

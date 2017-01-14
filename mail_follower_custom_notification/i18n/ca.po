@@ -31,8 +31,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2017-01-07 07:31+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -89,7 +89,7 @@ msgstr ""
 #: field:base.patch.models.mixin,display_name:0
 #: field:mail.subtype.assign.custom.notifications,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_followers
@@ -150,7 +150,7 @@ msgstr "ID"
 #: field:base.patch.models.mixin,__last_update:0
 #: field:mail.subtype.assign.custom.notifications,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,write_uid:0
