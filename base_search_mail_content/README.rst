@@ -6,7 +6,7 @@
 Base Search Mail Content
 ========================
 
-This module adds the capability to find any object (e.g. project issues or
+This module adds the capability to find on any object (e.g. project issues or
 helpdesk ticket) based on the conversation threads associated to them.
 
 This will be useful in models that make intense use of messages,

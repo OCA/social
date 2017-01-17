@@ -15,16 +15,20 @@ class MailThread(models.AbstractModel):
     _inherit = 'mail.thread'
 
     def _search_message_content(self, operator, value):
+
+        main_operator = 'in'
+        if operator in expression.NEGATIVE_TERM_OPERATORS:
+            main_operator = 'not in'
+            operators = {'!=': '=', 'not like': 'like',
+                         'not ilike': 'ilike', 'not in': 'in'}
+            operator = operators[operator]
         domain = [('model', '=', self._name), '|', '|', '|', '|',
                   ('record_name', operator, value),
                   ('subject', operator, value), ('body', operator, value),
                   ('email_from', operator, value),
                   ('reply_to', operator, value)]
-
-        if operator in expression.NEGATIVE_TERM_OPERATORS:
-            domain = domain[2:]
         recs = self.env['mail.message'].search(domain)
-        return [('id', 'in', recs.mapped('res_id'))]
+        return [('id', main_operator, recs.mapped('res_id'))]
 
     @api.multi
     def _compute_message_content(self):
@@ -33,7 +37,7 @@ class MailThread(models.AbstractModel):
         return ''
 
     message_content = fields.Text(
-        string='Messages',
+        string='Message Content',
         help='Message content, to be used only in searches',
         compute="_compute_message_content",
         search='_search_message_content')
@@ -62,7 +66,7 @@ def _custom_fields_view_get(self, view_id=None, view_type='form',
         })
 
         for node in doc.xpath("//field[1]"):
-            # Add message_ids in search view
+            # Add message_content in search view
             elem = etree.Element('field', {
                 'name': 'message_content',
             })
