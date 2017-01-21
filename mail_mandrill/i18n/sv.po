@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:30+0000\n"
+"POT-Creation-Date: 2017-01-14 08:27+0000\n"
+"PO-Revision-Date: 2017-01-19 20:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Swedish (http://www.transifex.com/oca/OCA-social-8-0/language/sv/)\n"
 "MIME-Version: 1.0\n"
@@ -109,7 +109,7 @@ msgstr "Visa namn"
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Email"
-msgstr ""
+msgstr "E-post"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,event_type:0
