@@ -23,7 +23,7 @@
 {
     'name': "Customizable unsubscription process on mass mailing emails",
     'category': 'Marketing',
-    'version': '8.0.2.0.0',
+    'version': '8.0.2.1.0',
     'depends': [
         'mass_mailing',
         'website_crm',
@@ -31,7 +31,7 @@
     'data': [
         'security/ir.model.access.csv',
         'data/install_salt.xml',
-        'data/mail.unsubscription.reason.csv',
+        'data/mail_unsubscription_reason.xml',
         'views/assets.xml',
         'views/mail_unsubscription_reason_view.xml',
         'views/mail_mass_mailing_list_view.xml',
