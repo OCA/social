@@ -83,7 +83,7 @@ class TestMailTracking(TransactionCase):
             'subject': 'Message test',
             'author_id': self.sender.id,
             'email_from': self.sender.email,
-            'type': 'comment',
+            'message_type': 'comment',
             'model': 'res.partner',
             'res_id': self.recipient.id,
             'partner_ids': [(4, self.recipient.id)],
