@@ -61,6 +61,7 @@
             <field name="tracking_email_id"/>
             <field name="recipient"/>
             <field name="event_type"/>
+            <field name="error_details" invisible="not context.get('event_error_filter', False)"/>
             <field name="date" invisible="1"/>
             <field name="ip"/>
             <field name="url"/>
@@ -91,7 +92,8 @@
             <filter name="bounce" string="Bounce"
                     domain="[('event_type', 'in', ('hard_bounce', 'soft_bounce'))]"/>
             <filter name="exception" string="Failed"
-                    domain="[('event_type', 'in', ('reject', 'spam'))]"/>
+                    domain="[('event_type', 'in', ('reject', 'spam'))]"
+                    context="{'event_error_filter': True}"/>
             <separator/>
             <group expand="0" string="Group By">
                 <filter string="Type" domain="[]" context="{'group_by': 'event_type'}"/>
