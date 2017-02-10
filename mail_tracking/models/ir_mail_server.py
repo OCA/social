@@ -74,8 +74,9 @@ class IrMailServer(models.Model):
                    smtp_encryption=None, smtp_debug=False):
         message_id = False
         tracking_email = self._tracking_email_get(message)
-        smtp_server_used = self._smtp_server_get(
-            mail_server_id, smtp_server)
+        smtp_server_used = self.sudo()._smtp_server_get(
+            mail_server_id, smtp_server,
+        )
         try:
             message_id = super(IrMailServer, self).send_email(
                 message, mail_server_id=mail_server_id,
