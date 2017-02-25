@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 11:32+0000\n"
-"PO-Revision-Date: 2017-02-10 11:32+0000\n"
+"POT-Creation-Date: 2017-02-18 07:46+0000\n"
+"PO-Revision-Date: 2017-02-18 07:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
-msgstr ""
+msgstr "Nazione"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_uid:0

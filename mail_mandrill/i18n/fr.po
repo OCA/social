@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-08 00:45+0000\n"
-"PO-Revision-Date: 2016-08-12 10:14+0000\n"
+"POT-Creation-Date: 2017-02-18 07:45+0000\n"
+"PO-Revision-Date: 2017-02-21 14:15+0000\n"
 "Last-Translator: dglucose <eric.lemesre@gmail.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgstr "Déférer"
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: selection:mail.mandrill.message,state:0
 msgid "Deferred"
-msgstr ""
+msgstr "Remis à plus tard"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,display_name:0
@@ -132,7 +132,7 @@ msgstr "Regrouper par"
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Hard bounce"
-msgstr ""
+msgstr " rebond dur"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,id:0 field:mail.mandrill.message,id:0
@@ -308,12 +308,12 @@ msgstr "Envoyé"
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Soft bounce"
-msgstr ""
+msgstr "Rebond doux"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.message,state:0
 msgid "Soft bounced"
-msgstr ""
+msgstr "Doux rebondi"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
