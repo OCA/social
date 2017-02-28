@@ -5,8 +5,9 @@
 <odoo>
 
     <template id="channel_page" inherit_id="website_livechat.channel_page" >
-        <xpath expr="//div[@class='media-body']/h5/node()" position="replace">
-            <t t-esc="user.partner_id.firstname"/>
+        <xpath expr="//div[@class='media-body']/h5/t" position="replace">
+            <t t-if="user.partner_id.firstname" t-esc="user.partner_id.firstname" />
+            <t t-else="" t-esc="user.partner_id.name" />
         </xpath>
     </template>
 
