@@ -8,7 +8,7 @@
     "version": "9.0.1.0.0",
     "category": "Social",
     "website": "https://github.com/OCA/social",
-    "author": "SMDrugstore, Odoo Community Association (OCA)",
+    "author": "SMDrugstore, Laslabs, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,

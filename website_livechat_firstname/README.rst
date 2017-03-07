@@ -13,20 +13,16 @@ Usage
 
 To use this module, you need to:
 
-#. Go to ...
+#. Install the module.
+#. Go to the website.
+#. Initiate a Live Chat at the bottom right-hand corner of the screen.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/{repo_id}/{branch}
 
-#. Install the module.
-#. Go to the website.
-#. Initiate a Live Chat at the bottom righthand corner of the screen.
-
-Known issues / Roadmap
+Known Issues / Roadmap
 ======================
-
-* ...
 
 Bug Tracker
 ===========
@@ -48,6 +44,7 @@ Contributors
 ------------
 
 * Kelly Lougheed <kelly@smdrugstore.com>
+* Brett Wood <bwood@laslabs.com>
 
 Maintainer
 ----------
