@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Specialty Medical Drugstore
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+
+<odoo>
+
+    <record id="res_partner_1" model="res.partner">
+        <field name="firstname">Mitchell</field>
+        <field name="lastname">Vangrey</field>
+        <field name="city">Las Vegas</field>
+        <field name="state_id" ref="base.state_us_23" />
+        <field name="country_id" ref="base.us" />
+        <field name="zip">89119</field>
+        <field name="street">111 Example Way</field>
+        <field name="email">mvangrey@example.com</field>
+        <field name="phone">+1 (702) 111-2222</field>
+        <field name="parent_id" ref="base.partner_demo" />
+        <field name="ref">680-36-6978</field>
+    </record>
+
+</odoo>

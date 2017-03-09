@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Specialty Medical Drugstore
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+
+<odoo>
+
+    <template id="channel_page" inherit_id="website_livechat.channel_page" >
+        <xpath expr="//div[@class='media-body']/h5/t" position="replace">
+            <t t-if="user.partner_id.firstname" t-esc="user.partner_id.firstname" />
+            <t t-else="" t-esc="user.partner_id.name" />
+        </xpath>
+    </template>
+
+</odoo>
