@@ -22,6 +22,7 @@ addon | version | summary
 [mass_mailing_partner](mass_mailing_partner/) | 9.0.1.0.0 | Link partners with mass-mailing
 [mass_mailing_security_group](mass_mailing_security_group/) | 9.0.1.0.0 | Mass mailing security group
 [mass_mailing_unique](mass_mailing_unique/) | 9.0.1.0.0 | Avoids duplicate mailing lists and contacts
+[website_livechat_firstname](website_livechat_firstname/) | 9.0.1.0.0 | Shows only the first name of the operator in the website
 
 Unported addons
 ---------------
