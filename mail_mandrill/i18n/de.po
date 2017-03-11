@@ -17,8 +17,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-18 07:45+0000\n"
-"PO-Revision-Date: 2017-02-25 00:44+0000\n"
+"POT-Creation-Date: 2017-03-04 07:41+0000\n"
+"PO-Revision-Date: 2017-03-10 13:16+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -130,7 +130,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Failed"
-msgstr ""
+msgstr "Gescheitert"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -257,7 +257,7 @@ msgstr "Monat"
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Open"
-msgstr ""
+msgstr "Offen"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
@@ -363,7 +363,7 @@ msgstr "Art"
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
