@@ -69,6 +69,8 @@ Contributors
 ------------
 
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
+* Carlos Dauden <carlos.dauden@tecnativa.com>
+* Rafael Blasco <rafael.blasco@tecnativa.com>
 
 Maintainer
 ----------
