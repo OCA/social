@@ -121,7 +121,7 @@ class OdooMail(models.Model):
         for email in self.filtered(lambda em: em.state == 'outgoing'):
             try:
                 response = sg.client.mail.send.post(
-                    request_body=email._prepare_sendgrid_data())
+                    request_body=email._prepare_sendgrid_data().get())
             except Exception as e:
                 _logger.error(e.message)
                 continue
@@ -145,6 +145,10 @@ class OdooMail(models.Model):
     #                             PRIVATE METHODS                            #
     ##########################################################################
     def _prepare_sendgrid_data(self):
+        """
+        Prepare and creates the Sendgrid Email object
+        :return: sendgrid.helpers.mail.Email object
+        """
         self.ensure_one()
         s_mail = Mail()
         s_mail.set_from(Email(self.email_from))
@@ -200,7 +204,7 @@ class OdooMail(models.Model):
             s_attachment.set_filename(attachment.name)
             s_mail.add_attachment(s_attachment)
 
-        return s_mail.get()
+        return s_mail
 
     def _track_sendgrid_emails(self):
         """ Create tracking e-mails after successfully sent with Sendgrid. """

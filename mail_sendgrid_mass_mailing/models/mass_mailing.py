@@ -29,6 +29,11 @@ class MassMailing(models.Model):
     # Trick to save html when taken from the e-mail template
     html_copy = fields.Html(
         compute='_compute_sendgrid_view', inverse='_inverse_html_copy')
+    enable_unsubscribe = fields.Boolean()
+    unsubscribe_text = fields.Char(
+        default='If you would like to unsubscribe and stop receiving these '
+                'emails <% clickhere %>.')
+    unsubscribe_tag = fields.Char()
 
     @api.depends('body_html')
     def _compute_sendgrid_view(self):

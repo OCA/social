@@ -17,6 +17,13 @@
                         <field name="body_sendgrid" widget="html"/>
                     </page>
                 </xpath>
+                <xpath expr="//page[@string='Options']/group">
+                    <group string="Sendgrid Unsubscribe">
+                        <field name="enable_unsubscribe"/>
+                        <field name="unsubscribe_text" attrs="{'invisible': [('enable_unsubscribe', '=', False)]}"/>
+                        <field name="unsubscribe_tag" attrs="{'invisible': [('enable_unsubscribe', '=', False)]}"/>
+                    </group>
+                </xpath>
             </field>
         </record>
 
