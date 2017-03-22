@@ -1,0 +1,184 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_digest
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-23 07:08+0000\n"
+"PO-Revision-Date: 2017-04-27 16:55+0200\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.8.9\n"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_uid
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_create_uid
+msgid "Created by"
+msgstr "Angelegt von"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_date
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: mail_digest
+#: selection:res.partner,notify_frequency:0
+msgid "Daily"
+msgstr "Täglich"
+
+#. module: mail_digest
+#: code:addons/mail_digest/models/mail_digest.py:106
+msgid "Daily update"
+msgstr "täglich Übersicht"
+
+#. module: mail_digest
+#: code:addons/mail_digest/models/res_partner.py:11
+#: model:ir.actions.act_window,name:mail_digest.action_digest_all
+#: model:ir.ui.menu,name:mail_digest.menu_email_digest
+#, python-format
+msgid "Digest"
+msgstr "Übersicht"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_display_name
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_display_name
+msgid "Display Name"
+msgstr "Angezeigter Name"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_enabled
+msgid "Enabled"
+msgstr "Aktivieren"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_frequency
+#: model:ir.model.fields,field_description:mail_digest.field_res_partner_notify_frequency
+msgid "Frequency"
+msgstr "Häufigkeit"
+
+#. module: mail_digest
+#: model:ir.ui.view,arch_db:mail_digest.default_digest_tmpl
+msgid "Hello,"
+msgstr "Guten Tag"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_id
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest___last_update
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_write_uid
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_write_date
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_mail_id
+msgid "Mail"
+msgstr "E-Mail"
+
+#. module: mail_digest
+#: model:ir.model,name:mail_digest.model_mail_digest
+#: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
+#: model:ir.ui.view,arch_db:mail_digest.mail_digest_tree
+msgid "Mail digest"
+msgstr "Übersicht"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_message_ids
+#: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
+msgid "Messages"
+msgstr "Mitteilungen"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_name
+msgid "Name"
+msgstr "Bezeichnung"
+
+#. module: mail_digest
+#: model:ir.ui.view,arch_db:mail_digest.notification_form
+msgid "Notification"
+msgstr "Benachrichtigung"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_subtype_id
+msgid "Notification type"
+msgstr "Benachrichtigung"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_res_partner_notify_conf_ids
+#: model:ir.ui.view,arch_db:mail_digest.notification_tree
+msgid "Notifications"
+msgstr "Benachrichtigungen"
+
+#. module: mail_digest
+#: model:ir.model,name:mail_digest.model_res_partner
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_partner_id
+#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_res_partner_disabled_notify_subtype_ids
+msgid "Partner disabled subtypes"
+msgstr "Partner disabled subtypes"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_res_partner_enabled_notify_subtype_ids
+msgid "Partner enabled subtypes"
+msgstr "Partner enabled subtypes"
+
+#. module: mail_digest
+#: model:ir.model,name:mail_digest.model_partner_notification_conf
+msgid "Partner notification configuration"
+msgstr "Partner notification configuration"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_state
+msgid "Status"
+msgstr "Status"
+
+#. module: mail_digest
+#: selection:res.partner,notify_frequency:0
+msgid "Weekly"
+msgstr "Wöchentlich"
+
+#. module: mail_digest
+#: code:addons/mail_digest/models/mail_digest.py:108
+msgid "Weekly update"
+msgstr "wöchentlich Übersicht"
+
+#. module: mail_digest
+#: sql_constraint:partner.notification.conf:0
+msgid "You can have only one configuration per subtype!"
+msgstr "You can have only one configuration per subtype!"
+
+#~ msgid "Mail notification"
+#~ msgstr "Mail notification"
+
+#~ msgid "Mail notifications control panel"
+#~ msgstr "Mail notifications control panel"
+
+#~ msgid "Message subtypes"
+#~ msgstr "Nachrichten-Subtyp"
