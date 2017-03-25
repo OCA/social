@@ -8,6 +8,7 @@ Social addons for Odoo
 Addons concerning Odoo's social ERP features and messaging in general
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
