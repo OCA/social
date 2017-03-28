@@ -22,6 +22,7 @@ addon | version | summary
 [mail_tracking](mail_tracking/) | 10.0.1.0.0 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 10.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 
+
 Unported addons
 ---------------
 addon | version | summary
