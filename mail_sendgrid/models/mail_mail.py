@@ -15,7 +15,7 @@ import time
 
 from sendgrid import SendGridAPIClient
 from sendgrid.helpers.mail import Email, Attachment, CustomArg, Content, \
-    Personalization, Substitution, Mail
+    Personalization, Substitution, Mail, Header
 
 from openerp import models, fields, api, exceptions, tools, _
 from openerp.tools.config import config
@@ -155,6 +155,18 @@ class OdooMail(models.Model):
         if self.reply_to:
             s_mail.set_reply_to(Email(self.reply_to))
         s_mail.add_custom_arg(CustomArg('odoo_id', self.message_id))
+
+        headers = {
+            'Message-Id': self.message_id
+        }
+        if self.headers:
+            try:
+                headers.update(eval(self.headers))
+            except Exception:
+                pass
+        for h_name, h_val in headers.iteritems():
+            s_mail.add_header(Header(h_name, h_val))
+
         html = self.body_html or ' '
 
         p = re.compile(r'<.*?>')  # Remove HTML markers
