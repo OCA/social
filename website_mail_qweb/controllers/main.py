@@ -4,7 +4,6 @@
 from openerp.addons.website_mail.controllers.email_designer import\
     WebsiteEmailDesigner
 from openerp import http
-from openerp.http import request
 
 
 class UnquoteObject(str):
