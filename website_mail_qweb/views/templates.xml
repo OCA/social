@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <openerp>
     <data>
-        <template id="assets_backend" name="website_mail_qweb assets" inherit_id="web.assets_backend">
-            <xpath expr="." position="inside">
-                <script type="text/javascript" src="/website_mail_qweb/static/src/js/website_mail_qweb.js"></script>
-                <link rel="stylesheet" href="/website_mail_qweb/static/src/css/website_mail_qweb.css"/>
-            </xpath>
-        </template>
         <template id="email_designer" inherit_id="website_mail.email_designer">
             <xpath expr="//div[@t-field='record.body']/parent::div" position="after">
                 <div t-if="body_field == 'body_view_id'" class="col-sm-offset-2">
