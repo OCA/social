@@ -4,34 +4,35 @@
 from openerp.addons.website_mail.controllers.email_designer import\
     WebsiteEmailDesigner
 from openerp import http
+from openerp.http import request
 
 
-class UnquoteObject(str):
-    def __getattr__(self, name):
-        return UnquoteObject('%s.%s' % (self, name))
+class UnquoteRecordset(object):
+    def __init__(self, recordset, name):
+        self.__recordset = recordset
+        self.__name = name
 
-    def __repr__(self):
-        return self
-
-    def __call__(self, *args, **kwargs):
-        return UnquoteObject(
-            '%s(%s)' % (
-                self,
-                ','.join(
-                    [
-                        UnquoteObject(
-                            a if not isinstance(a, basestring)
-                            else "'%s'" % a
-                        )
-                        for a in args
-                    ] +
-                    [
-                        '%s=%s' % (UnquoteObject(k), v)
-                        for (k, v) in kwargs.iteritems()
-                    ]
-                )
-            )
+    def __getitem__(self, key):
+        if isinstance(key, basestring) and key in self.__recordset._fields:
+            return self.__recordset[key]
+        return UnquoteRecordset(
+            self.__recordset[key], '%s[%s]' % (self.__name, key)
         )
+
+    def __getattr__(self, name):
+        recordset = self.__recordset
+        if name in recordset._fields:
+            if recordset._fields[name].relational:
+                return UnquoteRecordset(
+                    recordset[name], '%s.%s' % (self.__name, name)
+                )
+            elif recordset._fields[name].type in ('char', 'text'):
+                return '%s.%s' % (self.__name, name)
+            elif recordset._fields[name].type in ('integer', 'float'):
+                return 42
+            else:
+                return recordset[name]
+        return getattr(recordset, name)
 
 
 class Main(WebsiteEmailDesigner):
@@ -40,11 +41,15 @@ class Main(WebsiteEmailDesigner):
         result = super(Main, self).index(
             model, res_id, template_model=template_model, **kw
         )
+        env = request.env
         qcontext = result.qcontext
-        record = qcontext['record']
+        record = qcontext.get('record', env['email.template'].new())
         if record.body_type == 'qweb':
             qcontext['body_field'] = 'body_view_id'
             qcontext['mode'] = 'email_designer'
-            qcontext['object'] = UnquoteObject('object')
+            qcontext['object'] = UnquoteRecordset(
+                env[record.model_id.model].new(),
+                'object',
+            )
             qcontext['email_template'] = record
         return result
