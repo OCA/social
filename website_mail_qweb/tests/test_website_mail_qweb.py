@@ -2,7 +2,7 @@
 # © 2017 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from openerp.tests.common import HttpCase
-from ..controllers.main import UnquoteObject
+from ..controllers.main import UnquoteRecordset
 
 
 class TestWebsiteMailQweb(HttpCase):
@@ -14,15 +14,7 @@ class TestWebsiteMailQweb(HttpCase):
         )
         self.assertIn('Dear object.name,', result.read())
 
-    def test_unquote_object(self):
-        self.assertEqual(UnquoteObject('hello.world'), "hello.world")
-        self.assertEqual(
-            UnquoteObject('hello.world(42).test'), "hello.world(42).test"
-        )
-        self.assertEqual(
-            UnquoteObject("hello.world(42, hello='42').test"),
-            "hello.world(42, hello='42').test"
-        )
-        self.assertEqual(
-            UnquoteObject('hello.world[42].test'), "hello.world[42].test"
-        )
+    def test_unquote_recordset(self):
+        record = UnquoteRecordset(self.env['res.partner'].new(), 'object')
+        self.assertEqual(record.name, 'object.name')
+        self.assertEqual(record.parent_id.name, 'object.parent_id.name')
