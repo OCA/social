@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_sendgrid_substitution,Full access on sendgrid_substitution,model_sendgrid_substitution,base.group_user,1,1,1,1
+access_sendgrid_template,Full access on sendgrid_template,model_sendgrid_template,base.group_user,1,1,1,1
+access_sendgrid_lang_template,Full access on sendgrid_lang_template,model_sendgrid_email_lang_template,base.group_user,1,1,1,1

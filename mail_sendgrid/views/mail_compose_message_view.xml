@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Add sendgrid preview in compose mail wizard -->
+    <record model="ir.ui.view" id="email_compose_message_sendgrid_form">
+        <field name="name">mail.compose.sendgrid.form</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+        <field name="arch" type="xml">
+            <field name="body" position="replace">
+                <notebook>
+                    <page string="Html">
+                        <field name="body"/>
+                    </page>
+                    <page string="SendGrid Preview">
+                        <field name="body_sendgrid"/>
+                    </page>
+                </notebook>
+            </field>
+        </field>
+    </record>
+</odoo>
