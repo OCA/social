@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_tracking_mailgun
+# * website_livechat_firstname
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
@@ -19,12 +18,7 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: mail_tracking_mailgun
-#: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_email
-msgid "MailTracking email"
-msgstr "Mailverfolgung"
-
-#. module: mail_tracking_mailgun
-#: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
-msgid "ir.mail_server"
-msgstr "ir.mail_server"
+#. module: website_livechat_firstname
+#: model:ir.model,name:website_livechat_firstname.model_mail_channel
+msgid "Discussion channel"
+msgstr "Diskussionsforum"
