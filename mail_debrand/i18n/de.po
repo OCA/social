@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mass_mailing_keep_archives
+# * mail_debrand
 # 
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
@@ -18,17 +18,13 @@ msgstr ""
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: mass_mailing_keep_archives
-#: model:ir.model,name:mass_mailing_keep_archives.model_mail_compose_message
-msgid "Email composition wizard"
-msgstr "Assistent zum Email verfassen"
+#. module: mail_debrand
+#: model:ir.model,name:mail_debrand.model_mail_notification
+msgid "Notifications"
+msgstr "Mitteilungen"
 
-#. module: mass_mailing_keep_archives
-#: field:mail.mass_mailing,keep_archives:0
-msgid "Keep archives"
-msgstr "Archive behalten"
-
-#. module: mass_mailing_keep_archives
-#: model:ir.model,name:mass_mailing_keep_archives.model_mail_mass_mailing
-msgid "Mass Mailing"
-msgstr "Massenmailing"
+#. module: mail_debrand
+#: code:addons/mail_debrand/models/mail.py:51
+#, python-format
+msgid "Sent by %s"
+msgstr "Gesendet von %s"

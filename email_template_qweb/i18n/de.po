@@ -3,13 +3,14 @@
 # * email_template_qweb
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-30 02:47+0000\n"
-"PO-Revision-Date: 2016-04-28 14:40+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-04-30 10:21+0000\n"
+"PO-Revision-Date: 2017-04-04 15:55+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,17 +21,17 @@ msgstr ""
 #. module: email_template_qweb
 #: field:email.template,body_type:0
 msgid "Body templating engine"
-msgstr ""
+msgstr "Rumpf-Vorlage-Generator"
 
 #. module: email_template_qweb
 #: field:email.template,body_view_id:0
 msgid "Body view"
-msgstr ""
+msgstr "Rumpf-Ansicht"
 
 #. module: email_template_qweb
 #: view:website:email_template_qweb.view_email_template_demo1
 msgid "Dear"
-msgstr ""
+msgstr "Geehrter"
 
 #. module: email_template_qweb
 #: model:ir.model,name:email_template_qweb.model_email_template
@@ -40,29 +41,29 @@ msgstr "Email-Vorlagen"
 #. module: email_template_qweb
 #: selection:email.template,body_type:0
 msgid "Jinja2"
-msgstr ""
+msgstr "Jinja2"
 
 #. module: email_template_qweb
 #: selection:email.template,body_type:0
 msgid "QWeb"
-msgstr ""
+msgstr "QWeb"
 
 #. module: email_template_qweb
 #: model:email.template,subject:email_template_qweb.email_template_demo1
 msgid "QWeb demo email"
-msgstr ""
+msgstr "QWeb-Demoemail"
 
 #. module: email_template_qweb
 #: view:website:email_template_qweb.view_email_template_demo1
 msgid "This is an email template using qweb."
-msgstr ""
+msgstr "Dies ist eine QWeb verwendende Email-Vorlage."
 
 #. module: email_template_qweb
 #: field:email.template,body_view_arch:0
 msgid "View Architecture"
-msgstr ""
+msgstr "Architektur ansehen"
 
 #. module: email_template_qweb
 #: view:email.template:email_template_qweb.email_template_form
 msgid "{'invisible': [('body_type', '!=', 'jinja2')]}"
-msgstr ""
+msgstr "{'invisible': [('body_type', '!=', 'jinja2')]}"

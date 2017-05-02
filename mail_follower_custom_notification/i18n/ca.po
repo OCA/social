@@ -16,7 +16,7 @@
 # jeon <bluerespect@nate.com>, 2014
 # John Toro <johntoro@gmail.com>, 2015
 # Jong-Dae Park <jdpark7@gmail.com>, 2013,2015
-# Kevin Min <gr326887@graded.br>, 2015
+# Gu Hong Min <placidmoon1@gmail.com>, 2015
 # Kunwoo Kim <crazyabtmath@naver.com>, 2015
 # LEE SI HYEONG <super2451894@gmail.com>, 2014
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
@@ -31,8 +31,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"POT-Creation-Date: 2017-04-30 10:21+0000\n"
+"PO-Revision-Date: 2017-03-24 09:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-social-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -99,7 +99,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Tema del Correu electrònic "
 
 #. module: mail_follower_custom_notification
 #: field:mail.followers,force_mail_subtype_ids:0
@@ -190,7 +190,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: field:mail.message.subtype,custom_notification_model_ids:0
 msgid "Models"
-msgstr ""
+msgstr "Models "
 
 #. module: mail_follower_custom_notification
 #. openerp-web
