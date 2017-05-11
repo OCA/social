@@ -12,6 +12,7 @@ class TestBaseMailBcc(TransactionCase):
         message = ir_mail_server.build_email(
             email_from='admin@example.com',
             email_to='admin@example.com',
+            email_bcc='unused@example.com',
             subject='An example E-Mail',
             body='With an example body',
         )
