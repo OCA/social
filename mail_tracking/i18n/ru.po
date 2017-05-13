@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Victor Safronovich <vsafronovich@suvit.ru>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-07 07:31+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-05-13 03:01+0000\n"
+"PO-Revision-Date: 2017-05-13 03:01+0000\n"
+"Last-Translator: Victor Safronovich <vsafronovich@suvit.ru>, 2017\n"
 "Language-Team: Russian (https://www.transifex.com/oca/teams/23907/ru/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -72,7 +73,7 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
-msgstr ""
+msgstr "Страна"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_uid:0
@@ -127,7 +128,7 @@ msgstr ""
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,mail_id:0
 msgid "Email"
-msgstr ""
+msgstr "Эл. почта"
 
 #. module: mail_tracking
 #: view:res.partner:mail_tracking.view_res_partner_filter
