@@ -18,6 +18,7 @@ addon | version | summary
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 10.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_full_expand](mail_full_expand/) | 10.0.1.0.0 | Expand mail in a big window
 [mail_optional_autofollow](mail_optional_autofollow/) | 10.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
+[mail_optional_follower_notification](mail_optional_follower_notification/) | 10.0.1.0.0 | Choose if you want to automatically notify followers on mail.compose.message
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 10.0.1.0.0 | Define a domain from which followers can be selected
 [mail_tracking](mail_tracking/) | 10.0.1.0.0 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 10.0.1.0.0 | Mail tracking and Mailgun webhooks integration
