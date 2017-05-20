@@ -20,8 +20,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 08:27+0000\n"
-"PO-Revision-Date: 2017-01-19 20:17+0000\n"
+"POT-Creation-Date: 2017-05-13 08:42+0000\n"
+"PO-Revision-Date: 2017-05-13 18:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -85,7 +85,7 @@ msgstr "Data da última mensagem postada no registro"
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,details:0
 msgid "Details"
-msgstr ""
+msgstr "Detalhes"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,details_required:0
