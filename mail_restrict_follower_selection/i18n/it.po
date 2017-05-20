@@ -1,9 +1,8 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_full_expand
+# * mail_restrict_follower_selection
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
 # Marius Marolla <mariusmarolla@gmail.com>, 2017
 msgid ""
 msgstr ""
@@ -19,19 +18,12 @@ msgstr ""
 "Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: mail_full_expand
-#. openerp-web
-#: code:addons/mail_full_expand/static/src/xml/mail_full_expand.xml:10
-#, python-format
-msgid "Fully Expand"
-msgstr "Espandi Tutto"
+#. module: mail_restrict_follower_selection
+#: model:ir.actions.act_window,name:mail_restrict_follower_selection.action_setup
+msgid "Configure the restriction on followers"
+msgstr "Imposta restrizioni sui follower"
 
-#. module: mail_full_expand
-#: model:ir.ui.view,arch_db:mail_full_expand.mail_message_view_form
-msgid "Message"
-msgstr "Messaggio"
-
-#. module: mail_full_expand
-#: model:ir.actions.act_window,name:mail_full_expand.mail_message_action
-msgid "Read Full Email"
-msgstr "Leggi Tutto"
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
+msgid "Invite wizard"
+msgstr "Wizard Creazione Invito"

@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_as_letter
+# 
+# Translators:
+# Marius Marolla <mariusmarolla@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-17 01:02+0000\n"
+"PO-Revision-Date: 2017-05-17 01:02+0000\n"
+"Last-Translator: Marius Marolla <mariusmarolla@gmail.com>, 2017\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_as_letter
+#: model:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
+msgid "Download Letter"
+msgstr "Scarica Lettera"
+
+#. module: mail_as_letter
+#: model:ir.model,name:mail_as_letter.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Wizard Creazione Email"
+
+#. module: mail_as_letter
+#: model:ir.model.fields,field_description:mail_as_letter.field_mail_compose_message_partner_count
+msgid "Number of partners"
+msgstr "Numero Partner"
+
+#. module: mail_as_letter
+#: model:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
+msgid "Save as a PDF file"
+msgstr "Salva come file PDF"
+
+#. module: mail_as_letter
+#: model:ir.ui.view,arch_db:mail_as_letter.mail_print
+msgid "Subject :"
+msgstr "Oggetto: "
+
+#. module: mail_as_letter
+#: code:addons/mail_as_letter/wizards/mail_compose_message.py:31
+#, python-format
+msgid "There must be only one recipient."
+msgstr "E' ammesso solo un Destinatario."
+
+#. module: mail_as_letter
+#: model:ir.actions.report.xml,name:mail_as_letter.qweb_mail_pdf_export
+msgid "mail_as_letter"
+msgstr "mail_as_letter"
