@@ -10,14 +10,19 @@ python:
 
 addons:
   apt:
+# only add the two lines below if you need wkhtmltopdf for your tests
     sources:
       - pov-wkhtmltopdf
+#    Search your sources alias here:
+#      https://github.com/travis-ci/apt-source-whitelist/blob/master/ubuntu.json
     packages:
       - expect-dev  # provides unbuffer utility
       - python-lxml  # because pip installation is slow
       - python-simplejson
       - python-serial
       - python-yaml
+#     Search your packages here:
+#       https://github.com/travis-ci/apt-package-whitelist/blob/master/ubuntu-precise
       - wkhtmltopdf  # only add if needed and check the before_install section below
 
 # set up an X server to run wkhtmltopdf.
@@ -28,17 +33,48 @@ before_install:
 env:
   global:
   - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  - PHANTOMJS_VERSION="latest"
+  # The above line controls the PhantomJS version that is used for JS testing.
+  #   It is not necessary to include this value unless you are altering the default.
+  #   Use `OS` to skip the PhantomJS upgrade & use the system version instead.
   - TRANSIFEX_USER='transbot@odoo-community.org'
-  - secure: "GRXFURohRzzBbzRovVHd+cObj1yBe9x9bddKqUo7jEGPo+MYHKfGo1M7disTDq6HPLgCwacbhWRsMavGORB3AEkoNewP7q31MKGGPiS8Com9wMmYUtDPs4ZiuUlakJjvfsmGlpwTWUe1Xv1YSZweXVGIESAn0SwhzKHrSKiTcSFAapTwdZXt0lKIsDcra/xOesJ8p9QjY4mzsgyeLrLUSq/Gpt/icAJeoktJ2c4Z6sMV4ozbaRgMFSMCxXKXQTNtLgFICfiJZ2PAw3BQTYo6iX0sdX3RekvaWVBiFr1iblrFjZleoZ9CnkOEKq0JL8EXHMeX7UBvkSJvQV4M3DPd5GdHA0docKDwgdJKUSP9oxBJ6ElYxG5/bbwOxWfY0x6mh/iJdSuNyrfaUqzaCfhQsckuEw6IgqcMGWLPoO5FSovzAtC+u0+GIqphyFsA25lku9B76eZB8KuqWEUJGQZswIOYUKc0i1A2S/ej6MjCYW0BrazhN5laP/6nu7RHmYs0sIrIaxeJJZG0AaVKWAXmTbcDplF07wzwQau4nk922pH5Bxmt2hB1BOzeOqCGnE3wTOAuacuDIfyJaIpTmNMALWeWk/EkMghDZXRRCEueZO5QR2LdcxJk86x5ANj6sxKVo+nkl+x93ZBsehqELn4rTHwjAaA+Ck3vWRkzfV8nJ3A="
+  # This line contains the encrypted transifex password
+  # To encrypt transifex password, install travis ruby utils with:
+  #   $ gem install travis --user-install
+  # and use:
+  #   $ travis encrypt TRANSIFEX_PASSWORD=your-password -r owner/project
+  # Secure list for current OCA projects is in https://github.com/OCA/maintainer-quality-tools/issues/194
+  - secure: GRXFURohRzzBbzRovVHd+cObj1yBe9x9bddKqUo7jEGPo+MYHKfGo1M7disTDq6HPLgCwacbhWRsMavGORB3AEkoNewP7q31MKGGPiS8Com9wMmYUtDPs4ZiuUlakJjvfsmGlpwTWUe1Xv1YSZweXVGIESAn0SwhzKHrSKiTcSFAapTwdZXt0lKIsDcra/xOesJ8p9QjY4mzsgyeLrLUSq/Gpt/icAJeoktJ2c4Z6sMV4ozbaRgMFSMCxXKXQTNtLgFICfiJZ2PAw3BQTYo6iX0sdX3RekvaWVBiFr1iblrFjZleoZ9CnkOEKq0JL8EXHMeX7UBvkSJvQV4M3DPd5GdHA0docKDwgdJKUSP9oxBJ6ElYxG5/bbwOxWfY0x6mh/iJdSuNyrfaUqzaCfhQsckuEw6IgqcMGWLPoO5FSovzAtC+u0+GIqphyFsA25lku9B76eZB8KuqWEUJGQZswIOYUKc0i1A2S/ej6MjCYW0BrazhN5laP/6nu7RHmYs0sIrIaxeJJZG0AaVKWAXmTbcDplF07wzwQau4nk922pH5Bxmt2hB1BOzeOqCGnE3wTOAuacuDIfyJaIpTmNMALWeWk/EkMghDZXRRCEueZO5QR2LdcxJk86x5ANj6sxKVo+nkl+x93ZBsehqELn4rTHwjAaA+Ck3vWRkzfV8nJ3A=
+  # Use the following lines if you need to manually change the transifex project slug or/and the transifex organization.
+  # The default project slug is owner-repo_name-version (with dash in the version string).
+  # The default organization is the owner of the repo.
+  # The default fill up resources (TM) is True.
+  # The default team is 23907. https://www.transifex.com/organization/oca/team/23907/
+  # - TRANSIFEX_PROJECT_SLUG=
+  # - TRANSIFEX_ORGANIZATION=
+  # - TRANSIFEX_FILL_UP_RESOURCES=
+  # - TRANSIFEX_TEAM=
 
   matrix:
   - LINT_CHECK="1"
+  - TRANSIFEX="1"
   - TESTS="1" ODOO_REPO="odoo/odoo"
   - TESTS="1" ODOO_REPO="OCA/OCB"
-  - TRANSIFEX="1"
+# either use the two lines above or the two below. Don't change the default if
+# it's not necessary (it is only necessary if modules in your repository can't
+# be installed in the same database. And you get a huge speed penalty in your
+# tests)
+#  - TESTS="1.0" ODOO_REPO="odoo/odoo" UNIT_TEST="1"
+#  - TESTS="1.0" ODOO_REPO="OCA/OCB" UNIT_TEST="1"
 
 virtualenv:
   system_site_packages: true
+
+# Enable this if your repository needs sass command (needed for website related repos)
+#before_install:
+#  - rvm install ruby --latest
+#  - gem install bootstrap-sass
+#  - gem install compass --pre
 
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
