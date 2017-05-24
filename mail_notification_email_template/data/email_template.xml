@@ -4,10 +4,21 @@
         <record id="template" model="email.template">
             <field name="name">Template for discussion notifications</field>
             <field name="model_id" ref="mail.model_mail_notification" />
-            <field name="subject">${object.message_id.subject|safe}</field>
+            <field name="subject"><![CDATA[
+                <% set message = object.message_id %>
+                <% set thread = message.message_ancestor_id %>
+                <% if message.subject: %>
+                    ${message.subject|safe}
+                <% else: %>
+                    ${thread.subject and 'RE: ' + thread.subject or object.record.name|safe}
+                <% endif %>
+                ]]>
+            </field>
             <field name="body_html"><![CDATA[
-                <h2>Dear ${object.partner_id.name},</h2>
-                <p>there's a new message on <a href="${object.record_access_link}">${object.record.name}</a>:</p>
+                % if object.partner_id.user_ids:
+                    <h2>Dear ${object.partner_id.name},</h2>
+                    <p>there's a new message on <a href="${object.record_access_link or object.env['ir.config_parameter'].get_param('web.base.url')}">${object.record.name or 'Your Odoo Inbox'}</a>:</p>
+                % endif
                 ${object.message_id.body|safe}
                 ]]>
             </field>

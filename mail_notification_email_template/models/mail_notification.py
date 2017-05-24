@@ -14,6 +14,8 @@ class MailNotification(models.Model):
         ],
         compute='_compute_record')
     record_access_link = fields.Char(compute='_compute_record')
+    message_ancestor_id = fields.Many2one(
+        'mail.message', compute='_compute_ancestor')
 
     @api.multi
     def _notify_email(self, message_id, force_send=False, user_signature=True):
@@ -68,3 +70,13 @@ class MailNotification(models.Model):
             )
             for a in etree.HTML(link_html or '<html/>').xpath('//a[@href]'):
                 this.record_access_link = a.get('href')
+
+    @api.multi
+    def _compute_ancestor(self):
+        for notification in self:
+            previous = notification.message_id
+            ancestor = previous.parent_id
+            while ancestor:
+                previous = ancestor
+                ancestor = ancestor.parent_id
+            notification.message_ancestor_id = ancestor or previous
