@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Form view -->
+        <record id="view_email_template_sendgrid_form" model="ir.ui.view">
+            <field name="name">email.template.sendgrid.form</field>
+            <field name="model">email.template</field>
+            <field name="inherit_id" ref="email_template.email_template_form"/>
+            <field name="arch" type="xml">
+                <page string="Email Configuration" position="after">
+                    <page string="SendGrid">
+                        <group>
+                            <field name="sendgrid_template_ids">
+                                <tree editable="top">
+                                    <field name="lang"/>
+                                    <field name="sendgrid_template_id"/>
+                                </tree>
+                            </field>
+                            <button name="update_substitutions" string="Get substitutions from templates" type="object" colspan="2"/>
+                            <field name="substitution_ids">
+                                <tree editable="top">
+                                    <field name="key"/>
+                                    <field name="lang"/>
+                                    <field name="value"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </page>
+                </page>
+            </field>
+        </record>
+
+    </data>
+</openerp>
