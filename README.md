@@ -23,6 +23,7 @@ addon | version | summary
 [mail_tracking](mail_tracking/) | 9.0.3.0.1 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 9.0.1.0.0 | Improve mass mailing email tracking
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 9.0.2.0.0 | Know unsubscription reasons, track them
 [mass_mailing_partner](mass_mailing_partner/) | 9.0.1.0.0 | Link partners with mass-mailing
 [mass_mailing_security_group](mass_mailing_security_group/) | 9.0.1.0.0 | Mass mailing security group
 [mass_mailing_unique](mass_mailing_unique/) | 9.0.1.0.0 | Avoids duplicate mailing lists and contacts
@@ -36,7 +37,6 @@ addon | version | summary
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 (unported) | Select language in mail compose window
 [mail_full_expand](mail_full_expand/) | 8.0.3.0.0 (unported) | Expand mail in a big window
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 8.0.1.0.0 (unported) | Define a domain from which followers can be selected
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.0.0 (unported) | Customizable unsubscribe link on mass mailing emails
 
 [//]: # (end addons)
 
