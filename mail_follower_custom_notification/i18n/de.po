@@ -10,15 +10,15 @@
 # Carles Antoli <carlesantoli@hotmail.com>, 2015
 # danimaribeiro <danimaribeiro@gmail.com>, 2015
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012
-# Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2015-2017
 # SaFi J. <safi2266@gmail.com>, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:20+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-04-30 10:21+0000\n"
+"PO-Revision-Date: 2017-04-19 11:44+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -29,12 +29,12 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
 msgid "Apply"
-msgstr ""
+msgstr "Anwenden"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_subtype_assign_custom_notifications
 msgid "Assign custom notification settings to existing followers"
-msgstr ""
+msgstr "Individuelle Mitteilungseinstellungen bestehenden Followern zuordnen"
 
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
@@ -46,14 +46,14 @@ msgstr "Abbrechen"
 msgid ""
 "Check this to have notifications generated and sent via email about own "
 "messages"
-msgstr ""
+msgstr "Anwählen, um Mitteilungen über eigene Meldungen zu erzeugen und per Email zu verschicken"
 
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_model_ids:0
 msgid ""
 "Choose for which models the custom configuration applies. This is only "
 "necessary if your subtype doesn't set a model itself"
-msgstr ""
+msgstr "Wählen Sie die Modelle, auf die die Individuelle Konfiguration zutrifft. Dies ist nur erforderlich, wenn Ihre Unterart das Modell nicht selbst festlegt"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,create_uid:0
@@ -68,7 +68,7 @@ msgstr "Angelegt am"
 #. module: mail_follower_custom_notification
 #: view:mail.message.subtype:mail_follower_custom_notification.view_mail_message_subtype_form
 msgid "Custom notifications"
-msgstr ""
+msgstr "Individuelle Mitteilungen"
 
 #. module: mail_follower_custom_notification
 #: field:base.patch.models.mixin,display_name:0
@@ -79,7 +79,7 @@ msgstr "Anzeigename"
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_followers
 msgid "Document Followers"
-msgstr ""
+msgstr "Dokument-Follower"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_thread
@@ -89,41 +89,41 @@ msgstr "Email-Thread"
 #. module: mail_follower_custom_notification
 #: field:mail.followers,force_mail_subtype_ids:0
 msgid "Force mails from subtype"
-msgstr ""
+msgstr "Erzwinge Mails der Unterart"
 
 #. module: mail_follower_custom_notification
 #: selection:mail.message.subtype,custom_notification_mail:0
 msgid "Force no"
-msgstr ""
+msgstr "Erzwinge nicht"
 
 #. module: mail_follower_custom_notification
 #: field:mail.followers,force_nomail_subtype_ids:0
 msgid "Force no mails from subtype"
-msgstr ""
+msgstr "Erzwinge keine Mails von Unterart"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:20
 #, python-format
 msgid "Force not sending mails"
-msgstr ""
+msgstr "Unterbinde Mailversand"
 
 #. module: mail_follower_custom_notification
 #: field:mail.followers,force_own_subtype_ids:0
 msgid "Force own mails from subtype"
-msgstr ""
+msgstr "Erzwinge Unterart eigener Mails "
 
 #. module: mail_follower_custom_notification
 #. openerp-web
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:16
 #, python-format
 msgid "Force sending mails"
-msgstr ""
+msgstr "Erzwinge Mailversand"
 
 #. module: mail_follower_custom_notification
 #: selection:mail.message.subtype,custom_notification_mail:0
 msgid "Force yes"
-msgstr ""
+msgstr "Erzwinge ja"
 
 #. module: mail_follower_custom_notification
 #: field:base.patch.models.mixin,id:0
@@ -153,14 +153,14 @@ msgid ""
 "Leave empty to use the on the partner's form, set to \"Force yes\" to always"
 " send messages of this type via email, and \"Force no\" to never send "
 "messages of type via email"
-msgstr ""
+msgstr "Leer lassen, um die Einstellung der Partnersicht zu verwenden, setze \"Erzinge ja', um immer und 'Erzwinge nie', um niemals Nachrichten dieser Art zu versenden."
 
 #. module: mail_follower_custom_notification
 #. openerp-web
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:9
 #, python-format
 msgid "Mail notifications"
-msgstr ""
+msgstr "Nachrichtenhinweis"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_message
@@ -170,7 +170,7 @@ msgstr "Nachricht"
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_message_subtype
 msgid "Message subtypes"
-msgstr ""
+msgstr "Meldungsunterarten"
 
 #. module: mail_follower_custom_notification
 #: field:mail.message.subtype,custom_notification_model_ids:0
@@ -182,53 +182,53 @@ msgstr "Datenmodelle"
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:27
 #, python-format
 msgid "No notification"
-msgstr ""
+msgstr "Keine Benachrichtigung"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_notification
 msgid "Notifications"
-msgstr ""
+msgstr "Mitteilungen"
 
 #. module: mail_follower_custom_notification
 #: field:mail.message.subtype,custom_notification_own:0
 msgid "Notify about own messages"
-msgstr ""
+msgstr "Hinweisen auf eigene Emails"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:31
 #, python-format
 msgid "Notify me"
-msgstr ""
+msgstr "Benachrichtige mich"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:24
 #, python-format
 msgid "Own messages"
-msgstr ""
+msgstr "Eigene Mitteilungen"
 
 #. module: mail_follower_custom_notification
 #: field:mail.message.subtype,custom_notification_mail:0
 msgid "Send mail notification"
-msgstr ""
+msgstr "Versende Benachrichtigungsmail"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,subtype_ids:0
 msgid "Subtypes"
-msgstr ""
+msgstr "Unterarten"
 
 #. module: mail_follower_custom_notification
 #: model:ir.actions.act_window,name:mail_follower_custom_notification.action_mail_subtype_assign_custom_notifications
 msgid "Update existing subscriptions"
-msgstr ""
+msgstr "Aktualisiere bestehende Abonnements"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
 #: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:12
 #, python-format
 msgid "Use default mail preferences"
-msgstr ""
+msgstr "Verwende Vorgabe-Maileinstellungen"
 
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications

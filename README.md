@@ -8,10 +8,12 @@ Social addons for Odoo
 Addons concerning Odoo's social ERP features and messaging in general
 
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[base_mail_bcc](base_mail_bcc/) | 8.0.1.0.0 | BCC all emails
 [email_template_qweb](email_template_qweb/) | 8.0.1.0.0 | Use the QWeb templating mechanism for emails
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 8.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 | Select language in mail compose window

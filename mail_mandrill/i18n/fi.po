@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:29+0000\n"
+"POT-Creation-Date: 2017-05-13 03:01+0000\n"
+"PO-Revision-Date: 2017-05-11 14:14+0000\n"
 "Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-social-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -32,44 +32,44 @@ msgstr ""
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Bounce"
-msgstr ""
+msgstr "Palautua"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,bounce_description:0
 msgid "Bounce description"
-msgstr ""
+msgstr "Palautumisen kuvaus"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,bounce_type:0
 msgid "Bounce type"
-msgstr ""
+msgstr "Palautumisen tyyppi"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.message,state:0
 msgid "Bounced"
-msgstr ""
+msgstr "Palautunut"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Click"
-msgstr ""
+msgstr "Klikkaus"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Clicked"
-msgstr ""
+msgstr "Klikattu"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,url:0
 msgid "Clicked URL"
-msgstr ""
+msgstr "Klikattu URL"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "Country"
-msgstr ""
+msgstr "Maa"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_uid:0
@@ -92,13 +92,13 @@ msgstr "Päivämäärä"
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Deferral"
-msgstr ""
+msgstr "Lykkäys"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: selection:mail.mandrill.message,state:0
 msgid "Deferred"
-msgstr ""
+msgstr "Lykätty"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,display_name:0
@@ -109,29 +109,29 @@ msgstr "Nimi"
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Email"
-msgstr ""
+msgstr "Sähköposti"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,event_type:0
 msgid "Event type"
-msgstr ""
+msgstr "Tapahtuman tyyppi"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Failed"
-msgstr ""
+msgstr "Epäonnistunut"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Group By"
-msgstr ""
+msgstr "Ryhmittele"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Hard bounce"
-msgstr ""
+msgstr "Pakotettu palautuminen"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,id:0 field:mail.mandrill.message,id:0
@@ -141,7 +141,7 @@ msgstr "ID"
 #. module: mail_mandrill
 #: field:mail.mandrill.event,mobile:0
 msgid "Is mobile?"
-msgstr ""
+msgstr "Mobiililaite?"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,__last_update:0
@@ -225,7 +225,7 @@ msgstr ""
 #. module: mail_mandrill
 #: field:mail.mandrill.event,message_id:0
 msgid "Message"
-msgstr ""
+msgstr "Viesti"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -242,44 +242,44 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Month"
-msgstr ""
+msgstr "Kuukausi"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Open"
-msgstr ""
+msgstr "Avoin"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Avattu"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,os_family:0
 msgid "Operating system family"
-msgstr ""
+msgstr "Käyttöjärjestelmän tyyppi"
 
 #. module: mail_mandrill
 #: model:ir.model,name:mail_mandrill.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Lähtevät postit"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
 msgid "Recipient"
-msgstr ""
+msgstr "Vastaanottaja"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,recipient:0
 msgid "Recipient email"
-msgstr ""
+msgstr "Vastaanottajan sähköposti"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Rejected"
-msgstr ""
+msgstr "Hylätty"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -290,12 +290,12 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
 msgid "Sender"
-msgstr ""
+msgstr "Lähettäjä"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,sender:0
 msgid "Sender email"
-msgstr ""
+msgstr "Lähettäjän sähköpostiosoite"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
@@ -307,18 +307,18 @@ msgstr "Lähetetty"
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 msgid "Soft bounce"
-msgstr ""
+msgstr "Palautettu väliaikaisesti"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.message,state:0
 msgid "Soft bounced"
-msgstr ""
+msgstr "Palautettu väliaikaisesti"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Spam"
-msgstr ""
+msgstr "Roskaposti"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
@@ -331,7 +331,7 @@ msgstr "Tila"
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,name:0
 msgid "Subject"
-msgstr ""
+msgstr "Aihe"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
@@ -343,34 +343,34 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Time"
-msgstr ""
+msgstr "Aika"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Lopeta tilaus"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: selection:mail.mandrill.message,state:0
 msgid "Unsubscribed"
-msgstr ""
+msgstr "Tilaus lopetettu"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,ip:0
 msgid "User IP"
-msgstr ""
+msgstr "Käyttäjän IP-osoite"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -378,20 +378,20 @@ msgstr ""
 #: field:mail.mandrill.event,user_agent:0
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "User agent"
-msgstr ""
+msgstr "User agent"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,ua_family:0
 msgid "User agent family"
-msgstr ""
+msgstr "User agent family"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: field:mail.mandrill.event,ua_type:0
 msgid "User agent type"
-msgstr ""
+msgstr "User agent-tyyppi"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,user_country_id:0
 msgid "User country"
-msgstr ""
+msgstr "Käyttäjän maa"

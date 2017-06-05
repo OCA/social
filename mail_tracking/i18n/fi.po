@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-14 08:27+0000\n"
-"PO-Revision-Date: 2017-01-14 08:27+0000\n"
+"POT-Creation-Date: 2017-05-13 08:42+0000\n"
+"PO-Revision-Date: 2017-05-13 08:42+0000\n"
 "Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2017\n"
 "Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -36,44 +36,44 @@ msgstr ""
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
-msgstr ""
+msgstr "Palautua"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,bounce_description:0
 msgid "Bounce description"
-msgstr ""
+msgstr "Palautumisen kuvaus"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,bounce_type:0
 msgid "Bounce type"
-msgstr ""
+msgstr "Palautumisen tyyppi"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Bounced"
-msgstr ""
+msgstr "Palautunut"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
-msgstr ""
+msgstr "Klikkaus"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Clicked"
-msgstr ""
+msgstr "Klikattu"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,url:0
 msgid "Clicked URL"
-msgstr ""
+msgstr "Klikattu URL"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
-msgstr ""
+msgstr "Maa"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_uid:0
@@ -98,13 +98,13 @@ msgstr "Päivämäärä"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Deferral"
-msgstr ""
+msgstr "Lykkäys"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 msgid "Deferred"
-msgstr ""
+msgstr "Lykätty"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -112,7 +112,7 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Delivered"
-msgstr ""
+msgstr "Toimitettu"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,display_name:0
@@ -122,24 +122,24 @@ msgstr "Nimi"
 #. module: mail_tracking
 #: field:mail.tracking.email,display_name:0
 msgid "Display name"
-msgstr ""
+msgstr "Näyttönimi"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,mail_id:0
 msgid "Email"
-msgstr ""
+msgstr "Sähköposti"
 
 #. module: mail_tracking
 #: view:res.partner:mail_tracking.view_res_partner_filter
 #: field:res.partner,email_bounced:0
 msgid "Email bounced"
-msgstr ""
+msgstr "Sähköposti palautunut"
 
 #. module: mail_tracking
 #: field:res.partner,email_score:0
 msgid "Email score"
-msgstr ""
+msgstr "Sähköpostipisteet"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
@@ -150,46 +150,46 @@ msgstr "Virhe"
 #. module: mail_tracking
 #: field:mail.tracking.email,error_smtp_server:0
 msgid "Error SMTP server"
-msgstr ""
+msgstr "Virhe SMTP palvelimella"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,error_description:0
 #: field:mail.tracking.event,error_description:0
 msgid "Error description"
-msgstr ""
+msgstr "Virheen kuvaus"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,error_details:0
 msgid "Error details"
-msgstr ""
+msgstr "Virheen lisätiedot"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,error_type:0
 #: field:mail.tracking.event,error_type:0
 msgid "Error type"
-msgstr ""
+msgstr "Virheen tyyppi"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,event_type:0
 msgid "Event type"
-msgstr ""
+msgstr "Tapahtuman tyyppi"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Failed"
-msgstr ""
+msgstr "Epäonnistunut"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
-msgstr ""
+msgstr "Ryhmittele"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Hard bounce"
-msgstr ""
+msgstr "Palautettu lopullisesti"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,id:0 field:mail.tracking.event,id:0
@@ -199,7 +199,7 @@ msgstr "ID"
 #. module: mail_tracking
 #: field:mail.tracking.event,mobile:0
 msgid "Is mobile?"
-msgstr ""
+msgstr "Mobiililaite?"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,__last_update:0
@@ -221,36 +221,36 @@ msgstr "Viimeksi päivitetty"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
 msgid "MailTracking email"
-msgstr ""
+msgstr "MailTracking sähköposti"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 msgid "MailTracking email search"
-msgstr ""
+msgstr "MailTracking sähköpostien haku"
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_email
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
 msgid "MailTracking emails"
-msgstr ""
+msgstr "MailTracking sähköpostit"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_event
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_form
 msgid "MailTracking event"
-msgstr ""
+msgstr "MailTracking tapahtuma"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "MailTracking event search"
-msgstr ""
+msgstr "MailTracking tapahtumien haku"
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "MailTracking events"
-msgstr ""
+msgstr "MailTracking tapahtumat"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -258,41 +258,41 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,tracking_email_id:0
 msgid "Message"
-msgstr ""
+msgstr "Viesti"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/js/mail_tracking.js:30
 #, python-format
 msgid "Message tracking"
-msgstr ""
+msgstr "Viestin seuranta"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Month"
-msgstr ""
+msgstr "Kuukausi"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
-msgstr ""
+msgstr "Avoin"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Avattu"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,os_family:0
 msgid "Operating system family"
-msgstr ""
+msgstr "Käyttöjärjestelmän tyyppi"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Lähtevät postit"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
@@ -306,40 +306,40 @@ msgstr "Kumppani"
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,recipient:0
 msgid "Recipient"
-msgstr ""
+msgstr "Vastaanottaja"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,recipient:0
 msgid "Recipient email"
-msgstr ""
+msgstr "Vastaanottajan sähköposti"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,recipient_address:0
 #: field:mail.tracking.event,recipient_address:0
 msgid "Recipient email address"
-msgstr ""
+msgstr "Vastaanottajan sähköpostiosoite"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Rejected"
-msgstr ""
+msgstr "Hylätty"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,smtp_server:0
 msgid "SMTP server"
-msgstr ""
+msgstr "SMTP-palvelin"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_tree
 msgid "Sender"
-msgstr ""
+msgstr "Lähettäjä"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,sender:0
 msgid "Sender email"
-msgstr ""
+msgstr "Lähettäjän sähköpostiosoite"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -347,23 +347,23 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Sent"
-msgstr ""
+msgstr "Lähetetty"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Soft bounce"
-msgstr ""
+msgstr "Palautettu väliaikaisesti"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Soft bounced"
-msgstr ""
+msgstr "Palautettu väliaikaisesti"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Spam"
-msgstr ""
+msgstr "Roskaposti"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -375,7 +375,7 @@ msgstr "Tila"
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,name:0
 msgid "Subject"
-msgstr ""
+msgstr "Aihe"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
@@ -383,57 +383,57 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,time:0
 msgid "Time"
-msgstr ""
+msgstr "Aika"
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 #: view:res.partner:mail_tracking.view_partner_form
 msgid "Tracking emails"
-msgstr ""
+msgstr "Sähköpostit"
 
 #. module: mail_tracking
 #: field:res.partner,tracking_emails_count:0
 msgid "Tracking emails count"
-msgstr ""
+msgstr "Seurattavien sähköpostien määrä"
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_event
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
 #: field:mail.tracking.email,tracking_event_ids:0
 msgid "Tracking events"
-msgstr ""
+msgstr "Seurattavat tapahtumat"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
-msgstr ""
+msgstr "Tyyppi"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,timestamp:0 field:mail.tracking.event,timestamp:0
 msgid "UTC timestamp"
-msgstr ""
+msgstr "UTC aikaleima"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Lopeta tilaus"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
-msgstr ""
+msgstr "Tilaus lopetettu"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,ip:0
 msgid "User IP"
-msgstr ""
+msgstr "Käyttäjän IP-osoite"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_form
@@ -441,20 +441,20 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 #: field:mail.tracking.event,user_agent:0
 msgid "User agent"
-msgstr ""
+msgstr "User agent"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,ua_family:0
 msgid "User agent family"
-msgstr ""
+msgstr "User agent family"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: field:mail.tracking.event,ua_type:0
 msgid "User agent type"
-msgstr ""
+msgstr "User agent-tyyppi"
 
 #. module: mail_tracking
 #: field:mail.tracking.event,user_country_id:0
 msgid "User country"
-msgstr ""
+msgstr "Käyttäjän maa"
