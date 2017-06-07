@@ -7,12 +7,12 @@
         <field name="arch" type="xml">
             <tree string="Tracking change list" default_order="create_date desc"
                 create="false" edit="false" delete="false">
-              <field name="create_date" string="On"/>
-              <field name="record_name" string="For"/>
-              <field name="field_desc" string="Field changed"/>
-              <field name="old_value_formatted"/>
-              <field name="new_value_formatted"/>
-              <field name="model"/>
+                <field name="create_date" string="On"/>
+                <field name="record_name" string="For"/>
+                <field name="field_desc" string="Field changed"/>
+                <field name="old_value_formatted"/>
+                <field name="new_value_formatted"/>
+                <field name="model"/>
             </tree>
         </field>
     </record>
@@ -24,16 +24,14 @@
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                <field name="create_date" class="oe-inline"/>
-                <group>
-                <group string="">
-                    <field name="record_name" string="For"/>
-                    <field name="field_desc" string="Field changed"/>
-                    <field name="old_value_formatted"/>
-                    <field name="new_value_formatted"/>
-                    <field name="model"/>
-                </group>
-                </group>
+                    <field name="create_date" class="oe-inline"/>
+                    <group name="main">
+                        <field name="mail_message_id" string="For"/>
+                        <field name="field_desc" string="Field changed"/>
+                        <field name="old_value_formatted"/>
+                        <field name="new_value_formatted"/>
+                        <field name="model"/>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -44,11 +42,9 @@
         <field name="model">mail.tracking.value</field>
         <field name="arch" type="xml">
             <search string="Search">
-                <group>
-                    <field name="model"/>
-                </group>
-                <group expand="0" string="Group by">
-                    <filter group_by="group_by_model" string="Model" context="{'group_by':'model'}"/>
+                <field name="model"/>
+                <group expand="1" string="Group By">
+                    <filter name="model" string="Model" context="{'group_by':'model'}"/>
                 </group>
             </search>
         </field>
@@ -66,7 +62,7 @@
 
     <menuitem action="action_view_tracking_changes"
         id ="menu_action_view_tracking_changes"
-        name="Improved tracking values"
+        name="Improved Tracking Values"
         parent="base.menu_email"
         sequence="10"
     />
