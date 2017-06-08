@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * portal_welcome_email_template
+# 
+# Translators:
+# Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-06-30 01:07+0000\n"
+"PO-Revision-Date: 2016-06-17 14:57+0000\n"
+"Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/fr/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: portal_welcome_email_template
+#: model:email.template,body_html:portal_welcome_email_template.portal_welcome_email
+msgid ""
+"\n"
+"        \n"
+"<p>Dear ${object.name},&nbsp;</p>\n"
+"<p>You have been given access to ${object.company_id.name}'s ${ctx['portal']}.</p>\n"
+"<p>Your login account data is:</p>\n"
+"<blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\">\n"
+"    <div>\n"
+"        Username: <strong>${ctx['login']}</strong>&nbsp;\n"
+"    </div>\n"
+"    <div>\n"
+"        Portal: ${ctx['portal_url']}&nbsp;\n"
+"    </div>\n"
+"    <div>\n"
+"        Database: ${ctx['db']}&nbsp;\n"
+"    </div>\n"
+"</blockquote>\n"
+"<br/>\n"
+"You can set or change your password via the following url:<br/>\n"
+"${ctx['signup_url']}<br/>\n"
+"<p>${ctx['welcome_message']}</p>\n"
+"<pre>\n"
+"--\n"
+"Automatic Email.\n"
+"${object.company_id.name or ''}\n"
+"</pre>\n"
+"    "
+msgstr "\n        \n<p>Cher ${object.name},&nbsp;</p>\n<p>Nous venons de vous donner accès à ${object.company_id.name}'s ${ctx['portal']}.</p>\n<p>Votre identifiant est:</p>\n<blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\">\n    <div>\n        Identifiant: <strong>${ctx['login']}</strong>&nbsp;\n    </div>\n    <div>\n        Portail: ${ctx['portal_url']}&nbsp;\n    </div>\n    <div>\n        Base de données: ${ctx['db']}&nbsp;\n    </div>\n</blockquote>\n<br/>\nVous pouvez mettre ou changer votre mot de passe à l'adresse suivante:<br/>\n${ctx['signup_url']}<br/>\n<p>${ctx['welcome_message']}</p>\n<pre>\n--\nCourriel automatique.\n${object.company_id.name or ''}\n</pre>\n    "
+
+#. module: portal_welcome_email_template
+#: model:ir.model,name:portal_welcome_email_template.model_portal_wizard_user
+msgid "Portal User Config"
+msgstr "Configuration du portail utilisateur"
+
+#. module: portal_welcome_email_template
+#: model:email.template,subject:portal_welcome_email_template.portal_welcome_email
+msgid "Your account at ${object.company_id.name}"
+msgstr "Votre compte chez ${object.company_id.name}"

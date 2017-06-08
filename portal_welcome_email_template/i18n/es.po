@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * portal_welcome_email_template
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-02-27 01:40+0000\n"
+"PO-Revision-Date: 2016-02-26 17:03+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-social-8-0/language/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: portal_welcome_email_template
+#: model:email.template,body_html:portal_welcome_email_template.portal_welcome_email
+msgid ""
+"\n"
+"        \n"
+"<p>Dear ${object.name},&nbsp;</p>\n"
+"<p>You have been given access to ${object.company_id.name}'s ${ctx['portal']}.</p>\n"
+"<p>Your login account data is:</p>\n"
+"<blockquote style=\"margin: 0 0 0 40px; border: none; padding: 0px;\">\n"
+"    <div>\n"
+"        Username: <strong>${ctx['login']}</strong>&nbsp;\n"
+"    </div>\n"
+"    <div>\n"
+"        Portal: ${ctx['portal_url']}&nbsp;\n"
+"    </div>\n"
+"    <div>\n"
+"        Database: ${ctx['db']}&nbsp;\n"
+"    </div>\n"
+"</blockquote>\n"
+"<br/>\n"
+"You can set or change your password via the following url:<br/>\n"
+"${ctx['signup_url']}<br/>\n"
+"<p>${ctx['welcome_message']}</p>\n"
+"<pre>\n"
+"--\n"
+"Automatic Email.\n"
+"${object.company_id.name or ''}\n"
+"</pre>\n"
+"    "
+msgstr ""
+
+#. module: portal_welcome_email_template
+#: model:ir.model,name:portal_welcome_email_template.model_portal_wizard_user
+msgid "Portal User Config"
+msgstr "Configuración del portal de usuario"
+
+#. module: portal_welcome_email_template
+#: model:email.template,subject:portal_welcome_email_template.portal_welcome_email
+msgid "Your account at ${object.company_id.name}"
+msgstr "Su cuenta en ${object.company_id.name}"
