@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api
+from odoo import api, fields, models
 
 
 class MailMailStatistics(models.Model):
@@ -22,7 +22,6 @@ class MailMailStatistics(models.Model):
                 partner_id = obj.partner_id.id
         return partner_id
 
-    @api.multi
     def partner_link(self):
         for stat in self.filtered(lambda r: r.model and r.res_id):
             partner_id = self.partner_id_from_obj(stat.model, stat.res_id)

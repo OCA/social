@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2015 Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-# © 2015 Antonio Espinosa <antonioea@antiun.com>
-# © 2015 Javier Iniesta <javieria@antiun.com>
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+# Copyright 2015 Javier Iniesta <javieria@antiun.com>
+# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, _
+from odoo import _, api, fields, models
 
 
 class MailMassMailingContact(models.Model):
@@ -19,7 +19,6 @@ class MailMassMailingContact(models.Model):
          _('Partner already exists in this mailing list.'))
     ]
 
-    @api.one
     @api.onchange('partner_id')
     def _onchange_partner(self):
         if self.partner_id:
@@ -34,12 +33,12 @@ class MailMassMailingContact(models.Model):
         vals = self._set_name_email(vals)
         return super(MailMassMailingContact, self).create(vals)
 
-    @api.one
     def write(self, vals):
-        if vals.get('partner_id', None) is False:
-            # If removing partner, search again by email
-            vals = self._set_partner(vals)
-        vals = self._set_name_email(vals)
+        for contact in self:
+            if vals.get('partner_id', None) is False:
+                # If removing partner, search again by email
+                vals = contact._set_partner(vals)
+            vals = contact._set_name_email(vals)
         return super(MailMassMailingContact, self).write(vals)
 
     def _prepare_partner(self, vals, mailing_list):
