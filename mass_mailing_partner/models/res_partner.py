@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2015 Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
-# © 2015 Antonio Espinosa <antonioea@antiun.com>
-# © 2015 Javier Iniesta <javieria@antiun.com>
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+# Copyright 2015 Javier Iniesta <javieria@antiun.com>
+# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api, _
-from openerp.exceptions import ValidationError
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class ResPartner(models.Model):
@@ -19,7 +19,8 @@ class ResPartner(models.Model):
         comodel_name='mail.mass_mailing.contact', inverse_name='partner_id')
     mass_mailing_contacts_count = fields.Integer(
         string='Mailing list number',
-        compute='_compute_mass_mailing_contacts_count', store=True)
+        compute='_compute_mass_mailing_contacts_count', store=True,
+        compute_sudo=True)
     mass_mailing_stats = fields.One2many(
         string="Mass mailing stats",
         comodel_name='mail.mail.statistics', inverse_name='partner_id')
@@ -27,26 +28,26 @@ class ResPartner(models.Model):
         string='Mass mailing stats number',
         compute='_compute_mass_mailing_stats_count', store=True)
 
-    @api.one
     @api.constrains('email')
     def _check_email_mass_mailing_contacts(self):
-        if self.mass_mailing_contact_ids and not self.email:
-            raise ValidationError(
-                _("This partner '%s' is subscribed to one or more "
-                  "mailing lists. Email must be assigned." % self.name))
+        for partner in self:
+            if partner.sudo().mass_mailing_contact_ids and not partner.email:
+                raise ValidationError(
+                    _("This partner '%s' is subscribed to one or more "
+                      "mailing lists. Email must be assigned.") % partner.name)
 
-    @api.one
     @api.depends('mass_mailing_contact_ids',
                  'mass_mailing_contact_ids.opt_out')
     def _compute_mass_mailing_contacts_count(self):
-        self.mass_mailing_contacts_count = len(self.mass_mailing_contact_ids)
+        for reg in self:
+            reg.mass_mailing_contacts_count = len(
+                reg.mass_mailing_contact_ids)
 
-    @api.one
     @api.depends('mass_mailing_stats')
     def _compute_mass_mailing_stats_count(self):
-        self.mass_mailing_stats_count = len(self.mass_mailing_stats)
+        for reg in self:
+            reg.mass_mailing_stats_count = len(reg.mass_mailing_stats)
 
-    @api.multi
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
         if vals.get('name') or vals.get('email'):

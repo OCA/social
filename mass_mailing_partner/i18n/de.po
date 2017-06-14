@@ -3,15 +3,15 @@
 # * mass_mailing_partner
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: crm (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-28 02:26+0000\n"
-"PO-Revision-Date: 2017-04-19 11:44+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-crm-8-0/language/de/)\n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,38 +19,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_partner
-#: view:partner.mail.list.wizard:mass_mailing_partner.partner_mail_list_wizard_form
+#: model:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Add contacts to mailing list"
-msgstr "Kontakte zum Mailverteiler hinzufügen"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.actions.act_window,name:mass_mailing_partner.action_partner_mail_list
 msgid "Add to mailing list"
-msgstr "In Mailverteiler eintragen"
+msgstr ""
 
 #. module: mass_mailing_partner
-#: view:partner.mail.list.wizard:mass_mailing_partner.partner_mail_list_wizard_form
+#: model:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_partner_mail_list_wizard
-#: view:partner.mail.list.wizard:mass_mailing_partner.partner_mail_list_wizard_form
+#: model:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Create contact mailing list"
-msgstr "Erezuge Kontakte-Mailverteiler"
+msgstr ""
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,create_uid:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_create_uid
 msgid "Created by"
-msgstr "Erstellt von"
+msgstr "Angelegt durch"
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,create_date:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_create_date
 msgid "Created on"
-msgstr "Erstellt am:"
+msgstr "Angelegt am"
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,display_name:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_display_name
 msgid "Display Name"
 msgstr "Anzeigename"
 
@@ -60,47 +60,49 @@ msgid "Email Statistics"
 msgstr "Email-Statistiken"
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,id:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_id
 msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,__last_update:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard___last_update
 msgid "Last Modified on"
 msgstr "Zuletzt geändert am"
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,write_uid:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_write_uid
 msgid "Last Updated by"
-msgstr "Zuletzt aktualisiert von"
+msgstr "Zuletzt aktualisiert durch"
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,write_date:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_write_date
 msgid "Last Updated on"
 msgstr "Zuletzt aktualisiert am"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_list
-#: field:partner.mail.list.wizard,mail_list_id:0
-#: view:res.partner:mass_mailing_partner.view_res_partner_filter
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_mail_list_id
+#: model:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
 msgid "Mailing List"
 msgstr "Mailingliste"
 
 #. module: mass_mailing_partner
-#: field:res.partner,mass_mailing_contacts_count:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner_mass_mailing_contacts_count
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users_mass_mailing_contacts_count
 msgid "Mailing list number"
-msgstr "Verteilerlistennummer"
+msgstr ""
 
 #. module: mass_mailing_partner
-#: view:res.partner:mass_mailing_partner.view_partner_form
-#: field:res.partner,mass_mailing_contact_ids:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner_mass_mailing_contact_ids
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users_mass_mailing_contact_ids
+#: model:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
 msgid "Mailing lists"
-msgstr "Verteilerlisten"
+msgstr ""
 
 #. module: mass_mailing_partner
-#: field:mail.mass_mailing.list,partner_mandatory:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_list_partner_mandatory
 msgid "Mandatory Partner"
-msgstr "Partner-Pflichteintrag"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_contact
@@ -108,62 +110,54 @@ msgid "Mass Mailing Contact"
 msgstr "Massenmail-Kontakt"
 
 #. module: mass_mailing_partner
-#: view:res.partner:mass_mailing_partner.view_partner_form
-#: field:res.partner,mass_mailing_stats:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner_mass_mailing_stats
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users_mass_mailing_stats
+#: model:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
 msgid "Mass mailing stats"
-msgstr "Massenmail-Statistiken"
+msgstr ""
 
 #. module: mass_mailing_partner
-#: field:res.partner,mass_mailing_stats_count:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner_mass_mailing_stats_count
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users_mass_mailing_stats_count
 msgid "Mass mailing stats number"
-msgstr "Nummer der Massenmail-Statistik"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_res_partner
-#: view:mail.mail.statistics:mass_mailing_partner.view_mail_mail_statistics_search
-#: field:mail.mail.statistics,partner_id:0
-#: view:mail.mass_mailing.contact:mass_mailing_partner.view_mail_mass_mailing_contact_search
-#: field:mail.mass_mailing.contact,partner_id:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mail_statistics_partner_id
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_contact_partner_id
+#: model:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mail_statistics_search
+#: model:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mass_mailing_contact_search
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:26
 #, python-format
 msgid "Partner '%s' has no email."
-msgstr "Partner '%s' hat keine Email."
+msgstr ""
 
 #. module: mass_mailing_partner
-#: field:mail.mass_mailing.list,partner_category:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_list_partner_category
 msgid "Partner Tag"
-msgstr "Partner-Schlagwort"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: code:addons/mass_mailing_partner/models/mail_mass_mailing_contact.py:19
 #: sql_constraint:mail.mass_mailing.contact:0
 #, python-format
 msgid "Partner already exists in this mailing list."
-msgstr "Partner ist in diesem Verteiler vorhanden."
+msgstr ""
 
 #. module: mass_mailing_partner
-#: field:partner.mail.list.wizard,partner_ids:0
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_partner_ids
 msgid "Partner ids"
-msgstr "Partner IDs"
+msgstr ""
 
 #. module: mass_mailing_partner
-#: code:addons/mass_mailing_partner/models/res_partner.py:35
+#: code:addons/mass_mailing_partner/models/res_partner.py:36
 #, python-format
 msgid ""
 "This partner '%s' is subscribed to one or more mailing lists. Email must be "
 "assigned."
-msgstr "Dieser Partner '%s' ist in mehreren Mailverteilern eingetragen. Eine Email-Anschrift muss eingepflegt sein."
-
-#. module: mass_mailing_partner
-#: view:partner.mail.list.wizard:mass_mailing_partner.partner_mail_list_wizard_form
-msgid "or"
-msgstr "oder"
-
-#. module: mass_mailing_partner
-#: view:mail.mass_mailing.contact:mass_mailing_partner.view_mail_mass_mailing_contact_tree
-msgid "{'readonly': [('partner_id', '!=', False)]}"
-msgstr "{'readonly': [('partner_id', '!=', False)]}"
+msgstr ""
