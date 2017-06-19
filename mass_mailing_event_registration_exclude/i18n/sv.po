@@ -3,14 +3,14 @@
 # * mass_mailing_event
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2016-11-25 18:06+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -19,57 +19,57 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_event
-#: field:event.registration.state,code:0
+#: model:ir.model,name:mass_mailing_event.model_event_registration
+msgid "Attendee"
+msgstr ""
+
+#. module: mass_mailing_event
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_code
 msgid "Code"
 msgstr ""
 
 #. module: mass_mailing_event
-#: field:event.registration.state,create_uid:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_create_uid
 msgid "Created by"
 msgstr "Skapad av"
 
 #. module: mass_mailing_event
-#: field:event.registration.state,create_date:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_create_date
 msgid "Created on"
 msgstr "Skapad den"
 
 #. module: mass_mailing_event
-#: field:event.registration.state,display_name:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_display_name
 msgid "Display Name"
 msgstr "Visa namn"
 
 #. module: mass_mailing_event
-#: model:ir.model,name:mass_mailing_event.model_event_registration
-msgid "Event Registration"
-msgstr ""
-
-#. module: mass_mailing_event
-#: field:mail.mass_mailing,event_id:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_mail_mass_mailing_event_id
 msgid "Event related"
 msgstr ""
 
 #. module: mass_mailing_event
-#: field:mail.mass_mailing,exclude_event_state_ids:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_mail_mass_mailing_exclude_event_state_ids
 msgid "Exclude"
 msgstr ""
 
 #. module: mass_mailing_event
-#: field:event.registration.state,id:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_id
 msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_event
-#: field:event.registration.state,__last_update:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state___last_update
 msgid "Last Modified on"
 msgstr "Senast redigerad"
 
 #. module: mass_mailing_event
-#: field:event.registration.state,write_uid:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_write_uid
 msgid "Last Updated by"
 msgstr "Senast uppdaterad av"
 
 #. module: mass_mailing_event
-#: field:event.registration.state,write_date:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_write_date
 msgid "Last Updated on"
 msgstr "Senast uppdaterad"
 
@@ -84,7 +84,7 @@ msgid "Mass Mailing Contact"
 msgstr ""
 
 #. module: mass_mailing_event
-#: field:event.registration.state,name:0
+#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_name
 msgid "Name"
 msgstr "Namn"
 
@@ -94,6 +94,6 @@ msgid "Partner"
 msgstr "Företag"
 
 #. module: mass_mailing_event
-#: view:mail.mass_mailing:mass_mailing_event.view_mail_mass_mailing_form
-msgid "{'search_default_not_opt_out': 1, 'exclude_mass_mailing': active_id}"
+#: model:ir.model,name:mass_mailing_event.model_event_registration_state
+msgid "event.registration.state"
 msgstr ""
