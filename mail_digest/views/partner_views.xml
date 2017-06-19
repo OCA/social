@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+
+        <record id="notifications_emails_partner_info_form" model="ir.ui.view">
+            <field name="name">mail.notifications res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="mail.view_emails_partner_info_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='notify_email']" position="after">
+                    <field name="notify_conf_ids" attrs="{'invisible': [('notify_email','=', 'none')]}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="notification_form">
+            <field name="name">partner.notification.conf form</field>
+            <field name="model">partner.notification.conf</field>
+            <field name="arch" type="xml">
+                <form string="Notification">
+                    <group name="main">
+                        <field name="enabled" />
+                        <field name="subtype_id" options="{'no_create': True}" />
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="notification_tree">
+            <field name="name">partner.notification.conf tree</field>
+            <field name="model">partner.notification.conf</field>
+            <field name="arch" type="xml">
+                <tree string="Notifications" editable="top">
+                    <field name="enabled" />
+                    <field name="subtype_id" />
+                </tree>
+            </field>
+        </record>
+
+    </data>
+</openerp>
