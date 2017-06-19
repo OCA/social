@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import copy
-from openerp import models, fields, api
+from odoo import fields, models
 
 
 def event_filtered_ids(model, mass_mailing_id, domain, field='email'):
@@ -43,12 +43,10 @@ class MailMassMailing(models.Model):
         comodel_name='event.registration.state',
         string="Exclude", default=_default_exclude_event_state_ids)
 
-    @api.model
-    def get_recipients(self, mailing):
-        res_ids = super(MailMassMailing, self).get_recipients(mailing)
+    def get_recipients(self):
+        res_ids = super(MailMassMailing, self).get_recipients()
         if res_ids:
             domain = [('id', 'in', res_ids)]
-            return event_filtered_ids(
-                self.env[mailing.mailing_model], mailing.id, domain,
-                field='email')
+            res_ids = event_filtered_ids(
+                self.env[self.mailing_model], self.id, domain, field='email')
         return res_ids
