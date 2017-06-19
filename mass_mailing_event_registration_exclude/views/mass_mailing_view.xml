@@ -2,8 +2,7 @@
 <!-- Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
-<data>
+<odoo>
 
 <record model="ir.ui.view" id="view_mail_mass_mailing_form">
     <field name="name">Add event and exclude</field>
@@ -29,5 +28,4 @@
     </field>
 </record>
 
-</data>
-</openerp>
+</odoo>
