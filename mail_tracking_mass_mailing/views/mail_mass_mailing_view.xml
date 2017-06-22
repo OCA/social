@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
+     Copyright 2017 David Vidal - <david.vidal@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
 
@@ -21,7 +22,7 @@
 </record>
 
 <menuitem name="Mail tracking" id="mail_tracking_menu"
-          parent="base.marketing_menu" sequence="50"/>
+          parent="mass_mailing.mass_mailing_menu_root" sequence="50"/>
 
 <menuitem name="Emails" id="mail_tracking_email_menu"
           parent="mail_tracking_menu" sequence="1"

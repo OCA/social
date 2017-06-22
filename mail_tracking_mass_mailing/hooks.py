@@ -5,7 +5,7 @@
 
 import logging
 try:
-    from openerp.addons.mail_tracking.hooks import column_add_with_value
+    from odoo.addons.mail_tracking.hooks import column_add_with_value
 except ImportError:
     column_add_with_value = False
 
