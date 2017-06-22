@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
+# Copyright 2017 David Vidal - <david.vidal@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import mock
-from openerp.tests.common import TransactionCase
+from odoo.tools import mute_logger
+from odoo.tests.common import TransactionCase
 
-mock_send_email = ('openerp.addons.base.ir.ir_mail_server.'
-                   'ir_mail_server.send_email')
+mock_send_email = ('odoo.addons.base.ir.ir_mail_server.'
+                   'IrMailServer.send_email')
 
 
 class TestMassMailing(TransactionCase):
@@ -33,9 +35,10 @@ class TestMassMailing(TransactionCase):
             'reply_to_mode': 'email',
         })
 
+    @mute_logger('odoo.addons.mail.models.mail_mail')
     def test_smtp_error(self):
         with mock.patch(mock_send_email) as mock_func:
-            mock_func.side_effect = Warning('Test error')
+            mock_func.side_effect = Warning('Mock test error')
             self.mailing.send_mail()
             for stat in self.mailing.statistics_ids:
                 if stat.mail_mail_id:
@@ -46,7 +49,8 @@ class TestMassMailing(TransactionCase):
                 for track in tracking:
                     self.assertEqual('error', track.state)
                     self.assertEqual('Warning', track.error_type)
-                    self.assertEqual('Test error', track.error_description)
+                    self.assertEqual('Mock test error',
+                                     track.error_description)
             self.assertTrue(self.contact_a.email_bounced)
 
     def test_tracking_email_link(self):
