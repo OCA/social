@@ -33,7 +33,7 @@ eamils again to all the recipients, you must duplicate mass mailing.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/9.0
+   :target: https://runbot.odoo-community.org/runbot/205/10.0
 
 
 Bug Tracker
@@ -58,6 +58,7 @@ Contributors
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
 * Vicent Cubells <vicent.cubells@tecnativa.com>
+* David Vidal <david.vidal@tecnativa.com>
 
 Maintainer
 ----------
