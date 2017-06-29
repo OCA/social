@@ -9,7 +9,7 @@ class MailNotification(models.Model):
     _inherit = "mail.notification"
 
     @api.model
-    def _get_signature_footer(self, user_id, res_model=None, res_id=None,
+    def get_signature_footer(self, user_id, res_model=None, res_id=None,
                               user_signature=True):
         """Generate signature footer only with the chosen parts.
 
