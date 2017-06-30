@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import mock
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 mock_send_email = ('openerp.addons.base.ir.ir_mail_server.'
                    'ir_mail_server.send_email')
