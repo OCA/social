@@ -10,7 +10,7 @@
 ##############################################################################
 import simplejson
 
-from openerp.http import JsonRequest, Root, Response
+from odoo.http import JsonRequest, Root, Response
 
 # Monkeypatch type of request rooter to use RESTJsonRequest
 old_get_request = Root.get_request

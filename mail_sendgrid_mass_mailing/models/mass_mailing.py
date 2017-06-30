@@ -9,9 +9,9 @@
 #
 ##############################################################################
 
-from openerp import api, models, fields, _
-from openerp.exceptions import Warning as UserError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, models, fields, _
+from odoo.exceptions import Warning as UserError
+from odoo.tools.safe_eval import safe_eval
 
 
 class MassMailing(models.Model):

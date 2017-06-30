@@ -9,7 +9,7 @@
 #
 ##############################################################################
 
-from openerp import models, api, tools
+from odoo import models, api, tools
 
 
 class TestMassMailing(models.TransientModel):

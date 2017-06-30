@@ -8,8 +8,8 @@
 #    The licence is in the file __openerp__.py
 #
 ##############################################################################
-from openerp import models, fields, api, exceptions, _
-from openerp.tools.config import config
+from odoo import models, fields, api, exceptions, _
+from odoo.tools.config import config
 
 import json
 import re

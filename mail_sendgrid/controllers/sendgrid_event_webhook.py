@@ -10,8 +10,8 @@
 ##############################################################################
 import logging
 
-from openerp import http
-from openerp.addons.mail_tracking.controllers.main import \
+from odoo import http
+from odoo.addons.mail_tracking.controllers.main import \
     MailTrackingController, _env_get
 
 _logger = logging.getLogger(__name__)
