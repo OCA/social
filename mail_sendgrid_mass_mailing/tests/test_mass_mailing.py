@@ -2,7 +2,7 @@
 # © 2017 Emanuel Cino - <ecino@compassion.ch>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import mock
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 mock_sendgrid_api_client = ('openerp.addons.mail_sendgrid.models.mail_mail'
                             '.SendGridAPIClient')

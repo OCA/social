@@ -1,15 +1,8 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2016 Compassion CH (http://www.compassion.ch)
-#    Releasing children from poverty in Jesus' name
-#    @author: Emanuel Cino
-#
-#    The licence is in the file __openerp__.py
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields
+from odoo import models, fields
 
 
 class LanguageTemplate(models.Model):

@@ -1,17 +1,10 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2016 Compassion CH (http://www.compassion.ch)
-#    Releasing children from poverty in Jesus' name
-#    @author: Emanuel Cino
-#
-#    The licence is in the file __openerp__.py
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, models, fields, _
-from openerp.exceptions import Warning as UserError
-from openerp.tools.safe_eval import safe_eval
+from odoo import api, models, fields, _
+from odoo.exceptions import Warning as UserError
+from odoo.tools.safe_eval import safe_eval
 
 
 class MassMailing(models.Model):
@@ -98,7 +91,7 @@ class MassMailing(models.Model):
         self.ensure_one()
         if self.email_template_id:
             # use E-mail Template
-            res_ids = self.get_recipients(self)
+            res_ids = self.get_recipients()
             if not res_ids:
                 raise UserError(_('Please select recipients.'))
             template = self.email_template_id

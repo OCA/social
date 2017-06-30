@@ -1,16 +1,9 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2015-2016 Compassion CH (http://www.compassion.ch)
-#    Releasing children from poverty in Jesus' name
-#    @author: Roman Zoller, Emanuel Cino <ecino@compassion.ch>
-#
-#    The licence is in the file __openerp__.py
-#
-##############################################################################
-from openerp import models, fields, api, exceptions, tools, _
-from openerp.tools.config import config
-from openerp.tools.safe_eval import safe_eval
+# -*- coding: utf-8 -*-
+# Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from odoo import models, fields, api, exceptions, tools, _
+from odoo.tools.config import config
+from odoo.tools.safe_eval import safe_eval
 
 import base64
 import logging
@@ -122,8 +115,7 @@ class OdooMail(models.Model):
         one. """
         api_key = config.get('sendgrid_api_key')
         if not api_key:
-            raise exceptions.Warning(
-                'ConfigError',
+            raise exceptions.UserError(
                 _('Missing sendgrid_api_key in conf file'))
 
         sg = SendGridAPIClient(apikey=api_key)
@@ -195,15 +187,16 @@ class OdooMail(models.Model):
         subject = self.subject and self.subject.encode(
             "utf_8") or "(No subject)"
         personalization.subject = subject
-        addresses = list()
+        addresses = set()
         if not test_address:
-            if self.email_to and self.email_to not in addresses:
-                personalization.add_to(Email(self.email_to))
-                addresses.append(self.email_to)
+            if self.email_to:
+                addresses = set(self.email_to.split(','))
+                for address in addresses:
+                    personalization.add_to(Email(address))
             for recipient in self.recipient_ids:
                 if recipient.email not in addresses:
                     personalization.add_to(Email(recipient.email))
-                    addresses.append(recipient.email)
+                    addresses.add(recipient.email)
             if self.email_cc and self.email_cc not in addresses:
                 personalization.add_cc(Email(self.email_cc))
         else:
