@@ -1,17 +1,10 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2016 Compassion CH (http://www.compassion.ch)
-#    Releasing children from poverty in Jesus' name
-#    @author: Emanuel Cino <ecino@compassion.ch>
-#
-#    The licence is in the file __openerp__.py
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
 
-from openerp import http
-from openerp.addons.mail_tracking.controllers.main import \
+from odoo import http
+from odoo.addons.mail_tracking.controllers.main import \
     MailTrackingController, _env_get
 
 _logger = logging.getLogger(__name__)

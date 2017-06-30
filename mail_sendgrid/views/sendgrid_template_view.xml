@@ -49,13 +49,11 @@
     <record model="ir.actions.server" id="update_sendgrid_templates">
         <field name="name">Update Sendgrid Templates</field>
         <field name="model_id" ref="model_sendgrid_template"/>
-        <field name="code">
-self.update(cr, uid, context=context)
+        <field name="code">object.update()
 action = {
     'name': 'Sendgrid templates',
     'type': 'ir.actions.act_window',
     'res_model': 'sendgrid.template',
-    'view_type': 'form',
     'view_mode': 'tree,form'
 }
         </field>
