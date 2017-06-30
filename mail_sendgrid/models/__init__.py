@@ -1,13 +1,6 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2015 Compassion CH (http://www.compassion.ch)
-#    Releasing children from poverty in Jesus' name
-#    @author: Roman Zoller
-#
-#    The licence is in the file __openerp__.py
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from . import mail_mail
 from . import substitution

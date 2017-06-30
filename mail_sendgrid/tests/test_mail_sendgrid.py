@@ -2,7 +2,7 @@
 # © 2017 Emanuel Cino - <ecino@compassion.ch>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import mock
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 mock_base_send = 'openerp.addons.mail.models.mail_mail.MailMail.send'
 mock_sendgrid_api_client = ('openerp.addons.mail_sendgrid.models.mail_mail'
@@ -75,7 +75,7 @@ class TestMailSendgrid(TransactionCase):
         self.request = FakeRequest(self.event)
 
     def create_email(self, vals=None):
-        mail_vals = self.mail_wizard.render_message(self.recipient.ids)[
+        mail_vals = self.mail_wizard.get_mail_values(self.recipient.ids)[
             self.recipient.id]
         mail_vals['recipient_ids'] = [(6, 0, self.recipient.ids)]
         if vals is not None:
@@ -93,7 +93,7 @@ class TestMailSendgrid(TransactionCase):
     def test_create_email(self):
         """ Test that Sendgrid template is pushed in e-mail. """
         self.mail_template.update_substitutions()
-        mail_values = self.mail_wizard.render_message(self.recipient.ids)[
+        mail_values = self.mail_wizard.get_mail_values(self.recipient.ids)[
             self.recipient.id]
         # Test Sendgrid HTML preview
         self.assertEqual(
