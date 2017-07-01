@@ -4,13 +4,14 @@
 # 
 # Translators:
 # Mario Gielissen <mario@openworx.nl>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-31 04:27+0000\n"
-"PO-Revision-Date: 2017-05-31 04:27+0000\n"
-"Last-Translator: Mario Gielissen <mario@openworx.nl>, 2017\n"
+"POT-Creation-Date: 2017-06-24 09:40+0000\n"
+"PO-Revision-Date: 2017-06-24 09:40+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -73,7 +74,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_display_name
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_mass_mailing_list_not_cross_unsubscriptable
@@ -132,9 +133,9 @@ msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_id
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id_2584
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id_2612
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread
@@ -168,7 +169,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription___last_update
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason___last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Laatst gewijzigd op"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_write_uid
