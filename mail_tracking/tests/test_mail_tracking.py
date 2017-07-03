@@ -151,6 +151,13 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(image, res.response[0])
         # Two events again because no tracking_email_id found for False
         self.assertEqual(2, len(tracking.tracking_event_ids))
+        # Click event on links should redirect
+        http.request.httprequest.url = \
+            'http://www.odoo.com/?url=http://www.google.com.ar'
+        res = controller.mail_tracking_click(db, tracking.id)
+        self.assertEqual('301', res.status)
+        self.assertEqual('http://www.google.com.ar', res.headers['Location'])
+        self.assertEqual(3, len(tracking.tracking_event_ids))
 
     def test_concurrent_open(self):
         mail, tracking = self.mail_send(self.recipient.email)

@@ -95,6 +95,7 @@ Contributors
 
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
+* Iván Todorovich <ivan.todorovich@gmail.com>
 
 Maintainer
 ----------
