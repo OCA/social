@@ -7,8 +7,11 @@ from openerp.tests.common import HttpCase
 
 
 class UICase(HttpCase):
+    _tour_run = "odoo.__DEBUG__.services['web_tour.tour'].run('%s')"
+    _tour_ready = "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready"
+
     def extract_url(self, mail, *args, **kwargs):
-        url = mail._get_unsubscribe_url(mail, self.email)
+        url = mail._get_unsubscribe_url(self.email)
         self.assertIn("&token=", url)
         self.assertTrue(url.startswith(self.domain))
         self.url = url.replace(self.domain, "", 1)
@@ -20,6 +23,7 @@ class UICase(HttpCase):
         self.mail_postprocess_patch = mock.patch(
             "openerp.addons.mass_mailing.models.mail_mail.MailMail."
             "_postprocess_sent_message",
+            autospec=True,
             side_effect=self.extract_url,
         )
         with self.tempenv() as env:
@@ -37,11 +41,7 @@ class UICase(HttpCase):
                     "contact_list_ids": [(6, 0, self.lists.ids)],
                     "reply_to_mode": "thread",
                 })
-                self.mailings[n].write(
-                    self.mailings[n].on_change_model_and_list(
-                        self.mailings[n].mailing_model,
-                        self.mailings[n].contact_list_ids.ids,
-                    )["value"])
+                self.mailings[n]._onchange_model_and_list()
                 # HACK https://github.com/odoo/odoo/pull/14429
                 self.mailings[n].body_html = """
                     <div>
@@ -86,13 +86,12 @@ class UICase(HttpCase):
         tour = "mass_mailing_custom_unsubscribe_tour_contact"
         self.phantom_js(
             url_path=self.url,
-            code=("odoo.__DEBUG__.services['web.Tour']"
-                  ".run('%s', 'test')") % tour,
-            ready="odoo.__DEBUG__.services['web.Tour'].tours.%s" % tour)
+            code=self._tour_run % tour,
+            ready=self._tour_ready % tour)
 
         # Check results from running tour
         with self.tempenv() as env:
-            self.assertFalse(self.contacts[0].opt_out)
+            self.assertTrue(self.contacts[0].opt_out)
             self.assertTrue(self.contacts[1].opt_out)
             self.assertFalse(self.contacts[2].opt_out)
             unsubscriptions = env["mail.unsubscription"].search([
@@ -130,9 +129,8 @@ class UICase(HttpCase):
         tour = "mass_mailing_custom_unsubscribe_tour_partner"
         self.phantom_js(
             url_path=self.url,
-            code=("odoo.__DEBUG__.services['web.Tour']"
-                  ".run('%s', 'test')") % tour,
-            ready="odoo.__DEBUG__.services['web.Tour'].tours.%s" % tour)
+            code=self._tour_run % tour,
+            ready=self._tour_ready % tour)
 
         # Check results from running tour
         with self.tempenv() as env:
