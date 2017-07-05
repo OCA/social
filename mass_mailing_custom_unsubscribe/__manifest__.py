@@ -5,7 +5,7 @@
     'name': "Customizable unsubscription process on mass mailing emails",
     "summary": "Know unsubscription reasons, track them",
     'category': 'Marketing',
-    'version': '9.0.2.0.0',
+    'version': '10.0.1.0.0',
     'depends': [
         'website_mass_mailing',
     ],
@@ -25,8 +25,7 @@
     'images': [
         'images/form.png',
     ],
-    'author': 'Antiun Ingeniería S.L., '
-              'Tecnativa,'
+    'author': 'Tecnativa,'
               'Odoo Community Association (OCA)',
     'website': 'https://www.tecnativa.com',
     'license': 'AGPL-3',
