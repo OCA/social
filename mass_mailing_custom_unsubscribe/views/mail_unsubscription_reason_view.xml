@@ -26,9 +26,9 @@
     <field name="model">mail.unsubscription.reason</field>
     <field name="arch" type="xml">
         <tree>
+            <field name="sequence" widget="handle"/>
             <field name="name"/>
             <field name="details_required"/>
-            <field name="sequence" invisible="True"/>
         </tree>
     </field>
 </record>
