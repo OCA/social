@@ -10,7 +10,7 @@ This addon extends the unsubscription form to let you:
 
 - Choose which mailing lists are not cross-unsubscriptable when unsubscribing
   from a different one.
-- Know why and when a contact as been unsubscribed from a mass mailing.
+- Know why and when a contact has been unsubscribed from a mass mailing.
 
 Configuration
 =============
@@ -21,7 +21,7 @@ Unsubscription Reasons
 You can customize what reasons will be displayed to your unsubscriptors when
 they are going to unsubscribe. To do it:
 
-#. Go to *Marketing > Configuration > Unsubscription Reasons*.
+#. Go to *Mass Mailing > Configuration > Unsubscription Reasons*.
 #. Create / edit / remove / sort as usual.
 #. If *Details required* is enabled, they will have to fill a text area to
    continue.
@@ -40,7 +40,7 @@ Once configured:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/9.0
+   :target: https://runbot.odoo-community.org/runbot/205/10.0
 
 Known issues / Roadmap
 ======================
@@ -48,7 +48,9 @@ Known issues / Roadmap
 * This module adds a security hash for mass mailing unsubscription URLs, which
   disables insecure URLs from mass mailing messages sent before its
   installation. This can be a problem, but anyway you'd get that problem in
-  Odoo 11.0, so at least this addon will be forward-compatible with it.
+  Odoo 11.0, where https://github.com/odoo/odoo/pull/12040 was merged, so at
+  least this addon will be forward-compatible with it. So, **this feature must
+  be removed from here when migrating to v11**.
 * This module replaces AJAX submission core implementation from the mailing
   list management form, because it is impossible to extend it. When
   https://github.com/odoo/odoo/pull/14386 gets merged (which upstreams most

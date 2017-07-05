@@ -4,26 +4,19 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
-# Akim Juillerat <akim.juillerat@camptocamp.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-20 02:49+0000\n"
-"PO-Revision-Date: 2017-06-20 02:49+0000\n"
-"Last-Translator: Akim Juillerat <akim.juillerat@camptocamp.com>, 2017\n"
+"POT-Creation-Date: 2018-02-26 01:46+0000\n"
+"PO-Revision-Date: 2018-02-26 01:46+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction
-msgid "Action Needed"
-msgstr "Aktion erforderlich"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
@@ -57,11 +50,6 @@ msgid "Date"
 msgstr "Datum"
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_last_post
-msgid "Date of the last message posted on the record."
-msgstr "Datum der letzten Meldung zu diesem Datensatz."
-
-#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_details
 msgid "Details"
 msgstr "Details"
@@ -87,26 +75,6 @@ msgstr "Zeige diese Liste nicht in anderen Abmeldungen"
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_email
 msgid "Email"
 msgstr "Email"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
-msgid "Email Thread"
-msgstr "Email-Thread"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_follower_ids
-msgid "Followers"
-msgstr "Follower"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Follower (Kanäle)"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_partner_ids
-msgid "Followers (Partners)"
-msgstr "Follower (Partner)"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
@@ -135,19 +103,9 @@ msgstr "Ich bin nicht interessiert"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_id
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id_2612
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id_2723
 msgid "ID"
 msgstr "ID"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread
-msgid "If checked new messages require your attention."
-msgstr "Wenn angehakt, erfordern neue Mitteilungen Ihre Aufmerksamkeit."
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction
-msgid "If checked, new messages require your attention."
-msgstr "Wenn angewählt, erfordern neue Meldungen Ihre Aufmerksamkeit"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_mass_mailing_list_not_cross_unsubscriptable
@@ -159,16 +117,6 @@ msgstr ""
 "Wenn Sie dieses Feld anwählen, wird diese Liste, bei der Frage \"Gibt es "
 "eine andere abzumeldende Liste?\" nicht gezeigt, wenn das Abo einer anderen "
 "Liste beendet wird."
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_is_follower
-msgid "Is Follower"
-msgstr "Ist Follower"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_last_post
-msgid "Last Message Date"
-msgstr "Datum letzte Nachricht"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription___last_update
@@ -215,21 +163,6 @@ msgid "Mass mailing from which he was unsubscribed."
 msgstr "Massenversand, aus dem abgemeldet wurde."
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_content
-msgid "Message Content"
-msgstr "Mitteilungsinhalt"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_content
-msgid "Message content, to be used only in searches"
-msgstr "Mitteilungsinhalt, nur zur Verwendung in Suche"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_ids
-msgid "Messages"
-msgstr "Meldungen"
-
-#. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Month"
 msgstr "Monat"
@@ -243,21 +176,6 @@ msgstr "Weitere Details darüber, warum abgemeldet wurde."
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_name
 msgid "Name"
 msgstr "Bezeichnung"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction_counter
-msgid "Number of Actions"
-msgstr "Anzahl Aktionen"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Anzahl Meldungen, die eine Aktion erfordern"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread_counter
-msgid "Number of unread messages"
-msgstr "Anzahl ungelesener Meldungen"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_other
@@ -297,16 +215,6 @@ msgid "Thank you!"
 msgstr "Vielen Dank!"
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread
-msgid "Unread Messages"
-msgstr "Ungelesene Nachrichten"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Zähler für ungelesene Meldungen"
-
-#. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
 msgid "Unsubscribe now"
 msgstr "Jetzt abmelden"
@@ -327,16 +235,6 @@ msgstr "Abmeldungsgründe"
 #: model:ir.ui.menu,name:mass_mailing_custom_unsubscribe.mail_unsubscription_menu
 msgid "Unsubscriptions"
 msgstr "Abmeldungen"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_website_message_ids
-msgid "Website Messages"
-msgstr "Webseiten-Mitteilungen"
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_website_message_ids
-msgid "Website communication history"
-msgstr "Webseiten-Kommunikationsverlauf"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_unsubscriber_id
@@ -365,6 +263,11 @@ msgstr ""
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:106
 #, python-format
 msgid "Your changes have not been saved, try again later."
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
+msgid "mail.unsubscription"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
