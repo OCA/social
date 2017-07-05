@@ -37,18 +37,17 @@ class MailMassMailing(models.Model):
             raise AccessDenied()
         return token
 
-    @api.model
-    def update_opt_out(self, mailing_id, email, res_ids, value):
+    def update_opt_out(self, email, res_ids, value):
         """Save unsubscription reason when opting out from mailing."""
-        mailing = self.browse(mailing_id)
+        self.ensure_one()
         if value and self.env.context.get("default_reason_id"):
             for res_id in res_ids:
                 # reason_id and details are expected from the context
                 self.env["mail.unsubscription"].create({
                     "email": email,
-                    "mass_mailing_id": mailing.id,
+                    "mass_mailing_id": self.id,
                     "unsubscriber_id": "%s,%d" % (
-                        mailing.mailing_model, int(res_id)),
+                        self.mailing_model, int(res_id)),
                 })
         return super(MailMassMailing, self).update_opt_out(
-            mailing_id, email, res_ids, value)
+            email, res_ids, value)

@@ -29,7 +29,7 @@ class CustomUnsubscribe(MassMailController):
             Security token for unsubscriptions.
         """
         reasons = request.env["mail.unsubscription.reason"].search([])
-        return request.website.render(
+        return request.render(
             "mass_mailing_custom_unsubscribe.reason_form",
             {
                 "email": email,
@@ -75,11 +75,11 @@ class CustomUnsubscribe(MassMailController):
             return self.reason_form(mailing, email, res_id, token)
         else:
             # Unsubscribe, saving reason and details by context
-            request.context.update({
-                "default_reason_id": reason_id,
-                "default_details": post.get("details") or False,
-            })
-            del request.env
+            request.context = dict(
+                request.context,
+                default_reason_id=reason_id,
+                default_details=post.get("details") or False,
+            )
             # You could get a DetailsRequiredError here, but only if HTML5
             # validation fails, which should not happen in modern browsers
             return super(CustomUnsubscribe, self).mailing(
@@ -91,8 +91,11 @@ class CustomUnsubscribe(MassMailController):
         """Store unsubscription reasons when unsubscribing from RPC."""
         # Update request context and reset environment
         if reason_id:
-            request.context["default_reason_id"] = int(reason_id)
-            request.context["default_details"] = details or False
+            request.context = dict(
+                request.context,
+                default_reason_id=int(reason_id),
+                default_details=details or False,
+            )
         # FIXME Remove token check in version where this is merged:
         # https://github.com/odoo/odoo/pull/14385
         mailing = request.env['mail.mass_mailing'].sudo().browse(mailing_id)
