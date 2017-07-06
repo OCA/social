@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<!-- Copyright 2016-2017 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
 
-<openerp>
-<data>
+<odoo>
 
-<template id="mailing_list_subscribe"
-          inherit_id="mass_mailing.mailing_list_subscribe">
+<template id="s_newsletter_subscribe_form"
+          inherit_id="website_mass_mailing.s_newsletter_subscribe_form">
     <xpath expr="//input[@class='js_subscribe_email form-control']"
            position="before">
         <input
@@ -16,5 +15,4 @@
     </xpath>
 </template>
 
-</data>
-</openerp>
+</odoo>

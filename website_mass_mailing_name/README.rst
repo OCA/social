@@ -1,6 +1,6 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
-   :alt: License: AGPL-3
+.. image:: https://img.shields.io/badge/licence-LGPL--3-blue.svg
+   :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
+   :alt: License: LGPL-3
 
 ===========================================
 Mass Mailing Subscription Snippet With Name
@@ -11,7 +11,7 @@ the contact name directly in the subscription snippet.
 
 If you want to get partners created automatically and linked to the contacts,
 you can additionally install the `mass_mailing_partner
-<https://www.odoo.com/apps/modules/8.0/mass_mailing_partner/>`_ module.
+<https://www.odoo.com/apps/modules/10.0/mass_mailing_partner/>`_ module.
 
 Usage
 =====
@@ -26,14 +26,7 @@ To use this module, you need to:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/186/8.0
-
-Known issues / Roadmap
-======================
-
-* If you use Firefox, you could hit https://github.com/odoo/odoo/issues/7722.
-  Just use Chromium to work with this snippet until you update to Odoo 9.0.
-* When migrating to v9, improve the tour test to check autofilling of inputs.
+   :target: https://runbot.odoo-community.org/runbot/186/10.0
 
 Bug Tracker
 ===========
