@@ -26,6 +26,11 @@ env:
 virtualenv:
   system_site_packages: true
 
+before_install:
+  - rvm install ruby --latest
+  - rvm use ruby --latest
+  - gem install compass bootstrap-sass
+
 install:
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
