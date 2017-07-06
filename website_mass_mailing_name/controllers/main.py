@@ -1,22 +1,28 @@
 # -*- coding: utf-8 -*-
-# © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+# Copyright 2016-2017 Jairo Llopis <jairo.llopis@tecnativa.com>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from openerp.addons.mass_mailing.controllers.main import MassMailController
-from openerp.http import request, route
+from odoo.addons.website_mass_mailing.controllers import main
+from odoo.http import request, route
 
 
-class MassMailingPartner(MassMailController):
+class MassMailController(main.MassMailController):
     @route()
     def is_subscriber(self, *args, **kwargs):
         """Get user name too."""
-        result = super(MassMailingPartner, self).is_subscriber(*args, **kwargs)
-        email = result.get("email") or ""
+        result = super(MassMailController, self).is_subscriber(*args, **kwargs)
         if request.website.user_id != request.env.user:
             name = request.env.user.name
         else:
-            name, email = (request.env["mail.mass_mailing.contact"]
-                           .get_name_email(email, context=request.context))
-        result["name"] = name
-        result["email"] = email
+            name = request.session.get("mass_mailing_name", "")
+        return dict(result, name=name)
+
+    @route()
+    def subscribe(self, list_id, email, **post):
+        """Store email with name in session."""
+        result = super(MassMailController, self).subscribe(
+            list_id, email, **post)
+        name, email = request.env['mail.mass_mailing.contact'].sudo() \
+            .get_name_email(email)
+        request.session["mass_mailing_name"] = name if name != email else ""
         return result
