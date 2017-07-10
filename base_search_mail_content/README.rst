@@ -17,7 +17,7 @@ associated, based on the feedback that the person responsible for the ticket
 maintains, including conversations with the person that raised the issue.
 
 A user may often want to find issues or tickets, based on the past
-conversations that were recorded, as much as he/she needs to search
+conversations that were recorded, as much as he or she needs to search
 in their mail for past conversations.
 
 This module will add dynamically a field 'message_content' to the search view of
@@ -30,9 +30,8 @@ Installation
 ============
 
 This module depends on the module 'base_search_fuzzy' to ensure that
-searches on emails are based on indexes. Please read carefully the install
-instructions:
-https://github.com/OCA/server-tools/blob/9.0/base_search_fuzzy/README.rst
+searches on emails are based on indexes. Please read carefully the
+`install instructions <https://github.com/OCA/server-tools/blob/10.0/base_search_fuzzy/README.rst>`_.
 
 This module installs by default the indexes that are required to
 perform the searches on mail messages.
@@ -40,12 +39,12 @@ perform the searches on mail messages.
 Usage
 =====
 
-Go to any model that contains a chatter (e.g. Partners, Leads, ...). Search
+Go to any model that contains a chatter (e.g. Contacts, ...). Search
 for content in field 'Message Content'.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/server-tools/9.0
+   :target: https://runbot.odoo-community.org/runbot/server-tools/10.0
 
 Bug Tracker
 ===========
@@ -70,7 +69,6 @@ Contributors
 * Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
 * Lois Rilo Antelo <lois.rilo@eficent.com>
 * Aaron Henriquez <ahenriquez@eficent.com>
-
 
 Maintainer
 ----------
