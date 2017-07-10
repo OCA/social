@@ -6,16 +6,15 @@
 
 {
     "name": "Base Search Mail Content",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "author": "Eficent,"
               "SerpentCS,"
               "Odoo Community Association (OCA)",
-    "website": "http://www.eficent.com",
+    "website": "https://github.com/OCA/social",
     "category": "Social",
     "data": ["data/trgm_index_data.xml",
              "views/trgm_index_view.xml"],
-    "depends": ["mail",
-                "base_search_fuzzy"],
+    "depends": ["mail", "base_search_fuzzy"],
     "license": "AGPL-3",
     'installable': True,
 }
