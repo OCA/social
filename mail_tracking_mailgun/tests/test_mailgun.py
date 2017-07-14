@@ -2,6 +2,7 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from odoo.tools import mute_logger
 from odoo.tests.common import TransactionCase
 
 
@@ -63,6 +64,8 @@ class TestMailgun(TransactionCase):
         self.env['ir.config_parameter'].set_param('mailgun.apikey', '')
         self.test_event_delivered()
 
+    @mute_logger('odoo.addons.mail_tracking_mailgun.models'
+                 '.mail_tracking_email')
     def test_bad_signature(self):
         self.event.update({
             'event': u'delivered',
@@ -72,6 +75,8 @@ class TestMailgun(TransactionCase):
             None, self.event, self.metadata)
         self.assertEqual('ERROR: Signature', response)
 
+    @mute_logger('odoo.addons.mail_tracking_mailgun.models'
+                 '.mail_tracking_email')
     def test_bad_event_type(self):
         self.event.update({
             'event': u'bad_event',
@@ -80,6 +85,8 @@ class TestMailgun(TransactionCase):
             None, self.event, self.metadata)
         self.assertEqual('ERROR: Event type not supported', response)
 
+    @mute_logger('odoo.addons.mail_tracking_mailgun.models'
+                 '.mail_tracking_email')
     def test_bad_db(self):
         self.event.update({
             'event': u'delivered',
@@ -102,6 +109,8 @@ class TestMailgun(TransactionCase):
             None, self.event, self.metadata)
         self.assertEqual('OK', response)
 
+    @mute_logger('odoo.addons.mail_tracking_mailgun.models'
+                 '.mail_tracking_email')
     def test_tracking_not_found(self):
         self.event.update({
             'event': u'delivered',
