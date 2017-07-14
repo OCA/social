@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import mock
+from odoo.tools import mute_logger
 import base64
 import time
 from odoo import http
@@ -222,6 +223,7 @@ class TestMailTracking(TransactionCase):
         )
         self.assertEqual(len(opens), 3)
 
+    @mute_logger('odoo.addons.mail.models.mail_mail')
     def test_smtp_error(self):
         with mock.patch(mock_send_email) as mock_func:
             mock_func.side_effect = Warning('Test error')
