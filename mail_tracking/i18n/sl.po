@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2017-05-17 01:02+0000\n"
+"POT-Creation-Date: 2017-07-22 00:51+0000\n"
+"PO-Revision-Date: 2017-07-22 00:51+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -134,7 +134,7 @@ msgstr "E-pošta"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_bounced
 #: model:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
 msgid "Email bounced"
-msgstr ""
+msgstr "E-pošta odbita"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
