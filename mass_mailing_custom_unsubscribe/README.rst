@@ -1,65 +1,71 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
-====================================================
-Customizable unsubscribe link on mass mailing emails
-====================================================
+==========================================================
+Customizable unsubscription process on mass mailing emails
+==========================================================
 
-With this module you can set a custom unsubscribe link append at bottom of mass
-mailing emails.
+This addon extends the unsubscription form to let you:
 
+- Choose which mailing lists are not cross-unsubscriptable when unsubscribing
+  from a different one.
+- Know why and when a contact has been unsubscribed from a mass mailing.
 
 Configuration
 =============
 
-To configure unsubscribe label go to Setting > Technical > Parameters > System parameters
-and add a 'mass_mailing.unsubscribe.label' parameter with html to set at bottom
-of mass emailing emails. Including '%(url)s' variable where unsubscribe link
+Unsubscription Reasons
+----------------------
 
-For example:
+You can customize what reasons will be displayed to your unsubscriptors when
+they are going to unsubscribe. To do it:
 
-.. code:: html
-
-  <small>You can unsubscribe <a href="%(url)s">here</a></small>
-
-
-Additionally, you can disable this link if you set this parameter to 'False'
-
-If this parameter (mass_mailing.unsubscribe.label) is not set (or set to '')
-default 'Click to unsubscribe' link will appear. This default text is
-translatable via Settings > Translations > Application Terms > Translated terms
-
+#. Go to *Mass Mailing > Configuration > Unsubscription Reasons*.
+#. Create / edit / remove / sort as usual.
+#. If *Details required* is enabled, they will have to fill a text area to
+   continue.
 
 Usage
 =====
 
+Once configured:
+
+#. Go to *Mass Mailing > Mailings > Mass Mailings > Create*.
+#. Edit your mass mailing at wish, but remember to add a snippet from
+   *Footers*, so people have an *Unsubscribe* link.
+#. Send it.
+#. If somebody gets unsubscribed, you will see logs about that under
+   *Mass Mailing > Mailings > Unsubscriptions*.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/8.0
-
+   :target: https://runbot.odoo-community.org/runbot/205/10.0
 
 Known issues / Roadmap
 ======================
 
-* This custom html is not translatable, so as a suggestion, you can define
-  the same text in several languages in several lines.
-
-For example:
-
-.. code:: html
-
-  <small>[EN] You can unsubscribe <a href="%(url)s">here</a></small><br/>
-  <small>[ES] Puedes darte de baja <a href="%(url)s">aquí</a></small>
-
+* This module adds a security hash for mass mailing unsubscription URLs, which
+  disables insecure URLs from mass mailing messages sent before its
+  installation. This can be a problem, but anyway you'd get that problem in
+  Odoo 11.0, where https://github.com/odoo/odoo/pull/12040 was merged, so at
+  least this addon will be forward-compatible with it. So, **this feature must
+  be removed from here when migrating to v11**.
+* This module replaces AJAX submission core implementation from the mailing
+  list management form, because it is impossible to extend it. When
+  https://github.com/odoo/odoo/pull/14386 gets merged (which upstreams most
+  needed changes), this addon will need a refactoring (mostly removing
+  duplicated functionality and depending on it instead of replacing it). In the
+  mean time, there is a little chance that this introduces some
+  incompatibilities with other addons that depend on ``website_mass_mailing``.
 
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
-In case of trouble, please check there if your issue has already been reported.
-If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/social/issues/new?body=module:%20mass_mailing_custom_unsubscribe%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
-
+Bugs are tracked on `GitHub Issues
+<https://github.com/OCA/social/issues>`_. In case of trouble, please
+check there if your issue has already been reported. If you spotted it first,
+help us smashing it by providing a detailed and welcomed feedback.
 
 Credits
 =======
@@ -67,8 +73,9 @@ Credits
 Contributors
 ------------
 
-* Rafael Blasco <rafabn@antiun.com>
-* Antonio Espinosa <antonioea@antiun.com>
+* Rafael Blasco <rafael.blasco@tecnativa.com>
+* Antonio Espinosa <antonio.espinosa@tecnativa.com>
+* Jairo Llopis <jairo.llopis@tecnativa.com>
 
 Maintainer
 ----------
@@ -83,4 +90,4 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.
