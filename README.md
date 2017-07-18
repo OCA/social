@@ -22,6 +22,7 @@ addon | version | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 10.0.1.0.0 | Define a domain from which followers can be selected
 [mail_tracking](mail_tracking/) | 10.0.1.0.0 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 10.0.1.0.0 | Mail tracking and Mailgun webhooks integration
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 10.0.1.0.0 | Know unsubscription reasons, track them
 
 
 Unported addons
@@ -29,7 +30,6 @@ Unported addons
 addon | version | summary
 --- | --- | ---
 [mail_compose_select_lang](mail_compose_select_lang/) | 8.0.1.0.0 (unported) | Select language in mail compose window
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 8.0.1.0.0 (unported) | Customizable unsubscribe link on mass mailing emails
 
 [//]: # (end addons)
 
