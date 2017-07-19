@@ -27,7 +27,7 @@ class FetchmailServer(models.Model):
         ]).mapped("model_id")
         # Exclude AbstractModel
         return [(m.model, m.name) for m in models
-                if getattr(self.env[m.model], "_auto")]
+                if m.model in self.env and getattr(self.env[m.model], "_auto")]
 
     # TODO New api on v10+
     # pylint: disable=old-api7-method-defined
