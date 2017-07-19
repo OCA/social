@@ -22,6 +22,7 @@ addon | version | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 10.0.1.0.0 | Define a domain from which followers can be selected
 [mail_tracking](mail_tracking/) | 10.0.1.0.0 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 10.0.1.0.0 | Mail tracking and Mailgun webhooks integration
+[mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 10.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 10.0.1.0.0 | Know unsubscription reasons, track them
 
 
