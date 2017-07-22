@@ -4,14 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
-# Hosni Hadj-Taher <inactive+hajhasni@transifex.com>, 2017
+# Quentin THEURET <odoo@kerpeo.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 04:04+0000\n"
-"PO-Revision-Date: 2017-03-18 04:04+0000\n"
-"Last-Translator: Hosni Hadj-Taher <inactive+hajhasni@transifex.com>, 2017\n"
+"POT-Creation-Date: 2017-07-22 09:45+0000\n"
+"PO-Revision-Date: 2017-07-22 09:45+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,7 +43,7 @@ msgstr "Score du courriel"
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
 msgid "Emails"
-msgstr ""
+msgstr "Courriels"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
@@ -53,28 +53,28 @@ msgstr "Événements"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email_mail_id_int
 msgid "Mail ID"
-msgstr ""
+msgstr "ID de l'envoi"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email_mail_stats_id
 msgid "Mail statistics"
-msgstr ""
+msgstr "Statistiques de l'envoi"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics_mail_tracking_id
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
 msgid "Mail tracking"
-msgstr ""
+msgstr "Suivi de l'envoi"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_email
 msgid "Mail tracking emails"
-msgstr ""
+msgstr "Courrier électronique de suivi"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_event
 msgid "Mail tracking events"
-msgstr ""
+msgstr "Événements de suivi du courrier"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
@@ -100,7 +100,7 @@ msgstr "Publipostage"
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "OS"
-msgstr ""
+msgstr "SE"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail

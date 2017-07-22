@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro Castro Silva <pedrocs@exo.pt>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 04:04+0000\n"
-"PO-Revision-Date: 2017-03-18 04:04+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-02 13:17+0000\n"
+"PO-Revision-Date: 2017-12-02 13:17+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,93 +27,93 @@ msgstr "País"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
 msgid "Email Statistics"
-msgstr ""
+msgstr "Estatísticas de Email"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mass_mailing_contact_email_bounced
 #: model:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
 msgid "Email bounced"
-msgstr ""
+msgstr "Email devolvido"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mass_mailing_contact_email_score
 msgid "Email score"
-msgstr ""
+msgstr "Pontuação do email"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
 msgid "Emails"
-msgstr ""
+msgstr "Emails"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email_mail_id_int
 msgid "Mail ID"
-msgstr ""
+msgstr "ID do Email"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email_mail_stats_id
 msgid "Mail statistics"
-msgstr ""
+msgstr "Estatísticas de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics_mail_tracking_id
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
 msgid "Mail tracking"
-msgstr ""
+msgstr "Rastreamento de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_email
 msgid "Mail tracking emails"
-msgstr ""
+msgstr "Emails rastreados"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_event
 msgid "Mail tracking events"
-msgstr ""
+msgstr "Eventos rastreados"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
 msgid "MailTracking email"
-msgstr ""
+msgstr "Email do MailTracking"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_event
 msgid "MailTracking event"
-msgstr ""
+msgstr "Evento do MailTracking"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
 msgid "Mass Mailing Contact"
-msgstr ""
+msgstr "Contacto do email em massa"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email_mass_mailing_id
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_event_mass_mailing_id
 msgid "Mass mailing"
-msgstr ""
+msgstr "Emails em massa"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "OS"
-msgstr ""
+msgstr "S.O."
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Mensagens a Enviar"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics_tracking_event_ids
 #: model:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "Tracking events"
-msgstr ""
+msgstr "Eventos de rastreamento"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "User agent"
-msgstr ""
+msgstr "Agente do utilizador"
