@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Quentin THEURET <odoo@kerpeo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2017-05-17 01:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-07-22 09:45+0000\n"
+"PO-Revision-Date: 2017-07-22 09:45+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,6 +32,15 @@ msgid ""
 " * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
 " * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
 msgstr ""
+"* Le statut 'Erreur' indique qu'il y a eu une erreur lors de la tentative d'envoi du courrier, par exemple, 'Pas de destinataire valide'\n"
+"* Le statut 'Envoyé' indique que le message a été envoyé avec succès via le serveur de courriel sortant (SMTP).\n"
+"* Le statut 'Délivré' indique que le message a été délivré avec succès au destinataire du serveur Mail Exchange (MX).\n"
+"* Le statut 'Ouvert' indique que le message a été ouvert ou cliqué par le destinataire.\n"
+"* Le statut 'Rejeté' indique que l'adresse du destinataire est en liste noire sur le serveur de courriels sortant (SMTP). Il est recommandé de supprimé cette adresse courriel.\n"
+"* Le statut 'Spam' indique que le serveur de courriels sortant (SMTP) considère ce message comme un spam.\n"
+"* Le statut 'Désinscrit' indique que le destinataire a demandé à se désinscrire de la liste depuis ce message.\n"
+"* Le statut 'Rebondi' indique que le message a rebondi sur le serveur Mail Exchange (MX) du destinataire.\n"
+"* Le statut 'Rebondi temporairement' indique que le message a rebondi temporairement sur le serveur Mail Exchange (MX) du destinataire.\n"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -103,7 +113,7 @@ msgstr "Déférer"
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 msgid "Deferred"
-msgstr ""
+msgstr "Reporté"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -134,7 +144,7 @@ msgstr "Courriel"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_bounced
 #: model:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
 msgid "Email bounced"
-msgstr ""
+msgstr "Email retourné"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
@@ -162,7 +172,7 @@ msgstr "Desciptif de l'erreur"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_details
 msgid "Error details"
-msgstr ""
+msgstr "Détails de l'erreur"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_type
@@ -190,7 +200,7 @@ msgstr "Regrouper par"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Hard bounce"
-msgstr ""
+msgstr "Rebond définitif"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_id
@@ -201,7 +211,7 @@ msgstr "ID"
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_mobile
@@ -286,7 +296,7 @@ msgstr "Mois"
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "OS"
-msgstr ""
+msgstr "SE"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -297,7 +307,7 @@ msgstr "Ouverte"
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Ouvert"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_os_family
@@ -367,12 +377,12 @@ msgstr "Envoyé"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Soft bounce"
-msgstr ""
+msgstr "Rebond temporaire"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Soft bounced"
-msgstr ""
+msgstr "Temporairement rebondi"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
@@ -405,7 +415,7 @@ msgstr "Heure"
 #: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:46
 #, python-format
 msgid "To:"
-msgstr ""
+msgstr "À :"
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
@@ -431,7 +441,7 @@ msgstr "Suivi du courriel: évènements"
 #: code:addons/mail_tracking/static/src/js/mail_tracking.js:32
 #, python-format
 msgid "Tracking partner"
-msgstr ""
+msgstr "Partenaire suivi"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
