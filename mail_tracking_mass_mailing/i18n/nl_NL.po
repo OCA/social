@@ -3,14 +3,15 @@
 # * mail_tracking_mass_mailing
 # 
 # Translators:
-# Mario Gielissen <mario@openworx.nl>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Peter Hageman <hageman.p@gmail.com>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-18 04:04+0000\n"
-"PO-Revision-Date: 2017-03-18 04:04+0000\n"
-"Last-Translator: Mario Gielissen <mario@openworx.nl>, 2017\n"
+"POT-Creation-Date: 2017-07-22 00:51+0000\n"
+"PO-Revision-Date: 2017-07-22 00:51+0000\n"
+"Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -99,12 +100,12 @@ msgstr ""
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Uitgaande Mails"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics_tracking_event_ids
