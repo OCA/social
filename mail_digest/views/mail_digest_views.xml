@@ -1,50 +1,58 @@
 <?xml version="1.0"?>
-<openerp>
-    <data>
+<odoo>
 
-        <record model="ir.ui.view" id="mail_digest_tree">
-            <field name="name">mail_digest mail.digest.tree</field>
-            <field name="model">mail.digest</field>
-            <field name="arch" type="xml">
-                <tree string="Mail digest">
-                    <field name="partner_id" />
-                    <field name="mail_id" />
-                    <field name="state" />
-                </tree>
-            </field>
-        </record>
+    <record model="ir.ui.view" id="mail_digest_tree">
+        <field name="name">mail_digest mail.digest.tree</field>
+        <field name="model">mail.digest</field>
+        <field name="arch" type="xml">
+            <tree string="Mail digest">
+                <field name="partner_id" />
+                <field name="mail_id" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
 
 
-        <record model="ir.ui.view" id="mail_digest_form">
-            <field name="name">mail_digest mail.digest.form</field>
-            <field name="model">mail.digest</field>
-            <field name="arch" type="xml">
-                <form string="Mail digest">
-                    <group name="main" col="4">
+    <record model="ir.ui.view" id="mail_digest_form">
+        <field name="name">mail_digest mail.digest.form</field>
+        <field name="model">mail.digest</field>
+        <field name="arch" type="xml">
+            <form string="Mail digest">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="action_create_email" icon="fa-envelope"
+                                string="Create email now"
+                                type="object" attrs="{'invisible': [('mail_id', '!=', False)]}" />
+                    </div>
+                    <group name="main" col="2">
                         <field name="name" />
                         <field name="partner_id" />
+                    </group>
+                    <group name="settings" col="2">
                         <field name="frequency" />
                         <field name="mail_id" />
                         <field name="state" />
+                        <field name="template_id" />
                     </group>
                     <group name="messages" string="Messages" col="4">
                         <field name="message_ids" nolabel="1" />
                     </group>
-                </form>
-            </field>
-        </record>
+                </sheet>
+            </form>
+        </field>
+    </record>
 
-        <record model="ir.actions.act_window" id="action_digest_all">
-            <field name="name">Digest</field>
-            <field name="res_model">mail.digest</field>
-            <field name="view_type">form</field>
-            <field name="view_mode">form,tree</field>
-            <field name="view_id" ref="mail_digest_tree" />
-        </record>
+    <record model="ir.actions.act_window" id="action_digest_all">
+        <field name="name">Digest</field>
+        <field name="res_model">mail.digest</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="mail_digest_tree" />
+    </record>
 
-        <menuitem id="menu_email_digest" parent="base.menu_email"
-                  action="action_digest_all"
-                  sequence="90"/>
+    <menuitem id="menu_email_digest" parent="base.menu_email"
+              action="action_digest_all"
+              sequence="90"/>
 
-    </data>
-</openerp>
+</odoo>

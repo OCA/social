@@ -25,7 +25,7 @@ The preference tab on user's form will look like:
 Behavior
 --------
 
-When a partner with digest mode on is notified with a message of type email or an email
+When a partner with digest mode on is notified with a message or an email
 all the messages are collected inside a `mail.digest` container.
 
 A daily cron and a weekly cron will take care of creating a single email per each digest,
@@ -41,6 +41,15 @@ Specifically:
 
 NOTE: under the hood the digest notification logic excludes followers to be notified,
 since you really want to notify only mail.digest's partner.
+
+
+Global settings
+---------------
+
+By default digest functionality is enabled for every message type ('email', 'comment', 'notification').
+You change this with the config param `mail_digest.enabled_message_types`
+whereas you can specify message types separated by comma.
+
 
 Known issues / Roadmap
 ======================

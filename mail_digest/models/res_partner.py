@@ -2,7 +2,7 @@
 # Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from openerp import models, fields, api, _
+from odoo import models, fields, api, _
 
 
 class ResPartner(models.Model):
@@ -62,6 +62,7 @@ class ResPartner(models.Model):
                 partner._compute_notify_subtypes(False)
 
     def _search_notify_subtype_ids_domain(self, operator, value, enabled):
+        """Build domain to search notification subtypes by partner settings."""
         if operator in ('in', 'not in') and \
                 not isinstance(value, (tuple, list)):
             value = [value, ]
@@ -84,7 +85,8 @@ class ResPartner(models.Model):
             operator, value, False)
 
     @api.multi
-    def _notify(self, message, force_send=False, user_signature=True):
+    def _notify(self, message,
+                force_send=False, send_after_commit=True, user_signature=True):
         """Override to delegate domain generation."""
         # notify_by_email
         email_domain = self._get_notify_by_email_domain(message)
@@ -93,7 +95,8 @@ class ResPartner(models.Model):
         # and you really want to find all ppl to be notified
         partners = self.sudo().search(email_domain)
         partners._notify_by_email(
-            message, force_send=force_send, user_signature=user_signature)
+            message, force_send=force_send,
+            send_after_commit=send_after_commit, user_signature=user_signature)
         # notify_by_digest
         digest_domain = self._get_notify_by_email_domain(
             message, digest=True)
@@ -104,10 +107,22 @@ class ResPartner(models.Model):
         self._notify_by_chat(message)
         return True
 
+    def _digest_enabled_message_types(self):
+        """Return a list of enabled message types for digest.
+
+        In `_notify_by_digest` we check if digest mode is enabled
+        for given message's type. Here we retrieve global settings
+        from a config param that you can customize to second your needs.
+        """
+        param = self.env['ir.config_parameter'].sudo().get_param(
+            'mail_digest.enabled_message_types', default='')
+        return [x.strip() for x in param.split(',') if x.strip()]
+
     @api.multi
     def _notify_by_digest(self, message):
         message_sudo = message.sudo()
-        if not message_sudo.message_type == 'email':
+        if message_sudo.message_type \
+                not in self._digest_enabled_message_types():
             return
         self.env['mail.digest'].sudo().create_or_update(self, message)
 
@@ -158,6 +173,11 @@ class ResPartner(models.Model):
 
     @api.multi
     def _notify_update_subtype(self, subtype, enable):
+        """Update notification settings by subtype.
+
+        :param subtype: `mail.message.subtype` to enable or disable
+        :param enable: boolean to enable or disable given subtype
+        """
         self.ensure_one()
         exists = self.env['partner.notification.conf'].search([
             ('subtype_id', '=', subtype.id),
@@ -173,10 +193,12 @@ class ResPartner(models.Model):
 
     @api.multi
     def _notify_enable_subtype(self, subtype):
+        """Enable given subtype."""
         self._notify_update_subtype(subtype, True)
 
     @api.multi
     def _notify_disable_subtype(self, subtype):
+        """Disable given subtype."""
         self._notify_update_subtype(subtype, False)
 
 
@@ -204,5 +226,6 @@ class PartnerNotificationConf(models.Model):
         'Notification type',
         ondelete='cascade',
         required=True,
+        index=True,
     )
     enabled = fields.Boolean(default=True, index=True)
