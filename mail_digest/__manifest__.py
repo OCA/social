@@ -5,7 +5,7 @@
 {
     'name': 'Mail digest',
     'summary': """Basic digest mail handling.""",
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Camptocamp,Odoo Community Association (OCA)',
     'depends': [
@@ -13,7 +13,9 @@
     ],
     'data': [
         'data/ir_cron.xml',
+        'data/config_param.xml',
         'security/ir.model.access.csv',
+        'security/record_rules.xml',
         'views/mail_digest_views.xml',
         'views/partner_views.xml',
         'views/user_views.xml',

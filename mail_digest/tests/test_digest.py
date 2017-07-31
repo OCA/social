@@ -2,7 +2,8 @@
 # Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
+from odoo import exceptions
 
 
 class DigestCase(TransactionCase):
@@ -115,6 +116,36 @@ class DigestCase(TransactionCase):
         self.assertTrue(self.digest_model._get_by_partner(self.partner1))
         self.assertFalse(self.digest_model._get_by_partner(self.partner2))
 
+    def test_global_conf(self):
+        for k in ('email', 'comment', 'notification'):
+            self.assertIn(k, self.partner1._digest_enabled_message_types())
+        self.env['ir.config_parameter'].set_param(
+            'mail_digest.enabled_message_types',
+            'email,notification'
+        )
+        for k in ('email', 'notification'):
+            self.assertIn(k, self.partner1._digest_enabled_message_types())
+        self.assertNotIn(
+            'comment', self.partner1._digest_enabled_message_types())
+
+    def test_notify_partner_digest_global_disabled(self):
+        # change global conf
+        self.env['ir.config_parameter'].set_param(
+            'mail_digest.enabled_message_types',
+            'email,comment'
+        )
+        message = self.message_model.create({
+            'body': 'My Body 1',
+            'subtype_id': self.subtype1.id,
+            # globally disabled type
+            'message_type': 'notification',
+        })
+        self.partner1.notify_email = 'digest'
+        # notify partner
+        self.partner1._notify(message)
+        # we should not find any digest
+        self.assertFalse(self.digest_model._get_by_partner(self.partner1))
+
     def _create_for_partner(self, partner):
         messages = {}
         for type_id in (self.subtype1.id, self.subtype2.id):
@@ -145,3 +176,17 @@ class DigestCase(TransactionCase):
 
         self.assertEqual(self.env.user.company_id.email, values['email_from'])
         self.assertEqual([(4, self.partner1.id)], values['recipient_ids'])
+
+    def test_digest_template(self):
+        default = self.env.ref('mail_digest.default_digest_tmpl')
+        dig = self._create_for_partner(self.partner1)
+        # check default
+        self.assertEqual(dig.template_id, default)
+        self.assertTrue(dig._get_email_values())
+        # drop template
+        dig.template_id = False
+        # pass a custom one: ok
+        self.assertTrue(dig._get_email_values(template=default))
+        # raise error if no template found
+        with self.assertRaises(exceptions.UserError):
+            dig._get_email_values()

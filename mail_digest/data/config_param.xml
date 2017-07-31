@@ -1,0 +1,9 @@
+<odoo>
+    <data noupdate="1">
+        <record id="mail_digest_enabled_message_types" model="ir.config_parameter">
+            <field name="key">mail_digest.enabled_message_types</field>
+            <!-- enabled by default for each message type -->
+            <field name="value">email,notification,comment</field>
+        </record>
+    </data>
+</odoo>

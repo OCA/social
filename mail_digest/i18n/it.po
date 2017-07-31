@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_digest
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Giacomo <giacomo.spettoli@gmail.com>, 2017
@@ -10,15 +10,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-20 02:49+0000\n"
-"PO-Revision-Date: 2017-06-20 02:49+0000\n"
+"POT-Creation-Date: 2017-08-01 08:16+0000\n"
+"PO-Revision-Date: 2017-08-01 10:20+0200\n"
 "Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: it\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.9\n"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_uid
@@ -35,13 +36,13 @@ msgstr "Creato il"
 #. module: mail_digest
 #: selection:res.partner,notify_frequency:0
 msgid "Daily"
-msgstr ""
+msgstr "Giornaliera"
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:112
+#: code:addons/mail_digest/models/mail_digest.py:148
 #, python-format
 msgid "Daily update"
-msgstr ""
+msgstr "Aggiornamento giornaliero"
 
 #. module: mail_digest
 #: code:addons/mail_digest/models/res_partner.py:11
@@ -49,13 +50,19 @@ msgstr ""
 #: model:ir.ui.menu,name:mail_digest.menu_email_digest
 #, python-format
 msgid "Digest"
-msgstr ""
+msgstr "Digest"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_display_name
 #: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_display_name
 msgid "Display Name"
 msgstr "Nome da visualizzare"
+
+#. module: mail_digest
+#: model:ir.ui.view,arch_db:mail_digest.view_users_form_mail
+#: model:ir.ui.view,arch_db:mail_digest.view_users_form_simple_modif_mail
+msgid "Enable/disable notifications by type"
+msgstr "Abilita/disabilita notifiche per tipo"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_enabled
@@ -65,13 +72,14 @@ msgstr "Attiva"
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_frequency
 #: model:ir.model.fields,field_description:mail_digest.field_res_partner_notify_frequency
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_notify_frequency
 msgid "Frequency"
-msgstr ""
+msgstr "Frequenza"
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.default_digest_tmpl
 msgid "Hello,"
-msgstr ""
+msgstr "Ciao,"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_id
@@ -100,14 +108,14 @@ msgstr "Ultimo aggiornamento il"
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_mail_id
 msgid "Mail"
-msgstr ""
+msgstr "Mail"
 
 #. module: mail_digest
 #: model:ir.model,name:mail_digest.model_mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_tree
 msgid "Mail digest"
-msgstr ""
+msgstr "Mail digest"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_message_ids
@@ -123,15 +131,16 @@ msgstr "Nome"
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.notification_form
 msgid "Notification"
-msgstr ""
+msgstr "Notifica"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_subtype_id
 msgid "Notification type"
-msgstr ""
+msgstr "Tipo notifica"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_partner_notify_conf_ids
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_notify_conf_ids
 #: model:ir.ui.view,arch_db:mail_digest.notification_tree
 msgid "Notifications"
 msgstr "Notifiche"
@@ -145,18 +154,25 @@ msgstr "Partner"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_partner_disabled_notify_subtype_ids
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_disabled_notify_subtype_ids
 msgid "Partner disabled subtypes"
-msgstr ""
+msgstr "Tipi notifica disabilitati"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_partner_enabled_notify_subtype_ids
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_enabled_notify_subtype_ids
 msgid "Partner enabled subtypes"
-msgstr ""
+msgstr "Tipi notifica abilitati"
 
 #. module: mail_digest
 #: model:ir.model,name:mail_digest.model_partner_notification_conf
 msgid "Partner notification configuration"
-msgstr ""
+msgstr "Configurazione notifiche partner"
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_template_id
+msgid "Qweb mail template"
+msgstr "Qweb mail template"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_state
@@ -166,15 +182,21 @@ msgstr "Stato"
 #. module: mail_digest
 #: selection:res.partner,notify_frequency:0
 msgid "Weekly"
-msgstr ""
+msgstr "Settimanale"
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:114
+#: code:addons/mail_digest/models/mail_digest.py:150
 #, python-format
 msgid "Weekly update"
-msgstr ""
+msgstr "Aggiornamento settimanale"
 
 #. module: mail_digest
 #: sql_constraint:partner.notification.conf:0
 msgid "You can have only one configuration per subtype!"
-msgstr ""
+msgstr "Puoi avere solo una configurazione per tipo!"
+
+#. module: mail_digest
+#: code:addons/mail_digest/models/mail_digest.py:173
+#, python-format
+msgid "You must pass a template or set one on the digest record."
+msgstr "É necessario passare un template or impostarne uno sul digest."

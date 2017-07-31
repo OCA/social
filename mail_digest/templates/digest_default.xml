@@ -4,12 +4,8 @@
         <html>
             <body>
                 <img style="float: right" t-attf-src="data:image;base64,{{env.user.company_id.logo}}" />
-                <!-- if some template calling us sets this variable,
-                     we print a h1 tag /-->
                 <h1 t-if="email_heading"><t t-raw="email_heading" /></h1>
                 <t t-raw="0" />
-                <!-- use some standard footer if the user doesn't have
-                     a signature /-->
                 <footer t-if="not email_use_user_signature">
                     <p>
                         <a t-att-href="env.user.company_id.website">

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<odoo>
+
+  <record model="ir.rule" id="partner_notification_conf_owner">
+    <field name="name">Partners can edit their own notification settings</field>
+    <field name="model_id" ref="model_partner_notification_conf"/>
+    <field name="perm_read" eval="False"/>
+    <field name="perm_create" eval="False"/>
+    <field name="perm_write" eval="True"/>
+    <field name="perm_unlink" eval="True"/>
+    <field name="domain_force">['|',('partner_id', '=', user.partner_id.id), ('create_uid', '=', user.id)]</field>
+  </record>
+
+</odoo>
