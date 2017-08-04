@@ -2,8 +2,8 @@
 # Copyright 2016 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.tests import common
-from openerp import exceptions
+from odoo.tests import common
+from odoo import exceptions
 from ..hooks import pre_init_hook
 
 
