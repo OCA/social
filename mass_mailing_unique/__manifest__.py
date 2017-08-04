@@ -6,11 +6,10 @@
 {
     "name": "Unique records for mass mailing",
     "summary": "Avoids duplicate mailing lists and contacts",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "category": "Marketing",
     "website": "https://tecnativa.com",
-    "author": "Grupo ESOC Ingeniería de Servicios,"
-              "Tecnativa, "
+    "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
