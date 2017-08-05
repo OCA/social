@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Quentin THEURET <odoo@kerpeo.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 00:51+0000\n"
-"PO-Revision-Date: 2017-07-22 00:51+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-07-22 09:45+0000\n"
+"PO-Revision-Date: 2017-07-22 09:45+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,12 +25,16 @@ msgid ""
 "Before unsubscribing, could you please tell us why do you want to "
 "unsubscribe?"
 msgstr ""
+"Avant de se désinscrire, merci de nous indiquer les raisons de votre "
+"désinscription ?"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_details_required
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_details_required
 msgid "Check to ask for more details when this reason is selected."
 msgstr ""
+"Vérifier la demande pour avoir plus de détails quand cette raison est "
+"sélectionnée."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_create_uid
@@ -83,7 +88,7 @@ msgstr "Grouper par"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
 msgid "I am unsubscribing because..."
-msgstr ""
+msgstr "Je me désinscris car…"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
@@ -113,6 +118,9 @@ msgid ""
 "other mailing list, in the section: 'Is there any other mailing list you "
 "want to leave?'"
 msgstr ""
+"Si vous sélectionner ce champ, cette liste ne pourra plus être vue lors de "
+"la désinscription depuis une autre liste, dans la section : « Y a-t-il "
+"d'autres listes de diffusion que vous souhaitez quitter ? »"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription___last_update
@@ -140,7 +148,7 @@ msgstr "Liste de diffusion"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
 msgid "Mailing Unsubscription"
-msgstr ""
+msgstr "Désinscription de la liste"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
@@ -187,7 +195,7 @@ msgstr "Courriels sortants"
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:56
 #, python-format
 msgid "Please provide details on why you are unsubscribing."
-msgstr ""
+msgstr "Merci de fournir des détails sur les raisons de votre désinscription."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_sequence
@@ -240,7 +248,7 @@ msgstr "Qui s'était désabonné"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_id
 msgid "Why the unsubscription was made."
-msgstr ""
+msgstr "Pourquoi la désinscription a été effectuée."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
@@ -252,7 +260,7 @@ msgstr "Année"
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:91
 #, python-format
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Vos modifications ont bien été enregistrées."
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
@@ -260,6 +268,7 @@ msgstr ""
 #, python-format
 msgid "Your changes have not been saved, try again later."
 msgstr ""
+"Vos modifications n'ont pas été enregistrées, veuillez réessayer plus tard."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
