@@ -12,6 +12,8 @@
                 ]]>
             </field>
             <field name="email_from">${object.message_id.email_from|safe}</field>
+            <field name="email_cc">${object.message_id.email_cc|safe}</field>
+            <field name="reply_to">${object.message_id.reply_to|safe}</field>
             <field name="partner_to">${object.partner_id.ids|join(',')}</field>
         </record>
     </data>
