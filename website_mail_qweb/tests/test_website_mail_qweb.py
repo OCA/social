@@ -18,3 +18,13 @@ class TestWebsiteMailQweb(HttpCase):
         record = UnquoteRecordset(self.env['res.partner'].new(), 'object')
         self.assertEqual(record.name, 'object.name')
         self.assertEqual(record.parent_id.name, 'object.parent_id.name')
+        self.assertEqual(record.id, 42)
+        self.assertEqual(
+            record.create_date,
+            self.env['res.partner']._fields['create_date'].null(self.env)
+        )
+        self.assertEqual(
+            record[:1]['create_date'],
+            self.env['res.partner']._fields['create_date'].null(self.env)
+        )
+        self.assertEqual(record._fields, self.env['res.partner']._fields)
