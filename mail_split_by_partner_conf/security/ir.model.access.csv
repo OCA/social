@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_split_by_partner_conf_mail_split_by_partner_conf,mail_split_by_partner_conf.mail_split_by_partner_conf,model_mail_split_by_partner_conf_mail_split_by_partner_conf,,1,0,0,0

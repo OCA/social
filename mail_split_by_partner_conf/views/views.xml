@@ -1,0 +1,59 @@
+<odoo>
+  <data>
+    <!-- explicit list view definition -->
+    <!--
+    <record model="ir.ui.view" id="mail_split_by_partner_conf.list">
+      <field name="name">mail_split_by_partner_conf list</field>
+      <field name="model">mail_split_by_partner_conf.mail_split_by_partner_conf</field>
+      <field name="arch" type="xml">
+        <tree>
+          <field name="name"/>
+          <field name="value"/>
+          <field name="value2"/>
+        </tree>
+      </field>
+    </record>
+    -->
+
+    <!-- actions opening views on models -->
+    <!--
+    <record model="ir.actions.act_window" id="mail_split_by_partner_conf.action_window">
+      <field name="name">mail_split_by_partner_conf window</field>
+      <field name="res_model">mail_split_by_partner_conf.mail_split_by_partner_conf</field>
+      <field name="view_mode">tree,form</field>
+    </record>
+    -->
+
+    <!-- server action to the one above -->
+    <!--
+    <record model="ir.actions.server" id="mail_split_by_partner_conf.action_server">
+      <field name="name">mail_split_by_partner_conf server</field>
+      <field name="model_id" ref="model_mail_split_by_partner_conf_mail_split_by_partner_conf"/>
+      <field name="code">
+        action = {
+          "type": "ir.actions.act_window",
+          "view_mode": "tree,form",
+          "res_model": self._name,
+        }
+      </field>
+    </record>
+    -->
+
+    <!-- Top menu item -->
+    <!--
+    <menuitem name="mail_split_by_partner_conf" id="mail_split_by_partner_conf.menu_root"/>
+    -->
+    <!-- menu categories -->
+    <!--
+    <menuitem name="Menu 1" id="mail_split_by_partner_conf.menu_1" parent="mail_split_by_partner_conf.menu_root"/>
+    <menuitem name="Menu 2" id="mail_split_by_partner_conf.menu_2" parent="mail_split_by_partner_conf.menu_root"/>
+    -->
+    <!-- actions -->
+    <!--
+    <menuitem name="List" id="mail_split_by_partner_conf.menu_1_list" parent="mail_split_by_partner_conf.menu_1"
+              action="mail_split_by_partner_conf.action_window"/>
+    <menuitem name="Server to list" id="mail_split_by_partner_conf" parent="mail_split_by_partner_conf.menu_2"
+              action="mail_split_by_partner_conf.action_server"/>
+    -->
+  </data>
+</odoo>
