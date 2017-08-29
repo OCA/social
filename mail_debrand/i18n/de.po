@@ -27,4 +27,4 @@ msgstr "Benachrichtigungen"
 #: code:addons/mail_debrand/models/mail.py:51
 #, python-format
 msgid "Sent by %s"
-msgstr "Gesendet von %s"
+msgstr "Gesendet durch %s"
