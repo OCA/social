@@ -19,17 +19,20 @@
     'category': 'Uncategorized',
     'version': '0.1',
 
-    # any module necessary for this one to work correctly
-    'depends': ['base'],
+    # any module necessary for this one to work correctlyModel 'mail.mail' does not exist in registry.
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
         # 'security/ir.model.access.csv',
-        'views/views.xml',
-        'views/templates.xml',
+        'views/mail_mail_view.xml',
+        'views/mail_template_view.xml',
+        'data/ir_config_parameter.xml',
     ],
     # only loaded in demonstration mode
     'demo': [
         'demo/demo.xml',
     ],
+    "application": False,
+    'installable': True,
 }

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_email_template_form">
+        <field name="name">Email Template Form with split emails</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form"/>
+        <field name="arch" type="xml">
+            <field name="auto_delete" position="after">
+                <field name="split_mail_by_recipients"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
