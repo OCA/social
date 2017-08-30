@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
-    "name": "Message Auto Subscribe Notify Force Send",
+    "name": "Mail Auto Follower Notify",
     "summary": "This module extends the functionality of mail by sending an "
                "email notification to new followers that are system users",
     "author": "Eficent, "

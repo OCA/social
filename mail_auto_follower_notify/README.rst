@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-========================================
-Message Auto Subscribe Notify Force Send
-========================================
+=========================
+Mail Auto Follower Notify
+=========================
 
 With this module users assigned to leads, tasks, issues... will receive an
 automatic notification in their email address containing the last discussion
