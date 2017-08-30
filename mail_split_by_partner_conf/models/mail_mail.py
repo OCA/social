@@ -17,9 +17,9 @@ class MailMail(models.Model):
     split_mail_by_recipients = fields.Selection([
         ('split', 'One mail for each recipient'),
         ('merge', 'One mail for all recipients'),
-        ('project', 'Project Default')],
+        ('default', 'Project Default')],
         string='Split mail by recipient partner',
-        default='split',
+        default='default',
         help='',
     )
 
@@ -35,6 +35,7 @@ class MailMail(models.Model):
                 email_to.append(formataddr((partner.name, partner.email)))
         else:
             email_to = tools.email_split_and_format(self.email_to)
+        print 150 * '~' + '\n', email_to, '\n' + 150 * '~'
         return email_to
 
     @api.multi
@@ -106,7 +107,7 @@ class MailMail(models.Model):
                         or mail.split_mail_by_recipients == 'merge':
                     if mail.email_to or mail.recipient_ids:
                         email_list.append(mail.send_get_email_dict(
-                                partner=mail.recipient_ids))
+                            partner=mail.recipient_ids))
 
                 if mail.split_mail_by_recipients == 'default' \
                         and default == 'split' \
@@ -116,7 +117,6 @@ class MailMail(models.Model):
                     for partner in mail.recipient_ids:
                         email_list.append(
                             mail.send_get_email_dict(partner=partner))
-
 
                 # headers
                 headers = {}
