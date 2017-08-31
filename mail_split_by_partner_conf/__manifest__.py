@@ -1,38 +1,28 @@
 # -*- coding: utf-8 -*-
+# © 2017 Phuc.nt
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
-    'name': "mail_split_by_partner_conf",
-
-    'summary': """
-        Short (1 phrase/line) summary of the module's purpose, used as
-        subtitle on modules listing or apps.openerp.com""",
-
+    'name': "Mail split by partner",
+    "version": "10.0.1.0.0",
+    "author": "Phuc NT, Odoo Community Association (OCA)",
+    "license": "AGPL-3",
+    "category": "Marketing",
+    "website": "https://odoo-community.org/",
+    'summary': "Split or merge recipients when send mail.",
     'description': """
-        Long description of module's purpose
+        Configuring only one email should be sent to all recipients (convenient to know who
+         else has received the email) or split recipients to send one mail for each person. 
     """,
-
-    'author': "My Company",
-    'website': "http://www.yourcompany.com",
-
-    # Categories can be used to filter modules in modules listing
-    # Check https://github.com/odoo/odoo/blob/master/odoo/addons/base/module/module_data.xml
-    # for the full list
-    'category': 'Uncategorized',
-    'version': '0.1',
-
-    # any module necessary for this one to work correctlyModel 'mail.mail' does not exist in registry.
-    'depends': ['base', 'mail'],
-
-    # always loaded
+    'depends': [
+        'mail',
+    ],
+    'demo': [
+        'demo/demo.xml',
+    ],
     'data': [
-        # 'security/ir.model.access.csv',
         'views/mail_mail_view.xml',
         'views/mail_template_view.xml',
         'data/ir_config_parameter.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
-    "application": False,
     'installable': True,
 }
