@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-24 09:40+0000\n"
-"PO-Revision-Date: 2017-06-24 09:40+0000\n"
+"POT-Creation-Date: 2017-07-20 07:47+0000\n"
+"PO-Revision-Date: 2017-07-20 07:47+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -79,13 +79,13 @@ msgstr "Land"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
@@ -217,13 +217,13 @@ msgstr "Laatst gewijzigd op"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
