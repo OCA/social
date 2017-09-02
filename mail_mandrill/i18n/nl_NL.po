@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-20 08:42+0000\n"
-"PO-Revision-Date: 2017-06-30 08:53+0000\n"
+"POT-Creation-Date: 2017-08-19 10:09+0000\n"
+"PO-Revision-Date: 2017-08-29 08:01+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-social-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -75,13 +75,13 @@ msgstr ""
 #: field:mail.mandrill.event,create_uid:0
 #: field:mail.mandrill.message,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_date:0
 #: field:mail.mandrill.message,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
@@ -153,13 +153,13 @@ msgstr "Laatst gewijzigd op"
 #: field:mail.mandrill.event,write_uid:0
 #: field:mail.mandrill.message,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,write_date:0
 #: field:mail.mandrill.message,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,timestamp:0
