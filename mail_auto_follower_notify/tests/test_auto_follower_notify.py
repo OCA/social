@@ -13,11 +13,11 @@ class TestAutoFollowerNotify(TransactionCase):
             'name': 'Test Record',
         })
         self.user = self.env['res.users'].create({
-             'name': 'Test user',
-             'login': 'test_login',
-             'password': 'demo',
-             'email': 'test@yourcompany.com',
-            })
+            'name': 'Test user',
+            'login': 'test_login',
+            'password': 'demo',
+            'email': 'test@yourcompany.com',
+        })
 
     @at_install(False)
     @post_install(True)
