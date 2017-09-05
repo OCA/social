@@ -11,7 +11,7 @@
               "Odoo Community Association (OCA)",
     "website": "https://odoo-community.org/",
     "category": "Mail",
-    "depends": ["mail"],
+    "depends": ["mail", "base_patch_models_mixin"],
     "license": "AGPL-3",
     'installable': True,
     'application': False,
