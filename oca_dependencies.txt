@@ -1,2 +1,3 @@
 partner-contact
 server-tools
+server-tools-eficent https://github.com/eficent/server-tools 9.0-add-base_patch_models_mixin
