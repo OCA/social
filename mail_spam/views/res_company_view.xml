@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright 2017 LasLabs Inc.
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+-->
+
+<odoo>
+    <record id="view_company_form" model="ir.ui.view">
+        <field name="name">Company Form - SPAM Settings</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='website']" position="after">
+                <field name="pyzor_server_ids"
+                       widget="many2many_tags"
+                       />
+                <field name="pyzor_account_ids"
+                       widget="many2many_tags"
+                       domain="[('server_id', 'in', 'pyzor_server_ids')]"
+                       nocreate="1"
+                       attrs="{'invisible': [('pyzor_server_ids', '=', False)]}"
+                       />
+            </xpath>
+        </field>
+    </record>
+</odoo>
