@@ -21,6 +21,7 @@
     ],
     'data': [
         'data/pyzor_server_data.xml',
+        'templates/assets.xml',
         'views/res_company_view.xml',
     ],
     'qweb': [

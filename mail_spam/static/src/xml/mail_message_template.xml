@@ -8,7 +8,7 @@
 <templates>
     <t t-extend="mail.ChatThread.Message">
         <t t-jquery="div[t-att-data-message-id]" t-operation="attributes">
-            <attribute name="t-att-class">'o_thread_message' + (message.expanded ? ' o_message_expanded '  : ' ') + (message.is_selected ? 'o_thread_selected_message' : ' ') + message.is_spam</attribute>
+            <attribute name="t-att-class">'o_thread_message' + (message.expanded ? ' o_message_expanded '  : ' ') + (message.is_selected ? 'o_thread_selected_message' : ' ') + (message.is_spam ? 'hidden' : '')</attribute>
         </t>
     </t>
 </templates>
