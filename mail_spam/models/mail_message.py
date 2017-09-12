@@ -11,14 +11,15 @@ class MailMessage(models.Model):
     _inherit = 'mail.message'
 
     is_spam = fields.Boolean(
-        index=True,
         compute='_compute_is_spam',
         inverse='_inverse_is_spam',
+        search='_search_is_spam',
         help='Check this to mark the message as SPAM. Uncheck it to add to '
              'whitelist.',
     )
     _is_spam = fields.Boolean(
         readonly=True,
+        index=True,
     )
     pyzor_whitelist = fields.Integer()
     pyzor_blacklist = fields.Integer()
@@ -48,6 +49,10 @@ class MailMessage(models.Model):
                     )
                     vals['pyzor_manual_whitelist'] = fields.Datetime.now()
             record.write(vals)
+
+    @api.model
+    def _search_is_spam(self, operator, value):
+        return [('_is_spam', operator, value)]
 
     @api.multi
     def message_format(self):
