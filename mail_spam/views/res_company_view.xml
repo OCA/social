@@ -12,14 +12,14 @@
         <field name="inherit_id" ref="base.view_company_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='website']" position="after">
-                <field name="pyzor_server_ids"
+                <field name="reverend_thomas_ids"
                        widget="many2many_tags"
                        />
                 <field name="pyzor_account_ids"
                        widget="many2many_tags"
-                       domain="[('server_id', 'in', 'pyzor_server_ids')]"
+                       domain="[('server_id', 'in', 'reverend_thomas_ids')]"
                        nocreate="1"
-                       attrs="{'invisible': [('pyzor_server_ids', '=', False)]}"
+                       attrs="{'invisible': [('reverend_thomas_ids', '=', False)]}"
                        />
             </xpath>
         </field>

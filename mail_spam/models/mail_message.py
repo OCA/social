@@ -2,12 +2,11 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-import logging
-
 from odoo import api, fields, models
 
 
 class MailMessage(models.Model):
+
     _inherit = 'mail.message'
 
     is_spam = fields.Boolean(
@@ -15,17 +14,17 @@ class MailMessage(models.Model):
         inverse='_inverse_is_spam',
         search='_search_is_spam',
         help='Check this to mark the message as SPAM. Uncheck it to add to '
-             'whitelist.',
+             'train_ham.',
     )
     _is_spam = fields.Boolean(
         readonly=True,
         index=True,
     )
-    pyzor_whitelist = fields.Integer()
-    pyzor_blacklist = fields.Integer()
-    pyzor_digest = fields.Text()
-    pyzor_manual_blacklist = fields.Datetime()
-    pyzor_manual_whitelist = fields.Datetime()
+    spam_ratio = fields.Float(
+        help='Likelihood that this message is spam. >1 is ham.',
+    )
+    spam_score = fields.Float()
+    ham_score = fields.Float()
 
     @api.multi
     def _compute_is_spam(self):
@@ -35,24 +34,33 @@ class MailMessage(models.Model):
     @api.multi
     def _inverse_is_spam(self):
         for record in self.filtered(lambda r: r.is_spam != r._is_spam):
-            vals = {'_is_spam': record.is_spam}
+
+            reverends = record._get_all_reverends()
+
             if record.is_spam:
-                if record.pyzor_manual_blacklist:
-                    self.env['pyzor'].report(
-                        record.pyzor_digest, record.partner_ids,
-                    )
-                    vals['pyzor_manual_blacklist'] = fields.Datetime.now()
+                reverends.train_spam(record)
             else:
-                if not record.pyzor_manual_whitelist:
-                    self.env['pyzor'].whitelist(
-                        record.pyzor_digest, record.partner_ids,
-                    )
-                    vals['pyzor_manual_whitelist'] = fields.Datetime.now()
-            record.write(vals)
+                reverends.train_ham(record)
+
+            record._is_spam = record.is_spam
 
     @api.model
     def _search_is_spam(self, operator, value):
         return [('_is_spam', operator, value)]
+
+    @api.model
+    def create(self, vals):
+        """Check the message for SPAM before creation."""
+        memory_record = self.new(vals)
+        reverends = memory_record._get_all_reverends()
+        spam_values = reverends.check(memory_record)
+        vals.update({
+            '_is_spam': spam_values['ratio'] > 1,
+            'spam_ratio': spam_values['ratio'],
+            'spam_score': spam_values['spam'],
+            'ham_score': spam_values['ham'],
+        })
+        return super(MailMessage, self).create(vals)
 
     @api.multi
     def message_format(self):
@@ -61,3 +69,12 @@ class MailMessage(models.Model):
             message = self.browse(message_values['id'])
             message_values['is_spam'] = message.is_spam
         return messages_values
+
+    @api.multi
+    def _get_all_reverends(self):
+        """Return all Reverends associated with the singleton Message."""
+        self.ensure_one()
+        partners = self.partner_ids
+        if self.author_id:
+            partners |= self.author_id
+        return partners.mapped('company_id.reverend_thomas_ids')

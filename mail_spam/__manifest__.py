@@ -20,7 +20,7 @@
         'mail',
     ],
     'data': [
-        'data/pyzor_server_data.xml',
+        'data/reverend_thomas_data.xml',
         'templates/assets.xml',
         'views/res_company_view.xml',
     ],

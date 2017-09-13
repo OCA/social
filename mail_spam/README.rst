@@ -38,8 +38,6 @@ Roadmap
 * Add button to mark as spam in thread
 * Add a virtual channel to view SPAM messages and allow to mark as ham
 * Make sure that notifications do not go out to users for SPAM messages
-* The multi-server/account structure is kind of wonky
-* Catch messages that do not come in through email
 
 Bug Tracker
 ===========

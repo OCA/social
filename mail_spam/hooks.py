@@ -11,5 +11,5 @@ def post_init_hook(cr, _):
         env = api.Environment(cr, SUPERUSER_ID, {})
         Companies = env['res.company']
         Companies.search([]).write({
-            'pyzor_server_ids': Companies._default_pyzor_server_ids(),
+            'reverend_thomas_ids': Companies._default_reverend_thomas_ids(),
         })

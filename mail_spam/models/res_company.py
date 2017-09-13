@@ -6,25 +6,19 @@ from odoo import api, fields, models
 
 
 class ResCompany(models.Model):
+
     _inherit = 'res.company'
 
-    pyzor_server_ids = fields.Many2many(
-        string='Pyzor Servers',
-        comodel_name='pyzor.server',
-        default=lambda s: s._default_pyzor_server_ids(),
-        help='Enter the Pyzor Anti-SPAM servers that should be used for all '
+    reverend_thomas_ids = fields.Many2many(
+        string='SPAM Databases',
+        comodel_name='reverend.thomas',
+        default=lambda s: s._default_reverend_thomas_ids(),
+        help='Enter the Anti-SPAM databases that should be used for all '
              'messages received by this company.',
-    )
-    pyzor_account_ids = fields.Many2many(
-        string='Pyzor Accounts',
-        comodel_name='pyzor.account',
-        help='Enter the Pyzor Anti-SPAM accounts that should be used for '
-             'this company. Servers without an account selected will use '
-             'anonymous authentication.'
     )
 
     @api.model
-    def _default_pyzor_server_ids(self):
+    def _default_reverend_thomas_ids(self):
         return [
-            (6, 0, self.env.ref('mail_spam.pyzor_server_public').ids),
+            (6, 0, self.env.ref('mail_spam.reverend_thomas_default').ids),
         ]

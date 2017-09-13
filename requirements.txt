@@ -1,1 +1,1 @@
-pyzor
+git+https://github.com/LasLabs/python-reverend.git@master#egg=reverend

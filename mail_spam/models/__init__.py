@@ -6,6 +6,6 @@ from . import mail_message
 from . import mail_thread
 
 from . import pyzor_account
-from . import pyzor_server
+from . import reverend_thomas
 
 from . import res_company
