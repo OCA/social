@@ -6,8 +6,8 @@
 Anti-SPAM
 =========
 
-This module provides anti-SPAM support for mail messages, powered by `Pyzor
-<https://pyzor.readthedocs.io/en/release-1-0-0/>`_.
+This module provides anti-SPAM support for mail messages, powered by `Reverend
+<https://github.com/LasLabs/python-reverend>` Bayesian classifier.
 
 Installation
 ============

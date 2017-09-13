@@ -2,7 +2,4 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from . import models
-from . import wizards
-
-from .hooks import post_init_hook
+from . import reverend_thomas_training
