@@ -27,6 +27,7 @@ class MailMessage(models.Model):
     ham_score = fields.Float()
 
     @api.multi
+    @api.depends('_is_spam')
     def _compute_is_spam(self):
         """Map the visible ``is_spam`` to the underlying ``_is_spam``"""
         for record in self:

@@ -44,17 +44,13 @@ class TestReverendThomas(TransactionCase):
 
     def test_client(self):
         """It should set the client."""
-        self.assertIsInstance(self._create_reverend(), Bayes)
+        self.assertIsInstance(self._create_reverend().client, Bayes)
 
-    def test_client_loads(self):
+    @mock.patch('odoo.addons.mail_anti_spam.models.reverend_thomas.Bayes')
+    def test_client_loads(self, bayes):
         """It should load the database."""
-        client = mock.MagicMock()
-        self.Model._patch_method('_get_client', client)
-        try:
-            reverend = self._create_reverend()
-        finally:
-            self.Model._revert_method('_get_client')
-        call_args = client.load_handler.call_args
+        reverend = self._create_reverend()
+        call_args = bayes().load_handler.call_args
         self.assertTrue(call_args)
         self.assertEqual(
             call_args[0][0].getvalue(),
@@ -66,12 +62,6 @@ class TestReverendThomas(TransactionCase):
         reverend = self._create_reverend()
         self.assertTrue(reverend.database.decode('base64'))
 
-    def test_create_existing_database(self):
-        """It should use a provided database instead of creating one."""
-        database = 'Test'
-        reverend = self._create_reverend(database)
-        self.assertEqual(reverend.database.decode('base64'), database)
-
     def test_check_spam(self, reverend=None):
         """It should return a proper spam classification."""
         if reverend is None:
@@ -82,6 +72,9 @@ class TestReverendThomas(TransactionCase):
             self.Model.SPAM: 0.9999,
             self.Model.HAM: 0,
             'ratio': 0,
+            reverend.id: {
+                self.Model.SPAM: 0.9999,
+            }
         }
         self.assertDictEqual(results, expect)
 
@@ -95,6 +88,9 @@ class TestReverendThomas(TransactionCase):
             self.Model.HAM: 0.9999,
             self.Model.SPAM: 0,
             'ratio': 1,
+            reverend.id: {
+                self.Model.HAM: 0.9999,
+            }
         }
         self.assertDictEqual(results, expect)
 
@@ -108,6 +104,10 @@ class TestReverendThomas(TransactionCase):
             self.Model.HAM: 0.9999,
             self.Model.SPAM: 0.9999,
             'ratio': 1,
+            reverend.id: {
+                self.Model.HAM: 0.9999,
+                self.Model.SPAM: 0.9999,
+            }
         }
         self.assertDictEqual(results, expect)
 

@@ -11,10 +11,10 @@ from odoo.tests.common import TransactionCase
 class TestMailMessage(TransactionCase):
 
     def setUp(self):
-        super(TestReverendThomas, self).setUp()
+        super(TestMailMessage, self).setUp()
         self.Model = self.env['mail.message']
         self.sender = self.env.user.partner_id
-        self.recipient = self.env.ref('base.demo_user').partner_id
+        self.recipient = self.env.ref('base.user_demo').partner_id
         self.body = 'Test message'
         self.reverends = self.env['reverend.thomas'].search([])
 
@@ -76,22 +76,30 @@ class TestMailMessage(TransactionCase):
         """It should be able to search on ``is_spam``."""
         message = self._create_message()
         messages = self.Model.search([('is_spam', '=', message._is_spam)])
-        self.assertIn(messaage, messages)
+        self.assertIn(message, messages)
 
     def test_create_injects_spam_score_ham(self):
         """It should add the SPAM values into the record on create (HAM)."""
         message = self._create_message()
-        self.assertFalse(message.is_spam)
-        self.assertEqual(messaage.spam_ratio, 1)
-        self.assertEqual(message.spam_score, 0)
-        self.assertEqual(message.ham_score, 0.9999)
+        expect = {
+            'is_spam': False,
+            'spam_ratio': 1,
+            'spam_score': 0,
+            'ham_score': 0.9999,
+        }
+        result = {k: message[k] for k in expect.keys()}
+        self.assertDictEqual(result, expect)
 
     def test_create_injects_spam_score_spam(self):
         """It should add the SPAM values into the record on create (SPAM)."""
         message = self._create_message()
-        reverends.client.train_spam(message)
+        self.reverends.train_spam(message)
         message = self._create_message()
-        self.assertTrue(message.is_spam)
-        self.assertEqual(messaage.spam_ratio, 0)
-        self.assertEqual(message.spam_score, 0.9999)
-        self.assertEqual(message.ham_score, 0)
+        expect = {
+            'is_spam': True,
+            'spam_ratio': 0,
+            'spam_score': 0.9999,
+            'ham_score': 0,
+        }
+        result = {k: message[k] for k in expect.keys()}
+        self.assertDictEqual(result, expect)

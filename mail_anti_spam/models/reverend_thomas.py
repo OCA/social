@@ -72,7 +72,8 @@ class ReverendThomas(models.Model):
             message (MailMessage): Message singleton to check as SPAM.
 
         Returns:
-            dict: Mapping with keys `spam`, `ham`, and `ratio`.
+            dict: Mapping with keys `spam`, `ham`, and `ratio`. It also
+            includes the individual results keyed by the reverend ID.
         """
 
         message.ensure_one()
@@ -82,17 +83,25 @@ class ReverendThomas(models.Model):
 
         for record in self:
             for result in record.client.guess(self._parse_message(message)):
+                _logger.debug('Got result %s', result)
                 key, score = result
-                averages[key] = averages.get(key, 0) + score
+                averages[key] += score
                 output[record.id][key] = score
+
+        output_length = len(output)
+        if output_length:
+            for key, val in averages.items():
+                averages[key] = val / len(output)
 
         if averages[self.SPAM]:
             averages['ratio'] = averages[self.HAM] / averages[self.SPAM]
         else:
             averages['ratio'] = 1
 
+        _logger.debug('Averages: %s', averages)
+
         output.update(averages)
-        return output
+        return dict(output)
 
     @api.multi
     def train_spam(self, messages):
@@ -139,13 +148,13 @@ class ReverendThomas(models.Model):
         from_header = author and author.email or message.email_from
         return OrderedDict([
             ('from', 'FROM: %s' % from_header),
-            ('body', message.body),
+            ('body', str(message.body)),
         ])
 
     @classmethod
     def _parse_message(cls, message):
         """Parse a ``mail.message`` record into a string for training."""
-        return '\n'.join(cls._get_message_training_parts(message))
+        return '\n'.join(cls._get_message_training_parts(message).values())
 
     @api.multi
     def _save_db(self):
@@ -153,4 +162,4 @@ class ReverendThomas(models.Model):
         for record in self:
             with BytesIO() as fp:
                 record.client.save_handler(fp)
-            record.database = fp.getvalue()
+                record.database = fp.getvalue().encode('base64')
