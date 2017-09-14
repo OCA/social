@@ -28,16 +28,14 @@ Usage
 Known Issues / Roadmap
 ======================
 
-Known Issues
-------------
-
-
 Roadmap
 -------
 
 * Add button to mark as spam in thread
 * Add a virtual channel to view SPAM messages and allow to mark as ham
 * Make sure that notifications do not go out to users for SPAM messages
+* Create user action definitions that can be used as training (such as
+  a user replying [ham] or unlinking [spam])
 
 Bug Tracker
 ===========

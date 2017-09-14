@@ -28,6 +28,7 @@ class MailMessage(models.Model):
 
     @api.multi
     def _compute_is_spam(self):
+        """Map the visible ``is_spam`` to the underlying ``_is_spam``"""
         for record in self:
             record.is_spam = record._is_spam
 

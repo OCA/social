@@ -126,13 +126,13 @@ class ReverendThomas(models.Model):
                 record.client.train(message_string, spam_or_ham)
         self._save_db()
 
-    @staticmethod
-    def _get_client():
+    @classmethod
+    def _get_client(cls):
         """Return a Bayes client."""
         return Bayes()
 
-    @staticmethod
-    def _get_message_training_parts(message):
+    @classmethod
+    def _get_message_training_parts(cls, message):
         """Parse a ``mail.message`` object"""
         message.ensure_one()
         author = message.author_id

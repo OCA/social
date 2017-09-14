@@ -53,7 +53,7 @@ class TestReverendThomas(TransactionCase):
         try:
             reverend = self._create_reverend()
         finally:
-            self.Model._revert_metho('_get_client')
+            self.Model._revert_method('_get_client')
         call_args = client.load_handler.call_args
         self.assertTrue(call_args)
         self.assertEqual(
