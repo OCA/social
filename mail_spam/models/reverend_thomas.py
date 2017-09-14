@@ -122,13 +122,13 @@ class ReverendThomas(models.Model):
                 record.client.train(message_string, spam_or_ham)
         self._save_db()
 
-    @api.model_cr_context
-    def _get_client(self):
+    @staticmethod
+    def _get_client():
         """Return a Bayes client."""
         return Bayes()
 
-    @api.model_cr_context
-    def _get_message_training_parts(self, message):
+    @staticmethod
+    def _get_message_training_parts(message):
         """Parse a ``mail.message`` object"""
         message.ensure_one()
         author = message.author_id
@@ -138,10 +138,10 @@ class ReverendThomas(models.Model):
             ('body', message.body),
         ])
 
-    @api.model_cr_context
-    def _parse_message(self, message):
+    @classmethod
+    def _parse_message(cls, message):
         """Parse a ``mail.message`` record into a string for training."""
-        return '\n'.join(self._get_message_training_parts(message))
+        return '\n'.join(cls._get_message_training_parts(message))
 
     @api.multi
     def _save_db(self):

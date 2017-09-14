@@ -98,13 +98,13 @@ class ReverendThomasTraining(models.Model):
                 subprocess.check_call(command.split(' '))
                 return temp_dir
 
+    @classmethod
     @contextmanager
-    @api.model_cr_context
-    def _temp_dir(self):
+    def _temp_dir(cls):
         tempdir = tempfile.gettempdir()
         directory = os.path.join(tempdir, str(uuid4()))
         if os.path.isdir(directory):
-            yield self._temp_dir()
+            yield cls._temp_dir()
         os.mkdir(directory)
         try:
             yield directory
