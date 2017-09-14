@@ -20,5 +20,5 @@ class ResCompany(models.Model):
     @api.model
     def _default_reverend_thomas_ids(self):
         return [
-            (6, 0, self.env.ref('mail_spam.reverend_thomas_default').ids),
+            (6, 0, self.env.ref('mail_anti_spam.reverend_thomas_default').ids),
         ]
