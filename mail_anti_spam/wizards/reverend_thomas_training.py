@@ -15,7 +15,7 @@ from uuid import uuid4
 from odoo import api, fields, models
 
 
-class ReverendThomasTraining(models.Model):
+class ReverendThomasTraining(models.TransientModel):
 
     _name = 'reverend.thomas.training'
     _description = 'Train Bayesian Classifier'
@@ -46,7 +46,7 @@ class ReverendThomasTraining(models.Model):
         if all((self.env.context.get('active_model') == Model._name,
                 self.env.context.get('active_ids'))):
             return [(6, 0, self.env.context['active_ids'])]
-        default = self.env.ref('mail_spam.reverend_thomas_default')
+        default = self.env.ref('mail_anti_spam.reverend_thomas_default')
         return [(6, 0, default.ids)]
 
     @api.multi

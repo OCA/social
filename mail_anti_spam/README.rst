@@ -2,11 +2,11 @@
    :target: http://www.gnu.org/licenses/lgpl.html
    :alt: License: LGPL-3
 
-=========
-Anti-SPAM
-=========
+==============
+Mail Anti-SPAM
+==============
 
-This module provides anti-SPAM support for mail messages, powered by `Reverend
+This module provides Anti SPAM support for mail messages, powered by `Reverend
 <https://github.com/LasLabs/python-reverend>`_ Bayesian classifier.
 
 Installation

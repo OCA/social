@@ -9,7 +9,7 @@
     <template id="assets_common" inherit_id="web.assets_common">
         <xpath expr=".">
             <script type="application/javascript"
-                    src="/mail_spam/static/src/js/mail_spam.js"/>
+                    src="/mail_anti_spam/static/src/js/mail_anti_spam.js"/>
         </xpath>
     </template>
 </odoo>
