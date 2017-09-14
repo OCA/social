@@ -2,8 +2,6 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-import email
-import logging
 import os
 import re
 import requests
@@ -15,13 +13,6 @@ from xml.dom import minidom
 from uuid import uuid4
 
 from odoo import api, fields, models
-
-_logger = logging.getLogger(__name__)
-
-try:
-    import libarchive.public
-except ImportError:
-    _logger.info('`libarchive` Python library is not installed.')
 
 
 class ReverendThomasTraining(models.Model):
@@ -36,7 +27,7 @@ class ReverendThomasTraining(models.Model):
     )
     ham_message_ids = fields.Many2many(
         string='Ham Messages',
-        default=lambda s: [(6, 0, self.env['mail.message'].search([]))],
+        default=lambda s: [(6, 0, s.env['mail.message'].search([]))],
     )
     spam_source_uri = fields.Char(
         default='http://untroubled.org/spam/',
@@ -97,7 +88,7 @@ class ReverendThomasTraining(models.Model):
     def __download_archive(self, uri):
         response = requests.get(uri)
         with tempfile.NamedTemporaryFile() as temp_file:
-            fh.write(response.text)
+            temp_file.write(response.text)
             with self._temp_dir() as temp_dir:
                 command = self.unarchive_command % {
                     'directory': temp_dir,

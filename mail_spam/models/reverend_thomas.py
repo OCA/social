@@ -65,7 +65,7 @@ class ReverendThomas(models.Model):
 
         If partners is provided, it will use the Pyzor servers that are mapped
         to their company. Otherwise it will use the current user's company.
-        
+
         Args:
             message (MailMessage): Message singleton to check as SPAM.
 
@@ -143,5 +143,5 @@ class ReverendThomas(models.Model):
         """Save the trained database."""
         for record in self:
             with BytesIO() as fp:
-                client.save_handler(fp)
+                record.client.save_handler(fp)
             record.database = fp.getvalue()
