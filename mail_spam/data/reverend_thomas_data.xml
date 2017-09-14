@@ -6,8 +6,7 @@
 -->
 
 <odoo>
-    <record id="reverend_thomas_public" model="reverend.thomas">
-        <field name="host">public.pyzor.org</field>
-        <field name="port">24441</field>
+    <record id="reverend_thomas_default" model="reverend.thomas">
+        <field name="name">Default SPAM Filter</field>
     </record>
 </odoo>

@@ -4,7 +4,7 @@
 
 {
     'name': 'Anti-Spam',
-    'summary': 'Provides anti-SPAM support powered by Pyzor.',
+    'summary': 'Provides anti-SPAM support using Bayesian logic.',
     'version': '10.0.1.0.0',
     'category': 'Mail',
     'website': 'https://laslabs.com/',

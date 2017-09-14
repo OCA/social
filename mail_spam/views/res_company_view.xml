@@ -15,12 +15,6 @@
                 <field name="reverend_thomas_ids"
                        widget="many2many_tags"
                        />
-                <field name="pyzor_account_ids"
-                       widget="many2many_tags"
-                       domain="[('server_id', 'in', 'reverend_thomas_ids')]"
-                       nocreate="1"
-                       attrs="{'invisible': [('reverend_thomas_ids', '=', False)]}"
-                       />
             </xpath>
         </field>
     </record>

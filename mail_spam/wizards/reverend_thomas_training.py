@@ -27,13 +27,14 @@ class ReverendThomasTraining(models.Model):
     )
     ham_message_ids = fields.Many2many(
         string='Ham Messages',
+        comodel_name='mail.message',
         default=lambda s: [(6, 0, s.env['mail.message'].search([]))],
     )
     spam_source_uri = fields.Char(
         default='http://untroubled.org/spam/',
     )
     spam_file_regex = fields.Char(
-        default='.+\.7z$',
+        default=r'.+\.7z$',
     )
     unarchive_command = fields.Char(
         default='7z e -o %(directory)s %(file_name)s',

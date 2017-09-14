@@ -42,22 +42,24 @@ class ReverendThomas(models.Model):
     )
 
     @api.multi
+    @api.depends('database')
     def _compute_client(self):
         """Compute the client, optionally loading the stored database."""
-        for record in self:
+        for record in self.filtered(lambda r: r.database):
             record.client = self._get_client()
-            with BytesIO(record.database) as fp:
+            with BytesIO(record.database.decode('base64')) as fp:
                 record.client.load_handler(fp)
 
     @api.model
     def create(self, vals):
         """Add a new database into vals if one isn't provided."""
+        record = super(ReverendThomas, self).create(vals)
         if not vals.get('database'):
             client = self._get_client()
             with BytesIO() as fp:
                 client.save_handler(fp)
-            vals['database'] = fp.getvalue()
-        return super(ReverendThomas, self).create(vals)
+                record.database = fp.getvalue().encode('base64')
+        return record
 
     @api.multi
     def check(self, message):
@@ -75,15 +77,17 @@ class ReverendThomas(models.Model):
 
         message.ensure_one()
 
+        averages = {}
         output = defaultdict(dict)
 
         for record in self:
             for result in record.client.guess(self._parse_message(message)):
                 key, score = result
-                output[key] = output.get(key, 0) + score
+                averages[key] = averages.get(key, 0) + score
                 output[record.id][key] = score
 
-        output['ratio'] = output['ham'] / output['spam']
+        averages['ratio'] = averages[self.HAM] / averages[self.SPAM]
+        output.update(averages)
         return output
 
     @api.multi
@@ -128,10 +132,11 @@ class ReverendThomas(models.Model):
         """Parse a ``mail.message`` object"""
         message.ensure_one()
         author = message.author_id
-        return OrderedDict(
-            ('from', author and author.email or message.email_from),
+        from_header = author and author.email or message.email_from
+        return OrderedDict([
+            ('from', 'FROM: %s' % from_header),
             ('body', message.body),
-        )
+        ])
 
     @api.model_cr_context
     def _parse_message(self, message):

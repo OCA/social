@@ -7,7 +7,7 @@ Anti-SPAM
 =========
 
 This module provides anti-SPAM support for mail messages, powered by `Reverend
-<https://github.com/LasLabs/python-reverend>` Bayesian classifier.
+<https://github.com/LasLabs/python-reverend>`_ Bayesian classifier.
 
 Installation
 ============
