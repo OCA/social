@@ -86,7 +86,10 @@ class ReverendThomas(models.Model):
                 averages[key] = averages.get(key, 0) + score
                 output[record.id][key] = score
 
-        averages['ratio'] = averages[self.HAM] / (averages[self.SPAM] or 1)
+        if averages[self.SPAM]:
+            averages['ratio'] = averages[self.HAM] / averages[self.SPAM]
+        else:
+            averages['ratio'] = 1
 
         output.update(averages)
         return output

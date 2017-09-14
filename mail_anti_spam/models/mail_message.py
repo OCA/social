@@ -55,7 +55,7 @@ class MailMessage(models.Model):
         reverends = memory_record._get_all_reverends()
         spam_values = reverends.check(memory_record)
         vals.update({
-            '_is_spam': spam_values['ratio'] > 1,
+            '_is_spam': spam_values['ratio'] >= 1,
             'spam_ratio': spam_values['ratio'],
             'spam_score': spam_values['spam'],
             'ham_score': spam_values['ham'],
