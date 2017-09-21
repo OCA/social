@@ -19,7 +19,8 @@ class ResPartner(models.Model):
         comodel_name='mail.mass_mailing.contact', inverse_name='partner_id')
     mass_mailing_contacts_count = fields.Integer(
         string='Mailing list number',
-        compute='_compute_mass_mailing_contacts_count', store=True)
+        compute='_compute_mass_mailing_contacts_count', store=True,
+        compute_sudo=True)
     mass_mailing_stats = fields.One2many(
         string="Mass mailing stats",
         comodel_name='mail.mail.statistics', inverse_name='partner_id')
@@ -30,7 +31,7 @@ class ResPartner(models.Model):
     @api.constrains('email')
     def _check_email_mass_mailing_contacts(self):
         for partner in self:
-            if partner.mass_mailing_contact_ids and not partner.email:
+            if partner.sudo().mass_mailing_contact_ids and not partner.email:
                 raise ValidationError(
                     _("This partner '%s' is subscribed to one or more "
                       "mailing lists. Email must be assigned.") % partner.name)
