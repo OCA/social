@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- © 2017 Phuc.nt - <phuc.nt@komit-consulting.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_mail_mail_form">
+        <field name="name">Mail Mail Form with split emails</field>
+        <field name="model">mail.mail</field>
+        <field name="inherit_id" ref="mail.view_mail_form"/>
+        <field name="arch" type="xml">
+            <field name="auto_delete" position="after">
+                <field name="split_mail_by_recipients"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
