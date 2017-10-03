@@ -1,27 +1,21 @@
 # -*- coding: utf-8 -*-
+# Copyright 2017 Georg Notter, Agent ERP GmbH
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name" : "outgoing_mail_save",
-    "version" : "1.0",
-    "author" : "Agent ERP GmbH",
-    "category": 'mail',
-    'complexity': "easy",
-    "description": """
-This Module saves all outgoing mails to the Mailserver via IMAP
-====================================
-v1.0
-    """,
-    'website': 'www.agenterp.com',
-    "depends" : ["base","mail"],
-    'init_xml': [],
-    'update_xml': [
+    "name": "Mail Store Outgoing",
+    "summary": "This Module enables Odoo to store outgoing Mails via IMAP into a selected folder.",
+    "version": "10.0.1.0.0",
+    "category": "mail",
+    "website": "https://github.com/OCA/social",
+    "author": "Agent ERP GmbH, Odoo Community Association (OCA)",
+    "license": "AGPL-3",
+    "application": False,
+    "installable": True,
+    "depends": [
+        "mail",
+    ],
+    "data": [
         'views/ir_mail_server_view.xml',
-        'security/ir.model.access.csv'],
-    'demo_xml': [],
-    'test': [],
-    'application': True,
-    'installable': True,
-    'css': [
+        'security/ir.model.access.csv',
     ],
 }
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
