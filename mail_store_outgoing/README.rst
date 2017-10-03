@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-==============
+===================
 Mail Store Outgoing
-==============
+===================
 
 This Module enables Odoo to store outgoing Mails via IMAP into a selected folder.
 
@@ -30,7 +30,7 @@ If you sent and email, it will appear in your selected mailfolder.
 Known issues / Roadmap
 ======================
 
-* ...
+No known issues
 
 Bug Tracker
 ===========
