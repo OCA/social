@@ -63,7 +63,7 @@ class IrMailServer(models.Model):
     def send_email(self, message, mail_server_id=None,
                    smtp_server=None, smtp_port=None, smtp_user=None,
                    smtp_password=None, smtp_encryption=None, smtp_debug=False):
-        super(ir_mail_server, self).send_email(message, mail_server_id,
+        super(IrMailServer, self).send_email(message, mail_server_id,
                                                smtp_server, smtp_port,
                                                smtp_user, smtp_password,
                                                smtp_encryption, smtp_debug)
@@ -93,7 +93,7 @@ class IrMailServer(models.Model):
         try:
             maillib.login(smtp_user, smtp_password)
             folder = mail_server.imap_mailbox_folder.name.join('""')
-            maillib.append(folder, '\Seen', None, str(msg))
+            maillib.append(folder, r'\Seen', None, str(msg))
         except Exception, ex:
                 _logger.error(_(
                     'Failed attaching mail via imap to server %s %s')
@@ -117,4 +117,3 @@ class IrMailImapFolder(models.Model):
 
     server_id = fields.Many2one('ir.mail_server', 'Mail Server', )
     name = fields.Char('Foldername',)
-
