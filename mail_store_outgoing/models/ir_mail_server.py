@@ -12,7 +12,7 @@ from odoo.tools.translate import _
 _logger = logging.getLogger(__name__)
 
 
-class ir_mail_server(models.Model):
+class IrMailServer(models.Model):
     _inherit = 'ir.mail_server'
 
     def parse_list_response(self, line):
@@ -111,11 +111,10 @@ class ir_mail_server(models.Model):
     active = fields.Boolean('Active', )
 
 
-class ir_mail_imap_folder(models.Model):
+class IrMailImapFolder(models.Model):
     _name = 'ir.mail.imap.folder'
     _description = 'Imap Folder'
 
     server_id = fields.Many2one('ir.mail_server', 'Mail Server', )
     name = fields.Char('Foldername',)
 
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
