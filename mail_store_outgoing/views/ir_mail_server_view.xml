@@ -2,9 +2,9 @@
 <openerp>
     <data>
         <!-- ir.mail.server -->
-        <record model="ir.ui.view" id="outgoing_mail_save.ir_mail_server_form">
+        <record model="ir.ui.view" id="ir_mail_server_form_save_outgoing">
             <field name="model">ir.mail_server</field>
-            <field name="name">outgoing_mail_save.ir_mail_server_form</field>
+            <field name="name">ir_mail_server_form_save_outgoing</field>
             <field name="inherit_id" ref="base.ir_mail_server_form" />
             <field name="arch" type="xml">
                 <field name="sequence" position="after">
