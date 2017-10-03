@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- ir.mail.server -->
+        <record model="ir.ui.view" id="outgoing_mail_save.ir_mail_server_form">
+            <field name="model">ir.mail_server</field>
+            <field name="name">outgoing_mail_save.ir_mail_server_form</field>
+            <field name="inherit_id" ref="base.ir_mail_server_form" />
+            <field name="arch" type="xml">
+                <field name="sequence" position="after">
+                     <field name="active"/>
+                </field>
+                <xpath expr="//form/sheet/group" position="after">
+                    <group string="Outgoing Mail Settings" colspan="4">
+                        <field name="store_outgoing_mail"/>
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('store_outgoing_mail','=', False)]}">
+                        <field name="has_separate_imap_server"/>
+                        <field name="separate_imap_server" attrs="{'invisible': [('has_separate_imap_server','=', False)]}"/>
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('store_outgoing_mail','=', False)]}">
+                        <button name="test_imap_connection" type="object" string="Test Imap Connection" icon="gtk-network"/>
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('store_outgoing_mail','=', False)]}">
+                        <field name="imap_mailbox_verified" readonly="1"/>
+                    </group>
+                    <group colspan="4" attrs="{'invisible': [('imap_mailbox_verified','=', False)]}">
+                        <field name="imap_mailbox_folder" attrs="{'required': [('imap_mailbox_verified','=', True),('store_outgoing_mail','=',True)]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>

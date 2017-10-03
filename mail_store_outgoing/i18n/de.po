@@ -1,0 +1,132 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* outgoing_mail_save
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-03 16:32+0000\n"
+"PO-Revision-Date: 2017-01-03 16:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: outgoing_mail_save
+#: code:addons/outgoing_mail_save/ir_mail_server.py:77
+#, python-format
+msgid "Connection Test Failed!"
+msgstr "Connection Test Failed!"
+
+#. module: outgoing_mail_save
+#: code:addons/outgoing_mail_save/ir_mail_server.py:84
+#, python-format
+msgid "Connection Test Succeeded!"
+msgstr "Connection Test Succeeded!"
+
+#. module: outgoing_mail_save
+#: field:ir_mail_folder,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: outgoing_mail_save
+#: field:ir_mail_folder,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,display_name:0
+#: field:ir_mail_folder,display_name:0
+msgid "Display Name"
+msgstr "Display Name"
+
+#. module: outgoing_mail_save
+#: code:addons/outgoing_mail_save/ir_mail_server.py:84
+#, python-format
+msgid "Everything seems properly set up!"
+msgstr "Everything seems properly set up!"
+
+#. module: outgoing_mail_save
+#: code:addons/outgoing_mail_save/ir_mail_server.py:77
+#, python-format
+msgid "Here is what we got instead:\n"
+" %s"
+msgstr "Here is what we got instead:\n"
+" %s"
+
+#. module: outgoing_mail_save
+#: field:ir_mail_folder,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,imap_mailbox_veryfied:0
+msgid "IMAP Connection Veryfied"
+msgstr "IMAP Connection Veryfied"
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,__last_update:0
+#: field:ir_mail_folder,__last_update:0
+msgid "Last Modified on"
+msgstr "Last Modified on"
+
+#. module: outgoing_mail_save
+#: field:ir_mail_folder,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: outgoing_mail_save
+#: field:ir_mail_folder,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,imap_mailbox_folder:0
+msgid "Mailbox Folder"
+msgstr "Mailbox Folder"
+
+#. module: outgoing_mail_save
+#: code:addons/outgoing_mail_save/ir_mail_server.py:144
+#, python-format
+msgid "Missing SMTP Server"
+msgstr "Missing SMTP Server"
+
+#. module: outgoing_mail_save
+#: field:ir_mail_folder,name:0
+msgid "Name"
+msgstr "Name"
+
+#. module: outgoing_mail_save
+#: view:ir.mail_server:outgoing_mail_save.ir_mail_server_form
+msgid "Outgoing Mail Settings"
+msgstr "Outgoing Mail Settings"
+
+#. module: outgoing_mail_save
+#: code:addons/outgoing_mail_save/ir_mail_server.py:145
+#, python-format
+msgid "Please define at least one SMTP server, or provide the SMTP parameters explicitly."
+msgstr "Please define at least one SMTP server, or provide the SMTP parameters explicitly."
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,separate_imap_server:0
+msgid "Separate Imap Server"
+msgstr "Separate Imap Server"
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,store_outgoing_mail:0
+msgid "Store Outgoing Mail"
+msgstr "Store Outgoing Mail"
+
+#. module: outgoing_mail_save
+#: view:ir.mail_server:outgoing_mail_save.ir_mail_server_form
+msgid "Test Imap Connection"
+msgstr "Test Imap Connection"
+
+#. module: outgoing_mail_save
+#: field:ir.mail_server,has_separate_imap_server:0
+msgid "Use Separate Imap Server"
+msgstr "Use Separate Imap Server"
+
