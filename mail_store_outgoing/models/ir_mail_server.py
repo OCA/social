@@ -64,7 +64,7 @@ class IrMailServer(models.Model):
                    smtp_server=None, smtp_port=None, smtp_user=None,
                    smtp_password=None, smtp_encryption=None, smtp_debug=False):
         super(IrMailServer, self).send_email(
-            message, mail_server_id, smtp_server, smtp_port, 
+            message, mail_server_id, smtp_server, smtp_port,
             smtp_user, smtp_password, smtp_encryption, smtp_debug)
         return self._save_sent_message_to_sentbox(message, mail_server_id)
 
