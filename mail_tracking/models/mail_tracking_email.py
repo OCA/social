@@ -218,8 +218,12 @@ class MailTrackingEmail(models.Model):
         self.ensure_one()
         tracking_url = self._get_mail_tracking_img()
         if tracking_url:
+            content = email.get('body', '')
+            content = re.sub(
+                r'<img[^>]*data-odoo-tracking-email=["\'][0-9]*["\'][^>]*>',
+                '', content)
             body = tools.append_content_to_html(
-                email.get('body', ''), tracking_url, plaintext=False,
+                content, tracking_url, plaintext=False,
                 container_tag='div')
             email['body'] = body
         return email

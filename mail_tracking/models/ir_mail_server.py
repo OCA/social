@@ -23,7 +23,7 @@ class IrMailServer(models.Model):
         tracking_email_id = False
         # https://regex101.com/r/lW4cB1/2
         match = re.search(
-            r'<img [^>]* data-odoo-tracking-email=["\']([0-9]*)["\']', body)
+            r'<img[^>]*data-odoo-tracking-email=["\']([0-9]*)["\']', body)
         if match:
             try:
                 tracking_email_id = int(match.group(1))
