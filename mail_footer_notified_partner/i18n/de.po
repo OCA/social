@@ -1,0 +1,30 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_footer_notified_partners
+# 
+# Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-04-30 10:21+0000\n"
+"PO-Revision-Date: 2017-03-18 17:25+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_footer_notified_partners
+#: code:addons/mail_footer_notified_partners/models/mail_followers.py:43
+#, python-format
+msgid "Also notified: "
+msgstr "Auch benachrichtigt:"
+
+#. module: mail_footer_notified_partners
+#: model:ir.model,name:mail_footer_notified_partners.model_mail_notification
+msgid "Notifications"
+msgstr "Mitteilungen"

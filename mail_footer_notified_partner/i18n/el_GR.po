@@ -1,0 +1,29 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_footer_notified_partners
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: social (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-25 18:06+0000\n"
+"PO-Revision-Date: 2016-10-11 11:53+0000\n"
+"Last-Translator: Kostas Goutoudis <goutoudis@gmail.com>\n"
+"Language-Team: Greek (Greece) (http://www.transifex.com/oca/OCA-social-8-0/language/el_GR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: el_GR\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_footer_notified_partners
+#: code:addons/mail_footer_notified_partners/models/mail_followers.py:43
+#, python-format
+msgid "Also notified: "
+msgstr ""
+
+#. module: mail_footer_notified_partners
+#: model:ir.model,name:mail_footer_notified_partners.model_mail_notification
+msgid "Notifications"
+msgstr "Ειδοποιήσεις "
