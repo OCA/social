@@ -3,14 +3,14 @@
 # * mail_tracking
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-22 00:51+0000\n"
-"PO-Revision-Date: 2017-07-22 00:51+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Polish (https://www.transifex.com/oca/teams/23907/pl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -84,7 +84,7 @@ msgstr "Utworzone przez"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
 msgid "Created on"
-msgstr "Data utworzenia"
+msgstr "Utworzono"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
@@ -224,7 +224,7 @@ msgstr "Ostatnio modyfikowane przez"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
 msgid "Last Updated on"
-msgstr "Data ostatniej modyfikacji"
+msgstr "Ostatnia zmiana"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
