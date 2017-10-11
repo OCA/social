@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo noupdate="1">
+    <!-- inject xmlids so that we can address the records via its
+         mail xmlid as we'd do it in 11.0
+    /-->
+    <record id="xmlid_mail_mt_activities" model="ir.model.data">
+        <field name="model">mail.message.subtype</field>
+        <field name="res_id" ref="mt_activities" />
+        <field name="module">mail</field>
+        <field name="name">mt_activities</field>
+        <field name="noupdate" eval="True" />
+    </record>
+    <record id="xmlid_mail_message_activity_done" model="ir.model.data">
+        <field name="model">ir.ui.view</field>
+        <field name="res_id" ref="message_activity_done" />
+        <field name="module">mail</field>
+        <field name="name">message_activity_done</field>
+        <field name="noupdate" eval="True" />
+    </record>
+</odoo>
