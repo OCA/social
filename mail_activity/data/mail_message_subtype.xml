@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <record id="mail.mt_activities" model="mail.message.subtype">
+    <record id="mt_activities" model="mail.message.subtype">
         <field name="name">Activities</field>
         <field name="default" eval="True"/>
         <field name="internal" eval="True"/>

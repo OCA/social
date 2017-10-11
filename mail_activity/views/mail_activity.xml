@@ -161,7 +161,7 @@
         </field>
     </record>
 
-    <template id="mail.message_activity_done">
+    <template id="message_activity_done">
 <div>
     <p>
         <strong><span t-attf-class="fa #{activity.activity_type_id.icon}"/></strong> <span t-field="activity.activity_type_id.name"/> done
