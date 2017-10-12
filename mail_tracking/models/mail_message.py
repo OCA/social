@@ -37,7 +37,7 @@ class MailMessage(models.Model):
             partner_trackings = []
             partners_already = self.env['res.partner']
             partners = self.env['res.partner']
-            trackings = self.env['mail.tracking.email'].search([
+            trackings = self.env['mail.tracking.email'].sudo().search([
                 ('mail_message_id', '=', message.id),
             ])
             # Search all trackings for this message
