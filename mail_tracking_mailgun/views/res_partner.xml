@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Tecnativa - Pedro M. Baeza
+     Copyright 2016 Carlos Dauden - Tecnativa <carlos.dauden@tecnativa.com>
+     Copyright 2017 Tecnativa <vicent.cubellsn@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record id="view_partner_form_mailgun" model="ir.ui.view">
+        <field name="name">Partner Mailgun button</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail_tracking.view_partner_form"/>
+        <field name="arch" type="xml">
+            <field name="email_bounced" position="after">
+                <label for="check_email_bounced" string="Mailgun"
+                       attrs="{'invisible': [('email', '=', False)]}"/>
+                <group col="3" name="mailgun_buttons" attrs="{'invisible': [('email', '=', False)]}">
+                    <button name="check_email_bounced" type="object" string="Check Mailgun" class="oe_link"/>
+                    <button name="check_email_validity" type="object" string="Check email validity" class="oe_link"/>
+                    <button name="force_set_bounced" type="object" string="Set Bounced" class="oe_link"
+                            attrs="{'invisible': [('email_bounced', '=', True)]}"/>
+                    <button name="force_unset_bounced" type="object" string="Unset Bounced" class="oe_link"
+                            attrs="{'invisible': [('email_bounced', '=', False)]}"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+</odoo>
