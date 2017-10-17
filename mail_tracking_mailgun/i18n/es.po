@@ -8,17 +8,138 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-02 02:43+0000\n"
-"PO-Revision-Date: 2016-09-02 02:43+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
-"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"POT-Creation-Date: 2017-11-22 09:11+0000\n"
+"PO-Revision-Date: 2017-11-22 09:11+0000\n"
+"Last-Translator: <david.vidal@tecnativa.com>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:82
+#, python-format
+msgid "%s couldn't be verified. Either the request couln't be completed or the mailbox provider doesn't support email verification"
+msgstr "%s no ha podido ser verificado. Puede que la petición no se haya completado o que el buzón no soporta validación de correo electrónico"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:76
+#, python-format
+msgid "%s failed the mailbox verification. Please check it in order to avoid sending issues"
+msgstr "%s no ha pasado la validación de buzón. Compruébela para prevenir problemas con los envíos"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:69
+#, python-format
+msgid "%s is not a valid email address. Please check it in order to avoid sending issues"
+msgstr "%s no es una dirección válida de correo electrónico. Compruébela para prevenir problemas con los envíos"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:75
+#, python-format
+msgid "A Mailgun domain value is needed!"
+msgstr "¡Se necesita un valor de dominio para Mailgun!\""
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Check Mailgun"
+msgstr "Comprobar Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Check email validity"
+msgstr "Comprobar validez de email"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:236
+#, python-format
+msgid "Couldn't retrieve Mailgun information"
+msgstr "No se ha podido obtener información desde Mailgun"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:30
+#, python-format
+msgid ""
+"Email has been bounced: %s\n"
+"Reason: %s\n"
+"Event: %s"
+msgstr ""
+"El correo ha sido rebotado: %s\n"
+"Razón: %s\n"
+"Evento: %s"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:56
+#, python-format
+msgid "Error %s trying to check mailof connection"
+msgstr "Error %s al intentar comprobar el correo electrónicodeconexión"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:240
+#, python-format
+msgid "Event information not longer stored"
+msgstr "La información del evento ha caducado"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_email
 msgid "MailTracking email"
 msgstr "MailTracking email"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr "MailTracking event"
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Mailgun"
+msgstr "Mailgun"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:62
+#, python-format
+msgid "Mailgun Error. Mailbox verification value wasn't returned"
+msgstr "Error de Mailgun. No se ha devuelto el valor de verificación de buzón"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event_mailgun_id
+msgid "Mailgun Event ID"
+msgstr "Mailgun Event ID"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
+msgid "Re-sync Mailgun"
+msgstr "Resincronizar Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Set Bounced"
+msgstr "Marcar como rebotado"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:70
+#, python-format
+msgid "There is no Mailgun API key!"
+msgstr "¡No hay clave de API de Mailgun!"
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Unset Bounced"
+msgstr "Desmarcar como rebotado"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:46
+#, python-format
+msgid "You need to configure mailgun.validation_key in order to be able to check mails validity"
+msgstr "Necesitas configurar mailgun.validation_key para poder comprobar la validez de direcciones de correo"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
+msgid "ir.mail_server"
+msgstr "ir.mail_server"

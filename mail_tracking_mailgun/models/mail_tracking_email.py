@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
-# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2017 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import hashlib
 import hmac
+import json
+import requests
 from datetime import datetime
-from odoo import models, api, fields
+from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -40,6 +44,7 @@ class MailTrackingEmail(models.Model):
             'complained': 'spam',
             'bounced': 'hard_bounce',
             'dropped': 'reject',
+            'accepted': 'sent',
         }
 
     def _mailgun_event_type_verify(self, event):
@@ -57,6 +62,19 @@ class MailTrackingEmail(models.Model):
             key=str(api_key),
             msg='{}{}'.format(str(timestamp), str(token)),
             digestmod=hashlib.sha256).hexdigest()
+
+    def _mailgun_values(self):
+        icp = self.env['ir.config_parameter']
+        api_key = icp.get_param('mailgun.apikey')
+        if not api_key:
+            raise ValidationError(_('There is no Mailgun API key!'))
+        api_url = icp.get_param(
+            'mailgun.api_url', 'https://api.mailgun.net/v3')
+        domain = icp.get_param('mail.catchall.domain')
+        if not domain:
+            raise ValidationError(_('A Mailgun domain value is needed!'))
+        validation_key = icp.get_param('mailgun.validation_key')
+        return api_key, api_url, domain, validation_key
 
     def _mailgun_signature_verify(self, event):
         event = event or {}
@@ -104,6 +122,7 @@ class MailTrackingEmail(models.Model):
                 'timestamp': ts,
                 'time': fields.Datetime.to_string(dt),
                 'date': fields.Date.to_string(dt),
+                'mailgun_id': event.get('id', False)
             })
         # Common field mapping
         mapping = {
@@ -192,3 +211,38 @@ class MailTrackingEmail(models.Model):
             else:
                 _logger.info("Mailgun: event process '%s'", res)
         return res
+
+    @api.multi
+    def action_manual_check_mailgun(self):
+        """
+        Manual check against Mailgun API
+        API Documentation:
+        https://documentation.mailgun.com/en/latest/api-events.html
+        """
+        api_key, api_url, domain, validation_key = self._mailgun_values()
+        for tracking in self:
+            message_id = tracking.mail_message_id.message_id.replace(
+                "<", "").replace(">", "")
+            res = requests.get(
+                '%s/%s/events' % (api_url, domain),
+                auth=("api", api_key),
+                params={
+                    "begin": tracking.timestamp,
+                    "ascending": "yes",
+                    "message-id": message_id,
+                }
+            )
+            if not res or res.status_code != 200:
+                raise ValidationError(_(
+                    "Couldn't retrieve Mailgun information"))
+            content = json.loads(res.content, res.apparent_encoding)
+            if "items" not in content:
+                raise ValidationError(_("Event information not longer stored"))
+            for item in content["items"]:
+                if not self.env['mail.tracking.event'].search(
+                        [('mailgun_id', '=', item["id"])]):
+                    mapped_event_type = self._mailgun_event_type_mapping.get(
+                        item["event"]) or False
+                    metadata = self._mailgun_metadata(
+                        mapped_event_type, item, {})
+                    tracking.event_create(mapped_event_type, metadata)

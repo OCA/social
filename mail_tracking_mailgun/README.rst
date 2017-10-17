@@ -29,9 +29,16 @@ You must configure Mailgun webhooks in order to receive mail events:
 Replace '<your_domain>' with your Odoo install domain name
 and '<your_database>' with your database name.
 
-In order to validate Mailgun webhooks you have to save Mailgun api_key in
-a system parameter named 'mailgun.apikey'. You can find Mailgun api_key in your
-validated sending domain.
+In order to validate Mailgun webhooks you have to configure the following system
+parameters:
+
+- `mailgun.apikey`: You can find Mailgun api_key in your validated sending
+  domain.
+- `mailgun.api_url`: It should be fine as it is, but it could change in the
+  future.
+- `mailgun.validation_key`: If you want to be able to check mail address
+  validity you must config this parameter with your account Public Validation
+  Key.
 
 Usage
 =====
@@ -39,6 +46,17 @@ Usage
 In your mail tracking status screens (explained on module *mail_tracking*), you will
 see a more accurate information, like the 'Received' or 'Bounced' status, which are
 not usually detected by normal SMTP servers.
+
+It's also possible to make some checks to the partner's email addresses against the Mailgun API:
+
+- Check if the partner's email is in Mailgun's bounced list.
+- Check the validity of the partner's mailbox.
+- Force the partner's email into Mailgun's bounced list or delete from it.
+
+It's also possible to manually check a message mailgun tracking when the webhook
+couldn't be captured. For that, go to that message tracking form, press the
+button *Check Mailgun*. It's important to note that tracking events have quite a
+short lifespan, so after 24h they won't be recoverable.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -70,6 +88,8 @@ Contributors
 
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
 * Carlos Dauden <carlos.dauden@tecnativa.com>
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
+* David Vidal <david.vidal@tecnativa.com>
 * Rafael Blasco <rafael.blasco@tecnativa.com>
 
 Maintainer
