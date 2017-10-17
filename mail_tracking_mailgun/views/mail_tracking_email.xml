@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="mailgun_manual_check" model="ir.ui.view">
+        <field name="name">Manual Mailgun check</field>
+        <field name="model">mail.tracking.email</field>
+        <field name="inherit_id" ref="mail_tracking.view_mail_tracking_email_form"/>
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                    <button name="action_manual_check_mailgun"
+                            type="object" string="Re-sync Mailgun"/>
+            </field>
+        </field>
+    </record>
+
+</odoo>
