@@ -24,7 +24,8 @@ class MailMessage(models.Model):
         res = super(MailMessage, self)._notify(
             force_send=force_send, send_after_commit=send_after_commit,
             user_signature=user_signature)
-        if not self.env.context.get('notify_followers'):
+        if self.env.context.get('force_partners_to_notify'):
             # Needaction only for recipients
-            self.needaction_partner_ids = [(6, 0, self.partner_ids.ids)]
+            self.needaction_partner_ids = [
+                (6, 0, self.env.context.get('force_partners_to_notify'))]
         return res
