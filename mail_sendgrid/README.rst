@@ -35,7 +35,7 @@ You can add the following system parameters to configure the usage of SendGrid:
   suffix for SendGrid Substitution Tags.
   ``}`` is used by default.
 * ``mail_sendgrid.send_method`` Use value 'sendgrid' to override the traditional SMTP server used to send e-mails with sendgrid.
-  Use any other value to disable traditional e-mail sending. By default, SendGrid will co-exist with traditional system
+  By default, SendGrid will co-exist with traditional system
   (two buttons for sending either normally or with SendGrid).
 
 In order to use this module, the following variables have to be defined in the

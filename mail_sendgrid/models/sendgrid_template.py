@@ -39,7 +39,7 @@ class SendgridTemplate(models.Model):
                 self.detected_keywords = ';'.join(keywords)
 
     @api.model
-    def update(self):
+    def update_templates(self):
         api_key = config.get('sendgrid_api_key')
         if not api_key:
             raise exceptions.UserError(
@@ -77,8 +77,8 @@ class SendgridTemplate(models.Model):
     def get_keywords(self):
         """ Search in the Sendgrid template for keywords included with the
         following syntax: {keyword_name} and returns the list of keywords.
-        keyword_name shouldn't be longer than 20 characters and only contain
-        alphanumeric characters (underscore is allowed).
+        keyword_name shouldn't be longer than 50 characters and not contain
+        whitespaces.
         You can replace the substitution prefix and suffix by adding values
         in the system parameters
             - mail_sendgrid.substitution_prefix
@@ -92,5 +92,5 @@ class SendgridTemplate(models.Model):
         suffix = params.search([
             ('key', '=', 'mail_sendgrid.substitution_suffix')
         ]) or '}'
-        pattern = prefix + r'\w{0,20}' + suffix
+        pattern = prefix + r'\S{1,50}' + suffix
         return list(set(re.findall(pattern, self.html_content)))

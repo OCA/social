@@ -11,14 +11,13 @@ _logger = logging.getLogger(__name__)
 
 
 class SendgridTrackingController(MailTrackingController):
-    """
-    Sendgrid is posting JSON so we must define a new route for tracking.
-    """
+    """Sendgrid is posting JSON so we must define a new route for tracking."""
     @http.route('/mail/tracking/sendgrid/<string:db>',
                 type='json', auth='none', csrf=False)
     def mail_tracking_sendgrid(self, db, **kw):
         try:
             _env_get(db, self._tracking_event, None, None, **kw)
             return {'status': 200}
-        except:
+        except Exception as e:
+            _logger.error(e.message, exc_info=True)
             return {'status': 400}
