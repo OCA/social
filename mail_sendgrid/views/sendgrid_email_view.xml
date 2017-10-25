@@ -14,7 +14,7 @@
             <field name="body_html" position="attributes">
                 <attribute name="widget">html</attribute>
             </field>
-            <xpath expr="//field[@name='attachment_ids']/.." position="after">
+            <xpath expr="//field[@name='attachment_ids']/ancestor::page" position="after">
                 <page string="SendGrid">
                     <group>
                         <field name="sendgrid_template_id"/>

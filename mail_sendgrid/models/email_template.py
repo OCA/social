@@ -3,14 +3,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api
+from collections import defaultdict
 
 
 class EmailTemplate(models.Model):
     _inherit = 'mail.template'
 
-    ##########################################################################
-    #                                 FIELDS                                 #
-    ##########################################################################
     substitution_ids = fields.One2many(
         'sendgrid.substitution', 'email_template_id', 'Substitutions')
     sendgrid_template_ids = fields.One2many(
@@ -30,25 +28,27 @@ class EmailTemplate(models.Model):
 
     @api.multi
     def update_substitutions(self):
-        self.ensure_one()
-        new_substitutions = list()
-        for language_template in self.sendgrid_template_ids:
-            sendgrid_template = language_template.sendgrid_template_id
-            lang = language_template.lang
-            substitutions = self.substitution_ids.filtered(
-                lambda s: s.lang == lang)
-            keywords = sendgrid_template.get_keywords()
-            # Add new keywords from the sendgrid template
-            for key in keywords:
-                if key not in substitutions.mapped('key'):
-                    substitution_vals = {
-                        'key': key,
-                        'lang': lang,
-                        'email_template_id': self.id
-                    }
-                    new_substitutions.append((0, 0, substitution_vals))
+        for template in self:
+            new_substitutions = []
+            for language_template in template.sendgrid_template_ids:
+                sendgrid_template = language_template.sendgrid_template_id
+                lang = language_template.lang
+                substitutions = template.substitution_ids.filtered(
+                    lambda s: s.lang == lang)
+                keywords = sendgrid_template.get_keywords()
+                # Add new keywords from the sendgrid template
+                for key in keywords:
+                    if key not in substitutions.mapped('key'):
+                        substitution_vals = {
+                            'key': key,
+                            'lang': lang,
+                            'email_template_id': template.id
+                        }
+                        new_substitutions.append((0, 0, substitution_vals))
 
-        return self.write({'substitution_ids': new_substitutions})
+            template.write({'substitution_ids': new_substitutions})
+
+        return True
 
     @api.multi
     def render_substitutions(self, res_ids):
@@ -64,7 +64,7 @@ class EmailTemplate(models.Model):
             res_ids = [res_ids]
         substitutions = self.substitution_ids.filtered(
             lambda s: s.lang == self.env.context.get('lang', 'en_US'))
-        substitution_vals = {res_id: list() for res_id in res_ids}
+        substitution_vals = defaultdict(list)
         for substitution in substitutions:
             values = self.render_template(
                 substitution.value, self.model, res_ids)

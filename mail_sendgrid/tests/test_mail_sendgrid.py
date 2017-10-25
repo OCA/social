@@ -1,16 +1,30 @@
 # -*- coding: utf-8 -*-
 # © 2017 Emanuel Cino - <ecino@compassion.ch>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-import mock
-from odoo.tests.common import TransactionCase
+import json
 
-mock_base_send = 'openerp.addons.mail.models.mail_mail.MailMail.send'
-mock_sendgrid_api_client = ('openerp.addons.mail_sendgrid.models.mail_mail'
+import mock
+from odoo.tests.common import HttpCase
+from ..controllers.json_request import RESTJsonRequest
+
+mock_base_send = 'odoo.addons.mail.models.mail_mail.MailMail.send'
+mock_sendgrid_api_client = ('odoo.addons.mail_sendgrid.models.mail_mail'
                             '.SendGridAPIClient')
-mock_sendgrid_send = ('openerp.addons.mail_sendgrid.models.mail_mail.'
-                      'OdooMail.send_sendgrid')
-mock_config = ('openerp.addons.mail_sendgrid.models.mail_mail.'
+mock_sendgrid_send = ('odoo.addons.mail_sendgrid.models.mail_mail.'
+                      'MailMail.send_sendgrid')
+mock_config = ('odoo.addons.mail_sendgrid.models.mail_mail.'
                'config')
+
+mock_config_template = ('odoo.addons.mail_sendgrid.models.sendgrid_template.'
+                        'config')
+mock_template_api_client = ('odoo.addons.mail_sendgrid.models.'
+                            'sendgrid_template.sendgrid.SendGridAPIClient')
+
+mock_json_request = 'odoo.http.Root.get_request'
+
+
+def side_effect_json(http_request):
+    return RESTJsonRequest(http_request)
 
 
 class FakeClient(object):
@@ -33,7 +47,31 @@ class FakeRequest(object):
         self.jsonrequest = [data]
 
 
-class TestMailSendgrid(TransactionCase):
+class FakeTemplateClient(object):
+    """ Simulate the Sendgrid Template api"""
+    def __init__(self):
+        self.client = self
+        self.templates = self
+        self.body = json.dumps({
+            "templates": [{
+                "id": "fake_id",
+                "name": "Fake Template"
+            }],
+            "versions": [{
+                "active": True,
+                "html_content": "<h1>fake</h1>",
+                "plain_content": "fake",
+            }],
+        })
+
+    def get(self):
+        return self
+
+    def _(self, id):
+        return self
+
+
+class TestMailSendgrid(HttpCase):
     def setUp(self):
         super(TestMailSendgrid, self).setUp()
         self.sendgrid_template = self.env['sendgrid.template'].create({
@@ -56,7 +94,7 @@ class TestMailSendgrid(TransactionCase):
             'composition_mode': 'comment',
             'model': 'res.partner',
             'res_id': self.recipient.id
-        })
+        }).with_context(active_id=self.recipient.id)
         self.mail_wizard.onchange_template_id_wrapper()
         self.timestamp = u'1471021089'
         self.event = {
@@ -80,7 +118,22 @@ class TestMailSendgrid(TransactionCase):
         mail_vals['recipient_ids'] = [(6, 0, self.recipient.ids)]
         if vals is not None:
             mail_vals.update(vals)
-        return self.env['mail.mail'].create(mail_vals)
+        return self.env['mail.mail'].with_context(test_mode=True).create(
+            mail_vals)
+
+    def test_preview(self):
+        """
+        Test the preview email_template is getting the Sendgrid template
+        """
+        preview_wizard = self.env['email_template.preview'].with_context(
+            template_id=self.mail_template.id,
+            default_res_id=self.recipient.id
+        ).create({})
+        # For a strange reason, res_id is converted to string
+        preview_wizard.res_id = self.recipient.id
+        preview_wizard.on_change_res_id()
+        self.assertIn(u'<h1>Test Sendgrid</h1>', preview_wizard.body_html)
+        self.assertIn(self.recipient.name, preview_wizard.body_html)
 
     def test_substitutions(self):
         """ Test substitutions in templates. """
@@ -135,9 +188,11 @@ class TestMailSendgrid(TransactionCase):
         """ Test various tracking events. """
         self.env['ir.config_parameter'].set_param(
             'mail_sendgrid.send_method', 'sendgrid')
-        mail = self.create_email()
         mock_sendgrid.return_value = FakeClient()
         m_config.get.return_value = "ushuwejhfkj"
+
+        # Send mail
+        mail = self.create_email()
         mail.send()
         self.assertEqual(mock_sendgrid.called, True)
         self.assertEqual(mail.state, 'sent')
@@ -176,3 +231,40 @@ class TestMailSendgrid(TransactionCase):
             self.request, self.event, self.metadata)
         self.assertEqual(mail_tracking.state, 'opened')
         self.assertEqual(mail.click_count, 1)
+
+        # Test events are linked to e-mail
+        self.assertEquals(len(mail.tracking_event_ids), 4)
+
+    def test_controller(self):
+        """ Check the controller is working """
+        event_data = [self.event]
+        with mock.patch(mock_json_request,
+                        side_effect=side_effect_json) as json_mock:
+            json_mock.return_value = True
+            result = self.url_open(
+                '/mail/tracking/sendgrid/' + self.session.db,
+                json.dumps(event_data)
+            )
+            self.assertTrue(json_mock.called)
+            self.assertTrue(result)
+            # Invalid request
+            self.url_open(
+                '/mail/tracking/sendgrid/' + self.session.db,
+                "[{'invalid': True}]"
+            )
+
+    @mock.patch(mock_template_api_client)
+    @mock.patch(mock_config_template)
+    def test_update_templates(self, m_config, m_sendgrid):
+        m_config.return_value = "ldkfjsOIWJRksfj"
+        m_sendgrid.return_value = FakeTemplateClient()
+        self.env['sendgrid.template'].update_templates()
+        template = self.env['sendgrid.template'].search([
+            ('remote_id', '=', 'fake_id')
+        ])
+        self.assertTrue(template)
+
+    def tearDown(self):
+        super(TestMailSendgrid, self).tearDown()
+        self.env['ir.config_parameter'].set_param(
+            'mail_sendgrid.send_method', 'traditional')

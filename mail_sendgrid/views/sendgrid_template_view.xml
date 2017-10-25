@@ -48,8 +48,9 @@
 
     <record model="ir.actions.server" id="update_sendgrid_templates">
         <field name="name">Update Sendgrid Templates</field>
-        <field name="model_id" ref="model_sendgrid_template"/>
-        <field name="code">object.update()
+        <field name="model_id" ref="mail_sendgrid.model_sendgrid_template"/>
+        <field name="code">
+env['sendgrid.template'].update_templates()
 action = {
     'name': 'Sendgrid templates',
     'type': 'ir.actions.act_window',

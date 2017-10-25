@@ -6,7 +6,7 @@
         <field name="model">mail.template</field>
         <field name="inherit_id" ref="mail.email_template_form"/>
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='email_from']/../.." position="after">
+            <xpath expr="//field[@name='email_from']/ancestor::page" position="after">
                 <page string="SendGrid">
                     <group>
                         <field name="sendgrid_template_ids">

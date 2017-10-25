@@ -7,7 +7,7 @@
     'category': 'Social Network',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
-    'website': 'http://www.compassion.ch',
+    'website': 'https://github.com/OCA/social',
     'depends': ['mail_tracking'],
     'data': [
         'security/ir.model.access.csv',

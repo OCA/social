@@ -17,18 +17,20 @@ class MailTrackingEmail(models.Model):
     """
     _inherit = 'mail.tracking.email'
 
-    click_count = fields.Integer(compute='_compute_clicks', store=True)
+    click_count = fields.Integer(
+        compute='_compute_clicks', store=True, readonly=True)
 
     @api.depends('tracking_event_ids')
     def _compute_clicks(self):
         for mail in self:
-            mail.click_count = len(mail.tracking_event_ids.filtered(
-                lambda event: event.event_type == 'click'))
+            mail.click_count = self.env['mail.tracking.event'].search_count([
+                ('event_type', '=', 'click'),
+                ('tracking_email_id', '=', mail.id)
+            ])
 
     @property
     def _sendgrid_mandatory_fields(self):
-        return ('event', 'sg_event_id', 'timestamp',
-                'odoo_id', 'odoo_db')
+        return ('event', 'timestamp', 'odoo_id', 'odoo_db')
 
     @property
     def _sendgrid_event_type_mapping(self):
@@ -56,7 +58,7 @@ class MailTrackingEmail(models.Model):
         # OK, event type is valid
         return True
 
-    def _db_verify(self, event):
+    def _sendgrid_db_verify(self, event):
         event = event or {}
         odoo_db = event.get('odoo_db')
         current_db = self.env.cr.dbname
@@ -70,10 +72,10 @@ class MailTrackingEmail(models.Model):
 
     def _sendgrid_metadata(self, sendgrid_event_type, event, metadata):
         # Get sendgrid timestamp when found
-        ts = event.get('timestamp', False)
+        ts = event.get('timestamp')
         try:
             ts = float(ts)
-        except:
+        except ValueError:
             ts = False
         if ts:
             dt = datetime.utcfromtimestamp(ts)
@@ -102,10 +104,12 @@ class MailTrackingEmail(models.Model):
                     'android', 'iphone', 'ipad']
             })
         # Mapping for special events
-        if sendgrid_event_type == 'bounced':
+        if sendgrid_event_type == 'bounce':
             metadata.update({
                 'error_type': event.get('type', False),
+                'bounce_type': event.get('type', False),
                 'error_description': event.get('reason', False),
+                'bounce_description': event.get('reason', False),
                 'error_details': event.get('status', False),
             })
         elif sendgrid_event_type == 'dropped':
@@ -138,7 +142,7 @@ class MailTrackingEmail(models.Model):
                 if self._event_is_from_sendgrid(event):
                     if not self._sendgrid_event_type_verify(event):
                         res = 'ERROR: Event type not supported'
-                    elif not self._db_verify(event):
+                    elif not self._sendgrid_db_verify(event):
                         res = 'ERROR: Invalid DB'
                     else:
                         res = 'OK'
@@ -149,14 +153,14 @@ class MailTrackingEmail(models.Model):
                     if not mapped_event_type:
                         res = 'ERROR: Bad event'
                     tracking = self._sendgrid_tracking_get(event)
-                    if not tracking:
+                    if tracking:
+                        # Complete metadata with sendgrid event info
+                        metadata = self._sendgrid_metadata(
+                            sendgrid_event_type, event, metadata)
+                        # Create event
+                        tracking.event_create(mapped_event_type, metadata)
+                    else:
                         res = 'ERROR: Tracking not found'
-                if res == 'OK':
-                    # Complete metadata with sendgrid event info
-                    metadata = self._sendgrid_metadata(
-                        sendgrid_event_type, event, metadata)
-                    # Create event
-                    tracking.event_create(mapped_event_type, metadata)
                 if res != 'NONE':
                     if event_type:
                         _logger.info(
