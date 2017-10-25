@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo import models, fields, api, exceptions, tools, _
+from odoo import models, fields, api, tools
 from odoo.tools.config import config
 from odoo.tools.safe_eval import safe_eval
 
@@ -32,9 +32,6 @@ class MailMessage(models.Model):
     """
     _inherit = 'mail.message'
 
-    ##########################################################################
-    #                                 FIELDS                                 #
-    ##########################################################################
     body_text = fields.Text(help='Text only version of the body')
     sent_date = fields.Datetime(copy=False)
     substitution_ids = fields.Many2many(
@@ -43,9 +40,6 @@ class MailMessage(models.Model):
         'sendgrid.template', 'Sendgrid Template')
     send_method = fields.Char(compute='_compute_send_method')
 
-    ##########################################################################
-    #                             FIELDS METHODS                             #
-    ##########################################################################
     @api.multi
     def _compute_send_method(self):
         """ Check whether to use traditional send method, sendgrid or disable.
@@ -56,13 +50,10 @@ class MailMessage(models.Model):
             email.send_method = send_method
 
 
-class OdooMail(models.Model):
+class MailMail(models.Model):
     """ Email message sent through SendGrid """
     _inherit = 'mail.mail'
 
-    ##########################################################################
-    #                                 FIELDS                                 #
-    ##########################################################################
     tracking_email_ids = fields.One2many(
         'mail.tracking.email', 'mail_id', string='Registered events',
         readonly=True)
@@ -77,75 +68,74 @@ class OdooMail(models.Model):
                  'tracking_email_ids.state')
     def _compute_tracking(self):
         for email in self:
-            email.click_count = sum(email.tracking_email_ids.mapped(
+            click_count = sum(email.tracking_email_ids.mapped(
                 'click_count'))
-            opened = len(email.tracking_email_ids.filtered(
-                lambda t: t.state == 'opened'))
-            email.opened = opened > 0
+            opened = self.env['mail.tracking.email'].search_count([
+                ('state', '=', 'opened'),
+                ('mail_id', '=', email.id)
+            ])
+            email.update({
+                'click_count': click_count,
+                'opened': opened > 0
+            })
 
     def _compute_events(self):
         for email in self:
             email.tracking_event_ids = email.tracking_email_ids.mapped(
                 'tracking_event_ids')
 
-    ##########################################################################
-    #                             PUBLIC METHODS                             #
-    ##########################################################################
     @api.multi
     def send(self, auto_commit=False, raise_exception=False):
         """ Override send to select the method to send the e-mail. """
         traditional = self.filtered(lambda e: e.send_method == 'traditional')
         sendgrid = self.filtered(lambda e: e.send_method == 'sendgrid')
         if traditional:
-            super(OdooMail, traditional).send(auto_commit, raise_exception)
+            super(MailMail, traditional).send(auto_commit, raise_exception)
         if sendgrid:
             sendgrid.send_sendgrid()
-        unknown = self - traditional - sendgrid
-        if unknown:
-            _logger.warning(
-                "Traditional e-mails are disabled. Please remove system "
-                "parameter mail_sendgrid.send_method if you want to send "
-                "e-mails through your configured SMTP.")
-            unknown.write({'state': 'exception'})
         return True
 
     @api.multi
     def send_sendgrid(self):
         """ Use sendgrid transactional e-mails : e-mails are sent one by
         one. """
+        outgoing = self.filtered(lambda em: em.state == 'outgoing')
         api_key = config.get('sendgrid_api_key')
-        if not api_key:
-            raise exceptions.UserError(
-                _('Missing sendgrid_api_key in conf file'))
+        if outgoing and not api_key:
+            _logger.error(
+                'Missing sendgrid_api_key in conf file. Skipping Sendgrid '
+                'send.'
+            )
+            return
 
         sg = SendGridAPIClient(apikey=api_key)
-        for email in self.filtered(lambda em: em.state == 'outgoing'):
-            # Commit at each e-mail processed to avoid any errors
-            # invalidating state.
-            with self.env.cr.savepoint():
-                try:
-                    response = sg.client.mail.send.post(
-                        request_body=email._prepare_sendgrid_data().get())
-                except Exception as e:
-                    _logger.error(e.message)
-                    continue
+        for email in outgoing:
+            try:
+                response = sg.client.mail.send.post(
+                    request_body=email._prepare_sendgrid_data().get())
+            except Exception as e:
+                _logger.error(e.message or "mail not sent.")
+                continue
 
-                status = response.status_code
-                msg = response.body
+            status = response.status_code
+            msg = response.body
 
-                if status == STATUS_OK:
-                    _logger.info(str(msg))
-                    email._track_sendgrid_emails()
-                    email.write({
-                        'sent_date': fields.Datetime.now(),
-                        'state': 'sent'
-                    })
-                else:
-                    _logger.error("Failed to send email: {}".format(str(msg)))
+            if status == STATUS_OK:
+                _logger.info("e-mail sent. " + str(msg))
+                email._track_sendgrid_emails()
+                email.write({
+                    'sent_date': fields.Datetime.now(),
+                    'state': 'sent'
+                })
+                if not self.env.context.get('test_mode'):
+                    # Commit at each e-mail processed to avoid any errors
+                    # invalidating state.
+                    self.env.cr.commit()    # pylint: disable=invalid-commit
+                email._postprocess_sent_message(mail_sent=True)
+            else:
+                email._postprocess_sent_message(mail_sent=False)
+                _logger.error("Failed to send email: {}".format(str(msg)))
 
-    ##########################################################################
-    #                             PRIVATE METHODS                            #
-    ##########################################################################
     def _prepare_sendgrid_data(self):
         """
         Prepare and creates the Sendgrid Email object
@@ -177,7 +167,7 @@ class OdooMail(models.Model):
         p = re.compile(r'<.*?>')  # Remove HTML markers
         text_only = self.body_text or p.sub('', html.replace('<br/>', '\n'))
 
-        s_mail.add_content(Content("text/plain", text_only))
+        s_mail.add_content(Content("text/plain", text_only or ' '))
         s_mail.add_content(Content("text/html", html))
 
         test_address = config.get('sendgrid_test_address')

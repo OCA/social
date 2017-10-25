@@ -23,6 +23,8 @@ class MassMailing(models.Model):
     # Trick to save html when taken from the e-mail template
     html_copy = fields.Html(
         compute='_compute_sendgrid_view', inverse='_inverse_html_copy')
+    # Trick to display another widget when using Sendgrid
+    html_unframe = fields.Html(related='body_html')
     enable_unsubscribe = fields.Boolean()
     unsubscribe_text = fields.Char(
         default='If you would like to unsubscribe and stop receiving these '
@@ -88,41 +90,51 @@ class MassMailing(models.Model):
 
     @api.multi
     def send_mail(self):
-        self.ensure_one()
-        if self.email_template_id:
+        sendgrid = self.filtered('email_template_id')
+        emails = self.env['mail.mail']
+        for mailing in sendgrid:
             # use E-mail Template
-            res_ids = self.get_recipients()
+            res_ids = mailing.get_recipients()
             if not res_ids:
                 raise UserError(_('Please select recipients.'))
-            template = self.email_template_id
-            composer_values = {
-                'template_id': template.id,
-                'composition_mode': 'mass_mail',
-                'model': template.model,
-                'author_id': self.env.user.partner_id.id,
-                'res_id': res_ids[0],
-                'attachment_ids': [(4, attachment.id) for attachment in
-                                   self.attachment_ids],
-                'email_from': self.email_from,
-                'body': self.body_html,
-                'subject': self.name,
-                'record_name': False,
-                'mass_mailing_id': self.id,
-                'mailing_list_ids': [(4, l.id) for l in
-                                     self.contact_list_ids],
-                'no_auto_thread': self.reply_to_mode != 'thread',
-            }
-            if self.reply_to_mode == 'email':
-                composer_values['reply_to'] = self.reply_to
+            lang = mailing.lang.code or self.env.context.get('lang', 'en_US')
+            mailing = mailing.with_context(lang=lang)
+            composer_values = mailing._send_mail_get_composer_values()
+            if mailing.reply_to_mode == 'email':
+                composer_values['reply_to'] = mailing.reply_to
             composer = self.env['mail.compose.message'].with_context(
-                lang=self.lang.code or self.env.context.get('lang', 'en_US'),
-                active_ids=res_ids)
-            emails = composer.mass_mailing_sendgrid(res_ids, composer_values)
-            self.write({
+                lang=lang, active_ids=res_ids)
+            emails += composer.mass_mailing_sendgrid(res_ids, composer_values)
+            mailing.write({
                 'state': 'done',
                 'sent_date': fields.Datetime.now(),
             })
-            return emails
-        else:
-            # Traditional sending
-            return super(MassMailing, self).send_mail()
+        # Traditional sending
+        super(MassMailing, self - sendgrid).send_mail()
+        return emails
+
+    def _send_mail_get_composer_values(self):
+        """
+        Get the values used for the mail.compose.message wizard that will
+        generate the e-mails of a mass mailing campaign.
+        :return: dictionary of mail.compose.message values
+        """
+        template = self.email_template_id
+        author = self.mass_mailing_campaign_id.user_id.partner_id or \
+            self.env.user.partner_id
+        return {
+            'template_id': template.id,
+            'composition_mode': 'mass_mail',
+            'model': template.model,
+            'author_id': author.id,
+            'attachment_ids': [(4, attachment.id) for attachment in
+                               self.attachment_ids],
+            'email_from': self.email_from,
+            'body': self.body_html,
+            'subject': self.name,
+            'record_name': False,
+            'mass_mailing_id': self.id,
+            'mailing_list_ids': [(4, l.id) for l in
+                                 self.contact_list_ids],
+            'no_auto_thread': self.reply_to_mode != 'thread',
+        }

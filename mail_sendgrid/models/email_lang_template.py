@@ -13,10 +13,10 @@ class LanguageTemplate(models.Model):
     _name = 'sendgrid.email.lang.template'
 
     email_template_id = fields.Many2one('mail.template', 'E-mail Template')
-    lang = fields.Selection('_lang_get', 'Language', required=True)
+    lang = fields.Selection('_select_lang', 'Language', required=True)
     sendgrid_template_id = fields.Many2one(
         'sendgrid.template', 'Sendgrid Template', required=True)
 
-    def _lang_get(self):
+    def _select_lang(self):
         languages = self.env['res.lang'].search([])
         return [(language.code, language.name) for language in languages]

@@ -6,6 +6,12 @@
         <field name="model">mail.mass_mailing</field>
         <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
         <field name="arch" type="xml">
+            <field name="body_html" position="attributes">
+                <attribute name="attrs">{'invisible': [('email_template_id', '!=', False)]}</attribute>
+            </field>
+            <field name="body_html" position="after">
+                <field name="html_unframe" widget="html" attrs="{'invisible': [('email_template_id', '=', False)]}"/>
+            </field>
             <xpath expr="//field[@name='mailing_model']/.." position="after">
                 <field name="email_template_id" domain="[('model', '=', mailing_model), ('sendgrid_template_ids', '!=', False)]"/>
                 <field name="lang" attrs="{'invisible': [('email_template_id', '=', False)]}"/>
