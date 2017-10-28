@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-13 03:01+0000\n"
-"PO-Revision-Date: 2017-05-11 14:14+0000\n"
+"POT-Creation-Date: 2017-10-11 13:17+0000\n"
+"PO-Revision-Date: 2017-09-23 21:36+0000\n"
 "Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-social-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -211,18 +211,18 @@ msgstr "Viimeksi päivitetty"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
 msgid "Mailing List"
-msgstr ""
+msgstr "Postituslista"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
 msgid "Mass Mailing"
-msgstr ""
+msgstr "Massapostitus"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 #: field:mail.unsubscription,mass_mailing_id:0
 msgid "Mass mailing"
-msgstr ""
+msgstr "Massapostitus"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,mass_mailing_id:0

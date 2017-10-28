@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 10:10+0000\n"
-"PO-Revision-Date: 2017-08-19 10:10+0000\n"
+"POT-Creation-Date: 2017-10-11 13:17+0000\n"
+"PO-Revision-Date: 2017-10-11 13:17+0000\n"
 "Last-Translator: Peter Hageman <hageman.p@gmail.com>, 2017\n"
 "Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/23907/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -73,7 +73,7 @@ msgstr ""
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,create_uid:0
@@ -184,7 +184,7 @@ msgstr ""
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
-msgstr ""
+msgstr "Groeperen op"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -369,7 +369,7 @@ msgstr ""
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search
 #: field:mail.tracking.email,state:0
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: mail_tracking
 #: view:mail.tracking.email:mail_tracking.view_mail_tracking_email_search

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 10:10+0000\n"
-"PO-Revision-Date: 2017-08-21 07:22+0000\n"
+"POT-Creation-Date: 2017-10-11 13:17+0000\n"
+"PO-Revision-Date: 2017-09-22 14:36+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Danish (Denmark) (http://www.transifex.com/oca/OCA-social-8-0/language/da_DK/)\n"
 "MIME-Version: 1.0\n"
@@ -278,7 +278,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription.reason,sequence:0
 msgid "Sequence"
-msgstr ""
+msgstr "Rækkefølge"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search

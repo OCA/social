@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-19 10:09+0000\n"
-"PO-Revision-Date: 2017-08-29 08:01+0000\n"
+"POT-Creation-Date: 2017-10-11 13:17+0000\n"
+"PO-Revision-Date: 2017-09-22 20:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Dutch (Netherlands) (http://www.transifex.com/oca/OCA-social-8-0/language/nl_NL/)\n"
 "MIME-Version: 1.0\n"
@@ -69,7 +69,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_tree
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_form
 msgid "Country"
-msgstr ""
+msgstr "Land"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,create_uid:0
@@ -126,7 +126,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Group By"
-msgstr ""
+msgstr "Groeperen op"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
@@ -324,7 +324,7 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,state:0
 msgid "State"
-msgstr ""
+msgstr "Provincie"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search

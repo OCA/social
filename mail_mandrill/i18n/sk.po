@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:29+0000\n"
+"POT-Creation-Date: 2017-10-11 13:17+0000\n"
+"PO-Revision-Date: 2017-10-16 18:32+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Slovak (http://www.transifex.com/oca/OCA-social-8-0/language/sk/)\n"
 "MIME-Version: 1.0\n"
@@ -324,7 +324,7 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,state:0
 msgid "State"
-msgstr ""
+msgstr "Stav"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search

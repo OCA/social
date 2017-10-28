@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-13 03:01+0000\n"
-"PO-Revision-Date: 2017-05-11 04:38+0000\n"
+"POT-Creation-Date: 2017-10-11 13:17+0000\n"
+"PO-Revision-Date: 2017-09-23 22:00+0000\n"
 "Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-social-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: mass_mailing_statistic_extra
 #: model:ir.model,name:mass_mailing_statistic_extra.model_mail_mail_statistics
 msgid "Email Statistics"
-msgstr ""
+msgstr "Sähköpostistatistiikka"
 
 #. module: mass_mailing_statistic_extra
 #: field:mail.mail.statistics,email_from:0
