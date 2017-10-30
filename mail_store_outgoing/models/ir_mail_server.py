@@ -49,8 +49,8 @@ class IrMailServer(models.Model):
             self.write({'imap_mailbox_verified': True})
         except Exception, e:
             raise ValidationError(
-                _("Connection Test Failed!"),
-                _("Here is what we got instead:\n %s") % tools.ustr(e))
+                _("Connection Test Failed!"
+                "Here is what we got instead:\n %s") % tools.ustr(e))
         finally:
             try:
                 if result:
