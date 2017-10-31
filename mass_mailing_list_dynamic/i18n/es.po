@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mass_mailing_list_dynamic
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-03 10:58+0000\n"
+"PO-Revision-Date: 2017-11-03 12:00+0100\n"
+"Last-Translator: Jairo Llopis <yajo.sk8@gmail.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.0.3\n"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
+msgid ""
+"<i class=\"fa fa-info-circle\"/> If you want to remove contacts from a "
+"dynamic list, just <b>set them as <i>Opt Out</i></b>."
+msgstr ""
+"<i class=\"fa fa-info-circle\"/> Si quiere eliminar contactos de una lista "
+"dinámica, simplemente <b>márquelos como <i>Envío no deseado</i></b>."
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
+msgid ""
+"<i class=\"fa fa-info-circle\"/> You cannot make manual editions of contacts "
+"in fully synchronized lists."
+msgstr ""
+"<i class=\"fa fa-info-circle\"/> No puede editar manualmente los contactos "
+"en las listas que están completamente sincronizadas."
+
+#. module: mass_mailing_list_dynamic
+#: selection:mail.mass_mailing.list,sync_method:0
+msgid "Add and remove records as needed"
+msgstr "Añade y elimina los registros conforme se necesite"
+
+#. module: mass_mailing_list_dynamic
+#: code:addons/mass_mailing_list_dynamic/models/mail_mass_mailing_contact.py:17
+#, python-format
+msgid ""
+"Cannot edit manually contacts in a fully synchronized list. Change its sync "
+"method or execute a manual sync instead."
+msgstr ""
+"No se pueden editar manualmente los contactos de una lista que está "
+"completamente sincronizada. En vez de eso, cambie su método de "
+"sincronización o ejecute una sincronización manual."
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_method
+msgid ""
+"Choose the syncronization method for this list if you want to make it dynamic"
+msgstr ""
+"Escoja el método de sincronización para esta lista si quiere hacerla dinámica"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_dynamic
+msgid "Dynamic"
+msgstr "Dinámica"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
+msgid "Dynamic list"
+msgstr "Lista dinámica"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_domain
+msgid "Filter partners to sync in this list"
+msgstr "Filtrar contactos a sincronizar en esta lista"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model,name:mass_mailing_list_dynamic.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr "Lista de correo"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model,name:mass_mailing_list_dynamic.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr "Correo masivo"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model,name:mass_mailing_list_dynamic.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Contacto de correo masivo"
+
+#. module: mass_mailing_list_dynamic
+#: selection:mail.mass_mailing.list,sync_method:0
+msgid "Only add new records"
+msgstr "Solamente añadir nuevos registros"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_method
+msgid "Sync method"
+msgstr "Método de sincronización"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
+msgid "Sync now"
+msgstr "Sincronizar ahora"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_domain
+msgid "Synchronization critera"
+msgstr "Criterios de sincronización"
+
+#~ msgid ""
+#~ "<i class=\"fa fa-exclamation-circle\"/> If you manually add contacts to "
+#~ "the list, <b>they might get removed later automatically!</b>"
+#~ msgstr ""
+#~ "<i class=\"fa fa-exclamation-circle\"/> Si añade contactos a la lista "
+#~ "manualmente, <b>¡podrían ser eliminados automáticamente más tarde!</b>"
+
+#~ msgid "Sync domain"
+#~ msgstr "Dominio de sincronización"
