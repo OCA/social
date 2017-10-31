@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 Tecnativa - Jairo Llopis
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_mail_mass_mailing_list_form" model="ir.ui.view">
+        <field name="name">Add sync stuff</field>
+        <field name="model">mail.mass_mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_list_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="after">
+                <group name="dynamic" string="Dynamic list">
+                    <group colspan="4">
+                        <field
+                            name="dynamic"
+                        />
+                    </group>
+                    <group attrs="{'invisible': [('dynamic', '=', False)]}">
+                        <label for="sync_method"/>
+                        <div>
+                            <field
+                                name="sync_method"
+                            />
+                            <button
+                                name="action_sync"
+                                type="object"
+                                string="Sync now"
+                                icon="fa-refresh"
+                            />
+                        </div>
+                    </group>
+                    <group attrs="{'invisible': [('dynamic', '=', False)]}">
+                        <div
+                            class="alert alert-info"
+                            role="alert"
+                        >
+                            <i class="fa fa-info-circle"/> If you want to remove contacts from a dynamic list, just <b>set them as <i>Opt Out</i></b>.
+                        </div>
+                        <div
+                            class="alert alert-warning"
+                            role="alert"
+                        >
+                            <i class="fa fa-info-circle"/> You cannot make manual editions of contacts in fully synchronized lists.
+                        </div>
+                    </group>
+                    <group colspan="4"
+                           attrs="{'invisible': [('dynamic', '=', False)]}">
+                        <field
+                            name="sync_domain"
+                            widget="char_domain"
+                            options='{"model": "res.partner"}'
+                        />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
