@@ -15,7 +15,7 @@ class SignatureCase(TransactionCase):
     def signature(self, **context):
         """Get user's signature."""
         return (self.mail_notification.with_context(**context)
-                ._get_signature_footer(self.user.id))
+                .get_signature_footer(self.user.id))
 
     def test_signature_user_custom(self):
         """User name does not appear in signature when it is custom."""

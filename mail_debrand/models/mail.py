@@ -9,8 +9,8 @@ class MailNotification(models.Model):
     _inherit = "mail.notification"
 
     @api.model
-    def _get_signature_footer(self, user_id, res_model=None, res_id=None,
-                              user_signature=True):
+    def get_signature_footer(self, user_id, res_model=None, res_id=None,
+                             user_signature=True):
         """Generate signature footer only with the chosen parts.
 
         Now, you can set ``skip_signature_user=True`` in the context to remove
