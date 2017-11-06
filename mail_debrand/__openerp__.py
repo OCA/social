@@ -4,7 +4,7 @@
 {
     "name": "Mail Debrand",
     "summary": "Remove Odoo branding from email footers",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.0.1",
     "category": "Social Network",
     "website": "http://www.antiun.com",
     "author": "Antiun Ingeniería S.L., Odoo Community Association (OCA)",
