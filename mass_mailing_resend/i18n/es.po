@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mass_mailing_resend
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-11-07 19:32+0000\n"
+"PO-Revision-Date: 2017-11-07 19:32+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mass_mailing_resend
+#: model:ir.model,name:mass_mailing_resend.model_mail_mass_mailing
+msgid "Mass Mailing"
+msgstr "Correo masivo"
+
+#. module: mass_mailing_resend
+#: model:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+msgid "Resend"
+msgstr "Reenviar"
+
+#. module: mass_mailing_resend
+#: code:addons/mass_mailing_resend/models/mass_mailing.py:17
+#, python-format
+msgid "You can't resend a mass mailing that is being sent or in draft state."
+msgstr "No puede reenviar un correo masivo que está siendo enviado en estado borrador."
+
