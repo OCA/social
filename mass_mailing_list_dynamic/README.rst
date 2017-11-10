@@ -18,7 +18,7 @@ Configuration
 
 To create a dynamic mailing list, you need to:
 
-#. Go to *Mass Mailing > Mailings > Mailing Lists > Create*.
+#. Go to *Mass Mailing > Mailings > Mailing Lists* and create one.
 #. Check the *Dynamic* box.
 #. Choose a *Sync method*:
    - Leave empty to use as a manual mailing list, the normal behavior.
@@ -27,9 +27,25 @@ To create a dynamic mailing list, you need to:
    - *Add and remove records as needed* to make the list be fully synchronized
      with the *Synchronization critera*, even if that means removing contacts
      from it.
-#. Define a *Synchronization critera* that will be used to match the partners
+#. Define a *Synchronization criteria* that will be used to match the partners
    that should go into the list as contacts. Only partners with emails will
    be selected.
+
+You can also load an existing filter over contacts:
+
+#. Click on "Load filter" button below criteria.
+#. Select one of the existing filters.
+#. Click on "Load filter" and you will have that filter as criteria.
+
+Usage
+=====
+
+#. Go to *Mass Mailing > Mailings > Mass Mailings*, and create one.
+#. Select as recipients a mailing list.
+#. On "Select mailing lists:", choose one mailing list with dynamic flag
+   checked.
+#. Before sending the mass mailing, the list will be synced for having latest
+   changes.
 
 Usage
 =====
@@ -65,13 +81,15 @@ Credits
 Images
 ------
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+* Odoo.
+* FontAwesome (http://fontawesome.io).
 
 Contributors
 ------------
 
 * `Tecnativa <https://www.tecnativa.com>`_:
   * Jairo Llopis <jairo.llopis@tecnativa.com>
+  * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 
 Do not contact contributors directly about support or help with technical issues.
 

@@ -11,7 +11,7 @@ class MassMailingContact(models.Model):
 
     @api.constrains("partner_id", "list_id", "name", "email")
     def _check_no_manual_edits_on_fully_synced_lists(self):
-        if self.env.context.get("syncing"):
+        if self.env.context.get("syncing"):  # pragma: no cover
             return
         if any(one.list_id.sync_method == "full" for one in self):
             raise ValidationError(

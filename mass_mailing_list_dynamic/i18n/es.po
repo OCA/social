@@ -4,6 +4,8 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+#	* mass_mailing_list_dynamic
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
@@ -20,17 +22,13 @@ msgstr ""
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
-msgid ""
-"<i class=\"fa fa-info-circle\"/> If you want to remove contacts from a "
-"dynamic list, just <b>set them as <i>Opt Out</i></b>."
-msgstr ""
+msgid "<i class=\"fa fa-info-circle\"/> If you want to remove contacts from a dynamic list, just <b>set them as <i>Opt Out</i></b>."
+msgstr "<i class=\"fa fa-info-circle\"/> Si quiere eliminar contactos de una lista dinámica, simplemente <b>márquelos como <i>Envío no deseado</i></b>."
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
-msgid ""
-"<i class=\"fa fa-info-circle\"/> You cannot make manual editions of contacts"
-" in fully synchronized lists."
-msgstr ""
+msgid "<i class=\"fa fa-info-circle\"/> You cannot make manual editions of contacts in fully synchronized lists."
+msgstr "<i class=\"fa fa-info-circle\"/> No puede editar manualmente los contactos en las listas que están completamente sincronizadas."
 
 #. module: mass_mailing_list_dynamic
 #: selection:mail.mass_mailing.list,sync_method:0
@@ -38,19 +36,35 @@ msgid "Add and remove records as needed"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_load_filter_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: mass_mailing_list_dynamic
 #: code:addons/mass_mailing_list_dynamic/models/mail_mass_mailing_contact.py:18
 #, python-format
-msgid ""
-"Cannot edit manually contacts in a fully synchronized list. Change its sync "
-"method or execute a manual sync instead."
-msgstr ""
+msgid "Cannot edit manually contacts in a fully synchronized list. Change its sync method or execute a manual sync instead."
+msgstr "No se pueden editar manualmente los contactos de una lista que está completamente sincronizada. En vez de eso, cambie su método de sincronización o ejecute una sincronización manual."
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_method
-msgid ""
-"Choose the syncronization method for this list if you want to make it "
-"dynamic"
-msgstr ""
+msgid "Choose the syncronization method for this list if you want to make it dynamic"
+msgstr "Escoja el método de sincronización para esta lista si quiere hacerla dinámica"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_display_name
+msgid "Display Name"
+msgstr "Nombre a mostrar"
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_dynamic
@@ -66,6 +80,38 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_domain
 msgid "Filter partners to sync in this list"
 msgstr ""
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_filter_id
+msgid "Filter to load"
+msgstr "Filtro a cargar"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter___last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.actions.act_window,name:mass_mailing_list_dynamic.action_mail_mass_mailing_load_filter
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
+#: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_load_filter_form
+msgid "Load filter"
+msgstr "Cargar filtro"
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mail_mass_mailing_list
@@ -95,6 +141,11 @@ msgid ""
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_dynamic
+msgid "Set this list as dynamic, to make it autosynchronized with partners from a given criteria."
+msgstr "Establezca esta lista como dinámica, para hacerla autosincronizada con los contactos dado un criterio."
+
+#. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_method
 msgid "Sync method"
 msgstr ""
@@ -107,4 +158,9 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_domain
 msgid "Synchronization critera"
-msgstr ""
+msgstr "Criterios de sincronización"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model,name:mass_mailing_list_dynamic.model_mail_mass_mailing_load_filter
+msgid "mail.mass_mailing.load.filter"
+msgstr "mail.mass_mailing.load.filter"
