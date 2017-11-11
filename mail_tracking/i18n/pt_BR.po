@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Armando Vulcano Junior <vulcano@uol.com.br>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-12 12:59+0000\n"
-"PO-Revision-Date: 2017-03-12 12:59+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-10-28 11:15+0000\n"
+"PO-Revision-Date: 2017-10-28 11:15+0000\n"
+"Last-Translator: Armando Vulcano Junior <vulcano@uol.com.br>, 2017\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/23907/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -410,7 +411,7 @@ msgstr "Tipo"
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_tracking
 #: field:mail.tracking.email,timestamp:0 field:mail.tracking.event,timestamp:0

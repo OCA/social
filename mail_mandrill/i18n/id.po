@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:29+0000\n"
+"POT-Creation-Date: 2017-10-28 11:15+0000\n"
+"PO-Revision-Date: 2017-11-03 12:15+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-social-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -268,7 +268,7 @@ msgstr ""
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
 msgid "Recipient"
-msgstr ""
+msgstr "Penerima"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,recipient:0
@@ -284,13 +284,13 @@ msgstr ""
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 msgid "Send"
-msgstr ""
+msgstr "Kirim"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
 msgid "Sender"
-msgstr ""
+msgstr "Pengirim"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.message,sender:0
@@ -302,7 +302,7 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: selection:mail.mandrill.message,state:0
 msgid "Sent"
-msgstr ""
+msgstr "Kirim"
 
 #. module: mail_mandrill
 #: selection:mail.mandrill.event,event_type:0
@@ -324,14 +324,14 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,state:0
 msgid "State"
-msgstr ""
+msgstr "Bagian"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 #: field:mail.mandrill.message,name:0
 msgid "Subject"
-msgstr ""
+msgstr "Perihal"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_tree
