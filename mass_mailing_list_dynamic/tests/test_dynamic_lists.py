@@ -56,6 +56,10 @@ class DynamicListCase(common.SavepointCase):
         self.assertTrue(contact0.exists())
         # Set list as full-synced
         self.list.sync_method = "full"
+        Contact.search([
+            ("list_id", "=", self.list.id),
+            ("partner_id", "=", self.partners[2].id),
+        ]).unlink()
         self.list.action_sync()
         self.assertEqual(self.list.contact_nbr, 3)
         self.assertFalse(contact0.exists())
