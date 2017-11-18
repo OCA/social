@@ -6,13 +6,14 @@
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
 # Akim Juillerat <akim.juillerat@camptocamp.com>, 2017
+# neben <b.brich@humanilog.org>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-06-20 02:49+0000\n"
-"PO-Revision-Date: 2017-06-20 02:49+0000\n"
-"Last-Translator: Akim Juillerat <akim.juillerat@camptocamp.com>, 2017\n"
+"POT-Creation-Date: 2017-11-11 09:44+0000\n"
+"PO-Revision-Date: 2017-11-11 09:44+0000\n"
+"Last-Translator: neben <b.brich@humanilog.org>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,6 +32,8 @@ msgid ""
 "Before unsubscribing, could you please tell us why do you want to "
 "unsubscribe?"
 msgstr ""
+"Bevor Sie sich abmelden, dürfen wir Sie bitten uns mitzuteilen warum Sie "
+"sich abmelden?"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_details_required
@@ -116,7 +119,7 @@ msgstr "Gruppiere nach"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
 msgid "I am unsubscribing because..."
-msgstr ""
+msgstr "Ich möchten den Newsletter abbestellen weil..."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
@@ -196,7 +199,7 @@ msgstr "Mailingliste"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
 msgid "Mailing Unsubscription"
-msgstr ""
+msgstr "Newsletter abbestellen"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
@@ -273,7 +276,7 @@ msgstr "Ausgehende Nachrichten"
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:56
 #, python-format
 msgid "Please provide details on why you are unsubscribing."
-msgstr ""
+msgstr "Bitte teilen Sie uns mit, warum Sie den Newsletter abbestellen."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason_sequence
@@ -358,7 +361,7 @@ msgstr "Jahr"
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:91
 #, python-format
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Ihre Änderungen wurden gespeichert."
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
@@ -366,8 +369,10 @@ msgstr ""
 #, python-format
 msgid "Your changes have not been saved, try again later."
 msgstr ""
+"Ihre Änderungen wurden nicht gespeichert, bitte versuchen Sie es später noch"
+" einmal."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription_reason
 msgid "mail.unsubscription.reason"
-msgstr ""
+msgstr "Abbestellungsgründe"
