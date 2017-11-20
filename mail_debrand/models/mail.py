@@ -44,8 +44,9 @@ class MailNotification(models.Model):
         if website:
             if not website.startswith(('http:', 'https:')):
                 website = "http://" + website
-            company = ("<a href='%s'>%s</a>" %
+            company = ("<a style='color:inherit' href='%s'>%s</a>" %
                        (website, user.company_id.name))
         else:
             company = user.company_id.name
-        return _('Sent by %s') % company
+        sent_by = _('Sent by %s') % company
+        return '<br /><small>%s</small>' % sent_by
