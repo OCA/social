@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 LasLabs Inc.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+
+<templates>
+
+    <t t-name="systray">
+        <li class="o_mail_navbar_item">
+            <a id="userStatus" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Status" href="#">
+                <i class="o_mail_user_status" />
+            </a>
+            <ul class="dropdown-menu o_user_presence_dropdown" role="menu">
+                <li>
+                    <span name="online" class="o_user_presence_status">
+                        <i t-attf-class="o_mail_user_status o_user_online fa fa-circle" />
+                        Online
+                    </span>
+                </li>
+                <li>
+                    <span name="away" class="o_user_presence_status">
+                        <i class="o_mail_user_status o_user_idle fa fa-circle" />
+                        Away
+                    </span>
+                </li>
+                <li>
+                    <span name="offline" class="o_user_presence_status">
+                        <i class="o_mail_user_status fa fa-circle-o" />
+                        Offline
+                    </span>
+                </li>
+            </ul>
+        </li>
+    </t>
+
+</templates>
