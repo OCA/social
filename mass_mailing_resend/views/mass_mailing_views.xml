@@ -12,6 +12,16 @@
                         type="object"
                 />
             </field>
+            <header position="after">
+                <div class="alert alert-warning oe_text_center" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('sent', '=', '0')]}">
+                    <p>
+                        <i class="fa fa-info-circle"/> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, click on <b>Emails Sent</b> smart-button for removing the existing record(s).
+                    </p>
+                </div>
+            </header>
+            <div name="button_box" position="attributes">
+                <attribute name="attrs">{'invisible': [('sent', '=', 0)]}</attribute>
+            </div>
         </field>
     </record>
 
