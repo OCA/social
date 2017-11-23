@@ -49,10 +49,7 @@ class IrMailServer(models.Model):
                 folder.unlink()
             for line in mBoxes:
                 flags, delimiter, mailbox_name = self.parse_list_response(line)
-                res = {
-                    'server_id': self.id,
-                    'name': mailbox_name,
-                }
+                res = {'server_id': self.id, 'name': mailbox_name, }
                 imap_pool.create(res)
             self.write({'imap_mailbox_verified': True})
         except Exception, e:
