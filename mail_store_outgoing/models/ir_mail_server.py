@@ -55,7 +55,7 @@ class IrMailServer(models.Model):
         except Exception, e:
             raise ValidationError(
                 _("Connection Test Failed!"
-                "Here is what we got instead:\n %s") % tools.ustr(e))
+                    "Here is what we got instead:\n %s") % tools.ustr(e))
         finally:
             try:
                 if result:
