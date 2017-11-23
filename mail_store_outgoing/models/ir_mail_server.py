@@ -15,6 +15,14 @@ _logger = logging.getLogger(__name__)
 class IrMailServer(models.Model):
     _inherit = 'ir.mail_server'
 
+    imap_mailbox_folder = fields.Many2one('ir.mail.imap.folder',
+                                          'Imap Folders',)
+    imap_mailbox_verified = fields.Boolean('IMAP Connection Verified', )
+    store_outgoing_mail = fields.Boolean('Store Outgoing Mail', )
+    has_separate_imap_server = fields.Boolean('Use Separate Imap Server', )
+    separate_imap_server = fields.Char('Separate Imap Server', )
+    active = fields.Boolean('Active', )
+
     def parse_list_response(self, line):
         list_response_pattern = re.compile(
             r'\((?P<flags>.*?)\) "(?P<delimiter>.*)" (?P<name>.*)'
@@ -100,14 +108,6 @@ class IrMailServer(models.Model):
         finally:
             maillib.logout()
         return True
-
-    imap_mailbox_folder = fields.Many2one('ir.mail.imap.folder',
-                                          'Imap Folders',)
-    imap_mailbox_verified = fields.Boolean('IMAP Connection Verified', )
-    store_outgoing_mail = fields.Boolean('Store Outgoing Mail', )
-    has_separate_imap_server = fields.Boolean('Use Separate Imap Server', )
-    separate_imap_server = fields.Char('Separate Imap Server', )
-    active = fields.Boolean('Active', )
 
 
 class IrMailImapFolder(models.Model):
