@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-28 11:15+0000\n"
-"PO-Revision-Date: 2017-10-28 11:15+0000\n"
+"POT-Creation-Date: 2017-11-16 01:44+0000\n"
+"PO-Revision-Date: 2017-11-16 01:44+0000\n"
 "Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017\n"
 "Language-Team: Indonesian (https://www.transifex.com/oca/teams/23907/id/)\n"
 "MIME-Version: 1.0\n"
@@ -92,7 +92,7 @@ msgstr "Nama"
 #. module: mass_mailing_event
 #: model:ir.model,name:mass_mailing_event.model_res_partner
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: mass_mailing_event
 #: view:mail.mass_mailing:mass_mailing_event.view_mail_mass_mailing_form

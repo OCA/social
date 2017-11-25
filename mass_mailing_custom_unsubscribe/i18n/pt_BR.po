@@ -14,14 +14,14 @@
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2015-2016
 # Paolo Valier, 2016
 # Rudolf Schnapka <rs@techno-flex.de>, 2015-2016
-# SaFi J. <safi2266@gmail.com>, 2015
+# Mustafa J. Kadhem <safi2266@gmail.com>, 2015
 # Thomas A. Jaeger, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-13 08:42+0000\n"
-"PO-Revision-Date: 2017-05-13 18:19+0000\n"
+"POT-Creation-Date: 2017-11-16 01:44+0000\n"
+"PO-Revision-Date: 2017-11-23 23:28+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -297,7 +297,7 @@ msgstr "Sequência"
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 #: field:mail.unsubscription,success:0
 msgid "Success"
-msgstr ""
+msgstr "Sucesso"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_summary:0

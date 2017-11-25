@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-01 09:45+0000\n"
-"PO-Revision-Date: 2017-08-11 11:55+0000\n"
+"POT-Creation-Date: 2017-11-16 01:44+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-social-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -317,7 +317,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_unread:0
 msgid "Unread Messages"
-msgstr ""
+msgstr "Mensaxes sen ler"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form

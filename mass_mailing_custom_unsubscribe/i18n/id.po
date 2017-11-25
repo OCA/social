@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-28 11:15+0000\n"
-"PO-Revision-Date: 2017-11-03 12:16+0000\n"
+"POT-Creation-Date: 2017-11-16 01:44+0000\n"
+"PO-Revision-Date: 2017-11-23 23:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-social-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -242,7 +242,7 @@ msgstr "Pesan dan riwayat komunikasi"
 #. module: mass_mailing_custom_unsubscribe
 #: view:mail.unsubscription:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
 msgid "Month"
-msgstr ""
+msgstr "Bulan"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,details:0

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:28+0000\n"
+"POT-Creation-Date: 2017-11-16 01:44+0000\n"
+"PO-Revision-Date: 2017-11-23 23:27+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Galician (http://www.transifex.com/oca/OCA-social-8-0/language/gl/)\n"
 "MIME-Version: 1.0\n"
@@ -375,7 +375,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,type:0
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,use_active_domain:0

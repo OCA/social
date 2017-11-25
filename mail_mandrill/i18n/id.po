@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-28 11:15+0000\n"
-"PO-Revision-Date: 2017-11-03 12:15+0000\n"
+"POT-Creation-Date: 2017-11-16 01:44+0000\n"
+"PO-Revision-Date: 2017-11-23 23:25+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-social-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -242,7 +242,7 @@ msgstr ""
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Month"
-msgstr ""
+msgstr "Bulan"
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
