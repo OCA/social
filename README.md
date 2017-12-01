@@ -19,11 +19,11 @@ addon | version | summary
 [mail_as_letter](mail_as_letter/) | 9.0.1.0.0 | This module allows to download a mail message as a pdf letter.
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 9.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_debrand](mail_debrand/) | 9.0.1.0.0 | Remove Odoo branding in sent emails
-[mail_digest](mail_digest/) | 9.0.1.0.0 | Basic digest mail handling.
+[mail_digest](mail_digest/) | 9.0.1.0.1 | Basic digest mail handling.
 [mail_optional_autofollow](mail_optional_autofollow/) | 9.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 9.0.1.0.0 | Choose if you want to automatically notify followers on mail.compose.message
 [mail_tracking](mail_tracking/) | 9.0.3.0.2 | Email tracking system for all mails sent
-[mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.0.0 | Mail tracking and Mailgun webhooks integration
+[mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.1.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 9.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 9.0.2.0.0 | Know unsubscription reasons, track them
 [mass_mailing_partner](mass_mailing_partner/) | 9.0.1.0.0 | Link partners with mass-mailing
