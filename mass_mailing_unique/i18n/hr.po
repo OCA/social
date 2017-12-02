@@ -3,13 +3,14 @@
 # * mass_mailing_unique
 # 
 # Translators:
+# Bole <bole@dajmi5.com>, 2017
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 9.0c\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-04 03:40+0000\n"
-"PO-Revision-Date: 2017-01-04 03:40+0000\n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
@@ -21,18 +22,18 @@ msgstr ""
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.list:0
 msgid "Cannot have more than one lists with the same name."
-msgstr ""
+msgstr "Nije moguće imati više od jedne liste sa istim nazivom."
 
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.contact:0
 msgid "Cannot have the same email more than once in the same list."
-msgstr ""
+msgstr "Email mora biti jedinstven u listi."
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/hooks.py:44
 #, python-format
 msgid "Fix this before installing:"
-msgstr ""
+msgstr "Ispravite sljedeće prije instalacije:"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list

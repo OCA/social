@@ -3,14 +3,15 @@
 # * mail_attach_existing_attachment
 # 
 # Translators:
-# Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 14:24+0000\n"
-"PO-Revision-Date: 2016-11-29 14:24+0000\n"
-"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2016\n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,4 +32,4 @@ msgstr "Puede adjuntar adjuntos"
 #. module: mail_attach_existing_attachment
 #: model:ir.model,name:mail_attach_existing_attachment.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "Asistente de redacción de correo electrónico"
+msgstr "Asistente composición Correo Electrónico"
