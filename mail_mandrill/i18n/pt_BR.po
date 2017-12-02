@@ -14,8 +14,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-28 11:15+0000\n"
-"PO-Revision-Date: 2017-11-07 22:10+0000\n"
+"POT-Creation-Date: 2017-12-02 01:47+0000\n"
+"PO-Revision-Date: 2017-11-30 01:04+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-social-8-0/language/pt_BR/)\n"
 "MIME-Version: 1.0\n"
@@ -260,7 +260,7 @@ msgstr ""
 #: selection:mail.mandrill.event,event_type:0
 #: selection:mail.mandrill.message,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Aberto"
 
 #. module: mail_mandrill
 #: field:mail.mandrill.event,os_family:0
