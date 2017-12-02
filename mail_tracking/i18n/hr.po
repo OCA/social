@@ -3,14 +3,15 @@
 # * mail_tracking
 # 
 # Translators:
-# OCA Transbot <transbot@odoo-community.org>, 2016
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# Bole <bole@dajmi5.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-10 11:20+0000\n"
-"PO-Revision-Date: 2017-02-10 11:20+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2017\n"
 "Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -78,13 +79,13 @@ msgstr "Država"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_uid
 msgid "Created by"
-msgstr "Kreirao"
+msgstr "Stvorio/la"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
 msgid "Created on"
-msgstr "Kreirano "
+msgstr "Stvoreno dana"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
@@ -131,12 +132,14 @@ msgstr "E-mail"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_bounced
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_bounced
 #: model:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
 msgid "Email bounced"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_score
 msgid "Email score"
 msgstr ""
 
@@ -210,19 +213,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email___last_update
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event___last_update
 msgid "Last Modified on"
-msgstr "Zadnja izmjena na"
+msgstr "Zadnja izmjena"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_uid
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_uid
 msgid "Last Updated by"
-msgstr "Zadnje ažuriranje izvršio"
+msgstr "Zadnju izmjenu izvršio/la"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
 msgid "Last Updated on"
-msgstr "Zadnje ažuriranje na"
+msgstr "Zadnja izmjena"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
@@ -413,6 +416,7 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_emails_count
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users_tracking_emails_count
 msgid "Tracking emails count"
 msgstr ""
 
