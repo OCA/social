@@ -3,47 +3,46 @@
 # * mass_mailing_unique
 # 
 # Translators:
-# Bole <bole@dajmi5.com>, 2017
-# OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro Castro Silva <pedrocs@exo.pt>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
+"POT-Creation-Date: 2017-12-02 13:18+0000\n"
+"PO-Revision-Date: 2017-12-02 13:18+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
+"Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: hr\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.list:0
 msgid "Cannot have more than one lists with the same name."
-msgstr "Nije moguće imati više od jedne liste sa istim nazivom."
+msgstr ""
 
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.contact:0
 msgid "Cannot have the same email more than once in the same list."
-msgstr "Email mora biti jedinstven u listi."
+msgstr ""
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/hooks.py:44
 #, python-format
 msgid "Fix this before installing:"
-msgstr "Ispravite sljedeće prije instalacije:"
+msgstr ""
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
 msgid "Mailing List"
-msgstr "Mailing lista"
+msgstr ""
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_contact
 msgid "Mass Mailing Contact"
-msgstr "Kontakti za masovno slanje"
+msgstr "Contacto do email em massa"
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/hooks.py:39
