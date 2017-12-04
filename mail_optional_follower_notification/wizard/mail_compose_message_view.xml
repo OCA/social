@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//div[field[@name='partner_ids']]/span[2]" position="before">
-                    <field name="notify_followers" />
+                    <field name="notify_followers" attrs="{'invisible': [('composition_mode', '=', 'mass_mail')]}"/>
                 </xpath>
                 <xpath expr="//div[field[@name='partner_ids']]/span[2]" position="inside">
                     <span attrs="{'invisible': [('notify_followers', '=', True)]}" style="color: red;"> - Warning : Followers will not be notified but they can access the notification directly from the document (if they are allowed to)</span>
