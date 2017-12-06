@@ -7,15 +7,15 @@ from odoo import api, models
 from ..status_constants import OFFLINE
 
 
-class ResPartner(models.Model):
+class ResUsers(models.Model):
 
-    _inherit = 'res.partner'
+    _inherit = 'res.users'
 
     @api.multi
     def _compute_im_status(self):
         bus_recs = self.env['bus.presence'].search([
-            ('partner_id', 'in', self.ids),
+            ('user_id', 'in', self.ids),
         ])
-        statuses = bus_recs._get_partners_statuses()
+        statuses = bus_recs._get_users_statuses()
         for record in self:
             record.im_status = statuses.get(record.id, OFFLINE)
