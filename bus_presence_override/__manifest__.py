@@ -9,7 +9,7 @@
     "category": "Social",
     "website": "https://github.com/OCA/social",
     "author": "LasLabs, Odoo Community Association (OCA)",
-    "license": "AGPL-3",
+    "license": "LGPL-3",
     "application": False,
     "installable": True,
     "depends": [
@@ -19,6 +19,6 @@
         "views/assets.xml",
     ],
     "qweb": [
-        "static/src/xml/systray.xml",
+        "static/src/xml/bus_presence_systray.xml",
     ],
 }
