@@ -11,7 +11,7 @@
     "installable": True,
     "website": "http://acsone.eu",
     "category": "Mail",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "license": "AGPL-3",
     "depends": [
         "mail",
