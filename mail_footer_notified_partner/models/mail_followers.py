@@ -9,9 +9,28 @@ from odoo.tools.translate import _
 class MailNotification(models.Model):
     _inherit = 'res.partner'
 
+    @api.multi
+    def _notify_by_email(
+        self, message, force_send=False, send_after_commit=True,
+        user_signature=True
+    ):
+        # we need to save the complete list of partners because
+        # _message_notification_recipients builds recipients
+        # grouped by users groups. Thus get_additional_footer would get a
+        # partial list of recipients
+        return super(
+            MailNotification, self.with_context(notified_partners=self)
+        )._notify_by_email(
+            message, force_send=force_send,
+            send_after_commit=send_after_commit,
+            user_signature=user_signature
+        )
+
     @api.model
     def _notify_send(self, body, subject, recipients, **mail_values):
-        body += self.get_additional_footer(recipients)
+        footer_recipients = self.env.context.get(
+            'notified_partners', recipients) or recipients
+        body += self.get_additional_footer(footer_recipients)
         return super(MailNotification, self).\
             _notify_send(body, subject, recipients, **mail_values)
 
