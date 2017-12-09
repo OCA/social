@@ -1,0 +1,57 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_unique
+# 
+# Translators:
+# Pedro Castro Silva <pedrocs@exo.pt>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-02 13:18+0000\n"
+"PO-Revision-Date: 2017-12-02 13:18+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
+"Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.list:0
+msgid "Cannot have more than one lists with the same name."
+msgstr ""
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.contact:0
+msgid "Cannot have the same email more than once in the same list."
+msgstr ""
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:44
+#, python-format
+msgid "Fix this before installing:"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Contacto do email em massa"
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:39
+#, python-format
+msgid "There are {1} lists with name {0}."
+msgstr ""
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:30
+#, python-format
+msgid "{0} appears {2} times in list {1}."
+msgstr ""

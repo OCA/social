@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# Pedro Castro Silva <pedrocs@exo.pt>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2017-12-02 13:18+0000\n"
+"PO-Revision-Date: 2017-12-02 13:18+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -57,7 +58,7 @@ msgstr "Nome"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mail_statistics
 msgid "Email Statistics"
-msgstr ""
+msgstr "Estatísticas de Email"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard_id
@@ -107,7 +108,7 @@ msgstr ""
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_contact
 msgid "Mass Mailing Contact"
-msgstr ""
+msgstr "Contacto do email em massa"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner_mass_mailing_stats
