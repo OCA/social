@@ -2,30 +2,15 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-import logging
-
-from io import BytesIO
-from collections import defaultdict, OrderedDict
-
 from odoo import api, fields, models
 
-_logger = logging.getLogger(__name__)
 
-try:
-    from reverend.thomas import Bayes
-except ImportError:
-    _logger.info('`reverend` Python library not installed.')
-
-
-class ReverendThomas(models.Model):
-    """This model acts as a proxy for Reverend Thomas Bayes operations.
-
-    All actual Bayesian classifications happen in this model, and are stored
-    to the internal database file in the ``database`` field.
+class SpamAbstract(models.AbstractModel):
+    """This model defines the SPAM Adapter interface.
     """
 
-    _name = 'reverend.thomas'
-    _description = 'Bayesian Classifications'
+    _name = 'spam.abstract'
+    _description = 'SPAM Filter Interface'
 
     HAM = 'ham'
     SPAM = 'spam'
@@ -33,33 +18,14 @@ class ReverendThomas(models.Model):
     name = fields.Char(
         required=True,
     )
-    database = fields.Binary(
-        attachment=True,
-        readonly=True,
-    )
     client = fields.Binary(
         compute='_compute_client',
     )
 
     @api.multi
-    @api.depends('database')
     def _compute_client(self):
-        """Compute the client, optionally loading the stored database."""
-        for record in self.filtered(lambda r: r.database):
-            record.client = self._get_client()
-            with BytesIO(record.database.decode('base64')) as fp:
-                record.client.load_handler(fp)
-
-    @api.model
-    def create(self, vals):
-        """Add a new database into vals if one isn't provided."""
-        record = super(ReverendThomas, self).create(vals)
-        if not vals.get('database'):
-            client = self._get_client()
-            with BytesIO() as fp:
-                client.save_handler(fp)
-                record.database = fp.getvalue().encode('base64')
-        return record
+        """Compute a usable client."""
+        pass
 
     @api.multi
     def check(self, message):
@@ -70,7 +36,7 @@ class ReverendThomas(models.Model):
 
         Returns:
             dict: Mapping with keys `spam`, `ham`, and `ratio`. It also
-            includes the individual results keyed by the reverend ID.
+            includes the individual results keyed by the adapter ID.
         """
 
         message.ensure_one()

@@ -25,6 +25,9 @@ class MailMessage(models.Model):
     )
     spam_score = fields.Float()
     ham_score = fields.Float()
+    reverend_trained = fields.Char(
+        help='This message was manually trained as this type.',
+    )
 
     @api.multi
     @api.depends('_is_spam')
@@ -63,6 +66,14 @@ class MailMessage(models.Model):
             'ham_score': spam_values['ham'],
         })
         return super(MailMessage, self).create(vals)
+
+    @api.multi
+    def action_ham(self):
+        self.write({'is_spam': False})
+
+    @api.multi
+    def action_spam(self):
+        self.write({'is_spam': True})
 
     @api.multi
     def message_format(self):
