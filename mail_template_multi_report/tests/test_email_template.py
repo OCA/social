@@ -2,7 +2,7 @@
 # © 2016 Savoir-faire Linux
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests import common
+from odoo.tests import common
 
 
 class TestEmailTemplate(common.TransactionCase):
@@ -43,7 +43,7 @@ class TestEmailTemplate(common.TransactionCase):
             'report_name': 'mail_template_multi_report.test_report_template',
         })
 
-        self.template = self.env['email.template'].create({
+        self.template = self.env['mail.template'].create({
             'name': 'Test Email Template',
             'model_id': self.env.ref('base.model_res_partner').id,
             'report_line_ids': [(0, 0, {
@@ -58,9 +58,7 @@ class TestEmailTemplate(common.TransactionCase):
         })
 
     def test_01_generate_email_batch(self):
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
-
+        res = self.template.generate_email([self.partner.id])
         self.assertEquals(len(res[self.partner.id]['attachments']), 1)
 
     def test_02_generate_email_batch_with_standard_report(self):
@@ -69,8 +67,7 @@ class TestEmailTemplate(common.TransactionCase):
             'report_template': self.report.id,
         })
 
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         self.assertEquals(len(res[self.partner.id]['attachments']), 2)
 
@@ -79,8 +76,7 @@ class TestEmailTemplate(common.TransactionCase):
             'condition': "${object.customer}",
         })
 
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         self.assertEquals(len(res[self.partner.id]['attachments']), 1)
 
@@ -89,8 +85,7 @@ class TestEmailTemplate(common.TransactionCase):
             'condition': "${object.supplier}",
         })
 
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         res[self.partner.id].setdefault('attachments', [])
         self.assertEquals(len(res[self.partner.id]['attachments']), 0)

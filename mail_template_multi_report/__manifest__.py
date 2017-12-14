@@ -4,14 +4,14 @@
 
 {
     'name': 'Email Template Multi Report',
-    'version': '8.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Marketing',
     'summary': 'Multiple Reports in Email Templates',
-    'author': 'Savoir-faire Linux,Odoo Community Association (OCA)',
+    'author': 'Savoir-faire Linux,Apertoso NV,Odoo Community Association (OCA)',
     'website': 'http://www.savoirfairelinux.com',
     'license': 'AGPL-3',
     'depends': [
-        'email_template',
+        'mail',
     ],
     'data': [
         'security/ir.model.access.csv',
