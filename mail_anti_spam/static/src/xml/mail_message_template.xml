@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Copyright 2017 LasLabs Inc.
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+-->
+
+<templates>
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery="div[t-att-data-message-id]" t-operation="attributes">
+            <attribute name="t-att-class">'o_thread_message' + (message.expanded ? ' o_message_expanded '  : ' ') + (message.is_selected ? 'o_thread_selected_message' : ' ') + (message.is_spam ? 'hidden' : '')</attribute>
+        </t>
+    </t>
+</templates>
