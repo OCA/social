@@ -90,8 +90,9 @@ class DynamicListCase(common.SavepointCase):
             "email": "extra@example.com",
         })
         # Mock sending low level method, because an auto-commit happens there
-        with patch("odoo.addons.mail.models.mail_mail.MailMail.send"):
+        with patch("odoo.addons.mail.models.mail_mail.MailMail.send") as s:
             self.mail.send_mail()
+            self.assertEqual(1, s.call_count)
         self.assertEqual(6, self.list.contact_nbr)
 
     def test_load_filter(self):
@@ -108,3 +109,11 @@ class DynamicListCase(common.SavepointCase):
         })
         wizard.load_filter()
         self.assertEqual(self.list.sync_domain, domain)
+
+    def test_change_partner(self):
+        self.list.sync_method = 'full'
+        self.list.action_sync()
+        # This shouldn't fail
+        self.partners[:1].write({
+            'email': 'test_mass_mailing_list_dynamic@example.org',
+        })

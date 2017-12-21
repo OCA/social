@@ -55,7 +55,7 @@ class ResPartner(models.Model):
             if vals.get('name'):
                 mm_vals['name'] = vals['name']
             if vals.get('email'):
-                mm_vals['name'] = vals['email']
+                mm_vals['email'] = vals['email']
             self.env["mail.mass_mailing.contact"].search([
                 ("partner_id", "in", self.ids),
             ]).write(mm_vals)
