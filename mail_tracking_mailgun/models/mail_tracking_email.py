@@ -9,7 +9,7 @@ import json
 import requests
 from datetime import datetime
 from openerp import _, api, fields, models
-from openerp.exceptions import ValidationError
+from openerp.exceptions import UserError, ValidationError
 
 import logging
 _logger = logging.getLogger(__name__)
@@ -221,6 +221,8 @@ class MailTrackingEmail(models.Model):
         """
         api_key, api_url, domain, validation_key = self._mailgun_values()
         for tracking in self:
+            if not tracking.mail_message_id:
+                raise UserError(_('There is no tracked message!'))
             message_id = tracking.mail_message_id.message_id.replace(
                 "<", "").replace(">", "")
             res = requests.get(
@@ -242,7 +244,7 @@ class MailTrackingEmail(models.Model):
                 if not self.env['mail.tracking.event'].search(
                         [('mailgun_id', '=', item["id"])]):
                     mapped_event_type = self._mailgun_event_type_mapping.get(
-                        item["event"]) or False
+                        item["event"], item["event"])
                     metadata = self._mailgun_metadata(
                         mapped_event_type, item, {})
                     tracking.event_create(mapped_event_type, metadata)
