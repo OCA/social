@@ -55,6 +55,14 @@ Just use any mail template as Odoo standard feature
    :target: https://runbot.odoo-community.org/runbot/205/10
 
 
+Note:
+
+  Odoo with module web_editor already implements this feature on the client side (js).
+  This module brings this server side feature for cases without js part. It could the more stable way over the Odoo versions with a stable api in a dedicated library 
+  with adhoc python unit tests.
+
+
+
 Bug Tracker
 ===========
 

@@ -18,7 +18,6 @@ class MailTemplate(models.Model):
 
     def generate_email(self, res_ids, fields=None):
         res = super(MailTemplate, self).generate_email(res_ids, fields=fields)
-        for id in res:
-            if res[id].get('body_html'):
-                res[id]['body_html'] = transform(res[id]['body_html'])
+        if 'body_html' in res:
+            res['body_html'] = transform(res['body_html'])
         return res
