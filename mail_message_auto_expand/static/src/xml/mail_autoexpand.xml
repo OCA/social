@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<template>
+    <t t-extend="mail.thread.message">
+        <t t-jquery="div[class=oe_msg_center] div[class=oe_msg_body_short]" t-operation="replace">
+            <t t-raw="widget.body"/>
+        </t>
+    </t>
+</template>
