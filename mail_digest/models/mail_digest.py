@@ -44,7 +44,8 @@ class MailDigest(models.Model):
         'ir.ui.view',
         'Qweb mail template',
         ondelete='set null',
-        default=lambda self: self._default_template_id()
+        default=lambda self: self._default_template_id(),
+        domain=[('type', '=', 'qweb')],
     )
 
     def _default_template_id(self):
