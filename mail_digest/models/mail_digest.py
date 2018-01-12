@@ -131,12 +131,19 @@ class MailDigest(models.Model):
         # default to company
         name = self.env.user.company_id.name
         if 'website' in self.env:
+            # TODO: shall we make this configurable at digest or global level?
+            # Maybe you have a website but
+            # your digest msgs are not related to it at all or partially.
+            ws = None
             try:
                 ws = self.env['website'].get_current_website()
                 name = ws.name
             except RuntimeError:
-                # RuntimeError: object unbound -> no website request
-                pass
+                # RuntimeError: object unbound -> no website request.
+                # Fallback to default website if any.
+                ws = self.env['website'].search([], limit=1)
+            if ws:
+                name = ws.name
         return name
 
     @api.multi
