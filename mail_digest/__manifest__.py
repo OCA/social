@@ -8,6 +8,7 @@
     'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Camptocamp,Odoo Community Association (OCA)',
+    'website': 'https://github.com/OCA/social',
     'depends': [
         'mail',
     ],
@@ -21,4 +22,7 @@
         'views/user_views.xml',
         'templates/digest_default.xml',
     ],
+    'images': [
+        'static/description/preview.png',
+    ]
 }
