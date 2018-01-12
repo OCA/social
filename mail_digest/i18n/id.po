@@ -167,7 +167,7 @@ msgid "Partner notification configuration"
 msgstr ""
 
 #. module: mail_digest
-#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_template_id
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_digest_template_id
 msgid "Qweb mail template"
 msgstr ""
 

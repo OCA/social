@@ -181,10 +181,10 @@ class DigestCase(TransactionCase):
         default = self.env.ref('mail_digest.default_digest_tmpl')
         dig = self._create_for_partner(self.partner1)
         # check default
-        self.assertEqual(dig.template_id, default)
+        self.assertEqual(dig.digest_template_id, default)
         self.assertTrue(dig._get_email_values())
         # drop template
-        dig.template_id = False
+        dig.digest_template_id = False
         # pass a custom one: ok
         self.assertTrue(dig._get_email_values(template=default))
         # raise error if no template found
