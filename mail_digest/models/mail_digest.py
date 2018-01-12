@@ -40,15 +40,22 @@ class MailDigest(models.Model):
         ondelete='set null',
     )
     state = fields.Selection(related='mail_id.state', readonly=True)
-    template_id = fields.Many2one(
+    # To my future self: never ever change this field to `template_id`.
+    # When creating digest records within the context of mail composer
+    # (and possibly other contexts) you'll have a `default_template_id`
+    # key in the context which is going to override our safe default.
+    # This is going to break email generation because the template
+    # will be completely wrong. Lesson learned :)
+    digest_template_id = fields.Many2one(
         'ir.ui.view',
         'Qweb mail template',
         ondelete='set null',
-        default=lambda self: self._default_template_id(),
+        default=lambda self: self._default_digest_template_id(),
         domain=[('type', '=', 'qweb')],
+        oldname='template_id',
     )
 
-    def _default_template_id(self):
+    def _default_digest_template_id(self):
         """Retrieve default template to render digest."""
         return self.env.ref('mail_digest.default_digest_tmpl',
                             raise_if_not_found=False)
@@ -176,7 +183,7 @@ class MailDigest(models.Model):
     def _get_email_values(self, template=None):
         """Collect variables to create digest's mail message."""
         self.ensure_one()
-        template = template or self.template_id
+        template = template or self.digest_template_id
         if not template:
             raise exceptions.UserError(_(
                 'You must pass a template or set one on the digest record.'
