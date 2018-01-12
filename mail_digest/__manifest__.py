@@ -5,7 +5,7 @@
 {
     'name': 'Mail digest',
     'summary': """Basic digest mail handling.""",
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'license': 'AGPL-3',
     'author': 'Camptocamp,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
