@@ -39,7 +39,7 @@ class MailDigest(models.Model):
         'Mail',
         ondelete='set null',
     )
-    state = fields.Selection(related='mail_id.state')
+    state = fields.Selection(related='mail_id.state', readonly=True)
     template_id = fields.Many2one(
         'ir.ui.view',
         'Qweb mail template',
