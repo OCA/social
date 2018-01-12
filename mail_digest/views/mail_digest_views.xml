@@ -33,7 +33,7 @@
                         <field name="frequency" />
                         <field name="mail_id" />
                         <field name="state" />
-                        <field name="template_id" />
+                        <field name="digest_template_id" />
                     </group>
                     <group name="messages" string="Messages" col="4">
                         <field name="message_ids" nolabel="1" />
