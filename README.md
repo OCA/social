@@ -17,6 +17,7 @@ addon | version | summary
 [email_template_qweb](email_template_qweb/) | 10.0.1.0.0 | Use the QWeb templating mechanism for emails
 [mail_as_letter](mail_as_letter/) | 10.0.1.0.0 | This module allows to download a mail message as a pdf letter.
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 10.0.1.0.0 | Adding attachment on the object by sending this one
+[mail_digest](mail_digest/) | 10.0.1.0.1 | Basic digest mail handling.
 [mail_footer_notified_partner](mail_footer_notified_partner/) | 10.0.1.0.0 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_full_expand](mail_full_expand/) | 10.0.1.0.0 | Expand mail in a big window
 [mail_inline_css](mail_inline_css/) | 10.0.1.0.0 | Convert style tags in inline style in your mails
