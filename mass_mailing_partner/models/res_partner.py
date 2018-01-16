@@ -56,7 +56,8 @@ class ResPartner(models.Model):
                 mm_vals['name'] = vals['name']
             if vals.get('email'):
                 mm_vals['name'] = vals['email']
-            self.env["mail.mass_mailing.contact"].search([
+            # Using sudo because ACLs shouldn't produce data inconsistency
+            self.env["mail.mass_mailing.contact"].sudo().search([
                 ("partner_id", "in", self.ids),
             ]).write(mm_vals)
         return res
