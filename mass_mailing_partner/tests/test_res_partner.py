@@ -18,9 +18,21 @@ class ResPartnerCase(base.BaseCase):
         self.assertEqual(self.partner.mass_mailing_contacts_count, 2)
 
     def test_write_res_partner(self):
+        user = self.env['res.users'].create({
+            'login': 'test',
+            'name': 'test',
+            'email': 'test@example.org',
+            'groups_id': [
+                (4, self.env.ref('base.group_user').id),
+                (4, self.env.ref('base.group_partner_manager').id),
+            ]
+        })
         contact = self.create_mailing_contact(
             {'email': 'partner@test.com', 'list_id': self.mailing_list.id})
-        self.partner.write({'name': 'Changed', 'email': 'partner@changed.com'})
+        self.partner.sudo(user).write({
+            'name': 'Changed',
+            'email': 'partner@changed.com',
+        })
         self.assertEqual(contact.name, self.partner.name)
         self.assertEqual(contact.email, self.partner.email)
         with self.assertRaises(ValidationError):
