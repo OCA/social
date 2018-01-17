@@ -31,9 +31,11 @@ all the messages are collected inside a `mail.digest` container.
 A daily cron and a weekly cron will take care of creating a single email per each digest,
 which will be sent as a standard email.
 
-If the message has a specific subtype, all of this will work only
-if personal settings allow to receive notification for that specific subtype.
-Specifically:
+**Rules**
+
+Given that the user has `Notification management = Handle by Emails`...
+
+a message with subtype assigned *will be sent* via digest if:
 
 * no record for type: message passes
 * record disabled for type: message don't pass
@@ -42,6 +44,11 @@ Specifically:
 NOTE: under the hood the digest notification logic excludes followers to be notified,
 since you really want to notify only mail.digest's partner.
 
+a message with subtype assigned *will NOT be sent* via digest if:
+
+  * global: `mail_digest_enabled_message_types` param disables the message type
+  * user: digest mode is OFF for the recipient
+  * user: recipient's user has disabled the subtype in her/his settings
 
 Global settings
 ---------------
@@ -66,7 +73,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues
 <https://github.com/OCA/social/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
-help us smashing it by providing a detailed and welcomed feedback.
+help us smash it by providing a detailed and welcomed feedback.
 
 Credits
 =======

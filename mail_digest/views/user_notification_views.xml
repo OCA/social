@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<odoo>
+
+    <record model="ir.ui.view" id="notification_form">
+        <field name="name">user.notification.conf form</field>
+        <field name="model">user.notification.conf</field>
+        <field name="arch" type="xml">
+            <form string="Notification">
+                <group name="main">
+                    <field name="enabled" />
+                    <field name="subtype_id" options="{'no_create': True}" />
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="notification_tree">
+        <field name="name">user.notification.conf tree</field>
+        <field name="model">user.notification.conf</field>
+        <field name="arch" type="xml">
+            <tree string="Notifications" editable="top">
+                <field name="enabled" />
+                <field name="subtype_id" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

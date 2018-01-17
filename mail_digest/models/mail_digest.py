@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
+# Copyright 2017-2018 Camptocamp - Simone Orsi
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 from odoo import fields, models, api, exceptions, _
@@ -19,15 +18,15 @@ class MailDigest(models.Model):
         compute="_compute_name",
         readonly=True,
     )
-    partner_id = fields.Many2one(
-        string='Partner',
-        comodel_name='res.partner',
+    user_id = fields.Many2one(
+        string='User',
+        comodel_name='res.users',
         readonly=True,
         required=True,
         ondelete='cascade',
     )
     frequency = fields.Selection(
-        related='partner_id.notify_frequency',
+        related='user_id.digest_frequency',
         readonly=True,
     )
     message_ids = fields.Many2many(
@@ -52,7 +51,6 @@ class MailDigest(models.Model):
         ondelete='set null',
         default=lambda self: self._default_digest_template_id(),
         domain=[('type', '=', 'qweb')],
-        oldname='template_id',
     )
 
     def _default_digest_template_id(self):
@@ -61,53 +59,47 @@ class MailDigest(models.Model):
                             raise_if_not_found=False)
 
     @api.multi
-    @api.depends("partner_id", "partner_id.notify_frequency")
+    @api.depends("user_id", "user_id.digest_frequency")
     def _compute_name(self):
         for rec in self:
-            rec.name = u'{} - {}'.format(
-                rec.partner_id.name, rec._get_subject())
+            rec.name = '{} - {}'.format(
+                rec.user_id.name, rec._get_subject())
 
     @api.model
-    def create_or_update(self, partners, message, subtype_id=None):
+    def create_or_update(self, partners, message):
         """Create or update digest.
 
         :param partners: recipients as `res.partner` browse list
         :param message: `mail.message` to include in digest
-        :param subtype_id: `mail.message.subtype` instance
         """
-        subtype_id = subtype_id or message.subtype_id
         for partner in partners:
-            digest = self._get_or_create_by_partner(partner, message)
+            digest = self._get_or_create_by_user(partner.real_user_id)
             digest.message_ids |= message
         return True
 
     @api.model
-    def _get_by_partner(self, partner, mail_id=False):
-        """Retrieve digest record for given partner.
+    def _get_by_user(self, user):
+        """Retrieve digest record for given user.
 
-        :param partner: `res.partner` browse record
-        :param mail_id: `mail.mail` record for further filtering.
+        :param user: `res.users` browse record
 
         By default we lookup for pending digest without notification yet.
         """
         domain = [
-            ('partner_id', '=', partner.id),
-            ('mail_id', '=', mail_id),
+            ('user_id', '=', user.id),
         ]
         return self.search(domain, limit=1)
 
     @api.model
-    def _get_or_create_by_partner(self, partner, message=None, mail_id=False):
-        """Retrieve digest record or create it by partner.
+    def _get_or_create_by_user(self, user):
+        """Retrieve digest record or create it by user.
 
-        :param partner: `res.partner` record to create/get digest for
-        :param message: `mail.message` to include in digest
-        :param mail_id: `mail.mail` record to set on digest
+        :param user: `res.users` record to create/get digest for
         """
-        existing = self._get_by_partner(partner, mail_id=mail_id)
+        existing = self._get_by_user(user)
         if existing:
             return existing
-        values = {'partner_id': partner.id, }
+        values = {'user_id': user.id, }
         return self.create(values)
 
     @api.model
@@ -158,10 +150,10 @@ class MailDigest(models.Model):
         """Build the full subject for digest's mail."""
         # TODO: shall we move this to computed field?
         self.ensure_one()
-        subject = u'[{}] '.format(self._get_site_name())
-        if self.partner_id.notify_frequency == 'daily':
+        subject = '[{}] '.format(self._get_site_name())
+        if self.user_id.digest_frequency == 'daily':
             subject += _('Daily update')
-        elif self.partner_id.notify_frequency == 'weekly':
+        elif self.user_id.digest_frequency == 'weekly':
             subject += _('Weekly update')
         return subject
 
@@ -192,7 +184,7 @@ class MailDigest(models.Model):
         template_values = self._get_template_values()
         values = {
             'email_from': self.env.user.company_id.email,
-            'recipient_ids': [(4, self.partner_id.id)],
+            'recipient_ids': [(4, self.user_id.partner_id.id)],
             'subject': subject,
             'body_html': template.with_context(
                 **self._template_context()
@@ -204,7 +196,7 @@ class MailDigest(models.Model):
         """Inject context vars.
 
         By default we make sure that digest's email
-        will have only digest's partner among recipients.
+        will have only digest's user among recipients.
         """
         return {
             'notify_only_recipients': True,
@@ -214,11 +206,11 @@ class MailDigest(models.Model):
     def _template_context(self):
         """Rendering context for digest's template.
 
-        By default we enforce partner's language.
+        By default we enforce user's language.
         """
         self.ensure_one()
         return {
-            'lang': self.partner_id.lang,
+            'lang': self.user_id.lang,
         }
 
     @api.multi
@@ -252,12 +244,12 @@ class MailDigest(models.Model):
     def process(self, frequency='daily', domain=None):
         """Process existing digest records to create emails via cron.
 
-        :param frequency: lookup digest records by partners' `notify_frequency`
+        :param frequency: lookup digest records by users' `digest_frequency`
         :param domain: pass custom domain to lookup only specific digests
         """
         if not domain:
             domain = [
                 ('mail_id', '=', False),
-                ('partner_id.notify_frequency', '=', frequency),
+                ('user_id.digest_frequency', '=', frequency),
             ]
         self.search(domain).create_email()

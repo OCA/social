@@ -1,13 +1,12 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
+# Copyright 2017-2018 Camptocamp - Simone Orsi
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
 {
     'name': 'Mail digest',
     'summary': """Basic digest mail handling.""",
-    'version': '10.0.1.0.1',
+    'version': '11.0.1.0.0',
     'license': 'AGPL-3',
-    'author': 'Camptocamp,Odoo Community Association (OCA)',
+    'author': 'Camptocamp, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
     'depends': [
         'mail',
@@ -18,7 +17,7 @@
         'security/ir.model.access.csv',
         'security/record_rules.xml',
         'views/mail_digest_views.xml',
-        'views/partner_views.xml',
+        'views/user_notification_views.xml',
         'views/user_views.xml',
         'templates/digest_default.xml',
     ],

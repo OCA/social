@@ -1,88 +1,19 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
+# Copyright 2017-2018 Camptocamp - Simone Orsi
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import models, fields, api, _
+from odoo import models, api
 
 
 class ResPartner(models.Model):
     _inherit = 'res.partner'
 
-    notify_email = fields.Selection(selection_add=[('digest', _('Digest'))])
-    notify_frequency = fields.Selection(
-        string='Frequency',
-        selection=[
-            ('daily', 'Daily'),
-            ('weekly', 'Weekly')
-        ],
-        default='weekly',
-        required=True,
-    )
-    notify_conf_ids = fields.One2many(
-        string='Notifications',
-        inverse_name='partner_id',
-        comodel_name='partner.notification.conf',
-    )
-    enabled_notify_subtype_ids = fields.Many2many(
-        string='Partner enabled subtypes',
-        comodel_name='mail.message.subtype',
-        compute='_compute_enabled_notify_subtype_ids',
-        search='_search_enabled_notify_subtype_ids',
-    )
-    disabled_notify_subtype_ids = fields.Many2many(
-        string='Partner disabled subtypes',
-        comodel_name='mail.message.subtype',
-        compute='_compute_disabled_notify_subtype_ids',
-        search='_search_disabled_notify_subtype_ids',
-    )
-
-    @api.multi
-    def _compute_notify_subtypes(self, enabled):
-        self.ensure_one()
-        query = (
-            'SELECT subtype_id FROM partner_notification_conf '
-            'WHERE partner_id=%s AND enabled = %s'
-        )
-        self.env.cr.execute(
-            query, (self.id, enabled))
-        return [x[0] for x in self.env.cr.fetchall()]
-
-    @api.multi
-    @api.depends('notify_conf_ids.subtype_id')
-    def _compute_enabled_notify_subtype_ids(self):
-        for partner in self:
-            partner.enabled_notify_subtype_ids = \
-                partner._compute_notify_subtypes(True)
-
-    @api.multi
-    @api.depends('notify_conf_ids.subtype_id')
-    def _compute_disabled_notify_subtype_ids(self):
-        for partner in self:
-            partner.disabled_notify_subtype_ids = \
-                partner._compute_notify_subtypes(False)
-
-    def _search_notify_subtype_ids_domain(self, operator, value, enabled):
-        """Build domain to search notification subtypes by partner settings."""
-        if operator in ('in', 'not in') and \
-                not isinstance(value, (tuple, list)):
-            value = [value, ]
-        conf_value = value
-        if isinstance(conf_value, int):
-            # we search conf records always w/ 'in'
-            conf_value = [conf_value]
-        _value = self.env['partner.notification.conf'].search([
-            ('subtype_id', 'in', conf_value),
-            ('enabled', '=', enabled),
-        ]).mapped('partner_id').ids
-        return [('id', operator, _value)]
-
-    def _search_enabled_notify_subtype_ids(self, operator, value):
-        return self._search_notify_subtype_ids_domain(
-            operator, value, True)
-
-    def _search_disabled_notify_subtype_ids(self, operator, value):
-        return self._search_notify_subtype_ids_domain(
-            operator, value, False)
+    # Shortcut to bypass this weird thing of odoo:
+    # `partner.user_id` is the "saleman"
+    # while the user is stored into `user_ids`
+    # but in the majority of the cases we have one real user per partner.
+    @property
+    def real_user_id(self):
+        return self.user_ids[0] if self.user_ids else False
 
     @api.multi
     def _notify(self, message,
@@ -94,17 +25,14 @@ class ResPartner(models.Model):
         # the reason should be that anybody can write messages to a partner
         # and you really want to find all ppl to be notified
         partners = self.sudo().search(email_domain)
-        partners._notify_by_email(
+        super(ResPartner, partners)._notify(
             message, force_send=force_send,
-            send_after_commit=send_after_commit, user_signature=user_signature)
+            send_after_commit=send_after_commit,
+            user_signature=user_signature)
         # notify_by_digest
-        digest_domain = self._get_notify_by_email_domain(
-            message, digest=True)
+        digest_domain = self._get_notify_by_email_domain(message, digest=True)
         partners = self.sudo().search(digest_domain)
         partners._notify_by_digest(message)
-
-        # notify_by_chat
-        self._notify_by_chat(message)
         return True
 
     def _digest_enabled_message_types(self):
@@ -153,12 +81,10 @@ class ResPartner(models.Model):
             '|',
             ('id', 'in', ids),
             ('channel_ids', 'in', channels.ids),
-            ('email', '!=', email)
+            ('email', '!=', email),
+            ('user_ids.digest_mode', '=', digest),
+            ('user_ids.notification_type', '=', 'email'),
         ]
-        if not digest:
-            domain.append(('notify_email', 'not in', ('none', 'digest')))
-        else:
-            domain.append(('notify_email', '=', 'digest'))
         if message.subtype_id:
             domain.extend(self._get_domain_subtype_leaf(message.subtype_id))
         return domain
@@ -167,65 +93,6 @@ class ResPartner(models.Model):
     def _get_domain_subtype_leaf(self, subtype):
         return [
             '|',
-            ('disabled_notify_subtype_ids', 'not in', (subtype.id, )),
-            ('enabled_notify_subtype_ids', 'in', (subtype.id, )),
+            ('user_ids.disabled_notify_subtype_ids', 'not in', (subtype.id, )),
+            ('user_ids.enabled_notify_subtype_ids', 'in', (subtype.id, )),
         ]
-
-    @api.multi
-    def _notify_update_subtype(self, subtype, enable):
-        """Update notification settings by subtype.
-
-        :param subtype: `mail.message.subtype` to enable or disable
-        :param enable: boolean to enable or disable given subtype
-        """
-        self.ensure_one()
-        exists = self.env['partner.notification.conf'].search([
-            ('subtype_id', '=', subtype.id),
-            ('partner_id', '=', self.id)
-        ], limit=1)
-        if exists:
-            exists.enabled = enable
-        else:
-            self.write({
-                'notify_conf_ids': [
-                    (0, 0, {'enabled': enable, 'subtype_id': subtype.id})]
-            })
-
-    @api.multi
-    def _notify_enable_subtype(self, subtype):
-        """Enable given subtype."""
-        self._notify_update_subtype(subtype, True)
-
-    @api.multi
-    def _notify_disable_subtype(self, subtype):
-        """Disable given subtype."""
-        self._notify_update_subtype(subtype, False)
-
-
-class PartnerNotificationConf(models.Model):
-    """Hold partner's single notification configuration."""
-    _name = 'partner.notification.conf'
-    _description = 'Partner notification configuration'
-    # TODO: add friendly onchange to not yield errors when editin via UI
-    _sql_constraints = [
-        ('unique_partner_subtype_conf',
-         'unique (partner_id,subtype_id)',
-         'You can have only one configuration per subtype!')
-    ]
-
-    partner_id = fields.Many2one(
-        string='Partner',
-        comodel_name='res.partner',
-        readonly=True,
-        required=True,
-        ondelete='cascade',
-        index=True,
-    )
-    subtype_id = fields.Many2one(
-        'mail.message.subtype',
-        'Notification type',
-        ondelete='cascade',
-        required=True,
-        index=True,
-    )
-    enabled = fields.Boolean(default=True, index=True)
