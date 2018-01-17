@@ -5,13 +5,14 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="mail.view_users_form_mail"/>
         <field name="arch" type="xml">
-            <field name="notify_email" position="replace">
+            <field name="notification_type" position="replace">
                 <group name="notif_left">
-                    <field name="notify_email" widget="radio" readonly="0"/>
-                    <field name="notify_frequency" readonly="0"
-                           attrs="{'invisible': [('notify_email', '!=', 'digest')]}" />
+                    <field name="notification_type" widget="radio" readonly="0"/>
+                    <field name="digest_mode" />
+                    <field name="digest_frequency" readonly="0"
+                           attrs="{'invisible': [('digest_mode', '=', False)]}" />
                 </group>
-                <group name="notif_right" attrs="{'invisible': [('notify_email','=', 'none')]}">
+                <group name="notif_right" attrs="{'invisible': [('notification_type','=', 'inbox')]}">
                     <label string="Enable/disable notifications by type" colspan="4" />
                     <field name="notify_conf_ids" nolabel="1" colspan="4" readonly="0" />
                 </group>
@@ -25,17 +26,19 @@
         <field name="model">res.users</field>
         <field name="inherit_id" ref="mail.view_users_form_simple_modif_mail"/>
         <field name="arch" type="xml">
-            <field name="notify_email" position="replace">
+            <field name="notification_type" position="replace">
                 <group name="notif_left">
-                    <field name="notify_email" widget="radio" readonly="0"/>
-                    <field name="notify_frequency" readonly="0"
-                           attrs="{'invisible': [('notify_email', '!=', 'digest')]}" />
+                    <field name="digest_mode" />
+                    <field name="notification_type" widget="radio" readonly="0"/>
+                    <field name="digest_frequency" readonly="0"
+                           attrs="{'invisible': [('digest_mode', '=', False)]}" />
                 </group>
-                <group name="notif_right" attrs="{'invisible': [('notify_email','=', 'none')]}">
+                <group name="notif_right" attrs="{'invisible': [('notification_type','=', 'inbox')]}">
                     <label string="Enable/disable notifications by type" colspan="4" />
                     <field name="notify_conf_ids" nolabel="1" colspan="4" readonly="0" />
                 </group>
             </field>
         </field>
     </record>
+
 </odoo>
