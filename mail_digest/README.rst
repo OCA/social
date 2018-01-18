@@ -11,9 +11,10 @@ Features
 
 This module allows users/partners to:
 
-* select "digest" mode in their notification settings
+* enable "digest mode" in their notification settings
 * with digest mode on select a frequency: "daily" or "weekly"
 * configure specific rules per message subtype (enabled/disabled)
+* globally enable/disable digest based on message's type
 
 to receive or to not receive any email notification for a given subtype.
 
@@ -22,40 +23,46 @@ The preference tab on user's form will look like:
 .. image:: ./images/preview.png
 
 
+Global settings
+---------------
+
+By default digest functionality is enabled
+for every message type ('email', 'comment', 'notification').
+You change this with the config param `mail_digest.enabled_message_types`
+whereas you can specify message types separated by comma.
+
+
 Behavior
 --------
 
-When a partner with digest mode on is notified with a message or an email
+When a user with digest mode on is notified with a message or an email
 all the messages are collected inside a `mail.digest` container.
 
-A daily cron and a weekly cron will take care of creating a single email per each digest,
+A daily cron and a weekly cron will take care
+of creating a single email per each digest,
 which will be sent as a standard email.
 
 **Rules**
 
 Given that the user has `Notification management = Handle by Emails`...
 
-a message with subtype assigned *will be sent* via digest if:
+a message with subtype assigned _will be sent_ via digest if:
 
-* no record for type: message passes
-* record disabled for type: message don't pass
-* record enabled for type: message pass
+   * global: `mail_digest_enabled_message_types` param enables the message type
+   * user: digest mode is ON for the recipient
+   * user: recipient's user has no specific setting for the subtype
+   * user: recipient's user has no specific disabling setting for the subtype
 
-NOTE: under the hood the digest notification logic excludes followers to be notified,
-since you really want to notify only mail.digest's partner.
 
-a message with subtype assigned *will NOT be sent* via digest if:
+a message with subtype assigned _will NOT be sent_ via digest if:
 
   * global: `mail_digest_enabled_message_types` param disables the message type
   * user: digest mode is OFF for the recipient
   * user: recipient's user has disabled the subtype in her/his settings
 
-Global settings
----------------
 
-By default digest functionality is enabled for every message type ('email', 'comment', 'notification').
-You change this with the config param `mail_digest.enabled_message_types`
-whereas you can specify message types separated by comma.
+NOTE: under the hood the digest notification logic excludes followers to be notified,
+since you really want to notify only mail.digest's partner.
 
 
 Known issues / Roadmap
@@ -65,6 +72,22 @@ Known issues / Roadmap
 
 Right now the notification message and the digest mail itself is wrapped inside Odoo mail template.
 We should be able to customize this easily.
+
+Migrating to v11
+----------------
+
+Notification settings, in Odoo core,
+`have been moved to user model <https://github.com/odoo/odoo/commit/2950ffaa86ef38263e9a4a59a30d0768f82a61fa#diff-0c15808786b030dc6c62b0b88196afff>`,
+and the logic changed a bit.
+
+At the moment there's no staight upgrade provided by this module.
+If you need to migrate, keep in mind that:
+
+* `mail.digest` is now tied to user (partner_id -> user_id)
+* `notify_email` has been removed so to enable digest mode you have to turn on the new flag `digest_mode`
+* `notify_frequency` has been moved to user model and is now called `digest_frequency`
+* `partner.notification.conf` became `user.notification.conf`
+* `notify_conf_ids` now links the new model `user.notification.conf` and moved to user model
 
 
 Bug Tracker
