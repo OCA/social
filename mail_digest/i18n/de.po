@@ -36,7 +36,7 @@ msgid "Created on"
 msgstr "Angelegt am"
 
 #. module: mail_digest
-#: selection:res.partner,notify_frequency:0
+#: selection:res.partner,digest_frequency:0
 msgid "Daily"
 msgstr "Täglich"
 
@@ -73,8 +73,8 @@ msgstr "Aktivieren"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_frequency
-#: model:ir.model.fields,field_description:mail_digest.field_res_partner_notify_frequency
-#: model:ir.model.fields,field_description:mail_digest.field_res_users_notify_frequency
+#: model:ir.model.fields,field_description:mail_digest.field_res_partner_digest_frequency
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_digest_frequency
 msgid "Frequency"
 msgstr "Häufigkeit"
 
@@ -187,7 +187,7 @@ msgid "Users"
 msgstr ""
 
 #. module: mail_digest
-#: selection:res.partner,notify_frequency:0
+#: selection:res.partner,digest_frequency:0
 msgid "Weekly"
 msgstr "Wöchentlich"
 
@@ -198,7 +198,7 @@ msgid "Weekly update"
 msgstr "wöchentlich Übersicht"
 
 #. module: mail_digest
-#: sql_constraint:partner.notification.conf:0
+#: sql_constraint:user.notification.conf:0
 msgid "You can have only one configuration per subtype!"
 msgstr "You can have only one configuration per subtype!"
 
