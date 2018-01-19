@@ -30,7 +30,8 @@ class ResPartner(models.Model):
             body = _('Email has been bounced: %s\n'
                      'Reason: %s\n'
                      'Event: %s') % (partner.email, reason,
-                                     event['Message-Id'] or '')
+                                     event and event.get('Message-Id',
+                                                         _('unknown')))
             partner.message_post(body=body)
 
     @api.multi
