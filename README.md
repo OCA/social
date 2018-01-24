@@ -32,6 +32,7 @@ addon | version | summary
 [mass_mailing_event](mass_mailing_event/) | 10.0.1.0.0 | Link mass mailing with event for excluding recipients
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 10.0.1.0.0 | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 10.0.1.0.2 | Link partners with mass-mailing
+[mass_mailing_resend](mass_mailing_resend/) | 10.0.1.0.0 | Resend mass mailings
 [mass_mailing_unique](mass_mailing_unique/) | 10.0.1.0.0 | Avoids duplicate mailing lists and contacts
 [website_mass_mailing_name](website_mass_mailing_name/) | 10.0.1.0.0 | Ask for name when subscribing, and create and/or link partner
 
