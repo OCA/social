@@ -17,6 +17,6 @@
     ],
     "data": [],
     "qweb": [
-            "static/src/xml/mail_autoexpand.xml",
-        ],
+        "static/src/xml/mail_autoexpand.xml",
+    ],
 }

@@ -24,14 +24,13 @@ welcomed feedback `here <https://github.com/OCA/
 social/issues/new?body=module:%20 mail_message_auto_expand%0Aversion:%20
 8.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
-
 Credits
 =======
 
 Images
 ------
 
-* PICOL Icon Generator `here <http://picol.org/picol_icon_generator>`_.
+* Icon Image from `PICOL Icon Generator <http://picol.org/picol_icon_generator>`_.
 
 Contributors
 ------------
@@ -52,4 +51,4 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-To contribute to this module, please visit http://odoo-community.org.
+To contribute to this module, please visit https://odoo-community.org.
