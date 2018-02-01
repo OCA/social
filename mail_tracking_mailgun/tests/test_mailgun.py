@@ -389,10 +389,10 @@ class TestMailgun(TransactionCase):
 
     def test_email_bounced_set(self):
         message_number = len(self.partner.message_ids) + 1
-        self.partner._email_bounced_set('test_error', self.event)
+        self.partner._email_bounced_set('test_error', False)
         self.assertEqual(len(self.partner.message_ids), message_number)
         self.partner.email = ""
-        self.partner._email_bounced_set('test_error', self.event)
+        self.partner._email_bounced_set('test_error', False)
         self.assertEqual(len(self.partner.message_ids), message_number)
 
     @mock.patch(_packagepath + '.models.mail_tracking_email.requests')
