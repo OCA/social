@@ -52,6 +52,13 @@
                             options='{"model": "res.partner"}'
                         />
                     </group>
+                    <button
+                        name="%(action_mail_mass_mailing_load_filter)d"
+                        type="action"
+                        string="Load filter"
+                        icon="fa-filter"
+                        colspan="1"
+                    />
                 </group>
             </xpath>
         </field>
