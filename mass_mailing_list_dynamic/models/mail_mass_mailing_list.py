@@ -32,10 +32,12 @@ class MassMailingList(models.Model):
 
     def action_sync(self):
         """Sync contacts in dynamic lists."""
-        Contact = self.env["mail.mass_mailing.contact"]
+        Contact = self.env["mail.mass_mailing.contact"].with_context(
+            syncing=True,
+        )
         Partner = self.env["res.partner"]
         # Skip non-dynamic lists
-        dynamic = self.filtered("dynamic").with_context(syncing=True)
+        dynamic = self.filtered("dynamic")
         for one in dynamic:
             sync_domain = safe_eval(one.sync_domain) + [("email", "!=", False)]
             desired_partners = Partner.search(sync_domain)
