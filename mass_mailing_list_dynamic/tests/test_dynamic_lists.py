@@ -4,32 +4,35 @@
 
 from mock import patch
 from odoo.exceptions import ValidationError
-from odoo.tests.common import TransactionCase
+from odoo.tests import common
 
 
-class DynamicListCase(TransactionCase):
-    def setUp(self):
-        super(DynamicListCase, self).setUp()
-        self.tag = self.env["res.partner.category"].create({
+@common.at_install(False)
+@common.post_install(True)
+class DynamicListCase(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super(DynamicListCase, cls).setUpClass()
+        cls.tag = cls.env["res.partner.category"].create({
             "name": "testing tag",
         })
-        self.partners = self.env["res.partner"]
+        cls.partners = cls.env["res.partner"]
         for number in range(5):
-            self.partners |= self.partners.create({
+            cls.partners |= cls.partners.create({
                 "name": "partner %d" % number,
-                "category_id": [(4, self.tag.id, False)],
+                "category_id": [(4, cls.tag.id, False)],
                 "email": "%d@example.com" % number,
             })
-        self.list = self.env["mail.mass_mailing.list"].create({
+        cls.list = cls.env["mail.mass_mailing.list"].create({
             "name": "test list",
             "dynamic": True,
-            "sync_domain": repr([("category_id", "in", self.tag.ids)]),
+            "sync_domain": repr([("category_id", "in", cls.tag.ids)]),
         })
-        self.mail = self.env["mail.mass_mailing"].create({
+        cls.mail = cls.env["mail.mass_mailing"].create({
             "name": "test mass mailing",
-            "contact_list_ids": [(4, self.list.id, False)],
+            "contact_list_ids": [(4, cls.list.id, False)],
         })
-        self.mail._onchange_model_and_list()
+        cls.mail._onchange_model_and_list()
 
     def test_list_sync(self):
         """List is synced correctly."""
@@ -53,6 +56,10 @@ class DynamicListCase(TransactionCase):
         self.assertTrue(contact0.exists())
         # Set list as full-synced
         self.list.sync_method = "full"
+        Contact.search([
+            ("list_id", "=", self.list.id),
+            ("partner_id", "=", self.partners[2].id),
+        ]).unlink()
         self.list.action_sync()
         self.assertEqual(self.list.contact_nbr, 3)
         self.assertFalse(contact0.exists())
@@ -73,7 +80,7 @@ class DynamicListCase(TransactionCase):
             contact1.partner_id = self.partners[0]
 
     def test_sync_when_sending_mail(self):
-        """Dynamic list is synced before mailing to it."""
+        """Check that list in synced when sending a mass mailing."""
         self.list.action_sync()
         self.assertEqual(self.list.contact_nbr, 5)
         # Create a new partner
@@ -82,9 +89,31 @@ class DynamicListCase(TransactionCase):
             "category_id": [(4, self.tag.id, False)],
             "email": "extra@example.com",
         })
-        # Before sending the mail, the list is updated
-        with patch("odoo.addons.base.ir.ir_mail_server"
-                   ".IrMailServer.send_email") as send_email:
+        # Mock sending low level method, because an auto-commit happens there
+        with patch("odoo.addons.mail.models.mail_mail.MailMail.send") as s:
             self.mail.send_mail()
-            self.assertEqual(6, send_email.call_count)
+            self.assertEqual(1, s.call_count)
         self.assertEqual(6, self.list.contact_nbr)
+
+    def test_load_filter(self):
+        domain = "[('id', '=', 1)]"
+        ir_filter = self.env['ir.filters'].create({
+            'name': 'Test filter',
+            'model_id': 'res.partner',
+            'domain': domain,
+        })
+        wizard = self.env['mail.mass_mailing.load.filter'].with_context(
+            active_id=self.list.id,
+        ).create({
+            'filter_id': ir_filter.id,
+        })
+        wizard.load_filter()
+        self.assertEqual(self.list.sync_domain, domain)
+
+    def test_change_partner(self):
+        self.list.sync_method = 'full'
+        self.list.action_sync()
+        # This shouldn't fail
+        self.partners[:1].write({
+            'email': 'test_mass_mailing_list_dynamic@example.org',
+        })

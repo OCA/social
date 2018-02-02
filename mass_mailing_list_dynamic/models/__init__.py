@@ -4,3 +4,4 @@
 from . import mail_mass_mailing
 from . import mail_mass_mailing_contact
 from . import mail_mass_mailing_list
+from . import res_partner
