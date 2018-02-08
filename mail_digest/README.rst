@@ -46,7 +46,7 @@ which will be sent as a standard email.
 
 Given that the user has `Notification management = Handle by Emails`...
 
-a message with subtype assigned _will be sent_ via digest if:
+a message with subtype assigned **will be sent** via digest if:
 
    * global: `mail_digest_enabled_message_types` param enables the message type
    * user: digest mode is ON for the recipient
@@ -54,7 +54,7 @@ a message with subtype assigned _will be sent_ via digest if:
    * user: recipient's user has no specific disabling setting for the subtype
 
 
-a message with subtype assigned _will NOT be sent_ via digest if:
+a message with subtype assigned **will NOT be sent** via digest if:
 
   * global: `mail_digest_enabled_message_types` param disables the message type
   * user: digest mode is OFF for the recipient
