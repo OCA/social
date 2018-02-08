@@ -1,4 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_partner_notification_conf_user,partner.notification.user,model_user_notification_conf,base.group_user,1,1,1,1
-access_mail_digest_system,mail.digest.sys,model_mail_digest,base.group_system,1,1,1,1
-access_partner_notification_conf_system,partner.notification.sys,model_user_notification_conf,base.group_system,1,1,1,1
+access_user_notification_conf_user,user.notification.conf user,model_user_notification_conf,base.group_user,1,1,1,1
+access_user_notification_conf_portal,user.notification.conf portal,model_user_notification_conf,base.group_portal,1,1,1,1
+access_user_notification_conf_system,user.notification.conf sys,model_user_notification_conf,base.group_system,1,1,1,1
+access_mail_digest_system,mail.digest sys,model_mail_digest,base.group_system,1,1,1,1
