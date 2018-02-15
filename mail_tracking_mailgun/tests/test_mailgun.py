@@ -78,7 +78,8 @@ class TestMailgun(TransactionCase):
                         "subject": "This is a test"
                     },
                 },
-                "event": "delivered"
+                "event": "delivered",
+                "recipient": "to@example.com",
             }]
         }
 
