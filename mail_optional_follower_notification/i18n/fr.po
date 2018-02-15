@@ -27,6 +27,10 @@ msgid ""
 "can access the notification directly from the document (if they are allowed "
 "to)</span>"
 msgstr ""
+"<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" "
+"style=\"color: red;\">- Attention : les abonnés ne seront pas notifiés mais "
+"ils peuvent avoir accès à la notification directement depuis le document "
+"(s'ils sont autorisés à le faire)</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
