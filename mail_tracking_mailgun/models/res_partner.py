@@ -45,43 +45,50 @@ class ResPartner(models.Model):
         if not validation_key:
             raise UserError(_('You need to configure mailgun.validation_key'
                               ' in order to be able to check mails validity'))
-        for partner in self:
+        for partner in self.filtered('email'):
             res = requests.get(
                 "%s/address/validate" % api_url,
                 auth=("api", validation_key), params={
                     "address": partner.email,
                     "mailbox_verification": True,
                 })
-            if not res or res.status_code != 200:
+            if not res or res.status_code != 200 and not self.env.context.get(
+                    'mailgun_auto_check'):
                 raise UserError(_(
                     'Error %s trying to '
                     'check mail' % res.status_code or 'of connection'))
             content = json.loads(res.content, res.apparent_encoding)
             if 'mailbox_verification' not in content:
-                raise UserError(
-                    _("Mailgun Error. Mailbox verification value wasn't"
-                      " returned"))
+                if not self.env.context.get('mailgun_auto_check'):
+                    raise UserError(
+                        _("Mailgun Error. Mailbox verification value wasn't"
+                          " returned"))
             # Not a valid address: API sets 'is_valid' as False
             # and 'mailbox_verification' as None
             if not content['is_valid']:
                 partner.email_bounced = True
-                raise UserError(
-                    _('%s is not a valid email address. Please check it '
-                      'in order to avoid sending issues') % (partner.email))
+                body = _('%s is not a valid email address. Please check it'
+                         ' in order to avoid sending issues') % partner.email
+                if not self.env.context.get('mailgun_auto_check'):
+                    raise UserError(body)
+                partner.message_post(body=body)
             # If the mailbox is not valid API returns 'mailbox_verification'
             # as a string with value 'false'
             if content['mailbox_verification'] == 'false':
                 partner.email_bounced = True
-                raise UserError(
-                    _('%s failed the mailbox verification. Please check it '
-                      'in order to avoid sending issues') % (partner.email))
+                body = _('%s failed the mailbox verification. Please check it'
+                         ' in order to avoid sending issues') % partner.email
+                if not self.env.context.get('mailgun_auto_check'):
+                    raise UserError(body)
+                partner.message_post(body=body)
             # If Mailgun can't complete the validation request the API returns
             # 'mailbox_verification' as a string set to 'unknown'
             if content['mailbox_verification'] == 'unknown':
-                raise UserError(
-                    _("%s couldn't be verified. Either the request couln't be "
-                      "completed or the mailbox provider doesn't support "
-                      "email verification") % (partner.email))
+                if not self.env.context.get('mailgun_auto_check'):
+                    raise UserError(
+                        _("%s couldn't be verified. Either the request couln't"
+                          " be completed or the mailbox provider doesn't "
+                          "support email verification") % (partner.email))
 
     @api.multi
     def check_email_bounced(self):
@@ -133,3 +140,21 @@ class ResPartner(models.Model):
                 auth=("api", api_key))
             if res.status_code in (200, 404) and partner.email_bounced:
                 partner.email_bounced = False
+
+    def _autocheck_partner_email(self):
+        for partner in self:
+            partner.with_context(
+                mailgun_auto_check=True).check_email_validity()
+
+    @api.model
+    def create(self, vals):
+        if 'email' in vals and self.env['ir.config_parameter'].get_param(
+                'mailgun.auto_check_partner_email'):
+            self._autocheck_partner_email()
+        return super(ResPartner, self).create(vals)
+
+    def write(self, vals):
+        if 'email' in vals and self.env['ir.config_parameter'].get_param(
+                'mailgun.auto_check_partner_email'):
+            self._autocheck_partner_email()
+        return super(ResPartner, self).write(vals)

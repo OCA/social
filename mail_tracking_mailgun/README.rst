@@ -40,6 +40,10 @@ parameters:
   validity you must config this parameter with your account Public Validation
   Key.
 
+You can also config partner email autocheck with this system parameter:
+
+- `mailgun.auto_check_partner_email`: Set it to True.
+
 Usage
 =====
 
