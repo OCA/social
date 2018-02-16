@@ -242,10 +242,10 @@ class MailTrackingEmail(models.Model):
             if "items" not in content:
                 raise ValidationError(_("Event information not longer stored"))
             for item in content["items"]:
-                if not self.env['mail.tracking.event'].search(
                 # mailgun event hasn't been synced and recipient is the same as
                 # in the evaluated tracking. We use email_split since tracking
                 # recipient could come in format: "example" <to@dest.com>
+                if not self.env['mail.tracking.event'].search(
                         [('mailgun_id', '=', item["id"])]) and (
                             item.get("recipient", "") ==
                             email_split(tracking.recipient)[0]):
@@ -254,59 +254,3 @@ class MailTrackingEmail(models.Model):
                     metadata = self._mailgun_metadata(
                         mapped_event_type, item, {})
                     tracking.event_create(mapped_event_type, metadata)
-
-    @api.multi
-    def check_email_list_validity(self, email_list):
-        """
-        Checks email list validity with Mailgun's API
-        API documentation:
-        https://documentation.mailgun.com/en/latest/api-email-validation.html
-        """
-        api_key, api_url, domain, validation_key = self.env[
-            'mail.tracking.email']._mailgun_values()
-        if not validation_key:
-            raise UserError(_('You need to configure mailgun.validation_key'
-                              ' in order to be able to check mails validity'))
-        result = {}
-        for email in email_list:
-            res = requests.get(
-                "%s/address/validate" % api_url,
-                auth=("api", validation_key), params={
-                    "address": email,
-                    "mailbox_verification": True,
-                })
-            if not res or res.status_code != 200:
-                result[email] = {'result': (_(
-                    'Error %s trying to '
-                    'check mail' % res.status_code or 'of connection'))}
-                continue
-            content = json.loads(res.content, res.apparent_encoding)
-            if 'mailbox_verification' not in content:
-                result[email] = {'result': (
-                    _("Mailgun Error. Mailbox verification value wasn't"
-                      " returned"))}
-                continue
-            # Not a valid address: API sets 'is_valid' as False
-            # and 'mailbox_verification' as None
-            if not content['is_valid']:
-                result[email] = {'result': (
-                    _('%s is not a valid email address. Please check it '
-                      'in order to avoid sending issues') % (email))}
-                continue
-            # If the mailbox is not valid API returns 'mailbox_verification'
-            # as a string with value 'false'
-            if content['mailbox_verification'] == 'false':
-                result[email] = {'result': (
-                    _('%s failed the mailbox verification. Please check it '
-                      'in order to avoid sending issues') % (email))}
-                continue
-            # If Mailgun can't complete the validation request the API returns
-            # 'mailbox_verification' as a string set to 'unknown'
-            if content['mailbox_verification'] == 'unknown':
-                result[email] = {'result': (
-                    _("%s couldn't be verified. Either the request couln't be "
-                      "completed or the mailbox provider doesn't support "
-                      "email verification") % (email))}
-                continue
-            result[email] = {'result': _("The mailbox is correct")}
-        return result
