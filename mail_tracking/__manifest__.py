@@ -5,7 +5,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.1.0",
     "category": "Social Network",
     "website": "http://www.tecnativa.com",
     "author": "Tecnativa, "
