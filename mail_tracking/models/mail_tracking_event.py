@@ -28,7 +28,7 @@ class MailTrackingEvent(models.Model):
         string="Date", readonly=True, compute="_compute_date", store=True)
     tracking_email_id = fields.Many2one(
         string='Message', readonly=True, required=True, ondelete='cascade',
-        comodel_name='mail.tracking.email')
+        comodel_name='mail.tracking.email', index=True)
     event_type = fields.Selection(string='Event type', selection=[
         ('sent', 'Sent'),
         ('delivered', 'Delivered'),
