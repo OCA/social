@@ -39,7 +39,8 @@ class MailTrackingEmail(models.Model):
     date = fields.Date(
         string="Date", readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
-        string="Message", comodel_name='mail.message', readonly=True)
+        string="Message", comodel_name='mail.message', readonly=True,
+        index=True)
     mail_id = fields.Many2one(
         string="Email", comodel_name='mail.mail', readonly=True)
     partner_id = fields.Many2one(
