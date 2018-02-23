@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     Copyright 2016 Vicent Cubells <vicent.cubells@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <template id="assets_editor" name="560px_assets" inherit_id="web_editor.assets_editor">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/website_mail_snippet_fixed/static/src/css/fixed_560px.css"/>
+            <script type="text/javascript" src="/website_mail_snippet_fixed/static/src/js/fixed_560px.js"/>
+        </xpath>
+    </template>
+
+</odoo>
