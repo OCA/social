@@ -43,6 +43,8 @@ class TestMailgun(TransactionCase):
             'mail.catchall.domain', self.domain)
         self.env['ir.config_parameter'].set_param(
             'mailgun.validation_key', self.api_key)
+        self.env['ir.config_parameter'].set_param(
+            'mailgun.auto_check_partner_email', '')
         self.event = {
             'Message-Id': u'<xxx.xxx.xxx-openerp-xxx-res.partner@test_db>',
             'X-Mailgun-Sid': u'WyIwNjgxZSIsICJ0b0BleGFtcGxlLmNvbSIsICI3MG'
@@ -79,7 +81,8 @@ class TestMailgun(TransactionCase):
                         "subject": "This is a test"
                     },
                 },
-                "event": "delivered"
+                "event": "delivered",
+                "recipient": "to@example.com",
             }]
         }
 
@@ -331,14 +334,16 @@ class TestMailgun(TransactionCase):
     @mock.patch(_packagepath + '.models.res_partner.requests')
     def test_email_validity(self, mock_request):
         self.partner.email_bounced = False
-        self.partner.email = 'info@tecnativa.com'
         mock_request.get.return_value.apparent_encoding = 'ascii'
         mock_request.get.return_value.status_code = 200
         mock_request.get.return_value.content = json.dumps({
             'is_valid': True,
             'mailbox_verification': 'true',
         }, ensure_ascii=True)
-        self.partner.check_email_validity()
+        # Trigger email auto validation in partner
+        self.env['ir.config_parameter'].set_param(
+            'mailgun.auto_check_partner_email', 'True')
+        self.partner.email = 'info@tecnativa.com'
         self.assertFalse(self.partner.email_bounced)
         self.partner.email = 'xoxoxoxo@tecnativa.com'
         # Not a valid mailbox
