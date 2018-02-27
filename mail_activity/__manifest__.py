@@ -12,12 +12,15 @@
         'mail',
     ],
     "data": [
+        "views/res_partner.xml",
         "data/mail_message_subtype.xml",
         'security/ir.model.access.csv',
         'views/mail_activity.xml',
         'data/mail_activity.xml',
         'data/ir_model_data.xml',
+        'views/templates.xml',
     ],
     "qweb": [
+        'static/src/xml/mail_activity.xml',
     ],
 }
