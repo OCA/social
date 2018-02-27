@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 
 class MailActivityMixin(models.AbstractModel):
@@ -50,6 +50,52 @@ class MailActivityMixin(models.AbstractModel):
     activity_summary = fields.Char(
         'Next Activity Summary', related='activity_ids.summary',
         search='_search_activity_summary')
+
+    @api.model
+    def _setup_complete(self):
+        """ Copied and disabled part of the method, since it doesn't work
+            correctly for AbstractModels. Odoo fixed this for v10 and above
+            in 92144ef """
+        cls = type(self)
+
+        ## set up field triggers
+        #for field in cls._fields.itervalues():
+        #    # dependencies of custom fields may not exist; ignore that case
+        #    exceptions = (Exception,) if field.manual else ()
+        #    with tools.ignore(*exceptions):
+        #        field.setup_triggers(self.env)
+        #
+        ## add invalidation triggers on model dependencies
+        #if cls._depends:
+        #    for model_name, field_names in cls._depends.iteritems():
+        #        model = self.env[model_name]
+        #        for field_name in field_names:
+        #            field = model._fields[field_name]
+        #            for dependent in cls._fields.itervalues():
+        #                model._field_triggers.add(field, (dependent, None))
+
+        # determine old-api structures about inherited fields
+        cls._inherits_reload()
+
+        # register stuff about low-level function fields
+        cls._init_function_fields(cls.pool, self._cr)
+
+        # register constraints and onchange methods
+        cls._init_constraints_onchanges()
+
+        # check defaults
+        for name in cls._defaults:
+            assert name in cls._fields, \
+                "Model %s has a default for nonexiting field %s" % (cls._name, name)
+
+        # validate rec_name
+        if cls._rec_name:
+            assert cls._rec_name in cls._fields, \
+                "Invalid rec_name %s for model %s" % (cls._rec_name, cls._name)
+        elif 'name' in cls._fields:
+            cls._rec_name = 'name'
+        elif 'x_name' in cls._fields:
+            cls._rec_name = 'x_name'
 
     @api.depends('activity_ids.state')
     def _compute_activity_state(self):
