@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
+# enjolras <yo@miguelrevilla.com>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"POT-Creation-Date: 2018-02-26 01:46+0000\n"
+"PO-Revision-Date: 2018-02-26 01:46+0000\n"
+"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,12 +22,12 @@ msgstr ""
 #. module: mass_mailing_event
 #: model:ir.model,name:mass_mailing_event.model_event_registration
 msgid "Attendee"
-msgstr ""
+msgstr "Asistente"
 
 #. module: mass_mailing_event
 #: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_code
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. module: mass_mailing_event
 #: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_create_uid
@@ -46,12 +47,12 @@ msgstr "Nombre mostrado"
 #. module: mass_mailing_event
 #: model:ir.model.fields,field_description:mass_mailing_event.field_mail_mass_mailing_event_id
 msgid "Event related"
-msgstr ""
+msgstr "Evento relacionado"
 
 #. module: mass_mailing_event
 #: model:ir.model.fields,field_description:mass_mailing_event.field_mail_mass_mailing_exclude_event_state_ids
 msgid "Exclude"
-msgstr ""
+msgstr "Excluir"
 
 #. module: mass_mailing_event
 #: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_id
@@ -96,4 +97,4 @@ msgstr "Empresa"
 #. module: mass_mailing_event
 #: model:ir.model,name:mass_mailing_event.model_event_registration_state
 msgid "event.registration.state"
-msgstr ""
+msgstr "event.registration.state"
