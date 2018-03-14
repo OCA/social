@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record model="res.groups" id="group_mail_edit_editor" >
+            <field name="name">Edit mail messages</field>
+            <field name="comment">Members of this group are able to edit mail messages.</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_mail_edit_mover">
+            <field name="name">Move mail messages</field>
+            <field name="comment">Members of this group are able to move mails.</field>
+            <field name="category_id" ref="base.module_category_hidden"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+    </data>
+</openerp>
