@@ -21,6 +21,7 @@ To create a dynamic mailing list, you need to:
 #. Go to *Mass Mailing > Mailings > Mailing Lists* and create one.
 #. Check the *Dynamic* box.
 #. Choose a *Sync method*:
+
    - Leave empty to use as a manual mailing list, the normal behavior.
    - *Only add new records* to make sure no records disappear from the list
      when partners stop matching the *Synchronization critera*.
@@ -46,9 +47,6 @@ Usage
    checked.
 #. Before sending the mass mailing, the list will be synced for having latest
    changes.
-
-Usage
-=====
 
 When you hit the *Sync now* button or send a mass mailing to this list, its
 contacts will be automatically updated.
@@ -90,6 +88,7 @@ Contributors
 * `Tecnativa <https://www.tecnativa.com>`_:
   * Jairo Llopis <jairo.llopis@tecnativa.com>
   * Pedro M. Baeza <pedro.baeza@tecnativa.com>
+  * David Vidal <david.vidal@tecnativa.com>
 
 Do not contact contributors directly about support or help with technical issues.
 
