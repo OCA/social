@@ -78,6 +78,15 @@ class DynamicListCase(common.SavepointCase):
             contact1.email = "other@example.com"
         with self.assertRaises(ValidationError):
             contact1.partner_id = self.partners[0]
+        # Unset dynamic list
+        self.list.dynamic = False
+        # Now the contact is created without exception
+        Contact.create({
+            "list_id": self.list.id,
+            "email": "test@example.com",
+        })
+        # Contacts can now be changed
+        contact1.name = "other"
 
     def test_sync_when_sending_mail(self):
         """Check that list in synced when sending a mass mailing."""
