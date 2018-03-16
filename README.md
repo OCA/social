@@ -19,7 +19,7 @@ addon | version | summary
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 10.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_debrand](mail_debrand/) | 10.0.1.0.0 | Remove Odoo branding in sent emails
 [mail_digest](mail_digest/) | 10.0.1.0.1 | Basic digest mail handling.
-[mail_footer_notified_partner](mail_footer_notified_partner/) | 10.0.1.0.0 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
+[mail_footer_notified_partner](mail_footer_notified_partner/) | 10.0.1.0.1 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_force_queue](mail_force_queue/) | 10.0.0.2.0 | Force outgoing emails to be queued
 [mail_full_expand](mail_full_expand/) | 10.0.1.0.0 | Expand mail in a big window
 [mail_inline_css](mail_inline_css/) | 10.0.1.0.0 | Convert style tags in inline style in your mails
@@ -32,7 +32,7 @@ addon | version | summary
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 10.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 10.0.1.0.0 | Know unsubscription reasons, track them
 [mass_mailing_event](mass_mailing_event/) | 10.0.1.0.0 | Link mass mailing with event for excluding recipients
-[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 10.0.1.1.0 | Mass mailing lists that get autopopulated
+[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 10.0.1.1.1 | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 10.0.1.0.2 | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 10.0.1.0.0 | Resend mass mailings
 [mass_mailing_unique](mass_mailing_unique/) | 10.0.1.0.0 | Avoids duplicate mailing lists and contacts
