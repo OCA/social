@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import mock
 from odoo.tools import mute_logger
-import base64
 import time
 from odoo import http
 from odoo.tests.common import TransactionCase
@@ -29,12 +28,10 @@ class TestMailTracking(TransactionCase):
         self.sender = self.env['res.partner'].create({
             'name': 'Test sender',
             'email': 'sender@example.com',
-            'notify_email': 'always',
         })
         self.recipient = self.env['res.partner'].create({
             'name': 'Test recipient',
             'email': 'recipient@example.com',
-            'notify_email': 'always',
         })
         self.last_request = http.request
         http.request = type('obj', (object,), {
@@ -138,7 +135,7 @@ class TestMailTracking(TransactionCase):
     def test_mail_send(self):
         controller = MailTrackingController()
         db = self.env.cr.dbname
-        image = base64.decodestring(BLANK)
+        image = BLANK
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
@@ -310,8 +307,8 @@ class TestMailTracking(TransactionCase):
         db = self.env.cr.dbname
         controller = MailTrackingController()
         not_found = controller.mail_tracking_all('not_found_db')
-        self.assertEqual('NOT FOUND', not_found.response[0])
+        self.assertEqual(b'NOT FOUND', not_found.response[0])
         none = controller.mail_tracking_all(db)
-        self.assertEqual('NONE', none.response[0])
+        self.assertEqual(b'NONE', none.response[0])
         none = controller.mail_tracking_event(db, 'open')
-        self.assertEqual('NONE', none.response[0])
+        self.assertEqual(b'NONE', none.response[0])
