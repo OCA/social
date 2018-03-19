@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
-import urlparse
+import urllib.parse
 import time
 import re
 from datetime import datetime
@@ -94,26 +93,19 @@ class MailTrackingEmail(models.Model):
         inverse_name='tracking_email_id', readonly=True)
 
     @api.model
-    def _email_score_tracking_filter(self, domain, order='time desc',
-                                     limit=10):
-        """Default tracking search. Ready to be inherited."""
-        return self.search(domain, limit=limit, order=order)
-
-    @api.model
     def email_is_bounced(self, email):
         if email:
-            return len(self._email_score_tracking_filter([
+            return self.search_count([
                 ('recipient_address', '=', email.lower()),
                 ('state', 'in', ('error', 'rejected', 'spam', 'bounced')),
-            ])) > 0
+            ]) > 0
         return False
 
     @api.model
     def email_score_from_email(self, email):
         if email:
-            return self._email_score_tracking_filter([
-                ('recipient_address', '=', email.lower())
-            ]).email_score()
+            return self.search([
+                ('recipient_address', '=', email.lower())]).email_score()
         return 0.
 
     @api.model
@@ -183,7 +175,7 @@ class MailTrackingEmail(models.Model):
                 'db': self.env.cr.dbname,
                 'tracking_email_id': self.id,
             })
-        track_url = urlparse.urljoin(base_url, path_url)
+        track_url = urllib.parse.urljoin(base_url, path_url)
         return (
             '<img src="%(url)s" alt="" '
             'data-odoo-tracking-email="%(tracking_email_id)s"/>' % {
@@ -197,7 +189,7 @@ class MailTrackingEmail(models.Model):
         if event and event.recipient_address:
             recipients.append(event.recipient_address)
         else:
-            recipients = list(filter(None, self.mapped('recipient_address')))
+            recipients = [x for x in self.mapped('recipient_address') if x]
         for recipient in recipients:
             self.env['res.partner'].search([
                 ('email', '=ilike', recipient)
