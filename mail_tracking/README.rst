@@ -10,7 +10,6 @@ This module shows email notification tracking status for any messages in
 mail thread (chatter). Each notified partner will have an intuitive icon just
 right to his name.
 
-
 Installation
 ============
 
@@ -19,7 +18,6 @@ where /web/databse/selector returns a list of more than one database, then
 you need to add ``mail_tracking`` addon to wide load addons list
 (by default, only ``web`` addon), setting ``--load`` option.
 For example, ``--load=web,mail_tracking``
-
 
 Usage
 =====
@@ -63,7 +61,7 @@ These are all available status icons:
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/10.0
+   :target: https://runbot.odoo-community.org/runbot/205/11.0
 
 If you want to see all tracking emails and events you can go to
 
@@ -93,8 +91,11 @@ Images
 Contributors
 ------------
 
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* Antonio Espinosa <antonio.espinosa@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Pedro M. Baeza <pedro.baeza@tecnativa.com>
+  * Antonio Espinosa <antonio.espinosa@tecnativa.com>
+  * David Vidal <david.vidal@tecnativa.com>
 
 Maintainer
 ----------
