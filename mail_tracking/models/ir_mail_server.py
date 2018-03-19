@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import re
@@ -20,16 +19,10 @@ class IrMailServer(models.Model):
 
     def _tracking_email_id_body_get(self, body):
         body = body or ''
-        tracking_email_id = False
         # https://regex101.com/r/lW4cB1/2
         match = re.search(
             r'<img[^>]*data-odoo-tracking-email=["\']([0-9]*)["\']', body)
-        if match:
-            try:
-                tracking_email_id = int(match.group(1))
-            except:  # pragma: no cover
-                pass
-        return tracking_email_id
+        return int(match.group(1)) if match.group(1) else False
 
     def build_email(self, email_from, email_to, subject, body, email_cc=None,
                     email_bcc=None, reply_to=False, attachments=None,
@@ -64,14 +57,14 @@ class IrMailServer(models.Model):
             mail_server = mail_server_ids[0] if mail_server_ids else None
         if mail_server:
             smtp_server_used = mail_server.smtp_host
-        else:  # pragma: no cover
+        else:
             smtp_server_used = smtp_server or tools.config.get('smtp_server')
         return smtp_server_used
 
     @api.model
     def send_email(self, message, mail_server_id=None, smtp_server=None,
                    smtp_port=None, smtp_user=None, smtp_password=None,
-                   smtp_encryption=None, smtp_debug=False):
+                   smtp_encryption=None, smtp_debug=False, smtp_session=None):
         message_id = False
         tracking_email = self._tracking_email_get(message)
         smtp_server_used = self.sudo()._smtp_server_get(
@@ -82,7 +75,8 @@ class IrMailServer(models.Model):
                 message, mail_server_id=mail_server_id,
                 smtp_server=smtp_server, smtp_port=smtp_port,
                 smtp_user=smtp_user, smtp_password=smtp_password,
-                smtp_encryption=smtp_encryption, smtp_debug=smtp_debug)
+                smtp_encryption=smtp_encryption, smtp_debug=smtp_debug,
+                smtp_session=smtp_session)
         except Exception as e:
             if tracking_email:
                 tracking_email.smtp_error(self, smtp_server_used, e)
