@@ -15,6 +15,7 @@
                         <field
                             name="dynamic"
                         />
+                        <field name="is_synced" invisible="1"/>
                     </group>
                     <group attrs="{'invisible': [('dynamic', '=', False)]}">
                         <label for="sync_method"/>
@@ -26,7 +27,16 @@
                                 name="action_sync"
                                 type="object"
                                 string="Sync now"
+                                icon="fa-exclamation-triangle"
+                                class="btn-danger"
+                                attrs="{'invisible': [('is_synced', '=', True)]}"
+                            />
+                            <button
+                                name="action_sync"
+                                type="object"
+                                string="Sync now"
                                 icon="fa-refresh"
+                                attrs="{'invisible': [('is_synced', '=', False)]}"
                             />
                         </div>
                     </group>
@@ -61,6 +71,16 @@
                     />
                 </group>
             </xpath>
+            <field name="contact_nbr" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': [('is_synced', '=', False)]}
+                </attribute>
+            </field>
+            <field name="contact_nbr" position="after">
+                <span attrs="{'invisible': [('is_synced', '=', True)]}">
+                    <strong>???</strong>
+                </span>
+            </field>
         </field>
     </record>
 
