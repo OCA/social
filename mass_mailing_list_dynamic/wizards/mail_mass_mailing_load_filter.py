@@ -12,7 +12,9 @@ class MassMailingLoadFilter(models.TransientModel):
         comodel_name='ir.filters',
         string="Filter to load",
         required=True,
-        domain=[('model_id', '=', 'res.partner')],
+        domain="[('model_id', '=', 'res.partner'), '|', "
+               "('user_id', '=', uid), ('user_id','=',False)]",
+        ondelete='cascade',
     )
 
     def load_filter(self):
