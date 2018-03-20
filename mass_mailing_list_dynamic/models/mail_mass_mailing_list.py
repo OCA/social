@@ -2,7 +2,7 @@
 # Copyright 2017 Tecnativa - Jairo Llopis
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 from odoo.tools import safe_eval
 
 
@@ -28,6 +28,10 @@ class MassMailingList(models.Model):
         default="[('opt_out', '=', False), ('email', '!=', False)]",
         required=True,
         help="Filter partners to sync in this list",
+    )
+    is_synced = fields.Boolean(
+        help="Helper field to make the user aware of unsynced changes",
+        default=True,
     )
 
     def action_sync(self):
@@ -55,5 +59,11 @@ class MassMailingList(models.Model):
                     "list_id": one.id,
                     "partner_id": partner.id,
                 })
+            one.is_synced = True
         # Invalidate cached contact count
         self.invalidate_cache(["contact_nbr"], dynamic.ids)
+
+    @api.onchange("dynamic", "sync_method", "sync_domain")
+    def _onchange_dynamic(self):
+        if self.dynamic:
+            self.is_synced = False
