@@ -59,7 +59,7 @@ class MailThread(models.AbstractModel):
                 'body_html': (
                     u"%s<br/><br/><br/>%s<br/><br/>%s"
                     % (
-                        unicode(message_dict['body'], errors='replace'),
+                        message_dict['body'],
                         _("Raw message:"),
                         unicode(message.__str__(), errors='replace').replace(
                             "\n", "<br/>")
