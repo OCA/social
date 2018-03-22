@@ -4,6 +4,7 @@
 
 import logging
 from odoo import models, api, tools, _
+from odoo.tools import ustr
 
 _logger = logging.getLogger(__name__)
 
@@ -59,9 +60,9 @@ class MailThread(models.AbstractModel):
                 'body_html': (
                     u"%s<br/><br/><br/>%s<br/><br/>%s"
                     % (
-                        message_dict['body'],
+                        ustr(message_dict['body']),
                         _("Raw message:"),
-                        unicode(message.__str__(), errors='replace').replace(
+                        ustr(message.__str__()).replace(
                             "\n", "<br/>")
                     )),
                 'subject': message_dict['subject'],
