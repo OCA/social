@@ -23,9 +23,25 @@ class TestMailNotification(common.TransactionCase):
             'password': 'disabled',
             'bounce_notify_partner_ids': [(6, 0, [admin_id])]
         })
+
         path = get_module_resource(
             'mail_notify_bounce',
             'tests', 'data', 'bounce_message'
+        )
+        with open(path) as bounce_message:
+            self.thread_model.with_context(
+                fetchmail_server_id=server.id
+            ).message_process(
+                model='res.partner', message=bounce_message.read())
+        sent_mail = self.env['mail.mail'].search(
+            [], order="create_date desc")[0]
+        self.assertEqual(sent_mail.recipient_ids.name, 'Administrator')
+        self.assertEqual(
+            sent_mail.subject, 'Delivery Status Notification (Failure)')
+
+        path = get_module_resource(
+            'mail_notify_bounce',
+            'tests', 'data', 'bounce_message_2'
         )
         with open(path) as bounce_message:
             self.thread_model.with_context(
