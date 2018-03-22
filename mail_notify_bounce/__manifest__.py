@@ -5,7 +5,7 @@
 {
     "name": "Notify bounce emails",
     "summary": "Notify bounce emails to preconfigured addresses",
-    "version": "10.0.1.0.1",
+    "version": "10.0.1.0.2",
     "category": "Mail",
     "website": "https://github.com/OCA/social",
     "author": "Agile Business Group, Odoo Community Association (OCA)",
