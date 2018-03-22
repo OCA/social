@@ -1,0 +1,148 @@
+Delivered-To: catchall+100387-res.partner-3342@openerp.agilebg.com
+Received: by 10.200.3.172 with SMTP id t44csp807834qtg;
+        Thu, 22 Mar 2018 03:11:49 -0700 (PDT)
+X-Google-Smtp-Source: AG47ELvCw5X3EofeGH5PhUr8flDnN3FjSUkvHnEdaKHpvJVKgCs5hEuJvhFZmpDn6ZeBjXWM1qBr
+X-Received: by 10.223.197.139 with SMTP id m11mr18456177wrg.198.1521713508964;
+        Thu, 22 Mar 2018 03:11:48 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1521713508; cv=none;
+        d=google.com; s=arc-20160816;
+        b=yapDUUZ2lifefaxNgZAEs7dOwQsRJ3mIWnDrSlrW/04+TVMa+0/p0WvNmoUvyzUNSQ
+         9Gr6cHTVAxPJejefKByWsfRSnYdpvKvKopY+PL8FN1aWN9ui0MXYIuuZ9wx7+WUh9uxm
+         ZuBgYAktwC/PKOFL8EnUip4qYyz3v+kTXwu3gFkY6UpZ0kj0J6xKx/CiDTJ69Rc3hPuy
+         WuK7tzRRCOo+IZz7mJi5sp0QLjLzVrBQJJ/xW6GWzAWNRS3tPUAeAjQUW7uIoD7SF8pP
+         pqkVExBiytM7PNbMh/ZmJQB2xp+XNuwDhBti8k6Uiv3kXqCv4xh4kVxgSoYeAqqGqcLp
+         cc3g==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=message-id:mime-version:auto-submitted:to:subject:from:date
+         :arc-authentication-results;
+        bh=F08kgOAV9x4rcK6QrCWzhz0hfFl1ODcxJ5XznoAf1+M=;
+        b=mfLuUkUIhRuabYbk/3d3EkmNR+wjpxjA7gcl8tRdh5nZ7uhQsveCJbSK8+tF1AAtKE
+         kGOAfr0YXIZ9RFWNIKYbjT8iuuIx+xigRzPyrReYKDIkjXBAQ+9qiwqV6VB5Gz55d8ge
+         rK5sIcgvRYXBNbHKAuMQYzusRkt5qxADIMeN3DA0WVXRnypB0csFvLsh6Z23y5mNQkq+
+         jFZz7XhEId08XtvcZwUHMhXk4hFxLwV5N+BbMwKYsTBuwztYZS9DuJRbZIygvv+Evw7k
+         I7JUZqeU5hAzR86PFJHGWanx7dypnYO83/dgCKMzOe7k+J3yecMMlifPC+/IQ5uvO4fP
+         aBAQ==
+ARC-Authentication-Results: i=1; mx.google.com;
+       spf=pass (google.com: best guess record for domain of postmaster@odoo10.agilebg.com designates 212.35.199.210 as permitted sender) smtp.helo=odoo10.agilebg.com
+Return-Path: <>
+Received: from odoo10.agilebg.com (openerp.agilebg.com. [212.35.199.210])
+        by mx.google.com with ESMTPS id r94si5018388wrb.399.2018.03.22.03.11.48
+        for <catchall+100387-res.partner-3342@openerp.agilebg.com>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Thu, 22 Mar 2018 03:11:48 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of postmaster@odoo10.agilebg.com designates 212.35.199.210 as permitted sender) client-ip=212.35.199.210;
+Authentication-Results: mx.google.com;
+       spf=pass (google.com: best guess record for domain of postmaster@odoo10.agilebg.com designates 212.35.199.210 as permitted sender) smtp.helo=odoo10.agilebg.com
+Received: by odoo10.agilebg.com (Postfix)
+	id 8525410043F; Thu, 22 Mar 2018 11:11:48 +0100 (CET)
+Date: Thu, 22 Mar 2018 11:11:48 +0100 (CET)
+From: MAILER-DAEMON@odoo10.agilebg.com (Mail Delivery System)
+Subject: Undelivered Mail Returned to Sender
+To: catchall+100387-res.partner-3342@openerp.agilebg.com
+Auto-Submitted: auto-replied
+MIME-Version: 1.0
+Content-Type: multipart/report; report-type=delivery-status;
+	boundary="5E4E910043D.1521713508/odoo10.agilebg.com"
+Message-Id: <20180322101148.8525410043F@odoo10.agilebg.com>
+
+This is a MIME-encapsulated message.
+
+--5E4E910043D.1521713508/odoo10.agilebg.com
+Content-Description: Notification
+Content-Type: text/plain; charset=us-ascii
+
+This is the mail system at host odoo10.agilebg.com.
+
+I'm sorry to have to inform you that your message could not
+be delivered to one or more recipients. It's attached below.
+
+For further assistance, please send mail to postmaster.
+
+If you do so, please include this problem report. You can
+delete your own text from the attached returned message.
+
+                   The mail system
+
+<jj@jj.pink>: Host or domain name not found. Name service error for
+    name=jj.pink type=AAAA: Host not found
+
+--5E4E910043D.1521713508/odoo10.agilebg.com
+Content-Description: Delivery report
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; odoo10.agilebg.com
+X-Postfix-Queue-ID: 5E4E910043D
+X-Postfix-Sender: rfc822; catchall+100387-res.partner-3342@openerp.agilebg.com
+Arrival-Date: Thu, 22 Mar 2018 11:11:48 +0100 (CET)
+
+Final-Recipient: rfc822; jj@jj.pink
+Original-Recipient: rfc822;jj@jj.pink
+Action: failed
+Status: 5.4.4
+Diagnostic-Code: X-Postfix; Host or domain name not found. Name service error
+    for name=jj.pink type=AAAA: Host not found
+
+--5E4E910043D.1521713508/odoo10.agilebg.com
+Content-Description: Undelivered Message
+Content-Type: message/rfc822
+
+Return-Path: <catchall+100387-res.partner-3342@openerp.agilebg.com>
+Received: from openerp.agilebg.com (localhost [IPv6:::1])
+	by odoo10.agilebg.com (Postfix) with ESMTPS id 5E4E910043D;
+	Thu, 22 Mar 2018 11:11:48 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/simple; d=openerp.agilebg.com;
+	s=mail; t=1521713508;
+	bh=XM6oNst+a4NL3PGJ1aWi4QJEEpPylU7exovp16MS4gA=;
+	h=Subject:From:Reply-To:To:Date:From;
+	b=RHxpioE4IlCIHExtaRps5z/fiFvvJdIn/GxWdDtzqaVFUtvnBsnqqGEZ5E0s3Fyi7
+	 tkQFZP3MF9Zlzub9gwblsDFIScsuKwlPXIK+Xp9IBx9RJdXSCvKnUkAxjbve5vNkLc
+	 yQNUC5wruQkKIVC5mb32kp0BzFg8KKZpVRsf4JzU=
+Content-Type: multipart/mixed; boundary="===============5291852991323074884=="
+MIME-Version: 1.0
+Message-Id: <1521713445.211167097091675.905862349786927-openerp-3342-res.partner@odoo10.agilebg.com>
+Subject: Re: jj@jj.pink
+From: Lorenzo Battistini <catchall@openerp.agilebg.com>
+Reply-To: Agile Business Group Sagl <catchall@openerp.agilebg.com>
+To: "jj@jj.pink" <jj@jj.pink>
+Date: Thu, 22 Mar 2018 10:11:48 -0000
+X-Odoo-Tracking-ID: 227376
+X-Odoo-db-uuid: 265d92e8-8b23-11e2-afb4-525400cb0a64
+X-Odoo-Database: (u'agilebg',)
+X-Odoo-Objects: res.partner-3342
+Sender: Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+
+--===============5291852991323074884==
+Content-Type: multipart/alternative;
+ boundary="===============7339659580950519963=="
+MIME-Version: 1.0
+
+--===============7339659580950519963==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+dGVzdApMb3JlbnpvIEJhdHRpc3RpbmkKCgpTZW50IGJ5CkFnaWxlIEJ1c2luZXNzIEdyb3VwIFNh
+Z2wKWzFdCnVzaW5nCk9kb28gWzJdIC4KCkFsc28gbm90aWZpZWQ6IGpqQGpqLnBpbmsuCgoKWzFd
+IGh0dHA6Ly93d3cuYWdpbGViZy5jb20KWzJdIGh0dHBzOi8vd3d3Lm9kb28uY29tCg==
+
+--===============7339659580950519963==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+PGJhc2UgaHJlZj0naHR0cHM6Ly93d3cuYWdpbGViZy5jb20nPgo8cD50ZXN0PC9wPgogICAgPHA+
+TG9yZW56byBCYXR0aXN0aW5pPC9wPgo8YnI+CjxwIHN0eWxlPSJjb2xvcjogIzU1NTU1NTsiPgog
+ICAgU2VudCBieQogICAgPGEgaHJlZj0iaHR0cDovL3d3dy5hZ2lsZWJnLmNvbSIgc3R5bGU9InRl
+eHQtZGVjb3JhdGlvbjpub25lOyBjb2xvcjogIzg3NUE3QjsiPgogICAgQWdpbGUgQnVzaW5lc3Mg
+R3JvdXAgU2FnbAogICAgPC9hPgogICAgdXNpbmcKICAgIDxhIGhyZWY9Imh0dHBzOi8vd3d3Lm9k
+b28uY29tIiBzdHlsZT0idGV4dC1kZWNvcmF0aW9uOm5vbmU7IGNvbG9yOiAjODc1QTdCOyI+T2Rv
+bzwvYT4uCjwvcD4KPGJyPjxzbWFsbD5BbHNvIG5vdGlmaWVkOiBqakBqai5waW5rLjwvc21hbGw+
+PGJyPgoKPGltZyBzcmM9Imh0dHBzOi8vd3d3LmFnaWxlYmcuY29tL21haWwvdHJhY2tpbmcvb3Bl
+bi9hZ2lsZWJnLzIyNzM3Ni9ibGFuay5naWYiIGFsdD0iIiBkYXRhLW9kb28tdHJhY2tpbmctZW1h
+aWw9IjIyNzM3NiIvPgo=
+
+--===============7339659580950519963==--
+
+--===============5291852991323074884==--
+
+--5E4E910043D.1521713508/odoo10.agilebg.com--
