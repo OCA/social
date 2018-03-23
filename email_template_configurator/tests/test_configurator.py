@@ -5,13 +5,13 @@
 from openerp.tests import common
 
 
-class test_configurator(common.TransactionCase):
+class TestConfigurator(common.TransactionCase):
 
     def test_configurator(self):
         placeholders_obj = self.env['email.template.placeholder']
         templates_obj = self.env['email.template']
         invoice_model = self.env['ir.model'].search([
-            ('model', '=', 'account.invoice'),
+            ('model', '=', 'res.partner'),
         ])
         placeholders_vals = [
             {
@@ -32,6 +32,6 @@ class test_configurator(common.TransactionCase):
                 'placeholder_id': placeholder.id,
                 'placeholder_value': False,
             }, 'placeholder_id', {
-                'placeholder_id': 1,
+                'placeholder_id': "1",
             })['value']
             self.assertEqual(res['placeholder_value'], vals['placeholder'])

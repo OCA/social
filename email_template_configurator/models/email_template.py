@@ -19,4 +19,3 @@ class EmailTemplate(models.Model):
         for tmpl in self:
             if tmpl.placeholder_id:
                 tmpl.placeholder_value = tmpl.placeholder_id.placeholder
-                tmpl.placeholder_id = False
