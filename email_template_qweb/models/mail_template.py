@@ -17,13 +17,13 @@ class MailTemplate(models.Model):
     @api.multi
     def generate_email(self, res_ids, fields=None):
         multi_mode = True
-        if isinstance(res_ids, (int, long)):
+        if isinstance(res_ids, int):
             res_ids = [res_ids]
             multi_mode = False
         result = super(MailTemplate, self).generate_email(
             res_ids, fields=fields
         )
-        for record_id, this in self.get_email_template(res_ids).iteritems():
+        for record_id, this in self.get_email_template(res_ids).items():
             if this.body_type == 'qweb' and\
                     (not fields or 'body_html' in fields):
                 for record in self.env[this.model].browse(record_id):
@@ -33,7 +33,7 @@ class MailTemplate(models.Model):
                     })
                     # Some wizards, like when sending a sales order, need this
                     # fix to display accents correctly
-                    if not isinstance(body_html, unicode):
+                    if not isinstance(body_html, str):
                         body_html = body_html.decode('utf-8')
                     result[record_id]['body_html'] = self.render_post_process(
                         body_html

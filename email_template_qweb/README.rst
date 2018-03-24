@@ -49,6 +49,7 @@ Contributors
 
 * Holger Brunn <hbrunn@therp.nl>
 * Dave Lasley <dave@laslabs.com>
+* Carlos Lopez Mite <celm1990@gmail.com>
 
 Do not contact contributors directly about help with questions or problems concerning
 this addon, but use the `forum <https://www.odoo.com/forum/help-1>`_,
