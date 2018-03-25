@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# © 2016 Therp BV <http://therp.nl>
+# Copyright 2016 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests.common import TransactionCase
 
@@ -11,7 +10,7 @@ class TestMailTemplateQweb(TransactionCase):
         self.assertTrue(
             # this comes from the called template if everything worked
             '<footer>' in mail_values[self.env.user.id]['body_html'],
-            'Did not rcv rendered template in response. Got: \n%s\n' % (
+            'Did not receive rendered template in response. Got: \n%s\n' % (
                 mail_values[self.env.user.id]['body_html']
             )
         )
@@ -20,7 +19,7 @@ class TestMailTemplateQweb(TransactionCase):
         self.assertTrue(
             # this comes from the called template if everything worked
             '<footer>' in mail_values['body_html'],
-            'Did not rcv rendered template in response. Got: \n%s\n' % (
+            'Did not receive rendered template in response. Got: \n%s\n' % (
                 mail_values['body_html']
             )
         )
