@@ -27,7 +27,6 @@ class TestConfigurator(common.TransactionCase):
         ]
         for vals in placeholders_vals:
             placeholder = placeholders_obj.create(vals)
-
             res = templates_obj.onchange({
                 'placeholder_id': placeholder.id,
                 'placeholder_value': False,
