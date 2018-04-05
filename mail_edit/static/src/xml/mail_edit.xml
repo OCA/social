@@ -3,9 +3,14 @@
 <template>
     <t t-extend="mail.thread.message">
         <t t-jquery=".oe_msg_icons .oe_reply" t-operation="before">
-            <span class="oe_edit">
-                <a title="Edit Mail" class="oe_e">&#038;</a>
-            </span>
+            <t t-if="widget.is_author">
+                <span class="oe_edit">
+                    <a title="Edit Mail" class="oe_e">&#038;</a>
+                </span>
+                <span class="oe_delete">
+                    <a title="Delete" class="oe_e">[</a>
+                </span>
+            </t>
         </t>
     </t>
 </template>
