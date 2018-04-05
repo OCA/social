@@ -7,6 +7,7 @@ openerp.mail_edit = function (instance) {
         bind_events: function () {
             this._super.apply(this, arguments);
             this.$('.oe_edit').on('click', this.on_message_edit);
+            this.$('.oe_delete').on('click', this.on_message_delete);
         },
 
         on_message_edit: function () {
