@@ -34,6 +34,13 @@ class PartnerDomainCase(SavepointCase):
         cls.partner1 = cls.user1.partner_id
         cls.partner2 = cls.user2.partner_id
         cls.partner3 = cls.user3.partner_id
+        # a partner w/ no user that should not be excluded
+        # in non-digest notifications
+        cls.partner_nouser = cls.partner_model.with_context(
+            tracking_disable=True).create({
+                'name': 'No User Partner',
+                'email': 'nouser@test.com',
+            })
 
         cls.subtype1 = cls.subtype_model.create({'name': 'Type 1'})
         cls.subtype2 = cls.subtype_model.create({'name': 'Type 2'})
@@ -60,7 +67,7 @@ class PartnerDomainCase(SavepointCase):
         # because we call `_get_notify_by_email_domain` directly
         self.partner1.real_user_id.notification_type = 'email'
         self.partner2.real_user_id.notification_type = 'email'
-        partners = self.partner1 + self.partner2
+        partners = self.partner1 + self.partner2 + self.partner_nouser
         # followers
         self.partner3.message_subscribe(self.partner2.ids)
         # partner1 is the only recipient
@@ -68,16 +75,20 @@ class PartnerDomainCase(SavepointCase):
             'body': 'My Body',
             'res_id': self.partner3.id,
             'model': 'res.partner',
-            'partner_ids': [(4, self.partner1.id)]
+            'partner_ids': [(4, self.partner1.id), (4, self.partner_nouser.id)]
         })
         domain = partners._get_notify_by_email_domain(message)
         # we find both of them since partner2 is a follower
         self._assert_found(self.partner1, domain)
         self._assert_found(self.partner2, domain)
+        # and we find also the partner w/ no user
+        self._assert_found(self.partner_nouser, domain)
+
         # no one here in digest mode
         domain = partners._get_notify_by_email_domain(message, digest=True)
         self._assert_found(self.partner1, domain, not_found=True)
         self._assert_found(self.partner2, domain, not_found=True)
+        self._assert_found(self.partner_nouser, domain, not_found=True)
 
         # include only recipients
         domain = partners.with_context(

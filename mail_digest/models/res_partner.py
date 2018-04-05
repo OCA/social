@@ -77,17 +77,37 @@ class ResPartner(models.Model):
         ids = self.ids
         if self.env.context.get('notify_only_recipients'):
             ids = [x for x in ids if x in message.partner_ids.ids]
-        domain = [
+        common_domain = [
             '|',
             ('id', 'in', ids),
             ('channel_ids', 'in', channels.ids),
             ('email', '!=', email),
+        ]
+        # A bit hacky but we need to exclude / include partners
+        # that do not have any user and as such, they have no email settings.
+        # NOTE: using the following domain does not work,
+        # so we do 2 searches in the middle and return a domain
+        # containing only the desired ids.
+        #
+        #    '|', ('user_ids', '=', False),
+        #    '&', ('user_ids.digest_mode', '=', False),
+        #         ('user_ids.notification_type', '=', 'email')
+        without_users_ids = []
+        if not digest:
+            # get partners w/ no users
+            without_users_ids = self.search(
+                common_domain + [('user_ids', '=', False)]
+            ).ids
+        digest_domain = [
             ('user_ids.digest_mode', '=', digest),
             ('user_ids.notification_type', '=', 'email'),
         ]
         if message.subtype_id:
-            domain.extend(self._get_domain_subtype_leaf(message.subtype_id))
-        return domain
+            digest_domain.extend(
+                self._get_domain_subtype_leaf(message.subtype_id))
+        # get partners w/ users
+        with_users_ids = self.search(common_domain + digest_domain).ids
+        return [('id', 'in', without_users_ids + with_users_ids)]
 
     @api.model
     def _get_domain_subtype_leaf(self, subtype):
