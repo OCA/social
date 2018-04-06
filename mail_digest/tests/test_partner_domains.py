@@ -91,6 +91,20 @@ class PartnerDomainCase(SavepointCase):
         domain = partner._get_notify_by_email_domain(message, digest=1)
         self._assert_found(domain)
 
+    def test_notify_domains_digest_force_send(self):
+        # when `force_send` is true, digest machinery is bypassed
+        message = self.message_model.create({'body': 'My Body', })
+        partner = self.partner1
+        partner.notify_email = 'digest'
+        # even if we have digest mode on, we find the guy
+        domain = partner._get_notify_by_email_domain(message, force_send=True)
+        self._assert_found(domain)
+        # when asking for digest domain we don't get digest-related leaves
+        # as digest domain part is bypassed
+        domain = partner._get_notify_by_email_domain(
+            message, force_send=True, digest=True)
+        self.assertNotIn('notify_email', [x[0] for x in domain])
+
     def test_notify_domains_none(self):
         message = self.message_model.create({'body': 'My Body', })
         partner = self.partner1

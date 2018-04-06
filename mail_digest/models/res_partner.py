@@ -89,7 +89,8 @@ class ResPartner(models.Model):
                 force_send=False, send_after_commit=True, user_signature=True):
         """Override to delegate domain generation."""
         # notify_by_email
-        email_domain = self._get_notify_by_email_domain(message)
+        email_domain = self._get_notify_by_email_domain(
+            message, force_send=force_send)
         # `sudo` from original odoo method
         # the reason should be that anybody can write messages to a partner
         # and you really want to find all ppl to be notified
@@ -97,11 +98,12 @@ class ResPartner(models.Model):
         partners._notify_by_email(
             message, force_send=force_send,
             send_after_commit=send_after_commit, user_signature=user_signature)
-        # notify_by_digest
-        digest_domain = self._get_notify_by_email_domain(
-            message, digest=True)
-        partners = self.sudo().search(digest_domain)
-        partners._notify_by_digest(message)
+        if not force_send:
+            # notify_by_digest
+            digest_domain = self._get_notify_by_email_domain(
+                message, force_send=force_send, digest=True)
+            partners = self.sudo().search(digest_domain)
+            partners._notify_by_digest(message)
 
         # notify_by_chat
         self._notify_by_chat(message)
@@ -127,10 +129,12 @@ class ResPartner(models.Model):
         self.env['mail.digest'].sudo().create_or_update(self, message)
 
     @api.model
-    def _get_notify_by_email_domain(self, message, digest=False):
+    def _get_notify_by_email_domain(self, message,
+                                    force_send=False, digest=False):
         """Return domain to collect partners to be notified by email.
 
         :param message: instance of mail.message
+        :param force_send: whether the message should be sent immediately
         :param digest: include/exclude digest enabled partners
 
         NOTE: since mail.mail inherits from mail.message
@@ -155,6 +159,8 @@ class ResPartner(models.Model):
             ('channel_ids', 'in', channels.ids),
             ('email', '!=', email)
         ]
+        if force_send:
+            return domain
         if not digest:
             domain.append(('notify_email', 'not in', ('none', 'digest')))
         else:
