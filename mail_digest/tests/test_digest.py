@@ -2,37 +2,38 @@
 # Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 from odoo import exceptions
 
 
-class DigestCase(TransactionCase):
+class DigestCase(SavepointCase):
 
-    def setUp(self):
-        super(DigestCase, self).setUp()
-        self.partner_model = self.env['res.partner']
-        self.message_model = self.env['mail.message']
-        self.subtype_model = self.env['mail.message.subtype']
-        self.digest_model = self.env['mail.digest']
-        self.conf_model = self.env['partner.notification.conf']
+    @classmethod
+    def setUpClass(cls):
+        super(DigestCase, cls).setUpClass()
+        cls.partner_model = cls.env['res.partner']
+        cls.message_model = cls.env['mail.message']
+        cls.subtype_model = cls.env['mail.message.subtype']
+        cls.digest_model = cls.env['mail.digest']
+        cls.conf_model = cls.env['partner.notification.conf']
 
-        self.partner1 = self.partner_model.with_context(
+        cls.partner1 = cls.partner_model.with_context(
             tracking_disable=1).create({
                 'name': 'Partner 1',
                 'email': 'partner1@test.foo.com',
             })
-        self.partner2 = self.partner_model.with_context(
+        cls.partner2 = cls.partner_model.with_context(
             tracking_disable=1).create({
                 'name': 'Partner 2',
                 'email': 'partner2@test.foo.com',
             })
-        self.partner3 = self.partner_model.with_context(
+        cls.partner3 = cls.partner_model.with_context(
             tracking_disable=1).create({
                 'name': 'Partner 3',
                 'email': 'partner3@test.foo.com',
             })
-        self.subtype1 = self.subtype_model.create({'name': 'Type 1'})
-        self.subtype2 = self.subtype_model.create({'name': 'Type 2'})
+        cls.subtype1 = cls.subtype_model.create({'name': 'Type 1'})
+        cls.subtype2 = cls.subtype_model.create({'name': 'Type 2'})
 
     def test_get_or_create_digest(self):
         message1 = self.message_model.create({

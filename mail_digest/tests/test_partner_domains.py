@@ -2,34 +2,35 @@
 # Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class PartnerDomainCase(TransactionCase):
+class PartnerDomainCase(SavepointCase):
 
-    def setUp(self):
-        super(PartnerDomainCase, self).setUp()
-        self.partner_model = self.env['res.partner']
-        self.message_model = self.env['mail.message']
-        self.subtype_model = self.env['mail.message.subtype']
+    @classmethod
+    def setUpClass(cls):
+        super(PartnerDomainCase, cls).setUpClass()
+        cls.partner_model = cls.env['res.partner']
+        cls.message_model = cls.env['mail.message']
+        cls.subtype_model = cls.env['mail.message.subtype']
 
-        self.partner1 = self.partner_model.with_context(
+        cls.partner1 = cls.partner_model.with_context(
             tracking_disable=1).create({
                 'name': 'Partner 1',
                 'email': 'partner1@test.foo.com',
             })
-        self.partner2 = self.partner_model.with_context(
+        cls.partner2 = cls.partner_model.with_context(
             tracking_disable=1).create({
                 'name': 'Partner 2',
                 'email': 'partner2@test.foo.com',
             })
-        self.partner3 = self.partner_model.with_context(
+        cls.partner3 = cls.partner_model.with_context(
             tracking_disable=1).create({
                 'name': 'Partner 3',
                 'email': 'partner3@test.foo.com',
             })
-        self.subtype1 = self.subtype_model.create({'name': 'Type 1'})
-        self.subtype2 = self.subtype_model.create({'name': 'Type 2'})
+        cls.subtype1 = cls.subtype_model.create({'name': 'Type 1'})
+        cls.subtype2 = cls.subtype_model.create({'name': 'Type 2'})
 
     def _assert_found(self, domain, not_found=False, partner=None):
         partner = partner or self.partner1
@@ -89,6 +90,20 @@ class PartnerDomainCase(TransactionCase):
         self._assert_found(domain, not_found=1)
         domain = partner._get_notify_by_email_domain(message, digest=1)
         self._assert_found(domain)
+
+    def test_notify_domains_digest_force_send(self):
+        # when `force_send` is true, digest machinery is bypassed
+        message = self.message_model.create({'body': 'My Body', })
+        partner = self.partner1
+        partner.notify_email = 'digest'
+        # even if we have digest mode on, we find the guy
+        domain = partner._get_notify_by_email_domain(message, force_send=True)
+        self._assert_found(domain)
+        # when asking for digest domain we don't get digest-related leaves
+        # as digest domain part is bypassed
+        domain = partner._get_notify_by_email_domain(
+            message, force_send=True, digest=True)
+        self.assertNotIn('notify_email', [x[0] for x in domain])
 
     def test_notify_domains_none(self):
         message = self.message_model.create({'body': 'My Body', })
