@@ -2,7 +2,7 @@
 # © 2014-2015 Grupo ESOC <www.grupoesoc.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class MailForwardComposeMessage(models.TransientModel):
@@ -40,7 +40,6 @@ class MailForwardComposeMessage(models.TransientModel):
             order="name")
         return [(m.object, m.name) for m in model_objs]
 
-    @api.one
     @api.onchange("destination_object_id")
     def change_destination_object(self):
         """Update some fields for the new message."""
@@ -56,10 +55,13 @@ class MailForwardComposeMessage(models.TransientModel):
                 record_name = "%s %s" % (model_name, record_name)
 
             self.record_name = record_name
-        else:
-            self.model = self.res_id = self.record_name = False
 
-    @api.one
+    @api.multi
+    def send_mail_action(self):
+        # action buttons call with positional arguments only, so we need an
+        # intermediary function to ensure the context is passed correctly
+        return self.send_mail()
+
     def send_mail(self):
         """Send mail and execute the attachment relocation if needed."""
         # Let the original wizard do de hard work

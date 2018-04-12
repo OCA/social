@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from os import path
-from openerp.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase
 
 
 class ForwardMailCase(TransactionCase):
@@ -42,14 +42,6 @@ class ForwardMailCase(TransactionCase):
         self.assertEqual(self.fwd.res_id, self.partner.id)
         self.assertEqual(self.fwd.record_name,
                          "%s %s" % (model.name, self.partner.name))
-
-        # Remove the destination object
-        self.fwd.destination_object_id = False
-        self.fwd.change_destination_object()
-
-        self.assertFalse(self.fwd.model)
-        self.assertFalse(self.fwd.res_id)
-        self.assertFalse(self.fwd.record_name)
 
     def test_move_attachments(self):
         """Attachments moved correctly."""
