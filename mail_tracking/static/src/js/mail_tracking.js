@@ -8,22 +8,18 @@ var core = require('web.core');
 var session = require('web.session');
 var Model = require('web.Model');
 var ActionManager = require('web.ActionManager');
-var chat_manager = require('mail.chat_manager');
 var ChatThread = require('mail.ChatThread');
-var Chatter = require('mail.Chatter');
 
 var _t = core._t;
 var MessageModel = new Model('mail.message', session.context);
 
-// chat_manager is a simple dictionary, not an OdooClass
-chat_manager._make_message_super = chat_manager.make_message;
-chat_manager.make_message = function(data) {
-    var msg = this._make_message_super(data);
-    msg.partner_trackings = data.partner_trackings || [];
-    return msg;
-};
 
 ChatThread.include({
+    _preprocess_message: function (message) {
+        var msg = this._super.apply(this, arguments);
+        msg.partner_trackings = msg.partner_trackings || [];
+        return msg;
+    },
     on_tracking_partner_click: function (event) {
         var partner_id = this.$el.find(event.currentTarget).data('partner');
         var state = {
