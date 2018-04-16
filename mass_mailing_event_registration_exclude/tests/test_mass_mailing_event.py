@@ -3,10 +3,12 @@
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests.common import at_install, post_install, SavepointCase
 
 
-class TestMassMailingEvent(common.SavepointCase):
+@at_install(False)
+@post_install(True)
+class TestMassMailingEvent(SavepointCase):
 
     @classmethod
     def setUpClass(cls):
