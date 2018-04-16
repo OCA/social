@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #     This file is part of mail_attach_existing_attachment,
@@ -31,7 +30,7 @@
               "Odoo Community Association (OCA)",
     'website': "http://acsone.eu",
     'category': 'Social Network',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
         'mail',

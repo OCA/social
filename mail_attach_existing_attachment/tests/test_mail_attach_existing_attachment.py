@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #     This file is part of mail_attach_existing_attachment,
@@ -23,7 +22,7 @@
 #
 ##############################################################################
 
-from openerp.tests import common
+from odoo.tests import common
 
 
 class TestAttachExistingAttachment(common.TransactionCase):
@@ -31,7 +30,12 @@ class TestAttachExistingAttachment(common.TransactionCase):
     def setUp(self):
         super(TestAttachExistingAttachment, self).setUp()
         self.partner_obj = self.env['res.partner']
-        self.partner_01 = self.env.ref('base.res_partner_1')
+        self.partner_01 = self.env['res.partner'].create({
+            'name': 'Partner 1',
+            'email': 'partner1@example.org',
+            'is_company': True,
+            'parent_id': False,
+        })
 
     def test_send_email_attachment(self):
         attach1 = self.env['ir.attachment'].create({
