@@ -6,12 +6,14 @@
 
 import mock
 from odoo.tools import mute_logger
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import at_install, post_install, TransactionCase
 
 mock_send_email = ('odoo.addons.base.ir.ir_mail_server.'
                    'IrMailServer.send_email')
 
 
+@at_install(False)
+@post_install(True)
 class TestMassMailing(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestMassMailing, self).setUp(*args, **kwargs)
