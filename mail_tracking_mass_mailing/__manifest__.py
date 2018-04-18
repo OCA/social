@@ -7,9 +7,9 @@
 {
     "name": "Mail tracking for mass mailing",
     "summary": "Improve mass mailing email tracking",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "category": "Social Network",
-    "website": "http://www.tecnativa.com",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
