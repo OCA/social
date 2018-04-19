@@ -1,0 +1,56 @@
+import setuptools
+
+with open('VERSION.txt', 'r') as f:
+    version = f.read().strip()
+
+setuptools.setup(
+    name="odoo8-addons-oca-social",
+    description="Meta package for oca-social Odoo addons",
+    version=version,
+    install_requires=[
+        'odoo8-addon-base_mail_bcc',
+        'odoo8-addon-email_template_qweb',
+        'odoo8-addon-mail_attach_existing_attachment',
+        'odoo8-addon-mail_compose_select_lang',
+        'odoo8-addon-mail_debrand',
+        'odoo8-addon-mail_follower_custom_notification',
+        'odoo8-addon-mail_footer_notified_partners',
+        'odoo8-addon-mail_forward',
+        'odoo8-addon-mail_full_expand',
+        'odoo8-addon-mail_mandrill',
+        'odoo8-addon-mail_notification_email_template',
+        'odoo8-addon-mail_optional_autofollow',
+        'odoo8-addon-mail_optional_follower_notification',
+        'odoo8-addon-mail_print',
+        'odoo8-addon-mail_read_new_window',
+        'odoo8-addon-mail_restrict_follower_selection',
+        'odoo8-addon-mail_sent',
+        'odoo8-addon-mail_template_multi_report',
+        'odoo8-addon-mail_tracking',
+        'odoo8-addon-mail_tracking_mailgun',
+        'odoo8-addon-mail_tracking_mass_mailing',
+        'odoo8-addon-marketing_security_group',
+        'odoo8-addon-mass_mailing_custom_unsubscribe',
+        'odoo8-addon-mass_mailing_event',
+        'odoo8-addon-mass_mailing_keep_archives',
+        'odoo8-addon-mass_mailing_sending_queue',
+        'odoo8-addon-mass_mailing_statistic_extra',
+        'odoo8-addon-mass_mailing_unique',
+        'odoo8-addon-portal_welcome_email_template',
+        'odoo8-addon-social_media_dribbble',
+        'odoo8-addon-social_media_pinterest',
+        'odoo8-addon-social_media_pinterest_blog',
+        'odoo8-addon-social_media_tripadvisor',
+        'odoo8-addon-social_media_xing',
+        'odoo8-addon-website_mail_snippet_bg_color',
+        'odoo8-addon-website_mail_snippet_fixed',
+        'odoo8-addon-website_mail_snippet_responsive',
+        'odoo8-addon-website_mail_snippet_table_edit',
+        'odoo8-addon-website_mail_snippet_vertical_resize_base',
+        'odoo8-addon-website_mass_mailing_name',
+    ],
+    classifiers=[
+        'Programming Language :: Python',
+        'Framework :: Odoo',
+    ]
+)
