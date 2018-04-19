@@ -1,1 +1,3 @@
 premailer
+simplejson
+sendgrid
