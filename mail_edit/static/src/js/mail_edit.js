@@ -31,9 +31,7 @@ openerp.mail_edit = function (instance) {
                 do_action(action, {
                     on_close: function () {
                         // reload view
-                        //debugger;
                         var parent = self.getParent().getParent().getParent().getParent()
-                        console.log(parent.model)
                         if (typeof parent.model !== "undefined"){
                             parent.reload();
                         }
