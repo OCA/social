@@ -60,6 +60,8 @@ Contributors
 
 * Dan Kiplangat <dan@sunflowerweb.nl>
 * Tom Blauwendraat <tom@sunflowerweb.nl>
+* George Daramouskas <gdaramouskas@therp.nl>
+* Holger Brunn <hbrunn@therp.nl>
 
 Maintainer
 ----------
