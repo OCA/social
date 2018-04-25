@@ -21,14 +21,15 @@ class MailTemplateReportLine(models.Model):
         translate=True,
         help='Name to use for the generated report '
              'file (may contain placeholders)\n'
-             'The extension can be omitted and will then come from the report type.'
+             'The extension can be omitted and will '
+             'then come from the report type.'
     )
 
     condition = fields.Char(
         string='Condition',
-        help='An expression evaluated to determine if the report is '
-             'to be attached to the email. If blank, the report will always be '
-             'attached.'
+        help='An expression evaluated to determine if the '
+             'report is to be attached to the email. '
+             'If blank, the report will always be attached.'
     )
 
     report_template_id = fields.Many2one(
