@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -23,4 +22,4 @@ class TestMailDebrand(common.SavepointCase):
         res = self.template.generate_email(
             self.env.user.ids, fields=['body_html'],
         )
-        self.assertNotIn('using', res[res.keys()[0]])
+        self.assertNotIn('using', res[[*res.keys()][0]])
