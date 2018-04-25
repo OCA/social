@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Tecnativa - Jairo Llopis
 # Copyright 2017 SerpentCS - Darshan Patel
 # Copyright 2017 Tecnativa - Pedro M. Baeza
@@ -7,7 +6,7 @@
 {
     "name": "Mail Debrand",
     "summary": "Remove Odoo branding in sent emails",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "category": "Social Network",
     "website": "https://www.tecnativa.com",
     "author": "Tecnativa, "

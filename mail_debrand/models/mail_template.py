@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -35,9 +34,9 @@ class MailTemplate(models.Model):
             template_txt, model, res_ids, post_process=post_process,
         )
         if post_process and self.env.context.get('mail_debrand'):
-            if isinstance(res, basestring):
+            if isinstance(res, str):
                 res = self._debrand_body(res)
             else:
-                for res_id, body in res.iteritems():
+                for res_id, body in res.items():
                     res[res_id] = self._debrand_body(body)
         return res
