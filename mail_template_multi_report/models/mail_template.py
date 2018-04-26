@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 # © 2016 Savoir-faire Linux
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 import base64
 
 from odoo import api, fields, models
 from odoo.tools.safe_eval import safe_eval
+from odoo import report as odoo_report
 
 
 class MailTemplate(models.Model):
@@ -26,8 +26,6 @@ class MailTemplate(models.Model):
         results = super(MailTemplate, self).generate_email(
             res_ids, fields=fields)
 
-        report_ext = '.pdf'
-
         for report_line in self.report_line_ids:
             records = self.env[self.model_id.model].browse(res_ids)
 
@@ -45,16 +43,25 @@ class MailTemplate(models.Model):
                     report_line.report_name, self.model, rec.id)
 
                 report = report_line.report_template_id
+
                 report_service = report.report_name
 
-                result = self.env['report'].get_pdf(rec, report_service)
+                if report.report_type in ['qweb-html', 'qweb-pdf']:
+                    result, fmt = self.env['report'].get_pdf([rec.id], report_service), 'pdf'
+                else:
+                    result, fmt = odoo_report.render_report(
+                        self._cr, self._uid, [rec.id],
+                        report_service, {'model': self.model}, self._context)
+
                 result = base64.b64encode(result)
+
+                ext = "." + fmt
 
                 if not report_name:
                     report_name = 'report.' + report_service
 
-                if not report_name.endswith(report_ext):
-                    report_name += report_ext
+                if not report_name.endswith(ext):
+                    report_name += ext
 
                 results[rec.id].setdefault('attachments', [])
                 results[rec.id]['attachments'].append((report_name, result))
