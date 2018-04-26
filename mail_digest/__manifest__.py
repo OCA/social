@@ -20,6 +20,7 @@
         'views/user_notification_views.xml',
         'views/user_views.xml',
         'templates/digest_default.xml',
+        'templates/digest_layout_preview.xml',
     ],
     'images': [
         'static/description/preview.png',

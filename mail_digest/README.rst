@@ -65,6 +65,14 @@ NOTE: under the hood the digest notification logic excludes followers to be noti
 since you really want to notify only mail.digest's partner.
 
 
+Digest rendering preview
+------------------------
+
+You can check how messages are formatted per each mail subtype by going to `/digest/layout-preview` in your browser.
+
+.. image:: ./images/digest_layout_preview.png
+
+
 Known issues / Roadmap
 ======================
 

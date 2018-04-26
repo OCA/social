@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <template id="digest_layout_preview" name="Mail digest layout preview">
+    <style>
+      #digest_layout_wrapper {
+        max-width: 600px;
+        margin: 0 auto;
+        border: 1px dashed #ddd;
+        padding: 4em;
+      }
+    </style>
+    <div id="digest_layout_wrapper">
+      <t t-raw="digest_html" />
+    </div>
+  </template>
+
+</odoo>
