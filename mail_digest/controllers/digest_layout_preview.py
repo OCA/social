@@ -92,7 +92,6 @@ class DigestPreview(http.Controller):
                 msg.subtype_id = subtype
                 subject, body = self._fake_content(subtype, i, x)
                 msg.subject = subject
-                msg.body = body
                 msg.message_type = random.choice(
                     ('email', 'comment', 'notification'))
                 msg.email_from = 'random@user%d.com' % i
@@ -101,6 +100,11 @@ class DigestPreview(http.Controller):
                     # relate a document
                     msg.model = records._name
                     msg.res_id = random.choice(records.ids)
+                # simulate messages w/ no body but tracking values
+                if x == random.choice([1, 2]):
+                    msg.tracking_value_ids = self._fake_tracking_vals()
+                else:
+                    msg.body = body
                 messages += msg
         return messages
 
