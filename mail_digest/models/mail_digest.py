@@ -1,8 +1,7 @@
 # Copyright 2017-2018 Camptocamp - Simone Orsi
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
-from odoo import fields, models, api, exceptions, _
-
+from odoo import fields, models, api, exceptions, tools, _
 import logging
 
 logger = logging.getLogger('[mail_digest]')
@@ -51,6 +50,14 @@ class MailDigest(models.Model):
         ondelete='set null',
         default=lambda self: self._default_digest_template_id(),
         domain=[('type', '=', 'qweb')],
+    )
+    sanitize_msg_body = fields.Boolean(
+        string='Sanitize message body',
+        help='Collected messages can have different styles applied '
+             'on each element. If this flag is enabled (default) '
+             'each message content will be sanitized '
+             'before generating the email.',
+        default=True,
     )
 
     def _default_digest_template_id(self):
@@ -120,6 +127,19 @@ class MailDigest(models.Model):
         for msg in self.message_ids:
             grouped.setdefault(self._message_group_by_key(msg), []).append(msg)
         return grouped
+
+    @api.model
+    def message_body(self, msg, strip_style=True):
+        """Return body message prepared for email content.
+
+        Message's body can contains styles and other stuff
+        that can screw the look and feel of digests' mails.
+
+        Here we sanitize it if `sanitize_msg_body` is set on the digest.
+        """
+        if not self.sanitize_msg_body:
+            return msg.body
+        return tools.html_sanitize(msg.body or '', strip_style=strip_style)
 
     def _get_site_name(self):
         """Retrieve site name for meaningful mail subject.

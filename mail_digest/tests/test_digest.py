@@ -192,3 +192,32 @@ class DigestCase(SavepointCase):
         # raise error if no template found
         with self.assertRaises(exceptions.UserError):
             dig._get_email_values()
+
+    def test_digest_message_body_sanitize(self):
+        dig = self._create_for_partner(self.partner1)
+        message = self.message_model.create({
+            'body': '<p style="font-weight:bold">Body!</p>',
+            'subtype_id': self.subtype1.id,
+            'res_id': self.partner3.id,
+            'model': 'res.partner',
+            'partner_ids': [(4, self.partner1.id)]
+        })
+        body = dig.message_body(message)
+        self.assertEqual(body, '<p>Body!</p>')
+
+    def test_digest_message_body_no_sanitize(self):
+        dig = self._create_for_partner(self.partner1)
+        dig.sanitize_msg_body = False
+        message = self.message_model.create({
+            'body': '<p style="font-weight:bold">Body!</p>',
+            'subtype_id': self.subtype1.id,
+            'res_id': self.partner3.id,
+            'model': 'res.partner',
+            'partner_ids': [(4, self.partner1.id)]
+        })
+        body = dig.message_body(message)
+        self.assertEqual(
+            # prevent fail on weird behavior:
+            # sometimes you get a space, sometimes not :(
+            body.replace('font-weight: bold', 'font-weight:bold'),
+            '<p style="font-weight:bold">Body!</p>')

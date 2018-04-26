@@ -31,7 +31,7 @@
                         <t t-foreach="messages" t-as="msg">
                             <div style="margin:20px">
                                 <h3 t-esc="msg.subject" />
-                                <t t-raw="msg.body" />
+                                <t t-raw="digest.message_body(msg)" />
                             </div>
                         </t>
                     </t>
