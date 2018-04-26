@@ -47,7 +47,8 @@ class MailTemplate(models.Model):
                 report_service = report.report_name
 
                 if report.report_type in ['qweb-html', 'qweb-pdf']:
-                    result, fmt = self.env['report'].get_pdf([rec.id], report_service), 'pdf'
+                    result, fmt = self.env['report'].get_pdf(
+                        [rec.id], report_service), 'pdf'
                 else:
                     result, fmt = odoo_report.render_report(
                         self._cr, self._uid, [rec.id],
