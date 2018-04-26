@@ -43,6 +43,18 @@
                                     <div class="message-wrapper"
                                          t-attf-style="margin:0 10px;padding:5px 10px;#{not msg_first and 'border-top:1px solid #ccc'}">
                                         <t t-raw="digest.message_body(msg)" />
+                                        <t t-if="msg.tracking_value_ids">
+                                            <h4>Changed values</h4>
+                                            <ul class="tracking-values">
+                                                <t t-foreach="msg.tracking_value_ids" t-as="tracked">
+                                                    <li>
+                                                        <strong class="fname"><span t-field="tracked.field_desc" />:</strong>
+                                                        <span class="fvalue-old" t-esc="tracked.get_old_display_value()[0]" /> &#8594;
+                                                        <span class="fvalue-new" t-esc="tracked.get_new_display_value()[0]" />
+                                                    </li>
+                                                </t>
+                                            </ul>
+                                        </t>
                                     </div>
                                 </t>
                             </div>
