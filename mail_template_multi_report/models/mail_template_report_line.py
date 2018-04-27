@@ -35,7 +35,4 @@ class MailTemplateReportLine(models.Model):
     report_template_id = fields.Many2one(
         comodel_name='ir.actions.report.xml',
         string='Optional report to print and attach',
-        domain=[
-            ('report_type', 'in', ['qweb-html', 'qweb-pdf'])
-        ],
     )
