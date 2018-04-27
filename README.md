@@ -22,6 +22,7 @@ addon | version | summary
 [mail_footer_notified_partner](mail_footer_notified_partner/) | 10.0.1.0.1 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_force_queue](mail_force_queue/) | 10.0.0.2.0 | Force outgoing emails to be queued
 [mail_full_expand](mail_full_expand/) | 10.0.1.0.0 | Expand mail in a big window
+[mail_improved_tracking_value](mail_improved_tracking_value/) | 10.0.1.0.0 | Improves tracking changed values for certain type of fields.Adds a user-friendly view to consult them.
 [mail_inline_css](mail_inline_css/) | 10.0.1.0.0 | Convert style tags in inline style in your mails
 [mail_notify_bounce](mail_notify_bounce/) | 10.0.1.0.2 | Notify bounce emails to preconfigured addresses
 [mail_optional_autofollow](mail_optional_autofollow/) | 10.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
