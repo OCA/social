@@ -15,7 +15,8 @@
                     <field name="mass_mailing_id"/>
                     <field name="unsubscriber_id"/>
                     <field name="email"/>
-                    <field name="reason_id"/>
+                    <field name="reason_id"
+                           attrs="{'required': [('action', '=', 'unsubscription')]}"/>
                     <field name="details"
                            attrs="{'required': [('details_required', '=', True)]}"/>
                     <field name="details_required" invisible="True"/>

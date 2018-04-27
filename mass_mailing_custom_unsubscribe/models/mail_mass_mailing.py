@@ -40,7 +40,7 @@ class MailMassMailing(models.Model):
     def update_opt_out(self, email, res_ids, value):
         """Save unsubscription reason when opting out from mailing."""
         self.ensure_one()
-        if value and self.env.context.get("default_reason_id"):
+        if not value or self.env.context.get("default_reason_id"):
             for res_id in res_ids:
                 # reason_id and details are expected from the context
                 self.env["mail.unsubscription"].create({
@@ -48,6 +48,7 @@ class MailMassMailing(models.Model):
                     "mass_mailing_id": self.id,
                     "unsubscriber_id": "%s,%d" % (
                         self.mailing_model, int(res_id)),
+                    "action": "unsubscription" if value else "subscription",
                 })
         return super(MailMassMailing, self).update_opt_out(
             email, res_ids, value)

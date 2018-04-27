@@ -2,7 +2,7 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import _, api, fields, models
+from odoo import _, api, fields, models
 from .. import exceptions
 
 
@@ -16,6 +16,15 @@ class MailUnsubscription(models.Model):
         required=True)
     email = fields.Char(
         required=True)
+    action = fields.Selection(
+        selection=[
+            ("subscription", "Subscription"),
+            ("unsubscription", "Unsubscription"),
+        ],
+        required=True,
+        default="unsubscription",
+        help="What did the (un)subscriber choose to do.",
+    )
     mass_mailing_id = fields.Many2one(
         "mail.mass_mailing",
         "Mass mailing",
@@ -23,19 +32,22 @@ class MailUnsubscription(models.Model):
         help="Mass mailing from which he was unsubscribed.")
     unsubscriber_id = fields.Reference(
         lambda self: self._selection_unsubscriber_id(),
-        "Unsubscriber",
+        "(Un)subscriber",
         required=True,
-        help="Who was unsubscribed.")
+        help="Who was subscribed or unsubscribed.")
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
         "Reason",
         ondelete="restrict",
-        required=True,
         help="Why the unsubscription was made.")
     details = fields.Char(
         help="More details on why the unsubscription was made.")
     details_required = fields.Boolean(
         related="reason_id.details_required")
+    metadata = fields.Char(
+        readonly=True,
+        help="HTTP request metadata used when creating this record.",
+    )
 
     @api.model
     def _default_date(self):
@@ -45,6 +57,15 @@ class MailUnsubscription(models.Model):
     def _selection_unsubscriber_id(self):
         """Models that can be linked to a ``mail.mass_mailing``."""
         return self.env["mail.mass_mailing"]._get_mailing_model()
+
+    @api.multi
+    @api.constrains("action", "reason_id")
+    def _check_reason_needed(self):
+        """Ensure reason is given for unsubscriptions."""
+        for one in self:
+            if one.action == "unsubscription" and not one.reason_id:
+                raise exceptions.ReasonRequiredError(
+                    _("Please indicate why are you unsubscribing."))
 
     @api.multi
     @api.constrains("details", "reason_id")
