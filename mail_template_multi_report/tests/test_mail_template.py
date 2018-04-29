@@ -7,7 +7,7 @@ from odoo import tests
 
 @tests.at_install(False)
 @tests.post_install(True)
-class TestMailTemplate(tests.TransactionCase):
+class TestMailTemplate(tests.HttpCase):
 
     def setUp(self):
         super(TestMailTemplate, self).setUp()
