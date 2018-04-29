@@ -2,10 +2,12 @@
 # © 2016 Savoir-faire Linux
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo import tests
 
 
-class TestMailTemplate(common.TransactionCase):
+@tests.at_install(False)
+@tests.post_install(True)
+class TestMailTemplate(tests.TransactionCase):
 
     def setUp(self):
         super(TestMailTemplate, self).setUp()
