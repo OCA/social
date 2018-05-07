@@ -97,7 +97,6 @@ class CustomUnsubscribe(MassMailController):
                     "REMOTE_ADDR",
                     "HTTP_USER_AGENT",
                     "HTTP_ACCEPT_LANGUAGE",
-                    "HTTP_REFERER",
                 )
             ),
         }

@@ -33,7 +33,6 @@ class MailUnsubscription(models.Model):
     unsubscriber_id = fields.Reference(
         lambda self: self._selection_unsubscriber_id(),
         "(Un)subscriber",
-        required=True,
         help="Who was subscribed or unsubscribed.")
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
@@ -44,7 +43,7 @@ class MailUnsubscription(models.Model):
         help="More details on why the unsubscription was made.")
     details_required = fields.Boolean(
         related="reason_id.details_required")
-    metadata = fields.Char(
+    metadata = fields.Text(
         readonly=True,
         help="HTTP request metadata used when creating this record.",
     )

@@ -15,11 +15,13 @@
                     <field name="mass_mailing_id"/>
                     <field name="unsubscriber_id"/>
                     <field name="email"/>
+                    <field name="action"/>
                     <field name="reason_id"
                            attrs="{'required': [('action', '=', 'unsubscription')]}"/>
                     <field name="details"
                            attrs="{'required': [('details_required', '=', True)]}"/>
                     <field name="details_required" invisible="True"/>
+                    <field name="metadata"/>
                 </group>
             </sheet>
             <div class="oe_chatter">
@@ -37,11 +39,12 @@
     <field name="name">Mail Unsubscription Tree</field>
     <field name="model">mail.unsubscription</field>
     <field name="arch" type="xml">
-        <tree>
+        <tree decoration-warning="action == 'unsubscription'">
             <field name="date"/>
             <field name="mass_mailing_id"/>
             <field name="unsubscriber_id"/>
             <field name="email" invisible="True"/>
+            <field name="action"/>
             <field name="reason_id"/>
             <field name="details" invisible="True"/>
         </tree>
@@ -64,6 +67,10 @@
                         context="{'group_by': 'date:month'}"/>
                 <filter string="Year"
                         context="{'group_by': 'date:year'}"/>
+                <filter string="Action"
+                        context="{'group_by': 'action'}"/>
+                <filter string="Email"
+                        context="{'group_by': 'email'}"/>
                 <filter string="Reason"
                         context="{'group_by': 'reason_id'}"/>
                 <filter string="Mass mailing"
