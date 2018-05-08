@@ -50,11 +50,17 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
             });
             // Hide reasons form if you are only subscribing
             this.$reasons.toggleClass("hidden", !$disabled.length);
+            var $radios = this.$reasons.find(":radio");
             if (this.$reasons.is(":hidden")) {
                 // Uncheck chosen reason
-                this.$reasons.find(":radio").prop("checked", false)
+                $radios.prop("checked", false)
+                // Unrequire specifying a reason
+                .prop("required", false)
                 // Remove possible constraints for details
                 .trigger("change");
+            } else {
+                // Require specifying a reason
+                $radios.prop("required", true);
             }
         },
 

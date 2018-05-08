@@ -10,6 +10,7 @@ class MailUnsubscription(models.Model):
     _name = "mail.unsubscription"
     _inherit = "mail.thread"
     _rec_name = "date"
+    _order = "date DESC"
 
     date = fields.Datetime(
         default=lambda self: self._default_date(),

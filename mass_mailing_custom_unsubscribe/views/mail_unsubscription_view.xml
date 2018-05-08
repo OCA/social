@@ -80,8 +80,31 @@
     </field>
 </record>
 
+<record model="ir.ui.view" id="mail_unsubscription_view_pivot">
+    <field name="name">Mail Unsubscription Pivot</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <pivot string="(Un)subscriptions">
+            <field name="action" type="row"/>
+            <field name="reason_id" type="row"/>
+        </pivot>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="mail_unsubscription_view_graph">
+    <field name="name">Mail Unsubscription Graph</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <graph string="(Un)subscriptions">
+            <field name="date" type="row"/>
+            <field name="action" type="col"/>
+        </graph>
+    </field>
+</record>
+
 <act_window id="mail_unsubscription_action"
-            name="Unsubscriptions"
+            name="(Un)subscriptions"
+            view_mode="tree,form,pivot,graph"
             res_model="mail.unsubscription"/>
 
 <menuitem id="mail_unsubscription_menu"
