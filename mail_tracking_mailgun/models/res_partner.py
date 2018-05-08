@@ -6,7 +6,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import requests
-import json
 
 from odoo import _, api, models
 from odoo.exceptions import UserError
@@ -57,7 +56,7 @@ class ResPartner(models.Model):
                 raise UserError(_(
                     'Error %s trying to '
                     'check mail' % res.status_code or 'of connection'))
-            content = json.loads(res.content, res.apparent_encoding)
+            content = res.json()
             if 'mailbox_verification' not in content:
                 if not self.env.context.get('mailgun_auto_check'):
                     raise UserError(
