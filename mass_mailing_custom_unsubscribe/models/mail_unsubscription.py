@@ -90,8 +90,8 @@ class MailUnsubscription(models.Model):
         """Get the mass mailing list, if it is possible."""
         for one in self:
             try:
-                one.mailing_list_id = one.unsubscriber_id["list_id"]
-            except KeyError:
+                one.mailing_list_id = one.unsubscriber_id.list_id
+            except AttributeError:
                 # Possibly model != mail.mass_mailing.contact; no problem
                 pass
 
