@@ -45,6 +45,8 @@ class CustomUnsubscribe(MassMailController):
         _logger.debug(
             "Called `mailing()` with: %r",
             (mailing_id, email, res_id, token, post))
+        if res_id:
+            res_id = int(res_id)
         mailing = request.env["mail.mass_mailing"].sudo().browse(mailing_id)
         mailing._unsubscribe_token(res_id, token)
         # Mass mailing list contacts are a special case because they have a
