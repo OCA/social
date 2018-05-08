@@ -76,6 +76,13 @@ class MailUnsubscription(models.Model):
                 raise exceptions.DetailsRequiredError(
                     _("Please provide details on why you are unsubscribing."))
 
+    @api.model
+    def create(self, vals):
+        # No reasons for subscriptions
+        if vals.get("action") == "subscription":
+            vals = dict(vals, reason_id=False, details=False)
+        return super(MailUnsubscription, self).create(vals)
+
 
 class MailUnsubscriptionReason(models.Model):
     _name = "mail.unsubscription.reason"
