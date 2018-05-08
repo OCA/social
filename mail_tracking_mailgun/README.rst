@@ -47,11 +47,12 @@ You can also config partner email autocheck with this system parameter:
 Usage
 =====
 
-In your mail tracking status screens (explained on module *mail_tracking*), you will
-see a more accurate information, like the 'Received' or 'Bounced' status, which are
-not usually detected by normal SMTP servers.
+In your mail tracking status screens (explained on module *mail_tracking*), you
+will see a more accurate information, like the 'Received' or 'Bounced' status,
+which are not usually detected by normal SMTP servers.
 
-It's also possible to make some checks to the partner's email addresses against the Mailgun API:
+It's also possible to make some checks to the partner's email addresses against
+the Mailgun API:
 
 - Check if the partner's email is in Mailgun's bounced list.
 - Check the validity of the partner's mailbox.
@@ -64,7 +65,7 @@ short lifespan, so after 24h they won't be recoverable.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/205/9.0
+   :target: https://runbot.odoo-community.org/runbot/205/11.0
 
 Known issues / Roadmap
 ======================
