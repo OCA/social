@@ -14,6 +14,7 @@
                     <field name="date"/>
                     <field name="mass_mailing_id"/>
                     <field name="unsubscriber_id"/>
+                    <field name="mailing_list_id"/>
                     <field name="email"/>
                     <field name="action"/>
                     <field name="reason_id"
@@ -43,6 +44,7 @@
             <field name="date"/>
             <field name="mass_mailing_id"/>
             <field name="unsubscriber_id"/>
+            <field name="mailing_list_id"/>
             <field name="email" invisible="True"/>
             <field name="action"/>
             <field name="reason_id"/>
@@ -58,6 +60,7 @@
         <search>
             <field name="mass_mailing_id"/>
             <field name="unsubscriber_id"/>
+            <field name="mailing_list_id"/>
             <field name="email"/>
             <field name="reason_id"/>
             <field name="details"/>
@@ -85,8 +88,9 @@
     <field name="model">mail.unsubscription</field>
     <field name="arch" type="xml">
         <pivot string="(Un)subscriptions">
-            <field name="action" type="row"/>
             <field name="reason_id" type="row"/>
+            <field name="mailing_list_id" type="row"/>
+            <field name="action" type="col"/>
         </pivot>
     </field>
 </record>

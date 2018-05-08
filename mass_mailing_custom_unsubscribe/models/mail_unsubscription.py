@@ -35,6 +35,14 @@ class MailUnsubscription(models.Model):
         lambda self: self._selection_unsubscriber_id(),
         "(Un)subscriber",
         help="Who was subscribed or unsubscribed.")
+    mailing_list_id = fields.Many2one(
+        "mail.mass_mailing.list",
+        "Mailing list",
+        ondelete="set null",
+        compute="_compute_mailing_list_id",
+        store=True,
+        help="(Un)subscribed mass mailing list, if any.",
+    )
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
         "Reason",
@@ -75,6 +83,17 @@ class MailUnsubscription(models.Model):
             if not one.details and one.details_required:
                 raise exceptions.DetailsRequiredError(
                     _("Please provide details on why you are unsubscribing."))
+
+    @api.multi
+    @api.depends("unsubscriber_id")
+    def _compute_mailing_list_id(self):
+        """Get the mass mailing list, if it is possible."""
+        for one in self:
+            try:
+                one.mailing_list_id = one.unsubscriber_id["list_id"]
+            except KeyError:
+                # Possibly model != mail.mass_mailing.contact; no problem
+                pass
 
     @api.model
     def create(self, vals):
