@@ -5,7 +5,6 @@
 
 import hashlib
 import hmac
-import json
 import requests
 from datetime import datetime
 from odoo import _, api, fields, models
@@ -60,8 +59,8 @@ class MailTrackingEmail(models.Model):
 
     def _mailgun_signature(self, api_key, timestamp, token):
         return hmac.new(
-            key=str(api_key),
-            msg='{}{}'.format(str(timestamp), str(token)),
+            key=bytes(api_key, 'utf-8'),
+            msg=bytes('{}{}'.format(str(timestamp), str(token)), 'utf-8'),
             digestmod=hashlib.sha256).hexdigest()
 
     def _mailgun_values(self):
@@ -115,7 +114,7 @@ class MailTrackingEmail(models.Model):
         ts = event.get('timestamp', False)
         try:
             ts = float(ts)
-        except:
+        except Exception:
             ts = False
         if ts:
             dt = datetime.utcfromtimestamp(ts)
@@ -135,7 +134,7 @@ class MailTrackingEmail(models.Model):
             'ua_type': 'client-type',
             'url': 'url',
         }
-        for k, v in mapping.iteritems():
+        for k, v in mapping.items():
             if event.get(v, False):
                 metadata[k] = event[v]
         # Special field mapping
@@ -238,7 +237,7 @@ class MailTrackingEmail(models.Model):
             if not res or res.status_code != 200:
                 raise ValidationError(_(
                     "Couldn't retrieve Mailgun information"))
-            content = json.loads(res.content, res.apparent_encoding)
+            content = res.json()
             if "items" not in content:
                 raise ValidationError(_("Event information not longer stored"))
             for item in content["items"]:

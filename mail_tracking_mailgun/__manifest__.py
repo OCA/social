@@ -1,15 +1,14 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Tecnativa - Antonio Espinosa
 # Copyright 2016 Tecnativa - Carlos Dauden
 # Copyright 2017 Tecnativa - Pedro M. Baeza
-# Copyright 2017 Tecnativa - David Vidal
+# Copyright 2017-18 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Mail tracking for Mailgun",
     "summary": "Mail tracking and Mailgun webhooks integration",
-    "version": "10.0.1.1.3",
+    "version": "11.0.1.0.2",
     "category": "Social Network",
-    "website": "https://odoo-community.org/",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
