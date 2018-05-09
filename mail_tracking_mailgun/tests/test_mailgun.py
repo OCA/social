@@ -7,7 +7,6 @@ from odoo.tools import mute_logger
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError, ValidationError
 import mock
-import json
 
 _packagepath = 'odoo.addons.mail_tracking_mailgun'
 
@@ -336,10 +335,10 @@ class TestMailgun(TransactionCase):
         self.partner.email_bounced = False
         mock_request.get.return_value.apparent_encoding = 'ascii'
         mock_request.get.return_value.status_code = 200
-        mock_request.get.return_value.content = json.dumps({
+        mock_request.get.return_value.json.return_value = {
             'is_valid': True,
             'mailbox_verification': 'true',
-        }, ensure_ascii=True)
+        }
         # Trigger email auto validation in partner
         self.env['ir.config_parameter'].set_param(
             'mailgun.auto_check_partner_email', 'True')
@@ -347,24 +346,24 @@ class TestMailgun(TransactionCase):
         self.assertFalse(self.partner.email_bounced)
         self.partner.email = 'xoxoxoxo@tecnativa.com'
         # Not a valid mailbox
-        mock_request.get.return_value.content = json.dumps({
+        mock_request.get.return_value.json.return_value = {
             'is_valid': True,
             'mailbox_verification': 'false',
-        }, ensure_ascii=True)
+        }
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
         # Not a valid mail address
-        mock_request.get.return_value.content = json.dumps({
+        mock_request.get.return_value.json.return_value = {
             'is_valid': False,
             'mailbox_verification': 'false',
-        }, ensure_ascii=True)
+        }
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
         # Unable to fully validate
-        mock_request.get.return_value.content = json.dumps({
+        mock_request.get.return_value.json.return_value = {
             'is_valid': True,
             'mailbox_verification': 'unknown',
-        }, ensure_ascii=True)
+        }
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
         self.assertTrue(self.partner.email_bounced)
@@ -402,9 +401,7 @@ class TestMailgun(TransactionCase):
 
     @mock.patch(_packagepath + '.models.mail_tracking_email.requests')
     def test_manual_check(self, mock_request):
-        mock_request.get.return_value.content = json.dumps(self.response,
-                                                           ensure_ascii=True)
-        mock_request.get.return_value.apparent_encoding = 'ascii'
+        mock_request.get.return_value.json.return_value = self.response
         mock_request.get.return_value.status_code = 200
         self.tracking_email.action_manual_check_mailgun()
         event = self.env['mail.tracking.event'].search(
@@ -417,8 +414,6 @@ class TestMailgun(TransactionCase):
         with self.assertRaises(ValidationError):
             self.tracking_email.action_manual_check_mailgun()
         mock_request.get.return_value.status_code = 200
-        mock_request.get.return_value.content = json.dumps('{}',
-                                                           ensure_ascii=True)
-        mock_request.get.return_value.apparent_encoding = 'ascii'
+        mock_request.get.return_value.json.return_value = {}
         with self.assertRaises(ValidationError):
             self.tracking_email.action_manual_check_mailgun()
