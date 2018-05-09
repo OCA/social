@@ -237,7 +237,6 @@ class MailTrackingEmail(models.Model):
             if not res or res.status_code != 200:
                 raise ValidationError(_(
                     "Couldn't retrieve Mailgun information"))
-            # content = json.loads(res.content)
             content = res.json()
             if "items" not in content:
                 raise ValidationError(_("Event information not longer stored"))
