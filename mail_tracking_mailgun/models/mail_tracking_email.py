@@ -5,7 +5,6 @@
 
 import hashlib
 import hmac
-import json
 import requests
 from datetime import datetime
 from odoo import _, api, fields, models
@@ -115,7 +114,7 @@ class MailTrackingEmail(models.Model):
         ts = event.get('timestamp', False)
         try:
             ts = float(ts)
-        except:
+        except Exception:
             ts = False
         if ts:
             dt = datetime.utcfromtimestamp(ts)
@@ -238,7 +237,7 @@ class MailTrackingEmail(models.Model):
             if not res or res.status_code != 200:
                 raise ValidationError(_(
                     "Couldn't retrieve Mailgun information"))
-            content = json.loads(res.content)
+            content = res.json()
             if "items" not in content:
                 raise ValidationError(_("Event information not longer stored"))
             for item in content["items"]:
