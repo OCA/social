@@ -1,0 +1,151 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_tracking_mailgun
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Amharic (https://www.transifex.com/oca/teams/23907/am/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: am\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:82
+#, python-format
+msgid ""
+"%s couldn't be verified. Either the request couln't be completed or the "
+"mailbox provider doesn't support email verification"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:76
+#, python-format
+msgid ""
+"%s failed the mailbox verification. Please check it in order to avoid "
+"sending issues"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:69
+#, python-format
+msgid ""
+"%s is not a valid email address. Please check it in order to avoid sending "
+"issues"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:75
+#, python-format
+msgid "A Mailgun domain value is needed!"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Check Mailgun"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Check email validity"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:236
+#, python-format
+msgid "Couldn't retrieve Mailgun information"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:30
+#, python-format
+msgid ""
+"Email has been bounced: %s\n"
+"Reason: %s\n"
+"Event: %s"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:56
+#, python-format
+msgid "Error %s trying to check mailof connection"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:240
+#, python-format
+msgid "Event information not longer stored"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_email
+msgid "MailTracking email"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Mailgun"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:62
+#, python-format
+msgid "Mailgun Error. Mailbox verification value wasn't returned"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event_mailgun_id
+msgid "Mailgun Event ID"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_res_partner
+msgid "Partner"
+msgstr "ተባባሪ"
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
+msgid "Re-sync Mailgun"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Set Bounced"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:70
+#, python-format
+msgid "There is no Mailgun API key!"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Unset Bounced"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:46
+#, python-format
+msgid ""
+"You need to configure mailgun.validation_key in order to be able to check "
+"mails validity"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
+msgid "ir.mail_server"
+msgstr ""
