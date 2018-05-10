@@ -5,7 +5,7 @@ odoo.define("mass_mailing_custom_unsubscribe.require_details",
     "use strict";
     var animation = require("web_editor.snippets.animation");
 
-    return animation.registry.mass_mailing_custom_unsubscribe_require_details =
+    animation.registry.mass_mailing_custom_unsubscribe_require_details =
     animation.Class.extend({
         selector: ".js_unsubscription_reason",
 
@@ -19,7 +19,10 @@ odoo.define("mass_mailing_custom_unsubscribe.require_details",
         toggle: function (event) {
             this.$details.prop(
                 "required",
-                $(event.target).is("[data-details-required]"));
+                $(event.target).is("[data-details-required]") &&
+                $(event.target).is(":visible"));
         },
     });
+
+    return animation.registry.mass_mailing_custom_unsubscribe_require_details;
 });

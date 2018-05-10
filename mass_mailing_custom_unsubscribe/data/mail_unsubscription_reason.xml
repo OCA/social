@@ -2,7 +2,6 @@
 <!-- © 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 
-<openerp>
 <data noupdate="1">
 
     <record id="reason_not_interested"
@@ -38,4 +37,3 @@
     </record>
 
 </data>
-</openerp>

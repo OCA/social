@@ -7,3 +7,7 @@ from openerp import exceptions
 
 class DetailsRequiredError(exceptions.ValidationError):
     pass
+
+
+class ReasonRequiredError(exceptions.ValidationError):
+    pass
