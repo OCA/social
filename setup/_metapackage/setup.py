@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo11-addon-mail_digest',
         'odoo11-addon-mail_restrict_follower_selection',
         'odoo11-addon-mail_tracking',
+        'odoo11-addon-mail_tracking_mailgun',
     ],
     classifiers=[
         'Programming Language :: Python',
