@@ -45,6 +45,8 @@ class CustomUnsubscribe(MassMailController):
         _logger.debug(
             "Called `mailing()` with: %r",
             (mailing_id, email, res_id, token, post))
+        if res_id:
+            res_id = int(res_id)
         mailing = request.env["mail.mass_mailing"].sudo().browse(mailing_id)
         mailing._unsubscribe_token(res_id, token)
         # Mass mailing list contacts are a special case because they have a
@@ -75,11 +77,11 @@ class CustomUnsubscribe(MassMailController):
             return self.reason_form(mailing, email, res_id, token)
         else:
             # Unsubscribe, saving reason and details by context
-            request.context.update({
-                "default_reason_id": reason_id,
-                "default_details": post.get("details") or False,
-            })
-            del request.env
+            request.context = dict(
+                request.context,
+                default_reason_id=reason_id,
+                default_details=post.get("details") or False,
+            )
             # You could get a DetailsRequiredError here, but only if HTML5
             # validation fails, which should not happen in modern browsers
             return super(CustomUnsubscribe, self).mailing(
@@ -90,9 +92,21 @@ class CustomUnsubscribe(MassMailController):
                     token, reason_id=None, details=None):
         """Store unsubscription reasons when unsubscribing from RPC."""
         # Update request context and reset environment
+        environ = request.httprequest.headers.environ
+        extra_context = {
+            "default_metadata": "\n".join(
+                "%s: %s" % (val, environ.get(val)) for val in (
+                    "REMOTE_ADDR",
+                    "HTTP_USER_AGENT",
+                    "HTTP_ACCEPT_LANGUAGE",
+                )
+            ),
+        }
         if reason_id:
-            request.context["default_reason_id"] = int(reason_id)
-            request.context["default_details"] = details or False
+            extra_context["default_reason_id"] = int(reason_id)
+        if details:
+            extra_context["default_details"] = details
+        request.context = dict(request.context, **extra_context)
         # FIXME Remove token check in version where this is merged:
         # https://github.com/odoo/odoo/pull/14385
         mailing = request.env['mail.mass_mailing'].sudo().browse(mailing_id)
