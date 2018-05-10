@@ -10,7 +10,10 @@ This addon extends the unsubscription form to let you:
 
 - Choose which mailing lists are not cross-unsubscriptable when unsubscribing
   from a different one.
-- Know why and when a contact has been unsubscribed from a mass mailing.
+- Know why and when a contact has been subscribed or unsubscribed from a
+  mass mailing.
+- Provide proof on why you are sending mass mailings to a given contact, as
+  required by the GDPR in Europe.
 
 Configuration
 =============
