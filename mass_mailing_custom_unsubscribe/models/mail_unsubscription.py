@@ -2,7 +2,7 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import _, api, fields, models
+from odoo import _, api, fields, models
 from .. import exceptions
 
 
@@ -10,12 +10,22 @@ class MailUnsubscription(models.Model):
     _name = "mail.unsubscription"
     _inherit = "mail.thread"
     _rec_name = "date"
+    _order = "date DESC"
 
     date = fields.Datetime(
         default=lambda self: self._default_date(),
         required=True)
     email = fields.Char(
         required=True)
+    action = fields.Selection(
+        selection=[
+            ("subscription", "Subscription"),
+            ("unsubscription", "Unsubscription"),
+        ],
+        required=True,
+        default="unsubscription",
+        help="What did the (un)subscriber choose to do.",
+    )
     mass_mailing_id = fields.Many2one(
         "mail.mass_mailing",
         "Mass mailing",
@@ -23,19 +33,29 @@ class MailUnsubscription(models.Model):
         help="Mass mailing from which he was unsubscribed.")
     unsubscriber_id = fields.Reference(
         lambda self: self._selection_unsubscriber_id(),
-        "Unsubscriber",
-        required=True,
-        help="Who was unsubscribed.")
+        "(Un)subscriber",
+        help="Who was subscribed or unsubscribed.")
+    mailing_list_id = fields.Many2one(
+        "mail.mass_mailing.list",
+        "Mailing list",
+        ondelete="set null",
+        compute="_compute_mailing_list_id",
+        store=True,
+        help="(Un)subscribed mass mailing list, if any.",
+    )
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
         "Reason",
         ondelete="restrict",
-        required=True,
         help="Why the unsubscription was made.")
     details = fields.Char(
         help="More details on why the unsubscription was made.")
     details_required = fields.Boolean(
         related="reason_id.details_required")
+    metadata = fields.Text(
+        readonly=True,
+        help="HTTP request metadata used when creating this record.",
+    )
 
     @api.model
     def _default_date(self):
@@ -47,6 +67,15 @@ class MailUnsubscription(models.Model):
         return self.env["mail.mass_mailing"]._get_mailing_model()
 
     @api.multi
+    @api.constrains("action", "reason_id")
+    def _check_reason_needed(self):
+        """Ensure reason is given for unsubscriptions."""
+        for one in self:
+            if one.action == "unsubscription" and not one.reason_id:
+                raise exceptions.ReasonRequiredError(
+                    _("Please indicate why are you unsubscribing."))
+
+    @api.multi
     @api.constrains("details", "reason_id")
     def _check_details_needed(self):
         """Ensure details are given if required."""
@@ -54,6 +83,24 @@ class MailUnsubscription(models.Model):
             if not one.details and one.details_required:
                 raise exceptions.DetailsRequiredError(
                     _("Please provide details on why you are unsubscribing."))
+
+    @api.multi
+    @api.depends("unsubscriber_id")
+    def _compute_mailing_list_id(self):
+        """Get the mass mailing list, if it is possible."""
+        for one in self:
+            try:
+                one.mailing_list_id = one.unsubscriber_id.list_id
+            except AttributeError:
+                # Possibly model != mail.mass_mailing.contact; no problem
+                pass
+
+    @api.model
+    def create(self, vals):
+        # No reasons for subscriptions
+        if vals.get("action") == "subscription":
+            vals = dict(vals, reason_id=False, details=False)
+        return super(MailUnsubscription, self).create(vals)
 
 
 class MailUnsubscriptionReason(models.Model):
