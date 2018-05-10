@@ -7,15 +7,15 @@
  * that when it gets merged, and remove most of this file. */
 odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
     "use strict";
-    var core = require("web.core"),
-        ajax = require("web.ajax"),
-        animation = require("web_editor.snippets.animation"),
-        _t = core._t;
+    var core = require("web.core");
+    var ajax = require("web.ajax");
+    var animation = require("web_editor.snippets.animation");
+    var _t = core._t;
 
-    return animation.registry.mass_mailing_unsubscribe =
+    animation.registry.mass_mailing_unsubscribe =
     animation.Class.extend({
         selector: "#unsubscribe_form",
-        start: function (editable_mode) {
+        start: function () {
             this.controller = '/mail/mailing/unsubscribe';
             this.$alert = this.$(".alert");
             this.$email = this.$("input[name='email']");
@@ -32,7 +32,7 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
 
         // Helper to get list ids, to use in this.$contacts.map()
         int_val: function (index, element) {
-            return parseInt($(element).val());
+            return parseInt($(element).val(), 10);
         },
 
         // Get a filtered array of integer IDs of matching lists
@@ -50,11 +50,17 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
             });
             // Hide reasons form if you are only subscribing
             this.$reasons.toggleClass("hidden", !$disabled.length);
+            var $radios = this.$reasons.find(":radio");
             if (this.$reasons.is(":hidden")) {
                 // Uncheck chosen reason
-                this.$reasons.find(":radio").prop("checked", false)
+                $radios.prop("checked", false)
+                // Unrequire specifying a reason
+                .prop("required", false)
                 // Remove possible constraints for details
                 .trigger("change");
+            } else {
+                // Require specifying a reason
+                $radios.prop("required", true);
             }
         },
 
@@ -62,16 +68,18 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
         values: function () {
             var result = {
                 email: this.$email.val(),
-                mailing_id: parseInt(this.$mailing_id.val()),
+                mailing_id: parseInt(this.$mailing_id.val(), 10),
                 opt_in_ids: this.contact_ids(true),
                 opt_out_ids: this.contact_ids(false),
-                res_id: parseInt(this.$res_id.val()),
+                res_id: parseInt(this.$res_id.val(), 10),
                 token: this.$token.val(),
             };
             // Only send reason and details if an unsubscription was found
             if (this.$reasons.is(":visible")) {
                 result.reason_id = parseInt(
-                    this.$reasons.find("[name='reason_id']:checked").val());
+                    this.$reasons.find("[name='reason_id']:checked").val(),
+                    10
+                );
                 result.details = this.$details.val();
             }
             return result;
@@ -108,4 +116,6 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
             .addClass("alert-warning");
         },
     });
+
+    return animation.registry.mass_mailing_unsubscribe;
 });
