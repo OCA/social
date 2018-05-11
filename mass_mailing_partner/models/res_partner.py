@@ -51,7 +51,6 @@ class ResPartner(models.Model):
             partner.mass_mailing_stats_count = len(
                 self.env['mail.mail.statistics'].search_read(
                     [('partner_id', '=', partner.id)], ['id']))
-        self.mass_mailing_stats_count = len(self.mass_mailing_stats)
 
     @api.multi
     def write(self, vals):
