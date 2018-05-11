@@ -6,7 +6,7 @@
 {
     "name": "Mail tracking for Mailgun",
     "summary": "Mail tracking and Mailgun webhooks integration",
-    "version": "11.0.1.0.1",
+    "version": "11.0.1.0.2",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
