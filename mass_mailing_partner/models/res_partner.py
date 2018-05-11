@@ -35,15 +35,22 @@ class ResPartner(models.Model):
                 _("This partner '%s' is subscribed to one or more "
                   "mailing lists. Email must be assigned." % self.name))
 
-    @api.one
+    @api.multi
     @api.depends('mass_mailing_contact_ids',
                  'mass_mailing_contact_ids.opt_out')
     def _compute_mass_mailing_contacts_count(self):
-        self.mass_mailing_contacts_count = len(self.mass_mailing_contact_ids)
+        for partner in self:
+            partner.mass_mailing_contacts_count = len(
+                self.env['mail.mass_mailing.contact'].search_read(
+                    [('partner_id', '=', partner.id)], ['id']))
 
-    @api.one
+    @api.multi
     @api.depends('mass_mailing_stats')
     def _compute_mass_mailing_stats_count(self):
+        for partner in self:
+            partner.mass_mailing_stats_count = len(
+                self.env['mail.mail.statistics'].search_read(
+                    [('partner_id', '=', partner.id)], ['id']))
         self.mass_mailing_stats_count = len(self.mass_mailing_stats)
 
     @api.multi
