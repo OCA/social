@@ -7,7 +7,7 @@
 
 {
     "name": "Link partners with mass-mailing",
-    "version": "9.0.1.0.0",
+    "version": "9.0.1.0.1",
     "author": "Antiun Ingeniería S.L., "
               "Tecnativa, "
               "Odoo Community Association (OCA)",
