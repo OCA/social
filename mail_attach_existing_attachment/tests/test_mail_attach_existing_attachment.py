@@ -30,7 +30,6 @@ class TestAttachExistingAttachment(common.TransactionCase):
     def setUp(self):
         super(TestAttachExistingAttachment, self).setUp()
         self.partner_obj = self.env['res.partner']
-        # self.partner_01 = self.env.ref('base.res_partner_1')
         self.partner_01 = self.env['res.partner'].create({
             'name': 'Partner 1',
             'email': 'partner1@example.org',
