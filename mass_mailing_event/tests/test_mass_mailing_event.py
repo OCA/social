@@ -6,7 +6,7 @@
 from odoo.tests.common import at_install, post_install, SavepointCase
 
 
-@at_install(True)
+@at_install(False)
 @post_install(True)
 class TestMassMailingEvent(SavepointCase):
 
