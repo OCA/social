@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Simone Orsi <simone.orsi@camptocamp.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 
@@ -55,3 +54,9 @@ class PreviewCase(SavepointCase):
         patched_req.env = self.env
         vals = self.ctrl._fake_tracking_vals()
         self.assertEqual(len(vals), 2)
+
+    @mock.patch(REQUEST_PATH + '.request')
+    def test_render(self, patched_req):
+        patched_req.env = self.env
+        html = self.ctrl.digest_test()
+        self.assertTrue(html)

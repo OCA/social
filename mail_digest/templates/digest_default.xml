@@ -24,7 +24,7 @@
     <template id="default_digest_tmpl" name="Mail digest default template">
         <t t-call="mail_digest.digest_layout">
             <div id="mail_content">
-                <p>Hello <t t-esc="digest.partner_id.name" />,</p>
+                <p>Hello <t t-esc="digest.user_id.name" />,</p>
                 <div id="mail_inner_content">
                     <t t-foreach="grouped_messages.keys()" t-as="gkey">
                         <t t-set="messages" t-value="grouped_messages[gkey]" />

@@ -194,26 +194,26 @@ class DigestCase(SavepointCase):
             dig._get_email_values()
 
     def test_digest_message_body_sanitize(self):
-        dig = self._create_for_partner(self.partner1)
+        dig = self._create_for_partner(self.user1.partner_id)
         message = self.message_model.create({
-            'body': '<p style="font-weight:bold">Body!</p>',
+            'body': '<p style="font-weight: bold">Body!</p>',
             'subtype_id': self.subtype1.id,
-            'res_id': self.partner3.id,
+            'res_id': self.user3.partner_id.id,
             'model': 'res.partner',
-            'partner_ids': [(4, self.partner1.id)]
+            'partner_ids': [(4, self.user1.partner_id.id)]
         })
         body = dig.message_body(message)
         self.assertEqual(body, '<p>Body!</p>')
 
     def test_digest_message_body_no_sanitize(self):
-        dig = self._create_for_partner(self.partner1)
+        dig = self._create_for_partner(self.user1.partner_id)
         dig.sanitize_msg_body = False
         message = self.message_model.create({
-            'body': '<p style="font-weight:bold">Body!</p>',
+            'body': '<p style="font-weight: bold">Body!</p>',
             'subtype_id': self.subtype1.id,
-            'res_id': self.partner3.id,
+            'res_id': self.user3.partner_id.id,
             'model': 'res.partner',
-            'partner_ids': [(4, self.partner1.id)]
+            'partner_ids': [(4, self.user1.partner_id.id)]
         })
         body = dig.message_body(message)
         self.assertEqual(
