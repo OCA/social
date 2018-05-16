@@ -60,6 +60,14 @@ You change this with the config param `mail_digest.enabled_message_types`
 whereas you can specify message types separated by comma.
 
 
+Digest rendering preview
+------------------------
+
+You can check how messages are formatted per each mail subtype by going to `/digest/layout-preview` in your browser.
+
+.. image:: ./images/digest_layout_preview.png
+
+
 Known issues / Roadmap
 ======================
 
