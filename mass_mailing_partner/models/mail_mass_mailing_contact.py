@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -6,6 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import ValidationError
 
 
 class MailMassMailingContact(models.Model):
@@ -14,68 +14,84 @@ class MailMassMailingContact(models.Model):
     partner_id = fields.Many2one(comodel_name='res.partner', string="Partner",
                                  domain=[('email', '!=', False)])
 
-    _sql_constraints = [
-        ('partner_list_uniq', 'unique(partner_id, list_id)',
-         _('Partner already exists in this mailing list.'))
-    ]
+    @api.constrains('partner_id', 'list_ids')
+    def _check_partner_id_list_ids(self):
+        for contact in self:
+            if contact.partner_id:
+                other_contact = self.search([
+                    ('partner_id', '=', contact.partner_id.id),
+                    ('id', '!=', contact.id)
+                ])
+                if contact.list_ids & other_contact.mapped('list_ids'):
+                    raise ValidationError(_("Partner already exists in one of "
+                                            "these mailing lists"))
 
     @api.onchange('partner_id')
-    def _onchange_partner(self):
+    def _onchange_partner_mass_mailing_partner(self):
         if self.partner_id:
             self.name = self.partner_id.name
             self.email = self.partner_id.email
+            self.title_id = self.partner_id.title
+            self.company_name = self.partner_id.company_id.name
+            self.country_id = self.partner_id.country_id
+            category_ids = self.partner_id.category_id
+            if category_ids:
+                self.tag_ids = category_ids
 
     @api.model
-    @api.returns('self', lambda x: x.id)
     def create(self, vals):
-        if not vals.get('partner_id'):
-            vals = self._set_partner(vals)
-        vals = self._set_name_email(vals)
-        return super(MailMassMailingContact, self).create(vals)
+        record = self.new(vals)
+        if not record.partner_id:
+            record._set_partner()
+        record._onchange_partner_mass_mailing_partner()
+        new_vals = record._convert_to_write(record._cache)
+        return super(MailMassMailingContact, self).create(new_vals)
 
     def write(self, vals):
         for contact in self:
-            if vals.get('partner_id', None) is False:
-                # If removing partner, search again by email
-                vals = contact._set_partner(vals)
-            vals = contact._set_name_email(vals)
-        return super(MailMassMailingContact, self).write(vals)
+            new_vals = contact.copy_data(vals)[0]
+            record = self.new(new_vals)
+            if not record.partner_id:
+                record._set_partner()
+            record._onchange_partner_mass_mailing_partner()
+            new_vals = record._convert_to_write(record._cache)
+            super(MailMassMailingContact, contact).write(new_vals)
+        return True
 
-    def _prepare_partner(self, vals, mailing_list):
-        vals = {
-            'name': vals.get('name') or vals.get('email'),
-            'email': vals.get('email', False),
+    def _get_company(self):
+        company_id = False
+        if self.company_name:
+            company_id = self.env['res.company'].search(
+                [('name', '=', self.company_name)]).id
+            if not company_id:
+                company_id = self.env['res.company'].create(
+                    {'name': self.company_name}).id
+        return company_id
+
+    def _get_categories(self):
+        ca_ids = self.tag_ids.ids + self.list_ids.mapped('partner_category.id')
+        return [[6, 0, ca_ids]]
+
+    def _prepare_partner(self):
+        return {
+            'name': self.name or self.email,
+            'email': self.email,
+            'country_id': self.country_id.id,
+            'title': self.title_id.id,
+            'company_id': self._get_company(),
+            'category_id': self._get_categories(),
         }
-        if mailing_list.partner_category:
-            vals['category_id'] = [(4, mailing_list.partner_category.id, 0)]
-        return vals
 
-    def _set_partner(self, vals):
-        email = vals.get('email', self.email)
-        if not email:  # pragma: no cover
-            return vals
-        m_mailing = self.env['mail.mass_mailing.list']
+    @api.multi
+    def _set_partner(self):
+        self.ensure_one()
         m_partner = self.env['res.partner']
-        list_id = vals.get('list_id', self.list_id.id)
-        mailing_list = m_mailing.browse(list_id)
         # Look for a partner with that email
-        email = email.strip()
-        partners = m_partner.search([('email', '=ilike', email)], limit=1)
-        if partners:
+        email = self.email.strip()
+        partner = m_partner.search([('email', '=ilike', email)], limit=1)
+        if partner:
             # Partner found
-            vals['partner_id'] = partners[0].id
-        elif mailing_list.partner_mandatory:
+            self.partner_id = partner
+        elif self.list_ids.filtered('partner_mandatory'):
             # Create partner
-            partner = m_partner.sudo().create(
-                self._prepare_partner(vals, mailing_list))
-            vals['partner_id'] = partner.id
-        return vals
-
-    def _set_name_email(self, vals):
-        partner_id = vals.get('partner_id', self.partner_id.id)
-        if not partner_id:
-            return vals
-        partner = self.env['res.partner'].browse(partner_id)
-        vals['email'] = partner.email
-        vals['name'] = partner.name
-        return vals
+            self.partner_id = m_partner.sudo().create(self._prepare_partner())
