@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -15,10 +14,11 @@ class PartnerMailListWizardCase(base.BaseCase):
             {'mail_list_id': self.mailing_list.id})
         wizard.partner_ids = [self.partner.id]
         wizard.add_to_mail_list()
-        contact = self.env['mail.mass_mailing.contact'].search([
-            ('partner_id', '=', self.partner.id),
-            ('list_id', '=', self.mailing_list.id)])
-        self.check_mailing_contact_partner(contact)
+        contacts = self.env['mail.mass_mailing.contact'].search([
+            ('partner_id', '=', self.partner.id)])
+        cont = contacts.filtered(lambda r: wizard.mail_list_id in r.list_ids)
+        self.assertEqual(len(cont), 1)
+        self.check_mailing_contact_partner(cont)
         # This line does not create a new contact
         wizard.add_to_mail_list()
         partner = self.env['res.partner'].create({'name': 'No email partner'})

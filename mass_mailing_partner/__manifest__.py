@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015-2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -6,10 +5,10 @@
 
 {
     "name": "Link partners with mass-mailing",
-    "version": "10.0.1.0.3",
+    "version": "11.0.1.0.0",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
-    "website": "https://www.tecnativa.com",
+    "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Marketing",
     "depends": [
