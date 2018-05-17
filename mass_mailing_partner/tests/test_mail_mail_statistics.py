@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -21,8 +20,11 @@ class MailMailStatisticsCase(base.BaseCase):
     def test_link_mail_contact(self):
         partner = self.create_partner(
             {'name': 'Test partner', 'email': 'test@domain.com'})
-        contact = self.create_mailing_contact(
-            {'partner_id': partner.id, 'list_id': self.mailing_list.id})
+        contact_vals = {
+            'partner_id': partner.id,
+            'list_ids': [[6, 0, [self.mailing_list.id]]]
+        }
+        contact = self.create_mailing_contact(contact_vals)
         stat = self.env['mail.mail.statistics'].create({
             'model': 'mail.mass_mailing.contact',
             'res_id': contact.id,

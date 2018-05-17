@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -13,15 +12,15 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     mass_mailing_contact_ids = fields.One2many(
-        string="Mailing lists",
+        string="Mailing contacts",
         oldname="mass_mailing_contacts",
         domain=[('opt_out', '=', False)],
         comodel_name='mail.mass_mailing.contact', inverse_name='partner_id')
     mass_mailing_contacts_count = fields.Integer(
-        string='Mailing list number',
+        string='Mailing contacts number',
         compute='_compute_mass_mailing_contacts_count', store=True,
         compute_sudo=True)
-    mass_mailing_stats = fields.One2many(
+    mass_mailing_stats_ids = fields.One2many(
         string="Mass mailing stats",
         comodel_name='mail.mail.statistics', inverse_name='partner_id')
     mass_mailing_stats_count = fields.Integer(
@@ -31,12 +30,12 @@ class ResPartner(models.Model):
     @api.constrains('email')
     def _check_email_mass_mailing_contacts(self):
         for partner in self:
-            if partner.sudo().mass_mailing_contact_ids and not partner.email:
-                raise ValidationError(
-                    _("This partner '%s' is subscribed to one or more "
-                      "mailing lists. Email must be assigned.") % partner.name)
+            if not partner.email and self.sudo().mass_mailing_contact_ids:
+                raise ValidationError(_(
+                    "This partner '%s' is linked to one or more mass "
+                    "mailing contact. Email must be assigned."
+                ) % partner.name)
 
-    @api.multi
     @api.depends('mass_mailing_contact_ids',
                  'mass_mailing_contact_ids.opt_out')
     def _compute_mass_mailing_contacts_count(self):
@@ -49,8 +48,7 @@ class ResPartner(models.Model):
             partner.mass_mailing_contacts_count = mapped_data.get(partner.id,
                                                                   0)
 
-    @api.multi
-    @api.depends('mass_mailing_stats')
+    @api.depends('mass_mailing_stats_ids')
     def _compute_mass_mailing_stats_count(self):
         contact_data = self.env['mail.mail.statistics'].read_group(
             [('partner_id', 'in', self.ids)], ['partner_id'], ['partner_id'])
@@ -62,12 +60,21 @@ class ResPartner(models.Model):
 
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
-        if vals.get('name') or vals.get('email'):
-            mm_vals = {}
-            if vals.get('name'):
-                mm_vals['name'] = vals['name']
-            if vals.get('email'):
-                mm_vals['email'] = vals['email']
+        mm_vals = {}
+        if vals.get('name'):
+            mm_vals['name'] = vals['name']
+        if vals.get('email'):
+            mm_vals['email'] = vals['email']
+        if vals.get('title'):
+            mm_vals['title_id'] = vals['title']
+        if vals.get('company_id'):
+            company = self.env['res.company'].browse(vals.get('company_id'))
+            mm_vals['company_name'] = company.name
+        if vals.get('country_id'):
+            mm_vals['country_id'] = vals['country_id']
+        if vals.get('category_id'):
+            mm_vals['tag_ids'] = vals['category_id']
+        if mm_vals:
             # Using sudo because ACLs shouldn't produce data inconsistency
             self.env["mail.mass_mailing.contact"].sudo().search([
                 ("partner_id", "in", self.ids),

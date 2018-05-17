@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
@@ -24,19 +23,18 @@ class PartnerMailListWizard(models.TransientModel):
         for partner in self.partner_ids:
             if not partner.email:
                 raise UserError(_("Partner '%s' has no email.") % partner.name)
-            criteria = [
-                '|',
-                ('email', '=', partner.email),
-                ('partner_id', '=', partner.id),
-                ('list_id', '=', self.mail_list_id.id),
-            ]
-            contact_test = contact_obj.search(criteria)
-            if contact_test:
-                continue
-            contact_vals = {
-                'partner_id': partner.id,
-                'email': partner.email,
-                'name': partner.name,
-                'list_id': self.mail_list_id.id
-            }
-            contact_obj.create(contact_vals)
+            contact = contact_obj.search([('partner_id', '=', partner.id)])
+            if self.mail_list_id not in contact.mapped('list_ids'):
+                contact_vals = {
+                    'partner_id': partner.id,
+                    'list_ids': [[6, 0, [self.mail_list_id.id]]]
+                }
+                if partner.title:
+                    contact_vals['title_id'] = partner.title.id
+                if partner.company_id:
+                    contact_vals['company_name'] = partner.company_id.name
+                if partner.country_id:
+                    contact_vals['country_id'] = partner.country_id.id
+                if partner.category_id:
+                    contact_vals['tag_ids'] = partner.category_id.ids
+                contact_obj.create(contact_vals)
