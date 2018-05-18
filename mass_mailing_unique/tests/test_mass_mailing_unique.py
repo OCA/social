@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
@@ -17,6 +16,7 @@ class TestMassMailingUnique(common.SavepointCase):
         cls.contact1 = cls.env['mail.mass_mailing.contact'].create({
             'name': 'Contact 1',
             'email': 'email1@test.com',
+            'list_ids': [(6, 0, [cls.list.id])]
         })
 
     def test_init_hook_list(self):
@@ -32,14 +32,9 @@ class TestMassMailingUnique(common.SavepointCase):
             pre_init_hook(self.env.cr)
 
     def test_init_hook_contact(self):
-        # Disable temporarily the constraint
-        self.env.cr.execute("""
-            ALTER TABLE mail_mass_mailing_contact
-            DROP CONSTRAINT mail_mass_mailing_contact_unique_mail_per_list
-            """)
-        self.env['mail.mass_mailing.contact'].create({
-            'name': 'Contact 2',
-            'email': 'email1@test.com',
-        })
         with self.assertRaises(exceptions.ValidationError):
-            pre_init_hook(self.env.cr)
+            self.env['mail.mass_mailing.contact'].create({
+                'name': 'Contact 2',
+                'email': 'email1@test.com',
+                'list_ids': [(6, 0, [self.list.id])]
+            })
