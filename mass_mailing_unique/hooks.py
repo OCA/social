@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Grupo ESOC Ingeniería de Servicios, S.L.U. - Jairo Llopis
 # Copyright 2016 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
@@ -19,11 +18,13 @@ def pre_init_hook(cr):
     errors = list()
 
     # Search for duplicates in emails
-    cr.execute("""SELECT c.email, l.name, COUNT(c.id)
+    cr.execute("""SELECT LOWER(c.email) AS e, l.name, COUNT(c.id)
                   FROM
                     mail_mass_mailing_contact AS c
-                    INNER JOIN mail_mass_mailing_list AS l ON c.list_id = l.id
-                  GROUP BY l.name, l.id, c.email
+                    INNER JOIN mail_mass_mailing_contact_list_rel AS cl
+                      ON cl.contact_id = c.id
+                    INNER JOIN mail_mass_mailing_list AS l ON cl.list_id = l.id
+                  GROUP BY l.name, e
                   HAVING COUNT(c.id) > 1""")
     for result in cr.fetchall():
         errors.append(
