@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-# Copyright 2015-2017 Compassion CH (http://www.compassion.ch)
+# Copyright 2015-2018 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': 'SendGrid',
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'category': 'Social Network',
     'author': 'Compassion CH, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
@@ -20,6 +20,6 @@
     'installable': True,
     'auto_install': False,
     'external_dependencies': {
-        'python': ['sendgrid'],
+        'python': ['sendgrid', 'simplejson'],
     },
 }
