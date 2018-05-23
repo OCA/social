@@ -3,7 +3,7 @@
 <template>
     <t t-extend="mail.thread.message">
         <t t-jquery=".oe_msg_icons .oe_reply" t-operation="before">
-            <t t-if="widget.is_author">
+            <t t-if="widget.is_author or widget.is_superuser">
                 <span class="oe_edit">
                     <a title="Edit Mail" class="oe_e">&#038;</a>
                 </span>
