@@ -10,19 +10,19 @@
             <sheet>
                 <group>
                     <group>
-                        <field name="subject" groups="mail_edit.group_mail_edit_editor"/>
+                        <field name="subject" groups="mail_edit.group_mail_edit_editor,mail_edit.group_mail_edit_superuser"/>
                         <field name="date" readonly="1"/>
                         <field name="type" readonly="1"/>
                         <field name="subtype_id" readonly="1"/>
                     </group>
                     <group>
-                        <field name="destination_object_id" required="1" groups="mail_edit.group_mail_edit_mover"/>
+                        <field name="destination_object_id" required="1" groups="mail_edit.group_mail_edit_mover,mail_edit.group_mail_edit_superuser"/>
                         <field name="model" invisible="1"/>
                         <field name="res_id" invisible="1"/>
                         <field name="parent_id" readonly="1" />
                     </group>
                 </group>
-                <field name="body" groups="mail_edit.group_mail_edit_editor"/>
+                <field name="body" groups="mail_edit.group_mail_edit_editor,mail_edit.group_mail_edit_superuser"/>
             </sheet>
         </form>
     </field>
