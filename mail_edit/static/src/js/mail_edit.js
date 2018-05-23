@@ -40,4 +40,11 @@ openerp.mail_edit = function (instance) {
             });
         }
     });
+
+    instance.mail.MessageCommon.include({
+                init: function (parent, datasets, options) {
+                    this._super(parent, datasets, options);
+                    this.is_superuser = datasets.is_superuser || false;
+                }
+    });
 };
