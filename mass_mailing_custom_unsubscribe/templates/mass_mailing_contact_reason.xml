@@ -10,7 +10,7 @@
     <!-- Disable core AJAX submission of form, because it is impossible to
          extend it as it is designed right now. It is refactored in this addon.
          TODO Remove when merged https://github.com/odoo/odoo/pull/14386. -->
-    <xpath expr="//div[@class='container o_unsubscribe_form']"
+    <xpath expr="//div[hasclass('container', 'o_unsubscribe_form')]"
            position="attributes">
         <attribute name="class" value="container o_unsubscribe_form_custom"/>
     </xpath>
