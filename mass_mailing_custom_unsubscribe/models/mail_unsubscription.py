@@ -1,8 +1,9 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
+from odoo.addons.mass_mailing.models.mass_mailing import \
+    MASS_MAILING_BUSINESS_MODELS
 from .. import exceptions
 
 
@@ -35,13 +36,14 @@ class MailUnsubscription(models.Model):
         lambda self: self._selection_unsubscriber_id(),
         "(Un)subscriber",
         help="Who was subscribed or unsubscribed.")
-    mailing_list_id = fields.Many2one(
-        "mail.mass_mailing.list",
-        "Mailing list",
+    mailing_list_id = fields.Many2many(
+        comodel_name="mail.mass_mailing.list",
+        string="Mailing list",
         ondelete="set null",
         compute="_compute_mailing_list_id",
         store=True,
         help="(Un)subscribed mass mailing list, if any.",
+        readonly=False,
     )
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
@@ -57,6 +59,15 @@ class MailUnsubscription(models.Model):
         help="HTTP request metadata used when creating this record.",
     )
 
+    def map_mailing_list_models(self, models):
+        model_mapped = []
+        for model in models:
+            if model == 'mail.mass_mailing.list':
+                model_mapped.append(('mail.mass_mailing.contact', model))
+            else:
+                model_mapped.append((model, model))
+        return model_mapped
+
     @api.model
     def _default_date(self):
         return fields.Datetime.now()
@@ -64,7 +75,9 @@ class MailUnsubscription(models.Model):
     @api.model
     def _selection_unsubscriber_id(self):
         """Models that can be linked to a ``mail.mass_mailing``."""
-        return self.env["mail.mass_mailing"]._get_mailing_model()
+        model = self.env['ir.model'].search(
+            [('model', 'in', MASS_MAILING_BUSINESS_MODELS)]).mapped('model')
+        return self.map_mailing_list_models(model)
 
     @api.multi
     @api.constrains("action", "reason_id")
@@ -90,7 +103,7 @@ class MailUnsubscription(models.Model):
         """Get the mass mailing list, if it is possible."""
         for one in self:
             try:
-                one.mailing_list_id = one.unsubscriber_id.list_id
+                one.mailing_list_id |= one.unsubscriber_id.mailing_list_id
             except AttributeError:
                 # Possibly model != mail.mass_mailing.contact; no problem
                 pass
