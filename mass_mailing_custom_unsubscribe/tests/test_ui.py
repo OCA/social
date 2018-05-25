@@ -7,6 +7,9 @@ from openerp.tests.common import HttpCase
 
 
 class UICase(HttpCase):
+    _tour_run = "odoo.__DEBUG__.services['web_tour.tour'].run('%s')"
+    _tour_ready = "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready"
+
     def extract_url(self, mail, *args, **kwargs):
         url = mail._get_unsubscribe_url(mail, self.email)
         self.assertIn("&token=", url)
@@ -18,8 +21,9 @@ class UICase(HttpCase):
         super(UICase, self).setUp()
         self.email = "test.contact@example.com"
         self.mail_postprocess_patch = mock.patch(
-            "openerp.addons.mass_mailing.models.mail_mail.MailMail."
-            "_postprocess_sent_message",
+            "openerp.addons.mail.models.mail_mail.MailMail."
+            "_postprocess_sent_message_v9",
+            autospec=True,
             side_effect=self.extract_url,
         )
         with self.tempenv() as env:
