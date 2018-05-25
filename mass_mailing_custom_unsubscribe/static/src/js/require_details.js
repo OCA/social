@@ -3,7 +3,7 @@
 odoo.define("mass_mailing_custom_unsubscribe.require_details",
             function (require) {
     "use strict";
-    var animation = require("web_editor.snippets.animation");
+    var animation = require("website.content.snippets.animation");
 
     animation.registry.mass_mailing_custom_unsubscribe_require_details =
     animation.Class.extend({

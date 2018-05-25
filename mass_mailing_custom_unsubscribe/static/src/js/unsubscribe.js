@@ -1,4 +1,4 @@
-/* Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+    /* Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 
 /* TODO This JS module replaces core AJAX submission because it is impossible
@@ -9,7 +9,7 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
     "use strict";
     var core = require("web.core");
     var ajax = require("web.ajax");
-    var animation = require("web_editor.snippets.animation");
+    var animation = require("website.content.snippets.animation");
     var _t = core._t;
 
     animation.registry.mass_mailing_unsubscribe =
@@ -24,7 +24,7 @@ odoo.define("mass_mailing_custom_unsubscribe.unsubscribe", function (require) {
             this.$token = this.$("input[name='token']");
             this.$res_id = this.$("input[name='res_id']");
             this.$reasons = this.$(".js_unsubscription_reason");
-            this.$details = this.$reasons.find("[name='details']")
+            this.$details = this.$reasons.find("[name='details']");
             this.$el.on("submit", $.proxy(this.submit, this));
             this.$contacts.on("change", $.proxy(this.toggle_reasons, this));
             this.toggle_reasons();
