@@ -39,7 +39,7 @@ odoo.define("mass_mailing_custom_unsubscribe.partner_tour",
             },
             {
                 content: "Successfully unsubscribed",
-                trigger: "body:not(:has(#reason_form)) .alert-success:contains('Your changes have been saved.')",
+                trigger: "body:not(:has(#reason_form)) .alert-success:contains('You have been successfully unsubscribed!')",
             },
         ]
     );
