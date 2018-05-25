@@ -14,7 +14,7 @@
                     <field name="date"/>
                     <field name="mass_mailing_id"/>
                     <field name="unsubscriber_id"/>
-                    <field name="mailing_list_id"/>
+                    <field name="mailing_list_id" widget="many2many_tags"/>
                     <field name="email"/>
                     <field name="action"/>
                     <field name="reason_id"
@@ -44,7 +44,7 @@
             <field name="date"/>
             <field name="mass_mailing_id"/>
             <field name="unsubscriber_id"/>
-            <field name="mailing_list_id"/>
+            <field name="mailing_list_id" widget="many2many_tags"/>
             <field name="email" invisible="True"/>
             <field name="action"/>
             <field name="reason_id"/>

@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
 from contextlib import contextmanager
-from openerp.tests.common import HttpCase
+from odoo.tests.common import HttpCase
 
 
 class UICase(HttpCase):
@@ -37,7 +36,7 @@ class UICase(HttpCase):
                 })
                 self.mailings += Mailing.create({
                     "name": "test mailing %d" % n,
-                    "mailing_model": "mail.mass_mailing.contact",
+                    "mailing_model_id": self.env["mail.mass_mailing.contact"],
                     "contact_list_ids": [(6, 0, self.lists.ids)],
                     "reply_to_mode": "thread",
                 })
@@ -53,7 +52,7 @@ class UICase(HttpCase):
                 self.contacts += Contact.create({
                     "name": "test contact %d" % n,
                     "email": self.email,
-                    "list_id": self.lists[n].id,
+                    "mailing_list_id": self.lists[n].id,
                 })
 
     def tearDown(self):
@@ -117,7 +116,8 @@ class UICase(HttpCase):
             # Change mailing to be sent to partner
             partner_id = env["res.partner"].name_create(
                 "Demo Partner <%s>" % self.email)[0]
-            self.mailings[0].mailing_model = "res.partner"
+            self.mailings[0].mailing_model_id = self.env.ref(
+                "base.model_res_partner")
             self.mailings[0].mailing_domain = repr([
                 ('opt_out', '=', False),
                 ('id', '=', partner_id),
