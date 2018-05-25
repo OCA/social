@@ -1,12 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Antiun Ingeniería S.L. (http://www.antiun.com)
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
 
-from openerp.http import request, route
-from openerp.addons.website_mass_mailing.controllers.main \
+from odoo.http import request, route
+from odoo.addons.website_mass_mailing.controllers.main \
     import MassMailController
 
 _logger = logging.getLogger(__name__)
@@ -45,24 +44,18 @@ class CustomUnsubscribe(MassMailController):
         _logger.debug(
             "Called `mailing()` with: %r",
             (mailing_id, email, res_id, token, post))
-        if res_id:
-            res_id = int(res_id)
         mailing = request.env["mail.mass_mailing"].sudo().browse(mailing_id)
-        mailing._unsubscribe_token(res_id, token)
         # Mass mailing list contacts are a special case because they have a
         # subscription management form
-        if mailing.mailing_model == 'mail.mass_mailing.contact':
+        if mailing.mailing_model_real == 'mail.mass_mailing.contact':
             result = super(CustomUnsubscribe, self).mailing(
-                mailing_id, email, res_id, **post)
-            # FIXME Remove res_id and token in version where this is merged:
-            # https://github.com/odoo/odoo/pull/14385
+                mailing_id, email, res_id, token=token, **post)
             result.qcontext.update({
-                "token": token,
-                "res_id": res_id,
                 "contacts": result.qcontext["contacts"].filtered(
                     lambda contact:
-                        not contact.list_id.not_cross_unsubscriptable or
-                        contact.list_id <= mailing.contact_list_ids
+                        not any(contact.list_ids.mapped(
+                            'not_cross_unsubscriptable')) or
+                        contact.list_ids <= mailing.contact_list_ids
                 ),
                 "reasons":
                     request.env["mail.unsubscription.reason"].search([]),
@@ -85,7 +78,7 @@ class CustomUnsubscribe(MassMailController):
             # You could get a DetailsRequiredError here, but only if HTML5
             # validation fails, which should not happen in modern browsers
             return super(CustomUnsubscribe, self).mailing(
-                mailing_id, email, res_id, **post)
+                mailing_id, email, res_id, token=token, **post)
 
     @route()
     def unsubscribe(self, mailing_id, opt_in_ids, opt_out_ids, email, res_id,
@@ -107,10 +100,6 @@ class CustomUnsubscribe(MassMailController):
         if details:
             extra_context["default_details"] = details
         request.context = dict(request.context, **extra_context)
-        # FIXME Remove token check in version where this is merged:
-        # https://github.com/odoo/odoo/pull/14385
-        mailing = request.env['mail.mass_mailing'].sudo().browse(mailing_id)
-        mailing._unsubscribe_token(res_id, token)
         _logger.debug(
             "Called `unsubscribe()` with: %r",
             (mailing_id, opt_in_ids, opt_out_ids, email, res_id, token,
