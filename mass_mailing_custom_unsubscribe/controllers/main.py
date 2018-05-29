@@ -82,6 +82,7 @@ class CustomUnsubscribe(MassMailController):
                 default_reason_id=reason_id,
                 default_details=post.get("details") or False,
             )
+            del request.env
             # You could get a DetailsRequiredError here, but only if HTML5
             # validation fails, which should not happen in modern browsers
             return super(CustomUnsubscribe, self).mailing(

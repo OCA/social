@@ -7,9 +7,6 @@ from openerp.tests.common import HttpCase
 
 
 class UICase(HttpCase):
-    _tour_run = "odoo.__DEBUG__.services['web_tour.tour'].run('%s')"
-    _tour_ready = "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready"
-
     def extract_url(self, mail, *args, **kwargs):
         url = mail._get_unsubscribe_url(mail, self.email)
         self.assertIn("&token=", url)
