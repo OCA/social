@@ -20,8 +20,10 @@ env:
   matrix:
   - LINT_CHECK="1"
   - TRANSIFEX="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
-  - TESTS="1" ODOO_REPO="OCA/OCB"
+  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="mass_mailing_custom_unsubscribe"
+  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="mass_mailing_custom_unsubscribe"
+  - TESTS="1" ODOO_REPO="odoo/odoo"INCLUDE="mass_mailing_custom_unsubscribe"
+  - TESTS="1" ODOO_REPO="OCA/OCB" INCLUDE="mass_mailing_custom_unsubscribe"
 
 virtualenv:
   system_site_packages: true
