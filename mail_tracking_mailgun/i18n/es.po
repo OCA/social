@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_tracking_mailgun
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -12,14 +12,14 @@ msgstr ""
 "PO-Revision-Date: 2018-02-26 01:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:89
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:88
 #, python-format
 msgid ""
 "%s couldn't be verified. Either the request couln't be completed or the "
@@ -29,7 +29,7 @@ msgstr ""
 "o que el buzón no soporta validación de correo electrónico"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:79
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:78
 #, python-format
 msgid ""
 "%s failed the mailbox verification. Please check it in order to avoid "
@@ -39,7 +39,7 @@ msgstr ""
 "con los envíos"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:70
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:69
 #, python-format
 msgid ""
 "%s is not a valid email address. Please check it in order to avoid sending "
@@ -49,7 +49,7 @@ msgstr ""
 "prevenir problemas con los envíos"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:76
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:75
 #, python-format
 msgid "A Mailgun domain value is needed!"
 msgstr "¡Se necesita un valor de dominio para Mailgun!\""
@@ -65,13 +65,18 @@ msgid "Check email validity"
 msgstr "Comprobar validez de email"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:239
+#: model:ir.model,name:mail_tracking_mailgun.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mail_tracking_mailgun
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:238
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr "No se ha podido obtener información desde Mailgun"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:30
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:29
 #, python-format
 msgid ""
 "Email has been bounced: %s\n"
@@ -83,13 +88,13 @@ msgstr ""
 "Evento: %s"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:57
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:56
 #, python-format
 msgid "Error %s trying to check mailof connection"
 msgstr "Error %s al intentar comprobar el correo electrónicodeconexión"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:243
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:242
 #, python-format
 msgid "Event information not longer stored"
 msgstr "La información del evento ha caducado"
@@ -110,7 +115,7 @@ msgid "Mailgun"
 msgstr "Mailgun"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:64
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:63
 #, python-format
 msgid "Mailgun Error. Mailbox verification value wasn't returned"
 msgstr "Error de Mailgun. No se ha devuelto el valor de verificación de buzón"
@@ -119,11 +124,6 @@ msgstr "Error de Mailgun. No se ha devuelto el valor de verificación de buzón"
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event_mailgun_id
 msgid "Mailgun Event ID"
 msgstr "Mailgun Event ID"
-
-#. module: mail_tracking_mailgun
-#: model:ir.model,name:mail_tracking_mailgun.model_res_partner
-msgid "Partner"
-msgstr "Empresa"
 
 #. module: mail_tracking_mailgun
 #: model:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
@@ -136,13 +136,13 @@ msgid "Set Bounced"
 msgstr "Marcar como rebotado"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:71
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:70
 #, python-format
 msgid "There is no Mailgun API key!"
 msgstr "¡No hay clave de API de Mailgun!"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:226
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:225
 #, python-format
 msgid "There is no tracked message!"
 msgstr ""
@@ -153,7 +153,7 @@ msgid "Unset Bounced"
 msgstr "Desmarcar como rebotado"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:46
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:45
 #, python-format
 msgid ""
 "You need to configure mailgun.validation_key in order to be able to check "
@@ -168,7 +168,10 @@ msgid "ir.mail_server"
 msgstr "ir.mail_server"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:33
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:32
 #, python-format
 msgid "unknown"
 msgstr ""
+
+#~ msgid "Partner"
+#~ msgstr "Empresa"

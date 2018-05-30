@@ -147,13 +147,15 @@ class ResPartner(models.Model):
 
     @api.model
     def create(self, vals):
-        if 'email' in vals and self.env['ir.config_parameter'].get_param(
-                'mailgun.auto_check_partner_email'):
+        if ('email' in vals and
+                self.env['ir.config_parameter'].sudo().get_param(
+                    'mailgun.auto_check_partner_email')):
             self._autocheck_partner_email()
         return super(ResPartner, self).create(vals)
 
     def write(self, vals):
-        if 'email' in vals and self.env['ir.config_parameter'].get_param(
-                'mailgun.auto_check_partner_email'):
+        if ('email' in vals and
+                self.env['ir.config_parameter'].sudo().get_param(
+                    'mailgun.auto_check_partner_email')):
             self._autocheck_partner_email()
         return super(ResPartner, self).write(vals)
