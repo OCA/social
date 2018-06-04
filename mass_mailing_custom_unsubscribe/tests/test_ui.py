@@ -18,8 +18,8 @@ class UICase(HttpCase):
         super(UICase, self).setUp()
         self.email = "test.contact@example.com"
         self.mail_postprocess_patch = mock.patch(
-            "openerp.addons.mail.models.mail_mail.MailMail."
-            "_postprocess_sent_message_v9",
+            "openerp.addons.mass_mailing.models.mail_mail.MailMail."
+            "_postprocess_sent_message",
             autospec=True,
             side_effect=self.extract_url,
         )

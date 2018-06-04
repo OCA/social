@@ -77,11 +77,10 @@ class CustomUnsubscribe(MassMailController):
             return self.reason_form(mailing, email, res_id, token)
         else:
             # Unsubscribe, saving reason and details by context
-            request.context = dict(
-                request.context,
-                default_reason_id=reason_id,
-                default_details=post.get("details") or False,
-            )
+            request.context.update({
+                "default_reason_id": reason_id,
+                "default_details": post.get("details") or False,
+            })
             del request.env
             # You could get a DetailsRequiredError here, but only if HTML5
             # validation fails, which should not happen in modern browsers
