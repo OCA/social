@@ -108,6 +108,7 @@ class CustomUnsubscribe(MassMailController):
         if details:
             extra_context["default_details"] = details
         request.context = dict(request.context, **extra_context)
+        del request.env
         # FIXME Remove token check in version where this is merged:
         # https://github.com/odoo/odoo/pull/14385
         mailing = request.env['mail.mass_mailing'].sudo().browse(mailing_id)
