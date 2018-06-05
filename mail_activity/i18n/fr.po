@@ -1,0 +1,419 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_activity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-06-05 13:44+0000\n"
+"PO-Revision-Date: 2018-06-05 13:44+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_days
+msgid "# Days"
+msgstr "# Jours"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.message_activity_done
+msgid "<strong> Feedback</strong>"
+msgstr "<strong> Commentaire</strong>"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "<strong>Recommended Activities</strong>"
+msgstr "<strong>Activités recommandées</strong>"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_ids
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_type_view_form
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_type_view_tree
+#: model:mail.message.subtype,name:mail_activity.mt_activities
+msgid "Activities"
+msgstr "Activités"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_activity_type_id
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_calendar
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Activity"
+msgstr "Activité"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_activity_type
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Activity Type"
+msgstr "Type d'activité"
+
+#. module: mail_activity
+#: model:ir.actions.act_window,name:mail_activity.mail_activity_type_action
+#: model:ir.ui.menu,name:mail_activity.menu_mail_activity_type
+msgid "Activity Types"
+msgstr "Types d'activités"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_user_id
+msgid "Assigned to"
+msgstr "Assigné à"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_call
+msgid "Call"
+msgstr "Appeler"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_activity_category
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_category
+msgid "Categories may trigger specific behavior like opening calendar view"
+msgstr ""
+"Les catégories peuvent déclencher un comportement spécifique, tel que "
+"l'ouverture d'une vue calendrier"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_activity_category
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_category
+msgid "Category"
+msgstr "Catégorie"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Created By"
+msgstr "Créé par"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_create_uid
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_create_date
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Deadline"
+msgstr "Echéance"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Discard"
+msgstr "Annuler"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_display_name
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_display_name
+msgid "Display Name"
+msgstr "Nom à afficher"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_res_name
+msgid "Display name of the related document."
+msgstr "Afficher le nom du document connexe."
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_name
+msgid "Document Name"
+msgstr "Nom du document"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_date_deadline
+msgid "Due Date"
+msgstr "Date d'échéance"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_email
+msgid "Email"
+msgstr "Courriel"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_feedback
+msgid "Feedback"
+msgstr "Discussion"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_icon
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icône Font Awesome e.g. fa-tasks"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Future Activities"
+msgstr "Activités futures"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_id
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_icon
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_icon
+msgid "Icon"
+msgstr "Icône"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity___last_update
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type___last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_write_uid
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_write_date
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Late Activities"
+msgstr "Activités en retard"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Log a note..."
+msgstr "Enregistrer une note"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Log an Activity"
+msgstr "Planifier une Activité"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_message_mail_activity_type_id
+msgid "Mail Activity Type"
+msgstr "Envoyer le type d'activité par e-mail"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Mark as Done"
+msgstr "Marqué comme fait"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_meeting
+msgid "Meeting"
+msgstr "Rendez-vous"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_message
+msgid "Message"
+msgstr "Message"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_res_model_id
+msgid "Model"
+msgstr "Modèle"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "My Activities"
+msgstr "Mes activités"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_name
+msgid "Name"
+msgstr "Nom"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_tree
+msgid "Next Activities"
+msgstr "Activités suivantes"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Date limite de l'Activité à Venir"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_summary
+msgid "Next Activity Summary"
+msgstr "Résumé d'activité suivant"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_type_id
+msgid "Next Activity Type"
+msgstr "Type d'Activités à Venir"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_has_recommended_activities
+msgid "Next activities available"
+msgstr "Activités suivantes disponibles"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_note
+msgid "Note"
+msgstr "Note"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_days
+msgid ""
+"Number of days before executing the action. It allows to plan the action "
+"deadline."
+msgstr ""
+"Nombre de jours avant l'exécution de l'action. Cela permet de planifier "
+"l'échéance de l'action."
+
+#. module: mail_activity
+#: selection:mail.activity.type,category:0
+msgid "Other"
+msgstr "Autre"
+
+#. module: mail_activity
+#: selection:mail.activity,state:0
+#: selection:res.partner,activity_state:0
+msgid "Overdue"
+msgstr "Retard"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_res_partner
+msgid "Partner"
+msgstr "Partenaire"
+
+#. module: mail_activity
+#: selection:mail.activity,state:0
+#: selection:res.partner,activity_state:0
+msgid "Planned"
+msgstr "Planifié"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_previous_type_ids
+msgid "Preceding Activities"
+msgstr "Activités précédentes"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_previous_activity_type_id
+msgid "Previous Activity Type"
+msgstr "Type d'activité précédente"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_recommended_activity_type_id
+msgid "Recommended Activity Type"
+msgstr "Type d'activité recommandée"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_next_type_ids
+msgid "Recommended Next Activities"
+msgstr "Activités suivantes recommandées"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_id
+msgid "Related Document ID"
+msgstr "ID du document associé"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_model
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_model_id
+msgid "Related Document Model"
+msgstr "Modèle de document concerné"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_user_id
+msgid "Responsible"
+msgstr "Responsable"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Schedule"
+msgstr "Planifier"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Show all records which has next action date is before today"
+msgstr ""
+"Montrez toutes les enregistrements pour lesquelles la date des prochaines "
+"actions est pour aujourd'hui ou avant. "
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_res_model_id
+msgid "Specify a model if the activity should be specific to a modeland not available when managing activities for other models."
+msgstr ""
+"Spécifiez un modèle si l'activité doit être réservée à un certain modèle et "
+"qu'elle ne doit pas être disponible lors de la gestion des activités des "
+"autres modèles."
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_state
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_state
+msgid "State"
+msgstr "Statut"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_res_partner_activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Statut basé sur les activités\n"
+"En retard : la date d'échéance est déjà dépassée\n"
+"Aujourd'hui : la date d'activité est aujourd'hui\n"
+"Planifiée : activités futures"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_summary
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_summary
+msgid "Summary"
+msgstr "Résumé"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_has_recommended_activities
+msgid "Technical field for UX purpose"
+msgstr "Champ technique à des fins d'expérience utilisateur"
+
+#. module: mail_activity
+#: selection:mail.activity,state:0
+#: selection:res.partner,activity_state:0
+msgid "Today"
+msgstr "Aujourd'hui"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Today Activities"
+msgstr "Activités du Jour"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_todo
+msgid "Todo"
+msgstr "À faire"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.message_activity_done
+msgid "done\n"
+"        by"
+msgstr ""
+"fait\n"
+"        par"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "e.g. Discuss proposal"
+msgstr "Ex. : Proposition d'examen"
