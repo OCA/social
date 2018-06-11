@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * base_search_mail_content
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 msgid ""
@@ -11,18 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2017-01-18 03:39+0000\n"
 "PO-Revision-Date: 2017-01-18 03:39+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Serbian (Latin) (https://www.transifex.com/oca/teams/23907/sr@latin/)\n"
+"Language-Team: Serbian (Latin) (https://www.transifex.com/oca/teams/23907/"
+"sr@latin/)\n"
+"Language: sr@latin\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sr@latin\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-
-#. module: base_search_mail_content
-#: model:ir.ui.view,arch_db:base_search_mail_content.trgm_index_view_form
-#: model:ir.ui.view,arch_db:base_search_mail_content.trgm_index_view_tree
-msgid "\"You can either select a field of type 'text', 'char' or 'html'.\""
-msgstr ""
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
 #. module: base_search_mail_content
 #: model:ir.model,name:base_search_mail_content.model_mail_thread
@@ -30,18 +26,35 @@ msgid "Email Thread"
 msgstr ""
 
 #. module: base_search_mail_content
+#: code:addons/base_search_mail_content/models/mail_thread.py:53
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_channel_message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mass_mailing_contact_message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_simple_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_unsubscription_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner_message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_res_users_message_content
+#, python-format
 msgid "Message Content"
 msgstr ""
 
 #. module: base_search_mail_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_channel_message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_mass_mailing_contact_message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_simple_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_unsubscription_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner_message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_res_users_message_content
 msgid "Message content, to be used only in searches"
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model,name:base_search_mail_content.model_res_partner
-msgid "Partner"
-msgstr "Partner"
+#: model:ir.model,name:base_search_mail_content.model_trgm_index
+msgid "trgm.index"
+msgstr ""
+
+#~ msgid "Partner"
+#~ msgstr "Partner"

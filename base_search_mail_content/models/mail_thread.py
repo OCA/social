@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
-# © 2016-17 Eficent Business and IT Consulting Services S.L.
+# Copyright 2016-17 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
-# © 2016 Serpent Consulting Services Pvt. Ltd. (<http://www.serpentcs.com>)
+# Copyright 2016 Serpent Consulting Services Pvt. Ltd.
+#   (<http://www.serpentcs.com>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
 from lxml import etree
 from odoo.osv import expression
 from odoo.osv.orm import setup_modifiers
@@ -50,7 +50,7 @@ class MailThread(models.AbstractModel):
             res['fields'].update({
                 'message_content': {
                     'type': 'char',
-                    'string': 'Message Content',
+                    'string': _('Message Content'),
                 }
             })
 
