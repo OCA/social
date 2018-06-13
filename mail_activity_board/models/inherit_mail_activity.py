@@ -1,32 +1,30 @@
-# -*- coding: utf-8 -*-
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # SDI
 # author: djuaneda@sdi.es
-
-
 from odoo import api, models, fields, tools, _
 from odoo.tools.safe_eval import safe_eval
-
 
 class MailActivity(models.Model):
     _inherit = "mail.activity"
 
-
-    res_model_id_name = fields.Char(default="",related='res_model_id.name', string="Origin",
-                                    store=False, readonly=True)
-    duration = fields.Float(related='calendar_event_id.duration', string="Duration",
-                                    store=False, readonly=True)
-    calendar_event_id_start = fields.Datetime(default=False,
-                                              related='calendar_event_id.start',
-                                              store=False,
-                                              readonly=True)
-    calendar_event_id_partner_ids = fields.Many2many(related='calendar_event_id.partner_ids',
-                                                    string='Attendees', store=False,
-                                                    default=False,readonly=True)
+    res_model_id_name = fields.Char(
+        default="", related='res_model_id.name',
+        string="Origin", store=False, readonly=True)
+    duration = fields.Float(
+        related='calendar_event_id.duration',
+        string="Duration", store=False, readonly=True)
+    calendar_event_id_start = fields.Datetime(
+        default=False, related='calendar_event_id.start',
+        store=False, readonly=True)
+    calendar_event_id_partner_ids = fields.Many2many(
+        related='calendar_event_id.partner_ids', string='Attendees',
+        store=False, default=False,readonly=True)
 
     @api.multi
     def open_origin(self):
-        """ Utility method used to add an "Open Company" button in partner views """
+        """
+        Utility method used to add an "Open Company" button in partner views.
+        """
         self.ensure_one()
         response = {'type': 'ir.actions.act_window',
                         'res_model': self.res_model,
@@ -39,7 +37,6 @@ class MailActivity(models.Model):
             if res_type == 'opportunity':
                 view_id = self.env.ref("crm.crm_case_form_view_oppor").id
                 response['view_id'] = view_id
-
         return response
 
 
