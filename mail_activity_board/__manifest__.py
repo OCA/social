@@ -11,11 +11,13 @@
     'summary': 'Add Activity Boards',
     'license': 'GPL-3',
     'depends': [
-        'crm','mail','board',
+        'crm',
+        'mail',
+        'board',
     ],
     'data': [
-        'views/activities_boards_views.xml',
-        'views/inherit_crm_opportunities_views.xml',
+        'views/mail_activity_view.xml',
+        'views/crm_lead_opportunity_view.xml',
     ],
     'qweb': [],
     'demo': [],

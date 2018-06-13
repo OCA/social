@@ -2,5 +2,5 @@
 # SDI
 # author: djuaneda@sdi.es
 
-from . import inherit_crm_lead
+from . import crm_lead
 from . import inherit_mail_activity

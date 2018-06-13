@@ -144,7 +144,7 @@
         <field name="inherit_id" ref="mail.mail_activity_view_search"/>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <xpath expr='//field[@name="res_model_id"]' position='before'>
+            <xpath expr='//field[@name="res_model_id"][first()]' position='before'>
                 <field name="user_id"/>
                 <field name="res_name" string="Origin (opportunity/customer)"/>
             </xpath>
@@ -159,14 +159,9 @@
                 <separator/>
             </xpath>
 
-            <xpath expr='//search/group' position='replace'>
-                <group expand="0" string="Group By" colspan="16" name="group_deadline">
-                    <filter string="User" domain="[]" groups="sales_team.group_sale_salesman_all_leads" context="{'group_by':'user_id'}"/>
-                    <filter string="Created By" context="{'group_by': 'create_uid'}"/>
-                    <filter string="Activity Type" context="{'group_by': 'activity_type_id'}"/>
-                    <filter string="Origin" context="{'group_by': 'res_model_id'}"/>
-                    <separator/>
-                </group>
+            <xpath expr='//search/group' position='inside'>
+                <filter string="User" domain="[]" groups="sales_team.group_sale_salesman_all_leads" context="{'group_by':'user_id'}"/>
+                <filter string="Origin" context="{'group_by': 'res_model_id'}"/>
             </xpath>
 
         </field>
