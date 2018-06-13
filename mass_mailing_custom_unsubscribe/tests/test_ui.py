@@ -20,6 +20,7 @@ class UICase(HttpCase):
         self.mail_postprocess_patch = mock.patch(
             "openerp.addons.mass_mailing.models.mail_mail.MailMail."
             "_postprocess_sent_message",
+            autospec=True,
             side_effect=self.extract_url,
         )
         with self.tempenv() as env:

@@ -3,9 +3,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     'name': "Customizable unsubscription process on mass mailing emails",
-    "summary": "Know unsubscription reasons, track them",
+    "summary": "Know and track (un)subscription reasons, GDPR compliant",
     'category': 'Marketing',
-    'version': '9.0.2.0.0',
+    'version': '9.0.3.0.0',
     'depends': [
         'website_mass_mailing',
     ],
