@@ -54,7 +54,7 @@
                             <i class="fa fa-info-circle"/> You cannot make manual editions of contacts in fully synchronized lists.
                         </div>
                     </group>
-                    <group colspan="4"
+                    <group colspan="2"
                            attrs="{'invisible': [('dynamic', '=', False)]}">
                         <field
                             name="sync_domain"
@@ -62,13 +62,14 @@
                             options='{"model": "res.partner"}'
                         />
                     </group>
-                    <button
-                        name="%(action_mail_mass_mailing_load_filter)d"
-                        type="action"
-                        string="Load filter"
-                        icon="fa-filter"
-                        colspan="1"
-                    />
+                    <group attrs="{'invisible': [('dynamic', '=', False)]}">
+                        <button
+                            name="%(action_mail_mass_mailing_load_filter)d"
+                            type="action"
+                            string="Load filter"
+                            icon="fa-filter"
+                        />
+                    </group>
                 </group>
             </xpath>
             <field name="contact_nbr" position="attributes">
