@@ -3,4 +3,4 @@
 # author: djuaneda@sdi.es
 
 from . import crm_lead
-from . import inherit_mail_activity
+from . import mail_activity
