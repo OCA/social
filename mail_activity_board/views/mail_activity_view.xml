@@ -144,7 +144,7 @@
         <field name="inherit_id" ref="mail.mail_activity_view_search"/>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <xpath expr='//field[@name="res_model_id"][first()]' position='before'>
+            <xpath expr='//field[@name="res_model_id"]' position='before'>
                 <field name="user_id"/>
                 <field name="res_name" string="Origin (opportunity/customer)"/>
             </xpath>
