@@ -20,17 +20,19 @@ Configuration
 =============
 
 
-#. Install it from APPs.
+Install it from APPs.
 
 
 Usage
 =====
 
-#. Access to the views from menu Boards.
-#. A smartButton of activities is added in the opportunity form view.
+Access to the views from menu Boards.
+
+A smartButton of activities is added in the opportunity form view.
 From this smartButton is linked to the activity board, to the view tree,
 which shows the activities related to the opportunity.
-#. From the form view of the activity you can navigate to the origin of the activity.
+
+From the form view of the activity you can navigate to the origin of the activity.
 
 
 

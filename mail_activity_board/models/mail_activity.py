@@ -40,7 +40,6 @@ class MailActivity(models.Model):
                 response['view_id'] = view_id
         return response
 
-
     @api.model
     def action_your_activities(self):
         action = self.env.ref(
