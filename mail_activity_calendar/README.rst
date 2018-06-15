@@ -1,27 +1,29 @@
-==========
-Activities
-==========
+======================
+Mail Activity Calendar
+======================
 
-This module backports the activities from 11.0.
+Adds the ability to create calendar meetings when you schedule an
+activity of category 'Meeting'.
 
 Configuration
 =============
 
-To configure this module, you need to do the same as in 11.0.
+* Go to 'Settings / Technical / Email / Activity Types' and configure
+  the category 'Meeting'
 
 Usage
 =====
 
-To use this module, you need to do the same as in 11.0.
+When you schedule an activity of category 'Meeting' you will be directed
+to the calendar.
+
 
 Known issues / Roadmap
 ======================
 
-* The button 'Mark done' that appears for each activity in the chatter
-  is not available.
-
-* It is not possible to schedule a next activity based on a given activity.
-
+* When the user is redirected from the activity to the calendar view,
+  the summary of the activity does not appear in the pop-up window following
+  the creation of a new calendar event.
 
 
 Bug Tracker
@@ -45,7 +47,7 @@ Contributors
 
 **This module is a backport from Odoo SA and as such, it is not included in the OCA CLA. That means we do not have a copy of the copyright on it like all other OCA modules.**
 
-* Holger Brunn <hbrunn@therp.nl>
+* Jordi Ballester Alomar <jordi.ballester@eficent.com>
 
 Do not contact contributors directly about help with questions or problems concerning this addon, but use the `community mailing list <mailto:community@mail.odoo.com>`_ or the `appropriate specialized mailinglist <https://odoo-community.org/groups>`_ for help, and the bug tracker linked in `Bug Tracker`_ above for technical issues.
 

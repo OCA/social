@@ -90,6 +90,8 @@
                         </group>
                     </group>
                     <field name="note" placeholder="Log a note..."/>
+                    <label for="feedback"/>
+                    <field name="feedback" placeholder="e.g. Enter feedback"/>
                     <footer>
                         <button string="Schedule" name="action_close_dialog"
                             type="object" class="btn-primary"/>

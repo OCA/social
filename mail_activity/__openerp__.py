@@ -10,6 +10,7 @@
     "summary": "Backport activities",
     "depends": [
         'mail',
+        'web_kanban',
     ],
     "data": [
         "views/res_partner.xml",
@@ -22,5 +23,7 @@
     ],
     "qweb": [
         'static/src/xml/mail_activity.xml',
+        'static/src/xml/systray.xml',
+        'static/src/xml/web_kanban_activity.xml',
     ],
 }

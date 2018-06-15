@@ -5,11 +5,13 @@
 odoo.define('mail.Activity', function(require)
 {
     "use strict";
-    var Chatter = require('mail.Chatter'),
-        Model = require('web.Model'),
-        form_common = require('web.form_common'),
-        core = require('web.core'),
-        _t = core._t;
+    var Chatter = require('mail.Chatter');
+    var kanban_widgets = require('web_kanban.widgets');
+    var Model = require('web.Model');
+    var form_common = require('web.form_common');
+    var core = require('web.core');
+    var time = require('web.time');
+    var _t = core._t;
     Chatter.include({
         init: function() {
             this._super.apply(this, arguments);
@@ -63,8 +65,40 @@ odoo.define('mail.Activity', function(require)
         return activities;
     };
 
-    var Activity = form_common.AbstractField.extend({
+    var AbstractActivityField = form_common.AbstractField.extend({
+        _scheduleActivity: function (id, previous_activity_type_id, callback) {
+            var self = this,
+                action = {
+                type: 'ir.actions.act_window',
+                res_model: 'mail.activity',
+                view_mode: 'form',
+                view_type: 'form',
+                views: [[false, 'form']],
+                target: 'new',
+                context: {
+                    default_res_id: this.view.datarecord.id,
+                    default_res_model: this.view.dataset.model,
+                    default_previous_activity_type_id:
+                    previous_activity_type_id || false,
+                },
+                res_id: id || false,
+            };
+            return this.do_action(action, {
+                on_close: function() {
+                    if(callback) {
+                        callback();
+                    }
+                    return self.field_manager.reload()
+                },
+            })
+        },
+    });
+
+    var Activity = AbstractActivityField.extend({
         className: 'o_mail_activity',
+        custom_events: {
+            reload_mail_fields: '_onReloadMailFields',
+        },
         events: {
             'click .o_activity_edit': '_onEditActivity',
             'click .o_activity_unlink': '_onUnlinkActivity',
@@ -100,32 +134,6 @@ odoo.define('mail.Activity', function(require)
                 self.activities = activities;
             });
         },
-        _scheduleActivity: function (id, previous_activity_type_id, callback) {
-            var self = this,
-                action = {
-                type: 'ir.actions.act_window',
-                res_model: 'mail.activity',
-                view_mode: 'form',
-                view_type: 'form',
-                views: [[false, 'form']],
-                target: 'new',
-                context: {
-                    default_res_id: this.view.datarecord.id,
-                    default_res_model: this.view.dataset.model,
-                    default_previous_activity_type_id:
-                    previous_activity_type_id || false,
-                },
-                res_id: id || false,
-            };
-            return this.do_action(action, {
-                on_close: function() {
-                    if(callback) {
-                        callback();
-                    }
-                    return self.field_manager.reload()
-                },
-            })
-        },
         // handlers
         _onEditActivity: function (event, options) {
             event.preventDefault();
@@ -146,7 +154,7 @@ odoo.define('mail.Activity', function(require)
             });
             return this.do_action(action, {
                 on_close: function () {
-                    self._render_value();
+                    return self.field_manager.reload()
                 },
             });
         },
@@ -161,12 +169,9 @@ odoo.define('mail.Activity', function(require)
             .call('unlink', [activity_id])
             .then(this.render_value.bind(this));
         },
-        _onMarkActivityDone: function (event) {
-            //TODO: this should open a wizard to write a comment and call action_feedback
-        },
     });
-
     core.form_widget_registry.add('mail_activity', Activity);
 
     return Activity;
+
 });

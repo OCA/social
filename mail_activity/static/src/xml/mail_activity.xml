@@ -62,9 +62,6 @@
                             <t t-raw="activity.note"/>
                         </div>
                         <div class="o_thread_message_tools btn-group">
-                            <a href="#" class="btn btn-link btn-success text-muted btn-sm o_activity_done o_activity_link mr8" t-att-data-activity-id="activity.id" t-att-data-previous-activity-type-id="activity.activity_type_id[0]" data-toggle="popover">
-                                <i class="fa fa-check"/> Mark Done
-                            </a>
                             <a href="#" class="btn btn-link btn-default text-muted btn-sm o_activity_edit o_activity_link" t-att-data-activity-id="activity.id">
                                 <i class="fa fa-pencil"/> Edit
                             </a>
@@ -75,6 +72,19 @@
                     </div>
                 </div>
             </t>
+        </div>
+    </t>
+    <t t-name="mail.activity_feedback_form">
+        <div>
+            <textarea class="form-control" rows="3" id="activity_feedback" placeholder="Write Feedback"/>
+            <div class="mt8">
+                <button type="button" class="btn btn-xs btn-primary o_activity_popover_done_next" t-att-data-previous-activity-type-id="previous_activity_type_id">
+                    Done &amp; Schedule Next</button>
+                <button type="button" class="btn btn-xs btn-primary o_activity_popover_done">
+                    Done</button>
+                <button type="button" class="btn btn-xs btn-link o_activity_popover_discard">
+                    Discard</button>
+            </div>
         </div>
     </t>
 </templates>

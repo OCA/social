@@ -1,8 +1,8 @@
-==========
-Activities
-==========
+=================
+Activities in CRM
+=================
 
-This module backports the activities from 11.0.
+This module adds activities to CRM.
 
 Configuration
 =============
@@ -17,11 +17,12 @@ To use this module, you need to do the same as in 11.0.
 Known issues / Roadmap
 ======================
 
-* The button 'Mark done' that appears for each activity in the chatter
-  is not available.
+* From the Kanban view you can only display the activities. You cannot
+  schedule new activities from the kanban pop-up window, and the layout is
+  slightly different.
 
-* It is not possible to schedule a next activity based on a given activity.
-
+* The Kanban view shows the next activity date and summary, in red if it
+  is overdue.
 
 
 Bug Tracker

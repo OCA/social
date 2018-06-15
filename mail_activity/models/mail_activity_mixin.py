@@ -34,6 +34,13 @@ def setup_mail_actitivities(cls):
     cls.activity_summary = fields.Char(
         'Next Activity Summary', related='activity_ids.summary',
         search='_search_activity_summary')
+    cls.nbr_activities = fields.Integer(compute='_compute_nbr_activities')
+
+    @api.depends('activity_ids')
+    def _compute_nbr_activities(self):
+        for record in self:
+            record.nbr_activities = len(record.activity_ids)
+    cls._compute_nbr_activities = _compute_nbr_activities
 
     @api.depends('activity_ids.state')
     def _compute_activity_state(self):
