@@ -25,7 +25,7 @@ addon | version | summary
 [mail_tracking](mail_tracking/) | 9.0.3.0.2 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 9.0.1.2.1 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 9.0.1.0.0 | Improve mass mailing email tracking
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 9.0.2.0.0 | Know unsubscription reasons, track them
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 9.0.3.0.0 | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_partner](mass_mailing_partner/) | 9.0.1.0.1 | Link partners with mass-mailing
 [mass_mailing_security_group](mass_mailing_security_group/) | 9.0.1.0.0 | Mass mailing security group
 [mass_mailing_unique](mass_mailing_unique/) | 9.0.1.0.0 | Avoids duplicate mailing lists and contacts
