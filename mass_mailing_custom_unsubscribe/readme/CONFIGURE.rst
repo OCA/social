@@ -1,6 +1,3 @@
-Unsubscription Reasons
-----------------------
-
 You can customize what reasons will be displayed to your unsubscriptors when
 they are going to unsubscribe. To do it:
 
