@@ -20,39 +20,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_digest
+#: model:ir.model,name:mail_digest.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
+msgid "Create email now"
+msgstr ""
+
+#. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_uid
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_create_uid
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_date
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_create_date
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_create_date
 msgid "Created on"
 msgstr ""
 
 #. module: mail_digest
-#: selection:res.partner,digest_frequency:0
+#: selection:res.users,digest_frequency:0
 msgid "Daily"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:148
+#: code:addons/mail_digest/models/mail_digest.py:155
 #, python-format
 msgid "Daily update"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/res_partner.py:11
 #: model:ir.actions.act_window,name:mail_digest.action_digest_all
 #: model:ir.ui.menu,name:mail_digest.menu_email_digest
-#, python-format
 msgid "Digest"
 msgstr ""
 
 #. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_digest_mode
+msgid "Digest Mode"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.actions.server,name:mail_digest.ir_cron_mail_digest_daily_action_ir_actions_server
+#: model:ir.cron,cron_name:mail_digest.ir_cron_mail_digest_daily_action
+#: model:ir.cron,name:mail_digest.ir_cron_mail_digest_daily_action
+msgid "Digest mail process - daily"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.actions.server,name:mail_digest.ir_cron_mail_digest_weekly_action_ir_actions_server
+#: model:ir.cron,cron_name:mail_digest.ir_cron_mail_digest_weekly_action
+#: model:ir.cron,name:mail_digest.ir_cron_mail_digest_weekly_action
+msgid "Digest mail process - weekly"
+msgstr ""
+
+#. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_display_name
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_display_name
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_display_name
 msgid "Display Name"
 msgstr ""
 
@@ -63,13 +90,12 @@ msgid "Enable/disable notifications by type"
 msgstr ""
 
 #. module: mail_digest
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_enabled
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_enabled
 msgid "Enabled"
 msgstr ""
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_frequency
-#: model:ir.model.fields,field_description:mail_digest.field_res_partner_digest_frequency
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_digest_frequency
 msgid "Frequency"
 msgstr ""
@@ -81,25 +107,30 @@ msgstr ""
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_id
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_id
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_id
 msgid "ID"
 msgstr ""
 
 #. module: mail_digest
+#: model:ir.model.fields,help:mail_digest.field_res_users_digest_mode
+msgid "If enabled, email notifications will be sent in digest mode."
+msgstr ""
+
+#. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest___last_update
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf___last_update
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf___last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_write_uid
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_write_uid
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_write_date
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_write_date
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_write_date
 msgid "Last Updated on"
 msgstr ""
 
@@ -132,39 +163,14 @@ msgid "Notification"
 msgstr ""
 
 #. module: mail_digest
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_subtype_id
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_subtype_id
 msgid "Notification type"
 msgstr ""
 
 #. module: mail_digest
-#: model:ir.model.fields,field_description:mail_digest.field_res_partner_notify_conf_ids
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_notify_conf_ids
 #: model:ir.ui.view,arch_db:mail_digest.notification_tree
 msgid "Notifications"
-msgstr ""
-
-#. module: mail_digest
-#: model:ir.model,name:mail_digest.model_res_partner
-#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_partner_id
-#: model:ir.model.fields,field_description:mail_digest.field_partner_notification_conf_partner_id
-msgid "Partner"
-msgstr ""
-
-#. module: mail_digest
-#: model:ir.model.fields,field_description:mail_digest.field_res_partner_disabled_notify_subtype_ids
-#: model:ir.model.fields,field_description:mail_digest.field_res_users_disabled_notify_subtype_ids
-msgid "Partner disabled subtypes"
-msgstr ""
-
-#. module: mail_digest
-#: model:ir.model.fields,field_description:mail_digest.field_res_partner_enabled_notify_subtype_ids
-#: model:ir.model.fields,field_description:mail_digest.field_res_users_enabled_notify_subtype_ids
-msgid "Partner enabled subtypes"
-msgstr ""
-
-#. module: mail_digest
-#: model:ir.model,name:mail_digest.model_partner_notification_conf
-msgid "Partner notification configuration"
 msgstr ""
 
 #. module: mail_digest
@@ -178,12 +184,38 @@ msgid "Status"
 msgstr "Estat"
 
 #. module: mail_digest
-#: selection:res.partner,digest_frequency:0
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_user_id
+#: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_user_id
+msgid "User"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_disabled_notify_subtype_ids
+msgid "User disabled subtypes"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_res_users_enabled_notify_subtype_ids
+msgid "User enabled subtypes"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.model,name:mail_digest.model_user_notification_conf
+msgid "User notification configuration"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.model,name:mail_digest.model_res_users
+msgid "Users"
+msgstr ""
+
+#. module: mail_digest
+#: selection:res.users,digest_frequency:0
 msgid "Weekly"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:150
+#: code:addons/mail_digest/models/mail_digest.py:157
 #, python-format
 msgid "Weekly update"
 msgstr ""
@@ -194,7 +226,7 @@ msgid "You can have only one configuration per subtype!"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:173
+#: code:addons/mail_digest/models/mail_digest.py:180
 #, python-format
 msgid "You must pass a template or set one on the digest record."
 msgstr ""
