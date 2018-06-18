@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2018-06-19 10:00+0000\n"
+"Last-Translator: c2cdidier <didier.donze@camptocamp.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.0.1\n"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:88
@@ -25,6 +26,8 @@ msgid ""
 "%s couldn't be verified. Either the request couln't be completed or the "
 "mailbox provider doesn't support email verification"
 msgstr ""
+"%s n'a pas pu être vérifié. Soit la requête n'a pas pu être executée, soit "
+"le fournisseur email ne supporte pas la vérification d'email."
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:78
@@ -33,6 +36,8 @@ msgid ""
 "%s failed the mailbox verification. Please check it in order to avoid "
 "sending issues"
 msgstr ""
+"%s échéc de vérification de la mailbox. Merci de vérifier afin d'éviter "
+"d'envoyer des erreurs"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:69
