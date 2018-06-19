@@ -3,6 +3,7 @@
 import mock
 from contextlib import contextmanager
 from odoo.tests.common import HttpCase
+from werkzeug import urls
 
 
 class UICase(HttpCase):
@@ -11,7 +12,7 @@ class UICase(HttpCase):
 
     def extract_url(self, mail, *args, **kwargs):
         url = mail._get_unsubscribe_url(self.email)
-        self.assertIn("&token=", url)
+        self.assertTrue(urls.url_parse(url).decode_query().get('token'))
         self.assertTrue(url.startswith(self.domain))
         self.url = url.replace(self.domain, "", 1)
         return True
