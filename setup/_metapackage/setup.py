@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo11-addon-mail_tracking',
         'odoo11-addon-mail_tracking_mailgun',
         'odoo11-addon-mass_mailing_custom_unsubscribe',
+        'odoo11-addon-mass_mailing_partner',
     ],
     classifiers=[
         'Programming Language :: Python',
