@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_resend
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
@@ -12,18 +12,18 @@ msgstr ""
 "PO-Revision-Date: 2018-01-24 03:51+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_resend
 #: model:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
 msgid ""
-"<i class=\"fa fa-info-circle\"/> New sending will be done only to not "
-"sent/new recipients. If you want to resend again the mass mailing to already"
-" sent recipients, click on <b>Emails Sent</b> smart-button for removing the "
+"<i class=\"fa fa-info-circle\"/> New sending will be done only to not sent/"
+"new recipients. If you want to resend again the mass mailing to already sent "
+"recipients, click on <b>Emails Sent</b> smart-button for removing the "
 "existing record(s)."
 msgstr ""
 
