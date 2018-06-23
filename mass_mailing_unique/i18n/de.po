@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_unique
-# 
+#
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-04-30 10:21+0000\n"
 "PO-Revision-Date: 2017-03-19 12:11+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/"
+"de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_unique
@@ -26,7 +27,8 @@ msgstr "Sie dürfen nicht mehrere Listen gleich Namens führen."
 #. module: mass_mailing_unique
 #: sql_constraint:mail.mass_mailing.contact:0
 msgid "Cannot have the same email more than once in the same list."
-msgstr "Die gleiche Email-Anschrift darf nicht mehrmals in einer Liste vorkommen."
+msgstr ""
+"Die gleiche Email-Anschrift darf nicht mehrmals in einer Liste vorkommen."
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/hooks.py:42
