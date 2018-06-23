@@ -1,0 +1,337 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_sendgrid
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_body_sendgrid
+msgid "Body sendgrid"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_body_text
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_body_text
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_body_text
+msgid "Body text"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_click_count
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_tracking_email_click_count
+msgid "Click count"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.sendgrid_email_search_view
+msgid "Clicked"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_create_uid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_create_uid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_create_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_create_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_detected_keywords
+msgid "Detected keywords"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_display_name
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_display_name
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_email_template_id
+msgid "E-mail Template"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_email_template_preview
+msgid "Email Template Preview"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_mail_template
+msgid "Email Templates"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_email_id
+msgid "Email id"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_email_template_id
+msgid "Email template id"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_email_template_sendgrid_form
+msgid "Get substitutions from templates"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.email_compose_message_sendgrid_form
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_sendgrid_template_form
+msgid "Html"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_html_content
+msgid "Html content"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_id
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_id
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_id
+msgid "ID"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_key
+msgid "Key"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_lang
+msgid "Lang"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_lang
+msgid "Language"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template___last_update
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution___last_update
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template___last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_write_uid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_write_uid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_write_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_write_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_mail_tracking_email
+msgid "MailTracking email"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_mail_message
+msgid "Message"
+msgstr ""
+
+#. module: mail_sendgrid
+#: code:addons/mail_sendgrid/models/sendgrid_template.py:46
+#, python-format
+msgid "Missing sendgrid_api_key in conf file"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_name
+msgid "Name"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_opened
+#: model:ir.ui.view,arch_db:mail_sendgrid.sendgrid_email_search_view
+msgid "Opened"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_mail_mail
+msgid "Outgoing Mails"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_plain_content
+msgid "Plain content"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_sendgrid_template_form
+msgid "Plain text"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_tracking_email_ids
+msgid "Registered events"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_template_remote_id
+msgid "Remote id"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.email_form_view
+msgid "Send (SendGrid)"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.email_form_view
+msgid "Send Now"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_send_method
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_send_method
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_send_method
+msgid "Send method"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.email_form_view
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_email_template_sendgrid_form
+msgid "SendGrid"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.email_compose_message_sendgrid_form
+msgid "SendGrid Preview"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.menu,name:mail_sendgrid.menu_sendgrid_template
+msgid "SendGrid Templates"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_sendgrid_template_id
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_sendgrid_template_id
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_sendgrid_template_id
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_sendgrid_template_id
+msgid "Sendgrid Template"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_email_template_preview_sendgrid_template_ids
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_template_sendgrid_template_ids
+msgid "Sendgrid Templates"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_email_template_preview_sendgrid_localized_template
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_template_sendgrid_localized_template
+msgid "Sendgrid localized template"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_sent_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_sent_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_sent_date
+msgid "Sent date"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_email_template_preview_substitution_ids
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_substitution_ids
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_substitution_ids
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_substitution_ids
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_template_substitution_ids
+msgid "Substitutions"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.actions.act_window,name:mail_sendgrid.open_view_sendgrid_template_tree
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_sendgrid_template_form
+msgid "Template"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_sendgrid_substitution_line_tree
+msgid "Template substitutions"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.view,arch_db:mail_sendgrid.view_sendgrid_template_tree
+msgid "Templates"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,help:mail_sendgrid.field_mail_compose_message_body_text
+#: model:ir.model.fields,help:mail_sendgrid.field_mail_mail_body_text
+#: model:ir.model.fields,help:mail_sendgrid.field_mail_message_body_text
+msgid "Text only version of the body"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_tracking_event_ids
+msgid "Tracking event ids"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.ui.menu,name:mail_sendgrid.menu_update_sendgrid_template
+msgid "Update SendGrid"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.actions.server,name:mail_sendgrid.update_sendgrid_templates
+msgid "Update Sendgrid Templates"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_substitution_value
+msgid "Value"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_sendgrid_email_lang_template
+msgid "sendgrid.email.lang.template"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_sendgrid_substitution
+msgid "sendgrid.substitution"
+msgstr ""
+
+#. module: mail_sendgrid
+#: model:ir.model,name:mail_sendgrid.model_sendgrid_template
+msgid "sendgrid.template"
+msgstr ""
+
