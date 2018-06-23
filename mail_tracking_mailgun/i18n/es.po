@@ -37,7 +37,7 @@ msgstr "%s no es una dirección válida de correo electrónico. Compruébela par
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:75
 #, python-format
 msgid "A Mailgun domain value is needed!"
-msgstr "¡Se necesita un valor de dominio para Mailgun!""
+msgstr "¡Se necesita un valor de dominio para Mailgun!"
 
 #. module: mail_tracking_mailgun
 #: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
