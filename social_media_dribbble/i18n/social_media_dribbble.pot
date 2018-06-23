@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * social_media_dribbble
+#	* social_media_dribbble
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: social (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-25 18:06+0000\n"
-"PO-Revision-Date: 2015-11-20 13:46+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Czech (http://www.transifex.com/oca/OCA-social-8-0/language/"
-"cs/)\n"
-"Language: cs\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: \n"
 
 #. module: social_media_dribbble
 #: field:website,social_dribbble:0
@@ -27,7 +22,7 @@ msgstr ""
 #. module: social_media_dribbble
 #: model:ir.model,name:social_media_dribbble.model_website
 msgid "Website"
-msgstr "Webová stránka"
+msgstr ""
 
 #. module: social_media_dribbble
 #: view:website:social_media_dribbble.view_website_form_extra
@@ -38,3 +33,4 @@ msgstr ""
 #: view:website.config.settings:social_media_dribbble.view_website_config_settings_ext
 msgid "https://dribbble.com"
 msgstr ""
+
