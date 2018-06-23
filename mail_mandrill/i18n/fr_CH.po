@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_mandrill
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,23 +10,30 @@ msgstr ""
 "POT-Creation-Date: 2016-11-29 17:50+0000\n"
 "PO-Revision-Date: 2016-12-01 10:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-social-8-0/language/fr_CH/)\n"
+"Language-Team: French (Switzerland) (http://www.transifex.com/oca/OCA-"
+"social-8-0/language/fr_CH/)\n"
+"Language: fr_CH\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr_CH\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mail_mandrill
 #: help:mail.mandrill.message,state:0
 msgid ""
-" * The 'Sent' status indicates that message was succesfully delivered to recipient Mail Exchange (MX) server.\n"
-" * The 'Opened' status indicates that message was opened or clicked by recipient.\n"
-" * The 'Rejected' status indicates that recipient email address is blacklisted by Mandrill. It is recomended to delete this email address.\n"
+" * The 'Sent' status indicates that message was succesfully delivered to "
+"recipient Mail Exchange (MX) server.\n"
+" * The 'Opened' status indicates that message was opened or clicked by "
+"recipient.\n"
+" * The 'Rejected' status indicates that recipient email address is "
+"blacklisted by Mandrill. It is recomended to delete this email address.\n"
 " * The 'Spam' status indicates that Mandrill consider this message as spam.\n"
-" * The 'Unsubscribed' status indicates that recipient has requested to be unsubscribed from this message.\n"
-" * The 'Bounced' status indicates that message was bounced by recipient Mail Exchange (MX) server.\n"
-" * The 'Soft bounced' status indicates that message was soft bounced by recipient Mail Exchange (MX) server.\n"
+" * The 'Unsubscribed' status indicates that recipient has requested to be "
+"unsubscribed from this message.\n"
+" * The 'Bounced' status indicates that message was bounced by recipient Mail "
+"Exchange (MX) server.\n"
+" * The 'Soft bounced' status indicates that message was soft bounced by "
+"recipient Mail Exchange (MX) server.\n"
 msgstr ""
 
 #. module: mail_mandrill
