@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_custom_unsubscribe
-# 
+#
 # Translators:
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
@@ -12,11 +12,12 @@ msgstr ""
 "POT-Creation-Date: 2016-08-17 02:42+0000\n"
 "PO-Revision-Date: 2016-08-16 07:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/"
+"fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mass_mailing_custom_unsubscribe
@@ -29,7 +30,9 @@ msgstr ""
 msgid ""
 "But before continuing, could you please tell us why do you want to "
 "unsubscribe?"
-msgstr "Avant de continuer, merci de bien vouloir nous communiquer la raison de votre désabonnement."
+msgstr ""
+"Avant de continuer, merci de bien vouloir nous communiquer la raison de "
+"votre désabonnement."
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,details_required:0
@@ -123,7 +126,9 @@ msgstr ""
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Gère l'historique de \"Chatter\" (nombre de messages, ...). Cet historique est au format HTML pour permettre son utilisation dans la vue kanban"
+msgstr ""
+"Gère l'historique de \"Chatter\" (nombre de messages, ...). Cet historique "
+"est au format HTML pour permettre son utilisation dans la vue kanban"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
@@ -155,7 +160,9 @@ msgstr "Si coché, de nouveaux messages demandent votre attention."
 msgid ""
 "If this is unchecked, it indicates some failure happened in the "
 "unsubscription process."
-msgstr "Si c'est non coché, cela indique qu'il y a eu une erreur dans le processus de dés-inscription."
+msgstr ""
+"Si c'est non coché, cela indique qu'il y a eu une erreur dans le processus "
+"de dés-inscription."
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.mass_mailing.list,not_cross_unsubscriptable:0
@@ -173,7 +180,8 @@ msgstr "Est abonné"
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
 msgid "Is there any other mailing list you want to leave?"
-msgstr "Est-ce qu'il y a une autre liste de publipostage que vous voulez quitter?"
+msgstr ""
+"Est-ce qu'il y a une autre liste de publipostage que vous voulez quitter?"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.success

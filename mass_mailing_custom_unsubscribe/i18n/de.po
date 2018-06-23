@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_custom_unsubscribe
-# 
+#
 # Translators:
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2015
@@ -20,11 +20,12 @@ msgstr ""
 "POT-Creation-Date: 2017-04-30 10:21+0000\n"
 "PO-Revision-Date: 2017-04-19 11:44+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-social-8-0/language/"
+"de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_custom_unsubscribe
@@ -37,13 +38,16 @@ msgstr "Möchten Sie vor dem Verlassen noch etwas mitteilen?"
 msgid ""
 "But before continuing, could you please tell us why do you want to "
 "unsubscribe?"
-msgstr "Wären Sie so nett, uns vor Ihrem nächsten Schritt noch mitzuteilen, warum Sie sich abmelden möchten?"
+msgstr ""
+"Wären Sie so nett, uns vor Ihrem nächsten Schritt noch mitzuteilen, warum "
+"Sie sich abmelden möchten?"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,details_required:0
 #: help:mail.unsubscription.reason,details_required:0
 msgid "Check to ask for more details when this reason is selected."
-msgstr "Anwählen, wenn bei dieser Begründung weitere Details erfragt werden sollen."
+msgstr ""
+"Anwählen, wenn bei dieser Begründung weitere Details erfragt werden sollen."
 
 #. module: mass_mailing_custom_unsubscribe
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_mail.py:46
@@ -131,7 +135,10 @@ msgstr "Hallo,"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Beinhaltet die Dialogzusammenfassung (Anzahl Mitteilungen, ...). Diese Zusammenfassung liegt in HTML vor, um direkt in Kanban-Ansichten verwendet werden zu können."
+msgstr ""
+"Beinhaltet die Dialogzusammenfassung (Anzahl Mitteilungen, ...). Diese "
+"Zusammenfassung liegt in HTML vor, um direkt in Kanban-Ansichten verwendet "
+"werden zu können."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
@@ -163,7 +170,9 @@ msgstr "Wenn angehakt, erfordern neue Mitteilungen Ihre Aufmerksamkeit."
 msgid ""
 "If this is unchecked, it indicates some failure happened in the "
 "unsubscription process."
-msgstr "Wenn dies nicht angehakt ist, zeigt dies auf, dass der Abwahlvorgang gescheitert ist."
+msgstr ""
+"Wenn dies nicht angehakt ist, zeigt dies auf, dass der Abwahlvorgang "
+"gescheitert ist."
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.mass_mailing.list,not_cross_unsubscriptable:0
@@ -171,7 +180,10 @@ msgid ""
 "If you mark this field, this list won't be shown when unsubscribing from "
 "other mailing list, in the section: 'Is there any other mailing list you "
 "want to leave?'"
-msgstr "Wenn Sie dieses Feld anwählen, wird diese Liste, bei der Frage \"Gibt es eine andere abzumeldende Liste?\" nicht gezeigt, wenn das Abo einer anderen Liste beendet wird."
+msgstr ""
+"Wenn Sie dieses Feld anwählen, wird diese Liste, bei der Frage \"Gibt es "
+"eine andere abzumeldende Liste?\" nicht gezeigt, wenn das Abo einer anderen "
+"Liste beendet wird."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_is_follower:0
@@ -193,7 +205,9 @@ msgstr "Gibt es sonst noch etwas, was Sie uns mitteilen möchten?"
 msgid ""
 "It's sad to see you go, but if you love\n"
 "                        something, let it go."
-msgstr "Es ist schade, dass Sie gehen, aber was\nman liebt, soll man nicht halten."
+msgstr ""
+"Es ist schade, dass Sie gehen, aber was\n"
+"man liebt, soll man nicht halten."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_last_post:0
@@ -316,7 +330,9 @@ msgstr "Vielen Dank für Ihre Geduld."
 msgid ""
 "There was an error processing your unsubscription\n"
 "                        request."
-msgstr "Bei Bearbeitung Ihrer Abmeldung ist ein Fehler\naufgetreten."
+msgstr ""
+"Bei Bearbeitung Ihrer Abmeldung ist ein Fehler\n"
+"aufgetreten."
 
 #. module: mass_mailing_custom_unsubscribe
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:59
@@ -356,7 +372,10 @@ msgstr "Abmeldungen"
 msgid ""
 "We apologize for the inconvenience. You can contact us\n"
 "                        and we will handle your unsubscription manually."
-msgstr "Wir entschuldigen uns für Unanhemlichkeiten- Sie können\nsich gerne an uns wenden und wir nehmen die Abmeldung\nmanuell vor."
+msgstr ""
+"Wir entschuldigen uns für Unanhemlichkeiten- Sie können\n"
+"sich gerne an uns wenden und wir nehmen die Abmeldung\n"
+"manuell vor."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,website_message_ids:0
@@ -393,7 +412,9 @@ msgstr "Sie möchten sich aus allen Mailverteilern abmelden"
 msgid ""
 "You were successfully unsubscribed from our\n"
 "                        mailing list."
-msgstr "Sie wurden erfolgreich aus unserem Mailverteiler\nabgemeldet."
+msgstr ""
+"Sie wurden erfolgreich aus unserem Mailverteiler\n"
+"abgemeldet."
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form

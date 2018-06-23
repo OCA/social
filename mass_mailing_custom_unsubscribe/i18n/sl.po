@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_custom_unsubscribe
-# 
+#
 # Translators:
 # Hotellook, 2014
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2016
@@ -18,12 +18,14 @@ msgstr ""
 "POT-Creation-Date: 2016-08-17 02:42+0000\n"
 "PO-Revision-Date: 2016-08-16 07:17+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/"
+"language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
@@ -41,7 +43,8 @@ msgstr "Nam lahko pred nadaljevanjem podate razlog za vašo odjavo?"
 #: help:mail.unsubscription,details_required:0
 #: help:mail.unsubscription.reason,details_required:0
 msgid "Check to ask for more details when this reason is selected."
-msgstr "Označite, da bi zahtevali več podrobnosti v primeru izbire tega razloga."
+msgstr ""
+"Označite, da bi zahtevali več podrobnosti v primeru izbire tega razloga."
 
 #. module: mass_mailing_custom_unsubscribe
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_mail.py:46
@@ -129,7 +132,9 @@ msgstr "Pozdravljeni."
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Povzetek (število sporočil,..) v html formatu, da se lahko neposredno vstavi v poglede tipa kanban."
+msgstr ""
+"Povzetek (število sporočil,..) v html formatu, da se lahko neposredno vstavi "
+"v poglede tipa kanban."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
@@ -161,7 +166,9 @@ msgstr "Če označeno, zahtevajo nova sporočila vašo pozornost."
 msgid ""
 "If this is unchecked, it indicates some failure happened in the "
 "unsubscription process."
-msgstr "Če ni označeno, kaže, da je prišlo pri proceduri odjavljanja do nekakšne napake."
+msgstr ""
+"Če ni označeno, kaže, da je prišlo pri proceduri odjavljanja do nekakšne "
+"napake."
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.mass_mailing.list,not_cross_unsubscriptable:0
@@ -169,7 +176,10 @@ msgid ""
 "If you mark this field, this list won't be shown when unsubscribing from "
 "other mailing list, in the section: 'Is there any other mailing list you "
 "want to leave?'"
-msgstr "Če označite to polje, ta seznam ne bo prikazan pri odjavljanju iz drugih poštnih seznamov v odseku: 'Se želite odjaviti še iz katerega poštnega seznama?'"
+msgstr ""
+"Če označite to polje, ta seznam ne bo prikazan pri odjavljanju iz drugih "
+"poštnih seznamov v odseku: 'Se želite odjaviti še iz katerega poštnega "
+"seznama?'"
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_is_follower:0
@@ -191,7 +201,9 @@ msgstr "Nam želite še kaj povedati?"
 msgid ""
 "It's sad to see you go, but if you love\n"
 "                        something, let it go."
-msgstr "Hudo nam je, da odhajate, a ko si nekaj želiš,\n                        temu slediš."
+msgstr ""
+"Hudo nam je, da odhajate, a ko si nekaj želiš,\n"
+"                        temu slediš."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_last_post:0
@@ -314,7 +326,9 @@ msgstr "Hvala za potrpežljivost."
 msgid ""
 "There was an error processing your unsubscription\n"
 "                        request."
-msgstr "V postopku odjavljanja je prišlo do\n                        napake."
+msgstr ""
+"V postopku odjavljanja je prišlo do\n"
+"                        napake."
 
 #. module: mass_mailing_custom_unsubscribe
 #: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:59
@@ -354,7 +368,9 @@ msgstr "Odjave"
 msgid ""
 "We apologize for the inconvenience. You can contact us\n"
 "                        and we will handle your unsubscription manually."
-msgstr "Opravičujemo se za nevšečnosti. Vzpostavite stik z nami,\n                        da odjavo uredimo 'ročno'."
+msgstr ""
+"Opravičujemo se za nevšečnosti. Vzpostavite stik z nami,\n"
+"                        da odjavo uredimo 'ročno'."
 
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,website_message_ids:0
@@ -391,7 +407,9 @@ msgstr "Poskušate se odjaviti iz vseh seznamov masovne pošte."
 msgid ""
 "You were successfully unsubscribed from our\n"
 "                        mailing list."
-msgstr "Uspešno ste se odjavili iz našega\n                        poštnega seznama."
+msgstr ""
+"Uspešno ste se odjavili iz našega\n"
+"                        poštnega seznama."
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
