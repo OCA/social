@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_forward
-# 
+#
 # Translators:
 # Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2014
@@ -13,11 +13,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-18 07:45+0000\n"
 "PO-Revision-Date: 2017-02-21 14:26+0000\n"
 "Last-Translator: Hosni Hadj Taher <hajhasni@hotmail.com>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/fr/)\n"
+"Language-Team: French (http://www.transifex.com/oca/OCA-social-8-0/language/"
+"fr/)\n"
+"Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mail_forward
@@ -47,7 +48,9 @@ msgstr "Autorisé le transfert des courriels pour ce modèle"
 msgid ""
 "Answers do not go in the original document' discussion thread. This has an "
 "impact on the generated message-id."
-msgstr "Les réponses ne vont pas dans le fil de discussion du document original. Ceci a un impact sur le message-id généré."
+msgstr ""
+"Les réponses ne vont pas dans le fil de discussion du document original. "
+"Ceci a un impact sur le message-id généré."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,attachment_ids:0
@@ -59,9 +62,13 @@ msgstr "Pièces jointes"
 msgid ""
 "Attachments will be assigned to the chosen destination object and you will "
 "be able to pick them from its 'Attachments' button, but they will not be "
-"there for the current object if any. In any case you can always open it from"
-" the message itself."
-msgstr "Les pièces jointes seront affectées à l'objet de destination choisi et vous pourrez les sélectionner à partir de son bouton 'Pièces jointes', mais elles ne seront pas disponibles pour l'objet courant, le cas échéant. Dans tous les cas, vous pouvez toujours l'ouvrir à partir du message lui-même."
+"there for the current object if any. In any case you can always open it from "
+"the message itself."
+msgstr ""
+"Les pièces jointes seront affectées à l'objet de destination choisi et vous "
+"pourrez les sélectionner à partir de son bouton 'Pièces jointes', mais elles "
+"ne seront pas disponibles pour l'objet courant, le cas échéant. Dans tous "
+"les cas, vous pouvez toujours l'ouvrir à partir du message lui-même."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,author_id:0
@@ -71,9 +78,11 @@ msgstr "Auteur"
 #. module: mail_forward
 #: help:mail_forward.compose_message,author_id:0
 msgid ""
-"Author of the message. If not set, email_from may hold an email address that"
-" did not match any partner."
-msgstr "Auteur du message. S'il n'est pas indiqué, email_from peux contenir une adresse électronique ne correspondant à aucun partenaire."
+"Author of the message. If not set, email_from may hold an email address that "
+"did not match any partner."
+msgstr ""
+"Auteur du message. S'il n'est pas indiqué, email_from peux contenir une "
+"adresse électronique ne correspondant à aucun partenaire."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,author_avatar:0
@@ -120,7 +129,8 @@ msgstr "Créée le"
 #. module: mail_forward
 #: help:mail_forward.compose_message,starred:0
 msgid "Current user has a starred notification linked to this message"
-msgstr "L'utilisateur actuel a une notification \"favori\" associée à ce message"
+msgstr ""
+"L'utilisateur actuel a une notification \"favori\" associée à ce message"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,to_read:0
@@ -154,7 +164,9 @@ msgstr "Nom à afficher"
 msgid ""
 "Email address of the sender. This field is set when no matching partner is "
 "found for incoming emails."
-msgstr "Adresse courriel de l'expéditeur. Ce champ est défini dans les courriels entrants quand aucun partenaire ne correspond."
+msgstr ""
+"Adresse courriel de l'expéditeur. Ce champ est défini dans les courriels "
+"entrants quand aucun partenaire ne correspond."
 
 #. module: mail_forward
 #. openerp-web
@@ -239,7 +251,10 @@ msgstr "Nom de l'enregistrement du message"
 msgid ""
 "Message type: email for email message, notification for system message, "
 "comment for other messages such as user replies"
-msgstr "Type de message : \"Courriel\" pour les courriers électroniques, \"Notification\" pour les messages du système, \"Commentaire\" pour les autres messages tels que les réponses des utilisateurs"
+msgstr ""
+"Type de message : \"Courriel\" pour les courriers électroniques, "
+"\"Notification\" pour les messages du système, \"Commentaire\" pour les "
+"autres messages tels que les réponses des utilisateurs"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,message_id:0
@@ -310,7 +325,9 @@ msgstr "Message parent"
 #: help:mail_forward.compose_message,notified_partner_ids:0
 msgid ""
 "Partners that have a notification pushing this message in their mailboxes"
-msgstr "Partenaires ayant une notification qui publie ce message dans leur courrier entrant"
+msgstr ""
+"Partenaires ayant une notification qui publie ce message dans leur courrier "
+"entrant"
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,res_id:0
@@ -327,7 +344,9 @@ msgstr "Modèle de document concerné"
 msgid ""
 "Reply email address. Setting the reply_to bypasses the automatic thread "
 "creation."
-msgstr "Adresse courriel de réponse. Définir le champ reply_to contourne la création automatique de fil."
+msgstr ""
+"Adresse courriel de réponse. Définir le champ reply_to contourne la création "
+"automatique de fil."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,reply_to:0
@@ -361,7 +380,9 @@ msgstr "Sous-type"
 msgid ""
 "Technical field holding the message notifications. Use notified_partner_ids "
 "to access notified partners."
-msgstr "Champ technique contenant les notifications du message. Utiliser notified_partner_ids pour accéder aux partenaires notifiés."
+msgstr ""
+"Champ technique contenant les notifications du message. Utiliser "
+"notified_partner_ids pour accéder aux partenaires notifiés."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,to_read:0
@@ -411,7 +432,10 @@ msgid ""
 "{\n"
 "                    'invisible': [('destination_object_id', '=', False)]\n"
 "                }"
-msgstr "{\n'invisible': [('destination_objet_id', '=', Faux)]\n}"
+msgstr ""
+"{\n"
+"'invisible': [('destination_objet_id', '=', Faux)]\n"
+"}"
 
 #. module: mail_forward
 #: view:mail_forward.compose_message:mail_forward.compose_form
@@ -419,4 +443,7 @@ msgid ""
 "{\n"
 "                    'required': [('destination_object_id', '=', False)]\n"
 "                }"
-msgstr "{\n'Champs obligatoires': [('destination_object_id', '=', Faux)]\n}"
+msgstr ""
+"{\n"
+"'Champs obligatoires': [('destination_object_id', '=', Faux)]\n"
+"}"

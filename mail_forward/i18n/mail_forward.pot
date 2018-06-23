@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_forward
+#	* mail_forward
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: social (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2017-01-13 09:29+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Dutch (http://www.transifex.com/oca/OCA-social-8-0/language/"
-"nl/)\n"
-"Language: nl\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: mail_forward
 #. openerp-web
@@ -42,9 +37,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,no_auto_thread:0
-msgid ""
-"Answers do not go in the original document' discussion thread. This has an "
-"impact on the generated message-id."
+msgid "Answers do not go in the original document' discussion thread. This has an impact on the generated message-id."
 msgstr ""
 
 #. module: mail_forward
@@ -54,11 +47,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,move_attachments:0
-msgid ""
-"Attachments will be assigned to the chosen destination object and you will "
-"be able to pick them from its 'Attachments' button, but they will not be "
-"there for the current object if any. In any case you can always open it from "
-"the message itself."
+msgid "Attachments will be assigned to the chosen destination object and you will be able to pick them from its 'Attachments' button, but they will not be there for the current object if any. In any case you can always open it from the message itself."
 msgstr ""
 
 #. module: mail_forward
@@ -68,9 +57,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,author_id:0
-msgid ""
-"Author of the message. If not set, email_from may hold an email address that "
-"did not match any partner."
+msgid "Author of the message. If not set, email_from may hold an email address that did not match any partner."
 msgstr ""
 
 #. module: mail_forward
@@ -108,12 +95,12 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_uid:0
 msgid "Created by"
-msgstr "Aangemaakt door"
+msgstr ""
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,create_date:0
 msgid "Created on"
-msgstr "Aangemaakt op"
+msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,starred:0
@@ -128,7 +115,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,date:0
 msgid "Date"
-msgstr "Datum"
+msgstr ""
 
 #. module: mail_forward
 #. openerp-web
@@ -145,13 +132,11 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,display_name:0
 msgid "Display Name"
-msgstr "Te tonen naam"
+msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,email_from:0
-msgid ""
-"Email address of the sender. This field is set when no matching partner is "
-"found for incoming emails."
+msgid "Email address of the sender. This field is set when no matching partner is found for incoming emails."
 msgstr ""
 
 #. module: mail_forward
@@ -195,7 +180,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,parent_id:0
@@ -205,17 +190,17 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,__last_update:0
 msgid "Last Modified on"
-msgstr "Laatst bijgewerkt op"
+msgstr ""
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_uid:0
 msgid "Last Updated by"
-msgstr "Laatst bijgewerkt door"
+msgstr ""
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,write_date:0
 msgid "Last Updated on"
-msgstr "Laatst bijgewerkt op"
+msgstr ""
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,is_log:0
@@ -234,9 +219,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,type:0
-msgid ""
-"Message type: email for email message, notification for system message, "
-"comment for other messages such as user replies"
+msgid "Message type: email for email message, notification for system message, comment for other messages such as user replies"
 msgstr ""
 
 #. module: mail_forward
@@ -306,8 +289,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,notified_partner_ids:0
-msgid ""
-"Partners that have a notification pushing this message in their mailboxes"
+msgid "Partners that have a notification pushing this message in their mailboxes"
 msgstr ""
 
 #. module: mail_forward
@@ -322,9 +304,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,reply_to:0
-msgid ""
-"Reply email address. Setting the reply_to bypasses the automatic thread "
-"creation."
+msgid "Reply email address. Setting the reply_to bypasses the automatic thread creation."
 msgstr ""
 
 #. module: mail_forward
@@ -356,9 +336,7 @@ msgstr ""
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,notification_ids:0
-msgid ""
-"Technical field holding the message notifications. Use notified_partner_ids "
-"to access notified partners."
+msgid "Technical field holding the message notifications. Use notified_partner_ids to access notified partners."
 msgstr ""
 
 #. module: mail_forward
@@ -376,7 +354,7 @@ msgstr ""
 #. module: mail_forward
 #: field:mail_forward.compose_message,type:0
 msgid "Type"
-msgstr "Type"
+msgstr ""
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,use_active_domain:0
@@ -405,16 +383,15 @@ msgstr ""
 
 #. module: mail_forward
 #: view:mail_forward.compose_message:mail_forward.compose_form
-msgid ""
-"{\n"
+msgid "{\n"
 "                    'invisible': [('destination_object_id', '=', False)]\n"
 "                }"
 msgstr ""
 
 #. module: mail_forward
 #: view:mail_forward.compose_message:mail_forward.compose_form
-msgid ""
-"{\n"
+msgid "{\n"
 "                    'required': [('destination_object_id', '=', False)]\n"
 "                }"
 msgstr ""
+

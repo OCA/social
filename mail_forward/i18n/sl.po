@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_forward
-# 
+#
 # Translators:
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2010,2012-2014
 # Hotellook, 2014
@@ -16,12 +16,14 @@ msgstr ""
 "POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2016-05-01 05:11+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/"
+"language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: mail_forward
 #. openerp-web
@@ -50,7 +52,9 @@ msgstr "Dovoli posredovanje pošte na ta model."
 msgid ""
 "Answers do not go in the original document' discussion thread. This has an "
 "impact on the generated message-id."
-msgstr "Odgovori ne gredo v nit razprave izvornega dokumenta. To vpliva na ustvarjeni ID sporočila."
+msgstr ""
+"Odgovori ne gredo v nit razprave izvornega dokumenta. To vpliva na "
+"ustvarjeni ID sporočila."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,attachment_ids:0
@@ -62,9 +66,12 @@ msgstr "Priponke"
 msgid ""
 "Attachments will be assigned to the chosen destination object and you will "
 "be able to pick them from its 'Attachments' button, but they will not be "
-"there for the current object if any. In any case you can always open it from"
-" the message itself."
-msgstr "Priponke bodo dodeljene izbranemu ciljnemu objektu, da jih boste lahko izbirali preko gumba 'Priponke', a ne bo jih na voljo za trenutni (če kateri) objekt. V vsakem primeru pa jih lahko odprete iz samega sporočila."
+"there for the current object if any. In any case you can always open it from "
+"the message itself."
+msgstr ""
+"Priponke bodo dodeljene izbranemu ciljnemu objektu, da jih boste lahko "
+"izbirali preko gumba 'Priponke', a ne bo jih na voljo za trenutni (če "
+"kateri) objekt. V vsakem primeru pa jih lahko odprete iz samega sporočila."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,author_id:0
@@ -74,9 +81,11 @@ msgstr "Avtor"
 #. module: mail_forward
 #: help:mail_forward.compose_message,author_id:0
 msgid ""
-"Author of the message. If not set, email_from may hold an email address that"
-" did not match any partner."
-msgstr "Avtor sporočila. Če ni nastavljen, lahko email_from vsebuje e-poštni naslov, ki se ne ujema z nobenim partnerjem."
+"Author of the message. If not set, email_from may hold an email address that "
+"did not match any partner."
+msgstr ""
+"Avtor sporočila. Če ni nastavljen, lahko email_from vsebuje e-poštni naslov, "
+"ki se ne ujema z nobenim partnerjem."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,author_avatar:0
@@ -123,7 +132,8 @@ msgstr "Ustvarjeno"
 #. module: mail_forward
 #: help:mail_forward.compose_message,starred:0
 msgid "Current user has a starred notification linked to this message"
-msgstr "Trenutni uporabnik ima z zvezdico označeno obvestilo vezano na to sporočilo"
+msgstr ""
+"Trenutni uporabnik ima z zvezdico označeno obvestilo vezano na to sporočilo"
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,to_read:0
@@ -157,7 +167,9 @@ msgstr "Prikazni naziv"
 msgid ""
 "Email address of the sender. This field is set when no matching partner is "
 "found for incoming emails."
-msgstr "E-poštni naslov pošiljatelja. To polje se nastavi, kadar ni ujemajočega se partnerja za vhodno e-pošto."
+msgstr ""
+"E-poštni naslov pošiljatelja. To polje se nastavi, kadar ni ujemajočega se "
+"partnerja za vhodno e-pošto."
 
 #. module: mail_forward
 #. openerp-web
@@ -242,7 +254,9 @@ msgstr "Naziv zapisa sporočila"
 msgid ""
 "Message type: email for email message, notification for system message, "
 "comment for other messages such as user replies"
-msgstr "Tip sporočila: e-pošta za e-poštno sporočilo, obvestilo za sistemsko obvestilo, komentar za druga sporočila, kot npr. odgovori uporabnika."
+msgstr ""
+"Tip sporočila: e-pošta za e-poštno sporočilo, obvestilo za sistemsko "
+"obvestilo, komentar za druga sporočila, kot npr. odgovori uporabnika."
 
 #. module: mail_forward
 #: help:mail_forward.compose_message,message_id:0
@@ -330,7 +344,9 @@ msgstr "Model povezanega dokumenta"
 msgid ""
 "Reply email address. Setting the reply_to bypasses the automatic thread "
 "creation."
-msgstr "E-poštni naslov za odgovor. Nastavitev reply_to zaobide samodejno ustvarjanje niti."
+msgstr ""
+"E-poštni naslov za odgovor. Nastavitev reply_to zaobide samodejno "
+"ustvarjanje niti."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,reply_to:0
@@ -364,7 +380,9 @@ msgstr "Podtip"
 msgid ""
 "Technical field holding the message notifications. Use notified_partner_ids "
 "to access notified partners."
-msgstr "Tehnično polje, ki vsebuje sporočilna obvestila. Uporabi notified_partner_ids za dostop do obveščenih partnerjev."
+msgstr ""
+"Tehnično polje, ki vsebuje sporočilna obvestila. Uporabi "
+"notified_partner_ids za dostop do obveščenih partnerjev."
 
 #. module: mail_forward
 #: field:mail_forward.compose_message,to_read:0
@@ -414,7 +432,10 @@ msgid ""
 "{\n"
 "                    'invisible': [('destination_object_id', '=', False)]\n"
 "                }"
-msgstr "{\n                    'invisible': [('destination_object_id', '=', False)]\n                }"
+msgstr ""
+"{\n"
+"                    'invisible': [('destination_object_id', '=', False)]\n"
+"                }"
 
 #. module: mail_forward
 #: view:mail_forward.compose_message:mail_forward.compose_form
@@ -422,4 +443,7 @@ msgid ""
 "{\n"
 "                    'required': [('destination_object_id', '=', False)]\n"
 "                }"
-msgstr "{\n                    'required': [('destination_object_id', '=', False)]\n                }"
+msgstr ""
+"{\n"
+"                    'required': [('destination_object_id', '=', False)]\n"
+"                }"
