@@ -6,6 +6,7 @@
             <script type="text/javascript" src="/mail_activity/static/src/js/kanban_activity.js"></script>
             <script type="text/javascript" src="/mail_activity/static/src/js/systray.js"></script>
             <link rel="stylesheet" href="/mail_activity/static/src/css/mail_activity.css"/>
+            <link rel="stylesheet" href="/mail_activity/static/src/less/mail_activity.less" type="text/less"/>
             <link rel="stylesheet" href="/mail_activity/static/src/less/kanban_activity.less" type="text/less"/>
             <link rel="stylesheet" href="/mail_activity/static/src/less/systray.less" type="text/less"/>
         </xpath>
