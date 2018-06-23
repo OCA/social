@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mass_mailing_list_dynamic
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
 "PO-Revision-Date: 2018-02-26 01:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
-"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/teams/23907/es_CR/)\n"
+"Language-Team: Spanish (Costa Rica) (https://www.transifex.com/oca/"
+"teams/23907/es_CR/)\n"
+"Language: es_CR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_CR\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_list_dynamic
@@ -28,8 +29,8 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.ui.view,arch_db:mass_mailing_list_dynamic.view_mail_mass_mailing_list_form
 msgid ""
-"<i class=\"fa fa-info-circle\"/> You cannot make manual editions of contacts"
-" in fully synchronized lists."
+"<i class=\"fa fa-info-circle\"/> You cannot make manual editions of contacts "
+"in fully synchronized lists."
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
@@ -43,7 +44,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
-#: code:addons/mass_mailing_list_dynamic/models/mail_mass_mailing_contact.py:18
+#: code:addons/mass_mailing_list_dynamic/models/mail_mass_mailing_contact.py:19
 #, python-format
 msgid ""
 "Cannot edit manually contacts in a fully synchronized list. Change its sync "
@@ -53,8 +54,7 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_sync_method
 msgid ""
-"Choose the syncronization method for this list if you want to make it "
-"dynamic"
+"Choose the syncronization method for this list if you want to make it dynamic"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
@@ -93,9 +93,19 @@ msgid "Filter to load"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,help:mass_mailing_list_dynamic.field_mail_mass_mailing_list_is_synced
+msgid "Helper field to make the user aware of unsynced changes"
+msgstr ""
+
+#. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter_id
 msgid "ID"
 msgstr "ID"
+
+#. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_list_is_synced
+msgid "Is synced"
+msgstr ""
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mail_mass_mailing_load_filter___last_update
