@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_digest
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2018
 msgid ""
@@ -12,11 +12,24 @@ msgstr ""
 "PO-Revision-Date: 2018-01-16 03:47+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
 "Language-Team: Vietnamese (https://www.transifex.com/oca/teams/23907/vi/)\n"
+"Language: vi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: vi\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: mail_digest
+#: model:ir.ui.view,arch_db:mail_digest.default_digest_tmpl
+msgid "Changed values"
+msgstr ""
+
+#. module: mail_digest
+#: model:ir.model.fields,help:mail_digest.field_mail_digest_sanitize_msg_body
+msgid ""
+"Collected messages can have different styles applied on each element. If "
+"this flag is enabled (default) each message content will be sanitized before "
+"generating the email."
+msgstr ""
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
@@ -41,7 +54,7 @@ msgid "Daily"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:163
+#: code:addons/mail_digest/models/mail_digest.py:183
 #, python-format
 msgid "Daily update"
 msgstr ""
@@ -80,7 +93,7 @@ msgstr ""
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.default_digest_tmpl
-msgid "Hello,"
+msgid "Hello"
 msgstr ""
 
 #. module: mail_digest
@@ -177,6 +190,11 @@ msgid "Qweb mail template"
 msgstr ""
 
 #. module: mail_digest
+#: model:ir.model.fields,field_description:mail_digest.field_mail_digest_sanitize_msg_body
+msgid "Sanitize message body"
+msgstr ""
+
+#. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_state
 msgid "Status"
 msgstr ""
@@ -192,7 +210,7 @@ msgid "Weekly"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:165
+#: code:addons/mail_digest/models/mail_digest.py:185
 #, python-format
 msgid "Weekly update"
 msgstr ""
@@ -203,7 +221,7 @@ msgid "You can have only one configuration per subtype!"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:188
+#: code:addons/mail_digest/models/mail_digest.py:208
 #, python-format
 msgid "You must pass a template or set one on the digest record."
 msgstr ""
