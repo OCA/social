@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_follower_custom_notification
-# 
+#
 # Translators:
 # Antonio Trueba, 2016
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2012,2014
@@ -18,12 +18,14 @@ msgstr ""
 "POT-Creation-Date: 2016-04-30 02:47+0000\n"
 "PO-Revision-Date: 2016-04-30 06:12+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-social-8-0/"
+"language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: mail_follower_custom_notification
 #: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
@@ -45,14 +47,18 @@ msgstr "Preklic"
 msgid ""
 "Check this to have notifications generated and sent via email about own "
 "messages"
-msgstr "Označite, če želite, da se obvestila o lastnih sporočilih ustvarjajo in pošiljajo po e-pošti"
+msgstr ""
+"Označite, če želite, da se obvestila o lastnih sporočilih ustvarjajo in "
+"pošiljajo po e-pošti"
 
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_model_ids:0
 msgid ""
 "Choose for which models the custom configuration applies. This is only "
 "necessary if your subtype doesn't set a model itself"
-msgstr "Izberite na katere modele se nastavitve po meri nanašajo. To je potrebno le, če podtip sam ne nastavi modela"
+msgstr ""
+"Izberite na katere modele se nastavitve po meri nanašajo. To je potrebno le, "
+"če podtip sam ne nastavi modela"
 
 #. module: mail_follower_custom_notification
 #: field:mail.subtype.assign.custom.notifications,create_uid:0
@@ -149,10 +155,13 @@ msgstr "Zadnjič posodobljeno"
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_mail:0
 msgid ""
-"Leave empty to use the on the partner's form, set to \"Force yes\" to always"
-" send messages of this type via email, and \"Force no\" to never send "
+"Leave empty to use the on the partner's form, set to \"Force yes\" to always "
+"send messages of this type via email, and \"Force no\" to never send "
 "messages of type via email"
-msgstr "Pustite prazno za uporabo na obrazcu partnerja, nastavite \"Vsili da\", da bi vedno preko e-pošte pošiljali sporočila tega tipa in \"Vsili ne\", da ne bi nikoli pošiljali sporočil tega tipa preko e-pošte"
+msgstr ""
+"Pustite prazno za uporabo na obrazcu partnerja, nastavite \"Vsili da\", da "
+"bi vedno preko e-pošte pošiljali sporočila tega tipa in \"Vsili ne\", da ne "
+"bi nikoli pošiljali sporočil tega tipa preko e-pošte"
 
 #. module: mail_follower_custom_notification
 #. openerp-web

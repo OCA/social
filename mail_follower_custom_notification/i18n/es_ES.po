@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_follower_custom_notification
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-10 11:32+0000\n"
 "PO-Revision-Date: 2017-02-16 15:57+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-social-8-0/language/es_ES/)\n"
+"Language-Team: Spanish (Spain) (http://www.transifex.com/oca/OCA-social-8-0/"
+"language/es_ES/)\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es_ES\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_follower_custom_notification
@@ -141,8 +142,8 @@ msgstr "Última actualización en"
 #. module: mail_follower_custom_notification
 #: help:mail.message.subtype,custom_notification_mail:0
 msgid ""
-"Leave empty to use the on the partner's form, set to \"Force yes\" to always"
-" send messages of this type via email, and \"Force no\" to never send "
+"Leave empty to use the on the partner's form, set to \"Force yes\" to always "
+"send messages of this type via email, and \"Force no\" to never send "
 "messages of type via email"
 msgstr ""
 
