@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * mail_tracking_mass_mailing
+#	* mail_tracking_mass_mailing
 #
-# Translators:
-# Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-11 13:17+0000\n"
-"PO-Revision-Date: 2017-10-11 13:17+0000\n"
-"Last-Translator: Jarmo Kortetjärvi <jarmo.kortetjarvi@gmail.com>, 2017\n"
-"Language-Team: Finnish (https://www.transifex.com/oca/teams/23907/fi/)\n"
-"Language: fi\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: mail_tracking_mass_mailing
 #: field:mail.mass_mailing,avoid_resend:0
@@ -31,7 +26,7 @@ msgstr ""
 #. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "Country"
-msgstr "Maa"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: field:mail.mail,path:0
@@ -41,18 +36,18 @@ msgstr ""
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
 msgid "Email Statistics"
-msgstr "Sähköpostistatistiikka"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: view:mail.mass_mailing.contact:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
 #: field:mail.mass_mailing.contact,email_bounced:0
 msgid "Email bounced"
-msgstr "Sähköposti palautunut"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: field:mail.mass_mailing.contact,email_score:0
 msgid "Email score"
-msgstr "Sähköpostipisteet"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
@@ -93,54 +88,53 @@ msgstr ""
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
 msgid "MailTracking email"
-msgstr "MailTracking sähköposti"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_event
 msgid "MailTracking event"
-msgstr "MailTracking tapahtuma"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing
 msgid "Mass Mailing"
-msgstr "Massapostitus"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
 msgid "Mass Mailing Contact"
-msgstr "Massapostituksen kontakti"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: field:mail.tracking.email,mass_mailing_id:0
 #: field:mail.tracking.event,mass_mailing_id:0
 msgid "Mass mailing"
-msgstr "Massapostitus"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
 msgid "Outgoing Mails"
-msgstr "Lähtevät postit"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: code:addons/mail_tracking_mass_mailing/models/mail_mass_mailing.py:28
 #, python-format
-msgid ""
-"There is no more recipients to send and 'Avoid resend' option is enabled"
+msgid "There is no more recipients to send and 'Avoid resend' option is enabled"
 msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 #: field:mail.mail.statistics,tracking_event_ids:0
 msgid "Tracking events"
-msgstr "Seurattavat tapahtumat"
+msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: help:mail.mail,path:0
-msgid ""
-"Used to display messages in a paragraph-based chatter using a unique path;"
+msgid "Used to display messages in a paragraph-based chatter using a unique path;"
 msgstr ""
 
 #. module: mail_tracking_mass_mailing
 #: view:mail.mail.statistics:mail_tracking_mass_mailing.view_mail_mail_statistics_form
 msgid "User agent"
-msgstr "User agent"
+msgstr ""
+
