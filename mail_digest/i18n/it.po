@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * mail_digest
-# 
+#
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2017
 # Giacomo <giacomo.spettoli@gmail.com>, 2017
@@ -14,10 +14,10 @@ msgstr ""
 "PO-Revision-Date: 2017-06-20 02:49+0000\n"
 "Last-Translator: Paolo Valier <paolo.valier@hotmail.it>, 2017\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: it\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_digest
@@ -38,7 +38,7 @@ msgid "Daily"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:112
+#: code:addons/mail_digest/models/mail_digest.py:117
 #, python-format
 msgid "Daily update"
 msgstr ""
@@ -169,7 +169,7 @@ msgid "Weekly"
 msgstr ""
 
 #. module: mail_digest
-#: code:addons/mail_digest/models/mail_digest.py:114
+#: code:addons/mail_digest/models/mail_digest.py:119
 #, python-format
 msgid "Weekly update"
 msgstr ""
