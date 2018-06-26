@@ -43,6 +43,7 @@ class MailActivity(models.Model):
                 event.write({'description': description})
         return res
 
+    @api.one
     def unlink_w_meeting(self):
         events = self.mapped('calendar_event_id')
         res = self.unlink()

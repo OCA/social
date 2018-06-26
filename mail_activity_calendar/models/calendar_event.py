@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-from openerp import api, models, fields, tools, _
+from openerp import api, models, fields
 
 
 class CalendarEvent(models.Model):
@@ -77,8 +77,9 @@ class CalendarEvent(models.Model):
     @api.multi
     def write(self, values):
         # compute duration, only if start and stop are modified
-        if not 'duration' in values and 'start' in values and 'stop' in values:
-            values['duration'] = self._get_duration(values['start'], values['stop'])
+        if 'duration' not in values and 'start' in values and 'stop' in values:
+            values['duration'] = self._get_duration(values['start'],
+                                                    values['stop'])
 
         self._sync_activities(values)
         return super(CalendarEvent, self).write(values)
@@ -103,7 +104,8 @@ class CalendarEvent(models.Model):
             if values.get('description'):
                 activity_values['note'] = values['description']
             if values.get('start'):
-                activity_values['date_deadline'] = fields.Datetime.from_string(values['start']).date()
+                activity_values['date_deadline'] = \
+                    fields.Datetime.from_string(values['start']).date()
             if values.get('user_id'):
                 activity_values['user_id'] = values['user_id']
             if activity_values.keys():

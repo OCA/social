@@ -4,6 +4,7 @@ odoo.define('calendar.Activity', function (require) {
 var Activity = require('mail.Activity');
 var Dialog = require('web.Dialog');
 var core = require('web.core');
+var Model = require('web.Model');
 var _t = core._t;
 
 Activity.include({
@@ -37,19 +38,21 @@ Activity.include({
         var activity_id = $(event.currentTarget).data('activity-id');
         var activity = _.find(this.activities, function (act) { return act.id === activity_id; });
         if (activity && activity.activity_category === 'meeting' && activity.calendar_event_id) {
+            var done = $.Deferred();
             Dialog.confirm(
                 self,
                 _t("The activity is linked to a meeting. Deleting it will remove the meeting as well. Do you want to proceed ?"), {
                     confirm_callback: function () {
-                        return self._rpc({
-                            model: 'mail.activity',
-                            method: 'unlink_w_meeting',
-                            args: [[activity_id]],
-                        })
-                        .then(self.field_manager.reload());
+                        new Model('mail.activity')
+                            .call('unlink_w_meeting', [[activity_id]])
+                            .then(function(res) {
+                                self.render_value();
+                                done.resolve(res);
+                            });
                     },
                 }
             );
+            return done;
         }
         else {
             return self._super(event, options);
