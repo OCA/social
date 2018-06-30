@@ -15,7 +15,7 @@ _logger = logging.getLogger(__name__)
 try:
     import sendgrid
 except ImportError:
-    _logger.error("ImportError raised while loading module.")
+    _logger.warning("ImportError raised while loading module.")
     _logger.debug("ImportError details:", exc_info=True)
 
 
