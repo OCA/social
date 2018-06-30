@@ -19,7 +19,7 @@ try:
     from sendgrid.helpers.mail import Email, Attachment, CustomArg, Content, \
         Personalization, Substitution, Mail, Header
 except ImportError:
-    _logger.error("ImportError raised while loading module.")
+    _logger.warning("ImportError raised while loading module.")
     _logger.debug("ImportError details:", exc_info=True)
 
 
