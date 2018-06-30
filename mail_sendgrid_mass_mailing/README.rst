@@ -63,6 +63,7 @@ Contributors
 ------------
 
 * Emanuel Cino <ecino@compassion.ch>
+* Isaac Gallart <igallart@puntsistemes.es>
 
 Do not contact contributors directly about support or help with technical issues.
 
