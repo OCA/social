@@ -30,16 +30,17 @@ class MailNotification(models.Model):
     def _notify_send(self, body, subject, recipients, **mail_values):
         footer_recipients = self.env.context.get(
             'notified_partners', recipients) or recipients
-        body += self.get_additional_footer(footer_recipients)
+        newbody = self.get_additional_footer(footer_recipients)
+        newbody += body
         return super(MailNotification, self).\
-            _notify_send(body, subject, recipients, **mail_values)
+            _notify_send(newbody, subject, recipients, **mail_values)
 
     @api.model
     def get_additional_footer(self, recipients):
         recipients_name = [
             recipient.name for recipient in recipients
         ]
-        additional_footer = u'<br /><small>%s%s.</small><br />' % \
+        additional_footer = u'<br /><b>%s%s.</b><br />' % \
                             (_('Also notified: '),
                              ', '.join(recipients_name))
         return additional_footer
