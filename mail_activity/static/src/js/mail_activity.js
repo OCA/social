@@ -1,6 +1,5 @@
 //-*- coding: utf-8 -*-
-//© 2017-2018 Therp BV <http://therp.nl>
-//License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+// Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 odoo.define('mail.Activity', function(require)
 {
@@ -13,7 +12,7 @@ odoo.define('mail.Activity', function(require)
     Chatter.include({
         init: function() {
             this._super.apply(this, arguments);
-            this.schedule_activity_btn = !!this.view.fields.activity_ids
+            this.schedule_activity_btn = !!this.view.fields.activity_ids;
         },
         start: function() {
             this.$('button.o_chatter_button_schedule_activity').click(
@@ -73,7 +72,7 @@ odoo.define('mail.Activity', function(require)
         render_value: function() {
             return $.when(
                 this._super.apply(this, arguments),
-                this._readActivities(),
+                this._readActivities()
             ).then(this.proxy('_render_value'));
         },
         _render_value: function() {
@@ -122,9 +121,9 @@ odoo.define('mail.Activity', function(require)
                     if(callback) {
                         callback();
                     }
-                    return self.field_manager.reload()
+                    return self.field_manager.reload();
                 },
-            })
+            });
         },
         // handlers
         _onEditActivity: function (event, options) {
