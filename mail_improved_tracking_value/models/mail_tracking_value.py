@@ -4,7 +4,7 @@
 
 import json
 
-from odoo import api, fields, models
+from openerp import api, fields, models
 
 
 class MailTrackingValue(models.Model):
