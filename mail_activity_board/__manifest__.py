@@ -1,25 +1,26 @@
-# Copyright 2018 SDi - David Juaneda
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
+# Copyright 2016 David Juaneda - <djuaneda@sdi.es>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     'name': 'Activities board',
-    'version': '11.0.1.0.1',
-    'category': 'Social Network',
-    'author': 'David Juaneda, '
-              'Javier Garcia, '
-              'Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/social',
     'summary': 'Add Activity Boards',
-    'license': 'GPL-3',
+    'version': '11.0.1.0.0',
+    'development_status': 'Beta',
+    'category': 'Uncategorized',
+    'website': 'https://github.com/OCA/social',
+    'author': 'SDi, David Juaneda, Odoo Community Association (OCA)',
+    'license': 'AGPL-3',
+    'application': False,
+    'installable': True,
     'depends': [
-        'crm',
         'mail',
         'board',
     ],
     'data': [
+        'views/templates.xml',
         'views/mail_activity_view.xml',
-        'views/crm_lead_opportunity_view.xml',
     ],
-    'qweb': [],
-    'demo': [],
-    'installable': True,
+    'qweb': [
+        'static/src/xml/inherit_chatter.xml',
+    ]
 }
+
