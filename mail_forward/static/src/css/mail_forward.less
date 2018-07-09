@@ -1,0 +1,24 @@
+/* (C) 2018 CompassionCH <www.compassion.ch>
+/* (C) 2014-2015 Grupo ESOC <www.grupoesoc.es>
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ */
+
+@mail-thread-icon-opacity: 0.6;
+
+.o_mail_thread {
+    .o_thread_message {
+        i.o_forward {
+            cursor: pointer;
+            opacity: 0;
+        }
+
+        &:hover, &.o_thread_selected_message {
+            i.o_forward {
+                opacity: @mail-thread-icon-opacity;
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+    }
+}

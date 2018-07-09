@@ -1,0 +1,168 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_forward
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-11-02 09:15+0000\n"
+"PO-Revision-Date: 2015-11-02 10:19+0100\n"
+"Last-Translator: Jairo Llopis <j.llopis@grupoesoc.es>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: es\n"
+"X-Generator: Poedit 1.8.5\n"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:25
+#, python-format
+msgid "(No subject)"
+msgstr "(Sin asunto)"
+
+#. module: mail_forward
+#: help:res.request.link,mail_forward_target:0
+msgid "Allow to forward mails to this model."
+msgstr "Permitir reenviar correos a este modelo."
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,move_attachments:0
+msgid "Attachments will be assigned to the chosen destination object and you will be able to pick them from its 'Attachments' button, but they will not be there for the current object if any. In any case you can always open it from the message itself."
+msgstr "Los adjuntos se asignarán al objeto de destino escogido y podrá escogerlos desde el botón 'Adjuntos', pero desaparecerán del objeto en el que estén actualmente (si están en alguno). En cualquier caso, siempre podrá abrirlos desde el propio mensaje."
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:47
+#, python-format
+msgid "CC: "
+msgstr "CC: "
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:38
+#, python-format
+msgid "Date: "
+msgstr "Fecha: "
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,destination_object_id:0
+msgid "Destination object"
+msgstr "Objeto de destino"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:16
+#, python-format
+msgid "FWD"
+msgstr "RV"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/xml/mail_forward.xml:10
+#, python-format
+msgid "Forward"
+msgstr "Reenviar"
+
+#. module: mail_forward
+#: model:ir.actions.act_window,name:mail_forward.compose_action
+msgid "Forward Email"
+msgstr "Reenviar correo electrónico"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:36
+#, python-format
+msgid "Forwarded message"
+msgstr "Mensaje reenviado"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:37
+#, python-format
+msgid "From: "
+msgstr "De: "
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: mail_forward
+#: field:res.request.link,mail_forward_target:0
+msgid "Mail forward target"
+msgstr "Objetivo al reenviar"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,move_attachments:0
+msgid "Move attachments"
+msgstr "Mover adjuntos"
+
+#. module: mail_forward
+#: help:mail_forward.compose_message,destination_object_id:0
+msgid "Object where the forwarded message will be attached"
+msgstr "Objeto al que se añadirá el mensaje reenviado"
+
+#. module: mail_forward
+#: field:mail_forward.compose_message,original_wizard_id:0
+msgid "Original message compose wizard"
+msgstr "Asistente original de composición de mensajes"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:41
+#, python-format
+msgid "Subject: "
+msgstr "Asunto: "
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/js/mail_forward.js:44
+#, python-format
+msgid "To: "
+msgstr "Para: "
+
+#. module: mail_forward
+#: view:mail_forward.compose_message:mail_forward.compose_form
+msgid ""
+"{\n"
+"                    'invisible': [('destination_object_id', '=', False)]\n"
+"                }"
+msgstr ""
+"{\n"
+"                    'invisible': [('destination_object_id', '=', False)]\n"
+"                }"
+
+#. module: mail_forward
+#: view:mail_forward.compose_message:mail_forward.compose_form
+msgid ""
+"{\n"
+"                    'required': [('destination_object_id', '=', False)]\n"
+"                }"
+msgstr ""
+"{\n"
+"                    'required': [('destination_object_id', '=', False)]\n"
+"                }"
