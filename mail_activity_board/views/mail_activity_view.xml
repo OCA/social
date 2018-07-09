@@ -55,17 +55,13 @@
         <field name="name">mail.activity.boards.view.tree</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
-        <field name="domain"></field>
+        <field name="domain">[]</field>
         <field name="arch" type="xml">
-
             <xpath expr="//tree" position="attributes">
-
                 <attribute name="default_order"></attribute>
-
                 <attribute name="decoration-danger">(date_deadline &lt; current_date)</attribute>
                 <attribute name="decoration-warning">(date_deadline == current_date)</attribute>
-                <attribute name="decoration-success">(date_deadline &gt; current_date) </attribute>
-
+                <attribute name="decoration-success">(date_deadline &gt; current_date)</attribute>
             </xpath>
 
         </field>
@@ -172,17 +168,9 @@
             <xpath expr='//search/group' position='inside'>
                 <filter string="User" context="{'group_by':'user_id'}"/>
                 <filter string="Origin" context="{'group_by': 'res_model_id'}"/>
-                <separator/>
-                <filter string="Deadline by Month" name="deadline_by_month"
-                            context="{'group_by':'date_deadline', 'default_order': 'date_deadline asc'}"
-                            help="Groups the activities by deadline for weeks."/>
-                <filter string="Deadline by Week" name="deadline_by_week"
-                        context="{'group_by':'date_deadline:week', 'default_order': 'date_deadline'}"
-                        help="Groups the activities by deadline for weeks."/>
-                <separator/>
             </xpath>
 
-        </field>q
+        </field>
     </record>
 
 
@@ -190,7 +178,7 @@
     ACTION
 -->
     <record model="ir.actions.act_window" id="open_boards_activities">
-        <field name="name">Activities:</field>
+        <field name="name">Activities</field>
         <field name="res_model">mail.activity</field>
         <field name="view_type">form</field>
         <field name="view_mode">kanban,form</field>
