@@ -15,11 +15,13 @@ msgstr ""
 
 #. module: mail_sendgrid
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_body_sendgrid
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_forward_compose_message_body_sendgrid
 msgid "Body sendgrid"
 msgstr ""
 
 #. module: mail_sendgrid
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_body_text
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_forward_compose_message_body_text
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_body_text
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_body_text
 msgid "Body text"
@@ -220,6 +222,7 @@ msgstr ""
 
 #. module: mail_sendgrid
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_send_method
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_forward_compose_message_send_method
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_send_method
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_send_method
 msgid "Send method"
@@ -243,6 +246,7 @@ msgstr ""
 
 #. module: mail_sendgrid
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_sendgrid_template_id
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_forward_compose_message_sendgrid_template_id
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_sendgrid_template_id
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_sendgrid_template_id
 #: model:ir.model.fields,field_description:mail_sendgrid.field_sendgrid_email_lang_template_sendgrid_template_id
@@ -263,6 +267,7 @@ msgstr ""
 
 #. module: mail_sendgrid
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_sent_date
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_forward_compose_message_sent_date
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_sent_date
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_sent_date
 msgid "Sent date"
@@ -271,6 +276,7 @@ msgstr ""
 #. module: mail_sendgrid
 #: model:ir.model.fields,field_description:mail_sendgrid.field_email_template_preview_substitution_ids
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_compose_message_substitution_ids
+#: model:ir.model.fields,field_description:mail_sendgrid.field_mail_forward_compose_message_substitution_ids
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_mail_substitution_ids
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_message_substitution_ids
 #: model:ir.model.fields,field_description:mail_sendgrid.field_mail_template_substitution_ids
@@ -295,6 +301,7 @@ msgstr ""
 
 #. module: mail_sendgrid
 #: model:ir.model.fields,help:mail_sendgrid.field_mail_compose_message_body_text
+#: model:ir.model.fields,help:mail_sendgrid.field_mail_forward_compose_message_body_text
 #: model:ir.model.fields,help:mail_sendgrid.field_mail_mail_body_text
 #: model:ir.model.fields,help:mail_sendgrid.field_mail_message_body_text
 msgid "Text only version of the body"
