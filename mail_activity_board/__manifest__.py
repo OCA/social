@@ -12,7 +12,7 @@
     'application': False,
     'installable': True,
     'depends': [
-        'mail',
+        'calendar',
         'board',
     ],
     'data': [
@@ -23,4 +23,3 @@
         'static/src/xml/inherit_chatter.xml',
     ]
 }
-

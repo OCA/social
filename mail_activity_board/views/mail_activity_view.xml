@@ -14,7 +14,7 @@
             <form string="Activity Form" create="false" edit="false" delete="false">
                 <sheet string="Activity">
                     <button name="open_origin" type="object" class="centre oe_link" nolabel="1">
-                        <field name="res_name"><field name="res_model_id_name"/></field>
+                        <h1><field name="res_name"/></h1>
                     </button>
                     <field name="activity_category" invisible="1" />
                     <field name="res_model" invisible="1"/>
