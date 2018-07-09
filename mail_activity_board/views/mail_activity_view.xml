@@ -40,7 +40,6 @@
                                    attrs="{'invisible': [('calendar_event_id','=', False)], 'readonly': 1}"/>
                         </group>
                     </group>
-                    <hr/>
                     <group>
                         <field name="summary" placeholder="e.g. Discuss proposal"/>
                         <field name="note" placeholder="Log a note..."/>
@@ -56,12 +55,19 @@
         <field name="name">mail.activity.boards.view.tree</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
+        <field name="domain"></field>
         <field name="arch" type="xml">
+
             <xpath expr="//tree" position="attributes">
+
+                <attribute name="default_order"></attribute>
+
                 <attribute name="decoration-danger">(date_deadline &lt; current_date)</attribute>
                 <attribute name="decoration-warning">(date_deadline == current_date)</attribute>
                 <attribute name="decoration-success">(date_deadline &gt; current_date) </attribute>
+
             </xpath>
+
         </field>
     </record>
 
@@ -145,6 +151,7 @@
         <field name="name">mail.activity.boards.view.search</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_search"/>
+        <field name="priority" eval="2"/>
         <field name="mode">primary</field>
         <field name="arch" type="xml">
             <xpath expr='//field[@name="res_model_id"]' position='before'>
@@ -163,11 +170,19 @@
             </xpath>
 
             <xpath expr='//search/group' position='inside'>
-                <filter string="User" domain="[]" groups="sales_team.group_sale_salesman_all_leads" context="{'group_by':'user_id'}"/>
+                <filter string="User" context="{'group_by':'user_id'}"/>
                 <filter string="Origin" context="{'group_by': 'res_model_id'}"/>
+                <separator/>
+                <filter string="Deadline by Month" name="deadline_by_month"
+                            context="{'group_by':'date_deadline', 'default_order': 'date_deadline asc'}"
+                            help="Groups the activities by deadline for weeks."/>
+                <filter string="Deadline by Week" name="deadline_by_week"
+                        context="{'group_by':'date_deadline:week', 'default_order': 'date_deadline'}"
+                        help="Groups the activities by deadline for weeks."/>
+                <separator/>
             </xpath>
 
-        </field>
+        </field>q
     </record>
 
 
@@ -175,27 +190,29 @@
     ACTION
 -->
     <record model="ir.actions.act_window" id="open_boards_activities">
-        <field name="name">Activities</field>
+        <field name="name">Activities:</field>
         <field name="res_model">mail.activity</field>
-        <field name="view_mode">kanban,tree,calendar,graph,pivot,form</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">kanban,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
         <field name="view_ids"
                    eval="[(5, 0, 0),
-                    (0, 0, {'view_mode': 'form', 'view_id': ref('mail_activity_view_form_board')}),
-                    (0, 0, {'view_mode': 'kanban', 'view_id': ref('mail_activity_view_kanban')}),
-                    (0, 0, {'view_mode': 'tree', 'view_id': ref('mail_activity_view_tree')}),
-                    (0, 0, {'view_mode': 'calendar'}),
-                    (0, 0, {'view_mode': 'pivot'}),
-                    (0, 0, {'view_mode': 'graph'})]"/>
+                          (0, 0, {'view_mode': 'kanban', 'view_id': ref('mail_activity_view_kanban')}),
+                          (0, 0, {'view_mode': 'tree', 'view_id': ref('mail_activity_view_tree')}),
+                          (0, 0, {'view_mode': 'form', 'view_id': ref('mail_activity_view_form_board')}),
+                          (0, 0, {'view_mode': 'calendar'}),
+                          (0, 0, {'view_mode': 'pivot'}),
+                          (0, 0, {'view_mode': 'graph'})]"/>
         <field name="search_view_id" ref="mail_activity_view_search"/>
     </record>
 
+
 <!--
-Menu
+Menus
 -->
     <menuitem
-            id="sdi_board_menu_activities"
+            id="board_menu_activities"
             name="Activities"
             parent="base.menu_board_root"
             action="open_boards_activities"

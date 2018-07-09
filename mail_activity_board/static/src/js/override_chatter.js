@@ -18,15 +18,14 @@ odoo.define('mail.Chatter.activity', function(require){
         _onCountActivity: function (event) {
             event.preventDefault();
             var self = this;
-            console.log(self);
-             return this._rpc({
+            this._rpc({
                     model: self.record.model,
                     method: 'redirect_to_activities',
                     args: [[]],
                     kwargs: {'id':self.record.res_id,
                              'model':self.record.model},
                     context: this.record.getContext(),
-                }).then(function(action) {
+            }).then(function(action) {
                 return self.do_action(action);
             });
         },

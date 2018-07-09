@@ -24,10 +24,12 @@ class MailActivityMixin(models.AbstractModel):
 
     def redirect_to_activities(self, **kwargs):
         """
-            Method that redirects to the list of activities of the object shown.
+            Redirects to the list of activities of the object shown.
 
             Redirects to the activity board and configures the domain so that
-            only those activities that are related to the object shown are displayed.
+            only those activities that are related to the object shown are
+            displayed.
+
             Add to the title of the view the name the class of the object from
             which the activities will be displayed.
 
@@ -36,8 +38,13 @@ class MailActivityMixin(models.AbstractModel):
             :return: action.
         """
         id = kwargs.get("id")
-        model = kwargs.get("model")
         action = self.env['mail.activity'].action_activities_board()
-        desc = self.env[model]._description
+        views = [ ]
+        for v in action['views']:
+            if  v[1] == 'tree':
+                v = (v[0],'list')
+            views.append(v)
+
+        action['views'] = views
         action['domain'] = [('res_id', '=', id)]
         return action
