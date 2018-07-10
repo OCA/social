@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo10-addon-mail_digest',
         'odoo10-addon-mail_footer_notified_partner',
         'odoo10-addon-mail_force_queue',
+        'odoo10-addon-mail_forward',
         'odoo10-addon-mail_full_expand',
         'odoo10-addon-mail_improved_tracking_value',
         'odoo10-addon-mail_inline_css',
