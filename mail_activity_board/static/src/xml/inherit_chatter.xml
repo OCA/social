@@ -4,7 +4,7 @@
     <t t-extend="mail.Chatter.Buttons">
          <t t-jquery="button.o_chatter_button_schedule_activity" t-operation="after">
             <button t-if="schedule_activity_btn" class="btn btn-sm btn-link o_chatter_button_count_activity" title=" activity">
-                <i class="fa fa-list"/> <t t-if="isMobile">Activities</t><t t-else="">Activities</t>
+                <i class="fa fa-list"/> Activities
             </button>
          </t>
     </t>

@@ -5,7 +5,7 @@
     'summary': 'Add Activity Boards',
     'version': '11.0.1.0.0',
     'development_status': 'Beta',
-    'category': 'Uncategorized',
+    'category': 'Social Network',
     'website': 'https://github.com/OCA/social',
     'author': 'SDi, David Juaneda, Odoo Community Association (OCA)',
     'license': 'AGPL-3',

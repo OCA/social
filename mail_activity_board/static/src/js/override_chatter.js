@@ -8,26 +8,20 @@ odoo.define('mail.Chatter.activity', function(require){
 
     chatter.include({
 
-        events: {
-            'click .o_chatter_button_new_message': '_onOpenComposerMessage',
-            'click .o_chatter_button_log_note': '_onOpenComposerNote',
-            'click .o_chatter_button_schedule_activity': '_onScheduleActivity',
+        events: _.extend({}, chatter.prototype.events, {
             'click .o_chatter_button_count_activity': '_onCountActivity',
-        },
+        }),
 
         _onCountActivity: function (event) {
             event.preventDefault();
-            var self = this;
             this._rpc({
                     model: self.record.model,
                     method: 'redirect_to_activities',
                     args: [[]],
-                    kwargs: {'id':self.record.res_id,
+                    kwargs: {'id':this.record.res_id,
                              'model':self.record.model},
                     context: this.record.getContext(),
-            }).then(function(action) {
-                return self.do_action(action);
-            });
+            }).then($.proxy(this, "do_action"));
         },
 
     });

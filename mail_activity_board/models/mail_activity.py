@@ -8,20 +8,19 @@ class MailActivity(models.Model):
 
     res_model_id_name = fields.Char(
         related='res_model_id.name', string="Origin",
-        store=False, default="", readonly=True)
+        readonly=True)
     duration = fields.Float(
         related='calendar_event_id.duration', string="Duration",
-        store=False, readonly=True)
+        readonly=True)
     calendar_event_id_start = fields.Datetime(
         related='calendar_event_id.start', string="Start",
-        store=False, default=False, readonly=True)
+        default=False, readonly=True)
     calendar_event_id_partner_ids = fields.Many2many(
         related='calendar_event_id.partner_ids', string='Attendees',
-        store=False, default=False, readonly=True)
+        default=False, readonly=True)
 
     @api.multi
     def open_origin(self):
-        """  """
         self.ensure_one()
         response = {'type': 'ir.actions.act_window',
                     'res_model': self.res_model,
