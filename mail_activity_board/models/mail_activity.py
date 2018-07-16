@@ -1,4 +1,4 @@
-# Copyright 2016 David Juaneda - <djuaneda@sdi.es>
+# Copyright 2018 David Juaneda - <djuaneda@sdi.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, models, fields
 
@@ -10,14 +10,12 @@ class MailActivity(models.Model):
         related='res_model_id.name', string="Origin",
         readonly=True)
     duration = fields.Float(
-        related='calendar_event_id.duration', string="Duration",
-        readonly=True)
+        related='calendar_event_id.duration', readonly=True)
     calendar_event_id_start = fields.Datetime(
-        related='calendar_event_id.start', string="Start",
-        default=False, readonly=True)
+        related='calendar_event_id.start', readonly=True)
     calendar_event_id_partner_ids = fields.Many2many(
-        related='calendar_event_id.partner_ids', string='Attendees',
-        default=False, readonly=True)
+        related='calendar_event_id.partner_ids',
+        Stringreadonly=True)
 
     @api.multi
     def open_origin(self):

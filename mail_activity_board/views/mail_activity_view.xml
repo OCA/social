@@ -31,13 +31,13 @@
                             <field name="date_deadline"
                                    attrs="{'invisible': [('activity_category', '=', 'meeting')]}"/>
                             <field name="calendar_event_id_start" string="Start meeting"
-                                   attrs="{'invisible': [('calendar_event_id','=', False)], 'readonly': 1}"/>
+                                   attrs="{'invisible': [('calendar_event_id','=', False)]}"/>
                             <field name="duration" widget="float_time"
                                    attrs="{'invisible': ['|',('duration', '=', False),
-                                   ('calendar_event_id','=', False)], 'readonly': 1}"/>
-                            <field name="user_id"/>
+                                   ('calendar_event_id','=', False)]}"/>
+                            <field name="user_id" options="{'no_open': True}"/>
                             <field name="calendar_event_id_partner_ids" widget="many2many_tags"
-                                   attrs="{'invisible': [('calendar_event_id','=', False)], 'readonly': 1}"/>
+                                   attrs="{'invisible': [('calendar_event_id','=', False)]}"/>
                         </group>
                     </group>
                     <group>
@@ -55,7 +55,6 @@
         <field name="name">mail.activity.boards.view.tree</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
-        <field name="domain">[]</field>
         <field name="arch" type="xml">
             <xpath expr="//tree" position="attributes">
                 <attribute name="default_order"></attribute>
@@ -73,7 +72,6 @@
          <field name="name">mail.activity.boards.view.kanban</field>
          <field name="model">mail.activity</field>
          <field name="priority" eval="10"/>
-         <field name="context">{}</field>
          <field name="arch" type="xml">
             <kanban default_group_by="activity_type_id" class="_kanban_small_column o_opportunity_kanban" create="0" _order="date_deadline"
                     group_create="false" group_delete="false" group_edit="false">
