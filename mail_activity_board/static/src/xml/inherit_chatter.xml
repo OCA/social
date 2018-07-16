@@ -3,8 +3,8 @@
 
     <t t-extend="mail.Chatter.Buttons">
          <t t-jquery="button.o_chatter_button_schedule_activity" t-operation="after">
-            <button t-if="schedule_activity_btn" class="btn btn-sm btn-link o_chatter_button_count_activity" title=" activity">
-                <i class="fa fa-list"/> Activities
+            <button t-if="schedule_activity_btn" class="btn btn-sm btn-link o_chatter_button_list_activity">
+                 <span class="o_list_activity label label-primary"/> <t t-if="isMobile">List</t><t t-else="">Activities list</t>
             </button>
          </t>
     </t>
