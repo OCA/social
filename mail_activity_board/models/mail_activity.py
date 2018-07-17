@@ -15,7 +15,7 @@ class MailActivity(models.Model):
         related='calendar_event_id.start', readonly=True)
     calendar_event_id_partner_ids = fields.Many2many(
         related='calendar_event_id.partner_ids',
-        Stringreadonly=True)
+        readonly=True)
 
     @api.multi
     def open_origin(self):
