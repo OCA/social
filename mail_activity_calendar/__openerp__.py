@@ -18,4 +18,5 @@
         'views/calendar_templates.xml',
         "data/mail_activity_data.xml",
     ],
+    "pre_init_hook": "pre_init_hook",
 }
