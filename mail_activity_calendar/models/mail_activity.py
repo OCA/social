@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
-# Part of Odoo. See LICENSE file for full copyright and licensing details.
-
+# Copyright 2016 Odoo SA <https://www.odoo.com>
+# Copyright 2018 Eficent <http://www.eficent.com>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from openerp import api, models, fields, tools, _
 
 

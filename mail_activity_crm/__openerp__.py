@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
-# © 2017 Therp BV <http://therp.nl>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016 Odoo SA <https://www.odoo.com>
+# Copyright 2018 Therp BV <http://therp.nl>
+# Copyright 2018 Eficent <http://www.eficent.com>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Activities in CRM",
     "version": "9.0.1.0.0",
     "author": "Odoo SA,Therp BV,Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "category": "Discuss",
-    "summary": "Backport activities",
+    "summary": "Backport activities in CRM",
     "depends": [
         'mail_activity',
         'mail_activity_calendar',

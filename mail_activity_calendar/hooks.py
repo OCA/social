@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
+# Copyright 2018 Tecnativa <https://www.tecnativa.com>
+# Copyright 2018 Eficent <http://www.eficent.com>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 import logging
 
 

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
-# © 2018 Eficent Business and IT Consulting Services, S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016 Odoo SA <https://www.odoo.com>
+# Copyright 2018 Therp BV <http://therp.nl>
+# Copyright 2018 Eficent <http://www.eficent.com>
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Mail Activity Calendar",
     "version": "9.0.1.0.0",
