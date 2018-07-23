@@ -15,7 +15,7 @@ odoo.define('mail.Activity', function(require)
     Chatter.include({
         init: function() {
             this._super.apply(this, arguments);
-            this.schedule_activity_btn = !!this.view.fields.activity_ids
+            this.schedule_activity_btn = !!this.view.fields.activity_ids;
         },
         start: function() {
             this.$('button.o_chatter_button_schedule_activity').click(
@@ -88,9 +88,9 @@ odoo.define('mail.Activity', function(require)
                     if(callback) {
                         callback();
                     }
-                    return self.field_manager.reload()
+                    return self.field_manager.reload();
                 },
-            })
+            });
         },
     });
 
@@ -107,7 +107,7 @@ odoo.define('mail.Activity', function(require)
         render_value: function() {
             return $.when(
                 this._super.apply(this, arguments),
-                this._readActivities(),
+                this._readActivities()
             ).then(this.proxy('_render_value'));
         },
         _render_value: function() {
@@ -154,7 +154,7 @@ odoo.define('mail.Activity', function(require)
             });
             return this.do_action(action, {
                 on_close: function () {
-                    return self.field_manager.reload()
+                    return self.field_manager.reload();
                 },
             });
         },
