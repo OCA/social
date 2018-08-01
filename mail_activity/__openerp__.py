@@ -28,4 +28,5 @@
         'static/src/xml/systray.xml',
         'static/src/xml/web_kanban_activity.xml',
     ],
+    "post_load": "post_load_hook",
 }

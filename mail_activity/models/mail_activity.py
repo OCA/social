@@ -25,6 +25,7 @@ def message_post_with_view(records, views_or_xmlid, **kwargs):
         rendered_template = views.render(values, engine='ir.qweb')
         kwargs['body'] = rendered_template
         kwargs['message_type'] = 'notification'  # default in v10
+        kwargs['subtype_id'] = record.env.ref('mail.mt_activities').id,
         record.message_post_with_template(False, **kwargs)
 
 
