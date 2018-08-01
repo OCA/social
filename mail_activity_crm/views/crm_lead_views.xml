@@ -50,7 +50,10 @@
             <xpath expr="//div[@class='oe_chatter']/field[@name='message_follower_ids']" position="after">
                 <field name="activity_ids" widget="mail_activity" />
             </xpath>
-            <xpath expr="//sheet/group/group[2]" position="attributes">
+            <xpath expr="//sheet/group/group[2]/label" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/div" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
         </field>
