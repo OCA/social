@@ -32,7 +32,7 @@ msgid "%s is not a valid email address. Please check it in order to avoid sendin
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:75
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:76
 #, python-format
 msgid "A Mailgun domain value is needed!"
 msgstr ""
@@ -53,7 +53,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:238
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:239
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr ""
@@ -73,7 +73,7 @@ msgid "Error %s trying to check mailof connection"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:242
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:243
 #, python-format
 msgid "Event information not longer stored"
 msgstr ""
@@ -121,7 +121,7 @@ msgid "There is no Mailgun API key!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:225
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:226
 #, python-format
 msgid "There is no tracked message!"
 msgstr ""
