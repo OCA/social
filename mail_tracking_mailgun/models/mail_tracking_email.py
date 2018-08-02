@@ -70,7 +70,8 @@ class MailTrackingEmail(models.Model):
             raise ValidationError(_('There is no Mailgun API key!'))
         api_url = icp.get_param(
             'mailgun.api_url', 'https://api.mailgun.net/v3')
-        domain = icp.get_param('mail.catchall.domain')
+        catchall_domain = icp.get_param('mail.catchall.domain')
+        domain = icp.get_param('mailgun.domain', catchall_domain)
         if not domain:
             raise ValidationError(_('A Mailgun domain value is needed!'))
         validation_key = icp.get_param('mailgun.validation_key')
