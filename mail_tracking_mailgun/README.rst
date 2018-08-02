@@ -36,6 +36,8 @@ parameters:
   domain.
 - `mailgun.api_url`: It should be fine as it is, but it could change in the
   future.
+- `mailgun.domain`: In case your sending domain is different from the one
+  configured in `mail.catchall.domain`.
 - `mailgun.validation_key`: If you want to be able to check mail address
   validity you must config this parameter with your account Public Validation
   Key.
