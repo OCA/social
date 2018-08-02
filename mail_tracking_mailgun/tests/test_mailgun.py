@@ -104,6 +104,11 @@ class TestMailgun(TransactionCase):
         self.test_event_delivered()
         with self.assertRaises(ValidationError):
             self.env['mail.tracking.email']._mailgun_values()
+        # now we set an specific domain for Mailgun:
+        # i.e: we configure new EU zone without loosing old domain statistics
+        self.env['ir.config_parameter'].set_param(
+            'mailgun.domain', 'eu.example.com')
+        self.test_event_delivered()
 
     @mute_logger('odoo.addons.mail_tracking_mailgun.models'
                  '.mail_tracking_email')
@@ -169,9 +174,10 @@ class TestMailgun(TransactionCase):
         response = self.env['mail.tracking.email'].event_process(
             None, self.event, self.metadata)
         self.assertEqual('OK', response)
-        event = self.event_search('delivered')
-        self.assertEqual(event.timestamp, float(self.timestamp))
-        self.assertEqual(event.recipient, self.recipient)
+        events = self.event_search('delivered')
+        for event in events:
+            self.assertEqual(event.timestamp, float(self.timestamp))
+            self.assertEqual(event.recipient, self.recipient)
 
     # https://documentation.mailgun.com/user_manual.html#tracking-opens
     def test_event_opened(self):
