@@ -90,6 +90,12 @@ class CalendarEvent(models.Model):
         return {'type': 'ir.actions.act_window_close'}
 
     @api.multi
+    def action_done(self):
+        for rec in self:
+            rec.activity_ids.action_feedback()
+        return {'type': 'ir.actions.act_window_close'}
+
+    @api.multi
     def action_open_calendar_event(self):
         if self.res_model and self.res_id:
             return self.env[self.res_model].browse(

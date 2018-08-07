@@ -24,6 +24,8 @@
                 <footer>
                     <button string="Schedule" name="action_close_dialog"
                                 type="object" class="btn-primary"/>
+                    <button string="Mark Activity as Done" name="action_done"
+                                type="object" class="btn-primary"/>
                 </footer>
             </sheet>
         </field>

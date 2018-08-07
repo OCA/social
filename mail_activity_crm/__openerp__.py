@@ -17,5 +17,9 @@
     ],
     "data": [
         "views/crm_lead_views.xml",
+        'views/crm_activity_report_view.xml',
+        'views/crm_lead_menu.xml',
+        'views/crm_action_views.xml',
     ],
+    'post_init_hook': 'post_init_hook',
 }
