@@ -1,7 +1,7 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
 # Copyright 2017 David Vidal - <david.vidal@tecnativa.com>
+# Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import mock
@@ -22,15 +22,17 @@ class TestMassMailing(TransactionCase):
         })
         self.list.name = '%s #%s' % (self.list.name, self.list.id)
         self.contact_a = self.env['mail.mass_mailing.contact'].create({
-            'list_id': self.list.id,
+            'list_ids': [(6, 0, self.list.ids)],
             'name': 'Test contact A',
             'email': 'contact_a@example.com',
         })
         self.mailing = self.env['mail.mass_mailing'].create({
             'name': 'Test subject',
             'email_from': 'from@example.com',
-            'mailing_model': 'mail.mass_mailing.contact',
-            'mailing_domain': "[('list_id', 'in', [%d]), "
+            'mailing_model_id': self.env.ref(
+                'mass_mailing.model_mail_mass_mailing_contact'
+            ).id,
+            'mailing_domain': "[('list_ids', '=', %d), "
                               "('opt_out', '=', False)]" % self.list.id,
             'contact_list_ids': [(6, False, [self.list.id])],
             'body_html': '<p>Test email body</p>',
