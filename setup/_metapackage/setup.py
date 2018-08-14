@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo11-addon-mail_tracking_mass_mailing',
         'odoo11-addon-mass_mailing_custom_unsubscribe',
         'odoo11-addon-mass_mailing_partner',
+        'odoo11-addon-mass_mailing_resend',
         'odoo11-addon-mass_mailing_unique',
     ],
     classifiers=[
