@@ -7,7 +7,7 @@
 {
     "name": "Mail tracking for Mailgun",
     "summary": "Mail tracking and Mailgun webhooks integration",
-    "version": "9.0.1.3.0",
+    "version": "9.0.1.3.1",
     "category": "Social Network",
     "website": "https://odoo-community.org/",
     "author": "Tecnativa, "
