@@ -14,19 +14,19 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:89
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:90
 #, python-format
 msgid "%s couldn't be verified. Either the request couln't be completed or the mailbox provider doesn't support email verification"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:79
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:80
 #, python-format
 msgid "%s failed the mailbox verification. Please check it in order to avoid sending issues"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:70
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:71
 #, python-format
 msgid "%s is not a valid email address. Please check it in order to avoid sending issues"
 msgstr ""
@@ -62,7 +62,7 @@ msgid "Email has been bounced: %s\n"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:57
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:58
 #, python-format
 msgid "Error %s trying to check mailof connection"
 msgstr ""
@@ -89,7 +89,7 @@ msgid "Mailgun"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:64
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:65
 #, python-format
 msgid "Mailgun Error. Mailbox verification value wasn't returned"
 msgstr ""
