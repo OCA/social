@@ -8,6 +8,7 @@
                 <group position="inside">
                     <group string="Custom notifications">
                         <field name="custom_notification_mail" />
+                        <field name="custom_notification_mail_employees" />
                         <field name="custom_notification_own" />
                         <field name="custom_notification_model_ids" attrs="{'invisible': [('res_model', '!=', False)]}" widget="many2many_tags" />
                     </group>

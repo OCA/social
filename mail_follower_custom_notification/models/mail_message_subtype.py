@@ -9,10 +9,17 @@ class MailMessageSubtype(models.Model):
 
     custom_notification_mail = fields.Selection(
         [('force_yes', 'Force yes'), ('force_no', 'Force no')],
-        string='Send mail notification', help='Leave empty to use the '
+        string='Send mail notification', help='Leave empty to use the setting '
         'on the partner\'s form, set to "Force yes" to always send messages '
         'of this type via email, and "Force no" to never send messages of '
         'type via email')
+    custom_notification_mail_employees = fields.Selection(
+        [('force_yes', 'Force yes'), ('force_no', 'Force no')],
+        string='Send mail notification (employees)', help='Leave empty to use '
+        'the setting on the employee\'s partner form, set '
+        'to "Force yes" to always send messages of this type via email to '
+        'employees, and "Force no" to never send messages of type via email '
+        'to employees. Employees are users in group \'Employees\'')
     custom_notification_own = fields.Boolean(
         'Notify about own messages', help='Check this to have notifications '
         'generated and sent via email about own messages')

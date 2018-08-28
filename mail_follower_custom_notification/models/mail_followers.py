@@ -23,7 +23,6 @@ class MailFollowers(models.Model):
         string='Force own mails from subtype')
 
     @api.model
-    @api.returns('self', lambda x: x.id)
     def create(self, values):
         this = super(MailFollowers, self).create(values)
         for subtype in this.subtype_ids:
@@ -33,10 +32,21 @@ class MailFollowers(models.Model):
                     subtype.custom_notification_model_ids\
                         .mapped('model'):
                 continue
+            user = self.env['res.users'].search([
+                ('partner_id', '=', this.partner_id.id),
+            ], limit=1)
+            is_employee = user and user.has_group('base.group_user')
             if subtype.custom_notification_mail == 'force_yes':
-                this.force_mail_subtype_ids += subtype
+                this.force_mail_subtype_ids |= subtype
             if subtype.custom_notification_mail == 'force_no':
-                this.force_nomail_subtype_ids += subtype
+                this.force_nomail_subtype_ids |= subtype
+            if is_employee:
+                if subtype.custom_notification_mail_employees == 'force_yes':
+                    this.force_mail_subtype_ids |= subtype
+                    this.force_nomail_subtype_ids -= subtype
+                if subtype.custom_notification_mail_employees == 'force_no':
+                    this.force_mail_subtype_ids -= subtype
+                    this.force_nomail_subtype_ids |= subtype
             if subtype.custom_notification_own:
-                this.force_own_subtype_ids += subtype
+                this.force_own_subtype_ids |= subtype
         return this

@@ -50,6 +50,7 @@ class TestMailFollowerCustomNotification(TransactionCase):
 
         # post a message and see if we successfully forced a notification to
         # ourselves
+        # pylint: disable=translation-required
         followed_partner_demo.message_post('hello world', subtype='mt_comment')
         self.assertEqual(
             followed_partner_demo.message_ids[:-1].notification_ids.partner_id,
