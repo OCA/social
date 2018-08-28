@@ -3,5 +3,4 @@
 # (c) 2015 Pedro M. Baeza
 # License AGPL-3 - See LICENSE file on root folder for details
 ##############################################################################
-from . import email_template
-from . import report
+from . import mail_template

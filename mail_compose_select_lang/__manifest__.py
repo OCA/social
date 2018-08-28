@@ -6,17 +6,17 @@
 
 {
     'name': 'Select language in mail compose window',
-    'version': '8.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Marketing',
     'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
               'Antiun Ingeniería S.L.,'
               'Odoo Community Association (OCA)',
     'website': 'http://www.serviciosbaeza.com',
     'depends': [
-        'email_template',
+        'mail',
     ],
     'data': [
         'wizard/mail_compose_message_view.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
