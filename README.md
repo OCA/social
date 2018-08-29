@@ -20,6 +20,7 @@ addon | version | summary
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 9.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_debrand](mail_debrand/) | 9.0.1.0.0 | Remove Odoo branding in sent emails
 [mail_digest](mail_digest/) | 9.0.1.0.1 | Basic digest mail handling.
+[mail_improved_tracking_value](mail_improved_tracking_value/) | 9.0.1.0.0 | Improves tracking changed values for certain type of fields.Adds a user-friendly view to consult them.
 [mail_optional_autofollow](mail_optional_autofollow/) | 9.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 9.0.1.0.0 | Choose if you want to automatically notify followers on mail.compose.message
 [mail_tracking](mail_tracking/) | 9.0.3.0.2 | Email tracking system for all mails sent
