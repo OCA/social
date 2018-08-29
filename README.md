@@ -14,6 +14,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 10.0.1.0.0 | Base Search Mail Content
+[bus_presence_override](bus_presence_override/) | 10.0.1.0.0 | Adds user-defined im status (online, away, offline).
 [email_template_qweb](email_template_qweb/) | 10.0.1.0.0 | Use the QWeb templating mechanism for emails
 [mail_as_letter](mail_as_letter/) | 10.0.1.0.0 | This module allows to download a mail message as a pdf letter.
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 10.0.1.0.0 | Adding attachment on the object by sending this one
