@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo9-addon-mail_attach_existing_attachment',
         'odoo9-addon-mail_debrand',
         'odoo9-addon-mail_digest',
+        'odoo9-addon-mail_improved_tracking_value',
         'odoo9-addon-mail_optional_autofollow',
         'odoo9-addon-mail_optional_follower_notification',
         'odoo9-addon-mail_tracking',
