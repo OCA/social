@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo8-addon-mail_attach_existing_attachment',
         'odoo8-addon-mail_compose_select_lang',
         'odoo8-addon-mail_debrand',
+        'odoo8-addon-mail_edit',
         'odoo8-addon-mail_follower_custom_notification',
         'odoo8-addon-mail_footer_notified_partners',
         'odoo8-addon-mail_forward',
