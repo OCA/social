@@ -103,10 +103,12 @@ class MailTrackingEmail(models.Model):
 
     @api.model
     def email_score_from_email(self, email):
-        if email:
-            return self.search([
-                ('recipient_address', '=', email.lower())]).email_score()
-        return 0.
+        if not email:
+            return 0.
+        data = self.read_group([('recipient_address', '=', email.lower())],
+                               ['recipient_address', 'state'], ['state'])
+        mapped_data = {state['state']: state['state_count'] for state in data}
+        return self.with_context(mt_states=mapped_data).email_score()
 
     @api.model
     def _email_score_weights(self):
@@ -124,7 +126,7 @@ class MailTrackingEmail(models.Model):
 
     def email_score(self):
         """Default email score algorimth. Ready to be inherited
-
+        It can receive a recordset or mapped states dictionary via context.
         Must return a value beetwen 0.0 and 100.0
         - Bad reputation: Value between 0 and 50.0
         - Unknown reputation: Value 50.0
@@ -132,8 +134,13 @@ class MailTrackingEmail(models.Model):
         """
         weights = self._email_score_weights()
         score = 50.0
-        for tracking in self:
-            score += weights.get(tracking.state, 0.0)
+        states = self.env.context.get('mt_states', False)
+        if states:
+            for state in states.keys():
+                score += weights.get(state, 0.0) * states[state]
+        else:
+            for tracking in self:
+                score += weights.get(tracking.state, 0.0)
         if score > 100.0:
             score = 100.0
         elif score < 0.0:
