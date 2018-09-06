@@ -303,6 +303,15 @@ class TestMailTracking(TransactionCase):
             self.assertEqual('bounced', tracking.state)
         self.assertEqual(0.0, self.recipient.email_score)
 
+    def test_recordset_email_score(self):
+        """For backwords compatibility sake"""
+        trackings = self.env['mail.tracking.email']
+        for i in range(11):
+            mail, tracking = self.mail_send(self.recipient.email)
+            tracking.event_create('click', {})
+            trackings |= tracking
+        self.assertEqual(100.0, trackings.email_score())
+
     def test_db(self):
         db = self.env.cr.dbname
         controller = MailTrackingController()
