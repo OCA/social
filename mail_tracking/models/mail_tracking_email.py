@@ -107,8 +107,7 @@ class MailTrackingEmail(models.Model):
             return 0.
         data = self.read_group([('recipient_address', '=', email.lower())],
                                ['recipient_address', 'state'], ['state'])
-        mapped_data = dict([(state['state'], state['state_count'])
-                            for state in data])
+        mapped_data = {state['state']: state['state_count'] for state in data}
         return self.with_context(mt_states=mapped_data).email_score()
 
     @api.model
