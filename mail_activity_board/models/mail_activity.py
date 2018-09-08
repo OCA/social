@@ -20,17 +20,22 @@ class MailActivity(models.Model):
     @api.multi
     def open_origin(self):
         self.ensure_one()
-        response = {'type': 'ir.actions.act_window',
-                    'res_model': self.res_model,
-                    'view_mode': 'form',
-                    'res_id': self.res_id,
-                    'target': 'current',
-                    'flags': {'form': {'action_buttons': False}}}
-        if self.res_model == 'crm.lead':
-            res_type = self.env['crm.lead'].browse(self.res_id).type
-            if res_type == 'opportunity':
-                view_id = self.env.ref("crm.crm_case_form_view_oppor").id
-                response['view_id'] = view_id
+        view_id = self.env['crm.lead'].browse(self.res_id).get_formview_id()
+        response = {
+            'type': 'ir.actions.act_window',
+            'res_model': self.res_model,
+            'view_mode': 'form',
+            'res_id': self.res_id,
+            'target': 'current',
+            'flags': {
+                'form': {
+                    'action_buttons': False
+                }
+            },
+            'views': [
+                (view_id, "form")
+            ]
+        }
         return response
 
     @api.model
