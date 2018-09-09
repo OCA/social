@@ -20,7 +20,7 @@ class MailActivity(models.Model):
     @api.multi
     def open_origin(self):
         self.ensure_one()
-        view_id = self.env['crm.lead'].browse(self.res_id).get_formview_id()
+        vid = self.env[self.res_model].browse(self.res_id).get_formview_id()
         response = {
             'type': 'ir.actions.act_window',
             'res_model': self.res_model,
@@ -33,7 +33,7 @@ class MailActivity(models.Model):
                 }
             },
             'views': [
-                (view_id, "form")
+                (vid, "form")
             ]
         }
         return response

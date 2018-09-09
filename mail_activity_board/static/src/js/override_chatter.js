@@ -5,10 +5,7 @@ odoo.define('mail.Chatter.activity', function(require){
     "use strict";
 
     var chatter = require('mail.Chatter');
-    var concurrency = require('web.concurrency');
     var core = require('web.core');
-    var _t = core._t;
-    var QWeb = core.qweb;
 
     chatter.include({
 
@@ -18,12 +15,14 @@ odoo.define('mail.Chatter.activity', function(require){
 
         _onListActivity: function (event) {
             this._rpc({
-                    model: this.record.model,
-                    method: 'redirect_to_activities',
-                    args: [[]],
-                    kwargs: {'id':this.record.res_id,
-                             'model':this.record.model},
-                    context: this.record.getContext(),
+                model: this.record.model,
+                method: 'redirect_to_activities',
+                args: [[]],
+                kwargs: {
+                    'id':this.record.res_id,
+                    'model':this.record.model
+                },
+                context: this.record.getContext(),
             }).then($.proxy(this, "do_action"));
         },
 
