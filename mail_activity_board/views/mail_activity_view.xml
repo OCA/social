@@ -101,16 +101,17 @@
 
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left">
-                                        <t t-if="record.date_deadline.raw_value and record.date_deadline.raw_value lt (new Date())">
+                                        <t t-set="act_date" t-value="new Date(record.date_deadline.raw_value)"/>
+                                        <t t-if="act_date lt (new Date())">
                                             <span t-attf-class="text-danger"><i class="fa fa-clock-o"/></span>
                                             <t t-if="record.activity_category.raw_value!='meeting'">
                                                 <span t-attf-class="text-danger">
-                                                    <field name="date_deadline"/>
+                                                    <field name="date_deadline" t-options='{"widget": "date"}'/>
                                                 </span>
                                             </t>
                                             <t t-else="">
                                                 <span t-attf-class="text-danger">
-                                                    <field name="calendar_event_id_start"/>
+                                                    <field name="calendar_event_id_start"  t-options='{"widget": "date"}'/>
                                                 </span>
                                             </t>
                                         </t>
@@ -118,11 +119,11 @@
                                             <span><i class="fa fa-clock-o"/></span>
                                             <t t-if="record.activity_category.raw_value!='meeting'">
                                                 <span>
-                                                    <field name="date_deadline"/>
+                                                    <field name="date_deadline"  t-options='{"widget": "date"}'/>
                                                 </span>
                                             </t>
                                             <t t-else="">
-                                                <field name="calendar_event_id_start"/>
+                                                <field name="calendar_event_id_start"  t-options='{"widget": "date"}'/>
                                             </t>
                                         </t>
                                     </div>
