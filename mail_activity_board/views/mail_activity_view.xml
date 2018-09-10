@@ -102,7 +102,7 @@
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left">
                                         <t t-set="act_date" t-value="new Date(record.date_deadline.raw_value)"/>
-                                        <t t-if="act_date lt (new Date())">
+                                        <t t-if="act_date &lt; (new Date())">
                                             <span t-attf-class="text-danger"><i class="fa fa-clock-o"/></span>
                                             <t t-if="record.activity_category.raw_value!='meeting'">
                                                 <span t-attf-class="text-danger">
