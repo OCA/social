@@ -4,9 +4,9 @@
 {
     "name": "Mass Mailing Subscription Snippet With Name",
     "summary": "Ask for name when subscribing, and create and/or link partner",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "category": "Website",
-    "website": "https://tecnativa.com/",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "application": False,
