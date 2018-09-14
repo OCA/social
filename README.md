@@ -41,7 +41,7 @@ addon | version | summary
 [mass_mailing_partner](mass_mailing_partner/) | 10.0.1.0.3 | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 10.0.1.0.0 | Resend mass mailings
 [mass_mailing_unique](mass_mailing_unique/) | 10.0.1.0.0 | Avoids duplicate mailing lists and contacts
-[website_mass_mailing_name](website_mass_mailing_name/) | 10.0.1.0.0 | Ask for name when subscribing, and create and/or link partner
+[website_mass_mailing_name](website_mass_mailing_name/) | 10.0.1.0.1 | Ask for name when subscribing, and create and/or link partner
 
 
 Unported addons
