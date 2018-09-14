@@ -64,7 +64,7 @@ class MailTrackingEmail(models.Model):
             digestmod=hashlib.sha256).hexdigest()
 
     def _mailgun_values(self):
-        icp = self.env['ir.config_parameter']
+        icp = self.env['ir.config_parameter'].sudo()
         api_key = icp.get_param('mailgun.apikey')
         if not api_key:
             raise ValidationError(_('There is no Mailgun API key!'))
@@ -79,7 +79,8 @@ class MailTrackingEmail(models.Model):
 
     def _mailgun_signature_verify(self, event):
         event = event or {}
-        api_key = self.env['ir.config_parameter'].get_param('mailgun.apikey')
+        icp = self.env['ir.config_parameter'].sudo()
+        api_key = icp.get_param('mailgun.apikey')
         if not api_key:
             _logger.warning("No Mailgun api key configured. "
                             "Please add 'mailgun.apikey' to System parameters "
