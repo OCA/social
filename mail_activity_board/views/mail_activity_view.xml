@@ -39,7 +39,7 @@
 
                         </group>
                     </group>
-                    <group>
+                    <group attrs="{'invisible': ['|',('calendar_event_id','=', False),('calendar_event_id_partner_ids','=', False)]}">
                         <field name="calendar_event_id_partner_ids" mode="kanban">
                                 <kanban quick_create="false" create="true" delete="true">
                                     <field name="id"/>
@@ -90,12 +90,6 @@
                         <field name="summary" placeholder="e.g. Discuss proposal"/>
                         <field name="note" placeholder="Log a note..."/>
                     </group>
-                    <!--<notebook attrs="{'invisible': [('calendar_event_id','=', False)]}">-->
-                        <!--<page string="Attendees" autofocus="autofocus">-->
-                            <!---->
-                        <!--</page>-->
-                    <!--</notebook>-->
-
                 </sheet>
             </form>
         </field>
