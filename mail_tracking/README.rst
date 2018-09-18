@@ -28,22 +28,22 @@ status icon will appear just right to name of notified partner.
 
 These are all available status icons:
 
-.. |sent| image:: mail_tracking/static/src/img/sent.png
+.. |sent| image:: static/src/img/sent.png
    :width: 10px
 
-.. |delivered| image:: mail_tracking/static/src/img/delivered.png
+.. |delivered| image:: static/src/img/delivered.png
    :width: 15px
 
-.. |opened| image:: mail_tracking/static/src/img/opened.png
+.. |opened| image:: static/src/img/opened.png
    :width: 15px
 
-.. |error| image:: mail_tracking/static/src/img/error.png
+.. |error| image:: static/src/img/error.png
    :width: 10px
 
-.. |waiting| image:: mail_tracking/static/src/img/waiting.png
+.. |waiting| image:: static/src/img/waiting.png
    :width: 10px
 
-.. |unknown| image:: mail_tracking/static/src/img/unknown.png
+.. |unknown| image:: static/src/img/unknown.png
    :width: 10px
 
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
