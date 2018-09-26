@@ -1,9 +1,11 @@
 # -*- coding: utf-8 -*-
 # Copyright 2017 Tecnativa - Jairo Llopis
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from psycopg2 import IntegrityError
 
 from odoo import api, fields, models
-from odoo.tools import safe_eval
+from odoo.exceptions import ValidationError
+from ast import literal_eval
 
 
 class MassMailingList(models.Model):
@@ -42,9 +44,10 @@ class MassMailingList(models.Model):
         Partner = self.env["res.partner"]
         # Skip non-dynamic lists
         dynamic = self.filtered("dynamic")
+        errors = []
         for one in dynamic:
-            sync_domain = safe_eval(one.sync_domain) + [("email", "!=", False)]
-            desired_partners = Partner.search(sync_domain)
+            domain = literal_eval(one.sync_domain) + [("email", "!=", False)]
+            desired_partners = Partner.search(domain)
             # Remove undesired contacts when synchronization is full
             if one.sync_method == "full":
                 Contact.search([
@@ -55,11 +58,22 @@ class MassMailingList(models.Model):
             current_partners = current_contacts.mapped("partner_id")
             # Add new contacts
             for partner in desired_partners - current_partners:
-                Contact.create({
-                    "list_id": one.id,
-                    "partner_id": partner.id,
-                })
+                try:
+                    with self.env.cr.savepoint():
+                        Contact.create({
+                            "list_id": one.id,
+                            "partner_id": partner.id,
+                        })
+                except IntegrityError:
+                    errors.append(
+                        'Cannot add Partner %s to "%s". '
+                        'Email %s already added.' %
+                        (partner.name, one.name, partner.email)
+                    )
+            if errors:
+                raise ValidationError('\n'.join(errors))
             one.is_synced = True
+
         # Invalidate cached contact count
         self.invalidate_cache(["contact_nbr"], dynamic.ids)
 
