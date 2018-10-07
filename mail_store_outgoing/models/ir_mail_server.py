@@ -18,10 +18,10 @@ class IrMailServer(models.Model):
     imap_mailbox_folder = fields.Many2one('ir.mail.imap.folder',
                                           'Imap Folders',)
     imap_mailbox_verified = fields.Boolean('IMAP Connection Verified', )
-    store_outgoing_mail = fields.Boolean('Store Outgoing Mail', )
+    store_outgoing_mail = fields.Boolean()
     has_separate_imap_server = fields.Boolean('Use Separate Imap Server', )
-    separate_imap_server = fields.Char('Separate Imap Server', )
-    active = fields.Boolean('Active', )
+    separate_imap_server = fields.Char()
+    active = fields.Boolean()
 
     @api.model
     def parse_list_response(self, line):
