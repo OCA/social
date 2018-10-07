@@ -44,7 +44,7 @@ class IrMailServer(models.Model):
             smtp_server = self.smtp_host
         try:
             maillib = imaplib.IMAP4_SSL(smtp_server)
-            result = maillib.login(self.smtp_user, self.smtp_pass)
+            maillib.login(self.smtp_user, self.smtp_pass)
             typ, mBoxes = maillib.list()
             folder_ids = imap_pool.search([('server_id', '=', self.id)])
             for folder in folder_ids:
@@ -70,7 +70,6 @@ class IrMailServer(models.Model):
             smtp_user, smtp_password, smtp_encryption, smtp_debug)
         self._save_sent_message_to_sentbox(message, mail_server_id)
         return res
-
 
     @api.model
     def _save_sent_message_to_sentbox(self, msg, mail_server_id):
@@ -103,6 +102,7 @@ class IrMailServer(models.Model):
         return True
 
 class IrMailImapFolder(models.Model):
+
     _name = 'ir.mail.imap.folder'
     _description = 'Imap Folder'
 
