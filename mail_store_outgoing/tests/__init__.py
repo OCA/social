@@ -1,1 +1,2 @@
-import test_ir_mail
+from . import test_ir_mail
+
