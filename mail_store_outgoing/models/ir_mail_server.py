@@ -101,6 +101,7 @@ class IrMailServer(models.Model):
                 maillib.logout()
         return True
 
+
 class IrMailImapFolder(models.Model):
 
     _name = 'ir.mail.imap.folder'
