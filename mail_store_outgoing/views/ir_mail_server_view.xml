@@ -24,7 +24,7 @@
                     <group colspan="4" attrs="{'invisible': [('store_outgoing_mail','=', False)]}">
                         <field name="imap_mailbox_verified" readonly="1"/>
                     </group>
-                    <group colspan="4" attrs="{'invisible': [('imap_mailbox_verified','=', False)]}">
+                    <group colspan="4" attrs="{'invisible': [('store_outgoing_mail','=', False),('imap_mailbox_verified','=', False)]}">
                         <field name="imap_mailbox_folder" attrs="{'required': [('imap_mailbox_verified','=', True),('store_outgoing_mail','=',True)]}"/>
                     </group>
                 </xpath>

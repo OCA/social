@@ -23,7 +23,9 @@ class IrMailServer(models.Model):
     separate_imap_server = fields.Char('Separate Imap Server', )
     active = fields.Boolean('Active', )
 
+    @api.model
     def parse_list_response(self, line):
+        print line
         list_response_pattern = re.compile(
             r'\((?P<flags>.*?)\) "(?P<delimiter>.*)" (?P<name>.*)'
         )
@@ -54,7 +56,7 @@ class IrMailServer(models.Model):
             self.write({'imap_mailbox_verified': True})
         except Exception, e:
             raise ValidationError(
-                _("Connection Test Failed!"
+                _("Connection Test Failed! "
                     "Here is what we got instead:\n %s") % tools.ustr(e))
         finally:
             try:
@@ -68,18 +70,21 @@ class IrMailServer(models.Model):
     def send_email(self, message, mail_server_id=None,
                    smtp_server=None, smtp_port=None, smtp_user=None,
                    smtp_password=None, smtp_encryption=None, smtp_debug=False):
-        super(IrMailServer, self).send_email(
+        res = super(IrMailServer, self).send_email(
             message, mail_server_id, smtp_server, smtp_port,
             smtp_user, smtp_password, smtp_encryption, smtp_debug)
-        return self._save_sent_message_to_sentbox(message, mail_server_id)
+        self._save_sent_message_to_sentbox(message, mail_server_id)
+        return res
+
 
     @api.model
-    def _save_sent_message_to_sentbox(self, msg, mail_server_id,):
-        smtp_server = None
-        ir_mail_server = self.env['ir.mail_server']
+    def _save_sent_message_to_sentbox(self, msg, mail_server_id):
         mail_server = None
-        mail_server = ir_mail_server.sudo().search([], order='sequence',
-                                                   limit=1)
+        smtp_server = None
+        if mail_server_id:
+            mail_server = self.sudo().browse(mail_server_id)
+        else:
+            mail_server = self.sudo().search([], order='sequence', limit=1)
         if mail_server:
             if not mail_server.store_outgoing_mail:
                 return True
@@ -89,23 +94,18 @@ class IrMailServer(models.Model):
                 smtp_server = mail_server.smtp_host
             smtp_user = mail_server.smtp_user
             smtp_password = mail_server.smtp_pass
-        if not smtp_server:
-            raise ValidationError(_(
-                "Please define at least one SMTP server, or provide the"
-                " SMTP parameters explicitly."))
-        maillib = imaplib.IMAP4_SSL(smtp_server)
-        try:
-            maillib.login(smtp_user, smtp_password)
-            folder = mail_server.imap_mailbox_folder.name.join('""')
-            maillib.append(folder, r'\Seen', None, str(msg))
-        except Exception, ex:
-                _logger.error(_(
-                    'Failed attaching mail via imap to server %s %s')
-                    % (ex, msg))
-        finally:
-            maillib.logout()
+            try:
+                maillib = imaplib.IMAP4_SSL(smtp_server)
+                maillib.login(smtp_user, smtp_password)
+                folder = mail_server.imap_mailbox_folder.name.join('""')
+                maillib.append(folder, r'\Seen', None, str(msg))
+            except Exception, ex:
+                    _logger.error(_(
+                        'Failed attaching mail via imap to server %s %s')
+                        % (ex, msg))
+            finally:
+                maillib.logout()
         return True
-
 
 class IrMailImapFolder(models.Model):
     _name = 'ir.mail.imap.folder'
