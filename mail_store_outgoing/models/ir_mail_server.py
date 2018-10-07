@@ -59,12 +59,7 @@ class IrMailServer(models.Model):
                 _("Connection Test Failed! "
                     "Here is what we got instead:\n %s") % tools.ustr(e))
         finally:
-            try:
-                if result:
-                    maillib.logout()
-            except Exception:
-                # ignored, just a consequence of the previous exception
-                pass
+            maillib.logout()
 
     @api.model
     def send_email(self, message, mail_server_id=None,
