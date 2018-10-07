@@ -25,7 +25,6 @@ class IrMailServer(models.Model):
 
     @api.model
     def parse_list_response(self, line):
-        print line
         list_response_pattern = re.compile(
             r'\((?P<flags>.*?)\) "(?P<delimiter>.*)" (?P<name>.*)'
         )
