@@ -10,9 +10,9 @@ class TestIrMail(TransactionCase):
         super(TestIrMail, self).setUp()
 
     def test_parse_list_response(self):
-        imap_mailbox = '(\HasNoChildren \UnMarked) "." "INBOX.Deleted Messages"'
+        imap_mailbox = '(\\HasNoChildren \\UnMarked) "." "INBOX.Deleted Messages"'
         flags, delimiter, mailbox_name = self.env['ir.mail_server'].parse_list_response(imap_mailbox)
-        self.assertEqual(flags,'\HasNoChildren \UnMarked')
+        self.assertEqual(flags,'\\HasNoChildren \\UnMarked')
         self.assertEqual(delimiter,'.')
         self.assertEqual(mailbox_name, 'INBOX.Deleted Messages')
 
