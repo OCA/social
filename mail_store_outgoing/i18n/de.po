@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_store_outgoing
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-10-15 14:53+0000\n"
+"PO-Revision-Date: 2017-10-15 16:57+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: mail_store_outgoing
+#: code:addons/mail_store_outgoing/models/ir_mail_server.py:48
+#, python-format
+msgid "Connection Test Failed!"
+msgstr "Verbindung fehlgeschlagen!"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_create_date
+msgid "Created on"
+msgstr "Angelegt am"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_name
+msgid "Foldername"
+msgstr "Verzeichnisname"
+
+#. module: mail_store_outgoing
+#: code:addons/mail_store_outgoing/models/ir_mail_server.py:48
+#, python-format
+msgid ""
+"Here is what we got instead:\n"
+" %s"
+msgstr ""
+"Fehlermeldung:\n"
+" %s"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_server_imap_mailbox_verified
+msgid "IMAP Connection Verified"
+msgstr "IMAP Verbindung verifiziert"
+
+#. module: mail_store_outgoing
+#: model:ir.model,name:mail_store_outgoing.model_ir_mail_imap_folder
+msgid "Imap Folder"
+msgstr "Imap Verzeichnis"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_server_imap_mailbox_folder
+msgid "Imap Folders"
+msgstr "Imap Verzeichnisse"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder___last_update
+msgid "Last Modified on"
+msgstr "Zuletzt geändert am"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert durch"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_imap_folder_server_id
+msgid "Mail Server"
+msgstr "Mailserver"
+
+#. module: mail_store_outgoing
+#: model:ir.ui.view,arch_db:mail_store_outgoing.ir_mail_server_form
+msgid "Outgoing Mail Settings"
+msgstr "Maileinstellungen"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_server_separate_imap_server
+msgid "Separate Imap Server"
+msgstr "Alternativer Imapserver"
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_server_store_outgoing_mail
+msgid "Store Outgoing Mail"
+msgstr "Ausgehende Mails speichern"
+
+#. module: mail_store_outgoing
+#: model:ir.ui.view,arch_db:mail_store_outgoing.ir_mail_server_form
+msgid "Test Imap Connection"
+msgstr "Verbindung testen "
+
+#. module: mail_store_outgoing
+#: model:ir.model.fields,field_description:mail_store_outgoing.field_ir_mail_server_has_separate_imap_server
+msgid "Use Separate Imap Server"
+msgstr "Verwende alternativen IMAP Server"
+
+#. module: mail_store_outgoing
+#: model:ir.model,name:mail_store_outgoing.model_ir_mail_server
+msgid "ir.mail_server"
+msgstr "ir.mail_server"
