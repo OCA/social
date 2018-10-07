@@ -25,6 +25,7 @@ class IrMailServer(models.Model):
 
     @api.model
     def parse_list_response(self, line):
+        line = line.decode('utf-8')
         list_response_pattern = re.compile(
             r'\((?P<flags>.*?)\) "(?P<delimiter>.*)" (?P<name>.*)'
         )
@@ -53,7 +54,7 @@ class IrMailServer(models.Model):
                 res = {'server_id': self.id, 'name': mailbox_name, }
                 imap_pool.create(res)
             self.write({'imap_mailbox_verified': True})
-        except Exception, e:
+        except Exception as e:
             raise ValidationError(
                 _("Connection Test Failed! "
                     "Here is what we got instead:\n %s") % tools.ustr(e))
@@ -98,7 +99,7 @@ class IrMailServer(models.Model):
                 maillib.login(smtp_user, smtp_password)
                 folder = mail_server.imap_mailbox_folder.name.join('""')
                 maillib.append(folder, r'\Seen', None, str(msg))
-            except Exception, ex:
+            except Exception as ex:
                     _logger.error(_(
                         'Failed attaching mail via imap to server %s %s')
                         % (ex, msg))
