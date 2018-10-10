@@ -1,0 +1,508 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_activity
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-10-10 13:53+0000\n"
+"PO-Revision-Date: 2018-10-10 13:53+0000\n"
+"Last-Translator: Ronald Portier <ronald@therp.nl>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: nl_NL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_days
+msgid "# Days"
+msgstr "Dagen"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/js/mail_activity.js:50
+#, python-format
+msgid "%d days overdue"
+msgstr "dagen over tijd"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:56
+#, python-format
+msgid ", due on"
+msgstr ", gepland voor"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.message_activity_done
+msgid "<strong> Feedback</strong>"
+msgstr "Terugkoppeling"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_activity_ids
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_ids
+#: model:ir.model.fields,field_description:mail_activity.field_res_users_activity_ids
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_type_view_form
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_type_view_tree
+#: model:mail.message.subtype,name:mail_activity.mt_activities
+msgid "Activities"
+msgstr "Activiteiten"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_activity_type_id
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_calendar
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Activity"
+msgstr "Activiteit"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_activity_type
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Activity Type"
+msgstr "Soort activiteit"
+
+#. module: mail_activity
+#: model:ir.actions.act_window,name:mail_activity.mail_activity_type_action
+#: model:ir.ui.menu,name:mail_activity.menu_mail_activity_type
+msgid "Activity Types"
+msgstr "Soorten activiteit"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:44
+#, python-format
+msgid "Activity type"
+msgstr "Soort activiteit"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:52
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_user_id
+#, python-format
+msgid "Assigned to"
+msgstr "Toegekend aan"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_call
+msgid "Call"
+msgstr ""
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:72
+#, python-format
+msgid "Cancel"
+msgstr "Annuleren"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_activity_category
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_category
+msgid "Categories may trigger specific behavior like opening calendar view"
+msgstr "Een categorie kan specifieke acties teweeg brengen, zoals het openen van een kalender weergave"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_activity_category
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_category
+msgid "Category"
+msgstr "Categorie"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Created By"
+msgstr "Aangemaakt door"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_create_uid
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_create_uid
+msgid "Created by"
+msgstr "Aangemaakt door"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:48
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_create_date
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_create_date
+#, python-format
+msgid "Created on"
+msgstr "Aangemaakt op"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Deadline"
+msgstr "Uiterste datum"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Discard"
+msgstr "Niet opslaan"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_display_name
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_display_name
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_display_name
+msgid "Display Name"
+msgstr "Weergave naam"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_res_name
+msgid "Display name of the related document."
+msgstr "Weergave naam van gerelateerd document"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_name
+msgid "Document Name"
+msgstr "Documentnaam"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_date_deadline
+msgid "Due Date"
+msgstr "Geplande datum"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/js/mail_activity.js:56
+#, python-format
+msgid "Due in %d days"
+msgstr "Gepland over %d dagen"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:69
+#, python-format
+msgid "Edit"
+msgstr "Bewerken"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_email
+msgid "Email"
+msgstr "Email"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_feedback
+msgid "Feedback"
+msgstr "Terugkoppeling"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_icon
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Future Activities"
+msgstr "Toekomsige activiteiten"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Group By"
+msgstr "Groeperen op"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_id
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_id
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_icon
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_icon
+msgid "Icon"
+msgstr "Icoon"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity___last_update
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin___last_update
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type___last_update
+msgid "Last Modified on"
+msgstr "Laatst gewijzigd op"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_write_uid
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_write_uid
+msgid "Last Updated by"
+msgstr "Laatst bijgewerkt door"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_write_date
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_write_date
+msgid "Last Updated on"
+msgstr "Laatst bijgewerkt op"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Late Activities"
+msgstr "Vertraagde activiteiten"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:5
+#, python-format
+msgid "Log or schedule an activity"
+msgstr "Noteer of plan een activiteit"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_compose_message_mail_activity_type_id
+#: model:ir.model.fields,field_description:mail_activity.field_mail_mail_mail_activity_type_id
+#: model:ir.model.fields,field_description:mail_activity.field_mail_message_mail_activity_type_id
+msgid "Mail Activity Type"
+msgstr "Activiteitsoort Email"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:66
+#, python-format
+msgid "Mark Done"
+msgstr "Als gedaan markeren"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_meeting
+msgid "Meeting"
+msgstr "Bijeenkomst"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_mail_message
+msgid "Message"
+msgstr "Bericht"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_res_model_id
+msgid "Model"
+msgstr "Model"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "My Activities"
+msgstr "Mijn activiteiten"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_name
+msgid "Name"
+msgstr "Naam"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_tree
+msgid "Next Activities"
+msgstr "Vervolgactiviteiten"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_activity_date_deadline
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_date_deadline
+#: model:ir.model.fields,field_description:mail_activity.field_res_users_activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Uiterste datum vervolgactiviteit"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_activity_summary
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_summary
+#: model:ir.model.fields,field_description:mail_activity.field_res_users_activity_summary
+msgid "Next Activity Summary"
+msgstr "Samenvatting vervolgactiviteit"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_activity_type_id
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_type_id
+#: model:ir.model.fields,field_description:mail_activity.field_res_users_activity_type_id
+msgid "Next Activity Type"
+msgstr "Soort vervolgactiviteit"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_has_recommended_activities
+msgid "Next activities available"
+msgstr "Beschikbare vervolgactiviteiten"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_note
+msgid "Note"
+msgstr "Notitie"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_days
+msgid "Number of days before executing the action. It allows to plan the action deadline."
+msgstr "Aantal dagen voor deactie uitgevoerd wordt. Bedoeld om de uiterste datum voor de actie te plannen"
+
+#. module: mail_activity
+#: selection:mail.activity.type,category:0
+msgid "Other"
+msgstr "Andere"
+
+#. module: mail_activity
+#: selection:mail.activity,state:0
+#: selection:mail.activity.mixin,activity_state:0
+#: selection:res.partner,activity_state:0
+msgid "Overdue"
+msgstr "Verlaat"
+
+#. module: mail_activity
+#: model:ir.model,name:mail_activity.model_res_partner
+msgid "Partner"
+msgstr "Relatie"
+
+#. module: mail_activity
+#: selection:mail.activity,state:0
+#: selection:mail.activity.mixin,activity_state:0
+#: selection:res.partner,activity_state:0
+msgid "Planned"
+msgstr "Gepland"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:13
+#, python-format
+msgid "Planned activities"
+msgstr "Geplande activiteiten"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_previous_type_ids
+msgid "Preceding Activities"
+msgstr "Voorafgaande activiteiten"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_previous_activity_type_id
+msgid "Previous Activity Type"
+msgstr "Soort voorafgaande activiteit"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_recommended_activity_type_id
+msgid "Recommended Activity Type"
+msgstr "Aanbevolen soort activiteit"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_next_type_ids
+msgid "Recommended Next Activities"
+msgstr "Aanbevolgen vervolgactiviteiten"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_id
+msgid "Related Document ID"
+msgstr "ID gerelateerd document"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_model
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_res_model_id
+msgid "Related Document Model"
+msgstr "Model gerelateerd document"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_activity_user_id
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_user_id
+#: model:ir.model.fields,field_description:mail_activity.field_res_users_activity_user_id
+msgid "Responsible"
+msgstr "Verantwoordelijke"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_form_popup
+msgid "Save"
+msgstr "Opslaan"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:6
+#, python-format
+msgid "Schedule activity"
+msgstr "Activiteit plannen"
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_sequence
+msgid "Sequence"
+msgstr "Volgorde"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Show all records which has next action date is before today"
+msgstr "Toon alle records waarvoor de geplande datum voor vandaag is"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_type_res_model_id
+msgid "Specify a model if the activity should be specific to a modeland not available when managing activities for other models."
+msgstr "Geef aan of de activiteit specifiek is voor een model, en niet zichtbaar wanneer gewerkt wordt met andere modellen."
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_mixin_activity_state
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_state
+#: model:ir.model.fields,field_description:mail_activity.field_res_partner_activity_state
+#: model:ir.model.fields,field_description:mail_activity.field_res_users_activity_state
+msgid "State"
+msgstr "Status"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_mixin_activity_state
+#: model:ir.model.fields,help:mail_activity.field_res_partner_activity_state
+#: model:ir.model.fields,help:mail_activity.field_res_users_activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr "Status gebaseerd op activiteiten\n"
+"Verlaat: geplande datum is al gepasseerd\n"
+"Vandaag: datum activiteit is vandaag\n"
+"Gepland: toekomstige activiteiten."
+
+#. module: mail_activity
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_summary
+#: model:ir.model.fields,field_description:mail_activity.field_mail_activity_type_summary
+msgid "Summary"
+msgstr "Samenvatting"
+
+#. module: mail_activity
+#: model:ir.model.fields,help:mail_activity.field_mail_activity_has_recommended_activities
+msgid "Technical field for UX purpose"
+msgstr "Technisch veld voor UX doeleinden"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/js/mail_activity.js:44
+#: selection:mail.activity,state:0
+#: selection:mail.activity.mixin,activity_state:0
+#: selection:res.partner,activity_state:0
+#, python-format
+msgid "Today"
+msgstr "Vandaag"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.mail_activity_view_search
+msgid "Today Activities"
+msgstr "Activiteiten vandaag"
+
+#. module: mail_activity
+#: model:mail.activity.type,name:mail_activity.mail_activity_data_todo
+msgid "Todo"
+msgstr "Te doen"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/js/mail_activity.js:54
+#, python-format
+msgid "Tomorrow"
+msgstr "Morgen"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/js/mail_activity.js:48
+#, python-format
+msgid "Yesterday"
+msgstr "Gisteren"
+
+#. module: mail_activity
+#: model:ir.ui.view,arch_db:mail_activity.message_activity_done
+msgid "done\n"
+"        by"
+msgstr "gedaan\n"
+"        door\n"
+
+#. module: mail_activity
+#. openerp-web
+#: code:addons/mail_activity/static/src/xml/mail_activity.xml:37
+#, python-format
+msgid "for"
+msgstr "voor"
+
