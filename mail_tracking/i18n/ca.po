@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2018-10-11 15:05+0000\n"
+"Last-Translator: eduardgm <eduard.garcia@qubiq.es>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email_state
@@ -41,46 +42,65 @@ msgid ""
 " * The 'Soft bounced' status indicates that message was soft bounced by "
 "recipient Mail Exchange (MX) server.\n"
 msgstr ""
+" * L'estat \"Error\" indica que hi ha hagut un error en intentar enviar el "
+"correu electrònic, per exemple, \"No hi ha destinatari vàlid\"\n"
+" * L'estat \"Enviat\" indica que el missatge s'ha enviat correctament "
+"mitjançant un servidor de correu electrònic de sortida (SMTP).\n"
+" * L'estat \"Lliurat\" indica que el missatge s'ha enviat correctament al "
+"servidor Exchange de correu (MX) del destinatari.\n"
+" * L'estat \"Obert\" indica que el destinatari ha obert o ha fet clic al "
+"missatge.\n"
+" * L'estat \"Rebutjat\" indica que l'adreça de correu electrònic del "
+"destinatari està en la llista negra del servidor de correu electrònic de "
+"sortida (SMTP). Es recomana eliminar aquesta adreça de correu electrònic.\n"
+" * L'estat \"Correu Brossa\" indica que el servidor de correu sortint (SMTP) "
+"considera que aquest missatge és correu brossa.\n"
+" * L'estat \"Anul·lar subscripció\" indica que el destinatari ha sol·licitat "
+"la baixa de subscripció d'aquest missatge.\n"
+" * L'estat \"Rebotat\" indica que el missatge va ser rebotat pel servidor "
+"d'enviament de correu (MX) del destinatari.\n"
+" * L'estat \"Rebot suau\" indica que el missatge va ser rebutjat pel "
+"servidor de correu (MX) del destinatari.\n"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
-msgstr ""
+msgstr "Rebot"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_bounce_description
 msgid "Bounce description"
-msgstr ""
+msgstr "Descripció del rebot"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_bounce_type
 msgid "Bounce type"
-msgstr ""
+msgstr "Tipus de rebot"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Bounced"
-msgstr ""
+msgstr "Rebotat"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
-msgstr ""
+msgstr "Clic"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Clicked"
-msgstr ""
+msgstr "Clicat"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_url
 msgid "Clicked URL"
-msgstr ""
+msgstr "URL Clicada"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacte"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
@@ -112,13 +132,13 @@ msgstr "Data"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Deferral"
-msgstr ""
+msgstr "Ajornament"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 msgid "Deferred"
-msgstr ""
+msgstr "Ajornat"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -126,7 +146,7 @@ msgstr ""
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Delivered"
-msgstr ""
+msgstr "Enviat"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_display_name
@@ -136,7 +156,7 @@ msgstr "Veure el nom"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
 msgid "Display name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_id
@@ -147,16 +167,14 @@ msgstr "Correu electrònic"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_bounced
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_bounced
-#, fuzzy
 msgid "Email Bounced"
 msgstr "Correu electrònic rebotat"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_score
-#, fuzzy
 msgid "Email Score"
-msgstr "Puntuació de correu electrònic"
+msgstr "Puntuació del correu electrònic"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
@@ -172,29 +190,29 @@ msgstr "Error"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_smtp_server
 msgid "Error SMTP server"
-msgstr ""
+msgstr "Error del servidor SMTP"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_description
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_description
 msgid "Error description"
-msgstr ""
+msgstr "Descripció de l'error"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_details
 msgid "Error details"
-msgstr ""
+msgstr "Detalls de l'error"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_type
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_type
 msgid "Error type"
-msgstr ""
+msgstr "Tipus d'error"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_event_type
 msgid "Event type"
-msgstr ""
+msgstr "Tipus d'esdeveniment"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -211,7 +229,7 @@ msgstr "Agrupa Per"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Hard bounce"
-msgstr ""
+msgstr "Rebot rígid"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_id
@@ -222,12 +240,12 @@ msgstr "ID"
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_mobile
 msgid "Is mobile?"
-msgstr ""
+msgstr "És mòbil?"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email___last_update
@@ -255,31 +273,31 @@ msgstr "MailTracking correu electrònic"
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "MailTracking email search"
-msgstr ""
+msgstr "MailTracking cerca correu electrònic"
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_email
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 msgid "MailTracking emails"
-msgstr ""
+msgstr "MailTracking correus electrònics"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_event
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 msgid "MailTracking event"
-msgstr "MailTracking esdeveniments"
+msgstr "MailTracking esdeveniment"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "MailTracking event search"
-msgstr ""
+msgstr "MailTracking cerca d'esdeveniment"
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "MailTracking events"
-msgstr ""
+msgstr "MailTracking esdeveniments"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -294,7 +312,7 @@ msgstr "Missatge"
 #: code:addons/mail_tracking/static/src/js/mail_tracking.js:61
 #, python-format
 msgid "Message tracking"
-msgstr ""
+msgstr "Seguiment del correu"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -307,23 +325,23 @@ msgstr "Mes"
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "OS"
-msgstr ""
+msgstr "SO"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
-msgstr ""
+msgstr "Obre"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Opened"
-msgstr ""
+msgstr "Obert"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_os_family
 msgid "Operating system family"
-msgstr ""
+msgstr "Família del Sistema Operatiu"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_mail
@@ -341,40 +359,40 @@ msgstr "Empresa"
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Recipient"
-msgstr ""
+msgstr "Destinatari"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient
 msgid "Recipient email"
-msgstr ""
+msgstr "Correu electrònic del destinatari"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient_address
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient_address
 msgid "Recipient email address"
-msgstr ""
+msgstr "Adreça de correu electrònic del destinatari"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Rejected"
-msgstr ""
+msgstr "Rebutjat"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_smtp_server
 msgid "SMTP server"
-msgstr ""
+msgstr "Servidor SMTP"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 msgid "Sender"
-msgstr ""
+msgstr "Remitent"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_sender
 msgid "Sender email"
-msgstr ""
+msgstr "Correu electrònic del remitent"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -387,18 +405,18 @@ msgstr "Enviat"
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Soft bounce"
-msgstr ""
+msgstr "Rebot suau"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Soft bounced"
-msgstr ""
+msgstr "Rebot suau"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Spam"
-msgstr ""
+msgstr "Correu brossa"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_state
@@ -418,41 +436,40 @@ msgstr "Assumpte"
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Time"
-msgstr ""
+msgstr "Temps"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:46
 #, python-format
 msgid "To:"
-msgstr ""
+msgstr "Per:"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_emails_count
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_tracking_emails_count
-#, fuzzy
 msgid "Tracking Emails Count"
-msgstr "MailTracking correu electrònic"
+msgstr "Seguiment del contador de correus electrònics"
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 #: model:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
-msgstr ""
+msgstr "Seguiment dels correus electrònics"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_tracking_event_ids
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_event
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 msgid "Tracking events"
-msgstr "Esdeveniments de seguiment"
+msgstr "Seguiment dels esdeveniments"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/js/mail_tracking.js:41
 #, python-format
 msgid "Tracking partner"
-msgstr ""
+msgstr "Seguiment de l'empresa"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -462,36 +479,37 @@ msgstr "Tipus"
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_timestamp
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_timestamp
 msgid "UTC timestamp"
-msgstr ""
+msgstr "Marca d'hora UTC"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Anul·lar subscripció"
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
-msgstr ""
+msgstr "Subscripció cancel·lada"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ip
 msgid "User IP"
-msgstr ""
+msgstr "IP de l'usuari"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_agent
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
+#, fuzzy
 msgid "User agent"
 msgstr "Aplicació de l'usuari"
 
@@ -509,9 +527,9 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_country_id
 msgid "User country"
-msgstr ""
+msgstr "País de l'usuari"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_ir_mail_server
 msgid "ir.mail_server"
-msgstr ""
+msgstr "ir.mail_server"
