@@ -9,7 +9,7 @@ _logger = logging.getLogger(__name__)
 try:
     from sendgrid.helpers.mail import TrackingSettings, SubscriptionTracking
 except ImportError:
-    _logger.warning("ImportError raised while loading module.")
+    _logger.info("ImportError raised while loading module.")
     _logger.debug("ImportError details:", exc_info=True)
 
 
