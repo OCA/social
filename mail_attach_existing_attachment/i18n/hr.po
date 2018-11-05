@@ -21,12 +21,7 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_object_attachment_ids
-msgid "Attachments"
-msgstr "Privitci"
-
-#. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_can_attach_attachment
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__can_attach_attachment
 msgid "Can Attach Attachment"
 msgstr "Može pridružiti privitak"
 
@@ -34,3 +29,9 @@ msgstr "Može pridružiti privitak"
 #: model:ir.model,name:mail_attach_existing_attachment.model_mail_compose_message
 msgid "Email composition wizard"
 msgstr "Čarobnjak za sastavljanje maila"
+
+#. module: mail_attach_existing_attachment
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__object_attachment_ids
+#, fuzzy
+msgid "Object Attachments"
+msgstr "Privitci"
