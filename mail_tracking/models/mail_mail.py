@@ -27,8 +27,8 @@ class MailMail(models.Model):
             'sender': self.email_from,
         }
 
-    def send_get_email_dict(self, partner=None):
-        email = super(MailMail, self).send_get_email_dict(partner=partner)
+    def _send_prepare_values(self, partner=None):
+        email = super(MailMail, self)._send_prepare_values(partner=partner)
         vals = self._tracking_email_prepare(partner, email)
         tracking_email = self.env['mail.tracking.email'].sudo().create(vals)
         return tracking_email.tracking_img_add(email)
