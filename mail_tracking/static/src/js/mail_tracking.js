@@ -6,33 +6,60 @@ odoo.define('mail_tracking.partner_tracking', function(require){
     "use strict";
 
     var core = require('web.core');
-    var session = require('web.session');
-    var data = require('web.data');
     var ActionManager = require('web.ActionManager');
-    var chat_manager = require('mail.chat_manager');
-    var ChatThread = require('mail.ChatThread');
-    var Chatter = require('mail.Chatter');
+    var AbstractMessage = require('mail.model.AbstractMessage');
+    var Message = require('mail.model.Message');
+    var ThreadWidget = require('mail.widget.Thread');
 
     var _t = core._t;
 
-    // chat_manager is a simple dictionary, not an OdooClass
-    chat_manager._make_message_super = chat_manager.make_message;
-    chat_manager.make_message = function(data) {
-        var msg = this._make_message_super(data);
-        msg.partner_trackings = data.partner_trackings || [];
-        return msg;
-    };
+    AbstractMessage.include({
+        /**
+         * Messages do not have any PartnerTrackings.
+         *
+         * @return {boolean}
+         */
+        hasPartnerTrackings: function () {
+            return false;
+        },
+    });
 
-    ChatThread.include({
-        events: _.extend(ChatThread.prototype.events, {
+    Message.include({
+        init: function (parent, data, emojis) {
+            this._super.apply(this, arguments);
+            this._partnerTrackings = data.partner_trackings || [];
+        },
+
+        /**
+         * State whether this message contains some PartnerTrackings values
+         *
+         * @override
+         * @return {boolean}
+         */
+        hasPartnerTrackings: function () {
+            return !!(this._partnerTrackings && (this._partnerTrackings.length > 0));
+        },
+
+        /**
+         * Get the PartnerTrackings values of this message
+         * If this message has no PartnerTrackings values, returns []
+         *
+         * @override
+         * @return {Object[]}
+         */
+        getPartnerTrackings: function () {
+            if (!this.hasPartnerTrackings()) {
+                return [];
+            }
+            return this._partnerTrackings;
+        },
+    });
+
+    ThreadWidget.include({
+        events: _.extend(ThreadWidget.prototype.events, {
             'click .o_mail_action_tracking_partner': 'on_tracking_partner_click',
             'click .o_mail_action_tracking_status': 'on_tracking_status_click',
         }),
-        _preprocess_message: function (message) {
-            var msg = this._super.apply(this, arguments);
-            msg.partner_trackings = msg.partner_trackings || [];
-            return msg;
-        },
         on_tracking_partner_click: function (event) {
             var partner_id = this.$el.find(event.currentTarget).data('partner');
             var state = {
