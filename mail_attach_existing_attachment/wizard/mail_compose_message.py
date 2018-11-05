@@ -41,7 +41,8 @@ class MailComposeMessage(models.TransientModel):
     object_attachment_ids = fields.Many2many(
         comodel_name='ir.attachment',
         relation='mail_compose_message_ir_attachments_object_rel',
-        column1='wizard_id', column2='attachment_id', string='Attachments')
+        column1='wizard_id', column2='attachment_id',
+        string='Object Attachments')
 
     @api.multi
     def get_mail_values(self, res_ids):
