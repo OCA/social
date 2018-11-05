@@ -96,13 +96,13 @@
                     context="{'event_error_filter': True}"/>
             <separator/>
             <group expand="0" string="Group By">
-                <filter string="Type" domain="[]" context="{'group_by': 'event_type'}"/>
-                <filter string="Message" domain="[]" context="{'group_by': 'tracking_email_id'}"/>
-                <filter string="OS" domain="[('os_family', '!=', False)]" context="{'group_by': 'os_family'}"/>
-                <filter string="User agent" domain="[('ua_family', '!=', False)]" context="{'group_by': 'ua_family'}"/>
-                <filter string="User agent type" domain="[('ua_type', '!=', False)]" context="{'group_by': 'ua_type'}"/>
-                <filter string="Country" domain="[('user_country_id', '!=', False)]" context="{'group_by': 'user_country_id'}"/>
-                <filter string="Month" domain="[]" context="{'group_by': 'date'}"/>
+                <filter string="Type" name="group_by_type" domain="[]" context="{'group_by': 'event_type'}"/>
+                <filter string="Message" name="group_by_message" domain="[]" context="{'group_by': 'tracking_email_id'}"/>
+                <filter string="OS" name="group_by_os" domain="[('os_family', '!=', False)]" context="{'group_by': 'os_family'}"/>
+                <filter string="User agent" name="group_by_user_agent" domain="[('ua_family', '!=', False)]" context="{'group_by': 'ua_family'}"/>
+                <filter string="User agent type" name="group_by_user_agent_type" domain="[('ua_type', '!=', False)]" context="{'group_by': 'ua_type'}"/>
+                <filter string="Country" name="group_by_country" domain="[('user_country_id', '!=', False)]" context="{'group_by': 'user_country_id'}"/>
+                <filter string="Month" name="group_by_date" domain="[]" context="{'group_by': 'date'}"/>
             </group>
         </search>
     </field>
