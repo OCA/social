@@ -10,8 +10,7 @@ class MailMail(models.Model):
 
     @api.model
     def _tracking_email_prepare(self, partner, email):
-        res = super(MailMail, self)._tracking_email_prepare(
-            partner, email)
+        res = super(MailMail, self)._tracking_email_prepare(partner, email)
         res['mail_id_int'] = self.id
         res['mass_mailing_id'] = self.mailing_id.id
         res['mail_stats_id'] = self.statistics_ids[:1].id \
@@ -19,6 +18,6 @@ class MailMail(models.Model):
         return res
 
     @api.model
-    def _get_tracking_url(self, mail, partner=None):
+    def _get_tracking_url(self):
         # Invalid this tracking image, we have other to do the same
         return False
