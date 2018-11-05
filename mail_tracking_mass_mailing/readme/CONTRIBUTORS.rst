@@ -1,4 +1,7 @@
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* Antonio Espinosa <antonio.espinosa@tecnativa.com>
-* Vicent Cubells <vicent.cubells@tecnativa.com>
-* David Vidal <david.vidal@tecnativa.com>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Pedro M. Baeza
+  * Antonio Espinosa
+  * Vicent Cubells
+  * David Vidal
+  * Ernesto Tejeda
