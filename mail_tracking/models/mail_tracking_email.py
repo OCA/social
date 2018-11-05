@@ -94,12 +94,16 @@ class MailTrackingEmail(models.Model):
 
     @api.model
     def email_is_bounced(self, email):
-        if email:
-            return self.search_count([
-                ('recipient_address', '=', email.lower()),
-                ('state', 'in', ('error', 'rejected', 'spam', 'bounced')),
-            ]) > 0
-        return False
+        if not email:
+            return False
+        res = self._email_last_tracking_state(email)
+        return res and res[0].get('state', '') in ['rejected', 'error',
+                                                   'spam', 'bounced']
+
+    @api.model
+    def _email_last_tracking_state(self, email):
+        return self.search_read([('recipient_address', '=', email.lower())],
+                                ['state'], limit=1, order='time DESC')
 
     @api.model
     def email_score_from_email(self, email):
