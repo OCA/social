@@ -23,14 +23,13 @@
 ##############################################################################
 {
     'name': "Mail Attach Existing Attachment",
-    'summary': """
-        Adding attachment on the object by sending this one""",
-    'author': "ACSONE SA/NV,"
-              "Tecnativa,"
+    'summary': "Adding attachment on the object by sending this one",
+    'author': "ACSONE SA/NV, "
+              "Tecnativa, "
               "Odoo Community Association (OCA)",
-    'website': "http://acsone.eu",
+    'website': "https://github.com/OCA/social",
     'category': 'Social Network',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
         'mail',
