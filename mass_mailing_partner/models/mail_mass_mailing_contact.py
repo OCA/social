@@ -64,7 +64,7 @@ class MailMassMailingContact(models.Model):
         m_mailing = self.env['mail.mass_mailing.list']
         m_partner = self.env['res.partner']
         list_id = vals.get('list_id', self.list_id.id)
-        mailing_list = m_mailing.browse(list_id, self._prefetch)
+        mailing_list = m_mailing.browse(list_id, prefetch=self._prefetch)
         # Look for a partner with that email
         email = email.strip()
         partner = m_partner.search([('email', '=ilike', email)], limit=1)
