@@ -20,12 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_object_attachment_ids
-msgid "Attachments"
-msgstr "Anexos"
-
-#. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message_can_attach_attachment
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__can_attach_attachment
 msgid "Can Attach Attachment"
 msgstr "Pode Anexar Anexo"
 
@@ -33,3 +28,9 @@ msgstr "Pode Anexar Anexo"
 #: model:ir.model,name:mail_attach_existing_attachment.model_mail_compose_message
 msgid "Email composition wizard"
 msgstr "Assistente de Composição de Email"
+
+#. module: mail_attach_existing_attachment
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__object_attachment_ids
+#, fuzzy
+msgid "Object Attachments"
+msgstr "Anexos"
