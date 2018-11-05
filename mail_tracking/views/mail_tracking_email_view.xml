@@ -94,10 +94,10 @@
                     domain="[('state', 'in', ('error', 'rejected', 'spam', 'bounced', 'soft-bounced'))]"/>
             <separator/>
             <group expand="0" string="Group By">
-                <filter string="State" domain="[]" context="{'group_by': 'state'}"/>
-                <filter string="Subject" domain="[]" context="{'group_by': 'name'}"/>
-                <filter string="Sender" domain="[]" context="{'group_by': 'sender'}"/>
-                <filter string="Month" domain="[]" context="{'group_by': 'date'}"/>
+                <filter string="State" name="group_by_state" domain="[]" context="{'group_by': 'state'}"/>
+                <filter string="Subject" name="group_by_subject" domain="[]" context="{'group_by': 'name'}"/>
+                <filter string="Sender" name="group_by_sender" domain="[]" context="{'group_by': 'sender'}"/>
+                <filter string="Month" name="group_by_month" domain="[]" context="{'group_by': 'date'}"/>
             </group>
         </search>
     </field>
