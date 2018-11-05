@@ -82,7 +82,8 @@ class MailMassMailingContact(models.Model):
         partner_id = vals.get('partner_id', self.partner_id.id)
         if not partner_id:
             return vals
-        partner = self.env['res.partner'].browse(partner_id, prefetch=self._prefetch)
+        partner = self.env['res.partner'].browse(
+            partner_id, prefetch=self._prefetch)
         if vals.get("email", self.email) != partner.email:
             vals['email'] = partner.email
         if vals.get("name", self.name) != partner.name:
