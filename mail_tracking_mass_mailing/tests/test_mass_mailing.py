@@ -8,7 +8,7 @@ import mock
 from odoo.tools import mute_logger
 from odoo.tests.common import at_install, post_install, TransactionCase
 
-mock_send_email = ('odoo.addons.base.ir.ir_mail_server.'
+mock_send_email = ('odoo.addons.base.models.ir_mail_server.'
                    'IrMailServer.send_email')
 
 
@@ -32,8 +32,7 @@ class TestMassMailing(TransactionCase):
             'mailing_model_id': self.env.ref(
                 'mass_mailing.model_mail_mass_mailing_contact'
             ).id,
-            'mailing_domain': "[('list_ids', '=', %d), "
-                              "('opt_out', '=', False)]" % self.list.id,
+            'mailing_domain': "[('list_ids', 'in', %d)]" % self.list.id,
             'contact_list_ids': [(6, False, [self.list.id])],
             'body_html': '<p>Test email body</p>',
             'reply_to_mode': 'email',
