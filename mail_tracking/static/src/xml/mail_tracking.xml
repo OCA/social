@@ -40,33 +40,35 @@
     </t>
 </t>
 
-<t t-extend="mail.ChatThread.Message">
-    <t t-jquery="p[class='o_mail_info']" t-operation="after">
-        <p class="o_mail_tracking">
-            <strong>To:</strong>
-            <t t-set="first_tracking" t-value="true"/>
-            <t t-foreach="message.partner_trackings" t-as="tracking">
-                <t t-if="!first_tracking">
-                      -
+<t t-extend="mail.widget.Thread.Message">
+    <t t-jquery="p.o_mail_info" t-operation="after">
+        <t t-if="message.hasPartnerTrackings()" >
+            <p class="o_mail_tracking">
+                <strong>To:</strong>
+                <t t-set="first_tracking" t-value="true"/>
+                <t t-foreach="message.getPartnerTrackings()" t-as="tracking">
+                    <t t-if="!first_tracking">
+                             -
+                    </t>
+                    <t t-if="tracking[3]">
+                        <a class="o_mail_action_tracking_partner"
+                           t-att-data-partner="tracking[3]"
+                           t-attf-href="#model=res.partner&amp;id=#{tracking[3]}">
+                            <t t-esc="tracking[2]"/>
+                        </a>
+                    </t>
+                    <t t-if="!tracking[3]">
+                        <span><t t-esc="tracking[2]"/></span>
+                    </t>
+                    <span class="mail_tracking o_mail_action_tracking_status"
+                          t-att-data-tracking="tracking[1]"
+                          t-attf-title="Status: #{tracking[0]}">
+                        <t t-call="mail.tracking.status"/>
+                    </span>
+                    <t t-set="first_tracking" t-value="false"/>
                 </t>
-                <t t-if="tracking[3]">
-                    <a class="o_mail_action_tracking_partner"
-                       t-att-data-partner="tracking[3]"
-                       t-attf-href="#model=res.partner&amp;id=#{tracking[3]}">
-                        <t t-esc="tracking[2]"/>
-                    </a>
-                </t>
-                <t t-if="!tracking[3]">
-                    <span><t t-esc="tracking[2]"/></span>
-                </t>
-                <span class="mail_tracking o_mail_action_tracking_status"
-                      t-att-data-tracking="tracking[1]"
-                      t-attf-title="Status: #{tracking[0]}">
-                    <t t-call="mail.tracking.status"/>
-                </span>
-                <t t-set="first_tracking" t-value="false"/>
-            </t>
-        </p>
+            </p>
+        </t>
     </t>
 </t>
 
