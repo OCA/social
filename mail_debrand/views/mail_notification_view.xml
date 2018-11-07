@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+    <template id="message_notification_email" inherit_id="mail.message_notification_email" priority="99">
+        <xpath expr="//div/p[last()]" position="replace" >
+            <p style="color: #555555; margin-top:32px;">
+                Sent by
+                <a t-if="website_url" t-att-href="website_url" style="text-decoration:none; color: #875A7B;">
+                    <span t-esc="company.name"/>
+                </a>
+                <span t-if="not website_url" t-esc="company.name"/>
+            </p>
+        </xpath>
+    </template>
+
+    <!-- Replaces Powered By on these notifications -->
+    <template id="mail_notification_borders" inherit_id="mail.mail_notification_borders" priority="99">
+        <xpath expr="//tr[last()]" position="replace" />
+    </template>
+
+    <template id="mail_notification_light" inherit_id="mail.mail_notification_light" priority="99">
+        <xpath expr="//tr[last()]" position="replace" />
+    </template>
+
+    <template id="mail_notification_paynow" inherit_id="mail.mail_notification_paynow" priority="99">
+        <xpath expr="//tr[last()]" position="replace" />
+    </template>
+
+</odoo>
