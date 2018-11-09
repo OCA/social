@@ -26,13 +26,13 @@ class ResPartnerCase(base.BaseCase):
 
         title_doctor = self.env.ref('base.res_partner_title_doctor')
         country_cu = self.env.ref('base.cu')
-        category_4 = self.env.ref('base.res_partner_category_4')
-        category_5 = self.env.ref('base.res_partner_category_5')
+        category_8 = self.env.ref('base.res_partner_category_8')
+        category_11 = self.env.ref('base.res_partner_category_11')
         self.partner.write({
             'name': 'Changed', 'email': 'partner@changed.com',
             'title': title_doctor.id, 'company_id': self.main_company.id,
             'country_id': country_cu.id,
-            'category_id': [(6, 0, (category_4 | category_5).ids)],
+            'category_id': [(6, 0, (category_8 | category_11).ids)],
         })
         self.check_mailing_contact_partner(contact)
         with self.assertRaises(ValidationError):

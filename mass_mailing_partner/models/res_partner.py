@@ -14,7 +14,6 @@ class ResPartner(models.Model):
     mass_mailing_contact_ids = fields.One2many(
         string="Mailing contacts",
         oldname="mass_mailing_contacts",
-        domain=[('opt_out', '=', False)],
         comodel_name='mail.mass_mailing.contact', inverse_name='partner_id')
     mass_mailing_contacts_count = fields.Integer(
         string='Mailing contacts number',
@@ -36,8 +35,7 @@ class ResPartner(models.Model):
                     "mailing contact. Email must be assigned."
                 ) % partner.name)
 
-    @api.depends('mass_mailing_contact_ids',
-                 'mass_mailing_contact_ids.opt_out')
+    @api.depends('mass_mailing_contact_ids')
     def _compute_mass_mailing_contacts_count(self):
         contact_data = self.env['mail.mass_mailing.contact'].read_group(
             [('partner_id', 'in', self.ids)], ['partner_id'], ['partner_id'])
