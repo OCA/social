@@ -45,6 +45,10 @@ class MailMassMailingContact(models.Model):
             record._set_partner()
         record._onchange_partner_mass_mailing_partner()
         new_vals = record._convert_to_write(record._cache)
+        new_vals.update(
+            subscription_list_ids=vals.get('subscription_list_ids', False),
+            list_ids=vals.get('list_ids', False)
+        )
         return super(MailMassMailingContact, self).create(new_vals)
 
     def write(self, vals):
@@ -55,6 +59,10 @@ class MailMassMailingContact(models.Model):
                 record._set_partner()
             record._onchange_partner_mass_mailing_partner()
             new_vals = record._convert_to_write(record._cache)
+            new_vals.update(
+                subscription_list_ids=vals.get('subscription_list_ids', False),
+                list_ids=vals.get('list_ids', False)
+            )
             super(MailMassMailingContact, contact).write(new_vals)
         return True
 
@@ -92,6 +100,9 @@ class MailMassMailingContact(models.Model):
         if partner:
             # Partner found
             self.partner_id = partner
-        elif self.list_ids.filtered('partner_mandatory'):
-            # Create partner
-            self.partner_id = m_partner.sudo().create(self._prepare_partner())
+        else:
+            lts = self.subscription_list_ids.mapped('list_id') | self.list_ids
+            if lts.filtered('partner_mandatory'):
+                # Create partner
+                partner_vals = self._prepare_partner()
+                self.partner_id = m_partner.sudo().create(partner_vals)
