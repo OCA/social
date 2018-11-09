@@ -7,3 +7,4 @@ from . import mail_mass_mailing_contact
 from . import res_partner
 from . import mail_mass_mailing
 from . import mail_mail_statistics
+from . import mail_mass_mailing_list_contact_rel
