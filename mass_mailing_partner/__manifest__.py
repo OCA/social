@@ -5,7 +5,7 @@
 
 {
     "name": "Link partners with mass-mailing",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",

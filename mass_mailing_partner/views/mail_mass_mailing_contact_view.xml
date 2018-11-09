@@ -22,9 +22,9 @@
         <field name="model">mail.mass_mailing.contact</field>
         <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_form"/>
         <field name="arch" type="xml">
-            <field name="email" position="after">
+            <xpath expr="//field[@name='email']/.." position="after">
                 <field name="partner_id"/>
-            </field>
+            </xpath>
             <field name="title_id" position="attributes">
                 <attribute name="attrs">{'readonly': [('partner_id', '!=', False)]}</attribute>
             </field>
