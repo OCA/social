@@ -3,6 +3,7 @@
 
 from odoo.tests import common
 from odoo import exceptions
+
 from ..hooks import pre_init_hook
 
 
@@ -31,10 +32,56 @@ class TestMassMailingUnique(common.SavepointCase):
         with self.assertRaises(exceptions.ValidationError):
             pre_init_hook(self.env.cr)
 
-    def test_init_hook_contact(self):
+    def test_add_contact_with_list(self):
         with self.assertRaises(exceptions.ValidationError):
             self.env['mail.mass_mailing.contact'].create({
                 'name': 'Contact 2',
                 'email': 'email1@test.com',
                 'list_ids': [(6, 0, [self.list.id])]
+            })
+
+    def test_add_contact_with_subscription(self):
+        with self.assertRaises(exceptions.ValidationError):
+            self.env['mail.mass_mailing.contact'].create({
+                'name': 'Contact 2',
+                'email': 'email1@test.com',
+                'subscription_list_ids': [
+                    (0, 0, {'list_id': self.list.id})
+                ]
+            })
+
+    def test_add_list_with_contacts(self):
+        contact2 = self.env['mail.mass_mailing.contact'].create({
+            'name': 'Contact 2',
+            'email': 'email1@test.com',
+        })
+        with self.assertRaises(exceptions.ValidationError):
+            self.env['mail.mass_mailing.list'].create({
+                'name': 'Test list 2',
+                'contact_ids': [(6, 0, (self.contact1 | contact2).ids)]
+            })
+
+    def test_add_list_with_subscriptions(self):
+        contact2 = self.env['mail.mass_mailing.contact'].create({
+            'name': 'Contact 2',
+            'email': 'email1@test.com',
+        })
+        with self.assertRaises(exceptions.ValidationError):
+            self.env['mail.mass_mailing.list'].create({
+                'name': 'Test list 2',
+                'subscription_contact_ids': [
+                    (0, 0, {'contact_id': self.contact1.id}),
+                    (0, 0, {'contact_id': contact2.id})
+                ]
+            })
+
+    def test_add_list_contact_rel(self):
+        contact2 = self.env['mail.mass_mailing.contact'].create({
+            'name': 'Contact 2',
+            'email': 'email1@test.com',
+        })
+        with self.assertRaises(exceptions.ValidationError):
+            self.env['mail.mass_mailing.list_contact_rel'].create({
+                'list_id': self.list.id,
+                'contact_id': contact2.id
             })
