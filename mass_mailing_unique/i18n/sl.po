@@ -25,16 +25,10 @@ msgid "Cannot have more than one lists with the same name."
 msgstr "Imate lahko le en seznam z istim imenom."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/models/mass_mailing.py:21
+#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:21
 #, fuzzy, python-format
 msgid "Cannot have the same email more than once in the same list"
 msgstr "Isti e-poštni naslov imate lahko le enkrat v istem seznamu."
-
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:45
-#, python-format
-msgid "Fix this before installing:"
-msgstr "Popravite pred namestitvijo:"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
@@ -47,13 +41,15 @@ msgid "Mass Mailing Contact"
 msgstr "Stik masovne pošte"
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:40
-#, python-format
-msgid "There are {1} lists with name {0}."
-msgstr "{1} seznamov z imenom {0}."
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list_contact_rel
+msgid "Mass Mailing Subscription Information"
+msgstr ""
 
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:31
-#, python-format
-msgid "{0} appears {2} times in list {1}."
-msgstr "{0} se pojavi {2} krat v seznamu {1}."
+#~ msgid "Fix this before installing:"
+#~ msgstr "Popravite pred namestitvijo:"
+
+#~ msgid "There are {1} lists with name {0}."
+#~ msgstr "{1} seznamov z imenom {0}."
+
+#~ msgid "{0} appears {2} times in list {1}."
+#~ msgstr "{0} se pojavi {2} krat v seznamu {1}."

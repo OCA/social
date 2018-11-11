@@ -24,18 +24,12 @@ msgid "Cannot have more than one lists with the same name."
 msgstr "No es pot tenir més d'una llista amb el mateix nom."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/models/mass_mailing.py:21
+#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:21
 #, fuzzy, python-format
 msgid "Cannot have the same email more than once in the same list"
 msgstr ""
 "No es pot tenir el mateix correu electrònic més d'una vegada en la mateixa "
 "llista."
-
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:45
-#, python-format
-msgid "Fix this before installing:"
-msgstr "Solucionar això abans d'instal·lar:"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
@@ -48,13 +42,15 @@ msgid "Mass Mailing Contact"
 msgstr "Contactes del correu massiu"
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:40
-#, python-format
-msgid "There are {1} lists with name {0}."
-msgstr "Hi ha {1} llistes amb el nom {0}."
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list_contact_rel
+msgid "Mass Mailing Subscription Information"
+msgstr ""
 
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:31
-#, python-format
-msgid "{0} appears {2} times in list {1}."
-msgstr "{0} apareix  {2} vegades en la llista {1}."
+#~ msgid "Fix this before installing:"
+#~ msgstr "Solucionar això abans d'instal·lar:"
+
+#~ msgid "There are {1} lists with name {0}."
+#~ msgstr "Hi ha {1} llistes amb el nom {0}."
+
+#~ msgid "{0} appears {2} times in list {1}."
+#~ msgstr "{0} apareix  {2} vegades en la llista {1}."
