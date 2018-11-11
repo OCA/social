@@ -24,17 +24,11 @@ msgid "Cannot have more than one lists with the same name."
 msgstr "Non è possibile avere più di una lista con lo stesso nome."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/models/mass_mailing.py:21
+#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:21
 #, fuzzy, python-format
 msgid "Cannot have the same email more than once in the same list"
 msgstr ""
 "Non è possibile inserire la stessa email più di una volta nella stessa lista."
-
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:45
-#, python-format
-msgid "Fix this before installing:"
-msgstr "Da risolvere prima dell'installazione:"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
@@ -47,13 +41,15 @@ msgid "Mass Mailing Contact"
 msgstr "Contatto Mass Mailing"
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:40
-#, python-format
-msgid "There are {1} lists with name {0}."
-msgstr "Ci sono {1} liste con il nome {0}."
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list_contact_rel
+msgid "Mass Mailing Subscription Information"
+msgstr ""
 
-#. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/hooks.py:31
-#, python-format
-msgid "{0} appears {2} times in list {1}."
-msgstr "{0} appare {2} volte nella lista {1}."
+#~ msgid "Fix this before installing:"
+#~ msgstr "Da risolvere prima dell'installazione:"
+
+#~ msgid "There are {1} lists with name {0}."
+#~ msgstr "Ci sono {1} liste con il nome {0}."
+
+#~ msgid "{0} appears {2} times in list {1}."
+#~ msgstr "{0} appare {2} volte nella lista {1}."
