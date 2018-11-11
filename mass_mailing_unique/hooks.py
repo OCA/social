@@ -3,7 +3,6 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-from odoo import _
 from odoo.exceptions import ValidationError
 
 
@@ -27,8 +26,7 @@ def pre_init_hook(cr):
                   GROUP BY l.name, e
                   HAVING COUNT(c.id) > 1""")
     for result in cr.fetchall():
-        errors.append(
-            _("{0} appears {2} times in list {1}.").format(*result))
+        errors.append("{0} appears {2} times in list {1}.".format(*result))
 
     # Search for duplicates in list's name
     cr.execute("""SELECT name, COUNT(id)
@@ -36,11 +34,9 @@ def pre_init_hook(cr):
                   GROUP BY name
                   HAVING COUNT(id) > 1""")
     for result in cr.fetchall():
-        errors.append(
-            _("There are {1} lists with name {0}.").format(*result))
+        errors.append("There are {1} lists with name {0}.".format(*result))
 
     # Abort if duplicates are found
     if errors:
         raise ValidationError(
-            _("Fix this before installing:") +
-            "".join("\n" + e for e in errors))
+            "Fix this before installing:" + "".join("\n" + e for e in errors))
