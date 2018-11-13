@@ -22,6 +22,7 @@
 </record>
 
 <menuitem name="Mail tracking" id="mail_tracking_menu"
+          groups="mass_mailing.group_mass_mailing_user"
           parent="mass_mailing.mass_mailing_menu_root" sequence="50"/>
 
 <menuitem name="Emails" id="mail_tracking_email_menu"
