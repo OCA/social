@@ -13,18 +13,21 @@ class ResPartner(models.Model):
 
     mass_mailing_contact_ids = fields.One2many(
         string="Mailing contacts",
-        oldname="mass_mailing_contacts",
-        comodel_name='mail.mass_mailing.contact', inverse_name='partner_id')
+        comodel_name='mail.mass_mailing.contact',
+        inverse_name='partner_id')
     mass_mailing_contacts_count = fields.Integer(
         string='Mailing contacts number',
-        compute='_compute_mass_mailing_contacts_count', store=True,
+        compute='_compute_mass_mailing_contacts_count',
+        store=True,
         compute_sudo=True)
     mass_mailing_stats_ids = fields.One2many(
         string="Mass mailing stats",
-        comodel_name='mail.mail.statistics', inverse_name='partner_id')
+        comodel_name='mail.mail.statistics',
+        inverse_name='partner_id')
     mass_mailing_stats_count = fields.Integer(
         string='Mass mailing stats number',
-        compute='_compute_mass_mailing_stats_count', store=True)
+        compute='_compute_mass_mailing_stats_count',
+        store=True)
 
     @api.constrains('email')
     def _check_email_mass_mailing_contacts(self):
