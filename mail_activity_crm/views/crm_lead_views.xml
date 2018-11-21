@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<odoo>
+    <!--
+        Copyright 2016 Odoo SA <https://www.odoo.com>
+        Copyright 2018 Therp BV <http://therp.nl>
+        Copyright 2018 Eficent <http://www.eficent.com>
+        License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+    -->
+    <record model="ir.ui.view" id="crm_case_kanban_view_leads">
+        <field name="name">CRM - Leads Kanban</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+        <field name="arch" type="xml">
+            <field name="message_needaction_counter" position="after">
+                <field name="activity_ids"/>
+                <field name="nbr_activities"/>
+            </field>
+             <xpath expr="//div[@class='oe_kanban_content']" position="inside">
+                 Next activity:
+                <div class="text-muted">
+                    <t t-if="record.activity_date_deadline.raw_value and record.activity_date_deadline.raw_value lt (new Date())" t-set="red">oe_kanban_text_red</t>
+                    <span t-attf-class="#{red || ''}">
+                        <field name="activity_date_deadline"/>
+                        <t t-if="record.activity_date_deadline.raw_value"> : </t>
+                        <field name="activity_summary"/>
+                    </span>
+                </div>
+                <div t-if="record.nbr_activities.raw_value">
+                    <field name="activity_ids" widget="kanban_activity"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="crm_case_form_view_leads">
+        <field name="name">CRM - Leads Form</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_leads" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_chatter']/field[@name='message_follower_ids']" position="after">
+                <field name="activity_ids" widget="mail_activity" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="crm_case_form_view_oppor">
+        <field name="name">Opportunities</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.crm_case_form_view_oppor" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_chatter']/field[@name='message_follower_ids']" position="after">
+                <field name="activity_ids" widget="mail_activity" />
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/label" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//sheet/group/group[2]/div" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

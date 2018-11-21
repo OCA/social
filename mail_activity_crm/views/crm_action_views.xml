@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- hide -->
+    <record id="crm.crm_activity_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_no_one')])]"/>
+        <field name="name">Activities (obsolete)</field>
+    </record>
+
+</odoo>

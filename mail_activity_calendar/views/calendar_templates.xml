@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Copyright 2016 Odoo SA <https://www.odoo.com>
+        Copyright 2018 Eficent <http://www.eficent.com>
+        License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+    -->
+    <template id="assets_backend" name="calendar assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/mail_activity_calendar/static/src/js/mail_activity.js"></script>
+        </xpath>
+    </template>
+</odoo>

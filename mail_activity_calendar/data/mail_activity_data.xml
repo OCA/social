@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+        Copyright 2016 Odoo SA <https://www.odoo.com>
+        License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+    -->
+    <data noupdate="1">
+        <record id="mail_activity.mail_activity_data_meeting" model="mail.activity.type">
+            <field name="category">meeting</field>
+        </record>
+    </data>
+</odoo>
