@@ -32,7 +32,7 @@
     </t>
 
     <t t-name="mail.chat.ActivityMenu">
-        <li class="o_mail_navbar_item">
+        <li class="o_mail_navbar_item o_mail_navbar_item_v10">
             <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" title="Activities" href="#">
                 <i class="fa fa-clock-o"/> <span class="o_notification_counter badge"/>
             </a>

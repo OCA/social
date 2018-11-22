@@ -19,6 +19,7 @@
         "data/mail_message_subtype.xml",
         'security/ir.model.access.csv',
         'views/mail_activity.xml',
+        'views/crm_action_views.xml',
         'data/mail_activity.xml',
         'data/ir_model_data.xml',
         'views/templates.xml',
@@ -28,5 +29,4 @@
         'static/src/xml/systray.xml',
         'static/src/xml/web_kanban_activity.xml',
     ],
-    "post_load": "post_load_hook",
 }

@@ -1,7 +1,7 @@
 # Copyright 2018 Eficent Business and IT Consulting Services S.L.
 # Copyright 2018 Tecnativa, S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from openerp import api, SUPERUSER_ID
+from odoo import api, SUPERUSER_ID
 
 
 def convert_crm_activity_types(env):
@@ -72,7 +72,7 @@ def convert_crm_lead_activities(env):
          SELECT
             cl.id,  im.id, 'crm.lead', cl.name, cl.title_action,
             mat.id, cl.date_action, cl.create_uid, cl.create_date,
-            cl.write_uid, cl.write_date, COALESCE(cl.user_id, cl.create_uid)
+            cl.write_uid, cl.write_date, COALESCE(cl.user_id, cl.create_uid, 1)
          FROM
             crm_lead AS cl,
             mail_activity_type AS mat,

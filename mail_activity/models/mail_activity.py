@@ -3,30 +3,7 @@
 # Copyright 2018 Eficent <http://www.eficent.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from datetime import date, datetime, timedelta
-from openerp import api, fields, models
-
-
-def message_post_with_view(records, views_or_xmlid, **kwargs):
-    """ Method ported from mail.thread in v10 """
-    values = kwargs.pop('values', None) or dict()
-    try:
-        from openerp.addons.website.models.website import slug
-        values['slug'] = slug
-    except ImportError:
-        values['slug'] = lambda self: self.id
-    if isinstance(views_or_xmlid, basestring):
-        views = records.env.ref(views_or_xmlid, raise_if_not_found=False)
-    else:
-        views = views_or_xmlid
-    if not views:
-        return
-    for record in records:
-        values['object'] = record
-        rendered_template = views.render(values, engine='ir.qweb')
-        kwargs['body'] = rendered_template
-        kwargs['message_type'] = 'notification'  # default in v10
-        kwargs['subtype_id'] = record.env.ref('mail.mt_activities').id,
-        record.message_post_with_template(False, **kwargs)
+from odoo import api, fields, models
 
 
 class MailActivity(models.Model):
@@ -212,8 +189,7 @@ class MailActivity(models.Model):
             self.write(dict(feedback=feedback))
         for activity in self:
             record = self.env[activity.res_model].browse(activity.res_id)
-            message_post_with_view(
-                record,
+            record.message_post_with_view(
                 'mail.message_activity_done',
                 values={'activity': activity},
                 subtype_id=self.env.ref('mail.mt_activities').id,
