@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_configuration_mail_parent_recipient" model="ir.ui.view">
+            <field name="name">mail.parent.recipient.config.settings</field>
+            <field name="model">base.config.settings</field>
+            <field name="inherit_id" ref="mail.view_general_configuration_mail_alias_domain"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='email']" position='inside'>
+                    <div>
+                        <field name="use_parent_mail_address"/>
+                        <label for="use_parent_mail_address"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>
