@@ -29,7 +29,6 @@ class TestMailTemplate(TestMail):
             'parent_id': self.company_test.id,
         }
 
-
         # Partners test 2 with email
         partner_with_mail_vals = {
             'name': 'partner_2',
@@ -40,6 +39,7 @@ class TestMailTemplate(TestMail):
         self.partner_no_mail = self.res_parter.create(partner_no_mail_vals)
         self.partner_with_mail = self.res_parter.create(partner_with_mail_vals)
 
+    def create_mail_composer(self, partner_to_send_id):
         self.email_template = self.env['mail.template'].create({
             'model_id': self.env['ir.model'].search([
                 ('model', '=', 'mail.channel')
@@ -48,7 +48,7 @@ class TestMailTemplate(TestMail):
             'subject': '${object.name}',
             'body_html': '${object.description}',
             'user_signature': False,
-            'partner_to': '${object.partner_id.id}',  # TODO change
+            'partner_to': '%s' % (partner_to_send_id),
         })
 
         self.composer = self.mail_comp_msg.with_context({
@@ -61,12 +61,15 @@ class TestMailTemplate(TestMail):
             'template_id': self.email_template.id
         })
 
+        return self.composer
+
     # def test_1_mail_send_to_partner_no_mail(self):
     #     """
     #     Mail should only send with company mail
     #     even if is sended to partner_no_mail
     #     """
     #     import pdb; pdb.set_trace()
+    #     mail_composer = self.create_mail_composer(self.partner_no_mail.id)
     #     mail_id = self.email_template.send_mail(self.partner_no_mail.id)
     #     mail = self.env['mail.mail'].browse(mail_id)
     #
@@ -80,6 +83,7 @@ class TestMailTemplate(TestMail):
     #     Mail should only send with company mail
     #     even if is sended to partner_with_mail
     #     """
+    #     mail_composer = self.create_mail_composer(self.partner_no_mail.id)
     #     mail_id = self.email_template.send_mail(self.partner_with_mail.id)
     #     mail = self.env['mail.mail'].browse(mail_id)
     #
@@ -92,6 +96,7 @@ class TestMailTemplate(TestMail):
     #     """
     #     Mail should only send with company mail
     #     """
+    #     mail_composer = self.create_mail_composer(self.partner_no_mail.id)
     #     mail_id = self.email_template.send_mail(self.company_test.id)
     #     mail = self.env['mail.mail'].browse(mail_id)
     #
