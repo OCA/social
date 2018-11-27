@@ -9,7 +9,6 @@
     "version": "10.0.1.0.0",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp, Odoo Community Association (OCA)",
-    "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": [
