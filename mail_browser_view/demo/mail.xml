@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<odoo>
+  <data>
+    <record id="browser_view_demo" model="mail.mail">
+      <field name="body_html">
+<![CDATA[
+<html>
+  <body>
+    <p>Here is placeholder example:</p>
+    <a href="#" class="view_in_browser_url">View this mail in browser</a>
+    <p>For everything else, there is <a href="https://www.google.com">Google</a></p>
+  <body>
+</html>
+]]>
+      </field>
+    </record>
+  </data>
+</odoo>
