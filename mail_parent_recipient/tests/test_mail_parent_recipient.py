@@ -37,7 +37,9 @@ class TestMailTemplate(TestMail):
         }
 
         self.partner_no_mail = self.res_partner.create(partner_no_mail_vals)
-        self.partner_with_mail = self.res_partner.create(partner_with_mail_vals)
+        self.partner_with_mail = self.res_partner.create(
+            partner_with_mail_vals
+        )
 
     def create_mail_composer(self, partner_to_send_id):
         email_template = self.env['mail.template'].create({
@@ -65,8 +67,11 @@ class TestMailTemplate(TestMail):
             'comment', 'mail.channel', self.group_pigs.id
         )['value']
 
-        # use _convert_to_cache to return a browse record list from command list or id list for x2many fields
-        values = composer._convert_to_record(composer._convert_to_cache(values))
+        # use _convert_to_cache to return a browse record list from command
+        # list or id list for x2many fields
+        values = composer._convert_to_record(
+            composer._convert_to_cache(values)
+        )
         recipients = values['partner_ids']
 
         return recipients
