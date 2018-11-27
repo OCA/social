@@ -6,6 +6,8 @@ from odoo import models, fields
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    activity_team_ids = fields.Many2many('mail.activity.team',
-                                         'mail_activity_team_users_rel',
-                                         string="Activity Teams")
+    activity_team_ids = fields.Many2many(
+        comodel_name='mail.activity.team',
+        relation='mail_activity_team_users_rel',
+        string="Activity Teams",
+    )
