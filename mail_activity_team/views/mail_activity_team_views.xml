@@ -4,26 +4,34 @@
     VIEWS
 -->
 
-
     <!-- FORM VIEW -->
     <record id="mail_activity_team_view_form" model="ir.ui.view">
         <field name="name">mail.activity.team.view.form</field>
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
             <form string="Activity Team">
+                <header>
+                    <field name="count_missing_activities" invisible="1"/>
+                    <button name="assign_team_to_unassigned_activities" string="Assign to missing activities"
+                            type="object" class="oe_highlight"
+                            groups="base.group_no_one"
+                            attrs="{'invisible': [('count_missing_activities', '=', 0)]}"/>
+                </header>
                 <sheet string="Activity Team">
                     <div class="oe_button_box" name="button_box">
                         <button name="toggle_active" type="object"
-                            class="oe_stat_button" icon="fa-archive">
+                                class="oe_stat_button" icon="fa-archive">
                         <field name="active" widget="boolean_button"
-                            options='{"terminology": "archive"}'/></button>
+                               options='{"terminology": "archive"}'/></button>
                     </div>
                     <group>
                         <group name="base">
                             <field name="name"/>
+                            <field name="user_id" attrs="{'invisible': [('member_ids', '=', [])]}"/>
                         </group>
                         <group name="models">
-                            <field name="res_model_ids" widget="many2many_tags"/>
+                            <field name="res_model_ids" widget="many2many_tags"
+                                   options="{'no_create': True, 'no_open': True}"/>
                         </group>
                     </group>
                     <notebook>
