@@ -10,11 +10,10 @@ class MailTemplate(models.Model):
 
     @api.multi
     def generate_recipients(self, results, res_ids):
-        """
-        Modify the code that set the default recipient in an email to the first
-        partner having an email set following the parents tree.
-        If no parent with an email is found,
-        it reverts to the popup asking to set an email for the current partner
+        """Use partner's parent email as recipient.
+
+        Walk up the hierarchy of recipient partners via `parent_id`
+        and pick the 1st one having an email.
         """
         results = super(MailTemplate, self).generate_recipients(
             results,

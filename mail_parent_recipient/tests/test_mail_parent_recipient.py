@@ -77,10 +77,7 @@ class TestMailTemplate(TestMail):
         return recipients
 
     def test_1_mail_send_to_partner_no_mail(self):
-        """
-        Mail should only send with company mail
-        even if is sended to partner_no_mail
-        """
+        """Use company mail if recipient partner has no email."""
         recipients = self.create_mail_composer(self.partner_no_mail.id)
 
         self.assertEqual(recipients.email, self.company_test.email)
@@ -88,10 +85,7 @@ class TestMailTemplate(TestMail):
         self.assertNotEqual(recipients.email, self.partner_with_mail.email)
 
     def test_2_mail_send_to_partner_with_mail(self):
-        """
-        Mail should only send with company mail
-        even if is sended to partner_with_mail
-        """
+        """Use partner mail if recipient partner has an email."""
         recipients = self.create_mail_composer(self.partner_with_mail.id)
 
         self.assertNotEqual(recipients.email, self.company_test.email)
@@ -99,10 +93,8 @@ class TestMailTemplate(TestMail):
         self.assertEqual(recipients.email, self.partner_with_mail.email)
 
     def test_3_mail_send_to_company_test(self):
-        """
-        Mail should only send with company mail
-        """
-        recipients = self.create_mail_composer(self.partner_no_mail.id)
+        """Use company mail if recipient is the company."""
+        recipients = self.create_mail_composer(self.company_test.id)
 
         self.assertEqual(recipients.email, self.company_test.email)
         self.assertNotEqual(recipients.email, self.partner_no_mail.email)
