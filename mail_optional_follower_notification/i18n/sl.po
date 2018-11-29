@@ -40,6 +40,7 @@ msgstr "Sporočilo"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message_notify_followers
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_forward_compose_message_notify_followers
 msgid "Notify followers"
 msgstr "Obvesti sledilce"
 
