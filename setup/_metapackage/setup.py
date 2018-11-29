@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_track_diff_only',
         'odoo12-addon-mass_mailing_resend',
+        'odoo12-addon-mass_mailing_unique',
     ],
     classifiers=[
         'Programming Language :: Python',
