@@ -39,7 +39,7 @@ msgid "Resend"
 msgstr ""
 
 #. module: mass_mailing_resend
-#: code:addons/mass_mailing_resend/models/mass_mailing.py:16
+#: code:addons/mass_mailing_resend/models/mass_mailing.py:15
 #, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""
