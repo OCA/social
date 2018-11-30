@@ -18,6 +18,16 @@ class TestMailActivityBoardMethods(TransactionCase):
             'groups_id': [(6, 0, [self.env.ref('base.group_user').id])]
         })
 
+        # Create a user who doesn't have access to anything except activities
+        mail_activity_group = self.create_mail_activity_group()
+        self.employee2 = self.env['res.users'].create({
+            'company_id': self.env.ref("base.main_company").id,
+            'name': "Employee2",
+            'login': "alien",
+            'email': "alien@yourcompany.com",
+            'groups_id': [(6, 0, [mail_activity_group.id])],
+        })
+
         # lead_model_id = self.env['ir.model']._get('crm.lead').id
         partner_model_id = self.env['ir.model']._get('res.partner').id
 
@@ -45,6 +55,9 @@ class TestMailActivityBoardMethods(TransactionCase):
         # I create an opportunity, as employee
         self.partner_client = self.env.ref("base.res_partner_1")
 
+        # assure there isn't any mail activity yet
+        self.env['mail.activity'].sudo().search([]).unlink()
+
         self.act1 = self.env['mail.activity'].sudo().create({
             'activity_type_id': self.activity3.id,
             'note': 'Partner activity 1.',
@@ -66,6 +79,23 @@ class TestMailActivityBoardMethods(TransactionCase):
             'res_model_id': partner_model_id,
             'user_id': self.employee.id
         })
+
+    def create_mail_activity_group(self):
+        manager_mail_activity_test_group = self.env['res.groups'].create({
+            'name': 'group_manager_mail_activity_test',
+        })
+        mail_activity_model_id = self.env['ir.model'].sudo().search(
+            [('model', '=', 'mail.activity')], limit=1)
+        access = self.env['ir.model.access'].create({
+            'name': 'full_access_mail_activity',
+            'model_id': mail_activity_model_id.id,
+            'perm_read': True,
+            'perm_write': True,
+            'perm_create': True,
+            'perm_unlink': True,
+        })
+        access.group_id = manager_mail_activity_test_group
+        return manager_mail_activity_test_group
 
     def get_view(self, activity):
         action = activity.open_origin()
@@ -114,7 +144,7 @@ class TestMailActivityBoardMethods(TransactionCase):
         kwargs = {
             'groupby': [
                 "activity_type_id"
-            ]
+            ],
         }
         kwargs['domain'] = action.get('domain')
 
@@ -130,7 +160,13 @@ class TestMailActivityBoardMethods(TransactionCase):
             records = self.env['mail.activity'].search_read(
                 domain=group.get('__domain'), fields=kwargs['fields']
             )
-            acts += [id.get('id') for id in records]
+            acts += [record_id.get('id') for record_id in records]
 
         for act in acts:
             self.assertIn(act, self.partner_client.activity_ids.ids)
+
+    def test_read_permissions(self):
+        search1 = self.env['mail.activity'].sudo(self.employee).search([])
+        self.assertEqual(len(search1), 3)
+        search2 = self.env['mail.activity'].sudo(self.employee2).search([])
+        self.assertEqual(len(search2), 0)
