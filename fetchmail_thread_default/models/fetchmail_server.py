@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class FetchmailServer(models.Model):
@@ -29,17 +28,12 @@ class FetchmailServer(models.Model):
         return [(m.model, m.name) for m in models
                 if m.model in self.env and getattr(self.env[m.model], "_auto")]
 
-    # TODO New api on v10+
-    # pylint: disable=old-api7-method-defined
-    def onchange_server_type(self, cr, uid, ids, server_type=False, ssl=False,
-                             object_id=False):
+    @api.onchange('type', 'is_ssl', 'object_id')
+    def onchange_server_type(self):
         """Remove :attr:`default_thread_id` if there is :attr:`object_id`."""
-        result = super(FetchmailServer, self).onchange_server_type(
-            cr, uid, ids, server_type, ssl, object_id,
-        )
-        if object_id:
-            result["value"]["default_thread_id"] = False
-        return result
+        if self.object_id:
+            self.default_thread_id = False
+        return super(FetchmailServer, self).onchange_server_type()
 
     @api.multi
     @api.onchange("default_thread_id")
