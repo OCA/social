@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
-# Copyright 2017 Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.addons.mail.tests.test_mail_gateway import MAIL_TEMPLATE
-from openerp.tests.common import SavepointCase
-from openerp.tools import mute_logger
+from odoo.addons.mail.tests.test_mail_gateway import MAIL_TEMPLATE
+from odoo.tests.common import SavepointCase
+from odoo.tools import mute_logger
 
 
 class FetchmailCase(SavepointCase):
@@ -22,10 +21,9 @@ class FetchmailCase(SavepointCase):
 
     def test_emptying_default_thread(self):
         """Choosing an ``object_id`` empties ``default_thread_id``."""
-        self.assertEqual(
-            self.server.onchange_server_type(object_id=1)
-            ["value"]["default_thread_id"],
-            False)
+        self.server.write({'object_id': 1})
+        self.server.onchange_server_type()
+        self.assertFalse(self.server.default_thread_id)
 
     def test_emptying_object(self):
         """Choosing a ``default_thread_id`` empties ``object_id``."""
@@ -33,7 +31,7 @@ class FetchmailCase(SavepointCase):
         self.server._onchange_remove_object_id()
         self.assertFalse(self.server.object_id)
 
-    @mute_logger('openerp.addons.mail.models.mail_thread', 'openerp.models')
+    @mute_logger('odoo.addons.mail.models.mail_thread', 'odoo.models')
     def test_unbound_incoming_email(self):
         """An unbound incoming email gets posted to the sink."""
         # Imitate what self.server.feth_mail() would do
