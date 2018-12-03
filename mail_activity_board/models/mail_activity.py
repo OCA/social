@@ -1,4 +1,5 @@
 # Copyright 2018 David Juaneda - <djuaneda@sdi.es>
+# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, models, fields, SUPERUSER_ID
 
@@ -54,10 +55,10 @@ class MailActivity(models.Model):
 
     @api.model
     def _find_allowed_doc_ids(self, model_ids):
-        IrModelAccess = self.env['ir.model.access']
+        ir_model_access_model = self.env['ir.model.access']
         allowed_ids = set()
         for doc_model, doc_dict in model_ids.items():
-            if not IrModelAccess.check(doc_model, 'read', False):
+            if not ir_model_access_model.check(doc_model, 'read', False):
                 continue
             allowed_ids |= self._find_allowed_model_wise(doc_model, doc_dict)
         return allowed_ids
