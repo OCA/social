@@ -20,7 +20,7 @@ class MailActivityMixin(models.AbstractModel):
 
         :return: action.
         """
-        id = kwargs.get("id")
+        _id = kwargs.get("id")
         action = self.env['mail.activity'].action_activities_board()
         views = []
         for v in action['views']:
@@ -28,5 +28,5 @@ class MailActivityMixin(models.AbstractModel):
                 v = (v[0], 'list')
             views.append(v)
         action['views'] = views
-        action['domain'] = [('res_id', '=', id)]
+        action['domain'] = [('res_id', '=', _id)]
         return action
