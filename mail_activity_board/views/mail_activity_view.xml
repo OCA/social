@@ -4,7 +4,6 @@
     VIEWS
 -->
 
-
     <!-- FORM VIEW -->
     <record id="mail_activity_view_form_board" model="ir.ui.view">
         <field name="name">mail.activity.boards.view.form</field>
@@ -59,7 +58,7 @@
         <field name="inherit_id" ref="mail.mail_activity_view_tree"/>
         <field name="arch" type="xml">
             <xpath expr="//tree" position="attributes">
-                <attribute name="default_order"></attribute>
+                <attribute name="default_order"/>
                 <attribute name="decoration-danger">(date_deadline &lt; current_date)</attribute>
                 <attribute name="decoration-warning">(date_deadline == current_date)</attribute>
                 <attribute name="decoration-success">(date_deadline &gt; current_date)</attribute>
@@ -131,7 +130,8 @@
                                     </div>
                                     <div class="oe_kanban_bottom_right">
                                         <img t-att-src="kanban_image('res.users', 'image_small', record.user_id.raw_value)"
-                                             t-att-title="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
+                                             t-att-title="record.user_id.value"
+                                             t-att-alt="record.user_id.value" width="24" height="24" class="oe_kanban_avatar"/>
                                     </div>
                                 </div>
                             </div>
@@ -167,8 +167,8 @@
             </xpath>
 
             <xpath expr='//search/group' position='inside'>
-                <filter string="User" context="{'group_by':'user_id'}"/>
-                <filter string="Origin" context="{'group_by': 'res_model_id'}"/>
+                <filter string="User" name='assigned_user' context="{'group_by':'user_id'}"/>
+                <filter string="Origin" name='origin' context="{'group_by': 'res_model_id'}"/>
             </xpath>
 
         </field>
