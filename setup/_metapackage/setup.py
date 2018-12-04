@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo11-addon-email_template_qweb',
         'odoo11-addon-mail_activity_board',
         'odoo11-addon-mail_attach_existing_attachment',
+        'odoo11-addon-mail_browser_view',
         'odoo11-addon-mail_debrand',
         'odoo11-addon-mail_digest',
         'odoo11-addon-mail_optional_autofollow',
