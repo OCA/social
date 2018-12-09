@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_resend
-#: model:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+#: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
 msgid ""
 "<i class=\"fa fa-info-circle\"/> New sending will be done only to not sent/"
 "new recipients. If you want to resend again the mass mailing to already sent "
@@ -33,12 +33,12 @@ msgid "Mass Mailing"
 msgstr "Massenmailing"
 
 #. module: mass_mailing_resend
-#: model:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+#: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
 msgid "Resend"
 msgstr ""
 
 #. module: mass_mailing_resend
-#: code:addons/mass_mailing_resend/models/mass_mailing.py:16
+#: code:addons/mass_mailing_resend/models/mass_mailing.py:15
 #, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""
