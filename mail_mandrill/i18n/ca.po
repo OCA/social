@@ -116,6 +116,11 @@ msgid "Deferred"
 msgstr "Diferit"
 
 #. module: mail_mandrill
+#: field:mail.mail,destination_object_id:0
+msgid "Destination object"
+msgstr ""
+
+#. module: mail_mandrill
 #: field:mail.mandrill.event,display_name:0
 #: field:mail.mandrill.message,display_name:0
 msgid "Display Name"
@@ -258,6 +263,11 @@ msgstr ""
 #: view:mail.mandrill.message:mail_mandrill.view_mail_mandrill_message_search
 msgid "Month"
 msgstr "Mes"
+
+#. module: mail_mandrill
+#: help:mail.mail,destination_object_id:0
+msgid "Object where the message will be moved to"
+msgstr ""
 
 #. module: mail_mandrill
 #: view:mail.mandrill.event:mail_mandrill.view_mail_mandrill_event_search
