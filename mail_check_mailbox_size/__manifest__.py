@@ -18,6 +18,6 @@
     ],
     "data": [
         "views/fetchmail_view.xml",
-        "data/cron_data.xml"
+        "data/cron_data.xml",
     ],
 }
