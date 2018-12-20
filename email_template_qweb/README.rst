@@ -62,7 +62,6 @@ Authors
 ~~~~~~~
 
 * Therp BV
-* Tecnativa
 
 Contributors
 ~~~~~~~~~~~~
