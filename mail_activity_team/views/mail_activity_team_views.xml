@@ -27,7 +27,7 @@
                     <group>
                         <group name="base">
                             <field name="name"/>
-                            <field name="user_id" attrs="{'invisible': [('member_ids', '=', [])]}"/>
+                            <field name="user_id"/>
                         </group>
                         <group name="models">
                             <field name="res_model_ids" widget="many2many_tags"
