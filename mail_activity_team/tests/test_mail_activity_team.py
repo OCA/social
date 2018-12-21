@@ -100,7 +100,7 @@ class TestMailActivityTeam(TransactionCase):
             self.assertEqual(self.act2.team_id, self.team2)
             self.act2.team_id = self.team1
             self.act2._onchange_team_id()
-            self.assertFalse(self.act2.user_id)
+            self.assertEqual(self.act2.user_id, self.team1.member_ids)
             with self.assertRaises(ValidationError):
                 self.act2.write({
                     'user_id': self.employee2.id,
