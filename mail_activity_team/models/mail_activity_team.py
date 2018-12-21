@@ -46,7 +46,6 @@ class MailActivityTeam(models.Model):
     user_id = fields.Many2one(
         comodel_name='res.users',
         string='Team Leader',
-        domain="[('id', 'in', member_ids)]",
     )
     count_missing_activities = fields.Integer(
         string="Missing Activities",
@@ -59,6 +58,13 @@ class MailActivityTeam(models.Model):
         if self.user_id and self.user_id not in self.member_ids:
             self.user_id = False
 
+    @api.onchange('user_id')
+    def _onchange_user_id(self):
+        if self.user_id and self.user_id not in self.member_ids:
+            members_ids = self.member_ids.ids
+            members_ids.append(self.user_id.id)
+            self.member_ids = [(4, member) for member in members_ids]
+
     def assign_team_to_unassigned_activities(self):
         activity_model = self.env['mail.activity']
         for team in self:
@@ -68,4 +74,5 @@ class MailActivityTeam(models.Model):
             if team.res_model_ids:
                 domain.append(('res_model_id', 'in', team.res_model_ids.ids))
             missing_activities = activity_model.search(domain)
-            missing_activities.write({'team_id': team.id})
+            for missing_activity in missing_activities:
+                missing_activity.write({'team_id': team.id})
