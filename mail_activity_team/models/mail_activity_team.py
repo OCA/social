@@ -74,4 +74,5 @@ class MailActivityTeam(models.Model):
             if team.res_model_ids:
                 domain.append(('res_model_id', 'in', team.res_model_ids.ids))
             missing_activities = activity_model.search(domain)
-            missing_activities.write({'team_id': team.id})
+            for missing_activity in missing_activities:
+                missing_activity.write({'team_id': team.id})
