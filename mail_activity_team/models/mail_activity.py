@@ -46,11 +46,11 @@ class MailActivity(models.Model):
         if not self.team_id:
             return res
         res['domain']['user_id'] = [('id', 'in', self.team_id.member_ids.ids)]
-        if self.user_id and self.user_id in self.team_id.member_ids:
-            return res
         if self.team_id.user_id:
             self.user_id = self.team_id.user_id
-        elif self.env.user in self.team_id.member_ids.ids:
+        elif len(self.team_id.member_ids.ids) == 1:
+            self.user_id = self.team_id.member_ids
+        elif self.env.user.id in self.team_id.member_ids.ids:
             self.user_id = self.env.user
         else:
             self.user_id = self.env['res.users']
