@@ -61,6 +61,9 @@
             <xpath expr='//field[@name="user_id"]' position='before'>
                 <field name="team_id"/>
             </xpath>
+            <xpath expr='//filter[@name="activities_my"]' position='after'>
+                <filter name="my_team_activities" string="My Team Activities" domain="[('team_id.member_ids', '=', uid)]"/>
+            </xpath>
             <group position='inside'>
                 <filter name='team' string="Team" context="{'group_by': 'team_id'}"/>
             </group>
