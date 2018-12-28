@@ -9,20 +9,21 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-08 16:42+0000\n"
-"PO-Revision-Date: 2018-02-08 16:42+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
-"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/"
-"teams/23907/nl_NL/)\n"
+"PO-Revision-Date: 2018-12-28 11:41+0000\n"
+"Last-Translator: Thomas Pot <t.pot@open2bizz.nl>\n"
+"Language-Team: Dutch (Netherlands) (https://www.transifex.com/oca/teams/"
+"23907/nl_NL/)\n"
 "Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.3\n"
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.default_digest_tmpl
 msgid "Changed values"
-msgstr ""
+msgstr "Aangepaste waarden"
 
 #. module: mail_digest
 #: model:ir.model.fields,help:mail_digest.field_mail_digest_sanitize_msg_body
@@ -31,16 +32,19 @@ msgid ""
 "this flag is enabled (default) each message content will be sanitized before "
 "generating the email."
 msgstr ""
+"Bij verzamelde berichten kunnen verschillende stijlen op elk element worden "
+"toegepast. Als deze optie is ingeschakeld (standaard), wordt elke bericht "
+"geschoond voordat de e-mail wordt gegenereerd."
 
 #. module: mail_digest
 #: model:ir.model,name:mail_digest.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
 msgid "Create email now"
-msgstr ""
+msgstr "E-mail nu aanmaken"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_create_uid
@@ -57,38 +61,38 @@ msgstr "Aangemaakt op"
 #. module: mail_digest
 #: selection:res.users,digest_frequency:0
 msgid "Daily"
-msgstr ""
+msgstr "Dagelijks"
 
 #. module: mail_digest
 #: code:addons/mail_digest/models/mail_digest.py:175
 #, python-format
 msgid "Daily update"
-msgstr ""
+msgstr "Dagelijkse update"
 
 #. module: mail_digest
 #: model:ir.actions.act_window,name:mail_digest.action_digest_all
 #: model:ir.ui.menu,name:mail_digest.menu_email_digest
 msgid "Digest"
-msgstr ""
+msgstr "Kort verslag"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_digest_mode
 msgid "Digest Mode"
-msgstr ""
+msgstr "Verslag modus"
 
 #. module: mail_digest
 #: model:ir.actions.server,name:mail_digest.ir_cron_mail_digest_daily_action_ir_actions_server
 #: model:ir.cron,cron_name:mail_digest.ir_cron_mail_digest_daily_action
 #: model:ir.cron,name:mail_digest.ir_cron_mail_digest_daily_action
 msgid "Digest mail process - daily"
-msgstr ""
+msgstr "Verslag E-mail proces - dagelijks"
 
 #. module: mail_digest
 #: model:ir.actions.server,name:mail_digest.ir_cron_mail_digest_weekly_action_ir_actions_server
 #: model:ir.cron,cron_name:mail_digest.ir_cron_mail_digest_weekly_action
 #: model:ir.cron,name:mail_digest.ir_cron_mail_digest_weekly_action
 msgid "Digest mail process - weekly"
-msgstr ""
+msgstr "Verslag E-mail proces - wekelijks"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_display_name
@@ -100,23 +104,23 @@ msgstr "Weergavenaam"
 #: model:ir.ui.view,arch_db:mail_digest.view_users_form_mail
 #: model:ir.ui.view,arch_db:mail_digest.view_users_form_simple_modif_mail
 msgid "Enable/disable notifications by type"
-msgstr ""
+msgstr "Schakel meldingen in / uit op type"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_enabled
 msgid "Enabled"
-msgstr ""
+msgstr "Ingeschakeld"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_frequency
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_digest_frequency
 msgid "Frequency"
-msgstr ""
+msgstr "Frequentie"
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.default_digest_tmpl
 msgid "Hello"
-msgstr ""
+msgstr "Hallo"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_id
@@ -128,6 +132,7 @@ msgstr "ID"
 #: model:ir.model.fields,help:mail_digest.field_res_users_digest_mode
 msgid "If enabled, email notifications will be sent in digest mode."
 msgstr ""
+"Indien ingeschakeld, worden e-mailmeldingen verzonden in de verslag-modus."
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest___last_update
@@ -139,112 +144,113 @@ msgstr "Laatst gewijzigd op"
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_write_uid
 #: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst aangepast door"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_write_date
 #: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst aangepast op"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_mail_id
 msgid "Mail"
-msgstr ""
+msgstr "E-Mail"
 
 #. module: mail_digest
 #: model:ir.model,name:mail_digest.model_mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_tree
 msgid "Mail digest"
-msgstr ""
+msgstr "Verslag E-mail"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_message_ids
 #: model:ir.ui.view,arch_db:mail_digest.mail_digest_form
 msgid "Messages"
-msgstr ""
+msgstr "Berichten"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_name
 msgid "Name"
-msgstr ""
+msgstr "Naam"
 
 #. module: mail_digest
 #: model:ir.ui.view,arch_db:mail_digest.notification_form
 msgid "Notification"
-msgstr ""
+msgstr "Notificatie"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_subtype_id
 msgid "Notification type"
-msgstr ""
+msgstr "Notificatie type"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_notify_conf_ids
 #: model:ir.ui.view,arch_db:mail_digest.notification_tree
 msgid "Notifications"
-msgstr ""
+msgstr "Notificaties"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_digest_template_id
 msgid "Qweb mail template"
-msgstr ""
+msgstr "Qweb E-mail sjabloon"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_sanitize_msg_body
 msgid "Sanitize message body"
-msgstr ""
+msgstr "Opgeschoonde berichttekst"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_state
 msgid "Status"
-msgstr ""
+msgstr "Status"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_mail_digest_user_id
 #: model:ir.model.fields,field_description:mail_digest.field_user_notification_conf_user_id
 msgid "User"
-msgstr ""
+msgstr "Gebruiker"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_disabled_notify_subtype_ids
 msgid "User disabled subtypes"
-msgstr ""
+msgstr "Subtypen voor gebruiker uitgeschakeld"
 
 #. module: mail_digest
 #: model:ir.model.fields,field_description:mail_digest.field_res_users_enabled_notify_subtype_ids
 msgid "User enabled subtypes"
-msgstr ""
+msgstr "Subtypen voor gebruiker ingeschakeld"
 
 #. module: mail_digest
 #: model:ir.model,name:mail_digest.model_user_notification_conf
 msgid "User notification configuration"
-msgstr ""
+msgstr "Gebruikers-notificatie configuratie"
 
 #. module: mail_digest
 #: model:ir.model,name:mail_digest.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Gebruikers"
 
 #. module: mail_digest
 #: selection:res.users,digest_frequency:0
 msgid "Weekly"
-msgstr ""
+msgstr "Weekelijks"
 
 #. module: mail_digest
 #: code:addons/mail_digest/models/mail_digest.py:177
 #, python-format
 msgid "Weekly update"
-msgstr ""
+msgstr "Wekelijkse update"
 
 #. module: mail_digest
 #: sql_constraint:user.notification.conf:0
 msgid "You can have only one configuration per subtype!"
-msgstr ""
+msgstr "U kunt slechts één configuratie per subtype hebben!"
 
 #. module: mail_digest
 #: code:addons/mail_digest/models/mail_digest.py:200
 #, python-format
 msgid "You must pass a template or set one on the digest record."
 msgstr ""
+"U moet een sjabloon doorgeven of een sjabloon instellen in het verslag item."
