@@ -12,7 +12,8 @@ class EmailTemplate(models.Model):
     # Fake field for auto-completing placeholder
     placeholder_id = fields.Many2one(
         'email.template.placeholder', string="Placeholder")
-    placeholder_value = fields.Char()
+    placeholder_value = fields.Char(
+        help='Placeholder value to copy-paste in the desired template field')
 
     @api.onchange('placeholder_id')
     def _onchange_placeholder_id(self):

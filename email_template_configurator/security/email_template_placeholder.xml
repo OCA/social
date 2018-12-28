@@ -6,7 +6,7 @@
 <data>
 
     <record id="group_email_template_placeholders_manager" model="res.groups">
-        <field name="name">Template Placeholders Manager</field>
+        <field name="name">Placeholders Manager</field>
     </record>
 
     <record model="ir.model.access" id="email_template_placeholder_access_user">

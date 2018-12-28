@@ -31,7 +31,7 @@
             <search>
                 <field name="name"/>
                 <field name="model_id"/>
-                <group expand="0" string="Group by...">
+                <group string="Group by...">
                     <filter string="Model" domain="[]" context="{'group_by':'model_id'}" icon="terp-accessories-archiver"/>
                 </group>
             </search>
@@ -51,7 +51,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="email_template_placeholder_act_window">
-        <field name="name">Template Placeholders</field>
+        <field name="name">Predefined Placeholders</field>
         <field name="res_model">email.template.placeholder</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
@@ -59,7 +59,7 @@
     </record>
 
     <record model="ir.ui.menu" id="email_template_placeholder_menu">
-        <field name="name">Template Placeholders</field>
+        <field name="name">Predefined Placeholders</field>
         <field name="parent_id" ref="base.menu_email"/>
         <field name="action" ref="email_template_placeholder_act_window"/>
     </record>

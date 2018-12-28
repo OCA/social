@@ -11,10 +11,10 @@
         <field name="inherit_id" ref="email_template.email_template_form"/>
         <field name="arch" type="xml">
             <xpath expr="//page[.//field[@name='model_object_field']]" position="attributes">
-                <attribute name="groups">email_template_configurator.group_email_template_placeholders_manager</attribute>
+                <attribute name="groups" translation="off">email_template_configurator.group_email_template_placeholders_manager</attribute>
             </xpath>
             <xpath expr="//page[.//field[@name='model_object_field']]" position="after">
-                <page name="configured_placeholders" string="Configured Placeholders">
+                <page name="configured_placeholders" string="Predefined Placeholders">
                     <group>
                         <field name="placeholder_id"
                                domain="[('model_id','=',model_id)]"

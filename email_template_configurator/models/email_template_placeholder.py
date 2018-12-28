@@ -10,9 +10,10 @@ class EmailTemplatePlaceholder(models.Model):
     _name = 'email.template.placeholder'
     _description = 'Email Template Placeholder'
 
-    name = fields.Char(required=True)
+    name = fields.Char(string='Placeholder', required=True)
     model_id = fields.Many2one(
         'ir.model', string='Model', required=True)
     placeholder = fields.Char(
+        string='Placeholder value',
         required=True, default='${object.}')
     active = fields.Boolean(default=True)
