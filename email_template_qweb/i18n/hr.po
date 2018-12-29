@@ -20,19 +20,19 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview_body_type
-#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template_body_type
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_type
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_type
 msgid "Body templating engine"
 msgstr "Mehanizam predložaka poruke"
 
 #. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview_body_view_id
-#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template_body_view_id
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_id
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
 msgid "Body view"
 msgstr "Pregled tijela"
 
 #. module: email_template_qweb
-#: model:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
+#: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
 msgid "Dear"
 msgstr "Dragi"
 
@@ -59,12 +59,12 @@ msgid "QWeb demo email"
 msgstr "QWeb demo email"
 
 #. module: email_template_qweb
-#: model:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
+#: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
 msgid "This is an email template using qweb."
 msgstr "Ovo je predložak emaila korištenjem qweb-a."
 
 #. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview_body_view_arch
-#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template_body_view_arch
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_arch
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_arch
 msgid "View Architecture"
 msgstr "Pregled arhitekture"
