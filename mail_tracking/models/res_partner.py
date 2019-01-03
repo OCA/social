@@ -40,10 +40,15 @@ class ResPartner(models.Model):
         return partners.write({'email_bounced': True})
 
     def write(self, vals):
-        email = vals.get('email')
-        if email is not None:
-            vals['email'] = email.lower() if email else False
-            vals['email_bounced'] = (
-                bool(email) and
-                self.env['mail.tracking.email'].email_is_bounced(email))
+        if 'email' not in vals:
+            return super(ResPartner, self).write(vals)
+        email = vals['email'].lower() if vals['email'] else False
+        mte_obj = self.env['mail.tracking.email']
+        if not mte_obj.email_is_bounced(email):
+            vals['email_bounced'] = False
+            return super(ResPartner, self).write(vals)
+        res = mte_obj._email_last_tracking_state(email)
+        tracking = mte_obj.browse(res[0].get('id'))
+        event = tracking.tracking_event_ids[:1]
+        self.email_bounced_set(tracking, event.error_details, event)
         return super(ResPartner, self).write(vals)
