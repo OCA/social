@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+<record model="ir.ui.view" id="view_mail_tracking_event_form">
+    <field name="name">mail.tracking.event.form</field>
+    <field name="model">mail.tracking.event</field>
+    <field name="arch" type="xml">
+        <form string="MailTracking event" create="false" edit="false" delete="false">
+            <sheet>
+                <group>
+                    <group>
+                        <field name="tracking_email_id"/>
+                        <field name="recipient"/>
+                        <field name="event_type"/>
+                    </group>
+                    <group>
+                        <field name="timestamp"/>
+                        <field name="time"/>
+                        <field name="date"/>
+                    </group>
+                </group>
+                <group attrs="{'invisible': [('event_type', 'not in', ('sent',))]}">
+                    <field name="smtp_server"/>
+                </group>
+                <group attrs="{'invisible': [('event_type', 'not in', ('open', 'click'))]}">
+                    <field name="url"/>
+                </group>
+                <group attrs="{'invisible': [('event_type', 'not in', ('open', 'click'))]}">
+                    <group>
+                        <field name="mobile"/>
+                        <field name="ip"/>
+                        <field name="user_country_id"/>
+                    </group>
+                    <group>
+                        <field name="user_agent"/>
+                        <field name="ua_family"/>
+                        <field name="ua_type"/>
+                        <field name="os_family"/>
+                    </group>
+                </group>
+                <group string="Error"
+                       attrs="{'invisible': [('error_type', '=', False)]}">
+                    <field name="error_type"/>
+                    <field name="error_description"/>
+                    <field name="error_details"/>
+                </group>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_tracking_event_tree">
+    <field name="name">mail.tracking.event.tree</field>
+    <field name="model">mail.tracking.event</field>
+    <field name="arch" type="xml">
+        <tree string="MailTracking events" create="false" edit="false" delete="false"
+              colors="grey:event_type in ('deferral',);black:event_type in ('sent', 'delivered');red:event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject');blue:event_type in ('unsub', 'click', 'open')">
+            <field name="time"/>
+            <field name="tracking_email_id"/>
+            <field name="recipient"/>
+            <field name="event_type"/>
+            <field name="error_details" invisible="not context.get('event_error_filter', False)"/>
+            <field name="date" invisible="1"/>
+            <field name="ip"/>
+            <field name="url"/>
+            <field name="user_country_id" string="Country"/>
+            <field name="os_family" string="OS"/>
+            <field name="ua_family" string="User agent"/>
+        </tree>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_tracking_event_search">
+    <field name="name">mail.tracking.event.search</field>
+    <field name="model">mail.tracking.event</field>
+    <field name="arch" type="xml">
+        <search string="MailTracking event search">
+            <field name="tracking_email_id" string="Message"
+                   filter_domain="[('tracking_email_id', 'ilike', self)]"/>
+            <field name="recipient" string="Recipient"/>
+            <field name="time" string="Time"/>
+            <field name="date" string="Date"/>
+            <field name="ip" string="IP"/>
+            <field name="url" string="URL"/>
+            <filter name="sent" string="Sent" domain="[('event_type', '=', 'sent')]"/>
+            <filter name="delivered" string="Delivered" domain="[('event_type', '=', 'delivered')]"/>
+            <filter name="click" string="Click" domain="[('event_type', '=', 'click')]"/>
+            <filter name="open" string="Open" domain="[('event_type', '=', 'open')]"/>
+            <filter name="unsub" string="Unsubscribe" domain="[('event_type', '=', 'unsub')]"/>
+            <filter name="bounce" string="Bounce"
+                    domain="[('event_type', 'in', ('hard_bounce', 'soft_bounce'))]"/>
+            <filter name="exception" string="Failed"
+                    domain="[('event_type', 'in', ('reject', 'spam'))]"
+                    context="{'event_error_filter': True}"/>
+            <separator/>
+            <group expand="0" string="Group By">
+                <filter string="Type" name="group_by_type" domain="[]" context="{'group_by': 'event_type'}"/>
+                <filter string="Message" name="group_by_message" domain="[]" context="{'group_by': 'tracking_email_id'}"/>
+                <filter string="OS" name="group_by_os" domain="[('os_family', '!=', False)]" context="{'group_by': 'os_family'}"/>
+                <filter string="User agent" name="group_by_user_agent" domain="[('ua_family', '!=', False)]" context="{'group_by': 'ua_family'}"/>
+                <filter string="User agent type" name="group_by_user_agent_type" domain="[('ua_type', '!=', False)]" context="{'group_by': 'ua_type'}"/>
+                <filter string="Country" name="group_by_country" domain="[('user_country_id', '!=', False)]" context="{'group_by': 'user_country_id'}"/>
+                <filter string="Month" name="group_by_date" domain="[]" context="{'group_by': 'date'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+<record id="action_view_mail_tracking_event" model="ir.actions.act_window">
+    <field name="name">MailTracking events</field>
+    <field name="res_model">mail.tracking.event</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_mail_tracking_event_search"/>
+</record>
+
+<!-- Add menu entry in Settings/Email -->
+<menuitem name="Tracking events" id="menu_mail_tracking_event"
+          parent="base.menu_email"
+          action="action_view_mail_tracking_event"/>
+
+
+</odoo>

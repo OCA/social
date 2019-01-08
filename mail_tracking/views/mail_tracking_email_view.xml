@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+<record model="ir.ui.view" id="view_mail_tracking_email_form">
+    <field name="name">mail.tracking.email.form</field>
+    <field name="model">mail.tracking.email</field>
+    <field name="arch" type="xml">
+        <form string="MailTracking event" create="false" edit="false" delete="false">
+            <header>
+                <field name="state" widget="statusbar"/>
+            </header>
+            <sheet>
+                <group>
+                    <field name="name"/>
+                </group>
+                <group>
+                    <group>
+                        <field name="mail_message_id"/>
+                        <field name="mail_id"/>
+                        <field name="partner_id"/>
+                        <field name="recipient"/>
+                        <field name="sender"/>
+                    </group>
+                    <group>
+                        <field name="timestamp"/>
+                        <field name="time"/>
+                        <field name="date"/>
+                    </group>
+                </group>
+                <group attrs="{'invisible': [('bounce_type', '=', False)]}">
+                    <field name="bounce_type"/>
+                    <field name="bounce_description"/>
+                </group>
+                <group attrs="{'invisible': [('error_type', '=', False)]}">
+                    <field name="error_smtp_server"
+                           attrs="{'invisible': [('error_smtp_server', '=', False)]}"/>
+                    <field name="error_type"/>
+                    <field name="error_description"/>
+                </group>
+                <label for="tracking_event_ids"/>
+                <div>
+                    <field name="tracking_event_ids">
+                        <tree string="Tracking events" colors="grey:event_type in ('deferral');black:event_type in ('send');red:event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject');blue:event_type in ('unsub', 'click', 'open')">
+                            <field name="time"/>
+                            <field name="event_type"/>
+                            <field name="ip"/>
+                            <field name="url"/>
+                            <field name="user_country_id" string="Country"/>
+                            <field name="os_family" string="OS"/>
+                            <field name="ua_family" string="User agent"/>
+                        </tree>
+                    </field>
+                </div>
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_tracking_email_tree">
+    <field name="name">mail.tracking.email.tree</field>
+    <field name="model">mail.tracking.email</field>
+    <field name="arch" type="xml">
+        <tree string="MailTracking emails" create="false" edit="false" delete="false"
+              colors="grey:state in (False, 'deferred');black:state in ('sent', 'delivered');green:state in ('opened');red:state in ('rejected', 'spam', 'bounced', 'soft-bounced');blue:state in ('unsub')">
+            <field name="time"/>
+            <field name="date" invisible="1"/>
+            <field name="name"/>
+            <field name="sender" string="Sender"/>
+            <field name="recipient" string="Recipient"/>
+            <field name="state"/>
+        </tree>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_mail_tracking_email_search">
+    <field name="name">mail.tracking.email.search</field>
+    <field name="model">mail.tracking.email</field>
+    <field name="arch" type="xml">
+        <search string="MailTracking email search">
+            <field name="display_name" string="Email"
+                   filter_domain="['|', ('sender', 'ilike', self), ('recipient', 'ilike', self)]"/>
+            <field name="sender" string="Sender"/>
+            <field name="recipient" string="Recipient"/>
+            <field name="name" string="Subject"/>
+            <field name="time" string="Time"/>
+            <field name="date" string="Date"/>
+            <filter name="sent" string="Sent" domain="[('state', 'in', ('sent',))]"/>
+            <filter name="deferred" string="Deferred" domain="[('state', '=', 'deferred')]"/>
+            <filter name="delivered" string="Delivered" domain="[('state', 'in', ('delivered', 'opened'))]"/>
+            <filter name="unsub" string="Unsubscribed" domain="[('state', '=', 'unsub')]"/>
+            <filter name="exception" string="Failed"
+                    domain="[('state', 'in', ('error', 'rejected', 'spam', 'bounced', 'soft-bounced'))]"/>
+            <separator/>
+            <group expand="0" string="Group By">
+                <filter string="State" name="group_by_state" domain="[]" context="{'group_by': 'state'}"/>
+                <filter string="Subject" name="group_by_subject" domain="[]" context="{'group_by': 'name'}"/>
+                <filter string="Sender" name="group_by_sender" domain="[]" context="{'group_by': 'sender'}"/>
+                <filter string="Month" name="group_by_month" domain="[]" context="{'group_by': 'date'}"/>
+            </group>
+        </search>
+    </field>
+</record>
+
+
+<record id="action_view_mail_tracking_email" model="ir.actions.act_window">
+    <field name="name">MailTracking emails</field>
+    <field name="res_model">mail.tracking.email</field>
+    <field name="view_type">form</field>
+    <field name="view_mode">tree,form</field>
+    <field name="search_view_id" ref="view_mail_tracking_email_search"/>
+</record>
+
+<!-- Add menu entry in Settings/Email -->
+<menuitem name="Tracking emails" id="menu_mail_tracking_email"
+          parent="base.menu_email"
+          action="action_view_mail_tracking_email"/>
+
+</odoo>
