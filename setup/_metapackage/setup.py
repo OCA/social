@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo12-addon-mail_attach_existing_attachment',
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_track_diff_only',
+        'odoo12-addon-mail_tracking',
         'odoo12-addon-mass_mailing_resend',
         'odoo12-addon-mass_mailing_unique',
     ],
