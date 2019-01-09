@@ -43,7 +43,9 @@ class TestMailTemplate(TestMail):
         )
 
     def create_mail_composer(self, partner_to_send_ids):
-        email_template = self.env['mail.template'].create({
+        email_template = self.env[
+            'mail.template'
+        ].with_context(test_parent_mail_recipient=True).create({
             'model_id': self.env['ir.model'].search([
                 ('model', '=', 'mail.channel')
             ], limit=1).id,
