@@ -42,19 +42,19 @@ class TestMailTemplate(TestMail):
             partner_with_mail_vals
         )
 
-    def create_mail_composer(cls, partner_to_send_id):
-        email_template = cls.env['mail.template'].create({
-            'model_id': cls.env['ir.model'].search([
+    def create_mail_composer(self, partner_to_send_ids):
+        email_template = self.env['mail.template'].create({
+            'model_id': self.env['ir.model'].search([
                 ('model', '=', 'mail.channel')
             ], limit=1).id,
             'name': 'Pigs Template',
             'subject': '${object.name}',
             'body_html': '${object.description}',
             'user_signature': False,
-            'partner_to': '%s' % (partner_to_send_id),
+            'partner_to': ",".join(partner_to_send_ids),
         })
 
-        composer = cls.mail_comp_msg.with_context({
+        composer = self.mail_comp_msg.with_context({
             'default_composition_mode': 'comment',
             'default_model': 'mail.channel',
             'default_use_template': True,
@@ -65,7 +65,7 @@ class TestMailTemplate(TestMail):
         })
         values = composer.onchange_template_id(
             email_template.id,
-            'comment', 'mail.channel', cls.group_pigs.id
+            'comment', 'mail.channel', self.group_pigs.id
         )['value']
 
         # use _convert_to_cache to return a browse record list from command
@@ -77,26 +77,41 @@ class TestMailTemplate(TestMail):
 
         return recipients
 
-    def test_1_mail_send_to_partner_no_mail(cls):
+    def test_1_mail_send_to_partner_no_mail(self):
         """Use company mail if recipient partner has no email."""
-        recipients = cls.create_mail_composer(cls.partner_no_mail.id)
+        recipients = self.create_mail_composer([str(self.partner_no_mail.id)])
 
-        cls.assertEqual(recipients.email, cls.company_test.email)
-        cls.assertNotEqual(recipients.email, cls.partner_no_mail.email)
-        cls.assertNotEqual(recipients.email, cls.partner_with_mail.email)
+        self.assertEqual(recipients.email, self.company_test.email)
+        self.assertNotEqual(recipients.email, self.partner_no_mail.email)
+        self.assertNotEqual(recipients.email, self.partner_with_mail.email)
 
-    def test_2_mail_send_to_partner_with_mail(cls):
+    def test_2_mail_send_to_partner_with_mail(self):
         """Use partner mail if recipient partner has an email."""
-        recipients = cls.create_mail_composer(cls.partner_with_mail.id)
+        recipients = self.create_mail_composer(
+            [str(self.partner_with_mail.id)]
+        )
 
-        cls.assertNotEqual(recipients.email, cls.company_test.email)
-        cls.assertNotEqual(recipients.email, cls.partner_no_mail.email)
-        cls.assertEqual(recipients.email, cls.partner_with_mail.email)
+        self.assertNotEqual(recipients.email, self.company_test.email)
+        self.assertNotEqual(recipients.email, self.partner_no_mail.email)
+        self.assertEqual(recipients.email, self.partner_with_mail.email)
 
-    def test_3_mail_send_to_company_test(cls):
+    def test_3_mail_send_to_company_test(self):
         """Use company mail if recipient is the company."""
-        recipients = cls.create_mail_composer(cls.company_test.id)
+        recipients = self.create_mail_composer([str(self.company_test.id)])
 
-        cls.assertEqual(recipients.email, cls.company_test.email)
-        cls.assertNotEqual(recipients.email, cls.partner_no_mail.email)
-        cls.assertNotEqual(recipients.email, cls.partner_with_mail.email)
+        self.assertEqual(recipients.email, self.company_test.email)
+        self.assertNotEqual(recipients.email, self.partner_no_mail.email)
+        self.assertNotEqual(recipients.email, self.partner_with_mail.email)
+
+    def test_4_mail_send_to_company_and_partner_no_mail(self):
+        """ Use only one time company mail if recipient is the company
+            and partner without mail.
+        """
+        recipients = self.create_mail_composer([
+            str(self.partner_no_mail.id),
+            str(self.company_test.id)
+        ])
+
+        self.assertEqual(recipients.email, self.company_test.email)
+        self.assertNotEqual(recipients.email, self.partner_no_mail.email)
+        self.assertNotEqual(recipients.email, self.partner_with_mail.email)

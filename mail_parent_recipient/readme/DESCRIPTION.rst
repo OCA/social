@@ -1,1 +1,2 @@
-This modules add the fact to use partner's parent email as recipient.
+This module modifies how Odoo get email recipients from partners.
+Partner's closest parent email will be used as recipient if partner has no email address.
