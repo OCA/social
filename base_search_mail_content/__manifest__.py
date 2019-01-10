@@ -6,7 +6,7 @@
 
 {
     "name": "Base Search Mail Content",
-    "version": "11.0.1.0.1",
+    "version": "12.0.1.0.0",
     "author": "Eficent,"
               "SerpentCS,"
               "Tecnativa,"
