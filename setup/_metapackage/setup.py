@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo11-addon-email_template_qweb',
         'odoo11-addon-fetchmail_thread_default',
         'odoo11-addon-mail_activity_board',
+        'odoo11-addon-mail_activity_partner',
         'odoo11-addon-mail_activity_team',
         'odoo11-addon-mail_attach_existing_attachment',
         'odoo11-addon-mail_browser_view',
