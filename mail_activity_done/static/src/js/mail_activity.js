@@ -3,6 +3,8 @@
 
 odoo.define('mail.Activity.done', function(require) {
 "use strict";
+
+    var mailUtils = require('mail.utils');
     var core = require('web.core');
     var utils = require('mail.utils');
     var time = require('web.time');
@@ -46,14 +48,21 @@ odoo.define('mail.Activity.done', function(require) {
     };
 
     var Activity = mail_activity.include({
-
+        /**
+         * @override
+         * @private
+         */
         _render: function () {
-            _.each(this.activities, function (activity) {
-                if (activity.note) {
-                    activity.note = utils.parse_and_transform(activity.note, utils.add_link);
+            _.each(this._activities, function (activity) {
+                var note = mailUtils.parseAndTransform(activity.note || '', mailUtils.inline);
+                var is_blank = (/^\s*$/).test(note);
+                if (!is_blank) {
+                    activity.note = mailUtils.parseAndTransform(activity.note, mailUtils.addLink);
+                } else {
+                    activity.note = '';
                 }
             });
-            var activities = setDelayLabel(this.activities);
+            var activities = setDelayLabel(this._activities);
             if (activities.length) {
                 var nbActivities = _.countBy(activities, 'state');
                 this.$el.html(QWeb.render('mail.activity_items', {
@@ -61,8 +70,8 @@ odoo.define('mail.Activity.done', function(require) {
                     nbPlannedActivities: nbActivities.planned,
                     nbTodayActivities: nbActivities.today,
                     nbOverdueActivities: nbActivities.overdue,
-                    date_format: time.getLangDateFormat(),
-                    datetime_format: time.getLangDatetimeFormat(),
+                    dateFormat: time.getLangDateFormat(),
+                    datetimeFormat: time.getLangDatetimeFormat(),
                 }));
             } else {
                 this.$el.empty();
