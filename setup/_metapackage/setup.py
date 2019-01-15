@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo12-addon-email_template_qweb',
+        'odoo12-addon-mail_activity_partner',
         'odoo12-addon-mail_attach_existing_attachment',
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_track_diff_only',
