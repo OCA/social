@@ -46,6 +46,7 @@ class MailMessage(models.Model):
             messages, message_tree)
         for message_dict in messages:
             # Check if current user is a superuser
-            if self.env.user.has_group('mail_edit.group_mail_edit_superuser'):
-                message_dict['is_superuser'] = True
+            superuser_group = 'mail_edit.group_mail_edit_superuser'
+            message_dict.update(
+                {'is_superuser' : self.env.user.has_group(superuser_group)})
         return res

@@ -12,7 +12,7 @@
                     <group>
                         <field name="subject" groups="mail_edit.group_mail_edit_editor,mail_edit.group_mail_edit_superuser"/>
                         <field name="date" readonly="1"/>
-                        <field name="type" readonly="1"/>
+                        <field name="message_type" readonly="1"/>
                         <field name="subtype_id" readonly="1"/>
                     </group>
                     <group>

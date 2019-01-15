@@ -62,6 +62,7 @@ Contributors
 * Tom Blauwendraat <tom@sunflowerweb.nl>
 * George Daramouskas <gdaramouskas@therp.nl>
 * Holger Brunn <hbrunn@therp.nl>
+* Giovanni Francesco Capalbo <giovanni@therp.nl>
 
 Maintainer
 ----------

@@ -1,16 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <template>
-    <t t-extend="mail.thread.message">
-        <t t-jquery=".oe_msg_icons .oe_reply" t-operation="before">
-            <t t-if="widget.is_author or widget.is_superuser">
-                <span class="oe_edit">
-                    <a title="Edit Mail" class="oe_e">&#038;</a>
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery='p.o_mail_info>span>i:first-child' t-operation="after">
+            <span class="oe_edit">
+                <t t-if="is_author or is_superuser" >
+                    <i title="Edit Mail" class="fa fa-pencil-square-o o_edit"
+                        t-att-data-message-id="message.id">
+                    </i>
+                </t>
                 </span>
-                <span class="oe_delete">
-                    <a title="Delete" class="oe_e">[</a>
-                </span>
-            </t>
         </t>
     </t>
 </template>
