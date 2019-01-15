@@ -133,11 +133,13 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__email_bounced
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_bounced
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_bounced
 msgid "Email Bounced"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_score
 msgid "Email Score"
 msgstr ""
 
@@ -424,6 +426,7 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__tracking_emails_count
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users__tracking_emails_count
 msgid "Tracking Emails Count"
 msgstr ""
 
