@@ -1,11 +1,13 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, api
+from odoo import models, fields, api
 
 
 class MailMessage(models.Model):
     _inherit = "mail.message"
+
+    mail_tracking_email_ids = fields.One2many('mail.tracking.email', 'mail_message_id')
 
     def _tracking_status_map_get(self):
         return {

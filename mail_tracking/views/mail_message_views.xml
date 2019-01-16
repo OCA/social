@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_message_form">
+        <field name="name">mail.message.form.pbx</field>
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_form"/>
+        <field name="arch" type="xml">
+          <data>
+            <notebook position="inside">
+                <page string="Mail Tracking">
+                    <group>
+                        <field name="mail_tracking_email_ids" widget="one2many_list"  nolabel="1">
+                        </field>
+                    </group>
+                </page>
+            </notebook>
+          </data>
+        </field>
+    </record>
+
+</odoo>
