@@ -1,5 +1,4 @@
-# coding: utf-8
-# © 2017 David BEAL @ Akretion
+# Copyright 2017 David BEAL @ Akretion
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -17,7 +16,7 @@ class MailTemplate(models.Model):
     _inherit = 'mail.template'
 
     def generate_email(self, res_ids, fields=None):
-        res = super(MailTemplate, self).generate_email(res_ids, fields=fields)
+        res = super().generate_email(res_ids, fields=fields)
         if 'body_html' in res:
             res['body_html'] = transform(res['body_html'])
         return res
