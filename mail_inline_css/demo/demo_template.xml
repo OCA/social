@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="0">
+  <template id="demo_email_hello" name="demo email hello">
+    <html>
+      <body>
+        <!-- TODO: move to LESS file
+        If we put the link as it is `premailer` won't be able to render it.
+        To ease this, we could:
+        1. find the less file on FS
+        2. compile to less
+        3. populate style block
+        -->
+        <style>
+          #main_wrapper {
+            max-width: 620px;
+            margin: 0 auto;
+            border: 1px solid #ccc;
+            font-size: 18px;
+            font-family: verdana;
+            color: #6B6E71;
+          }
+          a { color: #3BA0A6; text-decoration: none }
+          #main_header, footer, main > div { padding: 30px 40px }
+          #main_header table { width: 100% }
+          #main_header table td { width: 50% }
+          #main_logo { max-width: 300px }
+          #main_header .right {
+            text-align: right;
+            vertical-align: top;
+            font-size: 140%;
+          }
+          #main_header .date_today { text-transform: uppercase; opacity: 0.7; color: #FF0000 }
+          footer { padding-top: 0; font-size: 120% }
+          footer address { font-style: normal }
+          .greeting { padding-top: 0; padding-bottom: 0 }
+          .image-wrapper {
+            min-height: 250px;
+          }
+          .image-wrapper.location-map {
+            margin: 0 -40px;
+          }
+          .pt0 { padding-top: 0 }
+          a.contact { cursor: pointer }
+        </style>
+        <div id="main_wrapper">
+          <div id="main_header">
+            <table>
+              <tbody>
+                <tr>
+                  <td class="left">
+                    <img id="main_logo" t-attf-src="data:image;base64,{{env.user.company_id.logo}}" />
+                  </td>
+                  <td class="right">
+                    <span class="date_today" t-esc="time.strftime('%%d %%B %%Y')" />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <main id="main_content">
+            <div class="greeting">
+              <p>Hello <span t-field="object.name" />.</p>
+            </div>
+            <div id="content">
+              <p>This e-mail styles are inline rendered although its template defines styles as embedded CSS!</p>
+            </div>
+          </main>
+          <footer id="main_footer">
+            <div class="company_info">
+              <p class="website"><a href="https://www.example.com">www.example.com</a></p>
+              <div class="address">
+                <div t-field="env.user.company_id.partner_id"
+                     t-options='{
+                      "widget": "contact",
+                      "fields": ["name", "address", "phone", "mobile", "email"]
+                      }'/>
+              </div>
+            </div>
+          </footer>
+        </div>
+      </body>
+    </html>
+  </template>
+</odoo>
