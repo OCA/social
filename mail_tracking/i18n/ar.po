@@ -20,7 +20,7 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: mail_tracking
-#: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email_state
+#: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
 msgid ""
 " * The 'Error' status indicates that there was an error when trying to sent "
 "the email, for example, 'No valid recipient'\n"
@@ -44,17 +44,17 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_bounce_description
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__bounce_description
 msgid "Bounce description"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_bounce_type
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__bounce_type
 msgid "Bounce type"
 msgstr ""
 
@@ -64,7 +64,7 @@ msgid "Bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
 msgstr ""
 
@@ -74,7 +74,7 @@ msgid "Clicked"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_url
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__url
 msgid "Clicked URL"
 msgstr ""
 
@@ -84,29 +84,29 @@ msgid "Contact"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "Country"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_uid
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_uid
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__create_uid
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__create_uid
 msgid "Created by"
 msgstr "أنشئ بواسطة"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_create_date
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_create_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__create_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__create_date
 msgid "Created on"
 msgstr "أنشئ في"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_date
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_date
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__date
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Date"
 msgstr "التاريخ"
 
@@ -116,94 +116,96 @@ msgid "Deferral"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 msgid "Deferred"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Delivered"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__display_name
 msgid "Display name"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_id
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Email"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_bounced
-#: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_bounced
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__email_bounced
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_bounced
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_bounced
 msgid "Email Bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_email_score
-#: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_score
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_score
 msgid "Email Score"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
 msgid "Email bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
 msgid "Error"
 msgstr "الخطأ"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_smtp_server
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__error_smtp_server
 msgid "Error SMTP server"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_description
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_description
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__error_description
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__error_description
 msgid "Error description"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_details
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__error_details
 msgid "Error details"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_error_type
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_error_type
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__error_type
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__error_type
 msgid "Error type"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_event_type
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__event_type
 msgid "Event type"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Failed"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
 msgstr ""
 
@@ -213,38 +215,50 @@ msgid "Hard bounce"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_id
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__id
 msgid "ID"
 msgstr "المعرف"
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "IP"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_mobile
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__mobile
 msgid "Is mobile?"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email___last_update
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event___last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event____last_update
 msgid "Last Modified on"
 msgstr "آخر تعديل في"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_uid
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_uid
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__write_uid
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__write_uid
 msgid "Last Updated by"
 msgstr "آخر تحديث بواسطة"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_write_date
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_write_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__write_date
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__write_date
 msgid "Last Updated on"
 msgstr "آخر تحديث في"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_ir_mail_server
+msgid "Mail Server"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_bounced_mixin
+msgid "Mail bounced mixin"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
@@ -252,64 +266,64 @@ msgid "MailTracking email"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "MailTracking email search"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_email
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 msgid "MailTracking emails"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_event
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 msgid "MailTracking event"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "MailTracking event search"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "MailTracking events"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_mail_message_id
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_tracking_email_id
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_message_id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__tracking_email_id
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Message"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:61
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:88
 #, python-format
 msgid "Message tracking"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Month"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "OS"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.event,event_type:0
 msgid "Open"
 msgstr ""
@@ -320,7 +334,7 @@ msgid "Opened"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_os_family
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__os_family
 msgid "Operating system family"
 msgstr ""
 
@@ -330,26 +344,26 @@ msgid "Outgoing Mails"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_partner_id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__partner_id
 msgid "Partner"
 msgstr "الشريك"
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Recipient"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__recipient
 msgid "Recipient email"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_recipient_address
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_recipient_address
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__recipient_address
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient_address
 msgid "Recipient email address"
 msgstr ""
 
@@ -360,24 +374,24 @@ msgid "Rejected"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_smtp_server
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__smtp_server
 msgid "SMTP server"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 msgid "Sender"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_sender
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__sender
 msgid "Sender email"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Sent"
@@ -400,116 +414,111 @@ msgid "Spam"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_state
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__state
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "State"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_name
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__name
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Subject"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_time
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_time
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__time
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__time
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Time"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:46
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:47
 #, python-format
 msgid "To:"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_emails_count
-#: model:ir.model.fields,field_description:mail_tracking.field_res_users_tracking_emails_count
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner__tracking_emails_count
+#: model:ir.model.fields,field_description:mail_tracking.field_res_users__tracking_emails_count
 msgid "Tracking Emails Count"
 msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
-#: model:ir.ui.view,arch_db:mail_tracking.view_partner_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_tracking_event_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__tracking_event_ids
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_event
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 msgid "Tracking events"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:41
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:68
 #, python-format
 msgid "Tracking partner"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
 msgstr "النوع"
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_timestamp
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_timestamp
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__timestamp
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__timestamp
 msgid "UTC timestamp"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Unsubscribe"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ip
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ip
 msgid "User IP"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_agent
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_agent
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "User agent"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ua_family
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ua_family
 msgid "User agent family"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_ua_type
-#: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ua_type
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "User agent type"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_country_id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_country_id
 msgid "User country"
-msgstr ""
-
-#. module: mail_tracking
-#: model:ir.model,name:mail_tracking.model_ir_mail_server
-msgid "ir.mail_server"
 msgstr ""
