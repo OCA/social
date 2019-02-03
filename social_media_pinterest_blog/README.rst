@@ -3,9 +3,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-==============
+=====================================
 Pinterest Social Media Icon Extension
-==============
+=====================================
 
 This module adds Pinterest social media icon. By default, the icon will
 be shown on the footer, about us, and the Blog, like the original icons.

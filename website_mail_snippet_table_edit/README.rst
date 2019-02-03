@@ -2,9 +2,9 @@
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
 
-=======================================
+========================================
 Edit Table Rows in Website Mail Designer
-=======================================
+========================================
 
 This module extends the functionality of ``website_mail`` to support
 duplication and deletion of table rows (``<tr>`` elements) and allow you to
