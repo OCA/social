@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="param_limit" model="ir.config_parameter">
+            <field name="key">mail_queue_send_limit.limit</field>
+            <field name="value">100</field>
+        </record>
+    </data>
+</openerp>
