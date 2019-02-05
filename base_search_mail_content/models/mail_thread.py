@@ -54,7 +54,7 @@ class MailThread(models.AbstractModel):
                 }
             })
 
-            for node in doc.xpath("//field[1]"):
+            for node in doc.xpath("//field[last()]"):
                 # Add message_content in search view
                 elem = etree.Element(
                     'field',
