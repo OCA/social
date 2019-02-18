@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo11-addon-mass_mailing_partner',
         'odoo11-addon-mass_mailing_resend',
         'odoo11-addon-mass_mailing_unique',
+        'odoo11-addon-message_auto_subscribe_notify_own',
     ],
     classifiers=[
         'Programming Language :: Python',
