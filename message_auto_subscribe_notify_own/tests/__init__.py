@@ -1,0 +1,1 @@
+from . import test_message_auto_subscribe_notify_own
