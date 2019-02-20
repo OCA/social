@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_auto_subscribe_notify_own_model_user,access_auto_subscribe_notify_own_model_user,model_auto_subscribe_notify_own_model,base.group_user,1,0,0,0
+access_auto_subscribe_notify_own_model_erp_manager,access_auto_subscribe_notify_own_model_admin,model_auto_subscribe_notify_own_model,base.group_erp_manager,1,1,1,1
+access_fake_model_test,fake.model.test,model_message_auto_subscribe_notify_own_test,base.group_user,1,1,1,1
