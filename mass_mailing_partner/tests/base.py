@@ -12,8 +12,6 @@ class BaseCase(TransactionCase):
         super(BaseCase, self).setUp()
         m_partner_category = self.env['res.partner.category']
         m_mailing_list = self.env['mail.mass_mailing.list']
-        self.company_id = self.env.ref('base.main_company')
-        self.company = self.env['res.company'].browse(self.company_id)
         self.partner = self.create_partner({'name': 'Partner test',
                                             'email': 'partner@test.com'})
         partner_category = m_partner_category.create({'name': 'Category Test'})
