@@ -1,0 +1,25 @@
+<odoo>
+
+    <record
+        model="ir.actions.act_window"
+        id="mail.action_email_template_tree_all">
+        <field name="name">Templates</field>
+        <field name="res_model">mail.template</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="mail.email_template_tree" />
+        <field name="search_view_id" ref="mail.view_email_template_search"/>
+        <field
+            name="domain"
+            eval="&quot;[('model_id', '=', %d)]&quot; % ref('mass_mailing.model_mail_mass_mailing')"/>
+        <field
+            name="context"
+            eval="&quot;{'default_model_id': %d}&quot; % ref('mass_mailing.model_mail_mass_mailing')"/>
+    </record>
+
+    <menuitem
+        id="menu_email_templates"
+        action="mail.action_email_template_tree_all"
+        parent="mass_mailing.menu_mass_mailing_configuration" />
+
+</odoo>

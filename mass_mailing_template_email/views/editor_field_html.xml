@@ -1,0 +1,14 @@
+<odoo>
+
+    <template
+        id="FieldTextHtmlInline"
+        inherit_id="mass_mailing.FieldTextHtmlInline">
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/mass_mailing_template_email/static/src/js/mass_mailing_template_email.js">
+            </script>
+        </xpath>
+    </template>
+
+</odoo>

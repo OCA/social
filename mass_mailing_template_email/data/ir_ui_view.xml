@@ -1,0 +1,22 @@
+<odoo>
+
+    <!--
+        This is needed in order to remove the plus icon that redirects to
+        enterprise version and the default template
+    -->
+
+    <record id="default_mass_mail_template" model="ir.ui.view">
+        <field name="name">Default Mass Mail Template</field>
+        <field name="type">qweb</field>
+        <field name="inherit_id" ref="mass_mailing.email_designer_snippets"/>
+        <field name="arch">
+            <![CDATA[
+            <xpath
+                expr="//div[@id='email_designer_themes']/div[@data-name='default']"
+                position="replace">
+            </xpath>
+        ]]>
+        </field>
+    </record>
+
+</odoo>
