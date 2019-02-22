@@ -15,7 +15,7 @@ class Substitution(models.Model):
     key = fields.Char()
     lang = fields.Char()
     email_template_id = fields.Many2one(
-        'mail.template', ondelete='cascade')
+        'mail.template', ondelete='cascade', index=True)
     email_id = fields.Many2one(
-        'mail.mail', ondelete='cascade')
+        'mail.mail', ondelete='cascade', index=True)
     value = fields.Char()
