@@ -63,6 +63,7 @@ Contributors
 * George Daramouskas <gdaramouskas@therp.nl>
 * Holger Brunn <hbrunn@therp.nl>
 * Giovanni Francesco Capalbo <giovanni@therp.nl>
+* Nikos Tsirintanis <ntsirintanis@therp.nl>
 
 Maintainer
 ----------
