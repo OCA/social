@@ -1,18 +1,13 @@
 # -*- coding: utf-8 -*-
 # Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+import json
 import logging
 from odoo.http import JsonRequest, Root, Response
 
 # Monkeypatch type of request rooter to use RESTJsonRequest
 old_get_request = Root.get_request
 _logger = logging.getLogger(__name__)
-
-try:
-    import simplejson
-except ImportError:
-    _logger.error("Please install simplejson tu use mail_sendgrid module")
-    _logger.debug("ImportError details:", exc_info=True)
 
 
 def get_request(self, httprequest):
@@ -45,7 +40,7 @@ class RESTJsonRequest(JsonRequest):
             response['result'] = result
 
         mime = 'application/json'
-        body = simplejson.dumps(response)
+        body = json.dumps(response)
 
         return Response(
             body, headers=[('Content-Type', mime),
