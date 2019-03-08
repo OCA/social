@@ -1,2 +1,3 @@
+server-tools
 # Until merged
 social-eficent https://github.com/Eficent/social 12.0-mig-mail_activity_board
