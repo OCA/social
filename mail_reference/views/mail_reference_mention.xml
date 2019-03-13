@@ -1,0 +1,30 @@
+<odoo>
+
+    <record id="mail_reference_mention_form" model="ir.ui.view">
+        <field name="name">Mail Reference Mention Form</field>
+        <field name="model">mail.reference.mention</field>
+        <field name="arch" type="xml">
+            <form string="Mentions">
+                <group>
+                    <field name="delimiter" required="1"/>
+                    <field name="shown_at_model_ids" required="1"/>
+                    <field name="shows_model_id" required="1"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_reference_mention_tree" model="ir.ui.view">
+        <field name="name">Mail Reference Mention Tree</field>
+        <field name="model">mail.reference.mention</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="display_name"/>
+                <field name="delimiter"/>
+                <field name="shown_at_model_ids"/>
+                <field name="shows_model_id"/>
+            </tree>
+        </field>
+    </record>
+
+</odoo>

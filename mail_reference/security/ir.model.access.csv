@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_reference_mention_all,access_mail_reference_mention_all,model_mail_reference_mention,base.group_no_one,1,0,0,0
+access_mail_reference_mention_system,access_mail_reference_mention_system,model_mail_reference_mention,base.group_system,1,1,1,1

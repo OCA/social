@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="action_view_mail_reference_mentions" model="ir.actions.act_window">
+        <field name="name">Mail References</field>
+        <field name="res_model">mail.reference.mention</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        name="Mail Reference Mentions"
+        id="menu_mail_reference_mentions"
+        parent="base.menu_email"
+        sequence="99"
+        action="action_view_mail_reference_mentions"/>
+
+</odoo>
