@@ -56,6 +56,7 @@ Contributors
 
 * Antonio Espinosa <antonio.espinosa@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
+* Dave Burkholder <dave@thinkwelldesigns.com>
 
 Maintainer
 ----------
