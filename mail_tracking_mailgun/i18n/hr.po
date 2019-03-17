@@ -50,12 +50,12 @@ msgid "A Mailgun domain value is needed!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
 msgid "Check Mailgun"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
 msgid "Check email validity"
 msgstr ""
 
@@ -65,13 +65,13 @@ msgid "Contact"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:238
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:239
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:29
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:28
 #, python-format
 msgid ""
 "Email has been bounced: %s\n"
@@ -86,10 +86,17 @@ msgid "Error %s trying to check mailof connection"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:242
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:243
 #, python-format
 msgid "Event information not longer stored"
 msgstr ""
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
+#, fuzzy
+#| msgid "ir.mail_server"
+msgid "Mail Server"
+msgstr "ir.mail_server"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_email
@@ -102,7 +109,7 @@ msgid "MailTracking event"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
 msgid "Mailgun"
 msgstr ""
 
@@ -113,39 +120,39 @@ msgid "Mailgun Error. Mailbox verification value wasn't returned"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event_mailgun_id
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event__mailgun_id
 msgid "Mailgun Event ID"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
 msgid "Re-sync Mailgun"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
 msgid "Set Bounced"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:70
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:69
 #, python-format
 msgid "There is no Mailgun API key!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:225
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:226
 #, python-format
 msgid "There is no tracked message!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
 msgid "Unset Bounced"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:45
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:44
 #, python-format
 msgid ""
 "You need to configure mailgun.validation_key in order to be able to check "
@@ -153,12 +160,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
-msgid "ir.mail_server"
-msgstr "ir.mail_server"
-
-#. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:32
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:31
 #, python-format
 msgid "unknown"
 msgstr ""
