@@ -75,13 +75,13 @@ msgid "Sendgrid Preview"
 msgstr ""
 
 #. module: mail_sendgrid_mass_mailing
-#: model:ir.ui.view,arch_db:mail_sendgrid_mass_mailing.view_email_template_sendgrid_form
-msgid "Sendgrid Unsubscribe"
+#: model:ir.model.fields,field_description:mail_sendgrid_mass_mailing.field_mail_mass_mailing_email_template_id
+msgid "Sendgrid Template"
 msgstr ""
 
 #. module: mail_sendgrid_mass_mailing
-#: model:ir.model.fields,field_description:mail_sendgrid_mass_mailing.field_mail_mass_mailing_email_template_id
-msgid "Sengdrid Template"
+#: model:ir.ui.view,arch_db:mail_sendgrid_mass_mailing.view_email_template_sendgrid_form
+msgid "Sendgrid Unsubscribe"
 msgstr ""
 
 #. module: mail_sendgrid_mass_mailing
