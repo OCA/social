@@ -14,7 +14,7 @@ class MailActivity(models.Model):
         'Completed Date', index=True, readonly=True,
     )
 
-    @api.depends('done')
+    @api.depends('date_deadline', 'done')
     def _compute_state(self):
         super(MailActivity, self)._compute_state()
         for record in self.filtered(lambda activity: activity.done):
