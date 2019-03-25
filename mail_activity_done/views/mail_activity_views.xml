@@ -39,7 +39,7 @@
                 <attribute name="domain">[('date_deadline', '=', context_today().strftime('%Y-%m-%d')), ('done', '!=', True)]</attribute>
             </filter>
             <filter name="activities_upcoming_all" position="attributes">
-                <attribute name="domain">[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('done', '!=', True)]</attribute>
+                <attribute name="domain">[('date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('done', '!=', True)]</attribute>
             </filter>
         </field>
     </record>
