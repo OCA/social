@@ -7,7 +7,7 @@ class ResUsers(models.Model):
     _inherit = 'res.users'
 
     @api.model
-    def activity_user_count(self):
+    def systray_get_activities(self):
         # Here we totally override the method. Not very nice, but
         # we should perhaps ask Odoo to add a hook here.
         query = """SELECT m.id, count(*), act.res_model as model,
