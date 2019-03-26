@@ -29,7 +29,7 @@ class TestMailActivityDoneMethods(TransactionCase):
         self.act1.done = True
         self.assertEquals(self.act1.state, 'done')
 
-    def test_activity_user_count(self):
-        act_count = self.employee.sudo(self.employee).activity_user_count()
+    def test_systray_get_activities(self):
+        act_count = self.employee.sudo(self.employee).systray_get_activities()
         self.assertEqual(len(act_count), 1,
                          "Number of activities should be equal to one")
