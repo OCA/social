@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-base_search_mail_content',
         'odoo12-addon-email_template_qweb',
+        'odoo12-addon-mail_activity_board',
         'odoo12-addon-mail_activity_done',
         'odoo12-addon-mail_activity_partner',
         'odoo12-addon-mail_attach_existing_attachment',
