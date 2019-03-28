@@ -1,5 +1,18 @@
-.oe_custom_notification legend
+.o_mail_follower_custom_notification
+{
+    padding: 5px 10px 10px 10px;
+}
+.o_mail_follower_custom_notification fieldset > legend
 {
     font-size: inherit;
     margin-bottom: 0px;
+}
+.o_mail_follower_custom_notification fieldset > div,
+.o_mail_follower_custom_notification fieldset > div > label
+{
+    white-space: nowrap;
+}
+.o_mail_follower_custom_notification fieldset > div > label
+{
+    font-weight: normal;
 }

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Therp BV <http://therp.nl>
+# Copyright 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class MailFollowers(models.Model):
@@ -23,7 +23,6 @@ class MailFollowers(models.Model):
         string='Force own mails from subtype')
 
     @api.model
-    @api.returns('self', lambda x: x.id)
     def create(self, values):
         this = super(MailFollowers, self).create(values)
         for subtype in this.subtype_ids:
