@@ -1,40 +1,11 @@
 # -*- coding: utf-8 -*-
-# © 2015 Therp BV <http://therp.nl>
+# Copyright 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from openerp import api, models
+from odoo import api, models
 
 
 class MailThread(models.AbstractModel):
-    _inherit = ['base.patch.models.mixin', 'mail.thread']
-    _name = 'mail.thread'
-
-    @api.multi
-    def _get_subscription_data(self, name, args, user_pid=None):
-        result = super(MailThread, self)._get_subscription_data(
-            name, args, user_pid=user_pid)
-        subtypes = self.env['mail.message.subtype'].search([
-            ('hidden', '=', False),
-            '|',
-            ('res_model', '=', self._name),
-            ('res_model', '=', False),
-        ])
-        for follower in self.env['mail.followers'].search([
-            ('res_model', '=', self._name),
-            ('res_id', 'in', result.keys()),
-            ('partner_id', '=', user_pid or self.env.user.partner_id.id),
-        ]):
-            # values are ordered dicts, so we get the correct matches
-            for subtype, data in zip(
-                    subtypes,
-                    result[follower.res_id]['message_subtype_data'].values()):
-                data['force_mail'] = 'default'
-                if subtype in follower.force_mail_subtype_ids:
-                    data['force_mail'] = 'force_yes'
-                elif subtype in follower.force_nomail_subtype_ids:
-                    data['force_mail'] = 'force_no'
-                data['force_own'] =\
-                    subtype in follower.force_own_subtype_ids
-        return result
+    _inherit = 'mail.thread'
 
     @api.multi
     def message_custom_notification_update_user(self, custom_notifications):
@@ -54,9 +25,10 @@ class MailThread(models.AbstractModel):
         and dictionaries mapping message subtype ids to custom notification
         values"""
         def ids_with_value(data, key, value):
-            return map(lambda x: int(x[0]),
-                       filter(lambda x: x[1][key] == value,
-                              data.iteritems()))
+            return map(
+                lambda x: int(x[0]),
+                filter(lambda x: x[1][key] == value, data.iteritems())
+            )
 
         custom_notifications = {
             int(key): value

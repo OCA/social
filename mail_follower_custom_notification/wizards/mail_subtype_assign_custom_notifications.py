@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © 2015 Therp BV <http://therp.nl>
+# Copyright 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from openerp import api, fields, models
 
@@ -15,8 +15,7 @@ class MailSubtypeAssignCustomNotifications(models.TransientModel):
 
     @api.multi
     def button_apply(self):
-        self.ensure_one()
-        for subtype in self.subtype_ids:
+        for subtype in self.mapped('subtype_ids'):
             domain = [('subtype_ids', '=', subtype.id)]
             if subtype.custom_notification_model_ids:
                 domain.append(
