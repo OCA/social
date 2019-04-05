@@ -8,11 +8,10 @@
         <field name="model">mail.mass_mailing.list</field>
         <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_list_form"/>
         <field name="arch" type="xml">
-            <div class="oe_title" position="after">
-                <group>
-                    <field name="not_cross_unsubscriptable"/>
-                </group>
-            </div>
+            <field name="is_public" position="after">
+                <field name="not_cross_unsubscriptable"
+                       attrs="{'invisible': [('is_public', '=', False)]}"/>
+            </field>
         </field>
     </record>
 
