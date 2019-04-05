@@ -5,8 +5,6 @@ odoo.define("mass_mailing_custom_unsubscribe.partner_tour",
     "use strict";
     var base = require("web_editor.base");
     var tour = require("web_tour.tour");
-    require("mass_mailing_custom_unsubscribe.require_details");
-    require("mass_mailing_custom_unsubscribe.unsubscribe");
 
     // Allow to know if an element is required
     $.extend($.expr[':'], {
@@ -25,7 +23,7 @@ odoo.define("mass_mailing_custom_unsubscribe.partner_tour",
             {
                 content: "Choose other reason",
                 trigger: ".radio:contains('Other reason') :radio:not(:checked)",
-                extra_trigger: "#reason_form .js_unsubscription_reason",
+                extra_trigger: "#reason_form #custom_div_feedback",
             },
             {
                 content: "Switch to not interested reason",
@@ -34,12 +32,13 @@ odoo.define("mass_mailing_custom_unsubscribe.partner_tour",
             },
             {
                 content: "Unsubscribe",
-                trigger: "#reason_form :submit",
+                trigger: "#reason_form button:submit",
                 extra_trigger: "body:not(:has([name='details']:propRequired))",
             },
             {
                 content: "Successfully unsubscribed",
-                trigger: "body:not(:has(#reason_form)) .alert-success:contains('You have been successfully unsubscribed!')",
+                trigger: "body:not(:has(#reason_form)) #subscription_info " +
+                         ":contains('successfully unsubscribed')",
             },
         ]
     );

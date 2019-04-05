@@ -5,76 +5,41 @@
 <odoo>
 
     <template id="reason" name="UI for Providing Unsubscription Reasons">
-        <div t-attf-class="js_unsubscription_reason #{extra_class or ''}">
-            <div class="col-md-12 mt16">
-                Before unsubscribing, could you please tell us why do you want to unsubscribe?
-            </div>
+        <div id="custom_div_feedback" t-attf-class="alert alert-success mt-4 #{extra_class or ''}" role="status">
+            <p>We would appreciate if you provide feedback about why you updated<br/>your subscriptions
+            </p>
             <div class="col-md-12 mb16">
-                <input
-                    type="hidden"
-                    name="res_id"
-                    t-att-value="res_id"/>
-                <input
-                    type="hidden"
-                    name="email"
-                    t-att-value="email"/>
-                <input
-                    type="hidden"
-                    name="token"
-                    t-att-value="token"/>
                 <t t-foreach="reasons" t-as="reason">
                     <div class="radio">
                         <label>
-                            <input
-                                type="radio"
-                                name="reason_id"
-                                t-att-data-details-required="reason.details_required"
-                                t-att-value="reason.id"/>
+                            <input type="radio" name="reason_id" t-att-data-details-required="reason.details_required" t-att-value="reason.id" required="required"/>
                             <t t-esc="reason.display_name"/>
                         </label>
                     </div>
                 </t>
-                <div t-attf-class="form-group">
-                    <textarea
-                        name="details"
-                        class="form-control"
-                        placeholder="I am unsubscribing because..."
-                        rows="3"/>
-                </div>
             </div>
+            <textarea class="form-control" name="details" cols="60" rows="3"></textarea>
         </div>
     </template>
 
-    <template id="reason_form"
-              name="Unsubscription Reason Form">
-        <t t-call="website.layout">
-            <div id="wrap" class="oe_structure oe_empty">
-                <section class="mt16 mb16">
-                    <form
-                        id="reason_form"
-                        class="container"
-                        t-attf-action="/mail/mailing/#{mailing.id}/unsubscribe"
-                        method="post">
-                        <input
-                            type="hidden"
-                            name="csrf_token"
-                            t-att-value="request.csrf_token()"/>
-                        <div class="row">
-                            <div class="col-md-12 text-center mt16 mb32">
-                                <h2>
-                                    Mailing Unsubscription
-                                </h2>
-                            </div>
-                            <t t-call="mass_mailing_custom_unsubscribe.reason"/>
-                            <div class="form-group mb16 mt16">
-                                <button type="submit" class="btn btn-danger">
-                                    Unsubscribe now
-                                </button>
-                                <p class="help-block">Thank you!</p>
-                            </div>
+    <template id="reason_form" name="Unsubscription Reason Form">
+        <t t-call="mass_mailing.layout">
+            <div class="container o_unsubscribe_form">
+                <div class="row">
+                    <form id="reason_form" t-attf-action="/mail/mailing/#{mailing_id}/unsubscribe?token=#{token}" method="post" class="col-lg-6 offset-lg-3 mt-4">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <input type="hidden" name="email" t-att-value="email"/>
+                        <input type="hidden" name="mailing_id" t-att-value="mailing_id"/>
+                        <input type="hidden" name="res_id" t-att-value="res_id"/>
+                        <t t-call="mass_mailing_custom_unsubscribe.reason"/>
+                        <div class="form-group mb16 mt16">
+                            <button type="submit" class="btn btn-danger">
+                                Unsubscribe now
+                            </button>
+                            <p class="form-text text-muted">Thank you!</p>
                         </div>
                     </form>
-                </section>
+                </div>
             </div>
         </t>
     </template>
