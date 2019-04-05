@@ -1,7 +1,6 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import mock
-from contextlib import contextmanager
 from odoo.tests.common import HttpCase
 from werkzeug import urls
 
@@ -21,129 +20,139 @@ class UICase(HttpCase):
         super(UICase, self).setUp()
         self.email = "test.contact@example.com"
         self.mail_postprocess_patch = mock.patch(
-            "openerp.addons.mass_mailing.models.mail_mail.MailMail."
+            "odoo.addons.mass_mailing.models.mail_mail.MailMail."
             "_postprocess_sent_message",
             autospec=True,
             side_effect=self.extract_url,
         )
-        with self.tempenv() as env:
-            self.domain = env["ir.config_parameter"].get_param('web.base.url')
-            List = self.lists = env["mail.mass_mailing.list"]
-            Mailing = self.mailings = env["mail.mass_mailing"]
-            Contact = self.contacts = env["mail.mass_mailing.contact"]
-            for n in range(3):
-                self.lists += List.create({
-                    "name": "test list %d" % n,
-                })
-                self.mailings += Mailing.create({
-                    "name": "test mailing %d" % n,
-                    "mailing_model_id": self.env["mail.mass_mailing.contact"],
-                    "contact_list_ids": [(6, 0, self.lists.ids)],
-                    "reply_to_mode": "thread",
-                })
-                self.mailings[n]._onchange_model_and_list()
-                # HACK https://github.com/odoo/odoo/pull/14429
-                self.mailings[n].body_html = """
-                    <div>
-                        <a href="/unsubscribe_from_list">
-                            This link should get the unsubscription URL
-                        </a>
-                    </div>
-                """
-                self.contacts += Contact.create({
-                    "name": "test contact %d" % n,
-                    "email": self.email,
-                    "mailing_list_id": self.lists[n].id,
-                })
+
+        self.domain = self.env["ir.config_parameter"].get_param('web.base.url')
+        List = self.lists = self.env["mail.mass_mailing.list"]
+        for n in range(4):
+            self.lists += List.create({"name": "test list %d" % n})
+        self.contact = self.env["mail.mass_mailing.contact"].create({
+            "name": "test contact",
+            "email": self.email,
+            "list_ids": [(6, False, self.lists.ids)],
+        })
+        self.mailing = self.env["mail.mass_mailing"].create({
+            "name": "test mailing %d" % n,
+            "mailing_model_id": self.env.ref(
+                'mass_mailing.model_mail_mass_mailing_list').id,
+            "contact_list_ids": [
+                (6, 0, [self.lists[0].id, self.lists[3].id])
+            ],
+            "reply_to_mode": "thread",
+        })
+        self.mailing._onchange_model_and_list()
+        # HACK https://github.com/odoo/odoo/pull/14429
+        self.mailing.body_html = """
+            <div>
+                <a href="/unsubscribe_from_list">
+                    This link should get the unsubscription URL
+                </a>
+            </div>
+        """
 
     def tearDown(self):
-        del self.email, self.lists, self.contacts, self.mailings, self.url
+        del self.email, self.lists, self.contact, self.mailing, self.url
         super(UICase, self).tearDown()
-
-    @contextmanager
-    def tempenv(self):
-        with self.cursor() as cr:
-            env = self.env(cr)
-            try:
-                self.lists = self.lists.with_env(env)
-                self.contacts = self.contacts.with_env(env)
-                self.mailings = self.mailings.with_env(env)
-            except AttributeError:
-                pass  # We are in :meth:`~.setUp`
-            yield env
 
     def test_contact_unsubscription(self):
         """Test a mass mailing contact that wants to unsubscribe."""
-        with self.tempenv() as env:
-            # This list we are unsubscribing from, should appear always in UI
-            self.lists[0].not_cross_unsubscriptable = True
-            # This another list should not appear in UI
-            self.lists[2].not_cross_unsubscriptable = True
-            # Extract the unsubscription link from the message body
-            with self.mail_postprocess_patch:
-                self.mailings[0].send_mail()
+        # This list we are unsubscribing from, should appear always in UI
+        self.lists[0].not_cross_unsubscriptable = True
+        # This another list should not appear in UI
+        self.lists[2].not_cross_unsubscriptable = True
+        # This another list should not appear in UI, even if it is one of
+        # the lists of the mailing
+        self.lists[3].is_public = False
+        # Extract the unsubscription link from the message body
+        with self.mail_postprocess_patch:
+            self.mailing.send_mail()
 
         tour = "mass_mailing_custom_unsubscribe_tour_contact"
-        self.phantom_js(
+        self.browser_js(
             url_path=self.url,
             code=self._tour_run % tour,
-            ready=self._tour_ready % tour)
+            ready=self._tour_ready % tour,
+            login='demo')
 
         # Check results from running tour
-        with self.tempenv() as env:
-            self.assertTrue(self.contacts[0].opt_out)
-            self.assertTrue(self.contacts[1].opt_out)
-            self.assertFalse(self.contacts[2].opt_out)
-            unsubscriptions = env["mail.unsubscription"].search([
-                ("mass_mailing_id", "=", self.mailings[0].id),
-                ("email", "=", self.email),
-                ("unsubscriber_id", "in",
-                 ["%s,%d" % (cnt._name, cnt.id)
-                  for cnt in self.contacts]),
-                ("details", "=",
-                 "I want to unsubscribe because I want. Period."),
-                ("reason_id", "=",
-                 env.ref("mass_mailing_custom_unsubscribe.reason_other").id),
-            ])
-            try:
-                self.assertEqual(2, len(unsubscriptions))
-            except AssertionError:
-                # HACK This works locally but fails on travis, undo in v10
-                pass
+        self.assertFalse(self.lists[0].subscription_contact_ids.opt_out)
+        self.assertTrue(self.lists[1].subscription_contact_ids.opt_out)
+        self.assertFalse(self.lists[2].subscription_contact_ids.opt_out)
+
+        cnt = self.contact
+        common_domain = [
+            ("mass_mailing_id", "=", self.mailing.id),
+            ("email", "=", self.email),
+            ("unsubscriber_id", "=", "%s,%d" % (cnt._name, cnt.id)),
+        ]
+        # first unsubscription
+        reason = "mass_mailing_custom_unsubscribe.reason_other"
+        unsubscription_1 = self.env["mail.unsubscription"].search(
+            common_domain + [
+                ("action", "=", "unsubscription"),
+                ("details", "=", "I want to unsubscribe because I want. "
+                                 "Period."),
+                ("reason_id", "=", self.env.ref(reason).id),
+            ]
+        )
+        # second unsubscription
+        reason = "mass_mailing_custom_unsubscribe.reason_not_interested"
+        unsubscription_2 = self.env["mail.unsubscription"].search(
+            common_domain + [
+                ("action", "=", "unsubscription"),
+                ("reason_id", "=", self.env.ref(reason).id),
+            ]
+        )
+        # re-subscription from self.lists[3]
+        unsubscription_3 = self.env["mail.unsubscription"].search(
+            common_domain + [
+                ("action", "=", "subscription"),
+            ]
+        )
+        # unsubscriptions above are all unsubscriptions saved during the
+        # tour and they are all the existing unsubscriptions
+        self.assertEqual(
+            unsubscription_1 | unsubscription_2 | unsubscription_3,
+            self.env["mail.unsubscription"].search([])
+        )
+        self.assertEqual(3, len(self.env["mail.unsubscription"].search([])))
 
     def test_partner_unsubscription(self):
         """Test a partner that wants to unsubscribe."""
-        with self.tempenv() as env:
-            # Change mailing to be sent to partner
-            partner_id = env["res.partner"].name_create(
-                "Demo Partner <%s>" % self.email)[0]
-            self.mailings[0].mailing_model_id = self.env.ref(
-                "base.model_res_partner")
-            self.mailings[0].mailing_domain = repr([
-                ('opt_out', '=', False),
-                ('id', '=', partner_id),
-            ])
-            # Extract the unsubscription link from the message body
-            with self.mail_postprocess_patch:
-                self.mailings[0].send_mail()
+        # Change mailing to be sent to partner
+        partner_id = self.env["res.partner"].name_create(
+            "Demo Partner <%s>" % self.email)[0]
+        self.mailing.mailing_model_id = self.env.ref(
+            "base.model_res_partner")
+        self.mailing.mailing_domain = repr([
+            ('is_blacklisted', '=', False),
+            ('id', '=', partner_id),
+        ])
+        # Extract the unsubscription link from the message body
+        with self.mail_postprocess_patch:
+            self.mailing.send_mail()
 
         tour = "mass_mailing_custom_unsubscribe_tour_partner"
         self.phantom_js(
             url_path=self.url,
             code=self._tour_run % tour,
-            ready=self._tour_ready % tour)
+            ready=self._tour_ready % tour,
+            login='demo')
 
         # Check results from running tour
-        with self.tempenv() as env:
-            partner = env["res.partner"].browse(partner_id)
-            self.assertTrue(partner.opt_out)
-            unsubscriptions = env["mail.unsubscription"].search([
-                ("mass_mailing_id", "=", self.mailings[0].id),
-                ("email", "=", self.email),
-                ("unsubscriber_id", "=", "res.partner,%d" % partner_id),
-                ("details", "=", False),
-                ("reason_id", "=",
-                 env.ref("mass_mailing_custom_unsubscribe"
-                         ".reason_not_interested").id),
-            ])
-            self.assertEqual(1, len(unsubscriptions))
+        partner = self.env["res.partner"].browse(partner_id)
+        self.assertTrue(partner.is_blacklisted)
+        reason_xid = "mass_mailing_custom_unsubscribe.reason_not_interested"
+        unsubscriptions = self.env["mail.unsubscription"].search([
+            ("action", "=", 'blacklist_add'),
+            ("mass_mailing_id", "=", self.mailing.id),
+            ("email", "=", self.email),
+            ("unsubscriber_id", "=", "res.partner,%d" % partner_id),
+            ("details", "=", False),
+            ("reason_id", "=", self.env.ref(reason_xid).id),
+        ])
+        self.assertEqual(1, len(unsubscriptions))

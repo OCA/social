@@ -14,7 +14,7 @@
                     <field name="date"/>
                     <field name="mass_mailing_id"/>
                     <field name="unsubscriber_id"/>
-                    <field name="mailing_list_id" widget="many2many_tags"/>
+                    <field name="mailing_list_ids" widget="many2many_tags"/>
                     <field name="email"/>
                     <field name="action"/>
                     <field name="reason_id"
@@ -40,11 +40,11 @@
     <field name="name">Mail Unsubscription Tree</field>
     <field name="model">mail.unsubscription</field>
     <field name="arch" type="xml">
-        <tree decoration-warning="action == 'unsubscription'">
+        <tree decoration-warning="action in ['unsubscription', 'blacklist_add']">
             <field name="date"/>
             <field name="mass_mailing_id"/>
             <field name="unsubscriber_id"/>
-            <field name="mailing_list_id" widget="many2many_tags"/>
+            <field name="mailing_list_ids" widget="many2many_tags"/>
             <field name="email" invisible="True"/>
             <field name="action"/>
             <field name="reason_id"/>
@@ -60,23 +60,29 @@
         <search>
             <field name="mass_mailing_id"/>
             <field name="unsubscriber_id"/>
-            <field name="mailing_list_id"/>
+            <field name="mailing_list_ids"/>
             <field name="email"/>
             <field name="reason_id"/>
             <field name="details"/>
             <separator/>
             <group string="Group by">
-                <filter string="Month"
+                <filter name="group_by_month"
+                        string="Month"
                         context="{'group_by': 'date:month'}"/>
-                <filter string="Year"
+                <filter name="group_by_year"
+                        string="Year"
                         context="{'group_by': 'date:year'}"/>
-                <filter string="Action"
+                <filter name="group_by_action"
+                        string="Action"
                         context="{'group_by': 'action'}"/>
-                <filter string="Email"
+                <filter name="group_by_email"
+                        string="Email"
                         context="{'group_by': 'email'}"/>
-                <filter string="Reason"
+                <filter name="group_by_reason"
+                        string="Reason"
                         context="{'group_by': 'reason_id'}"/>
-                <filter string="Mass mailing"
+                <filter name="group_by_mass_mailing"
+                        string="Mass mailing"
                         context="{'group_by': 'mass_mailing_id'}"/>
             </group>
         </search>
@@ -89,7 +95,7 @@
     <field name="arch" type="xml">
         <pivot string="(Un)subscriptions">
             <field name="reason_id" type="row"/>
-            <field name="mailing_list_id" type="row"/>
+            <field name="mailing_list_ids" type="row"/>
             <field name="action" type="col"/>
         </pivot>
     </field>
@@ -111,8 +117,7 @@
             view_mode="tree,form,pivot,graph"
             res_model="mail.unsubscription"/>
 
-<menuitem id="mail_unsubscription_menu"
-          parent="mass_mailing.mass_mailing_menu"
+<menuitem id="mail_unsubscription_menu" parent="mass_mailing.mass_mailing_menu_root"
           action="mail_unsubscription_action"/>
 
 </odoo>

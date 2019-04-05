@@ -9,6 +9,7 @@ from .. import exceptions
 
 class MailUnsubscription(models.Model):
     _name = "mail.unsubscription"
+    _description = "Mail unsubscription"
     _inherit = "mail.thread"
     _rec_name = "date"
     _order = "date DESC"
@@ -22,6 +23,8 @@ class MailUnsubscription(models.Model):
         selection=[
             ("subscription", "Subscription"),
             ("unsubscription", "Unsubscription"),
+            ("blacklist_add", "Blacklisting"),
+            ("blacklist_rm", "De-blacklisting"),
         ],
         required=True,
         default="unsubscription",
@@ -36,21 +39,17 @@ class MailUnsubscription(models.Model):
         lambda self: self._selection_unsubscriber_id(),
         "(Un)subscriber",
         help="Who was subscribed or unsubscribed.")
-    mailing_list_id = fields.Many2many(
+    mailing_list_ids = fields.Many2many(
         comodel_name="mail.mass_mailing.list",
-        string="Mailing list",
-        ondelete="set null",
-        compute="_compute_mailing_list_id",
-        store=True,
-        help="(Un)subscribed mass mailing list, if any.",
-        readonly=False,
+        string="Mailing lists",
+        help="(Un)subscribed mass mailing lists, if any.",
     )
     reason_id = fields.Many2one(
         "mail.unsubscription.reason",
         "Reason",
         ondelete="restrict",
         help="Why the unsubscription was made.")
-    details = fields.Char(
+    details = fields.Text(
         help="More details on why the unsubscription was made.")
     details_required = fields.Boolean(
         related="reason_id.details_required")
@@ -84,7 +83,8 @@ class MailUnsubscription(models.Model):
     def _check_reason_needed(self):
         """Ensure reason is given for unsubscriptions."""
         for one in self:
-            if one.action == "unsubscription" and not one.reason_id:
+            unsubscription_states = {"unsubscription", "blacklist_add"}
+            if one.action in unsubscription_states and not one.reason_id:
                 raise exceptions.ReasonRequiredError(
                     _("Please indicate why are you unsubscribing."))
 
@@ -97,27 +97,17 @@ class MailUnsubscription(models.Model):
                 raise exceptions.DetailsRequiredError(
                     _("Please provide details on why you are unsubscribing."))
 
-    @api.multi
-    @api.depends("unsubscriber_id")
-    def _compute_mailing_list_id(self):
-        """Get the mass mailing list, if it is possible."""
-        for one in self:
-            try:
-                one.mailing_list_id |= one.unsubscriber_id.mailing_list_id
-            except AttributeError:
-                # Possibly model != mail.mass_mailing.contact; no problem
-                pass
-
     @api.model
     def create(self, vals):
         # No reasons for subscriptions
-        if vals.get("action") == "subscription":
+        if vals.get("action") in {"subscription", "blacklist_rm"}:
             vals = dict(vals, reason_id=False, details=False)
-        return super(MailUnsubscription, self).create(vals)
+        return super().create(vals)
 
 
 class MailUnsubscriptionReason(models.Model):
     _name = "mail.unsubscription.reason"
+    _description = "Mail unsubscription reason"
     _order = "sequence, name"
 
     name = fields.Char(

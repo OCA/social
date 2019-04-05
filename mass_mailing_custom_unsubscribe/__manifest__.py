@@ -5,9 +5,9 @@
     'name': 'Customizable unsubscription process on mass mailing emails',
     'summary': 'Know and track (un)subscription reasons, GDPR compliant',
     'category': 'Marketing',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'depends': [
-        'website_mass_mailing',
+        'mass_mailing',
     ],
     'data': [
         'security/ir.model.access.csv',
@@ -17,7 +17,6 @@
         'views/assets.xml',
         'views/mail_unsubscription_reason_view.xml',
         'views/mail_mass_mailing_list_view.xml',
-        'views/mail_mass_mailing_contact_view.xml',
         'views/mail_unsubscription_view.xml',
     ],
     'demo': [
@@ -31,5 +30,4 @@
     'website': 'https://github.com/OCA/social',
     'license': 'AGPL-3',
     'installable': True,
-    'post_init_hook': 'post_init_hook',
 }
