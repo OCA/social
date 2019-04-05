@@ -5,14 +5,13 @@
 import logging
 
 from odoo.http import request, route
-from odoo.addons.website_mass_mailing.controllers.main \
-    import MassMailController
+from odoo.addons.mass_mailing.controllers.main import MassMailController
 
 _logger = logging.getLogger(__name__)
 
 
 class CustomUnsubscribe(MassMailController):
-    def reason_form(self, mailing, email, res_id, token):
+    def reason_form(self, mailing_id, email, res_id, reasons, token):
         """Get the unsubscription reason form.
 
         :param mail.mass_mailing mailing:
@@ -27,12 +26,11 @@ class CustomUnsubscribe(MassMailController):
         :param str token:
             Security token for unsubscriptions.
         """
-        reasons = request.env["mail.unsubscription.reason"].search([])
         return request.render(
             "mass_mailing_custom_unsubscribe.reason_form",
             {
                 "email": email,
-                "mailing": mailing,
+                "mailing_id": mailing_id,
                 "reasons": reasons,
                 "res_id": res_id,
                 "token": token,
@@ -44,48 +42,67 @@ class CustomUnsubscribe(MassMailController):
         _logger.debug(
             "Called `mailing()` with: %r",
             (mailing_id, email, res_id, token, post))
-        mailing = request.env["mail.mass_mailing"].sudo().browse(mailing_id)
-        # Mass mailing list contacts are a special case because they have a
-        # subscription management form
-        if mailing.mailing_model_real == 'mail.mass_mailing.contact':
-            result = super(CustomUnsubscribe, self).mailing(
-                mailing_id, email, res_id, token=token, **post)
-            result.qcontext.update({
-                "contacts": result.qcontext["contacts"].filtered(
-                    lambda contact:
-                        not any(contact.list_ids.mapped(
-                            'not_cross_unsubscriptable')) or
-                        contact.list_ids <= mailing.contact_list_ids
-                ),
-                "reasons":
-                    request.env["mail.unsubscription.reason"].search([]),
-            })
-            return result
-        # Any other record type gets a simplified form
+        reasons = request.env["mail.unsubscription.reason"].search([])
         try:
             # Check if we already have a reason for unsubscription
             reason_id = int(post["reason_id"])
         except (KeyError, ValueError):
             # No reasons? Ask for them
-            return self.reason_form(mailing, email, res_id, token)
+            return self.reason_form(mailing_id, email, res_id, reasons, token)
         else:
             # Unsubscribe, saving reason and details by context
-            request.context = dict(
-                request.context,
-                default_reason_id=reason_id,
-                default_details=post.get("details") or False,
-            )
+            details = post.get("details", False)
+            self._add_extra_context(mailing_id, res_id, reason_id, details)
             # You could get a DetailsRequiredError here, but only if HTML5
             # validation fails, which should not happen in modern browsers
-            return super(CustomUnsubscribe, self).mailing(
+            result = super().mailing(
                 mailing_id, email, res_id, token=token, **post)
+            result.qcontext.update({"reasons": reasons})
+            # update list_ids taking into account not_cross_unsubscriptable
+            # field
+            mailing_obj = request.env['mail.mass_mailing']
+            mailing = mailing_obj.sudo().browse(mailing_id)
+            if mailing.mailing_model_real == 'mail.mass_mailing.contact':
+                result.qcontext.update({
+                    "list_ids": result.qcontext["list_ids"].filtered(
+                        lambda mailing_list:
+                            not mailing_list.not_cross_unsubscriptable or
+                            mailing_list in mailing.contact_list_ids
+                    )
+                })
+            return result
 
     @route()
     def unsubscribe(self, mailing_id, opt_in_ids, opt_out_ids, email, res_id,
                     token, reason_id=None, details=None):
         """Store unsubscription reasons when unsubscribing from RPC."""
-        # Update request context and reset environment
+        # Update request context
+        self._add_extra_context(mailing_id, res_id, reason_id, details)
+        _logger.debug(
+            "Called `unsubscribe()` with: %r",
+            (mailing_id, opt_in_ids, opt_out_ids, email, res_id, token,
+             reason_id, details))
+        return super().unsubscribe(
+            mailing_id, opt_in_ids, opt_out_ids, email, res_id, token)
+
+    @route()
+    def blacklist_add(self, mailing_id, res_id, email, token, reason_id=None,
+                      details=None):
+        self._add_extra_context(mailing_id, res_id, reason_id, details)
+        return super().blacklist_add(
+            mailing_id, res_id, email, token)
+
+    @route()
+    def blacklist_remove(self, mailing_id, res_id, email, token,
+                         reason_id=None, details=None):
+        self._add_extra_context(mailing_id, res_id, reason_id, details)
+        return super().blacklist_remove(
+            mailing_id, res_id, email, token)
+
+    def _add_extra_context(self, mailing_id, res_id, reason_id, details):
         environ = request.httprequest.headers.environ
+        # Add mailing_id and res_id to request.context to be used in the
+        # redefinition of _add and _remove methods of the mail.blacklist class
         extra_context = {
             "default_metadata": "\n".join(
                 "%s: %s" % (val, environ.get(val)) for val in (
@@ -94,15 +111,11 @@ class CustomUnsubscribe(MassMailController):
                     "HTTP_ACCEPT_LANGUAGE",
                 )
             ),
+            "mailing_id": mailing_id,
+            "unsubscription_res_id": int(res_id),
         }
         if reason_id:
             extra_context["default_reason_id"] = int(reason_id)
         if details:
             extra_context["default_details"] = details
         request.context = dict(request.context, **extra_context)
-        _logger.debug(
-            "Called `unsubscribe()` with: %r",
-            (mailing_id, opt_in_ids, opt_out_ids, email, res_id, token,
-             reason_id, details))
-        return super(CustomUnsubscribe, self).unsubscribe(
-            mailing_id, opt_in_ids, opt_out_ids, email)
