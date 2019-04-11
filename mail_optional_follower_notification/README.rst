@@ -27,8 +27,6 @@ This field it's initialized to true to keep the standard behavior.
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/205/10.0
 
- * https://www.odoo.com/forum/help-1
-
 
 Bug Tracker
 ===========

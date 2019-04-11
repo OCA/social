@@ -34,12 +34,19 @@ class MailMassMailingContact(models.Model):
         return super(MailMassMailingContact, self).create(vals)
 
     def write(self, vals):
+        remaining = self
         for contact in self:
-            if vals.get('partner_id', None) is False:
-                # If removing partner, search again by email
-                vals = contact._set_partner(vals)
-            vals = contact._set_name_email(vals)
-        return super(MailMassMailingContact, self).write(vals)
+            _vals = vals.copy()
+            # If removing partner, search again by email
+            if _vals.get('partner_id') is False:
+                _vals = contact._set_partner(_vals)
+            _vals = contact._set_name_email(_vals)
+            # If changed, write it separately
+            if vals != _vals:
+                remaining -= contact
+                super(MailMassMailingContact, contact).write(_vals)
+        # Normal batch write for contacts that need no customization
+        return super(MailMassMailingContact, remaining).write(vals)
 
     def _prepare_partner(self, vals, mailing_list):
         vals = {
@@ -57,13 +64,13 @@ class MailMassMailingContact(models.Model):
         m_mailing = self.env['mail.mass_mailing.list']
         m_partner = self.env['res.partner']
         list_id = vals.get('list_id', self.list_id.id)
-        mailing_list = m_mailing.browse(list_id)
+        mailing_list = m_mailing.browse(list_id, prefetch=self._prefetch)
         # Look for a partner with that email
         email = email.strip()
-        partners = m_partner.search([('email', '=ilike', email)], limit=1)
-        if partners:
-            # Partner found
-            vals['partner_id'] = partners[0].id
+        partner = m_partner.search([('email', '=ilike', email)], limit=1)
+        # Different partner found
+        if partner and partner != self.partner_id:
+            vals['partner_id'] = partner.id
         elif mailing_list.partner_mandatory:
             # Create partner
             partner = m_partner.sudo().create(
@@ -75,7 +82,10 @@ class MailMassMailingContact(models.Model):
         partner_id = vals.get('partner_id', self.partner_id.id)
         if not partner_id:
             return vals
-        partner = self.env['res.partner'].browse(partner_id)
-        vals['email'] = partner.email
-        vals['name'] = partner.name
+        partner = self.env['res.partner'].browse(
+            partner_id, prefetch=self._prefetch)
+        if vals.get("email", self.email) != partner.email:
+            vals['email'] = partner.email
+        if vals.get("name", self.name) != partner.name:
+            vals['name'] = partner.name
         return vals

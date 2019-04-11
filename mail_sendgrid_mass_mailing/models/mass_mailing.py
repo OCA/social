@@ -15,7 +15,7 @@ class MassMailing(models.Model):
     _inherit = 'mail.mass_mailing'
 
     email_template_id = fields.Many2one(
-        'mail.template', 'Sengdrid Template',
+        'mail.template', 'Sendgrid Template',
     )
     lang = fields.Many2one(
         comodel_name="res.lang", string="Force language")

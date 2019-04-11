@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 LasLabs Inc.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+
+<odoo>
+
+    <template id="assets_backend" name="Bus Presence Override Assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <link rel="stylesheet" href="/bus_presence_override/static/src/less/bus_presence_systray.less"/>
+            <script type="text/javascript"
+                    src="/bus_presence_override/static/src/js/bus_presence_systray.js"
+                    />
+        </xpath>
+    </template>
+
+</odoo>

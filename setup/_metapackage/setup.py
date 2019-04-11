@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo10-addon-base_search_mail_content',
+        'odoo10-addon-bus_presence_override',
         'odoo10-addon-email_template_qweb',
         'odoo10-addon-mail_as_letter',
         'odoo10-addon-mail_attach_existing_attachment',
@@ -16,7 +17,9 @@ setuptools.setup(
         'odoo10-addon-mail_digest',
         'odoo10-addon-mail_footer_notified_partner',
         'odoo10-addon-mail_force_queue',
+        'odoo10-addon-mail_forward',
         'odoo10-addon-mail_full_expand',
+        'odoo10-addon-mail_improved_tracking_value',
         'odoo10-addon-mail_inline_css',
         'odoo10-addon-mail_notify_bounce',
         'odoo10-addon-mail_optional_autofollow',

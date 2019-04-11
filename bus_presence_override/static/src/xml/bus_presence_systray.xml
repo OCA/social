@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2017 LasLabs Inc.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+
+<templates>
+
+    <t t-name="bus_presence_systray">
+        <li class="o_mail_navbar_item">
+            <a title="Status"
+               class="dropdown-toggle o-user-systray-status"
+               data-toggle="dropdown"
+               aria-expanded="false"
+               href="#"
+               />
+            <ul class="dropdown-menu o-user-presence-dropdown" role="menu">
+                <li>
+                    <a name="online" class="o-user-status-select" href="#">
+                        <i t-attf-class="o_mail_user_status o_user_online fa fa-circle" />
+                        Online
+                    </a>
+                </li>
+                <li>
+                    <a name="away" class="o-user-status-select" href="#">
+                        <i class="o_mail_user_status o_user_idle fa fa-circle" />
+                        Away
+                    </a>
+                </li>
+                <li>
+                    <a name="offline" class="o-user-status-select" href="#">
+                        <i class="o_mail_user_status fa fa-circle-o" />
+                        Offline
+                    </a>
+                </li>
+            </ul>
+        </li>
+    </t>
+
+</templates>
