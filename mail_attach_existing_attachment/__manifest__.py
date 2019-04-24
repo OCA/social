@@ -32,10 +32,12 @@
     'version': '12.0.1.0.0',
     'license': 'AGPL-3',
     'depends': [
+        'account',
         'mail',
         'document',
     ],
     'data': [
+        'wizard/account_invoice_send_view.xml',
         'wizard/mail_compose_message_view.xml',
     ],
     'installable': True,
