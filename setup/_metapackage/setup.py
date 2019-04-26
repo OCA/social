@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo12-addon-mail_activity_done',
         'odoo12-addon-mail_activity_partner',
         'odoo12-addon-mail_attach_existing_attachment',
+        'odoo12-addon-mail_attach_existing_attachment_account',
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_track_diff_only',
         'odoo12-addon-mail_tracking',
