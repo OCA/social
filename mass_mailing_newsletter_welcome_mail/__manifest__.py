@@ -10,11 +10,11 @@
     'version': '11.0.1.0.0',
     'website': 'https://github.com/OCA/social',
     'depends': [
-        'mass_mailing',
-        'base_automation',
+        'website_mass_mailing',
     ],
     'data': [
-        "data/base_automation_data.xml",
+        "data/mail_template.xml",
+        "views/mail_mass_mailing_list.xml",
     ],
     'application': False,
     'installable': True,
