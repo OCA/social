@@ -44,6 +44,7 @@ class ResUsers(models.Model):
                         self.env[activity['model']]._original_module),
                     'total_count': 0, 'today_count': 0,
                     'overdue_count': 0, 'planned_count': 0,
+                    'type': 'activity',
                 }
             user_activities[activity['model']][
                 '%s_count' % activity['states']] += activity['count']
