@@ -52,3 +52,15 @@ def post_load_hook():
     if not hasattr(MailActivity, 'action_feedback_original'):
         MailActivity.action_feedback_original = MailActivity.action_feedback
         MailActivity.action_feedback = new_action_feedback
+
+
+def uninstall_hook(cr, registry):
+    """ The objective of this hook is to remove all activities that are done
+        upon module uninstall
+        """
+    cr.execute(
+        """
+        DELETE FROM mail_activity
+        WHERE done=True
+        """
+    )
