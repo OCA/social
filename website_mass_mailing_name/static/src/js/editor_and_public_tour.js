@@ -19,7 +19,7 @@ odoo.define("website_mass_mailing_name.editor_and_public_tour", function (requir
             },
             {
                 content: "Drag and drop a text snippet",
-                trigger: ".oe_snippet[name='Text Block'] .oe_snippet_thumbnail",
+                trigger: ".oe_snippet[name='Text block'] .oe_snippet_thumbnail",
                 run: "drag_and_drop #wrap",
             },
             {
@@ -45,11 +45,11 @@ odoo.define("website_mass_mailing_name.editor_and_public_tour", function (requir
             {
                 content: "Open user menu",
                 extra_trigger: ".js_subscribe .alert-success",
-                trigger: "#top_menu span:contains('Administrator')",
+                trigger: "#top_menu span:contains('Admin')",
             },
             {
                 content: "Logout",
-                trigger: "#o_logout a",
+                trigger: "#o_logout",
             },
             // Now use the widget as a random public user
             {
@@ -59,7 +59,7 @@ odoo.define("website_mass_mailing_name.editor_and_public_tour", function (requir
             },
             {
                 content: "Enter a name",
-                extra_trigger: ".js_subscribe.has-error",
+                extra_trigger: "div.input-group.js_subscribe",
                 trigger: ".js_subscribe_name",
                 run: "text Visitor",
             },
@@ -69,7 +69,7 @@ odoo.define("website_mass_mailing_name.editor_and_public_tour", function (requir
             },
             {
                 content: "Remove the name",
-                extra_trigger: ".js_subscribe.has-error",
+                extra_trigger: "div.input-group.js_subscribe",
                 trigger: ".js_subscribe_name",
                 run: function () {
                     $(".js_subscribe_name").val("");
@@ -86,7 +86,7 @@ odoo.define("website_mass_mailing_name.editor_and_public_tour", function (requir
             },
             {
                 content: "Enter the name again",
-                extra_trigger: ".js_subscribe.has-error",
+                extra_trigger: "div.input-group.js_subscribe",
                 trigger: ".js_subscribe_name",
                 run: "text Visitor",
             },
@@ -101,7 +101,7 @@ odoo.define("website_mass_mailing_name.editor_and_public_tour", function (requir
             },
             {
                 content: "Enter the good email",
-                extra_trigger: ".js_subscribe.has-error",
+                extra_trigger: "div.input-group.js_subscribe",
                 trigger: ".js_subscribe_email",
                 run: "text example@example.com",
             },
