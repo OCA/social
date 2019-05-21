@@ -4,12 +4,12 @@
 odoo.define("website_mass_mailing_name.subscribe", function (require) {
     "use strict";
     require("mass_mailing.website_integration");
-    var animation = require("web_editor.snippets.animation");
+    var animation = require("website.content.snippets.animation");
 
     animation.registry.subscribe.include({
         start: function(editable_mode) {
-            this.$email = this.$target.find(".js_subscribe_email");
-            this.$name = this.$target.find(".js_subscribe_name");
+            this.$email = this.$(".js_subscribe_email");
+            this.$name = this.$(".js_subscribe_name");
             // Thanks upstream for your @$&#?!! inheritance-ready code.
             // Injecting ajax events to modify behavior of snippet.
             if (this.$name) {
@@ -18,16 +18,12 @@ odoo.define("website_mass_mailing_name.subscribe", function (require) {
             return this._super(editable_mode);
         },
 
-        on_click: function() {
-            var email_error = !this.$email.val().match(/.+@.+/),
-                name_error = this.$name.length && !this.$name.val(),
-                values = {
-                    "list_id": this.$target.data('list-id'),
-                    "email": this.$email.val(),
-                };
-            // Stop on error
-            if (email_error || name_error) {
-                this.$target.addClass("has-error")
+        _onClick: function() {
+            // Upstream will not tell user what is wrong with the
+            // email validation so this will report with a helping message
+            var email_valid = this.$email[0].reportValidity(),
+                name_valid = this.$name[0].reportValidity();
+            if (!name_valid || !email_valid) {
                 return false;
             }
             return this._super.apply(this, arguments);
