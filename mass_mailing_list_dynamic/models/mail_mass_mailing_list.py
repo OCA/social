@@ -5,7 +5,6 @@
 from odoo import api, fields, models
 from odoo.tools import safe_eval
 
-
 class MassMailingList(models.Model):
     _inherit = "mail.mass_mailing.list"
 
@@ -43,7 +42,7 @@ class MassMailingList(models.Model):
         # Skip non-dynamic lists
         dynamic = self.filtered("dynamic")
         for one in dynamic:
-            sync_domain = safe_eval(one.sync_domain) + [("email", "!=", False)]
+            sync_domain = safe_eval(one.sync_domain.replace('u\'', '\'')) + [("email", "!=", False)]
             desired_partners = Partner.search(sync_domain)
             # Remove undesired contacts when synchronization is full
             if one.sync_method == "full":
@@ -55,7 +54,7 @@ class MassMailingList(models.Model):
             current_partners = current_contacts.mapped("partner_id")
             # Add new contacts
             for partner in desired_partners - current_partners:
-                Contact.create({
+                Contact.with_context(auto_created=True).create({
                     "list_id": one.id,
                     "partner_id": partner.id,
                 })
