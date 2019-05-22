@@ -19,6 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_full_expand
+#: model_terms:ir.ui.view,arch_db:mail_full_expand.mail_message_view_form
+msgid "Close"
+msgstr ""
+
+#. module: mail_full_expand
 #. openerp-web
 #: code:addons/mail_full_expand/static/src/xml/mail_full_expand.xml:10
 #, python-format
@@ -26,7 +31,7 @@ msgid "Fully Expand"
 msgstr ""
 
 #. module: mail_full_expand
-#: model:ir.ui.view,arch_db:mail_full_expand.mail_message_view_form
+#: model_terms:ir.ui.view,arch_db:mail_full_expand.mail_message_view_form
 msgid "Message"
 msgstr "Mensagem"
 

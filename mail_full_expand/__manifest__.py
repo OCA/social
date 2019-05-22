@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-# © 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+# Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Mail full expand",
     "summary": "Expand mail in a big window",
-    "version": "10.0.1.0.0",
+    "version": "12.0.1.0.0",
     "category": "Social Network",
-    "website": "http://www.grupoesoc.es/",
-    "author": "Grupo ESOC, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
+    "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
