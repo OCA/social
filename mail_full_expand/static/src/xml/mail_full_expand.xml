@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- © 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+<!-- Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 
 <template>
-    <t t-extend="mail.ChatThread.Message">
-        <t t-jquery=".o_thread_message_needaction" t-operation="after">
-            <i class="fa o_full_expand fa-arrows-alt"
-                t-att-data-message-id="message.id" title="Fully Expand"/>
+    <t t-extend="mail.widget.Thread.Message">
+        <t t-jquery=".o_mail_info" t-operation="append">
+            <span class="o_thread_full_spand_icon">
+                <i class="fa o_full_expand fa-arrows-alt" t-att-data-message-id="message.getID()" title="Fully Expand"/>
+            </span>
         </t>
     </t>
 </template>
