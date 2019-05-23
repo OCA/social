@@ -8,19 +8,19 @@ Mail full expand
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
-   :target: https://odoo-community.org/page/development-status
+    :target: https://odoo-community.org/page/development-status
     :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
-   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-   :target: https://github.com/OCA/social/tree/12.0/mail_full_expand
+    :target: https://github.com/OCA/social/tree/12.0/mail_full_expand
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-   :target: https://translation.odoo-community.org/projects/social-12-0/social-12-0-mail_full_expand
+    :target: https://translation.odoo-community.org/projects/social-12-0/social-12-0-mail_full_expand
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-   :target: https://runbot.odoo-community.org/runbot/205/12.0
+    :target: https://runbot.odoo-community.org/runbot/205/12.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -67,7 +67,7 @@ Credits
 Authors
 ~~~~~~~
 
-* Grupo ESOC
+* Tecnativa
 
 Contributors
 ~~~~~~~~~~~~
