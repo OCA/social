@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<openerp>
+<data>
+
+<template id="assets_backend"
+          name="mail_full_expand assets"
+          inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+        <link rel="stylesheet"
+              type="text/scss"
+              href="/mail_full_expand/static/src/scss/mail_full_expand.scss"/>
+        <script type="text/javascript"
+                src="/mail_full_expand/static/src/js/mail_full_expand.js"/>
+    </xpath>
+</template>
+
+</data>
+</openerp>
