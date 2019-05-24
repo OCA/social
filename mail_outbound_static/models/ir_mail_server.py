@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
@@ -40,7 +39,7 @@ class IrMailServer(models.Model):
             if not bounce_alias:
                 # then, bounce handling is disabled and we want
                 # Return-Path = From
-                if message.has_key('Return-Path'):
+                if 'Return-Path' in message:
                     message.replace_header('Return-Path', email_from)
                 else:
                     message.add_header('Return-Path', email_from)
