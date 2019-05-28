@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo11-addon-mail_browser_view',
         'odoo11-addon-mail_debrand',
         'odoo11-addon-mail_digest',
+        'odoo11-addon-mail_inline_css',
         'odoo11-addon-mail_optional_autofollow',
         'odoo11-addon-mail_restrict_follower_selection',
         'odoo11-addon-mail_track_diff_only',
