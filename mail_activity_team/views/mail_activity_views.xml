@@ -4,7 +4,7 @@
     <record id="mail_activity_view_form_popup" model="ir.ui.view">
         <field name="name">mail.activity.view.form.popup</field>
         <field name="model">mail.activity</field>
-        <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup"/>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="team_id" options="{'no_create': True, 'no_open': True}" />
@@ -75,6 +75,5 @@
                 <filter name='team' string="Team" context="{'group_by': 'team_id'}" />
             </group>
         </field>
-
     </record>
 </odoo>

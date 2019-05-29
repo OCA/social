@@ -189,3 +189,11 @@ class TestMailActivityTeam(TransactionCase):
             activity_type_id=self.env.ref("mail.mail_activity_data_call").id,
         )
         self.assertEqual(activity.team_id, self.team2)
+
+    def test_activity_count(self):
+        res = self.env['res.users'].with_context(
+            {'team_activities': True}
+        ).activity_user_count(
+            user_id=self.employee.id
+        )
+        self.assertEqual(res[0]['total_count'], 0)
