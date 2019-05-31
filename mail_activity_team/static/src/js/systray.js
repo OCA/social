@@ -1,5 +1,5 @@
 odoo.define('mail_activity_team.systray', function (require) {
-"use strict";
+    "use strict";
 
     var systray = require('mail.systray');
     var session = require("web.session");
@@ -8,9 +8,10 @@ odoo.define('mail_activity_team.systray', function (require) {
         events: _.extend({}, systray.ActivityMenu.prototype.events, {
             'click .o_filter_button': 'on_click_filter_button',
         }),
-        start: function() {
+        start: function () {
             this._super.apply(this, arguments);
             this.$filter_buttons = this.$('.o_filter_button');
+            this.$my_activities = this.$filter_buttons.first();
             this.filter = 'my';
         },
         on_click_filter_button: function (event) {
@@ -21,29 +22,33 @@ odoo.define('mail_activity_team.systray', function (require) {
             var $target = $(event.currentTarget);
             $target.addClass('active');
             self.filter = $target.data('filter');
-            if (self.filter == 'team'){
+            if (self.filter === 'team') {
                 session.user_context = _.extend({}, session.user_context, {
                     'team_activities': true
                 });
             }
             else if (self.filter == 'my'){
                 session.user_context = _.extend({}, session.user_context, {
-                    'team_activities': false
+                    'team_activities': false,
                 });
             }
             self._updateActivityPreview();
 
         },
-        _onActivityFilterClick: function (event){
-            if (this.filter == 'my'){
+        _onActivityFilterClick: function (event) {
+            if (this.filter === 'my') {
                 this._super.apply(this, arguments);
             }
-            if (this.filter == 'team'){
-                var data = _.extend({}, $(event.currentTarget).data(), $(event.target).data());
+            if (this.filter === 'team') {
+                var data = _.extend(
+                    {},
+                    $(event.currentTarget).data(),
+                    $(event.target).data()
+                );
                 var context = {};
                 if (data.filter === 'my') {
-                    context['search_default_activities_overdue'] = 1;
-                    context['search_default_activities_today'] = 1;
+                    context.search_default_activities_overdue = 1;
+                    context.search_default_activities_today = 1;
                 } else {
                     context['search_default_activities_' + data.filter] = 1;
                 }
@@ -53,18 +58,13 @@ odoo.define('mail_activity_team.systray', function (require) {
                     res_model:  data.res_model,
                     views: [[false, 'kanban'], [false, 'form']],
                     search_view_id: [false],
-                    domain: ['|', ['activity_user_id', '=', session.uid], ['activity_team_user_ids', 'in', session.uid]],
+                    domain: [
+                        ['activity_team_user_ids', 'in', session.uid]
+                     ],
                     context:context,
                 });
             }
         },
-        /*
-        _getActivityData: function(){
-            var self = this;
-            this._super.apply(this, arguments).then(function () {
-
-            });
-        },*/
     });
 
 });
