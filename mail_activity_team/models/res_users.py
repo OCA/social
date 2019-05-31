@@ -13,27 +13,31 @@ class ResUsers(models.Model):
     )
 
     @api.model
-    def activity_user_count(self):
+    def activity_user_count(self, user_id=False):
         if not self._context.get('team_activities', False):
             return super().activity_user_count()
         query = """SELECT m.id, count(*), act.res_model as model,
                                 CASE
-                                    WHEN %(today)s::date - act.date_deadline::date = 0 Then 'today'
-                                    WHEN %(today)s::date - act.date_deadline::date > 0 Then 'overdue'
-                                    WHEN %(today)s::date - act.date_deadline::date < 0 Then 'planned'
+                                    WHEN %(today)s::date -
+                                    act.date_deadline::date = 0 Then 'today'
+                                    WHEN %(today)s::date -
+                                    act.date_deadline::date > 0 Then 'overdue'
+                                    WHEN %(today)s::date -
+                                    act.date_deadline::date < 0 Then 'planned'
                                 END AS states
                             FROM mail_activity AS act
                             JOIN ir_model AS m ON act.res_model_id = m.id
                             WHERE team_id in (
-                            select mail_activity_team_id from mail_activity_team_users_rel
-                            where res_users_id = 
-                            %(user_id)s
+                                SELECT mail_activity_team_id
+                                FROM mail_activity_team_users_rel
+                                WHERE res_users_id = %(user_id)s
                             )
                             GROUP BY m.id, states, act.res_model;
                             """
+        user = user_id if user_id else self.env.uid,
         self.env.cr.execute(query, {
             'today': fields.Date.context_today(self),
-            'user_id': self.env.uid,
+            'user_id': user,
         })
         activity_data = self.env.cr.dictfetchall()
         model_ids = [a['id'] for a in activity_data]
@@ -56,5 +60,4 @@ class ResUsers(models.Model):
             if activity['states'] in ('today', 'overdue'):
                 user_activities[activity['model']]['total_count'] += activity[
                     'count']
-
         return list(user_activities.values())
