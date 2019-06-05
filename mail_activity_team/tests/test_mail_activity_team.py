@@ -123,4 +123,4 @@ class TestMailActivityTeam(TransactionCase):
         ).activity_user_count(
             user_id=self.employee.id
         )
-        self.assertEqual(res[0]['total_count'], 1)
+        self.assertEqual(res[0]['total_count'], 0)
