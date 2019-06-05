@@ -13,7 +13,16 @@ odoo.define('mail_activity_team.systray', function (require) {
             this.$filter_buttons = this.$('.o_filter_button');
             this.$my_activities = this.$filter_buttons.first();
             this.filter = 'my';
+            session.user_context = _.extend({}, session.user_context, {
+                'team_activities': false
+            });
         },
+
+        _updateCounter: function (data) {
+            this._super.apply(this, arguments);
+            this.$('.o_new_notification_counter').text(this.activityCounter);
+        },
+
         on_click_filter_button: function (event) {
             var self = this;
 
@@ -22,16 +31,11 @@ odoo.define('mail_activity_team.systray', function (require) {
             var $target = $(event.currentTarget);
             $target.addClass('active');
             self.filter = $target.data('filter');
-            if (self.filter === 'team') {
-                session.user_context = _.extend({}, session.user_context, {
-                    'team_activities': true
-                });
-            }
-            else if (self.filter == 'my'){
-                session.user_context = _.extend({}, session.user_context, {
-                    'team_activities': false,
-                });
-            }
+
+            session.user_context = _.extend({}, session.user_context, {
+                'team_activities': self.filter === 'team'
+            });
+
             self._updateActivityPreview();
 
         },
@@ -65,6 +69,31 @@ odoo.define('mail_activity_team.systray', function (require) {
                 });
             }
         },
+        _getActivityData: function(){
+            var self = this;
+            return self._super.apply(self, arguments).then(function (data) {
+                session.user_context = _.extend({}, session.user_context, {
+                    'team_activities': !session.user_context['team_activities'],
+                });
+
+                self._rpc({
+                    model: 'res.users',
+                    method: 'activity_user_count',
+                    kwargs: {
+                        context: session.user_context,
+                    },
+                }).then(function (data) {
+                    self.activityCounter += _.reduce(data, function(
+                        total_count, p_data
+                    ){ return total_count + p_data.total_count; }, 0);
+                    self.$('.o_new_notification_counter').text(self.activityCounter);
+                    self.$el.toggleClass('o_no_notification', !self.activityCounter);
+                    session.user_context = _.extend({}, session.user_context, {
+                        'team_activities': !session.user_context['team_activities'],
+                    });
+                });
+            });
+        }
     });
 
 });
