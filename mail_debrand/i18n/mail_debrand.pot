@@ -14,7 +14,25 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_debrand
-#: model_terms:ir.ui.view,arch_db:mail_debrand.message_notification_email
-msgid "Sent by"
+#: model:ir.model,name:mail_debrand.model_mail_template
+msgid "Email Templates"
+msgstr ""
+
+#. module: mail_debrand
+#: code:addons/mail_debrand/models/mail_template.py:15
+#, python-format
+msgid "Odoo"
+msgstr ""
+
+#. module: mail_debrand
+#: code:addons/mail_debrand/models/mail_template.py:19
+#, python-format
+msgid "Powered by"
+msgstr ""
+
+#. module: mail_debrand
+#: code:addons/mail_debrand/models/mail_template.py:14
+#, python-format
+msgid "using"
 msgstr ""
 
