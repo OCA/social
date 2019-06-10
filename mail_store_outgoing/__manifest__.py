@@ -6,7 +6,8 @@
     "version": "12.0.1.0.0",
     "category": "mail",
     "website": "https://github.com/OCA/social",
-    "author": "Agent ERP GmbH, Odoo Community Association (OCA)",
+    "author": "Agent ERP GmbH, "
+              "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
