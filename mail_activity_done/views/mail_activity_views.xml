@@ -27,19 +27,18 @@
         <field name="arch" type="xml">
             <field name="res_model_id" position="after">
                 <field name="done"/>
-                <filter string="Open Activities" name="activities_open"
-                        domain="[('done', '!=', True)]"/>
+                <field name="active"/>
                 <filter string="Completed Activities" name="activities_completed"
-                        domain="[('done', '=', True)]"/>
+                        domain="[('active', '=', False), ('state', '=', 'done')]"/>
             </field>
             <filter name="activities_overdue" position="attributes">
-                <attribute name="domain">[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('done', '!=', True)]</attribute>
+                <attribute name="domain">[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
             <filter name="activities_today" position="attributes">
-                <attribute name="domain">[('date_deadline', '=', context_today().strftime('%Y-%m-%d')), ('done', '!=', True)]</attribute>
+                <attribute name="domain">[('date_deadline', '=', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
             <filter name="activities_upcoming_all" position="attributes">
-                <attribute name="domain">[('date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('done', '!=', True)]</attribute>
+                <attribute name="domain">[('date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
         </field>
     </record>
@@ -51,18 +50,18 @@
         <field name="arch" type="xml">
             <filter name="activities_my" position="after">
                 <filter string="Open Activities" name="activities_open"
-                        domain="[('activity_ids.done', '!=', True)]"/>
+                        domain="[('activity_ids.active', '=', True)]"/>
                 <filter string="Completed Activities" name="activities_completed"
-                        domain="[('activity_ids.done', '=', True)]"/>
+                        domain="[('activity_ids.active', '=', False), ('activity_ids.state', '=', 'done')]"/>
             </filter>
             <filter name="activities_overdue" position="attributes">
-                <attribute name="domain">[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d')), ('activity_ids.done', '!=', True)]</attribute>
+                <attribute name="domain">[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
             <filter name="activities_today" position="attributes">
-                <attribute name="domain">[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d')), ('activity_ids.done', '!=', True)]</attribute>
+                <attribute name="domain">[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
             <filter name="activities_upcoming_all" position="attributes">
-                <attribute name="domain">[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d')), ('activity_ids.done', '!=', True)]</attribute>
+                <attribute name="domain">[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
         </field>
     </record>

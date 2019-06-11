@@ -39,6 +39,7 @@ def post_load_hook():
         for activity in self:
             record = self.env[activity.res_model].browse(activity.res_id)
             activity.done = True
+            activity.active = False
             activity.date_done = fields.Date.today()
             record.message_post_with_view(
                 'mail.message_activity_done',
