@@ -21,12 +21,30 @@ msgid "%d days overdue"
 msgstr ""
 
 #. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__active
+msgid "Active"
+msgstr ""
+
+#. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_res_users__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_mail_activity
 msgid "Activity"
 msgstr ""
 
 #. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: mail_activity_done
 #: model_terms:ir.ui.view,arch_db:mail_activity_done.mail_activity_view_search
+#: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
 msgid "Completed Activities"
 msgstr ""
 
@@ -49,7 +67,7 @@ msgid "Due in %d days"
 msgstr ""
 
 #. module: mail_activity_done
-#: model_terms:ir.ui.view,arch_db:mail_activity_done.mail_activity_view_search
+#: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
 msgid "Open Activities"
 msgstr ""
 
