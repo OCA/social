@@ -16,6 +16,8 @@ Installation
 This addon will be automatically installed when 'mail_sendgrid' and
 'mass_mailing' are both installed.
 
+Note this module is not compatible with the v6 versions of the sendgrid library.
+
 Configuration
 =============
 None

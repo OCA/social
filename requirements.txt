@@ -1,2 +1,2 @@
 premailer
-sendgrid
+sendgrid<v6.0.0
