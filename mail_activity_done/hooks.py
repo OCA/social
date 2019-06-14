@@ -39,6 +39,7 @@ def post_load_hook():
         for activity in self:
             record = self.env[activity.res_model].browse(activity.res_id)
             activity.done = True
+            activity.active = False
             activity.date_done = fields.Date.today()
             record.message_post_with_view(
                 'mail.message_activity_done',
@@ -52,3 +53,15 @@ def post_load_hook():
     if not hasattr(MailActivity, 'action_feedback_original'):
         MailActivity.action_feedback_original = MailActivity.action_feedback
         MailActivity.action_feedback = new_action_feedback
+
+
+def uninstall_hook(cr, registry):
+    """ The objective of this hook is to remove all activities that are done
+        upon module uninstall
+        """
+    cr.execute(
+        """
+        DELETE FROM mail_activity
+        WHERE done=True
+        """
+    )
