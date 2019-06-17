@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo12-addon-mail_tracking_mass_mailing',
         'odoo12-addon-mass_mailing_resend',
         'odoo12-addon-mass_mailing_unique',
+        'odoo12-addon-website_mass_mailing_name',
     ],
     classifiers=[
         'Programming Language :: Python',
