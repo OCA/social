@@ -1,7 +1,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
+from odoo.addons.mail.models.mail_activity import MailActivity
 from datetime import date
+from ..hooks import pre_init_hook, post_load_hook
 
 
 class TestMailActivityDoneMethods(TransactionCase):
@@ -24,6 +26,17 @@ class TestMailActivityDoneMethods(TransactionCase):
             'user_id': self.employee.id,
             'date_deadline': date.today(),
         })
+
+    def test_pre_init_hook(self):
+        pre_init_hook(self.env.cr)
+        self.env.cr.execute("""
+            SELECT * FROM mail_activity WHERE done=True
+        """)
+        self.assertEquals(self.env.cr.fetchone(), None)
+
+    def test_post_load_hook(self):
+        post_load_hook()
+        self.assertTrue(hasattr(MailActivity, 'action_feedback_original'))
 
     def test_mail_activity_done(self):
         self.act1.done = True
