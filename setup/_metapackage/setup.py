@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo10-addon-email_template_qweb',
         'odoo10-addon-mail_as_letter',
         'odoo10-addon-mail_attach_existing_attachment',
+        'odoo10-addon-mail_check_mailbox_size',
         'odoo10-addon-mail_debrand',
         'odoo10-addon-mail_digest',
         'odoo10-addon-mail_footer_notified_partner',
