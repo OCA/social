@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 13:17+0000\n"
-"PO-Revision-Date: 2017-12-02 13:17+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
+"PO-Revision-Date: 2019-06-19 20:42+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.6.1\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email_state
@@ -409,7 +410,7 @@ msgstr "Devolvido temporariamente"
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
 msgid "Spam"
-msgstr "spam"
+msgstr "Spam"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_state
@@ -442,7 +443,7 @@ msgstr "Para:"
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 #: model:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
-msgstr "Emails do rastreamento"
+msgstr "Emails Rastreados"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_tracking_emails_count
