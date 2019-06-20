@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Tecnativa - Jairo Llopis
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -45,7 +44,7 @@ class DynamicListCase(common.SavepointCase):
         self.list.dynamic = False
         # Create contact for partner 0 in unsynced list
         contact0 = Contact.create({
-            "list_id": self.list.id,
+            "list_ids": [(4, self.list.id)],
             "partner_id": self.partners[0].id,
         })
         self.assertEqual(self.list.contact_nbr, 1)
@@ -57,7 +56,7 @@ class DynamicListCase(common.SavepointCase):
         # Set list as full-synced
         self.list.sync_method = "full"
         Contact.search([
-            ("list_id", "=", self.list.id),
+            ("list_ids", "in", self.list.id),
             ("partner_id", "=", self.partners[2].id),
         ]).unlink()
         self.list.action_sync()
@@ -66,11 +65,11 @@ class DynamicListCase(common.SavepointCase):
         # Cannot add or edit contacts in fully synced lists
         with self.assertRaises(ValidationError):
             Contact.create({
-                "list_id": self.list.id,
+                "list_ids": [(4, self.list.id)],
                 "partner_id": self.partners[0].id,
             })
         contact1 = Contact.search([
-            ("list_id", "=", self.list.id),
+            ("list_ids", "in", self.list.id),
         ], limit=1)
         with self.assertRaises(ValidationError):
             contact1.name = "other"
@@ -82,7 +81,7 @@ class DynamicListCase(common.SavepointCase):
         self.list.dynamic = False
         # Now the contact is created without exception
         Contact.create({
-            "list_id": self.list.id,
+            "list_ids": [(4, self.list.id)],
             "email": "test@example.com",
         })
         # Contacts can now be changed
