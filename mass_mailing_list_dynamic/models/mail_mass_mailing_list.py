@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Tecnativa - Jairo Llopis
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
@@ -25,7 +24,7 @@ class MassMailingList(models.Model):
     )
     sync_domain = fields.Char(
         string="Synchronization critera",
-        default="[('opt_out', '=', False), ('email', '!=', False)]",
+        default="[('is_blacklisted', '=', False), ('email', '!=', False)]",
         required=True,
         help="Filter partners to sync in this list",
     )
@@ -48,17 +47,19 @@ class MassMailingList(models.Model):
             # Remove undesired contacts when synchronization is full
             if one.sync_method == "full":
                 Contact.search([
-                    ("list_id", "=", one.id),
+                    ("list_ids", "in", one.id),
                     ("partner_id", "not in", desired_partners.ids),
                 ]).unlink()
-            current_contacts = Contact.search([("list_id", "=", one.id)])
+            current_contacts = Contact.search([("list_ids", "in", one.id)])
             current_partners = current_contacts.mapped("partner_id")
             # Add new contacts
+            vals_list = []
             for partner in desired_partners - current_partners:
-                Contact.create({
-                    "list_id": one.id,
+                vals_list.append({
+                    "list_ids": [(4, one.id)],
                     "partner_id": partner.id,
                 })
+            Contact.create(vals_list)
             one.is_synced = True
         # Invalidate cached contact count
         self.invalidate_cache(["contact_nbr"], dynamic.ids)
