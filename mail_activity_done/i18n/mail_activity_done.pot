@@ -21,8 +21,18 @@ msgid "%d days overdue"
 msgstr ""
 
 #. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_active
+msgid "Active"
+msgstr ""
+
+#. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_mail_activity
 msgid "Activity"
+msgstr ""
+
+#. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_mail_activity_mixin
+msgid "Activity Mixin"
 msgstr ""
 
 #. module: mail_activity_done
@@ -45,11 +55,6 @@ msgstr ""
 #: code:addons/mail_activity_done/static/src/js/mail_activity.js:35
 #, python-format
 msgid "Due in %d days"
-msgstr ""
-
-#. module: mail_activity_done
-#: model:ir.ui.view,arch_db:mail_activity_done.mail_activity_view_search
-msgid "Open Activities"
 msgstr ""
 
 #. module: mail_activity_done
