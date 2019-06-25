@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from base64 import b64decode
 try:
-    from ExtractMsg import Message
+    from extract_msg import Message
 except ImportError:
     Message = None
 from odoo import _, api, exceptions, models
