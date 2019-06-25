@@ -4,11 +4,11 @@
 
 odoo.define('mail_drop_target', function(require)
 {
-    var Chatter = require('mail.Chatter'),
-        web_drop_target = require('web_drop_target'),
-        Model = require('web.Model');
+    var Chatter = require('mail.Chatter');
+    var web_drop_target = require('web_drop_target');
 
     Chatter.include(web_drop_target.DropTargetMixin);
+
     Chatter.include({
         _drop_allowed_types: ['message/rfc822'],
         _get_drop_item: function(e) {
@@ -23,32 +23,55 @@ odoo.define('mail_drop_target', function(require)
             }
             return this._super.apply(this, arguments);
         },
-        _handle_file_drop: function(drop_file, e) {
+
+        _handle_drop_items: function(drop_items, e) {
+            var self = this;
+            _.each(drop_items, function(item, e) {
+                return self._handle_file_drop_proxy(item, e);
+            });
+        },
+        _handle_file_drop_proxy: function(item, e) {
+            var self = this;
+            var file = item;
+            if(!file || !(file instanceof Blob)) {
+                return;
+            }
+            var reader = new FileReader();
+            reader.onloadend = self.proxy(
+                _.partial(self._handle_file_drop, file, reader, e)
+            );
+            reader.onerror = self.proxy('_file_reader_error_handler');
+            reader.readAsArrayBuffer(file);
+        },
+        _handle_file_drop: function(drop_file, reader, e) {
             var self = this,
                 mail_processor = '',
                 data = '';
-            if(drop_file.name.endsWith('.msg')) {
+            if (drop_file.name.endsWith('.msg')) {
                 mail_processor = 'message_process_msg';
                 data = base64js.fromByteArray(
-                    new Uint8Array(e.target.result)
+                    new Uint8Array(reader.result)
                 );
             } else {
                 mail_processor = 'message_process';
-                data = String.fromCharCode.apply(
-                    null, new Uint8Array(e.currentTarget.result)
-                );
+                var reader_array = new Uint8Array(reader.result);
+                data = ""
+                for (var i = 0; i < reader_array.length; i++) {
+                    data += String.fromCharCode(parseInt(reader_array[i]));
+                }
             }
             // TODO: read some config parameter if this should set
             // some of the context keys to suppress mail.thread's behavior
-            return new Model('mail.thread').call(
-                mail_processor,
-                [this.field_manager.dataset.model, data],
-                {
-                    thread_id: this.field_manager.datarecord.id,
+            return this._rpc({
+                model:'mail.thread',
+                method:mail_processor,
+                args: [this.record.model, data],
+                kwargs: {
+                    thread_id: this.record.data.id,
                 }
-            )
+            })
             .then(function() {
-                return self.field_manager.reload();
+                self.trigger_up('reload',{});
             });
         }
     });
