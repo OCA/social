@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo12-addon-mail_tracking',
         'odoo12-addon-mail_tracking_mailgun',
         'odoo12-addon-mail_tracking_mass_mailing',
+        'odoo12-addon-mass_mailing_partner',
         'odoo12-addon-mass_mailing_resend',
         'odoo12-addon-mass_mailing_unique',
         'odoo12-addon-website_mass_mailing_name',
