@@ -24,20 +24,25 @@ class MailBouncedMixin(models.AbstractModel):
     def email_bounced_set(self, tracking_emails, reason, event=None):
         """Inherit this method to make any other actions to the model that
         inherit the mixin"""
+        if self.env.context.get('write_loop'):
+            # We avoid with the context an infinite recursion calling write
+            # method from other write method.
+            return True
         partners = self.filtered(lambda r: not r.email_bounced)
         return partners.write({'email_bounced': True})
 
     def write(self, vals):
         [email_field] = self._primary_email
         if email_field not in vals:
-            return super(MailBouncedMixin, self).write(vals)
+            return super().write(vals)
         email = vals[email_field].lower() if vals[email_field] else False
         mte_obj = self.env['mail.tracking.email']
-        if not mte_obj.email_is_bounced(email):
-            vals['email_bounced'] = False
-            return super(MailBouncedMixin, self).write(vals)
-        res = mte_obj._email_last_tracking_state(email)
-        tracking = mte_obj.browse(res[0].get('id'))
-        event = tracking.tracking_event_ids[:1]
-        self.email_bounced_set(tracking, event.error_details, event)
-        return super(MailBouncedMixin, self).write(vals)
+        vals['email_bounced'] = mte_obj.email_is_bounced(email)
+        if vals['email_bounced']:
+            res = mte_obj._email_last_tracking_state(email)
+            tracking = mte_obj.browse(res[0].get('id'))
+            event = tracking.tracking_event_ids[:1]
+            self.with_context(
+                write_loop=True,
+            ).email_bounced_set(tracking, event.error_details, event)
+        return super().write(vals)
