@@ -20,6 +20,6 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: website_mass_mailing_name
-#: model:ir.ui.view,arch_db:website_mass_mailing_name.s_newsletter_subscribe_form
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_name.s_newsletter_subscribe_form
 msgid "your name..."
 msgstr "vaše ime..."

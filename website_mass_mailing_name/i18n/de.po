@@ -19,6 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: website_mass_mailing_name
-#: model:ir.ui.view,arch_db:website_mass_mailing_name.s_newsletter_subscribe_form
+#: model_terms:ir.ui.view,arch_db:website_mass_mailing_name.s_newsletter_subscribe_form
 msgid "your name..."
 msgstr "Ihr Name..."
