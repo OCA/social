@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_activity_done
+# 	* mail_activity_done
 #
 msgid ""
 msgstr ""
@@ -24,8 +24,22 @@ msgid "%d days overdue"
 msgstr "%d Tage verspätet"
 
 #. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_active
+#, fuzzy
+#| msgid "Activity"
+msgid "Active"
+msgstr "Aktivität"
+
+#. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_mail_activity
 msgid "Activity"
+msgstr "Aktivität"
+
+#. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_mail_activity_mixin
+#, fuzzy
+#| msgid "Activity"
+msgid "Activity Mixin"
 msgstr "Aktivität"
 
 #. module: mail_activity_done
@@ -49,11 +63,6 @@ msgstr "Erledigt"
 #, python-format
 msgid "Due in %d days"
 msgstr "In %d Tagen fällig"
-
-#. module: mail_activity_done
-#: model:ir.ui.view,arch_db:mail_activity_done.mail_activity_view_search
-msgid "Open Activities"
-msgstr "Unerledigte Aktivitäten"
 
 #. module: mail_activity_done
 #. openerp-web
@@ -80,3 +89,6 @@ msgstr "Benutzer"
 #, python-format
 msgid "Yesterday"
 msgstr "Gestern"
+
+#~ msgid "Open Activities"
+#~ msgstr "Unerledigte Aktivitäten"
