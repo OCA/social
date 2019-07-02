@@ -26,8 +26,7 @@ Dynamic Mass Mailing Lists
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 Without this addon you have to choose between providing a dynamic domain and
-letting your mass mailings reach all partners that match it, or being able to
-unsubscribe to certain mailing lists while still being subscribed to others.
+letting your mass mailings reach all partners that match it.
 
 This addon allows you to create dynamic mailing lists, so you can now benefit
 from both things.
@@ -69,7 +68,7 @@ Usage
 
 To use this module, you need to:
 
-#. Go to *Mass Mailing > Mailings > Mass Mailings*, and create one.
+#. Go to *Email Marketing > Mailings*, and create one.
 #. Select as recipients a mailing list.
 #. On "Select mailing lists:", choose one mailing list with dynamic flag
    checked.
