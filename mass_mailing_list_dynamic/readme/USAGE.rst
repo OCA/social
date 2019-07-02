@@ -1,6 +1,6 @@
 To use this module, you need to:
 
-#. Go to *Mass Mailing > Mailings > Mass Mailings*, and create one.
+#. Go to *Email Marketing > Mailings*, and create one.
 #. Select as recipients a mailing list.
 #. On "Select mailing lists:", choose one mailing list with dynamic flag
    checked.
