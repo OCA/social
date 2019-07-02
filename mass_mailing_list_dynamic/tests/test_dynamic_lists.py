@@ -56,7 +56,7 @@ class DynamicListCase(common.SavepointCase):
         # Set list as full-synced
         self.list.sync_method = "full"
         Contact.search([
-            ("list_ids", "in", self.list.id),
+            ("list_ids", "in", self.list.ids),
             ("partner_id", "=", self.partners[2].id),
         ]).unlink()
         self.list.action_sync()
@@ -69,7 +69,7 @@ class DynamicListCase(common.SavepointCase):
                 "partner_id": self.partners[0].id,
             })
         contact1 = Contact.search([
-            ("list_ids", "in", self.list.id),
+            ("list_ids", "in", self.list.ids),
         ], limit=1)
         with self.assertRaises(ValidationError):
             contact1.name = "other"

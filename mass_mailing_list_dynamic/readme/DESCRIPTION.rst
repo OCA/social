@@ -1,6 +1,5 @@
 Without this addon you have to choose between providing a dynamic domain and
-letting your mass mailings reach all partners that match it, or being able to
-unsubscribe to certain mailing lists while still being subscribed to others.
+letting your mass mailings reach all partners that match it.
 
 This addon allows you to create dynamic mailing lists, so you can now benefit
 from both things.

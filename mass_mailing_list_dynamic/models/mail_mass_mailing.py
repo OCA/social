@@ -10,4 +10,4 @@ class MassMailing(models.Model):
     def send_mail(self):
         """Sync dynamic lists before sending mailings to them."""
         self.contact_list_ids.action_sync()
-        return super(MassMailing, self).send_mail()
+        return super().send_mail()
