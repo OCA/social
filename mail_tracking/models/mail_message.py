@@ -1,11 +1,17 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2019 Alexandre Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, api
+from odoo import models, api, fields
+from odoo.tools import email_split
 
 
 class MailMessage(models.Model):
     _inherit = "mail.message"
+
+    # Recipients
+    email_cc = fields.Char("Cc", help='Additional recipients that receive a '
+                                      '"Carbon Copy" of the e-mail')
 
     def _tracking_status_map_get(self):
         return {
@@ -58,8 +64,35 @@ class MailMessage(models.Model):
             for partner in partners:
                 # If there is partners not included, then status is 'unknown'
                 partner_trackings.append((
-                    'unknown', False, partner.name, partner.id))
+                    'unknown', False, partner.name, partner.id, partner.email))
             res[message.id] = partner_trackings
+        return res
+
+    @api.multi
+    def _get_email_cc(self):
+        """This method gets all Cc mails and the associated partner if exist.
+            The result is a dictionary by 'message id' with a list of tuples
+            (str:email_cc, list:[partner id, partner display_name] or False)
+        """
+        res = {}
+        ResPartnerObj = self.env['res.partner']
+        for message in self:
+            email_cc_list = email_split(message.email_cc)
+            email_cc_list_checked = []
+            if any(email_cc_list):
+                partners = ResPartnerObj.search([
+                    ('email', 'in', email_cc_list)
+                ])
+                email_cc_list = set(email_cc_list)
+                for partner in partners:
+                    email_cc_list.discard(partner.email)
+                    email_cc_list_checked.append(
+                        (partner.email, [partner.id, partner.display_name]))
+                for email in email_cc_list:
+                    email_cc_list_checked.append((email, False))
+            res.update({
+                message.id: email_cc_list_checked
+            })
         return res
 
     @api.model
@@ -69,9 +102,11 @@ class MailMessage(models.Model):
         mail_message_ids = {m.get('id') for m in messages if m.get('id')}
         mail_messages = self.browse(mail_message_ids)
         partner_trackings = mail_messages.tracking_status()
+        email_cc = mail_messages._get_email_cc()
         for message_dict in messages:
             mail_message_id = message_dict.get('id', False)
             if mail_message_id:
                 message_dict['partner_trackings'] = \
                     partner_trackings[mail_message_id]
+                message_dict['email_cc'] = email_cc[mail_message_id]
         return res

@@ -7,3 +7,4 @@ from . import mail_message
 from . import mail_tracking_email
 from . import mail_tracking_event
 from . import res_partner
+from . import mail_thread
