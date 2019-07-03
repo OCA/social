@@ -106,7 +106,8 @@ class MailMessage(models.Model):
         for message_dict in messages:
             mail_message_id = message_dict.get('id', False)
             if mail_message_id:
-                message_dict['partner_trackings'] = \
-                    partner_trackings[mail_message_id]
-                message_dict['email_cc'] = email_cc[mail_message_id]
+                message_dict.update({
+                    'partner_trackings': partner_trackings[mail_message_id],
+                    'email_cc': email_cc[mail_message_id],
+                })
         return res
