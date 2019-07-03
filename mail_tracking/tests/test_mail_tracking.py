@@ -113,6 +113,34 @@ class TestMailTracking(TransactionCase):
         tracking_email.event_create('open', metadata)
         self.assertEqual(tracking_email.state, 'opened')
 
+    def test_email_cc(self):
+        message = self.env['mail.message'].create({
+            'subject': 'Message test',
+            'author_id': self.sender.id,
+            'email_from': self.sender.email,
+            'message_type': 'comment',
+            'model': 'res.partner',
+            'res_id': self.recipient.id,
+            'partner_ids': [(4, self.recipient.id)],
+            'email_cc': 'unnamed@test.com, sender@example.com',
+            'body': '<p>This is a test message</p>',
+        })
+
+        message_dict = message.message_format()[0]
+        self.assertEqual(len(message_dict['email_cc']), 2)
+        # mail cc
+        # 'mail.message' First check Cc with res.partner
+        email_cc = message_dict['email_cc'][0]
+        self.assertEqual(email_cc[0], 'sender@example.com')
+        self.assertTrue(email_cc[1])
+        email_cc = message_dict['email_cc'][1]
+        self.assertEqual(email_cc[0], 'unnamed@test.com')
+        self.assertFalse(email_cc[1])
+        # suggested recipients
+        recipients = self.recipient.message_get_suggested_recipients()
+        self.assertEqual(recipients[self.recipient.id][0][1],
+                         'unnamed@test.com')
+
     def mail_send(self, recipient):
         mail = self.env['mail.mail'].create({
             'subject': 'Test subject',
