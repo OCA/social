@@ -5,3 +5,4 @@
   * David Vidal
   * Ernesto Tejeda
   * Rafael Blasco
+  * Alexandre Díaz
