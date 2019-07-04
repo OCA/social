@@ -1,6 +1,6 @@
 # Copyright 2019 Eficent Business and IT Consulting Services, S.L.
 # Copyright 2019 Aleph Objects, Inc.
-# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo.tests.common import TransactionCase
 
 
@@ -13,7 +13,7 @@ class TestMessageAutoSubscribeNotifyOwn(TransactionCase):
         self.user_root.notification_type = 'email'
 
         self.fake_model_id = self.env['ir.model'].search(
-            [('name', '=', 'message_auto_subscribe_notify_own.test')])
+            [('model', '=', 'message_auto_subscribe_notify_own.test')])
 
         self.env['auto.subscribe.notify.own.model'].create(dict(
             model_id=self.fake_model_id.id
@@ -28,15 +28,15 @@ class TestMessageAutoSubscribeNotifyOwn(TransactionCase):
 
     def test_message_auto_subscribe_notify_own(self):
         prev_mail_messages = self.env['mail.message'].search([
-            ('record_name', '=', self.fake_test.name),
-            ('reply_to', '=', self.user_root.email_formatted)
+            ('model', '=', 'message_auto_subscribe_notify_own.test'),
+            ('res_id', '=', self.fake_test.id),
         ])
         self.fake_test.update(dict(
             user_id=self.user_root.id
         ))
         mail_messages = self.env['mail.message'].search([
-            ('record_name', '=', self.fake_test.name),
-            ('reply_to', '=', self.user_root.email_formatted)
+            ('model', '=', 'message_auto_subscribe_notify_own.test'),
+            ('res_id', '=', self.fake_test.id),
         ])
         self.assertEqual(len(mail_messages-prev_mail_messages), 1)
 
