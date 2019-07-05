@@ -4,6 +4,7 @@
 from odoo import models, api, _
 from email.utils import getaddresses
 from odoo.tools import email_split_and_format
+from lxml import etree
 
 
 class MailThread(models.AbstractModel):
@@ -46,4 +47,33 @@ class MailThread(models.AbstractModel):
                 partner = ResPartnerObj.browse(partner_id, self._prefetch)
                 record._message_add_suggested_recipient(
                     res, partner=partner, reason=_('Cc'))
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
+                        submenu=False):
+        """Add a filter to any model with mail.thread that will show up records
+           with tracking errors.
+        """
+        res = super().fields_view_get(
+            view_id=view_id, view_type=view_type, toolbar=toolbar,
+            submenu=submenu)
+        if view_type != 'search':
+            return res
+        eview = etree.fromstring(res['arch'])
+        search_view = eview.xpath("//search")
+        filter_name = "message_ids_with_tracking_errors"
+        tracking_error_domain = """[
+            ("message_ids.tracking_ids.state", "in",
+                "['error, 'rejected', 'spam', 'bounced', 'soft-bounced']"),
+            ("message_ids.track_needs_action", "=", True)
+        ]"""
+        new_filter = etree.Element(
+            'filter', {
+                'string': _('Messages with errors'),
+                'name': filter_name,
+                'domain': tracking_error_domain})
+        separator = etree.Element('separator', {})
+        new_filter.append(separator)
+        search_view.append(new_filter)
+        res['arch'] = etree.tostring(eview)
         return res

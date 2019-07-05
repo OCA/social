@@ -19,12 +19,23 @@ odoo.define('mail_tracking.partner_tracking', function (require) {
         msg.partner_trackings = data.partner_trackings || [];
         return msg;
     };
+    chat_manager.toggle_tracking_status = function (message_id) {
+        return this._rpc({
+                model: 'mail.message',
+                method: 'toggle_tracking_status',
+                args: [[message_id]],
+            });
+    },
 
     ChatThread.include({
         events: _.extend(ChatThread.prototype.events, {
             'click .o_mail_action_tracking_partner':
                 'on_tracking_partner_click',
             'click .o_mail_action_tracking_status': 'on_tracking_status_click',
+            'click .o_thread_message_tracking': function (event) {
+                var message_id = $(event.currentTarget).data('message-id');
+                this.trigger("toggle_tracking_status", message_id);
+            },
         }),
         _preprocess_message: function () {
             var msg = this._super.apply(this, arguments);

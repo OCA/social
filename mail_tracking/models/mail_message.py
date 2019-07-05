@@ -9,9 +9,20 @@ from odoo.tools import email_split
 class MailMessage(models.Model):
     _inherit = "mail.message"
 
+
     # Recipients
     email_cc = fields.Char("Cc", help='Additional recipients that receive a '
                                       '"Carbon Copy" of the e-mail')
+    mail_tracking_ids = fields.One2many(
+        comodel_name='mail.tracking.email',
+        inverse_name='mail_message_id',
+        string="Mail Trackings Associated with this message",
+    )
+    track_needs_action = fields.Boolean(
+        string="The message tracking will be considered"
+               "for filter tracking issues",
+        default=True,
+    )
 
     def _tracking_status_map_get(self):
         return {
@@ -123,3 +134,11 @@ class MailMessage(models.Model):
                 message_dict['partner_trackings'] = \
                     partner_trackings[mail_message_id]
         return res
+
+    @api.multi
+    def toggle_tracking_status(self):
+        """Toggle message tracking action needed to ignore them in the tracking
+           issues filter"""
+        # a user should always be able to star a message he can read
+        self.check_access_rule('read')
+        self.track_needs_action = not self.track_needs_action
