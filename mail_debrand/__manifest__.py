@@ -13,4 +13,5 @@
         "mail",
     ],
     "development_status": "Stable",
+    "maintainers": ["pedrobaeza"],
 }
