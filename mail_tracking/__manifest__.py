@@ -26,10 +26,17 @@
         "views/assets.xml",
         "views/mail_tracking_email_view.xml",
         "views/mail_tracking_event_view.xml",
+        "views/mail_message_view.xml",
         "views/res_partner_view.xml",
+        "wizard/mail_compose_message_view.xml",
     ],
     "qweb": [
         "static/src/xml/mail_tracking.xml",
+        "static/src/xml/failed_message.xml",
+        "static/src/xml/client_action.xml",
+    ],
+    'demo': [
+        'demo/demo.xml',
     ],
     "pre_init_hook": "pre_init_hook",
 }
