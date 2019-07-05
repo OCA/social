@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_message_form">
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_form"/>
+        <field name="arch" type="xml">
+            <field name="subtype_id" position="after">
+                <field name="mail_tracking_needs_action" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

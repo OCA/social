@@ -38,6 +38,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
             this._super.apply(this, arguments);
             this._partnerTrackings = data.partner_trackings || [];
             this._emailCc = data.email_cc || [];
+            this._trackNeedsAction = data.track_needs_action || false;
         },
 
         /**
@@ -100,6 +101,14 @@ odoo.define('mail_tracking.partner_tracking', function(require){
                 return item[0] === email;
             });
         },
+
+        toggleTrackingStatus: function () {
+            return this._rpc({
+                    model: 'mail.message',
+                    method: 'toggle_tracking_status',
+                    args: [[this.id]],
+                });
+        },
     });
 
     ThreadWidget.include({
@@ -107,6 +116,20 @@ odoo.define('mail_tracking.partner_tracking', function(require){
             'click .o_mail_action_tracking_partner': 'on_tracking_partner_click',
             'click .o_mail_action_tracking_status': 'on_tracking_status_click',
         }),
+        _preprocess_message: function () {
+            var msg = this._super.apply(this, arguments);
+            msg.partner_trackings = msg.partner_trackings || [];
+            msg.email_cc = msg.email_cc || [];
+            var needs_action = msg.track_needs_action;
+            var message_track = _.findWhere(messages_tracked_changes, {
+                id: msg.id,
+            });
+            if (message_track) {
+                needs_action = message_track.status;
+            }
+            msg.track_needs_action = needs_action;
+            return msg;
+        },
         on_tracking_partner_click: function (event) {
             var partner_id = this.$el.find(event.currentTarget).data('partner');
             var state = {
@@ -147,7 +170,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
             };
             this.do_action(action);
         },
-        init: function (parent, options) {
+        init: function () {
             this._super.apply(this, arguments);
             this.action_manager = this.findAncestor(function(ancestor){
                 return ancestor instanceof ActionManager;
