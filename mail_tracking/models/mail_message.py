@@ -12,6 +12,20 @@ class MailMessage(models.Model):
     # Recipients
     email_cc = fields.Char("Cc", help='Additional recipients that receive a '
                                       '"Carbon Copy" of the e-mail')
+    mail_tracking_ids = fields.One2many(
+        comodel_name='mail.tracking.email',
+        inverse_name='mail_message_id',
+        string="Mail Trackings",
+    )
+    mail_tracking_needs_action = fields.Boolean(
+        help="The message tracking will be considered"
+             " to filter tracking issues",
+        default=False,
+    )
+
+    @api.model
+    def get_failed_states(self):
+        return {'error', 'rejected', 'spam', 'bounced', 'soft-bounced'}
 
     def _tracking_status_map_get(self):
         return {
@@ -95,6 +109,17 @@ class MailMessage(models.Model):
             })
         return res
 
+    @api.multi
+    def _get_failed_message(self):
+        res = {}
+        for message in self:
+            res.update({
+                message.id: message.mail_tracking_needs_action
+                and bool(message.mail_tracking_ids.filtered(
+                    lambda x: x.state in self.get_failed_states()))
+            })
+        return res
+
     @api.model
     def _message_read_dict_postprocess(self, messages, message_tree):
         res = super(MailMessage, self)._message_read_dict_postprocess(
@@ -103,11 +128,77 @@ class MailMessage(models.Model):
         mail_messages = self.browse(mail_message_ids)
         partner_trackings = mail_messages.tracking_status()
         email_cc = mail_messages._get_email_cc()
+        failed_message = mail_messages._get_failed_message()
         for message_dict in messages:
             mail_message_id = message_dict.get('id', False)
             if mail_message_id:
                 message_dict.update({
                     'partner_trackings': partner_trackings[mail_message_id],
                     'email_cc': email_cc[mail_message_id],
+                    'failed_message': failed_message[mail_message_id],
                 })
+        return res
+
+    @api.model
+    def _prepare_dict_failed_message(self, message):
+        failed_trackings = message.mail_tracking_ids.filtered(
+            lambda x: x.state in self.get_failed_states())
+        failed_partners = failed_trackings.mapped('partner_id')
+        failed_recipients = failed_partners.name_get()
+        return {
+            'id': message.id,
+            'date': message.date,
+            'author_id': message.author_id.name_get()[0],
+            'body': message.body,
+            'failed_recipients': failed_recipients,
+        }
+
+    @api.multi
+    def get_failed_messages(self):
+        return [self._prepare_dict_failed_message(msg) for msg in self]
+
+    @api.multi
+    def toggle_tracking_status(self):
+        """Toggle message tracking action needed to ignore them in the tracking
+           issues filter"""
+        self.mail_tracking_needs_action = not self.mail_tracking_needs_action
+        return self.mail_tracking_needs_action
+
+    def _get_failed_message_domain(self):
+        return [
+            ('mail_tracking_ids.state', 'in', list(self.get_failed_states())),
+            ('mail_tracking_needs_action', '=', True)
+        ]
+
+    @api.model
+    def get_failed_count(self):
+        """ Gets the number of failed messages """
+        return self.search_count(self._get_failed_message_domain())
+
+    @api.model
+    def message_fetch(self, domain, limit=20):
+        # HACK: Because can't modify the domain in discuss JS to search the
+        # failed messages we force the change here to clean it of
+        # not valid criterias
+        if self.env.context.get('filter_failed_message'):
+            domain = self._get_failed_message_domain()
+        return super().message_fetch(domain, limit=limit)
+
+    @api.multi
+    def _notify(self, force_send=False, send_after_commit=True,
+                user_signature=True):
+        self_sudo = self.sudo()
+        hide_followers = self_sudo._context.get('default_hide_followers',
+                                                False)
+        if hide_followers:
+            # HACK: Because Odoo uses subtype to found message followers
+            # whe modify it to False to avoid include them.
+            orig_subtype_id = self_sudo.subtype_id
+            self_sudo.subtype_id = False
+        res = super()._notify(force_send=force_send,
+                              send_after_commit=send_after_commit,
+                              user_signature=user_signature)
+        if hide_followers:
+            self_sudo.subtype_id = orig_subtype_id
+
         return res
