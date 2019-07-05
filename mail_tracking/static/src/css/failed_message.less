@@ -1,0 +1,108 @@
+/* Copyright 2019 Alexandre Díaz
+   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
+.o_mail_failed_message {
+    &.o_field_widget {
+        display: block;
+    }
+
+    .o_thread_date_separator
+    {
+        margin-top: 1.5rem;
+        margin-bottom: 3rem;
+        @media (max-width: @screen-xs-max) {
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+        border-bottom: 1px solid @gray-lighter-darker;
+        border-bottom-style: solid;
+        text-align: center;
+
+        &.o_border_dashed {
+            border-bottom-style: dashed;
+
+            &[data-toggle="collapse"] {
+                cursor: pointer;
+
+                .o_chatter_failed_message_summary {
+                    display: none;
+                }
+
+                &.collapsed {
+                    margin-bottom: 0;
+                    .o-transition(margin, 0.8s);
+
+                    .o_chatter_failed_message_summary {
+                        display: inline-block;
+
+                        span {
+                            padding: 0 0.5rem;
+                            border-radius: 100%;
+                            font-size: 1.1rem;
+                        }
+                    }
+
+                    i.fa-caret-down:before {
+                        content: '\f0da';
+                    }
+                }
+            }
+        }
+
+        .o_thread_date {
+            position: relative;
+            top: 1rem;
+            margin: 0 auto;
+            padding: 0 1rem;
+            font-weight: bold;
+            background: white;
+        }
+    }
+
+    .o_thread_message {
+        display: -ms-flexbox;
+        display: -moz-box;
+        display: -webkit-box;
+        display: -webkit-flex;
+        display: flex;
+        padding: 0.4rem @odoo-horizontal-padding;
+        margin-bottom: 0px;
+
+        .o_thread_message_sidebar {
+            .o-flex(0, 0, @mail-thread-avatar-size);
+            margin-right: 1rem;
+            margin-top: 0.2rem;
+            text-align: center;
+            font-size: smaller;
+
+            .o_avatar_stack {
+                position: relative;
+                text-align: left;
+                margin-bottom: 0.8rem;
+
+                img {
+                    .square(31px);
+                }
+
+                .o_avatar_icon {
+                    .o-position-absolute(@right: -5px, @bottom: -5px);
+                    .square(25px);
+                    padding: 0.6rem 0.5rem;
+                    text-align: center;
+                    line-height: 1.2;
+                    color: white;
+                    border-radius: 100%;
+                    border: 2px solid white;
+                }
+            }
+        }
+
+        .o_thread_message_core .o_mail_info {
+            .text-muted();
+        }
+    }
+}
+
+.o_mail_chat .o_mail_chat_sidebar .o_mail_failed_message_refresh {
+    margin-right: 0.5em;
+    margin-top: 0.2em;
+}

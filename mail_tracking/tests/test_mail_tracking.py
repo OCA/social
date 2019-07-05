@@ -8,6 +8,7 @@ import base64
 from odoo import http
 from odoo.tests.common import TransactionCase
 from ..controllers.main import MailTrackingController, BLANK
+from lxml import etree
 
 mock_send_email = ('odoo.addons.base.models.ir_mail_server.'
                    'IrMailServer.send_email')
@@ -158,6 +159,28 @@ class TestMailTracking(TransactionCase):
         })
         recipients = self.recipient.message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id][0]), 3)
+
+    def test_failed_message(self):
+        # Create message
+        mail, tracking = self.mail_send(self.recipient.email)
+        self.assertFalse(tracking.mail_message_id.mail_tracking_needs_action)
+        # Force error state
+        tracking.state = 'error'
+        self.assertTrue(tracking.mail_message_id.mail_tracking_needs_action)
+        failed_count = self.env['mail.message'].get_failed_count()
+        self.assertTrue(failed_count > 0)
+        values = tracking.mail_message_id.get_failed_messages()
+        self.assertEqual(values[0]['id'], tracking.mail_message_id.id)
+        messages = self.env['mail.message'].message_fetch([])
+        messages_failed = self.env['mail.message'].with_context(
+            filter_failed_message=True).message_fetch([])
+        self.assertTrue(messages)
+        self.assertTrue(messages_failed)
+        self.assertTrue(len(messages) > len(messages_failed))
+        tracking.mail_message_id.toggle_tracking_status()
+        self.assertFalse(tracking.mail_message_id.mail_tracking_needs_action)
+        self.assertTrue(
+            self.env['mail.message'].get_failed_count() < failed_count)
 
     def mail_send(self, recipient):
         mail = self.env['mail.mail'].create({
@@ -371,3 +394,21 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(b'NONE', none.response[0])
         none = controller.mail_tracking_event(db, 'open')
         self.assertEqual(b'NONE', none.response[0])
+
+
+class TestMailTrackingViews(TransactionCase):
+    def test_fields_view_get(self):
+        result = self.env['res.partner'].fields_view_get(
+            view_id=self.env.ref('base.view_partner_form').id,
+            view_type='form')
+        doc = etree.XML(result['arch'])
+        nodes = doc.xpath(
+            "//field[@name='failed_message_ids'"
+            " and @widget='mail_failed_message']")
+        self.assertTrue(nodes)
+        result = self.env['res.partner'].fields_view_get(
+            view_id=self.env.ref('base.view_res_partner_filter').id,
+            view_type='search')
+        doc = etree.XML(result['arch'])
+        nodes = doc.xpath("//filter[@name='failed_message_ids']")
+        self.assertTrue(nodes)

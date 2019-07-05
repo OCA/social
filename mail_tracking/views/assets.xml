@@ -7,9 +7,13 @@
               inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet"
-                  href="/mail_tracking/static/src/css/mail_tracking.css"/>
+                  href="/mail_tracking/static/src/css/mail_tracking.less"/>
+            <link rel="stylesheet"
+                  href="/mail_tracking/static/src/css/failed_message.less"/>
             <script type="text/javascript"
                     src="/mail_tracking/static/src/js/mail_tracking.js"/>
+            <script type="text/javascript"
+                    src="/mail_tracking/static/src/js/failed_message.js"/>
         </xpath>
     </template>
 </odoo>
