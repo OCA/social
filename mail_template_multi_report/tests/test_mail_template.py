@@ -15,7 +15,7 @@ class TestMailTemplate(common.TransactionCase):
             'arch': """\
 <?xml version="1.0"?>
 <t t-name="mail_template_multi_report.test_report_template">
-    
+
 </t>
             """
         })

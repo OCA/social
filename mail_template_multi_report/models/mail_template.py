@@ -26,18 +26,24 @@ class MailTemplate(models.Model):
                 multi_mode = False
 
             for record in self.env[self.model].browse(res_ids):
-                attachments = multi_mode and res[record.id].get('attachments', []) or res.get('attachments', [])
+                attachments = multi_mode and \
+                              res[record.id].get('attachments', []) or \
+                              res.get('attachments', [])
                 for report_line in self.report_line_ids:
                     condition = report_line.condition
                     if condition and condition.strip():
-                        condition_result = self.render_template(condition, self.model, record.id)
-                        if not condition_result or not safe_eval(condition_result):
+                        condition_result = self.render_template(
+                            condition, self.model, record.id)
+                        if not condition_result or not safe_eval(
+                                condition_result):
                             continue
-                    report_name = self.render_template(report_line.report_name, self.model, record.id)
+                    report_name = self.render_template(report_line.report_name,
+                                                       self.model, record.id)
                     report = report_line.report_template_id
                     report_service = report.report_name
                     if report.report_type not in ['qweb-html', 'qweb-pdf']:
-                        raise UserError(_('Unsupported report type %s found.') % report.report_type)
+                        raise UserError(_('Unsupported report type %s found.')
+                                        % report.report_type)
                     result, result_format = report.render_qweb_pdf(record.id)
                     result = base64.b64encode(result)
                     if not report_name:
