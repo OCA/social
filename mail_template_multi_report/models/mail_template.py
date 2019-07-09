@@ -26,9 +26,8 @@ class MailTemplate(models.Model):
                 multi_mode = False
 
             for record in self.env[self.model].browse(res_ids):
-                attachments = multi_mode and \
-                              res[record.id].get('attachments', []) or \
-                              res.get('attachments', [])
+                attachments = multi_mode and res[record.id].get(
+                    'attachments', []) or res.get('attachments', [])
                 for report_line in self.report_line_ids:
                     condition = report_line.condition
                     if condition and condition.strip():
