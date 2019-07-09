@@ -29,7 +29,7 @@ Open a email template wizard and select your template. Your extra reports are ad
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/social/8.0
+   :target: https://runbot.odoo-community.org/runbot/social/11.0
 
 Known issues / Roadmap
 ======================
@@ -58,6 +58,7 @@ Contributors
 ------------
 
 * David Dufresne <david.dufresne@savoirfairelinux.com>
+* Javier Ruiz <javier@bloopark.de>
 
 
 Maintainer
