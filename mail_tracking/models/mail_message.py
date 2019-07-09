@@ -9,7 +9,6 @@ from odoo.tools import email_split
 class MailMessage(models.Model):
     _inherit = "mail.message"
 
-
     # Recipients
     email_cc = fields.Char("Cc", help='Additional recipients that receive a '
                                       '"Carbon Copy" of the e-mail')
@@ -142,3 +141,9 @@ class MailMessage(models.Model):
         # a user should always be able to star a message he can read
         self.check_access_rule('read')
         self.track_needs_action = not self.track_needs_action
+        notification = {'type': 'toggle_track', 'message_ids': [self.id],
+                        'tracked': self.track_needs_action,
+                        'res_id': self.res_id, 'model': self.model}
+        self.env['bus.bus'].sendone((self._cr.dbname, 'res.partner',
+                                     self.env.user.partner_id.id),
+                                    notification)

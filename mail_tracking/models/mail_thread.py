@@ -5,6 +5,8 @@ from odoo import models, api, _
 from email.utils import getaddresses
 from odoo.tools import email_split_and_format
 from lxml import etree
+import logging
+_logger = logging.getLogger(__name__)
 
 
 class MailThread(models.AbstractModel):
@@ -59,14 +61,13 @@ class MailThread(models.AbstractModel):
             submenu=submenu)
         if view_type != 'search':
             return res
-        eview = etree.fromstring(res['arch'])
-        search_view = eview.xpath("//search")
+
+        # Create filter element
         filter_name = "message_ids_with_tracking_errors"
         tracking_error_domain = """[
-            ("message_ids.tracking_ids.state", "in",
-                "['error, 'rejected', 'spam', 'bounced', 'soft-bounced']"),
-            ("message_ids.track_needs_action", "=", True)
-        ]"""
+            ("message_ids.mail_tracking_ids.state", "in",
+                ['error', 'rejected', 'spam', 'bounced', 'soft-bounced']),
+            ("message_ids.track_needs_action", "=", True)]"""
         new_filter = etree.Element(
             'filter', {
                 'string': _('Messages with errors'),
@@ -74,6 +75,10 @@ class MailThread(models.AbstractModel):
                 'domain': tracking_error_domain})
         separator = etree.Element('separator', {})
         new_filter.append(separator)
-        search_view.append(new_filter)
-        res['arch'] = etree.tostring(eview)
+
+        # Modify view to add new filter element
+        doc = etree.XML(res['arch'])
+        node = doc.xpath("//search")[0]
+        node.insert(0, new_filter)
+        res['arch'] = etree.tostring(doc, encoding='unicode')
         return res

@@ -92,6 +92,15 @@ class MailTrackingEmail(models.Model):
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
 
+    @api.multi
+    def write(self, vals):
+        if 'state' in vals and vals['state'] in \
+                ['error', 'rejected', 'spam', 'bounced', 'soft-bounced']:
+            for tracking_mail in self:
+                if tracking_mail.mail_message_id:
+                    tracking_mail.mail_message_id.track_needs_action = True
+        super().write(vals)
+
     @api.model
     def email_is_bounced(self, email):
         if not email:
