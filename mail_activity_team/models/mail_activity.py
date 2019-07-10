@@ -1,6 +1,6 @@
 # Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, models, fields, _
+from odoo import api, models, fields, _, SUPERUSER_ID
 from odoo.exceptions import ValidationError
 
 
@@ -59,7 +59,14 @@ class MailActivity(models.Model):
     @api.constrains('team_id', 'user_id')
     def _check_team_and_user(self):
         for activity in self:
-            if activity.team_id and activity.user_id and \
+            # SUPERUSER is used to put mail.activity on some objects
+            # like sale.order coming from stock.picking
+            # (for example with exception type activity, with no backorder).
+            # SUPERUSER is inactive and then even if you add it
+            # to member_ids it's not taken account
+            # To not be blocked we must add it to constraint condition
+            if activity.user_id.id != SUPERUSER_ID and activity.team_id and \
+                    activity.user_id and \
                     activity.user_id not in self.team_id.member_ids:
                 raise ValidationError(
                     _('The assigned user is not member of the team.'))
