@@ -2,35 +2,35 @@
    Copyright 2018 David Vidal - <david.vidal@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
 
-odoo.define('mail_tracking.partner_tracking', function(require){
+odoo.define('mail_tracking.partner_tracking', function (require) {
     "use strict";
 
     var core = require('web.core');
-    var session = require('web.session');
-    var data = require('web.data');
     var ActionManager = require('web.ActionManager');
     var chat_manager = require('mail.chat_manager');
     var ChatThread = require('mail.ChatThread');
-    var Chatter = require('mail.Chatter');
 
     var _t = core._t;
 
-    // chat_manager is a simple dictionary, not an OdooClass
+    // Chat_manager is a simple dictionary, not an OdooClass
     chat_manager._make_message_super = chat_manager.make_message;
-    chat_manager.make_message = function(data) {
+    chat_manager.make_message = function (data) {
         var msg = this._make_message_super(data);
         msg.partner_trackings = data.partner_trackings || [];
+        msg.email_cc = data.email_cc || [];
         return msg;
     };
 
     ChatThread.include({
         events: _.extend(ChatThread.prototype.events, {
-            'click .o_mail_action_tracking_partner': 'on_tracking_partner_click',
+            'click .o_mail_action_tracking_partner':
+                'on_tracking_partner_click',
             'click .o_mail_action_tracking_status': 'on_tracking_status_click',
         }),
-        _preprocess_message: function (message) {
+        _preprocess_message: function () {
             var msg = this._super.apply(this, arguments);
             msg.partner_trackings = msg.partner_trackings || [];
+            msg.email_cc = msg.email_cc || [];
             return msg;
         },
         on_tracking_partner_click: function (event) {
@@ -73,9 +73,9 @@ odoo.define('mail_tracking.partner_tracking', function(require){
             };
             this.do_action(action);
         },
-        init: function (parent, options) {
+        init: function () {
             this._super.apply(this, arguments);
-            this.action_manager = this.findAncestor(function(ancestor){
+            this.action_manager = this.findAncestor(function (ancestor) {
                 return ancestor instanceof ActionManager;
             });
         },
