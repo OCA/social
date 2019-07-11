@@ -1,16 +1,21 @@
 # Copyright 2019 Alexandre Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, api, _
+from odoo import fields, models, api, _
 from email.utils import getaddresses
 from odoo.tools import email_split_and_format
 from lxml import etree
-import logging
-_logger = logging.getLogger(__name__)
 
 
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
+
+    failed_message_ids = fields.One2many(
+        'mail.message', 'res_id', string='Failed Messages',
+        domain=lambda self:
+            [('model', '=', self._name)]
+            + self.env['mail.message']._get_failed_message_domain(),
+        auto_join=True)
 
     @api.multi
     @api.returns('self', lambda value: value.id)
@@ -30,6 +35,8 @@ class MailThread(models.AbstractModel):
 
     @api.multi
     def message_get_suggested_recipients(self):
+        """Adds email Cc recipients as suggested recipients.
+           If the recipient have an res.partner uses it."""
         res = super().message_get_suggested_recipients()
         ResPartnerObj = self.env['res.partner']
         email_cc_formated_list = []
@@ -49,36 +56,53 @@ class MailThread(models.AbstractModel):
                 partner = ResPartnerObj.browse(partner_id, self._prefetch)
                 record._message_add_suggested_recipient(
                     res, partner=partner, reason=_('Cc'))
+        return res
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
-        """Add a filter to any model with mail.thread that will show up records
-           with tracking errors.
+        """Add filters for failed messages.
+
+        These filters will show up on any form or search views of any
+        model inheriting from ``mail.thread``.
         """
         res = super().fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar,
             submenu=submenu)
-        if view_type != 'search':
+        if view_type != 'search' and view_type != 'form':
             return res
-
-        # Create filter element
-        filter_name = "message_ids_with_tracking_errors"
-        tracking_error_domain = """[
-            ("message_ids.mail_tracking_ids.state", "in",
-                ['error', 'rejected', 'spam', 'bounced', 'soft-bounced']),
-            ("message_ids.track_needs_action", "=", True)]"""
-        new_filter = etree.Element(
-            'filter', {
-                'string': _('Messages with errors'),
-                'name': filter_name,
-                'domain': tracking_error_domain})
-        separator = etree.Element('separator', {})
-        new_filter.append(separator)
-
-        # Modify view to add new filter element
         doc = etree.XML(res['arch'])
-        node = doc.xpath("//search")[0]
-        node.insert(0, new_filter)
+        if view_type == 'search':
+            # Modify view to add new filter element
+            nodes = doc.xpath("//search")
+            if nodes:
+                # Create filter element
+                new_filter = etree.Element(
+                    'filter', {
+                        'string': _('Failed sent messages'),
+                        'name': "failed_message_ids",
+                        'domain': str([
+                            ['failed_message_ids.mail_tracking_ids.state',
+                             'in',
+                             list(
+                                 self.env['mail.message'].get_failed_states()
+                             )],
+                            ['failed_message_ids.mail_tracking_needs_action',
+                             '=', True]
+                        ])
+                    })
+                nodes[0].append(etree.Element('separator'))
+                nodes[0].append(new_filter)
+        elif view_type == 'form':
+            # Modify view to add new field element
+            nodes = doc.xpath(
+                "//field[@name='message_ids' and @widget='mail_thread']")
+            if nodes:
+                # Create field
+                field_failed_messages = etree.Element('field', {
+                    'name': 'failed_message_ids',
+                    'widget': 'mail_failed_message',
+                })
+                nodes[0].addprevious(field_failed_messages)
         res['arch'] = etree.tostring(doc, encoding='unicode')
         return res

@@ -47,10 +47,6 @@
 </t>
 
 <t t-extend="mail.ChatThread.Message">
-    <t t-jquery="span[t-attf-class='o_thread_icons']>i:last" t-operation="after">
-        <i t-attf-class="fa fa-lg o_thread_icon o_thread_message_tracking #{message.track_needs_action ? 'fa-check-square' : 'fa-square-o'}"
-           t-att-data-message-id="message.id" title="Trackin reviewed"/>
-    </t>
     <t t-jquery="p[class='o_mail_info']" t-operation="after">
         <p class="o_mail_tracking">
             <strong>To:</strong>

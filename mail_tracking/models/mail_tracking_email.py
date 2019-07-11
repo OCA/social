@@ -94,11 +94,10 @@ class MailTrackingEmail(models.Model):
 
     @api.multi
     def write(self, vals):
-        if 'state' in vals and vals['state'] in \
-                ['error', 'rejected', 'spam', 'bounced', 'soft-bounced']:
-            for tracking_mail in self:
-                if tracking_mail.mail_message_id:
-                    tracking_mail.mail_message_id.track_needs_action = True
+        if vals.get('state') in self.env['mail.message'].get_failed_states():
+            self.mapped('mail_message_id').write({
+                'mail_tracking_needs_action': True,
+            })
         super().write(vals)
 
     @api.model
@@ -106,8 +105,8 @@ class MailTrackingEmail(models.Model):
         if not email:
             return False
         res = self._email_last_tracking_state(email)
-        return res and res[0].get('state', '') in ['rejected', 'error',
-                                                   'spam', 'bounced']
+        return res and res[0].get('state', '') in {'rejected', 'error',
+                                                   'spam', 'bounced'}
 
     @api.model
     def _email_last_tracking_state(self, email):
