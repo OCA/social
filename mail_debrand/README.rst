@@ -60,9 +60,17 @@ Do not contact contributors directly about support or help with technical issues
 Credits
 =======
 
+Authors
+~~~~~~~
+
+* Tecnativa
+* Eficent
+
 Contributors
 ~~~~~~~~~~~~
 
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
+* Lois Rilo <lois.rilo@eficent.com>
 * Graeme Gellatly <graeme@o4sb.com>
 
 Maintainers
