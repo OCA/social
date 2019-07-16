@@ -116,3 +116,11 @@ class TestMailActivityTeam(TransactionCase):
             self.team2.member_ids = [(3, self.employee.id)]
             self.team2._onchange_member_ids()
             self.assertFalse(self.team2.user_id)
+
+    def test_activity_count(self):
+        res = self.env['res.users'].with_context(
+            {'team_activities': True}
+        ).activity_user_count(
+            user_id=self.employee.id
+        )
+        self.assertEqual(res[0]['total_count'], 0)

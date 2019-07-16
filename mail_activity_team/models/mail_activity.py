@@ -19,6 +19,8 @@ class MailActivity(models.Model):
                            ('res_model_ids', 'in', model.ids)])
         return self.env['mail.activity.team'].search(domain, limit=1)
 
+    user_id = fields.Many2one(required=False)
+
     team_id = fields.Many2one(
         comodel_name='mail.activity.team',
         default=lambda s: s._get_default_team_id(),
