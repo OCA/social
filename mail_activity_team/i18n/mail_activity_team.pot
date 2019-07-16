@@ -24,6 +24,11 @@ msgid "Activity"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Activity Team"
 msgstr ""
@@ -91,6 +96,13 @@ msgid "Missing Activities"
 msgstr ""
 
 #. module: mail_activity_team
+#. openerp-web
+#: code:addons/mail_activity_team/static/src/xml/systray.xml:8
+#, python-format
+msgid "My Activities"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "My Team Activities"
 msgstr ""
@@ -104,6 +116,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team_id_2777
 #: model:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "Team"
+msgstr ""
+
+#. module: mail_activity_team
+#. openerp-web
+#: code:addons/mail_activity_team/static/src/xml/systray.xml:9
+#, python-format
+msgid "Team Activities"
 msgstr ""
 
 #. module: mail_activity_team
@@ -122,7 +141,7 @@ msgid "Team:"
 msgstr ""
 
 #. module: mail_activity_team
-#: code:addons/mail_activity_team/models/mail_activity.py:65
+#: code:addons/mail_activity_team/models/mail_activity.py:67
 #, python-format
 msgid "The assigned user is not member of the team."
 msgstr ""
@@ -135,5 +154,12 @@ msgstr ""
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_res_users
 msgid "Users"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin_activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_res_partner_activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_res_users_activity_team_user_ids
+msgid "test field"
 msgstr ""
 
