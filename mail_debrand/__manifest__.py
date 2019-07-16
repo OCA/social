@@ -1,3 +1,7 @@
+# Copyright 2016 Tecnativa - Jairo Llopis
+# Copyright 2017 Tecnativa - Pedro M. Baeza
+# Copyright 2019 Eficent Business and IT Consulting Services S.L.
+#   - Lois Rilo <lois.rilo@eficent.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -6,7 +10,7 @@
     "version": "12.0.2.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social/",
-    "author": "Odoo Community Association (OCA)",
+    "author": "Tecnativa, Eficent, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": [
