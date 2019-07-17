@@ -19,8 +19,5 @@
         "views/mail_activity_views.xml",
         "views/res_users_views.xml",
     ],
-
-    'qweb': [
-        'static/src/xml/systray.xml',
-    ],
+    "qweb": ["static/src/xml/systray.xml"],
 }
