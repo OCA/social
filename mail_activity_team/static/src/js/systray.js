@@ -1,12 +1,12 @@
-odoo.define('mail_activity_team.systray', function (require) {
+odoo.define('mail_activity_team.systray.ActivityMenu', function (require) {
     "use strict";
 
-    var systray = require('mail.systray');
+    var ActivityMenu = require('mail.systray.ActivityMenu');
     var session = require("web.session");
 
-    systray.ActivityMenu.include({
-        events: _.extend({}, systray.ActivityMenu.prototype.events, {
-            'click .o_filter_button': 'on_click_filter_button',
+    ActivityMenu.include({
+        events: _.extend({}, ActivityMenu.prototype.events, {
+                'click .o_filter_button': '_onClickFilterButton',
         }),
         start: function () {
             this._super.apply(this, arguments);
@@ -20,12 +20,11 @@ odoo.define('mail_activity_team.systray', function (require) {
 
         _updateCounter: function (data) {
             this._super.apply(this, arguments);
-            this.$('.o_new_notification_counter').text(this.activityCounter);
+            this.$('.o_notification_counter').text(this.activityCounter);
         },
 
-        on_click_filter_button: function (event) {
+        _onClickFilterButton: function (event) {
             var self = this;
-
             event.stopPropagation();
             self.$filter_buttons.removeClass('active');
             var $target = $(event.currentTarget);
@@ -78,15 +77,16 @@ odoo.define('mail_activity_team.systray', function (require) {
 
                 self._rpc({
                     model: 'res.users',
-                    method: 'activity_user_count',
+                    method: 'systray_get_activities',
+                    args: [],
                     kwargs: {
                         context: session.user_context,
                     },
                 }).then(function (data) {
                     self.activityCounter += _.reduce(data, function(
                         total_count, p_data
-                    ){ return total_count + p_data.total_count; }, 0);
-                    self.$('.o_new_notification_counter').text(self.activityCounter);
+                    ){ return total_count + p_data.total_count || 0; }, 0);
+                    self.$('.o_notification_counter').text(self.activityCounter);
                     self.$el.toggleClass('o_no_notification', !self.activityCounter);
                     session.user_context = _.extend({}, session.user_context, {
                         'team_activities': !session.user_context['team_activities'],

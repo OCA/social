@@ -13,9 +13,9 @@ class ResUsers(models.Model):
     )
 
     @api.model
-    def activity_user_count(self, user_id=False):
+    def systray_get_activities(self):
         if not self._context.get('team_activities', False):
-            return super().activity_user_count()
+            return super().systray_get_activities()
         query = """SELECT m.id, count(*), act.res_model as model,
                                 CASE
                                     WHEN %(today)s::date -
@@ -34,7 +34,7 @@ class ResUsers(models.Model):
                             )
                             GROUP BY m.id, states, act.res_model, act.user_id;
                             """
-        user = user_id if user_id else self.env.uid
+        user = self.env.uid
         self.env.cr.execute(query, {
             'today': fields.Date.context_today(self),
             'user_id': user,
@@ -50,6 +50,7 @@ class ResUsers(models.Model):
                 user_activities[activity['model']] = {
                     'name': model_names[activity['id']],
                     'model': activity['model'],
+                    'type': 'activity',
                     'icon': modules.module.get_module_icon(
                         self.env[activity['model']]._original_module),
                     'total_count': 0, 'today_count': 0, 'overdue_count': 0,
@@ -60,7 +61,8 @@ class ResUsers(models.Model):
             if activity['states'] in ('today', 'overdue'):
                 user_activities[activity['model']]['total_count'] += activity[
                     'count']
-            if activity['user_id'] == user:
+            if activity['user_id'] == user and \
+                    activity['states'] in ('today', 'overdue'):
                 user_activities[
                     activity['model']
                 ]['total_count'] -= activity['count']
