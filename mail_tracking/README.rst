@@ -70,6 +70,9 @@ These are all available status icons:
 .. |unknown| image:: mail_tracking/static/src/img/unknown.png
    :width: 10px
 
+.. |cc| image:: static/src/img/cc.png
+   :width: 10px
+
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
 
 |waiting|    **Waiting**: Waiting to be sent
@@ -82,11 +85,13 @@ These are all available status icons:
 
 |opened|  **Opened**: Opened by partner
 
+|cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
+
+
 If you want to see all tracking emails and events you can go to
 
 * Settings > Technical > Email > Tracking emails
 * Settings > Technical > Email > Tracking events
-
 
 Bug Tracker
 ===========
@@ -116,6 +121,7 @@ Contributors
   * David Vidal
   * Ernesto Tejeda
   * Rafael Blasco
+  * Alexandre Díaz
 
 Other credits
 ~~~~~~~~~~~~~
