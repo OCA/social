@@ -63,6 +63,12 @@ msgstr ""
 "servidor de correu (MX) del destinatari.\n"
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_cc
+#: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
+msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
+msgstr ""
+
+#. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
 msgstr "Rebot"
@@ -81,6 +87,15 @@ msgstr "Tipus de rebot"
 #: selection:mail.tracking.email,state:0
 msgid "Bounced"
 msgstr "Rebotat"
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_thread.py:36
+#: code:addons/mail_tracking/models/mail_thread.py:41
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_cc
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
+#, python-format
+msgid "Cc"
+msgstr ""
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -176,6 +191,13 @@ msgstr "Correu electrònic rebotat"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_score
 msgid "Email Score"
+msgstr "Puntuació del correu electrònic"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_thread
+#, fuzzy
+#| msgid "Email Score"
+msgid "Email Thread"
 msgstr "Puntuació del correu electrònic"
 
 #. module: mail_tracking
@@ -325,7 +347,7 @@ msgstr "Missatge"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:88
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:126
 #, python-format
 msgid "Message tracking"
 msgstr "Seguiment del correu"
@@ -441,6 +463,13 @@ msgid "State"
 msgstr "Estat"
 
 #. module: mail_tracking
+#. openerp-web
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:96
+#, python-format
+msgid "Status: unknown"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__name
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Subject"
@@ -456,7 +485,7 @@ msgstr "Temps"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:47
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:53
 #, python-format
 msgid "To:"
 msgstr "Per:"
@@ -482,7 +511,7 @@ msgstr "Seguiment dels esdeveniments"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:68
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:106
 #, python-format
 msgid "Tracking partner"
 msgstr "Seguiment de l'empresa"
