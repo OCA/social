@@ -43,6 +43,12 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_mail_compose_message_email_cc
+#: model:ir.model.fields,help:mail_tracking.field_mail_message_email_cc
+msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
 msgstr ""
@@ -60,6 +66,15 @@ msgstr ""
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Bounced"
+msgstr ""
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_thread.py:36
+#: code:addons/mail_tracking/models/mail_thread.py:41
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message_email_cc
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_message_email_cc
+#, python-format
+msgid "Cc"
 msgstr ""
 
 #. module: mail_tracking
@@ -155,6 +170,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_email_score
 #, fuzzy
 msgid "Email Score"
+msgstr "Eposta"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_thread
+#, fuzzy
+msgid "Email Thread"
 msgstr "Eposta"
 
 #. module: mail_tracking
@@ -406,6 +427,13 @@ msgid "State"
 msgstr "Durum"
 
 #. module: mail_tracking
+#. openerp-web
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:98
+#, python-format
+msgid "Status: unknown"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_name
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Subject"
@@ -421,7 +449,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:46
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:52
 #, python-format
 msgid "To:"
 msgstr ""
