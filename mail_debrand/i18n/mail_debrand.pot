@@ -19,6 +19,11 @@ msgid "Email Templates"
 msgstr ""
 
 #. module: mail_debrand
+#: model:ir.model,name:mail_debrand.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_debrand
 #: code:addons/mail_debrand/models/mail_template.py:15
 #, python-format
 msgid "Odoo"
