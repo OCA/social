@@ -138,8 +138,10 @@ class TestMailTracking(TransactionCase):
         self.assertFalse(email_cc[1])
         # suggested recipients
         recipients = self.recipient.message_get_suggested_recipients()
-        self.assertEqual(recipients[self.recipient.id][0][1],
-                         'unnamed@test.com')
+        suggested_mails = {
+            email[1] for email in recipients[self.recipient.id]
+        }
+        self.assertTrue('unnamed@test.com' in suggested_mails)
         self.assertEqual(len(recipients[self.recipient.id][0]), 3)
         # Repeated Cc recipients
         message = self.env['mail.message'].create({
