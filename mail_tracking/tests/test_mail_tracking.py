@@ -140,6 +140,21 @@ class TestMailTracking(TransactionCase):
         recipients = self.recipient.message_get_suggested_recipients()
         self.assertEqual(recipients[self.recipient.id][0][1],
                          'unnamed@test.com')
+        self.assertEqual(len(recipients[self.recipient.id][0]), 3)
+        # Repeated Cc recipients
+        message = self.env['mail.message'].create({
+            'subject': 'Message test',
+            'author_id': self.sender.id,
+            'email_from': self.sender.email,
+            'message_type': 'comment',
+            'model': 'res.partner',
+            'res_id': self.recipient.id,
+            'partner_ids': [(4, self.recipient.id)],
+            'email_cc': 'unnamed@test.com, sender@example.com',
+            'body': '<p>This is another test message</p>',
+        })
+        recipients = self.recipient.message_get_suggested_recipients()
+        self.assertEqual(len(recipients[self.recipient.id][0]), 3)
 
     def mail_send(self, recipient):
         mail = self.env['mail.mail'].create({
