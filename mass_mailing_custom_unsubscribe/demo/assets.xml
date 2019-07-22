@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+<template id="assets_frontend_demo"
+          inherit_id="web.assets_frontend">
+    <xpath expr=".">
+        <script type="text/javascript"
+                src="/mass_mailing_custom_unsubscribe/static/src/js/contact.tour.js"/>
+        <script type="text/javascript"
+                src="/mass_mailing_custom_unsubscribe/static/src/js/partner.tour.js"/>
+    </xpath>
+</template>
+
+<!--This is set here to make tours work-->
+<template id="mass_mailing_custom_unsubscribe.layout"
+          inherit_id="mass_mailing.layout">
+    <xpath expr="//t[@t-set='head']" position="inside">
+        <t t-call="web.assets_frontend"/>
+    </xpath>
+</template>
+
+</odoo>
