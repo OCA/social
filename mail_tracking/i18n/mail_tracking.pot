@@ -308,7 +308,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:126
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:135
 #, python-format
 msgid "Message tracking"
 msgstr ""
@@ -472,7 +472,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:106
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:115
 #, python-format
 msgid "Tracking partner"
 msgstr ""
