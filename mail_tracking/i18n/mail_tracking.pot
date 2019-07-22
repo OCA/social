@@ -54,8 +54,8 @@ msgid "Bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_thread.py:36
-#: code:addons/mail_tracking/models/mail_thread.py:41
+#: code:addons/mail_tracking/models/mail_thread.py:39
+#: code:addons/mail_tracking/models/mail_thread.py:43
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_cc
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
