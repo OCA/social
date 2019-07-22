@@ -22,6 +22,15 @@ odoo.define('mail_tracking.partner_tracking', function(require){
         hasPartnerTrackings: function () {
             return false;
         },
+
+        /**
+         * Messages do not have any email Cc values.
+         *
+         * @return {boolean}
+         */
+        hasEmailCc: function () {
+            return false;
+        },
     });
 
     Message.include({
