@@ -118,9 +118,7 @@ class TestMailActivityTeam(TransactionCase):
             self.assertFalse(self.team2.user_id)
 
     def test_activity_count(self):
-        res = self.env['res.users'].with_context(
+        res = self.env['res.users'].sudo(self.employee.id).with_context(
             {'team_activities': True}
-        ).activity_user_count(
-            user_id=self.employee.id
-        )
+        ).systray_get_activities()
         self.assertEqual(res[0]['total_count'], 0)

@@ -10,9 +10,6 @@
                 </div>
             </div>
         </t>
-<!--        <t t-jquery=".o_notification_counter" t-operation="replace">-->
-<!--            <span class="o_new_notification_counter badge badge-pill"/>-->
-<!--        </t>-->
     </t>
 
 </templates>

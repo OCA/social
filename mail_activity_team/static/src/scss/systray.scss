@@ -1,9 +1,0 @@
-.o_mail_systray_item {
-    .o_new_notification_counter {
-        background: $o-brand-primary;
-        color: white;
-        padding: 0em 0.3em;
-        font-size: 0.7em;
-        @include o-position-absolute($top: 20%, $right: 1px);
-    }
-}
