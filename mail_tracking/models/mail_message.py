@@ -51,7 +51,8 @@ class MailMessage(models.Model):
                 recipient = (
                     tracking.partner_id.name or tracking.recipient)
                 partner_trackings.append((
-                    status, tracking.id, recipient, tracking.partner_id.id))
+                    status, tracking.id, recipient, tracking.partner_id.id,
+                    tracking.partner_id.email))
                 if tracking.partner_id:
                     partners_already |= tracking.partner_id
             # Search all recipients for this message
@@ -87,7 +88,7 @@ class MailMessage(models.Model):
                 for partner in partners:
                     email_cc_list.discard(partner.email)
                     email_cc_list_checked.append(
-                        (partner.email, [partner.id, partner.display_name]))
+                        (partner.email, [partner.id, partner.name]))
                 for email in email_cc_list:
                     email_cc_list_checked.append((email, False))
             res.update({
