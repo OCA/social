@@ -115,6 +115,25 @@ class TestMailTracking(TransactionCase):
         tracking_email.event_create('open', metadata)
         self.assertEqual(tracking_email.state, 'opened')
 
+    def _check_partner_trackings(self, message):
+        message_dict = message.message_format()[0]
+        self.assertEqual(len(message_dict['partner_trackings']), 3)
+        # mail cc
+        foundPartner = False
+        foundNoPartner = False
+        for tracking in message_dict['partner_trackings']:
+            if tracking[3] == self.sender.id:
+                foundPartner = True
+                self.assertTrue(tracking[4])
+            elif tracking[2] == 'unnamed@test.com':
+                foundNoPartner = True
+                self.assertFalse(tracking[3])
+                self.assertTrue(tracking[4])
+            elif tracking[3] == self.recipient.id:
+                self.assertFalse(tracking[4])
+        self.assertTrue(foundPartner)
+        self.assertTrue(foundNoPartner)
+
     def test_email_cc(self):
         message = self.env['mail.message'].create({
             'subject': 'Message test',
@@ -127,17 +146,7 @@ class TestMailTracking(TransactionCase):
             'email_cc': 'unnamed@test.com, sender@example.com',
             'body': '<p>This is a test message</p>',
         })
-
-        message_dict = message.message_format()[0]
-        self.assertEqual(len(message_dict['email_cc']), 2)
-        # mail cc
-        # 'mail.message' First check Cc with res.partner
-        email_cc = message_dict['email_cc'][0]
-        self.assertEqual(email_cc[0], 'sender@example.com')
-        self.assertTrue(email_cc[1])
-        email_cc = message_dict['email_cc'][1]
-        self.assertEqual(email_cc[0], 'unnamed@test.com')
-        self.assertFalse(email_cc[1])
+        self._check_partner_trackings(message)
         # suggested recipients
         recipients = self.recipient.message_get_suggested_recipients()
         suggested_mails = {
@@ -154,11 +163,13 @@ class TestMailTracking(TransactionCase):
             'model': 'res.partner',
             'res_id': self.recipient.id,
             'partner_ids': [(4, self.recipient.id)],
-            'email_cc': 'unnamed@test.com, sender@example.com',
+            'email_cc': 'unnamed@test.com, sender@example.com'
+                        ', recipient@example.com',
             'body': '<p>This is another test message</p>',
         })
         recipients = self.recipient.message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id][0]), 3)
+        self._check_partner_trackings(message)
 
     def test_failed_message(self):
         # Create message

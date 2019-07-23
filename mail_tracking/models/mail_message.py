@@ -59,14 +59,21 @@ class MailMessage(models.Model):
             trackings = self.env['mail.tracking.email'].sudo().search([
                 ('mail_message_id', '=', message.id),
             ])
+            # Get Cc recipients
+            email_cc_list = email_split(message.email_cc)
+            if any(email_cc_list):
+                partners |= partners.search([('email', 'in', email_cc_list)])
+            email_cc_list = set(email_cc_list)
             # Search all trackings for this message
             for tracking in trackings:
                 status = self._partner_tracking_status_get(tracking)
                 recipient = (
                     tracking.partner_id.name or tracking.recipient)
                 partner_trackings.append((
-                    status, tracking.id, recipient, tracking.partner_id.id))
+                    status, tracking.id, recipient, tracking.partner_id.id,
+                    False))
                 if tracking.partner_id:
+                    email_cc_list.discard(tracking.partner_id.email)
                     partners_already |= tracking.partner_id
             # Search all recipients for this message
             if message.partner_ids:
@@ -77,47 +84,18 @@ class MailMessage(models.Model):
             partners -= partners_already
             for partner in partners:
                 # If there is partners not included, then status is 'unknown'
-                partner_trackings.append((
-                    'unknown', False, partner.name, partner.id, partner.email))
-            res[message.id] = partner_trackings
-        return res
-
-    @api.multi
-    def _get_email_cc(self):
-        """This method gets all Cc mails and the associated partner if exist.
-            The result is a dictionary by 'message id' with a list of tuples
-            (str:email_cc, list:[partner id, partner display_name] or False)
-        """
-        res = {}
-        ResPartnerObj = self.env['res.partner']
-        for message in self:
-            email_cc_list = email_split(message.email_cc)
-            email_cc_list_checked = []
-            if any(email_cc_list):
-                partners = ResPartnerObj.search([
-                    ('email', 'in', email_cc_list)
-                ])
-                email_cc_list = set(email_cc_list)
-                for partner in partners:
+                # Because can be an Cc recipinet
+                isCc = False
+                if partner.email in email_cc_list:
                     email_cc_list.discard(partner.email)
-                    email_cc_list_checked.append(
-                        (partner.email, [partner.id, partner.display_name]))
-                for email in email_cc_list:
-                    email_cc_list_checked.append((email, False))
-            res.update({
-                message.id: email_cc_list_checked
-            })
-        return res
-
-    @api.multi
-    def _get_failed_message(self):
-        res = {}
-        for message in self:
-            res.update({
-                message.id: message.mail_tracking_needs_action
-                and bool(message.mail_tracking_ids.filtered(
-                    lambda x: x.state in self.get_failed_states()))
-            })
+                    isCc = True
+                partner_trackings.append((
+                    'unknown', False, partner.name, partner.id, isCc))
+            for email in email_cc_list:
+                # If there is Cc without partner
+                partner_trackings.append((
+                    'unknown', False, email, False, True))
+            res[message.id] = partner_trackings
         return res
 
     @api.model
@@ -127,16 +105,16 @@ class MailMessage(models.Model):
         mail_message_ids = {m.get('id') for m in messages if m.get('id')}
         mail_messages = self.browse(mail_message_ids)
         partner_trackings = mail_messages.tracking_status()
-        email_cc = mail_messages._get_email_cc()
         failed_message = mail_messages._get_failed_message()
         for message_dict in messages:
             mail_message_id = message_dict.get('id', False)
             if mail_message_id:
                 message_dict.update({
                     'partner_trackings': partner_trackings[mail_message_id],
-                    'email_cc': email_cc[mail_message_id],
                     'failed_message': failed_message[mail_message_id],
                 })
+                message_dict['partner_trackings'] = \
+                    partner_trackings[mail_message_id]
         return res
 
     @api.model
@@ -200,5 +178,4 @@ class MailMessage(models.Model):
                               user_signature=user_signature)
         if hide_followers:
             self_sudo.subtype_id = orig_subtype_id
-
         return res
