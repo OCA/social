@@ -5,9 +5,10 @@ import werkzeug
 from psycopg2 import OperationalError
 from odoo import api, http, registry, SUPERUSER_ID
 import logging
+import base64
 _logger = logging.getLogger(__name__)
 
-BLANK = b'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+BLANK = 'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 
 def _env_get(db, callback, tracking_id, event_type, **kw):
@@ -82,5 +83,5 @@ class MailTrackingController(http.Controller):
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()
         response.mimetype = 'image/gif'
-        response.data = BLANK
+        response.data = base64.b64decode(BLANK)
         return response
