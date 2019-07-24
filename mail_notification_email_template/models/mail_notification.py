@@ -68,3 +68,7 @@ class MailNotification(models.Model):
             )
             for a in etree.HTML(link_html or '<html/>').xpath('//a[@href]'):
                 this.record_access_link = a.get('href')
+
+    @api.model
+    def _get_access_link(self, mail, partner):
+        return self.env['mail.thread']._get_access_link(mail, partner)
