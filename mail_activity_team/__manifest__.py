@@ -14,6 +14,7 @@
         'mail_activity_board',
     ],
     'data': [
+        'views/calendar_event.xml',
         'views/assets_backend.xml',
         'security/ir.model.access.csv',
         'security/mail_activity_team_security.xml',

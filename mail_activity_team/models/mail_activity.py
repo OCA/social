@@ -72,3 +72,9 @@ class MailActivity(models.Model):
                     activity.user_id not in activity.team_id.member_ids:
                 raise ValidationError(
                     _('The assigned user is not member of the team.'))
+
+    @api.multi
+    def action_create_calendar_event(self):
+        res = super().action_create_calendar_event()
+        res['context']['default_team_id'] = self.team_id.id or False
+        return res
