@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="view_calendar_event_form">
+        <field name="name">calendar.event.form (in mail_activity_team)</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_form"/>
+        <field name="arch" type="xml">
+            <field name="privacy" position="after">
+                <field name="team_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_calendar_event_search">
+        <field name="name">calendar.event.search</field>
+        <field name="model">calendar.event</field>
+        <field name="inherit_id" ref="calendar.view_calendar_event_search"/>
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="team_id"/>
+            </field>
+            <filter name="mymeetings" position="after">
+                <filter string="My Team Meetings" help="My Team Meetings"
+                        name="team_meetings"
+                        domain="[('team_id.member_ids', '=', uid)]"/>
+            </filter>
+        </field>
+    </record>
+
+
+</odoo>

@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import ValidationError
+from odoo.fields import Datetime
+from datetime import timedelta
 
 
 class TestMailActivityTeam(TransactionCase):
@@ -74,6 +76,56 @@ class TestMailActivityTeam(TransactionCase):
             'res_model_id': self.partner_ir_model.id,
             'user_id': self.employee.id,
         })
+
+        self.act3 = self.env['mail.activity'].sudo(self.employee).create({
+            'activity_type_id': self.browse_ref(
+                'mail.mail_activity_data_meeting').id,
+            'note': 'Meeting activity 3.',
+            'res_id': self.partner_client.id,
+            'res_model_id': self.partner_ir_model.id,
+            'user_id': self.employee.id,
+            'team_id': self.team1.id,
+            'summary': 'Metting activity'
+        })
+        self.start = Datetime.now()
+        self.stop = Datetime.to_string(
+            Datetime.from_string(self.start) + timedelta(hours=1)
+        )
+
+    def test_meeting_blank(self):
+        meeting = self.env['calendar.event'].sudo(self.employee).create({
+            'start': self.start,
+            'stop': self.stop,
+            'name': 'Test meeting'
+        })
+        self.assertTrue(meeting.team_id)
+
+    def test_meeting_from_activity(self):
+        action = self.act3.with_context(
+            default_res_id=self.act3.res_id,
+            default_res_model=self.act3.res_model,
+        ).action_create_calendar_event()
+
+        meeting = self.env['calendar.event'].sudo(self.employee).with_context(
+            **action['context']
+        ).create({
+            'start': self.start,
+            'stop': self.stop
+        })
+        self.assertTrue(meeting.team_id)
+        self.assertTrue(meeting.read(['description'])[0]['description'])
+        self.assertTrue(
+            meeting.sudo(self.employee2).read(
+                ['description'])[0]['description'],
+            'He should be able to read the record as it is public by default',
+        )
+        meeting.write({'privacy': 'team'})
+        self.assertFalse(
+            meeting.sudo(self.employee2).read(
+                ['description'])[0]['description'],
+            'He shouldn\'t be able to read the record as it is '
+            'public by default',
+        )
 
     def test_missing_activities(self):
         self.assertFalse(
