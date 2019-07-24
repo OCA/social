@@ -5,7 +5,7 @@
 <template>
 
 <t t-name="mail.tracking.status">
-    <t t-if="isCc">
+    <t t-if="tracking[4]">
         <span class="mail_tracking_cc">
             <i class="fa fa-cc"></i>
         </span>
@@ -51,55 +51,24 @@
         <p class="o_mail_tracking">
             <strong>To:</strong>
             <t t-foreach="message.partner_trackings" t-as="tracking">
-                <t t-set="isCc" t-value="false" />
-                <t t-foreach="message.email_cc" t-as="cc">
-                    <t t-if="!tracking[1] and cc[0] === tracking[4]" t-set="isCc" t-value="true" />
-                </t>
                 <t t-if="!tracking_first">
                       -
                 </t>
                 <t t-if="tracking[3]">
-                    <a t-attf-class="o_mail_action_tracking_partner #{isCc ? 'o_mail_cc' : ''}"
+                    <a t-attf-class="o_mail_action_tracking_partner #{tracking[4] ? 'o_mail_cc' : ''}"
                        t-att-data-partner="tracking[3]"
                        t-attf-href="#model=res.partner&amp;id=#{tracking[3]}">
                         <t t-esc="tracking[2]"/>
                     </a>
                 </t>
                 <t t-if="!tracking[3]">
-                    <span><t t-esc="tracking[2]"/></span>
+                    <span t-attf-class="#{tracking[4] ? 'o_mail_cc' : ''}"><t t-esc="tracking[2]"/></span>
                 </t>
                 <span class="mail_tracking o_mail_action_tracking_status"
                       t-att-data-tracking="tracking[1]"
                       t-attf-title="Status: #{tracking[0]}">
                     <t t-call="mail.tracking.status"/>
                 </span>
-            </t>
-
-            <t t-foreach="message.email_cc" t-as="cc">
-                <t t-set="needPrint" t-value="true" />
-                <t t-foreach="message.partner_trackings" t-as="tracking">
-                    <t t-if="cc[0] === tracking[4]" t-set="needPrint" t-value="false" />
-                </t>
-                <t t-if="needPrint">
-                    <t t-if="!cc_first">
-                          -
-                    </t>
-                    <t t-set="isCc" t-value="true" />
-                    <t t-if="cc[1]">
-                        <a t-attf-class="o_mail_action_tracking_partner o_mail_cc"
-                           t-att-data-partner="cc[1][0]"
-                           t-attf-href="#model=res.partner&amp;id=#{cc[1][0]}">
-                            <t t-esc="cc[1][1]"/>
-                        </a>
-                    </t>
-                    <t t-else="">
-                        <span class="o_mail_cc"><t t-esc="cc[0]" /></span>
-                    </t>
-                    <span class="mail_tracking"
-                          title="Status: unknown">
-                          <t t-call="mail.tracking.status"/>
-                    </span>
-                </t>
             </t>
         </p>
     </t>
