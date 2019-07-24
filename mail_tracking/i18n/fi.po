@@ -69,8 +69,8 @@ msgid "Bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_thread.py:36
-#: code:addons/mail_tracking/models/mail_thread.py:41
+#: code:addons/mail_tracking/models/mail_thread.py:39
+#: code:addons/mail_tracking/models/mail_thread.py:43
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_cc
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
@@ -328,7 +328,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:126
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:135
 #, python-format
 msgid "Message tracking"
 msgstr ""
@@ -493,7 +493,7 @@ msgstr "Seurattavat tapahtumat"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:106
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:115
 #, python-format
 msgid "Tracking partner"
 msgstr ""
