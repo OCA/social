@@ -4,6 +4,7 @@
 import mock
 from odoo.tools import mute_logger
 import time
+import base64
 from odoo import http
 from odoo.tests.common import TransactionCase
 from ..controllers.main import MailTrackingController, BLANK
@@ -175,7 +176,7 @@ class TestMailTracking(TransactionCase):
     def test_mail_send(self):
         controller = MailTrackingController()
         db = self.env.cr.dbname
-        image = BLANK
+        image = base64.b64decode(BLANK)
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
