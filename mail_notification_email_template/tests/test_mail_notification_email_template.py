@@ -15,6 +15,7 @@ class TestMailNotificationEmailTemplate(TransactionCase):
         demo_partner_mails = self.env['mail.mail'].search([
             ('recipient_ids', '=', demo_partner.id),
         ])
+        # pylint: disable=translation-required
         self.env.ref('mail.group_all_employees').message_post(
             body='hello world', type='comment', subtype='mail.mt_comment')
         notifications = self.env['mail.mail'].search([
