@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import mock
+from openerp.tools.misc import mute_logger
 from openerp.tests.common import TransactionCase
 from openerp.exceptions import Warning as UserError
 
@@ -56,7 +57,8 @@ class TestMassMailing(TransactionCase):
     def test_smtp_error(self):
         with mock.patch(mock_send_email) as mock_func:
             mock_func.side_effect = Warning('Test error')
-            self.mailing.send_mail()
+            with mute_logger('openerp.addons.mail.mail_mail'):
+                self.mailing.send_mail()
             for stat in self.mailing.statistics_ids:
                 if stat.mail_mail_id:
                     stat.mail_mail_id.send()
