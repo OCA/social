@@ -20,7 +20,7 @@ Known issues / Roadmap
 ======================
 
 * Add a second boolean into the partner form in order to manage the added
-partners with an other field than 'notify_email'
+  partners with an other field than 'notify_email'
 
 Bug Tracker
 ===========

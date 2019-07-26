@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # © 2016 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from mock import patch
 from openerp.tests.common import TransactionCase
 
 
@@ -14,6 +15,7 @@ class TestMailNotificationEmailTemplate(TransactionCase):
         demo_partner_mails = self.env['mail.mail'].search([
             ('recipient_ids', '=', demo_partner.id),
         ])
+        # pylint: disable=translation-required
         self.env.ref('mail.group_all_employees').message_post(
             body='hello world', type='comment', subtype='mail.mt_comment')
         notifications = self.env['mail.mail'].search([
@@ -22,3 +24,9 @@ class TestMailNotificationEmailTemplate(TransactionCase):
         self.assertTrue(notifications)
         # check that our template was used
         self.assertTrue('<h2>Dear ' in n.body for n in notifications)
+        # check we can actually send our mail
+        with patch.object(
+                self.env['ir.mail_server'].__class__, 'send_email'
+        ) as mock_send_email:
+            notifications.send()
+            mock_send_email.assert_called()
