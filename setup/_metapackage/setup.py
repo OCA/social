@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo12-addon-mass_mailing_partner',
         'odoo12-addon-mass_mailing_resend',
         'odoo12-addon-mass_mailing_unique',
+        'odoo12-addon-message_auto_subscribe_notify_own',
         'odoo12-addon-website_mass_mailing_name',
     ],
     classifiers=[
