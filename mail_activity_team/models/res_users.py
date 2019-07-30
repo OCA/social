@@ -60,7 +60,8 @@ class ResUsers(models.Model):
             if activity['states'] in ('today', 'overdue'):
                 user_activities[activity['model']]['total_count'] += activity[
                     'count']
-            if activity['user_id'] == user:
+            if activity['user_id'] == user and \
+                    activity['states'] in ('today', 'overdue'):
                 user_activities[
                     activity['model']
                 ]['total_count'] -= activity['count']
