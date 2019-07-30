@@ -26,7 +26,7 @@
                                            required="0"/>
                                     <field name="model" invisible="1"/>
                                     <field name="substitution_mail_template_id"
-                                           domain="[('id', '!=', parent.id)]"/>
+                                           domain="[('model', '=', model), ('id', '!=', parent.id)]"/>
                                 </group>
                                 <group>
                                     <field name="domain" widget="domain"
