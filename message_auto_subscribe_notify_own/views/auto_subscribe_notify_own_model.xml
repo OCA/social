@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record model="ir.ui.view" id="view_auto_subscribe_notify_own_model_tree">
+            <field name="name">auto.subscribe.notify.own.model.tree</field>
+            <field name="model">auto.subscribe.notify.own.model</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+                <tree string="Self Subscribe Notify Own" editable="bottom" create="true">
+                    <field name="name"/>
+                    <field name="model_id" domain="[('is_mail_thread','=', True)]"/>
+                    <field name="active"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="action_view_auto_subscribe_notify_own_model">
+            <field name="name">Notify Own Models</field>
+            <field name="res_model">auto.subscribe.notify.own.model</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <menuitem name="Notify Own Models" id="menu_message_auto_subscribe_notify_own_model" parent="base.menu_email" action="action_view_auto_subscribe_notify_own_model"/>
+    </data>
+</odoo>
