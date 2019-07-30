@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV,"
               "Odoo Community Association (OCA)",
     "website": "https://github.com/acsone/social",
-    "depends": ["base", "mail"],
+    "depends": ["base", "mail", "report_substitute"],
     "data": [
         "security/mail_template_substitution_rule.xml",
         "views/mail_template.xml",
