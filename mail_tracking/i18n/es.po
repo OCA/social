@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2019-08-04 17:44+0000\n"
+"Last-Translator: eduardgm <eduard.garcia@qubiq.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
@@ -51,22 +52,22 @@ msgstr ""
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Bounce"
-msgstr ""
+msgstr "Rebote"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__bounce_description
 msgid "Bounce description"
-msgstr ""
+msgstr "Descripción del rebote"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__bounce_type
 msgid "Bounce type"
-msgstr ""
+msgstr "Tipo de rebote"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
 msgid "Bounced"
-msgstr ""
+msgstr "Rebotado"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_thread.py:39
@@ -80,22 +81,22 @@ msgstr ""
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
-msgstr ""
+msgstr "Clic"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
 msgid "Clicked"
-msgstr ""
+msgstr "Clicado"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__url
 msgid "Clicked URL"
-msgstr ""
+msgstr "URL Clicada"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
@@ -152,7 +153,7 @@ msgstr "Nombre mostrado"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__display_name
 msgid "Display name"
-msgstr ""
+msgstr "Nombre mostrado"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
