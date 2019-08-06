@@ -20,6 +20,9 @@ class Message(models.Model):
             rec = super(Message, self).write(vals=vals)
         elif not self.filtered(lambda m: user not in m.author_id.user_ids):
             rec = super(Message, self).write(vals=vals)
+        elif self.model == 'crm.lead' and vals.get('subject') and \
+                vals.get('res_id'):
+            rec = super(Message, self).write(vals=vals)
         else:
             raise AccessError(
                 _("Sorry, you are not allowed to modify this document."))
