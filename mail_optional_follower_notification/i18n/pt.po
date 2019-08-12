@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-02 13:17+0000\n"
-"PO-Revision-Date: 2017-12-02 13:17+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>, 2017\n"
+"PO-Revision-Date: 2019-08-12 17:44+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: Portuguese (https://www.transifex.com/oca/teams/23907/pt/)\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Weblate 3.7.1\n"
 
 #. module: mail_optional_follower_notification
 #: model:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_inherit_form
@@ -27,11 +28,15 @@ msgid ""
 "access the notification directly from the document (if they are allowed to)</"
 "span>"
 msgstr ""
+"<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style=\""
+"color: red;\"> - Aviso: os seguidores não serão notificados mas poderão "
+"aceder à notificação diretamente a partir do documento (se para isso tiverem "
+"permissão)</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Assistente de composição de email"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_message
@@ -42,9 +47,9 @@ msgstr "Mensagem"
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message_notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_forward_compose_message_notify_followers
 msgid "Notify followers"
-msgstr ""
+msgstr "Notificar seguidores"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_res_partner
 msgid "Partner"
-msgstr "Entidade"
+msgstr "Parceiro"
