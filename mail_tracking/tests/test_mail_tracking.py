@@ -101,10 +101,11 @@ class TestMailTracking(TransactionCase):
         status = message_dict['partner_trackings'][0]
         # Tracking status must be sent and
         # mail tracking must be the one search before
-        self.assertEqual(status[0], 'sent')
-        self.assertEqual(status[1], tracking_email.id)
-        self.assertEqual(status[2], self.recipient.display_name)
-        self.assertEqual(status[3], self.recipient.id)
+        self.assertEqual(status['status'], 'sent')
+        self.assertEqual(status['tracking_id'], tracking_email.id)
+        self.assertEqual(status['recipient'], self.recipient.display_name)
+        self.assertEqual(status['partner_id'], self.recipient.id)
+        self.assertEqual(status['isCc'], False)
         # And now open the email
         metadata = {
             'ip': '127.0.0.1',
@@ -122,15 +123,15 @@ class TestMailTracking(TransactionCase):
         foundPartner = False
         foundNoPartner = False
         for tracking in message_dict['partner_trackings']:
-            if tracking[3] == self.sender.id:
+            if tracking['partner_id'] == self.sender.id:
                 foundPartner = True
-                self.assertTrue(tracking[4])
-            elif tracking[2] == 'unnamed@test.com':
+                self.assertTrue(tracking['isCc'])
+            elif tracking['recipient'] == 'unnamed@test.com':
                 foundNoPartner = True
-                self.assertFalse(tracking[3])
-                self.assertTrue(tracking[4])
-            elif tracking[3] == self.recipient.id:
-                self.assertFalse(tracking[4])
+                self.assertFalse(tracking['partner_id'])
+                self.assertTrue(tracking['isCc'])
+            elif tracking['partner_id'] == self.recipient.id:
+                self.assertFalse(tracking['isCc'])
         self.assertTrue(foundPartner)
         self.assertTrue(foundNoPartner)
 
