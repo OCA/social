@@ -119,7 +119,6 @@ odoo.define('mail_tracking.partner_tracking', function(require){
         _preprocess_message: function () {
             var msg = this._super.apply(this, arguments);
             msg.partner_trackings = msg.partner_trackings || [];
-            msg.email_cc = msg.email_cc || [];
             var needs_action = msg.track_needs_action;
             var message_track = _.findWhere(messages_tracked_changes, {
                 id: msg.id,
