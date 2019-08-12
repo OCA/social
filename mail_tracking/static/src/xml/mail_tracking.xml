@@ -67,7 +67,7 @@
                     </t>
                     <span class="mail_tracking o_mail_action_tracking_status"
                           t-att-data-tracking="tracking['tracking_id']"
-                          t-attf-title="Status: #{tracking['status']}">
+                          t-att-title="tracking['status_human']">
                         <t t-call="mail.tracking.status"/>
                     </span>
                 </t>
