@@ -69,9 +69,13 @@ class MailMessage(models.Model):
                 status = self._partner_tracking_status_get(tracking)
                 recipient = (
                     tracking.partner_id.name or tracking.recipient)
-                partner_trackings.append((
-                    status, tracking.id, recipient, tracking.partner_id.id,
-                    False))
+                partner_trackings.append({
+                    'status': status,
+                    'tracking_id': tracking.id,
+                    'recipient': recipient,
+                    'partner_id': tracking.partner_id.id,
+                    'isCc': False,
+                })
                 if tracking.partner_id:
                     email_cc_list.discard(tracking.partner_id.email)
                     partners_already |= tracking.partner_id
@@ -84,17 +88,27 @@ class MailMessage(models.Model):
             partners -= partners_already
             for partner in partners:
                 # If there is partners not included, then status is 'unknown'
-                # Because can be an Cc recipinet
+                # Because can be an Cc recipient
                 isCc = False
                 if partner.email in email_cc_list:
                     email_cc_list.discard(partner.email)
                     isCc = True
-                partner_trackings.append((
-                    'unknown', False, partner.name, partner.id, isCc))
+                partner_trackings.append({
+                    'status': 'unknown',
+                    'tracking_id': False,
+                    'recipient': partner.name,
+                    'partner_id': partner.id,
+                    'isCc': isCc,
+                })
             for email in email_cc_list:
                 # If there is Cc without partner
-                partner_trackings.append((
-                    'unknown', False, email, False, True))
+                partner_trackings.append({
+                    'status': 'unknown',
+                    'tracking_id': False,
+                    'recipient': email,
+                    'partner_id': False,
+                    'isCc': True,
+                })
             res[message.id] = partner_trackings
         return res
 
