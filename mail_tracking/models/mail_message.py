@@ -2,7 +2,7 @@
 # Copyright 2019 Alexandre Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, api, fields
+from odoo import _, models, api, fields
 from odoo.tools import email_split
 
 
@@ -50,6 +50,12 @@ class MailMessage(models.Model):
             status = tracking_status_map.get(tracking_email_status, 'unknown')
         return status
 
+    def _partner_tracking_status_human_get(self, status):
+        statuses = {'waiting': _('Waiting'), 'error': _('Error'),
+                    'sent': _('Sent'), 'delivered': _('Delivered'),
+                    'opened': _('Opened'), 'unknown': _('Unknown')}
+        return _("Status: %s") % statuses[status]
+
     def tracking_status(self):
         res = {}
         for message in self:
@@ -71,6 +77,8 @@ class MailMessage(models.Model):
                     tracking.partner_id.name or tracking.recipient)
                 partner_trackings.append({
                     'status': status,
+                    'status_human':
+                        self._partner_tracking_status_human_get(status),
                     'tracking_id': tracking.id,
                     'recipient': recipient,
                     'partner_id': tracking.partner_id.id,
@@ -95,6 +103,8 @@ class MailMessage(models.Model):
                     isCc = True
                 partner_trackings.append({
                     'status': 'unknown',
+                    'status_human':
+                        self._partner_tracking_status_human_get('unknown'),
                     'tracking_id': False,
                     'recipient': partner.name,
                     'partner_id': partner.id,
@@ -104,6 +114,8 @@ class MailMessage(models.Model):
                 # If there is Cc without partner
                 partner_trackings.append({
                     'status': 'unknown',
+                    'status_human':
+                        self._partner_tracking_status_human_get('unknown'),
                     'tracking_id': False,
                     'recipient': email,
                     'partner_id': False,
