@@ -1,0 +1,117 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_activity_board
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-01-31 14:04+0000\n"
+"Last-Translator: Thorsten Vocks <thorsten.vocks@big-consulting.net>\n"
+"Language-Team: none\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.4\n"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Act. next 6 months"
+msgstr "Akt. nächste 6 Mon."
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Act. next month"
+msgstr "Akt. nächster Monat"
+
+#. module: mail_activity_board
+#. openerp-web
+#: code:addons/mail_activity_board/static/src/xml/inherit_chatter.xml:8
+#: model:ir.actions.act_window,name:mail_activity_board.open_boards_activities
+#: model:ir.ui.menu,name:mail_activity_board.board_menu_activities
+#, python-format
+msgid "Activities"
+msgstr "Aktivitäten"
+
+#. module: mail_activity_board
+#: model:ir.model,name:mail_activity_board.model_mail_activity
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Activity"
+msgstr "Aktivität"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Activity Form"
+msgstr "Aktivität Formular"
+
+#. module: mail_activity_board
+#: model:ir.model,name:mail_activity_board.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity_calendar_event_id_partner_ids
+msgid "Attendees"
+msgstr "Teilnehmer"
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity_duration
+msgid "Duration"
+msgstr "Dauer"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Log a note..."
+msgstr "Notiz eingeben ..."
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity_res_model_id_name
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Origin"
+msgstr "Ursprung"
+
+#. module: mail_activity_board
+#. openerp-web
+#: code:addons/mail_activity_board/static/src/xml/inherit_chatter.xml:7
+#, python-format
+msgid "See activities list"
+msgstr "Aktivitätenliste öffnen"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Show activities scheduled for next 6 months."
+msgstr "Geplante Aktivitäten der kommenden 6 Monate anzeigen."
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Show activities scheduled for next month."
+msgstr "Aktivitäten des kommenden Monats anzeigen."
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity_calendar_event_id_start
+msgid "Start"
+msgstr "Start"
+
+#. module: mail_activity_board
+#: model:ir.model.fields,help:mail_activity_board.field_mail_activity_calendar_event_id_start
+msgid "Start date of an event, without time for full days events"
+msgstr ""
+"Start Datum der Veranstaltung, ohne Uhrzeitangabe für ganztägige "
+"Veranstaltungen"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Start meeting"
+msgstr "Meeetingbeginn"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "User"
+msgstr "Benutzer"
+
+#. module: mail_activity_board
+#: model:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "e.g. Discuss proposal"
+msgstr "z.B. Angebotsbesprechung"

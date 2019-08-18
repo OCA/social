@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:88
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:89
 #, python-format
 msgid ""
 "%s couldn't be verified. Either the request couln't be completed or the "
@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:78
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:79
 #, python-format
 msgid ""
 "%s failed the mailbox verification. Please check it in order to avoid "
@@ -35,7 +35,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:69
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:70
 #, python-format
 msgid ""
 "%s is not a valid email address. Please check it in order to avoid sending "
@@ -43,7 +43,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:75
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:76
 #, python-format
 msgid "A Mailgun domain value is needed!"
 msgstr ""
@@ -64,7 +64,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:238
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:240
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr ""
@@ -79,13 +79,13 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:56
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:57
 #, python-format
 msgid "Error %s trying to check mailof connection"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:242
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:244
 #, python-format
 msgid "Event information not longer stored"
 msgstr ""
@@ -106,7 +106,7 @@ msgid "Mailgun"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:63
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:64
 #, python-format
 msgid "Mailgun Error. Mailbox verification value wasn't returned"
 msgstr ""
@@ -133,7 +133,7 @@ msgid "There is no Mailgun API key!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:225
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:227
 #, python-format
 msgid "There is no tracked message!"
 msgstr ""

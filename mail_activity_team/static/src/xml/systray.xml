@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="mail.chat.ActivityMenu">
+        <t t-jquery=".o_mail_navbar_dropdown_channels" t-operation="before">
+            <li class="o_mail_navbar_dropdown_top">
+                <div>
+                    <button type="button" class="btn btn-sm o_filter_button active" data-filter='my'> My Activities </button>
+                    <button type="button" class="btn btn-sm o_filter_button" data-filter='team'> Team Activities </button>
+                </div>
+            </li>
+        </t>
+        <t t-jquery=".o_notification_counter" t-operation="replace">
+            <span class="o_new_notification_counter badge"/>
+        </t>
+    </t>
+
+</templates>

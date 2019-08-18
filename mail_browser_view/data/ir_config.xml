@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+  <record id="token_expiration_hours" model="ir.config_parameter">
+    <field name="key">mail_browser_view.token_expiration_hours</field>
+    <field name="value">720</field>
+  </record>
+</odoo>

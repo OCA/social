@@ -26,12 +26,14 @@ msgstr "Tema del Correu electrònic "
 
 #. module: base_search_mail_content
 #: code:addons/base_search_mail_content/models/mail_thread.py:53
+#: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_channel_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mass_mailing_contact_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_simple_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_unsubscription_message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_message_auto_subscribe_notify_own_test_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner_message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_users_message_content
 #, python-format
@@ -39,12 +41,14 @@ msgid "Message Content"
 msgstr ""
 
 #. module: base_search_mail_content
+#: model:ir.model.fields,help:base_search_mail_content.field_calendar_event_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_channel_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_mass_mailing_contact_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test_simple_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_unsubscription_message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_message_auto_subscribe_notify_own_test_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner_message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_users_message_content
 msgid "Message content, to be used only in searches"

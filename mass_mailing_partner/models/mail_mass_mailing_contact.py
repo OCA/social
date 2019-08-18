@@ -43,6 +43,11 @@ class MailMassMailingContact(models.Model):
         record = self.new(vals)
         if not record.partner_id:
             record._set_partner()
+            # HACK: if creating partner record is needed, `list_ids` and
+            # `tag_ids` fields are reset in `record`, so we recreate it as ugly
+            # workaround while no clue about Odoo glitch
+            vals['partner_id'] = record.partner_id.id
+            record = self.new(vals)
         record._onchange_partner_mass_mailing_partner()
         new_vals = record._convert_to_write(record._cache)
         return super(MailMassMailingContact, self).create(new_vals)
