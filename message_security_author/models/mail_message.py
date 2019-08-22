@@ -23,6 +23,8 @@ class Message(models.Model):
         elif self.model == 'crm.lead' and vals.get('subject') and \
                 vals.get('res_id'):
             rec = super(Message, self).write(vals=vals)
+        elif self.model == 'mail.channel' and vals.get('channel_ids'):
+            rec = super(Message, self).write(vals=vals)
         else:
             raise AccessError(
                 _("Sorry, you are not allowed to modify this document."))
