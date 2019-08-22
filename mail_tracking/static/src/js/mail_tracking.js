@@ -17,7 +17,6 @@ odoo.define('mail_tracking.partner_tracking', function (require) {
     chat_manager.make_message = function (data) {
         var msg = this._make_message_super(data);
         msg.partner_trackings = data.partner_trackings || [];
-        msg.email_cc = data.email_cc || [];
         return msg;
     };
 
@@ -30,7 +29,6 @@ odoo.define('mail_tracking.partner_tracking', function (require) {
         _preprocess_message: function () {
             var msg = this._super.apply(this, arguments);
             msg.partner_trackings = msg.partner_trackings || [];
-            msg.email_cc = msg.email_cc || [];
             return msg;
         },
         on_tracking_partner_click: function (event) {
