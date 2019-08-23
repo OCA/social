@@ -11,8 +11,8 @@ class MailThread(models.AbstractModel):
 
     @api.multi
     @api.returns('self', lambda value: value.id)
-    def message_post(self, *args, **kwargs):
-        new_message = super().message_post(*args, **kwargs)
+    def message_post(self, **kwargs):
+        new_message = super().message_post(**kwargs)
         email_cc = kwargs.get('cc')
         if email_cc:
             new_message.sudo().write({
