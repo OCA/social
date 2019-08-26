@@ -44,6 +44,8 @@ class MailTrackingEmail(models.Model):
             'bounced': 'hard_bounce',
             'dropped': 'reject',
             'accepted': 'sent',
+            'failed': 'error',
+            'rejected': 'error',
         }
 
     def _mailgun_event_type_verify(self, event):
