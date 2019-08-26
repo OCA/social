@@ -73,6 +73,7 @@ Known issues / Roadmap
 ======================
 
 * There's no support for more than one Mailgun mail server.
+* There's no support for webhooks, only for legacy webhooks
 
 Bug Tracker
 ===========
