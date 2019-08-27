@@ -46,6 +46,12 @@ msgid "Assign to missing activities"
 msgstr ""
 
 #. module: mail_activity_team
+#: code:addons/mail_activity_team/models/calendar_event.py:64
+#, python-format
+msgid "Busy"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team_create_uid
 msgid "Created by"
 msgstr ""
@@ -58,6 +64,11 @@ msgstr ""
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team_display_name
 msgid "Display Name"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_calendar_event
+msgid "Event"
 msgstr ""
 
 #. module: mail_activity_team
@@ -108,11 +119,17 @@ msgid "My Team Activities"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.ui.view,arch_db:mail_activity_team.view_calendar_event_search
+msgid "My Team Meetings"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team_name
 msgid "Name"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_calendar_event_team_id
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team_id_2777
 #: model:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "Team"
