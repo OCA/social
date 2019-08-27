@@ -137,10 +137,12 @@ msgid "Deferred"
 msgstr ""
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:41
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
+#, python-format
 msgid "Delivered"
 msgstr ""
 
@@ -183,8 +185,10 @@ msgid "Email bounced"
 msgstr ""
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:40
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
+#, python-format
 msgid "Error"
 msgstr ""
 
@@ -310,7 +314,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:61
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:59
 #, python-format
 msgid "Message tracking"
 msgstr ""
@@ -335,7 +339,9 @@ msgid "Open"
 msgstr ""
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:42
 #: selection:mail.tracking.email,state:0
+#, python-format
 msgid "Opened"
 msgstr ""
 
@@ -396,10 +402,12 @@ msgid "Sender email"
 msgstr ""
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:41
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
+#, python-format
 msgid "Sent"
 msgstr ""
 
@@ -426,10 +434,9 @@ msgid "State"
 msgstr "状态"
 
 #. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:98
+#: code:addons/mail_tracking/models/mail_message.py:43
 #, python-format
-msgid "Status: unknown"
+msgid "Status: %s"
 msgstr ""
 
 #. module: mail_tracking
@@ -474,7 +481,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:41
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:39
 #, python-format
 msgid "Tracking partner"
 msgstr ""
@@ -493,6 +500,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email_timestamp
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_timestamp
 msgid "UTC timestamp"
+msgstr ""
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:42
+#, python-format
+msgid "Unknown"
 msgstr ""
 
 #. module: mail_tracking
@@ -534,6 +547,12 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_country_id
 msgid "User country"
+msgstr ""
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:40
+#, python-format
+msgid "Waiting"
 msgstr ""
 
 #. module: mail_tracking

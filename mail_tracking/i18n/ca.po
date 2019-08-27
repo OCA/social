@@ -156,10 +156,12 @@ msgid "Deferred"
 msgstr "Ajornat"
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:41
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
+#, python-format
 msgid "Delivered"
 msgstr "Enviat"
 
@@ -204,8 +206,10 @@ msgid "Email bounced"
 msgstr "Correu electrònic rebotat"
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:40
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
+#, python-format
 msgid "Error"
 msgstr "Error"
 
@@ -331,7 +335,7 @@ msgstr "Missatge"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:61
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:59
 #, python-format
 msgid "Message tracking"
 msgstr "Seguiment del correu"
@@ -356,7 +360,9 @@ msgid "Open"
 msgstr "Obre"
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:42
 #: selection:mail.tracking.email,state:0
+#, python-format
 msgid "Opened"
 msgstr "Obert"
 
@@ -417,10 +423,12 @@ msgid "Sender email"
 msgstr "Correu electrònic del remitent"
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:41
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
 #: selection:mail.tracking.event,event_type:0
+#, python-format
 msgid "Sent"
 msgstr "Enviat"
 
@@ -447,10 +455,9 @@ msgid "State"
 msgstr "Estat"
 
 #. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:98
+#: code:addons/mail_tracking/models/mail_message.py:43
 #, python-format
-msgid "Status: unknown"
+msgid "Status: %s"
 msgstr ""
 
 #. module: mail_tracking
@@ -495,7 +502,7 @@ msgstr "Seguiment dels esdeveniments"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:41
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:39
 #, python-format
 msgid "Tracking partner"
 msgstr "Seguiment de l'empresa"
@@ -515,6 +522,12 @@ msgstr "URL"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_timestamp
 msgid "UTC timestamp"
 msgstr "Marca d'hora UTC"
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:42
+#, python-format
+msgid "Unknown"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -557,6 +570,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event_user_country_id
 msgid "User country"
 msgstr "País de l'usuari"
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_message.py:40
+#, python-format
+msgid "Waiting"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_ir_mail_server
