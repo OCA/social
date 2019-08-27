@@ -80,6 +80,8 @@ Contributors
 
   * Jordi Ballester Alomar (jordi.ballester@eficent.com)
 
+* Enric Tobella <etobella@creublanca.es>
+
 Maintainers
 ~~~~~~~~~~~
 
