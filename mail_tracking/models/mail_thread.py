@@ -11,8 +11,13 @@ class MailThread(models.AbstractModel):
 
     @api.multi
     @api.returns('self', lambda value: value.id)
-    def message_post(self, **kwargs):
-        new_message = super().message_post(**kwargs)
+    def message_post(self, body='', subject=None, message_type='notification',
+                     subtype=None, parent_id=False, attachments=None,
+                     content_subtype='html', **kwargs):
+        new_message = super().message_post(
+            body=body, subject=subject, message_type=message_type,
+            subtype=subtype, parent_id=parent_id, attachments=attachments,
+            content_subtype=content_subtype, **kwargs)
         email_cc = kwargs.get('cc')
         if email_cc:
             new_message.sudo().write({
