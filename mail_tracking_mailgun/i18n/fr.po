@@ -48,7 +48,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:76
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:78
 #, python-format
 msgid "A Mailgun domain value is needed!"
 msgstr ""
@@ -69,7 +69,7 @@ msgid "Contact"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:240
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:242
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr ""
@@ -90,7 +90,7 @@ msgid "Error %s trying to check mailof connection"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:244
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:246
 #, python-format
 msgid "Event information not longer stored"
 msgstr ""
@@ -132,13 +132,13 @@ msgid "Set Bounced"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:70
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:72
 #, python-format
 msgid "There is no Mailgun API key!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:227
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:229
 #, python-format
 msgid "There is no tracked message!"
 msgstr ""
