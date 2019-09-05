@@ -12,6 +12,30 @@ class MailThread(models.AbstractModel):
     _inherit = 'mail.thread'
 
     @api.model
+    def message_drop(self, model, message, custom_values=None,
+                     save_original=False, strip_attachments=False,
+                     thread_id=None):
+        result = self.message_process(
+            model, message, custom_values=custom_values,
+            save_original=save_original, strip_attachments=strip_attachments,
+            thread_id=thread_id
+        )
+        if not result:
+            return self.message_drop_existing(
+                model, message, custom_values=custom_values,
+                save_original=save_original,
+                strip_attachments=strip_attachments, thread_id=thread_id
+            )
+        return result
+
+    @api.model
+    def message_drop_existing(self, model, message,
+                              custom_values=None, save_original=False,
+                              strip_attachments=False, thread_id=None):
+        message = _("This message is already imported.")
+        raise exceptions.Warning(message)
+
+    @api.model
     def message_process_msg(
             self, model, message, custom_values=None, save_original=False,
             strip_attachments=False, thread_id=None,
@@ -28,12 +52,13 @@ class MailThread(models.AbstractModel):
             message_msg._getStream('__substg1.0_10130102') or message_msg.body,
             email_cc=message_msg.cc,
             headers={'date': message_msg.date},
+            message_id=message_msg.message_id,
             attachments=[
                 (attachment.longFilename, attachment.data)
                 for attachment in message_msg.attachments
             ],
         )
-        return self.message_process(
+        return self.message_drop(
             model, message_email.as_string(), custom_values=custom_values,
             save_original=save_original, strip_attachments=strip_attachments,
             thread_id=thread_id,
