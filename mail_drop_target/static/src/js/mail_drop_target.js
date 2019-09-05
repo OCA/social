@@ -1,9 +1,9 @@
-//-*- coding: utf-8 -*-
-//Copyright 2018 Therp BV <https://therp.nl>
-//License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+// -*- coding: utf-8 -*-
+// Copyright 2018 Therp BV <https://therp.nl>
+// License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-odoo.define('mail_drop_target', function(require)
-{
+odoo.define('mail_drop_target', function (require) {
+    "use strict";
     var Chatter = require('mail.Chatter');
     var web_drop_target = require('web_drop_target');
 
@@ -11,12 +11,12 @@ odoo.define('mail_drop_target', function(require)
 
     Chatter.include({
         _drop_allowed_types: ['message/rfc822'],
-        _get_drop_item: function(e) {
+        _get_drop_item: function (e) {
             var dataTransfer = e.originalEvent.dataTransfer;
-            if(
-                dataTransfer.items.length == 1 &&
-                dataTransfer.items[0].type == '' &&
-                dataTransfer.items[0].kind == 'file'
+            if (
+                dataTransfer.items.length === 1 &&
+                dataTransfer.items[0].type === '' &&
+                dataTransfer.items[0].kind === 'file'
             ) {
                 // this might be an outlook msg file
                 return dataTransfer.items[0];
@@ -24,16 +24,16 @@ odoo.define('mail_drop_target', function(require)
             return this._super.apply(this, arguments);
         },
 
-        _handle_drop_items: function(drop_items, e) {
+        _handle_drop_items: function (drop_items, e) {
             var self = this;
             _.each(drop_items, function(item, e) {
                 return self._handle_file_drop_proxy(item, e);
             });
         },
-        _handle_file_drop_proxy: function(item, e) {
+        _handle_file_drop_proxy: function (item, e) {
             var self = this;
             var file = item;
-            if(!file || !(file instanceof Blob)) {
+            if (!file || !(file instanceof Blob)) {
                 return;
             }
             var reader = new FileReader();
@@ -43,7 +43,7 @@ odoo.define('mail_drop_target', function(require)
             reader.onerror = self.proxy('_file_reader_error_handler');
             reader.readAsArrayBuffer(file);
         },
-        _handle_file_drop: function(drop_file, reader, e) {
+        _handle_file_drop: function (drop_file, reader, e) {
             var self = this,
                 mail_processor = '',
                 data = '';
@@ -53,9 +53,9 @@ odoo.define('mail_drop_target', function(require)
                     new Uint8Array(reader.result)
                 );
             } else {
-                mail_processor = 'message_process';
+                mail_processor = 'message_drop';
                 var reader_array = new Uint8Array(reader.result);
-                data = ""
+                data = "";
                 for (var i = 0; i < reader_array.length; i++) {
                     data += String.fromCharCode(parseInt(reader_array[i]));
                 }
@@ -68,11 +68,10 @@ odoo.define('mail_drop_target', function(require)
                 args: [this.record.model, data],
                 kwargs: {
                     thread_id: this.record.data.id,
-                }
-            })
-            .then(function() {
-                self.trigger_up('reload',{});
+                },
+            }).then(function() {
+                self.trigger_up('reload', {});
             });
-        }
+        },
     });
 });
