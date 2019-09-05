@@ -25,10 +25,14 @@ class ResPartner(models.Model):
         for partner in self:
             if not partner.email:
                 continue
+            event = event or self.env['mail.tracking.event']
+            event_str = """
+                <a href="#"
+                   data-oe-model="mail.tracking.event" data-oe-id="%d">%s</a>
+            """ % (event.id or 0, event.id or _('unknown'))
             body = _('Email has been bounced: %s\n'
                      'Reason: %s\n'
-                     'Event: %s') % (partner.email, reason,
-                                     event and event.id or _('unknown'))
+                     'Event: %s') % (partner.email, reason, event_str)
             partner.message_post(body=body)
 
     @api.multi
