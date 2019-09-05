@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from odoo.tests.common import TransactionCase
 from odoo import tools
 import base64
@@ -5,7 +6,7 @@ import base64
 
 class TestMailDropTarget(TransactionCase):
     def setUp(self):
-        super().setUp()
+        super(TestMailDropTarget, self).setUp()
         self.partner = self.env['res.partner'].create({
             'name': 'TEST PARTNER'
         })
