@@ -1,5 +1,5 @@
 from odoo.tests.common import TransactionCase
-from odoo import addons, exceptions, tools
+from odoo import exceptions, tools
 from mock import patch
 import base64
 
@@ -21,6 +21,9 @@ class TestMailDropTarget(TransactionCase):
             self.partner._name, message, thread_id=self.partner.id)
         self.partner.refresh()
         self.assertEqual(comments+1, len(self.partner.message_ids))
+        with self.assertRaises(exceptions.Warning):
+            self.partner.message_drop(
+                self.partner._name, message, thread_id=self.partner.id)
 
     def test_msg(self):
         message = base64.b64encode(tools.file_open(
@@ -33,10 +36,13 @@ class TestMailDropTarget(TransactionCase):
             self.partner._name, message, thread_id=self.partner.id)
         self.partner.refresh()
         self.assertEqual(comments+1, len(self.partner.message_ids))
+        with self.assertRaises(exceptions.Warning):
+            self.partner.message_process_msg(
+                self.partner._name, message, thread_id=self.partner.id)
 
     def test_no_msgextract(self):
-        with self.assertRaises(exceptions.UserError), patch.object(
-                addons.mail_drop_target.models.mail_thread, 'Message',
-                __nonzero__=lambda x: False,
+        with self.assertRaises(exceptions.UserError), patch(
+            'odoo.addons.mail_drop_target.models.mail_thread.Message',
+            new=False,
         ):
             self.test_msg()
