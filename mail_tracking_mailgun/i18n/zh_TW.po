@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:88
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:92
 #, python-format
 msgid ""
 "%s couldn't be verified. Either the request couln't be completed or the "
@@ -28,7 +28,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:78
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:82
 #, python-format
 msgid ""
 "%s failed the mailbox verification. Please check it in order to avoid "
@@ -36,7 +36,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:69
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:73
 #, python-format
 msgid ""
 "%s is not a valid email address. Please check it in order to avoid sending "
@@ -71,7 +71,7 @@ msgid "Couldn't retrieve Mailgun information"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:28
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:33
 #, python-format
 msgid ""
 "Email has been bounced: %s\n"
@@ -80,7 +80,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:56
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:60
 #, python-format
 msgid "Error %s trying to check mailof connection"
 msgstr ""
@@ -112,7 +112,7 @@ msgid "Mailgun"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:63
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:67
 #, python-format
 msgid "Mailgun Error. Mailbox verification value wasn't returned"
 msgstr ""
@@ -150,7 +150,7 @@ msgid "Unset Bounced"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:44
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:48
 #, python-format
 msgid ""
 "You need to configure mailgun.validation_key in order to be able to check "
@@ -158,7 +158,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:31
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:32
 #, python-format
 msgid "unknown"
 msgstr ""
