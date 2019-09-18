@@ -13,7 +13,7 @@
             </field>
             <field name="email_from">${object.message_id.email_from|safe}</field>
             <field name="partner_to">${object.partner_id.ids|join(',')}</field>
-            <field name="lang">${object.partner_id.lang}</field>
+            <field name="lang">${object.partner_id.lang or ''}</field>
         </record>
     </data>
 </openerp>
