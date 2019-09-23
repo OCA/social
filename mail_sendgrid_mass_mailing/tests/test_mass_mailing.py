@@ -81,7 +81,6 @@ class TestMailSendgrid(SavepointCase):
         """
         Test the preview field is getting the Sendgrid template
         """
-        self.mass_mailing.html_copy = self.mass_mailing.body_html
         preview = self.mass_mailing.body_sendgrid
         self.assertIn(u'<h1>Test Sendgrid</h1>', preview)
         self.assertIn('hello!', preview)

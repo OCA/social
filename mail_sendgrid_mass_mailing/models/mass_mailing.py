@@ -20,50 +20,41 @@ class MassMailing(models.Model):
     lang = fields.Many2one(
         comodel_name="res.lang", string="Force language")
     body_sendgrid = fields.Html(compute='_compute_sendgrid_view')
-    # Trick to save html when taken from the e-mail template
-    html_copy = fields.Html(
-        compute='_compute_sendgrid_view', inverse='_inverse_html_copy')
-    # Trick to display another widget when using Sendgrid
-    html_unframe = fields.Html(related='body_html')
     enable_unsubscribe = fields.Boolean()
     unsubscribe_text = fields.Char(
         default='If you would like to unsubscribe and stop receiving these '
                 'emails <% clickhere %>.')
     unsubscribe_tag = fields.Char()
 
-    @api.depends('body_html')
+    @api.depends('email_template_id')
     def _compute_sendgrid_view(self):
         for wizard in self:
             template = wizard.email_template_id.with_context(
-                lang=self.lang.code or self.env.context['lang'])
+                lang=wizard.lang.code or self.env.context['lang'])
             sendgrid_template = template.sendgrid_localized_template
-            if sendgrid_template and wizard.body_html:
+            if sendgrid_template:
                 res_id = self.env[wizard.mailing_model].search(safe_eval(
                     wizard.mailing_domain), limit=1).id
                 if res_id:
                     body = template.render_template(
-                        wizard.body_html, template.model, [res_id],
+                        template.body_html, template.model, [res_id],
                         post_process=True)[res_id]
                     wizard.body_sendgrid = \
                         sendgrid_template.html_content.replace('<%body%>',
                                                                body)
-            else:
-                wizard.body_sendgrid = wizard.body_html
-            wizard.html_copy = wizard.body_html
 
-    def _inverse_html_copy(self):
-        for wizard in self:
-            wizard.body_html = wizard.html_copy
-
-    @api.onchange('email_template_id')
-    def onchange_email_template_id(self):
-        if self.email_template_id:
-            template = self.email_template_id.with_context(
-                lang=self.lang.code or self.env.context['lang'])
+    @api.multi
+    def write(self, vals):
+        # Take settings from mail template
+        template_id = vals.get('email_template_id')
+        if template_id:
+            template = self.env['mail.template'].browse(template_id)
             if template.email_from:
-                self.email_from = template.email_from
-            self.name = template.subject
-            self.body_html = template.body_html
+                vals['email_from'] = template.email_from
+            if template.reply_to:
+                vals['reply_to'] = template.reply_to
+            vals['name'] = template.subject
+        return super(MassMailing, self).write(vals)
 
     @api.onchange('lang')
     def onchange_lang(self):
@@ -78,7 +69,6 @@ class MassMailing(models.Model):
                 domain.remove(lang_tuple)
             domain.append(('lang', '=', self.lang.code))
             self.mailing_domain = str(domain)
-            self.onchange_email_template_id()
 
     @api.multi
     def action_test_mailing(self):
@@ -130,7 +120,7 @@ class MassMailing(models.Model):
             'attachment_ids': [(4, attachment.id) for attachment in
                                self.attachment_ids],
             'email_from': self.email_from,
-            'body': self.body_html,
+            'body': template.body_html,
             'subject': self.name,
             'record_name': False,
             'mass_mailing_id': self.id,

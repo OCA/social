@@ -17,7 +17,7 @@ class EmailTemplatePreview(models.TransientModel):
         template_id = self.env.context.get('template_id')
         template = self.env['mail.template'].browse(template_id)
         sendgrid_template = template.sendgrid_localized_template
-        if sendgrid_template:
+        if sendgrid_template and body_html:
             self.body_html = sendgrid_template.html_content.replace(
                 '<%body%>', body_html)
         return result
