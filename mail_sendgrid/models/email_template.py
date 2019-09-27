@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -60,7 +59,7 @@ class EmailTemplate(models.Model):
          {res_id: list of substitutions values [0, 0 {substitution_vals}]}
         """
         self.ensure_one()
-        if isinstance(res_ids, (int, long)):
+        if isinstance(res_ids, int):
             res_ids = [res_ids]
         substitutions = self.substitution_ids.filtered(
             lambda s: s.lang == self.env.context.get('lang', 'en_US'))

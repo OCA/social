@@ -8,8 +8,10 @@
         <field name="arch" type="xml">
             <button name="send" position="replace">
                 <field name="send_method" invisible="1"/>
-                <button name="send" string="Send Now" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('send_method', 'not in', ['sendgrid','traditional']), ('state', '!=', 'outgoing')]}"/>
-                <button name="send_sendgrid" string="Send (SendGrid)" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('send_method', '=', 'sendgrid'), ('state', '!=', 'outgoing')]}"/>
+                <button name="send" string="Send Now" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('send_method', 'not in', ['sendgrid','traditional']), ('state', '!=', 'outgoing')]}"/>
+                <button name="send_sendgrid" string="Send (SendGrid)" type="object" class="oe_highlight"
+                        attrs="{'invisible': ['|', ('send_method', '=', 'sendgrid'), ('state', '!=', 'outgoing')]}"/>
             </button>
             <field name="body_html" position="attributes">
                 <attribute name="widget">html</attribute>
@@ -21,8 +23,12 @@
                         <field name="sent_date" readonly="1"/>
                         <field name="opened" readonly="1"/>
                         <field name="click_count" readonly="1"/>
-                        <field name="body_text"/>
+                        <field name="dynamic_template_selected" invisible="1"/>
+                        <field name="body_text"
+                               attrs="{'invisible': [('dynamic_template_selected', '=', True)]}"/>
                     </group>
+                    <button name="update_substitutions" string="Get substitutions from template" type="object"
+                            colspan="2"/>
                     <field name="substitution_ids" widget="one2many_list"/>
                     <field name="tracking_event_ids">
                         <tree default_order="time desc">

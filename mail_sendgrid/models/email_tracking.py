@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 import logging
@@ -90,7 +89,7 @@ class MailTrackingEmail(models.Model):
             'ip': 'ip',
             'url': 'url',
         }
-        for k, v in mapping.iteritems():
+        for k, v in mapping.items():
             if event.get(k, False):
                 metadata[v] = event[k]
         # Special field mapping

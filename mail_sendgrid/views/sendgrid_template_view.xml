@@ -6,8 +6,10 @@
         <field name="model">sendgrid.template</field>
         <field name="arch" type="xml">
             <tree string="Templates">
-                <field name="remote_id"/>
                 <field name="name"/>
+                <field name="version_name"/>
+                <field name="generation"/>
+                <field name="remote_id"/>
             </tree>
         </field>
     </record>
@@ -23,6 +25,7 @@
                         <field name="name"/>
                         <field name="remote_id"/>
                         <field name="detected_keywords"/>
+                        <field name="generation"/>
                     </group>
                     <notebook>
                         <page string="Html">
@@ -49,13 +52,14 @@
     <record model="ir.actions.server" id="update_sendgrid_templates">
         <field name="name">Update Sendgrid Templates</field>
         <field name="model_id" ref="mail_sendgrid.model_sendgrid_template"/>
+        <field name="state">code</field>
         <field name="code">
-env['sendgrid.template'].update_templates()
+model.update_templates()
 action = {
-    'name': 'Sendgrid templates',
-    'type': 'ir.actions.act_window',
-    'res_model': 'sendgrid.template',
-    'view_mode': 'tree,form'
+'name': 'Sendgrid templates',
+'type': 'ir.actions.act_window',
+'res_model': 'sendgrid.template',
+'view_mode': 'tree,form'
 }
         </field>
     </record>

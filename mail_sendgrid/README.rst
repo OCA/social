@@ -77,6 +77,15 @@ From e-mails, use the "Send (SendGrid)" button to send the e-mail using Sendgrid
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/205/10.0
 
+Modification with v11
+======================
+L'API v3 de SendGrid ne supporte plus les emails en plain text.
+Le champ Body Text de l'onglet Sendgrid sur la page de création d'email a donc été supprimé.
+Lorsque le template utilisé est un template dynamique, le champ Body de Odoo est envoyé comme un mot clé à substituer
+et son contenu est automatiquement placé dans la balise {{{body}}} du template (si cette balise existe dans le template).
+Cette balise n'est pas reconnue comme un mot clé du template et ne peut pas être ajouté à l'aide d'une substitution.
+
+
 Known issues / Roadmap
 ======================
 

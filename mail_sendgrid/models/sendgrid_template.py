@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models, fields, api, exceptions, _
@@ -8,9 +7,7 @@ import json
 import re
 import logging
 
-
 _logger = logging.getLogger(__name__)
-
 
 try:
     import sendgrid
@@ -31,23 +28,26 @@ class SendgridTemplate(models.Model):
     html_content = fields.Html(readonly=True)
     plain_content = fields.Text(readonly=True)
     detected_keywords = fields.Char(compute='_compute_keywords')
+    generation = fields.Text(readonly=True)
+    version_name = fields.Text(readonly=True)
 
     def _compute_keywords(self):
         for template in self:
             if template.html_content:
                 keywords = template.get_keywords()
-                self.detected_keywords = ';'.join(keywords)
+                template.detected_keywords = ';'.join(keywords)
 
     @api.model
     def update_templates(self):
+        global template_vals
         api_key = config.get('sendgrid_api_key')
         if not api_key:
             raise exceptions.UserError(
                 _('Missing sendgrid_api_key in conf file'))
 
-        sg = sendgrid.SendGridAPIClient(apikey=api_key)
+        sg = sendgrid.SendGridAPIClient(api_key)
         template_client = sg.client.templates
-        msg = template_client.get().body
+        msg = template_client.get(query_params={'generations': 'legacy,dynamic'}).body
         result = json.loads(msg)
 
         for template in result.get("templates", list()):
@@ -58,14 +58,16 @@ class SendgridTemplate(models.Model):
                 if version['active']:
                     template_vals = version
                     break
-            else:
-                continue
+                else:
+                    continue
 
             vals = {
                 "remote_id": id,
                 "name": template["name"],
+                "generation": template["generation"],
                 "html_content": template_vals["html_content"],
                 "plain_content": template_vals["plain_content"],
+                "version_name": template_vals["name"]
             }
             record = self.search([('remote_id', '=', id)])
             if record:
@@ -86,11 +88,34 @@ class SendgridTemplate(models.Model):
         """
         self.ensure_one()
         params = self.env['ir.config_parameter']
-        prefix = params.search([
-            ('key', '=', 'mail_sendgrid.substitution_prefix')
-        ]).value or '{'
-        suffix = params.search([
-            ('key', '=', 'mail_sendgrid.substitution_suffix')
-        ]) or '}'
-        pattern = prefix + r'\S{1,50}' + suffix
-        return list(set(re.findall(pattern, self.html_content)))
+
+        if self.generation == 'legacy':
+            prefix = params.search([
+                ('key', '=', 'mail_sendgrid.substitution_prefix')
+            ]).value or '{'
+            suffix = params.search([
+                ('key', '=', 'mail_sendgrid.substitution_suffix')
+            ]) or '}'
+            pattern = prefix + r'(\S{1,50})' + suffix
+            return list(set(re.findall(pattern, self.html_content)))
+        else:
+            prefix = params.search([
+                ('key', '=', 'mail_sendgrid.substitution_prefix')
+            ]).value or '{{'
+            suffix = params.search([
+                ('key', '=', 'mail_sendgrid.substitution_suffix')
+            ]) or '}}'
+            # examples of working patterns: <prefix>keyword<suffix> or {{keyword}} or {{{working}}}
+            pattern = '(' + prefix + '(\w{1,50})' + suffix + ')|({{3}(\w{1,50})}{3})'
+            # return list(set(re.finditer(pattern, self.html_content)))
+            w = set(
+                filter(
+                    lambda x: x != 'body',
+                    map(
+                        lambda x: x.group(2) or x.group(4),
+                        re.finditer(pattern, self.html_content)
+                    )
+                )
+            )
+
+            return w

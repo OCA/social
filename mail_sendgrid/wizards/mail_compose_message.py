@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -35,7 +34,7 @@ class EmailComposeMessage(models.TransientModel):
         if sendgrid_template_id:
             substitutions = template.render_substitutions(res_ids)
 
-            for res_id, value in mail_values.iteritems():
+            for res_id, value in mail_values.items():
                 value['sendgrid_template_id'] = sendgrid_template_id
                 value['substitution_ids'] = substitutions[res_id]
 
