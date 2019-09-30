@@ -1,7 +1,7 @@
 [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/205/10.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-social-205)
 [![Build Status](https://travis-ci.org/OCA/social.svg?branch=10.0)](https://travis-ci.org/OCA/social)
 [![Coverage Status](https://coveralls.io/repos/OCA/social/badge.svg?branch=10.0)](https://coveralls.io/r/OCA/social?branch=10.0)
-
+my change
 Social addons for Odoo
 ======================
 
