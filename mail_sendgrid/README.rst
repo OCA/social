@@ -77,14 +77,22 @@ From e-mails, use the "Send (SendGrid)" button to send the e-mail using Sendgrid
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/205/10.0
 
-Modification with v11
+Migration to v11
 ======================
-L'API v3 de SendGrid ne supporte plus les emails en plain text.
-Le champ Body Text de l'onglet Sendgrid sur la page de création d'email a donc été supprimé.
-Lorsque le template utilisé est un template dynamique, le champ Body de Odoo est envoyé comme un mot clé à substituer
-et son contenu est automatiquement placé dans la balise {{{body}}} du template (si cette balise existe dans le template).
-Cette balise n'est pas reconnue comme un mot clé du template et ne peut pas être ajouté à l'aide d'une substitution.
+Dynamic templates can be retrieved and used in Odoo. They cannot be modified there.
+When the template used is a dynamic template:
 
+ - The Body Text field of the Sendgrid tab on the email creation page is hidden
+ - The Odoo Body field is sent as a keyword to be substituted and its content is automatically placed in the tag {{{{body}}}} of the template (if this tag exists in the template). This tag is not recognized as a keyword in the template and cannot be added using a substitution.
+
+The migration from v10 to v11 removes all substitutions that have non-alphanumeric characters in their key and
+deletes the braces of each row in the Key column in the database.
+Examples:
+{key} becomes key
+{key-with-non-alphanum-char} ---> line deleted from the database
+
+For dynamic templates, only basic-replacement substitutions
+(https://sendgrid.com/docs/for-developers/sending-email/using-handlebars/#basic-replacement) are supported.
 
 Known issues / Roadmap
 ======================
