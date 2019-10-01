@@ -10,7 +10,7 @@
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,"
               "Odoo Community Association (OCA)",
-    "website": "https://github.com/acsone/social",
+    "website": "https://github.com/OCA/social",
     "depends": ["base", "mail", "report_substitute"],
     "data": [
         "security/mail_template_substitution_rule.xml",
