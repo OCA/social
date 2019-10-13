@@ -10,25 +10,25 @@ status icon will appear just right to name of notified partner.
 
 These are all available status icons:
 
-.. |sent| image:: static/src/img/sent.png
+.. |sent| image:: ../static/src/img/sent.png
    :width: 10px
 
-.. |delivered| image:: static/src/img/delivered.png
+.. |delivered| image:: ../static/src/img/delivered.png
    :width: 15px
 
-.. |opened| image:: static/src/img/opened.png
+.. |opened| image:: ../static/src/img/opened.png
    :width: 15px
 
-.. |error| image:: static/src/img/error.png
+.. |error| image:: ../static/src/img/error.png
    :width: 10px
 
-.. |waiting| image:: static/src/img/waiting.png
+.. |waiting| image:: ../static/src/img/waiting.png
    :width: 10px
 
-.. |unknown| image:: static/src/img/unknown.png
+.. |unknown| image:: ../static/src/img/unknown.png
    :width: 10px
 
-.. |cc| image:: static/src/img/cc.png
+.. |cc| image:: ../static/src/img/cc.png
    :width: 10px
 
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
@@ -44,3 +44,16 @@ These are all available status icons:
 |opened|  **Opened**: Opened by partner
 
 |cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
+
+
+When the message generates and 'error' status, it will apear on discuss 'Failed'
+channel. Any view that uses 'mail_thread' widget can show the failed messages
+too.
+
+* Discuss
+
+  .. image:: ../static/img/failed_message_discuss.png
+
+* Chatter
+
+  .. image:: ../static/img/failed_message_widget.png
