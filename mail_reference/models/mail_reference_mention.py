@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+import string
 from odoo import api, fields, models, exceptions, _
 
 
@@ -27,9 +28,15 @@ class MailReferenceMention(models.Model):
     @api.constrains('delimiter', 'shown_at_model_ids')
     def _constrain_unique_delimiter_per_model(self):
         for rec in self:
-            if rec.delimiter == '#':
+            # due to some regex manipulation in the `detect_delimiter` in the
+            # MentionManager widget, if we use symbols such as * or ^ the
+            # parsing will fail, lets stick to ascii characters for now
+            # those four symbols are already defined in the MentionManager
+            # and should not be used as well
+            if rec.delimiter not in string.letters or rec.delimiter in '@#:/':
                 raise exceptions.ValidationError(_(
-                    'Cannot use # as delimiter, its already used for channel'))
+                    'Can only use uppercase and lowercase ASCII characters '
+                    'as delimiters.'))
             if self.search_count([
                     ('delimiter', '=', rec.delimiter),
                     ('shown_at_model_ids', 'in', rec.shown_at_model_ids.ids),

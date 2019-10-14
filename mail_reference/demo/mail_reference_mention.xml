@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <record id="demo_mail_reference_mention" model="mail.reference.mention">
+        <field name="delimiter">a</field>
+        <field 
+            name="shown_at_model_ids"
+            eval="[(6, 0, ref('base.model_res_partner'))]"/>
+        <field name="shows_model_id" ref="base.model_res_partner"/>
+    </record>
+
+ </odoo>

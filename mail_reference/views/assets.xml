@@ -6,6 +6,9 @@
             <script
                 type="text/javascript"
                 src="/mail_reference/static/src/js/mail_reference.js"/>
+            <script
+                type="text/javascript"
+                src="/mail_reference/static/src/js/mail_reference_tour.js"/>
         </xpath>
     </template>
 

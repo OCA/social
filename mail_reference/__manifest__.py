@@ -10,6 +10,8 @@
     "summary": "Set your own delimiters on the Chatter.",
     "depends": [
         'mail',
+        'web_tour',
+        'web_editor',
     ],
     "data": [
         'security/ir.model.access.csv',
