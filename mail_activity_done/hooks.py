@@ -32,10 +32,10 @@ def pre_init_hook(cr):
 
 
 def post_load_hook():
-    def new_action_feedback(self, feedback=False):
+    def new_action_feedback(self, feedback=False, attachment_ids=None):
 
         if "done" not in self._fields:
-            return self.action_feedback_original(feedback=feedback)
+            return self.action_feedback_original(feedback=feedback, attachment_ids=None)
         message = self.env["mail.message"]
         if feedback:
             self.write(dict(feedback=feedback))
