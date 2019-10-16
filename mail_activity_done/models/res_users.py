@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent <http://www.eficent.com>
+# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, modules
 
