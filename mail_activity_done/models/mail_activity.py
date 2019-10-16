@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent <http://www.eficent.com>
+# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
 
@@ -14,7 +14,7 @@ class MailActivity(models.Model):
 
     @api.depends("date_deadline", "done")
     def _compute_state(self):
-        super(MailActivity, self)._compute_state()
+        super()._compute_state()
         for record in self.filtered(lambda activity: activity.done):
             record.state = "done"
 
