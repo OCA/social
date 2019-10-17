@@ -79,6 +79,8 @@ class MailMessage(models.Model):
                     'status': status,
                     'status_human':
                         self._partner_tracking_status_human_get(status),
+                    'error_type': tracking.error_type,
+                    'error_description': tracking.error_description,
                     'tracking_id': tracking.id,
                     'recipient': recipient,
                     'partner_id': tracking.partner_id.id,
@@ -105,6 +107,8 @@ class MailMessage(models.Model):
                     'status': 'unknown',
                     'status_human':
                         self._partner_tracking_status_human_get('unknown'),
+                    'error_type': False,
+                    'error_description': False,
                     'tracking_id': False,
                     'recipient': partner.name,
                     'partner_id': partner.id,
@@ -116,12 +120,30 @@ class MailMessage(models.Model):
                     'status': 'unknown',
                     'status_human':
                         self._partner_tracking_status_human_get('unknown'),
+                    'error_type': False,
+                    'error_description': False,
                     'tracking_id': False,
                     'recipient': email,
                     'partner_id': False,
                     'isCc': True,
                 })
             res[message.id] = partner_trackings
+        return res
+
+    @api.multi
+    def _get_failed_message(self):
+        res = {}
+        for message in self:
+            res.update({
+                message.id: message.mail_tracking_needs_action
+                and (
+                    message.author_id.id == self.env.user.partner_id.id
+                    or any(message.partner_ids.filtered(
+                        lambda x: x.id == self.env.user.partner_id.id))
+                )
+                and any(message.mail_tracking_ids.filtered(
+                    lambda x: x.state in self.get_failed_states()))
+            })
         return res
 
     @api.model
@@ -143,65 +165,53 @@ class MailMessage(models.Model):
                     partner_trackings[mail_message_id]
         return res
 
-    @api.model
-    def _prepare_dict_failed_message(self, message):
-        failed_trackings = message.mail_tracking_ids.filtered(
+    @api.multi
+    def _prepare_dict_failed_message(self):
+        self.ensure_one()
+        failed_trackings = self.mail_tracking_ids.filtered(
             lambda x: x.state in self.get_failed_states())
         failed_partners = failed_trackings.mapped('partner_id')
         failed_recipients = failed_partners.name_get()
         return {
-            'id': message.id,
-            'date': message.date,
-            'author_id': message.author_id.name_get()[0],
-            'body': message.body,
+            'id': self.id,
+            'date': self.date,
+            'author_id': self.author_id and self.author_id.name_get()[0] or '',
+            'body': self.body,
             'failed_recipients': failed_recipients,
         }
 
     @api.multi
     def get_failed_messages(self):
-        return [self._prepare_dict_failed_message(msg) for msg in self]
+        return [msg._prepare_dict_failed_message() for msg in self]
 
     @api.multi
     def toggle_tracking_status(self):
-        """Toggle message tracking action needed to ignore them in the tracking
-           issues filter"""
+        """Toggle message tracking action.
+
+        This will mark them to be (or not) ignored in the tracking issues
+        filter.
+        """
+        self.check_access_rule('read')
         self.mail_tracking_needs_action = not self.mail_tracking_needs_action
-        return self.mail_tracking_needs_action
+        notification = {
+            'type': 'toggle_tracking_status',
+            'message_ids': [self.id],
+            'needs_actions': self.mail_tracking_needs_action
+        }
+        self.env['bus.bus'].sendone(
+            (self._cr.dbname, 'res.partner', self.env.user.partner_id.id),
+            notification)
 
     def _get_failed_message_domain(self):
-        return [
-            ('mail_tracking_ids.state', 'in', list(self.get_failed_states())),
-            ('mail_tracking_needs_action', '=', True)
+        domain = self.env['mail.thread']._get_failed_message_domain()
+        domain += [
+            '|',
+            ('partner_ids', 'in', [self.env.user.partner_id.id]),
+            ('author_id', '=', self.env.user.partner_id.id),
         ]
+        return domain
 
     @api.model
     def get_failed_count(self):
-        """ Gets the number of failed messages """
+        """Gets the number of failed messages."""
         return self.search_count(self._get_failed_message_domain())
-
-    @api.model
-    def message_fetch(self, domain, limit=20):
-        # HACK: Because can't modify the domain in discuss JS to search the
-        # failed messages we force the change here to clean it of
-        # not valid criterias
-        if self.env.context.get('filter_failed_message'):
-            domain = self._get_failed_message_domain()
-        return super().message_fetch(domain, limit=limit)
-
-    @api.multi
-    def _notify(self, force_send=False, send_after_commit=True,
-                user_signature=True):
-        self_sudo = self.sudo()
-        hide_followers = self_sudo._context.get('default_hide_followers',
-                                                False)
-        if hide_followers:
-            # HACK: Because Odoo uses subtype to found message followers
-            # whe modify it to False to avoid include them.
-            orig_subtype_id = self_sudo.subtype_id
-            self_sudo.subtype_id = False
-        res = super()._notify(force_send=force_send,
-                              send_after_commit=send_after_commit,
-                              user_signature=user_signature)
-        if hide_followers:
-            self_sudo.subtype_id = orig_subtype_id
-        return res

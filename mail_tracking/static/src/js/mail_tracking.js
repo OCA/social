@@ -2,7 +2,7 @@
    Copyright 2018 David Vidal - <david.vidal@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
 
-odoo.define('mail_tracking.partner_tracking', function(require){
+odoo.define('mail_tracking.partner_tracking', function (require) {
     "use strict";
 
     var core = require('web.core');
@@ -14,10 +14,11 @@ odoo.define('mail_tracking.partner_tracking', function(require){
     var _t = core._t;
 
     AbstractMessage.include({
+
         /**
          * Messages do not have any PartnerTrackings.
          *
-         * @return {boolean}
+         * @returns {Boolean}
          */
         hasPartnerTrackings: function () {
             return false;
@@ -26,7 +27,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
         /**
          * Messages do not have any email Cc values.
          *
-         * @return {boolean}
+         * @returns {Boolean}
          */
         hasEmailCc: function () {
             return false;
@@ -34,7 +35,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
     });
 
     Message.include({
-        init: function (parent, data, emojis) {
+        init: function (parent, data) {
             this._super.apply(this, arguments);
             this._partnerTrackings = data.partner_trackings || [];
             this._emailCc = data.email_cc || [];
@@ -45,7 +46,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
          * State whether this message contains some PartnerTrackings values
          *
          * @override
-         * @return {boolean}
+         * @returns {Boolean}
          */
         hasPartnerTrackings: function () {
             return _.some(this._partnerTrackings);
@@ -54,7 +55,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
         /**
          * State whether this message contains some email Cc values
          *
-         * @return {boolean}
+         * @returns {Boolean}
          */
         hasEmailCc: function () {
             return _.some(this._emailCc);
@@ -65,7 +66,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
          * If this message has no PartnerTrackings values, returns []
          *
          * @override
-         * @return {Object[]}
+         * @returns {Object[]}
          */
         getPartnerTrackings: function () {
             if (!this.hasPartnerTrackings()) {
@@ -78,7 +79,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
          * Get the email Cc values of this message
          * If this message has no email Cc values, returns []
          *
-         * @return {Array}
+         * @returns {Array}
          */
         getEmailCc: function () {
             if (!this.hasEmailCc()) {
@@ -91,7 +92,8 @@ odoo.define('mail_tracking.partner_tracking', function(require){
          * Check if the email is an Cc
          * If this message has no email Cc values, returns false
          *
-         * @return {Boolean}
+         * @param {String} email
+         * @returns {Boolean}
          */
         isEmailCc: function (email) {
             if (!this.hasEmailCc()) {
@@ -104,31 +106,19 @@ odoo.define('mail_tracking.partner_tracking', function(require){
 
         toggleTrackingStatus: function () {
             return this._rpc({
-                    model: 'mail.message',
-                    method: 'toggle_tracking_status',
-                    args: [[this.id]],
-                });
+                model: 'mail.message',
+                method: 'toggle_tracking_status',
+                args: [[this.id]],
+            });
         },
     });
 
     ThreadWidget.include({
         events: _.extend(ThreadWidget.prototype.events, {
-            'click .o_mail_action_tracking_partner': 'on_tracking_partner_click',
+            'click .o_mail_action_tracking_partner':
+                'on_tracking_partner_click',
             'click .o_mail_action_tracking_status': 'on_tracking_status_click',
         }),
-        _preprocess_message: function () {
-            var msg = this._super.apply(this, arguments);
-            msg.partner_trackings = msg.partner_trackings || [];
-            var needs_action = msg.track_needs_action;
-            var message_track = _.findWhere(messages_tracked_changes, {
-                id: msg.id,
-            });
-            if (message_track) {
-                needs_action = message_track.status;
-            }
-            msg.track_needs_action = needs_action;
-            return msg;
-        },
         on_tracking_partner_click: function (event) {
             var partner_id = this.$el.find(event.currentTarget).data('partner');
             var state = {
@@ -171,7 +161,7 @@ odoo.define('mail_tracking.partner_tracking', function(require){
         },
         init: function () {
             this._super.apply(this, arguments);
-            this.action_manager = this.findAncestor(function(ancestor){
+            this.action_manager = this.findAncestor(function (ancestor) {
                 return ancestor instanceof ActionManager;
             });
         },

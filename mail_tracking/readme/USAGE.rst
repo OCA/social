@@ -25,6 +25,9 @@ These are all available status icons:
 .. |cc| image:: ../static/src/img/cc.png
    :width: 10px
 
+.. |noemail| image:: ../static/src/img/no_email.png
+   :width: 10px
+
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
 
 |waiting|    **Waiting**: Waiting to be sent
@@ -38,6 +41,8 @@ These are all available status icons:
 |opened|  **Opened**: Opened by partner
 
 |cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
+
+|noemail|  **No Email**: The partner doesn't have a defined email
 
 
 If you want to see all tracking emails and events you can go to
@@ -56,3 +61,10 @@ too.
 * Chatter
 
   .. image:: ../static/img/failed_message_widget.png
+
+You can use "Failed sent messages" filter present in all views to show records
+with messages in failed status and that needs an user action.
+
+* Filter
+
+  .. image:: ../static/img/failed_message_filter.png

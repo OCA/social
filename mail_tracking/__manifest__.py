@@ -33,7 +33,7 @@
     "qweb": [
         "static/src/xml/mail_tracking.xml",
         "static/src/xml/failed_message.xml",
-        "static/src/xml/client_action.xml",
+        "static/src/xml/discuss.xml",
     ],
     'demo': [
         'demo/demo.xml',

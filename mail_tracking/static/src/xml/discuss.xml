@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<template>
+
+    <t t-name="mail_tracking.SidebarFailedCounter">
+        <span t-attf-class="o_mail_sidebar_failed badge badge-pill #{(counter ? '' : 'd-none')}">
+            <t t-esc="counter"/>
+        </span>
+    </t>
+
+    <t t-name="mail_tracking.SidebarFailed">
+        <div t-attf-class="o_mail_discuss_title_main o_mail_discuss_item #{(activeThreadID === 'mailbox_failed') ? 'o_active': ''}"
+             data-thread-id="mailbox_failed">
+            <span class="o_thread_name"><i class="fa fa-exclamation mr8"/>Failed</span>
+            <t t-set="counter" t-value="failedCounter"/>
+            <t t-call="mail_tracking.SidebarFailedCounter"/>
+        </div>
+    </t>
+
+
+    <t t-extend="mail.widget.Thread.Empty">
+        <t t-jquery="t:last-child" t-operation="after">
+            <t t-if="thread.getID() === 'mailbox_failed'">
+                <div class="o_thread_title">Congratulations, doesn't have failed messages</div>
+                <div>Failed messages appear here.</div>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="mail.widget.Thread.Message">
+        <t t-jquery="span[t-attf-class=o_thread_icons]" t-operation="append">
+            <a t-if="message.isFailed() &amp;&amp; options.displayRetryButton" href="#" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.getID()">
+                <i class="fa fa-check"/> Mark Reviewed
+            </a>
+            <a t-if="message.isFailed() &amp;&amp; options.displayReviewedButton" href="#" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.getID()">
+                <i class="fa fa-retweet"/> Retry
+            </a>
+        </t>
+    </t>
+
+</template>

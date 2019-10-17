@@ -14,8 +14,15 @@ class MailThread(models.AbstractModel):
         'mail.message', 'res_id', string='Failed Messages',
         domain=lambda self:
             [('model', '=', self._name)]
-            + self.env['mail.message']._get_failed_message_domain(),
+            + self._get_failed_message_domain(),
         auto_join=True)
+
+    def _get_failed_message_domain(self):
+        failed_states = self.env['mail.message'].get_failed_states()
+        return [
+            ('mail_tracking_needs_action', '=', True),
+            ('mail_tracking_ids.state', 'in', list(failed_states)),
+        ]
 
     @api.multi
     @api.returns('self', lambda value: value.id)
@@ -31,7 +38,9 @@ class MailThread(models.AbstractModel):
     @api.multi
     def message_get_suggested_recipients(self):
         """Adds email Cc recipients as suggested recipients.
-           If the recipient have an res.partner uses it."""
+
+        If the recipient has a res.partner, use it.
+        """
         res = super().message_get_suggested_recipients()
         ResPartnerObj = self.env['res.partner']
         email_cc_formated_list = []

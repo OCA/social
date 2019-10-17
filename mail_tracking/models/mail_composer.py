@@ -12,8 +12,10 @@ class MailComposer(models.TransientModel):
 
     @api.multi
     def send_mail(self, auto_commit=False):
-        """ This method marks as reviewed the message when using the 'Retry'
-            option in the mail_failed_message widget"""
+        """Make compatible with mail_failed_message widget.
+
+        Mark as reviewed when using 'Retry' option in that widget.
+        """
         message = self.env['mail.message'].browse(
             self._context.get('message_id'))
         if message.exists():
@@ -23,8 +25,8 @@ class MailComposer(models.TransientModel):
     @api.model
     def get_record_data(self, values):
         values = super(MailComposer, self).get_record_data(values)
-        if self._context.get('default_hide_followers', False):
+        if self._context.get('default_hide_followers'):
             values['partner_ids'] = [
-                (6, 0, self._context.get('default_partner_ids', list()))
+                (6, 0, self._context['default_partner_ids'])
             ]
         return values

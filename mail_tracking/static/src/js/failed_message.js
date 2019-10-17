@@ -3,176 +3,212 @@
 odoo.define('mail_tracking.FailedMessage', function (require) {
     "use strict";
 
-    var ChatAction = require('mail.chat_client_action');
     var AbstractField = require('web.AbstractField');
     var BasicModel = require('web.BasicModel');
     var BasicView = require('web.BasicView');
     var Chatter = require('mail.Chatter');
+    var Discuss = require('mail.Discuss');
+    var MailManager = require('mail.Manager');
+    var Mailbox = require('mail.model.Mailbox');
+    var MailManagerNotif = require('mail.Manager.Notification');
+    var AbstractMessage = require('mail.model.AbstractMessage');
+    var Message = require('mail.model.Message');
     var utils = require('mail.utils');
-    var chat_manager = require('mail.chat_manager');
     var core = require('web.core');
     var field_registry = require('web.field_registry');
     var time = require('web.time');
-    var session = require('web.session');
-    var config = require('web.config');
 
     var QWeb = core.qweb;
     var _t = core._t;
 
-    /* DISCUSS */
-    var failed_counter = 0;
-    var is_channel_failed_outdated = false;
-    ChatAction.include({
-        init: function () {
-            this._super.apply(this, arguments);
-            // HACK: Custom event to update messsages
-            core.bus.on('force_update_message', this, function (data) {
-                is_channel_failed_outdated = true;
-                this._onMessageUpdated(data);
-                this.throttledUpdateChannels();
-            });
-        },
+    var FAILED_STATES = [
+        'error', 'rejected', 'spam', 'bounced', 'soft-bounced',
+    ];
 
-        _renderSidebar: function (options) {
-            options.failed_counter = chat_manager.get_failed_counter();
-            return this._super.apply(this, arguments);
-        },
-        _onMessageUpdated: function (message, type) {
-            var self = this;
-            var current_channel_id = this.channel.id;
-            // HACK: break inheritance because can't override properly
-            if (current_channel_id === "channel_failed" &&
-                !message.is_failed) {
-                chat_manager.get_messages({
-                    channel_id: this.channel.id,
-                    domain: this.domain,
-                }).then(function (messages) {
-                    var options = self._getThreadRenderingOptions(messages);
-                    self.thread.remove_message_and_render(
-                        message.id, messages, options).then(function () {
-                        self._updateButtonStatus(messages.length === 0, type);
-                    });
-                });
-            } else {
-                this._super.apply(this, arguments);
-            }
-        },
-        _updateChannels: function () {
-            var self = this;
-            // HACK: break inheritance because can't override properly
-            if (this.channel.id === "channel_failed") {
-                var $sidebar = this._renderSidebar({
-                    active_channel_id:
-                        this.channel ? this.channel.id: undefined,
-                    channels: chat_manager.get_channels(),
-                    needaction_counter: chat_manager.get_needaction_counter(),
-                    starred_counter: chat_manager.get_starred_counter(),
-                    failed_counter: chat_manager.get_failed_counter(),
-                });
-                this.$(".o_mail_chat_sidebar").html($sidebar.contents());
-                _.each(['dm', 'public', 'private'], function (type) {
-                    var $input = self.$(
-                        '.o_mail_add_channel[data-type=' + type + '] input');
-                    self._prepareAddChannelInput($input, type);
-                });
-            } else {
-                this._super.apply(this, arguments);
-            }
 
-            // FIXME: Because can't refresh "channel_failed" we add a flag
-            // to indicate that the data is outdated
-            var refresh_elm = this.$(
-                ".o_mail_chat_sidebar .o_mail_failed_message_refresh");
-            refresh_elm.click(function (event) {
-                event.preventDefault();
-                event.stopPropagation();
-                location.reload();
-            });
-            if (is_channel_failed_outdated) {
-                refresh_elm.removeClass('hidden');
-            }
+    /* COMMON */
+    AbstractMessage.include({
+        isFailed: function () {
+            return false;
         },
     });
 
-    chat_manager.get_failed_counter = function () {
-        return failed_counter;
-    };
+    Message.include({
+        init: function (parent, data) {
+            this._isFailedMessage = data.failed_message;
+            this._super.apply(this, arguments);
+        },
 
-    chat_manager._onMailClientAction_failed_message_super =
-        chat_manager._onMailClientAction;
-    chat_manager._onMailClientAction = function (result) {
-        failed_counter = result.failed_counter;
-        return this._onMailClientAction_failed_message_super(result);
-    };
+        isFailed: function () {
+            return _.contains(this._threadIDs, 'mailbox_failed');
+        },
 
-    function add_channel_to_message (message, channel_id) {
-        message.channel_ids.push(channel_id);
-        message.channel_ids = _.uniq(message.channel_ids);
-    }
+        setFailed: function (failed) {
+            if (failed) {
+                this._addThread('mailbox_failed');
+            } else {
+                this.removeThread('mailbox_failed');
+            }
+        },
 
-    chat_manager._make_message_failed_message_super = chat_manager.make_message;
-    chat_manager.make_message = function (data) {
-        var msg = this._make_message_failed_message_super(data);
-        function property_descr (channel) {
-            return {
-                enumerable: true,
-                get: function () {
-                    return _.contains(msg.channel_ids, channel);
-                },
-                set: function (bool) {
-                    if (bool) {
-                        add_channel_to_message(msg, channel);
+        _processMailboxes: function () {
+            this.setFailed(this._isFailedMessage);
+            this._super.apply(this, arguments);
+        },
+    });
+
+    MailManagerNotif.include({
+        _handlePartnerNotification: function (data) {
+            if (data.type === 'toggle_tracking_status') {
+                this._handlePartnerToggleFailedNotification(data);
+            } else {
+                this._super.apply(this, arguments);
+            }
+        },
+
+        _handlePartnerToggleFailedNotification: function (data) {
+            var self = this;
+            var failed = this.getMailbox('failed');
+            _.each(data.message_ids, function (messageID) {
+                var message = _.find(self._messages, function (msg) {
+                    return msg.getID() === messageID;
+                });
+                if (message) {
+                    message.setFailed(data.needs_actions);
+                    if (message.isFailed() === false) {
+                        self._removeMessageFromThread(
+                            'mailbox_failed', message);
                     } else {
-                        msg.channel_ids = _.without(msg.channel_ids, channel);
+                        self._addMessageToThreads(message, []);
+                        var channelFailed = self.getMailbox('failed');
+                        channelFailed.invalidateCaches();
                     }
-                },
+                    self._mailBus.trigger('update_message', message);
+                }
+            });
+
+            if (data.needs_actions) {
+                // Increase failed counter if message is marked as failed
+                failed.incrementMailboxCounter(data.message_ids.length);
+            } else {
+                // Decrease failed counter if message is remove from failed
+                failed.decrementMailboxCounter(data.message_ids.length);
+            }
+
+            this._mailBus.trigger('update_failed', failed.getMailboxCounter());
+        },
+    });
+
+
+    /* DISCUSS */
+    Discuss.include({
+        events: _.extend({}, Discuss.prototype.events, {
+            'click .o_failed_message_retry': '_onRetryFailedMessage',
+            'click .o_failed_message_reviewed': '_onMarkFailedMessageReviewed',
+        }),
+
+        _sidebarQWebParams: function () {
+            var failed = this.call('mail_service', 'getMailbox', 'failed');
+            return {
+                activeThreadID: this._thread ? this._thread.getID() : undefined,
+                failedCounter: failed.getMailboxCounter(),
             };
-        }
+        },
 
-        Object.defineProperties(msg, {
-            is_failed: property_descr("channel_failed"),
-        });
-        msg.is_failed = data.failed_message;
-        return msg;
-    };
+        _renderSidebar: function () {
+            var $sidebar = this._super.apply(this, arguments);
+            // Because Odoo implementation isn't designed to be inherited
+            // properly we inject failed button using jQuery.
+            var $sidebarFailed = $(QWeb.render('mail_tracking.SidebarFailed',
+                this._sidebarQWebParams()));
+            $sidebarFailed.insertBefore($sidebar.find("hr[class='mb8']"));
+            return $sidebar;
+        },
 
-    chat_manager._fetchFromChannel_failed_message_super =
-        chat_manager._fetchFromChannel;
-    chat_manager._fetchFromChannel = function (channel, options) {
-        if (channel.id !== "channel_failed") {
-            return this._fetchFromChannel_failed_message_super(
-                channel, options);
-        }
+        _onMessageUpdated: function (message, type) {
+            var self = this;
+            var currentThreadID = this._thread.getID();
+            if (currentThreadID === 'mailbox_failed' && !message.isFailed()) {
+                this._thread.fetchMessages(this.domain)
+                    .then(function () {
+                        var options = self._getThreadRenderingOptions();
+                        self._threadWidget.removeMessageAndRender(
+                            message.getID(), self._thread, options)
+                            .then(function () {
+                                self._updateButtonStatus(
+                                    !self._thread.hasMessages(), type);
+                            });
+                    });
+            } else {
+                this._super.apply(this, arguments);
+            }
+        },
 
-        // HACK: Can't override '_fetchFromChannel' properly to modify the
-        // domain, uses context instead and does it in python.
-        session.user_context.filter_failed_message = true;
-        var res = this._fetchFromChannel_failed_message_super(
-            channel, options);
-        res.then(function () {
-            delete session.user_context.filter_failed_message;
-        });
-        return res;
-    };
+        _getThreadRenderingOptions: function () {
+            var values = this._super.apply(this, arguments);
+            if (this._thread.getID() === 'mailbox_failed') {
+                values.displayEmailIcons = true;
+                values.displayReplyIcons = false;
+                values.displayRetryButton = true;
+                values.displayReviewedButton = true;
+            }
+            return values;
+        },
 
-    // HACK: Get failed_counter. Because 'chat_manager' call 'start' need call
-    // to '/mail/client_action' again with overrided '_onMailClientAction'
-    session.is_bound.then(function () {
-        var context = _.extend({isMobile: config.device.isMobile},
-            session.user_context);
-        return session.rpc('/mail/client_action', {context: context});
-    }).then(chat_manager._onMailClientAction.bind(chat_manager));
+        _startListening: function () {
+            this._super.apply(this, arguments);
+            this.call('mail_service', 'getMailBus')
+                .on('update_failed', this, this._throttledUpdateThreads);
+        },
+
+        // Handlers
+        _onRetryFailedMessage: function (event) {
+            event.preventDefault();
+            var messageID = $(event.currentTarget).data('message-id');
+            this.do_action('mail.mail_resend_message_action', {
+                additional_context: {
+                    mail_message_to_resend: messageID,
+                },
+            });
+        },
+
+        _onMarkFailedMessageReviewed: function (event) {
+            event.preventDefault();
+            var messageID = $(event.currentTarget).data('message-id');
+            this._rpc({
+                model: 'mail.message',
+                method: 'toggle_tracking_status',
+                args: [[messageID]],
+                context: this.getSession().user_context,
+            });
+        },
+    });
+
+    MailManager.include({
+        _updateMailboxesFromServer: function (data) {
+            this._super.apply(this, arguments);
+            this._addMailbox({
+                id: 'failed',
+                name: _t("Failed"),
+                mailboxCounter: data.failed_counter || 0,
+            });
+        },
+    });
+
+    Mailbox.include({
+        _getThreadDomain: function () {
+            if (this._id === 'mailbox_failed') {
+                return [
+                    ['mail_tracking_ids.state', 'in', FAILED_STATES],
+                    ['mail_tracking_needs_action', '=', true],
+                ];
+            }
+            return this._super.apply(this, arguments);
+        },
+    });
 
 
     /* FAILED MESSAGES CHATTER WIDGET */
-    // TODO: Use timeFromNow() in v12
-    function time_from_now (date) {
-        if (moment().diff(date, 'seconds') < 45) {
-            return _t("now");
-        }
-        return date.fromNow();
-    }
-
     function _readMessages (self, ids) {
         if (!ids.length) {
             return $.when([]);
@@ -187,7 +223,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             // Convert date to moment
             _.each(messages, function (msg) {
                 msg.date = moment(time.auto_str_to_date(msg.date));
-                msg.hour = time_from_now(msg.date);
+                msg.hour = utils.timeFromNow(msg.date);
             });
             return _.sortBy(messages, 'date');
         });
@@ -202,20 +238,8 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     });
 
     var AbstractFailedMessagesField = AbstractField.extend({
-        _markFailedMessageReviewed: function (id) {
-            return this._rpc({
-                model: 'mail.message',
-                method: 'toggle_tracking_status',
-                args: [[id]],
-                context: this.record.getContext(),
-            }).then(function (status) {
-                var fake_message = {
-                    'id': id,
-                    'is_failed': status,
-                };
-                chat_manager.bus.trigger('update_message', fake_message);
-                core.bus.trigger('force_update_message', fake_message);
-            });
+        _markFailedMessageReviewed: function () {
+            return false;
         },
     });
 
@@ -230,16 +254,38 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         init: function () {
             this._super.apply(this, arguments);
             this.failed_messages = this.record.specialData[this.name];
+            this.call(
+                'bus_service', 'onNotification', this, this._onNotification);
         },
+
+        _onNotification: function (notifs) {
+            var self = this;
+            _.each(notifs, function (notif) {
+                var model = notif[0][1];
+                if (model === 'res.partner') {
+                    var data = notif[1];
+                    if (data.type === 'update_failed_messages') {
+                        // Update failed messages
+                        self._reload({failed_message: true});
+                    }
+                }
+            });
+        },
+
+        _failedItemsQWebParams: function () {
+            return {
+                failed_messages: this.failed_messages,
+                nbFailedMessages: this.failed_messages.length,
+                date_format: time.getLangDateFormat(),
+                datetime_format: time.getLangDatetimeFormat(),
+            };
+        },
+
         _render: function () {
             if (this.failed_messages.length) {
                 this.$el.html(QWeb.render(
-                    'mail_tracking.failed_message_items', {
-                        failed_messages: this.failed_messages,
-                        nbFailedMessages: this.failed_messages.length,
-                        date_format: time.getLangDateFormat(),
-                        datetime_format: time.getLangDatetimeFormat(),
-                    }));
+                    'mail_tracking.failed_message_items',
+                    this._failedItemsQWebParams()));
             } else {
                 this.$el.empty();
             }
@@ -254,57 +300,30 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             this.trigger_up('reload_mail_fields', fieldsToReload);
         },
 
-        _openComposer: function (context) {
-            var self = this;
-            this.do_action({
-                type: 'ir.actions.act_window',
-                res_model: 'mail.compose.message',
-                view_mode: 'form',
-                view_type: 'form',
-                views: [[false, 'form']],
-                target: 'new',
-                context: context,
-            }, {
-                on_close: function () {
-                    self._reload({failed_message: true});
-                    self.trigger('need_refresh');
-                    chat_manager.get_messages({
-                        model: self.model,
-                        res_id: self.res_id,
-                    });
-                },
-            }).then(this.trigger.bind(this, 'close_composer'));
+        _markFailedMessageReviewed: function (id) {
+            return this._rpc({
+                model: 'mail.message',
+                method: 'toggle_tracking_status',
+                args: [[id]],
+                context: this.record.getContext(),
+            });
         },
 
         // Handlers
         _onRetryFailedMessage: function (event) {
             event.preventDefault();
-            var message_id = $(event.currentTarget).data('message-id');
-            var failed_msg = _.findWhere(this.failed_messages,
-                {'id': message_id});
-            var failed_partner_ids = _.map(failed_msg.failed_recipients,
-                function (item) {
-                    return item[0];
-                });
-            this._openComposer({
-                default_body: utils.get_text2html(failed_msg.body),
-                default_partner_ids: failed_partner_ids,
-                default_is_log: false,
-                default_model: this.model,
-                default_res_id: this.res_id,
-                default_composition_mode: 'comment',
-                // Omit followers
-                default_hide_followers: true,
-                mail_post_autofollow: true,
-                message_id: message_id,
+            var messageID = $(event.currentTarget).data('message-id');
+            this.do_action('mail.mail_resend_message_action', {
+                additional_context: {
+                    mail_message_to_resend: messageID,
+                },
             });
-
         },
 
         _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
-            var message_id = $(event.currentTarget).data('message-id');
-            this._markFailedMessageReviewed(message_id).then(
+            var messageID = $(event.currentTarget).data('message-id');
+            this._markFailedMessageReviewed(messageID).then(
                 this._reload.bind(this, {failed_message: true}));
         },
     });
@@ -313,10 +332,10 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
 
     var mailWidgets = ['mail_failed_message'];
     BasicView.include({
-        init: function (viewInfo) {
+        init: function () {
             this._super.apply(this, arguments);
             // Adds mail_failed_message as valid mail widget
-            var fieldsInfo = viewInfo.fieldsInfo[this.viewType];
+            var fieldsInfo = this.fieldsInfo[this.viewType];
             for (var fieldName in fieldsInfo) {
                 var fieldInfo = fieldsInfo[fieldName];
                 if (_.contains(mailWidgets, fieldInfo.widget)) {
@@ -327,6 +346,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             Object.assign(this.rendererParams.mailFields, this.mailFields);
         },
     });
+
     Chatter.include({
         init: function (parent, record, mailFields, options) {
             this._super.apply(this, arguments);
@@ -348,15 +368,14 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
 
         _onReloadMailFields: function (event) {
-            this._super.apply(this, arguments);
-            var fieldNames = [];
             if (this.fields.failed_message && event.data.failed_message) {
-                fieldNames.push(this.fields.failed_message.name);
+                this.trigger_up('reload', {
+                    fieldNames: [this.fields.failed_message.name],
+                    keepChanges: true,
+                });
+            } else {
+                this._super.apply(this, arguments);
             }
-            this.trigger_up('reload', {
-                fieldNames: fieldNames,
-                keepChanges: true,
-            });
         },
     });
 

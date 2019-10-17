@@ -147,6 +147,7 @@ class TestMailTracking(TransactionCase):
             'email_cc': 'unnamed@test.com, sender@example.com',
             'body': '<p>This is a test message</p>',
         })
+        message._notify(message, {}, force_send=True)
         self._check_partner_trackings(message)
         # suggested recipients
         recipients = self.recipient.message_get_suggested_recipients()
@@ -168,31 +169,33 @@ class TestMailTracking(TransactionCase):
                         ', recipient@example.com',
             'body': '<p>This is another test message</p>',
         })
+        message._notify(message, {}, force_send=True)
         recipients = self.recipient.message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id][0]), 3)
         self._check_partner_trackings(message)
 
     def test_failed_message(self):
+        MailMessageObj = self.env['mail.message']
         # Create message
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertFalse(tracking.mail_message_id.mail_tracking_needs_action)
         # Force error state
         tracking.state = 'error'
         self.assertTrue(tracking.mail_message_id.mail_tracking_needs_action)
-        failed_count = self.env['mail.message'].get_failed_count()
+        failed_count = MailMessageObj.get_failed_count()
         self.assertTrue(failed_count > 0)
         values = tracking.mail_message_id.get_failed_messages()
         self.assertEqual(values[0]['id'], tracking.mail_message_id.id)
-        messages = self.env['mail.message'].message_fetch([])
-        messages_failed = self.env['mail.message'].with_context(
-            filter_failed_message=True).message_fetch([])
+        messages = MailMessageObj.search([])
+        messages_failed = MailMessageObj.search(
+            MailMessageObj._get_failed_message_domain())
         self.assertTrue(messages)
         self.assertTrue(messages_failed)
         self.assertTrue(len(messages) > len(messages_failed))
         tracking.mail_message_id.toggle_tracking_status()
         self.assertFalse(tracking.mail_message_id.mail_tracking_needs_action)
         self.assertTrue(
-            self.env['mail.message'].get_failed_count() < failed_count)
+            MailMessageObj.get_failed_count() < failed_count)
 
     def mail_send(self, recipient):
         mail = self.env['mail.mail'].create({

@@ -3,7 +3,7 @@
 
 import werkzeug
 from psycopg2 import OperationalError
-from odoo import api, http, registry, SUPERUSER_ID, _
+from odoo import api, http, registry, SUPERUSER_ID
 from odoo.addons.mail.controllers.main import MailController
 from odoo.http import request
 import logging
@@ -89,19 +89,8 @@ class MailTrackingController(MailController):
         return response
 
     @http.route()
-    def mail_client_action(self):
-        values = super().mail_client_action()
-        values['channel_slots']['channel_channel'].append({
-            'id': 'channel_failed',
-            'name': _("Failed"),
-            'uuid': None,
-            'state': 'open',
-            'is_minimized': False,
-            'channel_type': 'static',
-            'public': False,
-            'mass_mailing': None,
-            'group_based_subscription': None,
-        })
+    def mail_init_messaging(self):
+        values = super().mail_init_messaging()
         values.update({
             'failed_counter': request.env['mail.message'].get_failed_count(),
         })
