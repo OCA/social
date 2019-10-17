@@ -348,15 +348,14 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
 
         _onReloadMailFields: function (event) {
-            this._super.apply(this, arguments);
-            var fieldNames = [];
             if (this.fields.failed_message && event.data.failed_message) {
-                fieldNames.push(this.fields.failed_message.name);
+                this.trigger_up('reload', {
+                    fieldNames: [this.fields.failed_message.name],
+                    keepChanges: true,
+                });
+            } else {
+                this._super.apply(this, arguments);
             }
-            this.trigger_up('reload', {
-                fieldNames: fieldNames,
-                keepChanges: true,
-            });
         },
     });
 
