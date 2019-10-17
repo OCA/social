@@ -52,44 +52,28 @@ status icon will appear just right to name of notified partner.
 
 These are all available status icons:
 
-<<<<<<< HEAD
-.. |sent| image:: mail_tracking/static/src/img/sent.png
+.. |sent| image:: ../static/src/img/sent.png
    :width: 10px
 
-.. |delivered| image:: mail_tracking/static/src/img/delivered.png
+.. |delivered| image:: ../static/src/img/delivered.png
    :width: 15px
 
-.. |opened| image:: mail_tracking/static/src/img/opened.png
+.. |opened| image:: ../static/src/img/opened.png
    :width: 15px
 
-.. |error| image:: mail_tracking/static/src/img/error.png
+.. |error| image:: ../static/src/img/error.png
    :width: 10px
 
-.. |waiting| image:: mail_tracking/static/src/img/waiting.png
+.. |waiting| image:: ../static/src/img/waiting.png
    :width: 10px
 
-.. |unknown| image:: mail_tracking/static/src/img/unknown.png
-=======
-.. |sent| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/sent.png
+.. |unknown| image:: ../static/src/img/unknown.png
    :width: 10px
 
-.. |delivered| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/delivered.png
-   :width: 15px
-
-.. |opened| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/opened.png
-   :width: 15px
-
-.. |error| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/error.png
+.. |cc| image:: ../static/src/img/cc.png
    :width: 10px
 
-.. |waiting| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/waiting.png
-   :width: 10px
-
-.. |unknown| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/unknown.png
->>>>>>> 75b9662... [IMP] mail_tracking: Failed Messages (Discuss & View)
-   :width: 10px
-
-.. |cc| image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/src/img/cc.png
+.. |noemail| image:: ../static/src/img/no_email.png
    :width: 10px
 
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
@@ -106,34 +90,37 @@ These are all available status icons:
 
 |cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
 
+|noemail|  **No Email**: The partner doesn't have a defined email
 
-<<<<<<< HEAD
+
 If you want to see all tracking emails and events you can go to
 
 * Settings > Technical > Email > Tracking emails
 * Settings > Technical > Email > Tracking events
-=======
-When the message generates and 'error' status, it will apear on discuss 'Failed'
-channel. Any view that uses 'mail_thread' widget can show the failed messages
+
+When the message generates an 'error' status, it will apear on discuss 'Failed'
+channel. Any view with chatter can show the failed messages
 too.
 
 * Discuss
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/img/failed_message_discuss.png
+  .. image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/img/failed_message_discuss.png
 
 * Chatter
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/img/failed_message_widget.png
+  .. image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/img/failed_message_widget.png
+
+You can use "Failed sent messages" filter present in all views to show records
+with messages in failed status and that needs an user action.
+
+* Filter
+
+  .. image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/img/failed_message_filter.png
 
 Known issues / Roadmap
 ======================
 
-* Handle message updates on discuss 'channel_failed' instead of showing the
-  'outdated' message.
-* Adapt chat_manager changes in v12
-* Adapt discuss changes in v12
 * Add pivot for tracking events and mail trackings
->>>>>>> 75b9662... [IMP] mail_tracking: Failed Messages (Discuss & View)
 
 Bug Tracker
 ===========

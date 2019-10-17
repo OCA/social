@@ -22,8 +22,9 @@
     </t>
     <t t-elif="tracking['status'] === 'error'">
         <span class="mail_tracking_error mail_tracking_pointer">
-            <i class="fa fa-remove"></i>
-        </span>
+          <i t-if="tracking['error_type'] === 'no_recipient'" class="fa fa-user-times"></i>
+          <i t-else="" class="fa fa-remove"></i>
+      </span>
     </t>
     <t t-elif="tracking['status'] === 'sent'">
         <span class="mail_tracking_sent mail_tracking_pointer">
@@ -51,7 +52,7 @@
         <t t-if="message.hasPartnerTrackings() || message.hasEmailCc()" >
             <p class="o_mail_tracking">
                 <strong>To:</strong>
-                <t t-foreach="message.partner_trackings" t-as="tracking">
+                <t t-foreach="message.getPartnerTrackings()" t-as="tracking">
                     <t t-if="!tracking_first">
                           -
                     </t>
@@ -65,9 +66,11 @@
                     <t t-else="">
                         <span t-attf-class="#{tracking['isCc'] ? 'o_mail_cc' : ''}"><t t-esc="tracking['recipient']"/></span>
                     </t>
+                    <t t-if="tracking['status'] === 'error' &amp;&amp; tracking['error_type'] === 'no_recipient'" t-set="title_status" t-value="tracking['error_description']" />
+                    <t t-else="" t-set="title_status" t-value="tracking['status_human']" />
                     <span class="mail_tracking o_mail_action_tracking_status"
                           t-att-data-tracking="tracking['tracking_id']"
-                          t-att-title="tracking['status_human']">
+                          t-att-title="title_status">
                         <t t-call="mail.tracking.status"/>
                     </span>
                 </t>
