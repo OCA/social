@@ -4,10 +4,10 @@
 
 .mail_tracking {
     span {
-        color: @odoo-color-0;
+        color: #909090;
 
         &.mail_tracking_opened {
-            color: @odoo-color-5;
+            color: #a34a8b;
         }
     }
 }
