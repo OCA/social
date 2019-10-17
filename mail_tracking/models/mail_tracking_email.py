@@ -5,6 +5,7 @@ import logging
 import urllib.parse
 import time
 import re
+import uuid
 from datetime import datetime
 
 from odoo import models, api, fields, tools
@@ -91,14 +92,30 @@ class MailTrackingEmail(models.Model):
     tracking_event_ids = fields.One2many(
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
+    # Token isn't generated here to have compatibility with older trackings.
+    # New trackings have token and older not
+    token = fields.Char(string="Security Token", readonly=True,
+                        default=lambda s: uuid.uuid4().hex,
+                        groups="base.group_system")
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        failed_states = self.env['mail.message'].get_failed_states()
+        records \
+            .filtered(lambda one: one.state in failed_states) \
+            .mapped("mail_message_id") \
+            .write({'mail_tracking_needs_action': True})
+        return records
 
     @api.multi
     def write(self, vals):
-        if vals.get('state') in self.env['mail.message'].get_failed_states():
+        super().write(vals)
+        state = vals.get('state')
+        if state and state in self.env['mail.message'].get_failed_states():
             self.mapped('mail_message_id').write({
                 'mail_tracking_needs_action': True,
             })
-        super().write(vals)
 
     @api.model
     def email_is_bounced(self, email):
@@ -162,7 +179,9 @@ class MailTrackingEmail(models.Model):
     @api.depends('recipient')
     def _compute_recipient_address(self):
         for email in self:
-            if email.recipient:
+            is_empty_recipient = (not email.recipient
+                                  or '<False>' in email.recipient)
+            if not is_empty_recipient:
                 matches = re.search(r'<(.*@.*)>', email.recipient)
                 if matches:
                     email.recipient_address = matches.group(1).lower()
@@ -187,13 +206,23 @@ class MailTrackingEmail(models.Model):
 
     def _get_mail_tracking_img(self):
         m_config = self.env['ir.config_parameter']
-        base_url = (m_config.get_param('mail_tracking.base.url') or
-                    m_config.get_param('web.base.url'))
-        path_url = (
-            'mail/tracking/open/%(db)s/%(tracking_email_id)s/blank.gif' % {
-                'db': self.env.cr.dbname,
-                'tracking_email_id': self.id,
-            })
+        base_url = (m_config.get_param('mail_tracking.base.url')
+                    or m_config.get_param('web.base.url'))
+        if self.token:
+            path_url = (
+                'mail/tracking/open/%(db)s/%(tracking_email_id)s/%(token)s/'
+                'blank.gif' % {
+                    'db': self.env.cr.dbname,
+                    'tracking_email_id': self.id,
+                    'token': self.token,
+                })
+        else:
+            # This is here for compatibility with older records
+            path_url = (
+                'mail/tracking/open/%(db)s/%(tracking_email_id)s/blank.gif' % {
+                    'db': self.env.cr.dbname,
+                    'tracking_email_id': self.id,
+                })
         track_url = urllib.parse.urljoin(base_url, path_url)
         return (
             '<img src="%(url)s" alt="" '
@@ -216,14 +245,25 @@ class MailTrackingEmail(models.Model):
 
     @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
-        self.sudo().write({
-            'error_smtp_server': tools.ustr(smtp_server),
-            'error_type': exception.__class__.__name__,
-            'error_description': tools.ustr(exception),
+        values = {
             'state': 'error',
-        })
-        self.sudo()._partners_email_bounced_set('error')
-        return True
+        }
+        IrMailServer = self.env['ir.mail_server']
+        if str(exception) == IrMailServer.NO_VALID_RECIPIENT \
+                and not self.recipient_address:
+            values.update({
+                'error_type': 'no_recipient',
+                'error_description':
+                    "The partner doesn't have a defined email",
+            })
+        else:
+            values.update({
+                'error_smtp_server': tools.ustr(smtp_server),
+                'error_type': exception.__class__.__name__,
+                'error_description': tools.ustr(exception),
+            })
+            self.sudo()._partners_email_bounced_set('error')
+        self.sudo().write(values)
 
     @api.multi
     def tracking_img_add(self, email):

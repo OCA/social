@@ -7,7 +7,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "12.0.1.1.3",
+    "version": "12.0.2.0.0",
     "category": "Social Network",
     "website": "http://github.com/OCA/social",
     "author": "Tecnativa, "
@@ -28,12 +28,12 @@
         "views/mail_tracking_event_view.xml",
         "views/mail_message_view.xml",
         "views/res_partner_view.xml",
-        "wizard/mail_compose_message_view.xml",
     ],
     "qweb": [
         "static/src/xml/mail_tracking.xml",
-        "static/src/xml/failed_message.xml",
-        "static/src/xml/client_action.xml",
+        "static/src/xml/failed_message/common.xml",
+        "static/src/xml/failed_message/thread.xml",
+        "static/src/xml/failed_message/discuss.xml",
     ],
     'demo': [
         'demo/demo.xml',
