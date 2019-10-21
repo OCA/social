@@ -6,7 +6,7 @@ import odoo.tests.common as common
 
 class TestMailNotification(common.TransactionCase):
     def setUp(self):
-        super(TestMailNotification, self).setUp()
+        super().setUp()
 
         self.partner_obj = self.env['res.partner']
 
