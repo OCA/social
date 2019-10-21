@@ -31,8 +31,9 @@ class MailNotification(models.Model):
             'notified_partners', recipients) or recipients
         newbody = self.get_additional_footer(footer_recipients)
         newbody += body
-        return super(MailNotification, self).\
-            _notify_send(newbody, subject, recipients, **mail_values)
+        return super()._notify_send(
+            newbody, subject, recipients, **mail_values
+        )
 
     @api.model
     def get_additional_footer(self, recipients):
