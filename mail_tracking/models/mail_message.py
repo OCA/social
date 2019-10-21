@@ -198,6 +198,19 @@ class MailMessage(models.Model):
         return super().message_fetch(domain, limit=limit)
 
     @api.multi
+    def message_format(self):
+        message_values = super().message_format()
+        for message in message_values:
+            message_id = self.browse(message['id'])
+            if message_id:
+                failed_trackings = message_id.mail_tracking_ids.filtered(
+                    lambda x: x.state in self.get_failed_states())
+                failed_partners = failed_trackings.mapped('partner_id')
+                failed_recipients = failed_partners.name_get()
+                message['failed_recipients'] = failed_recipients
+        return message_values
+
+    @api.multi
     def _notify(self, force_send=False, send_after_commit=True,
                 user_signature=True):
         self_sudo = self.sudo()
