@@ -18,6 +18,13 @@ class MailComposer(models.TransientModel):
             self._context.get('message_id'))
         if message.exists():
             message.mail_tracking_needs_action = False
+            self.env['bus.bus'].sendone(
+                (self._cr.dbname, 'res.partner', self.env.user.partner_id.id),
+                {
+                    'type': 'failed_updated',
+                    'id': message.id,
+                    'status': message.mail_tracking_needs_action,
+                })
         return super().send_mail(auto_commit=auto_commit)
 
     @api.model

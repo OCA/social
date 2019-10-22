@@ -27,5 +27,16 @@
             </t>
         </t>
     </t>
+    
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery="span[t-attf-class=o_thread_icons]" t-operation="append">
+            <a t-if="message.is_failed &amp;&amp; options.display_retry_button" href="#" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.id">
+                <i class="fa fa-check"/> Mark Reviewed
+            </a>
+            <a t-if="message.is_failed &amp;&amp; options.display_reviewed_button" href="#" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
+                <i class="fa fa-retweet"/> Retry
+            </a>
+        </t>
+    </t>
 
 </template>
