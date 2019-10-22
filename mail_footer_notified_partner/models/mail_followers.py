@@ -14,13 +14,17 @@ class MailNotification(models.Model):
         message,
         rdata,
         record,
-        force_send,
-        send_after_commit,
-        model_description,
-        mail_auto_delete,
+        force_send=False,
+        send_after_commit=True,
+        model_description=False,
+        mail_auto_delete=True
     ):
+        partner_ids = []
+        for data in rdata:
+            partner_ids.append(data['id'])
+
         additional_footer = self.get_additional_footer_with_recipient(
-            message.notification_ids
+            partner_ids
         )
         message.body += additional_footer
         res = super(
@@ -37,8 +41,9 @@ class MailNotification(models.Model):
         return res
 
     @api.model
-    def get_additional_footer_with_recipient(self, recipients):
-        recipients_name = [recipient.display_name for recipient in recipients]
+    def get_additional_footer_with_recipient(self, recipients_ids):
+        recipients = self.env['res.partner'].browse(recipients_ids)
+        recipients_name = [recipient.name for recipient in recipients]
         additional_footer = "<br /><b>%s%s.</b><br />" % (
             _("Also notified: "),
             ", ".join(recipients_name),
