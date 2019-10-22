@@ -6,41 +6,41 @@ from odoo.tools.translate import _
 
 
 class MailNotification(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
-    @api.multi
-    def _notify_by_email(
-        self, message, force_send=False, send_after_commit=True,
-        user_signature=True
+    @api.model
+    def _notify(
+        self,
+        message,
+        rdata,
+        record,
+        force_send,
+        send_after_commit,
+        model_description,
+        mail_auto_delete,
     ):
-        # we need to save the complete list of partners because
-        # _message_notification_recipients builds recipients
-        # grouped by users groups. Thus get_additional_footer would get a
-        # partial list of recipients
-        return super(
+        additional_footer = self.get_additional_footer_with_recipient(
+            message.notification_ids
+        )
+        message.body += additional_footer
+        res = super(
             MailNotification, self.with_context(notified_partners=self)
-        )._notify_by_email(
-            message, force_send=force_send,
-            send_after_commit=send_after_commit,
-            user_signature=user_signature
+        )._notify(
+            message,
+            rdata,
+            record,
+            force_send,
+            send_after_commit,
+            model_description,
+            mail_auto_delete,
         )
+        return res
 
     @api.model
-    def _notify_send(self, body, subject, recipients, **mail_values):
-        footer_recipients = self.env.context.get(
-            'notified_partners', recipients) or recipients
-        newbody = self.get_additional_footer(footer_recipients)
-        newbody += body
-        return super()._notify_send(
-            newbody, subject, recipients, **mail_values
+    def get_additional_footer_with_recipient(self, recipients):
+        recipients_name = [recipient.display_name for recipient in recipients]
+        additional_footer = "<br /><b>%s%s.</b><br />" % (
+            _("Also notified: "),
+            ", ".join(recipients_name),
         )
-
-    @api.model
-    def get_additional_footer(self, recipients):
-        recipients_name = [
-            recipient.name for recipient in recipients
-        ]
-        additional_footer = u'<br /><b>%s%s.</b><br />' % \
-                            (_('Also notified: '),
-                             ', '.join(recipients_name))
         return additional_footer
