@@ -367,6 +367,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
+#: code:addons/mail_tracking/static/src/xml/client_action.xml:34
 #: code:addons/mail_tracking/static/src/xml/failed_message.xml:36
 #, python-format
 msgid "Mark Reviewed"
@@ -462,6 +463,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
+#: code:addons/mail_tracking/static/src/xml/client_action.xml:37
 #: code:addons/mail_tracking/static/src/xml/failed_message.xml:39
 #, python-format
 msgid "Retry"
@@ -651,7 +653,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message.js:171
+#: code:addons/mail_tracking/static/src/js/failed_message.js:273
 #, python-format
 msgid "now"
 msgstr ""
