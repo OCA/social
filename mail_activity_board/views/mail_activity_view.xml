@@ -156,7 +156,7 @@
                 <field name="res_name" string="Origin"/>
             </xpath>
 
-            <xpath expr='//filter[@name="activities_my"]' position='after'>
+            <xpath expr='//filter[@name="activities_overdue"]' position='before'>
                 <filter string="Act. next month" name="activities_month"
                         domain="[('date_deadline', '&lt;', (context_today()+datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"
                         help="Show activities scheduled for next month."/>
@@ -181,7 +181,6 @@
     <record model="ir.actions.act_window" id="open_boards_activities">
         <field name="name">Activities</field>
         <field name="res_model">mail.activity</field>
-        <field name="view_type">form</field>
         <field name="view_mode">kanban,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
