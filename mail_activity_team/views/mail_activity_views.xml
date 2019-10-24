@@ -61,7 +61,7 @@
             <xpath expr='//field[@name="user_id"]' position='before'>
                 <field name="team_id"/>
             </xpath>
-            <xpath expr='//filter[@name="activities_my"]' position='after'>
+            <xpath expr='//filter[@name="activities_6_month"]' position='after'>
                 <filter name="my_team_activities" string="My Team Activities" domain="[('team_id.member_ids', '=', uid)]"/>
             </xpath>
             <group position='inside'>
