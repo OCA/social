@@ -16,11 +16,16 @@ class MassMailController(main.MassMailController):
         if not template:
             return result
         # Welcome new subscribers
-        contact = request.env["mail.mass_mailing.contact"].sudo().search([
-            ('list_ids', 'in', list_.ids),
-            ('email', '=', email),
-            ("opt_out", "=", False),
+        contact_obj = request.env["mail.mass_mailing.contact"].with_context(
+            default_list_ids=[list_id])
+        contact = contact_obj.sudo().search([
+            ('email', '=', request.session['mass_mailing_email']),
+            ('opt_out', '=', False),    # Needed until odoo/odoo#39604 is fixed
+            ('is_blacklisted', '=', False),
         ], limit=1)
+        # Needed until odoo/odoo#39604 is fixed
+        if not contact:
+            return result
         template.with_context(list_name=list_.name).send_mail(
             contact.id,
             # Must send now to use context

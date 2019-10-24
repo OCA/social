@@ -1,6 +1,6 @@
 To configure this module, you need to:
 
-#. Go to *Email Marketing > Contacts > Mailing Lists*.
+#. Go to *Email Marketing > Mailing Lists > Mailing Lists*.
 #. Edit or create one.
 #. Set a *Welcome mail template* to enable this module's special behavior when
    somebody subscribes to this mailing list. You can use one shipped with
