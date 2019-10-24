@@ -78,7 +78,6 @@
     <record model="ir.actions.act_window" id="mail_activity_team_action">
         <field name="name">Activity Teams</field>
         <field name="res_model">mail.activity.team</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
