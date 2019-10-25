@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<template>
+<templates>
 
     <t t-name="mail.chat.SidebarFailed">
         <span class="o_mail_failed_message_refresh hidden"><i class="fa fa-refresh"/> Outdated</span>
@@ -22,21 +22,21 @@
     <t t-extend="mail.EmptyChannel">
         <t t-jquery="t:last-child" t-operation="after">
             <t t-if="options.channel_id==='channel_failed'">
-                <div class="o_thread_title">Congratulations, doesn't have failed messages</div>
+                <div class="o_thread_title">Congratulations, your failed mailbox is empty</div>
                 <div>Failed messages appear here.</div>
             </t>
         </t>
     </t>
-    
+
     <t t-extend="mail.ChatThread.Message">
         <t t-jquery="span[t-attf-class=o_thread_icons]" t-operation="append">
-            <a t-if="message.is_failed &amp;&amp; options.display_retry_button" href="#" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.id">
-                <i class="fa fa-check"/> Mark Reviewed
+            <a t-if="message.is_failed &amp;&amp; options.display_retry_button" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.id">
+                <i class="fa fa-check"/> Set as Reviewed
             </a>
-            <a t-if="message.is_failed &amp;&amp; options.display_reviewed_button" href="#" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
+            <a t-if="message.is_failed &amp;&amp; options.display_reviewed_button" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
                 <i class="fa fa-retweet"/> Retry
             </a>
         </t>
     </t>
 
-</template>
+</templates>

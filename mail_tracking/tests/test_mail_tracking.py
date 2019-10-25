@@ -115,6 +115,29 @@ class TestMailTracking(TransactionCase):
         tracking_email.event_create('open', metadata)
         self.assertEqual(tracking_email.state, 'opened')
 
+    def test_message_post_partner_no_email(self):
+        # Create message with recipient without defined email
+        self.recipient.write({'email': ''})
+        message = self.env['mail.message'].create({
+            'subject': 'Message test',
+            'author_id': self.sender.id,
+            'email_from': self.sender.email,
+            'message_type': 'comment',
+            'model': 'res.partner',
+            'res_id': self.recipient.id,
+            'partner_ids': [(4, self.recipient.id)],
+            'body': '<p>This is a test message</p>',
+        })
+        # Search tracking created
+        tracking_email = self.env['mail.tracking.email'].search([
+            ('mail_message_id', '=', message.id),
+            ('partner_id', '=', self.recipient.id),
+        ])
+        # No email should generate a error state: no_recipient
+        self.assertEqual(tracking_email.state, 'error')
+        self.assertEqual(tracking_email.error_type, 'no_recipient')
+        self.assertFalse(self.recipient.email_bounced)
+
     def _check_partner_trackings(self, message):
         message_dict = message.message_format()[0]
         self.assertEqual(len(message_dict['partner_trackings']), 3)
@@ -192,6 +215,10 @@ class TestMailTracking(TransactionCase):
         self.assertFalse(tracking.mail_message_id.mail_tracking_needs_action)
         self.assertTrue(
             self.env['mail.message'].get_failed_count() < failed_count)
+        # No author_id
+        tracking.mail_message_id.author_id = False
+        values = tracking.mail_message_id.get_failed_messages()[0]
+        self.assertEqual(values['author'][0], -1)
 
     def mail_send(self, recipient):
         mail = self.env['mail.mail'].create({
