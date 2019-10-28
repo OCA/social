@@ -22,12 +22,29 @@ class MailMessage(models.Model):
              " to filter tracking issues",
         default=False,
     )
+    is_failed_message = fields.Boolean(compute="_compute_is_failed_message")
 
     @api.model
     def get_failed_states(self):
+        """The 'failed' states of the message"""
         return {'error', 'rejected', 'spam', 'bounced', 'soft-bounced'}
 
+    @api.depends('mail_tracking_needs_action', 'author_id', 'partner_ids',
+                 'mail_tracking_ids')
+    def _compute_is_failed_message(self):
+        """Compute 'is_failed_message' field for the active user"""
+        failed_states = self.get_failed_states()
+        for message in self:
+            needs_action = message.mail_tracking_needs_action
+            involves_me = self.env.user.partner_id in (
+                message.author_id | message.partner_ids)
+            has_failed_trackings = failed_states.intersection(
+                message.mapped("mail_tracking_ids.state"))
+            message.is_failed_message = bool(
+                needs_action and involves_me and has_failed_trackings)
+
     def _tracking_status_map_get(self):
+        """Map tracking states to be used in chatter"""
         return {
             'False': 'waiting',
             'error': 'error',
@@ -43,6 +60,7 @@ class MailMessage(models.Model):
         }
 
     def _partner_tracking_status_get(self, tracking_email):
+        """Determine tracking status"""
         tracking_status_map = self._tracking_status_map_get()
         status = 'unknown'
         if tracking_email:
@@ -51,12 +69,23 @@ class MailMessage(models.Model):
         return status
 
     def _partner_tracking_status_human_get(self, status):
+        """Translations for tracking statuses to be used on qweb"""
         statuses = {'waiting': _('Waiting'), 'error': _('Error'),
                     'sent': _('Sent'), 'delivered': _('Delivered'),
                     'opened': _('Opened'), 'unknown': _('Unknown')}
         return _("Status: %s") % statuses[status]
 
+    @api.model
+    def _get_error_description(self, tracking):
+        """Translations for error descriptions to be used on qweb"""
+        descriptions = {
+            'no_recipient': _("The partner doesn't have a defined email"),
+        }
+        return descriptions.get(tracking.error_type,
+                                tracking.error_description)
+
     def tracking_status(self):
+        """Generates a complete status tracking of the messages by partner"""
         res = {}
         for message in self:
             partner_trackings = []
@@ -80,7 +109,8 @@ class MailMessage(models.Model):
                     'status_human':
                         self._partner_tracking_status_human_get(status),
                     'error_type': tracking.error_type,
-                    'error_description': tracking.error_description,
+                    'error_description':
+                        self._get_error_description(tracking),
                     'tracking_id': tracking.id,
                     'recipient': recipient,
                     'partner_id': tracking.partner_id.id,
@@ -96,92 +126,79 @@ class MailMessage(models.Model):
                 partners |= message.needaction_partner_ids
             # Remove recipients already included
             partners -= partners_already
+            tracking_unkown_values = {
+                'status': 'unknown',
+                'status_human':  self._partner_tracking_status_human_get(
+                    'unknown'),
+                'error_type': False,
+                'error_description': False,
+                'tracking_id': False,
+            }
             for partner in partners:
                 # If there is partners not included, then status is 'unknown'
-                # Because can be an Cc recipient
+                # and perhaps a Cc recipient
                 isCc = False
                 if partner.email in email_cc_list:
                     email_cc_list.discard(partner.email)
                     isCc = True
-                partner_trackings.append({
-                    'status': 'unknown',
-                    'status_human':
-                        self._partner_tracking_status_human_get('unknown'),
-                    'error_type': False,
-                    'error_description': False,
-                    'tracking_id': False,
+                tracking_unkown_values.update({
                     'recipient': partner.name,
                     'partner_id': partner.id,
                     'isCc': isCc,
                 })
+                partner_trackings.append(tracking_unkown_values.copy())
             for email in email_cc_list:
                 # If there is Cc without partner
-                partner_trackings.append({
-                    'status': 'unknown',
-                    'status_human':
-                        self._partner_tracking_status_human_get('unknown'),
-                    'error_type': False,
-                    'error_description': False,
-                    'tracking_id': False,
+                tracking_unkown_values.update({
                     'recipient': email,
                     'partner_id': False,
                     'isCc': True,
                 })
-            res[message.id] = partner_trackings
-        return res
-
-    @api.multi
-    def _get_failed_message(self):
-        res = {}
-        for message in self:
-            res.update({
-                message.id: message.mail_tracking_needs_action
-                and (
-                    message.author_id.id == self.env.user.partner_id.id
-                    or any(message.partner_ids.filtered(
-                        lambda x: x.id == self.env.user.partner_id.id))
-                )
-                and any(message.mail_tracking_ids.filtered(
-                    lambda x: x.state in self.get_failed_states()))
-            })
+                partner_trackings.append(tracking_unkown_values.copy())
+            res[message.id] = {
+                'partner_trackings': partner_trackings,
+                'is_failed_message': message.is_failed_message,
+            }
         return res
 
     @api.model
     def _message_read_dict_postprocess(self, messages, message_tree):
-        res = super(MailMessage, self)._message_read_dict_postprocess(
+        """Preare values to be used by the chatter widget"""
+        res = super()._message_read_dict_postprocess(
             messages, message_tree)
         mail_message_ids = {m.get('id') for m in messages if m.get('id')}
         mail_messages = self.browse(mail_message_ids)
-        partner_trackings = mail_messages.tracking_status()
-        failed_message = mail_messages._get_failed_message()
+        tracking_statuses = mail_messages.tracking_status()
         for message_dict in messages:
             mail_message_id = message_dict.get('id', False)
             if mail_message_id:
-                message_dict.update({
-                    'partner_trackings': partner_trackings[mail_message_id],
-                    'failed_message': failed_message[mail_message_id],
-                })
-                message_dict['partner_trackings'] = \
-                    partner_trackings[mail_message_id]
+                message_dict.update(tracking_statuses[mail_message_id])
         return res
 
     @api.multi
     def _prepare_dict_failed_message(self):
+        """Preare values to be used by the chatter widget"""
         self.ensure_one()
         failed_trackings = self.mail_tracking_ids.filtered(
             lambda x: x.state in self.get_failed_states())
         failed_partners = failed_trackings.mapped('partner_id')
         failed_recipients = failed_partners.name_get()
+        if self.author_id and any(self.author_id.name_get()):
+            author = self.author_id.name_get()[0]
+        else:
+            author = (-1, _('-Unknown Author-'))
         return {
             'id': self.id,
             'date': self.date,
-            'author_id': self.author_id and self.author_id.name_get()[0] or '',
+            'author': author,
             'body': self.body,
             'failed_recipients': failed_recipients,
         }
 
     @api.multi
     def get_failed_messages(self):
+        """Returns the list of failed messages to be used by the
+           failed_messages widget"""
         return [msg._prepare_dict_failed_message() for msg in self]
 
     @api.multi
@@ -213,5 +230,5 @@ class MailMessage(models.Model):
 
     @api.model
     def get_failed_count(self):
-        """Gets the number of failed messages."""
+        """ Gets the number of failed messages used on discuss mailbox item"""
         return self.search_count(self._get_failed_message_domain())

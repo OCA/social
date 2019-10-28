@@ -21,8 +21,8 @@
             <field name="name">Message with CC</field>
             <field name="mail_message_id" ref="mail_message_cc" />
             <field name="partner_id" ref="base.res_partner_1" />
-            <field name="recipient">wood.corner26@example.com</field>
-            <field name="sender">demo@yourcompany.example.com</field>
+            <field name="recipient">demo@yourcompany.example.com</field>
+            <field name="sender">wood.corner26@example.com</field>
             <field name="state">sent</field>
             <field name="time" eval="DateTime.today().strftime('%Y-%m-%d %H:%M')"/>
         </record>

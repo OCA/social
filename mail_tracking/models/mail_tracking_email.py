@@ -7,7 +7,7 @@ import time
 import re
 from datetime import datetime
 
-from odoo import _, models, api, fields, tools
+from odoo import models, api, fields, tools
 import odoo.addons.decimal_precision as dp
 
 _logger = logging.getLogger(__name__)
@@ -171,8 +171,8 @@ class MailTrackingEmail(models.Model):
     @api.depends('recipient')
     def _compute_recipient_address(self):
         for email in self:
-            is_empty_recipient = not email.recipient or re.search(
-                r'<False>', email.recipient)
+            is_empty_recipient = (not email.recipient
+                                  or '<False>' in email.recipient)
             if not is_empty_recipient:
                 matches = re.search(r'<(.*@.*)>', email.recipient)
                 if matches:
@@ -227,22 +227,22 @@ class MailTrackingEmail(models.Model):
 
     @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
-        values = {}
+        values = {
+            'state': 'error',
+        }
         IrMailServer = self.env['ir.mail_server']
         if str(exception) == IrMailServer.NO_VALID_RECIPIENT \
                 and not self.recipient_address:
             values.update({
-                'state': 'error',
                 'error_type': 'no_recipient',
                 'error_description':
-                    _("The partner doesn't have a defined email"),
+                    "The partner doesn't have a defined email",
             })
         else:
             values.update({
                 'error_smtp_server': tools.ustr(smtp_server),
                 'error_type': exception.__class__.__name__,
                 'error_description': tools.ustr(exception),
-                'state': 'error',
             })
             self.sudo()._partners_email_bounced_set('error')
         self.sudo().write(values)

@@ -21,12 +21,3 @@ class MailComposer(models.TransientModel):
         if message.exists():
             message.mail_tracking_needs_action = False
         return super().send_mail(auto_commit=auto_commit)
-
-    @api.model
-    def get_record_data(self, values):
-        values = super(MailComposer, self).get_record_data(values)
-        if self._context.get('default_hide_followers'):
-            values['partner_ids'] = [
-                (6, 0, self._context['default_partner_ids'])
-            ]
-        return values

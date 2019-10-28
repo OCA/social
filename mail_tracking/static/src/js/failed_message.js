@@ -35,7 +35,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
 
     Message.include({
         init: function (parent, data) {
-            this._isFailedMessage = data.failed_message;
+            this._isFailedMessage = data.is_failed_message;
             this._super.apply(this, arguments);
         },
 
@@ -119,9 +119,10 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             var $sidebar = this._super.apply(this, arguments);
             // Because Odoo implementation isn't designed to be inherited
             // properly we inject failed button using jQuery.
-            var $sidebarFailed = $(QWeb.render('mail_tracking.SidebarFailed',
+            var $failed_item = $(QWeb.render('mail_tracking.SidebarFailed',
                 this._sidebarQWebParams()));
-            $sidebarFailed.insertBefore($sidebar.find("hr[class='mb8']"));
+            $failed_item.insertAfter(
+                $sidebar.find(".o_mail_discuss_title_main").filter(":last"));
             return $sidebar;
         },
 
@@ -140,6 +141,8 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                             });
                     });
             } else {
+                // Workaround to avoid calling '_fetchAndRenderThread' when
+                // it's not really needed.
                 this._super.apply(this, arguments);
             }
         },
@@ -175,7 +178,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');
-            this._rpc({
+            return this._rpc({
                 model: 'mail.message',
                 method: 'toggle_tracking_status',
                 args: [[messageID]],
@@ -198,6 +201,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     Mailbox.include({
         _getThreadDomain: function () {
             if (this._id === 'mailbox_failed') {
+                // Workaround to avoid throw an exception
                 return [
                     ['mail_tracking_ids.state', 'in', FAILED_STATES],
                     ['mail_tracking_needs_action', '=', true],
@@ -374,6 +378,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                     keepChanges: true,
                 });
             } else {
+                // Workarround to avoid trigger reload event two times.
                 this._super.apply(this, arguments);
             }
         },

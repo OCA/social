@@ -18,6 +18,8 @@ class MailThread(models.AbstractModel):
         auto_join=True)
 
     def _get_failed_message_domain(self):
+        """Domain used to display failed messages on the 'failed_messages'
+           widget"""
         failed_states = self.env['mail.message'].get_failed_states()
         return [
             ('mail_tracking_needs_action', '=', True),
@@ -27,6 +29,11 @@ class MailThread(models.AbstractModel):
     @api.multi
     @api.returns('self', lambda value: value.id)
     def message_post(self, *args, **kwargs):
+        """Adds CC recipient to the message.
+
+        Because Odoo implementation avoid store cc recipients we ensure that
+        this information its written into the mail.message record.
+        """
         new_message = super().message_post(*args, **kwargs)
         email_cc = kwargs.get('cc')
         if email_cc:
@@ -73,7 +80,7 @@ class MailThread(models.AbstractModel):
         res = super().fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar,
             submenu=submenu)
-        if view_type != 'search' and view_type != 'form':
+        if view_type not in {'search', 'form'}:
             return res
         doc = etree.XML(res['arch'])
         if view_type == 'search':
