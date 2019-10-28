@@ -303,7 +303,7 @@ class TestMailTracking(TransactionCase):
             self.assertEqual('error', tracking.state)
             self.assertEqual('Warning', tracking.error_type)
             self.assertEqual('Test error', tracking.error_description)
-            self.assertTrue(self.recipient.email_bounced)
+            self.assertFalse(self.recipient.email_bounced)
 
     def test_partner_email_change(self):
         mail, tracking = self.mail_send(self.recipient.email)

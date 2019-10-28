@@ -55,7 +55,7 @@ class TestMassMailing(TransactionCase):
                     self.assertEqual('Warning', track.error_type)
                     self.assertEqual('Mock test error',
                                      track.error_description)
-            self.assertTrue(self.contact_a.email_bounced)
+            self.assertFalse(self.contact_a.email_bounced)
 
     def test_tracking_email_link(self):
         self.mailing.send_mail()

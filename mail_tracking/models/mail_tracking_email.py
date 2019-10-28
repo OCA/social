@@ -105,8 +105,7 @@ class MailTrackingEmail(models.Model):
         if not email:
             return False
         res = self._email_last_tracking_state(email)
-        return res and res[0].get('state', '') in {'rejected', 'error',
-                                                   'spam', 'bounced'}
+        return res and res[0].get('state') in {'rejected', 'spam', 'bounced'}
 
     @api.model
     def _email_last_tracking_state(self, email):
@@ -222,7 +221,6 @@ class MailTrackingEmail(models.Model):
             'error_description': tools.ustr(exception),
             'state': 'error',
         })
-        self.sudo()._partners_email_bounced_set('error')
         return True
 
     @api.multi

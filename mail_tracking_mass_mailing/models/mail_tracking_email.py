@@ -47,7 +47,6 @@ class MailTrackingEmail(models.Model):
     def smtp_error(self, mail_server, smtp_server, exception):
         res = super(MailTrackingEmail, self).smtp_error(
             mail_server, smtp_server, exception)
-        self._contacts_email_bounced_set('error')
         return res
 
     @api.multi
