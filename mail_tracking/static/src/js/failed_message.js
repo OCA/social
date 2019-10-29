@@ -28,21 +28,44 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
 
     /* COMMON */
     AbstractMessage.include({
+
+        /**
+         * Abstract method to be implemented
+         *
+         * @returns {Boolean}
+         */
         isFailed: function () {
             return false;
         },
     });
 
     Message.include({
+
+        /**
+         * Init
+         *
+         * @param {Widget} parent
+         * @param {Object} data
+         */
         init: function (parent, data) {
             this._isFailedMessage = data.is_failed_message;
             this._super.apply(this, arguments);
         },
 
+        /**
+        * Implementation of the abstract method
+        *
+        * @returns {Boolean}
+        */
         isFailed: function () {
             return _.contains(this._threadIDs, 'mailbox_failed');
         },
 
+        /**
+        * Adds/Remove message to/from failed thread
+        *
+        * @param {Boolean} failed
+        */
         setFailed: function (failed) {
             if (failed) {
                 this._addThread('mailbox_failed');
@@ -51,6 +74,9 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             }
         },
 
+        /**
+        * Process message mailbox
+        */
         _processMailboxes: function () {
             this.setFailed(this._isFailedMessage);
             this._super.apply(this, arguments);
@@ -58,6 +84,13 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     });
 
     MailManagerNotif.include({
+
+        /**
+         * Handle partner notification
+         *
+         * @private
+         * @param {Object} data
+         */
         _handlePartnerNotification: function (data) {
             if (data.type === 'toggle_tracking_status') {
                 this._handlePartnerToggleFailedNotification(data);
@@ -66,6 +99,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             }
         },
 
+        /**
+        * Handle partner toggle failed notification
+        *
+        * @private
+        * @param {Object} data
+        */
         _handlePartnerToggleFailedNotification: function (data) {
             var self = this;
             var failed = this.getMailbox('failed');
@@ -107,6 +146,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             'click .o_failed_message_reviewed': '_onMarkFailedMessageReviewed',
         }),
 
+        /**
+        * Sidebar QWeb button params
+        *
+        * @private
+        * @returns {Object}
+        */
         _sidebarQWebParams: function () {
             var failed = this.call('mail_service', 'getMailbox', 'failed');
             return {
@@ -115,6 +160,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             };
         },
 
+        /**
+        * Render sidebar failed button
+        *
+        * @private
+        * @returns {jQueryElementt}
+        */
         _renderSidebar: function () {
             var $sidebar = this._super.apply(this, arguments);
             // Because Odoo implementation isn't designed to be inherited
@@ -126,6 +177,13 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             return $sidebar;
         },
 
+        /**
+         * Message Updated
+         *
+         * @private
+         * @param {Object} message
+         * @param {String} type
+         */
         _onMessageUpdated: function (message, type) {
             var self = this;
             var currentThreadID = this._thread.getID();
@@ -147,6 +205,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             }
         },
 
+        /**
+        * Get thread rendering options
+        *
+        * @private
+        * @returns {Object}
+        */
         _getThreadRenderingOptions: function () {
             var values = this._super.apply(this, arguments);
             if (this._thread.getID() === 'mailbox_failed') {
@@ -158,6 +222,11 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             return values;
         },
 
+        /**
+        * Start listening events
+        *
+        * @private
+        */
         _startListening: function () {
             this._super.apply(this, arguments);
             this.call('mail_service', 'getMailBus')
@@ -165,6 +234,10 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
 
         // Handlers
+        /**
+         * @private
+         * @param {Event} event
+         */
         _onRetryFailedMessage: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');
@@ -175,6 +248,11 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             });
         },
 
+        /**
+        * @private
+        * @param {Event} event
+        * @returns {Promise}
+        */
         _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');
@@ -188,6 +266,13 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     });
 
     MailManager.include({
+
+        /**
+         * Create mailbox entry
+         *
+         * @private
+         * @param {Object} data
+         */
         _updateMailboxesFromServer: function (data) {
             this._super.apply(this, arguments);
             this._addMailbox({
@@ -199,6 +284,13 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     });
 
     Mailbox.include({
+
+        /**
+         * Get thread domain
+         *
+         * @private
+         * @returns {Array}
+         */
         _getThreadDomain: function () {
             if (this._id === 'mailbox_failed') {
                 // Workaround to avoid throw an exception
@@ -213,6 +305,14 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
 
 
     /* FAILED MESSAGES CHATTER WIDGET */
+    /**
+    * Get messages with selected ids
+    *
+    * @private
+    * @param {Object} self
+    * @param {Array} ids
+    * @returns {Array}
+    */
     function _readMessages (self, ids) {
         if (!ids.length) {
             return $.when([]);
@@ -229,11 +329,20 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                 msg.date = moment(time.auto_str_to_date(msg.date));
                 msg.hour = utils.timeFromNow(msg.date);
             });
-            return _.sortBy(messages, 'date');
+            return messages;
         });
     }
 
     BasicModel.include({
+
+        /**
+        * Fetch special failed messages
+        *
+        * @private
+        * @param {Object} record
+        * @param {String} fieldName
+        * @returns {Array}
+        */
         _fetchSpecialFailedMessages: function (record, fieldName) {
             var localID = record._changes && fieldName in record._changes
                 ? record._changes[fieldName] : record.data[fieldName];
@@ -242,6 +351,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     });
 
     var AbstractFailedMessagesField = AbstractField.extend({
+
+        /**
+        * Abstract method to be implemented
+        *
+        * @returns {Boolean}
+        */
         _markFailedMessageReviewed: function () {
             return false;
         },
@@ -262,6 +377,81 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                 'bus_service', 'onNotification', this, this._onNotification);
         },
 
+        /**
+        * Get message qweb parameters
+        *
+        * @private
+        * @returns {Object}
+        */
+        _failedItemsQWebParams: function () {
+            return {
+                failed_messages: this.failed_messages,
+                nbFailedMessages: this.failed_messages.length,
+                date_format: time.getLangDateFormat(),
+                datetime_format: time.getLangDatetimeFormat(),
+            };
+        },
+
+        /**
+        * Render failed message
+        *
+        * @private
+        */
+        _render: function () {
+            if (this.failed_messages.length) {
+                this.$el.html(QWeb.render(
+                    'mail_tracking.failed_message_items',
+                    this._failedItemsQWebParams()));
+            } else {
+                this.$el.empty();
+            }
+        },
+
+        /**
+        * Reset
+        *
+        * @private
+        * @param {Object} record
+        */
+        _reset: function (record) {
+            this._super.apply(this, arguments);
+            this.failed_messages = this.record.specialData[this.name];
+            this.res_id = record.res_id;
+        },
+
+        /**
+        * Reload
+        *
+        * @private
+        * @param {Array} fieldsToReload
+        */
+        _reload: function (fieldsToReload) {
+            this.trigger_up('reload_mail_fields', fieldsToReload);
+        },
+
+        /**
+        * Mark failed message as reviewed
+        *
+        * @private
+        * @param {Int} id
+        * @returns {Promise}
+        */
+        _markFailedMessageReviewed: function (id) {
+            return this._rpc({
+                model: 'mail.message',
+                method: 'toggle_tracking_status',
+                args: [[id]],
+                context: this.record.getContext(),
+            });
+        },
+
+        // Handlers
+        /**
+        * Listen notification to launch reload process
+        *
+        * @private
+        * @param {Array} notifs
+        */
         _onNotification: function (notifs) {
             var self = this;
             _.each(notifs, function (notif) {
@@ -276,44 +466,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             });
         },
 
-        _failedItemsQWebParams: function () {
-            return {
-                failed_messages: this.failed_messages,
-                nbFailedMessages: this.failed_messages.length,
-                date_format: time.getLangDateFormat(),
-                datetime_format: time.getLangDatetimeFormat(),
-            };
-        },
-
-        _render: function () {
-            if (this.failed_messages.length) {
-                this.$el.html(QWeb.render(
-                    'mail_tracking.failed_message_items',
-                    this._failedItemsQWebParams()));
-            } else {
-                this.$el.empty();
-            }
-        },
-        _reset: function (record) {
-            this._super.apply(this, arguments);
-            this.failed_messages = this.record.specialData[this.name];
-            this.res_id = record.res_id;
-        },
-
-        _reload: function (fieldsToReload) {
-            this.trigger_up('reload_mail_fields', fieldsToReload);
-        },
-
-        _markFailedMessageReviewed: function (id) {
-            return this._rpc({
-                model: 'mail.message',
-                method: 'toggle_tracking_status',
-                args: [[id]],
-                context: this.record.getContext(),
-            });
-        },
-
-        // Handlers
+        /**
+         * Handle retry failed message event
+         *
+         * @private
+         * @param {Event} event
+         */
         _onRetryFailedMessage: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');
@@ -324,6 +482,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             });
         },
 
+        /**
+         * Handle mark message as reviewed event
+         *
+         * @private
+         * @param {Event} event
+         */
         _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');
@@ -352,6 +516,16 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     });
 
     Chatter.include({
+
+        /**
+         * Init
+         *
+         * @private
+         * @param {Widget} parent
+         * @param {Object} record
+         * @param {Object} mailFields
+         * @param {Object} options
+         */
         init: function (parent, record, mailFields, options) {
             this._super.apply(this, arguments);
             // Initialize mail_failed_message widget
@@ -361,6 +535,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             }
         },
 
+        /**
+         * Render
+         *
+         * @private
+         * @returns {Promise}
+         */
         _render: function () {
             var self = this;
             return this._super.apply(this, arguments).then(function () {
@@ -371,6 +551,12 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             });
         },
 
+        /**
+         * Handle reload fields event
+         *
+         * @private
+         * @param {Event} event
+         */
         _onReloadMailFields: function (event) {
             if (this.fields.failed_message && event.data.failed_message) {
                 this.trigger_up('reload', {

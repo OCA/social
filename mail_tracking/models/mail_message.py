@@ -183,7 +183,7 @@ class MailMessage(models.Model):
             lambda x: x.state in self.get_failed_states())
         failed_partners = failed_trackings.mapped('partner_id')
         failed_recipients = failed_partners.name_get()
-        if self.author_id and any(self.author_id.name_get()):
+        if self.author_id:
             author = self.author_id.name_get()[0]
         else:
             author = (-1, _('-Unknown Author-'))
@@ -199,7 +199,8 @@ class MailMessage(models.Model):
     def get_failed_messages(self):
         """Returns the list of failed messages to be used by the
            failed_messages widget"""
-        return [msg._prepare_dict_failed_message() for msg in self]
+        return [msg._prepare_dict_failed_message()
+                for msg in self.sorted('date', reverse=True)]
 
     @api.multi
     def toggle_tracking_status(self):

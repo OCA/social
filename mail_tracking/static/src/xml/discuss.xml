@@ -19,7 +19,7 @@
     <t t-extend="mail.widget.Thread.Empty">
         <t t-jquery="t:last-child" t-operation="after">
             <t t-if="thread.getID() === 'mailbox_failed'">
-                <div class="o_thread_title">Congratulations, doesn't have failed messages</div>
+                <div class="o_thread_title">Congratulations, your failed mailbox is empty</div>
                 <div>Failed messages appear here.</div>
             </t>
         </t>
@@ -27,10 +27,10 @@
 
     <t t-extend="mail.widget.Thread.Message">
         <t t-jquery="span[t-attf-class=o_thread_icons]" t-operation="append">
-            <a t-if="message.isFailed() &amp;&amp; options.displayRetryButton" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.getID()">
+            <a t-if="message.isFailed() &amp;&amp; options.displayRetryButton" class="btn btn-link btn-success text-success btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.getID()">
                 <i class="fa fa-check"/> Set as Reviewed
             </a>
-            <a t-if="message.isFailed() &amp;&amp; options.displayReviewedButton" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.getID()">
+            <a t-if="message.isFailed() &amp;&amp; options.displayReviewedButton" class="btn btn-link btn-default text-warning btn-sm o_failed_message_retry" t-att-data-message-id="message.getID()">
                 <i class="fa fa-retweet"/> Retry
             </a>
         </t>
