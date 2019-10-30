@@ -13,7 +13,9 @@
             <script type="text/javascript"
                     src="/mail_tracking/static/src/js/mail_tracking.js"/>
             <script type="text/javascript"
-                    src="/mail_tracking/static/src/js/failed_message.js"/>
+                    src="/mail_tracking/static/src/js/failed_message/discuss.js"/>
+            <script type="text/javascript"
+                    src="/mail_tracking/static/src/js/failed_message/widget.js"/>
         </xpath>
     </template>
 </odoo>

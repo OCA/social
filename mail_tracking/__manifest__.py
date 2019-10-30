@@ -31,8 +31,9 @@
     ],
     "qweb": [
         "static/src/xml/mail_tracking.xml",
-        "static/src/xml/failed_message.xml",
-        "static/src/xml/discuss.xml",
+        "static/src/xml/failed_message/common.xml",
+        "static/src/xml/failed_message/widget.xml",
+        "static/src/xml/failed_message/discuss.xml",
     ],
     'demo': [
         'demo/demo.xml',
