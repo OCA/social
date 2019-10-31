@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo12-addon-mail_tracking_mass_mailing',
         'odoo12-addon-mass_mailing_custom_unsubscribe',
         'odoo12-addon-mass_mailing_list_dynamic',
+        'odoo12-addon-mass_mailing_newsletter_welcome_mail',
         'odoo12-addon-mass_mailing_partner',
         'odoo12-addon-mass_mailing_resend',
         'odoo12-addon-mass_mailing_unique',
