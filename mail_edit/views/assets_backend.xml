@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="assets_backend" name="mail assets"
+              inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/mail_edit/static/src/js/thread.js"/>
+            <link rel="stylesheet" href="/mail_edit/static/src/less/thread.less" type="text/less"/>
+        </xpath>
+    </template>
+</odoo>

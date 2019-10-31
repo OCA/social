@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="view_message_form">
+        <field name="name">mail.message.form (in mail_edit_chatter)</field>
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="inside">
+                <field name="edited" invisible="1"/>
+                <page attrs="{'invisible': [('edited', '=', False)]}" string="Previous Editions">
+                    <field name="edited_message_ids"/>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_message_edition_tree_view">
+        <field name="name">mail.message.edition.tree (in mail_edit_chatter)</field>
+        <field name="model">mail.message.edition</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="create_date"/>
+                <field name="body"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_message_edition_form_view">
+        <field name="name">mail.message.edition.form (in mail_edit_chatter)</field>
+        <field name="model">mail.message.edition</field>
+        <field name="arch" type="xml">
+            <form string="Editions">
+                <sheet>
+                    <group>
+                        <field name="create_date"/>
+                        <field name="body"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="act_mail_message_edition_view" model="ir.actions.act_window">
+        <field name="name">Message Edition</field>
+        <field name="res_model">mail.message.edition</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+</odoo>

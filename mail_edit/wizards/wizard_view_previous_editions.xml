@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="wizard_view_previous_editions_form_view">
+        <field name="name">wizard.view.previous.editions.form (in mail_edit_chatter)</field>
+        <field name="model">wizard.view.previous.editions</field>
+        <field name="arch" type="xml">
+            <form string="View Previous Editions">
+                <notebook>
+                    <page string="Previous Editions">
+                        <field name="edited_message_ids"/>
+                    </page>
+                </notebook>
+                <footer>
+                    <button string="Close" class="btn-default" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>

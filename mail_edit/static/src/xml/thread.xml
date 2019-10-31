@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery=".o_thread_message_needaction" t-operation="after">
+            <i t-if="!message.is_needaction &amp;&amp; !message.is_note &amp;&amp; message.is_author"
+               class="fa fa-lg fa-pencil-square-o o_thread_icon o_thread_message_edit"
+               t-att-data-message-id="message.id" title="Edit Message"/>
+        </t>
+        <t t-jquery=".o_mail_timestamp" t-operation="after">
+            <small class="o_thread_edited_label" t-if="!message.is_needaction &amp;&amp; message.edited" t-att-data-message-id="message.id"
+                   title="View Previous Editions">- (edited)</small>
+        </t>
+    </t>
+
+</templates>

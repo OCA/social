@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="wizard_edit_message_form_view">
+        <field name="name">wizard.edit.message.form</field>
+        <field name="model">wizard.edit.message</field>
+        <field name="arch" type="xml">
+            <form string="Wizard Edit Message">
+                <group>
+                    <field name="message"/>
+                </group>
+                <footer>
+                    <button name="save_message_changes"
+                            string="Save"
+                            class="btn-primary"
+                            type="object"/>
+                    <button string="Cancel"
+                            class="btn-default"
+                            special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+
+
+</odoo>
