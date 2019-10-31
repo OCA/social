@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Tecnativa - Jairo Llopis
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<data noupdate="1">
+
+    <record id="mail_template_welcome" model="mail.template">
+        <field name="name">Welcome mail to newsletter subscribers</field>
+        <field name="model_id" ref="mass_mailing.model_mail_mass_mailing_contact"/>
+        <field name="use_default_to" eval="True"/>
+        <field name="lang">${ctx.get("lang")}</field>
+        <field name="subject">Welcome to the mailing list ${ctx.get("list_name")}</field>
+        <field name="body_html" type="html">
+            <div>Dear <b>${object.name or object.email}</b>,
+                <br/>
+                <h3>Thanks for signing up for our newsletter!</h3>
+                <p>Regards,</p>
+            </div>
+        </field>
+    </record>
+
+</data>
