@@ -19,7 +19,7 @@
     <t t-extend="mail.widget.Thread.Empty">
         <t t-jquery="t:last-child" t-operation="after">
             <t t-if="thread.getID() === 'mailbox_failed'">
-                <div class="o_thread_title">Congratulations, your failed mailbox is empty</div>
+                <div class="o_thread_title">Congratulations, you don't have any failed messages</div>
                 <div>Failed messages appear here.</div>
             </t>
         </t>

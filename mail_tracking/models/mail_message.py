@@ -30,7 +30,7 @@ class MailMessage(models.Model):
         return {'error', 'rejected', 'spam', 'bounced', 'soft-bounced'}
 
     @api.depends('mail_tracking_needs_action', 'author_id', 'partner_ids',
-                 'mail_tracking_ids')
+                 'mail_tracking_ids.state')
     def _compute_is_failed_message(self):
         """Compute 'is_failed_message' field for the active user"""
         failed_states = self.get_failed_states()

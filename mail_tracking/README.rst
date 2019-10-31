@@ -98,8 +98,8 @@ If you want to see all tracking emails and events you can go to
 * Settings > Technical > Email > Tracking emails
 * Settings > Technical > Email > Tracking events
 
-When the message generates and 'error' status, it will apear on discuss 'Failed'
-channel. Any view that uses 'mail_thread' widget can show the failed messages
+When the message generates an 'error' status, it will apear on discuss 'Failed'
+channel. Any view with chatter can show the failed messages
 too.
 
 * Discuss
