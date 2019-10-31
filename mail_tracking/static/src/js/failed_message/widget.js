@@ -301,8 +301,8 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             this._super.apply(this, arguments);
             this._enabledOptions.displayRetryButton = true;
             this._enabledOptions.displayReviewedButton = true;
-            this._disabledOptions.displayRetryButton = true;
-            this._disabledOptions.displayReviewedButton = true;
+            this._disabledOptions.displayRetryButton = false;
+            this._disabledOptions.displayReviewedButton = false;
         },
     });
 

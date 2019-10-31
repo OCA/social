@@ -233,3 +233,24 @@ class MailMessage(models.Model):
     def get_failed_count(self):
         """ Gets the number of failed messages used on discuss mailbox item"""
         return self.search_count(self._get_failed_message_domain())
+
+    @api.model
+    def set_all_as_reviewed(self):
+        """ Sets all messages in the given domain as reviewed.
+            Used by Discuss """
+
+        unreviewed_messages = self.search(self._get_failed_message_domain())
+        unreviewed_messages.write({'mail_tracking_needs_action': False})
+        ids = unreviewed_messages.ids
+
+        self.env['bus.bus'].sendone(
+            (self._cr.dbname, 'res.partner',
+             self.env.user.partner_id.id),
+            {
+                'type': 'toggle_tracking_status',
+                'message_ids': ids,
+                'needs_actions': False,
+            }
+        )
+
+        return ids

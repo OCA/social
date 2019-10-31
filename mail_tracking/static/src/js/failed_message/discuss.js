@@ -16,6 +16,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
     var MailManager = require('mail.Manager');
     var Mailbox = require('mail.model.Mailbox');
     var core = require('web.core');
+    var session = require('web.session');
 
     var QWeb = core.qweb;
     var _t = core._t;
@@ -128,7 +129,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
                         var channelFailed = self.getMailbox('failed');
                         channelFailed.invalidateCaches();
                     }
-                    self._mailBus.trigger('update_message', message);
+                    self._mailBus.trigger('update_message', message, data.type);
                 }
             });
 
@@ -180,6 +181,63 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
             $failed_item.insertAfter(
                 $sidebar.find(".o_mail_discuss_title_main").filter(":last"));
             return $sidebar;
+        },
+
+        /**
+         * Overrides to listen click on 'Set all as reviewed' button
+         *
+         * @Override
+         */
+        _renderButtons: function () {
+            this._super.apply(this, arguments);
+            this.$buttons
+                .on('click', '.o_mail_discuss_button_set_all_reviewed',
+                    this._onSetAllAsReviewedClicked.bind(this));
+        },
+
+        /**
+         * Overrides to update 'set all as reviewed' button
+         *
+         * @Override
+         */
+        _updateControlPanelButtons: function (thread) {
+            // Set All Reviewed
+            if (thread.getID() === 'mailbox_failed') {
+                this.$buttons
+                    .find('.o_mail_discuss_button_set_all_reviewed')
+                    .removeClass('d-none d-md-inline-block')
+                    .addClass('d-none d-md-inline-block');
+            } else {
+                this.$buttons
+                    .find('.o_mail_discuss_button_set_all_reviewed')
+                    .removeClass('d-none d-md-inline-block')
+                    .addClass('d-none');
+            }
+
+            this._super.apply(this, arguments);
+        },
+
+        /**
+         * Overrides to update 'set all as reviewed' button
+         *
+         * @Override
+         */
+        _updateButtonStatus: function (disabled, type) {
+            if (this._thread.getID() === 'mailbox_failed') {
+                this.$buttons
+                    .find('.o_mail_discuss_button_set_all_reviewed')
+                    .toggleClass('disabled', disabled);
+                //  Display Rainbowman when all inbox messages are reviewed
+                // through 'TOGGLE TRACKING STATUS' or marking last failed
+                // message as reviewed
+                if (disabled && type === 'toggle_tracking_status') {
+                    this.trigger_up('show_effect', {
+                        message: _t(
+                            "Congratulations, your failed mailbox is empty"),
+                        type: 'rainbow_man',
+                    });
+                }
+            }
         },
 
         /**
@@ -271,6 +329,13 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
                 context: this.getSession().user_context,
             });
         },
+
+        /**
+         * @private
+         */
+        _onSetAllAsReviewedClicked: function () {
+            this._thread.setAllMessagesAsReviewed();
+        },
     });
 
     MailManager.include({
@@ -302,10 +367,31 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
                 return [
                     ['mail_tracking_ids.state', 'in', FAILED_STATES],
                     ['mail_tracking_needs_action', '=', true],
+                    '|',
+                    ['partner_ids', 'in', [session.partner_id]],
+                    ['author_id', '=', session.partner_id],
                 ];
             }
             // Workaround to avoid throw 'Missing domain' exception
             return this._super.apply(this, arguments);
+        },
+
+        /**
+         * Sets all messages from the mailbox as reviewed. At the moment,
+         * this method makes only sense for 'Failed'.
+         *
+         * @param  {Array} domain
+         * @returns {$.Promise} resolved when all messages have been marked as
+         *   reviewed on the server
+         */
+        setAllMessagesAsReviewed: function () {
+            if (this._id === 'mailbox_failed' && this.getMailboxCounter() > 0) {
+                return this._rpc({
+                    model: 'mail.message',
+                    method: 'set_all_as_reviewed',
+                });
+            }
+            return $.when();
         },
     });
 
