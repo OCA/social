@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="mail.chatter.Buttons">
+         <t t-jquery="button.o_chatter_button_schedule_activity" t-operation="after">
+             <button t-if="scheduleActivityButton" class="btn btn-link o_chatter_button_list_activity"
+                     title="See activities list" type="button" disabled="disabled">
+                 <i class="fa fa-list"/> Activities
+             </button>
+         </t>
+    </t>
+
+</templates>
