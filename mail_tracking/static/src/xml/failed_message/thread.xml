@@ -28,10 +28,10 @@
                             </strong>
                             - <small class="o_mail_timestamp" t-att-title="message.date.format(date_format)"><t t-esc="message.hour"/></small>
                             <span t-attf-class="o_thread_icons">
-                                <a href="#" class="btn btn-link btn-success o_thread_icon text-success btn-sm o_failed_message_reviewed o_activity_link" t-att-data-message-id="message.id">
+                                <a href="#" class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_reviewed o_activity_link" t-att-data-message-id="message.id">
                                     <i class="fa fa-check"/> Set as Reviewed
                                 </a>
-                                <a href="#" class="btn btn-link btn-default o_thread_icon text-warning btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
+                                <a href="#" class="btn btn-link btn-default o_thread_icon text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
                                     <i class="fa fa-retweet"/> Retry
                                 </a>
                             </span>

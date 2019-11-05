@@ -13,34 +13,44 @@ _logger = logging.getLogger(__name__)
 BLANK = 'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 
-def _env_get(db, callback, tracking_id, event_type, **kw):
-    res = 'NOT FOUND'
-    reg = False
-    current = http.request.db and db == http.request.db
-    env = current and http.request.env
-    if not env:
-        with api.Environment.manage():
-            try:
-                reg = registry(db)
-            except OperationalError:
-                _logger.warning("Selected BD '%s' not found", db)
-            except Exception:  # pragma: no cover
-                _logger.warning("Selected BD '%s' connection error", db)
-            if reg:
-                _logger.info("New environment for database '%s'", db)
-                with reg.cursor() as new_cr:
-                    new_env = api.Environment(new_cr, SUPERUSER_ID, {})
-                    res = callback(new_env, tracking_id, event_type, **kw)
-                    new_env.cr.commit()
-    else:
-        # make sudo when reusing environment
-        env = env(user=SUPERUSER_ID)
-        res = callback(env, tracking_id, event_type, **kw)
-    return res
+# Helper class to invoke "_tracking_*" methods
+class EnvironmentDB:
+    def __init__(self, db):
+        self.db = db
+        self.__is_new = False
+        self._env = False
+
+    def __enter__(self):
+        reg = False
+        current = http.request.db and self.db == http.request.db
+        self._env = current and http.request.env
+        if not self._env:
+            with api.Environment.manage():
+                try:
+                    reg = registry(self.db)
+                except OperationalError:
+                    _logger.warning("Selected BD '%s' not found", self.db)
+                except Exception:  # pragma: no cover
+                    _logger.warning(
+                        "Selected BD '%s' connection error", self.db)
+                if reg:
+                    self.__is_new = True
+                    _logger.info("New environment for database '%s'", self.db)
+                    with reg.cursor() as new_cr:
+                        self._env = api.Environment(new_cr, SUPERUSER_ID, {})
+                        return self._env
+        else:
+            self._env = self._env(user=SUPERUSER_ID)
+        return self._env
+
+    def __exit__(self, type, value, traceback):
+        if self.__is_new:
+            self._env.cr.commit()
 
 
 class MailTrackingController(MailController):
 
+    # Prepare remote info metadata
     def _request_metadata(self):
         request = http.request.httprequest
         return {
@@ -50,9 +60,12 @@ class MailTrackingController(MailController):
             'ua_family': request.user_agent.browser or False,
         }
 
-    def _tracking_open(self, env, tracking_id, event_type, **kw):
+    # Tracking Open (Compatible with tracking without generated token)
+    def _tracking_open(self, env, tracking_id, token, **kw):
         tracking_email = env['mail.tracking.email'].search([
             ('id', '=', tracking_id),
+            ('state', 'in', ['sent', 'delivered']),
+            ('token', '=', token),
         ])
         if tracking_email:
             metadata = self._request_metadata()
@@ -61,26 +74,37 @@ class MailTrackingController(MailController):
             _logger.warning(
                 "MailTracking email '%s' not found", tracking_id)
 
-    def _tracking_event(self, env, tracking_id, event_type, **kw):
+    # Tracking Event without token
+    def _tracking_event(self, env, event_type, **kw):
         metadata = self._request_metadata()
         return env['mail.tracking.email'].event_process(
             http.request, kw, metadata, event_type=event_type)
 
+    # Route used by external mail service
     @http.route('/mail/tracking/all/<string:db>',
                 type='http', auth='none', csrf=False)
     def mail_tracking_all(self, db, **kw):
-        return _env_get(db, self._tracking_event, None, None, **kw)
+        with EnvironmentDB(db) as env:
+            return self._tracking_event(env, None) if env else 'NOT FOUND'
 
+    # Route used by external mail service
     @http.route('/mail/tracking/event/<string:db>/<string:event_type>',
                 type='http', auth='none', csrf=False)
     def mail_tracking_event(self, db, event_type, **kw):
-        return _env_get(db, self._tracking_event, None, event_type, **kw)
+        with EnvironmentDB(db) as env:
+            return (self._tracking_event(env, event_type)
+                    if env else 'NOT FOUND')
 
-    @http.route('/mail/tracking/open/<string:db>'
-                '/<int:tracking_email_id>/blank.gif',
+    # Route used to track mail openned (With & Without Token)
+    @http.route(['/mail/tracking/open/<string:db>'
+                 '/<int:tracking_email_id>/blank.gif',
+                 '/mail/tracking/open/<string:db>'
+                 '/<int:tracking_email_id>/<string:token>/blank.gif'],
                 type='http', auth='none')
-    def mail_tracking_open(self, db, tracking_email_id, **kw):
-        _env_get(db, self._tracking_open, tracking_email_id, None, **kw)
+    def mail_tracking_open(self, db, tracking_email_id, token=False, **kw):
+        with EnvironmentDB(db) as env:
+            if env:
+                self._tracking_open(env, tracking_email_id, token)
 
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()
@@ -88,6 +112,7 @@ class MailTrackingController(MailController):
         response.data = base64.b64decode(BLANK)
         return response
 
+    # Route used to initial values of Discuss app
     @http.route()
     def mail_init_messaging(self):
         values = super().mail_init_messaging()

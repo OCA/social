@@ -242,14 +242,46 @@ class TestMailTracking(TransactionCase):
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
-        res = controller.mail_tracking_open(db, tracking.id)
+        res = controller.mail_tracking_open(db, tracking.id, tracking.token)
         self.assertEqual(image, res.response[0])
         # Two events: sent and open
         self.assertEqual(2, len(tracking.tracking_event_ids))
         # Fake event: tracking_email_id = False
-        res = controller.mail_tracking_open(db, False)
+        res = controller.mail_tracking_open(db, False, False)
         self.assertEqual(image, res.response[0])
         # Two events again because no tracking_email_id found for False
+        self.assertEqual(2, len(tracking.tracking_event_ids))
+
+    def test_mail_tracking_open(self):
+        controller = MailTrackingController()
+        db = self.env.cr.dbname
+        mail, tracking = self.mail_send(self.recipient.email)
+        # Tracking is in sent or delivered state. But no token give.
+        # Don't generates tracking event
+        controller.mail_tracking_open(db, tracking.id)
+        self.assertEqual(1, len(tracking.tracking_event_ids))
+        tracking.write({'state': 'opened'})
+        # Tracking isn't in sent or delivered state.
+        # Don't generates tracking event
+        controller.mail_tracking_open(db, tracking.id, tracking.token)
+        self.assertEqual(1, len(tracking.tracking_event_ids))
+        tracking.write({'state': 'sent'})
+        # Tracking is in sent or delivered state and a token is given.
+        # Generates tracking event
+        controller.mail_tracking_open(db, tracking.id, tracking.token)
+        self.assertEqual(2, len(tracking.tracking_event_ids))
+        # Generate new email due concurrent event filter
+        mail, tracking = self.mail_send(self.recipient.email)
+        tracking.write({'token': False})
+        # Tracking is in sent or delivered state but a token is given for a
+        # record that doesn't have a token.
+        # Don't generates tracking event
+        controller.mail_tracking_open(db, tracking.id, 'tokentest')
+        self.assertEqual(1, len(tracking.tracking_event_ids))
+        # Tracking is in sent or delivered state and not token is given for a
+        # record that doesn't have a token.
+        # Generates tracking event
+        controller.mail_tracking_open(db, tracking.id, False)
         self.assertEqual(2, len(tracking.tracking_event_ids))
 
     def test_concurrent_open(self):

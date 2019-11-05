@@ -15,7 +15,7 @@
             <script type="text/javascript"
                     src="/mail_tracking/static/src/js/failed_message/discuss.js"/>
             <script type="text/javascript"
-                    src="/mail_tracking/static/src/js/failed_message/widget.js"/>
+                    src="/mail_tracking/static/src/js/failed_message/thread.js"/>
         </xpath>
     </template>
 </odoo>

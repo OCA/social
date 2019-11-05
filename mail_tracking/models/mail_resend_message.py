@@ -31,7 +31,7 @@ class MailResendMessage(models.TransientModel):
     @api.multi
     def resend_mail_action(self):
         for wizard in self:
-            to_send = wizard.partner_ids.filtered(lambda p: p.resend).mapped(
+            to_send = wizard.partner_ids.filtered("resend").mapped(
                 "partner_id")
             if to_send:
                 # Set as reviewed

@@ -237,7 +237,8 @@ class MailMessage(models.Model):
     @api.model
     def set_all_as_reviewed(self):
         """ Sets all messages in the given domain as reviewed.
-            Used by Discuss """
+
+        Used by Discuss """
 
         unreviewed_messages = self.search(self._get_failed_message_domain())
         unreviewed_messages.write({'mail_tracking_needs_action': False})

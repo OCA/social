@@ -6,7 +6,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
     // To be considered:
     //   - One message can be displayed in many threads
     //   - A thread can be a mailbox, channel, ...
-    //   - A mailbox it's a type of thread that it's displayed on top of
+    //   - A mailbox is a type of thread that is displayed on top of
     //    the discuss menu, has a counter, etc...
 
     var MailManagerNotif = require('mail.Manager.Notification');
@@ -30,8 +30,8 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
     AbstractMessage.include({
 
         /**
-         *  Abstract declaration to know if a message its included on the
-         * failed mailbox. By default should be false.
+         * Abstract declaration to know if a message is included in the
+         * failed mailbox. By default it should be false.
          *
          * @returns {Boolean}
          */
@@ -45,25 +45,25 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         /**
          * Overrides to store information from server
          *
-         * @Override
+         * @override
          */
         init: function (parent, data) {
             this._isFailedMessage = data.is_failed_message;
-            this._super.apply(this, arguments);
+            return this._super.apply(this, arguments);
         },
 
         /**
-        *  Implementation to know if a message its included on the
+        * Implementation to know if a message is included in the
         * failed mailbox.
         *
-        * @Override
+        * @override
         */
         isFailed: function () {
             return _.contains(this._threadIDs, 'mailbox_failed');
         },
 
         /**
-        * Adds/Remove message to/from failed mailbox
+        * Adds/Removes message to/from failed mailbox
         *
         * @param {Boolean} failed
         */
@@ -76,13 +76,13 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        *  Overrides to update if the message need be show in 'failed' mailbox
-        * thread
-        * @Override
+        * Include the message in the 'failed' mailbox if needed
+        *
+        * @override
         */
         _processMailboxes: function () {
             this.setFailed(this._isFailedMessage);
-            this._super.apply(this, arguments);
+            return this._super.apply(this, arguments);
         },
     });
 
@@ -91,7 +91,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         /**
          * Overrides to handle changes in the 'mail_tracking_needs_action' flag
          *
-         * @Override
+         * @override
          */
         _handlePartnerNotification: function (data) {
             if (data.type === 'toggle_tracking_status') {
@@ -105,7 +105,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * This method update messages in the failed mailbox when the flag
+        * This method updates messages in the failed mailbox when the flag
         * 'mail_tracking_needs_action' is toggled. This can remove/add
         * the message from/to failed mailbox and update mailbox counter.
         *
@@ -137,7 +137,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
                 // Increase failed counter if message is marked as failed
                 failed.incrementMailboxCounter(data.message_ids.length);
             } else {
-                // Decrease failed counter if message is remove from failed
+                // Decrease failed counter if message is removed from failed
                 failed.decrementMailboxCounter(data.message_ids.length);
             }
 
@@ -186,48 +186,44 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         /**
          * Overrides to listen click on 'Set all as reviewed' button
          *
-         * @Override
+         * @override
          */
         _renderButtons: function () {
             this._super.apply(this, arguments);
-            this.$buttons
-                .on('click', '.o_mail_discuss_button_set_all_reviewed',
-                    this._onSetAllAsReviewedClicked.bind(this));
+            this.$btn_set_all_reviewed = this.$buttons.find(
+                '.o_mail_discuss_button_set_all_reviewed');
+            this.$btn_set_all_reviewed
+                .on('click', $.proxy(this, "_onSetAllAsReviewedClicked"));
         },
 
         /**
-         * Overrides to update 'set all as reviewed' button
+         * Show or hide 'set all as reviewed' button in discuss mailbox
          *
-         * @Override
+         * This means in which thread the button should be displayed.
+         *
+         * @override
          */
         _updateControlPanelButtons: function (thread) {
-            // Set All Reviewed
-            if (thread.getID() === 'mailbox_failed') {
-                this.$buttons
-                    .find('.o_mail_discuss_button_set_all_reviewed')
-                    .removeClass('d-none d-md-inline-block')
-                    .addClass('d-none d-md-inline-block');
-            } else {
-                this.$buttons
-                    .find('.o_mail_discuss_button_set_all_reviewed')
-                    .removeClass('d-none d-md-inline-block')
-                    .addClass('d-none');
-            }
+            var is_mailbox_failed = thread.getID() === 'mailbox_failed';
+            this.$btn_set_all_reviewed
+                .toggleClass('d-none', !is_mailbox_failed)
+                .toggleClass('d-md-inline-block', is_mailbox_failed);
 
-            this._super.apply(this, arguments);
+            return this._super.apply(this, arguments);
         },
 
         /**
-         * Overrides to update 'set all as reviewed' button
+         * Overrides to update 'set all as reviewed' button.
          *
-         * @Override
+         * Disabled button if doesn't have more failed messages
+         *
+         * @override
          */
         _updateButtonStatus: function (disabled, type) {
             if (this._thread.getID() === 'mailbox_failed') {
-                this.$buttons
-                    .find('.o_mail_discuss_button_set_all_reviewed')
+                this.$btn_set_all_reviewed
                     .toggleClass('disabled', disabled);
-                //  Display Rainbowman when all inbox messages are reviewed
+                // Display Rainbowman when all failed messages are reviewed
                 // through 'TOGGLE TRACKING STATUS' or marking last failed
                 // message as reviewed
                 if (disabled && type === 'toggle_tracking_status') {
@@ -243,7 +239,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         /**
          * Overrides to update messages in 'failed' mailbox thread
          *
-         * @Override
+         * @override
          */
         _onMessageUpdated: function (message, type) {
             var self = this;
@@ -260,18 +256,18 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
                             });
                     });
             } else {
-                //  Workaround to avoid call '_fetchAndRenderThread' and refetch
-                // thread messages.
+                // Workaround to avoid calling '_fetchAndRenderThread' and
+                // refetching thread messages because these messages are
+                // actually fetched above.
                 this._super.apply(this, arguments);
             }
         },
 
         /**
-        *  Overrides to hide reply in the 'failed' mailbox, as this feature does
-        * not necessary in that channel. It also show retry and
-        * 'set as reviewed'.
+        * Hide reply feature in the 'failed' mailbox, where it has no sense.
+        * Show instead 'Retry' and 'Set as reviewed' buttons.
         *
-        * @Override
+        * @override
         */
         _getThreadRenderingOptions: function () {
             var values = this._super.apply(this, arguments);
@@ -285,9 +281,9 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Overrides to listen event that refresh thread messages
+        * Listen also to the event that refreshes thread messages
         *
-        * @Override
+        * @override
         */
         _startListening: function () {
             this._super.apply(this, arguments);
@@ -331,6 +327,8 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
+         * Inheritable method that call thread implementation
+         *
          * @private
          */
         _onSetAllAsReviewedClicked: function () {
@@ -341,9 +339,9 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
     MailManager.include({
 
         /**
-         * Overrides to add the 'failed' mailbox
+         * Add the 'failed' mailbox
          *
-         * @Override
+         * @override
          */
         _updateMailboxesFromServer: function (data) {
             this._super.apply(this, arguments);
@@ -360,7 +358,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         /**
          * Overrides to add domain for 'failed' mailbox thread
          *
-         * @Override
+         * @override
          */
         _getThreadDomain: function () {
             if (this._id === 'mailbox_failed') {
@@ -372,15 +370,16 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
                     ['author_id', '=', session.partner_id],
                 ];
             }
-            // Workaround to avoid throw 'Missing domain' exception
+            // Workaround to avoid throw 'Missing domain' exception. Call _super
+            // without a valid (hard-coded) thread id causes that exeception.
             return this._super.apply(this, arguments);
         },
 
         /**
-         * Sets all messages from the mailbox as reviewed. At the moment,
-         * this method makes only sense for 'Failed'.
+         * Sets all messages from the mailbox as reviewed.
          *
-         * @param  {Array} domain
+         * At the moment, this method makes only sense for 'Failed'.
+         *
          * @returns {$.Promise} resolved when all messages have been marked as
          *   reviewed on the server
          */

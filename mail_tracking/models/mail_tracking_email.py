@@ -5,6 +5,8 @@ import logging
 import urllib.parse
 import time
 import re
+import os
+import binascii
 from datetime import datetime
 
 from odoo import models, api, fields, tools
@@ -91,9 +93,17 @@ class MailTrackingEmail(models.Model):
     tracking_event_ids = fields.One2many(
         string="Tracking events", comodel_name='mail.tracking.event',
         inverse_name='tracking_email_id', readonly=True)
+    # Token isn't generated here to have compatibility with older trackings.
+    # New trackings have token and older not
+    token = fields.Char(string="Request Token", readonly=True)
 
     @api.model_create_multi
     def create(self, vals_list):
+        for vals in vals_list:
+            # Token is generated here because we don't like lost older mails
+            # trackings and here ensure that only new trackings have token.
+            if not vals.get('token'):
+                vals['token'] = binascii.hexlify(os.urandom(24)).decode()
         records = super().create(vals_list)
         for record in records:
             if record.state in self.env['mail.message'].get_failed_states():
@@ -198,13 +208,23 @@ class MailTrackingEmail(models.Model):
 
     def _get_mail_tracking_img(self):
         m_config = self.env['ir.config_parameter']
-        base_url = (m_config.get_param('mail_tracking.base.url') or
-                    m_config.get_param('web.base.url'))
-        path_url = (
-            'mail/tracking/open/%(db)s/%(tracking_email_id)s/blank.gif' % {
-                'db': self.env.cr.dbname,
-                'tracking_email_id': self.id,
-            })
+        base_url = (m_config.get_param('mail_tracking.base.url')
+                    or m_config.get_param('web.base.url'))
+        if self.token:
+            path_url = (
+                'mail/tracking/open/%(db)s/%(tracking_email_id)s/%(token)s/'
+                'blank.gif' % {
+                    'db': self.env.cr.dbname,
+                    'tracking_email_id': self.id,
+                    'token': self.token,
+                })
+        else:
+            # This is here for compatibility with older records
+            path_url = (
+                'mail/tracking/open/%(db)s/%(tracking_email_id)s/blank.gif' % {
+                    'db': self.env.cr.dbname,
+                    'tracking_email_id': self.id,
+                })
         track_url = urllib.parse.urljoin(base_url, path_url)
         return (
             '<img src="%(url)s" alt="" '

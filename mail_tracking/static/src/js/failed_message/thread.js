@@ -1,6 +1,6 @@
 /* Copyright 2019 Alexandre Díaz
    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
-odoo.define('mail_tracking.FailedMessage', function (require) {
+odoo.define('mail_tracking.FailedMessageThread', function (require) {
     "use strict";
 
     var AbstractField = require('web.AbstractField');
@@ -20,20 +20,20 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     * Helper method to fetch failed messages
     *
     * @private
-    * @param {Object} self
+    * @param {Object} widget
     * @param {Array} ids
     * @returns {Array}
     */
-    function _readMessages (self, ids) {
+    function _readMessages (widget, ids) {
         if (!ids.length) {
-            return $.when([]);
+            return $.when();
         }
-        var context = self.record && self.record.getContext();
-        return self._rpc({
+        var context = widget.record && widget.record.getContext();
+        return widget._rpc({
             model: 'mail.message',
             method: 'get_failed_messages',
             args: [ids],
-            context: context || self.getSession().user_context,
+            context: context || widget.getSession().user_context,
         }).then(function (messages) {
             // Convert date to moment
             _.each(messages, function (msg) {
@@ -47,8 +47,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     BasicModel.include({
 
         /**
-        *  Fetches the failed messages displayed by the 'mail_failed_message'
-        * field widget in form views.
+        * Fetch data for the 'mail_failed_message' field widget in form views.
         *
         * @private
         * @param {Object} record
@@ -62,19 +61,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
     });
 
-    var AbstractFailedMessagesField = AbstractField.extend({
-
-        /**
-        * Mark failed message as reviewed. By default should be don't reviewed.
-        *
-        * @returns {Boolean}
-        */
-        _markFailedMessageReviewed: function () {
-            return false;
-        },
-    });
-
-    var FailedMessage = AbstractFailedMessagesField.extend({
+    var FailedMessage = AbstractField.extend({
         className: 'o_mail_failed_message',
         events: {
             'click .o_failed_message_retry': '_onRetryFailedMessage',
@@ -83,13 +70,22 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         specialData: '_fetchSpecialFailedMessages',
 
         /**
-         * Overrides to listen bus notifications
+         * Overrides to reference failed messages in a easy way
          *
-         * @Override
+         * @override
          */
         init: function () {
             this._super.apply(this, arguments);
             this.failed_messages = this.record.specialData[this.name];
+        },
+
+        /**
+         * Overrides to listen bus notifications
+         *
+         * @override
+         */
+        start: function () {
+            this._super.apply(this, arguments);
             this.call(
                 'bus_service', 'onNotification', this, this._onNotification);
         },
@@ -210,7 +206,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');
             this._markFailedMessageReviewed(messageID).then(
-                this._reload.bind(this, {failed_message: true}));
+                $.proxy(this, "_reload", {failed_message: true}));
         },
     });
 
@@ -220,31 +216,40 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     BasicView.include({
 
         /**
-        *  Overrides to add 'mail_failed_message' widget as "mail widget" used
+        * Overrides to add 'mail_failed_message' widget as "mail widget" used
         * in Chatter.
         *
-        * @Override
+        * @override
         */
         init: function () {
             this._super.apply(this, arguments);
             var fieldsInfo = this.fieldsInfo[this.viewType];
             for (var fieldName in fieldsInfo) {
                 var fieldInfo = fieldsInfo[fieldName];
+                // Search fields using 'mail_failed_messsage' widget.
+                // Only can exists one field using the widget, the last
+                // founded wins.
                 if (_.contains(mailWidgets, fieldInfo.widget)) {
+                    // Add field as "mail field" shared with Chatter
                     this.mailFields[fieldInfo.widget] = fieldName;
+                    // Avoid fetch x2many data, this will be done by widget
                     fieldInfo.__no_fetch = true;
                 }
             }
-            Object.assign(this.rendererParams.mailFields, this.mailFields);
+            // Update renderParmans mailFields to include the founded field
+            // using 'mail_failed_messsage' widget. This info is used by the
+            // renderers [In Odoo vanilla by the form renderer to initialize
+            // Chatter widget].
+            _.extend(this.rendererParams.mailFields, this.mailFields);
         },
     });
 
     Chatter.include({
 
         /**
-         *  Overrides to initialize 'mail_failed_message' widget.
+         * Overrides to initialize 'mail_failed_message' widget.
          *
-         * @Override
+         * @override
          */
         init: function (parent, record, mailFields, options) {
             this._super.apply(this, arguments);
@@ -256,7 +261,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
 
         /**
-         * Injects widget before the chatter
+         * Injects failed messages widget before the chatter
          *
          * @private
          * @returns {Promise}
@@ -274,7 +279,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         /**
          * Overrides to reload 'mail_failed_message' widget
          *
-         * @Override
+         * @override
          */
         _onReloadMailFields: function (event) {
             if (this.fields.failed_message && event.data.failed_message) {
@@ -283,8 +288,8 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                     keepChanges: true,
                 });
             } else {
-                //  Workarround to avoid trigger reload event two times (one for
-                // mail_failed_message and other with empty 'fieldNames'.
+                // Workaround to avoid trigger reload event twice (once for
+                // mail_failed_message and again with empty 'fieldNames'.
                 this._super.apply(this, arguments);
             }
         },
@@ -293,9 +298,9 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
     MailThread.include({
 
         /**
-         * Overrides to show 'retry' & 'Set as reviewed' buttons in the Chatter
+         * Show 'retry' & 'Set as reviewed' buttons in the Chatter
          *
-         * @Override
+         * @override
          */
         init: function () {
             this._super.apply(this, arguments);

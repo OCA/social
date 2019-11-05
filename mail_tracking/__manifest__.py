@@ -32,7 +32,7 @@
     "qweb": [
         "static/src/xml/mail_tracking.xml",
         "static/src/xml/failed_message/common.xml",
-        "static/src/xml/failed_message/widget.xml",
+        "static/src/xml/failed_message/thread.xml",
         "static/src/xml/failed_message/discuss.xml",
     ],
     'demo': [
