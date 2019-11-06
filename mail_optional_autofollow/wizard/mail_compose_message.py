@@ -21,7 +21,6 @@ class MailComposeMessage(models.TransientModel):
         followers on the related object""",
     )
 
-    @api.multi
     def send_mail(self, auto_commit=False):
         for wizard in self:
             super(
