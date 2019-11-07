@@ -79,6 +79,9 @@ These are all available status icons:
 .. |cc| image:: ../static/src/img/cc.png
    :width: 10px
 
+.. |noemail| image:: ../static/src/img/no_email.png
+  :width: 10px
+
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
 
 |waiting|    **Waiting**: Waiting to be sent
@@ -93,6 +96,8 @@ These are all available status icons:
 
 |cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
 
+|noemail|  **No Email**: The partner doesn't have a defined email
+
 
 When the message generates and 'error' status, it will apear on discuss 'Failed'
 channel. Any view that uses 'mail_thread' widget can show the failed messages
@@ -105,6 +110,13 @@ too.
 * Chatter
 
   .. image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/img/failed_message_widget.png
+
+You can use "Failed sent messages" filter present in all views to show records
+with messages in failed status and that needs an user action.
+
+* Filter
+
+  .. image:: https://raw.githubusercontent.com/OCA/social/11.0/mail_tracking/static/img/failed_message_filter.png
 
 Known issues / Roadmap
 ======================
