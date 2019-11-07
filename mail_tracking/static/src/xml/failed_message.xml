@@ -4,20 +4,28 @@
         <div class="o_thread_message" style="margin-bottom: 10px">
             <div class="o_thread_message_sidebar">
                 <div class="o_avatar_stack">
-                    <img t-attf-src="/web/image#{message.author_id[0] >= 0 ? ('/res.partner/' + message.author_id[0] + '/image_small') : ''}" class="o_thread_message_avatar img-circle mb8" t-att-title="message.author_id[1]"/>
+                    <img t-attf-src="/web/image/res.partner/#{message.author[0]}/image_small" class="o_thread_message_avatar img-circle mb8" t-att-title="message.author[1]"/>
                     <i class="o_avatar_icon fa fa-exclamation bg-danger-full" title="Failed"></i>
                 </div>
             </div>
             <div class="o_thread_message_core">
                 <div class="o_mail_info">
                     <strong class="o_thread_author">
-                        <t t-esc="message.author_id[1]"/>
+                        <t t-esc="message.author[1]"/>
                     </strong>
-                    - <small class="o_mail_timestamp" t-att-title="message.date.format(date_format)"><t t-esc="message.hour"/></small><br/>
+                    - <small class="o_mail_timestamp" t-att-title="message.date.format(date_format)"><t t-esc="message.hour"/></small>
+                    <span t-attf-class="o_thread_icons">
+                        <a href="#" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link" t-att-data-message-id="message.id">
+                            <i class="fa fa-check"/> Mark Reviewed
+                        </a>
+                        <a href="#" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
+                            <i class="fa fa-retweet"/> Retry
+                        </a>
+                    </span>
+                    <br/>
                     <strong class="text-danger">Failed Recipients:</strong>
-                    <t t-set="first_recipient" t-value="true"/>
                     <t t-foreach="message.failed_recipients" t-as="recipient">
-                        <t t-if="!first_recipient">
+                        <t t-if="!recipient_first">
                             -
                         </t>
                         <a class="o_mail_action_tracking_partner"
@@ -25,19 +33,10 @@
                            t-attf-href="#model=res.partner&amp;id=#{recipient[0]}">
                             <t t-esc="recipient[1]"/>
                         </a>
-                        <t t-set="first_recipient" t-value="false"/>
                     </t>
                 </div>
                 <div class="o_thread_message_note small">
                     <t t-raw="message.body"/>
-                </div>
-                <div class="o_thread_message_tools btn-group">
-                    <a href="#" class="btn btn-link btn-success text-muted btn-sm o_failed_message_reviewed o_activity_link mr8" t-att-data-message-id="message.id">
-                        <i class="fa fa-check"/> Mark Reviewed
-                    </a>
-                    <a href="#" class="btn btn-link btn-default text-muted btn-sm o_failed_message_retry" t-att-data-message-id="message.id">
-                        <i class="fa fa-retweet"/> Retry
-                    </a>
                 </div>
             </div>
         </div>

@@ -161,7 +161,9 @@ class MailTrackingEmail(models.Model):
     @api.depends('recipient')
     def _compute_recipient_address(self):
         for email in self:
-            if email.recipient:
+            is_empty_recipient = (not email.recipient
+                                  or '<False>' in email.recipient)
+            if not is_empty_recipient:
                 matches = re.search(r'<(.*@.*)>', email.recipient)
                 if matches:
                     email.recipient_address = matches.group(1).lower()
@@ -215,12 +217,24 @@ class MailTrackingEmail(models.Model):
 
     @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
-        self.sudo().write({
-            'error_smtp_server': tools.ustr(smtp_server),
-            'error_type': exception.__class__.__name__,
-            'error_description': tools.ustr(exception),
+        values = {
             'state': 'error',
-        })
+        }
+        IrMailServer = self.env['ir.mail_server']
+        if str(exception) == IrMailServer.NO_VALID_RECIPIENT \
+                and not self.recipient_address:
+            values.update({
+                'error_type': 'no_recipient',
+                'error_description':
+                    "The partner doesn't have a defined email",
+            })
+        else:
+            values.update({
+                'error_smtp_server': tools.ustr(smtp_server),
+                'error_type': exception.__class__.__name__,
+                'error_description': tools.ustr(exception),
+            })
+        self.sudo().write(values)
         return True
 
     @api.multi

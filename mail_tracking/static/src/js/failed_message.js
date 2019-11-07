@@ -126,7 +126,6 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
 
         _openComposer: function (context) {
-            var self = this;
             var failed_msg = chat_manager.get_message(context.message_id);
             this.do_action({
                 type: 'ir.actions.act_window',
@@ -138,11 +137,8 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                 context: context,
             }, {
                 on_close: function () {
-                    self.trigger('need_refresh');
-                    chat_manager.get_messages({
-                        model: failed_msg.model,
-                        res_id: failed_msg.res_id,
-                    });
+                    chat_manager.bus.trigger('update_message', failed_msg);
+                    core.bus.trigger('force_update_message', failed_msg);
                 },
             }).then(this.trigger.bind(this, 'close_composer'));
         },
@@ -178,7 +174,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
             event.preventDefault();
             var message_id = $(event.currentTarget).data('message-id');
             var failed_msg = chat_manager.get_message(message_id);
-            this._rpc({
+            return this._rpc({
                 model: 'mail.message',
                 method: 'toggle_tracking_status',
                 args: [[message_id]],
@@ -233,7 +229,8 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         Object.defineProperties(msg, {
             is_failed: property_descr("channel_failed"),
         });
-        msg.is_failed = data.failed_message;
+
+        msg.is_failed = data.is_failed_message;
         msg.failed_recipients = data.failed_recipients;
         return msg;
     };
@@ -291,7 +288,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                 msg.date = moment(time.auto_str_to_date(msg.date));
                 msg.hour = time_from_now(msg.date);
             });
-            return _.sortBy(messages, 'date');
+            return messages;
         });
     }
 
@@ -331,7 +328,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
 
         init: function () {
             this._super.apply(this, arguments);
-            this.failed_messages = this.record.specialData[this.name];
+            this.failed_messages = this.record.specialData[this.name] || [];
         },
         _render: function () {
             if (this.failed_messages.length) {
@@ -348,7 +345,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
         },
         _reset: function (record) {
             this._super.apply(this, arguments);
-            this.failed_messages = this.record.specialData[this.name];
+            this.failed_messages = this.record.specialData[this.name] || [];
             this.res_id = record.res_id;
         },
 
@@ -456,6 +453,7 @@ odoo.define('mail_tracking.FailedMessage', function (require) {
                     keepChanges: true,
                 });
             } else {
+                // Workaround to avoid trigger reload event twice.
                 this._super.apply(this, arguments);
             }
         },

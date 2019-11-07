@@ -11,6 +11,7 @@ class MailMail(models.Model):
     _inherit = 'mail.mail'
 
     def _tracking_email_prepare(self, partner, email):
+        """Prepare email.tracking.email record values"""
         ts = time.time()
         dt = datetime.utcfromtimestamp(ts)
         email_to_list = email.get('email_to', [])
@@ -27,6 +28,8 @@ class MailMail(models.Model):
         }
 
     def send_get_email_dict(self, partner=None):
+        """Creates the mail.tracking.email record and adds the image tracking
+           to the email"""
         email = super(MailMail, self).send_get_email_dict(partner=partner)
         vals = self._tracking_email_prepare(partner, email)
         tracking_email = self.env['mail.tracking.email'].sudo().create(vals)
