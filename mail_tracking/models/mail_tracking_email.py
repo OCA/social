@@ -5,8 +5,7 @@ import logging
 import urllib.parse
 import time
 import re
-import os
-import binascii
+import uuid
 from datetime import datetime
 
 from odoo import models, api, fields, tools
@@ -95,15 +94,11 @@ class MailTrackingEmail(models.Model):
         inverse_name='tracking_email_id', readonly=True)
     # Token isn't generated here to have compatibility with older trackings.
     # New trackings have token and older not
-    token = fields.Char(string="Request Token", readonly=True)
+    token = fields.Char(string="Request Token", readonly=True,
+                        default=lambda s: uuid.uuid4().hex)
 
     @api.model_create_multi
     def create(self, vals_list):
-        for vals in vals_list:
-            # Token is generated here because we don't like lost older mails
-            # trackings and here ensure that only new trackings have token.
-            if not vals.get('token'):
-                vals['token'] = binascii.hexlify(os.urandom(24)).decode()
         records = super().create(vals_list)
         for record in records:
             if record.state in self.env['mail.message'].get_failed_states():

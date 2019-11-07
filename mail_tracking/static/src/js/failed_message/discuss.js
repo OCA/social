@@ -53,20 +53,20 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Implementation to know if a message is included in the
-        * failed mailbox.
-        *
-        * @override
-        */
+         * Implementation to know if a message is included in the
+         * failed mailbox.
+         *
+         * @override
+         */
         isFailed: function () {
             return _.contains(this._threadIDs, 'mailbox_failed');
         },
 
         /**
-        * Adds/Removes message to/from failed mailbox
-        *
-        * @param {Boolean} failed
-        */
+         * Adds/Removes message to/from failed mailbox
+         *
+         * @param {Boolean} failed
+         */
         setFailed: function (failed) {
             if (failed) {
                 this._addThread('mailbox_failed');
@@ -76,10 +76,10 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Include the message in the 'failed' mailbox if needed
-        *
-        * @override
-        */
+         * Include the message in the 'failed' mailbox if needed
+         *
+         * @override
+         */
         _processMailboxes: function () {
             this.setFailed(this._isFailedMessage);
             return this._super.apply(this, arguments);
@@ -97,7 +97,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
             if (data.type === 'toggle_tracking_status') {
                 this._handlePartnerToggleFailedNotification(data);
             } else {
-                //  Workaround to avoid call '_handlePartnerChannelNotification'
+                // Workaround to avoid call '_handlePartnerChannelNotification'
                 // because this is related with the failed mailbox, not a
                 // channel.
                 this._super.apply(this, arguments);
@@ -105,13 +105,13 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * This method updates messages in the failed mailbox when the flag
-        * 'mail_tracking_needs_action' is toggled. This can remove/add
-        * the message from/to failed mailbox and update mailbox counter.
-        *
-        * @private
-        * @param {Object} data
-        */
+         * This method updates messages in the failed mailbox when the flag
+         * 'mail_tracking_needs_action' is toggled. This can remove/add
+         * the message from/to failed mailbox and update mailbox counter.
+         *
+         * @private
+         * @param {Object} data
+         */
         _handlePartnerToggleFailedNotification: function (data) {
             var self = this;
             var failed = this.getMailbox('failed');
@@ -153,11 +153,11 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         }),
 
         /**
-        * Paramaters used to render 'failed' mailbox entry in Discuss
-        *
-        * @private
-        * @returns {Object}
-        */
+         * Paramaters used to render 'failed' mailbox entry in Discuss
+         *
+         * @private
+         * @returns {Object}
+         */
         _sidebarQWebParams: function () {
             var failed = this.call('mail_service', 'getMailbox', 'failed');
             return {
@@ -167,11 +167,11 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Render 'failed' mailbox menu entry in Discuss
-        *
-        * @private
-        * @returns {jQueryElementt}
-        */
+         * Render 'failed' mailbox menu entry in Discuss
+         *
+         * @private
+         * @returns {jQueryElementt}
+         */
         _renderSidebar: function () {
             var $sidebar = this._super.apply(this, arguments);
             // Because Odoo implementation isn't designed to be inherited
@@ -204,10 +204,10 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
          * @override
          */
         _updateControlPanelButtons: function (thread) {
-            var is_mailbox_failed = thread.getID() === 'mailbox_failed';
             this.$btn_set_all_reviewed
-                .toggleClass('d-none', !is_mailbox_failed)
-                .toggleClass('d-md-inline-block', is_mailbox_failed);
+                .toggleClass(
+                    'd-none d-md-none',
+                    thread.getID() !== 'mailbox_failed');
 
             return this._super.apply(this, arguments);
         },
@@ -264,11 +264,11 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Hide reply feature in the 'failed' mailbox, where it has no sense.
-        * Show instead 'Retry' and 'Set as reviewed' buttons.
-        *
-        * @override
-        */
+         * Hide reply feature in the 'failed' mailbox, where it has no sense.
+         * Show instead 'Retry' and 'Set as reviewed' buttons.
+         *
+         * @override
+         */
         _getThreadRenderingOptions: function () {
             var values = this._super.apply(this, arguments);
             if (this._thread.getID() === 'mailbox_failed') {
@@ -281,10 +281,10 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Listen also to the event that refreshes thread messages
-        *
-        * @override
-        */
+         * Listen also to the event that refreshes thread messages
+         *
+         * @override
+         */
         _startListening: function () {
             this._super.apply(this, arguments);
             this.call('mail_service', 'getMailBus')
@@ -309,12 +309,12 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
         },
 
         /**
-        * Toggle 'mail_tracking_needs_action' flag
-        *
-        * @private
-        * @param {Event} event
-        * @returns {Promise}
-        */
+         * Toggle 'mail_tracking_needs_action' flag
+         *
+         * @private
+         * @param {Event} event
+         * @returns {Promise}
+         */
         _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data('message-id');

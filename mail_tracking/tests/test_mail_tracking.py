@@ -5,6 +5,8 @@ import mock
 from odoo.tools import mute_logger
 import time
 import base64
+import psycopg2
+import psycopg2.errorcodes
 from odoo import http
 from odoo.tests.common import TransactionCase
 from ..controllers.main import MailTrackingController, BLANK
@@ -36,8 +38,9 @@ class TestMailTracking(TransactionCase):
         })
         self.last_request = http.request
         http.request = type('obj', (object,), {
-            'db': self.env.cr.dbname,
             'env': self.env,
+            'cr': self.env.cr,
+            'db': self.env.cr.dbname,
             'endpoint': type('obj', (object,), {
                 'routing': [],
             }),
@@ -242,47 +245,52 @@ class TestMailTracking(TransactionCase):
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
-        res = controller.mail_tracking_open(db, tracking.id, tracking.token)
-        self.assertEqual(image, res.response[0])
-        # Two events: sent and open
-        self.assertEqual(2, len(tracking.tracking_event_ids))
-        # Fake event: tracking_email_id = False
-        res = controller.mail_tracking_open(db, False, False)
-        self.assertEqual(image, res.response[0])
-        # Two events again because no tracking_email_id found for False
-        self.assertEqual(2, len(tracking.tracking_event_ids))
+        with mock.patch('odoo.http.db_filter') as mock_client:
+            mock_client.return_value = True
+            res = controller.mail_tracking_open(
+                db, tracking.id, tracking.token)
+            self.assertEqual(image, res.response[0])
+            # Two events: sent and open
+            self.assertEqual(2, len(tracking.tracking_event_ids))
+            # Fake event: tracking_email_id = False
+            res = controller.mail_tracking_open(db, False, False)
+            self.assertEqual(image, res.response[0])
+            # Two events again because no tracking_email_id found for False
+            self.assertEqual(2, len(tracking.tracking_event_ids))
 
     def test_mail_tracking_open(self):
         controller = MailTrackingController()
         db = self.env.cr.dbname
-        mail, tracking = self.mail_send(self.recipient.email)
-        # Tracking is in sent or delivered state. But no token give.
-        # Don't generates tracking event
-        controller.mail_tracking_open(db, tracking.id)
-        self.assertEqual(1, len(tracking.tracking_event_ids))
-        tracking.write({'state': 'opened'})
-        # Tracking isn't in sent or delivered state.
-        # Don't generates tracking event
-        controller.mail_tracking_open(db, tracking.id, tracking.token)
-        self.assertEqual(1, len(tracking.tracking_event_ids))
-        tracking.write({'state': 'sent'})
-        # Tracking is in sent or delivered state and a token is given.
-        # Generates tracking event
-        controller.mail_tracking_open(db, tracking.id, tracking.token)
-        self.assertEqual(2, len(tracking.tracking_event_ids))
-        # Generate new email due concurrent event filter
-        mail, tracking = self.mail_send(self.recipient.email)
-        tracking.write({'token': False})
-        # Tracking is in sent or delivered state but a token is given for a
-        # record that doesn't have a token.
-        # Don't generates tracking event
-        controller.mail_tracking_open(db, tracking.id, 'tokentest')
-        self.assertEqual(1, len(tracking.tracking_event_ids))
-        # Tracking is in sent or delivered state and not token is given for a
-        # record that doesn't have a token.
-        # Generates tracking event
-        controller.mail_tracking_open(db, tracking.id, False)
-        self.assertEqual(2, len(tracking.tracking_event_ids))
+        with mock.patch('odoo.http.db_filter') as mock_client:
+            mock_client.return_value = True
+            mail, tracking = self.mail_send(self.recipient.email)
+            # Tracking is in sent or delivered state. But no token give.
+            # Don't generates tracking event
+            controller.mail_tracking_open(db, tracking.id)
+            self.assertEqual(1, len(tracking.tracking_event_ids))
+            tracking.write({'state': 'opened'})
+            # Tracking isn't in sent or delivered state.
+            # Don't generates tracking event
+            controller.mail_tracking_open(db, tracking.id, tracking.token)
+            self.assertEqual(1, len(tracking.tracking_event_ids))
+            tracking.write({'state': 'sent'})
+            # Tracking is in sent or delivered state and a token is given.
+            # Generates tracking event
+            controller.mail_tracking_open(db, tracking.id, tracking.token)
+            self.assertEqual(2, len(tracking.tracking_event_ids))
+            # Generate new email due concurrent event filter
+            mail, tracking = self.mail_send(self.recipient.email)
+            tracking.write({'token': False})
+            # Tracking is in sent or delivered state but a token is given for a
+            # record that doesn't have a token.
+            # Don't generates tracking event
+            controller.mail_tracking_open(db, tracking.id, 'tokentest')
+            self.assertEqual(1, len(tracking.tracking_event_ids))
+            # Tracking is in sent or delivered state and not token is given for
+            # a record that doesn't have a token.
+            # Generates tracking event
+            controller.mail_tracking_open(db, tracking.id, False)
+            self.assertEqual(2, len(tracking.tracking_event_ids))
 
     def test_concurrent_open(self):
         mail, tracking = self.mail_send(self.recipient.email)
@@ -459,12 +467,14 @@ class TestMailTracking(TransactionCase):
     def test_db(self):
         db = self.env.cr.dbname
         controller = MailTrackingController()
-        not_found = controller.mail_tracking_all('not_found_db')
-        self.assertEqual(b'NOT FOUND', not_found.response[0])
-        none = controller.mail_tracking_all(db)
-        self.assertEqual(b'NONE', none.response[0])
-        none = controller.mail_tracking_event(db, 'open')
-        self.assertEqual(b'NONE', none.response[0])
+        with mock.patch('odoo.http.db_filter') as mock_client:
+            mock_client.return_value = True
+            with self.assertRaises(psycopg2.OperationalError):
+                controller.mail_tracking_event('not_found_db')
+            none = controller.mail_tracking_event(db)
+            self.assertEqual(b'NONE', none.response[0])
+            none = controller.mail_tracking_event(db, 'open')
+            self.assertEqual(b'NONE', none.response[0])
 
 
 class TestMailTrackingViews(TransactionCase):

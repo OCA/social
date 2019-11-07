@@ -17,13 +17,13 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
 
 
     /**
-    * Helper method to fetch failed messages
-    *
-    * @private
-    * @param {Object} widget
-    * @param {Array} ids
-    * @returns {Array}
-    */
+     * Helper method to fetch failed messages
+     *
+     * @private
+     * @param {Object} widget
+     * @param {Array} ids
+     * @returns {Array}
+     */
     function _readMessages (widget, ids) {
         if (!ids.length) {
             return $.when();
@@ -47,13 +47,13 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
     BasicModel.include({
 
         /**
-        * Fetch data for the 'mail_failed_message' field widget in form views.
-        *
-        * @private
-        * @param {Object} record
-        * @param {String} fieldName
-        * @returns {Array}
-        */
+         * Fetch data for the 'mail_failed_message' field widget in form views.
+         *
+         * @private
+         * @param {Object} record
+         * @param {String} fieldName
+         * @returns {Array}
+         */
         _fetchSpecialFailedMessages: function (record, fieldName) {
             var localID = record._changes && fieldName in record._changes
                 ? record._changes[fieldName] : record.data[fieldName];
@@ -76,7 +76,7 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
          */
         init: function () {
             this._super.apply(this, arguments);
-            this.failed_messages = this.record.specialData[this.name];
+            this.failed_messages = this.record.specialData[this.name] || [];
         },
 
         /**
@@ -91,11 +91,11 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
         },
 
         /**
-        * Paremeters used to render widget
-        *
-        * @private
-        * @returns {Object}
-        */
+         * Paremeters used to render widget
+         *
+         * @private
+         * @returns {Object}
+         */
         _failedItemsQWebParams: function () {
             return {
                 failed_messages: this.failed_messages,
@@ -106,8 +106,8 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
         },
 
         /**
-        * @private
-        */
+         * @private
+         */
         _render: function () {
             if (this.failed_messages.length) {
                 this.$el.html(QWeb.render(
@@ -119,34 +119,34 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
         },
 
         /**
-        * Reset widget data using selected record
-        *
-        * @private
-        * @param {Object} record
-        */
+         * Reset widget data using selected record
+         *
+         * @private
+         * @param {Object} record
+         */
         _reset: function (record) {
             this._super.apply(this, arguments);
-            this.failed_messages = this.record.specialData[this.name];
+            this.failed_messages = this.record.specialData[this.name] || [];
             this.res_id = record.res_id;
         },
 
         /**
-        * Trigger event to reload mail widgets
-        *
-        * @private
-        * @param {Array} fieldsToReload
-        */
+         * Trigger event to reload mail widgets
+         *
+         * @private
+         * @param {Array} fieldsToReload
+         */
         _reload: function (fieldsToReload) {
             this.trigger_up('reload_mail_fields', fieldsToReload);
         },
 
         /**
-        * Mark failed message as reviewed
-        *
-        * @private
-        * @param {Int} id
-        * @returns {Promise}
-        */
+         * Mark failed message as reviewed
+         *
+         * @private
+         * @param {Int} id
+         * @returns {Promise}
+         */
         _markFailedMessageReviewed: function (id) {
             return this._rpc({
                 model: 'mail.message',
@@ -158,13 +158,13 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
 
         // Handlers
         /**
-        * Listen bus notification to launch reload process.
-        * This bus notification is received when the user uses
-        * 'mail.resend.message' wizard.
-        *
-        * @private
-        * @param {Array} notifs
-        */
+         * Listen bus notification to launch reload process.
+         * This bus notification is received when the user uses
+         * 'mail.resend.message' wizard.
+         *
+         * @private
+         * @param {Array} notifs
+         */
         _onNotification: function (notifs) {
             var self = this;
             _.each(notifs, function (notif) {
@@ -216,19 +216,19 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
     BasicView.include({
 
         /**
-        * Overrides to add 'mail_failed_message' widget as "mail widget" used
-        * in Chatter.
-        *
-        * @override
-        */
+         * Overrides to add 'mail_failed_message' widget as "mail widget" used
+         * in Chatter.
+         *
+         * @override
+         */
         init: function () {
             this._super.apply(this, arguments);
             var fieldsInfo = this.fieldsInfo[this.viewType];
             for (var fieldName in fieldsInfo) {
                 var fieldInfo = fieldsInfo[fieldName];
                 // Search fields using 'mail_failed_messsage' widget.
-                // Only can exists one field using the widget, the last
-                // founded wins.
+                // Only one field can exists using the widget, the last
+                // found wins.
                 if (_.contains(mailWidgets, fieldInfo.widget)) {
                     // Add field as "mail field" shared with Chatter
                     this.mailFields[fieldInfo.widget] = fieldName;
@@ -236,7 +236,7 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
                     fieldInfo.__no_fetch = true;
                 }
             }
-            // Update renderParmans mailFields to include the founded field
+            // Update renderParmans mailFields to include the found field
             // using 'mail_failed_messsage' widget. This info is used by the
             // renderers [In Odoo vanilla by the form renderer to initialize
             // Chatter widget].
