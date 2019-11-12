@@ -94,15 +94,18 @@ class MailTrackingEmail(models.Model):
         inverse_name='tracking_email_id', readonly=True)
     # Token isn't generated here to have compatibility with older trackings.
     # New trackings have token and older not
-    token = fields.Char(string="Request Token", readonly=True,
-                        default=lambda s: uuid.uuid4().hex)
+    token = fields.Char(string="Security Token", readonly=True,
+                        default=lambda s: uuid.uuid4().hex,
+                        groups="base.group_system")
 
     @api.model_create_multi
     def create(self, vals_list):
         records = super().create(vals_list)
-        for record in records:
-            if record.state in self.env['mail.message'].get_failed_states():
-                record.mail_message_id.mail_tracking_needs_action = True
+        failed_states = self.env['mail.message'].get_failed_states()
+        records \
+            .filtered(lambda one: one.state in failed_states) \
+            .mapped("mail_message_id") \
+            .write({'mail_tracking_needs_action': True})
         return records
 
     @api.multi

@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-31 17:51+0000\n"
-"PO-Revision-Date: 2019-10-31 17:51+0000\n"
+"POT-Creation-Date: 2019-11-12 17:22+0000\n"
+"PO-Revision-Date: 2019-11-12 17:22+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -62,8 +62,8 @@ msgid "Bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_thread.py:65
-#: code:addons/mail_tracking/models/mail_thread.py:69
+#: code:addons/mail_tracking/models/mail_thread.py:64
+#: code:addons/mail_tracking/models/mail_thread.py:68
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_cc
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
@@ -94,7 +94,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:235
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:231
 #, python-format
 msgid "Congratulations, your failed mailbox is empty"
 msgstr ""
@@ -234,9 +234,9 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:352
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:350
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:13
-#: code:addons/mail_tracking/static/src/xml/failed_message/widget.xml:21
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:21
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #, python-format
@@ -259,14 +259,14 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/widget.xml:39
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:39
 #, python-format
 msgid "Failed Recipients:"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/widget.xml:7
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:7
 #, python-format
 msgid "Failed messages"
 msgstr ""
@@ -279,7 +279,7 @@ msgid "Failed messages appear here."
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_thread.py:93
+#: code:addons/mail_tracking/models/mail_thread.py:92
 #, python-format
 msgid "Failed sent messages"
 msgstr ""
@@ -487,7 +487,7 @@ msgstr ""
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:10
-#: code:addons/mail_tracking/static/src/xml/failed_message/widget.xml:35
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:35
 #, python-format
 msgid "Retry"
 msgstr ""
@@ -495,6 +495,11 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__smtp_server
 msgid "SMTP server"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__token
+msgid "Security Token"
 msgstr ""
 
 #. module: mail_tracking
@@ -520,8 +525,15 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:30
+#, python-format
+msgid "Set all as reviewed"
+msgstr ""
+
+#. module: mail_tracking
+#. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:7
-#: code:addons/mail_tracking/static/src/xml/failed_message/widget.xml:32
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:32
 #, python-format
 msgid "Set as Reviewed"
 msgstr ""

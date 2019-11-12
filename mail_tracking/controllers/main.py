@@ -16,7 +16,6 @@ BLANK = 'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
 
 @contextmanager
 def db_env(dbname):
-    # This part you're missing and it's important
     if not http.db_filter([dbname]):
         raise werkzeug.exceptions.BadRequest()
     cr = None
@@ -48,21 +47,25 @@ class MailTrackingController(MailController):
         metadata = self._request_metadata()
         res = None
         with db_env(db) as env:
-            if env:
+            try:
                 res = env['mail.tracking.email'].event_process(
                     http.request, kw, metadata, event_type=event_type)
-        return res or 'NOT FOUND'
+            except Exception:
+                pass
+        if not res or res == 'NOT FOUND':
+            return werkzeug.exceptions.NotAcceptable()
+        return res
 
     @http.route(['/mail/tracking/open/<string:db>'
                  '/<int:tracking_email_id>/blank.gif',
                  '/mail/tracking/open/<string:db>'
                  '/<int:tracking_email_id>/<string:token>/blank.gif'],
-                type='http', auth='none')
+                type='http', auth='none', methods=['GET'])
     def mail_tracking_open(self, db, tracking_email_id, token=False, **kw):
         """Route used to track mail openned (With & Without Token)"""
         metadata = self._request_metadata()
         with db_env(db) as env:
-            if env:
+            try:
                 tracking_email = env['mail.tracking.email'].search([
                     ('id', '=', tracking_email_id),
                     ('state', 'in', ['sent', 'delivered']),
@@ -73,6 +76,8 @@ class MailTrackingController(MailController):
                 else:
                     _logger.warning(
                         "MailTracking email '%s' not found", tracking_email_id)
+            except Exception:
+                pass
 
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()

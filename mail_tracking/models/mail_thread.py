@@ -14,8 +14,7 @@ class MailThread(models.AbstractModel):
         'mail.message', 'res_id', string='Failed Messages',
         domain=lambda self:
             [('model', '=', self._name)]
-            + self._get_failed_message_domain(),
-        auto_join=True)
+            + self._get_failed_message_domain())
 
     def _get_failed_message_domain(self):
         """Domain used to display failed messages on the 'failed_messages'
