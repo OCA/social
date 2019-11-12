@@ -21,6 +21,7 @@ addon | version | summary
 [mail_check_mailbox_size](mail_check_mailbox_size/) | 10.0.1.0.0 | Send an email summarizing the current space used by a mailbox
 [mail_debrand](mail_debrand/) | 10.0.1.0.0 | Remove Odoo branding in sent emails
 [mail_digest](mail_digest/) | 10.0.1.0.2 | Basic digest mail handling.
+[mail_follower_custom_notification](mail_follower_custom_notification/) | 10.0.1.0.0 | Let followers choose if they want to receive email notifications for a given subscription
 [mail_footer_notified_partner](mail_footer_notified_partner/) | 10.0.1.0.1 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_force_queue](mail_force_queue/) | 10.0.0.2.0 | Force outgoing emails to be queued
 [mail_forward](mail_forward/) | 10.0.1.0.0 | Add option to forward messages
