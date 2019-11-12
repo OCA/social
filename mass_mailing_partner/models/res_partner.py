@@ -59,6 +59,7 @@ class ResPartner(models.Model):
         for partner in self:
             partner.mass_mailing_stats_count = mapped_data.get(partner.id, 0)
 
+    @api.multi
     def write(self, vals):
         res = super(ResPartner, self).write(vals)
         mm_vals = {}
