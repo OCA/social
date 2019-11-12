@@ -7,7 +7,7 @@ from odoo.tests import common
 class TestAttachExistingAttachment(common.TransactionCase):
 
     def setUp(self):
-        super(TestAttachExistingAttachment, self).setUp()
+        super().setUp()
         self.partner_obj = self.env['res.partner']
         self.partner_01 = self.env.ref('base.res_partner_10')
         self.partner_02 = self.env.ref('base.res_partner_address_17')
