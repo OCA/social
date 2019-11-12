@@ -54,10 +54,11 @@ To use this module, you need to:
   You will need to install the *document* module and have at least *User*
   permissions for *Knowledge* to see the effect.
 
-.. info::
-    Technical note: Internally, forwarded messages are modified copies of
-    original ones, but attachments are references to the exact originals to
-    avoid duplicating disk space. Keep that in mind when managing permissions.
+**NOTE**
+
+Internally, forwarded messages are modified copies of
+original ones, but attachments are references to the exact originals to
+avoid duplicating disk space. Keep that in mind when managing permissions.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
