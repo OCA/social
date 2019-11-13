@@ -32,7 +32,7 @@ class ResPartner(models.Model):
     @api.constrains('email')
     def _check_email_mass_mailing_contacts(self):
         for partner in self:
-            if not partner.email and self.sudo().mass_mailing_contact_ids:
+            if not partner.email and partner.sudo().mass_mailing_contact_ids:
                 raise ValidationError(_(
                     "This partner '%s' is linked to one or more mass "
                     "mailing contact. Email must be assigned."
