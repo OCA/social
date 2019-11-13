@@ -57,6 +57,11 @@ msgid "Email Thread"
 msgstr ""
 
 #. module: message_auto_subscribe_notify_own
+#: model:ir.model.fields,field_description:message_auto_subscribe_notify_own.field_message_auto_subscribe_notify_own_test__failed_message_ids
+msgid "Failed Messages"
+msgstr ""
+
+#. module: message_auto_subscribe_notify_own
 #: model:ir.model.fields,field_description:message_auto_subscribe_notify_own.field_message_auto_subscribe_notify_own_test__message_follower_ids
 msgid "Followers"
 msgstr ""
