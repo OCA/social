@@ -130,6 +130,11 @@ msgid "Email"
 msgstr "E-post"
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__failed_message_ids
+msgid "Failed Messages"
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_follower_ids
 msgid "Followers"
 msgstr ""
