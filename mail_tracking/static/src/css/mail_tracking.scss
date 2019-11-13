@@ -1,0 +1,25 @@
+/* Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+   Copyright 2019 Alexandre Díaz
+   License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
+
+.mail_tracking {
+    span {
+        color: #909090;
+
+        &.mail_tracking_opened {
+            color: #a34a8b;
+        }
+    }
+}
+.mail_tracking_pointer {
+    cursor: pointer;
+}
+
+.o_mail_thread .o_thread_message .o_thread_message_core {
+    .o_mail_info {
+        margin: 0;
+    }
+    .o_mail_tracking {
+        margin: 0 0 0.2rem 0;
+    }
+}
