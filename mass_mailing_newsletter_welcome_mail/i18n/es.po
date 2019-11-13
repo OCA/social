@@ -35,7 +35,7 @@ msgstr ""
 "        "
 
 #. module: mass_mailing_newsletter_welcome_mail
-#: model:ir.model.fields,help:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list_welcome_mail_template_id
+#: model:ir.model.fields,help:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list__welcome_mail_template_id
 msgid "Mail template to be sent when a contact is subscribed from the website."
 msgstr ""
 
@@ -45,7 +45,7 @@ msgid "Mailing List"
 msgstr ""
 
 #. module: mass_mailing_newsletter_welcome_mail
-#: model:ir.model.fields,field_description:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list_welcome_mail_template_id
+#: model:ir.model.fields,field_description:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list__welcome_mail_template_id
 msgid "Welcome mail template"
 msgstr ""
 
