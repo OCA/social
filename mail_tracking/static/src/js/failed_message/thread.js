@@ -26,7 +26,7 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
      */
     function _readMessages (widget, ids) {
         if (!ids.length) {
-            return $.when();
+            return $.when([]);
         }
         var context = widget.record && widget.record.getContext();
         return widget._rpc({
@@ -150,7 +150,7 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
         _markFailedMessageReviewed: function (id) {
             return this._rpc({
                 model: 'mail.message',
-                method: 'toggle_tracking_status',
+                method: 'set_need_action_done',
                 args: [[id]],
                 context: this.record.getContext(),
             });
@@ -171,7 +171,7 @@ odoo.define('mail_tracking.FailedMessageThread', function (require) {
                 var model = notif[0][1];
                 if (model === 'res.partner') {
                     var data = notif[1];
-                    if (data.type === 'update_failed_messages') {
+                    if (data.type === 'toggle_tracking_status') {
                         // Reload 'mail_failed_message' widget
                         self._reload({failed_message: true});
                     }
