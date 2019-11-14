@@ -95,7 +95,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
          */
         _handlePartnerNotification: function (data) {
             if (data.type === 'toggle_tracking_status') {
-                this._handlePartnerToggleFailedNotification(data);
+                this._handleChangeTrackingNeedsActionNotification(data);
             } else {
                 // Workaround to avoid call '_handlePartnerChannelNotification'
                 // because this is related with the failed mailbox, not a
@@ -106,13 +106,14 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
 
         /**
          * This method updates messages in the failed mailbox when the flag
-         * 'mail_tracking_needs_action' is toggled. This can remove/add
-         * the message from/to failed mailbox and update mailbox counter.
+         * 'mail_tracking_needs_action' was changed to False. This can
+         * remove/add the message from/to failed mailbox and update mailbox
+         * counter.
          *
          * @private
          * @param {Object} data
          */
-        _handlePartnerToggleFailedNotification: function (data) {
+        _handleChangeTrackingNeedsActionNotification: function (data) {
             var self = this;
             var failed = this.getMailbox('failed');
             _.each(data.message_ids, function (messageID) {
@@ -320,7 +321,7 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
             var messageID = $(event.currentTarget).data('message-id');
             return this._rpc({
                 model: 'mail.message',
-                method: 'toggle_tracking_status',
+                method: 'set_need_action_done',
                 args: [[messageID]],
                 context: this.getSession().user_context,
             });
