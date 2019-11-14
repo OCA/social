@@ -203,18 +203,17 @@ class MailMessage(models.Model):
                 for msg in self.sorted('date', reverse=True)]
 
     @api.multi
-    def toggle_tracking_status(self):
-        """Toggle message tracking action.
+    def set_need_action_done(self):
+        """Set message tracking action as done
 
-        This will mark them to be (or not) ignored in the tracking issues
-        filter.
+        This will mark them to be ignored in the tracking issues filter.
         """
         self.check_access_rule('read')
-        self.mail_tracking_needs_action = not self.mail_tracking_needs_action
+        self.write({'mail_tracking_needs_action': False})
         notification = {
             'type': 'toggle_tracking_status',
-            'message_ids': [self.id],
-            'needs_actions': self.mail_tracking_needs_action
+            'message_ids': self.ids,
+            'needs_actions': False
         }
         self.env['bus.bus'].sendone(
             (self._cr.dbname, 'res.partner', self.env.user.partner_id.id),

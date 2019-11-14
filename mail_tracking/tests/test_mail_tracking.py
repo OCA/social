@@ -215,7 +215,7 @@ class TestMailTracking(TransactionCase):
         self.assertTrue(messages)
         self.assertTrue(messages_failed)
         self.assertTrue(len(messages) > len(messages_failed))
-        tracking.mail_message_id.toggle_tracking_status()
+        tracking.mail_message_id.set_need_action_done()
         self.assertFalse(tracking.mail_message_id.mail_tracking_needs_action)
         self.assertTrue(
             MailMessageObj.get_failed_count() < failed_count)
