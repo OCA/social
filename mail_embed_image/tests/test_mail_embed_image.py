@@ -85,3 +85,5 @@ class TestMailEmbedImage(common.TransactionCase):
             model_ir_mail_server.send_email.call_args[0][0].get_payload(
                 )[0].get_payload()[1].get_payload(decode=True),
         )
+        model_ir_mail_server._revert_method('send_email')
+        model_ir_mail_server._revert_method('build_email')
