@@ -14,11 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_sendgrid_mass_mailing
-#: model:ir.model.fields,field_description:mail_sendgrid_mass_mailing.field_mail_mass_mailing_html_unframe
-msgid "Body"
-msgstr ""
-
-#. module: mail_sendgrid_mass_mailing
 #: model:ir.model.fields,field_description:mail_sendgrid_mass_mailing.field_mail_mass_mailing_body_sendgrid
 msgid "Body sendgrid"
 msgstr ""
@@ -39,11 +34,6 @@ msgid "Force language"
 msgstr ""
 
 #. module: mail_sendgrid_mass_mailing
-#: model:ir.model.fields,field_description:mail_sendgrid_mass_mailing.field_mail_mass_mailing_html_copy
-msgid "Html copy"
-msgstr ""
-
-#. module: mail_sendgrid_mass_mailing
 #: model:ir.model,name:mail_sendgrid_mass_mailing.model_mail_tracking_event
 msgid "MailTracking event"
 msgstr ""
@@ -59,7 +49,7 @@ msgid "Outgoing Mails"
 msgstr ""
 
 #. module: mail_sendgrid_mass_mailing
-#: code:addons/mail_sendgrid_mass_mailing/models/mass_mailing.py:99
+#: code:addons/mail_sendgrid_mass_mailing/models/mass_mailing.py:89
 #, python-format
 msgid "Please select recipients."
 msgstr ""
