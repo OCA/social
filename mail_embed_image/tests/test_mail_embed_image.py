@@ -3,66 +3,25 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from base64 import b64encode
 from odoo.tests import common
-from mock import patch, mock
 from lxml import html
 from requests import get
-from odoo import api, registry, SUPERUSER_ID
 
 
 class TestMailEmbedImage(common.TransactionCase):
 
     post_install = True
-    at_install = False
 
-    @patch(
-        'odoo.fields.html_sanitize',
-        side_effect=lambda *args, **kwargs: args[0],
-    )
-    def test_mail_embed_image(self, html_sanitize):
-        """ The following are tested here:
-        1) Create an email with no image, send it.
-        2) Create an email with three images, one base64 content, one http
-        full url and one of the format `/web/image/.*`
-
-        We assert that nothing has changed on 1) and only the `/web/image/.*`
-        has changed in 2)
-        """
-        # we do not want to completely mock out the `build_email` and
-        # `send_email`, rather we want to be able to get information about
-        # them such as call arguments, no of times called etc.
-        # the `wraps` attribute of `Mock` helps us do that
-        reg = registry(common.get_db_name())
-        env = api.Environment(reg.cursor(), SUPERUSER_ID, {})
-        model_ir_mail_server = env['ir.mail_server']
-        mock_build_email = mock.Mock(wraps=model_ir_mail_server.build_email)
-        model_ir_mail_server._patch_method('build_email', mock_build_email)
-        mock_send_email = mock.Mock(wraps=model_ir_mail_server.send_email)
-        model_ir_mail_server._patch_method('send_email', mock_send_email)
-        model_mail_mail = self.env['mail.mail']
+    def test_mail_embed_image(self):
+        """We pass a mail with <img src="..." /> tags to build_email,
+        and then look into the result, check there were attachments
+        created and you find xpaths like //img[src] have a cid"""
+        # DATA
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
         image_url = base_url + \
             '/mail_embed_image/static/description/icon.png'
         image = get(image_url).content
-        body1 = '<div>this is an email</div>'
-        email1 = model_mail_mail.create({
-            'body_html': body1,
-            'email_from': 'test@example.com',
-            'email_to': 'test@example.com',
-        })
-        email1.send()
-        model_ir_mail_server.build_email.assert_called()
-        self.assertIn(
-            body1,
-            model_ir_mail_server.build_email.call_args[1].get('body') or
-            # if body is passed as positional argument
-            model_ir_mail_server.build_email.call_args[0][3])
-        self.assertIn(
-            body1,
-            model_ir_mail_server.send_email.call_args[0][0].get_payload(
-                )[0].get_payload()[1].get_payload(decode=True),
-        )
-        body2 = html.tostring(html.fromstring("""
+        body = html.tostring(html.fromstring("""
             <div>
             this is an email
             <img src="base64: %s"></img>
@@ -73,15 +32,26 @@ class TestMailEmbedImage(common.TransactionCase):
             image_url,
             '/web/image/res.partner/1/image',
             )))
-        email2 = model_mail_mail.create({
-            'body_html': body2,
-            'email_from': 'test@example.com',
-            'email_to': 'test@example.com',
-        })
-        email2.send()
-        model_ir_mail_server.build_email.assert_called()
-        self.assertIn(
-            'img src="cid:',
-            model_ir_mail_server.send_email.call_args[0][0].get_payload(
-                )[0].get_payload()[1].get_payload(decode=True),
-        )
+        email_from = 'test@example.com'
+        email_to = 'test@example.com'
+        subject = 'test mail'
+        # END DATA
+        res = self.env['ir.mail_server'].build_email(
+            email_from, email_to, subject,
+            body, subtype='html')
+        images_in_mail = 0
+        for part in res.walk():
+            if part.get_content_type() == 'text/html':
+                # we do not search in text, just in case that texts exists in
+                # the text elsewhere (not probable, but this is better)
+                images_in_mail += len(
+                    html.fromstring(
+                        part.get_payload(decode=True)
+                    ).xpath("//img[starts-with(@src, 'cid:')]")
+                )
+        # verify 1 replaced image
+        self.assertEqual(images_in_mail, 1)
+        # verify 1 attachment present
+        self.assertEqual([
+            x.get_content_type() for x in res.walk() if x.get_content_type(
+                ).startswith('image/')], ['image/png'])
