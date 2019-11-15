@@ -28,7 +28,7 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: mail_follower_custom_notification
-#: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
+#: model:ir.ui.view,arch_db:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
 msgid "Apply"
 msgstr "Uveljavi"
 
@@ -38,12 +38,12 @@ msgid "Assign custom notification settings to existing followers"
 msgstr "Obstoječim sledilcem dodeli nastavitve obvestil po meri"
 
 #. module: mail_follower_custom_notification
-#: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
+#: model:ir.ui.view,arch_db:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
 msgid "Cancel"
 msgstr "Preklic"
 
 #. module: mail_follower_custom_notification
-#: help:mail.message.subtype,custom_notification_own:0
+#: model:ir.model.fields,help:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_own
 msgid ""
 "Check this to have notifications generated and sent via email about own "
 "messages"
@@ -52,7 +52,7 @@ msgstr ""
 "pošiljajo po e-pošti"
 
 #. module: mail_follower_custom_notification
-#: help:mail.message.subtype,custom_notification_model_ids:0
+#: model:ir.model.fields,help:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_model_ids
 msgid ""
 "Choose for which models the custom configuration applies. This is only "
 "necessary if your subtype doesn't set a model itself"
@@ -61,23 +61,22 @@ msgstr ""
 "če podtip sam ne nastavi modela"
 
 #. module: mail_follower_custom_notification
-#: field:mail.subtype.assign.custom.notifications,create_uid:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_create_uid
 msgid "Created by"
 msgstr "Ustvaril"
 
 #. module: mail_follower_custom_notification
-#: field:mail.subtype.assign.custom.notifications,create_date:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: mail_follower_custom_notification
-#: view:mail.message.subtype:mail_follower_custom_notification.view_mail_message_subtype_form
+#: model:ir.ui.view,arch_db:mail_follower_custom_notification.view_mail_message_subtype_form
 msgid "Custom notifications"
 msgstr "Obvestila po meri"
 
 #. module: mail_follower_custom_notification
-#: field:base.patch.models.mixin,display_name:0
-#: field:mail.subtype.assign.custom.notifications,display_name:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_display_name
 msgid "Display Name"
 msgstr "Prikazni naziv"
 
@@ -92,7 +91,7 @@ msgid "Email Thread"
 msgstr "E-poštni niz"
 
 #. module: mail_follower_custom_notification
-#: field:mail.followers,force_mail_subtype_ids:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_followers_force_mail_subtype_ids
 msgid "Force mails from subtype"
 msgstr "Vsili e-pošto iz podtipa"
 
@@ -102,25 +101,25 @@ msgid "Force no"
 msgstr "Vsili ne"
 
 #. module: mail_follower_custom_notification
-#: field:mail.followers,force_nomail_subtype_ids:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_followers_force_nomail_subtype_ids
 msgid "Force no mails from subtype"
 msgstr "Vsili ne pošte iz podtipa"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:20
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:18
 #, python-format
 msgid "Force not sending mails"
 msgstr "Vsili ne pošiljanje pošte"
 
 #. module: mail_follower_custom_notification
-#: field:mail.followers,force_own_subtype_ids:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_followers_force_own_subtype_ids
 msgid "Force own mails from subtype"
 msgstr "Vsili lastno pošto iz podtipa"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:16
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:14
 #, python-format
 msgid "Force sending mails"
 msgstr "Vsili pošiljanje pošte"
@@ -131,33 +130,36 @@ msgid "Force yes"
 msgstr "Vsili da"
 
 #. module: mail_follower_custom_notification
-#: field:base.patch.models.mixin,id:0
-#: field:mail.subtype.assign.custom.notifications,id:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_id
 msgid "ID"
 msgstr "ID"
 
 #. module: mail_follower_custom_notification
-#: field:base.patch.models.mixin,__last_update:0
-#: field:mail.subtype.assign.custom.notifications,__last_update:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications___last_update
 msgid "Last Modified on"
 msgstr "Zadnjič spremenjeno"
 
 #. module: mail_follower_custom_notification
-#: field:mail.subtype.assign.custom.notifications,write_uid:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_write_uid
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
 
 #. module: mail_follower_custom_notification
-#: field:mail.subtype.assign.custom.notifications,write_date:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: mail_follower_custom_notification
-#: help:mail.message.subtype,custom_notification_mail:0
+#: model:ir.model.fields,help:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_mail
+#, fuzzy
+#| msgid ""
+#| "Leave empty to use the on the partner's form, set to \"Force yes\" to "
+#| "always send messages of this type via email, and \"Force no\" to never "
+#| "send messages of type via email"
 msgid ""
-"Leave empty to use the on the partner's form, set to \"Force yes\" to always "
-"send messages of this type via email, and \"Force no\" to never send "
-"messages of type via email"
+"Leave empty to use the setting on the partner's form, set to \"Force yes\" "
+"to always send messages of this type via email, and \"Force no\" to never "
+"send messages of type via email"
 msgstr ""
 "Pustite prazno za uporabo na obrazcu partnerja, nastavite \"Vsili da\", da "
 "bi vedno preko e-pošte pošiljali sporočila tega tipa in \"Vsili ne\", da ne "
@@ -165,7 +167,7 @@ msgstr ""
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:9
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:7
 #, python-format
 msgid "Mail notifications"
 msgstr "Poštna obvestila"
@@ -181,48 +183,48 @@ msgid "Message subtypes"
 msgstr "Sporočilni podtipi"
 
 #. module: mail_follower_custom_notification
-#: field:mail.message.subtype,custom_notification_model_ids:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_model_ids
 msgid "Models"
 msgstr "Modeli"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:27
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:25
 #, python-format
 msgid "No notification"
 msgstr "Brez obvestil"
 
 #. module: mail_follower_custom_notification
-#: model:ir.model,name:mail_follower_custom_notification.model_mail_notification
-msgid "Notifications"
-msgstr "Obvestila"
-
-#. module: mail_follower_custom_notification
-#: field:mail.message.subtype,custom_notification_own:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_own
 msgid "Notify about own messages"
 msgstr "Obveščanje o lastnih sporočilih"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:31
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:29
 #, python-format
 msgid "Notify me"
 msgstr "Obvesti me"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:24
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:22
 #, python-format
 msgid "Own messages"
 msgstr "Lastna sporočila"
 
 #. module: mail_follower_custom_notification
-#: field:mail.message.subtype,custom_notification_mail:0
+#: model:ir.model,name:mail_follower_custom_notification.model_res_partner
+msgid "Partner"
+msgstr ""
+
+#. module: mail_follower_custom_notification
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_mail
 msgid "Send mail notification"
 msgstr "Pošlji poštno obvestilo"
 
 #. module: mail_follower_custom_notification
-#: field:mail.subtype.assign.custom.notifications,subtype_ids:0
+#: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_subtype_assign_custom_notifications_subtype_ids
 msgid "Subtypes"
 msgstr "Podtipi"
 
@@ -233,12 +235,13 @@ msgstr "Posodobi obstoječe naročnine"
 
 #. module: mail_follower_custom_notification
 #. openerp-web
-#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:12
+#: code:addons/mail_follower_custom_notification/static/src/xml/mail_follower_custom_notification.xml:10
 #, python-format
 msgid "Use default mail preferences"
 msgstr "Uporabi privzete poštne nastavitve"
 
-#. module: mail_follower_custom_notification
-#: view:mail.subtype.assign.custom.notifications:mail_follower_custom_notification.view_mail_subtype_assign_custom_notifications
-msgid "or"
-msgstr "ali"
+#~ msgid "Notifications"
+#~ msgstr "Obvestila"
+
+#~ msgid "or"
+#~ msgstr "ali"
