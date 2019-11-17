@@ -128,7 +128,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:231
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:232
 #, python-format
 msgid "Congratulations, your failed mailbox is empty"
 msgstr ""
@@ -272,7 +272,7 @@ msgstr "Tipo de evento"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:350
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:351
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:13
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:21
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
