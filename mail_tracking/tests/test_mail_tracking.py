@@ -77,17 +77,19 @@ class TestMailTracking(TransactionCase):
 
     def test_message_post(self):
         # This message will generate a notification for recipient
-        message = self.env['mail.message'].create({
-            'subject': 'Message test',
-            'author_id': self.sender.id,
-            'email_from': self.sender.email,
-            'message_type': 'comment',
-            'model': 'res.partner',
-            'res_id': self.recipient.id,
-            'partner_ids': [(4, self.recipient.id)],
-            'body': '<p>This is a test message</p>',
-        })
-        message._notify(message, {}, force_send=True)
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": self.recipient.id,
+                "partner_ids": [(4, self.recipient.id)],
+                "body": "<p>This is a test message</p>",
+            }
+        )
+        message._moderate_accept()
         # Search tracking created
         tracking_email = self.env["mail.tracking.email"].search(
             [
@@ -102,7 +104,7 @@ class TestMailTracking(TransactionCase):
         message_dict = message.message_format()[0]
         self.assertTrue(len(message_dict["partner_ids"]) > 0)
         # First partner is recipient
-        partner_id = message_dict["partner_ids"][0][0]
+        partner_id = message_dict["partner_ids"][0]
         self.assertEqual(partner_id, self.recipient.id)
         status = message_dict["partner_trackings"][0]
         # Tracking status must be sent and
@@ -137,7 +139,7 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is a test message</p>",
             }
         )
-        message._notify(message, {}, force_send=True)
+        message._moderate_accept()
         # Search tracking created
         tracking_email = self.env["mail.tracking.email"].search(
             [
@@ -201,7 +203,7 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is another test message</p>",
             }
         )
-        message._notify(message, {}, force_send=True)
+        message._moderate_accept()
         recipients = self.recipient._message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id][0]), 3)
         self._check_partner_trackings(message)
@@ -232,6 +234,45 @@ class TestMailTracking(TransactionCase):
         tracking.mail_message_id.author_id = False
         values = tracking.mail_message_id.get_failed_messages()[0]
         self.assertEqual(values["author"][0], -1)
+
+    def test_resend_failed_message(self):
+        # This message will generate a notification for recipient
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": self.recipient.id,
+                "partner_ids": [(4, self.recipient.id)],
+                "body": "<p>This is a test message</p>",
+            }
+        )
+        message._moderate_accept()
+        # Search tracking created
+        tracking_email = self.env["mail.tracking.email"].search(
+            [
+                ("mail_message_id", "=", message.id),
+                ("partner_id", "=", self.recipient.id),
+            ]
+        )
+        # Force error state
+        tracking_email.state = "error"
+        # Create resend mail wizard
+        wizard = (
+            self.env["mail.resend.message"]
+            .sudo()
+            .with_context({"mail_message_to_resend": message.id})
+            .create({})
+        )
+        # Check failed recipient)s
+        self.assertTrue(any(wizard.partner_ids))
+        self.assertEqual(self.recipient.email, wizard.partner_ids[0].email)
+        # Resend message
+        wizard.resend_mail_action()
+        # Check tracking reset
+        self.assertFalse(tracking_email.state)
 
     def mail_send(self, recipient):
         mail = self.env["mail.mail"].create(
