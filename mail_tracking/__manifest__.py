@@ -10,15 +10,11 @@
     "version": "12.0.2.0.1",
     "category": "Social Network",
     "website": "http://github.com/OCA/social",
-    "author": "Tecnativa, "
-              "Odoo Community Association (OCA)",
+    "author": ("Tecnativa, " "Odoo Community Association (OCA)"),
     "license": "AGPL-3",
     "application": False,
-    'installable': True,
-    "depends": [
-        "decimal_precision",
-        "mail",
-    ],
+    "installable": True,
+    "depends": ["decimal_precision", "mail"],
     "data": [
         "data/tracking_data.xml",
         "security/mail_tracking_email_security.xml",
@@ -35,8 +31,6 @@
         "static/src/xml/failed_message/thread.xml",
         "static/src/xml/failed_message/discuss.xml",
     ],
-    'demo': [
-        'demo/demo.xml',
-    ],
+    "demo": ["demo/demo.xml"],
     "pre_init_hook": "pre_init_hook",
 }
