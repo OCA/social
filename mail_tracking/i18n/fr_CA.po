@@ -46,13 +46,18 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:189
+#: code:addons/mail_tracking/models/mail_message.py:0
 #, python-format
 msgid "-Unknown Author-"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_cc
+#: code:addons/mail_tracking/tests/test_mail_tracking.py:0
+#, python-format
+msgid "<p>This is a test message</p>"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
 msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
 msgstr ""
@@ -73,14 +78,12 @@ msgid "Bounce type"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.email,state:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__bounced
 msgid "Bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_thread.py:64
-#: code:addons/mail_tracking/models/mail_thread.py:68
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_cc
+#: code:addons/mail_tracking/models/mail_thread.py:0
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
 msgid "Cc"
@@ -92,7 +95,7 @@ msgid "Click"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.event,event_type:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__click
 msgid "Clicked"
 msgstr ""
 
@@ -103,14 +106,14 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:22
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #, python-format
 msgid "Congratulations, you don't have any failed messages"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:232
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
 #, python-format
 msgid "Congratulations, your failed mailbox is empty"
 msgstr ""
@@ -148,22 +151,22 @@ msgid "Date"
 msgstr "Date"
 
 #. module: mail_tracking
-#: selection:mail.tracking.event,event_type:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__deferral
 msgid "Deferral"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__deferred
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: selection:mail.tracking.email,state:0
 msgid "Deferred"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:74
+#: code:addons/mail_tracking/models/mail_message.py:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__delivered
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__delivered
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: selection:mail.tracking.email,state:0
-#: selection:mail.tracking.event,event_type:0
 #, python-format
 msgid "Delivered"
 msgstr ""
@@ -214,9 +217,9 @@ msgid "Email resend wizard"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:73
+#: code:addons/mail_tracking/models/mail_message.py:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__error
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
-#: selection:mail.tracking.email,state:0
 #, python-format
 msgid "Error"
 msgstr ""
@@ -250,9 +253,9 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:351
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:13
-#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:21
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #, python-format
@@ -260,11 +263,16 @@ msgid "Failed"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_account_analytic_account__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_blacklist__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_cc__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_phone__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mailing_contact__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mailing_mailing__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_phone_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 msgid "Failed Messages"
@@ -272,27 +280,27 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:39
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Failed Recipients:"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:7
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Failed messages"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:23
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #, python-format
 msgid "Failed messages appear here."
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_thread.py:92
+#: code:addons/mail_tracking/models/mail_thread.py:0
 #, python-format
 msgid "Failed sent messages"
 msgstr ""
@@ -304,7 +312,7 @@ msgid "Group By"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.event,event_type:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__hard_bounce
 msgid "Hard bounce"
 msgstr ""
 
@@ -321,7 +329,6 @@ msgid "IP"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__is_failed_message
 msgid "Is Failed Message"
@@ -357,14 +364,12 @@ msgid "Mail Server"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_needs_action
 msgid "Mail Tracking Needs Action"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
 msgid "Mail Trackings"
@@ -411,7 +416,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:30
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #, python-format
 msgid "Mark all as reviewed"
 msgstr ""
@@ -426,7 +431,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:147
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:0
 #, python-format
 msgid "Message tracking"
 msgstr ""
@@ -445,14 +450,14 @@ msgid "OS"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__open
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: selection:mail.tracking.event,event_type:0
 msgid "Open"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:75
-#: selection:mail.tracking.email,state:0
+#: code:addons/mail_tracking/models/mail_message.py:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__opened
 #, python-format
 msgid "Opened"
 msgstr ""
@@ -492,15 +497,15 @@ msgid "Recipient email address"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.email,state:0
-#: selection:mail.tracking.event,event_type:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__rejected
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__reject
 msgid "Rejected"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:10
-#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:35
+#: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:0
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Retry"
 msgstr ""
@@ -527,43 +532,43 @@ msgid "Sender email"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:74
+#: code:addons/mail_tracking/models/mail_message.py:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__sent
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__sent
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
-#: selection:mail.tracking.email,state:0
-#: selection:mail.tracking.event,event_type:0
 #, python-format
 msgid "Sent"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:30
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #, python-format
 msgid "Set all as reviewed"
 msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:7
-#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:32
+#: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:0
+#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Set as Reviewed"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.event,event_type:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__soft_bounce
 msgid "Soft bounce"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.email,state:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__soft-bounced
 msgid "Soft bounced"
 msgstr ""
 
 #. module: mail_tracking
-#: selection:mail.tracking.email,state:0
-#: selection:mail.tracking.event,event_type:0
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__spam
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__spam
 msgid "Spam"
 msgstr ""
 
@@ -574,7 +579,7 @@ msgid "State"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:0
 #, python-format
 msgid "Status: %s"
 msgstr ""
@@ -586,14 +591,13 @@ msgid "Subject"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__mail_tracking_needs_action
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__mail_tracking_needs_action
 msgid "The message tracking will be considered to filter tracking issues"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:82
+#: code:addons/mail_tracking/models/mail_message.py:0
 #, python-format
 msgid "The partner doesn't have a defined email"
 msgstr ""
@@ -608,7 +612,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:54
+#: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:0
 #, python-format
 msgid "To:"
 msgstr ""
@@ -634,7 +638,7 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:127
+#: code:addons/mail_tracking/static/src/js/mail_tracking.js:0
 #, python-format
 msgid "Tracking partner"
 msgstr ""
@@ -656,7 +660,7 @@ msgid "UTC timestamp"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:75
+#: code:addons/mail_tracking/models/mail_message.py:0
 #, python-format
 msgid "Unknown"
 msgstr ""
@@ -667,9 +671,9 @@ msgid "Unsubscribe"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__unsub
+#: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__unsub
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
-#: selection:mail.tracking.email,state:0
-#: selection:mail.tracking.event,event_type:0
 msgid "Unsubscribed"
 msgstr ""
 
@@ -703,7 +707,7 @@ msgid "User country"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:73
+#: code:addons/mail_tracking/models/mail_message.py:0
 #, python-format
 msgid "Waiting"
 msgstr ""

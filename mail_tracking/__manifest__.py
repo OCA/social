@@ -7,14 +7,14 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "12.0.2.0.1",
+    "version": "13.0.1.0.0",
     "category": "Social Network",
     "website": "http://github.com/OCA/social",
     "author": ("Tecnativa, " "Odoo Community Association (OCA)"),
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["decimal_precision", "mail"],
+    "depends": ["mail"],
     "data": [
         "data/tracking_data.xml",
         "security/mail_tracking_email_security.xml",
