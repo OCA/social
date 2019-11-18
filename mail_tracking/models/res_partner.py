@@ -11,23 +11,20 @@ class ResPartner(models.Model):
     # tracking_emails_count and email_score are non-store fields in order
     # to improve performance
     tracking_emails_count = fields.Integer(
-        compute="_compute_tracking_emails_count", readonly=True
+        compute="_compute_email_score_and_count", readonly=True
     )
-    email_score = fields.Float(compute="_compute_email_score", readonly=True)
+    email_score = fields.Float(compute="_compute_email_score_and_count", readonly=True)
 
     @api.depends("email")
-    def _compute_email_score(self):
-        for partner in self.filtered('email'):
-            partner.email_score = self.env['mail.tracking.email'].\
-                email_score_from_email(partner.email)
-
-    @api.multi
-    @api.depends('email')
-    def _compute_tracking_emails_count(self):
-        for partner in self:
-            count = 0
-            if partner.email:
-                count = self.env["mail.tracking.email"].search_count(
-                    [("recipient_address", "=", partner.email.lower())]
-                )
-            partner.tracking_emails_count = count
+    def _compute_email_score_and_count(self):
+        partners_mail = self.filtered("email")
+        mail_tracking_obj = self.env["mail.tracking.email"]
+        for partner in partners_mail:
+            partner.email_score = self.env[
+                "mail.tracking.email"
+            ].email_score_from_email(partner.email)
+            partner.tracking_emails_count = mail_tracking_obj.search_count(
+                [("recipient_address", "=", partner.email.lower())]
+            )
+        partners_no_mail = self - partners_mail
+        partners_no_mail.update({"email_score": 50.0, "tracking_emails_count": 0})

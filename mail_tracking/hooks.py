@@ -5,18 +5,9 @@ import logging
 
 from psycopg2.extensions import AsIs
 
+from odoo.tools import column_exists
+
 _logger = logging.getLogger(__name__)
-
-
-def column_exists(cr, table, column):
-    cr.execute(
-        """
-        SELECT column_name
-        FROM information_schema.columns
-        WHERE table_name = %s AND column_name = %s""",
-        (table, column),
-    )
-    return bool(cr.fetchall())
 
 
 def column_add_with_value(cr, table, column, field_type, value):

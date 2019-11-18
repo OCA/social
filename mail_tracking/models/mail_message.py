@@ -132,8 +132,8 @@ class MailMessage(models.Model):
             # Search all recipients for this message
             if message.partner_ids:
                 partners |= message.partner_ids
-            if message.needaction_partner_ids:
-                partners |= message.needaction_partner_ids
+            if message.notified_partner_ids:
+                partners |= message.notified_partner_ids
             # Remove recipients already included
             partners -= partners_already
             tracking_unkown_values = {
@@ -179,7 +179,6 @@ class MailMessage(models.Model):
                 message_dict.update(tracking_statuses[mail_message_id])
         return res
 
-    @api.multi
     def _prepare_dict_failed_message(self):
         """Preare values to be used by the chatter widget"""
         self.ensure_one()
@@ -200,7 +199,6 @@ class MailMessage(models.Model):
             "failed_recipients": failed_recipients,
         }
 
-    @api.multi
     def get_failed_messages(self):
         """Returns the list of failed messages to be used by the
            failed_messages widget"""
@@ -209,7 +207,6 @@ class MailMessage(models.Model):
             for msg in self.sorted("date", reverse=True)
         ]
 
-    @api.multi
     def set_need_action_done(self):
         """Set message tracking action as done
 
