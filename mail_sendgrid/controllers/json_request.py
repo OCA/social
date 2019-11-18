@@ -25,7 +25,7 @@ class RESTJsonRequest(JsonRequest):
     """
     def __init__(self, *args):
         try:
-            super(RESTJsonRequest, self).__init__(*args)
+            super().__init__(*args)
         except AttributeError:
             # The JSON may contain a list
             self.params = dict()

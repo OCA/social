@@ -89,7 +89,7 @@ class MailTrackingEmail(models.Model):
             'ip': 'ip',
             'url': 'url',
         }
-        for k, v in mapping.items():
+        for k, v in list(mapping.items()):
             if event.get(k, False):
                 metadata[v] = event[k]
         # Special field mapping

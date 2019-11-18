@@ -18,5 +18,5 @@ class EmailTemplatePreview(models.TransientModel):
         sendgrid_template = template.sendgrid_localized_template
         if sendgrid_template:
             self.body_html = sendgrid_template.html_content.replace(
-                '<%body%>', body_html)
+                '{{body}}', body_html)
         return result

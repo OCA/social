@@ -20,7 +20,7 @@ class EmailComposeMessage(models.TransientModel):
                 wizard.body, wizard.model, [res_id], post_process=True)[res_id]
             if sendgrid_template and wizard.body:
                 wizard.body_sendgrid = sendgrid_template.html_content.replace(
-                    '<%body%>', render_body)
+                    '{{body}}', render_body)
             else:
                 wizard.body_sendgrid = render_body
 
@@ -34,7 +34,7 @@ class EmailComposeMessage(models.TransientModel):
         if sendgrid_template_id:
             substitutions = template.render_substitutions(res_ids)
 
-            for res_id, value in mail_values.items():
+            for res_id, value in list(mail_values.items()):
                 value['sendgrid_template_id'] = sendgrid_template_id
                 value['substitution_ids'] = substitutions[res_id]
 

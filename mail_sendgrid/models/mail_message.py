@@ -6,14 +6,6 @@ import logging
 
 _logger = logging.getLogger(__name__)
 
-try:
-    from sendgrid import SendGridAPIClient
-    from sendgrid.helpers.mail import Email, Attachment, CustomArg, Content, \
-        Personalization, Substitution, Mail, Header
-except ImportError:
-    _logger.info("ImportError raised while loading module.")
-    _logger.debug("ImportError details:", exc_info=True)
-
 
 class MailMessage(models.Model):
     """ Add SendGrid related fields so that they dispatch in all

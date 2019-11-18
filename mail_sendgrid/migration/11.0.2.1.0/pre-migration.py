@@ -4,7 +4,6 @@ def migrate(cr, version):
     cr.execute("""
         UPDATE public.sendgrid_substitution
         SET key = regexp_replace(key, '[{}]+', '', 'g');
-        
         DELETE FROM public.sendgrid_substitution
         WHERE key SIMILAR TO '%\W+%';
     """)
