@@ -42,7 +42,10 @@
                 <label for="tracking_event_ids"/>
                 <div>
                     <field name="tracking_event_ids">
-                        <tree string="Tracking events" colors="grey:event_type in ('deferral');black:event_type in ('send');red:event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject');blue:event_type in ('unsub', 'click', 'open')">
+                        <tree string="Tracking events"
+                              decoration-muted="event_type == 'deferral'"
+                              decoration-danger="event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject')"
+                              decoration-info="event_type in ('unsub', 'click', 'open')">
                             <field name="time"/>
                             <field name="event_type"/>
                             <field name="ip"/>
@@ -63,7 +66,10 @@
     <field name="model">mail.tracking.email</field>
     <field name="arch" type="xml">
         <tree string="MailTracking emails" create="false" edit="false" delete="false"
-              colors="grey:state in (False, 'deferred');black:state in ('sent', 'delivered');green:state in ('opened');red:state in ('rejected', 'spam', 'bounced', 'soft-bounced');blue:state in ('unsub')">
+              decoration-muted="state in (False, 'deferred')"
+              decoration-success="state == 'opened'"
+              decoration-danger="state in ('rejected', 'spam', 'bounced', 'soft-bounced', 'error')"
+              decoration-info="state == 'unsub'">
             <field name="time"/>
             <field name="date" invisible="1"/>
             <field name="name"/>
@@ -107,7 +113,6 @@
 <record id="action_view_mail_tracking_email" model="ir.actions.act_window">
     <field name="name">MailTracking emails</field>
     <field name="res_model">mail.tracking.email</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
     <field name="search_view_id" ref="view_mail_tracking_email_search"/>
 </record>

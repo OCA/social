@@ -36,7 +36,6 @@ class MailResendMessage(models.TransientModel):
                 rec["partner_ids"].extend(partner_ids)
         return rec
 
-    @api.multi
     def resend_mail_action(self):
         for wizard in self:
             to_send = wizard.partner_ids.filtered("resend").mapped("partner_id")

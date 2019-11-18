@@ -8,13 +8,13 @@
     </t>
 
     <t t-name="mail_tracking.SidebarFailed">
-        <div t-attf-class="o_mail_discuss_title_main o_mail_discuss_item #{(activeThreadID === 'mailbox_failed') ? 'o_active': ''}"
-             data-thread-id="mailbox_failed">
-            <span class="o_thread_name"><i class="fa fa-exclamation mr8"/>Failed</span>
-            <t t-set="counter" t-value="failedCounter"/>
-            <t t-call="mail_tracking.SidebarFailedCounter"/>
-        </div>
-    </t>
+       <div t-attf-class="o_mail_discuss_title_main o_mail_discuss_item #{(activeThreadID === 'mailbox_failed') ? 'o_active': ''}"
+            data-thread-id="mailbox_failed">
+           <span class="o_thread_name"><i class="fa fa-exclamation mr8"/>Failed</span>
+           <t t-set="counter" t-value="failedCounter"/>
+           <t t-call="mail_tracking.SidebarFailedCounter"/>
+       </div>
+   </t>
 
     <t t-extend="mail.widget.Thread.Empty">
         <t t-jquery="t:last-child" t-operation="after">
