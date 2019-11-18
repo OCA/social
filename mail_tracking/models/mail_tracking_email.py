@@ -8,8 +8,7 @@ import urllib.parse
 import uuid
 from datetime import datetime
 
-from odoo import models, api, fields, tools
-import odoo.addons.decimal_precision as dp
+from odoo import api, fields, models, tools
 
 _logger = logging.getLogger(__name__)
 
@@ -36,8 +35,8 @@ class MailTrackingEmail(models.Model):
         compute="_compute_tracking_display_name",
     )
     timestamp = fields.Float(
-        string='UTC timestamp', readonly=True,
-        digits=dp.get_precision('MailTracking Timestamp'))
+        string="UTC timestamp", readonly=True, digits="MailTracking Timestamp"
+    )
     time = fields.Datetime(string="Time", readonly=True, index=True)
     date = fields.Date(
         string="Date", readonly=True, compute="_compute_date", store=True
@@ -125,7 +124,6 @@ class MailTrackingEmail(models.Model):
         ).write({"mail_tracking_needs_action": True})
         return records
 
-    @api.multi
     def write(self, vals):
         super().write(vals)
         state = vals.get("state")
@@ -255,7 +253,6 @@ class MailTrackingEmail(models.Model):
             % {"url": track_url, "tracking_email_id": self.id}
         )
 
-    @api.multi
     def _partners_email_bounced_set(self, reason, event=None):
         recipients = []
         if event and event.recipient_address:
@@ -267,7 +264,6 @@ class MailTrackingEmail(models.Model):
                 [("email", "=ilike", recipient)]
             ).email_bounced_set(self, reason, event=event)
 
-    @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
         values = {"state": "error"}
         IrMailServer = self.env["ir.mail_server"]
@@ -292,7 +288,6 @@ class MailTrackingEmail(models.Model):
             self.sudo()._partners_email_bounced_set("error")
         self.sudo().write(values)
 
-    @api.multi
     def tracking_img_add(self, email):
         self.ensure_one()
         tracking_url = self._get_mail_tracking_img()
@@ -311,20 +306,18 @@ class MailTrackingEmail(models.Model):
         if not self.mail_message_id.exists():  # pragma: no cover
             return True
         mail_message = self.mail_message_id
-        partners = (
-            mail_message.needaction_partner_ids | mail_message.partner_ids)
-        if (self.partner_id and self.partner_id not in partners):
+        partners = mail_message.notified_partner_ids | mail_message.partner_ids
+        if self.partner_id and self.partner_id not in partners:
             # If mail_message haven't tracking partner, then
             # add it in order to see his tracking status in chatter
             if mail_message.subtype_id:
-                mail_message.sudo().write({
-                    'needaction_partner_ids': [(4, self.partner_id.id)],
-                })
+                mail_message.sudo().write(
+                    {"notified_partner_ids": [(4, self.partner_id.id)]}
+                )
             else:
                 mail_message.sudo().write({"partner_ids": [(4, self.partner_id.id)]})
         return True
 
-    @api.multi
     def _tracking_sent_prepare(self, mail_server, smtp_server, message, message_id):
         self.ensure_one()
         ts = time.time()
@@ -368,7 +361,6 @@ class MailTrackingEmail(models.Model):
             concurrent_event_ids = m_event.search(domain)
         return concurrent_event_ids
 
-    @api.multi
     def event_create(self, event_type, metadata):
         event_ids = self.env["mail.tracking.event"]
         for tracking_email in self:
