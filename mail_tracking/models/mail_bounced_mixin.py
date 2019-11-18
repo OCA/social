@@ -12,11 +12,10 @@ class MailBouncedMixin(models.AbstractModel):
 
     _name = "mail.bounced.mixin"
     _description = "Mail bounced mixin"
-    _primary_email = ["email"]
+    _primary_email = "email"
 
     email_bounced = fields.Boolean(index=True)
 
-    @api.multi
     def email_bounced_set(self, tracking_emails, reason, event=None):
         """Inherit this method to make any other actions to the model that
         inherit the mixin"""
@@ -28,7 +27,7 @@ class MailBouncedMixin(models.AbstractModel):
         return partners.write({"email_bounced": True})
 
     def write(self, vals):
-        [email_field] = self._primary_email
+        email_field = self._primary_email
         if email_field not in vals:
             return super().write(vals)
         email = vals[email_field].lower() if vals[email_field] else False

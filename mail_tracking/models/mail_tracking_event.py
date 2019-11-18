@@ -5,8 +5,7 @@ import re
 import time
 from datetime import datetime
 
-from odoo import models, api, fields
-import odoo.addons.decimal_precision as dp
+from odoo import api, fields, models
 
 
 class MailTrackingEvent(models.Model):
@@ -24,8 +23,8 @@ class MailTrackingEvent(models.Model):
         index=True,
     )
     timestamp = fields.Float(
-        string='UTC timestamp', readonly=True,
-        digits=dp.get_precision('MailTracking Timestamp'))
+        string="UTC timestamp", readonly=True, digits="MailTracking Timestamp"
+    )
     time = fields.Datetime(string="Time", readonly=True)
     date = fields.Date(
         string="Date", readonly=True, compute="_compute_date", store=True
@@ -81,7 +80,6 @@ class MailTrackingEvent(models.Model):
             else:
                 email.recipient_address = False
 
-    @api.multi
     @api.depends("time")
     def _compute_date(self):
         for email in self:
