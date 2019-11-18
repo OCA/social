@@ -1,17 +1,20 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import werkzeug
-import odoo
+import base64
+import logging
 from contextlib import contextmanager
-from odoo import api, http, SUPERUSER_ID
+
+import werkzeug
+
+import odoo
+from odoo import SUPERUSER_ID, api, http
 
 from odoo.addons.mail.controllers.main import MailController
-import logging
-import base64
+
 _logger = logging.getLogger(__name__)
 
-BLANK = 'R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=='
+BLANK = "R0lGODlhAQABAIAAANvf7wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
 
 
 @contextmanager
@@ -28,60 +31,74 @@ def db_env(dbname):
 
 
 class MailTrackingController(MailController):
-
     def _request_metadata(self):
         """Prepare remote info metadata"""
         request = http.request.httprequest
         return {
-            'ip': request.remote_addr or False,
-            'user_agent': request.user_agent or False,
-            'os_family': request.user_agent.platform or False,
-            'ua_family': request.user_agent.browser or False,
+            "ip": request.remote_addr or False,
+            "user_agent": request.user_agent or False,
+            "os_family": request.user_agent.platform or False,
+            "ua_family": request.user_agent.browser or False,
         }
 
-    @http.route(['/mail/tracking/all/<string:db>',
-                 '/mail/tracking/event/<string:db>/<string:event_type>'],
-                type='http', auth='none', csrf=False)
+    @http.route(
+        [
+            "/mail/tracking/all/<string:db>",
+            "/mail/tracking/event/<string:db>/<string:event_type>",
+        ],
+        type="http",
+        auth="none",
+        csrf=False,
+    )
     def mail_tracking_event(self, db, event_type=None, **kw):
         """Route used by external mail service"""
         metadata = self._request_metadata()
         res = None
         with db_env(db) as env:
             try:
-                res = env['mail.tracking.email'].event_process(
-                    http.request, kw, metadata, event_type=event_type)
+                res = env["mail.tracking.email"].event_process(
+                    http.request, kw, metadata, event_type=event_type
+                )
             except Exception:
                 pass
-        if not res or res == 'NOT FOUND':
+        if not res or res == "NOT FOUND":
             return werkzeug.exceptions.NotAcceptable()
         return res
 
-    @http.route(['/mail/tracking/open/<string:db>'
-                 '/<int:tracking_email_id>/blank.gif',
-                 '/mail/tracking/open/<string:db>'
-                 '/<int:tracking_email_id>/<string:token>/blank.gif'],
-                type='http', auth='none', methods=['GET'])
+    @http.route(
+        [
+            "/mail/tracking/open/<string:db>" "/<int:tracking_email_id>/blank.gif",
+            "/mail/tracking/open/<string:db>"
+            "/<int:tracking_email_id>/<string:token>/blank.gif",
+        ],
+        type="http",
+        auth="none",
+        methods=["GET"],
+    )
     def mail_tracking_open(self, db, tracking_email_id, token=False, **kw):
         """Route used to track mail openned (With & Without Token)"""
         metadata = self._request_metadata()
         with db_env(db) as env:
             try:
-                tracking_email = env['mail.tracking.email'].search([
-                    ('id', '=', tracking_email_id),
-                    ('state', 'in', ['sent', 'delivered']),
-                    ('token', '=', token),
-                ])
+                tracking_email = env["mail.tracking.email"].search(
+                    [
+                        ("id", "=", tracking_email_id),
+                        ("state", "in", ["sent", "delivered"]),
+                        ("token", "=", token),
+                    ]
+                )
                 if tracking_email:
-                    tracking_email.event_create('open', metadata)
+                    tracking_email.event_create("open", metadata)
                 else:
                     _logger.warning(
-                        "MailTracking email '%s' not found", tracking_email_id)
+                        "MailTracking email '%s' not found", tracking_email_id
+                    )
             except Exception:
                 pass
 
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()
-        response.mimetype = 'image/gif'
+        response.mimetype = "image/gif"
         response.data = base64.b64decode(BLANK)
         return response
 
@@ -89,8 +106,7 @@ class MailTrackingController(MailController):
     def mail_init_messaging(self):
         """Route used to initial values of Discuss app"""
         values = super().mail_init_messaging()
-        values.update({
-            'failed_counter':
-                http.request.env['mail.message'].get_failed_count(),
-        })
+        values.update(
+            {"failed_counter": http.request.env["mail.message"].get_failed_count()}
+        )
         return values
