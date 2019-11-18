@@ -29,7 +29,6 @@ class MailThread(models.AbstractModel):
             ("mail_tracking_ids.state", "in", list(failed_states)),
         ]
 
-    @api.multi
     @api.returns("self", lambda value: value.id)
     def message_post(self, *args, **kwargs):
         """Adds CC recipient to the message.
@@ -43,13 +42,12 @@ class MailThread(models.AbstractModel):
             new_message.sudo().write({"email_cc": email_cc})
         return new_message
 
-    @api.multi
-    def message_get_suggested_recipients(self):
+    def _message_get_suggested_recipients(self):
         """Adds email Cc recipients as suggested recipients.
 
         If the recipient has a res.partner, use it.
         """
-        res = super().message_get_suggested_recipients()
+        res = super()._message_get_suggested_recipients()
         ResPartnerObj = self.env["res.partner"]
         email_cc_formated_list = []
         for record in self:
@@ -65,7 +63,7 @@ class MailThread(models.AbstractModel):
             if not partner_id:
                 record._message_add_suggested_recipient(res, email=cc, reason=_("Cc"))
             else:
-                partner = ResPartnerObj.browse(partner_id, self._prefetch)
+                partner = ResPartnerObj.browse(partner_id)
                 record._message_add_suggested_recipient(
                     res, partner=partner, reason=_("Cc")
                 )
