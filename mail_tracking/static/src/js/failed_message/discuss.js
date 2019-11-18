@@ -169,9 +169,9 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
 
         /**
          * Render 'failed' mailbox menu entry in Discuss
+         * - Initial render
          *
-         * @private
-         * @returns {jQueryElementt}
+         * @override
          */
         _renderSidebar: function () {
             var $sidebar = this._super.apply(this, arguments);
@@ -182,6 +182,19 @@ odoo.define('mail_tracking.FailedMessageDiscuss', function (require) {
             $failed_item.insertAfter(
                 $sidebar.find(".o_mail_discuss_title_main").filter(":last"));
             return $sidebar;
+        },
+
+        /**
+         * Render 'failed' mailbox menu entry in Discuss
+         * - Update status render (not called if the mailbox is empty)
+         *
+         * @override
+         */
+        _renderSidebarMailboxes: function () {
+            this._super.apply(this, arguments);
+            this.$('.o_mail_discuss_sidebar_mailboxes').append(
+                QWeb.render('mail_tracking.SidebarFailed',
+                    this._sidebarQWebParams()));
         },
 
         /**
