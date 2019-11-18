@@ -56,7 +56,9 @@
     <field name="model">mail.tracking.event</field>
     <field name="arch" type="xml">
         <tree string="MailTracking events" create="false" edit="false" delete="false"
-              colors="grey:event_type in ('deferral',);black:event_type in ('sent', 'delivered');red:event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject');blue:event_type in ('unsub', 'click', 'open')">
+              decoration-muted="event_type == 'deferred'"
+              decoration-danger="event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject')"
+              decoration-info="event_type in ('unsub', 'click', 'open')">
             <field name="time"/>
             <field name="tracking_email_id"/>
             <field name="recipient"/>
@@ -111,7 +113,6 @@
 <record id="action_view_mail_tracking_event" model="ir.actions.act_window">
     <field name="name">MailTracking events</field>
     <field name="res_model">mail.tracking.event</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
     <field name="search_view_id" ref="view_mail_tracking_event_search"/>
 </record>
