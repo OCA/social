@@ -115,6 +115,22 @@ class TestMailActivityTeam(TransactionCase):
             )
         )
 
+        self.employee3 = self.env["res.users"].create(
+            {
+                "company_id": self.env.ref("base.main_company").id,
+                "name": "Employee 3",
+                "login": "csu3",
+                "email": "crmuser3@yourcompany.com",
+                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+            }
+        )
+
+    def test_team_and_user_onchange(self):
+        with self.assertRaises(ValidationError):
+            self.team1.member_ids = [(3, self.employee.id)]
+            self.act2.team_id = self.team1
+            self.act2.user_id = self.employee
+
     def test_missing_activities(self):
         self.assertFalse(self.act1.team_id, "Error: Activity 1 should not have a team.")
         self.assertEqual(self.team1.count_missing_activities, 1)
@@ -132,6 +148,11 @@ class TestMailActivityTeam(TransactionCase):
         self.team2._onchange_member_ids()
         self.assertFalse(self.team2.user_id)
 
+    def test_leader_onchange(self):
+        self.team2.user_id = self.employee3
+        self.team2._onchange_user_id()
+        self.assertTrue(self.employee3 in self.team2.member_ids)
+
     def test_activity_onchanges(self):
         self.assertEqual(
             self.act2.team_id, self.team1, "Error: Activity 2 should have Team 1."
@@ -147,3 +168,14 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(self.act2.team_id, self.team2)
         with self.assertRaises(ValidationError):
             self.act2.write({"user_id": self.employee2.id, "team_id": self.team1.id})
+        self.team1.user_id = False
+        self.act2.user_id = False
+        self.act2._onchange_user_id()
+        self.team2.member_ids = [(4, self.employee3.id)]
+        self.act2.team_id = self.team1
+        self.act2.team_id = False
+        self.act2.user_id = self.employee3
+        self.act2._onchange_user_id()
+        self.act2.team_id = self.team2
+        self.team2.member_ids = [(3, self.act2.user_id.id)]
+        self.act2._onchange_team_id()
