@@ -22,9 +22,9 @@ class PartnerMailListWizard(models.TransientModel):
         contact_obj = self.env['mail.mass_mailing.contact']
         partners = self.partner_ids
 
-        add_list = partners.filtered(lambda r: r.mass_mailing_contact_ids)
-        if add_list:
-            add_list.mass_mailing_contact_ids[0].list_ids |= self.mail_list_id
+        add_list = partners.filtered('mass_mailing_contact_ids')
+        for partner in add_list:
+            partner.mass_mailing_contact_ids[0].list_ids |= self.mail_list_id
 
         to_create = partners - add_list
         for partner in to_create:
