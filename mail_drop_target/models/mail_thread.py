@@ -15,7 +15,14 @@ class MailThread(models.AbstractModel):
     def message_drop(self, model, message, custom_values=None,
                      save_original=False, strip_attachments=False,
                      thread_id=None):
-        result = self.message_process(
+        disable_notify_mail_drop_target = \
+            self.env["ir.config_parameter"].get_param(
+                "mail_drop_target.disable_notify", default=False)
+        self_message_process = self
+        if disable_notify_mail_drop_target:
+            self_message_process = self_message_process.with_context(
+                message_create_from_mail_mail=True)
+        result = self_message_process.message_process(
             model, message, custom_values=custom_values,
             save_original=save_original, strip_attachments=strip_attachments,
             thread_id=thread_id
