@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import common
 
@@ -8,7 +7,7 @@ from odoo.tests import common
 class TestMailOptionalFollowernotifications(common.TransactionCase):
 
     def setUp(self):
-        super(TestMailOptionalFollowernotifications, self).setUp()
+        super().setUp()
         self.partner_obj = self.env['res.partner']
         self.partner_01 = self.env.ref('base.res_partner_2')
         self.demo_user = self.env.ref('base.user_demo')
@@ -22,7 +21,8 @@ class TestMailOptionalFollowernotifications(common.TransactionCase):
             'default_composition_mode': 'comment',
         })
         mail_compose = self.env['mail.compose.message']
-        self.partner_01.message_subscribe_users(user_ids=[self.demo_user.id])
+        self.partner_01.message_subscribe(
+            partner_ids=[self.demo_user.partner_id.id])
         values = mail_compose.with_context(ctx)\
             .onchange_template_id(False, 'comment', 'res.partner',
                                   self.partner_01.id)['value']
