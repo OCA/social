@@ -21,19 +21,20 @@ class MailTemplate(models.Model):
         """Use `premailer` to convert styles to inline styles."""
         result = super().generate_email(res_ids, fields=fields)
         if isinstance(res_ids, int):
-            premailer = Premailer(
-                html=result['body_html'],
-                **self._get_premailer_options(),
-            )
-            result['body_html'] = premailer.transform()
+            result['body_html'] = \
+                self._premailer_apply_transform(result["body_html"])
         else:
             for __, data in result.items():
-                premailer = Premailer(
-                    html=data['body_html'],
-                    **self._get_premailer_options(),
-                )
-                data['body_html'] = premailer.transform()
+                data['body_html'] = \
+                    self._premailer_apply_transform(data["body_html"])
         return result
+
+    def _premailer_apply_transform(self, data_html):
+        premailer = Premailer(
+            html=data_html,
+            **self._get_premailer_options(),
+        )
+        return premailer.transform()
 
     def _get_premailer_options(self):
         return {}
