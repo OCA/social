@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <template id="email_templates_list">
+    <t t-call="web.layout">
+      <h1>
+        Email templates for: <span t-esc="model" />
+      </h1>
+      <t t-if="not templates">
+        <p>No template found.</p>
+      </t>
+      <t t-if="templates">
+        <div class="instructions">
+          <p>Here you find all the template for the given model.</p>
+          <ol>
+            <li>Find your template</li>
+            <li>Copy the link</li>
+            <li>
+              Paste into the address bar and change the record ID (the last value in the URL).
+              <br />If you don't know the ID of the record, just browse to the record via odoo interface and check its ID in the address bar `#id=XXX`.
+            </li>
+            <li>Load it</li>
+          </ol>
+        </div>
+        <ol class="email-template-list">
+          <t t-foreach="templates" t-as="tmpl">
+            <t t-set="xid" t-value="xids.get(tmpl.id)" />
+            <li class="email-template-item" style="padding:0.5em">
+              <strong>Name:</strong> <span class="name" t-field="tmpl.name" /><br />
+              <t t-if="xid">
+                <strong>XMLID:</strong> <span class="xid" t-esc="xid" /><br />
+              </t>
+              <strong>Link:</strong>
+              <a class="preview" t-attf-href="/email-preview/#{model}/#{xid or tmpl.id}/1">
+                Preview
+              </a><br />
+              <a class="preview" t-attf-href="/web#id=#{tmpl.id}&amp;view_type=form&amp;model=mail.template">
+                View in backend
+              </a>
+            </li>
+          </t>
+        </ol>
+      </t>
+    </t>
+  </template>
+
+</odoo>
