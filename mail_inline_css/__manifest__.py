@@ -5,7 +5,7 @@
 {
     'name': 'Mail Inline CSS',
     "summary": "Convert style tags in inline style in your mails",
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'author': 'Akretion, camptocamp, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
     'license': 'AGPL-3',
@@ -16,8 +16,6 @@
     },
     "depends": [
         "email_template_qweb",
-    ],
-    "data": [
     ],
     "demo": [
         "demo/demo_template.xml",
