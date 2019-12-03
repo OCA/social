@@ -202,3 +202,11 @@ class TestMailActivityBoardMethods(TransactionCase):
 
         for act in acts:
             self.assertIn(act, self.partner_client.activity_ids.ids)
+
+    def test_related_model_instance(self):
+        """This test case checks the direct access from the activity to the
+        linked model instance
+        """
+        self.assertEqual(self.act3.related_model_instance, self.partner_client)
+        self.act3.write({"res_id": False, "res_model": False})
+        self.assertFalse(self.act3.related_model_instance)
