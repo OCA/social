@@ -17,6 +17,24 @@ class MailActivity(models.Model):
     calendar_event_id_partner_ids = fields.Many2many(
         related="calendar_event_id.partner_ids", readonly=True
     )
+    related_model_instance = fields.Reference(
+        selection="_selection_related_model_instance",
+        compute="_compute_related_model_instance",
+        string="Document",
+    )
+
+    @api.depends("res_id", "res_model")
+    def _compute_related_model_instance(self):
+        for record in self:
+            ref = False
+            if record.res_id:
+                ref = "{},{}".format(record.res_model, record.res_id)
+            record.related_model_instance = ref
+
+    @api.model
+    def _selection_related_model_instance(self):
+        models = self.env["ir.model"].search([("is_mail_activity", "=", True)])
+        return [(model.model, model.name) for model in models]
 
     def open_origin(self):
         self.ensure_one()

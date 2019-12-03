@@ -4,6 +4,45 @@
     VIEWS
 -->
 
+    <!-- FORM POP
+
+        Add a link to the related model instance to ease navigation
+    -->
+    <record id="mail_activity_view_form_popup" model="ir.ui.view">
+        <field
+            name="name"
+        >mail.activity.view.form.popup (in mail_activity_board)</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="arch" type="xml">
+            <field name="activity_type_id" position="before">
+                <field
+                    name="related_model_instance"
+                    attrs="{'invisible': [('related_model_instance','=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- CALENDAR VIEW
+        Add a link to the related model instance to ease navigation
+    -->
+    <record id="mail_activity_view_calendar" model="ir.ui.view">
+        <field
+            name="name"
+        >mail.activity.view.form.calendar (in mail_activity_board)</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_calendar" />
+        <field name="arch" type="xml">
+            <field name="res_name" position="before">
+                <field name="related_model_instance" />
+            </field>
+            <field name="res_name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+        </field>
+    </record>
+
     <!-- FORM VIEW -->
     <record id="mail_activity_view_form_board" model="ir.ui.view">
         <field name="name">mail.activity.boards.view.form</field>
@@ -88,7 +127,12 @@
                     name="decoration-success"
                 >(date_deadline &gt; current_date)</attribute>
             </xpath>
-
+            <field name="res_name" position="before">
+                <field name="related_model_instance" />
+            </field>
+            <field name="res_name" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
         </field>
     </record>
 
