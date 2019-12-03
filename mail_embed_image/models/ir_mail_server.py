@@ -89,7 +89,7 @@ class IrMailServer(models.Model):
         are URLs, replace them with cids.
         """
         for part in email.walk():
-            if part.get_content_maintype() == 'text':
+            if part.get_content_type() == 'text/html':
                 body = part.get_payload(decode=True)
                 if not body or body == '\n':
                     continue

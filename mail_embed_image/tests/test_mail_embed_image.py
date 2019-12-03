@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from base64 import b64encode
 from odoo.tests import common
-from mock import patch, mock
+from mock import patch
 from lxml import html
 from requests import get
 from odoo import api, registry, SUPERUSER_ID
@@ -27,17 +27,10 @@ class TestMailEmbedImage(common.TransactionCase):
         We assert that nothing has changed on 1) and only the `/web/image/.*`
         has changed in 2)
         """
-        # we do not want to completely mock out the `build_email` and
-        # `send_email`, rather we want to be able to get information about
-        # them such as call arguments, no of times called etc.
-        # the `wraps` attribute of `Mock` helps us do that
         reg = registry(common.get_db_name())
         env = api.Environment(reg.cursor(), SUPERUSER_ID, {})
+        # DATA
         model_ir_mail_server = env['ir.mail_server']
-        mock_build_email = mock.Mock(wraps=model_ir_mail_server.build_email)
-        model_ir_mail_server._patch_method('build_email', mock_build_email)
-        mock_send_email = mock.Mock(wraps=model_ir_mail_server.send_email)
-        model_ir_mail_server._patch_method('send_email', mock_send_email)
         model_mail_mail = self.env['mail.mail']
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
@@ -49,19 +42,9 @@ class TestMailEmbedImage(common.TransactionCase):
             'body_html': body1,
             'email_from': 'test@example.com',
             'email_to': 'test@example.com',
+            'mail_server_id': self.env['ir.mail_server'].search(
+                [], limit=1).id,
         })
-        email1.send()
-        model_ir_mail_server.build_email.assert_called()
-        self.assertIn(
-            body1,
-            model_ir_mail_server.build_email.call_args[1].get('body') or
-            # if body is passed as positional argument
-            model_ir_mail_server.build_email.call_args[0][3])
-        self.assertIn(
-            body1,
-            model_ir_mail_server.send_email.call_args[0][0].get_payload(
-                )[0].get_payload()[1].get_payload(decode=True),
-        )
         body2 = html.tostring(html.fromstring("""
             <div>
             this is an email
@@ -77,13 +60,33 @@ class TestMailEmbedImage(common.TransactionCase):
             'body_html': body2,
             'email_from': 'test@example.com',
             'email_to': 'test@example.com',
+            'mail_server_id': self.env['ir.mail_server'].search(
+                [], limit=1).id,
         })
-        email2.send()
-        model_ir_mail_server.build_email.assert_called()
-        self.assertIn(
-            'img src="cid:',
-            model_ir_mail_server.send_email.call_args[0][0].get_payload(
-                )[0].get_payload()[1].get_payload(decode=True),
-        )
-        model_ir_mail_server._revert_method('send_email')
-        model_ir_mail_server._revert_method('build_email')
+        # END DATA
+        with patch.object(
+                env['ir.mail_server'].__class__, 'build_email'
+                    ) as mock_build_email:
+            email1.send()
+            mock_build_email.assert_called()
+            self.assertIn(
+                body1,
+                mock_build_email.call_args[1].get(
+                    'body') or model_ir_mail_server.mock_build_email.call_args[
+                        0][3])
+        with patch.object(
+                env['ir.mail_server'].__class__, 'send_email'
+                    ) as mock_send_email:
+            email1.send()
+            self.assertIn(
+                body1,
+                model_ir_mail_server.send_email.call_args[0][0].get_payload(
+                    )[0].get_payload()[1].get_payload(decode=True),
+            )
+            email2.send()
+            mock_send_email.assert_called()
+            self.assertIn(
+                'img src="cid:',
+                mock_send_email.call_args[0][0].get_payload(
+                    )[0].get_payload()[1].get_payload(decode=True),
+            )
