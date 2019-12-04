@@ -66,7 +66,7 @@ class TestMailEmbedImage(common.TransactionCase):
         # END DATA
         with patch.object(
                 env['ir.mail_server'].__class__, 'build_email'
-                    ) as mock_build_email:
+                ) as mock_build_email:
             email1.send()
             mock_build_email.assert_called()
             self.assertIn(
@@ -76,7 +76,7 @@ class TestMailEmbedImage(common.TransactionCase):
                         0][3])
         with patch.object(
                 env['ir.mail_server'].__class__, 'send_email'
-                    ) as mock_send_email:
+                ) as mock_send_email:
             email1.send()
             self.assertIn(
                 body1,
