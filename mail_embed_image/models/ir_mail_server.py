@@ -90,9 +90,14 @@ class IrMailServer(models.Model):
         """
         for part in email.walk():
             if part.get_content_maintype() == 'text':
+                logger.info(
+                    'getting payload of type %s',
+                    part.get_content_maintype(),
+                )
                 body = part.get_payload(decode=True)
                 if not body or body == '\n':
                     continue
+                logger.info('parsing payload of %s', body)
                 root = self.process_img_body(fromstring(body), email)
                 # encodestring will put a newline every 74 char
                 part.set_payload(encodestring(tostring(root)))
