@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_full_expand',
         'odoo12-addon-mail_inline_css',
+        'odoo12-addon-mail_optional_follower_notification',
         'odoo12-addon-mail_outbound_static',
         'odoo12-addon-mail_track_diff_only',
         'odoo12-addon-mail_tracking',
