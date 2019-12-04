@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -24,17 +24,17 @@ msgid "Email Templates"
 msgstr ""
 
 #. module: mail_inline_css
-#: model:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "Hello"
 msgstr ""
 
 #. module: mail_inline_css
-#: model:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "This e-mail styles are inline rendered although its template defines styles as embedded CSS!"
 msgstr ""
 
 #. module: mail_inline_css
-#: model:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "www.example.com"
 msgstr ""
 
