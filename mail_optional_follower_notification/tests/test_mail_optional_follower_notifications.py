@@ -1,59 +1,88 @@
-# Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
+# Copyright 2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo.tests import common
 
 
-class TestMailOptionalFollowernotifications(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.partner_obj = self.env["res.partner"]
-        self.partner_01 = self.env.ref("base.res_partner_2")
-        self.demo_user = self.env.ref("base.user_demo")
-        self.partner_03 = self.demo_user.copy().partner_id
-
-    def test_send_email_optional_follower_notifications(self):
-        ctx = self.env.context.copy()
+class TestMailOptionalFollowernotifications(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.partner_obj = cls.env["res.partner"]
+        cls.partner_01 = cls.env.ref("base.res_partner_2")
+        demo_user = cls.env.ref("base.user_demo")
+        cls.partner_follower = demo_user.partner_id
+        cls.partner_no_follower = demo_user.copy().partner_id
+        cls.partner_01.message_subscribe(partner_ids=[cls.partner_follower.id])
+        ctx = cls.env.context.copy()
         ctx.update(
             {
                 "default_model": "res.partner",
-                "default_res_id": self.partner_01.id,
+                "default_res_id": cls.partner_01.id,
                 "default_composition_mode": "comment",
             }
         )
-        mail_compose = self.env["mail.compose.message"]
-        self.partner_01.message_subscribe(partner_ids=[self.demo_user.partner_id.id])
-        values = mail_compose.with_context(ctx).onchange_template_id(
-            False, "comment", "res.partner", self.partner_01.id
-        )["value"]
-        values["partner_ids"] = [
-            (4, self.demo_user.partner_id.id),
-            (4, self.partner_03.id),
+        cls.mail_compose_context = ctx
+        cls.MailCompose = cls.env["mail.compose.message"]
+
+    def _send_mail(self, recipients, notify_followers):
+        old_messages = self.env["mail.message"].search([])
+        values = self.MailCompose.with_context(
+            self.mail_compose_context
+        ).onchange_template_id(False, "comment", "res.partner", self.partner_01.id)[
+            "value"
         ]
-        compose_id = mail_compose.with_context(ctx).create(values)
-        compose_id.with_context(ctx).send_mail()
-        res = self.env["mail.message"].search(
-            [("model", "=", "res.partner"), ("res_id", "=", self.partner_01.id)]
+        values["partner_ids"] = [(6, 0, recipients.ids)]
+        values["notify_followers"] = notify_followers
+        composer = self.MailCompose.with_context(self.mail_compose_context).create(
+            values
         )
-        self.assertEqual(len(res.ids), 1)
-        message = self.env["mail.message"]
-        for record in res:
-            if record.notification_ids.mapped("res_partner_id").ids == [
-                self.partner_03.id
-            ] and record.partner_ids.ids == [self.partner_03.id]:
-                message += record
-        self.assertEqual(len(message.ids), 0)
-        values["partner_ids"] = [(6, 0, [self.partner_03.id])]
-        compose_id = mail_compose.with_context(ctx).create(values)
-        compose_id.notify_followers = False
-        compose_id.with_context(ctx).send_mail()
-        res = self.env["mail.message"].search(
-            [("model", "=", "res.partner"), ("res_id", "=", self.partner_01.id)]
+        composer.send_mail()
+        return self.env["mail.message"].search([]) - old_messages
+
+    def test_1(self):
+        """
+        Data:
+            One partner follower of partner_01
+        Test case:
+            Send message to the follower and a non follower partner
+        Expected result:
+            Both are notified
+        """
+        message = self._send_mail(
+            self.partner_follower + self.partner_no_follower, notify_followers=True
         )
-        message = self.env["mail.message"]
-        for record in res:
-            if record.notification_ids.mapped("res_partner_id").ids == [
-                self.partner_03.id
-            ] and record.partner_ids.ids == [self.partner_03.id]:
-                message += record
-        self.assertEqual(len(message.ids), 1)
+        self.assertEqual(
+            message.notification_ids.mapped("res_partner_id"),
+            self.partner_no_follower + self.partner_follower,
+        )
+
+    def test_2(self):
+        """
+        Data:
+            One partner follower of partner_01
+        Test case:
+            Send message to the non follower partner
+        Expected result:
+            Both are notified
+        """
+        message = self._send_mail(self.partner_no_follower, notify_followers=True)
+        self.assertEqual(
+            message.notification_ids.mapped("res_partner_id"),
+            self.partner_no_follower + self.partner_follower,
+        )
+
+    def test_3(self):
+        """
+        Data:
+            One partner follower of partner_01
+        Test case:
+            Send message to the non follower partner and disable the
+            notification to followers
+        Expected result:
+            Only the non follower partner is notified
+        """
+        message = self._send_mail(self.partner_no_follower, notify_followers=False)
+        self.assertEqual(
+            message.notification_ids.mapped("res_partner_id"), self.partner_no_follower
+        )
