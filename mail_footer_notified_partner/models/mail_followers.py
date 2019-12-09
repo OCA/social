@@ -9,7 +9,7 @@ class MailNotification(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
-    def _notify_by_email(
+    def _notify(
         self, message, force_send=False, send_after_commit=True,
         user_signature=True
     ):
