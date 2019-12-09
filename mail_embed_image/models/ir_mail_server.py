@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 # Copyright 2019 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-import uuid
 import logging
 from contextlib import contextmanager
 from odoo import models, http
@@ -102,34 +101,29 @@ class IrMailServer(models.Model):
     def _build_email_process_img_body(self, root, email):
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
+        cid = 1
         for img in root.xpath(
                 ".//img[starts-with(@src, '%s/web/image')]"
                 "| .//img[starts-with(@src, '/web/image')]" % (base_url)):
             image_path = img.get('src').replace(base_url, '')
-            attached_fileparts = []
             with self._fetch_image(image_path) as (endpoint, arguments):
                 # now go ahead and call the endpoint and fetch the data
                 response = endpoint.method(**arguments)
                 if not response:
                     logger.warning('Could not get %s', img.get('src'))
                     continue
-                cid = uuid.uuid4().hex
                 filename_rfc2047 = encode_header_param(cid)
                 filepart = MIMEImage(response.data)
-                # check if filepart exists (do not attach twice)
-                filepart_exists = [
-                    x for x in attached_fileparts if x == filepart]
-                if filepart_exists:
-                    filepart = filepart_exists[0]
-                else:
-                    filepart.set_param('name', filename_rfc2047)
-                    filepart.add_header(
-                        'Content-Disposition',
-                        'inline',
-                        cid=cid,
-                        filename=filename_rfc2047,
-                    )
-                    # attach the image into the email as attachment
-                    email.attach(filepart)
-                img.set('src', 'cid:%s' % (cid))
+                # TODO check if filepart exists (do not attach twice)
+                filepart.set_param('name', filename_rfc2047)
+                filepart.add_header(
+                    'Content-Disposition',
+                    'inline',
+                    cid=cid,
+                    filename=filename_rfc2047,
+                )
+                # attach the image into the email as attachment
+                email.attach(filepart)
+                img.set('src', 'cid:%s' % (str(cid)))
+                cid += 1
         return root
