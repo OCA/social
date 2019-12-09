@@ -23,7 +23,7 @@ class IrMailServer(models.Model):
     _inherit = 'ir.mail_server'
 
     @contextmanager
-    def fetch_image(self, path):
+    def _fetch_image(self, path):
         public_user = self.env.ref('base.public_user')
         session_store = root_wsgi.session_store
         session = session_store.new()
@@ -98,7 +98,7 @@ class IrMailServer(models.Model):
                 part.set_payload(encodestring(tostring(root)))
         return email
 
-    def process_img_body(self, root, email):
+    def _build_email_process_img_body(self, root, email):
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
         for img in root.xpath(
@@ -106,9 +106,9 @@ class IrMailServer(models.Model):
                 "|"
                 "//img[starts-with(@src, '/web/image')]" % (
                     base_url or '', )):
-            # check if there is a bound request
             image_path = img.get('src').replace(base_url, '')
-            with self.fetch_image(image_path) as (endpoint, arguments):
+            attached_fileparts = []
+            with self.__fetch_image(image_path) as (endpoint, arguments):
                 # now go ahead and call the endpoint and fetch the data
                 response = endpoint.method(**arguments)
                 if not response:
@@ -117,14 +117,20 @@ class IrMailServer(models.Model):
                 cid = uuid.uuid4().hex
                 filename_rfc2047 = encode_header_param(cid)
                 filepart = MIMEImage(response.data)
-                filepart.set_param('name', filename_rfc2047)
-                filepart.add_header(
-                    'Content-Disposition',
-                    'inline',
-                    cid=cid,
-                    filename=filename_rfc2047,
-                )
-                # attach the image into the email as attachment
-                email.attach(filepart)
+                # check if filepart exists (do not attach twice)
+                filepart_exists = [
+                    x for x in attached_fileparts if x == filepart]
+                if filepart_exists:
+                    filepart = filepart_exists[0]
+                else:
+                    filepart.set_param('name', filename_rfc2047)
+                    filepart.add_header(
+                        'Content-Disposition',
+                        'inline',
+                        cid=cid,
+                        filename=filename_rfc2047,
+                    )
+                    # attach the image into the email as attachment
+                    email.attach(filepart)
                 img.set('src', 'cid:%s' % (cid))
         return root
