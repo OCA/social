@@ -93,7 +93,8 @@ class IrMailServer(models.Model):
                 body = part.get_payload(decode=True)
                 if not body or body == '\n':
                     continue
-                root = self.process_img_body(fromstring(body), email)
+                root = self._build_email_process_img_body(
+                    fromstring(body), email)
                 # encodestring will put a newline every 74 char
                 part.set_payload(encodestring(tostring(root)))
         return email
@@ -102,13 +103,11 @@ class IrMailServer(models.Model):
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
         for img in root.xpath(
-                "//img[starts-with(@src, '%s/web/image')]"
-                "|"
-                "//img[starts-with(@src, '/web/image')]" % (
-                    base_url or '', )):
+                ".//img[starts-with(@src, '%s/web/image')]"
+                "| .//img[starts-with(@src, '/web/image')]" % (base_url)):
             image_path = img.get('src').replace(base_url, '')
             attached_fileparts = []
-            with self.__fetch_image(image_path) as (endpoint, arguments):
+            with self._fetch_image(image_path) as (endpoint, arguments):
                 # now go ahead and call the endpoint and fetch the data
                 response = endpoint.method(**arguments)
                 if not response:
