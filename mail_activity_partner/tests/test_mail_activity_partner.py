@@ -1,17 +1,21 @@
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestMailActivityPartner(TransactionCase):
-    def setUp(self):
-        super(TestMailActivityPartner, self).setUp()
+class TestMailActivityPartner(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        # disable tracking test suite wise
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.user_model = cls.env["res.users"].with_context(no_reset_password=True)
 
-        self.user_admin = self.env.ref("base.user_root")
+        cls.user_admin = cls.env.ref("base.user_root")
 
-        self.employee = self.env["res.users"].create(
+        cls.employee = cls.env["res.users"].create(
             {
-                "company_id": self.env.ref("base.main_company").id,
+                "company_id": cls.env.ref("base.main_company").id,
                 "name": "Employee",
                 "login": "csu",
                 "email": "crmuser@yourcompany.com",
@@ -20,49 +24,48 @@ class TestMailActivityPartner(TransactionCase):
                         6,
                         0,
                         [
-                            self.env.ref("base.group_user").id,
-                            self.env.ref("base.group_partner_manager").id,
+                            cls.env.ref("base.group_user").id,
+                            cls.env.ref("base.group_partner_manager").id,
                         ],
                     )
                 ],
             }
         )
 
-        self.partner_ir_model = self.env["ir.model"]._get("res.partner")
+        cls.partner_ir_model = cls.env["ir.model"]._get("res.partner")
 
-        activity_type_model = self.env["mail.activity.type"]
-        self.activity1 = activity_type_model.create(
+        activity_type_model = cls.env["mail.activity.type"]
+        cls.activity1 = activity_type_model.create(
             {
                 "name": "Initial Contact",
-                "days": 5,
+                "delay_count": 5,
                 "summary": "ACT 1 : Presentation, barbecue, ... ",
-                "res_model_id": self.partner_ir_model.id,
+                "res_model_id": cls.partner_ir_model.id,
             }
         )
-        self.activity2 = activity_type_model.create(
+        cls.activity2 = activity_type_model.create(
             {
                 "name": "Call for Demo",
-                "days": 6,
+                "delay_count": 6,
                 "summary": "ACT 2 : I want to show you my ERP !",
-                "res_model_id": self.partner_ir_model.id,
+                "res_model_id": cls.partner_ir_model.id,
             }
         )
 
-        self.partner_01 = self.env.ref("base.res_partner_1")
+        cls.partner_01 = cls.env.ref("base.res_partner_1")
 
-        self.homer = self.env["res.partner"].create(
+        cls.homer = cls.env["res.partner"].create(
             {
                 "name": "Homer Simpson",
                 "city": "Springfield",
                 "street": "742 Evergreen Terrace",
                 "street2": "Donut Lane",
-                "street3": "Tho",
             }
         )
 
         # test synchro of street3 on create
-        self.partner_10 = self.env["res.partner"].create(
-            {"name": "Bart Simpson", "parent_id": self.homer.id, "type": "contact"}
+        cls.partner_10 = cls.env["res.partner"].create(
+            {"name": "Bart Simpson", "parent_id": cls.homer.id, "type": "contact"}
         )
 
     def test_partner_for_activity(self):
@@ -83,7 +86,7 @@ class TestMailActivityPartner(TransactionCase):
 
         self.act2 = (
             self.env["mail.activity"]
-            .sudo(self.employee)
+            .with_user(self.employee)
             .create(
                 {
                     "activity_type_id": self.activity2.id,
