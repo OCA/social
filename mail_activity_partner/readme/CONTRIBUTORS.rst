@@ -1,1 +1,1 @@
-* Adrià Gil Sorribes (adria.gil@eficent.com)
+* Adrià Gil Sorribes (adria.gil@forgeflow.com)
