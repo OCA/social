@@ -68,6 +68,5 @@
                 <filter name='team' string="Team" context="{'group_by': 'team_id'}"/>
             </group>
         </field>
-
     </record>
 </odoo>
