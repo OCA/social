@@ -30,18 +30,18 @@ msgid "Email Templates"
 msgstr "Email 模板"
 
 #. module: mail_inline_css
-#: model:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "Hello"
 msgstr ""
 
 #. module: mail_inline_css
-#: model:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid ""
 "This e-mail styles are inline rendered although its template defines styles "
 "as embedded CSS!"
 msgstr ""
 
 #. module: mail_inline_css
-#: model:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "www.example.com"
 msgstr ""
