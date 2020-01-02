@@ -73,6 +73,8 @@ Contributors
 
     * Ernesto Tejeda
 
+* Thomas Fossoul (thomas@niboo.com)
+
 Maintainers
 ~~~~~~~~~~~
 
