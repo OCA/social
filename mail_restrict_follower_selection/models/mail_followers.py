@@ -13,7 +13,7 @@ class MailFollowers(models.Model):
                               channel_data, force=True):
         domain = self.env[
             'mail.wizard.invite'
-        ]._mail_restrict_follower_selection_get_domain()
+        ]._mail_restrict_follower_selection_get_domain(res_model=res_model)
         partners = self.env['res.partner'].search(
             [('id', 'in', list(partner_data))] +
             safe_eval(domain)
