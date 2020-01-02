@@ -1,6 +1,6 @@
 # Copyright 2016 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models, tools
+from odoo import fields, models, tools
 
 
 class MailTemplate(models.Model):
@@ -12,12 +12,9 @@ class MailTemplate(models.Model):
         default="jinja2",
         required=True,
     )
-    body_view_id = fields.Many2one(
-        "ir.ui.view", "Body view", domain=[("type", "=", "qweb")]
-    )
+    body_view_id = fields.Many2one("ir.ui.view", domain=[("type", "=", "qweb")])
     body_view_arch = fields.Text(related="body_view_id.arch")
 
-    @api.multi
     def generate_email(self, res_ids, fields=None):
         multi_mode = True
         if isinstance(res_ids, int):
@@ -37,4 +34,4 @@ class MailTemplate(models.Model):
                     result[res_id]["body"] = tools.html_sanitize(
                         result[res_id]["body_html"]
                     )
-        return multi_mode and result or result[res_ids[0]]
+        return result if multi_mode else result[res_ids[0]]
