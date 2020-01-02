@@ -4,3 +4,5 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
     * Ernesto Tejeda
+
+* Thomas Fossoul (thomas@niboo.com)
