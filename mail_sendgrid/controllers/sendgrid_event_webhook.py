@@ -18,5 +18,5 @@ class SendgridTrackingController(MailTrackingController):
             _env_get(db, self._tracking_event, None, None, **kw)
             return {'status': 200}
         except Exception as e:
-            _logger.error(e.message, exc_info=True)
+            _logger.error(e.args[0] or e.message, exc_info=True)
             return {'status': 400}
