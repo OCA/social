@@ -61,7 +61,7 @@ class IrMailServer(models.Model):
             message_id=None,
             references=None,
             object_id=None,
-            subtype='plain',
+            subtype='html',
             headers=None,
             body_alternative=None,
             subtype_alternative='plain'):
