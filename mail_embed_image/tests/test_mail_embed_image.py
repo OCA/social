@@ -38,7 +38,7 @@ class TestMailEmbedImage(common.TransactionCase):
         # END DATA
         res = self.env['ir.mail_server'].build_email(
             email_from, email_to, subject,
-            body, subtype='html')
+            body, subtype='html', subtype_alternative='plain')
         images_in_mail = 0
         for part in res.walk():
             if part.get_content_type() == 'text/html':
