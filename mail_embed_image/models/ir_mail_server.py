@@ -111,8 +111,8 @@ class IrMailServer(models.Model):
                 response = endpoint.method(**arguments)
                 if str(response.status_code)[0] == '4':
                     logger.warning(
-                        'Could not fetch image for CID, code %s'
-                    ) % str(response.status_code)
+                        'Could not fetch image for CID, code %s' % str(
+                            response.status_code))
                 if not response:
                     logger.warning('Could not get %s', img.get('src'))
                     continue
