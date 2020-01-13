@@ -56,15 +56,16 @@ class IrMailServer(models.Model):
             body,
             email_cc=None,
             email_bcc=None,
-            reply_to=None,
+            reply_to=False,
             attachments=None,
             message_id=None,
             references=None,
-            object_id=None,
-            subtype='html',
+            object_id=False,
+            subtype='plain',
             headers=None,
             body_alternative=None,
-            subtype_alternative='plain'):
+            subtype_alternative='plain',
+    ):
         result = super(IrMailServer, self).build_email(
             email_from=email_from,
             email_to=email_to,
