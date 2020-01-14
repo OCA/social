@@ -110,11 +110,7 @@ class IrMailServer(models.Model):
             with self._fetch_image(image_path) as (endpoint, arguments):
                 # now go ahead and call the endpoint and fetch the data
                 response = endpoint.method(**arguments)
-                if str(response.status_code)[0] == '4':
-                    logger.warning(
-                        'Could not fetch image for CID, code %s' % str(
-                            response.status_code))
-                if not response:
+                if not response or response.status_code != 200:
                     logger.warning('Could not get %s', img.get('src'))
                     continue
                 cid = uuid.uuid4().hex
