@@ -8,9 +8,6 @@ from requests import get
 
 
 class TestMailEmbedImage(common.TransactionCase):
-
-    post_install = True
-
     def test_mail_embed_image(self):
         """We pass a mail with <img src="..." /> tags to build_email,
         and then look into the result, check there were attachments
