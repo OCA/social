@@ -5,6 +5,7 @@ from base64 import b64encode
 from odoo.tests import common
 from lxml import html
 from requests import get
+from ..models.ir_mail_server import IrMailServer
 
 
 class TestMailEmbedImage(common.TransactionCase):
@@ -25,17 +26,26 @@ class TestMailEmbedImage(common.TransactionCase):
             <img src="%s"></img>
             <img src="%s"></img>
             </div>""" % (
+            # won't be hit because we ignore embedded images
             b64encode(image),
+            # dito, not uploaded content
             image_url,
-            '/web/image/res.partner/1/image',
+            # this we may read with the share we create below
+            '/web/image/res.partner/%d/image' % (
+                self.env.ref('base.public_partner').id
+            ),
             )))
         email_from = 'test@example.com'
         email_to = 'test@example.com'
         subject = 'test mail'
         # END DATA
-        res = self.env['ir.mail_server'].build_email(
+        # given mail tests patch this method and don't restore it, we need
+        # to call our function somewhat clumsily
+        res = IrMailServer.build_email.__func__(
+            self.env['ir.mail_server'],
             email_from, email_to, subject,
-            body, subtype='html', subtype_alternative='plain')
+            body, subtype='html', subtype_alternative='plain',
+        )
         images_in_mail = 0
         for part in res.walk():
             if part.get_content_type() == 'text/html':
