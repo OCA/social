@@ -9,7 +9,7 @@
     "category": "Social",
     "summary": "Replace img.src's which start with http with inline cids",
     "depends": [
-        'mail',
+        'web',
     ],
     "installable": True,
     "application": False,
