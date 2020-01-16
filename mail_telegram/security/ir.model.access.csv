@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_message_telegram_all,mail.message.telegram.all,model_mail_message_telegram,,1,0,0,0
+access_mail_message_telegram_portal,mail.message.telegram.portal,model_mail_message_telegram,base.group_portal,1,1,1,0
+access_mail_message_telegram_user,mail.message.telegram.user,model_mail_message_telegram,base.group_user,1,1,1,0
+access_mail_message_telegram_system,mail.message.telegram.system,model_mail_message_telegram,base.group_system,1,1,1,1
+access_mail_telegram_chat_all,mail.telegram.chat.all,model_mail_telegram_chat,,1,0,0,0
+access_mail_telegram_chat_system,mail_telegram_chat,model_mail_telegram_chat,base.group_system,1,1,1,1

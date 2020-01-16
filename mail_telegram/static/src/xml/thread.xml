@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery=".o_thread_tooltip_container" t-operation="after">
+            <span t-if="message.telegram" class="o_thread_tooltip_telegram_container">
+                <i t-att-class="'o_thread_telegram_tooltip o_thread_message_telegram o_thread_message_telegram_' + message.customer_telegram_status + ' fa fa-telegram fa-lg'"/>
+            </span>
+        </t>
+    </t>
+</templates>

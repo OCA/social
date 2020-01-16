@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="mail_message_telegram_form_view">
+        <field name="name">mail.message.telegram.form (in mail_telegram)</field>
+        <field name="model">mail.message.telegram</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="send" string="Send Now" type="object" states='outgoing' class="oe_highlight"/>
+                    <button name="mark_outgoing" string="Retry" type="object" states='exception,cancel'/>
+                    <button name="cancel" string="Cancel" type="object" states='outgoing'/>
+                    <field name="state" widget="statusbar" statusbar_visible="outgoing,sent,received,exception,cancel"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box"/>
+                    <field name="mail_message_id" required="0" invisible="1"/>
+                    <label for="subject" class="oe_edit_only"/>
+                    <h2><field name="subject"/></h2>
+                    <group>
+                        <field name="chat_id"/>
+                        <field name="message_id" attrs="{'invisible': [('message_id', '=', False)]}"/>
+                    </group>
+                    <notebook>
+                            <page string="Body">
+                                <field name="body" widget="html" options="{'style-inline': true}"/>
+                            </page>
+                            <page string="Failure Reason" attrs="{'invisible': [('state', '!=', 'exception')]}">
+                                <field name="failure_reason"/>
+                            </page>
+                        </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_message_telegram_tree_view">
+        <field name="name">mail.message.telegram.tree (in mail_telegram)</field>
+        <field name="model">mail.message.telegram</field>
+        <field name="arch" type="xml">
+            <tree string="Telegram messages" decoration-muted="state in ('sent', 'cancel')" decoration-info="state=='outgoing'" decoration-danger="state=='exception'">
+                    <field name="date"/>
+                    <field name="subject"/>
+                    <field name="state" invisible="1"/>
+                    <button name="send" string="Send Now" type="object" icon="fa-paper-plane text-success" states='outgoing'/>
+                    <button name="mark_outgoing" string="Retry" type="object" icon="fa-repeat text-success" states='exception,cancel'/>
+                    <button name="cancel" string="Cancel Email" type="object" icon="fa-times-circle text-danger" states='outgoing'/>
+                </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mail_message_telegram_act_window">
+        <field name="name">Telegram messages</field>
+        <field name="res_model">mail.message.telegram</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="mail_message_telegram_menu">
+        <field name="name">Telegram messages</field>
+        <field name="parent_id" ref="base.menu_email"/>
+        <field name="action" ref="mail_message_telegram_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+
+</odoo>
