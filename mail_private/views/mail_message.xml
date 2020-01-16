@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="view_message_form">
+        <field name="name">mail.message.form (in mail_private)</field>
+        <field name="model">mail.message</field>
+        <field name="inherit_id" ref="mail.view_message_form"/>
+        <field name="arch" type="xml">
+            <field name="subtype_id" position="after">
+                <field name="mail_group_id"/>
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>

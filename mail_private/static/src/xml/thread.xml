@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery=".o_thread_tooltip_container" t-operation="after">
+            <span t-if="message.private" class="o_thread_tooltip_private_container">
+                <i t-att-class="'o_thread_private_tooltip o_thread_message_private fa fa-user-secret fa-lg'"/>
+                <span class="o_security_group_overlay">
+                    <t t-esc="message.mail_group"/>
+                </span>
+            </span>
+        </t>
+    </t>
+</templates>
