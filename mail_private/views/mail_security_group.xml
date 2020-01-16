@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="mail_security_group_form_view">
+        <field name="name">mail.security.group.form (in mail_private)</field>
+        <field name="model">mail.security.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <header/>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group>
+                        <field name="name"/>
+                        <field name="model_ids" widget="many2many_tags"/>
+                        <field name="group_ids" widget="many2many_tags"/>
+                        <field name="icon"/>
+                        <field name="button_name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_security_group_search_view">
+        <field name="name">mail.security.group.search (in mail_private)</field>
+        <field name="model">mail.security.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_security_group_tree_view">
+        <field name="name">mail.security.group.tree (in mail_private)</field>
+        <field name="model">mail.security.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mail_security_group_act_window">
+        <field name="name">Mail Group</field>
+        <field name="res_model">mail.security.group</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="mail_security_group_menu">
+        <field name="name">Mail Group</field>
+        <field name="parent_id" ref="base.menu_email"/>
+        <field name="action" ref="mail_security_group_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</odoo>

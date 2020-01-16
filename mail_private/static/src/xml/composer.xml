@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <div t-extend="mail.chatter.ChatComposer">
+        <t t-jquery=".o_composer_send" t-operation="append">
+            <div class="btn-group o_composer_send_private_group"/>
+        </t>
+    </div>
+</templates>

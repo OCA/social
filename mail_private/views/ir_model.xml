@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="model_form_view">
+        <field name="name">ir.model.form (in mail_private)</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="mail.model_form_view"/>
+        <field name="arch" type="xml">
+            <field name="is_mail_thread" position="after">
+                <field name="mail_group_ids"
+                       widget="many2many_tags"
+                       attrs="{'invisible': [('is_mail_thread', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>
