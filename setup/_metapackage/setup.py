@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo13-addon-email_template_qweb',
         'odoo13-addon-mail_activity_board',
         'odoo13-addon-mail_activity_done',
+        'odoo13-addon-mail_inline_css',
         'odoo13-addon-mail_optional_autofollow',
     ],
     classifiers=[
