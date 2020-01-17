@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_inline_css
+# 	* mail_inline_css
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -30,11 +30,12 @@ msgstr ""
 
 #. module: mail_inline_css
 #: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
-msgid "This e-mail styles are inline rendered although its template defines styles as embedded CSS!"
+msgid ""
+"This e-mail styles are inline rendered although its template defines styles "
+"as embedded CSS!"
 msgstr ""
 
 #. module: mail_inline_css
 #: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "www.example.com"
 msgstr ""
-
