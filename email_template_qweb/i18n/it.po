@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * email_template_qweb
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Marius Marolla <mariusmarolla@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-05-17 01:02+0000\n"
+"PO-Revision-Date: 2017-05-17 01:02+0000\n"
+"Last-Translator: Marius Marolla <mariusmarolla@gmail.com>, 2017\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_type
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_type
+msgid "Body templating engine"
+msgstr "Motore dei Modelli di Messaggio"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_id
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
+msgid "Body view"
+msgstr "Visualizzazione Messaggio"
+
+#. module: email_template_qweb
+#: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
+msgid "Dear"
+msgstr "Gentile"
+
+#. module: email_template_qweb
+#: model:ir.model,name:email_template_qweb.model_mail_template
+msgid "Email Templates"
+msgstr "Modelli Email"
+
+#. module: email_template_qweb
+#: selection:email_template.preview,body_type:0
+#: selection:mail.template,body_type:0
+msgid "Jinja2"
+msgstr "Jinja2"
+
+#. module: email_template_qweb
+#: selection:email_template.preview,body_type:0
+#: selection:mail.template,body_type:0
+msgid "QWeb"
+msgstr "QWeb"
+
+#. module: email_template_qweb
+#: model:mail.template,subject:email_template_qweb.email_template_demo1
+msgid "QWeb demo email"
+msgstr "Demo Email QWeb"
+
+#. module: email_template_qweb
+#: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
+msgid "This is an email template using qweb."
+msgstr "Questo è un modello di email basato su QWeb"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_arch
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_arch
+msgid "View Architecture"
+msgstr "Visualizza Architettura"
