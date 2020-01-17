@@ -19,8 +19,8 @@ class TestMailInlineStyles(SavepointCase):
         """ Convert node CSS string to Python dict"""
         res = {}
         for style in node.attrib.get("style", "").split(";"):
-            l = style.split(":")
-            res[l[0].strip()] = l[1].strip()
+            rule = style.split(":")
+            res[rule[0].strip()] = rule[1].strip()
         return res
 
     def find_by_id(self, node, html_id):
