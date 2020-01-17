@@ -3,22 +3,15 @@
 
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
-    'name': 'Mail Inline CSS',
+    "name": "Mail Inline CSS",
     "summary": "Convert style tags in inline style in your mails",
-    'version': '12.0.1.0.0',
-    'author': 'Akretion, camptocamp, Odoo Community Association (OCA)',
-    'website': 'https://github.com/OCA/social',
-    'license': 'AGPL-3',
-    'category': 'Tools',
-    'installable': True,
-    "external_dependencies": {
-        "python": ['premailer'],
-    },
-    "depends": [
-        "email_template_qweb",
-    ],
-    "demo": [
-        "demo/demo_template.xml",
-        "demo/demo_mail_template.xml",
-    ],
+    "version": "12.0.1.0.0",
+    "author": "Akretion, camptocamp, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
+    "license": "AGPL-3",
+    "category": "Tools",
+    "installable": True,
+    "external_dependencies": {"python": ["premailer"]},
+    "depends": ["email_template_qweb"],
+    "demo": ["demo/demo_template.xml", "demo/demo_mail_template.xml"],
 }
