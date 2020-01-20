@@ -16,7 +16,7 @@ class MailThread(models.AbstractModel):
                      save_original=False, strip_attachments=False,
                      thread_id=None):
         disable_notify_mail_drop_target = \
-            self.env["ir.config_parameter"].get_param(
+            self.env["ir.config_parameter"].sudo().get_param(
                 "mail_drop_target.disable_notify", default=False)
         self_message_process = self
         if disable_notify_mail_drop_target:
