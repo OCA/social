@@ -1,14 +1,13 @@
-# -*- coding: utf-8 -*-
-# © 2016 Savoir-faire Linux
+# Copyright 2016 Savoir-faire Linux
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp.tests import common
+from odoo.tests import common
 
 
-class TestEmailTemplate(common.TransactionCase):
+class TestMmailTemplate(common.TransactionCase):
 
     def setUp(self):
-        super(TestEmailTemplate, self).setUp()
+        super(TestMmailTemplate, self).setUp()
 
         self.report_view = self.env['ir.ui.view'].create({
             'name': 'test_report_template',
@@ -17,8 +16,8 @@ class TestEmailTemplate(common.TransactionCase):
             'arch': """\
 <?xml version="1.0"?>
 <t t-name="mail_template_multi_report.test_report_template">
-    <t t-call="report.html_container">
-        <t t-call="report.internal_layout">
+    <t t-call="web.html_container">
+        <t t-call="web.internal_layout">
             <div class="page">
             </div>
         </t>
@@ -36,14 +35,14 @@ class TestEmailTemplate(common.TransactionCase):
 
         model_data.clear_caches()
 
-        self.report = self.env['ir.actions.report.xml'].create({
+        self.report = self.env['ir.actions.report'].create({
             'name': 'Test Report 1',
             'model': 'res.partner',
             'report_type': 'qweb-html',
             'report_name': 'mail_template_multi_report.test_report_template',
         })
 
-        self.template = self.env['email.template'].create({
+        self.template = self.env['mail.template'].create({
             'name': 'Test Email Template',
             'model_id': self.env.ref('base.model_res_partner').id,
             'report_line_ids': [(0, 0, {
@@ -58,8 +57,7 @@ class TestEmailTemplate(common.TransactionCase):
         })
 
     def test_01_generate_email_batch(self):
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         self.assertEquals(len(res[self.partner.id]['attachments']), 1)
 
@@ -69,8 +67,7 @@ class TestEmailTemplate(common.TransactionCase):
             'report_template': self.report.id,
         })
 
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         self.assertEquals(len(res[self.partner.id]['attachments']), 2)
 
@@ -79,8 +76,7 @@ class TestEmailTemplate(common.TransactionCase):
             'condition': "${object.customer}",
         })
 
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         self.assertEquals(len(res[self.partner.id]['attachments']), 1)
 
@@ -89,8 +85,7 @@ class TestEmailTemplate(common.TransactionCase):
             'condition': "${object.supplier}",
         })
 
-        res = self.env['email.template'].generate_email_batch(
-            self.template.id, [self.partner.id])
+        res = self.template.generate_email([self.partner.id])
 
         res[self.partner.id].setdefault('attachments', [])
         self.assertEquals(len(res[self.partner.id]['attachments']), 0)
