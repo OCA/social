@@ -4,3 +4,4 @@
 
 from . import mail_followers
 from . import mail_wizard_invite
+from . import mail_thread
