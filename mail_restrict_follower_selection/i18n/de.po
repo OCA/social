@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_restrict_follower_selection
+# 	* mail_restrict_follower_selection
 #
 msgid ""
 msgstr ""
@@ -25,6 +25,11 @@ msgstr "Beschränkung der Abonnenten konfigurieren"
 #: model:ir.model,name:mail_restrict_follower_selection.model_mail_followers
 msgid "Document Followers"
 msgstr "Abonnenten des Dokuments"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_thread
+msgid "Email Thread"
+msgstr ""
 
 #. module: mail_restrict_follower_selection
 #: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
