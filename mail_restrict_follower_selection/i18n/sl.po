@@ -31,6 +31,11 @@ msgid "Document Followers"
 msgstr ""
 
 #. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_restrict_follower_selection
 #: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
 msgid "Invite wizard"
 msgstr "Čarovnik za vabila"
