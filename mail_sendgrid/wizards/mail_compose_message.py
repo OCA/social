@@ -27,7 +27,7 @@ class EmailComposeMessage(models.TransientModel):
     @api.multi
     def get_mail_values(self, res_ids):
         """ Attach sendgrid template to e-mail and render substitutions """
-        mail_values = super(EmailComposeMessage, self).get_mail_values(res_ids)
+        mail_values = super().get_mail_values(res_ids)
         template = self.template_id
         sendgrid_template_id = template.sendgrid_localized_template.id
 

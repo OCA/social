@@ -1,8 +1,8 @@
 # © 2017 Emanuel Cino - <ecino@compassion.ch>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import json
-
 import mock
+from html2text import html2text
 
 from odoo.tests.common import HttpCase
 from odoo.tools import config
@@ -160,9 +160,9 @@ class TestMailSendgrid(HttpCase):
             self.recipient.id]
         # Test Sendgrid HTML preview
         self.assertEqual(
-            self.mail_wizard.body_sendgrid,
-            self.sendgrid_template.html_content.replace(
-                '{{body}}', mail_values['body'])
+            html2text(self.mail_wizard.body_sendgrid),
+            html2text(self.sendgrid_template.html_content.replace(
+                '{{body}}', mail_values['body']))
         )
         mail = self.env['mail.mail'].create(mail_values)
         self.assertEqual(mail.sendgrid_template_id.id,
