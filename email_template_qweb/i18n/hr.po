@@ -20,16 +20,18 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_id
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
+#, fuzzy
+#| msgid "Body view"
+msgid "Body View"
+msgstr "Pregled tijela"
+
+#. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_type
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_type
 msgid "Body templating engine"
 msgstr "Mehanizam predložaka poruke"
-
-#. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_id
-#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
-msgid "Body view"
-msgstr "Pregled tijela"
 
 #. module: email_template_qweb
 #: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
@@ -42,14 +44,14 @@ msgid "Email Templates"
 msgstr "Predlošci mailova"
 
 #. module: email_template_qweb
-#: selection:email_template.preview,body_type:0
-#: selection:mail.template,body_type:0
+#: model:ir.model.fields.selection,name:email_template_qweb.selection__email_template_preview__body_type__jinja2
+#: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__jinja2
 msgid "Jinja2"
 msgstr "Jinja2"
 
 #. module: email_template_qweb
-#: selection:email_template.preview,body_type:0
-#: selection:mail.template,body_type:0
+#: model:ir.model.fields.selection,name:email_template_qweb.selection__email_template_preview__body_type__qweb
+#: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__qweb
 msgid "QWeb"
 msgstr "QWeb"
 
@@ -57,6 +59,16 @@ msgstr "QWeb"
 #: model:mail.template,subject:email_template_qweb.email_template_demo1
 msgid "QWeb demo email"
 msgstr "QWeb demo email"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,help:email_template_qweb.field_email_template_preview__body_view_arch
+#: model:ir.model.fields,help:email_template_qweb.field_mail_template__body_view_arch
+msgid ""
+"This field should be used when accessing view arch. It will use "
+"translation.\n"
+"                               Note that it will read `arch_db` or `arch_fs` "
+"if in dev-xml mode."
+msgstr ""
 
 #. module: email_template_qweb
 #: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
