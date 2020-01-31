@@ -7,12 +7,14 @@
               "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social Network",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "license": "AGPL-3",
     "depends": [
+        "account",
         "mail",
     ],
     "data": [
+        "wizard/account_invoice_send.xml",
         "wizard/mail_compose_message_view.xml",
     ],
 }
