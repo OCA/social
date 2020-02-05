@@ -1,12 +1,12 @@
-# Copyright 2017 Tecnativa - Pedro M. Baeza
+# Copyright 2017-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
 from odoo import _, exceptions, models
 
 
-class MailMassMailingList(models.Model):
-    _inherit = "mail.mass_mailing"
+class MailingMailing(models.Model):
+    _inherit = "mailing.mailing"
 
     def button_draft(self):
         """Return to draft state for resending the mass mailing."""
