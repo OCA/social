@@ -1,4 +1,4 @@
-# Copyright 2017-2018 Tecnativa - Pedro M. Baeza
+# Copyright 2017-2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import exceptions
@@ -9,18 +9,17 @@ class TestMassMailingResend(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestMassMailingResend, cls).setUpClass()
-        cls.list = cls.env["mail.mass_mailing.list"].create({"name": "Test list"})
-        cls.contact1 = cls.env["mail.mass_mailing.contact"].create(
+        cls.list = cls.env["mailing.list"].create({"name": "Test list"})
+        cls.contact1 = cls.env["mailing.contact"].create(
             {"name": "Contact 1", "email": "email1@test.com"}
         )
-        cls.mass_mailing = cls.env["mail.mass_mailing"].create(
+        cls.mass_mailing = cls.env["mailing.mailing"].create(
             {
                 "name": "Test mass mailing",
                 "email_from": "test@example.org",
-                "mailing_model_id": cls.env.ref(
-                    "mass_mailing.model_mail_mass_mailing_contact"
-                ).id,
+                "mailing_model_id": cls.env.ref("mass_mailing.model_mailing_list").id,
                 "contact_list_ids": [(6, 0, cls.list.ids)],
+                "subject": "Mailing test",
                 "reply_to_mode": "thread",
             }
         )
