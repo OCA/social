@@ -10,9 +10,11 @@ class MailMassMailingList(models.Model):
 
     def button_draft(self):
         """Return to draft state for resending the mass mailing."""
-        if any(self.mapped(lambda x: x.state != 'done')):
+        if any(self.mapped(lambda x: x.state != "done")):
             raise exceptions.UserError(
-                _("You can't resend a mass mailing that is being sent or in "
-                  "draft state.")
+                _(
+                    "You can't resend a mass mailing that is being sent or in "
+                    "draft state."
+                )
             )
-        self.write({'state': 'draft'})
+        self.write({"state": "draft"})
