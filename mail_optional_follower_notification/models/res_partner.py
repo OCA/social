@@ -14,7 +14,7 @@ class ResPartner(models.Model):
         if self.env.context.get('force_partners_to_notify'):
             partners_to_notify =\
                 self.env.context.get('force_partners_to_notify')
-            record = self.filtered(lambda p: p.id in partners_to_notify)
+            rdata = [i for i in rdata if i['id'] in partners_to_notify]
         return super()._notify(
             message, rdata, record,
             force_send=force_send, send_after_commit=send_after_commit,
