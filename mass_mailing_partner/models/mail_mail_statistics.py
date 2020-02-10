@@ -8,16 +8,17 @@ class MailMailStatistics(models.Model):
     _inherit = "mail.mail.statistics"
 
     partner_id = fields.Many2one(
-        string="Partner", comodel_name='res.partner', readonly=True)
+        string="Partner", comodel_name="res.partner", readonly=True
+    )
 
     @api.model
     def partner_id_from_obj(self, model, res_id):
         partner_id = False
         obj = self.env[model].browse(res_id)
         if obj.exists():
-            if model == 'res.partner':
+            if model == "res.partner":
                 partner_id = res_id
-            elif 'partner_id' in obj._fields:
+            elif "partner_id" in obj._fields:
                 partner_id = obj.partner_id.id
         return partner_id
 
