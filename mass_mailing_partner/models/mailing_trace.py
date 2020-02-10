@@ -1,11 +1,12 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
 
 
-class MailMailStatistics(models.Model):
-    _inherit = "mail.mail.statistics"
+class MailingTrace(models.Model):
+    _inherit = "mailing.trace"
 
     partner_id = fields.Many2one(
         string="Partner", comodel_name="res.partner", readonly=True
@@ -31,6 +32,6 @@ class MailMailStatistics(models.Model):
 
     @api.model
     def create(self, vals):
-        stat = super(MailMailStatistics, self).create(vals)
+        stat = super(MailingTrace, self).create(vals)
         stat.partner_link()
         return stat

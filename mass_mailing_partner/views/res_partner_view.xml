@@ -3,6 +3,7 @@
      Copyright 2015-16 Antonio Espinosa <antonio.espinosa@tecnativa.com>
      Copyright 2015 Javier Iniesta <javieria@antiun.com>
      Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     Copyright 2020 Tecnativa - Manuel Calero
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
 
@@ -23,7 +24,7 @@
                            widget="statinfo"
                            string="Mailing contacts"/>
                 </button>
-                <button name="%(mass_mailing.action_view_mail_mail_statistics)d"
+                <button name="%(mass_mailing.action_view_mail_mail_statistics_mailing)d"
                         context="{'search_default_partner_id': active_id,
                                   'default_partner_id': active_id}"
                         type="action"

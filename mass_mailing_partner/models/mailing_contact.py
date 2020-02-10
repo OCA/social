@@ -2,14 +2,15 @@
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class MailMassMailingContact(models.Model):
-    _inherit = "mail.mass_mailing.contact"
+class MailingContact(models.Model):
+    _inherit = "mailing.contact"
 
     partner_id = fields.Many2one(
         comodel_name="res.partner", string="Partner", domain=[("email", "!=", False)]
@@ -53,7 +54,7 @@ class MailMassMailingContact(models.Model):
             subscription_list_ids=vals.get("subscription_list_ids", False),
             list_ids=vals.get("list_ids", False),
         )
-        return super(MailMassMailingContact, self).create(new_vals)
+        return super(MailingContact, self).create(new_vals)
 
     def write(self, vals):
         for contact in self:
@@ -67,7 +68,7 @@ class MailMassMailingContact(models.Model):
                 subscription_list_ids=vals.get("subscription_list_ids", False),
                 list_ids=vals.get("list_ids", False),
             )
-            super(MailMassMailingContact, contact).write(new_vals)
+            super(MailingContact, contact).write(new_vals)
         return True
 
     def _get_company(self):
@@ -96,7 +97,6 @@ class MailMassMailingContact(models.Model):
             "category_id": self._get_categories(),
         }
 
-    @api.multi
     def _set_partner(self):
         self.ensure_one()
         m_partner = self.env["res.partner"]

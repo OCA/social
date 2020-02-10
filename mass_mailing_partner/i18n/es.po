@@ -11,7 +11,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
 "PO-Revision-Date: 2018-02-26 01:46+0000\n"
-"Last-Translator: enjolras <yo@miguelrevilla.com>, 2017\n"
+"Last-Translator: Tecnativa - Manuel Calero, 2020\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -24,7 +24,7 @@ msgstr ""
 #: code:addons/mass_mailing_partner/models/mail_mass_mailing_list_contact_rel.py:17
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
-msgstr ""
+msgstr "Un cliente no puede estar varias veces en la misma lista"
 
 #. module: mass_mailing_partner
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
@@ -44,7 +44,7 @@ msgstr "Cancelar"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_partner_mail_list_wizard
@@ -127,7 +127,7 @@ msgstr "Contacto de envío masivo"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_list_contact_rel
 msgid "Mass Mailing Subscription Information"
-msgstr ""
+msgstr "Información de suscripción de correo masivo"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_ids
