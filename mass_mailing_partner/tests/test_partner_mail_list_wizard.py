@@ -1,6 +1,7 @@
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import UserError
@@ -15,7 +16,7 @@ class PartnerMailListWizardCase(base.BaseCase):
         )
         wizard.partner_ids = [self.partner.id]
         wizard.add_to_mail_list()
-        contacts = self.env["mail.mass_mailing.contact"].search(
+        contacts = self.env["mailing.contact"].search(
             [("partner_id", "=", self.partner.id)]
         )
         cont = contacts.filtered(lambda r: wizard.mail_list_id in r.list_ids)
@@ -24,6 +25,7 @@ class PartnerMailListWizardCase(base.BaseCase):
         # This line does not create a new contact
         wizard.add_to_mail_list()
         self.assertEqual(len(self.partner.mass_mailing_contact_ids), 1)
+
         self.assertEqual(
             self.partner.mass_mailing_contact_ids.list_ids, self.mailing_list
         )

@@ -1,6 +1,7 @@
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import ValidationError
@@ -104,7 +105,7 @@ class MailMassMailingContactCase(base.BaseCase):
             "category_id": [(6, 0, (category_8 | category_11).ids)],
         }
         partner = self.create_partner(partner_vals)
-        with self.env.do_in_onchange():
-            contact.partner_id = partner
-            contact._onchange_partner_mass_mailing_partner()
-            self.check_mailing_contact_partner(contact)
+        # with self.env.do_in_onchange():
+        contact.partner_id = partner
+        contact._onchange_partner_mass_mailing_partner()
+        self.check_mailing_contact_partner(contact)
