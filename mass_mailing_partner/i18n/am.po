@@ -19,8 +19,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mass_mailing_partner
-#: code:addons/mass_mailing_partner/models/mail_mass_mailing.py:30
-#: code:addons/mass_mailing_partner/models/mail_mass_mailing_list_contact_rel.py:17
+#: code:addons/mass_mailing_partner/models/mailing_contact_subscription.py:0
+#: code:addons/mass_mailing_partner/models/mailing_list.py:0
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
 msgstr ""
@@ -67,11 +67,6 @@ msgid "Display Name"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mail_mail_statistics
-msgid "Email Statistics"
-msgstr ""
-
-#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__id
 msgid "ID"
 msgstr "ID"
@@ -92,10 +87,20 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_list
+#: model:ir.model,name:mass_mailing_partner.model_mailing_contact
+msgid "Mailing Contact"
+msgstr ""
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_list
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__mail_list_id
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
 msgid "Mailing List"
+msgstr ""
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_trace
+msgid "Mailing Statistics"
 msgstr ""
 
 #. module: mass_mailing_partner
@@ -112,17 +117,12 @@ msgid "Mailing contacts number"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_list__partner_mandatory
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_mandatory
 msgid "Mandatory Partner"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_contact
-msgid "Mass Mailing Contact"
-msgstr ""
-
-#. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_list_contact_rel
+#: model:ir.model,name:mass_mailing_partner.model_mailing_contact_subscription
 msgid "Mass Mailing Subscription Information"
 msgstr ""
 
@@ -140,33 +140,33 @@ msgid "Mass mailing stats number"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mail_statistics__partner_id
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_contact__partner_id
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__partner_id
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_trace__partner_id
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__partner_ids
-#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mail_statistics_search
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.mailing_trace_view_search
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mass_mailing_contact_search
 msgid "Partner"
 msgstr "ተባባሪ"
 
 #. module: mass_mailing_partner
-#: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:32
+#: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
 #, python-format
 msgid "Partner '%s' has no email."
 msgstr ""
 
 #. module: mass_mailing_partner
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_list__partner_category
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
 msgid "Partner Tag"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: code:addons/mass_mailing_partner/models/mail_mass_mailing_contact.py:26
+#: code:addons/mass_mailing_partner/models/mailing_contact.py:0
 #, python-format
 msgid "Partner already exists in one of these mailing lists"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: code:addons/mass_mailing_partner/models/res_partner.py:36
+#: code:addons/mass_mailing_partner/models/res_partner.py:0
 #, python-format
 msgid ""
 "This partner '%s' is linked to one or more mass mailing contact. Email must "

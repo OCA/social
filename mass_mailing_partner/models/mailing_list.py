@@ -1,14 +1,15 @@
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
-class MailMassMailingList(models.Model):
-    _inherit = "mail.mass_mailing.list"
+class MailingList(models.Model):
+    _inherit = "mailing.list"
 
     partner_mandatory = fields.Boolean(string="Mandatory Partner", default=False)
     partner_category = fields.Many2one(
@@ -17,7 +18,7 @@ class MailMassMailingList(models.Model):
 
     @api.constrains("contact_ids")
     def _check_contact_ids_partner_id(self):
-        contact_obj = self.env["mail.mass_mailing.contact"]
+        contact_obj = self.env["mailing.contact"]
         for mailing_list in self:
             data = contact_obj.read_group(
                 [

@@ -2,6 +2,7 @@
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -15,7 +16,7 @@ def post_init_hook(cr, registry):
     with api.Environment.manage():
         env = api.Environment(cr, SUPERUSER_ID, {})
         # ACTION 1: Match existing contacts
-        contact_model = env["mail.mass_mailing.contact"]
+        contact_model = env["mailing.contact"]
         partner_model = env["res.partner"]
         contacts = contact_model.search([("email", "!=", False)])
         _logger.info("Trying to match %d contacts to partner by email", len(contacts))
@@ -26,7 +27,7 @@ def post_init_hook(cr, registry):
             if partners:
                 contact.write({"partner_id": partners.id})
         # ACTION 2: Match existing statistics
-        stat_model = env["mail.mail.statistics"]
+        stat_model = env["mailing.trace"]
         stats = stat_model.search([("model", "!=", False), ("res_id", "!=", False)])
         _logger.info("Trying to link %d mass mailing statistics to partner", len(stats))
         stats.partner_link()
