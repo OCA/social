@@ -1,4 +1,5 @@
 # Copyright 2018 Tecnativa - Ernesto tejeda
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import ValidationError
@@ -33,9 +34,6 @@ class MailMassMailingListCase(base.BaseCase):
             self.create_mailing_list(
                 {
                     "name": "List test 3",
-                    "subscription_contact_ids": [
-                        (0, 0, {"contact_id": contact_test_1.id}),
-                        (0, 0, {"contact_id": contact_test_2.id}),
-                    ],
+                    "contact_ids": [(4, contact_test_1.id), (4, contact_test_2.id)],
                 }
             )

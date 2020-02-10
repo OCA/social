@@ -8,3 +8,4 @@
     * David Vidal
     * Ernesto Tejeda
     * Victor M.M. Torres
+    * Manuel Calero

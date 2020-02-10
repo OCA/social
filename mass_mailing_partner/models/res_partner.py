@@ -2,6 +2,7 @@
 # Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
@@ -13,7 +14,7 @@ class ResPartner(models.Model):
 
     mass_mailing_contact_ids = fields.One2many(
         string="Mailing contacts",
-        comodel_name="mail.mass_mailing.contact",
+        comodel_name="mailing.contact",
         inverse_name="partner_id",
     )
     mass_mailing_contacts_count = fields.Integer(
@@ -24,7 +25,7 @@ class ResPartner(models.Model):
     )
     mass_mailing_stats_ids = fields.One2many(
         string="Mass mailing stats",
-        comodel_name="mail.mail.statistics",
+        comodel_name="mailing.trace",
         inverse_name="partner_id",
     )
     mass_mailing_stats_count = fields.Integer(
@@ -47,24 +48,24 @@ class ResPartner(models.Model):
 
     @api.depends("mass_mailing_contact_ids")
     def _compute_mass_mailing_contacts_count(self):
-        contact_data = self.env["mail.mass_mailing.contact"].read_group(
+        contact_data = self.env["mailing.contact"].read_group(
             [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
         )
         mapped_data = {
-                contact["partner_id"][0]: contact["partner_id_count"]
-                for contact in contact_data
+            contact["partner_id"][0]: contact["partner_id_count"]
+            for contact in contact_data
         }
         for partner in self:
             partner.mass_mailing_contacts_count = mapped_data.get(partner.id, 0)
 
     @api.depends("mass_mailing_stats_ids")
     def _compute_mass_mailing_stats_count(self):
-        contact_data = self.env["mail.mail.statistics"].read_group(
+        contact_data = self.env["mailing.trace"].read_group(
             [("partner_id", "in", self.ids)], ["partner_id"], ["partner_id"]
         )
         mapped_data = {
-                contact["partner_id"][0]: contact["partner_id_count"]
-                for contact in contact_data
+            contact["partner_id"][0]: contact["partner_id_count"]
+            for contact in contact_data
         }
         for partner in self:
             partner.mass_mailing_stats_count = mapped_data.get(partner.id, 0)
@@ -87,7 +88,7 @@ class ResPartner(models.Model):
             mm_vals["tag_ids"] = vals["category_id"]
         if mm_vals:
             # Using sudo because ACLs shouldn't produce data inconsistency
-            self.env["mail.mass_mailing.contact"].sudo().search(
+            self.env["mailing.contact"].sudo().search(
                 [("partner_id", "in", self.ids)]
             ).write(mm_vals)
         return res
