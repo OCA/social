@@ -25,7 +25,6 @@ class PartnerMailListWizardCase(base.BaseCase):
         # This line does not create a new contact
         wizard.add_to_mail_list()
         self.assertEqual(len(self.partner.mass_mailing_contact_ids), 1)
-
         self.assertEqual(
             self.partner.mass_mailing_contact_ids.list_ids, self.mailing_list
         )
