@@ -105,7 +105,6 @@ class MailMassMailingContactCase(base.BaseCase):
             "category_id": [(6, 0, (category_8 | category_11).ids)],
         }
         partner = self.create_partner(partner_vals)
-        # with self.env.do_in_onchange():
         contact.partner_id = partner
         contact._onchange_partner_mass_mailing_partner()
         self.check_mailing_contact_partner(contact)
