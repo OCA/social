@@ -7,9 +7,9 @@
             <field name="interval_type">days</field>
             <field name="numbercall">-1</field>
             <field name="doall" eval="False"/>
-            <field name="model">fetchmail.server</field>
-            <field name="function">_check_mailboxes_size_cron</field>
-            <field name="args">()</field>
+            <field name="model_id" ref="fetchmail.model_fetchmail_server"/>
+            <field name="state">code</field>
+            <field name="code">model._check_mailboxes_size_cron()</field>
             <!-- Active flag is set on fetchmail_server.create/write -->
             <field name="active" eval="False"/>
         </record>

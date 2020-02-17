@@ -1,11 +1,10 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 Lorenzo Battistini
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 {
     "name": "Check mailbox size",
     "summary": "Send an email summarizing the current space used by a mailbox",
-    "version": "10.0.1.0.0",
+    "version": "12.0.1.0.0",
     "development_status": "Beta",
     "website": "https://github.com/OCA/social",
     "author": "Agile Business Group, Odoo Community Association (OCA)",

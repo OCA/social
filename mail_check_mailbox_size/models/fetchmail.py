@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
-
 import logging
+import shlex
 from odoo import models, fields, api, _
 
 _logger = logging.getLogger(__name__)
@@ -37,8 +36,7 @@ class Fetchmail(models.Model):
                     "Starting to check mailbox size for server %s"
                     % server.name)
                 imap_server = server.connect()
-                # The list of all folders
-                result, list = imap_server.list()
+                result, folders = imap_server.list()
                 if result != "OK":
                     raise Exception(_("Server responded %s") % result)
                 result_msg += _(
@@ -54,33 +52,33 @@ class Fetchmail(models.Model):
                 )
                 number_of_messages_all = 0
                 size_all = 0
-                for item in list:
-                    x = item.split()
+                for item in folders:
+                    x = shlex.split(item.decode())
                     mailbox = x[-1]
-
                     # Select the desired folder
                     result, number_of_messages = imap_server.select(
-                        mailbox, readonly=1)
+                        '"{}"'.format(mailbox), readonly=1)
                     if result != 'OK':
                         _logger.info(
                             "Server %s responded %s for folder %s"
                             % (server.name, number_of_messages, mailbox))
                         continue
-                    number_of_messages_all += int(number_of_messages[0])
+                    number_of_messages_all += int(
+                        number_of_messages[0].decode())
 
                     size_folder = 0
                     # Go through all the messages in the selected folder
                     typ, msg = imap_server.search(None, 'ALL')
                     # Find the first and last messages
-                    m = [int(msg_part) for msg_part in msg[0].split()]
+                    m = [int(msg_part.decode()) for msg_part in msg[0].split()]
                     m.sort()
                     if m:
                         message_set = "%d:%d" % (m[0], m[-1])
                         result, sizes_response = imap_server.fetch(
                             message_set, "(UID RFC822.SIZE)")
                         for i in range(m[-1]):
-                            tmp = sizes_response[i].split()
-                            size_folder += int(tmp[-1].replace(')', ''))
+                            last = sizes_response[i].split()[-1]
+                            size_folder += int(last.decode().replace(')', ''))
                     else:
                         size_folder = 0
                     result_msg += (
@@ -89,7 +87,11 @@ class Fetchmail(models.Model):
                         "<td style=\"text-align:right\">%i</td>"
                         "<td style=\"text-align:right\">%s</td>"
                         "</tr>"
-                    ) % (mailbox, int(number_of_messages[0]), size_folder)
+                    ) % (
+                        mailbox,
+                        int(number_of_messages[0].decode()),
+                        size_folder
+                    )
                     size_all += size_folder
 
                 result_msg += _(
