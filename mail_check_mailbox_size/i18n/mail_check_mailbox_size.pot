@@ -1,0 +1,78 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* mail_check_mailbox_size
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_check_mailbox_size
+#: code:addons/mail_check_mailbox_size/models/fetchmail.py:97
+#, python-format
+msgid "</tbody><tfoot><tr><td style=\"text-align:left;font-weight:bold\">Sum</td><td style=\"text-align:right;font-weight:bold\">%i</td><td style=\"text-align:right;font-weight:bold\">%10.3fMB</td></tr></tfoot></table>"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: code:addons/mail_check_mailbox_size/models/fetchmail.py:34
+#, python-format
+msgid "<h3>Server %s</h3>"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: code:addons/mail_check_mailbox_size/models/fetchmail.py:42
+#, python-format
+msgid "<table><thead><tr><th style=\"text-align:left\">Folder</th><th style=\"text-align:right\"># Msg</th><th style=\"text-align:right\">Size</th></tr></thead><tbody>"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: code:addons/mail_check_mailbox_size/models/fetchmail.py:110
+#, python-format
+msgid "An error occured while checking mailbox %s:<br/>%s"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: model:ir.model.fields,field_description:mail_check_mailbox_size.field_fetchmail_server__check_mailbox_size
+msgid "Check Size"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: model:ir.actions.server,name:mail_check_mailbox_size.ir_cron_check_mailbox_size_ir_actions_server
+#: model:ir.cron,cron_name:mail_check_mailbox_size.ir_cron_check_mailbox_size
+#: model:ir.cron,name:mail_check_mailbox_size.ir_cron_check_mailbox_size
+msgid "Check mailbox size"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: model:ir.model.fields,field_description:mail_check_mailbox_size.field_fetchmail_server__mailbox_size_partner_ids
+msgid "Contacts to notify"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: model:ir.model,name:mail_check_mailbox_size.model_fetchmail_server
+msgid "Incoming Mail Server"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: model_terms:ir.ui.view,arch_db:mail_check_mailbox_size.view_email_server_form_check_size
+msgid "Mailbox size checking"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: code:addons/mail_check_mailbox_size/models/fetchmail.py:118
+#, python-format
+msgid "Mailbox size for server %s"
+msgstr ""
+
+#. module: mail_check_mailbox_size
+#: code:addons/mail_check_mailbox_size/models/fetchmail.py:41
+#, python-format
+msgid "Server responded %s"
+msgstr ""
+
