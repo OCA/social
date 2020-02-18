@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo12-addon-mail_activity_team',
         'odoo12-addon-mail_attach_existing_attachment',
         'odoo12-addon-mail_attach_existing_attachment_account',
+        'odoo12-addon-mail_check_mailbox_size',
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_full_expand',
         'odoo12-addon-mail_inline_css',
