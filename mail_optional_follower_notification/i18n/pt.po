@@ -34,9 +34,11 @@ msgstr ""
 "permissão)</span>"
 
 #. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_res_partner
-msgid "Contact"
-msgstr ""
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_followers
+#, fuzzy
+#| msgid "Notify followers"
+msgid "Document Followers"
+msgstr "Notificar seguidores"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
@@ -44,16 +46,14 @@ msgid "Email composition wizard"
 msgstr "Assistente de composição de email"
 
 #. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_mail_message
-msgid "Message"
-msgstr "Mensagem"
-
-#. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 #, fuzzy
 #| msgid "Notify followers"
 msgid "Notify Followers"
 msgstr "Notificar seguidores"
+
+#~ msgid "Message"
+#~ msgstr "Mensagem"
 
 #~ msgid "Partner"
 #~ msgstr "Parceiro"

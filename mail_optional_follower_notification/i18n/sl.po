@@ -29,9 +29,11 @@ msgid ""
 msgstr ""
 
 #. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_res_partner
-msgid "Contact"
-msgstr ""
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_followers
+#, fuzzy
+#| msgid "Notify followers"
+msgid "Document Followers"
+msgstr "Obvesti sledilce"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
@@ -39,16 +41,14 @@ msgid "Email composition wizard"
 msgstr "Čarovnik za sestavljanje e-pošte"
 
 #. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_mail_message
-msgid "Message"
-msgstr "Sporočilo"
-
-#. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 #, fuzzy
 #| msgid "Notify followers"
 msgid "Notify Followers"
 msgstr "Obvesti sledilce"
+
+#~ msgid "Message"
+#~ msgstr "Sporočilo"
 
 #~ msgid "Partner"
 #~ msgstr "Partner"

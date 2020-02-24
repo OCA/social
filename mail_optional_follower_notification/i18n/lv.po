@@ -29,18 +29,13 @@ msgid ""
 msgstr ""
 
 #. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_res_partner
-msgid "Contact"
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_followers
+msgid "Document Followers"
 msgstr ""
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
-
-#. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_mail_message
-msgid "Message"
 msgstr ""
 
 #. module: mail_optional_follower_notification
