@@ -30,7 +30,7 @@ msgstr ""
 "b> para eliminar el/los registro/s existentes."
 
 #. module: mass_mailing_resend
-#: model:ir.model,name:mass_mailing_resend.model_mail_mass_mailing
+#: model:ir.model,name:mass_mailing_resend.model_mailing_mailing
 msgid "Mass Mailing"
 msgstr "Correo masivo"
 
@@ -40,7 +40,7 @@ msgid "Resend"
 msgstr "Reenviar"
 
 #. module: mass_mailing_resend
-#: code:addons/mass_mailing_resend/models/mass_mailing.py:15
+#: code:addons/mass_mailing_resend/models/mailing_mailing.py:0
 #, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""
