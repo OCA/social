@@ -4,7 +4,7 @@
 
 {
     "name": "Restrict follower selection",
-    "version": "11.0.2.0.0",
+    "version": "12.0.1.0.0",
     "author": "Therp BV,Creu Blanca,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Social Network",
@@ -16,10 +16,5 @@
         "data/ir_config_parameter.xml",
         "data/ir_actions.xml",
     ],
-    "auto_install": False,
     'installable': True,
-    "application": False,
-    "external_dependencies": {
-        'python': [],
-    },
 }
