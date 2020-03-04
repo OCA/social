@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+<record model="ir.ui.view" id="view_partner_form">
+    <field name="name">Partner Form with tracking emails</field>
+    <field name="model">res.partner</field>
+    <field name="priority">46</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+        <div name="button_box" position="inside">
+            <button name="%(mail_tracking.action_view_mail_tracking_email)d"
+                    context="{'search_default_recipient': email,
+                              'default_recipient': email}"
+                    type="action"
+                    class="oe_stat_button"
+                    icon="fa-envelope-o"
+                    attrs="{'invisible': [('email', '=', False)]}">
+                <field name="tracking_emails_count"
+                       widget="statinfo"
+                       string="Tracking emails"/>
+            </button>
+        </div>
+        <xpath expr="//field[@name='email']/.." position="after">
+            <field name="email_score" widget="progressbar"
+                   attrs="{'invisible': [('email', '=', False)]}"/>
+           <field name="email_bounced"
+                  attrs="{'invisible': [('email', '=', False)]}"/>
+        </xpath>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="view_res_partner_filter">
+    <field name="name">Filter bounced partners</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_res_partner_filter"/>
+    <field name="arch" type="xml">
+        <filter name="type_company" position="after">
+            <separator/>
+            <filter string="Email bounced" name="email_bounced"
+                    domain="[('email', '!=' , False), ('email_bounced', '=', True)]"/>
+        </filter>
+    </field>
+</record>
+
+</odoo>

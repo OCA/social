@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_inline_css
+#
+# Translators:
+# Marius Marolla <mariusmarolla@entersys.it>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-16 03:47+0000\n"
+"PO-Revision-Date: 2018-01-16 03:47+0000\n"
+"Last-Translator: Marius Marolla <mariusmarolla@entersys.it>, 2018\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_inline_css
+#: model:mail.template,subject:mail_inline_css.email_template_demo
+msgid "Demo email inline styles"
+msgstr ""
+
+#. module: mail_inline_css
+#: model:ir.model,name:mail_inline_css.model_mail_template
+msgid "Email Templates"
+msgstr "Modelli Email"
+
+#. module: mail_inline_css
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+msgid "Hello"
+msgstr ""
+
+#. module: mail_inline_css
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+msgid ""
+"This e-mail styles are inline rendered although its template defines styles "
+"as embedded CSS!"
+msgstr ""
+
+#. module: mail_inline_css
+#: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
+msgid "www.example.com"
+msgstr ""
