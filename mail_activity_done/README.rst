@@ -23,7 +23,7 @@ Mail Activity Done
     :target: https://runbot.odoo-community.org/runbot/205/11.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module implements the capability to keep activities that have been
 completed, for future reporting, by setting them with the boolean 'Done'.
@@ -57,6 +57,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Jordi Ballester <jordi.ballester@eficent.com> (www.eficent.com)
+* Guenter Selbert <guenter.selbert@sewisoft.de> (sewisoft.de)
 
 Maintainers
 ~~~~~~~~~~~

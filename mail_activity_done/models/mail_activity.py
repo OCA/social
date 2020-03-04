@@ -23,7 +23,6 @@ class MailActivity(models.Model):
 
 
 class MailActivityMixin(models.AbstractModel):
-
     _inherit = 'mail.activity.mixin'
     activity_ids = fields.One2many(
         domain=lambda self: [('res_model', '=', self._name),

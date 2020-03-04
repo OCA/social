@@ -28,7 +28,6 @@ def pre_init_hook(cr):
 
 
 def post_load_hook():
-
     def new_action_feedback(self, feedback=False):
 
         if 'done' not in self._fields:
@@ -36,6 +35,9 @@ def post_load_hook():
         message = self.env['mail.message']
         if feedback:
             self.write(dict(feedback=feedback))
+        mail_activity_team_installed = 'mail_activity_team' \
+                                       in self.env['ir.module.module']._installed()
+        today = fields.Date.today()
         for activity in self:
             record = self.env[activity.res_model].browse(activity.res_id)
             activity.done = True
@@ -48,6 +50,15 @@ def post_load_hook():
                 mail_activity_type_id=activity.activity_type_id.id,
             )
             message |= record.message_ids[0]
+            if activity.date_deadline <= today:
+                users = activity.user_id
+                if mail_activity_team_installed:
+                    users |= activity.team_id.member_ids
+                self.env['bus.bus'].sendmany([
+                    [(self._cr.dbname, 'res.partner', user.partner_id.id),
+                     {'type': 'activity_updated', 'activity_deleted': True}]
+                    for user in users
+                ])
         return message.ids and message.ids[0] or False
 
     if not hasattr(MailActivity, 'action_feedback_original'):
