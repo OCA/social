@@ -36,7 +36,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
             'partner_ids': [(4, id) for id in self.partner.ids],
         })
         self.assertEqual(compose.partner_ids, self.partner)
-        compose.send_mail_action()
+        compose.action_send_mail()
 
     def test_followers_meet(self):
         self.partner.write({'customer': True})
