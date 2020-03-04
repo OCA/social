@@ -23,7 +23,7 @@ Mail Activity Team
     :target: https://runbot.odoo-community.org/runbot/205/11.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds the possibility to assign teams to activities.
 
@@ -81,6 +81,8 @@ Contributors
   * Jordi Ballester Alomar (jordi.ballester@eficent.com)
 
 * Enric Tobella <etobella@creublanca.es>
+
+* Guenter Selbert (guenter.selbert@sewisoft.de)
 
 Maintainers
 ~~~~~~~~~~~

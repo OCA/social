@@ -34,6 +34,10 @@ class ResUsers(models.Model):
                             )
                             GROUP BY m.id, states, act.res_model, act.user_id;
                             """
+        if 'active' in self.env['mail.activity']._fields:
+            query = query.replace("WHERE team_id in",
+                                  "WHERE act.active = true AND team_id in")
+
         user = user_id if user_id else self.env.uid
         self.env.cr.execute(query, {
             'today': fields.Date.context_today(self),
