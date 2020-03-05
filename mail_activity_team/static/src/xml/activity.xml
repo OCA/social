@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <t t-extend="mail.activity_items">
+         <t t-jquery="t[t-esc='activity.user_id[1]']" t-operation="after">
+                    <t t-if="activity.team_id and activity.user_id"> / </t>
+             <t t-if="activity.team_id" t-esc="activity.team_id[1]"/>
+         </t>
+    </t>
+
+</templates>
