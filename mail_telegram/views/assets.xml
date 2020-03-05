@@ -7,7 +7,7 @@
               inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
             <link rel="stylesheet"
-                  href="/mail_telegram/static/src/less/telegram.less"/>
+                  href="/mail_telegram/static/src/scss/telegram.scss"/>
             <script type="text/javascript"
                     src="/mail_telegram/static/src/js/message.js"/>
         </xpath>

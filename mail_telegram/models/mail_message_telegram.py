@@ -5,7 +5,7 @@ from odoo import api, fields, models, _
 import requests
 import json
 from odoo.tools import html2plaintext
-from odoo.addons.base.ir.ir_mail_server import MailDeliveryException
+from odoo.addons.base.models.ir_mail_server import MailDeliveryException
 import logging
 
 _logger = logging.getLogger(__name__)
@@ -13,6 +13,7 @@ _logger = logging.getLogger(__name__)
 
 class MailMessageTelegram(models.Model):
     _name = 'mail.message.telegram'
+    _description = 'Telegram Message'
     _inherits = {'mail.message': 'mail_message_id'}
     _order = 'id desc'
     _rec_name = 'subject'
@@ -20,7 +21,7 @@ class MailMessageTelegram(models.Model):
 
     # content
     mail_message_id = fields.Many2one(
-        'mail.message', 'Message', required=True,
+        'mail.message', 'Mail Message', required=True,
         ondelete='cascade', index=True,
         auto_join=True
     )
