@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo12-addon-mail_optional_autofollow',
         'odoo12-addon-mail_optional_follower_notification',
         'odoo12-addon-mail_outbound_static',
+        'odoo12-addon-mail_template_substitute',
         'odoo12-addon-mail_track_diff_only',
         'odoo12-addon-mail_tracking',
         'odoo12-addon-mail_tracking_mailgun',
