@@ -1,4 +1,5 @@
 # Copyright 2017 Tecnativa - Jairo Llopis
+# Copyright 2020 Hibou Corp. - Jared Kipe
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from mock import patch
@@ -23,21 +24,25 @@ class DynamicListCase(common.SavepointCase):
                     "email": "%d@example.com" % number,
                 }
             )
-        cls.list = cls.env["mail.mass_mailing.list"].create(
+        cls.list = cls.env["mailing.list"].create(
             {
                 "name": "test list",
                 "dynamic": True,
                 "sync_domain": repr([("category_id", "in", cls.tag.ids)]),
             }
         )
-        cls.mail = cls.env["mail.mass_mailing"].create(
-            {"name": "test mass mailing", "contact_list_ids": [(4, cls.list.id, False)]}
+        cls.mail = cls.env["mailing.mailing"].create(
+            {
+                "name": "test mass mailing",
+                "subject": "test mass mailing",
+                "contact_list_ids": [(4, cls.list.id, False)],
+            }
         )
         cls.mail._onchange_model_and_list()
 
     def test_list_sync(self):
         """List is synced correctly."""
-        Contact = self.env["mail.mass_mailing.contact"]
+        Contact = self.env["mailing.contact"]
         # Partner 0 is not categorized
         self.partners[0].category_id = False
         # Partner 1 has no email
@@ -48,10 +53,12 @@ class DynamicListCase(common.SavepointCase):
         contact0 = Contact.create(
             {"list_ids": [(4, self.list.id)], "partner_id": self.partners[0].id}
         )
+        self.list.flush()
         self.assertEqual(self.list.contact_nbr, 1)
         # Set list as add-synced
         self.list.dynamic = True
         self.list.action_sync()
+        self.list.flush()
         self.assertEqual(self.list.contact_nbr, 4)
         self.assertTrue(contact0.exists())
         # Set list as full-synced
@@ -63,6 +70,7 @@ class DynamicListCase(common.SavepointCase):
             ]
         ).unlink()
         self.list.action_sync()
+        self.list.flush()
         self.assertEqual(self.list.contact_nbr, 3)
         self.assertFalse(contact0.exists())
         # Cannot add or edit contacts in fully synced lists
@@ -87,6 +95,7 @@ class DynamicListCase(common.SavepointCase):
     def test_sync_when_sending_mail(self):
         """Check that list in synced when sending a mass mailing."""
         self.list.action_sync()
+        self.list.flush()
         self.assertEqual(self.list.contact_nbr, 5)
         # Create a new partner
         self.partners.create(
@@ -98,8 +107,9 @@ class DynamicListCase(common.SavepointCase):
         )
         # Mock sending low level method, because an auto-commit happens there
         with patch("odoo.addons.mail.models.mail_mail.MailMail.send") as s:
-            self.mail.send_mail()
+            self.mail.action_send_mail()
             self.assertEqual(1, s.call_count)
+        self.list.flush()
         self.assertEqual(6, self.list.contact_nbr)
 
     def test_load_filter(self):
@@ -108,7 +118,7 @@ class DynamicListCase(common.SavepointCase):
             {"name": "Test filter", "model_id": "res.partner", "domain": domain}
         )
         wizard = (
-            self.env["mail.mass_mailing.load.filter"]
+            self.env["mailing.load.filter"]
             .with_context(active_id=self.list.id)
             .create({"filter_id": ir_filter.id})
         )
