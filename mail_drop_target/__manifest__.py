@@ -7,17 +7,7 @@
     "license": "AGPL-3",
     "category": "Discuss",
     "summary": "Attach emails to Odoo by dragging them from your desktop",
-    "depends": [
-        'mail',
-        'web_drop_target',
-    ],
-    "external_dependencies": {
-        "python": [
-            "extract_msg",
-        ],
-    },
-    "data": [
-        'views/templates.xml',
-        'views/res_config_settings_views.xml',
-    ],
+    "depends": ["mail", "web_drop_target"],
+    "external_dependencies": {"python": ["extract_msg"]},
+    "data": ["views/templates.xml", "views/res_config_settings_views.xml"],
 }
