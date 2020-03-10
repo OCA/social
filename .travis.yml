@@ -30,6 +30,8 @@ install:
   - pip install https://github.com/mattgwwalker/msg-extractor/tarball/master
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
+  # Requirements to test server_environment modules (required by server-tools)
+  - printf '[options]\n\nrunning_env = dev\n' > ${HOME}/.openerp_serverrc
   - travis_install_nightly
 
 script:
