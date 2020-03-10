@@ -12,9 +12,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "mass_mailing_partner",
-    ],
+    "depends": ["mass_mailing_partner"],
     "data": [
         # This should go first
         "wizards/mail_mass_mailing_load_filter_views.xml",
