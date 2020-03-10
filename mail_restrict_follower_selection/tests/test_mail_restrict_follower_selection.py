@@ -10,8 +10,16 @@ from odoo.tests.common import TransactionCase
 class TestMailRestrictFollowerSelection(TransactionCase):
     def setUp(self):
         super().setUp()
+        self.category_employees = self.env["res.partner.category"].create(
+            {"name": "Employees"}
+        )
+
         self.partner = self.env["res.partner"].create(
-            {"name": "Partner", "customer": True, "email": "test@test.com"}
+            {
+                "name": "Partner",
+                "category_id": self.category_employees,
+                "email": "test@test.com",
+            }
         )
 
     def test_fields_view_get(self):
@@ -45,16 +53,14 @@ class TestMailRestrictFollowerSelection(TransactionCase):
         compose.action_send_mail()
 
     def test_followers_meet(self):
-        self.partner.write({"customer": True})
-        self.assertTrue(self.partner.customer)
+        self.partner.write({"category_id": self.category_employees})
         self.send_action()
         self.assertIn(
             self.partner, self.partner.message_follower_ids.mapped("partner_id")
         )
 
     def test_followers_not_meet(self):
-        self.partner.write({"customer": False})
-        self.assertFalse(self.partner.customer)
+        self.partner.write({"category_id": False})
         self.send_action()
         self.assertNotIn(
             self.partner, self.partner.message_follower_ids.mapped("partner_id")
