@@ -5,7 +5,7 @@
 {
     "name": "Dynamic Mass Mailing Lists",
     "summary": "Mass mailing lists that get autopopulated",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Marketing",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -15,7 +15,7 @@
     "depends": ["mass_mailing_partner"],
     "data": [
         # This should go first
-        "wizards/mail_mass_mailing_load_filter_views.xml",
-        "views/mail_mass_mailing_list_view.xml",
+        "wizards/mailing_load_filter_views.xml",
+        "views/mailing_list_view.xml",
     ],
 }
