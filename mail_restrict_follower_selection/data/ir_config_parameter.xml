@@ -2,6 +2,6 @@
 <odoo noupdate="1">
     <record id="parameter_domain" model="ir.config_parameter">
         <field name="key">mail_restrict_follower_selection.domain</field>
-        <field name="value">[('customer', '=', True)]</field>
+        <field name="value">[('category_id.name', '=', 'Employees')]</field>
     </record>
 </odoo>
