@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo12-addon-mail_attach_existing_attachment_account',
         'odoo12-addon-mail_check_mailbox_size',
         'odoo12-addon-mail_debrand',
+        'odoo12-addon-mail_drop_target',
         'odoo12-addon-mail_full_expand',
         'odoo12-addon-mail_inline_css',
         'odoo12-addon-mail_optional_autofollow',
