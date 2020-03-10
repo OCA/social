@@ -3,7 +3,7 @@ X-MDAV-Processed: mail3.creublanca.es, Wed, 26 Jun 2019 18:08:19 +0200
 Return-path: <etobella@creublanca.es>
 Authentication-Results: mail3.creublanca.es;
 	auth=pass (login) smtp.auth=etobella@creublanca.es
-Received: from WorldClient by creublanca.es with ESMTPA id md50020655392.msg; 
+Received: from WorldClient by creublanca.es with ESMTPA id md50020655392.msg;
 	Wed, 26 Jun 2019 18:08:19 +0200
 X-Spam-Processed: mail3.creublanca.es, Wed, 26 Jun 2019 18:08:19 +0200
 	(not processed: message from trusted or authenticated source)
@@ -34,14 +34,14 @@ TEST
 
 
 
-Tanto este mensaje como los documentos que, en su caso, lleve como anexos, 
-pueden contener informacin reservada y/o confidencial, destinada exclusivamente 
-para el uso del destinatario o la persona responsable de entregarlo al mismo, 
-estando su uso no autorizado prohibido legalmente. 
-Su contenido no constituye un compromiso para Creu Blanca (la empresa remitente) 
-salvo ratificacin escrita por ambas partes. En caso de su recepcin por error, 
-rogamos nos lo comunique por igual va, se abstenga de realizar copias del mensaje 
-o documentos adjuntos, remitirlo o facilitarlo a un tercero, y proceda en su defecto, 
+Tanto este mensaje como los documentos que, en su caso, lleve como anexos,
+pueden contener informacin reservada y/o confidencial, destinada exclusivamente
+para el uso del destinatario o la persona responsable de entregarlo al mismo,
+estando su uso no autorizado prohibido legalmente.
+Su contenido no constituye un compromiso para Creu Blanca (la empresa remitente)
+salvo ratificacin escrita por ambas partes. En caso de su recepcin por error,
+rogamos nos lo comunique por igual va, se abstenga de realizar copias del mensaje
+o documentos adjuntos, remitirlo o facilitarlo a un tercero, y proceda en su defecto,
 a su eliminacin.
 
 --0626-1608-16-03-PART_BREAK
