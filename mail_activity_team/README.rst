@@ -17,7 +17,7 @@ Mail Activity Team
     :target: https://github.com/OCA/social/tree/13.0/mail_activity_team
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-13.0/social-13.0-mail_activity_team
+    :target: https://translation.odoo-community.org/projects/social-13-0/social-13-0-mail_activity_team
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/205/13.0
@@ -26,8 +26,6 @@ Mail Activity Team
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds the possibility to assign teams to activities.
-
-
 
 **Table of contents**
 
@@ -80,6 +78,7 @@ Contributors
 
   * Jordi Ballester Alomar (jordi.ballester@eficent.com)
   * Miquel Raïch (miquel.raich@eficent.com)
+  * Pedro Gonzalez (pedro.gonzalez@pesol.es)
 
 Maintainers
 ~~~~~~~~~~~
