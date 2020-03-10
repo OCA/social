@@ -9,17 +9,17 @@ class MassMailingLoadFilter(models.TransientModel):
     _description = "Mail Mass Mailing Load Filter"
 
     filter_id = fields.Many2one(
-        comodel_name='ir.filters',
+        comodel_name="ir.filters",
         string="Filter to load",
         required=True,
         domain="[('model_id', '=', 'res.partner'), '|', "
-               "('user_id', '=', uid), ('user_id','=',False)]",
-        ondelete='cascade',
+        "('user_id', '=', uid), ('user_id','=',False)]",
+        ondelete="cascade",
     )
 
     def load_filter(self):
         self.ensure_one()
-        mass_list = self.env['mail.mass_mailing.list'].browse(
-            self.env.context['active_id']
+        mass_list = self.env["mail.mass_mailing.list"].browse(
+            self.env.context["active_id"]
         )
         mass_list.sync_domain = self.filter_id.domain
