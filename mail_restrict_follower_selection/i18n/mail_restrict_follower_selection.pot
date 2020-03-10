@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_restrict_follower_selection
+# 	* mail_restrict_follower_selection
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,4 +32,3 @@ msgstr ""
 #: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
 msgid "Invite wizard"
 msgstr ""
-
