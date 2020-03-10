@@ -49,7 +49,6 @@ class MailComposeMessage(models.TransientModel):
         string="Object Attachments",
     )
 
-    @api.multi
     def get_mail_values(self, res_ids):
         res = super(MailComposeMessage, self).get_mail_values(res_ids)
         if self.object_attachment_ids.ids and self.model and len(res_ids) == 1:

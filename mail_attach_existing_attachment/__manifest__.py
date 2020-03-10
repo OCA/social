@@ -4,6 +4,7 @@
 #     an Odoo module.
 #
 #     Copyright (c) 2015 ACSONE SA/NV (<http://acsone.eu>)
+#     Copyright (c) 2020 Tecnativa - Manuel Calero
 #
 #     mail_attach_existing_attachment is free software:
 #     you can redistribute it and/or modify it under the terms of the GNU
@@ -27,9 +28,9 @@
     "author": "ACSONE SA/NV, " "Tecnativa, " "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social Network",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "license": "AGPL-3",
-    "depends": ["mail", "document"],
+    "depends": ["mail"],
     "data": ["wizard/mail_compose_message_view.xml"],
     "installable": True,
 }

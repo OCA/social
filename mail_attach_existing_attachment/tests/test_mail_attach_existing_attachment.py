@@ -42,7 +42,6 @@ class TestAttachExistingAttachment(common.TransactionCase):
         attach1 = self.env["ir.attachment"].create(
             {
                 "name": "Attach1",
-                "datas_fname": "Attach1",
                 "datas": "bWlncmF0aW9uIHRlc3Q=",
                 "res_model": "res.partner",
                 "res_id": self.partner_01.id,
