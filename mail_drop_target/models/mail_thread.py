@@ -103,3 +103,27 @@ class MailThread(models.AbstractModel):
             strip_attachments=strip_attachments,
             thread_id=thread_id,
         )
+
+    def _notify_record_by_email(
+        self,
+        record,
+        recipients_data,
+        msg_vals,
+        force_send=False,
+        send_after_commit=True,
+        model_description=False,
+        mail_auto_delete=True,
+        check_existing=False,
+    ):
+        if self.env.context.get("message_create_from_mail_mail", False):
+            return
+        return super()._notify_record_by_email(
+            record,
+            recipients_data,
+            msg_vals,
+            force_send=force_send,
+            send_after_commit=send_after_commit,
+            model_description=model_description,
+            mail_auto_delete=mail_auto_delete,
+            check_existing=check_existing,
+        )
