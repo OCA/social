@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="email_template_form" model="ir.ui.view">
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='report_template']/parent::group" position="after">
+                <group string="Conditional Attachments">
+                    <field name="conditional_attachment_ids" context="{'default_mail_template_id': id}">
+                        <tree>
+                            <field name="mail_template_id" invisible="1"/>
+                            <field name="model_name" invisible="1"/>
+                            <field name="name"/>
+                            <field name="filter_domain"/>
+                            <field name="attachment_ids"/>
+                        </tree>
+                        <form>
+                            <sheet>
+                                <div class="oe_title">
+                                    <label for="name" class="oe_edit_only"/>
+                                    <h1><field name="name" required="1"/></h1>
+                                </div>
+                                <group name="conditions">
+                                    <field name="mail_template_id" invisible="1"/>
+                                    <field name="model_name" invisible="1"/>
+                                    <field name="filter_domain" widget="domain" options="{'model': 'model_name', 'in_dialog': True}"/>
+                                </group>
+                                <field name="attachment_ids" widget="many2many_binary"/>
+                            </sheet>
+                        </form>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
