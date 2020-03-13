@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_debrand
+# 	* mail_debrand
 #
 msgid ""
 msgstr ""
@@ -22,13 +22,13 @@ msgid "Email Templates"
 msgstr "Mail skabelon"
 
 #. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:25
+#: code:addons/mail_debrand/models/mail_template.py:29
 #, python-format
 msgid "Odoo"
 msgstr ""
 
 #. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:24
+#: code:addons/mail_debrand/models/mail_template.py:28
 #, python-format
 msgid "using"
 msgstr "vha"

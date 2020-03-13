@@ -24,13 +24,13 @@ msgid "Email Templates"
 msgstr "E-Mail Vorlagen"
 
 #. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:25
+#: code:addons/mail_debrand/models/mail_template.py:29
 #, python-format
 msgid "Odoo"
 msgstr ""
 
 #. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:24
+#: code:addons/mail_debrand/models/mail_template.py:28
 #, python-format
 msgid "using"
 msgstr ""
