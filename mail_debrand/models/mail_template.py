@@ -21,7 +21,11 @@ class MailTemplate(models.Model):
 
     @api.model
     def _debrand_body(self, body):
-        using_word = _('using')
+        """Depending of the context the term could come translated or in
+           the original term. We should consider both. Also notice that if
+           the translated term in this module differs from the one in the
+           template it won't be catched."""
+        using_word = "(using|{})".format(_('using'))
         odoo_word = _('Odoo')
         return re.sub(
             using_word + "(.*)[\r\n]*(.*)>" + odoo_word + r"</a>", "", body,
