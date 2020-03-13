@@ -27,7 +27,7 @@ msgstr "Imate lahko le en seznam z istim imenom."
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:21
 #, fuzzy, python-format
-msgid "Cannot have the same email more than once in the same list"
+msgid "Cannot have the same email (%s) morethan once in the same list."
 msgstr "Isti e-poštni naslov imate lahko le enkrat v istem seznamu."
 
 #. module: mass_mailing_unique
