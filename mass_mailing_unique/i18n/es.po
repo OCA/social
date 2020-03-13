@@ -26,7 +26,7 @@ msgstr "No se puede tener más de una lista con el mismo nombre."
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:21
 #, fuzzy, python-format
-msgid "Cannot have the same email more than once in the same list"
+msgid "Cannot have the same email (%s) morethan once in the same list."
 msgstr "No se puede tener el mismo email varias veces en la misma lista."
 
 #. module: mass_mailing_unique

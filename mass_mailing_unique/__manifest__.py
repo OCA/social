@@ -6,7 +6,7 @@
 {
     "name": "Unique records for mass mailing",
     "summary": "Avoids duplicate mailing lists and contacts",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "category": "Marketing",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
