@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo13-addon-mail_activity_team',
         'odoo13-addon-mail_inline_css',
         'odoo13-addon-mail_optional_autofollow',
+        'odoo13-addon-mail_restrict_follower_selection',
         'odoo13-addon-mail_tracking',
         'odoo13-addon-mass_mailing_partner',
         'odoo13-addon-mass_mailing_resend',
