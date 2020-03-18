@@ -3,6 +3,7 @@
 # Copyright 2015 Javier Iniesta <javieria@antiun.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # Copyright 2020 Tecnativa - Manuel Calero
+# Copyright 2020 Hibou Corp.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import _, api, fields, models
@@ -51,8 +52,8 @@ class MailingContact(models.Model):
         record._onchange_partner_mass_mailing_partner()
         new_vals = record._convert_to_write(record._cache)
         new_vals.update(
-            subscription_list_ids=vals.get("subscription_list_ids", False),
-            list_ids=vals.get("list_ids", False),
+            subscription_list_ids=vals.get("subscription_list_ids", []),
+            list_ids=vals.get("list_ids", []),
         )
         return super(MailingContact, self).create(new_vals)
 
@@ -65,8 +66,8 @@ class MailingContact(models.Model):
             record._onchange_partner_mass_mailing_partner()
             new_vals = record._convert_to_write(record._cache)
             new_vals.update(
-                subscription_list_ids=vals.get("subscription_list_ids", False),
-                list_ids=vals.get("list_ids", False),
+                subscription_list_ids=vals.get("subscription_list_ids", []),
+                list_ids=vals.get("list_ids", []),
             )
             super(MailingContact, contact).write(new_vals)
         return True
