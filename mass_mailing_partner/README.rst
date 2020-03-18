@@ -88,6 +88,8 @@ Contributors
     * Victor M.M. Torres
     * Manuel Calero
 
+* `Hibou Corp. <https://hibou.io>`_
+
 Maintainers
 ~~~~~~~~~~~
 

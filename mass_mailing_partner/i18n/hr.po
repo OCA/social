@@ -103,7 +103,6 @@ msgstr "Mailing lista"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_trace
 #, fuzzy
-#| msgid "Email Statistics"
 msgid "Mailing Statistics"
 msgstr "Statistika e-maila"
 
