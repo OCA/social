@@ -23,7 +23,7 @@ Link partners with mass-mailing
     :target: https://runbot.odoo-community.org/runbot/205/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module links mass-mailing contacts with partners.
 
@@ -87,6 +87,8 @@ Contributors
     * Ernesto Tejeda
     * Victor M.M. Torres
     * Manuel Calero
+
+* `Hibou Corp. <https://hibou.io>`_
 
 Maintainers
 ~~~~~~~~~~~
