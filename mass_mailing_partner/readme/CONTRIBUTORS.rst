@@ -9,3 +9,5 @@
     * Ernesto Tejeda
     * Victor M.M. Torres
     * Manuel Calero
+
+* `Hibou Corp. <https://hibou.io>`_
