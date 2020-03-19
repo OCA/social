@@ -10,6 +10,11 @@
             <i class="fa fa-cc"></i>
         </span>
     </t>
+    <t t-elif="!tracking['isCc'] &amp;&amp; !tracking['partner_id']">
+        <span class="mail_anon_recipient">
+            <i class="fa fa-low-vision"></i>
+        </span>
+    </t>
     <t t-elif="tracking['status'] === 'unknown'">
         <span class="mail_tracking_unknown">
             <i class="fa fa-ban"></i>
