@@ -76,6 +76,9 @@ These are all available status icons:
 .. |noemail| image:: https://raw.githubusercontent.com/OCA/social/13.0/mail_tracking/static/src/img/no_email.png
    :width: 10px
 
+.. |anonuser| image:: https://raw.githubusercontent.com/OCA/social/13.0/mail_tracking/static/src/img/anon_user.png
+   :width: 10px
+
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
 
 |waiting|    **Waiting**: Waiting to be sent
@@ -91,6 +94,8 @@ These are all available status icons:
 |cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
 
 |noemail|  **No Email**: The partner doesn't have a defined email
+
+|anonuser|  **No Partner**: The recipient doesn't have a defined partner
 
 
 If you want to see all tracking emails and events you can go to
