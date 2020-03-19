@@ -9,3 +9,4 @@ from . import mail_tracking_event
 from . import res_partner
 from . import mail_thread
 from . import mail_resend_message
+from . import mail_alias
