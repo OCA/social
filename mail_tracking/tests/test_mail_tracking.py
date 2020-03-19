@@ -9,7 +9,7 @@ import psycopg2
 import psycopg2.errorcodes
 from lxml import etree
 
-from odoo import _, http
+from odoo import http
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -179,8 +179,9 @@ class TestMailTracking(TransactionCase):
                 "login": "sender-test",
             }
         )
+        # pylint: disable=C8107
         message = self.recipient.with_user(sender_user).message_post(
-            body=_("<p>This is a test message</p>"),
+            body="<p>This is a test message</p>",
             cc="unnamed@test.com, sender@example.com",
         )
         # suggested recipients
