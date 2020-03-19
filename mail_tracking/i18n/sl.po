@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-22 00:51+0000\n"
-"PO-Revision-Date: 2017-07-22 00:51+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2020-03-19 10:13+0000\n"
+"Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
@@ -42,18 +43,37 @@ msgid ""
 " * The 'Soft bounced' status indicates that message was soft bounced by "
 "recipient Mail Exchange (MX) server.\n"
 msgstr ""
+" * Status 'Napaka' pomeni, da je prišlo do napake pri pošiljanju, npr. \"Ni "
+"veljavnega prejemnika\"\n"
+" * Status 'Poslano' pomeni, da je bilo sporočilo uspešno poslano preko "
+"izhodnega e-poštnega strežnika (SMTP).\n"
+" * Status 'Dostavljeno' pomeni, da je bilo sporočilo uspešno dostavljeno "
+"prejemnikovemu Mail Exchange (MX) strežniku.\n"
+" * Status 'Odprto' pomeni, da je prejemnik sporočilo odprl ali kliknil nanj."
+"\n"
+" * Status 'Zavrnjeno' pomeni, da je prejemnikov e-poštni naslov na črni "
+"listi izhodnega e-poštnega strežnika (SMTP). Priporočeno je, da ta naslov "
+"izbrišete.\n"
+" * Status 'Neželena pošta' pomeni, da izhodni strežnik (SMTP) to sporočilo "
+"obravnava kot neželeno pošto.\n"
+" * Status 'Odjavljeno' pomeni, da je prejemnik zahteval odjavo od prejemanja "
+"tega sporočila.\n"
+" * Status 'Odbito' pomeni, da je bilo sporočilo odbito na prejemnikovem Mail "
+"Exchange (MX) strežniku.\n"
+" * Status 'Mehko odbito' pomeni, da je bilo sporočilo mehko-odbito na "
+"prejemnikovem Mail Exchange (MX) strežniku.\n"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_message.py:189
 #, python-format
 msgid "-Unknown Author-"
-msgstr ""
+msgstr "-Neznani avtor-"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_cc
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
 msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
-msgstr ""
+msgstr "Dodatni prejemniki, ki prejmejo \"karbon kopijo\" (kk) sporočila"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -82,7 +102,7 @@ msgstr "Odbito"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
 msgid "Cc"
-msgstr ""
+msgstr "Kk"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -104,19 +124,19 @@ msgstr "Kliknjena URL"
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:22
 #, python-format
 msgid "Congratulations, you don't have any failed messages"
-msgstr ""
+msgstr "Čestitamo, ni neuspešnih sporočil"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:232
 #, python-format
 msgid "Congratulations, your failed mailbox is empty"
-msgstr ""
+msgstr "Čestitamo, vaš predal neuspešnih sporočil je prazen"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Stik"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
@@ -170,12 +190,12 @@ msgstr "Dostavljeno"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__display_name
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__display_name
 msgid "Display Name"
-msgstr "Prikazni naziv"
+msgstr "Prikazani naziv"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__display_name
 msgid "Display name"
-msgstr "Prikazni naziv"
+msgstr "Prikazani naziv"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
@@ -187,22 +207,19 @@ msgstr "E-pošta"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__email_bounced
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_bounced
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_bounced
-#, fuzzy
 msgid "Email Bounced"
 msgstr "E-pošta odbita"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_score
-#, fuzzy
 msgid "Email Score"
 msgstr "Točkovanje e-pošte"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_thread
-#, fuzzy
 msgid "Email Thread"
-msgstr "Točkovanje e-pošte"
+msgstr "E-poštna nit"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
@@ -211,9 +228,8 @@ msgstr "E-pošta odbita"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_resend_message
-#, fuzzy
 msgid "Email resend wizard"
-msgstr "Točkovanje e-pošte"
+msgstr "Čarovnik za ponovno pošiljanje"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_message.py:73
@@ -269,38 +285,35 @@ msgstr "Neuspelo"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
-#, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
-msgstr "Sporočilo"
+msgstr "Neuspela sporočila"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:39
-#, fuzzy, python-format
-#| msgid "Recipient"
+#, python-format
 msgid "Failed Recipients:"
-msgstr "Prejemnik"
+msgstr "Neuspeli prejemniki:"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:7
 #, python-format
 msgid "Failed messages"
-msgstr ""
+msgstr "Neuspela sporočila"
 
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:23
 #, python-format
 msgid "Failed messages appear here."
-msgstr ""
+msgstr "Tu so prikazana neuspela sporočila."
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_thread.py:92
 #, python-format
 msgid "Failed sent messages"
-msgstr ""
+msgstr "Neuspešno poslana sporočila"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -323,14 +336,14 @@ msgstr "ID"
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__is_failed_message
 msgid "Is Failed Message"
-msgstr ""
+msgstr "Je neuspelo sporočilo"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__mobile
@@ -358,33 +371,27 @@ msgstr "Zadnjič posodobljeno"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_ir_mail_server
-#, fuzzy
 msgid "Mail Server"
-msgstr "Točkovanje e-pošte"
+msgstr "E-poštni strežnik"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_needs_action
-#, fuzzy
-#| msgid "MailTracking event"
 msgid "Mail Tracking Needs Action"
-msgstr "Dogodek sledenja e-pošte"
+msgstr "Potreba po ukrepu na sledljivosti pošte"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
-#, fuzzy
-#| msgid "MailTracking emails"
 msgid "Mail Trackings"
-msgstr "Sporočila sledenja"
+msgstr "Sledljivost sporočil"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_bounced_mixin
-#, fuzzy
 msgid "Mail bounced mixin"
-msgstr "E-pošta odbita"
+msgstr "mixin odbite pošte"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_email
@@ -425,7 +432,7 @@ msgstr "Dogodki sledenja e-pošte"
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:30
 #, python-format
 msgid "Mark all as reviewed"
-msgstr ""
+msgstr "Označi vse za pregledano"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -453,7 +460,7 @@ msgstr "Mesec"
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "OS"
-msgstr ""
+msgstr "OS"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -466,7 +473,7 @@ msgstr "Odprto"
 #: selection:mail.tracking.email,state:0
 #, python-format
 msgid "Opened"
-msgstr ""
+msgstr "Odprto"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__os_family
@@ -514,7 +521,7 @@ msgstr "Zavrnjeno"
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:35
 #, python-format
 msgid "Retry"
-msgstr ""
+msgstr "Ponovno poskusi"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__smtp_server
@@ -524,7 +531,7 @@ msgstr "SMTP strežnik"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__token
 msgid "Security Token"
-msgstr ""
+msgstr "Varnostni žeton"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -552,7 +559,7 @@ msgstr "Poslano"
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:30
 #, python-format
 msgid "Set all as reviewed"
-msgstr ""
+msgstr "Označi vse za pregledano"
 
 #. module: mail_tracking
 #. openerp-web
@@ -560,7 +567,7 @@ msgstr ""
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:32
 #, python-format
 msgid "Set as Reviewed"
-msgstr ""
+msgstr "Označi kot pregledano"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -588,7 +595,7 @@ msgstr "Stanje"
 #: code:addons/mail_tracking/models/mail_message.py:76
 #, python-format
 msgid "Status: %s"
-msgstr ""
+msgstr "Status: %s"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__name
@@ -602,12 +609,13 @@ msgstr "Zadeva"
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__mail_tracking_needs_action
 msgid "The message tracking will be considered to filter tracking issues"
 msgstr ""
+"Sledljivost sporočil bo upoštevana za filtriranje problematike sledljivosti"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_message.py:82
 #, python-format
 msgid "The partner doesn't have a defined email"
-msgstr ""
+msgstr "Partner nima določenega email naslova"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__time
@@ -622,14 +630,13 @@ msgstr "Čas"
 #: code:addons/mail_tracking/static/src/xml/mail_tracking.xml:54
 #, python-format
 msgid "To:"
-msgstr ""
+msgstr "Za:"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__tracking_emails_count
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__tracking_emails_count
-#, fuzzy
 msgid "Tracking Emails Count"
-msgstr "Števec sledenja e-pošte"
+msgstr "Število sledljive pošte"
 
 #. module: mail_tracking
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
@@ -649,7 +656,7 @@ msgstr "Sledilni dogodki"
 #: code:addons/mail_tracking/static/src/js/mail_tracking.js:127
 #, python-format
 msgid "Tracking partner"
-msgstr ""
+msgstr "Sledljivi partner"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -671,7 +678,7 @@ msgstr "UTC časovni žig"
 #: code:addons/mail_tracking/models/mail_message.py:75
 #, python-format
 msgid "Unknown"
-msgstr ""
+msgstr "Neznano"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -718,4 +725,4 @@ msgstr "Država uporabnika"
 #: code:addons/mail_tracking/models/mail_message.py:73
 #, python-format
 msgid "Waiting"
-msgstr ""
+msgstr "Čakanje"
