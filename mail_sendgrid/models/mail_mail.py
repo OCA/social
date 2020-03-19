@@ -92,15 +92,15 @@ class MailMail(models.Model):
             try:
                 message = email._prepare_sendgrid_data().get()
                 response = sg.send(message)
-            except Exception as e:
-                _logger.error(e.message or "mail not sent.", exc_info=True)
+            except:
+                _logger.error("mail not sent.", exc_info=True)
                 continue
 
             status = response.status_code
             msg = response.body
 
             if status == STATUS_OK:
-                _logger.info("e-mail sent. " + str(msg))
+                _logger.info("e-mail sent. ")
                 email._track_sendgrid_emails()
                 email.write({
                     'sent_date': fields.Datetime.now(),
@@ -188,9 +188,11 @@ class MailMail(models.Model):
                 substitutions_dict.update({'body': html})
                 s_mail.dynamic_template_data = substitutions_dict
             else:
+                substitutions = []
                 for substitution in self.substitution_ids:
-                    s_mail.substitution = Substitution(
-                        '{' + substitution.key + '}', substitution.value)
+                    substitutions.append(Substitution(
+                        substitution.key, substitution.value))
+                s_mail.substitution = substitutions
 
         for attachment in self.attachment_ids:
             # Datas are not encoded properly for sendgrid
