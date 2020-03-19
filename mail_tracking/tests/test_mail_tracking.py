@@ -168,6 +168,7 @@ class TestMailTracking(TransactionCase):
             'partner_id': self.sender.id,
             'login': 'sender-test',
         })
+        # pylint: disable=C8107
         message = self.recipient.sudo(user=sender_user).message_post(
             body='<p>This is a test message</p>',
             cc='unnamed@test.com, sender@example.com'
