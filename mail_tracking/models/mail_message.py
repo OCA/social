@@ -2,6 +2,8 @@
 # Copyright 2019 Alexandre Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from email.utils import getaddresses
+
 from odoo import _, api, fields, models
 from odoo.tools import email_split
 
@@ -13,6 +15,7 @@ class MailMessage(models.Model):
     email_cc = fields.Char(
         "Cc", help="Additional recipients that receive a " '"Carbon Copy" of the e-mail'
     )
+    email_to = fields.Char("To", help="Raw TO recipients")
     mail_tracking_ids = fields.One2many(
         comodel_name="mail.tracking.email",
         inverse_name="mail_message_id",
@@ -105,11 +108,16 @@ class MailMessage(models.Model):
                 .sudo()
                 .search([("mail_message_id", "=", message.id)])
             )
-            # Get Cc recipients
-            email_cc_list = email_split(message.email_cc)
-            if any(email_cc_list):
-                partners |= partners.search([("email", "in", email_cc_list)])
+            # String to List
+            email_cc_list = self._drop_aliases(email_split(message.email_cc))
+            email_to_list = self._drop_aliases(email_split(message.email_to))
+            # Search related partners recipients
+            partners |= partners.search(
+                [("email", "in", email_cc_list + email_to_list)]
+            )
+            # Operate over set's instead of lists
             email_cc_list = set(email_cc_list)
+            email_to_list = set(email_to_list) - email_cc_list
             # Search all trackings for this message
             for tracking in trackings:
                 status = self._partner_tracking_status_get(tracking)
@@ -127,44 +135,65 @@ class MailMessage(models.Model):
                     }
                 )
                 if tracking.partner_id:
+                    # Discard mails with tracking
                     email_cc_list.discard(tracking.partner_id.email)
+                    email_to_list.discard(tracking.partner_id.email)
                     partners_already |= tracking.partner_id
-            # Search all recipients for this message
+            # Search all partner recipients for this message
             if message.partner_ids:
                 partners |= message.partner_ids
             if message.notified_partner_ids:
                 partners |= message.notified_partner_ids
-            # Remove recipients already included
+            # Discard partner recipients already included
             partners -= partners_already
-            tracking_unkown_values = {
+            # Default tracking values
+            tracking_unknown_values = {
                 "status": "unknown",
                 "status_human": self._partner_tracking_status_human_get("unknown"),
                 "error_type": False,
                 "error_description": False,
                 "tracking_id": False,
             }
+            # Process tracking status of partner recipients without tracking
             for partner in partners:
+                # Discard 'To' with partner
+                if partner.email in email_to_list:
+                    email_to_list.discard(partner.email)
                 # If there is partners not included, then status is 'unknown'
                 # and perhaps a Cc recipient
                 isCc = False
                 if partner.email in email_cc_list:
                     email_cc_list.discard(partner.email)
                     isCc = True
-                tracking_unkown_values.update(
+                tracking_status = tracking_unknown_values.copy()
+                tracking_status.update(
                     {"recipient": partner.name, "partner_id": partner.id, "isCc": isCc}
                 )
-                partner_trackings.append(tracking_unkown_values.copy())
-            for email in email_cc_list:
-                # If there is Cc without partner
-                tracking_unkown_values.update(
-                    {"recipient": email, "partner_id": False, "isCc": True}
-                )
-                partner_trackings.append(tracking_unkown_values.copy())
+                partner_trackings.append(tracking_status)
+            # Process Cc/To recipients without partner
+            for cc, lst in [(True, email_cc_list), (False, email_to_list)]:
+                for email in lst:
+                    tracking_status = tracking_unknown_values.copy()
+                    tracking_status.update(
+                        {"recipient": email, "partner_id": False, "isCc": cc}
+                    )
+                    partner_trackings.append(tracking_status)
             res[message.id] = {
                 "partner_trackings": partner_trackings,
                 "is_failed_message": message.is_failed_message,
             }
         return res
+
+    @api.model
+    def _drop_aliases(self, mail_list):
+        aliases = self.env["mail.alias"].get_aliases()
+
+        def _filter_alias(email):
+            email_wn = getaddresses([email])[0][1]
+            if email_wn not in aliases:
+                return email_wn
+
+        return list(filter(_filter_alias, mail_list))
 
     @api.model
     def _message_read_dict_postprocess(self, messages, message_tree):
