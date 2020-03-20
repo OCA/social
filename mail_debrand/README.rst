@@ -20,7 +20,7 @@ Mail Debrand
     :target: https://runbot.odoo-community.org/runbot/205/12.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| 
+|badge1| |badge2| |badge3| |badge4|
 
 This module modifies the functionality of emails to remove the Odoo branding,
 specifically the 'using Odoo' of notifications or the 'Powered by Odoo'
@@ -92,7 +92,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-pedrobaeza| 
+|maintainer-pedrobaeza|
 
 This module is part of the `OCA/social <https://github.com/OCA/social/tree/12.0/mail_debrand>`_ project on GitHub.
 
