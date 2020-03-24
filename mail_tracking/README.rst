@@ -52,31 +52,31 @@ status icon will appear just right to name of notified partner.
 
 These are all available status icons:
 
-.. |sent| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/sent.png
+.. |sent| image:: ../static/src/img/sent.png
    :width: 10px
 
-.. |delivered| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/delivered.png
+.. |delivered| image:: ../static/src/img/delivered.png
    :width: 15px
 
-.. |opened| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/opened.png
+.. |opened| image:: ../static/src/img/opened.png
    :width: 15px
 
-.. |error| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/error.png
+.. |error| image:: ../static/src/img/error.png
    :width: 10px
 
-.. |waiting| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/waiting.png
+.. |waiting| image:: ../static/src/img/waiting.png
    :width: 10px
 
-.. |unknown| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/unknown.png
+.. |unknown| image:: ../static/src/img/unknown.png
    :width: 10px
 
-.. |cc| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/cc.png
+.. |cc| image:: ../static/src/img/cc.png
    :width: 10px
 
-.. |noemail| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/no_email.png
+.. |noemail| image:: ../static/src/img/no_email.png
    :width: 10px
 
-.. |anonuser| image:: https://raw.githubusercontent.com/OCA/social/12.0/mail_tracking/static/src/img/anon_user.png
+.. |anonuser| image:: ../static/src/img/anon_user.png
    :width: 10px
 
 |unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
