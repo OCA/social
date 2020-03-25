@@ -62,18 +62,18 @@ class MailThread(models.AbstractModel):
         email_extra_formated_list = set(email_extra_formated_list)
         email_extra_list = [
             x[1] for x in getaddresses(email_extra_formated_list)]
-        partners_info = record.message_partner_info_from_emails(
+        partners_info = self.message_partner_info_from_emails(
             email_extra_list)
         for pinfo in partners_info:
             partner_id = pinfo['partner_id']
             email = pinfo['full_name']
             if not partner_id:
                 if email not in aliases:
-                    record._message_add_suggested_recipient(
+                    self._message_add_suggested_recipient(
                         suggestions, email=email, reason=reason)
             else:
                 partner = ResPartnerObj.browse(partner_id, self._prefetch)
-                record._message_add_suggested_recipient(
+                self._message_add_suggested_recipient(
                     suggestions, partner=partner, reason=reason)
 
     @api.model
