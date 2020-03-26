@@ -7,7 +7,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "13.0.1.0.2",
+    "version": "13.0.1.0.3",
     "category": "Social Network",
     "website": "http://github.com/OCA/social",
     "author": ("Tecnativa, " "Odoo Community Association (OCA)"),
