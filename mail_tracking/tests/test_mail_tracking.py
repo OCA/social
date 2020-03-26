@@ -152,7 +152,7 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(tracking_email.error_type, "no_recipient")
         self.assertFalse(self.recipient.email_bounced)
 
-    def _check_partner_trackings(self, message):
+    def _check_partner_trackings_cc(self, message):
         message_dict = message.message_format()[0]
         self.assertEqual(len(message_dict["partner_trackings"]), 3)
         # mail cc
@@ -182,13 +182,13 @@ class TestMailTracking(TransactionCase):
         # pylint: disable=C8107
         message = self.recipient.with_user(sender_user).message_post(
             body="<p>This is a test message</p>",
-            cc="unnamed@test.com, sender@example.com",
+            cc="Dominique Pinon <unnamed@test.com>, sender@example.com",
         )
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
         suggested_mails = {email[1] for email in recipients[self.recipient.id]}
-        self.assertTrue("unnamed@test.com" in suggested_mails)
-        self.assertEqual(len(recipients[self.recipient.id][0]), 3)
+        self.assertIn("unnamed@test.com", suggested_mails)
+        self.assertEqual(len(recipients[self.recipient.id]), 3)
         # Repeated Cc recipients
         message = self.env["mail.message"].create(
             {
@@ -199,15 +199,80 @@ class TestMailTracking(TransactionCase):
                 "model": "res.partner",
                 "res_id": self.recipient.id,
                 "partner_ids": [(4, self.recipient.id)],
-                "email_cc": "unnamed@test.com, sender@example.com"
+                "email_cc": "Dominique Pinon <unnamed@test.com>, sender@example.com"
                 ", recipient@example.com",
                 "body": "<p>This is another test message</p>",
             }
         )
         message._moderate_accept()
         recipients = self.recipient._message_get_suggested_recipients()
-        self.assertEqual(len(recipients[self.recipient.id][0]), 3)
-        self._check_partner_trackings(message)
+        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        self._check_partner_trackings_cc(message)
+
+    def _check_partner_trackings_to(self, message):
+        message_dict = message.message_format()[0]
+        self.assertEqual(len(message_dict["partner_trackings"]), 3)
+        # mail cc
+        foundPartner = False
+        foundNoPartner = False
+        for tracking in message_dict["partner_trackings"]:
+            if tracking["partner_id"] == self.sender.id:
+                foundPartner = True
+            elif tracking["recipient"] == "support+unnamed@test.com":
+                foundNoPartner = True
+                self.assertFalse(tracking["partner_id"])
+        self.assertTrue(foundPartner)
+        self.assertTrue(foundNoPartner)
+
+    def test_email_to(self):
+        sender_user = self.env["res.users"].create(
+            {
+                "name": "Sender User Test",
+                "partner_id": self.sender.id,
+                "login": "sender-test",
+            }
+        )
+        # pylint: disable=C8107
+        message = self.recipient.with_user(sender_user).message_post(
+            body="<p>This is a test message</p>",
+            to="Dominique Pinon <support+unnamed@test.com>, sender@example.com",
+        )
+        # suggested recipients
+        recipients = self.recipient._message_get_suggested_recipients()
+        suggested_mails = {email[1] for email in recipients[self.recipient.id]}
+        self.assertIn("support+unnamed@test.com", suggested_mails)
+        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        # Repeated To recipients
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": self.recipient.id,
+                "partner_ids": [(4, self.recipient.id)],
+                "email_to": "Dominique Pinon <support+unnamed@test.com>"
+                ", sender@example.com, recipient@example.com",
+                "body": "<p>This is another test message</p>",
+            }
+        )
+        message._moderate_accept()
+        recipients = self.recipient._message_get_suggested_recipients()
+        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        self._check_partner_trackings_to(message)
+        # Catchall + Alias
+        self.env["ir.config_parameter"].set_param("mail.catchall.domain", "test.com")
+        self.env["mail.alias"].create(
+            {
+                "alias_model_id": self.env["ir.model"]._get("res.partner").id,
+                "alias_name": "support+unnamed",
+            }
+        )
+        recipients = self.recipient._message_get_suggested_recipients()
+        self.assertEqual(len(recipients[self.recipient.id]), 2)
+        suggested_mails = {email[1] for email in recipients[self.recipient.id]}
+        self.assertNotIn("support+unnamed@test.com", suggested_mails)
 
     def test_failed_message(self):
         MailMessageObj = self.env["mail.message"]
