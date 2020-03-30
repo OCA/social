@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-22 00:51+0000\n"
-"PO-Revision-Date: 2020-03-19 10:13+0000\n"
+"PO-Revision-Date: 2020-03-30 22:13+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@matmoz.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: mail_tracking
@@ -79,7 +79,7 @@ msgstr "Dodatni prejemniki, ki prejmejo \"karbon kopijo\" (kk) sporočila"
 #: code:addons/mail_tracking/models/mail_thread.py:50
 #, python-format
 msgid "Anon. To"
-msgstr ""
+msgstr "Anon. za"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -211,7 +211,7 @@ msgstr "E-pošta"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_alias
 msgid "Email Aliases"
-msgstr ""
+msgstr "Email aliasi"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__email_bounced
@@ -503,10 +503,8 @@ msgstr "Partner"
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_to
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
-#, fuzzy
-#| msgid "Recipient"
 msgid "Raw TO recipients"
-msgstr "Prejemnik"
+msgstr "Surovo za prejemnike"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient
@@ -646,10 +644,8 @@ msgstr "Čas"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_to
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
-#, fuzzy
-#| msgid "To:"
 msgid "To"
-msgstr "Za:"
+msgstr "Za"
 
 #. module: mail_tracking
 #. openerp-web
