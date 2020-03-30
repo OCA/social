@@ -81,18 +81,14 @@ class MailTrackingController(MailController):
         with db_env(db) as env:
             try:
                 tracking_email = env["mail.tracking.email"].search(
-                    [
-                        ("id", "=", tracking_email_id),
-                        ("state", "in", ["sent", "delivered"]),
-                        ("token", "=", token),
-                    ]
+                    [("id", "=", tracking_email_id), ("token", "=", token)]
                 )
-                if tracking_email:
-                    tracking_email.event_create("open", metadata)
-                else:
+                if not tracking_email:
                     _logger.warning(
                         "MailTracking email '%s' not found", tracking_email_id
                     )
+                elif tracking_email.state in ("sent", "delivered"):
+                    tracking_email.event_create("open", metadata)
             except Exception:
                 pass
 
