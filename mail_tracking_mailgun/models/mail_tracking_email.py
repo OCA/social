@@ -232,7 +232,6 @@ class MailTrackingEmail(models.Model):
                 _logger.info("Mailgun: event process '%s'", res)
         return res
 
-    @api.multi
     def action_manual_check_mailgun(self):
         """
         Manual check against Mailgun API

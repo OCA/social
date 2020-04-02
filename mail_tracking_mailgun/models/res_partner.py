@@ -13,7 +13,6 @@ from odoo.exceptions import UserError
 class ResPartner(models.Model):
     _inherit = "res.partner"
 
-    @api.multi
     def email_bounced_set(self, tracking_emails, reason, event=None):
         res = super(ResPartner, self).email_bounced_set(
             tracking_emails, reason, event=event
@@ -21,7 +20,6 @@ class ResPartner(models.Model):
         self._email_bounced_set(reason, event)
         return res
 
-    @api.multi
     def _email_bounced_set(self, reason, event):
         for partner in self:
             if not partner.email:
@@ -41,7 +39,6 @@ class ResPartner(models.Model):
             )
             partner.message_post(body=body)
 
-    @api.multi
     def check_email_validity(self):
         """
         Checks mailbox validity with Mailgun's API
@@ -126,7 +123,6 @@ class ResPartner(models.Model):
                         % (partner.email)
                     )
 
-    @api.multi
     def check_email_bounced(self):
         """
         Checks if the partner's email is in Mailgun's bounces list
@@ -146,7 +142,6 @@ class ResPartner(models.Model):
             elif res.status_code == 404 and partner.email_bounced:
                 partner.email_bounced = False
 
-    @api.multi
     def force_set_bounced(self):
         """
         Forces partner's email into Mailgun's bounces list
@@ -164,7 +159,6 @@ class ResPartner(models.Model):
             )
             partner.email_bounced = res.status_code == 200 and not partner.email_bounced
 
-    @api.multi
     def force_unset_bounced(self):
         """
         Forces partner's email deletion from Mailgun's bounces list
