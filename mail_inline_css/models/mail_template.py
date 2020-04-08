@@ -17,20 +17,14 @@ except (ImportError, IOError) as err:  # pragma: no cover
 class MailTemplate(models.Model):
     _inherit = "mail.template"
 
-    def generate_email(self, res_ids, fields=None):
-        """Use `premailer` to convert styles to inline styles."""
-        result = super().generate_email(res_ids, fields=fields)
-        if isinstance(res_ids, int):
-            result["body_html"] = self._premailer_apply_transform(result["body_html"])
-        else:
-            for __, data in result.items():
-                data["body_html"] = self._premailer_apply_transform(data["body_html"])
-        return result
+    def render_post_process(self, html):
+        html = super().render_post_process(html)
+        return self._premailer_apply_transform(html)
 
-    def _premailer_apply_transform(self, data_html):
-        if not data_html:
-            return data_html
-        premailer = Premailer(html=data_html, **self._get_premailer_options())
+    def _premailer_apply_transform(self, html):
+        if not html.strip():
+            return html
+        premailer = Premailer(html=html, **self._get_premailer_options())
         return premailer.transform()
 
     def _get_premailer_options(self):
