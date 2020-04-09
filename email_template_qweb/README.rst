@@ -9,7 +9,7 @@ QWeb for email templates
 This module was written to allow you to write email templates in QWeb instead
 of jinja2. The advantage here is that with QWeb, you can make use of
 inheritance and the ``call`` statement, which allows you to reuse designs and
-snippets in multiple templates, making your development process simpler. 
+snippets in multiple templates, making your development process simpler.
 Furthermore, QWeb views are easier to edit with the integrated ACE editor.
 
 Usage
@@ -19,7 +19,24 @@ To use this module, you need to:
 
 #. Select `QWeb` in the field `Body templating engine`
 #. Select a QWeb view to be used to render the body field
-#. Apart from QWeb's standard variables, you also have access to ``object`` and ``email_template``, which are browse records of the current object and the email template in use, respectively.
+
+
+**Variables**
+
+Apart from QWeb's standard variables, you also have access to:
+
+* ``object`` browse record of the current object
+* ``email_template`` browse record of email template in use
+* ``record`` depending on where the message is sent,
+  ``object`` can be either the real record or the mail message used to send the email.
+  In standard J2 templates this variable is available only for messages and only in the ctx.
+  This variable tries to solve this issue and provides always the same variable.
+* ``record_name`` always provide the display name of current record
+* In addition to these, you'll find all the variables available for J2 templates:
+  ``format_date``, ``format_tz``, ``format_amount``, ``user``, ``ctx``.
+  These will make easier to port existing J2 templates to Qweb.
+
+
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -46,6 +63,7 @@ Contributors
 * Holger Brunn <hbrunn@therp.nl>
 * Dave Lasley <dave@laslabs.com>
 * Carlos Lopez Mite <celm1990@gmail.com>
+* Simone Orsi <simone.orsi@camptocamp.com>
 
 Do not contact contributors directly about support or help with technical issues.
 
