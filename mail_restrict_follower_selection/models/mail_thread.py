@@ -1,4 +1,5 @@
 from odoo import models
+from odoo.tools import config
 from odoo.tools.safe_eval import safe_eval
 
 
@@ -11,6 +12,11 @@ class MailThread(models.AbstractModel):
         result = super(MailThread, self)._message_add_suggested_recipient(
             result, partner=partner, email=email, reason=reason
         )
+        test_condition = config["test_enable"] and not self.env.context.get(
+            "test_restrict_follower"
+        )
+        if test_condition or self.env.context.get("no_restrict_follower"):
+            return result
         domain = self.env[
             "mail.wizard.invite"
         ]._mail_restrict_follower_selection_get_domain()
