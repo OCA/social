@@ -267,6 +267,8 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
@@ -279,7 +281,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "İleti"
 
@@ -598,6 +599,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__name
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Subject"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_ir_config_parameter
+msgid "System Parameter"
 msgstr ""
 
 #. module: mail_tracking

@@ -227,7 +227,6 @@ msgstr "Score du courriel"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_thread
 #, fuzzy
-#| msgid "Email Score"
 msgid "Email Thread"
 msgstr "Score du courriel"
 
@@ -239,7 +238,6 @@ msgstr "Email retourné"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_resend_message
 #, fuzzy
-#| msgid "Email Score"
 msgid "Email resend wizard"
 msgstr "Score du courriel"
 
@@ -291,6 +289,8 @@ msgstr "Échec"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
@@ -303,7 +303,6 @@ msgstr "Échec"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "Message"
 
@@ -311,7 +310,6 @@ msgstr "Message"
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, fuzzy, python-format
-#| msgid "Recipient"
 msgid "Failed Recipients:"
 msgstr "Destinataire"
 
@@ -398,7 +396,6 @@ msgstr "ir.mail_server"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_needs_action
 #, fuzzy
-#| msgid "MailTracking event"
 msgid "Mail Tracking Needs Action"
 msgstr "Suivi du courriel: évènement"
 
@@ -406,7 +403,6 @@ msgstr "Suivi du courriel: évènement"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
 #, fuzzy
-#| msgid "MailTracking emails"
 msgid "Mail Trackings"
 msgstr "Suivi du courriel: courriels"
 
@@ -516,7 +512,6 @@ msgstr "Partenaire"
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
 #, fuzzy
-#| msgid "Recipient"
 msgid "Raw TO recipients"
 msgstr "Destinataire"
 
@@ -634,6 +629,11 @@ msgid "Subject"
 msgstr "Objet"
 
 #. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_ir_config_parameter
+msgid "System Parameter"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__mail_tracking_needs_action
 msgid "The message tracking will be considered to filter tracking issues"
@@ -656,7 +656,6 @@ msgstr "Heure"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
 #, fuzzy
-#| msgid "To:"
 msgid "To"
 msgstr "À :"
 

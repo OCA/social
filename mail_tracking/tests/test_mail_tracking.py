@@ -211,7 +211,7 @@ class TestMailTracking(TransactionCase):
 
     def _check_partner_trackings_to(self, message):
         message_dict = message.message_format()[0]
-        self.assertEqual(len(message_dict["partner_trackings"]), 3)
+        self.assertEqual(len(message_dict["partner_trackings"]), 4)
         # mail cc
         foundPartner = False
         foundNoPartner = False
@@ -253,16 +253,19 @@ class TestMailTracking(TransactionCase):
                 "res_id": self.recipient.id,
                 "partner_ids": [(4, self.recipient.id)],
                 "email_to": "Dominique Pinon <support+unnamed@test.com>"
-                ", sender@example.com, recipient@example.com",
+                ", sender@example.com, recipient@example.com"
+                ", TheCatchall@test.com",
                 "body": "<p>This is another test message</p>",
             }
         )
         message._moderate_accept()
         recipients = self.recipient._message_get_suggested_recipients()
-        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        self.assertEqual(len(recipients[self.recipient.id]), 4)
         self._check_partner_trackings_to(message)
         # Catchall + Alias
-        self.env["ir.config_parameter"].set_param("mail.catchall.domain", "test.com")
+        IrConfigParamObj = self.env["ir.config_parameter"].sudo()
+        IrConfigParamObj.set_param("mail.catchall.alias", "TheCatchall")
+        IrConfigParamObj.set_param("mail.catchall.domain", "test.com")
         self.env["mail.alias"].create(
             {
                 "alias_model_id": self.env["ir.model"]._get("res.partner").id,
