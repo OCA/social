@@ -10,9 +10,15 @@ class MailAlias(models.Model):
     @api.model
     @tools.ormcache()
     def get_aliases(self):
-        return set(x['display_name'] for x in self.search_read([
+        aliases = set(x['display_name'] for x in self.search_read([
             ('alias_name', '!=', False),
         ], ['display_name']))
+        IrConfigParamObj = self.env["ir.config_parameter"].sudo()
+        catchall = "%s@%s" % (
+            IrConfigParamObj.get_param("mail.catchall.alias"),
+            IrConfigParamObj.get_param("mail.catchall.domain"))
+        aliases.add(catchall)
+        return aliases
 
     @api.model_create_multi
     def create(self, vals_list):
