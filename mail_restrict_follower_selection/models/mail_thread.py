@@ -9,7 +9,7 @@ class MailThread(models.AbstractModel):
     def _message_add_suggested_recipient(
         self, result, partner=None, email=None, reason=""
     ):
-        result = super(MailThread, self)._message_add_suggested_recipient(
+        result = super()._message_add_suggested_recipient(
             result, partner=partner, email=email, reason=reason
         )
         test_condition = config["test_enable"] and not self.env.context.get(
