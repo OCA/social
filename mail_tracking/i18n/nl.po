@@ -269,6 +269,8 @@ msgstr "Mislukt"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
@@ -281,7 +283,6 @@ msgstr "Mislukt"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "Bericht"
 
@@ -289,7 +290,6 @@ msgstr "Bericht"
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, fuzzy, python-format
-#| msgid "Recipient"
 msgid "Failed Recipients:"
 msgstr "Ontvanger"
 
@@ -489,7 +489,6 @@ msgstr "Partner"
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
 #, fuzzy
-#| msgid "Recipient"
 msgid "Raw TO recipients"
 msgstr "Ontvanger"
 
@@ -605,6 +604,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Subject"
 msgstr "Onderwerp"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_ir_config_parameter
+msgid "System Parameter"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
