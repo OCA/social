@@ -33,41 +33,48 @@ class MailThread(models.AbstractModel):
     def message_post(self, *args, **kwargs):
         """Adds CC recipient to the message.
 
-        Because Odoo implementation avoid store cc recipients we ensure that
-        this information its written into the mail.message record.
+        Because Odoo implementation avoid store 'from, to, cc' recipients we
+        ensure that this information its written into the mail.message record.
         """
-        new_message = super().message_post(*args, **kwargs)
-        email_cc = kwargs.get("cc")
-        if email_cc:
-            new_message.sudo().write({"email_cc": email_cc})
-        return new_message
+        kwargs.update(
+            {"email_cc": kwargs.get("cc", False), "email_to": kwargs.get("to", False)}
+        )
+        return super().message_post(*args, **kwargs)
 
     def _message_get_suggested_recipients(self):
-        """Adds email Cc recipients as suggested recipients.
+        """Adds email 'extra' recipients as suggested recipients.
 
         If the recipient has a res.partner, use it.
         """
         res = super()._message_get_suggested_recipients()
+        self._add_extra_recipients_suggestions(res, "email_cc", _("Cc"))
+        self._add_extra_recipients_suggestions(res, "email_to", _("Anon. To"))
+        return res
+
+    def _add_extra_recipients_suggestions(self, suggestions, field_mail, reason):
         ResPartnerObj = self.env["res.partner"]
-        email_cc_formated_list = []
+        aliases = self.env["mail.alias"].get_aliases()
+        email_extra_formated_list = []
         for record in self:
-            emails_cc = record.message_ids.mapped("email_cc")
-            for email in emails_cc:
-                email_cc_formated_list.extend(email_split_and_format(email))
-        email_cc_formated_list = set(email_cc_formated_list)
-        for cc in email_cc_formated_list:
-            email_parts = getaddresses([cc])[0]
-            partner_id = record._message_partner_info_from_emails([email_parts[1]])[
-                0
-            ].get("partner_id")
+            emails_extra = record.message_ids.mapped(field_mail)
+            for email in emails_extra:
+                email_extra_formated_list.extend(email_split_and_format(email))
+        email_extra_formated_list = set(email_extra_formated_list)
+        email_extra_list = [x[1] for x in getaddresses(email_extra_formated_list)]
+        partners_info = self._message_partner_info_from_emails(email_extra_list)
+        for pinfo in partners_info:
+            partner_id = pinfo["partner_id"]
+            email = pinfo["full_name"]
             if not partner_id:
-                record._message_add_suggested_recipient(res, email=cc, reason=_("Cc"))
+                if email not in aliases:
+                    self._message_add_suggested_recipient(
+                        suggestions, email=email, reason=reason
+                    )
             else:
                 partner = ResPartnerObj.browse(partner_id)
-                record._message_add_suggested_recipient(
-                    res, partner=partner, reason=_("Cc")
+                self._message_add_suggested_recipient(
+                    suggestions, partner=partner, reason=reason
                 )
-        return res
 
     @api.model
     def _fields_view_get(
