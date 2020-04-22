@@ -49,14 +49,14 @@ msgid "-Unknown Author-"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/tests/test_mail_tracking.py:0
-#, python-format
-msgid "<p>This is a test message</p>"
+#: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
+msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
-msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
+#: code:addons/mail_tracking/models/mail_thread.py:0
+#, python-format
+msgid "Anon. To"
 msgstr ""
 
 #. module: mail_tracking
@@ -184,6 +184,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Email"
 msgstr "E-post"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_alias
+msgid "Email Aliases"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__email_bounced
@@ -479,6 +484,11 @@ msgid "Partner"
 msgstr "Företag"
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
+msgid "Raw TO recipients"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
@@ -609,6 +619,11 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Time"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
+msgid "To"
 msgstr ""
 
 #. module: mail_tracking
