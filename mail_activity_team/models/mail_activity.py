@@ -69,6 +69,6 @@ class MailActivity(models.Model):
             # To not be blocked we must add it to constraint condition
             if activity.user_id.id != SUPERUSER_ID and activity.team_id and \
                     activity.user_id and \
-                    activity.user_id not in self.team_id.member_ids:
+                    activity.user_id not in activity.team_id.member_ids:
                 raise ValidationError(
                     _('The assigned user is not member of the team.'))
