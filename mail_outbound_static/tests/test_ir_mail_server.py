@@ -14,7 +14,8 @@ class TestIrMailServer(TransactionCase):
 
     def setUp(self):
         super(TestIrMailServer, self).setUp()
-        self.email_from = 'derp@example.com'
+        self.email_from = 'test@example.com'
+        self.reply_from = 'postmaster-odoo@odoo-community.org'
         self.email_from_another = 'another@example.com'
         self.Model = self.env['ir.mail_server']
         self.parameter_model = self.env['ir.config_parameter']
@@ -76,5 +77,5 @@ class TestIrMailServer(TransactionCase):
         )
         self.assertEqual(
             message['Return-Path'],
-            '%s <%s>' % (user, self.email_from),
+            '<%s>' % (self.reply_from),
         )

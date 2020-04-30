@@ -4,7 +4,7 @@
 {
     'name': 'Mail Outbound Static',
     'summary': 'Allows you to configure the from header for a mail server.',
-    'version': '12.0.1.0.0',
+    'version': '11.0.1.0.0',
     'category': 'Discuss',
     'website': 'https://github.com/OCA/social',
     'author': 'LasLabs, Odoo Community Association (OCA)',
