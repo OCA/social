@@ -49,6 +49,7 @@ msgid "-Unknown Author-"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_account_invoice_send__email_cc
 #: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_cc
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
 msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
@@ -82,6 +83,7 @@ msgstr ""
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_thread.py:49
+#: model:ir.model.fields,field_description:mail_tracking.field_account_invoice_send__email_cc
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_cc
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
@@ -268,10 +270,16 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_account_analytic_account__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_account_bank_statement__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_account_invoice__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_account_payment__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_mass_mailing_contact__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_product_product__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_product_template__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 msgid "Failed Messages"
@@ -328,6 +336,7 @@ msgid "IP"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_account_invoice_send__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__is_failed_message
@@ -364,6 +373,7 @@ msgid "Mail Server"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_account_invoice_send__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_needs_action
@@ -371,6 +381,7 @@ msgid "Mail Tracking Needs Action"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_account_invoice_send__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
@@ -480,6 +491,7 @@ msgid "Partner"
 msgstr "Партньор"
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_account_invoice_send__email_to
 #: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_to
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
 msgid "Raw TO recipients"
@@ -604,6 +616,7 @@ msgid "System Parameter"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_account_invoice_send__mail_tracking_needs_action
 #: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__mail_tracking_needs_action
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__mail_tracking_needs_action
@@ -625,6 +638,7 @@ msgid "Time"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_account_invoice_send__email_to
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_to
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
 msgid "To"
