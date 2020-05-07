@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo12-addon-mail_activity_board',
         'odoo12-addon-mail_activity_done',
         'odoo12-addon-mail_activity_partner',
+        'odoo12-addon-mail_activity_reminder',
         'odoo12-addon-mail_activity_team',
         'odoo12-addon-mail_attach_existing_attachment',
         'odoo12-addon-mail_attach_existing_attachment_account',
