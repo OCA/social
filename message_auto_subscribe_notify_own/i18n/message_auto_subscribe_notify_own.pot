@@ -212,3 +212,13 @@ msgstr ""
 msgid "User"
 msgstr ""
 
+#. module: message_auto_subscribe_notify_own
+#: model:ir.model.fields,field_description:message_auto_subscribe_notify_own.field_message_auto_subscribe_notify_own_test__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: message_auto_subscribe_notify_own
+#: model:ir.model.fields,help:message_auto_subscribe_notify_own.field_message_auto_subscribe_notify_own_test__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
