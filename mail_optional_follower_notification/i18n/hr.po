@@ -40,6 +40,7 @@ msgid "Email composition wizard"
 msgstr "Čarobnjak za sastavljanje maila"
 
 #. module: mail_optional_follower_notification
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_invoice_send__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 msgid "Notify Followers"
 msgstr ""
