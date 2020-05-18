@@ -10,5 +10,6 @@ class MailMassMailing(models.Model):
     not_cross_unsubscriptable = fields.Boolean(
         string="Not cross unsubscriptable",
         help="If you mark this field, this list won't be shown when "
-             "unsubscribing from other mailing list, in the section: "
-             "'Is there any other mailing list you want to leave?'")
+        "unsubscribing from other mailing list, in the section: "
+        "'Is there any other mailing list you want to leave?'",
+    )
