@@ -12,18 +12,18 @@ odoo.define('mail_private.widget.Thread', function (require) {
         }),
         _renderGroupsPopover: function (event) {
             var $tooltip = $(event.currentTarget).closest(
-                '.o_thread_private_tooltip')
+                '.o_thread_private_tooltip');
             if (!$tooltip.length) {
                 return;
             }
             var message_text = $(event.currentTarget).data('message-text');
-            $tooltip .popover({
+            $tooltip.popover({
                 html: true,
                 boundary: 'viewport',
                 placement: 'top',
                 trigger: 'hover',
                 offset: '0, 1',
-                content: message_text
+                content: message_text,
             }).popover('show');
         },
     });

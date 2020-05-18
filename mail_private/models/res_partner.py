@@ -9,7 +9,10 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
-    def _notify(self, message, rdata, record, force_send=False, send_after_commit=True, model_description=False, mail_auto_delete=True):
+    def _notify(
+        self, message, rdata, record, force_send=False, send_after_commit=True,
+        model_description=False, mail_auto_delete=True
+    ):
         if not message.mail_group_id:
             return super(ResPartner, self)._notify(
                 message, rdata=rdata,
