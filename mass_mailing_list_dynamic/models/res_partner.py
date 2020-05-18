@@ -5,7 +5,7 @@ from odoo import models
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     def write(self, vals):
         """Allow to write values in mass mailing contact."""
