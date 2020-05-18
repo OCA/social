@@ -3,7 +3,7 @@
 
 odoo.define('mail_private.composer', function (require) {
     "use strict";
-    var ChatterComposer = require('mail.ChatterComposer');
+    var ChatterComposer = require('mail.composer.Chatter');
 
     ChatterComposer.include({
         init: function (parent, model, suggested_partners, options) {
@@ -19,9 +19,8 @@ odoo.define('mail_private.composer', function (require) {
             if (this.options.allow_private) {
                 var self = this;
                 this._rpc({
-                    model: this.model,
+                    model: this._model,
                     method: 'get_message_security_groups',
-                    args: [],
                 }).then(function (data) {
                     self.security_groups = data;
                     self._update_security_groups();
@@ -31,8 +30,8 @@ odoo.define('mail_private.composer', function (require) {
         },
         _get_group_button: function (group) {
             var $button = $('<button>', {
-                'class': 'o_dropdown_toggler_btn btn btn-sm ' +
-                    'o_composer_button_send_private hidden-xs',
+                'class': 'o_dropdown_toggler_btn btn btn-primary ' +
+                    'o_composer_button_send_private d-none d-md-inline-block',
                 'type': 'button',
                 'data-group-id': group.id,
             });
@@ -58,16 +57,16 @@ odoo.define('mail_private.composer', function (require) {
             });
         },
         on_send_private: function (event) {
-            if (this.is_empty() || !this.do_check_attachment_upload()) {
+            if (this.isEmpty() || !this._doCheckAttachmentUpload()) {
                 return;
             }
             var group_id = event.currentTarget.getAttribute('data-group-id');
             clearTimeout(this.canned_timeout);
             var self = this;
-            this.preprocess_message().then(function (message) {
+            this._preprocessMessage().then(function (message) {
                 message.context.default_mail_group_id = group_id;
                 self.trigger('post_message', message);
-                self.clear_composer_on_send();
+                self._clearComposerOnSend();
                 self.$input.focus();
             });
         },

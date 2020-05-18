@@ -9,13 +9,15 @@ class ResPartner(models.Model):
     _inherit = 'res.partner'
 
     @api.multi
-    def _notify(self, message, force_send=False, send_after_commit=True,
-                user_signature=True):
+    def _notify(self, message, rdata, record, force_send=False, send_after_commit=True, model_description=False, mail_auto_delete=True):
         if not message.mail_group_id:
             return super(ResPartner, self)._notify(
-                message, force_send=force_send,
+                message, rdata=rdata,
+                record=record,
+                force_send=force_send,
                 send_after_commit=send_after_commit,
-                user_signature=user_signature
+                model_description=model_description,
+                mail_auto_delete=mail_auto_delete
             )
         accepted_users = message.mail_group_id.mapped(
             'group_ids.users')
@@ -24,8 +26,12 @@ class ResPartner(models.Model):
             if partner.user_ids in accepted_users:
                 partners |= partner
         return super(ResPartner, partners)._notify(
-            message, force_send=force_send,
-            send_after_commit=send_after_commit, user_signature=user_signature
+            message, rdata=rdata,
+            record=record,
+            force_send=force_send,
+            send_after_commit=send_after_commit,
+            model_description=model_description,
+            mail_auto_delete=mail_auto_delete
         )
 
     @api.multi

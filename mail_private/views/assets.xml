@@ -6,12 +6,14 @@
               name="mail_private assets"
               inherit_id="web.assets_backend">
         <xpath expr="." position="inside">
-            <link rel="stylesheet" type="text/less"
-                  href="/mail_private/static/src/less/message.less"/>
+            <link rel="stylesheet" type="text/scss"
+                  href="/mail_private/static/src/scss/message.scss"/>
             <script type="text/javascript"
                     src="/mail_private/static/src/js/message.js"/>
             <script type="text/javascript"
                     src="/mail_private/static/src/js/composer.js"/>
+            <script type="text/javascript"
+                    src="/mail_private/static/src/js/thread.js"/>
         </xpath>
     </template>
 </odoo>
