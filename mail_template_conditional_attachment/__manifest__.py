@@ -19,4 +19,7 @@
         "security/ir.model.access.csv",
         "views/mail_template.xml",
     ],
+    "demo": [
+        "demo/demo.xml",
+    ]
 }
