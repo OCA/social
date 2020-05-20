@@ -1,0 +1,23 @@
+<odoo>
+
+    <record id="mail_template" model="mail.template">
+        <field name="name">Partner conditional attachment</field>
+        <field name="model_id" ref="base.model_res_partner"/>
+        <field name="subject">Partner conditional attachment</field>
+        <field name="body_html"><![CDATA[]]></field>
+    </record>
+
+    <record id="ir_attachment_company" model="ir.attachment">
+        <field name="type">binary</field>
+        <field name="datas" type="base64" file="mail_template_conditional_attachment/static/src/demo/company_partner.pdf"/>
+        <field name="name">company_partner.pdf</field>
+    </record>
+
+    <record id="mail_template_company_attachment" model="mail.template.conditional.attachment">
+        <field name="name">Company Attachment</field>
+        <field name="filter_domain">[('is_company', '=', True)]</field>
+        <field name="mail_template_id" ref="mail_template"/>
+        <field name="attachment_ids" eval="[(6, 0, [ref('ir_attachment_company')])]"/>
+    </record>
+
+</odoo>
