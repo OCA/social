@@ -9,16 +9,16 @@ class MailTrackingEmail(models.Model):
     _inherit = "mail.tracking.email"
 
     mass_mailing_id = fields.Many2one(
-        string="Mass mailing", comodel_name="mail.mass_mailing", readonly=True
+        string="Mass mailing", comodel_name="mailing.mailing", readonly=True
     )
     mail_stats_id = fields.Many2one(
-        string="Mail statistics", comodel_name="mail.mail.statistics", readonly=True
+        string="Mail statistics", comodel_name="mailing.trace", readonly=True
     )
     mail_id_int = fields.Integer(string="Mail ID", readonly=True)
 
     @api.model
     def _statistics_link_prepare(self, tracking):
-        """Inherit this method to link other object to mail.mail.statistics"""
+        """Inherit this method to link other object to mailing.trace"""
         return {"mail_tracking_id": tracking.id}
 
     @api.model
@@ -29,7 +29,6 @@ class MailTrackingEmail(models.Model):
             tracking.mail_stats_id.write(self._statistics_link_prepare(tracking))
         return tracking
 
-    @api.multi
     def _contacts_email_bounced_set(self, reason, event=None):
         recipients = []
         if event and event.recipient_address:
@@ -37,11 +36,10 @@ class MailTrackingEmail(models.Model):
         else:
             recipients = list(filter(None, self.mapped("recipient_address")))
         for recipient in recipients:
-            self.env["mail.mass_mailing.contact"].search(
+            self.env["mailing.contact"].search(
                 [("email", "=ilike", recipient)]
             ).email_bounced_set(self, reason, event=event)
 
-    @api.multi
     def smtp_error(self, mail_server, smtp_server, exception):
         res = super(MailTrackingEmail, self).smtp_error(
             mail_server, smtp_server, exception
@@ -49,7 +47,6 @@ class MailTrackingEmail(models.Model):
         self._contacts_email_bounced_set("error")
         return res
 
-    @api.multi
     def event_create(self, event_type, metadata):
         res = super(MailTrackingEmail, self).event_create(event_type, metadata)
         if event_type in {"hard_bounce", "spam", "reject"}:
