@@ -10,7 +10,7 @@ class MailTrackingEvent(models.Model):
 
     mass_mailing_id = fields.Many2one(
         string="Mass mailing",
-        comodel_name="mail.mass_mailing",
+        comodel_name="mailing.mailing",
         readonly=True,
         related="tracking_email_id.mass_mailing_id",
         store=True,
@@ -19,12 +19,12 @@ class MailTrackingEvent(models.Model):
     @api.model
     def process_open(self, tracking_email, metadata):
         res = super(MailTrackingEvent, self).process_open(tracking_email, metadata)
-        mail_mail_stats = self.sudo().env["mail.mail.statistics"]
+        mail_mail_stats = self.sudo().env["mailing.trace"]
         mail_mail_stats.set_opened(mail_mail_ids=[tracking_email.mail_id_int])
         return res
 
     def _tracking_set_bounce(self, tracking_email, metadata):
-        mail_mail_stats = self.sudo().env["mail.mail.statistics"]
+        mail_mail_stats = self.sudo().env["mailing.trace"]
         mail_mail_stats.set_bounced(mail_mail_ids=[tracking_email.mail_id_int])
 
     @api.model
