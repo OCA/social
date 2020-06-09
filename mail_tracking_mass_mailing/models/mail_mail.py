@@ -2,7 +2,7 @@
 # Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, api
+from odoo import api, models
 
 
 class MailMail(models.Model):
@@ -11,10 +11,11 @@ class MailMail(models.Model):
     @api.model
     def _tracking_email_prepare(self, partner, email):
         res = super(MailMail, self)._tracking_email_prepare(partner, email)
-        res['mail_id_int'] = self.id
-        res['mass_mailing_id'] = self.mailing_id.id
-        res['mail_stats_id'] = self.statistics_ids[:1].id \
-            if self.statistics_ids else False
+        res["mail_id_int"] = self.id
+        res["mass_mailing_id"] = self.mailing_id.id
+        res["mail_stats_id"] = (
+            self.statistics_ids[:1].id if self.statistics_ids else False
+        )
         return res
 
     @api.model
