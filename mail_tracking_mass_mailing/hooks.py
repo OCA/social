@@ -14,7 +14,7 @@ _logger = logging.getLogger(__name__)
 
 def pre_init_hook(cr):
     if column_add_with_value:
-        _logger.info("Creating mail.mass_mailing.contact.email_score column " "with value 50.0")
+        _logger.info("Creating mailing_contact.email_score column " "with value 50.0")
         column_add_with_value(
-            cr, "mail_mass_mailing_contact", "email_score", "double precision", 50.0
+            cr, "mailing_contact", "email_score", "double precision", 50.0
         )
