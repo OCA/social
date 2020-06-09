@@ -17,21 +17,21 @@ mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_e
 class TestMassMailing(TransactionCase):
     def setUp(self, *args, **kwargs):
         super(TestMassMailing, self).setUp(*args, **kwargs)
-        self.list = self.env["mail.mass_mailing.list"].create({"name": "Test mail tracking"})
+        self.list = self.env["mailing.list"].create({"name": "Test mail tracking"})
         self.list.name = "{} #{}".format(self.list.name, self.list.id)
-        self.contact_a = self.env["mail.mass_mailing.contact"].create(
+        self.contact_a = self.env["mailing.contact"].create(
             {
                 "list_ids": [(6, 0, self.list.ids)],
                 "name": "Test contact A",
                 "email": "contact_a@example.com",
             }
         )
-        self.mailing = self.env["mail.mass_mailing"].create(
+        self.mailing = self.env["mailing.mailing"].create(
             {
-                "name": "Test subject",
+                "subject": "Test subject",
                 "email_from": "from@example.com",
                 "mailing_model_id": self.env.ref(
-                    "mass_mailing.model_mail_mass_mailing_contact"
+                    "mass_mailing.model_mailing_contact"
                 ).id,
                 "mailing_domain": "[('list_ids', 'in', %d)]" % self.list.id,
                 "contact_list_ids": [(6, False, [self.list.id])],
@@ -44,8 +44,8 @@ class TestMassMailing(TransactionCase):
     def test_smtp_error(self):
         with mock.patch(mock_send_email) as mock_func:
             mock_func.side_effect = Warning("Mock test error")
-            self.mailing.send_mail()
-            for stat in self.mailing.statistics_ids:
+            self.mailing.action_send_mail()
+            for stat in self.mailing.mailing_trace_ids:
                 if stat.mail_mail_id:
                     stat.mail_mail_id.send()
                 tracking = self.env["mail.tracking.email"].search(
@@ -58,8 +58,8 @@ class TestMassMailing(TransactionCase):
             self.assertTrue(self.contact_a.email_bounced)
 
     def test_tracking_email_link(self):
-        self.mailing.send_mail()
-        for stat in self.mailing.statistics_ids:
+        self.mailing.action_send_mail()
+        for stat in self.mailing.mailing_trace_ids:
             if stat.mail_mail_id:
                 stat.mail_mail_id.send()
             tracking_email = self.env["mail.tracking.email"].search(
@@ -80,8 +80,8 @@ class TestMassMailing(TransactionCase):
             self.assertTrue(stat.opened)
 
     def _tracking_email_bounce(self, event_type, state):
-        self.mailing.send_mail()
-        for stat in self.mailing.statistics_ids:
+        self.mailing.action_send_mail()
+        for stat in self.mailing.mailing_trace_ids:
             if stat.mail_mail_id:
                 stat.mail_mail_id.send()
             tracking_email = self.env["mail.tracking.email"].search(

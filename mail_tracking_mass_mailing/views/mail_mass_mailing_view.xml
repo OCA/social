@@ -8,7 +8,6 @@
 <record model="ir.actions.act_window" id="action_view_mail_tracking_email">
     <field name="name">Mail tracking emails</field>
     <field name="res_model">mail.tracking.email</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[('mass_mailing_id', '!=', False)]</field>
 </record>
@@ -16,7 +15,6 @@
 <record model="ir.actions.act_window" id="action_view_mail_tracking_event">
     <field name="name">Mail tracking events</field>
     <field name="res_model">mail.tracking.event</field>
-    <field name="view_type">form</field>
     <field name="view_mode">tree,form</field>
     <field name="domain">[('mass_mailing_id', '!=', False)]</field>
 </record>
