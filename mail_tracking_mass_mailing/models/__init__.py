@@ -5,5 +5,5 @@
 from . import mail_mail
 from . import mail_tracking_email
 from . import mail_tracking_event
-from . import mail_mail_statistics
-from . import mail_mass_mailing_contact
+from . import mailing_trace
+from . import mailing_contact
