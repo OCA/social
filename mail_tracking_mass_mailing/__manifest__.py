@@ -10,16 +10,12 @@
     "version": "12.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
-    "author": "Tecnativa, "
-              "Odoo Community Association (OCA)",
+    "author": "Tecnativa, " "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    'auto_install': True,
-    "depends": [
-        "mass_mailing",
-        "mail_tracking",
-    ],
+    "auto_install": True,
+    "depends": ["mass_mailing", "mail_tracking"],
     "data": [
         "views/mail_tracking_email_view.xml",
         "views/mail_mail_statistics_view.xml",
