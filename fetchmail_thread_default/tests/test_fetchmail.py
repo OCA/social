@@ -1,7 +1,7 @@
 # Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.addons.mail.tests.test_mail_gateway import MAIL_TEMPLATE
+from odoo.addons.test_mail.tests.test_mail_gateway import MAIL_TEMPLATE
 from odoo.tests.common import SavepointCase
 from odoo.tools import mute_logger
 
