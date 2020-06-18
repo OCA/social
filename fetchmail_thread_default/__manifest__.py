@@ -3,7 +3,7 @@
 {
     "name": "Default Thread For Unbounded Emails",
     "summary": "Post unkonwn messages to an existing thread",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "category": "Discuss",
     "website": "https://www.github.com/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
