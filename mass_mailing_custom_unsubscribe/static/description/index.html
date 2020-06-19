@@ -376,6 +376,9 @@ from a different one.</li>
 mass mailing.</li>
 <li>Provide proof on why you are sending mass mailings to a given contact, as
 required by the GDPR in Europe.</li>
+<li>Handle discrete unsubscriptions from other recipients that are not a mailing
+list. On standard module, unsubscriptions from these recipients directly
+include that mail on the general blacklist.</li>
 </ul>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
@@ -402,6 +405,14 @@ they are going to unsubscribe. To do it:</p>
 <li>If <em>Details required</em> is enabled, they will have to fill a text area to
 continue.</li>
 </ol>
+<p>For having discrete unsubscriptions from other recipients than the mailing
+lists, you need to add a glue module that adds 2 fields in the associated
+model:</p>
+<ul class="simple">
+<li><cite>opt_out</cite>.</li>
+<li>Either <cite>email</cite> or <cite>email_from</cite>.</li>
+</ul>
+<p>See <cite>mass_mailing_custom_unsubscribe_event</cite> for an example.</p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#id2">Usage</a></h1>
@@ -449,6 +460,7 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <li>Jairo Llopis</li>
 <li>David Vidal</li>
 <li>Ernesto Tejeda</li>
+<li>Pedro M. Baeza</li>
 </ul>
 </li>
 </ul>

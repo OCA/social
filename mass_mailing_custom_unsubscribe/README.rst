@@ -33,6 +33,9 @@ This addon extends the unsubscription form to let you:
   mass mailing.
 - Provide proof on why you are sending mass mailings to a given contact, as
   required by the GDPR in Europe.
+- Handle discrete unsubscriptions from other recipients that are not a mailing
+  list. On standard module, unsubscriptions from these recipients directly
+  include that mail on the general blacklist.
 
 **Table of contents**
 
@@ -49,6 +52,15 @@ they are going to unsubscribe. To do it:
 #. Create / edit / remove / sort as usual.
 #. If *Details required* is enabled, they will have to fill a text area to
    continue.
+
+For having discrete unsubscriptions from other recipients than the mailing
+lists, you need to add a glue module that adds 2 fields in the associated
+model:
+
+- `opt_out`.
+- Either `email` or `email_from`.
+
+See `mass_mailing_custom_unsubscribe_event` for an example.
 
 Usage
 =====
@@ -98,6 +110,7 @@ Contributors
   * Jairo Llopis
   * David Vidal
   * Ernesto Tejeda
+  * Pedro M. Baeza
 
 Maintainers
 ~~~~~~~~~~~

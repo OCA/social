@@ -1,5 +1,6 @@
 # Copyright 2015 Antiun Ingeniería S.L. (http://www.antiun.com)
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2020 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -43,6 +44,7 @@ class CustomUnsubscribe(MassMailController):
             "Called `mailing()` with: %r",
             (mailing_id, email, res_id, token, post))
         reasons = request.env["mail.unsubscription.reason"].search([])
+        res_id = res_id and int(res_id)
         try:
             # Check if we already have a reason for unsubscription
             reason_id = int(post["reason_id"])
@@ -53,23 +55,38 @@ class CustomUnsubscribe(MassMailController):
             # Unsubscribe, saving reason and details by context
             details = post.get("details", False)
             self._add_extra_context(mailing_id, res_id, reason_id, details)
-            # You could get a DetailsRequiredError here, but only if HTML5
-            # validation fails, which should not happen in modern browsers
-            result = super().mailing(
-                mailing_id, email, res_id, token=token, **post)
-            result.qcontext.update({"reasons": reasons})
-            # update list_ids taking into account not_cross_unsubscriptable
-            # field
             mailing_obj = request.env['mail.mass_mailing']
-            mailing = mailing_obj.sudo().browse(mailing_id)
-            if mailing.mailing_model_real == 'mail.mass_mailing.contact':
-                result.qcontext.update({
-                    "list_ids": result.qcontext["list_ids"].filtered(
-                        lambda mailing_list:
-                            not mailing_list.not_cross_unsubscriptable or
-                            mailing_list in mailing.contact_list_ids
-                    )
+            mass_mailing = mailing_obj.sudo().browse(mailing_id)
+            model = mass_mailing.mailing_model_real
+            if "opt_out" in request.env[model]._fields:
+                mass_mailing.update_opt_out_other(email, [res_id], True)
+                result = request.render("mass_mailing.page_unsubscribed", {
+                    "email": email,
+                    "mailing_id": mailing_id,
+                    "res_id": res_id,
+                    "show_blacklist_button": request.env[
+                        "ir.config_parameter"
+                    ].sudo().get_param(
+                        "mass_mailing.show_blacklist_buttons"
+                    ),
                 })
+                result.qcontext.update({"reasons": reasons})
+            else:
+                # You could get a DetailsRequiredError here, but only if HTML5
+                # validation fails, which should not happen in modern browsers
+                result = super().mailing(
+                    mailing_id, email, res_id, token=token, **post)
+                if model == "mail.mass_mailing.contact":
+                    # update list_ids taking into account
+                    # not_cross_unsubscriptable field
+                    result.qcontext.update({
+                        "reasons": reasons,
+                        "list_ids": result.qcontext["list_ids"].filtered(
+                            lambda mailing_list:
+                                not mailing_list.not_cross_unsubscriptable or
+                                mailing_list in mass_mailing.contact_list_ids
+                        )
+                    })
             return result
 
     @route()
