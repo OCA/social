@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Tecnativa - Pedro M. Baeza
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record id="view_event_registration_form" model="ir.ui.view">
+        <field name="name">event.registration.form - Add opt_out</field>
+        <field name="model">event.registration</field>
+        <field name="inherit_id" ref="event.view_event_registration_form"/>
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="opt_out" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
