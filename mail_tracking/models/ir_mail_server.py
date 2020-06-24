@@ -80,9 +80,11 @@ class IrMailServer(models.Model):
         except Exception as e:
             if tracking_email:
                 tracking_email.smtp_error(self, smtp_server_used, e)
-        if message_id and tracking_email:
-            vals = tracking_email._tracking_sent_prepare(
-                self, smtp_server_used, message, message_id)
-            if vals:
-                self.env['mail.tracking.event'].sudo().create(vals)
+            raise
+        finally:
+            if message_id and tracking_email:
+                vals = tracking_email._tracking_sent_prepare(
+                    self, smtp_server_used, message, message_id)
+                if vals:
+                    self.env['mail.tracking.event'].sudo().create(vals)
         return message_id
