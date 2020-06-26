@@ -53,13 +53,18 @@ class MailThread(models.AbstractModel):
                 _('Install the msg-extractor library to handle .msg files')
             )
         message_msg = Message(b64decode(message))
+        try:
+            message_id = message_msg.messageId
+        except AttributeError:
+            # Using extract_msg < 0.24.4
+            message_id = message_msg.message_id
         message_email = self.env['ir.mail_server'].build_email(
             message_msg.sender, message_msg.to.split(','), message_msg.subject,
             # prefer html bodies to text
             message_msg._getStream('__substg1.0_10130102') or message_msg.body,
             email_cc=message_msg.cc,
             headers={'date': message_msg.date},
-            message_id=message_msg.message_id,
+            message_id=message_id,
             attachments=[
                 (attachment.longFilename, attachment.data)
                 for attachment in message_msg.attachments
