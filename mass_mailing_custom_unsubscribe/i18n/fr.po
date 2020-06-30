@@ -23,7 +23,6 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mailing_list_ids
 #, fuzzy
-#| msgid "(Un)subscribed mass mailing list, if any."
 msgid "(Un)subscribed mass mailing lists, if any."
 msgstr "Liste de distribution désabonnée."
 
@@ -49,9 +48,13 @@ msgstr "Action"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_needaction
 #, fuzzy
-#| msgid "Action"
 msgid "Action Needed"
 msgstr "Action"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__allow_private
+msgid "Allow Private"
+msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
@@ -70,7 +73,6 @@ msgstr ""
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:163
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:169
 #, fuzzy, python-format
-#| msgid "Your changes have not been saved, try again later."
 msgid "An error occurred. Your changes have not been saved, try again later."
 msgstr ""
 "Vos modifications n'ont pas été enregistrées, veuillez réessayer plus tard."
@@ -247,14 +249,12 @@ msgstr "Liste de diffusion"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
 #, fuzzy
-#| msgid "Mailing Unsubscription"
 msgid "Mail unsubscription"
 msgstr "Désinscription de la liste"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription_reason
 #, fuzzy
-#| msgid "Unsubscription Reasons"
 msgid "Mail unsubscription reason"
 msgstr "Motifs de désabonnement"
 
