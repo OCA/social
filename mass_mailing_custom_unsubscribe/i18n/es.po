@@ -51,6 +51,11 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__allow_private
+msgid "Allow Private"
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
 #. openerp-web
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:89
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:94
@@ -67,7 +72,6 @@ msgstr ""
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:163
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:169
 #, fuzzy, python-format
-#| msgid "Your changes have not been saved, try again later."
 msgid "An error occurred. Your changes have not been saved, try again later."
 msgstr "Los cambios no se han guardado, vuelva a intentarlo."
 
@@ -242,14 +246,12 @@ msgstr "Lista de correo"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
 #, fuzzy
-#| msgid "mail.unsubscription"
 msgid "Mail unsubscription"
 msgstr "mail.unsubscription"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription_reason
 #, fuzzy
-#| msgid "mail.unsubscription.reason"
 msgid "Mail unsubscription reason"
 msgstr "mail.unsubscription.reason"
 

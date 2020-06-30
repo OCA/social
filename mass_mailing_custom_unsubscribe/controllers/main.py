@@ -58,7 +58,8 @@ class CustomUnsubscribe(MassMailController):
             mailing_obj = request.env['mail.mass_mailing']
             mass_mailing = mailing_obj.sudo().browse(mailing_id)
             model = mass_mailing.mailing_model_real
-            if "opt_out" in request.env[model]._fields:
+            if ("opt_out" in request.env[model]._fields and
+                    model != "mail.mass_mailing.contact"):
                 mass_mailing.update_opt_out_other(email, [res_id], True)
                 result = request.render("mass_mailing.page_unsubscribed", {
                     "email": email,
