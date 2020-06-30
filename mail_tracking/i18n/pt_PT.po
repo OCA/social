@@ -275,6 +275,8 @@ msgstr "Falhou"
 #: model:ir.model.fields,field_description:mail_tracking.field_account_invoice__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_account_payment__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mass_mailing_contact__failed_message_ids
