@@ -50,6 +50,11 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__allow_private
+msgid "Allow Private"
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
 #. openerp-web
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:89
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:94
@@ -247,7 +252,6 @@ msgstr "Abmeldungen"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription_reason
 #, fuzzy
-#| msgid "Unsubscription Reasons"
 msgid "Mail unsubscription reason"
 msgstr "Abmeldungsgründe"
 
