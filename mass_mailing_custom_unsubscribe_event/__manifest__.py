@@ -3,7 +3,7 @@
 {
     "name": "Allow to unsubscribe discretely from an event",
     "category": "Marketing",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.0.1",
     "depends": [
         "event",
         "mass_mailing_custom_unsubscribe",
