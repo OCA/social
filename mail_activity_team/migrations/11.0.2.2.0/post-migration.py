@@ -11,7 +11,7 @@ def migrate(env, version):
         'domain_force': "['|', '|', "
                         "('privacy', 'not in', ['private', 'team']),"
                         "'&', ('privacy', '=', 'private'),"
-                        "('partner_ids', 'in', user.partner_id.id),"
+                        "('partner_ids', '=', user.partner_id.id),"
                         "'&', ('privacy', '=', 'team'),"
                         "('team_id', 'in', user.activity_team_ids.ids)]"
     })

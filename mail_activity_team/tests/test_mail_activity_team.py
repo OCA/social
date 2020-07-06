@@ -1,95 +1,97 @@
 # Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import TransactionCase
+
+from odoo.tests.common import SavepointCase
 from odoo.exceptions import ValidationError
 from odoo.fields import Datetime
 from datetime import timedelta
 
 
-class TestMailActivityTeam(TransactionCase):
+class TestMailActivityTeam(SavepointCase):
 
-    def setUp(self):
-        super(TestMailActivityTeam, self).setUp()
+    @classmethod
+    def setUpClass(cls):
+        super(TestMailActivityTeam, cls).setUpClass()
+        cls.env = cls.env(context=dict(
+            cls.env.context, tracking_disable=True, no_reset_password=True)
+        )
+        cls.env["mail.activity.team"].search([]).unlink()
 
-        self.env["mail.activity.team"].search([]).unlink()
-
-        self.employee = self.env['res.users'].create({
-            'company_id': self.env.ref("base.main_company").id,
+        cls.employee = cls.env['res.users'].create({
+            'company_id': cls.env.ref("base.main_company").id,
             'name': "Employee",
             'login': "csu",
             'email': "crmuser@yourcompany.com",
             'groups_id': [(6, 0, [
-                self.env.ref('base.group_user').id,
-                self.env.ref('base.group_partner_manager').id])]
+                cls.env.ref('base.group_user').id,
+                cls.env.ref('base.group_partner_manager').id])]
         })
 
-        self.employee2 = self.env['res.users'].create({
-            'company_id': self.env.ref("base.main_company").id,
+        cls.employee2 = cls.env['res.users'].create({
+            'company_id': cls.env.ref("base.main_company").id,
             'name': "Employee 2",
             'login': "csu2",
             'email': "crmuser2@yourcompany.com",
-            'groups_id': [(6, 0, [self.env.ref('base.group_user').id])]
+            'groups_id': [(6, 0, [cls.env.ref('base.group_user').id])]
         })
 
-        self.partner_ir_model = self.env['ir.model']._get('res.partner')
+        cls.partner_ir_model = cls.env['ir.model']._get('res.partner')
 
-        activity_type_model = self.env['mail.activity.type']
-        self.activity1 = activity_type_model.create({
+        activity_type_model = cls.env['mail.activity.type']
+        cls.activity1 = activity_type_model.create({
             'name': 'Initial Contact',
-            'days': 5,
             'summary': 'ACT 1 : Presentation, barbecue, ... ',
-            'res_model_id': self.partner_ir_model.id,
+            'res_model_id': cls.partner_ir_model.id,
         })
-        self.activity2 = activity_type_model.create({
+        cls.activity2 = activity_type_model.create({
             'name': 'Call for Demo',
-            'days': 6,
             'summary': 'ACT 2 : I want to show you my ERP !',
-            'res_model_id': self.partner_ir_model.id,
+            'res_model_id': cls.partner_ir_model.id,
         })
 
-        self.partner_client = self.env.ref("base.res_partner_1")
+        cls.partner_client = cls.env.ref("base.res_partner_1")
 
-        self.act1 = self.env['mail.activity'].sudo(self.employee).create({
-            'activity_type_id': self.activity1.id,
+        cls.act1 = cls.env['mail.activity'].sudo(cls.employee).create({
+            'activity_type_id': cls.activity1.id,
             'note': 'Partner activity 1.',
-            'res_id': self.partner_client.id,
-            'res_model_id': self.partner_ir_model.id,
-            'user_id': self.employee.id,
+            'res_id': cls.partner_client.id,
+            'res_model_id': cls.partner_ir_model.id,
+            'user_id': cls.employee.id,
         })
 
-        self.team1 = self.env['mail.activity.team'].sudo().create({
+        cls.team1 = cls.env['mail.activity.team'].sudo().create({
             'name': 'Team 1',
-            'res_model_ids': [(6, 0, [self.partner_ir_model.id])],
-            'member_ids': [(6, 0, [self.employee.id])],
+            'res_model_ids': [(6, 0, [cls.partner_ir_model.id])],
+            'member_ids': [(6, 0, [cls.employee.id])],
         })
 
-        self.team2 = self.env['mail.activity.team'].sudo().create({
+        cls.team2 = cls.env['mail.activity.team'].sudo().create({
             'name': 'Team 2',
-            'res_model_ids': [(6, 0, [self.partner_ir_model.id])],
-            'member_ids': [(6, 0, [self.employee.id, self.employee2.id])],
+            'res_model_ids': [(6, 0, [cls.partner_ir_model.id])],
+            'member_ids': [(6, 0, [cls.employee.id, cls.employee2.id])],
         })
 
-        self.act2 = self.env['mail.activity'].sudo(self.employee).create({
-            'activity_type_id': self.activity2.id,
+        cls.act2 = cls.env['mail.activity'].sudo(cls.employee).create({
+            'activity_type_id': cls.activity2.id,
             'note': 'Partner activity 2.',
-            'res_id': self.partner_client.id,
-            'res_model_id': self.partner_ir_model.id,
-            'user_id': self.employee.id,
+            'res_id': cls.partner_client.id,
+            'res_model_id': cls.partner_ir_model.id,
+            'user_id': cls.employee.id,
         })
 
-        self.act3 = self.env['mail.activity'].sudo(self.employee).create({
-            'activity_type_id': self.browse_ref(
+        cls.act3 = cls.env['mail.activity'].sudo(cls.employee).create({
+            'activity_type_id': cls.env.ref(
                 'mail.mail_activity_data_meeting').id,
             'note': 'Meeting activity 3.',
-            'res_id': self.partner_client.id,
-            'res_model_id': self.partner_ir_model.id,
-            'user_id': self.employee.id,
-            'team_id': self.team1.id,
+            'res_id': cls.partner_client.id,
+            'res_model_id': cls.partner_ir_model.id,
+            'user_id': cls.employee.id,
+            'team_id': cls.team1.id,
             'summary': 'Metting activity'
         })
-        self.start = Datetime.now()
-        self.stop = Datetime.to_string(
-            Datetime.from_string(self.start) + timedelta(hours=1)
+        cls.start = Datetime.now()
+        cls.stop = Datetime.to_string(
+            Datetime.from_string(cls.start) + timedelta(hours=1)
         )
 
     def test_meeting_blank(self):
