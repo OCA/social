@@ -12,4 +12,9 @@
         <field name="perm_unlink" eval="True"/>
     </record>
 
+    <record id="calendar.calendar_event_rule_private" model="ir.rule">
+        <field name="name">Private or group events</field>
+        <field name="domain_force">['|', '|', ('privacy', 'not in', ['private', 'team']), '&amp;', ('privacy', '=', 'private'), ('partner_ids', '=', user.partner_id.id), '&amp;', ('privacy', '=', 'team'), ('team_id', 'in', user.activity_team_ids.ids)]</field>
+    </record>
+
 </odoo>
