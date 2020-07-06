@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_activity_team
+# 	* mail_activity_team
 #
 msgid ""
 msgstr ""
@@ -54,6 +54,12 @@ msgid "Assigned to"
 msgstr "Tildelt til"
 
 #. module: mail_activity_team
+#: code:addons/mail_activity_team/models/calendar_event.py:71
+#, python-format
+msgid "Busy"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__create_uid
 msgid "Created by"
 msgstr "Oprettet af"
@@ -67,6 +73,16 @@ msgstr "Oprettet den"
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__display_name
 msgid "Display Name"
 msgstr "Vist navn"
+
+#. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_calendar_event
+msgid "Event"
+msgstr ""
+
+#. module: mail_activity_team
+#: selection:calendar.event,privacy:0
+msgid "Everyone"
+msgstr ""
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__id
@@ -116,11 +132,39 @@ msgid "My Team Activities"
 msgstr "Mine team aktiviteter"
 
 #. module: mail_activity_team
+#: model_terms:ir.ui.view,arch_db:mail_activity_team.view_calendar_event_search
+#, fuzzy
+#| msgid "My Team Activities"
+msgid "My Team Meetings"
+msgstr "Mine team aktiviteter"
+
+#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__name
 msgid "Name"
 msgstr "Navn"
 
 #. module: mail_activity_team
+#: selection:calendar.event,privacy:0
+msgid "Only internal users"
+msgstr ""
+
+#. module: mail_activity_team
+#: selection:calendar.event,privacy:0
+msgid "Only me"
+msgstr ""
+
+#. module: mail_activity_team
+#: selection:calendar.event,privacy:0
+msgid "Only team"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_calendar_event__privacy
+msgid "Privacy"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_calendar_event__team_id
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_id
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "Team"
