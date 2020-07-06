@@ -81,6 +81,8 @@ Contributors
   * Jordi Ballester Alomar (jordi.ballester@eficent.com)
   * Miquel Raïch (miquel.raich@eficent.com)
 
+* Enric Tobella <etobella@creublanca.es>
+
 Maintainers
 ~~~~~~~~~~~
 
