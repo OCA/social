@@ -1,7 +1,7 @@
 # Copyright 2018 David Juaneda - <djuaneda@sdi.es>
 # Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import SUPERUSER_ID, api, fields, models
+from odoo import api, fields, models
 
 
 class MailActivity(models.Model):
@@ -73,7 +73,7 @@ class MailActivity(models.Model):
         access_rights_uid=None,
     ):
         # Rules do not apply to administrator
-        if self._uid == SUPERUSER_ID:
+        if self.env.is_superuser():
             return super(MailActivity, self)._search(
                 args,
                 offset=offset,
@@ -103,17 +103,19 @@ class MailActivity(models.Model):
 
         model_ids = {}
 
-        self._cr.execute(
-            """
-            SELECT DISTINCT a.id, im.id, im.model, a.res_id
-            FROM "%s" a
-            LEFT JOIN ir_model im ON im.id = a.res_model_id
-            WHERE a.id = ANY (%%(ids)s)"""
-            % self._table,
-            dict(ids=ids),
-        )
-        for a_id, _ir_model_id, model, model_id in self._cr.fetchall():
-            model_ids.setdefault(model, {}).setdefault(model_id, set()).add(a_id)
+        self.flush(["res_id", "res_model_id", "res_model"])
+        for sub_ids in self._cr.split_for_in_conditions(ids):
+            self._cr.execute(
+                """
+                SELECT DISTINCT a.id, im.id, im.model, a.res_id
+                FROM "%s" a
+                LEFT JOIN ir_model im ON im.id = a.res_model_id
+                WHERE a.id = ANY (%%(ids)s)"""
+                % self._table,
+                dict(ids=list(sub_ids)),
+            )
+            for a_id, _ir_model_id, model, model_id in self._cr.fetchall():
+                model_ids.setdefault(model, {}).setdefault(model_id, set()).add(a_id)
 
         allowed_ids = self._find_allowed_doc_ids(model_ids)
 
