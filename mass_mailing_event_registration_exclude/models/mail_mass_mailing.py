@@ -1,5 +1,4 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import copy
@@ -44,9 +43,9 @@ class MailMassMailing(models.Model):
         string="Exclude", default=_default_exclude_event_state_ids)
 
     def get_recipients(self):
-        res_ids = super(MailMassMailing, self).get_recipients()
+        res_ids = super().get_recipients()
         if res_ids:
             domain = [('id', 'in', res_ids)]
             res_ids = event_filtered_ids(
-                self.env[self.mailing_model], self.id, domain, field='email')
+                self.env[self.mailing_model_real], self.id, domain, field='email')
         return res_ids

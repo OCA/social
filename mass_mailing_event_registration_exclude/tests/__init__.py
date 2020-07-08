@@ -1,3 +1,1 @@
-# -*- coding: utf-8 -*-
-
-from . import test_mass_mailing_event
+from . import test_mass_mailing_event_registration_exclude
