@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
-# Copyright 2016 Antonio Espinosa <antonio.espinosa@tecnativa.com>
-# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2017 Tecnativa - David Vidal
+# Copyright 2020 Tecnativa - Alexandre D. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import at_install, post_install, SavepointCase
@@ -8,15 +8,15 @@ from odoo.tests.common import at_install, post_install, SavepointCase
 
 @at_install(False)
 @post_install(True)
-class TestMassMailingEvent(SavepointCase):
+class TestMassMailingEventRegistrationExclude(SavepointCase):
 
     @classmethod
     def setUpClass(cls):
-        super(TestMassMailingEvent, cls).setUpClass()
+        super(TestMassMailingEventRegistrationExclude, cls).setUpClass()
         cls.event = cls.env['event.event'].create({
             'name': 'Test event',
-            'date_begin': '2017-06-24 8:00:00',
-            'date_end': '2017-06-30 18:00:00',
+            'date_begin': '2020-06-24 8:00:00',
+            'date_end': '2020-06-30 18:00:00',
         })
         cls.registration = cls.env['event.registration'].create({
             'event_id': cls.event.id,
@@ -30,12 +30,12 @@ class TestMassMailingEvent(SavepointCase):
             'name': 'Test list',
         })
         cls.contact_a = cls.env['mail.mass_mailing.contact'].create({
-            'list_id': cls.contact_list.id,
+            'list_ids': [(4, cls.contact_list.id, False)],
             'name': 'Test contact A',
             'email': 'partner_a@example.org',
         })
         cls.contact_b = cls.env['mail.mass_mailing.contact'].create({
-            'list_id': cls.contact_list.id,
+            'list_ids': [(4, cls.contact_list.id, False)],
             'name': 'Test contact B',
             'email': 'partner_b@example.org',
         })
@@ -50,19 +50,21 @@ class TestMassMailingEvent(SavepointCase):
 
     def test_mailing_contact(self):
         domain = [
-            ('list_id', 'in', [self.contact_list.id]),
+            ('list_ids', 'in', [self.contact_list.id]),
             ('opt_out', '=', False),
         ]
         mass_mailing = self.env['mail.mass_mailing'].create({
             'name': 'Test subject',
             'email_from': 'from@example.com',
-            'mailing_model': 'mail.mass_mailing.contact',
+            'mailing_model_id':
+                self.env['ir.model']._get('mail.mass_mailing.contact').id,
             'mailing_domain': str(domain),
             'contact_list_ids': [(6, 0, [self.contact_list.id])],
             'body_html': '<p>Test email body</p>',
             'reply_to_mode': 'email',
-        })
+        }).with_context(default_list_ids=[self.contact_list.id])
         mail_contact = self.env['mail.mass_mailing.contact'].with_context(
+            default_list_ids=[self.contact_list.id],
             exclude_mass_mailing=mass_mailing.id)
         self.assertEqual(
             [self.contact_a.id, self.contact_b.id],
@@ -88,7 +90,6 @@ class TestMassMailingEvent(SavepointCase):
     def test_mailing_partner(self):
         domain = [
             ('id', 'in', [self.partner_a.id, self.partner_b.id]),
-            ('opt_out', '=', False),
         ]
         domain_reg = [
             ('event_id', '=', self.event.id),
@@ -96,11 +97,11 @@ class TestMassMailingEvent(SavepointCase):
         mass_mailing = self.env['mail.mass_mailing'].create({
             'name': 'Test subject',
             'email_from': 'from@example.com',
-            'mailing_model': 'res.partner',
+            'mailing_model_id': self.env['ir.model']._get('res.partner').id,
             'mailing_domain': str(domain),
             'body_html': '<p>Test email body</p>',
             'reply_to_mode': 'email',
-        })
+        }).with_context(default_list_ids=[self.contact_list.id])
         mail_partner = self.env['res.partner'].with_context(
             exclude_mass_mailing=mass_mailing.id)
         mail_registration = self.env['event.registration'].with_context(
