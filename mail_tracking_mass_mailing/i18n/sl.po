@@ -16,19 +16,14 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
-"n%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 3.10\n"
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "Country"
 msgstr "Država"
-
-#. module: mail_tracking_mass_mailing
-#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
-msgid "Email Statistics"
-msgstr "Statistika e-pošte"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
@@ -36,7 +31,7 @@ msgid "Email bounced"
 msgstr "E-pošta odbita"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mass_mailing_contact__email_score
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_score
 msgid "Email score"
 msgstr "Točkovanje e-pošte"
 
@@ -61,7 +56,7 @@ msgid "Mail statistics"
 msgstr "Poštna statistika"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics__mail_tracking_id
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__mail_tracking_id
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
 msgid "Mail tracking"
 msgstr "Sledenje pošte"
@@ -87,9 +82,18 @@ msgid "MailTracking event"
 msgstr "Dogodek sledenja e-pošte"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
-msgid "Mass Mailing Contact"
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
+#, fuzzy
+#| msgid "Mass Mailing Contact"
+msgid "Mailing Contact"
 msgstr "Stik masovne pošte"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_trace
+#, fuzzy
+#| msgid "Mail statistics"
+msgid "Mailing Statistics"
+msgstr "Poštna statistika"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mass_mailing_id
@@ -98,7 +102,7 @@ msgid "Mass mailing"
 msgstr "Masovna pošta"
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "OS"
 msgstr "OS"
 
@@ -108,12 +112,15 @@ msgid "Outgoing Mails"
 msgstr "Izhodna pošta"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics__tracking_event_ids
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__tracking_event_ids
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "Tracking events"
 msgstr "Sledilni dogodki"
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
 msgstr "Uporabnikov odjemalec"
+
+#~ msgid "Email Statistics"
+#~ msgstr "Statistika e-pošte"

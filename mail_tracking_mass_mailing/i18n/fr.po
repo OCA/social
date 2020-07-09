@@ -20,14 +20,9 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "Country"
 msgstr "Pays"
-
-#. module: mail_tracking_mass_mailing
-#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail_statistics
-msgid "Email Statistics"
-msgstr "Statistiques de courriel"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
@@ -35,7 +30,7 @@ msgid "Email bounced"
 msgstr "Email retourné"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mass_mailing_contact__email_score
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_score
 msgid "Email score"
 msgstr "Score du courriel"
 
@@ -60,7 +55,7 @@ msgid "Mail statistics"
 msgstr "Statistiques de l'envoi"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics__mail_tracking_id
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__mail_tracking_id
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
 msgid "Mail tracking"
 msgstr "Suivi de l'envoi"
@@ -86,9 +81,18 @@ msgid "MailTracking event"
 msgstr "Suivi du courriel: évènement"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mass_mailing_contact
-msgid "Mass Mailing Contact"
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
+#, fuzzy
+#| msgid "Mass Mailing Contact"
+msgid "Mailing Contact"
 msgstr "Contact de la liste de diffusion"
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_trace
+#, fuzzy
+#| msgid "Mail statistics"
+msgid "Mailing Statistics"
+msgstr "Statistiques de l'envoi"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mass_mailing_id
@@ -97,7 +101,7 @@ msgid "Mass mailing"
 msgstr "Publipostage"
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "OS"
 msgstr "SE"
 
@@ -107,12 +111,15 @@ msgid "Outgoing Mails"
 msgstr "Courriels sortants"
 
 #. module: mail_tracking_mass_mailing
-#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail_statistics__tracking_event_ids
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__tracking_event_ids
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "Tracking events"
 msgstr "Suivi du courriel: évènements"
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mail_statistics_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
 msgstr "Navigateur"
+
+#~ msgid "Email Statistics"
+#~ msgstr "Statistiques de courriel"
