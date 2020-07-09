@@ -8,15 +8,12 @@ from lxml import etree
 
 from odoo import _, api, fields, models
 from odoo.osv import expression
-from odoo.osv.orm import setup_modifiers
 
 
 class MailThread(models.AbstractModel):
-
     _inherit = "mail.thread"
 
     def _search_message_content(self, operator, value):
-
         model_domain = [("model", "=", self._name)]
         if operator not in expression.NEGATIVE_TERM_OPERATORS:
             model_domain += ["|"] * 4
@@ -57,7 +54,6 @@ class MailThread(models.AbstractModel):
             for node in doc.xpath("//field[last()]"):
                 # Add message_content in search view
                 elem = etree.Element("field", {"name": "message_content"})
-                setup_modifiers(elem)
                 node.addnext(elem)
                 res["arch"] = etree.tostring(doc)
         return res
