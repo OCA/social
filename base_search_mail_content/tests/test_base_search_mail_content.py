@@ -10,15 +10,16 @@ class TestBaseSearchMailContent(TransactionCase):
         self.channel_obj = self.env["mail.channel"]
 
     def test_base_search_mail_content_1(self):
-        res = self.channel_obj.search(
-            [('message_content', 'ilike', 'xxxyyyzzz')])
+        res = self.channel_obj.search([("message_content", "ilike", "xxxyyyzzz")])
         self.assertFalse(res, "You have a channel with xxxyyyzzz :O")
 
     def test_base_search_mail_content_2(self):
         res = self.channel_obj.load_views(
-            [[False, 'search']], {'load_fields': False,
-                                  'load_filters': True,
-                                  'toolbar': True})
+            [[False, "search"]],
+            {"load_fields": False, "load_filters": True, "toolbar": True},
+        )
         self.assertIn(
-            'message_content', res['fields_views']['search']['fields'],
-            "message_content field was not detected")
+            "message_content",
+            res["fields_views"]["search"]["fields"],
+            "message_content field was not detected",
+        )

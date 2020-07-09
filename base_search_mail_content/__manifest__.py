@@ -7,16 +7,11 @@
 {
     "name": "Base Search Mail Content",
     "version": "12.0.1.0.0",
-    "author": "Eficent,"
-              "SerpentCS,"
-              "Tecnativa,"
-              "Odoo Community Association (OCA)",
+    "author": "Eficent," "SerpentCS," "Tecnativa," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social",
-    "data": [
-        "data/trgm_index_data.xml",
-    ],
+    "data": ["data/trgm_index_data.xml"],
     "depends": ["mail", "base_search_fuzzy"],
     "license": "AGPL-3",
-    'installable': True,
+    "installable": True,
 }
