@@ -11,7 +11,9 @@ class MailThread(models.AbstractModel):
         """ Compute recipients to notify based on subtype and followers. This
         method returns data structured as expected for ``_notify_recipients``. """
         recipient_data = super()._notify_compute_recipients(message, msg_vals)
-        if not self.env.context.get("notify_followers", False):
+        if "notify_followers" in self.env.context and not self.env.context.get(
+            "notify_followers", False
+        ):
             # filter out all the followers
             pids = (
                 msg_vals.get("partner_ids", [])
