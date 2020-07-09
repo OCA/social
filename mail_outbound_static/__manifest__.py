@@ -7,7 +7,7 @@
     'version': '10.0.1.0.0',
     'category': 'Discuss',
     'website': 'https://github.com/OCA/social',
-    'author': 'LasLabs, Odoo Community Association (OCA)',
+    'author': 'LasLabs, Odoo Community Association (OCA), TRESCLOUD CIA. LTDA.',
     'license': 'LGPL-3',
     'application': False,
     'installable': True,
