@@ -27,7 +27,7 @@ class IrMailServer(models.Model):
         elif not smtp_server:
             mail_server = self.sudo().search([], order='sequence', limit=1)
 
-        if mail_server.smtp_from:
+        if mail_server and mail_server.smtp_from:
             split_from = message['From'].rsplit(' <', 1)
             if len(split_from) > 1:
                 email_from = '%s <%s>' % (split_from[0], mail_server.smtp_from,)
@@ -39,7 +39,7 @@ class IrMailServer(models.Model):
             # odoo configuration
             email_from = odoo.tools.config['email_from']
 
-        if mail_server and email_from:
+        if email_from:
             message.replace_header('From', email_from)
             bounce_alias = self.env['ir.config_parameter'].get_param(
                 "mail.bounce.alias")
