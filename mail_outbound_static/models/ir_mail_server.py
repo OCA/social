@@ -21,6 +21,7 @@ class IrMailServer(models.Model):
 
         # Replicate logic from core to get mail server
         mail_server = None
+        email_from = None
         if mail_server_id:
             mail_server = self.sudo().browse(mail_server_id)
         elif not smtp_server:
@@ -29,27 +30,26 @@ class IrMailServer(models.Model):
         if mail_server and mail_server.smtp_from:
             split_from = message['From'].rsplit(' <', 1)
             if len(split_from) > 1:
-                email_from = '%s <%s>' % (
-                    split_from[0], mail_server.smtp_from,
-                )
+                email_from = '%s <%s>' % (split_from[0], mail_server.smtp_from,)
             else:
                 email_from = mail_server.smtp_from
         else:
             # If we do not have a smtp server defined we
             # look for the email_from parameter from the
             # odoo configuration
-            email_from = odoo.tools.config['email_from'] or ''
+            email_from = odoo.tools.config['email_from']
 
-        message.replace_header('From', email_from)
-        bounce_alias = self.env['ir.config_parameter'].get_param(
-            "mail.bounce.alias")
-        if not bounce_alias:
-            # then, bounce handling is disabled and we want
-            # Return-Path = From
-            if 'Return-Path' in message:
-                message.replace_header('Return-Path', email_from)
-            else:
-                message.add_header('Return-Path', email_from)
+        if email_from:
+            message.replace_header('From', email_from)
+            bounce_alias = self.env['ir.config_parameter'].get_param(
+                "mail.bounce.alias")
+            if not bounce_alias:
+                # then, bounce handling is disabled and we want
+                # Return-Path = From
+                if 'Return-Path' in message:
+                    message.replace_header('Return-Path', email_from)
+                else:
+                    message.add_header('Return-Path', email_from)
 
         return super(IrMailServer, self).send_email(
             message, mail_server_id, smtp_server, *args, **kwargs
