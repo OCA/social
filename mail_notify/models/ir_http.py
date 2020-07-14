@@ -1,4 +1,4 @@
-from odoo import api, models, registry
+from odoo import models
 from odoo import SUPERUSER_ID
 from odoo.http import request
 

@@ -1,4 +1,4 @@
-from odoo import fields, models, api
+from odoo import models, api
 from pyfcm import FCMNotification
 from html2text import html2text
 

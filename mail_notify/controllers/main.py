@@ -1,4 +1,4 @@
-from odoo import http, _
+from odoo import http
 from odoo.http import request
 
 class FirebaseController(http.Controller):
