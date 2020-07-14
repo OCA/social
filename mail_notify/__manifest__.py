@@ -10,6 +10,7 @@
     'external_dependencies': {
         'python': [
             'pyfcm',
+            'html2text',
         ],
     },
     'images': ['static/scr/img/banner.png'],
