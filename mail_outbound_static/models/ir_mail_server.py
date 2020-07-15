@@ -28,17 +28,25 @@ class IrMailServer(models.Model):
         elif not smtp_server:
             mail_server = self.sudo().search([], order='sequence', limit=1)
 
-        if mail_server and mail_server.smtp_from:
-            split_from = message['From'].rsplit(' <', 1)
-            if len(split_from) > 1:
-                email_from = '%s <%s>' % (split_from[0], mail_server.smtp_from,)
-            else:
-                email_from = mail_server.smtp_from
-        else:
+        if mail_server:
+            if mail_server.smtp_from:
+                split_from = message['From'].rsplit(' <', 1)
+                if len(split_from) > 1:
+                    email_from = '%s <%s>' % (split_from[0], mail_server.smtp_from,)
+                else:
+                    email_from = mail_server.smtp_from
+        elif odoo.tools.config['email_from']:
             # If we do not have a smtp server defined we
             # look for the email_from parameter from the
             # odoo configuration
-            email_from = odoo.tools.config['email_from']
+            split_from = message['From'].rsplit(' <', 1)
+            if len(split_from) > 1:
+                email_from = '%s <%s>' % (split_from[0], odoo.tools.config['email_from'],)
+            else:
+                email_from = odoo.tools.config['email_from']
+        else:
+            #do nothing
+            pass
 
         if email_from:
             message.replace_header('From', email_from)
