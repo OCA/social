@@ -6,7 +6,6 @@ from odoo import api, fields, models
 import odoo
 
 
-
 class IrMailServer(models.Model):
 
     _inherit = 'ir.mail_server'
@@ -26,13 +25,15 @@ class IrMailServer(models.Model):
         if mail_server_id:
             mail_server = self.sudo().browse(mail_server_id)
         elif not smtp_server:
-            mail_server = self.sudo().search([], order='sequence', limit=1)
-
+            mail_server = self.sudo().search([], order='sequence',
+                                             limit=1)
         if mail_server:
             if mail_server.smtp_from:
                 split_from = message['From'].rsplit(' <', 1)
                 if len(split_from) > 1:
-                    email_from = '%s <%s>' % (split_from[0], mail_server.smtp_from,)
+                    email_from = '%s <%s>' % \
+                                 (split_from[0],
+                                  mail_server.smtp_from,)
                 else:
                     email_from = mail_server.smtp_from
         elif odoo.tools.config['email_from']:
@@ -41,7 +42,9 @@ class IrMailServer(models.Model):
             # odoo configuration
             split_from = message['From'].rsplit(' <', 1)
             if len(split_from) > 1:
-                email_from = '%s <%s>' % (split_from[0], odoo.tools.config['email_from'],)
+                email_from = '%s <%s>' % \
+                             (split_from[0],
+                              odoo.tools.config['email_from'],)
             else:
                 email_from = odoo.tools.config['email_from']
         else:
