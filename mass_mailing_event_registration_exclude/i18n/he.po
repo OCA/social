@@ -18,82 +18,82 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#. module: mass_mailing_event
-#: model:ir.model,name:mass_mailing_event.model_event_registration
-msgid "Attendee"
-msgstr ""
-
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_code
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__code
 msgid "Code"
 msgstr ""
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_create_uid
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_uid
 msgid "Created by"
 msgstr "נוצר על ידי"
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_create_date
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_date
 msgid "Created on"
 msgstr "נוצר ב-"
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_display_name
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__display_name
 msgid "Display Name"
 msgstr "השם המוצג"
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_mail_mass_mailing_event_id
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration_state
+msgid "Event Registration State"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mail_mass_mailing__event_id
 msgid "Event related"
 msgstr ""
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_mail_mass_mailing_exclude_event_state_ids
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mail_mass_mailing__exclude_event_state_ids
 msgid "Exclude"
 msgstr ""
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_id
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__id
 msgid "ID"
 msgstr "מזהה"
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state___last_update
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state____last_update
 msgid "Last Modified on"
 msgstr "תאריך שינוי אחרון"
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_write_uid
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_uid
 msgid "Last Updated by"
 msgstr "עודכן לאחרונה על ידי"
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_write_date
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_date
 msgid "Last Updated on"
 msgstr "עודכן לאחרונה על"
 
-#. module: mass_mailing_event
-#: model:ir.model,name:mass_mailing_event.model_mail_mass_mailing
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mail_mass_mailing
 msgid "Mass Mailing"
 msgstr ""
 
-#. module: mass_mailing_event
-#: model:ir.model,name:mass_mailing_event.model_mail_mass_mailing_contact
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mail_mass_mailing_contact
 msgid "Mass Mailing Contact"
 msgstr ""
 
-#. module: mass_mailing_event
-#: model:ir.model.fields,field_description:mass_mailing_event.field_event_registration_state_name
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "שם"
-
-#. module: mass_mailing_event
-#: model:ir.model,name:mass_mailing_event.model_res_partner
-msgid "Partner"
-msgstr ""
-
-#. module: mass_mailing_event
-#: model:ir.model,name:mass_mailing_event.model_event_registration_state
-msgid "event.registration.state"
-msgstr ""
