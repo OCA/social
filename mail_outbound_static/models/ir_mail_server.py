@@ -48,7 +48,7 @@ class IrMailServer(models.Model):
             else:
                 email_from = odoo.tools.config['email_from']
         else:
-            #do nothing
+            # do nothing
             pass
 
         if email_from:
