@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo13-addon-mail_tracking',
         'odoo13-addon-mail_tracking_mailgun',
         'odoo13-addon-mail_tracking_mass_mailing',
+        'odoo13-addon-mass_mailing_list_dynamic',
         'odoo13-addon-mass_mailing_partner',
         'odoo13-addon-mass_mailing_resend',
     ],
