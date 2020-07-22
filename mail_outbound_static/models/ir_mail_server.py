@@ -32,8 +32,8 @@ class IrMailServer(models.Model):
                 email_from = mail_server.smtp_from
 
             message.replace_header("From", email_from)
-            bounce_alias = self.env["ir.config_parameter"].get_param(
-                "mail.bounce.alias"
+            bounce_alias = (
+                self.env["ir.config_parameter"].sudo().get_param("mail.bounce.alias")
             )
             if not bounce_alias:
                 # then, bounce handling is disabled and we want
