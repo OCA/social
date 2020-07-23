@@ -10,13 +10,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "fetchmail",
-    ],
-    "data": [
-        "views/fetchmail_server_view.xml",
-    ],
-    "demo": [
-        "demo/data.xml",
-    ],
+    "depends": ["fetchmail"],
+    "data": ["views/fetchmail_server_view.xml"],
+    "demo": ["demo/data.xml"],
 }
