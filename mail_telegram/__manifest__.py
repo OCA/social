@@ -5,9 +5,9 @@
     'name': 'Mail Telegram',
     'summary': """
         Send messages to telegram""",
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.1',
     'license': 'AGPL-3',
-    'author': 'Creu Blanca',
+    'author': 'Creu Blanca,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
     'depends': [
         'mail',
@@ -17,6 +17,7 @@
         'security/ir.model.access.csv',
         'views/mail_message_telegram.xml',
         'views/mail_telegram_chat.xml',
+        'views/mail_telegram_bot.xml',
         'views/assets.xml',
     ],
     'qweb': [

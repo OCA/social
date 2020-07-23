@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="mail_telegram_bot_form_view">
+        <field name="name">mail.telegram.bot.form (in mail_telegram_broker)</field>
+        <field name="model">mail.telegram.bot</field>
+        <field name="arch" type="xml">
+            <form>
+                <header/>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="token"/>
+                    </group>
+                </sheet>
+                <div class="oe_chatter"/>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_telegram_bot_search_view">
+        <field name="name">mail.telegram.bot.search (in mail_telegram_broker)</field>
+        <field name="model">mail.telegram.bot</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_telegram_bot_tree_view">
+        <field name="name">mail.telegram.bot.tree (in mail_telegram_broker)</field>
+        <field name="model">mail.telegram.bot</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="token"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mail_telegram_bot_act_window">
+        <field name="name">Telegram Bot</field>
+        <field name="res_model">mail.telegram.bot</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record model="ir.ui.menu" id="mail_telegram_bot_menu">
+        <field name="name">Telegram Bot</field>
+        <field name="parent_id" ref="base.menu_email"/>
+        <field name="action" ref="mail_telegram_bot_act_window"/>
+        <field name="sequence" eval="16"/>
+    </record>
+
+</odoo>

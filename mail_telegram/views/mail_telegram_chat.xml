@@ -5,24 +5,38 @@
 <odoo>
 
     <record model="ir.ui.view" id="mail_telegram_chat_form_view">
-        <field name="name">mail.telegram.chat.form (in mail_telegram)</field>
+        <field name="name">mail.telegram.chat.form (in mail_telegram_broker)</field>
         <field name="model">mail.telegram.chat</field>
+        <field name="priority">10</field>
         <field name="arch" type="xml">
             <form>
                 <header/>
                 <sheet>
-                    <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
-                            <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
-                        </button>
-                    </div>
+                    <div class="oe_button_box" name="button_box"/>
                     <group>
                         <field name="name"/>
-                        <field name="token"/>
-                        <field name="chat_id"/>
                     </group>
                 </sheet>
             </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_telegram_chat_form_root_view">
+        <field name="name">mail.telegram.chat.form (in mail_telegram)</field>
+        <field name="model">mail.telegram.chat</field>
+        <field name="inherit_id" ref="mail_telegram.mail_telegram_chat_form_view"/>
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="token"/>
+                <field name="bot_id"/>
+                <field name="chat_id"/>
+            </field>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button name="toggle_active" type="object" class="oe_stat_button" icon="fa-archive">
+                    <field name="active" widget="boolean_button" options="{&quot;terminology&quot;: &quot;archive&quot;}"/>
+                </button>
+            </xpath>
         </field>
     </record>
 

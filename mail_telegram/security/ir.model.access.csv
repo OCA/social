@@ -5,3 +5,5 @@ access_mail_message_telegram_user,mail.message.telegram.user,model_mail_message_
 access_mail_message_telegram_system,mail.message.telegram.system,model_mail_message_telegram,base.group_system,1,1,1,1
 access_mail_telegram_chat_all,mail.telegram.chat.all,model_mail_telegram_chat,,1,0,0,0
 access_mail_telegram_chat_system,mail_telegram_chat,model_mail_telegram_chat,base.group_system,1,1,1,1
+access_mail_telegram_bot_all,mail.telegram.bot.all,model_mail_telegram_bot,,1,0,0,0
+access_mail_telegram_bot_system,mail_telegram_bot,model_mail_telegram_bot,base.group_system,1,1,1,1

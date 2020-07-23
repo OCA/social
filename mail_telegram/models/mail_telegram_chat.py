@@ -10,5 +10,6 @@ class MailTelegramChat(models.Model):
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
-    token = fields.Char(required=True)
+    token = fields.Char(related='bot_id.token')
+    bot_id = fields.Many2one('mail.telegram.bot', required=True)
     chat_id = fields.Char(required=True)

@@ -1,1 +1,2 @@
-This addon allows to send messages from odoo through a telegram bot.
+This addon allows to send messages from odoo to a telegram chat through
+a telegram bot.

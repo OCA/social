@@ -22,6 +22,7 @@
                     <h2><field name="subject"/></h2>
                     <group>
                         <field name="chat_id"/>
+                        <field name="mail_message_id"/>
                         <field name="message_id" attrs="{'invisible': [('message_id', '=', False)]}"/>
                     </group>
                     <notebook>
