@@ -42,7 +42,7 @@ msgid ""
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:216
+#: code:addons/mail_tracking/models/mail_message.py:217
 #, python-format
 msgid "-Unknown Author-"
 msgstr "-Autor Desconocido-"
@@ -163,7 +163,7 @@ msgid "Deferred"
 msgstr "Diferido"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:77
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
@@ -223,7 +223,7 @@ msgid "Email resend wizard"
 msgstr "Asistente de reenvio de correo electrónico"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:75
+#: code:addons/mail_tracking/models/mail_message.py:76
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
 #, python-format
@@ -471,7 +471,7 @@ msgid "Open"
 msgstr "Abrir"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:77
+#: code:addons/mail_tracking/models/mail_message.py:78
 #: selection:mail.tracking.email,state:0
 #, python-format
 msgid "Opened"
@@ -556,7 +556,7 @@ msgid "Sender email"
 msgstr "Correo del remitente"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:77
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
@@ -603,7 +603,7 @@ msgid "State"
 msgstr "Estado"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:78
+#: code:addons/mail_tracking/models/mail_message.py:79
 #, python-format
 msgid "Status: %s"
 msgstr "Estado: %s"
@@ -630,7 +630,7 @@ msgstr ""
 "seguimiento"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:84
+#: code:addons/mail_tracking/models/mail_message.py:85
 #, python-format
 msgid "The partner doesn't have a defined email"
 msgstr "El socio no tiene un correo definido"
@@ -702,7 +702,7 @@ msgid "UTC timestamp"
 msgstr ""
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:77
+#: code:addons/mail_tracking/models/mail_message.py:78
 #, python-format
 msgid "Unknown"
 msgstr "Desconocido"
@@ -749,7 +749,7 @@ msgid "User country"
 msgstr "País del Usuario"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:75
+#: code:addons/mail_tracking/models/mail_message.py:76
 #, python-format
 msgid "Waiting"
 msgstr "Esperando"

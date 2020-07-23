@@ -64,7 +64,7 @@ msgstr ""
 "prejemnikovem Mail Exchange (MX) strežniku.\n"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:216
+#: code:addons/mail_tracking/models/mail_message.py:217
 #, python-format
 msgid "-Unknown Author-"
 msgstr "-Neznani avtor-"
@@ -184,7 +184,7 @@ msgid "Deferred"
 msgstr "Odloženo"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:77
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
@@ -244,7 +244,7 @@ msgid "Email resend wizard"
 msgstr "Čarovnik za ponovno pošiljanje"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:75
+#: code:addons/mail_tracking/models/mail_message.py:76
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
 #, python-format
@@ -492,7 +492,7 @@ msgid "Open"
 msgstr "Odprto"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:77
+#: code:addons/mail_tracking/models/mail_message.py:78
 #: selection:mail.tracking.email,state:0
 #, python-format
 msgid "Opened"
@@ -575,7 +575,7 @@ msgid "Sender email"
 msgstr "Pošiljateljeva e-pošta"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:77
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
@@ -622,7 +622,7 @@ msgid "State"
 msgstr "Stanje"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:78
+#: code:addons/mail_tracking/models/mail_message.py:79
 #, python-format
 msgid "Status: %s"
 msgstr "Status: %s"
@@ -648,7 +648,7 @@ msgstr ""
 "Sledljivost sporočil bo upoštevana za filtriranje problematike sledljivosti"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:84
+#: code:addons/mail_tracking/models/mail_message.py:85
 #, python-format
 msgid "The partner doesn't have a defined email"
 msgstr "Partner nima določenega email naslova"
@@ -718,7 +718,7 @@ msgid "UTC timestamp"
 msgstr "UTC časovni žig"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:77
+#: code:addons/mail_tracking/models/mail_message.py:78
 #, python-format
 msgid "Unknown"
 msgstr "Neznano"
@@ -765,7 +765,7 @@ msgid "User country"
 msgstr "Država uporabnika"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:75
+#: code:addons/mail_tracking/models/mail_message.py:76
 #, python-format
 msgid "Waiting"
 msgstr "Čakanje"
