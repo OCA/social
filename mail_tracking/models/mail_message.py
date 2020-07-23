@@ -18,6 +18,7 @@ class MailMessage(models.Model):
         comodel_name='mail.tracking.email',
         inverse_name='mail_message_id',
         string="Mail Trackings",
+        auto_join=True,
     )
     mail_tracking_needs_action = fields.Boolean(
         help="The message tracking will be considered"
