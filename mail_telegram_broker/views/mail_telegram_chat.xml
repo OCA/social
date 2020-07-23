@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="mail_telegram_chat_form_view">
+        <field name="name">mail.telegram.chat.form (in mail_telegram_broker)</field>
+        <field name="model">mail.telegram.chat</field>
+        <field name="inherit_id" ref="mail_telegram.mail_telegram_chat_form_view"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="partner_id"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_telegram_chat_form_root_view">
+        <field name="name">mail.telegram.chat.form (in mail_telegram_broker)</field>
+        <field name="model">mail.telegram.chat</field>
+        <field name="inherit_id" ref="mail_telegram.mail_telegram_chat_form_root_view"/>
+        <field name="arch" type="xml">
+            <field name="bot_id" position="after">
+                <field name="show_on_app"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="mail_telegram_chat_act_window_old">
+        <field name="name">Mail Telegram Chat</field>
+        <field name="res_model">mail.telegram.chat</field>
+        <field name="view_mode">tree</field>
+        <field name="domain">[('show_on_app', '=', True)]</field>
+        <field name="context">{}</field>
+    </record>
+
+    <record id="mail_telegram_chat_act_window" model="ir.actions.client">
+        <field name="name">Telegram</field>
+        <field name="tag">mail.telegram.broker</field>
+        <field name="res_model">mail.telegram.chat</field>
+        <field name="params" eval="{}"/>
+    </record>
+
+    <menuitem name="Telegram"
+              id="mail_telegram_chat_menu"
+              sequence="2"
+              web_icon="mail_telegram_broker,static/description/icon.png"
+              action="mail_telegram_chat_act_window"
+              groups="mail_telegram_broker.telegram_user"/>
+
+</odoo>
