@@ -11,7 +11,7 @@ class FetchmailServer(models.Model):
         selection="_get_thread_models",
         string="Default mail thread",
         help="Messages with no clear route will be posted as a new message "
-             "to this thread.",
+        "to this thread.",
     )
 
     @api.model
@@ -21,14 +21,19 @@ class FetchmailServer(models.Model):
         :return [(model, name), ...]:
             Tuple list of available models that can receive messages.
         """
-        models = self.env["ir.model.fields"].search([
-            ("name", "=", "message_partner_ids"),
-        ]).mapped("model_id")
+        models = (
+            self.env["ir.model.fields"]
+            .search([("name", "=", "message_partner_ids")])
+            .mapped("model_id")
+        )
         # Exclude AbstractModel
-        return [(m.model, m.name) for m in models
-                if m.model in self.env and getattr(self.env[m.model], "_auto")]
+        return [
+            (m.model, m.name)
+            for m in models
+            if m.model in self.env and getattr(self.env[m.model], "_auto")
+        ]
 
-    @api.onchange('type', 'is_ssl', 'object_id')
+    @api.onchange("type", "is_ssl", "object_id")
     def onchange_server_type(self):
         """Remove :attr:`default_thread_id` if there is :attr:`object_id`."""
         if self.object_id:
