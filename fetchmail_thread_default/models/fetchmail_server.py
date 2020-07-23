@@ -30,17 +30,16 @@ class FetchmailServer(models.Model):
         return [
             (m.model, m.name)
             for m in models
-            if m.model in self.env and getattr(self.env[m.model], "_auto")
+            if m.model in self.env and self.env[m.model]._auto
         ]
 
-    @api.onchange("type", "is_ssl", "object_id")
+    @api.onchange("server_type", "is_ssl", "object_id")
     def onchange_server_type(self):
         """Remove :attr:`default_thread_id` if there is :attr:`object_id`."""
         if self.object_id:
             self.default_thread_id = False
         return super(FetchmailServer, self).onchange_server_type()
 
-    @api.multi
     @api.onchange("default_thread_id")
     def _onchange_remove_object_id(self):
         """Remove :attr:`object_id` if there is :attr:`default_thread_id`."""
