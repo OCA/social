@@ -13,5 +13,6 @@
     "installable": True,
     "external_dependencies": {"python": ["premailer"]},
     "depends": ["email_template_qweb"],
+    "data": ["views/email_preview.xml"],
     "demo": ["demo/demo_template.xml", "demo/demo_mail_template.xml"],
 }

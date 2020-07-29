@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record model="ir.ui.view" id="email_template_preview_form">
+    <field name="model">mail.template</field>
+    <field name="inherit_id" ref="mail.email_template_form" />
+    <field name="arch" type="xml">
+        <!-- inject default value for lang to prevent call to generate_email method in
+        default_get of the wizard-->
+        <xpath expr="//button[@name='%(mail.wizard_email_template_preview)d']" position="attributes">
+            <attribute name="context">{'template_id':active_id, 'default_preview_lang': context['lang']}</attribute>
+        </xpath>
+
+    </field>
+  </record>
+</odoo>
