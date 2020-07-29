@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: fetchmail_thread_default
-#: model:ir.model.fields,field_description:fetchmail_thread_default.field_fetchmail_server_default_thread_id
+#: model:ir.model.fields,field_description:fetchmail_thread_default.field_fetchmail_server__default_thread_id
 msgid "Default mail thread"
 msgstr ""
 
@@ -30,17 +30,20 @@ msgid "Email Thread"
 msgstr ""
 
 #. module: fetchmail_thread_default
-#: model:ir.model.fields,help:fetchmail_thread_default.field_fetchmail_server_default_thread_id
+#: model:ir.model,name:fetchmail_thread_default.model_fetchmail_server
+msgid "Incoming Mail Server"
+msgstr ""
+
+#. module: fetchmail_thread_default
+#: model:ir.model.fields,help:fetchmail_thread_default.field_fetchmail_server__default_thread_id
 msgid ""
 "Messages with no clear route will be posted as a new message to this thread."
 msgstr ""
 
 #. module: fetchmail_thread_default
-#: model:ir.model,name:fetchmail_thread_default.model_fetchmail_server
-msgid "POP/IMAP Server"
-msgstr "POP/IMAP 服务器"
-
-#. module: fetchmail_thread_default
 #: model:mail.channel,name:fetchmail_thread_default.demo_sink
 msgid "mailsink"
 msgstr ""
+
+#~ msgid "POP/IMAP Server"
+#~ msgstr "POP/IMAP 服务器"
