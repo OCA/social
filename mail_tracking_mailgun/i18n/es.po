@@ -102,7 +102,6 @@ msgstr "La información del evento ha caducado"
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
 #, fuzzy
-#| msgid "ir.mail_server"
 msgid "Mail Server"
 msgstr "ir.mail_server"
 
