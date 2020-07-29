@@ -4,7 +4,7 @@
 
 {
     "name": "Restrict follower selection",
-    "version": "11.0.2.0.0",
+    "version": "11.0.2.0.1",
     "author": "Therp BV,Creu Blanca,Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Social Network",
