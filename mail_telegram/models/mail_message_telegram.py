@@ -2,8 +2,9 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models, _
-import requests
-import json
+from telegram import Bot
+from io import BytesIO
+import base64
 from odoo.tools import html2plaintext
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
 import logging
@@ -17,7 +18,6 @@ class MailMessageTelegram(models.Model):
     _inherits = {'mail.message': 'mail_message_id'}
     _order = 'id desc'
     _rec_name = 'subject'
-    _base_url = 'https://api.telegram.org/bot'
 
     # content
     mail_message_id = fields.Many2one(
@@ -55,18 +55,26 @@ class MailMessageTelegram(models.Model):
     def _send(
         self, auto_commit=False, raise_exception=False, parse_mode=False
     ):
-        response_data = False
+        message = False
         try:
-            url = '%s%s/sendMessage' % (self._base_url, self.chat_id.token)
-            data = {'chat_id': self.chat_id.chat_id, 'text': html2plaintext(self.body)}
-            if parse_mode:
-                data['parse_mode'] = parse_mode
-            response = requests.post(
-                url, data=json.dumps(data).encode('utf-8'),
-                headers={'Content-Type': 'application/json'},
-            )
-            response.raise_for_status()
-            response_data = json.loads(response.content.decode('utf-8'))
+            bot = Bot(self.chat_id.token)
+            chat = bot.get_chat(self.chat_id.chat_id)
+            if self.body:
+                message = chat.send_message(
+                    html2plaintext(self.body), parse_mode=parse_mode)
+            for attachment in self.attachment_ids:
+                if attachment.mimetype.split('/')[0] == 'image':
+                    new_message = chat.send_photo(
+                        BytesIO(base64.b64decode(attachment.datas))
+                    )
+                else:
+                    new_message = chat.send_document(
+                        BytesIO(base64.b64decode(attachment.datas)),
+                        filename=attachment.datas_fname
+                    )
+                if not message:
+                    message = new_message
+                _logger.info(attachment.read(['mimetype']))
         except Exception as exc:
             if raise_exception:
                 raise MailDeliveryException(_(
@@ -76,30 +84,12 @@ class MailMessageTelegram(models.Model):
                 _logger.warning('Issue sending message with id %s: %s' % (
                     self.id, exc))
                 self.write({'state': 'exception', 'failure_reason': exc})
-        if response_data:
-            if response_data['ok']:
-                self.write({
-                    'state': 'sent',
-                    'message_id': response_data['result']['message_id'],
-                    'failure_reason': False
-                })
-                _logger.debug(
-                    'Telegram message %s has been sended with id %s' % (
-                        self.id, self.message_id
-                    ))
-            else:
-                issue = _(
-                    'The response from telegram was wrong: %s'
-                ) % json.dumps(response_data)
-                if raise_exception:
-                    raise MailDeliveryException(issue, None)
-                else:
-                    _logger.warning('Issue sending message with id %s: %s' % (
-                        self.id, issue))
-                    self.write({
-                        'state': 'exception',
-                        'failure_reason': issue,
-                    })
+        if message:
+            self.write({
+                'state': 'sent',
+                'message_id': message.message_id,
+                'failure_reason': False
+            })
         if auto_commit is True:
             # pylint: disable=invalid-commit
             self._cr.commit()

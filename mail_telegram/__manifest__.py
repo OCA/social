@@ -20,6 +20,9 @@
         'views/mail_telegram_bot.xml',
         'views/assets.xml',
     ],
+    'external_dependencies': {
+        'python': ['telegram'],
+    },
     'qweb': [
         'static/src/xml/thread.xml',
     ],
