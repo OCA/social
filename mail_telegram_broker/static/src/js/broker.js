@@ -348,9 +348,8 @@ odoo.define('telegram.Broker', function (require) {
             var self = this;
             var options = {};
             if (this._selectedMessage) {
-                messageData.subtype =
-                    this._selectedMessage.isNote() ? 'mail.mt_note':
-                    'mail.mt_comment';
+                messageData.subtype = this._selectedMessage.isNote()
+                    ? 'mail.mt_note': 'mail.mt_comment';
                 messageData.subtype_id = false;
                 messageData.message_type = 'comment';
 

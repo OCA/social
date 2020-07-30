@@ -89,6 +89,8 @@ class MailTelegramChat(models.Model):
             vals['message_id'] = kwargs['message_id']
         vals['telegram_unread'] = kwargs.get('telegram_unread', False)
         vals['attachment_ids'] = []
+        for attachment_id in kwargs.get('attachment_ids', []):
+            vals['attachment_ids'].append((4, attachment_id))
         for name, content, mimetype in kwargs.get('attachments', []):
             vals['attachment_ids'].append((0, 0, {
                 'name': name,
@@ -103,7 +105,9 @@ class MailTelegramChat(models.Model):
     @api.returns('mail.telegram.message', lambda value: value.id)
     def telegram_message_post_broker(self, body=False, **kwargs):
         self.ensure_one()
-        if not body and not kwargs.get('attachments'):
+        if not body and not kwargs.get('attachments') and not kwargs.get(
+            'attachment_ids'
+        ):
             return False
         vals = self._telegram_message_post_vals(
             body, telegram_unread=True, author_id=self.partner_id.id, **kwargs)
@@ -128,7 +132,7 @@ class MailTelegramChat(models.Model):
     @api.returns('mail.telegram.message', lambda value: value.id)
     def telegram_message_post(self, body=False, **kwargs):
         self.ensure_one()
-        if not body:
+        if not body and not kwargs.get('attachment_ids'):
             return
         message = self.with_context(
             do_not_notify=True

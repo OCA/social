@@ -108,7 +108,7 @@ odoo.define('telegram.TelegramThread', function (require) {
                     }).then(function () {
                         return messageData;
                     });
-            });
+                });
         },
         _markAsRead: function () {
             var self = this;
