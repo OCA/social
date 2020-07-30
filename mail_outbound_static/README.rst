@@ -65,10 +65,9 @@ Authors
 
 Contributors
 ~~~~~~~~~~~~
-* TRESCLOUD CIA. LTDA.
-* Andres Calle
-* Carlos Manuel Alvarez
-* Reinier Quevedo Batista
+
+* Dave Lasley <dave@laslabs.com>
+* Lorenzo Battistini <https://github.com/eLBati>
 
 Maintainers
 ~~~~~~~~~~~
@@ -83,6 +82,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/10.0/mail_outbound_static>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/12.0/mail_outbound_static>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
