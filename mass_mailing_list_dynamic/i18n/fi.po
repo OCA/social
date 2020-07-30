@@ -43,7 +43,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
-#: code:addons/mass_mailing_list_dynamic/models/mail_mass_mailing_contact.py:19
+#: code:addons/mass_mailing_list_dynamic/models/mail_mass_mailing_contact.py:15
 #, python-format
 msgid ""
 "Cannot edit manually contacts in a fully synchronized list. Change its sync "
