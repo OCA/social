@@ -136,3 +136,17 @@ class DynamicListCase(common.SavepointCase):
         self.assertFalse(self.list.is_synced)
         self.list.action_sync()
         self.assertTrue(self.list.is_synced)
+
+    def test_no_edition_fully_synced_dynamic_list(self):
+        self.list.sync_method = "full"
+        contact = self.env["mail.mass_mailing.contact"].create({
+            "partner_id": self.partners[0].id,
+        })
+        with self.assertRaises(ValidationError):
+            contact.list_ids = [(4, self.list.id)]
+        # This one shouldn't fail
+        list2 = self.env["mail.mass_mailing.list"].create({
+            "name": "test list 2",
+            "dynamic": False,
+        })
+        contact.list_ids = [(4, list2.id)]
