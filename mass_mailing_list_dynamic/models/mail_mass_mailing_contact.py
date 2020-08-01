@@ -24,34 +24,30 @@ class MassMailingContact(models.Model):
         """
         if self.env.context.get("syncing"):
             return
-        for command in vals["list_ids"]:
+        List = self.env["mail.mass_mailing.list"]
+        for command in vals.get("list_ids", []):
             if command[0] in (1, 2, 3, 4):
-                lst = self.env["mail.mass_mailing.list"].browse(command[1])
-                self._check_dynamic_full_sync_list(lst)
-            elif command[0] in (5, 6):
+                self._check_dynamic_full_sync_list(List.browse(command[1]))
+            elif command[0] == 5:
                 for lst in self.mapped("list_ids"):
                     self._check_dynamic_full_sync_list(lst)
-                if command[0] == 6:
-                    for _id in command[2]:
-                        lst = self.env["mail.mass_mailing.list"].browse(_id)
+            elif command[0] == 6:
+                for record in self:
+                    old_ids = set(record.list_ids.ids)
+                    new_ids = set(command[2])
+                    to_check_ids = (old_ids - new_ids) | (new_ids - old_ids)
+                    for lst in List.browse(to_check_ids):
                         self._check_dynamic_full_sync_list(lst)
-
-    @api.constrains("partner_id", "name", "email")
-    def _check_no_manual_edits_on_fully_synced_lists(self):
-        """We have to avoid also changes in linked partner, name or email."""
-        if self.env.context.get("syncing"):
-            return
-        for lst in self.mapped('list_ids'):
-            self._check_dynamic_full_sync_list(lst)
+        if any(x in vals for x in {"partner_id", "name", "email"}):
+            for lst in self.mapped("list_ids"):
+                self._check_dynamic_full_sync_list(lst)
 
     def write(self, vals):
-        if "list_ids" in vals:
-            self._check_no_modification_on_fully_synced_lists(vals)
+        self._check_no_modification_on_fully_synced_lists(vals)
         return super().write(vals)
 
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:
-            if "list_ids" in vals:
-                self._check_no_modification_on_fully_synced_lists(vals)
+            self._check_no_modification_on_fully_synced_lists(vals)
         return super().create(vals_list)
