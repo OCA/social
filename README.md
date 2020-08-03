@@ -52,4 +52,4 @@ addon | version | summary
 
 Translation Status
 ------------------
-[![Transifex Status](https://www.transifex.com/projects/p/OCA-social-12-0/chart/image_png)](https://www.transifex.com/projects/p/OCA-social-12-0)
+[![Translation status](https://translation.odoo-community.org/widgets/social-12-0/-/multi-auto.svg)](https://translation.odoo-community.org/engage/social-12-0/?utm_source=widget)
