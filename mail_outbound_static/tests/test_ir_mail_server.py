@@ -140,4 +140,3 @@ class TestIrMailServer(TransactionCase):
         self.assertEqual(
             message['From'],
             '%s <%s>' % (user, 'from@example.com'))
-
