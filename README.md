@@ -31,7 +31,7 @@ addon | version | summary
 [mail_optional_autofollow](mail_optional_autofollow/) | 12.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 12.0.1.0.0 | Choose to notify followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 12.0.1.0.1 | Allows you to configure the from header for a mail server.
-[mail_restrict_follower_selection](mail_restrict_follower_selection/) | 12.0.1.0.1 | Define a domain from which followers can be selected
+[mail_restrict_follower_selection](mail_restrict_follower_selection/) | 12.0.1.0.2 | Define a domain from which followers can be selected
 [mail_template_substitute](mail_template_substitute/) | 12.0.1.0.1 | This module allows to create substitution rules for mail templates.
 [mail_track_diff_only](mail_track_diff_only/) | 12.0.1.0.0 | Mail track diff only
 [mail_tracking](mail_tracking/) | 12.0.2.1.5 | Email tracking system for all mails sent
