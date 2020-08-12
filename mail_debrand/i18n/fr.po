@@ -34,7 +34,7 @@ msgstr ""
 #: code:addons/mail_debrand/models/mail_template.py:0
 #, python-format
 msgid "Powered by"
-msgstr ""
+msgstr "Propulsé par"
 
 #. module: mail_debrand
 #: code:addons/mail_debrand/models/mail_template.py:0
