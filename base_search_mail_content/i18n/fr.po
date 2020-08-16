@@ -67,7 +67,6 @@ msgstr "Contenu du message, à utiliser dans les recherches"
 #. module: base_search_mail_content
 #: model:ir.model,name:base_search_mail_content.model_trgm_index
 #, fuzzy
-#| msgid "trgm.index"
 msgid "Trigram Index"
 msgstr "trgm.index"
 
