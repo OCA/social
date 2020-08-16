@@ -374,7 +374,6 @@ msgstr "Sähköpostipisteet"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_needs_action
 #, fuzzy
-#| msgid "MailTracking event"
 msgid "Mail Tracking Needs Action"
 msgstr "MailTracking tapahtuma"
 
@@ -382,7 +381,6 @@ msgstr "MailTracking tapahtuma"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
 #, fuzzy
-#| msgid "MailTracking email"
 msgid "Mail Trackings"
 msgstr "MailTracking sähköposti"
 
