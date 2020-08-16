@@ -243,7 +243,6 @@ msgstr "Disiscrizioni"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription_reason
 #, fuzzy
-#| msgid "Unsubscription Reasons"
 msgid "Mail unsubscription reason"
 msgstr "Motivi Disiscrizione"
 
