@@ -83,7 +83,6 @@ msgstr "MailTracking tapahtuma"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
 #, fuzzy
-#| msgid "MailTracking event"
 msgid "Mailing Contact"
 msgstr "MailTracking tapahtuma"
 
