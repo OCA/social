@@ -497,7 +497,6 @@ msgstr "Empresa"
 #: model:ir.model.fields,help:mail_tracking.field_mail_compose_message__email_to
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
 #, fuzzy
-#| msgid "Recipient"
 msgid "Raw TO recipients"
 msgstr "Destinatario"
 
@@ -648,7 +647,6 @@ msgstr "Tiempo"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_compose_message__email_to
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
 #, fuzzy
-#| msgid "To:"
 msgid "To"
 msgstr "Para:"
 
