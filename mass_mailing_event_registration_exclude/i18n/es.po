@@ -47,14 +47,12 @@ msgstr "Nombre mostrado"
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration
 #, fuzzy
-#| msgid "event.registration.state"
 msgid "Event Registration"
 msgstr "event.registration.state"
 
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration_state
 #, fuzzy
-#| msgid "event.registration.state"
 msgid "Event Registration State"
 msgstr "event.registration.state"
 
