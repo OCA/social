@@ -26,7 +26,6 @@ msgstr "%d Tage verspätet"
 #. module: mail_activity_done
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_active
 #, fuzzy
-#| msgid "Activity"
 msgid "Active"
 msgstr "Aktivität"
 
@@ -38,7 +37,6 @@ msgstr "Aktivität"
 #. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_mail_activity_mixin
 #, fuzzy
-#| msgid "Activity"
 msgid "Activity Mixin"
 msgstr "Aktivität"
 
