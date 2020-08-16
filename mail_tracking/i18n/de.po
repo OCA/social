@@ -282,7 +282,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "Nachricht"
 
@@ -376,7 +375,6 @@ msgstr "Email-Ergebnis"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_needs_action
 #, fuzzy
-#| msgid "MailTracking event"
 msgid "Mail Tracking Needs Action"
 msgstr "MailVerfolgungs-Vokommnis"
 
@@ -384,7 +382,6 @@ msgstr "MailVerfolgungs-Vokommnis"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
 #, fuzzy
-#| msgid "MailTracking email"
 msgid "Mail Trackings"
 msgstr "Mailverfolgung"
 
