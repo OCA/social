@@ -134,7 +134,6 @@ msgstr "Mine team aktiviteter"
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.view_calendar_event_search
 #, fuzzy
-#| msgid "My Team Activities"
 msgid "My Team Meetings"
 msgstr "Mine team aktiviteter"
 
