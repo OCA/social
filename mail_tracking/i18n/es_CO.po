@@ -279,7 +279,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "Mensaje"
 
