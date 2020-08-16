@@ -77,7 +77,6 @@ msgstr ""
 #. module: base_search_mail_content
 #: model:ir.model.fields,help:base_search_mail_content.field_trgm_index__field_id
 #, fuzzy
-#| msgid "\"You can either select a field of type 'text', 'char' or 'html'.\""
 msgid "You can either select a field of type 'text', 'char' or 'html'."
 msgstr "\"Sie können ein Feld vom Typ 'text', 'char' oder 'html' verwenden.\""
 
