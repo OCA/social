@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo12-addon-mail_optional_autofollow',
         'odoo12-addon-mail_optional_follower_notification',
         'odoo12-addon-mail_outbound_static',
+        'odoo12-addon-mail_private',
         'odoo12-addon-mail_restrict_follower_selection',
         'odoo12-addon-mail_template_substitute',
         'odoo12-addon-mail_track_diff_only',
@@ -41,6 +42,7 @@ setuptools.setup(
         'odoo12-addon-mass_mailing_resend',
         'odoo12-addon-mass_mailing_unique',
         'odoo12-addon-message_auto_subscribe_notify_own',
+        'odoo12-addon-test_mail_private',
         'odoo12-addon-website_mass_mailing_name',
     ],
     classifiers=[
