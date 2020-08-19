@@ -24,6 +24,11 @@ msgid "Active"
 msgstr ""
 
 #. module: message_auto_subscribe_notify_own
+#: model:ir.model.fields,field_description:message_auto_subscribe_notify_own.field_message_auto_subscribe_notify_own_test__allow_private
+msgid "Allow Private"
+msgstr ""
+
+#. module: message_auto_subscribe_notify_own
 #: model:ir.model.fields,field_description:message_auto_subscribe_notify_own.field_message_auto_subscribe_notify_own_test__message_attachment_count
 msgid "Attachment Count"
 msgstr ""
