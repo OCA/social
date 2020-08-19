@@ -283,11 +283,17 @@ msgstr "Falhou"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mass_mailing_contact__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_test__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_test_activity__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_test_full__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_test_simple__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_test_track__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_product_product__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_product_template__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_test_performance_mail__failed_message_ids
 #, fuzzy
 msgid "Failed Messages"
 msgstr "Mensagem"
