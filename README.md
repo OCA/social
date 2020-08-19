@@ -31,6 +31,7 @@ addon | version | summary
 [mail_optional_autofollow](mail_optional_autofollow/) | 12.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 12.0.1.0.0 | Choose to notify followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 12.0.1.0.1 | Allows you to configure the from header for a mail server.
+[mail_private](mail_private/) | 12.0.1.0.0 | Create private emails
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 12.0.1.0.2 | Define a domain from which followers can be selected
 [mail_template_substitute](mail_template_substitute/) | 12.0.1.0.1 | This module allows to create substitution rules for mail templates.
 [mail_track_diff_only](mail_track_diff_only/) | 12.0.1.0.0 | Mail track diff only
@@ -46,6 +47,7 @@ addon | version | summary
 [mass_mailing_resend](mass_mailing_resend/) | 12.0.1.0.0 | Resend mass mailings
 [mass_mailing_unique](mass_mailing_unique/) | 12.0.1.0.1 | Avoids duplicate mailing lists and contacts
 [message_auto_subscribe_notify_own](message_auto_subscribe_notify_own/) | 12.0.1.0.0 | Receive notifications of your own subscriptions
+[test_mail_private](test_mail_private/) | 12.0.1.0.0 | Mail Pivate Test Addon
 [website_mass_mailing_name](website_mass_mailing_name/) | 12.0.1.0.0 | Ask for name when subscribing, and create and/or link partner
 
 [//]: # (end addons)
