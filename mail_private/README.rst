@@ -14,24 +14,42 @@ Mail Private
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/11.0/mail_private
+    :target: https://github.com/OCA/social/tree/12.0/mail_private
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-11-0/social-11-0-mail_private
+    :target: https://translation.odoo-community.org/projects/social-12-0/social-12-0-mail_private
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/205/11.0
+    :target: https://runbot.odoo-community.org/runbot/205/12.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This addon allows to define private groups on models.
-Then, you can define private messages only visible for members of the groups
+Then, you can define private messages only visible for members of message groups.
+Each model may have one or more visible groups.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+* Access in developer mode
+* Access to `Settings > Technical > Email > Mail Group`
+* Create a new group from on a model that has a thread and specify some
+  security groups
+
+Usage
+=====
+
+* Access a record from a model with at least one mail group defined
+* Try to send a message
+* A new button will be added that allows to set the message as private.
+  There will be as many buttons as groups you can use.
+* The message will only be visible by users that are on the group.
 
 Bug Tracker
 ===========
@@ -39,7 +57,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_private%0Aversion:%2011.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_private%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -55,6 +73,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Enric Tobella <etobella@creublanca.es>
+* Jaime Arroyo <jaime.arroyo@creublanca.es>
 
 Maintainers
 ~~~~~~~~~~~
@@ -69,6 +88,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/11.0/mail_private>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/12.0/mail_private>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
