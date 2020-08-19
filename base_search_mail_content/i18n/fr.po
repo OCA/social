@@ -42,11 +42,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mass_mailing_contact__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_activity__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_full__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_simple__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_track__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_product_product__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_product_template__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_users__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_test_performance_mail__message_content
 #, python-format
 msgid "Message Content"
 msgstr "Contenu du message"
@@ -62,11 +68,17 @@ msgstr "Contenu du message"
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_mass_mailing_contact__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_activity__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_full__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_simple__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_track__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_product_product__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_product_template__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_users__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_test_performance_mail__message_content
 msgid "Message content, to be used only in searches"
 msgstr "Contenu du message, à utiliser dans les recherches"
 
