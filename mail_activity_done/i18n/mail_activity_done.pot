@@ -28,6 +28,7 @@ msgstr ""
 #. module: mail_activity_done
 #: model:ir.model.fields,field_description:mail_activity_done.field_account_invoice__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_test_activity__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_product_product__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_product_template__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
