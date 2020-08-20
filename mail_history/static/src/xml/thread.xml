@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-extend="mail.widget.Thread.Empty">
+        <t t-jquery="t:last-child" t-operation="after">
+            <t t-if="thread.getID() === 'mailbox_history'">
+                <div class="o_thread_title o_neutral_face_icon">No history messages</div>
+                <div>Messages marked as read will appear in the history.</div>
+            </t>
+        </t>
+    </t>
+</templates>

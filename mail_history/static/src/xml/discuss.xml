@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+    <t t-name="mail_history.SidebarHistory">
+        <div t-attf-class="o_mail_discuss_title_main o_mail_discuss_item #{(activeThreadID === 'mailbox_history') ? 'o_active': ''}"
+            data-thread-id="mailbox_history">
+            <span class="o_thread_name"><i class="fa fa-history mr8"/>History</span>
+        </div>
+    </t>
+</templates>
