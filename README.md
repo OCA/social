@@ -47,7 +47,7 @@ addon | version | summary
 [mass_mailing_resend](mass_mailing_resend/) | 12.0.1.0.0 | Resend mass mailings
 [mass_mailing_unique](mass_mailing_unique/) | 12.0.1.0.1 | Avoids duplicate mailing lists and contacts
 [message_auto_subscribe_notify_own](message_auto_subscribe_notify_own/) | 12.0.1.0.0 | Receive notifications of your own subscriptions
-[test_mail_private](test_mail_private/) | 12.0.1.0.0 | Mail Pivate Test Addon
+[test_mail_private](test_mail_private/) | 12.0.1.0.1 | Mail Pivate Test Addon
 [website_mass_mailing_name](website_mass_mailing_name/) | 12.0.1.0.0 | Ask for name when subscribing, and create and/or link partner
 
 [//]: # (end addons)
