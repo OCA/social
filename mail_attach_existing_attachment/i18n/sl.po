@@ -22,7 +22,6 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_account_invoice_send__can_attach_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__can_attach_attachment
 msgid "Can Attach Attachment"
 msgstr "Lahko pripenja priponke"
@@ -33,7 +32,6 @@ msgid "Email composition wizard"
 msgstr "Čarovnik za sestavljanje e-pošte"
 
 #. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_account_invoice_send__object_attachment_ids
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__object_attachment_ids
 msgid "Object Attachments"
 msgstr "Priponke objekta"
