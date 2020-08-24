@@ -1,26 +1,5 @@
-##############################################################################
-#
-#     This file is part of mail_attach_existing_attachment,
-#     an Odoo module.
-#
-#     Copyright (c) 2015 ACSONE SA/NV (<http://acsone.eu>)
-#
-#     mail_attach_existing_attachment is free software:
-#     you can redistribute it and/or modify it under the terms of the GNU
-#     Affero General Public License as published by the Free Software
-#     Foundation,either version 3 of the License, or (at your option) any
-#     later version.
-#
-#     mail_attach_existing_attachment is distributed
-#     in the hope that it will be useful, but WITHOUT ANY WARRANTY; without
-#     even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR
-#     PURPOSE.  See the GNU Affero General Public License for more details.
-#
-#     You should have received a copy of the GNU Affero General Public License
-#     along with mail_attach_existing_attachment.
-#     If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2015 ACSONE SA/NV
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
 
@@ -30,7 +9,7 @@ class MailComposeMessage(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(MailComposeMessage, self).default_get(fields_list)
+        res = super().default_get(fields_list)
         if (
             res.get("res_id")
             and res.get("model")
@@ -49,9 +28,8 @@ class MailComposeMessage(models.TransientModel):
         string="Object Attachments",
     )
 
-    @api.multi
     def get_mail_values(self, res_ids):
-        res = super(MailComposeMessage, self).get_mail_values(res_ids)
+        res = super().get_mail_values(res_ids)
         if self.object_attachment_ids.ids and self.model and len(res_ids) == 1:
             res[res_ids[0]].setdefault("attachment_ids", []).extend(
                 self.object_attachment_ids.ids
