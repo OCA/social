@@ -5,34 +5,36 @@ from odoo import models
 
 
 class MailBlackList(models.Model):
-    _inherit = 'mail.blacklist'
+    _inherit = "mail.blacklist"
 
     def _add(self, email):
-        mailing_id = self.env.context.get('mailing_id')
-        res_id = self.env.context.get('unsubscription_res_id')
+        mailing_id = self.env.context.get("mailing_id")
+        res_id = self.env.context.get("unsubscription_res_id")
         if mailing_id and res_id:
-            mailing = self.env['mail.mass_mailing'].browse(mailing_id,
-                                                           self._prefetch)
+            mailing = self.env["mail.mass_mailing"].browse(mailing_id, self._prefetch)
             model_name = mailing.mailing_model_real
-            self.env["mail.unsubscription"].create({
-                "email": email,
-                "mass_mailing_id": mailing_id,
-                "unsubscriber_id": "%s,%d" % (model_name, res_id),
-                "action": "blacklist_add",
-            })
+            self.env["mail.unsubscription"].create(
+                {
+                    "email": email,
+                    "mass_mailing_id": mailing_id,
+                    "unsubscriber_id": "%s,%d" % (model_name, res_id),
+                    "action": "blacklist_add",
+                }
+            )
         return super()._add(email)
 
     def _remove(self, email):
-        mailing_id = self.env.context.get('mailing_id')
-        res_id = self.env.context.get('unsubscription_res_id')
+        mailing_id = self.env.context.get("mailing_id")
+        res_id = self.env.context.get("unsubscription_res_id")
         if mailing_id and res_id:
-            mailing = self.env['mail.mass_mailing'].browse(mailing_id,
-                                                           self._prefetch)
+            mailing = self.env["mail.mass_mailing"].browse(mailing_id, self._prefetch)
             model_name = mailing.mailing_model_real
-            self.env["mail.unsubscription"].create({
-                "email": email,
-                "mass_mailing_id": mailing_id,
-                "unsubscriber_id": "%s,%d" % (model_name, res_id),
-                "action": "blacklist_rm",
-            })
+            self.env["mail.unsubscription"].create(
+                {
+                    "email": email,
+                    "mass_mailing_id": mailing_id,
+                    "unsubscriber_id": "%s,%d" % (model_name, res_id),
+                    "action": "blacklist_rm",
+                }
+            )
         return super()._remove(email)
