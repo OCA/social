@@ -26,8 +26,29 @@ Mail Outbound Static
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module brings Odoo outbound emails in to strict compliance with RFC-2822
-by allowing for a statically configured From header, with the sender's e-mail
-being appended into the proper Sender header instead.
+by allowing for a dynamically configured From header, with the sender's e-mail
+being appended into the proper Sender header instead. To accomplish this we:
+
+* Add a domain whitelist field in the mail server model. This one represent an
+  allowed Domains list separated by commas. If there is not given SMTP server
+  it will let us to search the proper mail server to be used to sent themessages
+  where the message 'From' email domain match with the domain whitelist. If
+  there is not mail sever that match then will use the default mail server to
+  sent the message.
+
+* Add a Email From field that will let us to email from a specific address taking
+  into account this conditions:
+
+  1) If the sender domain match with the domain whitelist then the original
+     message's 'From' will remain as it is and will not be changed because the
+     mail server is able to sent in the name of the sender domain.
+
+  2) If the original message's 'From' does not match with the domain whitelist
+     then the email From is replaced with the Email From field value.
+
+* Add compatibility to define the smtp information in Odoo config file. Both
+  smtp_from and smtp_whitelist_domain values will be used if there is not mail
+  server configured in the system.
 
 **Table of contents**
 
@@ -39,11 +60,13 @@ Usage
 
 * Navigate to an Outbound Email Server
 * Set the `Email From` option to an email address
+* Set the `Domain Whitelist` option with the domain whitelist
 
 Known issues / Roadmap
 ======================
 
-* Allow for domain-based whitelist that will not be manipulated
+* Add validation of smtp_from field to ensure that is a valid email address
+* Add validation of domain_whitelist field to ensure that they are valid domains
 
 Bug Tracker
 ===========
@@ -63,6 +86,7 @@ Authors
 
 * brain-tec AG
 * LasLabs
+* Adhoc SA
 
 Contributors
 ~~~~~~~~~~~~
@@ -71,6 +95,8 @@ Contributors
 * Dave Lasley <dave@laslabs.com>
 * Lorenzo Battistini <https://github.com/eLBati>
 * Pierre Pizzetta <pierre@devreaction.com>
+* Katherine Zaoral <kz@adhoc.com.ar>
+* Juan José Scarafía <jjs@adhoc.com.ar>
 
 Maintainers
 ~~~~~~~~~~~
