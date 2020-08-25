@@ -369,8 +369,28 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external" href="http://www.gnu.org/licenses/lgpl-3.0-standalone.html"><img alt="License: LGPL-3" src="https://img.shields.io/badge/licence-LGPL--3-blue.png" /></a> <a class="reference external" href="https://github.com/OCA/social/tree/14.0/mail_outbound_static"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external" href="https://translation.odoo-community.org/projects/social-14-0/social-14-0-mail_outbound_static"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external" href="https://runbot.odoo-community.org/runbot/205/14.0"><img alt="Try me on Runbot" src="https://img.shields.io/badge/runbot-Try%20me-875A7B.png" /></a></p>
 <p>This module brings Odoo outbound emails in to strict compliance with RFC-2822
-by allowing for a statically configured From header, with the sender’s e-mail
-being appended into the proper Sender header instead.</p>
+by allowing for a dynamically configured From header, with the sender’s e-mail
+being appended into the proper Sender header instead. To accomplish this we:</p>
+<ul class="simple">
+<li>Add a domain whitelist field in the mail server model. This one represent an
+allowed Domains list separated by commas. If there is not given SMTP server
+it will let us to search the proper mail server to be used to sent themessages
+where the message ‘From’ email domain match with the domain whitelist. If
+there is not mail sever that match then will use the default mail server to
+sent the message.</li>
+<li>Add a Email From field that will let us to email from a specific address taking
+into account this conditions:<ol class="arabic">
+<li>If the sender domain match with the domain whitelist then the original
+message’s ‘From’ will remain as it is and will not be changed because the
+mail server is able to sent in the name of the sender domain.</li>
+<li>If the original message’s ‘From’ does not match with the domain whitelist
+then the email From is replaced with the Email From field value.</li>
+</ol>
+</li>
+<li>Add compatibility to define the smtp information in Odoo config file. Both
+smtp_from and smtp_whitelist_domain values will be used if there is not mail
+server configured in the system.</li>
+</ul>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -390,12 +410,14 @@ being appended into the proper Sender header instead.</p>
 <ul class="simple">
 <li>Navigate to an Outbound Email Server</li>
 <li>Set the <cite>Email From</cite> option to an email address</li>
+<li>Set the <cite>Domain Whitelist</cite> option with the domain whitelist</li>
 </ul>
 </div>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#id2">Known issues / Roadmap</a></h1>
 <ul class="simple">
-<li>Allow for domain-based whitelist that will not be manipulated</li>
+<li>Add validation of smtp_from field to ensure that is a valid email address</li>
+<li>Add validation of domain_whitelist field to ensure that they are valid domains</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
@@ -413,6 +435,7 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <ul class="simple">
 <li>brain-tec AG</li>
 <li>LasLabs</li>
+<li>Adhoc SA</li>
 </ul>
 </div>
 <div class="section" id="contributors">
@@ -422,6 +445,8 @@ If you spotted it first, help us smashing it by providing a detailed and welcome
 <li>Dave Lasley &lt;<a class="reference external" href="mailto:dave&#64;laslabs.com">dave&#64;laslabs.com</a>&gt;</li>
 <li>Lorenzo Battistini &lt;<a class="reference external" href="https://github.com/eLBati">https://github.com/eLBati</a>&gt;</li>
 <li>Pierre Pizzetta &lt;<a class="reference external" href="mailto:pierre&#64;devreaction.com">pierre&#64;devreaction.com</a>&gt;</li>
+<li>Katherine Zaoral &lt;<a class="reference external" href="mailto:kz&#64;adhoc.com.ar">kz&#64;adhoc.com.ar</a>&gt;</li>
+<li>Juan José Scarafía &lt;<a class="reference external" href="mailto:jjs&#64;adhoc.com.ar">jjs&#64;adhoc.com.ar</a>&gt;</li>
 </ul>
 </div>
 <div class="section" id="maintainers">
