@@ -7,7 +7,7 @@
     "version": "14.0.1.0.0",
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
-    "author": "brain-tec AG, LasLabs, Odoo Community Association (OCA)",
+    "author": "brain-tec AG, LasLabs, Adhoc SA, Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "application": False,
     "installable": True,

@@ -1,13 +1,17 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
+import logging
 import os
 import threading
 from email import message_from_string
 
 from mock import MagicMock
 
+import odoo.tools as tools
 from odoo.tests.common import TransactionCase
+
+_logger = logging.getLogger(__name__)
 
 
 class TestIrMailServer(TransactionCase):
@@ -17,6 +21,7 @@ class TestIrMailServer(TransactionCase):
         self.email_from_another = "another@example.com"
         self.Model = self.env["ir.mail_server"]
         self.parameter_model = self.env["ir.config_parameter"]
+        self._delete_mail_servers()
         self.Model.create(
             {
                 "name": "localhost",
@@ -29,6 +34,44 @@ class TestIrMailServer(TransactionCase):
         )
         with open(message_file, "r") as fh:
             self.message = message_from_string(fh.read())
+
+    def _init_mail_server_domain_whilelist_based(self):
+        self._delete_mail_servers()
+        self.mail_server_domainone = self.Model.create(
+            {
+                "name": "sandbox domainone",
+                "smtp_host": "localhost",
+                "smtp_from": "notifications@domainone.com",
+                "domain_whitelist": "domainone.com",
+            }
+        )
+        self.mail_server_domaintwo = self.Model.create(
+            {
+                "name": "sandbox domaintwo",
+                "smtp_host": "localhost",
+                "smtp_from": "hola@domaintwo.com",
+                "domain_whitelist": "domaintwo.com",
+            }
+        )
+        self.mail_server_domainthree = self.Model.create(
+            {
+                "name": "sandbox domainthree",
+                "smtp_host": "localhost",
+                "smtp_from": "notifications@domainthree.com",
+                "domain_whitelist": "domainthree.com,domainmulti.com",
+            }
+        )
+
+    def _skip_test(self, reason):
+        _logger.warn(reason)
+        self.skipTest(reason)
+
+    def _delete_mail_servers(self):
+        """ Delete all available mail servers """
+        all_mail_servers = self.Model.search([])
+        if all_mail_servers:
+            all_mail_servers.unlink()
+        self.assertFalse(self.Model.search([]))
 
     def _send_mail(self, message=None, mail_server_id=None, smtp_server=None):
         if message is None:
@@ -70,7 +113,175 @@ class TestIrMailServer(TransactionCase):
         # Also check passing mail_server_id
         mail_server_id = self.Model.sudo().search([], order="sequence", limit=1)[0].id
         message = self._send_mail(mail_server_id=mail_server_id)
-        self.assertEqual(message["From"], "{} <{}>".format(user, self.email_from))
+        self.assertEqual(message["From"], '"{}" <{}>'.format(user, self.email_from))
         self.assertEqual(
-            message["Return-Path"], "{} <{}>".format(user, self.email_from)
+            message["Return-Path"], '"{}" <{}>'.format(user, self.email_from)
+        )
+
+    def test_1_from_outgoing_server_domainone(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "domainone.com"
+        email_from = "Mitchell Admin <admin@%s>" % domain
+        expected_mail_server = self.mail_server_domainone
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], email_from)
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertEqual(
+            used_mail_server,
+            expected_mail_server,
+            "It using %s but we expect to use %s"
+            % (used_mail_server.name, expected_mail_server.name),
+        )
+
+    def test_2_from_outgoing_server_domaintwo(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "domaintwo.com"
+        email_from = "Mitchell Admin <admin@%s>" % domain
+        expected_mail_server = self.mail_server_domaintwo
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], email_from)
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertEqual(
+            used_mail_server,
+            expected_mail_server,
+            "It using %s but we expect to use %s"
+            % (used_mail_server.name, expected_mail_server.name),
+        )
+
+    def test_3_from_outgoing_server_another(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "example.com"
+        email_from = "Mitchell Admin <admin@%s>" % domain
+        expected_mail_server = self.mail_server_domainone
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(
+            message["From"], "Mitchell Admin <%s>" % expected_mail_server.smtp_from
+        )
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertEqual(
+            used_mail_server,
+            expected_mail_server,
+            "It using %s but we expect to use %s"
+            % (used_mail_server.name, expected_mail_server.name),
+        )
+
+    def test_4_from_outgoing_server_none_use_config(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "example.com"
+        email_from = "Mitchell Admin <admin@%s>" % domain
+
+        self._delete_mail_servers()
+
+        # Find config values
+        config_smtp_from = tools.config.get("smtp_from")
+        config_smtp_domain_whitelist = tools.config.get("smtp_domain_whitelist")
+        if not config_smtp_from or not config_smtp_domain_whitelist:
+            self._skip_test(
+                "Cannot test transactions because there is not either smtp_from"
+                " or smtp_domain_whitelist."
+            )
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], "Mitchell Admin <%s>" % config_smtp_from)
+
+        used_mail_server = self.Model._get_mail_sever("example.com")
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertFalse(
+            used_mail_server, "using this mail server %s" % (used_mail_server.name)
+        )
+
+    def test_5_from_outgoing_server_none_same_domain(self):
+        self._init_mail_server_domain_whilelist_based()
+
+        # Find config values
+        config_smtp_from = tools.config.get("smtp_from")
+        config_smtp_domain_whitelist = domain = tools.config.get(
+            "smtp_domain_whitelist"
+        )
+        if not config_smtp_from or not config_smtp_domain_whitelist:
+            self._skip_test(
+                "Cannot test transactions because there is not either smtp_from"
+                " or smtp_domain_whitelist."
+            )
+
+        email_from = "Mitchell Admin <admin@%s>" % domain
+
+        self._delete_mail_servers()
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], email_from)
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertFalse(used_mail_server)
+
+    def test_6_from_outgoing_server_no_name_from(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "example.com"
+        email_from = "test@%s" % domain
+        expected_mail_server = self.mail_server_domainone
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], expected_mail_server.smtp_from)
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertEqual(
+            used_mail_server,
+            expected_mail_server,
+            "It using %s but we expect to use %s"
+            % (used_mail_server.name, expected_mail_server.name),
+        )
+
+    def test_7_from_outgoing_server_multidomain_1(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "domainthree.com"
+        email_from = "Mitchell Admin <admin@%s>" % domain
+        expected_mail_server = self.mail_server_domainthree
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], email_from)
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertEqual(
+            used_mail_server,
+            expected_mail_server,
+            "It using %s but we expect to use %s"
+            % (used_mail_server.name, expected_mail_server.name),
+        )
+
+    def test_8_from_outgoing_server_multidomain_3(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "domainmulti.com"
+        email_from = "test@%s" % domain
+        expected_mail_server = self.mail_server_domainthree
+
+        self.message.replace_header("From", email_from)
+        message = self._send_mail()
+        self.assertEqual(message["From"], email_from)
+
+        used_mail_server = self.Model._get_mail_sever(domain)
+        used_mail_server = self.Model.browse(used_mail_server)
+        self.assertEqual(
+            used_mail_server,
+            expected_mail_server,
+            "It using %s but we expect to use %s"
+            % (used_mail_server.name, expected_mail_server.name),
         )
