@@ -1,0 +1,44 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_outbound_dynamic
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-25 20:56+0000\n"
+"PO-Revision-Date: 2020-08-25 20:56+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_outbound_dynamic
+#: model:ir.model.fields,field_description:mail_outbound_dynamic.field_ir_mail_server__allowed_domain
+msgid "Allowed Domain"
+msgstr "Dominio Permitido"
+
+#. module: mail_outbound_dynamic
+#: model:ir.model.fields,help:mail_outbound_dynamic.field_ir_mail_server__allowed_domain
+msgid "Allowed domain that can use this SMTP without changing the smtp_from"
+msgstr "Dominio permitido que pueden usar este SMTP sin cambiar el email from"
+
+#. module: mail_outbound_dynamic
+#: model:ir.model.fields,help:mail_outbound_dynamic.field_ir_mail_server__smtp_from
+msgid ""
+"Change message 'From' with this specific address if 'From' domain is "
+"different from Allowed Domain"
+msgstr "Cambia el 'De' del mensaje con esta dirección especifica si el dominio del 'De' es"
+"diferente del Dominio permitido"
+
+#. module: mail_outbound_dynamic
+#: model:ir.model.fields,field_description:mail_outbound_dynamic.field_ir_mail_server__smtp_from
+msgid "Email From"
+msgstr "Email De"
+
+#. module: mail_outbound_dynamic
+#: model:ir.model,name:mail_outbound_dynamic.model_ir_mail_server
+msgid "Mail Server"
+msgstr "Servidor de correo"
