@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mass_mailing_custom_unsubscribe
+# 	* mass_mailing_custom_unsubscribe
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -43,26 +43,21 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__allow_private
-msgid "Allow Private"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:89
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:94
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:221
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:230
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:260
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:270
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
 msgid "An error occured. Please try again later or contact us."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:163
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:169
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
 msgid "An error occurred. Your changes have not been saved, try again later."
 msgstr ""
@@ -73,7 +68,7 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: selection:mail.unsubscription,action:0
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__blacklist_add
 msgid "Blacklisting"
 msgstr ""
 
@@ -101,7 +96,7 @@ msgid "Date"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: selection:mail.unsubscription,action:0
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__blacklist_rm
 msgid "De-blacklisting"
 msgstr ""
 
@@ -180,23 +175,23 @@ msgid "ID"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_unread
-msgid "If checked new messages require your attention."
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_needaction
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_error
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_mass_mailing_list__not_cross_unsubscriptable
-msgid "If you mark this field, this list won't be shown when unsubscribing from other mailing list, in the section: 'Is there any other mailing list you want to leave?'"
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mailing_list__not_cross_unsubscriptable
+msgid ""
+"If you mark this field, this list won't be shown when unsubscribing from "
+"other mailing list, in the section: 'Is there any other mailing list you "
+"want to leave?'"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
@@ -238,7 +233,7 @@ msgid "Mail unsubscription reason"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mailing_list
 msgid "Mailing List"
 msgstr ""
 
@@ -253,7 +248,7 @@ msgid "Main Attachment"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mailing_mailing
 msgid "Mass Mailing"
 msgstr ""
 
@@ -309,7 +304,7 @@ msgid "Name"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_mass_mailing_list__not_cross_unsubscriptable
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_list__not_cross_unsubscriptable
 msgid "Not cross unsubscriptable"
 msgstr ""
 
@@ -320,7 +315,7 @@ msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_error_counter
-msgid "Number of error"
+msgid "Number of errors"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
@@ -344,13 +339,13 @@ msgid "Other reason"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:89
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:0
 #, python-format
 msgid "Please indicate why are you unsubscribing."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:98
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:0
 #, python-format
 msgid "Please provide details on why you are unsubscribing."
 msgstr ""
@@ -367,12 +362,17 @@ msgid "Reason"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__sequence
 msgid "Sequence"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: selection:mail.unsubscription,action:0
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__subscription
 msgid "Subscription"
 msgstr ""
 
@@ -397,7 +397,7 @@ msgid "Unsubscribe now"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: selection:mail.unsubscription,action:0
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__unsubscription
 msgid "Unsubscription"
 msgstr ""
 
@@ -409,17 +409,9 @@ msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
-msgid "We would appreciate if you provide feedback about why you updated<br/>your subscriptions"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__website_message_ids
-msgid "Website Messages"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__website_message_ids
-msgid "Website communication history"
+msgid ""
+"We would appreciate if you provide feedback about why you updated<br/>your "
+"subscriptions"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
@@ -444,45 +436,48 @@ msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:147
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:199
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:247
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
 msgid "You are not authorized to do this!"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:105
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
 msgid "You have been <strong>successfully unsubscribed from %s</strong>."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:110
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
 msgid "You have been <strong>successfully unsubscribed</strong>."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:205
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
-msgid "You have been successfully <strong>added to our blacklist</strong>. You will not be contacted anymore by our services."
+msgid ""
+"You have been successfully <strong>added to our blacklist</strong>. You will"
+" not be contacted anymore by our services."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:253
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
-msgid "You have been successfully <strong>removed from our blacklist</strong>. You are now able to be contacted by our services."
+msgid ""
+"You have been successfully <strong>removed from our blacklist</strong>. You "
+"are now able to be contacted by our services."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
-#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:152
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
 msgid "Your changes have been saved."
 msgstr ""
-

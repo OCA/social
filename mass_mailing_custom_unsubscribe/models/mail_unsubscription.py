@@ -3,7 +3,7 @@
 
 from odoo import _, api, fields, models
 
-from odoo.addons.mass_mailing.models.mass_mailing import MASS_MAILING_BUSINESS_MODELS
+from odoo.addons.mass_mailing.models.mailing import MASS_MAILING_BUSINESS_MODELS
 
 from .. import exceptions
 
@@ -29,7 +29,7 @@ class MailUnsubscription(models.Model):
         help="What did the (un)subscriber choose to do.",
     )
     mass_mailing_id = fields.Many2one(
-        "mail.mass_mailing",
+        "mailing.mailing",
         "Mass mailing",
         required=True,
         help="Mass mailing from which he was unsubscribed.",
@@ -40,7 +40,7 @@ class MailUnsubscription(models.Model):
         help="Who was subscribed or unsubscribed.",
     )
     mailing_list_ids = fields.Many2many(
-        comodel_name="mail.mass_mailing.list",
+        comodel_name="mailing.list",
         string="Mailing lists",
         help="(Un)subscribed mass mailing lists, if any.",
     )
@@ -59,8 +59,8 @@ class MailUnsubscription(models.Model):
     def map_mailing_list_models(self, models):
         model_mapped = []
         for model in models:
-            if model == "mail.mass_mailing.list":
-                model_mapped.append(("mail.mass_mailing.contact", model))
+            if model == "mailing.list":
+                model_mapped.append(("mailing.contact", model))
             else:
                 model_mapped.append((model, model))
         return model_mapped
@@ -71,7 +71,7 @@ class MailUnsubscription(models.Model):
 
     @api.model
     def _selection_unsubscriber_id(self):
-        """Models that can be linked to a ``mail.mass_mailing``."""
+        """Models that can be linked to a ``mailing.mailing``."""
         model = (
             self.env["ir.model"]
             .search([("model", "in", MASS_MAILING_BUSINESS_MODELS)])
@@ -79,7 +79,6 @@ class MailUnsubscription(models.Model):
         )
         return self.map_mailing_list_models(model)
 
-    @api.multi
     @api.constrains("action", "reason_id")
     def _check_reason_needed(self):
         """Ensure reason is given for unsubscriptions."""
@@ -90,7 +89,6 @@ class MailUnsubscription(models.Model):
                     _("Please indicate why are you unsubscribing.")
                 )
 
-    @api.multi
     @api.constrains("details", "reason_id")
     def _check_details_needed(self):
         """Ensure details are given if required."""
