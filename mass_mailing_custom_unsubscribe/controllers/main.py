@@ -16,7 +16,7 @@ class CustomUnsubscribe(MassMailController):
     def reason_form(self, mailing_id, email, res_id, reasons, token):
         """Get the unsubscription reason form.
 
-        :param mail.mass_mailing mailing:
+        :param mailing.mailing mailing:
             Mailing where the unsubscription is being processed.
 
         :param str email:
@@ -46,6 +46,8 @@ class CustomUnsubscribe(MassMailController):
             "Called `mailing()` with: %r", (mailing_id, email, res_id, token, post)
         )
         reasons = request.env["mail.unsubscription.reason"].search([])
+        if not res_id:
+            res_id = "0"
         res_id = res_id and int(res_id)
         try:
             # Check if we already have a reason for unsubscription
@@ -57,13 +59,10 @@ class CustomUnsubscribe(MassMailController):
             # Unsubscribe, saving reason and details by context
             details = post.get("details", False)
             self._add_extra_context(mailing_id, res_id, reason_id, details)
-            mailing_obj = request.env["mail.mass_mailing"]
+            mailing_obj = request.env["mailing.mailing"]
             mass_mailing = mailing_obj.sudo().browse(mailing_id)
             model = mass_mailing.mailing_model_real
-            if (
-                "opt_out" in request.env[model]._fields
-                and model != "mail.mass_mailing.contact"
-            ):
+            if "opt_out" in request.env[model]._fields and model != "mailing.contact":
                 mass_mailing.update_opt_out_other(email, [res_id], True)
                 result = request.render(
                     "mass_mailing.page_unsubscribed",
@@ -81,7 +80,7 @@ class CustomUnsubscribe(MassMailController):
                 # You could get a DetailsRequiredError here, but only if HTML5
                 # validation fails, which should not happen in modern browsers
                 result = super().mailing(mailing_id, email, res_id, token=token, **post)
-                if model == "mail.mass_mailing.contact":
+                if model == "mailing.contact":
                     # update list_ids taking into account
                     # not_cross_unsubscriptable field
                     result.qcontext.update(
