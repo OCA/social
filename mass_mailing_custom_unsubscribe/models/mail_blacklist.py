@@ -11,7 +11,7 @@ class MailBlackList(models.Model):
         mailing_id = self.env.context.get("mailing_id")
         res_id = self.env.context.get("unsubscription_res_id")
         if mailing_id and res_id:
-            mailing = self.env["mail.mass_mailing"].browse(mailing_id, self._prefetch)
+            mailing = self.env["mailing.mailing"].browse(mailing_id)
             model_name = mailing.mailing_model_real
             self.env["mail.unsubscription"].create(
                 {
@@ -27,7 +27,7 @@ class MailBlackList(models.Model):
         mailing_id = self.env.context.get("mailing_id")
         res_id = self.env.context.get("unsubscription_res_id")
         if mailing_id and res_id:
-            mailing = self.env["mail.mass_mailing"].browse(mailing_id, self._prefetch)
+            mailing = self.env["mailing.mailing"].browse(mailing_id)
             model_name = mailing.mailing_model_real
             self.env["mail.unsubscription"].create(
                 {
