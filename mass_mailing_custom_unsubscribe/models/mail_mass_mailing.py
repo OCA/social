@@ -9,13 +9,13 @@ from odoo.tools.safe_eval import safe_eval
 
 
 class MailMassMailing(models.Model):
-    _inherit = "mail.mass_mailing"
+    _inherit = "mailing.mailing"
 
     def update_opt_out(self, email, list_ids, value):
         """Save unsubscription reason when opting out from mailing."""
         self.ensure_one()
         action = "unsubscription" if value else "subscription"
-        subscription_model = self.env["mail.mass_mailing.list_contact_rel"]
+        subscription_model = self.env["mailing.contact.subscription"]
         opt_out_records = subscription_model.search(
             [
                 ("contact_id.email", "=ilike", email),
@@ -23,7 +23,7 @@ class MailMassMailing(models.Model):
                 ("opt_out", "!=", value),
             ]
         )
-        model_name = "mail.mass_mailing.contact"
+        model_name = "mailing.contact"
         for contact, subscriptions in groupby(opt_out_records, lambda r: r.contact_id):
             mailing_list_ids = [r.list_id.id for r in subscriptions]
             # reason_id and details are expected from the context
@@ -64,10 +64,7 @@ class MailMassMailing(models.Model):
         """Handle models with opt_out field for excluding them."""
         self.ensure_one()
         model = self.env[self.mailing_model_real].with_context(active_test=False)
-        if (
-            self.mailing_model_real != "mail.mass_mailing.contact"
-            and "opt_out" in model._fields
-        ):
+        if self.mailing_model_real != "mailing.contact" and "opt_out" in model._fields:
             email_fname = "email_from"
             if "email" in model._fields:
                 email_fname = "email"

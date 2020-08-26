@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class MailMassMailing(models.Model):
-    _inherit = "mail.mass_mailing.list"
+    _inherit = "mailing.list"
 
     not_cross_unsubscriptable = fields.Boolean(
         string="Not cross unsubscriptable",

@@ -51,7 +51,7 @@
 
 <menuitem
     id="mail_unsubscription_reason_menu"
-    parent="mass_mailing.menu_mass_mailing_configuration"
+    parent="mass_mailing.mass_mailing_configuration"
     action="mail_unsubscription_reason_action"/>
 
 </odoo>
