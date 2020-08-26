@@ -28,24 +28,23 @@ class UICase(HttpCase):
         )
 
         self.domain = self.env["ir.config_parameter"].get_param("web.base.url")
-        List = self.lists = self.env["mail.mass_mailing.list"]
+        List = self.lists = self.env["mailing.list"]
         for n in range(4):
             self.lists += List.create({"name": "test list %d" % n})
-        self.contact = self.env["mail.mass_mailing.contact"].create(
+        self.contact = self.env["mailing.contact"].create(
             {
                 "name": "test contact",
                 "email": self.email,
                 "list_ids": [(6, False, self.lists.ids)],
             }
         )
-        self.mailing = self.env["mail.mass_mailing"].create(
+        self.mailing = self.env["mailing.mailing"].create(
             {
                 "name": "test mailing %d" % n,
-                "mailing_model_id": self.env.ref(
-                    "mass_mailing.model_mail_mass_mailing_list"
-                ).id,
+                "mailing_model_id": self.env.ref("mass_mailing.model_mailing_list").id,
                 "contact_list_ids": [(6, 0, [self.lists[0].id, self.lists[3].id])],
                 "reply_to_mode": "thread",
+                "subject": "Test",
             }
         )
         self.mailing._onchange_model_and_list()
@@ -73,7 +72,7 @@ class UICase(HttpCase):
         self.lists[3].is_public = False
         # Extract the unsubscription link from the message body
         with self.mail_postprocess_patch:
-            self.mailing.send_mail()
+            self.mailing.action_send_mail()
 
         tour = "mass_mailing_custom_unsubscribe_tour_contact"
         self.browser_js(
@@ -84,9 +83,9 @@ class UICase(HttpCase):
         )
 
         # Check results from running tour
-        self.assertFalse(self.lists[0].subscription_contact_ids.opt_out)
-        self.assertTrue(self.lists[1].subscription_contact_ids.opt_out)
-        self.assertFalse(self.lists[2].subscription_contact_ids.opt_out)
+        self.assertFalse(self.lists[0].subscription_ids.opt_out)
+        self.assertTrue(self.lists[1].subscription_ids.opt_out)
+        self.assertFalse(self.lists[2].subscription_ids.opt_out)
 
         cnt = self.contact
         common_domain = [
@@ -137,10 +136,10 @@ class UICase(HttpCase):
         )
         # Extract the unsubscription link from the message body
         with self.mail_postprocess_patch:
-            self.mailing.send_mail()
+            self.mailing.action_send_mail()
 
         tour = "mass_mailing_custom_unsubscribe_tour_partner"
-        self.phantom_js(
+        self.browser_js(
             url_path=self.url,
             code=self._tour_run % tour,
             ready=self._tour_ready % tour,

@@ -4,7 +4,7 @@
 /* This JS module replaces core AJAX submission because it is impossible
  * to extend it as it is currently designed. It is almost a copy+paste from
  * upstream, to allow easier version/patch updates, so linter is disabled. */
- /* eslint-disable */
+/* eslint-disable */
 odoo.define('mass_mailing_custom_unsubscribe.unsubscribe', function (require) {
     'use strict';
 
@@ -31,7 +31,7 @@ odoo.define('mass_mailing_custom_unsubscribe.unsubscribe', function (require) {
     $radio.on('change click', function (e) {
         $details.prop(
             "required",
-            $(event.target).is("[data-details-required]") && $(event.target).is(":visible")
+            $(e.target).is("[data-details-required]") && $(e.target).is(":visible")
         );
     });
 
@@ -90,7 +90,7 @@ odoo.define('mass_mailing_custom_unsubscribe.unsubscribe', function (require) {
                     $info_state.removeClass('alert-success').removeClass('alert-info').removeClass('alert-warning').addClass('alert-error');
                 }
             })
-            .fail(function () {
+            .guardedCatch(function () {
                 $('#subscription_info').html(_t('An error occured. Please try again later or contact us.'));
                 $info_state.removeClass('alert-success').removeClass('alert-info').removeClass('alert-warning').addClass('alert-error');
             });
@@ -164,7 +164,7 @@ odoo.define('mass_mailing_custom_unsubscribe.unsubscribe', function (require) {
                     $info_state.removeClass('alert-info').addClass('alert-warning');
                 }
             })
-            .fail(function () {
+            .guardedCatch(function () {
                 $('#info_state').removeClass('invisible');
                 $('#subscription_info').html(_t('An error occurred. Your changes have not been saved, try again later.'));
                 $info_state.removeClass('alert-info').addClass('alert-warning');
@@ -226,7 +226,7 @@ odoo.define('mass_mailing_custom_unsubscribe.unsubscribe', function (require) {
                     $('#unsubscribed_info').hide();
                 }
             })
-            .fail(function () {
+            .guardedCatch(function () {
                 $('#subscription_info').html(_t('An error occured. Please try again later or contact us.'));
                 $info_state.removeClass('alert-success').removeClass('alert-info').removeClass('alert-warning').addClass('alert-error');
             });
@@ -265,7 +265,7 @@ odoo.define('mass_mailing_custom_unsubscribe.unsubscribe', function (require) {
                     $('#unsubscribed_info').hide();
                 }
             })
-            .fail(function () {
+            .guardedCatch(function () {
                 $('#info_state').removeClass('invisible');
                 $('#subscription_info').html(_t('An error occured. Please try again later or contact us.'));
                 $info_state.removeClass('alert-success').removeClass('alert-info').removeClass('alert-warning').addClass('alert-error');
