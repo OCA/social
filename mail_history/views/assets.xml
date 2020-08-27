@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Tecnativa - Carlos Roca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <template id="assets_backend"
+              name="mail_history assets"
+              inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript"
+                    src="/mail_history/static/src/js/message.js"/>
+            <script type="text/javascript"
+                    src="/mail_history/static/src/js/discuss.js"/>
+            <script type="text/javascript"
+                    src="/mail_history/static/src/js/mail_manager.js"/>
+            <script type="text/javascript"
+                    src="/mail_history/static/src/js/mailbox.js"/>
+        </xpath>
+    </template>
+</odoo>
