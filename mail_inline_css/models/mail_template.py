@@ -28,6 +28,8 @@ class MailTemplate(models.Model):
         return result
 
     def _premailer_apply_transform(self, data_html):
+        if not data_html:
+            return data_html
         premailer = Premailer(html=data_html, **self._get_premailer_options())
         return premailer.transform()
 
