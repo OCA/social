@@ -19,6 +19,7 @@ addon | version | summary
 [mail_activity_board](mail_activity_board/) | 13.0.1.0.1 | Add Activity Boards
 [mail_activity_done](mail_activity_done/) | 13.0.1.0.0 | Mail Activity Done
 [mail_activity_team](mail_activity_team/) | 13.0.1.0.0 | Add Teams to Activities
+[mail_attach_existing_attachment](mail_attach_existing_attachment/) | 13.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_debrand](mail_debrand/) | 13.0.0.0.1 | Remove Odoo branding in sent emails
 [mail_inline_css](mail_inline_css/) | 13.0.1.0.1 | Convert style tags in inline style in your mails
 [mail_optional_autofollow](mail_optional_autofollow/) | 13.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
