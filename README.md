@@ -20,7 +20,7 @@ addon | version | summary
 [mail_activity_done](mail_activity_done/) | 13.0.1.0.0 | Mail Activity Done
 [mail_activity_team](mail_activity_team/) | 13.0.1.0.0 | Add Teams to Activities
 [mail_debrand](mail_debrand/) | 13.0.0.0.1 | Remove Odoo branding in sent emails
-[mail_inline_css](mail_inline_css/) | 13.0.1.0.0 | Convert style tags in inline style in your mails
+[mail_inline_css](mail_inline_css/) | 13.0.1.0.1 | Convert style tags in inline style in your mails
 [mail_optional_autofollow](mail_optional_autofollow/) | 13.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 13.0.1.0.1 | Allows you to configure the from header for a mail server.
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.0.2 | Define a domain from which followers can be selected
