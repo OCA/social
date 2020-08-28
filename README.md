@@ -17,7 +17,7 @@ addon | version | summary
 [email_template_qweb](email_template_qweb/) | 13.0.1.0.0 | Use the QWeb templating mechanism for emails
 [fetchmail_thread_default](fetchmail_thread_default/) | 13.0.1.0.0 | Post unkonwn messages to an existing thread
 [mail_activity_board](mail_activity_board/) | 13.0.1.0.1 | Add Activity Boards
-[mail_activity_done](mail_activity_done/) | 13.0.1.0.0 | Mail Activity Done
+[mail_activity_done](mail_activity_done/) | 13.0.1.0.1 | Mail Activity Done
 [mail_activity_team](mail_activity_team/) | 13.0.1.0.0 | Add Teams to Activities
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 13.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_debrand](mail_debrand/) | 13.0.0.0.1 | Remove Odoo branding in sent emails
@@ -28,7 +28,7 @@ addon | version | summary
 [mail_tracking](mail_tracking/) | 13.0.1.0.4 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 13.0.1.0.0 | Improve mass mailing email tracking
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.1.0.0 | Know and track (un)subscription reasons, GDPR compliant
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.1.0.1 | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 13.0.1.0.0 | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 13.0.1.0.1 | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 13.0.1.0.0 | Resend mass mailings
