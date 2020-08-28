@@ -23,6 +23,7 @@ setuptools.setup(
         'odoo11-addon-mail_drop_target',
         'odoo11-addon-mail_inline_css',
         'odoo11-addon-mail_optional_autofollow',
+        'odoo11-addon-mail_outbound_static',
         'odoo11-addon-mail_restrict_follower_selection',
         'odoo11-addon-mail_track_diff_only',
         'odoo11-addon-mail_tracking',
