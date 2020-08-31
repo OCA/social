@@ -15,7 +15,7 @@
             <header position="after">
                 <div class="oe_form_box_info bg-warning oe_text_center" attrs="{'invisible': ['|', ('state', '!=', 'draft'), ('sent', '=', 0)]}">
                     <p>
-                        <i class="fa fa-info-circle"/> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, click on <b>Emails Sent</b> smart-button for removing the existing record(s).
+                        <i class="fa fa-info-circle"/> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, you have to duplicate this mailing.
                     </p>
                 </div>
             </header>

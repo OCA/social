@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: mass_mailing_resend
 #: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
-msgid "<i class=\"fa fa-info-circle\"/> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, click on <b>Emails Sent</b> smart-button for removing the existing record(s)."
+msgid "<i class=\"fa fa-info-circle\"/> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, you have to duplicate this mailing."
 msgstr ""
 
 #. module: mass_mailing_resend
@@ -33,4 +33,3 @@ msgstr ""
 #, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""
-
