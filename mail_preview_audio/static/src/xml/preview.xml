@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="DocumentViewer.Content">
+        <t t-jquery=".fa-video-camera" t-operation="after">
+            <i class="fa fa-volume-up mr8"
+               t-if="widget.activeAttachment.type == 'audio'"
+               role="img" aria-label="Audio" title="Audio"/>
+        </t>
+        <t t-jquery=".o_viewer_video" t-operation="after">
+            <audio t-if="widget.activeAttachment.type == 'audio'" class="o_viewer_audio" controls="controls">
+                <source t-attf-src="#{widget.activeAttachment.source_url}" t-att-data-type="widget.activeAttachment.mimetype"/>
+            </audio>
+        </t>
+    </t>
+</templates>
