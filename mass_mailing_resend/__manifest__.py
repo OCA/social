@@ -4,7 +4,7 @@
 
 {
     "name": "Resend mass mailings",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.1.0",
     "category": "Marketing",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
