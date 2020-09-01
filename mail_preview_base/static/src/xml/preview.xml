@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-extend="DocumentViewer.Content">
+        <t t-jquery=".o_viewer_img" t-operation="attributes">
+            <attribute name="t-attf-src">#{widget.activeAttachment.source_url}?unique=1&amp;signature=#{widget.activeAttachment.checksum}</attribute>
+        </t>
+        <t t-jquery=".o_viewer_pdf" t-operation="attributes">
+            <attribute name="t-attf-src">/web/static/lib/pdfjs/web/viewer.html?file=#{widget.activeAttachment.source_url}</attribute>
+        </t>
+        <t t-jquery=".o_viewer_video > source" t-operation="attributes">
+            <attribute name="t-attf-src">#{widget.activeAttachment.source_url}</attribute>
+        </t>
+        <t t-jquery=".o_viewer_text:first" t-operation="attributes">
+            <attribute name="t-attf-src">#{widget.activeAttachment.source_url}</attribute>
+        </t>
+    </t>
+
+    <t t-extend="mail.Attachment">
+        <t t-jquery="t[t-set='has_preview']" t-operation="after">
+            <!--
+                We have added integration to text, as it was already
+                defined on the preview.
+                TODO: Set the has_preview on a function...
+            -->
+            <t t-set="has_preview" t-value="has_preview || attachment.has_preview"/>
+        </t>
+    </t>
+</templates>
