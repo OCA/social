@@ -132,7 +132,9 @@ class TestMailTracking(TransactionCase):
             'partner_ids': [(4, self.recipient.id)],
             'body': '<p>This is a test message</p>',
         })
-        message._notify(message, {}, force_send=True)
+        # disable mail_send_copy module for this test
+        message.with_context(do_not_send_copy=True)._notify(
+            message, {}, force_send=True)
         # Search tracking created
         tracking_email = self.env['mail.tracking.email'].search([
             ('mail_message_id', '=', message.id),
