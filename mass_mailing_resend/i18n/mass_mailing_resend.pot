@@ -33,3 +33,4 @@ msgstr ""
 #, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""
+
