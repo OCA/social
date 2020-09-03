@@ -19,6 +19,8 @@ class MailTemplate(models.Model):
 
     def generate_email(self, res_ids, fields=None):
         """Use `premailer` to convert styles to inline styles."""
+        if "body_html" not in fields:
+            fields.append("body_html")
         result = super().generate_email(res_ids, fields=fields)
         if isinstance(res_ids, int):
             result["body_html"] = self._premailer_apply_transform(result["body_html"])
