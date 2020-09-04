@@ -3,14 +3,16 @@ import base64
 from mock import patch
 
 from odoo import exceptions, tools
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestMailDropTarget(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.partner = self.env["res.partner"].create({"name": "TEST PARTNER"})
-        self.partner.message_subscribe(partner_ids=self.partner.ids)
+class TestMailDropTarget(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.partner = cls.env["res.partner"].create({"name": "TEST PARTNER"})
+        cls.partner.message_subscribe(partner_ids=cls.partner.ids)
 
     def test_eml(self):
         message = tools.file_open(
