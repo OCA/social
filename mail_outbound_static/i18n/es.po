@@ -16,6 +16,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_outbound_static
+#: code:addons/mail_outbound_static/models/ir_mail_server.py:0
+#, python-format
+msgid ""
+"%s is not a valid domain. Please define a list of valid domains separated by"
+" comma"
+msgstr ""
+"%s no es un dominio válido. Por favor defina una lista de dominios validos separados por"
+" comas"
+
+#. module: mail_outbound_static
 #: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__domain_whitelist
 msgid ""
 "Allowed Domains list separated by commas. If there is not given SMTP server "
@@ -23,10 +33,10 @@ msgid ""
 "messages where the message 'From' email domain match with the domain "
 "whitelist."
 msgstr ""
-"Lista de dominios permitidos separados por comas. Si no se ha seleccionado un servidor SMTP "
-"nos permitirá seleccionar el servidor de mail apropiado para enviar los "
-"mensajes donde el dominio del email del 'De' coincida con la lista blanca "
-"de dominios."
+"Lista de dominios permitidos separados por comas. Si no se ha seleccionado "
+"un servidor SMTP nos permitirá seleccionar el servidor de mail apropiado "
+"para enviar los mensajes donde el dominio del email del 'De' coincida con la"
+" lista blanca de dominios."
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__domain_whitelist
@@ -46,8 +56,8 @@ msgstr "Servidor de correo"
 #. module: mail_outbound_static
 #: code:addons/mail_outbound_static/models/ir_mail_server.py:0
 #, python-format
-msgid "Please define a list of domains separate by comma"
-msgstr "Por favor defina una lista de dominios separados por coma"
+msgid "Not a valid Email From"
+msgstr "No es un Email De válido"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__smtp_from
@@ -57,7 +67,7 @@ msgid ""
 "replaced with this value. If does match with the domain whitelist then the "
 "original message's 'From' will not change"
 msgstr ""
-"Definalo para usar un dirección de correo 'De' especifica. Si el 'De' del mensaje "
-"original no coincide con la lista blanca de dominios entonces este será "
-"remplazado con este valor. Si coincide con la lista blanca de dominios entonces "
-"el 'De' del mensajee original no cambiará"
+"Definalo para usar un dirección de correo 'De' especifica. Si el 'De' del "
+"mensaje original no coincide con la lista blanca de dominios entonces este "
+"será remplazado con este valor. Si coincide con la lista blanca de dominios "
+"entonces el 'De' del mensajee original no cambiará"

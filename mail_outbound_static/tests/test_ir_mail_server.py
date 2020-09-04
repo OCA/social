@@ -9,6 +9,7 @@ from email import message_from_string
 from mock import MagicMock
 
 import odoo.tools as tools
+from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
@@ -118,7 +119,7 @@ class TestIrMailServer(TransactionCase):
             message["Return-Path"], '"{}" <{}>'.format(user, self.email_from)
         )
 
-    def test_1_from_outgoing_server_domainone(self):
+    def test_01_from_outgoing_server_domainone(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "domainone.com"
         email_from = "Mitchell Admin <admin@%s>" % domain
@@ -137,7 +138,7 @@ class TestIrMailServer(TransactionCase):
             % (used_mail_server.name, expected_mail_server.name),
         )
 
-    def test_2_from_outgoing_server_domaintwo(self):
+    def test_02_from_outgoing_server_domaintwo(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "domaintwo.com"
         email_from = "Mitchell Admin <admin@%s>" % domain
@@ -156,7 +157,7 @@ class TestIrMailServer(TransactionCase):
             % (used_mail_server.name, expected_mail_server.name),
         )
 
-    def test_3_from_outgoing_server_another(self):
+    def test_03_from_outgoing_server_another(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "example.com"
         email_from = "Mitchell Admin <admin@%s>" % domain
@@ -177,7 +178,7 @@ class TestIrMailServer(TransactionCase):
             % (used_mail_server.name, expected_mail_server.name),
         )
 
-    def test_4_from_outgoing_server_none_use_config(self):
+    def test_04_from_outgoing_server_none_use_config(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "example.com"
         email_from = "Mitchell Admin <admin@%s>" % domain
@@ -203,7 +204,7 @@ class TestIrMailServer(TransactionCase):
             used_mail_server, "using this mail server %s" % (used_mail_server.name)
         )
 
-    def test_5_from_outgoing_server_none_same_domain(self):
+    def test_05_from_outgoing_server_none_same_domain(self):
         self._init_mail_server_domain_whilelist_based()
 
         # Find config values
@@ -229,7 +230,7 @@ class TestIrMailServer(TransactionCase):
         used_mail_server = self.Model.browse(used_mail_server)
         self.assertFalse(used_mail_server)
 
-    def test_6_from_outgoing_server_no_name_from(self):
+    def test_06_from_outgoing_server_no_name_from(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "example.com"
         email_from = "test@%s" % domain
@@ -248,7 +249,7 @@ class TestIrMailServer(TransactionCase):
             % (used_mail_server.name, expected_mail_server.name),
         )
 
-    def test_7_from_outgoing_server_multidomain_1(self):
+    def test_07_from_outgoing_server_multidomain_1(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "domainthree.com"
         email_from = "Mitchell Admin <admin@%s>" % domain
@@ -267,7 +268,7 @@ class TestIrMailServer(TransactionCase):
             % (used_mail_server.name, expected_mail_server.name),
         )
 
-    def test_8_from_outgoing_server_multidomain_3(self):
+    def test_08_from_outgoing_server_multidomain_3(self):
         self._init_mail_server_domain_whilelist_based()
         domain = "domainmulti.com"
         email_from = "test@%s" % domain
@@ -285,3 +286,43 @@ class TestIrMailServer(TransactionCase):
             "It using %s but we expect to use %s"
             % (used_mail_server.name, expected_mail_server.name),
         )
+
+    def test_09_not_valid_domain_whitelist(self):
+        self._init_mail_server_domain_whilelist_based()
+        mail_server = self.mail_server_domainone
+        mail_server.domain_whitelist = "example.com"
+        error_msg = (
+            "%s is not a valid domain. Please define a list of valid"
+            " domains separated by comma"
+        )
+
+        with self.assertRaisesRegex(ValidationError, error_msg % "asdasd"):
+            mail_server.domain_whitelist = "asdasd"
+
+        with self.assertRaisesRegex(ValidationError, error_msg % "asdasd"):
+            mail_server.domain_whitelist = "example.com, asdasd"
+
+        with self.assertRaisesRegex(ValidationError, error_msg % "invalid"):
+            mail_server.domain_whitelist = "example.com; invalid"
+
+        with self.assertRaisesRegex(ValidationError, error_msg % ";"):
+            mail_server.domain_whitelist = ";"
+
+        with self.assertRaisesRegex(ValidationError, error_msg % "."):
+            mail_server.domain_whitelist = "hola.com,."
+
+    def test_10_not_valid_smtp_from(self):
+        self._init_mail_server_domain_whilelist_based()
+        mail_server = self.mail_server_domainone
+        error_msg = "Not a valid Email From"
+
+        with self.assertRaisesRegex(ValidationError, error_msg):
+            mail_server.smtp_from = "asdasd"
+
+        with self.assertRaisesRegex(ValidationError, error_msg):
+            mail_server.smtp_from = "example.com"
+
+        with self.assertRaisesRegex(ValidationError, error_msg):
+            mail_server.smtp_from = "."
+
+        mail_server.smtp_from = "notifications@test.com"
