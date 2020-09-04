@@ -106,24 +106,26 @@ class MailThread(models.AbstractModel):
 
     def _notify_record_by_email(
         self,
-        record,
+        message,
         recipients_data,
-        msg_vals,
-        force_send=False,
-        send_after_commit=True,
+        msg_vals=False,
         model_description=False,
         mail_auto_delete=True,
         check_existing=False,
+        force_send=True,
+        send_after_commit=True,
+        **kwargs,
     ):
         if self.env.context.get("message_create_from_mail_mail", False):
             return
         return super()._notify_record_by_email(
-            record,
+            message,
             recipients_data,
-            msg_vals,
-            force_send=force_send,
-            send_after_commit=send_after_commit,
+            msg_vals=msg_vals,
             model_description=model_description,
             mail_auto_delete=mail_auto_delete,
             check_existing=check_existing,
+            force_send=force_send,
+            send_after_commit=send_after_commit,
+            **kwargs,
         )
