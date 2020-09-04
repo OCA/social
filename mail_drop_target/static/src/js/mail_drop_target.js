@@ -11,17 +11,8 @@ odoo.define('mail_drop_target', function (require) {
 
     Chatter.include({
         _drop_allowed_types: ['message/rfc822'],
-        _get_drop_item: function (e) {
-            var dataTransfer = e.originalEvent.dataTransfer;
-            if (
-                dataTransfer.items.length === 1 &&
-                dataTransfer.items[0].type === '' &&
-                dataTransfer.items[0].kind === 'file'
-            ) {
-                // this might be an outlook msg file
-                return dataTransfer.items[0];
-            }
-            return this._super.apply(this, arguments);
+        _get_record_id: function() {
+            return this.record.res_id;
         },
 
         _handle_drop_items: function (drop_items, e) {
