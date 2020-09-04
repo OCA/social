@@ -1,6 +1,7 @@
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
+import re
 from email.utils import formataddr, parseaddr
 
 from odoo import _, api, fields, models, tools
@@ -28,16 +29,37 @@ class IrMailServer(models.Model):
     @api.constrains("domain_whitelist")
     def check_valid_domain_whitelist(self):
         if self.domain_whitelist:
-            values = False
-            try:
-                values = list(self.domain_whitelist.split(","))
-            except Exception:
-                pass
+            domains = list(self.domain_whitelist.split(","))
+            for domain in domains:
+                if not self._is_valid_domain(domain):
+                    raise ValidationError(
+                        _(
+                            "%s is not a valid domain. Please define a list of"
+                            " valid domains separated by comma"
+                        )
+                        % (domain)
+                    )
 
-            if not isinstance(values, list):
-                raise ValidationError(
-                    _("Please define a list of domains separate by comma")
-                )
+    @api.constrains("smtp_from")
+    def check_valid_smtp_from(self):
+        if self.smtp_from:
+            match = re.match(
+                r"^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\."
+                r"[a-z]{2,4})$",
+                self.smtp_from,
+            )
+            if match is None:
+                raise ValidationError(_("Not a valid Email From"))
+
+    def _is_valid_domain(self, domain_name):
+        domain_regex = (
+            r"(([\da-zA-Z])([_\w-]{,62})\.){,127}(([\da-zA-Z])"
+            r"[_\w-]{,61})?([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z\d]{2,})))"
+        )
+        domain_regex = "{}$".format(domain_regex)
+        valid_domain_name_regex = re.compile(domain_regex, re.IGNORECASE)
+        domain_name = domain_name.lower().strip()
+        return True if re.match(valid_domain_name_regex, domain_name) else False
 
     @api.model
     def _get_domain_whitelist(self, domain_whitelist_string):
