@@ -32,6 +32,7 @@ addon | version | summary
 [mail_notify_bounce](mail_notify_bounce/) | 10.0.1.0.2 | Notify bounce emails to preconfigured addresses
 [mail_optional_autofollow](mail_optional_autofollow/) | 10.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 10.0.1.0.1 | Choose if you want to automatically notify followers on mail.compose.message
+[mail_outbound_static](mail_outbound_static/) | 10.0.1.0.0 | Allows you to configure the from header for a mail server.
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 10.0.1.0.0 | Define a domain from which followers can be selected
 [mail_sendgrid](mail_sendgrid/) | 10.0.1.0.2 | SendGrid
 [mail_sendgrid_mass_mailing](mail_sendgrid_mass_mailing/) | 10.0.1.0.1 | Mass Mailing with SendGrid
