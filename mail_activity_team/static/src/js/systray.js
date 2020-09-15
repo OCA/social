@@ -68,6 +68,12 @@ odoo.define('mail_activity_team.systray.ActivityMenu', function (require) {
                 });
             }
         },
+        _open_boards_activities_domain: function () {
+            if (this.filter === 'team') {
+                return {additional_context: {'search_default_my_team_activities':  1}};
+            }
+            return this._super.apply(this, arguments);
+        },
         _getActivityData: function(){
             var self = this;
             return self._super.apply(self, arguments).then(function (data) {
