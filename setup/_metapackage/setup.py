@@ -27,6 +27,7 @@ setuptools.setup(
         'odoo10-addon-mail_notify_bounce',
         'odoo10-addon-mail_optional_autofollow',
         'odoo10-addon-mail_optional_follower_notification',
+        'odoo10-addon-mail_outbound_static',
         'odoo10-addon-mail_restrict_follower_selection',
         'odoo10-addon-mail_sendgrid',
         'odoo10-addon-mail_sendgrid_mass_mailing',
