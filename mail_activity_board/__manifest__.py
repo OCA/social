@@ -16,9 +16,11 @@
     "assets": {
         "web.assets_backend": [
             "mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.esm.js",
+            "mail_activity_board/static/src/js/systray.esm.js",
         ],
         "web.assets_qweb": [
             "mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml",
+            "mail_activity_board/static/src/xml/systray.xml",
         ],
     },
 }

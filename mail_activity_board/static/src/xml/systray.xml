@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+    <t t-extend="mail.systray.ActivityMenu">
+        <t t-jquery=".o_mail_systray_dropdown_items" t-operation="before">
+            <div class="o_mail_systray_dropdown_top">
+                <button type="button" class="btn btn-link o_all_activities_button">Open All</button>
+            </div>
+        </t>
+    </t>
+
+</templates>
