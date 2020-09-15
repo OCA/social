@@ -20,5 +20,6 @@
     ],
     'qweb': [
         'static/src/xml/inherit_chatter.xml',
+        'static/src/xml/systray.xml',
     ]
 }
