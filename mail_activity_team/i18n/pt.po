@@ -121,7 +121,7 @@ msgstr "Atividades em Falta"
 
 #. module: mail_activity_team
 #. openerp-web
-#: code:addons/mail_activity_team/static/src/xml/systray.xml:8
+#: code:addons/mail_activity_team/static/src/xml/systray.xml:7
 #, python-format
 msgid "My Activities"
 msgstr "Minha Atividades"
@@ -170,7 +170,7 @@ msgstr "Equipa"
 
 #. module: mail_activity_team
 #. openerp-web
-#: code:addons/mail_activity_team/static/src/xml/systray.xml:9
+#: code:addons/mail_activity_team/static/src/xml/systray.xml:8
 #, python-format
 msgid "Team Activities"
 msgstr "Atividades da Equipa"
