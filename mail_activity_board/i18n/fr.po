@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_activity_board
+# 	* mail_activity_board
 #
 msgid ""
 msgstr ""
@@ -65,6 +65,13 @@ msgstr "Durée"
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Log a note..."
 msgstr "Enregistrer une note"
+
+#. module: mail_activity_board
+#. openerp-web
+#: code:addons/mail_activity_board/static/src/xml/systray.xml:7
+#, python-format
+msgid "Open All"
+msgstr ""
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__res_model_id_name
