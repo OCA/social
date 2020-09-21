@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+
+    Copyright 2020 CreuBlanca
+    License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
+
+  -->
+<odoo>
+    <template id="assets_backend" name="audio_assets" inherit_id="web.assets_backend">
+        <xpath expr="//script[last()]" position="after">
+            <script type="text/javascript" src="/mail_preview_audio/static/src/js/preview.js" />
+        </xpath>
+    </template>
+</odoo>
