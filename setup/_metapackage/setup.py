@@ -27,6 +27,8 @@ setuptools.setup(
         'odoo12-addon-mail_optional_autofollow',
         'odoo12-addon-mail_optional_follower_notification',
         'odoo12-addon-mail_outbound_static',
+        'odoo12-addon-mail_preview_audio',
+        'odoo12-addon-mail_preview_base',
         'odoo12-addon-mail_private',
         'odoo12-addon-mail_restrict_follower_selection',
         'odoo12-addon-mail_template_substitute',
