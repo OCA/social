@@ -65,6 +65,7 @@ Authors
 
 * Tecnativa
 * Eficent
+* Onestein
 
 Contributors
 ~~~~~~~~~~~~
