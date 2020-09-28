@@ -3,7 +3,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
  **********************************************************************************/
 
-odoo.define("audio_file.preview", function(require) {
+odoo.define("audio_file.preview", function (require) {
     "use strict";
 
     var DocumentViewer = require("mail.DocumentViewer");
@@ -11,12 +11,11 @@ odoo.define("audio_file.preview", function(require) {
     DocumentViewer.include({
         _checkAttachment: function (attachment) {
             if (
-                attachment.type !== 'url'
-                && attachment.mimetype.match("audio")
+                attachment.type !== 'url' && attachment.mimetype.match("audio")
             ) {
-               attachment.type = 'audio';
-               attachment.source_url = this._getImageUrl(attachment);
-               return true;
+                attachment.type = 'audio';
+                attachment.source_url = this._getImageUrl(attachment);
+                return true;
             }
             return this._super.apply(this, arguments);
         },
