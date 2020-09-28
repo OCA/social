@@ -3,7 +3,7 @@
     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
  **********************************************************************************/
 
-odoo.define("mail_preview_base.preview", function(require) {
+odoo.define("mail_preview_base.preview", function (require) {
     "use strict";
 
     var DocumentViewer = require("mail.DocumentViewer");
@@ -16,19 +16,21 @@ odoo.define("mail_preview_base.preview", function(require) {
             this._super.apply(this, arguments);
             var self = this;
             _.forEach(this.attachment, function (attachment) {
-                if (attachment.mimetype === 'application/pdf' || attachment.type === 'text') {
+                if (attachment.mimetype === 'application/pdf' ||
+                    attachment.type === 'text'
+                ) {
                     attachment.source_url = self._getContentUrl(attachment);
+                } else {
+                    attachment.source_url = self._getImageUrl(attachment);
                 }
-                else {
-                    attachment.source_url = self._getImageUrl(attachment)
-                }
-            })
+            });
             this.attachment = this.attachment.concat(
                 _.filter(attachments, function (attachment) {
-                    return self._checkAttachment(attachment)
+                    return self._checkAttachment(attachment);
                 })
             );
         },
+
         /*
             This function is a hook, it will allow to define new kind of
             records
@@ -44,7 +46,9 @@ odoo.define("mail_preview_base.preview", function(require) {
             return "/web/image/" + attachment.id;
         },
         _hasPreview: function (type, attachment) {
-            return type === 'image' || type === 'video' || attachment.mimetype === 'application/pdf';
+            return type === 'image' ||
+            type === 'video' ||
+            attachment.mimetype === 'application/pdf';
         },
     });
 
@@ -53,19 +57,19 @@ odoo.define("mail_preview_base.preview", function(require) {
             _.each(attachments, function (attachment) {
                 attachment.has_preview = DocumentViewer.prototype._hasPreview(
                     attachment.mimetype && attachment.mimetype.split('/').shift(),
-                    attachment)
-            })
+                    attachment);
+            });
             this._super.apply(this, arguments);
         },
-    })
+    });
 
     var FieldPreviewViewer = DocumentViewer.extend({
-        init: function(parent, attachments, activeAttachmentID, model, field) {
+        init: function (parent, attachments, activeAttachmentID, model, field) {
             this.modelName = model;
             this.fieldName = field;
             this._super.apply(this, arguments);
         },
-        _onDownload: function(e) {
+        _onDownload: function (e) {
             e.preventDefault();
             window.location =
                 "/web/content/" +
@@ -81,16 +85,16 @@ odoo.define("mail_preview_base.preview", function(require) {
         _getContentUrl: function (attachment) {
             return "/web/content/" +
                 this.modelName + '/' +
-                attachment.id + '/'
-                + this.fieldName
-                +"?filename=" +
+                attachment.id + '/' +
+                this.fieldName +
+                "?filename=" +
                 window.encodeURIComponent(attachment.name);
         },
         _getImageUrl: function (attachment) {
             return "/web/image/" +
                 this.modelName + '/' +
-                attachment.id + '/'
-                + this.fieldName
+                attachment.id + '/' +
+                this.fieldName;
         },
     });
 
@@ -98,7 +102,7 @@ odoo.define("mail_preview_base.preview", function(require) {
         events: _.extend({}, basic_fields.FieldBinaryFile.prototype.events, {
             "click .preview_file": "_previewFile",
         }),
-        _previewFile: function(event) {
+        _previewFile: function (event) {
             event.stopPropagation();
             event.preventDefault();
             var attachmentViewer = new FieldPreviewViewer(
@@ -110,7 +114,7 @@ odoo.define("mail_preview_base.preview", function(require) {
             );
             attachmentViewer.appendTo($("body"));
         },
-        _renderReadonly: function() {
+        _renderReadonly: function () {
             this._super.apply(this, arguments);
             if (this.value) {
                 this.attachment = {
