@@ -6,7 +6,8 @@
 odoo.define("audio_file.preview", function(require) {
     "use strict";
 
-    var DocumentViewer = require("mail.DocumentViewer");
+    var preview = require("mail_preview_base.preview");
+    var DocumentViewer = preview.DocumentViewer;
 
     DocumentViewer.include({
         _checkAttachment: function (attachment) {
