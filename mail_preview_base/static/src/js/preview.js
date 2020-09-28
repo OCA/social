@@ -141,6 +141,7 @@ odoo.define("mail_preview_base.preview", function (require) {
     return {
         FieldPreviewViewer: FieldPreviewViewer,
         FieldPreviewBinary: FieldPreviewBinary,
+        DocumentViewer: DocumentViewer,
     };
 
 });
