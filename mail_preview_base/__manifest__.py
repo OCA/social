@@ -5,7 +5,7 @@
     'name': 'Mail Preview',
     'summary': """
         Base to add more previewing options""",
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'license': 'LGPL-3',
     'author': 'Creu Blanca,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
