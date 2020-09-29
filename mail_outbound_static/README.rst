@@ -23,7 +23,7 @@ Mail Outbound Static
     :target: https://runbot.odoo-community.org/runbot/205/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module brings Odoo outbound emails in to strict compliance with RFC-2822
 by allowing for a statically configured From header, with the sender's e-mail
@@ -70,6 +70,10 @@ Contributors
 * Frédéric Garbely <frederic.garbely@braintec-group.com>
 * Dave Lasley <dave@laslabs.com>
 * Lorenzo Battistini <https://github.com/eLBati>
+* TRESCLOUD CIA. LTDA.
+* Andres Calle
+* Carlos Manuel Alvarez
+* Reinier Quevedo Batista
 
 Maintainers
 ~~~~~~~~~~~
