@@ -22,7 +22,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_id
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
 #, fuzzy
-#| msgid "Body view"
 msgid "Body View"
 msgstr "Nachrichtenansicht"
 

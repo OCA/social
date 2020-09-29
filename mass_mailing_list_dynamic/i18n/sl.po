@@ -137,7 +137,6 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mailing_contact
 #, fuzzy
-#| msgid "Mass Mailing Contact"
 msgid "Mailing Contact"
 msgstr "Stik masovne pošte"
 
@@ -154,7 +153,6 @@ msgstr "Masovno razpošiljanje"
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mailing_load_filter
 #, fuzzy
-#| msgid "Mass Mailing Contact"
 msgid "Mass Mailing Load Filter"
 msgstr "Stik masovne pošte"
 

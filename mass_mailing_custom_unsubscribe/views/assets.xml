@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+<template id="assets_backend"
+          inherit_id="mass_mailing.assets_backend">
+    <!-- Need to replace the asset because upstream is impossible to extend -->
+    <xpath expr="//script[@src='/mass_mailing/static/src/js/unsubscribe.js']" position="replace">
+        <script type="text/javascript"
+                src="/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js"/>
+    </xpath>
+</template>
+
+</odoo>

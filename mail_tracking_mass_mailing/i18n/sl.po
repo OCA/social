@@ -84,14 +84,12 @@ msgstr "Dogodek sledenja e-pošte"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
 #, fuzzy
-#| msgid "Mass Mailing Contact"
 msgid "Mailing Contact"
 msgstr "Stik masovne pošte"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_trace
 #, fuzzy
-#| msgid "Mail statistics"
 msgid "Mailing Statistics"
 msgstr "Poštna statistika"
 

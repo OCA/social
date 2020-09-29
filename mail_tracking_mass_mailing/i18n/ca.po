@@ -83,14 +83,12 @@ msgstr "MailTracking esdeveniments"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
 #, fuzzy
-#| msgid "Mass Mailing Contact"
 msgid "Mailing Contact"
 msgstr "Contactes del correu massiu"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_trace
 #, fuzzy
-#| msgid "Mail statistics"
 msgid "Mailing Statistics"
 msgstr "Estadístiques de correu electrònic"
 

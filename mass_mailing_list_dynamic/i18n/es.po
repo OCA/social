@@ -110,7 +110,6 @@ msgstr "ID"
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__is_synced
 #, fuzzy
-#| msgid "Sync method"
 msgid "Is Synced"
 msgstr "Método de sincronización"
 
@@ -139,7 +138,6 @@ msgstr "Cargar filtro"
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mailing_contact
 #, fuzzy
-#| msgid "Mass Mailing Contact"
 msgid "Mailing Contact"
 msgstr "Contacto de envío masivo"
 
@@ -156,7 +154,6 @@ msgstr "Envío masivo"
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mailing_load_filter
 #, fuzzy
-#| msgid "mail.mass_mailing.load.filter"
 msgid "Mass Mailing Load Filter"
 msgstr "mail.mass_mailing.load.filter"
 
@@ -175,7 +172,6 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__sync_method
 #, fuzzy
-#| msgid "Sync method"
 msgid "Sync Method"
 msgstr "Método de sincronización"
 
