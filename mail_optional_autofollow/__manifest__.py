@@ -16,6 +16,10 @@
     ],
     'data': [
         'wizard/mail_compose_message_view.xml',
+        'views/assets.xml',
+    ],
+    'qweb': [
+        'static/src/xml/chatter.xml',
     ],
     'installable': True,
 }

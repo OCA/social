@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template
+            id="assets_backend"
+            name="no_autofollow assets"
+            inherit_id="web.assets_backend"
+        >
+            <xpath expr="." position="inside">
+                <script
+                    type="text/javascript"
+                    src="/mail_optional_autofollow/static/src/js/chatter_composer_no_autofollow.js"
+                />
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates id="no_autofollow" xml:space="preserve">
+<!--                   class="o_composer_no_autofollow_checkbox custom-control-input"-->
+    <t t-extend="mail.chatter.Composer">
+        <t t-jquery=".o_composer_suggested_partners" t-operation="after">
+            <div class="o_composer_no_autofollow custom-control custom-checkbox">
+                <input type="checkbox"
+                   t-attf-id="no_autofollow_checkbox"
+                   class="custom-control-input"
+                   t-att-checked="widget.mail_post_autofollow? 'checked': undefined"
+                />
+                <label
+                    t-attf-for="no_autofollow_checkbox"
+                    class="o_composer_no_autofollow_label custom-control-label"
+                >
+                    Autofollow recipients
+                </label>
+            </div>
+        </t>
+    </t>
+
+</templates>
