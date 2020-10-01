@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018 ForgeFlow, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "Mail Activity Team",
@@ -7,7 +7,7 @@
     "development_status": "Beta",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
-    "author": "Eficent, Odoo Community Association (OCA)",
+    "author": "ForgeFlow, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": ["mail_activity_board"],
