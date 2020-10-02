@@ -5,6 +5,7 @@
 from email.utils import getaddresses
 
 from odoo import _, api, fields, models
+from odoo.osv import expression
 from odoo.tools import email_split
 
 
@@ -25,7 +26,9 @@ class MailMessage(models.Model):
         help="The message tracking will be considered" " to filter tracking issues",
         default=False,
     )
-    is_failed_message = fields.Boolean(compute="_compute_is_failed_message")
+    is_failed_message = fields.Boolean(
+        compute="_compute_is_failed_message", search="_search_is_failed_message",
+    )
 
     @api.model
     def get_failed_states(self):
@@ -35,7 +38,7 @@ class MailMessage(models.Model):
     @api.depends(
         "mail_tracking_needs_action",
         "author_id",
-        "partner_ids",
+        "notification_ids",
         "mail_tracking_ids.state",
     )
     def _compute_is_failed_message(self):
@@ -44,7 +47,7 @@ class MailMessage(models.Model):
         for message in self:
             needs_action = message.mail_tracking_needs_action
             involves_me = self.env.user.partner_id in (
-                message.author_id | message.partner_ids
+                message.author_id | message.notification_ids.mapped("res_partner_id")
             )
             has_failed_trackings = failed_states.intersection(
                 message.mapped("mail_tracking_ids.state")
@@ -52,6 +55,31 @@ class MailMessage(models.Model):
             message.is_failed_message = bool(
                 needs_action and involves_me and has_failed_trackings
             )
+
+    def _search_is_failed_message(self, operator, value):
+        """Search for messages considered failed for the active user.
+        Be notice that 'notificacion_ids' is a record that change if
+        the user mark the message as readed.
+        """
+        # FIXME: Due to ORM issue with auto_join and 'OR' we construct the domain
+        # using an extra query to get valid results.
+        # For more information see: https://github.com/odoo/odoo/issues/25175
+        notification_partner_ids = self.search(
+            [("notification_ids.res_partner_id", "=", self.env.user.partner_id.id)]
+        )
+        return expression.normalize_domain(
+            [
+                (
+                    "mail_tracking_ids.state",
+                    "in" if value else "not in",
+                    list(self.get_failed_states()),
+                ),
+                ("mail_tracking_needs_action", "=", True),
+                "|",
+                ("author_id", "=", self.env.user.partner_id.id),
+                ("id", "in", notification_partner_ids.ids),
+            ]
+        )
 
     def _tracking_status_map_get(self):
         """Map tracking states to be used in chatter"""
@@ -252,19 +280,10 @@ class MailMessage(models.Model):
             (self._cr.dbname, "res.partner", self.env.user.partner_id.id), notification
         )
 
-    def _get_failed_message_domain(self):
-        domain = self.env["mail.thread"]._get_failed_message_domain()
-        domain += [
-            "|",
-            ("partner_ids", "in", [self.env.user.partner_id.id]),
-            ("author_id", "=", self.env.user.partner_id.id),
-        ]
-        return domain
-
     @api.model
     def get_failed_count(self):
         """ Gets the number of failed messages used on discuss mailbox item"""
-        return self.search_count(self._get_failed_message_domain())
+        return self.search_count([("is_failed_message", "=", True)])
 
     @api.model
     def set_all_as_reviewed(self):
@@ -272,7 +291,7 @@ class MailMessage(models.Model):
 
         Used by Discuss """
 
-        unreviewed_messages = self.search(self._get_failed_message_domain())
+        unreviewed_messages = self.search([("is_failed_message", "=", True)])
         unreviewed_messages.write({"mail_tracking_needs_action": False})
         ids = unreviewed_messages.ids
 
