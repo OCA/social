@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--Copyright 2020 ADHOC SA
+    Nicolás Messina <nm@adhoc.com.ar>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+<record model="ir.ui.view" id="view_partner_category_form">
+    <field name="name">Contact Tags</field>
+    <field name="model">res.partner.category</field>
+    <field name="priority">46</field>
+    <field name="inherit_id" ref="base.view_partner_category_form"/>
+    <field name="arch" type="xml">
+        <field name="parent_id" position='after'>
+            <field name="auto_subscribe"/>
+            <field name="model_ids" attrs="{'invisible': [('auto_subscribe','=',False)]}"/>
+        </field>
+    </field>
+</record>
+
+</odoo>
