@@ -96,7 +96,7 @@ class TestIrMailServer(TransactionCase):
         # Also check passing mail_server_id
         mail_server_id = (
             self.Model.sudo()
-            .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[0]
+            .search([("name", "=", "localhost")], order="sequence", limit=1)[0]
             .id
         )
         message = self._send_mail(mail_server_id=mail_server_id)
