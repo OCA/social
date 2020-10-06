@@ -13,7 +13,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[base_search_mail_content](base_search_mail_content/) | 13.0.1.0.0 | Base Search Mail Content
+[base_search_mail_content](base_search_mail_content/) | 13.0.1.0.1 | Base Search Mail Content
 [email_template_qweb](email_template_qweb/) | 13.0.1.0.0 | Use the QWeb templating mechanism for emails
 [fetchmail_thread_default](fetchmail_thread_default/) | 13.0.1.0.0 | Post unkonwn messages to an existing thread
 [mail_activity_board](mail_activity_board/) | 13.0.1.0.1 | Add Activity Boards
