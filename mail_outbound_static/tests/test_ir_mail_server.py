@@ -77,64 +77,64 @@ class TestIrMailServer(TransactionCase):
             message["Return-Path"], "{} <{}>".format(user, self.email_from)
         )
 
-        def test_send_email_remove_return_path_from_with_canonical(self):
-            """
-            It is responsible for handling the case that the header
-            return-path is not in the message
-            """
-            user = "Test < User"
-            self.message.replace_header("From", "%s <test@example.com>" % user)
-            for header in self.message._headers:
-                if header[0].lower() == "return-path":
-                    self.message._headers.remove(header)
-            bounce_parameter = self.parameter_model.search(
-                [("key", "=", "mail.bounce.alias")]
-            )
-            if bounce_parameter:
-                # Remove mail.bounce.alias to test Return-Path
-                bounce_parameter.unlink()
-            # Also check passing mail_server_id
-            mail_server_id = (
-                self.Model.sudo()
-                .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[
-                    0
-                ]
-                .id
-            )
-            message = self._send_mail(mail_server_id=mail_server_id)
-            self.assertEqual(
-                message["Return-Path"], "{} <{}>".format(user, self.email_from)
-            )
+    def test_send_email_remove_return_path_from_with_canonical(self):
+        """
+        It is responsible for handling the case that the header
+        return-path is not in the message
+        """
+        user = "Test < User"
+        self.message.replace_header("From", "%s <test@example.com>" % user)
+        for header in self.message._headers:
+            if header[0].lower() == "return-path":
+                self.message._headers.remove(header)
+        bounce_parameter = self.parameter_model.search(
+            [("key", "=", "mail.bounce.alias")]
+        )
+        if bounce_parameter:
+            # Remove mail.bounce.alias to test Return-Path
+            bounce_parameter.unlink()
+        # Also check passing mail_server_id
+        mail_server_id = (
+            self.Model.sudo()
+            .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[
+                0
+            ]
+            .id
+        )
+        message = self._send_mail(mail_server_id=mail_server_id)
+        self.assertEqual(
+            message["Return-Path"], "{} <{}>".format(user, self.email_from)
+        )
 
-        def test_send_mail_get_from_conf_no_canonical(self):
-            """
-            It is responsible for managing the variant in which we extract
-            the email_from from .conf file
-            """
-            self.message.replace_header("From", "test@example.com")
-            # Unlink to all mail servers to force get mail_from
-            # from .conf file
-            mail_server_ids = self.Model.sudo().search([])
-            mail_server_ids.sudo().unlink()
+    def test_send_mail_get_from_conf_no_canonical(self):
+        """
+        It is responsible for managing the variant in which we extract
+        the email_from from .conf file
+        """
+        self.message.replace_header("From", "test@example.com")
+        # Unlink to all mail servers to force get mail_from
+        # from .conf file
+        mail_server_ids = self.Model.sudo().search([])
+        mail_server_ids.sudo().unlink()
 
-            odoo.tools.config["email_from"] = "from@example.com"
-            message = self._send_mail(mail_server_id=False)
-            self.assertEqual(message["From"], "from@example.com")
+        odoo.tools.config["email_from"] = "from@example.com"
+        message = self._send_mail(mail_server_id=False)
+        self.assertEqual(message["From"], "from@example.com")
 
-        def test_send_mail_get_from_conf_canonical(self):
-            """
-            It is responsible for managing the variant in which we extract
-            the email_from from .conf file
-            """
-            user = "Test < User"
-            self.message.replace_header("From", "%s <test@example.com>" % user)
-            # Unlink to all mail servers to force get mail_from
-            # from .conf file
-            mail_server_ids = self.Model.sudo().search([])
-            mail_server_ids.sudo().unlink()
+    def test_send_mail_get_from_conf_canonical(self):
+        """
+        It is responsible for managing the variant in which we extract
+        the email_from from .conf file
+        """
+        user = "Test < User"
+        self.message.replace_header("From", "%s <test@example.com>" % user)
+        # Unlink to all mail servers to force get mail_from
+        # from .conf file
+        mail_server_ids = self.Model.sudo().search([])
+        mail_server_ids.sudo().unlink()
 
-            odoo.tools.config["email_from"] = "from@example.com"
-            message = self._send_mail(mail_server_id=False)
-            self.assertEqual(
-                message["From"], "{} <{}>".format(user, "from@example.com")
-            )
+        odoo.tools.config["email_from"] = "from@example.com"
+        message = self._send_mail(mail_server_id=False)
+        self.assertEqual(
+            message["From"], "{} <{}>".format(user, "from@example.com")
+        )
