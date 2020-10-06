@@ -1,9 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 LasLabs Inc.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo import api, fields, models
 import odoo
+from odoo import api, fields, models
 
 
 class IrMailServer(models.Model):
@@ -34,17 +33,18 @@ class IrMailServer(models.Model):
             else:
                 email_from = mail_server.smtp_from
 
-        elif odoo.tools.config['email_from']:
+        elif odoo.tools.config["email_from"]:
             # If we do not have a smtp server defined we
             # look for the email_from parameter from the
             # odoo configuration
-            split_from = message['From'].rsplit(' <', 1)
+            split_from = message["From"].rsplit(" <", 1)
             if len(split_from) > 1:
-                email_from = '%s <%s>' % \
-                             (split_from[0],
-                              odoo.tools.config['email_from'],)
+                email_from = "{} <{}>".format(
+                    split_from[0],
+                    odoo.tools.config["email_from"],
+                )
             else:
-                email_from = odoo.tools.config['email_from']
+                email_from = odoo.tools.config["email_from"]
         else:
             # do nothing
             pass
