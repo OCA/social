@@ -96,9 +96,7 @@ class TestIrMailServer(TransactionCase):
         # Also check passing mail_server_id
         mail_server_id = (
             self.Model.sudo()
-            .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[
-                0
-            ]
+            .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[0]
             .id
         )
         message = self._send_mail(mail_server_id=mail_server_id)
@@ -135,6 +133,4 @@ class TestIrMailServer(TransactionCase):
 
         odoo.tools.config["email_from"] = "from@example.com"
         message = self._send_mail(mail_server_id=False)
-        self.assertEqual(
-            message["From"], "{} <{}>".format(user, "from@example.com")
-        )
+        self.assertEqual(message["From"], "{} <{}>".format(user, "from@example.com"))
