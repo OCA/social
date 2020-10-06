@@ -40,8 +40,7 @@ class IrMailServer(models.Model):
             split_from = message["From"].rsplit(" <", 1)
             if len(split_from) > 1:
                 email_from = "{} <{}>".format(
-                    split_from[0],
-                    odoo.tools.config["email_from"],
+                    split_from[0], odoo.tools.config["email_from"]
                 )
             else:
                 email_from = odoo.tools.config["email_from"]

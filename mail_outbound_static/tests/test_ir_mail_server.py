@@ -85,20 +85,21 @@ class TestIrMailServer(TransactionCase):
             user = "Test < User"
             self.message.replace_header("From", "%s <test@example.com>" % user)
             for header in self.message._headers:
-                if header[0].lower() == 'return-path':
+                if header[0].lower() == "return-path":
                     self.message._headers.remove(header)
-            bounce_parameter = self.parameter_model.search([
-                ("key", "=", "mail.bounce.alias")])
+            bounce_parameter = self.parameter_model.search(
+                [("key", "=", "mail.bounce.alias")]
+            )
             if bounce_parameter:
                 # Remove mail.bounce.alias to test Return-Path
                 bounce_parameter.unlink()
             # Also check passing mail_server_id
             mail_server_id = (
                 self.Model.sudo()
-                    .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[
+                .search([("name", "=", "mail_server_test")], order="sequence", limit=1)[
                     0
                 ]
-                    .id
+                .id
             )
             message = self._send_mail(mail_server_id=mail_server_id)
             self.assertEqual(
@@ -134,4 +135,6 @@ class TestIrMailServer(TransactionCase):
 
             odoo.tools.config["email_from"] = "from@example.com"
             message = self._send_mail(mail_server_id=False)
-            self.assertEqual(message["From"], "{} <{}>".format(user, "from@example.com"))
+            self.assertEqual(
+                message["From"], "{} <{}>".format(user, "from@example.com")
+            )
