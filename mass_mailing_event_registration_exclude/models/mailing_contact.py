@@ -4,11 +4,11 @@
 
 from odoo import api, models
 
-from .mail_mass_mailing import event_filtered_ids
+from .mailing import event_filtered_ids
 
 
-class MailMassMailingContact(models.Model):
-    _inherit = "mail.mass_mailing.contact"
+class MassMailingContact(models.Model):
+    _inherit = "mailing.contact"
 
     @api.model
     def search_count(self, domain):
