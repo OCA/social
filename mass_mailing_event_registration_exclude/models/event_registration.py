@@ -3,7 +3,7 @@
 
 from odoo import api, models
 
-from .mail_mass_mailing import event_filtered_ids
+from .mailing import event_filtered_ids
 
 
 class EventRegistration(models.Model):
