@@ -6,18 +6,18 @@ import copy
 from odoo import fields, models
 
 
-def event_filtered_ids(model, mass_mailing_id, domain, field="email"):
+def event_filtered_ids(model, mailing_mailing_id, domain, field="email"):
     field = field or "email"
     domain = domain or []
     exclude_emails = []
-    mass_mailing = model.env["mail.mass_mailing"].browse(mass_mailing_id)
-    if mass_mailing.event_id:
-        exclude = mass_mailing.exclude_event_state_ids.mapped("code")
+    mailing_mailing = model.env["mailing.mailing"].browse(mailing_mailing_id)
+    if mailing_mailing.event_id:
+        exclude = mailing_mailing.exclude_event_state_ids.mapped("code")
         reg_domain = False
         registrations = model.env["event.registration"]
         if exclude:
             reg_domain = [
-                ("event_id", "=", mass_mailing.event_id.id),
+                ("event_id", "=", mailing_mailing.event_id.id),
                 ("state", "in", exclude),
             ]
         if reg_domain:
@@ -31,8 +31,8 @@ def event_filtered_ids(model, mass_mailing_id, domain, field="email"):
     return rows.ids
 
 
-class MailMassMailing(models.Model):
-    _inherit = "mail.mass_mailing"
+class MassMailing(models.Model):
+    _inherit = "mailing.mailing"
 
     def _default_exclude_event_state_ids(self):
         return self.env["event.registration.state"].search([])
@@ -44,8 +44,8 @@ class MailMassMailing(models.Model):
         default=_default_exclude_event_state_ids,
     )
 
-    def get_recipients(self):
-        res_ids = super().get_recipients()
+    def _get_recipients(self):
+        res_ids = super()._get_recipients()
         if res_ids:
             domain = [("id", "in", res_ids)]
             res_ids = event_filtered_ids(

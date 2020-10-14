@@ -15,7 +15,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
         cls.event = cls.env["event.event"].create(
             {
                 "name": "Test event",
-                "date_begin": "2020-06-24 8:00:00",
+                "date_begin": "2020-06-24 08:00:00",
                 "date_end": "2020-06-30 18:00:00",
             }
         )
@@ -26,17 +26,15 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
         cls.state_confirmed = cls.env["event.registration.state"].search(
             [("code", "=", "open")]
         )
-        cls.contact_list = cls.env["mail.mass_mailing.list"].create(
-            {"name": "Test list"}
-        )
-        cls.contact_a = cls.env["mail.mass_mailing.contact"].create(
+        cls.contact_list = cls.env["mailing.list"].create({"name": "Test list"})
+        cls.contact_a = cls.env["mailing.contact"].create(
             {
                 "list_ids": [(4, cls.contact_list.id, False)],
                 "name": "Test contact A",
                 "email": "partner_a@example.org",
             }
         )
-        cls.contact_b = cls.env["mail.mass_mailing.contact"].create(
+        cls.contact_b = cls.env["mailing.contact"].create(
             {
                 "list_ids": [(4, cls.contact_list.id, False)],
                 "name": "Test contact B",
@@ -53,28 +51,27 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
     def test_mailing_contact(self):
         domain = [("list_ids", "in", [self.contact_list.id]), ("opt_out", "=", False)]
         mass_mailing = (
-            self.env["mail.mass_mailing"]
+            self.env["mailing.mailing"]
             .create(
                 {
                     "name": "Test subject",
                     "email_from": "from@example.com",
-                    "mailing_model_id": self.env["ir.model"]
-                    ._get("mail.mass_mailing.contact")
-                    .id,
+                    "mailing_model_id": self.env["ir.model"]._get("mailing.contact").id,
                     "mailing_domain": str(domain),
                     "contact_list_ids": [(6, 0, [self.contact_list.id])],
                     "body_html": "<p>Test email body</p>",
                     "reply_to_mode": "email",
+                    "subject": "Test email subject",
                 }
             )
             .with_context(default_list_ids=[self.contact_list.id])
         )
-        mail_contact = self.env["mail.mass_mailing.contact"].with_context(
+        mail_contact = self.env["mailing.contact"].with_context(
             default_list_ids=[self.contact_list.id],
             exclude_mass_mailing=mass_mailing.id,
         )
         self.assertEqual(
-            [self.contact_a.id, self.contact_b.id], mass_mailing.get_recipients()
+            [self.contact_a.id, self.contact_b.id], mass_mailing._get_recipients()
         )
         self.assertEqual(2, mail_contact.search_count(domain))
         mass_mailing.write(
@@ -83,14 +80,14 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                 "exclude_event_state_ids": [(6, 0, self.states_all.ids)],
             }
         )
-        self.assertEqual([self.contact_b.id], mass_mailing.get_recipients())
+        self.assertEqual([self.contact_b.id], mass_mailing._get_recipients())
         self.assertEqual(1, mail_contact.search_count(domain))
         self.registration.state = "draft"
         mass_mailing.write(
             {"exclude_event_state_ids": [(6, 0, self.state_confirmed.ids)]}
         )
         self.assertEqual(
-            [self.contact_a.id, self.contact_b.id], mass_mailing.get_recipients()
+            [self.contact_a.id, self.contact_b.id], mass_mailing._get_recipients()
         )
         self.assertEqual(2, mail_contact.search_count(domain))
 
@@ -98,7 +95,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
         domain = [("id", "in", [self.partner_a.id, self.partner_b.id])]
         domain_reg = [("event_id", "=", self.event.id)]
         mass_mailing = (
-            self.env["mail.mass_mailing"]
+            self.env["mailing.mailing"]
             .create(
                 {
                     "name": "Test subject",
@@ -107,6 +104,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                     "mailing_domain": str(domain),
                     "body_html": "<p>Test email body</p>",
                     "reply_to_mode": "email",
+                    "subject": "Test email subject",
                 }
             )
             .with_context(default_list_ids=[self.contact_list.id])
@@ -118,7 +116,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
             exclude_mass_mailing=mass_mailing.id
         )
         self.assertEqual(
-            [self.partner_a.id, self.partner_b.id], mass_mailing.get_recipients()
+            [self.partner_a.id, self.partner_b.id], mass_mailing._get_recipients()
         )
         self.assertEqual(2, mail_partner.search_count(domain))
         mass_mailing.write(
@@ -127,7 +125,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                 "exclude_event_state_ids": [(6, 0, self.states_all.ids)],
             }
         )
-        self.assertEqual([self.partner_b.id], mass_mailing.get_recipients())
+        self.assertEqual([self.partner_b.id], mass_mailing._get_recipients())
         self.assertEqual(1, mail_partner.search_count(domain))
         self.assertEqual(0, mail_registration.search_count(domain_reg))
         self.registration.state = "draft"
@@ -135,7 +133,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
             {"exclude_event_state_ids": [(6, 0, self.state_confirmed.ids)]}
         )
         self.assertEqual(
-            [self.partner_a.id, self.partner_b.id], mass_mailing.get_recipients()
+            [self.partner_a.id, self.partner_b.id], mass_mailing._get_recipients()
         )
         self.assertEqual(2, mail_partner.search_count(domain))
         self.assertEqual(1, mail_registration.search_count(domain_reg))
