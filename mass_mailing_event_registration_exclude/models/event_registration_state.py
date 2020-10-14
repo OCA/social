@@ -5,8 +5,8 @@ from odoo import fields, models
 
 
 class EventRegistrationState(models.Model):
-    _name = 'event.registration.state'
-    _description = 'Event Registration State'
+    _name = "event.registration.state"
+    _description = "Event Registration State"
 
     name = fields.Char(required=True)
     code = fields.Char(required=True)
