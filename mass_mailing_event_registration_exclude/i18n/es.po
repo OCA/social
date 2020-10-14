@@ -57,12 +57,12 @@ msgid "Event Registration State"
 msgstr "event.registration.state"
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mail_mass_mailing__event_id
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__event_id
 msgid "Event related"
 msgstr "Evento relacionado"
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mail_mass_mailing__exclude_event_state_ids
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__exclude_event_state_ids
 msgid "Exclude"
 msgstr "Excluir"
 
@@ -87,19 +87,22 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mail_mass_mailing
-msgid "Mass Mailing"
-msgstr "Envío masivo"
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_contact
+msgid "Mailing Contact"
+msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mail_mass_mailing_contact
-msgid "Mass Mailing Contact"
-msgstr "Contacto de envío masivo"
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr "Envío masivo"
 
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr "Nombre"
+
+#~ msgid "Mass Mailing Contact"
+#~ msgstr "Contacto de envío masivo"
 
 #~ msgid "Attendee"
 #~ msgstr "Asistente"

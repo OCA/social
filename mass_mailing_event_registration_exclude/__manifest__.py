@@ -5,7 +5,7 @@
 {
     "name": "Mass mailing event",
     "summary": "Link mass mailing with event for excluding recipients",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "category": "Marketing",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, " "Odoo Community Association (OCA)",
@@ -16,6 +16,6 @@
     "data": [
         "security/ir.model.access.csv",
         "data/event_state_data.xml",
-        "views/mass_mailing_view.xml",
+        "views/mailing_mailing_views.xml",
     ],
 }
