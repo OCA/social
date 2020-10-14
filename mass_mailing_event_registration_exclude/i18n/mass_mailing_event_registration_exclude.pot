@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mass_mailing_event_registration_exclude
+# 	* mass_mailing_event_registration_exclude
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -49,12 +49,12 @@ msgid "Event Registration State"
 msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mail_mass_mailing__event_id
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__event_id
 msgid "Event related"
 msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mail_mass_mailing__exclude_event_state_ids
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__exclude_event_state_ids
 msgid "Exclude"
 msgstr ""
 
@@ -79,17 +79,16 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mail_mass_mailing
-msgid "Mass Mailing"
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_contact
+msgid "Mailing Contact"
 msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
-#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mail_mass_mailing_contact
-msgid "Mass Mailing Contact"
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_mailing
+msgid "Mass Mailing"
 msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
 msgid "Name"
 msgstr ""
-
