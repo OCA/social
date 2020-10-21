@@ -95,7 +95,7 @@
     <field name="arch" type="xml">
         <pivot string="(Un)subscriptions">
             <field name="reason_id" type="row"/>
-            <field name="mailing_list_ids" type="row"/>
+            <field name="mass_mailing_id" type="row"/>
             <field name="action" type="col"/>
         </pivot>
     </field>
