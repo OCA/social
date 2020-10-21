@@ -20,6 +20,8 @@ setuptools.setup(
         'odoo13-addon-mail_inline_css',
         'odoo13-addon-mail_optional_autofollow',
         'odoo13-addon-mail_outbound_static',
+        'odoo13-addon-mail_preview_audio',
+        'odoo13-addon-mail_preview_base',
         'odoo13-addon-mail_restrict_follower_selection',
         'odoo13-addon-mail_tracking',
         'odoo13-addon-mail_tracking_mailgun',
