@@ -23,7 +23,7 @@ class IrMailServer(models.Model):
         body = body or ""
         # https://regex101.com/r/lW4cB1/2
         match = re.search(r'<img[^>]*data-odoo-tracking-email=["\']([0-9]*)["\']', body)
-        return int(match.group(1)) if match.group(1) else False
+        return int(match.group(1)) if match and match.group(1) else False
 
     def build_email(
         self,
