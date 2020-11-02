@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<!-- Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
-
+<!-- Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <template>
     <t t-extend="mail.widget.Thread.Message">
         <t t-jquery=".o_mail_info" t-operation="append">
