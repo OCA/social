@@ -11,15 +11,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "mail",
-        "web",
-    ],
-    "data": [
-        "views/mail_full_expand.xml",
-        "views/assets.xml",
-    ],
-    "qweb": [
-        "static/src/xml/mail_full_expand.xml",
-    ],
+    "depends": ["mail", "web"],
+    "data": ["views/mail_full_expand.xml", "views/assets.xml"],
+    "qweb": ["static/src/xml/mail_full_expand.xml"],
 }
