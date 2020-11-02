@@ -14,6 +14,6 @@
     "license": "AGPL-3",
     "installable": True,
     "depends": ["mail"],
-    "development_status": "Stable",
+    "development_status": "Production/Stable",
     "maintainers": ["pedrobaeza"],
 }
