@@ -113,7 +113,7 @@ class MailThread(models.AbstractModel):
         self,
         message,
         recipients_data,
-        msg_vals=False,
+        msg_vals=None,
         model_description=False,
         mail_auto_delete=True,
         check_existing=False,
