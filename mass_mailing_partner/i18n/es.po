@@ -143,6 +143,13 @@ msgid "Mass mailing stats number"
 msgstr "Número de estadísticas de envío masivo"
 
 #. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_base_partner_merge_automatic_wizard
+#, fuzzy
+#| msgid "Partner ids"
+msgid "Merge Partner Wizard"
+msgstr "IDs de asociados"
+
+#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mail_statistics__partner_id
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_contact__partner_id
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__partner_ids
@@ -183,6 +190,3 @@ msgstr ""
 
 #~ msgid "Mailing lists"
 #~ msgstr "Listas de correo"
-
-#~ msgid "Partner ids"
-#~ msgstr "IDs de asociados"
