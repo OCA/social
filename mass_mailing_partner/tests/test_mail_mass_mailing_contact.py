@@ -108,3 +108,35 @@ class MailMassMailingContactCase(base.BaseCase):
         contact.partner_id = partner
         contact._onchange_partner_mass_mailing_partner()
         self.check_mailing_contact_partner(contact)
+
+    def test_partners_merge(self):
+        partner_1 = self.create_partner({"name": "Demo 1", "email": "demo1@demo.com"})
+        partner_2 = self.create_partner({"name": "Demo 2", "email": "demo2@demo.com"})
+        list_1 = self.create_mailing_list({"name": "List test 1"})
+        list_2 = self.create_mailing_list({"name": "List test 2"})
+        contact_1 = self.create_mailing_contact(
+            {
+                "email": partner_1.email,
+                "name": partner_1.name,
+                "partner_id": partner_1.id,
+                "list_ids": [(6, 0, [list_1.id])],
+            }
+        )
+        contact_2 = self.create_mailing_contact(
+            {
+                "email": partner_2.email,
+                "name": partner_2.name,
+                "partner_id": partner_2.id,
+                "list_ids": [(6, 0, [list_1.id, list_2.id])],
+            }
+        )
+        # Wizard partner merge (partner_1 + partner_2) in partner_i1
+        wizard = self.env["base.partner.merge.automatic.wizard"].create(
+            {"state": "option"}
+        )
+        wizard._merge((partner_1 + partner_2).ids, partner_1)
+        contact = self.env["mailing.contact"].search(
+            [("id", "in", (contact_1 + contact_2).ids)]
+        )
+        self.assertEqual(len(contact), 1)
+        self.assertEqual(contact.list_ids.ids, (list_1 + list_2).ids)
