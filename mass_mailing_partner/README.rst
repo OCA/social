@@ -87,6 +87,7 @@ Contributors
     * Ernesto Tejeda
     * Victor M.M. Torres
     * Manuel Calero
+    * Víctor Martínez
 
 * `Hibou Corp. <https://hibou.io>`_
 

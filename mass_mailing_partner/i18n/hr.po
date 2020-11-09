@@ -145,6 +145,11 @@ msgid "Mass mailing stats number"
 msgstr ""
 
 #. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_base_partner_merge_automatic_wizard
+msgid "Merge Partner Wizard"
+msgstr ""
+
+#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__partner_id
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_trace__partner_id
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__partner_ids
