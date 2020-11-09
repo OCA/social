@@ -20,12 +20,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_optional_follower_notification
-#: model:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_inherit_form
+#: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_form
 msgid ""
-"<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
-"\"color: red;\"> - Warning : Followers will not be notified but they can "
-"access the notification directly from the document (if they are allowed to)</"
-"span>"
+"<span name=\"document_followers_text\" position=\"after\">\n"
+"                <span name=\"no_followers_text\" attrs=\"{'invisible': "
+"[('notify_followers', '=', True)]}\" style=\"color: red;\"> - Warning : "
+"Followers will not be notified but they can access the notification directly "
+"from the document (if they are allowed to)</span>\n"
+"            </span>"
+msgstr ""
+
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_mail_thread
+msgid "Email Thread"
 msgstr ""
 
 #. module: mail_optional_follower_notification
@@ -34,17 +41,12 @@ msgid "Email composition wizard"
 msgstr ""
 
 #. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_mail_message
-msgid "Message"
-msgstr "Bericht"
-
-#. module: mail_optional_follower_notification
-#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message_notify_followers
-#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_forward_compose_message_notify_followers
-msgid "Notify followers"
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
+msgid "Notify Followers"
 msgstr ""
 
-#. module: mail_optional_follower_notification
-#: model:ir.model,name:mail_optional_follower_notification.model_res_partner
-msgid "Partner"
-msgstr "Partner"
+#~ msgid "Message"
+#~ msgstr "Bericht"
+
+#~ msgid "Partner"
+#~ msgstr "Partner"
