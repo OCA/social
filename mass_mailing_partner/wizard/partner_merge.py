@@ -9,16 +9,17 @@ class BasePartnerMergeAutomaticWizard(models.TransientModel):
 
     def _merge(self, partner_ids, dst_partner=None, extra_checks=True):
         if dst_partner:
-            contact_ids = self.env['mail.mass_mailing.contact'].search([
-                ('partner_id', 'in', partner_ids)
-            ])
-            if contact_ids:
-                contact_ids.sorted(lambda x: 1 if x.partner_id == dst_partner else 0)
-                contact_ids[0].partner_id = dst_partner
-                contact_ids[0].list_ids = [
-                    (4, x) for x in contact_ids.mapped('list_ids').ids
-                ]
-                contact_ids[1:].unlink()
+            contacts = self.env["mailing.contact"].search(
+                [("partner_id", "in", partner_ids)]
+            )
+            if contacts:
+                contacts = contacts.sorted(
+                    lambda x: 1 if x.partner_id == dst_partner else 0
+                )
+                list_ids = contacts.mapped("list_ids").ids
+                contacts[1:].unlink()
+                contacts[0].partner_id = dst_partner
+                contacts[0].list_ids = [(4, x) for x in list_ids]
         return super()._merge(
             partner_ids, dst_partner=dst_partner, extra_checks=extra_checks,
         )
