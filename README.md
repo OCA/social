@@ -34,7 +34,7 @@ addon | version | summary
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 13.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.1.0.1 | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 13.0.1.0.0 | Mass mailing lists that get autopopulated
-[mass_mailing_partner](mass_mailing_partner/) | 13.0.1.0.1 | Link partners with mass-mailing
+[mass_mailing_partner](mass_mailing_partner/) | 13.0.1.0.2 | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 13.0.1.0.0 | Resend mass mailings
 
 [//]: # (end addons)
