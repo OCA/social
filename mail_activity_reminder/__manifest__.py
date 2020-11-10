@@ -4,7 +4,7 @@
 
 {
     'name': 'Mail Activity Reminder',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'category': 'Discuss',
     'website': 'https://github.com/OCA/social',
     'author':
