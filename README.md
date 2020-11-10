@@ -19,7 +19,7 @@ addon | version | summary
 [mail_activity_board](mail_activity_board/) | 12.0.1.0.1 | Add Activity Boards
 [mail_activity_done](mail_activity_done/) | 12.0.2.0.0 | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 12.0.1.0.0 | Add Partner to Activities
-[mail_activity_reminder](mail_activity_reminder/) | 12.0.1.0.0 | Reminder notifications about planned activities
+[mail_activity_reminder](mail_activity_reminder/) | 12.0.1.0.1 | Reminder notifications about planned activities
 [mail_activity_team](mail_activity_team/) | 12.0.1.2.1 | Add Teams to Activities
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 12.0.1.0.0 | Adding attachment on the object by sending this one
 [mail_attach_existing_attachment_account](mail_attach_existing_attachment_account/) | 12.0.1.0.0 | Module to use attach existing attachment for account module
