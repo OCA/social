@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo12-addon-mail_check_mailbox_size',
         'odoo12-addon-mail_debrand',
         'odoo12-addon-mail_drop_target',
+        'odoo12-addon-mail_footer_notified_partner',
         'odoo12-addon-mail_full_expand',
         'odoo12-addon-mail_history',
         'odoo12-addon-mail_inline_css',
