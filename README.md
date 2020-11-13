@@ -26,6 +26,7 @@ addon | version | summary
 [mail_check_mailbox_size](mail_check_mailbox_size/) | 12.0.1.0.0 | Send an email summarizing the current space used by a mailbox
 [mail_debrand](mail_debrand/) | 12.0.2.0.1 | Remove Odoo branding in sent emails
 [mail_drop_target](mail_drop_target/) | 12.0.1.1.1 | Attach emails to Odoo by dragging them from your desktop
+[mail_footer_notified_partner](mail_footer_notified_partner/) | 12.0.1.0.0 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_full_expand](mail_full_expand/) | 12.0.1.0.0 | Expand mail in a big window
 [mail_history](mail_history/) | 12.0.1.0.0 | Module to see old messages
 [mail_inline_css](mail_inline_css/) | 12.0.1.0.0 | Convert style tags in inline style in your mails
