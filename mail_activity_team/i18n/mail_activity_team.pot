@@ -67,6 +67,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_calendar_event
 msgid "Event"
 msgstr ""
@@ -129,6 +134,13 @@ msgid "Name"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin_activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_res_partner_activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_res_users_activity_team_user_ids
+msgid "Responsible Members"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_calendar_event_team_id
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team_id_2799
 #: model:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
@@ -171,12 +183,5 @@ msgstr ""
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_res_users
 msgid "Users"
-msgstr ""
-
-#. module: mail_activity_team
-#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin_activity_team_user_ids
-#: model:ir.model.fields,field_description:mail_activity_team.field_res_partner_activity_team_user_ids
-#: model:ir.model.fields,field_description:mail_activity_team.field_res_users_activity_team_user_ids
-msgid "test field"
 msgstr ""
 
