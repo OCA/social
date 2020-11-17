@@ -5,10 +5,11 @@ from odoo import fields, models
 
 
 class EventRegistration(models.Model):
-    _inherit = 'event.registration'
+    _inherit = "event.registration"
 
     opt_out = fields.Boolean(
-        string='Opt-Out',
+        string="Opt-Out",
         help="If opt-out is checked, this registree has refused to receive "
-             "emails for mass mailing and marketing campaign.")
+        "emails for mass mailing and marketing campaign.",
+    )
     # No need of email field, as it already exists
