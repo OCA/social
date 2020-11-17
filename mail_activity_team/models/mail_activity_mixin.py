@@ -7,7 +7,7 @@ class MailActivityMixin(models.AbstractModel):
     _inherit = 'mail.activity.mixin'
 
     activity_team_user_ids = fields.Many2many(
-        comodel_name='res.users', string='test field',
+        comodel_name='res.users', string='Responsible Members',
         compute="_compute_activity_team_user_ids",
         search="_search_activity_team_user_ids",
     )

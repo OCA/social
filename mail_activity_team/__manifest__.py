@@ -25,5 +25,6 @@
 
     'qweb': [
         'static/src/xml/systray.xml',
+        'static/src/xml/activity.xml',
     ],
 }

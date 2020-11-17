@@ -3,3 +3,4 @@ from . import mail_activity
 from . import res_users
 from . import mail_activity_mixin
 from . import calendar_event
+from . import mail_thread

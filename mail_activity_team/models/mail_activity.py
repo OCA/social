@@ -38,7 +38,7 @@ class MailActivity(models.Model):
         if self.team_id and self.user_id in self.team_id.member_ids:
             return res
         self.team_id = self.with_context(
-            default_res_model=self.res_model_id.id).\
+            default_res_model=self.res_model_id.id). \
             _get_default_team_id(user_id=self.user_id.id)
         return res
 
@@ -70,4 +70,44 @@ class MailActivity(models.Model):
     def action_create_calendar_event(self):
         res = super().action_create_calendar_event()
         res['context']['default_team_id'] = self.team_id.id or False
+        return res
+
+    @api.model
+    def create(self, vals):
+        activity_user = super().create(vals)
+        if activity_user.team_id and not activity_user.user_id and \
+                activity_user.date_deadline <= fields.Date.today():
+            for partner_id in activity_user.team_id.mapped("member_ids.partner_id.id"):
+                self.env['bus.bus'].sendone(
+                    (self._cr.dbname, 'res.partner', partner_id),
+                    {'type': 'activity_updated', 'activity_created': True}
+                )
+        return activity_user
+
+    @api.multi
+    def write(self, values):
+        self._check_access('write')
+        if values.get('team_id'):
+            pre_responsibles = {
+                activity: activity.team_id.mapped("member_ids.partner_id")
+                for activity in self
+            }
+        res = super(MailActivity, self.sudo()).write(values)
+
+        if values.get('team_id'):
+            today = fields.Date.today()
+            for activity in self:
+                if activity.date_deadline <= today:
+                    for partner in activity.team_id.member_ids.mapped("partner_id"):
+                        self.env['bus.bus'].sendone(
+                            (self._cr.dbname, 'res.partner', partner.id),
+                            {'type': 'activity_updated', 'activity_created': True}
+                        )
+            for activity in pre_responsibles:
+                if activity.date_deadline <= today:
+                    for partner in pre_responsibles[activity]:
+                        self.env['bus.bus'].sendone(
+                            (self._cr.dbname, 'res.partner', partner.id),
+                            {'type': 'activity_updated', 'activity_deleted': True}
+                        )
         return res
