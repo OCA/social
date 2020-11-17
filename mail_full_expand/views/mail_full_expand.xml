@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record id="mail_message_view_form" model="ir.ui.view">
+        <field name="name">mail.message.full_expand</field>
+        <field name="model">mail.message</field>
+        <field name="priority">30</field>
+        <field name="arch" type="xml">
+            <form string="Message">
+                <group>
+                    <field name="author_id" readonly="1"/>
+                    <field name="email_from" readonly="1"/>
+                    <field name="date" readonly="1"/>
+                    <field name="partner_ids" readonly="1" widget="many2many_tags"/>
+                </group>
+                <h1>
+                    <field name="subject" readonly="1"/>
+                </h1>
+                <field name="body" readonly="1"/>
+                <field name="attachment_ids" readonly="1" widget="many2many_binary"/>
+                <footer>
+                    <button class="btn-secondary" special="cancel" string="Close"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="mail_message_action" model="ir.actions.act_window">
+        <field name="name">Read Full Email</field>
+        <field name="res_model">mail.message</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="view_id" ref="mail_message_view_form"/>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
