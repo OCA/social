@@ -251,6 +251,8 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
