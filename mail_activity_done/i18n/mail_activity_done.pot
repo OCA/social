@@ -26,6 +26,8 @@ msgid "Active"
 msgstr ""
 
 #. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_event_event__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_event_registration__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mailing_mailing__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
