@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Tecnativa - João Marques
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+<template id="assets_frontend_demo"
+          inherit_id="web.assets_frontend">
+    <xpath expr=".">
+        <script type="text/javascript"
+                src="/mass_mailing_custom_unsubscribe_event/static/src/js/tour.js"/>
+    </xpath>
+</template>
+
+</odoo>
