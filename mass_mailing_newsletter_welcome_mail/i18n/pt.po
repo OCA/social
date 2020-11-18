@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-11-18 21:36+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: mass_mailing_newsletter_welcome_mail
 #: model:mail.template,body_html:mass_mailing_newsletter_welcome_mail.mail_template_welcome
@@ -23,11 +25,19 @@ msgid "<div>Dear <b>${object.name or object.email}</b>,\n"
 "            </div>\n"
 "        "
 msgstr ""
+"<div>Caro(a) <b>${object.name or object.email}</b>,\n"
+"                <br/>\n"
+"                <h3>Obrigado por subscrever a nossa newsletter!</h3>\n"
+"                <p>Cumprimentos,</p>\n"
+"            </div>\n"
+"        "
 
 #. module: mass_mailing_newsletter_welcome_mail
 #: model:ir.model.fields,help:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list__welcome_mail_template_id
 msgid "Mail template to be sent when a contact is subscribed from the website."
 msgstr ""
+"Modelo de email a ser enviado quando um contacto subscreve através do "
+"website."
 
 #. module: mass_mailing_newsletter_welcome_mail
 #: model:ir.model,name:mass_mailing_newsletter_welcome_mail.model_mail_mass_mailing_list
@@ -37,9 +47,9 @@ msgstr ""
 #. module: mass_mailing_newsletter_welcome_mail
 #: model:ir.model.fields,field_description:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list__welcome_mail_template_id
 msgid "Welcome mail template"
-msgstr ""
+msgstr "Modelo de email de boas vindas"
 
 #. module: mass_mailing_newsletter_welcome_mail
 #: model:mail.template,subject:mass_mailing_newsletter_welcome_mail.mail_template_welcome
 msgid "Welcome to the mailing list ${ctx.get(\"list_name\")}"
-msgstr ""
+msgstr "Bem-vindo(a) à mailing list ${ctx.get(\"list_name\")}"
