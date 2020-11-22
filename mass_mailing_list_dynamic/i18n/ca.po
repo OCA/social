@@ -136,7 +136,6 @@ msgstr ""
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mail_mass_mailing_load_filter
 #, fuzzy
-#| msgid "Mass Mailing Contact"
 msgid "Mail Mass Mailing Load Filter"
 msgstr "Contactes del correu massiu"
 
