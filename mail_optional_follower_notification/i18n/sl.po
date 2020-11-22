@@ -43,7 +43,6 @@ msgstr "Čarovnik za sestavljanje e-pošte"
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 #, fuzzy
-#| msgid "Notify followers"
 msgid "Notify Followers"
 msgstr "Obvesti sledilce"
 
