@@ -21,12 +21,15 @@ msgstr ""
 "%100>=11 && n%100<=14)? 2 : 3);\n"
 
 #. module: mail_footer_notified_partner
-#: code:addons/mail_footer_notified_partner/models/mail_followers.py:43
+#: code:addons/mail_footer_notified_partner/models/mail_followers.py:48
 #, python-format
 msgid "Also notified: "
 msgstr ""
 
 #. module: mail_footer_notified_partner
 #: model:ir.model,name:mail_footer_notified_partner.model_res_partner
-msgid "Partner"
-msgstr "Контрагент"
+msgid "Contact"
+msgstr ""
+
+#~ msgid "Partner"
+#~ msgstr "Контрагент"
