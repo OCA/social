@@ -26,7 +26,7 @@ msgstr ""
 
 #. module: mail_full_expand
 #. openerp-web
-#: code:addons/mail_full_expand/static/src/xml/mail_full_expand.xml:10
+#: code:addons/mail_full_expand/static/src/xml/mail_full_expand.xml:0
 #, python-format
 msgid "Fully Expand"
 msgstr "Complètement agrandi"
