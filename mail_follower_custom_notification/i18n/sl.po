@@ -152,10 +152,6 @@ msgstr "Zadnjič posodobljeno"
 #. module: mail_follower_custom_notification
 #: model:ir.model.fields,help:mail_follower_custom_notification.field_mail_message_subtype_custom_notification_mail
 #, fuzzy
-#| msgid ""
-#| "Leave empty to use the on the partner's form, set to \"Force yes\" to "
-#| "always send messages of this type via email, and \"Force no\" to never "
-#| "send messages of type via email"
 msgid ""
 "Leave empty to use the setting on the partner's form, set to \"Force yes\" "
 "to always send messages of this type via email, and \"Force no\" to never "
