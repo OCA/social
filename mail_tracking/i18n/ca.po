@@ -209,7 +209,6 @@ msgstr "Puntuació del correu electrònic"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_thread
 #, fuzzy
-#| msgid "Email Score"
 msgid "Email Thread"
 msgstr "Puntuació del correu electrònic"
 
@@ -281,7 +280,6 @@ msgstr "Fallit"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "Missatge"
 
@@ -289,7 +287,6 @@ msgstr "Missatge"
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message.xml:26
 #, fuzzy, python-format
-#| msgid "Recipient"
 msgid "Failed Recipients:"
 msgstr "Destinatari"
 
@@ -345,7 +342,6 @@ msgstr "IP"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail_is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message_is_failed_message
 #, fuzzy
-#| msgid "Message"
 msgid "Is Failed Message"
 msgstr "Missatge"
 
@@ -377,7 +373,6 @@ msgstr "Darrera Actualització el"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail_mail_tracking_needs_action
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message_mail_tracking_needs_action
 #, fuzzy
-#| msgid "MailTracking event"
 msgid "Mail Tracking Needs Action"
 msgstr "MailTracking esdeveniment"
 
@@ -386,7 +381,6 @@ msgstr "MailTracking esdeveniment"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail_mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message_mail_tracking_ids
 #, fuzzy
-#| msgid "MailTracking emails"
 msgid "Mail Trackings"
 msgstr "MailTracking correus electrònics"
 

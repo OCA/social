@@ -263,7 +263,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner_failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users_failed_message_ids
 #, fuzzy
-#| msgid "Message"
 msgid "Failed Messages"
 msgstr "Bericht"
 
@@ -271,7 +270,6 @@ msgstr "Bericht"
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message.xml:26
 #, fuzzy, python-format
-#| msgid "Recipient"
 msgid "Failed Recipients:"
 msgstr "Ontvanger"
 
@@ -327,7 +325,6 @@ msgstr "IP"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail_is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message_is_failed_message
 #, fuzzy
-#| msgid "Message"
 msgid "Is Failed Message"
 msgstr "Bericht"
 
