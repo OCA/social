@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo13-addon-mail_tracking_mailgun',
         'odoo13-addon-mail_tracking_mass_mailing',
         'odoo13-addon-mass_mailing_custom_unsubscribe',
+        'odoo13-addon-mass_mailing_custom_unsubscribe_event',
         'odoo13-addon-mass_mailing_event_registration_exclude',
         'odoo13-addon-mass_mailing_list_dynamic',
         'odoo13-addon-mass_mailing_partner',
