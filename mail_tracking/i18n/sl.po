@@ -64,7 +64,7 @@ msgstr ""
 "prejemnikovem Mail Exchange (MX) strežniku.\n"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:217
+#: code:addons/mail_tracking/models/mail_message.py:244
 #, python-format
 msgid "-Unknown Author-"
 msgstr "-Neznani avtor-"
@@ -135,7 +135,7 @@ msgstr "Čestitamo, ni neuspešnih sporočil"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:232
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:230
 #, python-format
 msgid "Congratulations, your failed mailbox is empty"
 msgstr "Čestitamo, vaš predal neuspešnih sporočil je prazen"
@@ -184,7 +184,7 @@ msgid "Deferred"
 msgstr "Odloženo"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:77
+#: code:addons/mail_tracking/models/mail_message.py:104
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
@@ -203,6 +203,13 @@ msgstr "Prikazani naziv"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__display_name
 msgid "Display name"
 msgstr "Prikazani naziv"
+
+#. module: mail_tracking
+#. openerp-web
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:337
+#, python-format
+msgid "Do you really want to mark as reviewed all the failed messages (%d)?"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
@@ -244,7 +251,7 @@ msgid "Email resend wizard"
 msgstr "Čarovnik za ponovno pošiljanje"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:103
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #: selection:mail.tracking.email,state:0
 #, python-format
@@ -280,7 +287,7 @@ msgstr "Tip dogodka"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:351
+#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:359
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:13
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:21
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -498,7 +505,7 @@ msgid "Open"
 msgstr "Odprto"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:78
+#: code:addons/mail_tracking/models/mail_message.py:105
 #: selection:mail.tracking.email,state:0
 #, python-format
 msgid "Opened"
@@ -581,7 +588,7 @@ msgid "Sender email"
 msgstr "Pošiljateljeva e-pošta"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:77
+#: code:addons/mail_tracking/models/mail_message.py:104
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: selection:mail.tracking.email,state:0
@@ -628,7 +635,7 @@ msgid "State"
 msgstr "Stanje"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:79
+#: code:addons/mail_tracking/models/mail_message.py:106
 #, python-format
 msgid "Status: %s"
 msgstr "Status: %s"
@@ -654,7 +661,7 @@ msgstr ""
 "Sledljivost sporočil bo upoštevana za filtriranje problematike sledljivosti"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:85
+#: code:addons/mail_tracking/models/mail_message.py:112
 #, python-format
 msgid "The partner doesn't have a defined email"
 msgstr "Partner nima določenega email naslova"
@@ -724,7 +731,7 @@ msgid "UTC timestamp"
 msgstr "UTC časovni žig"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:78
+#: code:addons/mail_tracking/models/mail_message.py:105
 #, python-format
 msgid "Unknown"
 msgstr "Neznano"
@@ -771,7 +778,7 @@ msgid "User country"
 msgstr "Država uporabnika"
 
 #. module: mail_tracking
-#: code:addons/mail_tracking/models/mail_message.py:76
+#: code:addons/mail_tracking/models/mail_message.py:103
 #, python-format
 msgid "Waiting"
 msgstr "Čakanje"
