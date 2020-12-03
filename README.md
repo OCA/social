@@ -39,7 +39,7 @@ addon | version | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 12.0.1.0.2 | Define a domain from which followers can be selected
 [mail_template_substitute](mail_template_substitute/) | 12.0.1.0.1 | This module allows to create substitution rules for mail templates.
 [mail_track_diff_only](mail_track_diff_only/) | 12.0.1.0.0 | Mail track diff only
-[mail_tracking](mail_tracking/) | 12.0.2.1.6 | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 12.0.2.1.7 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 12.0.1.0.2 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 12.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 12.0.1.0.3 | Know and track (un)subscription reasons, GDPR compliant
