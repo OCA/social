@@ -9,7 +9,6 @@
     "author": "ADHOC SA, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["mail", "sale_management", "contacts"],
-    "demo": ["demo/res_partner_category_demo.xml"],
+    "depends": ["mail"],
     "data": ["views/res_partner_view.xml"],
 }
