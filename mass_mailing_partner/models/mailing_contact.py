@@ -100,6 +100,8 @@ class MailingContact(models.Model):
 
     def _set_partner(self):
         self.ensure_one()
+        if not self.email:
+            return
         m_partner = self.env["res.partner"]
         # Look for a partner with that email
         email = self.email.strip()
