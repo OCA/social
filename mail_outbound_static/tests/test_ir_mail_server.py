@@ -48,8 +48,7 @@ class TestIrMailServer(TransactionCase):
         return message_from_string(message_string)
 
     def test_send_email_injects_from_no_canonical(self):
-        """It should inject the FROM header correctly when no canonical name.
-        """
+        """It should inject the FROM header correctly when no canonical name."""
         self.message.replace_header("From", "test@example.com")
         message = self._send_mail()
         self.assertEqual(message["From"], self.email_from)
