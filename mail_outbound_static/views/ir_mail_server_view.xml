@@ -13,7 +13,8 @@
         <field name="inherit_id" ref="base.ir_mail_server_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='smtp_pass']" position="after">
-                <field name="smtp_from" />
+                <field name="domain_whitelist"/>
+                <field name="smtp_from" widget="email"/>
             </xpath>
         </field>
     </record>
