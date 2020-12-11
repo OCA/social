@@ -23,8 +23,10 @@ class MailMassMailingContact(models.Model):
                     ('id', '!=', contact.id)
                 ])
                 if contact.list_ids & other_contact.mapped('list_ids'):
-                    raise ValidationError(_("Partner already exists in one of "
-                                            "these mailing lists"))
+                    raise ValidationError(
+                        _("Partner already exists in one of these "
+                          "mailing lists") + ": %s" % contact.partner_id.display_name
+                    )
 
     @api.onchange('partner_id')
     def _onchange_partner_mass_mailing_partner(self):
