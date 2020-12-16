@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo13-addon-mail_drop_target',
         'odoo13-addon-mail_full_expand',
         'odoo13-addon-mail_inline_css',
+        'odoo13-addon-mail_layout_preview',
         'odoo13-addon-mail_optional_autofollow',
         'odoo13-addon-mail_optional_follower_notification',
         'odoo13-addon-mail_outbound_static',
