@@ -24,6 +24,7 @@ addon | version | summary
 [mail_drop_target](mail_drop_target/) | 13.0.1.0.1 | Attach emails to Odoo by dragging them from your desktop
 [mail_full_expand](mail_full_expand/) | 13.0.1.0.0 | Expand mail in a big window
 [mail_inline_css](mail_inline_css/) | 13.0.1.0.2 | Convert style tags in inline style in your mails
+[mail_layout_preview](mail_layout_preview/) | 13.0.1.0.0 | Preview email templates in the browser
 [mail_optional_autofollow](mail_optional_autofollow/) | 13.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 13.0.1.0.1 | Choose to notify followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 13.0.2.0.0 | Allows you to configure the from header for a mail server.
