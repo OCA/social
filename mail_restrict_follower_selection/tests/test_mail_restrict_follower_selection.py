@@ -64,3 +64,19 @@ class TestMailRestrictFollowerSelection(TransactionCase):
         self.assertNotIn(
             self.partner, self.partner.message_follower_ids.mapped("partner_id")
         )
+
+    def test_message_add_suggested_recipient(self):
+        res = self.partner.with_context(
+            test_restrict_follower=True
+        )._message_add_suggested_recipient({self.partner.id: []}, partner=self.partner)
+        self.assertEqual(res[self.partner.id][0][0], self.partner.id)
+        self.env["ir.config_parameter"].create(
+            {
+                "key": "mail_restrict_follower_selection.domain.res.partner",
+                "value": "[('category_id.name', '!=', 'Employees')]",
+            }
+        )
+        new_res = self.partner.with_context(
+            test_restrict_follower=True
+        )._message_add_suggested_recipient({self.partner.id: []})
+        self.assertFalse(new_res[self.partner.id][0][0])
