@@ -1,0 +1,69 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_notification_custom_subject
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-05 09:11+0000\n"
+"PO-Revision-Date: 2021-01-05 09:17+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.4.2\n"
+"Last-Translator: \n"
+"Language: es_ES\n"
+
+#. module: mail_notification_custom_subject
+#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:150
+#, python-format
+msgid "Append After"
+msgstr "Añadir después"
+
+#. module: mail_notification_custom_subject
+#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:149
+#, python-format
+msgid "Append Before"
+msgstr "Añadir antes"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model,name:mail_notification_custom_subject.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de correo electrónico"
+
+#. module: mail_notification_custom_subject
+#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:238
+#, python-format
+msgid "Failed to render template %r using values %r"
+msgstr "Error al procesar la plantilla %r usando los valores %r"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model,name:mail_notification_custom_subject.model_mail_message_custom_subject
+msgid "Mail Message Custom Subject"
+msgstr "Asunto Personalizado en Mensaje de Correo"
+
+#. module: mail_notification_custom_subject
+#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:151
+#, python-format
+msgid "Replace"
+msgstr "Sustituir"
+
+#. module: mail_notification_custom_subject
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
+msgid "Subject (placeholders may be used here)"
+msgstr "Asunto (se pueden utilizar aquí expresiones de campos)"
+
+#. module: mail_notification_custom_subject
+#: model:ir.actions.act_window,name:mail_notification_custom_subject.action_mail_notification_custom_subject_tree_all
+#: model:ir.ui.menu,name:mail_notification_custom_subject.menu_mail_notification_custom_subject
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
+msgid "Subject Replacement Templates"
+msgstr "Plantillas de Sustitución de Asuntos"
+
+#. module: mail_notification_custom_subject
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_tree
+msgid "Templates"
+msgstr "Plantillas"
