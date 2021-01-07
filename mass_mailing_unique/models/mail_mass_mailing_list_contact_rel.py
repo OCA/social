@@ -5,7 +5,7 @@ from odoo import api, models
 
 
 class MailMassMailingContactListRel(models.Model):
-    _inherit = "mail.mass_mailing.list_contact_rel"
+    _inherit = "mailing.contact.subscription"
 
     @api.constrains("contact_id", "list_id")
     def _check_contact_id_partner_id_list_id(self):

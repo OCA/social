@@ -6,7 +6,7 @@ from odoo.exceptions import ValidationError
 
 
 class MailMassMailingContact(models.Model):
-    _inherit = "mail.mass_mailing.contact"
+    _inherit = "mailing.contact"
 
     @api.constrains("email", "list_ids")
     def _check_email_list_ids(self):

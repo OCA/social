@@ -20,10 +20,10 @@ def pre_init_hook(cr):
     cr.execute(
         """SELECT LOWER(c.email) AS e, l.name, COUNT(c.id)
                   FROM
-                    mail_mass_mailing_contact AS c
-                    INNER JOIN mail_mass_mailing_contact_list_rel AS cl
+                    mailing_contact AS c
+                    INNER JOIN mailing_contact_list_rel AS cl
                       ON cl.contact_id = c.id
-                    INNER JOIN mail_mass_mailing_list AS l ON cl.list_id = l.id
+                    INNER JOIN mailing_list AS l ON cl.list_id = l.id
                   GROUP BY l.name, e
                   HAVING COUNT(c.id) > 1"""
     )
@@ -33,7 +33,7 @@ def pre_init_hook(cr):
     # Search for duplicates in list's name
     cr.execute(
         """SELECT name, COUNT(id)
-                  FROM mail_mass_mailing_list
+                  FROM mailing_list
                   GROUP BY name
                   HAVING COUNT(id) > 1"""
     )
@@ -42,6 +42,4 @@ def pre_init_hook(cr):
 
     # Abort if duplicates are found
     if errors:
-        raise ValidationError(
-            "Fix this before installing:" + "".join("\n" + e for e in errors)
-        )
+        raise ValidationError("Fix this before installing:" + "".join("\n" + e for e in errors))
