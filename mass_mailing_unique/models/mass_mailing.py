@@ -9,6 +9,9 @@ class MailMassMailingList(models.Model):
     _inherit = "mail.mass_mailing.list"
 
     _sql_constraints = [
-        ("unique_name", "UNIQUE(name)",
-         "Cannot have more than one lists with the same name.")
+        (
+            "unique_name",
+            "UNIQUE(name)",
+            "Cannot have more than one lists with the same name.",
+        )
     ]

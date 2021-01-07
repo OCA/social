@@ -9,17 +9,11 @@
     "version": "12.0.1.0.1",
     "category": "Marketing",
     "website": "https://github.com/OCA/social",
-    "author": "Tecnativa, "
-              "Odoo Community Association (OCA)",
+    "author": "Tecnativa, " "Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "pre_init_hook": "pre_init_hook",
-    "images": [
-        "images/error-duplicated-email.png",
-        "images/error-duplicated-list.png",
-    ],
-    "depends": [
-        "mass_mailing",
-    ],
+    "images": ["images/error-duplicated-email.png", "images/error-duplicated-list.png"],
+    "depends": ["mass_mailing"],
 }
