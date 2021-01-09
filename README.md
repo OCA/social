@@ -37,6 +37,7 @@ addon | version | summary
 [mail_preview_base](mail_preview_base/) | 12.0.1.0.1 | Base to add more previewing options
 [mail_private](mail_private/) | 12.0.1.0.0 | Create private emails
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 12.0.1.0.2 | Define a domain from which followers can be selected
+[mail_send_copy](mail_send_copy/) | 12.0.1.0.0 | Send to you a copy of each mail sent by Odoo
 [mail_template_substitute](mail_template_substitute/) | 12.0.1.0.1 | This module allows to create substitution rules for mail templates.
 [mail_track_diff_only](mail_track_diff_only/) | 12.0.1.0.0 | Mail track diff only
 [mail_tracking](mail_tracking/) | 12.0.2.1.7 | Email tracking system for all mails sent
