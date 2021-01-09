@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo12-addon-mail_preview_base',
         'odoo12-addon-mail_private',
         'odoo12-addon-mail_restrict_follower_selection',
+        'odoo12-addon-mail_send_copy',
         'odoo12-addon-mail_template_substitute',
         'odoo12-addon-mail_track_diff_only',
         'odoo12-addon-mail_tracking',
