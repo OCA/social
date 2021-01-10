@@ -15,7 +15,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[mail_send_copy](mail_send_copy/) | 14.0.1.0.0 | Send to you a copy of each mail sent by Odoo
 
 [//]: # (end addons)
 
