@@ -1,1 +1,1 @@
-from . import mail_render_mixin
+from . import mail_render_mixinANDmail_mail
