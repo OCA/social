@@ -41,7 +41,7 @@ Configuration
 * Go to **Settings > Technical > Email > Subject Replacement Templates**
 * Create a new template.
 
-    * The field **Models** specifies the models to which the subject template should apply in the emails sent by Odoo
+    * The field **Model** specifies the model to which the subject template should apply in the notification emails sent by Odoo.
     * The field **Subject Template** accepts `Jinjah<ttps://jinja.palletsprojects.com/en/2.11.x/>` expressions.
     * The field **Replace** specifies if the template should replace existing content or append to it.
 
