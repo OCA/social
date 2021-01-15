@@ -18,7 +18,7 @@ class MailThread(models.AbstractModel):
         thread_id=None,
     ):
         server = self.env["fetchmail.server"].browse(
-            self.env.context.get("fetchmail_server_id")
+            self.env.context.get("default_fetchmail_server_id")
         )
         if server.default_thread_id and not (model or thread_id):
             model = server.default_thread_id._name
