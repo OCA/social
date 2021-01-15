@@ -37,7 +37,7 @@ class FetchmailCase(SavepointCase):
         """An unbound incoming email gets posted to the sink."""
         # Imitate what self.server.feth_mail() would do
         result = self.MailThread.with_context(
-            fetchmail_server_id=self.server.id
+            default_fetchmail_server_id=self.server.id
         ).message_process(
             self.server.object_id.model,
             MAIL_TEMPLATE.format(
