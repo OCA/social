@@ -46,7 +46,7 @@ class MailResendMessage(models.TransientModel):
                 tracking_ids = wizard.mail_message_id.mail_tracking_ids.filtered(
                     lambda x: x.partner_id in to_send
                 )
-                tracking_ids.write({"state": False})
+                tracking_ids.sudo().write({"state": False})
                 # Send bus notifications to update Discuss and
                 # mail_failed_messages widget
                 notification = {
