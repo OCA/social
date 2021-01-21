@@ -4,20 +4,20 @@
         <field name="name">Edit own mail messages</field>
         <field name="comment">Members of this group are able to edit mail messages.</field>
         <field name="category_id" ref="base.module_category_hidden"/>
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
     </record>
 
     <record model="res.groups" id="group_mail_edit_mover">
         <field name="name">Move own mail messages</field>
         <field name="comment">Members of this group are able to move mails.</field>
         <field name="category_id" ref="base.module_category_hidden"/>
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
     </record>
 
     <record model="res.groups" id="group_mail_edit_superuser">
         <field name="name">Edit or Move anyone's mail messages</field>
         <field name="comment">Members of this group are able to move or edit mails</field>
         <field name="category_id" ref="base.module_category_hidden"/>
-        <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        <field name="users" eval="[(4, ref('base.user_admin'))]"/>
     </record>
 </odoo>

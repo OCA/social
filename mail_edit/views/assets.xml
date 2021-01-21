@@ -7,6 +7,8 @@
                   href="/mail_edit/static/src/scss/mail_edit.scss"/>
             <script type="text/javascript"
                     src="/mail_edit/static/src/js/mail_edit.js"/>
+            <script type="text/javascript"
+                    src="/mail_edit/static/src/js/tour.js"/>
         </xpath>
     </template>
 </odoo>
