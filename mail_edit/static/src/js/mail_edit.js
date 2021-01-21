@@ -1,50 +1,75 @@
 /* © 2014-2017 Sunflower IT <www.sunflowerweb.nl>*/
 
+ odoo.define('mail_edit.mail_edit', function (require) {
 "use strict";
-openerp.mail_edit = function (instance) {
-    var _t = instance.web._t;
-    instance.mail.ThreadMessage.include({
-        bind_events: function () {
-            this._super.apply(this, arguments);
-            this.$('.oe_edit').on('click', this.on_message_edit);
-            this.$('.oe_delete').on('click', this.on_message_delete);
-        },
 
-        on_message_edit: function () {
-            var context = {};
+    var Message = require('mail.model.Message');
+    var ThreadWidget = require('mail.widget.Thread');
+    var Dialog = require('web.Dialog');
 
-            // save the widget object in a var.
+    ThreadWidget.include({
+        events: _.defaults({
+            "click .o_mail_edit": "_onClickMessageEdit",
+            "click .o_mail_delete": "_onClickMessageDelete",
+        }, ThreadWidget.prototype.events),
+
+        _onClickMessageEdit: function(event) {
             var self = this;
+            var do_action = self.do_action,
+                msg_id = $(event.currentTarget).data('message-id');
 
-            // Get the action data
-            var do_action = this.do_action;
-
-            this.rpc("/web/action/load", {
-                "action_id": "mail_edit.mail_edit_action",
+            self._rpc({
+                route: "/web/action/load",
+                params: {
+                    action_id: "mail_edit.mail_edit_action",
+                },
             })
-            .done(function(action) {
-                action.res_id = self.id;
-                action.flags = {
-                    action_buttons: true,
-                };
-                action.context = context;
-                do_action(action, {
+            .done(function (action) {
+                action.res_id = msg_id;
+                self.do_action(action, {
                     on_close: function () {
-                        // reload view
-                        var parent = self.getParent().getParent().getParent().getParent()
-                        if (typeof parent.model !== "undefined"){
-                            parent.reload();
-                        }
+                        location.reload();
+                        //self.trigger_up('refresh_on_fly');
+                        //this.reload.bind(this)
+                        //self.trigger_up('reload', { keepChanges: true });
+                         //self.trigger.bind(self, 'need_refresh')
                     },
                 });
             });
+        },
+
+        _onClickMessageDelete: function(event, options) {
+            var self = this;
+            event.stopPropagation();
+            event.preventDefault();
+            var msg_id = $(event.currentTarget).data('message-id');
+            Dialog.confirm(
+                self,
+                _t("Do you really want to delete this message?"), {
+                    confirm_callback: function () {
+                        return self._rpc({
+                            model: 'mail.message',
+                            method: 'unlink',
+                            args: [[msg_id]],
+                        })
+                        .then(function() {
+                            //self.trigger_up('reload');
+                            location.reload();
+                        });
+                    },
+                }
+            );
+
         }
+
     });
 
-    instance.mail.MessageCommon.include({
-                init: function (parent, datasets, options) {
-                    this._super(parent, datasets, options);
-                    this.is_superuser = datasets.is_superuser || false;
-                }
+    Message.include({
+        init: function (parent, data) {
+            this._super.apply(this, arguments);
+            this.is_superuser = data.is_superuser || false;
+            this.is_author = data.is_author || false;
+        },
     });
-};
+
+});

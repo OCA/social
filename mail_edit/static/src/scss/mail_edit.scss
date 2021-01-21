@@ -1,0 +1,28 @@
+/* Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ */
+
+.o_mail_thread .o_thread_message {
+    .o_mail_edit, .o_mail_delete {
+        cursor: pointer;
+        opacity: 0;
+        padding: 5px;
+    }
+
+    &:hover {
+        .o_mail_edit {
+            color: #1FC0FF;
+            opacity: 0.6;
+            &:hover {
+                opacity: 1;
+            }
+        }
+        .o_mail_delete {
+            color: red;
+            opacity: 0.6;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}

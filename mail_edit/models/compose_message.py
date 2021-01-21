@@ -2,7 +2,7 @@
 # © 2016 Sunflower IT (http://sunflowerweb.nl)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import api, fields, models
+from odoo import api, fields, models
 
 
 class MailMessage(models.Model):
@@ -10,13 +10,11 @@ class MailMessage(models.Model):
 
     @api.model
     def _get_model_selection(self):
-        """Get allowed models and their names."""
-        model_objs = self.env["res.request.link"].search(
-            [("mail_edit", "=", True)],
-            order="name")
-        return [(m.object, m.name) for m in model_objs]
+        # Get models that supports messages, exclude transient models
+        models = self.env['ir.model'].search(
+            [('is_mail_thread', '=', True), ('transient', '=', False)])
+        return [(m.model, m.name) for m in models]
 
-    @api.one
     @api.onchange("destination_object_id")
     def change_destination_object(self):
         """Update some fields for the new message."""
@@ -48,4 +46,6 @@ class MailMessage(models.Model):
             # Check if current user is a superuser
             if self.env.user.has_group('mail_edit.group_mail_edit_superuser'):
                 message_dict['is_superuser'] = True
+            message_dict['is_author'] = self.env.user.partner_id.id == \
+                message_dict['author_id'][0]
         return res

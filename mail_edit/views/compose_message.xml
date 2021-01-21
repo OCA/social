@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-<data>
+<odoo>
 
 <record id="mail_edit_form" model="ir.ui.view">
     <field name="name">Edit Email Form</field>
     <field name="model">mail.message</field>
+    <field name="priority">50</field>
     <field name="arch" type="xml">
         <form string="Message" create="false">
             <sheet>
@@ -12,7 +12,7 @@
                     <group>
                         <field name="subject" groups="mail_edit.group_mail_edit_editor,mail_edit.group_mail_edit_superuser"/>
                         <field name="date" readonly="1"/>
-                        <field name="type" readonly="1"/>
+                        <field name="message_type" readonly="1"/>
                         <field name="subtype_id" readonly="1"/>
                     </group>
                     <group>
@@ -38,5 +38,4 @@
     <field name="target">new</field>
 </record>
 
-</data>
-</openerp>
+</odoo>
