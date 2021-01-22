@@ -144,6 +144,7 @@
                                         />
                                         <t t-if="act_date &lt; (new Date())">
                                             <span t-attf-class="text-danger"><i
+                                                    title="date"
                                                     class="fa fa-clock-o"
                                                 /></span>
                                             <t
@@ -166,7 +167,10 @@
                                             </t>
                                         </t>
                                         <t t-else="">
-                                            <span><i class="fa fa-clock-o" /></span>
+                                            <span><i
+                                                    title="date"
+                                                    class="fa fa-clock-o"
+                                                /></span>
                                             <t
                                                 t-if="record.activity_category.raw_value!='meeting'"
                                             >

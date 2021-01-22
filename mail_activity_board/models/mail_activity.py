@@ -1,5 +1,5 @@
 # Copyright 2018 David Juaneda - <djuaneda@sdi.es>
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018 ForgeFlow S.L.  <https://www.forgeflow.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
 
