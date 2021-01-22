@@ -37,7 +37,7 @@ class MailRenderMixin(models.AbstractModel):
                     # anchor <a href odoo has a parent powered by that must be removed
                     parent.getparent().remove(parent)
                 else:
-                    if parent.tag == 'td':  # also here can be powerd by
+                    if parent.tag == "td":  # also here can be powerd by
                         parent.getparent().remove(parent)
                     else:
                         parent.remove(elem)
