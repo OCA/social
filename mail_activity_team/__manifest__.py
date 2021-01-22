@@ -5,7 +5,7 @@
     "name": "Mail Activity Team",
     "summary": "Add Teams to Activities",
     "version": "14.0.1.0.0",
-    "development_status": "Beta",
+    "development_status": "Alpha",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Eficent, Sodexis, Odoo Community Association (OCA)",

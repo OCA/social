@@ -30,5 +30,5 @@ class MailActivityMixin(models.AbstractModel):
                 v = (v[0], "list")
             views.append(v)
         action["views"] = views
-        action["domain"] = [("res_id", "=", _id),(("res_model", "=", model))]
+        action["domain"] = [("res_id", "=", _id), (("res_model", "=", model))]
         return action
