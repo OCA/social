@@ -37,7 +37,10 @@ class MailRenderMixin(models.AbstractModel):
                     # anchor <a href odoo has a parent powered by that must be removed
                     parent.getparent().remove(parent)
                 else:
-                    parent.remove(elem)
+                    if parent.tag == 'td':  # also here can be powerd by
+                        parent.getparent().remove(parent)
+                    else:
+                        parent.remove(elem)
             value = etree.tostring(tree, pretty_print=True, method="html")
         if type(value) is str:
             value = re.sub("[^(<)(</)]odoo", "", value, flags=re.IGNORECASE)
