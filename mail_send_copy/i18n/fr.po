@@ -6,20 +6,32 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-11-13 10:48+0000\n"
-"PO-Revision-Date: 2019-11-13 10:48+0000\n"
+"POT-Creation-Date: 2021-01-22 15:41+0000\n"
+"PO-Revision-Date: 2021-01-22 15:41+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: mail_send_copy
+#: model:ir.model.fields,help:mail_send_copy.field_res_users__mail_send_copy
+msgid "If checked, you will receive each mail in bcc mode for each mail you will send using Odoo."
+msgstr "Si la case est cochée, vous recevrez chaque email en copie cachée pour chaque mail que vous envoyez en utilisant Odoo"
+
+#. module: mail_send_copy
 #: model:ir.model,name:mail_send_copy.model_ir_mail_server
 msgid "Mail Server"
 msgstr "Serveur d'email"
 
-#~ msgid "Users"
-#~ msgstr "Utilisateurs"
+#. module: mail_send_copy
+#: model:ir.model.fields,field_description:mail_send_copy.field_res_users__mail_send_copy
+msgid "Send Email Copy"
+msgstr "M'envoyer une copie des emails"
+
+#. module: mail_send_copy
+#: model:ir.model,name:mail_send_copy.model_res_users
+msgid "Users"
+msgstr "Utilisateurs"
+

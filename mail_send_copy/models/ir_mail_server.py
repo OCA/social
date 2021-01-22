@@ -11,7 +11,17 @@ class IrMailServer(models.Model):
 
     @api.model
     def send_email(self, message, *args, **kwargs):
+        ResUsers = self.env["res.users"]
+
+        # Check context
         do_not_send_copy = self.env.context.get("do_not_send_copy", False)
+
+        # Check user settings
+        if not do_not_send_copy and message.get("From", False):
+            users = ResUsers.search([('email', "=", message["From"])])
+            if len(users) >= 1:
+                do_not_send_copy = not users[0].mail_send_copy
+
         if not do_not_send_copy:
             if message["Bcc"]:
                 message["Bcc"] = message["Bcc"].join(
