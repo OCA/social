@@ -12,9 +12,7 @@ class MailMail(models.Model):
         return super()._send(auto_commit, raise_exception, smtp_session)
 
     def unlink(self):
-        to_unlink = self
         if self.env.context.get("autodelete_skip_unlink"):
-            to_purge = self.filtered(lambda r: r.auto_delete)
-            to_purge.write({"body_html": "", "body": ""})
-            to_unlink -= to_purge
-        super(MailMail, to_unlink).unlink()
+            return self.write({"body_html": "", "body": ""})
+        else:
+            return super().unlink()
