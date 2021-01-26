@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      Copyright 2020 Tecnativa - Manuel Calero
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
@@ -7,10 +7,10 @@
 <record model="ir.ui.view" id="mailing_trace_view_form">
     <field name="name">Add partner field</field>
     <field name="model">mailing.trace</field>
-    <field name="inherit_id" ref="mass_mailing.mailing_trace_view_form"/>
+    <field name="inherit_id" ref="mass_mailing.mailing_trace_view_form" />
     <field name="arch" type="xml">
         <field name="res_id" position="after">
-            <field name="partner_id"/>
+            <field name="partner_id" />
         </field>
     </field>
 </record>
@@ -18,10 +18,10 @@
 <record model="ir.ui.view" id="mailing_trace_view_tree">
     <field name="name">Add partner column</field>
     <field name="model">mailing.trace</field>
-    <field name="inherit_id" ref="mass_mailing.mailing_trace_view_tree"/>
+    <field name="inherit_id" ref="mass_mailing.mailing_trace_view_tree" />
     <field name="arch" type="xml">
         <field name="sent" position="before">
-            <field name="partner_id"/>
+            <field name="partner_id" />
         </field>
     </field>
 </record>
@@ -29,15 +29,17 @@
 <record model="ir.ui.view" id="mailing_trace_view_search">
     <field name="name">Add partner search field and group by</field>
     <field name="model">mailing.trace</field>
-    <field name="inherit_id" ref="mass_mailing.mailing_trace_view_search"/>
+    <field name="inherit_id" ref="mass_mailing.mailing_trace_view_search" />
     <field name="arch" type="xml">
         <field name="mass_mailing_id" position="after">
-            <field name="partner_id"/>
+            <field name="partner_id" />
         </field>
         <filter name="group_reply_date" position="after">
-            <filter string="Partner"
+            <filter
+                    string="Partner"
                     name="group_partner"
-                    context="{'group_by': 'partner_id'}"/>
+                    context="{'group_by': 'partner_id'}"
+                />
         </filter>
     </field>
 </record>
