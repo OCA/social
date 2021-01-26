@@ -1,15 +1,22 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <record id="email_compose_message_wizard_form" model="ir.ui.view">
         <field name="model">mail.compose.message</field>
-        <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
         <field name="arch" type="xml">
             <span name="document_followers_text" position="before">
-                <field name="notify_followers" attrs="{'invisible': [('composition_mode', '=', 'mass_mail')]}"/>
+                <field
+                    name="notify_followers"
+                    attrs="{'invisible': [('composition_mode', '=', 'mass_mail')]}"
+                />
             </span>
             <span name="document_followers_text" position="after">
-                <span name="no_followers_text" attrs="{'invisible': [('notify_followers', '=', True)]}" style="color: red;"> - Warning : Followers will not be notified but they can access the notification directly from the document (if they are allowed to)</span>
+                <span
+                    name="no_followers_text"
+                    attrs="{'invisible': [('notify_followers', '=', True)]}"
+                    style="color: red;"
+                > - Warning : Followers will not be notified but they can access the notification directly from the document (if they are allowed to)</span>
             </span>
         </field>
     </record>
