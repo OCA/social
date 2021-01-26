@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
@@ -7,11 +7,11 @@
 <record model="ir.ui.view" id="view_mail_mass_mailing_contact_tree">
     <field name="name">Add email score and stars</field>
     <field name="model">mailing.contact</field>
-    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_tree"/>
+    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_tree" />
     <field name="arch" type="xml">
         <field name="is_blacklisted" position="after">
-            <field name="email_bounced"/>
-            <field name="email_score" widget="progressbar"/>
+            <field name="email_bounced" />
+            <field name="email_score" widget="progressbar" />
         </field>
     </field>
 </record>
@@ -19,11 +19,14 @@
 <record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
     <field name="name">Filter bounced contacts</field>
     <field name="model">mailing.contact</field>
-    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_search"/>
+    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_search" />
     <field name="arch" type="xml">
         <filter name="filter_not_email_bl" position="after">
-            <filter string="Email bounced" name="email_bounced"
-                    domain="[('email_bounced', '=', True)]"/>
+            <filter
+                    string="Email bounced"
+                    name="email_bounced"
+                    domain="[('email_bounced', '=', True)]"
+                />
         </filter>
     </field>
 </record>
