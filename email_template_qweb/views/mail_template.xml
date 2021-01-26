@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <record id="email_template_form" model="ir.ui.view">
         <field name="model">mail.template</field>
@@ -9,12 +9,21 @@
             </field>
             <field name="body_html" position="before">
                 <group attrs="{'invisible': [('body_type', '!=', 'qweb')]}">
-                    <field name="body_view_id" attrs="{'required': [('body_type', '=', 'qweb')]}" />
-                    <field name="body_view_arch" widget="ace" attrs="{'required': [('body_type', '=', 'qweb')], 'invisible': [('body_view_id', '=', False)]}" />
+                    <field
+                        name="body_view_id"
+                        attrs="{'required': [('body_type', '=', 'qweb')]}"
+                    />
+                    <field
+                        name="body_view_arch"
+                        widget="ace"
+                        attrs="{'required': [('body_type', '=', 'qweb')], 'invisible': [('body_view_id', '=', False)]}"
+                    />
                 </group>
             </field>
             <field name="body_html" position="attributes">
-                <attribute name="attrs">{'invisible': [('body_type', '!=', 'jinja2')]}</attribute>
+                <attribute
+                    name="attrs"
+                >{'invisible': [('body_type', '!=', 'jinja2')]}</attribute>
             </field>
         </field>
     </record>
