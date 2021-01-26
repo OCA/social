@@ -6,12 +6,22 @@
 
   -->
 <odoo>
-    <template id="assets_backend" name="mail_preview_base_assets" inherit_id="web.assets_backend">
+    <template
+        id="assets_backend"
+        name="mail_preview_base_assets"
+        inherit_id="web.assets_backend"
+    >
         <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/mail_preview_base/static/src/js/preview.js" />
+            <script
+                type="text/javascript"
+                src="/mail_preview_base/static/src/js/preview.js"
+            />
         </xpath>
         <xpath expr="//link[last()]" position="after">
-            <link rel="stylesheet" href="/mail_preview_base/static/src/scss/preview.scss" />
+            <link
+                rel="stylesheet"
+                href="/mail_preview_base/static/src/scss/preview.scss"
+            />
         </xpath>
     </template>
 </odoo>
