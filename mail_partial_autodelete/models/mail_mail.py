@@ -9,7 +9,7 @@ class MailMail(models.Model):
 
     def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
         self = self.with_context(autodelete_skip_unlink=True)
-        super()._send(auto_commit, raise_exception, smtp_session)
+        return super()._send(auto_commit, raise_exception, smtp_session)
 
     def unlink(self):
         to_unlink = self
