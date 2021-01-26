@@ -11,32 +11,46 @@
         <field name="arch" type="xml">
             <form string="Activity Team">
                 <header>
-                    <field name="count_missing_activities" invisible="1"/>
-                    <button name="assign_team_to_unassigned_activities" string="Assign to missing activities"
-                            type="object" class="oe_highlight"
-                            groups="base.group_no_one"
-                            attrs="{'invisible': [('count_missing_activities', '=', 0)]}"/>
+                    <field name="count_missing_activities" invisible="1" />
+                    <button
+                        name="assign_team_to_unassigned_activities"
+                        string="Assign to missing activities"
+                        type="object"
+                        class="oe_highlight"
+                        groups="base.group_no_one"
+                        attrs="{'invisible': [('count_missing_activities', '=', 0)]}"
+                    />
                 </header>
                 <sheet string="Activity Team">
                     <div class="oe_button_box" name="button_box">
-                        <button name="toggle_active" type="object"
-                                class="oe_stat_button" icon="fa-archive">
-                        <field name="active" widget="boolean_button"
-                               options='{"terminology": "archive"}'/></button>
+                        <button
+                            name="toggle_active"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-archive"
+                        >
+                        <field
+                                name="active"
+                                widget="boolean_button"
+                                options='{"terminology": "archive"}'
+                            /></button>
                     </div>
                     <group>
                         <group name="base">
-                            <field name="name"/>
-                            <field name="user_id"/>
+                            <field name="name" />
+                            <field name="user_id" />
                         </group>
                         <group name="models">
-                            <field name="res_model_ids" widget="many2many_tags"
-                                   options="{'no_create': True, 'no_open': True}"/>
+                            <field
+                                name="res_model_ids"
+                                widget="many2many_tags"
+                                options="{'no_create': True, 'no_open': True}"
+                            />
                         </group>
                     </group>
                     <notebook>
                         <page name="members" string="Members">
-                            <field name="member_ids" nolabel="1"/>
+                            <field name="member_ids" nolabel="1" />
                         </page>
                     </notebook>
                 </sheet>
@@ -51,8 +65,8 @@
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
            <tree>
-               <field name="name"/>
-               <field name="res_model_ids" widget="many2many_tags"/>
+               <field name="name" />
+               <field name="res_model_ids" widget="many2many_tags" />
            </tree>
         </field>
     </record>
@@ -64,9 +78,9 @@
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
             <search>
-               <field name="name"/>
-               <field name="res_model_ids"/>
-               <field name="member_ids"/>
+               <field name="name" />
+               <field name="res_model_ids" />
+               <field name="member_ids" />
             </search>
         </field>
     </record>
@@ -81,7 +95,7 @@
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
-        <field name="search_view_id" ref="mail_activity_team_view_search"/>
+        <field name="search_view_id" ref="mail_activity_team_view_search" />
     </record>
 
 
@@ -89,9 +103,10 @@
 Menus
 -->
     <menuitem
-            id="menu_mail_activity_team"
-            name="Activity Teams"
-            parent="base.menu_email"
-            action="mail_activity_team_action"/>
+        id="menu_mail_activity_team"
+        name="Activity Teams"
+        parent="base.menu_email"
+        action="mail_activity_team_action"
+    />
 
 </odoo>
