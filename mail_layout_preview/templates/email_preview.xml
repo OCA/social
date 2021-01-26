@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
 
   <template id="email_templates_list">
@@ -17,7 +17,8 @@
             <li>Copy the link</li>
             <li>
               Paste into the address bar and change the record ID (the last value in the URL).
-              <br />If you don't know the ID of the record, just browse to the record via odoo interface and check its ID in the address bar `#id=XXX`.
+              <br
+                            />If you don't know the ID of the record, just browse to the record via odoo interface and check its ID in the address bar `#id=XXX`.
             </li>
             <li>Load it</li>
           </ol>
@@ -31,10 +32,16 @@
                 <strong>XMLID:</strong> <span class="xid" t-esc="xid" /><br />
               </t>
               <strong>Link:</strong>
-              <a class="preview" t-attf-href="/email-preview/#{model}/#{xid or tmpl.id}/1">
+              <a
+                                class="preview"
+                                t-attf-href="/email-preview/#{model}/#{xid or tmpl.id}/1"
+                            >
                 Preview
               </a><br />
-              <a class="preview" t-attf-href="/web#id=#{tmpl.id}&amp;view_type=form&amp;model=mail.template">
+              <a
+                                class="preview"
+                                t-attf-href="/web#id=#{tmpl.id}&amp;view_type=form&amp;model=mail.template"
+                            >
                 View in backend
               </a>
             </li>
