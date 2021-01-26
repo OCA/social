@@ -1,9 +1,12 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="view_email_template_corporate_identity">
         <body>
             <html>
-                <img style="float: right" t-attf-src="data:image;base64,{{env.user.company_id.logo}}" />
+                <img
+                    style="float: right"
+                    t-attf-src="data:image;base64,{{env.user.company_id.logo}}"
+                />
                 <!-- if some template calling us sets this variable,
                      we print a h1 tag /-->
                 <h1 t-if="email_heading"><t t-esc="email_heading" /></h1>
