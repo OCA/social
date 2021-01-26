@@ -6,6 +6,7 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "category": "Discuss",
+    "website": "https://github.com/OCA/social",
     "depends": ["mail"],
     "data": ["views/templates.xml", "views/mail_activity_views.xml"],
     "pre_init_hook": "pre_init_hook",
