@@ -23,25 +23,20 @@ odoo.define("mail.Activity.done", function(require) {
             var diff = deadline.diff(today, "days", true);
             if (diff === 0) {
                 to_display = _t("Today");
-            } else {
+            } else if (diff < 0) {
                 // This block is for overdue
-                if (diff < 0) {
-                    // eslint-disable-line no-lonely-if
-                    if (diff === -1) {
-                        to_display = _t("Yesterday");
-                    } else {
-                        to_display = _.str.sprintf(
-                            _t("%d days overdue"),
-                            Math.abs(diff)
-                        );
-                    }
-                    // This block is for due
-                } else if (diff === 1) {
-                    // eslint-disable-line no-lonely-if
-                    to_display = _t("Tomorrow");
+                // eslint-disable-line no-lonely-if
+                if (diff === -1) {
+                    to_display = _t("Yesterday");
                 } else {
-                    to_display = _.str.sprintf(_t("Due in %d days"), Math.abs(diff));
+                    to_display = _.str.sprintf(_t("%d days overdue"), Math.abs(diff));
                 }
+                // This block is for due
+            } else if (diff === 1) {
+                // eslint-disable-line no-lonely-if
+                to_display = _t("Tomorrow");
+            } else {
+                to_display = _.str.sprintf(_t("Due in %d days"), Math.abs(diff));
             }
             activity.label_delay = to_display;
         });
