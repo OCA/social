@@ -1,4 +1,4 @@
-// -*- coding: utf-8 -*-
+/* global base64js:false, Uint8Array:false */
 // Copyright 2018 Therp BV <https://therp.nl>
 // License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -15,7 +15,7 @@ odoo.define("mail_drop_target", function(require) {
             return this.record.res_id;
         },
 
-        _handle_drop_items: function(drop_items, e) {
+        _handle_drop_items: function(drop_items) {
             var self = this;
             _.each(drop_items, function(item, e) {
                 return self._handle_file_drop_proxy(item, e);
@@ -34,7 +34,7 @@ odoo.define("mail_drop_target", function(require) {
             reader.onerror = self.proxy("_file_reader_error_handler");
             reader.readAsArrayBuffer(file);
         },
-        _handle_file_drop: function(drop_file, reader, e) {
+        _handle_file_drop: function(drop_file, reader) {
             var self = this,
                 mail_processor = "",
                 data = "";
