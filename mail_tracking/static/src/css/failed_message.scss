@@ -31,7 +31,7 @@
                 }
 
                 i.fa-caret-down:before {
-                    content: '\f0da';
+                    content: "\f0da";
                 }
             }
         }
@@ -52,7 +52,7 @@
     }
 
     .o_thread_typing_notification_free_space {
-        flex-grow: 1,
+        flex-grow: 1;
     }
 
     .o_thread_typing_notification_bar {
@@ -60,7 +60,7 @@
         background-color: rgba($white, 0.75);
         padding: 5px;
         text-align: center;
-        color: gray('600');
+        color: gray("600");
 
         &.o_thread_order_asc {
             @include o-position-sticky($bottom: 0px);
@@ -83,7 +83,7 @@
             margin-top: 0px;
             margin-bottom: 15px;
         }
-        border-bottom: 1px solid gray('400');
+        border-bottom: 1px solid gray("400");
         text-align: center;
 
         .o_thread_date {
@@ -116,8 +116,8 @@
         margin-bottom: 0px;
 
         &.o_mail_not_discussion {
-            background-color: rgba(gray('300'), 0.5);
-            border-bottom: 1px solid gray('400');
+            background-color: rgba(gray("300"), 0.5);
+            border-bottom: 1px solid gray("400");
         }
 
         .o_thread_message_sidebar {
@@ -155,7 +155,8 @@
             }
         }
 
-        &:hover, &.o_thread_selected_message {
+        &:hover,
+        &.o_thread_selected_message {
             .o_thread_message_side_date {
                 opacity: $o-mail-thread-side-date-opacity;
             }
@@ -182,8 +183,6 @@
                 text-align: justify;
             }
 
-
-
             .o_mail_subject {
                 font-style: italic;
             }
@@ -193,7 +192,8 @@
                 color: gray;
             }
 
-            [summary~=o_mail_notification] { // name conflicts with channel notifications, but is odoo notification buttons to hide in chatter if present
+            [summary~="o_mail_notification"] {
+                // name conflicts with channel notifications, but is odoo notification buttons to hide in chatter if present
                 display: none;
             }
 
@@ -224,7 +224,10 @@
                 }
             }
 
-            .o_thread_message_star, .o_thread_message_needaction, .o_thread_message_reply, .o_thread_message_email {
+            .o_thread_message_star,
+            .o_thread_message_needaction,
+            .o_thread_message_reply,
+            .o_thread_message_email {
                 padding: 4px;
             }
 
@@ -232,14 +235,16 @@
                 &.o_thread_message_email_ready {
                     color: grey;
                 }
-                &.o_thread_message_email_exception, &.o_thread_message_email_bounce {
+                &.o_thread_message_email_exception,
+                &.o_thread_message_email_bounce {
                     color: red;
                     opacity: 1;
                     cursor: pointer;
                 }
             }
 
-            .o_attachments_list, .o_attachments_previews {
+            .o_attachments_list,
+            .o_attachments_previews {
                 &:last-child {
                     margin-bottom: $grid-gutter-width;
                 }
@@ -299,7 +304,7 @@
                 .o_activity_info {
                     vertical-align: baseline;
                     padding: 4px 6px;
-                    background: theme-color('light');
+                    background: theme-color("light");
                     border-radius: 2px 2px 0 0;
                     @include o-hover-opacity(1, 1);
 
