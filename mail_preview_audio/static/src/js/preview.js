@@ -11,10 +11,8 @@ odoo.define("audio_file.preview", function (require) {
 
     DocumentViewer.include({
         _checkAttachment: function (attachment) {
-            if (
-                attachment.type !== 'url' && attachment.mimetype.match("audio")
-            ) {
-                attachment.type = 'audio';
+            if (attachment.type !== "url" && attachment.mimetype.match("audio")) {
+                attachment.type = "audio";
                 attachment.source_url = this._getImageUrl(attachment);
                 return true;
             }
@@ -22,8 +20,7 @@ odoo.define("audio_file.preview", function (require) {
         },
         _hasPreview: function (type) {
             var result = this._super.apply(this, arguments);
-            return result || type === 'audio';
+            return result || type === "audio";
         },
     });
-
 });
