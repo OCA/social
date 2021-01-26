@@ -5,7 +5,7 @@
     "summary": "Post unkonwn messages to an existing thread",
     "version": "13.0.1.0.0",
     "category": "Discuss",
-    "website": "https://www.github.com/social",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
