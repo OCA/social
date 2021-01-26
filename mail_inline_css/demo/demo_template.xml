@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="0">
   <template id="demo_email_hello" name="demo email hello">
     <html>
@@ -48,7 +48,10 @@
               <tbody>
                 <tr>
                   <td class="left">
-                    <img id="main_logo" t-attf-src="data:image;base64,{{env.user.company_id.logo}}" />
+                    <img
+                                            id="main_logo"
+                                            t-attf-src="data:image;base64,{{env.user.company_id.logo}}"
+                                        />
                   </td>
                   <td class="right">
                     <span class="date_today" t-esc="time.strftime('%%d %%B %%Y')" />
@@ -62,18 +65,23 @@
               <p>Hello <span t-field="object.name" />.</p>
             </div>
             <div id="content">
-              <p>This e-mail styles are inline rendered although its template defines styles as embedded CSS!</p>
+              <p
+                            >This e-mail styles are inline rendered although its template defines styles as embedded CSS!</p>
             </div>
           </main>
           <footer id="main_footer">
             <div class="company_info">
-              <p class="website"><a href="https://www.example.com">www.example.com</a></p>
+              <p class="website"><a
+                                    href="https://www.example.com"
+                                >www.example.com</a></p>
               <div class="address">
-                <div t-field="env.user.company_id.partner_id"
-                     t-options='{
+                <div
+                                    t-field="env.user.company_id.partner_id"
+                                    t-options='{
                       "widget": "contact",
                       "fields": ["name", "address", "phone", "mobile", "email"]
-                      }'/>
+                      }'
+                                />
               </div>
             </div>
           </footer>
