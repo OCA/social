@@ -1,34 +1,44 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
 
         <record id="subject_gin_idx" model="trgm.index">
             <field name="index_type">gin</field>
-            <field name="field_id"
-                   search="[('model','=','mail.message'),('name','=','subject')]"/>
+            <field
+            name="field_id"
+            search="[('model','=','mail.message'),('name','=','subject')]"
+        />
         </record>
 
         <record id="body_gin_idx" model="trgm.index">
             <field name="index_type">gin</field>
-            <field name="field_id"
-                   search="[('model','=','mail.message'),('name','=','body')]"/>
+            <field
+            name="field_id"
+            search="[('model','=','mail.message'),('name','=','body')]"
+        />
         </record>
 
         <record id="record_name_gin_idx" model="trgm.index">
             <field name="index_type">gin</field>
-            <field name="field_id"
-                   search="[('model','=','mail.message'),('name','=','record_name')]"/>
+            <field
+            name="field_id"
+            search="[('model','=','mail.message'),('name','=','record_name')]"
+        />
         </record>
 
         <record id="email_from_gin_idx" model="trgm.index">
             <field name="index_type">gin</field>
-            <field name="field_id"
-                   search="[('model','=','mail.message'),('name','=','email_from')]"/>
+            <field
+            name="field_id"
+            search="[('model','=','mail.message'),('name','=','email_from')]"
+        />
         </record>
 
         <record id="reply_to_gin_idx" model="trgm.index">
             <field name="index_type">gin</field>
-            <field name="field_id"
-                   search="[('model','=','mail.message'),('name','=','reply_to')]"/>
+            <field
+            name="field_id"
+            search="[('model','=','mail.message'),('name','=','reply_to')]"
+        />
         </record>
 
 </odoo>

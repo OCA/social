@@ -1,7 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <act_window id="action_setup" res_model="ir.config_parameter"
-        name="Configure the restriction on followers" view_mode="form" />
+    <act_window
+        id="action_setup"
+        res_model="ir.config_parameter"
+        name="Configure the restriction on followers"
+        view_mode="form"
+    />
     <record id="action_setup" model="ir.actions.act_window">
         <field name="res_id" ref="parameter_domain" />
     </record>

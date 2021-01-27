@@ -1,11 +1,17 @@
 [![Runbot Status](https://runbot.odoo-community.org/runbot/badge/flat/205/13.0.svg)](https://runbot.odoo-community.org/runbot/repo/github-com-oca-social-205)
-[![Build Status](https://travis-ci.org/OCA/social.svg?branch=13.0)](https://travis-ci.org/OCA/social)
-[![Coverage Status](https://coveralls.io/repos/OCA/social/badge.svg?branch=13.0)](https://coveralls.io/r/OCA/social?branch=13.0)
+[![Build Status](https://travis-ci.com/OCA/social.svg?branch=13.0)](https://travis-ci.com/OCA/social)
+[![codecov](https://codecov.io/gh/OCA/social/branch/13.0/graph/badge.svg)](https://codecov.io/gh/OCA/social)
+[![Translation Status](https://translation.odoo-community.org/widgets/social-13-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/social-13-0/?utm_source=widget)
 
-Social addons for Odoo
-======================
+<!-- /!\ do not modify above this line -->
 
-Addons concerning Odoo's social ERP features and messaging in general
+# Social addons for Odoo
+
+Addons concerning Odoo's social features and messaging in general.
+
+<!-- /!\ do not modify below this line -->
+
+<!-- prettier-ignore-start -->
 
 [//]: # (addons)
 
@@ -44,7 +50,18 @@ addon | version | summary
 
 [//]: # (end addons)
 
-Translation Status
-------------------
+<!-- prettier-ignore-end -->
 
-[![Translation status](https://translation.odoo-community.org/widgets/social-13-0/-/multi-auto.svg)](https://translation.odoo-community.org/engage/social-13-0/?utm_source=widget)
+## Licenses
+
+This repository is licensed under [AGPL-3.0](LICENSE).
+
+However, each module can have a totally different license, as long as they adhere to OCA
+policy. Consult each module's `__manifest__.py` file, which contains a `license` key
+that explains its license.
+
+----
+
+OCA, or the [Odoo Community Association](http://odoo-community.org/), is a nonprofit
+organization whose mission is to support the collaborative development of Odoo features
+and promote its widespread use.

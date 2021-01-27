@@ -8,7 +8,10 @@
 <odoo>
     <template id="assets_backend" name="audio_assets" inherit_id="web.assets_backend">
         <xpath expr="//script[last()]" position="after">
-            <script type="text/javascript" src="/mail_preview_audio/static/src/js/preview.js" />
+            <script
+                type="text/javascript"
+                src="/mail_preview_audio/static/src/js/preview.js"
+            />
         </xpath>
     </template>
 </odoo>
