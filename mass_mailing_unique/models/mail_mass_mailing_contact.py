@@ -18,7 +18,14 @@ class MailMassMailingContact(models.Model):
             contact_email = contact.email.strip().lower()
             other_emails = [e.strip().lower() for e in others.mapped('email')]
             if contact_email in other_emails:
-                raise ValidationError(_(
-                    "Cannot have the same email (%s) more"
-                    "than once in the same list." % contact_email
-                ))
+                in_list = others.filtered(lambda o: o.email == contact_email) \
+                    .list_ids.mapped('name')
+                lists = ''.join(map(lambda l: '- {}\n'.format(l), in_list))
+                msg = _('''Email (%(contact_email)s) already in mailing list(s):
+                    %(lists)s
+                    Please use a different email address or remove \
+                     (%(contact_email)s) from the mailing list(s) above.''')
+                raise ValidationError(msg % {
+                    'contact_email': contact_email,
+                    'lists': lists,
+                })
