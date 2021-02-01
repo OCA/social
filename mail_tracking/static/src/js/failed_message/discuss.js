@@ -341,18 +341,21 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
         _onSetAllAsReviewedClicked: function() {
             var self = this;
             var failed = this.call("mail_service", "getMailbox", "failed");
-            var promptText = _.str.sprintf(
-                _t(
-                    "Do you really want to mark as reviewed all the" +
-                        " failed messages (%d)?"
-                ),
-                failed.getMailboxCounter()
-            );
-            Dialog.confirm(this, promptText, {
-                confirm_callback: function() {
-                    self._thread.setAllMessagesAsReviewed();
-                },
-            });
+            var failed_counter = failed.getMailboxCounter();
+            if (failed_counter > 0) {
+                var promptText = _.str.sprintf(
+                    _t(
+                        "Do you really want to mark as reviewed all the" +
+                            " failed messages (%d)?"
+                    ),
+                    failed_counter
+                );
+                Dialog.confirm(this, promptText, {
+                    confirm_callback: function() {
+                        self._thread.setAllMessagesAsReviewed();
+                    },
+                });
+            }
         },
     });
 
