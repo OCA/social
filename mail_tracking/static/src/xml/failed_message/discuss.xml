@@ -35,7 +35,7 @@
         <t t-jquery="div" t-operation="append">
             <button
                 type="button"
-                class="btn btn-secondary o_mail_discuss_button_set_all_reviewed d-none d-md-none d-md-inline-block"
+                class="btn btn-secondary o_mail_discuss_button_set_all_reviewed"
                 title="Mark all as reviewed"
             >Set all as reviewed</button>
         </t>

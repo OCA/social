@@ -15,14 +15,11 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
     var Discuss = require("mail.Discuss");
     var MailManager = require("mail.Manager");
     var Mailbox = require("mail.model.Mailbox");
+    var Dialog = require("web.Dialog");
     var core = require("web.core");
-    var session = require("web.session");
 
     var QWeb = core.qweb;
     var _t = core._t;
-
-    /* The states to consider a message as failed message */
-    var FAILED_STATES = ["error", "rejected", "spam", "bounced", "soft-bounced"];
 
     AbstractMessage.include({
         /**
@@ -216,10 +213,9 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @override
          */
         _updateControlPanelButtons: function(thread) {
-            this.$btn_set_all_reviewed.toggleClass(
-                "d-none d-md-none",
-                thread.getID() !== "mailbox_failed"
-            );
+            this.$btn_set_all_reviewed
+                .toggleClass("d-none", thread.getID() !== "mailbox_failed")
+                .toggleClass("d-md-inline-block", thread.getID() === "mailbox_failed");
 
             return this._super.apply(this, arguments);
         },
@@ -343,7 +339,23 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @private
          */
         _onSetAllAsReviewedClicked: function() {
-            this._thread.setAllMessagesAsReviewed();
+            var self = this;
+            var failed = this.call("mail_service", "getMailbox", "failed");
+            var failed_counter = failed.getMailboxCounter();
+            if (failed_counter > 0) {
+                var promptText = _.str.sprintf(
+                    _t(
+                        "Do you really want to mark as reviewed all the" +
+                            " failed messages (%d)?"
+                    ),
+                    failed_counter
+                );
+                Dialog.confirm(this, promptText, {
+                    confirm_callback: function() {
+                        self._thread.setAllMessagesAsReviewed();
+                    },
+                });
+            }
         },
     });
 
@@ -371,13 +383,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          */
         _getThreadDomain: function() {
             if (this._id === "mailbox_failed") {
-                return [
-                    ["mail_tracking_ids.state", "in", FAILED_STATES],
-                    ["mail_tracking_needs_action", "=", true],
-                    "|",
-                    ["partner_ids", "in", [session.partner_id]],
-                    ["author_id", "=", session.partner_id],
-                ];
+                return [["is_failed_message", "=", true]];
             }
             // Workaround to avoid throw 'Missing domain' exception. Call _super
             // without a valid (hard-coded) thread id causes that exeception.
