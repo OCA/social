@@ -7,7 +7,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "12.0.2.1.7",
+    "version": "12.0.2.1.8",
     "category": "Social Network",
     "website": "http://github.com/OCA/social",
     "author": "Tecnativa, "
