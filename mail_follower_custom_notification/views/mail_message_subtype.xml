@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_mail_message_subtype_form" model="ir.ui.view">
+        <field name="model">mail.message.subtype</field>
+        <field name="inherit_id" ref="mail.view_mail_message_subtype_form" />
+        <field name="arch" type="xml">
+            <group position="inside">
+                <group name="mail_follower_custom_notification" string="Custom notifications">
+                    <field name="custom_notification_mail" />
+                    <field name="custom_notification_own" />
+                    <field name="custom_notification_model_ids" attrs="{'invisible': [('res_model', '!=', False)]}" widget="many2many_tags" />
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>

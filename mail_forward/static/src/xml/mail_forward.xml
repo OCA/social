@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- © 2014-2015 Grupo ESOC <www.grupoesoc.es>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+
+<template>
+    <t t-extend="mail.ChatThread.Message">
+        <t t-jquery=".o_thread_message_reply" t-operation="after">
+            <i class="fa fa-share o_forward" title="Forward" t-att-data-message-id="message.id"/>
+        </t>
+    </t>
+</template>

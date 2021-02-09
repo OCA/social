@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_email_template_sendgrid_form" model="ir.ui.view">
+        <field name="name">sendgrid.sendgrid.form</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_from']/ancestor::page" position="after">
+                <page string="SendGrid">
+                    <group>
+                        <field name="sendgrid_template_ids">
+                            <tree editable="top">
+                                <field name="lang"/>
+                                <field name="sendgrid_template_id"/>
+                            </tree>
+                        </field>
+                        <button name="update_substitutions" string="Get substitutions from templates" type="object" colspan="2"/>
+                        <field name="substitution_ids">
+                            <tree editable="top">
+                                <field name="key"/>
+                                <field name="lang"/>
+                                <field name="value"/>
+                            </tree>
+                        </field>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

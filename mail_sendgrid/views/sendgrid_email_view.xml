@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extension of mail.mail form view -->
+    <record model="ir.ui.view" id="email_form_view">
+        <field name="name">mail.mail.sendgrid</field>
+        <field name="model">mail.mail</field>
+        <field name="inherit_id" ref="mail.view_mail_form"/>
+        <field name="arch" type="xml">
+            <button name="send" position="replace">
+                <field name="send_method" invisible="1"/>
+                <button name="send" string="Send Now" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('send_method', 'not in', ['sendgrid','traditional']), ('state', '!=', 'outgoing')]}"/>
+                <button name="send_sendgrid" string="Send (SendGrid)" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('send_method', '=', 'sendgrid'), ('state', '!=', 'outgoing')]}"/>
+            </button>
+            <field name="body_html" position="attributes">
+                <attribute name="widget">html</attribute>
+            </field>
+            <xpath expr="//field[@name='attachment_ids']/ancestor::page" position="after">
+                <page string="SendGrid">
+                    <group>
+                        <field name="sendgrid_template_id"/>
+                        <field name="sent_date" readonly="1"/>
+                        <field name="opened" readonly="1"/>
+                        <field name="click_count" readonly="1"/>
+                        <field name="body_text"/>
+                    </group>
+                    <field name="substitution_ids" widget="one2many_list"/>
+                    <field name="tracking_event_ids">
+                        <tree default_order="time desc">
+                            <field name="tracking_email_id"/>
+                            <field name="time"/>
+                            <field name="event_type"/>
+                            <field name="url"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extension of mail.mail tree view -->
+    <record model="ir.ui.view" id="sendgrid_email_tree_view">
+        <field name="name">mail.mail.sendgrid.tree</field>
+        <field name="model">mail.mail</field>
+        <field name="inherit_id" ref="mail.view_mail_tree"/>
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="opened"/>
+                <field name="click_count"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- Extension of mail.mail search view -->
+    <record model="ir.ui.view" id="sendgrid_email_search_view">
+        <field name="name">mail.mail.sendgrid.search</field>
+        <field name="model">mail.mail</field>
+        <field name="inherit_id" ref="mail.view_mail_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='received']" position="after">
+                <filter name="opened" string="Opened" domain="[('opened','=',True)]"/>
+                <filter name="clicked" string="Clicked" domain="[('click_count','>',0)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Substitution line view -->
+    <record id="view_sendgrid_substitution_line_tree" model="ir.ui.view">
+        <field name="name">sendgrid.substitution.tree</field>
+        <field name="model">sendgrid.substitution</field>
+        <field name="arch" type="xml">
+            <tree string="Template substitutions" editable="bottom">
+                <field name="key"/>
+                <field name="value"/>
+            </tree>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_mail_subtype_assign_custom_notifications" model="ir.ui.view">
+        <field name="model">mail.subtype.assign.custom.notifications</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="subtype_ids" widget="many2many_tags" />
+                </group>
+                <footer>
+                    <button type="object" name="button_apply" string="Apply"
+                        class="btn-primary" />
+                    <button type="special" special="cancel" string="Cancel"
+                        class="btn-default" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <act_window id="action_mail_subtype_assign_custom_notifications"
+        name="Update existing subscriptions"
+        src_model="mail.message.subtype"
+        res_model="mail.subtype.assign.custom.notifications"
+        view_id="view_mail_subtype_assign_custom_notifications"
+        multi="False"
+        key2="client_action_multi"
+        target="new" />
+</odoo>

@@ -39,9 +39,10 @@ class MailTrackingEmail(models.Model):
     date = fields.Date(
         string="Date", readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
-        string="Message", comodel_name='mail.message', readonly=True)
+        string="Message", comodel_name='mail.message', readonly=True,
+        index=True)
     mail_id = fields.Many2one(
-        string="Email", comodel_name='mail.mail', readonly=True)
+        string="Email", comodel_name='mail.mail', readonly=True, index=True)
     partner_id = fields.Many2one(
         string="Partner", comodel_name='res.partner', readonly=True)
     recipient = fields.Char(string='Recipient email', readonly=True)
@@ -218,8 +219,12 @@ class MailTrackingEmail(models.Model):
         self.ensure_one()
         tracking_url = self._get_mail_tracking_img()
         if tracking_url:
+            content = email.get('body', '')
+            content = re.sub(
+                r'<img[^>]*data-odoo-tracking-email=["\'][0-9]*["\'][^>]*>',
+                '', content)
             body = tools.append_content_to_html(
-                email.get('body', ''), tracking_url, plaintext=False,
+                content, tracking_url, plaintext=False,
                 container_tag='div')
             email['body'] = body
         return email

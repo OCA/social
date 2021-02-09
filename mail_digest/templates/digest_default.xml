@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="digest_layout" name="Mail digest layout">
+        <html>
+            <body>
+                <img style="float: right" t-attf-src="data:image;base64,{{env.user.company_id.logo}}" />
+                <h1 t-if="email_heading"><t t-raw="email_heading" /></h1>
+                <t t-raw="0" />
+                <footer t-if="not email_use_user_signature">
+                    <p>
+                        <a t-att-href="env.user.company_id.website">
+                            <t t-esc="env.user.company_id.name" />
+                        </a>
+                    </p>
+                    <p><t t-esc="env.user.company_id.phone" /></p>
+                </footer>
+                <footer t-if="email_use_user_signature">
+                    <t t-raw="env.user.signature" />
+                </footer>
+            </body>
+        </html>
+    </template>
+
+    <template id="default_digest_tmpl" name="Mail digest default template">
+        <t t-call="mail_digest.digest_layout">
+            <div id="mail_content">
+                <p>Hello <t t-esc="digest.partner_id.name" />,</p>
+                <div id="mail_inner_content">
+                    <t t-foreach="grouped_messages.keys()" t-as="gkey">
+                        <t t-set="messages" t-value="grouped_messages[gkey]" />
+                        <t t-if="messages">
+                            <div class="subtype-wrapper"
+                                 t-attf-style="marging-bottom:10px;padding-bottom:10px;#{not gkey_last and 'border-bottom:2px solid #aaa;margin-bottom:20px'}">
+                                <t t-set="subtype" t-value="messages[0].subtype_id" />
+                                <h3 style="margin-bottom:5px">
+                                    <span t-field="subtype.name" style="font-weight:bold" />
+                                    <t t-if="subtype.description">
+                                        <span t-field="subtype.description"
+                                              style="display:block;margin-top:10px;font-size:80%;color: #777"/>
+                                    </t>
+                                </h3>
+                                <t t-foreach="messages" t-as="msg">
+                                    <div class="message-wrapper"
+                                         t-attf-style="margin:0 10px;padding:5px 10px;#{not msg_first and 'border-top:1px solid #ccc'}">
+                                        <t t-raw="digest.message_body(msg)" />
+                                        <t t-if="msg.tracking_value_ids">
+                                            <h4>Changed values</h4>
+                                            <ul class="tracking-values">
+                                                <t t-foreach="msg.tracking_value_ids" t-as="tracked">
+                                                    <li>
+                                                        <strong class="fname"><span t-field="tracked.field_desc" />:</strong>
+                                                        <span class="fvalue-old" t-esc="tracked.get_old_display_value()[0]" /> &#8594;
+                                                        <span class="fvalue-new" t-esc="tracked.get_new_display_value()[0]" />
+                                                    </li>
+                                                </t>
+                                            </ul>
+                                        </t>
+                                    </div>
+                                </t>
+                            </div>
+                        </t>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+
+</odoo>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend" name="mail_follower_custom_notification assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/mail_follower_custom_notification/static/src/js/mail_follower_custom_notification.js"></script>
+            <link rel="stylesheet" href="/mail_follower_custom_notification/static/src/css/mail_follower_custom_notification.css"/>
+        </xpath>
+    </template>
+</odoo>

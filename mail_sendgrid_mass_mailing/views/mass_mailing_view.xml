@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Form view -->
+    <record id="view_email_template_sendgrid_form" model="ir.ui.view">
+        <field name="name">mass.mailing.sendgrid.form</field>
+        <field name="model">mail.mass_mailing</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[1]" position="attributes">
+                <attribute name="attrs">{'invisible': [('email_template_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='mailing_model']/.." position="after">
+                <field name="email_template_id" domain="[('model', '=', mailing_model), ('sendgrid_template_ids', '!=', False)]"/>
+                <field name="lang" attrs="{'invisible': [('email_template_id', '=', False)]}"/>
+            </xpath>
+            <xpath expr="//notebook/page[1]" position="after">
+                <page string="Sendgrid Preview" attrs="{'invisible': [('email_template_id', '=', False)]}">
+                    <field name="body_sendgrid" widget="html"/>
+                </page>
+            </xpath>
+            <xpath expr="//notebook/page/group[1]">
+                <group string="Sendgrid Unsubscribe">
+                    <field name="enable_unsubscribe"/>
+                    <field name="unsubscribe_text" attrs="{'invisible': [('enable_unsubscribe', '=', False)]}"/>
+                    <field name="unsubscribe_tag" attrs="{'invisible': [('enable_unsubscribe', '=', False)]}"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

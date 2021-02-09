@@ -1,0 +1,286 @@
+Delivered-To: support@agilebg.com
+Received: by 10.80.142.237 with SMTP id x42csp662854edx;
+        Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+X-Received: by 10.28.217.213 with SMTP id q204mr246173wmg.141.1520936712614;
+        Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1520936712; cv=none;
+        d=google.com; s=arc-20160816;
+        b=qbz1vQti1TNpvFCsZ3oTK/NIA1yd7l5SDqjVtAExKOkroR8+NmbDVISr2K0T/+sK0e
+         WdDQD33xDCJJXct74JCj7fK+r0JJzv0GDhbMT9lU5W/eSBHqzvrbAxMXPKXog6xYabFh
+         GrIke9W/HwnN3qztgMAEbD0yVb3as3/DFhp2dRcJwPFf/zu/0RHxIzLRFs/7OzUc+bVc
+         KIWXkDOWduHwGX7MAyCS0R3/whTmkxardwUQuytNclN65OLURU0aU9ACNJ0WQSzRC6wX
+         oOEB/WjMdirTbv+mm4ZMI0d45fpH9xhQ6cCrzumXpc3sLdBXL86It54OEM/8AclQ32Vy
+         A+LQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20160816;
+        h=date:message-id:in-reply-to:references:subject:auto-submitted:to
+         :from:dkim-signature:arc-authentication-results;
+        bh=dMVfhTfiY+WIHZkvVKWnGHTG12r2Aw1JK67YJWXZEHc=;
+        b=tejri4tYrPpIZAr4xgujZQNaHIxNFnQ+Pi9W6z3X09n37kRtnET9Bdsg+tlg1Io6zc
+         c4hC1eTCNEyNq4LYUM++nngwRpgFFqFdb6R0O9b3pmGru0XdO2xF0/uwtJGmIVnDM3n3
+         rmr+7gsi9JF/Et0J8Sle7CIsqXsrKcKRv06SwfTjikSHlKWHegS9EP3p3oVv2eTcwwWz
+         Rz7QupEM3clvNn32qaUjvdnOJkpRP8iQ/9RoDNfFcrOzaL3bgk3xWZ2wZAsOdCr5MF5p
+         ihN5XKpJhOtaByodI+McJtJUP0w7tVtOJ9pu+Jgr6N543zHM95oymMvaccU8sXTIi2aO
+         Ds7A==
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@googlemail.com header.s=20161025 header.b=YYg5WZz/;
+       spf=pass (google.com: best guess record for domain of postmaster@mail-sor-f69.google.com designates 209.85.220.69 as permitted sender) smtp.helo=mail-sor-f69.google.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=googlemail.com
+Return-Path: <>
+Received: from mail-sor-f69.google.com (mail-sor-f69.google.com. [209.85.220.69])
+        by mx.google.com with SMTPS id j4sor60079wmi.79.2018.03.13.03.25.12
+        for <support@agilebg.com>
+        (Google Transport Security);
+        Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+Received-SPF: pass (google.com: best guess record for domain of postmaster@mail-sor-f69.google.com designates 209.85.220.69 as permitted sender) client-ip=209.85.220.69;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@googlemail.com header.s=20161025 header.b=YYg5WZz/;
+       spf=pass (google.com: best guess record for domain of postmaster@mail-sor-f69.google.com designates 209.85.220.69 as permitted sender) smtp.helo=mail-sor-f69.google.com;
+       dmarc=pass (p=QUARANTINE sp=QUARANTINE dis=NONE) header.from=googlemail.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=googlemail.com; s=20161025;
+        h=from:to:auto-submitted:subject:references:in-reply-to:message-id
+         :date;
+        bh=dMVfhTfiY+WIHZkvVKWnGHTG12r2Aw1JK67YJWXZEHc=;
+        b=YYg5WZz/fxHVm3S7KhH7Q3SmGSIwsFJYJrQzs3ZMLywKytJrXGatFipeRbDvfWIdvt
+         EeLwNna6r6mMeWWWST/p9ZktwEvdQ3b8BB7qzHnv6knTxldpB6y/J06bI40xgr/NnP6y
+         C87zqlBMOwGuYw1tDUkfCcwXTz/bz50blhtmd4Iz1Q1oZbTgMAMVTsjIyCJexANP/0dh
+         s56QktPnpBHH86bKNxi/BG0Yv2ShROf/42HO1iEIHxlhYU/Sr1CIwrfwBy4J4NwAp+Ae
+         K8pBl/MO0pUeM/3ANn4mrApDK1+oqpYWJvXxzv+YigZJxeWfYJ9wESC2PLV6bS8tDJSW
+         yQTg==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:to:auto-submitted:subject:references
+         :in-reply-to:message-id:date;
+        bh=dMVfhTfiY+WIHZkvVKWnGHTG12r2Aw1JK67YJWXZEHc=;
+        b=ncoceBRXPA6alPEdKWega4icd2pN6Bi+jacNSHpG2DgKYSEMSoAwwHPOglbrZqWPSs
+         M3YNYbF6/Eyx3HlY1fhtbh+0XkJU0z2/2FQcU/YCnA6sQ2IU4usztMv3LLv5XvYHt7MM
+         hRR2e5h1E6obIPKXhBroYf3nyRNCE6HU+OwE/GnLeNeyWCkBhCLfNZKUJbNHpEpHt3sw
+         7jveCrDsnoeOf3Apx9hKqbEpaVY1j83ZXd8Xlgh3TKpaLWTkJ7kXpjWI1dtyoHu2gqDa
+         eAYNugD7LEf/Z4eqAscxDh1BGLoP08nnSuNOLFp2vSllOOJ9lrn4j+7oNh2kH5rqCo5p
+         Bsng==
+X-Gm-Message-State: AElRT7HLs9wf2hitIMHNLIfimcazh71cW/FEbkyUsTU7RxS/X/F91dLP
+	6bBRDO9/IVMugWthex/F5ETZimzvqruF11fKqp8mEQ==
+X-Google-Smtp-Source: AG47ELvXcyNHPl+/aUdcgG+CzQeXrs6eiMf+ZMiUhyKwChcSc4RVtQp8GCoTITDyrD8DFPmc3XUPXWoqXdygX6xt4XSc4Il/Zw+ygz4=
+X-Received: by 10.28.106.19 with SMTP id f19mr289852wmc.84.1520936712492;
+        Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+Content-Type: multipart/report; boundary="089e082ce1a07949ad056748acaf"; report-type=delivery-status
+Return-Path: <>
+Received: by 10.28.106.19 with SMTP id f19mr318417wmc.84; Tue, 13 Mar 2018
+ 03:25:12 -0700 (PDT)
+From: Mail Delivery Subsystem <mailer-daemon@googlemail.com>
+To: support@agilebg.com
+Auto-Submitted: auto-replied
+Subject: Delivery Status Notification (Failure)
+References: <1520936710.340821981430054.404664939598865-openerp-7-res.partner@elbati-Vostro-3550>
+In-Reply-To: <1520936710.340821981430054.404664939598865-openerp-7-res.partner@elbati-Vostro-3550>
+X-Failed-Recipients: jj@jj.pink
+Message-ID: <5aa7a708.136a1c0a.1b2fb.07f5.GMRIR@mx.google.com>
+Date: Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+
+--089e082ce1a07949ad056748acaf
+Content-Type: multipart/related; boundary="089e082ce1a07950b2056748acb0"
+
+--089e082ce1a07950b2056748acb0
+Content-Type: multipart/alternative; boundary="089e082ce1a07950c1056748acb1"
+
+--089e082ce1a07950c1056748acb1
+Content-Type: text/plain; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+
+** Indirizzo non trovato **
+
+Il tuo messaggio per jj@jj.pink non =C3=A8 stato recapitato perch=C3=A9 il =
+dominio jj.pink risulta inesistente. Verifica di non aver inserito errori d=
+i battitura o spazi superflui e riprova.
+
+
+
+Risposta:
+
+DNS Error: 21006586 DNS type 'mx' lookup of jj.pink responded with code NXD=
+OMAIN
+Domain name not found: jj.pink
+
+--089e082ce1a07950c1056748acb1
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+
+<html>
+<head>
+<style>
+* {
+font-family:Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+</style>
+</head>
+<body>
+<table cellpadding=3D"0" cellspacing=3D"0" class=3D"email-wrapper" style=3D=
+"padding-top:32px;background-color:#ffffff;"><tbody>
+<tr><td>
+<table cellpadding=3D0 cellspacing=3D0><tbody>
+<tr><td style=3D"max-width:560px;padding:24px 24px 32px;background-color:#f=
+afafa;border:1px solid #e0e0e0;border-radius:2px">
+<img style=3D"padding:0 24px 16px 0;float:left" width=3D72 height=3D72 alt=
+=3D"Icona di errore" src=3D"cid:icon.png">
+<table style=3D"min-width:272px;padding-top:8px"><tbody>
+<tr><td><h2 style=3D"font-size:20px;color:#212121;font-weight:bold;margin:0=
+">
+Indirizzo non trovato
+</h2></td></tr>
+<tr><td style=3D"padding-top:20px;color:#757575;font-size:16px;font-weight:=
+normal;text-align:left">
+Il tuo messaggio per <a style=3D'color:#212121;text-decoration:none'><b>jj@=
+jj.pink</b></a> non =C3=A8 stato recapitato perch=C3=A9 il dominio jj.pink =
+risulta inesistente. Verifica di non aver inserito errori di battitura o sp=
+azi superflui e riprova.
+</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+</td></tr>
+<tr style=3D"border:none;background-color:#fff;font-size:12.8px;width:90%">
+<td align=3D"left" style=3D"padding:48px 10px">
+Risposta:<br/>
+<p style=3D"font-family:monospace">
+DNS Error: 21006586 DNS type &#39;mx&#39; lookup of jj.pink responded with =
+code NXDOMAIN
+Domain name not found: jj.pink
+</p>
+</td>
+</tr>
+</tbody></table>
+</body>
+</html>
+
+--089e082ce1a07950c1056748acb1--
+--089e082ce1a07950b2056748acb0
+Content-Type: image/png; name="icon.png"
+Content-Disposition: attachment; filename="icon.png"
+Content-Transfer-Encoding: base64
+Content-ID: <icon.png>
+
+iVBORw0KGgoAAAANSUhEUgAAAJAAAACQCAYAAADnRuK4AAAACXBIWXMAABYlAAAWJQFJUiTwAAAA
+GXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAABTdJREFUeNrsnD9sFEcUh5+PRMqZ
+yA0SPhAUQAQFUkyTgiBASARo6QApqVIkfdxGFJFSgGhJAUIiBaQB0ZIOKVCkwUgURjIg2fxL4kS+
+YDvkbC/388bi8N16Z4/d7J/5PsniuD3fyePP772ZeTsDQRAYQL/UGAJAIEAgQCBAIAAEAgQCBAIE
+AkAgyJT3Mv+Eq7vYK8mTE+MDRCAghQECAeRQA5V2ZOpmg5vDx3NPzRbmGRMEcmTrEbNNB8zWfRD+
+f/Efs2e3zCZvMjaksBg27TfbcuSNPEKP9ZyuAQKtHX2O9ncNgWC57umMPKvRNb0GEKgnLoUyxTQC
+rcns0/6uIRAs8/hGf9cQCJZpTpjdO2f25/03z+mxntM1eLtsZAgiUtX4JcaBCAQIBAgECARQ8CJa
+G5jab4J4pm4WZmO3OALVh802fIwcLkyPkcKAGggAgQCBAIEAgQCBABAIEAjKA/1AnahhbO5FdOOY
+VsrrDbPBYcYKgf5D2wLaV3p+22xh1u17tO3S+DTcvxvagUDeivPgx/a/95J/73w7Sj26Hn4pKo2M
+ehuV/KyBJM6d0f7k6RKx/R63vvL2tmf/ItDdM2ZTP6f7nkp9Y2fDx1v9akmpIU+KSCLVUghUQfSL
+zVKeTklbLxGoctw/nzC5rw8L5KRNbkpnKq6pgSqEClzNnFzY+XnYWrt6VpVk1vbwWvg+RKCKMOUw
+Q1LEOXA+/MX3mpJvGDHb265xtnzmFoUK1HaKQGlMtePYM+q2KKjXuaS1NJYIEKgI8jhEgqHt4cqy
+Ky53j3hyHz2bqSLp2o2LbJ7MxKovkGqXteoWpaOk96O9/yF/dF7NwlS36AuIQIBA5celQK4PIxBE
+4LLzrtoLgaALdSy6CJRkWQCBPGLsTHznomZ9nszUECgJ2ml3WWHe+QVFNPSQx6UdZNtxr9pbEShN
+eTTz8mQXHoHSlke7+Z+c9m6VGoHSkEfs/trLW3wQKApN1V3lGfnGu2Z6BFoLtYCs3GWBPAiUCLVh
+/HoaeRCoT9R873KLM/IgUBfapnCpe5AHgXry4pf412ihEHkQqCdxd5VqrcezhUIESsJMTJ+Pdthp
+Z0WgyNlXXPHc2Mc4IVAELl2Gnh8mhUDvCkfbIVAkcbf/aOoO3fMKhqAD3frTa4quwpn0hUDOkQhI
+YYBAgECAQAAU0QlYObl+5Ug8NcprZkZxjUCxRPVA6zmtEXHCBykskrhjgHXN09PoEcgFl4M4H11j
+nBAoApcj6ZoPGScEAgTKApcDoTw5sgWB+sGlz1n90IBAPdE6j1o21PfcC11jLagL1oFWRyGlKU3p
+OxcSJQ7NZAjkhHp/uG2HFAYIBAgECASAQIBAgECAQAAIBOkxEARBtp9wdVfAMOfIifEBIhCQwgCB
+ABAI0oV2jhxZ+nfBatuPZfgBCy0Eqqo8c01b+uu51XZvzOgDWoHNTGR+pCwpLEd5svuAZXlO2uEr
+PyEQ8hRWHgRCHmqg0sjTnLalv6crJQ8C/U8stqNO0I4+VZOHFIY8COS1PGL2ybd5yUMKK7s8zYmL
+dujyd3n+nESgcsvzZd4/KwIhDwIhT35QA6UyE1qyxZnfvJMHgdKS549JC1qvvJOHFIY8CFR5eV5O
+XimqPAhUdHnmfx+zgxdOFXkoqIGKKs/cswnb/8Oeog8HEai48nxUhiFBIORBIOShBioskkbySCLk
+IQIhDwIhj28p7FApR6b1qlEbHGpkO/rr6215vi/zH1r2x7tApSGFAQIBAgECAQIBIBAgECAQIBBA
+LK8FGADCTxYrr+EVJgAAAABJRU5ErkJggg==
+--089e082ce1a07950b2056748acb0--
+--089e082ce1a07949ad056748acaf
+Content-Type: message/delivery-status
+
+Reporting-MTA: dns; googlemail.com
+Received-From-MTA: dns; support@agilebg.com
+Arrival-Date: Tue, 13 Mar 2018 03:25:11 -0700 (PDT)
+X-Original-Message-ID: <1520936710.340821981430054.404664939598865-openerp-7-res.partner@elbati-Vostro-3550>
+
+Final-Recipient: rfc822; jj@jj.pink
+Action: failed
+Status: 4.0.0
+Diagnostic-Code: smtp; DNS Error: 21006586 DNS type 'mx' lookup of jj.pink responded with code NXDOMAIN
+ Domain name not found: jj.pink
+Last-Attempt-Date: Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+
+--089e082ce1a07949ad056748acaf
+Content-Type: message/rfc822
+
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=agilebg-com.20150623.gappssmtp.com; s=20150623;
+        h=from:mime-version:message-id:subject:reply-to:to:date;
+        bh=JoCx/XdOebyfcX3JwqQu+w3RwEEedYScqlTnqxEbYdc=;
+        b=JO54Xix6Gwe2oYDyjNk/g5m1/tO5P4uV0uFG6P4wEt6ADH8WyM61eoFI1RQXVpFdtr
+         8F6h0gF+n6+qxWNu7W/0xroNgILJmDJYz8uM0yVlLDivt1/3YVS2+vCY4lxhfmEnQW4A
+         Z43steYkQdkrtDk4xa39zBwwsomJx9mViNF/diZ7919RvTzujMel5tLF8ZAUGIZvAQOX
+         RlVBUiBFQeY5vjBCh22/7dlnbt3aiwQDOUrM844zuxjPQrN/4DOIVXIJ5xg/akMUVCd6
+         G6RlJ/mwAkquhSMmo8qITJZ/SOtC1NdRn7ZM1jK9u3R4uNHA07Se85rRrR/ay9ptgFUw
+         wQqw==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20161025;
+        h=x-gm-message-state:from:mime-version:message-id:subject:reply-to:to
+         :date;
+        bh=JoCx/XdOebyfcX3JwqQu+w3RwEEedYScqlTnqxEbYdc=;
+        b=P3+oyRfjA7k/46qFeJlG3dwtiAiK0X+zdvJbu6tiDenD27KfhLBOh3n3cARxu8GkGg
+         X3nWbjd/Dp3ifjwrj43SY8qWjJrLJgREt7NiS+CSRUoVtFzzg88D95v0CUbUW1gHSFdJ
+         nWWMUwD9eOBQvpf6RSV3KlN3cmFTHwqDBKD9yt5mosKB/yHBKSYqIBEzVT1kWtwEFx2r
+         i6XTqVWrZjPxSGhF3QtKqX3emLuxdp2HGwXEgFHqK2Ckti2zwkqvnZRyclXhsjz3BCW3
+         B6cfziTjxnfRzClZozTOO30u+FkF7NWHeZ6SX7mkRC3iymnayRif4qs0yASNmFdWSo+Q
+         DPiA==
+X-Gm-Message-State: AElRT7HcU/pKvDTBS+u1vpLED5d18RpMEMxDuQNGJQTybNHBL+tOFsPm
+	r4kpiCsS45ObtQFm602vRGNTpfrY
+X-Google-Smtp-Source: AG47ELuqwAATDTpeGPm3Bkd+l3Xvi+nW1YzPRybnU3Co5geAM45/LlwjsooGXjg1mt8dvHtnVDi+bA==
+X-Received: by 10.28.106.19 with SMTP id f19mr289835wmc.84.1520936712169;
+        Tue, 13 Mar 2018 03:25:12 -0700 (PDT)
+Return-Path: <support@agilebg.com>
+Received: from [127.0.1.1] ([153.92.179.94])
+        by smtp.gmail.com with ESMTPSA id y111sm66797wrc.0.2018.03.13.03.25.10
+        for <jj@jj.pink>
+        (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
+        Tue, 13 Mar 2018 03:25:11 -0700 (PDT)
+From: Administrator <support@agilebg.com>
+X-Google-Original-From: Administrator <admin@agilebg.com>
+Content-Type: multipart/mixed; boundary="===============8882118813701652090=="
+MIME-Version: 1.0
+Message-Id: <1520936710.340821981430054.404664939598865-openerp-7-res.partner@elbati-Vostro-3550>
+Subject: Re: jj
+Reply-To: Administrator <admin@agilebg.com>
+To: jj <jj@jj.pink>
+Date: Tue, 13 Mar 2018 10:25:10 -0000
+X-Odoo-db-uuid: b155a0e0-2612-11e8-b332-08edb9323673
+X-Odoo-Objects: res.partner-7
+
+--===============8882118813701652090==
+Content-Type: multipart/alternative;
+ boundary="===============5618999107486207453=="
+MIME-Version: 1.0
+
+--===============5618999107486207453==
+Content-Type: text/plain; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+dGVzdAotLQpBZG1pbmlzdHJhdG9yCgpTZW50IGJ5Ck15IENvbXBhbnkKWzFdCnVzaW5nCk9kb28g
+WzJdIC4KCgoKWzFdIGh0dHA6Ly93d3cueW91cmNvbXBhbnkuY29tClsyXSBodHRwczovL3d3dy5v
+ZG9vLmNvbQo=
+
+--===============5618999107486207453==
+Content-Type: text/html; charset="utf-8"
+MIME-Version: 1.0
+Content-Transfer-Encoding: base64
+
+PGRpdiBkYXRhLW8tbWFpbC1xdW90ZS1jb250YWluZXI9IjEiPjxwPnRlc3Q8L3A+CiAgICA8c3Bh
+biBkYXRhLW8tbWFpbC1xdW90ZT0iMSI+LS0gPGJyIGRhdGEtby1tYWlsLXF1b3RlPSIxIj4KQWRt
+aW5pc3RyYXRvcjwvc3Bhbj4KPGJyIGRhdGEtby1tYWlsLXF1b3RlPSIxIj4KPHAgc3R5bGU9ImNv
+bG9yOiAjNTU1NTU1OyIgZGF0YS1vLW1haWwtcXVvdGU9IjEiPgogICAgU2VudCBieQogICAgPGEg
+aHJlZj0iaHR0cDovL3d3dy55b3VyY29tcGFueS5jb20iIHN0eWxlPSJ0ZXh0LWRlY29yYXRpb246
+bm9uZTsgY29sb3I6ICM4NzVBN0I7IiBkYXRhLW8tbWFpbC1xdW90ZT0iMSI+CiAgICBNeSBDb21w
+YW55CiAgICA8L2E+CiAgICB1c2luZwogICAgPGEgaHJlZj0iaHR0cHM6Ly93d3cub2Rvby5jb20i
+IHN0eWxlPSJ0ZXh0LWRlY29yYXRpb246bm9uZTsgY29sb3I6ICM4NzVBN0I7IiBkYXRhLW8tbWFp
+bC1xdW90ZT0iMSI+T2RvbzwvYT4uCjwvcD4KPC9kaXY+
+
+--===============5618999107486207453==--
+
+--===============8882118813701652090==--
+
+--089e082ce1a07949ad056748acaf--

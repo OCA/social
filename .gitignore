@@ -46,6 +46,9 @@ coverage.xml
 # Translations
 *.mo
 
+# Pycharm
+.idea
+
 # Django stuff:
 *.log
 

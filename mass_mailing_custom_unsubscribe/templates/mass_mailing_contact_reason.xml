@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+<template id="unsubscribe"
+          inherit_id="website_mass_mailing.unsubscribe"
+          name="Add Reasons to Mailing List Management Form">
+    <!-- Disable core AJAX submission of form, because it is impossible to
+         extend it as it is designed right now. It is refactored in this addon.
+         TODO Remove when merged https://github.com/odoo/odoo/pull/14386. -->
+    <xpath expr="//div[@class='container o_unsubscribe_form']"
+           position="attributes">
+        <attribute name="class" value="container o_unsubscribe_form_custom"/>
+    </xpath>
+
+    <!-- Add reasons to mass mailing list manager -->
+    <xpath expr="//t[@t-as='contact']/.." position="after">
+        <t t-call="mass_mailing_custom_unsubscribe.reason">
+            <t t-set="extra_class" t-value="'hidden'"/>
+        </t>
+    </xpath>
+</template>
+
+</odoo>
