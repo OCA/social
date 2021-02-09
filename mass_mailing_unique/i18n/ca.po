@@ -24,12 +24,15 @@ msgid "Cannot have more than one lists with the same name."
 msgstr "No es pot tenir més d'una llista amb el mateix nom."
 
 #. module: mass_mailing_unique
-#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:21
-#, fuzzy, python-format
-msgid "Cannot have the same email (%s) morethan once in the same list."
+#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:24
+#, python-format
+msgid ""
+"Email (%(contact_email)s) already in mailing list(s):\n"
+"                    %(lists)s\n"
+"                    Please use a different email address or "
+"remove                      (%(contact_email)s) from the mailing list(s) "
+"above."
 msgstr ""
-"No es pot tenir el mateix correu electrònic més d'una vegada en la mateixa "
-"llista."
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
@@ -45,6 +48,12 @@ msgstr "Contactes del correu massiu"
 #: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list_contact_rel
 msgid "Mass Mailing Subscription Information"
 msgstr ""
+
+#, fuzzy
+#~ msgid "Cannot have the same email (%s) morethan once in the same list."
+#~ msgstr ""
+#~ "No es pot tenir el mateix correu electrònic més d'una vegada en la "
+#~ "mateixa llista."
 
 #~ msgid "Fix this before installing:"
 #~ msgstr "Solucionar això abans d'instal·lar:"
