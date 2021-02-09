@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Druidoo - Iván Todorovich <ivan.todorovich@druidoo.io>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 

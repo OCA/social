@@ -1,8 +1,8 @@
+# -*- coding: utf-8 -*-
 # Copyright 2019 Druidoo - Iván Todorovich <ivan.todorovich@druidoo.io>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, models, fields
-from odoo.tools import pycompat
 
 
 class MailTemplate(models.Model):
@@ -20,11 +20,11 @@ class MailTemplate(models.Model):
         # Odoo way of handling different result for multi/one res_ids
         # Placed before super(), so we force multi_mode=True there
         multi_mode = True
-        if isinstance(res_ids, pycompat.integer_types):
+        if isinstance(res_ids, (int, long)):
             res_ids = [res_ids]
             multi_mode = False
 
-        results = super().generate_email(res_ids, **kwargs)
+        results = super(MailTemplate, self).generate_email(res_ids, **kwargs)
         # Add conditional attachments
         if self.conditional_attachment_ids:
             for res_id in res_ids:
