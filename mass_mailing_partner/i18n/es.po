@@ -169,7 +169,7 @@ msgid "Partner Tag"
 msgstr "Etiqueta del asociado"
 
 #. module: mass_mailing_partner
-#: code:addons/mass_mailing_partner/models/mail_mass_mailing_contact.py:27
+#: code:addons/mass_mailing_partner/models/mail_mass_mailing_contact.py:28
 #, fuzzy, python-format
 msgid "Partner already exists in one of these mailing lists"
 msgstr "El asociado ya existe en esta lista de correo."
