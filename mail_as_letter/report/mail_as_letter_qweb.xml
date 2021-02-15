@@ -40,7 +40,7 @@
         <field name="type">ir.actions.report</field>
         <field name="report_name">mail_as_letter.report_mail_print</field>
         <field name="report_type">qweb-pdf</field>
-        <field name="paperformat_id" ref="base.paperformat_euro"/>
+        <field name="paperformat_id" ref="base.paperformat_euro" />
     </record>
 
 </odoo>
