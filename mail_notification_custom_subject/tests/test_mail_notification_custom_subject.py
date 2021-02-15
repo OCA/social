@@ -1,6 +1,6 @@
 # Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
+# pylint: disable=C8107
 from odoo.tests import common
 
 
@@ -27,15 +27,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${object.name or 'n/a'} and something more",
             }
         )
@@ -65,15 +57,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${object.name or 'n/a'} and something more",
             }
         )
@@ -89,15 +73,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${object.name or 'n/a'} and something more",
             }
         )
@@ -105,15 +81,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 2",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${object.name or 'n/a'} and something different",
             }
         )
@@ -129,15 +97,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 3",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${' and yet something else'}",
                 "position": "append_after",
             }
@@ -155,15 +115,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 4",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${'Re: '}",
                 "position": "append_before",
             }
@@ -183,15 +135,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             {
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${' and something more'}",
                 "position": "append_after",
             }
@@ -201,24 +145,14 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             body="Test", subtype="mail.mt_comment", subject="Test",
         )
         # Get message and check subject
-        self.assertEquals(
-            mail_message_1.subject, "Test and something more"
-        )
+        self.assertEquals(mail_message_1.subject, "Test and something more")
 
     def test_bad_template_does_not_break(self):
         self.env["mail.message.custom.subject"].create(
             {
                 "name": "Test bad template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [
-                    (
-                        6,
-                        0,
-                        [
-                            self.env.ref("mail.mt_comment").id,
-                        ],
-                    )
-                ],
+                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
                 "subject_template": "${obaject.number_a} and something",
                 "position": "append_after",
             }
@@ -229,9 +163,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         )
         # Get message and check subject
         # No exception should be raised but subject should remain as original.
-        self.assertEquals(
-            mail_message_1.subject, "Test"
-        )
+        self.assertEquals(mail_message_1.subject, "Test")
 
     def test_no_template_default_result(self):
         # Send message in partner
@@ -240,6 +172,4 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         )
         # Get message and check subject
         # No exception should be raised but subject should remain as original.
-        self.assertEquals(
-            mail_message_1.subject, "Test partner 1"
-        )
+        self.assertEquals(mail_message_1.subject, "Test partner 1")
