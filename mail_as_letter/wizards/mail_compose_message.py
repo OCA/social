@@ -20,7 +20,6 @@ class MailComposeMessage(models.TransientModel):
         for rec in self:
             rec.partner_count = len(rec.partner_ids)
 
-    @api.multi
     def download_pdf(self):
         """
         Download the email in pdf format, based on a QWeb report.
@@ -36,12 +35,10 @@ class MailComposeMessage(models.TransientModel):
                 "active_model": "mail.compose.message",
             }
         )
-
         return {
-            "name": "mail_as_letter",
+            "name": "Mail as Letter",
             "model": "mail.compose.message",
-            "res_id": self.id,
-            "type": "ir.actions.report.xml",
+            "type": "ir.actions.report",
             "report_name": "mail_as_letter.report_mail_print",
             "report_type": "qweb-pdf",
             "context": ctx,

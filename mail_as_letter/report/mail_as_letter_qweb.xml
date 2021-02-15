@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="qweb_mail_pdf_export" model="ir.actions.report.xml">
-      <field name="name">mail_as_letter</field>
-      <field name="model">mail.compose.message</field>
-      <field name="type">ir.actions.report.xml</field>
-      <field name="report_name">mail_as_letter.report_mail_print</field>
-      <field name="report_type">qweb-pdf</field>
-      <field name="paperformat_id" eval="ref('report.paperformat_euro')" />
-      <field name="auto" eval="False" />
-    </record>
-
     <template id="mail_print">
-      <t t-call="report.external_layout">
+      <t t-call="web.external_layout">
         <div class="page">
           <div class="oe_structure" />
             <t t-foreach="o.partner_ids" t-as="p">
@@ -37,10 +27,20 @@
     </template>
 
     <template id="report_mail_print">
-      <t t-call="report.html_container">
+      <t t-call="web.html_container">
         <t t-foreach="docs" t-as="o">
           <t t-call="mail_as_letter.mail_print" />
         </t>
       </t>
     </template>
+
+    <record id="qweb_mail_pdf_export" model="ir.actions.report">
+        <field name="name">Mail as Letter</field>
+        <field name="model">mail.compose.message</field>
+        <field name="type">ir.actions.report</field>
+        <field name="report_name">mail_as_letter.report_mail_print</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="paperformat_id" ref="base.paperformat_euro"/>
+    </record>
+
 </odoo>
