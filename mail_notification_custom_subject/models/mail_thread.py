@@ -23,25 +23,21 @@ class MailThread(models.AbstractModel):
         mail_auto_delete=True,
         **kwargs
     ):
-        subtype_id = kwargs.get('subtype_id', False)
+        subtype_id = kwargs.get("subtype_id", False)
         if not subtype_id:
-            subtype = subtype or 'mt_note'
-            if '.' not in subtype:
-                subtype = 'mail.%s' % subtype
-            subtype_id = self.env['ir.model.data'].xmlid_to_res_id(
+            subtype = subtype or "mt_note"
+            if "." not in subtype:
+                subtype = "mail.%s" % subtype
+            subtype_id = self.env["ir.model.data"].xmlid_to_res_id(
                 subtype, raise_if_not_found=False,
             )
         if subtype_id:
             custom_subjects = self.env["mail.message.custom.subject"].search(
-                [
-                    ("model_id.model", "=", self._name),
-                    ("subtype_ids", "=", subtype_id),
-                ]
+                [("model_id.model", "=", self._name), ("subtype_ids", "=", subtype_id)]
             )
             if not subject:
-                subject = 'Re: %s' % self.env["mail.message"].with_context(
-                    default_model=self._name,
-                    default_res_id=self.id,
+                subject = "Re: %s" % self.env["mail.message"].with_context(
+                    default_model=self._name, default_res_id=self.id,
                 )._get_record_name({})
             for template in custom_subjects:
                 try:
