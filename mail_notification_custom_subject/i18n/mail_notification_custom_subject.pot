@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_notification_custom_subject
+# 	* mail_notification_custom_subject
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,16 +14,12 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_notification_custom_subject
-#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:31
-#: selection:mail.message.custom.subject,position:0
-#, python-format
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_after
 msgid "Append After"
 msgstr ""
 
 #. module: mail_notification_custom_subject
-#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:30
-#: selection:mail.message.custom.subject,position:0
-#, python-format
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_before
 msgid "Append Before"
 msgstr ""
 
@@ -93,9 +89,7 @@ msgid "Position"
 msgstr ""
 
 #. module: mail_notification_custom_subject
-#: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:32
-#: selection:mail.message.custom.subject,position:0
-#, python-format
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__replace
 msgid "Replace"
 msgstr ""
 
@@ -129,6 +123,7 @@ msgstr ""
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
-msgid "Whether to replace, append at beggining or append at end to other templates that apply to a given context"
+msgid ""
+"Whether to replace, append at beggining or append at end to other templates "
+"that apply to a given context"
 msgstr ""
-

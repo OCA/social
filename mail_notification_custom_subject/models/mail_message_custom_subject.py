@@ -1,7 +1,7 @@
 # Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 
 class MailMessageCustomSubject(models.Model):
@@ -25,9 +25,9 @@ class MailMessageCustomSubject(models.Model):
     )
     position = fields.Selection(
         selection=[
-            ("append_before", _("Append Before")),
-            ("append_after", _("Append After")),
-            ("replace", _("Replace")),
+            ("append_before", "Append Before"),
+            ("append_after", "Append After"),
+            ("replace", "Replace"),
         ],
         string="Position",
         default="replace",
