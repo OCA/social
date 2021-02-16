@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-29 14:24+0000\n"
+"POT-Creation-Date: 2021-02-16 07:08+0000\n"
 "PO-Revision-Date: 2016-11-29 14:24+0000\n"
 "Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2016\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_as_letter
-#: model:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
+#: model_terms:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
 msgid "Download Letter"
 msgstr "Descargar carta"
 
@@ -30,27 +30,28 @@ msgid "Email composition wizard"
 msgstr "Asistente composición Correo Electrónico"
 
 #. module: mail_as_letter
-#: model:ir.model.fields,field_description:mail_as_letter.field_mail_compose_message_partner_count
+#: model:ir.actions.report,name:mail_as_letter.qweb_mail_pdf_export
+#, fuzzy
+msgid "Mail as Letter"
+msgstr "mail_as_letter"
+
+#. module: mail_as_letter
+#: model:ir.model.fields,field_description:mail_as_letter.field_mail_compose_message__partner_count
 msgid "Number of partners"
 msgstr "Número de empresas"
 
 #. module: mail_as_letter
-#: model:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
+#: model_terms:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
 msgid "Save as a PDF file"
 msgstr "Guardar como un archivo PDF"
 
 #. module: mail_as_letter
-#: model:ir.ui.view,arch_db:mail_as_letter.mail_print
+#: model_terms:ir.ui.view,arch_db:mail_as_letter.mail_print
 msgid "Subject :"
 msgstr "Asunto:"
 
 #. module: mail_as_letter
-#: code:addons/mail_as_letter/wizards/mail_compose_message.py:31
+#: code:addons/mail_as_letter/wizards/mail_compose_message.py:0
 #, python-format
 msgid "There must be only one recipient."
 msgstr "Debe haber sólo un destinatario."
-
-#. module: mail_as_letter
-#: model:ir.actions.report.xml,name:mail_as_letter.qweb_mail_pdf_export
-msgid "mail_as_letter"
-msgstr "mail_as_letter"

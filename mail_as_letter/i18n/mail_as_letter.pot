@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_as_letter
+# 	* mail_as_letter
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2021-02-16 07:08+0000\n"
+"PO-Revision-Date: 2021-02-16 07:08+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_as_letter
-#: model:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
+#: model_terms:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
 msgid "Download Letter"
 msgstr ""
 
@@ -24,28 +26,27 @@ msgid "Email composition wizard"
 msgstr ""
 
 #. module: mail_as_letter
-#: model:ir.model.fields,field_description:mail_as_letter.field_mail_compose_message_partner_count
+#: model:ir.actions.report,name:mail_as_letter.qweb_mail_pdf_export
+msgid "Mail as Letter"
+msgstr ""
+
+#. module: mail_as_letter
+#: model:ir.model.fields,field_description:mail_as_letter.field_mail_compose_message__partner_count
 msgid "Number of partners"
 msgstr ""
 
 #. module: mail_as_letter
-#: model:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
+#: model_terms:ir.ui.view,arch_db:mail_as_letter.mail_compose_message_form_view
 msgid "Save as a PDF file"
 msgstr ""
 
 #. module: mail_as_letter
-#: model:ir.ui.view,arch_db:mail_as_letter.mail_print
+#: model_terms:ir.ui.view,arch_db:mail_as_letter.mail_print
 msgid "Subject :"
 msgstr ""
 
 #. module: mail_as_letter
-#: code:addons/mail_as_letter/wizards/mail_compose_message.py:31
+#: code:addons/mail_as_letter/wizards/mail_compose_message.py:0
 #, python-format
 msgid "There must be only one recipient."
 msgstr ""
-
-#. module: mail_as_letter
-#: model:ir.actions.report.xml,name:mail_as_letter.qweb_mail_pdf_export
-msgid "mail_as_letter"
-msgstr ""
-
