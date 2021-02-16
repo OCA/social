@@ -6,20 +6,12 @@ from odoo.tests import common
 
 class TestMailNotificationCustomSubject(common.TransactionCase):
     def setUp(self):
-        super(TestMailNotificationCustomSubject, self).setUp()
+        super().setUp()
         self.partner_1 = self.env["res.partner"].create(
-            {
-                "name": "Test partner 1",
-                "supplier": True,
-                "email": "partner1@example.com",
-            }
+            {"name": "Test partner 1", "email": "partner1@example.com"}
         )
         self.partner_2 = self.env["res.partner"].create(
-            {
-                "name": "Test partner 2",
-                "supplier": True,
-                "email": "partner2@example.com",
-            }
+            {"name": "Test partner 2", "email": "partner2@example.com"}
         )
 
     def test_email_subject_template_overrides(self):
