@@ -41,7 +41,8 @@ class MailTrackingEmail(models.Model):
         string="Message", comodel_name='mail.message', readonly=True,
         index=True)
     mail_id = fields.Many2one(
-        string="Email", comodel_name='mail.mail', readonly=True)
+        string="Email", comodel_name='mail.mail', readonly=True,
+        ondelete="cascade")
     partner_id = fields.Many2one(
         string="Partner", comodel_name='res.partner', readonly=True)
     recipient = fields.Char(string='Recipient email', readonly=True)
