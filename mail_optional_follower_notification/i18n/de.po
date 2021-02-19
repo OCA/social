@@ -21,19 +21,12 @@ msgstr ""
 
 #. module: mail_optional_follower_notification
 #: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_form
-#, fuzzy
 msgid ""
-"<span name=\"document_followers_text\" position=\"after\">\n"
-"                <span name=\"no_followers_text\" attrs=\"{'invisible': "
-"[('notify_followers', '=', True)]}\" style=\"color: red;\"> - Warning : "
-"Followers will not be notified but they can access the notification directly "
-"from the document (if they are allowed to)</span>\n"
-"            </span>"
+"<span name=\"no_followers_text\" attrs=\"{'invisible': [('notify_followers', "
+"'=', True)]}\" style=\"color: red;\"> - Warning : Followers will not be "
+"notified but they can access the notification directly from the document (if "
+"they are allowed to)</span>"
 msgstr ""
-"<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
-"\"color: red;\"> - Warnung : Abonnenten werden nicht benachrichtigt! Aber "
-"sie können die Benachrichtigung direkt über das Dokument einsehen (wenn sie "
-"berechtigt sind).</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_thread
@@ -50,6 +43,20 @@ msgstr "Assistent zum Email verfassen"
 #, fuzzy
 msgid "Notify Followers"
 msgstr "Abonnenten benachrichtigen"
+
+#, fuzzy
+#~ msgid ""
+#~ "<span name=\"document_followers_text\" position=\"after\">\n"
+#~ "                <span name=\"no_followers_text\" attrs=\"{'invisible': "
+#~ "[('notify_followers', '=', True)]}\" style=\"color: red;\"> - Warning : "
+#~ "Followers will not be notified but they can access the notification "
+#~ "directly from the document (if they are allowed to)</span>\n"
+#~ "            </span>"
+#~ msgstr ""
+#~ "<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
+#~ "\"color: red;\"> - Warnung : Abonnenten werden nicht benachrichtigt! Aber "
+#~ "sie können die Benachrichtigung direkt über das Dokument einsehen (wenn "
+#~ "sie berechtigt sind).</span>"
 
 #~ msgid "Message"
 #~ msgstr "Nachricht"
