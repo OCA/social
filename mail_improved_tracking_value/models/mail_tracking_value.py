@@ -60,7 +60,7 @@ class MailTrackingValue(models.Model):
 
             def get_values(source, prefix):
                 if source:
-                    names = ', '.join(source.mapped('display_name'))
+                    names = ', '.join(source.exists().mapped('display_name'))
                     json_ids = json.dumps(source.ids)
                 else:
                     names = ''
