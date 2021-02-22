@@ -54,10 +54,10 @@ class MailTrackingValue(models.Model):
                 record.old_value_formatted = record.old_value_text
 
     @api.model
-    def create_tracking_values(self, old_value, new_value, col_name, col_info):
+    def create_tracking_values(self, initial_value, new_value,
+                               col_name, col_info, track_sequence):
         """ Add tacking capabilities for many2many and one2many fields """
         if col_info['type'] in ('many2many', 'one2many'):
-
             def get_values(source, prefix):
                 if source:
                     names = ', '.join(source.exists().mapped('display_name'))
@@ -75,11 +75,11 @@ class MailTrackingValue(models.Model):
                 'field_desc': col_info['string'],
                 'field_type': col_info['type'],
             }
-            values.update(get_values(old_value, 'old'))
+            values.update(get_values(initial_value, 'old'))
             values.update(get_values(new_value, 'new'))
             return values
         else:
             return super().create_tracking_values(
-                old_value, new_value,
-                col_name, col_info
+                initial_value, new_value,
+                col_name, col_info, track_sequence
             )
