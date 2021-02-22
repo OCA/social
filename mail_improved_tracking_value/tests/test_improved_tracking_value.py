@@ -23,7 +23,7 @@ class TestImproveTrackingValue(TransactionCase):
         """Test tracking one2many changes"""
         tracking = self.model.create_tracking_values(
             self.mr, self.dr, 'testing_col',
-            {'string': 'TestingField', 'type': 'one2many'})
+            {'string': 'TestingField', 'type': 'one2many'}, track_sequence=100)
         self.assertEqual(tracking['old_value_char'], self.mr.display_name)
         self.assertEqual(tracking['new_value_char'], self.dr.display_name)
         self.assertEqual(tracking['old_value_text'], json.dumps([self.mr.id]))
@@ -33,7 +33,7 @@ class TestImproveTrackingValue(TransactionCase):
         """Test tracking one2many changes emtpy"""
         tracking = self.model.create_tracking_values(
             self.mr, None, 'testing_col',
-            {'string': 'TestingField', 'type': 'one2many'})
+            {'string': 'TestingField', 'type': 'one2many'}, track_sequence=100)
         self.assertEqual(tracking['old_value_char'], self.mr.display_name)
         self.assertEqual(tracking['new_value_char'], '')
         self.assertEqual(tracking['old_value_text'], json.dumps([self.mr.id]))
@@ -45,9 +45,10 @@ class TestImproveTrackingValue(TransactionCase):
                                                          self.dr.id])
         newvalue = self.env['res.partner.title'].browse([self.mm.id,
                                                          self.pf.id])
+
         tracking = self.model.create_tracking_values(
             oldvalue, newvalue, 'testing_col',
-            {'string': 'TestingField', 'type': 'many2many'})
+            {'string': 'TestingField', 'type': 'many2many'}, track_sequence=100)
         self.assertEqual(tracking['old_value_char'],
                          self.mr.display_name + ', ' + self.dr.display_name)
         self.assertEqual(tracking['new_value_char'],
