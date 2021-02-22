@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -14,25 +14,25 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_improved_tracking_value
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_form_view
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_form_view
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
 msgid "Field changed"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_form_view
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_form_view
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
 msgid "For"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
-msgid "Group by"
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
+msgid "Group By"
 msgstr ""
 
 #. module: mail_improved_tracking_value
 #: model:ir.ui.menu,name:mail_improved_tracking_value.menu_action_view_tracking_changes
-msgid "Improved tracking values"
+msgid "Improved Tracking Values"
 msgstr ""
 
 #. module: mail_improved_tracking_value
@@ -41,43 +41,43 @@ msgid "Mail Tracking Value"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value_record_name
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__record_name
 msgid "Message Record Name"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value_model
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__model
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
 msgid "Model"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.model.fields,help:mail_improved_tracking_value.field_mail_tracking_value_record_name
+#: model:ir.model.fields,help:mail_improved_tracking_value.field_mail_tracking_value__record_name
 msgid "Name get of the related document."
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value_new_value_formatted
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__new_value_formatted
 msgid "New value"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value_old_value_formatted
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__old_value_formatted
 msgid "Old value"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
 msgid "On"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
 msgid "Search"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
 msgid "Tracking change list"
 msgstr ""
 
