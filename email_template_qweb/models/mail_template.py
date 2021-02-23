@@ -15,22 +15,24 @@ class MailTemplate(models.Model):
     body_view_id = fields.Many2one("ir.ui.view", domain=[("type", "=", "qweb")])
     body_view_arch = fields.Text(related="body_view_id.arch")
 
-    def generate_email(self, res_ids, fields=None):
+    def generate_email(self, res_ids, fields):
         multi_mode = True
         if isinstance(res_ids, int):
             res_ids = [res_ids]
             multi_mode = False
         result = super(MailTemplate, self).generate_email(res_ids, fields=fields)
-        for res_id, template in self.get_email_template(res_ids).items():
-            if template.body_type == "qweb" and (not fields or "body_html" in fields):
-                for record in self.env[template.model].browse(res_id):
-                    body_html = template.body_view_id.render(
-                        {"object": record, "email_template": template}
+        for res_id in res_ids:
+            if self.body_type == "qweb" and (not fields or "body_html" in fields):
+                for record in self.env[self.model].browse(res_id):
+                    body_html = self.body_view_id._render(
+                        {"object": record, "email_template": self}
                     )
                     # Some wizards, like when sending a sales order, need this
                     # fix to display accents correctly
                     body_html = tools.ustr(body_html)
-                    result[res_id]["body_html"] = self.render_post_process(body_html)
+                    result[res_id]["body_html"] = self._render_template_postprocess(
+                        {res_id: body_html}
+                    )[res_id]
                     result[res_id]["body"] = tools.html_sanitize(
                         result[res_id]["body_html"]
                     )
