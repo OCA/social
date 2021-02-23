@@ -6,3 +6,4 @@
     * Ernesto Tejeda
 
 * Thomas Fossoul (thomas@niboo.com)
+* Phuc Tran Thanh <phuc@trobz.com>
