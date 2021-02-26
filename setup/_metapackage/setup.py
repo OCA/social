@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-social Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-mail_debrand',
         'odoo14-addon-mail_send_copy',
     ],
     classifiers=[
