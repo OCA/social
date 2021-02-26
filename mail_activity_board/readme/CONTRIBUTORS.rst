@@ -2,9 +2,9 @@
 
   * David Juaneda
 
-* `Eficent <https://www.eficent.com>`_:
+* `ForgeFlow <https://www.forgeflow.com>`_:
 
-  * Miquel Raïch (miquel.raich@eficent.com)
+  * Miquel Raïch (miquel.raich@forgeflow.com)
 
 * `Pesol <https://www.pesol.es>`_:
 
