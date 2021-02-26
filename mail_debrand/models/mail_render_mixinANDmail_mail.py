@@ -33,7 +33,7 @@ class MailRenderMixin(models.AbstractModel):
                     only_what_is_in_tags = bytes_text[: bytes_text.rfind(b">") + 1]
                     data_formatted = html.fromstring(only_what_is_in_tags)
                     parent.replace(previous, data_formatted)
-                if parent.getparent() and remove_parent:
+                if len(parent.getparent()) and remove_parent:
                     # anchor <a href odoo has a parent powered by that must be removed
                     parent.getparent().remove(parent)
                 else:
@@ -42,12 +42,10 @@ class MailRenderMixin(models.AbstractModel):
                     else:
                         parent.remove(elem)
             value = etree.tostring(tree, pretty_print=True, method="html")
-        if type(value) is str:
-            value = re.sub("[^(<)(</)]odoo", "", value, flags=re.IGNORECASE)
-        elif type(value) is bytes:
-            value = re.sub(b"[^(<)(</)]odoo", b"", value, flags=re.IGNORECASE)
-
-        return value
+            # etree can return bytes; ensure we get a proper string
+            if type(value) is bytes:
+                value = value.decode()
+        return re.sub("[^(<)(</)]odoo", "", value, flags=re.IGNORECASE)
 
     @api.model
     def _render_template(
