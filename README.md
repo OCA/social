@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[mail_debrand](mail_debrand/) | 14.0.1.0.0 | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.0 | Send to you a copy of each mail sent by Odoo
 
 [//]: # (end addons)
