@@ -182,7 +182,7 @@ class TestMailTracking(TransactionCase):
         # pylint: disable=C8107
         message = self.recipient.with_user(sender_user).message_post(
             body="<p>This is a test message</p>",
-            cc="Dominique Pinon <unnamed@test.com>, sender@example.com",
+            email_cc="Dominique Pinon <unnamed@test.com>, sender@example.com",
         )
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
@@ -235,7 +235,7 @@ class TestMailTracking(TransactionCase):
         # pylint: disable=C8107
         message = self.recipient.with_user(sender_user).message_post(
             body="<p>This is a test message</p>",
-            to="Dominique Pinon <support+unnamed@test.com>, sender@example.com",
+            email_to="Dominique Pinon <support+unnamed@test.com>, sender@example.com",
         )
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
