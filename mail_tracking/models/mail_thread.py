@@ -29,17 +29,20 @@ class MailThread(models.AbstractModel):
             ("mail_tracking_ids.state", "in", list(failed_states)),
         ]
 
-    @api.returns("self", lambda value: value.id)
-    def message_post(self, *args, **kwargs):
+    @api.model
+    def _message_route_process(self, message, message_dict, routes):
         """Adds CC recipient to the message.
 
         Because Odoo implementation avoid store 'from, to, cc' recipients we
         ensure that this information its written into the mail.message record.
         """
-        kwargs.update(
-            {"email_cc": kwargs.get("cc", False), "email_to": kwargs.get("to", False)}
+        message_dict.update(
+            {
+                "email_cc": message_dict.get("cc", False),
+                "email_to": message_dict.get("to", False),
+            }
         )
-        return super().message_post(*args, **kwargs)
+        return super()._message_route_process(message, message_dict, routes)
 
     def _message_get_suggested_recipients(self):
         """Adds email 'extra' recipients as suggested recipients.
