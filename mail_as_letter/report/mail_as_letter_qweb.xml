@@ -4,8 +4,8 @@
       <t t-call="web.external_layout">
         <div class="page">
           <div class="oe_structure" />
-            <t t-foreach="o.partner_ids" t-as="p">
-              <div class="col-xs-5 col-xs-offset-7">
+            <div t-foreach="o.partner_ids" t-as="p" class="row">
+              <div class="col-5 offset-7">
                 <address
                             t-field="o.partner_ids"
                             t-field-options='{"widget": "contact",
@@ -13,15 +13,15 @@
                                            "no_marker": true}'
                         />
               </div>
-            </t>
+            </div>
             <br />
-            <p>
+            <div class="row">
               <b>Subject : <span t-field="o.subject" /></b>
-            </p>
+            </div>
             <br />
-            <p>
+            <div class="row">
               <span class="email_preview" t-raw="o.body" />
-            </p>
+            </div>
         </div>
       </t>
     </template>
