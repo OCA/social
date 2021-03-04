@@ -9,47 +9,48 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2017-12-01 02:19+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-03-04 13:45+0000\n"
+"Last-Translator: Rémi <remi@le-filament.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: mass_mailing_partner
 #: code:addons/mass_mailing_partner/models/mail_mass_mailing.py:30
 #: code:addons/mass_mailing_partner/models/mail_mass_mailing_list_contact_rel.py:17
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
-msgstr ""
+msgstr "Un contact ne peut pas être présent plusieurs fois dans la même liste"
 
 #. module: mass_mailing_partner
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Add contacts to mailing list"
-msgstr ""
+msgstr "Ajouter des contacts à la liste de diffusion"
 
 #. module: mass_mailing_partner
 #: model:ir.actions.act_window,name:mass_mailing_partner.action_partner_mail_list
 msgid "Add to mailing list"
-msgstr ""
+msgstr "Ajouter à la liste de diffusion"
 
 #. module: mass_mailing_partner
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contact"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_partner_mail_list_wizard
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Create contact mailing list"
-msgstr ""
+msgstr "Créer un destinataire de liste de diffusion"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__create_uid
@@ -102,49 +103,47 @@ msgstr "Liste de diffusion"
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_contact_ids
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_contact_ids
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
-#, fuzzy
 msgid "Mailing contacts"
-msgstr "Contact de la liste de diffusion"
+msgstr "Destinataires de publipostage"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_contacts_count
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_contacts_count
-#, fuzzy
 msgid "Mailing contacts number"
-msgstr "Contact de la liste de diffusion"
+msgstr "Nombre de destinataires"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_list__partner_mandatory
 msgid "Mandatory Partner"
-msgstr ""
+msgstr "Contact Obligatoire"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_contact
 msgid "Mass Mailing Contact"
-msgstr "Contact de la liste de diffusion"
+msgstr "Destinataire de publipostage"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mail_mass_mailing_list_contact_rel
 msgid "Mass Mailing Subscription Information"
-msgstr ""
+msgstr "Information d'Abonnement au Publipostage"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_ids
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_stats_ids
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
 msgid "Mass mailing stats"
-msgstr ""
+msgstr "Stats de publipostage"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_count
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_stats_count
 msgid "Mass mailing stats number"
-msgstr ""
+msgstr "Nombre de stats de publipostage"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_base_partner_merge_automatic_wizard
 msgid "Merge Partner Wizard"
-msgstr ""
+msgstr "Assistant de Fusion de Contact"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mail_statistics__partner_id
@@ -153,24 +152,24 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mail_statistics_search
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mass_mailing_contact_search
 msgid "Partner"
-msgstr "Partenaire"
+msgstr "Contact"
 
 #. module: mass_mailing_partner
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:32
 #, python-format
 msgid "Partner '%s' has no email."
-msgstr ""
+msgstr "Le contact '%s' n'a pas de courriel."
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mail_mass_mailing_list__partner_category
 msgid "Partner Tag"
-msgstr ""
+msgstr "Étiquette de Contact"
 
 #. module: mass_mailing_partner
 #: code:addons/mass_mailing_partner/models/mail_mass_mailing_contact.py:28
 #, python-format
 msgid "Partner already exists in one of these mailing lists"
-msgstr ""
+msgstr "Le contact existe déjà dans une de ces listes de diffusion"
 
 #. module: mass_mailing_partner
 #: code:addons/mass_mailing_partner/models/res_partner.py:36
@@ -179,3 +178,5 @@ msgid ""
 "This partner '%s' is linked to one or more mass mailing contact. Email must "
 "be assigned."
 msgstr ""
+"Ce contact '%s' est lié à un ou plusieurs destinataire(s) de publipostage. "
+"Un courriel doit être sélectionné."
