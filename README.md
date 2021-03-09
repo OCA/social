@@ -38,7 +38,7 @@ addon | version | summary
 [mail_preview_audio](mail_preview_audio/) | 13.0.1.0.0 | Allow to preview audio files
 [mail_preview_base](mail_preview_base/) | 13.0.1.0.0 | Base to add more previewing options
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.0.2 | Define a domain from which followers can be selected
-[mail_tracking](mail_tracking/) | 13.0.1.0.7 | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 13.0.1.0.8 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 13.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.1.0.1 | Know and track (un)subscription reasons, GDPR compliant
