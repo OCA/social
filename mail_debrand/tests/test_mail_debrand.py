@@ -13,6 +13,17 @@ class TestMailDebrand(common.TransactionCase):
         self.default_template = self.env.ref("mail.message_notification_email")
         self.paynow_template = self.env.ref("mail.mail_notification_paynow")
 
+    def test_debrand_binary_value(self):
+        """
+        Regression test: ensure binary input is gracefully handled
+        """
+        try:
+            self.env["mail.template"].remove_href_odoo(
+                b"Binary value with more than 20 characters"
+            )
+        except TypeError:
+            self.fail("Debranding binary string raised TypeError")
+
     def test_default_debrand(self):
         self.assertIn("using", self.default_template.arch)
         res = self.env["mail.template"]._render_template(
