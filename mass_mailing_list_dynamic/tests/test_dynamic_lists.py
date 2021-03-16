@@ -1,4 +1,5 @@
 # Copyright 2017 Tecnativa - Jairo Llopis
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from mock import patch
@@ -150,3 +151,50 @@ class DynamicListCase(common.SavepointCase):
             "dynamic": False,
         })
         contact.list_ids = [(4, list2.id)]
+
+    def test_partners_merge(self):
+        tag2 = self.tag.copy({
+            "name": "Tag 2"
+        })
+        self.list.sync_method = "full"
+        list2 = self.list.copy({
+            "name": "test list 2",
+            "sync_domain": repr([("category_id", "in", tag2.ids)]),
+        })
+        partner_1 = self.partners.create({
+            "name": "Demo 1",
+            "email": "demo1@demo.com",
+            "category_id": [(4, self.tag.id, False)],
+        })
+        partner_2 = self.partners.create({
+            "name": "Demo 2",
+            "email": "demo2@demo.com",
+            "category_id": [(4, self.tag.id, False), (4, tag2.id, False)],
+        })
+        self.list.action_sync()
+        list2.action_sync()
+        self.assertTrue(
+            partner_1.id in self.list.contact_ids.mapped('partner_id').ids
+        )
+        self.assertTrue(
+            partner_2.id in self.list.contact_ids.mapped('partner_id').ids
+        )
+        self.assertFalse(
+            partner_1.id in list2.contact_ids.mapped('partner_id').ids
+        )
+        self.assertTrue(
+            partner_2.id in list2.contact_ids.mapped('partner_id').ids
+        )
+        # Wizard partner merge (partner_1 + partner_2) in partner_i1
+        wizard = self.env["base.partner.merge.automatic.wizard"].create({
+            "state": "option",
+            "dst_partner_id": partner_1.id,
+            "partner_ids": [(4, partner_1.id), (4, partner_2.id)]
+        })
+        wizard.action_merge()
+        self.assertTrue(
+            partner_1.id in self.list.contact_ids.mapped('partner_id').ids
+        )
+        self.assertTrue(
+            partner_1.id in list2.contact_ids.mapped('partner_id').ids
+        )
