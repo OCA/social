@@ -11,7 +11,10 @@ class MassMailingContact(models.Model):
     _inherit = "mail.mass_mailing.contact"
 
     def _check_dynamic_full_sync_list(self, mailing_list):
-        if mailing_list.dynamic and mailing_list.sync_method == "full":
+        if (
+            mailing_list.dynamic and mailing_list.sync_method == "full"
+            and not self.env.context.get("bypass_dynamic_list_check")
+        ):
             raise ValidationError(_(
                 "Cannot edit manually contacts in a fully "
                 "synchronized list. Change its sync method or execute "
