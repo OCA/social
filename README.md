@@ -47,7 +47,7 @@ addon | version | summary
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 12.0.1.0.3 | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_custom_unsubscribe_event](mass_mailing_custom_unsubscribe_event/) | 12.0.1.0.1 | Allow to unsubscribe discretely from an event
 [mass_mailing_event_registration_exclude](mass_mailing_event_registration_exclude/) | 12.0.1.0.0 | Link mass mailing with event for excluding recipients
-[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 12.0.1.0.3 | Mass mailing lists that get autopopulated
+[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 12.0.1.0.4 | Mass mailing lists that get autopopulated
 [mass_mailing_newsletter_welcome_mail](mass_mailing_newsletter_welcome_mail/) | 12.0.1.0.0 | Send an automated welcome mail to new newsletter subscribers
 [mass_mailing_partner](mass_mailing_partner/) | 12.0.1.0.8 | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 12.0.1.1.0 | Resend mass mailings
