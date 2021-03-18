@@ -156,6 +156,11 @@ msgid "Mass Mailing Load Filter"
 msgstr "Contactes del correu massiu"
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model,name:mass_mailing_list_dynamic.model_base_partner_merge_automatic_wizard
+msgid "Merge Partner Wizard"
+msgstr ""
+
+#. module: mass_mailing_list_dynamic
 #: model:ir.model.fields.selection,name:mass_mailing_list_dynamic.selection__mailing_list__sync_method__add
 msgid "Only add new records"
 msgstr ""
