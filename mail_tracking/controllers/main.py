@@ -68,7 +68,7 @@ class MailTrackingController(MailController):
             try:
                 tracking_email = env['mail.tracking.email'].search([
                     ('id', '=', tracking_email_id),
-                    ('state', 'in', ['sent', 'delivered']),
+                    ('state', 'in', ['sent', 'delivered', 'opened']),
                     ('token', '=', token),
                 ])
                 if tracking_email:
