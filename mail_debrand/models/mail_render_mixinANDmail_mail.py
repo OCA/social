@@ -28,7 +28,7 @@ class MailRenderMixin(models.AbstractModel):
                 parent = elem.getparent()
                 previous = elem.getprevious()
 
-                if remove_before and not remove_parent and len(previous):
+                if remove_before and not remove_parent and previous:
                     # remove 'using' that is before <a and after </span>
                     bytes_text = etree.tostring(
                         previous, pretty_print=True, method="html"
