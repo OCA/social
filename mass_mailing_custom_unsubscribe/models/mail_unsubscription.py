@@ -11,6 +11,7 @@ class MailUnsubscription(models.Model):
     _name = "mail.unsubscription"
     _description = "Mail unsubscription"
     _inherit = "mail.thread"
+    _mail_post_access = "read"
     _rec_name = "date"
     _order = "date DESC"
 
