@@ -7,4 +7,10 @@ You need to add the configuration in three places:
   Javascript
 * Qweb template `DocumentViewer.Content`
 
+To use this module, you need to:
+
+#. Go to Settings > Technical > Attachments
+#. Create attachment with image or pdf format
+#. Show preview icon in "File content"
+
 As an example, you can check `mail_preview_audio`.
