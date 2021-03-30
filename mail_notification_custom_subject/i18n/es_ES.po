@@ -113,14 +113,12 @@ msgstr "Plantillas de Sustitución de Asuntos"
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
 #, fuzzy
-#| msgid "Subject Replacement Templates"
 msgid "Subject Template"
 msgstr "Plantillas de Sustitución de Asuntos"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
 #, fuzzy
-#| msgid "Templates"
 msgid "Template Name"
 msgstr "Plantillas"
 
