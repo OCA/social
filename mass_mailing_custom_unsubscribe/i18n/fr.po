@@ -23,7 +23,8 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mailing_list_ids
 msgid "(Un)subscribed mass mailing lists, if any."
-msgstr "Liste de diffusion auxquelles le contact est (dés)abonnée, s'il y en a."
+msgstr ""
+"Liste de diffusion auxquelles le contact est (dés)abonnée, s'il y en a."
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__unsubscriber_id
@@ -364,13 +365,13 @@ msgid "Other reason"
 msgstr "Autre motif:"
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:89
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:90
 #, python-format
 msgid "Please indicate why are you unsubscribing."
 msgstr "Merci de préciser les raisons de votre désinscription."
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:98
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:99
 #, python-format
 msgid "Please provide details on why you are unsubscribing."
 msgstr "Merci de fournir des détails sur les raisons de votre désinscription."

@@ -364,13 +364,13 @@ msgid "Other reason"
 msgstr "Anderer Grund"
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:89
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:90
 #, python-format
 msgid "Please indicate why are you unsubscribing."
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:98
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:99
 #, python-format
 msgid "Please provide details on why you are unsubscribing."
 msgstr ""
