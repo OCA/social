@@ -9,7 +9,6 @@ odoo.define("mail_preview_base.preview", function (require) {
     var DocumentViewer = require("mail.DocumentViewer");
     var basic_fields = require("web.basic_fields");
     var registry = require("web.field_registry");
-    var AttachmentBox = require("mail.AttachmentBox");
 
     DocumentViewer.include({
         init: function (parent, attachments) {
@@ -59,29 +58,18 @@ odoo.define("mail_preview_base.preview", function (require) {
         },
     });
 
-    AttachmentBox.include({
-        init: function (parent, record, attachments) {
-            _.each(attachments, function (attachment) {
-                attachment.has_preview = DocumentViewer.prototype._hasPreview(
-                    attachment.mimetype && attachment.mimetype.split("/").shift(),
-                    attachment
-                );
-            });
-            this._super.apply(this, arguments);
-        },
-    });
-
     var FieldPreviewViewer = DocumentViewer.extend({
         init: function (parent, attachments, activeAttachmentID, model, field) {
-            this.modelName = model;
+            this.fieldModelName = model;
             this.fieldName = field;
             this._super.apply(this, arguments);
+            this.modelName = model;
         },
         _onDownload: function (e) {
             e.preventDefault();
             window.location =
                 "/web/content/" +
-                this.modelName +
+                this.fieldModelName +
                 "/" +
                 this.activeAttachment.id +
                 "/" +
@@ -93,7 +81,7 @@ odoo.define("mail_preview_base.preview", function (require) {
         _getContentUrl: function (attachment) {
             return (
                 "/web/content/" +
-                this.modelName +
+                this.fieldModelName +
                 "/" +
                 attachment.id +
                 "/" +
@@ -105,7 +93,7 @@ odoo.define("mail_preview_base.preview", function (require) {
         _getImageUrl: function (attachment) {
             return (
                 "/web/image/" +
-                this.modelName +
+                this.fieldModelName +
                 "/" +
                 attachment.id +
                 "/" +
@@ -118,6 +106,10 @@ odoo.define("mail_preview_base.preview", function (require) {
         events: _.extend({}, basic_fields.FieldBinaryFile.prototype.events, {
             "click .preview_file": "_previewFile",
         }),
+        init: function () {
+            this._super.apply(this, arguments);
+            this.mimetype_value = this.recordData.mimetype;
+        },
         _previewFile: function (event) {
             event.stopPropagation();
             event.preventDefault();
@@ -134,12 +126,12 @@ odoo.define("mail_preview_base.preview", function (require) {
             this._super.apply(this, arguments);
             if (this.value) {
                 this.attachment = {
-                    mimetype: this.recordData.res_mimetype,
+                    mimetype: this.mimetype_value,
                     id: this.res_id,
-                    fileType: this.recordData.res_mimetype,
-                    name: this.filename,
+                    fileType: this.mimetype_value,
+                    name: this.recordData.name,
                 };
-                var mimetype = this.recordData.res_mimetype;
+                var mimetype = this.mimetype_value;
                 var type = mimetype.split("/").shift();
                 if (DocumentViewer.prototype._hasPreview(type, this.attachment)) {
                     this.$el.prepend(
