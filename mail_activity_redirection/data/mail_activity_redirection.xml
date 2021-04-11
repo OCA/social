@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <data noupdate="1">
+        <record id="mail_activity_redirection_default_rule" model="mail.activity.redirection">
+            <field name="active" eval="False"/>
+            <field name="name">Default rule to redirect every activities to admin user</field>
+            <field name="user_id" ref="base.user_admin"/>
+            <field name="regex_pattern">.*</field>
+            <field name="sequence" eval="100"/>
+        </record>
+    </data>
+
+</odoo>

@@ -1,0 +1,248 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_activity_redirection
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-03-01 22:01+0000\n"
+"PO-Revision-Date: 2021-03-01 23:01+0100\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 2.3.1\n"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.res_config_settings_form_view
+msgid "<span class=\"o_form_label\">Activities Redirection</span>"
+msgstr "<span class=\"o_form_label\">Redirection des activités</span>"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__active
+msgid "Active"
+msgstr "Actif"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_form_view
+msgid "Activities Redirection"
+msgstr "Redirection des activités"
+
+#. module: mail_activity_redirection
+#: model:ir.actions.act_window,name:mail_activity_redirection.act_window_mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_search_view
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_tree_view
+msgid "Activities Redirections"
+msgstr "Redirections des activités"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__user_id
+msgid "Activities will be redirected to this user"
+msgstr "Les activités seront redirigées vers cet utilisateur"
+
+#. module: mail_activity_redirection
+#: model:ir.model,name:mail_activity_redirection.model_mail_activity
+msgid "Activity"
+msgstr "Activité"
+
+#. module: mail_activity_redirection
+#: model:ir.model,name:mail_activity_redirection.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr "Combinaison d'activités"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__activity_type_ids
+msgid "Activity Types"
+msgstr "Type d'activités"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__active
+msgid "By unchecking the active field, you may hide a rule you will not use."
+msgstr "En décochant le champ actif, vous pouvez cacher une règle que vous n'utilisez pas."
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: mail_activity_redirection
+#: model:mail.activity.redirection,name:mail_activity_redirection.mail_activity_redirection_default_rule
+msgid "Default rule to redirect every activities to admin user"
+msgstr "Règle par défaut pour rediriger toutes les activités vers l’utilisateur admin"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__sequence
+msgid "Gives the sequence order when displaying."
+msgstr "Donne l'ordre d'affichage."
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_search_view
+msgid "Group By"
+msgstr "Regrouper par"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__activity_ids
+msgid "History of latest intercepted and redirected activities"
+msgstr "Historique des dernières activités interceptées et redirigées"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_search_view
+msgid "Inactive"
+msgstr "Inactive"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__activity_ids
+msgid "Intercepted Activities"
+msgstr "Activités interceptées"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: mail_activity_redirection
+#: model:ir.model,name:mail_activity_redirection.model_mail_activity_redirection
+msgid "Mail Activity Redirection"
+msgstr "Redirection des activités"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.res_config_settings_form_view
+msgid "Manage redirections"
+msgstr "Gérer les redirections"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__model_ids
+msgid "Models"
+msgstr "Modèles"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__model_ids
+msgid "Models targeted by these activities like _name class attribute"
+msgstr "Nom du modèle ciblé par ces activités comme visible dans l'attribut de classe \"_name\""
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__name
+msgid "Name"
+msgstr "Nom"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__qweb_templates
+msgid "QWeb Templates"
+msgstr "Vues QWeb"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.res_config_settings_form_view
+msgid "Redirect activities to a specific user"
+msgstr "Redirige les activités vers un utilisateur spécifique"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__regex_pattern
+msgid "RegEx"
+msgstr "Regex"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__regex_pattern
+msgid "Regular Expression used to parse activity note"
+msgstr "Expression régulière utilisée pour analyser le message de l'activité"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__sequence
+msgid "Sequence"
+msgstr "Séquence"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_search_view
+msgid "Show inactive rules"
+msgstr "Afficher les règles inactives"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,help:mail_activity_redirection.field_mail_activity_redirection__qweb_templates
+msgid "Templates used to render activity note"
+msgstr "Vues utilisées pour faire le rendu du message de l'activité"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_form_view
+msgid "Test your expression on"
+msgstr "Tester votre expression sur"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__user_id
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_search_view
+msgid "User"
+msgstr "Utilisateur"
+
+#. module: mail_activity_redirection
+#: model:ir.model.fields,field_description:mail_activity_redirection.field_mail_activity_redirection__initial_user_ids
+msgid "Users initially targeted"
+msgstr "Utilisateurs initialement visés"
+
+#. module: mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:mail_activity_redirection.mail_activity_redirection_form_view
+msgid "regex101.com"
+msgstr "regex101.com"
+
+#~ msgid "Activity Type Xmlid"
+#~ msgstr "Type d'activité (xml-id)"
+
+#~ msgid "Activity XML ID"
+#~ msgstr "Identification XML de l'activité"
+
+#~ msgid "Exact XML ID name coded like module_name.template_name"
+#~ msgstr "Nom d’identification XML exact codé de la manière suivante module_name.template_name"
+
+#, fuzzy
+#~ msgid "Mail Activity Redirections Redirections"
+#~ msgstr "Redirections des exceptions commerciales"
+
+#~ msgid "Business Exception"
+#~ msgstr "Exception commerciale"
+
+#~ msgid "Business Exceptions"
+#~ msgstr "Exceptions commerciales"
+
+#~ msgid "Production Order"
+#~ msgstr "Ordre de fabrication"
+
+#~ msgid "Purchase Order"
+#~ msgstr "Commande fournisseur"
+
+#~ msgid "Sale Order"
+#~ msgstr "Bon de commande"
+
+#~ msgid "Sales Order Line"
+#~ msgstr "Ligne de bons de commande"
+
+#~ msgid "Transfer"
+#~ msgstr "Transfert"
+
+#~ msgid "Show active rules"
+#~ msgstr "Afficher les règles actives"

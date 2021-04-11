@@ -1,0 +1,246 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* test_mail_activity_redirection
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-04-11 21:41+0000\n"
+"PO-Revision-Date: 2021-04-11 21:41+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__active
+msgid "Active"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model,name:test_mail_activity_redirection.model_mail_test_activity_alt
+msgid "Activity Model"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:test_mail_activity_redirection.act_template_2
+msgid "Duis aute irure dolor in reprehenderit in voluptate velit esse\n"
+"                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat\n"
+"                cupidatat non proident, sunt in culpa qui officia deserunt\n"
+"                mollit anim id est laborum."
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__email_from
+msgid "Email From"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:test_mail_activity_redirection.act_template_1
+msgid "First sample activity message:"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_channel_ids
+msgid "Followers (Channels)"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__id
+msgid "ID"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__message_unread
+msgid "If checked new messages require your attention."
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:test_mail_activity_redirection.act_template_1
+msgid "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed\n"
+"                do eiusmod tempor incididunt ut labore et dolore magna aliqua.\n"
+"                Ut enim ad minim veniam, quis nostrud exercitation ullamco\n"
+"                laboris nisi ut aliquip ex ea commodo consequat."
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__name
+msgid "Name"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_has_error_counter
+msgid "Number of error"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__message_unread_counter
+msgid "Number of unread messages"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: selection:mail.test.activity.alt,activity_state:0
+msgid "Overdue"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: selection:mail.test.activity.alt,activity_state:0
+msgid "Planned"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model_terms:ir.ui.view,arch_db:test_mail_activity_redirection.act_template_2
+msgid "Second sample activity message:"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,help:test_mail_activity_redirection.field_mail_test_activity_alt__activity_state
+msgid "Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: selection:mail.test.activity.alt,activity_state:0
+msgid "Today"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_unread
+msgid "Unread Messages"
+msgstr ""
+
+#. module: test_mail_activity_redirection
+#: model:ir.model.fields,field_description:test_mail_activity_redirection.field_mail_test_activity_alt__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr ""
+

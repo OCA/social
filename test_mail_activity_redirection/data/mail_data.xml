@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="act_template_1" name="Message: 1st sample">
+        <div>
+            <p>
+                First sample activity message:
+            </p>
+            <div class="mt16">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                laboris nisi ut aliquip ex ea commodo consequat. 
+            </div>
+        </div>
+    </template>
+
+    <template id="act_template_2" name="Message: 2nd sample">
+        <div>
+            <p>
+                Second sample activity message:
+            </p>
+            <div class="mt16">
+                Duis aute irure dolor in reprehenderit in voluptate velit esse
+                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
+                cupidatat non proident, sunt in culpa qui officia deserunt
+                mollit anim id est laborum.
+            </div>
+        </div>
+    </template>
+
+</odoo>

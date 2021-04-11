@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="mail_activity_redirection_tree_view" >
+        <field name="name">mail.activity.redirection.tree@mail_activity_redirection</field>
+        <field name="model">mail.activity.redirection</field>
+        <field name="arch" type="xml">
+            <tree string="Activities Redirections">
+                <field name="sequence" widget='handle'/>
+                <field name="name"/>
+                <field name="user_id"/>
+                <field name="model_ids"/>
+                <field name="activity_type_ids"/>
+                <field name="qweb_templates"/>
+                <field name="regex_pattern"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_activity_redirection_form_view" >
+        <field name="name">mail.activity.redirection.form@mail_activity_redirection</field>
+        <field name="model">mail.activity.redirection</field>
+        <field name="arch" type="xml">
+            <form string="Activities Redirection">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button 
+                            name="toggle_active" 
+                            type="object"
+                            class="oe_stat_button" 
+                            icon="fa-archive">
+                            <field name="active" widget="boolean_button" options='{"terminology": "archive"}'/>
+                        </button>
+                    </div>
+                    <group name="head">
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name"/>
+                            </h1>
+                        </div>
+                    </group>
+                    <group>
+                        <field name="sequence"/>
+                        <field name="user_id"/>
+                    </group>
+                    <group>
+                        <field name="initial_user_ids"/>
+                        <field name="model_ids"/>
+                        <field name="activity_type_ids"/>
+                        <field name="qweb_templates"/>
+                        <field name="regex_pattern"/>
+                    </group>
+                    <div>
+                        Test your expression on <a href="https://regex101.com/">regex101.com</a>
+                    </div>
+                    <group>
+                        <field name="activity_ids">
+                            <tree>
+                                <field name="create_date"/>
+                                <field name="res_name"/>
+                                <field name="activity_type_id"/>
+                                <field name="summary"/>
+                                <field name="date_deadline"/>
+                            </tree>
+                        </field>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="mail_activity_redirection_search_view">
+        <field name="name">mail.activity.redirection.search@mail_activity_redirection</field>
+        <field name="model">mail.activity.redirection</field>
+        <field name="arch" type="xml">
+            <search string="Activities Redirections">
+                <field name="user_id"/>
+                <field name="initial_user_ids"/>
+                <field name="model_ids"/>
+                <field name="activity_type_ids"/>
+                <field name="qweb_templates"/>
+                <field name="regex_pattern"/>
+                <separator/>
+                <filter name="inactive" string="Inactive" domain="[('active', '=', False)]" help="Show inactive rules"/>
+                <group string="Group By" name="groupby">
+                    <filter string="User" name="groupby_user_id" context="{'group_by':'user_id'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="act_window_mail_activity_redirection" >
+        <field name="name">Activities Redirections</field>
+        <field name="res_model">mail.activity.redirection</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="mail_activity_redirection_tree_view"/>
+        <field name="search_view_id" ref="mail_activity_redirection_search_view"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_window_view_mail_activity_redirection_tree" >
+        <field name="sequence" eval="1"/>
+        <field name="view_mode">tree</field>
+        <field name="view_id" ref="mail_activity_redirection_tree_view"/>
+        <field name="act_window_id" ref="act_window_mail_activity_redirection"/>
+    </record>
+
+    <record model="ir.actions.act_window.view" id="act_window_view_mail_activity_redirection_form" >
+        <field name="sequence" eval="2"/>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="mail_activity_redirection_form_view"/>
+        <field name="act_window_id" ref="act_window_mail_activity_redirection"/>
+    </record>
+
+</odoo>
