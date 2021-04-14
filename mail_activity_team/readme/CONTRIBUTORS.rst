@@ -4,3 +4,6 @@
   * Miquel Raïch (miquel.raich@eficent.com)
 
 * Enric Tobella <etobella@creublanca.es>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * David Vidal
