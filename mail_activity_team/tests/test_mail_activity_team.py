@@ -179,3 +179,13 @@ class TestMailActivityTeam(TransactionCase):
         self.act2.team_id = self.team2
         self.team2.member_ids = [(3, self.act2.user_id.id)]
         self.act2._onchange_team_id()
+
+    def test_schedule_activity(self):
+        """Correctly assign teams to auto scheduled activities. Those won't
+        trigger onchanges and could raise constraints and team missmatches"""
+        partner_record = self.employee.partner_id.sudo(self.employee.id)
+        activity = partner_record.activity_schedule(
+            user_id=self.employee2.id,
+            activity_type_id=self.env.ref("mail.mail_activity_data_call").id,
+        )
+        self.assertEqual(activity.team_id, self.team2)
