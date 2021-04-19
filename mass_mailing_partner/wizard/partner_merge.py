@@ -9,8 +9,10 @@ class BasePartnerMergeAutomaticWizard(models.TransientModel):
 
     def _merge(self, partner_ids, dst_partner=None, extra_checks=True):
         if dst_partner:
-            contacts = self.env["mailing.contact"].search(
-                [("partner_id", "in", partner_ids)]
+            contacts = (
+                self.env["mailing.contact"]
+                .sudo()
+                .search([("partner_id", "in", partner_ids)])
             )
             if contacts:
                 contacts = contacts.sorted(
