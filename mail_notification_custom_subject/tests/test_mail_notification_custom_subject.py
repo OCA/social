@@ -140,6 +140,7 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         self.assertEquals(mail_message_1.subject, "Test and something more")
 
     def test_bad_template_does_not_break(self):
+        """Create template with error (obaject) to test error."""
         self.env["mail.message.custom.subject"].create(
             {
                 "name": "Test bad template 1",
