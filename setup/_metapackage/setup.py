@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo10-addon-mail_debrand',
         'odoo10-addon-mail_digest',
         'odoo10-addon-mail_drop_target',
+        'odoo10-addon-mail_embed_image',
         'odoo10-addon-mail_follower_custom_notification',
         'odoo10-addon-mail_footer_notified_partner',
         'odoo10-addon-mail_force_queue',
