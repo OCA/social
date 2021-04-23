@@ -29,6 +29,7 @@ addon | version | summary
 [mail_footer_notified_partner](mail_footer_notified_partner/) | 12.0.1.0.0 | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_full_expand](mail_full_expand/) | 12.0.1.0.0 | Expand mail in a big window
 [mail_history](mail_history/) | 12.0.1.0.0 | Module to see old messages
+[mail_improved_tracking_value](mail_improved_tracking_value/) | 12.0.1.0.0 | Improves tracking changed values for certain type of fields.Adds a user-friendly view to consult them.
 [mail_inline_css](mail_inline_css/) | 12.0.1.0.0 | Convert style tags in inline style in your mails
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 12.0.1.0.0 | Apply a custom subject to mail notifications
 [mail_optional_autofollow](mail_optional_autofollow/) | 12.0.1.0.0 | Choose if you want to automatically add new recipients as followers on mail.compose.message
