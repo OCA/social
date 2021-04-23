@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo12-addon-mail_footer_notified_partner',
         'odoo12-addon-mail_full_expand',
         'odoo12-addon-mail_history',
+        'odoo12-addon-mail_improved_tracking_value',
         'odoo12-addon-mail_inline_css',
         'odoo12-addon-mail_notification_custom_subject',
         'odoo12-addon-mail_optional_autofollow',
