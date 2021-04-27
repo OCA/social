@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="reply_template" model="mail.template">
+        <field name="name">Reply</field>
+        <field name="subject">Re: ${object.subject}</field>
+        <field name="use_default_to" eval="True"/>
+        <field name="model_id" ref="mail.model_mail_message"/>
+        <field name="body_html"><![CDATA[
+            <div>
+            </div>
+            <br/>
+            <blockquote style="padding-right:0px; padding-left:5px; border-left-color: #000; margin-left:5px; margin-right:0px;border-left-width: 2px; border-left-style:solid">
+            From: ${object.email_from}<br/>
+            Date: ${object.date}<br/>
+            Subject: ${object.subject}<br/>
+            ${object.body | safe}
+            </blockquote>
+        ]]></field>
+    </record>
+</odoo>
