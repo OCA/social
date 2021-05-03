@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data noupdate="0">
+    <data>
 
         <!-- Message with CC -->
         <record id="mail_message_cc" model="mail.message">
