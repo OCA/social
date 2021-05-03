@@ -22,7 +22,7 @@ class MailThread(models.AbstractModel):
 
     def _get_failed_message_domain(self):
         """Domain used to display failed messages on the 'failed_messages'
-           widget"""
+        widget"""
         failed_states = self.env["mail.message"].get_failed_states()
         return [
             ("mail_tracking_needs_action", "=", True),
