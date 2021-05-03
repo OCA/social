@@ -1,6 +1,6 @@
 /* Copyright 2019 Alexandre Díaz
    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
-odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
+odoo.define("mail_tracking.FailedMessageDiscuss", function (require) {
     "use strict";
 
     // To be considered:
@@ -28,7 +28,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @returns {Boolean}
          */
-        isFailed: function() {
+        isFailed: function () {
             return false;
         },
     });
@@ -39,7 +39,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        init: function(parent, data) {
+        init: function (parent, data) {
             this._isFailedMessage = data.is_failed_message;
             return this._super.apply(this, arguments);
         },
@@ -50,7 +50,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        isFailed: function() {
+        isFailed: function () {
             return _.contains(this._threadIDs, "mailbox_failed");
         },
 
@@ -59,7 +59,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @param {Boolean} failed
          */
-        setFailed: function(failed) {
+        setFailed: function (failed) {
             if (failed) {
                 this._addThread("mailbox_failed");
             } else {
@@ -72,7 +72,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _processMailboxes: function() {
+        _processMailboxes: function () {
             this.setFailed(this._isFailedMessage);
             return this._super.apply(this, arguments);
         },
@@ -84,7 +84,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _handlePartnerNotification: function(data) {
+        _handlePartnerNotification: function (data) {
             if (data.type === "toggle_tracking_status") {
                 this._handleChangeTrackingNeedsActionNotification(data);
             } else {
@@ -104,11 +104,11 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @private
          * @param {Object} data
          */
-        _handleChangeTrackingNeedsActionNotification: function(data) {
+        _handleChangeTrackingNeedsActionNotification: function (data) {
             var self = this;
             var failed = this.getMailbox("failed");
-            _.each(data.message_ids, function(messageID) {
-                var message = _.find(self._messages, function(msg) {
+            _.each(data.message_ids, function (messageID) {
+                var message = _.find(self._messages, function (msg) {
                     return msg.getID() === messageID;
                 });
                 if (message) {
@@ -149,7 +149,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @private
          * @returns {Object}
          */
-        _sidebarQWebParams: function() {
+        _sidebarQWebParams: function () {
             var failed = this.call("mail_service", "getMailbox", "failed");
             return {
                 activeThreadID: this._thread ? this._thread.getID() : undefined,
@@ -163,7 +163,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _renderSidebar: function() {
+        _renderSidebar: function () {
             var $sidebar = this._super.apply(this, arguments);
             // Because Odoo implementation isn't designed to be inherited
             // properly, we inject 'failed' button using jQuery.
@@ -182,7 +182,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _renderSidebarMailboxes: function() {
+        _renderSidebarMailboxes: function () {
             this._super.apply(this, arguments);
             this.$(".o_mail_discuss_sidebar_mailboxes").append(
                 QWeb.render("mail_tracking.SidebarFailed", this._sidebarQWebParams())
@@ -194,7 +194,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _renderButtons: function() {
+        _renderButtons: function () {
             this._super.apply(this, arguments);
             this.$btn_set_all_reviewed = this.$buttons.find(
                 ".o_mail_discuss_button_set_all_reviewed"
@@ -212,7 +212,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _updateControlPanelButtons: function(thread) {
+        _updateControlPanelButtons: function (thread) {
             this.$btn_set_all_reviewed
                 .toggleClass("d-none", thread.getID() !== "mailbox_failed")
                 .toggleClass("d-md-inline-block", thread.getID() === "mailbox_failed");
@@ -227,7 +227,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _updateButtonStatus: function(disabled, type) {
+        _updateButtonStatus: function (disabled, type) {
             if (this._thread.getID() === "mailbox_failed") {
                 this.$btn_set_all_reviewed.toggleClass("disabled", disabled);
                 // Display Rainbowman when all failed messages are reviewed
@@ -247,15 +247,15 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _onMessageUpdated: function(message, type) {
+        _onMessageUpdated: function (message, type) {
             var self = this;
             var currentThreadID = this._thread.getID();
             if (currentThreadID === "mailbox_failed" && !message.isFailed()) {
-                this._thread.fetchMessages(this.domain).then(function() {
+                this._thread.fetchMessages(this.domain).then(function () {
                     var options = self._getThreadRenderingOptions();
                     self._threadWidget
                         .removeMessageAndRender(message.getID(), self._thread, options)
-                        .then(function() {
+                        .then(function () {
                             self._updateButtonStatus(!self._thread.hasMessages(), type);
                         });
                 });
@@ -273,7 +273,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _getThreadRenderingOptions: function() {
+        _getThreadRenderingOptions: function () {
             var values = this._super.apply(this, arguments);
             if (this._thread.getID() === "mailbox_failed") {
                 values.displayEmailIcons = true;
@@ -289,7 +289,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _startListening: function() {
+        _startListening: function () {
             this._super.apply(this, arguments);
             this.call("mail_service", "getMailBus").on(
                 "update_failed",
@@ -305,7 +305,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @private
          * @param {Event} event
          */
-        _onRetryFailedMessage: function(event) {
+        _onRetryFailedMessage: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data("message-id");
             this.do_action("mail.mail_resend_message_action", {
@@ -322,7 +322,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @param {Event} event
          * @returns {Promise}
          */
-        _onMarkFailedMessageReviewed: function(event) {
+        _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data("message-id");
             return this._rpc({
@@ -338,7 +338,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @private
          */
-        _onSetAllAsReviewedClicked: function() {
+        _onSetAllAsReviewedClicked: function () {
             var self = this;
             var failed = this.call("mail_service", "getMailbox", "failed");
             var failed_counter = failed.getMailboxCounter();
@@ -351,7 +351,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
                     failed_counter
                 );
                 Dialog.confirm(this, promptText, {
-                    confirm_callback: function() {
+                    confirm_callback: function () {
                         self._thread.setAllMessagesAsReviewed();
                     },
                 });
@@ -365,7 +365,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _updateMailboxesFromServer: function(data) {
+        _updateMailboxesFromServer: function (data) {
             this._super.apply(this, arguments);
             this._addMailbox({
                 id: "failed",
@@ -381,7 +381,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          *
          * @override
          */
-        _getThreadDomain: function() {
+        _getThreadDomain: function () {
             if (this._id === "mailbox_failed") {
                 return [["is_failed_message", "=", true]];
             }
@@ -398,7 +398,7 @@ odoo.define("mail_tracking.FailedMessageDiscuss", function(require) {
          * @returns {$.Promise} resolved when all messages have been marked as
          *   reviewed on the server
          */
-        setAllMessagesAsReviewed: function() {
+        setAllMessagesAsReviewed: function () {
             if (this._id === "mailbox_failed" && this.getMailboxCounter() > 0) {
                 return this._rpc({
                     model: "mail.message",
