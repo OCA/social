@@ -1,6 +1,6 @@
 /* Copyright 2019 Alexandre Díaz
    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
-odoo.define("mail_tracking.FailedMessageThread", function(require) {
+odoo.define("mail_tracking.FailedMessageThread", function (require) {
     "use strict";
 
     var AbstractField = require("web.AbstractField");
@@ -35,9 +35,9 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
                 args: [ids],
                 context: context || widget.getSession().user_context,
             })
-            .then(function(messages) {
+            .then(function (messages) {
                 // Convert date to moment
-                _.each(messages, function(msg) {
+                _.each(messages, function (msg) {
                     msg.date = moment(time.auto_str_to_date(msg.date));
                     msg.hour = utils.timeFromNow(msg.date);
                 });
@@ -54,7 +54,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @param {String} fieldName
          * @returns {Array}
          */
-        _fetchSpecialFailedMessages: function(record, fieldName) {
+        _fetchSpecialFailedMessages: function (record, fieldName) {
             var localID =
                 record._changes && fieldName in record._changes
                     ? record._changes[fieldName]
@@ -76,7 +76,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          *
          * @override
          */
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             this.failed_messages = this.record.specialData[this.name] || [];
         },
@@ -86,7 +86,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          *
          * @override
          */
-        start: function() {
+        start: function () {
             this._super.apply(this, arguments);
             this.call("bus_service", "onNotification", this, this._onNotification);
         },
@@ -97,7 +97,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @returns {Object}
          */
-        _failedItemsQWebParams: function() {
+        _failedItemsQWebParams: function () {
             return {
                 failed_messages: this.failed_messages,
                 nbFailedMessages: this.failed_messages.length,
@@ -109,7 +109,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
         /**
          * @private
          */
-        _render: function() {
+        _render: function () {
             if (this.failed_messages.length) {
                 this.$el.html(
                     QWeb.render(
@@ -128,7 +128,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @param {Object} record
          */
-        _reset: function(record) {
+        _reset: function (record) {
             this._super.apply(this, arguments);
             this.failed_messages = this.record.specialData[this.name] || [];
             this.res_id = record.res_id;
@@ -140,7 +140,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @param {Array} fieldsToReload
          */
-        _reload: function(fieldsToReload) {
+        _reload: function (fieldsToReload) {
             this.trigger_up("reload_mail_fields", fieldsToReload);
         },
 
@@ -151,7 +151,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @param {Int} id
          * @returns {Promise}
          */
-        _markFailedMessageReviewed: function(id) {
+        _markFailedMessageReviewed: function (id) {
             return this._rpc({
                 model: "mail.message",
                 method: "set_need_action_done",
@@ -169,9 +169,9 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @param {Array} notifs
          */
-        _onNotification: function(notifs) {
+        _onNotification: function (notifs) {
             var self = this;
-            _.each(notifs, function(notif) {
+            _.each(notifs, function (notif) {
                 var model = notif[0][1];
                 if (model === "res.partner") {
                     var data = notif[1];
@@ -190,7 +190,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @param {Event} event
          */
-        _onRetryFailedMessage: function(event) {
+        _onRetryFailedMessage: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data("message-id");
             this.do_action("mail.mail_resend_message_action", {
@@ -206,7 +206,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @param {Event} event
          */
-        _onMarkFailedMessageReviewed: function(event) {
+        _onMarkFailedMessageReviewed: function (event) {
             event.preventDefault();
             var messageID = $(event.currentTarget).data("message-id");
             this._markFailedMessageReviewed(messageID).then(
@@ -225,7 +225,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          *
          * @override
          */
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             var fieldsInfo = this.fieldsInfo[this.viewType];
             for (var fieldName in fieldsInfo) {
@@ -254,7 +254,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          *
          * @override
          */
-        init: function(parent, record, mailFields, options) {
+        init: function (parent, record, mailFields, options) {
             this._super.apply(this, arguments);
             // Initialize mail_failed_message widget
             if (mailFields.mail_failed_message) {
@@ -273,9 +273,9 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          * @private
          * @returns {Promise}
          */
-        _render: function() {
+        _render: function () {
             var self = this;
-            return this._super.apply(this, arguments).then(function() {
+            return this._super.apply(this, arguments).then(function () {
                 if (self.fields.failed_message) {
                     self.fields.failed_message.$el.insertBefore(
                         self.$el.find(".o_mail_thread")
@@ -289,7 +289,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          *
          * @override
          */
-        _onReloadMailFields: function(event) {
+        _onReloadMailFields: function (event) {
             if (this.fields.failed_message && event.data.failed_message) {
                 this.trigger_up("reload", {
                     fieldNames: [this.fields.failed_message.name],
@@ -309,7 +309,7 @@ odoo.define("mail_tracking.FailedMessageThread", function(require) {
          *
          * @override
          */
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
             this._enabledOptions.displayRetryButton = true;
             this._enabledOptions.displayReviewedButton = true;

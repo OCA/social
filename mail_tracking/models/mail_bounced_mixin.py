@@ -5,7 +5,7 @@ from odoo import fields, models
 
 
 class MailBouncedMixin(models.AbstractModel):
-    """ A mixin class to use if you want to add is_bounced flag on a model.
+    """A mixin class to use if you want to add is_bounced flag on a model.
     The field '_primary_email' must be overridden in the model that inherit
     the mixin and must contain the email field of the model.
     """
