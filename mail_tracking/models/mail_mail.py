@@ -30,7 +30,7 @@ class MailMail(models.Model):
 
     def _send_prepare_values(self, partner=None):
         """Creates the mail.tracking.email record and adds the image tracking
-           to the email"""
+        to the email"""
         email = super()._send_prepare_values(partner=partner)
         vals = self._tracking_email_prepare(partner, email)
         tracking_email = self.env["mail.tracking.email"].sudo().create(vals)
