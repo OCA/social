@@ -2,7 +2,7 @@
    Copyright 2018 David Vidal - <david.vidal@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
 
-odoo.define("mail_tracking.partner_tracking", function(require) {
+odoo.define("mail_tracking.partner_tracking", function (require) {
     "use strict";
 
     var core = require("web.core");
@@ -19,7 +19,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          *
          * @returns {Boolean}
          */
-        hasPartnerTrackings: function() {
+        hasPartnerTrackings: function () {
             return false;
         },
 
@@ -28,13 +28,13 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          *
          * @returns {Boolean}
          */
-        hasEmailCc: function() {
+        hasEmailCc: function () {
             return false;
         },
     });
 
     Message.include({
-        init: function(parent, data) {
+        init: function (parent, data) {
             this._super.apply(this, arguments);
             this._partnerTrackings = data.partner_trackings || [];
             this._emailCc = data.email_cc || [];
@@ -47,7 +47,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          * @override
          * @returns {Boolean}
          */
-        hasPartnerTrackings: function() {
+        hasPartnerTrackings: function () {
             return _.some(this._partnerTrackings);
         },
 
@@ -56,7 +56,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          *
          * @returns {Boolean}
          */
-        hasEmailCc: function() {
+        hasEmailCc: function () {
             return _.some(this._emailCc);
         },
 
@@ -67,7 +67,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          * @override
          * @returns {Object[]}
          */
-        getPartnerTrackings: function() {
+        getPartnerTrackings: function () {
             if (!this.hasPartnerTrackings()) {
                 return [];
             }
@@ -80,7 +80,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          *
          * @returns {Array}
          */
-        getEmailCc: function() {
+        getEmailCc: function () {
             if (!this.hasEmailCc()) {
                 return [];
             }
@@ -94,16 +94,16 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
          * @param {String} email
          * @returns {Boolean}
          */
-        isEmailCc: function(email) {
+        isEmailCc: function (email) {
             if (!this.hasEmailCc()) {
                 return false;
             }
-            return _.some(this._emailCc, function(item) {
+            return _.some(this._emailCc, function (item) {
                 return item[0] === email;
             });
         },
 
-        toggleTrackingStatus: function() {
+        toggleTrackingStatus: function () {
             return this._rpc({
                 model: "mail.message",
                 method: "toggle_tracking_status",
@@ -117,7 +117,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
             "click .o_mail_action_tracking_partner": "on_tracking_partner_click",
             "click .o_mail_action_tracking_status": "on_tracking_status_click",
         }),
-        on_tracking_partner_click: function(event) {
+        on_tracking_partner_click: function (event) {
             var partner_id = this.$el.find(event.currentTarget).data("partner");
             var state = {
                 model: "res.partner",
@@ -137,7 +137,7 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
             };
             this.do_action(action);
         },
-        on_tracking_status_click: function(event) {
+        on_tracking_status_click: function (event) {
             var tracking_email_id = $(event.currentTarget).data("tracking");
             var state = {
                 model: "mail.tracking.email",
@@ -157,9 +157,9 @@ odoo.define("mail_tracking.partner_tracking", function(require) {
             };
             this.do_action(action);
         },
-        init: function() {
+        init: function () {
             this._super.apply(this, arguments);
-            this.action_manager = this.findAncestor(function(ancestor) {
+            this.action_manager = this.findAncestor(function (ancestor) {
                 return ancestor instanceof ActionManager;
             });
         },
