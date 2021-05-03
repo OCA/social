@@ -27,7 +27,8 @@ class MailMessage(models.Model):
         default=False,
     )
     is_failed_message = fields.Boolean(
-        compute="_compute_is_failed_message", search="_search_is_failed_message",
+        compute="_compute_is_failed_message",
+        search="_search_is_failed_message",
     )
 
     @api.model
@@ -258,7 +259,7 @@ class MailMessage(models.Model):
 
     def get_failed_messages(self):
         """Returns the list of failed messages to be used by the
-           failed_messages widget"""
+        failed_messages widget"""
         return [
             msg._prepare_dict_failed_message()
             for msg in self.sorted("date", reverse=True)
@@ -287,9 +288,9 @@ class MailMessage(models.Model):
 
     @api.model
     def set_all_as_reviewed(self):
-        """ Sets all messages in the given domain as reviewed.
+        """Sets all messages in the given domain as reviewed.
 
-        Used by Discuss """
+        Used by Discuss"""
 
         unreviewed_messages = self.search([("is_failed_message", "=", True)])
         unreviewed_messages.write({"mail_tracking_needs_action": False})
