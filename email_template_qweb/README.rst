@@ -74,6 +74,7 @@ Contributors
     * Ernesto Tejeda
 
 * Thomas Fossoul (thomas@niboo.com)
+* Simone Orsi <simahawk@gmail.com>
 
 Maintainers
 ~~~~~~~~~~~
