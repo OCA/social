@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-email_template_qweb',
         'odoo14-addon-mail_debrand',
+        'odoo14-addon-mail_outbound_static',
         'odoo14-addon-mail_preview_base',
         'odoo14-addon-mail_send_copy',
     ],
