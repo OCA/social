@@ -21,6 +21,7 @@ addon | version | summary
 --- | --- | ---
 [email_template_qweb](email_template_qweb/) | 14.0.1.0.0 | Use the QWeb templating mechanism for emails
 [mail_debrand](mail_debrand/) | 14.0.1.0.1 | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
+[mail_outbound_static](mail_outbound_static/) | 14.0.1.0.0 | Allows you to configure the from header for a mail server.
 [mail_preview_base](mail_preview_base/) | 14.0.1.0.0 | Base to add more previewing options
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.0 | Send to you a copy of each mail sent by Odoo
 
