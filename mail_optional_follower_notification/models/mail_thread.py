@@ -8,8 +8,8 @@ class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
     def _notify_compute_recipients(self, message, msg_vals):
-        """ Compute recipients to notify based on subtype and followers. This
-        method returns data structured as expected for ``_notify_recipients``. """
+        """Compute recipients to notify based on subtype and followers. This
+        method returns data structured as expected for ``_notify_recipients``."""
         recipient_data = super()._notify_compute_recipients(message, msg_vals)
         if "notify_followers" in self.env.context and not self.env.context.get(
             "notify_followers", False
