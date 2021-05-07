@@ -1,10 +1,10 @@
 # Copyright 2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests.common import SavepointCase
 
 
-class TestMailOptionalFollowernotifications(common.SavepointCase):
+class TestMailOptionalFollowernotifications(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -20,6 +20,7 @@ class TestMailOptionalFollowernotifications(common.SavepointCase):
                 "default_model": "res.partner",
                 "default_res_id": cls.partner_01.id,
                 "default_composition_mode": "comment",
+                "test_optional_follow_notification": True,
             }
         )
         cls.mail_compose_context = ctx
