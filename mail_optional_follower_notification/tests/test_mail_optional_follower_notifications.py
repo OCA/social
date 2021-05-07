@@ -1,10 +1,10 @@
 # Copyright 2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests.common import SavepointCase
 
 
-class TestMailOptionalFollowernotifications(common.SavepointCase):
+class TestMailOptionalFollowernotifications(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
