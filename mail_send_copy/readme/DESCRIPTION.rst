@@ -1,5 +1,12 @@
-This module extends the functionality of Mail Module to allow users to
-receive each mail sent by Odoo, in BCC mode.
+
+This module extends the functionality of Mail Module adding sender in
+BBC field to receive a copy of each mail sent by Odoo.
+
+.. warning::
+
+  Sender can be different from the current user according email
+  template in use.
+
 
 Use Case
 --------
