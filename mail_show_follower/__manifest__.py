@@ -6,7 +6,7 @@
     "summary": "Show CC document followers in mails.",
     "version": "12.0.1.0.0",
     "category": "Mail",
-    "website": "https://www.sygel.es",
+    "website": "https://github.com/OCA/social",
     "author": "Sygel, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
