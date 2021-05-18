@@ -3,8 +3,6 @@
 # Copyright 2020 Onestein - Andrea Stirpe
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, models
-from lxml import etree, html
-import re
 
 
 class MailMail(models.AbstractModel):
