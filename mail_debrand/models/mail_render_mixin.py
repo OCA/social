@@ -16,12 +16,18 @@ class MailRenderMixin(models.AbstractModel):
         # value can be bytes type; ensure we get a proper string
         if type(value) is bytes:
             value = value.decode()
-        has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
+
+        # https://regex101.com/r/o01Rfz/3
+        has_odoo_link = re.search(r"(href\s*=\s*[\'\"]{1}(https?://)?(www|apps)?\.?odoo\.com(?!\.)\b)", value, flags=re.IGNORECASE)
         if has_odoo_link:
             tree = etree.HTML(
                 value
             )  # html with broken links   tree = etree.fromstring(value) just xml
-            odoo_achors = tree.xpath('//a[contains(@href,"odoo.com")]')
+
+            # https://regex101.com/r/o01Rfz/5
+            odoo_achors = tree.xpath(
+                '//a[re:test(@href,"(^(https?://)?(www|apps)?\\.?odoo\\.com(?!\\.)\\b)")]',
+                namespaces={'re': "http://exslt.org/regular-expressions"})
             for elem in odoo_achors:
                 parent = elem.getparent()
                 previous = elem.getprevious()
@@ -46,7 +52,8 @@ class MailRenderMixin(models.AbstractModel):
             # etree can return bytes; ensure we get a proper string
             if type(value) is bytes:
                 value = value.decode()
-        return re.sub("[^(<)(</)]odoo", "", value, flags=re.IGNORECASE)
+        # https://regex101.com/r/FLTxID/11
+        return re.sub(r"(\s?(?:https?://)?(?:apps\.|www\.|(?<![\.\-\w\n]))odoo\.com(?!\.)\b[^\s\"<>]*|(?<!<|/)odoo(?![\w\-\.]{2,99}))", "", value, flags=re.IGNORECASE)
 
     @api.model
     def _render_template(
