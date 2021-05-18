@@ -79,9 +79,9 @@ class MailRenderMixin(models.AbstractModel):
             template_src,
             model,
             res_ids,
-            engine="jinja",
-            add_context=None,
-            post_process=False,
+            engine=engine,
+            add_context=add_context,
+            post_process=post_process,
         )
 
         for key in res_ids:
