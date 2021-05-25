@@ -54,3 +54,14 @@ class TestMailDebrand(common.TransactionCase):
             ._render_template(paynow_arch, "ir.ui.view", [self.paynow_template])
         )
         self.assertNotIn("Aangeboden door", res)
+
+    def test_plaintext_email(self):
+        MailMessage = self.env["mail.mail"]
+        email_values = {
+            "email_from": "customer@example.com",
+            "subject": "Hello",
+            "email_to": "contact@example.com",
+            "reply_to": "contact@example.com",
+        }
+        # No exception expected
+        MailMessage.create(email_values)
