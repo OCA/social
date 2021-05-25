@@ -101,7 +101,9 @@ class MailMail(models.AbstractModel):
             values_list[index]["body_html"] = self.env[
                 "mail.render.mixin"
             ].remove_href_odoo(
-                values_list[index]["body_html"], remove_parent=0, remove_before=1
+                values_list[index].get("body_html", ""),
+                remove_parent=0,
+                remove_before=1,
             )
 
         return super().create(values_list)
