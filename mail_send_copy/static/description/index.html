@@ -368,8 +368,13 @@ ul.auto-toc {
 !! changes will be overwritten.                   !!
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external" href="https://github.com/OCA/social/tree/14.0/mail_send_copy"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external" href="https://translation.odoo-community.org/projects/social-14-0/social-14-0-mail_send_copy"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external" href="https://runbot.odoo-community.org/runbot/205/14.0"><img alt="Try me on Runbot" src="https://img.shields.io/badge/runbot-Try%20me-875A7B.png" /></a></p>
-<p>This module extends the functionality of Mail Module to allow users to
-receive each mail sent by Odoo, in BCC mode.</p>
+<p>This module extends the functionality of Mail Module adding sender in
+BBC field to receive a copy of each mail sent by Odoo.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">Sender can be different from the current user according email
+template in use.</p>
+</div>
 <div class="section" id="use-case">
 <h1>Use Case</h1>
 <p>This feature can be usefull for users:</p>
