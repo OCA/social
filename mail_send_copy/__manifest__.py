@@ -4,7 +4,7 @@
 {
     "name": "Mail - Send Email Copy",
     "summary": "Send to you a copy of each mail sent by Odoo",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Social Network",
     "author": "GRAP," "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
