@@ -17,9 +17,11 @@ except (ImportError, IOError) as err:  # pragma: no cover
 class MailTemplate(models.Model):
     _inherit = "mail.template"
 
-    def render_post_process(self, html):
-        html = super().render_post_process(html)
-        return self._premailer_apply_transform(html)
+    def _render_template_postprocess(self, rendered):
+        rendered = super()._render_template_postprocess(rendered)
+        for res_id, html in rendered.items():
+            rendered[res_id] = self._premailer_apply_transform(html)
+        return rendered
 
     def _premailer_apply_transform(self, html):
         if not html.strip():
