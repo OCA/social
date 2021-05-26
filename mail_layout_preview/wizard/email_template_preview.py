@@ -4,8 +4,8 @@
 from odoo import api, fields, models
 
 
-class TemplatePreview(models.TransientModel):
-    _inherit = "email_template.preview"
+class MailTemplatePreview(models.TransientModel):
+    _inherit = "mail.template.preview"
 
     _url_pattern = "/email-preview/{model}/{templ_id}/{rec_id}/"
 
@@ -13,14 +13,14 @@ class TemplatePreview(models.TransientModel):
         string="Full layout preview", compute="_compute_layout_preview_url"
     )
 
-    @api.depends("res_id")
+    @api.depends("resource_ref", "model_id", "mail_template_id")
     def _compute_layout_preview_url(self):
         for rec in self:
-            if self.env.context.get("template_id"):
+            if rec.mail_template_id:
                 rec.layout_preview_url = self._url_pattern.format(
                     model=rec.model_id.model,
-                    templ_id=self.env.context["template_id"],
-                    rec_id=rec.res_id,
+                    templ_id=rec.mail_template_id.id,
+                    rec_id=rec.resource_ref.id,
                 )
             else:
                 rec.layout_preview_url = ""
