@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -34,7 +34,12 @@ msgid "Copy the link"
 msgstr ""
 
 #. module: mail_layout_preview
-#: model:ir.model,name:mail_layout_preview.model_email_template_preview
+#: model:ir.model.fields,field_description:mail_layout_preview.field_mail_template_preview__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_layout_preview
+#: model:ir.model,name:mail_layout_preview.model_mail_template_preview
 msgid "Email Template Preview"
 msgstr ""
 
@@ -49,13 +54,23 @@ msgid "Find your template"
 msgstr ""
 
 #. module: mail_layout_preview
-#: model:ir.model.fields,field_description:mail_layout_preview.field_email_template_preview__layout_preview_url
+#: model:ir.model.fields,field_description:mail_layout_preview.field_mail_template_preview__layout_preview_url
 msgid "Full layout preview"
 msgstr ""
 
 #. module: mail_layout_preview
 #: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
 msgid "Here you find all the template for the given model."
+msgstr ""
+
+#. module: mail_layout_preview
+#: model:ir.model.fields,field_description:mail_layout_preview.field_mail_template_preview__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_layout_preview
+#: model:ir.model.fields,field_description:mail_layout_preview.field_mail_template_preview____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_layout_preview
