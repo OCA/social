@@ -16,7 +16,6 @@ class TestLayoutMixin(object):
             "subject": "Preview ${object.name}",
             "body_html": "<p>Hello ${object.name}</p>",
             "model_id": env["ir.model"]._get(model).id,
-            "user_signature": False,
         }
         vals.update(kw)
         return env["mail.template"].create(vals)
@@ -28,14 +27,17 @@ class TestLayoutPreview(SavepointCase, TestLayoutMixin):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.wiz_model = cls.env["email_template.preview"]
+        cls.wiz_model = cls.env["mail.template.preview"]
         cls.partner = cls.env.ref("base.res_partner_4")
         cls.tmpl = cls._create_template(cls.env, cls.partner._name)
 
     def test_wizard_preview_url(self):
-        wiz = self.wiz_model.with_context(
-            template_id=self.tmpl.id, default_res_id=self.partner.id
-        ).create({})
+        wiz = self.wiz_model.create(
+            {
+                "mail_template_id": self.tmpl.id,
+                "resource_ref": "{},{}".format(self.partner._name, self.partner.id),
+            }
+        )
         self.assertEqual(
             wiz.layout_preview_url,
             "/email-preview/res.partner/{}/{}/".format(self.tmpl.id, self.partner.id),
