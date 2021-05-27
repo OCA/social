@@ -6,14 +6,14 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
 
-    <act_window
-        id="action_partner_mail_list"
-        name="Add to mailing list"
-        res_model="partner.mail.list.wizard"
-        binding_model="res.partner"
-        target="new"
-        view_mode="form"
-    />
+    <record id="action_partner_mail_list" model="ir.actions.act_window">
+        <field name="name">Add to mailing list</field>
+        <field name="res_model">partner.mail.list.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="binding_view_types">list</field>
+    </record>
 
     <record model="ir.ui.view" id="partner_mail_list_wizard_form">
         <field name="name">partner.mail.list.form</field>
