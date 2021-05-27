@@ -32,6 +32,6 @@ class MailingTrace(models.Model):
 
     @api.model
     def create(self, vals):
-        stat = super(MailingTrace, self).create(vals)
+        stat = super().create(vals)
         stat.partner_link()
         return stat

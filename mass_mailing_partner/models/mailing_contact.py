@@ -56,7 +56,7 @@ class MailingContact(models.Model):
             subscription_list_ids=vals.get("subscription_list_ids", []),
             list_ids=vals.get("list_ids", []),
         )
-        return super(MailingContact, self).create(new_vals)
+        return super().create(new_vals)
 
     def write(self, vals):
         for contact in self:
