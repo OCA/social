@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <record model="ir.ui.view" id="email_template_preview_form">
+    <field name="model">mail.template.preview</field>
+    <field name="inherit_id" ref="mail.mail_template_preview_view_form" />
+    <field name="arch" type="xml">
+      <footer position="before">
+        <hr />
+        <label for="layout_preview_url" />
+        <field name="layout_preview_url" widget="url" />
+      </footer>
+    </field>
+  </record>
+</odoo>
