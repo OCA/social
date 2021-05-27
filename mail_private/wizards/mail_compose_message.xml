@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="email_compose_message_wizard_form">
+        <field name="name">mail.compose.message.form (in mail_private)</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form"/>
+        <field name="arch" type="xml">
+            <field name="subject" position="after">
+                <field name="mail_group_id"
+                       attrs="{'invisible': [('allow_private', '=', False)]}"
+                       domain="[('model_ids.model', '=', model), ('group_ids.users', '=', uid)]" widget="selection"/>
+                <field name="allow_private" invisible="1"/>
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>

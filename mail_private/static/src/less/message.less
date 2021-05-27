@@ -1,0 +1,18 @@
+.o_thread_tooltip_private_container {
+    .o_security_group_overlay {
+        display: none;
+        position: absolute;
+        background: @gray-lighter;
+        padding: 4px;
+        border: solid @gray-lighter 1px;
+        border-radius: 5px;
+        opacity: 0;
+        transition: opacity 0.5s;
+        overflow: hidden;
+        z-index: 20;
+    }
+    &:hover .o_security_group_overlay {
+        display: inline;
+        opacity: 1;
+    }
+}
