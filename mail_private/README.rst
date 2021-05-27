@@ -26,12 +26,30 @@ Mail Private
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This addon allows to define private groups on models.
-Then, you can define private messages only visible for members of the groups
+Then, you can define private messages only visible for members of message groups.
+Each model may have one or more visible groups.
 
 **Table of contents**
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+* Access in developer mode
+* Access to `Settings > Technical > Email > Mail Group`
+* Create a new group from on a model that has a thread and specify some
+  security groups
+
+Usage
+=====
+
+* Access a record from a model with at least one mail group defined
+* Try to send a message
+* A new button will be added that allows to set the message as private.
+  There will be as many buttons as groups you can use.
+* The message will only be visible by users that are on the group.
 
 Bug Tracker
 ===========
