@@ -10,10 +10,7 @@
     <record model="ir.ui.view" id="view_mail_mass_mailing_contact_tree">
             <field name="name">mailing.contact.tree.inherit</field>
             <field name="model">mailing.contact</field>
-            <field
-            name="inherit_id"
-            ref="mass_mailing.view_mail_mass_mailing_contact_tree"
-        />
+            <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree" />
             <field name="arch" type="xml">
                 <field name="email" position="after">
                     <field name="partner_id" />
@@ -24,10 +21,7 @@
     <record model="ir.ui.view" id="view_mail_mass_mailing_contact_form">
         <field name="name">mailing.contact.form.partner</field>
         <field name="model">mailing.contact</field>
-        <field
-            name="inherit_id"
-            ref="mass_mailing.view_mail_mass_mailing_contact_form"
-        />
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='email']/.." position="after">
                 <field name="partner_id" />
@@ -68,10 +62,7 @@
     <record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
         <field name="name">Add partner search field and group by</field>
         <field name="model">mailing.contact</field>
-        <field
-            name="inherit_id"
-            ref="mass_mailing.view_mail_mass_mailing_contact_search"
-        />
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_search" />
         <field name="arch" type="xml">
             <field name="name" position="after">
                 <field name="partner_id" />

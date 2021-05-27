@@ -71,7 +71,7 @@ class ResPartner(models.Model):
             partner.mass_mailing_stats_count = mapped_data.get(partner.id, 0)
 
     def write(self, vals):
-        res = super(ResPartner, self).write(vals)
+        res = super().write(vals)
         mm_vals = {}
         if vals.get("name"):
             mm_vals["name"] = vals["name"]
