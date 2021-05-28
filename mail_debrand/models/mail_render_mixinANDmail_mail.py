@@ -48,7 +48,7 @@ class MailRenderMixin(models.AbstractModel):
             # etree can return bytes; ensure we get a proper string
             if type(value) is bytes:
                 value = value.decode()
-        return re.sub("[^(<)(</)]odoo", "", value, flags=re.IGNORECASE)
+        return re.sub("[^</]odoo", "", value, flags=re.IGNORECASE)
 
     @api.model
     def _render_template(
