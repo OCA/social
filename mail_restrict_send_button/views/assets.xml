@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <template
+            id="assets_backend"
+            inherit_id="web.assets_backend"
+            name="mail assets"
+        >
+            <xpath expr="." position="inside">
+                <script
+                    src="/mail_restrict_send_button/static/src/js/chatter.js"
+                    type="text/javascript"
+                />
+            </xpath>
+        </template>
+    </data>
+</odoo>

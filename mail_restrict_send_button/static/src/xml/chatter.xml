@@ -1,0 +1,16 @@
+<templates xml:space="preserve">
+    <t t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
+        <xpath expr="//button[1]" position="replace">
+            <t t-if="chatter.isSendMessage">
+                <button
+                    class="btn btn-link o_ChatterTopbar_button o_ChatterTopbar_buttonSendMessage"
+                    t-att-class="{                         'o-active': chatter.isComposerVisible and chatter.composer and !chatter.composer.isLog,                         'o-bordered': chatter.hasExternalBorder,                     }"
+                    t-att-disabled="chatter.isDisabled"
+                    t-on-click="_onClickSendMessage"
+                    type="button"
+                >Send message
+                </button>
+            </t>
+        </xpath>
+    </t>
+</templates>
