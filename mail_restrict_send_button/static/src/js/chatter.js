@@ -2,7 +2,6 @@ odoo.define("mail_restrict_send_button/static/src/js/chatter.js", function (requ
     "use strict";
 
     const {registry} = require("mail/static/src/model/model_core.js");
-    const chatter = require("mail/static/src/models/chatter/chatter.js");
     const container = require("mail/static/src/components/chatter_container/chatter_container.js");
     const rpc = require("web.rpc");
     const {attr, many2one, one2one} = require("mail/static/src/model/model_field.js");
@@ -358,11 +357,12 @@ odoo.define("mail_restrict_send_button/static/src/js/chatter.js", function (requ
         const values = Object.assign({}, props);
         rpc.query({
             model: "mail.followers",
-            method: "check_user_group",
+            method: "check_can_send_message",
             args: [],
         }).then((result) => {
             values.isSendMessage = result;
             if (values.threadId === undefined) {
+                // eslint-disable-next-line no-undef
                 values.threadId = clear();
             }
             if (!this.chatter) {
