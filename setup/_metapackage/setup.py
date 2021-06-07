@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-mail_outbound_static',
         'odoo14-addon-mail_preview_base',
         'odoo14-addon-mail_send_copy',
+        'odoo14-addon-mass_mailing_partner',
     ],
     classifiers=[
         'Programming Language :: Python',
