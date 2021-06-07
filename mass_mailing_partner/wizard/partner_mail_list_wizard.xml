@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+     Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     Copyright 2015 Javier Iniesta <javieria@antiun.com>
+     Copyright 2020 Tecnativa - Manuel Calero
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record id="action_partner_mail_list" model="ir.actions.act_window">
+        <field name="name">Add to mailing list</field>
+        <field name="res_model">partner.mail.list.wizard</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="binding_view_types">list</field>
+    </record>
+
+    <record model="ir.ui.view" id="partner_mail_list_wizard_form">
+        <field name="name">partner.mail.list.form</field>
+        <field name="model">partner.mail.list.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Create contact mailing list">
+                <group>
+                    <field name="mail_list_id" />
+                </group>
+                <footer>
+                    <button
+                        string="Add contacts to mailing list"
+                        name="add_to_mail_list"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+</odoo>
