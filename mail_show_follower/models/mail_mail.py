@@ -5,7 +5,7 @@ class MailMail(models.Model):
     _inherit = "mail.mail"
 
     @api.multi
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
+    def send(self, auto_commit=False, raise_exception=False):
         plain_text = (
             '<div summary="o_mail_notification" style="padding: 0px; '
             'font-size: 10px;"><b>CC</b>: %s<hr style="background-color:'
@@ -68,7 +68,6 @@ class MailMail(models.Model):
                         # it is saved in the body_html field so that it does
                         # not appear in the odoo log
                         mail.body_html = final_cc + mail.body_html
-        return super(MailMail, self)._send(
-            auto_commit=auto_commit, raise_exception=raise_exception,
-            smtp_session=smtp_session
+        return super(MailMail, self).send(
+            auto_commit=auto_commit, raise_exception=raise_exception
         )
