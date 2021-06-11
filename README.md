@@ -43,7 +43,7 @@ addon | version | summary
 [mail_tracking](mail_tracking/) | 13.0.1.0.8 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 13.0.1.0.0 | Improve mass mailing email tracking
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.1.0.2 | Know and track (un)subscription reasons, GDPR compliant
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.2.0.0 | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_custom_unsubscribe_event](mass_mailing_custom_unsubscribe_event/) | 13.0.1.0.0 | Allow to unsubscribe discretely from an event
 [mass_mailing_event_registration_exclude](mass_mailing_event_registration_exclude/) | 13.0.1.0.0 | Link mass mailing with event for excluding recipients
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 13.0.1.0.1 | Mass mailing lists that get autopopulated
