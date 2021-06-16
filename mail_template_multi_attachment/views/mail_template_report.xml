@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="mail_template_report_form_view">
+    <field name="name">
+      mail.template.report.form (in mail_template_multi_attachment)
+    </field>
+    <field name="model">mail.template.report</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <group>
+            <group>
+              <field name="mail_template_id" />
+              <field name="model" invisible="True" />
+              <field name="report_template_id" domain="[('model','=',model)]" />
+              <field
+                                name="report_name"
+                                attrs="{'invisible':[('report_template_id','=',False)]}"
+                            />
+            </group>
+            <group />
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="mail_template_report_tree_view">
+    <field name="name">
+      mail.template.report.tree (in mail_template_multi_attachment)
+    </field>
+    <field name="model">mail.template.report</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="mail_template_id" />
+        <field name="model" invisible="True" />
+        <field name="report_template_id" domain="[('model','=',model)]" />
+        <field
+                    name="report_name"
+                    attrs="{'invisible':[('report_template_id','=',False)]}"
+                />
+      </tree>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="mail_template_report_tree_o2m_view">
+    <field name="name">
+      mail.template.report.tree (in mail_template_multi_attachment)
+    </field>
+    <field name="model">mail.template.report</field>
+    <field name="arch" type="xml">
+      <tree editable="bottom">
+        <field name="model" invisible="True" />
+        <field name="report_template_id" domain="[('model','=',model)]" />
+        <field
+                    name="report_name"
+                    attrs="{'invisible':[('report_template_id','=',False)]}"
+                />
+      </tree>
+    </field>
+  </record>
+</odoo>
