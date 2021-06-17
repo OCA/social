@@ -66,10 +66,16 @@ class MailActivity(models.Model):
             # (for example with exception type activity, with no backorder).
             # SUPERUSER is inactive and then even if you add it
             # to member_ids it's not taken account
-            # To not be blocked we must add it to constraint condition
-            if activity.user_id.id != SUPERUSER_ID and activity.team_id and \
-                    activity.user_id and \
-                    activity.user_id not in activity.team_id.member_ids:
+            # To not be blocked we must add it to constraint condition.
+            # We must consider also users that could be archived but come from
+            # an automatic scheduled activity
+            if (
+                activity.user_id.id != SUPERUSER_ID
+                and activity.team_id and activity.user_id
+                and activity.user_id not in activity.team_id.with_context(
+                    active_test=False
+                ).member_ids
+            ):
                 raise ValidationError(
                     _('The assigned user is not member of the team.'))
 
