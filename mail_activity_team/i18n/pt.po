@@ -191,7 +191,7 @@ msgid "Team:"
 msgstr "Equipa:"
 
 #. module: mail_activity_team
-#: code:addons/mail_activity_team/models/mail_activity.py:74
+#: code:addons/mail_activity_team/models/mail_activity.py:80
 #, python-format
 msgid "The assigned user is not member of the team."
 msgstr "O utilizador atribuído não é membro da equipa."
