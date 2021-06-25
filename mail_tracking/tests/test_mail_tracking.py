@@ -7,7 +7,6 @@ import time
 import mock
 import psycopg2
 import psycopg2.errorcodes
-from lxml import etree
 
 from odoo import http
 from odoo.tests.common import TransactionCase
@@ -577,21 +576,3 @@ class TestMailTracking(TransactionCase):
             self.assertEqual(b"NONE", none.response[0])
             none = controller.mail_tracking_event(db, "open")
             self.assertEqual(b"NONE", none.response[0])
-
-
-class TestMailTrackingViews(TransactionCase):
-    def test_fields_view_get(self):
-        result = self.env["res.partner"].fields_view_get(
-            view_id=self.env.ref("base.view_partner_form").id, view_type="form"
-        )
-        doc = etree.XML(result["arch"])
-        nodes = doc.xpath(
-            "//field[@name='failed_message_ids'" " and @widget='mail_failed_message']"
-        )
-        self.assertTrue(nodes)
-        result = self.env["res.partner"].fields_view_get(
-            view_id=self.env.ref("base.view_res_partner_filter").id, view_type="search"
-        )
-        doc = etree.XML(result["arch"])
-        nodes = doc.xpath("//filter[@name='failed_message_ids']")
-        self.assertTrue(nodes)
