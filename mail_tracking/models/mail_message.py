@@ -224,14 +224,13 @@ class MailMessage(models.Model):
 
         return list(filter(_filter_alias, mail_list))
 
-    @api.model
-    def _message_read_dict_postprocess(self, messages, message_tree):
+    def message_format(self):
         """Preare values to be used by the chatter widget"""
-        res = super()._message_read_dict_postprocess(messages, message_tree)
-        mail_message_ids = {m.get("id") for m in messages if m.get("id")}
+        res = super().message_format()
+        mail_message_ids = {m.get("id") for m in res if m.get("id")}
         mail_messages = self.browse(mail_message_ids)
         tracking_statuses = mail_messages.tracking_status()
-        for message_dict in messages:
+        for message_dict in res:
             mail_message_id = message_dict.get("id", False)
             if mail_message_id:
                 message_dict.update(tracking_statuses[mail_message_id])
