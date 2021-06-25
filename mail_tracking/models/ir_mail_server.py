@@ -13,9 +13,7 @@ class IrMailServer(models.Model):
     def _tracking_headers_add(self, tracking_email_id, headers):
         """Allow other addons to add its own tracking SMTP headers"""
         headers = headers or {}
-        headers["X-Odoo-Database"] = (
-            getattr(threading.currentThread(), "dbname", None),
-        )
+        headers["X-Odoo-Database"] = getattr(threading.currentThread(), "dbname", None)
         headers["X-Odoo-Tracking-ID"] = tracking_email_id
         return headers
 
@@ -23,7 +21,7 @@ class IrMailServer(models.Model):
         body = body or ""
         # https://regex101.com/r/lW4cB1/2
         match = re.search(r'<img[^>]*data-odoo-tracking-email=["\']([0-9]*)["\']', body)
-        return int(match.group(1)) if match and match.group(1) else False
+        return str(match.group(1)) if match and match.group(1) else False
 
     def build_email(
         self,

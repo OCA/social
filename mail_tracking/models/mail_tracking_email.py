@@ -9,6 +9,7 @@ import uuid
 from datetime import datetime
 
 from odoo import api, fields, models, tools
+from odoo.tools import email_split
 
 _logger = logging.getLogger(__name__)
 
@@ -203,15 +204,10 @@ class MailTrackingEmail(models.Model):
     @api.depends("recipient")
     def _compute_recipient_address(self):
         for email in self:
-            is_empty_recipient = not email.recipient or "<False>" in email.recipient
-            if not is_empty_recipient:
-                matches = re.search(r"<(.*@.*)>", email.recipient)
-                if matches:
-                    email.recipient_address = matches.group(1).lower()
-                else:
-                    email.recipient_address = email.recipient.lower()
-            else:
-                email.recipient_address = False
+            email.recipient_address = False
+            recipient_email = email_split(email.recipient)
+            if recipient_email:
+                email.recipient_address = recipient_email[0].lower()
 
     @api.depends("name", "recipient")
     def _compute_tracking_display_name(self):
