@@ -1,6 +1,7 @@
 # Copyright 2019 O4SB - Graeme Gellatly
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # Copyright 2020 Onestein - Andrea Stirpe
+# Copyright 2021 NextERP Romania
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import re
 
@@ -44,11 +45,15 @@ class MailRenderMixin(models.AbstractModel):
                         parent.getparent().remove(parent)
                     else:
                         parent.remove(elem)
+            odoo_achors = tree.xpath('//img[contains(@src,"odoo.com")]')
+            for elem in odoo_achors:
+                parent = elem.getparent()
+                parent.remove(elem)
             value = etree.tostring(tree, pretty_print=True, method="html")
             # etree can return bytes; ensure we get a proper string
             if type(value) is bytes:
                 value = value.decode()
-        return re.sub("[^</]odoo", "", value, flags=re.IGNORECASE)
+        return re.sub("[^</]odoo", " software ", value, flags=re.IGNORECASE)
 
     @api.model
     def _render_template(
@@ -79,9 +84,9 @@ class MailRenderMixin(models.AbstractModel):
             template_src,
             model,
             res_ids,
-            engine="jinja",
-            add_context=None,
-            post_process=False,
+            engine=engine,
+            add_context=add_context,
+            post_process=post_process,
         )
 
         for key in res_ids:
