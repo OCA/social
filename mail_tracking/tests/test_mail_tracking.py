@@ -138,7 +138,7 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is a test message</p>",
             }
         )
-        message._moderate_accept()
+        message.with_context(do_not_send_copy=True)._moderate_accept()
         # Search tracking created
         tracking_email = self.env["mail.tracking.email"].search(
             [
