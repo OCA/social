@@ -6,7 +6,7 @@ from odoo.tests.common import TransactionCase
 
 class TestBaseSearchMailContent(TransactionCase):
     def setUp(self):
-        super(TestBaseSearchMailContent, self).setUp()
+        super().setUp()
         self.channel_obj = self.env["mail.channel"]
 
     def test_base_search_mail_content_1(self):
