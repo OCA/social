@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     Copyright 2019 Alexandre Díaz
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<template>
+
+<t t-name="mail.tracking.status">
+    <t t-if="tracking['isCc']">
+        <span class="mail_tracking_cc">
+            <i class="fa fa-cc" />
+        </span>
+    </t>
+    <t t-elif="!tracking['isCc'] &amp;&amp; !tracking['partner_id']">
+        <span class="mail_anon_recipient">
+            <i class="fa fa-low-vision" />
+        </span>
+    </t>
+    <t t-elif="tracking['status'] === 'unknown'">
+        <span class="mail_tracking_unknown">
+            <i class="fa fa-ban" />
+        </span>
+    </t>
+    <t t-elif="tracking['status'] === 'waiting'">
+        <span class="mail_tracking_waiting mail_tracking_pointer">
+            <i class="fa fa-clock-o" />
+        </span>
+    </t>
+    <t t-elif="tracking['status'] === 'error'">
+        <span class="mail_tracking_error mail_tracking_pointer">
+          <i
+                    t-if="tracking['error_type'] === 'no_recipient'"
+                    class="fa fa-user-times"
+                />
+          <i t-else="" class="fa fa-remove" />
+      </span>
+    </t>
+    <t t-elif="tracking['status'] === 'sent'">
+        <span class="mail_tracking_sent mail_tracking_pointer">
+            <i class="fa fa-check" />
+        </span>
+    </t>
+    <t t-elif="tracking['status'] === 'delivered'">
+        <span class="fa-stack mail_tracking_delivered mail_tracking_pointer">
+            <i class="fa fa-check fa-stack-1x" style="margin-left:1px" />
+            <i class="fa fa-check fa-inverse fa-stack-1x" style="margin-left:-2px;" />
+            <i class="fa fa-check fa-stack-1x" style="margin-left:-3px" />
+        </span>
+    </t>
+    <t t-elif="tracking['status'] === 'opened'">
+        <span class="fa-stack mail_tracking_opened mail_tracking_pointer">
+            <i class="fa fa-check fa-stack-1x" style="margin-left:1px" />
+            <i class="fa fa-check fa-inverse fa-stack-1x" style="margin-left:-2px;" />
+            <i class="fa fa-check fa-stack-1x" style="margin-left:-3px" />
+        </span>
+    </t>
+</t>
+
+<t t-extend="mail.widget.Thread.Message">
+    <t t-jquery="p.o_mail_info" t-operation="after">
+        <t t-if="message.hasPartnerTrackings() || message.hasEmailCc()">
+            <p class="o_mail_tracking">
+                <strong>To:</strong>
+                <t t-foreach="message.getPartnerTrackings()" t-as="tracking">
+                    <t t-if="!tracking_first">
+                          -
+                    </t>
+                    <t t-if="tracking['partner_id']">
+                        <a
+                                t-attf-class="o_mail_action_tracking_partner #{tracking['isCc'] ? 'o_mail_cc' : ''}"
+                                t-att-data-partner="tracking['partner_id']"
+                                t-attf-href="#model=res.partner&amp;id=#{tracking['partner_id']}"
+                            >
+                            <t t-esc="tracking['recipient']" />
+                        </a>
+                    </t>
+                    <t t-else="">
+                        <span t-attf-class="#{tracking['isCc'] ? 'o_mail_cc' : ''}"><t
+                                    t-esc="tracking['recipient']"
+                                /></span>
+                    </t>
+                    <t
+                            t-if="tracking['status'] === 'error' &amp;&amp; tracking['error_type'] === 'no_recipient'"
+                            t-set="title_status"
+                            t-value="tracking['error_description']"
+                        />
+                    <t
+                            t-else=""
+                            t-set="title_status"
+                            t-value="tracking['status_human']"
+                        />
+                    <span
+                            class="mail_tracking o_mail_action_tracking_status"
+                            t-att-data-tracking="tracking['tracking_id']"
+                            t-att-title="title_status"
+                        >
+                        <t t-call="mail.tracking.status" />
+                    </span>
+                </t>
+            </p>
+        </t>
+    </t>
+</t>
+
+</template>

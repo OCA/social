@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record
+        forcecreate="True"
+        id="decimal_tracking_timestamp"
+        model="decimal.precision"
+    >
+        <field name="name">MailTracking Timestamp</field>
+        <field name="digits">6</field>
+    </record>
+</odoo>

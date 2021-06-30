@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+
+    <t t-name="mail_tracking.SidebarFailedCounter">
+        <span
+            t-attf-class="o_mail_sidebar_failed badge badge-pill #{(counter ? '' : 'd-none')}"
+        >
+            <t t-esc="counter" />
+        </span>
+    </t>
+
+    <t t-name="mail_tracking.SidebarFailed">
+       <div
+            t-attf-class="o_mail_discuss_title_main o_mail_discuss_item #{(activeThreadID === 'mailbox_failed') ? 'o_active': ''}"
+            data-thread-id="mailbox_failed"
+        >
+           <span class="o_thread_name"><i class="fa fa-exclamation mr8" />Failed</span>
+           <t t-set="counter" t-value="failedCounter" />
+           <t t-call="mail_tracking.SidebarFailedCounter" />
+       </div>
+   </t>
+
+    <t t-extend="mail.widget.Thread.Empty">
+        <t t-jquery="t:last-child" t-operation="after">
+            <t t-if="thread.getID() === 'mailbox_failed'">
+                <div
+                    class="o_thread_title"
+                >Congratulations, you don't have any failed messages</div>
+                <div>Failed messages appear here.</div>
+            </t>
+        </t>
+    </t>
+
+    <t t-extend="mail.discuss.ControlButtons">
+        <t t-jquery="div" t-operation="append">
+            <button
+                type="button"
+                class="btn btn-secondary o_mail_discuss_button_set_all_reviewed"
+                title="Mark all as reviewed"
+            >Set all as reviewed</button>
+        </t>
+    </t>
+
+</templates>
