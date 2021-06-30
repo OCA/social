@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo14-addon-mail_outbound_static',
         'odoo14-addon-mail_preview_base',
         'odoo14-addon-mail_send_copy',
+        'odoo14-addon-mail_tracking',
         'odoo14-addon-mass_mailing_partner',
     ],
     classifiers=[
