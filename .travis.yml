@@ -33,7 +33,7 @@ jobs:
 env:
   global:
     - VERSION="12.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0" MQT_DEP="PIP"
-    - PHANTOMJS_VERSION="2.1.2"
+    - PHANTOMJS_VERSION="2.1.8"
     - WEBSITE_REPO="1"
 
 install:
