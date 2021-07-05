@@ -11,6 +11,9 @@
     "depends": [
         'web',
     ],
+    "external_dependencies": [
+        'beautifulsoup4'
+    ],
     "installable": True,
     "application": False,
 }

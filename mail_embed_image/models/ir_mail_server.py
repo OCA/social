@@ -8,13 +8,15 @@ from odoo import models, http
 from odoo.addons.base.ir.ir_mail_server import encode_header_param
 from werkzeug.test import EnvironBuilder
 from werkzeug.wrappers import Request as WerkzeugRequest
-from lxml.html.soupparser import fromstring
+try:
+    from lxml.html.soupparser import fromstring
+except(ImportError, IOError) as err:
+    logging.info(err)
 from lxml.etree import tostring
 from base64 import encodestring
 import threading
 from odoo.http import root as root_wsgi
 from email.mime.image import MIMEImage
-
 
 logger = logging.getLogger(__name__)
 
@@ -32,7 +34,7 @@ class IrMailServer(models.Model):
             'login': public_user.login,
             'uid': public_user.id,
             'context': self.env.context,
-            })
+        })
         werkzeug_env = EnvironBuilder(path).get_environ()
         werkzeug_request = WerkzeugRequest(werkzeug_env)
         werkzeug_request.session = session
@@ -45,26 +47,26 @@ class IrMailServer(models.Model):
                 False,
                 self.env['ir.http']._get_converters()
             ).bind_to_environ(
-                werkzeug_env).match(return_rule=False,)
+                werkzeug_env).match(return_rule=False, )
             yield endpoint, arguments
 
     def build_email(
-            self,
-            email_from,
-            email_to,
-            subject,
-            body,
-            email_cc=None,
-            email_bcc=None,
-            reply_to=False,
-            attachments=None,
-            message_id=None,
-            references=None,
-            object_id=False,
-            subtype='plain',
-            headers=None,
-            body_alternative=None,
-            subtype_alternative='plain',
+        self,
+        email_from,
+        email_to,
+        subject,
+        body,
+        email_cc=None,
+        email_bcc=None,
+        reply_to=False,
+        attachments=None,
+        message_id=None,
+        references=None,
+        object_id=False,
+        subtype='plain',
+        headers=None,
+        body_alternative=None,
+        subtype_alternative='plain',
     ):
         result = super(IrMailServer, self).build_email(
             email_from=email_from,
@@ -104,8 +106,8 @@ class IrMailServer(models.Model):
         base_url = self.env['ir.config_parameter'].get_param(
             'web.base.url')
         for img in root.xpath(
-                ".//img[starts-with(@src, '%s/web/image')]"
-                "| .//img[starts-with(@src, '/web/image')]" % (base_url)):
+            ".//img[starts-with(@src, '%s/web/image')]"
+            "| .//img[starts-with(@src, '/web/image')]" % (base_url)):
             image_path = img.get('src').replace(base_url, '')
             with self._fetch_image(image_path) as (endpoint, arguments):
                 # now go ahead and call the endpoint and fetch the data
