@@ -14,7 +14,7 @@ class IrMailServer(models.Model):
         """Allow other addons to add its own tracking SMTP headers"""
         headers = headers or {}
         headers["X-Odoo-Database"] = getattr(threading.currentThread(), "dbname", None)
-        headers["X-Odoo-Tracking-ID"] = tracking_email_id
+        headers["X-Odoo-MailTracking-ID"] = tracking_email_id
         return headers
 
     def _tracking_email_id_body_get(self, body):
@@ -64,9 +64,16 @@ class IrMailServer(models.Model):
         return msg
 
     def _tracking_email_get(self, message):
-        tracking_email_id = False
-        if message.get("X-Odoo-Tracking-ID", "").isdigit():
-            tracking_email_id = int(message["X-Odoo-Tracking-ID"])
+        try:
+            tracking_email_id = int(
+                message.get(
+                    "X-Odoo-MailTracking-ID",
+                    # Deprecated tracking header, kept as fallback
+                    message["X-Odoo-Tracking-ID"],
+                )
+            )
+        except (TypeError, ValueError, KeyError):
+            tracking_email_id = False
         return self.env["mail.tracking.email"].browse(tracking_email_id)
 
     def _smtp_server_get(self, mail_server_id, smtp_server):
