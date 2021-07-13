@@ -73,15 +73,16 @@ odoo.define("mail_preview_base.preview", function(require) {
 
     var FieldPreviewViewer = DocumentViewer.extend({
         init: function(parent, attachments, activeAttachmentID, model, field) {
-            this.modelName = model;
+            this.fieldModelName = model;
             this.fieldName = field;
             this._super.apply(this, arguments);
+            this.modelName = model;
         },
         _onDownload: function(e) {
             e.preventDefault();
             window.location =
                 "/web/content/" +
-                this.modelName +
+                this.fieldModelName +
                 "/" +
                 this.activeAttachment.id +
                 "/" +
@@ -93,7 +94,7 @@ odoo.define("mail_preview_base.preview", function(require) {
         _getContentUrl: function(attachment) {
             return (
                 "/web/content/" +
-                this.modelName +
+                this.fieldModelName +
                 "/" +
                 attachment.id +
                 "/" +
@@ -105,7 +106,7 @@ odoo.define("mail_preview_base.preview", function(require) {
         _getImageUrl: function(attachment) {
             return (
                 "/web/image/" +
-                this.modelName +
+                this.fieldModelName +
                 "/" +
                 attachment.id +
                 "/" +
