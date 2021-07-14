@@ -38,7 +38,7 @@ addon | version | summary
 [mail_outbound_static](mail_outbound_static/) | 13.0.2.0.0 | Allows you to configure the from header for a mail server.
 [mail_partner_opt_out](mail_partner_opt_out/) | 13.0.1.0.0 | Add the partner's email to the blackmailed list
 [mail_preview_audio](mail_preview_audio/) | 13.0.1.0.0 | Allow to preview audio files
-[mail_preview_base](mail_preview_base/) | 13.0.1.0.0 | Base to add more previewing options
+[mail_preview_base](mail_preview_base/) | 13.0.1.0.1 | Base to add more previewing options
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.0.2 | Define a domain from which followers can be selected
 [mail_tracking](mail_tracking/) | 13.0.1.0.9 | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.1.0.0 | Mail tracking and Mailgun webhooks integration
