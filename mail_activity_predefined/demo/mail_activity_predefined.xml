@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<record id="group_mail_activity_predefined" model="res.groups">
+    <field name="users" eval="[(4, ref('base.user_demo'))]" />
+</record>
+
+</odoo>
