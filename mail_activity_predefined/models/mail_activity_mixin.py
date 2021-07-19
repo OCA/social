@@ -64,13 +64,26 @@ class MailActivityMixin(models.AbstractModel):
             return result
 
         arch = etree.fromstring(result["arch"])
-        for container in arch.xpath("//header") or arch.xpath("."):
+        for container in (
+            arch.xpath("//header")
+            or arch.xpath("//div[hasclass('oe_button_box')]")
+            or arch.xpath(".")
+        ):
             for activity in predefined_activities:
                 button = self._mail_activity_predefined_button(activity, container)
                 self._mail_activity_predefined_add_button(button, container)
                 self._mail_activity_predefined_add_field(result, container, activity)
         result["arch"] = etree.tostring(arch)
         return result
+
+    def _update_cache(self, values, validate=True):
+        """Don't confuse the cache with our virtual fields"""
+        nonvirtual_values = {
+            fieldname: value
+            for fieldname, value in values.items()
+            if not fieldname.startswith(self._mail_activity_predefined_fieldname())
+        }
+        return super()._update_cache(nonvirtual_values, validate=validate)
 
     def _mail_activity_predefined_button(self, activity_type, container):
         """Create a button for activity_type in container"""
@@ -85,6 +98,7 @@ class MailActivityMixin(models.AbstractModel):
                 "modifiers": '{"invisible": [["%s", "=", false]]}'
                 % (self._mail_activity_predefined_fieldname(activity_type),),
                 "data-mail-activity-type": str(activity_type.id),
+                "icon": activity_type.icon,
             },
         )
 
@@ -130,7 +144,12 @@ class MailActivityMixin(models.AbstractModel):
         etree.SubElement(
             container,
             "field",
-            {"name": fieldname, "invisible": "1", "modifiers": '{"invisible": true}'},
+            {
+                "name": fieldname,
+                "invisible": "1",
+                "readonly": "1",
+                "modifiers": '{"invisible": true, "readonly": true}',
+            },
         )
 
     def mail_activity_predefined_execute(self):
