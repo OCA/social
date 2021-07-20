@@ -25,6 +25,7 @@ addon | version | summary
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.0 | Preview email templates in the browser
 [mail_outbound_static](mail_outbound_static/) | 14.0.1.0.0 | Allows you to configure the from header for a mail server.
 [mail_preview_base](mail_preview_base/) | 14.0.1.0.0 | Base to add more previewing options
+[mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.0.1 | Security for Send Message Button on Chatter Area
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 | Send to you a copy of each mail sent by Odoo
 [mail_tracking](mail_tracking/) | 14.0.1.0.1 | Email tracking system for all mails sent
 [mass_mailing_partner](mass_mailing_partner/) | 14.0.1.0.0 | Link partners with mass-mailing
