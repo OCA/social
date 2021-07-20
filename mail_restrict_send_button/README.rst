@@ -25,7 +25,7 @@ Mail Restrict Send Button
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-Hide the Send Message button from Chatter area If "Show Send Message Button" group not assigned to User. 
+Hide the Send Message button from Chatter area If "Show Send Message Button" group not assigned to User.
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
