@@ -5,7 +5,7 @@ odoo.define("mail_restrict_send_button/static/src/js/chatter.js", function (requ
     const container = require("mail/static/src/components/chatter_container/chatter_container.js");
     const rpc = require("web.rpc");
     const {attr, many2one, one2one} = require("mail/static/src/model/model_field.js");
-    const { clear } = require('mail/static/src/model/model_field_command.js');
+    const {clear} = require("mail/static/src/model/model_field_command.js");
 
     registry["mail.chatter"].factory = function (dependencies) {
         const getThreadNextTemporaryId = (function () {
