@@ -1,15 +1,13 @@
 /* Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
-odoo.define("mass_mailing_custom_unsubscribe.partner_tour", function (require) {
+odoo.define("mass_mailing_custom_unsubscribe.partner_tour", (require) => {
     "use strict";
-    var base = require("web_editor.base");
-    var tour = require("web_tour.tour");
+    const base = require("web_editor.base");
+    const tour = require("web_tour.tour");
 
     // Allow to know if an element is required
     $.extend($.expr[":"], {
-        propRequired: function (element) {
-            return $(element).prop("required");
-        },
+        propRequired: (element) => $(element).prop("required"),
     });
 
     tour.register(
@@ -26,10 +24,7 @@ odoo.define("mass_mailing_custom_unsubscribe.partner_tour", function (require) {
             },
             {
                 content: "Switch to not interested reason",
-                // eslint-disable-next-line no-multi-str
-                trigger:
-                    '.radio:contains("I\'m not interested") \
-                            :radio:not(:checked)',
+                trigger: '.radio:contains("I\'m not interested") :radio:not(:checked)',
                 extra_trigger: "[name='details']:propRequired",
             },
             {
