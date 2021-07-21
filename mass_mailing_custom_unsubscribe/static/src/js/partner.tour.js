@@ -1,13 +1,13 @@
 /* Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
-odoo.define("mass_mailing_custom_unsubscribe.partner_tour", function(require) {
+odoo.define("mass_mailing_custom_unsubscribe.partner_tour", function (require) {
     "use strict";
     var base = require("web_editor.base");
     var tour = require("web_tour.tour");
 
     // Allow to know if an element is required
     $.extend($.expr[":"], {
-        propRequired: function(element) {
+        propRequired: function (element) {
             return $(element).prop("required");
         },
     });
