@@ -128,12 +128,11 @@
     </field>
 </record>
 
-<act_window
-        id="mail_unsubscription_action"
-        name="(Un)subscriptions"
-        view_mode="tree,form,pivot,graph"
-        res_model="mail.unsubscription"
-    />
+<record id="mail_unsubscription_action" model="ir.actions.act_window">
+    <field name="name">(Un)subscriptions</field>
+    <field name="res_model">mail.unsubscription</field>
+    <field name="view_mode">tree,form,pivot,graph</field>
+</record>
 
 <menuitem
         id="mail_unsubscription_menu"
