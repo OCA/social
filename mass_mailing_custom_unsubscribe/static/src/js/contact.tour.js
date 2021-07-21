@@ -1,15 +1,13 @@
 /* Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
-odoo.define("mass_mailing_custom_unsubscribe.contact_tour", function (require) {
+odoo.define("mass_mailing_custom_unsubscribe.contact_tour", (require) => {
     "use strict";
-    var base = require("web_editor.base");
-    var tour = require("web_tour.tour");
+    const base = require("web_editor.base");
+    const tour = require("web_tour.tour");
 
     // Allow to know if an element is required
     $.extend($.expr[":"], {
-        propRequired: function (element) {
-            return $(element).prop("required");
-        },
+        propRequired: (element) => $(element).prop("required"),
     });
 
     tour.register(
@@ -59,8 +57,7 @@ odoo.define("mass_mailing_custom_unsubscribe.contact_tour", function (require) {
             {
                 content: "Choose other reason",
                 trigger: ".radio:contains('Other reason') :radio",
-                extra_trigger:
-                    ".radio:contains('Other reason') " + ":radio:not(:checked)",
+                extra_trigger: ".radio:contains('Other reason') :radio:not(:checked)",
             },
             {
                 content: "Add details to reason",
@@ -78,18 +75,13 @@ odoo.define("mass_mailing_custom_unsubscribe.contact_tour", function (require) {
             },
             {
                 content: "Subscribe again to list 0",
-                // eslint-disable-next-line no-multi-str
                 trigger:
-                    "body:not(:has(#unsubscribe_form #custom_div_feedback\
-                            :visible)):has(.alert-success) li:contains('test list 0') \
-                            input:not(:checked)",
+                    "body:not(:has(#unsubscribe_form #custom_div_feedback:visible)):has(.alert-success) li:contains('test list 0') input:not(:checked)",
             },
             {
                 content: "Update subscriptions 3nd time",
-                // eslint-disable-next-line no-multi-str
                 trigger:
-                    "#unsubscribe_form:not(\
-                            :has(.js_unsubscription_reason:visible)) :submit",
+                    "#unsubscribe_form:not(:has(.js_unsubscription_reason:visible)) :submit",
             },
             {
                 content: "Successfully subscribed",

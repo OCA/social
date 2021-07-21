@@ -11,14 +11,14 @@ class UICase(HttpCase):
     _tour_ready = "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready"
 
     def extract_url(self, mail, *args, **kwargs):
-        url = mail._get_unsubscribe_url(self.email)
+        url = mail.mailing_id._get_unsubscribe_url(self.email, mail.res_id)
         self.assertTrue(urls.url_parse(url).decode_query().get("token"))
         self.assertTrue(url.startswith(self.domain))
         self.url = url.replace(self.domain, "", 1)
         return True
 
     def setUp(self):
-        super(UICase, self).setUp()
+        super().setUp()
         self.email = "test.contact@example.com"
         self.mail_postprocess_patch = mock.patch(
             "odoo.addons.mass_mailing.models.mail_mail.MailMail."
@@ -47,7 +47,6 @@ class UICase(HttpCase):
                 "subject": "Test",
             }
         )
-        self.mailing._onchange_model_and_list()
         # HACK https://github.com/odoo/odoo/pull/14429
         self.mailing.body_html = """
             <div>
@@ -59,7 +58,7 @@ class UICase(HttpCase):
 
     def tearDown(self):
         del self.email, self.lists, self.contact, self.mailing, self.url
-        super(UICase, self).tearDown()
+        super().tearDown()
 
     def test_contact_unsubscription(self):
         """Test a mass mailing contact that wants to unsubscribe."""
