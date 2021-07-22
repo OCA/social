@@ -118,6 +118,3 @@ msgstr "Suivi du courriel: évènements"
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
 msgstr "Navigateur"
-
-#~ msgid "Email Statistics"
-#~ msgstr "Statistiques de courriel"
