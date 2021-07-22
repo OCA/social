@@ -1,22 +1,21 @@
-# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
-# Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
-# Copyright 2017 David Vidal - <david.vidal@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2017 Tecnativa - Vicent Cubells
+# Copyright 2017 Tecnativa - David Vidal
 # Copyright 2018 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import mock
+from unittest import mock
 
-from odoo.tests.common import TransactionCase, at_install, post_install
+from odoo.tests.common import TransactionCase, tagged
 from odoo.tools import mute_logger
 
-mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_email"
+mock_send_email = "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
 
 
-@at_install(False)
-@post_install(True)
+@tagged("-at_install", "post_install")
 class TestMassMailing(TransactionCase):
     def setUp(self, *args, **kwargs):
-        super(TestMassMailing, self).setUp(*args, **kwargs)
+        super().setUp(*args, **kwargs)
         self.list = self.env["mailing.list"].create({"name": "Test mail tracking"})
         self.list.name = "{} #{}".format(self.list.name, self.list.id)
         self.contact_a = self.env["mailing.contact"].create(

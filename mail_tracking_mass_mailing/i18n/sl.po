@@ -119,6 +119,3 @@ msgstr "Sledilni dogodki"
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
 msgstr "Uporabnikov odjemalec"
-
-#~ msgid "Email Statistics"
-#~ msgstr "Statistika e-pošte"
