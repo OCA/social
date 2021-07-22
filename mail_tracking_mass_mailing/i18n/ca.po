@@ -118,6 +118,3 @@ msgstr "Esdeveniments de seguiment"
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
 msgstr "Aplicació de l'usuari"
-
-#~ msgid "Email Statistics"
-#~ msgstr "Estadístiques de correu electrònic"

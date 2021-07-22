@@ -1,5 +1,5 @@
-# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
-# Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -23,7 +23,7 @@ class MailTrackingEmail(models.Model):
 
     @api.model
     def create(self, vals):
-        tracking = super(MailTrackingEmail, self).create(vals)
+        tracking = super().create(vals)
         # Link mail statistics with this tracking
         if tracking.mail_stats_id:
             tracking.mail_stats_id.write(self._statistics_link_prepare(tracking))
@@ -41,14 +41,12 @@ class MailTrackingEmail(models.Model):
             ).email_bounced_set(self, reason, event=event)
 
     def smtp_error(self, mail_server, smtp_server, exception):
-        res = super(MailTrackingEmail, self).smtp_error(
-            mail_server, smtp_server, exception
-        )
+        res = super().smtp_error(mail_server, smtp_server, exception)
         self._contacts_email_bounced_set("error")
         return res
 
     def event_create(self, event_type, metadata):
-        res = super(MailTrackingEmail, self).event_create(event_type, metadata)
+        res = super().event_create(event_type, metadata)
         if event_type in {"hard_bounce", "spam", "reject"}:
             self._contacts_email_bounced_set(event_type)
         return res
