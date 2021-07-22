@@ -119,6 +119,3 @@ msgstr "Eventos de rastreamento"
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
 msgstr "Agente do utilizador"
-
-#~ msgid "Email Statistics"
-#~ msgstr "Estatísticas de Email"

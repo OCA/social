@@ -1,5 +1,5 @@
-# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
-# Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
@@ -14,7 +14,7 @@ _logger = logging.getLogger(__name__)
 
 def pre_init_hook(cr):
     if column_add_with_value:
-        _logger.info("Creating mailing_contact.email_score column " "with value 50.0")
+        _logger.info("Creating mailing_contact.email_score column with value 50.0")
         column_add_with_value(
             cr, "mailing_contact", "email_score", "double precision", 50.0
         )
