@@ -4,10 +4,10 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
 
-<record model="ir.ui.view" id="view_mail_mass_mailing_contact_tree">
+<record model="ir.ui.view" id="mailing_contact_view_tree">
     <field name="name">Add email score and stars</field>
     <field name="model">mailing.contact</field>
-    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_tree" />
+    <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree" />
     <field name="arch" type="xml">
         <field name="is_blacklisted" position="after">
             <field name="email_bounced" />
@@ -16,10 +16,10 @@
     </field>
 </record>
 
-<record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
+<record model="ir.ui.view" id="mailing_contact_view_search">
     <field name="name">Filter bounced contacts</field>
     <field name="model">mailing.contact</field>
-    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_contact_search" />
+    <field name="inherit_id" ref="mass_mailing.mailing_contact_view_search" />
     <field name="arch" type="xml">
         <filter name="filter_not_email_bl" position="after">
             <filter
