@@ -88,22 +88,3 @@ class MailRenderMixin(models.AbstractModel):
             orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key])
 
         return orginal_rendered
-
-
-class MailMail(models.AbstractModel):
-    _inherit = "mail.mail"
-
-    # in messages from objects is adding using Odoo that we are going to remove
-
-    @api.model_create_multi
-    def create(self, values_list):
-        for index, _value in enumerate(values_list):
-            values_list[index]["body_html"] = self.env[
-                "mail.render.mixin"
-            ].remove_href_odoo(
-                values_list[index].get("body_html", ""),
-                remove_parent=0,
-                remove_before=1,
-            )
-
-        return super().create(values_list)
