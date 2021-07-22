@@ -1,5 +1,5 @@
-# Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
-# Copyright 2017 Vicent Cubells - <vicent.cubells@tecnativa.com>
+# Copyright 2016 Tecnativa - Antonio Espinosa
+# Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -18,7 +18,7 @@ class MailTrackingEvent(models.Model):
 
     @api.model
     def process_open(self, tracking_email, metadata):
-        res = super(MailTrackingEvent, self).process_open(tracking_email, metadata)
+        res = super().process_open(tracking_email, metadata)
         mail_mail_stats = self.sudo().env["mailing.trace"]
         mail_mail_stats.set_opened(mail_mail_ids=[tracking_email.mail_id_int])
         return res
@@ -29,28 +29,24 @@ class MailTrackingEvent(models.Model):
 
     @api.model
     def process_hard_bounce(self, tracking_email, metadata):
-        res = super(MailTrackingEvent, self).process_hard_bounce(
-            tracking_email, metadata
-        )
+        res = super().process_hard_bounce(tracking_email, metadata)
         self._tracking_set_bounce(tracking_email, metadata)
         return res
 
     @api.model
     def process_soft_bounce(self, tracking_email, metadata):
-        res = super(MailTrackingEvent, self).process_soft_bounce(
-            tracking_email, metadata
-        )
+        res = super().process_soft_bounce(tracking_email, metadata)
         self._tracking_set_bounce(tracking_email, metadata)
         return res
 
     @api.model
     def process_reject(self, tracking_email, metadata):
-        res = super(MailTrackingEvent, self).process_reject(tracking_email, metadata)
+        res = super().process_reject(tracking_email, metadata)
         self._tracking_set_bounce(tracking_email, metadata)
         return res
 
     @api.model
     def process_spam(self, tracking_email, metadata):
-        res = super(MailTrackingEvent, self).process_spam(tracking_email, metadata)
+        res = super().process_spam(tracking_email, metadata)
         self._tracking_set_bounce(tracking_email, metadata)
         return res
