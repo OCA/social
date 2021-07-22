@@ -29,7 +29,7 @@ class TestMailgun(TransactionCase):
         return mail, tracking_email
 
     def setUp(self):
-        super(TestMailgun, self).setUp()
+        super().setUp()
         self.recipient = "to@example.com"
         self.mail, self.tracking_email = self.mail_send()
         self.api_key = "key-12345678901234567890123456789012"
