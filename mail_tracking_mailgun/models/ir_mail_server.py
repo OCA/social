@@ -10,9 +10,7 @@ class IrMailServer(models.Model):
     _inherit = "ir.mail_server"
 
     def _tracking_headers_add(self, tracking_email_id, headers):
-        headers = super(IrMailServer, self)._tracking_headers_add(
-            tracking_email_id, headers
-        )
+        headers = super()._tracking_headers_add(tracking_email_id, headers)
         headers = headers or {}
         metadata = {
             "odoo_db": self.env.cr.dbname,

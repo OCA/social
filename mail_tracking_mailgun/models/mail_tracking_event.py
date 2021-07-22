@@ -10,8 +10,6 @@ class MailTrackingEvent(models.Model):
     mailgun_id = fields.Char(string="Mailgun Event ID", copy="False", readonly=True)
 
     def _process_data(self, tracking_email, metadata, event_type, state):
-        res = super(MailTrackingEvent, self)._process_data(
-            tracking_email, metadata, event_type, state
-        )
+        res = super()._process_data(tracking_email, metadata, event_type, state)
         res.update({"mailgun_id": metadata.get("mailgun_id", False)})
         return res

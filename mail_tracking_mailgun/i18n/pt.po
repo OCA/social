@@ -175,6 +175,3 @@ msgstr ""
 #, python-format
 msgid "unknown"
 msgstr "desconhecido"
-
-#~ msgid "Partner"
-#~ msgstr "Entidade"
