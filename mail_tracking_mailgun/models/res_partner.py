@@ -14,9 +14,7 @@ class ResPartner(models.Model):
     _inherit = "res.partner"
 
     def email_bounced_set(self, tracking_emails, reason, event=None):
-        res = super(ResPartner, self).email_bounced_set(
-            tracking_emails, reason, event=event
-        )
+        res = super().email_bounced_set(tracking_emails, reason, event=event)
         self._email_bounced_set(reason, event)
         return res
 
@@ -186,11 +184,11 @@ class ResPartner(models.Model):
             "mailgun.auto_check_partner_email"
         ):
             self._autocheck_partner_email()
-        return super(ResPartner, self).create(vals)
+        return super().create(vals)
 
     def write(self, vals):
         if "email" in vals and self.env["ir.config_parameter"].sudo().get_param(
             "mailgun.auto_check_partner_email"
         ):
             self._autocheck_partner_email()
-        return super(ResPartner, self).write(vals)
+        return super().write(vals)
