@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo14-addon-mail_restrict_send_button',
         'odoo14-addon-mail_send_copy',
         'odoo14-addon-mail_tracking',
+        'odoo14-addon-mail_tracking_mass_mailing',
         'odoo14-addon-mass_mailing_partner',
     ],
     classifiers=[
