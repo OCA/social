@@ -17,31 +17,50 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_debrand
-#: model:ir.model,name:mail_debrand.model_mail_template
-#, fuzzy
-msgid "Email Templates"
-msgstr "Email Templates"
-
-#. module: mail_debrand
-#: model:ir.model,name:mail_debrand.model_mail_thread
-#, fuzzy
-msgid "Email Thread"
-msgstr "Email Thread"
-
-#. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:0
-#, fuzzy, python-format
-msgid "Odoo"
-msgstr "Odoo"
-
-#. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:0
+#: code:addons/mail_debrand/tests/test_mail_debrand_digest.py:0
 #, python-format
-msgid "Powered by"
-msgstr "Aangeboden door"
-
-#. module: mail_debrand
-#: code:addons/mail_debrand/models/mail_template.py:0
-#, python-format
-msgid "using"
+msgid "Connect"
 msgstr ""
+
+#. module: mail_debrand
+#: model:ir.model.fields,field_description:mail_debrand.field_mail_mail__display_name
+#: model:ir.model.fields,field_description:mail_debrand.field_mail_render_mixin__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_debrand
+#: model:ir.model.fields,field_description:mail_debrand.field_mail_mail__id
+#: model:ir.model.fields,field_description:mail_debrand.field_mail_render_mixin__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_debrand
+#: model:ir.model.fields,field_description:mail_debrand.field_mail_mail____last_update
+#: model:ir.model.fields,field_description:mail_debrand.field_mail_render_mixin____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mail_debrand
+#: model:ir.model,name:mail_debrand.model_mail_render_mixin
+msgid "Mail Render Mixin"
+msgstr ""
+
+#. module: mail_debrand
+#: model:ir.model,name:mail_debrand.model_mail_mail
+msgid "Outgoing Mails"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Email Templates"
+#~ msgstr "Email Templates"
+
+#, fuzzy
+#~ msgid "Email Thread"
+#~ msgstr "Email Thread"
+
+#, fuzzy
+#~ msgid "Odoo"
+#~ msgstr "Odoo"
+
+#~ msgid "Powered by"
+#~ msgstr "Aangeboden door"
