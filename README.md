@@ -29,6 +29,7 @@ addon | version | summary
 [mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.0.1 | Security for Send Message Button on Chatter Area
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 | Send to you a copy of each mail sent by Odoo
 [mail_tracking](mail_tracking/) | 14.0.1.0.1 | Email tracking system for all mails sent
+[mail_tracking_mailgun](mail_tracking_mailgun/) | 14.0.1.0.0 | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 14.0.1.0.0 | Improve mass mailing email tracking
 [mass_mailing_partner](mass_mailing_partner/) | 14.0.1.0.0 | Link partners with mass-mailing
 
