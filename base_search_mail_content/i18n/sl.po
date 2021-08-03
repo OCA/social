@@ -44,6 +44,7 @@ msgstr "Polje"
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mass_mailing_contact__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_activity__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_field_type__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_full__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_simple__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_test_track__message_content
@@ -70,6 +71,7 @@ msgstr "Vsebina sporočila"
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_mass_mailing_contact__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test_activity__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_test_field_type__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test_full__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test_simple__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_test_track__message_content
