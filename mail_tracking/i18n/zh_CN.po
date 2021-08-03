@@ -289,6 +289,7 @@ msgstr "失败"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mass_mailing_contact__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_test__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_test_activity__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_test_field_type__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_test_full__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_test_simple__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_test_track__failed_message_ids
