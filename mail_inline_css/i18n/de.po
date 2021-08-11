@@ -24,6 +24,11 @@ msgid "Demo email inline styles"
 msgstr ""
 
 #. module: mail_inline_css
+#: model:ir.model.fields,field_description:mail_inline_css.field_mail_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_inline_css
 #: model:ir.model,name:mail_inline_css.model_mail_template
 msgid "Email Templates"
 msgstr "E-Mail Vorlagen"
@@ -31,6 +36,16 @@ msgstr "E-Mail Vorlagen"
 #. module: mail_inline_css
 #: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "Hello"
+msgstr ""
+
+#. module: mail_inline_css
+#: model:ir.model.fields,field_description:mail_inline_css.field_mail_template__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_inline_css
+#: model:ir.model.fields,field_description:mail_inline_css.field_mail_template____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_inline_css
