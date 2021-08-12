@@ -16,7 +16,9 @@ class MailMessageCustomSubject(models.Model):
         help="Model where this template applies",
     )
     subtype_ids = fields.Many2many(
-        comodel_name="mail.message.subtype", string="Applied Subtypes", required=True,
+        comodel_name="mail.message.subtype",
+        string="Applied Subtypes",
+        required=True,
     )
     subject_template = fields.Char(
         string="Subject Template",
