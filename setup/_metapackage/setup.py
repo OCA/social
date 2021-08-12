@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo14-addon-base_search_mail_content',
         'odoo14-addon-email_template_qweb',
         'odoo14-addon-mail_attach_existing_attachment',
+        'odoo14-addon-mail_autosubscribe',
         'odoo14-addon-mail_debrand',
         'odoo14-addon-mail_inline_css',
         'odoo14-addon-mail_layout_preview',
