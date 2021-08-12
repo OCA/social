@@ -22,6 +22,7 @@ addon | version | summary
 [base_search_mail_content](base_search_mail_content/) | 14.0.1.0.0 | Base Search Mail Content
 [email_template_qweb](email_template_qweb/) | 14.0.1.0.0 | Use the QWeb templating mechanism for emails
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 14.0.1.0.0 | Adding attachment on the object by sending this one
+[mail_autosubscribe](mail_autosubscribe/) | 14.0.1.0.0 | Automatically subscribe partners to its company's business documents
 [mail_debrand](mail_debrand/) | 14.0.2.0.0 | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
 [mail_inline_css](mail_inline_css/) | 14.0.1.0.0 | Convert style tags in inline style in your mails
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.0 | Preview email templates in the browser
