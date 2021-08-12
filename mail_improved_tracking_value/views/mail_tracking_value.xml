@@ -1,18 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
 
     <record id="tracking_change_list" model="ir.ui.view">
         <field name="name">Tracking change list"</field>
         <field name="model">mail.tracking.value</field>
         <field name="arch" type="xml">
-            <tree string="Tracking change list" default_order="create_date desc"
-                create="false" edit="false" delete="false">
-                <field name="create_date" string="On"/>
-                <field name="record_name" string="For"/>
-                <field name="field_desc" string="Field changed"/>
-                <field name="old_value_formatted"/>
-                <field name="new_value_formatted"/>
-                <field name="model"/>
+            <tree
+                string="Tracking change list"
+                default_order="create_date desc"
+                create="false"
+                edit="false"
+                delete="false"
+            >
+                <field name="create_date" string="On" />
+                <field name="record_name" string="For" />
+                <field name="field_desc" string="Field changed" />
+                <field name="old_value_formatted" />
+                <field name="new_value_formatted" />
+                <field name="model" />
             </tree>
         </field>
     </record>
@@ -20,17 +25,17 @@
     <record id="tracking_change_form_view" model="ir.ui.view">
         <field name="name">Tracking change form</field>
         <field name="model">mail.tracking.value</field>
-        <field name="priority" eval="20"/>
+        <field name="priority" eval="20" />
         <field name="arch" type="xml">
             <form>
                 <sheet>
-                    <field name="create_date" class="oe-inline"/>
+                    <field name="create_date" class="oe-inline" />
                     <group name="main">
-                        <field name="mail_message_id" string="For"/>
-                        <field name="field_desc" string="Field changed"/>
-                        <field name="old_value_formatted"/>
-                        <field name="new_value_formatted"/>
-                        <field name="model"/>
+                        <field name="mail_message_id" string="For" />
+                        <field name="field_desc" string="Field changed" />
+                        <field name="old_value_formatted" />
+                        <field name="new_value_formatted" />
+                        <field name="model" />
                     </group>
                 </sheet>
             </form>
@@ -42,9 +47,13 @@
         <field name="model">mail.tracking.value</field>
         <field name="arch" type="xml">
             <search string="Search">
-                <field name="model"/>
+                <field name="model" />
                 <group expand="1" string="Group By">
-                    <filter name="model" string="Model" context="{'group_by':'model'}"/>
+                    <filter
+                        name="model"
+                        string="Model"
+                        context="{'group_by':'model'}"
+                    />
                 </group>
             </search>
         </field>
@@ -54,14 +63,17 @@
         <field name="name">View last tracked changes</field>
         <field name="res_model">mail.tracking.value</field>
         <field name="view_mode">tree,form</field>
-        <field name="view_ids" eval="[(5, 0, 0),
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
             (0, 0, {'view_mode': 'tree', 'view_id': ref('tracking_change_list')}),
             (0, 0, {'view_mode': 'form', 'view_id': ref('tracking_change_form_view')})]"
         />
     </record>
 
-    <menuitem action="action_view_tracking_changes"
-        id ="menu_action_view_tracking_changes"
+    <menuitem
+        action="action_view_tracking_changes"
+        id="menu_action_view_tracking_changes"
         name="Improved Tracking Values"
         parent="base.menu_email"
         sequence="10"
