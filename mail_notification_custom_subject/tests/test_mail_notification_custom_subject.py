@@ -134,7 +134,9 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         )
         # Send message in partner
         mail_message_1 = self.partner_1.message_post(
-            body="Test", subtype="mail.mt_comment", subject="Test",
+            body="Test",
+            subtype="mail.mt_comment",
+            subject="Test",
         )
         # Get message and check subject
         self.assertEquals(mail_message_1.subject, "Test and something more")
@@ -152,7 +154,9 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         )
         # Send message in partner
         mail_message_1 = self.partner_1.message_post(
-            body="Test", subtype="mail.mt_comment", subject="Test",
+            body="Test",
+            subtype="mail.mt_comment",
+            subject="Test",
         )
         # Get message and check subject
         # No exception should be raised but subject should remain as original.
