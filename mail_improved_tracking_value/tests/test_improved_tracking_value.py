@@ -21,9 +21,10 @@ class TestImproveTrackingValue(TransactionCase):
         tracking = self.model.create_tracking_values(
             self.mr,
             self.dr,
-            "testing_col",
+            "title",
             {"string": "TestingField", "type": "one2many"},
-            track_sequence=100,
+            tracking_sequence=100,
+            model_name="res.partner",
         )
         self.assertEqual(tracking["old_value_char"], self.mr.display_name)
         self.assertEqual(tracking["new_value_char"], self.dr.display_name)
@@ -35,9 +36,10 @@ class TestImproveTrackingValue(TransactionCase):
         tracking = self.model.create_tracking_values(
             self.mr,
             None,
-            "testing_col",
+            "title",
             {"string": "TestingField", "type": "one2many"},
-            track_sequence=100,
+            tracking_sequence=100,
+            model_name="res.partner",
         )
         self.assertEqual(tracking["old_value_char"], self.mr.display_name)
         self.assertEqual(tracking["new_value_char"], "")
@@ -52,9 +54,10 @@ class TestImproveTrackingValue(TransactionCase):
         tracking = self.model.create_tracking_values(
             oldvalue,
             newvalue,
-            "testing_col",
+            "title",
             {"string": "TestingField", "type": "many2many"},
-            track_sequence=100,
+            tracking_sequence=100,
+            model_name="res.partner",
         )
         self.assertEqual(
             tracking["old_value_char"],
@@ -74,7 +77,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "char",
                 "old_value_char": "weakness",
                 "new_value_char": "strength",
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -88,7 +91,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "many2many",
                 "old_value_char": "123",
                 "new_value_char": "456",
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -102,7 +105,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "one2many",
                 "old_value_char": "123",
                 "new_value_char": "456",
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -116,7 +119,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "integer",
                 "old_value_integer": 1,
                 "new_value_integer": 3,
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -130,7 +133,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "float",
                 "old_value_float": 1.1,
                 "new_value_float": 3.14159,
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -144,7 +147,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "monetary",
                 "old_value_monetary": 3.45,
                 "new_value_monetary": 5.45,
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -158,7 +161,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "datetime",
                 "old_value_datetime": "2018-01-01",
                 "new_value_datetime": "2018-01-04",
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )
@@ -172,7 +175,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "field_type": "text",
                 "old_value_text": "previous",
                 "new_value_text": "next",
-                "field": "test",
+                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
                 "field_desc": "desc",
             }
         )

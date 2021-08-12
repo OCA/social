@@ -11,21 +11,13 @@ class MailTrackingValue(models.Model):
     _inherit = "mail.tracking.value"
 
     new_value_formatted = fields.Char(
-        compute="_compute_formatted_value",
-        string="New value",
+        compute="_compute_formatted_value", string="New value"
     )
     old_value_formatted = fields.Char(
-        compute="_compute_formatted_value",
-        string="Old value",
+        compute="_compute_formatted_value", string="Old value"
     )
-    record_name = fields.Char(
-        related="mail_message_id.record_name",
-    )
-    model = fields.Char(
-        related="mail_message_id.model",
-        store="True",
-        string="Model",
-    )
+    record_name = fields.Char(related="mail_message_id.record_name")
+    model = fields.Char(related="mail_message_id.model", store="True", string="Model")
 
     @api.depends(
         "new_value_char",
@@ -65,7 +57,13 @@ class MailTrackingValue(models.Model):
 
     @api.model
     def create_tracking_values(
-        self, initial_value, new_value, col_name, col_info, track_sequence
+        self,
+        initial_value,
+        new_value,
+        col_name,
+        col_info,
+        tracking_sequence,
+        model_name,
     ):
         """ Add tacking capabilities for many2many and one2many fields """
         if col_info["type"] in ("many2many", "one2many"):
@@ -82,8 +80,12 @@ class MailTrackingValue(models.Model):
                     "{}_value_text".format(prefix): json_ids,
                 }
 
+            field = self.env["ir.model.fields"]._get(model_name, col_name)
+            if not field:
+                return
+
             values = {
-                "field": col_name,
+                "field": field.id,
                 "field_desc": col_info["string"],
                 "field_type": col_info["type"],
             }
@@ -92,5 +94,10 @@ class MailTrackingValue(models.Model):
             return values
         else:
             return super().create_tracking_values(
-                initial_value, new_value, col_name, col_info, track_sequence
+                initial_value,
+                new_value,
+                col_name,
+                col_info,
+                tracking_sequence,
+                model_name,
             )
