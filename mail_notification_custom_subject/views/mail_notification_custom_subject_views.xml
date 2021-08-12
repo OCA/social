@@ -16,7 +16,7 @@
                                 name="subject_template"
                                 placeholder="Subject (placeholders may be used here)"
                             />
-                            <field name="model_id" />
+                            <field name="model_id" options="{'no_create': True}" />
                             <field name="subtype_ids" widget="many2many_tags" />
                             <field name="position" />
                         </group>
@@ -29,7 +29,7 @@
             <field name="name">mail.message.custom.subject.tree</field>
             <field name="model">mail.message.custom.subject</field>
             <field name="arch" type="xml">
-                <tree string="Templates">
+                <tree>
                     <field name="name" />
                     <field name="model_id" />
                     <field name="subtype_ids" />
