@@ -14,6 +14,7 @@ class MailMessageCustomSubject(models.Model):
         string="Model",
         required=True,
         help="Model where this template applies",
+        ondelete="cascade",
     )
     subtype_ids = fields.Many2many(
         comodel_name="mail.message.subtype",
