@@ -1,4 +1,4 @@
-// Copyright2018 Eficent <http://www.eficent.com>
+// Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
 // License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 odoo.define("mail.Activity.done", function (require) {
@@ -6,7 +6,6 @@ odoo.define("mail.Activity.done", function (require) {
 
     var mailUtils = require("mail.utils");
     var core = require("web.core");
-    var utils = require("mail.utils");
     var time = require("web.time");
     var mail_activity = require("mail.Activity");
 
@@ -20,23 +19,24 @@ odoo.define("mail.Activity.done", function (require) {
         _.each(activities, function (activity) {
             var to_display = "";
             var deadline = moment(activity.date_deadline).startOf("day");
-            var diff = deadline.diff(today, "days", true); // True means no rounding
+            // On next line, true means no rounding
+            var diff = deadline.diff(today, "days", true);
             if (diff === 0) {
                 to_display = _t("Today");
             } else if (diff < 0) {
-                // Overdue
+                // This block is for overdue
+                // eslint-disable-line no-lonely-if
                 if (diff === -1) {
                     to_display = _t("Yesterday");
                 } else {
                     to_display = _.str.sprintf(_t("%d days overdue"), Math.abs(diff));
                 }
+                // This block is for due
+            } else if (diff === 1) {
+                // eslint-disable-line no-lonely-if
+                to_display = _t("Tomorrow");
             } else {
-                // Due
-                if (diff === 1) {
-                    to_display = _t("Tomorrow");
-                } else {
-                    to_display = _.str.sprintf(_t("Due in %d days"), Math.abs(diff));
-                }
+                to_display = _.str.sprintf(_t("Due in %d days"), Math.abs(diff));
             }
             activity.label_delay = to_display;
         });
@@ -47,7 +47,7 @@ odoo.define("mail.Activity.done", function (require) {
         return open_activities;
     };
 
-    var Activity = mail_activity.include({
+    mail_activity.include({
         /**
          * @override
          * @private
@@ -59,13 +59,13 @@ odoo.define("mail.Activity.done", function (require) {
                     mailUtils.inline
                 );
                 var is_blank = /^\s*$/.test(note);
-                if (!is_blank) {
+                if (is_blank) {
+                    activity.note = "";
+                } else {
                     activity.note = mailUtils.parseAndTransform(
                         activity.note,
                         mailUtils.addLink
                     );
-                } else {
-                    activity.note = "";
                 }
             });
             var activities = setDelayLabel(this._activities);
