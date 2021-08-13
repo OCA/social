@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!--
-        Copyright 2018 Eficent <https://www.eficent.com>
+        Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
         License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
     -->
     <record id="mail_activity_view_form_popup" model="ir.ui.view">
@@ -59,7 +59,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="mail.res_partner_view_search_inherit_mail" />
         <field name="arch" type="xml">
-            <filter name="activities_my" position="after">
+            <filter name="activities_overdue" position="before">
                 <filter
                     string="Open Activities"
                     name="activities_open"
