@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent <http://www.eficent.com>
+# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, modules
 
@@ -26,11 +26,7 @@ class ResUsers(models.Model):
                     GROUP BY m.id, states, act.res_model;
                     """
         self.env.cr.execute(
-            query,
-            {
-                "today": fields.Date.context_today(self),
-                "user_id": self.env.uid,
-            },
+            query, {"today": fields.Date.context_today(self), "user_id": self.env.uid}
         )
         activity_data = self.env.cr.dictfetchall()
         model_ids = [a["id"] for a in activity_data]
