@@ -3,18 +3,17 @@
 {
     "name": "Mail Activity Done",
     "version": "12.0.2.0.0",
-    "author": "Eficent,"
-              "Odoo Community Association (OCA)",
+    "author": "Eficent," "Odoo Community Association (OCA)",
     "license": "LGPL-3",
     "category": "Discuss",
     "depends": [
-        'mail',
+        "mail",
     ],
     "data": [
-        'views/templates.xml',
-        'views/mail_activity_views.xml',
+        "views/templates.xml",
+        "views/mail_activity_views.xml",
     ],
     "pre_init_hook": "pre_init_hook",
     "post_load": "post_load_hook",
-    'uninstall_hook': 'uninstall_hook',
+    "uninstall_hook": "uninstall_hook",
 }
