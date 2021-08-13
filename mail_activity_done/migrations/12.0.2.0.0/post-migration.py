@@ -5,8 +5,10 @@
 def migrate(cr, version):
     if not version:
         return
-    cr.execute("""
+    cr.execute(
+        """
         UPDATE mail_activity SET
             active = False
             WHERE done=True;
-    """)
+    """
+    )

@@ -4,7 +4,7 @@ from odoo import api, fields, models, modules
 
 
 class ResUsers(models.Model):
-    _inherit = 'res.users'
+    _inherit = "res.users"
 
     @api.model
     def systray_get_activities(self):
@@ -25,31 +25,38 @@ class ResUsers(models.Model):
                     AND act.done = False
                     GROUP BY m.id, states, act.res_model;
                     """
-        self.env.cr.execute(query, {
-            'today': fields.Date.context_today(self),
-            'user_id': self.env.uid,
-        })
+        self.env.cr.execute(
+            query,
+            {
+                "today": fields.Date.context_today(self),
+                "user_id": self.env.uid,
+            },
+        )
         activity_data = self.env.cr.dictfetchall()
-        model_ids = [a['id'] for a in activity_data]
-        model_names = {n[0]: n[1] for n in self.env['ir.model'].browse(
-            model_ids).name_get()}
+        model_ids = [a["id"] for a in activity_data]
+        model_names = {
+            n[0]: n[1] for n in self.env["ir.model"].browse(model_ids).name_get()
+        }
 
         user_activities = {}
         for activity in activity_data:
-            if not user_activities.get(activity['model']):
-                user_activities[activity['model']] = {
-                    'name': model_names[activity['id']],
-                    'model': activity['model'],
-                    'icon': modules.module.get_module_icon(
-                        self.env[activity['model']]._original_module),
-                    'total_count': 0, 'today_count': 0,
-                    'overdue_count': 0, 'planned_count': 0,
-                    'type': 'activity',
+            if not user_activities.get(activity["model"]):
+                user_activities[activity["model"]] = {
+                    "name": model_names[activity["id"]],
+                    "model": activity["model"],
+                    "icon": modules.module.get_module_icon(
+                        self.env[activity["model"]]._original_module
+                    ),
+                    "total_count": 0,
+                    "today_count": 0,
+                    "overdue_count": 0,
+                    "planned_count": 0,
+                    "type": "activity",
                 }
-            user_activities[activity['model']][
-                '%s_count' % activity['states']] += activity['count']
-            if activity['states'] in ('today', 'overdue'):
-                user_activities[activity['model']][
-                    'total_count'] += activity['count']
+            user_activities[activity["model"]][
+                "%s_count" % activity["states"]
+            ] += activity["count"]
+            if activity["states"] in ("today", "overdue"):
+                user_activities[activity["model"]]["total_count"] += activity["count"]
 
         return list(user_activities.values())
