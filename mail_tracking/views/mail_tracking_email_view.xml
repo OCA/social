@@ -99,8 +99,16 @@
                     string="Email"
                     filter_domain="['|', ('sender', 'ilike', self), ('recipient', 'ilike', self)]"
                 />
-            <field name="sender" string="Sender" />
-            <field name="recipient" string="Recipient" />
+            <field
+                    name="sender"
+                    string="Sender"
+                    filter_domain="[('sender', '=', self)]"
+                />
+            <field
+                    name="recipient"
+                    string="Recipient"
+                    filter_domain="[('recipient', '=', self)]"
+                />
             <field name="name" string="Subject" />
             <field name="time" string="Time" />
             <field name="date" string="Date" />
