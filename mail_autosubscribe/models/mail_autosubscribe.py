@@ -18,22 +18,12 @@ class MailAutosubscribe(models.Model):
     ]
 
     model_id = fields.Many2one(
-        "ir.model",
-        required=True,
-        index=True,
-        ondelete="cascade",
+        "ir.model", required=True, index=True, ondelete="cascade",
     )
     model = fields.Char(
-        related="model_id.model",
-        string="Model Name",
-        store=True,
-        index=True,
+        related="model_id.model", string="Model Name", store=True, index=True,
     )
-    name = fields.Char(
-        compute="_compute_name",
-        store=True,
-        readonly=False,
-    )
+    name = fields.Char(compute="_compute_name", store=True, readonly=False,)
 
     @api.depends("model_id")
     def _compute_name(self):
