@@ -10,6 +10,7 @@ class MailMail(models.AbstractModel):
 
     def _send_prepare_body(self):
         body = super()._send_prepare_body()
+        remove_parent = self._context.get("mail_remove_parent", 0)
         return self.env["mail.render.mixin"].remove_href_odoo(
-            body or "", remove_parent=0, remove_before=1
+            body or "", remove_parent=remove_parent, remove_before=1
         )
