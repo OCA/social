@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo14-addon-mail_debrand',
         'odoo14-addon-mail_inline_css',
         'odoo14-addon-mail_layout_preview',
+        'odoo14-addon-mail_notification_custom_subject',
         'odoo14-addon-mail_outbound_static',
         'odoo14-addon-mail_preview_base',
         'odoo14-addon-mail_restrict_send_button',
