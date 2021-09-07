@@ -1,0 +1,19 @@
+<odoo>
+    <record id="user_form_portal_user_special" model="ir.ui.view">
+        <field name="name">special.portal.user.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <page name="access_rights" position="inside">
+                <field invisible="1" name="share" />
+                <group
+                    string="Portal User Internal Message Access"
+                    attrs="{'invisible':[('share','=',False)]}"
+                >
+                    <field name="portal_see_internal_msg_own" />
+                    <field name="portal_see_internal_msg_other" />
+                </group>
+            </page>
+        </field>
+    </record>
+</odoo>
