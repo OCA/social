@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Camptocamp (http://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@gmail.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <data noupdate="1">
+
+        <record id="mailing_list_subscribe" model="mail.template">
+            <field name="name">Mailing list: Subscribed</field>
+            <field
+                name="model_id"
+                ref="mass_mailing.model_mailing_contact_subscription"
+            />
+            <field
+                name="email_from"
+            >${object.env.company.email_formatted | safe}</field>
+            <field name="email_to">${object.contact_id.email}</field>
+            <field
+                name="subject"
+            >You've been subscribed to our ${object.list_id.name}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        Thank you for subscribing.
+                        <br /><br />
+                        You can <a
+                            href="/unsubscribe_from_list"
+                        >nsubscribe</a> at any time.
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+        <record id="mailing_list_unsubscribe" model="mail.template">
+            <field name="name">Mailing list: Unsubscribed</field>
+            <field
+                name="model_id"
+                ref="mass_mailing.model_mailing_contact_subscription"
+            />
+            <field
+                name="email_from"
+            >${object.env.company.email_formatted | safe}</field>
+            <field name="email_to">${object.contact_id.email}</field>
+            <field
+                name="subject"
+            >You've been unsubscribed from our ${object.list_id.name}</field>
+            <field name="body_html" type="html">
+                <div style="margin: 0px; padding: 0px;">
+                    <p style="margin: 0px; padding: 0px; font-size: 13px;">
+                        You've been unsubscribed.
+                    </p>
+                </div>
+            </field>
+            <field name="lang">${object.lang}</field>
+            <field name="auto_delete" eval="True" />
+        </record>
+
+    </data>
+</odoo>
