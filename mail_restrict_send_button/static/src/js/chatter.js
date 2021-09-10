@@ -172,7 +172,7 @@ odoo.define("mail_restrict_send_button/static/src/js/chatter.js", function (requ
              * @private
              */
             _onThreadIsLoadingAttachmentsChanged() {
-                if (!this.thread.isLoadingAttachments) {
+                if (!this.thread || !this.thread.isLoadingAttachments) {
                     this._stopAttachmentsLoading();
                     return;
                 }
