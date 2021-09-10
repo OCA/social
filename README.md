@@ -30,7 +30,7 @@ addon | version | maintainers | summary
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 14.0.1.0.0 | [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Apply a custom subject to mail notifications
 [mail_outbound_static](mail_outbound_static/) | 14.0.1.0.0 |  | Allows you to configure the from header for a mail server.
 [mail_preview_base](mail_preview_base/) | 14.0.1.0.0 |  | Base to add more previewing options
-[mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.0.1 |  | Security for Send Message Button on Chatter Area
+[mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.1.0 |  | Security for Send Message Button on Chatter Area
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
 [mail_tracking](mail_tracking/) | 14.0.1.1.0 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 14.0.1.0.0 |  | Mail tracking and Mailgun webhooks integration
