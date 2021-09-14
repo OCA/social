@@ -3,6 +3,7 @@
 # Copyright 2019 Eficent Business and IT Consulting Services S.L.
 #   - Lois Rilo <lois.rilo@eficent.com>
 # 2020 NextERP Romania
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
@@ -12,7 +13,7 @@
     ( for powerd by) form all the templates
     removes any 'odoo' that are in tempalte texts > 20characters
     """,
-    "version": "14.0.2.0.1",
+    "version": "14.0.2.0.2",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": """Tecnativa, Eficent, Onestein, Sodexis, Nexterp Romania,
@@ -21,5 +22,5 @@
     "installable": True,
     "depends": ["mail"],
     "development_status": "Production/Stable",
-    "maintainers": ["pedrobaeza"],
+    "maintainers": ["pedrobaeza", "joao-p-marques"],
 }
