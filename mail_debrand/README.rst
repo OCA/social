@@ -75,9 +75,12 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Lois Rilo <lois.rilo@eficent.com>
 * Graeme Gellatly <graeme@o4sb.com>
+* `Tecnativa <https://www.tecnativa.com>`__:
+
+  * Pedro M. Baeza
+  * João Marques
 
 Maintainers
 ~~~~~~~~~~~
@@ -95,10 +98,13 @@ promote its widespread use.
 .. |maintainer-pedrobaeza| image:: https://github.com/pedrobaeza.png?size=40px
     :target: https://github.com/pedrobaeza
     :alt: pedrobaeza
+.. |maintainer-joao-p-marques| image:: https://github.com/joao-p-marques.png?size=40px
+    :target: https://github.com/joao-p-marques
+    :alt: joao-p-marques
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-pedrobaeza| 
+|maintainer-pedrobaeza| |maintainer-joao-p-marques| 
 
 This module is part of the `OCA/social <https://github.com/OCA/social/tree/14.0/mail_debrand>`_ project on GitHub.
 
