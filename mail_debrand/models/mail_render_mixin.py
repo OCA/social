@@ -1,6 +1,7 @@
 # Copyright 2019 O4SB - Graeme Gellatly
 # Copyright 2019 Tecnativa - Ernesto Tejeda
 # Copyright 2020 Onestein - Andrea Stirpe
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import re
 
@@ -12,7 +13,9 @@ from odoo import api, models
 class MailRenderMixin(models.AbstractModel):
     _inherit = "mail.render.mixin"
 
-    def remove_href_odoo(self, value, remove_parent=True, remove_before=False):
+    def remove_href_odoo(
+        self, value, remove_parent=True, remove_before=False, to_keep=None
+    ):
         if len(value) < 20:
             return value
         # value can be bytes type; ensure we get a proper string
@@ -20,35 +23,41 @@ class MailRenderMixin(models.AbstractModel):
             value = value.decode()
         has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
         if has_odoo_link:
-            tree = etree.HTML(
-                value
-            )  # html with broken links   tree = etree.fromstring(value) just xml
-            odoo_achors = tree.xpath('//a[contains(@href,"odoo.com")]')
-            for elem in odoo_achors:
-                parent = elem.getparent()
-                previous = elem.getprevious()
+            # We don't want to change what was explicitly added in the message body,
+            # so we will only change what is before and after it.
+            if to_keep:
+                to_change = value.split(to_keep)
+            else:
+                to_change = [value]
+                to_keep = ""
+            new_parts = []
+            for part in to_change:
+                tree = html.fromstring(part)
+                if tree is None:
+                    new_parts.append(part)
+                    continue
+                odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
+                for elem in odoo_anchors:
+                    parent = elem.getparent()
+                    previous = elem.getprevious()
 
-                if remove_before and not remove_parent and previous is not None:
-                    # remove 'using' that is before <a and after </span>
-                    bytes_text = etree.tostring(
-                        previous, pretty_print=True, method="html"
-                    )
-                    only_what_is_in_tags = bytes_text[: bytes_text.rfind(b">") + 1]
-                    data_formatted = html.fromstring(only_what_is_in_tags)
-                    parent.replace(previous, data_formatted)
-                if remove_parent and len(parent.getparent()):
-                    # anchor <a href odoo has a parent powered by that must be removed
-                    parent.getparent().remove(parent)
-                else:
-                    if parent.tag == "td":  # also here can be powerd by
+                    if remove_before and not remove_parent and previous is not None:
+                        # remove 'using' that is before <a and after </span>
+                        previous.tail = ""
+                    if remove_parent and len(parent.getparent()):
+                        # anchor <a href odoo has a parent powered by that must be removed
                         parent.getparent().remove(parent)
                     else:
-                        parent.remove(elem)
-            value = etree.tostring(tree, pretty_print=True, method="html")
-            # etree can return bytes; ensure we get a proper string
-            if type(value) is bytes:
-                value = value.decode()
-        return re.sub("[^(<)(</)]odoo", "", value, flags=re.IGNORECASE)
+                        if parent.tag == "td":  # also here can be powered by
+                            parent.getparent().remove(parent)
+                        else:
+                            parent.remove(elem)
+                part = etree.tostring(
+                    tree, pretty_print=True, method="html", encoding="unicode"
+                )
+                new_parts.append(part)
+            value = to_keep.join(new_parts)
+        return value
 
     @api.model
     def _render_template(
