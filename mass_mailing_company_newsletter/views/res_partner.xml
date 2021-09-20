@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Camptocamp (http://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@gmail.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='sales_purchases']//group[@name='sale']"
+                position="inside"
+            >
+                <field name="main_mailing_list_id" invisible="1" />
+                <label
+                    for="main_mailing_list_subscription_state"
+                    string="Company Newsletter"
+                    attrs="{'invisible': [('main_mailing_list_id', '=', False)]}"
+                />
+                <div
+                    name="main_mailing_list_subscription_state"
+                    class="o_row"
+                    attrs="{'invisible': [('main_mailing_list_id', '=', False)]}"
+                >
+                    <field
+                        name="main_mailing_list_subscription_state"
+                        widget="radio"
+                        options="{'horizontal': True}"
+                        attrs="{'readonly': [('email', '=', False)]}"
+                    />
+                    <span
+                        name="main_mailing_list_subscription_date"
+                        class="text-muted oe_read_only"
+                        attrs="{'invisible': [('main_mailing_list_subscription_state', '!=', 'subscribed')]}"
+                    >
+                        on
+                        <field
+                            name="main_mailing_list_subscription_date"
+                            widget="date"
+                        />
+                    </span>
+                    <span
+                        name="main_mailing_list_unsubscription_date"
+                        class="text-muted oe_read_only"
+                        attrs="{'invisible': [('main_mailing_list_subscription_state', '!=', 'unsubscribed')]}"
+                    >
+                        on
+                        <field
+                            name="main_mailing_list_unsubscription_date"
+                            widget="date"
+                        />
+                    </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="main_mailing_list_subscription_state" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <filter name="inactive" position="after">
+                <separator />
+                <filter
+                    name="main_mailing_list_subscribed"
+                    string="Subscribed to Company Newsletter"
+                    domain="[('main_mailing_list_subscription_state', '=', 'subscribed')]"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>
