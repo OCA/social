@@ -6,20 +6,11 @@
 {
     "name": "Unique records for mass mailing",
     "summary": "Avoids duplicate mailing lists and contacts",
-    "version": "12.0.1.0.2",
+    "version": "14.0.1.0.0",
     "category": "Marketing",
     "website": "https://github.com/OCA/social",
-    "author": "Tecnativa, "
-              "Odoo Community Association (OCA)",
+    "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "application": False,
-    "installable": True,
+    "depends": ["mass_mailing"],
     "pre_init_hook": "pre_init_hook",
-    "images": [
-        "images/error-duplicated-email.png",
-        "images/error-duplicated-list.png",
-    ],
-    "depends": [
-        "mass_mailing",
-    ],
 }
