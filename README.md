@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 14.0.1.0.0 |  | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 14.0.1.0.0 |  | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_partner](mass_mailing_partner/) | 14.0.1.0.0 |  | Link partners with mass-mailing
+[mass_mailing_subscription_date](mass_mailing_subscription_date/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Track contact's subscription date to mailing lists
 
 [//]: # (end addons)
 
