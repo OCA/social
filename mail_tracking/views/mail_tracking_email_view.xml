@@ -102,12 +102,12 @@
             <field
                     name="sender"
                     string="Sender"
-                    filter_domain="[('sender', '=', self)]"
+                    filter_domain="[('sender', 'ilike', self)]"
                 />
             <field
                     name="recipient"
                     string="Recipient"
-                    filter_domain="[('recipient', '=', self)]"
+                    filter_domain="[('recipient', 'ilike', self)]"
                 />
             <field name="name" string="Subject" />
             <field name="time" string="Time" />
