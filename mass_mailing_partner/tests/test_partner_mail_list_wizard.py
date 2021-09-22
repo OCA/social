@@ -29,7 +29,7 @@ class PartnerMailListWizardCase(base.BaseCase):
             self.partner.mass_mailing_contact_ids.list_ids, self.mailing_list
         )
 
-        list_2 = self.create_mailing_list({"name": "New list"})
+        list_2 = self.create_mailing_list({"name": "Test Add to List"})
         wizard.mail_list_id = list_2
         wizard.add_to_mail_list()
         self.assertEqual(len(self.partner.mass_mailing_contact_ids), 1)

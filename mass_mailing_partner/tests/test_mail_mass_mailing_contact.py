@@ -112,8 +112,8 @@ class MailMassMailingContactCase(base.BaseCase):
     def test_partners_merge(self):
         partner_1 = self.create_partner({"name": "Demo 1", "email": "demo1@demo.com"})
         partner_2 = self.create_partner({"name": "Demo 2", "email": "demo2@demo.com"})
-        list_1 = self.create_mailing_list({"name": "List test 1"})
-        list_2 = self.create_mailing_list({"name": "List test 2"})
+        list_1 = self.create_mailing_list({"name": "List test Partners Merge 1"})
+        list_2 = self.create_mailing_list({"name": "List test Partners Merge 2"})
         contact_1 = self.create_mailing_contact(
             {
                 "email": partner_1.email,
