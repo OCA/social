@@ -73,18 +73,6 @@ class MailingContact(models.Model):
             super(MailingContact, contact).write(new_vals)
         return True
 
-    def _get_company(self):
-        company_id = False
-        if self.company_name:
-            company_id = (
-                self.env["res.company"].search([("name", "=", self.company_name)]).id
-            )
-            if not company_id:
-                company_id = (
-                    self.env["res.company"].create({"name": self.company_name}).id
-                )
-        return company_id
-
     def _get_categories(self):
         ca_ids = self.tag_ids.ids + self.list_ids.mapped("partner_category.id")
         return [[6, 0, ca_ids]]
@@ -95,7 +83,8 @@ class MailingContact(models.Model):
             "email": self.email,
             "country_id": self.country_id.id,
             "title": self.title_id.id,
-            "company_id": self._get_company(),
+            "company_name": self.company_name,
+            "company_id": False,
             "category_id": self._get_categories(),
         }
 
