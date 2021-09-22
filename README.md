@@ -48,7 +48,7 @@ addon | version | maintainers | summary
 [mass_mailing_custom_unsubscribe_event](mass_mailing_custom_unsubscribe_event/) | 13.0.1.0.0 |  | Allow to unsubscribe discretely from an event
 [mass_mailing_event_registration_exclude](mass_mailing_event_registration_exclude/) | 13.0.1.0.0 |  | Link mass mailing with event for excluding recipients
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 13.0.1.0.1 |  | Mass mailing lists that get autopopulated
-[mass_mailing_partner](mass_mailing_partner/) | 13.0.1.1.0 |  | Link partners with mass-mailing
+[mass_mailing_partner](mass_mailing_partner/) | 13.0.1.1.1 |  | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 13.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
 
 [//]: # (end addons)
