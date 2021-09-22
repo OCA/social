@@ -7,7 +7,7 @@
 
 # social
 
-TODO: add repo description.
+Addons concerning Odoo's social ERP features and messaging in general.
 
 <!-- /!\ do not modify below this line -->
 
