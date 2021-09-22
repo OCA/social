@@ -104,10 +104,10 @@ class MailMassMailingContactCase(base.BaseCase):
             'email': 'demo2@demo.com'
         })
         list_1 = self.create_mailing_list({
-            'name': 'List test 1'
+            'name': 'List test Partners Merge 1'
         })
         list_2 = self.create_mailing_list({
-            'name': 'List test 2'
+            'name': 'List test Partners Merge 2'
         })
         contact_1 = self.create_mailing_contact(
             {
