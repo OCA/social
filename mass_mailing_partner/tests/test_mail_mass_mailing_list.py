@@ -18,7 +18,7 @@ class MailMassMailingListCase(base.BaseCase):
         with self.assertRaises(ValidationError):
             self.create_mailing_list(
                 {
-                    "name": "List test 3",
+                    "name": "List test Create Mailing List",
                     "contact_ids": [(6, 0, (contact_test_1 | contact_test_2).ids)],
                 }
             )
@@ -33,7 +33,7 @@ class MailMassMailingListCase(base.BaseCase):
         with self.assertRaises(ValidationError):
             self.create_mailing_list(
                 {
-                    "name": "List test 3",
+                    "name": "List test Creat List With Subscription",
                     "contact_ids": [(4, contact_test_1.id), (4, contact_test_2.id)],
                 }
             )
