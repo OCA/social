@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_activity_board
+# 	* mail_activity_board
 #
 msgid ""
 msgstr ""
@@ -15,6 +15,27 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Weblate 4.3.2\n"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid ""
+"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Mark as Done\" title="
+"\"Mark as Done\"/>"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid ""
+"<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel\" title=\"Cancel\"/"
+">"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid ""
+"<i class=\"fa fa-undo\" role=\"img\" aria-label=\"Done &amp; Schedule Next\" "
+"title=\"Done &amp; Schedule Next\"/>"
+msgstr ""
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search

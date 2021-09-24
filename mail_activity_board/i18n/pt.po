@@ -17,6 +17,27 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid ""
+"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Mark as Done\" title="
+"\"Mark as Done\"/>"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid ""
+"<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel\" title=\"Cancel\"/"
+">"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid ""
+"<i class=\"fa fa-undo\" role=\"img\" aria-label=\"Done &amp; Schedule Next\" "
+"title=\"Done &amp; Schedule Next\"/>"
+msgstr ""
+
+#. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Act. next 6 months"
 msgstr "Ativ. próx. 6 meses"
