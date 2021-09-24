@@ -16,7 +16,7 @@ addon | version | maintainers | summary
 [base_search_mail_content](base_search_mail_content/) | 12.0.1.0.1 |  | Base Search Mail Content
 [email_template_qweb](email_template_qweb/) | 12.0.1.1.0 |  | Use the QWeb templating mechanism for emails
 [fetchmail_thread_default](fetchmail_thread_default/) | 12.0.1.0.0 |  | Post unkonwn messages to an existing thread
-[mail_activity_board](mail_activity_board/) | 12.0.1.0.1 |  | Add Activity Boards
+[mail_activity_board](mail_activity_board/) | 12.0.1.1.0 |  | Add Activity Boards
 [mail_activity_done](mail_activity_done/) | 12.0.2.0.0 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 12.0.1.0.0 |  | Add Partner to Activities
 [mail_activity_reminder](mail_activity_reminder/) | 12.0.1.0.1 |  | Reminder notifications about planned activities
