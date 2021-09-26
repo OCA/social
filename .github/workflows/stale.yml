@@ -14,6 +14,7 @@ jobs:
         uses: actions/stale@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          ascending: true
           exempt-pr-labels: "no stale"
           days-before-stale: 120
           days-before-close: 30
@@ -35,6 +36,7 @@ jobs:
         uses: actions/stale@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          ascending: true
           exempt-issue-labels: "no stale,needs more information"
           days-before-stale: 180
           days-before-close: 30
@@ -57,6 +59,7 @@ jobs:
         uses: actions/stale@v4
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+          ascending: true
           only-labels: "needs more information"
           exempt-issue-labels: "no stale"
           days-before-stale: 15
