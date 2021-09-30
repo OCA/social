@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2017-05-17 01:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2021-09-30 09:34+0000\n"
+"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
 "Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_optional_follower_notification
 #: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_form
@@ -26,11 +27,15 @@ msgid ""
 "notified but they can access the notification directly from the document (if "
 "they are allowed to)</span>"
 msgstr ""
+"<span name=\"no_followers_text\" attrs=\"{'invisible': [('notify_followers', "
+"'=', True)]}\" style=\"color: red;\"> - Atenció: Els seguidors no seran "
+"notificats, però poden accedir a la notificació directament des del document "
+"(si hi tenen permís)</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Fil d'emails"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
@@ -40,7 +45,7 @@ msgstr "Assistent per composició de correus electrònics"
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 msgid "Notify Followers"
-msgstr ""
+msgstr "Notificar als seguidors"
 
 #~ msgid "Message"
 #~ msgstr "Missatge"
