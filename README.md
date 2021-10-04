@@ -32,7 +32,7 @@ addon | version | maintainers | summary
 [mail_preview_base](mail_preview_base/) | 14.0.1.0.0 |  | Base to add more previewing options
 [mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.1.0 |  | Security for Send Message Button on Chatter Area
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
-[mail_tracking](mail_tracking/) | 14.0.1.1.0 |  | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 14.0.1.1.1 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 14.0.1.0.0 |  | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 14.0.1.0.0 |  | Improve mass mailing email tracking
 [mass_mailing_contact_partner](mass_mailing_contact_partner/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Links mailing.contacts with res.partners.
