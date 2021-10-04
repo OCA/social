@@ -3,15 +3,16 @@
 # Copyright 2020 Tecnativa - Alexandre D. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase, at_install, post_install
+from odoo.tests.common import SavepointCase
 
 
-@at_install(False)
-@post_install(True)
 class TestMassMailingEventRegistrationExclude(SavepointCase):
+    at_install = False
+    post_install = True
+
     @classmethod
     def setUpClass(cls):
-        super(TestMassMailingEventRegistrationExclude, cls).setUpClass()
+        super().setUpClass()
         cls.event = cls.env["event.event"].create(
             {
                 "name": "Test event",
@@ -56,7 +57,9 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                 {
                     "name": "Test subject",
                     "email_from": "from@example.com",
-                    "mailing_model_id": self.env["ir.model"]._get("mailing.contact").id,
+                    "mailing_model_id": self.env.ref(
+                        "mass_mailing.model_mailing_contact"
+                    ).id,
                     "mailing_domain": str(domain),
                     "contact_list_ids": [(6, 0, [self.contact_list.id])],
                     "body_html": "<p>Test email body</p>",
@@ -100,7 +103,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                 {
                     "name": "Test subject",
                     "email_from": "from@example.com",
-                    "mailing_model_id": self.env["ir.model"]._get("res.partner").id,
+                    "mailing_model_id": self.env.ref("base.model_res_partner").id,
                     "mailing_domain": str(domain),
                     "body_html": "<p>Test email body</p>",
                     "reply_to_mode": "email",
