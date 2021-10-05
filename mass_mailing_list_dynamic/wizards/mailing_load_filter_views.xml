@@ -18,12 +18,10 @@
         </field>
     </record>
 
-
-    <act_window
-        id="action_mailing_load_filter"
-        name="Load filter"
-        res_model="mailing.load.filter"
-        target="new"
-        view_mode="form"
-    />
+    <record id="action_mailing_load_filter" model="ir.actions.act_window">
+        <field name="name">Load filter</field>
+        <field name="res_model">mailing.load.filter</field>
+        <field name="target">new</field>
+        <field name="view_mode">form</field>
+    </record>
 </odoo>
