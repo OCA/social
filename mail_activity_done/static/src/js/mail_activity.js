@@ -8,6 +8,7 @@ odoo.define("mail.Activity.done", function(require) {
     var core = require("web.core");
     var time = require("web.time");
     var mail_activity = require("mail.Activity");
+    var session = require('web.session');
 
     var QWeb = core.qweb;
     var _t = core._t;
@@ -73,12 +74,15 @@ odoo.define("mail.Activity.done", function(require) {
                 var nbActivities = _.countBy(activities, "state");
                 this.$el.html(
                     QWeb.render("mail.activity_items", {
+                        uid: session.uid,
                         activities: activities,
                         nbPlannedActivities: nbActivities.planned,
                         nbTodayActivities: nbActivities.today,
                         nbOverdueActivities: nbActivities.overdue,
                         dateFormat: time.getLangDateFormat(),
                         datetimeFormat: time.getLangDatetimeFormat(),
+                        session: session,
+                        widget: this,
                     })
                 );
             } else {
