@@ -185,6 +185,3 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__sync_domain
 msgid "Synchronization critera"
 msgstr ""
-
-#~ msgid "Partner"
-#~ msgstr "Συνεργάτης"

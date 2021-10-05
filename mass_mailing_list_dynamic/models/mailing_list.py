@@ -3,7 +3,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.tools import safe_eval
+from odoo.tools.safe_eval import safe_eval
 
 
 class MassMailingList(models.Model):
@@ -14,7 +14,10 @@ class MassMailingList(models.Model):
         "partners from a given criteria."
     )
     sync_method = fields.Selection(
-        [("add", "Only add new records"), ("full", "Add and remove records as needed")],
+        selection=[
+            ("add", "Only add new records"),
+            ("full", "Add and remove records as needed"),
+        ],
         default="add",
         required=True,
         help="Choose the syncronization method for this list if you want to "

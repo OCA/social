@@ -2,19 +2,18 @@
 # Copyright 2020 Hibou Corp. - Jared Kipe
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 from mock import patch
 
 from odoo.exceptions import ValidationError
 from odoo.tests import common
 
 
-@common.at_install(False)
-@common.post_install(True)
 class DynamicListCase(common.SavepointCase):
+    post_install = True
+
     @classmethod
     def setUpClass(cls):
-        super(DynamicListCase, cls).setUpClass()
+        super().setUpClass()
         cls.tag = cls.env["res.partner.category"].create({"name": "testing tag"})
         cls.partners = cls.env["res.partner"]
         for number in range(5):
@@ -39,7 +38,6 @@ class DynamicListCase(common.SavepointCase):
                 "contact_list_ids": [(4, cls.list.id, False)],
             }
         )
-        cls.mail._onchange_model_and_list()
 
     def test_list_sync(self):
         """List is synced correctly."""

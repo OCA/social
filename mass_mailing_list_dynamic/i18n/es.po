@@ -189,6 +189,3 @@ msgstr "Sincronizar ahora"
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__sync_domain
 msgid "Synchronization critera"
 msgstr "Criterio de sincronización"
-
-#~ msgid "Partner"
-#~ msgstr "Empresa"
