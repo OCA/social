@@ -1,0 +1,111 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_event
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# enjolras <yo@miguelrevilla.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-26 01:46+0000\n"
+"PO-Revision-Date: 2018-02-26 01:46+0000\n"
+"Last-Translator: enjolras <yo@miguelrevilla.com>, 2018\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__code
+msgid "Code"
+msgstr "Código"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_date
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration
+#, fuzzy
+msgid "Event Registration"
+msgstr "event.registration.state"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration_state
+#, fuzzy
+msgid "Event Registration State"
+msgstr "event.registration.state"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__event_id
+msgid "Event related"
+msgstr "Evento relacionado"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__exclude_event_state_ids
+msgid "Exclude"
+msgstr "Excluir"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_date
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_contact
+msgid "Mailing Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr "Envío masivo"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
+msgid "Name"
+msgstr "Nombre"
+
+#~ msgid "Mass Mailing Contact"
+#~ msgstr "Contacto de envío masivo"
+
+#~ msgid "Attendee"
+#~ msgstr "Asistente"
+
+#~ msgid "Partner"
+#~ msgstr "Empresa"
