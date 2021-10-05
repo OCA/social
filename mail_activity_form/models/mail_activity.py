@@ -28,7 +28,7 @@ class ModelProxy(object):
 
     def __getitem__(self, key):
         if isinstance(key, str):
-            return self.__getattribute__(key)
+            return getattr(self, key)
         return ModelProxy(object.__getattribute__(self, "__model__")[key])
 
 

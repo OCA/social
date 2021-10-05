@@ -31,7 +31,10 @@
             >It can also make sense to add some constants to the template to use in formulas, here we add some factor: <span
                     data-form-id="factor"
                     data-form-type="float"
-                >42</span></div>
+                >42</span>. And you can use dotted paths and items: <span
+                    data-form-id="user_name"
+                    data-form-compute="object.create_uid['name']"
+                /></div>
     </field>
 </record>
 
