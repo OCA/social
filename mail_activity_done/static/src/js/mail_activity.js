@@ -13,6 +13,20 @@ odoo.define("mail.Activity.done", function(require) {
     var QWeb = core.qweb;
     var _t = core._t;
 
+    /**
+     * Set the file upload identifier for 'upload_file' type activities
+     *
+     * @param {Array} activities list of activity Object
+     * @return {Array} : list of modified activity Object
+     */
+    var setFileUploadID = function (activities) {
+        _.each(activities, function (activity) {
+            if (activity.activity_category === 'upload_file') {
+                activity.fileuploadID = _.uniqueId('o_fileupload');
+            }
+        });
+        return activities;
+    };
     // We are forced here to override the method, as there is no possibility
     // to inherit it.
     var setDelayLabel = function(activities) {
@@ -69,7 +83,7 @@ odoo.define("mail.Activity.done", function(require) {
                     );
                 }
             });
-            var activities = setDelayLabel(this._activities);
+            var activities = setFileUploadID(setDelayLabel(this._activities));
             if (activities.length) {
                 var nbActivities = _.countBy(activities, "state");
                 this.$el.html(
@@ -85,7 +99,9 @@ odoo.define("mail.Activity.done", function(require) {
                         widget: this,
                     })
                 );
+                this._bindOnUploadAction(this._activities);
             } else {
+                this._unbindOnUploadAction(this._activities);
                 this.$el.empty();
             }
         },
