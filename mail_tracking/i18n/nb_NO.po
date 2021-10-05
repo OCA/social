@@ -170,8 +170,16 @@ msgid "Delivered"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_ir_config_parameter__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_ir_mail_server__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_alias__display_name
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_message__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_resend_message__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__display_name
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__display_name
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Vis navn"
 
@@ -273,7 +281,6 @@ msgid "Failed"
 msgstr ""
 
 #. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
@@ -329,9 +336,17 @@ msgid "Hard bounce"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_ir_config_parameter__id
+#: model:ir.model.fields,field_description:mail_tracking.field_ir_mail_server__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_alias__id
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_message__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_resend_message__id
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__id
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__id
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__id
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
@@ -352,9 +367,17 @@ msgid "Is mobile?"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_ir_config_parameter____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_ir_mail_server____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_alias____last_update
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_mail____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_message____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_resend_message____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread____last_update
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email____last_update
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event____last_update
+#: model:ir.model.fields,field_description:mail_tracking.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Sist endret den"
 
