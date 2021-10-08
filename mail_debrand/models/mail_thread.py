@@ -10,5 +10,16 @@ class MailThread(models.AbstractModel):
 
     def _replace_local_links(self, html, base_url=None):
         html = super()._replace_local_links(html, base_url=base_url)
-        html_debranded = self.env["mail.template"]._debrand_body(html)
+        lang = False
+        if {'default_template_id', 'default_model', 'default_res_id'} \
+                <= self.env.context.keys():
+            template = self.env["mail.template"].browse(
+                self.env.context['default_template_id'])
+            if template.lang:
+                lang = template._render_template(template.lang,
+                                                 self.env.context['default_model'],
+                                                 self.env.context['default_res_id'])
+            elif template._context.get('lang', False):
+                lang = template._context.get('lang')
+        html_debranded = self.env["mail.template"]._debrand_body(html, lang)
         return html_debranded

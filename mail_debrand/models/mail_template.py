@@ -11,10 +11,10 @@ class MailTemplate(models.Model):
     _inherit = "mail.template"
 
     @api.model
-    def _debrand_translated_words(self):
+    def _debrand_translated_words(self, lang):
         def _get_translated(word):
             return self.env["ir.translation"]._get_source(
-                "ir.ui.view,arch_db", "model_terms", self.env.lang, word
+                "ir.ui.view,arch_db", "model_terms", lang, word
             )
 
         odoo_word = _get_translated("Odoo") or _("Odoo")
@@ -23,8 +23,10 @@ class MailTemplate(models.Model):
         return odoo_word, powered_by, using_word
 
     @api.model
-    def _debrand_body(self, html):
-        odoo_word, powered_by, using_word = self._debrand_translated_words()
+    def _debrand_body(self, html, lang=False):
+        if not lang:
+            lang = self.env.lang
+        odoo_word, powered_by, using_word = self._debrand_translated_words(lang)
         html = re.sub(using_word + "(.*)[\r\n]*(.*)>" + odoo_word + r"</a>", "", html)
         if powered_by not in html:
             return html
