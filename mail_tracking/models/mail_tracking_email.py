@@ -382,6 +382,7 @@ class MailTrackingEmail(models.Model):
                 _logger.debug("Concurrent event '%s' discarded", event_type)
         return event_ids
 
+    # TODO Remove useless method
     @api.model
     def event_process(self, request, post, metadata, event_type=None):
         # Generic event process hook, inherit it and
