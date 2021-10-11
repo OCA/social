@@ -120,6 +120,10 @@ class MailTrackingEvent(models.Model):
         return self._process_data(tracking_email, metadata, event_type, state)
 
     @api.model
+    def process_sent(self, tracking_email, metadata):
+        return self._process_status(tracking_email, metadata, "sent", "sent")
+
+    @api.model
     def process_delivered(self, tracking_email, metadata):
         return self._process_status(tracking_email, metadata, "delivered", "delivered")
 
