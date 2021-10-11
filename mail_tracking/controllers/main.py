@@ -39,6 +39,7 @@ class MailTrackingController(MailController):
             'ua_family': request.user_agent.browser or False,
         }
 
+    # TODO Remove useless controller
     @http.route(['/mail/tracking/all/<string:db>',
                  '/mail/tracking/event/<string:db>/<string:event_type>'],
                 type='http', auth='none', csrf=False)
