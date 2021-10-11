@@ -41,6 +41,7 @@ class MailTrackingController(MailController):
             "ua_family": request.user_agent.browser or False,
         }
 
+    # TODO Remove useless controller
     @http.route(
         [
             "/mail/tracking/all/<string:db>",
