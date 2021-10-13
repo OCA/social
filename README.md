@@ -21,6 +21,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 14.0.1.0.0 |  | Base Search Mail Content
 [email_template_qweb](email_template_qweb/) | 14.0.1.0.0 |  | Use the QWeb templating mechanism for emails
+[mail_activity_board](mail_activity_board/) | 14.0.1.0.0 |  | Add Activity Boards
 [mail_allow_portal_internal_note](mail_allow_portal_internal_note/) | 14.0.1.0.0 |  | Portal users can access internal messages related to own or other companies
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 14.0.1.0.0 |  | Adding attachment on the object by sending this one
 [mail_autosubscribe](mail_autosubscribe/) | 14.0.1.0.0 |  | Automatically subscribe partners to its company's business documents
