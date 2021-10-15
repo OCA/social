@@ -32,7 +32,8 @@ class MailMail(models.Model):
                     ).mapped('partner_id').ids
                     partners_len = len(partners_obj.filtered(
                         lambda x: x.id not in user_partner_ids and (
-                            not x.user_ids or group_portal in x.user_ids.groups_id
+                            not x.user_ids or
+                            group_portal in x.user_ids.mapped("groups_id")
                         )))
                     if partners_len > 1:
                         # get partners
@@ -55,7 +56,7 @@ class MailMail(models.Model):
                             partners = partners_obj.filtered(
                                 lambda x: x.id not in user_partner_ids and (
                                     not x.user_ids or group_portal in
-                                    x.user_ids.groups_id
+                                    x.user_ids.mapped("groups_id")
                                 )
                             )
                         # get names and emails
