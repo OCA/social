@@ -28,6 +28,7 @@ setuptools.setup(
         'odoo14-addon-mass_mailing_contact_partner',
         'odoo14-addon-mass_mailing_custom_unsubscribe',
         'odoo14-addon-mass_mailing_event_registration_exclude',
+        'odoo14-addon-mass_mailing_list_dynamic',
         'odoo14-addon-mass_mailing_partner',
         'odoo14-addon-mass_mailing_subscription_date',
     ],
