@@ -1,0 +1,5 @@
+diff a/.github/workflows/stale.yml b/.github/workflows/stale.yml	(rejected hunks)
+@@ -52,2 +52,3 @@ jobs:
+           repo-token: ${{ secrets.GITHUB_TOKEN }}
++          ascending: true
+           only-labels: "needs more information"
