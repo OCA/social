@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo14-addon-mass_mailing_event_registration_exclude',
         'odoo14-addon-mass_mailing_list_dynamic',
         'odoo14-addon-mass_mailing_partner',
+        'odoo14-addon-mass_mailing_resend',
         'odoo14-addon-mass_mailing_subscription_date',
     ],
     classifiers=[
