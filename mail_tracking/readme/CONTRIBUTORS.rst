@@ -6,3 +6,6 @@
   * Ernesto Tejeda
   * Rafael Blasco
   * Alexandre Díaz
+
+* `Eezee-IT <https://www.eezee-it.com>`_:
+  * Asma Elferkhsi

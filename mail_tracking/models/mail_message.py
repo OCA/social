@@ -242,6 +242,8 @@ class MailMessage(models.Model):
         failed_trackings = self.mail_tracking_ids.filtered(
             lambda x: x.state in self.get_failed_states()
         )
+        if not failed_trackings or not self.mail_tracking_needs_action:
+            return
         failed_partners = failed_trackings.mapped("partner_id")
         failed_recipients = failed_partners.name_get()
         if self.author_id:
@@ -305,3 +307,13 @@ class MailMessage(models.Model):
         )
 
         return ids
+
+    @api.model
+    def get_failed_messsage_info(self, ids, model):
+        msg_ids = self.search([("res_id", "=", ids), ("model", "=", model)])
+        res = [
+            msg._prepare_dict_failed_message()
+            for msg in msg_ids.sorted("date", reverse=True)
+            if msg._prepare_dict_failed_message()
+        ]
+        return res
