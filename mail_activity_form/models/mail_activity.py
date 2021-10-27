@@ -69,10 +69,35 @@ class MailActivity(models.Model):
         """
         Update note from template if we're told so
         """
-        # TODO: extract vals from old note field, apply to type's default
-        # description and return as note content
-        # if type.write_date > activity.write_date
-        return super().read(fields=fields, load=load)
+        result = super().read(fields=fields, load=load)
+
+        if (
+            not fields
+            or "note" in fields
+            and self.env.context.get("_mail_activity_form_update") != self
+        ):
+            for this, this_values in zip(
+                self.with_context(_mail_activity_form_update=self), result,
+            ):
+                activity_type = this.activity_type_id
+                if (
+                    not activity_type.uses_forms
+                    or this.write_date > activity_type.write_date
+                ):
+                    continue
+                # if the type has been updated, return html from type
+                # but with values from current activity
+                fromstring = lxml_html.fromstring
+                template = fromstring(activity_type.default_description)
+                current = fromstring(this_values["note"])
+                this_values["note"] = str(
+                    lxml_html.tostring(
+                        this._mail_activity_form_update(
+                            template, this._mail_activity_form_extract(current),
+                        ),
+                    )
+                )
+        return result
 
     def _mail_activity_form_compute(self, raise_on_error=True):
         """
@@ -86,10 +111,10 @@ class MailActivity(models.Model):
         vals = self._mail_activity_form_extract(doc, compute=True)
         for node in doc.xpath("//*[@%s]" % _compute):
             if node.get(_id) in vals:
-                node.text = vals.get(node.get(_id))
+                node.text = str(vals.get(node.get(_id)))
             else:
-                node.text = self._mail_activity_form_extract_value(
-                    node, vals, compute=True,
+                node.text = str(
+                    self._mail_activity_form_extract_value(node, vals, compute=True,)
                 )
         self.with_context(_mail_activity_form_compute=self,).write(
             {"note": lxml_html.tostring(doc)}
@@ -103,7 +128,9 @@ class MailActivity(models.Model):
         if not self.note or not self.activity_type_id.default_description:
             return
         template_html = lxml_html.fromstring(self.activity_type_id.default_description)
-        activity_html = lxml_html.fromstring(self.note)
+        activity_html = lxml_html.fromstring(
+            self.with_context(_mail_activity_form_update=self).note
+        )
         _id, _editable, _compute, _type = self._mail_activity_form_attributes()
         different = False
         for t, a in itertools.zip_longest(template_html.iter(), activity_html.iter()):
@@ -116,7 +143,7 @@ class MailActivity(models.Model):
                 break
 
             for attribute in t.attrib:
-                if t.attrib[attribute] != a.attrib[attribute]:
+                if t.attrib[attribute].strip() != a.attrib[attribute].strip():
                     different = True
 
             if different:
@@ -144,6 +171,18 @@ class MailActivity(models.Model):
             "%scompute" % self._mail_activity_form_prefix,
             "%stype" % self._mail_activity_form_prefix,
         )
+
+    def _mail_activity_form_update(self, html, values):
+        """
+        Replace the content of all nodes in html with an -id attribute with the
+        value from values of that name, return modified html
+        """
+        _id, _editable, _compute, _type = self._mail_activity_form_attributes()
+        for node in html.xpath("//*[@%s]" % (_id)):
+            node.text = self._mail_activity_form_format_value(
+                values.get(node.attrib[_id]), node.attrib.get(_type),
+            )
+        return html
 
     def _mail_activity_form_extract(self, html, compute=False):
         """
@@ -189,6 +228,12 @@ class MailActivity(models.Model):
         if value_type not in ("float", "int", "str", None):
             raise exceptions.UserError(_("Value type %s is invalid",) % value_type)
         return _BUILTINS.get(value_type, _BUILTINS["str"])(value)
+
+    def _mail_activity_form_format_value(self, value, value_type):
+        """
+        Format a value for representation
+        """
+        return str(value)
 
     def _mail_activity_form_eval(self, expression, values):
         """

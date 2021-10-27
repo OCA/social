@@ -62,3 +62,22 @@ class TestMailActivityForm(TransactionCase):
                     'compute="different"',
                 )
             )
+
+    def test_change_template(self):
+        """
+        Test that after changing a template, we get the updated version when reading
+        """
+        cell_template = (
+            '<td %(p)sid="%%s" %(p)stype="float" %(p)seditable="1">%%s</td>'
+        ) % {"p": self.env["mail.activity"]._mail_activity_form_prefix}
+        activity = self._create_activity(
+            self.activity_type.default_description.replace(
+                cell_template % ("value1", ""), cell_template % ("value1", "1"),
+            ).replace(cell_template % ("value2", ""), cell_template % ("value2", "2"),),
+        )
+        extra_node = "<div>some extra text</div>"
+        self.activity_type.default_description += extra_node
+        updated_note = activity.read(["note"])[0]["note"]
+        self.assertIn(extra_node, updated_note)
+        self.assertIn(cell_template % ("value1", "1.0"), updated_note)
+        self.assertIn(cell_template % ("value2", "2.0"), updated_note)
