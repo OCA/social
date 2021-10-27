@@ -22,11 +22,27 @@
             />
             <script
                 type="text/javascript"
-                src="/mail_tracking/static/src/js/failed_message/discuss.js"
+                src="/mail_tracking/static/src/js/message.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_tracking/static/src/js/failed_message/mail_failed_box.js"
             />
             <script
                 type="text/javascript"
                 src="/mail_tracking/static/src/js/failed_message/thread.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_tracking/static/src/js/models/thread.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_tracking/static/src/js/chatter.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_tracking/static/src/js/discuss/discuss.js"
             />
         </xpath>
     </template>
