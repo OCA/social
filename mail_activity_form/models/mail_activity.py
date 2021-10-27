@@ -90,13 +90,11 @@ class MailActivity(models.Model):
                 fromstring = lxml_html.fromstring
                 template = fromstring(activity_type.default_description)
                 current = fromstring(this_values["note"])
-                this_values["note"] = str(
-                    lxml_html.tostring(
-                        this._mail_activity_form_update(
-                            template, this._mail_activity_form_extract(current),
-                        ),
-                    )
-                )
+                this_values["note"] = lxml_html.tostring(
+                    this._mail_activity_form_update(
+                        template, this._mail_activity_form_extract(current),
+                    ),
+                ).decode("utf8")
         return result
 
     def _mail_activity_form_compute(self, raise_on_error=True):
