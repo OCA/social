@@ -4,7 +4,7 @@
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <template>
 
-<t t-name="mail.tracking.status">
+<t t-name="mail.tracking.status" owl="1">
     <t t-if="tracking['isCc']">
         <span class="mail_tracking_cc">
             <i class="fa fa-cc" />
@@ -54,9 +54,8 @@
         </span>
     </t>
 </t>
-
-<t t-extend="mail.widget.Thread.Message">
-    <t t-jquery="p.o_mail_info" t-operation="after">
+<t t-inherit="mail.Message" t-inherit-mode="extension">
+    <xpath expr="//div[hasclass('o_Message_header')]" position="after">
         <t t-if="message.hasPartnerTrackings() || message.hasEmailCc()">
             <p class="o_mail_tracking">
                 <strong>To:</strong>
@@ -68,7 +67,7 @@
                         <a
                                 t-attf-class="o_mail_action_tracking_partner #{tracking['isCc'] ? 'o_mail_cc' : ''}"
                                 t-att-data-partner="tracking['partner_id']"
-                                t-attf-href="#model=res.partner&amp;id=#{tracking['partner_id']}"
+                                t-attf-href="#model=res.partner&amp;id={{tracking['partner_id']}}"
                             >
                             <t t-esc="tracking['recipient']" />
                         </a>
@@ -92,13 +91,14 @@
                             class="mail_tracking o_mail_action_tracking_status"
                             t-att-data-tracking="tracking['tracking_id']"
                             t-att-title="title_status"
+                            t-on-click="_onTrackingStatusClick"
                         >
                         <t t-call="mail.tracking.status" />
                     </span>
                 </t>
             </p>
         </t>
-    </t>
-</t>
 
+    </xpath>
+</t>
 </template>
