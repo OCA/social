@@ -7,10 +7,15 @@ from odoo import models, fields
 class MailTrackingEvent(models.Model):
     _inherit = "mail.tracking.event"
 
+    _sql_constraints = [
+        ("mailgun_id_unique", "UNIQUE(mailgun_id)", "Mailgun event IDs must be unique!")
+    ]
+
     mailgun_id = fields.Char(
         string="Mailgun Event ID",
         copy="False",
         readonly=True,
+        index=True,
     )
 
     def _process_data(self, tracking_email, metadata, event_type, state):
