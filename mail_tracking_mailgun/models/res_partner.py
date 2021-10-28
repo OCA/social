@@ -4,6 +4,8 @@
 # Copyright 2017 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from urllib.parse import urljoin
+
 import requests
 
 from odoo import _, api, models
@@ -43,10 +45,8 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-email-validation.html
         """
-        api_key, api_url, domain, validation_key = self.env[
-            "mail.tracking.email"
-        ]._mailgun_values()
-        if not validation_key:
+        params = self.env["mail.tracking.email"]._mailgun_values()
+        if not params.validation_key:
             raise UserError(
                 _(
                     "You need to configure mailgun.validation_key"
@@ -55,9 +55,8 @@ class ResPartner(models.Model):
             )
         for partner in self.filtered("email"):
             res = requests.get(
-                # Validation API url is always the same
-                "https://api.mailgun.net/v3/address/validate",
-                auth=("api", validation_key),
+                urljoin(params.api_url, "/v3/address/validate"),
+                auth=("api", params.validation_key),
                 params={"address": partner.email, "mailbox_verification": True},
             )
             if (
@@ -127,12 +126,12 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-suppressions.html
         """
-        api_key, api_url, domain, validation_key = self.env[
+        api_key, api_url, domain, *__ = self.env[
             "mail.tracking.email"
         ]._mailgun_values()
         for partner in self:
             res = requests.get(
-                "{}/{}/bounces/{}".format(api_url, domain, partner.email),
+                urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
                 auth=("api", api_key),
             )
             if res.status_code == 200 and not partner.email_bounced:
@@ -146,12 +145,12 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-suppressions.html
         """
-        api_key, api_url, domain, validation_key = self.env[
+        api_key, api_url, domain, *__ = self.env[
             "mail.tracking.email"
         ]._mailgun_values()
         for partner in self:
             res = requests.post(
-                "{}/{}/bounces".format(api_url, domain),
+                urljoin(api_url, "/v3/%s/bounces" % domain),
                 auth=("api", api_key),
                 data={"address": partner.email},
             )
@@ -163,12 +162,12 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-suppressions.html
         """
-        api_key, api_url, domain, validation_key = self.env[
+        api_key, api_url, domain, *__ = self.env[
             "mail.tracking.email"
         ]._mailgun_values()
         for partner in self:
             res = requests.delete(
-                "{}/{}/bounces/{}".format(api_url, domain, partner.email),
+                urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
                 auth=("api", api_key),
             )
             if res.status_code in (200, 404) and partner.email_bounced:
