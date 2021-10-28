@@ -6,4 +6,5 @@
   * David Vidal
   * Rafael Blasco
   * Ernesto Tejeda
+  * Jairo Llopis
   * Carlos Roca
