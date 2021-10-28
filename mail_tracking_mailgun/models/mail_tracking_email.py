@@ -1,11 +1,12 @@
 # Copyright 2016 Tecnativa - Antonio Espinosa
 # Copyright 2017 Tecnativa - David Vidal
+# Copyright 2021 Tecnativa - Jairo Llopis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-import hashlib
-import hmac
 import logging
+from collections import namedtuple
 from datetime import datetime
+from urllib.parse import urljoin
 
 import requests
 
@@ -14,6 +15,22 @@ from odoo.exceptions import UserError, ValidationError
 from odoo.tools import email_split
 
 _logger = logging.getLogger(__name__)
+
+MailgunParameters = namedtuple(
+    "MailgunParameters",
+    (
+        "api_key",
+        "api_url",
+        "domain",
+        "validation_key",
+        "webhooks_domain",
+        "webhook_signing_key",
+    ),
+)
+
+
+class EventNotFoundWarning(Warning):
+    pass
 
 
 class MailTrackingEmail(models.Model):
@@ -29,49 +46,30 @@ class MailTrackingEmail(models.Model):
             return country.id
         return False
 
-    @property
-    def _mailgun_mandatory_fields(self):
-        return (
-            "event",
-            "timestamp",
-            "token",
-            "signature",
-            "tracking_email_id",
-            "odoo_db",
-        )
+    @api.model
+    def _mailgun_event2type(self, event, default="UNKNOWN"):
+        """Return the ``mail.tracking.event`` equivalent event
 
-    @property
-    def _mailgun_event_type_mapping(self):
-        return {
-            # Mailgun event type: tracking event type
+        Args:
+            event: Mailgun event response from API.
+            default: Value to return when not found.
+        """
+        # Mailgun event type: tracking event type
+        equivalents = {
             "delivered": "delivered",
             "opened": "open",
             "clicked": "click",
             "unsubscribed": "unsub",
             "complained": "spam",
-            "bounced": "hard_bounce",
-            "dropped": "reject",
             "accepted": "sent",
-            "failed": "error",
-            "rejected": "error",
+            "failed": (
+                "hard_bounce" if event.get("severity") == "permanent" else "soft_bounce"
+            ),
+            "rejected": "reject",
         }
+        return equivalents.get(event.get("event"), default)
 
-    def _mailgun_event_type_verify(self, event):
-        event = event or {}
-        mailgun_event_type = event.get("event")
-        if mailgun_event_type not in self._mailgun_event_type_mapping:
-            _logger.error("Mailgun: event type '%s' not supported", mailgun_event_type)
-            return False
-        # OK, event type is valid
-        return True
-
-    def _mailgun_signature(self, api_key, timestamp, token):
-        return hmac.new(
-            key=bytes(api_key, "utf-8"),
-            msg=bytes("{}{}".format(str(timestamp), str(token)), "utf-8"),
-            digestmod=hashlib.sha256,
-        ).hexdigest()
-
+    @api.model
     def _mailgun_values(self):
         icp = self.env["ir.config_parameter"].sudo()
         api_key = icp.get_param("mailgun.apikey")
@@ -83,43 +81,17 @@ class MailTrackingEmail(models.Model):
         if not domain:
             raise ValidationError(_("A Mailgun domain value is needed!"))
         validation_key = icp.get_param("mailgun.validation_key")
-        return api_key, api_url, domain, validation_key
-
-    def _mailgun_signature_verify(self, event):
-        event = event or {}
-        icp = self.env["ir.config_parameter"].sudo()
-        api_key = icp.get_param("mailgun.apikey")
-        if not api_key:
-            _logger.warning(
-                "No Mailgun api key configured. "
-                "Please add 'mailgun.apikey' to System parameters "
-                "to enable Mailgun authentication webhoook "
-                "requests. More info at: "
-                "https://documentation.mailgun.com/"
-                "user_manual.html#webhooks"
-            )
-        else:
-            timestamp = event.get("timestamp")
-            token = event.get("token")
-            signature = event.get("signature")
-            event_digest = self._mailgun_signature(api_key, timestamp, token)
-            if signature != event_digest:
-                _logger.error(
-                    "Mailgun: Invalid signature '%s' != '%s'", signature, event_digest
-                )
-                return False
-        # OK, signature is valid
-        return True
-
-    def _db_verify(self, event):
-        event = event or {}
-        odoo_db = event.get("odoo_db")
-        current_db = self.env.cr.dbname
-        if odoo_db != current_db:
-            _logger.error("Mailgun: Database '%s' is not the current database", odoo_db)
-            return False
-        # OK, DB is current
-        return True
+        web_base_url = icp.get_param("web.base.url")
+        webhooks_domain = icp.get_param("mailgun.webhooks_domain", web_base_url)
+        webhook_signing_key = icp.get_param("mailgun.webhook_signing_key")
+        return MailgunParameters(
+            api_key,
+            api_url,
+            domain,
+            validation_key,
+            webhooks_domain,
+            webhook_signing_key,
+        )
 
     def _mailgun_metadata(self, mailgun_event_type, event, metadata):
         # Get Mailgun timestamp when found
@@ -159,20 +131,22 @@ class MailTrackingEmail(models.Model):
             }
         )
         # Mapping for special events
-        if mailgun_event_type == "bounced":
+        if mailgun_event_type == "failed":
+            delivery_status = event.get("delivery-status", {})
             metadata.update(
                 {
-                    "error_type": event.get("code", False),
-                    "error_description": event.get("error", False),
-                    "error_details": event.get("notification", False),
+                    "error_type": delivery_status.get("code", False),
+                    "error_description": delivery_status.get("message", False),
+                    "error_details": delivery_status.get("description", False),
                 }
             )
-        elif mailgun_event_type == "dropped":
+        elif mailgun_event_type == "rejected":
+            reject = event.get("reject", {})
             metadata.update(
                 {
-                    "error_type": event.get("reason", False),
-                    "error_description": event.get("code", False),
-                    "error_details": event.get("description", False),
+                    "error_type": "rejected",
+                    "error_description": reject.get("reason", False),
+                    "error_details": reject.get("description", False),
                 }
             )
         elif mailgun_event_type == "complained":
@@ -185,87 +159,79 @@ class MailTrackingEmail(models.Model):
             )
         return metadata
 
-    def _mailgun_tracking_get(self, event):
-        tracking = False
-        tracking_email_id = event.get("tracking_email_id", False)
-        if tracking_email_id and tracking_email_id.isdigit():
-            tracking = self.search([("id", "=", tracking_email_id)], limit=1)
-        return tracking
-
-    def _event_is_from_mailgun(self, event):
-        event = event or {}
-        return all([k in event for k in self._mailgun_mandatory_fields])
-
     @api.model
-    def event_process(self, request, post, metadata, event_type=None):
-        res = super().event_process(request, post, metadata, event_type=event_type)
-        if res == "NONE" and self._event_is_from_mailgun(post):
-            if not self._mailgun_signature_verify(post):
-                res = "ERROR: Signature"
-            elif not self._mailgun_event_type_verify(post):
-                res = "ERROR: Event type not supported"
-            elif not self._db_verify(post):
-                res = "ERROR: Invalid DB"
-            else:
-                res = "OK"
-        if res == "OK":
-            mailgun_event_type = post.get("event")
-            mapped_event_type = (
-                self._mailgun_event_type_mapping.get(mailgun_event_type) or event_type
-            )
-            if not mapped_event_type:  # pragma: no cover
-                res = "ERROR: Bad event"
-            tracking = self._mailgun_tracking_get(post)
-            if not tracking:
-                res = "ERROR: Tracking not found"
-        if res == "OK":
-            # Complete metadata with mailgun event info
-            metadata = self._mailgun_metadata(mailgun_event_type, post, metadata)
-            # Create event
-            tracking.event_create(mapped_event_type, metadata)
-        if res != "NONE":
-            if event_type:
-                _logger.info("Mailgun: event '%s' process '%s'", event_type, res)
-            else:
-                _logger.info("Mailgun: event process '%s'", res)
-        return res
+    def _mailgun_event_process(self, event_data, metadata):
+        """Retrieve (and maybe create) mailgun event from API data payload.
+
+        In https://documentation.mailgun.com/en/latest/api-events.html#event-structure
+        you can read the event payload format as obtained from webhooks or calls to API.
+        """
+        if event_data["user-variables"]["odoo_db"] != self.env.cr.dbname:
+            raise ValidationError(_("Wrong database for event!"))
+        # Do nothing if event was already processed
+        mailgun_id = event_data["id"]
+        db_event = self.env["mail.tracking.event"].search(
+            [("mailgun_id", "=", mailgun_id)], limit=1
+        )
+        if db_event:
+            _logger.debug("Mailgun event already found in DB: %s", mailgun_id)
+            return db_event
+        # Do nothing if tracking email for event is not found
+        message_id = event_data["message"]["headers"]["message-id"]
+        recipient = event_data["recipient"]
+        tracking_email = self.browse(
+            int(event_data["user-variables"]["tracking_email_id"])
+        )
+        mailgun_event_type = event_data["event"]
+        # Process event
+        state = self._mailgun_event2type(event_data, mailgun_event_type)
+        metadata = self._mailgun_metadata(mailgun_event_type, event_data, metadata)
+        _logger.info(
+            "Importing mailgun event %s (%s message %s for %s)",
+            mailgun_id,
+            mailgun_event_type,
+            message_id,
+            recipient,
+        )
+        tracking_email.event_create(state, metadata)
 
     def action_manual_check_mailgun(self):
-        """
-        Manual check against Mailgun API
+        """Manual check against Mailgun API
+
         API Documentation:
         https://documentation.mailgun.com/en/latest/api-events.html
         """
-        api_key, api_url, domain, validation_key = self._mailgun_values()
+        api_key, api_url, domain, *__ = self._mailgun_values()
         for tracking in self:
             if not tracking.mail_message_id:
                 raise UserError(_("There is no tracked message!"))
             message_id = tracking.mail_message_id.message_id.replace("<", "").replace(
                 ">", ""
             )
-            res = requests.get(
-                "{}/{}/events".format(api_url, domain),
-                auth=("api", api_key),
-                params={
-                    "begin": tracking.timestamp,
-                    "ascending": "yes",
-                    "message-id": message_id,
-                },
-            )
-            if not res or res.status_code != 200:
-                raise ValidationError(_("Couldn't retrieve Mailgun information"))
-            content = res.json()
-            if "items" not in content:
-                raise ValidationError(_("Event information not longer stored"))
-            for item in content["items"]:
-                # mailgun event hasn't been synced and recipient is the same as
-                # in the evaluated tracking. We use email_split since tracking
-                # recipient could come in format: "example" <to@dest.com>
-                if not self.env["mail.tracking.event"].search(
-                    [("mailgun_id", "=", item["id"])]
-                ) and (item.get("recipient", "") == email_split(tracking.recipient)[0]):
-                    mapped_event_type = self._mailgun_event_type_mapping.get(
-                        item["event"], item["event"]
-                    )
-                    metadata = self._mailgun_metadata(mapped_event_type, item, {})
-                    tracking.event_create(mapped_event_type, metadata)
+            events = []
+            url = urljoin(api_url, "/v3/%s/events" % domain)
+            params = {
+                "begin": tracking.timestamp,
+                "ascending": "yes",
+                "message-id": message_id,
+                "recipient": email_split(tracking.recipient)[0],
+            }
+            while url:
+                res = requests.get(
+                    url,
+                    auth=("api", api_key),
+                    params=params,
+                )
+                if not res or res.status_code != 200:
+                    raise UserError(_("Couldn't retrieve Mailgun information"))
+                iter_events = res.json().get("items", [])
+                if not iter_events:
+                    # Loop no more
+                    break
+                events.extend(iter_events)
+                # Loop over pagination
+                url = res.json().get("paging", {}).get("next")
+            if not events:
+                raise UserError(_("Event information not longer stored"))
+            for event in events:
+                self.sudo()._mailgun_event_process(event, {})
