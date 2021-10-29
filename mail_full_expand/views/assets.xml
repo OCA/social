@@ -8,12 +8,12 @@
     >
         <xpath expr="." position="inside">
             <link
-                href="/mail_full_expand/static/src/scss/mail_full_expand.scss"
+                href="/mail_full_expand/static/src/components/message/mail_full_expand.scss"
                 rel="stylesheet"
                 type="text/scss"
             />
             <script
-                src="/mail_full_expand/static/src/js/mail_full_expand.js"
+                src="/mail_full_expand/static/src/components/message/mail_full_expand.js"
                 type="text/javascript"
             />
         </xpath>

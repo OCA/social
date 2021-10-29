@@ -13,5 +13,5 @@
     "installable": True,
     "depends": ["mail", "web"],
     "data": ["views/mail_full_expand.xml", "views/assets.xml"],
-    "qweb": ["static/src/xml/mail_full_expand.xml"],
+    "qweb": ["static/src/components/message/mail_full_expand.xml"],
 }
