@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<template>
+    <t t-inherit="mail.Message" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[hasclass('o_Message_header')]" t-operation="inside">
+            <span class="o_Message_threadFullSpandIcon">
+                <i
+                    class="fa o_Message_fullExpand fa-arrows-alt"
+                    t-att-data-message-id="message.localId"
+                    t-on-click="_onClickMessageFullExpand"
+                    title="Fully Expand"
+                />
+            </span>
+        </xpath>
+    </t>
+</template>

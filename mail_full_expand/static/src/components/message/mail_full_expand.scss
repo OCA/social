@@ -1,0 +1,24 @@
+/* Copyright 2014-2015 Grupo ESOC <http://www.grupoesoc.es>
+ * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+ */
+.o_Message {
+    .o_Message_fullExpand {
+        cursor: pointer;
+        opacity: 0;
+        margin-right: -5px;
+        padding: 4px;
+    }
+
+    &.o-clicked .o_Message_fullExpand {
+        opacity: 0.6;
+    }
+
+    &:hover {
+        .o_Message_fullExpand {
+            opacity: 0.6;
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+}
