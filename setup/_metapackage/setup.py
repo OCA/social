@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo14-addon-mail_attach_existing_attachment',
         'odoo14-addon-mail_autosubscribe',
         'odoo14-addon-mail_debrand',
+        'odoo14-addon-mail_full_expand',
         'odoo14-addon-mail_inline_css',
         'odoo14-addon-mail_layout_preview',
         'odoo14-addon-mail_notification_custom_subject',
