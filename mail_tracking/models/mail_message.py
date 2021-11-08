@@ -310,6 +310,10 @@ class MailMessage(models.Model):
 
     @api.model
     def get_failed_messsage_info(self, ids, model):
-        msg_ids = self.search([('res_id', '=', ids), ('model', '=', model)])
-        res = [msg._prepare_dict_failed_message() for msg in msg_ids.sorted("date", reverse=True) if msg._prepare_dict_failed_message()]
+        msg_ids = self.search([("res_id", "=", ids), ("model", "=", model)])
+        res = [
+            msg._prepare_dict_failed_message()
+            for msg in msg_ids.sorted("date", reverse=True)
+            if msg._prepare_dict_failed_message()
+        ]
         return res
