@@ -299,7 +299,8 @@ class TestMailTracking(TransactionCase):
         # No author_id
         tracking.mail_message_id.author_id = False
         values = tracking.mail_message_id.get_failed_messages()[0]
-        self.assertEqual(values["author"][0], -1)
+        if values and values.get("author"):
+            self.assertEqual(values["author"][0], -1)
 
     def test_resend_failed_message(self):
         # This message will generate a notification for recipient
