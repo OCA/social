@@ -1,7 +1,7 @@
 # Copyright 2015 ACSONE SA/NV
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.tests import Form, common
 
 
 class TestAttachExistingAttachment(common.TransactionCase):
@@ -35,3 +35,11 @@ class TestAttachExistingAttachment(common.TransactionCase):
         mail = self.env["mail.compose.message"].create(vals)
         values = mail.get_mail_values([self.partner_01.id])
         self.assertTrue(attach1.id in values[self.partner_01.id]["attachment_ids"])
+
+    def test_wizard(self):
+        compose = Form(
+            self.env["mail.compose.message"].with_context(
+                default_res_id=self.partner_01.id, default_model=self.partner_obj._name,
+            )
+        )
+        self.assertTrue(compose.can_attach_attachment)
