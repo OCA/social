@@ -16,6 +16,7 @@ setuptools.setup(
         'odoo13-addon-mail_activity_partner',
         'odoo13-addon-mail_activity_team',
         'odoo13-addon-mail_attach_existing_attachment',
+        'odoo13-addon-mail_attach_existing_attachment_account',
         'odoo13-addon-mail_autosubscribe',
         'odoo13-addon-mail_debrand',
         'odoo13-addon-mail_drop_target',
