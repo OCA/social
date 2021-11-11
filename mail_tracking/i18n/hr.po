@@ -105,13 +105,6 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
-#, python-format
-msgid "Congratulations, you don't have any failed messages"
-msgstr ""
-
-#. module: mail_tracking
-#. openerp-web
 #: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
 #, python-format
 msgid "Congratulations, your failed mailbox is empty"
@@ -275,9 +268,8 @@ msgstr ""
 
 #. module: mail_tracking
 #. openerp-web
+#: code:addons/mail_tracking/static/src/js/discuss/discuss.js:0
 #: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
-#: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #, python-format
@@ -323,13 +315,6 @@ msgstr "Primatelj"
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Failed messages"
-msgstr ""
-
-#. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
-#, python-format
-msgid "Failed messages appear here."
 msgstr ""
 
 #. module: mail_tracking
@@ -465,26 +450,12 @@ msgid "MailTracking events"
 msgstr ""
 
 #. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
-#, python-format
-msgid "Mark all as reviewed"
-msgstr ""
-
-#. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_message_id
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__tracking_email_id
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Message"
 msgstr "Poruka"
-
-#. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:0
-#, python-format
-msgid "Message tracking"
-msgstr ""
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -561,6 +532,7 @@ msgstr ""
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:0
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Retry"
@@ -599,14 +571,8 @@ msgstr "Poslano"
 
 #. module: mail_tracking
 #. openerp-web
-#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
-#, python-format
-msgid "Set all as reviewed"
-msgstr ""
-
-#. module: mail_tracking
-#. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/common.xml:0
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Set as Reviewed"
@@ -700,13 +666,6 @@ msgstr ""
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_event
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 msgid "Tracking events"
-msgstr ""
-
-#. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/js/mail_tracking.js:0
-#, python-format
-msgid "Tracking partner"
 msgstr ""
 
 #. module: mail_tracking
