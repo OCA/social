@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo14-addon-mail_activity_board',
         'odoo14-addon-mail_allow_portal_internal_note',
         'odoo14-addon-mail_attach_existing_attachment',
+        'odoo14-addon-mail_attach_existing_attachment_account',
         'odoo14-addon-mail_autosubscribe',
         'odoo14-addon-mail_debrand',
         'odoo14-addon-mail_full_expand',
