@@ -1,7 +1,7 @@
 # © 2016 ACSONE SA/NV <https://acsone.eu>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, api
+from odoo import api, models
 from odoo.tools.translate import _
 
 
@@ -17,15 +17,13 @@ class MailNotification(models.Model):
         force_send=False,
         send_after_commit=True,
         model_description=False,
-        mail_auto_delete=True
+        mail_auto_delete=True,
     ):
         partner_ids = []
         for data in rdata:
-            partner_ids.append(data['id'])
+            partner_ids.append(data["id"])
 
-        additional_footer = self.get_additional_footer_with_recipient(
-            partner_ids
-        )
+        additional_footer = self.get_additional_footer_with_recipient(partner_ids)
         message.body += additional_footer
         res = super(
             MailNotification, self.with_context(notified_partners=self)
@@ -42,7 +40,7 @@ class MailNotification(models.Model):
 
     @api.model
     def get_additional_footer_with_recipient(self, recipients_ids):
-        recipients = self.env['res.partner'].browse(recipients_ids)
+        recipients = self.env["res.partner"].browse(recipients_ids)
         recipients_name = [recipient.name for recipient in recipients]
         additional_footer = "<br /><b>%s%s.</b><br />" % (
             _("Also notified: "),

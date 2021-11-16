@@ -7,35 +7,43 @@ import odoo.tests.common as common
 class TestMailNotification(common.TransactionCase):
     def setUp(self):
         super().setUp()
-        self.sender = self.env['res.partner'].create({
-            'name': 'Test sender',
-            'email': 'sender@example.com',
-        })
-        self.recipient = self.env['res.partner'].create({
-            'name': 'Test recipient',
-            'email': 'recipient@example.com',
-        })
-        self.message = self.env['mail.message'].create({
-            'subject': 'Message test',
-            'author_id': self.sender.id,
-            'email_from': self.sender.email,
-            'message_type': 'comment',
-            'model': 'res.partner',
-            'res_id': self.recipient.id,
-            'partner_ids': [(4, self.recipient.id)],
-            'body': '<p>This is a test message</p>',
-        })
+        self.sender = self.env["res.partner"].create(
+            {
+                "name": "Test sender",
+                "email": "sender@example.com",
+            }
+        )
+        self.recipient = self.env["res.partner"].create(
+            {
+                "name": "Test recipient",
+                "email": "recipient@example.com",
+            }
+        )
+        self.message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": self.recipient.id,
+                "partner_ids": [(4, self.recipient.id)],
+                "body": "<p>This is a test message</p>",
+            }
+        )
 
         self.record = self.recipient
 
-        self.rdata = [{
-            'type': 'customer',
-            'id': self.recipient.id,
-            'groups': [None],
-            'active': True,
-            'share': True,
-            'notif': 'email'
-        }]
+        self.rdata = [
+            {
+                "type": "customer",
+                "id": self.recipient.id,
+                "groups": [None],
+                "active": True,
+                "share": True,
+                "notif": "email",
+            }
+        ]
         self.force_send = True
         self.send_after_commit = True
         self.model_description = False
