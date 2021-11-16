@@ -1,7 +1,10 @@
 <odoo>
     <data>
 
-        <template id="message_notification_email" inherit_id="mail.message_notification_email">
+        <template
+            id="message_notification_email"
+            inherit_id="mail.message_notification_email"
+        >
             <xpath expr="//div[@t-if='signature']" position="before">
                 <div><p>
                     Also notified:
@@ -10,8 +13,11 @@
             </xpath>
         </template>
 
-        <template id="message_notification_light" inherit_id="mail.message_notification_light">
-            <xpath expr="//t[@t-raw='messager.body']" position="after">
+        <template
+            id="message_notification_light"
+            inherit_id="mail.mail_notification_light"
+        >
+            <xpath expr="//t[@t-raw='message.body']" position="after">
                 <div><p>
                     Also notified:
                     <span t-field="record.message_partner_ids" />
