@@ -1,7 +1,7 @@
 # Copyright 2020 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.models import SUPERUSER_ID
+
 from odoo.tests.common import TransactionCase
 
 
@@ -21,7 +21,7 @@ class TestCreator(TransactionCase):
         self.activity_type = self.env["mail.activity.type"].create(
             {
                 "name": "Initial Contact",
-                "days": 5,
+                "delay_count": 5,
                 "summary": "ACT 1 : Presentation, barbecue, ... ",
                 "res_model_id": self.model_id,
             }
@@ -30,7 +30,7 @@ class TestCreator(TransactionCase):
     def test_activity_creator(self):
         activity = (
             self.env["mail.activity"]
-            .sudo(self.user_01.id)
+            .with_user(self.user_01.id)
             .create(
                 {
                     "activity_type_id": self.activity_type.id,
@@ -42,4 +42,3 @@ class TestCreator(TransactionCase):
             )
         )
         self.assertEqual(activity.creator_uid, self.user_01)
-        self.assertEqual(activity.create_uid.id, SUPERUSER_ID)
