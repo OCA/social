@@ -6,11 +6,12 @@
         This module adds the list of notified partners in the footer of
         notification e-mails sent by Odoo.
         """,
-    "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
-    "installable": True,
+    "author": "ACSONE SA/NV,Open SOurce Integrators,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
-    "category": "Mail",
-    "version": "12.0.1.0.0",
+    "category": "Discuss",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "depends": ["mail"],
+    "data": ["views/mail_templates.xml"],
+    "installable": True,
 }
