@@ -217,7 +217,7 @@
         <field name="priority" eval="2" />
         <field name="mode">primary</field>
         <field name="arch" type="xml">
-            <xpath expr='//field[@name="res_model_id"]' position='before'>
+            <xpath expr='//field[@name="res_model"]' position='before'>
                 <field name="user_id" />
                 <field name="res_name" string="Origin" />
             </xpath>

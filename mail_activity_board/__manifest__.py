@@ -4,7 +4,7 @@
 {
     "name": "Mail Activity Board",
     "summary": "Add Activity Boards",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "development_status": "Beta",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
@@ -12,6 +12,13 @@
     "license": "AGPL-3",
     "installable": True,
     "depends": ["calendar", "board"],
-    "data": ["views/templates.xml", "views/mail_activity_view.xml"],
-    "qweb": ["static/src/components/chatter_topbar/chatter_topbar.xml"],
+    "data": ["views/mail_activity_view.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.esm.js",
+        ],
+        "web.assets_qweb": [
+            "mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml",
+        ],
+    },
 }
