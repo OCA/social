@@ -6,7 +6,7 @@
             position="after"
         >
               <button
-                class="btn btn-link o_ChatterTopbar_button o_ChatterTopbar_buttonListActivity"
+                class="btn btn-link o_ChatterTopbar_button"
                 type="button"
                 t-att-disabled="chatter.isDisabled"
                 t-on-click="_onListActivity"
