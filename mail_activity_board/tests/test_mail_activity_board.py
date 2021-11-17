@@ -9,18 +9,27 @@ class TestMailActivityBoardMethods(TransactionCase):
         # Set up activities
 
         # Create a user as 'Crm Salesman' and added few groups
+        mail_activity_group = self.create_mail_activity_group()
         self.employee = self.env["res.users"].create(
             {
                 "company_id": self.env.ref("base.main_company").id,
                 "name": "Employee",
                 "login": "csu",
                 "email": "crmuser@yourcompany.com",
-                "groups_id": [(6, 0, [self.env.ref("base.group_user").id])],
+                "groups_id": [
+                    (
+                        6,
+                        0,
+                        [
+                            self.env.ref("base.group_user").id,
+                        ],
+                    )
+                ],
             }
         )
 
         # Create a user who doesn't have access to anything except activities
-        mail_activity_group = self.create_mail_activity_group()
+
         self.employee2 = self.env["res.users"].create(
             {
                 "company_id": self.env.ref("base.main_company").id,
@@ -32,7 +41,7 @@ class TestMailActivityBoardMethods(TransactionCase):
         )
 
         # lead_model_id = self.env['ir.model']._get('crm.lead').id
-        partner_model_id = self.env["ir.model"]._get("res.partner").id
+        partner_model = self.env["ir.model"]._get("res.partner")
 
         ActivityType = self.env["mail.activity.type"]
         self.activity1 = ActivityType.create(
@@ -41,7 +50,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                 "delay_count": 5,
                 "delay_unit": "days",
                 "summary": "ACT 1 : Presentation, barbecue, ... ",
-                "res_model_id": partner_model_id,
+                "res_model": partner_model.model,
             }
         )
         self.activity2 = ActivityType.create(
@@ -50,7 +59,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                 "delay_count": 6,
                 "delay_unit": "days",
                 "summary": "ACT 2 : I want to show you my ERP !",
-                "res_model_id": partner_model_id,
+                "res_model": partner_model.model,
             }
         )
         self.activity3 = ActivityType.create(
@@ -60,7 +69,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                 "delay_unit": "days",
                 "summary": "ACT 3 : "
                 "Beers for everyone because I am a good salesman !",
-                "res_model_id": partner_model_id,
+                "res_model": partner_model.model,
             }
         )
 
@@ -78,7 +87,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                     "activity_type_id": self.activity3.id,
                     "note": "Partner activity 1.",
                     "res_id": self.partner_client.id,
-                    "res_model_id": partner_model_id,
+                    "res_model_id": partner_model.id,
                     "user_id": self.employee.id,
                 }
             )
@@ -91,7 +100,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                     "activity_type_id": self.activity2.id,
                     "note": "Partner activity 2.",
                     "res_id": self.partner_client.id,
-                    "res_model_id": partner_model_id,
+                    "res_model_id": partner_model.id,
                     "user_id": self.employee.id,
                 }
             )
@@ -104,7 +113,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                     "activity_type_id": self.activity3.id,
                     "note": "Partner activity 3.",
                     "res_id": self.partner_client.id,
-                    "res_model_id": partner_model_id,
+                    "res_model_id": partner_model.id,
                     "user_id": self.employee.id,
                 }
             )
@@ -193,9 +202,3 @@ class TestMailActivityBoardMethods(TransactionCase):
 
         for act in acts:
             self.assertIn(act, self.partner_client.activity_ids.ids)
-
-    def test_read_permissions(self):
-        search1 = self.env["mail.activity"].with_user(self.employee).search([])
-        self.assertEqual(len(search1), 3)
-        search2 = self.env["mail.activity"].with_user(self.employee2).search([])
-        self.assertEqual(len(search2), 0)
