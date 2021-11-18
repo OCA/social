@@ -34,6 +34,7 @@ setuptools.setup(
         'odoo14-addon-mass_mailing_partner',
         'odoo14-addon-mass_mailing_resend',
         'odoo14-addon-mass_mailing_subscription_date',
+        'odoo14-addon-mass_mailing_unique',
     ],
     classifiers=[
         'Programming Language :: Python',
