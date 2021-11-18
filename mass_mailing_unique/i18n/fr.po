@@ -1,0 +1,70 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_unique
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-04 03:40+0000\n"
+"PO-Revision-Date: 2021-03-04 13:45+0000\n"
+"Last-Translator: Rémi <remi@le-filament.com>\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.list:0
+msgid "Cannot have more than one lists with the same name."
+msgstr "Impossible d'avoir plus d'une liste avec le même nom."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:24
+#, python-format
+msgid ""
+"Email (%(contact_email)s) already in mailing list(s):\n"
+"                    %(lists)s\n"
+"                    Please use a different email address or "
+"remove                      (%(contact_email)s) from the mailing list(s) "
+"above."
+msgstr ""
+"Courriel (%(contact_email)s) déjà dans la(les) liste(s) de diffusion :\n"
+"                    %(lists)s\n"
+"                    Merci d'utiliser une adresse courriel différente ou "
+"supprimer                     (%(contact_email)s) de la (des) liste(s) de "
+"diffusion ci-dessus."
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr "Liste de diffusion"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Contact de la liste de diffusion"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list_contact_rel
+msgid "Mass Mailing Subscription Information"
+msgstr "Information d'Abonnement au Publipostage"
+
+#, fuzzy
+#~ msgid "Cannot have the same email (%s) morethan once in the same list."
+#~ msgstr ""
+#~ "Impossible d'avoir le même courriel plus d'une fois dans la même liste"
+
+#~ msgid "Fix this before installing:"
+#~ msgstr "Fixer avant l'installation:"
+
+#~ msgid "There are {1} lists with name {0}."
+#~ msgstr "Il y'a {1} listes avec le nom {0}."
+
+#~ msgid "{0} appears {2} times in list {1}."
+#~ msgstr "{0} Apparaît {2} fois dans la liste {1}."

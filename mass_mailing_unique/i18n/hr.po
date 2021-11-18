@@ -1,0 +1,59 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_unique
+#
+# Translators:
+# Bole <bole@dajmi5.com>, 2017
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: mass_mailing_unique
+#: sql_constraint:mail.mass_mailing.list:0
+msgid "Cannot have more than one lists with the same name."
+msgstr "Nije moguće imati više od jedne liste sa istim nazivom."
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/models/mail_mass_mailing_contact.py:24
+#, python-format
+msgid ""
+"Email (%(contact_email)s) already in mailing list(s):\n"
+"                    %(lists)s\n"
+"                    Please use a different email address or "
+"remove                      (%(contact_email)s) from the mailing list(s) "
+"above."
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr "Mailing lista"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_contact
+msgid "Mass Mailing Contact"
+msgstr "Kontakti za masovno slanje"
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mail_mass_mailing_list_contact_rel
+msgid "Mass Mailing Subscription Information"
+msgstr ""
+
+#, fuzzy
+#~ msgid "Cannot have the same email (%s) morethan once in the same list."
+#~ msgstr "Email mora biti jedinstven u listi."
+
+#~ msgid "Fix this before installing:"
+#~ msgstr "Ispravite sljedeće prije instalacije:"
