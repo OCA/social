@@ -9,7 +9,12 @@ class MailActivity(models.Model):
 
     active = fields.Boolean(default=True)
     done = fields.Boolean(default=False)
-    state = fields.Selection(selection_add=[("done", "Done")], ondelete={"done": "set null"}, compute="_compute_state", store=True)
+    state = fields.Selection(
+        selection_add=[("done", "Done")],
+        ondelete={"done": "set null"},
+        compute="_compute_state",
+        store=True,
+    )
     date_done = fields.Date("Completed Date", index=True, readonly=True)
 
     @api.depends("date_deadline", "done")
