@@ -2,11 +2,11 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Mail Activity Done",
-    "version": "13.0.1.0.1",
+    "version": "14.0.1.0.0",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
     "license": "LGPL-3",
     "category": "Discuss",
-    "website": "https://github.com/OCA/social",
     "depends": ["mail"],
     "data": ["views/templates.xml", "views/mail_activity_views.xml"],
     "pre_init_hook": "pre_init_hook",
