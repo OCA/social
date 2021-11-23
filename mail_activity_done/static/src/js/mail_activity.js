@@ -1,7 +1,7 @@
 // Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
 // License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-odoo.define("mail.Activity.done", function(require) {
+odoo.define("mail.Activity.done", function (require) {
     "use strict";
 
     var mailUtils = require("mail.utils");
@@ -14,9 +14,9 @@ odoo.define("mail.Activity.done", function(require) {
 
     // We are forced here to override the method, as there is no possibility
     // to inherit it.
-    var setDelayLabel = function(activities) {
+    var setDelayLabel = function (activities) {
         var today = moment().startOf("day");
-        _.each(activities, function(activity) {
+        _.each(activities, function (activity) {
             var to_display = "";
             var deadline = moment(activity.date_deadline).startOf("day");
             // On next line, true means no rounding
@@ -41,7 +41,7 @@ odoo.define("mail.Activity.done", function(require) {
             activity.label_delay = to_display;
         });
         // We do not want to show the activities that have been completed.
-        var open_activities = _.filter(activities, function(activity) {
+        var open_activities = _.filter(activities, function (activity) {
             return activity.done !== true;
         });
         return open_activities;
@@ -52,8 +52,8 @@ odoo.define("mail.Activity.done", function(require) {
          * @override
          * @private
          */
-        _render: function() {
-            _.each(this._activities, function(activity) {
+        _render: function () {
+            _.each(this._activities, function (activity) {
                 var note = mailUtils.parseAndTransform(
                     activity.note || "",
                     mailUtils.inline
