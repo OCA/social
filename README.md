@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 [email_template_qweb](email_template_qweb/) | 13.0.1.1.0 |  | Use the QWeb templating mechanism for emails
 [fetchmail_thread_default](fetchmail_thread_default/) | 13.0.1.0.0 |  | Post unkonwn messages to an existing thread
 [mail_activity_board](mail_activity_board/) | 13.0.1.0.1 |  | Add Activity Boards
+[mail_activity_creator](mail_activity_creator/) | 13.0.1.0.0 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 13.0.1.0.1 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 13.0.1.0.0 |  | Add Partner to Activities
 [mail_activity_team](mail_activity_team/) | 13.0.1.0.2 |  | Add Teams to Activities
