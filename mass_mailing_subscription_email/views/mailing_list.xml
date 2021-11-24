@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Camptocamp (http://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@gmail.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="mailing_list_view_tree" model="ir.ui.view">
+        <field name="model">mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_list_view_tree" />
+        <field name="arch" type="xml">
+            <field name="is_public" position="after">
+                <field name="subscribe_template_id" optional="hide" />
+                <field name="unsubscribe_template_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mailing_list_view_form" model="ir.ui.view">
+        <field name="model">mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_list_view_form" />
+        <field name="arch" type="xml">
+            <field name="is_public" position="after">
+                <field name="subscribe_template_id" />
+                <field name="unsubscribe_template_id" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
