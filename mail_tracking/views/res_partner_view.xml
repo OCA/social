@@ -12,8 +12,8 @@
         <div name="button_box" position="inside">
             <button
                     name="%(mail_tracking.action_view_mail_tracking_email)d"
-                    context="{'search_default_recipient': email,
-                              'default_recipient': email}"
+                    context="{'search_default_recipient_address': email,
+                              'default_recipient_address': email}"
                     type="action"
                     class="oe_stat_button"
                     icon="fa-envelope-o"

@@ -509,11 +509,15 @@ msgstr "Prejemnik"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient
-#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_tree
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Recipient"
 msgstr "Prejemnik"
+
+#. module: mail_tracking
+#: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
+msgid "Recipient Address"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__recipient
