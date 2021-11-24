@@ -45,6 +45,7 @@ addon | version | maintainers | summary
 [mass_mailing_partner](mass_mailing_partner/) | 14.0.1.0.1 |  | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 14.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
 [mass_mailing_subscription_date](mass_mailing_subscription_date/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Track contact's subscription date to mailing lists
+[mass_mailing_subscription_email](mass_mailing_subscription_email/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Send notification emails when contacts subscription changes.
 [mass_mailing_unique](mass_mailing_unique/) | 14.0.1.0.0 |  | Avoids duplicate mailing lists and contacts
 
 [//]: # (end addons)
