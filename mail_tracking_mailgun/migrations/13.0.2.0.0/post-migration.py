@@ -15,7 +15,7 @@ def migrate(env, version):
     This version dropped support for legacy webhooks and added support for
     webhook autoregistering. Do that process now.
     """
-    settings = env["res.config.settings"].create()
+    settings = env["res.config.settings"].create([])
     if not settings.mail_tracking_mailgun_enabled:
         _logger.warning("Not updating webhooks because mailgun is not configured")
         return
