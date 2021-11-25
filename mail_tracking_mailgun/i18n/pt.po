@@ -90,7 +90,7 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:220
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:222
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr "Não foi possível obter informação do Mailgun"
@@ -124,7 +124,7 @@ msgid "Error %s trying to check mailof connection"
 msgstr "Erro %s ao tentar verificar o mailof da conexão"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:229
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:231
 #, python-format
 msgid "Event information not longer stored"
 msgstr "A informação do evento já não está armazenada"
@@ -286,7 +286,7 @@ msgid "There is no Mailgun API key!"
 msgstr "Não há chave de API do Mailgun!"
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:202
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:204
 #, python-format
 msgid "There is no tracked message!"
 msgstr "Não há mensagem rastreada!"
