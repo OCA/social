@@ -9,5 +9,7 @@ class MailActivity(models.Model):
     _inherit = "mail.activity"
 
     creator_uid = fields.Many2one(
-        "res.users", default=lambda r: r.env.user.id, string="Creator",
+        "res.users",
+        default=lambda r: r.env.user.id,
+        string="Creator",
     )
