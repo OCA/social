@@ -175,7 +175,9 @@ class MailTrackingEmail(models.Model):
         # Do nothing if tracking email for event is not found
         message_id = event_data["message"]["headers"]["message-id"]
         recipient = event_data["recipient"]
-        tracking_email = self.browse(event_data['user-variables']['tracking_email_id'])
+        tracking_email = self.browse(
+            int(event_data['user-variables']['tracking_email_id'])
+        )
         mailgun_event_type = event_data["event"]
         # Process event
         state = self._mailgun_event2type(event_data, mailgun_event_type)
