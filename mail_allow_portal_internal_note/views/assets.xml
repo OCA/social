@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="assets_frontend"
+        inherit_id="web_editor.assets_frontend"
+        name="Portal Assets"
+        priority="15"
+    >
+        <xpath expr="//script[last()]" position="after">
+            <script
+                type="text/javascript"
+                src="/mail_allow_portal_internal_note/static/src/js/composer.js"
+            />
+        </xpath>
+    </template>
+
+</odoo>
