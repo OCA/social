@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-extend="mail.activity_items">
+        <t t-jquery="dd.mb8:first" t-operation="after">
+            <dt>Creator</dt>
+            <dd class="mb8">
+                <img
+                    t-attf-src="/web/image#{activity.creator_uid[0] >= 0 ? ('/res.users/' + activity.creator_uid[0] + '/image_small') : ''}"
+                    height="18"
+                    width="18"
+                    class="rounded-circle mr4"
+                    t-att-title="activity.creator_uid[1]"
+                    t-att-alt="activity.creator_uid[1]"
+                />
+                <b><t t-esc="activity.creator_uid[1]" /></b>
+            </dd>
+        </t>
+    </t>
+</templates>
