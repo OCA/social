@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.ChatterTopbar" t-inherit-mode="extension">
+        <xpath
+            expr="//*[@class='btn btn-link o_ChatterTopbar_button o_ChatterTopbar_buttonScheduleActivity']"
+            position="after"
+        >
+              <button
+                class="btn btn-link o_ChatterTopbar_button"
+                type="button"
+                t-att-disabled="chatter.isDisabled"
+                t-on-click="_onListActivity"
+            >
+                 <i class="fa fa-list" />Activities
+              </button>
+         </xpath>
+    </t>
+
+</templates>
