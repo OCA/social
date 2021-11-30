@@ -8,6 +8,7 @@ from odoo.tests.common import TransactionCase
 class TestCreator(TransactionCase):
     def setUp(self):
         super().setUp()
+
         self.partner = self.env["res.partner"].create({"name": "DEMO"})
         self.user_01 = self.env["res.users"].create(
             {
@@ -17,26 +18,28 @@ class TestCreator(TransactionCase):
                 "notification_type": "inbox",
             }
         )
-        self.model_id = self.env["ir.model"]._get("res.partner").id
-        self.activity_type = self.env["mail.activity.type"].create(
+        self.partner_model = self.env["ir.model"]._get("res.partner")
+        self.ActivityType = self.env["mail.activity.type"]
+        self.activity1 = self.ActivityType.create(
             {
                 "name": "Initial Contact",
                 "delay_count": 5,
                 "summary": "ACT 1 : Presentation, barbecue, ... ",
-                "res_model_id": self.model_id,
+                "res_model": self.partner_model.model,
             }
         )
 
     def test_activity_creator(self):
         activity = (
             self.env["mail.activity"]
+            .sudo()
             .with_user(self.user_01.id)
             .create(
                 {
-                    "activity_type_id": self.activity_type.id,
+                    "activity_type_id": self.activity1.id,
                     "note": "Partner activity 3.",
                     "res_id": self.partner.id,
-                    "res_model_id": self.model_id,
+                    "res_model_id": self.partner_model.id,
                     "user_id": self.user_01.id,
                 }
             )
