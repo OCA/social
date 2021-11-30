@@ -1,9 +1,9 @@
 # Copyright 2018 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMailActivityPartner(SavepointCase):
+class TestMailActivityPartner(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -32,15 +32,16 @@ class TestMailActivityPartner(SavepointCase):
             }
         )
 
-        cls.partner_ir_model = cls.env["ir.model"]._get("res.partner")
+        cls.partner_model = cls.env["ir.model"]._get("res.partner")
 
         activity_type_model = cls.env["mail.activity.type"]
         cls.activity1 = activity_type_model.create(
             {
                 "name": "Initial Contact",
                 "delay_count": 5,
+                "delay_unit": "days",
                 "summary": "ACT 1 : Presentation, barbecue, ... ",
-                "res_model_id": cls.partner_ir_model.id,
+                "res_model": cls.partner_model.model,
             }
         )
         cls.activity2 = activity_type_model.create(
@@ -48,7 +49,7 @@ class TestMailActivityPartner(SavepointCase):
                 "name": "Call for Demo",
                 "delay_count": 6,
                 "summary": "ACT 2 : I want to show you my ERP !",
-                "res_model_id": cls.partner_ir_model.id,
+                "res_model": cls.partner_model.model,
             }
         )
 
@@ -78,7 +79,7 @@ class TestMailActivityPartner(SavepointCase):
                     "activity_type_id": self.activity1.id,
                     "note": "Partner activity 1.",
                     "res_id": self.partner_01.id,
-                    "res_model_id": self.partner_ir_model.id,
+                    "res_model_id": self.partner_model.id,
                     "user_id": self.user_admin.id,
                 }
             )
@@ -92,7 +93,7 @@ class TestMailActivityPartner(SavepointCase):
                     "activity_type_id": self.activity2.id,
                     "note": "Partner activity 10.",
                     "res_id": self.partner_10.id,
-                    "res_model_id": self.partner_ir_model.id,
+                    "res_model_id": self.partner_model.id,
                     "user_id": self.employee.id,
                 }
             )
