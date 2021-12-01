@@ -216,7 +216,6 @@ class MailMessage(models.Model):
     @api.model
     def _drop_aliases(self, mail_list):
         aliases = self.env["mail.alias"].get_aliases()
-
         def _filter_alias(email):
             email_wn = getaddresses([email])[0][1]
             if email_wn not in aliases:
@@ -224,7 +223,7 @@ class MailMessage(models.Model):
 
         return list(filter(_filter_alias, mail_list))
 
-    def message_format(self):
+    def message_format(self, **kwargs):
         """Preare values to be used by the chatter widget"""
         res = super().message_format()
         mail_message_ids = {m.get("id") for m in res if m.get("id")}
@@ -236,7 +235,7 @@ class MailMessage(models.Model):
                 message_dict.update(tracking_statuses[mail_message_id])
         return res
 
-    def _prepare_dict_failed_message(self):
+    def _prepare_dict_failed_message(self, **kwargs):
         """Preare values to be used by the chatter widget"""
         self.ensure_one()
         failed_trackings = self.mail_tracking_ids.filtered(
@@ -258,7 +257,7 @@ class MailMessage(models.Model):
             "failed_recipients": failed_recipients,
         }
 
-    def get_failed_messages(self):
+    def get_failed_messages(self, **kwargs):
         """Returns the list of failed messages to be used by the
         failed_messages widget"""
         return [

@@ -10,7 +10,7 @@ import werkzeug
 import odoo
 from odoo import SUPERUSER_ID, api, http
 
-from odoo.addons.mail.controllers.main import MailController
+from odoo.addons.mail.controllers.mail import MailController
 
 _logger = logging.getLogger(__name__)
 
@@ -98,11 +98,4 @@ class MailTrackingController(MailController):
         response.data = base64.b64decode(BLANK)
         return response
 
-    @http.route()
-    def mail_init_messaging(self):
-        """Route used to initial values of Discuss app"""
-        values = super().mail_init_messaging()
-        values.update(
-            {"failed_counter": http.request.env["mail.message"].get_failed_count()}
-        )
-        return values
+    

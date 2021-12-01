@@ -100,7 +100,7 @@
                                  </t>
                               </div>
                               <div class="o_thread_message_note small">
-                                 <t t-raw="messagefailed.body" />
+                                 <t t-out="messagefailed.body" />
                               </div>
                            </div>
                         </t>

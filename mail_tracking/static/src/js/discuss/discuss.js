@@ -7,7 +7,7 @@ odoo.define("mail_tracking/static/src/js/discuss/discuss.js", function (require)
         registerFieldPatchModel,
         registerClassPatchModel,
     } = require("mail/static/src/model/model_core.js");
-    const {one2one, many2one} = require("mail/static/src/model/model_field.js");
+    let {one2one, many2one} = require("mail/static/src/model/model_field.js");
 
     registerInstancePatchModel(
         "mail.messaging_initializer",

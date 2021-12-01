@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
-    <t t-inherit="mail.ThreadIcon" t-inherit-mode="extension">
+    <t t-call="mail.ThreadIcon" t-inherit-mode="extension">
         <xpath
-            expr="//t[@t-elif='thread === env.messaging.moderation']"
+            expr="//t[@t-elif='thread === messaging.moderation']"
             position="after"
         >
-            <t t-elif="thread === env.messaging.failedmsg">
+            <t t-if="thread === messaging.failedmsg">
                 <div class="o_ThreadIcon_mailboxModeration fa fa-exclamation" />
             </t>
         </xpath>
