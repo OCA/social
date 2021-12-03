@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo14-addon-mail_tracking',
         'odoo14-addon-mail_tracking_mailgun',
         'odoo14-addon-mail_tracking_mass_mailing',
+        'odoo14-addon-mass_mailing_company_newsletter',
         'odoo14-addon-mass_mailing_contact_partner',
         'odoo14-addon-mass_mailing_custom_unsubscribe',
         'odoo14-addon-mass_mailing_event_registration_exclude',
