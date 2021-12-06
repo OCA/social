@@ -20,6 +20,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [mail_activity_board](mail_activity_board/) | 15.0.1.0.0 |  | Add Activity Boards
+[mail_activity_partner](mail_activity_partner/) | 15.0.1.0.0 |  | Add Partner to Activities
 
 [//]: # (end addons)
 
