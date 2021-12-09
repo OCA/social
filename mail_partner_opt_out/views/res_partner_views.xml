@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_partner_form" model="ir.ui.view">
+    <record id="res_partner_view_form_inherit_mail" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.mail</field>
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <field name="email" position="before">
-                <field name="opt_out" string="Opt Out" />
+                <button
+                    name="mail_blacklist_add"
+                    class="fa fa-plus text-success"
+                    title="Click to add this email to the blacklist."
+                    type="object"
+                    groups="base.group_user"
+                    attrs="{'invisible': [('is_blacklisted', '=', True)]}"
+                />
             </field>
         </field>
     </record>
