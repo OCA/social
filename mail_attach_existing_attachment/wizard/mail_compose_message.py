@@ -19,7 +19,7 @@ class MailComposeMessage(models.TransientModel):
             res["can_attach_attachment"] = True  # pragma: no cover
         return res
 
-    can_attach_attachment = fields.Boolean(string="Can Attach Attachment")
+    can_attach_attachment = fields.Boolean()
     object_attachment_ids = fields.Many2many(
         comodel_name="ir.attachment",
         relation="mail_compose_message_ir_attachments_object_rel",
