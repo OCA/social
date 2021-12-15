@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="assets_backend" name="Broker assets" inherit_id="web.assets_backend">
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/mail_broker/static/src/js/message.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_broker/static/src/js/manager.js"
+            />
+            <script type="text/javascript" src="/mail_broker/static/src/js/thread.js" />
+            <script type="text/javascript" src="/mail_broker/static/src/js/broker.js" />
+            <link rel="stylesheet" href="/mail_broker/static/src/scss/broker.scss" />
+        </xpath>
+    </template>
+</odoo>

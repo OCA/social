@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_broker_channel_form_view">
+        <field name="name">mail.broker.channel.form</field>
+        <field name="model">mail.broker.channel</field>
+        <field name="priority">10</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <group>
+                        <field name="name" />
+                        <field name="partner_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mail_broker_channel_form_root_view">
+        <field name="name">mail.broker.channel.form</field>
+        <field name="model">mail.broker.channel</field>
+        <field name="inherit_id" ref="mail_broker.mail_broker_channel_form_view" />
+        <field name="groups_id" eval="[(6, 0, [ref('base.group_system')])]" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="token" />
+                <field name="broker_id" />
+                <field name="show_on_app" />
+                <field name="token" />
+            </field>
+            <xpath expr="//div[@name='button_box']" position="inside" />
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mail_broker_channel_search_view">
+        <field name="name">mail.broker.channel.search (in mail_broker)</field>
+        <field name="model">mail.broker.channel</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mail_broker_channel_tree_view">
+        <field name="name">mail.broker.channel.tree (in mail_broker)</field>
+        <field name="model">mail.broker.channel</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="mail_broker_channel_act_window">
+        <field name="name">Mail Broken Channel</field>
+        <field name="res_model">mail.broker.channel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.menu" id="mail_broker_channel_menu">
+        <field name="name">Mail Broken Channel</field>
+        <field name="parent_id" ref="base.menu_email" />
+        <field name="action" ref="mail_broker_channel_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+    <record id="mail_broker_action_window" model="ir.actions.client">
+        <field name="name">Broker</field>
+        <field name="tag">mail.broker</field>
+        <field name="res_model">mail.broker.channel</field>
+        <field name="params" eval="{}" />
+    </record>
+    <menuitem
+        name="Broker"
+        id="mail_broker_channel"
+        sequence="2"
+        web_icon="mail_broker,static/description/icon.png"
+        action="mail_broker_action_window"
+        groups="mail_broker.broker_user"
+    />
+</odoo>
