@@ -1,0 +1,10 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_message_broker_all,mail.message.broker.all,model_mail_message_broker,,1,0,0,0
+access_mail_message_broker_portal,mail.message.broker.portal,model_mail_message_broker,base.group_portal,1,1,1,0
+access_mail_message_broker_user,mail.message.broker.user,model_mail_message_broker,base.group_user,1,1,1,0
+access_mail_message_broker_system,mail.message.broker.system,model_mail_message_broker,base.group_system,1,1,1,1
+access_mail_broker_channel_all,mail.telegram.chat.all,model_mail_broker_channel,,1,0,0,0
+access_mail_broker_channel_system,mail_broker_channel,model_mail_broker_channel,base.group_system,1,1,1,1
+access_mail_broker_all,mail.telegram.bot.all,model_mail_broker,,1,0,0,0
+access_mail_broker_channel_user,mail_broker_manager_bot,model_mail_broker_channel,mail_broker.broker_user,1,1,0,0
+access_mail_broker_system,mail_broker,model_mail_broker,base.group_system,1,1,1,1

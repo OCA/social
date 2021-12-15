@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2020 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_broker_form_view">
+        <field name="name">mail.broker.form</field>
+        <field name="model">mail.broker</field>
+        <field name="arch" type="xml">
+            <form>
+                <header />
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <group>
+                        <field name="name" />
+                        <field name="show_on_app" />
+                        <field name="token" />
+                        <field name="broker_type" />
+                        <field name="webhook_url" />
+                        <field name="webhook_user_id" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter" />
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mail_broker_search_view">
+        <field name="name">mail.broker.search</field>
+        <field name="model">mail.broker</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mail_broker_tree_view">
+        <field name="name">mail.broker.tree</field>
+        <field name="model">mail.broker</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="token" />
+            </tree>
+        </field>
+    </record>
+    <record model="ir.actions.act_window" id="mail_broker_act_window">
+        <field name="name">Mail Broker</field>
+        <field name="res_model">mail.broker</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.menu" id="mail_broker_menu">
+        <field name="name">Mail Broker</field>
+        <field name="parent_id" ref="base.menu_email" />
+        <field name="action" ref="mail_broker_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>
