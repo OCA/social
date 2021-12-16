@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-extend="mail.widget.Thread.Message">
+        <t t-jquery=".o_thread_tooltip_broker_container" t-operation="append">
+            <i
+                t-att-class="'o_thread_message_broker_' + message.customer_status + ' fa fa-whatsapp fa-lg'"
+                t-if="message.broker_type == 'whatsapp'"
+            />
+        </t>
+    </t>
+</templates>
