@@ -31,7 +31,6 @@
                 <field name="show_on_app" />
                 <field name="token" />
             </field>
-            <xpath expr="//div[@name='button_box']" position="inside" />
         </field>
     </record>
     <record model="ir.ui.view" id="mail_broker_channel_search_view">
@@ -53,14 +52,14 @@
         </field>
     </record>
     <record model="ir.actions.act_window" id="mail_broker_channel_act_window">
-        <field name="name">Mail Broken Channel</field>
+        <field name="name">Mail Broker Channel</field>
         <field name="res_model">mail.broker.channel</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
     <record model="ir.ui.menu" id="mail_broker_channel_menu">
-        <field name="name">Mail Broken Channel</field>
+        <field name="name">Mail Broker Channel</field>
         <field name="parent_id" ref="base.menu_email" />
         <field name="action" ref="mail_broker_channel_act_window" />
         <field name="sequence" eval="16" />
