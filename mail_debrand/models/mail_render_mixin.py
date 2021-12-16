@@ -56,7 +56,7 @@ class MailRenderMixin(models.AbstractModel):
                     tree, pretty_print=True, method="html", encoding="unicode"
                 )
                 new_parts.append(part)
-            value = to_keep.join(new_parts)
+            value = str(to_keep).join(new_parts)
         return value
 
     @api.model
@@ -65,15 +65,16 @@ class MailRenderMixin(models.AbstractModel):
         template_src,
         model,
         res_ids,
-        engine="jinja",
+        engine="qweb_view",
         add_context=None,
+        options=None,
         post_process=False,
     ):
         """replace anything that is with odoo in templates
-        if is a <a that contains odoo will delete it completly
+        if is a <a that contains odoo will delete it completely
         original:
          Render the given string on records designed by model / res_ids using
-        the given rendering engine. Currently only jinja is supported.
+        the given rendering engine.
 
         :param str template_src: template text to render (jinja) or  (qweb)
           this could be cleaned but hey, we are in a rush
