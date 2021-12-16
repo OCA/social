@@ -6,9 +6,11 @@ dependency_installation_mode: OCA
 generate_requirements_txt: true
 include_wkhtmltopdf: false
 odoo_version: 13.0
-rebel_module_groups: []
+rebel_module_groups:
+- mail_restrict_follower_selection
 repo_description: Addons concerning Odoo's social features and messaging in general.
 repo_name: Social addons for Odoo
 repo_slug: social
-travis_apt_packages: []
+travis_apt_packages:
+- postgresql-contrib
 travis_apt_sources: []
