@@ -51,7 +51,7 @@ class MailMessageBroker(models.Model):
     @api.model_create_multi
     def create(self, vals_list):
         messages = super().create(vals_list)
-        if self.env.context.get("notify_broker", True):
+        if self.env.context.get("notify_broker", False):
             notifications = []
             for message in messages:
                 notifications.append(
