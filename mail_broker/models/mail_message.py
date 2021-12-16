@@ -15,7 +15,9 @@ class MailMessage(models.Model):
         store=True,
     )
     broker_unread = fields.Boolean(default=False)
-    broker_type = fields.Selection([("telegram", "Telegram")], required=True)
+    broker_type = fields.Selection(
+        selection=lambda r: r.env["mail.broker"]._fields["broker_type"].selection
+    )
     broker_notification_ids = fields.One2many(
         "mail.message.broker", inverse_name="mail_message_id"
     )
