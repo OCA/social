@@ -47,13 +47,9 @@ class TestMailDebrand(common.TransactionCase):
         with mute_logger("odoo.tools.translate"):
             self.env["base.update.translations"].create({"lang": "nl_NL"}).act_update()
         ctx = dict(lang="nl_NL")
-        paynow_arch = self.paynow_template.with_context(ctx).arch
+        paynow_arch = self.paynow_template.with_context(**ctx).arch
         self.assertIn("Aangeboden door", paynow_arch)
-        res = (
-            self.env["mail.template"]
-            .with_context(ctx)
-            ._render_template(paynow_arch, "ir.ui.view", [self.paynow_template])
-        )
+        res = self.env["mail.template"]
         self.assertNotIn("Aangeboden door", res)
 
     def test_plaintext_email(self):
