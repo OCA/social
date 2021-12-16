@@ -10,6 +10,9 @@
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "depends": ["mail_broker"],
-    "pre_init_hook": "pre_init_hook",
-    "external_dependencies": {"python": ["telegram"]},
+    "data": ["views/mail_broker.xml"],
+    "qweb": ["/static/src/xml/thread.xml"],
+    "external_dependencies": {
+        "python": ["python-telegram-bot<=13.11", "cairosvg", "lottie"]
+    },
 }
