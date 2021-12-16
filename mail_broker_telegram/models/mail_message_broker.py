@@ -3,8 +3,6 @@ import logging
 import traceback
 from io import BytesIO, StringIO
 
-from telegram import Bot
-
 from odoo import _, models
 from odoo.tools import html2plaintext
 
@@ -14,14 +12,14 @@ _logger = logging.getLogger(__name__)
 
 
 class MailMessageBroker(models.Model):
-    _name = "mail.message.broker"
+    _inherit = "mail.message.broker"
 
     def _send_telegram(
         self, auto_commit=False, raise_exception=False, parse_mode=False
     ):
         message = False
         try:
-            bot = Bot(self.channel_id.broker_token)
+            bot = self.channel_id.broker_id._get_telegram_bot()
             chat = bot.get_chat(self.channel_id.token)
             if self.body:
                 message = chat.send_message(

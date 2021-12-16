@@ -3,4 +3,5 @@ extract_msg
 premailer
 extract-msg
 python-telegram-bot
-telegram
+cairosvg
+lottie
