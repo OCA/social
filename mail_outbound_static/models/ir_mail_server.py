@@ -32,6 +32,10 @@ class IrMailServer(models.Model):
                 )
             else:
                 email_from = mail_server.smtp_from
+                if "Message-id" in message :
+                    mail_message=self.env['mail.mail'].search([('message_id','=',message['Message-id'])],limit=1)
+                    if len(mail_message):
+                        email_from ='"%s" <%s>' % (mail_message.author_id.name,mail_server.smtp_from)
 
             message.replace_header('From', email_from)
             bounce_alias = self.env['ir.config_parameter'].sudo().get_param(
