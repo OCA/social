@@ -35,7 +35,7 @@ class IrMailServer(models.Model):
                 if "Message-id" in message :
                     mail_message = self.env['mail.mail'].search(
                         [('message_id', '=', message['Message-id'])], limit=1)
-                    if len(mail_message) :
+                    if len(mail_message) and len(mail_message.author_id) : 
                         email_from = '"%s" <%s>' % (mail_message.author_id.name,
                                                     mail_server.smtp_from)
 
