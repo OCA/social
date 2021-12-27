@@ -22,3 +22,11 @@ class TestMailPartialAutodeleteCase(SavepointCase):
         self.mail.auto_delete = True
         self.mail._send()
         self.assertEqual(self.mail.body, "")
+
+    def test_autodelete_only_purge_debugmode(self):
+        self.env["ir.config_parameter"].create(
+            {"key": "mail_partial_autodelete_debugmode", "value": 1}
+        )
+        self.mail.auto_delete = True
+        self.mail._send()
+        self.assertEqual(self.mail.body, "<p>example body</p>")

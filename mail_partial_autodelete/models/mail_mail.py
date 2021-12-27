@@ -13,6 +13,10 @@ class MailMail(models.Model):
 
     def unlink(self):
         if self.env.context.get("autodelete_skip_unlink"):
+            if self.env["ir.config_parameter"].get_param(
+                "mail_partial_autodelete_debugmode"
+            ):
+                return self.write({"state": "sent"})  # prevent further operations
             return self.write({"body_html": "", "body": ""})
         else:
             return super().unlink()
