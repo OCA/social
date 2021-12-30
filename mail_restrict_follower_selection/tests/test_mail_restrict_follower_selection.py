@@ -33,12 +33,11 @@ class TestMailRestrictFollowerSelection(TransactionCase):
         compose = (
             self.env["mail.compose.message"]
             .with_context(
-                {
-                    "mail_post_autofollow": True,
-                    "default_composition_mode": "comment",
-                    "default_model": "res.partner",
-                    "default_use_active_domain": True,
-                }
+                mail_post_autofollow=True,
+                default_composition_mode="comment",
+                default_model="res.partner",
+                default_use_active_domain=True,
+                test_restrict_follower=True,
             )
             .create(
                 {
@@ -50,7 +49,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
             )
         )
         self.assertEqual(compose.partner_ids, self.partner)
-        compose.action_send_mail()
+        compose.send_mail()
 
     def test_followers_meet(self):
         self.partner.write({"category_id": self.category_employees})
