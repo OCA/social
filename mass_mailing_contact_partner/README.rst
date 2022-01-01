@@ -33,7 +33,7 @@ share the same email address.
 This module is different than `mass_mailing_partner` because the relationship
 is in the opposite direction.
 
-It's recommended to use it with `mass_mailing_contact_unique` module.
+It's recommended to use it with `mass_mailing_unique` module.
 
 **Table of contents**
 
