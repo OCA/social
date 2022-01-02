@@ -17,6 +17,14 @@ class MailMail(models.Model):
                 "mail_partial_autodelete_debugmode"
             ):
                 return self.write({"state": "sent"})  # prevent further operations
-            return self.write({"body_html": "", "body": ""})
+            # We only want to keep a trace of sent email during a grace period
+            # exceptions email can be drop
+            sent_records = self.filtered(lambda s: s.state == "sent")
+            # we purge (for security reason) email that are not a notification
+            # maybe we have secret inside
+            sent_records.filtered(lambda s: not s.notification).write(
+                {"body_html": "", "body": ""}
+            )
+            return super(MailMail, self - sent_records).unlink()
         else:
             return super().unlink()
