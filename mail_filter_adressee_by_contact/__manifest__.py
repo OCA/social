@@ -14,5 +14,10 @@
     "installable": True,
     "depends": [
         "mail",
+        "account",
+    ],
+    "data": [
+        "views/mail_compose_message_view.xml",
+        "views/mail_invoice_send_view.xml",
     ],
 }

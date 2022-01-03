@@ -2,7 +2,7 @@
 # @author Kévin Roche <kevin.roche@akretion.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 FILTERED_MODEL = [
     "account.move",
@@ -21,13 +21,15 @@ class MailComposer(models.TransientModel):
         "wizard_id",
         "partner_id",
         "Additional Contacts",
-        domain=lambda self: self._get_partner_ids_domain(),
     )
 
+    apply_filter = fields.Boolean(default=True, string="Filtering relevant adressees")
+
+    @api.onchange("apply_filter")
     def _get_partner_ids_domain(self):
         domain = [("type", "!=", "private")]
         model = self._context.get("active_model")
-        if model in FILTERED_MODEL:
+        if model in FILTERED_MODEL and self.apply_filter:
             domain.insert(0, "&")
             records = self.env[self._context["active_model"]].browse(
                 self._context.get("active_ids")
@@ -36,11 +38,10 @@ class MailComposer(models.TransientModel):
                 records
             )
             domain += partners
-        return domain
+        return {"domain": {"partner_ids": domain}}
 
     def _get_domain_for_sale_order(self, records):
         return [
-            "|",
             "|",
             "|",
             "|",
@@ -49,7 +50,6 @@ class MailComposer(models.TransientModel):
             ("id", "child_of", records.partner_id.ids),
             ("id", "child_of", records.partner_invoice_id.ids),
             ("id", "child_of", records.partner_shipping_id.ids),
-            ("id", "child_of", records.commercial_partner_id.ids),
             ("id", "in", records.message_partner_ids.ids),
         ]
 
@@ -58,10 +58,8 @@ class MailComposer(models.TransientModel):
             "|",
             "|",
             "|",
-            "|",
             ("user_ids", "!=", False),
             ("id", "child_of", records.partner_id.ids),
-            ("id", "child_of", records.commercial_partner_id.ids),
             ("id", "child_of", records.partner_shipping_id.ids),
             ("id", "in", records.message_partner_ids.ids),
         ]
@@ -70,10 +68,8 @@ class MailComposer(models.TransientModel):
         return [
             "|",
             "|",
-            "|",
             ("user_ids", "!=", False),
             ("id", "child_of", records.partner_id.ids),
-            ("id", "child_of", records.delivery_partner_id.ids),
             ("id", "in", records.message_partner_ids.ids),
         ]
 
