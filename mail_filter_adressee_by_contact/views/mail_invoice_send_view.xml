@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_invoice_send_wizard_form" model="ir.ui.view">
+        <field name="name">Send Invoice</field>
+        <field name="model">account.invoice.send</field>
+        <field name="inherit_id" ref="account.account_invoice_send_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='template_id']" position="after">
+                <field name="apply_filter" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
