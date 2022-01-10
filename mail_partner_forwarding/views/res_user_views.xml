@@ -1,0 +1,28 @@
+<!-- Copyright 2022 AdHoc SA
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record id="view_users_form_mail" model="ir.ui.view">
+        <field name="name">res.users.form.user.forwarding</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='login']//.." position="after">
+                <label for="forwarding_partner_id" />
+                <field name="forwarding_partner_id" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_users_form_mail_preferences" model="ir.ui.view">
+        <field name="name">res.users.form.user.forwarding.preferences</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field name="forwarding_partner_id" readonly="0" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
