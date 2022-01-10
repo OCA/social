@@ -3,6 +3,7 @@
 from base64 import b64decode
 
 from odoo import _, api, exceptions, models
+from odoo.tools import pycompat, ustr
 
 try:
     from extract_msg import Message
@@ -93,13 +94,17 @@ class MailThread(models.AbstractModel):
             # prefer html bodies to text
             message_msg._getStream("__substg1.0_10130102") or message_msg.body,
             email_cc=message_msg.cc,
-            headers={"date": message_msg.date},
             message_id=message_id,
             attachments=[
                 (attachment.longFilename, attachment.data)
                 for attachment in message_msg.attachments
             ],
         )
+        # We need to override message date, as an error rises when processing it
+        # directly with headers
+        key = pycompat.to_text(ustr("date"))
+        del message_email[key]
+        message_email[key] = message_msg.date
         return self.message_drop(
             model,
             message_email.as_string(),
