@@ -3,6 +3,6 @@
 .js_subscribe .form-control {
     width: 50%;
 }
-.js_subscribe[data-subscribe=on] .js_subscribe_name:not([disabled]) {
+.js_subscribe[data-subscribe="on"] .js_subscribe_name:not([disabled]) {
     display: none;
 }

@@ -7,7 +7,7 @@ odoo.define("website_mass_mailing_name.subscribe", function (require) {
     var animation = require("website.content.snippets.animation");
 
     animation.registry.subscribe.include({
-        start: function(editable_mode) {
+        start: function (editable_mode) {
             this.$email = this.$(".js_subscribe_email");
             this.$name = this.$(".js_subscribe_name");
             // Thanks upstream for your @$&#?!! inheritance-ready code.
@@ -18,7 +18,7 @@ odoo.define("website_mass_mailing_name.subscribe", function (require) {
             return this._super(editable_mode);
         },
 
-        _onClick: function() {
+        _onClick: function () {
             // Upstream will not tell user what is wrong with the
             // email validation so this will report with a helping message
             var email_valid = this.$email[0].reportValidity(),
@@ -29,7 +29,7 @@ odoo.define("website_mass_mailing_name.subscribe", function (require) {
             return this._super.apply(this, arguments);
         },
 
-        on_ajax_send: function(event, jqXHR, ajaxOptions) {
+        on_ajax_send: function (event, jqXHR, ajaxOptions) {
             // Add handlers on correct requests
             if (ajaxOptions.url == "/website_mass_mailing/is_subscriber") {
                 jqXHR.done($.proxy(this.on_start, this));
@@ -44,12 +44,13 @@ odoo.define("website_mass_mailing_name.subscribe", function (require) {
             }
         },
 
-        on_start: function(data) {
-            this.$name.val(data.result.name)
-            .attr(
-                "disabled",
-                Boolean(data.result.is_subscriber && data.result.name.length)
-            );
+        on_start: function (data) {
+            this.$name
+                .val(data.result.name)
+                .attr(
+                    "disabled",
+                    Boolean(data.result.is_subscriber && data.result.name.length)
+                );
         },
     });
 });
