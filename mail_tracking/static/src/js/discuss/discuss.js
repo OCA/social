@@ -14,7 +14,6 @@ odoo.define("mail_tracking/static/src/js/discuss/discuss.js", function (require)
         "mail/static/src/models/messaging_initializer/messaging_initializer.js",
         {
             async start() {
-                this._super(...arguments);
                 this.messaging.update({
                     failedmsg: [
                         [
@@ -28,6 +27,7 @@ odoo.define("mail_tracking/static/src/js/discuss/discuss.js", function (require)
                         ],
                     ],
                 });
+                return this._super(...arguments);
             },
             async _init({
                 channel_slots,
