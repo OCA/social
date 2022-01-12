@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
-"PO-Revision-Date: 2022-01-12 09:39+0000\n"
+"PO-Revision-Date: 2022-01-12 15:39+0000\n"
 "Last-Translator: Nils Nyman <nils.nyman-waara@vertel.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
@@ -476,7 +476,7 @@ msgstr "Du har blivit <strong>avanmäld i från %s</strong>"
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:110
 #, python-format
 msgid "You have been <strong>successfully unsubscribed</strong>."
-msgstr "Du har blivit <strong>avanmäld</strong>"
+msgstr "Du har blivit <strong>avanmäld</strong>."
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
@@ -486,6 +486,8 @@ msgid ""
 "You have been successfully <strong>added to our blacklist</strong>. You will "
 "not be contacted anymore by our services."
 msgstr ""
+"Du har blivit <strong> tillagd till våran svartlistning</strong>. Du kommer "
+"inte bli kontaktad mer av våra tjänster."
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
@@ -495,10 +497,12 @@ msgid ""
 "You have been successfully <strong>removed from our blacklist</strong>. You "
 "are now able to be contacted by our services."
 msgstr ""
+"Du har blivit <strong>borttagen i från våran svartlistning</strong>. Du kan "
+"nu bli kontaktad utav våra tjänster."
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:152
 #, python-format
 msgid "Your changes have been saved."
-msgstr ""
+msgstr "Dina förändringar har blivit sparade."
