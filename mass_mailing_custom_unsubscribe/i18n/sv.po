@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
-"PO-Revision-Date: 2021-11-15 10:36+0000\n"
-"Last-Translator: Robin Chatfield <robin.chatfield@vertel.se>\n"
+"PO-Revision-Date: 2022-01-12 09:39+0000\n"
+"Last-Translator: Nils Nyman <nils.nyman-waara@vertel.se>\n"
 "Language-Team: Swedish (https://www.transifex.com/oca/teams/23907/sv/)\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -422,6 +422,8 @@ msgid ""
 "We would appreciate if you provide feedback about why you updated<br/>your "
 "subscriptions"
 msgstr ""
+"Vi skulle uppskatta om du gav återkoppling om varför du uppdaterade<br/>dina "
+"anmälningar"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__website_message_ids
@@ -467,14 +469,14 @@ msgstr ""
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:105
 #, python-format
 msgid "You have been <strong>successfully unsubscribed from %s</strong>."
-msgstr ""
+msgstr "Du har blivit <strong>avanmäld i från %s</strong>"
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:110
 #, python-format
 msgid "You have been <strong>successfully unsubscribed</strong>."
-msgstr ""
+msgstr "Du har blivit <strong>avanmäld</strong>"
 
 #. module: mass_mailing_custom_unsubscribe
 #. openerp-web
