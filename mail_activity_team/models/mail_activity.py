@@ -1,4 +1,4 @@
-# Copyright 2018 ForgeFlow, S.L.
+# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -57,18 +57,23 @@ class MailActivity(models.Model):
 
     @api.constrains("team_id", "user_id")
     def _check_team_and_user(self):
-        # SUPERUSER is used to put mail.activity on some objects
-        # like sale.order coming from stock.picking
-        # (for example with exception type activity, with no backorder).
-        # SUPERUSER is inactive and then even if you add it
-        # to member_ids it's not taken account
-        # To not be blocked we must add it to constraint condition
-        # We must consider also users that could be archived but come from
-        # an automatic scheduled activity
-        for _activity in self.filtered(
-            lambda a: a.user_id.id != SUPERUSER_ID
-            and a.team_id
-            and a.user_id
-            and a.user_id not in a.team_id.with_context(active_test=True).member_ids
-        ):
-            raise ValidationError(_("The assigned user is not member of the team."))
+        for activity in self:
+            # SUPERUSER is used to put mail.activity on some objects
+            # like sale.order coming from stock.picking
+            # (for example with exception type activity, with no backorder).
+            # SUPERUSER is inactive and then even if you add it
+            # to member_ids it's not taken account
+            # To not be blocked we must add it to constraint condition.
+            # We must consider also users that could be archived but come from
+            # an automatic scheduled activity
+            if (
+                activity.user_id.id != SUPERUSER_ID
+                and activity.team_id
+                and activity.user_id
+                and activity.user_id
+                not in activity.team_id.with_context(active_test=False).member_ids
+            ):
+                raise ValidationError(
+                    _("The assigned user %s is not member of the team %s.")
+                    % (activity.user_id.name, activity.team_id.name)
+                )
