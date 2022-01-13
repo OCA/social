@@ -1,4 +1,4 @@
-# Copyright 2018 ForgeFlow, S.L.
+# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
@@ -138,15 +138,6 @@ class TestMailActivityTeam(TransactionCase):
         self.team1._compute_missing_activities()
         self.assertEqual(self.team1.count_missing_activities, 0)
         self.assertEqual(self.act1.team_id, self.team1)
-
-    def test_team_onchanges(self):
-        self.assertFalse(
-            self.team2.user_id, "Error: Team 2 should not have a Team Leader yet."
-        )
-        self.team2.user_id = self.employee
-        self.team2.member_ids = [(3, self.employee.id)]
-        self.team2._onchange_member_ids()
-        self.assertFalse(self.team2.user_id)
 
     def test_leader_onchange(self):
         self.team2.user_id = self.employee3
