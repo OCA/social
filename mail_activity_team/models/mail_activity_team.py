@@ -1,4 +1,5 @@
-# Copyright 2018 ForgeFlow, S.L.
+# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2021 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
 
@@ -47,12 +48,6 @@ class MailActivityTeam(models.Model):
     count_missing_activities = fields.Integer(
         string="Missing Activities", compute="_compute_missing_activities", default=0
     )
-
-    @api.onchange("member_ids")
-    def _onchange_member_ids(self):
-        """Remove team leader in case is not a member anymore"""
-        if self.user_id and self.user_id not in self.member_ids:
-            self.user_id = False
 
     @api.onchange("user_id")
     def _onchange_user_id(self):
