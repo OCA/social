@@ -63,9 +63,8 @@ class TestController(HttpCase, TestLayoutMixin):
         templates = self.env["mail.template"].search([("model_id.model", "=", model)])
         url_pattern = "/email-preview/res.partner/mail.email_template_partner/{}"
         for el, tmpl in zip(list_items, templates):
-            self.assertEqual(
-                el.attrib, {"class": "preview", "href": url_pattern.format(tmpl.id)}
-            )
+            self.assertEqual(el.attrib["class"], "preview")
+            self.assertEqual(el.attrib["href"], url_pattern.format(tmpl.id))
 
     def test_controller2(self):
         self.authenticate("admin", "admin")
