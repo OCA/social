@@ -1,0 +1,109 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_activity_done
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-04-16 14:36+0000\n"
+"Last-Translator: Tamás Dombos <tdombos@gmail.com>\n"
+"Language-Team: none\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: mail_activity_done
+#. openerp-web
+#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#, python-format
+msgid "%d days overdue"
+msgstr "%d nap késésben"
+
+#. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__active
+msgid "Active"
+msgstr "Aktív"
+
+#. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_event_event__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_event_registration__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_mailing_mailing__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_res_users__activity_ids
+msgid "Activities"
+msgstr "Tevékenységek"
+
+#. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_mail_activity
+msgid "Activity"
+msgstr "Tevékenység"
+
+#. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr "Tevékenység mixin"
+
+#. module: mail_activity_done
+#: model_terms:ir.ui.view,arch_db:mail_activity_done.mail_activity_view_search
+#: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
+msgid "Completed Activities"
+msgstr "Elkészült tevékenységek"
+
+#. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__date_done
+msgid "Completed Date"
+msgstr "Elkészülés dátuma"
+
+#. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__done
+#: model:ir.model.fields.selection,name:mail_activity_done.selection__mail_activity__state__done
+msgid "Done"
+msgstr "Kész"
+
+#. module: mail_activity_done
+#. openerp-web
+#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#, python-format
+msgid "Due in %d days"
+msgstr "%d napon belül esedékes"
+
+#. module: mail_activity_done
+#: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
+msgid "Open Activities"
+msgstr "Nyitott tevékenységek"
+
+#. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__state
+msgid "State"
+msgstr "Állapot"
+
+#. module: mail_activity_done
+#. openerp-web
+#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#, python-format
+msgid "Today"
+msgstr "Ma"
+
+#. module: mail_activity_done
+#. openerp-web
+#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#, python-format
+msgid "Tomorrow"
+msgstr "Holnap"
+
+#. module: mail_activity_done
+#: model:ir.model,name:mail_activity_done.model_res_users
+msgid "Users"
+msgstr "Felhasználók"
+
+#. module: mail_activity_done
+#. openerp-web
+#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#, python-format
+msgid "Yesterday"
+msgstr "Tegnap"
