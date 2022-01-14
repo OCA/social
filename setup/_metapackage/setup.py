@@ -12,6 +12,7 @@ setuptools.setup(
         'odoo14-addon-email_template_qweb',
         'odoo14-addon-mail_activity_board',
         'odoo14-addon-mail_activity_creator',
+        'odoo14-addon-mail_activity_done',
         'odoo14-addon-mail_activity_partner',
         'odoo14-addon-mail_activity_team',
         'odoo14-addon-mail_allow_portal_internal_note',
