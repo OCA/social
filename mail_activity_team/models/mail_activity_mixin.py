@@ -18,6 +18,22 @@ class MailActivityMixin(models.AbstractModel):
         for rec in self:
             rec.activity_team_user_ids = rec.activity_ids.mapped("team_id.member_ids")
 
+    def _search_my_activity_date_deadline(self, operator, operand):
+        if not self._context.get("team_activities", False):
+            return super(MailActivityMixin, self)._search_my_activity_date_deadline(
+                operator, operand
+            )
+        activity_ids = self.env["mail.activity"]._search(
+            [
+                "|",
+                ("user_id", "=", self.env.user.id),
+                "&",
+                ("date_deadline", operator, operand),
+                ("res_model", "=", self._name),
+            ]
+        )
+        return [("activity_ids", "in", activity_ids)]
+
     @api.model
     def _search_activity_team_user_ids(self, operator, operand):
         return [("activity_ids.team_id.member_ids", operator, operand)]
