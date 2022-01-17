@@ -16,8 +16,13 @@ class MailTemplate(models.Model):
     def _debrand_translated_words(self):
         def _get_translated(word):
             return self.env["ir.translation"]._get_source(
-                "ir.ui.view,arch_db", "model_terms", self.env.lang, word
+                "ir.ui.view,arch_db", "model_terms", lang, word
             )
+
+        lang = self.env.lang
+        template_lang = self._get_template_lang()
+        if template_lang and template_lang != lang:
+            lang = template_lang
 
         odoo_word = _get_translated("Odoo") or _("Odoo")
         powered_by = _get_translated("Powered by") or _("Powered by")
@@ -49,3 +54,15 @@ class MailTemplate(models.Model):
     def render_post_process(self, html):
         html = super().render_post_process(html)
         return self._debrand_body(html)
+
+    def _get_template_lang(self):
+        template_lang = False
+        if self._context.get("default_template_id"):
+            template = self.env["mail.template"].browse(
+                self._context.get("default_template_id")
+            )
+            if template.lang and self._context.get("active_id"):
+                template_lang = template._render_template(
+                    template.lang, template.model, self._context.get("active_id")
+                )
+        return template_lang

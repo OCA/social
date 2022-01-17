@@ -7,7 +7,7 @@
 {
     "name": "Mail Debrand",
     "summary": "Remove Odoo branding in sent emails",
-    "version": "13.0.2.0.1",
+    "version": "13.0.2.0.2",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, ForgeFlow, Onestein, Odoo Community Association (OCA)",
