@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018-22 ForgeFlow Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models, modules
 
@@ -44,7 +44,7 @@ class ResUsers(models.Model):
         activity_data = self.env.cr.dictfetchall()
         model_ids = [a["id"] for a in activity_data]
         model_names = {
-            n[0]: n[1] for n in self.env["ir.model"].browse(model_ids).name_get()
+            n[0]: n[1] for n in self.env["ir.model"].sudo().browse(model_ids).name_get()
         }
         user_activities = {}
         for activity in activity_data:
@@ -66,9 +66,4 @@ class ResUsers(models.Model):
             ] += activity["count"]
             if activity["states"] in ("today", "overdue"):
                 user_activities[activity["model"]]["total_count"] += activity["count"]
-            if activity["user_id"] == user and activity["states"] in (
-                "today",
-                "overdue",
-            ):
-                user_activities[activity["model"]]["total_count"] -= activity["count"]
         return list(user_activities.values())

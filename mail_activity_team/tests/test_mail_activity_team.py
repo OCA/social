@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018-22 ForgeFlow Business and IT Consulting Services, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
@@ -48,7 +48,7 @@ class TestMailActivityTeam(TransactionCase):
                 "delay_count": 5,
                 "delay_unit": "days",
                 "summary": "ACT 1 : Presentation, barbecue, ... ",
-                "res_model_id": self.partner_ir_model.id,
+                "res_model": self.partner_ir_model.model,
             }
         )
         self.activity2 = activity_type_model.create(
@@ -57,7 +57,7 @@ class TestMailActivityTeam(TransactionCase):
                 "delay_count": 6,
                 "delay_unit": "days",
                 "summary": "ACT 2 : I want to show you my ERP !",
-                "res_model_id": self.partner_ir_model.id,
+                "res_model": self.partner_ir_model.model,
             }
         )
 
@@ -148,7 +148,6 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(
             self.act2.team_id, self.team1, "Error: Activity 2 should have Team 1."
         )
-        self.act2.team_id = False
         self.act2._onchange_team_id()
         self.assertEqual(self.act2.user_id, self.employee)
         self.act2.team_id = self.team2
@@ -174,7 +173,7 @@ class TestMailActivityTeam(TransactionCase):
     def test_schedule_activity(self):
         """Correctly assign teams to auto scheduled activities. Those won't
         trigger onchanges and could raise constraints and team missmatches"""
-        partner_record = self.employee.partner_id.sudo(self.employee.id)
+        partner_record = self.employee.partner_id.with_user(self.employee.id)
         activity = partner_record.activity_schedule(
             user_id=self.employee2.id,
             activity_type_id=self.env.ref("mail.mail_activity_data_call").id,
