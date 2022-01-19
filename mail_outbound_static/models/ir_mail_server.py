@@ -118,8 +118,8 @@ class IrMailServer(models.Model):
 
     @tools.ormcache("email_domain")
     def _get_mail_sever(self, email_domain):
-        """ return the mail server id that match with the domain_whitelist
-        If not match then return the default mail server id available one """
+        """return the mail server id that match with the domain_whitelist
+        If not match then return the default mail server id available one"""
         mail_server_id = None
         for item in self.sudo().search(
             [("domain_whitelist", "!=", False)], order="sequence"
