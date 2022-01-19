@@ -6,25 +6,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-01-19 15:32+0000\n"
+"Last-Translator: Yann Papouin <ypa@decgroupe.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__smtp_from
 msgid "Email From"
-msgstr ""
+msgstr "Courriel provenant de"
 
 #. module: mail_outbound_static
 #: model:ir.model,name:mail_outbound_static.model_ir_mail_server
 msgid "Mail Server"
-msgstr ""
+msgstr "Serveur de courriel"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__smtp_from
 msgid "Set this in order to email from a specific address."
 msgstr ""
+"Définissez ceci afin d'envoyer un e-mail à partir d'une adresse spécifique."
