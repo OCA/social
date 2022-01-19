@@ -1,4 +1,4 @@
-# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
+# Copyright 2018-22 ForgeFlow <http://www.forgeflow.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
 
@@ -18,9 +18,10 @@ class MailActivity(models.Model):
 
     @api.depends("date_deadline", "done")
     def _compute_state(self):
-        super()._compute_state()
+        res = super()._compute_state()
         for record in self.filtered(lambda activity: activity.done):
             record.state = "done"
+        return res
 
     def _search_state(self, operator, operand):
         if not operand:
