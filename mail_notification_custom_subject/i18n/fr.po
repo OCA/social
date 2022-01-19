@@ -6,129 +6,133 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-01-19 15:32+0000\n"
+"Last-Translator: Yann Papouin <ypa@decgroupe.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_notification_custom_subject
 #: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:31
 #: selection:mail.message.custom.subject,position:0
 #, python-format
 msgid "Append After"
-msgstr ""
+msgstr "Ajouter après"
 
 #. module: mail_notification_custom_subject
 #: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:30
 #: selection:mail.message.custom.subject,position:0
 #, python-format
 msgid "Append Before"
-msgstr ""
+msgstr "Ajouter avant"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subtype_ids
 msgid "Applied Subtypes"
-msgstr ""
+msgstr "Sous-type concernés"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom d'affichage"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model,name:mail_notification_custom_subject.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussion par courriel"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière mise à jour par"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mis à jour le"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model,name:mail_notification_custom_subject.model_mail_message_custom_subject
 msgid "Mail Message Custom Subject"
-msgstr ""
+msgstr "Objet personnalisé du message électronique"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
 msgid "Model"
-msgstr ""
+msgstr "Objet"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
 msgid "Model where this template applies"
-msgstr ""
+msgstr "Objet sur lequel ce modèle s'applique"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid "Position"
-msgstr ""
+msgstr "Position"
 
 #. module: mail_notification_custom_subject
 #: code:addons/mail_notification_custom_subject/models/mail_message_custom_subject.py:32
 #: selection:mail.message.custom.subject,position:0
 #, python-format
 msgid "Replace"
-msgstr ""
+msgstr "Remplacer"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
 #: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
 msgid "Subject (placeholders may be used here)"
-msgstr ""
+msgstr "Sujet (des variables peuvent être utilisées ici)"
 
 #. module: mail_notification_custom_subject
 #: model:ir.actions.act_window,name:mail_notification_custom_subject.action_mail_notification_custom_subject_tree_all
 #: model:ir.ui.menu,name:mail_notification_custom_subject.menu_mail_notification_custom_subject
 #: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
 msgid "Subject Replacement Templates"
-msgstr ""
+msgstr "Modèles de remplacement de sujet"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
 msgid "Subject Template"
-msgstr ""
+msgstr "Modèle de sujet"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
 msgid "Template Name"
-msgstr ""
+msgstr "Nom du modèle"
 
 #. module: mail_notification_custom_subject
 #: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_tree
 msgid "Templates"
-msgstr ""
+msgstr "Modèles"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid "Whether to replace, append at beggining or append at end to other templates that apply to a given context"
 msgstr ""
+"Que ce soit pour remplacer, ajouter au début ou ajouter à la fin d'autres "
+"modèles qui s'appliquent à un contexte donné"
