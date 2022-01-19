@@ -1,7 +1,7 @@
-# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
+# Copyright 2018-22 ForgeFlow <http://www.forgeflow.com>
 # Copyright 2018 Odoo, S.A.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
-from odoo import fields
+from odoo import Command, fields
 
 from odoo.addons.mail.models.mail_activity import MailActivity
 
@@ -43,29 +43,11 @@ def post_load_hook():
         next_activities_values = []
         for activity in self:
             # extract value to generate next activities
-            if activity.force_next:
-                # context key is required in the onchange to set deadline
-                Activity = self.env["mail.activity"].with_context(
+            if activity.chaining_type == "trigger":
+                vals = activity.with_context(
                     activity_previous_deadline=activity.date_deadline
-                )
-                vals = Activity.default_get(Activity.fields_get())
-
-                vals.update(
-                    {
-                        "previous_activity_type_id": activity.activity_type_id.id,
-                        "res_id": activity.res_id,
-                        "res_model": activity.res_model,
-                        "res_model_id": self.env["ir.model"]
-                        ._get(activity.res_model)
-                        .id,
-                    }
-                )
-                virtual_activity = Activity.new(vals)
-                virtual_activity._onchange_previous_activity_type_id()
-                virtual_activity._onchange_activity_type_id()
-                next_activities_values.append(
-                    virtual_activity._convert_to_write(virtual_activity._cache)
-                )
+                )._prepare_next_activity_values()
+                next_activities_values.append(vals)
 
             # post message on activity, before deleting it
             record = self.env[activity.res_model].browse(activity.res_id)
@@ -79,11 +61,13 @@ def post_load_hook():
                     "feedback": feedback,
                     "display_assignee": activity.user_id != self.env.user,
                 },
-                subtype_id=self.env["ir.model.data"].xmlid_to_res_id(
+                subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                     "mail.mt_activities"
                 ),
                 mail_activity_type_id=activity.activity_type_id.id,
-                attachment_ids=[(4, attachment_id) for attachment_id in attachment_ids]
+                attachment_ids=[
+                    Command.link(attachment_id) for attachment_id in attachment_ids
+                ]
                 if attachment_ids
                 else [],
             )
