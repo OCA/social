@@ -27,7 +27,7 @@
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_search" />
         <field name="arch" type="xml">
-            <field name="res_model_id" position="after">
+            <field name="res_model" position="after">
                 <field name="done" />
                 <field name="active" />
                 <filter

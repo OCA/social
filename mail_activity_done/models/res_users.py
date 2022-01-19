@@ -1,4 +1,4 @@
-# Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
+# Copyright 2018-22 ForgeFlow <http://www.forgeflow.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models, modules
 
@@ -31,7 +31,7 @@ class ResUsers(models.Model):
         activity_data = self.env.cr.dictfetchall()
         model_ids = [a["id"] for a in activity_data]
         model_names = {
-            n[0]: n[1] for n in self.env["ir.model"].browse(model_ids).name_get()
+            n[0]: n[1] for n in self.env["ir.model"].sudo().browse(model_ids).name_get()
         }
 
         user_activities = {}
