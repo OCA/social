@@ -18,7 +18,7 @@ msgstr ""
 
 #. module: mail_activity_done
 #. openerp-web
-#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "%d days overdue"
 msgstr "%d nap késésben"
@@ -29,8 +29,6 @@ msgid "Active"
 msgstr "Aktív"
 
 #. module: mail_activity_done
-#: model:ir.model.fields,field_description:mail_activity_done.field_event_event__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_event_registration__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mailing_mailing__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
@@ -67,7 +65,7 @@ msgstr "Kész"
 
 #. module: mail_activity_done
 #. openerp-web
-#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Due in %d days"
 msgstr "%d napon belül esedékes"
@@ -84,14 +82,14 @@ msgstr "Állapot"
 
 #. module: mail_activity_done
 #. openerp-web
-#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Today"
 msgstr "Ma"
 
 #. module: mail_activity_done
 #. openerp-web
-#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Tomorrow"
 msgstr "Holnap"
@@ -103,7 +101,7 @@ msgstr "Felhasználók"
 
 #. module: mail_activity_done
 #. openerp-web
-#: code:addons/mail_activity_done/static/src/js/mail_activity.js:0
+#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Yesterday"
 msgstr "Tegnap"
