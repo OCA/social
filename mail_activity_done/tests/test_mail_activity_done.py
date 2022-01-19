@@ -32,7 +32,7 @@ class TestMailActivityDoneMethods(TransactionCase):
 
     def test_mail_activity_done(self):
         self.act1.done = True
-        self.assertEquals(self.act1.state, "done")
+        self.assertEqual(self.act1.state, "done")
 
     def test_systray_get_activities(self):
         act_count = self.employee.sudo(self.employee).systray_get_activities()
