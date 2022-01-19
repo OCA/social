@@ -6,15 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-07-30 22:59+0000\n"
-"Last-Translator: Yann Papouin <y.papouin@dec-industrie.com>\n"
+"PO-Revision-Date: 2022-01-19 18:46+0000\n"
+"Last-Translator: Yann Papouin <ypa@decgroupe.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
@@ -22,6 +22,8 @@ msgid ""
 "<i class=\"fa fa-check\" role=\"img\" aria-label=\"Mark as Done\" title="
 "\"Mark as Done\"/>"
 msgstr ""
+"<i class=\"fa fa-check\" role=\"img\" aria-label=\"Marqué comme terminé\" "
+"title=\"Marqué comme terminé\"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
@@ -29,6 +31,8 @@ msgid ""
 "<i class=\"fa fa-times\" role=\"img\" aria-label=\"Cancel\" title=\"Cancel\"/"
 ">"
 msgstr ""
+"<i class=\"fa fa-times\" role=\"img\" aria-label=\"Annulé\" title=\"Annulé\""
+"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
@@ -36,6 +40,8 @@ msgid ""
 "<i class=\"fa fa-undo\" role=\"img\" aria-label=\"Done &amp; Schedule Next\" "
 "title=\"Done &amp; Schedule Next\"/>"
 msgstr ""
+"<i class=\"fa fa-undo\" role=\"img\" aria-label=\"Terminé et planifier le "
+"prochain\" title=\"Terminé et planifier le prochain\"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
@@ -92,7 +98,7 @@ msgstr "Enregistrer une note"
 #: code:addons/mail_activity_board/static/src/xml/systray.xml:7
 #, python-format
 msgid "Open All"
-msgstr ""
+msgstr "Ouvrir tout"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__res_model_id_name
