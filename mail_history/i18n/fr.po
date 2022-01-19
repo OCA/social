@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-01-19 15:32+0000\n"
+"Last-Translator: Yann Papouin <ypa@decgroupe.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_history
 #. openerp-web
@@ -20,28 +22,28 @@ msgstr ""
 #: code:addons/mail_history/static/src/xml/discuss.xml:6
 #, python-format
 msgid "History"
-msgstr ""
+msgstr "Historique"
 
 #. module: mail_history
 #: model:ir.model,name:mail_history.model_mail_message
 msgid "Message"
-msgstr ""
+msgstr "Message"
 
 #. module: mail_history
 #: model:ir.model,name:mail_history.model_mail_notification
 msgid "Message Notifications"
-msgstr ""
+msgstr "Notifications par message"
 
 #. module: mail_history
 #. openerp-web
 #: code:addons/mail_history/static/src/xml/thread.xml:7
 #, python-format
 msgid "Messages marked as read will appear in the history."
-msgstr ""
+msgstr "Les messages marqués comme lus apparaîtront dans l'historique."
 
 #. module: mail_history
 #. openerp-web
 #: code:addons/mail_history/static/src/xml/thread.xml:6
 #, python-format
 msgid "No history messages"
-msgstr ""
+msgstr "Aucun message d'historique"
