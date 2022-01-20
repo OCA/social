@@ -3,7 +3,7 @@
 {
     'name': 'Activities board',
     'summary': 'Add Activity Boards',
-    'version': '12.0.1.1.0',
+    'version': '12.0.1.1.1',
     'development_status': 'Beta',
     'category': 'Social Network',
     'website': 'https://github.com/OCA/social',
