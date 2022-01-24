@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo14-addon-mail_inline_css',
         'odoo14-addon-mail_layout_preview',
         'odoo14-addon-mail_notification_custom_subject',
+        'odoo14-addon-mail_optional_follower_notification',
         'odoo14-addon-mail_outbound_static',
         'odoo14-addon-mail_partner_opt_out',
         'odoo14-addon-mail_preview_base',
