@@ -28,7 +28,6 @@ class MailThread(models.AbstractModel):
         record_name=False,
         **kwargs
     ):
-        subtype_id = kwargs.get("subtype_id", False)
         if not subtype_id and subtype_xmlid:
             subtype_id = self.env["ir.model.data"].xmlid_to_res_id(
                 subtype_xmlid,
@@ -39,15 +38,10 @@ class MailThread(models.AbstractModel):
                 [("model_id.model", "=", self._name), ("subtype_ids", "=", subtype_id)]
             )
             if not subject:
-                subject = (
-                    "Re: %s"
-                    % self.env["mail.message"]
-                    .with_context(
-                        default_model=self._name,
-                        default_res_id=self.id,
-                    )
-                    ._get_record_name({})
-                )
+                subject = "Re: %s" % self.env["mail.message"].with_context(
+                    default_model=self._name,
+                    default_res_id=self.id,
+                )._get_record_name({})
             for template in custom_subjects:
                 try:
                     rendered_subject_template = self.env[
