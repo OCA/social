@@ -28,7 +28,6 @@ class MailThread(models.AbstractModel):
         record_name=False,
         **kwargs
     ):
-        subtype_id = kwargs.get("subtype_id", False)
         if not subtype_id and subtype_xmlid:
             subtype_id = self.env["ir.model.data"].xmlid_to_res_id(
                 subtype_xmlid,
