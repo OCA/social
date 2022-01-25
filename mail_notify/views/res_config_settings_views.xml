@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">mail_notify.res_config_settings_view_form</field>
+        <field name="model">res.config.settings</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="mail.res_config_settings_view_form"/>
+        <field name="arch" type="xml">
+            <div id="emails" position="after">
+                <div id="push_notifications">
+                    <h2>Push Notifications</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-xs-12 col-md-6 o_setting_box">
+                            <div class="o_setting_left_pane">
+                                <field name="is_fcm_enabled"/>
+                            </div>
+                            <div class="o_setting_right_pane">
+                                <label for="is_fcm_enabled"/>
+                                <div class="text-muted">
+                                    Use Firebase instead of internal bus for Push Notifications.
+                                </div>
+                                <div attrs="{'invisible': [('is_fcm_enabled','=',False)]}">
+                                    <div class="mt16 row">
+                                        <label class="col-xs-3 col-md-3 o_light_label" for="fcm_server_key"/>
+                                        <field name="fcm_server_key" attrs="{'required': [('is_fcm_enabled','=',True)]}"/>
+                                        <label class="col-xs-3 col-md-3 o_light_label" for="fcm_vapid_key"/>
+                                        <field name="fcm_vapid_key" attrs="{'required': [('is_fcm_enabled','=',True)]}"/>
+                                        <label class="col-xs-3 col-md-3 o_light_label" for="fcm_messaging_id"/>
+                                        <field name="fcm_messaging_id" attrs="{'required': [('is_fcm_enabled','=',True)]}"/>
+                                    </div>
+                                    <div>
+                                        <!--<a class="btn-link o_btn-link-as-button fa fa-arrow-right" href="https://console.firebase.google.com/project/_/settings/cloudmessaging/">
+                                            Get your keys
+                                        </a>-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,16 @@
+<odoo>
+    <data>
+        <record id="mail_notify_clean" model="ir.cron">
+            <field name="name">Clean Invalid FCM Tokens</field>
+            <field name="active" eval="True"/>
+            <field name="state" eval="'code'"/>
+            <field name="priority" eval="5"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="doall" eval="False"/>
+            <field name="model_id" ref="mail_notify.model_res_users_token"/>
+            <field name="code" eval="'model.clean_token()'"/>
+        </record>
+    </data>
+</odoo>
