@@ -68,7 +68,7 @@ class TestIrMailServer(TransactionCase):
         self.skipTest(reason)
 
     def _delete_mail_servers(self):
-        """ Delete all available mail servers """
+        """Delete all available mail servers"""
         all_mail_servers = self.Model.search([])
         if all_mail_servers:
             all_mail_servers.unlink()
