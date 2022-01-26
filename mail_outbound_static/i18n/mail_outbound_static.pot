@@ -20,6 +20,7 @@ msgstr ""
 msgid "Display Name"
 msgstr ""
 
+#. module: mail_outbound_static
 #: code:addons/mail_outbound_static/models/ir_mail_server.py:0
 #, python-format
 msgid ""
