@@ -16,28 +16,37 @@ _logger = logging.getLogger(__name__)
 
 
 class TestIrMailServer(TransactionCase):
-    def setUp(self):
-        super(TestIrMailServer, self).setUp()
-        self.email_from = "derp@example.com"
-        self.email_from_another = "another@example.com"
-        self.Model = self.env["ir.mail_server"]
-        self.parameter_model = self.env["ir.config_parameter"]
-        self._delete_mail_servers()
-        self.Model.create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.email_from = "derp@example.com"
+        cls.email_from_another = "another@example.com"
+        cls.Model = cls.env["ir.mail_server"]
+        cls.parameter_model = cls.env["ir.config_parameter"]
+        cls._delete_mail_servers()
+        cls.Model.create(
             {
                 "name": "localhost",
                 "smtp_host": "localhost",
-                "smtp_from": self.email_from,
+                "smtp_from": cls.email_from,
             }
         )
         message_file = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "test.msg"
         )
         with open(message_file, "r") as fh:
-            self.message = message_from_string(fh.read())
+            cls.message = message_from_string(fh.read())
+
+    @classmethod
+    def _delete_mail_servers(cls):
+        """Delete all available mail servers"""
+        all_mail_servers = cls.Model.search([])
+        if all_mail_servers:
+            all_mail_servers.unlink()
 
     def _init_mail_server_domain_whilelist_based(self):
         self._delete_mail_servers()
+        self.assertFalse(self.Model.search([]))
         self.mail_server_domainone = self.Model.create(
             {
                 "name": "sandbox domainone",
@@ -66,13 +75,6 @@ class TestIrMailServer(TransactionCase):
     def _skip_test(self, reason):
         _logger.warn(reason)
         self.skipTest(reason)
-
-    def _delete_mail_servers(self):
-        """Delete all available mail servers"""
-        all_mail_servers = self.Model.search([])
-        if all_mail_servers:
-            all_mail_servers.unlink()
-        self.assertFalse(self.Model.search([]))
 
     def _send_mail(self, message=None, mail_server_id=None, smtp_server=None):
         if message is None:
@@ -184,7 +186,7 @@ class TestIrMailServer(TransactionCase):
         email_from = "Mitchell Admin <admin@%s>" % domain
 
         self._delete_mail_servers()
-
+        self.assertFalse(self.Model.search([]))
         # Find config values
         config_smtp_from = tools.config.get("smtp_from")
         config_smtp_domain_whitelist = tools.config.get("smtp_domain_whitelist")
@@ -221,7 +223,7 @@ class TestIrMailServer(TransactionCase):
         email_from = "Mitchell Admin <admin@%s>" % domain
 
         self._delete_mail_servers()
-
+        self.assertFalse(self.Model.search([]))
         self.message.replace_header("From", email_from)
         message = self._send_mail()
         self.assertEqual(message["From"], email_from)
