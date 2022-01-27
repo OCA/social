@@ -3,9 +3,10 @@
 
 import re
 from email.utils import formataddr, parseaddr
+from email_validator import validate_email, EmailSyntaxError
 
 from odoo import _, api, fields, models, tools
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 
 
 class IrMailServer(models.Model):
@@ -72,12 +73,21 @@ class IrMailServer(models.Model):
         self, message, mail_server_id=None, smtp_server=None, *args, **kwargs
     ):
         # Get email_from and name_from
-        if message["From"].count("<") > 1:
+        name_from, email_from = parseaddr(message["From"])
+
+        # Validate that the email address is a valid one
+        try:
+            validate_email(email_from)
+        except EmailSyntaxError:
+            # Not able to process the email from, try to fix it manually
             split_from = message["From"].rsplit(" <", 1)
             name_from = split_from[0]
             email_from = split_from[-1].replace(">", "")
-        else:
-            name_from, email_from = parseaddr(message["From"])
+            try:
+                validate_email(email_from)
+            except EmailSyntaxError as exp:
+                # email is not valid, exception message is human-readable
+                raise UserError('Invalid email address "%s". ' % message["From"] + str(exp))
 
         email_domain = email_from.split("@")[1]
 
