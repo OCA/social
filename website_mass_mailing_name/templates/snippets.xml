@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016-2017 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl). -->
+<odoo>
+
+<template
+        id="s_newsletter_subscribe_form"
+        inherit_id="website_mass_mailing.s_newsletter_subscribe_form"
+    >
+    <xpath expr="//input[hasclass('js_subscribe_email')]" position="before">
+        <input
+                name="name"
+                class="js_subscribe_name form-control"
+                required="required"
+                placeholder="your name..."
+            />
+    </xpath>
+    <xpath expr="//input[hasclass('js_subscribe_email')]" position="attributes">
+        <attribute name="required">required</attribute>
+    </xpath>
+</template>
+
+</odoo>
