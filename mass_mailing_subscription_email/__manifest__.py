@@ -16,6 +16,5 @@
         "data/mail_template.xml",
         "views/mailing_list.xml",
     ],
-    "demo": ["demo/mailing_list.xml"],
     "post_init_hook": "post_init_hook",
 }

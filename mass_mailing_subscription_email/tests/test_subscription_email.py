@@ -22,15 +22,14 @@ class TestSubscriptionEmail(SavepointCase, MockEmail):
         module_name = "mass_mailing_subscription_email"
         cls.subscribe_tmpl = cls.env.ref(f"{module_name}.mailing_list_subscribe")
         cls.unsubscribe_tmpl = cls.env.ref(f"{module_name}.mailing_list_unsubscribe")
+        # Set some tmpl values to ease tests
+        cls.email_from = "your-company@example.com"
+        cls.subscribe_tmpl.email_from = cls.email_from
+        cls.subscribe_tmpl.subject = "SUBSCRIBED"
+        cls.unsubscribe_tmpl.email_from = cls.email_from
+        cls.unsubscribe_tmpl.subject = "UNSUBSCRIBED"
 
     def test_subscription_email(self):
-        # Set some tmpl values to ease tests
-        email_from = "your-company@example.com"
-        email_to = self.mailing_contact.email
-        self.subscribe_tmpl.email_from = email_from
-        self.unsubscribe_tmpl.email_from = email_from
-        self.subscribe_tmpl.subject = "SUBSCRIBED"
-        self.unsubscribe_tmpl.subject = "UNSUBSCRIBED"
         # Create subscription
         with self.mock_mail_gateway():
             subs = self.env["mailing.contact.subscription"].create(
@@ -39,26 +38,26 @@ class TestSubscriptionEmail(SavepointCase, MockEmail):
                     "list_id": self.mailing_list.id,
                 }
             )
-        self.assertEqual(self._new_mails.email_from, email_from)
-        self.assertEqual(self._new_mails.email_to, email_to)
+        self.assertEqual(self._new_mails.email_from, self.email_from)
+        self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
         self.assertEqual(self._new_mails.subject, "SUBSCRIBED")
         # Unsubscribe
         with self.mock_mail_gateway():
             subs.opt_out = True
-        self.assertEqual(self._new_mails.email_from, email_from)
-        self.assertEqual(self._new_mails.email_to, email_to)
+        self.assertEqual(self._new_mails.email_from, self.email_from)
+        self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
         self.assertEqual(self._new_mails.subject, "UNSUBSCRIBED")
         # Subscribe again
         with self.mock_mail_gateway():
             subs.opt_out = False
-        self.assertEqual(self._new_mails.email_from, email_from)
-        self.assertEqual(self._new_mails.email_to, email_to)
+        self.assertEqual(self._new_mails.email_from, self.email_from)
+        self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
         self.assertEqual(self._new_mails.subject, "SUBSCRIBED")
         # Unsubscribe through unlinking
         with self.mock_mail_gateway():
             subs.unlink()
-        self.assertEqual(self._new_mails.email_from, email_from)
-        self.assertEqual(self._new_mails.email_to, email_to)
+        self.assertEqual(self._new_mails.email_from, self.email_from)
+        self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
         self.assertEqual(self._new_mails.subject, "UNSUBSCRIBED")
 
     def test_subscription_email_disabled(self):
