@@ -6,7 +6,7 @@
 odoo.define("mail_preview_base.preview", function (require) {
     "use strict";
 
-    var DocumentViewer = require("mail.DocumentViewer");
+    const DocumentViewer = require("@mail/js/document_viewer")[Symbol.for("default")];
     var basic_fields = require("web.basic_fields");
     var registry = require("web.field_registry");
 
