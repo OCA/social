@@ -2,7 +2,12 @@
 # @author Iván Todorovich <ivan.todorovich@gmail.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+import hashlib
+import hmac
+
+from werkzeug.urls import url_encode
+
+from odoo import api, models, tools
 
 
 class MailingContactSubscription(models.Model):
@@ -37,3 +42,30 @@ class MailingContactSubscription(models.Model):
             )
             if template:
                 template.send_mail(rec.id)
+
+    def _unsubscribe_token(self):
+        """Generate a secure hash for this mailing list and parameters"""
+        # NOTE: similar to core's mailing.mailing._unsubscribe_token
+        secret = self.env["ir.config_parameter"].sudo().get_param("database.secret")
+        token = (
+            self.env.cr.dbname,
+            self.id,
+            tools.ustr(self.contact_id.email_normalized),
+        )
+        return hmac.new(
+            secret.encode("utf-8"), repr(token).encode("utf-8"), hashlib.sha512
+        ).hexdigest()
+
+    def _get_unsubscribe_url(self):
+        """Generate a secure URL to opt-out of this subscription"""
+        self.ensure_one()
+        if not self.contact_id.email_normalized:
+            return False
+        params = {
+            "email": self.contact_id.email_normalized,
+            "token": self._unsubscribe_token(),
+        }
+        return "/mail/mailing/contact/%(res_id)s/unsubscribe?%(params)s" % {
+            "res_id": self.id,
+            "params": url_encode(params),
+        }
