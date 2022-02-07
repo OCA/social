@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Tree view -->
     <record id="view_sendgrid_template_tree" model="ir.ui.view">
@@ -6,8 +6,8 @@
         <field name="model">sendgrid.template</field>
         <field name="arch" type="xml">
             <tree string="Templates">
-                <field name="remote_id"/>
-                <field name="name"/>
+                <field name="remote_id" />
+                <field name="name" />
             </tree>
         </field>
     </record>
@@ -20,16 +20,16 @@
             <form string="Template">
                 <sheet>
                     <group>
-                        <field name="name"/>
-                        <field name="remote_id"/>
-                        <field name="detected_keywords"/>
+                        <field name="name" />
+                        <field name="remote_id" />
+                        <field name="detected_keywords" />
                     </group>
                     <notebook>
                         <page string="Html">
-                            <field name="html_content"/>
+                            <field name="html_content" />
                         </page>
                         <page string="Plain text">
-                            <field name="plain_content"/>
+                            <field name="plain_content" />
                         </page>
                     </notebook>
                 </sheet>
@@ -43,12 +43,12 @@
         <field name="res_model">sendgrid.template</field>
         <field name="view_type">form</field>
         <field name="view_mode">form,tree</field>
-        <field name="view_id" ref="view_sendgrid_template_tree"/>
+        <field name="view_id" ref="view_sendgrid_template_tree" />
     </record>
 
     <record model="ir.actions.server" id="update_sendgrid_templates">
         <field name="name">Update Sendgrid Templates</field>
-        <field name="model_id" ref="mail_sendgrid.model_sendgrid_template"/>
+        <field name="model_id" ref="mail_sendgrid.model_sendgrid_template" />
         <field name="code">
 env['sendgrid.template'].update_templates()
 action = {
@@ -61,12 +61,18 @@ action = {
     </record>
 
     <!-- Add menu entry in Settings/Email -->
-    <menuitem name="SendGrid Templates" id="menu_sendgrid_template"
-              parent="base.menu_email"
-              sequence="8"
-              action="open_view_sendgrid_template_tree"/>
-    <menuitem name="Update SendGrid" id="menu_update_sendgrid_template"
-              parent="base.menu_email"
-              sequence="9"
-              action="update_sendgrid_templates"/>
+    <menuitem
+        name="SendGrid Templates"
+        id="menu_sendgrid_template"
+        parent="base.menu_email"
+        sequence="8"
+        action="open_view_sendgrid_template_tree"
+    />
+    <menuitem
+        name="Update SendGrid"
+        id="menu_update_sendgrid_template"
+        parent="base.menu_email"
+        sequence="9"
+        action="update_sendgrid_templates"
+    />
 </odoo>

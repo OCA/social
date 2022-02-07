@@ -1,27 +1,29 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015-2017 Compassion CH (http://www.compassion.ch)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 
 class EmailComposeMessage(models.TransientModel):
     """ Email message sent through SendGrid """
-    _inherit = 'mail.compose.message'
 
-    body_sendgrid = fields.Html(compute='_compute_sendgrid_view')
+    _inherit = "mail.compose.message"
 
-    @api.depends('body')
+    body_sendgrid = fields.Html(compute="_compute_sendgrid_view")
+
+    @api.depends("body")
     def _compute_sendgrid_view(self):
         for wizard in self:
             template = wizard.template_id
             sendgrid_template = template.sendgrid_localized_template
-            res_id = self.env.context.get('active_id')
+            res_id = self.env.context.get("active_id")
             render_body = self.render_template(
-                wizard.body, wizard.model, [res_id], post_process=True)[res_id]
+                wizard.body, wizard.model, [res_id], post_process=True
+            )[res_id]
             if sendgrid_template and wizard.body:
                 wizard.body_sendgrid = sendgrid_template.html_content.replace(
-                    '<%body%>', render_body)
+                    "<%body%>", render_body
+                )
             else:
                 wizard.body_sendgrid = render_body
 
@@ -36,7 +38,7 @@ class EmailComposeMessage(models.TransientModel):
             substitutions = template.render_substitutions(res_ids)
 
             for res_id, value in mail_values.iteritems():
-                value['sendgrid_template_id'] = sendgrid_template_id
-                value['substitution_ids'] = substitutions[res_id]
+                value["sendgrid_template_id"] = sendgrid_template_id
+                value["substitution_ids"] = substitutions[res_id]
 
         return mail_values
