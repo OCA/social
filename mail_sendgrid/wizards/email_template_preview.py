@@ -7,15 +7,13 @@ from odoo import api, models
 class EmailTemplatePreview(models.TransientModel):
     """ Put the preview inside sendgrid template """
 
-    _inherit = "email_template.preview"
+    _inherit = "mail.template.preview"
 
-    @api.onchange("res_id")
-    @api.multi
-    def on_change_res_id(self):
-        result = super(EmailTemplatePreview, self).on_change_res_id()
+    @api.depends("lang", "resource_ref")
+    def _compute_mail_template_fields(self):
+        result = super(EmailTemplatePreview, self)._compute_mail_template_fields()
         body_html = self.body_html
-        template_id = self.env.context.get("template_id")
-        template = self.env["mail.template"].browse(template_id)
+        template = self.mail_template_id
         sendgrid_template = template.sendgrid_localized_template
         if sendgrid_template and body_html:
             self.body_html = sendgrid_template.html_content.replace(

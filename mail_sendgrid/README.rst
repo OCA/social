@@ -104,6 +104,7 @@ Contributors
 * Emanuel Cino <ecino@compassion.ch>
 * Roman Zoller <rzcomp@gmail.com>
 * Isaac Gallart <igallart@puntsistemes.es>
+* Eugene Molotov <molotov@it-projects.info>
 
 Maintainer
 ----------

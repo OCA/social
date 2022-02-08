@@ -47,11 +47,12 @@ class MailMessage(models.Model):
     sendgrid_template_id = fields.Many2one("sendgrid.template", "Sendgrid Template")
     send_method = fields.Char(compute="_compute_send_method")
 
-    @api.multi
     def _compute_send_method(self):
         """Check whether to use traditional send method, sendgrid or disable."""
-        send_method = self.env["ir.config_parameter"].get_param(
-            "mail_sendgrid.send_method", "traditional"
+        send_method = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mail_sendgrid.send_method", "traditional")
         )
         for email in self:
             email.send_method = send_method
@@ -84,13 +85,16 @@ class MailMail(models.Model):
             )
             email.update({"click_count": click_count, "opened": opened > 0})
 
+    @api.depends(
+        "tracking_email_ids",
+        "tracking_email_ids.tracking_event_ids",
+    )
     def _compute_events(self):
         for email in self:
             email.tracking_event_ids = email.tracking_email_ids.mapped(
                 "tracking_event_ids"
             )
 
-    @api.multi
     def send(self, auto_commit=False, raise_exception=False):
         """ Override send to select the method to send the e-mail. """
         traditional = self.filtered(lambda e: e.send_method == "traditional")
@@ -101,7 +105,6 @@ class MailMail(models.Model):
             sendgrid.send_sendgrid()
         return True
 
-    @api.multi
     def send_sendgrid(self):
         """Use sendgrid transactional e-mails : e-mails are sent one by
         one."""
@@ -120,7 +123,7 @@ class MailMail(models.Model):
                     request_body=email._prepare_sendgrid_data().get()
                 )
             except Exception as e:
-                _logger.error(e.message or "mail not sent.")
+                _logger.error(str(e) or "mail not sent.")
                 continue
 
             status = response.status_code
@@ -134,9 +137,9 @@ class MailMail(models.Model):
                     # Commit at each e-mail processed to avoid any errors
                     # invalidating state.
                     self.env.cr.commit()  # pylint: disable=invalid-commit
-                email._postprocess_sent_message(mail_sent=True)
+                email._postprocess_sent_message(success_pids=list(email.recipient_ids))
             else:
-                email._postprocess_sent_message(mail_sent=False)
+                email._postprocess_sent_message(failure_type="UNKNOWN")
                 _logger.error("Failed to send email: {}".format(str(msg)))
 
     def _prepare_sendgrid_data(self):
@@ -160,7 +163,7 @@ class MailMail(models.Model):
                 headers.update(safe_eval(self.headers))
             except Exception:
                 pass
-        for h_name, h_val in headers.iteritems():
+        for h_name, h_val in headers.items():
             s_mail.add_header(Header(h_name, h_val))
 
         html = self.body_html or " "

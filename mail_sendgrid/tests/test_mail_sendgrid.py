@@ -1,8 +1,7 @@
 # © 2017 Emanuel Cino - <ecino@compassion.ch>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import json
-
-import mock
+from unittest import mock
 
 from odoo.tests.common import HttpCase
 
@@ -148,16 +147,16 @@ class TestMailSendgrid(HttpCase):
         """
         Test the preview email_template is getting the Sendgrid template
         """
-        preview_wizard = (
-            self.env["email_template.preview"]
-            .with_context(
-                template_id=self.mail_template.id, default_res_id=self.recipient.id
-            )
-            .create({})
+        preview_wizard = self.env["mail.template.preview"].create(
+            {
+                "mail_template_id": self.mail_template.id,
+            }
         )
-        # For a strange reason, res_id is converted to string
-        preview_wizard.res_id = self.recipient.id
-        preview_wizard.on_change_res_id()
+        preview_wizard.resource_ref = "%s,%s" % (
+            self.recipient._name,
+            self.recipient.id,
+        )
+        preview_wizard._compute_mail_template_fields()
         self.assertIn(u"<h1>Test Sendgrid</h1>", preview_wizard.body_html)
         self.assertIn(self.recipient.name, preview_wizard.body_html)
 
@@ -192,7 +191,9 @@ class TestMailSendgrid(HttpCase):
         """Tests that sending an e-mail by default doesn't use Sendgrid,
         and that Sendgrid is used when system parameter is set.
         """
-        self.env["ir.config_parameter"].set_param("mail_sendgrid.send_method", False)
+        self.env["ir.config_parameter"].sudo().set_param(
+            "mail_sendgrid.send_method", False
+        )
         mock_sendgrid.return_value = True
         mock_email.return_value = True
         mail = self.create_email()
@@ -200,11 +201,11 @@ class TestMailSendgrid(HttpCase):
         self.assertTrue(mock_email.called)
         self.assertFalse(mock_sendgrid.called)
 
-        self.env["ir.config_parameter"].set_param(
+        self.env["ir.config_parameter"].sudo().set_param(
             "mail_sendgrid.send_method", "sendgrid"
         )
         # Force again computation of send_method
-        self.env.invalidate_all()
+        self.env.cache.invalidate()
         mail.send()
         self.assertEqual(mock_email.call_count, 1)
         self.assertEqual(mock_sendgrid.call_count, 1)
@@ -213,11 +214,13 @@ class TestMailSendgrid(HttpCase):
     @mock.patch(mock_config)
     def test_mail_tracking(self, m_config, mock_sendgrid):
         """ Test various tracking events. """
-        self.env["ir.config_parameter"].set_param(
+        self.env["ir.config_parameter"].sudo().set_param(
             "mail_sendgrid.send_method", "sendgrid"
         )
         mock_sendgrid.return_value = FakeClient()
-        m_config.get.return_value = "ushuwejhfkj"
+        m_config.get.side_effect = (
+            lambda key: "ushuwejhfkj" if key == "sendgrid_api_key" else None
+        )
 
         # Send mail
         mail = self.create_email()
@@ -262,7 +265,7 @@ class TestMailSendgrid(HttpCase):
         self.assertEqual(mail.click_count, 1)
 
         # Test events are linked to e-mail
-        self.assertEquals(len(mail.tracking_event_ids), 4)
+        self.assertEqual(len(mail.tracking_event_ids), 4)
 
     def test_controller(self):
         """ Check the controller is working """
@@ -270,13 +273,13 @@ class TestMailSendgrid(HttpCase):
         with mock.patch(mock_json_request, side_effect=side_effect_json) as json_mock:
             json_mock.return_value = True
             result = self.url_open(
-                "/mail/tracking/sendgrid/" + self.session.db, json.dumps(event_data)
+                "/mail/tracking/sendgrid/" + self.env.cr.dbname, json.dumps(event_data)
             )
             self.assertTrue(json_mock.called)
             self.assertTrue(result)
             # Invalid request
             self.url_open(
-                "/mail/tracking/sendgrid/" + self.session.db, "[{'invalid': True}]"
+                "/mail/tracking/sendgrid/" + self.env.cr.dbname, "[{'invalid': True}]"
             )
 
     @mock.patch(mock_template_api_client)
@@ -290,6 +293,6 @@ class TestMailSendgrid(HttpCase):
 
     def tearDown(self):
         super(TestMailSendgrid, self).tearDown()
-        self.env["ir.config_parameter"].set_param(
+        self.env["ir.config_parameter"].sudo().set_param(
             "mail_sendgrid.send_method", "traditional"
         )

@@ -3,7 +3,7 @@
 
 from collections import defaultdict
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class EmailTemplate(models.Model):
@@ -30,7 +30,6 @@ class EmailTemplate(models.Model):
                     lang_template.sendgrid_template_id
                 )
 
-    @api.multi
     def update_substitutions(self):
         for template in self:
             new_substitutions = []
@@ -55,7 +54,6 @@ class EmailTemplate(models.Model):
 
         return True
 
-    @api.multi
     def render_substitutions(self, res_ids):
         """
         :param res_ids: resource ids for rendering the template
@@ -65,14 +63,16 @@ class EmailTemplate(models.Model):
          {res_id: list of substitutions values [0, 0 {substitution_vals}]}
         """
         self.ensure_one()
-        if isinstance(res_ids, (int, long)):
+        if isinstance(res_ids, int):
             res_ids = [res_ids]
         substitutions = self.substitution_ids.filtered(
             lambda s: s.lang == self.env.context.get("lang", "en_US")
         )
         substitution_vals = defaultdict(list)
         for substitution in substitutions:
-            values = self.render_template(substitution.value, self.model, res_ids)
+            values = self.env["mail.render.mixin"]._render_template(
+                substitution.value, self.model, res_ids
+            )
             for res_id in res_ids:
                 substitution_vals[res_id].append(
                     (0, 0, {"key": substitution.key, "value": values[res_id]})

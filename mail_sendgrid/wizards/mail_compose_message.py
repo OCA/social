@@ -17,7 +17,7 @@ class EmailComposeMessage(models.TransientModel):
             template = wizard.template_id
             sendgrid_template = template.sendgrid_localized_template
             res_id = self.env.context.get("active_id")
-            render_body = self.render_template(
+            render_body = self.env["mail.render.mixin"]._render_template(
                 wizard.body, wizard.model, [res_id], post_process=True
             )[res_id]
             if sendgrid_template and wizard.body:
@@ -27,7 +27,6 @@ class EmailComposeMessage(models.TransientModel):
             else:
                 wizard.body_sendgrid = render_body
 
-    @api.multi
     def get_mail_values(self, res_ids):
         """ Attach sendgrid template to e-mail and render substitutions """
         mail_values = super(EmailComposeMessage, self).get_mail_values(res_ids)
@@ -37,7 +36,7 @@ class EmailComposeMessage(models.TransientModel):
         if sendgrid_template_id:
             substitutions = template.render_substitutions(res_ids)
 
-            for res_id, value in mail_values.iteritems():
+            for res_id, value in mail_values.items():
                 value["sendgrid_template_id"] = sendgrid_template_id
                 value["substitution_ids"] = substitutions[res_id]
 

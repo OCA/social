@@ -4,6 +4,7 @@ import json
 import logging
 
 from odoo.http import JsonRequest, Response, Root
+from odoo.tools import date_utils
 
 # Monkeypatch type of request rooter to use RESTJsonRequest
 old_get_request = Root.get_request
@@ -42,7 +43,7 @@ class RESTJsonRequest(JsonRequest):
             response["result"] = result
 
         mime = "application/json"
-        body = json.dumps(response)
+        body = json.dumps(response, default=date_utils.json_default)
 
         return Response(
             body, headers=[("Content-Type", mime), ("Content-Length", len(body))]
