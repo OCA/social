@@ -166,14 +166,18 @@ class ResPartner(models.Model):
         self.ensure_one()
         if not self.email:  # pragma: no cover
             raise ValidationError(_("Email is required to subscribe to the Newsletter"))
-        return self.env["mailing.contact"].create(
-            {
-                "name": self.name or self.email,
-                "email": self.email,
-                "title_id": self.title.id,
-                "country_id": self.country_id.id,
-                "tag_ids": [(6, 0, self.category_id.ids)],
-            }
+        return (
+            self.env["mailing.contact"]
+            .sudo()
+            .create(
+                {
+                    "name": self.name or self.email,
+                    "email": self.email,
+                    "title_id": self.title.id,
+                    "country_id": self.country_id.id,
+                    "tag_ids": [(6, 0, self.category_id.ids)],
+                }
+            )
         )
 
     def _create_mailing_contact_subscription(self, **kwargs):
@@ -186,6 +190,6 @@ class ResPartner(models.Model):
         }
         if kwargs is not None:
             vals.update(kwargs)
-        subs = self.env["mailing.contact.subscription"].create(vals)
+        subs = self.env["mailing.contact.subscription"].sudo().create(vals)
         self.invalidate_cache(["main_mailing_list_subscription_id"])
         return subs
