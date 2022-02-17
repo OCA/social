@@ -116,11 +116,7 @@
                 <field name="name" string="Subject" />
                 <field name="time" string="Time" />
                 <field name="date" string="Date" />
-                <filter
-                    name="sent"
-                    string="Sent"
-                    domain="[('state', 'in', ('sent',))]"
-                />
+                <filter name="sent" string="Sent" domain="[('state', '=', 'sent')]" />
                 <filter
                     name="deferred"
                     string="Deferred"
