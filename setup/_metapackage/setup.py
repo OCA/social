@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo-addon-mail_activity_partner>=15.0dev,<15.1dev',
         'odoo-addon-mail_attach_existing_attachment>=15.0dev,<15.1dev',
         'odoo-addon-mail_debrand>=15.0dev,<15.1dev',
+        'odoo-addon-mail_preview_base>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
