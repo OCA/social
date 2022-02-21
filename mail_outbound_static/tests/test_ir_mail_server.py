@@ -9,7 +9,7 @@ from email import message_from_string
 from mock import MagicMock
 
 import odoo.tools as tools
-from odoo.exceptions import ValidationError
+from odoo.exceptions import ValidationError, UserError
 from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
@@ -19,15 +19,13 @@ class TestIrMailServer(TransactionCase):
     def setUp(self):
         super(TestIrMailServer, self).setUp()
         self.email_from = "derp@example.com"
-        self.email_from_another = "another@example.com"
         self.Model = self.env["ir.mail_server"]
-        self.parameter_model = self.env["ir.config_parameter"]
+        self.parameter_model = self.env["ir.config_parameter"].sudo()
         self._delete_mail_servers()
-        self.Model.create(
+        self.mail_server_wo_whitelist = self.Model.create(
             {
                 "name": "localhost",
                 "smtp_host": "localhost",
-                "smtp_from": self.email_from,
             }
         )
         message_file = os.path.join(
@@ -59,7 +57,7 @@ class TestIrMailServer(TransactionCase):
                 "name": "sandbox domainthree",
                 "smtp_host": "localhost",
                 "smtp_from": "notifications@domainthree.com",
-                "domain_whitelist": "domainthree.com,domainmulti.com",
+                "domain_whitelist": "domainthree.com,domainfour.com",
             }
         )
 
@@ -91,12 +89,20 @@ class TestIrMailServer(TransactionCase):
         send_from, send_to, message_string = connect().sendmail.call_args[0]
         return message_from_string(message_string)
 
+    def test_send_email_with_smtp_from(self):
+        """It should inject the FROM header correctly when no canonical name.
+        """
+        self.mail_server_wo_whitelist.smtp_from = "derp@example.com"
+        self.message.replace_header("From", "test@example.com")
+        message = self._send_mail()
+        self.assertEqual(message["From"], "derp@example.com")
+
     def test_send_email_injects_from_no_canonical(self):
         """It should inject the FROM header correctly when no canonical name.
         """
         self.message.replace_header("From", "test@example.com")
         message = self._send_mail()
-        self.assertEqual(message["From"], self.email_from)
+        self.assertEqual(message["From"], "test@example.com")
 
     def test_send_email_injects_from_with_canonical(self):
         """It should inject the FROM header correctly with a canonical name.
@@ -115,10 +121,27 @@ class TestIrMailServer(TransactionCase):
         # Also check passing mail_server_id
         mail_server_id = self.Model.sudo().search([], order="sequence", limit=1)[0].id
         message = self._send_mail(mail_server_id=mail_server_id)
-        self.assertEqual(message["From"], '"{}" <{}>'.format(user, self.email_from))
+        self.assertEqual(message["From"], 'Test < User <test@example.com>')
         self.assertEqual(
-            message["Return-Path"], '"{}" <{}>'.format(user, self.email_from)
+            message["Return-Path"], 'Test < User <test@example.com>'
         )
+
+    def test_send_email_injects_from_with_bad_canonical(self):
+        """It should inject the FROM header correctly with a canonical name.
+
+        Note that there is an extra `,` in the canonical name to test for
+        proper handling in the split. """
+        user = "Test, User"
+        self.message.replace_header("From", "%s <test@example.com>" % user)
+        message = self._send_mail()
+        self.assertEqual(message["From"], 'Test, User <test@example.com>')
+
+    def test_send_email_injects_from_with_bad_email_from(self):
+        """It will raise and exception because not valid FROM """
+        user = "Test, User"
+        self.message.replace_header("From", "%s test@example.com" % user)
+        with self.assertRaisesRegex(UserError, "'Invalid email address"):
+            self._send_mail()
 
     def test_01_from_outgoing_server_domainone(self):
         self._init_mail_server_domain_whilelist_based()
@@ -186,7 +209,9 @@ class TestIrMailServer(TransactionCase):
 
         self._delete_mail_servers()
 
-        # Find config values
+        tools.config["smtp_from"] = "domainfive.com"
+        tools.config["smtp_domain_whitelist"] = "domainfive.com"
+
         config_smtp_from = tools.config.get("smtp_from")
         config_smtp_domain_whitelist = tools.config.get("smtp_domain_whitelist")
         if not config_smtp_from or not config_smtp_domain_whitelist:
@@ -207,6 +232,9 @@ class TestIrMailServer(TransactionCase):
 
     def test_05_from_outgoing_server_none_same_domain(self):
         self._init_mail_server_domain_whilelist_based()
+
+        tools.config["smtp_from"] = "info@domainfive.com"
+        tools.config["smtp_domain_whitelist"] = "domainfive.com"
 
         # Find config values
         config_smtp_from = tools.config.get("smtp_from")
@@ -271,7 +299,7 @@ class TestIrMailServer(TransactionCase):
 
     def test_08_from_outgoing_server_multidomain_3(self):
         self._init_mail_server_domain_whilelist_based()
-        domain = "domainmulti.com"
+        domain = "domainfour.com"
         email_from = "test@%s" % domain
         expected_mail_server = self.mail_server_domainthree
 
