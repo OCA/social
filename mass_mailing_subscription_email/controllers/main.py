@@ -24,4 +24,5 @@ class MassMailSubscriptionEmailController(MassMailController):
         if not consteq(subscription._unsubscribe_token(), token):  # pragma: no cover
             raise AccessDenied()
         subscription.opt_out = True
-        return request.render("mass_mailing.page_unsubscribed")
+        values = {"email": email}
+        return request.render("mass_mailing.page_unsubscribed", values)
