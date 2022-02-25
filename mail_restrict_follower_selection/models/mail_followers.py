@@ -14,10 +14,8 @@ class MailFollowers(models.Model):
         res_ids,
         partner_ids,
         partner_subtypes,
-        channel_ids,
-        channel_subtypes,
         check_existing=False,
-        existing_policy="skip",
+        existing_policy='skip',
     ):
         domain = self.env[
             "mail.wizard.invite"
@@ -31,8 +29,6 @@ class MailFollowers(models.Model):
             res_ids,
             partners.ids,
             partner_subtypes,
-            channel_ids,
-            channel_subtypes,
             check_existing=check_existing,
             existing_policy=existing_policy,
         )
