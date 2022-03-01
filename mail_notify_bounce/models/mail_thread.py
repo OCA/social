@@ -1,4 +1,5 @@
 # Copyright 2017 Lorenzo Battistini - Agile Business Group
+# Copyright 2022 Simone Vanin - Agile Business Group
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 import logging
@@ -76,10 +77,9 @@ class MailThread(models.AbstractModel):
     def message_route(
         self, message, message_dict, model=None, thread_id=None, custom_values=None
     ):
-        if self.env.context.get("fetchmail_server_id"):
-            fetchmail = self.env["fetchmail.server"].browse(
-                self.env.context["fetchmail_server_id"]
-            )
+        fetchmail_server_id = self.env.context.get("default_fetchmail_server_id")
+        if fetchmail_server_id:
+            fetchmail = self.env["fetchmail.server"].browse(fetchmail_server_id)
             self.notify_bounce_partners(message, fetchmail, message_dict)
 
         return super(MailThread, self).message_route(
