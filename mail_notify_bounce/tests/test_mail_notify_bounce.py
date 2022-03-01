@@ -13,14 +13,16 @@ class TestMailNotification(common.TransactionCase):
         self.thread_model = self.env["mail.thread"]
 
     def test_notify_bounce_partners(self):
-        admin_id = self.partner_model.search([("name", "=", "Administrator")])[0].id
+        admin_id = self.env["res.partner"].create(
+            {
+                "name": "Administrator",
+            }
+        )
         server = self.fetchmail_model.create(
             {
-                "name": "disabled",
-                "server": "disabled",
-                "user": "disabled",
-                "password": "disabled",
-                "bounce_notify_partner_ids": [(6, 0, [admin_id])],
+                "name": "Test Fetchmail Server",
+                "server_type": "imap",
+                "bounce_notify_partner_ids": [(6, 0, [admin_id.id])],
             }
         )
 
@@ -29,7 +31,7 @@ class TestMailNotification(common.TransactionCase):
         )
         with open(path) as bounce_message:
             self.thread_model.with_context(
-                fetchmail_server_id=server.id
+                default_fetchmail_server_id=server.id
             ).message_process(model="res.partner", message=bounce_message.read())
         sent_mail = self.env["mail.mail"].search([], order="create_date desc")[0]
         self.assertEqual(sent_mail.recipient_ids.name, "Administrator")
