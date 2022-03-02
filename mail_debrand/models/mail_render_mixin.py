@@ -97,3 +97,10 @@ class MailRenderMixin(models.AbstractModel):
             orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key])
 
         return orginal_rendered
+
+    def _replace_local_links(self, html, base_url=None):
+        message = super()._replace_local_links(html)
+        message = re.sub(
+            r"""(Powered by\s(.*)Odoo</a>)""", "<div>&nbsp;</div>", message
+        )
+        return message
