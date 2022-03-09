@@ -1,10 +1,10 @@
 # Copyright 2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMailOptionalFollowernotifications(SavepointCase):
+class TestMailOptionalFollowernotifications(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -29,16 +29,16 @@ class TestMailOptionalFollowernotifications(SavepointCase):
     def _send_mail(self, recipients, notify_followers):
         old_messages = self.env["mail.message"].search([])
         values = self.MailCompose.with_context(
-            self.mail_compose_context
-        ).onchange_template_id(False, "comment", "res.partner", self.partner_01.id)[
+            **self.mail_compose_context
+        )._onchange_template_id(False, "comment", "res.partner", self.partner_01.id)[
             "value"
         ]
         values["partner_ids"] = [(6, 0, recipients.ids)]
         values["notify_followers"] = notify_followers
-        composer = self.MailCompose.with_context(self.mail_compose_context).create(
+        composer = self.MailCompose.with_context(**self.mail_compose_context).create(
             values
         )
-        composer.send_mail()
+        composer.action_send_mail()
         return self.env["mail.message"].search([]) - old_messages
 
     def test_1(self):
