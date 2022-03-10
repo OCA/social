@@ -1,4 +1,4 @@
-# Copyright 2018-22 ForgeFlow Business and IT Consulting Services, S.L.
+# Copyright 2018-22 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo.exceptions import ValidationError
 from odoo.tests.common import TransactionCase
