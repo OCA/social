@@ -1,4 +1,4 @@
-from odoo import models, api
+from odoo import api, models
 
 
 class MailMail(models.Model):
@@ -9,10 +9,10 @@ class MailMail(models.Model):
         plain_text = (
             '<div summary="o_mail_notification" style="padding: 0px; '
             'font-size: 10px;"><b>CC</b>: %s<hr style="background-color:'
-            'rgb(204,204,204);border:medium none;clear:both;display:block;'
+            "rgb(204,204,204);border:medium none;clear:both;display:block;"
             'font-size:0px;min-height:1px;line-height:0; margin:4px 0 12px 0;"></div>'
         )
-        group_portal = self.env.ref('base.group_portal')
+        group_portal = self.env.ref("base.group_portal")
         for mail_id in self.ids:
             mail = self.browse(mail_id)
             # if the email has a model, id and it belongs to the portal group
@@ -22,19 +22,29 @@ class MailMail(models.Model):
                 # if they do it must be a portal, we exclude internal
                 # users of the system.
                 if hasattr(obj, "message_follower_ids"):
-                    partners_obj = obj.message_follower_ids.mapped('partner_id')
+                    partners_obj = obj.message_follower_ids.mapped("partner_id")
                     # internal partners
-                    user_partner_ids = self.env['res.users'].search([
-                        ('active', 'in', (True, False)),
-                        ('show_in_cc', '=', False),
-                    ]).filtered(
-                        lambda x: group_portal not in x.groups_id
-                    ).mapped('partner_id').ids
-                    partners_len = len(partners_obj.filtered(
-                        lambda x: x.id not in user_partner_ids and (
-                            not x.user_ids or
-                            group_portal in x.user_ids.mapped("groups_id")
-                        )))
+                    user_partner_ids = (
+                        self.env["res.users"]
+                        .search(
+                            [
+                                ("active", "in", (True, False)),
+                                ("show_in_cc", "=", False),
+                            ]
+                        )
+                        .filtered(lambda x: group_portal not in x.groups_id)
+                        .mapped("partner_id")
+                        .ids
+                    )
+                    partners_len = len(
+                        partners_obj.filtered(
+                            lambda x: x.id not in user_partner_ids
+                            and (
+                                not x.user_ids
+                                or group_portal in x.user_ids.mapped("groups_id")
+                            )
+                        )
+                    )
                     if partners_len > 1:
                         # get partners
                         cc_internal = True
@@ -43,28 +53,28 @@ class MailMail(models.Model):
                             cc_internal = obj.company_id.show_internal_users_cc
                         # get company in user
                         elif mail.env and mail.env.user and mail.env.user.company_id:
-                            cc_internal = self.env.user.company_id.\
-                                show_internal_users_cc
+                            cc_internal = (
+                                self.env.user.company_id.show_internal_users_cc
+                            )
                         if cc_internal:
                             partners = partners_obj.filtered(
-                                lambda x: x.id not in user_partner_ids and (
-                                    not x.user_ids or x.user_ids.show_in_cc
-                                )
+                                lambda x: x.id not in user_partner_ids
+                                and (not x.user_ids or x.user_ids.show_in_cc)
                             )
                         else:
                             partners = partners_obj.filtered(
-                                lambda x: x.id not in user_partner_ids and (
-                                    not x.user_ids or group_portal in
-                                    x.user_ids.mapped("groups_id")
+                                lambda x: x.id not in user_partner_ids
+                                and (
+                                    not x.user_ids
+                                    or group_portal in x.user_ids.mapped("groups_id")
                                 )
                             )
                         partners = partners.filtered(
-                            lambda x:
-                            not x.user_ids
+                            lambda x: not x.user_ids
                             or
                             # otherwise, email is not sent
-                            x.user_ids and "email" in x.user_ids.mapped(
-                                "notification_type")
+                            x.user_ids
+                            and "email" in x.user_ids.mapped("notification_type")
                         )
                         # get names and emails
                         final_cc = None
@@ -77,6 +87,7 @@ class MailMail(models.Model):
                         # not appear in the odoo log
                         mail.body_html = final_cc + mail.body_html
         return super(MailMail, self)._send(
-            auto_commit=auto_commit, raise_exception=raise_exception,
-            smtp_session=smtp_session
+            auto_commit=auto_commit,
+            raise_exception=raise_exception,
+            smtp_session=smtp_session,
         )

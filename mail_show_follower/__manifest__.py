@@ -11,12 +11,6 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": [
-        "base",
-        "mail"
-    ],
-    "data": [
-        "views/res_config_settings.xml",
-        "views/res_users.xml"
-    ],
+    "depends": ["base", "mail"],
+    "data": ["views/res_config_settings.xml", "views/res_users.xml"],
 }
