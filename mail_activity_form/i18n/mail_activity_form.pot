@@ -1,0 +1,80 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_activity_form
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_activity_form
+#: model:ir.model,name:mail_activity_form.model_mail_activity
+msgid "Activity"
+msgstr ""
+
+#. module: mail_activity_form
+#: model:ir.model,name:mail_activity_form.model_mail_activity_type
+msgid "Activity Type"
+msgstr ""
+
+#. module: mail_activity_form
+#: model:mail.activity.type,name:mail_activity_form.demo_type1
+msgid "Demo type 1"
+msgstr ""
+
+#. module: mail_activity_form
+#: model_terms:mail.activity.type,default_description:mail_activity_form.demo_type1
+msgid ""
+"It can also make sense to add some constants to the template to use in "
+"formulas, here we add some factor: <span data-form-id=\"factor\" data-form-"
+"type=\"float\">42</span>. And you can use dotted paths and items: <span "
+"data-form-id=\"user_name\" data-form-"
+"compute=\"object.create_uid['name']\"></span>"
+msgstr ""
+
+#. module: mail_activity_form
+#: model_terms:mail.activity.type,default_description:mail_activity_form.demo_type1
+msgid "Result:"
+msgstr ""
+
+#. module: mail_activity_form
+#: model:ir.model.fields,field_description:mail_activity_form.field_mail_activity_type__uses_forms
+msgid "Uses Forms"
+msgstr ""
+
+#. module: mail_activity_form
+#: code:addons/mail_activity_form/models/mail_activity.py:0
+#, python-format
+msgid "Value type %s is invalid"
+msgstr ""
+
+#. module: mail_activity_form
+#: model_terms:mail.activity.type,default_description:mail_activity_form.demo_type1
+msgid "Value1:"
+msgstr ""
+
+#. module: mail_activity_form
+#: model_terms:mail.activity.type,default_description:mail_activity_form.demo_type1
+msgid "Value2:"
+msgstr ""
+
+#. module: mail_activity_form
+#: code:addons/mail_activity_form/models/mail_activity.py:0
+#, python-format
+msgid "You are not supposed to change the content of this activity."
+msgstr ""
+
+#. module: mail_activity_form
+#: model_terms:mail.activity.type,default_description:mail_activity_form.demo_type1
+msgid ""
+"You can do whatever design you want, here we use a table. Note that the "
+"result row below is computed, and we use as well values the user filled in "
+"(value1, value2), some constant we defined here (factor), and a field of the"
+" object this activity is attached to (object.id)."
+msgstr ""
