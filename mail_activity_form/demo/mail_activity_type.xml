@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<!-- call this manually for demo data /-->
+<function model="mail.activity" name="_register_hook" eval="[[]]" />
+<record id="demo_type1" model="mail.activity.type">
+    <field name="name">Demo type 1</field>
+    <field name="default_description" type="html">
+        <div
+            >You can do whatever design you want, here we use a table. Note that the result row below is computed, and we use as well values the user filled in (value1, value2), some constant we defined here (factor), and a field of the object this activity is attached to (object.id).</div>
+        <table class="table table-bordered">
+            <tbody>
+                <tr><th>Value1:</th><td
+                            data-form-id="value1"
+                            data-form-type="float"
+                            data-form-editable="1"
+                        /></tr>
+                <tr><th>Value2:</th><td
+                            data-form-id="value2"
+                            data-form-type="float"
+                            data-form-editable="1"
+                        /></tr>
+                <tr><th>Result:</th><td
+                            data-form-compute="(value1 + value2 + object[-1:].id) * factor"
+                        /></tr>
+            </tbody>
+        </table>
+        <div
+            >It can also make sense to add some constants to the template to use in formulas, here we add some factor: <span
+                    data-form-id="factor"
+                    data-form-type="float"
+                >42</span>. And you can use dotted paths and items: <span
+                    data-form-id="user_name"
+                    data-form-compute="object.create_uid['name']"
+                /></div>
+    </field>
+</record>
+
+</odoo>
