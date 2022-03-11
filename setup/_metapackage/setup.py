@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo13-addon-mail_activity_board',
         'odoo13-addon-mail_activity_creator',
         'odoo13-addon-mail_activity_done',
+        'odoo13-addon-mail_activity_form',
         'odoo13-addon-mail_activity_partner',
         'odoo13-addon-mail_activity_team',
         'odoo13-addon-mail_attach_existing_attachment',
