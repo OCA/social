@@ -4,7 +4,7 @@
 {
     "name": "Mail Show Follower",
     "summary": "Show CC document followers in mails.",
-    "version": "12.0.1.0.1",
+    "version": "15.0.1.0.0",
     "category": "Mail",
     "website": "https://github.com/OCA/social",
     "author": "Sygel, Odoo Community Association (OCA)",
@@ -12,5 +12,8 @@
     "application": False,
     "installable": True,
     "depends": ["base", "mail"],
-    "data": ["views/res_config_settings.xml", "views/res_users.xml"],
+    "data": [
+        "views/res_config_settings.xml",
+        "views/res_users.xml",
+    ],
 }
