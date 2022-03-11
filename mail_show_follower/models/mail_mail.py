@@ -1,10 +1,9 @@
-from odoo import api, models
+from odoo import models
 
 
 class MailMail(models.Model):
     _inherit = "mail.mail"
 
-    @api.multi
     def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
         plain_text = (
             '<div summary="o_mail_notification" style="padding: 0px; '
@@ -71,9 +70,7 @@ class MailMail(models.Model):
                             )
                         partners = partners.filtered(
                             lambda x: not x.user_ids
-                            or
-                            # otherwise, email is not sent
-                            x.user_ids
+                            or x.user_ids  # otherwise, email is not sent
                             and "email" in x.user_ids.mapped("notification_type")
                         )
                         # get names and emails
@@ -86,7 +83,7 @@ class MailMail(models.Model):
                         # it is saved in the body_html field so that it does
                         # not appear in the odoo log
                         mail.body_html = final_cc + mail.body_html
-        return super(MailMail, self)._send(
+        return super()._send(
             auto_commit=auto_commit,
             raise_exception=raise_exception,
             smtp_session=smtp_session,
