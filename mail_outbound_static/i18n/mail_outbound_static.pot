@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-09-03 12:53+0000\n"
-"PO-Revision-Date: 2020-09-03 12:53+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,10 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_outbound_static
-#: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__display_name
-msgid "Display Name"
-msgstr ""
-
 #: code:addons/mail_outbound_static/models/ir_mail_server.py:0
 #, python-format
 msgid ""
@@ -34,6 +28,11 @@ msgid ""
 "it will let us to search the proper mail server to be used to sent the "
 "messages where the message 'From' email domain match with the domain "
 "whitelist."
+msgstr ""
+
+#. module: mail_outbound_static
+#: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__display_name
+msgid "Display Name"
 msgstr ""
 
 #. module: mail_outbound_static
