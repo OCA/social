@@ -1,0 +1,75 @@
+X-MDAV-Result: clean
+X-MDAV-Processed: mail3.creublanca.es, Wed, 26 Jun 2019 18:08:19 +0200
+Return-path: <etobella@creublanca.es>
+Authentication-Results: mail3.creublanca.es;
+	auth=pass (login) smtp.auth=etobella@creublanca.es
+Received: from WorldClient by creublanca.es with ESMTPA id md50020655392.msg;
+	Wed, 26 Jun 2019 18:08:19 +0200
+X-Spam-Processed: mail3.creublanca.es, Wed, 26 Jun 2019 18:08:19 +0200
+	(not processed: message from trusted or authenticated source)
+X-MDArrival-Date: Wed, 26 Jun 2019 18:08:19 +0200
+X-Authenticated-Sender: etobella@creublanca.es
+X-Rcpt-To: etobella@creublanca.es
+X-MDRcpt-To: etobella@creublanca.es
+X-Return-Path: prvs=10800b8cdb=etobella@creublanca.es
+X-Envelope-From: etobella@creublanca.es
+X-MDaemon-Deliver-To: etobella@creublanca.es
+Received: by creublanca.es via MDaemon Webmail with HTTP;
+	Wed, 26 Jun 2019 18:08:16 +0200
+Date: Wed, 26 Jun 2019 18:08:16 +0200
+From: "Enric Tobella" <etobella@creublanca.es>
+To: "Enric Tobella" <etobella@creublanca.es>
+Subject: Test
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary="0626-1608-16-03-PART_BREAK"
+Message-ID: <WC20190626160816.960736@creublanca.es>
+X-Mailer: MDaemon Webmail 19.0.2
+
+--0626-1608-16-03-PART_BREAK
+Content-Type: text/plain; charset=iso-8859-1
+Content-Transfer-Encoding: 8bit
+
+TEST
+
+
+
+
+Tanto este mensaje como los documentos que, en su caso, lleve como anexos,
+pueden contener informacin reservada y/o confidencial, destinada exclusivamente
+para el uso del destinatario o la persona responsable de entregarlo al mismo,
+estando su uso no autorizado prohibido legalmente.
+Su contenido no constituye un compromiso para Creu Blanca (la empresa remitente)
+salvo ratificacin escrita por ambas partes. En caso de su recepcin por error,
+rogamos nos lo comunique por igual va, se abstenga de realizar copias del mensaje
+o documentos adjuntos, remitirlo o facilitarlo a un tercero, y proceda en su defecto,
+a su eliminacin.
+
+--0626-1608-16-03-PART_BREAK
+Content-Type: text/html; charset=iso-8859-1
+Content-Transfer-Encoding: quoted-printable
+
+<html><body>
+<div style=3D"font-family: Trebuchet MS; color: rgb(0, 0, 0); font-size: 13=
+.3333px; font-weight: 400; font-style: normal;">TEST</div>
+<br><br>
+<br>
+<br>
+Tanto este mensaje como los documentos que, en su caso, lleve como anexos, =
+<br>
+pueden contener informaci=F3n reservada y/o confidencial, destinada exclusi=
+vamente <br>
+para el uso del destinatario o la persona responsable de entregarlo al mism=
+o, <br>
+estando su uso no autorizado prohibido legalmente. <br>
+Su contenido no constituye un compromiso para Creu Blanca (la empresa remit=
+ente) <br>
+salvo ratificaci=F3n escrita por ambas partes. En caso de su recepci=F3n po=
+r error, <br>
+rogamos nos lo comunique por igual v=EDa, se abstenga de realizar copias de=
+l mensaje <br>
+o documentos adjuntos, remitirlo o facilitarlo a un tercero, y proceda en s=
+u defecto, <br>
+a su eliminaci=F3n.<br>
+</body></html>
+
+--0626-1608-16-03-PART_BREAK--

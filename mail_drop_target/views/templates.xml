@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<openerp>
+    <data>
+        <template
+            id="assets_backend"
+            name="mail_drop_target assets"
+            inherit_id="web.assets_backend"
+        >
+            <xpath expr="." position="inside">
+                <script
+                    type="text/javascript"
+                    src="/mail_drop_target/static/src/js/mail_drop_target.js"
+                />
+                <link
+                    rel="stylesheet"
+                    href="/mail_drop_target/static/src/css/mail_drop_target.css"
+                />
+            </xpath>
+        </template>
+    </data>
+</openerp>
