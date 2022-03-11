@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [mail_attach_existing_attachment_account](mail_attach_existing_attachment_account/) | 14.0.1.0.0 |  | Module to use attach existing attachment for account module
 [mail_autosubscribe](mail_autosubscribe/) | 14.0.1.0.0 |  | Automatically subscribe partners to its company's business documents
 [mail_debrand](mail_debrand/) | 14.0.2.0.2 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
+[mail_drop_target](mail_drop_target/) | 14.0.1.0.0 |  | Attach emails to Odoo by dragging them from your desktop
 [mail_full_expand](mail_full_expand/) | 14.0.1.0.0 |  | Expand mail in a big window
 [mail_inline_css](mail_inline_css/) | 14.0.1.0.0 |  | Convert style tags in inline style in your mails
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.1 |  | Preview email templates in the browser
