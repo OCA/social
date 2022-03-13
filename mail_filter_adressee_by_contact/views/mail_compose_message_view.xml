@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form">
+        <field name="name">mail.compose.message.form</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="arch" type="xml">
+            <field name="partner_ids" position="before">
+                <div>
+                    <field name="apply_filter" widget="boolean_toggle" />
+                    <span name="apply_filter">Filter Email</span>
+                </div>
+            </field>
+        </field>
+    </record>
+</odoo>
