@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo14-addon-mail_autosubscribe',
         'odoo14-addon-mail_debrand',
         'odoo14-addon-mail_drop_target',
+        'odoo14-addon-mail_filter_adressee_by_contact',
         'odoo14-addon-mail_full_expand',
         'odoo14-addon-mail_inline_css',
         'odoo14-addon-mail_layout_preview',
