@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+
+    <!-- Via Email Alias -->
+    <record id="icp_mail_via_alias" model="ir.config_parameter">
+        <field name="key">mail.via.alias</field>
+        <field name="value">via</field>
+    </record>
+
+</odoo>
