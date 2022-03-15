@@ -28,7 +28,6 @@ class MailThread(models.AbstractModel):
         return [("id", "in", recs.mapped("res_id"))]
 
     message_content = fields.Text(
-        string="Message Content",
         help="Message content, to be used only in searches",
         compute=lambda self: False,
         search="_search_message_content",
