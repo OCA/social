@@ -7,7 +7,7 @@
     "author": "Thore Baden, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social Network",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "license": "AGPL-3",
     "depends": ["account", "mail_attach_existing_attachment"],
     "data": ["wizard/account_invoice_send_view.xml"],
