@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-social Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-base_search_mail_content>=15.0dev,<15.1dev',
         'odoo-addon-mail_activity_board>=15.0dev,<15.1dev',
         'odoo-addon-mail_activity_creator>=15.0dev,<15.1dev',
         'odoo-addon-mail_activity_done>=15.0dev,<15.1dev',
