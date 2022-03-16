@@ -23,7 +23,7 @@ Base Search Mail Content
     :target: https://runbot.odoo-community.org/runbot/205/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds the capability to find on any object (e.g. project issues or
 helpdesk ticket) based on the conversation threads associated to them.
@@ -55,7 +55,7 @@ Installation
 
 This module depends on the module 'base_search_fuzzy' to ensure that
 searches on emails are based on indexes. Please read carefully the
-`install instructions <https://github.com/OCA/server-tools/blob/11.0/base_search_fuzzy>`_.
+`install instructions <https://github.com/OCA/server-tools/blob/15.0/base_search_fuzzy>`_.
 
 This module installs by default the indexes that are required to
 perform the searches on mail messages.
