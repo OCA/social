@@ -14,7 +14,10 @@ class TestMailAttachExistingAttachmentAccount(common.SavepointCase):
         )
         account_type = cls.env.ref("account.data_account_type_other_income")
         cls.income_account = cls.env["account.account"].search(
-            [("user_type_id", "=", account_type.id)],
+            [
+                ("user_type_id", "=", account_type.id),
+                ("company_id", "=", cls.env.company.id),
+            ],
             limit=1,
         )
         invoice_form = Form(
