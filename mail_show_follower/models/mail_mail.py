@@ -73,13 +73,12 @@ class MailMail(models.Model):
                             or x.user_ids  # otherwise, email is not sent
                             and "email" in x.user_ids.mapped("notification_type")
                         )
-                        # get names and emails
-                        final_cc = None
-                        mails = ""
-                        for p in partners:
-                            mails += "%s &lt;%s&gt;, " % (p.name, p.email)
-                        # join texts
-                        final_cc = plain_text % (mails[:-2])
+                        # get names and emails and join texts
+                        final_cc = plain_text % (
+                            ", ".join(
+                                "%s &lt;%s&gt;" % (p.name, p.email) for p in partners
+                            )
+                        )
                         # it is saved in the body_html field so that it does
                         # not appear in the odoo log
                         mail.body_html = final_cc + mail.body_html
