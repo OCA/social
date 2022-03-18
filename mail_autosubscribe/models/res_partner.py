@@ -14,3 +14,15 @@ class ResPartner(models.Model):
         column1="partner_id",
         column2="model_id",
     )
+
+    def _has_autosubscription_to(self, model_name: str) -> bool:
+        """Checks whether partner has auto-subscription to a specific model
+
+        :param str model_name: model technical name
+        :returns: True if partner has auto-subscription on given model
+        """
+        self.ensure_one()
+        return bool(
+            self.mail_autosubscribe_ids
+            and model_name in self.mail_autosubscribe_ids.mapped("model")
+        )
