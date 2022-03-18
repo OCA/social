@@ -1,16 +1,64 @@
-from odoo import models
+from markupsafe import Markup
+
+from odoo import api, models, tools
 
 
 class MailMail(models.Model):
     _inherit = "mail.mail"
 
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
-        plain_text = (
-            '<div summary="o_mail_notification" style="padding: 0px; '
-            'font-size: 10px;"><b>CC</b>: %s<hr style="background-color:'
-            "rgb(204,204,204);border:medium none;clear:both;display:block;"
-            'font-size:0px;min-height:1px;line-height:0; margin:4px 0 12px 0;"></div>'
+    @api.model
+    def _build_cc_text(self, partners):
+        if not partners:
+            return ""
+
+        def get_ctx_param(ctx_key, default_parm):
+            if ctx_key in self.env.context:
+                return self.env.context[ctx_key]
+            return default_parm
+
+        def remove_p(markup_txt):
+            if markup_txt.startswith("<p>") and markup_txt.endswith("</p>"):
+                return markup_txt[3:-4]
+            return markup_txt
+
+        company = self.env.company
+        partner_format = get_ctx_param(
+            "partner_format", company.show_followers_partner_format
         )
+        msg_sent_to = get_ctx_param(
+            "msg_sent_to", company.show_followers_message_sent_to
+        )
+        msg_warn = get_ctx_param(
+            "msg_warn", company.show_followers_message_response_warning
+        )
+        partner_message = ", ".join(
+            [
+                partner_format
+                % {
+                    # Supported parameters
+                    "partner_name": p.name,
+                    "partner_email": p.email,
+                    "partner_email_domain": tools.email_domain_extract(p.email),
+                }
+                for p in partners
+            ]
+        )
+        full_text = """
+            <div summary='o_mail_notification' style='padding:5px;
+            margin:10px 0px 10px 0px;font-size:13px;border-radius:5px;
+            font-family:Arial;border:1px solid #E0E2E6;background-color:#EBEBEB;'>
+            {msg_sent_to} {partner_message}
+            {rc}{msg_warn}
+            </div>
+        """.format(
+            msg_sent_to=remove_p(msg_sent_to),
+            partner_message=Markup.escape(partner_message),
+            rc=msg_warn.striptags() and "<br/>" or "",
+            msg_warn=msg_warn.striptags() and remove_p(msg_warn) or "",
+        )
+        return full_text
+
+    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
         group_portal = self.env.ref("base.group_portal")
         for mail_id in self.ids:
             mail = self.browse(mail_id)
@@ -73,13 +121,21 @@ class MailMail(models.Model):
                             or x.user_ids  # otherwise, email is not sent
                             and "email" in x.user_ids.mapped("notification_type")
                         )
-                        # get names and emails
-                        final_cc = None
-                        mails = ""
-                        for p in partners:
-                            mails += "%s &lt;%s&gt;, " % (p.name, p.email)
-                        # join texts
-                        final_cc = plain_text % (mails[:-2])
+                        # set proper lang for recipients
+                        langs = list(
+                            filter(
+                                bool,
+                                mail.mapped("recipient_ids.lang")
+                                + [
+                                    mail.author_id.lang,
+                                    self.env.company.partner_id.lang,
+                                ],
+                            )
+                        )
+                        # get show follower text
+                        final_cc = mail.with_context(
+                            lang=langs and langs[0]
+                        )._build_cc_text(partners)
                         # it is saved in the body_html field so that it does
                         # not appear in the odoo log
                         mail.body_html = final_cc + mail.body_html
