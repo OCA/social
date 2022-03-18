@@ -10,12 +10,68 @@
             <div id="emails" position="inside">
                 <div class="col-12 col-lg-6 o_setting_box">
                     <div class="o_setting_left_pane">
-                        <field name="show_internal_users_cc" />
                     </div>
                     <div class="o_setting_right_pane">
-                        <label for="show_internal_users_cc" />
-                        <div class="text-muted" id="show_internal_users_cc">
-                            Add internal users in cc mails details
+                        <div class="content-group">
+                            <label
+                                for="show_internal_users_cc"
+                                string="Show Followers on mails"
+                            />
+                            <div>
+                                <div>
+                                    <label
+                                        for="show_internal_users_cc"
+                                        class="o_light_label"
+                                        string="Show Internal Users on CC"
+                                    />
+                                    <field name="show_internal_users_cc" />
+                                </div>
+                                <div>
+                                    <label
+                                        for="show_followers_message_sent_to"
+                                        class="o_light_label"
+                                        style="vertical-align: top;"
+                                    />
+                                    <field
+                                        name="show_followers_message_sent_to"
+                                        placeholder="This message has been sent to"
+                                        style="display:inline-block;"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        for="show_followers_partner_format"
+                                        class="o_light_label"
+                                        style="vertical-align: top;"
+                                    />
+                                    <field
+                                        name="show_followers_partner_format"
+                                        placeholder="%%(partner_name)s &lt;%%(partner_email)s&gt;"
+                                        style="display:inline-block;"
+                                    />
+                                </div>
+                                <div>
+                                    <label
+                                        for="show_followers_message_response_warning"
+                                        class="o_light_label"
+                                        style="vertical-align: top;"
+                                    />
+                                    <field
+                                        name="show_followers_message_response_warning"
+                                        placeholder="Notice: Replies to this email will be sent to all recipients."
+                                        style="display:inline-block;"
+                                    />
+                                </div>
+                            </div>
+                            <label
+                                for="show_followers_message_preview"
+                                class="text-muted"
+                            />
+                            <field
+                                name="show_followers_message_preview"
+                                style="width:100%;"
+                                widget="html"
+                            />
                         </div>
                     </div>
                 </div>
