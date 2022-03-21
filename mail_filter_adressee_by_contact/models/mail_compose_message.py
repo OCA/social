@@ -3,13 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-
-FILTERED_MODEL = [
-    "account.move",
-    "sale.order",
-    "purchase.order",
-    "stock.picking",
-]
+from odoo.osv import expression
 
 
 class MailComposer(models.TransientModel):
@@ -23,21 +17,43 @@ class MailComposer(models.TransientModel):
         "Additional Contacts",
     )
 
-    apply_filter = fields.Boolean(default=True, string="Filtering relevant adressees")
+    apply_filter = fields.Selection(
+        (
+            [
+                ("contacts", "Contacts"),
+                ("users", "Users"),
+                ("all", "All"),
+            ]
+        ),
+        string="Filtering relevant adressees",
+        default="contacts",
+        required=True,
+    )
 
     @api.onchange("apply_filter")
-    def _get_partner_ids_domain(self):
+    def get_partner_ids_domain(self):
         domain = [("type", "!=", "private")]
         model = self._context.get("active_model")
-        if model in FILTERED_MODEL and self.apply_filter:
-            domain.insert(0, "&")
-            records = self.env[self._context["active_model"]].browse(
-                self._context.get("active_ids")
+        if model and self.apply_filter == "contacts":
+            method_name = f"_get_domain_for_{model.replace('.', '_')}"
+            if hasattr(self, method_name):
+                records = self.env[self._context["active_model"]].browse(
+                    self._context.get("active_ids")
+                )
+                partners = getattr(self, method_name)(records)
+                domain = expression.AND(
+                    [
+                        domain,
+                        partners,
+                    ]
+                )
+        if self.apply_filter == "users":
+            domain = expression.AND(
+                [
+                    domain,
+                    [("user_ids", "!=", False)],
+                ]
             )
-            partners = getattr(self, f"_get_domain_for_{model.replace('.', '_')}")(
-                records
-            )
-            domain += partners
         return {"domain": {"partner_ids": domain}}
 
     def _get_domain_for_sale_order(self, records):
@@ -45,8 +61,6 @@ class MailComposer(models.TransientModel):
             "|",
             "|",
             "|",
-            "|",
-            ("user_ids", "!=", False),
             ("id", "child_of", records.partner_id.ids),
             ("id", "child_of", records.partner_invoice_id.ids),
             ("id", "child_of", records.partner_shipping_id.ids),
@@ -57,8 +71,6 @@ class MailComposer(models.TransientModel):
         return [
             "|",
             "|",
-            "|",
-            ("user_ids", "!=", False),
             ("id", "child_of", records.partner_id.ids),
             ("id", "child_of", records.partner_shipping_id.ids),
             ("id", "in", records.message_partner_ids.ids),
@@ -67,8 +79,6 @@ class MailComposer(models.TransientModel):
     def _get_domain_for_purchase_order(self, records):
         return [
             "|",
-            "|",
-            ("user_ids", "!=", False),
             ("id", "child_of", records.partner_id.ids),
             ("id", "in", records.message_partner_ids.ids),
         ]
@@ -76,8 +86,6 @@ class MailComposer(models.TransientModel):
     def _get_domain_for_stock_picking(self, records):
         return [
             "|",
-            "|",
-            ("user_ids", "!=", False),
             ("id", "child_of", records.partner_id.ids),
             ("id", "in", records.message_partner_ids.ids),
         ]

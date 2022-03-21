@@ -9,12 +9,14 @@
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Akretion, Odoo Community Association (OCA)",
+    "maintainers": ["Kev-Roche"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,
     "depends": [
         "mail",
         "account",
+        "sale",
     ],
     "data": [
         "views/mail_compose_message_view.xml",
