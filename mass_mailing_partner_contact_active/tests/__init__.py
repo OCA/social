@@ -1,0 +1,1 @@
+from . import test_mailing_partner_contact_active
