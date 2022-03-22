@@ -29,7 +29,9 @@ class IrMailServer(models.Model):
             m = re.search('<(.+?)>', from_email)
             if m:
                 from_email = m.group(1)
-            users = ResUsers.search([('email', "=", from_email)])
+            users = ResUsers.with_context(
+                active_test=False
+            ).search([('email', "=", from_email)])
             if len(users) >= 1:
                 do_not_send_copy = not users[0].mail_send_copy
 
