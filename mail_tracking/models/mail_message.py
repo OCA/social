@@ -284,7 +284,7 @@ class MailMessage(models.Model):
 
     @api.model
     def get_failed_count(self):
-        """ Gets the number of failed messages used on discuss mailbox item"""
+        """Gets the number of failed messages used on discuss mailbox item"""
         return self.search_count([("is_failed_message", "=", True)])
 
     @api.model
