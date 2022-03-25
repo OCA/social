@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
-
         <!-- Message with CC -->
         <record id="mail_message_cc" model="mail.message">
             <field name="model">res.partner</field>
@@ -9,17 +7,17 @@
             <field name="message_type">comment</field>
             <field name="subtype_id" ref="mail.mt_comment" />
             <field
-                name="email_cc"
-            >acc@testmail.com,wood.corner26@example.com,toni.rhodes11@example.com</field>
+            name="email_cc"
+        >acc@testmail.com,wood.corner26@example.com,toni.rhodes11@example.com</field>
             <field name="mail_tracking_needs_action">1</field>
             <field name="body"><![CDATA[<p>This is a message with CC</p>]]></field>
             <field name="email_from">wood.corner26@example.com</field>
             <field name="author_id" ref="base.res_partner_1" />
             <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
             <field
-                name="notification_ids"
-                eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
-            />
+            name="notification_ids"
+            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+        />
             <field name="subject">Message with CC</field>
         </record>
 
@@ -45,9 +43,9 @@
             <field name="author_id" ref="base.res_partner_1" />
             <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
             <field
-                name="notification_ids"
-                eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
-            />
+            name="notification_ids"
+            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+        />
             <field name="subject">Failed Message</field>
         </record>
 
@@ -73,9 +71,9 @@
             <field name="author_id" ref="base.res_partner_10" />
             <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
             <field
-                name="notification_ids"
-                eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
-            />
+            name="notification_ids"
+            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+        />
             <field name="subject">Failed Message</field>
         </record>
 
@@ -101,9 +99,9 @@
             <field name="author_id" ref="base.partner_admin" />
             <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
             <field
-                name="notification_ids"
-                eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
-            />
+            name="notification_ids"
+            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+        />
             <field name="subject">Failed Message</field>
         </record>
 
@@ -116,6 +114,4 @@
             <field name="state">error</field>
             <field name="time" eval="DateTime.today().strftime('%Y-%m-%d %H:%M')" />
         </record>
-
-    </data>
 </odoo>
