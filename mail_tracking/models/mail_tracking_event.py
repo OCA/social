@@ -14,7 +14,7 @@ class MailTrackingEvent(models.Model):
     _rec_name = "event_type"
     _description = "MailTracking event"
 
-    recipient = fields.Char(string="Recipient", readonly=True)
+    recipient = fields.Char(readonly=True)
     recipient_address = fields.Char(
         string="Recipient email address",
         readonly=True,
@@ -25,10 +25,8 @@ class MailTrackingEvent(models.Model):
     timestamp = fields.Float(
         string="UTC timestamp", readonly=True, digits="MailTracking Timestamp"
     )
-    time = fields.Datetime(string="Time", readonly=True)
-    date = fields.Date(
-        string="Date", readonly=True, compute="_compute_date", store=True
-    )
+    time = fields.Datetime(readonly=True)
+    date = fields.Date(readonly=True, compute="_compute_date", store=True)
     tracking_email_id = fields.Many2one(
         string="Message",
         readonly=True,
@@ -38,7 +36,6 @@ class MailTrackingEvent(models.Model):
         index=True,
     )
     event_type = fields.Selection(
-        string="Event type",
         selection=[
             ("sent", "Sent"),
             ("delivered", "Delivered"),
@@ -56,7 +53,7 @@ class MailTrackingEvent(models.Model):
     smtp_server = fields.Char(string="SMTP server", readonly=True)
     url = fields.Char(string="Clicked URL", readonly=True)
     ip = fields.Char(string="User IP", readonly=True)
-    user_agent = fields.Char(string="User agent", readonly=True)
+    user_agent = fields.Char(readonly=True)
     mobile = fields.Boolean(string="Is mobile?", readonly=True)
     os_family = fields.Char(string="Operating system family", readonly=True)
     ua_family = fields.Char(string="User agent family", readonly=True)
@@ -64,9 +61,9 @@ class MailTrackingEvent(models.Model):
     user_country_id = fields.Many2one(
         string="User country", readonly=True, comodel_name="res.country"
     )
-    error_type = fields.Char(string="Error type", readonly=True)
-    error_description = fields.Char(string="Error description", readonly=True)
-    error_details = fields.Text(string="Error details", readonly=True)
+    error_type = fields.Char(readonly=True)
+    error_description = fields.Char(readonly=True)
+    error_details = fields.Text(readonly=True)
 
     @api.depends("recipient")
     def _compute_recipient_address(self):

@@ -88,7 +88,8 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is a test message</p>",
             }
         )
-        message._moderate_accept()
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id)._notify_thread(message)
         # Search tracking created
         tracking_email = self.env["mail.tracking.email"].search(
             [
@@ -138,7 +139,10 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is a test message</p>",
             }
         )
-        message.with_context(do_not_send_copy=True)._moderate_accept()
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id).with_context(
+                do_not_send_copy=True
+            )._notify_thread(message)
         # Search tracking created
         tracking_email = self.env["mail.tracking.email"].search(
             [
@@ -203,7 +207,8 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is another test message</p>",
             }
         )
-        message._moderate_accept()
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id)._notify_thread(message)
         recipients = self.recipient._message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id]), 3)
         self._check_partner_trackings_cc(message)
@@ -257,7 +262,8 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is another test message</p>",
             }
         )
-        message._moderate_accept()
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id)._notify_thread(message)
         recipients = self.recipient._message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id]), 4)
         self._check_partner_trackings_to(message)
@@ -316,7 +322,8 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is a test message</p>",
             }
         )
-        message._moderate_accept()
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id)._notify_thread(message)
         # Search tracking created
         tracking_email = self.env["mail.tracking.email"].search(
             [
@@ -330,7 +337,7 @@ class TestMailTracking(TransactionCase):
         wizard = (
             self.env["mail.resend.message"]
             .sudo()
-            .with_context({"mail_message_to_resend": message.id})
+            .with_context(mail_message_to_resend=message.id)
             .create({})
         )
         # Check failed recipient)s

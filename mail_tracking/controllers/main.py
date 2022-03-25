@@ -10,7 +10,8 @@ import werkzeug
 import odoo
 from odoo import SUPERUSER_ID, api, http
 
-from odoo.addons.mail.controllers.main import MailController
+from odoo.addons.mail.controllers.discuss import DiscussController
+from odoo.addons.mail.controllers.mail import MailController
 
 _logger = logging.getLogger(__name__)
 
@@ -26,11 +27,10 @@ def db_env(dbname):
         cr = http.request.cr
     if not cr:
         cr = odoo.sql_db.db_connect(dbname).cursor()
-    with api.Environment.manage():
-        yield api.Environment(cr, SUPERUSER_ID, {})
+    yield api.Environment(cr, SUPERUSER_ID, {})
 
 
-class MailTrackingController(MailController):
+class MailTrackingController(MailController, DiscussController):
     def _request_metadata(self):
         """Prepare remote info metadata"""
         request = http.request.httprequest
@@ -59,8 +59,8 @@ class MailTrackingController(MailController):
                 res = env["mail.tracking.email"].event_process(
                     http.request, kw, metadata, event_type=event_type
                 )
-            except Exception:
-                pass
+            except Exception as e:
+                _logger.warning(e)
         if not res or res == "NOT FOUND":
             return werkzeug.exceptions.NotAcceptable()
         return res
@@ -89,8 +89,8 @@ class MailTrackingController(MailController):
                     )
                 elif tracking_email.state in ("sent", "delivered"):
                     tracking_email.event_create("open", metadata)
-            except Exception:
-                pass
+            except Exception as e:
+                _logger.warning(e)
 
         # Always return GIF blank image
         response = werkzeug.wrappers.Response()
@@ -106,3 +106,12 @@ class MailTrackingController(MailController):
             {"failed_counter": http.request.env["mail.message"].get_failed_count()}
         )
         return values
+
+    @http.route("/mail/failed/messages", methods=["POST"], type="json", auth="user")
+    def discuss_failed_messages(self, max_id=None, min_id=None, limit=30, **kwargs):
+        return http.request.env["mail.message"]._message_fetch(
+            domain=[("is_failed_message", "=", True)],
+            max_id=max_id,
+            min_id=min_id,
+            limit=limit,
+        )

@@ -224,9 +224,9 @@ class MailMessage(models.Model):
 
         return list(filter(_filter_alias, mail_list))
 
-    def message_format(self):
+    def message_format(self, format_reply=True):
         """Preare values to be used by the chatter widget"""
-        res = super().message_format()
+        res = super().message_format(format_reply)
         mail_message_ids = {m.get("id") for m in res if m.get("id")}
         mail_messages = self.browse(mail_message_ids)
         tracking_statuses = mail_messages.tracking_status()
@@ -273,13 +273,8 @@ class MailMessage(models.Model):
         """
         self.check_access_rule("read")
         self.write({"mail_tracking_needs_action": False})
-        notification = {
-            "type": "toggle_tracking_status",
-            "message_ids": self.ids,
-            "needs_actions": False,
-        }
-        self.env["bus.bus"].sendone(
-            (self._cr.dbname, "res.partner", self.env.user.partner_id.id), notification
+        self.env["bus.bus"]._sendone(
+            self.env.user.partner_id, "toggle_tracking_status", self.ids
         )
 
     @api.model

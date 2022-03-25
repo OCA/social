@@ -49,13 +49,9 @@ class MailResendMessage(models.TransientModel):
                 tracking_ids.sudo().write({"state": False})
                 # Send bus notifications to update Discuss and
                 # mail_failed_messages widget
-                notification = {
-                    "type": "toggle_tracking_status",
-                    "message_ids": [self.mail_message_id.id],
-                    "needs_actions": False,
-                }
-                self.env["bus.bus"].sendone(
-                    (self._cr.dbname, "res.partner", self.env.user.partner_id.id),
-                    notification,
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id.id,
+                    "toggle_tracking_status",
+                    self.mail_message_id.id,
                 )
-        super().resend_mail_action()
+        return super().resend_mail_action()
