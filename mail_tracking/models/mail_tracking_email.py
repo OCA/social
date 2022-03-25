@@ -30,7 +30,6 @@ class MailTrackingEmail(models.Model):
     # - state: Search and group_by in tree view
     name = fields.Char(string="Subject", readonly=True, index=True)
     display_name = fields.Char(
-        string="Display name",
         readonly=True,
         store=True,
         compute="_compute_tracking_display_name",
@@ -38,10 +37,8 @@ class MailTrackingEmail(models.Model):
     timestamp = fields.Float(
         string="UTC timestamp", readonly=True, digits="MailTracking Timestamp"
     )
-    time = fields.Datetime(string="Time", readonly=True, index=True)
-    date = fields.Date(
-        string="Date", readonly=True, compute="_compute_date", store=True
-    )
+    time = fields.Datetime(readonly=True, index=True)
+    date = fields.Date(readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
         string="Message", comodel_name="mail.message", readonly=True, index=True
     )
@@ -71,7 +68,6 @@ class MailTrackingEmail(models.Model):
             ("bounced", "Bounced"),
             ("soft-bounced", "Soft bounced"),
         ],
-        string="State",
         index=True,
         readonly=True,
         default=False,
@@ -97,10 +93,10 @@ class MailTrackingEmail(models.Model):
         "bounced by recipient Mail Exchange (MX) server.\n",
     )
     error_smtp_server = fields.Char(string="Error SMTP server", readonly=True)
-    error_type = fields.Char(string="Error type", readonly=True)
-    error_description = fields.Char(string="Error description", readonly=True)
-    bounce_type = fields.Char(string="Bounce type", readonly=True)
-    bounce_description = fields.Char(string="Bounce description", readonly=True)
+    error_type = fields.Char(readonly=True)
+    error_description = fields.Char(readonly=True)
+    bounce_type = fields.Char(readonly=True)
+    bounce_description = fields.Char(readonly=True)
     tracking_event_ids = fields.One2many(
         string="Tracking events",
         comodel_name="mail.tracking.event",
@@ -126,10 +122,11 @@ class MailTrackingEmail(models.Model):
         return records
 
     def write(self, vals):
-        super().write(vals)
+        res = super().write(vals)
         state = vals.get("state")
         if state and state in self.env["mail.message"].get_failed_states():
             self.mapped("mail_message_id").write({"mail_tracking_needs_action": True})
+        return res
 
     @api.model
     def email_is_bounced(self, email):
