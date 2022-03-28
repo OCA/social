@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo14-addon-mail_preview_base',
         'odoo14-addon-mail_restrict_send_button',
         'odoo14-addon-mail_send_copy',
+        'odoo14-addon-mail_show_follower',
         'odoo14-addon-mail_tracking',
         'odoo14-addon-mail_tracking_mailgun',
         'odoo14-addon-mail_tracking_mass_mailing',
