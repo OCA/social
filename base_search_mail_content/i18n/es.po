@@ -53,6 +53,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_search_mail_content.field_account_move__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_account_payment__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_crm_team__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_event_event__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_event_registration__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_blacklist__message_content
@@ -68,6 +69,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_search_mail_content.field_product_template__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_users__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_sale_order__message_content
 #, python-format
 msgid "Message Content"
 msgstr "Contenido del mensaje"
@@ -80,6 +82,7 @@ msgstr "Contenido del mensaje"
 #: model:ir.model.fields,help:base_search_mail_content.field_account_move__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_account_payment__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_calendar_event__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_crm_team__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_event_event__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_event_registration__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_blacklist__message_content
@@ -95,6 +98,7 @@ msgstr "Contenido del mensaje"
 #: model:ir.model.fields,help:base_search_mail_content.field_product_template__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_users__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_sale_order__message_content
 msgid "Message content, to be used only in searches"
 msgstr "Contenido del mensaje, para usarse en búsquedas"
 
