@@ -5,9 +5,15 @@
         <field name="model">account.invoice.send</field>
         <field name="inherit_id" ref="account.account_invoice_send_wizard_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='template_id']" position="after">
-                <field name="apply_filter" />
-            </xpath>
+            <field name="partner_ids" position="before">
+                <div>
+                    <field
+                        name="apply_filter"
+                        widget="radio"
+                        options="{'horizontal': True}"
+                    />
+                </div>
+            </field>
         </field>
     </record>
 </odoo>
