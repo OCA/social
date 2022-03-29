@@ -178,5 +178,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_team.field_product_template__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_sale_order__activity_team_user_ids
 msgid "test field"
 msgstr ""
