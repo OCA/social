@@ -1,14 +1,18 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.3.6
+_commit: v1.5.2
 _src_path: https://github.com/OCA/oca-addons-repo-template.git
-ci: Travis
-dependency_installation_mode: OCA
+ci: GitHub
+dependency_installation_mode: PIP
 generate_requirements_txt: true
 include_wkhtmltopdf: false
 odoo_version: 13.0
-rebel_module_groups: []
+org_name: Odoo Community Association (OCA)
+org_slug: OCA
+rebel_module_groups:
+- mail_restrict_follower_selection
 repo_description: Addons concerning Odoo's social features and messaging in general.
 repo_name: Social addons for Odoo
 repo_slug: social
+repo_website: https://github.com/OCA/social
 travis_apt_packages: []
 travis_apt_sources: []
