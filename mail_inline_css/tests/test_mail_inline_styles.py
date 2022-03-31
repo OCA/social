@@ -16,7 +16,7 @@ class TestMailInlineStyles(SavepointCase):
         return html.fragments_fromstring(html_)
 
     def parse_node_style(self, node):
-        """ Convert node CSS string to Python dict"""
+        """Convert node CSS string to Python dict"""
         res = {}
         for style in node.attrib.get("style", "").split(";"):
             rule = style.split(":")
