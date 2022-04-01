@@ -21,10 +21,10 @@ class MailComposeMessage(models.TransientModel):
         followers on the related object""",
     )
 
-    def send_mail(self, auto_commit=False):
+    def _action_send_mail(self, auto_commit=False):
         for wizard in self:
             super(
                 MailComposeMessage,
                 wizard.with_context(mail_post_autofollow=wizard.autofollow_recipients),
-            ).send_mail(auto_commit=auto_commit)
+            )._action_send_mail(auto_commit=auto_commit)
         return True
