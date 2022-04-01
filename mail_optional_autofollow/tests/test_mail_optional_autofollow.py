@@ -21,13 +21,13 @@ class TestAttachExistingAttachment(common.TransactionCase):
             }
         )
         mail_compose = self.env["mail.compose.message"]
-        values = mail_compose.with_context(ctx).onchange_template_id(
+        values = mail_compose.with_context(**ctx)._onchange_template_id(
             False, "comment", "res.partner", self.partner_01.id
         )["value"]
         values["partner_ids"] = [(4, self.partner_02.id)]
-        compose_id = mail_compose.with_context(ctx).create(values)
+        compose_id = mail_compose.with_context(**ctx).create(values)
         compose_id.autofollow_recipients = False
-        compose_id.with_context(ctx).send_mail()
+        compose_id.with_context(**ctx).action_send_mail()
         res = self.env["mail.followers"].search(
             [
                 ("res_model", "=", "res.partner"),
@@ -37,9 +37,9 @@ class TestAttachExistingAttachment(common.TransactionCase):
         )
         # I check if the recipient isn't a follower
         self.assertEqual(len(res.ids), 0)
-        compose_id = mail_compose.with_context(ctx).create(values)
+        compose_id = mail_compose.with_context(**ctx).create(values)
         compose_id.autofollow_recipients = True
-        compose_id.with_context(ctx).send_mail()
+        compose_id.with_context(**ctx).action_send_mail()
         res = self.env["mail.followers"].search(
             [
                 ("res_model", "=", "res.partner"),
