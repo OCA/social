@@ -82,6 +82,7 @@ class ResConfigSettings(models.TransientModel):
         webhooks = requests.get(
             urljoin(params.api_url, "/v3/domains/%s/webhooks" % params.domain),
             auth=("api", params.api_key),
+            timeout=10,
         )
         webhooks.raise_for_status()
         for event, data in webhooks.json()["webhooks"].items():
@@ -100,6 +101,7 @@ class ResConfigSettings(models.TransientModel):
                     "/v3/domains/%s/webhooks/%s" % (params.domain, event),
                 ),
                 auth=("api", params.api_key),
+                timeout=10,
             )
             response.raise_for_status()
 
@@ -116,6 +118,7 @@ class ResConfigSettings(models.TransientModel):
                 urljoin(params.api_url, "/v3/domains/%s/webhooks" % params.domain),
                 auth=("api", params.api_key),
                 data={"id": event, "url": [odoo_webhook]},
+                timeout=10,
             )
             # Assert correct registration
             response.raise_for_status()
