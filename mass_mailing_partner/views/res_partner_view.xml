@@ -22,7 +22,7 @@
                     context="{'search_default_partner_id': active_id,
                                   'default_partner_id': active_id}"
                     type="action"
-                    class="oe_stat_button oe_inline"
+                    class="oe_stat_button"
                     icon="fa-envelope-o"
                 >
                     <field
@@ -36,7 +36,7 @@
                     context="{'search_default_partner_id': active_id,
                                   'default_partner_id': active_id}"
                     type="action"
-                    class="oe_stat_button oe_inline"
+                    class="oe_stat_button"
                     icon="fa-envelope-o"
                 >
                     <field
