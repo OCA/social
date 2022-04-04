@@ -64,7 +64,7 @@ class MailThread(models.AbstractModel):
         thread_id=None,
     ):
         message = _("This message is already imported.")
-        raise exceptions.Warning(message)
+        raise exceptions.UserError(message)
 
     @api.model
     def message_process_msg(
