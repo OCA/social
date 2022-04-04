@@ -1,7 +1,7 @@
 .o_thread_mail_message_reply {
-  cursor: pointer;
-  color: gray('400');
-  &:not(.o-mobile) {
+    cursor: pointer;
+    color: gray("400");
+    &:not(.o-mobile) {
         &:hover {
             filter: brightness(0.8);
         }
@@ -16,6 +16,6 @@
     }
 
     &.o-message-selected {
-        color: gray('500');
+        color: gray("500");
     }
 }
