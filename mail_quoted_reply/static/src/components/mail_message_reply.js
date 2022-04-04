@@ -1,4 +1,4 @@
-odoo.define("mail_quoted_reply/static/src/components/mail_message_reply.js", function(
+odoo.define("mail_quoted_reply/static/src/components/mail_message_reply.js", function (
     require
 ) {
     "use strict";
@@ -12,10 +12,9 @@ odoo.define("mail_quoted_reply/static/src/components/mail_message_reply.js", fun
         components.Message,
         "mail_quoted_reply/static/src/models/mail_message_reply.js",
         {
-            _onClickMailMessageReply(ev) {
+            _onClickMailMessageReply() {
                 this.message._onClickMailMessageReply();
             },
-
         }
     );
 });
