@@ -12,7 +12,16 @@
 
         <script
                 type="text/javascript"
-                src="/mail_quoted_reply/static/src/js/mail_message_reply.js"
+                src="/mail_quoted_reply/static/src/components/mail_message_reply.js"
+            />
+        <script
+                type="text/javascript"
+                src="/mail_quoted_reply/static/src/models/mail_message_reply.js"
+            />
+        <link
+                href="/mail_quoted_reply/static/src/scss/thread_mail_message_reply.scss"
+                rel="stylesheet"
+                type="text/scss"
             />
     </xpath>
 </template>
