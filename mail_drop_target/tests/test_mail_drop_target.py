@@ -3,10 +3,10 @@ import base64
 from mock import patch
 
 from odoo import exceptions, tools
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMailDropTarget(SavepointCase):
+class TestMailDropTarget(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -15,16 +15,14 @@ class TestMailDropTarget(SavepointCase):
         cls.partner.message_subscribe(partner_ids=cls.partner.ids)
 
     def test_eml(self):
-        message = tools.file_open(
-            "sample.eml", subdir="addons/mail_drop_target/tests"
-        ).read()
+        message = tools.file_open("addons/mail_drop_target/tests/sample.eml").read()
         comments = len(self.partner.message_ids)
         self.partner.message_process(
             self.partner._name, message, thread_id=self.partner.id
         )
         self.partner.refresh()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(exceptions.UserError):
             self.partner.message_drop(
                 self.partner._name, message, thread_id=self.partner.id
             )
@@ -32,7 +30,7 @@ class TestMailDropTarget(SavepointCase):
     def test_msg(self):
         message = base64.b64encode(
             tools.file_open(
-                "sample.msg", mode="rb", subdir="addons/mail_drop_target/tests"
+                "addons/mail_drop_target/tests/sample.msg", mode="rb"
             ).read()
         )
         comments = len(self.partner.message_ids)
@@ -43,7 +41,7 @@ class TestMailDropTarget(SavepointCase):
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertIsNotNone(msg.notified_partner_ids)
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(exceptions.UserError):
             self.partner.message_process_msg(
                 self.partner._name, message, thread_id=self.partner.id
             )
@@ -57,7 +55,7 @@ class TestMailDropTarget(SavepointCase):
     def test_msg_no_notification(self):
         message = base64.b64encode(
             tools.file_open(
-                "sample.msg", mode="rb", subdir="addons/mail_drop_target/tests"
+                "addons/mail_drop_target/tests/sample.msg", mode="rb"
             ).read()
         )
         settings = self.env["res.config.settings"].create({})
@@ -71,7 +69,7 @@ class TestMailDropTarget(SavepointCase):
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertEqual(len(msg.notified_partner_ids), 0)
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(exceptions.UserError):
             self.partner.message_process_msg(
                 self.partner._name, message, thread_id=self.partner.id
             )
