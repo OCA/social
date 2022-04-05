@@ -63,6 +63,7 @@ Authors
 
 * SDi
 * David Juaneda
+* ACSONE SA/NV
 
 Contributors
 ~~~~~~~~~~~~
@@ -78,6 +79,10 @@ Contributors
 * `Pesol <https://www.pesol.es>`_:
 
   * Pedro Gonzalez (pedro.gonzalez@pesol.es)
+
+* `ACSONE SA/NV <https://www.acsone.eu>`_
+
+  * Laurent Mignon <laurent.mignon@acsone.eu>
 
 Maintainers
 ~~~~~~~~~~~
