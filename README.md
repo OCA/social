@@ -45,7 +45,7 @@ addon | version | maintainers | summary
 [mail_partner_opt_out](mail_partner_opt_out/) | 13.0.1.0.0 |  | Add the partner's email to the blackmailed list
 [mail_preview_audio](mail_preview_audio/) | 13.0.1.0.0 |  | Allow to preview audio files
 [mail_preview_base](mail_preview_base/) | 13.0.1.0.1 |  | Base to add more previewing options
-[mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.0.2 |  | Define a domain from which followers can be selected
+[mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.1.0 |  | Define a domain from which followers can be selected
 [mail_template_multi_attachment](mail_template_multi_attachment/) | 13.0.1.0.0 |  | Module who allows to generate multi attachments on an email template.
 [mail_tracking](mail_tracking/) | 13.0.1.0.10 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.2.0.1 |  | Mail tracking and Mailgun webhooks integration
