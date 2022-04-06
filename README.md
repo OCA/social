@@ -22,7 +22,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 14.0.1.0.0 |  | Base Search Mail Content
 [email_template_qweb](email_template_qweb/) | 14.0.1.0.0 |  | Use the QWeb templating mechanism for emails
-[mail_activity_board](mail_activity_board/) | 14.0.1.0.0 |  | Add Activity Boards
+[mail_activity_board](mail_activity_board/) | 14.0.1.1.0 |  | Add Activity Boards
 [mail_activity_creator](mail_activity_creator/) | 14.0.1.0.0 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 14.0.1.0.1 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 14.0.1.0.0 |  | Add Partner to Activities
