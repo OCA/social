@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+
+    <t t-extend="mail.systray.ActivityMenu">
+        <t t-jquery=".o_mail_systray_dropdown_items" t-operation="before">
+            <div>
+                <button
+                    type="button"
+                    class="btn btn-link o_filter_button active"
+                    data-filter='my'
+                    role="tab"
+                > My Activities </button>
+                <button
+                    type="button"
+                    class="btn btn-link o_filter_button"
+                    data-filter='team'
+                    role="tab"
+                > Team Activities </button>
+            </div>
+        </t>
+    </t>
+
+</templates>
