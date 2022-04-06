@@ -70,6 +70,11 @@ msgid "Display Name"
 msgstr ""
 
 #. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__related_model_instance
+msgid "Document"
+msgstr ""
+
+#. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__duration
 msgid "Duration"
 msgstr ""
