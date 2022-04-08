@@ -62,6 +62,11 @@ class MailMail(models.Model):
         group_portal = self.env.ref("base.group_portal")
         for mail_id in self.ids:
             mail = self.browse(mail_id)
+            message_recipients = self.search(
+                [
+                    ("message_id", "=", mail.message_id),
+                ]
+            ).mapped("recipient_ids")
             # if the email has a model, id and it belongs to the portal group
             if mail.model and mail.res_id and group_portal:
                 obj = self.env[mail.model].browse(mail.res_id)
@@ -69,7 +74,10 @@ class MailMail(models.Model):
                 # if they do it must be a portal, we exclude internal
                 # users of the system.
                 if hasattr(obj, "message_follower_ids"):
-                    partners_obj = obj.message_follower_ids.mapped("partner_id")
+                    partners_obj = (
+                        obj.message_follower_ids.mapped("partner_id")
+                        | message_recipients
+                    )
                     # internal partners
                     user_partner_ids = (
                         self.env["res.users"]
