@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+   <template
+        id="assets_backend"
+        name="mail internal chat"
+        inherit_id="web.assets_backend"
+    >
+        <xpath expr="." position="inside">
+            <script
+                type="text/javascript"
+                src="/mail_internal_chat/static/src/js/mail_internal_chat.js"
+            />
+        </xpath>
+    </template>
+</odoo>

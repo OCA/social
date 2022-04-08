@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_mail_message_subtype_form">
+        <field name="name">mail.message.subtype.form</field>
+        <field name="model">mail.message.subtype</field>
+        <field name="inherit_id" ref="mail.view_mail_message_subtype_form" />
+        <field name="arch" type="xml">
+            <field name="internal" position="after">
+                <field name="keep_chat_internal" />
+            </field>
+        </field>
+    </record>
+</odoo>
