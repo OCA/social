@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent Business and IT Consulting Services, S.L.
+# Copyright 2018 ForgeFlow S.L.
 # Copyright 2021 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
@@ -8,7 +8,7 @@
     "development_status": "Alpha",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
-    "author": "Eficent, Sodexis, Odoo Community Association (OCA)",
+    "author": "ForgeFlow, Sodexis, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": ["mail_activity_board"],
