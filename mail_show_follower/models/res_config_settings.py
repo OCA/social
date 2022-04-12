@@ -8,7 +8,7 @@ class ResConfigSettings(models.TransientModel):
         related="company_id.show_internal_users_cc",
         readonly=False,
     )
-    show_followers_message_sent_to = fields.Html(
+    show_followers_message_sent_to = fields.Text(
         related="company_id.show_followers_message_sent_to",
         readonly=False,
     )
@@ -20,7 +20,7 @@ class ResConfigSettings(models.TransientModel):
         "%(partner_email)s = Partner Email\n"
         "%(partner_email_domain)s = Partner Email Domain",
     )
-    show_followers_message_response_warning = fields.Html(
+    show_followers_message_response_warning = fields.Text(
         related="company_id.show_followers_message_response_warning",
         readonly=False,
     )

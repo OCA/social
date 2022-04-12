@@ -16,11 +16,6 @@ class MailMail(models.Model):
                 return self.env.context[ctx_key]
             return default_parm
 
-        def remove_p(markup_txt):
-            if markup_txt.startswith("<p>") and markup_txt.endswith("</p>"):
-                return markup_txt[3:-4]
-            return markup_txt
-
         company = self.env.company
         partner_format = get_ctx_param(
             "partner_format", company.show_followers_partner_format
@@ -51,10 +46,10 @@ class MailMail(models.Model):
             {rc}{msg_warn}
             </div>
         """.format(
-            msg_sent_to=remove_p(msg_sent_to),
+            msg_sent_to=msg_sent_to,
             partner_message=Markup.escape(partner_message),
-            rc=msg_warn.striptags() and "<br/>" or "",
-            msg_warn=msg_warn.striptags() and remove_p(msg_warn) or "",
+            rc=msg_warn and "<br/>" or "",
+            msg_warn=msg_warn or "",
         )
         return full_text
 
