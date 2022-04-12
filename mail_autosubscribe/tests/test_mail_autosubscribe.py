@@ -4,11 +4,11 @@
 
 from odoo_test_helper import FakeModelLoader
 
-from odoo.tests.common import Form, SavepointCase, tagged
+from odoo.tests.common import Form, TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
-class TestMailAutosubscribe(SavepointCase):
+class TestMailAutosubscribe(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

@@ -8,7 +8,7 @@ from odoo import models
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    def message_subscribe(self, partner_ids=None, channel_ids=None, subtype_ids=None):
+    def message_subscribe(self, partner_ids=None, subtype_ids=None):
         # Overload to automatically subscribe autosubscribe followers.
         autosubscribe_followers = not self.env.context.get("no_autosubscribe_followers")
         if partner_ids and autosubscribe_followers:
@@ -22,6 +22,5 @@ class MailThread(models.AbstractModel):
             partner_ids += follower_ids
         return super().message_subscribe(
             partner_ids=partner_ids,
-            channel_ids=channel_ids,
             subtype_ids=subtype_ids,
         )
