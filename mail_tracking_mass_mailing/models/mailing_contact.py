@@ -10,7 +10,7 @@ class MailMassMailingContact(models.Model):
     _inherit = ["mailing.contact", "mail.bounced.mixin"]
 
     email_score = fields.Float(
-        string="Email score", readonly=True, store=False, compute="_compute_email_score"
+        readonly=True, store=False, compute="_compute_email_score"
     )
 
     @api.depends("email")
