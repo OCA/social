@@ -8,7 +8,7 @@ class ResCompany(models.Model):
         string="Show Internal Users CC",
         default=True,
     )
-    show_followers_message_sent_to = fields.Html(
+    show_followers_message_sent_to = fields.Text(
         string="Text 'Sent to'",
         translate=True,
         default="This message has been sent to",
@@ -21,7 +21,7 @@ class ResCompany(models.Model):
         "%(partner_email)s = Partner Email\n"
         "%(partner_email_domain)s = Partner Email Domain",
     )
-    show_followers_message_response_warning = fields.Html(
+    show_followers_message_response_warning = fields.Text(
         string="Text 'Replies'",
         translate=True,
         default="Notice: Replies to this email will be sent to all recipients",
