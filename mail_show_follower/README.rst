@@ -23,7 +23,7 @@ Mail Show Follower
     :target: https://runbot.odoo-community.org/runbot/205/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module extends the functionality of mailing to show the document followers in head of the mails.
 In the cc, only appear when:
@@ -41,8 +41,11 @@ Configuration
 
 To configure this module, you need to:
 
-#. Go General settings/Discuss/Show Internal Users CC and set if want to show or not internal users in cc details.
+#. Go General settings/Discuss/Show Followers on mails/Show Internal Users CC and set if want to show or not internal users in cc details.
 #. Go Settings/Users & Company salect any user in 'Preferences' check or not the 'Show in CC' field if this user need to appear in the cc note.
+#. Go General settings/Discuss/Show Followers on mails/Text 'Sent to' and set the initial part of the message.
+#. Go General settings/Discuss/Show Followers on mails/Partner format and choose desired fields to show on CC recipients.
+#. Go General settings/Discuss/Show Followers on mails/Text 'Replies' and choose desired warn message
 
 Usage
 =====
@@ -68,6 +71,7 @@ Authors
 ~~~~~~~
 
 * Sygel
+* Moduon
 
 Contributors
 ~~~~~~~~~~~~
@@ -75,6 +79,7 @@ Contributors
 * Valentin Vinagre <valentin.vinagre@sygel.es>
 * Lorenzo Battistini
 * Alex Comba <alex.comba@agilebg.com>
+* Eduardo de Miguel <edu@moduon.team>
 
 Maintainers
 ~~~~~~~~~~~
