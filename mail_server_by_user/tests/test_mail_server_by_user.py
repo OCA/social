@@ -123,7 +123,11 @@ class TestIrMailServer(TransactionCase):
         self.message.replace_header("From", self.user3.login)
         call_args = self._send_mail()
         mail_server_id = call_args.kwargs.get("mail_server_id", False)
-        self.assertEqual(mail_server_id, None)
+        # With this module, you always get mail server on call, only test when is not installed
+        if not self.env["ir.module.module"].search(
+            [("name", "=", "mail_outbound_static"), ("state", "=", "installed")]
+        ):
+            self.assertEqual(mail_server_id, None)
 
     def test_message_thread_send(self):
         mail_message_1 = self.partner.with_user(self.user1).message_post(
