@@ -35,7 +35,7 @@ class ResConfigSettings(models.TransientModel):
         "show_followers_partner_format",
         "show_followers_message_response_warning",
     )
-    def onchange_show_followers_message_preview(self):
+    def _onchange_show_followers_message_preview(self):
         self.show_followers_message_preview = (
             self.env["mail.mail"]
             .with_context(
