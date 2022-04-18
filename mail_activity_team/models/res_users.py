@@ -14,7 +14,7 @@ class ResUsers(models.Model):
 
     @api.model
     def systray_get_activities(self):
-        if not self._context.get("team_activities", False):
+        if not self.env.context.get("team_activities"):
             return super().systray_get_activities()
         query = """SELECT m.id, count(*), act.res_model as model,
                     CASE
