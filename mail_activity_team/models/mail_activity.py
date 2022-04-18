@@ -1,6 +1,5 @@
 # Copyright 2018-22 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-import json
 
 from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import ValidationError
@@ -27,15 +26,6 @@ class MailActivity(models.Model):
     team_id = fields.Many2one(
         comodel_name="mail.activity.team", default=lambda s: s._get_default_team_id()
     )
-    user_id_domain = fields.Char(compute="_compute_user_id_domain")
-
-    @api.depends("team_id")
-    def _compute_user_id_domain(self):
-        for record in self:
-            domain = []
-            if record.team_id:
-                domain.append(("id", "in", record.team_id.member_ids.ids))
-            record.user_id_domain = json.dumps(domain)
 
     @api.onchange("user_id")
     def _onchange_user_id(self):
