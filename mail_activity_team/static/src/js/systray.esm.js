@@ -11,10 +11,11 @@ ActivityMenu.include({
         this.$filter_buttons = this.$(".o_filter_button");
         this.$my_activities = this.$filter_buttons.first();
         this.filter = "my";
-        this.user_context = session.user_context;
-        this.user_context = _.extend({}, session.user_context, {
-            team_activities: false,
-        });
+        this._update_team_activities_context();
+    },
+
+    _update_team_activities_context: function () {
+        session.user_context.team_activities = this.filter === "team";
     },
 
     _updateCounter: function () {
@@ -23,18 +24,13 @@ ActivityMenu.include({
     },
 
     _onClickFilterButton: function (event) {
-        var self = this;
         event.stopPropagation();
-        self.$filter_buttons.removeClass("active");
+        this.$filter_buttons.removeClass("active");
         var $target = $(event.currentTarget);
         $target.addClass("active");
-        self.filter = $target.data("filter");
-
-        self.user_context = _.extend({}, session.user_context, {
-            team_activities: self.filter === "team",
-        });
-
-        self._updateActivityPreview();
+        this.filter = $target.data("filter");
+        this._update_team_activities_context();
+        this._updateActivityPreview();
     },
     _onActivityFilterClick: function (event) {
         if (this.filter === "my") {
@@ -63,12 +59,21 @@ ActivityMenu.include({
                     [false, "form"],
                 ],
                 search_view_id: [false],
-                domain: [["activity_team_user_ids", "in", session.uid]],
+                domain: [["activity_team_user_ids", "in", [session.uid]]],
                 context: context,
             });
         }
     },
+    _open_boards_activities_domain: function () {
+        if (this.filter === "team") {
+            return {additional_context: {search_default_my_team_activities: 1}};
+        }
+        return this._super.apply(this, arguments);
+    },
     _getActivityData: function () {
+        if (this.filter !== "team") {
+            return this._super.apply(this, arguments);
+        }
         var self = this;
 
         return self
@@ -89,6 +94,8 @@ ActivityMenu.include({
                 );
                 self.$(".o_notification_counter").text(self.activityCounter);
                 self.$el.toggleClass("o_no_notification", !self.activityCounter);
+                // Unset context after we gather the info to avoid side effects
+                session.user_context.team_activities = false;
             });
     },
 });
