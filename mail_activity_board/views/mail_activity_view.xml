@@ -57,7 +57,8 @@
                         class="centre oe_link"
                         nolabel="1"
                     >
-                        <h1><field name="res_name" /></h1>
+                        <field name="res_name" invisible="1" />
+                        <h1><field name="related_model_instance" /></h1>
                     </button>
                     <field name="activity_category" invisible="1" />
                     <field name="res_model" invisible="1" />
