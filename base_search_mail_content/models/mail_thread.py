@@ -29,9 +29,13 @@ class MailThread(models.AbstractModel):
 
     message_content = fields.Text(
         help="Message content, to be used only in searches",
-        compute=lambda self: False,
+        compute="_compute_message_content",
         search="_search_message_content",
     )
+
+    def _compute_message_content(self):
+        # Always assign a value to avoid CacheMiss errors
+        self.message_content = False
 
     @api.model
     def fields_view_get(
