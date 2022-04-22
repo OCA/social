@@ -21,19 +21,27 @@ class MailTemplate(models.Model):
             res_ids = [res_ids]
             multi_mode = False
         result = super(MailTemplate, self).generate_email(res_ids, fields=fields)
-        for res_id in res_ids:
-            if self.body_type == "qweb" and (not fields or "body_html" in fields):
-                for record in self.env[self.model].browse(res_id):
-                    body_html = self.body_view_id._render(
-                        {"object": record, "email_template": self}
-                    )
-                    # Some wizards, like when sending a sales order, need this
-                    # fix to display accents correctly
-                    body_html = tools.ustr(body_html)
-                    result[res_id]["body_html"] = self._render_template_postprocess(
-                        {res_id: body_html}
-                    )[res_id]
-                    result[res_id]["body"] = tools.html_sanitize(
-                        result[res_id]["body_html"]
-                    )
+        for lang, (_template, _template_res_ids) in self._classify_per_lang(
+            res_ids
+        ).items():
+            self_with_lang = self.with_context(lang=lang)
+            for res_id in res_ids:
+                if self.body_type == "qweb" and (not fields or "body_html" in fields):
+                    for record in self_with_lang.env[self.model].browse(res_id):
+                        body_html = self_with_lang.body_view_id._render(
+                            {"object": record, "email_template": self_with_lang}
+                        )
+                        # Some wizards, like when sending a sales order, need this
+                        # fix to display accents correctly
+                        body_html = tools.ustr(body_html)
+                        result[res_id][
+                            "body_html"
+                        ] = self_with_lang._render_template_postprocess(
+                            {res_id: body_html}
+                        )[
+                            res_id
+                        ]
+                        result[res_id]["body"] = tools.html_sanitize(
+                            result[res_id]["body_html"]
+                        )
         return result if multi_mode else result[res_ids[0]]
