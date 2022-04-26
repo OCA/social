@@ -1,0 +1,22 @@
+<templates id="template" xml:space="preserve">
+
+    <t t-extend="portal.Composer">
+
+        <t t-jquery=".o_portal_chatter_attachment_tokens" t-operation="after">
+            <input
+                type="hidden"
+                name="is_log_note"
+                class="o_portal_chatter_is_log_note"
+            />
+        </t>
+        <t t-jquery=".o_portal_chatter_attachment_btn" t-operation="before">
+            <button
+                class="o_portal_chatter_log_note_btn btn btn-secondary"
+                type="button"
+                title="Log Note"
+            >
+                Log a Note
+            </button>
+        </t>
+    </t>
+</templates>

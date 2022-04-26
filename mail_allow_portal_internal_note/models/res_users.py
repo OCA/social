@@ -11,7 +11,12 @@ class Users(models.Model):
     # because Portal User form does not present group selection boxes
     portal_see_internal_msg_own = fields.Boolean(
         string="See own company Internal Messages",
+        help="Portal User can see the internal messages"
+        " for documents related to his parent company",
     )
     portal_see_internal_msg_other = fields.Boolean(
         string="See other company Internal Messages",
+        help="Portal User can see the internal messages"
+        " for documents related tho other companies"
+        " , other than his parent company",
     )

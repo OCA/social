@@ -9,9 +9,13 @@
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
-    "depends": ["mail"],
+    "depends": ["mail", "portal"],
     "installable": True,
     "maintainer": ["dreispt"],
     "development_status": "Alpha",
-    "data": ["views/res_users.xml"],
+    "data": [
+        "views/res_users.xml",
+        "views/assets.xml",
+    ],
+    "qweb": ["static/src/xml/mail_portal_template.xml"],
 }
