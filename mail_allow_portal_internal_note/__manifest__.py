@@ -4,7 +4,7 @@
     "name": "Allow Portal Users to access internal messages",
     "summary": "Portal users can access internal messages"
     " related to own or other companies",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Social Network",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
