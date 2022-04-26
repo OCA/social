@@ -29,8 +29,36 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_allow_portal_internal_note
+#. openerp-web
+#: code:addons/mail_allow_portal_internal_note/static/src/xml/mail_portal_template.xml:0
+#, python-format
+msgid "Log Note"
+msgstr ""
+
+#. module: mail_allow_portal_internal_note
+#. openerp-web
+#: code:addons/mail_allow_portal_internal_note/static/src/xml/mail_portal_template.xml:0
+#, python-format
+msgid "Log a Note"
+msgstr ""
+
+#. module: mail_allow_portal_internal_note
 #: model_terms:ir.ui.view,arch_db:mail_allow_portal_internal_note.user_form_portal_user_special
 msgid "Portal User Internal Message Access"
+msgstr ""
+
+#. module: mail_allow_portal_internal_note
+#: model:ir.model.fields,help:mail_allow_portal_internal_note.field_res_users__portal_see_internal_msg_other
+msgid ""
+"Portal User can see the internal messages for documents related tho other "
+"companies , other than his parent company"
+msgstr ""
+
+#. module: mail_allow_portal_internal_note
+#: model:ir.model.fields,help:mail_allow_portal_internal_note.field_res_users__portal_see_internal_msg_own
+msgid ""
+"Portal User can see the internal messages for documents related to his "
+"parent company"
 msgstr ""
 
 #. module: mail_allow_portal_internal_note
