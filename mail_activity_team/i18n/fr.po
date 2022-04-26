@@ -45,6 +45,11 @@ msgstr "Equipes d'activité"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
+msgid "Archived"
+msgstr ""
+
+#. module: mail_activity_team
+#: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Assign to missing activities"
 msgstr "Assigner une équipe aux activités manquantes"
 
@@ -162,6 +167,7 @@ msgstr ""
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_mailing_mailing__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
 msgid "test field"

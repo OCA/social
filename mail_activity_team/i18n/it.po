@@ -27,6 +27,11 @@ msgid "Activity"
 msgstr "Attività"
 
 #. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Activity Team"
 msgstr "Team Attività"
@@ -37,6 +42,11 @@ msgstr "Team Attività"
 #: model:ir.ui.menu,name:mail_activity_team.menu_mail_activity_team
 msgid "Activity Teams"
 msgstr "Team Attività"
+
+#. module: mail_activity_team
+#: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
+msgid "Archived"
+msgstr ""
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
@@ -94,6 +104,13 @@ msgid "Missing Activities"
 msgstr "Attività Mancanti"
 
 #. module: mail_activity_team
+#. openerp-web
+#: code:addons/mail_activity_team/static/src/xml/systray.xml:0
+#, python-format
+msgid "My Activities"
+msgstr ""
+
+#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "My Team Activities"
 msgstr "Attività del mio Team"
@@ -108,6 +125,13 @@ msgstr "Nome"
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "Team"
 msgstr "Team"
+
+#. module: mail_activity_team
+#. openerp-web
+#: code:addons/mail_activity_team/static/src/xml/systray.xml:0
+#, python-format
+msgid "Team Activities"
+msgstr ""
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__user_id
@@ -127,8 +151,9 @@ msgstr "Team:"
 #. module: mail_activity_team
 #: code:addons/mail_activity_team/models/mail_activity.py:0
 #, python-format
-msgid "The assigned user is not member of the team."
-msgstr "L'utente assegnato non è un membro del team."
+msgid ""
+"The assigned user %(user_name)s is not member of the team %(team_name)s."
+msgstr ""
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__res_model_ids
@@ -139,3 +164,14 @@ msgstr "Modelli usati"
 #: model:ir.model,name:mail_activity_team.model_res_users
 msgid "Users"
 msgstr "Utenti"
+
+#. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_mailing_mailing__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_res_partner__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
+msgid "test field"
+msgstr ""
+
+#~ msgid "The assigned user is not member of the team."
+#~ msgstr "L'utente assegnato non è un membro del team."
