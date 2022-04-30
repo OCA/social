@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_general_configuration" model="ir.ui.view">
+        <field name="model">base.config.settings</field>
+        <field name="inherit_id" ref="base_setup.view_general_configuration" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='google']" position="before">
+                <group string="Gmail Credentials" name="google_gmail_setting">
+                    <field name="google_gmail_client_identifier" />
+                    <field name="google_gmail_client_secret" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
