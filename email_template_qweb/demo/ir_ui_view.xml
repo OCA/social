@@ -10,7 +10,7 @@
                 <!-- if some template calling us sets this variable,
                      we print a h1 tag /-->
                 <h1 t-if="email_heading"><t t-esc="email_heading" /></h1>
-                <t t-raw="0" />
+                <t t-out="0" />
                 <!-- use some standard footer if the user doesn't have
                      a signature /-->
                 <footer t-if="not email_use_user_signature">
@@ -22,7 +22,7 @@
                     <p><t t-esc="env.user.company_id.phone" /></p>
                 </footer>
                 <footer t-if="email_use_user_signature">
-                    <t t-raw="env.user.signature" />
+                    <t t-out="env.user.signature" />
                 </footer>
             </html>
         </body>

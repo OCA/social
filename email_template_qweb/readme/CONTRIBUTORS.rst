@@ -7,3 +7,6 @@
 
 * Thomas Fossoul (thomas@niboo.com)
 * Phuc Tran Thanh <phuc@trobz.com>
+* Foram Shah <foram.shah@initos.com>
+* `Trobz <https://trobz.com>`_:
+    * Dzung Tran <dungtd@trobz.com>

@@ -7,9 +7,9 @@ class MailTemplate(models.Model):
     _inherit = "mail.template"
 
     body_type = fields.Selection(
-        [("jinja2", "Jinja2"), ("qweb", "QWeb")],
+        [("qweb", "QWeb"), ("qweb_view", "QWeb View")],
         "Body templating engine",
-        default="jinja2",
+        default="qweb",
         required=True,
     )
     body_view_id = fields.Many2one("ir.ui.view", domain=[("type", "=", "qweb")])
@@ -26,7 +26,9 @@ class MailTemplate(models.Model):
         ).items():
             self_with_lang = self.with_context(lang=lang)
             for res_id in res_ids:
-                if self.body_type == "qweb" and (not fields or "body_html" in fields):
+                if self.body_type == "qweb_view" and (
+                    not fields or "body_html" in fields
+                ):
                     for record in self_with_lang.env[self.model].browse(res_id):
                         body_html = self_with_lang.body_view_id._render(
                             {"object": record, "email_template": self_with_lang}
