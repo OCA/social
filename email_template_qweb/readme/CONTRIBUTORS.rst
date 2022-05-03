@@ -7,3 +7,4 @@
 
 * Thomas Fossoul (thomas@niboo.com)
 * Phuc Tran Thanh <phuc@trobz.com>
+* Foram Shah <foram.shah@initos.com>
