@@ -22,6 +22,13 @@ msgid "Configure the restriction on followers"
 msgstr "Beschränkung der Abonnenten konfigurieren"
 
 #. module: mail_restrict_follower_selection
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_followers__display_name
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_thread__display_name
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_wizard_invite__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_restrict_follower_selection
 #: model:ir.model,name:mail_restrict_follower_selection.model_mail_followers
 msgid "Document Followers"
 msgstr "Abonnenten des Dokuments"
@@ -32,6 +39,20 @@ msgid "Email Thread"
 msgstr ""
 
 #. module: mail_restrict_follower_selection
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_followers__id
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_thread__id
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_wizard_invite__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_restrict_follower_selection
 #: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
 msgid "Invite wizard"
 msgstr "Assistent zum Einladen von Abonnenten"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_followers____last_update
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_thread____last_update
+#: model:ir.model.fields,field_description:mail_restrict_follower_selection.field_mail_wizard_invite____last_update
+msgid "Last Modified on"
+msgstr ""
