@@ -8,22 +8,22 @@
                 <field name="body_type" />
             </field>
             <field name="body_html" position="before">
-                <group attrs="{'invisible': [('body_type', '!=', 'qweb')]}">
+                <group attrs="{'invisible': [('body_type', '!=', 'qweb_view')]}">
                     <field
                         name="body_view_id"
-                        attrs="{'required': [('body_type', '=', 'qweb')]}"
+                        attrs="{'required': [('body_type', '=', 'qweb_view')]}"
                     />
                     <field
                         name="body_view_arch"
                         widget="ace"
-                        attrs="{'required': [('body_type', '=', 'qweb')], 'invisible': [('body_view_id', '=', False)]}"
+                        attrs="{'required': [('body_type', '=', 'qweb_view')], 'invisible': [('body_view_id', '=', False)]}"
                     />
                 </group>
             </field>
             <field name="body_html" position="attributes">
                 <attribute
                     name="attrs"
-                >{'invisible': [('body_type', '!=', 'jinja2')]}</attribute>
+                >{'invisible': [('body_type', '!=', 'qweb')]}</attribute>
             </field>
         </field>
     </record>
