@@ -10,21 +10,6 @@ from odoo.addons.portal.controllers.mail import PortalChatter, _message_post_hel
 
 
 class PortalChatterExt(PortalChatter):
-    def portal_can_see_internal_messages(self, res_model, res_id):
-        user = request.env.user
-        if not user.has_group("base.group_user") and (
-            user.portal_see_internal_msg_own or user.portal_see_internal_msg_other
-        ):
-            Model = request.env[res_model]
-            if hasattr(Model, "partner_id"):
-                record_company = Model.browse(res_id).partner_id.commercial_partner_id
-                is_own_company = record_company == user.commercial_partner_id
-                if user.portal_see_internal_msg_own and is_own_company:
-                    return True
-                if user.portal_see_internal_msg_other and not is_own_company:
-                    return True
-        return False
-
     @http.route()
     def portal_message_fetch(
         self, res_model, res_id, domain=False, limit=10, offset=0, **kw
@@ -32,7 +17,7 @@ class PortalChatterExt(PortalChatter):
         res = super().portal_message_fetch(
             res_model, res_id, domain=domain, limit=limit, offset=offset
         )
-        if self.portal_can_see_internal_messages(res_model, res_id):
+        if request.env["res.users"].portal_can_see_internal_messages(res_model, res_id):
             Message = request.env["mail.message"]
             domain = expression.AND(
                 [domain, [("model", "=", res_model), ("res_id", "=", res_id)]]
@@ -128,3 +113,14 @@ class PortalChatterExt(PortalChatter):
                     message.sudo().write(attachments)
 
         return request.redirect(url)
+
+    @http.route(
+        ["/can_portal_see_internal_messages"],
+        type="json",
+        auth="public",
+        website=True,
+    )
+    def can_portal_see_internal_messages(self, res_model, res_id, **kw):
+        return request.env["res.users"].portal_can_see_internal_messages(
+            res_model, res_id
+        )

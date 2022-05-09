@@ -20,3 +20,18 @@ class Users(models.Model):
         " for documents related tho other companies"
         " , other than his parent company",
     )
+
+    def portal_can_see_internal_messages(self, res_model, res_id):
+        user = self.env.user
+        if not user.has_group("base.group_user") and (
+            user.portal_see_internal_msg_own or user.portal_see_internal_msg_other
+        ):
+            Model = self.env[res_model]
+            if hasattr(Model, "partner_id"):
+                record_company = Model.browse(res_id).partner_id.commercial_partner_id
+                is_own_company = record_company == user.commercial_partner_id
+                if user.portal_see_internal_msg_own and is_own_company:
+                    return True
+                if user.portal_see_internal_msg_other and not is_own_company:
+                    return True
+        return False
