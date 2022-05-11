@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+   <t t-name="mail_tracking.MessageFailedBox" owl="1">
+      <div class="o_ActivityBox">
+         <t
+                t-if="chatter and chatter.thread and chatter.thread.messagefailed.length > 0"
+            >
+            <a role="button" class="o_ActivityBox_title btn" t-on-click="_onClickTitle">
+               <hr class="o_ActivityBox_titleLine" />
+               <span class="o_ActivityBox_titleText">
+               <i
+                            class="fa fa-fw"
+                            t-att-class="chatter.isMessageFailedBoxVisible ? 'fa-caret-down' : 'fa-caret-right'"
+                        />
+               Failed messages
+               </span>
+               <t t-if="!chatter.isMessageFailedBoxVisible">
+                  <span class="o_ActivityBox_titleBadges">
+                     <t t-if="chatter.thread.messagefailed.length > 0">
+                        <span
+                                    class="o_ActivityBox_titleBadge badge rounded-circle badge-danger"
+                                >
+                           <t t-esc="chatter.thread.messagefailed.length" />
+                        </span>
+                     </t>
+                  </span>
+               </t>
+               <hr class="o_ActivityBox_titleLine" />
+            </a>
+            <t
+                    t-if="chatter.isMessageFailedBoxVisible and chatter.thread.messagefailed"
+                >
+               <div class="o_ActivityList">
+                  <t
+                            t-foreach="chatter.thread.messagefailed"
+                            t-as="messagefailed"
+                            t-key="messagefailed.localId"
+                        >
+                     <div class="o_Activity">
+                        <t t-if="messagefailed">
+                           <div class="o_Activity_sidebar">
+                              <div class="o_Activity_user">
+                                 <t t-if="messagefailed.author">
+                                    <img
+                                                    class="o_Activity_userAvatar"
+                                                    t-attf-src="/web/image/res.users/{{ messagefailed.author_id }}/image_128"
+                                                    t-att-alt="messagefailed.author"
+                                                />
+                                 </t>
+                                 <div class="o_Activity_iconContainer bg-danger-full">
+                                    <i class="o_Activity_icon fa fa-exclamation" />
+                                 </div>
+                              </div>
+                           </div>
+                           <div class="o_Activity_core">
+                              <div class="o_Activity_info">
+                                 <div class="o_Activity_dueDateText" t-att-class="{}">
+                                    <t t-esc="messagefailed.author" />
+                                 </div>
+                                 <t t-if="messagefailed.date">
+                                    <div class="o_Activity_summary text-muted">
+                                       <t t-esc="messagefailed.date" />
+                                    </div>
+                                 </t>
+                                 <span t-attf-class="o_thread_icons">
+                                 <a
+                                                    href="#"
+                                                    class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_reviewed o_activity_link"
+                                                    t-on-click="_onMarkFailedMessageReviewed"
+                                                    t-att-data-message-id="messagefailed.id"
+                                                >
+                                 <i class="fa fa-check" /> Set as Reviewed
+                                 </a>
+                                 <a
+                                                    href="#"
+                                                    class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_retry o_activity_link"
+                                                    t-on-click="_onRetryFailedMessage"
+                                                    t-att-data-message-id="messagefailed.id"
+                                                >
+                                 <i class="fa fa-retweet" /> Retry
+                                 </a>
+                                 </span>
+                              </div>
+                              <div class="o_Activity_info">
+                                 <strong class="text-danger">Failed Recipients:</strong>
+                                 <t
+                                                t-foreach="messagefailed.failed_recipients"
+                                                t-as="recipient"
+                                            >
+                                    <t t-if="!recipient_first">
+                                       -
+                                    </t>
+                                    <a
+                                                    class="o_mail_action_tracking_partner"
+                                                    t-att-data-partner="recipient[1]"
+                                                    t-attf-href="#model=res.partner&amp;id={{recipient[0]}}"
+                                                >
+                                       <t t-esc="recipient[1]" />
+                                    </a>
+                                 </t>
+                              </div>
+                              <div class="o_thread_message_note small">
+                                 <t t-raw="messagefailed.body" />
+                              </div>
+                           </div>
+                        </t>
+                     </div>
+                  </t>
+               </div>
+            </t>
+         </t>
+      </div>
+   </t>
+   <t t-inherit="mail.Chatter" t-inherit-mode="extension">
+      <xpath
+            expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.isAttachmentBoxVisible']"
+            position="before"
+        >
+         <t t-if="chatter.thread">
+            <MessageFailedBox
+                    class="o_Chatter_activityBox"
+                    chatterLocalId="chatter.localId"
+                />
+         </t>
+      </xpath>
+   </t>
+</templates>

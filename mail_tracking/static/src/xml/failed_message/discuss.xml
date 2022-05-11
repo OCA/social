@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t t-inherit="mail.ThreadIcon" t-inherit-mode="extension">
+        <xpath expr="//t[@t-elif='thread === messaging.history']" position="after">
+            <t t-elif="thread === messaging.failedmsg">
+                <div class="o_ThreadIcon_mailboxModeration fa fa-exclamation" />
+            </t>
+        </xpath>
+    </t>
+
+    <t t-inherit="mail.DiscussSidebar" t-inherit-mode="extension">
+        <xpath
+            expr="//div[hasclass('o_DiscussSidebar_categoryMailbox')]"
+            position="inside"
+        >
+            <DiscussSidebarMailbox threadLocalId="messaging.failedmsg.localId" />
+        </xpath>
+    </t>
+
+    <t t-inherit="mail.MessageList" t-inherit-mode="extension">
+        <t t-elif="threadView.thread === messaging.history" position="after">
+            <t t-elif="threadView.thread === messaging.failedmsg">
+                <div class="o_MessageList_emptyTitle o-neutral-face-icon">
+                    No failed messages
+                </div>
+                Failed messages will be appeared here.
+            </t>
+        </t>
+    </t>
+
+    <t t-inherit="mail.Message" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_Message_originThread')]" position="inside">
+            <t t-if="messageView.message.isFailed">
+                <span t-attf-class="o_thread_icons">
+                    <a
+                        href="#"
+                        class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_reviewed o_activity_link"
+                        t-on-click="_onMarkFailedMessageReviewed"
+                        t-att-data-message-id="messageView.message.id"
+                    >
+                        <i class="fa fa-check" />
+                        Set as Reviewed
+                    </a>
+                    <a
+                        href="#"
+                        class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_retry o_activity_link"
+                        t-on-click="_onRetryFailedMessage"
+                        t-att-data-message-id="messageView.message.id"
+                    >
+                        <i class="fa fa-retweet" />
+                        Retry
+                    </a>
+                </span>
+            </t>
+        </xpath>
+    </t>
+</templates>
