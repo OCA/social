@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [mail_outbound_static](mail_outbound_static/) | 15.0.1.0.0 |  | Allows you to configure the from header for a mail server.
 [mail_preview_base](mail_preview_base/) | 15.0.1.0.0 |  | Base to add more previewing options
 [mail_show_follower](mail_show_follower/) | 15.0.1.2.1 |  | Show CC document followers in mails.
+[mail_tracking](mail_tracking/) | 15.0.1.0.0 |  | Email tracking system for all mails sent
 
 [//]: # (end addons)
 
