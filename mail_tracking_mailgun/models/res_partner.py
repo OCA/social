@@ -32,11 +32,9 @@ class ResPartner(models.Model):
                 event.id or 0,
                 event.id or _("unknown"),
             )
-            body = _("Email has been bounced: %s\nReason: %s\nEvent: %s") % (
-                partner.email,
-                reason,
-                event_str,
-            )
+            body = _(
+                "Email has been bounced: %(email)s\nReason: %(reason)s\nEvent: %(event_str)s"
+            ) % ({"email": partner.email, "reason": reason, "event_str": event_str})
             partner.message_post(body=body)
 
     def check_email_validity(self):
