@@ -398,6 +398,9 @@ class TestMailgun(TransactionCase):
         }
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
+        # If we autocheck, the mail will be bounced
+        self.partner.with_context(mailgun_auto_check=True).check_email_validity()
+        self.assertTrue(self.partner.email_bounced)
         # Unable to fully validate
         mock_request.get.return_value.json.return_value = {
             "is_valid": True,
@@ -405,7 +408,6 @@ class TestMailgun(TransactionCase):
         }
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
-        self.assertTrue(self.partner.email_bounced)
 
     @mock.patch(_packagepath + ".models.res_partner.requests")
     def test_email_validity_exceptions(self, mock_request):
