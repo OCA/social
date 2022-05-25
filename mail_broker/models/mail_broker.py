@@ -15,7 +15,7 @@ class MailBroker(models.Model):
     webhook_key = fields.Char()
     integrated_webhook = fields.Boolean(readonly=True)
     can_set_webhook = fields.Boolean(compute="_compute_webhook_checks")
-    webhook_url = fields.Char()
+    webhook_url = fields.Char(compute="_compute_webhook_url")
     has_new_channel_security = fields.Boolean(
         help="When checked, channels are not created automatically"
     )
@@ -31,6 +31,11 @@ class MailBroker(models.Model):
             "Webhook Key must be unique",
         ),
     ]
+
+    @api.depends("webhook_key")
+    def _compute_webhook_url(self):
+        for record in self:
+            record.webhook_url = record._get_webhook_url()
 
     def _get_webhook_url(self):
         return "%s/broker/%s/update" % (
