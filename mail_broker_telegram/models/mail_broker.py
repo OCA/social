@@ -22,15 +22,17 @@ class MailBroker(models.Model):
         return telegram.Bot(self.token)
 
     def _set_webhook(self):
-        bot = self._get_telegram_bot()
-        bot.setWebhook(url=self._get_webhook_url())
+        if self.broker_type == "telegram":
+            bot = self._get_telegram_bot()
+            bot.setWebhook(url=self._get_webhook_url())
         super(MailBroker, self)._set_webhook()
 
     def _remove_webhook(self):
-        bot = self._get_telegram_bot()
-        webhookinfo = bot.get_webhook_info()
-        if webhookinfo.url:
-            bot.delete_webhook(drop_pending_updates=False)
+        if self.broker_type == "telegram":
+            bot = self._get_telegram_bot()
+            webhookinfo = bot.get_webhook_info()
+            if webhookinfo.url:
+                bot.delete_webhook(drop_pending_updates=False)
         super(MailBroker, self)._remove_webhook()
 
     def _get_channel_vals(self, token, update):
