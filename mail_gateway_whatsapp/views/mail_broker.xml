@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_broker_form_view">
+        <field name="name">mail.broker.form (in mail_broker_telegram)</field>
+        <field name="model">mail.broker</field>
+        <field name="inherit_id" ref="mail_broker.mail_broker_form_view" />
+        <field name="arch" type="xml">
+            <field name="webhook_user_id" position="after">
+                <field
+                    name="whatsapp_security_key"
+                    attrs="{'invisible': [('broker_type', '!=', 'whatsapp')]}"
+                />
+                <field
+                    name="whatsapp_from_phone"
+                    attrs="{'invisible': [('broker_type', '!=', 'whatsapp')]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
