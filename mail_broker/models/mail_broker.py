@@ -124,7 +124,7 @@ class MailBroker(models.Model):
         return result
 
     @api.model
-    def _get_broker_id(self, key):
+    def _get_broker_id(self, key, **kwargs):
         # We are using cache in order to avoid an exploit
         if not key:
             return False
@@ -155,3 +155,8 @@ class MailBroker(models.Model):
             "broker_id": self.id,
             "show_on_app": self.show_on_app,
         }
+
+    def _verify_bot(self, **kwargs):
+        self.ensure_one()
+        # TODO: PASS IT TO WHATSAPP
+        return kwargs.get("hub.challenge")
