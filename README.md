@@ -25,7 +25,7 @@ addon | version | maintainers | summary
 [mail_attach_existing_attachment_account](mail_attach_existing_attachment_account/) | 12.0.1.0.0 |  | Module to use attach existing attachment for account module
 [mail_check_mailbox_size](mail_check_mailbox_size/) | 12.0.1.0.0 | [![eLBati](https://github.com/eLBati.png?size=30px)](https://github.com/eLBati) | Send an email summarizing the current space used by a mailbox
 [mail_debrand](mail_debrand/) | 12.0.2.0.1 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Remove Odoo branding in sent emails
-[mail_drop_target](mail_drop_target/) | 12.0.1.1.1 |  | Attach emails to Odoo by dragging them from your desktop
+[mail_drop_target](mail_drop_target/) | 12.0.1.1.2 |  | Attach emails to Odoo by dragging them from your desktop
 [mail_footer_notified_partner](mail_footer_notified_partner/) | 12.0.1.0.0 |  | This module adds the list of notified partners in the footer of notification e-mails sent by Odoo.
 [mail_full_expand](mail_full_expand/) | 12.0.1.0.0 |  | Expand mail in a big window
 [mail_history](mail_history/) | 12.0.1.0.0 |  | Module to see old messages
