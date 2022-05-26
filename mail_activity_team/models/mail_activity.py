@@ -38,7 +38,7 @@ class MailActivity(models.Model):
         if self.team_id and self.user_id in self.team_id.member_ids:
             return res
         self.team_id = self.with_context(
-            default_res_model=self.res_model_id.id
+            default_res_model=self.res_model_id.model
         )._get_default_team_id(user_id=self.user_id.id)
         return res
 
