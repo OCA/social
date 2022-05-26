@@ -64,6 +64,9 @@ class ResUsers(models.Model):
             user_activities[activity["model"]][
                 "%s_count" % activity["states"]
             ] += activity["count"]
-            if activity["states"] in ("today", "overdue"):
+            if (
+                activity["states"] in ("today", "overdue")
+                and activity["user_id"] != user
+            ):
                 user_activities[activity["model"]]["total_count"] += activity["count"]
         return list(user_activities.values())
