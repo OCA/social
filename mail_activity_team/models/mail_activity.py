@@ -19,6 +19,8 @@ class MailActivity(models.Model):
             )
         return self.env["mail.activity.team"].search(domain, limit=1)
 
+    user_id = fields.Many2one(required=False)
+
     team_id = fields.Many2one(
         comodel_name="mail.activity.team", default=lambda s: s._get_default_team_id()
     )
@@ -81,3 +83,12 @@ class MailActivity(models.Model):
                         team_name=activity.team_id.name,
                     )
                 )
+
+    @api.onchange("activity_type_id")
+    def _onchange_activity_type_id(self):
+        super(MailActivity, self)._onchange_activity_type_id()
+        if self.activity_type_id.default_team_id:
+            self.team_id = self.activity_type_id.default_team_id
+            members = self.activity_type_id.default_team_id.member_ids
+            if self.user_id not in members and members:
+                self.user_id = members[:1]

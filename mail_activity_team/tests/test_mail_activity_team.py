@@ -148,6 +148,7 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(
             self.act2.team_id, self.team1, "Error: Activity 2 should have Team 1."
         )
+        self.act2.team_id = False
         self.act2._onchange_team_id()
         self.assertEqual(self.act2.user_id, self.employee)
         self.act2.team_id = self.team2
@@ -179,3 +180,51 @@ class TestMailActivityTeam(TransactionCase):
             activity_type_id=self.env.ref("mail.mail_activity_data_call").id,
         )
         self.assertEqual(activity.team_id, self.team2)
+
+    def test_schedule_activity_default_team(self):
+        """Correctly assign teams to auto scheduled activities. Those won't
+        trigger onchanges and could raise constraints and team missmatches"""
+        partner_record = self.employee.partner_id.with_user(self.employee.id)
+        self.env.ref("mail.mail_activity_data_call").default_team_id = self.team2
+        activity = partner_record.activity_schedule(
+            act_type_xmlid="mail.mail_activity_data_call", user_id=self.employee2.id,
+        )
+        self.assertEqual(activity.team_id, self.team2)
+        self.assertEqual(activity.user_id, self.employee2)
+
+    def test_schedule_activity_default_team_no_user(self):
+        """Correctly assign teams to auto scheduled activities. Those won't
+        trigger onchanges and could raise constraints and team missmatches"""
+        partner_record = self.employee.partner_id.with_user(self.employee.id)
+        self.activity2.default_team_id = self.team2
+        self.team2.member_ids = self.employee2
+        activity = partner_record.activity_schedule(activity_type_id=self.activity2.id,)
+        self.assertEqual(activity.team_id, self.team2)
+        self.assertEqual(activity.user_id, self.employee2)
+
+    def test_activity_count(self):
+        res = (
+            self.env["res.users"]
+            .with_user(self.employee.id)
+            .with_context({"team_activities": True})
+            .systray_get_activities()
+        )
+        self.assertEqual(res[0]["total_count"], 0)
+
+    def test_activity_schedule_next(self):
+        self.activity1.write(
+            {
+                "default_team_id": self.team1.id,
+                "default_next_type_id": self.activity2.id,
+                "force_next": True,
+            }
+        )
+        self.activity2.default_team_id = self.team2
+        self.team2.member_ids = self.employee2
+        partner_record = self.employee.partner_id.with_user(self.employee.id)
+        activity = partner_record.activity_schedule(activity_type_id=self.activity1.id)
+        activity.flush()
+        _messages, next_activities = activity._action_done()
+        self.assertTrue(next_activities)
+        self.assertEqual(next_activities.team_id, self.team2)
+        self.assertEqual(next_activities.user_id, self.employee2)

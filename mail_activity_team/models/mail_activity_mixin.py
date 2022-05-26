@@ -46,16 +46,35 @@ class MailActivityMixin(models.AbstractModel):
         user-team missmatch. We can hook onto `act_values` dict as it's passed
         to the create activity method.
         """
-        user_id = act_values.get("user_id")
-        if user_id:
-            team = (
-                self.env["mail.activity"]
-                .with_context(
-                    default_res_model=self._name,
+        if "team_id" not in act_values:
+            if act_type_xmlid:
+                activity_type = self.sudo().env.ref(act_type_xmlid)
+            else:
+                activity_type = (
+                    self.env["mail.activity.type"]
+                    .sudo()
+                    .browse(act_values["activity_type_id"])
                 )
-                ._get_default_team_id(user_id=user_id)
-            )
-            act_values.update({"team_id": team.id})
+            if activity_type.default_team_id:
+                act_values.update({"team_id": activity_type.default_team_id.id})
+                if (
+                    not act_values.get("user_id")
+                    and activity_type.default_team_id.member_ids
+                ):
+                    act_values.update(
+                        {"user_id": activity_type.default_team_id.member_ids[:1].id}
+                    )
+            else:
+                user_id = act_values.get("user_id")
+                if user_id:
+                    team = (
+                        self.env["mail.activity"]
+                        .with_context(default_res_model=self._name,)
+                        ._get_default_team_id(user_id=user_id)
+                    )
+                    # Even if it comes empty, we don't want to mismatch the user's team
+                    if team:
+                        act_values.update({"team_id": team.id})
         return super().activity_schedule(
             act_type_xmlid=act_type_xmlid,
             date_deadline=date_deadline,
