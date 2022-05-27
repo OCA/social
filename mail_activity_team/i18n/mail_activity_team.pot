@@ -41,6 +41,11 @@ msgid "Activity Teams"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_mail_activity_type
+msgid "Activity Type"
+msgstr ""
+
+#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Assign to missing activities"
 msgstr ""
@@ -58,6 +63,11 @@ msgstr ""
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__create_date
 msgid "Created on"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_type__default_team_id
+msgid "Default Team"
 msgstr ""
 
 #. module: mail_activity_team
