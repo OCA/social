@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="mail_activity_type_view_form" model="ir.ui.view">
+        <field name="name">mail.activity.type.view.form</field>
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//p[@role='alert']" position="before">
+                <group
+                    name="activity_auto"
+                    string="Automation"
+                    groups="base.group_system"
+                >
+                    <field name="auto" />
+                    <field name="auto_action_ids" nolabel="1" colspan="2" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
