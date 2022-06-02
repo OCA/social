@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2022 Camptocamp SA (https://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@camptocamp.com>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <template id="mail_layout_custom">
+        <table
+            border="0"
+            cellpadding="0"
+            cellspacing="0"
+            style="padding-top: 32px; background-color: red; width: 100%; border-collapse:separate;"
+        >
+            <tr>
+                <td align="center">
+                    <table
+                        border="0"
+                        cellpadding="0"
+                        cellspacing="0"
+                        width="590"
+                        style="padding: 24px; background-color: white; border-collapse:separate;"
+                    >
+                        <tbody>
+                            <!-- HEADER -->
+                            <tr>
+                                <td align="center" style="min-width: 590px;">
+                                    <table
+                                        border="0"
+                                        cellpadding="0"
+                                        cellspacing="0"
+                                        width="100%"
+                                        style="background-color: white; padding: 0; border-collapse:separate;"
+                                    >
+                                        <tr>
+                                            <td valign="middle">
+                                                <t
+                                                    t-esc="model_description or 'document'"
+                                                />
+                                                <t
+                                                    t-esc="message.record_name and message.record_name.replace('/','-') or ''"
+                                                />
+                                            </td>
+                                            <td valign="middle" align="right">
+                                                <img
+                                                    t-att-src="'/logo.png?company=%s' % (company.id or 0)"
+                                                    style="padding: 0px; margin: 0px; height: 48px;"
+                                                    t-att-alt="'%s' % company.name"
+                                                />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="text-align:center;">
+                                                <hr
+                                                    width="100%"
+                                                    style="background-color: red; border: medium none; clear: both; display: block; margin:4px 0px 32px 0px;"
+                                                />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                            <!-- CONTENT -->
+                            <tr>
+                                <td style="min-width: 590px;">
+                                    <t t-raw="message.body" />
+                                </td>
+                            </tr>
+                            <!-- FOOTER -->
+                            <tr>
+                                <td
+                                    align="center"
+                                    style="min-width: 590px; padding: 0 8px 0 8px; font-size:11px;"
+                                >
+                                    <hr
+                                        width="100%"
+                                        style="background-color: red; border: medium none; clear: both; display: block; margin:4px 0px 32px 0px;"
+                                    />
+                                    <div style="color: #FF9999;">
+                                    <b t-esc="company.name" /><br />
+                                        <t t-esc="company.name" />
+                                        <t t-if="company.phone">
+                                            ::
+                                            <t t-esc="company.phone" />
+                                        </t>
+                                        <t t-if="company.email">
+                                            ::
+                                            <a
+                                                t-att-href="'mailto:%s' % company.email"
+                                                style="text-decoration:none;color:red;"
+                                            >
+                                                <t t-esc="company.email" />
+                                            </a>
+                                        </t>
+                                        <t t-if="company.website">
+                                            ::
+                                            <a
+                                                t-att-href="'%s' % company.website"
+                                                style="text-decoration:none;color:red;"
+                                            >
+                                                <t t-esc="company.website" />
+                                            </a>
+                                        </t>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </table>
+    </template>
+
+</odoo>
