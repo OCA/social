@@ -1,5 +1,6 @@
 # Copyright 2021 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from odoo.tests import TransactionCase
 
 
@@ -9,6 +10,7 @@ class TestMessageReply(TransactionCase):
         self.assertFalse(
             partner.message_ids.filtered(lambda r: r.message_type != "notification")
         )
+        # pylint: disable=C8107
         message = partner.message_post(body="demo message", message_type="email")
         partner.refresh()
         self.assertIn(

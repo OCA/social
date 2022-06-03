@@ -5,11 +5,11 @@
     "name": "Mail Message Reply",
     "summary": """
         Make a reply using a message""",
-    "version": "12.0.1.0.0",
+    "version": "13.0.1.0.0",
     "license": "AGPL-3",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "depends": ["mail"],
-    "qweb": ["static/src/xml/mail_message_reply.xml",],
-    "data": ["templates/assets.xml", "data/reply_template.xml",],
+    "qweb": ["static/src/xml/mail_message_reply.xml"],
+    "data": ["templates/assets.xml", "data/reply_template.xml"],
 }
