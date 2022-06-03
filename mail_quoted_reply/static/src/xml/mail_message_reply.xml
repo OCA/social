@@ -1,12 +1,17 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!-- Copyright 2021 Creu Blanca
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <template>
     <t t-extend="mail.widget.Thread.Message">
         <t t-jquery=".o_thread_message_reply" t-operation="after">
-            <i t-if="message.isLinkedToDocumentThread() and !options.displayReplyIcons and !message.isSystemNotification()"
-               class="fa fa-reply o_thread_icon o_thread_mail_message_reply"
-               t-att-data-message-id="message.getID()" title="Reply" role="img" aria-label="Reply"/>
+            <i
+                t-if="message.isLinkedToDocumentThread() and !options.displayReplyIcons and !message.isSystemNotification()"
+                class="fa fa-reply o_thread_icon o_thread_mail_message_reply"
+                t-att-data-message-id="message.getID()"
+                title="Reply"
+                role="img"
+                aria-label="Reply"
+            />
         </t>
     </t>
 </template>
