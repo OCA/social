@@ -3,9 +3,11 @@
     <record id="reply_template" model="mail.template">
         <field name="name">Reply</field>
         <field name="subject">Re: ${object.subject}</field>
-        <field name="use_default_to" eval="True"/>
-        <field name="model_id" ref="mail.model_mail_message"/>
-        <field name="body_html"><![CDATA[
+        <field name="use_default_to" eval="True" />
+        <field name="model_id" ref="mail.model_mail_message" />
+        <field
+            name="body_html"
+        ><![CDATA[
             <div>
             </div>
             <br/>
