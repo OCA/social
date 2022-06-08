@@ -38,7 +38,7 @@ class TestMailDebrandDigest(common.TransactionCase):
             "digest.digest_mail_main",
             "digest.digest",
             self.mail_digest_id.ids,
-            engine="qweb",
+            engine="qweb_view",
             add_context={
                 "title": self.mail_digest_id.name,
                 "top_button_label": _("Connect"),
@@ -48,13 +48,13 @@ class TestMailDebrandDigest(common.TransactionCase):
                 "tips_count": 1,
                 "formatted_date": datetime.today().strftime("%B %d, %Y"),
                 "display_mobile_banner": True,
-                "kpi_data": self.mail_digest_id.compute_kpis(
+                "kpi_data": self.mail_digest_id._compute_kpis(
                     self.env.user.company_id, self.env.user
                 ),
-                "tips": self.mail_digest_id.compute_tips(
+                "tips": self.mail_digest_id._compute_tips(
                     self.env.user.company_id, self.env.user, tips_count=1, consumed=True
                 ),
-                "preferences": self.mail_digest_id.compute_preferences(
+                "preferences": self.mail_digest_id._compute_preferences(
                     self.env.user.company_id, self.env.user
                 ),
             },
