@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
+    <t t-extend="mail.widget.Thread.Message">
+        <t t-jquery=".o_mail_info" t-operation="append">
+            <span
+                t-if="message.broker_type"
+                class="o_thread_tooltip_broker_container"
+            />
+        </t>
+    </t>
     <t t-name="mail_broker.broker">
         <div class="o_mail_discuss">
             <div class="o_mail_discuss_sidebar" />

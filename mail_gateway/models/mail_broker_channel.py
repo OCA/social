@@ -76,6 +76,7 @@ class MailBrokerChannel(models.Model):
             "subtype_id": subtype_id,
             "model": self._name,
             "res_id": self.id,
+            "broker_type": self.broker_id.broker_type,
         }
         if kwargs.get("author_id", False):
             vals["author_id"] = kwargs["author_id"]
