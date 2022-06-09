@@ -39,10 +39,13 @@ class MailMessage(models.Model):
                 message_dict.update(
                     {
                         "broker_channel_id": message.broker_channel_id.id,
+                        "broker_type": message.broker_type,
                         "broker_unread": message.broker_unread,
-                        "customer_status": "received"
+                        "customer_status": "sent"
+                        if all(d.state == "sent" for d in notifications)
+                        else "received"
                         if all(d.state == "received" for d in notifications)
-                        else message_dict.get("customer_status", False),
+                        else message_dict.get("customer_status", "error"),
                     }
                 )
         return result
