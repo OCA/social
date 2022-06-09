@@ -1,6 +1,5 @@
 # Copyright 2020 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 from odoo import api, fields, models, tools
 
 
@@ -38,7 +37,7 @@ class MailBroker(models.Model):
             record.webhook_url = record._get_webhook_url()
 
     def _get_webhook_url(self):
-        return "%s/broker/%s/update" % (
+        return "%s/broker/broker/%s/update" % (
             self.webhook_url
             or self.env["ir.config_parameter"].get_param("web.base.url"),
             self.webhook_key,
@@ -158,5 +157,4 @@ class MailBroker(models.Model):
 
     def _verify_bot(self, **kwargs):
         self.ensure_one()
-        # TODO: PASS IT TO WHATSAPP
-        return kwargs.get("hub.challenge")
+        return ""
