@@ -15,32 +15,33 @@
                             string="Integrate Webhook"
                             icon="fa-plug"
                             name="set_webhook"
-                            attrs="{'invisible': ['|', ('can_set_webhook', '=', False), ('integrated_webhook', '=', True)]}"
+                            attrs="{'invisible': ['|', ('can_set_webhook', '=', False), ('integrated_webhook_state', '!=', False)]}"
                         />
                         <button
                             type="object"
                             string="Update Webhook"
                             name="update_webhook"
                             icon="fa-refresh"
-                            attrs="{'invisible': ['|', ('can_set_webhook', '=', False), ('integrated_webhook', '=', False)]}"
+                            attrs="{'invisible': ['|', ('can_set_webhook', '=', False), ('integrated_webhook_state', '!=', 'integrated')]}"
                         />
                         <button
                             type="object"
                             string="Remove Webhook"
                             name="remove_webhook"
                             icon="fa-remove"
-                            attrs="{'invisible': [('integrated_webhook', '=', False)]}"
+                            attrs="{'invisible': [('integrated_webhook_state', '=', False)]}"
                         />
                     </div>
                     <field name="can_set_webhook" invisible="1" />
-                    <field name="integrated_webhook" invisible="1" />
                     <group>
                         <field name="name" />
                         <field name="show_on_app" />
                         <field name="token" />
                         <field name="broker_type" />
+                        <field name="integrated_webhook_state" />
                         <field name="webhook_url" groups="base.group_no_one" />
                         <field name="webhook_key" />
+                        <field name="webhook_secret" />
                         <field name="webhook_user_id" />
                         <field name="has_new_channel_security" />
                     </group>
