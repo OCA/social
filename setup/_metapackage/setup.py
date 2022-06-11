@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo13-addon-mail_partner_opt_out',
         'odoo13-addon-mail_preview_audio',
         'odoo13-addon-mail_preview_base',
+        'odoo13-addon-mail_quoted_reply',
         'odoo13-addon-mail_restrict_follower_selection',
         'odoo13-addon-mail_template_multi_attachment',
         'odoo13-addon-mail_tracking',
