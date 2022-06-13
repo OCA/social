@@ -58,9 +58,7 @@ class MailActivityMixin(models.AbstractModel):
                         )
                         ._get_default_team_id(user_id=user_id)
                     )
-                    # Even if it comes empty, we don't want to mismatch the user's team
-                    if team:
-                        act_values.update({"team_id": team.id})
+                    act_values.update({"team_id": team.id})
         return super().activity_schedule(
             act_type_xmlid=act_type_xmlid,
             date_deadline=date_deadline,
