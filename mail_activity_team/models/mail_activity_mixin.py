@@ -69,7 +69,9 @@ class MailActivityMixin(models.AbstractModel):
                 if user_id:
                     team = (
                         self.env["mail.activity"]
-                        .with_context(default_res_model=self._name,)
+                        .with_context(
+                            default_res_model=self._name,
+                        )
                         ._get_default_team_id(user_id=user_id)
                     )
                     act_values.update({"team_id": team.id})
