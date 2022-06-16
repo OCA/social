@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+  <template
+        id="message_notification_email"
+        inherit_id="mail.message_notification_email"
+    >
+    <xpath expr="//div[@t-if='signature']" position="after">
+
+      <t
+                t-set="message_history"
+                t-value="message._get_notification_message_history()"
+            />
+      <t t-if="message_history">
+        <p class="message_history_title">Discussion history in Odoo:</p>
+        <ul>
+          <t t-foreach="message_history" t-as="msg">
+            <li class="message_history_item">
+            <p><t t-esc="msg.author_id.name or 'unknown'" /> commented on <span
+                                    t-field="msg.date"
+                                /></p>
+            <div t-raw="msg.body" />
+            </li>
+          </t>
+        </ul>
+      </t>
+
+    </xpath>
+  </template>
+
+</odoo>
