@@ -5,12 +5,10 @@ class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
     show_internal_users_cc = fields.Boolean(
-        related="company_id.show_internal_users_cc",
-        readonly=False,
+        related="company_id.show_internal_users_cc", readonly=False,
     )
     show_followers_message_sent_to = fields.Text(
-        related="company_id.show_followers_message_sent_to",
-        readonly=False,
+        related="company_id.show_followers_message_sent_to", readonly=False,
     )
     show_followers_partner_format = fields.Char(
         related="company_id.show_followers_partner_format",
@@ -21,13 +19,10 @@ class ResConfigSettings(models.TransientModel):
         "%(partner_email_domain)s = Partner Email Domain",
     )
     show_followers_message_response_warning = fields.Text(
-        related="company_id.show_followers_message_response_warning",
-        readonly=False,
+        related="company_id.show_followers_message_response_warning", readonly=False,
     )
     show_followers_message_preview = fields.Html(
-        string="Message preview",
-        readonly=True,
-        store=False,
+        string="Message preview", readonly=True, store=False,
     )
 
     @api.onchange(

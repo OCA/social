@@ -58,9 +58,7 @@ class MailMail(models.Model):
         for mail_id in self.ids:
             mail = self.browse(mail_id)
             message_recipients = self.search(
-                [
-                    ("message_id", "=", mail.message_id),
-                ]
+                [("message_id", "=", mail.message_id)]
             ).mapped("recipient_ids")
             # if the email has a model, id and it belongs to the portal group
             if mail.model and mail.res_id and group_portal:
