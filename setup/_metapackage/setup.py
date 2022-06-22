@@ -31,6 +31,7 @@ setuptools.setup(
         'odoo14-addon-mail_partner_opt_out',
         'odoo14-addon-mail_preview_audio',
         'odoo14-addon-mail_preview_base',
+        'odoo14-addon-mail_quoted_reply',
         'odoo14-addon-mail_restrict_follower_selection',
         'odoo14-addon-mail_restrict_send_button',
         'odoo14-addon-mail_send_copy',
