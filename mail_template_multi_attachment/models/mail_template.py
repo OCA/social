@@ -14,7 +14,7 @@ class MailTemplate(models.Model):
     )
 
     # pylint: disable=redefined-outer-name
-    def generate_email(self, res_ids, fields=None):
+    def generate_email(self, res_ids, fields):
         """
         Inherit to generate attachments.
         Inspired from original mail.template,generate_email(...) from Odoo.
@@ -30,21 +30,25 @@ class MailTemplate(models.Model):
         if isinstance(res_ids, int):
             multi_mode = False
             results = {res_ids: results}
+        self.generate_attachments(results)
+        return multi_mode and results or results[res_ids]
+
+    def generate_attachments(self, results):
         # Generate attachments (inspired from Odoo); Just add new attachments
         # into 'attachments' key
         for res_id, values in results.items():
             attachments = values.setdefault("attachments", [])
             for template_report in self.template_report_ids:
                 report_name = self._render_template(
-                    template_report.report_name, template_report.model, res_id
-                )
+                    template_report.report_name, template_report.model, [res_id]
+                )[res_id]
                 report = template_report.report_template_id
                 report_service = report.report_name
 
                 if report.report_type in ["qweb-html", "qweb-pdf"]:
-                    result, report_format = report.render_qweb_pdf([res_id])
+                    result, report_format = report._render_qweb_pdf([res_id])
                 else:
-                    res = report.render([res_id])
+                    res = report._render([res_id])
                     if not res:
                         raise exceptions.UserError(
                             _("Unsupported report type %s found.") % report.report_type
@@ -57,4 +61,3 @@ class MailTemplate(models.Model):
                 if not report_name.endswith(ext):
                     report_name += ext
                 attachments.append((report_name, result))
-        return multi_mode and results or results[res_ids]

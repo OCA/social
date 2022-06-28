@@ -23,7 +23,6 @@ class TestMailTemplate(SavepointCase):
             "subject": "About ${object.name}",
             "body_html": "<p>Hello ${object.name}</p>",
             "model_id": cls.env["ir.model"]._get(cls.report1.model).id,
-            "user_signature": False,
             "report_template": cls.report1.id,
             "report_name": "Report 1",
             "template_report_ids": [
@@ -43,7 +42,7 @@ class TestMailTemplate(SavepointCase):
         of this module.
         :return:
         """
-        results = self.mail_template.generate_email(self.partner.id)
+        results = self.mail_template.generate_email(self.partner.id, ["body_html"])
         self.assertEqual(2, len(results.get("attachments")))
 
     def test_multi_generation2(self):
@@ -53,7 +52,7 @@ class TestMailTemplate(SavepointCase):
         :return:
         """
         self.mail_template.write({"template_report_ids": [(6, False, [])]})
-        results = self.mail_template.generate_email(self.partner.id)
+        results = self.mail_template.generate_email(self.partner.id, ["body_html"])
         self.assertEqual(1, len(results.get("attachments")))
 
     def test_multi_generation3(self):
@@ -63,5 +62,5 @@ class TestMailTemplate(SavepointCase):
         :return:
         """
         self.mail_template.write({"report_template": False, "report_name": False})
-        results = self.mail_template.generate_email(self.partner.id)
+        results = self.mail_template.generate_email(self.partner.id, ["body_html"])
         self.assertEqual(1, len(results.get("attachments")))
