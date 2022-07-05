@@ -17,6 +17,16 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid "<i title=\"date\" class=\"fa fa-clock-o\"/>"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid "<span><i title=\"date\" class=\"fa fa-clock-o\"/></span>"
+msgstr ""
+
+#. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Act. next 6 months"
 msgstr "Act. próximos 6 meses"
@@ -28,7 +38,7 @@ msgstr "Act. próximo mes"
 
 #. module: mail_activity_board
 #. openerp-web
-#: code:addons/mail_activity_board/static/src/xml/inherit_chatter.xml:0
+#: code:addons/mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml:0
 #: model:ir.actions.act_window,name:mail_activity_board.open_boards_activities
 #: model:ir.ui.menu,name:mail_activity_board.board_menu_activities
 #, python-format
@@ -57,6 +67,11 @@ msgid "Attendees"
 msgstr "Asistentes"
 
 #. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__related_model_instance
+msgid "Document"
+msgstr ""
+
+#. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__duration
 msgid "Duration"
 msgstr "Duración"
@@ -71,13 +86,6 @@ msgstr "Registrar una nota..."
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Origin"
 msgstr "Origen"
-
-#. module: mail_activity_board
-#. openerp-web
-#: code:addons/mail_activity_board/static/src/xml/inherit_chatter.xml:0
-#, python-format
-msgid "See activities list"
-msgstr "Ver lista de actividades"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
@@ -97,7 +105,8 @@ msgstr "Inicio"
 #. module: mail_activity_board
 #: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start date of an event, without time for full days events"
-msgstr "Fecha de inicio de un evento, sin tiempo para eventos de días completos"
+msgstr ""
+"Fecha de inicio de un evento, sin tiempo para eventos de días completos"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
@@ -113,3 +122,6 @@ msgstr "Usuario"
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "e.g. Discuss proposal"
 msgstr "Ej. Discutir propuesta"
+
+#~ msgid "See activities list"
+#~ msgstr "Ver lista de actividades"
