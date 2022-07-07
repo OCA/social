@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <template
+            id="assets_backend"
+            name="activity assets"
+            inherit_id="web.assets_backend"
+        >
+            <xpath expr="." position="inside">
+                <script
+                    type="text/javascript"
+                    src="mail_send_error_activity/static/src/models/messaging_notification_handler/messaging_notification_handler.js"
+                />
+            </xpath>
+        </template>
+    </data>
+</odoo>

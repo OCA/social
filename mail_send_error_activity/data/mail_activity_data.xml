@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="mail_activity_data_mail_send_error" model="mail.activity.type">
+        <field name="name">Mail send error</field>
+        <field name="icon">fa-exclamation-triangle</field>
+        <field name="delay_count">0</field>
+        <field name="summary">Error while sending mail</field>
+        <field name="category">default</field>
+        <field name="active">False</field>
+    </record>
+</odoo>
