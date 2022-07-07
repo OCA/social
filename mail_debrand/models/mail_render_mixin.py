@@ -56,7 +56,7 @@ class MailRenderMixin(models.AbstractModel):
         template_src,
         model,
         res_ids,
-        engine="qweb_view",
+        engine="inline_template",
         add_context=None,
         options=None,
         post_process=False,
