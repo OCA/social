@@ -28,8 +28,8 @@ class TestMailAutosubscribe(TransactionCase):
             {
                 "model_id": cls.fake_order_model.id,
                 "name": "Fake Order: Send by Mail",
-                "subject": "Fake Order: ${object.partner_id.name}",
-                "partner_to": "${object.partner_id.id}",
+                "subject": "Fake Order: {{object.partner_id.name}}",
+                "partner_to": "{{object.partner_id.id}}",
                 "body_html": "Hello, this is a fake order",
             }
         )
@@ -111,7 +111,7 @@ class TestMailAutosubscribe(TransactionCase):
                 default_composition_mode="comment",
             )
         )
-        composer.save().send_mail()
+        composer.save().action_send_mail()
         message = self.order.message_ids[0]
         self.assertEqual(message.partner_ids, self.partner_2 | self.partner_3)
 
@@ -127,6 +127,6 @@ class TestMailAutosubscribe(TransactionCase):
                 default_composition_mode="comment",
             )
         )
-        composer.save().send_mail()
+        composer.save().action_send_mail()
         message = self.order.message_ids[0]
         self.assertEqual(message.partner_ids, self.partner_2)
