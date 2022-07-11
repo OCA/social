@@ -24,7 +24,7 @@ class MailBroker(models.Model):
     def _get_channel_vals(self, token, update):
         result = super(MailBroker, self)._get_channel_vals(token, update)
         if self.broker_type == "whatsapp" and not result.get("name"):
-            for contact in update["contacts"]:
+            for contact in update.get("contacts"):
                 if contact["wa_id"] == token:
                     result["name"] = contact["profile"]["name"]
                     continue
