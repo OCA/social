@@ -22,6 +22,23 @@ class MailRenderMixin(models.AbstractModel):
         if type(value) is bytes:
             value = value.decode()
         has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
+        extra_regex_to_skip = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mail_debrand.extra_regex_to_skip", "False")
+        )
+        # value is required field on ir config_parameter, so we have added
+        # safety check for "False"
+        if (
+            has_odoo_link
+            and extra_regex_to_skip
+            and extra_regex_to_skip.strip().lower() != "false"
+        ):
+            # check each regex to be skipped
+            for regex in extra_regex_to_skip.split(","):
+                if re.search(r"{}".format(regex), value, flags=re.IGNORECASE):
+                    has_odoo_link = False
+                    break
         if has_odoo_link:
             # We don't want to change what was explicitly added in the message body,
             # so we will only change what is before and after it.
