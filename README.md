@@ -36,6 +36,7 @@ addon | version | maintainers | summary
 [mail_filter_adressee_by_contact](mail_filter_adressee_by_contact/) | 14.0.1.1.0 | [![Kev-Roche](https://github.com/Kev-Roche.png?size=30px)](https://github.com/Kev-Roche) | Adresses filter by partner contacts and users
 [mail_full_expand](mail_full_expand/) | 14.0.1.0.0 |  | Expand mail in a big window
 [mail_inline_css](mail_inline_css/) | 14.0.1.0.0 |  | Convert style tags in inline style in your mails
+[mail_layout_force](mail_layout_force/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Force a mail layout on selected email templates
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.1 |  | Preview email templates in the browser
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 14.0.1.0.0 | [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Apply a custom subject to mail notifications
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 14.0.1.0.0 |  | Choose to notify followers on mail.compose.message
