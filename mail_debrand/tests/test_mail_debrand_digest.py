@@ -68,3 +68,4 @@ class TestMailDebrandDigest(common.TransactionCase):
         self.assertNotEqual(rendered_body, None)
         self.assertNotEqual(rendered_body, False)
         self.assertNotEqual(rendered_body, "")
+        self.assertNotIn("Powered by", rendered_body)
