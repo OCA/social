@@ -6,8 +6,9 @@
 import re
 
 from lxml import etree, html
+from markupsafe import Markup
 
-from odoo import api, models
+from odoo import api, models, tools
 
 
 class MailRenderMixin(models.AbstractModel):
@@ -20,9 +21,15 @@ class MailRenderMixin(models.AbstractModel):
             return value
         # value can be bytes type; ensure we get a proper string
         if type(value) is bytes:
+            back_to_bytes = True
             value = value.decode()
+        else:
+            back_to_bytes = False
+        has_dev_odoo_link = re.search(
+            r"<a\s(.*)dev\.odoo\.com", value, flags=re.IGNORECASE
+        )
         has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
-        if has_odoo_link:
+        if has_odoo_link and not has_dev_odoo_link:
             # We don't want to change what was explicitly added in the message body,
             # so we will only change what is before and after it.
             if to_keep:
@@ -35,11 +42,12 @@ class MailRenderMixin(models.AbstractModel):
                 if remove_before and not remove_parent and previous is not None:
                     # remove 'using' that is before <a and after </span>
                     previous.tail = ""
-                if remove_parent and len(parent.getparent()):
+                if remove_parent and parent.getparent() is not None:
                     # anchor <a href odoo has a parent powered by that must be removed
                     parent.getparent().remove(parent)
                 else:
-                    if parent.tag == "td":  # also here can be powered by
+                    # also here can be powered by
+                    if parent.tag == "td" and parent.getparent():
                         parent.getparent().remove(parent)
                     else:
                         parent.remove(elem)
@@ -48,6 +56,8 @@ class MailRenderMixin(models.AbstractModel):
             )
             if to_keep:
                 value = value.replace("<body_msg></body_msg>", to_keep)
+        if back_to_bytes:
+            value = value.encode()
         return value
 
     @api.model
@@ -82,6 +92,7 @@ class MailRenderMixin(models.AbstractModel):
             res_ids,
             engine=engine,
             add_context=add_context,
+            options=options,
             post_process=post_process,
         )
 
@@ -91,8 +102,15 @@ class MailRenderMixin(models.AbstractModel):
         return orginal_rendered
 
     def _replace_local_links(self, html, base_url=None):
-        message = super()._replace_local_links(html)
+        message = super()._replace_local_links(html, base_url=base_url)
+
+        wrapper = Markup if isinstance(message, Markup) else str
+        message = tools.ustr(message)
+        if isinstance(message, Markup):
+            wrapper = Markup
+
         message = re.sub(
             r"""(Powered by\s(.*)Odoo</a>)""", "<div>&nbsp;</div>", message
         )
-        return message
+
+        return wrapper(message)
