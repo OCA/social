@@ -26,12 +26,16 @@ msgstr ""
 #. module: base_search_mail_content
 #: code:addons/base_search_mail_content/models/mail_thread.py:0
 #: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_event_event__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_event_registration__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_cc__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_phone__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mailing_contact__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mailing_mailing__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_phone_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_users__message_content
@@ -41,12 +45,16 @@ msgstr ""
 
 #. module: base_search_mail_content
 #: model:ir.model.fields,help:base_search_mail_content.field_calendar_event__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_event_event__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_event_registration__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_cc__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_phone__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mailing_contact__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mailing_mailing__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_phone_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_users__message_content

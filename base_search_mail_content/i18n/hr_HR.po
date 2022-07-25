@@ -21,12 +21,6 @@ msgstr ""
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__display_name
-#: model:ir.model.fields,field_description:base_search_mail_content.field_trgm_index__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: base_search_mail_content
 #: model:ir.model,name:base_search_mail_content.model_mail_thread
 msgid "Email Thread"
 msgstr ""
@@ -37,25 +31,7 @@ msgid "Field"
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__id
-#: model:ir.model.fields,field_description:base_search_mail_content.field_trgm_index__id
-msgid "ID"
-msgstr ""
-
-#. module: base_search_mail_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread____last_update
-#: model:ir.model.fields,field_description:base_search_mail_content.field_trgm_index____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: base_search_mail_content
 #: code:addons/base_search_mail_content/models/mail_thread.py:0
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_analytic_account__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_bank_statement__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_bank_statement_line__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_journal__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_move__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_payment__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_event_event__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_event_registration__message_content
@@ -68,8 +44,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mailing_contact__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mailing_mailing__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_phone_blacklist__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_product_product__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_product_template__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_users__message_content
 #, python-format
@@ -77,12 +51,6 @@ msgid "Message Content"
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_analytic_account__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_bank_statement__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_bank_statement_line__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_journal__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_move__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_payment__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_calendar_event__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_event_event__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_event_registration__message_content
@@ -95,8 +63,6 @@ msgstr ""
 #: model:ir.model.fields,help:base_search_mail_content.field_mailing_contact__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mailing_mailing__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_phone_blacklist__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_product_product__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_product_template__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_users__message_content
 msgid "Message content, to be used only in searches"
