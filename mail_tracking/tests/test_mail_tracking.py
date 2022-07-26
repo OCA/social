@@ -158,6 +158,37 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(tracking_email.error_type, "no_recipient")
         self.assertFalse(self.recipient.email_bounced)
 
+    def test_message_post_show_aliases(self):
+        # Create message with show aliases setup
+        self.env.company.mail_tracking_show_aliases = True
+        # Setup catchall domain
+        IrConfigParamObj = self.env["ir.config_parameter"].sudo()
+        IrConfigParamObj.set_param("mail.catchall.domain", "test.com")
+        # pylint: disable=C8107
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": self.recipient.id,
+                "partner_ids": [(4, self.recipient.id)],
+                "email_cc": "Dominique Pinon <unnamed@test.com>, customer-invoices@test.com",
+                "body": "<p>This is another test message</p>",
+            }
+        )
+        message._moderate_accept()
+        message_dict, *_ = message.message_format()
+        self.assertTrue(
+            any(
+                [
+                    tracking["recipient"] == "customer-invoices@test.com"
+                    for tracking in message_dict["partner_trackings"]
+                ]
+            )
+        )
+
     def _check_partner_trackings_cc(self, message):
         message_dict = message.message_format()[0]
         self.assertEqual(len(message_dict["partner_trackings"]), 3)
