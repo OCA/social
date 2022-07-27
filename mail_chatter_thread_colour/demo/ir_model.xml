@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record model="ir.model" id="base.model_res_partner">
+       <field name="thread_colour">#3af29c</field>
+    </record>
+
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="ir_model_form_view">
+        <field name="name">ir.model.form (in mail_chatter_thread_colour)</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="mail.model_form_view" />
+        <field name="arch" type="xml">
+            <field name="is_mail_thread" position="after">
+                <field
+                    name="thread_colour"
+                    attrs="{'invisible': [('is_mail_thread','!=', True)]}"
+                    groups="base.group_no_one"
+                    widget="color"
+                />
+                <field
+                    name="thread_font_colour"
+                    attrs="{'invisible': [('is_mail_thread','!=', True)]}"
+                    groups="base.group_no_one"
+                    widget="color"
+                />
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-extend="mail.ThreadWindow">
+        <t t-jquery=".o_thread_window_header" t-operation="attributes">
+            <attribute
+                name="t-att-data-thread-model"
+                value="widget.hasThread() &amp;&amp; widget._thread.getType() === 'document_thread'? widget._thread.getDocumentModel() : 'chat' "
+            />
+        </t>
+    </t>
+</templates>
