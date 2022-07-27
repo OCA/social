@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="res_config_settings_form_view">
+        <field
+            name="name"
+        >res.config.settings.form (in mail_chatter_thread_colour)</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mail.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='external_email_server_default']/../.."
+                position="after"
+            >
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    title="Define base colour for record model threads"
+                >
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <label for="thread_colour" />
+                        <div class="text-muted" id="thread_colour">
+                            Select the base colour used for all model threads. Each model might have an specific colour if required.
+                        </div>
+                        <field name="thread_colour" widget="color" />
+                        <label for="thread_font_colour" />
+                        <div class="text-muted" id="thread_font_colour">
+                            Select the base font colour used for all model threads. Each model might have an specific font colour if required.
+                        </div>
+                        <field name="thread_font_colour" widget="color" />
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+
+
+</odoo>
