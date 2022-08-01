@@ -9,4 +9,3 @@
    * Iván Todorovich <ivan.todorovich@gmail.com>
 * `Dynapps N.V. <https://www.dynapps.be>`_:
    * Xander De Jaegere
-
