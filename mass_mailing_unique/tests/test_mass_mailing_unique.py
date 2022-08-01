@@ -5,13 +5,14 @@
 from psycopg2 import IntegrityError
 
 from odoo.exceptions import ValidationError
-from odoo.tests import common
+from odoo.tests import common, tagged
 from odoo.tools import mute_logger
 
 from ..hooks import pre_init_hook
 
 
-class TestMassMailingUnique(common.SavepointCase):
+@tagged("post_install", "-at_install")
+class TestMassMailingUnique(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
