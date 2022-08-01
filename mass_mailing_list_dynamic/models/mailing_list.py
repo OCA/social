@@ -65,7 +65,7 @@ class MassMailingList(models.Model):
             Contact.create(vals_list)
             one.is_synced = True
         # Invalidate cached contact count
-        self.invalidate_cache(["contact_nbr"], dynamic.ids)
+        self.invalidate_cache(["contact_count"], dynamic.ids)
 
     @api.onchange("dynamic", "sync_method", "sync_domain")
     def _onchange_dynamic(self):
