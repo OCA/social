@@ -64,12 +64,12 @@
                     />
                 </group>
             </xpath>
-            <field name="contact_nbr" position="attributes">
+            <field name="contact_count" position="attributes">
                 <attribute name="attrs">
                     {'invisible': [('is_synced', '=', False)]}
                 </attribute>
             </field>
-            <field name="contact_nbr" position="after">
+            <field name="contact_count" position="after">
                 <span attrs="{'invisible': [('is_synced', '=', True)]}">
                     <strong>???</strong>
                 </span>

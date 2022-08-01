@@ -5,12 +5,11 @@
 from mock import patch
 
 from odoo.exceptions import ValidationError
-from odoo.tests import common
+from odoo.tests import common, tagged
 
 
-class DynamicListCase(common.SavepointCase):
-    post_install = True
-
+@tagged("post_install", "-at_install")
+class DynamicListCase(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -53,12 +52,12 @@ class DynamicListCase(common.SavepointCase):
             {"list_ids": [(4, self.list.id)], "partner_id": self.partners[0].id}
         )
         self.list.flush()
-        self.assertEqual(self.list.contact_nbr, 1)
+        self.assertEqual(self.list.contact_count, 1)
         # Set list as add-synced
         self.list.dynamic = True
         self.list.action_sync()
         self.list.flush()
-        self.assertEqual(self.list.contact_nbr, 4)
+        self.assertEqual(self.list.contact_count, 4)
         self.assertTrue(contact0.exists())
         # Set list as full-synced
         self.list.sync_method = "full"
@@ -70,7 +69,7 @@ class DynamicListCase(common.SavepointCase):
         ).unlink()
         self.list.action_sync()
         self.list.flush()
-        self.assertEqual(self.list.contact_nbr, 3)
+        self.assertEqual(self.list.contact_count, 3)
         self.assertFalse(contact0.exists())
         # Cannot add or edit contacts in fully synced lists
         with self.assertRaises(ValidationError):
@@ -95,7 +94,7 @@ class DynamicListCase(common.SavepointCase):
         """Check that list in synced when sending a mass mailing."""
         self.list.action_sync()
         self.list.flush()
-        self.assertEqual(self.list.contact_nbr, 5)
+        self.assertEqual(self.list.contact_count, 5)
         # Create a new partner
         self.partners.create(
             {
@@ -109,7 +108,7 @@ class DynamicListCase(common.SavepointCase):
             self.mail.action_send_mail()
             self.assertEqual(1, s.call_count)
         self.list.flush()
-        self.assertEqual(6, self.list.contact_nbr)
+        self.assertEqual(6, self.list.contact_count)
 
     def test_load_filter(self):
         domain = "[('id', '=', 1)]"
