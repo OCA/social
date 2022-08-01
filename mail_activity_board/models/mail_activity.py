@@ -33,7 +33,7 @@ class MailActivity(models.Model):
 
     @api.model
     def _selection_related_model_instance(self):
-        models = self.env["ir.model"].search([("is_mail_activity", "=", True)])
+        models = self.env["ir.model"].sudo().search([("is_mail_activity", "=", True)])
         return [(model.model, model.name) for model in models]
 
     def open_origin(self):
