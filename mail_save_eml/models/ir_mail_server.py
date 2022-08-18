@@ -2,7 +2,9 @@
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import base64
+
 from odoo import api, fields, models
+
 from odoo.addons.base.models.ir_mail_server import extract_rfc2822_addresses
 
 
@@ -27,7 +29,11 @@ class IrMailServer(models.Model):
         if not object_ref:
             return
         res_model, res_id = object_ref[0].split("-")
-        models = self.env["ir.config_parameter"].sudo().get_param("mail.save.attachment.eml.models", "")
+        models = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mail.save.attachment.eml.models", "")
+        )
         if res_model in models.split(","):
             recipient = extract_rfc2822_addresses(_get_header_value("To"))
             name = f"{recipient[0] if recipient else res_model + res_id}"
