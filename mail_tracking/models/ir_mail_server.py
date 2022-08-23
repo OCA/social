@@ -13,7 +13,7 @@ class IrMailServer(models.Model):
     def _tracking_headers_add(self, tracking_email_id, headers):
         """Allow other addons to add its own tracking SMTP headers"""
         headers = headers or {}
-        headers["X-Odoo-Database"] = getattr(threading.currentThread(), "dbname", None)
+        headers["X-Odoo-Database"] = getattr(threading.current_thread(), "dbname", None)
         headers["X-Odoo-MailTracking-ID"] = tracking_email_id
         return headers
 
