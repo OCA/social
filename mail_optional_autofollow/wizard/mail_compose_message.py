@@ -22,9 +22,15 @@ class MailComposeMessage(models.TransientModel):
     )
 
     def _action_send_mail(self, auto_commit=False):
+        result_mails_su, result_messages = (
+            self.env["mail.mail"].sudo(),
+            self.env["mail.message"],
+        )
         for wizard in self:
-            super(
+            result_mails_su_wizard, result_messages_wizard = super(
                 MailComposeMessage,
                 wizard.with_context(mail_post_autofollow=wizard.autofollow_recipients),
             )._action_send_mail(auto_commit=auto_commit)
-        return True
+            result_mails_su += result_mails_su_wizard
+            result_messages += result_messages_wizard
+        return result_mails_su, result_messages
