@@ -1,6 +1,6 @@
 To use this module, you need to:
 
-* Adding some attachments on an object by creating a new *Log note*
+* Add some attachments on an object by creating a new *Log note*
 
 .. figure:: ../static/description/attachment.png
    :alt: Attachment on purchase order
