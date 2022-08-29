@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 15.0.1.0.1 |  | Base Search Mail Content
-[mail_activity_board](mail_activity_board/) | 15.0.1.1.0 |  | Add Activity Boards
+[mail_activity_board](mail_activity_board/) | 15.0.1.1.1 |  | Add Activity Boards
 [mail_activity_creator](mail_activity_creator/) | 15.0.1.0.0 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 15.0.1.0.0 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 15.0.1.0.0 |  | Add Partner to Activities
