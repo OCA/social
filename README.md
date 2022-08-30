@@ -1,12 +1,13 @@
 
 [![Runboat](https://img.shields.io/badge/runboat-Try%20me-875A7B.png)](https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=14.0)
-[![Build Status](https://travis-ci.com/OCA/social.svg?branch=14.0)](https://travis-ci.com/OCA/social)
+[![Pre-commit Status](https://github.com/OCA/social/actions/workflows/pre-commit.yml/badge.svg?branch=14.0)](https://github.com/OCA/social/actions/workflows/pre-commit.yml?query=branch%3A14.0)
+[![Build Status](https://github.com/OCA/social/actions/workflows/test.yml/badge.svg?branch=14.0)](https://github.com/OCA/social/actions/workflows/test.yml?query=branch%3A14.0)
 [![codecov](https://codecov.io/gh/OCA/social/branch/14.0/graph/badge.svg)](https://codecov.io/gh/OCA/social)
 [![Translation Status](https://translation.odoo-community.org/widgets/social-14-0/-/svg-badge.svg)](https://translation.odoo-community.org/engage/social-14-0/?utm_source=widget)
 
 <!-- /!\ do not modify above this line -->
 
-# social
+# Social addons for Odoo
 
 Addons concerning Odoo's social ERP features and messaging in general.
 
