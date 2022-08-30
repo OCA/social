@@ -33,6 +33,7 @@ addon | version | maintainers | summary
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 13.0.1.0.0 |  | Adding attachment on the object by sending this one
 [mail_attach_existing_attachment_account](mail_attach_existing_attachment_account/) | 13.0.1.0.0 |  | Module to use attach existing attachment for account module
 [mail_autosubscribe](mail_autosubscribe/) | 13.0.1.0.0 |  | Automatically subscribe partners to its company's business documents
+[mail_chatter_thread_colour](mail_chatter_thread_colour/) | 13.0.1.0.0 |  | Allow to change the colour of threads
 [mail_debrand](mail_debrand/) | 13.0.2.0.1 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Remove Odoo branding in sent emails
 [mail_drop_target](mail_drop_target/) | 13.0.1.0.1 |  | Attach emails to Odoo by dragging them from your desktop
 [mail_full_expand](mail_full_expand/) | 13.0.1.0.0 |  | Expand mail in a big window
