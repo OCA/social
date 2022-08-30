@@ -251,6 +251,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_cc__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_phone__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mailing_contact__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mailing_mailing__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_phone_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
