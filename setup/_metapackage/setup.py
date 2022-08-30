@@ -22,6 +22,7 @@ setuptools.setup(
         'odoo-addon-mail_preview_base>=15.0dev,<15.1dev',
         'odoo-addon-mail_show_follower>=15.0dev,<15.1dev',
         'odoo-addon-mail_tracking>=15.0dev,<15.1dev',
+        'odoo-addon-mass_mailing_partner>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
