@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-    <t t-extend="mail.ThreadWindow">
-        <t t-jquery=".o_thread_window_header" t-operation="attributes">
+    <t t-inherit="mail.ChatWindowHeader" t-inherit-mode="extension" owl="1">
+        <xpath expr="div[hasclass('o_ChatWindowHeader')]" position="attributes">
             <attribute
                 name="t-att-data-thread-model"
-                value="widget.hasThread() &amp;&amp; widget._thread.getType() === 'document_thread'? widget._thread.getDocumentModel() : 'chat' "
-            />
-        </t>
+            >chatWindow.thread &amp;&amp; chatWindow.thread.model &amp;&amp; chatWindow.thread.model !== 'mail.channel' ? chatWindow.thread.model : 'chat'</attribute>
+        </xpath>
     </t>
 </templates>

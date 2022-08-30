@@ -17,7 +17,7 @@ class AssetsMailChatterThreadColourBundle(AssetsBundle):
         )
         for model in models:
             result.append(
-                """.o_thread_window_header[data-thread-model="%s"]
+                """.o_ChatWindowHeader[data-thread-model="%s"]
                 {background-color: %s; color: %s}"""
                 % (
                     model.model,
