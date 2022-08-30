@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="base_colour_config_param" model="ir.config_parameter">
+            <field name="key">mail_chatter.base_colour</field>
+            <field name="value">#7C7BAD</field>
+        </record>
+        <record id="base_font_colour_config_param" model="ir.config_parameter">
+            <field name="key">mail_chatter.base_font_colour</field>
+            <field name="value">#FFFFFF</field>
+        </record>
+    </data>
+</odoo>
