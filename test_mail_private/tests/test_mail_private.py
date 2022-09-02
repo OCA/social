@@ -247,6 +247,25 @@ class TestMailPrivate(Moderation):
             'partner_ids': []})
         self.assertFalse(compose.allow_private)
 
+    def test_compose_message_compute_no_field(self):
+        """
+        Compose Wizard does not allow private
+        if related record has no field `allow_private`.
+        """
+        mail_message = self.env['mail.message'].search([], limit=1)
+        self.assertTrue(mail_message)
+        self.assertFalse(hasattr(mail_message, 'allow_private'))
+
+        compose = self.env['mail.compose.message'].with_context({
+            'default_composition_mode': 'comment',
+            'default_model': mail_message._name,
+            'default_res_id': mail_message.id
+        }).sudo(self.user_01.id).create({
+            'subject': 'Subject',
+            'body': 'Body text',
+            'partner_ids': []})
+        self.assertFalse(compose.allow_private)
+
     def test_security_groups(self):
         groups = self.partner.sudo(
             self.user_01.id).get_message_security_groups()
