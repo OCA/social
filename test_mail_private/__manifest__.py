@@ -5,7 +5,7 @@
     'name': 'Test Mail Private',
     'summary': """
         Mail Pivate Test Addon""",
-    'version': '12.0.1.0.1',
+    'version': '12.0.1.0.2',
     'license': 'AGPL-3',
     'author': 'Creu Blanca,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
