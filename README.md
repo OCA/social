@@ -37,7 +37,7 @@ addon | version | maintainers | summary
 [mail_outbound_static](mail_outbound_static/) | 12.0.1.0.1 |  | Allows you to configure the from header for a mail server.
 [mail_preview_audio](mail_preview_audio/) | 12.0.1.0.1 |  | Allow to preview audio files
 [mail_preview_base](mail_preview_base/) | 12.0.1.0.1 |  | Base to add more previewing options
-[mail_private](mail_private/) | 12.0.1.0.0 |  | Create private emails
+[mail_private](mail_private/) | 12.0.1.0.1 |  | Create private emails
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 12.0.1.0.2 |  | Define a domain from which followers can be selected
 [mail_send_copy](mail_send_copy/) | 12.0.1.0.0 |  | Send to you a copy of each mail sent by Odoo
 [mail_show_follower](mail_show_follower/) | 12.0.1.0.1 |  | Show CC document followers in mails.
@@ -55,7 +55,7 @@ addon | version | maintainers | summary
 [mass_mailing_resend](mass_mailing_resend/) | 12.0.1.1.0 |  | Resend mass mailings
 [mass_mailing_unique](mass_mailing_unique/) | 12.0.1.0.2 |  | Avoids duplicate mailing lists and contacts
 [message_auto_subscribe_notify_own](message_auto_subscribe_notify_own/) | 12.0.1.0.0 |  | Receive notifications of your own subscriptions
-[test_mail_private](test_mail_private/) | 12.0.1.0.1 |  | Mail Pivate Test Addon
+[test_mail_private](test_mail_private/) | 12.0.1.0.2 |  | Mail Pivate Test Addon
 [website_mass_mailing_name](website_mass_mailing_name/) | 12.0.1.0.0 |  | Ask for name when subscribing, and create and/or link partner
 
 [//]: # (end addons)
