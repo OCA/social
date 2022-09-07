@@ -9,6 +9,7 @@ import psycopg2
 import psycopg2.errorcodes
 
 from odoo import http
+from odoo.tests import users
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
@@ -74,19 +75,24 @@ class TestMailTracking(TransactionCase):
         tracking.write({"recipient": False})
         self.assertEqual(False, tracking.recipient_address)
 
+    @users("admin", "demo")
     def test_message_post(self):
         # This message will generate a notification for recipient
-        message = self.env["mail.message"].create(
-            {
-                "subject": "Message test",
-                "author_id": self.sender.id,
-                "email_from": self.sender.email,
-                "message_type": "comment",
-                "model": "res.partner",
-                "res_id": self.recipient.id,
-                "partner_ids": [(4, self.recipient.id)],
-                "body": "<p>This is a test message</p>",
-            }
+        message = (
+            self.env["mail.message"]
+            .sudo()
+            .create(
+                {
+                    "subject": "Message test",
+                    "author_id": self.sender.id,
+                    "email_from": self.sender.email,
+                    "message_type": "comment",
+                    "model": "res.partner",
+                    "res_id": self.recipient.id,
+                    "partner_ids": [(4, self.recipient.id)],
+                    "body": "<p>This is a test message</p>",
+                }
+            )
         )
         if message.is_thread_message():
             self.env[message.model].browse(message.res_id)._notify_thread(message)

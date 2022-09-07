@@ -8,7 +8,8 @@ import urllib.parse
 import uuid
 from datetime import datetime
 
-from odoo import api, fields, models, tools
+from odoo import _, api, fields, models, tools
+from odoo.exceptions import AccessError
 from odoo.tools import email_split
 
 _logger = logging.getLogger(__name__)
@@ -138,11 +139,90 @@ class MailTrackingEmail(models.Model):
             self.mapped("mail_message_id").write({"mail_tracking_needs_action": True})
         return res
 
+    def _find_allowed_tracking_ids(self):
+        """Filter trackings based on related records ACLs"""
+        # Admins passby this filter
+        if not self or self.env.user.has_group("base.group_system"):
+            return self.ids
+        # Override ORM to get the values directly
+        self._cr.execute(
+            """
+            SELECT id, mail_message_id, partner_id
+            FROM mail_tracking_email WHERE id IN %s
+            """,
+            (tuple(self.ids),),
+        )
+        msg_linked = self._cr.fetchall()
+        if not msg_linked:
+            return []
+        _, msg_ids, partner_ids = zip(*msg_linked)
+        # Filter messages with their ACL rules avoiding False values fetched in the set
+        msg_ids = self.env["mail.message"]._search(
+            [("id", "in", [x for x in msg_ids if x])]
+        )
+        partner_ids = self.env["res.partner"]._search(
+            [("id", "in", [x for x in partner_ids if x])]
+        )
+        return [
+            x[0]
+            for x in msg_linked
+            if (x[1] in msg_ids)  # We can read the linked message
+            or (
+                not any({x[1], x[2]}) and x[3] in partner_ids
+            )  # No linked msg/mail but we can read the linked partner
+            or (not any({x[1], x[2], x[3]}))  # No linked record
+        ]
+
+    @api.model
+    def _search(
+        self,
+        args,
+        offset=0,
+        limit=None,
+        order=None,
+        count=False,
+        access_rights_uid=None,
+    ):
+        """Filter ids based on related records ACLs"""
+        ids = super()._search(
+            args, offset, limit, order, count=count, access_rights_uid=access_rights_uid
+        )
+        if not self.env.user.has_group("base.group_system") and not count:
+            ids = self.browse(ids)._find_allowed_tracking_ids()
+        return ids
+
+    def check_access_rule(self, operation):
+        """Rely on related messages ACLs"""
+        super().check_access_rule(operation)
+        allowed_ids = self._search([("id", "in", self._find_allowed_tracking_ids())])
+        disallowed_ids = set(self.exists().ids).difference(set(allowed_ids))
+        if not disallowed_ids:
+            return
+        raise AccessError(
+            _(
+                "The requested operation cannot be completed due to security "
+                "restrictions. Please contact your system administrator.\n\n"
+                "(Document type: %(desc)s, Operation: %(operation)s)"
+            )
+            % {"desc": self._description, "operation": operation}
+            + " - ({} {}, {} {})".format(
+                _("Records:"), list(disallowed_ids), _("User:"), self._uid
+            )
+        )
+
+    def read(self, fields=None, load="_classic_read"):
+        """Override to explicitly call check_access_rule, that is not called
+        by the ORM. It instead directly fetches ir.rules and apply them.
+        """
+        if not self.env.user.has_group("base.group_system"):
+            self.check_access_rule("read")
+        return super().read(fields=fields, load=load)
+
     @api.model
     def email_is_bounced(self, email):
         if not email:
             return False
-        res = self._email_last_tracking_state(email)
+        res = self.sudo()._email_last_tracking_state(email)
         return res and res[0].get("state", "") in {
             "rejected",
             "error",
@@ -163,13 +243,13 @@ class MailTrackingEmail(models.Model):
     def email_score_from_email(self, email):
         if not email:
             return 0.0
-        data = self.read_group(
+        data = self.sudo().read_group(
             [("recipient_address", "=", email.lower())],
             ["recipient_address", "state"],
             ["state"],
         )
         mapped_data = {state["state"]: state["state_count"] for state in data}
-        return self.with_context(mt_states=mapped_data).email_score()
+        return self.with_context(mt_states=mapped_data).sudo().email_score()
 
     @api.model
     def _email_score_weights(self):
