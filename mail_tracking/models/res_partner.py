@@ -16,17 +16,21 @@ class ResPartner(models.Model):
 
     @api.depends('email')
     def _compute_email_score(self):
+        mt_obj = self.env['mail.tracking.email'].sudo()
         for partner in self.filtered('email'):
-            partner.email_score = self.env['mail.tracking.email'].\
-                email_score_from_email(partner.email)
+            partner.email_score = mt_obj.email_score_from_email(partner.email)
 
     @api.multi
     @api.depends('email')
     def _compute_tracking_emails_count(self):
+        # We don't want performance issues due to heavy ACLs check for large
+        # recordsets. Our option is to hide the number for regular users.
+        if not self.env.user.has_group("base.group_system"):
+            self.write({"tracking_emails_count": 0})
+            return
         for partner in self:
-            count = 0
             if partner.email:
-                count = self.env['mail.tracking.email'].search_count([
+                count = len(self.env['mail.tracking.email']._search([
                     ('recipient_address', '=', partner.email.lower())
-                ])
+                ]))
             partner.tracking_emails_count = count

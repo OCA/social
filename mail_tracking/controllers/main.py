@@ -67,7 +67,7 @@ class MailTrackingController(MailController):
         metadata = self._request_metadata()
         with db_env(db) as env:
             try:
-                tracking_email = env['mail.tracking.email'].search([
+                tracking_email = env['mail.tracking.email'].sudo().search([
                     ('id', '=', tracking_email_id),
                     ('token', '=', token),
                 ])
