@@ -17,14 +17,16 @@ class ResPartner(models.Model):
 
     @api.depends("email")
     def _compute_email_score_and_count(self):
+        self.email_score = 50.0
+        self.tracking_emails_count = 0
         partners_mail = self.filtered("email")
-        mail_tracking_obj = self.env["mail.tracking.email"]
+        mt_obj = self.env["mail.tracking.email"].sudo()
         for partner in partners_mail:
-            partner.email_score = self.env[
-                "mail.tracking.email"
-            ].email_score_from_email(partner.email)
-            partner.tracking_emails_count = mail_tracking_obj.search_count(
-                [("recipient_address", "=", partner.email.lower())]
+            partner.email_score = mt_obj.email_score_from_email(partner.email)
+            # We don't want performance issues due to heavy ACLs check for large
+            # recordsets. Our option is to hide the number for regular users.
+            if not self.env.user.has_group("base.group_system"):
+                continue
+            partner.tracking_emails_count = len(
+                mt_obj._search([("recipient_address", "=", partner.email.lower())])
             )
-        partners_no_mail = self - partners_mail
-        partners_no_mail.update({"email_score": 50.0, "tracking_emails_count": 0})
