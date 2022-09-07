@@ -23,6 +23,7 @@
                         name="tracking_emails_count"
                         widget="statinfo"
                         string="Tracking emails"
+                        attrs="{'invisible': [('tracking_emails_count', '=', False)]}"
                     />
             </button>
         </div>

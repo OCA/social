@@ -20,6 +20,7 @@ class MailMessage(models.Model):
     mail_tracking_ids = fields.One2many(
         comodel_name="mail.tracking.email",
         inverse_name="mail_message_id",
+        auto_join=True,
         string="Mail Trackings",
     )
     mail_tracking_needs_action = fields.Boolean(
