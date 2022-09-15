@@ -49,7 +49,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
             )
         )
         self.assertEqual(compose.partner_ids, self.partner)
-        compose.send_mail()
+        compose._action_send_mail()
 
     def test_followers_meet(self):
         self.partner.write({"category_id": self.category_employees})
