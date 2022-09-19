@@ -21,7 +21,7 @@ class MailRenderMixin(models.AbstractModel):
         # value can be bytes type; ensure we get a proper string
         if type(value) is bytes:
             value = value.decode()
-        has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
+        has_odoo_link = re.search(r"<a\s(.*)https://odoo\.com", value, flags=re.IGNORECASE)
         if has_odoo_link:
             # We don't want to change what was explicitly added in the message body,
             # so we will only change what is before and after it.
@@ -35,7 +35,7 @@ class MailRenderMixin(models.AbstractModel):
                 if remove_before and not remove_parent and previous is not None:
                     # remove 'using' that is before <a and after </span>
                     previous.tail = ""
-                if remove_parent and parent.getparent() and len(parent.getparent()):
+                if remove_parent and len(parent.getparent()):
                     # anchor <a href odoo has a parent powered by that must be removed
                     parent.getparent().remove(parent)
                 else:
