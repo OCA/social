@@ -6,9 +6,9 @@
 import re
 
 from lxml import etree, html
+from markupsafe import Markup
 
-from odoo import api, models
-
+from odoo import api, models, tools
 
 class MailRenderMixin(models.AbstractModel):
     _inherit = "mail.render.mixin"
@@ -18,9 +18,13 @@ class MailRenderMixin(models.AbstractModel):
     ):
         if len(value) < 20:
             return value
+
         # value can be bytes type; ensure we get a proper string
         if type(value) is bytes:
+            back_to_bytes = True
             value = value.decode()
+        else:
+            back_to_bytes = False
         has_odoo_link = re.search(r"<a\s(.*)https://odoo\.com", value, flags=re.IGNORECASE)
         if has_odoo_link:
             # We don't want to change what was explicitly added in the message body,
@@ -48,6 +52,8 @@ class MailRenderMixin(models.AbstractModel):
             )
             if to_keep:
                 value = value.replace("<body_msg></body_msg>", to_keep)
+        if back_to_bytes:
+            value = value.encode()
         return value
 
     @api.model
@@ -82,6 +88,7 @@ class MailRenderMixin(models.AbstractModel):
             res_ids,
             engine=engine,
             add_context=add_context,
+            options=options,
             post_process=post_process,
         )
 
@@ -91,8 +98,15 @@ class MailRenderMixin(models.AbstractModel):
         return orginal_rendered
 
     def _replace_local_links(self, html, base_url=None):
-        message = super()._replace_local_links(html)
-        message = re.sub(
+        message = super()._replace_local_links(html, base_url=base_url)
+
+        wrapper = Markup if isinstance(message, Markup) else str
+        message = tools.ustr(message)
+        if isinstance(message, Markup):
+            wrapper = Markup
+
+        message =  re.sub(
             r"""(Powered by\s(.*)Odoo</a>)""", "<div>&nbsp;</div>", message
         )
-        return message
+
+        return wrapper(message)
