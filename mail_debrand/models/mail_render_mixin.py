@@ -35,7 +35,7 @@ class MailRenderMixin(models.AbstractModel):
                 if remove_before and not remove_parent and previous is not None:
                     # remove 'using' that is before <a and after </span>
                     previous.tail = ""
-                if remove_parent and len(parent.getparent()):
+                if remove_parent and parent.getparent() and len(parent.getparent()):
                     # anchor <a href odoo has a parent powered by that must be removed
                     parent.getparent().remove(parent)
                 else:
