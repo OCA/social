@@ -19,7 +19,10 @@ class MailThread(models.AbstractModel):
                 for follower in followers
                 if follower not in partners and follower not in self.message_partner_ids
             ]
-            partner_ids += follower_ids
+            if isinstance(partner_ids, tuple):
+                partner_ids += tuple(follower_ids)
+            else:
+                partner_ids += follower_ids
         return super().message_subscribe(
             partner_ids=partner_ids,
             subtype_ids=subtype_ids,

@@ -4,11 +4,11 @@
 {
     "name": "Mail Activity Board",
     "summary": "Add Activity Boards",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.1.0",
     "development_status": "Beta",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
-    "author": "SDi, David Juaneda, Sodexis, Odoo Community Association (OCA)",
+    "author": "SDi, David Juaneda, Sodexis, ACSONE SA/NV, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": ["calendar", "board"],
