@@ -1,4 +1,4 @@
-# Copyright 2018 Camptocamp SA
+# Copyright 2018-2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import json
@@ -34,7 +34,7 @@ class MailTrackingValue(models.Model):
         "old_value_monetary",
     )
     def _compute_formatted_value(self):
-        """ Sets the value formatted field used in the view """
+        """Sets the value formatted field used in the view"""
         for record in self:
             if record.field_type in ("many2many", "one2many", "char"):
                 record.new_value_formatted = record.new_value_char
@@ -65,7 +65,7 @@ class MailTrackingValue(models.Model):
         tracking_sequence,
         model_name,
     ):
-        """ Add tacking capabilities for many2many and one2many fields """
+        """Add tacking capabilities for many2many and one2many fields"""
         if col_info["type"] in ("many2many", "one2many"):
 
             def get_values(source, prefix):

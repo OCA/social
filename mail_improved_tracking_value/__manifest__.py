@@ -3,7 +3,7 @@
 
 {
     "name": "Improved tracking value change",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "summary": "Improves tracking changed values for certain type of fields."
     "Adds a user-friendly view to consult them.",
     "author": "Camptocamp, Odoo Community Association (OCA)",
