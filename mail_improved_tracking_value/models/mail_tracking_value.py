@@ -1,4 +1,4 @@
-# Copyright 2018 Camptocamp SA
+# Copyright 2018-2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import json
@@ -7,7 +7,6 @@ from odoo import api, fields, models
 
 
 class MailTrackingValue(models.Model):
-
     _inherit = "mail.tracking.value"
 
     new_value_formatted = fields.Char(
@@ -34,9 +33,9 @@ class MailTrackingValue(models.Model):
         "old_value_monetary",
     )
     def _compute_formatted_value(self):
-        """ Sets the value formatted field used in the view """
+        """Sets the value formatted field used in the view"""
         for record in self:
-            if record.field_type in ("many2many", "one2many", "char"):
+            if record.field_type in ("many2many", "one2many", "char", "selection"):
                 record.new_value_formatted = record.new_value_char
                 record.old_value_formatted = record.old_value_char
             elif record.field_type == "integer":
@@ -54,6 +53,17 @@ class MailTrackingValue(models.Model):
             elif record.field_type == "text":
                 record.new_value_formatted = record.new_value_text
                 record.old_value_formatted = record.old_value_text
+            elif record.field_type == "date":
+                record.new_value_formatted = (
+                    record.new_value_datetime
+                    and str(record.new_value_datetime.date())
+                    or ""
+                )
+                record.old_value_formatted = (
+                    record.old_value_datetime
+                    and str(record.old_value_datetime.date())
+                    or ""
+                )
 
     @api.model
     def create_tracking_values(
@@ -65,7 +75,7 @@ class MailTrackingValue(models.Model):
         tracking_sequence,
         model_name,
     ):
-        """ Add tacking capabilities for many2many and one2many fields """
+        """Add tacking capabilities for many2many and one2many fields"""
         if col_info["type"] in ("many2many", "one2many"):
 
             def get_values(source, prefix):
