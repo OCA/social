@@ -6,7 +6,6 @@
         <field name="model">mail.tracking.value</field>
         <field name="arch" type="xml">
             <tree
-                string="Tracking change list"
                 default_order="create_date desc"
                 create="false"
                 edit="false"
