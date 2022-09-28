@@ -25,8 +25,9 @@ class MailRenderMixin(models.AbstractModel):
             value = value.decode()
         else:
             back_to_bytes = False
+        has_dev_odoo_link = re.search(r"<a\s(.*)dev\.odoo\.com", value, flags=re.IGNORECASE)
         has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
-        if has_odoo_link:
+        if has_odoo_link and not has_dev_odoo_link:
             # We don't want to change what was explicitly added in the message body,
             # so we will only change what is before and after it.
             if to_keep:
