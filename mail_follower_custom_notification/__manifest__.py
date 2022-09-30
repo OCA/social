@@ -9,6 +9,7 @@
     "category": "Social Network",
     "summary": "Let followers choose if they want to receive email "
     "notifications for a given subscription",
+    'website': 'https://github.com/OCA/social',
     "depends": [
         'mail',
     ],
