@@ -7,7 +7,7 @@
     "summary": "Expand mail in a big window",
     "version": "10.0.1.0.0",
     "category": "Social Network",
-    "website": "http://www.grupoesoc.es/",
+    "website": "https://github.com/OCA/social",
     "author": "Grupo ESOC, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,

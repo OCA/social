@@ -8,7 +8,7 @@
     "summary": "Avoids duplicate mailing lists and contacts",
     "version": "10.0.1.0.0",
     "category": "Marketing",
-    "website": "https://tecnativa.com",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
