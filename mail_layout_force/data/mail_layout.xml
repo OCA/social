@@ -7,7 +7,7 @@
 <odoo>
 
     <template id="mail_layout_noop" name="Mail: No-Layout notification template">
-        <t t-raw="message.body" />
+        <t t-out="message.body" />
     </template>
 
 </odoo>
