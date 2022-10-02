@@ -2,10 +2,10 @@
 # @author Iván Todorovich <ivan.todorovich@camptocamp.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import SavepointCase
+from odoo.tests import TransactionCase
 
 
-class TestMailLayoutForce(SavepointCase):
+class TestMailLayoutForce(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -15,7 +15,7 @@ class TestMailLayoutForce(SavepointCase):
                 "name": "Test Layout",
                 "type": "qweb",
                 "mode": "primary",
-                "arch": "<t t-name='test'><h1></h1><t t-raw='message.body'/></t>",
+                "arch": "<t t-name='test'><h1></h1><t t-out='message.body'/></t>",
             }
         )
         cls.template = cls.env["mail.template"].create(
@@ -67,7 +67,7 @@ class TestMailLayoutForce(SavepointCase):
                 }
             )
         )
-        composer.onchange_template_id_wrapper()
-        composer.send_mail()
+        composer._onchange_template_id_wrapper()
+        composer._action_send_mail()
         message = self.partner.message_ids[-1]
         self.assertEqual(message.mail_ids.body_html.strip(), "<h1></h1><p>Test</p>")

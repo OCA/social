@@ -64,7 +64,7 @@
                             <!-- CONTENT -->
                             <tr>
                                 <td style="min-width: 590px;">
-                                    <t t-raw="message.body" />
+                                    <t t-out="message.body" />
                                 </td>
                             </tr>
                             <!-- FOOTER -->
