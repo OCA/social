@@ -9,7 +9,9 @@ class MailMessage(models.Model):
     _inherit = "mail.message"
 
     def reply_message(self):
-        action = self.env.ref("mail.action_email_compose_message_wizard").read()[0]
+        action = self.env["ir.actions.actions"]._for_xml_id(
+            "mail.action_email_compose_message_wizard"
+        )
         action["context"] = {
             "default_model": self._name,
             "default_res_id": self.id,
