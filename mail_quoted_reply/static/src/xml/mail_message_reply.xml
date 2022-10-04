@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!-- Copyright 2021 Creu Blanca
-     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <template>
-    <t t-inherit="mail.Message" t-inherit-mode="extension">
-        <xpath
-            expr="//div[hasclass('o_Message_core')]//div[hasclass('o_Message_headerCommands')]/t[1]"
-            position="inside"
-        >
-            <t>
-                <span
-                    class="fa fa-reply o_thread_icon o_thread_mail_message_reply"
-                    t-on-click="_onClickMailMessageReply"
-                    title="Reply"
-                />
-            </t>
-        </xpath>
+    <t t-name="MessageQuotedReplyButton">
+        <span
+            class="p-2 fa fa-lg fa-reply o_MessageActionList_action"
+            t-on-click="_onClickMailMessageReply"
+            title="Reply"
+        />
     </t>
 </template>
