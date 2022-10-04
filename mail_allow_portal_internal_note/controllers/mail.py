@@ -17,7 +17,9 @@ class PortalChatterExt(PortalChatter):
         ):
             Model = request.env[res_model]
             if hasattr(Model, "partner_id"):
-                record_company = Model.browse(res_id).partner_id.commercial_partner_id
+                record_company = (
+                    Model.browse(res_id).partner_id.sudo().commercial_partner_id
+                )
                 is_own_company = record_company == user.commercial_partner_id
                 if user.portal_see_internal_msg_own and is_own_company:
                     return True
