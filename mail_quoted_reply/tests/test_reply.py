@@ -1,6 +1,8 @@
 # Copyright 2021 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import re
+
 from odoo.tests import TransactionCase
 
 
@@ -24,8 +26,12 @@ class TestMessageReply(TransactionCase):
         )
         action = message.reply_message()
         wizard = (
-            self.env[action["res_model"]].with_context(action["context"]).create({})
+            self.env[action["res_model"]].with_context(**action["context"]).create({})
         )
+        # the onchange in the composer isn't triggered in tests, so we check for the
+        # correct quote in the context
+        email_quote = re.search("<p>.*?</p>", wizard._context["quote_body"]).group()
+        self.assertEqual("<p>demo message</p>", email_quote)
         wizard.action_send_mail()
         new_message = partner.message_ids.filtered(
             lambda r: r.message_type != "notification" and r != message
