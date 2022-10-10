@@ -40,7 +40,7 @@ addon | version | maintainers | summary
 [mail_layout_force](mail_layout_force/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Force a mail layout on selected email templates
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.1 |  | Preview email templates in the browser
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 14.0.1.0.0 | [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Apply a custom subject to mail notifications
-[mail_optional_autofollow](mail_optional_autofollow/) | 14.0.1.0.0 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
+[mail_optional_autofollow](mail_optional_autofollow/) | 14.0.1.0.1 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 14.0.1.0.0 |  | Choose to notify followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 14.0.2.0.0 |  | Allows you to configure the from header for a mail server.
 [mail_partner_opt_out](mail_partner_opt_out/) | 14.0.1.0.0 |  | Add the partner's email to the blackmailed list
