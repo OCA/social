@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo-addon-mail_attach_existing_attachment>=15.0dev,<15.1dev',
         'odoo-addon-mail_autosubscribe>=15.0dev,<15.1dev',
         'odoo-addon-mail_debrand>=15.0dev,<15.1dev',
+        'odoo-addon-mail_optional_autofollow>=15.0dev,<15.1dev',
         'odoo-addon-mail_optional_follower_notification>=15.0dev,<15.1dev',
         'odoo-addon-mail_outbound_static>=15.0dev,<15.1dev',
         'odoo-addon-mail_preview_base>=15.0dev,<15.1dev',
