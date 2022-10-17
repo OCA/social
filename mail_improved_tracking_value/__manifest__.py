@@ -10,7 +10,7 @@
     'author': 'Camptocamp, Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'category': 'Tools',
-    'website': 'http://www.camptocamp.com',
+    'website': 'https://github.com/OCA/social',
     'depends': [
         'base',
         'mail'

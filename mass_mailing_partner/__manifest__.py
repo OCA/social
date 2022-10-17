@@ -9,7 +9,7 @@
     "version": "10.0.1.0.3",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
-    "website": "https://www.tecnativa.com",
+    "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Marketing",
     "depends": [

@@ -9,7 +9,7 @@
     "summary": "Mail tracking and Mailgun webhooks integration",
     "version": "10.0.1.2.1",
     "category": "Social Network",
-    "website": "https://odoo-community.org/",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",

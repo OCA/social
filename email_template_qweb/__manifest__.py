@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "category": "Marketing",
     "summary": "Use the QWeb templating mechanism for emails",
+    'website': 'https://github.com/OCA/social',
     "depends": [
         'mail',
     ],

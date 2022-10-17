@@ -8,6 +8,7 @@
     "license": "AGPL-3",
     "category": "Social",
     "summary": "Replace img.src's which start with http with inline cids",
+    'website': 'https://github.com/OCA/social',
     "depends": [
         'web',
     ],
