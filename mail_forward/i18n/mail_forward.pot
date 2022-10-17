@@ -146,6 +146,11 @@ msgid "Delete sent emails (mass mailing only)"
 msgstr ""
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_description
+msgid "Description"
+msgstr ""
+
+#. module: mail_forward
 #: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_destination_object_id
 msgid "Destination object"
 msgstr ""
@@ -244,8 +249,29 @@ msgid "Mail forward target"
 msgstr ""
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_mailing_list_ids
+msgid "Mailing List"
+msgstr ""
+
+#. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_mass_mailing_id
+#: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_mass_mailing_name
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_mass_mailing_campaign_id
+msgid "Mass Mailing Campaign"
+msgstr ""
+
+#. module: mail_forward
 #: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_record_name
 msgid "Message Record Name"
+msgstr ""
+
+#. module: mail_forward
+#: model:ir.model.fields,help:mail_forward.field_mail_forward_compose_message_description
+msgid "Message description: either the subject, or the beginning of the body"
 msgstr ""
 
 #. module: mail_forward
@@ -330,6 +356,11 @@ msgid "Partners with Need Action"
 msgstr ""
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_website_published
+msgid "Published"
+msgstr ""
+
+#. module: mail_forward
 #: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_res_id
 msgid "Related Document ID"
 msgstr ""
@@ -406,6 +437,11 @@ msgstr ""
 #. module: mail_forward
 #: model:ir.model.fields,field_description:mail_forward.field_mail_forward_compose_message_template_id
 msgid "Use template"
+msgstr ""
+
+#. module: mail_forward
+#: model:ir.model.fields,help:mail_forward.field_mail_forward_compose_message_website_published
+msgid "Visible on the website as a comment"
 msgstr ""
 
 #. module: mail_forward
