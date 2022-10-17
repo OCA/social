@@ -5,7 +5,7 @@
 {
     "name": "Mail full expand",
     "summary": "Expand mail in a big window",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.0.1",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Grupo ESOC, Odoo Community Association (OCA)",
