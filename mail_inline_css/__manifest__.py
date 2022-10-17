@@ -5,7 +5,7 @@
 {
     'name': 'Mail Inline CSS',
     "summary": "Convert style tags in inline style in your mails",
-    'version': '10.0.1.0.0',
+    'version': '10.0.1.0.1',
     'author': 'Akretion, Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/social',
     'license': 'AGPL-3',
