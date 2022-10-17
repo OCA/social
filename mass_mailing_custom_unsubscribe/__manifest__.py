@@ -5,7 +5,7 @@
     'name': "Customizable unsubscription process on mass mailing emails",
     "summary": "Know and track (un)subscription reasons, GDPR compliant",
     'category': 'Marketing',
-    'version': '10.0.2.0.0',
+    'version': '10.0.2.0.1',
     'depends': [
         'website_mass_mailing',
     ],
