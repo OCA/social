@@ -1,11 +1,12 @@
 # Copyright 2020 Tecnativa - João Marques
+# Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # pylint: disable=C8107
 from odoo.tests import common
 from odoo.tools import mute_logger
 
 
-class TestMailNotificationCustomSubject(common.SavepointCase):
+class TestMailNotificationCustomSubject(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -26,7 +27,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${object.name or 'n/a'} and something more",
+                "subject_template": "{{object.name or 'n/a'}} and something more",
             }
         )
         # Send message in partner
@@ -56,7 +57,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${object.name or 'n/a'} and something more",
+                "subject_template": "{{object.name or 'n/a'}} and something more",
             }
         )
         # Send note in partner
@@ -72,7 +73,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${object.name or 'n/a'} and something more",
+                "subject_template": "{{object.name or 'n/a'}} and something more",
             }
         )
         self.env["mail.message.custom.subject"].create(
@@ -80,7 +81,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 2",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${object.name or 'n/a'} and something different",
+                "subject_template": "{{object.name or 'n/a'}} and something different",
             }
         )
         # Send message in partner
@@ -96,7 +97,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 3",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${' and yet something else'}",
+                "subject_template": "{{' and yet something else'}}",
                 "position": "append_after",
             }
         )
@@ -114,7 +115,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 4",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${'Re: '}",
+                "subject_template": "{{'Re: '}}",
                 "position": "append_before",
             }
         )
@@ -134,7 +135,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${' and something more'}",
+                "subject_template": "{{' and something more'}}",
                 "position": "append_after",
             }
         )
@@ -154,7 +155,7 @@ class TestMailNotificationCustomSubject(common.SavepointCase):
                 "name": "Test bad template 1",
                 "model_id": self.env.ref("base.model_res_partner").id,
                 "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "${obaject.number_a} and something",
+                "subject_template": "{{obaject.number_a}} and something",
                 "position": "append_after",
             }
         )
