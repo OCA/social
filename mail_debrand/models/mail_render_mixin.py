@@ -56,7 +56,7 @@ class MailRenderMixin(models.AbstractModel):
         template_src,
         model,
         res_ids,
-        engine="qweb_view",
+        engine="inline_template",
         add_context=None,
         options=None,
         post_process=False,
@@ -71,7 +71,7 @@ class MailRenderMixin(models.AbstractModel):
           this could be cleaned but hey, we are in a rush
         :param str model: model name of records on which we want to perform rendering
         :param list res_ids: list of ids of records (all belonging to same model)
-        :param string engine: jinja
+        :param string engine: inline_template, qweb or qweb_view;
         :param post_process: perform rendered str / html post processing (see
           ``_render_template_postprocess``)
 
