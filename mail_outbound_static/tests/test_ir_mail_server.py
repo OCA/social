@@ -72,7 +72,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         )
 
     def _skip_test(self, reason):
-        _logger.warn(reason)
+        _logger.warning(reason)
         self.skipTest(reason)
 
     def _send_mail(
