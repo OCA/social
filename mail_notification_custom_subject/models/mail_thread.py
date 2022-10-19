@@ -21,7 +21,6 @@ class MailThread(models.AbstractModel):
         subtype_xmlid=None,
         subtype_id=False,
         partner_ids=None,
-        channel_ids=None,
         attachments=None,
         attachment_ids=None,
         add_sign=True,
@@ -29,7 +28,7 @@ class MailThread(models.AbstractModel):
         **kwargs
     ):
         if not subtype_id and subtype_xmlid:
-            subtype_id = self.env["ir.model.data"].xmlid_to_res_id(
+            subtype_id = self.env["ir.model.data"]._xmlid_to_res_id(
                 subtype_xmlid,
                 raise_if_not_found=False,
             )
@@ -71,7 +70,6 @@ class MailThread(models.AbstractModel):
             subtype_xmlid=subtype_xmlid,
             subtype_id=subtype_id,
             partner_ids=partner_ids,
-            channel_ids=channel_ids,
             attachments=attachments,
             attachment_ids=attachment_ids,
             add_sign=add_sign,
