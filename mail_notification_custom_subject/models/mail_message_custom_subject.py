@@ -22,7 +22,6 @@ class MailMessageCustomSubject(models.Model):
         required=True,
     )
     subject_template = fields.Char(
-        string="Subject Template",
         required=True,
         help="Subject (placeholders may be used here)",
     )
@@ -32,7 +31,6 @@ class MailMessageCustomSubject(models.Model):
             ("append_after", "Append After"),
             ("replace", "Replace"),
         ],
-        string="Position",
         default="replace",
         help="Whether to replace, append at beggining or append at end to other"
         " templates that apply to a given context",
