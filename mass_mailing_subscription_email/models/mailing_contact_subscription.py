@@ -20,9 +20,14 @@ class MailingContactSubscription(models.Model):
         return records
 
     def write(self, vals):
+        changed_records = (
+            self.filtered(lambda rec: rec.opt_out != vals["opt_out"])
+            if "opt_out" in vals
+            else None
+        )
         res = super().write(vals)
-        if "opt_out" in vals:
-            self._send_mail_notification()
+        if changed_records:
+            changed_records._send_mail_notification()
         return res
 
     def unlink(self):
