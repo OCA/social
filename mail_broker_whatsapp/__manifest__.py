@@ -10,10 +10,10 @@
     "author": "Creu Blanca, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "depends": ["mail_broker", "phone_validation"],
+    "external_dependencies": {"python": ["requests_toolbelt"]},
     "data": [
         "wizards/whatsapp_composer.xml",
         "views/mail_broker.xml",
         "templates/assets.xml",
     ],
-    "external_dependencies": {},
 }

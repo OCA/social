@@ -27,16 +27,23 @@ class MailBrokerChannel(models.Model):
                     for key in ["image", "audio", "video"]:
                         if message.get(key):
                             image_id = message.get(key).get("id")
-                            image_info_request = requests.get(
-                                "https://graph.facebook.com/v13.0/%s" % image_id,
-                                headers={
-                                    "Authorization": "Bearer %s" % self.broker_id.token,
-                                },
-                            )
-                            image_info_request.raise_for_status()
-                            image_info = image_info_request.json()
+                            if image_id:
+                                image_info_request = requests.get(
+                                    "https://graph.facebook.com/v13.0/%s" % image_id,
+                                    headers={
+                                        "Authorization": "Bearer %s"
+                                        % self.broker_id.token,
+                                    },
+                                )
+                                image_info_request.raise_for_status()
+                                image_info = image_info_request.json()
+                                image_url = image_info["url"]
+                            else:
+                                image_url = message.get(key).get("url")
+                            if not image_url:
+                                continue
                             image_request = requests.get(
-                                image_info["url"],
+                                image_url,
                                 headers={
                                     "Authorization": "Bearer %s" % self.broker_id.token,
                                 },
