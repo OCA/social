@@ -16,4 +16,5 @@
         "views/mail_broker.xml",
         "templates/assets.xml",
     ],
+    "qweb": ["static/src/xml/thread.xml"],
 }
