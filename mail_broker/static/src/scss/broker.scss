@@ -1,3 +1,9 @@
 .o_thread_message_broker_received {
-    color: green;
+    color: theme-color("info");
+}
+.o_thread_message_broker_sent {
+    color: theme-color("success");
+}
+.o_thread_message_broker_error {
+    color: theme-color("danger");
 }
