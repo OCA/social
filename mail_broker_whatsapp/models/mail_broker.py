@@ -1,11 +1,11 @@
 # Copyright 2022 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import logging
+
+import hashlib
+import hmac
 
 from odoo import fields, models
 from odoo.http import request
-
-_logger = logging
 
 
 class MailBroker(models.Model):
@@ -31,7 +31,19 @@ class MailBroker(models.Model):
         return result
 
     def _receive_update_whatsapp(self, update):
-        chat = {}
+        signature = request.httprequest.headers.get("x-hub-signature-256")
+        if not signature:
+            return
+        if (
+            "sha256=%s"
+            % hmac.new(
+                self.whatsapp_security_key.encode(),
+                request.httprequest.data,
+                hashlib.sha256,
+            ).hexdigest()
+            != signature
+        ):
+            return
         if update:
             for entry in update["entry"]:
                 for change in entry["changes"]:
