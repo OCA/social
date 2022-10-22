@@ -47,6 +47,10 @@ class TestSubscriptionEmail(SavepointCase, MockEmail):
         self.assertEqual(self._new_mails.email_from, self.email_from)
         self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
         self.assertEqual(self._new_mails.subject, "UNSUBSCRIBED")
+        # Unsubscribe again (even though it's already unsubscribed)
+        with self.mock_mail_gateway():
+            subs.opt_out = True
+        self.assertFalse(self._new_mails)
         # Subscribe again
         with self.mock_mail_gateway():
             subs.opt_out = False
@@ -59,6 +63,32 @@ class TestSubscriptionEmail(SavepointCase, MockEmail):
         self.assertEqual(self._new_mails.email_from, self.email_from)
         self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
         self.assertEqual(self._new_mails.subject, "UNSUBSCRIBED")
+
+    def test_subscription_email_no_repetition(self):
+        """No email must be sent if it's created and opted out at the same time"""
+        with self.mock_mail_gateway():
+            subs = self.env["mailing.contact.subscription"].create(
+                {
+                    "contact_id": self.mailing_contact.id,
+                    "list_id": self.mailing_list.id,
+                    "opt_out": True,
+                }
+            )
+        self.assertFalse(self._new_mails)
+        # Even after re-writing on the field
+        with self.mock_mail_gateway():
+            subs.opt_out = True
+        self.assertFalse(self._new_mails)
+        # Subscribing must send the email
+        with self.mock_mail_gateway():
+            subs.opt_out = False
+        self.assertEqual(self._new_mails.email_from, self.email_from)
+        self.assertEqual(self._new_mails.email_to, self.mailing_contact.email)
+        self.assertEqual(self._new_mails.subject, "SUBSCRIBED")
+        # Subscribing again mustn't..
+        with self.mock_mail_gateway():
+            subs.opt_out = False
+        self.assertFalse(self._new_mails)
 
     def test_subscription_email_disabled(self):
         self.mailing_list.subscribe_template_id = False
