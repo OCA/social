@@ -10,7 +10,6 @@ odoo.define("mail_broker.model.Message", function(require) {
             this.broker_unread = data.broker_unread || false;
             this.broker_type = data.broker_type || false;
             this.customer_status = data.customer_status || false;
-            console.log(this);
         },
         isNeedaction: function() {
             return this._super.apply(this, arguments) || this.broker_unread;

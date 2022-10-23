@@ -69,11 +69,14 @@ class MailMessageBroker(models.Model):
 
     def send(self, auto_commit=False, raise_exception=False, parse_mode="HTML"):
         for record in self:
-            getattr(record, "_send_%s" % record.channel_id.broker_id.broker_type)(
-                auto_commit=auto_commit,
-                raise_exception=raise_exception,
-                parse_mode=parse_mode,
-            )
+            broker = record.channel_id.broker_id
+            with broker.work_on(broker._name) as work:
+                work.component(usage=broker.broker_type)._send(
+                    record,
+                    auto_commit=auto_commit,
+                    raise_exception=raise_exception,
+                    parse_mode=parse_mode,
+                )
 
     def mark_outgoing(self):
         return self.write({"state": "outgoing"})
