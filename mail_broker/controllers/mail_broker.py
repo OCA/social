@@ -6,5 +6,5 @@ from odoo.addons.base_rest.controllers import main
 
 class MailBrokerController(main.RestController):
     _root_path = "/broker/"
-    _collection_name = "mail.broker.services"
+    _collection_name = "mail.broker"
     _default_auth = "none"

@@ -5,6 +5,7 @@ from odoo import api, fields, models, tools
 
 class MailBroker(models.Model):
     _name = "mail.broker"
+    _inherit = ["collection.base"]
     _description = "Mail Broker"
 
     name = fields.Char(required=True)
@@ -12,7 +13,10 @@ class MailBroker(models.Model):
     broker_type = fields.Selection([], required=True)
     show_on_app = fields.Boolean(default=True)
     webhook_key = fields.Char()
-    integrated_webhook = fields.Boolean(readonly=True)
+    webhook_secret = fields.Char()
+    integrated_webhook_state = fields.Selection(
+        [("pending", "Pending"), ("integrated", "Integrated")], readonly=True
+    )
     can_set_webhook = fields.Boolean(compute="_compute_webhook_checks")
     webhook_url = fields.Char(compute="_compute_webhook_url")
     has_new_channel_security = fields.Boolean(
@@ -36,10 +40,20 @@ class MailBroker(models.Model):
         for record in self:
             record.webhook_url = record._get_webhook_url()
 
+    def _get_channel_id(self, chat_token):
+        return (
+            self.env["mail.broker.channel"]
+            .search(
+                [("token", "=", str(chat_token)), ("broker_id", "=", self.id)], limit=1,
+            )
+            .id
+        )
+
     def _get_webhook_url(self):
-        return "%s/broker/broker/%s/update" % (
+        return "%s/broker/%s/%s/update" % (
             self.webhook_url
             or self.env["ir.config_parameter"].get_param("web.base.url"),
+            self.broker_type,
             self.webhook_key,
         )
 
@@ -54,22 +68,18 @@ class MailBroker(models.Model):
     def set_webhook(self):
         self.ensure_one()
         if self.can_set_webhook:
-            self._set_webhook()
+            with self.work_on(self._name) as work:
+                work.component(usage=self.broker_type)._set_webhook()
 
     def remove_webhook(self):
         self.ensure_one()
-        self._remove_webhook()
+        with self.work_on(self._name) as work:
+            work.component(usage=self.broker_type)._remove_webhook()
 
     def update_webhook(self):
         self.ensure_one()
         self.remove_webhook()
         self.set_webhook()
-
-    def _set_webhook(self):
-        self.integrated_webhook = True
-
-    def _remove_webhook(self):
-        self.integrated_webhook = False
 
     @api.model
     def broker_fetch_slot(self):
@@ -98,63 +108,54 @@ class MailBroker(models.Model):
             domain += [("name", "ilike", "%" + name + "%")]
         return self.env["mail.broker.channel"].search(domain).read(["name"])
 
-    def _receive_update(self, update):
-        return getattr(self, "_receive_update_%s" % self.broker_type)(update)
-
     def write(self, vals):
         res = super(MailBroker, self).write(vals)
-        if "webhook_key" in vals:
+        if (
+            "webhook_key" in vals
+            or "integrated_webhook_state" in vals
+            or "webhook_secret" in vals
+            or "webhook_user_id" in vals
+        ):
             self.clear_caches()
         return res
 
     @api.model_create_single
     def create(self, vals):
         res = super(MailBroker, self).create(vals)
-        if "webhook_key" in vals:
+        if (
+            "webhook_key" in vals
+            or "integrated_webhook_state" in vals
+            or "webhook_secret" in vals
+            or "webhook_user_id" in vals
+        ):
             self.clear_caches()
         return res
 
     @api.model
     @tools.ormcache()
-    def _get_broker_map(self):
+    def _get_broker_map(self, state="integrated", broker_type=False):
         result = {}
-        for record in self.search([]):
-            result[record.webhook_key] = record.id
+        for record in self.search(
+            [
+                ("integrated_webhook_state", "=", state),
+                ("broker_type", "=", broker_type),
+            ]
+        ):
+            result[record.webhook_key] = record._get_broker_data()
         return result
 
+    def _get_broker_data(self):
+        return {
+            "id": self.id,
+            "webhook_secret": self.webhook_secret,
+            "webhook_user_id": self.webhook_user_id.id,
+        }
+
     @api.model
-    def _get_broker_id(self, key, **kwargs):
+    def _get_broker(self, key, state="integrated", broker_type=False, **kwargs):
         # We are using cache in order to avoid an exploit
         if not key:
             return False
-        return self._get_broker_map().get(key, False)
-
-    def _get_channel_id(self, chat_token):
-        return (
-            self.env["mail.broker.channel"]
-            .search(
-                [("token", "=", str(chat_token)), ("broker_id", "=", self.id)], limit=1
-            )
-            .id
+        return self._get_broker_map(state=state, broker_type=broker_type).get(
+            key, False
         )
-
-    def _get_channel(self, token, update, force_create=False):
-        chat_id = self._get_channel_id(token)
-        if chat_id:
-            return self.env["mail.broker.channel"].browse(chat_id)
-        if not force_create and self.has_new_channel_security:
-            return False
-        return self.env["mail.broker.channel"].create(
-            self._get_channel_vals(token, update)
-        )
-
-    def _get_channel_vals(self, token, update):
-        return {
-            "token": token,
-            "broker_id": self.id,
-            "show_on_app": self.show_on_app,
-        }
-
-    def _verify_bot(self, **kwargs):
-        self.ensure_one()
-        return ""
