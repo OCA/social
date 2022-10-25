@@ -123,11 +123,6 @@ msgid "Template Name"
 msgstr "Plantillas"
 
 #. module: mail_notification_custom_subject
-#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_tree
-msgid "Templates"
-msgstr "Plantillas"
-
-#. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid ""
 "Whether to replace, append at beggining or append at end to other templates "
@@ -135,3 +130,6 @@ msgid ""
 msgstr ""
 "Ya sea para reemplazar, agregar al principio o agregar al final a otras "
 "plantillas que se aplican a un contexto determinado"
+
+#~ msgid "Templates"
+#~ msgstr "Plantillas"
