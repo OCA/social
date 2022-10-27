@@ -20,6 +20,9 @@
     "license": "AGPL-3",
     "installable": True,
     "depends": ["mail"],
+    "data": [
+        "data/ir_config_parameter.xml",
+    ],
     "development_status": "Production/Stable",
     "maintainers": ["pedrobaeza", "joao-p-marques"],
 }
