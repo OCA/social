@@ -99,7 +99,8 @@ Menus
     <menuitem
         id="menu_mail_activity_team"
         name="Activity Teams"
-        parent="base.menu_email"
+        parent="mail.mail_menu_technical"
+        sequence="10"
         action="mail_activity_team_action"
     />
 
