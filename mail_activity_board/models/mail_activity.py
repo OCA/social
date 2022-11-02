@@ -52,7 +52,9 @@ class MailActivity(models.Model):
 
     @api.model
     def action_activities_board(self):
-        action = self.env.ref("mail_activity_board.open_boards_activities").read()[0]
+        action = (
+            self.env.ref("mail_activity_board.open_boards_activities").sudo().read()[0]
+        )
         return action
 
     @api.model
