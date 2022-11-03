@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
-    <record model="ir.ui.view" id="view_mail_mass_mailing_form">
+    <record id="view_mail_mass_mailing_form" model="ir.ui.view">
         <field name="model">mailing.mailing</field>
         <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form" />
         <field name="arch" type="xml">
@@ -22,7 +21,7 @@
                         <i
                             class="fa fa-info-circle"
                         /> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, click on <b
-                        >Emails Sent</b> smart-button for removing the existing record(s).
+                        >Sent</b> smart-button for removing the existing record(s).
                     </p>
                 </div>
             </header>
@@ -31,5 +30,18 @@
             </div>
         </field>
     </record>
-
+    <record id="mailing_mailing_view_form_full_width" model="ir.ui.view">
+        <field name="model">mailing.mailing</field>
+        <field
+            name="inherit_id"
+            ref="mass_mailing.mailing_mailing_view_form_full_width"
+        />
+        <field name="arch" type="xml">
+            <button name="action_view_traces_sent" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('state', 'in', ('draft','test')),('sent', '=', 0)]}</attribute>
+            </button>
+        </field>
+    </record>
 </odoo>
