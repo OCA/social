@@ -37,6 +37,7 @@ addon | version | maintainers | summary
 [mail_drop_target](mail_drop_target/) | 14.0.1.0.1 |  | Attach emails to Odoo by dragging them from your desktop
 [mail_filter_adressee_by_contact](mail_filter_adressee_by_contact/) | 14.0.1.1.0 | [![Kev-Roche](https://github.com/Kev-Roche.png?size=30px)](https://github.com/Kev-Roche) | Adresses filter by partner contacts and users
 [mail_full_expand](mail_full_expand/) | 14.0.1.0.0 |  | Expand mail in a big window
+[mail_improved_tracking_value](mail_improved_tracking_value/) | 14.0.1.0.0 |  | Improves tracking changed values for certain type of fields.Adds a user-friendly view to consult them.
 [mail_inline_css](mail_inline_css/) | 14.0.1.0.0 |  | Convert style tags in inline style in your mails
 [mail_layout_force](mail_layout_force/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Force a mail layout on selected email templates
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.1 |  | Preview email templates in the browser
