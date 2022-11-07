@@ -9,11 +9,6 @@
     "website": "https://github.com/OCA/social",
     "depends": ["mail"],
     "data": ["views/mail_activity_views.xml"],
-    "assets": {
-        "web.assets_backend": [
-            "mail_activity_done/static/src/js/mail_activity.esm.js",
-        ],
-    },
     "pre_init_hook": "pre_init_hook",
     "post_load": "post_load_hook",
     "uninstall_hook": "uninstall_hook",
