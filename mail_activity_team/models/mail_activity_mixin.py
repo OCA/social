@@ -8,7 +8,6 @@ class MailActivityMixin(models.AbstractModel):
 
     activity_team_user_ids = fields.Many2many(
         comodel_name="res.users",
-        string="test field",
         compute="_compute_activity_team_user_ids",
         search="_search_activity_team_user_ids",
     )
