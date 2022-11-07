@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template
+        id="webclient_bootstrap"
+        name="chatter_thread_colour_assets assets"
+        inherit_id="web.webclient_bootstrap"
+    >
+        <xpath expr="//t[@t-set='head_web']">
+            <t
+                t-call-assets="mail_chatter_thread_colour.chatter_thread_colour_assets"
+            />
+        </xpath>
+    </template>
+</odoo>
