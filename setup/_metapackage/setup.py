@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo14-addon-mail_attach_existing_attachment',
         'odoo14-addon-mail_attach_existing_attachment_account',
         'odoo14-addon-mail_autosubscribe',
+        'odoo14-addon-mail_chatter_thread_colour',
         'odoo14-addon-mail_debrand',
         'odoo14-addon-mail_drop_target',
         'odoo14-addon-mail_filter_adressee_by_contact',
