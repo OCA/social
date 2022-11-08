@@ -8,7 +8,7 @@
     "category": "Social Network",
     "author": "GRAP,"
               "Odoo Community Association (OCA)",
-    "website": "https://www.github.com/OCA/server-tools",
+    "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "depends": ["mail"],
     "installable": True,

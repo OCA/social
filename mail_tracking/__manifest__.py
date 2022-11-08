@@ -9,7 +9,7 @@
     "summary": "Email tracking system for all mails sent",
     "version": "12.0.3.1.0",
     "category": "Social Network",
-    "website": "http://github.com/OCA/social",
+    "website": "https://github.com/OCA/social",
     "author": "Tecnativa, "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",

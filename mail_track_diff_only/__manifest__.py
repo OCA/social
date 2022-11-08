@@ -3,7 +3,7 @@
     "version": "12.0.1.0.0",
     "author": "Vauxoo, Odoo Community Association (OCA)",
     "category": "Discuss",
-    "website": "http://www.vauxoo.com/",
+    "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "depends": [
         "mail",

@@ -7,8 +7,8 @@
         notification e-mails sent by Odoo.
         """,
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
     "installable": True,
-    "website": "http://acsone.eu",
     "category": "Mail",
     "version": "12.0.1.0.0",
     "license": "AGPL-3",
