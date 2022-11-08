@@ -4,6 +4,7 @@
     "name": "Drag & drop emails to Odoo",
     "version": "12.0.1.1.2",
     "author": "Therp BV,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Discuss",
     "summary": "Attach emails to Odoo by dragging them from your desktop",

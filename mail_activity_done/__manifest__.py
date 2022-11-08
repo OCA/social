@@ -5,6 +5,7 @@
     "version": "12.0.2.0.0",
     "author": "Eficent,"
               "Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
     "license": "LGPL-3",
     "category": "Discuss",
     "depends": [

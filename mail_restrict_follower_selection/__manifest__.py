@@ -6,6 +6,7 @@
     "name": "Restrict follower selection",
     "version": "12.0.1.0.2",
     "author": "Therp BV,Creu Blanca,Odoo Community Association (OCA)",
+    "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Social Network",
     "summary": "Define a domain from which followers can be selected",
