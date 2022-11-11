@@ -143,8 +143,8 @@ class TestMailActivityBoardMethods(TransactionCase):
 
     def get_view(self, activity):
         action = activity.open_origin()
-        result = self.env[action.get("res_model")].load_views(action.get("views"))
-        return result.get("fields_views").get(action.get("view_mode"))
+        result = self.env[action.get("res_model")].get_views(action.get("views"))
+        return result.get("views").get(action.get("view_mode"))
 
     def test_open_origin_res_partner(self):
         """This test case checks
@@ -159,19 +159,19 @@ class TestMailActivityBoardMethods(TransactionCase):
         view = self.get_view(self.act1)
 
         # Check the next view is correct
-        self.assertEqual(form_view_partner_id, view.get("view_id"))
+        self.assertEqual(form_view_partner_id, view.get("id"))
 
         # Id of the form view return open_origin()
         view = self.get_view(self.act2)
 
         # Check the next view is correct
-        self.assertEqual(form_view_partner_id, view.get("view_id"))
+        self.assertEqual(form_view_partner_id, view.get("id"))
 
         # Id of the form view return open_origin()
         view = self.get_view(self.act3)
 
         # Check the next view is correct
-        self.assertEqual(form_view_partner_id, view.get("view_id"))
+        self.assertEqual(form_view_partner_id, view.get("id"))
 
     def test_redirect_to_activities(self):
         """This test case checks
@@ -180,15 +180,19 @@ class TestMailActivityBoardMethods(TransactionCase):
         """
         action_id = self.env.ref("mail_activity_board.open_boards_activities").id
         action = self.partner_client.redirect_to_activities(
-            **{"id": self.partner_client.id}
+            **{
+                "id": self.partner_client.id,
+                "model": self.partner_client._name,
+            }
         )
         self.assertEqual(action.get("id"), action_id)
 
         kwargs = {"groupby": ["activity_type_id"]}
         kwargs["domain"] = action.get("domain")
 
-        result = self.env[action.get("res_model")].load_views(action.get("views"))
-        fields = result.get("fields_views").get("kanban").get("fields")
+        result = self.env[action.get("res_model")].get_views(action.get("views"))
+        # fields = result.get("views").get("kanban").get("fields")
+        fields = result.get("models").get(action.get("res_model"))
         kwargs["fields"] = list(fields.keys())
 
         result = self.env["mail.activity"].read_group(**kwargs)

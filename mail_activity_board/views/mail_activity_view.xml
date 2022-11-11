@@ -196,17 +196,13 @@
                                                 t-if="record.activity_category.raw_value!='meeting'"
                                             >
                                                 <span t-attf-class="text-danger">
-                                                    <field
-                                                        name="date_deadline"
-                                                        t-options='{"widget": "date"}'
-                                                    />
+                                                    <field name="date_deadline" />
                                                 </span>
                                             </t>
                                             <t t-else="">
                                                 <span t-attf-class="text-danger">
                                                     <field
                                                         name="calendar_event_id_start"
-                                                        t-options='{"widget": "date"}'
                                                     />
                                                 </span>
                                             </t>
@@ -220,17 +216,11 @@
                                                 t-if="record.activity_category.raw_value!='meeting'"
                                             >
                                                 <span>
-                                                    <field
-                                                        name="date_deadline"
-                                                        t-options='{"widget": "date"}'
-                                                    />
+                                                    <field name="date_deadline" />
                                                 </span>
                                             </t>
                                             <t t-else="">
-                                                <field
-                                                    name="calendar_event_id_start"
-                                                    t-options='{"widget": "date"}'
-                                                />
+                                                <field name="calendar_event_id_start" />
                                             </t>
                                         </t>
                                     </div>
@@ -329,7 +319,7 @@ Menus
     <menuitem
         id="board_menu_activities"
         name="Activities"
-        parent="base.menu_board_root"
+        parent="spreadsheet_dashboard.spreadsheet_dashboard_menu_root"
         action="open_boards_activities"
         sequence="1"
     />
