@@ -2,6 +2,6 @@
 extract_msg
 premailer
 extract-msg
-python-telegram-bot
+python-telegram-bot<=13.11
 cairosvg
 lottie
