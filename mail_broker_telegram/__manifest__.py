@@ -12,5 +12,7 @@
     "depends": ["mail_broker"],
     "data": ["views/mail_broker.xml"],
     "qweb": ["/static/src/xml/thread.xml"],
-    "external_dependencies": {"python": ["python-telegram-bot", "cairosvg", "lottie"]},
+    "external_dependencies": {
+        "python": ["python-telegram-bot<=13.11", "cairosvg", "lottie"]
+    },
 }
