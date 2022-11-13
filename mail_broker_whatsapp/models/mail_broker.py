@@ -10,3 +10,4 @@ class MailBroker(models.Model):
     whatsapp_security_key = fields.Char()
     broker_type = fields.Selection(selection_add=[("whatsapp", "WhatsApp")])
     whatsapp_from_phone = fields.Char()
+    whatsapp_version = fields.Char(default="15.0")

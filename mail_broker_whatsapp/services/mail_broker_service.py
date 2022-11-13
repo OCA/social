@@ -217,8 +217,11 @@ class MailBrokerWhatsappService(Component):
         try:
             if record.body:
                 response = requests.post(
-                    "https://graph.facebook.com/v13.0/%s/messages"
-                    % self.collection.whatsapp_from_phone,
+                    "https://graph.facebook.com/v%s/%s/messages"
+                    % (
+                        self.collection.whatsapp_version,
+                        self.collection.whatsapp_from_phone,
+                    ),
                     headers={"Authorization": "Bearer %s" % self.collection.token},
                     json=self._send_payload(record.channel_id, body=record.body),
                 )

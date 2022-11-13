@@ -16,6 +16,10 @@
                     name="whatsapp_from_phone"
                     attrs="{'invisible': [('broker_type', '!=', 'whatsapp')]}"
                 />
+                <field
+                    name="whatsapp_version"
+                    attrs="{'invisible': [('broker_type', '!=', 'whatsapp')]}"
+                />
             </field>
         </field>
     </record>
