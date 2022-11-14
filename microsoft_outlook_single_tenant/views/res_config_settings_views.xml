@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.microsoft_outlook_tenant</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="microsoft_outlook.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <div id="outlook_client_secret" position="after">
+                <div class="row mt16" id="microsoft_outlook_directory_tenant_id">
+                    <label
+                        string="Directory Tenant ID"
+                        for="microsoft_outlook_directory_tenant_id"
+                        class="col-lg-3 o_light_label"
+                    />
+                    <field name="microsoft_outlook_directory_tenant_id" class="ml-2" />
+                </div>
+            </div>
+        </field>
+    </record>
+</odoo>
