@@ -109,7 +109,10 @@ class MailBrokerWhatsappService(Component):
                             image_id = message.get(key).get("id")
                             if image_id:
                                 image_info_request = requests.get(
-                                    "https://graph.facebook.com/v13.0/%s" % image_id,
+                                    "https://graph.facebook.com/v%s/%s" % (
+                                        self.collection.whatsapp_version,
+                                        image_id,
+                                    ),
                                     headers={
                                         "Authorization": "Bearer %s"
                                         % self.broker_id.token,
@@ -245,8 +248,11 @@ class MailBrokerWhatsappService(Component):
                 )
 
                 response = requests.post(
-                    "https://graph.facebook.com/v13.0/%s/media"
-                    % self.collection.whatsapp_from_phone,
+                    "https://graph.facebook.com/v%s/%s/media"
+                    % (
+                        self.collection.whatsapp_version,
+                        self.collection.whatsapp_from_phone,
+                    ),
                     headers={
                         "Authorization": "Bearer %s" % self.collection.token,
                         "content-type": m.content_type,
@@ -255,8 +261,11 @@ class MailBrokerWhatsappService(Component):
                 )
                 response.raise_for_status()
                 response = requests.post(
-                    "https://graph.facebook.com/v13.0/%s/messages"
-                    % self.collection.whatsapp_from_phone,
+                    "https://graph.facebook.com/v%s/%s/messages"
+                    % (
+                        self.collection.whatsapp_version,
+                        self.collection.whatsapp_from_phone,
+                    ),
                     headers={"Authorization": "Bearer %s" % self.collection.token},
                     json=self._send_payload(
                         record.channel_id,
