@@ -39,6 +39,7 @@ addon | version | maintainers | summary
 [mail_show_follower](mail_show_follower/) | 15.0.1.2.1 |  | Show CC document followers in mails.
 [mail_tracking](mail_tracking/) | 15.0.1.0.2 |  | Email tracking system for all mails sent
 [mass_mailing_partner](mass_mailing_partner/) | 15.0.1.0.0 |  | Link partners with mass-mailing
+[mass_mailing_resend](mass_mailing_resend/) | 15.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
 
 [//]: # (end addons)
 
