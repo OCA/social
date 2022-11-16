@@ -53,6 +53,7 @@ setuptools.setup(
         'odoo14-addon-mass_mailing_subscription_date',
         'odoo14-addon-mass_mailing_subscription_email',
         'odoo14-addon-mass_mailing_unique',
+        'odoo14-addon-microsoft_outlook_single_tenant',
         'odoo14-addon-website_mass_mailing_name',
     ],
     classifiers=[
