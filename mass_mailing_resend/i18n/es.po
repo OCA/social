@@ -21,13 +21,13 @@ msgstr ""
 msgid ""
 "<i class=\"fa fa-info-circle\"/> New sending will be done only to not sent/"
 "new recipients. If you want to resend again the mass mailing to already sent "
-"recipients, click on <b>Sent</b> smart-button for removing the "
-"existing record(s)."
+"recipients, click on <b>Sent</b> smart-button for removing the existing "
+"record(s)."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/> El nuevo envío se realizará solo a los "
 "destinatarios no enviados/nuevos. Si quiere reenviar otra vez el correo "
-"masivo a destinatarios ya enviados, pulse en el botón <b>Enviados</"
-"b> para eliminar el/los registro/s existentes."
+"masivo a destinatarios ya enviados, pulse en el botón <b>Enviados</b> para "
+"eliminar el/los registro/s existentes."
 
 #. module: mass_mailing_resend
 #: model:ir.model,name:mass_mailing_resend.model_mailing_mailing
