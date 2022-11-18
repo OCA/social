@@ -6,8 +6,22 @@
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
         <field name="arch" type="xml">
+            <field name="user_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('team_id', '!=', False)]}</attribute>
+            </field>
             <field name="user_id" position="after">
-                <field name="team_id" options="{'no_create': True, 'no_open': True}" />
+                <field
+                    name="team_user_id"
+                    attrs="{'invisible': [('team_id', '=', False)]}"
+                    domain="[('activity_team_ids', '=', team_id)]"
+                />
+                <field
+                    name="team_id"
+                    options="{'no_create': True, 'no_open': True}"
+                    domain="['|', ('res_model_ids', '=', False), ('res_model_ids', '=', res_model_id)]"
+                />
             </field>
         </field>
     </record>
@@ -31,8 +45,21 @@
             ref="mail_activity_board.mail_activity_view_form_board"
         />
         <field name="arch" type="xml">
+            <field name="user_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('team_id', '=', False)]}</attribute>
+            </field>
             <field name="user_id" position="after">
-                <field name="team_id" />
+                <field
+                    name="user_id"
+                    attrs="{'invisible': [('team_id', '!=', False)]}"
+                    domain="[('activity_team_ids', '=', team_id)]"
+                />
+                <field
+                    name="team_id"
+                    domain="['|', ('res_model_ids', '=', False), ('res_model_ids', '=', res_model_id)]"
+                />
             </field>
         </field>
     </record>
