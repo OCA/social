@@ -1,5 +1,7 @@
 # Copyright 2018-22 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import json
+
 from odoo.exceptions import ValidationError
 from odoo.tests.common import Form, TransactionCase
 
@@ -200,6 +202,10 @@ class TestMailActivityTeam(TransactionCase):
         self.team2.member_ids = self.employee2
         with Form(self.act2) as form:
             form.team_id = self.team2
+            self.assertIn(
+                form.user_id,
+                self.env["res.users"].search(json.loads(form.user_id_domain)),
+            )
             self.assertEqual(form.user_id, self.employee2)
 
     def test_activity_onchanges_team_different_member_no_leader(self):
