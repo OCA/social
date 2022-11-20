@@ -7,13 +7,13 @@
                 <div>
                     <button
                         type="button"
-                        class="btn btn-link o_filter_button active"
+                        class="my_activities btn btn-link o_filter_button active"
                         data-filter='my'
                         role="tab"
                     > My Activities </button>
                     <button
                         type="button"
-                        class="btn btn-link o_filter_button"
+                        class="team_activities btn btn-link o_filter_button"
                         data-filter='team'
                         role="tab"
                     > Team Activities </button>
