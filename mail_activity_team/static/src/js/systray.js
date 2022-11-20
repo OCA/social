@@ -98,5 +98,14 @@ odoo.define("mail_activity_team.systray.ActivityMenu", function (require) {
                 });
             });
         },
+        _onActivityMenuHide: function () {
+            this.filter = "my";
+            this._update_team_activities_context();
+            this._getActivityData();
+            this.$filter_buttons.removeClass("active");
+            var $target = $(".my_activities");
+            $target.addClass("active");
+            return this._super.apply(this, arguments);
+        },
     });
 });
