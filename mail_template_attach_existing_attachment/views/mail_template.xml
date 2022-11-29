@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="email_template_form">
+        <field name="name">email.template.form</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook/page[@name='advanced_settings']" position="inside">
+                <group>
+                    <field name="attach_exist_document_regex" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
