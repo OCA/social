@@ -25,9 +25,7 @@ class MailMessageBroker(models.Model):
         auto_join=True,
     )
     message_id = fields.Char(readonly=True)
-    channel_id = fields.Many2one(
-        "mail.broker.channel", required=True, ondelete="cascade"
-    )
+    channel_id = fields.Many2one("mail.channel", required=True, ondelete="cascade")
     state = fields.Selection(
         [
             ("outgoing", "Outgoing"),
@@ -54,17 +52,10 @@ class MailMessageBroker(models.Model):
         if self.env.context.get("notify_broker", False):
             notifications = []
             for message in messages:
-                notifications.append(
-                    [
-                        (
-                            self._cr.dbname,
-                            "mail.broker",
-                            message.channel_id.broker_id.id,
-                        ),
-                        {"message": message.mail_message_id.message_format()[0]},
-                    ]
+                notifications += message.channel_id._channel_message_notifications(
+                    message.mail_message_id
                 )
-            self.env["bus.bus"].sendmany(notifications)
+            self.env["bus.bus"].sudo().sendmany(notifications)
         return messages
 
     def send(self, auto_commit=False, raise_exception=False, parse_mode="HTML"):

@@ -9,7 +9,7 @@ class MailMessage(models.Model):
     _inherit = "mail.message"
 
     broker_channel_id = fields.Many2one(
-        "mail.broker.channel",
+        "mail.channel",
         readonly=True,
         compute="_compute_broker_channel_id",
         store=True,
@@ -51,5 +51,7 @@ class MailMessage(models.Model):
         return result
 
     def set_message_done(self):
-        self.write({"broker_unread": False})
+        # We need to set it as sudo in order to avoid collateral damages.
+        # In fact, it is done with sudo on the original method
+        self.sudo().filtered(lambda r: r.broker_unread).write({"broker_unread": False})
         return super().set_message_done()
