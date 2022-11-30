@@ -15,17 +15,30 @@ class MailBrokerChannel(models.Model):
     active = fields.Boolean(default=True)
     token = fields.Char(required=True)
     broker_id = fields.Many2one("mail.broker", required=True)
-    message_ids = fields.One2many("mail.message.broker", inverse_name="channel_id",)
-    mail_message_ids = fields.One2many(
-        "mail.message", inverse_name="broker_channel_id",
+    message_ids = fields.One2many(
+        "mail.message.broker",
+        inverse_name="channel_id",
     )
-    last_message_date = fields.Datetime(compute="_compute_message_data", store=True,)
-    unread = fields.Integer(compute="_compute_message_data", store=True,)
+    mail_message_ids = fields.One2many(
+        "mail.message",
+        inverse_name="broker_channel_id",
+    )
+    last_message_date = fields.Datetime(
+        compute="_compute_message_data",
+        store=True,
+    )
+    unread = fields.Integer(
+        compute="_compute_message_data",
+        store=True,
+    )
     broker_token = fields.Char(related="broker_id.token", store=True, required=False)
     show_on_app = fields.Boolean()
     partner_id = fields.Many2one("res.partner")
     message_main_attachment_id = fields.Many2one(
-        string="Main Attachment", comodel_name="ir.attachment", index=True, copy=False,
+        string="Main Attachment",
+        comodel_name="ir.attachment",
+        index=True,
+        copy=False,
     )
 
     def message_fetch(self, domain=False, limit=30):
@@ -39,13 +52,19 @@ class MailBrokerChannel(models.Model):
         )
 
     @api.depends(
-        "mail_message_ids", "mail_message_ids.date", "mail_message_ids.broker_unread",
+        "mail_message_ids",
+        "mail_message_ids.date",
+        "mail_message_ids.broker_unread",
     )
     def _compute_message_data(self):
         for r in self:
             r.last_message_date = (
                 self.env["mail.message"]
-                .search([("broker_channel_id", "=", r.id)], limit=1, order="date DESC",)
+                .search(
+                    [("broker_channel_id", "=", r.id)],
+                    limit=1,
+                    order="date DESC",
+                )
                 .date
             )
             r.unread = self.env["mail.message"].search_count(
