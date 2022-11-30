@@ -1,10 +1,10 @@
-odoo.define("mail_broker.mail.Manager", function(require) {
+odoo.define("mail_broker.mail.Manager", function (require) {
     "use strict";
     var Manager = require("mail.Manager");
     var BrokerThread = require("mail_broker.BrokerThread");
 
     Manager.include({
-        _addMessageToThreads: function(message, options) {
+        _addMessageToThreads: function (message, options) {
             this._super.apply(this, arguments);
             if (message.broker_channel_id) {
                 var thread = this.getThread(
@@ -15,31 +15,31 @@ odoo.define("mail_broker.mail.Manager", function(require) {
                 }
             }
         },
-        _updateInternalStateFromServer: function(result) {
+        _updateInternalStateFromServer: function (result) {
             this._super.apply(this, arguments);
             this._updateBrokerChannelFromServer(result);
         },
-        getBrokerBots: function() {
+        getBrokerBots: function () {
             var data = _.extend({}, this._broker_bots);
-            _.each(data, function(value) {
+            _.each(data, function (value) {
                 value.threads = [];
             });
-            _.each(this._threads, function(thread) {
+            _.each(this._threads, function (thread) {
                 if (thread.getType() === "broker_thread") {
                     data[thread.broker_id].threads.push(thread);
                 }
             });
-            _.each(data, function(value) {
-                value.threads.sort(function(a, b) {
+            _.each(data, function (value) {
+                value.threads.sort(function (a, b) {
                     return b.last_message_date - a.last_message_date;
                 });
             });
             return data;
         },
-        _updateBrokerChannelFromServer: function(data) {
+        _updateBrokerChannelFromServer: function (data) {
             var self = this;
             this._broker_bots = {};
-            _.each(data.broker_slots, function(slot) {
+            _.each(data.broker_slots, function (slot) {
                 self._broker_bots[slot.id] = {
                     name: slot.name,
                     channel_name: slot.channel_name,
@@ -47,16 +47,16 @@ odoo.define("mail_broker.mail.Manager", function(require) {
                 _.each(slot.threads, self._addChannel.bind(self));
             });
         },
-        getMailBrokerThreads: function() {
-            var data = _.filter(this._threads, function(thread) {
+        getMailBrokerThreads: function () {
+            var data = _.filter(this._threads, function (thread) {
                 return thread.getType() === "broker_thread";
             });
-            data = data.sort(function(a, b) {
+            data = data.sort(function (a, b) {
                 return b.last_message_date - a.last_message_date;
             });
             return data;
         },
-        _makeChannel: function(data, options) {
+        _makeChannel: function (data, options) {
             if (data.channel_type === "broker_thread") {
                 return new BrokerThread({
                     parent: this,
@@ -67,10 +67,10 @@ odoo.define("mail_broker.mail.Manager", function(require) {
             }
             return this._super.apply(this, arguments);
         },
-        _onNotification: function(notifs) {
+        _onNotification: function (notifs) {
             var self = this;
             var result = this._super.apply(this, arguments);
-            _.each(notifs, function(notif) {
+            _.each(notifs, function (notif) {
                 if (notif[0][1] === "mail.broker") {
                     if (notif[1].message) {
                         self.addMessage(notif[1].message, {silent: 0});

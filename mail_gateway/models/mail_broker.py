@@ -44,7 +44,8 @@ class MailBroker(models.Model):
         return (
             self.env["mail.broker.channel"]
             .search(
-                [("token", "=", str(chat_token)), ("broker_id", "=", self.id)], limit=1,
+                [("token", "=", str(chat_token)), ("broker_id", "=", self.id)],
+                limit=1,
             )
             .id
         )
