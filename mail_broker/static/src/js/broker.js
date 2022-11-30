@@ -1,4 +1,4 @@
-odoo.define("mail_broker.Broker", function(require) {
+odoo.define("mail_broker.Broker", function (require) {
     "use strict";
     var BasicComposer = require("mail.composer.Basic");
     var ExtendedComposer = require("mail.composer.Extended");
@@ -19,7 +19,7 @@ odoo.define("mail_broker.Broker", function(require) {
             "click .o_mail_sidebar_title .o_add": "_onSearchThread",
             "blur .o_mail_add_thread input": "_onSearchThreadBlur",
         },
-        init: function(parent, action, options) {
+        init: function (parent, action, options) {
             this._super.apply(this, arguments);
             this.action = action;
             this.action_manager = parent;
@@ -37,7 +37,7 @@ odoo.define("mail_broker.Broker", function(require) {
         /**
          * @override
          */
-        on_attach_callback: function() {
+        on_attach_callback: function () {
             if (this._thread) {
                 this._threadWidget.scrollToPosition(
                     this._threadsScrolltop[this._thread.getID()]
@@ -49,17 +49,17 @@ odoo.define("mail_broker.Broker", function(require) {
         /**
          * @override
          */
-        on_detach_callback: function() {
+        on_detach_callback: function () {
             if (this._thread) {
                 this._threadsScrolltop[
                     this._thread.getID()
                 ] = this._threadWidget.getScrolltop();
             }
         },
-        start: function() {
+        start: function () {
             var self = this;
 
-            return this._super.apply(this, arguments).then(function() {
+            return this._super.apply(this, arguments).then(function () {
                 return self._initRender();
             });
             /*
@@ -93,7 +93,7 @@ odoo.define("mail_broker.Broker", function(require) {
                 });
             */
         },
-        _initRender: function() {
+        _initRender: function () {
             var self = this;
             this._basicComposer = new BasicComposer(this, {
                 mentionPartnersRestricted: true,
@@ -114,19 +114,19 @@ odoo.define("mail_broker.Broker", function(require) {
             defs.push(this._renderThread());
             defs.push(this._basicComposer.appendTo(this.$(".o_mail_discuss_content")));
             return Promise.all(defs)
-                .then(function() {
+                .then(function () {
                     if (self._defaultChatID) {
                         return self._setThread(self._defaultChatID);
                     }
                 })
 
-                .then(function() {
+                .then(function () {
                     self._updateThreads();
                     self._startListening();
                     self._threadWidget.$el.on(
                         "scroll",
                         null,
-                        _.debounce(function() {
+                        _.debounce(function () {
                             var $noContent = self._threadWidget.$(".o_mail_no_content");
                             if (
                                 self._threadWidget.getScrolltop() < 20 &&
@@ -142,14 +142,14 @@ odoo.define("mail_broker.Broker", function(require) {
                     );
                 });
         },
-        _startListening: function() {
+        _startListening: function () {
             this.call("mail_service", "getMailBus").on(
                 "new_message",
                 this,
                 this._onNewMessage
             );
         },
-        _setThread: function(threadID) {
+        _setThread: function (threadID) {
             this._storeThreadState();
             var thread = this.call("mail_service", "getThread", threadID);
             if (!thread) {
@@ -159,7 +159,7 @@ odoo.define("mail_broker.Broker", function(require) {
 
             var self = this;
             this.messagesSeparatorPosition = undefined;
-            return this._fetchAndRenderThread().then(function() {
+            return this._fetchAndRenderThread().then(function () {
                 self._thread.markAsRead();
                 // Restore scroll position and composer of the new
                 // current thread
@@ -175,14 +175,14 @@ odoo.define("mail_broker.Broker", function(require) {
                 });
             });
         },
-        _storeThreadState: function() {
+        _storeThreadState: function () {
             if (this._thread) {
                 this._threadsScrolltop[
                     this._thread.getID()
                 ] = this._threadWidget.getScrolltop();
             }
         },
-        _loadEnoughMessages: function() {
+        _loadEnoughMessages: function () {
             var $el = this._threadWidget.el;
             var loadMoreMessages =
                 $el.clientHeight &&
@@ -194,7 +194,7 @@ odoo.define("mail_broker.Broker", function(require) {
                 );
             }
         },
-        _getThreadRenderingOptions: function() {
+        _getThreadRenderingOptions: function () {
             if (_.isUndefined(this.messagesSeparatorPosition)) {
                 if (this._unreadCounter) {
                     var messageID = this._thread.getLastSeenMessageID();
@@ -217,9 +217,9 @@ odoo.define("mail_broker.Broker", function(require) {
                 displayStars: false,
             };
         },
-        _fetchAndRenderThread: function() {
+        _fetchAndRenderThread: function () {
             var self = this;
-            return this._thread.fetchMessages().then(function() {
+            return this._thread.fetchMessages().then(function () {
                 self._threadWidget.render(
                     self._thread,
                     self._getThreadRenderingOptions()
@@ -227,10 +227,10 @@ odoo.define("mail_broker.Broker", function(require) {
                 return self._loadEnoughMessages();
             });
         },
-        _renderButtons: function() {
+        _renderButtons: function () {
             // This is a hook just in case some buttons are required
         },
-        _renderThread: function() {
+        _renderThread: function () {
             this._threadWidget = new ThreadWidget(this, {
                 areMessageAttachmentsDeletable: false,
                 loadMoreOnScroll: true,
@@ -238,7 +238,7 @@ odoo.define("mail_broker.Broker", function(require) {
             this._threadWidget.on("load_more_messages", this, this._loadMoreMessages);
             return this._threadWidget.appendTo(this.$(".o_mail_discuss_content"));
         },
-        _renderSidebar: function(options) {
+        _renderSidebar: function (options) {
             var $sidebar = $(
                 QWeb.render("mail_broker.broker.Sidebar", {
                     activeThreadID: this._thread ? this._thread.getID() : undefined,
@@ -247,7 +247,7 @@ odoo.define("mail_broker.Broker", function(require) {
             );
             return $sidebar;
         },
-        _restoreThreadState: function() {
+        _restoreThreadState: function () {
             var $newMessagesSeparator = this.$(".o_thread_new_messages_separator");
             if ($newMessagesSeparator.length) {
                 this._threadWidget.$el.scrollTo($newMessagesSeparator);
@@ -256,51 +256,49 @@ odoo.define("mail_broker.Broker", function(require) {
                 this._threadWidget.scrollToPosition(newThreadScrolltop);
             }
         },
-        _updateThreads: function() {
+        _updateThreads: function () {
             var bots = this.call("mail_service", "getBrokerBots");
             var $sidebar = this._renderSidebar({
                 bots: bots,
             });
             this.$(".o_mail_discuss_sidebar").html($sidebar.contents());
             var self = this;
-            _.each(bots, function(bot, broker_id) {
+            _.each(bots, function (bot, broker_id) {
                 var $input = self.$(
                     ".o_mail_add_thread[data-bot=" + broker_id + "] input"
                 );
                 self._prepareAddThreadInput($input, broker_id, bot);
             });
         },
-        _prepareAddThreadInput: function($input, broker_id) {
+        _prepareAddThreadInput: function ($input, broker_id) {
             var self = this;
             $input.autocomplete({
-                source: function(request, response) {
+                source: function (request, response) {
                     self._lastSearchVal = _.escape(request.term);
-                    self._searchChannel(broker_id, self._lastSearchVal).then(function(
+                    self._searchChannel(broker_id, self._lastSearchVal).then(function (
                         result
                     ) {
                         response(result);
                     });
                 },
-                select: function(ev, ui) {
+                select: function (ev, ui) {
                     self._setThread("broker_thread_" + ui.item.id);
                     self._updateThreads();
                 },
-                focus: function(ev) {
+                focus: function (ev) {
                     ev.preventDefault();
                 },
                 html: true,
             });
         },
-        _loadMoreMessages: function() {
+        _loadMoreMessages: function () {
             var self = this;
-            var oldestMessageID = this.$(".o_thread_message")
-                .first()
-                .data("messageId");
+            var oldestMessageID = this.$(".o_thread_message").first().data("messageId");
             var oldestMessageSelector =
                 '.o_thread_message[data-message-id="' + oldestMessageID + '"]';
             var offset = -dom.getPosition(document.querySelector(oldestMessageSelector))
                 .top;
-            return this._thread.fetchMessages({loadMore: true}).then(function() {
+            return this._thread.fetchMessages({loadMore: true}).then(function () {
                 if (self.messagesSeparatorPosition === "top") {
                     // Reset value to re-compute separator position
                     self.messagesSeparatorPosition = undefined;
@@ -314,7 +312,7 @@ odoo.define("mail_broker.Broker", function(require) {
                 self._threadWidget.scrollToPosition(offset);
             });
         },
-        _onSearchThread: function(ev) {
+        _onSearchThread: function (ev) {
             ev.preventDefault();
             var bot = $(ev.target).data("bot");
             this.$(".o_mail_add_thread[data-bot=" + bot + "]")
@@ -322,10 +320,10 @@ odoo.define("mail_broker.Broker", function(require) {
                 .find("input")
                 .focus();
         },
-        _onSearchThreadBlur: function() {
+        _onSearchThreadBlur: function () {
             this.$(".o_mail_add_thread").hide();
         },
-        _onChannelSettingsClicked: function(ev) {
+        _onChannelSettingsClicked: function (ev) {
             ev.preventDefault();
             ev.stopPropagation();
             var threadID = $(ev.target).data("thread-id");
@@ -339,13 +337,13 @@ odoo.define("mail_broker.Broker", function(require) {
                 target: "new",
             });
         },
-        _onNewMessage: function(message) {
+        _onNewMessage: function (message) {
             var thread_id = "broker_thread_" + message.broker_channel_id;
             if (this._thread && thread_id === this._thread.getID()) {
                 this._thread.markAsRead();
                 var shouldScroll = this._threadWidget.isAtBottom();
                 var self = this;
-                this._fetchAndRenderThread().then(function() {
+                this._fetchAndRenderThread().then(function () {
                     if (shouldScroll) {
                         self._threadWidget.scrollToMessage({
                             msgID: message.getID(),
@@ -362,14 +360,14 @@ odoo.define("mail_broker.Broker", function(require) {
                 message.getThreadIDs()
             );
         },
-        _searchChannel: function(broker_id, searchVal) {
+        _searchChannel: function (broker_id, searchVal) {
             return this._rpc({
                 model: "mail.broker",
                 method: "channel_search",
                 args: [[parseInt(broker_id, 10)], searchVal],
-            }).then(function(result) {
+            }).then(function (result) {
                 var values = [];
-                _.each(result, function(channel) {
+                _.each(result, function (channel) {
                     var escapedName = _.escape(channel.name);
                     values.push(
                         _.extend(channel, {
@@ -381,16 +379,16 @@ odoo.define("mail_broker.Broker", function(require) {
                 return values;
             });
         },
-        _onComposerFocused: function() {
+        _onComposerFocused: function () {
             // Hook
         },
-        _onSelectBrokerChannel: function(ev) {
+        _onSelectBrokerChannel: function (ev) {
             ev.preventDefault();
             var threadID = $(ev.currentTarget).data("thread-id");
             this._setThread(threadID);
             this._updateThreads();
         },
-        _onPostMessage: function(messageData) {
+        _onPostMessage: function (messageData) {
             var self = this;
             var options = {};
             if (this._selectedMessage) {
@@ -405,7 +403,7 @@ odoo.define("mail_broker.Broker", function(require) {
             }
             this._thread
                 .postMessage(messageData, options)
-                .then(function() {
+                .then(function () {
                     if (self._selectedMessage) {
                         self._renderSnackbar(
                             "mail.discuss.MessageSentSnackbar",
@@ -419,7 +417,7 @@ odoo.define("mail_broker.Broker", function(require) {
                         self._threadWidget.scrollToBottom();
                     }
                 })
-                .catch(function() {
+                .catch(function () {
                     // TODO: Display notifications
                 });
         },
