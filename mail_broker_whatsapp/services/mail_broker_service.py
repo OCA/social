@@ -109,10 +109,8 @@ class MailBrokerWhatsappService(Component):
                             image_id = message.get(key).get("id")
                             if image_id:
                                 image_info_request = requests.get(
-                                    "https://graph.facebook.com/v%s/%s" % (
-                                        self.collection.whatsapp_version,
-                                        image_id,
-                                    ),
+                                    "https://graph.facebook.com/v%s/%s"
+                                    % (self.collection.whatsapp_version, image_id,),
                                     headers={
                                         "Authorization": "Bearer %s"
                                         % self.broker_id.token,

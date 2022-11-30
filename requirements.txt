@@ -1,7 +1,7 @@
 # generated from manifests external_dependencies
-extract_msg
-premailer
-extract-msg
-python-telegram-bot<=13.11
 cairosvg
+extract_msg
 lottie
+premailer
+python-telegram-bot<=13.11
+requests_toolbelt
