@@ -26,37 +26,28 @@ class MailRenderMixin(models.AbstractModel):
             # We don't want to change what was explicitly added in the message body,
             # so we will only change what is before and after it.
             if to_keep:
-                to_change = value.split(to_keep)
-            else:
-                to_change = [value]
-                to_keep = ""
-            new_parts = []
-            for part in to_change:
-                tree = html.fromstring(part)
-                if tree is None:
-                    new_parts.append(part)
-                    continue
-                odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
-                for elem in odoo_anchors:
-                    parent = elem.getparent()
-                    previous = elem.getprevious()
-
-                    if remove_before and not remove_parent and previous is not None:
-                        # remove 'using' that is before <a and after </span>
-                        previous.tail = ""
-                    if remove_parent and len(parent.getparent()):
-                        # anchor <a href odoo has a parent powered by that must be removed
+                value = value.replace(to_keep, "<body_msg></body_msg>")
+            tree = html.fromstring(value)
+            odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
+            for elem in odoo_anchors:
+                parent = elem.getparent()
+                previous = elem.getprevious()
+                if remove_before and not remove_parent and previous is not None:
+                    # remove 'using' that is before <a and after </span>
+                    previous.tail = ""
+                if remove_parent and len(parent.getparent()):
+                    # anchor <a href odoo has a parent powered by that must be removed
+                    parent.getparent().remove(parent)
+                else:
+                    if parent.tag == "td":  # also here can be powered by
                         parent.getparent().remove(parent)
                     else:
-                        if parent.tag == "td":  # also here can be powered by
-                            parent.getparent().remove(parent)
-                        else:
-                            parent.remove(elem)
-                part = etree.tostring(
-                    tree, pretty_print=True, method="html", encoding="unicode"
-                )
-                new_parts.append(part)
-            value = to_keep.join(new_parts)
+                        parent.remove(elem)
+            value = etree.tostring(
+                tree, pretty_print=True, method="html", encoding="unicode"
+            )
+            if to_keep:
+                value = value.replace("<body_msg></body_msg>", to_keep)
         return value
 
     @api.model
@@ -65,15 +56,16 @@ class MailRenderMixin(models.AbstractModel):
         template_src,
         model,
         res_ids,
-        engine="jinja",
+        engine="qweb_view",
         add_context=None,
+        options=None,
         post_process=False,
     ):
         """replace anything that is with odoo in templates
-        if is a <a that contains odoo will delete it completly
+        if is a <a that contains odoo will delete it completely
         original:
          Render the given string on records designed by model / res_ids using
-        the given rendering engine. Currently only jinja is supported.
+        the given rendering engine.
 
         :param str template_src: template text to render (jinja) or  (qweb)
           this could be cleaned but hey, we are in a rush
@@ -97,3 +89,10 @@ class MailRenderMixin(models.AbstractModel):
             orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key])
 
         return orginal_rendered
+
+    def _replace_local_links(self, html, base_url=None):
+        message = super()._replace_local_links(html)
+        message = re.sub(
+            r"""(Powered by\s(.*)Odoo</a>)""", "<div>&nbsp;</div>", message
+        )
+        return message
