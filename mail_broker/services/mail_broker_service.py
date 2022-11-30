@@ -1,4 +1,4 @@
-# Copyright 2018 ACSONE SA/NV
+# Copyright 2022 CreuBlanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl).
 from odoo.addons.base_rest import restapi
 from odoo.addons.component.core import AbstractComponent
@@ -16,6 +16,12 @@ class BrokerMethodParams(restapi.RestMethodParam):
 
     def to_openapi_responses(self, service):
         return {"200": {"content": {}}}
+
+    def to_openapi_query_parameters(self, service, spec):
+        return []
+
+    def to_json_schema(self, service, spec, direction):
+        return {}
 
 
 class MailBrokerService(AbstractComponent):
@@ -60,10 +66,10 @@ class MailBrokerService(AbstractComponent):
     def _get_channel(self, broker, token, update, force_create=False):
         chat_id = broker._get_channel_id(token)
         if chat_id:
-            return self.env["mail.broker.channel"].browse(chat_id)
+            return broker.env["mail.channel"].browse(chat_id)
         if not force_create and broker.has_new_channel_security:
             return False
-        return self.env["mail.broker.channel"].create(
+        return broker.env["mail.channel"].create(
             self._get_channel_vals(broker, token, update)
         )
 
@@ -72,6 +78,8 @@ class MailBrokerService(AbstractComponent):
             "token": token,
             "broker_id": broker.id,
             "show_on_app": broker.show_on_app,
+            "public": "broker",
+            "channel_type": "broker",
         }
 
     def _send(self, record, auto_commit=False, raise_exception=False, parse_mode=False):

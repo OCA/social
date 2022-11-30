@@ -9,7 +9,7 @@ class MailMessage(models.Model):
     _inherit = "mail.message"
 
     broker_channel_id = fields.Many2one(
-        "mail.broker.channel",
+        "mail.channel",
         readonly=True,
         compute="_compute_broker_channel_id",
         store=True,

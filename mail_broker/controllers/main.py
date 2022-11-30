@@ -17,6 +17,10 @@ class NewMailChatController(MailChatController):
     def _poll(self, dbname, channels, last, options):
         if request.session.uid:
             if request.env.user.has_group("mail_broker.broker_user"):
-                for bot in request.env["mail.broker"].search([]):
-                    channels.append((request.db, "mail.broker", bot.id))
-        return super()._poll(dbname, channels, last, options)
+                channels = list(channels)
+                for channel in request.env["mail.channel"].search(
+                    [("public", "=", "broker")]
+                ):
+                    channels.append((request.db, "mail.channel", channel.id))
+        result = super()._poll(dbname, channels, last, options)
+        return result
