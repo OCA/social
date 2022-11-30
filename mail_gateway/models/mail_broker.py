@@ -42,7 +42,7 @@ class MailBroker(models.Model):
 
     def _get_channel_id(self, chat_token):
         return (
-            self.env["mail.broker.channel"]
+            self.env["mail.channel"]
             .search(
                 [("token", "=", str(chat_token)), ("broker_id", "=", self.id)],
                 limit=1,
@@ -94,7 +94,7 @@ class MailBroker(models.Model):
                     "channel_name": "broker_%s" % record.id,
                     "threads": [
                         thread._get_thread_data()
-                        for thread in self.env["mail.broker.channel"].search(
+                        for thread in self.env["mail.channel"].search(
                             [("show_on_app", "=", True), ("broker_id", "=", record.id)]
                         )
                     ],
@@ -107,7 +107,7 @@ class MailBroker(models.Model):
         domain = [("broker_id", "=", self.id)]
         if name:
             domain += [("name", "ilike", "%" + name + "%")]
-        return self.env["mail.broker.channel"].search(domain).read(["name"])
+        return self.env["mail.channel"].search(domain).read(["name"])
 
     def write(self, vals):
         res = super(MailBroker, self).write(vals)

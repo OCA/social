@@ -8,9 +8,16 @@
             />
             <script
                 type="text/javascript"
-                src="/mail_broker/static/src/js/manager.js"
+                src="/mail_broker/static/src/js/discuss.js"
+            /><!--
+            <script
+                type="text/javascript"
+                src="/mail_broker/static/src/js/messaging_initializer.js"
+            />-->
+            <script
+                type="text/javascript"
+                src="/mail_broker/static/src/js/broker_model.js"
             />
-            <script type="text/javascript" src="/mail_broker/static/src/js/thread.js" />
             <script type="text/javascript" src="/mail_broker/static/src/js/broker.js" />
             <link rel="stylesheet" href="/mail_broker/static/src/scss/broker.scss" />
         </xpath>
