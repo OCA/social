@@ -12,12 +12,15 @@ Configure Odoo
 1. Access on debug mode
 2. Access `Settings > Technical Settings > Email > Mail Broker`.
 3. Create a bot and assign the token. Mark it as `Show on App`
-4. Press on `Generate webhook` in order to Open the webhook
+4. Set a Webhook key and a Webhook secret (use what you want,
+   It's just to allow the comunication with Telegram bot).
+5. Press on `Generate webhook` in order to Open the webhook
 
 Limitations
 ~~~~~~~~~~~
 
-The Webhook functionality can only be used if your system is accessible from website.
+The Webhook functionality can only be used if your system is accessible from website
+and it has `https` certificate..
 On local installations it might be problematic as Telegram will not be able to contact
 your system. In that case, you might need to create a telegram bot that will send data
 to you on an external process with the following code.
