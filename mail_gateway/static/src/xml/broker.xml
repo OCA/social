@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
+    <t t-name="mail_broker.broker">
+        <div class="o_widget_Discuss" />
+    </t>
+    <t t-name="mail_broker.DiscussSidebarBroker" owl="1">
+        <div>
+            <div class="o_DiscussSidebar_groupHeader">
+                <div
+                    class="o_DiscussSidebar_groupHeaderItem o_DiscussSidebar_groupTitle o-clickable"
+                    t-esc="mailBroker.name"
+                />
+                <div class="o-autogrow" />
+                <div
+                    class="o_DiscussSidebar_groupHeaderItem o_DiscussSidebar_groupHeaderItemAdd fa fa-plus"
+                    t-on-click="_onClickChannelAdd"
+                    title="Add or join a channel"
+                />
+            </div>
+            <div class="o_DiscussSidebar_list">
+                <div class="o_DiscussSidebar_item o_DiscussSidebar_itemNew">
+                    <AutocompleteInput
+                        class="o_DiscussSidebar_itemNewInput"
+                        customClass="'o_DiscussSidebar_newChannelAutocompleteSuggestions'"
+                        isFocusOnMount="true"
+                        isHtml="true"
+                        placeholder="FIND_OR_CREATE_CHANNEL"
+                        select="_onAddChannelAutocompleteSelect"
+                        source="_onAddChannelAutocompleteSource"
+                    />
+                </div>
+                <t
+                    t-foreach="quickSearchOrderedAndPinnedBrokerChannels"
+                    t-as="brokerChannel"
+                    t-key="brokerChannel.localId"
+                >
+                    <DiscussSidebarItem
+                        class="o_DiscussSidebar_item"
+                        threadLocalId="brokerChannel.localId"
+                    />
+                </t>
+            </div>
+        </div>
+    </t>
+    <t t-name="mail_broker.DiscussSidebar" owl="1">
+        <div name="root" class="o_DiscussSidebar">
+            <div class="o_DiscussSidebar_group o_DiscussSidebar_groupChannel">
+                <div class="o_DiscussSidebar_list">
+                    <t
+                        t-foreach="mailBrokers"
+                        t-as="mailBroker"
+                        t-key="mailBroker.localId"
+                    >
+                        <DiscussSidebarBroker brokerId="mailBroker.localId" />
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+    <!--
     <t t-extend="mail.widget.Thread.Message">
         <t t-jquery=".o_mail_info" t-operation="append">
             <span
@@ -44,5 +102,5 @@
         <t t-jquery=".o_input" t-operation="attributes">
             <attribute name="t-attf-data-bot">#{bot_key}</attribute>
         </t>
-    </t>
+    </t>-->
 </templates>
