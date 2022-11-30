@@ -11,4 +11,25 @@
             eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
         />
     </record>
+    <record id="mail_channel_broker_rule" model="ir.rule">
+        <field name="name">Mail.channel: access broker</field>
+        <field name="model_id" ref="mail.model_mail_channel" />
+        <field name="groups" eval="[(4, ref('mail_broker.broker_user'))]" />
+        <field name="domain_force">[('public', '=', 'broker')]</field>
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+    <record id="ir_rule_mail_channel_partner_group_user" model="ir.rule">
+        <field
+            name="name"
+        >mail.channel.partner: write its own entries on broker channels</field>
+        <field name="model_id" ref="mail.model_mail_channel_partner" />
+        <field name="groups" eval="[(4, ref('mail_broker.broker_user'))]" />
+        <field name="domain_force">[('channel_id.public', '=', 'broker')]</field>
+        <field name="perm_read" eval="False" />
+        <field name="perm_write" eval="True" />
+        <field name="perm_create" eval="False" />
+        <field name="perm_unlink" eval="True" />
+    </record>
+
 </odoo>
