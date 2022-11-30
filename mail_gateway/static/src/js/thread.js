@@ -65,7 +65,7 @@ odoo.define("mail_broker.BrokerThread", function (require) {
                 domain = [["id", "<", minMessageID]].concat(domain);
             }
             return this._rpc({
-                model: "mail.broker.channel",
+                model: "mail.channel",
                 method: "message_fetch",
                 args: [[this.resId], domain],
                 kwargs: this._getFetchMessagesKwargs(options),
