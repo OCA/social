@@ -181,7 +181,10 @@ class MailBrokerTelegramService(Component):
                 body += (
                     '<a target="_blank" href="https://www.google.com/'
                     'maps/search/?api=1&query=%s,%s">Location</a>'
-                    % (effective_attachment.latitude, effective_attachment.longitude,)
+                    % (
+                        effective_attachment.latitude,
+                        effective_attachment.longitude,
+                    )
                 )
             attachment_data = self._process_telegram_attachment(effective_attachment)
             if attachment_data:
