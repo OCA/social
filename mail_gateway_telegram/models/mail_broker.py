@@ -8,4 +8,6 @@ class MailBroker(models.Model):
     _inherit = "mail.broker"
 
     telegram_security_key = fields.Char()
-    broker_type = fields.Selection(selection_add=[("telegram", "Telegram")])
+    broker_type = fields.Selection(
+        selection_add=[("telegram", "Telegram")], ondelete={"telegram": "cascade"}
+    )
