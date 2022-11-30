@@ -4,9 +4,9 @@
 from odoo import api, models
 
 
-class MailBrokerChannel(models.Model):
+class MailChannel(models.Model):
 
-    _inherit = "mail.broker.channel"
+    _inherit = "mail.channel"
 
     @api.returns("mail.message.broker", lambda value: value.id)
     def telegram_message_post_broker(self, body=False, **kwargs):
