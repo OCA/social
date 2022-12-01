@@ -174,7 +174,7 @@ class TestMailActivityTeam(TransactionCase):
     def test_schedule_activity(self):
         """Correctly assign teams to auto scheduled activities. Those won't
         trigger onchanges and could raise constraints and team missmatches"""
-        partner_record = self.employee.partner_id.sudo(self.employee.id)
+        partner_record = self.employee.partner_id.with_user(self.employee.id)
         activity = partner_record.activity_schedule(
             user_id=self.employee2.id,
             activity_type_id=self.env.ref("mail.mail_activity_data_call").id,
