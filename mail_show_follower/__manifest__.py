@@ -13,6 +13,7 @@
     "application": False,
     "installable": True,
     "depends": ["base", "mail"],
+    "maintainers": ["yajo"],
     "data": [
         "views/res_config_settings.xml",
         "views/res_users.xml",
