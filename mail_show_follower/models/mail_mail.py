@@ -114,7 +114,10 @@ class MailMail(models.Model):
                         if cc_internal:
                             partners = partners_obj.filtered(
                                 lambda x: x.id not in user_partner_ids
-                                and (not x.user_ids or x.user_ids.show_in_cc)
+                                and (
+                                    not x.user_ids
+                                    or any(x.mapped("user_ids.show_in_cc"))
+                                )
                             )
                         else:
                             partners = partners_obj.filtered(
