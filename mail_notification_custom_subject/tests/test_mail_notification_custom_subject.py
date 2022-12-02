@@ -20,16 +20,22 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
                 ]
             )
         )
+        cls.admin = common.new_test_user(cls.env, "boss", "base.group_system")
+
+    def setUp(self):
+        super().setUp()
+        self.uid = common.new_test_user(self.env, "worker")
 
     def test_email_subject_template_overrides(self):
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 1",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{object.name or 'n/a'}} and something more",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 1",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{object.name or 'n/a'}} and something more",
+                }
+            )
         # Send message in partner
         mail_message_1 = self.partner_1.message_post(
             body="Test", subtype_xmlid="mail.mt_comment"
@@ -52,14 +58,15 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         self.assertEqual(mail_message_3.subject, "Test partner 2 and something more")
 
     def test_email_subject_template_normal(self):
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 1",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{object.name or 'n/a'}} and something more",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 1",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{object.name or 'n/a'}} and something more",
+                }
+            )
         # Send note in partner
         mail_message_1 = self.partner_1.message_post(
             body="Test", subtype_xmlid="mail.mt_note", subject="Test"
@@ -68,22 +75,24 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         self.assertEqual(mail_message_1.subject, "Test")
 
     def test_email_subject_template_multi(self):
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 1",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{object.name or 'n/a'}} and something more",
-            }
-        )
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 2",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{object.name or 'n/a'}} and something different",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 1",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{object.name or 'n/a'}} and something more",
+                }
+            )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 2",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{object.name or 'n/a'}} and something different",
+                }
+            )
         # Send message in partner
         mail_message_1 = self.partner_1.message_post(
             body="Test", subtype_xmlid="mail.mt_comment"
@@ -92,15 +101,16 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         self.assertEqual(
             mail_message_1.subject, "Test partner 1 and something different"
         )
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 3",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{' and yet something else'}}",
-                "position": "append_after",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 3",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{' and yet something else'}}",
+                    "position": "append_after",
+                }
+            )
         # Send message in partner
         mail_message_2 = self.partner_1.message_post(
             body="Test", subtype_xmlid="mail.mt_comment"
@@ -110,15 +120,16 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
             mail_message_2.subject,
             "Test partner 1 and something different and yet something else",
         )
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 4",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{'Re: '}}",
-                "position": "append_before",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 4",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{'Re: '}}",
+                    "position": "append_before",
+                }
+            )
         # Send message in partner
         mail_message_3 = self.partner_1.message_post(
             body="Test", subtype_xmlid="mail.mt_comment"
@@ -130,15 +141,16 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
         )
 
     def test_email_subject_template_w_original(self):
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test template 1",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{' and something more'}}",
-                "position": "append_after",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template 1",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{' and something more'}}",
+                    "position": "append_after",
+                }
+            )
         # Send message in partner
         mail_message_1 = self.partner_1.message_post(
             body="Test",
@@ -150,15 +162,16 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
 
     def test_bad_template_does_not_break(self):
         """Create template with error (obaject) to test error."""
-        self.env["mail.message.custom.subject"].create(
-            {
-                "name": "Test bad template 1",
-                "model_id": self.env.ref("base.model_res_partner").id,
-                "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                "subject_template": "{{obaject.number_a}} and something",
-                "position": "append_after",
-            }
-        )
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test bad template 1",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_template": "{{obaject.number_a}} and something",
+                    "position": "append_after",
+                }
+            )
         # Send message in partner
         with mute_logger("odoo.addons.mail.models.mail_render_mixin"):
             mail_message_1 = self.partner_1.message_post(
