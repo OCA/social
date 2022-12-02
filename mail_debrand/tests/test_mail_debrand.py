@@ -27,7 +27,9 @@ class TestMailDebrand(common.TransactionCase):
         self.assertIn("Powered by", self.default_template.arch)
         model = "ir.ui.view"
         res_ids = self.env[model].search([], limit=1).ids
-        res = self.env["mail.template"]._render_template(self.default_template.arch, model, res_ids)
+        res = self.env["mail.template"]._render_template(
+            self.default_template.arch, model, res_ids
+        )
         self.assertNotIn("Powered by", res)
 
     def test_plaintext_email(self):
