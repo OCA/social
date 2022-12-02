@@ -33,8 +33,16 @@ class MailThread(models.AbstractModel):
                 raise_if_not_found=False,
             )
         if subtype_id:
-            custom_subjects = self.env["mail.message.custom.subject"].search(
-                [("model_id.model", "=", self._name), ("subtype_ids", "=", subtype_id)]
+            custom_subjects = (
+                self.env["mail.message.custom.subject"]
+                .sudo()
+                .search(
+                    [
+                        ("model_id.model", "=", self._name),
+                        ("subtype_ids", "=", subtype_id),
+                    ]
+                )
+                .sudo(False)
             )
             if not subject:
                 subject = "Re: %s" % self.env["mail.message"].with_context(
