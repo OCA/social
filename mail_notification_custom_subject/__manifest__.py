@@ -17,5 +17,5 @@
         "views/mail_notification_custom_subject_views.xml",
     ],
     "development_status": "Production/Stable",
-    "maintainers": ["joao-p-marques"],
+    "maintainers": ["yajo"],
 }
