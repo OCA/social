@@ -1,6 +1,6 @@
 # Copyright 2017 Tecnativa - Pedro M. Baeza
 # Copyright 2020 Onestein - Andrea Stirpe
-# Copyright 2021 Sodexis
+# Copyright 2021-22 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from datetime import datetime
