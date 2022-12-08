@@ -21,6 +21,14 @@ class MailTrackingEmail(models.Model):
         """Inherit this method to link other object to mailing.trace"""
         return {"mail_tracking_id": tracking.id}
 
+    @api.depends("mail_stats_id")
+    def _compute_message_id(self):
+        """For the mass mailings, the message id is stored in the mailing.trace record."""
+        res = super()._compute_message_id()
+        for tracking in self.filtered("mail_stats_id"):
+            tracking.message_id = tracking.mail_stats_id.message_id
+        return res
+
     @api.model
     def create(self, vals):
         tracking = super().create(vals)
