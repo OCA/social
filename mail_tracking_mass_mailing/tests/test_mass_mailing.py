@@ -35,7 +35,7 @@ class TestMassMailing(TransactionCase):
                 "mailing_domain": "[('list_ids', 'in', %d)]" % self.list.id,
                 "contact_list_ids": [(6, False, [self.list.id])],
                 "body_html": "<p>Test email body</p>",
-                "reply_to_mode": "email",
+                "reply_to_mode": "new",
             }
         )
 
@@ -54,9 +54,8 @@ class TestMassMailing(TransactionCase):
                     self.assertEqual("error", track.state)
                     self.assertEqual("Warning", track.error_type)
                     self.assertEqual("Mock test error", track.error_description)
-                self.assertTrue(stat.exception)
-                self.assertEqual(stat.state, "exception")
-                self.assertEqual(stat.failure_type, "SMTP")
+                self.assertEqual(stat.trace_status, "outgoing")
+                self.assertEqual(stat.failure_type, "mail_smtp")
             self.assertTrue(self.contact_a.email_bounced)
 
     def test_tracking_email_link(self):
@@ -79,7 +78,7 @@ class TestMassMailing(TransactionCase):
                 "ua_family": "odoo",
             }
             tracking_email.event_create("open", metadata)
-            self.assertTrue(stat.opened)
+            self.assertEqual(stat.trace_status, "open")
 
     def _tracking_email_bounce(self, event_type, state):
         self.mailing.action_send_mail()
@@ -95,7 +94,7 @@ class TestMassMailing(TransactionCase):
                 "bounce_description": "Unable to connect to MX servers",
             }
             tracking_email.event_create(event_type, metadata)
-            self.assertTrue(stat.bounced)
+            self.assertEqual(stat.trace_status, "bounce")
 
     def test_tracking_email_hard_bounce(self):
         self._tracking_email_bounce("hard_bounce", "bounced")
