@@ -6,3 +6,4 @@
   * David Vidal
   * Ernesto Tejeda
   * Carlos Roca
+  * Sergio Teruel
