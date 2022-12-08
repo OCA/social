@@ -2,7 +2,7 @@
 # Copyright 2017 Tecnativa - Vicent Cubells
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import api, models
 
 
 class MailMail(models.Model):
@@ -45,13 +45,12 @@ class MailMail(models.Model):
             mail_tracking = mail.mailing_trace_ids.mail_tracking_id
             if mail.mailing_id and mail_tracking.state == "error":
                 mail_failure_type = (
-                    "RECIPIENT"
+                    "mail_email_invalid"
                     if mail_tracking.error_type == "no_recipient"
-                    else "SMTP"
+                    else "mail_smtp"
                 )
                 mail.mailing_trace_ids.write(
                     {
-                        "exception": fields.Datetime.now(),
                         "failure_type": mail_failure_type,
                     }
                 )
