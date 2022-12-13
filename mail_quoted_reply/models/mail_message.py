@@ -11,6 +11,8 @@ class MailMessage(models.Model):
     def _prep_quoted_reply_body(self):
         return """
             <div>
+                <br/>
+                <br/>
             </div>
             <br/>
             <blockquote style="padding-right:0px; padding-left:5px; border-left-color: #000;
