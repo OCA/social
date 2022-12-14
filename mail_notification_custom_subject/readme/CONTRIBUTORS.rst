@@ -7,3 +7,6 @@
 
 * Versada <https://versada.eu>
     * Naglis Jonaitis
+
+* Moduon <https://www.moduon.team>
+    * Eduardo de Miguel
