@@ -68,6 +68,33 @@ class MailTrackingController(main.MailTrackingController):
             )
         except ValidationError as error:
             raise NotAcceptable from error
+        # v13: Under certain circumstances setting the bounce to hard faild partner
+        # leads to a triggering of the property_pricelist recomputation. We need to set
+        # company, user and uid for the query build to work correctly:
+        # https://github.com
+        # /odoo/odoo/blob/13.0/odoo/addons/base/models/ir_property.py#L240
+        #
+        # The result is an inderect error that impedes the correct bounce flagging and
+        # the event record creation:
+        #
+        # > ERROR prod odoo.sql_db: bad query:
+        # >
+        # > SELECT substr(p.res_id, 13)::integer, r.id
+        # > FROM ir_property p
+        # > LEFT JOIN product_pricelist r ON substr(p.value_reference, 19)::integer=r.id
+        # > WHERE p.fields_id=2440
+        # >     AND (p.company_id=false OR p.company_id IS NULL)
+        # >     AND (p.res_id IN ('res.partner,45621') OR p.res_id IS NULL)
+        # > ORDER BY p.company_id NULLS FIRST
+        # >
+        # > ERROR: operator does not exist: integer = boolean
+        # > LINE 6:                     AND (p.company_id=false OR p.company_id ...
+        #
+        # As far as we could research, this doesn't happen in >v14. So this nasty glitch
+        # only needs a fix for this version.
+        request.env.user = request.env["res.users"].browse(1)
+        request.env.company = request.env["res.company"].search([], limit=1)
+        request.env.uid = 1
         # Process event
         request.env["mail.tracking.email"].sudo()._mailgun_event_process(
             request.jsonrequest["event-data"], self._request_metadata(),
