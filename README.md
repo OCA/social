@@ -36,6 +36,7 @@ addon | version | maintainers | summary
 [mail_outbound_static](mail_outbound_static/) | 15.0.1.0.0 |  | Allows you to configure the from header for a mail server.
 [mail_parent_recipient](mail_parent_recipient/) | 15.0.1.0.0 |  | Send email to parent partner if partner's email is empty
 [mail_preview_base](mail_preview_base/) | 15.0.1.0.0 |  | Base to add more previewing options
+[mail_quoted_reply](mail_quoted_reply/) | 15.0.1.0.0 |  | Make a reply using a message
 [mail_show_follower](mail_show_follower/) | 15.0.1.2.2 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Show CC document followers in mails.
 [mail_tracking](mail_tracking/) | 15.0.1.0.2 |  | Email tracking system for all mails sent
 [mass_mailing_partner](mass_mailing_partner/) | 15.0.1.0.0 |  | Link partners with mass-mailing
