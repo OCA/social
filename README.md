@@ -50,7 +50,7 @@ addon | version | maintainers | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.1.0 |  | Define a domain from which followers can be selected
 [mail_template_multi_attachment](mail_template_multi_attachment/) | 13.0.1.0.0 |  | Module who allows to generate multi attachments on an email template.
 [mail_tracking](mail_tracking/) | 13.0.1.0.10 |  | Email tracking system for all mails sent
-[mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.2.0.1 |  | Mail tracking and Mailgun webhooks integration
+[mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.2.0.2 |  | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 13.0.1.0.1 |  | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 13.0.2.0.0 |  | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_custom_unsubscribe_event](mass_mailing_custom_unsubscribe_event/) | 13.0.1.0.0 |  | Allow to unsubscribe discretely from an event
