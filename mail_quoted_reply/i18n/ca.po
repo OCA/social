@@ -17,56 +17,9 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_quoted_reply
-#: model:mail.template,body_html:mail_quoted_reply.reply_template
-msgid ""
-"\n"
-"            <div>\n"
-"            </div>\n"
-"            <br/>\n"
-"            <blockquote style=\"padding-right:0px; padding-left:5px; border-left-color: #000; margin-left:5px; margin-right:0px;border-left-width: 2px; border-left-style:solid\">\n"
-"            From: ${object.email_from}<br/>\n"
-"            Date: ${object.date}<br/>\n"
-"            Subject: ${object.subject}<br/>\n"
-"            ${object.body | safe}\n"
-"            </blockquote>\n"
-"        "
-msgstr ""
-"\n"
-"            <div>\n"
-"            </div>\n"
-"            <br/>\n"
-"            <blockquote style=\"padding-right:0px; padding-left:5px; border-"
-"left-color: #000; margin-left:5px; margin-right:0px;border-left-width: 2px; "
-"border-left-style:solid\">\n"
-"            From: ${object.email_from}<br/>\n"
-"            Date: ${object.date}<br/>\n"
-"            Subject: ${object.subject}<br/>\n"
-"            ${object.body | safe}\n"
-"            </blockquote>\n"
-"        "
-
-#. module: mail_quoted_reply
-#: model:ir.model.fields,field_description:mail_quoted_reply.field_mail_compose_message__display_name
-#: model:ir.model.fields,field_description:mail_quoted_reply.field_mail_message__display_name
-msgid "Display Name"
-msgstr "Nom a mostrar"
-
-#. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_compose_message
 msgid "Email composition wizard"
 msgstr "Assistent de redacció d'emails"
-
-#. module: mail_quoted_reply
-#: model:ir.model.fields,field_description:mail_quoted_reply.field_mail_compose_message__id
-#: model:ir.model.fields,field_description:mail_quoted_reply.field_mail_message__id
-msgid "ID"
-msgstr "ID"
-
-#. module: mail_quoted_reply
-#: model:ir.model.fields,field_description:mail_quoted_reply.field_mail_compose_message____last_update
-#: model:ir.model.fields,field_description:mail_quoted_reply.field_mail_message____last_update
-msgid "Last Modified on"
-msgstr "Darrera modificació el"
 
 #. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_message
@@ -74,13 +27,49 @@ msgid "Message"
 msgstr "Missatge"
 
 #. module: mail_quoted_reply
-#: model:mail.template,subject:mail_quoted_reply.reply_template
-msgid "Re: ${object.subject}"
-msgstr "Re: ${object.subject}"
-
-#. module: mail_quoted_reply
 #. openerp-web
 #: code:addons/mail_quoted_reply/static/src/xml/mail_message_reply.xml:0
 #, python-format
 msgid "Reply"
 msgstr "Respon"
+
+#~ msgid ""
+#~ "\n"
+#~ "            <div>\n"
+#~ "            </div>\n"
+#~ "            <br/>\n"
+#~ "            <blockquote style=\"padding-right:0px; padding-left:5px; "
+#~ "border-left-color: #000; margin-left:5px; margin-right:0px;border-left-"
+#~ "width: 2px; border-left-style:solid\">\n"
+#~ "            From: ${object.email_from}<br/>\n"
+#~ "            Date: ${object.date}<br/>\n"
+#~ "            Subject: ${object.subject}<br/>\n"
+#~ "            ${object.body | safe}\n"
+#~ "            </blockquote>\n"
+#~ "        "
+#~ msgstr ""
+#~ "\n"
+#~ "            <div>\n"
+#~ "            </div>\n"
+#~ "            <br/>\n"
+#~ "            <blockquote style=\"padding-right:0px; padding-left:5px; "
+#~ "border-left-color: #000; margin-left:5px; margin-right:0px;border-left-"
+#~ "width: 2px; border-left-style:solid\">\n"
+#~ "            From: ${object.email_from}<br/>\n"
+#~ "            Date: ${object.date}<br/>\n"
+#~ "            Subject: ${object.subject}<br/>\n"
+#~ "            ${object.body | safe}\n"
+#~ "            </blockquote>\n"
+#~ "        "
+
+#~ msgid "Display Name"
+#~ msgstr "Nom a mostrar"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Darrera modificació el"
+
+#~ msgid "Re: ${object.subject}"
+#~ msgstr "Re: ${object.subject}"
