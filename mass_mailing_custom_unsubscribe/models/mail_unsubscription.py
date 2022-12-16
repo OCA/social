@@ -3,8 +3,6 @@
 
 from odoo import _, api, fields, models
 
-from odoo.addons.mass_mailing.models.mailing import MASS_MAILING_BUSINESS_MODELS
-
 from .. import exceptions
 
 
@@ -57,15 +55,6 @@ class MailUnsubscription(models.Model):
         readonly=True, help="HTTP request metadata used when creating this record."
     )
 
-    def map_mailing_list_models(self, models):
-        model_mapped = []
-        for model in models:
-            if model == "mailing.list":
-                model_mapped.append(("mailing.contact", model))
-            else:
-                model_mapped.append((model, model))
-        return model_mapped
-
     @api.model
     def _default_date(self):
         return fields.Datetime.now()
@@ -73,12 +62,10 @@ class MailUnsubscription(models.Model):
     @api.model
     def _selection_unsubscriber_id(self):
         """Models that can be linked to a ``mailing.mailing``."""
-        model = (
-            self.env["ir.model"]
-            .search([("model", "in", MASS_MAILING_BUSINESS_MODELS)])
-            .mapped("model")
+        models = self.env["ir.model"].search(
+            [("is_mailing_enabled", "=", True), ("model", "!=", "mailing.list")]
         )
-        return self.map_mailing_list_models(model)
+        return [(model.model, model.name) for model in models]
 
     @api.constrains("action", "reason_id")
     def _check_reason_needed(self):
