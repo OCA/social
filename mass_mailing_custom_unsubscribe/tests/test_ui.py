@@ -1,15 +1,13 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import mock
+from unittest import mock
+
 from werkzeug import urls
 
 from odoo.tests.common import HttpCase
 
 
 class UICase(HttpCase):
-    _tour_run = "odoo.__DEBUG__.services['web_tour.tour'].run('%s')"
-    _tour_ready = "odoo.__DEBUG__.services['web_tour.tour'].tours.%s.ready"
-
     def extract_url(self, mail, *args, **kwargs):
         url = mail.mailing_id._get_unsubscribe_url(self.email, mail.res_id)
         self.assertTrue(urls.url_parse(url).decode_query().get("token"))
@@ -43,7 +41,7 @@ class UICase(HttpCase):
                 "name": "test mailing %d" % n,
                 "mailing_model_id": self.env.ref("mass_mailing.model_mailing_list").id,
                 "contact_list_ids": [(6, 0, [self.lists[0].id, self.lists[3].id])],
-                "reply_to_mode": "thread",
+                "reply_to_mode": "update",
                 "subject": "Test",
             }
         )
@@ -73,12 +71,8 @@ class UICase(HttpCase):
         with self.mail_postprocess_patch:
             self.mailing.action_send_mail()
 
-        tour = "mass_mailing_custom_unsubscribe_tour_contact"
-        self.browser_js(
-            url_path=self.url,
-            code=self._tour_run % tour,
-            ready=self._tour_ready % tour,
-            login="demo",
+        self.start_tour(
+            self.url, "mass_mailing_custom_unsubscribe_tour_contact", login="admin"
         )
 
         # Check results from running tour
@@ -137,12 +131,8 @@ class UICase(HttpCase):
         with self.mail_postprocess_patch:
             self.mailing.action_send_mail()
 
-        tour = "mass_mailing_custom_unsubscribe_tour_partner"
-        self.browser_js(
-            url_path=self.url,
-            code=self._tour_run % tour,
-            ready=self._tour_ready % tour,
-            login="demo",
+        self.start_tour(
+            self.url, "mass_mailing_custom_unsubscribe_tour_partner", login="demo"
         )
 
         # Check results from running tour
