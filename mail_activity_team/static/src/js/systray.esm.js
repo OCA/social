@@ -81,7 +81,7 @@ ActivityMenu.include({
                 model: "res.users",
                 method: "systray_get_activities",
                 args: [],
-                kwargs: {context: self.user_context},
+                kwargs: {context: session.user_context},
             })
             .then(function (data) {
                 self._activities = data;
