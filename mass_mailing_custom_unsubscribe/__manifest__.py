@@ -6,7 +6,7 @@
     "name": "Customizable unsubscription process on mass mailing emails",
     "summary": "Know and track (un)subscription reasons, GDPR compliant",
     "category": "Marketing",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "depends": ["mass_mailing"],
     "data": [
         "security/ir.model.access.csv",
@@ -31,7 +31,6 @@
         ],
     },
     "demo": ["demo/assets.xml"],
-    "images": ["images/form.png"],
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
