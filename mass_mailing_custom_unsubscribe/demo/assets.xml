@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<!--This is set here to make tours work-->
+<template id="mass_mailing_custom_unsubscribe.layout" inherit_id="mass_mailing.layout">
+    <xpath expr="//t[@t-set='head']" position="inside">
+        <t t-call-assets="web.assets_common_minimal" t-css="false" defer_load="True" />
+        <t
+                t-call-assets="web.assets_frontend_minimal"
+                t-css="false"
+                defer_load="True"
+            />
+        <t t-call="web.conditional_assets_tests" />
+        <t t-call-assets="web.assets_common_lazy" t-css="false" lazy_load="True" />
+        <t t-call-assets="web.assets_frontend_lazy" t-css="false" lazy_load="True" />
+    </xpath>
+</template>
+
+</odoo>

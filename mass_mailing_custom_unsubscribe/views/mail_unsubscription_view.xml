@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<record id="mail_unsubscription_view_form" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Form</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="date" />
+                    <field name="mass_mailing_id" />
+                    <field name="unsubscriber_id" />
+                    <field name="mailing_list_ids" widget="many2many_tags" />
+                    <field name="email" />
+                    <field name="action" />
+                    <field
+                            name="reason_id"
+                            attrs="{'required': [('action', '=', 'unsubscription')]}"
+                        />
+                    <field
+                            name="details"
+                            attrs="{'required': [('details_required', '=', True)]}"
+                        />
+                    <field name="details_required" invisible="True" />
+                    <field name="metadata" />
+                </group>
+            </sheet>
+            <div class="oe_chatter">
+                <field
+                        name="message_follower_ids"
+                        widget="mail_followers"
+                        groups="base.group_user"
+                    />
+                <field name="message_ids" widget="mail_thread" />
+           </div>
+        </form>
+    </field>
+</record>
+
+<record id="mail_unsubscription_view_tree" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Tree</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <tree decoration-warning="action in ['unsubscription', 'blacklist_add']">
+            <field name="date" />
+            <field name="mass_mailing_id" />
+            <field name="unsubscriber_id" />
+            <field name="mailing_list_ids" widget="many2many_tags" />
+            <field name="email" invisible="True" />
+            <field name="action" />
+            <field name="reason_id" />
+            <field name="details" invisible="True" />
+        </tree>
+    </field>
+</record>
+
+<record id="mail_unsubscription_view_search" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Search</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="mass_mailing_id" />
+            <field name="unsubscriber_id" />
+            <field name="mailing_list_ids" />
+            <field name="email" />
+            <field name="reason_id" />
+            <field name="details" />
+            <separator />
+            <group string="Group by">
+                <filter
+                        name="group_by_month"
+                        string="Month"
+                        context="{'group_by': 'date:month'}"
+                    />
+                <filter
+                        name="group_by_year"
+                        string="Year"
+                        context="{'group_by': 'date:year'}"
+                    />
+                <filter
+                        name="group_by_action"
+                        string="Action"
+                        context="{'group_by': 'action'}"
+                    />
+                <filter
+                        name="group_by_email"
+                        string="Email"
+                        context="{'group_by': 'email'}"
+                    />
+                <filter
+                        name="group_by_reason"
+                        string="Reason"
+                        context="{'group_by': 'reason_id'}"
+                    />
+                <filter
+                        name="group_by_mass_mailing"
+                        string="Mass mailing"
+                        context="{'group_by': 'mass_mailing_id'}"
+                    />
+            </group>
+        </search>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="mail_unsubscription_view_pivot">
+    <field name="name">Mail Unsubscription Pivot</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <pivot string="(Un)subscriptions">
+            <field name="reason_id" type="row" />
+            <field name="mailing_list_ids" type="row" />
+            <field name="action" type="col" />
+        </pivot>
+    </field>
+</record>
+
+<record model="ir.ui.view" id="mail_unsubscription_view_graph">
+    <field name="name">Mail Unsubscription Graph</field>
+    <field name="model">mail.unsubscription</field>
+    <field name="arch" type="xml">
+        <graph string="(Un)subscriptions">
+            <field name="date" type="row" />
+            <field name="action" type="col" />
+        </graph>
+    </field>
+</record>
+
+<record id="mail_unsubscription_action" model="ir.actions.act_window">
+    <field name="name">(Un)subscriptions</field>
+    <field name="res_model">mail.unsubscription</field>
+    <field name="view_mode">tree,form,pivot,graph</field>
+</record>
+
+<menuitem
+        id="mail_unsubscription_menu"
+        parent="mass_mailing.mass_mailing_menu_root"
+        action="mail_unsubscription_action"
+    />
+
+</odoo>

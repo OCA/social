@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+<record id="mail_unsubscription_reason_view_form" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Reason Form</field>
+    <field name="model">mail.unsubscription.reason</field>
+    <field name="arch" type="xml">
+        <form>
+            <sheet>
+                <group>
+                    <field name="name" />
+                    <field name="details_required" />
+                    <field name="sequence" />
+                </group>
+                <div class="oe_chatter" />
+            </sheet>
+        </form>
+    </field>
+</record>
+
+<record id="mail_unsubscription_reason_view_tree" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Reason Tree</field>
+    <field name="model">mail.unsubscription.reason</field>
+    <field name="arch" type="xml">
+        <tree>
+            <field name="sequence" widget="handle" />
+            <field name="name" />
+            <field name="details_required" />
+        </tree>
+    </field>
+</record>
+
+<record id="mail_unsubscription_reason_view_search" model="ir.ui.view">
+    <field name="name">Mail Unsubscription Reason Search</field>
+    <field name="model">mail.unsubscription.reason</field>
+    <field name="arch" type="xml">
+        <search>
+            <field name="name" />
+            <field name="details_required" />
+        </search>
+    </field>
+</record>
+
+<record id="mail_unsubscription_reason_action" model="ir.actions.act_window">
+    <field name="name">Unsubscription Reasons</field>
+    <field name="res_model">mail.unsubscription.reason</field>
+    <field name="view_mode">tree,form</field>
+</record>
+
+<menuitem
+        id="mail_unsubscription_reason_menu"
+        parent="mass_mailing.mass_mailing_configuration"
+        action="mail_unsubscription_reason_action"
+    />
+
+</odoo>
