@@ -59,6 +59,13 @@ msgstr ""
 #. openerp-web
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
+msgid "An error occurred. Please try again later or contact us."
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
 msgid "An error occurred. Your changes have not been saved, try again later."
 msgstr ""
 
@@ -135,11 +142,6 @@ msgid "Followers"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
-#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_channel_ids
-msgid "Followers (Channels)"
-msgstr ""
-
-#. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_partner_ids
 msgid "Followers (Partners)"
 msgstr ""
@@ -152,6 +154,11 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__metadata
 msgid "HTTP request metadata used when creating this record."
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__has_message
+msgid "Has Message"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
