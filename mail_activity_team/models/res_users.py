@@ -14,7 +14,7 @@ class ResUsers(models.Model):
 
     @api.model
     def systray_get_activities(self):
-        if not self._context.get("team_activities", False):
+        if not self.env.context.get("team_activities"):
             return super().systray_get_activities()
         query = """SELECT m.id, count(*), act.res_model as model,
                     CASE
@@ -64,6 +64,9 @@ class ResUsers(models.Model):
             user_activities[activity["model"]][
                 "%s_count" % activity["states"]
             ] += activity["count"]
-            if activity["states"] in ("today", "overdue"):
+            if (
+                activity["states"] in ("today", "overdue")
+                and activity["user_id"] != user
+            ):
                 user_activities[activity["model"]]["total_count"] += activity["count"]
         return list(user_activities.values())
