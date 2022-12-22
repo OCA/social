@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Tecnativa - Jairo Llopis
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<data>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mail.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="emails" position="inside">
+                <div id="mail_tracking_mailgun" class="col-12 o_setting_box">
+                    <div class="o_setting_left_pane">
+                        <field name="mail_tracking_mailgun_enabled" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="mail_tracking_mailgun_enabled" />
+                        <div class="text-muted">
+                            Connecting Odoo with <a
+                                href="https://www.mailgun.com/"
+                                target="_blank"
+                            >Mailgun</a> enhances Odoo's mail tracking features.
+                        </div>
+                        <div
+                            class="content-group"
+                            attrs="{'invisible': [('mail_tracking_mailgun_enabled', '=', False)]}"
+                        >
+                            <div class="row">
+                                <div class="col-12 col-lg-6">
+                                    <div class="text-muted mt16 mb4">
+                                        Obtain keys in <a
+                                            href="https://app.mailgun.com/app/account/security/api_keys"
+                                            target="_blank"
+                                        >Mailgun &gt; Settings &gt; API keys</a>:
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="mail_tracking_mailgun_api_key"
+                                            class="col-lg-3 o_light_label"
+                                        />
+                                        <field
+                                            name="mail_tracking_mailgun_api_key"
+                                            password="True"
+                                            placeholder="key-abcde0123456789abcde0123456789ab"
+                                            attrs="{'required': [('mail_tracking_mailgun_enabled', '=', True)]}"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="mail_tracking_mailgun_webhook_signing_key"
+                                            class="col-lg-3 o_light_label"
+                                        />
+                                        <field
+                                            name="mail_tracking_mailgun_webhook_signing_key"
+                                            password="True"
+                                            placeholder="abcde0123456789abcde0123456789ab"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="mail_tracking_mailgun_validation_key"
+                                            class="col-lg-3 o_light_label"
+                                        />
+                                        <field
+                                            name="mail_tracking_mailgun_validation_key"
+                                            password="True"
+                                            placeholder="pubkey-abcde0123456789abcde0123456789ab"
+                                            attrs="{'required': [('mail_tracking_mailgun_auto_check_partner_emails', '=', True)]}"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-12 col-lg-6">
+                                    <div class="text-muted mt16 mb4">
+                                        Other settings:
+                                    </div>
+                                    <div class="mt16">
+                                        <field
+                                            name="mail_tracking_mailgun_auto_check_partner_emails"
+                                            class="oe_inline"
+                                        />
+                                        <label
+                                            for="mail_tracking_mailgun_auto_check_partner_emails"
+                                            class="o_light_label"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="mail_tracking_mailgun_domain"
+                                            class="col-lg-3 o_light_label"
+                                        />
+                                        <field
+                                            name="mail_tracking_mailgun_domain"
+                                            placeholder="odoo.example.com"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="mail_tracking_mailgun_api_url"
+                                            class="col-lg-3 o_light_label"
+                                        />
+                                        <field
+                                            name="mail_tracking_mailgun_api_url"
+                                            placeholder="https://api.mailgun.net"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="mail_tracking_mailgun_webhooks_domain"
+                                            class="col-lg-3 o_light_label"
+                                        />
+                                        <field
+                                            name="mail_tracking_mailgun_webhooks_domain"
+                                            placeholder="https://odoo.example.com"
+                                        />
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <div class="text-muted mt16 mb4">
+                                        If you change Mailgun settings, your Odoo URL or your sending domain, unregister webhooks and register them again to get automatic updates about sent emails:
+                                    </div>
+                                    <button
+                                        type="object"
+                                        name="mail_tracking_mailgun_unregister_webhooks"
+                                        string="Unregister Mailgun webhooks"
+                                        icon="fa-arrow-right"
+                                        class="btn-link"
+                                        confirm="This will unregister ALL webhooks from Mailgun, which can include webhooks for other apps."
+                                    />
+                                    <button
+                                        type="object"
+                                        name="mail_tracking_mailgun_register_webhooks"
+                                        string="Register Mailgun webhooks"
+                                        icon="fa-arrow-right"
+                                        class="btn-link"
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</data>
