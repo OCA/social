@@ -98,29 +98,13 @@ msgid "Couldn't retrieve Mailgun information"
 msgstr "Não foi possível obter informação do Mailgun"
 
 #. module: mail_tracking_mailgun
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_ir_mail_server__display_name
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event__display_name
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__display_name
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_partner__display_name
-msgid "Display Name"
-msgstr ""
-
-#. module: mail_tracking_mailgun
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_email__display_name
-msgid "Display name"
-msgstr ""
-
-#. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid ""
-"Email has been bounced: %s\n"
-"Reason: %s\n"
-"Event: %s"
+"Email has been bounced: %(email)s\n"
+"Reason: %(reason)s\n"
+"Event: %(event_str)s"
 msgstr ""
-"O email foi devolvido: %s\n"
-"Razão: %s\n"
-"Evento: %s"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_enabled
@@ -145,15 +129,6 @@ msgid "Event information not longer stored"
 msgstr "A informação do evento já não está armazenada"
 
 #. module: mail_tracking_mailgun
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_ir_mail_server__id
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_email__id
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event__id
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__id
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_partner__id
-msgid "ID"
-msgstr ""
-
-#. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid ""
 "If you change Mailgun settings, your Odoo URL or your sending domain, "
@@ -164,15 +139,6 @@ msgstr ""
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_validation_key
 msgid "Key used to validate emails."
-msgstr ""
-
-#. module: mail_tracking_mailgun
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_ir_mail_server____last_update
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_email____last_update
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event____last_update
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings____last_update
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_partner____last_update
-msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_tracking_mailgun
@@ -403,3 +369,13 @@ msgstr ""
 #, python-format
 msgid "unknown"
 msgstr "desconhecido"
+
+#, python-format
+#~ msgid ""
+#~ "Email has been bounced: %s\n"
+#~ "Reason: %s\n"
+#~ "Event: %s"
+#~ msgstr ""
+#~ "O email foi devolvido: %s\n"
+#~ "Razão: %s\n"
+#~ "Evento: %s"
