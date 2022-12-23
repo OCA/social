@@ -4,7 +4,7 @@
 {
     "name": "Mail Activity Team",
     "summary": "Add Teams to Activities",
-    "version": "14.0.1.2.0",
+    "version": "14.0.1.3.0",
     "development_status": "Alpha",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
@@ -20,6 +20,7 @@
         "views/mail_activity_team_views.xml",
         "views/mail_activity_views.xml",
         "views/res_users_views.xml",
+        "views/calendar_event_views.xml",
     ],
     "qweb": [
         "static/src/xml/systray.xml",
