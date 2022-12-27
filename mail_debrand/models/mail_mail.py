@@ -11,5 +11,5 @@ class MailMail(models.AbstractModel):
     def _send_prepare_body(self):
         body_html = super()._send_prepare_body()
         return self.env["mail.render.mixin"].remove_href_odoo(
-            body_html or "", remove_parent=0, remove_before=1, to_keep=self.body
+            body_html or "", remove_parent=0, to_keep=self.body
         )
