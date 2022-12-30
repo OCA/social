@@ -1,0 +1,50 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_partner_forwarding
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_partner_forwarding
+#: model:ir.model,name:mail_partner_forwarding.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mail_partner_forwarding
+#: model:ir.model,name:mail_partner_forwarding.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_partner_forwarding
+#: model:ir.model.fields,field_description:mail_partner_forwarding.field_res_partner__forwarding_partner_id
+#: model:ir.model.fields,field_description:mail_partner_forwarding.field_res_users__forwarding_partner_id
+msgid "Forwarding Partner"
+msgstr ""
+
+#. module: mail_partner_forwarding
+#: model:ir.model.fields,help:mail_partner_forwarding.field_res_partner__forwarding_partner_id
+#: model:ir.model.fields,help:mail_partner_forwarding.field_res_users__forwarding_partner_id
+msgid ""
+"Messages will be forwarded only for partners that are followers but no "
+"partners being notify because they belong to channel that is following the "
+"thread"
+msgstr ""
+
+#. module: mail_partner_forwarding
+#: code:addons/mail_partner_forwarding/tests/test_mail_forwarding.py:0
+#, python-format
+msgid "Test"
+msgstr ""
+
+#. module: mail_partner_forwarding
+#: model:ir.model,name:mail_partner_forwarding.model_res_users
+msgid "Users"
+msgstr ""
