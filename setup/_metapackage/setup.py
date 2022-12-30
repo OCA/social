@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo14-addon-mail_layout_force',
         'odoo14-addon-mail_layout_preview',
         'odoo14-addon-mail_notification_custom_subject',
+        'odoo14-addon-mail_notification_with_history',
         'odoo14-addon-mail_optional_autofollow',
         'odoo14-addon-mail_optional_follower_notification',
         'odoo14-addon-mail_outbound_static',
