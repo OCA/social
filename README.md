@@ -52,6 +52,7 @@ addon | version | maintainers | summary
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 14.0.1.0.0 |  | Define a domain from which followers can be selected
 [mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.1.0 |  | Security for Send Message Button on Chatter Area
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
+[mail_server_by_user](mail_server_by_user/) | 14.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Email Server By User
 [mail_show_follower](mail_show_follower/) | 14.0.1.1.0 |  | Show CC document followers in mails.
 [mail_tracking](mail_tracking/) | 14.0.2.0.3 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 14.0.2.0.0 |  | Mail tracking and Mailgun webhooks integration
