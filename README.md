@@ -17,7 +17,11 @@
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[mail_optional_autofollow](mail_optional_autofollow/) | 16.0.1.0.0 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
 
 [//]: # (end addons)
 
