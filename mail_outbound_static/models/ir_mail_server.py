@@ -132,10 +132,10 @@ class IrMailServer(models.Model):
             mail_server_id = self.sudo().search([], order="sequence", limit=1).id
         return mail_server_id
 
-    @api.model
-    def create(self, values):
+    @api.model_create_multi
+    def create(self, vals_list):
         self.clear_caches()
-        return super().create(values)
+        return super().create(vals_list)
 
     def write(self, values):
         self.clear_caches()
