@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2022-11-18 13:44+0000\n"
+"PO-Revision-Date: 2023-01-03 12:46+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -102,7 +102,7 @@ msgstr "Nome da visualizzare"
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_email__display_name
 msgid "Display name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
