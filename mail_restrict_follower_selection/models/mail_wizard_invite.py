@@ -2,9 +2,12 @@
 # Copyright (C) 2017 Komit <http://www.komit-consulting.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+
 from lxml import etree
 
 from odoo import api, models
+from odoo.osv import expression
+from odoo.tools.safe_eval import safe_eval
 
 
 class MailWizardInvite(models.TransientModel):
@@ -15,7 +18,7 @@ class MailWizardInvite(models.TransientModel):
         if not res_model:
             res_model = self.env.context.get("default_res_model")
         parameter_name = "mail_restrict_follower_selection.domain"
-        return (
+        parameter_domain = (
             self.env["ir.config_parameter"]
             .sudo()
             .get_param(
@@ -25,16 +28,20 @@ class MailWizardInvite(models.TransientModel):
                 .get_param(parameter_name, default="[]"),
             )
         )
+        domain = expression.AND(
+            [safe_eval(parameter_domain), self._fields["partner_ids"].domain]
+        )
+        return domain
 
     @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
-        result = super(MailWizardInvite, self).fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
+    def get_view(self, view_id=None, view_type="form", **options):
+        result = super(MailWizardInvite, self).get_view(
+            view_id=view_id, view_type=view_type, **options
         )
         arch = etree.fromstring(result["arch"])
         for field in arch.xpath('//field[@name="partner_ids"]'):
-            field.attrib["domain"] = self._mail_restrict_follower_selection_get_domain()
+            field.attrib["domain"] = str(
+                self._mail_restrict_follower_selection_get_domain()
+            )
         result["arch"] = etree.tostring(arch)
         return result
