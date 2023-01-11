@@ -23,7 +23,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
         )
 
     def test_fields_view_get(self):
-        result = self.env["mail.wizard.invite"].fields_view_get(view_type="form")
+        result = self.env["mail.wizard.invite"].get_view(view_type="form")
         for field in etree.fromstring(result["arch"]).xpath(
             '//field[@name="partner_ids"]'
         ):
