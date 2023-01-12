@@ -281,12 +281,6 @@ msgid "There is no Mailgun API key!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
-#, python-format
-msgid "There is no tracked message!"
-msgstr ""
-
-#. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid ""
 "This will unregister ALL webhooks from Mailgun, which can include webhooks "

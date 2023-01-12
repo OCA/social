@@ -202,12 +202,8 @@ class MailTrackingEmail(models.Model):
         https://documentation.mailgun.com/en/latest/api-events.html
         """
         api_key, api_url, domain, *__ = self._mailgun_values()
-        for tracking in self:
-            if not tracking.mail_message_id:
-                raise UserError(_("There is no tracked message!"))
-            message_id = tracking.mail_message_id.message_id.replace("<", "").replace(
-                ">", ""
-            )
+        for tracking in self.filtered("message_id"):
+            message_id = tracking.message_id.replace("<", "").replace(">", "")
             events = []
             url = urljoin(api_url, "/v3/%s/events" % domain)
             params = {
