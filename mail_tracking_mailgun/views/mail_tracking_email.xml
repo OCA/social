@@ -7,10 +7,12 @@
         <field name="inherit_id" ref="mail_tracking.view_mail_tracking_email_form" />
         <field name="arch" type="xml">
             <field name="state" position="before">
+                    <field name="message_id" invisible="1" />
                     <button
                     name="action_manual_check_mailgun"
                     type="object"
                     string="Re-sync Mailgun"
+                    attrs="{'invisible': [('message_id', '=', False)]}"
                 />
             </field>
         </field>
