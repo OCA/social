@@ -42,6 +42,7 @@ class MailTrackingEmail(models.Model):
     mail_message_id = fields.Many2one(
         string="Message", comodel_name="mail.message", readonly=True, index=True
     )
+    message_id = fields.Char(compute="_compute_message_id")
     mail_id = fields.Many2one(string="Email", comodel_name="mail.mail", readonly=True)
     partner_id = fields.Many2one(
         string="Partner", comodel_name="res.partner", readonly=True
@@ -111,6 +112,15 @@ class MailTrackingEmail(models.Model):
         default=lambda s: uuid.uuid4().hex,
         groups="base.group_system",
     )
+
+    @api.depends("mail_message_id")
+    def _compute_message_id(self):
+        """This helper field will allow us to map the message_id from either the linked
+        mail.message or a mass.mailing mail.trace.
+        """
+        self.message_id = False
+        for tracking in self.filtered("mail_message_id"):
+            tracking.message_id = tracking.mail_message_id.message_id
 
     @api.model_create_multi
     def create(self, vals_list):
