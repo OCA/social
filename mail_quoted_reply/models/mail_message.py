@@ -43,6 +43,6 @@ class MailMessage(models.Model):
             "is_quoted_reply": True,
             "default_notify": True,
             "force_email": True,
-            "default_partner_ids": [(6, 0, self.partner_ids.ids)],
+            "default_partner_ids": self.partner_ids.ids,
         }
         return action
