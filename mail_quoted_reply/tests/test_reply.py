@@ -13,7 +13,11 @@ class TestMessageReply(TransactionCase):
             partner.message_ids.filtered(lambda r: r.message_type != "notification")
         )
         # pylint: disable=C8107
-        message = partner.message_post(body="demo message", message_type="email")
+        message = partner.message_post(
+            body="demo message",
+            message_type="email",
+            partner_ids=self.env.ref("base.partner_demo").ids,
+        )
         partner.refresh()
         self.assertIn(
             message,
@@ -28,6 +32,8 @@ class TestMessageReply(TransactionCase):
         wizard = (
             self.env[action["res_model"]].with_context(**action["context"]).create({})
         )
+        self.assertTrue(wizard.partner_ids)
+        self.assertEqual(message.partner_ids, wizard.partner_ids)
         # the onchange in the composer isn't triggered in tests, so we check for the
         # correct quote in the context
         email_quote = re.search("<p>.*?</p>", wizard._context["quote_body"]).group()
