@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates>
+    <t t-inherit="mail.mail.activity_thread_message_tools" t-inherit-mode="extension">
+        <xpath expr="//span[hasclass('o_mark_as_done')]/a" position="attributes">
+            <attribute name="t-if">!activity.label_activity_done</attribute>
+        </xpath>
+        <xpath expr="//span[hasclass('o_mark_as_done')]/a" position="after">
+            <a
+                role="button"
+                href="#"
+                class="btn btn-link btn-success text-muted o_activity_link mr8"
+                t-if="activity.label_activity_done"
+            >
+                <i class="fa fa-check" /> <t t-esc="activity.label_activity_done" />
+            </a>
+        </xpath>
+    </t>
+</templates>
