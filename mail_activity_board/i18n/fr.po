@@ -35,11 +35,8 @@ msgid "Act. next month"
 msgstr ""
 
 #. module: mail_activity_board
-#. openerp-web
-#: code:addons/mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml:0
 #: model:ir.actions.act_window,name:mail_activity_board.open_boards_activities
 #: model:ir.ui.menu,name:mail_activity_board.board_menu_activities
-#, python-format
 msgid "Activities"
 msgstr ""
 
@@ -113,6 +110,13 @@ msgstr ""
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "User"
+msgstr ""
+
+#. module: mail_activity_board
+#. odoo-javascript
+#: code:addons/mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml:0
+#, python-format
+msgid "View Activities"
 msgstr ""
 
 #. module: mail_activity_board
