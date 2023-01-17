@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+    <t
+        t-name="ChatterTopbar"
+        t-inherit="mail.ChatterTopbar"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <t t-if="chatterTopbar.chatter.hasActivities" position="after">
+            <button
+                class="btn btn-link o_ChatterTopbar_button"
+                type="button"
+                t-att-disabled="!chatterTopbar.chatter.hasWriteAccess"
+                t-on-click="_onListActivity"
+            >
+                <i class="fa fa-list" /> View Activities
+            </button>
+        </t>
+    </t>
+</templates>
