@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-mail_activity_board>=16.0dev,<16.1dev',
+        'odoo-addon-mail_attach_existing_attachment>=16.0dev,<16.1dev',
         'odoo-addon-mail_optional_autofollow>=16.0dev,<16.1dev',
         'odoo-addon-mail_partner_opt_out>=16.0dev,<16.1dev',
     ],
