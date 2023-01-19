@@ -23,7 +23,7 @@ Mail Attach Existing Attachment
     :target: https://runbot.odoo-community.org/runbot/205/16.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module was written to add the possibility to add attachments located on
 the object by sending it by email with the mail compose message wizard
@@ -38,7 +38,7 @@ Usage
 
 To use this module, you need to:
 
-* Adding some attachments on an object by creating a new *Log note*
+* Add some attachments on an object by creating a new *Log note*
 
 .. figure:: https://raw.githubusercontent.com/OCA/social/16.0/mail_attach_existing_attachment/static/description/attachment.png
    :alt: Attachment on purchase order
@@ -76,6 +76,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * Adrien Peiffer <adrien.peiffer@acsone.eu>
+* Benoit Aimont <benoit.aimont@acsone.eu>
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * Sergio Teruel
