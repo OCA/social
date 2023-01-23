@@ -1,10 +1,10 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestFetchMailServerMicrosoftOutlook(SavepointCase):
+class TestFetchMailServerMicrosoftOutlook(TransactionCase):
     def _create_mail_server(self):
         return self.env["fetchmail.server"].create(
             {
