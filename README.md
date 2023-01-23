@@ -50,7 +50,7 @@ addon | version | maintainers | summary
 [mail_quoted_reply](mail_quoted_reply/) | 13.0.1.0.0 |  | Make a reply using a message
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 13.0.1.1.0 |  | Define a domain from which followers can be selected
 [mail_template_multi_attachment](mail_template_multi_attachment/) | 13.0.1.0.0 |  | Module who allows to generate multi attachments on an email template.
-[mail_tracking](mail_tracking/) | 13.0.1.0.11 |  | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 13.0.2.0.0 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 13.0.2.0.3 |  | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 13.0.1.0.2 |  | Improve mass mailing email tracking
 [mass_mailing_contact_active](mass_mailing_contact_active/) | 13.0.1.0.0 |  | Adds active feature on mailing list contact and subscriptions
