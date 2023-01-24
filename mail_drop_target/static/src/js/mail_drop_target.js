@@ -1,66 +1,62 @@
-/* global base64js:false, Uint8Array:false */
-// Copyright 2018 Therp BV <https://therp.nl>
-// License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-
+/* global Uint8Array base64js*/
 odoo.define("mail_drop_target", function (require) {
     "use strict";
-    var Chatter = require("mail.Chatter");
-    var web_drop_target = require("web_drop_target");
 
-    Chatter.include(web_drop_target.DropTargetMixin);
+    const MessageList = require("mail/static/src/components/message_list/message_list.js");
+    const {patch} = require("web.utils");
+    const DropZone = require("mail/static/src/components/drop_zone/drop_zone.js");
+    const useDragVisibleDropZone = require("mail/static/src/component_hooks/use_drag_visible_dropzone/use_drag_visible_dropzone.js");
 
-    Chatter.include({
-        _drop_allowed_types: ["message/rfc822"],
-        _get_record_id: function () {
-            return this.record.res_id;
+    patch(MessageList, "mail_drop_target.mail_drop", {
+        setup() {
+            this._super();
+            this.isDropZoneVisible = useDragVisibleDropZone();
         },
-
-        _handle_drop_items: function (drop_items) {
+        async _onDropZoneFilesDropped(ev) {
+            ev.stopPropagation();
+            this.isDropZoneVisible.value = false;
             var self = this;
-            _.each(drop_items, function (item, e) {
-                return self._handle_file_drop_proxy(item, e);
-            });
-        },
-        _handle_file_drop_proxy: function (item, e) {
-            var self = this;
-            var file = item;
-            if (!file || !(file instanceof Blob)) {
-                return;
-            }
-            var reader = new FileReader();
-            reader.onloadend = self.proxy(
-                _.partial(self._handle_file_drop, file, reader, e)
-            );
-            reader.onerror = self.proxy("_file_reader_error_handler");
-            reader.readAsArrayBuffer(file);
-        },
-        _handle_file_drop: function (drop_file, reader) {
-            var self = this,
-                mail_processor = "",
-                data = "";
-            if (drop_file.name.endsWith(".msg")) {
-                mail_processor = "message_process_msg";
-                data = base64js.fromByteArray(new Uint8Array(reader.result));
-            } else {
-                mail_processor = "message_drop";
-                var reader_array = new Uint8Array(reader.result);
-                data = "";
-                for (var i = 0; i < reader_array.length; i++) {
-                    data += String.fromCharCode(parseInt(reader_array[i]));
-                }
-            }
-            // TODO: read some config parameter if this should set
-            // some of the context keys to suppress mail.thread's behavior
-            return this._rpc({
-                model: "mail.thread",
-                method: mail_processor,
-                args: [this.record.model, data],
-                kwargs: {
-                    thread_id: this.record.data.id,
-                },
-            }).then(function () {
-                self.trigger_up("reload", {});
+            Promise.all(
+                Array.from(ev.detail.files).map((drop_file) => {
+                    var reader = new FileReader();
+                    var mail_processor = "";
+                    if (drop_file.name.endsWith(".msg")) {
+                        mail_processor = "message_process_msg";
+                    } else {
+                        mail_processor = "message_drop";
+                    }
+                    reader.readAsArrayBuffer(drop_file);
+                    reader.onload = function (event) {
+                        var data = "";
+                        // TODO: read some config parameter if this should set
+                        // some of the context keys to suppress mail.thread's behavior
+                        if (mail_processor === "message_process_msg") {
+                            data = base64js.fromByteArray(
+                                new Uint8Array(event.target.result)
+                            );
+                        } else {
+                            var reader_array = new Uint8Array(event.target.result);
+                            data = "";
+                            for (var i = 0; i < reader_array.length; i++) {
+                                data += String.fromCharCode(
+                                    parseInt(reader_array[i], 10)
+                                );
+                            }
+                        }
+                        self.env.services.rpc({
+                            model: "mail.thread",
+                            method: mail_processor,
+                            args: [self.threadView.thread.model, data],
+                            kwargs: {
+                                thread_id: self.threadView.thread.id,
+                            },
+                        });
+                    };
+                })
+            ).then(function () {
+                return self.trigger("reload");
             });
         },
     });
+    MessageList.components.DropZone = DropZone;
 });
