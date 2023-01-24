@@ -26,6 +26,11 @@ class IrMailServer(models.Model):
         " match with the domain whitelist."
     )
 
+    reply_to_the_same_address = fields.Boolean(
+        help="If you have no catchall support for  this server and will activate "
+        "this option, Reply-To address will be the same as From address."
+    )
+
     @api.constrains("domain_whitelist")
     def check_valid_domain_whitelist(self):
         if self.domain_whitelist:
@@ -111,6 +116,13 @@ class IrMailServer(models.Model):
                     message.replace_header("Return-Path", email_from)
                 else:
                     message.add_header("Return-Path", email_from)
+
+            # If reply to the same address is True,
+            # Reply-To header field should have the same as sender address
+            if mail_server.reply_to_the_same_address:
+                message.replace_header("Reply-To", email_from) if message.get(
+                    "Reply-To"
+                ) else message.add_header("Reply-To", email_from)
 
         return super(IrMailServer, self).send_email(
             message, mail_server_id, smtp_server, *args, **kwargs
