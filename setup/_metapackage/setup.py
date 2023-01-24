@@ -30,6 +30,7 @@ setuptools.setup(
         'odoo-addon-mass_mailing_custom_unsubscribe>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_partner>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_resend>=15.0dev,<15.1dev',
+        'odoo-addon-microsoft_outlook_single_tenant>=15.0dev,<15.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
