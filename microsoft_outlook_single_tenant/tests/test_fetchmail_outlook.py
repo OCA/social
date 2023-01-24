@@ -9,7 +9,7 @@ class TestFetchMailServerMicrosoftOutlook(TransactionCase):
         return self.env["fetchmail.server"].create(
             {
                 "name": "Test server",
-                "use_microsoft_outlook_service": True,
+                "is_microsoft_outlook_configured": True,
                 "user": "test@example.com",
                 "password": "",
                 "server_type": "imap",
@@ -42,7 +42,7 @@ class TestFetchMailServerMicrosoftOutlook(TransactionCase):
         mail_server = self.env["fetchmail.server"].create(
             {
                 "name": "Test server",
-                "use_microsoft_outlook_service": True,
+                "is_microsoft_outlook_configured": True,
                 "user": "test@example.com",
                 "password": "",
                 "server_type": "imap",
