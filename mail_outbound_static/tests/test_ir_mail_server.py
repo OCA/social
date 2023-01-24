@@ -327,3 +327,24 @@ class TestIrMailServer(TransactionCase):
             mail_server.smtp_from = "."
 
         mail_server.smtp_from = "notifications@test.com"
+
+    def test_11_from_outgoing_server_with_catchall(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "example.com"
+        email_from = "test@%s" % domain
+
+        self.message.replace_header("From", email_from)
+        reply_to_address = self.message["Reply-To"]
+        message = self._send_mail()
+        self.assertEqual(message["Reply-To"], reply_to_address)
+
+    def test_12_from_outgoing_server_no_catchall(self):
+        self._init_mail_server_domain_whilelist_based()
+        domain = "example.com"
+        email_from = "test@%s" % domain
+        expected_mail_server = self.mail_server_domainone
+
+        self.message.replace_header("From", email_from)
+        expected_mail_server.reply_to_the_same_address = True
+        message = self._send_mail()
+        self.assertEqual(message["Reply-To"], expected_mail_server.smtp_from)
