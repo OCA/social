@@ -43,6 +43,7 @@ addon | version | maintainers | summary
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 15.0.1.0.0 |  | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_partner](mass_mailing_partner/) | 15.0.1.0.0 |  | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 15.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
+[microsoft_outlook_single_tenant](microsoft_outlook_single_tenant/) | 15.0.1.0.0 |  | Microsoft Outlook Single Tenant
 
 [//]: # (end addons)
 
