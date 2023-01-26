@@ -8,7 +8,8 @@
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
     "summary": "Attach emails to Odoo by dragging them from your desktop",
-    "depends": ["mail", "web_drop_target"],
+    "depends": ["mail"],
     "external_dependencies": {"python": ["extract_msg"]},
     "data": ["views/templates.xml", "views/res_config_settings_views.xml"],
+    "qweb": ["static/src/xml/chatter.xml"],
 }
