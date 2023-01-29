@@ -4,3 +4,6 @@
 * Pierre Pizzetta <pierre@devreaction.com>
 * Katherine Zaoral <kz@adhoc.com.ar>
 * Juan José Scarafía <jjs@adhoc.com.ar>
+* `Quartile <https://www.quartile.co>`__:
+
+  * Yoshi Tashiro
