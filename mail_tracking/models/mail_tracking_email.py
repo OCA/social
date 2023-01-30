@@ -158,10 +158,16 @@ class MailTrackingEmail(models.Model):
         if not msg_linked:
             return []
         ids, msg_ids, mail_ids, partner_ids = zip(*msg_linked)
-        # Filter messages with their ACL rules
-        msg_ids = self.env["mail.message"]._search([("id", "in", msg_ids)])
-        mail_ids = self.env["mail.mail"]._search([("id", "in", mail_ids)])
-        partner_ids = self.env["res.partner"]._search([("id", "in", partner_ids)])
+        # Filter messages with their ACL rules avoiding False values fetched in the set
+        msg_ids = self.env["mail.message"]._search(
+            [("id", "in", [x for x in msg_ids if x])]
+        )
+        mail_ids = self.env["mail.mail"]._search(
+            [("id", "in", [x for x in mail_ids if x])]
+        )
+        partner_ids = self.env["res.partner"]._search(
+            [("id", "in", [x for x in partner_ids if x])]
+        )
         return [
             x[0]
             for x in msg_linked
