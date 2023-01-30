@@ -4,7 +4,7 @@
 {
     "name": "Mail Activity Team",
     "summary": "Add Teams to Activities",
-    "version": "15.0.1.4.0",
+    "version": "15.0.2.0.0",
     "development_status": "Alpha",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
@@ -15,6 +15,7 @@
     "data": [
         "security/ir.model.access.csv",
         "security/mail_activity_team_security.xml",
+        "views/ir_actions_server_views.xml",
         "views/mail_activity_type.xml",
         "views/mail_activity_team_views.xml",
         "views/mail_activity_views.xml",
