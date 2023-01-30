@@ -46,6 +46,8 @@ class MailActivityMixin(models.AbstractModel):
         user-team missmatch. We can hook onto `act_values` dict as it's passed
         to the create activity method.
         """
+        if self.env.context.get("force_activity_team"):
+            act_values["team_id"] = self.env.context["force_activity_team"].id
         if "team_id" not in act_values:
             if act_type_xmlid:
                 activity_type = self.sudo().env.ref(act_type_xmlid)
