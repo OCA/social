@@ -1,10 +1,9 @@
 /** @odoo-module **/
-
-import {attr} from "@mail/model/model_field";
 import {
     registerFieldPatchModel,
     registerInstancePatchModel,
 } from "@mail/model/model_core";
+import {attr} from "@mail/model/model_field";
 
 registerInstancePatchModel(
     "mail.chatter",
