@@ -61,7 +61,8 @@ registerInstancePatchModel(
             } else {
                 this.messaging.update({
                     userSetting: insertAndReplace({
-                        id: -1, // Fake id for guest
+                        // Fake id for guest
+                        id: -1,
                     }),
                 });
             }

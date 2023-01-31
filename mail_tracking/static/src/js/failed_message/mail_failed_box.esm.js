@@ -1,19 +1,9 @@
 /** @odoo-module **/
 
-// const chatter = require("mail/static/src/models/chatter/chatter.js");
-// const useStore = require("mail/static/src/component_hooks/use_store/use_store.js");
 import {registerMessagingComponent} from "@mail/utils/messaging_component";
 const {Component} = owl;
 
 export class MessageFailedBox extends Component {
-    constructor(...args) {
-        super(...args);
-    }
-
-    //    Get chatter() {
-    //        return this.env.models["mail.chatter"].get(this.props.chatterLocalId);
-    //    }
-
     _onClickTitle() {
         this.chatter.toggleMessageFailedBoxVisibility();
     }

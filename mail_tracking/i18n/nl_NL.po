@@ -500,6 +500,12 @@ msgid "Recipient email address"
 msgstr ""
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_tracking_email.py:0
+#, python-format
+msgid "Records:"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__rejected
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__reject
 msgid "Rejected"
@@ -606,6 +612,16 @@ msgid "The partner doesn't have a defined email"
 msgstr ""
 
 #. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_tracking_email.py:0
+#, python-format
+msgid ""
+"The requested operation cannot be completed due to security restrictions. "
+"Please contact your system administrator.\n"
+"\n"
+"(Document type: %(desc)s, Operation: %(operation)s)"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__time
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__time
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -709,6 +725,12 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_country_id
 msgid "User country"
+msgstr ""
+
+#. module: mail_tracking
+#: code:addons/mail_tracking/models/mail_tracking_email.py:0
+#, python-format
+msgid "User:"
 msgstr ""
 
 #. module: mail_tracking
