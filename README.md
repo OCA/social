@@ -26,7 +26,7 @@ addon | version | maintainers | summary
 [mail_activity_creator](mail_activity_creator/) | 15.0.1.0.0 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 15.0.1.0.0 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 15.0.1.0.0 |  | Add Partner to Activities
-[mail_activity_team](mail_activity_team/) | 15.0.1.4.0 |  | Add Teams to Activities
+[mail_activity_team](mail_activity_team/) | 15.0.2.0.0 |  | Add Teams to Activities
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 15.0.1.0.0 |  | Adding attachment on the object by sending this one
 [mail_autosubscribe](mail_autosubscribe/) | 15.0.1.0.3 |  | Automatically subscribe partners to its company's business documents
 [mail_debrand](mail_debrand/) | 15.0.1.2.2 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
