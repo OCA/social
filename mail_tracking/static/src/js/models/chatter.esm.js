@@ -1,15 +1,11 @@
 /** @odoo-module **/
 
 import {attr} from "@mail/model/model_field";
-import {
-    registerFieldPatchModel,
-    registerInstancePatchModel,
-} from "@mail/model/model_core";
+import {registerPatch} from "@mail/model/model_core";
 
-registerInstancePatchModel(
-    "mail.chatter",
-    "mail/static/src/models/chatter/chatter.js",
-    {
+registerPatch({
+    name: "Chatter",
+    modelMethods: {
         async refresh() {
             this._super(...arguments);
             this.thread.refreshMessagefailed();
@@ -23,10 +19,10 @@ registerInstancePatchModel(
             this._super(...arguments);
             this.thread.refreshMessagefailed();
         },
-    }
-);
-registerFieldPatchModel("mail.chatter", "mail/static/src/models/chatter/chatter.js", {
-    isMessageFailedBoxVisible: attr({
-        default: true,
-    }),
+    },
+    fields: {
+        isMessageFailedBoxVisible: attr({
+            default: true,
+        }),
+    },
 });

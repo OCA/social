@@ -3,14 +3,14 @@
 
 import base64
 import time
+from unittest import mock
 
-import mock
 import psycopg2
 import psycopg2.errorcodes
 
 from odoo import http
 from odoo.tests.common import TransactionCase
-from odoo.tools import mute_logger
+from odoo.tools.misc import mute_logger
 
 from ..controllers.main import BLANK, MailTrackingController
 
@@ -102,9 +102,9 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(tracking_email.state, "sent")
         # message_dict read by web interface
         message_dict = message.message_format()[0]
-        self.assertTrue(len(message_dict["partner_ids"]) > 0)
+        self.assertTrue(len(message_dict["history_partner_ids"]) > 0)
         # First partner is recipient
-        partner_id = message_dict["partner_ids"][0]
+        partner_id = message_dict["history_partner_ids"][0]
         self.assertEqual(partner_id, self.recipient.id)
         status = message_dict["partner_trackings"][0]
         # Tracking status must be sent and

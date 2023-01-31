@@ -1,8 +1,6 @@
 /* Copyright 2019 Alexandre Díaz
    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). */
 odoo.define("mail_tracking.FailedMessageDiscuss", function (require) {
-    "use strict";
-
     // To be considered:
     //   - One message can be displayed in many threads
     //   - A thread can be a mailbox, channel, ...

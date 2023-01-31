@@ -7,14 +7,14 @@
             >
             <a role="button" class="o_ActivityBox_title btn" t-on-click="_onClickTitle">
                <hr class="o_ActivityBox_titleLine" />
-               <span class="o_ActivityBox_titleText">
+                <span class="o_ActivityBox_titleText">
                <i
                             class="fa fa-fw"
                             t-att-class="chatter.isMessageFailedBoxVisible ? 'fa-caret-down' : 'fa-caret-right'"
                         />
-               Failed messages
+                    Failed messages
                </span>
-               <t t-if="!chatter.isMessageFailedBoxVisible">
+                <t t-if="!chatter.isMessageFailedBoxVisible">
                   <span class="o_ActivityBox_titleBadges">
                      <t t-if="chatter.thread.messagefailed.length > 0">
                         <span
@@ -25,9 +25,9 @@
                      </t>
                   </span>
                </t>
-               <hr class="o_ActivityBox_titleLine" />
+                <hr class="o_ActivityBox_titleLine" />
             </a>
-            <t
+             <t
                     t-if="chatter.isMessageFailedBoxVisible and chatter.thread.messagefailed"
                 >
                <div class="o_ActivityList">
@@ -47,22 +47,22 @@
                                                     t-att-alt="messagefailed.author"
                                                 />
                                  </t>
-                                 <div class="o_Activity_iconContainer bg-danger-full">
+                                  <div class="o_Activity_iconContainer bg-danger-full">
                                     <i class="o_Activity_icon fa fa-exclamation" />
                                  </div>
                               </div>
                            </div>
-                           <div class="o_Activity_core">
+                            <div class="o_Activity_core">
                               <div class="o_Activity_info">
                                  <div class="o_Activity_dueDateText" t-att-class="{}">
                                     <t t-esc="messagefailed.author" />
                                  </div>
-                                 <t t-if="messagefailed.date">
+                                  <t t-if="messagefailed.date">
                                     <div class="o_Activity_summary text-muted">
                                        <t t-esc="messagefailed.date" />
                                     </div>
                                  </t>
-                                 <span t-attf-class="o_thread_icons">
+                                  <span t-attf-class="o_thread_icons">
                                  <a
                                                     href="#"
                                                     class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_reviewed o_activity_link"
@@ -71,7 +71,7 @@
                                                 >
                                  <i class="fa fa-check" /> Set as Reviewed
                                  </a>
-                                 <a
+                                      <a
                                                     href="#"
                                                     class="btn btn-link btn-success o_thread_icon text-muted btn-sm o_failed_message_retry o_activity_link"
                                                     t-on-click="_onRetryFailedMessage"
@@ -81,16 +81,17 @@
                                  </a>
                                  </span>
                               </div>
-                              <div class="o_Activity_info">
+                                <div class="o_Activity_info">
                                  <strong class="text-danger">Failed Recipients:</strong>
-                                 <t
+                                    <t
                                                 t-foreach="messagefailed.failed_recipients"
                                                 t-as="recipient"
+                                                t-key="recipient[0]"
                                             >
                                     <t t-if="!recipient_first">
                                        -
                                     </t>
-                                    <a
+                                        <a
                                                     class="o_mail_action_tracking_partner"
                                                     t-att-data-partner="recipient[1]"
                                                     t-attf-href="#model=res.partner&amp;id={{recipient[0]}}"
@@ -99,7 +100,7 @@
                                     </a>
                                  </t>
                               </div>
-                              <div class="o_thread_message_note small">
+                                <div class="o_thread_message_note small">
                                  <t t-raw="messagefailed.body" />
                               </div>
                            </div>
@@ -111,17 +112,18 @@
          </t>
       </div>
    </t>
-   <t t-inherit="mail.Chatter" t-inherit-mode="extension">
+    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
       <xpath
-            expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.isAttachmentBoxVisible']"
+            expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.attachmentBoxView']"
             position="before"
         >
-         <t t-if="chatter.thread">
+         <t t-if="chatter.activityBoxView">
             <MessageFailedBox
-                    class="o_Chatter_activityBox"
-                    chatterLocalId="chatter.localId"
+                    className="'o_Chatter_activityBox'"
+                    record="chatter.activityBoxView"
                 />
          </t>
       </xpath>
    </t>
+
 </templates>
