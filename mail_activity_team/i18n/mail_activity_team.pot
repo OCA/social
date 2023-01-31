@@ -29,6 +29,8 @@ msgid "Activity Mixin"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_ir_actions_server__activity_team_id
+#: model:ir.model.fields,field_description:mail_activity_team.field_ir_cron__activity_team_id
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Activity Team"
 msgstr ""
@@ -131,6 +133,11 @@ msgstr ""
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__name
 msgid "Name"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_ir_actions_server
+msgid "Server Action"
 msgstr ""
 
 #. module: mail_activity_team
