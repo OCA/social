@@ -41,6 +41,7 @@ class MailTrackingController(MailController):
             "ua_family": request.user_agent.browser or False,
         }
 
+    # TODO Remove useless controller
     @http.route(
         [
             "/mail/tracking/all/<string:db>",
@@ -80,8 +81,10 @@ class MailTrackingController(MailController):
         metadata = self._request_metadata()
         with db_env(db) as env:
             try:
-                tracking_email = env["mail.tracking.email"].search(
-                    [("id", "=", tracking_email_id), ("token", "=", token)]
+                tracking_email = (
+                    env["mail.tracking.email"]
+                    .sudo()
+                    .search([("id", "=", tracking_email_id), ("token", "=", token)])
                 )
                 if not tracking_email:
                     _logger.warning(
