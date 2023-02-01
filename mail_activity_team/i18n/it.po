@@ -61,12 +61,6 @@ msgid "Assign to missing activities"
 msgstr "Assegna ad attività mancanti"
 
 #. module: mail_activity_team
-#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
-#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__user_id
-msgid "Assigned to"
-msgstr ""
-
-#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__create_uid
 msgid "Created by"
 msgstr "Creato da"
@@ -167,6 +161,11 @@ msgid "Team Members"
 msgstr "Membri Team"
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
+msgid "Team user"
+msgstr ""
+
+#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_kanban
 msgid "Team:"
 msgstr "Team:"
@@ -184,11 +183,18 @@ msgid "Used models"
 msgstr "Modelli usati"
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__user_id
+msgid "User"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_res_users
 msgid "Users"
 msgstr "Utenti"
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_event_event__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_event_registration__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_mailing_mailing__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner__activity_team_user_ids
