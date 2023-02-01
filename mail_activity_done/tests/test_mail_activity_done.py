@@ -24,6 +24,7 @@ class TestMailActivityDoneMethods(TransactionCase):
             {
                 "activity_type_id": activity_type.id,
                 "res_id": self.env.ref("base.res_partner_1").id,
+                "res_model": "res.partner",
                 "res_model_id": self.env["ir.model"]._get("res.partner").id,
                 "user_id": self.employee.id,
                 "date_deadline": date.today(),
