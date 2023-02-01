@@ -37,7 +37,7 @@ class ResUsers(models.Model):
         user_activities = {}
         for activity in activity_data:
             if not user_activities.get(activity["model"]):
-                module = self.env[activity["model"]].get('_original_module', False)
+                module = self.env[activity["model"]]._original_module
                 icon = module and modules.module.get_module_icon(module)
                 user_activities[activity["model"]] = {
                     "name": model_names[activity["id"]],
