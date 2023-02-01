@@ -58,12 +58,6 @@ msgid "Assign to missing activities"
 msgstr ""
 
 #. module: mail_activity_team
-#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
-#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__user_id
-msgid "Assigned to"
-msgstr ""
-
-#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__create_uid
 msgid "Created by"
 msgstr ""
@@ -164,6 +158,11 @@ msgid "Team Members"
 msgstr ""
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
+msgid "Team user"
+msgstr ""
+
+#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_kanban
 msgid "Team:"
 msgstr ""
@@ -178,6 +177,11 @@ msgstr ""
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__res_model_ids
 msgid "Used models"
+msgstr ""
+
+#. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__user_id
+msgid "User"
 msgstr ""
 
 #. module: mail_activity_team
