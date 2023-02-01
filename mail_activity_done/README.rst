@@ -86,6 +86,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/15.0/mail_activity_done>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_activity_done>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

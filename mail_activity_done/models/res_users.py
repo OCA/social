@@ -37,12 +37,13 @@ class ResUsers(models.Model):
         user_activities = {}
         for activity in activity_data:
             if not user_activities.get(activity["model"]):
+                module = self.env[activity["model"]]._original_module
+                icon = module and modules.module.get_module_icon(module)
                 user_activities[activity["model"]] = {
+                    "id": activity["id"],
                     "name": model_names[activity["id"]],
                     "model": activity["model"],
-                    "icon": modules.module.get_module_icon(
-                        self.env[activity["model"]]._original_module
-                    ),
+                    "icon": icon,
                     "total_count": 0,
                     "today_count": 0,
                     "overdue_count": 0,

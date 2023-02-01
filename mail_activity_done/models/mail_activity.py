@@ -14,7 +14,7 @@ class MailActivity(models.Model):
         compute="_compute_state",
         search="_search_state",
     )
-    date_done = fields.Date("Completed Date", index=True, readonly=True)
+    date_done = fields.Date("Completed Date", index="btree", readonly=True)
 
     @api.depends("date_deadline", "done")
     def _compute_state(self):
