@@ -68,7 +68,7 @@ addon | version | maintainers | summary
 [mass_mailing_subscription_date](mass_mailing_subscription_date/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Track contact's subscription date to mailing lists
 [mass_mailing_subscription_email](mass_mailing_subscription_email/) | 14.0.1.0.3 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Send notification emails when contacts subscription changes.
 [mass_mailing_unique](mass_mailing_unique/) | 14.0.1.0.0 |  | Avoids duplicate mailing lists and contacts
-[microsoft_outlook_single_tenant](microsoft_outlook_single_tenant/) | 14.0.1.0.0 |  | Microsoft Outlook Single Tenant
+[microsoft_outlook_single_tenant](microsoft_outlook_single_tenant/) | 14.0.1.0.0 |  | Microsoft Outlook Single Tenant (DEPRECATED)
 [website_mass_mailing_name](website_mass_mailing_name/) | 14.0.1.0.0 |  | Ask for name when subscribing, and create and/or link partner
 
 [//]: # (end addons)
