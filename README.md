@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 15.0.1.0.1 |  | Base Search Mail Content
-[mail_activity_board](mail_activity_board/) | 15.0.1.1.1 |  | Add Activity Boards
+[mail_activity_board](mail_activity_board/) | 15.0.2.0.0 |  | Add Activity Boards
 [mail_activity_creator](mail_activity_creator/) | 15.0.1.0.0 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 15.0.1.0.0 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 15.0.1.0.0 |  | Add Partner to Activities
@@ -39,7 +39,7 @@ addon | version | maintainers | summary
 [mail_quoted_reply](mail_quoted_reply/) | 15.0.1.0.1 |  | Make a reply using a message
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 15.0.1.0.0 |  | Define a domain from which followers can be selected
 [mail_show_follower](mail_show_follower/) | 15.0.1.2.2 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Show CC document followers in mails.
-[mail_tracking](mail_tracking/) | 15.0.1.1.0 |  | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 15.0.2.0.0 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 15.0.1.1.0 |  | Mail tracking and Mailgun webhooks integration
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 15.0.1.0.0 |  | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_partner](mass_mailing_partner/) | 15.0.1.0.0 |  | Link partners with mass-mailing
