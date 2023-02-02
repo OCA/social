@@ -30,6 +30,10 @@ class TestFetchMailServerMicrosoftOutlook(SavepointCase):
         self.assertIn(common_endpoint, mail_server.microsoft_outlook_uri)
 
     def test_single_tenant_app_endpoint(self):
+        self.env["ir.config_parameter"].sudo().set_param(
+            "microsoft_outlook.endpoint",
+            "https://login.microsoftonline.com/test_directory_tenant_id/oauth2/v2.0/",
+        )
         self.env["res.config.settings"].create(
             {
                 "microsoft_outlook_client_identifier": "test_client_id",
