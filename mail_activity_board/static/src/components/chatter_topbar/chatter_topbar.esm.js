@@ -1,8 +1,7 @@
 /** @odoo-module **/
-import {patch} from "web.utils";
 import {ChatterTopbar} from "@mail/components/chatter_topbar/chatter_topbar";
+import {patch} from "web.utils";
 const components = {ChatterTopbar};
-// Import {rpc}
 import rpc from "web.rpc";
 
 patch(
