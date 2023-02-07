@@ -139,8 +139,8 @@ class MailMessage(models.Model):
                 .search([("mail_message_id", "=", message.id)])
             )
             # String to List
-            email_cc_list = self._drop_aliases(email_split(message.email_cc))
-            email_to_list = self._drop_aliases(email_split(message.email_to))
+            email_cc_list = self._drop_catchall(email_split(message.email_cc))
+            email_to_list = self._drop_catchall(email_split(message.email_to))
             # Search related partners recipients
             partners |= partners.search(
                 [("email", "in", email_cc_list + email_to_list)]
@@ -215,12 +215,16 @@ class MailMessage(models.Model):
         return res
 
     @api.model
-    def _drop_aliases(self, mail_list):
-        aliases = self.env["mail.alias"].get_aliases()
+    def _drop_catchall(self, mail_list):
+        IrConfigParamObj = self.env["ir.config_parameter"].sudo()
+        catchall = "{}@{}".format(
+            IrConfigParamObj.get_param("mail.catchall.alias"),
+            IrConfigParamObj.get_param("mail.catchall.domain"),
+        )
 
         def _filter_alias(email):
             email_wn = getaddresses([email])[0][1]
-            if email_wn not in aliases:
+            if email_wn not in catchall:
                 return email_wn
 
         return list(filter(_filter_alias, mail_list))
