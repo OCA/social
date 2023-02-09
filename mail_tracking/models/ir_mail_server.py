@@ -45,10 +45,10 @@ class IrMailServer(models.Model):
         if tracking_email_id:
             headers = self._tracking_headers_add(tracking_email_id, headers)
         msg = super(IrMailServer, self).build_email(
-            email_from,
-            email_to,
-            subject,
-            body,
+            email_from=email_from,
+            email_to=email_to,
+            subject=subject,
+            body=body,
             email_cc=email_cc,
             email_bcc=email_bcc,
             reply_to=reply_to,
