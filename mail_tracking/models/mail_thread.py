@@ -75,9 +75,10 @@ class MailThread(models.AbstractModel):
                     )
             else:
                 partner = ResPartnerObj.browse(partner_id)
-                self._message_add_suggested_recipient(
-                    suggestions, partner=partner, reason=reason
-                )
+                if partner.email not in aliases:
+                    self._message_add_suggested_recipient(
+                        suggestions, partner=partner, reason=reason
+                    )
 
     @api.model
     def _fields_view_get(
