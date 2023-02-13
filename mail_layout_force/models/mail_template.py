@@ -29,7 +29,7 @@ class MailTemplate(models.Model):
                 for rec in missing
             ]
             self.env["ir.model.data"].sudo().create(vals)
-            self.force_email_layout_id.invalidate_cache(["xml_id"])
+            self.force_email_layout_id.invalidate_recordset(["xml_id"])
 
     @api.model_create_multi
     def create(self, vals_list):
