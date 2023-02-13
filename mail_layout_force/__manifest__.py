@@ -5,7 +5,7 @@
 {
     "name": "Mail Layout Force",
     "summary": "Force a mail layout on selected email templates",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["ivantodorovich"],
     "website": "https://github.com/OCA/social",
