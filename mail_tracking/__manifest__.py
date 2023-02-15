@@ -31,7 +31,7 @@
         "web.assets_backend": [
             "mail_tracking/static/src/css/mail_tracking.scss",
             "mail_tracking/static/src/js/failed_message/mail_failed_box.esm.js",
-            "mail_tracking/static/src/js/failed_message/discuss.esm.js",
+            #"mail_tracking/static/src/js/failed_message/discuss.esm.js",
             "mail_tracking/static/src/xml/mail_tracking.xml",
             "mail_tracking/static/src/xml/failed_message/common.xml",
             "mail_tracking/static/src/xml/failed_message/thread.xml",

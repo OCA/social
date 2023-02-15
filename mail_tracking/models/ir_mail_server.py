@@ -91,18 +91,10 @@ class IrMailServer(models.Model):
         return smtp_server_used
 
     @api.model
-    def send_email(
-        self,
-        message,
-        mail_server_id=None,
-        smtp_server=None,
-        smtp_port=None,
-        smtp_user=None,
-        smtp_password=None,
-        smtp_encryption=None,
-        smtp_debug=False,
-        smtp_session=None,
-    ):
+    def send_email(self, message, mail_server_id=None, smtp_server=None, smtp_port=None,
+                   smtp_user=None, smtp_password=None, smtp_encryption=None,
+                   smtp_ssl_certificate=None, smtp_ssl_private_key=None,
+                   smtp_debug=False, smtp_session=None):
         message_id = False
         tracking_email = self._tracking_email_get(message)
         smtp_server_used = self.sudo()._smtp_server_get(mail_server_id, smtp_server)
@@ -115,6 +107,8 @@ class IrMailServer(models.Model):
                 smtp_user=smtp_user,
                 smtp_password=smtp_password,
                 smtp_encryption=smtp_encryption,
+                smtp_ssl_certificate=smtp_ssl_certificate,
+                smtp_ssl_private_key=smtp_ssl_certificate,
                 smtp_debug=smtp_debug,
                 smtp_session=smtp_session,
             )

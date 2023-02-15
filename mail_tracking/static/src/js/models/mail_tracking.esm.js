@@ -8,7 +8,7 @@ registerPatch({
     modelMethods: {
         convertData(data) {
             const data2 = this._super(data);
-            if ("partner_trackings" in data) {
+            if ("partner_trackings" in data && data.partner_trackings.tracking_id) {
                 data2.partner_trackings = data.partner_trackings;
             }
             return data2;

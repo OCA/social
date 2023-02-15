@@ -71,7 +71,7 @@
                         t-as="tracking"
                         t-key="tracking.tracking_id"
                     >
-                    >
+
                     <t t-if="!tracking_first">
                           -
                     </t>
