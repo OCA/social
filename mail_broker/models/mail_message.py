@@ -51,5 +51,7 @@ class MailMessage(models.Model):
         return result
 
     def set_message_done(self):
-        self.write({"broker_unread": False})
+        # We need to set it as sudo in order to avoid collateral damages.
+        # In fact, it is done with sudo on the original method
+        self.sudo().write({"broker_unread": False})
         return super().set_message_done()
