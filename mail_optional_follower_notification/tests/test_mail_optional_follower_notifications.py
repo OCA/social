@@ -20,7 +20,6 @@ class TestMailOptionalFollowernotifications(TransactionCase):
                 "default_model": "res.partner",
                 "default_res_id": cls.partner_01.id,
                 "default_composition_mode": "comment",
-                "test_optional_follow_notification": True,
             }
         )
         cls.mail_compose_context = ctx
