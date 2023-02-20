@@ -61,6 +61,9 @@ class ResPartner(models.Model):
                 urljoin(params.api_url, "/v3/address/validate"),
                 auth=("api", params.validation_key),
                 params={"address": partner.email, "mailbox_verification": True},
+                timeout=self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("mailgun.timeout", 10),
             )
             if (
                 not res
@@ -136,6 +139,9 @@ class ResPartner(models.Model):
             res = requests.get(
                 urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
                 auth=("api", api_key),
+                timeout=self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("mailgun.timeout", 10),
             )
             if res.status_code == 200 and not partner.email_bounced:
                 partner.email_bounced = True
@@ -156,6 +162,9 @@ class ResPartner(models.Model):
                 urljoin(api_url, "/v3/%s/bounces" % domain),
                 auth=("api", api_key),
                 data={"address": partner.email},
+                timeout=self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("mailgun.timeout", 10),
             )
             partner.email_bounced = res.status_code == 200 and not partner.email_bounced
 
@@ -172,6 +181,9 @@ class ResPartner(models.Model):
             res = requests.delete(
                 urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
                 auth=("api", api_key),
+                timeout=self.env["ir.config_parameter"]
+                .sudo()
+                .get_param("mailgun.timeout", 10),
             )
             if res.status_code in (200, 404) and partner.email_bounced:
                 partner.email_bounced = False
