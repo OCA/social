@@ -217,6 +217,9 @@ class MailTrackingEmail(models.Model):
                     url,
                     auth=("api", api_key),
                     params=params,
+                    timeout=self.env["ir.config_parameter"]
+                    .sudo()
+                    .get_param("mailgun.timeout", 10),
                 )
                 if not res or res.status_code != 200:
                     raise UserError(_("Couldn't retrieve Mailgun information"))
