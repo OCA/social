@@ -64,12 +64,12 @@ class MailTrackingController(main.MailTrackingController):
         # See https://documentation.mailgun.com/en/latest/user_manual.html#routes
         try:
             self._mail_tracking_mailgun_webhook_verify(
-                **request.jsonrequest["signature"]
+                **request.dispatcher.jsonrequest["signature"]
             )
         except ValidationError as error:
             raise NotAcceptable from error
         # Process event
         request.env["mail.tracking.email"].sudo()._mailgun_event_process(
-            request.jsonrequest["event-data"],
+            request.dispatcher.jsonrequest["event-data"],
             self._request_metadata(),
         )
