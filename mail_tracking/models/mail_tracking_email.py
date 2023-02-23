@@ -168,9 +168,9 @@ class MailTrackingEmail(models.Model):
             for x in msg_linked
             if (x[1] in msg_ids)  # We can read the linked message
             or (
-                not any({x[1], x[2]}) and x[3] in partner_ids
+                not any({x[0], x[1]}) and x[2] in partner_ids
             )  # No linked msg/mail but we can read the linked partner
-            or (not any({x[1], x[2], x[3]}))  # No linked record
+            or (not any({x[0], x[1], x[2]}))  # No linked record
         ]
 
     @api.model
