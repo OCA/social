@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data noupdate="1">
+        <record id="mt_activities_unlink" model="mail.message.subtype">
+            <field name="name">Activities unlink</field>
+            <field name="default" eval="True" />
+            <field name="internal" eval="True" />
+            <field name="sequence" eval="90" />
+        </record>
+    </data>
+    <data>
+        <template id="message_activity_unlink">
+            <div>
+                <p>
+                    <span
+                        t-attf-class="fa #{activity.activity_type_id.icon} fa-fw"
+                    /><span t-field="activity.activity_type_id.name" /> deleted
+                    <t t-if="display_assignee"> (originally assigned to <span
+                            t-field="activity.user_id.name"
+                        />)</t>
+                    <span t-if="activity.summary">: </span><span
+                        t-if="activity.summary"
+                        t-field="activity.summary"
+                    />
+                </p>
+                <t
+                    t-if="activity.note and activity.note != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
+                ><!-- <p></br></p> -->
+                    <div class="o_mail_note_title"><strong>Original note:</strong></div>
+                    <div t-field="activity.note" />
+                </t>
+            </div>
+        </template>
+    </data>
+</odoo>
