@@ -12,5 +12,6 @@
     "summary": "Define a domain from which followers can be selected",
     "depends": ["mail"],
     "data": ["data/ir_config_parameter.xml", "data/ir_actions.xml"],
+    "demo": ["demo/ir_config_parameter_demo.xml"],
     "installable": True,
 }
