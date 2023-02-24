@@ -13,6 +13,10 @@ class TestMailRestrictFollowerSelection(TransactionCase):
         self.category_employees = self.env["res.partner.category"].create(
             {"name": "Employees"}
         )
+        self.param = self.env.ref(
+            "mail_restrict_follower_selection.parameter_res_partner_domain"
+        )
+        self.param.update({"value": "[('category_id.name', '=', 'Employees')]"})
 
         self.partner = self.env["res.partner"].create(
             {
@@ -70,12 +74,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
             test_restrict_follower=True
         )._message_add_suggested_recipient({self.partner.id: []}, partner=self.partner)
         self.assertEqual(res[self.partner.id][0][0], self.partner.id)
-        self.env["ir.config_parameter"].create(
-            {
-                "key": "mail_restrict_follower_selection.domain.res.partner",
-                "value": "[('category_id.name', '!=', 'Employees')]",
-            }
-        )
+
         new_res = self.partner.with_context(
             test_restrict_follower=True
         )._message_add_suggested_recipient({self.partner.id: []})
