@@ -20,6 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mass_mailing_partner
+#. odoo-python
 #: code:addons/mass_mailing_partner/models/mailing_contact_subscription.py:0
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
 #, python-format
@@ -155,6 +156,7 @@ msgid "Partner"
 msgstr "Empresa"
 
 #. module: mass_mailing_partner
+#. odoo-python
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
 #, python-format
 msgid "Partner '%s' has no email."
@@ -166,12 +168,19 @@ msgid "Partner Tag"
 msgstr ""
 
 #. module: mass_mailing_partner
+#. odoo-python
 #: code:addons/mass_mailing_partner/models/mailing_contact.py:0
 #, python-format
 msgid "Partner already exists in one of these mailing lists"
 msgstr ""
 
 #. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: mass_mailing_partner
+#. odoo-python
 #: code:addons/mass_mailing_partner/models/res_partner.py:0
 #, python-format
 msgid ""

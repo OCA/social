@@ -84,8 +84,6 @@ class ResPartner(models.Model):
             mm_vals["company_name"] = company.name
         if vals.get("country_id"):
             mm_vals["country_id"] = vals["country_id"]
-        if vals.get("category_id"):
-            mm_vals["tag_ids"] = vals["category_id"]
         if mm_vals:
             # Using sudo because ACLs shouldn't produce data inconsistency
             self.env["mailing.contact"].sudo().search(

@@ -30,8 +30,8 @@ class MailingTrace(models.Model):
                 stat.partner_id = partner_id
         return True
 
-    @api.model
-    def create(self, vals):
-        stat = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        stat = super().create(vals_list)
         stat.partner_link()
         return stat

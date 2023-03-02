@@ -12,3 +12,7 @@
     * Víctor Martínez
 
 * `Hibou Corp. <https://hibou.io>`_
+
+* `Trobz <https://trobz.com>`_:
+
+    * Nguyễn Minh Chiến <chien@trobz.com>

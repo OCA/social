@@ -16,6 +16,15 @@ class MailingContact(models.Model):
     partner_id = fields.Many2one(
         comodel_name="res.partner", string="Partner", domain=[("email", "!=", False)]
     )
+    tag_ids = fields.Many2many(compute="_compute_tag_ids", store=True)
+
+    @api.depends("partner_id", "partner_id.category_id")
+    def _compute_tag_ids(self):
+        for rec in self:
+            tags = rec.tag_ids
+            if rec.partner_id.category_id:
+                tags = rec.partner_id.category_id
+            rec.tag_ids = tags
 
     @api.constrains("partner_id", "list_ids")
     def _check_partner_id_list_ids(self):
@@ -39,42 +48,49 @@ class MailingContact(models.Model):
             self.name = self.partner_id.name
             self.email = self.partner_id.email
             self.title_id = self.partner_id.title
-            self.company_name = self.partner_id.company_id.name
+            self.company_name = (
+                self.partner_id.company_id.name or self.partner_id.company_name
+            )
             self.country_id = self.partner_id.country_id
-            category_ids = self.partner_id.category_id
-            if category_ids:
-                self.tag_ids = category_ids
 
     @api.model
-    def create(self, vals):
-        record = self.new(vals)
+    def _get_contact_vals(self, origin_vals):
+        record = self.new(origin_vals)
         if not record.partner_id:
             record._set_partner()
         record._onchange_partner_mass_mailing_partner()
         new_vals = record._convert_to_write(record._cache)
         new_vals.update(
-            subscription_list_ids=vals.get("subscription_list_ids", []),
-            list_ids=vals.get("list_ids", []),
+            subscription_list_ids=origin_vals.get("subscription_list_ids", []),
+            list_ids=origin_vals.get("list_ids", []),
         )
-        return super().create(new_vals)
+        if new_vals.get("partner_id") and "tag_ids" in new_vals:
+            # When there is a partner, tag_ids must get value from the compute function
+            # otherwise, its values will be different from partner
+            del new_vals["tag_ids"]
+        return new_vals
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        new_vals_list = []
+        for vals in vals_list:
+            new_vals = self._get_contact_vals(vals)
+            new_vals_list.append(new_vals)
+        return super().create(new_vals_list)
 
     def write(self, vals):
         for contact in self:
-            new_vals = contact.copy_data(vals)[0]
-            record = self.new(new_vals)
-            if not record.partner_id:
-                record._set_partner()
-            record._onchange_partner_mass_mailing_partner()
-            new_vals = record._convert_to_write(record._cache)
-            new_vals.update(
-                subscription_list_ids=vals.get("subscription_list_ids", []),
-                list_ids=vals.get("list_ids", []),
-            )
+            origin_vals = contact.copy_data(vals)[0]
+            new_vals = self._get_contact_vals(origin_vals)
             super(MailingContact, contact).write(new_vals)
         return True
 
     def _get_categories(self):
-        ca_ids = self.tag_ids.ids + self.list_ids.mapped("partner_category.id")
+        ca_ids = (
+            self.tag_ids.ids
+            + self.list_ids.mapped("partner_category.id")
+            + self.subscription_list_ids.mapped("list_id.partner_category.id")
+        )
         return [[6, 0, ca_ids]]
 
     def _prepare_partner(self):
