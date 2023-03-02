@@ -39,6 +39,5 @@ class PartnerMailListWizard(models.TransientModel):
                 "title_id": partner.title or False,
                 "company_name": partner.company_id.name or False,
                 "country_id": partner.country_id or False,
-                "tag_ids": partner.category_id or False,
             }
             contact_obj.create(contact_vals)
