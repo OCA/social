@@ -1,14 +1,11 @@
 /** @odoo-module **/
-import {
-    registerFieldPatchModel,
-    registerInstancePatchModel,
-} from "@mail/model/model_core";
-import {attr} from "@mail/model/model_field";
 
-registerInstancePatchModel(
-    "mail.chatter",
-    "mail/static/src/models/chatter/chatter.esm.js",
-    {
+import {attr} from "@mail/model/model_field";
+import {registerPatch} from "@mail/model/model_core";
+
+registerPatch({
+    name: "Chatter",
+    modelMethods: {
         async refresh() {
             this._super(...arguments);
             this.thread.refreshMessagefailed();
@@ -22,14 +19,10 @@ registerInstancePatchModel(
             this._super(...arguments);
             this.thread.refreshMessagefailed();
         },
-    }
-);
-registerFieldPatchModel(
-    "mail.chatter",
-    "mail/static/src/models/chatter/chatter.esm.js",
-    {
+    },
+    fields: {
         isMessageFailedBoxVisible: attr({
             default: true,
         }),
-    }
-);
+    },
+});
