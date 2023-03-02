@@ -86,6 +86,7 @@
                                  <t
                                                 t-foreach="messagefailed.failed_recipients"
                                                 t-as="recipient"
+                                                t-key="recipient[0]"
                                             >
                                     <t t-if="!recipient_first">
                                        -
@@ -100,7 +101,7 @@
                                  </t>
                               </div>
                               <div class="o_thread_message_note small">
-                                 <t t-raw="messagefailed.body" />
+                                 <t t-out="messagefailed.body" />
                               </div>
                            </div>
                         </t>
@@ -113,13 +114,13 @@
    </t>
    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
       <xpath
-            expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.isAttachmentBoxVisible']"
+            expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.attachmentBoxView']"
             position="before"
         >
-         <t>
+         <t t-if="chatter.activityBoxView">
             <MessageFailedBox
-                    class="o_Chatter_activityBox"
-                    chatterLocalId="chatter.localId"
+                    className="'o_Chatter_activityBox'"
+                    record="chatter.activityBoxView"
                 />
          </t>
       </xpath>

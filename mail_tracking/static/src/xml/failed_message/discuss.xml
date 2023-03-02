@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
     <t t-inherit="mail.ThreadIcon" t-inherit-mode="extension">
-        <xpath expr="//t[@t-elif='thread === messaging.history']" position="after">
+        <xpath
+            expr="//t[@t-elif='thread.mailbox === messaging.history']"
+            position="after"
+        >
             <t t-elif="thread === messaging.failedmsg">
                 <div class="o_ThreadIcon_mailboxModeration fa fa-exclamation" />
             </t>
@@ -13,13 +16,18 @@
             expr="//div[hasclass('o_DiscussSidebar_categoryMailbox')]"
             position="inside"
         >
-            <DiscussSidebarMailbox threadLocalId="messaging.failedmsg.localId" />
+            <DiscussSidebarMailbox record="discussView.failedmsgView" />
         </xpath>
     </t>
 
     <t t-inherit="mail.MessageList" t-inherit-mode="extension">
-        <t t-elif="threadView.thread === messaging.history" position="after">
-            <t t-elif="threadView.thread === messaging.failedmsg">
+        <t
+            t-elif="messageListView.threadViewOwner.thread === messaging.history.thread"
+            position="after"
+        >
+            <t
+                t-if="messageListView.threadViewOwner.thread === messaging.failedmsg.thread"
+            >
                 <div class="o_MessageList_emptyTitle o-neutral-face-icon">
                     No failed messages
                 </div>
@@ -29,7 +37,7 @@
     </t>
 
     <t t-inherit="mail.Message" t-inherit-mode="extension">
-        <xpath expr="//div[hasclass('o_Message_originThread')]" position="inside">
+        <xpath expr="//small[hasclass('o_Message_originThread')]" position="inside">
             <t t-if="messageView.message.isFailed">
                 <span t-attf-class="o_thread_icons">
                     <a

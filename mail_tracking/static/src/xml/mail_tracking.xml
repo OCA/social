@@ -54,7 +54,12 @@
         </span>
     </t>
 </t>
-<t t-name="mail.MessageTracking" t-inherit="mail.Message" t-inherit-mode="extension">
+<t
+        t-name="mail.MessageTracking"
+        t-inherit="mail.Message"
+        t-inherit-mode="extension"
+        owl="1"
+    >>
     <xpath expr="//div[hasclass('o_Message_header')]" position="after">
         <t
                 t-if="messageView.message.hasPartnerTrackings() || messageView.message.hasEmailCc()"
@@ -64,6 +69,7 @@
                 <t
                         t-foreach="messageView.message.getPartnerTrackings()"
                         t-as="tracking"
+                        t-key="tracking.tracking_delta"
                     >
                     <t t-if="!tracking_first">
                           -
@@ -97,7 +103,7 @@
                             t-att-data-tracking="tracking['tracking_id']"
                             t-att-title="title_status"
                             type="button"
-                            t-on-click="_onTrackingStatusClick"
+                            t-on-click="messageView._onTrackingStatusClick"
                         >
                         <t t-call="mail.tracking.status" />
                     </span>

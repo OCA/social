@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<odoo>
+<odoo noupdate="True">
         <!-- Message with CC -->
         <record id="mail_message_cc" model="mail.message">
             <field name="model">res.partner</field>

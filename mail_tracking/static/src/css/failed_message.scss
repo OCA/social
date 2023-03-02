@@ -116,8 +116,8 @@
         margin-bottom: 0px;
 
         &.o_mail_not_discussion {
-            background-color: rgba(gray("300"), 0.5);
-            border-bottom: 1px solid gray("400");
+            background-color: rgba(map-get($grays, "300"), 0.5);
+            border-bottom: 1px solid map-get($grays, "400");
         }
 
         .o_thread_message_sidebar {

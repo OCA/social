@@ -50,9 +50,7 @@ export class MessageFailedBox extends Component {
 }
 
 Object.assign(MessageFailedBox, {
-    props: {
-        chatterLocalId: String,
-    },
+    props: {record: Object},
     template: "mail_tracking.MessageFailedBox",
 });
 

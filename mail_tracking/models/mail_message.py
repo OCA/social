@@ -130,6 +130,7 @@ class MailMessage(models.Model):
         """Generates a complete status tracking of the messages by partner"""
         res = {}
         for message in self:
+            tracking_delta = 0
             partner_trackings = []
             partners_already = self.env["res.partner"]
             partners = self.env["res.partner"]
@@ -162,6 +163,7 @@ class MailMessage(models.Model):
                         "recipient": recipient,
                         "partner_id": tracking.partner_id.id,
                         "isCc": False,
+                        "tracking_delta": "%i-%i" % (message.id, tracking_delta),
                     }
                 )
                 if tracking.partner_id:
@@ -169,6 +171,7 @@ class MailMessage(models.Model):
                     email_cc_list.discard(tracking.partner_id.email)
                     email_to_list.discard(tracking.partner_id.email)
                     partners_already |= tracking.partner_id
+                tracking_delta += 1
             # Search all partner recipients for this message
             if message.partner_ids:
                 partners |= message.partner_ids
@@ -197,17 +200,29 @@ class MailMessage(models.Model):
                     isCc = True
                 tracking_status = tracking_unknown_values.copy()
                 tracking_status.update(
-                    {"recipient": partner.name, "partner_id": partner.id, "isCc": isCc}
+                    {
+                        "recipient": partner.name,
+                        "partner_id": partner.id,
+                        "isCc": isCc,
+                        "tracking_delta": "%i-%i" % (message.id, tracking_delta),
+                    }
                 )
                 partner_trackings.append(tracking_status)
+                tracking_delta += 1
             # Process Cc/To recipients without partner
             for cc, lst in [(True, email_cc_list), (False, email_to_list)]:
                 for email in lst:
                     tracking_status = tracking_unknown_values.copy()
                     tracking_status.update(
-                        {"recipient": email, "partner_id": False, "isCc": cc}
+                        {
+                            "recipient": email,
+                            "partner_id": False,
+                            "isCc": cc,
+                            "tracking_delta": "%i-%i" % (message.id, tracking_delta),
+                        }
                     )
                     partner_trackings.append(tracking_status)
+                    tracking_delta += 1
             res[message.id] = {
                 "partner_trackings": partner_trackings,
                 "is_failed_message": message.is_failed_message,

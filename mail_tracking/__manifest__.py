@@ -7,7 +7,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "15.0.3.1.0",
+    "version": "16.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": ("Tecnativa, " "Odoo Community Association (OCA)"),
@@ -25,22 +25,23 @@
         "views/res_partner_view.xml",
     ],
     "assets": {
+        "mail.assets_messaging": [
+            "mail_tracking/static/src/js/models/*.js",
+        ],
         "web.assets_backend": [
+            "mail_tracking/static/src/xml/mail_tracking.xml",
             "mail_tracking/static/src/css/mail_tracking.scss",
             "mail_tracking/static/src/css/failed_message.scss",
-            "mail_tracking/static/src/js/mail_tracking.esm.js",
             "mail_tracking/static/src/js/message.esm.js",
             "mail_tracking/static/src/js/failed_message/mail_failed_box.esm.js",
-            "mail_tracking/static/src/js/failed_message/thread.esm.js",
             "mail_tracking/static/src/js/models/thread.esm.js",
-            "mail_tracking/static/src/js/chatter.esm.js",
-            "mail_tracking/static/src/js/discuss/discuss.esm.js",
-        ],
-        "web.assets_qweb": [
             "mail_tracking/static/src/xml/mail_tracking.xml",
             "mail_tracking/static/src/xml/failed_message/common.xml",
             "mail_tracking/static/src/xml/failed_message/thread.xml",
             "mail_tracking/static/src/xml/failed_message/discuss.xml",
+        ],
+        "web.assets_frontend": [
+            "mail_tracking/static/src/css/failed_message.scss",
         ],
     },
     "demo": ["demo/demo.xml"],
