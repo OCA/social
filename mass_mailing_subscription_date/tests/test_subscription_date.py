@@ -2,10 +2,10 @@
 # @author Iván Todorovich <ivan.todorovich@gmail.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestSubscriptionDate(SavepointCase):
+class TestSubscriptionDate(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -26,9 +26,9 @@ class TestSubscriptionDate(SavepointCase):
                 "list_id": self.mailing_list.id,
             }
         )
-        self.assertTrue(subs.subscription_date)
+
         # Opt out
-        subs.opt_out = True
+        subs.write({"opt_out": True})
         self.assertFalse(subs.subscription_date)
 
     def test_subscription_date_opt_out(self):

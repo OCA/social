@@ -10,12 +10,21 @@ class MailingContactSubscription(models.Model):
 
     subscription_date = fields.Datetime(readonly=True)
 
-    @api.model
-    def create(self, vals):
-        vals["subscription_date"] = not vals.get("opt_out") and fields.Datetime.now()
-        return super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        now = fields.Datetime.now()
+        for vals in vals_list:
+            if "opt_out" in vals and "subscription_date" not in vals:
+                vals["subscription_date"] = now if not vals["opt_out"] else False
+            if vals.get("subscription_date"):
+                vals["opt_out"] = False
+        return super().create(vals_list)
 
     def write(self, vals):
-        if "opt_out" in vals:
-            vals["subscription_date"] = not vals["opt_out"] and fields.Datetime.now()
-        return super().write(vals)
+        if "opt_out" in vals and "subscription_date" not in vals:
+            vals["subscription_date"] = (
+                fields.Datetime.now() if not vals["opt_out"] else False
+            )
+        if vals.get("subscription_date"):
+            vals["opt_out"] = False
+        return super(MailingContactSubscription, self).write(vals)
