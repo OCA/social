@@ -1,0 +1,1 @@
+odoo-addon-email_template_qweb@ git+https://github.com/oca/social@refs/pull/1072/head#subdirectory=setup/email_template_qweb
