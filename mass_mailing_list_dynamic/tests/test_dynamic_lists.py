@@ -2,7 +2,7 @@
 # Copyright 2020 Hibou Corp. - Jared Kipe
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-from mock import patch
+from unittest.mock import patch
 
 from odoo.exceptions import ValidationError
 from odoo.tests import common, tagged
@@ -51,12 +51,12 @@ class DynamicListCase(common.TransactionCase):
         contact0 = Contact.create(
             {"list_ids": [(4, self.list.id)], "partner_id": self.partners[0].id}
         )
-        self.list.flush()
+        self.list.flush_recordset()
         self.assertEqual(self.list.contact_count, 1)
         # Set list as add-synced
         self.list.dynamic = True
         self.list.action_sync()
-        self.list.flush()
+        self.list.flush_recordset()
         self.assertEqual(self.list.contact_count, 4)
         self.assertTrue(contact0.exists())
         # Set list as full-synced
@@ -68,7 +68,7 @@ class DynamicListCase(common.TransactionCase):
             ]
         ).unlink()
         self.list.action_sync()
-        self.list.flush()
+        self.list.flush_recordset()
         self.assertEqual(self.list.contact_count, 3)
         self.assertFalse(contact0.exists())
         # Cannot add or edit contacts in fully synced lists
@@ -93,7 +93,7 @@ class DynamicListCase(common.TransactionCase):
     def test_sync_when_sending_mail(self):
         """Check that list in synced when sending a mass mailing."""
         self.list.action_sync()
-        self.list.flush()
+        self.list.flush_recordset()
         self.assertEqual(self.list.contact_count, 5)
         # Create a new partner
         self.partners.create(
@@ -107,7 +107,7 @@ class DynamicListCase(common.TransactionCase):
         with patch("odoo.addons.mail.models.mail_mail.MailMail.send") as s:
             self.mail.action_send_mail()
             self.assertEqual(1, s.call_count)
-        self.list.flush()
+        self.list.flush_recordset()
         self.assertEqual(6, self.list.contact_count)
 
     def test_load_filter(self):
