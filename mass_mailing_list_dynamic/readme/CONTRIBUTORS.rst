@@ -13,3 +13,7 @@
 * `Dynapps N.V. <https://www.dynapps.be>`_:
 
   * Xander De Jaegere
+
+* `Trobz <https://trobz.com>`_:
+
+    * Nguyễn Minh Chiến <chien@trobz.com>

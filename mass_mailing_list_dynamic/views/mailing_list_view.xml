@@ -35,7 +35,7 @@
                             />
                         </div>
                     </group>
-                    <group attrs="{'invisible': [('dynamic', '=', False)]}">
+                    <div attrs="{'invisible': [('dynamic', '=', False)]}">
                         <div class="alert alert-info" role="alert">
                             <i
                                 class="fa fa-info-circle"
@@ -47,7 +47,7 @@
                                 class="fa fa-info-circle"
                             /> You cannot make manual editions of contacts in fully synchronized lists.
                         </div>
-                    </group>
+                    </div>
                     <group colspan="4" attrs="{'invisible': [('dynamic', '=', False)]}">
                         <field
                             name="sync_domain"
