@@ -33,6 +33,14 @@ msgid ""
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model_terms:ir.ui.view,arch_db:mass_mailing_list_dynamic.mailing_list_view_form
+msgid ""
+"<span attrs=\"{'invisible': [('is_synced', '=', True)]}\">\n"
+"                    <strong>???</strong>\n"
+"                </span>"
+msgstr ""
+
+#. module: mass_mailing_list_dynamic
 #: model:ir.model.fields.selection,name:mass_mailing_list_dynamic.selection__mailing_list__sync_method__full
 msgid "Add and remove records as needed"
 msgstr ""
