@@ -1,21 +1,23 @@
 # Copyright 2020 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-import mock
+from unittest import mock
+
 from werkzeug import urls
 
-from odoo.tests.common import HttpCase
+from odoo.tests.common import HttpCase, tagged
 
 
+@tagged("post_install", "-at_install")
 class UICase(HttpCase):
     def extract_url(self, mail, *args, **kwargs):
-        url = mail._get_unsubscribe_url(self.email)
+        url = mail.mailing_id._get_unsubscribe_url(self.email, mail.res_id)
         self.assertTrue(urls.url_parse(url).decode_query().get("token"))
         self.assertTrue(url.startswith(self.domain))
         self.url = url.replace(self.domain, "", 1)
         return True
 
     def setUp(self):
-        super(UICase, self).setUp()
+        super().setUp()
         self.email = "test.contact@example.com"
         self.mail_postprocess_patch = mock.patch(
             "odoo.addons.mass_mailing.models.mail_mail.MailMail."
@@ -23,13 +25,11 @@ class UICase(HttpCase):
             autospec=True,
             side_effect=self.extract_url,
         )
-
         self.domain = self.env["ir.config_parameter"].get_param("web.base.url")
 
         self.partner = self.env["res.partner"].create(
             {"name": "Demo Partner <%s>" % self.email, "email": self.email}
         )
-
         self.event_1 = self.env["event.event"].create(
             {
                 "name": "test_event_2",
@@ -62,18 +62,15 @@ class UICase(HttpCase):
                 "partner_id": self.partner.id,
             }
         )
-
         self.mailing_1 = self.env["mailing.mailing"].create(
             {
                 "name": "test_mailing_1",
                 "mailing_model_id": self.env.ref("event.model_event_registration").id,
                 "mailing_domain": "[['id','=',%s]]" % self.event_registration_1.id,
-                "reply_to_mode": "email",
+                "reply_to_mode": "update",
                 "subject": "Test 1",
             }
         )
-        self.mailing_1._onchange_model_and_list()
-        # HACK https://github.com/odoo/odoo/pull/14429
         self.mailing_1.body_html = """
             <div>
                 <a href="/unsubscribe_from_list">
@@ -81,18 +78,15 @@ class UICase(HttpCase):
                 </a>
             </div>
         """
-
         self.mailing_2 = self.env["mailing.mailing"].create(
             {
                 "name": "test_mailing_2",
                 "mailing_model_id": self.env.ref("event.model_event_registration").id,
                 "mailing_domain": "[['id','=',%s]]" % self.event_registration_2.id,
-                "reply_to_mode": "email",
+                "reply_to_mode": "update",
                 "subject": "Test 2",
             }
         )
-        self.mailing_2._onchange_model_and_list()
-        # HACK https://github.com/odoo/odoo/pull/14429
         self.mailing_2.body_html = """
             <div>
                 <a href="/unsubscribe_from_list">
@@ -120,16 +114,13 @@ class UICase(HttpCase):
         # Extract the unsubscription link from the message body
         with self.mail_postprocess_patch:
             self.mailing_1.action_send_mail()
-
         tour = "mass_mailing_custom_unsubscribe_event_tour"
         self.start_tour(url_path=self.url, tour_name=tour, login="demo")
-
         # Check results from running tour
         # User should be opted out from event 1 mailing list
         self.assertTrue(self.event_registration_1.opt_out)
         # User should not be opted out from event 2 mailing list
         self.assertFalse(self.event_registration_2.opt_out)
-
         reason_xid = "mass_mailing_custom_unsubscribe.reason_not_interested"
         unsubscriptions = self.env["mail.unsubscription"].search(
             [
@@ -147,8 +138,6 @@ class UICase(HttpCase):
         )
         # Unsubscription record must exist
         self.assertEqual(1, len(unsubscriptions))
-
         self.mailing_2.action_send_mail()
-
         # Mail to user must have been sent
         self.assertEqual(1, self.mailing_2.sent)
