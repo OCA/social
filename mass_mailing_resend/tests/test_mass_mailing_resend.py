@@ -48,16 +48,16 @@ class TestMassMailingResend(common.TransactionCase):
         # Send mailing
         self._mailing_action_done()
         self.assertEqual(self.mass_mailing.state, "done")
-        self.assertEqual(self.mass_mailing.sent, 2)
+        self.assertEqual(len(self.mass_mailing.mailing_trace_ids), 2)
         # Simulate that an email has not been sent
         self.mass_mailing.mailing_trace_ids.filtered(
             lambda x: x.email == self.contact2.email
         ).unlink()
-        self.assertEqual(self.mass_mailing.sent, 1)
+        self.assertEqual(len(self.mass_mailing.mailing_trace_ids), 1)
         # Back to draft
         self.mass_mailing.button_draft()
         self.assertEqual(self.mass_mailing.state, "draft")
         # Send mailing again (already sent not sent again)
         self._mailing_action_done()
         self.assertEqual(self.mass_mailing.state, "done")
-        self.assertEqual(self.mass_mailing.sent, 2)
+        self.assertEqual(len(self.mass_mailing.mailing_trace_ids), 2)
