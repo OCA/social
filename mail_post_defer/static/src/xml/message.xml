@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Moduon Team S.L. <info@moduon.team>
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<template>
+    <t t-inherit="mail.MessageActionList" t-inherit-mode="extension" owl="1">
+        <xpath
+            expr="//*[@t-if='messageActionList.message.canBeDeleted'][hasclass('o_MessageActionList_actionEdit')]"
+            position="attributes"
+        >
+            <attribute name="t-if">messageActionList.message.canBeEdited</attribute>
+        </xpath>
+    </t>
+</template>
