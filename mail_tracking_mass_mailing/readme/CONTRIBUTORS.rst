@@ -7,3 +7,5 @@
   * Ernesto Tejeda
   * Carlos Roca
   * Sergio Teruel
+* `Trobz <https://trobz.com>`_:
+    * nguyenhk <nguyenhk@trobz.com>
