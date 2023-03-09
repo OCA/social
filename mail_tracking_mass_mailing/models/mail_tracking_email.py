@@ -29,9 +29,9 @@ class MailTrackingEmail(models.Model):
             tracking.message_id = tracking.mail_stats_id.message_id
         return res
 
-    @api.model
-    def create(self, vals):
-        tracking = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        tracking = super().create(vals_list)
         # Link mail statistics with this tracking
         if tracking.mail_stats_id:
             tracking.mail_stats_id.write(self._statistics_link_prepare(tracking))
