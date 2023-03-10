@@ -9,7 +9,8 @@ class MailTemplate(models.Model):
     _inherit = "mail.template"
 
     template_report_ids = fields.One2many(
-        comodel_name="mail.template.report", inverse_name="mail_template_id",
+        comodel_name="mail.template.report",
+        inverse_name="mail_template_id",
     )
 
     # pylint: disable=redefined-outer-name
