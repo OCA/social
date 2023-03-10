@@ -10,7 +10,9 @@ class ResPartner(models.Model):
     def write(self, values):
         res = super().write(values)
         if "active" in values:
-            self.env["mailing.contact"].with_context(active_test=False).sudo().search(
-                [("partner_id", "in", self.ids)]
-            ).write({"active": values["active"]})
+            self.env["mailing.contact"].with_context(
+                active_test=False, syncing=True
+            ).sudo().search([("partner_id", "in", self.ids)]).write(
+                {"active": values["active"]}
+            )
         return res

@@ -1,9 +1,9 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMailingPartnerContactActive(SavepointCase):
+class TestMailingPartnerContactActive(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -19,3 +19,6 @@ class TestMailingPartnerContactActive(SavepointCase):
         self.partner.write({"active": False})
         self.assertFalse(self.partner.active)
         self.assertFalse(self.mailing_contact.active)
+        self.partner.write({"active": True})
+        self.assertTrue(self.partner.active)
+        self.assertTrue(self.mailing_contact.active)

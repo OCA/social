@@ -3,7 +3,7 @@
 {
     "name": "Mass Mailing Partner Contact Active",
     "summary": "Archive/unarchvice mailing list contact through partner",
-    "version": "13.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Marketing/Email Marketing",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp, Odoo Community Association (OCA)",
