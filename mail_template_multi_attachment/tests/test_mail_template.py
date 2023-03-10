@@ -1,9 +1,9 @@
 # Copyright 2021 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMailTemplate(SavepointCase):
+class TestMailTemplate(TransactionCase):
     """
     Tests for mail.template
     """
@@ -23,18 +23,18 @@ class TestMailTemplate(SavepointCase):
             "subject": "About ${object.name}",
             "body_html": "<p>Hello ${object.name}</p>",
             "model_id": cls.env["ir.model"]._get(cls.report1.model).id,
-            "user_signature": False,
             "report_template": cls.report1.id,
             "report_name": "Report 1",
             "template_report_ids": [
                 (
                     0,
                     False,
-                    {"report_template_id": cls.report2.id, "report_name": "Report 2"},
+                    {"report_template_id": cls.report2.id, "report_name": "'Report 2'"},
                 ),
             ],
         }
         cls.mail_template = cls.MailTemplate.create(mail_tmpl_values)
+        cls.fields = cls.mail_template._fields
 
     def test_multi_generation1(self):
         """
@@ -43,7 +43,7 @@ class TestMailTemplate(SavepointCase):
         of this module.
         :return:
         """
-        results = self.mail_template.generate_email(self.partner.id)
+        results = self.mail_template.generate_email(self.partner.id, fields=self.fields)
         self.assertEqual(2, len(results.get("attachments")))
 
     def test_multi_generation2(self):
@@ -53,7 +53,7 @@ class TestMailTemplate(SavepointCase):
         :return:
         """
         self.mail_template.write({"template_report_ids": [(6, False, [])]})
-        results = self.mail_template.generate_email(self.partner.id)
+        results = self.mail_template.generate_email(self.partner.id, fields=self.fields)
         self.assertEqual(1, len(results.get("attachments")))
 
     def test_multi_generation3(self):
@@ -63,5 +63,14 @@ class TestMailTemplate(SavepointCase):
         :return:
         """
         self.mail_template.write({"report_template": False, "report_name": False})
-        results = self.mail_template.generate_email(self.partner.id)
+        results = self.mail_template.generate_email(self.partner.id, fields=self.fields)
         self.assertEqual(1, len(results.get("attachments")))
+
+    def test_multi_generation4(self):
+        """
+        Test generate_email method with unsupported report type
+        :return:
+        """
+        self.report2.report_type = "qweb-text"
+        results = self.mail_template.generate_email(self.partner.id, fields=self.fields)
+        self.assertEqual(2, len(results.get("attachments")))
