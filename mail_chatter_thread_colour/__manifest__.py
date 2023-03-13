@@ -16,5 +16,6 @@
         "views/ir_model.xml",
         "templates/assets.xml",
     ],
+    "demo": ["demo/ir_model.xml"],
     "qweb": ["static/src/xml/thread.xml"],
 }
