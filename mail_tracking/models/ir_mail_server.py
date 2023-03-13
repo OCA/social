@@ -118,7 +118,7 @@ class IrMailServer(models.Model):
                 smtp_password=smtp_password,
                 smtp_encryption=smtp_encryption,
                 smtp_ssl_certificate=smtp_ssl_certificate,
-                smtp_ssl_private_key=smtp_ssl_certificate,
+                smtp_ssl_private_key=smtp_ssl_private_key,
                 smtp_debug=smtp_debug,
                 smtp_session=smtp_session,
             )

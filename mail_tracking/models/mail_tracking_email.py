@@ -41,7 +41,7 @@ class MailTrackingEmail(models.Model):
     time = fields.Datetime(readonly=True, index=True)
     date = fields.Date(readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
-        string="Message", comodel_name="mail.message", readonly=True, index=True
+        string="Message (mail)", comodel_name="mail.message", readonly=True, index=True
     )
     message_id = fields.Char(compute="_compute_message_id")
     mail_id = fields.Many2one(string="Email", comodel_name="mail.mail", readonly=True)
@@ -168,9 +168,9 @@ class MailTrackingEmail(models.Model):
             for x in msg_linked
             if (x[1] in msg_ids)  # We can read the linked message
             or (
-                not any({x[1], x[2]}) and x[3] in partner_ids
+                not any({x[0], x[1]}) and x[2] in partner_ids
             )  # No linked msg/mail but we can read the linked partner
-            or (not any({x[1], x[2], x[3]}))  # No linked record
+            or (not any({x[0], x[1], x[2]}))  # No linked record
         ]
 
     @api.model

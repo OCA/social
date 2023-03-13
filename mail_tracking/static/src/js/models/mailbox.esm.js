@@ -11,7 +11,7 @@ registerPatch({
             compute() {
                 switch (this) {
                     case this.messaging.failedmsg:
-                        return "/mail/failedmsg/messages";
+                        return "/mail/failed/messages";
                 }
                 return this._super();
             },

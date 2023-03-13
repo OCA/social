@@ -80,57 +80,55 @@ class MailThread(models.AbstractModel):
                 )
 
     @api.model
-    def _fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
+    def _get_view(self, view_id=None, view_type='form', **options):
         """Add filters for failed messages.
 
         These filters will show up on any form or search views of any
         model inheriting from ``mail.thread``.
         """
-        res = super()._fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
-        )
-        if view_type not in {"search", "form"}:
-            return res
-        doc = etree.XML(res["arch"])
-        if view_type == "search":
-            # Modify view to add new filter element
-            nodes = doc.xpath("//search")
-            if nodes:
-                # Create filter element
-                new_filter = etree.Element(
-                    "filter",
-                    {
-                        "string": _("Failed sent messages"),
-                        "name": "failed_message_ids",
-                        "domain": str(
-                            [
+
+        arch, view = super()._get_view(view_id, view_type, **options)
+        if view_type in {"search", "form"}:
+            doc = etree.XML(arch)
+            if view_type == "search":
+                # Modify view to add new filter element
+                nodes = doc.xpath("//search")
+                if nodes:
+                    # Create filter element
+                    new_filter = etree.Element(
+                        "filter",
+                        {
+                            "string": _("Failed sent messages"),
+                            "name": "failed_message_ids",
+                            "domain": str(
                                 [
-                                    "failed_message_ids.mail_tracking_ids.state",
-                                    "in",
-                                    list(self.env["mail.message"].get_failed_states()),
-                                ],
-                                [
-                                    "failed_message_ids.mail_tracking_needs_action",
-                                    "=",
-                                    True,
-                                ],
-                            ]
-                        ),
-                    },
-                )
-                nodes[0].append(etree.Element("separator"))
-                nodes[0].append(new_filter)
-        elif view_type == "form":
-            # Modify view to add new field element
-            nodes = doc.xpath("//field[@name='message_ids' and @widget='mail_thread']")
-            if nodes:
-                # Create field
-                field_failed_messages = etree.Element(
-                    "field",
-                    {"name": "failed_message_ids", "widget": "mail_failed_message"},
-                )
-                nodes[0].addprevious(field_failed_messages)
-        res["arch"] = etree.tostring(doc, encoding="unicode")
-        return res
+                                    [
+                                        "failed_message_ids.mail_tracking_ids.state",
+                                        "in",
+                                        list(self.env["mail.message"].get_failed_states()),
+                                    ],
+                                    [
+                                        "failed_message_ids.mail_tracking_needs_action",
+                                        "=",
+                                        True,
+                                    ],
+                                ]
+                            ),
+                        },
+                    )
+                    nodes[0].append(etree.Element("separator"))
+                    nodes[0].append(new_filter)
+            elif view_type == "form":
+                # Modify view to add new field element
+                nodes = doc.xpath("//field[@name='message_ids' and @widget='mail_thread']")
+                if nodes:
+                    # Create field
+                    field_failed_messages = etree.Element(
+                        "field",
+                        {"name": "failed_message_ids", "widget": "mail_failed_message"},
+                    )
+                    nodes[0].addprevious(field_failed_messages)
+            arch = etree.tostring(doc, encoding="unicode")
+
+        return arch, view
+

@@ -277,7 +277,7 @@ msgstr ""
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #, python-format
-msgid "Failed messages will be appeared here."
+msgid "Failed messages will be listed here."
 msgstr ""
 
 #. module: mail_tracking

@@ -5,8 +5,8 @@
             expr="//t[@t-elif='thread.mailbox === messaging.history']"
             position="after"
         >
-            <t t-elif="thread === messaging.failedmsg">
-                <div class="o_ThreadIcon_mailboxModeration fa fa-exclamation" />
+            <t t-elif="thread.mailbox === messaging.failedmsg">
+                <div class="o_ThreadIcon_mailboxModeration fa-fw fa-exclamation" />
             </t>
         </xpath>
     </t>
@@ -31,7 +31,7 @@
                 <div class="o_MessageList_emptyTitle o-neutral-face-icon">
                     No failed messages
                 </div>
-                Failed messages will be appeared here.
+                Failed messages will be listed here.
             </t>
         </t>
     </t>
