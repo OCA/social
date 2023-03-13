@@ -12,5 +12,10 @@ class MailingContact(models.Model):
     def write(self, values):
         res = super().write(values)
         if "active" in values:
-            self.mapped("subscription_list_ids").write({"active": values["active"]})
+            # Have to search to fetch the inactive records
+            subscriptions = self.env["mailing.contact.subscription"].search(
+                [("contact_id", "in", self.ids), ("active", "!=", values["active"])]
+            )
+            if subscriptions:
+                subscriptions.write({"active": values["active"]})
         return res
