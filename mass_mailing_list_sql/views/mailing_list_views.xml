@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright (C) 2023 ForgeFlow, S.L.
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="mailing_list_view_form_sql" model="ir.ui.view">
+        <field name="name">Add sql query</field>
+        <field name="model">mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_list_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='dynamic']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('sql_search', '=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='dynamic']" position="after">
+                <field
+                    name="sql_search"
+                    attrs="{'invisible': [('dynamic', '=', True)]}"
+                />
+                <field
+                    name="query"
+                    widget="ace"
+                    attrs="{'invisible': [('sql_search', '=', False)]}"
+                />
+            </xpath>
+            <xpath expr="//label[@for='sync_method']/.." position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('dynamic', '=', False),('sql_search', '=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
