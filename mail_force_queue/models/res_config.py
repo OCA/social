@@ -9,6 +9,6 @@ class BaseConfigSettings(models.TransientModel):
     _inherit = 'base.config.settings'
 
     force_mail_queue = fields.Boolean(
-        related="company_id.force_mail_queue", string="Force Mail queue",
+        string="Force Mail queue",
         help="Force outgoing emails to be queued instead of sent immediately. "
              "Queued emails are sent by 'Email Queue Manager' cron")
