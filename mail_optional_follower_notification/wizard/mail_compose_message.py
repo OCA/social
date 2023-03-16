@@ -10,7 +10,15 @@ class MailComposeMessage(models.TransientModel):
     notify_followers = fields.Boolean(default=True)
 
     def _action_send_mail(self, auto_commit=False):
+        result_mails_su, result_messages = (
+            self.env["mail.mail"].sudo(),
+            self.env["mail.message"],
+        )
         for wizard in self:
             wizard = wizard.with_context(notify_followers=wizard.notify_followers)
-            super(MailComposeMessage, wizard)._action_send_mail(auto_commit=auto_commit)
-        return True
+            result_mails_su_wizard, result_messages_wizard = super(
+                MailComposeMessage, wizard
+            )._action_send_mail(auto_commit=auto_commit)
+            result_mails_su += result_mails_su_wizard
+            result_messages += result_messages_wizard
+        return result_mails_su, result_messages
