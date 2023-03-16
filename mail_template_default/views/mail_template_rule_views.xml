@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Solvti sp. z o.o. (https://solvti.pl) -->
+<odoo>
+    <record id="mail_template_rule_form" model="ir.ui.view">
+        <field name="name">Mail Template Rule Form</field>
+        <field name="model">mail.template.rule</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="model_id" />
+                            <field name="model_name" invisible="1" />
+                            <field name="template_id" />
+                            <field name="context_flag" />
+                            <field name="company_id" />
+                            <field
+                                name="field_domain"
+                                widget="domain"
+                                options="{'model': 'model_name', 'in_dialog': True}"
+                                context="{'skip_search_count': 1}"
+                            />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <div class="text-muted">
+                                Description of the rule flow
+                                <ul>
+                                    <li
+                                    >Rules are executed in a specific order based on the amount of information entered into the rule.</li>
+                                    <li
+                                    >The first rule to meet all the conditions is taken.</li>
+                                    <li
+                                    >Mail Template Rules are sorted base on 4 fields in following hierarchy:</li>
+                                    <b>Context Flag → Company → Filter → Sequence</b>
+                                    <li><i
+                                        >The order is determined by sequence only if two or more rules have the same amount of filled fields.</i></li>
+                                </ul>
+                            </div>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="mail_template_rule_tree" model="ir.ui.view">
+        <field name="name">Mail Template Rule Tree</field>
+        <field name="model">mail.template.rule</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="model_id" />
+                <field name="template_id" />
+                <field name="context_flag" />
+                <field name="company_id" />
+                <field name="field_domain" />
+            </tree>
+        </field>
+    </record>
+    <record id="mail_template_rule_search" model="ir.ui.view">
+        <field name="name">Mail Template Rule search</field>
+        <field name="model">mail.template.rule</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="model_id" />
+                <field name="template_id" />
+                <field name="context_flag" />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+                <group>
+                    <filter
+                        string="Model"
+                        name="group_by_model"
+                        domain="[]"
+                        context="{'group_by':'model_id'}"
+                    />
+                    <filter
+                        string="Company"
+                        name="group_by_company"
+                        domain="[]"
+                        context="{'group_by': 'company_id'}"
+                    />
+                    <filter
+                        string="Template"
+                        name="group_by_context"
+                        domain="[]"
+                        context="{'group_by': 'template_id'}"
+                    />
+                    <filter
+                        string="Context"
+                        name="group_by_context"
+                        domain="[]"
+                        context="{'group_by': 'context_flag'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="action_mail_template_rule" model="ir.actions.act_window">
+        <field name="name">Mail Template Rule</field>
+        <field name="res_model">mail.template.rule</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        id="menu_mail_template_rule"
+        name="Mail Template Rule"
+        parent="base.menu_email"
+        action="action_mail_template_rule"
+    />
+</odoo>
