@@ -23,7 +23,7 @@ Mail optional follower notification
     :target: https://runbot.odoo-community.org/runbot/205/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds the possibility to choose if you want to automatically
 notify followers on mail.compose.message. By default, Odoo notify
@@ -73,6 +73,7 @@ Contributors
 * Laurent Mignon <laurent.mignon@acsone.eu>
 * Andrea Stirpe <a.stirpe@onestein.nl>
 * Robin Goots <robin.goots@dynapps.be>
+* Aleksander Milinkevich <amilinkevich@trilab.pl>
 
 Maintainers
 ~~~~~~~~~~~

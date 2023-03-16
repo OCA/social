@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_invoice_send_wizard_form_inherit" model="ir.ui.view">
+        <field name="name">account.invoice.send.form.inherit.archimedes</field>
+        <field name="model">account.invoice.send</field>
+        <field name="inherit_id" ref="account.account_invoice_send_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//span[starts-with(text(),'Followers')]" position="before">
+                <field name="notify_followers" />
+            </xpath>
+            <field name="partner_ids" position="before">
+                <span
+                    name="no_followers_text"
+                    attrs="{'invisible': [('notify_followers', '=', True)]}"
+                    style="color: red;"
+                > - Warning : Followers will not be notified but they can access the notification directly from the document (if they are allowed to)</span>
+            </field>
+        </field>
+    </record>
+</odoo>

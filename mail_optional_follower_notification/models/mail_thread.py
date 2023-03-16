@@ -17,9 +17,7 @@ class MailThread(models.AbstractModel):
         recipient_data = super()._notify_compute_recipients(message, msg_vals)
         if test_condition:
             return recipient_data
-        if "notify_followers" in self.env.context and not self.env.context.get(
-            "notify_followers", False
-        ):
+        if not self.env.context.get("notify_followers", False):
             # filter out all the followers
             pids = (
                 msg_vals.get("partner_ids", [])
@@ -27,4 +25,5 @@ class MailThread(models.AbstractModel):
                 else message.sudo().partner_ids.ids
             )
             recipient_data = [d for d in recipient_data if d["id"] in pids]
+
         return recipient_data
