@@ -55,8 +55,10 @@ class MailComposer(models.TransientModel):
                 ("company_id", "=", rec.company_id.id),
             ]
 
-        rule_ids = self.env["mail.template.rule"].search(
-            [("model_id.model", "=", rec._name)] + domain
+        rule_ids = (
+            self.env["mail.template.rule"]
+            .sudo()
+            .search([("model_id.model", "=", rec._name)] + domain)
         )
         rule_ids = rule_ids.sorted(
             lambda x: (
@@ -66,15 +68,18 @@ class MailComposer(models.TransientModel):
                 x.sequence,
             )
         )
+        rule_id = self._check_and_pick_rule(rule_ids, rec)
+        if rule_id:
+            res["template_id"] = rule_id.template_id.id
 
+        return res
+
+    def _check_and_pick_rule(self, rule_ids, obj):
         for rule in rule_ids:
             if rule.field_domain:
-                if rec.search_count(
-                    [("id", "=", rec.id)] + safe_eval(rule.field_domain)
+                if obj.search_count(
+                    [("id", "=", obj.id)] + safe_eval(rule.field_domain)
                 ):
-                    res["template_id"] = rule.template_id.id
-                    break
+                    return rule
             else:
-                res["template_id"] = rule.template_id.id
-                break
-        return res
+                return rule
