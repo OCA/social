@@ -1,0 +1,50 @@
+<?xml version="1.0" ?>
+<!-- Copyright 2023 Solvti sp. z o.o. (https://solvti.pl) -->
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="view_mail_alias_form_inherit">
+            <field name="name">mail.alias.form.inherit</field>
+            <field name="model">mail.alias</field>
+            <field name="inherit_id" ref="mail.view_mail_alias_form" />
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="after">
+                    <group>
+                        <label for="check_domain" />
+                        <div class="o_row">
+                            <field name="check_domain" />
+                        </div>
+                    </group>
+                </xpath>
+                <field name="alias_name" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+                <field name="alias_name" position="before">
+                    <field
+                        name="alias_display_name"
+                        class="oe_inline"
+                        attrs="{'required': [('check_domain','=',True)]}"
+                    />
+                </field>
+                <field name="alias_parent_thread_id" position="after">
+                    <field name="alias_name" groups="base.group_no_one" />
+                    <field name="alias_hash" groups="base.group_no_one" />
+                </field>
+                <field name="alias_domain" position="attributes">
+                    <attribute name="attrs">
+                        {'readonly': [('check_domain','=',False)], 'required': [('check_domain','=',True)]}
+                    </attribute>
+                </field>
+            </field>
+        </record>
+        <record model="ir.ui.view" id="view_mail_alias_tree_inherit">
+            <field name="name">mail.alias.tree.inherit</field>
+            <field name="model">mail.alias</field>
+            <field name="inherit_id" ref="mail.view_mail_alias_tree" />
+            <field name="arch" type="xml">
+                <field name="alias_name" position="before">
+                    <field name="alias_display_name" />
+                </field>
+            </field>
+        </record>
+    </data>
+</odoo>
