@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Solvti sp. z o.o. (https://solvti.pl)
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <data noupdate="1">
+
+        <record id="mail_save_attachment_eml_models" model="ir.config_parameter">
+            <field name="key">mail.save.attachment.eml.models</field>
+            <field name="value">False</field>
+        </record>
+
+    </data>
+</odoo>
