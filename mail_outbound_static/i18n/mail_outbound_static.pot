@@ -41,6 +41,13 @@ msgid "Email From"
 msgstr ""
 
 #. module: mail_outbound_static
+#: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__reply_to_the_same_address
+msgid ""
+"If you have no catchall support for  this server and will activate this "
+"option, Reply-To address will be the same as From address."
+msgstr ""
+
+#. module: mail_outbound_static
 #: model:ir.model,name:mail_outbound_static.model_ir_mail_server
 msgid "Mail Server"
 msgstr ""
@@ -54,13 +61,6 @@ msgstr ""
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__reply_to_the_same_address
 msgid "Reply To The Same Address"
-msgstr ""
-
-#. module: mail_outbound_static
-#: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__reply_to_the_same_address
-msgid ""
-"If you have no catchall support for  this server and will activate "
-"this option, Reply-To address will be the same as From address."
 msgstr ""
 
 #. module: mail_outbound_static
