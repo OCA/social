@@ -7,3 +7,4 @@
 * `Quartile <https://www.quartile.co>`__:
 
   * Yoshi Tashiro
+* Sergei Ruzki <sergei.ruzki@gmail.com>

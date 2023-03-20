@@ -53,6 +53,9 @@ being appended into the proper Sender header instead. To accomplish this we:
   smtp_from and smtp_whitelist_domain values will be used if there is not mail
   server configured in the system.
 
+* If your server doesn't support catchall too, you can activate `Reply To The Same Address`
+  flag, so 'Reply-To' in your message will be the same as 'From'.
+
 **Table of contents**
 
 .. contents::
@@ -64,6 +67,7 @@ Usage
 * Navigate to an Outbound Email Server
 * Set the `Email From` option to an email address
 * Set the `Domain Whitelist` option with the domain whitelist
+* Set the `Reply to the same address` option to modify 'Reply-To' message field
 
 Bug Tracker
 ===========
@@ -81,6 +85,7 @@ Credits
 Authors
 ~~~~~~~
 
+* Solvti sp. z o.o.
 * brain-tec AG
 * LasLabs
 * Adhoc SA
@@ -97,6 +102,7 @@ Contributors
 * `Quartile <https://www.quartile.co>`__:
 
   * Yoshi Tashiro
+* Sergei Ruzki <sergei.ruzki@gmail.com>
 
 Maintainers
 ~~~~~~~~~~~

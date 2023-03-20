@@ -13,6 +13,10 @@
             <xpath expr="//field[@name='smtp_pass']" position="after">
                 <field name="domain_whitelist" />
                 <field name="smtp_from" widget="email" />
+                <field
+                    name="reply_to_the_same_address"
+                    attrs="{'invisible': [('smtp_from', '=', False)]}"
+                />
             </xpath>
         </field>
     </record>
