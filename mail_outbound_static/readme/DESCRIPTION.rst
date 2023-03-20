@@ -22,3 +22,6 @@ being appended into the proper Sender header instead. To accomplish this we:
 * Add compatibility to define the smtp information in Odoo config file. Both
   smtp_from and smtp_whitelist_domain values will be used if there is not mail
   server configured in the system.
+
+* If your server doesn't support catchall too, you can activate `Reply To The Same Address`
+  flag, so 'Reply-To' in your message will be the same as 'From'.

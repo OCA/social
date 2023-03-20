@@ -3,3 +3,4 @@
 * Lorenzo Battistini <https://github.com/eLBati>
 * Katherine Zaoral <kz@adhoc.com.ar>
 * Juan José Scarafía <jjs@adhoc.com.ar>
+* Sergei Ruzki <sergei.ruzki@gmail.com>
