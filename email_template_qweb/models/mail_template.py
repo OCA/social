@@ -17,6 +17,8 @@ class MailTemplate(models.Model):
 
     def generate_email(self, res_ids, fields):
         multi_mode = True
+        IrQweb = self.env["ir.qweb"]
+
         if isinstance(res_ids, int):
             res_ids = [res_ids]
             multi_mode = False
@@ -30,8 +32,9 @@ class MailTemplate(models.Model):
                     not fields or "body_html" in fields
                 ):
                     for record in self_with_lang.env[self.model].browse(res_id):
-                        body_html = self_with_lang.body_view_id._render(
-                            {"object": record, "email_template": self_with_lang}
+                        body_html = IrQweb._render(
+                            self_with_lang.body_view_id.id,
+                            {"object": record, "email_template": self_with_lang},
                         )
                         # Some wizards, like when sending a sales order, need this
                         # fix to display accents correctly
