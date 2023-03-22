@@ -25,4 +25,5 @@
     "qweb": [
         "static/src/xml/systray.xml",
     ],
+    "uninstall_hook": "uninstall_hook",
 }
