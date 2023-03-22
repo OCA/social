@@ -30,7 +30,7 @@ class MailTemplateRule(models.Model):
         for rec in self:
             # if the domain translates to False we want to get rid of default "[]"
             # to get the right ordering of the rules
-            if not safe_eval(rec.field_domain):
+            if not safe_eval(str(rec.field_domain)):
                 rec.field_domain = False
 
     @api.constrains("template_id", "model_id")
