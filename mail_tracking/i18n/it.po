@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2023-12-11 15:34+0000\n"
+"PO-Revision-Date: 2024-01-17 10:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -208,7 +208,7 @@ msgstr "Spunta destra stato consegna"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__display_name
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__display_name
 msgid "Display Name"
-msgstr "Nome da visualizzare"
+msgstr "Nome visualizzato"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
@@ -319,6 +319,8 @@ msgstr "Icona messaggio fallito"
 #: model:ir.model.fields,field_description:mail_tracking.field_account_reconcile_model__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_account_setup_bank_manual_config__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
@@ -813,7 +815,7 @@ msgstr "User agent"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ip
 msgid "User IP"
-msgstr "IP Utente"
+msgstr "IP utente"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
@@ -850,7 +852,7 @@ msgstr "Utente:"
 #: code:addons/mail_tracking/models/mail_message.py:0
 #, python-format
 msgid "Waiting"
-msgstr "Attesa"
+msgstr "In attesa"
 
 #. module: mail_tracking
 #. odoo-javascript
