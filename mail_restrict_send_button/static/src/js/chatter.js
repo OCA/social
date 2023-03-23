@@ -366,10 +366,10 @@ odoo.define("mail_restrict_send_button/static/src/js/chatter.js", function (requ
                 // eslint-disable-next-line no-undef
                 values.threadId = clear();
             }
-            if (!this.chatter) {
-                this.chatter = this.env.models["mail.chatter"].create(values);
-            } else {
+            if (this.chatter) {
                 this.chatter.update(values);
+            } else {
+                this.chatter = this.env.models["mail.chatter"].create(values);
             }
         });
     };
