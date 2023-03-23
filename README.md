@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 16.0.1.0.1 |  | Choose to notify followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 16.0.1.0.0 |  | Allows you to configure the from header for a mail server.
 [mail_partner_opt_out](mail_partner_opt_out/) | 16.0.1.0.0 |  | Add the partner's email to the blackmailed list
+[mass_mailing_contact_active](mass_mailing_contact_active/) | 16.0.1.0.0 |  | Adds active feature on mailing list contact and subscriptions
 
 [//]: # (end addons)
 
