@@ -12,6 +12,11 @@
     "installable": True,
     "maintainer": ["dreispt"],
     "development_status": "Alpha",
-    "data": ["security/res_groups.xml", "views/assets.xml"],
-    "qweb": ["static/src/xml/chatter.xml"],
+    "data": ["security/res_groups.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "mail_restrict_send_button/static/src/js/chatter.js",
+            "mail_restrict_send_button/static/src/xml/chatter.xml",
+        ],
+    },
 }
