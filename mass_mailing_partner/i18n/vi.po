@@ -173,6 +173,11 @@ msgid "Partner already exists in one of these mailing lists"
 msgstr "Đối tác đã tồn tại trong một danh sách Mail"
 
 #. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: mass_mailing_partner
 #. odoo-python
 #: code:addons/mass_mailing_partner/models/res_partner.py:0
 #, python-format
