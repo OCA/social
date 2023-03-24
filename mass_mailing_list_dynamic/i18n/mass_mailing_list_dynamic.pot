@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -28,6 +28,14 @@ msgid ""
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model_terms:ir.ui.view,arch_db:mass_mailing_list_dynamic.mailing_list_view_form
+msgid ""
+"<span attrs=\"{'invisible': [('is_synced', '=', True)]}\">\n"
+"                    <strong>???</strong>\n"
+"                </span>"
+msgstr ""
+
+#. module: mass_mailing_list_dynamic
 #: model:ir.model.fields.selection,name:mass_mailing_list_dynamic.selection__mailing_list__sync_method__full
 msgid "Add and remove records as needed"
 msgstr ""
@@ -38,6 +46,7 @@ msgid "Cancel"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#. odoo-python
 #: code:addons/mass_mailing_list_dynamic/models/mailing_contact.py:0
 #, python-format
 msgid ""
@@ -68,12 +77,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard__display_name
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact__display_name
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__display_name
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__display_name
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing__display_name
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -103,12 +107,7 @@ msgid "Helper field to make the user aware of unsynced changes"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard__id
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact__id
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__id
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__id
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing__id
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner__id
 msgid "ID"
 msgstr ""
 
@@ -118,12 +117,7 @@ msgid "Is Synced"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard____last_update
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact____last_update
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list____last_update
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter____last_update
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing____last_update
-#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr ""
 
