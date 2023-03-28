@@ -5,7 +5,7 @@
 {
     "name": "Mail Autosubscribe",
     "summary": "Automatically subscribe partners to its company's business documents",
-    "version": "15.0.1.0.3",
+    "version": "16.0.1.0.0",
     "author": "Camptocamp SA, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Marketing",
