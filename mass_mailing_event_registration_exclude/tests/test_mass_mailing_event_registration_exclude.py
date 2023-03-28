@@ -3,10 +3,10 @@
 # Copyright 2020 Tecnativa - Alexandre D. Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMassMailingEventRegistrationExclude(SavepointCase):
+class TestMassMailingEventRegistrationExclude(TransactionCase):
     at_install = False
     post_install = True
 
@@ -63,7 +63,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                     "mailing_domain": str(domain),
                     "contact_list_ids": [(6, 0, [self.contact_list.id])],
                     "body_html": "<p>Test email body</p>",
-                    "reply_to_mode": "email",
+                    "reply_to_mode": "new",
                     "subject": "Test email subject",
                 }
             )
@@ -106,7 +106,7 @@ class TestMassMailingEventRegistrationExclude(SavepointCase):
                     "mailing_model_id": self.env.ref("base.model_res_partner").id,
                     "mailing_domain": str(domain),
                     "body_html": "<p>Test email body</p>",
-                    "reply_to_mode": "email",
+                    "reply_to_mode": "new",
                     "subject": "Test email subject",
                 }
             )
