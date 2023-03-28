@@ -10,6 +10,9 @@
     "author": "ForgeFlow, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "data": ["views/mail_activity_views.xml"],
+    "data": [
+        "views/mail_activity_views.xml",
+        "views/res_partner_view.xml",
+    ],
     "depends": ["mail_activity_board"],
 }
