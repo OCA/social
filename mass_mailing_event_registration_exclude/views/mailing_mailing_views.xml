@@ -6,7 +6,7 @@
 <record model="ir.ui.view" id="view_mail_mass_mailing_form">
     <field name="name">Add event and exclude</field>
     <field name="model">mailing.mailing</field>
-    <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form" />
+    <field name="inherit_id" ref="mass_mailing.mailing_mailing_view_form_full_width" />
     <field name="arch" type="xml">
         <field name="mailing_domain" position="attributes">
             <attribute
