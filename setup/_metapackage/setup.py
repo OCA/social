@@ -34,6 +34,7 @@ setuptools.setup(
         'odoo-addon-mail_tracking_mass_mailing>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_custom_unsubscribe>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_custom_unsubscribe_event>=15.0dev,<15.1dev',
+        'odoo-addon-mass_mailing_event_registration_exclude>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_list_dynamic>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_partner>=15.0dev,<15.1dev',
         'odoo-addon-mass_mailing_resend>=15.0dev,<15.1dev',
