@@ -1,3 +1,5 @@
+# Copyright 2018 ForgeFlow S.L.
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, models
 
 
@@ -7,7 +9,7 @@ class MailActivity(models.Model):
     @api.onchange("activity_type_id")
     def _onchange_activity_type_id(self):
         original_user_id = self.user_id
-        super(MailActivity, self)._onchange_activity_type_id()
+        super()._onchange_activity_type_id()
         if (
             original_user_id != self.env.user
             and not self.activity_type_id.default_user_id
@@ -17,14 +19,14 @@ class MailActivity(models.Model):
 
     def action_feedback_schedule_next(self, feedback=False):
         create_uid = self.create_uid.id
-        action = super().action_feedback_schedule_next()
+        action = super().action_feedback_schedule_next(feedback)
         action["context"]["source_activity_create_uid"] = create_uid
         return action
 
     @api.model
     def default_get(self, fields):
         res = super().default_get(fields)
-        if self._context.get("source_activity_create_uid") and not self._context.get(
+        if self._context.get("source_activity_create_uid") and not self.env.context.get(
             "no_recursion"
         ):
             default_activity_type_id = self.with_context(
@@ -35,5 +37,5 @@ class MailActivity(models.Model):
                 or not default_activity_type_id.default_user_id
             ):
                 # assign to prev. activity creator
-                res["user_id"] = self._context["source_activity_create_uid"]
+                res["user_id"] = self.env.context["source_activity_create_uid"]
         return res
