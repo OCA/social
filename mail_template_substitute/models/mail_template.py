@@ -22,9 +22,7 @@ class MailTemplate(models.Model):
         if isinstance(active_ids, pycompat.integer_types):
             active_ids = [active_ids]
         model = self.env[model_id.model]
-        for (
-            substitution_template_rule
-        ) in self.mail_template_substitution_rule_ids:
+        for substitution_template_rule in self.mail_template_substitution_rule_ids:
             domain = safe_eval(substitution_template_rule.domain)
             domain.append(("id", "in", active_ids))
             if set(model.search(domain).ids) == set(active_ids):
@@ -33,9 +31,7 @@ class MailTemplate(models.Model):
 
     @api.multi
     def get_email_template(self, res_ids):
-        substitution_template = self._get_substitution_template(
-            self.model_id, res_ids
-        )
+        substitution_template = self._get_substitution_template(self.model_id, res_ids)
         if substitution_template:
             return substitution_template.get_email_template(res_ids)
         return super().get_email_template(res_ids)
