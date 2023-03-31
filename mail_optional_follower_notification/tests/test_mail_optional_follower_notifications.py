@@ -20,7 +20,6 @@ class TestMailOptionalFollowernotifications(TransactionCase):
                 "default_model": "res.partner",
                 "default_res_id": cls.partner_01.id,
                 "default_composition_mode": "comment",
-                "test_optional_follow_notification": True,
             }
         )
         cls.mail_compose_context = ctx
@@ -72,3 +71,21 @@ class TestMailOptionalFollowernotifications(TransactionCase):
             message.notification_ids.mapped("res_partner_id"),
             self.partner_no_follower + self.partner_follower,
         )
+<<<<<<< HEAD
+=======
+
+    def test_3(self):
+        """
+        Data:
+            One partner follower of partner_01
+        Test case:
+            Send message to the non follower partner and disable the
+            notification to followers
+        Expected result:
+            Only the non follower partner is notified
+        """
+        message = self._send_mail(self.partner_no_follower, notify_followers=False)
+        self.assertEqual(
+            message.notification_ids.mapped("res_partner_id"), self.partner_no_follower
+        )
+>>>>>>> 1b503800631a682e6fbde29fa04cc7bb405adab4

@@ -1,0 +1,63 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_outbound_static
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_outbound_static
+#. odoo-python
+#: code:addons/mail_outbound_static/models/ir_mail_server.py:0
+#, python-format
+msgid ""
+"%s is not a valid domain. Please define a list of valid domains separated by"
+" comma"
+msgstr ""
+
+#. module: mail_outbound_static
+#: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__domain_whitelist
+msgid ""
+"Allowed Domains list separated by commas. If there is not given SMTP server "
+"it will let us to search the proper mail server to be used to sent the "
+"messages where the message 'From' email domain match with the domain "
+"whitelist."
+msgstr ""
+
+#. module: mail_outbound_static
+#: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__domain_whitelist
+msgid "Domain Whitelist"
+msgstr ""
+
+#. module: mail_outbound_static
+#: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__smtp_from
+msgid "Email From"
+msgstr ""
+
+#. module: mail_outbound_static
+#: model:ir.model,name:mail_outbound_static.model_ir_mail_server
+msgid "Mail Server"
+msgstr ""
+
+#. module: mail_outbound_static
+#. odoo-python
+#: code:addons/mail_outbound_static/models/ir_mail_server.py:0
+#, python-format
+msgid "Not a valid Email From"
+msgstr ""
+
+#. module: mail_outbound_static
+#: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__smtp_from
+msgid ""
+"Set this in order to email from a specific address. If the original "
+"message's 'From' does not match with the domain whitelist then it is "
+"replaced with this value. If does match with the domain whitelist then the "
+"original message's 'From' will not change"
+msgstr ""

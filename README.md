@@ -17,7 +17,20 @@
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[mail_activity_board](mail_activity_board/) | 16.0.1.0.0 |  | Add Activity Boards
+[mail_attach_existing_attachment](mail_attach_existing_attachment/) | 16.0.1.0.1 |  | Adding attachment on the object by sending this one
+[mail_debrand](mail_debrand/) | 16.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
+[mail_optional_autofollow](mail_optional_autofollow/) | 16.0.1.0.0 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
+[mail_optional_follower_notification](mail_optional_follower_notification/) | 16.0.1.0.1 |  | Choose to notify followers on mail.compose.message
+[mail_outbound_static](mail_outbound_static/) | 16.0.1.0.0 |  | Allows you to configure the from header for a mail server.
+[mail_partner_opt_out](mail_partner_opt_out/) | 16.0.1.0.0 |  | Add the partner's email to the blackmailed list
+[mass_mailing_contact_active](mass_mailing_contact_active/) | 16.0.1.0.0 |  | Adds active feature on mailing list contact and subscriptions
+[mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 16.0.1.0.0 |  | Mass mailing lists that get autopopulated
+[mass_mailing_partner](mass_mailing_partner/) | 16.0.1.0.0 |  | Link partners with mass-mailing
 
 [//]: # (end addons)
 
