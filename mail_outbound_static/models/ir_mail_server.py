@@ -119,7 +119,7 @@ class IrMailServer(models.Model):
 
             # If reply to the same address is True,
             # Reply-To header field should have the same as sender address
-            if mail_server.reply_to_the_same_address:
+            if mail_server_id and mail_server.reply_to_the_same_address:
                 message.replace_header("Reply-To", email_from) if message.get(
                     "Reply-To"
                 ) else message.add_header("Reply-To", email_from)
