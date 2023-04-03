@@ -1,7 +1,7 @@
 # Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import Form, TransactionCase
 
 
 class TestMailTemplateSubstitute(TransactionCase):
@@ -42,16 +42,35 @@ class TestMailTemplateSubstitute(TransactionCase):
             {"template_id": self.mt.id, "composition_mode": "mass_mail"}
         )
         self.partners = self.env["res.partner"].search([])
+        self.partner = self.env["res.partner"].search([], limit=1)
 
-    def test_get_email_template(self):
+    def test_get_email_template_partners(self):
         self.assertEqual(
             self.mt._get_substitution_template(
                 self.env.ref("base.model_res_partner"), self.partners.ids
             ),
             self.smt1,
         )
+        res_ids_to_templates = self.mt._classify_per_lang(self.partners.ids)
+        self.assertTrue(len(res_ids_to_templates))
+        _lang, (template, _res_ids) = list(res_ids_to_templates.items())[0]
         self.assertEqual(
-            self.mt.get_email_template(self.partners.ids).get(self.partners.ids[0]),
+            template,
+            self.smt1,
+        )
+
+    def test_get_email_template_partner(self):
+        self.assertEqual(
+            self.mt._get_substitution_template(
+                self.env.ref("base.model_res_partner"), self.partner.id
+            ),
+            self.smt1,
+        )
+        res_ids_to_templates = self.mt._classify_per_lang(self.partner.ids)
+        self.assertTrue(len(res_ids_to_templates))
+        _lang, (template, _res_ids) = list(res_ids_to_templates.items())[0]
+        self.assertEqual(
+            template,
             self.smt1,
         )
 
@@ -70,3 +89,15 @@ class TestMailTemplateSubstitute(TransactionCase):
             active_ids=self.partners.ids
         ).onchange_template_id_wrapper()
         self.assertEqual(self.mail_compose.template_id, self.smt2)
+
+    def test_default_get(self):
+        mail_compose_form = Form(
+            self.env["mail.compose.message"].with_context(
+                **{
+                    "default_template_id": self.mt.id,
+                    "default_model": self.partner._name,
+                    "default_res_id": self.partner.id,
+                }
+            )
+        )
+        self.assertEqual(mail_compose_form.template_id, self.smt1)
