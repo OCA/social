@@ -15,7 +15,7 @@ class MailTemplateSubstitutionRule(models.Model):
         comodel_name="mail.template", required=True, ondelete="cascade"
     )
     model = fields.Char(related="mail_template_id.model_id.model", store=True)
-    domain = fields.Char(string="Domain", required=True, default="[]")
+    domain = fields.Char(required=True, default="[]")
     substitution_mail_template_id = fields.Many2one(
         comodel_name="mail.template",
         required=True,

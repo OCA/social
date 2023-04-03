@@ -13,9 +13,10 @@ class MailComposeMessage(models.TransientModel):
         if template:
             if composition_mode == "mass_mail" and self.env.context.get("active_ids"):
                 res_ids = self.env.context.get("active_ids")
-            res_ids_to_templates = template.get_email_template(res_ids)
-            if res_ids_to_templates:
-                return list(res_ids_to_templates.values())[0]
+            res_ids_to_templates = template._classify_per_lang(res_ids)
+            if len(res_ids_to_templates):
+                _lang, (template, _res_ids) = list(res_ids_to_templates.items())[0]
+                return template
         return False
 
     @api.model
@@ -30,7 +31,6 @@ class MailComposeMessage(models.TransientModel):
             result["template_id"] = substitution_template.id
         return result
 
-    @api.multi
     @api.onchange("template_id")
     def onchange_template_id_wrapper(self):
         substitution_template = self._get_substitution_template(
