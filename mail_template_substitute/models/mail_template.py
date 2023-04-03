@@ -1,13 +1,11 @@
 # Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
-from odoo.tools import pycompat
+from odoo import fields, models
 from odoo.tools.safe_eval import safe_eval
 
 
 class MailTemplate(models.Model):
-
     _inherit = "mail.template"
 
     mail_template_substitution_rule_ids = fields.One2many(
@@ -16,12 +14,11 @@ class MailTemplate(models.Model):
         string="Substitution Rules",
     )
 
-    @api.multi
     def _get_substitution_template(self, model_id, active_ids):
         self.ensure_one()
-        if isinstance(active_ids, pycompat.integer_types):
+        if isinstance(active_ids, int):
             active_ids = [active_ids]
-        model = self.env[model_id.model]
+        model = self.env[model_id.sudo().model]
         for substitution_template_rule in self.mail_template_substitution_rule_ids:
             domain = safe_eval(substitution_template_rule.domain)
             domain.append(("id", "in", active_ids))
@@ -29,9 +26,8 @@ class MailTemplate(models.Model):
                 return substitution_template_rule.substitution_mail_template_id
         return False
 
-    @api.multi
-    def get_email_template(self, res_ids):
+    def _classify_per_lang(self, res_ids, engine="inline_template"):
         substitution_template = self._get_substitution_template(self.model_id, res_ids)
         if substitution_template:
-            return substitution_template.get_email_template(res_ids)
-        return super().get_email_template(res_ids)
+            return substitution_template._classify_per_lang(res_ids, engine=engine)
+        return super()._classify_per_lang(res_ids, engine=engine)
