@@ -166,15 +166,20 @@ class MailTrackingEmail(models.Model):
         partner_ids = self.env["res.partner"]._search(
             [("id", "in", [x for x in partner_ids if x])]
         )
-        return [
-            x[0]
-            for x in msg_linked
-            if (x[1] in msg_ids)  # We can read the linked message
-            or (
-                not any({x[1], x[2]}) and x[3] in partner_ids
-            )  # No linked msg/mail but we can read the linked partner
-            or (not any({x[1], x[2], x[3]}))  # No linked record
-        ]
+        res = []
+
+        for tracking_id, message_id, partner_id in msg_linked:
+            # We can read the linked message
+            linked_message = message_id in msg_ids
+            # No linked msg/mail but we can read the linked partner
+            linked_partner = not any({tracking_id, message_id}) and partner_id in partner_ids
+            # No linked record
+            no_linked_record = not any({tracking_id, message_id, partner_id})
+
+            if linked_message or linked_partner or no_linked_record:
+                res.append(tracking_id)
+
+        return res
 
     @api.model
     def _search(
