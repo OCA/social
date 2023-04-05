@@ -27,6 +27,7 @@ addon | version | maintainers | summary
 [mail_activity_creator](mail_activity_creator/) | 14.0.1.0.0 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 14.0.1.0.2 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 14.0.1.0.0 |  | Add Partner to Activities
+[mail_activity_reply_creator](mail_activity_reply_creator/) | 14.0.1.0.0 |  | Assign new to its creator
 [mail_activity_team](mail_activity_team/) | 14.0.1.2.0 |  | Add Teams to Activities
 [mail_activity_unlink_log](mail_activity_unlink_log/) | 14.0.1.0.0 |  | Leave a message when an activity is unlinked
 [mail_allow_portal_internal_note](mail_allow_portal_internal_note/) | 14.0.1.0.2 |  | Portal users can access internal messages related to own or other companies
