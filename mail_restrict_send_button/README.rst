@@ -69,10 +69,7 @@ Contributors
   * Chandresh Thakkar <cthakkar@opensourceintegrators.com>
   * Daniel Reis <dreis@opensourceintegrators.com>
   * Sandip Vyas <svyas@opensourceintegrators.com>
-
 Maintainers
-~~~~~~~~~~~
-
 This module is maintained by the OCA.
 
 .. image:: https://odoo-community.org/logo.png
