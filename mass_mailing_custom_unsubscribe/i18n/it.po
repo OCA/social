@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-29 17:50+0000\n"
-"PO-Revision-Date: 2022-12-30 11:50+0000\n"
+"PO-Revision-Date: 2023-04-07 18:25+0000\n"
 "Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-social-8-0/language/"
 "it/)\n"
@@ -169,7 +169,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_is_follower:0
 msgid "Is a Follower"
-msgstr "È un follower"
+msgstr "Sta seguendo"
 
 #. module: mass_mailing_custom_unsubscribe
 #: view:website:mass_mailing_custom_unsubscribe.reason_form
@@ -235,7 +235,7 @@ msgstr ""
 #. module: mass_mailing_custom_unsubscribe
 #: field:mail.unsubscription,message_ids:0
 msgid "Messages"
-msgstr "Messages"
+msgstr "Messaggi"
 
 #. module: mass_mailing_custom_unsubscribe
 #: help:mail.unsubscription,message_ids:0
