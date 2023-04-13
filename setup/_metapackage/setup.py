@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo-addon-mail_outbound_static>=15.0dev,<15.1dev',
         'odoo-addon-mail_parent_recipient>=15.0dev,<15.1dev',
         'odoo-addon-mail_post_defer>=15.0dev,<15.1dev',
+        'odoo-addon-mail_preview_audio>=15.0dev,<15.1dev',
         'odoo-addon-mail_preview_base>=15.0dev,<15.1dev',
         'odoo-addon-mail_quoted_reply>=15.0dev,<15.1dev',
         'odoo-addon-mail_restrict_follower_selection>=15.0dev,<15.1dev',
