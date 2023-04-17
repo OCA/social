@@ -3,7 +3,7 @@
 {
     "name": "Mail Activity Reply Creator",
     "summary": "Assign new to its creator",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Social",
     "website": "https://github.com/OCA/social",
     "author": "Ilyas, Ooops, Odoo Community Association (OCA)",
