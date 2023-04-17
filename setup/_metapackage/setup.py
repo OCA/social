@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-mail_activity_creator',
         'odoo14-addon-mail_activity_done',
         'odoo14-addon-mail_activity_partner',
+        'odoo14-addon-mail_activity_reply_creator',
         'odoo14-addon-mail_activity_team',
         'odoo14-addon-mail_activity_unlink_log',
         'odoo14-addon-mail_allow_portal_internal_note',
