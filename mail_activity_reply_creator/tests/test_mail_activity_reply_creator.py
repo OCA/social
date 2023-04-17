@@ -22,6 +22,14 @@ class TestMailActivityReplyCreator(SavepointCase):
                 "default_user_id": False,
             }
         )
+        cls.activity_type_2 = activity_type_model.create(
+            {
+                "name": "Act Type 2",
+                "res_model_id": cls.partner_ir_model.id,
+                "default_user_id": False,
+                "default_next_type_id": cls.activity_type_1.id,
+            }
+        )
         cls.act1 = (
             cls.env["mail.activity"]
             .with_user(cls.user_2)
@@ -29,6 +37,19 @@ class TestMailActivityReplyCreator(SavepointCase):
                 {
                     "activity_type_id": cls.activity_type_1.id,
                     "note": "Partner activity 1.",
+                    "res_id": cls.partner_01.id,
+                    "res_model_id": cls.partner_ir_model.id,
+                    "user_id": cls.user_2.id,
+                }
+            )
+        )
+        cls.act2 = (
+            cls.env["mail.activity"]
+            .with_user(cls.user_2)
+            .create(
+                {
+                    "activity_type_id": cls.activity_type_2.id,
+                    "note": "Partner activity 2.",
                     "res_id": cls.partner_01.id,
                     "res_model_id": cls.partner_ir_model.id,
                     "user_id": cls.user_2.id,
@@ -49,3 +70,4 @@ class TestMailActivityReplyCreator(SavepointCase):
         # by default current user will be responsible.
         # module set responsible as prev. activity creator.
         self.assertEqual(new_act.user_id, prev_act_uid)
+        self.act2.action_feedback_schedule_next()
