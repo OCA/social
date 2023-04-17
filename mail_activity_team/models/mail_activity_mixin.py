@@ -20,16 +20,28 @@ class MailActivityMixin(models.AbstractModel):
 
     def _search_my_activity_date_deadline(self, operator, operand):
         if not self._context.get("team_activities", False):
-            return super(MailActivityMixin, self)._search_my_activity_date_deadline(
-                operator, operand
-            )
+            return super()._search_my_activity_date_deadline(operator, operand)
+        query = """
+        SELECT res_users_id
+        FROM mail_activity_team_users_rel
+        WHERE mail_activity_team_id IN (
+            SELECT mail_activity_team_id
+            FROM mail_activity_team_users_rel
+            WHERE res_users_id = %(user_id)s)
+        """
+        user = self.env.uid
+        self.env.cr.execute(
+            query,
+            {
+                "user_id": user,
+            },
+        )
+        users = [row[0] for row in self.env.cr.fetchall()]
         activity_ids = self.env["mail.activity"]._search(
             [
-                "|",
-                ("user_id", "=", self.env.user.id),
-                "&",
                 ("date_deadline", operator, operand),
                 ("res_model", "=", self._name),
+                ("user_id", "in", users),
             ]
         )
         return [("activity_ids", "in", activity_ids)]
