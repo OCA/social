@@ -4,7 +4,7 @@
 {
     "name": "Mail Activity Team",
     "summary": "Add Teams to Activities",
-    "version": "15.0.2.1.0",
+    "version": "16.0.1.0.0",
     "development_status": "Alpha",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
@@ -23,10 +23,8 @@
     ],
     "assets": {
         "web.assets_backend": [
-            "mail_activity_team/static/src/js/systray.esm.js",
-        ],
-        "web.assets_qweb": [
-            "mail_activity_team/static/src/xml/systray.xml",
+            "mail_activity_team/static/src/components/*/*",
+            "mail_activity_team/static/src/models/*",
         ],
     },
 }

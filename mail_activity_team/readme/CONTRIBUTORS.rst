@@ -7,3 +7,6 @@
 * `Tecnativa <https://www.tecnativa.com>`_:
 
   * David Vidal
+* `Dynapps <https://www.dynapps.eu>`_:
+
+  * Raf Ven

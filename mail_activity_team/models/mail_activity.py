@@ -78,7 +78,7 @@ class MailActivity(models.Model):
 
     @api.onchange("activity_type_id")
     def _onchange_activity_type_id(self):
-        res = super(MailActivity, self)._onchange_activity_type_id()
+        res = super()._onchange_activity_type_id()
         if self.activity_type_id.default_team_id:
             self.team_id = self.activity_type_id.default_team_id
             members = self.activity_type_id.default_team_id.member_ids
