@@ -114,7 +114,7 @@ class TestMailActivityTeam(TransactionCase):
 
     def test_activity_members(self):
         self.team1.member_ids |= self.employee2
-        self.partner_client.refresh()
+        self.partner_client.invalidate_recordset()
         self.assertIn(self.employee2, self.partner_client.activity_team_user_ids)
         self.assertIn(self.employee, self.partner_client.activity_team_user_ids)
         self.assertEqual(
@@ -155,9 +155,11 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(
             self.act2.team_id, self.team1, "Error: Activity 2 should have Team 1."
         )
-        with Form(self.act2) as form:
-            form.user_id = self.employee2
-            self.assertEqual(form.team_id, self.team2)
+        with self.assertRaises(
+            AssertionError, msg="can't write on invisible field user_id"
+        ):
+            with Form(self.act2) as form:
+                form.user_id = self.employee2
 
     def test_activity_onchanges_user_no_team(self):
         self.assertEqual(
@@ -269,7 +271,7 @@ class TestMailActivityTeam(TransactionCase):
         activity = partner_record.activity_schedule(
             activity_type_id=self.activity2.id, user_id=self.employee2.id
         )
-        activity.flush()
+        activity.flush_recordset()
         res = (
             self.env["res.users"]
             .with_user(self.employee.id)
@@ -292,7 +294,7 @@ class TestMailActivityTeam(TransactionCase):
         self.team2.member_ids = self.employee2
         partner_record = self.employee.partner_id.with_user(self.employee.id)
         activity = partner_record.activity_schedule(activity_type_id=self.activity1.id)
-        activity.flush()
+        activity.flush_recordset()
         _messages, next_activities = activity._action_done()
         self.assertTrue(next_activities)
         self.assertEqual(next_activities.team_id, self.team2)
