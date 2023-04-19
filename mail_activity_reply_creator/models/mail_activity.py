@@ -20,7 +20,8 @@ class MailActivity(models.Model):
     def action_feedback_schedule_next(self, feedback=False):
         create_uid = self.create_uid.id
         action = super().action_feedback_schedule_next(feedback)
-        action["context"]["source_activity_create_uid"] = create_uid
+        if action:
+            action["context"]["source_activity_create_uid"] = create_uid
         return action
 
     @api.model
