@@ -7,12 +7,12 @@ from odoo import api, fields, models
 
 
 class MailActivityType(models.Model):
-    _inherit = 'mail.activity.type'
+    _inherit = "mail.activity.type"
 
     reminders = fields.Char(
-        string='Reminders',
+        string="Reminders",
         help=(
-            'A non-digit-separated list of offsets (in days) when reminders'
+            "A non-digit-separated list of offsets (in days) when reminders"
             ' should be fired: e.g. 0 means "on the deadline day" while'
             ' 5 means "5 calendar days before the deadline".'
         ),
@@ -24,4 +24,4 @@ class MailActivityType(models.Model):
         self.ensure_one()
         if not self.reminders:
             return []
-        return [int(x) for x in split(r'\D+', self.reminders) if x]
+        return [int(x) for x in split(r"\D+", self.reminders) if x]
