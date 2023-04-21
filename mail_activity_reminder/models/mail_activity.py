@@ -41,7 +41,6 @@ class MailActivity(models.Model):
         activities.action_remind()
         return activities
 
-    @api.multi
     @api.depends(
         "user_id.tz", "activity_type_id.reminders", "deadline", "last_reminder_local",
     )
@@ -79,7 +78,6 @@ class MailActivity(models.Model):
                 tzinfo=None
             )
 
-    @api.multi
     @api.depends("user_id.tz", "date_deadline")
     def _compute_deadline(self):
         for activity in self:
@@ -90,7 +88,6 @@ class MailActivity(models.Model):
                 .replace(tzinfo=None)
             )
 
-    @api.multi
     def action_notify(self):
         super().action_notify()
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
@@ -100,7 +97,6 @@ class MailActivity(models.Model):
             tz = timezone(activity.user_id.sudo().tz or "UTC")
             activity.last_reminder_local = utc_now.astimezone(tz).replace(tzinfo=None)
 
-    @api.multi
     def action_remind(self):
         IrModel = self.env["ir.model"]
         MailThread = self.env["mail.thread"]

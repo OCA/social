@@ -3,7 +3,7 @@
 
 from re import split
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class MailActivityType(models.Model):
@@ -18,7 +18,6 @@ class MailActivityType(models.Model):
         ),
     )
 
-    @api.multi
     def _get_reminder_offsets(self):
         """Hook for extensions"""
         self.ensure_one()
