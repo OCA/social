@@ -4,14 +4,12 @@
 
 {
     "name": "Mail Activity Reminder",
-    "version": "12.0.1.0.1",
+    "version": "13.0.1.0.0",
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
-    "author": "CorporateHub, " "Odoo Community Association (OCA)",
+    "author": "CorporateHub, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "installable": True,
-    "application": False,
     "summary": "Reminder notifications about planned activities",
-    "depends": ["mail",],
-    "data": ["data/mail_activity_reminder_cron.xml", "views/mail_activity_type.xml",],
+    "depends": ["mail"],
+    "data": ["data/mail_activity_reminder_cron.xml", "views/mail_activity_type.xml"],
 }

@@ -34,24 +34,24 @@ class TestMailActivityReminder(common.SavepointCase):
         )
 
     def test_none_reminders(self):
-        activity_type = self.MailActivityType.create({"name": "Activity Type",})
+        activity_type = self.MailActivityType.create({"name": "Activity Type"})
         self.assertEqual(activity_type._get_reminder_offsets(), [])
 
     def test_empty_reminders(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": " -./",}
+            {"name": "Activity Type", "reminders": " -./"}
         )
         self.assertEqual(activity_type._get_reminder_offsets(), [])
 
     def test_delimiters(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": "0 1_2/3.4t5",}
+            {"name": "Activity Type", "reminders": "0 1_2/3.4t5"}
         )
         self.assertEqual(activity_type._get_reminder_offsets(), [0, 1, 2, 3, 4, 5])
 
     def test_first_notice_is_reminder(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": "0",}
+            {"name": "Activity Type", "reminders": "0"}
         )
         user = self.ResUsers.sudo().create(
             {
@@ -76,7 +76,7 @@ class TestMailActivityReminder(common.SavepointCase):
 
     def test_reminder_behaviour(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": "0/2",}
+            {"name": "Activity Type", "reminders": "0/2"}
         )
 
         with freeze_time(self.now):
@@ -119,7 +119,7 @@ class TestMailActivityReminder(common.SavepointCase):
 
     def test_reminder_flow(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": "0/2",}
+            {"name": "Activity Type", "reminders": "0/2"}
         )
 
         with freeze_time(self.now):
@@ -155,7 +155,7 @@ class TestMailActivityReminder(common.SavepointCase):
 
     def test_repeated_reminder(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": "0",}
+            {"name": "Activity Type", "reminders": "0"}
         )
 
         with freeze_time(self.now):
@@ -178,7 +178,7 @@ class TestMailActivityReminder(common.SavepointCase):
 
     def test_overdue_reminder(self):
         activity_type = self.MailActivityType.create(
-            {"name": "Activity Type", "reminders": "0",}
+            {"name": "Activity Type", "reminders": "0"}
         )
 
         with freeze_time(self.now):
