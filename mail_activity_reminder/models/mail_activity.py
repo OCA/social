@@ -4,9 +4,8 @@
 from datetime import datetime, time
 
 from dateutil.relativedelta import relativedelta
-from pytz import UTC, timezone
-
 from odoo import _, api, fields, models
+from pytz import UTC, timezone
 
 
 class MailActivity(models.Model):
@@ -57,13 +56,13 @@ class MailActivity(models.Model):
             reminders.sort(reverse=True)
             tz = timezone(activity.user_id.sudo().tz or "UTC")
             last_reminder_local = (
-                tz.localize(activity.last_reminder_local)
+                tz.localize(fields.Datetime.from_string(activity.last_reminder_local))
                 if activity.last_reminder_local
                 else None
             )
             local_deadline = tz.localize(
                 datetime.combine(
-                    activity.date_deadline,
+                    fields.Date.from_string(activity.date_deadline),
                     time.min,  # Schedule reminder based of beginning of day
                 )
             )
@@ -83,7 +82,7 @@ class MailActivity(models.Model):
         for activity in self:
             tz = timezone(activity.user_id.sudo().tz or "UTC")
             activity.deadline = (
-                tz.localize(datetime.combine(activity.date_deadline, time.max))
+                tz.localize(datetime.combine(fields.Date.from_string(activity.date_deadline), time.max))
                 .astimezone(UTC)
                 .replace(tzinfo=None)
             )
@@ -105,7 +104,7 @@ class MailActivity(models.Model):
         message_activity_assigned = self.env.ref(
             "mail_activity_reminder.message_activity_assigned"
         )
-        utc_now = fields.Datetime.now().replace(tzinfo=UTC)
+        utc_now = fields.Datetime.from_string(fields.Datetime.now()).replace(tzinfo=UTC)
         for user in self.mapped("user_id"):
             activities = self.filtered(lambda activity: activity.user_id == user)
             tz = timezone(user.sudo().tz or "UTC")
@@ -116,13 +115,13 @@ class MailActivity(models.Model):
             body = message_activity_assigned.render(
                 dict(activities=activities, model_description="Activities"),
                 engine="ir.qweb",
-                minimal_qcontext=True,
             )
-            MailThread.message_notify(
+
+            MailThread.message_post(
                 partner_ids=user.partner_id.ids,
                 body=body,
                 subject=subject,
                 model_description="Activity",
                 notif_layout="mail.mail_notification_light",
             )
-            activities.update({"last_reminder_local": local_now.replace(tzinfo=None)})
+            activities.update({"last_reminder_local": fields.Datetime.to_string(local_now.replace(tzinfo=None))})

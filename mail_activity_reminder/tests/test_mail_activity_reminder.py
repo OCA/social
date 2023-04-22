@@ -5,7 +5,7 @@ from datetime import datetime
 
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
-
+from odoo.fields import Date
 from odoo.tests import common
 
 
@@ -25,13 +25,13 @@ class TestMailActivityReminder(common.SavepointCase):
         cls.MailActivity = cls.env["mail.activity"]
         cls.company_id = cls.Company._company_default_get()
         cls.now = datetime(2020, 4, 19, 15, 00)
-        cls.today = cls.now.date()
+        cls.today = Date.to_string(cls.now.date())
         cls.model_res_partner = cls.env["ir.model"].search(
             [("model", "=", "res.partner")], limit=1
         )
-        cls.partner_DecoAddict = cls.env["res.partner"].search(
-            [("name", "ilike", "Deco Addict")], limit=1
-        )
+        cls.partner_DecoAddict = cls.env["res.partner"].create({
+            "name": "Deco Addict"
+        })
 
     def test_none_reminders(self):
         activity_type = self.MailActivityType.create({"name": "Activity Type"})
@@ -86,7 +86,7 @@ class TestMailActivityReminder(common.SavepointCase):
                     "activity_type_id": activity_type.id,
                     "res_model_id": self.model_res_partner.id,
                     "res_id": self.partner_DecoAddict.id,
-                    "date_deadline": self.today + relativedelta(days=5),
+                    "date_deadline": Date.to_string(Date.from_string(self.today) + relativedelta(days=5)),
                 }
             )
 
@@ -129,7 +129,7 @@ class TestMailActivityReminder(common.SavepointCase):
                     "activity_type_id": activity_type.id,
                     "res_model_id": self.model_res_partner.id,
                     "res_id": self.partner_DecoAddict.id,
-                    "date_deadline": self.today + relativedelta(days=5),
+                    "date_deadline": Date.to_string(Date.from_string(self.today) + relativedelta(days=5)),
                 }
             )
 
@@ -165,7 +165,7 @@ class TestMailActivityReminder(common.SavepointCase):
                     "activity_type_id": activity_type.id,
                     "res_model_id": self.model_res_partner.id,
                     "res_id": self.partner_DecoAddict.id,
-                    "date_deadline": self.today + relativedelta(days=1),
+                    "date_deadline": Date.to_string(Date.from_string(self.today) + relativedelta(days=1)),
                 }
             )
 
@@ -188,7 +188,7 @@ class TestMailActivityReminder(common.SavepointCase):
                     "activity_type_id": activity_type.id,
                     "res_model_id": self.model_res_partner.id,
                     "res_id": self.partner_DecoAddict.id,
-                    "date_deadline": self.today + relativedelta(days=1),
+                    "date_deadline": Date.to_string(Date.from_string(self.today) + relativedelta(days=1)),
                 }
             )
 
