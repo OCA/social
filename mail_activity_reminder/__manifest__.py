@@ -11,5 +11,9 @@
     "license": "AGPL-3",
     "summary": "Reminder notifications about planned activities",
     "depends": ["mail"],
-    "data": ["data/mail_activity_reminder_cron.xml", "views/mail_activity_type.xml"],
+    "data": [
+        "data/mail_activity_reminder_cron.xml",
+        "views/mail_activity_type.xml",
+        "data/mail_activity_template.xml",
+    ],
 }
