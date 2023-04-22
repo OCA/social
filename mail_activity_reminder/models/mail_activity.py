@@ -98,30 +98,31 @@ class MailActivity(models.Model):
             activity.last_reminder_local = utc_now.astimezone(tz).replace(tzinfo=None)
 
     def action_remind(self):
-        IrModel = self.env["ir.model"]
+        """
+            Group reminders by user and type and send them together
+        """
         MailThread = self.env["mail.thread"]
-        message_activity_assigned = self.env.ref("mail.message_activity_assigned")
+        message_activity_assigned = self.env.ref(
+            "mail_activity_reminder.message_activity_assigned"
+        )
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
-        for activity in self:
-            tz = timezone(activity.user_id.sudo().tz or "UTC")
+        for user in self.mapped("user_id"):
+            activities = self.filtered(lambda activity: activity.user_id == user)
+            tz = timezone(user.sudo().tz or "UTC")
             local_now = utc_now.astimezone(tz)
-            model_description = IrModel._get(activity.res_model).display_name
-            subject = _("%s: %s assigned to you, %d day(s) remaining") % (
-                activity.res_name,
-                activity.summary or activity.activity_type_id.name,
-                (activity.date_deadline - local_now.date()).days,
-            )
+
+            subject = _("Some activities you are assigned too expire soon.")
+
             body = message_activity_assigned.render(
-                dict(activity=activity, model_description=model_description),
+                dict(activities=activities, model_description="Activities"),
                 engine="ir.qweb",
                 minimal_qcontext=True,
             )
             MailThread.message_notify(
-                partner_ids=activity.user_id.partner_id.ids,
+                partner_ids=user.partner_id.ids,
                 body=body,
                 subject=subject,
-                record_name=activity.res_name,
-                model_description=model_description,
+                model_description="Activity",
                 notif_layout="mail.mail_notification_light",
             )
-            activity.last_reminder_local = local_now.replace(tzinfo=None)
+            activities.update({"last_reminder_local": local_now.replace(tzinfo=None)})
