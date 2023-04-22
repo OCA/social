@@ -43,12 +43,6 @@ To configure reminders for specific Activity Type:
    when reminders should be fired: e.g. 0 means "on the deadline day" while
    5 means "5 calendar days before the deadline".
 
-Known issues / Roadmap
-======================
-
- * Maybe, group reminders by receiver and send multiple scheduled remiders
-   in one message.
-
 Bug Tracker
 ===========
 
