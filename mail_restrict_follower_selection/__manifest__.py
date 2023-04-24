@@ -9,6 +9,7 @@
     "license": "AGPL-3",
     "category": "Social Network",
     "summary": "Define a domain from which followers can be selected",
+    "website": "https://github.com/OCA/social",
     "depends": [
         'mail',
     ],
