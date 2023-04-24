@@ -18,13 +18,8 @@
                     class="oe_stat_button"
                     icon="fa-envelope-o"
                     attrs="{'invisible': [('email', '=', False)]}"
+                    string="Tracking e-mail"
                 >
-                <field
-                        name="tracking_emails_count"
-                        widget="statinfo"
-                        string="Tracking emails"
-                        attrs="{'invisible': [('tracking_emails_count', '=', False)]}"
-                    />
             </button>
         </div>
         <xpath expr="//field[@name='email']/.." position="after">
