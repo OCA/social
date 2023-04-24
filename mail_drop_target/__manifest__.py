@@ -7,6 +7,7 @@
     "license": "AGPL-3",
     "category": "Discuss",
     "summary": "Attach emails to Odoo by dragging them from your desktop",
+    "website": "https://github.com/OCA/social",
     "depends": [
         'mail',
         'web_drop_target',
