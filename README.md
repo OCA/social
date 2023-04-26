@@ -31,6 +31,7 @@ addon | version | maintainers | summary
 [mass_mailing_contact_active](mass_mailing_contact_active/) | 16.0.1.0.0 |  | Adds active feature on mailing list contact and subscriptions
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 16.0.1.0.0 |  | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 16.0.1.0.0 |  | Link partners with mass-mailing
+[mass_mailing_resend](mass_mailing_resend/) | 16.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
 
 [//]: # (end addons)
 
