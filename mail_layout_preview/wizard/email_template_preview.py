@@ -16,7 +16,7 @@ class MailTemplatePreview(models.TransientModel):
     @api.depends("resource_ref", "model_id", "mail_template_id")
     def _compute_layout_preview_url(self):
         for rec in self:
-            if rec.mail_template_id:
+            if rec.mail_template_id and rec.resource_ref:
                 rec.layout_preview_url = self._url_pattern.format(
                     model=rec.model_id.model,
                     templ_id=rec.mail_template_id.id,
