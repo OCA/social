@@ -43,7 +43,7 @@ addon | version | maintainers | summary
 [mail_quoted_reply](mail_quoted_reply/) | 15.0.1.0.1 |  | Make a reply using a message
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 15.0.1.0.0 |  | Define a domain from which followers can be selected
 [mail_show_follower](mail_show_follower/) | 15.0.1.2.2 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Show CC document followers in mails.
-[mail_tracking](mail_tracking/) | 15.0.2.0.3 |  | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 15.0.2.0.4 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 15.0.1.1.0 |  | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 15.0.1.0.0 |  | Improve mass mailing email tracking
 [mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 15.0.1.0.0 |  | Know and track (un)subscription reasons, GDPR compliant
