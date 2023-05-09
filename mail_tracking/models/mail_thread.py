@@ -71,7 +71,7 @@ class MailThread(models.AbstractModel):
                 email_extra_formated_list.extend(email_split_and_format(email))
         email_extra_formated_list = set(email_extra_formated_list)
         email_extra_list = [x[1] for x in getaddresses(email_extra_formated_list)]
-        partners_info = self._message_partner_info_from_emails(email_extra_list)
+        partners_info = self.sudo()._message_partner_info_from_emails(email_extra_list)
         for pinfo in partners_info:
             partner_id = pinfo["partner_id"]
             email_formed = email_split(pinfo["full_name"])
