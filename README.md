@@ -57,7 +57,7 @@ addon | version | maintainers | summary
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
 [mail_server_by_user](mail_server_by_user/) | 14.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Email Server By User
 [mail_show_follower](mail_show_follower/) | 14.0.1.1.0 |  | Show CC document followers in mails.
-[mail_tracking](mail_tracking/) | 14.0.3.1.1 |  | Email tracking system for all mails sent
+[mail_tracking](mail_tracking/) | 14.0.3.1.2 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 14.0.2.1.0 |  | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 14.0.1.1.0 |  | Improve mass mailing email tracking
 [mass_mailing_company_newsletter](mass_mailing_company_newsletter/) | 14.0.1.0.1 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Easily manage partner's subscriptions to your main mailing list.
