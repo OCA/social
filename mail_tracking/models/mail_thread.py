@@ -87,7 +87,7 @@ class MailThread(models.AbstractModel):
                 )
 
     @api.model
-    def _get_view(self, view_id=None, view_type='form', **options):
+    def _get_view(self, view_id=None, view_type="form", **options):
         """Add filters for failed messages.
 
         These filters will show up on any form or search views of any
@@ -95,8 +95,9 @@ class MailThread(models.AbstractModel):
         """
 
         arch, view = super()._get_view(view_id, view_type, **options)
+        # import pdb; pdb.set_trace()
         if view_type in {"search", "form"}:
-            doc = etree.XML(arch)
+            doc = arch
             if view_type == "search":
                 # Modify view to add new filter element
                 nodes = doc.xpath("//search")
@@ -112,7 +113,9 @@ class MailThread(models.AbstractModel):
                                     [
                                         "failed_message_ids.mail_tracking_ids.state",
                                         "in",
-                                        list(self.env["mail.message"].get_failed_states()),
+                                        list(
+                                            self.env["mail.message"].get_failed_states()
+                                        ),
                                     ],
                                     [
                                         "failed_message_ids.mail_tracking_needs_action",
@@ -127,7 +130,9 @@ class MailThread(models.AbstractModel):
                     nodes[0].append(new_filter)
             elif view_type == "form":
                 # Modify view to add new field element
-                nodes = doc.xpath("//field[@name='message_ids' and @widget='mail_thread']")
+                nodes = doc.xpath(
+                    "//field[@name='message_ids' and @widget='mail_thread']"
+                )
                 if nodes:
                     # Create field
                     field_failed_messages = etree.Element(
@@ -135,7 +140,6 @@ class MailThread(models.AbstractModel):
                         {"name": "failed_message_ids", "widget": "mail_failed_message"},
                     )
                     nodes[0].addprevious(field_failed_messages)
-            arch = etree.tostring(doc, encoding="unicode")
+            arch = doc
 
         return arch, view
-

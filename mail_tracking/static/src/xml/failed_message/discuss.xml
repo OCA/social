@@ -6,7 +6,7 @@
             position="after"
         >
             <t t-elif="thread.mailbox === messaging.failedmsg">
-                <div class="o_ThreadIcon_mailboxModeration fa-fw fa-exclamation" />
+                <div class="o_ThreadIcon_mailboxModeration fa fa-fw fa-exclamation" />
             </t>
         </xpath>
     </t>
