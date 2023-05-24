@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-18 07:46+0000\n"
 "PO-Revision-Date: 2023-05-24 10:10+0000\n"
-"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -416,7 +416,7 @@ msgstr ""
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
 msgid "Type"
-msgstr "Type"
+msgstr "Tipo"
 
 #. module: mail_tracking
 #: view:mail.tracking.event:mail_tracking.view_mail_tracking_event_search
