@@ -48,7 +48,9 @@
                                                 />
                                  </t>
                                  <div class="o_Activity_iconContainer bg-danger-full">
-                                    <i class="o_Activity_icon fa fa-fw fa-exclamation" />
+                                    <i
+                                                    class="o_Activity_icon fa fa-fw fa-exclamation"
+                                                />
                                  </div>
                               </div>
                            </div>

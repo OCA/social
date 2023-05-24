@@ -33,17 +33,14 @@ patch(Message.prototype, "mail_tracking/static/src/js/message.js", {
     _onRetryFailedMessage(event) {
         event.preventDefault();
         var messageID = $(event.currentTarget).data("message-id");
-        this.env.services.action.doAction(
-            'mail.mail_resend_message_action',
-            {
-                additionalContext: {
-                    mail_message_to_resend: messageID,
-                },
-                onClose: () => {
-                    window.location.reload();
-                }
-            }
-        );
+        this.env.services.action.doAction("mail.mail_resend_message_action", {
+            additionalContext: {
+                mail_message_to_resend: messageID,
+            },
+            onClose: () => {
+                window.location.reload();
+            },
+        });
     },
     _markFailedMessageReviewed(id) {
         return this.messaging.rpc({

@@ -18,7 +18,7 @@ registerPatch({
         isFailed: attr({
             default: false,
         }),
-        threads: ({
+        threads: {
             compute() {
                 const threads = this._super();
                 if (this.isFailed && this.messaging.failedmsg) {
@@ -26,6 +26,6 @@ registerPatch({
                 }
                 return threads;
             },
-        }),
+        },
     },
 });
