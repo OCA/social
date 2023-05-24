@@ -45,10 +45,9 @@ registerPatch({
                         case this.messaging.failedmsg:
                             return "failedmsg";
                     }
-                    return this._super();
                 })();
                 if (!threadId) {
-                    return clear();
+                    return this._super();
                 }
                 return {
                     id: threadId,

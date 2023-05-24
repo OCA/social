@@ -18,5 +18,14 @@ registerPatch({
         isFailed: attr({
             default: false,
         }),
+        threads: ({
+            compute() {
+                const threads = this._super();
+                if (this.isFailed && this.messaging.failedmsg) {
+                    threads.push(this.messaging.failedmsg.thread);
+                }
+                return threads;
+            },
+        }),
     },
 });
