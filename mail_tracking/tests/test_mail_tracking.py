@@ -621,3 +621,35 @@ class TestMailTracking(TransactionCase):
             "soft_bounce"
             in message.mail_tracking_ids.tracking_event_ids.mapped("event_type")
         )
+
+    def test_tracking_img_tag(self):
+        # As the img tag is not in the body of the returned mail.mail record,
+        # we have to intercept the IrMailServer.send_email method here to get
+        # the real outgoing mail body and check for the img tag with a
+        # side_effect function:
+        def assert_tracking_tag_side_effect(*args, **kwargs):
+            mail = args[0]
+            msg = "data-odoo-tracking-email not found"
+            if "data-odoo-tracking-email=" in mail.as_string():
+                msg = "data-odoo-tracking-email found"
+            raise AssertionError(msg)
+
+        with mock.patch(mock_send_email) as mock_func:
+            mock_func.side_effect = assert_tracking_tag_side_effect
+            self.env["ir.config_parameter"].set_param(
+                "mail_tracking.tracking_img_disabled", False
+            )
+            mail, tracking = self.mail_send(self.recipient.email)
+            self.assertEqual(
+                "data-odoo-tracking-email found", tracking.error_description
+            )
+
+            # now we change the system parameter "mail_tracking.img.disable"
+            # to True and check that the img tag is not in the outgoing mail
+            self.env["ir.config_parameter"].set_param(
+                "mail_tracking.tracking_img_disabled", True
+            )
+            mail, tracking = self.mail_send(self.recipient.email)
+            self.assertEqual(
+                "data-odoo-tracking-email not found", tracking.error_description
+            )
