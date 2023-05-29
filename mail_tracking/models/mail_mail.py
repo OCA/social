@@ -30,7 +30,11 @@ class MailMail(models.Model):
 
     def _send_prepare_values(self, partner=None):
         """Creates the mail.tracking.email record and adds the image tracking
-        to the email"""
+        to the email. Please note that because we can't add mail headers in this
+        function, the added tracking image will later (IrMailServer.build_email)
+        also be used to extract the mail.tracking.email record id and to set the
+        X-Odoo-MailTracking-ID header there.
+        """
         email = super()._send_prepare_values(partner=partner)
         vals = self._tracking_email_prepare(partner, email)
         tracking_email = self.env["mail.tracking.email"].sudo().create(vals)
