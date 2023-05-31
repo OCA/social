@@ -36,18 +36,18 @@ jobs:
       matrix:
         include:
           - container: ghcr.io/oca/oca-ci/py3.6-odoo13.0:latest
-            include: "mail_restrict_follower_selection,mass_mailing_contact_active,mass_mailing_partner_contact_active"
+            include: "mail_restrict_follower_selection"
             makepot: "true"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.6-ocb13.0:latest
-            include: "mail_restrict_follower_selection,mass_mailing_contact_active,mass_mailing_partner_contact_active"
+            include: "mail_restrict_follower_selection"
             name: test with OCB
           - container: ghcr.io/oca/oca-ci/py3.6-odoo13.0:latest
-            exclude: "mail_restrict_follower_selection,mass_mailing_contact_active,mass_mailing_partner_contact_active"
+            exclude: "mail_restrict_follower_selection"
             makepot: "true"
             name: test with Odoo
           - container: ghcr.io/oca/oca-ci/py3.6-ocb13.0:latest
-            exclude: "mail_restrict_follower_selection,mass_mailing_contact_active,mass_mailing_partner_contact_active"
+            exclude: "mail_restrict_follower_selection"
             name: test with OCB
     services:
       postgres:
