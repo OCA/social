@@ -3,7 +3,7 @@
 {
     "name": "Mass Mailing Contact Active",
     "summary": "Adds active feature on mailing list contact and subscriptions",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.1.0",
     "category": "Marketing/Email Marketing",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp, Odoo Community Association (OCA)",
