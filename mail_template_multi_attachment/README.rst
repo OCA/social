@@ -23,7 +23,7 @@ Mail template multi attachment
     :target: https://runbot.odoo-community.org/runbot/205/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module add possibility to generate more than one attachment into your email template.
 
@@ -69,6 +69,7 @@ Contributors
 ~~~~~~~~~~~~
 
 * François Honoré <francois.honore@acsone.eu>
+* Benoit Aimont <benoit.aimont@acsone.eu>
 
 Maintainers
 ~~~~~~~~~~~
