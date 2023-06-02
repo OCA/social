@@ -267,7 +267,8 @@ msgid "Failed Recipients:"
 msgstr ""
 
 #. module: mail_tracking
-#. openerp-web
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/xml/failed_message/discuss.xml:0
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
 #, python-format
 msgid "Failed messages"

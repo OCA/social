@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import {attr} from "@mail/model/model_field";
+import {attr, one} from "@mail/model/model_field";
 import {registerPatch} from "@mail/model/model_core";
 
 registerPatch({
@@ -23,6 +23,9 @@ registerPatch({
     fields: {
         isMessageFailedBoxVisible: attr({
             default: true,
+        }),
+        threadViewFailed: one("ThreadView", {
+            related: "threadViewer.threadView",
         }),
     },
 });
