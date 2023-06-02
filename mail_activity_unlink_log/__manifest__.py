@@ -5,7 +5,7 @@
     "name": "Mail Activities: log on unlink",
     "summary": """
         Leave a message when an activity is unlinked""",
-    "version": "14.0.1.0.0",
+    "version": "15.0.1.0.0",
     "license": "AGPL-3",
     "author": "CreuBlanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
