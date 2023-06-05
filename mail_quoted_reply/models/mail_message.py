@@ -1,7 +1,8 @@
 # Copyright 2021 Creu Blanca
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import _, models
+from odoo.tools import format_datetime
 
 
 class MailMessage(models.Model):
@@ -12,20 +13,25 @@ class MailMessage(models.Model):
             <div>
                 <br/>
                 <br/>
+                {signature}
             </div>
             <br/>
             <blockquote style="padding-right:0px; padding-left:5px; border-left-color: #000;
             margin-left:5px; margin-right:0px;border-left-width: 2px; border-left-style:solid">
-            From: {email_from}<br/>
-            Date: {date}<br/>
-            Subject: {subject}<br/>
+            {str_from}: {email_from}<br/>
+            {str_date}: {date}<br/>
+            {str_subject}: {subject}<br/>
             {body}
             </blockquote>
         """.format(
             email_from=self.email_from,
-            date=self.date,
+            date=format_datetime(self.env, self.date),
             subject=self.subject,
             body=self.body,
+            signature=self.env.user.signature,
+            str_date=_("Date"),
+            str_subject=_("Subject"),
+            str_from=_("From"),
         )
 
     def reply_message(self):
