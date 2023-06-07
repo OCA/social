@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2019 Tecnativa - Jairo Llopis
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+
+<data>
+
+    <record id="list_form" model="ir.ui.view">
+        <field name="name">Add welcome mail template field</field>
+        <field name="model">mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_list_view_form_simplified" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <group>
+                    <field name="welcome_mail_template_id"/>
+                </group>
+            </field>
+        </field>
+    </record>
+
+    <record id="mailing_list_view_form_inherit" model="ir.ui.view">
+      <field name="name">Welcome Mail Template</field>
+      <field name="model">mailing.list</field>
+      <field name="inherit_id" ref="mass_mailing.mailing_list_view_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='active']" position="before">
+          <field name="welcome_mail_template_id"/>
+        </xpath>
+      </field>
+    </record>
+
+</data>
