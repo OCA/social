@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="mail_activity_type_form_view">
+        <field name="name">mail.activity.type.form (in mail_activity_team)</field>
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
+        <field name="arch" type="xml">
+            <field name="default_user_id" position="after">
+                <field
+                    name="default_team_id"
+                    options="{'no_create': True, 'no_edit': True}"
+                />
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>
