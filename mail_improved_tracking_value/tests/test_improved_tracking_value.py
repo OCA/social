@@ -7,14 +7,15 @@ from odoo.tests.common import TransactionCase
 
 
 class TestImproveTrackingValue(TransactionCase):
-    def setUp(self):
-        super(TestImproveTrackingValue, self).setUp()
-        self.model = self.env["mail.tracking.value"]
-        self.msg = self.env["mail.message"].create({"message_type": "email"})
-        self.mr = self.env.ref("base.res_partner_title_mister")
-        self.dr = self.env.ref("base.res_partner_title_doctor")
-        self.mm = self.env.ref("base.res_partner_title_madam")
-        self.pf = self.env.ref("base.res_partner_title_prof")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.model = cls.env["mail.tracking.value"]
+        cls.msg = cls.env["mail.message"].create({"message_type": "email"})
+        cls.mr = cls.env.ref("base.res_partner_title_mister")
+        cls.dr = cls.env.ref("base.res_partner_title_doctor")
+        cls.mm = cls.env.ref("base.res_partner_title_madam")
+        cls.pf = cls.env.ref("base.res_partner_title_prof")
 
     def test_change_one2many(self):
         """Test tracking one2many changes"""
