@@ -14,12 +14,12 @@ class TestBaseSearchMailContent(TransactionCase):
         self.assertFalse(res, "You have a channel with xxxyyyzzz :O")
 
     def test_base_search_mail_content_2(self):
-        res = self.channel_obj.load_views(
+        res = self.channel_obj.get_views(
             [[False, "search"]],
             {"load_fields": False, "load_filters": True, "toolbar": True},
         )
         self.assertIn(
             "message_content",
-            res["fields_views"]["search"]["fields"],
+            res["models"]["mail.channel"],
             "message_content field was not detected",
         )
