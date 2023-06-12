@@ -6,7 +6,7 @@
 
 from lxml import etree
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.osv import expression
 
 
@@ -38,21 +38,14 @@ class MailThread(models.AbstractModel):
         self.message_content = False
 
     @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
+    def get_view(self, view_id=None, view_type="form", **options):
         """
         Override to add message_content field in all the objects
         that inherits mail.thread
         """
-        res = super(MailThread, self).fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
-        )
+        res = super().get_view(view_id=view_id, view_type=view_type, options=options)
         if view_type == "search" and self._fields.get("message_content"):
             doc = etree.XML(res["arch"])
-            res["fields"].update(
-                {"message_content": {"type": "char", "string": _("Message Content")}}
-            )
             for node in doc.xpath("/search/field[last()]"):
                 # Add message_content in search view
                 elem = etree.Element("field", {"name": "message_content"})
