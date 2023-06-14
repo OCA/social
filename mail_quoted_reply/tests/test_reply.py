@@ -18,7 +18,7 @@ class TestMessageReply(TransactionCase):
             message_type="email",
             partner_ids=self.env.ref("base.partner_demo").ids,
         )
-        partner.refresh()
+        partner.invalidate_recordset()
         self.assertIn(
             message,
             partner.message_ids.filtered(lambda r: r.message_type != "notification"),
