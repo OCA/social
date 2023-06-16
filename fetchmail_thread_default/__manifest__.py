@@ -1,12 +1,13 @@
 # Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
+# Copyright 2023 Therp BV <https://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Default Thread For Unbounded Emails",
     "summary": "Post unkonwn messages to an existing thread",
-    "version": "13.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
-    "author": "Tecnativa, Odoo Community Association (OCA)",
+    "author": "Tecnativa, Therp BV,  Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
