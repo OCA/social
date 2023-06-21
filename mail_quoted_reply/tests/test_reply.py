@@ -33,7 +33,7 @@ class TestMessageReply(TransactionCase):
             self.env[action["res_model"]].with_context(**action["context"]).create({})
         )
         self.assertTrue(wizard.partner_ids)
-        self.assertEqual(message.partner_ids, wizard.partner_ids)
+        self.assertEqual(message.email_from, wizard.partner_ids.email_formatted)
         # the onchange in the composer isn't triggered in tests, so we check for the
         # correct quote in the context
         email_quote = re.search("<p>.*?</p>", wizard._context["quote_body"]).group()
