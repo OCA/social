@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form">
         <field
@@ -8,10 +8,78 @@
         <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='attachment_ids']/.." position="before">
-                <field name="can_attach_attachment" invisible="1"/>
+                <field name="can_attach_attachment" invisible="1" />
                 <div attrs="{'invisible': [('can_attach_attachment', '=', False)]}">
-                    <span>Include Attachments:</span><br/>
-                    <field name="object_attachment_ids" widget="many2many_checkboxes" domain="[('res_model', '=', model), ('res_id', '=', res_id)]"/>
+                    <span>Include Attachments:</span>
+                    <br />
+                    <field name="object_attachment_ids" widget="many2many_checkboxes"
+                        domain="[('res_model', '=', model), ('res_id', '=', res_id)]" />
+                    <!-- <field name="object_attachment_ids" widget="many2many_kanban"
+                        domain="[('res_model', '=', model), ('res_id', '=', res_id)]">
+                        <kanban edit="false" import="false">
+                            <field name="id" />
+                            <field name="mimetype" />
+                            <field name="type" />
+                            <field name="create_uid" />
+                            <field name="url" />
+                            <field name="create_date" />
+                            <field name="name" />
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <div
+                                        class="oe_kanban_global_area oe_kanban_global_click o_kanban_attachment">
+                                        <div class="row">
+                                            <div class="offset-10">
+                                                <a t-if="! read_only_mode" type="delete"
+                                                    style="position: absolute; right: 0; padding: 4px; diplay: inline-block">
+                                                    X</a>
+
+                                            </div>
+                                        </div>
+                                        <div class="o_kanban_image">
+                                            <div class="o_kanban_image_wrapper">
+                                                <t t-set="webimage"
+                                                    t-value="new RegExp('image.*(gif|jpeg|jpg|png)').test(record.mimetype.value)" />
+                                                <div t-if="record.type.raw_value == 'url'"
+                                                    class="o_url_image fa fa-link fa-3x text-muted"
+                                                    aria-label="Image is a link" />
+                                                <img t-elif="webimage"
+                                                    t-attf-src="/web/image/#{record.id.raw_value}"
+                                                    style="height: unset; max-height: 70px; max-width: 70px;"
+                                                    alt="Document" class="o_attachment_image" />
+                                                <div t-else="!webimage"
+                                                    class="o_image o_image_thumbnail"
+                                                    t-att-data-mimetype="record.mimetype.value" />
+                                            </div>
+                                        </div>
+                                        <div class="o_kanban_details">
+                                            <div class="o_kanban_details_wrapper">
+                                                <div t-att-title="record.name.raw_value"
+                                                    class="o_kanban_record_title">
+                                                    <field name="name" class="o_text_overflow" />
+                                                </div>
+                                                <div class="o_kanban_record_body">
+                                                    <t t-if="record.type.raw_value == 'url'">
+                                                        <span class="o_document_url">
+                                                            <i class="fa fa-globe"
+                                                                aria-label="Document url" />
+                                                            <field name="url" widget="url" />
+                                                        </span>
+                                                    </t>
+                                                    <samp t-else="" class="text-muted"> </samp>
+                                                </div>
+                                                <div class="o_kanban_record_bottom">
+                                                    <time class="oe_kanban_bottom_left">
+                                                        <field name="create_date" widget="date" />
+                                                    </time>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field> -->
                 </div>
             </xpath>
         </field>

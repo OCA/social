@@ -3,7 +3,6 @@
 
 from odoo import api, fields, models
 
-
 class MailComposeMessage(models.TransientModel):
     _inherit = "mail.compose.message"
 
@@ -14,9 +13,15 @@ class MailComposeMessage(models.TransientModel):
             res.get("res_id")
             and res.get("model")
             and res.get("composition_mode", "") != "mass_mail"
-            and not res.get("can_attach_attachment")
         ):
-            res["can_attach_attachment"] = True  # pragma: no cover
+            attachments = self.env['ir.attachment'].search([('res_model', '=', res.get("model")), ('res_id', '=', res.get("res_id"))])
+            if len(attachments) == 0:
+                res["can_attach_attachment"] = False
+            elif not res.get("can_attach_attachment"):
+                # Enable line to auto select all attachments
+                # res["object_attachment_ids"] = [(4, x.id) for x in attachments]
+                res["can_attach_attachment"] = True  # pragma: no cover
+
         return res
 
     can_attach_attachment = fields.Boolean()
