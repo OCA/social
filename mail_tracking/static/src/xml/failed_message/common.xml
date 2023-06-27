@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+
+    <t t-extend="mail.widget.Thread.Message">
+        <t t-jquery="span[t-attf-class=o_thread_icons]" t-operation="append">
+            <a
+                t-if="message.isFailed() &amp;&amp; options.displayRetryButton"
+                class="btn btn-link o_thread_icon btn-default text-muted btn-sm o_failed_message_reviewed o_activity_link mr8"
+                t-att-data-message-id="message.getID()"
+            >
+                <i class="fa fa-check" /> Set as Reviewed
+            </a>
+            <a
+                t-if="message.isFailed() &amp;&amp; options.displayReviewedButton"
+                class="btn btn-link o_thread_icon btn-default text-muted btn-sm o_failed_message_retry"
+                t-att-data-message-id="message.getID()"
+            >
+                <i class="fa fa-retweet" /> Retry
+            </a>
+        </t>
+    </t>
+
+</templates>
