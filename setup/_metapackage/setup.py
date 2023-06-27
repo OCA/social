@@ -8,8 +8,10 @@ setuptools.setup(
     description="Meta package for oca-social Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-base_search_mail_content>=16.0dev,<16.1dev',
         'odoo-addon-email_template_qweb>=16.0dev,<16.1dev',
         'odoo-addon-mail_activity_board>=16.0dev,<16.1dev',
+        'odoo-addon-mail_activity_team>=16.0dev,<16.1dev',
         'odoo-addon-mail_attach_existing_attachment>=16.0dev,<16.1dev',
         'odoo-addon-mail_debrand>=16.0dev,<16.1dev',
         'odoo-addon-mail_optional_autofollow>=16.0dev,<16.1dev',
