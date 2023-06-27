@@ -11,6 +11,9 @@
                     placeholder="Comma-separated blind carbon copy recipients addresses"
                 />
             </xpath>
+            <xpath expr="//field[@name='recipient_ids']" position="attributes">
+                <attribute name="string">Partners</attribute>
+            </xpath>
         </field>
     </record>
 </odoo>
