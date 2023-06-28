@@ -1,12 +1,15 @@
 /** @odoo-module **/
 
-import { registerPatch } from "@mail/model/model_core";
+import {registerPatch} from "@mail/model/model_core";
 
 registerPatch({
     name: "MessageActionView",
     recordMethods: {
         onClick(ev) {
-            if (this.messageAction.messageActionListOwner === this.messageAction.replyMessageAction) {
+            if (
+                this.messageAction.messageActionListOwner ===
+                this.messageAction.replyMessageAction
+            ) {
                 this.messageAction.messageActionListOwner.message.messageReply();
             } else {
                 this._super(ev);
@@ -17,7 +20,10 @@ registerPatch({
         classNames: {
             compute() {
                 let classNames = this._super() || "";
-                if (this.messageAction.messageActionListOwner === this.messageAction.replyMessageAction) {
+                if (
+                    this.messageAction.messageActionListOwner ===
+                    this.messageAction.replyMessageAction
+                ) {
                     classNames += " fa fa-lg fa-reply";
                 }
                 return classNames;
@@ -25,7 +31,10 @@ registerPatch({
         },
         title: {
             compute() {
-                if (this.messageAction.messageActionListOwner === this.messageAction.replyMessageAction) {
+                if (
+                    this.messageAction.messageActionListOwner ===
+                    this.messageAction.replyMessageAction
+                ) {
                     return this.env._t("Reply");
                 }
                 return this._super();

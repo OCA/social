@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { registerPatch } from "@mail/model/model_core";
+import {registerPatch} from "@mail/model/model_core";
 
 import rpc from "web.rpc";
 
@@ -8,7 +8,6 @@ registerPatch({
     name: "Message",
 
     recordMethods: {
-
         messageReply() {
             var self = this,
                 msg_id = this.id;
@@ -17,7 +16,8 @@ registerPatch({
                 method: "reply_message",
                 args: [msg_id],
             }).then(function (result) {
-                return self.env.services.action.doAction(result,
+                return self.env.services.action.doAction(
+                    result,
 
                     {
                         onClose: async () => {
@@ -25,7 +25,6 @@ registerPatch({
                             self.env.bus.trigger("update-messages");
                         },
                     }
-
                 );
             });
         },
