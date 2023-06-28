@@ -12,12 +12,8 @@
     "depends": ["mail"],
     "data": [],
     "assets": {
-        "web.assets_qweb": [
-            "/mail_quoted_reply/static/src/xml/mail_message_reply.xml",
-        ],
         "web.assets_backend": [
-            "/mail_quoted_reply/static/src/models/mail_message_reply.esm.js",
-            "/mail_quoted_reply/static/src/components/mail_message_reply.esm.js",
+            "/mail_quoted_reply/static/src/models/*.js",
         ],
     },
 }
