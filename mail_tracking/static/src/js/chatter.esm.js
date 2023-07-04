@@ -13,7 +13,7 @@ registerPatch({
     recordMethods: {
         async refresh() {
             this._super(...arguments);
-            this.thread.refreshMessagefailed();
+            //this.thread.refreshMessagefailed();
         },
         toggleMessageFailedBoxVisibility() {
             this.update({
@@ -22,7 +22,7 @@ registerPatch({
         },
         _onThreadIdOrThreadModelChanged() {
             this._super(...arguments);
-            this.thread.refreshMessagefailed();
+//            this.thread.refreshMessagefailed();
         },
     }
 });

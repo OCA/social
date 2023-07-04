@@ -37,7 +37,7 @@ export class MessageFailedBox extends Component {
         var messageID = $(event.currentTarget).data("message-id");
         this._markFailedMessageReviewed(messageID);
         this.trigger("reload", {keepChanges: true});
-        this.chatter.thread.refreshMessagefailed();
+//        this.chatter.thread.refreshMessagefailed();
         this.chatter.thread.refresh();
     }
 }
