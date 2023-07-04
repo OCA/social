@@ -1,7 +1,7 @@
 {
     "name": "Email tracking",
     "summary": "Email tracking system for all mails sent",
-    "version": "16.0.0.0.1",
+    "version": "16.0.0.0.2",
     "category": "Social Network",
     "author": ("Process Control SL","Tecnativa, " "Odoo Community Association (OCA)"),
     "license": "AGPL-3",

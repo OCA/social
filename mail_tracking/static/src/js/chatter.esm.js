@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { registerPatch } from '@mail/model/model_core';
+import {registerPatch} from '@mail/model/model_core';
 import {attr} from "@mail/model/model_field";
 
 registerPatch({
@@ -13,7 +13,10 @@ registerPatch({
     recordMethods: {
         async refresh() {
             this._super(...arguments);
-            //this.thread.refreshMessagefailed();
+            if (this.thread) {
+                this.thread.refreshMessagefailed();
+            }
+
         },
         toggleMessageFailedBoxVisibility() {
             this.update({
@@ -22,7 +25,9 @@ registerPatch({
         },
         _onThreadIdOrThreadModelChanged() {
             this._super(...arguments);
-//            this.thread.refreshMessagefailed();
+            if (this.thread) {
+                this.thread.refreshMessagefailed();
+            }
         },
     }
 });
