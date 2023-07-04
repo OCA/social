@@ -1,12 +1,14 @@
 /** @odoo-module **/
 
 import {registerMessagingComponent} from "@mail/utils/messaging_component";
+
 const {Component} = owl;
 
 export class MessageFailedBox extends Component {
     _onClickTitle() {
         this.chatter.toggleMessageFailedBoxVisibility();
     }
+
     _markFailedMessageReviewed(id) {
         return this.env.services.rpc({
             model: "mail.message",
@@ -14,6 +16,7 @@ export class MessageFailedBox extends Component {
             args: [[id]],
         });
     }
+
     _onRetryFailedMessage(event) {
         event.preventDefault();
         var messageID = $(event.currentTarget).data("message-id");
@@ -32,12 +35,13 @@ export class MessageFailedBox extends Component {
             },
         });
     }
+
     _onMarkFailedMessageReviewed(event) {
         event.preventDefault();
         var messageID = $(event.currentTarget).data("message-id");
         this._markFailedMessageReviewed(messageID);
         this.trigger("reload", {keepChanges: true});
-       this.chatter.thread.refreshMessagefailed();
+        this.chatter.thread.refreshMessagefailed();
         this.chatter.thread.refresh();
     }
 }
