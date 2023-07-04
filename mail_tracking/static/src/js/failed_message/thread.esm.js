@@ -1,6 +1,6 @@
 /** @odoo-module **/
 
-import { registerPatch } from '@mail/model/model_core';
+import {registerPatch} from '@mail/model/model_core';
 import {many} from "@mail/model/model_field";
 
 registerPatch({
@@ -12,21 +12,21 @@ registerPatch({
     },
     recordMethods: {
         async refreshMessagefailed() {
-            var id = this.__values.id;
-            var model = this.__values.model;
+            var id = this.__values.get('id');
+            var model = this.__values.get('model');
             const messagefailedData = await this.messaging.rpc(
-                    {
-                        model: "mail.message",
-                        method: "get_failed_messsage_info",
-                        args: [id, model],
-                    },
-                    {
-                        shadow: true,
-                    }
-                );
-            const messagefailed = this.messaging.models["mail.message.failed"].insert(
+                {
+                    model: "mail.message",
+                    method: "get_failed_messsage_info",
+                    args: [id, model],
+                },
+                {
+                    shadow: true,
+                }
+            );
+            const messagefailed = this.messaging.models["MailMessageFailed"].insert(
                 messagefailedData.map((messageData) =>
-                    this.messaging.models["mail.message.failed"].convertData(
+                    this.messaging.models["MailMessageFailed"].convertData(
                         messageData
                     )
                 )
