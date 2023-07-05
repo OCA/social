@@ -1,0 +1,10 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="res.groups" id="group_show_mail_activity_board">
+        <field name="name">Show mail activity board</field>
+        <field
+            name="users"
+            eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"
+        />
+    </record>
+</odoo>
