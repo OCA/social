@@ -321,6 +321,7 @@ Menus
         name="Activities"
         parent="spreadsheet_dashboard.spreadsheet_dashboard_menu_root"
         action="open_boards_activities"
+        groups="group_show_mail_activity_board"
         sequence="1"
     />
 
