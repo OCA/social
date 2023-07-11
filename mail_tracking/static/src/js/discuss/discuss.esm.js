@@ -1,7 +1,7 @@
 /** @odoo-module **/
 
-import { registerPatch } from '@mail/model/model_core';
-import {many, attr, one} from "@mail/model/model_field";
+import {registerPatch} from '@mail/model/model_core';
+import {attr, many, one} from "@mail/model/model_field";
 import {insert, set} from "@mail/model/model_field_command";
 
 registerPatch({
@@ -19,21 +19,21 @@ registerPatch({
             return this._super(...arguments);
         },
         async _init({
-            channels,
-            companyName,
-            current_partner,
-            currentGuest,
-            current_user_id,
-            current_user_settings,
-            mail_failures = [],
-            menu_id,
-            needaction_inbox_counter = 0,
-            partner_root,
-            public_partners,
-            shortcodes = [],
-            starred_counter = 0,
-            failed_counter = 0,
-        }) {
+                        channels,
+                        commands = [],
+                        companyName,
+                        current_partner,
+                        currentGuest,
+                        current_user_id,
+                        current_user_settings,
+                        hasLinkPreviewFeature,
+                        internalUserGroupId,
+                        menu_id,
+                        needaction_inbox_counter = 0,
+                        partner_root,
+                        shortcodes = [],
+                        starred_counter = 0,
+                    }) {
             const discuss = this.messaging.discuss;
             // Partners first because the rest of the code relies on them
             this._initPartners({
@@ -41,18 +41,16 @@ registerPatch({
                 current_partner,
                 current_user_id,
                 partner_root,
-                public_partners,
             });
             // Mailboxes after partners and before other initializers that might
             // manipulate threads or messages
             this._initMailboxes({
                 needaction_inbox_counter,
                 starred_counter,
-                failed_counter,
             });
             // Init mail user settings
             if (current_user_settings) {
-                this._initPartners(current_user_settings);
+                this.messaging.models['res.users.settings'].insert(current_user_settings);
             } else {
                 this.messaging.update({
                     userSetting: insert({
@@ -61,19 +59,22 @@ registerPatch({
                     }),
                 });
             }
-            // Various suggestions in no particular order
+            /// various suggestions in no particular order
             this._initCannedResponses(shortcodes);
             // FIXME: guests should have (at least some) commands available
             if (!this.messaging.isCurrentUserGuest) {
                 this._initCommands();
             }
-            // Channels when the rest of messaging is ready
-            await this._initChannels(channels);
-            // Failures after channels
-            this._initMailFailures(mail_failures);
+            // channels when the rest of messaging is ready
+            if (channels) {
+                await this._initChannels(channels);
+            }
+            if (!this.exists()) {
+                return;
+            }
             discuss.update({menu_id});
-            // Company related data
-            this.messaging.update({companyName});
+            // company related data
+            this.messaging.update({companyName, hasLinkPreviewFeature, internalUserGroupId});
         },
 
         _initMailboxes({needaction_inbox_counter, starred_counter, failed_counter}) {
