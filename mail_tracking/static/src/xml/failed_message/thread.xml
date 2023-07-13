@@ -115,16 +115,22 @@
       </div>
    </t>
    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
-      <xpath
-            expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.attachmentBoxView']"
-            position="before"
-        >
-         <t t-if="chatter.activityBoxView">
-            <MessageFailedBox
-                    className="'o_Chatter_activityBox'"
-                    record="chatter.activityBoxView"
+      <t t-if="chatter.threadView" position="before">
+         <t
+                t-if="chatter.threadViewFailed and chatter.threadViewFailed.failedMessages.length !== 0"
+            >
+            <ThreadView
+                    className="'o_Chatter_thread_Failed'"
+                    record="chatter.threadViewFailed"
                 />
          </t>
-      </xpath>
+      </t>
+   </t>
+   <t t-inherit="mail.ThreadView" t-inherit-mode="extension">
+      <MessageList position="attributes">
+         <attribute
+                name="classNameObj"
+            >{'threadViewFailedMsg': className == 'o_Chatter_thread_Failed'}</attribute>
+      </MessageList>
    </t>
 </templates>
