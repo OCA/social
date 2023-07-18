@@ -7,7 +7,9 @@ from odoo import fields, models
 class MailComposeMessage(models.TransientModel):
     _inherit = "mail.compose.message"
 
-    notify_followers = fields.Boolean(default=True)
+    notify_followers = fields.Boolean(
+        default=lambda self: self.env.company.notify_followers
+    )
 
     def _action_send_mail(self, auto_commit=False):
         result_mails_su, result_messages = (

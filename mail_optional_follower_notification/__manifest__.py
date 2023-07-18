@@ -9,5 +9,10 @@
     "version": "16.0.1.0.1",
     "license": "AGPL-3",
     "depends": ["mail"],
-    "data": ["wizard/mail_compose_message_view.xml"],
+    "data": [
+        # Views
+        "views/res_config_settings_view.xml",
+        # Wizard
+        "wizard/mail_compose_message_view.xml",
+    ],
 }

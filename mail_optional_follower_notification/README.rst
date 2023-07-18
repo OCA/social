@@ -23,7 +23,7 @@ Mail optional follower notification
     :target: https://runbot.odoo-community.org/runbot/205/16.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds the possibility to choose if you want to automatically
 notify followers on mail.compose.message. By default, Odoo notify
@@ -47,6 +47,11 @@ This field it's initialized to true to keep the standard behavior.
 
 .. figure:: https://raw.githubusercontent.com/OCA/social/16.0/mail_optional_follower_notification/static/description/optional_follower_002.png
    :alt: Checkbox to avoid to notify automatically followers
+
+You can set the default for notify followers by go to General Settings -> Discuss
+
+.. figure:: https://raw.githubusercontent.com/OCA/social/16.0/mail_optional_follower_notification/static/description/optional_follower_003.png
+   :alt: Set the default for notify followers
 
 Bug Tracker
 ===========
