@@ -2,7 +2,7 @@
 <template>
     <t t-name="MessageQuotedReplyButton">
         <span
-            class="p-2 fa fa-lg fa-reply o_MessageActionList_action"
+            class="p-2 fa fa-lg fa-reply o_MessageActionList_action o_mail_quoted_reply_command"
             t-on-click="_onClickMailMessageReply"
             title="Reply"
         />

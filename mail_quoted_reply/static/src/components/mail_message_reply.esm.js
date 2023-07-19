@@ -30,7 +30,12 @@ patch(
                     );
                 }
                 actionLists.forEach((actionList) => {
-                    actionList.append(MessageQuotedReplyIcon);
+                    if (
+                        !actionList.querySelectorAll(".o_mail_quoted_reply_command")
+                            .length > 0
+                    ) {
+                        actionList.append(MessageQuotedReplyIcon);
+                    }
                 });
             });
         },
