@@ -20,7 +20,9 @@ class MailThread(models.AbstractModel):
             custom_values=custom_values,
         )
 
-        for model, thread_id in routes or ():
+        for route in routes:
+            # routes: list of routes [(model, thread_id, custom_values, user_id, alias)]
+            model, thread_id = route[0], route[1]
             mdl = self.env[model]
             # Model needs mail.activity.mixin
             if not all(hasattr(mdl, x) for x in ("activity_ids", "activity_schedule")):
