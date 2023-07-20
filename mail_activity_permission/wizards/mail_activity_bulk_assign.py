@@ -17,6 +17,7 @@ class MailActivityBulkAssign(models.TransientModel):
                 "=",
                 self.env[self.env.context.get("active_model", "base")]
                 .browse(self.env.context.get("active_ids", []))
+                .exists()
                 .mapped("company_id")
                 .ids
                 + self.env.user.company_id.ids,
