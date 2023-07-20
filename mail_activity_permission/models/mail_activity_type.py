@@ -11,6 +11,8 @@ class MailActivityType(models.Model):
     field_ids = fields.Many2many(
         "ir.model.fields",
         domain="[('model_id', '=', res_model_id), ('ttype', '=', 'one2many')]",
+        string="Field permissions",
+        help="Select field of the model for which this activity type bypasses permissions",
     )
     code_activity_done = fields.Text(
         "Code done",
