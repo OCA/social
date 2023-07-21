@@ -60,6 +60,7 @@ Contributors
 ~~~~~~~~~~~~
 
   * isufi kapasi (isufi.kapasi@initos.com)
+  * Dhara Solanki <dhara.solanki@initos.com>
 
 Maintainers
 ~~~~~~~~~~~

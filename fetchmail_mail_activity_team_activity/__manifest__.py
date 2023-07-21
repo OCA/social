@@ -3,7 +3,7 @@
 
 {
     "name": "Mail Activity on Fetchmail with Team Activity",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Alpha",
     "category": "Hidden",
     "author": "initOS GmbH, Odoo Community Association (OCA)",
