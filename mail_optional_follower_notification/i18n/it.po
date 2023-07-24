@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2017-05-17 01:02+0000\n"
-"Last-Translator: Marius Marolla <mariusmarolla@gmail.com>, 2017\n"
+"PO-Revision-Date: 2023-07-24 10:10+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_optional_follower_notification
 #: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_form
@@ -36,7 +37,7 @@ msgstr ""
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr "Wizard Creazione Email"
+msgstr "Procedura guidata creazione e-mail"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
