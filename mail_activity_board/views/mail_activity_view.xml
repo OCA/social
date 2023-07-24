@@ -331,6 +331,7 @@ Menus
         name="Activities"
         parent="base.menu_board_root"
         action="open_boards_activities"
+        groups="group_show_mail_activity_board"
         sequence="1"
     />
 
