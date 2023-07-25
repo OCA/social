@@ -95,6 +95,11 @@ msgid "Show activities scheduled for next month."
 msgstr "Afficher les activités prévues pour le mois prochain."
 
 #. module: mail_activity_board
+#: model:res.groups,name:mail_activity_board.group_show_mail_activity_board
+msgid "Show mail activity board"
+msgstr ""
+
+#. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start"
 msgstr "Début"

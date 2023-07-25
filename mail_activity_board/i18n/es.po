@@ -108,7 +108,8 @@ msgstr "Inicio"
 #. module: mail_activity_board
 #: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start date of an event, without time for full days events"
-msgstr "Fecha de inicio de un evento, sin tiempo para eventos de días completos"
+msgstr ""
+"Fecha de inicio de un evento, sin tiempo para eventos de días completos"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
