@@ -8,7 +8,7 @@ from urllib.parse import urljoin
 
 import requests
 
-from odoo import _, api, models
+from odoo import SUPERUSER_ID, _, api, models
 from odoo.exceptions import UserError
 
 
@@ -35,6 +35,11 @@ class ResPartner(models.Model):
             body = _(
                 "Email has been bounced: %(email)s\nReason: %(reason)s\nEvent: %(event_str)s"
             ) % ({"email": partner.email, "reason": reason, "event_str": event_str})
+            # This function can be called by the non user via the callback_method set in
+            # /mail/tracking/mailgun/all/. A sudo() is not enough to succesfully send
+            # the bounce message in this circumstances.
+            if self.env.su:
+                partner = partner.with_user(SUPERUSER_ID)
             partner.message_post(body=body)
 
     def check_email_validity(self):
