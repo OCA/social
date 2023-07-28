@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-29 17:50+0000\n"
-"PO-Revision-Date: 2023-06-16 13:09+0000\n"
+"PO-Revision-Date: 2023-07-28 13:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-social-8-0/language/"
 "it/)\n"
@@ -214,7 +214,7 @@ msgstr "Ultimo aggiornamento il"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing_list
 msgid "Mailing List"
-msgstr "Mailing List"
+msgstr "Mailing list"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_mass_mailing
