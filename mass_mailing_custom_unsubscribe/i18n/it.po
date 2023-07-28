@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
-"PO-Revision-Date: 2023-06-15 08:10+0000\n"
+"PO-Revision-Date: 2023-07-28 13:11+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -248,7 +248,7 @@ msgstr "Motivi Disiscrizione"
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mailing_list
 msgid "Mailing List"
-msgstr "Mailing List"
+msgstr "Mailing list"
 
 #. module: mass_mailing_custom_unsubscribe
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mailing_list_ids
