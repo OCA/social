@@ -41,6 +41,9 @@
                                 options="{'no_create': True, 'no_open': True}"
                             />
                         </group>
+                        <group name="company">
+                            <field name="company_id" options="{'no_create': True}" />
+                        </group>
                     </group>
                     <notebook>
                         <page name="members" string="Members">

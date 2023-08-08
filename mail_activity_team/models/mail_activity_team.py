@@ -1,7 +1,8 @@
 # Copyright 2018-22 ForgeFlow S.L.
 # Copyright 2021 Sodexis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.odoo.exceptions import ValidationError
 
 
 class MailActivityTeam(models.Model):
@@ -48,6 +49,9 @@ class MailActivityTeam(models.Model):
     count_missing_activities = fields.Integer(
         string="Missing Activities", compute="_compute_missing_activities", default=0
     )
+    company_id = fields.Many2one(
+        "res.company", required=True, default=lambda self: self.env.company
+    )
 
     @api.onchange("user_id")
     def _onchange_user_id(self):
@@ -55,6 +59,14 @@ class MailActivityTeam(models.Model):
             members_ids = self.member_ids.ids
             members_ids.append(self.user_id.id)
             self.member_ids = [(4, member) for member in members_ids]
+
+    @api.constrains("company_id", "user_id", "member_ids")
+    def _check_company_user(self):
+        for rec in self:
+            if any(rec.company_id not in user.company_ids for user in rec.member_ids):
+                raise ValidationError(
+                    _("Some member can not access to the team company.")
+                )
 
     def assign_team_to_unassigned_activities(self):
         activity_model = self.env["mail.activity"]
