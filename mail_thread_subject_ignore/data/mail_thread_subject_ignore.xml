@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Keywords: Ignore -->
+    <record id="out_of_office" model="mail.thread.subject.ignore">
+        <field name="name">Out of Office</field>
+    </record>
+
+    <record id="automatic_reply" model="mail.thread.subject.ignore">
+        <field name="name">Automatic Reply</field>
+    </record>
+
+    <record id="vacation_notice" model="mail.thread.subject.ignore">
+        <field name="name">Vacation Notice</field>
+    </record>
+
+    <record id="away_from_desk" model="mail.thread.subject.ignore">
+        <field name="name">Away from Desk</field>
+    </record>
+
+    <record id="automatic_response" model="mail.thread.subject.ignore">
+        <field name="name">Automatic Response</field>
+    </record>
+
+    <record id="out_of_the_office" model="mail.thread.subject.ignore">
+        <field name="name">Out of the Office</field>
+    </record>
+
+    <record id="on_leave" model="mail.thread.subject.ignore">
+        <field name="name">On Leave</field>
+    </record>
+
+    <record id="not_available" model="mail.thread.subject.ignore">
+        <field name="name">Not Available</field>
+    </record>
+
+    <record id="auto_reply" model="mail.thread.subject.ignore">
+        <field name="name">Auto-reply</field>
+    </record>
+
+    <record id="autoresponder" model="mail.thread.subject.ignore">
+        <field name="name">Autoresponder</field>
+    </record>
+
+    <record id="absence_notification" model="mail.thread.subject.ignore">
+        <field name="name">Absence Notification</field>
+    </record>
+
+    <record id="vacation_response" model="mail.thread.subject.ignore">
+        <field name="name">Vacation Response</field>
+    </record>
+
+    <record id="automatic_vacation_message" model="mail.thread.subject.ignore">
+        <field name="name">Automatic Vacation Message</field>
+    </record>
+
+    <record id="automated_out_of_office_message" model="mail.thread.subject.ignore">
+        <field name="name">Automated Out-of-Office Message</field>
+    </record>
+
+    <record id="temporary_absence" model="mail.thread.subject.ignore">
+        <field name="name">Temporary Absence</field>
+    </record>
+
+    <record id="auto_response" model="mail.thread.subject.ignore">
+        <field name="name">Auto-Response</field>
+    </record>
+
+</odoo>

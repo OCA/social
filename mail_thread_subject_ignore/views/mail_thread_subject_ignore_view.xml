@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Define a new tree view for the Helpdesk Category model -->
+    <record id="view_mail_thread_subject_ignore_tree" model="ir.ui.view">
+        <field name="name">mail.thread.subject.ignore.tree</field>
+        <field name="model">mail.thread.subject.ignore</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Define a new form view for the Helpdesk Category model -->
+    <record id="view_mail_thread_subject_ignore_form" model="ir.ui.view">
+        <field name="name">mail.thread.subject.ignore.form</field>
+        <field name="model">mail.thread.subject.ignore</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Search view for HelpdeskCategory model -->
+    <record id="view_mail_thread_subject_ignore_search" model="ir.ui.view">
+        <field name="name">mail.thread.subject.ignore.search</field>
+        <field name="model">mail.thread.subject.ignore</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mail_thread_subject_ignore_form" model="ir.actions.act_window">
+        <field name="name">Mail Subjects to Ignore</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.thread.subject.ignore</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_mail_thread_subject_ignore_search" />
+    </record>
+
+    <record id="menu_mail_thread_subject_ignore" model="ir.ui.menu">
+        <field name="name">Mail Subjects to Ignore</field>
+        <field name="parent_id" ref="mail.mail_menu_technical" />
+        <field name="action" ref="action_mail_thread_subject_ignore_form" />
+        <field name="groups_id" eval="[(4, ref('base.group_erp_manager'))]" />
+    </record>
+
+</odoo>
