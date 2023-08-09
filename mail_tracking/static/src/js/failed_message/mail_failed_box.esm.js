@@ -40,6 +40,13 @@ export class MessageFailedBox extends Component {
         this.chatter.thread.refreshMessagefailed();
         this.chatter.thread.refresh();
     }
+
+    /**
+     * @returns {Chatter}
+     */
+    get chatter() {
+        return this.messaging.models["mail.chatter"].get(this.props.chatterLocalId);
+    }
 }
 
 Object.assign(MessageFailedBox, {

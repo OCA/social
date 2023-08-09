@@ -3,7 +3,7 @@
 import {Message} from "@mail/components/message/message";
 import {patch} from "web.utils";
 
-patch(Message.prototype, "mail_tracking/static/src/js/message.js", {
+patch(Message.prototype, "mail_tracking/static/src/js/message.esm.js", {
     constructor() {
         this._super(...arguments);
     },
