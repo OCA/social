@@ -9,7 +9,7 @@ import {attr} from "@mail/model/model_field";
 
 registerClassPatchModel(
     "mail.message",
-    "mail_tracking/static/src/js/mail_tracking.js",
+    "mail_tracking/static/src/js/mail_tracking.esm.js",
     {
         convertData(data) {
             const data2 = this._super(data);
@@ -23,7 +23,7 @@ registerClassPatchModel(
 
 registerFieldPatchModel(
     "mail.message",
-    "mail_tracking/static/src/js/mail_tracking.js",
+    "mail_tracking/static/src/js/mail_tracking.esm.js",
     {
         partner_trackings: attr(),
     }
@@ -31,7 +31,7 @@ registerFieldPatchModel(
 
 registerInstancePatchModel(
     "mail.model",
-    "mail_tracking/static/src/js/mail_tracking.js",
+    "mail_tracking/static/src/js/mail_tracking.esm.js",
     {
         hasPartnerTrackings() {
             return _.some(this.__values.partner_trackings);
