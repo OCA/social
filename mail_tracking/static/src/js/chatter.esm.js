@@ -7,7 +7,7 @@ import {attr} from "@mail/model/model_field";
 
 registerInstancePatchModel(
     "mail.chatter",
-    "mail/static/src/models/chatter/chatter.js",
+    "mail/static/src/models/chatter/chatter.esm.js",
     {
         async refresh() {
             this._super(...arguments);
@@ -24,8 +24,12 @@ registerInstancePatchModel(
         },
     }
 );
-registerFieldPatchModel("mail.chatter", "mail/static/src/models/chatter/chatter.js", {
-    isMessageFailedBoxVisible: attr({
-        default: true,
-    }),
-});
+registerFieldPatchModel(
+    "mail.chatter",
+    "mail/static/src/models/chatter/chatter.esm.js",
+    {
+        isMessageFailedBoxVisible: attr({
+            default: true,
+        }),
+    }
+);

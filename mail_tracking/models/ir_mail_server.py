@@ -134,6 +134,8 @@ class IrMailServer(models.Model):
         smtp_user=None,
         smtp_password=None,
         smtp_encryption=None,
+        smtp_ssl_certificate=None,
+        smtp_ssl_private_key=None,
         smtp_debug=False,
         smtp_session=None,
     ):
@@ -149,6 +151,8 @@ class IrMailServer(models.Model):
                 smtp_user=smtp_user,
                 smtp_password=smtp_password,
                 smtp_encryption=smtp_encryption,
+                smtp_ssl_certificate=smtp_ssl_certificate,
+                smtp_ssl_private_key=smtp_ssl_private_key,
                 smtp_debug=smtp_debug,
                 smtp_session=smtp_session,
             )

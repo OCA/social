@@ -8,7 +8,7 @@ import {one2many} from "@mail/model/model_field";
 
 registerInstancePatchModel(
     "mail.thread",
-    "mail_tracking/static/src/js/failed_message/thread.js",
+    "mail_tracking/static/src/js/failed_message/thread.esm.js",
     {
         async refreshMessagefailed() {
             var id = this.__values.id;
@@ -49,7 +49,7 @@ registerInstancePatchModel(
 
 registerFieldPatchModel(
     "mail.thread",
-    "mail_tracking/static/src/js/failed_message/thread.js",
+    "mail_tracking/static/src/js/failed_message/thread.esm.js",
     {
         messagefailed: one2many("mail.message.failed", {
             inverse: "thread",

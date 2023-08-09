@@ -103,13 +103,6 @@ msgid "Clicked URL"
 msgstr ""
 
 #. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
-#, python-format
-msgid "Congratulations, your failed mailbox is empty"
-msgstr ""
-
-#. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
 msgid "Contact"
 msgstr ""
@@ -167,13 +160,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__display_name
 msgid "Display Name"
 msgstr "Mostrar Nombre"
-
-#. module: mail_tracking
-#. openerp-web
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
-#, python-format
-msgid "Do you really want to mark as reviewed all the failed messages (%d)?"
-msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
@@ -252,7 +238,6 @@ msgstr ""
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/js/discuss/discuss.esm.js:0
-#: code:addons/mail_tracking/static/src/js/failed_message/discuss.js:0
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #, python-format

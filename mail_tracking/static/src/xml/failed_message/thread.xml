@@ -43,11 +43,11 @@
                                  <t t-if="messagefailed.author">
                                     <img
                                                     class="o_Activity_userAvatar"
-                                                    t-attf-src="/web/image/res.users/{{ messagefailed.author_id }}/image_128"
+                                                    t-attf-src="/web/image/res.partner/{{ messagefailed.author_id }}/avatar_128"
                                                     t-att-alt="messagefailed.author"
                                                 />
                                  </t>
-                                 <div class="o_Activity_iconContainer bg-danger-full">
+                                 <div class="o_Activity_iconContainer bg-danger">
                                     <i class="o_Activity_icon fa fa-exclamation" />
                                  </div>
                               </div>
@@ -116,7 +116,7 @@
             expr="//div[hasclass('o_Chatter_scrollPanel')]/t[@t-if='chatter.isAttachmentBoxVisible']"
             position="before"
         >
-         <t t-if="chatter.thread">
+         <t>
             <MessageFailedBox
                     class="o_Chatter_activityBox"
                     chatterLocalId="chatter.localId"
