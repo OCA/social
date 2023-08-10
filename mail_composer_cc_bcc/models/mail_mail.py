@@ -34,7 +34,7 @@ class MailMail(models.Model):
         ICP = env["ir.config_parameter"].sudo()
         # Mail composer only sends 1 mail at a time.
         is_out_of_scope = len(self.ids) > 1
-        if is_out_of_scope or not (self.email_cc or self.email_bcc):
+        if is_out_of_scope:
             return super()._send(
                 auto_commit=auto_commit,
                 raise_exception=raise_exception,
