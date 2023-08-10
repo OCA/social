@@ -99,46 +99,35 @@ class MailThread(models.AbstractModel):
         res = super()._fields_view_get(
             view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
         )
-        if view_type not in {"search", "form"}:
+        if view_type != "search":
             return res
         doc = etree.XML(res["arch"])
-        if view_type == "search":
-            # Modify view to add new filter element
-            nodes = doc.xpath("//search")
-            if nodes:
-                # Create filter element
-                new_filter = etree.Element(
-                    "filter",
-                    {
-                        "string": _("Failed sent messages"),
-                        "name": "failed_message_ids",
-                        "domain": str(
+        # Modify view to add new filter element
+        nodes = doc.xpath("//search")
+        if nodes:
+            # Create filter element
+            new_filter = etree.Element(
+                "filter",
+                {
+                    "string": _("Failed sent messages"),
+                    "name": "failed_message_ids",
+                    "domain": str(
+                        [
                             [
-                                [
-                                    "failed_message_ids.mail_tracking_ids.state",
-                                    "in",
-                                    list(self.env["mail.message"].get_failed_states()),
-                                ],
-                                [
-                                    "failed_message_ids.mail_tracking_needs_action",
-                                    "=",
-                                    True,
-                                ],
-                            ]
-                        ),
-                    },
-                )
-                nodes[0].append(etree.Element("separator"))
-                nodes[0].append(new_filter)
-        elif view_type == "form":
-            # Modify view to add new field element
-            nodes = doc.xpath("//field[@name='message_ids' and @widget='mail_thread']")
-            if nodes:
-                # Create field
-                field_failed_messages = etree.Element(
-                    "field",
-                    {"name": "failed_message_ids", "widget": "mail_failed_message"},
-                )
-                nodes[0].addprevious(field_failed_messages)
+                                "failed_message_ids.mail_tracking_ids.state",
+                                "in",
+                                list(self.env["mail.message"].get_failed_states()),
+                            ],
+                            [
+                                "failed_message_ids.mail_tracking_needs_action",
+                                "=",
+                                True,
+                            ],
+                        ]
+                    ),
+                },
+            )
+            nodes[0].append(etree.Element("separator"))
+            nodes[0].append(new_filter)
         res["arch"] = etree.tostring(doc, encoding="unicode")
         return res
