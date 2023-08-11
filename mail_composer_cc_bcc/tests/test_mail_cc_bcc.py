@@ -178,3 +178,24 @@ Test Template<br></p>""",
         # Only 4 partners notified
         self.assertEqual(len(message.notified_partner_ids), 4)
         self.assertEqual(len(message.notification_ids), 4)
+
+    def test_mail_without_cc_bcc(self):
+        # Test without any partner in cc/bcc -> only 1 mail should be sent
+        self.set_company()
+        form = self.open_mail_composer_form()
+        subject = "Testing without cc/bcc single mail"
+        form.subject = subject
+        composer = form.save()
+        composer.partner_cc_ids = None
+        composer.partner_bcc_ids = None
+        composer.partner_ids = self.partner + self.partner_cc
+        ctx = {"mail_notify_force_send": True}
+        ctx.update(composer.env.context)
+        composer = composer.with_context(**ctx)
+        with self.mock_mail_gateway():
+            composer._action_send_mail()
+        sent_mails = 0
+        for mail in self._mails:
+            if subject == mail.get("subject"):
+                sent_mails += 1
+        self.assertEqual(sent_mails, 1)
