@@ -28,18 +28,18 @@ class MailMail(models.Model):
     def _send(  # noqa: max-complexity: 4
         self, auto_commit=False, raise_exception=False, smtp_session=None
     ):
-        env = self.env
-        IrMailServer = env["ir.mail_server"]
-        IrAttachment = env["ir.attachment"]
-        ICP = env["ir.config_parameter"].sudo()
-        # Mail composer only sends 1 mail at a time.
+        is_from_composer = self.env.context.get("is_from_composer", False)
         is_out_of_scope = len(self.ids) > 1
-        if is_out_of_scope or not (self.email_cc or self.email_bcc):
+        if not is_from_composer or is_out_of_scope:
             return super()._send(
                 auto_commit=auto_commit,
                 raise_exception=raise_exception,
                 smtp_session=smtp_session,
             )
+        env = self.env
+        IrMailServer = env["ir.mail_server"]
+        IrAttachment = env["ir.attachment"]
+        ICP = env["ir.config_parameter"].sudo()
         mail = self
         success_pids = []
         failure_type = None
