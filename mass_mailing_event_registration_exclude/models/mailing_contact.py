@@ -12,7 +12,7 @@ class MassMailingContact(models.Model):
 
     @api.model
     def search_count(self, domain, limit=None):
-        res = super().search_count(domain, limit)
+        res = super().search_count(domain)
         mass_mailing_id = self.env.context.get("exclude_mass_mailing", False)
         if mass_mailing_id:
             res_ids = event_filtered_ids(self, mass_mailing_id, domain, field="email")
