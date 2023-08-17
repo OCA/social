@@ -263,7 +263,10 @@ class MailMail(models.Model):
         partners_cc_bcc = self.recipient_cc_ids + self.recipient_bcc_ids
         partner_to_ids = [r.id for r in self.recipient_ids if r not in partners_cc_bcc]
         partner_to = self.env["res.partner"].browse(partner_to_ids)
-        res["email_to"] = format_emails(partner_to)
-        res["email_cc"] = format_emails(self.recipient_cc_ids)
-        res["email_bcc"] = format_emails(self.recipient_bcc_ids)
+        if partner_to:
+            res["email_to"] = format_emails(partner_to)
+        if self.recipient_cc_ids:
+            res["email_cc"] = format_emails(self.recipient_cc_ids)
+        if self.recipient_bcc_ids:
+            res["email_bcc"] = format_emails(self.recipient_bcc_ids)
         return res
