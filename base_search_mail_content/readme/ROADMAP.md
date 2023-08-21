@@ -1,0 +1,1 @@
+- This module restricts the message_content search functionality to internal users only, addressing the issue faced by project collaborators (portal users) as described in <https://github.com/OCA/social/issues/1204>. Consequently, portal users no longer have the ability to search within mail content.
