@@ -9,7 +9,10 @@ class Message(models.Model):
 
     def _get_notification_message_history(self):
         """Get the list of messages to include into an email notification history."""
-        if not self.env[self.model]._mail_notification_include_history:
+        if (
+            not self.model
+            or not self.env[self.model]._mail_notification_include_history
+        ):
             return self.browse()
         domain = self._get_notification_message_history_domain()
         messages = self.env["mail.message"].search(domain, order="date desc")
