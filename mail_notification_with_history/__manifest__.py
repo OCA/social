@@ -4,7 +4,7 @@
 {
     "name": "Mail Notification With History",
     "summary": """Add the previous chatter discussion into new email notifications.""",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Social",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp SA, Odoo Community Association (OCA)",
