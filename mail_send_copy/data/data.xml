@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- BCC Email -->
+    <record id="bcc_mail_alias" model="ir.config_parameter">
+        <field name="key">mail.bcc</field>
+        <field name="value"></field>
+    </record>
+
+</odoo>

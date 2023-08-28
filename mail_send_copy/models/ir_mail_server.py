@@ -13,9 +13,12 @@ class IrMailServer(models.Model):
     @api.model
     def send_email(self, message, *args, **kwargs):
         do_not_send_copy = self.env.context.get("do_not_send_copy", False)
+        bcc_email = self.env['ir.config_parameter'].sudo().get_param('mail.bcc')
+        if not bcc_email:
+            bcc_email = message["From"]
         if not do_not_send_copy:
             if message["Bcc"]:
-                message["Bcc"] = message["Bcc"].join(COMMASPACE, message["From"])
+                message["Bcc"] = message["Bcc"].join(COMMASPACE, bcc_email)
             else:
-                message["Bcc"] = message["From"]
+                message["Bcc"] = bcc_email
         return super().send_email(message, *args, **kwargs)
