@@ -70,6 +70,9 @@ class MailComposeMessage(models.TransientModel):
         setattr(self, field_name, current_partners + partner)
 
     def _action_send_mail(self, auto_commit=False):
+        # don't impact mass_mailing that also uses mail.compose.message
+        if self.composition_mode == "mass_mail":
+            return super()._action_send_mail(auto_commit)
         context = {
             "is_from_composer": True,
             "partner_cc_ids": self.partner_cc_ids,
