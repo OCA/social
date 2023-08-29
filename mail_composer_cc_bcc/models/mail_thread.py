@@ -46,7 +46,8 @@ class MailThread(models.AbstractModel):
         rdata = super()._notify_compute_recipients(message, msg_vals)
         context = self.env.context
         is_from_composer = context.get("is_from_composer", False)
-        if not is_from_composer:
+        note_subtype_id = self.env["ir.model.data"]._xmlid_to_res_id("mail.mt_note")
+        if not is_from_composer or msg_vals.get("subtype_id", False) == note_subtype_id:
             return rdata
         for pdata in rdata:
             pdata["type"] = "customer"
