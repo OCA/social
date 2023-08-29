@@ -22,7 +22,7 @@ class TestMailDropTarget(TransactionCase):
         )
         self.partner.refresh()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(exceptions.UserError):
             self.partner.message_drop(
                 self.partner._name, message, thread_id=self.partner.id
             )
@@ -41,7 +41,7 @@ class TestMailDropTarget(TransactionCase):
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertIsNotNone(msg.notified_partner_ids)
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(exceptions.UserError):
             self.partner.message_process_msg(
                 self.partner._name, message, thread_id=self.partner.id
             )
@@ -69,7 +69,7 @@ class TestMailDropTarget(TransactionCase):
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertEqual(len(msg.notified_partner_ids), 0)
-        with self.assertRaises(exceptions.Warning):
+        with self.assertRaises(exceptions.UserError):
             self.partner.message_process_msg(
                 self.partner._name, message, thread_id=self.partner.id
             )
