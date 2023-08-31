@@ -21,23 +21,42 @@ class MailThread(models.AbstractModel):
             _self = self.with_context(mail_defer_seconds=30)
         return super(MailThread, _self).message_post(**kwargs)
 
-    def _notify_by_email_add_values(self, base_mail_values):
+    def _notify_thread(self, message, msg_vals=False, **kwargs):
         """Defer emails by default."""
-        result = super()._notify_by_email_add_values(base_mail_values)
         defer_seconds = self.env.context.get("mail_defer_seconds")
         if defer_seconds:
-            result.setdefault(
+            kwargs.setdefault(
                 "scheduled_date",
                 fields.Datetime.now() + timedelta(seconds=defer_seconds),
             )
-        return result
+        return super()._notify_thread(message, msg_vals=msg_vals, **kwargs)
 
     def _check_can_update_message_content(self, message):
-        """Allow deleting unsent mails."""
+        """Allow deleting unsent mails.
+
+        When a message is scheduled, notifications and mails will still not
+        exist. Another possibility is that they exist but are not sent yet. In
+        those cases, we are still on time to update it. Once they are sent,
+        it's too late.
+        """
         if (
             self.env.context.get("deleting")
-            and set(message.notification_ids.mapped("notification_status")) == {"ready"}
-            and set(message.mail_ids.mapped("state")) == {"outgoing"}
+            and (
+                not message.notification_ids
+                or set(message.notification_ids.mapped("notification_status"))
+                == {"ready"}
+            )
+            and (
+                not message.mail_ids
+                or set(message.mail_ids.mapped("state")) == {"outgoing"}
+            )
         ):
             return
         return super()._check_can_update_message_content(message)
+
+    def _message_update_content(self, message, body, *args, **kwargs):
+        """Let checker know about empty body."""
+        _self = self.with_context(deleting=body == "")
+        return super(MailThread, _self)._message_update_content(
+            message, body, *args, **kwargs
+        )
