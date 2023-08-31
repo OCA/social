@@ -20,19 +20,20 @@ class MessagePostCase(MailCommon):
     def test_standard(self):
         """A normal call just uses the queue by default."""
         with self.mock_mail_gateway():
-            self.partner_portal.message_post(
+            msg = self.partner_portal.message_post(
                 body="test body",
                 subject="test subject",
                 message_type="comment",
                 partner_ids=self.partner_employee.ids,
             )
-            self.assertMailMail(
-                self.partner_employee,
-                "outgoing",
-                author=self.env.user.partner_id,
-                content="test body",
-                fields_values={"scheduled_date": "2023-01-02 10:00:30"},
+            schedules = self.env["mail.message.schedule"].search(
+                [
+                    ("mail_message_id", "=", msg.id),
+                    ("scheduled_datetime", "=", "2023-01-02 10:00:30"),
+                ]
             )
+            self.assertEqual(len(schedules), 1)
+            self.assertNoMail(self.partner_employee)
 
     def test_forced_arg(self):
         """A forced send via method argument is sent directly."""
@@ -91,16 +92,26 @@ class MessagePostCase(MailCommon):
                 subtype_xmlid="mail.mt_comment",
             )
             # Emulate user clicking on edit button and going through the
-            # `/mail/message/update_content` controller
+            # `/mail/message/update_content` controller. It should fail.
             with self.assertRaises(UserError):
-                msg._update_content("new body", [])
-            self.assertMailMail(
-                self.partner_employee,
-                "outgoing",
-                author=self.env.user.partner_id,
-                content="test body",
-                fields_values={"scheduled_date": "2023-01-02 10:00:30"},
+                self.partner_portal._message_update_content(msg, "new body")
+            schedules = self.env["mail.message.schedule"].search(
+                [
+                    ("mail_message_id", "=", msg.id),
+                    ("scheduled_datetime", "=", "2023-01-02 10:00:30"),
+                ]
             )
+            self.assertEqual(len(schedules), 1)
+            self.assertNoMail(self.partner_employee)
+            # After a minute, the mail is created
+            with freezegun.freeze_time("2023-01-02 10:01:00"):
+                self.env["mail.message.schedule"]._send_notifications_cron()
+                self.assertMailMail(
+                    self.partner_employee,
+                    "outgoing",
+                    author=self.env.user.partner_id,
+                    content="test body",
+                )
 
     def test_queued_msg_delete(self):
         """A user can delete a message before it's sent."""
@@ -112,15 +123,25 @@ class MessagePostCase(MailCommon):
                 partner_ids=self.partner_employee.ids,
                 subtype_xmlid="mail.mt_comment",
             )
+            schedules = self.env["mail.message.schedule"].search(
+                [
+                    ("mail_message_id", "=", msg.id),
+                    ("scheduled_datetime", "=", "2023-01-02 10:00:30"),
+                ]
+            )
+            self.assertEqual(len(schedules), 1)
             # Emulate user clicking on delete button and going through the
             # `/mail/message/update_content` controller
-            msg._update_content("", [])
+            self.partner_portal._message_update_content(msg, "", [])
+            self.env.flush_all()
+            self.assertFalse(schedules.exists())
             self.assertNoMail(
                 self.partner_employee,
                 author=self.env.user.partner_id,
             )
             # One minute later, the cron has no mails to send
             with freezegun.freeze_time("2023-01-02 10:01:00"):
+                self.env["mail.message.schedule"]._send_notifications_cron()
                 self.env["mail.mail"].process_email_queue()
                 self.assertNoMail(
                     self.partner_employee,
@@ -145,15 +166,15 @@ class MessagePostCase(MailCommon):
             )
             # One minute later, the cron sends the mail
             with freezegun.freeze_time("2023-01-02 10:01:00"):
+                self.env["mail.message.schedule"]._send_notifications_cron()
                 self.env["mail.mail"].process_email_queue()
                 self.assertMailMail(
                     self.partner_employee,
                     "sent",
                     author=self.env.user.partner_id,
                     content="test body",
-                    fields_values={"scheduled_date": "2023-01-02 10:00:30"},
                 )
                 # Emulate user clicking on delete button and going through the
                 # `/mail/message/update_content` controller
                 with self.assertRaises(UserError):
-                    msg._update_content("", [])
+                    self.partner_portal._message_update_content(msg, "", [])
