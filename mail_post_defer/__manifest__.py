@@ -15,11 +15,11 @@
     ],
     "post_init_hook": "post_init_hook",
     "assets": {
+        # This could go in mail.assets_messaging, but that's included in
+        # mail.assets_discuss_public and we don't want the public to be able to
+        # edit their messages; only the backend.
         "web.assets_backend": [
             "mail_post_defer/static/src/**/*.js",
-        ],
-        "web.assets_qweb": [
-            "mail_post_defer/static/src/**/*.xml",
         ],
     },
 }
