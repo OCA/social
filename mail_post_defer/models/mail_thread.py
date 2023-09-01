@@ -3,7 +3,8 @@
 
 from datetime import timedelta
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.exceptions import UserError
 
 
 class MailThread(models.AbstractModel):
@@ -31,32 +32,39 @@ class MailThread(models.AbstractModel):
             )
         return super()._notify_thread(message, msg_vals=msg_vals, **kwargs)
 
-    def _check_can_update_message_content(self, message):
-        """Allow deleting unsent mails.
+    def _check_can_update_message_content(self, messages):
+        """Allow updating unsent messages.
 
-        When a message is scheduled, notifications and mails will still not
-        exist. Another possibility is that they exist but are not sent yet. In
-        those cases, we are still on time to update it. Once they are sent,
-        it's too late.
+        Upstream Odoo only allows updating notes. We want to be able to update
+        any message that is not sent yet. When a message is scheduled,
+        notifications and mails will still not exist. Another possibility is
+        that they exist but are not sent yet. In those cases, we are still on
+        time to update it.
         """
-        if (
-            self.env.context.get("deleting")
-            and (
-                not message.notification_ids
-                or set(message.notification_ids.mapped("notification_status"))
-                == {"ready"}
-            )
-            and (
-                not message.mail_ids
-                or set(message.mail_ids.mapped("state")) == {"outgoing"}
-            )
-        ):
-            return
-        return super()._check_can_update_message_content(message)
+        try:
+            # If upstream allows editing, we are done
+            return super()._check_can_update_message_content(messages)
+        except UserError:
+            # Repeat upstream checks that are still valid for us
+            if messages.tracking_value_ids:
+                raise
+            if any(message.message_type != "comment" for message in messages):
+                raise
+            # Check that no notification or mail has been sent yet
+            if any(
+                ntf.notification_status == "sent" for ntf in messages.notification_ids
+            ):
+                raise UserError(
+                    _("Cannot modify message; notifications were already sent.")
+                ) from None
+            if any(mail.state in {"sent", "received"} for mail in messages.mail_ids):
+                raise UserError(
+                    _("Cannot modify message; notifications were already sent.")
+                ) from None
 
-    def _message_update_content(self, message, body, *args, **kwargs):
-        """Let checker know about empty body."""
-        _self = self.with_context(deleting=body == "")
-        return super(MailThread, _self)._message_update_content(
-            message, body, *args, **kwargs
+    def _message_update_content(self, *args, **kwargs):
+        """Defer messages by extra 30 seconds after updates."""
+        kwargs.setdefault(
+            "scheduled_date", fields.Datetime.now() + timedelta(seconds=30)
         )
+        return super()._message_update_content(*args, **kwargs)

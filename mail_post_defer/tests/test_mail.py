@@ -70,18 +70,11 @@ class MessagePostCase(MailCommon):
                 fields_values={"scheduled_date": False},
             )
 
-    def test_no_msg_edit(self):
-        """Cannot update messages.
+    def test_msg_edit(self):
+        """Can update messages.
 
-        This is normal upstream Odoo behavior. It is not a feature of this
-        module, but it is important to make sure this protection is still
-        respected, because we disable it for queued message deletion.
-
-        A non-malicious end user won't get to this code because the edit button
-        is hidden. Still, the server-side protection is important.
-
-        If, at some point, this module is improved to support this use case,
-        then this test should change; and that would be a good thing probably.
+        Upstream Odoo allows only updating notes, regardless of their sent
+        status. We allow updating any message that is not sent yet.
         """
         with self.mock_mail_gateway():
             msg = self.partner_portal.message_post(
@@ -91,10 +84,6 @@ class MessagePostCase(MailCommon):
                 partner_ids=self.partner_employee.ids,
                 subtype_xmlid="mail.mt_comment",
             )
-            # Emulate user clicking on edit button and going through the
-            # `/mail/message/update_content` controller. It should fail.
-            with self.assertRaises(UserError):
-                self.partner_portal._message_update_content(msg, "new body")
             schedules = self.env["mail.message.schedule"].search(
                 [
                     ("mail_message_id", "=", msg.id),
@@ -103,6 +92,17 @@ class MessagePostCase(MailCommon):
             )
             self.assertEqual(len(schedules), 1)
             self.assertNoMail(self.partner_employee)
+            # After 15 seconds, the user updates the message
+            with freezegun.freeze_time("2023-01-02 10:00:15"):
+                self.partner_portal._message_update_content(msg, "new body")
+                schedules = self.env["mail.message.schedule"].search(
+                    [
+                        ("mail_message_id", "=", msg.id),
+                        ("scheduled_datetime", "=", "2023-01-02 10:00:45"),
+                    ]
+                )
+                self.assertEqual(len(schedules), 1)
+                self.assertNoMail(self.partner_employee)
             # After a minute, the mail is created
             with freezegun.freeze_time("2023-01-02 10:01:00"):
                 self.env["mail.message.schedule"]._send_notifications_cron()
@@ -110,7 +110,7 @@ class MessagePostCase(MailCommon):
                     self.partner_employee,
                     "outgoing",
                     author=self.env.user.partner_id,
-                    content="test body",
+                    content="new body",
                 )
 
     def test_queued_msg_delete(self):

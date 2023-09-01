@@ -1,48 +1,51 @@
 /** @odoo-module **/
-import {
-    registerFieldPatchModel,
-    registerInstancePatchModel,
-} from "@mail/model/model_core";
-import {attr} from "@mail/model/model_field";
+import {registerPatch} from "@mail/model/model_core";
 
-registerInstancePatchModel("mail.message", "mail_post_defer.message", {
-    xmlDependencies: ["/mail_post_defer/static/src/xml/message.xml"],
+// Ensure that the model definition is loaded before the patch
+import "@mail/models/message";
 
-    /**
-     * Allow deleting deferred messages
-     *
-     * @param {Boolean} editing Set `true` to know if you can edit the message
-     * @returns {Boolean}
-     */
-    _computeCanBeDeleted(editing) {
-        return (
-            this._super() ||
-            (!editing &&
-                this.notifications.filter(
-                    (current) => current.notification_status !== "ready"
-                ).length === 0)
-        );
+registerPatch({
+    name: "Message",
+
+    fields: {
+        canBeDeleted: {
+            /**
+             * Whether this message can be updated.
+             *
+             * Despite the field name, this method is used upstream to determine
+             * whether a message can be edited or deleted.
+             *
+             * Upstream Odoo allows updating notes. We want to allow updating any
+             * user message that is not yet sent. If there's a race condition,
+             * anyways the server will repeat these checks.
+             *
+             * @returns {Boolean}
+             *  Whether this message can be updated.
+             * @override
+             */
+            compute() {
+                // If upstream allows editing, we are done
+                if (this._super()) {
+                    return true;
+                }
+                // Repeat upstream checks that are still valid for us
+                if (this.trackingValues.length > 0) {
+                    return false;
+                }
+                if (this.message_type !== "comment") {
+                    return false;
+                }
+                if (this.originThread.model === "mail.channel") {
+                    return true;
+                }
+                // Check that no notification has been sent yet
+                if (
+                    this.notifications.some((ntf) => ntf.notification_status === "sent")
+                ) {
+                    return false;
+                }
+                return true;
+            },
+        },
     },
-
-    /**
-     * Allow editing messages.
-     *
-     * Upstream Odoo allows editing any message that can be deleted. We do the
-     * same here. However, if the message is a public message that is deferred,
-     * it can be edited but not deleted.
-     *
-     * @returns {Boolean}
-     */
-    _computeCanBeEdited() {
-        return this._computeCanBeDeleted(true);
-    },
-});
-
-registerFieldPatchModel("mail.message", "mail_post_defer.message", {
-    /**
-     * Whether this message can be edited.
-     */
-    canBeEdited: attr({
-        compute: "_computeCanBeEdited",
-    }),
 });
