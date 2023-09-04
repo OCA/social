@@ -4,11 +4,11 @@ import {one} from "@mail/model/model_field";
 import {registerPatch} from "@mail/model/model_core";
 
 registerPatch({
-    name: "Messaging",
+    name: "DiscussView",
     fields: {
-        failedmsg: one("Mailbox", {
+        failedMessageView: one("DiscussSidebarMailboxView", {
             default: {},
-            inverse: "messagingAsFailedmsg",
+            inverse: "discussViewOwnerAsFailedMessage",
         }),
     },
 });
