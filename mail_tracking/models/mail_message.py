@@ -262,14 +262,9 @@ class MailMessage(models.Model):
             return
         failed_partners = failed_trackings.mapped("partner_id")
         failed_recipients = failed_partners.name_get()
-        if self.author_id:
-            author = self.author_id.name_get()[0]
-        else:
-            author = (-1, _("-Unknown Author-"))
         return {
             "id": self.id,
             "date": self.date,
-            "author": author,
             "body": self.body,
             "failed_recipients": failed_recipients,
         }
@@ -292,6 +287,7 @@ class MailMessage(models.Model):
         self.env["bus.bus"]._sendone(
             self.env.user.partner_id, "toggle_tracking_status", self.ids
         )
+        return self.mail_tracking_needs_action
 
     @api.model
     def get_failed_count(self):

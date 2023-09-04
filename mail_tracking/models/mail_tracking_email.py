@@ -10,6 +10,7 @@ from datetime import datetime
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import AccessError
+from odoo.fields import Command
 from odoo.tools import email_split
 
 _logger = logging.getLogger(__name__)
@@ -41,7 +42,7 @@ class MailTrackingEmail(models.Model):
     time = fields.Datetime(readonly=True, index=True)
     date = fields.Date(readonly=True, compute="_compute_date", store=True)
     mail_message_id = fields.Many2one(
-        string="Message", comodel_name="mail.message", readonly=True, index=True
+        comodel_name="mail.message", readonly=True, index=True
     )
     message_id = fields.Char(compute="_compute_message_id")
     mail_id = fields.Many2one(string="Email", comodel_name="mail.mail", readonly=True)
@@ -395,10 +396,12 @@ class MailTrackingEmail(models.Model):
             # add it in order to see his tracking status in chatter
             if mail_message.subtype_id:
                 mail_message.sudo().write(
-                    {"notified_partner_ids": [(4, self.partner_id.id)]}
+                    {"notified_partner_ids": [Command.link(self.partner_id.id)]}
                 )
             else:
-                mail_message.sudo().write({"partner_ids": [(4, self.partner_id.id)]})
+                mail_message.sudo().write(
+                    {"partner_ids": [Command.link(self.partner_id.id)]}
+                )
         return True
 
     def _tracking_sent_prepare(self, mail_server, smtp_server, message, message_id):

@@ -88,17 +88,13 @@ class MailThread(models.AbstractModel):
                 )
 
     @api.model
-    def _fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
+    def get_view(self, view_id=None, view_type="form", **options):
         """Add filters for failed messages.
 
-        These filters will show up on any form or search views of any
+        These filters will show up on any search views of any
         model inheriting from ``mail.thread``.
         """
-        res = super()._fields_view_get(
-            view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
-        )
+        res = super().get_view(view_id, view_type, **options)
         if view_type != "search":
             return res
         doc = etree.XML(res["arch"])

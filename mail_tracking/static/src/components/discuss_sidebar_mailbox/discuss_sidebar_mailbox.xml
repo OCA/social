@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="mail_tracking.DiscussSidebarMailbox"
+        t-inherit="mail.DiscussSidebarMailbox"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//t[@t-if='discussSidebarMailboxView.mailbox.counter > 0']"
+            position="before"
+        >
+            <t
+                t-set="messages"
+                t-value="discussSidebarMailboxView.mailbox.thread.messages"
+            />
+            <t
+                t-if="discussSidebarMailboxView.isFailedDiscussSidebarMailboxView &amp;&amp; messages.length"
+            >
+                <t
+                    t-set="failedMessages"
+                    t-value="discussSidebarMailboxView._getNonReviewedFailedMessages(
+                        messages,
+                        store.reviewedMessageIds,
+                    )"
+                />
+                <div
+                    t-if="failedMessages.length"
+                    t-attf-class="o_DiscussSidebarMailbox_counter o_DiscussSidebarMailbox_item badge rounded-pill {{ discussSidebarMailboxView.mailbox === messaging.starred ? 'bg-400 text-light' : 'text-bg-primary' }} ms-1 me-3"
+                >
+                    <t t-esc="failedMessages.length" />
+                </div>
+            </t>
+            <t t-else="">
+                <div
+                    t-if="discussSidebarMailboxView.mailbox.counter > 0"
+                    t-attf-class="o_DiscussSidebarMailbox_counter o_DiscussSidebarMailbox_item badge rounded-pill {{ discussSidebarMailboxView.mailbox === messaging.starred ? 'bg-400 text-light' : 'text-bg-primary' }} ms-1 me-3"
+                >
+                    <t t-esc="discussSidebarMailboxView.mailbox.counter" />
+                </div>
+            </t>
+        </xpath>
+        <xpath
+            expr="//t[@t-if='discussSidebarMailboxView.mailbox.counter > 0']"
+            position="attributes"
+        >
+            <attribute name="t-if">false</attribute>
+        </xpath>
+    </t>
+</templates>

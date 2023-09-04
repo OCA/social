@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="mail_tracking.FailedMessage"
+        t-inherit="mail.Message"
+        t-inherit-mode="primary"
+    >
+        <!-- Avoid setting original message as isActive upon hovering or clicking failed message -->
+        <xpath expr="//div[hasclass('o_Message')]" position="attributes">
+            <attribute name="t-on-mouseenter">messageView.doNothing</attribute>
+            <attribute name="t-on-click">messageView.doNothing</attribute>
+        </xpath>
+        <!-- Avoid showing Message Action List on failed messages -->
+        <xpath
+            expr="//div[hasclass('o_Message_actionListContainer')]"
+            position="attributes"
+        >
+            <attribute name="t-if">false</attribute>
+        </xpath>
+        <!-- Replace original Message component's recipients -->
+        <xpath expr="//p[hasclass('o_mail_tracking')]" position="after">
+            <div t-if="messageView.message.failedRecipients" class="o_Activity_info">
+                <strong class="text-danger">Failed Recipients: </strong>
+                <t
+                    t-foreach="messageView.message.failedRecipients"
+                    t-as="recipient"
+                    t-key="recipient_localId"
+                >
+                    <a
+                        class="o_mail_action_tracking_partner"
+                        t-att-data-partner="recipient[1]"
+                        t-attf-href="#model=res.partner&amp;id={{recipient[0]}}"
+                        t-out="recipient[1]"
+                    />
+                </t>
+            </div>
+        </xpath>
+        <xpath expr="//p[hasclass('o_mail_tracking')]" position="attributes">
+            <attribute name="t-if">false</attribute>
+        </xpath>
+        <!-- Replace original Message component's 'online' icon on partner's picture -->
+        <t t-if="messageView.personaImStatusIconView" position="after">
+            <div class="o_Activity_iconContainer bg-danger rounded-circle">
+                <i
+                    class="o_Activity_icon fa fa-exclamation"
+                    role="img"
+                    aria-label="Failed Message Icon"
+                />
+            </div>
+        </t>
+        <t t-if="messageView.personaImStatusIconView" position="attributes">
+            <attribute name="t-if">false</attribute>
+        </t>
+    </t>
+
+</templates>

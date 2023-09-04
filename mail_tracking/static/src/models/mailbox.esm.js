@@ -1,6 +1,5 @@
 /** @odoo-module **/
 
-import {clear} from "@mail/model/model_field_command";
 import {one} from "@mail/model/model_field";
 import {registerPatch} from "@mail/model/model_core";
 
@@ -11,12 +10,12 @@ registerPatch({
             compute() {
                 switch (this) {
                     case this.messaging.failedmsg:
-                        return "/mail/failedmsg/messages";
+                        return "/mail/failed/messages";
                 }
                 return this._super();
             },
         },
-        messagingAsFailedmsg: one("Messaging", {
+        messagingAsFailed: one("Messaging", {
             identifying: true,
             inverse: "failedmsg",
         }),
@@ -24,7 +23,7 @@ registerPatch({
             compute() {
                 switch (this) {
                     case this.messaging.failedmsg:
-                        return this.env._t("Failedmsg");
+                        return this.env._t("Failed");
                 }
                 return this._super();
             },
@@ -33,7 +32,7 @@ registerPatch({
             compute() {
                 switch (this) {
                     case this.messaging.failedmsg:
-                        return 4;
+                        return 3;
                 }
                 return this._super();
             },
@@ -45,10 +44,9 @@ registerPatch({
                         case this.messaging.failedmsg:
                             return "failedmsg";
                     }
-                    return this._super();
                 })();
                 if (!threadId) {
-                    return clear();
+                    return this._super();
                 }
                 return {
                     id: threadId,

@@ -13,10 +13,13 @@
             <field name="body"><![CDATA[<p>This is a message with CC</p>]]></field>
             <field name="email_from">wood.corner26@example.com</field>
             <field name="author_id" ref="base.res_partner_1" />
-            <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
             <field
             name="notification_ids"
-            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')})]"
         />
             <field name="subject">Message with CC</field>
         </record>
@@ -41,10 +44,13 @@
             <field name="body"><![CDATA[<p>This is a failed message</p>]]></field>
             <field name="email_from">wood.corner26@example.com</field>
             <field name="author_id" ref="base.res_partner_1" />
-            <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
             <field
             name="notification_ids"
-            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')})]"
         />
             <field name="subject">Failed Message</field>
         </record>
@@ -69,10 +75,13 @@
             <field name="body"><![CDATA[<p>This is another failed message</p>]]></field>
             <field name="email_from">jackson.group82@example.com</field>
             <field name="author_id" ref="base.res_partner_10" />
-            <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
             <field
             name="notification_ids"
-            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')})]"
         />
             <field name="subject">Failed Message</field>
         </record>
@@ -97,10 +106,13 @@
             <field name="body"><![CDATA[<p>This is another failed message</p>]]></field>
             <field name="email_from">admin@example.com</field>
             <field name="author_id" ref="base.partner_admin" />
-            <field name="partner_ids" eval="[(6, 0, [ref('base.partner_demo')])]" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
             <field
             name="notification_ids"
-            eval="[(0, 0, {'res_partner_id': ref('base.partner_demo')})]"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')})]"
         />
             <field name="subject">Failed Message</field>
         </record>

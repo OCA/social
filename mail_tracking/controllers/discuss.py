@@ -6,9 +6,9 @@ from odoo.addons.mail.controllers.discuss import DiscussController
 
 class MailTrackingDiscussController(DiscussController):
     @http.route()
-    def mail_init_messaging(self):
+    def mail_init_messaging(self, **kwargs):
         """Route used to initial values of Discuss app"""
-        values = super().mail_init_messaging()
+        values = super().mail_init_messaging(**kwargs)
         values.update(
             {"failed_counter": http.request.env["mail.message"].get_failed_count()}
         )
@@ -16,9 +16,13 @@ class MailTrackingDiscussController(DiscussController):
 
     @http.route("/mail/failed/messages", methods=["POST"], type="json", auth="user")
     def discuss_failed_messages(self, max_id=None, min_id=None, limit=30, **kwargs):
-        return http.request.env["mail.message"]._message_fetch(
-            domain=[("is_failed_message", "=", True)],
-            max_id=max_id,
-            min_id=min_id,
-            limit=limit,
+        return (
+            http.request.env["mail.message"]
+            ._message_fetch(
+                domain=[("is_failed_message", "=", True)],
+                max_id=max_id,
+                min_id=min_id,
+                limit=limit,
+            )
+            .message_format()
         )

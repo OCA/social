@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.ThreadView" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o_ThreadView')]" position="before">
+            <div
+                t-if="this.props.className == 'o_Chatter_thread' &amp;&amp; threadView.messageListView"
+                class="o_ThreadView_core o_ActivityThreadView d-flex flex-column flex-grow-1"
+            >
+                <FailedMessageList
+                    className="'o_ThreadView_messageList flex-grow-1'"
+                    record="threadView.messageListView"
+                />
+            </div>
+        </xpath>
+    </t>
+
+</templates>

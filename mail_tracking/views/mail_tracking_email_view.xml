@@ -22,7 +22,7 @@
                     </group>
                     <group>
                         <group>
-                            <field name="mail_message_id" />
+                            <field name="mail_message_id" string="Message" />
                             <field name="mail_id" />
                             <field name="partner_id" />
                             <field name="recipient" />

@@ -40,31 +40,6 @@ class MailTrackingController(MailController):
             "ua_family": request.user_agent.browser or False,
         }
 
-    # TODO Remove useless controller
-    @http.route(
-        [
-            "/mail/tracking/all/<string:db>",
-            "/mail/tracking/event/<string:db>/<string:event_type>",
-        ],
-        type="http",
-        auth="none",
-        csrf=False,
-    )
-    def mail_tracking_event(self, db, event_type=None, **kw):
-        """Route used by external mail service"""
-        metadata = self._request_metadata()
-        res = None
-        with db_env(db) as env:
-            try:
-                res = env["mail.tracking.email"].event_process(
-                    http.request, kw, metadata, event_type=event_type
-                )
-            except Exception as e:
-                _logger.warning(e)
-        if not res or res == "NOT FOUND":
-            return werkzeug.exceptions.NotAcceptable()
-        return res
-
     @http.route(
         [
             "/mail/tracking/open/<string:db>" "/<int:tracking_email_id>/blank.gif",
