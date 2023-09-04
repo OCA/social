@@ -1,6 +1,5 @@
 /** @odoo-module **/
 
-import {one} from "@mail/model/model_field";
 import {registerPatch} from "@mail/model/model_core";
 
 registerPatch({
@@ -19,19 +18,15 @@ registerPatch({
                     shadow: true,
                 }
             );
-            const messagefailed = this.messaging.models.MessageFailed.insert(
+            /* Create failed Message records; these will be updated when fetching
+            their usual Message data and assigned to their respective threads. */
+            this.messaging.models.Message.insert(
                 messagefailedData.map((messageData) =>
-                    this.messaging.models.MessageFailed.convertData(messageData)
+                    this.messaging.models.Message.convertData(
+                        Object.assign(messageData, {is_failed_chatter_message: true})
+                    )
                 )
             );
-            this.update({
-                messagefailed: [["replace", messagefailed]],
-            });
         },
-    },
-    fields: {
-        messagefailed: one("MessageFailed", {
-            inverse: "thread",
-        }),
     },
 });

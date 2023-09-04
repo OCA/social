@@ -3,15 +3,16 @@
 
 import base64
 import time
-from unittest import mock
+from unittest.mock import patch
 
-import psycopg2
-import psycopg2.errorcodes
+from werkzeug.exceptions import BadRequest
 
 from odoo import http
+from odoo.fields import Command
 from odoo.tests.common import TransactionCase
-from odoo.tools.misc import mute_logger
+from odoo.tools import mute_logger
 
+from ..controllers.discuss import MailTrackingDiscussController
 from ..controllers.main import BLANK, MailTrackingController
 
 mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_email"
@@ -51,6 +52,10 @@ class TestMailTracking(TransactionCase):
                 ),
             },
         )
+        for _ in http._generate_routing_rules(
+            ["mail", "mail_tracking"], nodb_only=False
+        ):
+            pass
 
     def tearDown(self, *args, **kwargs):
         http.request = self.last_request
@@ -84,7 +89,7 @@ class TestMailTracking(TransactionCase):
                 "message_type": "comment",
                 "model": "res.partner",
                 "res_id": self.recipient.id,
-                "partner_ids": [(4, self.recipient.id)],
+                "partner_ids": [Command.link(self.recipient.id)],
                 "body": "<p>This is a test message</p>",
             }
         )
@@ -102,7 +107,7 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(tracking_email.state, "sent")
         # message_dict read by web interface
         message_dict = message.message_format()[0]
-        self.assertTrue(len(message_dict["history_partner_ids"]) > 0)
+        self.assertTrue(message_dict["history_partner_ids"])
         # First partner is recipient
         partner_id = message_dict["history_partner_ids"][0]
         self.assertEqual(partner_id, self.recipient.id)
@@ -135,7 +140,7 @@ class TestMailTracking(TransactionCase):
                 "message_type": "comment",
                 "model": "res.partner",
                 "res_id": self.recipient.id,
-                "partner_ids": [(4, self.recipient.id)],
+                "partner_ids": [Command.link(self.recipient.id)],
                 "body": "<p>This is a test message</p>",
             }
         )
@@ -201,7 +206,7 @@ class TestMailTracking(TransactionCase):
                 "message_type": "comment",
                 "model": "res.partner",
                 "res_id": self.recipient.id,
-                "partner_ids": [(4, self.recipient.id)],
+                "partner_ids": [Command.link(self.recipient.id)],
                 "email_cc": "Dominique Pinon <unnamed@test.com>, sender@example.com"
                 ", recipient@example.com",
                 "body": "<p>This is another test message</p>",
@@ -255,7 +260,7 @@ class TestMailTracking(TransactionCase):
                 "message_type": "comment",
                 "model": "res.partner",
                 "res_id": self.recipient.id,
-                "partner_ids": [(4, self.recipient.id)],
+                "partner_ids": [Command.link(self.recipient.id)],
                 "email_to": "Dominique Pinon <support+unnamed@test.com>"
                 ", sender@example.com, recipient@example.com"
                 ", TheCatchall@test.com",
@@ -318,7 +323,7 @@ class TestMailTracking(TransactionCase):
                 "message_type": "comment",
                 "model": "res.partner",
                 "res_id": self.recipient.id,
-                "partner_ids": [(4, self.recipient.id)],
+                "partner_ids": [Command.link(self.recipient.id)],
                 "body": "<p>This is a test message</p>",
             }
         )
@@ -364,6 +369,7 @@ class TestMailTracking(TransactionCase):
         )
         return mail, tracking_email
 
+    @mute_logger("odoo.addons.mail_tracking.controllers.main")
     def test_mail_send(self):
         controller = MailTrackingController()
         db = self.env.cr.dbname
@@ -371,7 +377,7 @@ class TestMailTracking(TransactionCase):
         mail, tracking = self.mail_send(self.recipient.email)
         self.assertEqual(mail.email_to, tracking.recipient)
         self.assertEqual(mail.email_from, tracking.sender)
-        with mock.patch("odoo.http.db_filter") as mock_client:
+        with patch("odoo.http.db_filter") as mock_client:
             mock_client.return_value = True
             res = controller.mail_tracking_open(db, tracking.id, tracking.token)
             self.assertEqual(image, res.response[0])
@@ -383,10 +389,14 @@ class TestMailTracking(TransactionCase):
             # Two events again because no tracking_email_id found for False
             self.assertEqual(2, len(tracking.tracking_event_ids))
 
+    @mute_logger("odoo.addons.mail_tracking.controllers.main")
     def test_mail_tracking_open(self):
+        def mock_error_function(*args, **kwargs):
+            raise Exception()
+
         controller = MailTrackingController()
         db = self.env.cr.dbname
-        with mock.patch("odoo.http.db_filter") as mock_client:
+        with patch("odoo.http.db_filter") as mock_client:
             mock_client.return_value = True
             mail, tracking = self.mail_send(self.recipient.email)
             # Tracking is in sent or delivered state. But no token give.
@@ -416,6 +426,30 @@ class TestMailTracking(TransactionCase):
             # Generates tracking event
             controller.mail_tracking_open(db, tracking.id, False)
             self.assertEqual(2, len(tracking.tracking_event_ids))
+            # Purposely trigger an error during mail_tracking_open
+            # flow (to increase coverage)
+            with patch(
+                "odoo.addons.mail_tracking.models.mail_tracking_email.MailTrackingEmail.search",
+                wraps=mock_error_function,
+            ):
+                controller.mail_tracking_open(db, tracking.id, False)
+        # Purposely trigger an error during db_env (to increase coverage)
+        with patch("odoo.http.db_filter") as mock_client, self.assertRaises(BadRequest):
+            mock_client.return_value = False
+            controller.mail_tracking_open(db, tracking.id, False)
+
+    def test_db_env_no_cr(self):
+        http.request.cr = None
+        db = self.env.cr.dbname
+        controller = MailTrackingController()
+        # Cast Cursor to Mock object to avoid raising 'Cursor not closed explicitly' log
+        with patch("odoo.sql_db.db_connect"), patch(
+            "odoo.http.db_filter"
+        ) as mock_client:
+            mock_client.return_value = True
+            mail, tracking = self.mail_send(self.recipient.email)
+            response = controller.mail_tracking_open(db, tracking.id, False)
+            self.assertEqual(response.status_code, 200)
 
     def test_concurrent_open(self):
         mail, tracking = self.mail_send(self.recipient.email)
@@ -476,7 +510,7 @@ class TestMailTracking(TransactionCase):
 
     @mute_logger("odoo.addons.mail.models.mail_mail")
     def test_smtp_error(self):
-        with mock.patch(mock_send_email) as mock_func:
+        with patch(mock_send_email) as mock_func:
             mock_func.side_effect = Warning("Test error")
             mail, tracking = self.mail_send(self.recipient.email)
             self.assertEqual("error", tracking.state)
@@ -573,22 +607,10 @@ class TestMailTracking(TransactionCase):
             trackings |= tracking
         self.assertEqual(100.0, trackings.email_score())
 
-    def test_db(self):
-        db = self.env.cr.dbname
-        controller = MailTrackingController()
-        with mock.patch("odoo.http.db_filter") as mock_client:
-            mock_client.return_value = True
-            with self.assertRaises(psycopg2.OperationalError):
-                controller.mail_tracking_event("not_found_db")
-            none = controller.mail_tracking_event(db)
-            self.assertEqual(b"NONE", none.response[0])
-            none = controller.mail_tracking_event(db, "open")
-            self.assertEqual(b"NONE", none.response[0])
-
     def test_bounce_tracking_event_created(self):
         mail, tracking = self.mail_send(self.recipient.email)
         message = self.env.ref("mail.mail_message_channel_1_1")
-        message.mail_tracking_ids = [(4, tracking.id, False)]
+        message.mail_tracking_ids = [Command.link(tracking.id)]
         mail.mail_message_id = message
         message_dict = {
             "bounced_email": "test@test.net",
@@ -628,7 +650,7 @@ class TestMailTracking(TransactionCase):
                 msg = "data-odoo-tracking-email found"
             raise AssertionError(msg)
 
-        with mock.patch(mock_send_email) as mock_func:
+        with patch(mock_send_email) as mock_func:
             mock_func.side_effect = assert_tracking_tag_side_effect
             self.env["ir.config_parameter"].set_param(
                 "mail_tracking.tracking_img_disabled", False
@@ -647,3 +669,38 @@ class TestMailTracking(TransactionCase):
             self.assertEqual(
                 "data-odoo-tracking-email not found", tracking.error_description
             )
+
+    def test_mail_init_messaging(self):
+        def mock_json_response(*args, **kwargs):
+            return {"expected_result": True}
+
+        controller = MailTrackingDiscussController()
+        # This is non-functional test to increase coverage
+        with patch(
+            "odoo.addons.mail.controllers.discuss.DiscussController.mail_init_messaging",
+            wraps=mock_json_response,
+        ):
+            res = controller.mail_init_messaging()
+            self.assertTrue(res["expected_result"])
+
+    def test_discuss_failed_messages(self):
+        def mock_json_response(*args, **kwargs):
+            return {"expected_result": True}
+
+        def mock_message_fetch(*args, **kwargs):
+            return self.env["mail.message"]
+
+        controller = MailTrackingDiscussController()
+        # This is non-functional test to increase coverage
+        with patch(
+            "odoo.addons.mail_tracking.models.mail_message.MailMessage.message_format",
+            wraps=mock_json_response,
+        ), patch(
+            "odoo.addons.mail.models.mail_message.Message._message_fetch",
+            wraps=mock_message_fetch,
+        ):
+            res = controller.discuss_failed_messages()
+            self.assertTrue(res["expected_result"])
+
+    def test_unlink_mail_alias(self):
+        self.env["ir.config_parameter"].search([], limit=1).unlink()

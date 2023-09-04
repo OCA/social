@@ -9,3 +9,6 @@
 
 * `Eezee-IT <https://www.eezee-it.com>`_:
   * Asma Elferkhsi
+
+* `Vauxoo <https://www.vauxoo.com>`_:
+  * Agustín Payen Sandoval
