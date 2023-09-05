@@ -102,7 +102,9 @@ class MailRenderMixin(models.AbstractModel):
         )
 
         for key in res_ids:
-            orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key])
+            orginal_rendered[key] = self.remove_href_odoo(
+                orginal_rendered[key], remove_parent=False
+            )
 
         return orginal_rendered
 
