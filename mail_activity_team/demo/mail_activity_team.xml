@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+
+    <record model="mail.activity.team" id="team_a">
+        <field name="name">Team A</field>
+        <field
+            name="member_ids"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+        <field
+            name="image_1920"
+            type="base64"
+            file="mail_activity_team/static/src/img/team_a.png"
+        />
+    </record>
+
+    <record model="mail.activity.team" id="team_b">
+        <field name="name">Team B</field>
+        <field name="member_ids" eval="[(4, ref('base.user_demo'))]" />
+        <field
+            name="image_1920"
+            type="base64"
+            file="mail_activity_team/static/src/img/team_b.png"
+        />
+    </record>
+
+</odoo>
