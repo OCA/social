@@ -24,5 +24,6 @@
     "qweb": [
         "static/src/xml/activity.xml",
         "static/src/xml/systray.xml",
+        "static/src/xml/web_kanban_activity.xml",
     ],
 }

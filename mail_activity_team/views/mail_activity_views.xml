@@ -68,15 +68,26 @@
         <field name="name">mail.activity.boards.view.kanban</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail_activity_board.mail_activity_view_kanban" />
+        <field name="priority">150</field>
         <field name="arch" type="xml">
             <field name="user_id" position="after">
                 <field name="team_id" />
             </field>
-            <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
-                <br />
-                <div>
-                    Team: <field name="team_id" />
-                </div>
+            <xpath
+                expr="//div[hasclass('oe_kanban_bottom_right')]//img[hasclass('oe_kanban_avatar')]"
+                position="replace"
+            >
+                <t t-if="record.team_id.value">
+                    <img
+                        t-att-src="kanban_image('mail.activity.team', 'image_128', record.team_id.raw_value)"
+                        t-att-title="record.team_id.value"
+                        t-att-alt="record.team_id.value"
+                        width="24"
+                        height="24"
+                        class="oe_kanban_avatar"
+                    />
+                </t>
+                <t t-if="record.user_id.value">$0</t>
             </xpath>
         </field>
     </record>
