@@ -58,10 +58,10 @@
         <field name="name">mail.activity.team.view.tree</field>
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
-           <tree>
-               <field name="name" />
-               <field name="res_model_ids" widget="many2many_tags" />
-           </tree>
+            <tree>
+                <field name="name" />
+                <field name="res_model_ids" widget="many2many_tags" />
+            </tree>
         </field>
     </record>
 
@@ -72,9 +72,9 @@
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
             <search>
-               <field name="name" />
-               <field name="res_model_ids" />
-               <field name="member_ids" />
+                <field name="name" />
+                <field name="res_model_ids" />
+                <field name="member_ids" />
             </search>
         </field>
     </record>

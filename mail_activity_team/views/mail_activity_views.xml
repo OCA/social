@@ -64,21 +64,21 @@
         </field>
     </record>
 
-     <record id="mail_activity_view_kanban" model="ir.ui.view">
-         <field name="name">mail.activity.boards.view.kanban</field>
-         <field name="model">mail.activity</field>
-         <field name="inherit_id" ref="mail_activity_board.mail_activity_view_kanban" />
-         <field name="arch" type="xml">
-             <field name="user_id" position="after">
-                 <field name="team_id" />
-             </field>
-             <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
-                 <br />
-                 <div>
-                     Team: <field name="team_id" />
-                 </div>
-             </xpath>
-         </field>
+    <record id="mail_activity_view_kanban" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.kanban</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail_activity_board.mail_activity_view_kanban" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="team_id" />
+            </field>
+            <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
+                <br />
+                <div>
+                    Team: <field name="team_id" />
+                </div>
+            </xpath>
+        </field>
     </record>
 
         <!-- SEARCH VIEW -->
