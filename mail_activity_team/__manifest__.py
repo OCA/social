@@ -22,6 +22,7 @@
         "views/res_users_views.xml",
     ],
     "qweb": [
+        "static/src/xml/activity.xml",
         "static/src/xml/systray.xml",
     ],
 }

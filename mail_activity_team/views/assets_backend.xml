@@ -1,10 +1,26 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <template id="assets_backend" name="mail assets" inherit_id="web.assets_backend">
+    <template
+        id="assets_backend"
+        name="mail_activity_team assets"
+        inherit_id="web.assets_backend"
+    >
         <xpath expr="." position="inside">
             <script
                 type="text/javascript"
                 src="/mail_activity_team/static/src/js/systray.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_activity_team/static/src/components/activity/activity.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_activity_team/static/src/models/activity_team/activity_team.js"
+            />
+            <script
+                type="text/javascript"
+                src="/mail_activity_team/static/src/models/activity/activity.js"
             />
         </xpath>
     </template>

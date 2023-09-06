@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class MailActivityTeam(models.Model):
     _name = "mail.activity.team"
+    _inherit = ["image.mixin"]
     _description = "Mail Activity Team"
 
     @api.depends("res_model_ids", "member_ids")

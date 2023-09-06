@@ -33,6 +33,12 @@
                             <field name="active" invisible="1" />
                             <field name="name" />
                             <field name="user_id" />
+                            <field
+                                name="image_1920"
+                                widget="image"
+                                class="oe_avatar"
+                                options='{"preview_image": "image_128"}'
+                            />
                         </group>
                         <group name="models">
                             <field
