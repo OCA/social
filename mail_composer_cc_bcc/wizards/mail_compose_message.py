@@ -77,5 +77,5 @@ class MailComposeMessage(models.TransientModel):
         }
         context.update(self.env.context)
         self_super = super(MailComposeMessage, self.with_context(**context))
-        res = self_super._action_send_mail(auto_commit)
+        res = self_super._action_send_mail(auto_commit=auto_commit)
         return res
