@@ -42,17 +42,10 @@ document and" on mail.compose.message:
 
 This field it's initialized to true to keep the standard behavior.
 
-<<<<<<< HEAD
-.. figure:: https://raw.githubusercontent.com/OCA/social/15.0/mail_optional_follower_notification/static/description/optional_follower_001.png
-   :alt: Default checkbox
-
-.. figure:: https://raw.githubusercontent.com/OCA/social/15.0/mail_optional_follower_notification/static/description/optional_follower_002.png
-=======
 .. figure:: https://raw.githubusercontent.com/OCA/social/16.0/mail_optional_follower_notification/static/description/optional_follower_001.png
    :alt: Default checkbox
 
 .. figure:: https://raw.githubusercontent.com/OCA/social/16.0/mail_optional_follower_notification/static/description/optional_follower_002.png
->>>>>>> 1b503800631a682e6fbde29fa04cc7bb405adab4
    :alt: Checkbox to avoid to notify automatically followers
 
 Bug Tracker
@@ -61,11 +54,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-<<<<<<< HEAD
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_optional_follower_notification%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
-=======
 `feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_optional_follower_notification%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
->>>>>>> 1b503800631a682e6fbde29fa04cc7bb405adab4
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -98,10 +87,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-<<<<<<< HEAD
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/15.0/mail_optional_follower_notification>`_ project on GitHub.
-=======
 This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_optional_follower_notification>`_ project on GitHub.
->>>>>>> 1b503800631a682e6fbde29fa04cc7bb405adab4
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
