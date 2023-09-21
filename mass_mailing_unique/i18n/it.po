@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-04 03:40+0000\n"
-"PO-Revision-Date: 2023-07-28 13:09+0000\n"
+"PO-Revision-Date: 2023-09-21 13:36+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -26,10 +26,10 @@ msgstr "Non è possibile avere più di una lista con lo stesso nome."
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/models/mass_mailing.py:21
-#, fuzzy, python-format
+#, python-format
 msgid "Cannot have the same email more than once in the same list"
 msgstr ""
-"Non è possibile inserire la stessa email più di una volta nella stessa lista."
+"Non è possibile avere la stessa e-mail più di una volta nella stessa lista"
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/hooks.py:45
