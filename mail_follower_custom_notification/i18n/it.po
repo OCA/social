@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-07 07:31+0000\n"
-"PO-Revision-Date: 2023-05-24 10:10+0000\n"
+"PO-Revision-Date: 2023-09-21 15:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-social-8-0/language/"
 "it/)\n"
@@ -76,7 +76,7 @@ msgstr ""
 #. module: mail_follower_custom_notification
 #: model:ir.model,name:mail_follower_custom_notification.model_mail_thread
 msgid "Email Thread"
-msgstr "Discussione Email"
+msgstr "Discussione e-mail"
 
 #. module: mail_follower_custom_notification
 #: model:ir.model.fields,field_description:mail_follower_custom_notification.field_mail_followers_force_mail_subtype_ids
