@@ -102,8 +102,11 @@ msgstr ""
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_users
-msgid "Users"
-msgstr "Utilisateurs"
+msgid "User"
+msgstr ""
+
+#~ msgid "Users"
+#~ msgstr "Utilisateurs"
 
 #~ msgid "Add internal users in cc mails details"
 #~ msgstr ""
