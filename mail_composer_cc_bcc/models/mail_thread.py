@@ -20,30 +20,32 @@ class MailThread(models.AbstractModel):
             res.recipient_bcc_ids = partners_bcc
         return res
 
-    def _notify_by_email_add_values(self, base_mail_values):
+    def _notify_by_email_get_base_mail_values(self, message, additional_values=None):
         """
         This is to add cc, bcc addresses to mail.mail objects so that email
         can be sent to those addresses.
         """
         context = self.env.context
 
+        res = super()._notify_by_email_get_base_mail_values(
+            message, additional_values=additional_values
+        )
         partners_cc = context.get("partner_cc_ids", None)
         if partners_cc:
-            base_mail_values["email_cc"] = format_emails(partners_cc)
+            res["email_cc"] = format_emails(partners_cc)
         partners_bcc = context.get("partner_bcc_ids", None)
         if partners_bcc:
-            base_mail_values["email_bcc"] = format_emails(partners_bcc)
-        res = super()._notify_by_email_add_values(base_mail_values)
+            res["email_bcc"] = format_emails(partners_bcc)
         return res
 
-    def _notify_compute_recipients(self, message, msg_vals):
+    def _notify_get_recipients(self, message, msg_vals, **kwargs):
         """
         This is to add cc, bcc recipients so that they can be grouped with
         other recipients.
         """
         ResPartner = self.env["res.partner"]
         MailFollowers = self.env["mail.followers"]
-        rdata = super()._notify_compute_recipients(message, msg_vals)
+        rdata = super()._notify_get_recipients(message, msg_vals, **kwargs)
         context = self.env.context
         is_from_composer = context.get("is_from_composer", False)
         if not is_from_composer:
@@ -60,28 +62,35 @@ class MailThread(models.AbstractModel):
         recipients_cc_bcc = MailFollowers._get_recipient_data(
             None, message_type, subtype_id, partners_cc_bcc.ids
         )
-        for pid, active, pshare, notif, groups in recipients_cc_bcc:
-            if not pid:
-                continue
-            if not notif:  # notif is False, has no user, is therefore customer
-                notif = "email"
-            msg_type = "customer"
-            pdata = {
-                "id": pid,
-                "active": active,
-                "share": pshare,
-                "groups": groups or [],
-                "notif": notif,
-                "type": msg_type,
-            }
-            rdata.append(pdata)
+        for _, value in recipients_cc_bcc.items():
+            for _, data in value.items():
+                if not data.get("id"):
+                    continue
+                if not data.get(
+                    "notif"
+                ):  # notif is False, has no user, is therefore customer
+                    notif = "email"
+                msg_type = "customer"
+                pdata = {
+                    "id": data.get("id"),
+                    "active": data.get("active"),
+                    "share": data.get("share"),
+                    "notif": data.get("notif") and data.get("notif") or notif,
+                    "type": msg_type,
+                    "is_follower": data.get("is_follower"),
+                }
+                rdata.append(pdata)
         return rdata
 
-    def _notify_email_recipient_values(self, recipient_ids):
+    def _notify_by_email_get_final_mail_values(
+        self, recipient_ids, base_mail_values, additional_values=None
+    ):
         """
         This is to add cc, bcc recipients' ids to recipient_ids of mail.mail
         """
-        res = super()._notify_email_recipient_values(recipient_ids)
+        res = super()._notify_by_email_get_final_mail_values(
+            recipient_ids, base_mail_values, additional_values=additional_values
+        )
         context = self.env.context
         r_ids = list(recipient_ids)
         partners_cc = context.get("partner_cc_ids", None)
@@ -94,8 +103,10 @@ class MailThread(models.AbstractModel):
             res["recipient_ids"] = tuple(set(r_ids))
         return res
 
-    def _notify_classify_recipients(self, recipient_data, model_name, msg_vals=None):
-        res = super()._notify_classify_recipients(
+    def _notify_get_recipients_classify(
+        self, recipient_data, model_name, msg_vals=None
+    ):
+        res = super()._notify_get_recipients_classify(
             recipient_data, model_name, msg_vals=msg_vals
         )
         is_from_composer = self.env.context.get("is_from_composer", False)
