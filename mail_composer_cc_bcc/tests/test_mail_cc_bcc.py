@@ -10,7 +10,9 @@ from odoo.tests import Form
 from odoo.addons.mail.models.mail_mail import MailMail as upstream
 from odoo.addons.mail.tests.test_mail_composer import TestMailComposer
 
-VALID_HASHES = ["5f8b9bd28ccfe4f4ef1702002b2ab3fc", "0e47779dfd6e70de1cc1457792c68c0f"]
+VALID_HASHES = [
+    "d52cb36b88b33abc9556f7be6718d93f",
+]
 
 
 class TestMailCcBcc(TestMailComposer):
@@ -31,6 +33,8 @@ class TestMailCcBcc(TestMailComposer):
             "default_partner_ids": test_record.ids,
             "default_model": test_record._name,
             "default_res_id": test_record.id,
+            # to ensure consistent test results even when mail_post_defer is installed
+            "mail_notify_force_send": True,
         }
         form = Form(self.env["mail.compose.message"].with_context(**ctx))
         form.body = "<p>Hello</p>"
@@ -44,6 +48,7 @@ class TestMailCcBcc(TestMailComposer):
             "active_ids": test_record.ids,
             "default_model": "account.move",
             "default_res_id": test_record.id,
+            "mail_notify_force_send": True,
         }
         form = Form(self.env["account.invoice.send"].with_context(**ctx))
         form.body = "<p>Hello</p>"

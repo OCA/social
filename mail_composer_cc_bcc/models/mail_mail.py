@@ -1,3 +1,6 @@
+# Copyright 2023 Camptocamp SA
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+
 import ast
 import base64
 import logging
@@ -121,9 +124,8 @@ class MailMail(models.Model):
                 )
                 # `test_mail_bounce_during_send`, force immediate update to obtain the lock.
                 # see rev. 56596e5240ef920df14d99087451ce6f06ac6d36
-                notifs.flush(
-                    fnames=["notification_status", "failure_type", "failure_reason"],
-                    records=notifs,
+                notifs.flush_recordset(
+                    ["notification_status", "failure_type", "failure_reason"]
                 )
 
             # protect against ill-formatted email_from when formataddr was used on an already formatted email # noqa: B950
