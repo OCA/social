@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2023-07-24 10:10+0000\n"
+"PO-Revision-Date: 2023-10-09 08:18+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -29,9 +29,9 @@ msgid ""
 "span>"
 msgstr ""
 "<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
-"\"color: red;\"> - Attenzione: i follower non verranno notificati ma "
-"potranno accedere accedere alle notifiche direttamente dal documento (se "
-"autorizzati)</span>"
+"\"color: red;\"> - Attenzione: non verrà inviata notifica a chi segue ma "
+"potrà accedere alla notifica direttamente dal documento (se "
+"autorizzato)</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
@@ -47,7 +47,7 @@ msgstr "Messaggio"
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message_notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_forward_compose_message_notify_followers
 msgid "Notify followers"
-msgstr "Notifica Follower"
+msgstr "Avvisa chi segue"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_res_partner
