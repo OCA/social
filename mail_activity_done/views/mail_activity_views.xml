@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--
+        Copyright 2018-20 ForgeFlow <http://www.forgeflow.com>
+        License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
+    -->
+    <record id="mail_activity_view_form_popup" model="ir.ui.view">
+        <field name="name">mail.activity.view.form.popup</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <field name="activity_type_id" position="after">
+                <field name="state" />
+                <field name="date_done" />
+            </field>
+            <button name="action_done" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':[('state', '=', 'done')]}</attribute>
+            </button>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_search" model="ir.ui.view">
+        <field name="name">mail.activity.view.search</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_search" />
+        <field name="arch" type="xml">
+            <field name="res_model" position="after">
+                <field name="done" />
+                <field name="active" />
+                <filter
+                    string="Completed Activities"
+                    name="activities_completed"
+                    domain="[('active', '=', False), ('state', '=', 'done')]"
+                />
+            </field>
+            <filter name="activities_overdue" position="attributes">
+                <attribute
+                    name="domain"
+                >[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]</attribute>
+            </filter>
+            <filter name="activities_today" position="attributes">
+                <attribute
+                    name="domain"
+                >[('date_deadline', '=', context_today().strftime('%Y-%m-%d'))]</attribute>
+            </filter>
+            <filter name="activities_upcoming_all" position="attributes">
+                <attribute
+                    name="domain"
+                >[('date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <record id="res_partner_view_search_inherit_mail" model="ir.ui.view">
+        <field name="name">res.partner.view.search.inherit.mail</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="mail.res_partner_view_search_inherit_mail" />
+        <field name="arch" type="xml">
+            <filter name="activities_overdue" position="before">
+                <filter
+                    string="Open Activities"
+                    name="activities_open"
+                    domain="[('activity_ids.active', '=', True)]"
+                />
+                <filter
+                    string="Completed Activities"
+                    name="activities_completed"
+                    domain="[('activity_ids.active', '=', False), ('activity_ids.state', '=', 'done')]"
+                />
+            </filter>
+            <filter name="activities_overdue" position="attributes">
+                <attribute
+                    name="domain"
+                >[('activity_ids.date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]</attribute>
+            </filter>
+            <filter name="activities_today" position="attributes">
+                <attribute
+                    name="domain"
+                >[('activity_ids.date_deadline', '=', context_today().strftime('%Y-%m-%d'))]</attribute>
+            </filter>
+            <filter name="activities_upcoming_all" position="attributes">
+                <attribute
+                    name="domain"
+                >[('activity_ids.date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_tree" model="ir.ui.view">
+        <field name="name">mail.activity.view.tree</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree" />
+        <field name="arch" type="xml">
+            <field name="date_deadline" position="after">
+                <field name="state" />
+                <field name="date_done" />
+            </field>
+            <tree position="attributes">
+                <attribute name="decoration-muted">state == 'done'</attribute>
+                <attribute
+                    name="decoration-danger"
+                >date_deadline &lt; current_date and state != 'done'</attribute>
+                <attribute
+                    name="decoration-success"
+                >date_deadline == current_date and state != 'done'</attribute>
+            </tree>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_calendar" model="ir.ui.view">
+        <field name="name">mail.activity.view.calendar</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_calendar" />
+        <field name="priority" eval="2" />
+        <field name="arch" type="xml">
+            <field name="summary" position="after">
+                <field name="state" />
+                <field name="date_done" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
