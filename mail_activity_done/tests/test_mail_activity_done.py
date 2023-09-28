@@ -1,5 +1,5 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
+# Copyright 2023 Tecnativa - Víctor Martínez
 from datetime import date
 
 from odoo.tests.common import TransactionCase
@@ -35,7 +35,12 @@ class TestMailActivityDoneMethods(TransactionCase):
         self.assertEqual(self.act1.state, "done")
 
     def test_systray_get_activities(self):
-        act_count = self.employee.with_user(self.employee).systray_get_activities()
-        self.assertEqual(
-            len(act_count), 1, "Number of activities should be equal to one"
-        )
+        res = self.employee.with_user(self.employee).systray_get_activities()
+        self.assertEqual(res[0]["total_count"], 1)
+        self.act1.action_feedback()
+        self.assertFalse(self.act1.active)
+        self.assertEqual(self.act1.state, "done")
+        self.assertTrue(self.act1.done)
+        self.act1.flush()
+        res = self.employee.with_user(self.employee).systray_get_activities()
+        self.assertEqual(res[0]["total_count"], 0)
