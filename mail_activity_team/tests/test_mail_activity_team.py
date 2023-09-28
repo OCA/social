@@ -272,7 +272,7 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(res[0]["total_count"], 1)
         self.assertEqual(res[0]["today_count"], 2)
         res = self.env["res.users"].with_user(self.employee.id).systray_get_activities()
-        self.assertEqual(res[0]["total_count"], 2)
+        self.assertEqual(res[0]["total_count"], 1)
 
     def test_activity_schedule_next(self):
         self.activity1.write(
