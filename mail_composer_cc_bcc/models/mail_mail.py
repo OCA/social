@@ -45,8 +45,8 @@ class MailMail(models.Model):
         success_pids = []
         failure_type = None
         # ===== Same with native Odoo =====
-        # https://github.com/odoo/odoo/blob/6ec4ba7ba22626219ddd09241c274b09a21fac0b
-        # /addons/mail/models/mail_mail.py#L375
+        # https://github.com/odoo/odoo/blob/0a3fc96cd51c0aab024207a4608f6ba32d49da36
+        # /addons/mail/models/mail_mail.py#L384
         try:
             if mail.state != "outgoing":
                 if mail.state != "exception" and mail.auto_delete:
@@ -126,11 +126,16 @@ class MailMail(models.Model):
                     records=notifs,
                 )
 
+            # protect against ill-formatted email_from when formataddr was used on an already formatted email # noqa: B950
+            emails_from = tools.email_split_and_format(mail.email_from)
+            email_from = emails_from[0] if emails_from else mail.email_from
+
             # build an RFC2822 email.message.Message object and send it without queuing
             res = None
             # TDE note: could be great to pre-detect missing to/cc and skip sending it
             # to go directly to failed state update
             # ===== Different than native Odoo =====
+            email["email_from"] = email_from
             msg = self.build_email(
                 email,
                 attachments=attachments,
@@ -231,12 +236,13 @@ class MailMail(models.Model):
     def build_email(self, email, attachments=None, headers=None):
         env = self.env
         mail = self
+        email_from = email.get("email_from")
         IrMailServer = env["ir.mail_server"]
         # ===== Same with native Odoo =====
-        # https://github.com/odoo/odoo/blob/6ec4ba7ba22626219ddd09241c274b09a21fac0b
-        # /addons/mail/models/mail_mail.py#L447
+        # https://github.com/odoo/odoo/blob/0a3fc96cd51c0aab024207a4608f6ba32d49da36
+        # /addons/mail/models/mail_mail.py#L458
         msg = IrMailServer.build_email(
-            email_from=mail.email_from,
+            email_from=email_from,
             email_to=email.get("email_to"),
             subject=mail.subject,
             body=email.get("body"),
