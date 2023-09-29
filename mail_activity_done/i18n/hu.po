@@ -17,7 +17,7 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_activity_done
-#. openerp-web
+#. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "%d days overdue"
@@ -29,9 +29,17 @@ msgid "Active"
 msgstr "Aktív"
 
 #. module: mail_activity_done
+#: model:ir.model.fields,field_description:mail_activity_done.field_account_bank_statement_line__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_account_journal__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_account_move__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_account_payment__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_account_setup_bank_manual_config__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mailing_mailing__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_product_product__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_product_template__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_res_partner_bank__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_users__activity_ids
 msgid "Activities"
 msgstr "Tevékenységek"
@@ -64,7 +72,7 @@ msgid "Done"
 msgstr "Kész"
 
 #. module: mail_activity_done
-#. openerp-web
+#. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Due in %d days"
@@ -81,14 +89,14 @@ msgid "State"
 msgstr "Állapot"
 
 #. module: mail_activity_done
-#. openerp-web
+#. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Today"
 msgstr "Ma"
 
 #. module: mail_activity_done
-#. openerp-web
+#. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Tomorrow"
@@ -96,12 +104,15 @@ msgstr "Holnap"
 
 #. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_res_users
-msgid "Users"
-msgstr "Felhasználók"
+msgid "User"
+msgstr ""
 
 #. module: mail_activity_done
-#. openerp-web
+#. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Yesterday"
 msgstr "Tegnap"
+
+#~ msgid "Users"
+#~ msgstr "Felhasználók"
