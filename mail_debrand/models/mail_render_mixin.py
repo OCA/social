@@ -14,6 +14,26 @@ from odoo import api, models, tools
 class MailRenderMixin(models.AbstractModel):
     _inherit = "mail.render.mixin"
 
+    def remove_href_odoo_special_case(self, elem):
+        parent = elem.getparent()
+        previous_elem = elem.getprevious()
+        # auth_signup.set_password_email
+        if previous_elem is not None and previous_elem.tag == "br":
+            head_msg = "Have a look at the"
+            tail_msg = "to discover the tool."
+            if (
+                previous_elem.tail
+                and head_msg in previous_elem.tail
+                and elem.tail
+                and tail_msg in elem.tail
+            ):
+                previous_elem.tail = previous_elem.tail.replace(head_msg, "")
+                elem.tail = elem.tail.replace(tail_msg, "")
+                parent.remove(previous_elem)
+                parent.remove(elem)
+                return True
+        return False
+
     def remove_href_odoo(self, value, remove_parent=True, to_keep=None):
         if len(value) < 20:
             return value
@@ -35,6 +55,8 @@ class MailRenderMixin(models.AbstractModel):
             tree = html.fromstring(value)
             odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
             for elem in odoo_anchors:
+                if self.remove_href_odoo_special_case(elem):
+                    continue
                 parent = elem.getparent()
                 if remove_parent and parent.getparent() is not None:
                     # anchor <a href odoo has a parent powered by that must be removed
