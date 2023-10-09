@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_outbound_static
+# 	* mail_outbound_static
 #
 msgid ""
 msgstr ""
