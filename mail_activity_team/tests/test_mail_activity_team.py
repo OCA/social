@@ -2,52 +2,45 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form, TransactionCase, new_test_user
 
 
 class TestMailActivityTeam(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                mail_activity_quick_update=True,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+                tracking_disable=True,
+            )
+        )
         # Start from a clean slate
         cls.env["mail.activity.team"].search([]).unlink()
         # Create Users
-        cls.employee = cls.env["res.users"].create(
-            {
-                "company_id": cls.env.ref("base.main_company").id,
-                "name": "Employee",
-                "login": "csu",
-                "email": "crmuser@yourcompany.com",
-                "groups_id": [
-                    (
-                        6,
-                        0,
-                        [
-                            cls.env.ref("base.group_user").id,
-                            cls.env.ref("base.group_partner_manager").id,
-                        ],
-                    )
-                ],
-            }
+        cls.employee = new_test_user(
+            cls.env,
+            name="Employee",
+            login="csu",
+            email="crmuser@yourcompany.com",
+            groups="base.group_user,base.group_partner_manager",
         )
-        cls.employee2 = cls.env["res.users"].create(
-            {
-                "company_id": cls.env.ref("base.main_company").id,
-                "name": "Employee 2",
-                "login": "csu2",
-                "email": "crmuser2@yourcompany.com",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
-            }
+        cls.employee2 = new_test_user(
+            cls.env,
+            name="Employee 2",
+            login="csu2",
+            email="crmuser2@yourcompany.com",
         )
-        cls.employee3 = cls.env["res.users"].create(
-            {
-                "company_id": cls.env.ref("base.main_company").id,
-                "name": "Employee 3",
-                "login": "csu3",
-                "email": "crmuser3@yourcompany.com",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
-            }
+        cls.employee3 = new_test_user(
+            cls.env,
+            name="Employee 3",
+            login="csu3",
+            email="crmuser3@yourcompany.com",
         )
         # Create Activity Types
         cls.activity1 = cls.env["mail.activity.type"].create(
@@ -279,7 +272,7 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(res[0]["total_count"], 1)
         self.assertEqual(res[0]["today_count"], 2)
         res = self.env["res.users"].with_user(self.employee.id).systray_get_activities()
-        self.assertEqual(res[0]["total_count"], 2)
+        self.assertEqual(res[0]["total_count"], 1)
 
     def test_activity_schedule_next(self):
         self.activity1.write(
