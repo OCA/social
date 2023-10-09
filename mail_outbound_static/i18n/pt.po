@@ -18,8 +18,8 @@ msgstr ""
 #: code:addons/mail_outbound_static/models/ir_mail_server.py:0
 #, python-format
 msgid ""
-"%s is not a valid domain. Please define a list of valid domains separated by"
-" comma"
+"%s is not a valid domain. Please define a list of valid domains separated by "
+"comma"
 msgstr ""
 
 #. module: mail_outbound_static
