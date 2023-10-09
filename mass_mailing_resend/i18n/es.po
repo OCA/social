@@ -30,6 +30,21 @@ msgstr ""
 "b> para eliminar el/los registro/s existentes."
 
 #. module: mass_mailing_resend
+#: model:ir.model.fields,field_description:mass_mailing_resend.field_mailing_mailing__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mass_mailing_resend
+#: model:ir.model.fields,field_description:mass_mailing_resend.field_mailing_mailing__id
+msgid "ID"
+msgstr ""
+
+#. module: mass_mailing_resend
+#: model:ir.model.fields,field_description:mass_mailing_resend.field_mailing_mailing____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mass_mailing_resend
 #: model:ir.model,name:mass_mailing_resend.model_mailing_mailing
 msgid "Mass Mailing"
 msgstr "Correo masivo"
