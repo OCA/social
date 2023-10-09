@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_optional_autofollow
+# 	* mail_optional_autofollow
 #
 msgid ""
 msgstr ""
@@ -30,7 +30,9 @@ msgstr "Tornar os destinatários seguidores"
 #. module: mail_optional_autofollow
 #: model:ir.model.fields,help:mail_optional_autofollow.field_account_invoice_send__autofollow_recipients
 #: model:ir.model.fields,help:mail_optional_autofollow.field_mail_compose_message__autofollow_recipients
-msgid "if checked, the additional recipients will be added as        followers on the related object"
+msgid ""
+"if checked, the additional recipients will be added as        followers on "
+"the related object"
 msgstr ""
 "Se assinalado, os destinatários adicionais serão adicionados como seguidores "
 "do objeto relacionado"
