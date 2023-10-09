@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_preview_base
+# 	* mail_preview_base
 #
 msgid ""
 msgstr ""
@@ -26,12 +26,16 @@ msgstr ""
 #. openerp-web
 #: code:addons/mail_preview_base/static/src/xml/preview.xml:5
 #, python-format
-msgid "#{widget.activeAttachment.source_url}?unique=1&signature=#{widget.activeAttachment.checksum}"
+msgid ""
+"#{widget.activeAttachment.source_url}?unique=1&signature=#{widget."
+"activeAttachment.checksum}"
 msgstr ""
 
 #. module: mail_preview_base
 #. openerp-web
 #: code:addons/mail_preview_base/static/src/xml/preview.xml:8
 #, python-format
-msgid "/web/static/lib/pdfjs/web/viewer.html?file=#{widget.activeAttachment.source_url}"
+msgid ""
+"/web/static/lib/pdfjs/web/viewer.html?file=#{widget.activeAttachment."
+"source_url}"
 msgstr ""
