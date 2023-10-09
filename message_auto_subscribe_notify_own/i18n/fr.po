@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* message_auto_subscribe_notify_own
+# 	* message_auto_subscribe_notify_own
 #
 msgid ""
 msgstr ""
