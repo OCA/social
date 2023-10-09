@@ -72,7 +72,12 @@ msgid "Created on"
 msgstr "作成日"
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__display_name
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing__display_name
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner__display_name
 msgid "Display Name"
 msgstr "表示名"
 
@@ -102,7 +107,12 @@ msgid "Helper field to make the user aware of unsynced changes"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list__id
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing__id
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
@@ -112,7 +122,12 @@ msgid "Is Synced"
 msgstr ""
 
 #. module: mass_mailing_list_dynamic
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_base_partner_merge_automatic_wizard____last_update
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_contact____last_update
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_list____last_update
 #: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_load_filter____last_update
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_mailing_mailing____last_update
+#: model:ir.model.fields,field_description:mass_mailing_list_dynamic.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "最終更新日"
 
