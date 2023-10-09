@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_improved_tracking_value
+# 	* mail_improved_tracking_value
 #
 msgid ""
 msgstr ""
