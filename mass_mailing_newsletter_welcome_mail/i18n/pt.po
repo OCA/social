@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mass_mailing_newsletter_welcome_mail
+# 	* mass_mailing_newsletter_welcome_mail
 #
 msgid ""
 msgstr ""
@@ -18,7 +18,8 @@ msgstr ""
 
 #. module: mass_mailing_newsletter_welcome_mail
 #: model:mail.template,body_html:mass_mailing_newsletter_welcome_mail.mail_template_welcome
-msgid "<div>Dear <b>${object.name or object.email}</b>,\n"
+msgid ""
+"<div>Dear <b>${object.name or object.email}</b>,\n"
 "                <br/>\n"
 "                <h3>Thanks for signing up for our newsletter!</h3>\n"
 "                <p>Regards,</p>\n"
