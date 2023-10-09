@@ -22,7 +22,6 @@ class MailActivity(models.Model):
         string="Last reminder (local)",
     )
     deadline = fields.Datetime(
-        string="Deadline",
         compute="_compute_deadline",
         compute_sudo=True,
         store=True,
@@ -99,22 +98,20 @@ class MailActivity(models.Model):
             )
 
     def action_notify(self):
-        super().action_notify()
+        res = super().action_notify()
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
         for activity in self:
             if activity.last_reminder_local:
                 continue
             tz = timezone(activity.user_id.sudo().tz or "UTC")
             activity.last_reminder_local = utc_now.astimezone(tz).replace(tzinfo=None)
+        return res
 
     def action_remind(self):
         """
         Group reminders by user and type and send them together
         """
         MailThread = self.env["mail.thread"]
-        message_activity_assigned = self.env.ref(
-            "mail_activity_reminder.message_activity_assigned"
-        )
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
         for user in self.mapped("user_id"):
             activities = self.filtered(lambda activity: activity.user_id == user)
@@ -123,9 +120,9 @@ class MailActivity(models.Model):
 
             subject = _("Some activities you are assigned too expire soon.")
 
-            body = message_activity_assigned.render(
+            body = self.env["ir.qweb"]._render(
+                "mail_activity_reminder.message_activity_assigned",
                 dict(activities=activities, model_description="Activities"),
-                engine="ir.qweb",
                 minimal_qcontext=True,
             )
             MailThread.message_notify(

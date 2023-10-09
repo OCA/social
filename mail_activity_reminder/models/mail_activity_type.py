@@ -10,7 +10,6 @@ class MailActivityType(models.Model):
     _inherit = "mail.activity.type"
 
     reminders = fields.Char(
-        string="Reminders",
         help=(
             "A non-digit-separated list of offsets (in days) when reminders"
             ' should be fired: e.g. 0 means "on the deadline day" while'
