@@ -44,6 +44,7 @@ msgstr "Creado el"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__display_name
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_thread__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
@@ -54,11 +55,13 @@ msgstr "Hilo de correo electrónico"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__id
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_thread__id
 msgid "ID"
 msgstr "ID"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject____last_update
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_thread____last_update
 msgid "Last Modified on"
 msgstr "Última modificación el"
 
@@ -123,11 +126,6 @@ msgid "Template Name"
 msgstr "Plantillas"
 
 #. module: mail_notification_custom_subject
-#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_tree
-msgid "Templates"
-msgstr "Plantillas"
-
-#. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid ""
 "Whether to replace, append at beggining or append at end to other templates "
@@ -135,3 +133,6 @@ msgid ""
 msgstr ""
 "Ya sea para reemplazar, agregar al principio o agregar al final a otras "
 "plantillas que se aplican a un contexto determinado"
+
+#~ msgid "Templates"
+#~ msgstr "Plantillas"
