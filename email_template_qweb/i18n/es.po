@@ -19,14 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_id
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
 #, fuzzy
 msgid "Body View"
 msgstr "Vista del cuerpo"
 
 #. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_type
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_type
 msgid "Body templating engine"
 msgstr "Motor de plantilla para el cuerpo del mensaje"
@@ -37,18 +35,31 @@ msgid "Dear"
 msgstr "Estimado"
 
 #. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: email_template_qweb
 #: model:ir.model,name:email_template_qweb.model_mail_template
 msgid "Email Templates"
 msgstr "Plantillas de correo electrónico"
 
 #. module: email_template_qweb
-#: model:ir.model.fields.selection,name:email_template_qweb.selection__email_template_preview__body_type__jinja2
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__id
+msgid "ID"
+msgstr ""
+
+#. module: email_template_qweb
 #: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__jinja2
 msgid "Jinja2"
 msgstr "Jinja2"
 
 #. module: email_template_qweb
-#: model:ir.model.fields.selection,name:email_template_qweb.selection__email_template_preview__body_type__qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: email_template_qweb
 #: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__qweb
 msgid "QWeb"
 msgstr "QWeb"
@@ -59,7 +70,6 @@ msgid "QWeb demo email"
 msgstr "Correo electrónico demo en QWeb"
 
 #. module: email_template_qweb
-#: model:ir.model.fields,help:email_template_qweb.field_email_template_preview__body_view_arch
 #: model:ir.model.fields,help:email_template_qweb.field_mail_template__body_view_arch
 msgid ""
 "This field should be used when accessing view arch. It will use "
@@ -74,7 +84,6 @@ msgid "This is an email template using qweb."
 msgstr "Esto es una plantilla de correo electrónico usando QWeb"
 
 #. module: email_template_qweb
-#: model:ir.model.fields,field_description:email_template_qweb.field_email_template_preview__body_view_arch
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_arch
 msgid "View Architecture"
 msgstr "Arquitectura de la vista"
