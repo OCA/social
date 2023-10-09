@@ -4,3 +4,4 @@
     * David Vidal
     * Alexandre D. Díaz
     * Stefan Ungureanu
+    * Carolina Fernandez
