@@ -18,9 +18,14 @@ class MailActivity(models.Model):
         compute_sudo=True,
         store=True,
     )
-    last_reminder_local = fields.Datetime(string="Last reminder (local)",)
+    last_reminder_local = fields.Datetime(
+        string="Last reminder (local)",
+    )
     deadline = fields.Datetime(
-        string="Deadline", compute="_compute_deadline", compute_sudo=True, store=True,
+        string="Deadline",
+        compute="_compute_deadline",
+        compute_sudo=True,
+        store=True,
     )
 
     @api.model
@@ -42,7 +47,10 @@ class MailActivity(models.Model):
         return activities
 
     @api.depends(
-        "user_id.tz", "activity_type_id.reminders", "deadline", "last_reminder_local",
+        "user_id.tz",
+        "activity_type_id.reminders",
+        "deadline",
+        "last_reminder_local",
     )
     def _compute_next_reminder(self):
         now = fields.Datetime.now()
@@ -68,7 +76,9 @@ class MailActivity(models.Model):
                 )
             )
             for reminder in reminders:
-                next_reminder_local = local_deadline - relativedelta(days=reminder,)
+                next_reminder_local = local_deadline - relativedelta(
+                    days=reminder,
+                )
                 if not last_reminder_local or next_reminder_local > last_reminder_local:
                     break
             if last_reminder_local and next_reminder_local <= last_reminder_local:
@@ -99,7 +109,7 @@ class MailActivity(models.Model):
 
     def action_remind(self):
         """
-            Group reminders by user and type and send them together
+        Group reminders by user and type and send them together
         """
         MailThread = self.env["mail.thread"]
         message_activity_assigned = self.env.ref(
