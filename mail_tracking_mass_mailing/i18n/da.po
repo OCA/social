@@ -24,7 +24,25 @@ msgid "Country"
 msgstr "Land."
 
 #. module: mail_tracking_mass_mailing
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.view_mail_mass_mailing_contact_search
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail__display_name
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_event__display_name
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__display_name
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__display_name
+msgid "Display name"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_bounced
+msgid "Email Bounced"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_contact_view_search
 msgid "Email bounced"
 msgstr ""
 
@@ -41,6 +59,24 @@ msgstr ""
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
 msgid "Events"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail__id
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__id
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_event__id
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__id
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_tracking_mass_mailing
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail____last_update
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email____last_update
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_event____last_update
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact____last_update
+#: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: mail_tracking_mass_mailing
