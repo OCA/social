@@ -27,8 +27,8 @@ msgid ""
 "dynamic list, just <b>set them as <i>Opt Out</i></b>."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/> Si desea eliminar contactos de una lista "
-"dinámica, simplemente <b>configúrelos como <i>Optar por no "
-"participar</i></b>."
+"dinámica, simplemente <b>configúrelos como <i>Optar por no participar</i></"
+"b>."
 
 #. module: mass_mailing_list_dynamic
 #: model_terms:ir.ui.view,arch_db:mass_mailing_list_dynamic.mailing_list_view_form
