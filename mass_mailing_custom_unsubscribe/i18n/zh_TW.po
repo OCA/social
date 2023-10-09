@@ -59,6 +59,13 @@ msgstr ""
 #. openerp-web
 #: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
 #, python-format
+msgid "An error occurred. Please try again later or contact us."
+msgstr ""
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
 msgid "An error occurred. Your changes have not been saved, try again later."
 msgstr ""
 
@@ -112,8 +119,11 @@ msgid "Details Required"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_blacklist__display_name
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__display_name
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__display_name
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_list__display_name
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_mailing__display_name
 msgid "Display Name"
 msgstr "顯示名稱"
 
@@ -169,8 +179,11 @@ msgid "I'm not interested"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_blacklist__id
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__id
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__id
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_list__id
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_mailing__id
 msgid "ID"
 msgstr "編號"
 
@@ -200,8 +213,11 @@ msgid "Is Follower"
 msgstr ""
 
 #. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_blacklist____last_update
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription____last_update
 #: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason____last_update
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_list____last_update
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_mailing____last_update
 msgid "Last Modified on"
 msgstr "最後修改:"
 
