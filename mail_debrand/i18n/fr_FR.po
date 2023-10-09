@@ -23,24 +23,6 @@ msgid "Connect"
 msgstr ""
 
 #. module: mail_debrand
-#: model:ir.model.fields,field_description:mail_debrand.field_mail_mail__display_name
-#: model:ir.model.fields,field_description:mail_debrand.field_mail_render_mixin__display_name
-msgid "Display Name"
-msgstr "Nom affiché"
-
-#. module: mail_debrand
-#: model:ir.model.fields,field_description:mail_debrand.field_mail_mail__id
-#: model:ir.model.fields,field_description:mail_debrand.field_mail_render_mixin__id
-msgid "ID"
-msgstr ""
-
-#. module: mail_debrand
-#: model:ir.model.fields,field_description:mail_debrand.field_mail_mail____last_update
-#: model:ir.model.fields,field_description:mail_debrand.field_mail_render_mixin____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification"
-
-#. module: mail_debrand
 #: model:ir.model,name:mail_debrand.model_mail_render_mixin
 msgid "Mail Render Mixin"
 msgstr "Rendu du courrier"
@@ -49,3 +31,9 @@ msgstr "Rendu du courrier"
 #: model:ir.model,name:mail_debrand.model_mail_mail
 msgid "Outgoing Mails"
 msgstr "E-mails sortants"
+
+#~ msgid "Display Name"
+#~ msgstr "Nom affiché"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification"
