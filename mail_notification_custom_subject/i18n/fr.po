@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_notification_custom_subject
+# 	* mail_notification_custom_subject
 #
 msgid ""
 msgstr ""
@@ -132,7 +132,9 @@ msgstr "Modèles"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
-msgid "Whether to replace, append at beggining or append at end to other templates that apply to a given context"
+msgid ""
+"Whether to replace, append at beggining or append at end to other templates "
+"that apply to a given context"
 msgstr ""
 "Que ce soit pour remplacer, ajouter au début ou ajouter à la fin d'autres "
 "modèles qui s'appliquent à un contexte donné"
