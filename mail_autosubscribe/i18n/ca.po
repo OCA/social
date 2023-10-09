@@ -45,9 +45,6 @@ msgstr "Creat el"
 
 #. module: mail_autosubscribe
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__display_name
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template__display_name
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_thread__display_name
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Nom a mostrar"
 
@@ -63,9 +60,6 @@ msgstr "Fil de correus"
 
 #. module: mail_autosubscribe
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__id
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template__id
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_thread__id
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
@@ -76,9 +70,6 @@ msgstr "En còpia de"
 
 #. module: mail_autosubscribe
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe____last_update
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template____last_update
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_thread____last_update
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Darrera modificació el"
 
