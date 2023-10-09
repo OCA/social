@@ -9,7 +9,7 @@ from freezegun import freeze_time
 from odoo.tests import common
 
 
-class TestMailActivityReminder(common.SavepointCase):
+class TestMailActivityReminder(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -114,7 +114,7 @@ class TestMailActivityReminder(common.SavepointCase):
             self.assertEqual(activities, activity)
             activities.action_remind()
 
-        activity.active = False
+        activity.unlink()
         with freeze_time(self.now + relativedelta(days=5)):
             activities = self.MailActivity._get_activities_to_remind()
             self.assertFalse(activities)
