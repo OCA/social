@@ -4,7 +4,7 @@
 {
     "name": "Mail Activity Team",
     "summary": "Add Teams to Activities",
-    "version": "15.0.2.1.0",
+    "version": "15.0.2.1.1",
     "development_status": "Alpha",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
