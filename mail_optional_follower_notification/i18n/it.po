@@ -30,8 +30,8 @@ msgid ""
 msgstr ""
 "<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
 "\"color: red;\"> - Attenzione: non verrà inviata notifica a chi segue ma "
-"potrà accedere alla notifica direttamente dal documento (se "
-"autorizzato)</span>"
+"potrà accedere alla notifica direttamente dal documento (se autorizzato)</"
+"span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_followers
