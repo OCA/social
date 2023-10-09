@@ -40,7 +40,11 @@ msgid "Created on"
 msgstr "Created on"
 
 #. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration__display_name
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__display_name
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_contact__display_name
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__display_name
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Display Name"
 
@@ -65,12 +69,20 @@ msgid "Exclude"
 msgstr ""
 
 #. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration__id
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__id
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_contact__id
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__id
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration____last_update
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state____last_update
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_contact____last_update
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing____last_update
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_res_partner____last_update
 msgid "Last Modified on"
 msgstr "Last Modified on"
 
