@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="mail_tracking.FailedMessageList" owl="1">
+        <t
+            t-set="nonReviewedFailedMessageItems"
+            t-value="messageListView._getNonReviewedFailedMessageItems(
+                messageListView.messageFailedListViewItems, store.reviewedMessageIds
+            )"
+        />
+        <div
+            t-if="messageListView &amp;&amp; nonReviewedFailedMessageItems.length"
+            class="o_ActivityBox o_Chatter_activityBox"
+        >
+            <a
+                href="#"
+                class="o_ActivityBox_title btn d-flex align-items-center p-0 w-100 fw-bold"
+                role="button"
+                t-att-aria-expanded="messageListView.isMessageFailedBoxVisible"
+                t-on-click="_onClickTitle"
+            >
+                <hr class="o_ActivityBox_titleLine w-auto flex-grow-1 me-3" />
+                <span class="o_ActivityBox_titleText">
+                    <i
+                        class="fa fa-fw"
+                        t-att-class="messageListView.isMessageFailedBoxVisible ? 'fa-caret-down' : 'fa-caret-right'"
+                    />
+                    Failed messages
+                </span>
+                <span
+                    t-if="!messageListView.isMessageFailedBoxVisible"
+                    class="o_ActivityBox_titleBadges ms-2"
+                >
+                    <span
+                        class="o_ActivityBox_titleBadge me-1 badge text-bg-danger"
+                        t-out="nonReviewedFailedMessageItems.length"
+                    />
+                </span>
+                <hr class="o_ActivityBox_titleLine w-auto flex-grow-1 ms-3" />
+            </a>
+            <div
+                class="o_MessageList bg-view d-flex flex-column overflow-auto"
+                t-att-class="{
+                    'o-empty align-items-center justify-content-center': messageListView.threadViewOwner.messages.length === 0,
+                    'pb-4': messageListView.threadViewOwner.messages.length !== 0
+                }"
+                t-attf-class="{{ className }}"
+                t-on-scroll="onScroll"
+                t-ref="root"
+                t-if="messageListView.isMessageFailedBoxVisible"
+            >
+                <t
+                    t-foreach="nonReviewedFailedMessageItems"
+                    t-as="messageListViewItem"
+                    t-key="messageListViewItem.localId"
+                >
+                    <FailedMessage
+                        t-if="(
+                            !messageListViewItem.message.isEmpty
+                            &amp;&amp; messageListViewItem.messageView
+                        )"
+                        record="messageListViewItem.messageView"
+                        isFailedMessage="true"
+                    />
+                </t>
+            </div>
+        </div>
+    </t>
+
+</templates>
