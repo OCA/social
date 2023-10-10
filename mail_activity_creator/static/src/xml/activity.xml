@@ -5,7 +5,7 @@
             <dt>Creator</dt>
             <dd class="mb8">
                 <img
-                    t-attf-src="/web/image#{activity.creator_uid[0] >= 0 ? ('/res.users/' + activity.creator_uid[0] + '/image_small') : ''}"
+                    t-attf-src="/web/image#{activity.creator_uid[0] >= 0 ? ('/res.users/' + activity.creator_uid[0] + '/avatar_128') : ''}"
                     height="18"
                     width="18"
                     class="rounded-circle mr4"
