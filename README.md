@@ -29,6 +29,7 @@ addon | version | maintainers | summary
 [mail_activity_done](mail_activity_done/) | 13.0.1.0.2 |  | Mail Activity Done
 [mail_activity_form](mail_activity_form/) | 13.0.1.0.0 |  | Define editable and computed sections in mail activity descriptions
 [mail_activity_partner](mail_activity_partner/) | 13.0.1.0.0 |  | Add Partner to Activities
+[mail_activity_reminder](mail_activity_reminder/) | 13.0.1.0.0 |  | Reminder notifications about planned activities
 [mail_activity_team](mail_activity_team/) | 13.0.1.3.2 |  | Add Teams to Activities
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 13.0.1.0.0 |  | Adding attachment on the object by sending this one
 [mail_attach_existing_attachment_account](mail_attach_existing_attachment_account/) | 13.0.1.0.0 |  | Module to use attach existing attachment for account module
