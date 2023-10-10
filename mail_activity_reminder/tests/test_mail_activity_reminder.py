@@ -34,6 +34,12 @@ class TestMailActivityReminder(common.TransactionCase):
         cls.partner_DecoAddict = cls.env["res.partner"].search(
             [("name", "ilike", "Deco Addict")], limit=1
         )
+        cls.partner_Azure = cls.env["res.partner"].search(
+            [("name", "ilike", "Azure Interior")], limit=1
+        )
+        cls.partner_Gemini = cls.env["res.partner"].search(
+            [("name", "ilike", "Gemini Furniture")], limit=1
+        )
 
     def test_none_reminders(self):
         activity_type = self.MailActivityType.create({"name": "Activity Type"})
@@ -197,3 +203,73 @@ class TestMailActivityReminder(common.TransactionCase):
         with freeze_time(self.now + relativedelta(days=2)):
             activities = self.MailActivity._get_activities_to_remind()
             self.assertFalse(activities)
+
+    def test_mail_reminder_per_type(self):
+        mt = self.env.ref("mail_activity_reminder.message_activity_assigned")
+        mt_copy1 = mt.copy()
+        mt_copy2 = mt.copy()
+        activity_type1 = self.MailActivityType.create(
+            {
+                "name": "Activity Type 1",
+                "reminders": "0",
+            }
+        )
+        activity_type2 = self.MailActivityType.create(
+            {
+                "name": "Activity Type 2",
+                "reminders": "0",
+                "reminder_mail_template_id": mt_copy1.id,
+            }
+        )
+        activity_type3 = self.MailActivityType.create(
+            {
+                "name": "Activity Type 3",
+                "reminders": "0",
+                "reminder_mail_template_id": mt_copy2.id,
+            }
+        )
+        user = self.ResUsers.sudo().create(
+            {
+                "name": "User",
+                "login": "user",
+                "email": "user@example.com",
+                "company_id": self.company_id.id,
+            }
+        )
+        with freeze_time(self.now):
+            activities = self.MailActivity.create(
+                [
+                    # Activity using generic mail template
+                    {
+                        "summary": "Activity 1",
+                        "activity_type_id": activity_type1.id,
+                        "res_model_id": self.model_res_partner.id,
+                        "res_id": self.partner_DecoAddict.id,
+                        "date_deadline": self.today + relativedelta(days=1),
+                        "user_id": user.id,
+                    },
+                    # Activities using dedicated mail templates
+                    {
+                        "summary": "Activity 2",
+                        "activity_type_id": activity_type2.id,
+                        "res_model_id": self.model_res_partner.id,
+                        "res_id": self.partner_Azure.id,
+                        "date_deadline": self.today + relativedelta(days=1),
+                        "user_id": user.id,
+                    },
+                    {
+                        "summary": "Activity 3",
+                        "activity_type_id": activity_type3.id,
+                        "res_model_id": self.model_res_partner.id,
+                        "res_id": self.partner_Gemini.id,
+                        "date_deadline": self.today + relativedelta(days=1),
+                        "user_id": user.id,
+                    },
+                ]
+            )
+        with freeze_time(self.now + relativedelta(days=1)):
+            with common.RecordCapturer(self.env["mail.message"], []) as capt:
+                activities = self.MailActivity._process_reminders()
+            self.assertTrue(all(a.last_reminder_local for a in activities))
+            # 3 messages posted (1 per mail template)
+            self.assertEqual(len(capt.records), 3)

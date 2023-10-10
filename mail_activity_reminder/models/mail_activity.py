@@ -111,25 +111,43 @@ class MailActivity(models.Model):
         """
         Group reminders by user and type and send them together
         """
-        MailThread = self.env["mail.thread"]
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
         for user in self.mapped("user_id"):
             activities = self.filtered(lambda activity: activity.user_id == user)
             tz = timezone(user.sudo().tz or "UTC")
             local_now = utc_now.astimezone(tz)
+            # Send reminders per dedicated mail templates if any
+            mail_templates = activities.activity_type_id.reminder_mail_template_id
+            for template in mail_templates:
+                activities_tmpl = activities.filtered(
+                    lambda o: o.activity_type_id.reminder_mail_template_id == template
+                )
+                self._send_reminder_mail(user, activities_tmpl, template=template)
+                activities -= activities_tmpl
+                activities_tmpl.update(
+                    {"last_reminder_local": local_now.replace(tzinfo=None)}
+                )
+            # Send reminders with generic mail template
+            if activities:
+                self._send_reminder_mail(user, activities)
+                activities.update(
+                    {"last_reminder_local": local_now.replace(tzinfo=None)}
+                )
 
-            subject = _("Some activities you are assigned too expire soon.")
-
-            body = self.env["ir.qweb"]._render(
-                "mail_activity_reminder.message_activity_assigned",
-                dict(activities=activities, model_description="Activities"),
-                minimal_qcontext=True,
-            )
-            MailThread.message_notify(
-                partner_ids=user.partner_id.ids,
-                body=body,
-                subject=subject,
-                model_description="Activity",
-                notif_layout="mail.mail_notification_light",
-            )
-            activities.update({"last_reminder_local": local_now.replace(tzinfo=None)})
+    def _send_reminder_mail(self, user, activities, template=None):
+        if template is None:
+            template = self.env.ref("mail_activity_reminder.message_activity_assigned")
+        MailThread = self.env["mail.thread"]
+        subject = _("Some activities you are assigned too expire soon.")
+        body = self.env["ir.qweb"]._render(
+            template.id,
+            dict(activities=activities, model_description="Activities"),
+            minimal_qcontext=True,
+        )
+        MailThread.message_notify(
+            partner_ids=user.partner_id.ids,
+            body=body,
+            subject=subject,
+            model_description="Activity",
+            notif_layout="mail.mail_notification_light",
+        )
