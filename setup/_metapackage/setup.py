@@ -45,6 +45,7 @@ setuptools.setup(
         'odoo14-addon-mail_server_by_user',
         'odoo14-addon-mail_show_follower',
         'odoo14-addon-mail_template_multi_attachment',
+        'odoo14-addon-mail_thread_create_nolog',
         'odoo14-addon-mail_tracking',
         'odoo14-addon-mail_tracking_mailgun',
         'odoo14-addon-mail_tracking_mass_mailing',
