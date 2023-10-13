@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* mail_activity_reminder
+# 	* mail_activity_reminder
 #
 msgid ""
 msgstr ""
@@ -17,14 +17,21 @@ msgstr ""
 "X-Generator: Weblate 4.14.1\n"
 
 #. module: mail_activity_reminder
-#: code:addons/mail_activity_reminder/models/mail_activity.py:123
-#, python-format
-msgid "%s: %s assigned to you, %d day(s) remaining"
-msgstr "%s : %s assigné à vous, %d jour(s) restant(s)"
+#: model_terms:ir.ui.view,arch_db:mail_activity_reminder.message_activity_assigned
+msgid ".<br/>"
+msgstr ""
+
+#. module: mail_activity_reminder
+#: model_terms:ir.ui.view,arch_db:mail_activity_reminder.message_activity_assigned
+msgid "<span>You have some activities assigned that expire soon:</span>"
+msgstr ""
 
 #. module: mail_activity_reminder
 #: model:ir.model.fields,help:mail_activity_reminder.field_mail_activity_type__reminders
-msgid "A non-digit-separated list of offsets (in days) when reminders should be fired: e.g. 0 means \"on the deadline day\" while 5 means \"5 calendar days before the deadline\"."
+msgid ""
+"A non-digit-separated list of offsets (in days) when reminders should be "
+"fired: e.g. 0 means \"on the deadline day\" while 5 means \"5 calendar days "
+"before the deadline\"."
 msgstr ""
 "Une liste de nombres de jours (séparés par tout caractère autre que des "
 "chiffres) qui indique quand les rappels doivent être déclenchés : par ex. 0 "
@@ -54,7 +61,6 @@ msgstr "Dernier rappel (local)"
 #. module: mail_activity_reminder
 #: model:ir.actions.server,name:mail_activity_reminder.mail_activity_reminder_ir_actions_server
 #: model:ir.cron,cron_name:mail_activity_reminder.mail_activity_reminder
-#: model:ir.cron,name:mail_activity_reminder.mail_activity_reminder
 msgid "Mail Activity: Reminders"
 msgstr "Activité : Rappels"
 
@@ -67,3 +73,34 @@ msgstr "Rappel suivant"
 #: model:ir.model.fields,field_description:mail_activity_reminder.field_mail_activity_type__reminders
 msgid "Reminders"
 msgstr "Rappels"
+
+#. module: mail_activity_reminder
+#. odoo-python
+#: code:addons/mail_activity_reminder/models/mail_activity.py:0
+#, python-format
+msgid "Some activities you are assigned too expire soon."
+msgstr ""
+
+#. module: mail_activity_reminder
+#: model_terms:ir.ui.view,arch_db:mail_activity_reminder.message_activity_assigned
+msgid "View"
+msgstr ""
+
+#. module: mail_activity_reminder
+#: model_terms:ir.ui.view,arch_db:mail_activity_reminder.message_activity_assigned
+msgid "assigned you an activity"
+msgstr ""
+
+#. module: mail_activity_reminder
+#: model_terms:ir.ui.view,arch_db:mail_activity_reminder.message_activity_assigned
+msgid "on"
+msgstr ""
+
+#. module: mail_activity_reminder
+#: model_terms:ir.ui.view,arch_db:mail_activity_reminder.message_activity_assigned
+msgid "to close for"
+msgstr ""
+
+#, python-format
+#~ msgid "%s: %s assigned to you, %d day(s) remaining"
+#~ msgstr "%s : %s assigné à vous, %d jour(s) restant(s)"
