@@ -18,7 +18,9 @@ registerPatch({
                     this.messageListViewItemOwner.messageListViewOwner.threadViewOwner
                         .threadViewer.discuss;
                 return Boolean(
-                    discuss && discuss.threadView.thread.mailbox.messagingAsFailed
+                    discuss &&
+                        discuss.threadView.thread.mailbox &&
+                        discuss.threadView.thread.mailbox.messagingAsFailed
                 );
             },
         }),
