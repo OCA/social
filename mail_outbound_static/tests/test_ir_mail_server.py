@@ -3,6 +3,7 @@
 
 import logging
 import os
+import sys
 import threading
 from email import message_from_string
 
@@ -88,8 +89,10 @@ class TestIrMailServer(TransactionCase):
                 self.Model._revert_method("connect")
         finally:
             thread.testing = True
-        send_from, send_to, message_string = connect().sendmail.call_args[0]
-        return message_from_string(message_string)
+        if sys.version_info < (3, 7, 4):
+            send_from, send_to, message_string = connect().sendmail.call_args[0]
+            return message_from_string(message_string)
+        return connect().send_message.call_args[0][0]
 
     def test_send_email_injects_from_no_canonical(self):
         """It should inject the FROM header correctly when no canonical name."""
