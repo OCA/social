@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo-addon-mail_activity_reminder>=16.0dev,<16.1dev',
         'odoo-addon-mail_activity_team>=16.0dev,<16.1dev',
         'odoo-addon-mail_attach_existing_attachment>=16.0dev,<16.1dev',
+        'odoo-addon-mail_composer_cc_bcc>=16.0dev,<16.1dev',
         'odoo-addon-mail_debrand>=16.0dev,<16.1dev',
         'odoo-addon-mail_improved_tracking_value>=16.0dev,<16.1dev',
         'odoo-addon-mail_layout_preview>=16.0dev,<16.1dev',
