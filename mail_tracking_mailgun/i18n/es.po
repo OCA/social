@@ -9,14 +9,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
-"PO-Revision-Date: 2018-02-26 01:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2023-10-28 13:30+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
@@ -52,12 +53,14 @@ msgstr ""
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "A Mailgun domain value is needed!"
-msgstr "¡Se necesita un valor de dominio para Mailgun!\""
+msgstr "¡Se necesita un valor de dominio para Mailgun!"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_auto_check_partner_emails
 msgid "Attempt to check partner emails always. This may cost money."
 msgstr ""
+"Intente comprobar siempre los correos electrónicos de los socios. Esto puede "
+"costar dinero."
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
@@ -72,22 +75,22 @@ msgstr "Comprobar validez de email"
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_auto_check_partner_emails
 msgid "Check partner emails automatically"
-msgstr ""
+msgstr "Compruebe automáticamente los correos electrónicos de los socios"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes Configuración"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "Connecting Odoo with"
-msgstr ""
+msgstr "Conexión de Odoo con"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
@@ -103,16 +106,19 @@ msgid ""
 "Reason: %(reason)s\n"
 "Event: %(event_str)s"
 msgstr ""
+"El correo electrónico ha sido devuelto: %(email)s\n"
+"Motivo: %(reason)s\n"
+"Evento: %(event_str)s"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_enabled
 msgid "Enable mail tracking with Mailgun"
-msgstr ""
+msgstr "Activar el seguimiento del correo con Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_enabled
 msgid "Enable to enhance mail tracking with Mailgun"
-msgstr ""
+msgstr "Mejorar el seguimiento del correo con Mailgun"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
@@ -133,21 +139,24 @@ msgid ""
 "unregister webhooks and register them again to get automatic updates about "
 "sent emails:"
 msgstr ""
+"Si cambias la configuración de Mailgun, tu URL de Odoo o tu dominio de "
+"envío, desregistra los webhooks y regístralos de nuevo para obtener "
+"actualizaciones automáticas sobre los emails enviados:"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_validation_key
 msgid "Key used to validate emails."
-msgstr ""
+msgstr "Clave utilizada para validar los correos electrónicos."
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhooks_domain
 msgid "Leave empty to use the base Odoo URL."
-msgstr ""
+msgstr "Dejar vacío para usar la URL base de Odoo."
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_domain
 msgid "Leave empty to use the catch-all domain."
-msgstr ""
+msgstr "Dejar vacío para utilizar el dominio catch-all."
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_url
@@ -155,22 +164,23 @@ msgid ""
 "Leave this empty if your API endpoint is the default (https://api.mailgun."
 "net/)."
 msgstr ""
+"Déjelo vacío si su punto final de API es el predeterminado (https://api."
+"mailgun.net/)."
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
-#, fuzzy
 msgid "Mail Server"
-msgstr "ir.mail_server"
+msgstr "Servidor de Correo"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_email
 msgid "MailTracking email"
-msgstr "MailTracking email"
+msgstr "Email de seguimiento de correo"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_event
 msgid "MailTracking event"
-msgstr "MailTracking event"
+msgstr "Evento de seguimiento de correo"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
@@ -181,17 +191,17 @@ msgstr "Mailgun"
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "Mailgun &gt; Settings &gt; API keys"
-msgstr ""
+msgstr "Mailgun &gt; Configuración &gt; Claves API"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_url
 msgid "Mailgun API endpoint"
-msgstr ""
+msgstr "Punto final de la API de Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_key
 msgid "Mailgun API key"
-msgstr ""
+msgstr "Clave API de Mailgun"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
@@ -202,42 +212,42 @@ msgstr "Error de Mailgun. No se ha devuelto el valor de verificación de buzón"
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event__mailgun_id
 msgid "Mailgun Event ID"
-msgstr "Mailgun Event ID"
+msgstr "ID de Evento de Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_domain
 msgid "Mailgun domain"
-msgstr ""
+msgstr "Dominio Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.constraint,message:mail_tracking_mailgun.constraint_mail_tracking_event_mailgun_id_unique
 msgid "Mailgun event IDs must be unique!"
-msgstr ""
+msgstr "¡Los ID de los eventos de Mailgun deben ser únicos!"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_validation_key
 msgid "Mailgun validation key"
-msgstr ""
+msgstr "Clave de validación Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhook_signing_key
 msgid "Mailgun webhook signing key"
-msgstr ""
+msgstr "Clave de firma del webhook Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhooks_domain
 msgid "Mailgun webhooks domain"
-msgstr ""
+msgstr "Dominio de webhooks de Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "Obtain keys in"
-msgstr ""
+msgstr "Obtener llaves en"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "Other settings:"
-msgstr ""
+msgstr "Otras Configuraciones:"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
@@ -247,29 +257,30 @@ msgstr "Resincronizar Mailgun"
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "Register Mailgun webhooks"
-msgstr ""
+msgstr "Registrar los webhooks de Mailgun"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Request is too old"
-msgstr ""
+msgstr "La solicitud es demasiado antigua"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Request was already processed"
-msgstr ""
+msgstr "La solicitud ya ha sido procesada"
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_key
 msgid "Secret API key used to authenticate with Mailgun."
-msgstr ""
+msgstr "Clave API secreta utilizada para autenticarse con Mailgun."
 
 #. module: mail_tracking_mailgun
 #: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhook_signing_key
 msgid "Secret key used to validate incoming webhooks payload."
 msgstr ""
+"Clave secreta utilizada para validar la carga útil de los webhooks entrantes."
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
@@ -288,11 +299,13 @@ msgid ""
 "This will unregister ALL webhooks from Mailgun, which can include webhooks "
 "for other apps."
 msgstr ""
+"Esto anulará el registro de TODOS los webhooks de Mailgun, que pueden "
+"incluir webhooks para otras aplicaciones."
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "Unregister Mailgun webhooks"
-msgstr ""
+msgstr "Anular el registro de los webhooks de Mailgun"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
@@ -303,13 +316,13 @@ msgstr "Desmarcar como rebotado"
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "Wrong database for event!"
-msgstr ""
+msgstr "¡Base de datos incorrecta para el evento!"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Wrong signature"
-msgstr ""
+msgstr "Firma incorrecta"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
@@ -324,43 +337,43 @@ msgstr ""
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "abcde0123456789abcde0123456789ab"
-msgstr ""
+msgstr "abcde0123456789abcde0123456789ab"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "enhances Odoo's mail tracking features."
-msgstr ""
+msgstr "mejora las funciones de seguimiento del correo de Odoo."
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "https://api.mailgun.net"
-msgstr ""
+msgstr "https://api.mailgun.net"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "https://odoo.example.com"
-msgstr ""
+msgstr "https://odoo.example.com"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "key-abcde0123456789abcde0123456789ab"
-msgstr ""
+msgstr "Clave-abcde0123456789abcde0123456789ab"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "odoo.example.com"
-msgstr ""
+msgstr "odoo.example.com"
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "pubkey-abcde0123456789abcde0123456789ab"
-msgstr ""
+msgstr "pubclave-abcde0123456789abcde0123456789ab"
 
 #. module: mail_tracking_mailgun
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid "unknown"
-msgstr ""
+msgstr "desconocido"
 
 #, python-format
 #~ msgid ""
