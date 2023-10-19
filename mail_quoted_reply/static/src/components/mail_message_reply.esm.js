@@ -17,7 +17,6 @@ patch(
         setup() {
             this._super();
             onMounted(() => {
-                var actionLists = document.querySelectorAll(".o_MessageActionList");
                 var MessageQuotedReplyIcon = $(
                     qweb.render("MessageQuotedReplyButton", this)
                 )[0];
@@ -29,9 +28,7 @@ patch(
                         ).onClickMailMessageReply
                     );
                 }
-                actionLists.forEach((actionList) => {
-                    actionList.append(MessageQuotedReplyIcon);
-                });
+                this.el.append(MessageQuotedReplyIcon);
             });
         },
     }
