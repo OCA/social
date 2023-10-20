@@ -6,35 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-10-28 13:30+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model,name:microsoft_outlook_single_tenant.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes Configuración"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_res_config_settings__microsoft_outlook_directory_tenant_id
 msgid "Directory (tenant) ID"
-msgstr ""
+msgstr "ID del directorio (inquilino)"
 
 #. module: microsoft_outlook_single_tenant
 #: model_terms:ir.ui.view,arch_db:microsoft_outlook_single_tenant.res_config_settings_view_form
 msgid "Directory Tenant ID"
-msgstr ""
+msgstr "Directorio ID inquilino"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model,name:microsoft_outlook_single_tenant.model_microsoft_outlook_mixin
 msgid "Microsoft Outlook Mixin"
-msgstr ""
+msgstr "Mezclador de Microsoft Outlook"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,help:microsoft_outlook_single_tenant.field_res_config_settings__microsoft_outlook_directory_tenant_id
 msgid "Place here Tenant ID (or Application ID), if single-tenant application"
 msgstr ""
+"Coloque aquí el ID del inquilino (o ID de la solicitud), si se trata de una "
+"solicitud de un solo inquilino"
