@@ -19,6 +19,4 @@ class AccountInvoiceSend(models.TransientModel):
             res["can_attach_attachment"] = True  # pragma: no cover
         return res
 
-    can_attach_attachment = fields.Boolean(
-        string="Can Attach Attachment",
-    )
+    can_attach_attachment = fields.Boolean()

@@ -3,7 +3,7 @@
 from odoo.tests import Form, common
 
 
-class TestMailAttachExistingAttachmentAccount(common.SavepointCase):
+class TestMailAttachExistingAttachmentAccount(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
