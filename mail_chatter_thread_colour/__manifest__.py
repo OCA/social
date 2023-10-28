@@ -5,7 +5,7 @@
     "name": "Mail Chatter Thread Colour",
     "summary": """
         Allow to change the colour of threads""",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "license": "AGPL-3",
     "author": "CreuBlanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
