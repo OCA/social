@@ -62,7 +62,6 @@
     <field name="model">mail.tracking.event</field>
     <field name="arch" type="xml">
         <tree
-                string="MailTracking events"
                 create="false"
                 edit="false"
                 delete="false"
