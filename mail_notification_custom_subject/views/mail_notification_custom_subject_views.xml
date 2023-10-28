@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <data>
         <record model="ir.ui.view" id="mail_notification_custom_subject_form">
             <field name="name">mail.message.custom.subject.form</field>
             <field name="model">mail.message.custom.subject</field>
@@ -13,9 +12,9 @@
                         </div>
                         <group>
                             <field
-                                name="subject_template"
-                                placeholder="Subject (placeholders may be used here)"
-                            />
+                            name="subject_template"
+                            placeholder="Subject (placeholders may be used here)"
+                        />
                             <field name="model_id" options="{'no_create': True}" />
                             <field name="subtype_ids" widget="many2many_tags" />
                             <field name="position" />
@@ -39,9 +38,9 @@
         </record>
 
         <record
-            model="ir.actions.act_window"
-            id="action_mail_notification_custom_subject_tree_all"
-        >
+        model="ir.actions.act_window"
+        id="action_mail_notification_custom_subject_tree_all"
+    >
             <field name="name">Subject Replacement Templates</field>
             <field name="res_model">mail.message.custom.subject</field>
             <field name="view_mode">form,tree</field>
@@ -49,11 +48,9 @@
         </record>
 
         <menuitem
-            id="menu_mail_notification_custom_subject"
-            parent="base.menu_email"
-            action="action_mail_notification_custom_subject_tree_all"
-            sequence="21"
-        />
-
-    </data>
+        id="menu_mail_notification_custom_subject"
+        parent="base.menu_email"
+        action="action_mail_notification_custom_subject_tree_all"
+        sequence="21"
+    />
 </odoo>

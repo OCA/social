@@ -45,7 +45,6 @@
                 <div>
                     <field name="tracking_event_ids">
                         <tree
-                                string="Tracking events"
                                 decoration-muted="event_type == 'deferral'"
                                 decoration-danger="event_type in ('hard_bounce', 'soft_bounce', 'spam', 'reject')"
                                 decoration-info="event_type in ('unsub', 'click', 'open')"
@@ -70,7 +69,6 @@
     <field name="model">mail.tracking.email</field>
     <field name="arch" type="xml">
         <tree
-                string="MailTracking emails"
                 create="false"
                 edit="false"
                 delete="false"

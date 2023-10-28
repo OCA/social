@@ -92,11 +92,6 @@ msgid "Search"
 msgstr ""
 
 #. module: mail_improved_tracking_value
-#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
-msgid "Tracking change list"
-msgstr ""
-
-#. module: mail_improved_tracking_value
 #: model:ir.actions.act_window,name:mail_improved_tracking_value.action_view_tracking_changes
 msgid "View last tracked changes"
 msgstr ""
