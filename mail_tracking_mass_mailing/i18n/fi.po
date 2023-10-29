@@ -145,7 +145,6 @@ msgstr "Lähtevät postit"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__tracking_event_ids
-#: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "Tracking events"
 msgstr "Seurattavat tapahtumat"
 
