@@ -108,7 +108,7 @@ odoo.define("mail_preview_base.preview", function (require) {
         }),
         init: function () {
             this._super.apply(this, arguments);
-            this.mimetype_value = this.recordData.mimetype;
+            this.mimetype_value = this.recordData[this.attrs.mimetype];
         },
         _previewFile: function (event) {
             event.stopPropagation();
