@@ -9,31 +9,35 @@ from unittest import mock
 from odoo.tests.common import TransactionCase, tagged
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import DISABLED_MAIL_CONTEXT
+
 mock_send_email = "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
 
 
 @tagged("-at_install", "post_install")
 class TestMassMailing(TransactionCase):
-    def setUp(self, *args, **kwargs):
-        super().setUp(*args, **kwargs)
-        self.list = self.env["mailing.list"].create({"name": "Test mail tracking"})
-        self.list.name = "{} #{}".format(self.list.name, self.list.id)
-        self.contact_a = self.env["mailing.contact"].create(
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
+        cls.list = cls.env["mailing.list"].create({"name": "Test mail tracking"})
+        cls.list.name = "{} #{}".format(cls.list.name, cls.list.id)
+        cls.contact_a = cls.env["mailing.contact"].create(
             {
-                "list_ids": [(6, 0, self.list.ids)],
+                "list_ids": [(6, 0, cls.list.ids)],
                 "name": "Test contact A",
                 "email": "contact_a@example.com",
             }
         )
-        self.mailing = self.env["mailing.mailing"].create(
+        cls.mailing = cls.env["mailing.mailing"].create(
             {
                 "subject": "Test subject",
                 "email_from": "from@example.com",
-                "mailing_model_id": self.env.ref(
+                "mailing_model_id": cls.env.ref(
                     "mass_mailing.model_mailing_contact"
                 ).id,
-                "mailing_domain": "[('list_ids', 'in', %d)]" % self.list.id,
-                "contact_list_ids": [(6, False, [self.list.id])],
+                "mailing_domain": "[('list_ids', 'in', %d)]" % cls.list.id,
+                "contact_list_ids": [(6, False, [cls.list.id])],
                 "body_html": "<p>Test email body</p>",
                 "reply_to_mode": "new",
             }
