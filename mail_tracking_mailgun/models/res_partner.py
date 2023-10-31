@@ -8,8 +8,10 @@ from urllib.parse import urljoin
 
 import requests
 
-from odoo import SUPERUSER_ID, _, api, models
+from odoo import SUPERUSER_ID, _, models
 from odoo.exceptions import UserError
+
+from ..wizards.res_config_settings import MAILGUN_TIMEOUT
 
 
 class ResPartner(models.Model):
@@ -49,6 +51,11 @@ class ResPartner(models.Model):
         https://documentation.mailgun.com/en/latest/api-email-validation.html
         """
         params = self.env["mail.tracking.email"]._mailgun_values()
+        timeout = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
+        )
         if not params.validation_key:
             raise UserError(
                 _(
@@ -61,9 +68,7 @@ class ResPartner(models.Model):
                 urljoin(params.api_url, "/v3/address/validate"),
                 auth=("api", params.validation_key),
                 params={"address": partner.email, "mailbox_verification": True},
-                timeout=self.env["ir.config_parameter"]
-                .sudo()
-                .get_param("mailgun.timeout", 10),
+                timeout=timeout,
             )
             if (
                 not res
@@ -135,13 +140,16 @@ class ResPartner(models.Model):
         api_key, api_url, domain, *__ = self.env[
             "mail.tracking.email"
         ]._mailgun_values()
+        timeout = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
+        )
         for partner in self:
             res = requests.get(
                 urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
                 auth=("api", api_key),
-                timeout=self.env["ir.config_parameter"]
-                .sudo()
-                .get_param("mailgun.timeout", 10),
+                timeout=timeout,
             )
             if res.status_code == 200 and not partner.email_bounced:
                 partner.email_bounced = True
@@ -157,14 +165,17 @@ class ResPartner(models.Model):
         api_key, api_url, domain, *__ = self.env[
             "mail.tracking.email"
         ]._mailgun_values()
+        timeout = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
+        )
         for partner in self:
             res = requests.post(
                 urljoin(api_url, "/v3/%s/bounces" % domain),
                 auth=("api", api_key),
                 data={"address": partner.email},
-                timeout=self.env["ir.config_parameter"]
-                .sudo()
-                .get_param("mailgun.timeout", 10),
+                timeout=timeout,
             )
             partner.email_bounced = res.status_code == 200 and not partner.email_bounced
 
@@ -177,32 +188,16 @@ class ResPartner(models.Model):
         api_key, api_url, domain, *__ = self.env[
             "mail.tracking.email"
         ]._mailgun_values()
+        timeout = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
+        )
         for partner in self:
             res = requests.delete(
                 urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
                 auth=("api", api_key),
-                timeout=self.env["ir.config_parameter"]
-                .sudo()
-                .get_param("mailgun.timeout", 10),
+                timeout=timeout,
             )
             if res.status_code in (200, 404) and partner.email_bounced:
                 partner.email_bounced = False
-
-    def _autocheck_partner_email(self):
-        for partner in self:
-            partner.with_context(mailgun_auto_check=True).check_email_validity()
-
-    @api.model
-    def create(self, vals):
-        if "email" in vals and self.env["ir.config_parameter"].sudo().get_param(
-            "mailgun.auto_check_partner_email"
-        ):
-            self._autocheck_partner_email()
-        return super().create(vals)
-
-    def write(self, vals):
-        if "email" in vals and self.env["ir.config_parameter"].sudo().get_param(
-            "mailgun.auto_check_partner_email"
-        ):
-            self._autocheck_partner_email()
-        return super().write(vals)
