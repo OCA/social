@@ -19,6 +19,8 @@ WEBHOOK_EVENTS = (
     "temporary_fail",
     "unsubscribed",
 )
+# Default Mailgun timeout when no parameter is set
+MAILGUN_TIMEOUT = 10
 
 
 class ResConfigSettings(models.TransientModel):
@@ -61,11 +63,6 @@ class ResConfigSettings(models.TransientModel):
         config_parameter="mailgun.webhooks_domain",
         help="Leave empty to use the base Odoo URL.",
     )
-    mail_tracking_mailgun_auto_check_partner_emails = fields.Boolean(
-        string="Check partner emails automatically",
-        config_parameter="mailgun.auto_check_partner_email",
-        help="Attempt to check partner emails always. This may cost money.",
-    )
 
     def get_values(self):
         """Is Mailgun enabled?"""
@@ -84,7 +81,7 @@ class ResConfigSettings(models.TransientModel):
             auth=("api", params.api_key),
             timeout=self.env["ir.config_parameter"]
             .sudo()
-            .get_param("mailgun.timeout", 10),
+            .get_param("mailgun.timeout", MAILGUN_TIMEOUT),
         )
         webhooks.raise_for_status()
         for event, data in webhooks.json()["webhooks"].items():
@@ -105,7 +102,7 @@ class ResConfigSettings(models.TransientModel):
                 auth=("api", params.api_key),
                 timeout=self.env["ir.config_parameter"]
                 .sudo()
-                .get_param("mailgun.timeout", 10),
+                .get_param("mailgun.timeout", MAILGUN_TIMEOUT),
             )
             response.raise_for_status()
 
@@ -124,7 +121,7 @@ class ResConfigSettings(models.TransientModel):
                 data={"id": event, "url": [odoo_webhook]},
                 timeout=self.env["ir.config_parameter"]
                 .sudo()
-                .get_param("mailgun.timeout", 10),
+                .get_param("mailgun.timeout", MAILGUN_TIMEOUT),
             )
             # Assert correct registration
             response.raise_for_status()

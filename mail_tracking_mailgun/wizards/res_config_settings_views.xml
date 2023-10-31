@@ -65,23 +65,12 @@
                                             name="mail_tracking_mailgun_validation_key"
                                             password="True"
                                             placeholder="pubkey-abcde0123456789abcde0123456789ab"
-                                            attrs="{'required': [('mail_tracking_mailgun_auto_check_partner_emails', '=', True)]}"
                                         />
                                     </div>
                                 </div>
                                 <div class="col-12 col-lg-6">
                                     <div class="text-muted mt16 mb4">
                                         Other settings:
-                                    </div>
-                                    <div class="mt16">
-                                        <field
-                                            name="mail_tracking_mailgun_auto_check_partner_emails"
-                                            class="oe_inline"
-                                        />
-                                        <label
-                                            for="mail_tracking_mailgun_auto_check_partner_emails"
-                                            class="o_light_label"
-                                        />
                                     </div>
                                     <div class="row mt16">
                                         <label

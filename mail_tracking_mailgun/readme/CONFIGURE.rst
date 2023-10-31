@@ -7,10 +7,6 @@ To configure this module, you need to:
 #. Optionally click *Unregister Mailgun webhooks* and accept.
 #. Click *Register Mailgun webhooks*.
 
-You can also config partner email autocheck with this system parameter:
-
-- `mailgun.auto_check_partner_email`: Set it to True.
-
 You can also config timeout for mailgun with this system parameter:
 
 - `mailgun.timeout`: Set it to a number of seconds.

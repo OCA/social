@@ -21,6 +21,7 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid ""
@@ -31,6 +32,7 @@ msgstr ""
 "fornecedor da caixa de correio não suporta verificação de email"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid ""
@@ -41,6 +43,7 @@ msgstr ""
 "maneira a evitar problemas de envio"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid ""
@@ -51,15 +54,11 @@ msgstr ""
 "evitar problemas de envio"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "A Mailgun domain value is needed!"
 msgstr "É necessário um valor no domínio do Mailgun!"
-
-#. module: mail_tracking_mailgun
-#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_auto_check_partner_emails
-msgid "Attempt to check partner emails always. This may cost money."
-msgstr ""
 
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
@@ -70,11 +69,6 @@ msgstr "Verificar Mailgun"
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
 msgid "Check email validity"
 msgstr "Verificar validade do email"
-
-#. module: mail_tracking_mailgun
-#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_auto_check_partner_emails
-msgid "Check partner emails automatically"
-msgstr ""
 
 #. module: mail_tracking_mailgun
 #: model:ir.model,name:mail_tracking_mailgun.model_res_config_settings
@@ -92,12 +86,14 @@ msgid "Contact"
 msgstr "Contacto"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "Couldn't retrieve Mailgun information"
 msgstr "Não foi possível obter informação do Mailgun"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid ""
@@ -117,12 +113,14 @@ msgid "Enable to enhance mail tracking with Mailgun"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid "Error %s trying to check mailof connection"
 msgstr "Erro %s ao tentar verificar o mailof da conexão"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "Event information not longer stored"
@@ -195,6 +193,7 @@ msgid "Mailgun API key"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid "Mailgun Error. Mailbox verification value wasn't returned"
@@ -252,12 +251,14 @@ msgid "Register Mailgun webhooks"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Request is too old"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Request was already processed"
@@ -279,6 +280,7 @@ msgid "Set Bounced"
 msgstr "Marcar como Devolvido"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "There is no Mailgun API key!"
@@ -302,18 +304,21 @@ msgid "Unset Bounced"
 msgstr "Desmarcar Devolvido"
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
 #, python-format
 msgid "Wrong database for event!"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Wrong signature"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid ""
@@ -359,6 +364,7 @@ msgid "pubkey-abcde0123456789abcde0123456789ab"
 msgstr ""
 
 #. module: mail_tracking_mailgun
+#. odoo-python
 #: code:addons/mail_tracking_mailgun/models/res_partner.py:0
 #, python-format
 msgid "unknown"

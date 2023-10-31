@@ -14,6 +14,8 @@ from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import email_split
 
+from ..wizards.res_config_settings import MAILGUN_TIMEOUT
+
 _logger = logging.getLogger(__name__)
 
 MailgunParameters = namedtuple(
@@ -201,6 +203,11 @@ class MailTrackingEmail(models.Model):
         API Documentation:
         https://documentation.mailgun.com/en/latest/api-events.html
         """
+        timeout = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
+        )
         api_key, api_url, domain, *__ = self._mailgun_values()
         for tracking in self.filtered("message_id"):
             message_id = tracking.message_id.replace("<", "").replace(">", "")
@@ -217,9 +224,7 @@ class MailTrackingEmail(models.Model):
                     url,
                     auth=("api", api_key),
                     params=params,
-                    timeout=self.env["ir.config_parameter"]
-                    .sudo()
-                    .get_param("mailgun.timeout", 10),
+                    timeout=timeout,
                 )
                 if not res or res.status_code != 200:
                     raise UserError(_("Couldn't retrieve Mailgun information"))

@@ -12,8 +12,9 @@ from odoo import _
 from odoo.exceptions import ValidationError
 from odoo.http import request, route
 
+from odoo.addons.web.controllers.utils import ensure_db
+
 from ...mail_tracking.controllers import main
-from ...web.controllers.main import ensure_db
 
 _logger = logging.getLogger(__name__)
 

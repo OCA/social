@@ -4,8 +4,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from contextlib import contextmanager, suppress
+from unittest.mock import patch
 
-import mock
 from freezegun import freeze_time
 from werkzeug.exceptions import NotAcceptable
 
@@ -58,7 +58,6 @@ class TestMailgun(TransactionCase):
             cf.mail_tracking_mailgun_validation_key
         ) = "key-12345678901234567890123456789012"
         cf.mail_tracking_mailgun_domain = False
-        cf.mail_tracking_mailgun_auto_check_partner_emails = False
         config = cf.save()
         # Done this way as `hr_expense` adds this field again as readonly, and thus Form
         # doesn't process it correctly
@@ -111,7 +110,7 @@ class TestMailgun(TransactionCase):
         # Imitate Mailgun JSON request
         mock = MockRequest(self.env)
         with mock as request:
-            request.jsonrequest = {
+            request.dispatcher.jsonrequest = {
                 "signature": {
                     "timestamp": self.timestamp,
                     "token": self.token,
@@ -368,7 +367,7 @@ class TestMailgun(TransactionCase):
         self.assertEqual(event.error_description, reason)
         self.assertEqual(event.error_details, description)
 
-    @mock.patch(_packagepath + ".models.res_partner.requests")
+    @patch(f"{_packagepath}.models.res_partner.requests")
     def test_email_validity(self, mock_request):
         self.partner.email_bounced = False
         mock_request.get.return_value.apparent_encoding = "ascii"
@@ -377,10 +376,6 @@ class TestMailgun(TransactionCase):
             "is_valid": True,
             "mailbox_verification": "true",
         }
-        # Trigger email auto validation in partner
-        self.env["ir.config_parameter"].set_param(
-            "mailgun.auto_check_partner_email", "True"
-        )
         self.partner.email = "info@tecnativa.com"
         self.assertFalse(self.partner.email_bounced)
         self.partner.email = "xoxoxoxo@tecnativa.com"
@@ -409,7 +404,7 @@ class TestMailgun(TransactionCase):
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
 
-    @mock.patch(_packagepath + ".models.res_partner.requests")
+    @patch(f"{_packagepath}.models.res_partner.requests")
     def test_email_validity_exceptions(self, mock_request):
         mock_request.get.return_value.status_code = 404
         with self.assertRaises(UserError):
@@ -418,7 +413,7 @@ class TestMailgun(TransactionCase):
         with self.assertRaises(UserError):
             self.partner.check_email_validity()
 
-    @mock.patch(_packagepath + ".models.res_partner.requests")
+    @patch(f"{_packagepath}.models.res_partner.requests")
     def test_bounced(self, mock_request):
         self.partner.email_bounced = True
         mock_request.get.return_value.status_code = 404
@@ -440,7 +435,7 @@ class TestMailgun(TransactionCase):
         self.partner._email_bounced_set("test_error", False)
         self.assertEqual(len(self.partner.message_ids), message_number)
 
-    @mock.patch(_packagepath + ".models.mail_tracking_email.requests")
+    @patch(f"{_packagepath}.models.mail_tracking_email.requests")
     def test_manual_check(self, mock_request):
         mock_request.get.return_value.json.return_value = self.response
         mock_request.get.return_value.status_code = 200
@@ -451,7 +446,7 @@ class TestMailgun(TransactionCase):
         self.assertTrue(event)
         self.assertEqual(event.event_type, self.response["items"][0]["event"])
 
-    @mock.patch(_packagepath + ".models.mail_tracking_email.requests")
+    @patch(f"{_packagepath}.models.mail_tracking_email.requests")
     def test_manual_check_exceptions(self, mock_request):
         mock_request.get.return_value.status_code = 404
         with self.assertRaises(UserError):
