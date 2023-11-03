@@ -192,6 +192,8 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_team.field_account_move__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_account_payment__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_account_setup_bank_manual_config__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_event_event__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_event_registration__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_mixin__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_mailing_mailing__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_product_product__activity_team_user_ids
