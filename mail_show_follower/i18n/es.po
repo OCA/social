@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-08 13:02+0000\n"
+"PO-Revision-Date: 2023-11-08 13:36+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -73,7 +73,7 @@ msgstr "Mostrar Usuarios Internos en CC"
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_users__show_in_cc
 msgid "Show in CC"
-msgstr ""
+msgstr "Mostrar en CC"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,help:mail_show_follower.field_res_company__show_followers_partner_format
@@ -84,25 +84,29 @@ msgid ""
 "%(partner_email)s = Partner Email\n"
 "%(partner_email_domain)s = Partner Email Domain"
 msgstr ""
+"Parámetros admitidos:\n"
+"%(partner_name)s = Nombre del socio\n"
+"%(partner_email)s = Correo electrónico del socio\n"
+"%(partner_email_domain)s = Dominio de correo electrónico del socio"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_response_warning
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_response_warning
 msgid "Text 'Replies'"
-msgstr ""
+msgstr "Texto 'Respuestas'"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_sent_to
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_sent_to
 msgid "Text 'Sent to'"
-msgstr ""
+msgstr "Texto 'Enviado a'"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "This message has been sent to"
-msgstr ""
+msgstr "Este mensaje ha sido enviado a"
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_users
 msgid "User"
-msgstr ""
+msgstr "Usuario"
