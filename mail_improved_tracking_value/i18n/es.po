@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-09 17:37+0000\n"
+"PO-Revision-Date: 2023-11-09 20:38+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -62,24 +62,24 @@ msgstr "Modelo"
 #. module: mail_improved_tracking_value
 #: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__new_value_formatted
 msgid "New value"
-msgstr ""
+msgstr "Nuevo valor"
 
 #. module: mail_improved_tracking_value
 #: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__old_value_formatted
 msgid "Old value"
-msgstr ""
+msgstr "Valor antiguo"
 
 #. module: mail_improved_tracking_value
 #: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
 msgid "On"
-msgstr ""
+msgstr "Para el"
 
 #. module: mail_improved_tracking_value
 #: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
 msgid "Search"
-msgstr ""
+msgstr "Buscar"
 
 #. module: mail_improved_tracking_value
 #: model:ir.actions.act_window,name:mail_improved_tracking_value.action_view_tracking_changes
 msgid "View last tracked changes"
-msgstr ""
+msgstr "Ver los últimos cambios rastreados"
