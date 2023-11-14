@@ -7,6 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='datas']" position="attributes">
                 <attribute name="widget">preview_binary</attribute>
+                <attribute name="mimetype">mimetype</attribute>
             </xpath>
         </field>
     </record>
