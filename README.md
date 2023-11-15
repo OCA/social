@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 15.0.1.0.1 |  | Base Search Mail Content
-[email_template_qweb](email_template_qweb/) | 15.0.1.0.0 |  | Use the QWeb templating mechanism for emails
+[email_template_qweb](email_template_qweb/) | 15.0.1.0.1 |  | Use the QWeb templating mechanism for emails
 [fetchmail_mail_activity_team_activity](fetchmail_mail_activity_team_activity/) | 15.0.1.0.0 |  | * Uses mail.activity.team to configure automatic activities when mails arrive for the specified models. * The configuration to add RMA and PO models (Settings --> Technical --> Activity Teams menu)
 [mail_activity_board](mail_activity_board/) | 15.0.2.1.1 |  | Add Activity Boards
 [mail_activity_creator](mail_activity_creator/) | 15.0.1.0.1 |  | Show activities creator
