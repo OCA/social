@@ -30,9 +30,11 @@ class MailTemplate(models.Model):
                     not fields or "body_html" in fields
                 ):
                     for record in self_with_lang.env[self.model].browse(res_id):
-                        body_html = self_with_lang.body_view_id._render(
+                        values = self_with_lang._render_eval_context()
+                        values.update(
                             {"object": record, "email_template": self_with_lang}
                         )
+                        body_html = self_with_lang.body_view_id._render(values)
                         # Some wizards, like when sending a sales order, need this
                         # fix to display accents correctly
                         body_html = tools.ustr(body_html)
