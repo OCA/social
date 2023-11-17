@@ -50,7 +50,7 @@ class TestMassMailingEventRegistrationExclude(TransactionCase):
         )
 
     def test_mailing_contact(self):
-        domain = [("list_ids", "in", [self.contact_list.id]), ("opt_out", "=", False)]
+        domain = [("list_ids", "in", [self.contact_list.id])]
         mass_mailing = (
             self.env["mailing.mailing"]
             .create(
