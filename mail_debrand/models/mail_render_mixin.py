@@ -86,8 +86,7 @@ class MailRenderMixin(models.AbstractModel):
             res_ids,
             engine=engine,
             add_context=add_context,
-            options=options,
-            post_process=post_process,
+            options=options
         )
 
         for key in res_ids:
