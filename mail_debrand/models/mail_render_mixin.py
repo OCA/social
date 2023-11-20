@@ -18,7 +18,7 @@ class MailRenderMixin(models.AbstractModel):
         if len(value) < 20:
             return value
         # value can be bytes type; ensure we get a proper string
-        if type(value) is bytes:
+        if isinstance(value, bytes):
             back_to_bytes = True
             value = value.decode()
         else:
@@ -41,7 +41,7 @@ class MailRenderMixin(models.AbstractModel):
                     parent.getparent().remove(parent)
                 else:
                     # also here can be powered by
-                    if parent.tag == "td" and parent.getparent():
+                    if remove_parent and parent.getparent() is not None:
                         parent.getparent().remove(parent)
                     else:
                         parent.remove(elem)
@@ -87,7 +87,6 @@ class MailRenderMixin(models.AbstractModel):
             engine=engine,
             add_context=add_context,
             options=options,
-            post_process=post_process,
         )
 
         for key in res_ids:
