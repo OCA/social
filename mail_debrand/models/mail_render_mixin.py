@@ -41,7 +41,7 @@ class MailRenderMixin(models.AbstractModel):
                     parent.getparent().remove(parent)
                 else:
                     # also here can be powered by
-                    if parent.tag == "td" and parent.getparent():
+                    if (remove_parent and parent.getparent() is not None) or (len(elem.xpath('preceding-sibling')) == 0 and len(elem.xpath('following-sibling')) == 0):
                         parent.getparent().remove(parent)
                     else:
                         parent.remove(elem)
