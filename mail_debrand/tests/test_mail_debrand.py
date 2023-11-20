@@ -82,4 +82,4 @@ class TestMailDebrand(common.TransactionCase):
         }
         # No exception expected
         message = MailMessage.create(email_values)
-        self.assertTrue(original_body in message._send_prepare_body())
+        self.assertTrue(original_body in message._prepare_outgoing_body())
