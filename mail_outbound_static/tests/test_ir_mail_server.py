@@ -33,7 +33,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         message_file = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "test.msg"
         )
-        with open(message_file, "r") as fh:
+        with open(message_file) as fh:
             cls.message = message_from_string(fh.read())
 
     @classmethod
@@ -139,10 +139,8 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         # A mail server is configured for the email
         with self.mock_smtplib_connection():
             message = self._send_mail(self.message, mail_server_id=mail_server_id)
-        self.assertEqual(message["From"], '"{}" <{}>'.format(user, self.email_from))
-        self.assertEqual(
-            message["Return-Path"], '"{}" <{}>'.format(user, self.email_from)
-        )
+        self.assertEqual(message["From"], f'"{user}" <{self.email_from}>')
+        self.assertEqual(message["Return-Path"], f'"{user}" <{self.email_from}>')
 
     def test_01_from_outgoing_server_domainone(self):
         self._init_mail_server_domain_whilelist_based()
@@ -161,8 +159,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.assertEqual(
             used_mail_server,
             expected_mail_server,
-            "It using %s but we expect to use %s"
-            % (used_mail_server.name, expected_mail_server.name),
+            f"It using {used_mail_server.name} but we expect to use {expected_mail_server.name}",
         )
 
     def test_02_from_outgoing_server_domaintwo(self):
@@ -182,8 +179,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.assertEqual(
             used_mail_server,
             expected_mail_server,
-            "It using %s but we expect to use %s"
-            % (used_mail_server.name, expected_mail_server.name),
+            f"It using {used_mail_server.name} but we expect to use {expected_mail_server.name}",
         )
 
     def test_03_from_outgoing_server_another(self):
@@ -205,8 +201,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.assertEqual(
             used_mail_server,
             expected_mail_server,
-            "It using %s but we expect to use %s"
-            % (used_mail_server.name, expected_mail_server.name),
+            f"It using {used_mail_server.name} but we expect to use {expected_mail_server.name}",
         )
 
     def test_04_from_outgoing_server_none_use_config(self):
@@ -282,8 +277,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.assertEqual(
             used_mail_server,
             expected_mail_server,
-            "It using %s but we expect to use %s"
-            % (used_mail_server.name, expected_mail_server.name),
+            f"It using {used_mail_server.name} but we expect to use {expected_mail_server.name}",
         )
 
     def test_07_from_outgoing_server_multidomain_1(self):
@@ -303,8 +297,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.assertEqual(
             used_mail_server,
             expected_mail_server,
-            "It using %s but we expect to use %s"
-            % (used_mail_server.name, expected_mail_server.name),
+            f"It using {used_mail_server.name} but we expect to use {expected_mail_server.name}",
         )
 
     def test_08_from_outgoing_server_multidomain_3(self):
@@ -324,8 +317,7 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
         self.assertEqual(
             used_mail_server,
             expected_mail_server,
-            "It using %s but we expect to use %s"
-            % (used_mail_server.name, expected_mail_server.name),
+            f"It using {used_mail_server.name} but we expect to use {expected_mail_server.name}",
         )
 
     def test_09_not_valid_domain_whitelist(self):
