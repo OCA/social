@@ -9,7 +9,6 @@ from odoo.exceptions import ValidationError
 
 
 class IrMailServer(models.Model):
-
     _inherit = "ir.mail_server"
 
     smtp_from = fields.Char(
@@ -56,7 +55,7 @@ class IrMailServer(models.Model):
             r"(([\da-zA-Z])([_\w-]{,62})\.){,127}(([\da-zA-Z])"
             r"[_\w-]{,61})?([\da-zA-Z]\.((xn\-\-[a-zA-Z\d]+)|([a-zA-Z\d]{2,})))"
         )
-        domain_regex = "{}$".format(domain_regex)
+        domain_regex = f"{domain_regex}$"
         valid_domain_name_regex = re.compile(domain_regex, re.IGNORECASE)
         domain_name = domain_name.lower().strip()
         return True if re.match(valid_domain_name_regex, domain_name) else False
@@ -117,9 +116,7 @@ class IrMailServer(models.Model):
             email_domain=email_domain,
             mail_server_id=mail_server_id,
         )
-        return super(IrMailServer, self).send_email(
-            message, mail_server_id, smtp_server, *args, **kwargs
-        )
+        return super().send_email(message, mail_server_id, smtp_server, *args, **kwargs)
 
     @tools.ormcache("email_domain")
     def _get_mail_sever(self, email_domain):
