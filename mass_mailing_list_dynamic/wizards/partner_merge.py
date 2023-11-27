@@ -11,5 +11,7 @@ class BasePartnerMergeAutomaticWizard(models.TransientModel):
         return super(
             BasePartnerMergeAutomaticWizard, self.with_context(syncing=True)
         )._merge(
-            partner_ids=partner_ids, dst_partner=dst_partner, extra_checks=extra_checks,
+            partner_ids=partner_ids,
+            dst_partner=dst_partner.with_context(syncing=True),
+            extra_checks=extra_checks,
         )
