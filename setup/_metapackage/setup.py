@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo-addon-mail_composer_cc_bcc>=15.0dev,<15.1dev',
         'odoo-addon-mail_debrand>=15.0dev,<15.1dev',
         'odoo-addon-mail_layout_force>=15.0dev,<15.1dev',
+        'odoo-addon-mail_layout_preview>=15.0dev,<15.1dev',
         'odoo-addon-mail_notification_custom_subject>=15.0dev,<15.1dev',
         'odoo-addon-mail_optional_autofollow>=15.0dev,<15.1dev',
         'odoo-addon-mail_optional_follower_notification>=15.0dev,<15.1dev',
