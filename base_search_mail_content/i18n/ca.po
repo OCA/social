@@ -41,6 +41,8 @@ msgstr "Camp"
 #: model:ir.model.fields,field_description:base_search_mail_content.field_account_reconcile_model__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_account_setup_bank_manual_config__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_event_event__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_event_registration__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__message_content
@@ -70,6 +72,8 @@ msgstr "Contingut del missatge"
 #: model:ir.model.fields,help:base_search_mail_content.field_account_reconcile_model__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_account_setup_bank_manual_config__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_calendar_event__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_event_event__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_event_registration__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread__message_content
