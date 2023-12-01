@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-11-03 13:39+0000\n"
+"PO-Revision-Date: 2023-12-01 12:33+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -29,7 +29,7 @@ msgstr "Attività"
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity_mixin
 msgid "Activity Mixin"
-msgstr ""
+msgstr "Mixin attività"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_ir_actions_server__activity_team_id
@@ -48,12 +48,12 @@ msgstr "Team Attività"
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity_type
 msgid "Activity Type"
-msgstr ""
+msgstr "Tipo attività"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
@@ -73,7 +73,7 @@ msgstr "Creato il"
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_type__default_team_id
 msgid "Default Team"
-msgstr ""
+msgstr "Team predefinito"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__display_name
@@ -120,12 +120,12 @@ msgstr "Attività Mancanti"
 #: code:addons/mail_activity_team/static/src/components/activity_menu_view/activity_menu_view.xml:0
 #, python-format
 msgid "My Activities"
-msgstr ""
+msgstr "Le mie attività"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "My Team Activities"
-msgstr "Attività del mio Team"
+msgstr "Attività del mio team"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__name
@@ -135,7 +135,7 @@ msgstr "Nome"
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_ir_actions_server
 msgid "Server Action"
-msgstr ""
+msgstr "Azione server"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_id
@@ -148,7 +148,7 @@ msgstr "Team"
 #: code:addons/mail_activity_team/static/src/components/activity_menu_view/activity_menu_view.xml:0
 #, python-format
 msgid "Team Activities"
-msgstr ""
+msgstr "Attività del mio team"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__user_id
@@ -163,7 +163,7 @@ msgstr "Membri Team"
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
 msgid "Team user"
-msgstr ""
+msgstr "Utente del team"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_kanban
@@ -176,7 +176,7 @@ msgstr "Team:"
 #, python-format
 msgid ""
 "The assigned user %(user_name)s is not member of the team %(team_name)s."
-msgstr ""
+msgstr "L'utente assegnato %(user_name)s nn è un membro del team %(team_name)s."
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__res_model_ids
@@ -187,7 +187,7 @@ msgstr "Modelli usati"
 #: model:ir.model,name:mail_activity_team.model_res_users
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__user_id
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_account_bank_statement_line__activity_team_user_ids
@@ -203,7 +203,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner_bank__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
 msgid "test field"
-msgstr ""
+msgstr "campo test"
 
 #~ msgid "Users"
 #~ msgstr "Utenti"
