@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-05-17 01:02+0000\n"
-"PO-Revision-Date: 2023-07-24 10:10+0000\n"
+"PO-Revision-Date: 2023-12-01 10:12+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -28,11 +28,15 @@ msgid ""
 "notified but they can access the notification directly from the document (if "
 "they are allowed to)</span>"
 msgstr ""
+"<span name=\"no_followers_text\" attrs=\"{'invisible': [('notify_followers', "
+"'=', True)]}\" style=\"color: red;\"> - Attenzione: non verrà inviata "
+"notifica a chi segue ma potrà accedere alla notifica direttamente dal "
+"documento (se autorizzato)</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussione e-mail"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_compose_message
@@ -42,9 +46,8 @@ msgstr "Procedura guidata creazione e-mail"
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_invoice_send__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
-#, fuzzy
 msgid "Notify Followers"
-msgstr "Notifica Follower"
+msgstr "Avvisa chi segue"
 
 #, fuzzy
 #~ msgid ""
