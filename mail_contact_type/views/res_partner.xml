@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">res.partner.mail.contact.type.form</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='website']" position="before">
+                <field name="mail_contact_type_ids" widget="many2many_tags" />
+            </xpath>
+            <xpath
+                expr="//page[@name='contact_addresses']//kanban//templates//field[@name='name']"
+                position="after"
+            >
+                <div t-if="record.mail_contact_type_ids.raw_value">
+                    <field name="mail_contact_type_ids" widget="many2many_tags" />
+                </div>
+            </xpath>
+            <xpath
+                expr="//page[@name='contact_addresses']//form//field[@name='email']"
+                position="after"
+            >
+                <field name="mail_contact_type_ids" widget="many2many_tags" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_partner_tree" model="ir.ui.view">
+        <field name="name">res.partner.mail.contact.type.tree</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field
+                    name="mail_contact_type_ids"
+                    widget="many2many_tags"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">res.partner.select</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field
+                    name="mail_contact_type_ids"
+                    filter_domain="[('mail_contact_type_ids', 'ilike', self)]"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>

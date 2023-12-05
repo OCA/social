@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2023 Foodles.
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="email_compose_message_wizard_form" model="ir.ui.view">
+        <field
+            name="name"
+        >mail.compose.message.form (mail_attach_existing_attachment)</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="arch" type="xml">
+            <field name="partner_ids" position="attributes">
+                <attribute
+                    name="context"
+                    operation="python_dict"
+                    key="show_mail_contact_types"
+                >
+                    1
+                </attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
