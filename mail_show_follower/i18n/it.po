@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-07 13:37+0000\n"
+"PO-Revision-Date: 2023-12-07 13:40+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -40,11 +40,12 @@ msgstr "Anteprima messaggio"
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "Notice: Replies to this email will be sent to all recipients."
 msgstr ""
+"Avviso: la risposta a questa e-mail verrà inviata a tutti i deStinatari."
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "E-mail in uscita"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_partner_format
