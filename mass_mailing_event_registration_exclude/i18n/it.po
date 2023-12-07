@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2023-03-30 14:25+0000\n"
+"PO-Revision-Date: 2023-12-07 13:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__code
@@ -99,7 +99,7 @@ msgstr "Ultimo aggiornamento il"
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_contact
 msgid "Mailing Contact"
-msgstr "Contatto Mass Mailing"
+msgstr "Contatto spedizione"
 
 #. module: mass_mailing_event_registration_exclude
 #: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_mailing
