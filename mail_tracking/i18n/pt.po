@@ -103,8 +103,8 @@ msgid "Bounced"
 msgstr "Devolvido"
 
 #. module: mail_tracking
-#. odoo-javascript
 #. odoo-python
+#. odoo-javascript
 #: code:addons/mail_tracking/models/mail_thread.py:0
 #: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
