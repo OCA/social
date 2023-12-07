@@ -28,7 +28,7 @@ class MailActivity(models.Model):
         for record in self:
             ref = False
             if record.res_id:
-                ref = "{},{}".format(record.res_model, record.res_id)
+                ref = f"{record.res_model},{record.res_id}"
             record.related_model_instance = ref
 
     @api.model
