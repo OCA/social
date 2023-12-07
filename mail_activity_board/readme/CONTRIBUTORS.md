@@ -1,0 +1,8 @@
+- [SDI](https://www.sdi.es):
+  - David Juaneda
+- [ForgeFlow](https://www.forgeflow.com):
+  - Miquel Raïch (<miquel.raich@forgeflow.com>)
+- [Pesol](https://www.pesol.es):
+  - Pedro Gonzalez (<pedro.gonzalez@pesol.es>)
+- [ACSONE SA/NV](https://www.acsone.eu)
+  - Laurent Mignon \<<laurent.mignon@acsone.eu>\>
