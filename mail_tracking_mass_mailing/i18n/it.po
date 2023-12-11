@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-22 00:51+0000\n"
-"PO-Revision-Date: 2023-12-07 13:40+0000\n"
+"PO-Revision-Date: 2023-12-11 15:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -28,12 +28,12 @@ msgstr "Nazione"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_bounced
 msgid "Email Bounced"
-msgstr "Email rimbalzate"
+msgstr "Email rimbalzata"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_contact_view_search
 msgid "Email bounced"
-msgstr "Email rimbalzate"
+msgstr "Email rimbalzata"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_score
