@@ -13,7 +13,7 @@
     "data": [],
     "assets": {
         "web.assets_backend": [
-            "/mail_quoted_reply/static/src/models/mail_message_reply.js",
+            "/mail_quoted_reply/static/src/models/mail_message_reply.esm.js",
         ],
     },
 }
