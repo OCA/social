@@ -53,7 +53,7 @@ class TestMassMailingUnique(common.SavepointCase):
                 "email": self.mailing_contact.email,
             }
         )
-        self.env["mailing.contact"].flush()
+        self.env["mailing.contact"].flush_model()
         with self.assertRaises(ValidationError):
             pre_init_hook(self.env.cr)
 
@@ -67,7 +67,7 @@ class TestMassMailingUnique(common.SavepointCase):
                         "email": "john.doe@example.com",
                     }
                 )
-                self.env["mailing.contact"].flush()
+                self.env["mailing.contact"].flush_model()
 
     def test_mailing_contact_unique_email_same(self):
         """Create a contact with the same email (not exact though)"""
@@ -79,7 +79,7 @@ class TestMassMailingUnique(common.SavepointCase):
                         "email": "<John Doe> John.DOE@example.com",
                     }
                 )
-                self.env["mailing.contact"].flush()
+                self.env["mailing.contact"].flush_model()
 
     def test_mailing_contact_unique_email_ok(self):
         """Create a contact with another email"""
@@ -99,7 +99,7 @@ class TestMassMailingUnique(common.SavepointCase):
                         "name": self.mailing_list.name,
                     }
                 )
-                self.env["mailing.list"].flush()
+                self.env["mailing.list"].flush_model()
 
     def test_mailing_list_unique_name_ok(self):
         """Create a mailing list with another name"""
