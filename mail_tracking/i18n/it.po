@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2023-12-07 16:33+0000\n"
+"PO-Revision-Date: 2023-12-11 15:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -76,7 +76,7 @@ msgstr "-Autore sconosciuto-"
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
 msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
 msgstr ""
-"Destinatari aggiuntivi che ricevono una \"copia conoscenza\" dell'email"
+"Destinatari aggiuntivi che ricevono una \"copia conoscenza\" dell'e-mail"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_thread.py:50
@@ -116,7 +116,7 @@ msgstr "Cc"
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Click"
-msgstr "Click"
+msgstr "Clic"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -229,7 +229,7 @@ msgstr "Alias email"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_bounced
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_bounced
 msgid "Email Bounced"
-msgstr "Email rimbalzate"
+msgstr "Email rimbalzata"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
@@ -245,7 +245,7 @@ msgstr "Discussione e-mail"
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_res_partner_filter
 msgid "Email bounced"
-msgstr "Email rimbalzate"
+msgstr "Email rimbalzata"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_resend_message
@@ -385,7 +385,7 @@ msgstr "È un messaggio fallito"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__mobile
 msgid "Is mobile?"
-msgstr "È mobile?"
+msgstr "È cellulare?"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin____last_update
@@ -425,7 +425,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
 msgid "Mail Trackings"
-msgstr "Tracciamenti email"
+msgstr "Tracciamenti e-mail"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_bounced_mixin
@@ -553,7 +553,7 @@ msgstr "Email destinatario"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__recipient_address
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient_address
 msgid "Recipient email address"
-msgstr "Indirizzo email destinatario"
+msgstr "Indirizzo e-mail destinatario"
 
 #. module: mail_tracking
 #: selection:mail.tracking.email,state:0
@@ -613,7 +613,7 @@ msgstr "Impostare tutti come revisionati"
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:32
 #, python-format
 msgid "Set as Reviewed"
-msgstr "Impostare come revisionato"
+msgstr "Imposta come revisionato"
 
 #. module: mail_tracking
 #: selection:mail.tracking.event,event_type:0
@@ -666,7 +666,7 @@ msgstr ""
 #: code:addons/mail_tracking/models/mail_message.py:112
 #, python-format
 msgid "The partner doesn't have a defined email"
-msgstr "Il partner non ha un email definita"
+msgstr "Il partner non ha un e-mail definita"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__time
@@ -700,7 +700,7 @@ msgstr "Numero email tracciate"
 #: model:ir.ui.menu,name:mail_tracking.menu_mail_tracking_email
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_partner_form
 msgid "Tracking emails"
-msgstr "Email tracciate"
+msgstr "Tracciamento e-mail"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__tracking_event_ids
