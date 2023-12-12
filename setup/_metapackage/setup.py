@@ -34,6 +34,7 @@ setuptools.setup(
         'odoo-addon-mass_mailing_list_dynamic>=16.0dev,<16.1dev',
         'odoo-addon-mass_mailing_partner>=16.0dev,<16.1dev',
         'odoo-addon-mass_mailing_resend>=16.0dev,<16.1dev',
+        'odoo-addon-mass_mailing_unique>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
