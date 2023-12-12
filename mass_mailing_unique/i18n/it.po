@@ -1,0 +1,101 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_unique
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-01-04 03:40+0000\n"
+"PO-Revision-Date: 2023-10-09 07:54+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mass_mailing_unique
+#: model:ir.model.constraint,message:mass_mailing_unique.constraint_mailing_list_unique_name
+msgid "Cannot have more than one lists with the same name."
+msgstr "Non è possibile avere più di una lista con lo stesso nome."
+
+#. module: mass_mailing_unique
+#: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_contact__display_name
+#: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_list__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_contact__id
+#: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_list__id
+msgid "ID"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_contact____last_update
+#: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_list____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mailing_contact
+msgid "Mailing Contact"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: model:ir.model,name:mass_mailing_unique.model_mailing_list
+msgid "Mailing List"
+msgstr "Mailing list"
+
+#. module: mass_mailing_unique
+#: model:ir.model.constraint,message:mass_mailing_unique.constraint_mailing_contact_unique_email
+msgid "There's already a contact with this email address"
+msgstr ""
+
+#. module: mass_mailing_unique
+#: code:addons/mass_mailing_unique/hooks.py:0
+#, python-format
+msgid ""
+"Unable to install module mass_mailing_unique:\n"
+"%s"
+msgstr ""
+
+#, python-format
+#~ msgid ""
+#~ "Email (%(contact_email)s) already in mailing list(s):\n"
+#~ "                    %(lists)s\n"
+#~ "                    Please use a different email address or "
+#~ "remove                      (%(contact_email)s) from the mailing list(s) "
+#~ "above."
+#~ msgstr ""
+#~ "L'indirizzo (%(contact_email)s) è già nella mailing list:\n"
+#~ "                    %(lists)s\n"
+#~ "                    Utilizzare un indirizzo e-mail diverso o "
+#~ "rimuovere                      (%(contact_email)s) dalle liste "
+#~ "sopraelencate."
+
+#~ msgid "Mass Mailing Contact"
+#~ msgstr "Contatto Mass Mailing"
+
+#~ msgid "Mass Mailing Subscription Information"
+#~ msgstr "Informazione iscrizione mailing di massa"
+
+#, fuzzy
+#~ msgid "Cannot have the same email (%s) morethan once in the same list."
+#~ msgstr ""
+#~ "Non è possibile inserire la stessa email più di una volta nella stessa "
+#~ "lista."
+
+#~ msgid "Fix this before installing:"
+#~ msgstr "Da risolvere prima dell'installazione:"
+
+#~ msgid "There are {1} lists with name {0}."
+#~ msgstr "Ci sono {1} liste con il nome {0}."
+
+#~ msgid "{0} appears {2} times in list {1}."
+#~ msgstr "{0} appare {2} volte nella lista {1}."
