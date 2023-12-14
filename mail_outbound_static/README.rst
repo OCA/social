@@ -66,11 +66,6 @@ Usage
 -  Set the Email From option to an email address
 -  Set the Domain Whitelist option with the domain whitelist
 
-Known issues / Roadmap
-======================
-
-
-
 Bug Tracker
 ===========
 
