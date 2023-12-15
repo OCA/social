@@ -25,7 +25,7 @@
                 <t
                     t-foreach="messageView.message.failedRecipients"
                     t-as="recipient"
-                    t-key="recipient_localId"
+                    t-key="recipient[0]"
                 >
                     <a
                         class="o_mail_action_tracking_partner"
