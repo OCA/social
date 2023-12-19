@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-04 03:40+0000\n"
-"PO-Revision-Date: 2023-10-09 07:54+0000\n"
+"PO-Revision-Date: 2023-12-19 16:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -28,24 +28,24 @@ msgstr "Non è possibile avere più di una lista con lo stesso nome."
 #: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_contact__display_name
 #: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_list__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: mass_mailing_unique
 #: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_contact__id
 #: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_list__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mass_mailing_unique
 #: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_contact____last_update
 #: model:ir.model.fields,field_description:mass_mailing_unique.field_mailing_list____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mailing_contact
 msgid "Mailing Contact"
-msgstr ""
+msgstr "Contatto spedizione"
 
 #. module: mass_mailing_unique
 #: model:ir.model,name:mass_mailing_unique.model_mailing_list
@@ -55,7 +55,7 @@ msgstr "Mailing list"
 #. module: mass_mailing_unique
 #: model:ir.model.constraint,message:mass_mailing_unique.constraint_mailing_contact_unique_email
 msgid "There's already a contact with this email address"
-msgstr ""
+msgstr "Esiste già un contatto con questo indirizzo e-mail"
 
 #. module: mass_mailing_unique
 #: code:addons/mass_mailing_unique/hooks.py:0
@@ -64,6 +64,8 @@ msgid ""
 "Unable to install module mass_mailing_unique:\n"
 "%s"
 msgstr ""
+"Non è possibile installare il modlo mass_mailing_unique:\n"
+"%s"
 
 #, python-format
 #~ msgid ""
