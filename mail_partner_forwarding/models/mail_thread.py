@@ -4,13 +4,13 @@ from odoo import models
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    def _notify_compute_recipients(self, message, msg_vals):
+    def _notify_get_recipients(self, message, msg_vals, **kwargs):
         """Inherit this method to add in the list of partners to be notify
         the forwarding_partner_id of any partners in the list"""
-        recipient_data = super()._notify_compute_recipients(message, msg_vals)
-        if not recipient_data.get("partners", False):
+        recipient_data = super()._notify_get_recipients(message, msg_vals, **kwargs)
+        if not recipient_data:
             return recipient_data
-        partner_dict = {x.get("id"): x for x in recipient_data.get("partners")}
+        partner_dict = {x.get("id"): x for x in recipient_data}
         forwarded_partner_ids = []
         # for each partner being notified we check if it has a
         # forwarding_partner_id configured that is not being notified yet
@@ -39,5 +39,5 @@ class MailThread(models.AbstractModel):
                         "notif": notif,
                     }
                 )
-                recipient_data["partners"].append(data)
+                recipient_data.append(data)
         return recipient_data
