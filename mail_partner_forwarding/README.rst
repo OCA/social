@@ -29,8 +29,9 @@ Partner Mail Forwarding
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows to select a related user (called "Forwarding
-partner") in each partner in order to send all the notifications to the
-Forwarding partner.
+partner") in the res.users and res.partner models in order to send
+a copy of all the notifications meant to the users / partners
+to the Forwarding partner.
 
 **Table of contents**
 
@@ -44,6 +45,8 @@ To use this module, you need to:
 
 -  Install it.
 -  Set a Forwarding partner in your partner.
+    - In the users profile
+    - In the partners
 -  Your Forwarding partner also will be notify of your notifications
 
 Changelog
