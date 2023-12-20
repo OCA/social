@@ -5,8 +5,8 @@ class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
     def _notify_compute_recipients(self, message, msg_vals):
-        """ Inherit this method to add in the list of partners to be notify
-        the forwarding_partner_id of any partners in the list """
+        """Inherit this method to add in the list of partners to be notify
+        the forwarding_partner_id of any partners in the list"""
         recipient_data = super()._notify_compute_recipients(message, msg_vals)
         if not recipient_data.get("partners", False):
             return recipient_data
