@@ -3,11 +3,11 @@
 from odoo_test_helper import FakeModelLoader
 
 from odoo import _
-from odoo.tests.common import SavepointCase, tagged
+from odoo.tests.common import TransactionCase, tagged
 
 
 @tagged("post_install", "-at_install")
-class TestMailForwarding(SavepointCase):
+class TestMailForwarding(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -41,6 +41,6 @@ class TestMailForwarding(SavepointCase):
         self.order.message_post(
             body=_("Test"),
             message_type="comment",
-            subtype="mail.mt_comment",
+            subtype_id=self.env.ref("mail.mt_comment").id,
             partner_ids=[self.partner_2.id],
         )
