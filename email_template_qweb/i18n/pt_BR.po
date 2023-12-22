@@ -9,20 +9,19 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-22 00:50+0000\n"
-"PO-Revision-Date: 2019-09-17 14:24+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2023-12-22 11:54+0000\n"
+"Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.8\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
-#, fuzzy
 msgid "Body View"
 msgstr "Visualizar Corpo"
 
@@ -49,12 +48,12 @@ msgstr "Qweb"
 #. module: email_template_qweb
 #: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__qweb_view
 msgid "QWeb View"
-msgstr ""
+msgstr "Visão Qweb"
 
 #. module: email_template_qweb
 #: model:mail.template,name:email_template_qweb.email_template_demo1
 msgid "QWeb demo"
-msgstr ""
+msgstr "Demo Qweb"
 
 #. module: email_template_qweb
 #: model:mail.template,subject:email_template_qweb.email_template_demo1
@@ -69,6 +68,9 @@ msgid ""
 "                               Note that it will read `arch_db` or `arch_fs` "
 "if in dev-xml mode."
 msgstr ""
+"Este campo deve ser usado ao acessar o view arch. Ele usará tradução.\n"
+"                                Observe que ele lerá `arch_db` ou `arch_fs` "
+"se estiver no modo dev-xml."
 
 #. module: email_template_qweb
 #: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
