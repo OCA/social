@@ -6,23 +6,25 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-22 11:47+0000\n"
+"Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
 msgid "<i title=\"date\" class=\"fa fa-clock-o\"/>"
-msgstr ""
+msgstr "<i title=\"data\" class=\"fa fa-clock-o\"/>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
 msgid "<span><i title=\"date\" class=\"fa fa-clock-o\"/></span>"
-msgstr ""
+msgstr "<span><i title=\"data\" class=\"fa fa-clock-o\"/></span>"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
@@ -38,23 +40,23 @@ msgstr ""
 #: model:ir.actions.act_window,name:mail_activity_board.open_boards_activities
 #: model:ir.ui.menu,name:mail_activity_board.board_menu_activities
 msgid "Activities"
-msgstr ""
+msgstr "Atividades"
 
 #. module: mail_activity_board
 #: model:ir.model,name:mail_activity_board.model_mail_activity
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Activity"
-msgstr ""
+msgstr "Atividade"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Activity Form"
-msgstr ""
+msgstr "Formulário Atividade"
 
 #. module: mail_activity_board
 #: model:ir.model,name:mail_activity_board.model_mail_activity_mixin
 msgid "Activity Mixin"
-msgstr ""
+msgstr "Mixin Atividade"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_partner_ids
