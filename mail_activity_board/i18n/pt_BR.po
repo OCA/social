@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-22 11:47+0000\n"
+"PO-Revision-Date: 2023-12-22 11:51+0000\n"
 "Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
 "Language-Team: none\n"
 "Language: pt_BR\n"
@@ -61,72 +61,72 @@ msgstr "Mixin Atividade"
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_partner_ids
 msgid "Attendees"
-msgstr ""
+msgstr "Participantes"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__related_model_instance
 msgid "Document"
-msgstr ""
+msgstr "Documento"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__duration
 msgid "Duration"
-msgstr ""
+msgstr "Duração"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Log a note..."
-msgstr ""
+msgstr "Registrar uma nota..."
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__res_model_id_name
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Origin"
-msgstr ""
+msgstr "Origem"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Show activities scheduled for next 6 months."
-msgstr ""
+msgstr "Mostrar atividades programadas para os próximos 6 meses."
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "Show activities scheduled for next month."
-msgstr ""
+msgstr "Mostrar atividades programadas para o próximo mês."
 
 #. module: mail_activity_board
 #: model:res.groups,name:mail_activity_board.group_show_mail_activity_board
 msgid "Show mail activity board"
-msgstr ""
+msgstr "Mostrar quadro de atividades de e-mail"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start"
-msgstr ""
+msgstr "Iniciar"
 
 #. module: mail_activity_board
 #: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_start
 msgid "Start date of an event, without time for full days events"
-msgstr ""
+msgstr "Data de início de um evento, sem tempo para eventos de dia inteiro"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "Start meeting"
-msgstr ""
+msgstr "Iniciar reunião"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
 msgid "User"
-msgstr ""
+msgstr "Usuário"
 
 #. module: mail_activity_board
 #. odoo-javascript
 #: code:addons/mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml:0
 #, python-format
 msgid "View Activities"
-msgstr ""
+msgstr "Ver Atividades"
 
 #. module: mail_activity_board
 #: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
 msgid "e.g. Discuss proposal"
-msgstr ""
+msgstr "e.x. Discutir Proposta"
