@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2023-12-07 16:35+0000\n"
+"PO-Revision-Date: 2023-12-24 19:41+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -282,9 +282,9 @@ msgstr "Messaggio"
 #. module: mail_tracking
 #. openerp-web
 #: code:addons/mail_tracking/static/src/xml/failed_message/thread.xml:0
-#, fuzzy, python-format
+#, python-format
 msgid "Failed Recipients:"
-msgstr "Destinatario"
+msgstr "Destinatario:"
 
 #. module: mail_tracking
 #. openerp-web
@@ -632,9 +632,8 @@ msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
-#, fuzzy
 msgid "To"
-msgstr "A:"
+msgstr "A"
 
 #. module: mail_tracking
 #. openerp-web
