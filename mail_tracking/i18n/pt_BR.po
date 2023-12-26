@@ -9,10 +9,10 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2023-12-26 11:47+0000\n"
+"PO-Revision-Date: 2023-12-26 14:38+0000\n"
 "Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -454,14 +454,14 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_email
 msgid "MailTracking emails"
-msgstr ""
+msgstr "Rastreamento de emails"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_tracking_event
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 msgid "MailTracking event"
-msgstr ""
+msgstr "Rastreamento de evento"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -471,7 +471,7 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 msgid "MailTracking events"
-msgstr ""
+msgstr "Rastreamento de eventos"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -500,7 +500,7 @@ msgstr "Nenhuma mensagem com falha"
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "OS"
-msgstr ""
+msgstr "SO"
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__open
@@ -540,7 +540,7 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__os_family
 msgid "Operating system family"
-msgstr ""
+msgstr "Família Sistema Operacional"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_mail
@@ -806,35 +806,35 @@ msgstr "Inscrição Cancelada"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_agent
 msgid "User Agent"
-msgstr ""
+msgstr "Agente Usuário"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ip
 msgid "User IP"
-msgstr ""
+msgstr "IP Usuário"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
 msgid "User agent"
-msgstr ""
+msgstr "Agente Usuário"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ua_family
 msgid "User agent family"
-msgstr ""
+msgstr "Família Agente Usuário"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ua_type
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "User agent type"
-msgstr ""
+msgstr "Tipo Agente Usuário"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_country_id
 msgid "User country"
-msgstr ""
+msgstr "País Usuário"
 
 #. module: mail_tracking
 #. odoo-python
