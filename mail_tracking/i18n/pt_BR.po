@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
 "PO-Revision-Date: 2023-12-26 11:47+0000\n"
 "Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -103,8 +103,8 @@ msgid "Bounced"
 msgstr "Devolvido"
 
 #. module: mail_tracking
-#. odoo-python
 #. odoo-javascript
+#. odoo-python
 #: code:addons/mail_tracking/models/mail_thread.py:0
 #: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
