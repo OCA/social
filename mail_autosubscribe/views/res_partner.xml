@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2021 Camptocamp (http://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@gmail.com>
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']/parent::div" position="after">
+                <field
+                    name="mail_autosubscribe_ids"
+                    string="In copy of"
+                    widget="many2many_checkboxes"
+                    attrs="{'invisible': [('email', '=', False)]}"
+                />
+            </xpath>
+            <xpath
+                expr="//field[@name='child_ids']//form//field[@name='email']"
+                position="after"
+            >
+                <field
+                    name="mail_autosubscribe_ids"
+                    string="In copy of"
+                    widget="many2many_checkboxes"
+                    attrs="{'invisible': [('email', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
