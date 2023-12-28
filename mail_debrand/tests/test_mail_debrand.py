@@ -8,9 +8,20 @@ from odoo.tests import common
 
 
 class TestMailDebrand(common.TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.default_template = self.env.ref("mail.mail_notification_layout")
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.mail = cls.env["mail.mail"].create(
+            {
+                "email_from": "customer@example.com",
+                "subject": "Hello",
+                "email_to": "contact@example.com",
+                "reply_to": "contact@example.com",
+            }
+        )
+        lang_nl = cls.env.ref("base.lang_nl")
+        if not lang_nl.active:
+            lang_nl.toggle_active()
 
     def test_debrand_binary_value(self):
         """
@@ -23,27 +34,47 @@ class TestMailDebrand(common.TransactionCase):
         except TypeError:
             self.fail("Debranding binary string raised TypeError")
 
-    def test_default_debrand(self):
-        self.assertIn("Powered by", self.default_template.arch)
-        model = "mail.template"
-        res_ids = self.env[model].search([], limit=1).ids
-        res = self.env[model]._render_template(
-            self.default_template,
-            "ir.ui.view",
-            res_ids,
+    def _test_debrand_by_lang(self, template_ref, lang, term):
+        body = self.env["ir.qweb"]._render(
+            template_ref,
+            {
+                "message": self.mail,
+                "company": self.env.company,
+            },
+            lang=lang.code,
+            minimal_qcontext=True,
         )
-        self.assertNotIn("Powered by", res)
+        self.assertIn(term, body)
+        body_cleaned = self.env["mail.render.mixin"].remove_href_odoo(body)
+        self.assertNotIn(term, body_cleaned)
 
-    def test_plaintext_email(self):
-        MailMessage = self.env["mail.mail"]
-        email_values = {
-            "email_from": "customer@example.com",
-            "subject": "Hello",
-            "email_to": "contact@example.com",
-            "reply_to": "contact@example.com",
-        }
-        # No exception expected
-        MailMessage.create(email_values)
+    def test_default_debrand(self):
+        self._test_debrand_by_lang(
+            "mail.mail_notification_layout",
+            self.env.ref("base.lang_en"),
+            "Powered by",
+        )
+
+    def test_default_debrand_translated(self):
+        self._test_debrand_by_lang(
+            "mail.mail_notification_layout",
+            self.env.ref("base.lang_nl"),
+            "Aangeboden door",
+        )
+
+    def test_light_debrand(self):
+        self._test_debrand_by_lang(
+            "mail.mail_notification_light",
+            self.env.ref("base.lang_en"),
+            "Powered by",
+        )
+
+    def test_light_debrand_translated(self):
+        self._test_debrand_by_lang(
+            "mail.mail_notification_light",
+            self.env.ref("base.lang_nl"),
+            "Aangeboden door",
+        )
 
     def test_body_intact(self):
         """The message body should never be changed"""
