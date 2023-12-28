@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo-addon-mail_outbound_static>=16.0dev,<16.1dev',
         'odoo-addon-mail_partner_opt_out>=16.0dev,<16.1dev',
         'odoo-addon-mail_post_defer>=16.0dev,<16.1dev',
+        'odoo-addon-mail_send_confirmation>=16.0dev,<16.1dev',
         'odoo-addon-mail_show_follower>=16.0dev,<16.1dev',
         'odoo-addon-mail_template_substitute>=16.0dev,<16.1dev',
         'odoo-addon-mail_tracking>=16.0dev,<16.1dev',
