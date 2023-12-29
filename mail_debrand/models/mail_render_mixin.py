@@ -26,14 +26,14 @@ class MailRenderMixin(models.AbstractModel):
         has_dev_odoo_link = re.search(
             r"<a\s(.*)dev\.odoo\.com", value, flags=re.IGNORECASE
         )
-        has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
+        has_odoo_link = re.search(r"<a\s(.*)www\.odoo\.com", value, flags=re.IGNORECASE)
         if has_odoo_link and not has_dev_odoo_link:
             # We don't want to change what was explicitly added in the message body,
             # so we will only change what is before and after it.
             if to_keep:
                 value = value.replace(to_keep, "<body_msg></body_msg>")
             tree = html.fromstring(value)
-            odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
+            odoo_anchors = tree.xpath('//a[contains(@href,"www.odoo.com")]')
             for elem in odoo_anchors:
                 parent = elem.getparent()
                 if remove_parent and parent.getparent() is not None:
