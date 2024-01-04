@@ -42,8 +42,12 @@ class TestMailCcBcc(TestMailComposer):
 
     def open_invoice_mail_composer_form(self):
         # Use form to populate data
-        for_name = [("name", "=", "INV/2023/00003")]
+        for_name = [("name", "like", "%INV/20__/00003")]
         self.test_invoice = test_record = self.env["account.move"].search(for_name)
+        self.assertTrue(
+            self.test_invoice,
+            "Test setup did not succeeed. Invoice not found.",
+        )
         ctx = {
             "active_ids": test_record.ids,
             "default_model": "account.move",
