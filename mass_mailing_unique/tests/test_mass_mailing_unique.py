@@ -11,7 +11,7 @@ from odoo.tools import mute_logger
 from ..hooks import pre_init_hook
 
 
-class TestMassMailingUnique(common.SavepointCase):
+class TestMassMailingUnique(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -34,7 +34,6 @@ class TestMassMailingUnique(common.SavepointCase):
         )
         # Create another list with the same exact name
         self.env["mailing.list"].create({"name": self.mailing_list.name})
-        self.env["mailing.list"].flush()
         with self.assertRaises(ValidationError):
             pre_init_hook(self.env.cr)
 
