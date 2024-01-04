@@ -14,7 +14,7 @@ from odoo import api, models
 class MailRenderMixin(models.AbstractModel):
     _inherit = "mail.render.mixin"
 
-    def remove_href_odoo(self, value, remove_parent=True, to_keep=None):
+    def remove_href_odoo(self, value, to_keep=None):
         if len(value) < 20:
             return value
         # value can be bytes or markup; ensure we get a proper string and preserve type
@@ -38,15 +38,13 @@ class MailRenderMixin(models.AbstractModel):
             odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
             for elem in odoo_anchors:
                 parent = elem.getparent()
-                if remove_parent and parent.getparent() is not None:
-                    # anchor <a href odoo has a parent powered by that must be removed
-                    parent.getparent().remove(parent)
-                else:
-                    previous = elem.getprevious()
-                    if previous is not None:
-                        # Remove "Powered by", "using" etc.
-                        previous.tail = ""
-                    parent.remove(elem)
+                # Remove "Powered by", "using" etc.
+                previous = elem.getprevious()
+                if previous is not None:
+                    previous.tail = ""
+                elif parent.text:
+                    parent.text = ""
+                parent.remove(elem)
             value = etree.tostring(
                 tree, pretty_print=True, method="html", encoding="unicode"
             )
