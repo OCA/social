@@ -33,6 +33,7 @@ setuptools.setup(
         'odoo-addon-mail_tracking_mailgun>=16.0dev,<16.1dev',
         'odoo-addon-mail_tracking_mass_mailing>=16.0dev,<16.1dev',
         'odoo-addon-mass_mailing_contact_active>=16.0dev,<16.1dev',
+        'odoo-addon-mass_mailing_event_registration_exclude>=16.0dev,<16.1dev',
         'odoo-addon-mass_mailing_list_dynamic>=16.0dev,<16.1dev',
         'odoo-addon-mass_mailing_partner>=16.0dev,<16.1dev',
         'odoo-addon-mass_mailing_resend>=16.0dev,<16.1dev',
