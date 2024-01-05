@@ -1,0 +1,103 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_event
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Chinese (Taiwan) (https://www.transifex.com/oca/teams/23907/"
+"zh_TW/)\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__code
+msgid "Code"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_uid
+msgid "Created by"
+msgstr "建立者"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_date
+msgid "Created on"
+msgstr "建立於"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__display_name
+msgid "Display Name"
+msgstr "顯示名稱"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration_state
+msgid "Event Registration State"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__event_id
+msgid "Event related"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__exclude_event_state_ids
+msgid "Exclude"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__id
+msgid "ID"
+msgstr "編號"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state____last_update
+msgid "Last Modified on"
+msgstr "最後修改:"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_uid
+msgid "Last Updated by"
+msgstr "最後更新："
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_date
+msgid "Last Updated on"
+msgstr "最後更新於"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_contact
+msgid "Mailing Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
+msgid "Name"
+msgstr "名稱"
+
+#~ msgid "Partner"
+#~ msgstr "夥伴"
