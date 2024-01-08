@@ -4,3 +4,5 @@
 
   * Pedro M. Baeza
   * João Marques
+
+* Stefan Rijnhart <stefan@opener.amsterdam>

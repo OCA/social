@@ -8,21 +8,23 @@ import re
 from lxml import etree, html
 from markupsafe import Markup
 
-from odoo import api, models, tools
+from odoo import api, models
 
 
 class MailRenderMixin(models.AbstractModel):
     _inherit = "mail.render.mixin"
 
-    def remove_href_odoo(self, value, remove_parent=True, to_keep=None):
+    def remove_href_odoo(self, value, to_keep=None):
         if len(value) < 20:
             return value
-        # value can be bytes type; ensure we get a proper string
+        # value can be bytes or markup; ensure we get a proper string and preserve type
+        back_to_bytes = False
+        back_to_markup = False
         if type(value) is bytes:
             back_to_bytes = True
             value = value.decode()
-        else:
-            back_to_bytes = False
+        if type(value) is Markup:
+            back_to_markup = True
         has_dev_odoo_link = re.search(
             r"<a\s(.*)dev\.odoo\.com", value, flags=re.IGNORECASE
         )
@@ -36,15 +38,13 @@ class MailRenderMixin(models.AbstractModel):
             odoo_anchors = tree.xpath('//a[contains(@href,"www.odoo.com")]')
             for elem in odoo_anchors:
                 parent = elem.getparent()
-                if remove_parent and parent.getparent() is not None:
-                    # anchor <a href odoo has a parent powered by that must be removed
-                    parent.getparent().remove(parent)
-                else:
-                    # also here can be powered by
-                    if parent.tag == "td" and parent.getparent():
-                        parent.getparent().remove(parent)
-                    else:
-                        parent.remove(elem)
+                # Remove "Powered by", "using" etc.
+                previous = elem.getprevious()
+                if previous is not None:
+                    previous.tail = ""
+                elif parent.text:
+                    parent.text = ""
+                parent.remove(elem)
             value = etree.tostring(
                 tree, pretty_print=True, method="html", encoding="unicode"
             )
@@ -52,6 +52,8 @@ class MailRenderMixin(models.AbstractModel):
                 value = value.replace("<body_msg></body_msg>", to_keep)
         if back_to_bytes:
             value = value.encode()
+        elif back_to_markup:
+            value = Markup(value)
         return value
 
     @api.model
@@ -94,17 +96,3 @@ class MailRenderMixin(models.AbstractModel):
             orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key])
 
         return orginal_rendered
-
-    def _replace_local_links(self, html, base_url=None):
-        message = super()._replace_local_links(html, base_url=base_url)
-
-        wrapper = Markup if isinstance(message, Markup) else str
-        message = tools.ustr(message)
-        if isinstance(message, Markup):
-            wrapper = Markup
-
-        message = re.sub(
-            r"""(Powered by\s(.*)Odoo</a>)""", "<div>&nbsp;</div>", message
-        )
-
-        return wrapper(message)
