@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="email_template_form_view">
+        <field name="name">mail.template.form (in email_template_configurator)</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[.//field[@name='model_object_field']]"
+                position="attributes"
+            >
+                <attribute
+                    name="groups"
+                >email_template_configurator.group_email_template_placeholders_manager</attribute>
+            </xpath>
+            <page name="email_configuration" position="attributes">
+                <attribute name="groups">
+                    email_template_configurator.group_mail_template_manager
+                </attribute>
+            </page>
+            <page name="advanced_settings" position="attributes">
+                <attribute name="groups">
+                    email_template_configurator.group_mail_template_manager
+                </attribute>
+            </page>
+            <xpath expr="//page[.//field[@name='model_object_field']]" position="after">
+                <page name="configured_placeholders" string="Configured Placeholders">
+                    <group>
+                        <field
+                            name="placeholder_id"
+                            domain="[('model_id','=',model_id)]"
+                            options="{'no_quick_create':True,'no_create_edit':True}"
+                        />
+                        <field name="placeholder_value" />
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

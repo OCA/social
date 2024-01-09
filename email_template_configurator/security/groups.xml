@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="res.groups" id="group_mail_template_manager">
+        <field name="name">Mail template: manager</field>
+        <field name="category_id" ref="base.module_category_hidden" />
+        <field
+            name="users"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
+    </record>
+
+    <record id="group_email_template_placeholders_manager" model="res.groups">
+        <field name="name">Template Placeholders Manager</field>
+    </record>
+
+    <record model="res.groups" id="base.group_system">
+        <field
+            name="implied_ids"
+            eval="[
+            (4, ref('group_email_template_placeholders_manager')),
+        ]"
+        />
+    </record>
+
+</odoo>
