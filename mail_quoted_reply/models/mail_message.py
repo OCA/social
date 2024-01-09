@@ -10,12 +10,13 @@ class MailMessage(models.Model):
 
     def _prep_quoted_reply_body(self):
         return """
-            <div>
-                <br/>
-                <br/>
-                {signature}
-            </div>
-            <br/>
+            <div style="margin: 0px; padding: 0px;">
+            <p style="margin:0px 0 12px 0;box-sizing:border-box;">
+            <br />
+            </p>
+            {signature}
+            <br />
+            <br />
             <blockquote style="padding-right:0px; padding-left:5px; border-left-color: #000;
             margin-left:5px; margin-right:0px;border-left-width: 2px; border-left-style:solid">
             {str_from}: {email_from}<br/>
@@ -23,6 +24,7 @@ class MailMessage(models.Model):
             {str_subject}: {subject}<br/>
             {body}
             </blockquote>
+            </div>
         """.format(
             email_from=self.email_from,
             date=format_datetime(self.env, self.date),
