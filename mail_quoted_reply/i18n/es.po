@@ -17,9 +17,23 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_quoted_reply
+#. odoo-python
+#: code:addons/mail_quoted_reply/models/mail_message.py:0
+#, python-format
+msgid "Date"
+msgstr ""
+
+#. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_compose_message
 msgid "Email composition wizard"
 msgstr "Asistente composición Correo Electrónico"
+
+#. module: mail_quoted_reply
+#. odoo-python
+#: code:addons/mail_quoted_reply/models/mail_message.py:0
+#, python-format
+msgid "From"
+msgstr ""
 
 #. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_message
@@ -27,11 +41,18 @@ msgid "Message"
 msgstr "Mensaje"
 
 #. module: mail_quoted_reply
-#. openerp-web
-#: code:addons/mail_quoted_reply/static/src/xml/mail_message_reply.xml:0
+#. odoo-javascript
+#: code:addons/mail_quoted_reply/static/src/models/message_action_view.esm.js:0
 #, python-format
 msgid "Reply"
 msgstr "Responder"
+
+#. module: mail_quoted_reply
+#. odoo-python
+#: code:addons/mail_quoted_reply/models/mail_message.py:0
+#, python-format
+msgid "Subject"
+msgstr ""
 
 #~ msgid ""
 #~ "\n"
