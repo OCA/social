@@ -6,22 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2022-07-04 15:05+0000\n"
-"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
+"PO-Revision-Date: 2024-01-10 19:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_quoted_reply
 #. odoo-python
 #: code:addons/mail_quoted_reply/models/mail_message.py:0
 #, python-format
 msgid "Date"
-msgstr ""
+msgstr "Fecha"
 
 #. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_compose_message
@@ -33,7 +33,7 @@ msgstr "Asistente composición Correo Electrónico"
 #: code:addons/mail_quoted_reply/models/mail_message.py:0
 #, python-format
 msgid "From"
-msgstr ""
+msgstr "Desde"
 
 #. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_message
@@ -52,7 +52,7 @@ msgstr "Responder"
 #: code:addons/mail_quoted_reply/models/mail_message.py:0
 #, python-format
 msgid "Subject"
-msgstr ""
+msgstr "Asunto"
 
 #~ msgid ""
 #~ "\n"
