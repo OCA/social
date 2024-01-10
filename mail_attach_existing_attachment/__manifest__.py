@@ -7,7 +7,7 @@
     "author": "ACSONE SA/NV, Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social Network",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.1.0",
     "license": "AGPL-3",
     "depends": ["mail"],
     "data": ["wizard/mail_compose_message_view.xml"],
