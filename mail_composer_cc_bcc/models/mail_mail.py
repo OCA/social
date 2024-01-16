@@ -14,9 +14,7 @@ _logger = logging.getLogger(__name__)
 
 
 def format_emails(partners):
-    emails = [
-        tools.formataddr((p.name or "False", p.email or "False")) for p in partners
-    ]
+    emails = [tools.formataddr((p.name, p.email)) for p in partners if p.email]
     return ", ".join(emails)
 
 
