@@ -6,47 +6,49 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-20 14:34+0000\n"
+"Last-Translator: Claude R Perrin <claude@alpis.fr>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,field_description:mail_allow_portal_internal_note.field_res_users__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,field_description:mail_allow_portal_internal_note.field_res_users__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,field_description:mail_allow_portal_internal_note.field_res_users____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: mail_allow_portal_internal_note
 #. openerp-web
 #: code:addons/mail_allow_portal_internal_note/static/src/xml/mail_portal_template.xml:0
 #, python-format
 msgid "Log Note"
-msgstr ""
+msgstr "Note enregistrée"
 
 #. module: mail_allow_portal_internal_note
 #. openerp-web
 #: code:addons/mail_allow_portal_internal_note/static/src/xml/mail_portal_template.xml:0
 #, python-format
 msgid "Log a Note"
-msgstr ""
+msgstr "Enregistrer une note"
 
 #. module: mail_allow_portal_internal_note
 #: model_terms:ir.ui.view,arch_db:mail_allow_portal_internal_note.user_form_portal_user_special
 msgid "Portal User Internal Message Access"
-msgstr ""
+msgstr "Accès aux messages internes par un utilisateur du portail"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,help:mail_allow_portal_internal_note.field_res_users__portal_see_internal_msg_other
@@ -54,6 +56,8 @@ msgid ""
 "Portal User can see the internal messages for documents related tho other "
 "companies , other than his parent company"
 msgstr ""
+"L’utilisateur du portail peut voir les messages internes pour les documents "
+"liés à d’autres sociétés, autres que sa société mère"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,help:mail_allow_portal_internal_note.field_res_users__portal_see_internal_msg_own
@@ -61,18 +65,20 @@ msgid ""
 "Portal User can see the internal messages for documents related to his "
 "parent company"
 msgstr ""
+"L’utilisateur du portail peut voir les messages internes des documents liés "
+"à sa société mère"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,field_description:mail_allow_portal_internal_note.field_res_users__portal_see_internal_msg_other
 msgid "See other company Internal Messages"
-msgstr ""
+msgstr "Voir les messages internes d'autres entreprises"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model.fields,field_description:mail_allow_portal_internal_note.field_res_users__portal_see_internal_msg_own
 msgid "See own company Internal Messages"
-msgstr ""
+msgstr "Voir les messages internes de votre entreprise"
 
 #. module: mail_allow_portal_internal_note
 #: model:ir.model,name:mail_allow_portal_internal_note.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Utilisateurs"
