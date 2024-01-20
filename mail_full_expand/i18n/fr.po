@@ -10,26 +10,27 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-22 09:45+0000\n"
-"PO-Revision-Date: 2017-07-22 09:45+0000\n"
-"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2017\n"
+"PO-Revision-Date: 2024-01-20 14:34+0000\n"
+"Last-Translator: Claude R Perrin <claude@alpis.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_full_expand
 #: model_terms:ir.ui.view,arch_db:mail_full_expand.mail_message_view_form
 msgid "Close"
-msgstr ""
+msgstr "Fermer"
 
 #. module: mail_full_expand
 #. openerp-web
 #: code:addons/mail_full_expand/static/src/components/message/mail_full_expand.xml:0
 #, python-format
 msgid "Fully Expand"
-msgstr "Complètement agrandi"
+msgstr "Agrandir complètement"
 
 #. module: mail_full_expand
 #: model_terms:ir.ui.view,arch_db:mail_full_expand.mail_message_view_form
@@ -39,4 +40,4 @@ msgstr "Message"
 #. module: mail_full_expand
 #: model:ir.actions.act_window,name:mail_full_expand.mail_message_action
 msgid "Read Full Email"
-msgstr "Lire la totalité du courriel"
+msgstr "Lire l’intégralité de l’e-mail"
