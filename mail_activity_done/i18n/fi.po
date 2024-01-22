@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-01-22 13:36+0000\n"
+"PO-Revision-Date: 2024-01-22 16:35+0000\n"
 "Last-Translator: Miku Laitinen <github@laitinen.lv>\n"
 "Language-Team: none\n"
 "Language: fi\n"
@@ -83,35 +83,35 @@ msgstr "Erääntyy %d päivän päästä"
 #. module: mail_activity_done
 #: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
 msgid "Open Activities"
-msgstr ""
+msgstr "Avoimet toimenpiteet"
 
 #. module: mail_activity_done
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__state
 msgid "State"
-msgstr ""
+msgstr "Tila"
 
 #. module: mail_activity_done
 #. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Today"
-msgstr ""
+msgstr "Tänään"
 
 #. module: mail_activity_done
 #. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Tomorrow"
-msgstr ""
+msgstr "Huomenna"
 
 #. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_res_users
 msgid "User"
-msgstr ""
+msgstr "Käyttäjä"
 
 #. module: mail_activity_done
 #. odoo-javascript
 #: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
 msgid "Yesterday"
-msgstr ""
+msgstr "Eilen"
