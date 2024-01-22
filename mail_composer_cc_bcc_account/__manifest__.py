@@ -1,9 +1,9 @@
 # Copyright 2023 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Email CC and BCC",
-    "summary": "This module enables sending mail to CC and BCC partners in mail composer form.",
-    "version": "16.0.1.1.0",
+    "name": "Email CC and BCC when sending invoice",
+    "summary": "This module enables sending mail to CC and BCC partners for invoices.",
+    "version": "16.0.1.0.1",
     "development_status": "Alpha",
     "category": "Social",
     "website": "https://github.com/OCA/social",
@@ -12,15 +12,13 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
+    "auto_install": True,
     "preloadable": True,
     "depends": [
-        "mail",
+        "mail_composer_cc_bcc",
+        "account",
     ],
     "data": [
-        "views/res_company_views.xml",
-        "views/mail_mail_views.xml",
-        "views/mail_message_views.xml",
-        "views/mail_template_views.xml",
-        "wizards/mail_compose_message_view.xml",
+        "wizards/account_invoice_send_views.xml",
     ],
 }
