@@ -5,7 +5,7 @@ from odoo.tests.common import TransactionCase
 
 class TestMailActivityBoardMethods(TransactionCase):
     def setUp(self):
-        super(TestMailActivityBoardMethods, self).setUp()
+        super().setUp()
         # Set up activities
 
         # Create a user as 'Crm Salesman' and added few groups
