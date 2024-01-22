@@ -18,7 +18,7 @@
             <field name="activity_type_id" position="before">
                 <field
                     name="related_model_instance"
-                    attrs="{'invisible': [('related_model_instance','=', False)]}"
+                    invisible="not related_model_instance"
                 />
             </field>
         </field>
@@ -78,25 +78,24 @@
                         <group>
                             <field
                                 name="date_deadline"
-                                attrs="{'invisible': [('activity_category', '=', 'meeting')]}"
+                                invisible="activity_category == 'meeting'"
                             />
                             <field
                                 name="calendar_event_id_start"
                                 string="Start meeting"
-                                attrs="{'invisible': [('calendar_event_id','=', False)]}"
+                                invisible="not calendar_event_id"
                             />
                             <field
                                 name="duration"
                                 widget="float_time"
-                                attrs="{'invisible': ['|',('duration', '=', False),
-                                   ('calendar_event_id','=', False)]}"
+                                invisible="not duration or not calendar_event_id"
                             />
                             <field name="user_id" options="{'no_open': True}" />
 
                         </group>
                     </group>
                     <group
-                        attrs="{'invisible': ['|',('calendar_event_id','=', False),('calendar_event_id_partner_ids','=', False)]}"
+                        invisible="not calendar_event_id or not calendar_event_id_partner_ids"
                     >
                         <field name="calendar_event_id_partner_ids" mode="kanban" />
                     </group>
