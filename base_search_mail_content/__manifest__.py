@@ -6,12 +6,11 @@
 
 {
     "name": "Base Search Mail Content",
-    "version": "16.0.1.0.2",
+    "version": "17.0.1.0.0",
     "author": "ForgeFlow, SerpentCS, Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Social",
-    "data": ["data/trgm_index_data.xml"],
-    "depends": ["mail", "base_search_fuzzy"],
+    "depends": ["mail"],
     "license": "AGPL-3",
     "installable": True,
 }

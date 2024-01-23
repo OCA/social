@@ -58,13 +58,8 @@ body, email from, reply to and record name.
 Installation
 ============
 
-This module depends on the module 'base_search_fuzzy' to ensure that
-searches on emails are based on indexes. Please read carefully the
-`install
-instructions <https://github.com/OCA/server-tools/blob/15.0/base_search_fuzzy>`__.
-
-This module installs by default the indexes that are required to perform
-the searches on mail messages.
+This module creates the GIN (trigram) indexes for these fields of
+mail.message: subject, body, record_name, email_from, reply_to.
 
 Usage
 =====
@@ -103,6 +98,8 @@ Contributors
 
    -  Vicent Cubells
    -  Ernesto Tejeda
+
+-  Nguyen Minh Chien <chien@trobz.com>
 
 Maintainers
 -----------
