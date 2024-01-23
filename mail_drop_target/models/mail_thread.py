@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from base64 import b64decode
 
+import lxml.html
+
 from odoo import _, api, exceptions, models
 from odoo.tools import pycompat, ustr
 
@@ -87,18 +89,25 @@ class MailThread(models.AbstractModel):
         except AttributeError:
             # Using extract_msg < 0.24.4
             message_id = message_msg.message_id
+        msg_body = message_msg.htmlBody or message_msg.body
+        subtype = (
+            lxml.html.fromstring(msg_body).find(".//*") is not None
+            and "html"
+            or "plain"
+        )
         message_email = self.env["ir.mail_server"].build_email(
             message_msg.sender,
             message_msg.to.split(","),
             message_msg.subject,
             # prefer html bodies to text
-            message_msg._getStream("__substg1.0_10130102") or message_msg.body,
+            msg_body,
             email_cc=message_msg.cc,
             message_id=message_id,
             attachments=[
-                (attachment.longFilename, attachment.data)
+                (attachment.longFilename, attachment.data, attachment.mimetype)
                 for attachment in message_msg.attachments
             ],
+            subtype=subtype,
         )
         # We need to override message date, as an error rises when processing it
         # directly with headers
