@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 class TestBaseSearchMailContent(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.channel_obj = self.env["mail.channel"]
+        self.channel_obj = self.env["discuss.channel"]
 
     def test_base_search_mail_content_1(self):
         res = self.channel_obj.search([("message_content", "ilike", "xxxyyyzzz")])
@@ -20,6 +20,6 @@ class TestBaseSearchMailContent(TransactionCase):
         )
         self.assertIn(
             "message_content",
-            res["models"]["mail.channel"],
+            res["models"][self.channel_obj._name],
             "message_content field was not detected",
         )
