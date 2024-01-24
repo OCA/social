@@ -1,2 +1,4 @@
 # generated from manifests external_dependencies
+cryptography<37
+extract_msg
 odoo_test_helper

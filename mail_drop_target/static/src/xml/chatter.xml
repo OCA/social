@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates id="template" xml:space="preserve">
+
+    <t t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath expr="//div[1]" position="inside">
+            <t t-if="isDropZoneVisible.value">
+                <DropZone
+                    class="o_MailBox_dropZone"
+                    t-on-o-dropzone-files-dropped="_onDropZoneFilesDropped"
+                    t-ref="dropzone"
+                />
+                <FileUploader
+                    threadLocalId="chatter.thread.localId"
+                    t-on-o-attachment-created="_onAttachmentCreated"
+                    t-ref="fileUploader"
+                />
+            </t>
+        </xpath>
+    </t>
+
+</templates>
