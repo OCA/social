@@ -81,3 +81,25 @@ class MailActivity(models.Model):
                 continue
             allowed_ids |= self._find_allowed_model_wise(doc_model, doc_dict)
         return allowed_ids
+
+    @api.model
+    def _search(
+        self,
+        args,
+        offset=0,
+        limit=None,
+        order=None,
+        count=False,
+        access_rights_uid=None,
+    ):
+        result = super()._search(
+            args,
+            offset=offset,
+            limit=None,
+            order=order,
+            count=count,
+            access_rights_uid=access_rights_uid,
+        )
+        if limit is not None:
+            result = result[:limit]
+        return result
