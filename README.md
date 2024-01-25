@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [mail_outbound_static](mail_outbound_static/) | 17.0.1.0.0 |  | Allows you to configure the from header for a mail server.
+[mail_partner_forwarding](mail_partner_forwarding/) | 17.0.1.0.0 |  | Forwarding notifications for partners
 
 [//]: # (end addons)
 
