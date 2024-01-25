@@ -92,6 +92,18 @@ class MailActivity(models.Model):
         count=False,
         access_rights_uid=None,
     ):
+        # The mail.activity model has a custom search view which removes records from
+        # the search based on the access rules of the related res_model/res_id records.
+        # This has a side effect when search() is called with a limit, as is the case
+        # for instance when displaying mail.activity records in list view, which is
+        # enabled by this module: in some cases, the list will be truncated and the
+        # pager will not work, and grouping by assigned users will show for instance
+        # 100 records for a given user, but filtering on the same user will only
+        # display a total number of 70 records which is very confusing for the users.
+        #
+        # The fix consists in using an unlimited search when calling super()._search
+        # and applying the limit after the access rights filtering has been applied.
+
         result = super()._search(
             args,
             offset=offset,
