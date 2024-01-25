@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2024-01-20 14:34+0000\n"
+"PO-Revision-Date: 2024-01-25 15:36+0000\n"
 "Last-Translator: Claude R Perrin <claude@alpis.fr>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
@@ -82,7 +82,7 @@ msgstr "Nom à afficher"
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__id
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__id
 msgid "ID"
-msgstr "ID"
+msgstr "Identifiant"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_base_partner_merge_automatic_wizard____last_update
@@ -108,7 +108,7 @@ msgstr "Modifié le"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_contact
 msgid "Mailing Contact"
-msgstr "Contact du Publipostage"
+msgstr "Contact de Publipostage"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_list
