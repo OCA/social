@@ -41,9 +41,9 @@ class MailRenderMixin(models.AbstractModel):
                 # Remove "Powered by", "using" etc.
                 previous = elem.getprevious()
                 if previous is not None:
-                    previous.tail = ""
+                    previous.tail = etree.CDATA("&nbsp;")
                 elif parent.text:
-                    parent.text = ""
+                    parent.text = etree.CDATA("&nbsp;")
                 parent.remove(elem)
             value = etree.tostring(
                 tree, pretty_print=True, method="html", encoding="unicode"
