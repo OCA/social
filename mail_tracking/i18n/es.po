@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-11-12 17:22+0000\n"
-"PO-Revision-Date: 2019-11-12 18:26+0100\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2024-01-26 19:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 2.2.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
@@ -40,6 +40,25 @@ msgid ""
 " * The 'Soft bounced' status indicates that message was soft bounced by "
 "recipient Mail Exchange (MX) server.\n"
 msgstr ""
+" * El estado \"Error\" indica que se ha producido un error al intentar "
+"enviar el correo electrónico, por ejemplo, \"No hay destinatario válido\".\n"
+" * El estado \"Enviado\" indica que el mensaje se ha enviado correctamente a "
+"través del servidor de correo electrónico saliente (SMTP).\n"
+" * El estado \"Entregado\" indica que el mensaje se ha entregado "
+"correctamente en el servidor Mail Exchange (MX) del destinatario.\n"
+" * El estado \"Abierto\" indica que el destinatario ha abierto el mensaje o "
+"ha hecho clic en él.\n"
+" * El estado \"Rechazado\" indica que la dirección de correo electrónico del "
+"destinatario está en la lista negra del servidor de correo saliente (SMTP). "
+"Se recomienda eliminar esta dirección de correo electrónico.\n"
+" * El estado \"Spam\" indica que el servidor de correo saliente (SMTP) "
+"considera este mensaje como spam.\n"
+" * El estado \"Desuscrito\" indica que el destinatario ha solicitado ser "
+"desuscrito de este mensaje.\n"
+" * El estado \"Rebotado\" indica que el mensaje ha sido rebotado por el "
+"servidor Mail Exchange (MX) del destinatario.\n"
+" * El estado 'Soft bounced' indica que el mensaje fue rebotado por el "
+"servidor Mail Exchange (MX) del destinatario.\n"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_message.py:0
@@ -57,7 +76,7 @@ msgstr ""
 #: code:addons/mail_tracking/models/mail_thread.py:0
 #, python-format
 msgid "Anon. To"
-msgstr ""
+msgstr "Anon. A"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -84,7 +103,7 @@ msgstr "Rebotado"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
 msgid "Cc"
-msgstr ""
+msgstr "Con copia (cc)"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
@@ -104,12 +123,12 @@ msgstr "URL Clicada"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes Config"
 
 #. module: mail_tracking
 #. openerp-web
@@ -198,6 +217,7 @@ msgstr "Nombre mostrado"
 #, python-format
 msgid "Do you really want to mark as reviewed all the failed messages (%d)?"
 msgstr ""
+"¿Realmente quieres marcar como revisados todos los mensajes fallidos (%d)?"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
@@ -208,7 +228,7 @@ msgstr "Correo electrónico"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_alias
 msgid "Email Aliases"
-msgstr ""
+msgstr "Alias de correo electrónico"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_bounced_mixin__email_bounced
@@ -244,7 +264,7 @@ msgstr "Asistente de reenvio de correo electrónico"
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_form
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Error"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__error_smtp_server
@@ -357,12 +377,12 @@ msgstr "Rebote duro"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__id
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "IP"
-msgstr ""
+msgstr "IP"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
@@ -419,7 +439,7 @@ msgstr "Mail Tracking necesita acción"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__mail_tracking_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__mail_tracking_ids
 msgid "Mail Trackings"
-msgstr ""
+msgstr "Seguimientos de Correo"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_bounced_mixin
@@ -510,9 +530,8 @@ msgstr "Empresa"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_to
-#, fuzzy
 msgid "Raw TO recipients"
-msgstr "Destinatario"
+msgstr "Raw a los destinatarios"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__recipient
@@ -524,7 +543,7 @@ msgstr "Destinatario"
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Recipient Address"
-msgstr ""
+msgstr "Dirección del Destinatario"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__recipient
@@ -541,7 +560,7 @@ msgstr "Dirección de correo de destinatario"
 #: code:addons/mail_tracking/models/mail_tracking_email.py:0
 #, python-format
 msgid "Records:"
-msgstr ""
+msgstr "Registros:"
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_email__state__rejected
@@ -603,7 +622,7 @@ msgstr "Marcar como Revisado"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_show_aliases
 #: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
 msgid "Show Aliases in Mail Tracking"
-msgstr ""
+msgstr "Mostrar Alias en el Seguimiento del Correo"
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__soft_bounce
@@ -642,7 +661,7 @@ msgstr "Asunto"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_ir_config_parameter
 msgid "System Parameter"
-msgstr ""
+msgstr "Parámetro del Sistema"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
@@ -667,6 +686,10 @@ msgid ""
 "\n"
 "(Document type: %s, Operation: %s)"
 msgstr ""
+"La operación solicitada no puede completarse debido a restricciones de "
+"seguridad. Póngase en contacto con el administrador del sistema.\n"
+"\n"
+"(Tipo de documento: %s, Operación: %s)"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__time
@@ -678,9 +701,8 @@ msgstr "Tiempo"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_to
-#, fuzzy
 msgid "To"
-msgstr "Para:"
+msgstr "Para"
 
 #. module: mail_tracking
 #. openerp-web
@@ -715,13 +737,13 @@ msgstr "Tipo"
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__timestamp
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__timestamp
 msgid "UTC timestamp"
-msgstr ""
+msgstr "Marca de tiempo UTC"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_message.py:0
@@ -757,13 +779,13 @@ msgstr "Aplicación del usuario"
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ua_family
 msgid "User agent family"
-msgstr ""
+msgstr "Familia del agente de usuario"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__ua_type
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "User agent type"
-msgstr ""
+msgstr "Tipo del agente del usuario"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_country_id
@@ -774,7 +796,7 @@ msgstr "País del Usuario"
 #: code:addons/mail_tracking/models/mail_tracking_email.py:0
 #, python-format
 msgid "User:"
-msgstr ""
+msgstr "Usuario:"
 
 #. module: mail_tracking
 #: code:addons/mail_tracking/models/mail_message.py:0
