@@ -17,15 +17,24 @@ class ResPartner(models.Model):
     )
 
     def _find_contacts_by_mail_contact_types(self, codes):
-        return (
-            self.commercial_partner_id.child_ids | self.commercial_partner_id
-        ).filtered(
-            lambda contact: any(
-                contact.mail_contact_type_ids.filtered(
-                    lambda contact_type: contact_type.code in codes
+        """
+        Example of usage:
+        self._find_contacts_by_mail_contact_types([["customer","accounting"], "supplier"])
+        return contacts that are (customer and accounting) or supplier
+        """
+        contacts = self.env["res.partner"].browse()
+        for code_list in codes:
+            if not isinstance(code_list, list):
+                code_list = [code_list]
+            contacts |= (
+                self.commercial_partner_id.child_ids | self.commercial_partner_id
+            ).filtered(
+                lambda contact: all(
+                    code in contact.mail_contact_type_ids.mapped("code")
+                    for code in code_list
                 )
             )
-        )
+        return contacts
 
     def contact_by_types(self, *codes):
         return ",".join(
