@@ -113,8 +113,22 @@ class TestMailContactType(SavepointCase):
             self.env["res.partner"],
         )
         self.assertEqual(
-            self.main_partner._find_contacts_by_mail_contact_types(["invoice", "sale"]),
-            self.partner1 | self.partner2 | self.partner4 | self.main_partner,
+            self.main_partner._find_contacts_by_mail_contact_types(
+                [["invoice", "sale"]]
+            ),
+            self.partner4,
+        )
+        self.assertEqual(
+            self.main_partner._find_contacts_by_mail_contact_types(
+                [["invoice", "sale", "purchase"]]
+            ),
+            self.env["res.partner"],
+        )
+        self.assertEqual(
+            self.main_partner._find_contacts_by_mail_contact_types(
+                [["invoice", "sale"], "purchase"]
+            ),
+            self.partner4 | self.partner3,
         )
 
     def test_contact_by_type(self):
@@ -136,7 +150,19 @@ class TestMailContactType(SavepointCase):
         )
         self.assertEqual(
             self.main_partner.contact_by_types("invoice", "sale"),
-            f"{self.partner1.id},{self.partner2.id},{self.partner4.id},{self.main_partner.id}",
+            f"{self.partner1.id},{self.partner4.id},{self.main_partner.id},{self.partner2.id}",
+        )
+        self.assertEqual(
+            self.main_partner.contact_by_types(["invoice", "sale"]),
+            f"{self.partner4.id}",
+        )
+        self.assertEqual(
+            self.main_partner.contact_by_types(["invoice", "sale", "purchase"]),
+            "",
+        )
+        self.assertEqual(
+            self.main_partner.contact_by_types(["invoice", "sale"], "purchase"),
+            f"{self.partner4.id},{self.partner3.id}",
         )
 
     def test_get_name(self):
