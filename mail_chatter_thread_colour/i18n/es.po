@@ -6,64 +6,66 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-26 16:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model,name:mail_chatter_thread_colour.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes de Config"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_res_config_settings__thread_colour
 msgid "Define base colour for model threads"
-msgstr ""
+msgstr "Definir el color base de los hilos del modelo"
 
 #. module: mail_chatter_thread_colour
 #: model_terms:ir.ui.view,arch_db:mail_chatter_thread_colour.res_config_settings_form_view
 msgid "Define base colour for record model threads"
-msgstr ""
+msgstr "Definir el color base de los hilos del modelo de registro"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_res_config_settings__thread_font_colour
 msgid "Define base font colour for model threads"
-msgstr ""
+msgstr "Definir el color de la fuente base para los hilos del modelo"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_model__display_name
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_qweb__display_name
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_model__id
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_qweb__id
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_model____last_update
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_qweb____last_update
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model,name:mail_chatter_thread_colour.model_ir_model
 msgid "Models"
-msgstr ""
+msgstr "Modelos"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model,name:mail_chatter_thread_colour.model_ir_qweb
 msgid "Qweb"
-msgstr ""
+msgstr "Qweb"
 
 #. module: mail_chatter_thread_colour
 #: model_terms:ir.ui.view,arch_db:mail_chatter_thread_colour.res_config_settings_form_view
@@ -71,6 +73,8 @@ msgid ""
 "Select the base colour used for all model threads. Each model might have an "
 "specific colour if required."
 msgstr ""
+"Seleccione el color base utilizado para todos los hilos del modelo. Cada "
+"modelo puede tener un color específico si es necesario."
 
 #. module: mail_chatter_thread_colour
 #: model_terms:ir.ui.view,arch_db:mail_chatter_thread_colour.res_config_settings_form_view
@@ -78,16 +82,19 @@ msgid ""
 "Select the base font colour used for all model threads. Each model might "
 "have an specific font colour if required."
 msgstr ""
+"Seleccione el color de fuente base utilizado para todos los hilos del "
+"modelo. Cada modelo puede tener un color de fuente específico si es "
+"necesario."
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_model__thread_colour
 msgid "Thread Colour"
-msgstr ""
+msgstr "Color del Hilo"
 
 #. module: mail_chatter_thread_colour
 #: model:ir.model.fields,field_description:mail_chatter_thread_colour.field_ir_model__thread_font_colour
 msgid "Thread Font Colour"
-msgstr ""
+msgstr "Color de la Fuente del Hilo"
 
 #. module: mail_chatter_thread_colour
 #. openerp-web
@@ -97,3 +104,5 @@ msgid ""
 "chatWindow.thread && chatWindow.thread.model && chatWindow.thread.model !== "
 "'mail.channel' ? chatWindow.thread.model : 'chat'"
 msgstr ""
+"chatWindow.thread && chatWindow.thread.model && chatWindow.thread.model !== "
+"'mail.channel' ? chatWindow.thread.model : 'chat'"
