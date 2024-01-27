@@ -17,33 +17,34 @@ Email CC and BCC
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_composer_cc_bcc
+    :target: https://github.com/OCA/social/tree/17.0/mail_composer_cc_bcc
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_composer_cc_bcc
+    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-mail_composer_cc_bcc
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Odoo native does not support defining a Cc field in the Mail Composer
-by default; instead, it only has a unique Recipients fields, which is
+Odoo native does not support defining a Cc field in the Mail Composer by
+default; instead, it only has a unique Recipients fields, which is
 confusing for a lot of end users.
 
-This module allows to properly separate To:, Cc:, and Bcc: fields
-in the Mail Composer.
+This module allows to properly separate To:, Cc:, and Bcc: fields in the
+Mail Composer.
 
 Features
-~~~~~~~~
+--------
 
-* Add Cc and Bcc fields to mail composer form. Send only once to multiple email
-  addresses.
-* Add Cc and Bcc fields to company form to use them as default in mail composer
-  form.
-* Add Bcc field to mail template form. Use Cc and Bcc fields to lookup partners
-  by email then add them to corresponding fields in mail composer form.
+-  Add Cc and Bcc fields to mail composer form. Send only once to
+   multiple email addresses.
+-  Add Cc and Bcc fields to company form to use them as default in mail
+   composer form.
+-  Add Bcc field to mail template form. Use Cc and Bcc fields to lookup
+   partners by email then add them to corresponding fields in mail
+   composer form.
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -58,33 +59,39 @@ Features
 Configuration
 =============
 
-In company form there are two fields to set default cc and bcc
-partners.
+In company form there are two fields to set default cc and bcc partners.
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_composer_cc_bcc/static/img/res_company_form_default_cc_bcc.png
+   |image|
 
 In template form there are two fields to set cc and bcc emails.
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_composer_cc_bcc/static/img/email_template_form_cc_bcc.png
+   |image1|
+
+.. |image| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/res_company_form_default_cc_bcc.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/email_template_form_cc_bcc.png
 
 Usage
 =====
 
-The partners cc and bcc from company form will be used to fill in mail composer
-form.
+The partners cc and bcc from company form will be used to fill in mail
+composer form.
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_composer_cc_bcc/static/img/mail_compose_message_default_cc_bcc.png
+   |image|
 
-When select a template that has cc and/or bcc emails, the emails will be used
-to lookup partners then found partners will be added to corresponding mail
-composer's fields.
+When select a template that has cc and/or bcc emails, the emails will be
+used to lookup partners then found partners will be added to
+corresponding mail composer's fields.
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_composer_cc_bcc/static/img/mail_compose_message_template_cc_bcc.png
+   |image1|
+
+.. |image| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/mail_compose_message_default_cc_bcc.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/mail_compose_message_template_cc_bcc.png
 
 Known issues / Roadmap
 ======================
 
-* Extract `account` customization (`account.invoice.send` wizard) to a specific module `mail_composer_cc_bcc_account`
+-  Extract account customization (account.invoice.send wizard) to a
+   specific module mail_composer_cc_bcc_account
 
 Bug Tracker
 ===========
@@ -92,7 +99,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_composer_cc_bcc%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_composer_cc_bcc%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -100,25 +107,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp SA
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Trobz <https://www.trobz.com>`_:
+-  `Trobz <https://www.trobz.com>`__:
 
-    * Hai N. Le <hailn@trobz.com>
-    * Son Ho <sonhd@trobz.com>
+      -  Hai N. Le <hailn@trobz.com>
+      -  Son Ho <sonhd@trobz.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-The creation and migration from 15.0 to 16.0 of this module were financially supported by Camptocamp.
+The creation and migration from 15.0 to 16.0 of this module were
+financially supported by Camptocamp.
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -138,6 +146,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-hailangvn2023| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_composer_cc_bcc>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/mail_composer_cc_bcc>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
