@@ -9,20 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-10 11:20+0000\n"
-"PO-Revision-Date: 2017-02-10 11:20+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"PO-Revision-Date: 2024-01-28 17:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
-#, fuzzy
 msgid "Body View"
-msgstr "Vista del cuerpo"
+msgstr "Vista del Cuerpo"
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_type
@@ -37,7 +37,7 @@ msgstr "Estimado"
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: email_template_qweb
 #: model:ir.model,name:email_template_qweb.model_mail_template
@@ -47,7 +47,7 @@ msgstr "Plantillas de correo electrónico"
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: email_template_qweb
 #: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__jinja2
@@ -57,7 +57,7 @@ msgstr "Jinja2"
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: email_template_qweb
 #: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__qweb
@@ -77,11 +77,15 @@ msgid ""
 "                               Note that it will read `arch_db` or `arch_fs` "
 "if in dev-xml mode."
 msgstr ""
+"Este campo debe utilizarse cuando se accede al arco de vista. Utilizará la "
+"traducción.\n"
+"                               Tenga en cuenta que leerá `arch_db` o "
+"`arch_fs` si está en modo dev-xml."
 
 #. module: email_template_qweb
 #: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
 msgid "This is an email template using qweb."
-msgstr "Esto es una plantilla de correo electrónico usando QWeb"
+msgstr "Esto es una plantilla de correo electrónico usando qweb."
 
 #. module: email_template_qweb
 #: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_arch
