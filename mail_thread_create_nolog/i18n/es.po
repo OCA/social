@@ -6,38 +6,40 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-28 17:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_thread_create_nolog
 #: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_message__display_name
 #: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_thread__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: mail_thread_create_nolog
 #: model:ir.model,name:mail_thread_create_nolog.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Hilo de Correo Electrónico"
 
 #. module: mail_thread_create_nolog
 #: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_message__id
 #: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_thread__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_thread_create_nolog
 #: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_message____last_update
 #: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_thread____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: mail_thread_create_nolog
 #: model:ir.model,name:mail_thread_create_nolog.model_mail_message
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
