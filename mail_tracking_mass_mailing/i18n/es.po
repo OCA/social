@@ -10,14 +10,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
-"PO-Revision-Date: 2018-02-26 01:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"PO-Revision-Date: 2024-01-28 17:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
@@ -30,17 +31,17 @@ msgstr "País"
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__display_name
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__display_name
 msgid "Display name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_bounced
 msgid "Email Bounced"
-msgstr ""
+msgstr "Correo Electrónico Rebotado"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_contact_view_search
@@ -55,7 +56,7 @@ msgstr "Reputación del email"
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
 msgid "Emails"
-msgstr "Emails"
+msgstr "Correos Electrónicos"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
@@ -69,7 +70,7 @@ msgstr "Eventos"
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__id
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_mail____last_update
@@ -78,7 +79,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact____last_update
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mail_id_int
@@ -118,15 +119,13 @@ msgstr "Evento de seguimiento de correo"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
-#, fuzzy
 msgid "Mailing Contact"
-msgstr "Contacto de correo masivo"
+msgstr "Contacto por Correo"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_trace
-#, fuzzy
 msgid "Mailing Statistics"
-msgstr "Estadísticas de correo"
+msgstr "Estadísticas de Correo"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mass_mailing_id
