@@ -6,56 +6,58 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-01-28 11:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_layout_force
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_compose_message__display_name
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_template__display_name
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_thread__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: mail_layout_force
 #: model:ir.model,name:mail_layout_force.model_mail_template
 msgid "Email Templates"
-msgstr ""
+msgstr "Plantillas Correo Electrónico"
 
 #. module: mail_layout_force
 #: model:ir.model,name:mail_layout_force.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Hilo de Correo Electrónico"
 
 #. module: mail_layout_force
 #: model:ir.model,name:mail_layout_force.model_mail_compose_message
 msgid "Email composition wizard"
-msgstr ""
+msgstr "Asistente de redacción de correo electrónico"
 
 #. module: mail_layout_force
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_template__force_email_layout_id
 msgid "Force Layout"
-msgstr ""
+msgstr "Forzar Diseño"
 
 #. module: mail_layout_force
 #: model:ir.model.fields,help:mail_layout_force.field_mail_template__force_email_layout_id
 msgid "Force a mail layout for this template."
-msgstr ""
+msgstr "Forzar un diseño de correo para esta plantilla."
 
 #. module: mail_layout_force
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_compose_message__id
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_template__id
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_thread__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_layout_force
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_compose_message____last_update
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_template____last_update
 #: model:ir.model.fields,field_description:mail_layout_force.field_mail_thread____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
