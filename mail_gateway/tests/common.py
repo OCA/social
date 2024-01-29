@@ -1,15 +1,14 @@
-# Copyright 2022 CreuBlanca
+# Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.addons.component.tests.common import SavepointComponentRegistryCase
+from odoo.tests.common import HttpCase
 
 
-class MailBrokerComponentRegistryTestCase(SavepointComponentRegistryCase):
+class MailGatewayTestCase(HttpCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls._setup_env()
-        cls._load_module_components(cls, "mail_broker")
 
     @classmethod
     def _setup_context(cls):
