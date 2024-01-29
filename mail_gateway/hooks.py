@@ -8,5 +8,5 @@ def pre_init_hook(cr):
     """
     cr.execute(
         """ALTER TABLE mail_message
-    ADD COLUMN broker_channel_id int"""
+    ADD COLUMN gateway_channel_id int"""
     )

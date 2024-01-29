@@ -1,0 +1,12 @@
+.o_gateway_composer_selector {
+    select {
+        width: unset;
+        display: inline-block;
+        min-width: 15%;
+    }
+
+    .o_gateway_composer_selector_partner {
+        min-width: 30%;
+        display: inline-block;
+    }
+}
