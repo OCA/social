@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.MessageNotificationPopoverContent" t-inherit-mode="extension">
+        <xpath
+            expr="//div[hasclass('o_MessageNotificationPopoverContent_notification')]"
+            position="inside"
+        >
+            <span
+                class="o_MessageNotificationPopoverContent_notificationPartnerName"
+                t-esc="notification.channel_name"
+                t-if="notification.notification_type == 'gateway'"
+            />
+        </xpath>
+    </t>
+</templates>
