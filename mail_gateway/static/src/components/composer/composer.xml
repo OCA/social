@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="mail_gateway.Composer"
+        t-inherit="mail.Composer"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//small[hasclass('o_Composer_followers')]/.." position="after">
+            <t t-if="composerView.composer.isGateway">
+                <small><b class="text-muted">To: </b></small>
+                <t
+                    t-foreach="composerView.composer.composerGatewayFollowers"
+                    t-as="followerGateway"
+                    t-key="followerGateway.follower"
+                >
+                    <GatewayFollowerView record="followerGateway" />
+                </t>
+            </t>
+        </xpath>
+
+    </t>
+</templates>
