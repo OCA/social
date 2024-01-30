@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, fields, models, tools
+from odoo import fields, models, tools
 
 
 def format_emails(partners):

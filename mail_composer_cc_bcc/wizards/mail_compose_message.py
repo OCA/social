@@ -1,7 +1,7 @@
 # Copyright 2023 Camptocamp
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import Command, api, fields, models, tools, _
+from odoo import Command, _, api, fields, models, tools
 
 
 class MailComposeMessage(models.TransientModel):
@@ -76,9 +76,7 @@ class MailComposeMessage(models.TransientModel):
     )
     def _compute_partner_ids(self):
         """
-        Change:
-            add email_bcc
-            recompute when change template/ manually input in composer
+        Change: add email_bcc
 
         return: field Recipients filled with value from 'email_cc', 'email_to', 'partner_ids', 'email_bcc'
         """

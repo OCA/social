@@ -2,15 +2,14 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 import threading
 
-from odoo import _, api, models, registry, SUPERUSER_ID
+from odoo import SUPERUSER_ID, api, models, registry
+from odoo.tools.misc import clean_context, split_every
 
 from .mail_mail import format_emails
-from odoo.tools.misc import clean_context, split_every
 
 
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
-
 
     # ------------------------------------------------------------
     # MAIL.MESSAGE HELPERS
@@ -36,31 +35,29 @@ class MailThread(models.AbstractModel):
         res = super()._notify_by_email_get_base_mail_values(
             message, additional_values=additional_values
         )
-        partners_cc = (
-            message.parent_id.recipient_cc_ids
-            if message.parent_id.recipient_cc_ids
-            else None
-        )
-        if message.recipient_cc_ids not in partners_cc:
-            partners_cc |= message.recipient_cc_ids
 
+        partners_cc = message.recipient_cc_ids if message.recipient_cc_ids else None
         if partners_cc:
+            if (
+                message.parent_id.recipient_cc_ids
+                and message.parent_id.recipient_cc_ids not in partners_cc
+            ):
+                partners_cc |= message.parent_id.recipient_cc_ids
             res["email_cc"] = format_emails(partners_cc)
 
-        partners_bcc = (
-            message.parent_id.recipient_bcc_ids
-            if message.parent_id.recipient_bcc_ids
-            else None
-        )
-        if message.recipient_bcc_ids not in partners_cc:
-            partners_bcc |= message.recipient_bcc_ids
-
+        partners_bcc = message.recipient_bcc_ids if message.recipient_bcc_ids else None
         if partners_bcc:
+            if (
+                message.parent_id.recipient_bcc_ids
+                and message.parent_id.recipient_bcc_ids not in partners_cc
+            ):
+                partners_bcc |= message.parent_id.recipient_bcc_ids
             res["email_bcc"] = format_emails(partners_bcc)
         return res
 
-
-    def _notify_get_recipients_classify(self, message, recipients_data, model_description, msg_vals=None):
+    def _notify_get_recipients_classify(
+        self, message, recipients_data, model_description, msg_vals=None
+    ):
         res = super()._notify_get_recipients_classify(
             message, recipients_data, model_description, msg_vals=msg_vals
         )
@@ -82,7 +79,6 @@ class MailThread(models.AbstractModel):
             customer_data["recipients"] += ids
         return [customer_data]
 
-
     def _notify_thread_by_email(
         self,
         message,
@@ -96,7 +92,8 @@ class MailThread(models.AbstractModel):
         resend_existing=False,
         force_send=True,
         send_after_commit=True,  # email send
-        **kwargs):
+        **kwargs,
+    ):
         """
         add check to avoid violates unique constraint
         """
