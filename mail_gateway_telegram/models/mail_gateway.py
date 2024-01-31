@@ -1,13 +1,13 @@
-# Copyright 2021 Creu Blanca
+# Copyright 2024 Dixmit
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields, models
 
 
-class MailBroker(models.Model):
+class MailGateway(models.Model):
 
-    _inherit = "mail.broker"
+    _inherit = "mail.gateway"
 
     telegram_security_key = fields.Char()
-    broker_type = fields.Selection(
+    gateway_type = fields.Selection(
         selection_add=[("telegram", "Telegram")], ondelete={"telegram": "cascade"}
     )

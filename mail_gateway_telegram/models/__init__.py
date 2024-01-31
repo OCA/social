@@ -1,2 +1,3 @@
-from . import mail_broker_channel
-from . import mail_broker
+from . import mail_gateway_channel
+from . import mail_gateway
+from . import mail_gateway_telegram
