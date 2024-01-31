@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 Creu Blanca
+     Copyright 2024 Dixmit
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="mail_gateway_form_view">
+        <field name="name">mail.gateway.form (in mail_gateway_telegram)</field>
+        <field name="model">mail.gateway</field>
+        <field name="inherit_id" ref="mail_gateway.mail_gateway_form_view" />
+        <field name="arch" type="xml">
+            <field name="has_new_channel_security" position="after">
+                <field
+                    name="telegram_security_key"
+                    attrs="{'invisible': ['|', ('gateway_type', '!=', 'telegram'), ('has_new_channel_security', '=', False)], 'required': [('gateway_type', '=', 'telegram'), ('has_new_channel_security', '=', True)]}"
+                />
+            </field>
+            <notebook position="inside">
+                <page
+                    name="telegram"
+                    string="Telegram configuration"
+                    attrs="{'invisible': [('gateway_type', '!=', 'telegram')]}"
+                >
+                    <div>
+                        <ol>
+                            <li>Access Telegram and start a converstation with <a
+                                    href="https://t.me/BotFather"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >BotFather</a>.</li>
+                            <li
+                            >Create a bot using the command /newbot. The system will ask for a bot name. Remember that it needs to end with the word bot.</li>
+                            <li>Copy the <b
+                                >token given by BotFather to access the HTTP API</b> to the token field.</li>
+                            <li
+                            >Define a Webhook key and a webhook secret of your choice in its corresponding field, in order to secure the connection.</li>
+                            <li
+                            >Press the save button and the integrate webhook smart button will appear.</li>
+                            <li>Press the Integrate webhook button.</li>
+                        </ol>
+                    </div>
+                    <div>
+                        If you want to add an extra layer of security, you can check <b
+                        >Has New Channel Security</b>
+                        and define a <b>Telegram security key</b>.
+                        New chats will be created only with the command <b
+                        >/start SECURITY_KEY</b>.
+                    </div>
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+
+
+</odoo>
