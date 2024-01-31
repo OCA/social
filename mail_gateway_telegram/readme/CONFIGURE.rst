@@ -10,9 +10,14 @@ Configure Odoo
 ~~~~~~~~~~~~~~
 
 1. Access on debug mode
-2. Access `Settings > Technical Settings > Email > Mail Broker`.
-3. Create a bot and assign the token. Mark it as `Show on App`
-4. Press on `Generate webhook` in order to Open the webhook
+2. Access `Settings > Technical Settings > Email > Mail Gateway`.
+3. Access Telegram and start a converstation with BotFather.
+4. Create a bot using the command /newbot. The system will ask for a bot name. Remember that it needs to end with the word bot.
+5. Copy the token to access the HTTP API to the token field.
+6. Define Webhook key an webhook secret of your choice in its corresponding field, in order to secure the connection.
+7. Press save button and the integrate webhook smart button will appear.
+8. Press the Integrate webhook button.
+9. If you want to add an extra layer of security, you can check Has New Channel Security and define a Telegram security key. New chats will be created only with the command /start SECURITY_KEY.
 
 Limitations
 ~~~~~~~~~~~
