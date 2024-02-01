@@ -9,33 +9,40 @@ from .mail_mail import format_emails
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    def _message_create(self, values_list):
-        context = self.env.context
-        res = super()._message_create(values_list)
-        partners_cc = context.get("partner_cc_ids", None)
-        if partners_cc:
-            res.recipient_cc_ids = partners_cc
-        partners_bcc = context.get("partner_bcc_ids", None)
-        if partners_bcc:
-            res.recipient_bcc_ids = partners_bcc
-        return res
+    # ------------------------------------------------------------
+    # MAIL.MESSAGE HELPERS
+    # ------------------------------------------------------------
+
+    def _get_message_create_valid_field_names(self):
+        """
+        add cc and bcc field to create record in mail.mail
+        """
+        field_names = super()._get_message_create_valid_field_names()
+        field_names.update({"recipient_cc_ids", "recipient_bcc_ids"})
+        return field_names
+
+    # ------------------------------------------------------
+    # NOTIFICATION API
+    # ------------------------------------------------------
 
     def _notify_by_email_get_base_mail_values(self, message, additional_values=None):
         """
         This is to add cc, bcc addresses to mail.mail objects so that email
         can be sent to those addresses.
         """
-        context = self.env.context
-
         res = super()._notify_by_email_get_base_mail_values(
             message, additional_values=additional_values
         )
+        context = self.env.context
+
         partners_cc = context.get("partner_cc_ids", None)
         if partners_cc:
             res["email_cc"] = format_emails(partners_cc)
+
         partners_bcc = context.get("partner_bcc_ids", None)
         if partners_bcc:
             res["email_bcc"] = format_emails(partners_bcc)
+
         return res
 
     def _notify_get_recipients(self, message, msg_vals, **kwargs):
@@ -82,32 +89,11 @@ class MailThread(models.AbstractModel):
                 rdata.append(pdata)
         return rdata
 
-    def _notify_by_email_get_final_mail_values(
-        self, recipient_ids, base_mail_values, additional_values=None
-    ):
-        """
-        This is to add cc, bcc recipients' ids to recipient_ids of mail.mail
-        """
-        res = super()._notify_by_email_get_final_mail_values(
-            recipient_ids, base_mail_values, additional_values=additional_values
-        )
-        context = self.env.context
-        r_ids = list(recipient_ids)
-        partners_cc = context.get("partner_cc_ids", None)
-        if partners_cc:
-            r_ids += partners_cc.ids
-        partners_bcc = context.get("partner_bcc_ids", None)
-        if partners_bcc:
-            r_ids += partners_bcc.ids
-        if partners_cc or partners_bcc:
-            res["recipient_ids"] = tuple(set(r_ids))
-        return res
-
     def _notify_get_recipients_classify(
-        self, recipient_data, model_name, msg_vals=None
+        self, message, recipients_data, model_description, msg_vals=None
     ):
         res = super()._notify_get_recipients_classify(
-            recipient_data, model_name, msg_vals=msg_vals
+            message, recipients_data, model_description, msg_vals=msg_vals
         )
         is_from_composer = self.env.context.get("is_from_composer", False)
         if not is_from_composer:

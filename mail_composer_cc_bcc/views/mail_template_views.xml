@@ -8,7 +8,7 @@
             <xpath expr="//field[@name='email_cc']" position="after">
                 <field
                     name="email_bcc"
-                    attrs="{'invisible': [('use_default_to', '=', True)]}"
+                    invisible="use_default_to == True"
                     placeholder="Comma-separated blind carbon copy recipients addresses"
                 />
             </xpath>

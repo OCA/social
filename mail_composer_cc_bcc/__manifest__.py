@@ -2,13 +2,13 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Email CC and BCC",
-    "summary": "This module enables sending mail to CC and BCC partners in mail composer form.",
-    "version": "16.0.1.0.1",
+    "summary": "This module enables sending mail to CC and BCC partners in mail composer form.",  # noqa: E501
+    "version": "17.0.1.0.0",
     "development_status": "Alpha",
     "category": "Social",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp SA, Odoo Community Association (OCA)",
-    "maintainers": ["hailangvn2023"],
+    "maintainers": ["trisdoan"],
     "license": "AGPL-3",
     "application": False,
     "installable": True,
@@ -22,7 +22,6 @@
         "views/mail_mail_views.xml",
         "views/mail_message_views.xml",
         "views/mail_template_views.xml",
-        "wizards/account_invoice_send_views.xml",
         "wizards/mail_compose_message_view.xml",
     ],
 }
