@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="mail_activity_plan_activity_type_wellcome_mail"
+        model="mail.activity.plan.activity.type"
+    >
+        <field name="model">res.partner</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_email" />
+        <field name="summary">Wellcome mail</field>
+        <field name="user_id" ref="base.user_admin" />
+    </record>
+    <record
+        id="mail_activity_plan_activity_type_first_call"
+        model="mail.activity.plan.activity.type"
+    >
+        <field name="model">res.partner</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_call" />
+        <field name="summary">First call</field>
+        <field name="user_id" ref="base.user_admin" />
+    </record>
+    <record
+        id="mail_activity_plan_activity_type_quotation"
+        model="mail.activity.plan.activity.type"
+    >
+        <field name="model">res.partner</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo" />
+        <field name="summary">Send a quotation</field>
+        <field name="user_id" ref="base.user_demo" />
+    </record>
+    <record
+        id="mail_activity_plan_activity_type_survey"
+        model="mail.activity.plan.activity.type"
+    >
+        <field name="model">res.partner</field>
+        <field name="activity_type_id" ref="mail.mail_activity_data_todo" />
+        <field name="summary">Satisfaction survey</field>
+        <field name="user_expression">{{object.user_id.id}}</field>
+    </record>
+    <record id="mail_activity_plan_demo_1" model="mail.activity.plan">
+        <field name="name">Test plan (fixed users)</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]" />
+        <field
+            name="plan_activity_type_ids"
+            eval="[(6, 0, [
+                ref('mail_activity_plan.mail_activity_plan_activity_type_wellcome_mail'),
+                ref('mail_activity_plan.mail_activity_plan_activity_type_first_call'),
+                ref('mail_activity_plan.mail_activity_plan_activity_type_quotation')
+            ])]"
+        />
+    </record>
+    <record id="mail_activity_plan_demo_2" model="mail.activity.plan">
+        <field name="name">Test plan (fixed users + partner user)</field>
+        <field name="model_id" ref="base.model_res_partner" />
+        <field name="group_ids" eval="[(6, 0, [ref('base.group_user')])]" />
+        <field
+            name="plan_activity_type_ids"
+            eval="[(6, 0, [
+                ref('mail_activity_plan.mail_activity_plan_activity_type_wellcome_mail'),
+                ref('mail_activity_plan.mail_activity_plan_activity_type_first_call'),
+                ref('mail_activity_plan.mail_activity_plan_activity_type_quotation'),
+                ref('mail_activity_plan.mail_activity_plan_activity_type_survey')
+            ])]"
+        />
+    </record>
+</odoo>
