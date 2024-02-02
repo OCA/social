@@ -7,7 +7,7 @@
     "development_status": "Alpha",
     "category": "Social",
     "website": "https://github.com/OCA/social",
-    "author": "Camptocamp SA, Odoo Community Association (OCA)",
+    "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["trisdoan"],
     "license": "AGPL-3",
     "application": False,
