@@ -38,10 +38,12 @@ class MailComposeMessage(models.TransientModel):
             res_ids = self._evaluate_res_ids()
             model = self.model
             if model and res_ids:
-                attachments = self.env["ir.attachment"].search([
-                    ("res_model", "=", model),
-                    ("res_id", "in", res_ids),
-                ])
+                attachments = self.env["ir.attachment"].search(
+                    [
+                        ("res_model", "=", model),
+                        ("res_id", "in", res_ids),
+                    ]
+                )
                 composer.display_object_attachment_ids = attachments
             else:
                 composer.display_object_attachment_ids = False

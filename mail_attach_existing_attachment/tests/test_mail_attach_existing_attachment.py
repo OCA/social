@@ -6,10 +6,9 @@ from odoo.tests.common import Form, TransactionCase
 
 
 class TestMailComposer(TransactionCase):
-
     @classmethod
     def setUpClass(cls):
-        super(TestMailComposer, cls).setUpClass()
+        super().setUpClass()
         cls.partner_01 = cls.env["res.partner"].create(
             {
                 "name": "Partner 1",
@@ -30,11 +29,13 @@ class TestMailComposer(TransactionCase):
     def test_01_send_email_attachment(self):
         """Test sending amail with attachment from Object Attachment of composer"""
         # Open email composer
-        composer_form = Form(self.env['mail.compose.message'].with_context({
-            'default_composition_mode': 'comment',
-            'default_model': self.partner_01._name,
-            'default_res_ids': self.partner_01.ids,
-        }))
+        composer_form = Form(
+            self.env["mail.compose.message"].with_context(
+                default_composition_mode="comment",
+                default_model=self.partner_01._name,
+                default_res_ids=self.partner_01.ids,
+            )
+        )
 
         # Field can_attach_attachment is automatically set
         self.assertTrue(composer_form.can_attach_attachment)
@@ -63,13 +64,19 @@ class TestMailComposer(TransactionCase):
         """Test method _prepare_mail_values()"""
         attach2 = self.attach1.copy()
         # Create email composer with 2 Object Attachments
-        composer = self.env['mail.compose.message'].with_context({
-            'default_composition_mode': 'comment',
-            'default_model': self.partner_01._name,
-            'default_res_ids': self.partner_01.ids,
-        }).create({
-            "object_attachment_ids": (self.attach1 + attach2).ids,
-        })
+        composer = (
+            self.env["mail.compose.message"]
+            .with_context(
+                default_composition_mode="comment",
+                default_model=self.partner_01._name,
+                default_res_ids=self.partner_01.ids,
+            )
+            .create(
+                {
+                    "object_attachment_ids": (self.attach1 + attach2).ids,
+                }
+            )
+        )
 
         # Two selectable Object Attachments are displayed
         display_records = composer.display_object_attachment_ids
