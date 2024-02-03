@@ -4,3 +4,7 @@
 
   * Sergio Teruel
   * Ernesto Tejeda
+
+* `360ERP <https://www.360erp.com>`_:
+
+  * Andrea Stirpe
