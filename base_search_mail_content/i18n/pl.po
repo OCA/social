@@ -20,85 +20,87 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 
 #. module: base_search_mail_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__body
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_message__body
+msgid "Contents"
+msgstr ""
+
+#. module: base_search_mail_content
 #: model:ir.model,name:base_search_mail_content.model_mail_thread
 msgid "Email Thread"
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_trgm_index__field_id
-msgid "Field"
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_mail__email_from
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_message__email_from
+msgid ""
+"Email address of the sender. This field is set when no matching partner is "
+"found and replaces the author_id field in the chatter."
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_account__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_account_template__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_analytic_account__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_bank_statement_line__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_journal__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_move__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_payment__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_reconcile_model__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_account_setup_bank_manual_config__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_event_event__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_event_registration__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__email_from
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_message__email_from
+msgid "From"
+msgstr ""
+
+#. module: base_search_mail_content
+#: model:ir.model,name:base_search_mail_content.model_mail_message
+msgid "Message"
+msgstr ""
+
+#. module: base_search_mail_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_discuss_channel__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_blacklist__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_cc__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_main_attachment__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread_phone__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_mailing_contact__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_mailing_mailing__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_phone_blacklist__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_product_product__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_product_template__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_res_company__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner__message_content
-#: model:ir.model.fields,field_description:base_search_mail_content.field_res_partner_bank__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_res_users__message_content
 msgid "Message Content"
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_account__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_account_template__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_analytic_account__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_bank_statement_line__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_journal__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_move__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_payment__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_reconcile_model__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_account_setup_bank_manual_config__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_calendar_event__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_event_event__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_event_registration__message_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__record_name
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_message__record_name
+msgid "Message Record Name"
+msgstr ""
+
+#. module: base_search_mail_content
+#: model:ir.model.fields,help:base_search_mail_content.field_discuss_channel__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_blacklist__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_mail_channel__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_cc__message_content
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_main_attachment__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread_phone__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_mailing_contact__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_mailing_mailing__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_phone_blacklist__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_product_product__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_product_template__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_res_company__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_partner__message_content
-#: model:ir.model.fields,help:base_search_mail_content.field_res_partner_bank__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_res_users__message_content
 msgid "Message content, to be used only in searches"
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model,name:base_search_mail_content.model_trgm_index
-msgid "Trigram Index"
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_mail__reply_to
+#: model:ir.model.fields,help:base_search_mail_content.field_mail_message__reply_to
+msgid ""
+"Reply email address. Setting the reply_to bypasses the automatic thread "
+"creation."
 msgstr ""
 
 #. module: base_search_mail_content
-#: model:ir.model.fields,help:base_search_mail_content.field_trgm_index__field_id
-msgid "You can either select a field of type 'text', 'char' or 'html'."
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__reply_to
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_message__reply_to
+msgid "Reply-To"
+msgstr ""
+
+#. module: base_search_mail_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__subject
+#: model:ir.model.fields,field_description:base_search_mail_content.field_mail_message__subject
+msgid "Subject"
 msgstr ""
 
 #~ msgid "Partner"
