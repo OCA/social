@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record model="ir.ui.view" id="mail_template_form_view">
+    <field name="name">mail.template.form (in mail_template_multi_attachment)</field>
+    <field name="model">mail.template</field>
+    <field name="inherit_id" ref="mail.email_template_form" />
+    <field name="priority" eval="250" />
+    <field name="arch" type="xml">
+      <field name="report_template" position="replace" />
+      <field name="report_name" position="replace" />
+      <notebook position="inside">
+        <page string="Attachments">
+          <group name="simple_attachment" string="Simple attachment">
+            <group>
+              <field name="report_template" domain="[('model','=',model)]" />
+              <field
+                                name="report_name"
+                                attrs="{'invisible':[('report_template','=',False)]}"
+                            />
+            </group>
+            <group />
+          </group>
+          <group name="multi_attachments" string="Multi attachments">
+            <field
+                            name="template_report_ids"
+                            context="{'tree_view_ref': 'mail_template_multi_attachment.mail_template_report_tree_o2m_view', 'default_model': model}"
+                            nolabel="1"
+                            colspan="2"
+                        />
+          </group>
+        </page>
+      </notebook>
+    </field>
+  </record>
+</odoo>
