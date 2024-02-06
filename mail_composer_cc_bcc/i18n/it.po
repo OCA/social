@@ -17,7 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: mail_composer_cc_bcc
-#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__email_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_template__email_bcc
@@ -41,7 +40,6 @@ msgid "Blind cc recipients (placeholders may be used here)"
 msgstr "Nascondi destinatari in CC (qui si possono usare segnaposto)"
 
 #. module: mail_composer_cc_bcc
-#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_cc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_cc_ids
 msgid "Cc"
 msgstr "Cc"
