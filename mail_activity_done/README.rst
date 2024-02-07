@@ -20,7 +20,7 @@ Mail Activity Done
     :target: https://github.com/OCA/social/tree/17.0/mail_activity_done
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-mail_activity_done
+    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_activity_done
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
     :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
@@ -29,8 +29,7 @@ Mail Activity Done
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module implements the capability to keep activities that have been
-completed, for future reporting, by setting them with the boolean
-'Done'.
+completed, for future reporting, by setting them with the boolean 'Done'.
 
 **Table of contents**
 
@@ -42,13 +41,13 @@ Usage
 
 To use this module, you need to:
 
-1. Access to an activity from the systray activities menu.
-2. Once finished, open the activity and mark it as Done.
+#. Access to an activity from the systray activities menu.
+#. Once finished, open the activity and mark it as Done.
 
 To check activities:
 
-1. Go to Settings -> Technical -> Activities
-2. To see finished activities filter by Completed Activities
+#. Go to Settings -> Technical -> Activities
+#. To see finished activities filter by Completed Activities
 
 Bug Tracker
 ===========
@@ -64,24 +63,21 @@ Credits
 =======
 
 Authors
--------
+~~~~~~~
 
 * ForgeFlow
 
 Contributors
-------------
+~~~~~~~~~~~~
 
--  Jordi Ballester <jordi.ballester@forgeflow.com>
-   (`www.forgeflow.com <http://www.forgeflow.com>`__)
--  Eduardo Magdalena <emagdalena@c2i.es> (C2i Change 2 improve
-   http://www.c2i.es)
--  Radovan Skolnik <radovan@skolnik.info> (https://www.kema.sk)
--  Manuel Regidor <manuel.regidor@sygel.es> (https://www.sygel.es)
--  Bernat Puig <bernat.puig@forgeflow.com>
-   (`www.forgeflow.com <http://www.forgeflow.com>`__)
+* Jordi Ballester <jordi.ballester@forgeflow.com> (www.forgeflow.com)
+* Eduardo Magdalena <emagdalena@c2i.es> (C2i Change 2 improve http://www.c2i.es)
+* Radovan Skolnik <radovan@skolnik.info> (https://www.kema.sk)
+* Manuel Regidor <manuel.regidor@sygel.es> (https://www.sygel.es)
+* Bernat Puig <bernat.puig@forgeflow.com> (www.forgeflow.com)
 
 Maintainers
------------
+~~~~~~~~~~~
 
 This module is maintained by the OCA.
 
