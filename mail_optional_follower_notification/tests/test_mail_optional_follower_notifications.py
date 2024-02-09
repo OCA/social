@@ -18,7 +18,7 @@ class TestMailOptionalFollowernotifications(TransactionCase):
         ctx.update(
             {
                 "default_model": "res.partner",
-                "default_res_id": cls.partner_01.id,
+                "default_res_ids": [cls.partner_01.id],
                 "default_composition_mode": "comment",
             }
         )
@@ -27,13 +27,12 @@ class TestMailOptionalFollowernotifications(TransactionCase):
 
     def _send_mail(self, recipients, notify_followers):
         old_messages = self.env["mail.message"].search([])
-        values = self.MailCompose.with_context(
-            **self.mail_compose_context
-        )._onchange_template_id(False, "comment", "res.partner", self.partner_01.id)[
-            "value"
-        ]
-        values["partner_ids"] = [(6, 0, recipients.ids)]
-        values["notify_followers"] = notify_followers
+        values = {
+            "subject": "Your subject here",
+            "body": "Your plain text body here",
+            "partner_ids": [(6, 0, recipients.ids)],
+            "notify_followers": notify_followers,
+        }
         composer = self.MailCompose.with_context(**self.mail_compose_context).create(
             values
         )
