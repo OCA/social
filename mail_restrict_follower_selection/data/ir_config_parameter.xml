@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record forcecreate="False" id="parameter_domain" model="ir.config_parameter">
+        <field name="key">mail_restrict_follower_selection.domain</field>
+        <field name="value">[('category_id.name', '=', 'Employees')]</field>
+    </record>
+</odoo>
