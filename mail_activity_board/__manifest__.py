@@ -4,7 +4,7 @@
 {
     "name": "Mail Activity Board",
     "summary": "Add Activity Boards",
-    "version": "15.0.2.1.1",
+    "version": "15.0.2.1.2",
     "development_status": "Beta",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
