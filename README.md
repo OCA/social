@@ -23,6 +23,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 14.0.1.0.1 |  | Base Search Mail Content
 [email_template_qweb](email_template_qweb/) | 14.0.1.0.1 |  | Use the QWeb templating mechanism for emails
+[fetchmail_thread_default](fetchmail_thread_default/) | 14.0.1.0.0 |  | Post unkonwn messages to an existing thread
 [mail_activity_board](mail_activity_board/) | 14.0.1.1.1 |  | Add Activity Boards
 [mail_activity_creator](mail_activity_creator/) | 14.0.1.0.1 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 14.0.1.0.2 |  | Mail Activity Done
