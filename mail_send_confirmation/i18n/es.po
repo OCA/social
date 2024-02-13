@@ -20,30 +20,21 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
 #, python-format
-msgid "Confirm"
-msgstr "Confirmar"
-
-#. module: mail_send_confirmation
-#. odoo-javascript
-#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
-#, python-format
-msgid "Confirmation"
-msgstr "Confirmación"
-
-#. module: mail_send_confirmation
-#. odoo-javascript
-#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
-#, python-format
-msgid "Discard"
-msgstr "Descartar"
-
-#. module: mail_send_confirmation
-#. odoo-javascript
-#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
-#, python-format
 msgid ""
 "This message will be sent to external partners as well. Are you sure you "
 "would like to send this message?"
 msgstr ""
 "Este mensaje también se enviará a socios externos. ¿Está seguro de que desea "
 "enviar este mensaje?"
+
+#, python-format
+#~ msgid "Confirm"
+#~ msgstr "Confirmar"
+
+#, python-format
+#~ msgid "Confirmation"
+#~ msgstr "Confirmación"
+
+#, python-format
+#~ msgid "Discard"
+#~ msgstr "Descartar"
