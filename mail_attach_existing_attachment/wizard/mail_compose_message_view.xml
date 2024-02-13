@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="email_compose_message_wizard_inherit_form" model="ir.ui.view">
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='attachment_ids']" position="after">
+                <field name="can_attach_attachment" invisible="1" />
+                <field name="display_object_attachment_ids" invisible="1" />
+                <field
+                    name="object_attachment_ids"
+                    widget="many2many_checkboxes"
+                    domain="[('id', 'in', display_object_attachment_ids)]"
+                    invisible="not can_attach_attachment"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
