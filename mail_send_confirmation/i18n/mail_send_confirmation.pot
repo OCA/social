@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -12,27 +12,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
-
-#. module: mail_send_confirmation
-#. odoo-javascript
-#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
-#, python-format
-msgid "Confirm"
-msgstr ""
-
-#. module: mail_send_confirmation
-#. odoo-javascript
-#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
-#, python-format
-msgid "Confirmation"
-msgstr ""
-
-#. module: mail_send_confirmation
-#. odoo-javascript
-#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
-#, python-format
-msgid "Discard"
-msgstr ""
 
 #. module: mail_send_confirmation
 #. odoo-javascript
