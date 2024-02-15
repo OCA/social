@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Tecnativa - Víctor Martínez
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_mail_activity_plan_form" model="ir.ui.view">
+        <field name="model">wizard.mail.activity.plan</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="res_model" invisible="1" />
+                    <field name="allowed_activity_plans" invisible="1" />
+                    <field name="activity_plan_id" required="1" />
+                </group>
+                <notebook>
+                    <page
+                        name="detail_ids"
+                        string="Details"
+                        attrs="{'invisible' : [('activity_plan_id', '=', False)]}"
+                    >
+                        <field name="detail_ids">
+                            <tree editable="bottom" delete="true" create="false">
+                                <field name="record_ref" />
+                                <field name="activity_type_id" />
+                                <field name="date_deadline" />
+                                <field name="summary" />
+                                <field name="user_id" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button
+                        name="action_launch"
+                        string="Create activities"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_wizard_mail_activity_plan" model="ir.actions.act_window">
+        <field name="name">Schedule Activity Plan</field>
+        <field name="res_model">wizard.mail.activity.plan</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+</odoo>
