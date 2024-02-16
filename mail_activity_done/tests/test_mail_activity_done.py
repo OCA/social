@@ -41,3 +41,32 @@ class TestMailActivityDoneMethods(TransactionCase):
         self.assertEqual(
             len(act_count), 1, "Number of activities should be equal to one"
         )
+
+    def test_mail_activity_search(self):
+        # Cover `_search_state` for mail.activity
+        self.act1._action_done()
+        self.assertEqual(
+            self.env["mail.activity"].search_count(
+                [("state", "=", "done"), ("active", "=", False)]
+            ),
+            1,
+        )
+        self.assertEqual(
+            self.env["mail.activity"].search_count(
+                [("state", "!=", "done"), ("active", "=", False)]
+            ),
+            0,
+        )
+        self.assertEqual(
+            self.env["mail.activity"].search_count(
+                [("state", "!=", "today"), ("active", "=", False)]
+            ),
+            1,
+        )
+        self.assertFalse(
+            self.env["mail.activity"].search_count(
+                [("state", "=", "today"), ("active", "=", False)]
+            )
+        )
+        self.assertFalse(self.env["mail.activity"].search([("state", "=", False)]))
+        self.assertTrue(self.env["mail.activity"].search([("state", "!=", False)]))
