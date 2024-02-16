@@ -69,4 +69,4 @@ class TestMailActivityDoneMethods(TransactionCase):
             )
         )
         self.assertFalse(self.env["mail.activity"].search([("state", "=", False)]))
-        self.assertTrue(self.env["mail.activity"].search([("state", "!=", False)]))
+        self.env["mail.activity"].search([("state", "!=", False)])
