@@ -1,0 +1,49 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_send_confirmation
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-01-03 11:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_send_confirmation
+#. odoo-javascript
+#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
+#, python-format
+msgid "Confirm"
+msgstr "Conferma"
+
+#. module: mail_send_confirmation
+#. odoo-javascript
+#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
+#, python-format
+msgid "Confirmation"
+msgstr "Conferma"
+
+#. module: mail_send_confirmation
+#. odoo-javascript
+#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
+#, python-format
+msgid "Discard"
+msgstr "Abbandona"
+
+#. module: mail_send_confirmation
+#. odoo-javascript
+#: code:addons/mail_send_confirmation/static/src/models/composer_view.esm.js:0
+#, python-format
+msgid ""
+"This message will be sent to external partners as well. Are you sure you "
+"would like to send this message?"
+msgstr ""
+"Questo messaggio verrà inviato anche ai partner. Si è sicuri di inviare "
+"questo messaggio?"
