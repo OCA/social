@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
+<?xml version="1.0" encoding="UTF-8" ?>
 <template>
     <t t-extend="mail.thread.message">
         <t t-jquery=".oe_msg_icons .oe_reply" t-operation="before">

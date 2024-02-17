@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2016 Sunflower IT (http://sunflowerweb.nl)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -7,7 +6,7 @@
     "summary": "Adds an option to edit mail to different partners",
     "version": "8.0.1.0.0",
     "category": "Social Network",
-    "website": "https://sunflowerweb.nl",
+    "website": "https://github.com/OCA/social",
     "author": "Sunflower IT, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
