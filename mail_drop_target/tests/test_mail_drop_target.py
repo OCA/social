@@ -1,6 +1,5 @@
 import base64
-
-from mock import patch
+from unittest.mock import patch
 
 from odoo import exceptions, tools
 from odoo.tests.common import TransactionCase
@@ -20,7 +19,7 @@ class TestMailDropTarget(TransactionCase):
         self.partner.message_process(
             self.partner._name, message, thread_id=self.partner.id
         )
-        self.partner.refresh()
+        self.partner.invalidate_recordset()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         with self.assertRaises(exceptions.UserError):
             self.partner.message_drop(
@@ -37,9 +36,30 @@ class TestMailDropTarget(TransactionCase):
         self.partner.message_process_msg(
             self.partner._name, message, thread_id=self.partner.id
         )
-        self.partner.refresh()
+        self.partner.invalidate_recordset()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
+        self.assertIsNotNone(msg.notified_partner_ids)
+        with self.assertRaises(exceptions.UserError):
+            self.partner.message_process_msg(
+                self.partner._name, message, thread_id=self.partner.id
+            )
+
+    def test_msg_with_attachment(self):
+        message = base64.b64encode(
+            tools.file_open(
+                "addons/mail_drop_target/tests/sample_include_attachment.msg", mode="rb"
+            ).read()
+        )
+        comments = len(self.partner.message_ids)
+        self.partner.message_process_msg(
+            self.partner._name, message, thread_id=self.partner.id
+        )
+        self.partner.invalidate_recordset()
+        self.assertEqual(comments + 1, len(self.partner.message_ids))
+        msg = self.partner.message_ids.filtered(
+            lambda m: m.subject == "Test Mail Attachment"
+        )
         self.assertIsNotNone(msg.notified_partner_ids)
         with self.assertRaises(exceptions.UserError):
             self.partner.message_process_msg(
@@ -51,6 +71,11 @@ class TestMailDropTarget(TransactionCase):
             "odoo.addons.mail_drop_target.models.mail_thread.Message", new=False
         ):
             self.test_msg()
+
+        with self.assertRaises(exceptions.UserError), patch(
+            "odoo.addons.mail_drop_target.models.mail_thread.Message", new=False
+        ):
+            self.test_msg_with_attachment()
 
     def test_msg_no_notification(self):
         message = base64.b64encode(
@@ -65,7 +90,7 @@ class TestMailDropTarget(TransactionCase):
         self.partner.message_process_msg(
             self.partner._name, message, thread_id=self.partner.id
         )
-        self.partner.refresh()
+        self.partner.invalidate_recordset()
         self.assertEqual(comments + 1, len(self.partner.message_ids))
         msg = self.partner.message_ids.filtered(lambda m: m.subject == "Test")
         self.assertEqual(len(msg.notified_partner_ids), 0)
