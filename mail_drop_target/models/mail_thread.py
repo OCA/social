@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from base64 import b64decode
 
+import lxml.html
+
 from odoo import _, api, exceptions, models
 from odoo.tools import pycompat, ustr
 
@@ -87,18 +89,26 @@ class MailThread(models.AbstractModel):
         except AttributeError:
             # Using extract_msg < 0.24.4
             message_id = message_msg.message_id
+        msg_body = message_msg.htmlBody or message_msg.body
+        subtype = (
+            lxml.html.fromstring(msg_body).find(".//*") is not None
+            and "html"
+            or "plain"
+        )
+
         message_email = self.env["ir.mail_server"].build_email(
             message_msg.sender,
             message_msg.to.split(","),
             message_msg.subject,
             # prefer html bodies to text
-            message_msg._getStream("__substg1.0_10130102") or message_msg.body,
+            msg_body,
             email_cc=message_msg.cc,
             message_id=message_id,
             attachments=[
-                (attachment.longFilename, attachment.data)
+                (attachment.longFilename, attachment.data, attachment.mimetype)
                 for attachment in message_msg.attachments
             ],
+            subtype=subtype,
         )
         # We need to override message date, as an error rises when processing it
         # directly with headers
@@ -114,28 +124,34 @@ class MailThread(models.AbstractModel):
             thread_id=thread_id,
         )
 
-    def _notify_record_by_email(
+    def _notify_thread_by_email(
         self,
         message,
         recipients_data,
-        msg_vals=None,
+        msg_vals=False,
+        mail_auto_delete=True,  # mail.mail
         model_description=False,
-        mail_auto_delete=True,
-        check_existing=False,
+        force_email_company=False,
+        force_email_lang=False,  # rendering
+        resend_existing=False,
         force_send=True,
-        send_after_commit=True,
-        **kwargs,
+        send_after_commit=True,  # email send
+        subtitles=None,
+        **kwargs
     ):
         if self.env.context.get("message_create_from_mail_mail", False):
             return
-        return super()._notify_record_by_email(
+        return super()._notify_thread_by_email(
             message,
             recipients_data,
             msg_vals=msg_vals,
-            model_description=model_description,
             mail_auto_delete=mail_auto_delete,
-            check_existing=check_existing,
+            model_description=model_description,
+            force_email_company=force_email_company,
+            force_email_lang=force_email_lang,
+            resend_existing=resend_existing,
             force_send=force_send,
             send_after_commit=send_after_commit,
+            subtitles=subtitles,
             **kwargs,
         )
