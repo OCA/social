@@ -61,14 +61,14 @@ Configuration
 
 In company form there are two fields to set default cc and bcc partners.
 
-   |image|
+   |res_company_form_default_cc_bcc|
 
 In template form there are two fields to set cc and bcc emails.
 
-   |image1|
+   |email_template_form_cc_bcc|
 
-.. |image| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/res_company_form_default_cc_bcc.png
-.. |image1| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/email_template_form_cc_bcc.png
+.. |res_company_form_default_cc_bcc| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/res_company_form_default_cc_bcc.png
+.. |email_template_form_cc_bcc| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_composer_cc_bcc/static/img/email_template_form_cc_bcc.png
 
 Usage
 =====

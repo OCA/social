@@ -3,7 +3,7 @@
 {
     "name": "Email CC and BCC when sending invoice",
     "summary": "This module enables sending mail to CC and BCC partners for invoices.",
-    "version": "16.0.2.0.0",
+    "version": "17.0.1.0.0",
     "development_status": "Alpha",
     "category": "Social",
     "website": "https://github.com/OCA/social",
@@ -15,10 +15,10 @@
     "auto_install": True,
     "preloadable": True,
     "depends": [
-        "mail_composer_cc_bcc",
         "account",
+        "mail_composer_cc_bcc",
     ],
     "data": [
-        "wizards/account_invoice_send_views.xml",
+        "wizards/account_move_send.xml",
     ],
 }
