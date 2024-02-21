@@ -8,14 +8,14 @@ If you create a test Business Account, passwords will change every 24 hours.
 
 In order to make the webhook accessible, the system must be public.
 
-Configure the broker
-~~~~~~~~~~~~~~~~~~~~
+Configure the gateway
+~~~~~~~~~~~~~~~~~~~~~
 
-Once you have created the Meta App, you need to add the broker and webhook.
+Once you have created the Meta App, you need to add the gateway and webhook.
 In order to make it you must follow this steps:
 
-*  Access `Settings > Emails > Mail Broker`
-*  Create a Broker of type `WhatsApp`
+*  Access `Settings > Emails > Mail Gateway`
+*  Create a Gateway of type `WhatsApp`
 
   *  Use the Meta App authentication key as `Token` field
   *  Use the Meta App Phone Number ID as `Whatsapp from Phone` field
