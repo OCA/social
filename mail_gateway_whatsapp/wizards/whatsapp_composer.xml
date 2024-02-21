@@ -4,16 +4,16 @@
 <odoo>
 
     <record model="ir.ui.view" id="whatsapp_composer_form_view">
-        <field name="name">whatsapp.composer.form (in mail_broker_whatsapp)</field>
+        <field name="name">whatsapp.composer.form (in mail_gateway_whatsapp)</field>
         <field name="model">whatsapp.composer</field>
         <field name="arch" type="xml">
             <form string="Whatsapp Composer">
                 <group>
                     <field
-                        name="broker_id"
-                        attrs="{'invisible': [('find_broker', '=', False)]}"
+                        name="gateway_id"
+                        attrs="{'invisible': [('find_gateway', '=', False)]}"
                     />
-                    <field name="find_broker" invisible="1" />
+                    <field name="find_gateway" invisible="1" />
                     <field name="res_model" invisible="1" />
                     <field name="res_id" invisible="1" />
                     <field name="number_field_name" invisible="1" />
@@ -29,7 +29,7 @@
                     />
                     <button
                         name="action_view_whatsapp"
-                        string="Show log"
+                        string="Show Chat"
                         type="object"
                     />
                     <button string="Cancel" class="btn-default" special="cancel" />
