@@ -5,3 +5,4 @@ extract_msg
 lottie
 premailer
 python-telegram-bot
+requests_toolbelt
