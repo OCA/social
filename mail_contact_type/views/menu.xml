@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+
+    <record id="action_mail_contact_type" model="ir.actions.act_window">
+        <field name="name">Contact Types</field>
+        <field name="res_model">mail.contact.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+    <menuitem
+        id="menu_contact_type"
+        name="Mailing"
+        parent="contacts.res_partner_menu_config"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_contact_type_list"
+        name="Contact types"
+        parent="menu_contact_type"
+        action="action_mail_contact_type"
+        sequence="10"
+    />
+
+</odoo>
