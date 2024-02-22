@@ -8,6 +8,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -30,7 +31,6 @@ msgstr "Type de contact"
 
 #. module: mail_contact_type
 #: model:ir.actions.act_window,name:mail_contact_type.action_mail_contact_type
-#: model_terms:ir.ui.view,arch_db:mail_contact_type.view_mail_contact_type_tree
 msgid "Contact Types"
 msgstr "Types de contact"
 
@@ -83,21 +83,10 @@ msgid "Mail Contact Type"
 msgstr "Type de contact par mail"
 
 #. module: mail_contact_type
-#: model:ir.model.fields,field_description:mail_contact_type.field_fsm_location__mail_contact_type_ids
-#: model:ir.model.fields,field_description:mail_contact_type.field_fsm_person__mail_contact_type_ids
 #: model:ir.model.fields,field_description:mail_contact_type.field_res_partner__mail_contact_type_ids
 #: model:ir.model.fields,field_description:mail_contact_type.field_res_users__mail_contact_type_ids
 msgid "Mail Contact Types"
 msgstr "Types de contact par mail"
-
-#. module: mail_contact_type
-#: model:ir.model.fields,help:mail_contact_type.field_fsm_location__mail_contact_type_ids
-#: model:ir.model.fields,help:mail_contact_type.field_fsm_person__mail_contact_type_ids
-#: model:ir.model.fields,help:mail_contact_type.field_res_partner__mail_contact_type_ids
-#: model:ir.model.fields,help:mail_contact_type.field_res_users__mail_contact_type_ids
-msgid "Used by email template to select contacts by mail contact type"
-msgstr "Utilisé par le modèle de courriel pour sélectionner les contacts par type de contact par courriel"
-
 
 #. module: mail_contact_type
 #: model:ir.ui.menu,name:mail_contact_type.menu_contact_type
@@ -113,3 +102,11 @@ msgstr "Nom"
 #: model:ir.model.constraint,message:mail_contact_type.constraint_mail_contact_type_code_uniq
 msgid "The code must be unique"
 msgstr "Le code doit être unique"
+
+#. module: mail_contact_type
+#: model:ir.model.fields,help:mail_contact_type.field_res_partner__mail_contact_type_ids
+#: model:ir.model.fields,help:mail_contact_type.field_res_users__mail_contact_type_ids
+msgid "Used by email template to select contacts by mail contact type"
+msgstr ""
+"Utilisé par le modèle de courriel pour sélectionner les contacts par type de "
+"contact par courriel"
