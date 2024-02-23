@@ -6,7 +6,7 @@ from odoo.tests.common import Form, TransactionCase
 
 class TestMailTemplateSubstitute(TransactionCase):
     def setUp(self):
-        super(TestMailTemplateSubstitute, self).setUp()
+        super().setUp()
         self.smt2 = self.env["mail.template"].create(
             {
                 "name": "substitute_template_2",
