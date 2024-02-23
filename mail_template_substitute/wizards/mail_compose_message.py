@@ -5,7 +5,6 @@ from odoo import api, models
 
 
 class MailComposeMessage(models.TransientModel):
-
     _inherit = "mail.compose.message"
 
     @api.model
@@ -21,7 +20,7 @@ class MailComposeMessage(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        result = super(MailComposeMessage, self).default_get(fields)
+        result = super().default_get(fields)
         substitution_template = self._get_substitution_template(
             result.get("composition_mode"),
             self.env["mail.template"].browse(result.get("template_id")),

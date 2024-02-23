@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class MailTemplateSubstitutionRule(models.Model):
-
     _name = "mail.template.substitution.rule"
     _description = "Mail Template Substitution Rule"
     _order = "sequence ASC"
