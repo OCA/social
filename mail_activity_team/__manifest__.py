@@ -21,7 +21,12 @@
         "views/mail_activity_views.xml",
         "views/res_users_views.xml",
     ],
+    "demo": [
+        "demo/mail_activity_team.xml",
+    ],
     "qweb": [
+        "static/src/xml/activity.xml",
         "static/src/xml/systray.xml",
+        "static/src/xml/web_kanban_activity.xml",
     ],
 }

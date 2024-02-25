@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-extend="mail.activities-list-group-item">
+        <t t-jquery=".o_activity_title_entry small.mr-1" t-operation="replace">
+            <t t-if="log.user_id[0]">
+                <small
+                    t-if="log.user_id[0] !== session.uid and log.mail_template_ids"
+                    class="mr-1"
+                ><t t-esc="log.user_id[1]" /> -</small>
+            </t>
+            <t t-else="">
+                <t t-if="log.team_id[0]">
+                    <small class="mr-1"><t t-esc="log.team_id[1]" /> -</small>
+                </t>
+            </t>
+        </t>
+    </t>
+
+</templates>

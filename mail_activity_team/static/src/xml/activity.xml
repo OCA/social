@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.Activity" t-inherit-mode="extension" owl="1">
+        <xpath
+            expr="//div[@class='o_Activity_user']/t[@t-if='activity.assignee']"
+            position="after"
+        >
+            <t t-if="!activity.assignee and activity.team">
+                <img
+                    class="o_Activity_userAvatar o_object_fit_cover"
+                    t-attf-src="/web/image/mail.activity.team/{{ activity.team.id }}/image_128"
+                    t-att-alt="activity.team.displayName"
+                />
+            </t>
+        </xpath>
+        <xpath
+            expr="//div[@class='o_Activity_core']/div[@class='o_Activity_info']/t[@t-if='activity.assignee']"
+            position="after"
+        >
+            <t t-if="!activity.assignee and activity.team">
+                <div class="o_Activity_userName">
+                    <t t-esc="assignedTeamText()" />
+                </div>
+            </t>
+        </xpath>
+    </t>
+
+</templates>
