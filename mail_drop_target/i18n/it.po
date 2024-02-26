@@ -6,52 +6,54 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-02-26 16:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_drop_target
 #: model:ir.model,name:mail_drop_target.model_ir_attachment
 msgid "Attachment"
-msgstr ""
+msgstr "Allegato"
 
 #. module: mail_drop_target
 #: model:ir.model,name:mail_drop_target.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: mail_drop_target
 #: model_terms:ir.ui.view,arch_db:mail_drop_target.res_config_settings_view_form
 msgid "Disable Mail Drag&Drop Notification"
-msgstr ""
+msgstr "Disabilita notifica e-mail trascina&rilascia"
 
 #. module: mail_drop_target
 #: model:ir.model.fields,field_description:mail_drop_target.field_res_config_settings__disable_notify_mail_drop_target
 msgid "Disable Notification followers on mail dropped to a Thread"
-msgstr ""
+msgstr "Disabilita notifica chi segue per e-mail inserita in una discussione"
 
 #. module: mail_drop_target
 #: model:ir.model,name:mail_drop_target.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussione e-mail"
 
 #. module: mail_drop_target
 #. odoo-python
 #: code:addons/mail_drop_target/models/mail_thread.py:0
 #, python-format
 msgid "Install the msg-extractor library to handle .msg files"
-msgstr ""
+msgstr "Installare la libreria msg-extractor per festire i file .msg"
 
 #. module: mail_drop_target
 #. odoo-python
 #: code:addons/mail_drop_target/models/mail_thread.py:0
 #, python-format
 msgid "This message is already imported."
-msgstr ""
+msgstr "Questo messaggio è già stato importato."
 
 #. module: mail_drop_target
 #: model_terms:ir.ui.view,arch_db:mail_drop_target.res_config_settings_view_form
@@ -59,6 +61,8 @@ msgid ""
 "When a user drops an email into an existing thread\n"
 "                            the followers of the thread will not be notified."
 msgstr ""
+"Quando un utente rilascia una e-mail in una discussione esistente\n"
+"                            chi segue la discussione non verrà avvisato."
 
 #. module: mail_drop_target
 #: model:ir.model.fields,help:mail_drop_target.field_res_config_settings__disable_notify_mail_drop_target
@@ -67,10 +71,13 @@ msgid ""
 " the followers of the thread will not be notified. This sets an "
 "ir.config.parameter mail_drop_target.disable_notify"
 msgstr ""
+"Quanto è attiva questa impostazione, quando un utente rilascia una e.mail in "
+"una discussione esistente, chi segue la discussione non verrà avvisato. "
+"Questo imposta un ir.config.parameter in mail_drop_target.disable_notify"
 
 #. module: mail_drop_target
 #. odoo-python
 #: code:addons/mail_drop_target/controllers/discuss.py:0
 #, python-format
 msgid "You are not allowed to upload an attachment here."
-msgstr ""
+msgstr "Non si ha l'autorizzazione per caricare qui un allegato."
