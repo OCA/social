@@ -1,12 +1,13 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # Copyright 2018 David Vidal <david.vidal@tecnativa.com>
 # Copyright 2020 Tecnativa - Pedro M. Baeza
+# Copyright 2024 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 {
     "name": "Customizable unsubscription process on mass mailing emails",
     "summary": "Know and track (un)subscription reasons, GDPR compliant",
     "category": "Marketing",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "depends": ["mass_mailing"],
     "data": [
         "security/ir.model.access.csv",
