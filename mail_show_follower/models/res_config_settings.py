@@ -29,11 +29,20 @@ class ResConfigSettings(models.TransientModel):
         readonly=True,
         store=False,
     )
+    show_followers_message_background_color = fields.Char(
+        related='company_id.show_followers_message_background_color', readonly=False
+    )
+    show_followers_message_font_color = fields.Char(
+        related='company_id.show_followers_message_font_color',
+        readonly=False
+    )
 
     @api.onchange(
         "show_followers_message_sent_to",
         "show_followers_partner_format",
         "show_followers_message_response_warning",
+        "show_followers_message_background_color",
+        "show_followers_message_font_color"
     )
     def onchange_show_followers_message_preview(self):
         self.show_followers_message_preview = (
@@ -43,6 +52,8 @@ class ResConfigSettings(models.TransientModel):
                 partner_format=self.show_followers_partner_format or "",
                 msg_sent_to=self.show_followers_message_sent_to or "",
                 msg_warn=self.show_followers_message_response_warning or "",
+                msg_back_color=self.show_followers_message_background_color or "#EBEBEB",
+                msg_font_color=self.show_followers_message_font_color or "#E0E2E6"
             )
             ._build_cc_text(
                 # Sample partners

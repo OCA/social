@@ -26,3 +26,11 @@ class ResCompany(models.Model):
         translate=True,
         default="Notice: Replies to this email will be sent to all recipients",
     )
+    show_followers_message_background_color = fields.Char(
+        "Follower message Background Color",
+        readonly=False, store=True
+    )
+    show_followers_message_font_color = fields.Char(
+        "Follower message font Color",
+        readonly=False, store=True
+    )

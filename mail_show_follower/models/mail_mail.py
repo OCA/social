@@ -31,6 +31,12 @@ class MailMail(models.Model):
         msg_warn = get_ctx_param(
             "msg_warn", company.show_followers_message_response_warning
         )
+        msg_back_color = get_ctx_param(
+            "msg_back_color", company.show_followers_message_background_color
+        )
+        msg_font_color = get_ctx_param(
+            "msg_font_color", company.show_followers_message_font_color
+        )
         partner_message = ", ".join(
             [
                 partner_format
@@ -46,11 +52,13 @@ class MailMail(models.Model):
         full_text = """
             <div summary='o_mail_notification' style='padding:5px;
             margin:10px 0px 10px 0px;font-size:13px;border-radius:5px;
-            font-family:Arial;border:1px solid #E0E2E6;background-color:#EBEBEB;'>
+            font-family:Arial;border:1px solid;color:{msg_font_color};background-color:{msg_back_color};'>
             {msg_sent_to} {partner_message}
             {rc}{msg_warn}
             </div>
         """.format(
+            msg_font_color=remove_p(msg_font_color),
+            msg_back_color=remove_p(msg_back_color),
             msg_sent_to=remove_p(msg_sent_to),
             partner_message=Markup.escape(partner_message),
             rc=msg_warn.striptags() and "<br/>" or "",
@@ -58,7 +66,7 @@ class MailMail(models.Model):
         )
         return full_text
 
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
+    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None, alias_domain_id=False):
         group_portal = self.env.ref("base.group_portal")
         for mail_id in self.ids:
             mail = self.browse(mail_id)
@@ -154,4 +162,5 @@ class MailMail(models.Model):
             auto_commit=auto_commit,
             raise_exception=raise_exception,
             smtp_session=smtp_session,
+            alias_domain_id=False
         )
