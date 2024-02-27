@@ -98,6 +98,7 @@ class MailUnsubscriptionReason(models.Model):
     _name = "mail.unsubscription.reason"
     _description = "Mail unsubscription reason"
     _order = "sequence, name"
+    _inherit = ["mail.thread"]
 
     name = fields.Char(index=True, translate=True, required=True)
     details_required = fields.Boolean(
