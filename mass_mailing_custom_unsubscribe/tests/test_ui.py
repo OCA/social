@@ -4,9 +4,11 @@ from unittest import mock
 
 from werkzeug import urls
 
+from odoo.tests import tagged
 from odoo.tests.common import HttpCase
 
 
+@tagged("post_install", "-at_install")
 class UICase(HttpCase):
     def extract_url(self, mail, *args, **kwargs):
         url = mail.mailing_id._get_unsubscribe_url(self.email, mail.res_id)
@@ -33,7 +35,11 @@ class UICase(HttpCase):
             {
                 "name": "test contact",
                 "email": self.email,
-                "list_ids": [(6, False, self.lists.ids)],
+                "subscription_list_ids": [
+                    (0, 0, {"list_id": self.lists[0].id}),
+                    (0, 0, {"list_id": self.lists[1].id}),
+                    (0, 0, {"list_id": self.lists[2].id}),
+                ],
             }
         )
         self.mailing = self.env["mailing.mailing"].create(
@@ -70,7 +76,6 @@ class UICase(HttpCase):
         # Extract the unsubscription link from the message body
         with self.mail_postprocess_patch:
             self.mailing.action_send_mail()
-
         self.start_tour(
             self.url, "mass_mailing_custom_unsubscribe_tour_contact", login="admin"
         )
@@ -130,11 +135,9 @@ class UICase(HttpCase):
         # Extract the unsubscription link from the message body
         with self.mail_postprocess_patch:
             self.mailing.action_send_mail()
-
         self.start_tour(
             self.url, "mass_mailing_custom_unsubscribe_tour_partner", login="demo"
         )
-
         # Check results from running tour
         partner = self.env["res.partner"].browse(partner_id)
         self.assertTrue(partner.is_blacklisted)

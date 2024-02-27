@@ -7,3 +7,4 @@
   * Ernesto Tejeda
   * Pedro M. Baeza
   * Carlos Roca
+  * Pilar Vargas
