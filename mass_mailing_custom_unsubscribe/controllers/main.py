@@ -156,4 +156,4 @@ class CustomUnsubscribe(MassMailController):
             extra_context["default_reason_id"] = int(reason_id)
         if details:
             extra_context["default_details"] = details
-        request.context = dict(request.context, **extra_context)
+        request.update_context(**extra_context)

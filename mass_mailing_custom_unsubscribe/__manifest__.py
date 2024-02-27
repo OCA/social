@@ -19,10 +19,10 @@
         "views/mail_unsubscription_view.xml",
     ],
     "assets": {
-        "web.assets_backend": [
+        "mass_mailing.mailing_assets": [
             (
                 "replace",
-                "mass_mailing/static/src/js/unsubscribe.js",
+                "mass_mailing/static/src/js/mailing_portal.js",
                 "mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js",
             ),
         ],
@@ -31,7 +31,6 @@
             "mass_mailing_custom_unsubscribe/static/src/js/partner.tour.esm.js",
         ],
     },
-    "demo": ["demo/assets.xml"],
     "images": ["images/form.png"],
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
