@@ -1,0 +1,55 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#       * mass_mailing_newsletter_welcome_mail
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 11.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-02 11:06+0000\n"
+"PO-Revision-Date: 2019-05-02 12:08+0100\n"
+"Last-Translator: Jairo Llopis <yajo.sk8@gmail.com>\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#. module: mass_mailing_newsletter_welcome_mail
+#: model:mail.template,body_html:mass_mailing_newsletter_welcome_mail.mail_template_welcome
+msgid ""
+"<div>Dear <b>${object.name or object.email}</b>,\n"
+"                <br/>\n"
+"                <h3>Thanks for signing up for our newsletter!</h3>\n"
+"                <p>Regards,</p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<div>Estimado/a <b>${object.name or object.email}</b>,\n"
+"                <br/>\n"
+"                <h3>¡Gracias por suscribirse a nuestro boletín!</h3>\n"
+"                <p>Saludos,</p>\n"
+"            </div>\n"
+"        "
+
+#. module: mass_mailing_newsletter_welcome_mail
+#: model:ir.model.fields,help:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list__welcome_mail_template_id
+msgid "Mail template to be sent when a contact is subscribed from the website."
+msgstr ""
+
+#. module: mass_mailing_newsletter_welcome_mail
+#: model:ir.model,name:mass_mailing_newsletter_welcome_mail.model_mail_mass_mailing_list
+msgid "Mailing List"
+msgstr ""
+
+#. module: mass_mailing_newsletter_welcome_mail
+#: model:ir.model.fields,field_description:mass_mailing_newsletter_welcome_mail.field_mail_mass_mailing_list__welcome_mail_template_id
+msgid "Welcome mail template"
+msgstr ""
+
+#. module: mass_mailing_newsletter_welcome_mail
+#: model:mail.template,subject:mass_mailing_newsletter_welcome_mail.mail_template_welcome
+msgid "Welcome to the mailing list ${ctx.get(\"list_name\")}"
+msgstr "Bienvenido/a a la lista de correo ${ctx.get(\"list_name\")}"
