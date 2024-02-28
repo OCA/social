@@ -10,9 +10,6 @@
     "license": "AGPL-3",
     "category": "Marketing",
     "depends": ["mail"],
-    "external_dependencies": {
-        "python": ["odoo_test_helper"],
-    },
     "website": "https://github.com/OCA/social",
     "data": [
         "security/ir.model.access.csv",

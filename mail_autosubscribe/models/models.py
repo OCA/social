@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
+from odoo.tools import config
 
 
 class BaseModel(models.AbstractModel):
@@ -24,7 +25,10 @@ class BaseModel(models.AbstractModel):
         # Overload to include auto follow document partners in the composer
         # Note: This only works if the template is configured with 'Default recipients'
         res = super()._message_get_default_recipients()
-        if self.env.context.get("no_autosubscribe_followers"):
+        test_condition = config["test_enable"] and not self.env.context.get(
+            "test_mail_autosubscribe"
+        )
+        if test_condition or self.env.context.get("no_autosubscribe_followers"):
             return res
         for rec in self:
             partner_ids = res[rec.id]["partner_ids"]

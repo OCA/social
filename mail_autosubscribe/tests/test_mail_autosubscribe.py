@@ -13,7 +13,11 @@ class TestMailAutosubscribe(TransactionCase):
     def setUpClass(cls):
         super().setUpClass()
         # Setup env
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context, tracking_disable=True, test_mail_autosubscribe=True
+            )
+        )
         # Load fake order model
         cls.loader = FakeModelLoader(cls.env, cls.__module__)
         cls.loader.backup_registry()
