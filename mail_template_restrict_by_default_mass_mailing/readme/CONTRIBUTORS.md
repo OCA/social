@@ -1,0 +1,3 @@
+- Holger Brunn \<mail@hunki-enterprises.com> (https://hunki-enterprises.com)
+- Stefan Rijnhart \<stefan@opener.amsterdam> (https://opener.amsterdam)
+- Martin Trigaux \<mat@odoo.com> (https://odoo.com)
