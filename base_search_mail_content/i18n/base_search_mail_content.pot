@@ -44,6 +44,7 @@ msgid "Message"
 msgstr ""
 
 #. module: base_search_mail_content
+#: model:ir.model.fields,field_description:base_search_mail_content.field_calendar_event__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_discuss_channel__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_thread__message_content
@@ -64,6 +65,7 @@ msgid "Message Record Name"
 msgstr ""
 
 #. module: base_search_mail_content
+#: model:ir.model.fields,help:base_search_mail_content.field_calendar_event__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_discuss_channel__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_blacklist__message_content
 #: model:ir.model.fields,help:base_search_mail_content.field_mail_thread__message_content
