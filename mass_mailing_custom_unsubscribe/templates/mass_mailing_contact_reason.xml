@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <template
+        id="unsubscribe"
+        inherit_id="mass_mailing.unsubscribe"
+        name="Add Reasons to Mailing List Management Form"
+    >
+        <!-- Hide original feedback textarea to put another one after mailing lists checkboxes -->
+        <xpath expr="//div[@id='div_feedback']" position="attributes">
+            <attribute name="class" add="d-none" separator=" " />
+        </xpath>
+
+        <!-- Add reasons to mass mailing list manager -->
+        <xpath expr="//ul[hasclass('list-group')]" position="after">
+            <t t-call="mass_mailing_custom_unsubscribe.reason">
+                <t t-set="extra_class" t-value="'d-none'" />
+            </t>
+        </xpath>
+    </template>
+
+    <template
+        id="unsubscribed"
+        inherit_id="mass_mailing.unsubscribed"
+        name="Add Reasons to Blacklist Management Form"
+    >
+        <!-- Add reasons to blacklist manager  -->
+        <xpath expr="//div[@id='button_add_blacklist']" position="before">
+            <form id="unsubscribe_form">
+                <t t-call="mass_mailing_custom_unsubscribe.reason">
+                    <t t-set="extra_class" t-value="'d-none'" />
+                </t>
+            </form>
+        </xpath>
+    </template>
+
+</odoo>
