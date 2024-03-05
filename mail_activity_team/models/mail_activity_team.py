@@ -17,7 +17,7 @@ class MailActivityTeam(models.Model):
                 domain.append(("user_id", "in", team.member_ids.ids))
             if team.res_model_ids:
                 domain.append(("res_model_id", "in", team.res_model_ids.ids))
-            team.count_missing_activities = activity_model.search(domain, count=True)
+            team.count_missing_activities = activity_model.search_count(domain)
 
     name = fields.Char(required=True, translate=True)
     active = fields.Boolean(default=True)

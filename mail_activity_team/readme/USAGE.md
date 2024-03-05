@@ -1,7 +1,7 @@
 To set up new teams:
 
 1.  Go to *Settings / Activate developer mode*
-2.  Go to *Settings / Technical / Email / Activity Teams*
+2.  Go to *Settings / Technical / Discuss / Activity Teams*
 3.  Create a new Team and assign (optionally) the models in which it
     will be used, and the members of the team.
 

@@ -7,14 +7,12 @@
         <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
         <field name="arch" type="xml">
             <field name="user_id" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('team_id', '!=', False)]}</attribute>
+                <attribute name="invisible">team_id</attribute>
             </field>
             <field name="user_id" position="after">
                 <field
                     name="team_user_id"
-                    attrs="{'invisible': [('team_id', '=', False)]}"
+                    invisible="not team_id"
                     domain="[('activity_team_ids', '=', team_id)]"
                 />
                 <field
@@ -46,14 +44,12 @@
         />
         <field name="arch" type="xml">
             <field name="user_id" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('team_id', '=', False)]}</attribute>
+                <attribute name="invisible">not team_id</attribute>
             </field>
             <field name="user_id" position="after">
                 <field
                     name="team_user_id"
-                    attrs="{'invisible': [('team_id', '!=', False)]}"
+                    invisible="team_id"
                     domain="[('activity_team_ids', '=', team_id)]"
                 />
                 <field
