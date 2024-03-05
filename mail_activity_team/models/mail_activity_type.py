@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class MailActivityType(models.Model):
-
     _inherit = "mail.activity.type"
 
     default_team_id = fields.Many2one(comodel_name="mail.activity.team")
