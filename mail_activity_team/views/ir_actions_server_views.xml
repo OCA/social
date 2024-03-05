@@ -13,7 +13,7 @@
             <field name="activity_user_id" position="after">
                 <field
                     name="activity_team_id"
-                    attrs="{'invisible': [('activity_user_type', '!=', 'specific')]}"
+                    invisible="activity_user_type != 'specific'"
                 />
             </field>
         </field>

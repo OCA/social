@@ -7,3 +7,5 @@
   - David Vidal
 - [Dynapps](https://www.dynapps.eu):
   - Raf Ven
+- [Trobz] (https://trobz.com):
+  - Son Ho <sonhd@trobz.com>
