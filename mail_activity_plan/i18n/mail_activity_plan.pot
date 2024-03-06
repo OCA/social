@@ -158,7 +158,6 @@ msgstr ""
 #. module: mail_activity_plan
 #. openerp-web
 #: code:addons/mail_activity_plan/static/src/js/mail_activity_plan.js:0
-#: code:addons/mail_activity_plan/static/src/js/mail_activity_plan.js:0
 #, python-format
 msgid "Launch Activity Plan"
 msgstr ""
