@@ -29,7 +29,7 @@ addon | version | maintainers | summary
 [mail_activity_creator](mail_activity_creator/) | 15.0.1.0.1 |  | Show activities creator
 [mail_activity_done](mail_activity_done/) | 15.0.1.0.2 |  | Mail Activity Done
 [mail_activity_partner](mail_activity_partner/) | 15.0.1.0.0 |  | Add Partner to Activities
-[mail_activity_plan](mail_activity_plan/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Mail activity plan
+[mail_activity_plan](mail_activity_plan/) | 15.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Mail activity plan
 [mail_activity_team](mail_activity_team/) | 15.0.2.1.1 |  | Add Teams to Activities
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 15.0.1.0.0 |  | Adding attachment on the object by sending this one
 [mail_autosubscribe](mail_autosubscribe/) | 15.0.1.0.3 |  | Automatically subscribe partners to its company's business documents
