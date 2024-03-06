@@ -6,6 +6,36 @@ odoo.define("mail_activity_plan.mail_activity_plan", function (require) {
     var core = require("web.core");
     var _t = core._t;
 
+    const MailActivityPlanExtension = {
+        _showWizardMailActivityPlan: function () {
+            return this._rpc({
+                model: "mail.activity.plan",
+                method: "get_total_plans_from_model",
+                args: [this.modelName],
+            }).then((planCount) => {
+                this.showWizardMailActivityPlan = planCount !== 0;
+            });
+        },
+        willStart: function () {
+            return Promise.all([
+                this._super.apply(this, arguments),
+                this._showWizardMailActivityPlan(),
+            ]);
+        },
+        _getActionMenuItems: function () {
+            var menuItems = this._super.apply(this, arguments);
+            if (menuItems && this.showWizardMailActivityPlan) {
+                menuItems.items.other.push({
+                    description: _t("Launch Activity Plan"),
+                    callback: () => this._actionWizardMailActivityPlan(),
+                });
+            }
+            return menuItems;
+        },
+    };
+    ListController.include(MailActivityPlanExtension);
+    FormController.include(MailActivityPlanExtension);
+
     ListController.include({
         async _actionWizardMailActivityPlan() {
             const state = this.model.get(this.handle);
@@ -20,29 +50,6 @@ odoo.define("mail_activity_plan.mail_activity_plan", function (require) {
                 },
             });
         },
-        willStart: function () {
-            var getMailActivityPlans = this._rpc({
-                model: "mail.activity.plan",
-                method: "get_total_plans_from_model",
-                args: [this.modelName],
-            }).then((total) => {
-                this.total_mail_activity_plan = total;
-            });
-            return Promise.all([
-                this._super.apply(this, arguments),
-                getMailActivityPlans,
-            ]);
-        },
-        _getActionMenuItems: function () {
-            var menuItems = this._super.apply(this, arguments);
-            if (menuItems && this.total_mail_activity_plan > 0) {
-                menuItems.items.other.push({
-                    description: _t("Launch Activity Plan"),
-                    callback: () => this._actionWizardMailActivityPlan(),
-                });
-            }
-            return menuItems;
-        },
     });
     FormController.include({
         async _actionWizardMailActivityPlan() {
@@ -55,29 +62,6 @@ odoo.define("mail_activity_plan.mail_activity_plan", function (require) {
                     this.update({}, {reload: false});
                 },
             });
-        },
-        willStart: function () {
-            var getMailActivityPlans = this._rpc({
-                model: "mail.activity.plan",
-                method: "get_total_plans_from_model",
-                args: [this.modelName],
-            }).then((total) => {
-                this.total_mail_activity_plan = total;
-            });
-            return Promise.all([
-                this._super.apply(this, arguments),
-                getMailActivityPlans,
-            ]);
-        },
-        _getActionMenuItems: function () {
-            var menuItems = this._super.apply(this, arguments);
-            if (menuItems && this.total_mail_activity_plan > 0) {
-                menuItems.items.other.push({
-                    description: _t("Launch Activity Plan"),
-                    callback: () => this._actionWizardMailActivityPlan(),
-                });
-            }
-            return menuItems;
         },
     });
 });
