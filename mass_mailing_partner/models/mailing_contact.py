@@ -61,7 +61,7 @@ class MailingContact(models.Model):
         record._onchange_partner_mass_mailing_partner()
         new_vals = record._convert_to_write(record._cache)
         new_vals.update(
-            subscription_list_ids=origin_vals.get("subscription_list_ids", []),
+            subscription_ids=origin_vals.get("subscription_ids", []),
             list_ids=origin_vals.get("list_ids", []),
         )
         if new_vals.get("partner_id") and "tag_ids" in new_vals:
@@ -89,7 +89,7 @@ class MailingContact(models.Model):
         ca_ids = (
             self.tag_ids.ids
             + self.list_ids.mapped("partner_category.id")
-            + self.subscription_list_ids.mapped("list_id.partner_category.id")
+            + self.subscription_ids.mapped("list_id.partner_category.id")
         )
         return [[6, 0, ca_ids]]
 
@@ -116,7 +116,7 @@ class MailingContact(models.Model):
             # Partner found
             self.partner_id = partner
         else:
-            lts = self.subscription_list_ids.mapped("list_id") | self.list_ids
+            lts = self.subscription_ids.mapped("list_id") | self.list_ids
             if lts.filtered("partner_mandatory"):
                 # Create partner
                 partner_vals = self._prepare_partner()
