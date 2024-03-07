@@ -9,7 +9,7 @@ from odoo.tests.common import TransactionCase
 
 class BaseCase(TransactionCase):
     def setUp(self):
-        super(BaseCase, self).setUp()
+        super().setUp()
 
         self.main_company = self.env.ref("base.main_company")
         self.country_es = self.env.ref("base.es")

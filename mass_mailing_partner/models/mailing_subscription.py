@@ -6,8 +6,8 @@ from odoo import _, api, models
 from odoo.exceptions import ValidationError
 
 
-class MailingContactSubscription(models.Model):
-    _inherit = "mailing.contact.subscription"
+class MailingSubscription(models.Model):
+    _inherit = "mailing.subscription"
 
     @api.constrains("contact_id", "list_id")
     def _check_contact_id_partner_id_list_id(self):
