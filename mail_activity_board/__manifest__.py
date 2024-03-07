@@ -8,7 +8,8 @@
     "development_status": "Beta",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
-    "author": "SDi, David Juaneda, Sodexis, ACSONE SA/NV, Odoo Community Association (OCA)",
+    "author": "SDi, David Juaneda, Sodexis, ACSONE SA/NV,"
+    " Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
     "depends": ["calendar", "spreadsheet_dashboard"],
