@@ -6,4 +6,5 @@ import odoo.tests
 @odoo.tests.tagged("post_install", "-at_install")
 class TestMailEdit(odoo.tests.HttpCase):
     def test_tour(self):
-        self.start_tour("/web", "mail_edit_tour", login="demo")
+        self.start_tour("/web", "mail_edit_tour", login="admin")
+        self.start_tour("/web", "mail_edit_tour_no_superuser", login="demo")

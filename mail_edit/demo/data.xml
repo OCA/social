@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo noupdate="1">
+    <!-- demo can edit only his own messages -->
     <record id="base.user_demo" model="res.users">
         <field
             name="groups_id"
-            eval="[(4,ref('mail_edit.group_mail_edit_superuser'))]"
+            eval="[(4,ref('mail_edit.group_mail_edit_editor'))]"
         />
     </record>
 </odoo>
