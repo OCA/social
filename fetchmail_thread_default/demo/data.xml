@@ -5,10 +5,7 @@
 
     <record id="demo_sink" model="mail.channel">
         <field name="name">mailsink</field>
-        <field name="email_send" eval="True" />
         <field name="description">Unbounded email sink</field>
-        <field name="alias_contact">everyone</field>
-        <field name="public">private</field>
         <field name="group_ids" eval="[(4, ref('base.group_user'))]" />
     </record>
 
