@@ -1,16 +1,16 @@
 # Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
 from odoo.addons.test_mail.tests.test_mail_gateway import MAIL_TEMPLATE
 
 
-class FetchmailCase(SavepointCase):
+class FetchmailCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
-        super(FetchmailCase, cls).setUpClass()
+        super().setUpClass()
         cls.server = cls.env.ref("fetchmail_thread_default.demo_server")
         cls.sink = cls.env.ref("fetchmail_thread_default.demo_sink")
         cls.MailThread = cls.env["mail.thread"]
@@ -41,6 +41,7 @@ class FetchmailCase(SavepointCase):
         ).message_process(
             self.server.object_id.model,
             MAIL_TEMPLATE.format(
+                return_path="spambot@example.com",
                 email_from="spambot@example.com",
                 to="you@example.com",
                 cc="nobody@example.com",
