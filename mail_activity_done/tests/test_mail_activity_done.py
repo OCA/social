@@ -41,3 +41,18 @@ class TestMailActivityDoneMethods(TransactionCase):
         self.assertEqual(
             len(act_count), 1, "Number of activities should be equal to one"
         )
+
+    def test_read_progress_bar(self):
+        res_partner = self.env["res.partner"].browse(self.act1.res_model_id)
+        params = {
+            "domain": [],
+            "group_by": "id",
+            "progress_bar": {"field": "activity_state"},
+        }
+        result = res_partner._read_progress_bar(**params)
+        self.assertEqual(result[0]["__count"], 1)
+
+        self.act1._action_done()
+        self.assertEqual(self.act1.state, "done")
+        result = res_partner._read_progress_bar(**params)
+        self.assertEqual(len(result), 0)
