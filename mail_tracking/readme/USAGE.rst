@@ -2,6 +2,10 @@ When user sends a message in mail_thread (chatter), for instance in partner
 form, then an email tracking is created for each email notification. Then a
 status icon will appear just right to name of notified partner.
 
+For users using the internal notifications system, the status of their notifications is
+used. Note that read notifications are deleted after 180 days so old messages will
+display unknown status.
+
 These are all available status icons:
 
 .. |sent| image:: ../static/src/img/sent.png
@@ -55,7 +59,7 @@ If you want to see all tracking emails and events you can go to
 * Settings > Technical > Email > Tracking emails
 * Settings > Technical > Email > Tracking events
 
-When the message generates an 'error' status, it will apear on discuss 'Failed'
+When the message generates an 'error' status, it will appear on discuss 'Failed'
 channel. Any view with chatter can show the failed messages
 too.
 
