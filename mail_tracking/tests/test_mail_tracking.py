@@ -439,7 +439,7 @@ class TestMailTracking(TransactionCase):
             controller.mail_tracking_open(db, tracking.id, False)
 
     def test_db_env_no_cr(self):
-        http.request.cr = None
+        http.request.env = None
         db = self.env.cr.dbname
         controller = MailTrackingController()
         # Cast Cursor to Mock object to avoid raising 'Cursor not closed explicitly' log
