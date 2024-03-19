@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo-addon-base_search_mail_content>=16.0dev,<16.1dev',
         'odoo-addon-email_template_qweb>=16.0dev,<16.1dev',
+        'odoo-addon-fetchmail_thread_default>=16.0dev,<16.1dev',
         'odoo-addon-mail_activity_board>=16.0dev,<16.1dev',
         'odoo-addon-mail_activity_done>=16.0dev,<16.1dev',
         'odoo-addon-mail_activity_partner>=16.0dev,<16.1dev',
