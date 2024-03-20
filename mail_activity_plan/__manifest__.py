@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Mail activity plan",
-    "version": "15.0.1.0.1",
+    "version": "16.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -18,7 +18,7 @@
     "demo": ["demo/mail_activity_plan_demo.xml"],
     "assets": {
         "web.assets_backend": [
-            "mail_activity_plan/static/src/js/mail_activity_plan.js",
+            "mail_activity_plan/static/src/js/mail_activity_plan.esm.js",
         ],
     },
     "maintainers": ["victoralmau"],

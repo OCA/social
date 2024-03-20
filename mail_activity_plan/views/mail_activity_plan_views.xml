@@ -94,14 +94,19 @@
                             <field name="group_ids" widget="many2many_tags" />
                         </group>
                     </group>
-                    <group name="activities_group" string="Activities">
-                        <field
-                            name="plan_activity_type_ids"
-                            nolabel="1"
-                            context="{'tree_view_ref': 'mail_activity_plan.view_mail_activity_plan_activity_type_tree', 'form_view_ref':'mail_activity_plan.view_mail_activity_plan_activity_type_form', 'default_model': model}"
+                    <notebook>
+                        <page
+                            name="activities_group"
+                            string="Activities"
                             attrs="{'invisible': [('model_id', '=', False)]}"
-                        />
-                    </group>
+                        >
+                            <field
+                                name="plan_activity_type_ids"
+                                nolabel="1"
+                                context="{'tree_view_ref': 'mail_activity_plan.view_mail_activity_plan_activity_type_tree', 'form_view_ref':'mail_activity_plan.view_mail_activity_plan_activity_type_form', 'default_model': model}"
+                            />
+                        </page>
+                    </notebook>
                 </sheet>
             </form>
         </field>
