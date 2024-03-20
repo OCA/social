@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="rule_multi_company_mail_activity_plan" model="ir.rule">
+        <field name="name">Mail Activity Plan multi-company</field>
+        <field name="model_id" ref="model_mail_activity_plan" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', [False] + company_ids)]</field>
+    </record>
+    <record id="rule_multi_company_mail_activity_plan_activity_type" model="ir.rule">
+        <field name="name">Mail Activity Plan Activity Types multi-company</field>
+        <field name="model_id" ref="model_mail_activity_plan_activity_type" />
+        <field name="global" eval="True" />
+        <field name="domain_force">[('company_id', 'in', [False] + company_ids)]</field>
+    </record>
+</odoo>
