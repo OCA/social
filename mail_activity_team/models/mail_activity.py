@@ -26,7 +26,9 @@ class MailActivity(models.Model):
     )
 
     team_id = fields.Many2one(
-        comodel_name="mail.activity.team", default=lambda s: s._get_default_team_id()
+        comodel_name="mail.activity.team",
+        default=lambda s: s._get_default_team_id(),
+        index=True,
     )
 
     @api.onchange("user_id")
