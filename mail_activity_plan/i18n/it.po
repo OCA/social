@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-03-21 13:04+0000\n"
+"PO-Revision-Date: 2024-03-21 13:08+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -169,69 +169,69 @@ msgstr "Lancia piano attività"
 #. module: mail_activity_plan
 #: model:ir.model,name:mail_activity_plan.model_mail_activity_plan
 msgid "Mail Activity Plan"
-msgstr ""
+msgstr "Piano attività e-mail"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model_id
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan_activity_type__model
 msgid "Model"
-msgstr ""
+msgstr "Modello"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: mail_activity_plan
 #. odoo-python
 #: code:addons/mail_activity_plan/models/mail_activity_plan.py:0
 #, python-format
 msgid "No user with the expression %(expression)s for %(record_name)s"
-msgstr ""
+msgstr "Nessun utente con l'espression %(expression)s per %(record_name)s"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_wizard_mail_activity_plan_detail__parent_id
 msgid "Parent"
-msgstr ""
+msgstr "Padre"
 
 #. module: mail_activity_plan
 #: model:ir.model,name:mail_activity_plan.model_mail_activity_plan_activity_type
 msgid "Plan activity type"
-msgstr ""
+msgstr "Tipo attività piano"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_wizard_mail_activity_plan_detail__record_ref
 msgid "Record"
-msgstr ""
+msgstr "Record"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_wizard_mail_activity_plan__res_model
 msgid "Res Model"
-msgstr ""
+msgstr "Modello res"
 
 #. module: mail_activity_plan
 #: model:ir.actions.act_window,name:mail_activity_plan.action_wizard_mail_activity_plan
 msgid "Schedule Activity Plan"
-msgstr ""
+msgstr "Schedula piano attività"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan_activity_type__summary
 #: model:ir.model.fields,field_description:mail_activity_plan.field_wizard_mail_activity_plan_detail__summary
 msgid "Summary"
-msgstr ""
+msgstr "Riepilogo"
 
 #. module: mail_activity_plan
 #: model:ir.model,name:mail_activity_plan.model_wizard_mail_activity_plan
 msgid "Wizard Mail Activity Plan"
-msgstr ""
+msgstr "Procedura guidata piano attività e-mail"
 
 #. module: mail_activity_plan
 #: model:ir.model,name:mail_activity_plan.model_wizard_mail_activity_plan_detail
 msgid "Wizard Mail Activity Plan Detail"
-msgstr ""
+msgstr "Procedura guidata dettaglio piano attività e-mail"
