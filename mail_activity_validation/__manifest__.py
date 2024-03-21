@@ -3,7 +3,7 @@
 
 {
     "name": "Mail Activity Validation",
-    "version": "12.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp SA, Odoo Community Association (OCA)",

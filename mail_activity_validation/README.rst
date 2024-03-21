@@ -60,6 +60,7 @@ Contributors
 ------------
 
 -  Damien Crier <damien.crier@camptocamp.com>
+-  Maksym Yankin <maksym.yankin@camptocamp.com>
 
 Maintainers
 -----------
