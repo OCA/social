@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-06-10 02:46+0000\n"
-"PO-Revision-Date: 2024-02-26 16:34+0000\n"
+"PO-Revision-Date: 2024-03-21 13:04+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. module: fetchmail_thread_default
 #: model:ir.model.fields,field_description:fetchmail_thread_default.field_fetchmail_server__default_thread_id
 msgid "Default mail thread"
-msgstr ""
+msgstr "Argomento e-mail predefinito"
 
 #. module: fetchmail_thread_default
 #: model:ir.model,name:fetchmail_thread_default.model_mail_thread
@@ -33,13 +33,15 @@ msgstr "Discussione e-mail"
 #. module: fetchmail_thread_default
 #: model:ir.model,name:fetchmail_thread_default.model_fetchmail_server
 msgid "Incoming Mail Server"
-msgstr ""
+msgstr "Server di posta in arrivo"
 
 #. module: fetchmail_thread_default
 #: model:ir.model.fields,help:fetchmail_thread_default.field_fetchmail_server__default_thread_id
 msgid ""
 "Messages with no clear route will be posted as a new message to this thread."
 msgstr ""
+"Messaggi senza un percorso chiaro verranno inseriti come nuovi messaggui in "
+"questo argomento."
 
 #~ msgid "POP/IMAP Server"
 #~ msgstr "Server POP/IMAP"
