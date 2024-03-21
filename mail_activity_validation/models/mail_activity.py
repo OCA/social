@@ -23,8 +23,7 @@ class MailActivity(models.Model):
 
         raise AccessError(
             _(
-                "Only validators in groups {} are "
-                "allowed to validate this activity."
+                "Only validators in groups {} are " "allowed to validate this activity."
             ).format(
                 "\n".join(
                     g.display_name for g in self.activity_type_id.validator_group_ids
