@@ -1,0 +1,2 @@
+This Module adds the mail_template_attach_existing_attachment_account
+feature to the account module
