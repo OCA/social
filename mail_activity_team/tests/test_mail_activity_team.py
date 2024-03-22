@@ -313,3 +313,35 @@ class TestMailActivityTeam(SavepointCase):
         self.assertTrue(next_activities)
         self.assertEqual(next_activities.team_id, self.team2)
         self.assertEqual(next_activities.user_id, self.employee2)
+
+    def test_user_sync(self):
+        messages_domain = [
+            ("res_id", "=", self.partner_client.id),
+            ("model", "=", self.partner_ir_model.model),
+        ]
+        messages_ids = self.env["mail.message"].search(messages_domain)
+        self.assertFalse(messages_ids)
+        # create a new activity
+        activity_form = Form(self.env["mail.activity"].with_user(self.employee))
+        # ensure default values are set
+        self.assertEqual(activity_form.team_id, self.team1)
+        self.assertEqual(activity_form.user_id, self.employee)
+        # assign new activity values
+        activity_form.activity_type_id = self.activity2
+        activity_form.res_model_id = self.partner_ir_model
+        activity_form.res_id = self.partner_client
+        # set another user (the `user_id` field is hidden and replaced with
+        # `team_user_id` when this module is installed)
+        activity_form.team_user_id = self.employee2
+        activity_form.team_id = self.team2
+        activity_id = activity_form.save()
+        # check right values
+        self.assertEqual(activity_id.user_id, self.employee2)
+        self.assertEqual(activity_id.team_user_id, self.employee2)
+        self.assertEqual(activity_id.team_id, self.team2)
+        # ensure that one and only one notification has been created
+        messages_id = self.env["mail.message"].search(messages_domain)
+        self.assertEqual(len(messages_id), 1)
+        self.assertEqual(messages_id.email_from, '"Employee" <crmuser@yourcompany.com>')
+        self.assertEqual(messages_id.partner_ids, self.employee2.partner_id)
+        self.assertRegex(messages_id.body, r"Employee.*assigned you an activity")
