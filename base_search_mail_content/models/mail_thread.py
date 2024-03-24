@@ -44,7 +44,11 @@ class MailThread(models.AbstractModel):
         that inherits mail.thread
         """
         res = super().get_view(view_id=view_id, view_type=view_type, options=options)
-        if view_type == "search" and self._fields.get("message_content"):
+        if (
+            view_type == "search"
+            and self._fields.get("message_content")
+            and self.env.user.has_group("base.group_user")
+        ):
             doc = etree.XML(res["arch"])
             for node in doc.xpath("/search/field[last()]"):
                 # Add message_content in search view
