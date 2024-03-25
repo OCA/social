@@ -1,0 +1,99 @@
+# Translation of Mail edit module.
+# This file contains the translation of the following modules:
+# * mail_edit
+#
+# Translators:
+# Tom Blauwendraat <tom@sunflowerweb.nl>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-01-19 14:40+0000\n"
+"PO-Revision-Date: 2017-08-18 16:51+0000\n"
+"Last-Translator: Erwin van der Ploeg <erwin@odooexperts.nl>\n"
+"Language-Team: Dutch (http://www.transifex.com/odoo/odoo-8/language/nl/)\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mail_edit
+#: help:res.request.link,mail_edit:0
+msgid "Allow to move mails to this model."
+msgstr "Sta toe om berichten naar dit model te verplaatsen."
+
+#. module: mail_edit
+#. openerp-web
+#: code:addons/mail_edit/static/src/xml/mail_edit.xml:11
+#, python-format
+msgid "Delete"
+msgstr ""
+
+#. module: mail_edit
+#: field:mail.message,destination_object_id:0
+msgid "Destination object"
+msgstr "Doelobject"
+
+#. module: mail_edit
+#. openerp-web
+#: code:addons/mail_edit/static/src/xml/mail_edit.xml:8
+#, python-format
+msgid "Edit Mail"
+msgstr "Bericht wijzigen"
+
+#. module: mail_edit
+#: model:ir.actions.act_window,name:mail_edit.mail_edit_action
+msgid "Edit or Move Message"
+msgstr "Wijzigen of verplaatsen van bericht"
+
+#. module: mail_edit
+#: model:res.groups,name:mail_edit.group_mail_edit_superuser
+#, fuzzy
+msgid "Edit or Move anyone's mail messages"
+msgstr "Wijzigen of verplaatsen van bericht"
+
+#. module: mail_edit
+#: model:res.groups,name:mail_edit.group_mail_edit_editor
+#, fuzzy
+msgid "Edit own mail messages"
+msgstr "Berichten wijzigen"
+
+#. module: mail_edit
+#: field:res.request.link,mail_edit:0
+#, fuzzy
+msgid "Mail move"
+msgstr "Bericht wijzigen"
+
+#. module: mail_edit
+#: model:res.groups,comment:mail_edit.group_mail_edit_editor
+msgid "Members of this group are able to edit mail messages."
+msgstr "Leden van deze groep mogen de inhoud van berichten wijzigen."
+
+#. module: mail_edit
+#: model:res.groups,comment:mail_edit.group_mail_edit_mover
+msgid "Members of this group are able to move mails."
+msgstr "Leden van deze groep mogen berichten verplaatsen."
+
+#. module: mail_edit
+#: model:res.groups,comment:mail_edit.group_mail_edit_superuser
+#, fuzzy
+msgid "Members of this group are able to move or edit mails"
+msgstr "Leden van deze groep mogen berichten verplaatsen."
+
+#. module: mail_edit
+#: model:ir.model,name:mail_edit.model_mail_message
+#: view:mail.message:mail_edit.mail_edit_form
+msgid "Message"
+msgstr "Bericht"
+
+#. module: mail_edit
+#: model:res.groups,name:mail_edit.group_mail_edit_mover
+#, fuzzy
+msgid "Move own mail messages"
+msgstr "Berichten verplaatsen"
+
+#. module: mail_edit
+#: help:mail.message,destination_object_id:0
+msgid "Object where the message will be moved to"
+msgstr "Object waar het bericht naartoe verplaatst zal worden"
