@@ -13,9 +13,7 @@
     "application": False,
     "installable": True,
     "preloadable": True,
-    "depends": [
-        "mail",
-    ],
+    "depends": ["mail", "product"],
     "data": [
         "views/res_company_views.xml",
         "views/mail_mail_views.xml",
