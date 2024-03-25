@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo-addon-mail_drop_target>=16.0dev,<16.1dev',
         'odoo-addon-mail_improved_tracking_value>=16.0dev,<16.1dev',
         'odoo-addon-mail_inline_css>=16.0dev,<16.1dev',
+        'odoo-addon-mail_layout_force>=16.0dev,<16.1dev',
         'odoo-addon-mail_layout_preview>=16.0dev,<16.1dev',
         'odoo-addon-mail_optional_autofollow>=16.0dev,<16.1dev',
         'odoo-addon-mail_optional_follower_notification>=16.0dev,<16.1dev',
