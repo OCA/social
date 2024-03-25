@@ -103,7 +103,7 @@ class MailThread(models.AbstractModel):
             # prefer html bodies to text
             msg_body,
             email_cc=message_msg.cc,
-            message_id=message_id,
+            message_id=message_id.strip(),
             attachments=[
                 (attachment.longFilename, attachment.data, attachment.mimetype)
                 for attachment in message_msg.attachments
