@@ -1,0 +1,2 @@
+odoo-addon-mass_mailing_contact_partner @ git+https://github.com/OCA/social.git@refs/pull/1297/head#subdirectory=setup/mass_mailing_contact_partner
+odoo-addon-mass_mailing_subscription_date @ git+https://github.com/OCA/social.git@refs/pull/1299/head#subdirectory=setup/mass_mailing_subscription_date

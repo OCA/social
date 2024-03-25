@@ -1,0 +1,161 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mass_mailing_company_newsletter
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-01-17 13:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mass_mailing_company_newsletter
+#: model_terms:ir.ui.view,arch_db:mass_mailing_company_newsletter.res_config_settings_view_form
+msgid ""
+"<span role=\"img\" class=\"fa fa-lg fa-building-o\" title=\"Values set here "
+"are company-specific.\" aria-label=\"Values set here are company-specific.\""
+" groups=\"base.group_multi_company\"/>"
+msgstr ""
+"<span role=\"img\" class=\"fa fa-lg fa-building-o\" title=\"Values set here "
+"are company-specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\"/>"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model,name:mass_mailing_company_newsletter.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_company__main_mailing_list_id
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_config_settings__main_mailing_list_id
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_id
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_users__main_mailing_list_id
+#: model_terms:ir.ui.view,arch_db:mass_mailing_company_newsletter.view_partner_form
+msgid "Company Newsletter"
+msgstr "Boletín de noticias de la Compañía"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_subscription_id
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_users__main_mailing_list_subscription_id
+msgid "Company Newsletter Subscription"
+msgstr "Suscripción al Boletín Informativo de la Compañía"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_subscription_date
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_users__main_mailing_list_subscription_date
+msgid "Company Newsletter Subscription Date"
+msgstr "Fecha de Suscripción al Boletín Informativo de la Compañía"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_subscription_state
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_users__main_mailing_list_subscription_state
+msgid "Company Newsletter Subscription State"
+msgstr "Estado de Suscripción al Boletín Informativo de la Compañía"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_unsubscription_date
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_users__main_mailing_list_unsubscription_date
+msgid "Company Newsletter Unsubscription Date"
+msgstr ""
+"Fecha de Anulación de la Suscripción al Boletín Informativo de la Compañía"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model,name:mass_mailing_company_newsletter.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes Config"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model,name:mass_mailing_company_newsletter.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_company__display_name
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_config_settings__display_name
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: mass_mailing_company_newsletter
+#: code:addons/mass_mailing_company_newsletter/models/res_partner.py:0
+#, python-format
+msgid "Email is required to subscribe to the Newsletter"
+msgstr ""
+"El correo electrónico es imprescindible para suscribirse al Boletín "
+"Informativo"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_company__id
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_config_settings__id
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_company_newsletter
+#: model_terms:ir.ui.view,arch_db:mass_mailing_company_newsletter.res_config_settings_view_form
+msgid ""
+"If set, it allows to manage partner's subscriptions to the\n"
+"                            company newsletter directly from the partner form."
+msgstr ""
+"Si se configura, permite gestionar las suscripciones de los socios al\n"
+"                            boletín de la compañía directamente desde el "
+"formulario de socio."
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_company____last_update
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_config_settings____last_update
+#: model:ir.model.fields,field_description:mass_mailing_company_newsletter.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields.selection,name:mass_mailing_company_newsletter.selection__res_partner__main_mailing_list_subscription_state__subscribed
+msgid "Subscribed"
+msgstr "Suscrito"
+
+#. module: mass_mailing_company_newsletter
+#: model_terms:ir.ui.view,arch_db:mass_mailing_company_newsletter.view_res_partner_filter
+msgid "Subscribed to Company Newsletter"
+msgstr "Suscripción al Boletín Informativo de la Compañía"
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,help:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_id
+#: model:ir.model.fields,help:mass_mailing_company_newsletter.field_res_users__main_mailing_list_id
+msgid "Technical field: The company's Newsletter mailing list."
+msgstr "Campo técnico: Lista de correo del Boletín Informativo de la Compañía."
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields,help:mass_mailing_company_newsletter.field_res_partner__main_mailing_list_subscription_id
+#: model:ir.model.fields,help:mass_mailing_company_newsletter.field_res_users__main_mailing_list_subscription_id
+msgid ""
+"Technical field: The company's newsletter subscription for this partner."
+msgstr ""
+"Campo técnico: Suscripción al boletín informativo de la compañía para este "
+"socio."
+
+#. module: mass_mailing_company_newsletter
+#: model:ir.model.fields.selection,name:mass_mailing_company_newsletter.selection__res_partner__main_mailing_list_subscription_state__unsubscribed
+msgid "Unsubscribed"
+msgstr "Desuscrito"
+
+#. module: mass_mailing_company_newsletter
+#: code:addons/mass_mailing_company_newsletter/models/res_partner.py:0
+#, python-format
+msgid ""
+"You need to configure a main newsletter for company '%s'.\n"
+"To do so, go to Mass Mailing general settings."
+msgstr ""
+"Necesita configurar un boletín informativo principal para la compañía '%s'.\n"
+"Para ello, vaya a la configuración general del correo masivo."
+
+#. module: mass_mailing_company_newsletter
+#: model_terms:ir.ui.view,arch_db:mass_mailing_company_newsletter.view_partner_form
+msgid "on"
+msgstr "sobre"
