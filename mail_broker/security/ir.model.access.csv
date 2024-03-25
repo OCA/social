@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_broker_channel_portal,res.partner.broker.channel.portal,model_res_partner_broker_channel,base.group_portal,1,0,0,0
+access_res_partner_broker_channel_user,res.partner.broker.channel,model_res_partner_broker_channel,base.group_user,1,0,0,0
+manage_res_partner_broker_channel_user,res.partner.broker.channel,model_res_partner_broker_channel,broker_user,1,1,1,1
+access_mail_message_broker_send_user,mail.message.broker.send,model_mail_message_broker_send,base.group_user,1,1,1,0
+access_mail_broker_all,mail.telegram.bot.all,model_mail_broker,,1,0,0,0
+access_mail_guest_manage,mail.telegram.bot.all,model_mail_guest_manage,base.group_user,1,1,1,1
+access_mail_broker_system,mail_broker,model_mail_broker,base.group_system,1,1,1,1

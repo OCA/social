@@ -1,4 +1,7 @@
 # generated from manifests external_dependencies
 cryptography<37
 extract_msg
+lottie
 premailer
+python-telegram-bot
+requests_toolbelt

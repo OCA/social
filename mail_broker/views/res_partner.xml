@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_partner_form">
+        <field name="name">Partner Form communication info</field>
+        <field name="model">res.partner</field>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <notebook position="inside">
+                <page name="broker" string="Broker information">
+                    <field name="broker_channel_ids" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_partner_broker_channel_form">
+        <field name="name">Partner Broker Channel Form</field>
+        <field name="model">res.partner.broker.channel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_partner_broker_channel_tree">
+        <field name="name">Partner Broker Channel Tree</field>
+        <field name="model">res.partner.broker.channel</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom" create="false">
+                <field name="name" />
+                <field name="broker_id" />
+                <field name="broker_token" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>
