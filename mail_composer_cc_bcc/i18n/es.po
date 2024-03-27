@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_composer_cc_bcc
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-08 13:02+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_bcc_ids
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_bcc_ids
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__email_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_template__email_bcc
+msgid "Bcc"
+msgstr "Bcc"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__recipient_bcc_ids
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_message__recipient_bcc_ids
+msgid "Bcc (Partners)"
+msgstr "Bcc (Socios)"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,help:mail_composer_cc_bcc.field_mail_mail__email_bcc
+msgid "Blind Cc message recipients"
+msgstr "Destinatarios de mensajes Cc ciegos"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,help:mail_composer_cc_bcc.field_mail_template__email_bcc
+msgid "Blind cc recipients (placeholders may be used here)"
+msgstr "Destinatarios cc ciegos (pueden utilizarse marcadores de posición)"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_cc_ids
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_cc_ids
+msgid "Cc"
+msgstr "Con copia (cc)"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__recipient_cc_ids
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_message__recipient_cc_ids
+msgid "Cc (Partners)"
+msgstr "Cc (Socios)"
+
+#. module: mail_composer_cc_bcc
+#: model_terms:ir.ui.view,arch_db:mail_composer_cc_bcc.email_template_form_inherit
+#: model_terms:ir.ui.view,arch_db:mail_composer_cc_bcc.view_mail_form_inherit
+msgid "Comma-separated blind carbon copy recipients addresses"
+msgstr "Direcciones de los destinatarios de la copia oculta separadas por comas"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model,name:mail_composer_cc_bcc.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_res_company__default_partner_bcc_ids
+msgid "Default Bcc"
+msgstr "Bcc por defecto"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_res_company__default_partner_cc_ids
+msgid "Default Cc"
+msgstr "Cc por defecto"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model,name:mail_composer_cc_bcc.model_mail_template
+msgid "Email Templates"
+msgstr "Plantillas Correo Electrónico"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model,name:mail_composer_cc_bcc.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de Correo Electrónico"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model,name:mail_composer_cc_bcc.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente de redacción de correo electrónico"
+
+#. module: mail_composer_cc_bcc
+#. odoo-python
+#: code:addons/mail_composer_cc_bcc/models/mail_mail.py:0
+#, python-format
+msgid ""
+"Error without exception. Probably due do concurrent access update of "
+"notification records. Please see with an administrator."
+msgstr ""
+"Error sin excepción. Probablemente debido a la actualización de acceso "
+"concurrente de los registros de notificación. Por favor, consulte con un "
+"administrador."
+
+#. module: mail_composer_cc_bcc
+#. odoo-python
+#: code:addons/mail_composer_cc_bcc/models/mail_mail.py:0
+#, python-format
+msgid ""
+"Error without exception. Probably due do sending an email without computed "
+"recipients."
+msgstr ""
+"Error sin excepción. Probablemente debido a enviar un email sin "
+"destinatarios computados."
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model,name:mail_composer_cc_bcc.model_mail_message
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: mail_composer_cc_bcc
+#: model:ir.model,name:mail_composer_cc_bcc.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Correos Salientes"
+
+#. module: mail_composer_cc_bcc
+#: model_terms:ir.ui.view,arch_db:mail_composer_cc_bcc.view_mail_form_inherit
+msgid "Partners"
+msgstr "Socios"

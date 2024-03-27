@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_mail_form_inherit">
+        <field name="name">email.mail.form.inherit</field>
+        <field name="model">mail.mail</field>
+        <field name="inherit_id" ref="mail.view_mail_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_cc']" position="after">
+                <field
+                    name="email_bcc"
+                    placeholder="Comma-separated blind carbon copy recipients addresses"
+                />
+            </xpath>
+            <xpath expr="//field[@name='recipient_ids']" position="attributes">
+                <attribute name="string">Partners</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
