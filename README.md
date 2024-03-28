@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [mail_send_confirmation](mail_send_confirmation/) | 17.0.1.0.0 |  | Mail Send Confirmation
 [mass_mailing_partner](mass_mailing_partner/) | 17.0.1.0.0 |  | Link partners with mass-mailing
 
+
 [//]: # (end addons)
 
 <!-- prettier-ignore-end -->
