@@ -54,13 +54,14 @@ def post_load_hook():
             activity.done = True
             activity.active = False
             activity.date_done = fields.Date.today()
-            record.message_post_with_view(
+            act_values = {
+                "activity": activity,
+                "feedback": feedback,
+                "display_assignee": activity.user_id != self.env.user,
+            }
+            record.with_context(act_values=act_values).message_post_with_view(
                 "mail.message_activity_done",
-                values={
-                    "activity": activity,
-                    "feedback": feedback,
-                    "display_assignee": activity.user_id != self.env.user,
-                },
+                values=act_values,
                 subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                     "mail.mt_activities"
                 ),
