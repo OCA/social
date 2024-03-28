@@ -1,6 +1,7 @@
 # Copyright 2018-22 ForgeFlow <http://www.forgeflow.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 from odoo import api, fields, models
+from odoo.osv import expression
 
 delete_sentinel = object()
 
@@ -83,3 +84,11 @@ class MailActivityMixin(models.AbstractModel):
     activity_ids = fields.One2many(
         domain=lambda self: [("res_model", "=", self._name), ("active", "=", True)]
     )
+
+    def _read_progress_bar(self, domain, group_by, progress_bar):
+        """
+        Exclude completed activities from progress bar result.
+        Pass an extra domain to super to filter out records with only done activities.
+        """
+        domain = expression.AND([domain, [("activity_ids.done", "=", False)]])
+        return super()._read_progress_bar(domain, group_by, progress_bar)
