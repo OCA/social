@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+     Copyright 2015 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     Copyright 2015 Javier Iniesta <javieria@antiun.com>
+     Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     Copyright 2020 Tecnativa - Manuel Calero
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_tree">
+            <field name="name">mailing.contact.tree.inherit</field>
+            <field name="model">mailing.contact</field>
+            <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree" />
+            <field name="arch" type="xml">
+                <field name="email" position="after">
+                    <field name="partner_id" />
+                </field>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_form">
+        <field name="name">mailing.contact.form.partner</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']/.." position="after">
+                <field name="partner_id" />
+            </xpath>
+            <field name="title_id" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+            <field name="email" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+            <field name="name" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+            <field name="company_name" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+            <field name="country_id" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+            <field name="tag_ids" position="attributes">
+                <attribute name="readonly">partner_id</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_mail_mass_mailing_contact_search">
+        <field name="name">Add partner search field and group by</field>
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_search" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="partner_id" />
+            </field>
+            <filter name="group_create_date" position="after">
+                <filter
+                    string="Partner"
+                    name="group_partner"
+                    context="{'group_by': 'partner_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+
+</odoo>

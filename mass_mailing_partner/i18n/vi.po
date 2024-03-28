@@ -1,0 +1,189 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mass_mailing_partner
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-02 10:31+0000\n"
+"PO-Revision-Date: 2023-03-24 15:11+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: vi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: mass_mailing_partner
+#. odoo-python
+#: code:addons/mass_mailing_partner/models/mailing_contact_subscription.py:0
+#: code:addons/mass_mailing_partner/models/mailing_list.py:0
+#, python-format
+msgid "A partner cannot be multiple times in the same list"
+msgstr "Một đối tác không thể xuất hiện nhiều lần trong một Danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
+msgid "Add contacts to mailing list"
+msgstr "Thêm liên hệ vào danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.actions.act_window,name:mass_mailing_partner.action_partner_mail_list
+msgid "Add to mailing list"
+msgstr "Thêm vào danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
+msgid "Cancel"
+msgstr "Hủy"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_res_partner
+msgid "Contact"
+msgstr "Liên hệ"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_partner_mail_list_wizard
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
+msgid "Create contact mailing list"
+msgstr "Thêm vào danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__create_uid
+msgid "Created by"
+msgstr "Tạo bởi"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__create_date
+msgid "Created on"
+msgstr "Tạo vào"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__display_name
+msgid "Display Name"
+msgstr "Tên hiển thị"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__id
+msgid "ID"
+msgstr ""
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard____last_update
+msgid "Last Modified on"
+msgstr "Sửa lần cuối vào"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__write_uid
+msgid "Last Updated by"
+msgstr "Cập nhật lần cuối bởi"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__write_date
+msgid "Last Updated on"
+msgstr "Cập nhật lần cuối vào"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_contact
+msgid "Mailing Contact"
+msgstr "Liên hệ của danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_list
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__mail_list_id
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
+msgid "Mailing List"
+msgstr "Danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_trace
+msgid "Mailing Statistics"
+msgstr "Thống kê Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_contact_ids
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_contact_ids
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
+msgid "Mailing contacts"
+msgstr "Liên hệ của ds mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_contacts_count
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_contacts_count
+msgid "Mailing contacts number"
+msgstr "SL liên hệ của ds Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_mandatory
+msgid "Mandatory Partner"
+msgstr "Bắt buộc có đối tác"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_contact_subscription
+msgid "Mass Mailing Subscription Information"
+msgstr "Thông tin đăng ký gửi thư hàng loạt"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_ids
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_stats_ids
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
+msgid "Mass mailing stats"
+msgstr "Thống kê ds Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_count
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_stats_count
+msgid "Mass mailing stats number"
+msgstr "SL thống kê ds Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_base_partner_merge_automatic_wizard
+msgid "Merge Partner Wizard"
+msgstr "Tính năng gộp đối tác"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__partner_id
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_trace__partner_id
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__partner_ids
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.mailing_trace_view_search
+#: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_mail_mass_mailing_contact_search
+msgid "Partner"
+msgstr "Đối tác"
+
+#. module: mass_mailing_partner
+#. odoo-python
+#: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
+#, python-format
+msgid "Partner '%s' has no email."
+msgstr "Đối tác '%s' chưa có email."
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
+msgid "Partner Tag"
+msgstr "Thẻ của đối tác"
+
+#. module: mass_mailing_partner
+#. odoo-python
+#: code:addons/mass_mailing_partner/models/mailing_contact.py:0
+#, python-format
+msgid "Partner already exists in one of these mailing lists"
+msgstr "Đối tác đã tồn tại trong một danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
+msgid "Tags"
+msgstr ""
+
+#. module: mass_mailing_partner
+#. odoo-python
+#: code:addons/mass_mailing_partner/models/res_partner.py:0
+#, python-format
+msgid ""
+"This partner '%s' is linked to one or more mass mailing contact. Email must "
+"be assigned."
+msgstr ""
+"Đối tác '%s' có liên kết đến một liên hệ của danh sách Mail. Email là thông "
+"tin bắt buộc."

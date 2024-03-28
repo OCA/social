@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+     Copyright 2015-16 Antonio Espinosa <antonio.espinosa@tecnativa.com>
+     Copyright 2015 Javier Iniesta <javieria@antiun.com>
+     Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     Copyright 2020 Tecnativa - Manuel Calero
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+    <record model="ir.ui.view" id="view_partner_form">
+        <field name="name">Partner Form with mailing contacts</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button
+                    name="%(mass_mailing.action_view_mass_mailing_contacts)d"
+                    context="{'search_default_partner_id': id,
+                                  'default_partner_id': id}"
+                    type="action"
+                    class="oe_stat_button oe_inline"
+                    icon="fa-envelope-o"
+                    groups="mass_mailing.group_mass_mailing_user"
+                >
+                    <field
+                        name="mass_mailing_contacts_count"
+                        widget="statinfo"
+                        string="Mailing contacts"
+                    />
+                </button>
+                <button
+                    name="%(mass_mailing.mailing_trace_action)d"
+                    context="{'search_default_partner_id': id,
+                                  'default_partner_id': id}"
+                    type="action"
+                    class="oe_stat_button oe_inline"
+                    icon="fa-envelope-o"
+                    groups="mass_mailing.group_mass_mailing_user"
+                >
+                    <field
+                        name="mass_mailing_stats_count"
+                        widget="statinfo"
+                        string="Mass mailing stats"
+                    />
+                </button>
+            </div>
+        </field>
+    </record>
+
+    <record id="view_res_partner_filter" model="ir.ui.view">
+        <field name="name">Partner Search with mailing contacts</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field
+                    name="mass_mailing_contact_ids"
+                    string="Mailing List"
+                    filter_domain="[('mass_mailing_contact_ids.list_ids','ilike', self)]"
+                    groups="mass_mailing.group_mass_mailing_user"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
