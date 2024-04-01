@@ -45,6 +45,7 @@ addon | version | maintainers | summary
 [mail_inline_css](mail_inline_css/) | 14.0.1.0.0 |  | Convert style tags in inline style in your mails
 [mail_layout_force](mail_layout_force/) | 14.0.1.0.0 | [![ivantodorovich](https://github.com/ivantodorovich.png?size=30px)](https://github.com/ivantodorovich) | Force a mail layout on selected email templates
 [mail_layout_preview](mail_layout_preview/) | 14.0.1.0.1 |  | Preview email templates in the browser
+[mail_notification_clean_status_error](mail_notification_clean_status_error/) | 14.0.1.0.1 | [![sebalix](https://github.com/sebalix.png?size=30px)](https://github.com/sebalix) | Extend Odoo scheduled action to also delete notifications in error.
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 14.0.1.0.1 | [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Apply a custom subject to mail notifications
 [mail_notification_with_history](mail_notification_with_history/) | 14.0.1.0.1 | [![TDu](https://github.com/TDu.png?size=30px)](https://github.com/TDu) | Add the previous chatter discussion into new email notifications.
 [mail_optional_autofollow](mail_optional_autofollow/) | 14.0.1.0.1 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message

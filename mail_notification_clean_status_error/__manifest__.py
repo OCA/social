@@ -3,7 +3,7 @@
 {
     "name": "Mail Notification - Clean up notifications in error",
     "summary": "Extend Odoo scheduled action to also delete notifications in error.",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Mail",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp, Odoo Community Association (OCA)",
