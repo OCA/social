@@ -54,7 +54,7 @@ addon | version | maintainers | summary
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 16.0.1.0.0 |  | Mail tracking and Mailgun webhooks integration
 [mail_tracking_mass_mailing](mail_tracking_mass_mailing/) | 16.0.1.0.0 |  | Improve mass mailing email tracking
 [mass_mailing_contact_active](mass_mailing_contact_active/) | 16.0.1.0.0 |  | Adds active feature on mailing list contact and subscriptions
-[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 16.0.1.0.0 |  | Know and track (un)subscription reasons, GDPR compliant
+[mass_mailing_custom_unsubscribe](mass_mailing_custom_unsubscribe/) | 16.0.1.0.1 |  | Know and track (un)subscription reasons, GDPR compliant
 [mass_mailing_event_registration_exclude](mass_mailing_event_registration_exclude/) | 16.0.1.0.0 |  | Link mass mailing with event for excluding recipients
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 16.0.1.0.0 |  | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 16.0.1.0.0 |  | Link partners with mass-mailing
