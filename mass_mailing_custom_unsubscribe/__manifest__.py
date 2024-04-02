@@ -7,7 +7,7 @@
     "name": "Customizable unsubscription process on mass mailing emails",
     "summary": "Know and track (un)subscription reasons, GDPR compliant",
     "category": "Marketing",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.0.1",
     "depends": ["mass_mailing"],
     "data": [
         "security/ir.model.access.csv",
