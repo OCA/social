@@ -12,7 +12,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["base", "mail"],
+    "depends": ["base", "mail","markupsafe==2.0.1"],
     "maintainers": ["yajo"],
     "data": [
         "views/res_config_settings.xml",
