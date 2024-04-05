@@ -50,9 +50,9 @@ Known issues / Roadmap
 
 Known issues:
 
-* Not all branding is removed from auth_signup's invitation email because it is a
-  longer, more complex snippet of HTML. Only the line containing the link to Odoo.com
-  is removed.
+-  Not all branding is removed from auth_signup's invitation email
+   because it is a longer, more complex snippet of HTML. Only the line
+   containing the link to Odoo.com is removed.
 
 Changelog
 =========
@@ -100,7 +100,7 @@ Contributors
    -  Pedro M. Baeza
    -  João Marques
 
-* Stefan Rijnhart <stefan@opener.amsterdam>
+-  Stefan Rijnhart stefan@opener.amsterdam
 
 Maintainers
 -----------
