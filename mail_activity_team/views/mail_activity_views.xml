@@ -1,0 +1,103 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="mail_activity_view_form_popup" model="ir.ui.view">
+        <field name="name">mail.activity.view.form.popup</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="attributes">
+                <attribute name="invisible">team_id</attribute>
+            </field>
+            <field name="user_id" position="after">
+                <field
+                    name="team_user_id"
+                    invisible="not team_id"
+                    domain="[('activity_team_ids', '=', team_id)]"
+                />
+                <field
+                    name="team_id"
+                    options="{'no_create': True, 'no_open': True}"
+                    domain="['|', ('res_model_ids', '=', False), ('res_model_ids', '=', res_model_id)]"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_tree" model="ir.ui.view">
+        <field name="name">mail.activity.view.tree</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_tree" />
+        <field name="arch" type="xml">
+            <field name="date_deadline" position="after">
+                <field name="team_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_activity_view_form_board" model="ir.ui.view">
+        <field name="name">mail.activity.view.form</field>
+        <field name="model">mail.activity</field>
+        <field
+            name="inherit_id"
+            ref="mail_activity_board.mail_activity_view_form_board"
+        />
+        <field name="arch" type="xml">
+            <field name="user_id" position="attributes">
+                <attribute name="invisible">not team_id</attribute>
+            </field>
+            <field name="user_id" position="after">
+                <field
+                    name="team_user_id"
+                    invisible="team_id"
+                    domain="[('activity_team_ids', '=', team_id)]"
+                />
+                <field
+                    name="team_id"
+                    domain="['|', ('res_model_ids', '=', False), ('res_model_ids', '=', res_model_id)]"
+                />
+            </field>
+        </field>
+    </record>
+
+     <record id="mail_activity_view_kanban" model="ir.ui.view">
+         <field name="name">mail.activity.boards.view.kanban</field>
+         <field name="model">mail.activity</field>
+         <field name="inherit_id" ref="mail_activity_board.mail_activity_view_kanban" />
+         <field name="arch" type="xml">
+             <field name="user_id" position="after">
+                 <field name="team_id" />
+             </field>
+             <xpath expr="//div[hasclass('oe_kanban_content')]" position="inside">
+                 <br />
+                 <div>
+                     Team: <field name="team_id" />
+                 </div>
+             </xpath>
+         </field>
+    </record>
+
+        <!-- SEARCH VIEW -->
+    <record id="mail_activity_view_search" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.search</field>
+        <field name="model">mail.activity</field>
+        <field name="inherit_id" ref="mail_activity_board.mail_activity_view_search" />
+        <field name="priority" eval="2" />
+        <field name="arch" type="xml">
+            <xpath expr='//field[@name="user_id"]' position='before'>
+                <field name="team_id" />
+            </xpath>
+            <xpath expr='//filter[@name="activities_6_month"]' position='after'>
+                <filter
+                    name="my_team_activities"
+                    string="My Team Activities"
+                    domain="[('team_id.member_ids', '=', uid)]"
+                />
+            </xpath>
+            <group position='inside'>
+                <filter name='team' string="Team" context="{'group_by': 'team_id'}" />
+            </group>
+        </field>
+
+    </record>
+</odoo>
