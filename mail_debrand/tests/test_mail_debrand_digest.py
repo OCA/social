@@ -58,7 +58,9 @@ class TestMailDebrandDigest(common.TransactionCase):
                     self.env.user.company_id, self.env.user
                 ),
             },
-            post_process=True,
+            options={
+                "post_process": True,
+            },
         )[self.mail_digest_id.id]
 
         # ensure the template rendered correctly. if rendering failed,

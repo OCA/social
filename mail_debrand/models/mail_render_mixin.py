@@ -20,10 +20,10 @@ class MailRenderMixin(models.AbstractModel):
         # value can be bytes or markup; ensure we get a proper string and preserve type
         back_to_bytes = False
         back_to_markup = False
-        if type(value) is bytes:
+        if isinstance(value, bytes):
             back_to_bytes = True
             value = value.decode()
-        if type(value) is Markup:
+        if isinstance(value, Markup):
             back_to_markup = True
         has_dev_odoo_link = re.search(
             r"<a\s(.*)dev\.odoo\.com", value, flags=re.IGNORECASE
@@ -65,7 +65,6 @@ class MailRenderMixin(models.AbstractModel):
         engine="inline_template",
         add_context=None,
         options=None,
-        post_process=False,
     ):
         """replace anything that is with odoo in templates
         if is a <a that contains odoo will delete it completely
