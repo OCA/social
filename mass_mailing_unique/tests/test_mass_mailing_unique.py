@@ -35,7 +35,7 @@ class TestMassMailingUnique(common.TransactionCase):
         # Create another list with the same exact name
         self.env["mailing.list"].create({"name": self.mailing_list.name})
         with self.assertRaises(ValidationError):
-            pre_init_hook(self.env.cr)
+            pre_init_hook(self.env)
 
     def test_init_hook_list_mailing_contact(self):
         # Disable temporarily the constraint
@@ -54,7 +54,7 @@ class TestMassMailingUnique(common.TransactionCase):
         )
         self.env["mailing.contact"].flush_model()
         with self.assertRaises(ValidationError):
-            pre_init_hook(self.env.cr)
+            pre_init_hook(self.env)
 
     def test_mailing_contact_unique_email_exact(self):
         """Create a contact with the same exact email"""

@@ -6,7 +6,7 @@ from odoo import _
 from odoo.exceptions import ValidationError
 
 
-def pre_init_hook(cr):
+def pre_init_hook(env):
     """Make sure there are no duplicates before installing the module.
 
     If you define an unique key in Odoo that cannot be applied, Odoo will log a
@@ -16,7 +16,7 @@ def pre_init_hook(cr):
     """
     errors = list()
     # Search for duplicates in emails
-    cr.execute(
+    env.cr.execute(
         """
           SELECT email_normalized, COUNT(id) as count
           FROM mailing_contact
@@ -24,12 +24,12 @@ def pre_init_hook(cr):
           HAVING COUNT(id) > 1
       """
     )
-    for result in cr.fetchall():
+    for result in env.cr.fetchall():
         errors.append(
             "There are {1} mailing contacts with the same email: {0}".format(*result)
         )
     # Search for duplicates in list's name
-    cr.execute(
+    env.cr.execute(
         """
           SELECT name, COUNT(id) as count
           FROM mailing_list
@@ -37,7 +37,7 @@ def pre_init_hook(cr):
           HAVING COUNT(id) > 1
       """
     )
-    for result in cr.fetchall():
+    for result in env.cr.fetchall():
         errors.append(
             "There are {1} mailing lists with the same name: {0}.".format(*result)
         )
