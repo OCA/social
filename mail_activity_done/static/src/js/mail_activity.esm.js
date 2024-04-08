@@ -3,10 +3,13 @@
 // Copyright 2018-22 ForgeFlow <http://www.forgeflow.com>
 // License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-import {qweb as QWeb, _t} from "web.core";
 import mailUtils from "@mail/js/utils";
-import mail_activity from "mail.activity";
-import time from "web.time";
+import {mail_activity} from "@mail/core/web/activity";
+
+import {renderToElement} from "@web/core/utils/render";
+import {_t} from "@web/core/l10n/translation";
+
+// Import time from "web.time";
 
 // We are forced here to override the method, as there is no possibility
 // to inherit it.
@@ -68,13 +71,13 @@ mail_activity.include({
         if (activities.length) {
             var nbActivities = _.countBy(activities, "state");
             this.$el.html(
-                QWeb.render("mail.activity_items", {
+                renderToElement("mail.activity_items", {
                     activities: activities,
                     nbPlannedActivities: nbActivities.planned,
                     nbTodayActivities: nbActivities.today,
                     nbOverdueActivities: nbActivities.overdue,
-                    dateFormat: time.getLangDateFormat(),
-                    datetimeFormat: time.getLangDatetimeFormat(),
+                    //                    DateFormat: time.getLangDateFormat(),
+                    //                    datetimeFormat: time.getLangDatetimeFormat(),
                 })
             );
         } else {

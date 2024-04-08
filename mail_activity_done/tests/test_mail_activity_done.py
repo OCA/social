@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestMailActivityDoneMethods(TransactionCase):
     def setUp(self):
-        super(TestMailActivityDoneMethods, self).setUp()
+        super().setUp()
 
         self.employee = self.env["res.users"].create(
             {
@@ -42,17 +42,31 @@ class TestMailActivityDoneMethods(TransactionCase):
             len(act_count), 1, "Number of activities should be equal to one"
         )
 
-    def test_read_progress_bar(self):
-        res_partner = self.env["res.partner"].browse(self.act1.res_model_id)
-        params = {
-            "domain": [],
-            "group_by": "id",
-            "progress_bar": {"field": "activity_state"},
-        }
-        result = res_partner._read_progress_bar(**params)
-        self.assertEqual(result[0]["__count"], 1)
-
+    def test_mail_activity_search(self):
+        # Cover `_search_state` for mail.activity
         self.act1._action_done()
-        self.assertEqual(self.act1.state, "done")
-        result = res_partner._read_progress_bar(**params)
-        self.assertEqual(len(result), 0)
+        self.assertEqual(
+            self.env["mail.activity"].search_count(
+                [("state", "=", "done"), ("active", "=", False)]
+            ),
+            1,
+        )
+        self.assertEqual(
+            self.env["mail.activity"].search_count(
+                [("state", "!=", "done"), ("active", "=", False)]
+            ),
+            0,
+        )
+        self.assertEqual(
+            self.env["mail.activity"].search_count(
+                [("state", "!=", "today"), ("active", "=", False)]
+            ),
+            1,
+        )
+        self.assertFalse(
+            self.env["mail.activity"].search_count(
+                [("state", "=", "today"), ("active", "=", False)]
+            )
+        )
+        self.assertFalse(self.env["mail.activity"].search([("state", "=", False)]))
+        self.env["mail.activity"].search([("state", "!=", False)])
