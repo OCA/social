@@ -114,7 +114,9 @@ class MailActivity(models.Model):
         MailThread = self.env["mail.thread"]
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
         for user in self.mapped("user_id"):
-            activities = self.filtered(lambda activity: activity.user_id == user)
+            activities = self.filtered(
+                lambda activity, user=user: activity.user_id == user
+            )
             tz = timezone(user.sudo().tz or "UTC")
             local_now = utc_now.astimezone(tz)
 

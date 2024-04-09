@@ -5,8 +5,13 @@
 -->
 <odoo>
 
-    <record id="mail_activity_type_view_form" model="ir.ui.view">
-        <field name="name">mail.activity.type.view.form</field>
+    <record
+        id="mail_activity_reminder_mail_activity_type_view_form_inherit"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >mail_activity_reminder.mail.activity.type.view.form.inherit</field>
         <field name="model">mail.activity.type</field>
         <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
         <field name="arch" type="xml">
