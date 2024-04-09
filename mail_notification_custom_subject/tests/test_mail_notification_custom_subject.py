@@ -90,7 +90,8 @@ class TestMailNotificationCustomSubject(common.TransactionCase):
                     "name": "Test template 2",
                     "model_id": self.env.ref("base.model_res_partner").id,
                     "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
-                    "subject_template": "{{object.name or 'n/a'}} and something different",
+                    "subject_template": "{{object.name or 'n/a'}} and "
+                    "something different",
                 }
             )
         # Send message in partner

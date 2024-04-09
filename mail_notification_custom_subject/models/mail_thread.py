@@ -24,8 +24,7 @@ class MailThread(models.AbstractModel):
         partner_ids=None,
         attachments=None,
         attachment_ids=None,
-        add_sign=True,
-        record_name=False,
+        body_is_html=False,
         **kwargs,
     ):
         if subtype_xmlid:
@@ -81,7 +80,6 @@ class MailThread(models.AbstractModel):
             partner_ids=partner_ids,
             attachments=attachments,
             attachment_ids=attachment_ids,
-            add_sign=add_sign,
-            record_name=record_name,
+            body_is_html=body_is_html,
             **kwargs,
         )
