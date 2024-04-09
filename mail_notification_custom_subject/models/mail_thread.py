@@ -26,7 +26,7 @@ class MailThread(models.AbstractModel):
         attachment_ids=None,
         add_sign=True,
         record_name=False,
-        **kwargs
+        **kwargs,
     ):
         if subtype_xmlid:
             subtype_id = self.env["ir.model.data"]._xmlid_to_res_id(
@@ -60,9 +60,7 @@ class MailThread(models.AbstractModel):
                         template_src=template.subject_template,
                         model=self._name,
                         res_ids=[self.id],
-                    )[
-                        self.id
-                    ]
+                    )[self.id]
                     if template.position == "replace":
                         subject = rendered_subject_template
                     elif template.position == "append_before":
