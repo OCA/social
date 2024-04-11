@@ -12,7 +12,7 @@
                     title="Click to add this email to the blacklist."
                     type="object"
                     groups="base.group_user"
-                    attrs="{'invisible': [('is_blacklisted', '=', True)]}"
+                    invisible="is_blacklisted"
                 />
             </field>
         </field>
