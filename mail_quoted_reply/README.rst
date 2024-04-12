@@ -68,6 +68,13 @@ Contributors
 -  Giuseppe Borruso <gborruso@dinamicheaziendali.it>
 -  Laurence Labusch <lala@labiso.de>
 -  Dani Forga
+-  Tris Doan <tridm@trobz.com>
+
+Other credits
+-------------
+
+The migration from 16.0 to 17.0 of this module were financially
+supported by Camptocamp.
 
 Maintainers
 -----------
