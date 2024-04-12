@@ -6,18 +6,28 @@ from odoo import api, models, tools
 class MailComposeMessage(models.TransientModel):
     _inherit = "mail.compose.message"
 
-    @api.onchange("template_id")
-    def _onchange_template_id_wrapper(self):
-        super()._onchange_template_id_wrapper()
-        context = self._context
-        if "is_quoted_reply" in context.keys() and context["is_quoted_reply"]:
-            self.body += Markup(context["quote_body"])
-        return
+    @api.depends("composition_mode", "model", "res_domain", "res_ids", "template_id")
+    def _compute_body(self):
+        res = super()._compute_body()
+        for composer in self:
+            context = composer._context
+            if context.get("is_quoted_reply"):
+                composer.body = Markup(context["quote_body"])
+        return res
 
-    @api.model
-    def get_record_data(self, values):
-        result = super().get_record_data(values)
-        subj = self._context.get("default_subject", False)
-        if subj:
-            result["subject"] = tools.ustr(subj)
-        return result
+    @api.depends(
+        "composition_mode",
+        "model",
+        "parent_id",
+        "record_name",
+        "res_domain",
+        "res_ids",
+        "template_id",
+    )
+    def _compute_subject(self):
+        res = super()._compute_subject()
+        for composer in self:
+            subj = composer._context.get("default_subject", False)
+            if subj:
+                composer.subject = tools.ustr(subj)
+        return res

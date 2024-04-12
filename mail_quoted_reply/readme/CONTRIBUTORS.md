@@ -3,3 +3,4 @@
 - Giuseppe Borruso \<<gborruso@dinamicheaziendali.it>\>
 - Laurence Labusch \<<lala@labiso.de>\>
 - Dani Forga
+- Tris Doan \<<tridm@trobz.com>\>
