@@ -1,0 +1,135 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_notification_custom_subject
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-02-16 10:56+0000\n"
+"PO-Revision-Date: 2021-02-16 11:56+0100\n"
+"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_after
+msgid "Append After"
+msgstr "Añadir después"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_before
+msgid "Append Before"
+msgstr "Añadir antes"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subtype_ids
+msgid "Applied Subtypes"
+msgstr "Subtipos aplicados"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model,name:mail_notification_custom_subject.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de correo electrónico"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_uid
+msgid "Last Updated by"
+msgstr "Última modificación por"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model,name:mail_notification_custom_subject.model_mail_message_custom_subject
+msgid "Mail Message Custom Subject"
+msgstr "Asunto Personalizado en Mensaje de Correo"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
+msgid "Model"
+msgstr "Modelo"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
+msgid "Model where this template applies"
+msgstr "Modelo en el que se aplica la plantilla"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__position
+msgid "Position"
+msgstr "Posición"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__replace
+msgid "Replace"
+msgstr "Sustituir"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
+msgid "Subject (placeholders may be used here)"
+msgstr "Asunto (se pueden utilizar aquí expresiones de campos)"
+
+#. module: mail_notification_custom_subject
+#: model:ir.actions.act_window,name:mail_notification_custom_subject.action_mail_notification_custom_subject_tree_all
+#: model:ir.ui.menu,name:mail_notification_custom_subject.menu_mail_notification_custom_subject
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
+msgid "Subject Replacement Templates"
+msgstr "Plantillas de Sustitución de Asuntos"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
+#, fuzzy
+msgid "Subject Template"
+msgstr "Plantillas de Sustitución de Asuntos"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
+#, fuzzy
+msgid "Template Name"
+msgstr "Plantillas"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
+msgid ""
+"Whether to replace, append at beggining or append at end to other templates "
+"that apply to a given context"
+msgstr ""
+"Ya sea para reemplazar, agregar al principio o agregar al final a otras "
+"plantillas que se aplican a un contexto determinado"
+
+#~ msgid "Templates"
+#~ msgstr "Plantillas"
