@@ -22,7 +22,7 @@ class MailWizardInvite(models.TransientModel):
             self.env["ir.config_parameter"]
             .sudo()
             .get_param(
-                "{}.{}".format(parameter_name, res_model),
+                f"{parameter_name}.{res_model}",
                 self.env["ir.config_parameter"]
                 .sudo()
                 .get_param(parameter_name, default="[]"),
