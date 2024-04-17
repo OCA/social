@@ -94,7 +94,7 @@ class MailActivityMixin(models.AbstractModel):
                     activity.date_deadline
                     for activity in record.activity_ids
                     if activity.user_id.id == record.env.uid
-                    or activity.team_id.id in record.env.user.activity_team_ids.ids
+                    or activity.team_id in record.env.user.activity_team_ids
                 ),
                 False,
             )
