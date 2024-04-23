@@ -28,9 +28,13 @@ class ResCompany(models.Model):
     )
     show_followers_message_background_color = fields.Char(
         "Follower message Background Color",
-        readonly=False, store=True
+        readonly=False, 
+        store=True,
+        default="#EBEBEB"
     )
     show_followers_message_font_color = fields.Char(
         "Follower message font Color",
-        readonly=False, store=True
+        readonly=False, 
+        store=True,
+        default="#000000"
     )
