@@ -30,7 +30,8 @@ class ResConfigSettings(models.TransientModel):
         store=False,
     )
     show_followers_message_background_color = fields.Char(
-        related='company_id.show_followers_message_background_color', readonly=False
+        related='company_id.show_followers_message_background_color', 
+        readonly=False
     )
     show_followers_message_font_color = fields.Char(
         related='company_id.show_followers_message_font_color',
