@@ -6,24 +6,26 @@
         <field name="inherit_id" ref="mail.res_config_settings_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//block[@id='emails']" position="inside">
-            <!-- <block id="emails" position="inside"> -->
-                    <div class="col-12 col-lg-6 o_setting_box">
-                        <div class="o_setting_left_pane">
-                        </div>
-                        <div class="o_setting_right_pane">
-                            <div class="content-group">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane">
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <div class="content-group">
+                            <settings company_dependent="1">
                                 <label for="show_internal_users_cc" string="Show Followers on mails"/>
                                 <div>
                                     <div>
                                         <field name="show_internal_users_cc"/>
                                         <label for="show_internal_users_cc" class="o_light_label" string="Show Internal Users on CC"/>
+                                        <span class="fa fa-lg fa-building-o" title="Values set here are company-specific."></span>
                                     </div>
                                     <div>
                                         <label for="show_followers_message_sent_to" class="o_light_label" style="vertical-align: top;"/>
                                         <field name="show_followers_message_sent_to" placeholder="This message has been sent to"/>
                                     </div>
                                     <div>
-                                        <label for="show_followers_partner_format" class="o_light_label" style="vertical-align: top;"/><br></br>
+                                        <label for="show_followers_partner_format" class="o_light_label" style="vertical-align: top;"/>
+                                        <br></br>
                                         <field name="show_followers_partner_format" placeholder="%%(partner_name)s or %%(partner_email)s&gt;" style="display:inline-block;width: 262px;"/>
                                     </div>
                                     <div>
@@ -36,24 +38,27 @@
                                     </div>
                                     <div>
                                         <td>
-                                            <label for="show_followers_message_font_color" class="o_light_label" style="vertical-align: top;"/><br></br>
+                                            <label for="show_followers_message_font_color" class="o_light_label" style="vertical-align: top;"/>
+                                            <br></br>
                                         </td>
                                         <td>
                                             <field name="show_followers_message_font_color" style="display:inline-block;" widget="color"/>
                                         </td>
                                     </div>
                                     <div>
-                                        <label for="show_followers_message_response_warning" class="o_light_label" style="vertical-align: top;"/><br></br>
+                                        <label for="show_followers_message_response_warning" class="o_light_label" style="vertical-align: top;"/>
+                                        <br></br>
                                         <field name="show_followers_message_response_warning" placeholder="Notice: Replies to this email will be sent to all recipients."/>
                                     </div>
                                 </div>
-                                <label for="show_followers_message_preview" class="text-muted"/><br></br>
+                                <label for="show_followers_message_preview" class="text-muted"/>
+                                <br></br>
                                 <field name="show_followers_message_preview" style="width:100%;" widget="html"/>
-                            </div>
+                            </settings>
                         </div>
                     </div>
-                <!-- </block> -->
-                </xpath>
+                </div>
+            </xpath>
         </field>
     </record>
 </odoo>
