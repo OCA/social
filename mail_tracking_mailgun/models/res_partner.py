@@ -50,7 +50,7 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-email-validation.html
         """
-        params = self.env["mail.tracking.email"]._mailgun_values()
+        params = self.env["mail.tracking.email"]._mailgun_values()[0]
         timeout = (
             self.env["ir.config_parameter"]
             .sudo()
@@ -137,24 +137,24 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-suppressions.html
         """
-        api_key, api_url, domain, *__ = self.env[
-            "mail.tracking.email"
-        ]._mailgun_values()
+        params = self.env["mail.tracking.email"]._mailgun_values()
         timeout = (
             self.env["ir.config_parameter"]
             .sudo()
             .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
         )
         for partner in self:
-            res = requests.get(
-                urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
-                auth=("api", api_key),
-                timeout=timeout,
-            )
-            if res.status_code == 200 and not partner.email_bounced:
-                partner.email_bounced = True
-            elif res.status_code == 404 and partner.email_bounced:
-                partner.email_bounced = False
+            email_bounced = False
+            for api_key, api_url, domain, *__ in params:
+                res = requests.get(
+                    urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
+                    auth=("api", api_key),
+                    timeout=timeout,
+                )
+                if res.status_code == 200 and not email_bounced:
+                    email_bounced = True
+                    break
+            partner.email_bounced = email_bounced
 
     def force_set_bounced(self):
         """
@@ -162,22 +162,23 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-suppressions.html
         """
-        api_key, api_url, domain, *__ = self.env[
-            "mail.tracking.email"
-        ]._mailgun_values()
+        params = self.env["mail.tracking.email"]._mailgun_values()
         timeout = (
             self.env["ir.config_parameter"]
             .sudo()
             .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
         )
         for partner in self:
-            res = requests.post(
-                urljoin(api_url, "/v3/%s/bounces" % domain),
-                auth=("api", api_key),
-                data={"address": partner.email},
-                timeout=timeout,
-            )
-            partner.email_bounced = res.status_code == 200 and not partner.email_bounced
+            email_bounced = partner.email_bounced
+            for api_key, api_url, domain, *__ in params:
+                res = requests.post(
+                    urljoin(api_url, "/v3/%s/bounces" % domain),
+                    auth=("api", api_key),
+                    data={"address": partner.email},
+                    timeout=timeout,
+                )
+                email_bounced = res.status_code == 200
+            partner.email_bounced = email_bounced
 
     def force_unset_bounced(self):
         """
@@ -185,19 +186,19 @@ class ResPartner(models.Model):
         API documentation:
         https://documentation.mailgun.com/en/latest/api-suppressions.html
         """
-        api_key, api_url, domain, *__ = self.env[
-            "mail.tracking.email"
-        ]._mailgun_values()
+        params = self.env["mail.tracking.email"]._mailgun_values()
         timeout = (
             self.env["ir.config_parameter"]
             .sudo()
             .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
         )
         for partner in self:
-            res = requests.delete(
-                urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
-                auth=("api", api_key),
-                timeout=timeout,
-            )
-            if res.status_code in (200, 404) and partner.email_bounced:
-                partner.email_bounced = False
+            email_bounced = partner.email_bounced
+            for api_key, api_url, domain, *__ in params:
+                res = requests.delete(
+                    urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
+                    auth=("api", api_key),
+                    timeout=timeout,
+                )
+                email_bounced = res.status_code not in (200, 404)
+            partner.email_bounced = email_bounced

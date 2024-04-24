@@ -41,7 +41,7 @@ class MailTrackingController(main.MailTrackingController):
         if token in processed_tokens:
             raise ValidationError(_("Request was already processed"))
         processed_tokens.add(token)
-        params = request.env["mail.tracking.email"]._mailgun_values()
+        params = request.env["mail.tracking.email"]._mailgun_values()[0]
         # Assert signature
         if not params.webhook_signing_key:
             _logger.warning(

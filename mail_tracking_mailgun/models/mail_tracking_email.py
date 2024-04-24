@@ -82,18 +82,25 @@ class MailTrackingEmail(models.Model):
         domain = icp.get_param("mailgun.domain", catchall_domain)
         if not domain:
             raise ValidationError(_("A Mailgun domain value is needed!"))
+        domains = domain.split(",")
         validation_key = icp.get_param("mailgun.validation_key")
         web_base_url = icp.get_param("web.base.url")
         webhooks_domain = icp.get_param("mailgun.webhooks_domain", web_base_url)
         webhook_signing_key = icp.get_param("mailgun.webhook_signing_key")
-        return MailgunParameters(
-            api_key,
-            api_url,
-            domain,
-            validation_key,
-            webhooks_domain,
-            webhook_signing_key,
-        )
+
+        parameters = []
+        for domain in domains:
+            parameters.append(
+                MailgunParameters(
+                    api_key,
+                    api_url,
+                    domain,
+                    validation_key,
+                    webhooks_domain,
+                    webhook_signing_key,
+                )
+            )
+        return parameters
 
     def _mailgun_metadata(self, mailgun_event_type, event, metadata):
         # Get Mailgun timestamp when found
@@ -208,34 +215,43 @@ class MailTrackingEmail(models.Model):
             .sudo()
             .get_param("mailgun.timeout", MAILGUN_TIMEOUT)
         )
-        api_key, api_url, domain, *__ = self._mailgun_values()
-        for tracking in self.filtered("message_id"):
-            message_id = tracking.message_id.replace("<", "").replace(">", "")
-            events = []
-            url = urljoin(api_url, "/v3/%s/events" % domain)
-            params = {
-                "begin": tracking.timestamp,
-                "ascending": "yes",
-                "message-id": message_id,
-                "recipient": email_split(tracking.recipient)[0],
-            }
-            while url:
-                res = requests.get(
-                    url,
-                    auth=("api", api_key),
-                    params=params,
-                    timeout=timeout,
-                )
-                if not res or res.status_code != 200:
-                    raise UserError(_("Couldn't retrieve Mailgun information"))
-                iter_events = res.json().get("items", [])
-                if not iter_events:
-                    # Loop no more
-                    break
-                events.extend(iter_events)
-                # Loop over pagination
-                url = res.json().get("paging", {}).get("next")
-            if not events:
+        parameters = self._mailgun_values()
+        events_found = False
+        for api_key, api_url, domain, *__ in parameters:
+            message_found = False
+            for tracking in self.filtered("message_id"):
+                message_id = tracking.message_id.replace("<", "").replace(">", "")
+                events = []
+                url = urljoin(api_url, "/v3/%s/events" % domain)
+                params = {
+                    "begin": tracking.timestamp,
+                    "ascending": "yes",
+                    "message-id": message_id,
+                    "recipient": email_split(tracking.recipient)[0],
+                }
+                while url:
+                    res = requests.get(
+                        url,
+                        auth=("api", api_key),
+                        params=params,
+                        timeout=timeout,
+                    )
+                    if not res or res.status_code != 200:
+                        break
+                    message_found = True
+                    iter_events = res.json().get("items", [])
+                    if not iter_events:
+                        # Loop no more
+                        break
+                    events.extend(iter_events)
+                    # Loop over pagination
+                    url = res.json().get("paging", {}).get("next")
+                if not events:
+                    continue
+                events_found = True
+                for event in events:
+                    self.sudo()._mailgun_event_process(event, {})
+            if not message_found:
+                raise UserError(_("Couldn't retrieve Mailgun information"))
+            if not events_found:
                 raise UserError(_("Event information not longer stored"))
-            for event in events:
-                self.sudo()._mailgun_event_process(event, {})
