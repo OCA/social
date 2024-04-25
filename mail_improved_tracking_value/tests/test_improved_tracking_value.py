@@ -75,11 +75,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "char",
                 "old_value_char": "weakness",
                 "new_value_char": "strength",
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "char", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, "weakness")
@@ -89,11 +88,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "many2many",
                 "old_value_char": "123",
                 "new_value_char": "456",
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "many2many", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, "123")
@@ -103,11 +101,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "one2many",
                 "old_value_char": "123",
                 "new_value_char": "456",
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "one2many", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, "123")
@@ -117,11 +114,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "integer",
                 "old_value_integer": 1,
                 "new_value_integer": 3,
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "integer", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, str(1))
@@ -131,11 +127,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "float",
                 "old_value_float": 1.1,
                 "new_value_float": 3.14159,
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "float", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, str(1.1))
@@ -145,11 +140,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "monetary",
-                "old_value_monetary": 3.45,
-                "new_value_monetary": 5.45,
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "old_value_float": 3.45,
+                "new_value_float": 5.45,
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "monetary", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, str(3.45))
@@ -159,11 +153,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "datetime",
                 "old_value_datetime": "2018-01-01",
                 "new_value_datetime": "2018-01-04",
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "datetime", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, "2018-01-01 00:00:00")
@@ -173,11 +166,10 @@ class TestImproveTrackingValue(TransactionCase):
         r = self.model.create(
             {
                 "mail_message_id": self.msg.id,
-                "field_type": "text",
                 "old_value_text": "previous",
                 "new_value_text": "next",
-                "field": self.env["ir.model.fields"]._get("res.partner", "name").id,
-                "field_desc": "desc",
+                "field_id": self.env["ir.model.fields"]._get("res.partner", "name").id,
+                "field_info": {"type": "text", "desc": "desc"},
             }
         )
         self.assertEqual(r.old_value_formatted, "previous")

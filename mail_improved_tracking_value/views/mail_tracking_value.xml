@@ -13,7 +13,6 @@
             >
                 <field name="create_date" string="On" />
                 <field name="record_name" string="For" />
-                <field name="field_desc" string="Field changed" />
                 <field name="old_value_formatted" />
                 <field name="new_value_formatted" />
                 <field name="model" />
@@ -31,7 +30,6 @@
                     <field name="create_date" class="oe-inline" />
                     <group name="main">
                         <field name="mail_message_id" string="For" />
-                        <field name="field_desc" string="Field changed" />
                         <field name="old_value_formatted" />
                         <field name="new_value_formatted" />
                         <field name="model" />
