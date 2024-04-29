@@ -43,9 +43,7 @@ class MailTemplate(models.Model):
                             "body_html"
                         ] = self_with_lang._render_template_postprocess(
                             {res_id: body_html}
-                        )[
-                            res_id
-                        ]
+                        )[res_id]
                         result[res_id]["body"] = tools.html_sanitize(
                             result[res_id]["body_html"]
                         )

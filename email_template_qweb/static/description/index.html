@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -369,12 +368,13 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:f34eb5d597bb6e375fee10d4f9edc4908631034be7f187d151cd0deaedd3cfa3
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/16.0/email_template_qweb"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-16-0/social-16-0-email_template_qweb"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>This module was written to allow you to write email templates in <cite>QWeb view</cite> instead
-of QWeb. The advantage here is that with QWeb View, you can make use of
-inheritance and the <tt class="docutils literal">call</tt> statement, which allows you to reuse designs and
-snippets in multiple templates, making your development process simpler.
-Furthermore, QWeb views are easier to edit with the integrated ACE editor.</p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/17.0/email_template_qweb"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-17-0/social-17-0-email_template_qweb"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module was written to allow you to write email templates in QWeb
+view instead of QWeb. The advantage here is that with QWeb View, you can
+make use of inheritance and the <tt class="docutils literal">call</tt> statement, which allows you to
+reuse designs and snippets in multiple templates, making your
+development process simpler. Furthermore, QWeb views are easier to edit
+with the integrated ACE editor.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -393,9 +393,11 @@ Furthermore, QWeb views are easier to edit with the integrated ACE editor.</p>
 <h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
 <p>To use this module, you need to:</p>
 <ol class="arabic simple">
-<li>Select <cite>QWeb View</cite> in the field <cite>Body templating engine</cite></li>
-<li>Select a <cite>QWeb View</cite> to be used to render the body field</li>
-<li>Apart from <cite>QWeb View</cite> standard variables, you also have access to <tt class="docutils literal">object</tt> and <tt class="docutils literal">email_template</tt>, which are browse records of the current object and the email template in use, respectively.</li>
+<li>Select QWeb View in the field Body templating engine</li>
+<li>Select a QWeb View to be used to render the body field</li>
+<li>Apart from QWeb View standard variables, you also have access to
+<tt class="docutils literal">object</tt> and <tt class="docutils literal">email_template</tt>, which are browse records of the
+current object and the email template in use, respectively.</li>
 </ol>
 </div>
 <div class="section" id="bug-tracker">
@@ -403,7 +405,7 @@ Furthermore, QWeb views are easier to edit with the integrated ACE editor.</p>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20email_template_qweb%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20email_template_qweb%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -436,13 +438,10 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </li>
 <li><p class="first">Foram Shah &lt;<a class="reference external" href="mailto:foram.shah&#64;initos.com">foram.shah&#64;initos.com</a>&gt;</p>
 </li>
-<li><dl class="first docutils">
-<dt><a class="reference external" href="https://trobz.com">Trobz</a>:</dt>
-<dd><ul class="first last simple">
+<li><p class="first"><a class="reference external" href="https://trobz.com">Trobz</a>:</p>
+<ul class="simple">
 <li>Dzung Tran &lt;<a class="reference external" href="mailto:dungtd&#64;trobz.com">dungtd&#64;trobz.com</a>&gt;</li>
 </ul>
-</dd>
-</dl>
 </li>
 </ul>
 </div>
@@ -460,7 +459,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/16.0/email_template_qweb">OCA/social</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/17.0/email_template_qweb">OCA/social</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
