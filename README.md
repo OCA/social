@@ -62,6 +62,7 @@ addon | version | maintainers | summary
 [mass_mailing_partner](mass_mailing_partner/) | 15.0.1.0.0 |  | Link partners with mass-mailing
 [mass_mailing_resend](mass_mailing_resend/) | 15.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
 [microsoft_outlook_single_tenant](microsoft_outlook_single_tenant/) | 15.0.2.0.0 |  | Microsoft Outlook Single Tenant (DEPRECATED)
+[outgoing_email_by_model](outgoing_email_by_model/) | 15.0.1.0.0 | [![mmequignon](https://github.com/mmequignon.png?size=30px)](https://github.com/mmequignon) | Outgoing Email by Model
 
 [//]: # (end addons)
 
