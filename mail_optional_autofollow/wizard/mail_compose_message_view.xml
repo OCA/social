@@ -8,7 +8,7 @@
             <xpath expr="//div[field[@name='partner_ids']]" position="after">
                 <field
                     name="autofollow_recipients"
-                    attrs="{'invisible': [('composition_mode', '=', 'mass_mail')]}"
+                    invisible="composition_mode == 'mass_mail'"
                 />
             </xpath>
         </field>

@@ -9,7 +9,7 @@ class MailComposeMessage(models.TransientModel):
 
     @api.model
     def default_get(self, fields_list):
-        res = super(MailComposeMessage, self).default_get(fields_list)
+        res = super().default_get(fields_list)
         res.setdefault(
             "autofollow_recipients", self.env.context.get("mail_post_autofollow", False)
         )
