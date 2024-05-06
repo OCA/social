@@ -1,8 +1,9 @@
-# Copyright 2016 Therp BV <http://therp.nl>
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016-2024 Therp BV <http://therp.nl>
+# Copyright 2024 ForgeFlow S.L. (https://www.forgeflow.com)
+# License LGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
     "name": "QWeb for email templates",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "author": "Therp BV, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Marketing",

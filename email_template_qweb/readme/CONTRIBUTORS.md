@@ -14,5 +14,7 @@
 
 - Foram Shah \<<foram.shah@initos.com>\>
 
-- [Trobz](https://trobz.com):  
+- [Trobz](https://trobz.com):
   - Dzung Tran \<<dungtd@trobz.com>\>
+
+- Anaïs Lopez \<<anais.lopez@forgeflow.com>\>
