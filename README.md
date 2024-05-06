@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [base_search_mail_content](base_search_mail_content/) | 17.0.1.0.0 |  | Base Search Mail Content
 [mail_activity_board](mail_activity_board/) | 17.0.1.0.1 |  | Add Activity Boards
 [mail_activity_team](mail_activity_team/) | 17.0.1.0.0 |  | Add Teams to Activities
+[mail_attach_existing_attachment](mail_attach_existing_attachment/) | 17.0.1.0.0 |  | Adding attachment on the object by sending this one
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 17.0.1.0.0 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Apply a custom subject to mail notifications
 [mail_outbound_static](mail_outbound_static/) | 17.0.1.0.1 |  | Allows you to configure the from header for a mail server.
 [mail_partner_forwarding](mail_partner_forwarding/) | 17.0.1.0.1 |  | Forwarding notifications for partners
