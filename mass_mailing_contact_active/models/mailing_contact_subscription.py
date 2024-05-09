@@ -4,6 +4,6 @@ from odoo import fields, models
 
 
 class MailingContactSubscription(models.Model):
-    _inherit = "mailing.contact.subscription"
+    _inherit = "mailing.subscription"
 
     active = fields.Boolean(default=True)

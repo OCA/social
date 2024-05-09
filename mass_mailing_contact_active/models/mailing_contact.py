@@ -12,7 +12,7 @@ class MailingContact(models.Model):
         res = super().write(values)
         if "active" in values:
             # Have to search to fetch the inactive records
-            subscriptions = self.env["mailing.contact.subscription"].search(
+            subscriptions = self.env["mailing.subscription"].search(
                 [("contact_id", "in", self.ids), ("active", "!=", values["active"])]
             )
             if subscriptions:
