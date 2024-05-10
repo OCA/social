@@ -6,8 +6,8 @@
 
 {
     "name": "Base User Signature",
-    "version": "15.0.1.0.0",
-    "author": "Camptocamp," "Odoo Community Association (OCA)",
+    "version": "16.0.1.0.0",
+    "author": "Camptocamp, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Social",
