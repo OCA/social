@@ -5,3 +5,4 @@
 * Mayank Gosai <mgosai@opensourceintegrators.com>
 * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
 * Italo LOPES <contact@ilopes.me>
+* Saran Lim. <saranl@ecosoft.co.th>
