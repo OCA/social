@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
+from odoo.tools.safe_eval import safe_eval
 
 
 class MailComposeMessage(models.TransientModel):
@@ -24,17 +25,8 @@ class MailComposeMessage(models.TransientModel):
         substitution_template = self._get_substitution_template(
             result.get("composition_mode"),
             self.env["mail.template"].browse(result.get("template_id")),
-            [result.get("res_id")],
+            safe_eval(result.get("res_ids")) if result.get("res_ids") else [],
         )
         if substitution_template:
             result["template_id"] = substitution_template.id
         return result
-
-    @api.onchange("template_id")
-    def onchange_template_id_wrapper(self):
-        substitution_template = self._get_substitution_template(
-            self.composition_mode, self.template_id, [self.res_id]
-        )
-        if substitution_template:
-            self.template_id = substitution_template
-        return super().onchange_template_id_wrapper()

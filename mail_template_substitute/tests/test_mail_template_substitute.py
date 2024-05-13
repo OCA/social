@@ -62,7 +62,7 @@ class TestMailTemplateSubstitute(TransactionCase):
     def test_get_email_template_partner(self):
         self.assertEqual(
             self.mt._get_substitution_template(
-                self.env.ref("base.model_res_partner"), self.partner.id
+                self.env.ref("base.model_res_partner"), self.partner.ids
             ),
             self.smt1,
         )
@@ -82,21 +82,13 @@ class TestMailTemplateSubstitute(TransactionCase):
             self.smt1,
         )
 
-    def test_onchange_template_id_wrapper(self):
-        self.assertEqual(self.mail_compose.template_id, self.mt)
-        self.smt1.mail_template_substitution_rule_ids.domain = "[]"
-        self.mail_compose.with_context(
-            active_ids=self.partners.ids
-        ).onchange_template_id_wrapper()
-        self.assertEqual(self.mail_compose.template_id, self.smt2)
-
     def test_default_get(self):
         mail_compose_form = Form(
             self.env["mail.compose.message"].with_context(
                 **{
                     "default_template_id": self.mt.id,
                     "default_model": self.partner._name,
-                    "default_res_id": self.partner.id,
+                    "default_res_ids": self.partner.ids,
                 }
             )
         )
