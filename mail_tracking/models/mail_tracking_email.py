@@ -143,7 +143,7 @@ class MailTrackingEmail(models.Model):
     def _find_allowed_tracking_ids(self):
         """Filter trackings based on related records ACLs"""
         # Admins passby this filter
-        if not self or self.env.user.has_group("base.group_system"):
+        if not self.ids or self.env.user.has_group("base.group_system"):
             return self.ids
         # Override ORM to get the values directly
         self._cr.execute(
@@ -156,7 +156,7 @@ class MailTrackingEmail(models.Model):
         msg_linked = self._cr.fetchall()
         if not msg_linked:
             return []
-        _, msg_ids, partner_ids = zip(*msg_linked)
+        _, msg_ids, partner_ids = zip(*msg_linked, strict=True)
         # Filter messages with their ACL rules avoiding False values fetched in the set
         msg_ids = self.env["mail.message"]._search(
             [("id", "in", [x for x in msg_ids if x])]
@@ -181,16 +181,16 @@ class MailTrackingEmail(models.Model):
         offset=0,
         limit=None,
         order=None,
-        count=False,
         access_rights_uid=None,
     ):
         """Filter ids based on related records ACLs"""
-        ids = super()._search(
-            args, offset, limit, order, count=count, access_rights_uid=access_rights_uid
+        allowed = super()._search(
+            args, offset, limit, order, access_rights_uid=access_rights_uid
         )
-        if not self.env.user.has_group("base.group_system") and not count:
-            ids = self.browse(ids)._find_allowed_tracking_ids()
-        return ids
+        if not self.env.user.has_group("base.group_system"):
+            ids = self.browse(allowed)._find_allowed_tracking_ids()
+            allowed = self.browse(ids)._as_query(order)
+        return allowed
 
     def check_access_rule(self, operation):
         """Rely on related messages ACLs"""
@@ -317,23 +317,15 @@ class MailTrackingEmail(models.Model):
         )
         if self.token:
             path_url = (
-                "mail/tracking/open/%(db)s/%(tracking_email_id)s/%(token)s/"
-                "blank.gif"
-                % {
-                    "db": self.env.cr.dbname,
-                    "tracking_email_id": self.id,
-                    "token": self.token,
-                }
+                f"mail/tracking/open/{self.env.cr.dbname}/{self.id}/{self.token}/"
+                f"blank.gif"
             )
         else:
             # This is here for compatibility with older records
             path_url = f"mail/tracking/open/{self.env.cr.dbname}/{self.id}/blank.gif"
         track_url = urllib.parse.urljoin(base_url, path_url)
-        return (
-            '<img src="%(url)s" alt="" '
-            'data-odoo-tracking-email="%(tracking_email_id)s"/>'
-            % {"url": track_url, "tracking_email_id": self.id}
-        )
+        _logger.debug(f"Sending email will tracking url: {track_url}")
+        return f'<img src="{track_url}" alt="" data-odoo-tracking-email="{self.id}"/>'
 
     def _partners_email_bounced_set(self, reason, event=None):
         recipients = []
@@ -382,7 +374,6 @@ class MailTrackingEmail(models.Model):
                 content, tracking_url, plaintext=False, container_tag="div"
             )
             email["body"] = body
-        return email
 
     def _message_partners_check(self, message, message_id):
         if not self.mail_message_id.exists():  # pragma: no cover

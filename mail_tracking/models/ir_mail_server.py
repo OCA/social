@@ -78,7 +78,7 @@ class IrMailServer(models.Model):
             # the tracking image in case it's to be disabled
             if self._tracking_img_disabled(tracking_email_id):
                 body = self._tracking_img_remove(body)
-        msg = super(IrMailServer, self).build_email(
+        msg = super().build_email(
             email_from=email_from,
             email_to=email_to,
             subject=subject,
@@ -143,7 +143,7 @@ class IrMailServer(models.Model):
         tracking_email = self._tracking_email_get(message)
         smtp_server_used = self.sudo()._smtp_server_get(mail_server_id, smtp_server)
         try:
-            message_id = super(IrMailServer, self).send_email(
+            message_id = super().send_email(
                 message,
                 mail_server_id=mail_server_id,
                 smtp_server=smtp_server,

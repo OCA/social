@@ -125,10 +125,9 @@ records with messages in failed status and that needs an user action.
 Known issues / Roadmap
 ======================
 
--  Integrate with the core mail.notification model. A soft way would be
-   to write a notification event along with the mail.tracking.event
-   ones. Another way could be to merge both models and build the module
-   features on top of it. This might imply a refactor though.
+-  Integrate with the core ``mail.notification`` model as it overlaps
+   with what the ``mail.tracking`` model does. We could add the existing
+   features on top of that model and save lots of code lines.
 
 Bug Tracker
 ===========
@@ -167,18 +166,6 @@ Contributors
 -  `Vauxoo <https://www.vauxoo.com>`__:
 
    -  Agustín Payen Sandoval
-
-Other credits
--------------
-
-Images
-~~~~~~
-
--  Odoo Community Association:
-   `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`__.
--  Thanks to `LlubNek <https://openclipart.org/user-detail/LlubNek>`__
-   and `Openclipart <https://openclipart.org>`__ for `the
-   icon <https://openclipart.org/detail/19342/open-envelope>`__.
 
 Maintainers
 -----------

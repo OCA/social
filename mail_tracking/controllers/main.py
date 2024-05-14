@@ -42,7 +42,7 @@ class MailTrackingController(MailController):
 
     @http.route(
         [
-            "/mail/tracking/open/<string:db>" "/<int:tracking_email_id>/blank.gif",
+            "/mail/tracking/open/<string:db>/<int:tracking_email_id>/blank.gif",
             "/mail/tracking/open/<string:db>"
             "/<int:tracking_email_id>/<string:token>/blank.gif",
         ],
