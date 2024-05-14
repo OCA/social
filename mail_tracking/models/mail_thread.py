@@ -20,6 +20,10 @@ class MailThread(models.AbstractModel):
         + self._get_failed_message_domain(),
     )
 
+    def _get_message_create_valid_field_names(self):
+        valid_field_names = super()._get_message_create_valid_field_names()
+        return valid_field_names | {"email_to", "email_cc"}
+
     def _get_failed_message_domain(self):
         """Domain used to display failed messages on the 'failed_messages'
         widget"""
@@ -46,9 +50,16 @@ class MailThread(models.AbstractModel):
 
     def _routing_handle_bounce(self, email_message, message_dict):
         bounced_message = message_dict["bounced_message"]
-        if bounced_message.mail_tracking_ids:
+        mail_trackings = bounced_message.mail_tracking_ids.filtered(
+            lambda x: x.recipient_address == message_dict["bounced_email"]
+            or (
+                message_dict["bounced_partner"]
+                and message_dict["bounced_partner"] == x.partner_id
+            )
+        )
+        if mail_trackings:
             # TODO detect hard of soft bounce
-            bounced_message.mail_tracking_ids.event_create("soft_bounce", message_dict)
+            mail_trackings.event_create("soft_bounce", message_dict)
         return super()._routing_handle_bounce(email_message, message_dict)
 
     def _message_get_suggested_recipients(self):

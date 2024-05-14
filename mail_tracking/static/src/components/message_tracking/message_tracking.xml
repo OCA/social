@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail_tracking.MessageTracking">
+        <t t-set="skip_track_links" t-value="props.skip_track_links" />
+        <t t-foreach="partner_trackings" t-as="tracking" t-key="tracking_index">
+            <t t-if="!tracking_first">
+                -
+            </t>
+            <a
+                t-if="tracking['partner_id']"
+                t-attf-class="o_mail_action_tracking_partner #{tracking['isCc'] ? 'o_mail_cc' : ''}"
+                t-att-data-partner="tracking['partner_id']"
+                href="#"
+                data-oe-model="res.partner"
+                t-att-data-oe-id="tracking['partner_id']"
+                t-out="tracking['recipient']"
+            />
+            <span
+                t-else=""
+                t-attf-class="#{tracking['isCc'] ? 'o_mail_cc' : ''}"
+                t-out="tracking['recipient']"
+            />
+            <t
+                t-if="tracking['status'] === 'error' &amp;&amp; tracking['error_type'] === 'no_recipient'"
+                t-set="title_status"
+                t-value="tracking['error_description']"
+            />
+            <t t-else="" t-set="title_status" t-value="tracking['status_human']" />
+            <span
+                class="mail_tracking ps-1 text-black-50"
+                t-if="!skip_track_links"
+                t-att-data-tracking="tracking['tracking_id']"
+                t-att-title="title_status"
+                type="button"
+                t-on-click="_onTrackingStatusClick"
+            >
+                <t t-call="mail_tracking.TrackingStatus" />
+            </span>
+        </t>
+    </t>
+</templates>

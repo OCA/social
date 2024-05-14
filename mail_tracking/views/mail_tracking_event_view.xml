@@ -26,17 +26,13 @@
                             <field name="date" />
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('event_type', 'not in', ('sent',))]}">
+                    <group invisible="event_type != 'sent'">
                         <field name="smtp_server" />
                     </group>
-                    <group
-                        attrs="{'invisible': [('event_type', 'not in', ('open', 'click'))]}"
-                    >
+                    <group invisible="event_type not in ('open', 'click')">
                         <field name="url" />
                     </group>
-                    <group
-                        attrs="{'invisible': [('event_type', 'not in', ('open', 'click'))]}"
-                    >
+                    <group invisible="event_type not in ('open', 'click')">
                         <group>
                             <field name="mobile" />
                             <field name="ip" />
@@ -49,10 +45,7 @@
                             <field name="os_family" />
                         </group>
                     </group>
-                    <group
-                        string="Error"
-                        attrs="{'invisible': [('error_type', '=', False)]}"
-                    >
+                    <group string="Error" invisible="not error_type">
                         <field name="error_type" />
                         <field name="error_description" />
                         <field name="error_details" />
