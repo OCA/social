@@ -11,7 +11,7 @@ from odoo import fields, models
 class MailMail(models.Model):
     _inherit = "mail.mail"
 
-    def _tracking_email_prepare(self, partner, email):
+    def _tracking_email_prepare(self, email):
         """Prepare email.tracking.email record values"""
         ts = time.time()
         dt = datetime.utcfromtimestamp(ts)
@@ -23,19 +23,21 @@ class MailMail(models.Model):
             "time": fields.Datetime.to_string(dt),
             "mail_id": self.id,
             "mail_message_id": self.mail_message_id.id,
-            "partner_id": partner.id if partner else False,
+            "partner_id": (email.get("partner_id") or self.env["res.partner"]).id,
             "recipient": email_to,
             "sender": self.email_from,
         }
 
-    def _send_prepare_values(self, partner=None):
+    def _prepare_outgoing_list(self, recipients_follower_status=None):
         """Creates the mail.tracking.email record and adds the image tracking
         to the email. Please note that because we can't add mail headers in this
         function, the added tracking image will later (IrMailServer.build_email)
         also be used to extract the mail.tracking.email record id and to set the
         X-Odoo-MailTracking-ID header there.
         """
-        email = super()._send_prepare_values(partner=partner)
-        vals = self._tracking_email_prepare(partner, email)
-        tracking_email = self.env["mail.tracking.email"].sudo().create(vals)
-        return tracking_email.tracking_img_add(email)
+        emails = super()._prepare_outgoing_list(recipients_follower_status)
+        for email in emails:
+            vals = self._tracking_email_prepare(email)
+            tracking_email = self.env["mail.tracking.email"].sudo().create(vals)
+            tracking_email.tracking_img_add(email)
+        return emails

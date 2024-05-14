@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+<t t-name="mail_tracking.FailedMessageReview">
+    <span>
+        <a
+                href="#"
+                class="btn btn-link btn-success text-muted p-0 me-3"
+                role="button"
+                t-on-click="setFailedMessageReviewed"
+            >
+            <i class="fa fa-check" role="img" aria-label="Set As Reviewed" />
+            Set as Reviewed
+        </a>
+        <a
+                href="#"
+                class="btn btn-link btn-success text-muted p-0 me-3"
+                role="button"
+                t-on-click="retryFailedMessage"
+            >
+            <i class="fa fa-retweet" role="img" aria-label="Retry" />
+            Retry
+        </a>
+    </span>
+</t>
+
+</templates>

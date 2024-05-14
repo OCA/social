@@ -1,6 +1,5 @@
 # Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-
 import base64
 import time
 from unittest.mock import patch
@@ -12,8 +11,7 @@ from odoo.fields import Command
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
-from ..controllers.discuss import MailTrackingDiscussController
-from ..controllers.main import BLANK, MailTrackingController
+from odoo.addons.mail_tracking.controllers.main import BLANK, MailTrackingController
 
 mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_email"
 
@@ -29,7 +27,7 @@ class FakeUserAgent:
 
 class TestMailTracking(TransactionCase):
     def setUp(self, *args, **kwargs):
-        super(TestMailTracking, self).setUp(*args, **kwargs)
+        super().setUp(*args, **kwargs)
         self.sender = self.env["res.partner"].create(
             {"name": "Test sender", "email": "sender@example.com"}
         )
@@ -59,7 +57,7 @@ class TestMailTracking(TransactionCase):
 
     def tearDown(self, *args, **kwargs):
         http.request = self.last_request
-        return super(TestMailTracking, self).tearDown(*args, **kwargs)
+        return super().tearDown(*args, **kwargs)
 
     def test_empty_email(self):
         self.recipient.write({"email_bounced": True})
@@ -273,13 +271,14 @@ class TestMailTracking(TransactionCase):
         self.assertEqual(len(recipients[self.recipient.id]), 4)
         self._check_partner_trackings_to(message)
         # Catchall + Alias
-        IrConfigParamObj = self.env["ir.config_parameter"].sudo()
-        IrConfigParamObj.set_param("mail.catchall.alias", "TheCatchall")
-        IrConfigParamObj.set_param("mail.catchall.domain", "test.com")
+        alias_domain_id = self.env["mail.alias.domain"].create(
+            {"catchall_alias": "TheCatchall", "name": "test.com"}
+        )
         self.env["mail.alias"].create(
             {
                 "alias_model_id": self.env["ir.model"]._get("res.partner").id,
                 "alias_name": "support+unnamed",
+                "alias_domain_id": alias_domain_id.id,
             }
         )
         recipients = self.recipient._message_get_suggested_recipients()
@@ -338,7 +337,13 @@ class TestMailTracking(TransactionCase):
         )
         # Force error state
         tracking_email.state = "error"
-        # Create resend mail wizard
+        # Mock a bounce
+        message.notification_ids.update(
+            {
+                "notification_type": "email",
+                "notification_status": "bounce",
+            }
+        )
         wizard = (
             self.env["mail.resend.message"]
             .sudo()
@@ -613,9 +618,9 @@ class TestMailTracking(TransactionCase):
         message.mail_tracking_ids = [Command.link(tracking.id)]
         mail.mail_message_id = message
         message_dict = {
-            "bounced_email": "test@test.net",
+            "bounced_email": self.recipient.email,
             "bounced_message": message,
-            "bounced_msg_id": [message.message_id],
+            "bounced_msg_ids": [message.message_id],
             "bounced_partner": self.recipient,
             "cc": "",
             "date": "2023-02-07 12:35:53",
@@ -669,38 +674,3 @@ class TestMailTracking(TransactionCase):
             self.assertEqual(
                 "data-odoo-tracking-email not found", tracking.error_description
             )
-
-    def test_mail_init_messaging(self):
-        def mock_json_response(*args, **kwargs):
-            return {"expected_result": True}
-
-        controller = MailTrackingDiscussController()
-        # This is non-functional test to increase coverage
-        with patch(
-            "odoo.addons.mail.controllers.discuss.DiscussController.mail_init_messaging",
-            wraps=mock_json_response,
-        ):
-            res = controller.mail_init_messaging()
-            self.assertTrue(res["expected_result"])
-
-    def test_discuss_failed_messages(self):
-        def mock_json_response(*args, **kwargs):
-            return {"expected_result": True}
-
-        def mock_message_fetch(*args, **kwargs):
-            return self.env["mail.message"]
-
-        controller = MailTrackingDiscussController()
-        # This is non-functional test to increase coverage
-        with patch(
-            "odoo.addons.mail_tracking.models.mail_message.MailMessage.message_format",
-            wraps=mock_json_response,
-        ), patch(
-            "odoo.addons.mail.models.mail_message.Message._message_fetch",
-            wraps=mock_message_fetch,
-        ):
-            res = controller.discuss_failed_messages()
-            self.assertTrue(res["expected_result"])
-
-    def test_unlink_mail_alias(self):
-        self.env["ir.config_parameter"].search([], limit=1).unlink()

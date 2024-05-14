@@ -383,11 +383,7 @@ just right to his name.</p>
 <li><a class="reference internal" href="#credits" id="toc-entry-6">Credits</a><ul>
 <li><a class="reference internal" href="#authors" id="toc-entry-7">Authors</a></li>
 <li><a class="reference internal" href="#contributors" id="toc-entry-8">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="toc-entry-9">Other credits</a><ul>
-<li><a class="reference internal" href="#images" id="toc-entry-10">Images</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-11">Maintainers</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-9">Maintainers</a></li>
 </ul>
 </li>
 </ul>
@@ -453,10 +449,9 @@ records with messages in failed status and that needs an user action.</p>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#toc-entry-4">Known issues / Roadmap</a></h1>
 <ul class="simple">
-<li>Integrate with the core mail.notification model. A soft way would be
-to write a notification event along with the mail.tracking.event
-ones. Another way could be to merge both models and build the module
-features on top of it. This might imply a refactor though.</li>
+<li>Integrate with the core <tt class="docutils literal">mail.notification</tt> model as it overlaps
+with what the <tt class="docutils literal">mail.tracking</tt> model does. We could add the existing
+features on top of that model and save lots of code lines.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
@@ -497,21 +492,8 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </li>
 </ul>
 </div>
-<div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#toc-entry-9">Other credits</a></h2>
-<div class="section" id="images">
-<h3><a class="toc-backref" href="#toc-entry-10">Images</a></h3>
-<ul class="simple">
-<li>Odoo Community Association:
-<a class="reference external" href="https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg">Icon</a>.</li>
-<li>Thanks to <a class="reference external" href="https://openclipart.org/user-detail/LlubNek">LlubNek</a>
-and <a class="reference external" href="https://openclipart.org">Openclipart</a> for <a class="reference external" href="https://openclipart.org/detail/19342/open-envelope">the
-icon</a>.</li>
-</ul>
-</div>
-</div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-11">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-9">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
 <a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose

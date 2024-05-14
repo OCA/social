@@ -24,7 +24,7 @@ class MailMessage(models.Model):
         string="Mail Trackings",
     )
     mail_tracking_needs_action = fields.Boolean(
-        help="The message tracking will be considered" " to filter tracking issues",
+        help="The message tracking will be considered to filter tracking issues",
         default=False,
     )
     is_failed_message = fields.Boolean(
@@ -41,6 +41,7 @@ class MailMessage(models.Model):
         "mail_tracking_needs_action",
         "author_id",
         "notification_ids",
+        "mail_tracking_ids",
         "mail_tracking_ids.state",
     )
     def _compute_is_failed_message(self):
@@ -49,7 +50,7 @@ class MailMessage(models.Model):
         for message in self:
             needs_action = message.mail_tracking_needs_action
             involves_me = self.env.user.partner_id in (
-                message.author_id | message.notification_ids.mapped("res_partner_id")
+                message.author_id | message.notification_ids.res_partner_id
             )
             has_failed_trackings = failed_states.intersection(
                 message.mapped("mail_tracking_ids.state")
@@ -128,106 +129,99 @@ class MailMessage(models.Model):
 
     def tracking_status(self):
         """Generates a complete status tracking of the messages by partner"""
-        res = {}
-        for message in self:
-            tracking_delta = 0
-            partner_trackings = []
-            partners_already = self.env["res.partner"]
-            partners = self.env["res.partner"]
-            trackings = (
-                self.env["mail.tracking.email"]
-                .sudo()
-                .search([("mail_message_id", "=", message.id)])
+        self.ensure_one()
+        tracking_delta = 0
+        partner_trackings = []
+        partners_already = self.env["res.partner"]
+        partners = self.env["res.partner"]
+        trackings = (
+            self.env["mail.tracking.email"]
+            .sudo()
+            .search([("mail_message_id", "=", self.id)])
+        )
+        # String to List
+        email_cc_list = self._drop_aliases(email_split(self.email_cc))
+        email_to_list = self._drop_aliases(email_split(self.email_to))
+        # Search related partners recipients
+        partners |= partners.search([("email", "in", email_cc_list + email_to_list)])
+        # Operate over set's instead of lists
+        email_cc_list = set(email_cc_list)
+        email_to_list = set(email_to_list) - email_cc_list
+        # Search all trackings for this message
+        for tracking in trackings:
+            status = self._partner_tracking_status_get(tracking)
+            recipient = tracking.partner_id.name or tracking.recipient
+            partner_trackings.append(
+                {
+                    "status": status,
+                    "status_human": self._partner_tracking_status_human_get(status),
+                    "error_type": tracking.error_type,
+                    "error_description": self._get_error_description(tracking),
+                    "tracking_id": tracking.id,
+                    "recipient": recipient,
+                    "partner_id": tracking.partner_id.id,
+                    "isCc": False,
+                    "tracking_delta": "%i-%i" % (self.id, tracking_delta),
+                }
             )
-            # String to List
-            email_cc_list = self._drop_aliases(email_split(message.email_cc))
-            email_to_list = self._drop_aliases(email_split(message.email_to))
-            # Search related partners recipients
-            partners |= partners.search(
-                [("email", "in", email_cc_list + email_to_list)]
+            if tracking.partner_id:
+                # Discard mails with tracking
+                email_cc_list.discard(tracking.partner_id.email)
+                email_to_list.discard(tracking.partner_id.email)
+                partners_already |= tracking.partner_id
+            tracking_delta += 1
+        # Search all partner recipients for this message
+        if self.partner_ids:
+            partners |= self.partner_ids
+        if self.notified_partner_ids:
+            partners |= self.notified_partner_ids
+        # Discard partner recipients already included
+        partners -= partners_already
+        # Default tracking values
+        tracking_unknown_values = {
+            "status": "unknown",
+            "status_human": self._partner_tracking_status_human_get("unknown"),
+            "error_type": False,
+            "error_description": False,
+            "tracking_id": False,
+        }
+        # Process tracking status of partner recipients without tracking
+        for partner in partners:
+            # Discard 'To' with partner
+            if partner.email in email_to_list:
+                email_to_list.discard(partner.email)
+            # If there is partners not included, then status is 'unknown'
+            # and perhaps a Cc recipient
+            isCc = False
+            if partner.email in email_cc_list:
+                email_cc_list.discard(partner.email)
+                isCc = True
+            tracking_status = tracking_unknown_values.copy()
+            tracking_status.update(
+                {
+                    "recipient": partner.name,
+                    "partner_id": partner.id,
+                    "isCc": isCc,
+                    "tracking_delta": "%i-%i" % (self.id, tracking_delta),
+                }
             )
-            # Operate over set's instead of lists
-            email_cc_list = set(email_cc_list)
-            email_to_list = set(email_to_list) - email_cc_list
-            # Search all trackings for this message
-            for tracking in trackings:
-                status = self._partner_tracking_status_get(tracking)
-                recipient = tracking.partner_id.name or tracking.recipient
-                partner_trackings.append(
-                    {
-                        "status": status,
-                        "status_human": self._partner_tracking_status_human_get(status),
-                        "error_type": tracking.error_type,
-                        "error_description": self._get_error_description(tracking),
-                        "tracking_id": tracking.id,
-                        "recipient": recipient,
-                        "partner_id": tracking.partner_id.id,
-                        "isCc": False,
-                        "tracking_delta": "%i-%i" % (message.id, tracking_delta),
-                    }
-                )
-                if tracking.partner_id:
-                    # Discard mails with tracking
-                    email_cc_list.discard(tracking.partner_id.email)
-                    email_to_list.discard(tracking.partner_id.email)
-                    partners_already |= tracking.partner_id
-                tracking_delta += 1
-            # Search all partner recipients for this message
-            if message.partner_ids:
-                partners |= message.partner_ids
-            if message.notified_partner_ids:
-                partners |= message.notified_partner_ids
-            # Discard partner recipients already included
-            partners -= partners_already
-            # Default tracking values
-            tracking_unknown_values = {
-                "status": "unknown",
-                "status_human": self._partner_tracking_status_human_get("unknown"),
-                "error_type": False,
-                "error_description": False,
-                "tracking_id": False,
-            }
-            # Process tracking status of partner recipients without tracking
-            for partner in partners:
-                # Discard 'To' with partner
-                if partner.email in email_to_list:
-                    email_to_list.discard(partner.email)
-                # If there is partners not included, then status is 'unknown'
-                # and perhaps a Cc recipient
-                isCc = False
-                if partner.email in email_cc_list:
-                    email_cc_list.discard(partner.email)
-                    isCc = True
+            partner_trackings.append(tracking_status)
+            tracking_delta += 1
+        # Process Cc/To recipients without partner
+        for cc, lst in [(True, email_cc_list), (False, email_to_list)]:
+            for email in lst:
                 tracking_status = tracking_unknown_values.copy()
                 tracking_status.update(
                     {
-                        "recipient": partner.name,
-                        "partner_id": partner.id,
-                        "isCc": isCc,
-                        "tracking_delta": "%i-%i" % (message.id, tracking_delta),
+                        "recipient": email,
+                        "partner_id": False,
+                        "isCc": cc,
+                        "tracking_delta": "%i-%i" % (self.id, tracking_delta),
                     }
                 )
                 partner_trackings.append(tracking_status)
                 tracking_delta += 1
-            # Process Cc/To recipients without partner
-            for cc, lst in [(True, email_cc_list), (False, email_to_list)]:
-                for email in lst:
-                    tracking_status = tracking_unknown_values.copy()
-                    tracking_status.update(
-                        {
-                            "recipient": email,
-                            "partner_id": False,
-                            "isCc": cc,
-                            "tracking_delta": "%i-%i" % (message.id, tracking_delta),
-                        }
-                    )
-                    partner_trackings.append(tracking_status)
-                    tracking_delta += 1
-            res[message.id] = {
-                "partner_trackings": partner_trackings,
-                "is_failed_message": message.is_failed_message,
-            }
-        return res
+        return partner_trackings
 
     @api.model
     def _drop_aliases(self, mail_list):
@@ -240,18 +234,6 @@ class MailMessage(models.Model):
 
         return list(filter(_filter_alias, mail_list))
 
-    def message_format(self, format_reply=True):
-        """Preare values to be used by the chatter widget"""
-        res = super().message_format(format_reply)
-        mail_message_ids = {m.get("id") for m in res if m.get("id")}
-        mail_messages = self.browse(mail_message_ids)
-        tracking_statuses = mail_messages.tracking_status()
-        for message_dict in res:
-            mail_message_id = message_dict.get("id", False)
-            if mail_message_id:
-                message_dict.update(tracking_statuses[mail_message_id])
-        return res
-
     def _prepare_dict_failed_message(self):
         """Preare values to be used by the chatter widget"""
         self.ensure_one()
@@ -261,7 +243,7 @@ class MailMessage(models.Model):
         if not failed_trackings or not self.mail_tracking_needs_action:
             return
         failed_partners = failed_trackings.mapped("partner_id")
-        failed_recipients = failed_partners.name_get()
+        failed_recipients = failed_partners.read(["display_name"])
         return {
             "id": self.id,
             "date": self.date,
@@ -278,42 +260,15 @@ class MailMessage(models.Model):
         ]
 
     def set_need_action_done(self):
-        """Set message tracking action as done
-
-        This will mark them to be ignored in the tracking issues filter.
-        """
+        """This will mark the messages to be ignored in the tracking issues filter"""
         self.check_access_rule("read")
-        self.write({"mail_tracking_needs_action": False})
-        self.env["bus.bus"]._sendone(
-            self.env.user.partner_id, "toggle_tracking_status", self.ids
-        )
-        return self.mail_tracking_needs_action
+        self.mail_tracking_needs_action = False
+        self._notify_message_notification_update()
 
     @api.model
     def get_failed_count(self):
         """Gets the number of failed messages used on discuss mailbox item"""
         return self.search_count([("is_failed_message", "=", True)])
-
-    @api.model
-    def set_all_as_reviewed(self):
-        """Sets all messages in the given domain as reviewed.
-
-        Used by Discuss"""
-
-        unreviewed_messages = self.search([("is_failed_message", "=", True)])
-        unreviewed_messages.write({"mail_tracking_needs_action": False})
-        ids = unreviewed_messages.ids
-
-        self.env["bus.bus"].sendone(
-            (self._cr.dbname, "res.partner", self.env.user.partner_id.id),
-            {
-                "type": "toggle_tracking_status",
-                "message_ids": ids,
-                "needs_actions": False,
-            },
-        )
-
-        return ids
 
     @api.model
     def get_failed_messsage_info(self, ids, model):
@@ -323,4 +278,31 @@ class MailMessage(models.Model):
             for msg in msg_ids.sorted("date", reverse=True)
             if msg._prepare_dict_failed_message()
         ]
+        return res
+
+    def _message_notification_format(self):
+        """Add info for the web client"""
+        formatted_notifications = super()._message_notification_format()
+        for notification in formatted_notifications:
+            message = self.filtered(
+                lambda x, notification=notification: x.id == notification["id"]
+            )
+            notification.update(
+                {
+                    "mail_tracking_needs_action": message.mail_tracking_needs_action,
+                    "is_failed_message": message.is_failed_message,
+                }
+            )
+        return formatted_notifications
+
+    def _message_format_extras(self, format_reply):
+        """Add info for the web client"""
+        res = super()._message_format_extras(format_reply)
+        res.update(
+            {
+                "partner_trackings": self.tracking_status(),
+                "mail_tracking_needs_action": self.mail_tracking_needs_action,
+                "is_failed_message": self.is_failed_message,
+            }
+        )
         return res

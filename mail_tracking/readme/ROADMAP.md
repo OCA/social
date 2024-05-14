@@ -1,4 +1,3 @@
-- Integrate with the core mail.notification model. A soft way would be
-  to write a notification event along with the mail.tracking.event ones.
-  Another way could be to merge both models and build the module
-  features on top of it. This might imply a refactor though.
+- Integrate with the core `mail.notification` model as it overlaps with what the
+  `mail.tracking` model does. We could add the existing features on top of that model
+  and save lots of code lines.

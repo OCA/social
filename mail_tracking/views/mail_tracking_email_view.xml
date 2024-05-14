@@ -34,14 +34,14 @@
                             <field name="date" />
                         </group>
                     </group>
-                    <group attrs="{'invisible': [('bounce_type', '=', False)]}">
+                    <group invisible="not bounce_type">
                         <field name="bounce_type" />
                         <field name="bounce_description" />
                     </group>
-                    <group attrs="{'invisible': [('error_type', '=', False)]}">
+                    <group invisible="not error_type">
                         <field
                             name="error_smtp_server"
-                            attrs="{'invisible': [('error_smtp_server', '=', False)]}"
+                            invisible="not error_smtp_server"
                         />
                         <field name="error_type" />
                         <field name="error_description" />
