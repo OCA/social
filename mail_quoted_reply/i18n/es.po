@@ -17,9 +17,21 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: mail_quoted_reply
+#: code:addons/mail_quoted_reply/models/mail_message.py:0
+#, python-format
+msgid "Date"
+msgstr ""
+
+#. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_compose_message
 msgid "Email composition wizard"
 msgstr "Asistente composición Correo Electrónico"
+
+#. module: mail_quoted_reply
+#: code:addons/mail_quoted_reply/models/mail_message.py:0
+#, python-format
+msgid "From"
+msgstr ""
 
 #. module: mail_quoted_reply
 #: model:ir.model,name:mail_quoted_reply.model_mail_message
@@ -32,6 +44,12 @@ msgstr "Mensaje"
 #, python-format
 msgid "Reply"
 msgstr "Responder"
+
+#. module: mail_quoted_reply
+#: code:addons/mail_quoted_reply/models/mail_message.py:0
+#, python-format
+msgid "Subject"
+msgstr ""
 
 #~ msgid ""
 #~ "\n"
