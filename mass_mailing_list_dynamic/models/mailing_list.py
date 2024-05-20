@@ -45,7 +45,7 @@ class MassMailingList(models.Model):
             # Detach or remove undesired contacts when synchronization is full
             if one.sync_method == "full":
                 contact_to_detach = one.contact_ids.filtered(
-                    lambda r: r.partner_id not in desired_partners
+                    lambda r, dp=desired_partners: r.partner_id not in dp
                 )
                 one.contact_ids -= contact_to_detach
                 contact_to_detach.filtered(lambda r: not r.list_ids).unlink()

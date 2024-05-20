@@ -17,3 +17,7 @@
 - [Trobz](https://trobz.com):
 
   > - Nguyễn Minh Chiến \<<chien@trobz.com>\>
+
+- [PeGon GmbH](https://www.pegon.ch):
+
+  - Pedro Evaristo Gonzalez Sanchez

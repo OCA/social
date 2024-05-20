@@ -127,10 +127,14 @@ Contributors
 
       -  Nguyễn Minh Chiến <chien@trobz.com>
 
+-  `PeGon GmbH <https://www.pegon.ch>`__:
+
+   -  Pedro Evaristo Gonzalez Sanchez
+
 Other credits
 -------------
 
-The migration of this module from 15.0 to 16.0 was financially supported
+The migration of this module from 15.0 to 17.0 was financially supported
 by Camptocamp
 
 Maintainers
