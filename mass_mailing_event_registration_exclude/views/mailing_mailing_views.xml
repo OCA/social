@@ -23,7 +23,7 @@
                             name="exclude_event_state_ids"
                             widget="many2many_tags"
                             options="{'no_create_edit': True}"
-                            attrs="{'invisible': [('event_id', '=', False)]}"
+                            invisible="not event_id"
                         />
                 </group>
             </group>
