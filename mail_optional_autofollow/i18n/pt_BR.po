@@ -8,15 +8,17 @@ msgstr ""
 "Project-Id-Version: social (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-04-14 07:09+0000\n"
-"PO-Revision-Date: 2016-04-05 07:05+0000\n"
-"Last-Translator: <>\n"
-"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-"
-"social-8-0/language/pt_BR/)\n"
+"PO-Revision-Date: 2024-05-22 14:35+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
+"OCA-social-8-0/language/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_optional_autofollow
 #: model:ir.model,name:mail_optional_autofollow.model_mail_compose_message
@@ -27,7 +29,7 @@ msgstr "Assistente de Composição de Email"
 #: model:ir.model.fields,field_description:mail_optional_autofollow.field_account_invoice_send__autofollow_recipients
 #: model:ir.model.fields,field_description:mail_optional_autofollow.field_mail_compose_message__autofollow_recipients
 msgid "Make recipients followers"
-msgstr ""
+msgstr "Torne os destinatários seguidores"
 
 #. module: mail_optional_autofollow
 #: model:ir.model.fields,help:mail_optional_autofollow.field_account_invoice_send__autofollow_recipients
@@ -36,3 +38,5 @@ msgid ""
 "if checked, the additional recipients will be added as        followers on "
 "the related object"
 msgstr ""
+"se marcada, os destinatários adicionais serão adicionados como        "
+"seguidores no objeto relacionado"
