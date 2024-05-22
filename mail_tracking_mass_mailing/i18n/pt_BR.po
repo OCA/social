@@ -9,15 +9,17 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-18 04:04+0000\n"
-"PO-Revision-Date: 2017-03-18 04:04+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2024-05-23 01:20+0000\n"
+"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
+"translation.odoo-community.org>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
@@ -99,24 +101,24 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mass_mailing_id
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_event__mass_mailing_id
 msgid "Mass mailing"
-msgstr ""
+msgstr "Correspondência em massa"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "OS"
-msgstr ""
+msgstr "SO"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_mail
 msgid "Outgoing Mails"
-msgstr "Mails de Saída"
+msgstr "E-mails de Saída"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__tracking_event_ids
 msgid "Tracking events"
-msgstr ""
+msgstr "Rastreamento Eventos"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
 msgid "User agent"
-msgstr ""
+msgstr "Agente Usuário"
