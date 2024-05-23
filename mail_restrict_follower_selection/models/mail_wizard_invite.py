@@ -35,9 +35,7 @@ class MailWizardInvite(models.TransientModel):
 
     @api.model
     def get_view(self, view_id=None, view_type="form", **options):
-        result = super(MailWizardInvite, self).get_view(
-            view_id=view_id, view_type=view_type, **options
-        )
+        result = super().get_view(view_id=view_id, view_type=view_type, **options)
         arch = etree.fromstring(result["arch"])
         for field in arch.xpath('//field[@name="partner_ids"]'):
             field.attrib["domain"] = str(
