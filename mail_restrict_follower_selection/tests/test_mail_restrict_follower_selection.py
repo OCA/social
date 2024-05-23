@@ -47,7 +47,7 @@ class TestMailRestrictFollowerSelection(TransactionCase):
                 {
                     "subject": "From Composer Test",
                     "body": "${object.description}",
-                    "res_id": self.partner.id,
+                    "res_ids": self.partner.ids,
                     "partner_ids": [(4, id) for id in self.partner.ids],
                 }
             )
