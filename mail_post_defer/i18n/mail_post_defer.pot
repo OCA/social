@@ -30,3 +30,8 @@ msgstr ""
 #: model:ir.model,name:mail_post_defer.model_mail_message
 msgid "Message"
 msgstr ""
+
+#. module: mail_post_defer
+#: model:ir.model,name:mail_post_defer.model_mail_message_schedule
+msgid "Scheduled Messages"
+msgstr ""
