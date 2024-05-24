@@ -4,12 +4,12 @@
 import freezegun
 
 from odoo.exceptions import UserError
+from odoo.tests import tagged
 
 from odoo.addons.mail.tests.common import MailCommon
 
 
-@freezegun.freeze_time("2023-01-02 10:00:00")
-class MessagePostCase(MailCommon):
+class MailPostDeferCommon(MailCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -17,6 +17,9 @@ class MessagePostCase(MailCommon):
         # Notify employee by email
         cls.user_employee.notification_type = "email"
 
+
+@freezegun.freeze_time("2023-01-02 10:00:00")
+class MessagePostCase(MailPostDeferCommon):
     def test_standard(self):
         """A normal call just uses the queue by default."""
         with self.mock_mail_gateway():
@@ -178,3 +181,37 @@ class MessagePostCase(MailCommon):
                 # `/mail/message/update_content` controller
                 with self.assertRaises(UserError):
                     self.partner_portal._message_update_content(msg, "", [])
+
+
+@tagged("-at_install", "post_install")
+@freezegun.freeze_time("2023-01-02 10:00:00")
+class AutomaticNotificationCase(MailPostDeferCommon):
+    """Check that automatic notifications are queued too.
+
+    This is a separate case because some notifications require a
+    completely-loaded registry, so this case needs to run in post-install mode.
+    """
+
+    def test_assignation_mail(self):
+        """When assigning a record to a user, a notification is scheduled."""
+        with self.mock_mail_gateway():
+            self.partner_portal.user_id = self.user_employee.id
+            self.partner_portal.flush_recordset()
+            self.assertNoMail(self.partner_employee)
+            schedules = self.env["mail.message.schedule"].search(
+                [
+                    ("mail_message_id.res_id", "=", self.partner_portal.id),
+                    ("mail_message_id.model", "=", "res.partner"),
+                    ("scheduled_datetime", "=", "2023-01-02 10:00:30"),
+                ]
+            )
+            self.assertEqual(len(schedules), 1)
+            # After a minute, the mail is sent
+            with freezegun.freeze_time("2023-01-02 10:01:00"):
+                self.env["mail.message.schedule"]._send_notifications_cron()
+                self.assertMailMail(
+                    self.partner_employee,
+                    "outgoing",
+                    author=self.env.user.partner_id,
+                    content="You have been assigned to the Contact Chell Gladys.",
+                )
