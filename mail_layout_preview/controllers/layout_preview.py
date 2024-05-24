@@ -42,5 +42,5 @@ class Preview(http.Controller):
         else:
             # got a XID
             template = env.ref(templ_id.strip())
-        result = template.generate_email(record.id, ["body_html"])
-        return request.make_response(result["body_html"])
+        result = template._generate_template([record.id], ["body_html"])
+        return request.make_response(result[record.id]["body_html"])

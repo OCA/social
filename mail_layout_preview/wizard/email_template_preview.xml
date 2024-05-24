@@ -6,8 +6,10 @@
     <field name="arch" type="xml">
       <footer position="before">
         <hr />
-        <label for="layout_preview_url" />
-        <field name="layout_preview_url" widget="url" />
+        <div style="margin-left:15px;">
+          <label for="layout_preview_url" />
+          <field name="layout_preview_url" widget="url" />
+        </div>
       </footer>
     </field>
   </record>

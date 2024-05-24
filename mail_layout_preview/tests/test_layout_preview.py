@@ -61,10 +61,13 @@ class TestController(HttpCase, TestLayoutMixin):
         tree = etree.fromstring(content)
         list_items = tree.xpath("//ol[@class='email-template-list']/li/a")
         templates = self.env["mail.template"].search([("model_id.model", "=", model)])
-        url_pattern = "/email-preview/res.partner/mail.email_template_partner/{}"
-        for el, tmpl in zip(list_items, templates):
+        url_pattern = "/email-preview/res.partner/{templ_id}"
+        for el, tmpl in zip(list_items, templates, strict=False):
             self.assertEqual(el.attrib["class"], "preview")
-            self.assertEqual(el.attrib["href"], url_pattern.format(tmpl.id))
+            self.assertEqual(
+                el.attrib["href"],
+                url_pattern.format(templ_id=tmpl.id),
+            )
 
     def test_controller2(self):
         self.authenticate("admin", "admin")
