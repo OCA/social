@@ -8,7 +8,7 @@ from odoo import tools
 from odoo.tests.common import HttpCase, TransactionCase, tagged
 
 
-class TestLayoutMixin(object):
+class TestLayoutMixin:
     @staticmethod
     def _create_template(env, model, **kw):
         vals = {
@@ -35,12 +35,12 @@ class TestLayoutPreview(TransactionCase, TestLayoutMixin):
         wiz = self.wiz_model.create(
             {
                 "mail_template_id": self.tmpl.id,
-                "resource_ref": "{},{}".format(self.partner._name, self.partner.id),
+                "resource_ref": f"{self.partner._name},{self.partner.id}",
             }
         )
         self.assertEqual(
             wiz.layout_preview_url,
-            "/email-preview/res.partner/{}/{}/".format(self.tmpl.id, self.partner.id),
+            f"/email-preview/res.partner/{self.tmpl.id}/{self.partner.id}/",
         )
 
 
@@ -71,8 +71,6 @@ class TestController(HttpCase, TestLayoutMixin):
         partner = self.env.ref("base.res_partner_4")
         model = partner._name
         tmpl = self._create_template(self.env, model)
-        response = self.url_open(
-            self.base_url + "{}/{}/{}/".format(model, tmpl.id, partner.id)
-        )
+        response = self.url_open(self.base_url + f"{model}/{tmpl.id}/{partner.id}/")
         content = response.content.decode()
         self.assertIn("<p>Hello %s</p>" % (partner.name), content)

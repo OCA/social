@@ -6,7 +6,6 @@ from odoo.http import request
 
 
 class Preview(http.Controller):
-
     _list_template = "mail_layout_preview.email_templates_list"
 
     @http.route(
