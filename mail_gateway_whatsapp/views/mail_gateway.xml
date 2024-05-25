@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Creu Blanca
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_gateway_form_view">
+        <field name="name">mail.gateway.form (in mail_gateway_telegram)</field>
+        <field name="model">mail.gateway</field>
+        <field name="inherit_id" ref="mail_gateway.mail_gateway_form_view" />
+        <field name="arch" type="xml">
+            <field name="webhook_user_id" position="after">
+                <field
+                    name="whatsapp_security_key"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                />
+                <field
+                    name="whatsapp_from_phone"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                />
+                <field
+                    name="whatsapp_version"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                />
+            </field>
+            <notebook position="inside">
+                <page
+                    name="whatsapp"
+                    string="Whatsapp configuration info"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                >
+                    <div>
+                        <h2>First steps</h2>
+                        <span>Define the values of the fields <b>Webhook Key</b> and <b
+                            >Whatsapp Security Key</b>.
+                            You should set some random value of your choice for this fields.
+                            Ensure that facebook will be able to comunicate with your server.</span>
+                        <h2>Creating the Application from meta developer</h2>
+                        <ol>
+                            <li>Access
+                                <a
+                                    href="https://developers.facebook.com/apps/?show_reminder=true"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Meta developer platform</a>.</li>
+                            <li>Create a new application.</li>
+                            <li>Select the <b>Other</b> option, then <b
+                                >Business</b> in order to create Whatsapp manager</li>
+                            <li>Select a name and create it</li>
+                            <li
+                            >Select the Whatsapp API on the products of the application</li>
+                            <li>Select the business that you will use</li>
+                            <li>Go to <b>Whatsapp / API Configuration</b> menú.</li>
+                            <li>Add a new number.</li>
+                            <li>Copy the phone identification number to the field <b
+                                >Whastapp From phone</b> field.</li>
+                                <li>Access the menu <b
+                                >Configuration / Basic information</b>.</li>
+                                <li
+                            >Show the secret key of the application and copy it to the <b
+                                >Webhook secret</b> field.</li>
+                                <li>Access the menu <b
+                                >Configuration / Advanced Options</b>.</li>
+                                <li>Copy the API Version on the <b
+                                >Whastapp Version</b> field.</li>
+                        </ol>
+                        <h2>Creating a permanent token</h2>
+                        <ol>
+                            <li>Access your <a
+                                    href="https://business.facebook.com/"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >meta business site.</a></li>
+                            <li>Access your business settings menu</li>
+                            <li>Go to <b
+                                >Users / System Users</b> and create a new one with administrator</li>
+                            <li
+                            >Once it is created, Generate a new token related to the created app with no expiry and give access to all whatsapp permissions.</li>
+                            <li>Copy the token value to token field in this page.</li>
+                        </ol>
+                        <h2>Setting webhook and version</h2>
+                        <ol>
+                            <li>Save this record. All the values have been filled</li>
+                            <li>Press the button Integrate webhook.</li>
+                            <li
+                            >On Facebook Develpment, return to the app menu and go to <b
+                                >Whatsapp / Configuration</b>.</li>
+                            <li>Click on <b>Edit Button</b> on the webhook area.</li>
+                            <li>On the wizard, fill the URL field with <b
+                                >Webhook URL</b> field of the gateway. For the verification identifier, use the <b
+                                >Whatsapp Security Key</b> field.</li>
+                            <li>Verify and save the wizard.</li>
+                            <li
+                            >If no error is raised, refresh this gateway data, and you should see that it is integrated.
+                                You should be able to receive and send messages.
+                                If an error is raised, check that the fields are filled properly and that facebook server is able to access your server.</li>
+                        </ol>
+                    </div>
+
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

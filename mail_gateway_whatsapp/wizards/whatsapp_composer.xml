@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 CreuBlanca
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="whatsapp_composer_form_view">
+        <field name="name">whatsapp.composer.form (in mail_gateway_whatsapp)</field>
+        <field name="model">whatsapp.composer</field>
+        <field name="arch" type="xml">
+            <form string="Whatsapp Composer">
+                <group>
+                    <field
+                        name="gateway_id"
+                        attrs="{'invisible': [('find_gateway', '=', False)]}"
+                    />
+                    <field name="find_gateway" invisible="1" />
+                    <field name="res_model" invisible="1" />
+                    <field name="res_id" invisible="1" />
+                    <field name="number_field_name" invisible="1" />
+                    <field name="body" />
+                </group>
+                <footer>
+                    <button
+                        name="action_send_whatsapp"
+                        string="Send"
+                        class="btn-primary"
+                        icon="fa-whatsapp"
+                        type="object"
+                    />
+                    <button
+                        name="action_view_whatsapp"
+                        string="Show Chat"
+                        type="object"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="whatsapp_composer_act_window">
+        <field name="name">Send Whatsapp Message</field>
+        <field name="res_model">whatsapp.composer</field>
+        <field name="view_mode">form</field>
+        <field name="context">{}</field>
+        <field name="target">new</field>
+    </record>
+
+
+</odoo>
