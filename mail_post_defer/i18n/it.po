@@ -19,7 +19,6 @@ msgstr ""
 #. module: mail_post_defer
 #. odoo-python
 #: code:addons/mail_post_defer/models/mail_thread.py:0
-#: code:addons/mail_post_defer/models/mail_thread.py:0
 #, python-format
 msgid "Cannot modify message; notifications were already sent."
 msgstr ""
@@ -34,3 +33,8 @@ msgstr "Discussione e-mail"
 #: model:ir.model,name:mail_post_defer.model_mail_message
 msgid "Message"
 msgstr "Messaggio"
+
+#. module: mail_post_defer
+#: model:ir.model,name:mail_post_defer.model_mail_message_schedule
+msgid "Scheduled Messages"
+msgstr ""
