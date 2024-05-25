@@ -1,7 +1,7 @@
 # Copyright 2022-2023 Moduon Team S.L. <info@moduon.team>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 from odoo import _, fields, models
 from odoo.exceptions import UserError
@@ -10,27 +10,26 @@ from odoo.exceptions import UserError
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    def message_post(self, **kwargs):
-        """Post messages using queue by default."""
-        _self = self
-        force_send = self.env.context.get("mail_notify_force_send") or kwargs.get(
-            "force_send", False
-        )
-        kwargs.setdefault("force_send", force_send)
-        if not force_send:
-            # If deferring message, give the user some minimal time to revert it
-            _self = self.with_context(mail_defer_seconds=30)
-        return super(MailThread, _self).message_post(**kwargs)
-
     def _notify_thread(self, message, msg_vals=False, **kwargs):
         """Defer emails by default."""
-        defer_seconds = self.env.context.get("mail_defer_seconds")
+        _self = self
+        if "mail_defer_seconds" not in _self.env.context:
+            force_send = _self.env.context.get("mail_notify_force_send") or kwargs.get(
+                "force_send", False
+            )
+            kwargs.setdefault("force_send", force_send)
+            if not force_send:
+                # If deferring message, give the user some minimal time to revert it
+                _self = _self.with_context(mail_defer_seconds=30)
+        defer_seconds = _self.env.context.get("mail_defer_seconds")
         if defer_seconds:
             kwargs.setdefault(
                 "scheduled_date",
-                fields.Datetime.now() + timedelta(seconds=defer_seconds),
+                datetime.utcnow() + timedelta(seconds=defer_seconds),
             )
-        return super()._notify_thread(message, msg_vals=msg_vals, **kwargs)
+        return super(MailThread, _self)._notify_thread(
+            message, msg_vals=msg_vals, **kwargs
+        )
 
     def _check_can_update_message_content(self, messages):
         """Allow updating unsent messages.

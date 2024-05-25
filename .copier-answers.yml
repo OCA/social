@@ -15,7 +15,8 @@ odoo_test_flavor: Both
 odoo_version: 16.0
 org_name: Odoo Community Association (OCA)
 org_slug: OCA
-rebel_module_groups: []
+rebel_module_groups:
+- mail_post_defer
 repo_description: '{''TODO'': ''add repo description.''}'
 repo_name: social
 repo_slug: social
