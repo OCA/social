@@ -57,8 +57,8 @@ class MailMail(models.Model):
             {rc}{msg_warn}
             </div>
         """.format(
-            msg_font_color=remove_p(msg_font_color),
-            msg_back_color=remove_p(msg_back_color),
+            msg_font_color=msg_font_color or "#000000",
+            msg_back_color=msg_back_color or "#EBEBEB",
             msg_sent_to=remove_p(msg_sent_to),
             partner_message=Markup.escape(partner_message),
             rc=msg_warn.striptags() and "<br/>" or "",
