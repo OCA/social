@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-28 16:20+0000\n"
+"PO-Revision-Date: 2024-05-28 16:26+0000\n"
 "Last-Translator: Anna Martínez <anna080678@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -49,6 +49,9 @@ msgid ""
 "Chat is private and unique between 2 persons. Group is private among invited"
 " persons. Channel can be freely joined (depending on its configuration)."
 msgstr ""
+"El chat es privado y único entre 2 personas. El grupo es privado entre las "
+"personas invitadas. El canal se pueden unir libremente (dependiendo de su "
+"configuración)."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_message_ids
@@ -61,17 +64,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__company_id
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__company_id
 msgid "Company"
-msgstr ""
+msgstr "Compañía"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contacto"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_guest_manage_form_view
 msgid "Create new partner"
-msgstr ""
+msgstr "Crear una nueva empresa"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__create_uid
@@ -80,7 +83,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__create_uid
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__create_date
@@ -89,12 +92,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__create_date
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_channel
 msgid "Discussion Channel"
-msgstr ""
+msgstr "Canal de discusión"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__display_name
@@ -103,12 +106,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__display_name
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Hilo de mensajes"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_notification__gateway_failure_reason
@@ -116,6 +119,9 @@ msgid ""
 "Failure reason. This is usually the exception thrown by the email server, "
 "stored to ease the debugging of mailing issues."
 msgstr ""
+"Motivo del fallo. Esta suele ser la excepción lanzada por el servidor de "
+"correo electrónico, almacenada para facilitar la depuración de problemas de "
+"correo."
 
 #. module: mail_gateway
 #. odoo-javascript
