@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-03-18 04:04+0000\n"
-"PO-Revision-Date: 2024-05-23 01:20+0000\n"
+"PO-Revision-Date: 2024-05-29 19:35+0000\n"
 "Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
 "translation.odoo-community.org>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
@@ -29,17 +29,17 @@ msgstr "País"
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_bounced
 msgid "Email Bounced"
-msgstr ""
+msgstr "Email Devolvido"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_contact_view_search
 msgid "Email bounced"
-msgstr ""
+msgstr "Email devolvido"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_contact__email_score
 msgid "Email score"
-msgstr ""
+msgstr "Pontuação de e-mail"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
@@ -49,53 +49,53 @@ msgstr "Emails"
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
 msgid "Events"
-msgstr ""
+msgstr "Eventos"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mail_id_int
 msgid "Mail ID"
-msgstr ""
+msgstr "Correio ID"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mail_stats_id
 msgid "Mail statistics"
-msgstr ""
+msgstr "Estatísticas de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mailing_trace__mail_tracking_id
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_menu
 msgid "Mail tracking"
-msgstr ""
+msgstr "Rastreio de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_email
 msgid "Mail tracking emails"
-msgstr ""
+msgstr "E-mails de rastreamento de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.actions.act_window,name:mail_tracking_mass_mailing.action_view_mail_tracking_event
 msgid "Mail tracking events"
-msgstr ""
+msgstr "Eventos de rastreamento de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_email
 msgid "MailTracking email"
-msgstr ""
+msgstr "E-mail de rastreamento de correio"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mail_tracking_event
 msgid "MailTracking event"
-msgstr ""
+msgstr "Rastreamento de evento"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_contact
 msgid "Mailing Contact"
-msgstr ""
+msgstr "Contato para correspondência"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model,name:mail_tracking_mass_mailing.model_mailing_trace
 msgid "Mailing Statistics"
-msgstr ""
+msgstr "Estatísticas de correspondência"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.model.fields,field_description:mail_tracking_mass_mailing.field_mail_tracking_email__mass_mailing_id
