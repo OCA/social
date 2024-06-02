@@ -7,6 +7,7 @@ class MailComposeMessage(models.TransientModel):
     _inherit = "mail.compose.message"
 
     @api.depends("composition_mode", "model", "res_domain", "res_ids", "template_id")
+    @api.depends_context("is_quoted_reply")
     def _compute_body(self):
         res = super()._compute_body()
         for composer in self:
@@ -24,6 +25,7 @@ class MailComposeMessage(models.TransientModel):
         "res_ids",
         "template_id",
     )
+    @api.depends_context("default_subject")
     def _compute_subject(self):
         res = super()._compute_subject()
         for composer in self:
