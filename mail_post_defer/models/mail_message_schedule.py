@@ -13,3 +13,14 @@ class MailMessageSchedule(models.Model):
         return super(MailMessageSchedule, _self)._send_notifications(
             default_notify_kwargs=default_notify_kwargs
         )
+
+    def _group_by_model(self):
+        """Make sure only mail.thread children are grouped with model."""
+        result = super()._group_by_model()
+        for model, records in result.copy().items():
+            # Move records without mail.thread mixin to a False key
+            if model and not hasattr(model, "_notify_thread"):
+                result.pop(model)
+                result.setdefault(False, self.browse())
+                result[False] += records
+        return result

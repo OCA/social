@@ -3,7 +3,7 @@
 {
     "name": "Deferred Message Posting",
     "summary": "Faster and cancellable outgoing messages",
-    "version": "16.0.1.1.0",
+    "version": "16.0.1.1.1",
     "development_status": "Alpha",
     "category": "Productivity/Discuss",
     "website": "https://github.com/OCA/social",
