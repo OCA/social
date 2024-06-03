@@ -1,4 +1,4 @@
-# Copyright 2022-2023 Moduon Team S.L. <info@moduon.team>
+# Copyright 2022-2024 Moduon Team S.L. <info@moduon.team>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 from datetime import datetime, timedelta
@@ -12,7 +12,15 @@ class MailThread(models.AbstractModel):
 
     def _notify_thread(self, message, msg_vals=False, **kwargs):
         """Defer emails by default."""
-        _self = self
+        # Remember if the author should be notified when deferring
+        kwargs.setdefault(
+            "mail_post_defer_notify_author",
+            self.env.context.get("mail_notify_author", False),
+        )
+        _self = self.with_context(
+            mail_notify_author=kwargs["mail_post_defer_notify_author"]
+        )
+        # Don't defer automatically if forcing send
         if "mail_defer_seconds" not in _self.env.context:
             force_send = _self.env.context.get("mail_notify_force_send") or kwargs.get(
                 "force_send", False
@@ -21,6 +29,7 @@ class MailThread(models.AbstractModel):
             if not force_send:
                 # If deferring message, give the user some minimal time to revert it
                 _self = _self.with_context(mail_defer_seconds=30)
+        # Apply deferring
         defer_seconds = _self.env.context.get("mail_defer_seconds")
         if defer_seconds:
             kwargs.setdefault(

@@ -182,6 +182,40 @@ class MessagePostCase(MailPostDeferCommon):
                 with self.assertRaises(UserError):
                     self.partner_portal._message_update_content(msg, "", [])
 
+    def test_model_without_threading(self):
+        """When models don't inherit from mail.thread, they still work."""
+        self.partner_portal.email = "portal@example.com"
+        with self.mock_mail_gateway():
+            self.env["mail.thread"].with_context(
+                mail_notify_author=True
+            ).message_notify(
+                author_id=self.partner_employee.id,
+                body="test body",
+                model="res.country",
+                partner_ids=(self.partner_employee | self.partner_portal).ids,
+                res_id=self.ref("base.es"),
+            )
+            self.assertNoMail(self.partner_employee | self.partner_portal)
+            # One minute later, the cron sends the mail
+            with freezegun.freeze_time("2023-01-02 10:01:00"):
+                self.env["mail.message.schedule"]._send_notifications_cron()
+                self.env["mail.mail"].process_email_queue()
+                self.assertMailMail(
+                    self.partner_portal,
+                    "sent",
+                    author=self.partner_employee,
+                    content="test body",
+                )
+                self.assertMailMail(
+                    self.partner_employee,
+                    "sent",
+                    author=self.partner_employee,
+                    content="test body",
+                )
+        # Safety belt to avoid false positives in this test
+        self.assertFalse(hasattr(self.env["res.country"], "_notify_thread"))
+        self.assertTrue(hasattr(self.env["res.partner"], "_notify_thread"))
+
 
 @tagged("-at_install", "post_install")
 @freezegun.freeze_time("2023-01-02 10:00:00")
