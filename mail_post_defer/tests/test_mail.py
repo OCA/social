@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 import freezegun
+from lxml import html
 
 from odoo.exceptions import UserError
 from odoo.tests import tagged
@@ -215,6 +216,49 @@ class MessagePostCase(MailPostDeferCommon):
         # Safety belt to avoid false positives in this test
         self.assertFalse(hasattr(self.env["res.country"], "_notify_thread"))
         self.assertTrue(hasattr(self.env["res.partner"], "_notify_thread"))
+
+    def test_button_access(self):
+        """A button is added to the email to access the record."""
+        customer = self.env["res.partner"].create(
+            {"name": "Customer", "email": "customer@example.com"}
+        )
+        with self.mock_mail_gateway():
+            customer.message_post(
+                body="test body",
+                subject="test subject",
+                message_type="comment",
+                partner_ids=(self.partner_employee | customer).ids,
+            )
+            self.assertNoMail(self.partner_employee | customer)
+            # After a minute, mails are sent
+            with freezegun.freeze_time("2023-01-02 10:01:00"):
+                self.env["mail.message.schedule"]._send_notifications_cron()
+                self.env["mail.mail"].process_email_queue()
+                # Employee has a button that grants them access
+                customer_link = customer._notify_get_action_link("view")
+                employee_mail = self.assertSentEmail(
+                    self.env.user.partner_id,
+                    self.partner_employee,
+                    body_content="test body",
+                )
+                self.assertEqual(
+                    html.fromstring(employee_mail["body"])
+                    .xpath(f"//a[contains(@href, '{customer_link}')]")[0]
+                    .text_content()
+                    .strip(),
+                    "View Contact",
+                )
+                # Customer got the mail, but doesn't have access
+                customer_mail = self.assertSentEmail(
+                    self.env.user.partner_id,
+                    customer,
+                    body_content="test body",
+                )
+                self.assertFalse(
+                    html.fromstring(customer_mail["body"]).xpath(
+                        f"//a[contains(@href, '{customer_link}')]"
+                    )
+                )
 
 
 @tagged("-at_install", "post_install")
