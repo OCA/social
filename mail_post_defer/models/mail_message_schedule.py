@@ -19,7 +19,7 @@ class MailMessageSchedule(models.Model):
         result = super()._group_by_model()
         for model, records in result.copy().items():
             # Move records without mail.thread mixin to a False key
-            if model and not hasattr(model, "_notify_thread"):
+            if model and not hasattr(self.env.get(model), "_notify_thread"):
                 result.pop(model)
                 result.setdefault(False, self.browse())
                 result[False] += records
