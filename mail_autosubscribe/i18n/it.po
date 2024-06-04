@@ -1,0 +1,120 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_autosubscribe
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-12-28 15:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner__mail_autosubscribe_ids
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_users__mail_autosubscribe_ids
+#: model:ir.ui.menu,name:mail_autosubscribe.menu_mail_autosubscribe
+msgid "Autosubscribe Models"
+msgstr "Modelli autoiscrizione"
+
+#. module: mail_autosubscribe
+#: model:ir.model,name:mail_autosubscribe.model_base
+msgid "Base"
+msgstr "Base"
+
+#. module: mail_autosubscribe
+#: model:ir.model,name:mail_autosubscribe.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: mail_autosubscribe
+#: model:ir.model,name:mail_autosubscribe.model_mail_template
+msgid "Email Templates"
+msgstr "Modelli e-mail"
+
+#. module: mail_autosubscribe
+#: model:ir.model,name:mail_autosubscribe.model_mail_thread
+msgid "Email Thread"
+msgstr "Discussione e-mail"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_autosubscribe
+#: model_terms:ir.ui.view,arch_db:mail_autosubscribe.view_partner_form
+msgid "In copy of"
+msgstr "In copia di"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: mail_autosubscribe
+#: model:ir.actions.act_window,name:mail_autosubscribe.action_mail_autosubscribe
+msgid "Mail Auto Subscribe"
+msgstr "E-mail autoiscrizione"
+
+#. module: mail_autosubscribe
+#: model:ir.model,name:mail_autosubscribe.model_mail_autosubscribe
+msgid "Mail Autosubscribe"
+msgstr "E-mail autoiscrizione"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__model_id
+msgid "Model"
+msgstr "Modello"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__model
+msgid "Model Name"
+msgstr "Nome modello"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__name
+#: model_terms:ir.ui.view,arch_db:mail_autosubscribe.view_mail_autosubscribe_form
+msgid "Name"
+msgstr "Nome"
+
+#. module: mail_autosubscribe
+#: model:ir.model.constraint,message:mail_autosubscribe.constraint_mail_autosubscribe_model_id_unique
+msgid "There's already a rule for this model"
+msgstr "Esiste già una regola per questo modello"
+
+#. module: mail_autosubscribe
+#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template__use_autosubscribe_followers
+msgid "Use Autosubscribe Followers"
+msgstr "Utilizza autoiscrizione chi segue"
