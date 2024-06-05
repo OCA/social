@@ -3,10 +3,11 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
 
-def pre_init_hook(cr):
+def pre_init_hook(env):
     """The objective of this hook is to default to false all values of field
     'done' of mail.activity
     """
+    cr = env.cr
     cr.execute(
         """SELECT column_name
     FROM information_schema.columns
@@ -28,10 +29,11 @@ def pre_init_hook(cr):
     )
 
 
-def uninstall_hook(cr, registry):
+def uninstall_hook(env):
     """The objective of this hook is to remove all activities that are done
     upon module uninstall
     """
+    cr = env.cr
     cr.execute(
         """
         DELETE FROM mail_activity

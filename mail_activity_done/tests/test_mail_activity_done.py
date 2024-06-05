@@ -7,7 +7,7 @@ from odoo.tests.common import TransactionCase
 
 class TestMailActivityDoneMethods(TransactionCase):
     def setUp(self):
-        super(TestMailActivityDoneMethods, self).setUp()
+        super().setUp()
 
         self.employee = self.env["res.users"].create(
             {
