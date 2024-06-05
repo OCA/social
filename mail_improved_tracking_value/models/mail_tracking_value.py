@@ -36,7 +36,7 @@ class MailTrackingValue(models.Model):
     def _compute_formatted_value(self):
         """Sets the value formatted field used in the view"""
         for record in self:
-            if record.field_type in ("many2many", "one2many", "char"):
+            if record.field_type in ("many2many", "one2many", "char", "many2one"):
                 record.new_value_formatted = record.new_value_char
                 record.old_value_formatted = record.old_value_char
             elif record.field_type == "integer":
