@@ -327,9 +327,7 @@ class MailTrackingEmail(models.Model):
             )
         else:
             # This is here for compatibility with older records
-            path_url = "mail/tracking/open/{db}/{tracking_email_id}/blank.gif".format(
-                db=self.env.cr.dbname, tracking_email_id=self.id
-            )
+            path_url = f"mail/tracking/open/{self.env.cr.dbname}/{self.id}/blank.gif"
         track_url = urllib.parse.urljoin(base_url, path_url)
         return (
             '<img src="%(url)s" alt="" '

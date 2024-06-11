@@ -17,20 +17,20 @@ Email tracking
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_tracking
+    :target: https://github.com/OCA/social/tree/17.0/mail_tracking
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_tracking
+    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-mail_tracking
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module shows email notification tracking status for any messages in
-mail thread (chatter). Each notified partner will have an intuitive icon just
-right to his name.
+mail thread (chatter). Each notified partner will have an intuitive icon
+just right to his name.
 
 **Table of contents**
 
@@ -40,107 +40,95 @@ right to his name.
 Installation
 ============
 
-If you're using a multi-database installation (with or without dbfilter option)
-where /web/databse/selector returns a list of more than one database, then
-you need to add ``mail_tracking`` addon to wide load addons list
-(by default, only ``web`` addon), setting ``--load`` option.
+If you're using a multi-database installation (with or without dbfilter
+option) where /web/databse/selector returns a list of more than one
+database, then you need to add ``mail_tracking`` addon to wide load
+addons list (by default, only ``web`` addon), setting ``--load`` option.
 For example, ``--load=web,mail,mail_tracking``
 
 Configuration
 =============
 
-As there can be scenarios where sending a tracking img in the email body is
-not desired, there is a global system parameter
+As there can be scenarios where sending a tracking img in the email body
+is not desired, there is a global system parameter
 "mail_tracking.tracking_img_disabled" that can be set to True to remove
-the tracking img from all outgoing emails. Note that the **Opened** status
-will not be available in this case.
+the tracking img from all outgoing emails. Note that the **Opened**
+status will not be available in this case.
 
 Usage
 =====
 
-When user sends a message in mail_thread (chatter), for instance in partner
-form, then an email tracking is created for each email notification. Then a
-status icon will appear just right to name of notified partner.
+When user sends a message in mail_thread (chatter), for instance in
+partner form, then an email tracking is created for each email
+notification. Then a status icon will appear just right to name of
+notified partner.
 
 These are all available status icons:
 
-.. |sent| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/sent.png
-   :width: 10px
+|unknown| **Unknown**: No email tracking info available. Maybe this
+notified partner has 'Receive Inbox Notifications by Email' == 'Never'
 
-.. |delivered| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/delivered.png
-   :width: 15px
+|waiting| **Waiting**: Waiting to be sent
 
-.. |opened| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/opened.png
-   :width: 15px
+|error| **Error**: Error while sending
 
-.. |error| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/error.png
-   :width: 10px
+|sent| **Sent**: Sent to SMTP server configured
 
-.. |waiting| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/waiting.png
-   :width: 10px
+|delivered| **Delivered**: Delivered to final MX server
 
-.. |unknown| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/unknown.png
-   :width: 10px
+|opened| **Opened**: Opened by partner
 
-.. |cc| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/cc.png
-   :width: 10px
+|cc| **Cc**: It's a Carbon-Copy recipient. Can't know the status so is
+'Unknown'
 
-.. |noemail| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/no_email.png
-   :width: 10px
+|noemail| **No Email**: The partner doesn't have a defined email
 
-.. |anonuser| image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/src/img/anon_user.png
-   :width: 10px
-
-|unknown|  **Unknown**: No email tracking info available. Maybe this notified partner has 'Receive Inbox Notifications by Email' == 'Never'
-
-|waiting|    **Waiting**: Waiting to be sent
-
-|error|    **Error**: Error while sending
-
-|sent|    **Sent**: Sent to SMTP server configured
-
-|delivered|    **Delivered**: Delivered to final MX server
-
-|opened|  **Opened**: Opened by partner
-
-|cc|  **Cc**: It's a Carbon-Copy recipient. Can't know the status so is 'Unknown'
-
-|noemail|  **No Email**: The partner doesn't have a defined email
-
-|anonuser|  **No Partner**: The recipient doesn't have a defined partner
-
+|anonuser| **No Partner**: The recipient doesn't have a defined partner
 
 If you want to see all tracking emails and events you can go to
 
-* Settings > Technical > Email > Tracking emails
-* Settings > Technical > Email > Tracking events
+-  Settings > Technical > Email > Tracking emails
+-  Settings > Technical > Email > Tracking events
 
-When the message generates an 'error' status, it will apear on discuss 'Failed'
-channel. Any view with chatter can show the failed messages
+When the message generates an 'error' status, it will apear on discuss
+'Failed' channel. Any view with chatter can show the failed messages
 too.
 
-* Discuss
+-  Discuss
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/img/failed_message_discuss.png
+   |image|
 
-* Chatter
+-  Chatter
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/img/failed_message_widget.png
+   |image1|
 
-You can use "Failed sent messages" filter present in all views to show records
-with messages in failed status and that needs an user action.
+You can use "Failed sent messages" filter present in all views to show
+records with messages in failed status and that needs an user action.
 
-* Filter
+-  Filter
 
-  .. image:: https://raw.githubusercontent.com/OCA/social/16.0/mail_tracking/static/img/failed_message_filter.png
+   |image2|
+
+.. |unknown| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/unknown.png
+.. |waiting| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/waiting.png
+.. |error| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/error.png
+.. |sent| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/sent.png
+.. |delivered| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/delivered.png
+.. |opened| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/opened.png
+.. |cc| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/cc.png
+.. |noemail| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/no_email.png
+.. |anonuser| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/src/img/anon_user.png
+.. |image| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/img/failed_message_discuss.png
+.. |image1| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/img/failed_message_widget.png
+.. |image2| image:: https://raw.githubusercontent.com/OCA/social/17.0/mail_tracking/static/img/failed_message_filter.png
 
 Known issues / Roadmap
 ======================
 
-* Integrate with the core `mail.notification` model. A soft way would be to write a
-  notification event along with the mail.tracking.event ones. Another way could be
-  to merge both models and build the module features on top of it. This might imply
-  a refactor though.
+-  Integrate with the core mail.notification model. A soft way would be
+   to write a notification event along with the mail.tracking.event
+   ones. Another way could be to merge both models and build the module
+   features on top of it. This might imply a refactor though.
 
 Bug Tracker
 ===========
@@ -148,7 +136,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_tracking%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_tracking%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -156,41 +144,44 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Tecnativa
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Pedro M. Baeza
-  * Antonio Espinosa
-  * David Vidal
-  * Ernesto Tejeda
-  * Rafael Blasco
-  * Alexandre Díaz
+   -  Pedro M. Baeza
+   -  Antonio Espinosa
+   -  David Vidal
+   -  Ernesto Tejeda
+   -  Rafael Blasco
+   -  Alexandre Díaz
 
-* `Eezee-IT <https://www.eezee-it.com>`_:
-  * Asma Elferkhsi
+-  `Eezee-IT <https://www.eezee-it.com>`__:
 
-* `Vauxoo <https://www.vauxoo.com>`_:
-  * Agustín Payen Sandoval
+   -  Asma Elferkhsi
+
+-  `Vauxoo <https://www.vauxoo.com>`__:
+
+   -  Agustín Payen Sandoval
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
 Images
-------
+~~~~~~
 
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
-* Thanks to `LlubNek <https://openclipart.org/user-detail/LlubNek>`_ and `Openclipart
-  <https://openclipart.org>`_ for `the icon
-  <https://openclipart.org/detail/19342/open-envelope>`_.
+-  Odoo Community Association:
+   `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`__.
+-  Thanks to `LlubNek <https://openclipart.org/user-detail/LlubNek>`__
+   and `Openclipart <https://openclipart.org>`__ for `the
+   icon <https://openclipart.org/detail/19342/open-envelope>`__.
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -202,6 +193,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_tracking>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/mail_tracking>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
