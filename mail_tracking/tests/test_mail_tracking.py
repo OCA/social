@@ -18,7 +18,7 @@ from ..controllers.main import BLANK, MailTrackingController
 mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_email"
 
 
-class FakeUserAgent(object):
+class FakeUserAgent:
     browser = "Test browser"
     platform = "Test platform"
 
