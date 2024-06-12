@@ -112,6 +112,6 @@ class MailActivity(models.Model):
             count=count,
             access_rights_uid=access_rights_uid,
         )
-        if limit is not None:
+        if limit is not None and result:
             result = result[:limit]
         return result
