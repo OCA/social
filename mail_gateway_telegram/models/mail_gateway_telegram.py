@@ -68,7 +68,6 @@ class MailGatewayTelegramService(models.AbstractModel):
         for name in [
             update.message.chat.first_name or False,
             update.message.chat.last_name or False,
-            update.message.chat.description or False,
             update.message.chat.title or False,
         ]:
             if name:
