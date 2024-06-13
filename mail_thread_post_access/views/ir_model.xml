@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2024 CorporateHub
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="model_form_view" model="ir.ui.view">
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="mail.model_form_view" />
+        <field name="arch" type="xml">
+            <field name="is_mail_thread" position="after">
+                <field
+                    name="mail_post_access"
+                    readonly="not is_mail_thread"
+                    groups="base.group_no_one"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
