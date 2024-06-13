@@ -6,7 +6,7 @@
     "version": "15.0.1.0.0",
     "category": "Social",
     "website": "https://github.com/OCA/social",
-    "author": "Camptocamp SA, Odoo Community Association (OCA)",
+    "author": "Camptocamp, Odoo Community Association (OCA)",
     "maintainers": ["mmequignon"],
     "license": "AGPL-3",
     "installable": True,
