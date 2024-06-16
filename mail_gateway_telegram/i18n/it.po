@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-06-16 19:36+0000\n"
+"PO-Revision-Date: 2024-06-16 22:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -79,42 +79,42 @@ msgstr ""
 #. module: mail_gateway_telegram
 #: model:ir.model,name:mail_gateway_telegram.model_mail_gateway
 msgid "Mail Gateway"
-msgstr ""
+msgstr "Gateway e-mail"
 
 #. module: mail_gateway_telegram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
 msgid "Press the Integrate webhook button."
-msgstr ""
+msgstr "Fare clic sul pulsante Integra webhook."
 
 #. module: mail_gateway_telegram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
 msgid ""
 "Press the save button and the integrate webhook smart button will appear."
-msgstr ""
+msgstr "Fare clic sul pulsante salva e il pulsante integra webhook apparirà."
 
 #. module: mail_gateway_telegram
 #: model:ir.model.fields.selection,name:mail_gateway_telegram.selection__mail_gateway__gateway_type__telegram
 msgid "Telegram"
-msgstr ""
+msgstr "Telegram"
 
 #. module: mail_gateway_telegram
 #: model:ir.model,name:mail_gateway_telegram.model_mail_gateway_telegram
 msgid "Telegram Gateway services"
-msgstr ""
+msgstr "Servizio gateway Telegram"
 
 #. module: mail_gateway_telegram
 #: model:ir.model.fields,field_description:mail_gateway_telegram.field_mail_gateway__telegram_security_key
 msgid "Telegram Security Key"
-msgstr ""
+msgstr "Chiave di sicurezza Telegram"
 
 #. module: mail_gateway_telegram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
 msgid "Telegram configuration"
-msgstr ""
+msgstr "Configurazione Telegram"
 
 #. module: mail_gateway_telegram
 #. odoo-python
 #: code:addons/mail_gateway_telegram/models/mail_gateway_telegram.py:0
 #, python-format
 msgid "Unable to send the telegram message"
-msgstr ""
+msgstr "Impossibile inviare il messaggio Telegram"
