@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-base_search_mail_content>=16.0dev,<16.1dev',
+        'odoo-addon-base_user_signature>=16.0dev,<16.1dev',
         'odoo-addon-email_template_qweb>=16.0dev,<16.1dev',
         'odoo-addon-fetchmail_thread_default>=16.0dev,<16.1dev',
         'odoo-addon-mail_activity_board>=16.0dev,<16.1dev',
