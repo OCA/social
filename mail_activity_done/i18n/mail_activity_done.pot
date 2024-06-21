@@ -14,13 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "%d days overdue"
-msgstr ""
-
-#. module: mail_activity_done
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__active
 msgid "Active"
 msgstr ""
@@ -71,13 +64,6 @@ msgid "Done"
 msgstr ""
 
 #. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Due in %d days"
-msgstr ""
-
-#. module: mail_activity_done
 #: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
 msgid "Open Activities"
 msgstr ""
@@ -88,27 +74,6 @@ msgid "State"
 msgstr ""
 
 #. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Today"
-msgstr ""
-
-#. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Tomorrow"
-msgstr ""
-
-#. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_res_users
 msgid "User"
-msgstr ""
-
-#. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Yesterday"
 msgstr ""
