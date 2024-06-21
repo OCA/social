@@ -341,3 +341,21 @@ class TestMailActivityTeam(TransactionCase):
         )
         self.assertEqual(partner, self.partner_client)
         self.assertEqual(partner.my_activity_date_deadline, today)
+
+    def test_create_activity_for_user_not_in_team(self):
+        """As a member of a team, create an activity for a teamless member"""
+
+        activity = (
+            self.env["mail.activity"]
+            .with_user(self.employee)
+            .create(
+                {
+                    "activity_type_id": self.activity2.id,
+                    "note": "Partner activity 3",
+                    "res_id": self.partner_client.id,
+                    "res_model_id": self.partner_ir_model.id,
+                    "user_id": self.employee3.id,
+                }
+            )
+        )
+        self.assertFalse(activity.team_id)
