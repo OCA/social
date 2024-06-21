@@ -5,6 +5,9 @@
 from lxml import etree
 
 from odoo import api, models
+from odoo.tools.safe_eval import safe_eval
+
+from ..utils import _id_get
 
 
 class MailWizardInvite(models.TransientModel):
@@ -34,7 +37,11 @@ class MailWizardInvite(models.TransientModel):
             view_id=view_id, view_type=view_type, toolbar=toolbar, submenu=submenu
         )
         arch = etree.fromstring(result["arch"])
+        domain = self._mail_restrict_follower_selection_get_domain()
+        eval_domain = safe_eval(
+            domain, locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)}
+        )
         for field in arch.xpath('//field[@name="partner_ids"]'):
-            field.attrib["domain"] = self._mail_restrict_follower_selection_get_domain()
+            field.attrib["domain"] = str(eval_domain)
         result["arch"] = etree.tostring(arch)
         return result

@@ -5,6 +5,8 @@ from odoo import models
 from odoo.tools import config
 from odoo.tools.safe_eval import safe_eval
 
+from ..utils import _id_get
+
 
 class MailFollowers(models.Model):
     _inherit = "mail.followers"
@@ -38,7 +40,10 @@ class MailFollowers(models.Model):
             "mail.wizard.invite"
         ]._mail_restrict_follower_selection_get_domain(res_model=res_model)
         partners = self.env["res.partner"].search(
-            [("id", "in", partner_ids)] + safe_eval(domain)
+            [("id", "in", partner_ids)]
+            + safe_eval(
+                domain, locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)}
+            )
         )
         _res_ids = res_ids.copy() or [0]
         new, update = super()._add_followers(

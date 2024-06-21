@@ -2,6 +2,8 @@ from odoo import models
 from odoo.tools import config
 from odoo.tools.safe_eval import safe_eval
 
+from ..utils import _id_get
+
 
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
@@ -20,7 +22,9 @@ class MailThread(models.AbstractModel):
         domain = self.env[
             "mail.wizard.invite"
         ]._mail_restrict_follower_selection_get_domain()
-        eval_domain = safe_eval(domain)
+        eval_domain = safe_eval(
+            domain, locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)}
+        )
         for key in result:
             for partner_id, email, reason in result[key]:
                 if partner_id:
