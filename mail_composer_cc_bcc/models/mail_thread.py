@@ -12,12 +12,15 @@ class MailThread(models.AbstractModel):
     def _message_create(self, values_list):
         context = self.env.context
         res = super()._message_create(values_list)
-        partners_cc = context.get("partner_cc_ids", None)
-        if partners_cc:
-            res.recipient_cc_ids = partners_cc
-        partners_bcc = context.get("partner_bcc_ids", None)
-        if partners_bcc:
-            res.recipient_bcc_ids = partners_bcc
+        for message in res:
+            if message.message_type == "notification":
+                continue
+            partners_cc = context.get("partner_cc_ids", None)
+            if partners_cc:
+                message.recipient_cc_ids = partners_cc
+            partners_bcc = context.get("partner_bcc_ids", None)
+            if partners_bcc:
+                message.recipient_bcc_ids = partners_bcc
         return res
 
     def _notify_by_email_add_values(self, base_mail_values):
@@ -46,7 +49,7 @@ class MailThread(models.AbstractModel):
         rdata = super()._notify_compute_recipients(message, msg_vals)
         context = self.env.context
         is_from_composer = context.get("is_from_composer", False)
-        if not is_from_composer:
+        if not is_from_composer or msg_vals.get("message_type") == "notification":
             return rdata
         for pdata in rdata:
             pdata["type"] = "customer"
