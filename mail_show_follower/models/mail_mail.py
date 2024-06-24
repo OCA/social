@@ -59,29 +59,24 @@ class MailMail(models.Model):
         return full_text
 
     def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
-        group_portal = self.env.ref("base.group_portal")
+        group_user = self.env.ref("base.group_user")
 
         for mail in self:
-            if not (mail.model and mail.res_id and group_portal):
+            if not (mail.model and mail.res_id and group_user):
                 continue
-            recipients = mail.recipient_ids | mail.notified_partner_ids
+            # recipients from any Notification Type (i.e. email, inbox, etc.)
+            recipients = mail.notification_ids.res_partner_id
             record = self.env[mail.model].browse(mail.res_id)
-            company = (
-                record.company_id
-                if hasattr(record, "company_id")
-                else self.env.user.company_id
-            )
+            company = getattr(record, "company_id", self.env.company)
             show_internal_users = company and company.show_internal_users_cc
-            show_in_cc_recipients = recipients.filtered(
-                lambda r: r._show_in_cc(show_internal_users)
-            )
+            show_in_cc_recipients = recipients._filter_shown_in_cc(show_internal_users)
             if len(show_in_cc_recipients) <= 1:
                 continue
 
             langs = (
-                mail.recipient_ids.mapped("lang")
+                mail.notification_ids.res_partner_id.mapped("lang")
                 or mail.author_id.lang
-                or self.env.company.partner_id.lang
+                or company.partner_id.lang
             )
             final_cc = mail.with_context(lang=langs[0])._build_cc_text(
                 show_in_cc_recipients
