@@ -317,13 +317,8 @@ class MailTrackingEmail(models.Model):
         )
         if self.token:
             path_url = (
-                "mail/tracking/open/%(db)s/%(tracking_email_id)s/%(token)s/"
-                "blank.gif"
-                % {
-                    "db": self.env.cr.dbname,
-                    "tracking_email_id": self.id,
-                    "token": self.token,
-                }
+                f"mail/tracking/open/{self.env.cr.dbname}/{self.id}/{self.token}/"
+                f"blank.gif"
             )
         else:
             # This is here for compatibility with older records
@@ -331,11 +326,8 @@ class MailTrackingEmail(models.Model):
                 db=self.env.cr.dbname, tracking_email_id=self.id
             )
         track_url = urllib.parse.urljoin(base_url, path_url)
-        return (
-            '<img src="%(url)s" alt="" '
-            'data-odoo-tracking-email="%(tracking_email_id)s"/>'
-            % {"url": track_url, "tracking_email_id": self.id}
-        )
+        _logger.debug(f"Sending email will tracking url: {track_url}")
+        return f'<img src="{track_url}" alt="" data-odoo-tracking-email="{self.id}"/>'
 
     def _partners_email_bounced_set(self, reason, event=None):
         recipients = []
