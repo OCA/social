@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+
+<record model="ir.rule" id="mail_tracking_email_portal_public_rule">
+    <field
+            name="name"
+        >mail_tracking_email: portal/public: read access on my email trackings</field>
+    <field name="model_id" ref="model_mail_tracking_email" />
+    <field name="domain_force">[('partner_id', '=', user.partner_id.id)]</field>
+    <field
+            name="groups"
+            eval="[Command.link(ref('base.group_portal')), Command.link(ref('base.group_public'))]"
+        />
+    <field name="perm_create" eval="False" />
+    <field name="perm_unlink" eval="False" />
+    <field name="perm_write" eval="False" />
+</record>
+
+</odoo>
