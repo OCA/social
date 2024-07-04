@@ -48,8 +48,8 @@ class MailMail(models.Model):
         success_pids = []
         failure_type = None
         # ===== Same with native Odoo =====
-        # https://github.com/odoo/odoo/blob/0a3fc96cd51c0aab024207a4608f6ba32d49da36
-        # /addons/mail/models/mail_mail.py#L384
+        # https://github.com/odoo/odoo/blob/d492bbde35d2b52e975ca252588f5529f07027aa
+        # /addons/mail/models/mail_mail.py#L461
         try:
             if mail.state != "outgoing":
                 if mail.state != "exception" and mail.auto_delete:
@@ -138,10 +138,19 @@ class MailMail(models.Model):
             # to go directly to failed state update
             # ===== Different than native Odoo =====
             email["email_from"] = email_from
+            # support headers specific to the specific outgoing email
+            if email.get("headers"):
+                email_headers = headers.copy()
+                try:
+                    email_headers.update(email.get("headers"))
+                except Exception as e:
+                    _logger.warning("Error during email_headers update: %s", e)
+            else:
+                email_headers = headers
             msg = self.build_email(
                 email,
                 attachments=attachments,
-                headers=headers,
+                headers=email_headers,
             )
             try:
                 res = IrMailServer.send_email(
@@ -241,8 +250,8 @@ class MailMail(models.Model):
         email_from = email.get("email_from")
         IrMailServer = env["ir.mail_server"]
         # ===== Same with native Odoo =====
-        # https://github.com/odoo/odoo/blob/0a3fc96cd51c0aab024207a4608f6ba32d49da36
-        # /addons/mail/models/mail_mail.py#L458
+        # https://github.com/odoo/odoo/blob/d492bbde35d2b52e975ca252588f5529f07027aa
+        # /addons/mail/models/mail_mail.py#L543
         msg = IrMailServer.build_email(
             email_from=email_from,
             email_to=email.get("email_to"),
