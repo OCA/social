@@ -280,6 +280,11 @@
                     domain="[('date_deadline', '&lt;', (context_today()+datetime.timedelta(days=180)).strftime('%Y-%m-%d'))]"
                     help="Show activities scheduled for next 6 months."
                 />
+                <filter
+                    string="My Activities"
+                    name="activities_my"
+                    domain="[('user_id', '=', uid)]"
+                />
                 <separator />
             </xpath>
 
