@@ -23,7 +23,7 @@ class MailTrackingEmail(models.Model):
 
     @api.depends("mail_stats_id")
     def _compute_message_id(self):
-        """For the mass mailings, the message id is stored in the mailing.trace record."""
+        """In mass mailings, the message id is stored in the `mailing.trace` record."""
         res = super()._compute_message_id()
         for tracking in self.filtered("mail_stats_id"):
             tracking.message_id = tracking.mail_stats_id.message_id
