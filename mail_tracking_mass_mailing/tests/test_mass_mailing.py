@@ -21,7 +21,7 @@ class TestMassMailing(TransactionCase):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, **DISABLED_MAIL_CONTEXT))
         cls.list = cls.env["mailing.list"].create({"name": "Test mail tracking"})
-        cls.list.name = "{} #{}".format(cls.list.name, cls.list.id)
+        cls.list.name = f"{cls.list.name} #{cls.list.id}"
         cls.contact_a = cls.env["mailing.contact"].create(
             {
                 "list_ids": [(6, 0, cls.list.ids)],
