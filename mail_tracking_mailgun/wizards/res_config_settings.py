@@ -96,8 +96,7 @@ class ResConfigSettings(models.TransientModel):
             )
             response = requests.delete(
                 urljoin(
-                    params.api_url,
-                    "/v3/domains/%s/webhooks/%s" % (params.domain, event),
+                    params.api_url, f"/v3/domains/{params.domain}/webhooks/{event}"
                 ),
                 auth=("api", params.api_key),
                 timeout=self.env["ir.config_parameter"]

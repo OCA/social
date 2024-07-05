@@ -44,13 +44,14 @@ class TestMailgun(TransactionCase):
         )
         return mail, tracking_email
 
-    def setUp(self):
-        super().setUp()
-        self.recipient = "to@example.com"
-        self.mail, self.tracking_email = self.mail_send()
-        self.domain = "example.com"
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.recipient = "to@example.com"
+        cls.mail, cls.tracking_email = cls.mail_send(cls)
+        cls.domain = "example.com"
         # Configure Mailgun through GUI
-        cf = Form(self.env["res.config.settings"])
+        cf = Form(cls.env["res.config.settings"])
         cf.mail_tracking_mailgun_enabled = True
         cf.mail_tracking_mailgun_api_key = (
             cf.mail_tracking_mailgun_webhook_signing_key
@@ -61,14 +62,17 @@ class TestMailgun(TransactionCase):
         config = cf.save()
         # Done this way as `hr_expense` adds this field again as readonly, and thus Form
         # doesn't process it correctly
-        config.alias_domain = self.domain
+        # Catchall + Alias
+        cls.alias_domain = cls.env["mail.alias.domain"].create(
+            {"catchall_alias": "TheCatchall", "name": cls.domain}
+        )
         config.execute()
-        self.token = "f1349299097a51b9a7d886fcb5c2735b426ba200ada6e9e149"
-        self.timestamp = "1471021089"
-        self.signature = (
+        cls.token = "f1349299097a51b9a7d886fcb5c2735b426ba200ada6e9e149"
+        cls.timestamp = "1471021089"
+        cls.signature = (
             "4fb6d4dbbe10ce5d620265dcd7a3c0b8" "ca0dede1433103891bc1ae4086e9d5b2"
         )
-        self.event = {
+        cls.event = {
             "log-level": "info",
             "id": "oXAVv5URCF-dKv8c6Sa7T",
             "timestamp": 1471021089.0,
@@ -83,21 +87,21 @@ class TestMailgun(TransactionCase):
             "event": "delivered",
             "recipient": "to@example.com",
             "user-variables": {
-                "odoo_db": self.env.cr.dbname,
-                "tracking_email_id": self.tracking_email.id,
+                "odoo_db": cls.env.cr.dbname,
+                "tracking_email_id": cls.tracking_email.id,
             },
         }
-        self.metadata = {
+        cls.metadata = {
             "ip": "127.0.0.1",
             "user_agent": False,
             "os_family": False,
             "ua_family": False,
         }
-        self.partner = self.env["res.partner"].create(
+        cls.partner = cls.env["res.partner"].create(
             {"name": "Mr. Odoo", "email": "mrodoo@example.com"}
         )
-        self.response = {"items": [self.event]}
-        self.MailTrackingController = MailTrackingController()
+        cls.response = {"items": [cls.event]}
+        cls.MailTrackingController = MailTrackingController()
 
     @contextmanager
     def _request_mock(self, reset_replay_cache=True):
@@ -138,10 +142,14 @@ class TestMailgun(TransactionCase):
             self.env["mail.tracking.email"]._mailgun_values()
 
     def test_no_domain(self):
-        self.env["ir.config_parameter"].set_param("mail.catchall.domain", "")
+        # Avoid pre-existing domains
+        self.env["mail.alias"].search(
+            [("alias_domain_id", "!=", False)]
+        ).alias_domain_id = False
+        self.env["mail.alias.domain"].search([]).unlink()
         with self.assertRaises(ValidationError):
             self.env["mail.tracking.email"]._mailgun_values()
-        # now we set an specific domain for Mailgun:
+        # Now we set an specific domain for Mailgun:
         # i.e: we configure new EU zone without loosing old domain statistics
         self.env["ir.config_parameter"].set_param("mailgun.domain", "eu.example.com")
         self.test_event_delivered()
@@ -295,7 +303,7 @@ class TestMailgun(TransactionCase):
         ua_type = "browser"
         self.event.update(
             {
-                "event": "unsubscribed",
+                "event": "unsub",
                 "city": "Mountain View",
                 "country": "US",
                 "region": "CA",
