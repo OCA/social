@@ -27,16 +27,17 @@ class ResPartner(models.Model):
             if not partner.email:
                 continue
             event = event or self.env["mail.tracking.event"]
-            event_str = """
-                <a href="#"
-                   data-oe-model="mail.tracking.event" data-oe-id="%d">%s</a>
-            """ % (
-                event.id or 0,
-                event.id or _("unknown"),
+            event_str = (
+                f'<a href="#" data-oe-model="mail.tracking.event"'
+                f'data-oe-id="{event.id or 0}">{event.id or _("unknown")}</a>'
             )
             body = _(
-                "Email has been bounced: %(email)s\nReason: %(reason)s\nEvent: %(event_str)s"
-            ) % ({"email": partner.email, "reason": reason, "event_str": event_str})
+                "Email has been bounced: %(email)s\nReason: "
+                "%(reason)s\nEvent: %(event_str)s",
+                email=partner.email,
+                reason=reason,
+                event_str=event_str,
+            )
             # This function can be called by the non user via the callback_method set in
             # /mail/tracking/mailgun/all/. A sudo() is not enough to succesfully send
             # the bounce message in this circumstances.
@@ -147,7 +148,7 @@ class ResPartner(models.Model):
         )
         for partner in self:
             res = requests.get(
-                urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
+                urljoin(api_url, f"/v3/{domain}/bounces/{partner.email}"),
                 auth=("api", api_key),
                 timeout=timeout,
             )
@@ -172,7 +173,7 @@ class ResPartner(models.Model):
         )
         for partner in self:
             res = requests.post(
-                urljoin(api_url, "/v3/%s/bounces" % domain),
+                urljoin(api_url, "/v3/{domain}/bounces"),
                 auth=("api", api_key),
                 data={"address": partner.email},
                 timeout=timeout,
@@ -195,7 +196,7 @@ class ResPartner(models.Model):
         )
         for partner in self:
             res = requests.delete(
-                urljoin(api_url, "/v3/%s/bounces/%s" % (domain, partner.email)),
+                urljoin(api_url, f"/v3/{domain}/bounces/{partner.email}"),
                 auth=("api", api_key),
                 timeout=timeout,
             )

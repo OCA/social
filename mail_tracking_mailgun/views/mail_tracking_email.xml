@@ -12,7 +12,7 @@
                     name="action_manual_check_mailgun"
                     type="object"
                     string="Re-sync Mailgun"
-                    attrs="{'invisible': [('message_id', '=', False)]}"
+                    invisible="not message_id"
                 />
             </field>
         </field>
