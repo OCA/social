@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2024-05-23 01:20+0000\n"
-"Last-Translator: Rodrigo Macedo <sottomaiormacedotec@users.noreply."
-"translation.odoo-community.org>\n"
+"PO-Revision-Date: 2024-07-05 20:47+0000\n"
+"Last-Translator: rodrigosottomaiormacedo "
+"<sottomaiormacedotec@sottomaiormacedo.tech>\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
 "23907/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -27,22 +27,22 @@ msgstr ""
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
-msgstr ""
+msgstr "Um parceiro não pode estar várias vezes na mesma lista"
 
 #. module: mass_mailing_partner
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Add contacts to mailing list"
-msgstr ""
+msgstr "Adicionar contatos à lista de e-mails"
 
 #. module: mass_mailing_partner
 #: model:ir.actions.act_window,name:mass_mailing_partner.action_partner_mail_list
 msgid "Add to mailing list"
-msgstr ""
+msgstr "Adicionar à lista de discussão"
 
 #. module: mass_mailing_partner
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_res_partner
@@ -53,7 +53,7 @@ msgstr "Contato"
 #: model:ir.model,name:mass_mailing_partner.model_partner_mail_list_wizard
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.partner_mail_list_wizard_form
 msgid "Create contact mailing list"
-msgstr ""
+msgstr "Criar lista de discussão de contatos"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__create_uid
@@ -93,60 +93,60 @@ msgstr "Última atualização em"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_contact
 msgid "Mailing Contact"
-msgstr ""
+msgstr "Contato para correspondência"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_list
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__mail_list_id
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
 msgid "Mailing List"
-msgstr ""
+msgstr "Lista de discussão"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_trace
 msgid "Mailing Statistics"
-msgstr ""
+msgstr "Estatísticas de correspondência"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_contact_ids
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_contact_ids
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
 msgid "Mailing contacts"
-msgstr ""
+msgstr "Contatos de correspondência"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_contacts_count
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_contacts_count
 msgid "Mailing contacts number"
-msgstr ""
+msgstr "Número de contatos para correspondência"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_mandatory
 msgid "Mandatory Partner"
-msgstr ""
+msgstr "Parceiro obrigatório"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_contact_subscription
 msgid "Mass Mailing Subscription Information"
-msgstr ""
+msgstr "Informações de assinatura de correspondência em massa"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_ids
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_stats_ids
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_partner_form
 msgid "Mass mailing stats"
-msgstr ""
+msgstr "Estatísticas de correspondência em massa"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_count
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_users__mass_mailing_stats_count
 msgid "Mass mailing stats number"
-msgstr ""
+msgstr "Número de estatísticas de correspondência em massa"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_base_partner_merge_automatic_wizard
 msgid "Merge Partner Wizard"
-msgstr ""
+msgstr "Assistente de mesclagem de parceiros"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__partner_id
@@ -162,24 +162,24 @@ msgstr "Parceiro"
 #: code:addons/mass_mailing_partner/wizard/partner_mail_list_wizard.py:0
 #, python-format
 msgid "Partner '%s' has no email."
-msgstr ""
+msgstr "O parceiro '%s' não tem e-mail."
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
 msgid "Partner Tag"
-msgstr ""
+msgstr "Etiqueta de parceiro"
 
 #. module: mass_mailing_partner
 #. odoo-python
 #: code:addons/mass_mailing_partner/models/mailing_contact.py:0
 #, python-format
 msgid "Partner already exists in one of these mailing lists"
-msgstr ""
+msgstr "O parceiro já existe em uma dessas listas de e-mail"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #. module: mass_mailing_partner
 #. odoo-python
@@ -189,3 +189,5 @@ msgid ""
 "This partner '%s' is linked to one or more mass mailing contact. Email must "
 "be assigned."
 msgstr ""
+"Este parceiro '%s' está vinculado a um ou mais contatos de correspondência "
+"em massa. O e-mail deve ser atribuído."
