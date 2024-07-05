@@ -51,7 +51,7 @@ class MailTrackingController(main.MailTrackingController):
             return
         hmac_digest = hmac.new(
             key=params.webhook_signing_key.encode(),
-            msg=("{}{}".format(timestamp, token)).encode(),
+            msg=(f"{timestamp}{token}").encode(),
             digestmod=hashlib.sha256,
         ).hexdigest()
         if not hmac.compare_digest(str(signature), str(hmac_digest)):
