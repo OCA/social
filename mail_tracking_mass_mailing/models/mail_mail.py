@@ -9,8 +9,8 @@ class MailMail(models.Model):
     _inherit = "mail.mail"
 
     @api.model
-    def _tracking_email_prepare(self, partner, email):
-        res = super()._tracking_email_prepare(partner, email)
+    def _tracking_email_prepare(self, email):
+        res = super()._tracking_email_prepare(email)
         res["mail_id_int"] = self.id
         res["mass_mailing_id"] = self.mailing_id.id
         res["mail_stats_id"] = (

@@ -7,12 +7,11 @@
 {
     "name": "Mail tracking for mass mailing",
     "summary": "Improve mass mailing email tracking",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "application": False,
     "installable": True,
     "auto_install": True,
     "depends": ["mass_mailing", "mail_tracking"],
@@ -22,5 +21,4 @@
         "views/mail_mass_mailing_view.xml",
         "views/mailing_contact_view.xml",
     ],
-    "pre_init_hook": "pre_init_hook",
 }
