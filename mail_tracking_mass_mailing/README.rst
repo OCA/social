@@ -38,17 +38,21 @@ Links mail statistics objects with mail tracking objects.
 Installation
 ============
 
-This addon will be automatically installed when 'mail_tracking' and
-'mass_mailing' are both installed.
+This addon will be automatically installed when ``mail_tracking`` and
+``mass_mailing`` are both installed.
 
 Usage
 =====
 
-From mail statistic object, you can see: - Email tracking state - Email
-related tracking object - Email related tracking events
+From mail statistic object, you can see:
 
-From mass mailing contact, you can see: - Email score, in order to clean
-up your lists from bad score emails
+-  Email tracking state
+-  Email related tracking object
+-  Email related tracking events
+
+From mass mailing contact, you can see:
+
+-  Email score, in order to clean up your lists from bad score emails
 
 Mass mailing emails are sent only to recipients once. If you want to
 send emails again to all the recipients, you must duplicate mass
@@ -88,12 +92,6 @@ Contributors
 -  `Trobz <https://trobz.com>`__:
 
    -  nguyenhk <nguyenhk@trobz.com>
-
-Other credits
--------------
-
-The migration of this module from 15.0 to 16.0 was financially supported
-by Camptocamp
 
 Maintainers
 -----------
