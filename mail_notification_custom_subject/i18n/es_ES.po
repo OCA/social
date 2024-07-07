@@ -58,11 +58,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: mail_notification_custom_subject
-#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_uid
 msgid "Last Updated by"
 msgstr "Última modificación por"
@@ -130,6 +125,9 @@ msgid ""
 msgstr ""
 "Ya sea para reemplazar, agregar al principio o agregar al final a otras "
 "plantillas que se aplican a un contexto determinado"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"
 
 #~ msgid "Templates"
 #~ msgstr "Plantillas"
