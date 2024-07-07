@@ -22,8 +22,8 @@ msgstr ""
 
 #. module: mass_mailing_partner
 #. odoo-python
-#: code:addons/mass_mailing_partner/models/mailing_contact_subscription.py:0
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
+#: code:addons/mass_mailing_partner/models/mailing_subscription.py:0
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
 msgstr ""
@@ -75,11 +75,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_partner
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard____last_update
-msgid "Last Modified on"
-msgstr "Laatst gewijzigd op"
-
-#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__write_uid
 msgid "Last Updated by"
 msgstr ""
@@ -99,6 +94,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__mail_list_id
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
 msgid "Mailing List"
+msgstr ""
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_subscription
+msgid "Mailing List Subscription"
 msgstr ""
 
 #. module: mass_mailing_partner
@@ -122,11 +122,6 @@ msgstr ""
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_mandatory
 msgid "Mandatory Partner"
-msgstr ""
-
-#. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mailing_contact_subscription
-msgid "Mass Mailing Subscription Information"
 msgstr ""
 
 #. module: mass_mailing_partner
@@ -188,3 +183,6 @@ msgid ""
 "This partner '%s' is linked to one or more mass mailing contact. Email must "
 "be assigned."
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Laatst gewijzigd op"
