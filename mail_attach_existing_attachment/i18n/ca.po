@@ -19,9 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_account_invoice_send__can_attach_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__can_attach_attachment
 msgid "Can Attach Attachment"
+msgstr ""
+
+#. module: mail_attach_existing_attachment
+#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__display_object_attachment_ids
+msgid "Display Object Attachment"
 msgstr ""
 
 #. module: mail_attach_existing_attachment
@@ -30,7 +34,6 @@ msgid "Email composition wizard"
 msgstr "Assistent per composició de correus electrònics"
 
 #. module: mail_attach_existing_attachment
-#: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_account_invoice_send__object_attachment_ids
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__object_attachment_ids
 msgid "Object Attachments"
 msgstr ""
