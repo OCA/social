@@ -64,6 +64,13 @@ msgstr ""
 "temporairement sur le serveur Mail Exchange (MX) du destinataire.\n"
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_messages_panel/failed_messages_panel.esm.js:0
+#, python-format
+msgid "%s failed messages found"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
 msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
 msgstr "Destinataires supplémentaires qui recevront un copie du courriel"
@@ -77,7 +84,7 @@ msgstr "CCI"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Anonymous Recipient"
 msgstr "Destinataire anonyme"
@@ -106,7 +113,7 @@ msgstr "Rejeté"
 #. odoo-javascript
 #. odoo-python
 #: code:addons/mail_tracking/models/mail_thread.py:0
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
 msgid "Cc"
@@ -183,21 +190,21 @@ msgstr "Livré"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Delivered Status Center Checkmark"
 msgstr "Case à cocher centrale de l’état de livraison"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Delivered Status Left Checkmark"
 msgstr "Case à cocher gauche de l’état de livraison"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Delivered Status Right Checkmark"
 msgstr "Case à cocher droite de l’état de livraison"
@@ -225,6 +232,11 @@ msgstr "Alias d’adresse"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_bounced
 msgid "Email Bounced"
 msgstr "Courriel rejeté"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_alias_domain
+msgid "Email Domain"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
@@ -274,7 +286,7 @@ msgstr "Erreur du serveur SMTP"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Error Status"
 msgstr "État de l’erreur"
@@ -292,7 +304,8 @@ msgstr "Type d’événement"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/models/mailbox.esm.js:0
+#: code:addons/mail_tracking/static/src/core/discuss/thread_icon.xml:0
+#: code:addons/mail_tracking/static/src/services/messaging_service_patch.esm.js:0
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #, python-format
@@ -300,39 +313,18 @@ msgid "Failed"
 msgstr "Échec"
 
 #. module: mail_tracking
-#. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
-#, python-format
-msgid "Failed Message Icon"
-msgstr "Icône de message en échec"
-
-#. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_account_account__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_account_template__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_analytic_account__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_bank_statement_line__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_journal__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_move__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_payment__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_reconcile_model__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_setup_bank_manual_config__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_discuss_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_cc__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_main_attachment__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_phone__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mailing_contact__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mailing_mailing__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_phone_blacklist__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_product_product__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_product_template__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_res_company__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_bank__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 msgid "Failed Messages"
 msgstr "Messages en échec"
@@ -340,23 +332,18 @@ msgstr "Messages en échec"
 #. module: mail_tracking
 #. odoo-javascript
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#: code:addons/mail_tracking/static/src/core/message/message.xml:0
 #, python-format
 msgid "Failed Recipients:"
 msgstr "Destinataires en échec :"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/failed_message_list/failed_message_list.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_messages_panel/failed_messages_panel.esm.js:0
+#: code:addons/mail_tracking/static/src/core/chatter/chatter.xml:0
 #, python-format
 msgid "Failed messages"
 msgstr "Messages en échec"
-
-#. module: mail_tracking
-#. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
-#, python-format
-msgid "Failed messages will appear here."
-msgstr "Les messages en échec apparaissent ici."
 
 #. module: mail_tracking
 #. odoo-python
@@ -366,10 +353,29 @@ msgid "Failed sent messages"
 msgstr "Messages envoyés en échec"
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Go"
+msgstr ""
+
+#. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Go to message"
+msgstr ""
+
+#. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
 msgstr "Regrouper par"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_guest
+msgid "Guest"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__hard_bounce
@@ -388,6 +394,13 @@ msgid "IP"
 msgstr "IP"
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Info"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__is_failed_message
 msgid "Is Failed Message"
@@ -397,12 +410,6 @@ msgstr "Est un message en échec"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__mobile
 msgid "Is mobile?"
 msgstr "Est mobile ?"
-
-#. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email____last_update
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__write_uid
@@ -491,13 +498,6 @@ msgid "Month"
 msgstr "Mois"
 
 #. module: mail_tracking
-#. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
-#, python-format
-msgid "No failed messages"
-msgstr "Pas de message en échec"
-
-#. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
@@ -520,21 +520,21 @@ msgstr "Ouvert"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Opened Status Center Checkmark"
 msgstr "Case à cocher centrale de l’état ouvert"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Opened Status Left Checkmark"
 msgstr "Case à cocher gauche de l’état ouvert"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Opened Status Right Checkmark"
 msgstr "Case à cocher droite de l’état ouvert"
@@ -597,7 +597,7 @@ msgstr "Refusé"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_message_review/failed_message_review.xml:0
 #, python-format
 msgid "Retry"
 msgstr "Nouvelle tentative"
@@ -636,21 +636,21 @@ msgstr "Envoyé"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Sent Status"
 msgstr "État d’envoi"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_message_review/failed_message_review.xml:0
 #, python-format
 msgid "Set As Reviewed"
 msgstr "Indiquer comme revu"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_message_review/failed_message_review.xml:0
 #, python-format
 msgid "Set as Reviewed"
 msgstr "Indiquer comme revu"
@@ -691,9 +691,11 @@ msgid "Subject"
 msgstr "Objet"
 
 #. module: mail_tracking
-#: model:ir.model,name:mail_tracking.model_ir_config_parameter
-msgid "System Parameter"
-msgstr "Paramètre système"
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Subject:"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
@@ -738,7 +740,7 @@ msgstr "À"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/core/message/message.xml:0
 #, python-format
 msgid "To:"
 msgstr "À :"
@@ -786,7 +788,7 @@ msgstr "Inconnu"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Unknown Status"
 msgstr "État inconnu"
@@ -802,6 +804,11 @@ msgstr "Se désabonner"
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Unsubscribed"
 msgstr "Désabonné"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_res_users
+msgid "User"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_agent
@@ -852,10 +859,28 @@ msgstr "En attente"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Waiting Status"
 msgstr "État de l’attente"
+
+#, python-format
+#~ msgid "Failed Message Icon"
+#~ msgstr "Icône de message en échec"
+
+#, python-format
+#~ msgid "Failed messages will appear here."
+#~ msgstr "Les messages en échec apparaissent ici."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
+
+#, python-format
+#~ msgid "No failed messages"
+#~ msgstr "Pas de message en échec"
+
+#~ msgid "System Parameter"
+#~ msgstr "Paramètre système"
 
 #~ msgid "Bounce description"
 #~ msgstr "Descriptif du rebond"
