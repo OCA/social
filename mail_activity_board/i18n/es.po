@@ -123,7 +123,7 @@ msgstr "Usuario"
 
 #. module: mail_activity_board
 #. odoo-javascript
-#: code:addons/mail_activity_board/static/src/components/chatter_topbar/chatter_topbar.xml:0
+#: code:addons/mail_activity_board/static/src/components/chatter/chatter.xml:0
 #, python-format
 msgid "View Activities"
 msgstr "Ver actividades"
