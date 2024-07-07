@@ -19,8 +19,8 @@ msgstr ""
 
 #. module: mass_mailing_partner
 #. odoo-python
-#: code:addons/mass_mailing_partner/models/mailing_contact_subscription.py:0
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
+#: code:addons/mass_mailing_partner/models/mailing_subscription.py:0
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
 msgstr "Một đối tác không thể xuất hiện nhiều lần trong một Danh sách Mail"
@@ -72,11 +72,6 @@ msgid "ID"
 msgstr ""
 
 #. module: mass_mailing_partner
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard____last_update
-msgid "Last Modified on"
-msgstr "Sửa lần cuối vào"
-
-#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Cập nhật lần cuối bởi"
@@ -97,6 +92,11 @@ msgstr "Liên hệ của danh sách Mail"
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
 msgid "Mailing List"
 msgstr "Danh sách Mail"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_subscription
+msgid "Mailing List Subscription"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_trace
@@ -120,11 +120,6 @@ msgstr "SL liên hệ của ds Mail"
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_mandatory
 msgid "Mandatory Partner"
 msgstr "Bắt buộc có đối tác"
-
-#. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mailing_contact_subscription
-msgid "Mass Mailing Subscription Information"
-msgstr "Thông tin đăng ký gửi thư hàng loạt"
 
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_res_partner__mass_mailing_stats_ids
@@ -187,3 +182,9 @@ msgid ""
 msgstr ""
 "Đối tác '%s' có liên kết đến một liên hệ của danh sách Mail. Email là thông "
 "tin bắt buộc."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Sửa lần cuối vào"
+
+#~ msgid "Mass Mailing Subscription Information"
+#~ msgstr "Thông tin đăng ký gửi thư hàng loạt"

@@ -16,13 +16,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: mass_mailing_partner
 #. odoo-python
-#: code:addons/mass_mailing_partner/models/mailing_contact_subscription.py:0
 #: code:addons/mass_mailing_partner/models/mailing_list.py:0
+#: code:addons/mass_mailing_partner/models/mailing_subscription.py:0
 #, python-format
 msgid "A partner cannot be multiple times in the same list"
 msgstr ""
@@ -74,11 +74,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_partner
-#: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard____last_update
-msgid "Last Modified on"
-msgstr "Zadnja izmjena"
-
-#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Zadnju izmjenu izvršio/la"
@@ -100,6 +95,11 @@ msgstr "Kontakti za masovno slanje"
 #: model_terms:ir.ui.view,arch_db:mass_mailing_partner.view_res_partner_filter
 msgid "Mailing List"
 msgstr "Mailing lista"
+
+#. module: mass_mailing_partner
+#: model:ir.model,name:mass_mailing_partner.model_mailing_subscription
+msgid "Mailing List Subscription"
+msgstr ""
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_trace
@@ -125,11 +125,6 @@ msgstr "Kontakti za masovno slanje"
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_mandatory
 msgid "Mandatory Partner"
-msgstr ""
-
-#. module: mass_mailing_partner
-#: model:ir.model,name:mass_mailing_partner.model_mailing_contact_subscription
-msgid "Mass Mailing Subscription Information"
 msgstr ""
 
 #. module: mass_mailing_partner
@@ -191,6 +186,9 @@ msgid ""
 "This partner '%s' is linked to one or more mass mailing contact. Email must "
 "be assigned."
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnja izmjena"
 
 #~ msgid "Mass Mailing Contact"
 #~ msgstr "Kontakti za masovno slanje"
