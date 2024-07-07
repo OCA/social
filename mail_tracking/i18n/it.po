@@ -65,6 +65,13 @@ msgstr ""
 "modalità leggera dal server Mail Exchange (MX) del destinatario.\n"
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_messages_panel/failed_messages_panel.esm.js:0
+#, python-format
+msgid "%s failed messages found"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
 msgid "Additional recipients that receive a \"Carbon Copy\" of the e-mail"
 msgstr ""
@@ -79,7 +86,7 @@ msgstr "Anonimo a"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Anonymous Recipient"
 msgstr "Destinatario anonimo"
@@ -108,7 +115,7 @@ msgstr "Rimbalzato"
 #. odoo-javascript
 #. odoo-python
 #: code:addons/mail_tracking/models/mail_thread.py:0
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__email_cc
 #, python-format
 msgid "Cc"
@@ -185,21 +192,21 @@ msgstr "Consegnato"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Delivered Status Center Checkmark"
 msgstr "Spunta centrale stato consegna"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Delivered Status Left Checkmark"
 msgstr "Spunta sinistra stato consegna"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Delivered Status Right Checkmark"
 msgstr "Spunta destra stato consegna"
@@ -227,6 +234,11 @@ msgstr "Alias email"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__email_bounced
 msgid "Email Bounced"
 msgstr "Email rimbalzata"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_alias_domain
+msgid "Email Domain"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
@@ -276,7 +288,7 @@ msgstr "Errore server SMTP"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Error Status"
 msgstr "Stato errore"
@@ -294,7 +306,8 @@ msgstr "Tipo evento"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/models/mailbox.esm.js:0
+#: code:addons/mail_tracking/static/src/core/discuss/thread_icon.xml:0
+#: code:addons/mail_tracking/static/src/services/messaging_service_patch.esm.js:0
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #, python-format
@@ -302,39 +315,18 @@ msgid "Failed"
 msgstr "Fallita"
 
 #. module: mail_tracking
-#. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
-#, python-format
-msgid "Failed Message Icon"
-msgstr "Icona messaggio fallito"
-
-#. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_account_account__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_account_template__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_analytic_account__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_bank_statement_line__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_journal__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_move__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_payment__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_reconcile_model__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_account_setup_bank_manual_config__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_calendar_event__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_event_event__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_event_registration__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_discuss_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_blacklist__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_channel__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_blacklist__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_cc__failed_message_ids
+#: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_main_attachment__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_thread_phone__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mailing_contact__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_mailing_mailing__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_phone_blacklist__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_product_product__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_product_template__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_res_company__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__failed_message_ids
-#: model:ir.model.fields,field_description:mail_tracking.field_res_partner_bank__failed_message_ids
 #: model:ir.model.fields,field_description:mail_tracking.field_res_users__failed_message_ids
 msgid "Failed Messages"
 msgstr "Messaggi falliti"
@@ -342,23 +334,18 @@ msgstr "Messaggi falliti"
 #. module: mail_tracking
 #. odoo-javascript
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#: code:addons/mail_tracking/static/src/core/message/message.xml:0
 #, python-format
 msgid "Failed Recipients:"
 msgstr "Destinatari falliti:"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/failed_message_list/failed_message_list.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_messages_panel/failed_messages_panel.esm.js:0
+#: code:addons/mail_tracking/static/src/core/chatter/chatter.xml:0
 #, python-format
 msgid "Failed messages"
 msgstr "Messaggi falliti"
-
-#. module: mail_tracking
-#. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
-#, python-format
-msgid "Failed messages will appear here."
-msgstr "I messaggi falliti compaiono qui."
 
 #. module: mail_tracking
 #. odoo-python
@@ -368,10 +355,29 @@ msgid "Failed sent messages"
 msgstr "Messaggi inviati falliti"
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Go"
+msgstr ""
+
+#. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Go to message"
+msgstr ""
+
+#. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 msgid "Group By"
 msgstr "Raggruppa per"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_mail_guest
+msgid "Guest"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__hard_bounce
@@ -390,6 +396,13 @@ msgid "IP"
 msgstr "IP"
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Info"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__is_failed_message
 msgid "Is Failed Message"
@@ -399,12 +412,6 @@ msgstr "È un messaggio fallito"
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__mobile
 msgid "Is mobile?"
 msgstr "È cellulare?"
-
-#. module: mail_tracking
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email____last_update
-#: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__write_uid
@@ -493,13 +500,6 @@ msgid "Month"
 msgstr "Mese"
 
 #. module: mail_tracking
-#. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
-#, python-format
-msgid "No failed messages"
-msgstr "Nessun messaggio fallito"
-
-#. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_form
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_search
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_event_tree
@@ -522,21 +522,21 @@ msgstr "Aperto"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Opened Status Center Checkmark"
 msgstr "Spunta centrale stato aperto"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Opened Status Left Checkmark"
 msgstr "Spunta sinistra stato aperto"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Opened Status Right Checkmark"
 msgstr "Spunta destra stato aperto"
@@ -599,7 +599,7 @@ msgstr "Rifiutata"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_message_review/failed_message_review.xml:0
 #, python-format
 msgid "Retry"
 msgstr "Riprova"
@@ -638,21 +638,21 @@ msgstr "Inviato"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Sent Status"
 msgstr "Stato invio"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_message_review/failed_message_review.xml:0
 #, python-format
 msgid "Set As Reviewed"
 msgstr "Imposta come revisionato"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/components/failed_message_review/failed_message_review.xml:0
 #, python-format
 msgid "Set as Reviewed"
 msgstr "Imposta come revisionato"
@@ -693,9 +693,11 @@ msgid "Subject"
 msgstr "Soggetto"
 
 #. module: mail_tracking
-#: model:ir.model,name:mail_tracking.model_ir_config_parameter
-msgid "System Parameter"
-msgstr "Parametro di sistema"
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
+#, python-format
+msgid "Subject:"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
@@ -742,7 +744,7 @@ msgstr "A"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/message/message.xml:0
+#: code:addons/mail_tracking/static/src/core/message/message.xml:0
 #, python-format
 msgid "To:"
 msgstr "A:"
@@ -790,7 +792,7 @@ msgstr "Sconosciuto"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Unknown Status"
 msgstr "Stato sconosciuto"
@@ -806,6 +808,11 @@ msgstr "Disiscrivi"
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Unsubscribed"
 msgstr "Disiscritto"
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_res_users
+msgid "User"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_agent
@@ -856,10 +863,28 @@ msgstr "In attesa"
 
 #. module: mail_tracking
 #. odoo-javascript
-#: code:addons/mail_tracking/static/src/components/discuss/discuss.xml:0
+#: code:addons/mail_tracking/static/src/components/message_tracking/message_tracking_status.xml:0
 #, python-format
 msgid "Waiting Status"
 msgstr "Stato attesa"
+
+#, python-format
+#~ msgid "Failed Message Icon"
+#~ msgstr "Icona messaggio fallito"
+
+#, python-format
+#~ msgid "Failed messages will appear here."
+#~ msgstr "I messaggi falliti compaiono qui."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
+
+#, python-format
+#~ msgid "No failed messages"
+#~ msgstr "Nessun messaggio fallito"
+
+#~ msgid "System Parameter"
+#~ msgstr "Parametro di sistema"
 
 #~ msgid "Display name"
 #~ msgstr "Nome da visualizzare"
