@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2024-01-17 10:34+0000\n"
+"PO-Revision-Date: 2024-07-08 08:59+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
@@ -69,7 +69,7 @@ msgstr ""
 #: code:addons/mail_tracking/static/src/components/failed_messages_panel/failed_messages_panel.esm.js:0
 #, python-format
 msgid "%s failed messages found"
-msgstr ""
+msgstr "Trovati %s messaggi falliti"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_message__email_cc
@@ -238,7 +238,7 @@ msgstr "Email rimbalzata"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_alias_domain
 msgid "Email Domain"
-msgstr ""
+msgstr "Dominio e-mail"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_partner__email_score
@@ -359,14 +359,14 @@ msgstr "Messaggi inviati falliti"
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
 #, python-format
 msgid "Go"
-msgstr ""
+msgstr "Vai"
 
 #. module: mail_tracking
 #. odoo-javascript
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
 #, python-format
 msgid "Go to message"
-msgstr ""
+msgstr "Vai al messaggio"
 
 #. module: mail_tracking
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
@@ -377,7 +377,7 @@ msgstr "Raggruppa per"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_guest
 msgid "Guest"
-msgstr ""
+msgstr "Ospite"
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__hard_bounce
@@ -400,7 +400,7 @@ msgstr "IP"
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
 #, python-format
 msgid "Info"
-msgstr ""
+msgstr "Informazioni"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
@@ -697,7 +697,7 @@ msgstr "Soggetto"
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
 #, python-format
 msgid "Subject:"
-msgstr ""
+msgstr "Oggetto:"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_mail__mail_tracking_needs_action
@@ -812,7 +812,7 @@ msgstr "Disiscritto"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_users
 msgid "User"
-msgstr ""
+msgstr "Utente"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_event__user_agent
