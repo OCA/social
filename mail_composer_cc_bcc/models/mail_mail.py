@@ -45,8 +45,8 @@ class MailMail(models.Model):
         success_pids = []
         failure_type = None
         # ===== Same with native Odoo =====
-        # https://github.com/odoo/odoo/blob/0a3fc96cd51c0aab024207a4608f6ba32d49da36
-        # /addons/mail/models/mail_mail.py#L384
+        # https://github.com/odoo/odoo/blob/28e1e01835c0df2ad6e9ddf131dd438fcf6072e1
+        # /addons/mail/models/mail_mail.py#L402
         try:
             if mail.state != "outgoing":
                 if mail.state != "exception" and mail.auto_delete:
@@ -135,11 +135,20 @@ class MailMail(models.Model):
             # TDE note: could be great to pre-detect missing to/cc and skip sending it
             # to go directly to failed state update
             # ===== Different than native Odoo =====
+            # support headers specific to the specific outgoing email
+            if email.get("headers"):
+                email_headers = headers.copy()
+                try:
+                    email_headers.update(email.get("headers"))
+                except Exception as e:
+                    _logger.warning("Error during email_headers update: %s", e)
+            else:
+                email_headers = headers
             email["email_from"] = email_from
             msg = self.build_email(
                 email,
                 attachments=attachments,
-                headers=headers,
+                headers=email_headers,
             )
             try:
                 res = IrMailServer.send_email(
@@ -239,8 +248,8 @@ class MailMail(models.Model):
         email_from = email.get("email_from")
         IrMailServer = env["ir.mail_server"]
         # ===== Same with native Odoo =====
-        # https://github.com/odoo/odoo/blob/0a3fc96cd51c0aab024207a4608f6ba32d49da36
-        # /addons/mail/models/mail_mail.py#L458
+        # https://github.com/odoo/odoo/blob/28e1e01835c0df2ad6e9ddf131dd438fcf6072e1
+        # /addons/mail/models/mail_mail.py#L486
         msg = IrMailServer.build_email(
             email_from=email_from,
             email_to=email.get("email_to"),
