@@ -146,7 +146,7 @@ class CustomUnsubscribe(MassMailController):
         # redefinition of _add and _remove methods of the mail.blacklist class
         extra_context = {
             "default_metadata": "\n".join(
-                "{}: {}".format(val, environ.get(val))
+                f"{val}: {environ.get(val)}"
                 for val in ("REMOTE_ADDR", "HTTP_USER_AGENT", "HTTP_ACCEPT_LANGUAGE")
             ),
             "mailing_id": mailing_id,
