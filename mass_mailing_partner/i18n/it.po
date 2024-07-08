@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2023-12-07 16:33+0000\n"
+"PO-Revision-Date: 2024-07-08 08:59+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: mass_mailing_partner
 #. odoo-python
@@ -98,7 +98,7 @@ msgstr "Mailing list"
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_subscription
 msgid "Mailing List Subscription"
-msgstr ""
+msgstr "Iscrizione alla lista di distribuzione"
 
 #. module: mass_mailing_partner
 #: model:ir.model,name:mass_mailing_partner.model_mailing_trace
@@ -172,7 +172,7 @@ msgstr "Il partner è già presente in una di queste mailing list"
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_contact__tag_ids
 msgid "Tags"
-msgstr ""
+msgstr "Etichette"
 
 #. module: mass_mailing_partner
 #. odoo-python
