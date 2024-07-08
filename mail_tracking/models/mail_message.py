@@ -24,7 +24,7 @@ class MailMessage(models.Model):
         string="Mail Trackings",
     )
     mail_tracking_needs_action = fields.Boolean(
-        help="The message tracking will be considered" " to filter tracking issues",
+        help="The message tracking will be considered to filter tracking issues",
         default=False,
     )
     is_failed_message = fields.Boolean(
@@ -41,6 +41,7 @@ class MailMessage(models.Model):
         "mail_tracking_needs_action",
         "author_id",
         "notification_ids",
+        "mail_tracking_ids",
         "mail_tracking_ids.state",
     )
     def _compute_is_failed_message(self):

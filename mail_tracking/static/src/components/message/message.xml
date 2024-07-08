@@ -72,7 +72,8 @@
                         t-if="tracking['partner_id']"
                         t-attf-class="o_mail_action_tracking_partner #{tracking['isCc'] ? 'o_mail_cc' : ''}"
                         t-att-data-partner="tracking['partner_id']"
-                        t-attf-href="#model=res.partner&amp;id={{tracking['partner_id']}}"
+                        data-oe-model="res.partner"
+                        t-att-data-oe-id="tracking['partner_id']"
                         t-out="tracking['recipient']"
                     />
                     <span

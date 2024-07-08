@@ -46,9 +46,16 @@ class MailThread(models.AbstractModel):
 
     def _routing_handle_bounce(self, email_message, message_dict):
         bounced_message = message_dict["bounced_message"]
-        if bounced_message.mail_tracking_ids:
-            # TODO detect hard of soft bounce
-            bounced_message.mail_tracking_ids.event_create("soft_bounce", message_dict)
+        # Ensure that only the failed recipients are flagged
+        mail_trackings = bounced_message.mail_tracking_ids.filtered(
+            lambda x: x.recipient_address == message_dict["bounced_email"]
+            or (
+                message_dict["bounced_partner"]
+                and message_dict["bounced_partner"] == x.partner_id
+            )
+        )
+        if mail_trackings:
+            mail_trackings.event_create("soft_bounce", message_dict)
         return super()._routing_handle_bounce(email_message, message_dict)
 
     def _message_get_suggested_recipients(self):

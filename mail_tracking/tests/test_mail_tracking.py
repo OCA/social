@@ -613,7 +613,7 @@ class TestMailTracking(TransactionCase):
         message.mail_tracking_ids = [Command.link(tracking.id)]
         mail.mail_message_id = message
         message_dict = {
-            "bounced_email": "test@test.net",
+            "bounced_email": self.recipient.email,
             "bounced_message": message,
             "bounced_msg_id": [message.message_id],
             "bounced_partner": self.recipient,
