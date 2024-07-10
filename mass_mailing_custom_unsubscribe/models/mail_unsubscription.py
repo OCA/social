@@ -62,8 +62,12 @@ class MailUnsubscription(models.Model):
     @api.model
     def _selection_unsubscriber_id(self):
         """Models that can be linked to a ``mailing.mailing``."""
-        models = self.env["ir.model"].search(
-            [("is_mailing_enabled", "=", True), ("model", "!=", "mailing.list")]
+        models = (
+            self.env["ir.model"]
+            .sudo()
+            .search(
+                [("is_mailing_enabled", "=", True), ("model", "!=", "mailing.list")]
+            )
         )
         return [(model.model, model.name) for model in models]
 
