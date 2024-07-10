@@ -23,6 +23,7 @@ class FetchmailServer(models.Model):
         """
         models = (
             self.env["ir.model.fields"]
+            .sudo()
             .search([("name", "=", "message_partner_ids")])
             .mapped("model_id")
         )
