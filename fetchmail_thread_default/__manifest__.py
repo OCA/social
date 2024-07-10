@@ -4,7 +4,7 @@
 {
     "name": "Default Thread For Unbounded Emails",
     "summary": "Post unkonwn messages to an existing thread",
-    "version": "16.0.1.0.0",
+    "version": "16.0.1.1.0",
     "category": "Discuss",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Therp BV,  Odoo Community Association (OCA)",
