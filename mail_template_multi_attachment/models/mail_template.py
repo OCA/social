@@ -30,7 +30,10 @@ class MailTemplate(models.Model):
         if isinstance(res_ids, int):
             multi_mode = False
             results = {res_ids: results}
-        self.generate_attachments(results)
+        for lang, (_template, _template_res_ids) in self._classify_per_lang(
+            [res_ids] if not isinstance(res_ids, (list, tuple)) else res_ids
+        ).items():
+            self.with_context(lang=lang).generate_attachments(results)
         return multi_mode and results or results[res_ids]
 
     def generate_attachments(self, results):
