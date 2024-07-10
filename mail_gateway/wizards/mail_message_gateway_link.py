@@ -16,7 +16,7 @@ class MailMessageGatewayLink(models.TransientModel):
 
     @api.model
     def _selection_target_model(self):
-        models = self.env["ir.model"].search([("is_mail_thread", "=", True)])
+        models = self.env["ir.model"].sudo().search([("is_mail_thread", "=", True)])
         return [(model.model, model.name) for model in models]
 
     def link_message(self):
