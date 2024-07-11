@@ -297,13 +297,6 @@ msgstr ""
 
 #. module: mail_tracking_mailgun
 #. odoo-python
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
-#, python-format
-msgid "Wrong database for event!"
-msgstr ""
-
-#. module: mail_tracking_mailgun
-#. odoo-python
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Wrong signature"

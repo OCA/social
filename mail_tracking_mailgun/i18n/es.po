@@ -314,13 +314,6 @@ msgstr "Desmarcar como rebotado"
 
 #. module: mail_tracking_mailgun
 #. odoo-python
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
-#, python-format
-msgid "Wrong database for event!"
-msgstr "¡Base de datos incorrecta para el evento!"
-
-#. module: mail_tracking_mailgun
-#. odoo-python
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Wrong signature"
@@ -378,6 +371,10 @@ msgstr "pubclave-abcde0123456789abcde0123456789ab"
 #, python-format
 msgid "unknown"
 msgstr "desconocido"
+
+#, python-format
+#~ msgid "Wrong database for event!"
+#~ msgstr "¡Base de datos incorrecta para el evento!"
 
 #~ msgid "Attempt to check partner emails always. This may cost money."
 #~ msgstr ""
