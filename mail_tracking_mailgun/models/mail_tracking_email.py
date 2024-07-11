@@ -168,8 +168,18 @@ class MailTrackingEmail(models.Model):
         In https://documentation.mailgun.com/en/latest/api-events.html#event-structure
         you can read the event payload format as obtained from webhooks or calls to API.
         """
+        # Just ignore these events, as they will be from another system using the same
+        # smtp domain
+        if "odoo_db" not in event_data["user-variables"]:
+            _logger.debug(f"Mailgun: dropping not Odoo event: {event_data}")
+            return
+        # Don't fail too hard, just drop and log the issue
         if event_data["user-variables"]["odoo_db"] != self.env.cr.dbname:
-            raise ValidationError(_("Wrong database for event!"))
+            _logger.error(
+                f"Mailgun: event for DB {event_data['user-variables']['odoo_db']} "
+                f"received in DB {self.env.cr.dbname}: {event_data}"
+            )
+            return
         # Do nothing if event was already processed
         mailgun_id = event_data["id"]
         db_event = self.env["mail.tracking.event"].search(

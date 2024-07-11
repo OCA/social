@@ -190,11 +190,21 @@ class TestMailgun(TransactionCase):
         with self._request_mock(), self.assertRaises(MissingError):
             self.MailTrackingController.mail_tracking_mailgun_webhook()
 
-    @mute_logger("odoo.addons.mail_tracking_mailgun.models.mail_tracking_email")
     def test_tracking_wrong_db(self):
         self.event["user-variables"]["odoo_db"] = "%s_nope" % self.env.cr.dbname
-        with self._request_mock(), self.assertRaises(ValidationError):
+        with self._request_mock(), self.assertLogs(level="ERROR") as log_catcher:
             self.MailTrackingController.mail_tracking_mailgun_webhook()
+        self.assertIn(
+            f"Mailgun: event for DB {self.env.cr.dbname}_nope "
+            f"received in DB {self.env.cr.dbname}",
+            log_catcher.output[0],
+        )
+
+    def test_tracking_not_odoo_event(self):
+        self.event["user-variables"].pop("odoo_db")
+        with self._request_mock(), self.assertLogs(level="DEBUG") as log_catcher:
+            self.MailTrackingController.mail_tracking_mailgun_webhook()
+        self.assertIn("Mailgun: dropping not Odoo event", log_catcher.output[-1:][0])
 
     # https://documentation.mailgun.com/en/latest/user_manual.html#tracking-deliveries
     def test_event_delivered(self):
