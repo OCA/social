@@ -15,14 +15,17 @@ class MailActivity(models.Model):
     def unlink(self):
         if not self.env.context.get("activity_unlink_no_message"):
             for activity in self:
-                record = self.env[activity.res_model].browse(activity.res_id)
-                record.message_post_with_view(
+                message_body = self.env["ir.qweb"]._render(
                     "mail_activity_unlink_log.message_activity_unlink",
-                    values={
+                    {
                         "activity": activity,
                         "display_assignee": activity.user_id != self.env.user,
                     },
-                    subtype_id=self.env["ir.model.data"].xmlid_to_res_id(
+                )
+                record = self.env[activity.res_model].browse(activity.res_id)
+                record.message_post(
+                    body=message_body,
+                    subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                         "mail_activity_unlink_log.mt_activities_unlink"
                     ),
                     mail_activity_type_id=activity.activity_type_id.id,
