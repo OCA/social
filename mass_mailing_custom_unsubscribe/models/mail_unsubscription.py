@@ -1,9 +1,7 @@
 # Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
-
-from .. import exceptions
+from odoo import api, fields, models
 
 
 class MailUnsubscription(models.Model):
@@ -44,16 +42,14 @@ class MailUnsubscription(models.Model):
         help="(Un)subscribed mass mailing lists, if any.",
     )
     reason_id = fields.Many2one(
-        "mail.unsubscription.reason",
+        "mailing.subscription.optout",
         "Reason",
         ondelete="restrict",
         help="Why the unsubscription was made.",
     )
     details = fields.Text(help="More details on why the unsubscription was made.")
-    details_required = fields.Boolean(related="reason_id.details_required")
-    metadata = fields.Text(
-        readonly=True, help="HTTP request metadata used when creating this record."
-    )
+    is_feedback = fields.Boolean(related="reason_id.is_feedback")
+    metadata = fields.Text(help="HTTP request metadata used when creating this record.")
 
     @api.model
     def _default_date(self):
@@ -67,24 +63,15 @@ class MailUnsubscription(models.Model):
         )
         return [(model.model, model.name) for model in models]
 
-    @api.constrains("action", "reason_id")
-    def _check_reason_needed(self):
-        """Ensure reason is given for unsubscriptions."""
-        for one in self:
-            unsubscription_states = {"unsubscription", "blacklist_add"}
-            if one.action in unsubscription_states and not one.reason_id:
-                raise exceptions.ReasonRequiredError(
-                    _("Please indicate why are you unsubscribing.")
-                )
-
-    @api.constrains("details", "reason_id")
-    def _check_details_needed(self):
-        """Ensure details are given if required."""
-        for one in self:
-            if not one.details and one.details_required:
-                raise exceptions.DetailsRequiredError(
-                    _("Please provide details on why you are unsubscribing.")
-                )
+    @api.model
+    def _fetch_last_unsubcription(self, mailing, res_id, action=None):
+        domain = [
+            ("mass_mailing_id", "=", mailing.id),
+            ("unsubscriber_id", "=", f"{mailing.mailing_model_real},{res_id}"),
+        ]
+        if action:
+            domain += [("action", "=", action)]
+        return self.search(domain, limit=1)
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -93,16 +80,3 @@ class MailUnsubscription(models.Model):
             if vals.get("action") in {"subscription", "blacklist_rm"}:
                 vals = dict(vals, reason_id=False, details=False)
         return super().create(vals_list)
-
-
-class MailUnsubscriptionReason(models.Model):
-    _name = "mail.unsubscription.reason"
-    _description = "Mail unsubscription reason"
-    _order = "sequence, name"
-    _inherit = ["mail.thread"]
-
-    name = fields.Char(index=True, translate=True, required=True)
-    details_required = fields.Boolean(
-        help="Check to ask for more details when this reason is selected."
-    )
-    sequence = fields.Integer(index=True, help="Position of the reason in the list.")
