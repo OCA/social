@@ -1,40 +1,43 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
+# Copyright 2024 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
-from odoo import models
+from odoo import api, models
 
 
 class MailBlackList(models.Model):
-    _inherit = "mail.blacklist"
+    _name = "mail.blacklist"
+    _inherit = ["mail.blacklist", "mail.unsubscription.mixin"]
 
-    def _add(self, email):
-        mailing_id = self.env.context.get("mailing_id")
-        res_id = self.env.context.get("unsubscription_res_id")
-        if mailing_id and res_id:
-            mailing = self.env["mailing.mailing"].browse(mailing_id)
-            model_name = mailing.mailing_model_real
-            self.env["mail.unsubscription"].create(
-                {
-                    "email": email,
-                    "mass_mailing_id": mailing_id,
-                    "unsubscriber_id": "%s,%d" % (model_name, res_id),
-                    "action": "blacklist_add",
-                }
-            )
-        return super()._add(email)
+    def _update_unsubscription_reason(self):
+        mailing, res_id = self._unsubscription_context()
+        if not mailing or not res_id or not self.opt_out_reason_id:
+            return
+        last_unsubscription = self.env["mail.unsubscription"]._fetch_last_unsubcription(
+            mailing, res_id
+        )
+        details = self.env.context.get("details")
+        if last_unsubscription:
+            last_unsubscription.reason_id = self.opt_out_reason_id
+            if details:
+                last_unsubscription.details = details
 
-    def _remove(self, email):
-        mailing_id = self.env.context.get("mailing_id")
-        res_id = self.env.context.get("unsubscription_res_id")
-        if mailing_id and res_id:
-            mailing = self.env["mailing.mailing"].browse(mailing_id)
-            model_name = mailing.mailing_model_real
-            self.env["mail.unsubscription"].create(
-                {
-                    "email": email,
-                    "mass_mailing_id": mailing_id,
-                    "unsubscriber_id": "%s,%d" % (model_name, res_id),
-                    "action": "blacklist_rm",
-                }
-            )
-        return super()._remove(email)
+    def _add(self, email, message=None):
+        self._track_mail_unsubscription(email, "blacklist_add")
+        return super()._add(email, message)
+
+    def _remove(self, email, message=None):
+        self._track_mail_unsubscription(email, "blacklist_rm")
+        return super()._remove(email, message)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
+        for record in records.filtered("opt_out_reason_id"):
+            record._update_unsubscription_reason()
+        return records
+
+    def write(self, vals):
+        res = super().write(vals)
+        if vals.get("opt_out_reason_id"):
+            self._update_unsubscription_reason()
+        return res

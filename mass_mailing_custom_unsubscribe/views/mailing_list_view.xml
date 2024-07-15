@@ -8,10 +8,7 @@
         <field name="inherit_id" ref="mass_mailing.mailing_list_view_form" />
         <field name="arch" type="xml">
             <field name="is_public" position="after">
-                <field
-                    name="not_cross_unsubscriptable"
-                    attrs="{'invisible': [('is_public', '=', False)]}"
-                />
+                <field name="not_cross_unsubscriptable" invisible="not is_public" />
             </field>
         </field>
     </record>
