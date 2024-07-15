@@ -1,40 +1,33 @@
 # Copyright 2019 Tecnativa - Ernesto Tejeda
+# Copyright 2024 Tecnativa - David Vidal
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from markupsafe import Markup
 
-from odoo import models
+from odoo import fields, models
 
 
 class MailBlackList(models.Model):
     _inherit = "mail.blacklist"
 
-    def _add(self, email):
-        mailing_id = self.env.context.get("mailing_id")
-        res_id = self.env.context.get("unsubscription_res_id")
-        if mailing_id and res_id:
-            mailing = self.env["mailing.mailing"].browse(mailing_id)
-            model_name = mailing.mailing_model_real
-            self.env["mail.unsubscription"].create(
-                {
-                    "email": email,
-                    "mass_mailing_id": mailing_id,
-                    "unsubscriber_id": "%s,%d" % (model_name, res_id),
-                    "action": "blacklist_add",
-                }
-            )
-        return super()._add(email)
+    metadata = fields.Text()
 
-    def _remove(self, email):
-        mailing_id = self.env.context.get("mailing_id")
-        res_id = self.env.context.get("unsubscription_res_id")
-        if mailing_id and res_id:
-            mailing = self.env["mailing.mailing"].browse(mailing_id)
-            model_name = mailing.mailing_model_real
-            self.env["mail.unsubscription"].create(
-                {
-                    "email": email,
-                    "mass_mailing_id": mailing_id,
-                    "unsubscriber_id": "%s,%d" % (model_name, res_id),
-                    "action": "blacklist_rm",
-                }
+    def _get_metadata_message(self, message):
+        if message and self.env.context.get("metadata"):
+            return Markup(
+                f"{str(message)}<br/><br/><strong>METADATA</strong><hr/>"
+                f"<pre>{self.env.context.get('metadata')}</pre>"
             )
-        return super()._remove(email)
+
+    def _add(self, email, message=None):
+        metadata_msg = self._get_metadata_message(message)
+        if message and metadata_msg:
+            message = metadata_msg
+            self.metadata = self.env.context.get("metadata")
+        return super()._add(email, message)
+
+    def _remove(self, email, message=None):
+        metadata_msg = self._get_metadata_message(message)
+        if message and metadata_msg:
+            message = metadata_msg
+            self.metadata = self.env.context.get("metadata")
+        return super()._remove(email, message)
