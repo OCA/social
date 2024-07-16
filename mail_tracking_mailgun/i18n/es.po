@@ -1,0 +1,398 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_tracking_mailgun
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-26 01:46+0000\n"
+"PO-Revision-Date: 2023-10-28 13:30+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid ""
+"%s couldn't be verified. Either the request couln't be completed or the "
+"mailbox provider doesn't support email verification"
+msgstr ""
+"%s no ha podido ser verificado. Puede que la petición no se haya completado "
+"o que el buzón no soporta validación de correo electrónico"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid ""
+"%s failed the mailbox verification. Please check it in order to avoid "
+"sending issues"
+msgstr ""
+"%s no ha pasado la validación de buzón. Compruébela para prevenir problemas "
+"con los envíos"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid ""
+"%s is not a valid email address. Please check it in order to avoid sending "
+"issues"
+msgstr ""
+"%s no es una dirección válida de correo electrónico. Compruébela para "
+"prevenir problemas con los envíos"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
+#, python-format
+msgid "A Mailgun domain value is needed!"
+msgstr "¡Se necesita un valor de dominio para Mailgun!"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Check Mailgun"
+msgstr "Comprobar Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Check email validity"
+msgstr "Comprobar validez de email"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_res_config_settings
+msgid "Config Settings"
+msgstr "Ajustes Configuración"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "Connecting Odoo with"
+msgstr "Conexión de Odoo con"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
+#, python-format
+msgid "Couldn't retrieve Mailgun information"
+msgstr "No se ha podido obtener información desde Mailgun"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid ""
+"Email has been bounced: %(email)s\n"
+"Reason: %(reason)s\n"
+"Event: %(event_str)s"
+msgstr ""
+"El correo electrónico ha sido devuelto: %(email)s\n"
+"Motivo: %(reason)s\n"
+"Evento: %(event_str)s"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_enabled
+msgid "Enable mail tracking with Mailgun"
+msgstr "Activar el seguimiento del correo con Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_enabled
+msgid "Enable to enhance mail tracking with Mailgun"
+msgstr "Mejorar el seguimiento del correo con Mailgun"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid "Error %s trying to check mailof connection"
+msgstr "Error %s al intentar comprobar el correo electrónicodeconexión"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
+#, python-format
+msgid "Event information not longer stored"
+msgstr "La información del evento ha caducado"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid ""
+"If you change Mailgun settings, your Odoo URL or your sending domain, "
+"unregister webhooks and register them again to get automatic updates about "
+"sent emails:"
+msgstr ""
+"Si cambias la configuración de Mailgun, tu URL de Odoo o tu dominio de "
+"envío, desregistra los webhooks y regístralos de nuevo para obtener "
+"actualizaciones automáticas sobre los emails enviados:"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_validation_key
+msgid "Key used to validate emails."
+msgstr "Clave utilizada para validar los correos electrónicos."
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhooks_domain
+msgid "Leave empty to use the base Odoo URL."
+msgstr "Dejar vacío para usar la URL base de Odoo."
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_domain
+msgid "Leave empty to use the catch-all domain."
+msgstr "Dejar vacío para utilizar el dominio catch-all."
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_url
+msgid ""
+"Leave this empty if your API endpoint is the default (https://api.mailgun."
+"net/)."
+msgstr ""
+"Déjelo vacío si su punto final de API es el predeterminado (https://api."
+"mailgun.net/)."
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_ir_mail_server
+msgid "Mail Server"
+msgstr "Servidor de Correo"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_email
+msgid "MailTracking email"
+msgstr "Email de seguimiento de correo"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model,name:mail_tracking_mailgun.model_mail_tracking_event
+msgid "MailTracking event"
+msgstr "Evento de seguimiento de correo"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Mailgun"
+msgstr "Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "Mailgun &gt; Settings &gt; API keys"
+msgstr "Mailgun &gt; Configuración &gt; Claves API"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_url
+msgid "Mailgun API endpoint"
+msgstr "Punto final de la API de Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_key
+msgid "Mailgun API key"
+msgstr "Clave API de Mailgun"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid "Mailgun Error. Mailbox verification value wasn't returned"
+msgstr "Error de Mailgun. No se ha devuelto el valor de verificación de buzón"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_mail_tracking_event__mailgun_id
+msgid "Mailgun Event ID"
+msgstr "ID de Evento de Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_domain
+msgid "Mailgun domain"
+msgstr "Dominio Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.constraint,message:mail_tracking_mailgun.constraint_mail_tracking_event_mailgun_id_unique
+msgid "Mailgun event IDs must be unique!"
+msgstr "¡Los ID de los eventos de Mailgun deben ser únicos!"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_validation_key
+msgid "Mailgun validation key"
+msgstr "Clave de validación Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhook_signing_key
+msgid "Mailgun webhook signing key"
+msgstr "Clave de firma del webhook Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,field_description:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhooks_domain
+msgid "Mailgun webhooks domain"
+msgstr "Dominio de webhooks de Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "Obtain keys in"
+msgstr "Obtener llaves en"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "Other settings:"
+msgstr "Otras Configuraciones:"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.mailgun_manual_check
+msgid "Re-sync Mailgun"
+msgstr "Resincronizar Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "Register Mailgun webhooks"
+msgstr "Registrar los webhooks de Mailgun"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/controllers/main.py:0
+#, python-format
+msgid "Request is too old"
+msgstr "La solicitud es demasiado antigua"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/controllers/main.py:0
+#, python-format
+msgid "Request was already processed"
+msgstr "La solicitud ya ha sido procesada"
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_api_key
+msgid "Secret API key used to authenticate with Mailgun."
+msgstr "Clave API secreta utilizada para autenticarse con Mailgun."
+
+#. module: mail_tracking_mailgun
+#: model:ir.model.fields,help:mail_tracking_mailgun.field_res_config_settings__mail_tracking_mailgun_webhook_signing_key
+msgid "Secret key used to validate incoming webhooks payload."
+msgstr ""
+"Clave secreta utilizada para validar la carga útil de los webhooks entrantes."
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Set Bounced"
+msgstr "Marcar como rebotado"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
+#, python-format
+msgid "There is no Mailgun API key!"
+msgstr "¡No hay clave de API de Mailgun!"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid ""
+"This will unregister ALL webhooks from Mailgun, which can include webhooks "
+"for other apps."
+msgstr ""
+"Esto anulará el registro de TODOS los webhooks de Mailgun, que pueden "
+"incluir webhooks para otras aplicaciones."
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "Unregister Mailgun webhooks"
+msgstr "Anular el registro de los webhooks de Mailgun"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.view_partner_form_mailgun
+msgid "Unset Bounced"
+msgstr "Desmarcar como rebotado"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
+#, python-format
+msgid "Wrong database for event!"
+msgstr "¡Base de datos incorrecta para el evento!"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/controllers/main.py:0
+#, python-format
+msgid "Wrong signature"
+msgstr "Firma incorrecta"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid ""
+"You need to configure mailgun.validation_key in order to be able to check "
+"mails validity"
+msgstr ""
+"Necesitas configurar mailgun.validation_key para poder comprobar la validez "
+"de direcciones de correo"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "abcde0123456789abcde0123456789ab"
+msgstr "abcde0123456789abcde0123456789ab"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "enhances Odoo's mail tracking features."
+msgstr "mejora las funciones de seguimiento del correo de Odoo."
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "https://api.mailgun.net"
+msgstr "https://api.mailgun.net"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "https://odoo.example.com"
+msgstr "https://odoo.example.com"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "key-abcde0123456789abcde0123456789ab"
+msgstr "Clave-abcde0123456789abcde0123456789ab"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "odoo.example.com"
+msgstr "odoo.example.com"
+
+#. module: mail_tracking_mailgun
+#: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
+msgid "pubkey-abcde0123456789abcde0123456789ab"
+msgstr "pubclave-abcde0123456789abcde0123456789ab"
+
+#. module: mail_tracking_mailgun
+#. odoo-python
+#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
+#, python-format
+msgid "unknown"
+msgstr "desconocido"
+
+#~ msgid "Attempt to check partner emails always. This may cost money."
+#~ msgstr ""
+#~ "Intente comprobar siempre los correos electrónicos de los socios. Esto "
+#~ "puede costar dinero."
+
+#~ msgid "Check partner emails automatically"
+#~ msgstr "Compruebe automáticamente los correos electrónicos de los socios"
+
+#, python-format
+#~ msgid ""
+#~ "Email has been bounced: %s\n"
+#~ "Reason: %s\n"
+#~ "Event: %s"
+#~ msgstr ""
+#~ "El correo ha sido rebotado: %s\n"
+#~ "Razón: %s\n"
+#~ "Evento: %s"
