@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -291,13 +291,6 @@ msgstr ""
 
 #. module: mail_tracking_mailgun
 #. odoo-python
-#: code:addons/mail_tracking_mailgun/models/mail_tracking_email.py:0
-#, python-format
-msgid "Wrong database for event!"
-msgstr ""
-
-#. module: mail_tracking_mailgun
-#. odoo-python
 #: code:addons/mail_tracking_mailgun/controllers/main.py:0
 #, python-format
 msgid "Wrong signature"
@@ -345,11 +338,4 @@ msgstr ""
 #. module: mail_tracking_mailgun
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mailgun.res_config_settings_view_form
 msgid "pubkey-abcde0123456789abcde0123456789ab"
-msgstr ""
-
-#. module: mail_tracking_mailgun
-#. odoo-python
-#: code:addons/mail_tracking_mailgun/models/res_partner.py:0
-#, python-format
-msgid "unknown"
 msgstr ""
