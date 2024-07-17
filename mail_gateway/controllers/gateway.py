@@ -32,6 +32,7 @@ class GatewayController(Controller):
             return (
                 request.env["mail.gateway.%s" % usage]
                 .with_user(bot_data["webhook_user_id"])
+                .with_company(bot_data["company_id"])
                 ._receive_get_update(bot_data, request, **kwargs)
             )
         bot_data = request.env["mail.gateway"]._get_gateway(
