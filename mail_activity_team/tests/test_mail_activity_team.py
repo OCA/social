@@ -72,6 +72,7 @@ class TestMailActivityTeam(TransactionCase):
         )
         # Create Teams and Activities
         cls.partner_client = cls.env.ref("base.res_partner_1")
+        cls.partner_client_2 = cls.env.ref("base.res_partner_2")
         cls.partner_ir_model = cls.env["ir.model"]._get("res.partner")
         cls.act1 = (
             cls.env["mail.activity"]
@@ -108,6 +109,19 @@ class TestMailActivityTeam(TransactionCase):
                     "activity_type_id": cls.activity2.id,
                     "note": "Partner activity 2.",
                     "res_id": cls.partner_client.id,
+                    "res_model_id": cls.partner_ir_model.id,
+                    "user_id": cls.employee.id,
+                }
+            )
+        )
+        cls.act3 = (
+            cls.env["mail.activity"]
+            .with_user(cls.employee)
+            .create(
+                {
+                    "activity_type_id": cls.activity2.id,
+                    "note": "Partner activity 3.",
+                    "res_id": cls.partner_client_2.id,
                     "res_model_id": cls.partner_ir_model.id,
                     "user_id": cls.employee.id,
                 }
@@ -338,3 +352,18 @@ class TestMailActivityTeam(TransactionCase):
         )
         self.assertEqual(partner, self.partner_client)
         self.assertEqual(partner.my_activity_date_deadline, today)
+
+    def test_my_team_activity(self):
+        """
+        Test the activity of my team by writing data for a specific user and team, then checking the number of partners with the specified activity user ID.
+        Rerurns 2 partners for both user activities and team activities.
+        """
+        self.act3.write({"user_id": self.employee2.id, "team_id": self.team2.id})
+
+        partners = (
+            self.env["res.partner"]
+            .with_context(team_activities=True)
+            .with_user(self.employee.id)
+            .search([("activity_user_id", "=", self.employee.id)])
+        )
+        self.assertEqual(len(partners), 2)
