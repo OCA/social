@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,7 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: mail_composer_cc_bcc
-#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__email_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_template__email_bcc
@@ -38,7 +37,6 @@ msgid "Blind cc recipients (placeholders may be used here)"
 msgstr ""
 
 #. module: mail_composer_cc_bcc
-#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_cc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_cc_ids
 msgid "Cc"
 msgstr ""
@@ -86,21 +84,8 @@ msgid "Email composition wizard"
 msgstr ""
 
 #. module: mail_composer_cc_bcc
-#. odoo-python
-#: code:addons/mail_composer_cc_bcc/models/mail_mail.py:0
-#, python-format
-msgid ""
-"Error without exception. Probably due do concurrent access update of "
-"notification records. Please see with an administrator."
-msgstr ""
-
-#. module: mail_composer_cc_bcc
-#. odoo-python
-#: code:addons/mail_composer_cc_bcc/models/mail_mail.py:0
-#, python-format
-msgid ""
-"Error without exception. Probably due do sending an email without computed "
-"recipients."
+#: model:ir.model,name:mail_composer_cc_bcc.model_ir_mail_server
+msgid "Mail Server"
 msgstr ""
 
 #. module: mail_composer_cc_bcc
