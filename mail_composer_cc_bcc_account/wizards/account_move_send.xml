@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="account_move_send_form_inherit" model="ir.ui.view">
+        <field name="name">account.move.send.form.inherit</field>
+        <field name="model">account.move.send</field>
+        <field name="inherit_id" ref="account.account_move_send_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mail_partner_ids']/.." position="after">
+                <field name='mode' invisible="1" />
+                <field
+                    name="partner_cc_ids"
+                    widget="many2many_tags_email"
+                    context="{'force_email':True, 'show_email':True}"
+                    invisible="mode == 'invoice_multi'"
+                />
+                <field
+                    name="partner_bcc_ids"
+                    widget="many2many_tags_email"
+                    context="{'force_email':True, 'show_email':True}"
+                    invisible="mode == 'invoice_multi'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
