@@ -17,13 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "%d days overdue"
-msgstr "%d días de retraso"
-
-#. module: mail_activity_done
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity__active
 msgid "Active"
 msgstr "Activo"
@@ -34,10 +27,9 @@ msgstr "Activo"
 #: model:ir.model.fields,field_description:mail_activity_done.field_account_move__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_account_payment__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_account_setup_bank_manual_config__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_event_event__activity_ids
-#: model:ir.model.fields,field_description:mail_activity_done.field_event_registration__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mail_activity_mixin__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_mailing_mailing__activity_ids
+#: model:ir.model.fields,field_description:mail_activity_done.field_product_pricelist__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_product_product__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_product_template__activity_ids
 #: model:ir.model.fields,field_description:mail_activity_done.field_res_partner__activity_ids
@@ -74,13 +66,6 @@ msgid "Done"
 msgstr "Hecho"
 
 #. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Due in %d days"
-msgstr "Vencimiento en %d días"
-
-#. module: mail_activity_done
 #: model_terms:ir.ui.view,arch_db:mail_activity_done.res_partner_view_search_inherit_mail
 msgid "Open Activities"
 msgstr "Actividades Abiertas"
@@ -91,27 +76,26 @@ msgid "State"
 msgstr "Estado"
 
 #. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Today"
-msgstr "Hoy"
-
-#. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
-#, python-format
-msgid "Tomorrow"
-msgstr "Mañana"
-
-#. module: mail_activity_done
 #: model:ir.model,name:mail_activity_done.model_res_users
 msgid "User"
 msgstr "Usuario"
 
-#. module: mail_activity_done
-#. odoo-javascript
-#: code:addons/mail_activity_done/static/src/js/mail_activity.esm.js:0
 #, python-format
-msgid "Yesterday"
-msgstr "Ayer"
+#~ msgid "%d days overdue"
+#~ msgstr "%d días de retraso"
+
+#, python-format
+#~ msgid "Due in %d days"
+#~ msgstr "Vencimiento en %d días"
+
+#, python-format
+#~ msgid "Today"
+#~ msgstr "Hoy"
+
+#, python-format
+#~ msgid "Tomorrow"
+#~ msgstr "Mañana"
+
+#, python-format
+#~ msgid "Yesterday"
+#~ msgstr "Ayer"
