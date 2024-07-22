@@ -17,7 +17,6 @@ msgstr ""
 "X-Generator: Weblate 4.17\n"
 
 #. module: mail_composer_cc_bcc
-#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__email_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_template__email_bcc
@@ -41,7 +40,6 @@ msgid "Blind cc recipients (placeholders may be used here)"
 msgstr "Nascondi destinatari in CC (qui si possono usare segnaposto)"
 
 #. module: mail_composer_cc_bcc
-#: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_account_invoice_send__partner_cc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_compose_message__partner_cc_ids
 msgid "Cc"
 msgstr "Cc"
@@ -89,26 +87,9 @@ msgid "Email composition wizard"
 msgstr "Procedura guidata creazione e-mail"
 
 #. module: mail_composer_cc_bcc
-#. odoo-python
-#: code:addons/mail_composer_cc_bcc/models/mail_mail.py:0
-#, python-format
-msgid ""
-"Error without exception. Probably due do concurrent access update of "
-"notification records. Please see with an administrator."
+#: model:ir.model,name:mail_composer_cc_bcc.model_ir_mail_server
+msgid "Mail Server"
 msgstr ""
-"Errore senza eccezione. Probabilmente per un accesso concorrente per "
-"aggiornamento record notifiche. Verificare con un amministratore."
-
-#. module: mail_composer_cc_bcc
-#. odoo-python
-#: code:addons/mail_composer_cc_bcc/models/mail_mail.py:0
-#, python-format
-msgid ""
-"Error without exception. Probably due do sending an email without computed "
-"recipients."
-msgstr ""
-"Errore senza eccezione. Probabilmente dovto all'invio di una e-mail con "
-"destinatari mancanti."
 
 #. module: mail_composer_cc_bcc
 #: model:ir.model,name:mail_composer_cc_bcc.model_mail_message
@@ -124,3 +105,19 @@ msgstr "E-mail in uscita"
 #: model_terms:ir.ui.view,arch_db:mail_composer_cc_bcc.view_mail_form_inherit
 msgid "Partners"
 msgstr "Partner"
+
+#, python-format
+#~ msgid ""
+#~ "Error without exception. Probably due do concurrent access update of "
+#~ "notification records. Please see with an administrator."
+#~ msgstr ""
+#~ "Errore senza eccezione. Probabilmente per un accesso concorrente per "
+#~ "aggiornamento record notifiche. Verificare con un amministratore."
+
+#, python-format
+#~ msgid ""
+#~ "Error without exception. Probably due do sending an email without "
+#~ "computed recipients."
+#~ msgstr ""
+#~ "Errore senza eccezione. Probabilmente dovto all'invio di una e-mail con "
+#~ "destinatari mancanti."
