@@ -26,6 +26,8 @@ addon | version | maintainers | summary
 [mail_activity_done](mail_activity_done/) | 17.0.1.0.0 |  | Mail Activity Done
 [mail_activity_team](mail_activity_team/) | 17.0.1.0.0 |  | Add Teams to Activities
 [mail_attach_existing_attachment](mail_attach_existing_attachment/) | 17.0.1.0.0 |  | Adding attachment on the object by sending this one
+[mail_composer_cc_bcc](mail_composer_cc_bcc/) | 17.0.1.0.0 | [![trisdoan](https://github.com/trisdoan.png?size=30px)](https://github.com/trisdoan) | This module enables sending mail to CC and BCC partners in mail composer form.
+[mail_composer_cc_bcc_account](mail_composer_cc_bcc_account/) | 17.0.1.0.0 | [![hailangvn2023](https://github.com/hailangvn2023.png?size=30px)](https://github.com/hailangvn2023) | This module enables sending mail to CC and BCC partners for invoices.
 [mail_debrand](mail_debrand/) | 17.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 17.0.1.0.0 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Apply a custom subject to mail notifications
 [mail_optional_autofollow](mail_optional_autofollow/) | 17.0.1.0.0 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
