@@ -5,7 +5,6 @@ from odoo.tools.mail import email_normalize
 
 
 class MailMail(models.Model):
-
     _inherit = "mail.mail"
 
     def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
@@ -20,4 +19,8 @@ class MailMail(models.Model):
                     and rec.mail_server_id.id != mail_server_suggested.id
                 ):
                     rec.mail_server_id = mail_server_suggested.id
-        return super(MailMail, self)._send(auto_commit, raise_exception, smtp_session)
+        return super(MailMail, self)._send(
+            auto_commit=auto_commit,
+            raise_exception=raise_exception,
+            smtp_session=smtp_session,
+        )
