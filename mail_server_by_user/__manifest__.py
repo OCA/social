@@ -4,7 +4,7 @@
 {
     "name": "Email Server By User",
     "summary": "Email Server By User",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": ("ForgeFlow, " "Odoo Community Association (OCA)"),

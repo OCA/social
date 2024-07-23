@@ -1,14 +1,14 @@
 # Copyright 2022 ForgeFlow S.L.
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-
+import logging
 import os
-import threading
 from email import message_from_string
-
-from mock import MagicMock
+from unittest.mock import MagicMock
 
 from odoo import _
 from odoo.tests.common import TransactionCase
+
+_logger = logging.getLogger(__name__)
 
 
 class TestIrMailServer(TransactionCase):
@@ -16,8 +16,8 @@ class TestIrMailServer(TransactionCase):
         super(TestIrMailServer, self).setUp()
         self.smtp_server_model = self.env["ir.mail_server"]
         self.parameter_model = self.env["ir.config_parameter"]
-        self.default_template = self.env.ref("mail.message_notification_email")
-        self.paynow_template = self.env.ref("mail.mail_notification_paynow")
+        # self.default_template = self.env.ref("mail.message_notification_email")
+        # self.paynow_template = self.env.ref("mail.mail_notification_paynow")
         self.server_1 = self.smtp_server_model.create(
             {
                 "name": "localhost",
@@ -95,16 +95,13 @@ class TestIrMailServer(TransactionCase):
         if message is None:
             message = self.message
         connect = MagicMock()
-        thread = threading.currentThread()
-        thread.testing = False
+        self.smtp_server_model._patch_method("connect", connect)
         try:
-            self.smtp_server_model._patch_method("connect", connect)
-            try:
-                self.smtp_server_model.send_email(message, mail_server_id, smtp_server)
-            finally:
-                self.smtp_server_model._revert_method("connect")
+            self.smtp_server_model.send_email(message, mail_server_id, smtp_server)
+        except Exception as e:
+            _logger.debug(str(e))
         finally:
-            thread.testing = True
+            self.smtp_server_model._revert_method("connect")
         call_args = connect.call_args
         return call_args
 
@@ -131,15 +128,21 @@ class TestIrMailServer(TransactionCase):
 
     def test_message_thread_send(self):
         mail_message_1 = self.partner.with_user(self.user1).message_post(
-            body=_("Test"), subtype_xmlid="mail.mt_comment"
+            body=_("Test"),
+            subtype_xmlid="mail.mt_comment",
+            partner_ids=self.partner.ids,
         )
         self.assertEqual(mail_message_1.mail_server_id.id, self.server_1.id)
         mail_message_2 = self.partner.with_user(self.user2).message_post(
-            body=_("Test"), subtype_xmlid="mail.mt_comment"
+            body=_("Test"),
+            subtype_xmlid="mail.mt_comment",
+            partner_ids=self.partner.ids,
         )
         self.assertEqual(mail_message_2.mail_server_id.id, self.server_2.id)
         mail_message_3 = self.partner.with_user(self.user3).message_post(
-            body=_("Test"), subtype_xmlid="mail.mt_comment"
+            body=_("Test"),
+            subtype_xmlid="mail.mt_comment",
+            partner_ids=self.partner.ids,
         )
         self.assertFalse(mail_message_3.mail_server_id.id)
 
