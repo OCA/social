@@ -30,7 +30,10 @@ class MailActivityMixin(models.AbstractModel):
                 ("team_id", "in", self.env.user.activity_team_ids.ids),
             ]
         )
-        return [('activity_ids', 'any', [('active', 'in', [True, False])]), ("activity_ids", "in", activity_ids)]
+        return [
+            ("activity_ids", "any", [("active", "in", [True, False])]),
+            ("activity_ids", "in", activity_ids),
+        ]
 
     def _search_my_activity_date_deadline(self, operator, operand):
         if not self._context.get("team_activities", False):

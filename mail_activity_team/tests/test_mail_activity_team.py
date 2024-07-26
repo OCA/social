@@ -355,8 +355,10 @@ class TestMailActivityTeam(TransactionCase):
 
     def test_my_team_activity(self):
         """
-        Test the activity of my team by writing data for a specific user and team, then checking the number of partners with the specified activity user ID.
-        Rerurns 2 partners for both user activities and team activities.
+        * Test the activity of my team by writing data for a specific user
+        and team, then checking the number of partners with the specified
+        activity user ID.
+        * Returns 2 partners for both user activities and team activities.
         """
         self.act3.write({"user_id": self.employee2.id, "team_id": self.team2.id})
 
