@@ -33,8 +33,25 @@ msgstr ""
 "documento (si se les permite)</span>"
 
 #. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: mail_optional_follower_notification
+#: model:ir.model,name:mail_optional_follower_notification.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: mail_optional_follower_notification
+#: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.res_config_settings_view_form
+msgid "Default notify followers when the user sending email"
+msgstr ""
+
+#. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__display_name
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_thread__display_name
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_company__display_name
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_config_settings__display_name
 msgid "Display Name"
 msgstr "Mostrar Nombre"
 
@@ -51,12 +68,16 @@ msgstr "Asistente composición Correo Electrónico"
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__id
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_thread__id
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_company__id
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_config_settings__id
 msgid "ID"
 msgstr "ID"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message____last_update
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_thread____last_update
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_company____last_update
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_config_settings____last_update
 msgid "Last Modified on"
 msgstr "Última Modificación el"
 
@@ -64,6 +85,8 @@ msgstr "Última Modificación el"
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_invoice_send__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_tour_upload_bill__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_company__notify_followers
+#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_res_config_settings__notify_followers
 msgid "Notify Followers"
 msgstr "Notificar a los Seguidores"
 
