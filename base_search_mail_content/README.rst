@@ -67,6 +67,15 @@ Usage
 Go to any model that contains a chatter (e.g. Contacts, ...). Search for
 content in field 'Message Content'.
 
+Known issues / Roadmap
+======================
+
+-  This module restricts the message_content search functionality to
+   internal users only, addressing the issue faced by project
+   collaborators (portal users) as described in
+   https://github.com/OCA/social/issues/1204. Consequently, portal users
+   no longer have the ability to search within mail content.
+
 Bug Tracker
 ===========
 
