@@ -27,7 +27,7 @@ patch(Chatter.prototype, "mail_drop_target.mail_drop", {
                 } else if (drop_file.name.endsWith(".eml")) {
                     mail_processor = "message_drop";
                 } else {
-                    this._fileUploaderRef.comp.uploadFiles(ev.detail.files);
+                    this._fileUploaderRef.comp.uploadFiles([drop_file]);
                     this.chatter.update({isAttachmentBoxVisible: true});
                 }
                 if (mail_processor) {
