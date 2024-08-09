@@ -114,11 +114,13 @@ class MailActivity(models.Model):
         MailThread = self.env["mail.thread"]
         utc_now = fields.Datetime.now().replace(tzinfo=UTC)
         for user in self.mapped("user_id"):
-            activities = self.filtered(lambda activity: activity.user_id == user)
+            activities = self.filtered(
+                lambda activity, user=user: activity.user_id == user
+            )
             tz = timezone(user.sudo().tz or "UTC")
             local_now = utc_now.astimezone(tz)
 
-            subject = _("Some activities you are assigned too expire soon.")
+            subject = _("Some activities assigned to you will expire soon.")
 
             body = self.env["ir.qweb"]._render(
                 "mail_activity_reminder.message_activity_assigned",
@@ -130,6 +132,6 @@ class MailActivity(models.Model):
                 body=body,
                 subject=subject,
                 model_description="Activity",
-                notif_layout="mail.mail_notification_light",
+                email_layout_xmlid="mail.mail_notification_light",
             )
             activities.update({"last_reminder_local": local_now.replace(tzinfo=None)})
