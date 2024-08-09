@@ -32,10 +32,10 @@ class MailComposeMessage(models.TransientModel):
         return result
 
     @api.onchange("template_id")
-    def onchange_template_id_wrapper(self):
+    def _onchange_template_id_wrapper(self):
         substitution_template = self._get_substitution_template(
             self.composition_mode, self.template_id, [self.res_id]
         )
         if substitution_template:
             self.template_id = substitution_template
-        return super().onchange_template_id_wrapper()
+        return super()._onchange_template_id_wrapper()
