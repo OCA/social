@@ -1,0 +1,3 @@
+- [CorporateHub](https://corporatehub.eu/)
+  - Alexey Pelykh \<<alexey.pelykh@corphub.eu>\>
+- Denis Roussel \<<denis.roussel@acsone.eu>\>
