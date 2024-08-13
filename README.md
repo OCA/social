@@ -55,7 +55,7 @@ addon | version | maintainers | summary
 [mail_preview_audio](mail_preview_audio/) | 14.0.1.0.0 |  | Allow to preview audio files
 [mail_preview_base](mail_preview_base/) | 14.0.1.0.0 |  | Base to add more previewing options
 [mail_quoted_reply](mail_quoted_reply/) | 14.0.1.0.1 |  | Make a reply using a message
-[mail_restrict_follower_selection](mail_restrict_follower_selection/) | 14.0.1.0.0 |  | Define a domain from which followers can be selected
+[mail_restrict_follower_selection](mail_restrict_follower_selection/) | 14.0.1.1.0 |  | Define a domain from which followers can be selected
 [mail_restrict_send_button](mail_restrict_send_button/) | 14.0.1.1.1 |  | Security for Send Message Button on Chatter Area
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
 [mail_server_by_user](mail_server_by_user/) | 14.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Email Server By User
