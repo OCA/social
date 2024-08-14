@@ -19,6 +19,28 @@
                         </div>
                     </div>
                 </div>
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="mail_tracking_deletion_job_settings"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="mail_tracking_email_max_age_days" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <div class="content-group">
+                            <label
+                                for="mail_tracking_email_max_age_days"
+                                string="Max age in days of mail tracking email records"
+                            />
+                            <div
+                                class="text-muted"
+                                id="mail_tracking_email_max_age_days"
+                            >
+                                If set as positive integer enables the deletion of old mail tracking records to reduce the database size.
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </field>
     </record>
