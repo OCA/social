@@ -3,6 +3,7 @@
 
 from odoo import _, models
 from odoo.tools import format_datetime
+from odoo.tools.misc import html_escape
 
 
 class MailMessage(models.Model):
@@ -26,9 +27,9 @@ class MailMessage(models.Model):
             </blockquote>
             </div>
         """.format(
-            email_from=self.email_from,
+            email_from=html_escape(self.email_from),
             date=format_datetime(self.env, self.date),
-            subject=self.subject,
+            subject=html_escape(self.subject),
             body=self.body,
             signature=self.env.user.signature,
             str_date=_("Date"),
