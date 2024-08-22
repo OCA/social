@@ -18,7 +18,7 @@ class ResUsers(models.Model):
         for item in res:
             user_activities[item["model"]] = item
         # Redo the method only with the archived records and subtract them.
-        query = """SELECT array_agg(res_id) as res_ids, m.id, count(*),
+        query = """SELECT array_agg(res_id) as res_ids, act.res_model, m.id, count(*),
                     CASE
                         WHEN %(today)s::date - act.date_deadline::date = 0 Then 'today'
                         WHEN %(today)s::date - act.date_deadline::date > 0 Then 'overdue'
@@ -28,7 +28,7 @@ class ResUsers(models.Model):
                 JOIN ir_model AS m ON act.res_model_id = m.id
                 WHERE user_id = %(user_id)s
                 AND act.active = False
-                GROUP BY m.id, states;
+                GROUP BY m.id, act.res_model, states;
                 """
         self.env.cr.execute(
             query,
@@ -42,6 +42,9 @@ class ResUsers(models.Model):
             lambda: {"today": set(), "overdue": set(), "planned": set(), "all": set()}
         )
         for data in activity_data:
+            if not user_activities.get(data["res_model"]):
+                # this especially filters out records due to access rights
+                continue
             records_by_state_by_model[data["id"]][data["states"]] = set(data["res_ids"])
             records_by_state_by_model[data["id"]]["all"] = records_by_state_by_model[
                 data["id"]
