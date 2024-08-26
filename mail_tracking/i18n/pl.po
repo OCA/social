@@ -16,9 +16,9 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
-"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
-"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
+"(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
+"n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
@@ -367,6 +367,14 @@ msgid "IP"
 msgstr ""
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_res_config_settings__mail_tracking_email_max_age_days
+#: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
+msgid ""
+"If set as positive integer enables the deletion of old mail tracking records "
+"to reduce the database size."
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_mail__is_failed_message
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_message__is_failed_message
 msgid "Is Failed Message"
@@ -458,6 +466,12 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 msgid "MailTracking events"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_email_max_age_days
+#: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
+msgid "Max age in days of mail tracking email records"
 msgstr ""
 
 #. module: mail_tracking
