@@ -14,6 +14,45 @@ from odoo import api, models
 class MailRenderMixin(models.AbstractModel):
     _inherit = "mail.render.mixin"
 
+    def replace_href_odoo(self, value, to_keep=None):
+        """devostim replace brand"""
+        if len(value) < 20:
+            return value
+
+        back_to_bytes = False
+        back_to_markup = False
+        if isinstance(value, bytes):
+            back_to_bytes = True
+            value = value.decode()
+        if isinstance(value, Markup):
+            back_to_markup = True
+
+        has_dev_odoo_link = re.search(r"<a\s(.*)dev\.odoo\.com", value, flags=re.IGNORECASE)
+        has_odoo_link = re.search(r"<a\s(.*)odoo\.com", value, flags=re.IGNORECASE)
+
+        if has_odoo_link and not has_dev_odoo_link:
+            if to_keep:
+                value = value.replace(to_keep, "<body_msg></body_msg>")
+            
+            tree = html.fromstring(value)
+            odoo_anchors = tree.xpath('//a[contains(@href,"odoo.com")]')
+            
+            for elem in odoo_anchors:
+                elem.set("href", self.env.company.website or "#")
+                elem.text = self.env.company.name or ""
+            
+            value = etree.tostring(tree, pretty_print=True, method="html", encoding="unicode")
+            
+            if to_keep:
+                value = value.replace("<body_msg></body_msg>", to_keep)
+        
+        if back_to_bytes:
+            value = value.encode()
+        elif back_to_markup:
+            value = Markup(value)
+        
+        return value
+
     def remove_href_odoo(self, value, to_keep=None):
         if len(value) < 20:
             return value
@@ -81,6 +120,7 @@ class MailRenderMixin(models.AbstractModel):
           ``_render_template_postprocess``)
 
         :return dict: {res_id: string of rendered template based on record}"""
+        replace = self.env['ir.config_parameter'].sudo().get_param('mail_debrand.action', 'remove') == 'replace'
         orginal_rendered = super()._render_template(
             template_src,
             model,
@@ -91,6 +131,6 @@ class MailRenderMixin(models.AbstractModel):
         )
 
         for key in res_ids:
-            orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key])
+            orginal_rendered[key] = self.remove_href_odoo(orginal_rendered[key]) if not replace else self.replace_href_odoo(orginal_rendered[key])
 
         return orginal_rendered
