@@ -322,6 +322,9 @@ class TestMailActivityTeam(TransactionCase):
         self.assertEqual(partner.activity_ids[-1].team_id, self.team2)
 
     def test_my_activity_date_deadline(self):
+        """This test case checks
+        - if the team activities are properly filtered
+        """
         today = date.today()
         self.act2.write(
             {
