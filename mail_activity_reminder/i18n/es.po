@@ -54,13 +54,17 @@ msgid "Deadline"
 msgstr "Fecha límite"
 
 #. module: mail_activity_reminder
+#: model:ir.model,name:mail_activity_reminder.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_activity_reminder
 #: model:ir.model.fields,field_description:mail_activity_reminder.field_mail_activity__last_reminder_local
 msgid "Last reminder (local)"
 msgstr "Último recordatorio (local)"
 
 #. module: mail_activity_reminder
 #: model:ir.actions.server,name:mail_activity_reminder.mail_activity_reminder_ir_actions_server
-#: model:ir.cron,cron_name:mail_activity_reminder.mail_activity_reminder
 msgid "Mail Activity: Reminders"
 msgstr "Actividad de correo: Recordatorios"
 
