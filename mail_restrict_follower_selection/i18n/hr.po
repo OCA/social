@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_restrict_follower_selection
+#
+# Translators:
+# Bole <bole@dajmi5.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-29 14:24+0000\n"
+"PO-Revision-Date: 2016-11-29 14:24+0000\n"
+"Last-Translator: Bole <bole@dajmi5.com>, 2016\n"
+"Language-Team: Croatian (https://www.transifex.com/oca/teams/23907/hr/)\n"
+"Language: hr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.actions.act_window,name:mail_restrict_follower_selection.action_setup
+msgid "Configure the restriction on followers"
+msgstr "Postavi ograničenja na pratitelje"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_followers
+msgid "Document Followers"
+msgstr ""
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
+msgid "Invite wizard"
+msgstr "Čarobnjak za pozivnce"
