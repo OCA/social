@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="mass_mailing_contact_active_view_inherit_mass_mailing_contact_tree"
+        model="ir.ui.view"
+    >
+        <field name="model">mailing.contact</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_contact_view_tree" />
+        <field name="arch" type="xml">
+            <field name="message_bounce" position="after">
+                <field name="active" column_invisible="True" />
+            </field>
+        </field>
+    </record>
+</odoo>
