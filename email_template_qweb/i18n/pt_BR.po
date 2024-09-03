@@ -1,0 +1,86 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * email_template_qweb
+#
+# Translators:
+# falexandresilva <falexandresilva@gmail.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-22 00:50+0000\n"
+"PO-Revision-Date: 2023-12-22 11:54+0000\n"
+"Last-Translator: Adriano Prado <adrianojprado@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_id
+msgid "Body View"
+msgstr "Visualizar Corpo"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_type
+msgid "Body templating engine"
+msgstr "Motor de modelagem do corpo"
+
+#. module: email_template_qweb
+#: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
+msgid "Dear"
+msgstr "Caro"
+
+#. module: email_template_qweb
+#: model:ir.model,name:email_template_qweb.model_mail_template
+msgid "Email Templates"
+msgstr "Modelos de E-mail"
+
+#. module: email_template_qweb
+#: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__qweb
+msgid "QWeb"
+msgstr "Qweb"
+
+#. module: email_template_qweb
+#: model:ir.model.fields.selection,name:email_template_qweb.selection__mail_template__body_type__qweb_view
+msgid "QWeb View"
+msgstr "Visão Qweb"
+
+#. module: email_template_qweb
+#: model:mail.template,name:email_template_qweb.email_template_demo1
+msgid "QWeb demo"
+msgstr "Demo Qweb"
+
+#. module: email_template_qweb
+#: model:mail.template,subject:email_template_qweb.email_template_demo1
+msgid "QWeb demo email"
+msgstr "E-mail de demonstração QWeb"
+
+#. module: email_template_qweb
+#: model:ir.model.fields,help:email_template_qweb.field_mail_template__body_view_arch
+msgid ""
+"This field should be used when accessing view arch. It will use "
+"translation.\n"
+"                               Note that it will read `arch_db` or `arch_fs` "
+"if in dev-xml mode."
+msgstr ""
+"Este campo deve ser usado ao acessar o view arch. Ele usará tradução.\n"
+"                                Observe que ele lerá `arch_db` ou `arch_fs` "
+"se estiver no modo dev-xml."
+
+#. module: email_template_qweb
+#: model_terms:ir.ui.view,arch_db:email_template_qweb.view_email_template_demo1
+msgid "This is an email template using qweb."
+msgstr "Este é um modelo de e-mail usando o qweb."
+
+#. module: email_template_qweb
+#: model:ir.model.fields,field_description:email_template_qweb.field_mail_template__body_view_arch
+msgid "View Architecture"
+msgstr "Ver Arquitetura"
+
+#~ msgid "Jinja2"
+#~ msgstr "Jinja2"
