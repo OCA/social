@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_form" model="ir.ui.view">
+        <field name="name">Partner Marketing tags</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//form//sheet//group//group//field[@name='website']"
+                position="before"
+            >
+                <field name="no_bounce_email" />
+                <field name="is_automatic_reply_address" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
