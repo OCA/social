@@ -9,7 +9,12 @@ class MailMail(models.AbstractModel):
     _inherit = "mail.mail"
 
     def _prepare_outgoing_body(self):
+        replace = self.env['ir.config_parameter'].sudo().get_param('mail_debrand.action', 'remove') == 'replace'
         body_html = super()._prepare_outgoing_body()
+        if replace:
+            return self.env["mail.render.mixin"].replace_href_odoo(
+                body_html or "", to_keep=self.body
+            )
         return self.env["mail.render.mixin"].remove_href_odoo(
             body_html or "", to_keep=self.body
         )
