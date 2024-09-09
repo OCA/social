@@ -60,7 +60,7 @@ addon | version | maintainers | summary
 [mail_send_copy](mail_send_copy/) | 14.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
 [mail_server_by_user](mail_server_by_user/) | 14.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Email Server By User
 [mail_show_follower](mail_show_follower/) | 14.0.1.1.0 |  | Show CC document followers in mails.
-[mail_template_multi_attachment](mail_template_multi_attachment/) | 14.0.1.0.0 |  | Module that allows to generate multi attachments on an email template.
+[mail_template_multi_attachment](mail_template_multi_attachment/) | 14.0.1.1.0 |  | Module that allows to generate multi attachments on an email template.
 [mail_thread_create_nolog](mail_thread_create_nolog/) | 14.0.1.0.0 | [![sebalix](https://github.com/sebalix.png?size=30px)](https://github.com/sebalix) | Display a fake (non-stored) create log in the chatter.
 [mail_tracking](mail_tracking/) | 14.0.3.2.0 |  | Email tracking system for all mails sent
 [mail_tracking_mailgun](mail_tracking_mailgun/) | 14.0.2.1.0 |  | Mail tracking and Mailgun webhooks integration
