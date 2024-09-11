@@ -44,7 +44,7 @@ class IrMailServer(models.Model):
             # https://tools.ietf.org/html/rfc3834
             message["Auto-Submitted"] = "auto-generated"
 
-        return super(IrMailServer, self).send_email(
+        return super().send_email(
             message,
             mail_server_id=mail_server_id,
             smtp_server=smtp_server,
