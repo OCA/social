@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-09-11 18:25+0000\n"
+"PO-Revision-Date: 2024-09-11 18:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,6 +18,21 @@ msgstr ""
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "%(partner_name)s <%(partner_email)s>"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "- %(partner_email)s = Partner Email"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "- %(partner_email_domain)s = Partner Email Domain"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "- %(partner_name)s = Partner Name"
 msgstr ""
 
 #. module: mail_show_follower
@@ -31,6 +48,11 @@ msgstr ""
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_partner
 msgid "Contact"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Include internal users on the list of recipients."
 msgstr ""
 
 #. module: mail_show_follower
@@ -56,7 +78,7 @@ msgstr ""
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
-msgid "Show Followers on mails"
+msgid "Prefix Text"
 msgstr ""
 
 #. module: mail_show_follower
@@ -73,6 +95,11 @@ msgstr ""
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_users__show_in_cc
 msgid "Show in CC"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Supported Parameters:"
 msgstr ""
 
 #. module: mail_show_follower
@@ -105,4 +132,9 @@ msgstr ""
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_users
 msgid "User"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Warning Text"
 msgstr ""
