@@ -87,7 +87,7 @@ class TestMailTemplateSubstitute(TransactionCase):
         self.smt1.mail_template_substitution_rule_ids.domain = "[]"
         self.mail_compose.with_context(
             active_ids=self.partners.ids
-        ).onchange_template_id_wrapper()
+        )._onchange_template_id_wrapper()
         self.assertEqual(self.mail_compose.template_id, self.smt2)
 
     def test_default_get(self):
