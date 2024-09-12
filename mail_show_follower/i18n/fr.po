@@ -1,0 +1,119 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_show_follower
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-01-19 15:32+0000\n"
+"Last-Translator: Yann Papouin <ypa@decgroupe.com>\n"
+"Language-Team: none\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "%(partner_name)s <%(partner_email)s>"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model,name:mail_show_follower.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: mail_show_follower
+#: model:ir.model,name:mail_show_follower.model_res_config_settings
+msgid "Config Settings"
+msgstr "Paramétrage"
+
+#. module: mail_show_follower
+#: model:ir.model,name:mail_show_follower.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_preview
+msgid "Message preview"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Notice: Replies to this email will be sent to all recipients."
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model,name:mail_show_follower.model_mail_mail
+msgid "Outgoing Mails"
+msgstr "Courriels à envoyer"
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_partner_format
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_partner_format
+msgid "Partner format"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Show Followers on mails"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_internal_users_cc
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_internal_users_cc
+msgid "Show Internal Users CC"
+msgstr "Afficher les utilisateurs internes en « Copie à (CC) »"
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Show Internal Users on CC"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_users__show_in_cc
+msgid "Show in CC"
+msgstr "Afficher dans « Copie à (CC) »"
+
+#. module: mail_show_follower
+#: model:ir.model.fields,help:mail_show_follower.field_res_company__show_followers_partner_format
+#: model:ir.model.fields,help:mail_show_follower.field_res_config_settings__show_followers_partner_format
+msgid ""
+"Supported parameters:\n"
+"%(partner_name)s = Partner Name\n"
+"%(partner_email)s = Partner Email\n"
+"%(partner_email_domain)s = Partner Email Domain"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_response_warning
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_response_warning
+msgid "Text 'Replies'"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_sent_to
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_sent_to
+msgid "Text 'Sent to'"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "This message has been sent to"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model,name:mail_show_follower.model_res_users
+msgid "User"
+msgstr ""
+
+#~ msgid "Users"
+#~ msgstr "Utilisateurs"
+
+#~ msgid "Add internal users in cc mails details"
+#~ msgstr ""
+#~ "Ajouter les utilisateurs internes dans l'entête « Copie à (CC) » des e-"
+#~ "mails"
