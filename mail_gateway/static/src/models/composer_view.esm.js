@@ -23,7 +23,6 @@ registerPatch({
                 const attachmentIds = this.composer.attachments.map(
                     (attachment) => attachment.id
                 );
-                console.log(this);
                 const context = {
                     default_attachment_ids: attachmentIds,
                     default_body: escapeAndCompactTextContent(
@@ -35,12 +34,21 @@ registerPatch({
                     ),
                     default_res_id: this.composer.activeThread.id,
                     mail_post_autofollow: this.composer.activeThread.hasWriteAccess,
-                    default_wizard_partner_ids:
-                        this.composer.composerGatewayFollowers.map((follower) => {
-                            return follower._getMessageData();
-                        }),
+                    default_wizard_partner_ids: Array.from(
+                        new Set(
+                            this.composer.composerGatewayFollowers.map((follower) => {
+                                return follower.follower.partner.id;
+                            })
+                        )
+                    ),
+                    default_wizard_channel_ids: Array.from(
+                        new Set(
+                            this.composer.composerGatewayFollowers.map((follower) => {
+                                return follower.channel;
+                            })
+                        )
+                    ),
                 };
-                console.log(context);
                 const action = {
                     type: "ir.actions.act_window",
                     name: this.env._t("Gateway message"),

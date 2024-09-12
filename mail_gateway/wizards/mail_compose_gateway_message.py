@@ -9,8 +9,17 @@ class MailComposeGatewayMessage(models.TransientModel):
     _inherit = "mail.compose.message"
     _description = "Mail Compose Gateway Message"
 
-    wizard_partner_ids = fields.One2many(
-        "mail.compose.gateway.message.partner", "wizard_id", "Recipents"
+    wizard_partner_ids = fields.Many2many(
+        "res.partner",
+        "mail_compose_gateway_message_res_partner_rel",
+        "wizard_id",
+        "partner_id",
+    )
+    wizard_channel_ids = fields.Many2many(
+        "res.partner.gateway.channel",
+        "mail_compose_gateway_message_gateway_channel_rel",
+        "wizard_id",
+        "channel_id",
     )
     attachment_ids = fields.Many2many(
         "ir.attachment",
@@ -34,21 +43,10 @@ class MailComposeGatewayMessage(models.TransientModel):
         res = super(MailComposeGatewayMessage, self).get_mail_values(res_ids)
         res[res_ids[0]]["gateway_notifications"] = [
             {
-                "partner_id": partner.partner_id.id,
-                "channel_type": partner.channel_type,
-                "gateway_channel_id": partner.gateway_channel_id.id,
+                "partner_id": channel.partner_id.id,
+                "channel_type": "gateway",
+                "gateway_channel_id": channel.id,
             }
-            for partner in self.wizard_partner_ids
+            for channel in self.wizard_channel_ids
         ]
         return res
-
-
-class MailComposeGatewayMessagePartner(models.TransientModel):
-    _name = "mail.compose.gateway.message.partner"
-
-    wizard_id = fields.Many2one(
-        "mail.compose.gateway.message", "Wizard", required=True, ondelete="cascade"
-    )
-    partner_id = fields.Many2one("res.partner", "Contact", required=True, readonly=True)
-    gateway_channel_id = fields.Many2one("res.partner.gateway.channel", "Channel")
-    channel_type = fields.Char()

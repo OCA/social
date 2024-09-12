@@ -12,21 +12,13 @@
                 <attribute name="invisible">1</attribute>
             </field>
             <field name="body" position="before">
-                <field name="wizard_partner_ids">
-                    <tree create="0" editable="bottom">
-                        <field
-                            name="partner_id"
-                            options="{'no_create': True, 'no_open': True}"
-                            force_save="1"
-                        />
-                        <field
-                            name="gateway_channel_id"
-                            domain="[('partner_id', '=', partner_id)]"
-                            options="{'no_open': 1, 'no_create': 1}"
-                        />
-                        <field name="channel_type" invisible="1" />
-                    </tree>
-                </field>
+                <field name="wizard_partner_ids" invisible="1" />
+                <field
+                    name="wizard_channel_ids"
+                    widget="many2many_tags"
+                    context="{'mail_gateway_partner_info': 1}"
+                    domain="[('partner_id', 'in', wizard_partner_ids)]"
+                />
             </field>
             <field name="subject" position="attributes">
                 <attribute name="invisible">1</attribute>
