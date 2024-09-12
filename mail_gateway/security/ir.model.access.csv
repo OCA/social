@@ -7,3 +7,4 @@ access_mail_gateway_all,mail.telegram.bot.all,model_mail_gateway,,1,0,0,0
 access_mail_guest_manage,mail.telegram.bot.all,model_mail_guest_manage,base.group_user,1,1,1,1
 access_mail_message_gateway_link,mail.message.link.all,model_mail_message_gateway_link,base.group_user,1,1,1,1
 access_mail_gateway_system,mail_gateway,model_mail_gateway,base.group_system,1,1,1,1
+access_mail_compose_gateway_message,access.mail.compose.gateway.message,model_mail_compose_gateway_message,base.group_user,1,1,1,0
