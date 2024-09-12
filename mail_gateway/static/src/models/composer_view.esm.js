@@ -1,6 +1,7 @@
 /** @odoo-module **/
 
 import {clear} from "@mail/model/model_field_command";
+import {escapeAndCompactTextContent} from "@mail/js/utils";
 import {one} from "@mail/model/model_field";
 import {registerPatch} from "@mail/model/model_core";
 
@@ -17,6 +18,55 @@ registerPatch({
             }
             return result;
         },
+        async openFullComposer() {
+            if (this.composer.isGateway) {
+                const attachmentIds = this.composer.attachments.map(
+                    (attachment) => attachment.id
+                );
+                console.log(this);
+                const context = {
+                    default_attachment_ids: attachmentIds,
+                    default_body: escapeAndCompactTextContent(
+                        this.composer.textInputContent
+                    ),
+                    default_model: this.composer.activeThread.model,
+                    default_partner_ids: this.composer.recipients.map(
+                        (partner) => partner.id
+                    ),
+                    default_res_id: this.composer.activeThread.id,
+                    mail_post_autofollow: this.composer.activeThread.hasWriteAccess,
+                    default_wizard_partner_ids:
+                        this.composer.composerGatewayFollowers.map((follower) => {
+                            return follower._getMessageData();
+                        }),
+                };
+                console.log(context);
+                const action = {
+                    type: "ir.actions.act_window",
+                    name: this.env._t("Gateway message"),
+                    res_model: "mail.compose.gateway.message",
+                    view_mode: "form",
+                    views: [[false, "form"]],
+                    target: "new",
+                    context: context,
+                };
+                const composer = this.composer;
+                const options = {
+                    onClose: () => {
+                        if (!composer.exists()) {
+                            return;
+                        }
+                        composer._reset();
+                        if (composer.activeThread) {
+                            composer.activeThread.fetchData(["messages"]);
+                        }
+                    },
+                };
+                await this.env.services.action.doAction(action, options);
+                return;
+            }
+            return await this._super(...arguments);
+        },
     },
     fields: {
         hasFollowers: {
@@ -30,17 +80,6 @@ registerPatch({
         hasHeader: {
             compute() {
                 return Boolean(this._super() || this.composer.isGateway);
-            },
-        },
-        isExpandable: {
-            /*
-                We will not allow to expand on this composer due to all complexity of selection
-            */
-            compute() {
-                if (this.composer.isGateway) {
-                    return clear();
-                }
-                return this._super();
             },
         },
         composerGatewayChannelView: one("GatewayChannelView", {
