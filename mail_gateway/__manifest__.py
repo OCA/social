@@ -12,6 +12,7 @@
     "depends": ["mail"],
     "pre_init_hook": "pre_init_hook",
     "data": [
+        "wizards/mail_compose_gateway_message.xml",
         "wizards/mail_message_gateway_link.xml",
         "wizards/mail_message_gateway_send.xml",
         "wizards/mail_guest_manage.xml",

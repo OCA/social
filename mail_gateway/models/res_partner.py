@@ -66,6 +66,23 @@ class ResPartnerGatewayChannel(models.Model):
         "res.company", related="gateway_id.company_id", store=True
     )
 
+    def name_get(self):
+        result = []
+        origin = super().name_get()
+        if not self.env.context.get("mail_gateway_partner_info", False):
+            return origin
+        origin_dict = dict(origin)
+        for record in self:
+            result.append(
+                (
+                    record.id,
+                    "{} ({})".format(
+                        record.partner_id.display_name, origin_dict[record.id]
+                    ),
+                )
+            )
+        return result
+
     _sql_constraints = [
         (
             "unique_partner_gateway",
