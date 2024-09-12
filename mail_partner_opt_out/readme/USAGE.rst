@@ -5,3 +5,8 @@ will be removed from the blacklist.
 
 You can also filter for the Blacklist attribute, to see all the partner's that
 their email has been added to the blacklist.
+
+To add or remove emails to the blacklist in mass, go to the partners list view and select
+the records of partners that must be added or removed from the blacklist. Press action,
+and then "Add To Blacklist" or "Remove From Blacklist". For the remove case, a wizard will
+open where you can specify the reason of the removal.

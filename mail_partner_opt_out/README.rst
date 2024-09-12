@@ -30,7 +30,9 @@ Mail Partner Opt Out
 
 This module adds the capability for a user to add a partner's email address
 to the blackmail list so that she will not receive any emails from mass
-mailing campaigns
+mailing campaigns.
+It also allows the users to add or remove emails from the blacklist in mass,
+by adding an action on the res.partner list view.
 
 **Table of contents**
 
@@ -47,6 +49,11 @@ will be removed from the blacklist.
 
 You can also filter for the Blacklist attribute, to see all the partner's that
 their email has been added to the blacklist.
+
+To add or remove emails to the blacklist in mass, go to the partners list view and select
+the records of partners that must be added or removed from the blacklist. Press action,
+and then "Add To Blacklist" or "Remove From Blacklist". For the remove case, a wizard will
+open where you can specify the reason of the removal.
 
 Bug Tracker
 ===========
@@ -72,6 +79,7 @@ Contributors
 * ForgeFlow, S.L. (contact@forgeflow.com)
 
     * Jordi Ballester Alomar (jordi.ballester@forgeflow.com)
+    * Marina Alapont (marina.alapont@forgeflow.com)
 
 Maintainers
 ~~~~~~~~~~~
