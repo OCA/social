@@ -58,7 +58,13 @@ class MailMail(models.Model):
         )
         return full_text
 
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None, alias_domain_id=False):
+    def _send(
+        self,
+        auto_commit=False,
+        raise_exception=False,
+        smtp_session=None,
+        alias_domain_id=False,
+    ):
         group_user = self.env.ref("base.group_user")
 
         for mail in self:

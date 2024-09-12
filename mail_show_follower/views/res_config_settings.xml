@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <record id="res_config_settings_view_form" model="ir.ui.view">
-        <field name="name">res.config.settings.view.form.inherit.mail.show.follower</field>
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.mail.show.follower</field>
         <field name="model">res.config.settings</field>
         <field name="inherit_id" ref="mail.res_config_settings_view_form" />
         <field name="arch" type="xml">
@@ -10,34 +12,72 @@
                     <div class="content-group">
                         <div>
                             <div>
-                                <field name="show_internal_users_cc" class="w-auto"/>
-                                <label for="show_internal_users_cc" string="Show Internal Users on CC"/>
+                                <field name="show_internal_users_cc" class="w-auto" />
+                                <label
+                                    for="show_internal_users_cc"
+                                    string="Show Internal Users on CC"
+                                />
                                 <div class="text-muted">
                                         Include internal users on the list of recipients.
                                 </div>
                             </div>
                             <div class="row mt8">
-                                <label for="show_followers_partner_format" class="col-lg-4"/>
-                                <field name="show_followers_partner_format" placeholder="%%(partner_name)s &lt;%%(partner_email)s&gt;"/>
+                                <label
+                                    for="show_followers_partner_format"
+                                    class="col-lg-4"
+                                />
+                                <field
+                                    name="show_followers_partner_format"
+                                    placeholder="%%(partner_name)s &lt;%%(partner_email)s&gt;"
+                                />
                                 <div class="text-muted">
-                                    <p style="margin-bottom: 0">Supported Parameters:</p>
-                                    <p style="margin-bottom: 0"> - %%(partner_name)s = Partner Name</p>
-                                    <p style="margin-bottom: 0"> - %%(partner_email)s = Partner Email</p>
-                                    <p style="margin-bottom: 0"> - %%(partner_email_domain)s = Partner Email Domain</p>
+                                    <p
+                                        style="margin-bottom: 0"
+                                    >Supported Parameters:</p>
+                                    <p
+                                        style="margin-bottom: 0"
+                                    > - %%(partner_name)s = Partner Name</p>
+                                    <p
+                                        style="margin-bottom: 0"
+                                    > - %%(partner_email)s = Partner Email</p>
+                                    <p
+                                        style="margin-bottom: 0"
+                                    > - %%(partner_email_domain)s = Partner Email Domain</p>
                                 </div>
                             </div>
                             <div class="mt8">
-                                <label for="show_followers_message_sent_to" string="Prefix Text"/>
-                                <field name="show_followers_message_sent_to" placeholder="This message has been sent to" class="w-100"/>
+                                <label
+                                    for="show_followers_message_sent_to"
+                                    string="Prefix Text"
+                                />
+                                <field
+                                    name="show_followers_message_sent_to"
+                                    placeholder="This message has been sent to"
+                                    class="w-100"
+                                />
                             </div>
                             <div class="mt8">
-                                <label for="show_followers_message_response_warning" string="Warning Text"/>
-                                <field name="show_followers_message_response_warning" placeholder="Notice: Replies to this email will be sent to all recipients." class="w-100"/>
+                                <label
+                                    for="show_followers_message_response_warning"
+                                    string="Warning Text"
+                                />
+                                <field
+                                    name="show_followers_message_response_warning"
+                                    placeholder="Notice: Replies to this email will be sent to all recipients."
+                                    class="w-100"
+                                />
                             </div>
                         </div>
                         <div class="mt8">
-                            <label for="show_followers_message_preview" class="text-muted"/>
-                            <field name="show_followers_message_preview" widget="html" class="w-100"/>
+                            <label
+                                for="show_followers_message_preview"
+                                class="text-muted"
+                            />
+                            <field
+                                name="show_followers_message_preview"
+                                widget="html"
+                                class="w-100"
+                            />
                         </div>
                     </div>
                 </setting>
