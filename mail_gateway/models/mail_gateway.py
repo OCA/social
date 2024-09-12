@@ -113,7 +113,7 @@ class MailGateway(models.Model):
     @tools.ormcache()
     def _get_gateway_map(self, state="integrated", gateway_type=False):
         result = {}
-        for record in self.search(
+        for record in self.sudo().search(
             [
                 ("integrated_webhook_state", "=", state),
                 ("gateway_type", "=", gateway_type),
@@ -125,6 +125,7 @@ class MailGateway(models.Model):
     def _get_gateway_data(self):
         return {
             "id": self.id,
+            "company_id": self.company_id.id,
             "webhook_secret": self.webhook_secret,
             "webhook_user_id": self.webhook_user_id.id,
         }
