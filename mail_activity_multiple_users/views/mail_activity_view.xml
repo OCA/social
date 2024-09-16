@@ -1,0 +1,30 @@
+<odoo>
+    <record model="ir.ui.view" id="mail_activity_view_form_popup">
+        <field name="name">mail_activity_view_form_popup</field>
+        <field name="inherit_id" ref="mail.mail_activity_view_form_popup" />
+        <field name="model">mail.activity</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible':['|',('is_multiple_users_activity', '!=',
+                    False),'&amp;',('is_module_calendar_installed', '!=',
+                    False),('activity_category', '=', 'meeting')],
+                    'required':[('is_multiple_users_activity', '!=', True)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field name="id" invisible="1" />
+                <field name="is_module_calendar_installed" invisible="1" />
+                <field
+                    name="user_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible':[('is_multiple_users_activity', '!=', True)], 'required':[('is_multiple_users_activity', '!=', False)]}"
+                />
+                <field
+                    name="is_multiple_users_activity"
+                    attrs="{'invisible': ['|',('id', '!=', False),'&amp;',('is_module_calendar_installed', '!=', False),('activity_category', '=', 'meeting')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
