@@ -5,7 +5,7 @@
 
 import logging
 from collections import namedtuple
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import urljoin
 
 import requests
@@ -103,7 +103,7 @@ class MailTrackingEmail(models.Model):
         except Exception:
             ts = False
         if ts:
-            dt = datetime.utcfromtimestamp(ts)
+            dt = datetime.fromtimestamp(ts, timezone.utc)
             metadata.update(
                 {
                     "timestamp": ts,
