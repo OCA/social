@@ -6,167 +6,169 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-09-23 16:06+0000\n"
+"Last-Translator: Bastian Günther <mail@bastian-guenther.de>\n"
 "Language-Team: none\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__active
 msgid "Active"
-msgstr ""
+msgstr "Aktiv"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity
 msgid "Activity"
-msgstr ""
+msgstr "Aktivität"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity_mixin
 msgid "Activity Mixin"
-msgstr ""
+msgstr "Aktivität Mixen"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_ir_actions_server__activity_team_id
 #: model:ir.model.fields,field_description:mail_activity_team.field_ir_cron__activity_team_id
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Activity Team"
-msgstr ""
+msgstr "Aktivitäts-Team"
 
 #. module: mail_activity_team
 #: model:ir.actions.act_window,name:mail_activity_team.mail_activity_team_action
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_ids
 #: model:ir.ui.menu,name:mail_activity_team.menu_mail_activity_team
 msgid "Activity Teams"
-msgstr ""
+msgstr "Aktivitäts-Teams"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity_type
 msgid "Activity Type"
-msgstr ""
+msgstr "Aktivitätstyp"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Archived"
-msgstr ""
+msgstr "Archiviert"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Assign to missing activities"
-msgstr ""
+msgstr "Nicht zugewiesene Aktivitäten zuweisen"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Erstellt von"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Erstellt am"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_type__default_team_id
 msgid "Default Team"
-msgstr ""
+msgstr "Standard-Team"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Zuletzt aktualisiert am"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_mail_activity_team
 msgid "Mail Activity Team"
-msgstr ""
+msgstr "Team Aktivitätsbenachrichtigung"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Members"
-msgstr ""
+msgstr "Mitglieder"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__count_missing_activities
 msgid "Missing Activities"
-msgstr ""
+msgstr "Nicht zugewiesene Aktivitäten"
 
 #. module: mail_activity_team
 #. odoo-javascript
 #: code:addons/mail_activity_team/static/src/components/activity_menu_view/activity_menu_view.xml:0
 #, python-format
 msgid "My Activities"
-msgstr ""
+msgstr "Meine Aktivitäten"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "My Team Activities"
-msgstr ""
+msgstr "Meine Team-Aktivitäten"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__name
 msgid "Name"
-msgstr ""
+msgstr "Name"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_ir_actions_server
 msgid "Server Action"
-msgstr ""
+msgstr "Serveraktion"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_id
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_search
 msgid "Team"
-msgstr ""
+msgstr "Team"
 
 #. module: mail_activity_team
 #. odoo-javascript
 #: code:addons/mail_activity_team/static/src/components/activity_menu_view/activity_menu_view.xml:0
 #, python-format
 msgid "Team Activities"
-msgstr ""
+msgstr "Team Aktivitäten"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__user_id
 msgid "Team Leader"
-msgstr ""
+msgstr "Teamleiter"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__member_ids
 msgid "Team Members"
-msgstr ""
+msgstr "Team-Mitglieder"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
 msgid "Team user"
-msgstr ""
+msgstr "Team-Benutzer"
 
 #. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_view_kanban
 msgid "Team:"
-msgstr ""
+msgstr "Team:"
 
 #. module: mail_activity_team
 #. odoo-python
@@ -175,17 +177,19 @@ msgstr ""
 msgid ""
 "The assigned user %(user_name)s is not member of the team %(team_name)s."
 msgstr ""
+"Der zugewiesene Benutzer %(user_name)s ist kein Mitglied des Teams "
+"%(team_name)s."
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_team__res_model_ids
 msgid "Used models"
-msgstr ""
+msgstr "Verwendete Modelle"
 
 #. module: mail_activity_team
 #: model:ir.model,name:mail_activity_team.model_res_users
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__user_id
 msgid "User"
-msgstr ""
+msgstr "Benutzer"
 
 #. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_account_bank_statement_line__activity_team_user_ids
@@ -203,4 +207,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner_bank__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
 msgid "test field"
-msgstr ""
+msgstr "Test-Feld"
