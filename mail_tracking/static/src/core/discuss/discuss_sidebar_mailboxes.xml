@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <templates xml:space="preserve">
     <t
-        t-name="mail_tracking.Mailbox"
-        t-inherit="mail.Mailbox"
+        t-name="mail_tracking.Mailbox.main"
+        t-inherit="mail.Mailbox.main"
         t-inherit-mode="extension"
     >
         <xpath expr="//span[@t-esc='mailbox.counter']" position="attributes">
@@ -18,11 +18,9 @@
         t-inherit-mode="extension"
     >
         <xpath expr="//div" position="inside">
-            <t t-call="mail.Mailbox">
-                <t t-set="mailbox" t-value="store.discuss.failed" />
-            </t>
+            <Mailbox mailbox="store.failed" />
         </xpath>
-    </t>
+        </t>
     <t
         t-name="mail_tracking.Discuss.mobileTopbar"
         t-inherit="mail.Discuss.mobileTopbar"
@@ -30,7 +28,7 @@
     >
         <xpath expr="//div" position="inside">
             <t t-call="mail.MobileMailbox">
-                <t t-set="mailbox" t-value="store.discuss.failed" />
+                <t t-set="mailbox" t-value="store.failed" />
             </t>
         </xpath>
     </t>

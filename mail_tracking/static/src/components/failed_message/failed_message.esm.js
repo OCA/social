@@ -1,4 +1,3 @@
-/** @odoo-module **/
 import {AvatarCardPopover} from "@mail/discuss/web/avatar_card/avatar_card_popover";
 import {FailedMessageReview} from "@mail_tracking/components/failed_message_review/failed_message_review.esm";
 import {MessageTracking} from "@mail_tracking/components/message_tracking/message_tracking.esm";
@@ -6,8 +5,7 @@ import {RelativeTime} from "@mail/core/common/relative_time";
 import {url} from "@web/core/utils/urls";
 import {usePopover} from "@web/core/popover/popover_hook";
 import {useService} from "@web/core/utils/hooks";
-
-const {Component, useState} = owl;
+import {Component, toRaw, useState} from "@odoo/owl";
 
 export class FailedMessage extends Component {
     static props = ["message", "onUpdate?", "reloadParentView"];
@@ -21,8 +19,8 @@ export class FailedMessage extends Component {
     };
 
     setup() {
+        this.store = useState(useService("mail.store"));
         this.avatarCard = usePopover(AvatarCardPopover);
-        this.threadService = useState(useService("mail.thread"));
         this.state = useState({showDetails: false});
         this.message = useState(this.props.message);
         this.orm = useService("orm");
@@ -32,31 +30,25 @@ export class FailedMessage extends Component {
             [this.message.id],
         ]);
         // Debugger
-        const thread = this.env.services["mail.thread"].getThread(
-            this.message.model,
-            this.message.id
-        );
-        this.env.services["mail.thread"].fetchNewMessages(thread);
+        this.thread.fetchNewMessages();
         this.props.reloadParentView();
     }
     retryFailedMessage() {
+        const message = toRaw(this.message);
         this.env.services.action.doAction("mail.mail_resend_message_action", {
             additionalContext: {
-                mail_message_to_resend: this.message.id,
+                mail_message_to_resend: message.id,
             },
             onClose: async () => {
                 // Check if message is still 'failed' after Retry
                 await this.orm.call("mail.message", "get_failed_messages", [
-                    [this.message.id],
+                    [message.id],
                 ]);
             },
         });
     }
     async onClickJump() {
-        await this.env.messageHighlight?.highlightMessage(
-            this.message,
-            this.message.originThread
-        );
+        await this.env.messageHighlight?.highlightMessage(this.message, this.thread);
     }
     toggleDetails() {
         this.state.showDetails = !this.state.showDetails;
@@ -89,16 +81,14 @@ export class FailedMessage extends Component {
         ) {
             return url("/mail/static/src/img/email_icon.png");
         }
-        return this.threadService.avatarUrl(
-            this.message.author,
-            this.message.originThread
-        );
+        if (this.message.author) {
+            return this.message.author.avatarUrl;
+        }
+
+        return this.store.DEFAULT_AVATAR;
     }
     get thread() {
-        return this.threadService.getThread(
-            this.message.res_model,
-            this.message.res_id
-        );
+        return this.props.message.thread;
     }
     get failed_recipients() {
         const error_states = ["error", "rejected", "spam", "bounced", "soft-bounced"];

@@ -5,8 +5,9 @@
 from email.utils import getaddresses
 
 from odoo import _, api, fields, models
-from odoo.osv import expression
 from odoo.tools import email_split
+
+from odoo.addons.mail.tools.discuss import Store
 
 
 class MailMessage(models.Model):
@@ -29,7 +30,7 @@ class MailMessage(models.Model):
     )
     is_failed_message = fields.Boolean(
         compute="_compute_is_failed_message",
-        search="_search_is_failed_message",
+        store=True,
     )
 
     @api.model
@@ -58,31 +59,6 @@ class MailMessage(models.Model):
             message.is_failed_message = bool(
                 needs_action and involves_me and has_failed_trackings
             )
-
-    def _search_is_failed_message(self, operator, value):
-        """Search for messages considered failed for the active user.
-        Be notice that 'notificacion_ids' is a record that change if
-        the user mark the message as readed.
-        """
-        # FIXME: Due to ORM issue with auto_join and 'OR' we construct the domain
-        # using an extra query to get valid results.
-        # For more information see: https://github.com/odoo/odoo/issues/25175
-        notification_partner_ids = self.search(
-            [("notification_ids.res_partner_id", "=", self.env.user.partner_id.id)]
-        )
-        return expression.normalize_domain(
-            [
-                (
-                    "mail_tracking_ids.state",
-                    "in" if value else "not in",
-                    list(self.get_failed_states()),
-                ),
-                ("mail_tracking_needs_action", "=", True),
-                "|",
-                ("author_id", "=", self.env.user.partner_id.id),
-                ("id", "in", notification_partner_ids.ids),
-            ]
-        )
 
     def _tracking_status_map_get(self):
         """Map tracking states to be used in chatter"""
@@ -267,7 +243,7 @@ class MailMessage(models.Model):
 
     def set_need_action_done(self):
         """This will mark the messages to be ignored in the tracking issues filter"""
-        self.check_access_rule("read")
+        self.check_access("read")
         self.mail_tracking_needs_action = False
         self._notify_message_notification_update()
 
@@ -286,29 +262,14 @@ class MailMessage(models.Model):
         ]
         return res
 
-    def _message_notification_format(self):
-        """Add info for the web client"""
-        formatted_notifications = super()._message_notification_format()
-        for notification in formatted_notifications:
-            message = self.filtered(
-                lambda x, notification=notification: x.id == notification["id"]
-            )
-            notification.update(
+    def _extras_to_store(self, store: Store, format_reply):
+        super()._extras_to_store(store, format_reply=format_reply)
+        for message in self:
+            store.add(
+                message,
                 {
+                    "partner_trackings": message.tracking_status(),
                     "mail_tracking_needs_action": message.mail_tracking_needs_action,
                     "is_failed_message": message.is_failed_message,
-                }
+                },
             )
-        return formatted_notifications
-
-    def _message_format_extras(self, format_reply):
-        """Add info for the web client"""
-        res = super()._message_format_extras(format_reply)
-        res.update(
-            {
-                "partner_trackings": self.tracking_status(),
-                "mail_tracking_needs_action": self.mail_tracking_needs_action,
-                "is_failed_message": self.is_failed_message,
-            }
-        )
-        return res

@@ -9,3 +9,5 @@
   - Asma Elferkhsi
 - [Vauxoo](https://www.vauxoo.com):
   - Agustín Payen Sandoval
+- [Trobz](https://www.trobz.com):
+  - Tris Doan

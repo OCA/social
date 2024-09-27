@@ -6,7 +6,14 @@ from odoo import models
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    def _init_messaging(self):
-        values = super()._init_messaging()
-        values["failed_counter"] = self.env["mail.message"].get_failed_count()
-        return values
+    def _init_messaging(self, store):
+        super()._init_messaging(store)
+        store.add(
+            {
+                "failed": {
+                    "id": "failed",
+                    "model": "mail.box",
+                    "counter": self.env["mail.message"].get_failed_count(),
+                }
+            }
+        )
