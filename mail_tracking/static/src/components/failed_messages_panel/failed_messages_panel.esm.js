@@ -1,4 +1,3 @@
-/* @odoo-module */
 import {ActionPanel} from "@mail/discuss/core/common/action_panel";
 import {MessageCardList} from "@mail/core/common/message_card_list";
 import {_t} from "@web/core/l10n/translation";

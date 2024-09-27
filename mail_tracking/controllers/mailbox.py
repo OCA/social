@@ -3,6 +3,7 @@
 from odoo.http import request, route
 
 from odoo.addons.mail.controllers.mailbox import MailboxController
+from odoo.addons.mail.tools.discuss import Store
 
 
 class MailTrackingMailBoxController(MailboxController):
@@ -19,4 +20,9 @@ class MailTrackingMailBoxController(MailboxController):
             around=around,
             limit=limit,
         )
-        return {**res, "messages": res["messages"].message_format()}
+        messages = res.pop("messages")
+        return {
+            **res,
+            "data": Store(messages, for_current_user=True).get_result(),
+            "messages": Store.many_ids(messages),
+        }

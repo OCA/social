@@ -19,7 +19,7 @@ class MailMail(models.Model):
         email_to = COMMASPACE.join(email_to_list)
         return {
             "name": self.subject,
-            "timestamp": "%.6f" % ts,
+            "timestamp": f"{ts:.6f}",
             "time": fields.Datetime.to_string(dt),
             "mail_id": self.id,
             "mail_message_id": self.mail_message_id.id,
@@ -28,14 +28,16 @@ class MailMail(models.Model):
             "sender": self.email_from,
         }
 
-    def _prepare_outgoing_list(self, recipients_follower_status=None):
+    def _prepare_outgoing_list(
+        self, mail_server=False, recipients_follower_status=None
+    ):
         """Creates the mail.tracking.email record and adds the image tracking
         to the email. Please note that because we can't add mail headers in this
         function, the added tracking image will later (IrMailServer.build_email)
         also be used to extract the mail.tracking.email record id and to set the
         X-Odoo-MailTracking-ID header there.
         """
-        emails = super()._prepare_outgoing_list(recipients_follower_status)
+        emails = super()._prepare_outgoing_list(mail_server, recipients_follower_status)
         for email in emails:
             vals = self._tracking_email_prepare(email)
             tracking_email = self.env["mail.tracking.email"].sudo().create(vals)

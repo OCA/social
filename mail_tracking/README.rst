@@ -167,6 +167,16 @@ Contributors
 
    -  Agustín Payen Sandoval
 
+-  `Trobz <https://www.trobz.com>`__:
+
+   -  Tris Doan
+
+Other credits
+-------------
+
+The migration of this module from 17.0 to 18.0 was financially supported
+by Camptocamp.
+
 Maintainers
 -----------
 

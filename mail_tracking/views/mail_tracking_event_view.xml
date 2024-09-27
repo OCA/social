@@ -55,10 +55,10 @@
     </record>
 
     <record model="ir.ui.view" id="view_mail_tracking_event_tree">
-        <field name="name">mail.tracking.event.tree</field>
+        <field name="name">mail.tracking.event.list</field>
         <field name="model">mail.tracking.event</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 create="false"
                 edit="false"
                 delete="false"
@@ -80,7 +80,7 @@
                 <field name="user_country_id" string="Country" />
                 <field name="os_family" string="OS" />
                 <field name="ua_family" string="User agent" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -187,7 +187,7 @@
     <record id="action_view_mail_tracking_event" model="ir.actions.act_window">
         <field name="name">MailTracking events</field>
         <field name="res_model">mail.tracking.event</field>
-        <field name="view_mode">tree,form,pivot</field>
+        <field name="view_mode">list,form,pivot</field>
         <field name="search_view_id" ref="view_mail_tracking_event_search" />
     </record>
 

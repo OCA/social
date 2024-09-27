@@ -6,11 +6,16 @@ from unittest.mock import patch
 
 from werkzeug.exceptions import BadRequest
 
-from odoo import http
+from odoo import SUPERUSER_ID, http
+from odoo.exceptions import AccessError
 from odoo.fields import Command
+from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import HttpCaseWithUserDemo
+from odoo.addons.mail.tests.common import mail_new_test_user
+from odoo.addons.mail.tools.discuss import Store
 from odoo.addons.mail_tracking.controllers.main import BLANK, MailTrackingController
 
 mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_email"
@@ -104,12 +109,11 @@ class TestMailTracking(TransactionCase):
         self.assertTrue(tracking_email)
         self.assertEqual(tracking_email.state, "sent")
         # message_dict read by web interface
-        message_dict = message.message_format()[0]
-        self.assertTrue(message_dict["history_partner_ids"])
+        message_dict = Store(message, for_current_user=True).get_result()
         # First partner is recipient
-        partner_id = message_dict["history_partner_ids"][0]
-        self.assertEqual(partner_id, self.recipient.id)
-        status = message_dict["partner_trackings"][0]
+        partner_id = message_dict["mail.message"][0]["recipients"][0]
+        self.assertEqual(partner_id["id"], self.recipient.id)
+        status = message_dict["mail.message"][0]["partner_trackings"][0]
         # Tracking status must be sent and
         # mail tracking must be the one search before
         self.assertEqual(status["status"], "sent")
@@ -178,23 +182,25 @@ class TestMailTracking(TransactionCase):
                 "body": "<p>This is another test message</p>",
             }
         )
-        message_dict, *_ = message.message_format()
+        message_dict = Store(message, for_current_user=True).get_result()
+        partner_trackings = message_dict["mail.message"][0]["partner_trackings"]
         self.assertTrue(
             any(
                 [
                     tracking["recipient"] == "customer-invoices@test.com"
-                    for tracking in message_dict["partner_trackings"]
+                    for tracking in partner_trackings
                 ]
             )
         )
 
     def _check_partner_trackings_cc(self, message):
-        message_dict = message.message_format()[0]
-        self.assertEqual(len(message_dict["partner_trackings"]), 3)
+        message_dict = Store(message, for_current_user=True).get_result()
+        partner_trackings = message_dict["mail.message"][0]["partner_trackings"]
+        self.assertEqual(len(partner_trackings), 3)
         # mail cc
         foundPartner = False
         foundNoPartner = False
-        for tracking in message_dict["partner_trackings"]:
+        for tracking in partner_trackings:
             if tracking["partner_id"] == self.sender.id:
                 foundPartner = True
                 self.assertTrue(tracking["isCc"])
@@ -222,9 +228,9 @@ class TestMailTracking(TransactionCase):
         )
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
-        suggested_mails = {email[1] for email in recipients[self.recipient.id]}
+        suggested_mails = {recipient["email"] for recipient in recipients}
         self.assertIn("unnamed@test.com", suggested_mails)
-        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        self.assertEqual(len(recipients), 3)
         # Repeated Cc recipients
         message = self.env["mail.message"].create(
             {
@@ -243,16 +249,17 @@ class TestMailTracking(TransactionCase):
         if message.is_thread_message():
             self.env[message.model].browse(message.res_id)._notify_thread(message)
         recipients = self.recipient._message_get_suggested_recipients()
-        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        self.assertEqual(len(recipients), 3)
         self._check_partner_trackings_cc(message)
 
     def _check_partner_trackings_to(self, message):
-        message_dict = message.message_format()[0]
-        self.assertEqual(len(message_dict["partner_trackings"]), 4)
+        message_dict = Store(message, for_current_user=True).get_result()
+        partner_trackings = message_dict["mail.message"][0]["partner_trackings"]
+        self.assertEqual(len(partner_trackings), 4)
         # mail cc
         foundPartner = False
         foundNoPartner = False
-        for tracking in message_dict["partner_trackings"]:
+        for tracking in partner_trackings:
             if tracking["partner_id"] == self.sender.id:
                 foundPartner = True
             elif tracking["recipient"] == "support+unnamed@test.com":
@@ -276,9 +283,9 @@ class TestMailTracking(TransactionCase):
         )
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
-        suggested_mails = {email[1] for email in recipients[self.recipient.id]}
+        suggested_mails = {recipient["email"] for recipient in recipients}
         self.assertIn("support+unnamed@test.com", suggested_mails)
-        self.assertEqual(len(recipients[self.recipient.id]), 3)
+        self.assertEqual(len(recipients), 3)
         # Repeated To recipients
         message = self.env["mail.message"].create(
             {
@@ -298,7 +305,7 @@ class TestMailTracking(TransactionCase):
         if message.is_thread_message():
             self.env[message.model].browse(message.res_id)._notify_thread(message)
         recipients = self.recipient._message_get_suggested_recipients()
-        self.assertEqual(len(recipients[self.recipient.id]), 4)
+        self.assertEqual(len(recipients), 4)
         self._check_partner_trackings_to(message)
         # Catchall + Alias
         alias_domain_id = self.env["mail.alias.domain"].create(
@@ -312,8 +319,8 @@ class TestMailTracking(TransactionCase):
             }
         )
         recipients = self.recipient._message_get_suggested_recipients()
-        self.assertEqual(len(recipients[self.recipient.id]), 2)
-        suggested_mails = {email[1] for email in recipients[self.recipient.id]}
+        self.assertEqual(len(recipients), 2)
+        suggested_mails = {recipient["email"] for recipient in recipients}
         self.assertNotIn("support+unnamed@test.com", suggested_mails)
 
     def test_failed_message(self):
@@ -473,6 +480,7 @@ class TestMailTracking(TransactionCase):
             mock_client.return_value = False
             controller.mail_tracking_open(db, tracking.id, False)
 
+    @mute_logger("odoo.addons.mail_tracking.controllers.main")
     def test_db_env_no_cr(self):
         http.request.env = None
         db = self.env.cr.dbname
@@ -704,4 +712,156 @@ class TestMailTracking(TransactionCase):
             mail, tracking = self.mail_send(self.recipient.email)
             self.assertEqual(
                 "data-odoo-tracking-email not found", tracking.error_description
+            )
+
+    def test_search_is_failed_message(self):
+        user_employee_1 = mail_new_test_user(
+            self.env,
+            groups="base.group_user",
+            login="employee1",
+            name="employee_1",
+        )
+        partner_employee = user_employee_1.partner_id
+        user_employee_2 = mail_new_test_user(
+            self.env,
+            groups="base.group_user",
+            login="employee2",
+            name="employee_2",
+        )
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": partner_employee.id,
+                "partner_ids": [Command.link(partner_employee.id)],
+                "body": "<p>This is a test message</p>",
+            }
+        )
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id)._notify_thread(message)
+        # Search tracking created
+        tracking_email = self.env["mail.tracking.email"].search(
+            [
+                ("mail_message_id", "=", message.id),
+                ("partner_id", "=", partner_employee.id),
+            ]
+        )
+        # Force error state
+        tracking_email.state = "error"
+
+        # employee_1 should read/search failed msg
+        failed_msg = message.with_user(user_employee_1).read(
+            fields=["is_failed_message"]
+        )
+        self.assertTrue(failed_msg[0]["is_failed_message"])
+        self.assertTrue(
+            self.env["mail.message"]
+            .with_user(user_employee_1)
+            .search(
+                [
+                    ("is_failed_message", "=", True),
+                ]
+            )
+        )
+        self.assertFalse(
+            self.env["mail.message"]
+            .with_user(user_employee_2)
+            .search(
+                [
+                    ("is_failed_message", "=", True),
+                ]
+            )
+        )
+
+
+@tagged("-at_install", "post_install")
+class TestAccessTrackingEmail(HttpCaseWithUserDemo, TestMailTracking):
+    def _get_tracking_email(
+        self, user=SUPERUSER_ID, mail_msg_id=False, mail_id=False, partner_id=False
+    ):
+        domain = []
+        if mail_msg_id:
+            domain.append(("mail_message_id", "=", mail_msg_id))
+        if mail_id:
+            domain.append(("mail_id", "=", mail_id))
+        if partner_id:
+            domain.append(("partner_id", "=", partner_id))
+        result = self.env["mail.tracking.email"].with_user(user).search(domain)
+        return result
+
+    def test_access_tracking_email(self):
+        if "hr.employee" in self.env:
+            self.admin_user = self.env.ref("base.user_admin")
+            user_employee_1 = mail_new_test_user(
+                self.env,
+                groups="base.group_user",
+                login="employee1",
+                name="employee 1",
+            )
+            employee_1 = self.env["hr.employee"].create(
+                [
+                    {
+                        "name": "employee 1",
+                        "user_id": user_employee_1.id,
+                    },
+                ]
+            )
+            user_employee_2 = mail_new_test_user(
+                self.env,
+                groups="base.group_user",
+                login="employee2",
+                name="employee 2",
+            )
+
+            # Create message
+            message = self.env["mail.message"].create(
+                {
+                    "subject": "Confidential Message",
+                    "body": "Confidential message",
+                    "author_id": self.sender.id,
+                    "email_from": self.sender.email,
+                    "model": "hr.employee",
+                    "res_id": employee_1.id,
+                    "partner_ids": [(6, 0, [user_employee_1.partner_id.id])],
+                }
+            )
+            if message.is_thread_message():
+                self.env[message.model].browse(message.res_id)._notify_thread(message)
+            # Search tracking created
+            tracking_email = self._get_tracking_email(
+                mail_msg_id=message.id, partner_id=user_employee_1.partner_id.id
+            )
+            # ensure tracking exists
+            self.assertTrue(tracking_email)
+            # Addmin should be able to read/search the tracking email
+            tracking_email.with_user(self.admin_user).read()
+            self.assertTrue(
+                self._get_tracking_email(
+                    mail_msg_id=message.id,
+                    partner_id=user_employee_1.partner_id.id,
+                )
+            )
+
+            # employee 1 should be able to read/search the tracking email
+            tracking_email.with_user(user_employee_1).read()
+            self.assertTrue(
+                self._get_tracking_email(
+                    user=user_employee_1,
+                    mail_msg_id=message.id,
+                    partner_id=user_employee_1.partner_id.id,
+                )
+            )
+
+            # employee 2 should not be able to read/search the tracking email
+            with self.assertRaises(AccessError):
+                tracking_email.with_user(user_employee_2).read()
+            self.assertFalse(
+                self._get_tracking_email(
+                    user=user_employee_2,
+                    mail_msg_id=message.id,
+                    partner_id=user_employee_1.partner_id.id,
+                )
             )

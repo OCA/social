@@ -6,7 +6,7 @@ from email.utils import getaddresses
 from lxml import etree
 
 from odoo import _, api, fields, models
-from odoo.tools import email_split, email_split_and_format
+from odoo.tools.mail import email_split, email_split_and_format
 
 
 class MailThread(models.AbstractModel):

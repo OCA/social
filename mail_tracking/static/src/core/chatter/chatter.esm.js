@@ -1,5 +1,4 @@
-/** @odoo-module */
-import {Chatter} from "@mail/core/web/chatter";
+import {Chatter} from "@mail/chatter/web_portal/chatter";
 import {FailedMessage} from "@mail_tracking/components/failed_message/failed_message.esm";
 import {FailedMessagesPanel} from "@mail_tracking/components/failed_messages_panel/failed_messages_panel.esm";
 import {patch} from "@web/core/utils/patch";
