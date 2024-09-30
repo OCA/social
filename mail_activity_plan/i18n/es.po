@@ -160,8 +160,8 @@ msgid "Last Updated on"
 msgstr "Última modificación en"
 
 #. module: mail_activity_plan
-#. openerp-web
-#: code:addons/mail_activity_plan/static/src/js/mail_activity_plan.js:0
+#. odoo-javascript
+#: code:addons/mail_activity_plan/static/src/js/mail_activity_plan.esm.js:0
 #, python-format
 msgid "Launch Activity Plan"
 msgstr "Lanzar plan de actividad"
@@ -172,11 +172,15 @@ msgid "Mail Activity Plan"
 msgstr "Plan de actividad por email"
 
 #. module: mail_activity_plan
-#: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model_id
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan_activity_type__model
 msgid "Model"
 msgstr "Modelo"
+
+#. module: mail_activity_plan
+#: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
+msgid "Model name"
+msgstr ""
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__name
@@ -184,6 +188,7 @@ msgid "Name"
 msgstr "Nombre"
 
 #. module: mail_activity_plan
+#. odoo-python
 #: code:addons/mail_activity_plan/models/mail_activity_plan.py:0
 #, python-format
 msgid "No user with the expression %(expression)s for %(record_name)s"

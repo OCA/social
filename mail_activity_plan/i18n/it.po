@@ -161,7 +161,6 @@ msgstr "Ultimo aggiornamento il"
 #. module: mail_activity_plan
 #. odoo-javascript
 #: code:addons/mail_activity_plan/static/src/js/mail_activity_plan.esm.js:0
-#: code:addons/mail_activity_plan/static/src/js/mail_activity_plan.esm.js:0
 #, python-format
 msgid "Launch Activity Plan"
 msgstr "Lancia piano attività"
@@ -172,11 +171,15 @@ msgid "Mail Activity Plan"
 msgstr "Piano attività e-mail"
 
 #. module: mail_activity_plan
-#: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model_id
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan_activity_type__model
 msgid "Model"
 msgstr "Modello"
+
+#. module: mail_activity_plan
+#: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
+msgid "Model name"
+msgstr ""
 
 #. module: mail_activity_plan
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__name
