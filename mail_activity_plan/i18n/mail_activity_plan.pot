@@ -169,10 +169,14 @@ msgid "Mail Activity Plan"
 msgstr ""
 
 #. module: mail_activity_plan
-#: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model_id
 #: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan_activity_type__model
 msgid "Model"
+msgstr ""
+
+#. module: mail_activity_plan
+#: model:ir.model.fields,field_description:mail_activity_plan.field_mail_activity_plan__model
+msgid "Model name"
 msgstr ""
 
 #. module: mail_activity_plan
