@@ -89,10 +89,10 @@ class AccountMoveSend(models.TransientModel):
             or self._get_default_mail_attachments_widget(move, mail_template),
             "partner_cc_ids": wizard
             and wizard.partner_cc_ids
-            or self._get_default_mail_partner_cc_ids(move, mail_template),
+            or self._get_partner_ids_from_mail(move, mail_template.email_cc),
             "partner_bcc_ids": wizard
             and wizard.partner_bcc_ids
-            or self._get_default_mail_partner_bcc_ids(move, mail_template),
+            or self._get_partner_ids_from_mail(move, mail_template.email_bcc),
         }
 
     # -------------------------------------------------------------------------
