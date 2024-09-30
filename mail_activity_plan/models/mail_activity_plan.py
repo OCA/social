@@ -13,7 +13,9 @@ class MailActivityPlan(models.Model):
     active = fields.Boolean(default=True)
     name = fields.Char(required=True)
     sequence = fields.Integer(required=True, default=10)
-    model = fields.Char(compute="_compute_model", compute_sudo=True, store=True)
+    model = fields.Char(
+        compute="_compute_model", string="Model name", compute_sudo=True, store=True
+    )
     model_id = fields.Many2one(
         comodel_name="ir.model",
         domain=[("transient", "=", False), ("model", "not like", "ir.")],
