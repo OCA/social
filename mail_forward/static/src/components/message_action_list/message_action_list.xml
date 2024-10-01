@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.MessageActionList" t-inherit-mode="extension" owl="1">
+        <xpath expr="//span[@t-if='messageActionList.hasReplyIcon']" position="before">
+            <!-- Show the "Forward Message" button only on messages, not on notes. -->
+            <ForwardMessage
+                t-if="messageActionList.message.is_discussion &amp;&amp; !messageActionList.message.is_note"
+                message="messageActionList.message"
+            />
+        </xpath>
+    </t>
+</templates>
