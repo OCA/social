@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail_print.PrintMessage" owl="1">
+        <span
+            class="o_MessageActionList_action o_MessageActionList_actionPrint p-2 fa fa-lg fa-print"
+            title="Print Message"
+            role="button"
+            tabindex="0"
+            aria-label="Print Message"
+            t-on-click="onClickPrintMessage"
+        />
+    </t>
+</templates>
