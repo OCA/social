@@ -70,6 +70,13 @@ Contributors
 -  `Camptocamp <https://www.camptocamp.com>`__
 
       -  Thierry Ducrest <thierry.ducrest@camptocamp.com>
+      -  Tris Doan <tridm@trobz.com>
+
+Other credits
+-------------
+
+The migration of this module from 14.0 to 18.0 was financially supported
+by Camptocamp.
 
 Maintainers
 -----------

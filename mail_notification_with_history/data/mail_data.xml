@@ -2,10 +2,10 @@
 <odoo>
 
   <template
-        id="message_notification_email"
-        inherit_id="mail.message_notification_email"
+        id="mail_notification_with_history.mail_notification_layout"
+        inherit_id="mail.mail_notification_layout"
     >
-    <xpath expr="//div[@t-if='signature']" position="after">
+    <xpath expr="//div[@t-out='signature']" position="after">
 
       <t
                 t-set="message_history"
@@ -19,7 +19,7 @@
             <p><t t-esc="msg.author_id.name or 'unknown'" /> commented on <span
                                     t-field="msg.date"
                                 /></p>
-            <div t-raw="msg.body" />
+            <div t-out="msg.body" />
             </li>
           </t>
         </ul>

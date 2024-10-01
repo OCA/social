@@ -3,15 +3,15 @@
 
 from unittest.mock import Mock, patch
 
-from odoo.tests import common
+from odoo.addons.base.tests.common import SavepointCaseWithUserDemo
 
 
-class TestMailNotificationWithHistory(common.SavepointCase):
+class TestMailNotificationWithHistory(SavepointCaseWithUserDemo):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.base_template = cls.env.ref("mail.message_notification_email")
+        cls.base_template = cls.env.ref("mail.mail_notification_layout")
         cls.mail_message = cls.env.ref("mail.mail_message_channel_1_2_1")
         cls.message_subtype = cls.env.ref("mail.mt_comment")
         cls.render_values = {
@@ -33,16 +33,20 @@ class TestMailNotificationWithHistory(common.SavepointCase):
             ),
             new=Mock(return_value=True),
         ):
-            body = self.base_template._render(
-                self.render_values, engine="ir.qweb", minimal_qcontext=True
+            body = self.env["ir.qweb"]._render(
+                "mail.mail_notification_layout",
+                self.render_values,
+                minimal_qcontext=True,
             )
-        self.assertTrue(body.find(b"Discussion") >= 0)
+            self.assertTrue(body.find("Discussion") >= 0)
 
     def test_thread_history_is_not_included(self):
-        body = self.base_template._render(
-            self.render_values, engine="ir.qweb", minimal_qcontext=True
+        body = self.env["ir.qweb"]._render(
+            "mail.mail_notification_layout",
+            self.render_values,
+            minimal_qcontext=True,
         )
-        self.assertTrue(body.find(b"Discussion") == -1)
+        self.assertTrue(body.find("Discussion") == -1)
 
     def test_domain_message_in_history(self):
         """Check the good number of message is returned for the history."""
