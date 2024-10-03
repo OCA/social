@@ -2,10 +2,11 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
 from odoo import fields
-from odoo.tests.common import SavepointCase
+
+from odoo.addons.base.tests.common import SavepointCaseWithUserDemo
 
 
-class TestMailTrackingEmailCleanUp(SavepointCase):
+class TestMailTrackingEmailCleanUp(SavepointCaseWithUserDemo):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

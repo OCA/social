@@ -174,11 +174,10 @@ class TestMailTracking(TransactionCase):
                 "model": "res.partner",
                 "res_id": self.recipient.id,
                 "partner_ids": [(4, self.recipient.id)],
-                "email_cc": "Dominique Pinon <unnamed@test.com>, customer-invoices@test.com",
+                "email_cc": "Dominique Pinon <unnamed@test.com>, customer-invoices@test.com",  # noqa E501
                 "body": "<p>This is another test message</p>",
             }
         )
-        message._moderate_accept()
         message_dict, *_ = message.message_format()
         self.assertTrue(
             any(
