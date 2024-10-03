@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-02 12:25+0000\n"
-"PO-Revision-Date: 2024-10-02 12:25+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -44,6 +42,27 @@ msgstr ""
 #: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
 #, python-format
 msgid "Forward Message"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
+#, python-format
+msgid "Forward Message Center"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
+#, python-format
+msgid "Forward Message Left"
+msgstr ""
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
+#, python-format
+msgid "Forward Message Right"
 msgstr ""
 
 #. module: mail_forward
