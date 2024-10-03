@@ -1,0 +1,83 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_forward
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-10-02 12:25+0000\n"
+"PO-Revision-Date: 2024-10-02 07:27-0500\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+
+#. module: mail_forward
+#: code:addons/mail_forward/models/mail_message.py:0
+#, python-format
+msgid "---------- Forwarded message ---------"
+msgstr "---------- Mensaje reenviado ---------"
+
+#. module: mail_forward
+#: code:addons/mail_forward/models/mail_message.py:0
+#, python-format
+msgid "Date"
+msgstr "Fecha"
+
+#. module: mail_forward
+#: model:ir.model,name:mail_forward.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de correos electrónicos"
+
+#. module: mail_forward
+#: model:ir.model,name:mail_forward.model_mail_compose_message
+msgid "Email composition wizard"
+msgstr "Asistente de composición de correos electrónicos"
+
+#. module: mail_forward
+#. openerp-web
+#: code:addons/mail_forward/models/mail_message.py:0
+#: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
+#, python-format
+msgid "Forward Message"
+msgstr "Reenviar mensaje"
+
+#. module: mail_forward
+#: code:addons/mail_forward/models/mail_message.py:0
+#, python-format
+msgid "From"
+msgstr "De"
+
+#. module: mail_forward
+#: code:addons/mail_forward/wizards/mail_compose_message.py:0
+#, python-format
+msgid "Fwd:"
+msgstr ""
+
+#. module: mail_forward
+#: model:ir.model,name:mail_forward.model_mail_message
+msgid "Message"
+msgstr "Mensaje"
+
+#. module: mail_forward
+#: code:addons/mail_forward/wizards/mail_compose_message.py:0
+#, python-format
+msgid "Re:"
+msgstr ""
+
+#. module: mail_forward
+#: code:addons/mail_forward/models/mail_message.py:0
+#, python-format
+msgid "Subject"
+msgstr "Asunto"
+
+#. module: mail_forward
+#: code:addons/mail_forward/models/mail_message.py:0
+#, python-format
+msgid "To"
+msgstr "Para"
