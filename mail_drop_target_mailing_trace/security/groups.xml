@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record model="res.groups" id="group_mailing_drop_mail">
+        <field name="name">Drop email in chatter</field>
+        <field
+            name="category_id"
+            ref="base.module_category_marketing_email_marketing"
+        />
+    </record>
+    <record model="res.groups" id="base.group_user">
+        <field
+            name="implied_ids"
+            eval="[(4, ref('mail_drop_target_mailing_trace.group_mailing_drop_mail'))]"
+        />
+    </record>
+</odoo>

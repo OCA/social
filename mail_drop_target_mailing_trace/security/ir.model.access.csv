@@ -1,0 +1,2 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mailing_trace_user,mailing.trace.user,mass_mailing.model_mailing_trace,mail_drop_target_mailing_trace.group_mailing_drop_mail,1,1,1,1
