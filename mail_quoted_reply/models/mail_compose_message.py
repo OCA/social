@@ -13,7 +13,10 @@ class MailComposeMessage(models.TransientModel):
         for composer in self:
             context = composer._context
             if context.get("is_quoted_reply"):
-                composer.body = Markup(context["quote_body"])
+                if composer.body:
+                    composer.body += Markup(context["quote_body"])
+                else:
+                    composer.body = Markup(context["quote_body"])
         return res
 
     @api.depends(
