@@ -2,7 +2,12 @@
 
 import tour from "web_tour.tour";
 const contact_steps = [
-    ...tour.stepUtils.goToAppSteps("contacts.menu_contacts", "Go to the Contacts."),
+    {
+        trigger: ".o_navbar_apps_menu button",
+    },
+    {
+        trigger: '.o_app[data-menu-xmlid="contacts.menu_contacts"]',
+    },
     {
         content: "Search Contact",
         trigger: ".o_searchview_input",
