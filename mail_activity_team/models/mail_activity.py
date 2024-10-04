@@ -3,22 +3,11 @@
 
 from odoo import SUPERUSER_ID, _, api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.osv.expression import AND
 
 
 class MailActivity(models.Model):
     _inherit = "mail.activity"
-
-    def _get_default_team_id(self, user_id=None):
-        if not user_id:
-            user_id = self.env.uid
-        res_model = self.env.context.get("default_res_model")
-        model = self.sudo().env["ir.model"].search([("model", "=", res_model)], limit=1)
-        domain = [("member_ids", "in", [user_id])]
-        if res_model:
-            domain.extend(
-                ["|", ("res_model_ids", "=", False), ("res_model_ids", "in", model.ids)]
-            )
-        return self.env["mail.activity.team"].search(domain, limit=1)
 
     user_id = fields.Many2one(string="User", required=False)
     team_user_id = fields.Many2one(
@@ -27,19 +16,11 @@ class MailActivity(models.Model):
 
     team_id = fields.Many2one(
         comodel_name="mail.activity.team",
-        default=lambda s: s._get_default_team_id(),
+        compute="_compute_team_id",
         index=True,
+        readonly=False,
+        store=True,
     )
-
-    @api.onchange("user_id")
-    def _onchange_user_id(self):
-        if not self.user_id or (
-            self.team_id and self.user_id in self.team_id.member_ids
-        ):
-            return
-        self.team_id = self.with_context(
-            default_res_model=self.sudo().res_model_id.model
-        )._get_default_team_id(user_id=self.user_id.id)
 
     @api.onchange("team_id")
     def _onchange_team_id(self):
@@ -50,6 +31,62 @@ class MailActivity(models.Model):
                 self.user_id = self.team_id.member_ids
             else:
                 self.user_id = self.env["res.users"]
+
+    @api.depends("activity_type_id", "res_model", "user_id")
+    def _compute_team_id(self):
+        """Fetch the team given the user, the model and the activity type"""
+        for activity in self:
+            model_id = self.env["ir.model"]._get_id(activity.res_model)
+            if activity.team_id:
+                # Does the current team still qualify?
+                if (
+                    (
+                        not activity.user_id
+                        or activity.user_id in activity.team_id.member_ids
+                    )
+                    and (
+                        not model_id
+                        or not activity.team_id.res_model_ids
+                        or model_id in activity.team_id.res_model_ids.ids
+                    )
+                    and (
+                        not activity.activity_type_id.default_team_id
+                        or activity.team_id == activity.activity_type_id.default_team_id
+                    )
+                ):
+                    continue
+            # Does the activity type's default team qualify?
+            default_team = activity.activity_type_id.default_team_id
+            if (
+                default_team
+                and (
+                    not activity.user_id or activity.user_id in default_team.member_ids
+                )
+                and (
+                    not model_id
+                    or not default_team.res_model_ids
+                    or model_id in default_team.res_model_ids.ids
+                )
+            ):
+                activity.team_id = default_team
+                if not activity.user_id:
+                    activity.user_id = activity.team_id.member_ids[:1]
+                continue
+            if not activity.user_id:
+                continue
+            domain = [("member_ids", "=", activity.user_id.id)]
+            if model_id:
+                domain = AND(
+                    [
+                        domain,
+                        [
+                            "|",
+                            ("res_model_ids", "=", model_id),
+                            ("res_model_ids", "=", False),
+                        ],
+                    ]
+                )
+            activity.team_id = self.env["mail.activity.team"].search(domain, limit=1)
 
     @api.constrains("team_id", "user_id")
     def _check_team_and_user(self):
@@ -78,12 +115,19 @@ class MailActivity(models.Model):
                     )
                 )
 
-    @api.onchange("activity_type_id")
-    def _onchange_activity_type_id(self):
-        res = super()._onchange_activity_type_id()
-        if self.activity_type_id.default_team_id:
-            self.team_id = self.activity_type_id.default_team_id
-            members = self.activity_type_id.default_team_id.member_ids
-            if self.user_id not in members and members:
-                self.user_id = members[:1]
-        return res
+    def _prepare_next_activity_values(self):
+        """Set the default team, and a member from that team as the user"""
+        vals = super()._prepare_next_activity_values()
+        if vals.get("activity_type_id"):
+            activity_type = self.env["mail.activity.type"].browse(
+                vals["activity_type_id"]
+            )
+            team = activity_type.default_team_id
+            if team:
+                vals["team_id"] = team.id
+                if team.member_ids and (
+                    not vals.get("user_id")
+                    or vals["user_id"] not in team.member_ids.ids
+                ):
+                    vals["user_id"] = team.member_ids[0].id
+        return vals
