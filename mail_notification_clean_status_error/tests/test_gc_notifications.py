@@ -8,7 +8,7 @@ from odoo.tests.common import SavepointCase
 class TestNotificationErrorCleanUp(SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestNotificationErrorCleanUp, cls).setUpClass()
+        super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner = cls.env.ref("base.res_partner_address_28")
         cls.message = cls.env["mail.message"].create(
