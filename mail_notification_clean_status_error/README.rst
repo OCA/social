@@ -71,6 +71,18 @@ Contributors
 
    -  Sébastien Alix <sebastien.alix@camptocamp.com>
 
+-  `Trobz <https://trobz.com>`__:
+
+   -  Khoi (Kien Kim) <khoikk@trobz.com>
+
+Other credits
+-------------
+
+The migration of this module from 17.0 to 18.0 was financially supported
+by:
+
+-  Camptocamp.
+
 Maintainers
 -----------
 
