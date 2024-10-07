@@ -31,8 +31,8 @@ class TestMailInlineStyles(TransactionCase):
         self.assertEqual(self.parse_node_style(node), expected)
 
     def test_generate_mail(self):
-        res = self.mail_template.generate_email(
-            [self.demo_user.id], fields=["body_html"]
+        res = self.mail_template._generate_template(
+            [self.demo_user.id], render_fields=["body_html"]
         )
         body_html_string = res[self.demo_user.id].get("body_html")
         html_node = self.to_xml_node(body_html_string)[0]

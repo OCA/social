@@ -17,8 +17,8 @@ except (OSError, ImportError) as err:  # pragma: no cover
 class MailTemplate(models.Model):
     _inherit = "mail.template"
 
-    def _render_template_postprocess(self, rendered):
-        rendered = super()._render_template_postprocess(rendered)
+    def _render_template_postprocess(self, model, rendered):
+        rendered = super()._render_template_postprocess(model, rendered)
         for res_id, html in rendered.items():
             rendered[res_id] = self._premailer_apply_transform(html)
         return rendered

@@ -60,24 +60,25 @@ Authors
 Contributors
 ------------
 
-- David BEAL <david.beal@akretion.com>
+-  David BEAL <david.beal@akretion.com>
 
-- Akim Juillerat <akim.juillerat@camptocamp.com>
+-  Akim Juillerat <akim.juillerat@camptocamp.com>
 
-- Simone Orsi <simone.orsi@camptocamp.com>
+-  Simone Orsi <simone.orsi@camptocamp.com>
 
-- Patrick Tombez <patrick.tombez@camptocamp.com>
+-  Patrick Tombez <patrick.tombez@camptocamp.com>
 
-- Phuc Tran Thanh <phuc@trobz.com>
+-  Phuc Tran Thanh <phuc@trobz.com>
 
-- `Trobz <https://trobz.com>`__:
+-  `Trobz <https://trobz.com>`__:
 
-     - Son Ho <sonhd@trobz.com>
+      -  Son Ho <sonhd@trobz.com>
+      -  Khoi Vo <khoivha@trobz.com>
 
 Other credits
 -------------
 
-The migration of this module from 15.0 to 16.0 was financially supported
+The migration of this module from 16.0 to 18.0 was financially supported
 by Camptocamp
 
 Maintainers

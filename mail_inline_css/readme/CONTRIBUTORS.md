@@ -11,3 +11,4 @@
 - [Trobz](https://trobz.com):
 
   > - Son Ho \<<sonhd@trobz.com>\>
+  > - Khoi Vo \<<khoivha@trobz.com>\>
