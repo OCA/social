@@ -24,7 +24,7 @@ class TestMailInlineStyles(TransactionCase):
         return res
 
     def find_by_id(self, node, html_id):
-        return node.xpath('//*[@id="{}"]'.format(html_id))
+        return node.xpath(f'//*[@id="{html_id}"]')
 
     def assertNodeStyle(self, node, expected):
         self.assertIn("style", node.attrib)

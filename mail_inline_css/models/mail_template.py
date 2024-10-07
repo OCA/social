@@ -7,7 +7,7 @@ from odoo import models
 
 try:
     from premailer import Premailer
-except (ImportError, IOError) as err:  # pragma: no cover
+except (OSError, ImportError) as err:  # pragma: no cover
     import logging
 
     _logger = logging.getLogger(__name__)
