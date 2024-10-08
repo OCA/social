@@ -9,3 +9,6 @@
   - Raf Ven
 - [Trobz] (https://trobz.com):
   - Son Ho <sonhd@trobz.com>
+- [Camptocamp] (https://camptocamp.com):
+  - Vincent Van Rossem <vincent.vanrossem@camptocamp.com>
+  - Italo Lopes <italo.lopes@camptocamp.com>

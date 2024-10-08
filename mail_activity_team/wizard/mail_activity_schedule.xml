@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mail_activity_schedule_view_form" model="ir.ui.view">
+        <field name="model">mail.activity.schedule</field>
+        <field name="inherit_id" ref="mail.mail_activity_schedule_view_form" />
+        <field name="arch" type="xml">
+            <field name="activity_user_id" position="attributes">
+                <attribute name="invisible">activity_team_id</attribute>
+                <attribute
+                    name="required"
+                    add="and not activity_team_id"
+                    separator=" "
+                />
+            </field>
+            <field name="activity_user_id" position="after">
+                <field name="res_model_id" invisible="1" />
+                <field
+                    name="activity_team_user_id"
+                    invisible="not activity_team_id"
+                    domain="[('activity_team_ids', '=', activity_team_id)]"
+                />
+                <field
+                    name="activity_team_id"
+                    options="{'no_create': True, 'no_open': True}"
+                    domain="['|', ('res_model_ids', '=', False), ('res_model_ids', '=', res_model_id)]"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
