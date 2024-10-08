@@ -704,3 +704,51 @@ class TestMailTracking(TransactionCase):
 
     def test_unlink_mail_alias(self):
         self.env["ir.config_parameter"].search([], limit=1).unlink()
+
+    def test_inbox_mail_notification(self):
+        """Test tracking a message for a user using internal notifications."""
+        admin_partner = self.env.ref("base.partner_admin")
+        # Ensure admin settings is set to inbox
+        self.env.ref("base.user_admin").notification_type = "inbox"
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message test",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "model": "res.partner",
+                "res_id": admin_partner.id,
+                "partner_ids": [Command.link(admin_partner.id)],
+                "body": "<p>This is a test message</p>",
+            }
+        )
+        if message.is_thread_message():
+            self.env[message.model].browse(message.res_id)._notify_thread(message)
+        # Search tracking created
+        tracking_email = self.env["mail.tracking.email"].search(
+            [
+                ("mail_message_id", "=", message.id),
+                ("partner_id", "=", admin_partner.id),
+            ]
+        )
+        # No tracking email exists
+        self.assertFalse(tracking_email)
+        # message_dict read by web interface
+        message_dict = message.message_format()[0]
+        status = message_dict["partner_trackings"][0]
+        # Tracking status must be delivered
+        self.assertEqual(status["status"], "delivered")
+        self.assertEqual(status["tracking_id"], tracking_email.id)
+        self.assertEqual(status["recipient"], admin_partner.name)
+        self.assertEqual(status["partner_id"], admin_partner.id)
+        self.assertEqual(status["isCc"], False)
+        # Mark the inbox message as read
+        self.env["mail.notification"].search(
+            [
+                ("mail_message_id", "=", message.id),
+                ("res_partner_id", "=", admin_partner.id),
+            ]
+        ).is_read = True
+        self.assertEqual(
+            message.message_format()[0]["partner_trackings"][0]["status"], "opened"
+        )
