@@ -76,4 +76,4 @@ class TestController(HttpCase, TestLayoutMixin):
         tmpl = self._create_template(self.env, model)
         response = self.url_open(self.base_url + f"{model}/{tmpl.id}/{partner.id}/")
         content = response.content.decode()
-        self.assertIn("<p>Hello %s</p>" % (partner.name), content)
+        self.assertIn(f"<p>Hello {partner.name}</p>", content)

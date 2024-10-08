@@ -81,12 +81,13 @@ Contributors
 -  Simone Orsi <simahawk@gmail.com>
 -  Phuc Tran Thanh <phuc@trobz.com>
 -  Son Ho <sonhd@trobz.com>
+-  Khoi (Kien Kim) <khoikk@trobz.com>
 
 Other credits
 -------------
 
-The development and migration of this module from 15.0 to 16.0 has been
-financially supported by:
+The development and migration of this module from 15.0 to 16.0 and from
+17.0 to 18.0 has been financially supported by:
 
 -  Camptocamp
 
