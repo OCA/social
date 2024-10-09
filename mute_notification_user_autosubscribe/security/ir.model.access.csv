@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"user_autosubscribe_mute_access","user.autosubscribe.mute.access","model_user_autosubscribe_mute",base.group_user,1,0,0,0
+"user_autosubscribe_mute_manage","user.autosubscribe.mute.manage","model_user_autosubscribe_mute",base.group_system,1,1,1,1
