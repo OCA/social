@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+  <t t-name="Message" t-inherit="mail.Message" t-inherit-mode="extension" owl="1">
+    <xpath expr="//div[hasclass('o_Message_trackingValueFieldName')]" position="before">
+      <t t-log="value" />
+      <div
+                t-if="value.company_name"
+                class="o_Message_trackingValueFieldCompanyName o_Message_trackingValueItem"
+            >
+        <span style="font-weight:bold;">
+          (
+          <span t-esc="value.company_name" />)
+        </span>
+      </div>
+    </xpath>
+  </t>
+</templates>
