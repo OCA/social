@@ -7,5 +7,6 @@
   - Carlos Roca
   - Sergio Teruel
 
-- [Trobz](https://trobz.com):  
+- [Trobz](https://trobz.com):
   - nguyenhk \<<nguyenhk@trobz.com>\>
+  - Tris Doan \<<tridm@trobz.com>\>
