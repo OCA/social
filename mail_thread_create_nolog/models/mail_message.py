@@ -7,32 +7,40 @@ from odoo import api, models
 class MailMessage(models.AbstractModel):
     _inherit = "mail.message"
 
+    def _get_message_fields(self):
+        return [
+            "body",
+            "date",
+            "message_type",
+            "model",
+            "res_id",
+        ]
+
     @api.model
-    def message_fetch(self, domain, limit=20, moderated_channel_ids=None):
-        res = super().message_fetch(
-            domain, limit=limit, moderated_channel_ids=moderated_channel_ids
-        )
+    def _generate_messsage(self, domain):
         # Generate a creation message only if messages are fetched for a record.
-        # Indeed 'message_fetch' is also used to populate channels, in that
-        # case there is no specific record implied, so no need to generate the
+        # In that case there is no specific record implied, so no need to generate the
         # the message.
         record = self._messages_for_record(domain)
-        if record and record._log_access and len(res) < limit:
+        author = record.create_uid.partner_id
+
+        if record and record._log_access:
             creation_message = record._creation_message()
-            create_message_values = self.new(
+            create_message_record = self.new(
                 {
                     "body": creation_message,
                     "date": record.create_date,
-                    "is_internal": True,
                     "model": record._name,
                     "res_id": record.id,
                     "message_type": "notification",
-                    "subtype_id": self.env.ref("mail.mt_note"),
-                    "author_id": record.create_uid.partner_id.id,
                 }
-            ).message_format()[0]
-            author = record.create_uid.partner_id
-            create_message_values.update(
+            )
+
+            data = create_message_record._read_format(
+                self._get_message_fields(), load=False
+            )[0]
+
+            data.update(
                 {
                     # An ID is required by the thread client-side
                     # so we generate one that doesn't really exist
@@ -40,11 +48,17 @@ class MailMessage(models.AbstractModel):
                     # unique (used by the thread_cache client model).
                     "id": self._get_create_message_id(domain),
                     # Author is not preserved above when creating the fake-record
-                    "author_id": (author.id, author.name),
+                    "author": {
+                        "id": author.id,
+                        "name": author.name,
+                        "type": "partner",
+                    },
                 }
             )
-            res.append(create_message_values)
-        return res
+
+            return data
+
+        return None
 
     def _get_create_message_id(self, domain):
         # Odoo JS client needs an ID to manage its cache (thread_cache).

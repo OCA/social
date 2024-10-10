@@ -3,7 +3,7 @@
 {
     "name": "Mail Thread - Fake create log",
     "summary": "Display a fake (non-stored) create log in the chatter.",
-    "version": "14.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Mail",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp, Odoo Community Association (OCA)",

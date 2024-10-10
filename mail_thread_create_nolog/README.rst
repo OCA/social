@@ -75,6 +75,14 @@ Contributors
 
    -  Sébastien Alix
 
+-  Chau Le chaulb@trobz.com
+
+Other credits
+-------------
+
+The migration of this module from 14.0 to 18.0 was financially supported
+by Camptocamp.
+
 Maintainers
 -----------
 
