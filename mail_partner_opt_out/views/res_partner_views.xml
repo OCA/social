@@ -17,4 +17,22 @@
             </field>
         </field>
     </record>
+    <record model="ir.actions.server" id="action_mail_blacklist_add">
+       <field name="name">Add To Blacklist</field>
+       <field name="model_id" ref="base.model_res_partner" />
+       <field name="binding_model_id" ref="base.model_res_partner" />
+       <field name="state">code</field>
+       <field name="code">
+           action = records.mail_blacklist_add()
+       </field>
+    </record>
+    <record model="ir.actions.server" id="action_mail_blacklist_remove">
+       <field name="name">Remove From Blacklist</field>
+       <field name="model_id" ref="base.model_res_partner" />
+       <field name="binding_model_id" ref="base.model_res_partner" />
+       <field name="state">code</field>
+       <field name="code">
+           action = records.mail_action_blacklist_remove()
+       </field>
+    </record>
 </odoo>
