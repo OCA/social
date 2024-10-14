@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="mail_notification_custom_subject_form">
+        <field name="name">mail.message.custom.subject.form</field>
+        <field name="model">mail.message.custom.subject</field>
+        <field name="arch" type="xml">
+            <form string="Subject Replacement Templates">
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1 name="name"><field name="name" /></h1>
+                    </div>
+                    <group>
+                        <field
+                            name="subject_template"
+                            placeholder="Subject (placeholders may be used here)"
+                        />
+                        <field name="model_id" options="{'no_create': True}" />
+                        <field name="subtype_ids" widget="many2many_tags" />
+                        <field name="position" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="mail_notification_custom_subject_tree">
+        <field name="name">mail.message.custom.subject.tree</field>
+        <field name="model">mail.message.custom.subject</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="model_id" />
+                <field name="subtype_ids" />
+                <field name="subject_template" />
+            </tree>
+        </field>
+    </record>
+    <record
+        model="ir.actions.act_window"
+        id="action_mail_notification_custom_subject_tree_all"
+    >
+        <field name="name">Subject Replacement Templates</field>
+        <field name="res_model">mail.message.custom.subject</field>
+        <field name="view_mode">form,tree</field>
+        <field name="view_id" ref="mail_notification_custom_subject_tree" />
+    </record>
+    <menuitem
+        id="menu_mail_notification_custom_subject"
+        parent="base.menu_email"
+        action="action_mail_notification_custom_subject_tree_all"
+        sequence="21"
+    />
+</odoo>
