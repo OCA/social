@@ -5,7 +5,7 @@
 {
     "name": "Mail Notification Custom Subject",
     "summary": "Apply a custom subject to mail notifications",
-    "version": "15.0.1.0.2",
+    "version": "16.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
@@ -17,5 +17,5 @@
         "views/mail_notification_custom_subject_views.xml",
     ],
     "development_status": "Production/Stable",
-    "maintainers": ["yajo"],
+    "maintainers": ["yajo", "edlopen", "rafaelbn"],
 }
