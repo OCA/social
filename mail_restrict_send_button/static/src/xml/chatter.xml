@@ -1,0 +1,14 @@
+<templates xml:space="preserve">
+    <t
+        t-name="mail_restrict_send_button.ChatterTopbar"
+        t-inherit="mail.ChatterTopbar"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//button[hasclass('o_ChatterTopbar_buttonSendMessage')]"
+            position="attributes"
+        >
+            <attribute name="t-if">isSendMessage</attribute>
+        </xpath>
+    </t>
+</templates>

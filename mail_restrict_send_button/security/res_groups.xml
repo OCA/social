@@ -1,0 +1,6 @@
+<odoo noupdate="1">
+    <record id="group_show_send_message_button" model="res.groups">
+        <field name="name">Show Send Message Button</field>
+        <field name="category_id" ref="base.module_category_usability" />
+    </record>
+</odoo>
