@@ -32,6 +32,11 @@ msgid "Config Settings"
 msgstr "Paramétrage"
 
 #. module: mail_show_follower
+#: model:ir.model,name:mail_show_follower.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_preview
 msgid "Message preview"
 msgstr ""
