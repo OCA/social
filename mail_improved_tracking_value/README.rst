@@ -11,7 +11,7 @@ value changes on predefined fields.
 It adds support for many2many and one2many fields, which are not handled
 well by default.
 It also implements a new view (little bit more user friendly than the
-existing one) to watch for changes 
+existing one) to watch for changes
 
 Installation
 ============
@@ -60,6 +60,7 @@ Contributors
 ------------
 
 * Thierry Ducrest <thierry.ducrest@camptocamp.com>
+* Ugnė Sinkevičienė <ugne@versada.eu>
 
 Maintainer
 ----------

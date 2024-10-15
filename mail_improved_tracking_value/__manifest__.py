@@ -3,13 +3,13 @@
 
 {
     "name": "Improved tracking value change",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "summary": "Improves tracking changed values for certain type of fields."
     "Adds a user-friendly view to consult them.",
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "category": "Tools",
     "website": "https://github.com/OCA/social",
-    "depends": ["base", "mail"],
+    "depends": ["mail"],
     "data": ["views/mail_tracking_value.xml"],
 }

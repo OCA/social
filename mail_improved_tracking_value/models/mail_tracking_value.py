@@ -7,7 +7,6 @@ from odoo import api, fields, models
 
 
 class MailTrackingValue(models.Model):
-
     _inherit = "mail.tracking.value"
 
     new_value_formatted = fields.Char(
@@ -25,33 +24,31 @@ class MailTrackingValue(models.Model):
         "new_value_float",
         "new_value_text",
         "new_value_datetime",
-        "new_value_monetary",
         "old_value_char",
         "old_value_integer",
         "old_value_float",
         "old_value_text",
         "old_value_datetime",
-        "old_value_monetary",
     )
     def _compute_formatted_value(self):
         """Sets the value formatted field used in the view"""
         for record in self:
-            if record.field_type in ("many2many", "one2many", "char"):
+            if record.field_id.ttype in ("many2many", "one2many", "char"):
                 record.new_value_formatted = record.new_value_char
                 record.old_value_formatted = record.old_value_char
-            elif record.field_type == "integer":
+            elif record.field_id.ttype == "integer":
                 record.new_value_formatted = str(record.new_value_integer)
                 record.old_value_formatted = str(record.old_value_integer)
-            elif record.field_type == "float":
+            elif record.field_id.ttype == "float":
                 record.new_value_formatted = str(record.new_value_float)
                 record.old_value_formatted = str(record.old_value_float)
-            elif record.field_type == "monetary":
-                record.new_value_formatted = str(record.new_value_monetary)
-                record.old_value_formatted = str(record.old_value_monetary)
-            elif record.field_type == "datetime":
+            elif record.field_id.ttype == "monetary":
+                record.new_value_formatted = str(record.new_value_float)
+                record.old_value_formatted = str(record.old_value_float)
+            elif record.field_id.ttype == "datetime":
                 record.new_value_formatted = str(record.new_value_datetime)
                 record.old_value_formatted = str(record.old_value_datetime)
-            elif record.field_type == "text":
+            elif record.field_id.ttype == "text":
                 record.new_value_formatted = record.new_value_text
                 record.old_value_formatted = record.old_value_text
 
@@ -76,8 +73,8 @@ class MailTrackingValue(models.Model):
                     names = ""
                     json_ids = json.dumps([])
                 return {
-                    "{}_value_char".format(prefix): names,
-                    "{}_value_text".format(prefix): json_ids,
+                    f"{prefix}_value_char": names,
+                    f"{prefix}_value_text": json_ids,
                 }
 
             field = self.env["ir.model.fields"]._get(model_name, col_name)
@@ -86,8 +83,6 @@ class MailTrackingValue(models.Model):
 
             values = {
                 "field": field.id,
-                "field_desc": col_info["string"],
-                "field_type": col_info["type"],
             }
             values.update(get_values(initial_value, "old"))
             values.update(get_values(new_value, "new"))
