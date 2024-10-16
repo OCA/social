@@ -62,9 +62,10 @@ class MailThread(models.AbstractModel):
         recipients_cc_bcc = MailFollowers._get_recipient_data(
             None, message_type, subtype_id, partners_cc_bcc.ids
         )
+        partners_already_marked_as_recipient = [r.get('id', False) for r in rdata]
         for _, value in recipients_cc_bcc.items():
-            for _, data in value.items():
-                if not data.get("id"):
+            for _, data in value.items():                
+                if not data.get("id") or data.get("id") in partners_already_marked_as_recipient:
                     continue
                 if not data.get(
                     "notif"
