@@ -1,0 +1,94 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_layout_preview
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-11-09 17:37+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "<strong>Link:</strong>"
+msgstr "<strong>Enlace:</strong>"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "<strong>Name:</strong>"
+msgstr "<strong>Nombre:</strong>"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "<strong>XMLID:</strong>"
+msgstr "<strong>XMLID:</strong>"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "Copy the link"
+msgstr "Copiar el enlace"
+
+#. module: mail_layout_preview
+#: model:ir.model,name:mail_layout_preview.model_mail_template_preview
+msgid "Email Template Preview"
+msgstr "Previsualización plantilla Email"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "Email templates for:"
+msgstr "Plantillas de correo electrónico para:"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "Find your template"
+msgstr "Encuentre su plantilla"
+
+#. module: mail_layout_preview
+#: model:ir.model.fields,field_description:mail_layout_preview.field_mail_template_preview__layout_preview_url
+msgid "Full layout preview"
+msgstr "Vista previa completa del diseño"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "Here you find all the template for the given model."
+msgstr "Aquí encontrará todas las plantillas del modelo en cuestión."
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "Load it"
+msgstr "Cárgalo"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "No template found."
+msgstr "No se ha encontrado ninguna plantilla."
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid ""
+"Paste into the address bar and change the record ID (the last value in the URL).\n"
+"              <br/>If you don't know the ID of the record, just browse to the record via odoo interface and check its ID in the address bar `#id=XXX`."
+msgstr ""
+"Pegue en la barra de direcciones y cambie el ID del registro (el último "
+"valor en la URL).\n"
+"              <br/>Si no conoce el ID del registro, simplemente busque el "
+"registro a través de la interfaz de odoo y verifique su ID en la barra de "
+"direcciones `#id=XXX`."
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "Preview"
+msgstr "Previsualización"
+
+#. module: mail_layout_preview
+#: model_terms:ir.ui.view,arch_db:mail_layout_preview.email_templates_list
+msgid "View in backend"
+msgstr "Ver en el servidor"
