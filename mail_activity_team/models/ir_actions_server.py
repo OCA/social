@@ -2,7 +2,7 @@
 # @author Iván Todorovich <ivan.todorovich@camptocamp.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class IrActionsServer(models.Model):
@@ -18,3 +18,8 @@ class IrActionsServer(models.Model):
         if self.activity_user_type == "specific" and self.activity_team_id:
             self = self.with_context(force_activity_team=self.activity_team_id)
         return super()._run_action_next_activity(eval_context=eval_context)
+
+    @api.onchange("activity_team_id")
+    def onchange_activity_team_id(self):
+        if self.activity_team_id.user_id:
+            self.activity_user_id = self.activity_team_id.user_id
