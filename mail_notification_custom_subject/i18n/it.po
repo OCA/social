@@ -6,116 +6,118 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-10-17 16:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_after
 msgid "Append After"
-msgstr ""
+msgstr "Appendi dopo"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_before
 msgid "Append Before"
-msgstr ""
+msgstr "Appendi prima"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subtype_ids
 msgid "Applied Subtypes"
-msgstr ""
+msgstr "Sotto tipi applicati"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model,name:mail_notification_custom_subject.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussione e-mail"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model,name:mail_notification_custom_subject.model_mail_message_custom_subject
 msgid "Mail Message Custom Subject"
-msgstr ""
+msgstr "Oggetto perconalizzato messaggio e-mail"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
 msgid "Model"
-msgstr ""
+msgstr "Modello"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
 msgid "Model where this template applies"
-msgstr ""
+msgstr "Modello dove si applica questo schema"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid "Position"
-msgstr ""
+msgstr "Posizione"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__replace
 msgid "Replace"
-msgstr ""
+msgstr "Sostituisce"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
 #: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
 msgid "Subject (placeholders may be used here)"
-msgstr ""
+msgstr "Oggetto (qui si può usare un segnaposto)"
 
 #. module: mail_notification_custom_subject
 #: model:ir.actions.act_window,name:mail_notification_custom_subject.action_mail_notification_custom_subject_tree_all
 #: model:ir.ui.menu,name:mail_notification_custom_subject.menu_mail_notification_custom_subject
 #: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
 msgid "Subject Replacement Templates"
-msgstr ""
+msgstr "Modelli sostituzione oggetto"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
 msgid "Subject Template"
-msgstr ""
+msgstr "Modello soggetto"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
 msgid "Template Name"
-msgstr ""
+msgstr "Nome modello"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
@@ -123,3 +125,5 @@ msgid ""
 "Whether to replace, append at beggining or append at end to other templates "
 "that apply to a given context"
 msgstr ""
+"Se si applica ad un dato contesto la sostituzione, l'aggiunta all'inizio o "
+"l'aggiunta alla fine ad altri modelli"
