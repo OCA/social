@@ -242,10 +242,10 @@ class TestMailActivityTeam(TransactionCase):
         self.env.ref("mail.mail_activity_data_call").default_team_id = self.team2
         activity = partner_record.activity_schedule(
             act_type_xmlid="mail.mail_activity_data_call",
-            user_id=self.employee2.id,
         )
         self.assertEqual(activity.team_id, self.team2)
-        self.assertEqual(activity.user_id, self.employee2)
+        # As we are in a 'team activity' context, the user should not be set
+        self.assertEqual(activity.user_id, self.env["res.users"])
 
     def test_schedule_activity_default_team_no_user(self):
         """Correctly assign teams to auto scheduled activities. Those won't
@@ -257,7 +257,8 @@ class TestMailActivityTeam(TransactionCase):
             activity_type_id=self.activity2.id,
         )
         self.assertEqual(activity.team_id, self.team2)
-        self.assertEqual(activity.user_id, self.employee2)
+        # As we are in a 'team activity' context, the user should not be set
+        self.assertEqual(activity.user_id, self.env["res.users"])
 
     def test_activity_count(self):
         res = (
@@ -300,7 +301,8 @@ class TestMailActivityTeam(TransactionCase):
         _messages, next_activities = activity._action_done()
         self.assertTrue(next_activities)
         self.assertEqual(next_activities.team_id, self.team2)
-        self.assertEqual(next_activities.user_id, self.employee2)
+        # As we are in a 'team activity' context, the user should not be set
+        self.assertEqual(next_activities.user_id, self.env["res.users"])
 
     def test_schedule_activity_from_server_action(self):
         partner = self.env["res.partner"].create({"name": "Test Partner"})

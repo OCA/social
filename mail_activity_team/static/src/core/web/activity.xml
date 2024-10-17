@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="mail_activity_team.Activity"
+        t-inherit="mail.Activity"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//div/div[hasclass('o-mail-Activity-sidebar')]/img"
+            position="attributes"
+        >
+            <attribute name="t-if">activity.user_id</attribute>
+        </xpath>
+        <xpath
+            expr="//div/div/div[hasclass('o-mail-Activity-info')]/span[hasclass('o-mail-Activity-user')]"
+            position="attributes"
+        >
+            <attribute name="t-if">activity.user_id</attribute>
+        </xpath>
+
+    </t>
+
+</templates>
