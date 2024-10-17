@@ -118,8 +118,7 @@ class MailTrackingEmail(models.Model):
     @api.depends("mail_message_id")
     def _compute_message_id(self):
         """This helper field will allow us to map the message_id from either the linked
-        mail.message or a mass.mailing mail.trace.
-        """
+        mail.message or a mass.mailing mail.trace."""
         self.message_id = False
         for tracking in self.filtered("mail_message_id"):
             tracking.message_id = tracking.mail_message_id.message_id
@@ -462,3 +461,40 @@ class MailTrackingEmail(models.Model):
         # - return 'NONE' if this request is not for you
         # - return 'ERROR' if any error
         return "NONE"  # pragma: no cover
+
+    def _get_old_mail_tracking_email_domain(self, max_age_days):
+        target_write_date = fields.Datetime.subtract(
+            fields.Datetime.now(), days=max_age_days
+        )
+        return [("write_date", "<", target_write_date)]
+
+    @api.autovacuum
+    def _gc_mail_tracking_email(self, limit=5000):
+        config_max_age_days = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mail_tracking.mail_tracking_email_max_age_days")
+        )
+        try:
+            max_age_days = int(config_max_age_days)
+        except ValueError:
+            max_age_days = 0
+
+        if not max_age_days > 0:
+            return False
+
+        domain = self._get_old_mail_tracking_email_domain(max_age_days)
+        records_to_delete = self.search(domain, limit=limit).exists()
+        if records_to_delete:
+            _logger.info(
+                "Deleting %s mail.tracking.email records", len(records_to_delete)
+            )
+            records_to_delete.flush_recordset()
+            # Using a direct query to avoid ORM as it causes an issue with
+            # a related field mass_mailing_id in customer DB when deleting
+            # the records. This might be 14.0 specific, so changing to
+            # .unlink() should be tested when forward porting.
+            query = "DELETE FROM mail_tracking_email WHERE id IN %s"
+            args = (tuple(records_to_delete.ids),)
+            self.env.cr.execute(query, args)
+            self.invalidate_model()

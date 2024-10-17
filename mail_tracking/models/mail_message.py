@@ -226,6 +226,12 @@ class MailMessage(models.Model):
     @api.model
     def _drop_aliases(self, mail_list):
         aliases = self.env["mail.alias"].get_aliases()
+        if self.env.company.mail_tracking_show_aliases:
+            IrConfigParamObj = self.env["ir.config_parameter"].sudo()
+            aliases = "{}@{}".format(
+                IrConfigParamObj.get_param("mail.catchall.alias"),
+                IrConfigParamObj.get_param("mail.catchall.domain"),
+            )
 
         def _filter_alias(email):
             email_wn = getaddresses([email])[0][1]
