@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail_tracking.FailedMessageList">
+        <div class="o-mail-ActivityList">
+            <div
+                class="d-flex pt-4 cursor-pointer fw-bolder"
+                t-on-click="toggleFailedMessageList"
+            >
+                <hr class="flex-grow-1 fs-3" />
+                <div class="d-flex align-items-center px-3">
+                    <i
+                        class="fa fa-fw text-danger"
+                        t-att-class="state.showFailedMessageList ? 'fa-caret-down' : 'fa-caret-right'"
+                    />
+                    <span class="text-danger">Failed messages</span>
+                    <span
+                        t-if="!state.showFailedMessageList"
+                        class="badge rounded-pill ms-2 text-bg-danger"
+                    ><t t-esc="failed_messages.length" /></span>
+                </div>
+                <hr class="flex-grow-1 fe-3" />
+            </div>
+            <t t-if="state.showFailedMessageList">
+                <div class="o-mail-MessageCardList d-flex flex-column">
+                    <t
+                        t-foreach="failed_messages"
+                        t-as="failed_message"
+                        t-key="failed_message.id"
+                    >
+                        <FailedMessage
+                            message="failed_message"
+                            onUpdate.bind="load"
+                            reloadParentView.bind="reloadParentView"
+                        />
+                    </t>
+                </div>
+            </t>
+        </div>
+    </t>
+    <t
+        t-name="mail_tracking.Chatter"
+        t-inherit="mail.Chatter"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//t[@t-call='mail.ActivityList']/.." position="after">
+            <t t-if="failed_messages?.length and !state.isSearchOpen">
+                <t t-call="mail_tracking.FailedMessageList" />
+            </t>
+        </xpath>
+        <!-- Failed messages search panel -->
+        <xpath expr="//button[@t-on-click='onClickSearch']" position="before">
+            <button
+                class="btn btn-link text-danger"
+                aria-label="Failed messages"
+                title="Failed messages"
+                t-on-click="toggleSearchFailedOpen"
+                t-if="failed_messages?.length"
+            >
+                <span class="text-danger">
+                    <i class="fa fa-exclamation-triangle" role="img" />
+                    <sup
+                        class="o-mail-Followers-counter"
+                        t-out="failed_messages.length"
+                    />
+                </span>
+            </button>
+        </xpath>
+        <xpath expr="//div[@t-if='state.isSearchOpen']" position="after">
+            <div t-elif="state.isSearchFailedOpen" class="o-mail-Chatter-search">
+                <FailedMessagesPanel
+                    closeSearch.bind="closeSearchFailed"
+                    thread="state.thread"
+                    onClickJump.bind="closeSearchFailed"
+                />
+            </div>
+        </xpath>
+    </t>
+</templates>

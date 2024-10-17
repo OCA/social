@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="mail_tracking.ThreadIcon"
+        t-inherit="mail.ThreadIcon"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//div[contains(@t-elif,'history')]" position="after">
+            <div
+                t-elif="props.thread.id === 'failed'"
+                class="fa fa-fw fa-exclamation-triangle"
+                title="Failed"
+            />
+        </xpath>
+    </t>
+</templates>

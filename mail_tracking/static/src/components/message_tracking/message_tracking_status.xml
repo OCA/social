@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail_tracking.TrackingStatus">
+        <span t-if="tracking['isCc']" class="mail_tracking_cc">
+            <i class="fa fa-cc" role="img" aria-label="Cc" />
+        </span>
+        <span
+            t-elif="!tracking['isCc'] &amp;&amp; !tracking['partner_id']"
+            class="mail_anon_recipient"
+        >
+            <i class="fa fa-low-vision" role="img" aria-label="Anonymous Recipient" />
+        </span>
+        <span t-elif="tracking['status'] === 'unknown'" class="mail_tracking_unknown">
+            <i class="fa fa-ban" role="img" aria-label="Unknown Status" />
+        </span>
+        <span
+            t-elif="tracking['status'] === 'waiting'"
+            class="mail_tracking_waiting"
+            role="button"
+        >
+            <i class="fa fa-clock-o" role="img" aria-label="Waiting Status" />
+        </span>
+        <span
+            t-elif="tracking['status'] === 'error'"
+            class="mail_tracking_error text-danger"
+            role="button"
+        >
+            <i
+                t-if="tracking['error_type'] === 'no_recipient'"
+                class="fa fa-user-times"
+                role="img"
+                aria-label="Error Status"
+            />
+            <i t-else="" class="fa fa-remove" />
+        </span>
+        <span
+            t-elif="tracking['status'] === 'sent'"
+            class="mail_tracking_sent"
+            role="button"
+        >
+            <i class="fa fa-check" role="img" aria-label="Sent Status" />
+        </span>
+        <span
+            t-elif="tracking['status'] === 'delivered'"
+            class="fa-stack mail_tracking_delivered"
+            role="button"
+        >
+            <i
+                class="fa fa-check fa-stack-1x"
+                style="margin-left:1px"
+                role="img"
+                aria-label="Delivered Status Left Checkmark"
+            />
+            <i
+                class="fa fa-check fa-inverse fa-stack-1x"
+                style="margin-left:-2px;"
+                role="img"
+                aria-label="Delivered Status Center Checkmark"
+            />
+            <i
+                class="fa fa-check fa-stack-1x"
+                style="margin-left:-3px"
+                role="img"
+                aria-label="Delivered Status Right Checkmark"
+            />
+        </span>
+        <span
+            t-elif="tracking['status'] === 'opened'"
+            class="fa-stack text-success"
+            role="button"
+        >
+            <i
+                class="fa fa-check fa-stack-1x"
+                style="margin-left:1px"
+                role="img"
+                aria-label="Opened Status Left Checkmark"
+            />
+            <i
+                class="fa fa-check fa-inverse fa-stack-1x"
+                style="margin-left:-2px;"
+                role="img"
+                aria-label="Opened Status Center Checkmark"
+            />
+            <i
+                class="fa fa-check fa-stack-1x"
+                style="margin-left:-3px"
+                role="img"
+                aria-label="Opened Status Right Checkmark"
+            />
+        </span>
+    </t>
+</templates>

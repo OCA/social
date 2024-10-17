@@ -1,0 +1,5 @@
+.o-discuss-badge {
+    &.o-danger {
+        --o-discuss-badge-bg: #{$o-danger};
+    }
+}
