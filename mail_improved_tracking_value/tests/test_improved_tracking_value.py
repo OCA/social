@@ -21,7 +21,7 @@ class TestImproveTrackingValue(TransactionCase):
         )
         cls.custom = cls.env["ir.model.fields"].create(
             {
-                "name": "custom",
+                "name": "x_custom",
                 "ttype": "monetary",
                 "model_id": cls.category.id,
                 "translate": True,
