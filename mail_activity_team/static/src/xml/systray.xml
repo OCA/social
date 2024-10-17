@@ -2,7 +2,7 @@
 <templates>
 
     <t t-extend="mail.systray.ActivityMenu">
-        <t t-jquery=".o_mail_systray_dropdown_items" t-operation="before">
+        <t t-jquery=".o_all_activities_button" t-operation="before">
             <div class="o_mail_systray_dropdown_top">
                 <div>
                     <button
