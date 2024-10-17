@@ -1,0 +1,1 @@
+odoo-addon-mail_tracking @ git+https://github.com/OCA/social.git@refs/pull/1476/head#subdirectory=mail_tracking
