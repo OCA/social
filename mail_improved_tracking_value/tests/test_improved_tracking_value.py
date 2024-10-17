@@ -16,6 +16,17 @@ class TestImproveTrackingValue(TransactionCase):
         cls.dr = cls.env.ref("base.res_partner_title_doctor")
         cls.mm = cls.env.ref("base.res_partner_title_madam")
         cls.pf = cls.env.ref("base.res_partner_title_prof")
+        cls.category = cls.env["res.partner.category"].create(
+            {"name": "Local Businesses"}
+        )
+        cls.custom = cls.env["ir.model.fields"].create(
+            {
+                "name": "custom",
+                "ttype": "monetary",
+                "model_id": cls.category.id,
+                "translate": True,
+            }
+        )
 
     def test_change_one2many(self):
         """Test tracking one2many changes"""
@@ -117,9 +128,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "mail_message_id": self.msg.id,
                 "old_value_integer": 1,
                 "new_value_integer": 3,
-                "field_id": self.env["ir.model.fields"]
-                ._get("res.partner", "supplier_rank")
-                .id,
+                "field_id": self.env["ir.model.fields"]._get("res.groups", "color").id,
             }
         )
         self.assertEqual(r.old_value_formatted, str(1))
@@ -132,7 +141,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "old_value_float": 1.1,
                 "new_value_float": 3.14159,
                 "field_id": self.env["ir.model.fields"]
-                ._get("res.partner", "credit_limit")
+                ._get("res.partner", "partner_latitude")
                 .id,
             }
         )
@@ -145,9 +154,7 @@ class TestImproveTrackingValue(TransactionCase):
                 "mail_message_id": self.msg.id,
                 "old_value_float": 3.45,
                 "new_value_float": 5.45,
-                "field_id": self.env["ir.model.fields"]
-                ._get("res.partner", "credit")
-                .id,
+                "field_id": self.custom.id,
             }
         )
         self.assertEqual(r.old_value_formatted, str(3.45))
