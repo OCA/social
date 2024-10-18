@@ -31,6 +31,15 @@ class MailActivity(models.Model):
         index=True,
     )
 
+    @api.model_create_multi
+    def create(self, values):
+        for value in values:
+            if "team_user_id" in value and value.get(
+                "team_user_id", False
+            ) != value.get("user_id"):
+                value.update({"user_id": value.get("team_user_id", False)})
+        return super().create(values)
+
     @api.onchange("user_id")
     def _onchange_user_id(self):
         if not self.user_id or (
