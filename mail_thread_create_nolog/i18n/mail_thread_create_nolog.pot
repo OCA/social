@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_thread_create_nolog
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_thread_create_nolog
+#: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_message__display_name
+#: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_thread__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_thread_create_nolog
+#: model:ir.model,name:mail_thread_create_nolog.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_thread_create_nolog
+#: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_message__id
+#: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_thread__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_thread_create_nolog
+#: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_message____last_update
+#: model:ir.model.fields,field_description:mail_thread_create_nolog.field_mail_thread____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mail_thread_create_nolog
+#: model:ir.model,name:mail_thread_create_nolog.model_mail_message
+msgid "Message"
+msgstr ""
