@@ -22,15 +22,11 @@ msgstr ""
 #. module: mail_optional_follower_notification
 #: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_form
 msgid ""
-"<span name=\"no_followers_text\" attrs=\"{'invisible': [('notify_followers', "
-"'=', True)]}\" style=\"color: red;\"> - Warning : Followers will not be "
-"notified but they can access the notification directly from the document (if "
-"they are allowed to)</span>"
+"<span name=\"no_followers_text\" invisible=\"notify_followers\" "
+"style=\"color: red;\"> - Warning : Followers will not be notified but they "
+"can access the notification directly from the document (if they are allowed "
+"to)</span>"
 msgstr ""
-"<span name=\"no_followers_text\" attrs=\"{'invisible': [('notify_followers', "
-"'=', True)]}\" style=\"color: red;\"> - Warning : Los seguidores no serán "
-"notificados, pero pueden acceder a la notificación directamente desde el "
-"documento (si se les permite)</span>"
 
 #. module: mail_optional_follower_notification
 #: model:ir.model,name:mail_optional_follower_notification.model_mail_thread
@@ -43,10 +39,20 @@ msgid "Email composition wizard"
 msgstr "Asistente composición Correo Electrónico"
 
 #. module: mail_optional_follower_notification
-#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_invoice_send__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 msgid "Notify Followers"
 msgstr "Notificar a los seguidores"
+
+#~ msgid ""
+#~ "<span name=\"no_followers_text\" attrs=\"{'invisible': "
+#~ "[('notify_followers', '=', True)]}\" style=\"color: red;\"> - Warning : "
+#~ "Followers will not be notified but they can access the notification "
+#~ "directly from the document (if they are allowed to)</span>"
+#~ msgstr ""
+#~ "<span name=\"no_followers_text\" attrs=\"{'invisible': "
+#~ "[('notify_followers', '=', True)]}\" style=\"color: red;\"> - Warning : "
+#~ "Los seguidores no serán notificados, pero pueden acceder a la "
+#~ "notificación directamente desde el documento (si se les permite)</span>"
 
 #~ msgid "Message"
 #~ msgstr "Mensaje"
