@@ -23,10 +23,10 @@ msgstr ""
 #. module: mail_optional_follower_notification
 #: model_terms:ir.ui.view,arch_db:mail_optional_follower_notification.email_compose_message_wizard_form
 msgid ""
-"<span name=\"no_followers_text\" attrs=\"{'invisible': [('notify_followers', "
-"'=', True)]}\" style=\"color: red;\"> - Warning : Followers will not be "
-"notified but they can access the notification directly from the document (if "
-"they are allowed to)</span>"
+"<span name=\"no_followers_text\" invisible=\"notify_followers\" "
+"style=\"color: red;\"> - Warning : Followers will not be notified but they "
+"can access the notification directly from the document (if they are allowed "
+"to)</span>"
 msgstr ""
 
 #. module: mail_optional_follower_notification
@@ -40,7 +40,6 @@ msgid "Email composition wizard"
 msgstr "Assistente de composição de email"
 
 #. module: mail_optional_follower_notification
-#: model:ir.model.fields,field_description:mail_optional_follower_notification.field_account_invoice_send__notify_followers
 #: model:ir.model.fields,field_description:mail_optional_follower_notification.field_mail_compose_message__notify_followers
 #, fuzzy
 msgid "Notify Followers"
@@ -55,10 +54,10 @@ msgstr "Notificar seguidores"
 #~ "directly from the document (if they are allowed to)</span>\n"
 #~ "            </span>"
 #~ msgstr ""
-#~ "<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" style="
-#~ "\"color: red;\"> - Aviso: os seguidores não serão notificados mas poderão "
-#~ "aceder à notificação diretamente a partir do documento (se para isso "
-#~ "tiverem permissão)</span>"
+#~ "<span attrs=\"{'invisible': [('notify_followers', '=', True)]}\" "
+#~ "style=\"color: red;\"> - Aviso: os seguidores não serão notificados mas "
+#~ "poderão aceder à notificação diretamente a partir do documento (se para "
+#~ "isso tiverem permissão)</span>"
 
 #~ msgid "Message"
 #~ msgstr "Mensagem"
