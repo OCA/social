@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+<t t-name="mail_tracking.FailedMessage">
+    <div class="card mb-2">
+        <div class="card-body py-2">
+            <div class="o-mail-Activity d-flex px-3 py-1 mb-2">
+                <div class="o-mail-Activity-sidebar flex-shrink-0 position-relative">
+                    <img
+                            class="o-mail-Message-avatar w-100 h-100 rounded"
+                            t-att-src="authorAvatarUrl"
+                            t-att-class="authorAvatarAttClass"
+                            t-on-click.stop.prevent="onClickAvatar"
+                        />
+                        <div
+                            class="o-mail-Activity-iconContainer position-absolute top-100 start-100 translate-middle d-flex align-items-center justify-content-center mt-n1 ms-n1 rounded-circle w-50 h-50 bg-danger text-light"
+                        >
+                            <i class="fa small fa-exclamation" />
+                        </div>
+                </div>
+                <div class="flex-grow px-3">
+                    <div class="o-mail-Activity-info lh-1">
+                        <span
+                                t-if="message.author or message.email_from"
+                                class="o-mail-Message-author"
+                                t-on-click.stop.prevent="onClickAvatar"
+                                t-att-role="hasAuthorClickable() ? 'button' : ''"
+                            >
+                            <strong class="me-1 text-truncate"><t
+                                        t-if="message.author"
+                                        t-esc="message.author.name"
+                                    /><t
+                                        t-else=""
+                                        t-esc="message.email_from"
+                                    /></strong>
+                        </span>
+                        <small
+                                t-if="!message.is_transient"
+                                class="o-mail-Message-date text-muted opacity-75"
+                                t-att-class="{ 'me-2': !isAlignedRight }"
+                                t-att-title="message.datetimeShort"
+                            >
+                            - <RelativeTime datetime="message.datetime" />
+                        </small>
+                        <i
+                                class="fa fa-info-circle btn-link btn-primary cursor-pointer ms-1"
+                                role="img"
+                                title="Info"
+                                aria-label="Info"
+                                t-on-click="toggleDetails"
+                            />
+                    </div>
+                    <div class="lh-lg">
+                        <FailedMessageReview message="message" />
+                        <span>
+                            <a
+                                    href="#"
+                                    class="btn btn-link btn-success text-muted p-0 me-3"
+                                    role="button"
+                                    t-on-click="onClickJump"
+                                >
+                                <i
+                                        class="fa fa-angle-double-down"
+                                        role="img"
+                                        aria-label="Go"
+                                    />
+                                Go to message
+                            </a>
+                        </span>
+                    </div>
+                    <div class="o-mail-Activity-info lh-1">
+                        <strong class="text-danger">Failed Recipients: </strong>
+                        <MessageTracking
+                                partner_trackings="failed_recipients"
+                                message="message"
+                                skip_track_links="true"
+                            />
+                    </div>
+                    <div
+                            class="position-relative text-break o-mail-Message-body p-1"
+                            t-if="state.showDetails"
+                        >
+                        <em
+                                t-if="message.subject and !message.isSubjectSimilarToOriginThreadName and !message.isSubjectDefault"
+                                class="mb-1 me-2"
+                            >Subject: <t t-out="message.subject" /></em>
+                        <t t-if="message.body" t-out="message.body" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</t>
+
+</templates>
