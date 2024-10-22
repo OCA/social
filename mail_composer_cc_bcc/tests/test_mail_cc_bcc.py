@@ -4,11 +4,13 @@
 import hashlib
 import inspect
 import logging
+from unittest.mock import patch
 
 from odoo import tools
 from odoo.tests import Form
 
 from odoo.addons.mail.models.mail_mail import MailMail as upstream
+from odoo.addons.mail.models.mail_thread import MailThread
 from odoo.addons.mail.tests.test_mail_composer import TestMailComposer
 
 # When Odoo upstream function _send in the mall.mail model, that has been fully
@@ -194,3 +196,59 @@ class TestMailCcBcc(TestMailComposer):
             if subject == mail.get("subject"):
                 sent_mails += 1
         self.assertEqual(sent_mails, 1)
+
+    def test_tracking_mail_without_cc_bcc(self):
+        Partner = self.env["res.partner"]
+        p1 = Partner.create(
+            {"name": "Customer1", "email": "test1@test.example.com"}
+        ).with_context(mail_notrack=False)
+        self.cr.precommit.clear()
+        p2 = Partner.create({"name": "Customer2", "email": "test2@test.example.com"})
+
+        original_message_post = MailThread.message_post
+
+        def patched_message_post(self, **kwargs):
+            self = self.with_context(
+                mail_post_autofollow=self.env.context.get("mail_post_autofollow", True),
+            )
+            # to trigger tracking email
+            p1.write({"email": "test@test.example.com"})
+            return original_message_post(self, **kwargs)
+
+        ctx = {
+            "default_partner_ids": p1.ids,
+            "default_model": Partner._name,
+            "default_res_id": p1.id,
+            "mail_notify_force_send": True,
+        }
+        form = Form(self.env["mail.compose.message"].with_context(**ctx))
+        form.body = "<p>Hello</p>"
+        composer = form.save()
+        composer.partner_bcc_ids = p2.ids
+        with self.mock_mail_gateway(), self.mock_mail_app(), patch(
+            "odoo.addons.mail.models.mail_thread.MailThread.message_post",
+            new=patched_message_post,
+        ):
+            composer._action_send_mail()
+            self.flush_tracking()
+        self.assertEqual(
+            len(self._new_msgs),
+            2,
+        )
+        self.assertEqual(
+            self.ref("mail.mt_note"),
+            self._new_msgs[1].subtype_id.id,
+            "Expected a tracking message",
+        )
+
+        # Main email should include cc/bcc
+        main_message = self._new_msgs.filtered(lambda x: x.message_type == "comment")
+        self.assertEqual(len(main_message.notified_partner_ids), 2)
+        self.assertEqual(len(main_message.notification_ids), 2)
+        main_mail = main_message.mail_ids
+        self.assertEqual(len(main_mail.recipient_ids), 2)
+
+        # tracking email should not include cc/bcc
+        tracking_message = self._new_msgs.filtered(lambda x: x.message_type == "note")
+        tracking_field_mail = tracking_message.mail_ids
+        self.assertFalse(tracking_field_mail.email_bcc)
