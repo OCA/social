@@ -29,6 +29,10 @@ class ResConfigSettings(models.TransientModel):
         readonly=True,
         store=False,
     )
+    show_followers_models_to_exclude = fields.Char(
+        help="Tecnichal model names separated by coma",
+        config_parameter="show_followers.models_to_exclude",
+    )
 
     @api.onchange(
         "show_followers_message_sent_to",

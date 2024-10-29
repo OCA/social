@@ -15,6 +15,7 @@
     "depends": ["base", "mail"],
     "maintainers": ["yajo"],
     "data": [
+        "data/config_parameter_data.xml",
         "views/res_config_settings.xml",
         "views/res_users.xml",
     ],

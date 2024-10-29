@@ -60,9 +60,15 @@ class MailMail(models.Model):
 
     def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
         group_user = self.env.ref("base.group_user")
-
+        models_to_exclude = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("show_followers.models_to_exclude", "")
+        )
         for mail in self:
             if not (mail.model and mail.res_id and group_user):
+                continue
+            if models_to_exclude and mail.model in models_to_exclude.split(","):
                 continue
             # recipients from any Notification Type (i.e. email, inbox, etc.)
             recipients = mail.notification_ids.res_partner_id
