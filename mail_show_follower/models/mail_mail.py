@@ -72,14 +72,16 @@ class MailMail(models.Model):
             show_in_cc_recipients = recipients._filter_shown_in_cc(show_internal_users)
             if len(show_in_cc_recipients) <= 1:
                 continue
-
-            langs = (
-                mail.notification_ids.res_partner_id.mapped("lang")
+            lang = (
+                mail.notification_ids.res_partner_id[:1].lang
                 or mail.author_id.lang
                 or company.partner_id.lang
+                or "en_US"
             )
-            final_cc = mail.with_context(lang=langs[0])._build_cc_text(
-                show_in_cc_recipients
+            final_cc = (
+                mail.with_context(lang=lang)
+                .with_company(company)
+                ._build_cc_text(show_in_cc_recipients)
             )
             mail.body_html = final_cc + mail.body_html
 
