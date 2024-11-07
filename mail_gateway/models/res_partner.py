@@ -67,6 +67,8 @@ class ResPartnerGatewayChannel(models.Model):
     )
 
     def name_get(self):
+        # Be able to tell to which partner belongs the gateway partner channel
+        # e.g.: picking it from a selector
         result = []
         origin = super().name_get()
         if not self.env.context.get("mail_gateway_partner_info", False):
