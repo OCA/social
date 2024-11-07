@@ -28,7 +28,6 @@ class MailComposeGatewayMessage(models.TransientModel):
         "attachment_id",
         "Attachments",
     )
-
     partner_ids = fields.Many2many(
         "res.partner",
         "mail_compose_gateway_message_res_partner_rel",
@@ -36,6 +35,30 @@ class MailComposeGatewayMessage(models.TransientModel):
         "partner_id",
         "Additional Contacts",
         domain=lambda r: r._partner_ids_domain(),
+    )
+    # Dummy compatibility with other OCA modules
+    # OCA/mail_attach_existing_attachment
+    object_attachment_ids = fields.Many2many(
+        comodel_name="ir.attachment",
+        relation="mail_compose_gateway_message_ir_attachments_object_rel",
+        column1="wizard_id",
+        column2="attachment_id",
+        string="Object Attachments",
+    )
+    # OCA/mail_composer_cc_bcc
+    partner_cc_ids = fields.Many2many(
+        comodel_name="res.partner",
+        relation="mail_compose_gateway_message_res_partner_cc_rel",
+        column1="wizard_id",
+        column2="partner_id",
+        string="Cc",
+    )
+    partner_bcc_ids = fields.Many2many(
+        comodel_name="res.partner",
+        relation="mail_compose_gateway_message_res_partner_bcc_rel",
+        column1="wizard_id",
+        column2="partner_id",
+        string="Bcc",
     )
 
     def get_mail_values(self, res_ids):
