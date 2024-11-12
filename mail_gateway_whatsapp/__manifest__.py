@@ -12,8 +12,11 @@
     "depends": ["mail_gateway", "phone_validation"],
     "external_dependencies": {"python": ["requests_toolbelt"]},
     "data": [
+        "security/security.xml",
         "security/ir.model.access.csv",
         "wizards/whatsapp_composer.xml",
+        "wizards/mail_compose_gateway_message.xml",
+        "views/mail_whatsapp_template_views.xml",
         "views/mail_gateway.xml",
     ],
     "assets": {

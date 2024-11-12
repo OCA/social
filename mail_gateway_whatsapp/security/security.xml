@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <record id="mail_whatsapp_template_rule" model="ir.rule">
+        <field name="name">WhatsApp template: multicompany</field>
+        <field name="model_id" ref="model_mail_whatsapp_template" />
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
+    </record>
+</odoo>

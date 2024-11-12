@@ -19,6 +19,7 @@ In order to make it you must follow this steps:
 
   *  Use the Meta App authentication key as `Token` field
   *  Use the Meta App Phone Number ID as `Whatsapp from Phone` field
+  *  Use the Meta Account Business ID as `Whatsapp account` field (only if you need sync templates)
   *  Write your own `Webhook key`
   *  Use the Application Secret Key on `Whatsapp Security Key`. It will be used in order to validate the data
   *  Press the `Integrate Webhook Key`. In this case, it will not integrate it, we need to make it manually

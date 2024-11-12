@@ -6,7 +6,10 @@ import hmac
 import json
 from unittest.mock import MagicMock, patch
 
+from markupsafe import Markup
+
 from odoo.exceptions import UserError
+from odoo.tests import Form, RecordCapturer
 from odoo.tests.common import tagged
 from odoo.tools import mute_logger
 
@@ -14,7 +17,7 @@ from odoo.addons.mail_gateway.tests.common import MailGatewayTestCase
 
 
 @tagged("-at_install", "post_install")
-class TestMailGatewayTelegram(MailGatewayTestCase):
+class TestMailGatewayWhatsApp(MailGatewayTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -26,6 +29,17 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
                 "token": "token",
                 "whatsapp_security_key": "key",
                 "webhook_secret": "MY-SECRET",
+            }
+        )
+        cls.ws_template = cls.env["mail.whatsapp.template"].create(
+            {
+                "name": "New template",
+                "category": "marketing",
+                "language": "es",
+                "body": "Demo template",
+                "state": "approved",
+                "is_supported": True,
+                "gateway_id": cls.gateway.id,
             }
         )
         cls.partner = cls.env["res.partner"].create(
@@ -278,6 +292,65 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
                 message_type="comment",
             )
         self.assertEqual(message.notification_ids.notification_status, "exception")
+
+    def test_send_message_text(self):
+        """
+        Test that the message is sent correctly
+        - First message need a template
+        - Second message does not need a template
+        """
+        ctx = {
+            "default_res_model": self.partner._name,
+            "default_res_id": self.partner.id,
+            "default_number_field_name": "mobile",
+            "default_composition_mode": "comment",
+            "default_gateway_id": self.gateway.id,
+        }
+        self.gateway.whatsapp_account_id = "123456"
+        form_composer = Form(self.env["whatsapp.composer"].with_context(**ctx))
+        form_composer.body = "Body test"
+        self.assertTrue(form_composer.is_required_template)
+        self.assertTrue(form_composer._get_modifier("template_id", "required"))
+        form_composer.template_id = self.ws_template
+        composer = form_composer.save()
+        self.assertEqual(composer.body, "Demo template")
+        channel = self.partner._whatsapp_get_channel(
+            composer.number_field_name, composer.gateway_id
+        )
+        message_domain = [
+            ("gateway_type", "=", "whatsapp"),
+            ("model", "=", channel._name),
+            ("res_id", "=", channel.id),
+        ]
+        with RecordCapturer(self.env["mail.message"], message_domain) as capture, patch(
+            "requests.post"
+        ) as post_mock:
+            post_mock.return_value = MagicMock()
+            composer.action_send_whatsapp()
+        self.assertEqual(len(capture.records), 1)
+        self.assertEqual(capture.records.body, Markup("<p>Demo template</p>"))
+        # second message
+        form_composer = Form(self.env["whatsapp.composer"].with_context(**ctx))
+        form_composer.body = "Body test"
+        self.assertFalse(form_composer.is_required_template)
+        self.assertFalse(form_composer._get_modifier("template_id", "required"))
+        composer = form_composer.save()
+        self.assertEqual(composer.body, "Body test")
+        channel = self.partner._whatsapp_get_channel(
+            composer.number_field_name, composer.gateway_id
+        )
+        message_domain = [
+            ("gateway_type", "=", "whatsapp"),
+            ("model", "=", channel._name),
+            ("res_id", "=", channel.id),
+        ]
+        with RecordCapturer(self.env["mail.message"], message_domain) as capture, patch(
+            "requests.post"
+        ) as post_mock:
+            post_mock.return_value = MagicMock()
+            composer.action_send_whatsapp()
+        self.assertEqual(len(capture.records), 1)
+        self.assertEqual(capture.records.body, Markup("<p>Body test</p>"))
 
     def test_compose(self):
         self.gateway.webhook_key = self.webhook

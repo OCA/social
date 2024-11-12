@@ -7,7 +7,35 @@
         <field name="model">mail.gateway</field>
         <field name="inherit_id" ref="mail_gateway.mail_gateway_form_view" />
         <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    type="object"
+                    name="button_import_whatsapp_template"
+                    string="Download Templates"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    icon="fa-download"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="action"
+                    name="%(mail_gateway_whatsapp.action_mail_whatsapp_template_gateway)d"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    class="oe_stat_button"
+                    icon="fa-whatsapp"
+                >
+                    <field
+                        name="whatsapp_template_count"
+                        string="Templates"
+                        widget="statinfo"
+                    />
+                </button>
+            </xpath>
             <field name="webhook_user_id" position="after">
+                <field
+                    name="whatsapp_account_id"
+                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                />
                 <field
                     name="whatsapp_security_key"
                     attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"

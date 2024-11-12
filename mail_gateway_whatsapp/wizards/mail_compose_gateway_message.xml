@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Tecnativa - Carlos López
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="mail_compose_gateway_message_form_view">
+        <field name="model">mail.compose.gateway.message</field>
+        <field
+            name="inherit_id"
+            ref="mail_gateway.mail_compose_gateway_message_form_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='wizard_channel_ids']" position="after">
+                <field
+                    name="whatsapp_template_id"
+                    options="{'no_create': True, 'no_open': True}"
+                />
+            </xpath>
+            <xpath expr="//field[@name='template_id']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('whatsapp_template_id', '!=', False)]}</attribute>
+            </xpath>
+            <xpath expr="//field[@name='attachment_ids']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('whatsapp_template_id', '!=', False)]}</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
