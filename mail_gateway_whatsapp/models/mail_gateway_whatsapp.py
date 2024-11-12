@@ -285,14 +285,35 @@ class MailGatewayWhatsappService(models.AbstractModel):
     def _send_payload(
         self, channel, body=False, media_id=False, media_type=False, media_name=False
     ):
+        whatsapp_template = self.env["mail.whatsapp.template"]
+        if self.env.context.get("whatsapp_template_id"):
+            whatsapp_template = self.env["mail.whatsapp.template"].browse(
+                self.env.context.get("whatsapp_template_id")
+            )
         if body:
-            return {
+            payload = {
                 "messaging_product": "whatsapp",
                 "recipient_type": "individual",
                 "to": channel.gateway_channel_token,
-                "type": "text",
-                "text": {"preview_url": False, "body": html2plaintext(body)},
             }
+            if whatsapp_template:
+                payload.update(
+                    {
+                        "type": "template",
+                        "template": {
+                            "name": whatsapp_template.template_name,
+                            "language": {"code": whatsapp_template.language},
+                        },
+                    }
+                )
+            else:
+                payload.update(
+                    {
+                        "type": "text",
+                        "text": {"preview_url": False, "body": html2plaintext(body)},
+                    }
+                )
+            return payload
         if media_id:
             media_data = {"id": media_id}
             if media_type == "document":

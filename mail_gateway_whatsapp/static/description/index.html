@@ -8,10 +8,11 @@
 
 /*
 :Author: David Goodger (goodger@python.org)
-:Id: $Id: html4css1.css 8954 2022-01-20 10:10:25Z milde $
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
 :Copyright: This stylesheet has been placed in the public domain.
 
 Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
 
 See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
 customize this style sheet.
@@ -274,7 +275,7 @@ pre.literal-block, pre.doctest-block, pre.math, pre.code {
   margin-left: 2em ;
   margin-right: 2em }
 
-pre.code .ln { color: grey; } /* line numbers */
+pre.code .ln { color: gray; } /* line numbers */
 pre.code, code { background-color: #eeeeee }
 pre.code .comment, code .comment { color: #5C6576 }
 pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
@@ -300,7 +301,7 @@ span.option {
 span.pre {
   white-space: pre }
 
-span.problematic {
+span.problematic, pre.problematic {
   color: red }
 
 span.section-subtitle {
@@ -381,12 +382,13 @@ of partners in an integrated way.</p>
 </ul>
 </li>
 <li><a class="reference internal" href="#usage" id="toc-entry-4">Usage</a></li>
-<li><a class="reference internal" href="#bug-tracker" id="toc-entry-5">Bug Tracker</a></li>
-<li><a class="reference internal" href="#credits" id="toc-entry-6">Credits</a><ul>
-<li><a class="reference internal" href="#authors" id="toc-entry-7">Authors</a></li>
-<li><a class="reference internal" href="#contributors" id="toc-entry-8">Contributors</a></li>
-<li><a class="reference internal" href="#other-credits" id="toc-entry-9">Other credits</a></li>
-<li><a class="reference internal" href="#maintainers" id="toc-entry-10">Maintainers</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-5">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-6">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-7">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-8">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-9">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="toc-entry-10">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-11">Maintainers</a></li>
 </ul>
 </li>
 </ul>
@@ -412,6 +414,7 @@ In order to make it you must follow this steps:</p>
 <ul class="simple">
 <li>Use the Meta App authentication key as <cite>Token</cite> field</li>
 <li>Use the Meta App Phone Number ID as <cite>Whatsapp from Phone</cite> field</li>
+<li>Use the Meta Account Business ID as <cite>Whatsapp account</cite> field (only if you need sync templates)</li>
 <li>Write your own <cite>Webhook key</cite></li>
 <li>Use the Application Secret Key on <cite>Whatsapp Security Key</cite>. It will be used in order to validate the data</li>
 <li>Press the <cite>Integrate Webhook Key</cite>. In this case, it will not integrate it, we need to make it manually</li>
@@ -434,8 +437,16 @@ In order to make it you must follow this steps:</p>
 <li>Now you will be able to respond and receive messages to this person.</li>
 </ol>
 </div>
+<div class="section" id="known-issues-roadmap">
+<h1><a class="toc-backref" href="#toc-entry-5">Known issues / Roadmap</a></h1>
+<p><strong>WhatsApp templates</strong></p>
+<ul class="simple">
+<li>Add support for <cite>Variables</cite></li>
+<li>Add support for <cite>Buttons</cite></li>
+</ul>
+</div>
 <div class="section" id="bug-tracker">
-<h1><a class="toc-backref" href="#toc-entry-5">Bug Tracker</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-6">Bug Tracker</a></h1>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
@@ -443,29 +454,40 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
-<h1><a class="toc-backref" href="#toc-entry-6">Credits</a></h1>
+<h1><a class="toc-backref" href="#toc-entry-7">Credits</a></h1>
 <div class="section" id="authors">
-<h2><a class="toc-backref" href="#toc-entry-7">Authors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-8">Authors</a></h2>
 <ul class="simple">
 <li>Creu Blanca</li>
 <li>Dixmit</li>
 </ul>
 </div>
 <div class="section" id="contributors">
-<h2><a class="toc-backref" href="#toc-entry-8">Contributors</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-9">Contributors</a></h2>
+<ul>
+<li><p class="first">Olga Marco &lt;<a class="reference external" href="mailto:olga.marco&#64;creublanca.es">olga.marco&#64;creublanca.es</a>&gt;</p>
+</li>
+<li><p class="first">Enric Tobella &lt;<a class="reference external" href="mailto:etobella&#64;creublanca.es">etobella&#64;creublanca.es</a>&gt;</p>
+</li>
+<li><p class="first"><a class="reference external" href="https://www.tecnativa.com">Tecnativa</a>:</p>
+<blockquote>
 <ul class="simple">
-<li>Olga Marco &lt;<a class="reference external" href="mailto:olga.marco&#64;creublanca.es">olga.marco&#64;creublanca.es</a>&gt;</li>
-<li>Enric Tobella &lt;<a class="reference external" href="mailto:etobella&#64;creublanca.es">etobella&#64;creublanca.es</a>&gt;</li>
+<li>Carlos Lopez</li>
+</ul>
+</blockquote>
+</li>
 </ul>
 </div>
 <div class="section" id="other-credits">
-<h2><a class="toc-backref" href="#toc-entry-9">Other credits</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-10">Other credits</a></h2>
 <p>This work has been funded by AEOdoo (Asociación Española de Odoo - <a class="reference external" href="https://www.aeodoo.org">https://www.aeodoo.org</a>)</p>
 </div>
 <div class="section" id="maintainers">
-<h2><a class="toc-backref" href="#toc-entry-10">Maintainers</a></h2>
+<h2><a class="toc-backref" href="#toc-entry-11">Maintainers</a></h2>
 <p>This module is maintained by the OCA.</p>
-<a class="reference external image-reference" href="https://odoo-community.org"><img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" /></a>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>

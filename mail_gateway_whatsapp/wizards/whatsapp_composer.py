@@ -1,5 +1,7 @@
 # Copyright 2022 CreuBlanca
+# Copyright 2024 Tecnativa - Carlos López
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+from datetime import datetime
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
@@ -17,7 +19,57 @@ class WhatsappComposer(models.TransientModel):
     gateway_id = fields.Many2one(
         "mail.gateway", domain=[("gateway_type", "=", "whatsapp")], required=True
     )
+    template_id = fields.Many2one(
+        "mail.whatsapp.template",
+        domain="""[
+            ('gateway_id', '=', gateway_id),
+            ('state', '=', 'approved'),
+            ('is_supported', '=', True)
+        ]""",
+    )
     body = fields.Text("Message")
+    is_required_template = fields.Boolean(compute="_compute_is_required_template")
+
+    @api.depends("res_model", "res_id", "number_field_name", "gateway_id")
+    def _compute_is_required_template(self):
+        MailMessage = self.env["mail.message"]
+        for wizard in self:
+            if (
+                not wizard.res_model
+                or not wizard.gateway_id
+                or not wizard.number_field_name
+            ):
+                wizard.is_required_template = False
+                continue
+            record = self.env[wizard.res_model].browse(wizard.res_id)
+            is_required_template = True
+            channel = record._whatsapp_get_channel(
+                wizard.number_field_name, wizard.gateway_id
+            )
+            if channel:
+                last_message = MailMessage.search(
+                    [
+                        ("gateway_type", "=", "whatsapp"),
+                        ("model", "=", channel._name),
+                        ("res_id", "=", channel.id),
+                    ],
+                    order="date desc",
+                    limit=1,
+                )
+                if last_message:
+                    delta = (datetime.now() - last_message.date).total_seconds() / 3600
+                    if delta < 24.0:
+                        is_required_template = False
+            wizard.is_required_template = is_required_template
+
+    @api.onchange("gateway_id")
+    def onchange_gateway_id(self):
+        self.template_id = False
+
+    @api.onchange("template_id")
+    def onchange_template_id(self):
+        if self.template_id:
+            self.body = self.template_id.body
 
     @api.model
     def default_get(self, fields):
@@ -33,7 +85,7 @@ class WhatsappComposer(models.TransientModel):
         if not record:
             return
         channel = record._whatsapp_get_channel(self.number_field_name, self.gateway_id)
-        channel.message_post(
+        channel.with_context(whatsapp_template_id=self.template_id.id).message_post(
             body=self.body, subtype_xmlid="mail.mt_comment", message_type="comment"
         )
 
