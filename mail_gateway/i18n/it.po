@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-12 20:06+0000\n"
+"PO-Revision-Date: 2024-11-13 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -523,17 +523,17 @@ msgstr "Gestione ospite"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mass_mailing_id
 msgid "Mass Mailing"
-msgstr ""
+msgstr "Spedizione di massa"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__campaign_id
 msgid "Mass Mailing Campaign"
-msgstr ""
+msgstr "Campagna spedizione di massa"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mass_mailing_name
 msgid "Mass Mailing Name"
-msgstr ""
+msgstr "Nome spedizione di massa"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__member_ids
@@ -565,7 +565,7 @@ msgstr "Notifiche messaggio"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__record_name
 msgid "Message Record Name"
-msgstr ""
+msgstr "Nome record messaggio"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__message_type
@@ -573,6 +573,8 @@ msgid ""
 "Message type: email for email message, notification for system message, "
 "comment for other messages such as user replies"
 msgstr ""
+"Tipo di messaggio: e-mail per messaggio e-mail, notifica per messaggio di "
+"sistema, commento per altri messaggi come risposte utente"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__name
@@ -595,17 +597,17 @@ msgstr "Tipo notifica"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__notify
 msgid "Notify followers"
-msgstr ""
+msgstr "Avvisa chi segue"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__notify
 msgid "Notify followers of the document (mass post only)"
-msgstr ""
+msgstr "Notifica chi segue il documento (solo invio di massa)"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__object_attachment_ids
 msgid "Object Attachments"
-msgstr ""
+msgstr "Allegati oggetto"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__lang
@@ -615,6 +617,10 @@ msgid ""
 "a placeholder expression that provides the appropriate language, e.g. "
 "{{ object.partner_id.lang }}."
 msgstr ""
+"Lingua di traduzione facoltativa (codice ISO) da selezionare quando si invia "
+"un'e-mail. Se non impostata, verrà utilizzata la versione inglese. Di solito "
+"dovrebbe essere un'espressione segnaposto che fornisce la lingua "
+"appropriata, ad esempio {{ object.partner_id.lang }}."
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to_mode
@@ -625,6 +631,12 @@ msgid ""
 "tracking message-id instead of original document discussion thread. \n"
 " This has an impact on the generated message-id."
 msgstr ""
+"Discussione originale: le risposte vanno nella traccia di discussione del "
+"documento originale.\n"
+"Un altro indirizzo e-mail: le risposte vanno all'indirizzo e-mail menzionato "
+"nel messaggio di tracciamento-id invece che nella traccia di discussione del "
+"documento originale.\n"
+"Questo ha un impatto sul message-id generato."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_message_id
@@ -635,12 +647,12 @@ msgstr "Messaggio gateway originale"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mail_server_id
 msgid "Outgoing mail server"
-msgstr ""
+msgstr "Server posta in uscita"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__parent_id
 msgid "Parent Message"
-msgstr ""
+msgstr "Messaggio padre"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__partner_id
@@ -667,12 +679,12 @@ msgstr "Riferimento record"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__res_id
 msgid "Related Document ID"
-msgstr ""
+msgstr "ID documento correlato"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__model
 msgid "Related Document Model"
-msgstr ""
+msgstr "Modello documento correlato"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
@@ -682,17 +694,17 @@ msgstr "Rimuovi webhook"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__render_model
 msgid "Rendering Model"
-msgstr ""
+msgstr "Modello presentazione"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__reply_to_mode
 msgid "Replies"
-msgstr ""
+msgstr "Risposte"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__reply_to
 msgid "Reply To"
-msgstr ""
+msgstr "Rispondi a"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to
@@ -700,6 +712,8 @@ msgid ""
 "Reply email address. Setting the reply_to bypasses the automatic thread "
 "creation."
 msgstr ""
+"Indirizzo e-mail risposta. Impostando replay_to evitando la creazione "
+"automatica dell'argomento."
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_send_form_view
@@ -721,12 +735,12 @@ msgstr "Invia con gateway"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__subject
 msgid "Subject"
-msgstr ""
+msgstr "Oggetto"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__subtype_id
 msgid "Subtype"
-msgstr ""
+msgstr "Sottotipo"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_partner_gateway_channel
@@ -740,6 +754,9 @@ msgid ""
 "including from the Technical menu in the Settings, in order to preserve "
 "storage space of your Odoo database."
 msgstr ""
+"Questa opzione rimuove definitivamente ogni traccia dell'e-mail dopo il suo "
+"invio, anche dal menu Tecnico nelle Impostazioni, in modo da preservare lo "
+"spazio di archiviazione del database Odoo."
 
 #. module: mail_gateway
 #. odoo-javascript
@@ -761,7 +778,7 @@ msgstr "Il token deve essere univoco"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__message_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
@@ -771,12 +788,12 @@ msgstr "Aggiorna webhook"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__use_active_domain
 msgid "Use active domain"
-msgstr ""
+msgstr "Usa dominio attivo"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__template_id
 msgid "Use template"
-msgstr ""
+msgstr "Usa modello"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_users
@@ -825,12 +842,12 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__wizard_channel_ids
 msgid "Wizard Channel"
-msgstr ""
+msgstr "Procedura guidata canale"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__wizard_partner_ids
 msgid "Wizard Partner"
-msgstr ""
+msgstr "Partner procedura guidata"
 
 #. module: mail_gateway
 #. odoo-javascript
