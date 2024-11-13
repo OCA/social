@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 9.0c\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-01-18 03:39+0000\n"
-"PO-Revision-Date: 2024-02-04 16:37+0000\n"
+"PO-Revision-Date: 2024-11-13 10:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: base_search_mail_content
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__body
@@ -140,7 +140,7 @@ msgstr "Rispondi a"
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_mail__subject
 #: model:ir.model.fields,field_description:base_search_mail_content.field_mail_message__subject
 msgid "Subject"
-msgstr "Soggetto"
+msgstr "Oggetto"
 
 #~ msgid "Field"
 #~ msgstr "Campo"
