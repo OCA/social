@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-14 14:06+0000\n"
+"PO-Revision-Date: 2024-11-14 19:06+0000\n"
 "Last-Translator: PabloMartin32 <pablo.martin@factorlibre.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -273,6 +273,8 @@ msgid ""
 "If the sanitized phone number is on the blacklist, the contact won't receive"
 " mass mailing sms anymore, from any list"
 msgstr ""
+"Si el número de teléfono saneado está en la blacklist, el contacto no "
+"recibirá el envío masivo de sms nunca mñas, de ninguna lista"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__mobile_blacklisted
@@ -281,6 +283,9 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
+"Indica si un número de teléfono saneado de la lista negra es un número de "
+"móvil. Ayuda a distinguir qué número está en la lista negra cuando hay tanto "
+"un número de móvil como de teléfono en un modelo."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__phone_blacklisted
@@ -289,98 +294,101 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
+"Indica si un teléfono snaeado es un número de teléfono. Ayuda a diferenciar "
+"que número de teléfono está en una lista negra cuando hay tanto un número de "
+"teléfono como de móvil."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "Es seguidor"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última modificación el"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_mail_gateway
 msgid "Mail Gateway"
-msgstr ""
+msgstr "Gateway de correo"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Adjunto principal"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer__body
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_content
 msgid "Message Content"
-msgstr ""
+msgstr "Contenido del mensaje"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Error en la entrega del mensaje"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__message_content
 msgid "Message content, to be used only in searches"
-msgstr ""
+msgstr "Contenido del mensaje, que sólo se utilizará en las búsquedas"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Mensajes"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Meta developer platform"
-msgstr ""
+msgstr "Plataforma de desarrolladores de Meta"
 
 #. module: mail_gateway_whatsapp
 #. odoo-python
 #: code:addons/mail_gateway_whatsapp/models/mail_gateway_whatsapp.py:0
 #, python-format
 msgid "Mimetype is not valid"
-msgstr ""
+msgstr "Mimetype no es válido"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer__number_field_name
 msgid "Number Field Name"
-msgstr ""
+msgstr "Número nombre del campo"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Número de acciones"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Número de errores"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Número de mensajes que requieren una acción"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Número de mensajes con error de envío"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -388,6 +396,8 @@ msgid ""
 "On Facebook Develpment, return to the app menu and go to <b>Whatsapp / "
 "Configuration</b>."
 msgstr ""
+"En desarrolladores de Facebook, vuelva al menú de la app y vaya a "
+"<b>Whatsapp / Configuración</b>."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -396,6 +406,9 @@ msgid ""
 "gateway. For the verification identifier, use the <b>Whatsapp Security "
 "Key</b> field."
 msgstr ""
+"En el wizard, rellene el campo URL con el campo <b>Webhook URL</b> del "
+"Gateway. Para la verificación de identidad, use la <b>el campo clave de "
+"seguridad de Whatsapp</b>."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -403,43 +416,45 @@ msgid ""
 "Once it is created, Generate a new token related to the created app with no "
 "expiry and give access to all whatsapp permissions."
 msgstr ""
+"Una vez esté creado, genere un nuevo token relacionado con la app creada de "
+"manera permanente para dar acceso a todos los permisos de whatsapp."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__phone_sanitized_blacklisted
 msgid "Phone Blacklisted"
-msgstr ""
+msgstr "Blacklist de móvil"
 
 #. module: mail_gateway_whatsapp
 #. odoo-python
 #: code:addons/mail_gateway_whatsapp/models/mail_thread.py:0
 #, python-format
 msgid "Phone cannot be sanitized"
-msgstr ""
+msgstr "El móvil no puede ser saneado"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__phone_mobile_search
 msgid "Phone/Mobile"
-msgstr ""
+msgstr "Teléfono/Móvil"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Press the button Integrate webhook."
-msgstr ""
+msgstr "Pulse el botón de integrar webhook."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__phone_sanitized
 msgid "Sanitized Number"
-msgstr ""
+msgstr "Número saneado"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Save this record. All the values have been filled"
-msgstr ""
+msgstr "Guarde este registro. Se han rellenado todos los valores"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Select a name and create it"
-msgstr ""
+msgstr "Elija un nombre y crealo"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -447,21 +462,23 @@ msgid ""
 "Select the <b>Other</b> option, then <b>Business</b> in order to create "
 "Whatsapp manager"
 msgstr ""
+"Seleccione la <b>otra</b>opción, despuñes <b>Negocio</b>para crear un "
+"manager de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Select the Whatsapp API on the products of the application"
-msgstr ""
+msgstr "Seleccione la API de Whatsapp en los productos de la aplicación"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Select the business that you will use"
-msgstr ""
+msgstr "Elija el negocio que usará"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.whatsapp_composer_form_view
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #. module: mail_gateway_whatsapp
 #. odoo-javascript
@@ -469,17 +486,17 @@ msgstr ""
 #: model:ir.actions.act_window,name:mail_gateway_whatsapp.whatsapp_composer_act_window
 #, python-format
 msgid "Send Whatsapp Message"
-msgstr ""
+msgstr "Envíe un mensaje de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Setting webhook and version"
-msgstr ""
+msgstr "Configuración de webhook y versión"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.whatsapp_composer_form_view
 msgid "Show Chat"
-msgstr ""
+msgstr "Mostrar chat"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -487,33 +504,35 @@ msgid ""
 "Show the secret key of the application and copy it to the <b>Webhook "
 "secret</b> field."
 msgstr ""
+"Mostrar la clave secreta de la aplicación y copiarla en el campo<b>Webhook "
+"secret</b>."
 
 #. module: mail_gateway_whatsapp
 #. odoo-python
 #: code:addons/mail_gateway_whatsapp/models/mail_gateway_whatsapp.py:0
 #, python-format
 msgid "Unable to send the whatsapp message"
-msgstr ""
+msgstr "No es posible enviar este mensaje de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Verify and save the wizard."
-msgstr ""
+msgstr "Verifique y guarde este wizard."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Mensajes del website"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Histórico de comunicación del website"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields.selection,name:mail_gateway_whatsapp.selection__mail_gateway__gateway_type__whatsapp
 msgid "WhatsApp"
-msgstr ""
+msgstr "WhatsApp"
 
 #. module: mail_gateway_whatsapp
 #. odoo-javascript
@@ -530,29 +549,29 @@ msgstr ""
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_mail_gateway__whatsapp_from_phone
 msgid "Whatsapp From Phone"
-msgstr ""
+msgstr "Whatsapp desde el teléfono"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_mail_gateway_whatsapp
 msgid "Whatsapp Gateway services"
-msgstr ""
+msgstr "Servicios de gateway de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_mail_gateway__whatsapp_security_key
 msgid "Whatsapp Security Key"
-msgstr ""
+msgstr "Clave de seguridad de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_mail_gateway__whatsapp_version
 msgid "Whatsapp Version"
-msgstr ""
+msgstr "Versión de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Whatsapp configuration info"
-msgstr ""
+msgstr "Configuración de información de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "meta business site."
-msgstr ""
+msgstr "sitio de negocio de meta."
