@@ -1,4 +1,5 @@
 # Copyright 2019 Therp BV <https://therp.nl>
+# Copyright 2024 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Mail Embed Image",
@@ -9,7 +10,11 @@
     "summary": "Replace img.src's which start with http with inline cids",
     "website": "https://github.com/OCA/social",
     "depends": [
+        "mail",
         "web",
+    ],
+    "data": [
+        "views/res_config_settings_views.xml",
     ],
     "installable": True,
     "application": False,
