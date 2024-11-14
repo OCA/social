@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-10-03 16:06+0000\n"
-"Last-Translator: FranciscoFactorLibre <francisco.santos@factorlibre.com>\n"
+"PO-Revision-Date: 2024-11-14 11:06+0000\n"
+"Last-Translator: PabloMartin32 <pablo.martin@factorlibre.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -23,16 +23,22 @@ msgid ""
 "                            You should set some random value of your choice for this fields.\n"
 "                            Ensure that facebook will be able to comunicate with your server.</span>"
 msgstr ""
+"<span>Escriba los valores en los campo <b>Clave Webhook</b>y <b>Clave de "
+"seguridad de Whatsapp</b>\n"
+"                                                               Deberá poner "
+"valores aleatorios a su elección para estos campos.\n"
+"                                                               Asegurese de "
+"que Facebook podrá contactar con su servidor."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access"
-msgstr ""
+msgstr "Acceso"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access the menu <b>Configuration / Advanced Options</b>."
-msgstr ""
+msgstr "Accede al menú <b>Configuración / Opciones Avanzadas</b>."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
