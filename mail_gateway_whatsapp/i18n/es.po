@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-14 19:06+0000\n"
+"PO-Revision-Date: 2024-11-15 15:06+0000\n"
 "Last-Translator: PabloMartin32 <pablo.martin@factorlibre.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -73,12 +73,12 @@ msgstr "Recuento de archivos adjuntos"
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__mobile_blacklisted
 msgid "Blacklisted Phone Is Mobile"
-msgstr ""
+msgstr "El teléfono de la lista negra en un móvil"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__phone_blacklisted
 msgid "Blacklisted Phone is Phone"
-msgstr ""
+msgstr "El teléfono de la lista negra en un teléfono"
 
 #. module: mail_gateway_whatsapp
 #. odoo-python
@@ -169,7 +169,7 @@ msgstr "ID (Identificación)"
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer__res_model
 msgid "Document Model Name"
-msgstr ""
+msgstr "Nombre del Documento del Modelo"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_mail_thread
@@ -539,7 +539,7 @@ msgstr "WhatsApp"
 #: code:addons/mail_gateway_whatsapp/static/src/components/send_whatsapp_button/send_whatsapp_button.xml:0
 #, python-format
 msgid "Whatsapp"
-msgstr ""
+msgstr "WhatsApp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.whatsapp_composer_form_view
