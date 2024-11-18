@@ -86,12 +86,12 @@ class TestMailCcBcc(TestMailComposer):
         env.company.default_partner_cc_ids = self.partner_cc3
         env.company.default_partner_bcc_ids = self.partner_cc2
         # Product template values
-        tmpl_model = env["ir.model"].search([("model", "=", "product.template")])
+        tmpl_model_id = env["ir.model"]._get_id("product.template")
         partner_cc = self.partner_cc
         partner_bcc = self.partner_bcc
         vals = {
             "name": "Product Template: Re: [E-COM11] Cabinet with Doors",
-            "model_id": tmpl_model.id,
+            "model_id": tmpl_model_id,
             "subject": "Re: [E-COM11] Cabinet with Doors",
             "body_html": """<p style="margin:0px 0 12px 0;box-sizing:border-box;">
 Test Template<br></p>""",

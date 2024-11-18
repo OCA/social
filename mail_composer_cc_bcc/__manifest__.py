@@ -15,6 +15,7 @@
     "preloadable": True,
     "depends": [
         "mail",
+        "product",
     ],
     "data": [
         "views/res_company_views.xml",
