@@ -5,7 +5,7 @@
     "name": "Mail Gateway",
     "summary": """
         Set a gateway""",
-    "version": "16.0.1.1.0",
+    "version": "16.0.1.2.0",
     "license": "AGPL-3",
     "author": "Creu Blanca,Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
