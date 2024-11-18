@@ -29,6 +29,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
                 "token": "token",
                 "whatsapp_security_key": "key",
                 "webhook_secret": "MY-SECRET",
+                "member_ids": [(4, cls.env.user.id)],
             }
         )
         cls.ws_template = cls.env["mail.whatsapp.template"].create(
