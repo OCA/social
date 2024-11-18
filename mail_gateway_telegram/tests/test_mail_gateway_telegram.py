@@ -81,7 +81,12 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         super().setUpClass()
         cls.webhook = "demo_hook"
         cls.gateway = cls.env["mail.gateway"].create(
-            {"name": "gateway", "gateway_type": "telegram", "token": "token"}
+            {
+                "name": "gateway",
+                "gateway_type": "telegram",
+                "token": "token",
+                "member_ids": [(4, cls.env.user.id)],
+            }
         )
         cls.password = "my_new_password"
         cls.gateway_token = "12341234"
