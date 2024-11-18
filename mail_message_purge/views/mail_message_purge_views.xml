@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+  <record model="ir.ui.view" id="view_message_purge_tree">
+    <field name="name">mail.message.purge.tree</field>
+    <field name="model">mail.message.purge</field>
+    <field name="priority">20</field>
+    <field name="arch" type="xml">
+      <tree string="Mail Message Purge">
+        <field name="res_model" />
+        <field name="retention_period" />
+        <field name="include_user_notification" />
+        <field name="mail_message_subtype_ids" widget="many2many_tags" />
+      </tree>
+    </field>
+  </record>
+
+  <record model="ir.ui.view" id="view_mail_message_purge_form">
+    <field name="name">mail.message.purge.form</field>
+    <field name="model">mail.message.purge</field>
+    <field name="arch" type="xml">
+      <form string="Mail Message Purge">
+        <sheet>
+          <group>
+            <group string="Records to check">
+              <field name="res_model" />
+              <field name="model_name" invisible="1" />
+              <field
+                                name="domain"
+                                widget="domain"
+                                options="{'in_dialog': True, 'model': 'model_name'}"
+                            />
+            </group>
+            <group string="Mail message notification to purge">
+              <field name="retention_period" />
+              <field name="include_user_notification" />
+              <field name="mail_message_subtype_ids" widget="many2many_tags" />
+            </group>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record model="ir.actions.act_window" id="action_view_mail_message_purge">
+    <field name="name">Mail Message Purge</field>
+    <field name="res_model">mail.message.purge</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+  <menuitem
+        name="Message Purge"
+        id="menu_mail_message_purge"
+        parent="mail.mail_menu_technical"
+        action="action_view_mail_message_purge"
+        sequence="20"
+    />
+
+</odoo>

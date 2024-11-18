@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Camptocamp SA
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+  <record model="ir.cron" id="cron_purge_mail_message">
+    <field name='name'>Purge Mail Messages</field>
+    <field name='interval_number'>1</field>
+    <field name='interval_type'>days</field>
+    <field name="numbercall">-1</field>
+    <field name="active" eval="True" />
+    <field name="doall" eval="False" />
+    <field
+            name="nextcall"
+            eval="(datetime.now() + timedelta(days=1)).strftime('%Y-%m-%d 00:00:00')"
+        />
+    <field name="model_id" ref="mail_message_purge.model_mail_message_purge" />
+    <field name="state">code</field>
+    <field name="code">model._cron_purge_mail_message()</field>
+  </record>
+
+</odoo>
