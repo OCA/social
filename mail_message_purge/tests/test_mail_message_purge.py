@@ -26,7 +26,7 @@ class TestMailMessagePurge(SavepointCase):
         contact_model = cls.env.ref("base.model_res_partner")
         cls.mm_purge = cls.env["mail.message.purge"].create(
             {
-                "res_model": contact_model.id,
+                "model_id": contact_model.id,
                 "domain": f"[('id', '=', {cls.contact.id})]",
                 "retention_period": 1,
             }
@@ -46,12 +46,16 @@ class TestMailMessagePurge(SavepointCase):
         with freeze_time(purge_time):
             self.env["mail.message.purge"]._cron_purge_mail_message()
         self.assertFalse(self.mm1.exists())
-        self.assertTrue(self.mm2.exists())
-        # Check including the user notification message type
-        self.mm_purge.include_user_notification = True
+        self.assertFalse(self.mm2.exists())
+
+    def test_purge_only_some_message_type(self):
+        purge_time = datetime.datetime.now() + relativedelta(days=370)
+        self.mm_purge.all_message_type = False
+        self.mm_purge.mail_message_domain = "[('message_type', '=', 'notification')]"
         with freeze_time(purge_time):
             self.env["mail.message.purge"]._cron_purge_mail_message()
-        self.assertFalse(self.mm2.exists())
+        self.assertFalse(self.mm1.exists())
+        self.assertTrue(self.mm2.exists())
 
     def test_purge_in_relation_to_subtype(self):
         """Check deletion or not of messages based on subtype."""

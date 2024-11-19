@@ -6,9 +6,8 @@
     <field name="priority">20</field>
     <field name="arch" type="xml">
       <tree string="Mail Message Purge">
-        <field name="res_model" />
+        <field name="model_id" />
         <field name="retention_period" />
-        <field name="include_user_notification" />
         <field name="mail_message_subtype_ids" widget="many2many_tags" />
       </tree>
     </field>
@@ -22,7 +21,7 @@
         <sheet>
           <group>
             <group string="Records to check">
-              <field name="res_model" />
+              <field name="model_id" />
               <field name="model_name" invisible="1" />
               <field
                                 name="domain"
@@ -30,10 +29,16 @@
                                 options="{'in_dialog': True, 'model': 'model_name'}"
                             />
             </group>
-            <group string="Mail message notification to purge">
+            <group string="Mail message to purge">
               <field name="retention_period" />
-              <field name="include_user_notification" />
+              <field name="all_message_type" />
               <field name="mail_message_subtype_ids" widget="many2many_tags" />
+              <field
+                                name="mail_message_domain"
+                                widget="domain"
+                                options="{'in_dialog': True, 'model': 'mail.message'}"
+                                attrs="{'invisible': [('all_message_type', '=', True)]}"
+                            />
             </group>
           </group>
         </sheet>
