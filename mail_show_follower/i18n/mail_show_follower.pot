@@ -40,6 +40,11 @@ msgstr ""
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "Models to exclude"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "Notice: Replies to this email will be sent to all recipients."
 msgstr ""
 
@@ -52,6 +57,11 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_partner_format
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_partner_format
 msgid "Partner format"
+msgstr ""
+
+#. module: mail_show_follower
+#: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_models_to_exclude
+msgid "Show Followers Models To Exclude"
 msgstr ""
 
 #. module: mail_show_follower
@@ -86,6 +96,11 @@ msgid ""
 msgstr ""
 
 #. module: mail_show_follower
+#: model:ir.model.fields,help:mail_show_follower.field_res_config_settings__show_followers_models_to_exclude
+msgid "Tecnichal model names separated by coma"
+msgstr ""
+
+#. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_response_warning
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_response_warning
 msgid "Text 'Replies'"
@@ -105,4 +120,9 @@ msgstr ""
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_users
 msgid "User"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "blog.blog,blog.post"
 msgstr ""
