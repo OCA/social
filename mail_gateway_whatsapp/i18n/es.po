@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-11-15 15:06+0000\n"
+"PO-Revision-Date: 2024-11-20 17:06+0000\n"
 "Last-Translator: PabloMartin32 <pablo.martin@factorlibre.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -23,37 +23,37 @@ msgid ""
 "                            You should set some random value of your choice for this fields.\n"
 "                            Ensure that facebook will be able to comunicate with your server.</span>"
 msgstr ""
-"<span>Escriba los valores en los campo <b>Clave Webhook</b>y <b>Clave de "
+"<span>Escriba los valores en los campo <b>Clave Webhook</b> y <b>Clave de "
 "seguridad de Whatsapp</b>\n"
 "                                                               Deberá poner "
-"valores aleatorios a su elección para estos campos.\n"
+"los valores de su elección en estos campos\n"
 "                                                               Asegurese de "
 "que Facebook podrá contactar con su servidor."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access"
-msgstr "Acceso"
+msgstr "Acceda"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access the menu <b>Configuration / Advanced Options</b>."
-msgstr "Accede al menú <b>Configuración / Opciones Avanzadas</b>."
+msgstr "Acceda al menú <b> Configuración / Opciones Avanzadas</b>."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access the menu <b>Configuration / Basic information</b>."
-msgstr "Accede al menú <b>Configuración / Información básica</b>."
+msgstr "Acceda al menú <b>Configuración / Información básica</b>."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access your"
-msgstr "Accede a tu"
+msgstr "Accede a su"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Access your business settings menu"
-msgstr "Accede a tu menú de ajustes"
+msgstr "Acceda a su menú de ajustes"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_needaction
@@ -63,7 +63,7 @@ msgstr "Acción requerida"
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Add a new number."
-msgstr "Añadir nuevo número."
+msgstr "Añada un número nuevo."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_attachment_count
@@ -73,7 +73,7 @@ msgstr "Recuento de archivos adjuntos"
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__mobile_blacklisted
 msgid "Blacklisted Phone Is Mobile"
-msgstr "El teléfono de la lista negra en un móvil"
+msgstr "El teléfono de la lista negra es un móvil"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__phone_blacklisted
@@ -95,12 +95,12 @@ msgstr "Cancelar"
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Click on <b>Edit Button</b> on the webhook area."
-msgstr "Pulsa en <b>Editar</b> en el área del webhook."
+msgstr "Pulsa en <b>Editar</b>  en el área del webhook."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_whatsapp_composer
 msgid "Compose a whatsapp message"
-msgstr "Redacte un mensaje en Whatsapp"
+msgstr "Redacte un mensaje de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_res_partner
@@ -118,13 +118,13 @@ msgid ""
 "Copy the phone identification number to the field <b>Whastapp From phone</b>"
 " field."
 msgstr ""
-"Copie el número de identificación del número en el campo <b>Whatsapp desde "
+"Copie el identificador del número de teléfono en el campo <b>Whatsapp desde "
 "el teléfono</b>."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Copy the token value to token field in this page."
-msgstr "Copie el valor del token en el campo token de esta página."
+msgstr "Copie el valor del token en el campo \"token\" de esta página."
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -149,7 +149,7 @@ msgstr "Creando un token permanente"
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Creating the Application from meta developer"
-msgstr "Creando la aplicación desde el desde el desarrollador de meta"
+msgstr "Creando la aplicación desde el desarrollador de meta"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_mail_channel
@@ -179,7 +179,7 @@ msgstr "Correo electrónico"
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__failed_message_ids
 msgid "Failed Messages"
-msgstr "Mensaje fallido"
+msgstr "Mensajes fallidos"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__phone_sanitized
@@ -187,8 +187,8 @@ msgid ""
 "Field used to store sanitized phone number. Helps speeding up searches and "
 "comparisons."
 msgstr ""
-"Campo utilizado para almacenar el número de teléfono. Ayuda a acerlerar las "
-"búsquedas y las comparaciones."
+"Campo utilizado para almacenar el número de teléfono saneado.  Ayuda a "
+"acelerar las búsquedas y las comparaciones."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_whatsapp_composer__find_gateway
@@ -225,13 +225,13 @@ msgstr "Tipo de Gateway"
 msgid ""
 "Go to <b>Users / System Users</b> and create a new one with administrator"
 msgstr ""
-"Vaya a <b> Usuarios / Usuarios del sisteme</b> y cree uno nuevo con el "
-"admnistrador"
+"Vaya a <b> Usuarios / Usuarios del sistema</b> y cree uno nuevo como "
+"administrador"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Go to <b>Whatsapp / API Configuration</b> menú."
-msgstr "Vaya a <b>Whatsapp / Configuración</b> menú."
+msgstr "Vaya a <b>Whatsapp / Configuración API</b>."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__has_message
@@ -246,7 +246,7 @@ msgstr "ID"
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr "Si está marcado, mensajes nuevos requieren su atención."
+msgstr "Si está marcado, nuevos mensajes requieren su atención."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__message_has_error
@@ -294,7 +294,7 @@ msgid ""
 "distinguish which number is blacklisted             when there is both a "
 "mobile and phone field in a model."
 msgstr ""
-"Indica si un teléfono snaeado es un número de teléfono. Ayuda a diferenciar "
+"Indica si un teléfono saneado es un número de teléfono. Ayuda a diferenciar "
 "que número de teléfono está en una lista negra cuando hay tanto un número de "
 "teléfono como de móvil."
 
@@ -407,7 +407,7 @@ msgid ""
 "Key</b> field."
 msgstr ""
 "En el wizard, rellene el campo URL con el campo <b>Webhook URL</b> del "
-"Gateway. Para la verificación de identidad, use la <b>el campo clave de "
+"Gateway. Para la verificación de identidad, use <b>el campo clave de "
 "seguridad de Whatsapp</b>."
 
 #. module: mail_gateway_whatsapp
@@ -416,8 +416,8 @@ msgid ""
 "Once it is created, Generate a new token related to the created app with no "
 "expiry and give access to all whatsapp permissions."
 msgstr ""
-"Una vez esté creado, genere un nuevo token relacionado con la app creada de "
-"manera permanente para dar acceso a todos los permisos de whatsapp."
+"Una vez esté creado, genere un nuevo token relacionado con la aplicación "
+"creada de manera permanente para dar acceso a todos los permisos de Whatsapp."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__phone_sanitized_blacklisted
@@ -454,7 +454,7 @@ msgstr "Guarde este registro. Se han rellenado todos los valores"
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Select a name and create it"
-msgstr "Elija un nombre y crealo"
+msgstr "Elija un nombre y creelo"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -462,13 +462,15 @@ msgid ""
 "Select the <b>Other</b> option, then <b>Business</b> in order to create "
 "Whatsapp manager"
 msgstr ""
-"Seleccione la <b>otra</b>opción, despuñes <b>Negocio</b>para crear un "
-"manager de Whatsapp"
+"Seleccione la <b>otra</b>opción, después <b>Negocio</b>para crear un manager "
+"de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Select the Whatsapp API on the products of the application"
-msgstr "Seleccione la API de Whatsapp en los productos de la aplicación"
+msgstr ""
+"Seleccione los productos de la aplicación en Whatsapp > Configuración de la "
+"API"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -504,7 +506,7 @@ msgid ""
 "Show the secret key of the application and copy it to the <b>Webhook "
 "secret</b> field."
 msgstr ""
-"Mostrar la clave secreta de la aplicación y copiarla en el campo<b>Webhook "
+"Pulse en clave secreta de la aplicación y copiela en el campo<b>Webhook "
 "secret</b>."
 
 #. module: mail_gateway_whatsapp
@@ -549,7 +551,7 @@ msgstr ""
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_mail_gateway__whatsapp_from_phone
 msgid "Whatsapp From Phone"
-msgstr "Whatsapp desde el teléfono"
+msgstr "Teléfono origen de Whatsapp"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model,name:mail_gateway_whatsapp.model_mail_gateway_whatsapp
