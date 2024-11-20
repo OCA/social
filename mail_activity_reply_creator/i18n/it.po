@@ -21,17 +21,11 @@ msgstr ""
 msgid "Activity"
 msgstr "Attività"
 
-#. module: mail_activity_reply_creator
-#: model:ir.model.fields,field_description:mail_activity_reply_creator.field_mail_activity__display_name
-msgid "Display Name"
-msgstr "Nome visualizzato"
+#~ msgid "Display Name"
+#~ msgstr "Nome visualizzato"
 
-#. module: mail_activity_reply_creator
-#: model:ir.model.fields,field_description:mail_activity_reply_creator.field_mail_activity__id
-msgid "ID"
-msgstr "ID"
+#~ msgid "ID"
+#~ msgstr "ID"
 
-#. module: mail_activity_reply_creator
-#: model:ir.model.fields,field_description:mail_activity_reply_creator.field_mail_activity____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"

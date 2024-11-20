@@ -9,13 +9,14 @@ class MailActivity(models.Model):
     @api.onchange("activity_type_id")
     def _onchange_activity_type_id(self):
         original_user_id = self.user_id
-        super()._onchange_activity_type_id()
+        res = super()._onchange_activity_type_id()
         if (
             original_user_id != self.env.user
             and not self.activity_type_id.default_user_id
         ):
             # keep already set user
             self.user_id = original_user_id
+        return res
 
     def action_feedback_schedule_next(self, feedback=False):
         create_uid = self.create_uid.id
@@ -32,7 +33,7 @@ class MailActivity(models.Model):
         ):
             default_activity_type_id = self.with_context(
                 no_recursion=True
-            )._default_activity_type_id()
+            )._default_activity_type()
             if (
                 not default_activity_type_id
                 or not default_activity_type_id.default_user_id
