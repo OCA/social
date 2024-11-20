@@ -1,9 +1,9 @@
 # Copyright 2023 Ooops404
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestMailActivityReplyCreator(SavepointCase):
+class TestMailActivityReplyCreator(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -18,16 +18,15 @@ class TestMailActivityReplyCreator(SavepointCase):
         cls.activity_type_1 = activity_type_model.create(
             {
                 "name": "Act Type Without Default Responsible",
-                "res_model_id": cls.partner_ir_model.id,
+                "res_model": cls.partner_ir_model.model,
                 "default_user_id": False,
             }
         )
         cls.activity_type_2 = activity_type_model.create(
             {
                 "name": "Act Type 2",
-                "res_model_id": cls.partner_ir_model.id,
+                "res_model": cls.partner_ir_model.model,
                 "default_user_id": False,
-                "default_next_type_id": cls.activity_type_1.id,
             }
         )
         cls.act1 = (
@@ -66,7 +65,7 @@ class TestMailActivityReplyCreator(SavepointCase):
     def test_schedule_new_activity_user(self):
         prev_act_uid = self.act1.create_uid
         action = self.act1.action_feedback_schedule_next()
-        new_act = self.env["mail.activity"].with_context(action["context"]).create({})
+        new_act = self.env["mail.activity"].with_context(**action["context"]).create({})
         # by default current user will be responsible.
         # module set responsible as prev. activity creator.
         self.assertEqual(new_act.user_id, prev_act_uid)
