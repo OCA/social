@@ -133,6 +133,16 @@ msgid "Clicked URL"
 msgstr "URL Clicada"
 
 #. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: mail_tracking
+#: model:ir.model,name:mail_tracking.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
 msgid "Contact"
 msgstr "Contacto"
@@ -406,6 +416,14 @@ msgid "IP"
 msgstr "IP"
 
 #. module: mail_tracking
+#: model:ir.model.fields,help:mail_tracking.field_res_config_settings__mail_tracking_email_max_age_days
+#: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
+msgid ""
+"If set as positive integer enables the deletion of old mail tracking records "
+"to reduce the database size."
+msgstr ""
+
+#. module: mail_tracking
 #. odoo-javascript
 #: code:addons/mail_tracking/static/src/components/failed_message/failed_message.xml:0
 #, python-format
@@ -493,6 +511,12 @@ msgstr "MailTracking búsqueda de eventos"
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 msgid "MailTracking events"
 msgstr "MailTracking eventos"
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_email_max_age_days
+#: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
+msgid "Max age in days of mail tracking email records"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -666,6 +690,13 @@ msgstr "Marcar Como Revisado"
 #, python-format
 msgid "Set as Reviewed"
 msgstr "Marcar como Revisado"
+
+#. module: mail_tracking
+#: model:ir.model.fields,field_description:mail_tracking.field_res_company__mail_tracking_show_aliases
+#: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_show_aliases
+#: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
+msgid "Show Aliases in Mail Tracking"
+msgstr ""
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__soft_bounce
