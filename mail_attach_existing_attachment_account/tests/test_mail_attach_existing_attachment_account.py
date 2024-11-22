@@ -3,7 +3,7 @@
 from odoo.tests import Form, common
 
 
-class TestMailAttachExistingAttachmentAccount(common.SavepointCase):
+class TestMailAttachExistingAttachmentAccount(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -12,21 +12,12 @@ class TestMailAttachExistingAttachmentAccount(common.SavepointCase):
         cls.journal = cls.env["account.journal"].create(
             {"name": "Test sale journal", "code": "TSALE", "type": "sale"}
         )
-        account_type = cls.env.ref("account.data_account_type_other_income")
-        cls.income_account = cls.env["account.account"].search(
-            [
-                ("user_type_id", "=", account_type.id),
-                ("company_id", "=", cls.env.company.id),
-            ],
-            limit=1,
-        )
         invoice_form = Form(
             cls.env["account.move"].with_context(default_move_type="out_invoice")
         )
         invoice_form.partner_id = cls.partner
         with invoice_form.invoice_line_ids.new() as line_form:
             line_form.product_id = cls.product
-            line_form.account_id = cls.income_account
         cls.invoice = invoice_form.save()
         cls.invoice.action_post()
 
