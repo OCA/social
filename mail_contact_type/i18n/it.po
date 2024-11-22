@@ -1,0 +1,110 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_contact_type
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__code
+msgid "Code"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model,name:mail_contact_type.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mail_contact_type
+#: model_terms:ir.ui.view,arch_db:mail_contact_type.view_mail_contact_type_form
+msgid "Contact Type"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.actions.act_window,name:mail_contact_type.action_mail_contact_type
+msgid "Contact Types"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.ui.menu,name:mail_contact_type.menu_contact_type_list
+msgid "Contact types"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__display_name
+#: model:ir.model.fields,field_description:mail_contact_type.field_res_partner__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__id
+#: model:ir.model.fields,field_description:mail_contact_type.field_res_partner__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type____last_update
+#: model:ir.model.fields,field_description:mail_contact_type.field_res_partner____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model,name:mail_contact_type.model_mail_contact_type
+msgid "Mail Contact Type"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_res_partner__mail_contact_type_ids
+#: model:ir.model.fields,field_description:mail_contact_type.field_res_users__mail_contact_type_ids
+msgid "Mail Contact Types"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.ui.menu,name:mail_contact_type.menu_contact_type
+msgid "Mailing"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,field_description:mail_contact_type.field_mail_contact_type__name
+msgid "Name"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.constraint,message:mail_contact_type.constraint_mail_contact_type_code_uniq
+msgid "The code must be unique"
+msgstr ""
+
+#. module: mail_contact_type
+#: model:ir.model.fields,help:mail_contact_type.field_res_partner__mail_contact_type_ids
+#: model:ir.model.fields,help:mail_contact_type.field_res_users__mail_contact_type_ids
+msgid "Used by email template to select contacts by mail contact type"
+msgstr ""
