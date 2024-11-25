@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<odoo>
+  <record id="mail_activity_type_form_inherit" model="ir.ui.view">
+    <field name="model">mail.activity.type</field>
+    <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
+    <field name="arch" type="xml">
+      <field name="res_model" position="after">
+        <field
+                    name="default_user_field_id"
+                    domain="[('ttype','in', ['one2many', 'many2one', 'many2many']),('model','=',res_model), ('relation', '=', 'res.users')]"
+                />
+      </field>
+    </field>
+  </record>
+</odoo>
