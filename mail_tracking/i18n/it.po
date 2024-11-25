@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2024-11-13 10:06+0000\n"
+"PO-Revision-Date: 2024-11-25 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -139,12 +139,12 @@ msgstr "URL cliccato"
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_res_partner
@@ -426,6 +426,8 @@ msgid ""
 "If set as positive integer enables the deletion of old mail tracking records "
 "to reduce the database size."
 msgstr ""
+"Se si imposta in intero positivo si abilita la cancellazione dei vecchi "
+"record di tracciamento per ridurre la dimensione del database."
 
 #. module: mail_tracking
 #. odoo-javascript
@@ -520,7 +522,7 @@ msgstr "Eventi tracciamento e-mail"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_email_max_age_days
 #: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
 msgid "Max age in days of mail tracking email records"
-msgstr ""
+msgstr "Età massima in giorni dei record di tracciamento e-mail"
 
 #. module: mail_tracking
 #: model:ir.model,name:mail_tracking.model_mail_message
@@ -700,7 +702,7 @@ msgstr "Imposta come revisionato"
 #: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_show_aliases
 #: model_terms:ir.ui.view,arch_db:mail_tracking.res_config_settings_view_form
 msgid "Show Aliases in Mail Tracking"
-msgstr ""
+msgstr "Visualizza gli alias nel tracciamento e-mail"
 
 #. module: mail_tracking
 #: model:ir.model.fields.selection,name:mail_tracking.selection__mail_tracking_event__event_type__soft_bounce
