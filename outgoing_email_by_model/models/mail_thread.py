@@ -7,8 +7,12 @@ from odoo import models
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    def _notify_by_email_add_values(self, base_values):
-        res = super()._notify_by_email_add_values(base_values)
+    def _notify_by_email_get_final_mail_values(
+        self, recipient_ids, base_mail_values, additional_values=None
+    ):
+        res = super()._notify_by_email_get_final_mail_values(
+            recipient_ids, base_mail_values, additional_values=additional_values
+        )
         model = self.env["ir.model"].sudo().search([("model", "=", self._name)])
         custom_mailserver = model.outgoing_mailserver_id
         if custom_mailserver:
