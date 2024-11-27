@@ -11,10 +11,12 @@
         <field name="is_mail_blacklist" position="after">
             <field
                     name="outgoing_mailserver_id"
+                    groups="base.group_no_one"
                     attrs="{'invisible': [('is_mail_thread', '=', False)], 'readonly': [('is_mail_thread', '=', False)]}"
                 />
             <field
                     name="outgoing_email"
+                    groups="base.group_no_one"
                     attrs="{'invisible': [('is_mail_thread', '=', False)], 'readonly': [('is_mail_thread', '=', False)]}"
                 />
         </field>
