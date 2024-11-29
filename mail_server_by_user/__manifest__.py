@@ -4,17 +4,13 @@
 {
     "name": "Email Server By User",
     "summary": "Email Server By User",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": ("ForgeFlow, " "Odoo Community Association (OCA)"),
     "license": "LGPL-3",
-    "application": False,
     "installable": True,
     "depends": ["base", "mail"],
     "development_status": "Alpha",
     "maintainers": ["ChrisOForgeFlow"],
-    "data": [],
-    "qweb": [],
-    "demo": [],
 }

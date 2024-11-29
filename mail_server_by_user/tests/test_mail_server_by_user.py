@@ -13,11 +13,9 @@ _logger = logging.getLogger(__name__)
 
 class TestIrMailServer(TransactionCase):
     def setUp(self):
-        super(TestIrMailServer, self).setUp()
+        super().setUp()
         self.smtp_server_model = self.env["ir.mail_server"]
         self.parameter_model = self.env["ir.config_parameter"]
-        # self.default_template = self.env.ref("mail.message_notification_email")
-        # self.paynow_template = self.env.ref("mail.mail_notification_paynow")
         self.server_1 = self.smtp_server_model.create(
             {
                 "name": "localhost",
@@ -95,13 +93,11 @@ class TestIrMailServer(TransactionCase):
         if message is None:
             message = self.message
         connect = MagicMock()
-        self.smtp_server_model._patch_method("connect", connect)
+        self.patch(type(self.smtp_server_model), "connect", connect)
         try:
             self.smtp_server_model.send_email(message, mail_server_id, smtp_server)
         except Exception as e:
             _logger.debug(str(e))
-        finally:
-            self.smtp_server_model._revert_method("connect")
         call_args = connect.call_args
         return call_args
 
@@ -120,7 +116,8 @@ class TestIrMailServer(TransactionCase):
         self.message.replace_header("From", self.user3.login)
         call_args = self._send_mail()
         mail_server_id = call_args.kwargs.get("mail_server_id", False)
-        # With this module, you always get mail server on call, only test when is not installed
+        # With this module, you always get mail server on call, only test when
+        # is not installed
         if not self.env["ir.module.module"].search(
             [("name", "=", "mail_outbound_static"), ("state", "=", "installed")]
         ):
