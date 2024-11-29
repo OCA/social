@@ -88,7 +88,7 @@ class TestIrMailServer(TransactionCase):
         message_file = os.path.join(
             os.path.dirname(os.path.realpath(__file__)), "test.msg"
         )
-        with open(message_file, "r") as fh:
+        with open(message_file) as fh:
             self.message = message_from_string(fh.read())
 
     def _send_mail(self, message=None, mail_server_id=None, smtp_server=None):

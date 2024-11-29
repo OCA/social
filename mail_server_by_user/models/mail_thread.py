@@ -21,7 +21,7 @@ class MailThread(models.AbstractModel):
         force_send=True,
         send_after_commit=True,
         subtitles=None,
-        **kwargs
+        **kwargs,
     ):
         mail_server_model = self.env["ir.mail_server"].sudo()
         if message.email_from:
