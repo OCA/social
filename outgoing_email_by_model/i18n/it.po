@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-12-19 10:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: outgoing_email_by_model
 #: model:ir.model.fields,help:outgoing_email_by_model.field_ir_model__outgoing_email
@@ -21,6 +23,11 @@ msgid ""
 "    Allows to force the usage of a given email address if this setting is set.\n"
 "    However, this setting will be active only if the model extends `mail.thread`.\n"
 msgstr ""
+"\n"
+"    Consente di forzare l'utilizzo di un dato indirizzo email se questa "
+"impostazione è impostata.\n"
+"    Tuttavia, questa impostazione sarà attiva solo se il modello estende "
+"`mail.thread`.\n"
 
 #. module: outgoing_email_by_model
 #: model:ir.model.fields,help:outgoing_email_by_model.field_ir_model__outgoing_mailserver_id
@@ -29,23 +36,28 @@ msgid ""
 "    Allows to force the usage of a given outgoing mail server if this setting is set.\n"
 "    However, this setting will be active only if the model extends `mail.thread`.\n"
 msgstr ""
+"\n"
+"    Consente di forzare l'utilizzo di un dato server di posta in uscita se "
+"questa impostazione è impostata. \n"
+"    Tuttavia, questa impostazione sarà attiva solo se il modello estende "
+"`mail.thread`.\n"
 
 #. module: outgoing_email_by_model
 #: model:ir.model,name:outgoing_email_by_model.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussione e-mail"
 
 #. module: outgoing_email_by_model
 #: model:ir.model,name:outgoing_email_by_model.model_ir_model
 msgid "Models"
-msgstr ""
+msgstr "Modelli"
 
 #. module: outgoing_email_by_model
 #: model:ir.model.fields,field_description:outgoing_email_by_model.field_ir_model__outgoing_email
 msgid "Outgoing Email"
-msgstr ""
+msgstr "E-mail in uscita"
 
 #. module: outgoing_email_by_model
 #: model:ir.model.fields,field_description:outgoing_email_by_model.field_ir_model__outgoing_mailserver_id
 msgid "Outgoing Mailserver"
-msgstr ""
+msgstr "Server e-mail in uscita"
