@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-10 18:58+0000\n"
+"PO-Revision-Date: 2024-12-19 19:06+0000\n"
 "Last-Translator: Rodrigo Sottomaior Macedo "
 "<sottomaiormacedotec@sottomaiormacedo.tech>\n"
 "Language-Team: none\n"
@@ -45,7 +45,7 @@ msgstr "Visualização da Mensagem"
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "Models to exclude"
-msgstr ""
+msgstr "Modelos para exclusão"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
@@ -67,7 +67,7 @@ msgstr "Formato do Parceiro"
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_models_to_exclude
 msgid "Show Followers Models To Exclude"
-msgstr ""
+msgstr "Mostrar modelos de seguidores para excluir"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
@@ -107,7 +107,7 @@ msgstr ""
 #. module: mail_show_follower
 #: model:ir.model.fields,help:mail_show_follower.field_res_config_settings__show_followers_models_to_exclude
 msgid "Tecnichal model names separated by coma"
-msgstr ""
+msgstr "Nomes de modelos técnicos separados por vírgula"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_response_warning
@@ -134,4 +134,4 @@ msgstr "Usuário"
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "blog.blog,blog.post"
-msgstr ""
+msgstr "blog.blog,blog.post"
