@@ -14,8 +14,18 @@ class IrMailServer(models.Model):
     def send_email(self, message, *args, **kwargs):
         do_not_send_copy = self.env.context.get("do_not_send_copy", False)
         if not do_not_send_copy:
-            if message["Bcc"]:
-                message["Bcc"] = message["Bcc"].join(COMMASPACE, message["From"])
+            # Get existing Bcc recipients (if any)
+            bcc = message.get("Bcc", "")
+            from_addr = message.get("From", "")
+
+            # Combine existing Bcc with From address
+            if bcc:
+                all_bcc = COMMASPACE.join([bcc, from_addr])
             else:
-                message["Bcc"] = message["From"]
+                all_bcc = from_addr
+
+            # Set the combined Bcc
+            message.replace_header(
+                "Bcc", all_bcc
+            ) if "Bcc" in message else message.add_header("Bcc", all_bcc)
         return super().send_email(message, *args, **kwargs)
