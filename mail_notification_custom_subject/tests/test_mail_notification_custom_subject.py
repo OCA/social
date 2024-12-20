@@ -2,29 +2,27 @@
 # Copyright 2022 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 # pylint: disable=C8107
-from odoo.tests import common
+from odoo.tests import new_test_user
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestMailNotificationCustomSubject(common.TransactionCase):
+
+class TestMailNotificationCustomSubject(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.partner_1, cls.partner_2 = (
-            cls.env["res.partner"]
-            .with_context(tracking_disable=True)
-            .create(
-                [
-                    {"name": "Test partner 1", "email": "partner1@example.com"},
-                    {"name": "Test partner 2", "email": "partner2@example.com"},
-                ]
-            )
+        cls.partner_1, cls.partner_2 = cls.env["res.partner"].create(
+            [
+                {"name": "Test partner 1", "email": "partner1@example.com"},
+                {"name": "Test partner 2", "email": "partner2@example.com"},
+            ]
         )
-        cls.admin = common.new_test_user(cls.env, "boss", "base.group_system")
+        cls.admin = new_test_user(cls.env, "boss", "base.group_system")
 
     def setUp(self):
         super().setUp()
-        self.uid = common.new_test_user(self.env, "worker")
+        self.uid = new_test_user(self.env, "worker")
 
     def test_email_subject_template_overrides(self):
         with self.with_user("boss"):
