@@ -14,7 +14,7 @@ class PartnerMailListWizardCase(base.BaseCase):
         wizard = self.env["partner.mail.list.wizard"].create(
             {"mail_list_id": self.mailing_list.id}
         )
-        wizard.partner_ids = [self.partner.id]
+        wizard.partner_ids = self.partner
         wizard.add_to_mail_list()
         contacts = self.env["mailing.contact"].search(
             [("partner_id", "=", self.partner.id)]

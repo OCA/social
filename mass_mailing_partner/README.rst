@@ -99,6 +99,10 @@ Contributors
 
       -  Nguyễn Minh Chiến <chien@trobz.com>
 
+* `Moduon <https://www.moduon.team>`_:
+
+    * Jairo Llopis
+
 Other credits
 -------------
 

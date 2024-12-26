@@ -21,3 +21,7 @@
 - [PeGon GmbH](https://www.pegon.ch):
 
   - Pedro Evaristo Gonzalez Sanchez
+
+- [Moduon](https://www.moduon.team/):
+
+    - Jairo Llopis

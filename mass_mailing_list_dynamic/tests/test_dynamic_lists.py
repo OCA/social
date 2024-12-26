@@ -17,15 +17,16 @@ class DynamicListCase(BaseCommon):
     def setUpClass(cls):
         super().setUpClass()
         cls.tag = cls.env["res.partner.category"].create({"name": "testing tag"})
-        cls.partners = cls.env["res.partner"]
-        for number in range(5):
-            cls.partners |= cls.partners.create(
+        cls.partners = cls.env["res.partner"].create(
+            [
                 {
                     "name": "partner %d" % number,
                     "category_id": [(4, cls.tag.id, False)],
                     "email": "%d@example.com" % number,
                 }
-            )
+                for number in range(5)
+            ]
+        )
         cls.list = cls.env["mailing.list"].create(
             {
                 "name": "test list",
@@ -226,3 +227,17 @@ class DynamicListCase(BaseCommon):
         wizard.action_merge()
         self.assertTrue(partner_1.id in self.list.contact_ids.mapped("partner_id").ids)
         self.assertTrue(partner_1.id in list2.contact_ids.mapped("partner_id").ids)
+
+    def test_synced_contacts_can_be_bounced(self):
+        self.list.sync_method = "full"
+        self.list.action_sync()
+        contact = self.env["mailing.contact"].search(
+            [
+                ("list_ids", "in", self.list.ids),
+                ("partner_id", "=", self.partners[0].id),
+            ]
+        )
+        # A bounce arrives through fetchmail
+        contact._message_receive_bounce(contact.email, contact.partner_id)
+        # The contact is marked as bounced
+        self.assertEqual(contact.message_bounce, 1)
