@@ -21,7 +21,7 @@ try:
     import telegram
     from lottie.exporters import exporters
     from lottie.importers import importers
-except (ImportError, IOError) as err:
+except (OSError, ImportError) as err:
     _logger.debug(err)
 
 
@@ -167,7 +167,7 @@ class MailGatewayTelegramService(models.AbstractModel):
             data = output.getvalue()
         mimetype = guess_mimetype(data)
         return (
-            "{}{}".format(file_name, mimetypes.guess_extension(mimetype)),
+            f"{file_name}{mimetypes.guess_extension(mimetype)}",
             data,
             {},
         )
@@ -307,9 +307,7 @@ class MailGatewayTelegramService(models.AbstractModel):
                     _("Unable to send the telegram message"), exc
                 ) from None
             else:
-                _logger.warning(
-                    "Issue sending message with id {}: {}".format(record.id, exc)
-                )
+                _logger.warning(f"Issue sending message with id {record.id}: {exc}")
                 record.sudo().write(
                     {
                         "notification_status": "exception",
