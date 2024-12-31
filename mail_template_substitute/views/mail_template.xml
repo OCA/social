@@ -1,7 +1,6 @@
 <!-- Copyright 2019 ACSONE SA/NV
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="email_template_form">
         <field name="name">mail.template.form (in mail_template_substitute)
         </field>
@@ -48,6 +47,4 @@
             </xpath>
         </field>
     </record>
-
-
 </odoo>
