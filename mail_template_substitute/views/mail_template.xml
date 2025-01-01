@@ -13,11 +13,11 @@
                     string="Substitution Rules"
                 >
                     <field name="mail_template_substitution_rule_ids">
-                        <tree>
+                        <list>
                             <field name="sequence" widget="handle" />
                             <field name="substitution_mail_template_id" />
                             <field name="domain" />
-                        </tree>
+                        </list>
                         <form>
                             <sheet>
                                 <group>
