@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_template_form_view">
+        <field
+            name="name"
+        >mail.template.form (in mail_template_conditional_report)</field>
+        <field name="model">mail.template</field>
+        <field name="inherit_id" ref="mail.email_template_form" />
+        <field name="priority" eval="90" />
+        <field name="arch" type="xml">
+            <field name="report_template_ids" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </field>
+            <notebook position="inside">
+                <page string="Attachments" name="attachment_advanced">
+                    <group>
+                        <group>
+                            <field name="mail_template_report_ids">
+                                <list>
+                                    <field
+                                        name="ir_actions_report_id"
+                                        options="{'no_create': True, 'no_open': True}"
+                                    />
+                                    <field name="model_name" invisible="True" />
+                                    <field
+                                        name="filter_domain"
+                                        widget="domain"
+                                        options="{'model': 'model_name'}"
+                                    />
+                                </list>
+                                <form>
+                                    <group>
+                                        <group>
+                                            <field
+                                                name="ir_actions_report_id"
+                                                options="{'no_create': True, 'no_open': True}"
+                                            />
+                                            <field name="model_name" invisible="True" />
+                                            <field
+                                                name="filter_domain"
+                                                widget="domain"
+                                                options="{'model': 'model_name'}"
+                                            />
+                                        </group>
+                                        <group />
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group />
+                    </group>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

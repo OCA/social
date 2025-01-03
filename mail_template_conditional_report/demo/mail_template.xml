@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_template_demo_hello_world" model="mail.template">
+        <field name="name">Hello world</field>
+        <field name="model_id" ref="base.model_ir_model" />
+        <field name="email_from" />
+        <field name="subject">You shouldn't receive this</field>
+        <field name="body_html" type="html">
+            <div>But I think you receive it</div>
+        </field>
+        <field name="mail_template_report_ids">
+            <record id="mail_template_report_hello_world1" model="mail.template.report">
+                <field
+                    name="ir_actions_report_id"
+                    ref="base.report_ir_model_overview"
+                />
+                <field name="filter_domain" />
+            </record>
+        </field>
+    </record>
+    <record id="mail_template_demo_promote" model="mail.template">
+        <field name="name">Promotion</field>
+        <field name="model_id" ref="base.model_ir_model" />
+        <field name="email_from" />
+        <field name="subject">You have been promoted 🥳</field>
+        <field name="body_html" type="html">
+            <div
+            >Sorry this email is not for you! But please continue your good job!💪</div>
+        </field>
+        <field name="mail_template_report_ids">
+            <record id="mail_template_report_promote1" model="mail.template.report">
+                <field
+                    name="ir_actions_report_id"
+                    ref="base.report_ir_model_overview"
+                />
+                <field name="filter_domain">[(1, '=', 1)]</field>
+            </record>
+            <record id="mail_template_report_promote2" model="mail.template.report">
+                <field name="ir_actions_report_id" ref="report_ir_model_overview2" />
+                <field name="filter_domain">[(0, '=', 1)]</field>
+            </record>
+            <record id="mail_template_report_promote3" model="mail.template.report">
+                <field name="ir_actions_report_id" ref="report_ir_model_overview3" />
+                <field name="filter_domain">[(1, '=', 1)]</field>
+            </record>
+        </field>
+    </record>
+</odoo>
