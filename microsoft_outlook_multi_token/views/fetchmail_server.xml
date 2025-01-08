@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<data>
+    <record id="fetchmail_server_view_form" model="ir.ui.view">
+        <field name="model">fetchmail.server</field>
+        <field name="inherit_id" ref="fetchmail_outlook.fetchmail_server_view_form" />
+        <field name="arch" type="xml">
+            <field name="password" position="after">
+                <field
+                    name="microsoft_outlook_client_id"
+                    placeholder="Server-specific client id"
+                    attrs="{'invisible': [('use_microsoft_outlook_service', '=', False)]}"
+                />
+                <field
+                    name="microsoft_outlook_client_secret"
+                    placeholder="Server-specific client secret"
+                    attrs="{'invisible': [('use_microsoft_outlook_service', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+</data>
