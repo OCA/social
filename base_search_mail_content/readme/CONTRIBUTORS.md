@@ -6,3 +6,4 @@
   - Vicent Cubells
   - Ernesto Tejeda
 - Nguyen Minh Chien \<<chien@trobz.com>\>
+- Elliott Bristow \<<elliott@glo.systems>\>
