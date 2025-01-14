@@ -3,8 +3,6 @@
 
 from odoo import models
 
-from .mail_mail import format_emails
-
 
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
@@ -18,24 +16,6 @@ class MailThread(models.AbstractModel):
         partners_bcc = context.get("partner_bcc_ids", None)
         if partners_bcc:
             res.recipient_bcc_ids = partners_bcc
-        return res
-
-    def _notify_by_email_get_base_mail_values(self, message, additional_values=None):
-        """
-        This is to add cc, bcc addresses to mail.mail objects so that email
-        can be sent to those addresses.
-        """
-        context = self.env.context
-
-        res = super()._notify_by_email_get_base_mail_values(
-            message, additional_values=additional_values
-        )
-        partners_cc = context.get("partner_cc_ids", None)
-        if partners_cc:
-            res["email_cc"] = format_emails(partners_cc)
-        partners_bcc = context.get("partner_bcc_ids", None)
-        if partners_bcc:
-            res["email_bcc"] = format_emails(partners_bcc)
         return res
 
     def _notify_get_recipients(self, message, msg_vals, **kwargs):

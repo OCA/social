@@ -268,8 +268,8 @@ class MailMail(models.Model):
             body=email.get("body"),
             body_alternative=email.get("body_alternative"),
             # ===== Different than native Odoo =====
-            email_cc=mail.email_cc,
-            email_bcc=mail.email_bcc,
+            email_cc=email.get("email_cc"),
+            email_bcc=email.get("email_bcc"),
             # ===== Same with native Odoo =====
             reply_to=mail.reply_to,
             attachments=attachments,
@@ -291,6 +291,18 @@ class MailMail(models.Model):
         partner_to_ids = [r.id for r in self.recipient_ids if r not in partners_cc_bcc]
         partner_to = self.env["res.partner"].browse(partner_to_ids)
         res["email_to"] = format_emails(partner_to)
-        res["email_cc"] = format_emails(self.recipient_cc_ids)
-        res["email_bcc"] = format_emails(self.recipient_bcc_ids)
+        mail_recipients_cc_bcc = {}
+        email_cc = format_emails(self.recipient_cc_ids)
+        res["email_cc"] = email_cc
+        if email_cc:
+            mail_recipients_cc_bcc.update({"email_cc": email_cc})
+        email_bcc = format_emails(self.recipient_bcc_ids)
+        res["email_bcc"] = email_bcc
+        if email_bcc:
+            mail_recipients_cc_bcc.update({"email_bcc": email_bcc})
+        if mail_recipients_cc_bcc:
+            self.write(mail_recipients_cc_bcc)
+        if res.get("email_to_normalized", []):
+            res.get("email_to_normalized").append(tools.email_normalize_all(email_cc))
+            res.get("email_to_normalized").append(tools.email_normalize_all(email_bcc))
         return res
