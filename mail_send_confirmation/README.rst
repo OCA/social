@@ -66,13 +66,13 @@ Authors
 Contributors
 ------------
 
--  `Quartile <https://www.quartile.co>`__:
+- `Quartile <https://www.quartile.co>`__:
 
-   -  Aung Ko Ko Lin
+  - Aung Ko Ko Lin
 
--  `360ERP <https://www.360erp.com>`__:
+- `360ERP <https://www.360erp.com>`__:
 
-   -  Andrea Stirpe
+  - Andrea Stirpe
 
 Maintainers
 -----------
