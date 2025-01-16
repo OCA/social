@@ -1,9 +1,11 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-from odoo.tests import Form, common
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestMailAttachExistingAttachmentAccount(common.TransactionCase):
+class TestMailAttachExistingAttachmentAccount(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -23,7 +25,7 @@ class TestMailAttachExistingAttachmentAccount(common.TransactionCase):
 
     def test_account_invoice_send(self):
         compose = Form(
-            self.env["account.invoice.send"].with_context(
+            self.env["account.move.send"].with_context(
                 active_ids=self.invoice.ids,
                 default_model=self.invoice._name,
                 default_res_id=self.invoice.id,

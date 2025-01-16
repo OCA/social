@@ -63,6 +63,7 @@ Contributors
 
   - Víctor Martínez
   - Ernesto Tejeda
+  - Carlos Lopez
 
 Maintainers
 -----------
