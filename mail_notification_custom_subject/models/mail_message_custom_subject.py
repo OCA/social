@@ -21,6 +21,10 @@ class MailMessageCustomSubject(models.Model):
         string="Applied Subtypes",
         required=True,
     )
+    subject_to_replace = fields.Char(
+        help="The text that will be replaced. You can use placeholders."
+        " E.g.: {{ object.company_id.name }}"
+    )
     subject_template = fields.Char(
         required=True,
         translate=True,
@@ -31,8 +35,9 @@ class MailMessageCustomSubject(models.Model):
             ("append_before", "Append Before"),
             ("append_after", "Append After"),
             ("replace", "Replace"),
+            ("inside_replace", "Partial Replacement"),
         ],
         default="replace",
-        help="Whether to replace, append at beggining or append at end to other"
-        " templates that apply to a given context",
+        help="Whether to replace completely, partially, append at beginning or append"
+        " at end to other templates that apply to a given context",
     )

@@ -55,6 +55,27 @@ class TestMailNotificationCustomSubject(BaseCommon):
         # Get message and check subject
         self.assertEqual(mail_message_3.subject, "Test")
 
+    def test_email_subject_template_inside_replace(self):
+        with self.with_user("boss"):
+            self.env["mail.message.custom.subject"].create(
+                {
+                    "name": "Test template",
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "subtype_ids": [(6, 0, [self.env.ref("mail.mt_comment").id])],
+                    "subject_to_replace": "{{object.company_id.name}}",
+                    "subject_template": "CLN",
+                    "position": "inside_replace",
+                }
+            )
+        self.partner_1.company_id = self.env.company
+        self.partner_1.company_id.name = "COMPANY_LONG_NAME"
+        mail_message_1 = self.partner_1.message_post(
+            subject="COMPANY_LONG_NAME: Custom",
+            body="Test",
+            subtype_xmlid="mail.mt_comment",
+        )
+        self.assertEqual(mail_message_1.subject, "CLN: Custom")
+
     def test_email_subject_template_normal(self):
         with self.with_user("boss"):
             self.env["mail.message.custom.subject"].create(

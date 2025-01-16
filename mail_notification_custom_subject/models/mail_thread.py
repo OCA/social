@@ -1,6 +1,7 @@
 # Copyright 2020-2021 Tecnativa - João Marques
 # Copyright 2021 Tecnativa - Pedro M. Baeza
 # Copyright 2022 Moduon - Eduardo de Miguel
+# Copyright 2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
@@ -71,6 +72,20 @@ class MailThread(models.AbstractModel):
                         subject = rendered_subject_template + subject
                     elif template.position == "append_after":
                         subject += rendered_subject_template
+                    elif template.position == "inside_replace":
+                        rendered_subject_to_replace = self.env[
+                            "mail.template"
+                        ]._render_template(
+                            template_src=template.subject_to_replace,
+                            model=self._name,
+                            res_ids=[self.id],
+                        )[self.id]
+                        if rendered_subject_to_replace:
+                            # To avoid empty string replacements
+                            subject = subject.replace(
+                                rendered_subject_to_replace,
+                                rendered_subject_template,
+                            )
                 except Exception:
                     _logger.warning(
                         f"There is an error with {self.display_name} in the mail "

@@ -12,6 +12,11 @@
                     </div>
                     <group>
                         <field
+                            name="subject_to_replace"
+                            invisible="position!='inside_replace'"
+                            required="position=='inside_replace'"
+                        />
+                        <field
                             name="subject_template"
                             placeholder="Subject (placeholders may be used here)"
                         />
