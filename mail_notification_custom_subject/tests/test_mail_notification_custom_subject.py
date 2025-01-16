@@ -48,12 +48,12 @@ class TestMailNotificationCustomSubject(BaseCommon):
         # Get message and check subject
         self.assertEqual(mail_message_2.subject, "Test partner 2 and something more")
 
-        # Explicit subject should also be overwritten
+        # Explicit subject should not also overwritten
         mail_message_3 = self.partner_2.message_post(
             body="Test", subtype_xmlid="mail.mt_comment", subject="Test"
         )
         # Get message and check subject
-        self.assertEqual(mail_message_3.subject, "Test partner 2 and something more")
+        self.assertEqual(mail_message_3.subject, "Test")
 
     def test_email_subject_template_normal(self):
         with self.with_user("boss"):

@@ -35,15 +35,17 @@ class MailThread(models.AbstractModel):
         if not subtype_id:
             subtype_id = self.env["ir.model.data"]._xmlid_to_res_id("mail.mt_note")
         if subtype_id:
+            domain = [
+                ("model_id.model", "=", self._name),
+                ("subtype_ids", "=", subtype_id),
+            ]
+            if subject:
+                # If it already had a defined subject, we must respect it
+                domain += [("position", "!=", "replace")]
             custom_subjects = (
                 self.env["mail.message.custom.subject"]
                 .sudo()
-                .search(
-                    [
-                        ("model_id.model", "=", self._name),
-                        ("subtype_ids", "=", subtype_id),
-                    ]
-                )
+                .search(domain)
                 .sudo(False)
             )
             if not subject:
