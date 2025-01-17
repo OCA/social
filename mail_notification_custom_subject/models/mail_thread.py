@@ -2,8 +2,11 @@
 # Copyright 2021 Tecnativa - Pedro M. Baeza
 # Copyright 2022 Moduon - Eduardo de Miguel
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+import logging
 
 from odoo import api, models
+
+_logger = logging.getLogger(__name__)
 
 
 class MailThread(models.AbstractModel):
@@ -69,7 +72,10 @@ class MailThread(models.AbstractModel):
                     elif template.position == "append_after":
                         subject += rendered_subject_template
                 except Exception:
-                    rendered_subject_template = False
+                    _logger.warning(
+                        f"There is an error with {self.display_name} in the mail "
+                        f"message custom subject {template.name}"
+                    )
         return super().message_post(
             body=body,
             subject=subject,
