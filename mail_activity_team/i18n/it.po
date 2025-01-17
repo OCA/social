@@ -51,6 +51,11 @@ msgid "Activity Type"
 msgstr "Tipo attività"
 
 #. module: mail_activity_team
+#: model:ir.model,name:mail_activity_team.model_mail_activity_schedule
+msgid "Activity schedule plan Wizard"
+msgstr ""
+
+#. module: mail_activity_team
 #: model_terms:ir.ui.view,arch_db:mail_activity_team.mail_activity_team_view_form
 msgid "Archived"
 msgstr "In archivio"
@@ -156,7 +161,13 @@ msgid "Team Members"
 msgstr "Membri Team"
 
 #. module: mail_activity_team
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_schedule__activity_team_id
+msgid "Team assigned to"
+msgstr ""
+
+#. module: mail_activity_team
 #: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity__team_user_id
+#: model:ir.model.fields,field_description:mail_activity_team.field_mail_activity_schedule__activity_team_user_id
 msgid "Team user"
 msgstr "Utente del team"
 
