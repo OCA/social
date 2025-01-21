@@ -3,7 +3,7 @@
 
 import re
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 
 from odoo import api, fields, models
 
@@ -84,7 +84,7 @@ class MailTrackingEvent(models.Model):
 
     def _process_data(self, tracking_email, metadata, event_type, state):
         ts = time.time()
-        dt = datetime.utcfromtimestamp(ts)
+        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
         return {
             "recipient": metadata.get("recipient", tracking_email.recipient),
             "timestamp": metadata.get("timestamp", ts),

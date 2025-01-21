@@ -6,7 +6,7 @@ import re
 import time
 import urllib.parse
 import uuid
-from datetime import datetime
+from datetime import datetime, timezone
 
 from odoo import _, api, fields, models, tools
 from odoo.exceptions import AccessError
@@ -395,7 +395,7 @@ class MailTrackingEmail(models.Model):
     def _tracking_sent_prepare(self, mail_server, smtp_server, message, message_id):
         self.ensure_one()
         ts = time.time()
-        dt = datetime.utcfromtimestamp(ts)
+        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
         self._message_partners_check(message, message_id)
         self.sudo().write({"state": "sent"})
         return {

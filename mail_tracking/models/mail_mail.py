@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from email.utils import COMMASPACE
 
 from odoo import fields, models
@@ -14,7 +14,7 @@ class MailMail(models.Model):
     def _tracking_email_prepare(self, email):
         """Prepare email.tracking.email record values"""
         ts = time.time()
-        dt = datetime.utcfromtimestamp(ts)
+        dt = datetime.fromtimestamp(ts, tz=timezone.utc)
         email_to_list = email.get("email_to", [])
         email_to = COMMASPACE.join(email_to_list)
         return {
