@@ -4,7 +4,7 @@
 # Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -32,7 +32,7 @@ class PartnerMailListWizard(models.TransientModel):
         to_create = partners - add_list
         for partner in to_create:
             if not partner.email:
-                raise UserError(_("Partner '%s' has no email.") % partner.name)
+                raise UserError(self.env._(f"Partner '{partner.name}' has no email."))
             contact_vals = {
                 "partner_id": partner.id,
                 "list_ids": [(4, self.mail_list_id.id)],

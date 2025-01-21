@@ -6,7 +6,7 @@
 # Copyright 2020 Hibou Corp.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -38,8 +38,10 @@ class MailingContact(models.Model):
                 )
                 if contact.list_ids & other_contact.mapped("list_ids"):
                     raise ValidationError(
-                        _("Partner already exists in one of these mailing lists")
-                        + ": %s" % contact.partner_id.display_name
+                        self.env._(
+                            f"Partner already exists in one of these mailing lists: "
+                            f"{contact.partner_id.display_name}"
+                        )
                     )
 
     @api.onchange("partner_id")

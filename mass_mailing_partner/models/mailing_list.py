@@ -4,7 +4,7 @@
 # Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -30,5 +30,5 @@ class MailingList(models.Model):
             )
             if len(list(filter(lambda r: r["partner_id_count"] > 1, data))):
                 raise ValidationError(
-                    _("A partner cannot be multiple times " "in the same list")
+                    self.env._("A partner cannot be multiple times " "in the same list")
                 )

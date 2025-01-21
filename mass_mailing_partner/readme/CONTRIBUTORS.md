@@ -16,3 +16,6 @@
 - [Trobz](https://trobz.com):
 
   > - Nguyễn Minh Chiến \<<chien@trobz.com>\>
+
+- [360ERP](https://www.360erp.com):
+  > - Kevin Khao

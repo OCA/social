@@ -5,7 +5,7 @@
 # Copyright 2020 Tecnativa - Manuel Calero
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -39,11 +39,10 @@ class ResPartner(models.Model):
         for partner in self:
             if not partner.email and partner.sudo().mass_mailing_contact_ids:
                 raise ValidationError(
-                    _(
-                        "This partner '%s' is linked to one or more mass "
-                        "mailing contact. Email must be assigned."
+                    self.env._(
+                        f"This partner '{partner.name}' is linked to one or more mass "
+                        f"mailing contact. Email must be assigned."
                     )
-                    % partner.name
                 )
 
     @api.depends("mass_mailing_contact_ids")
