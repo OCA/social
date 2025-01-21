@@ -6,7 +6,6 @@
      Copyright 2020 Tecnativa - Manuel Calero
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
-
     <record model="ir.ui.view" id="view_partner_form">
         <field name="name">Partner Form with mailing contacts</field>
         <field name="model">res.partner</field>
@@ -63,5 +62,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

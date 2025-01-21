@@ -5,21 +5,19 @@
      Copyright 2020 Tecnativa - Manuel Calero
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
-
-<record model="ir.ui.view" id="mailing_list_view_form">
-    <field name="name">mailing.list.form</field>
-    <field name="model">mailing.list</field>
-    <field name="inherit_id" ref="mass_mailing.mailing_list_view_form" />
-    <field name="arch" type="xml">
-        <xpath expr="//div[hasclass('oe_title')]" position="after">
-            <group>
+    <record model="ir.ui.view" id="mailing_list_view_form">
+        <field name="name">mailing.list.form</field>
+        <field name="model">mailing.list</field>
+        <field name="inherit_id" ref="mass_mailing.mailing_list_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('oe_title')]" position="after">
                 <group>
-                    <field name="partner_mandatory" />
-                    <field name="partner_category" />
+                    <group>
+                        <field name="partner_mandatory" />
+                        <field name="partner_category" />
+                    </group>
                 </group>
-            </group>
-        </xpath>
-    </field>
-</record>
-
+            </xpath>
+        </field>
+    </record>
 </odoo>
