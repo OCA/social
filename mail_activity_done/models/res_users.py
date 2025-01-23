@@ -50,9 +50,9 @@ class ResUsers(models.Model):
                     "planned_count": 0,
                     "type": "activity",
                 }
-            user_activities[activity["model"]][
-                "%s_count" % activity["states"]
-            ] += activity["count"]
+            user_activities[activity["model"]][f"{activity['states']}_count"] += (
+                activity["count"]
+            )
             if activity["states"] in ("today", "overdue"):
                 user_activities[activity["model"]]["total_count"] += activity["count"]
 

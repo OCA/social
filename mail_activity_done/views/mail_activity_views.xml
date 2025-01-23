@@ -34,17 +34,17 @@
                     domain="[('active', '=', False), ('state', '=', 'done')]"
                 />
             </field>
-            <filter name="activities_overdue" position="attributes">
+            <filter name="filter_date_deadline_past" position="attributes">
                 <attribute
                     name="domain"
                 >[('date_deadline', '&lt;', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
-            <filter name="activities_today" position="attributes">
+            <filter name="filter_date_deadline_today" position="attributes">
                 <attribute
                     name="domain"
                 >[('date_deadline', '=', context_today().strftime('%Y-%m-%d'))]</attribute>
             </filter>
-            <filter name="activities_upcoming_all" position="attributes">
+            <filter name="filter_date_deadline_future" position="attributes">
                 <attribute
                     name="domain"
                 >[('date_deadline', '&gt;', context_today().strftime('%Y-%m-%d'))]</attribute>
@@ -96,7 +96,7 @@
                 <field name="state" />
                 <field name="date_done" readonly="1" />
             </field>
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="decoration-muted">state == 'done'</attribute>
                 <attribute
                     name="decoration-danger"
@@ -104,7 +104,7 @@
                 <attribute
                     name="decoration-success"
                 >date_deadline == current_date and state != 'done'</attribute>
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -120,5 +120,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

@@ -46,13 +46,13 @@ class TestMailActivityDoneMethods(TransactionCase):
         res_partner = self.env["res.partner"].browse(self.act1.res_model_id)
         params = {
             "domain": [],
-            "group_by": "id",
-            "progress_bar": {"field": "activity_state"},
+            "fields": ["activity_state"],
+            "groupby": "id",
         }
-        result = res_partner._read_progress_bar(**params)
-        self.assertEqual(result[0]["__count"], 1)
+        result = res_partner.read_group(**params)
+        self.assertEqual(result[0]["id_count"], 1)
 
         self.act1._action_done()
         self.assertEqual(self.act1.state, "done")
-        result = res_partner._read_progress_bar(**params)
+        result = res_partner.read_group(**params)
         self.assertEqual(len(result), 0)

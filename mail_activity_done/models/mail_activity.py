@@ -83,10 +83,20 @@ class MailActivityMixin(models.AbstractModel):
         domain=lambda self: [("res_model", "=", self._name), ("active", "=", True)]
     )
 
-    def _read_progress_bar(self, domain, group_by, progress_bar):
+    def read_group(
+        self, domain, fields, groupby, offset=0, limit=None, orderby=False, lazy=True
+    ):
         """
         Exclude completed activities from progress bar result.
         Pass an extra domain to super to filter out records with only done activities.
         """
         domain = expression.AND([domain, [("activity_ids.done", "=", False)]])
-        return super()._read_progress_bar(domain, group_by, progress_bar)
+        return super().read_group(
+            domain,
+            fields,
+            groupby,
+            offset=offset,
+            limit=limit,
+            orderby=orderby,
+            lazy=lazy,
+        )
