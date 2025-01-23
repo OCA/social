@@ -13,9 +13,9 @@ class ResUsers(models.Model):
     )
 
     @api.model
-    def systray_get_activities(self):
+    def _get_activity_groups(self):
         if not self.env.context.get("team_activities"):
-            return super().systray_get_activities()
+            return super()._get_activity_groups()
         query = """SELECT m.id, count(*), act.res_model as model,
                     CASE
                         WHEN %(today)s::date -
@@ -66,9 +66,9 @@ class ResUsers(models.Model):
                     "overdue_count": 0,
                     "planned_count": 0,
                 }
-            user_activities[activity["model"]][
-                "%s_count" % activity["states"]
-            ] += activity["count"]
+            user_activities[activity["model"]][f"{activity['states']}_count"] += (
+                activity["count"]
+            )
             if (
                 activity["states"] in ("today", "overdue")
                 and activity["user_id"] != user

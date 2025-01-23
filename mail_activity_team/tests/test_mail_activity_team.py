@@ -4,7 +4,8 @@
 from datetime import date
 
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form
+from odoo.tests.common import TransactionCase
 
 
 class TestMailActivityTeam(TransactionCase):
@@ -103,6 +104,7 @@ class TestMailActivityTeam(TransactionCase):
         cls.act2 = (
             cls.env["mail.activity"]
             .with_user(cls.employee)
+            .sudo()
             .create(
                 {
                     "activity_type_id": cls.activity2.id,
@@ -265,7 +267,7 @@ class TestMailActivityTeam(TransactionCase):
             self.env["res.users"]
             .with_user(self.employee.id)
             .with_context(**{"team_activities": True})
-            .systray_get_activities()
+            ._get_activity_groups()
         )
         self.assertEqual(res[0]["total_count"], 0)
         self.assertEqual(res[0]["today_count"], 1)
@@ -279,11 +281,11 @@ class TestMailActivityTeam(TransactionCase):
             self.env["res.users"]
             .with_user(self.employee.id)
             .with_context(**{"team_activities": True})
-            .systray_get_activities()
+            ._get_activity_groups()
         )
         self.assertEqual(res[0]["total_count"], 1)
         self.assertEqual(res[0]["today_count"], 2)
-        res = self.env["res.users"].with_user(self.employee.id).systray_get_activities()
+        res = self.env["res.users"].with_user(self.employee.id)._get_activity_groups()
         self.assertEqual(res[0]["total_count"], 2)
 
     def test_activity_schedule_next(self):

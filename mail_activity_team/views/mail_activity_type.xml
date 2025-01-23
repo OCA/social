@@ -2,7 +2,6 @@
 <!-- Copyright 2022 CreuBlanca
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="mail_activity_type_form_view">
         <field name="name">mail.activity.type.form (in mail_activity_team)</field>
         <field name="model">mail.activity.type</field>
@@ -16,7 +15,4 @@
             </field>
         </field>
     </record>
-
-
-
 </odoo>

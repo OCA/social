@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-<!--
+    <!--
     VIEWS
 -->
 
@@ -52,19 +52,17 @@
         </field>
     </record>
 
-
     <!-- TREE VIEW -->
     <record id="mail_activity_team_view_tree" model="ir.ui.view">
         <field name="name">mail.activity.team.view.tree</field>
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
-           <tree>
-               <field name="name" />
-               <field name="res_model_ids" widget="many2many_tags" />
-           </tree>
+            <list>
+                <field name="name" />
+                <field name="res_model_ids" widget="many2many_tags" />
+            </list>
         </field>
     </record>
-
 
     <!-- SEARCH VIEW -->
     <record id="mail_activity_team_view_search" model="ir.ui.view">
@@ -72,15 +70,14 @@
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
             <search>
-               <field name="name" />
-               <field name="res_model_ids" />
-               <field name="member_ids" />
+                <field name="name" />
+                <field name="res_model_ids" />
+                <field name="member_ids" />
             </search>
         </field>
     </record>
 
-
-<!--
+    <!--
     ACTION
 -->
     <record model="ir.actions.act_window" id="mail_activity_team_action">
@@ -92,8 +89,7 @@
         <field name="search_view_id" ref="mail_activity_team_view_search" />
     </record>
 
-
-<!--
+    <!--
 Menus
 -->
     <menuitem
@@ -103,5 +99,4 @@ Menus
         sequence="10"
         action="mail_activity_team_action"
     />
-
 </odoo>
