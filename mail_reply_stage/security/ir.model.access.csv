@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_reply_config_all,mail.reply.config.all,model_mail_reply_config,,1,0,0,0
+access_mail_reply_config_admin,mail.reply.config.admin,model_mail_reply_config,base.group_system,1,1,1,1
