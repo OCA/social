@@ -66,7 +66,8 @@ class MailMail(models.Model):
         )
         return full_text
 
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None, alias_domain_id=False):
+    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None, alias_domain_id=False,
+              mail_server=False, post_send_callback=None):
         group_portal = self.env.ref("base.group_portal")
         for mail_id in self.ids:
             mail = self.browse(mail_id)
@@ -162,5 +163,7 @@ class MailMail(models.Model):
             auto_commit=auto_commit,
             raise_exception=raise_exception,
             smtp_session=smtp_session,
-            alias_domain_id=False
+            alias_domain_id=False,
+            mail_server=mail_server,
+            post_send_callback=post_send_callback
         )

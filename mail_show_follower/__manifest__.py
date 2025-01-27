@@ -1,5 +1,6 @@
 # Copyright 2020 Valentin Vinagre <valentin.vinagre@sygel.es>
 # Copyright 2022 Eduardo de Miguel <edu@moduon.team>
+# Copyright 2025 Thomas Pot <info@open2bizz.eu>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 {
