@@ -52,7 +52,8 @@ class MailMail(models.Model):
         full_text = """
             <div summary='o_mail_notification' style='padding:5px;
             margin:10px 0px 10px 0px;font-size:13px;border-radius:5px;
-            font-family:Arial;border:1px solid;color:{msg_font_color};background-color:{msg_back_color};'>
+            font-family:Arial;border:1px solid;color:{msg_font_color};
+            background-color:{msg_back_color};'>
             {msg_sent_to} {partner_message}
             {rc}{msg_warn}
             </div>
@@ -66,8 +67,8 @@ class MailMail(models.Model):
         )
         return full_text
 
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None, alias_domain_id=False,
-              mail_server=False, post_send_callback=None):
+    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None,
+              alias_domain_id=False, mail_server=False, post_send_callback=None):
         group_portal = self.env.ref("base.group_portal")
         for mail_id in self.ids:
             mail = self.browse(mail_id)
@@ -77,7 +78,8 @@ class MailMail(models.Model):
                 ]
             ).mapped("recipient_ids")
             # if the email has a model, id and it belongs to the portal group
-            if mail.model and mail.res_id and group_portal and not mail.subtype_id.internal:
+            if (mail.model and mail.res_id and group_portal
+                    and not mail.subtype_id.internal):
                 obj = self.env[mail.model].browse(mail.res_id)
                 # those partners are obtained, who do not have a user and
                 # if they do it must be a portal, we exclude internal
