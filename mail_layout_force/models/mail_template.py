@@ -12,33 +12,24 @@ class MailTemplate(models.Model):
         comodel_name="ir.ui.view",
         string="Force Layout",
         domain=[("type", "=", "qweb"), ("mode", "=", "primary")],
-        context={"default_type": "qweb"},
+        compute="_compute_force_email_layout_id",
+        inverse="_inverse_force_email_layout_id",
         help="Force a mail layout for this template.",
     )
 
-    def _ensure_force_email_layout_xml_id(self):
-        missing = self.force_email_layout_id.filtered(lambda rec: not rec.xml_id)
-        if missing:
-            vals = [
-                {
-                    "module": "__export__",
-                    "name": "force_email_layout_%s" % rec.id,
-                    "model": rec._name,
-                    "res_id": rec.id,
-                }
-                for rec in missing
-            ]
-            self.env["ir.model.data"].sudo().create(vals)
-            self.force_email_layout_id.invalidate_recordset(["xml_id"])
+    @api.depends("email_layout_xmlid")
+    def _compute_force_email_layout_id(self):
+        for template in self:
+            if template.email_layout_xmlid:
+                template.force_email_layout_id = self.env.ref(
+                    template.email_layout_xmlid, raise_if_not_found=False
+                )
+            else:
+                template.force_email_layout_id = False
 
-    @api.model_create_multi
-    def create(self, vals_list):
-        records = super().create(vals_list)
-        records._ensure_force_email_layout_xml_id()
-        return records
-
-    def write(self, vals):
-        res = super().write(vals)
-        if "force_email_layout_id" in vals:
-            self._ensure_force_email_layout_xml_id()
-        return res
+    def _inverse_force_email_layout_id(self):
+        for template in self:
+            if template.force_email_layout_id:
+                template.email_layout_xmlid = template.force_email_layout_id.xml_id
+            else:
+                template.email_layout_xmlid = False

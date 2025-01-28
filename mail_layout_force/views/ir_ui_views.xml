@@ -9,7 +9,7 @@
                 <page
                     name="layout_mapping"
                     string="Layout Mapping"
-                    attrs="{'invisible': [('type', '!=', 'qweb')]}"
+                    invisible="type != 'qweb'"
                 >
                     <field name="layout_mapping_line_ids" nolabel="1">
                         <tree editable="bottom">

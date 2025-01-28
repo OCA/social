@@ -39,14 +39,15 @@ There are notably two main layouts used in Odoo, and the user can't
 control when they're used, as it's hardcoded into the different
 applications.
 
-* ``mail.message_notification_email``
-* ``mail.mail_notification_light``
-* ``mail.mail_notification_paynow``
+-  ``mail.message_notification_email``
+-  ``mail.mail_notification_light``
+-  ``mail.mail_notification_paynow``
 
-This module allows to force a specific layout for a given ``email.template``,
-effectively overwritting the one hardcoded by Odoo. Additionally, it enables
-forcing a custom layout for emails that do not use an existing ``email.template``
-record (e.g., when sending an email from the chatter).
+This module allows to force a specific layout for a given
+``email.template``, effectively overwritting the one hardcoded by Odoo.
+Additionally, it enables forcing a custom layout for emails that do not
+use an existing ``email.template`` record (e.g., when sending an email
+from the chatter).
 
 This allows you to fully customize the way Odoo emails are rendered and
 sent to your customers.
@@ -59,9 +60,9 @@ sent to your customers.
 Configuration
 =============
 
-#. Go to Settings > Technical > Emails > Templates
-#. Open the desired ``email.template`` record.
-#. In Advanced Parameters tab, find the Force Layout field.
+# Go to Configuration > Technical > Emails > Templates # Open the
+desired ``email.template`` record. # In Advanced Parameters tab, find
+the Force Layout field.
 
 You can leave it empty to use the default email layout (chosen by Odoo).
 You can force a custom email layout of your own. You can use the *Mail:
@@ -75,15 +76,16 @@ inspiration:
 -  ``mail.mail_notification_paynow``
 -  ``mail.mail_notification_borders``
 
-To force a new custom layout for emails that do not use an existing ``email.template``
-record (e.g., emails sent from the chatter):
+To force a new custom layout for emails that do not use an existing
+``email.template`` record (e.g., emails sent from the chatter):
 
-#. Go to Settings > Technical > User Interface > Views.
-#. Copy the current layout (e.g., mail.message_notification_email) to create a new one, and remove any parts you don’t need.
-#. Open the layout that you want to swap with a substitute. Then, under the Layout Mapping tab:
-    * Set ``Substitute Layout`` to the new custom layout you created.
-    * Set ``Models`` if you want to apply the replacement only to specific models. If left empty,
-      the email layout will be replaced for all models.
+#. Go to Settings > Technical > User Interface > Views. #. Copy the
+current layout (e.g., mail.message_notification_email) to create a new
+one, and remove any parts you don’t need. #. Open the layout that you
+want to swap with a substitute. Then, under the Layout Mapping tab: \*
+Set ``Substitute Layout`` to the new custom layout you created. \* Set
+``Models`` if you want to apply the replacement only to specific models.
+If left empty, the email layout will be replaced for all models.
 
 Bug Tracker
 ===========
@@ -106,14 +108,16 @@ Authors
 Contributors
 ------------
 
--  `Camptocamp <https://www.camptocamp.com>`__
+-  ``Camptocamp <https://www.camptocamp.com>``\ \_
 
-    * Iván Todorovich <ivan.todorovich@camptocamp.com>
-* Abraham Anes <abrahamanes@gmail.com>
-* `Quartile <https://www.quartile.co>`_
+   -  Iván Todorovich ivan.todorovich@camptocamp.com
 
-  * Aung Ko Ko Lin
-  * Yoshi Tashiro
+-  Abraham Anes abrahamanes@gmail.com
+
+-  ``Quartile <https://www.quartile.co>``\ \_
+
+   -  Aung Ko Ko Lin
+   -  Yoshi Tashiro
 
 Maintainers
 -----------

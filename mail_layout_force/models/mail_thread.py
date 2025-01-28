@@ -8,17 +8,6 @@ from odoo import models
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    def message_post_with_template(
-        self, template_id, email_layout_xmlid=None, **kwargs
-    ):
-        # OVERRIDE to force the email_layout_xmlid defined on the mail.template
-        template = self.env["mail.template"].sudo().browse(template_id)
-        if template.force_email_layout_id:
-            email_layout_xmlid = template.force_email_layout_id.xml_id
-        return super().message_post_with_template(
-            template_id, email_layout_xmlid=email_layout_xmlid, **kwargs
-        )
-
     def _notify_thread_by_email(
         self,
         message,
@@ -32,7 +21,7 @@ class MailThread(models.AbstractModel):
         force_send=True,
         send_after_commit=True,
         subtitles=None,
-        **kwargs
+        **kwargs,
     ):
         msg_vals = msg_vals or {}
         layout_xmlid = (
@@ -71,5 +60,5 @@ class MailThread(models.AbstractModel):
             force_send=force_send,
             send_after_commit=send_after_commit,
             subtitles=subtitles,
-            **kwargs
+            **kwargs,
         )
