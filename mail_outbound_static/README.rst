@@ -17,13 +17,13 @@ Mail Outbound Static
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/17.0/mail_outbound_static
+    :target: https://github.com/OCA/social/tree/18.0/mail_outbound_static
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-mail_outbound_static
+    :target: https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_outbound_static
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -33,26 +33,26 @@ RFC-2822 by allowing for a dynamically configured From header, with the
 sender's e-mail being appended into the proper Sender header instead. To
 accomplish this we:
 
--  Add a domain whitelist field in the mail server model. This one
-   represent an allowed Domains list separated by commas. If there is
-   not given SMTP server it will let us to search the proper mail server
-   to be used to send the messages where the message 'From' email domain
-   match with the domain whitelist. If there is not mail server that
-   matches then will use the default mail server to send the message.
--  Add a Email From field that will let us to email from a specific
-   address taking into account this conditions:
+- Add a domain whitelist field in the mail server model. This one
+  represent an allowed Domains list separated by commas. If there is not
+  given SMTP server it will let us to search the proper mail server to
+  be used to send the messages where the message 'From' email domain
+  match with the domain whitelist. If there is not mail server that
+  matches then will use the default mail server to send the message.
+- Add a Email From field that will let us to email from a specific
+  address taking into account this conditions:
 
-   1) If the sender domain match with the domain whitelist then the
-      original message's 'From' will remain as it is and will not be
-      changed because the mail server is able to send in the name of the
-      sender domain.
-   2) If the original message's 'From' does not match with the domain
-      whitelist then the email From is replaced with the Email From
-      field value.
+  1) If the sender domain match with the domain whitelist then the
+     original message's 'From' will remain as it is and will not be
+     changed because the mail server is able to send in the name of the
+     sender domain.
+  2) If the original message's 'From' does not match with the domain
+     whitelist then the email From is replaced with the Email From field
+     value.
 
--  Add compatibility to define the smtp information in Odoo config file.
-   Both smtp_from and smtp_whitelist_domain values will be used if there
-   is not mail server configured in the system.
+- Add compatibility to define the smtp information in Odoo config file.
+  Both smtp_from and smtp_whitelist_domain values will be used if there
+  is not mail server configured in the system.
 
 **Table of contents**
 
@@ -62,9 +62,9 @@ accomplish this we:
 Usage
 =====
 
--  Navigate to an Outbound Email Server
--  Set the Email From option to an email address
--  Set the Domain Whitelist option with the domain whitelist
+- Navigate to an Outbound Email Server
+- Set the Email From option to an email address
+- Set the Domain Whitelist option with the domain whitelist
 
 Known issues / Roadmap
 ======================
@@ -77,7 +77,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_outbound_static%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_outbound_static%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -94,15 +94,15 @@ Authors
 Contributors
 ------------
 
--  Frédéric Garbely <frederic.garbely@braintec-group.com>
--  Dave Lasley <dave@laslabs.com>
--  Lorenzo Battistini <https://github.com/eLBati>
--  Pierre Pizzetta <pierre@devreaction.com>
--  Katherine Zaoral <kz@adhoc.com.ar>
--  Juan José Scarafía <jjs@adhoc.com.ar>
--  `Quartile <https://www.quartile.co>`__:
+- Frédéric Garbely <frederic.garbely@braintec-group.com>
+- Dave Lasley <dave@laslabs.com>
+- Lorenzo Battistini <https://github.com/eLBati>
+- Pierre Pizzetta <pierre@devreaction.com>
+- Katherine Zaoral <kz@adhoc.com.ar>
+- Juan José Scarafía <jjs@adhoc.com.ar>
+- `Quartile <https://www.quartile.co>`__:
 
-   -  Yoshi Tashiro
+  - Yoshi Tashiro
 
 Maintainers
 -----------
@@ -117,6 +117,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/mail_outbound_static>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/18.0/mail_outbound_static>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

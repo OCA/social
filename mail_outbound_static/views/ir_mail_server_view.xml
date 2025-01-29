@@ -4,7 +4,6 @@
     License LGPL-3 or later (http://www.gnu.org/licenses/lgpl.html).
 -->
 <odoo>
-
     <record id="ir_mail_server_form" model="ir.ui.view">
         <field name="name">IR Mail Server - From Address</field>
         <field name="model">ir.mail_server</field>
@@ -16,5 +15,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
