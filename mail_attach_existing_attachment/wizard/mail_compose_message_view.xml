@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='attachment_ids']" position="after">
                 <field name="can_attach_attachment" invisible="1" />
-                    <field
+                <field
                     name="object_attachment_ids"
                     widget="many2many_checkboxes"
                     domain="[('res_model', '=', model), ('res_id', '=', res_id)]"
