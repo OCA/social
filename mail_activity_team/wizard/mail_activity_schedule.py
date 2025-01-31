@@ -1,4 +1,5 @@
 # Copyright 2024 Camptocamp SA
+# Copyright 2024 CorporateHub
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -26,7 +27,7 @@ class MailActivitySchedule(models.TransientModel):
             elif not scheduler.activity_team_id:
                 scheduler.activity_team_id = (
                     self.env["mail.activity"]
-                    .with_context(default_res_model=self.sudo().res_model_id.model)
+                    .with_context(default_res_model=scheduler.sudo().res_model_id.model)
                     ._get_default_team_id(user_id=scheduler.activity_team_user_id.id)
                 )
 
