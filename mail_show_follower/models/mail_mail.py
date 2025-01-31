@@ -58,7 +58,13 @@ class MailMail(models.Model):
         )
         return full_text
 
-    def _send(self, auto_commit=False, raise_exception=False, smtp_session=None):
+    def _send(
+        self,
+        auto_commit=False,
+        raise_exception=False,
+        smtp_session=None,
+        alias_domain_id=False,
+    ):
         group_user = self.env.ref("base.group_user")
         models_to_exclude = (
             self.env["ir.config_parameter"]
@@ -95,4 +101,5 @@ class MailMail(models.Model):
             auto_commit=auto_commit,
             raise_exception=raise_exception,
             smtp_session=smtp_session,
+            alias_domain_id=alias_domain_id,
         )
