@@ -17,22 +17,23 @@ Mail Show Follower
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_show_follower
+    :target: https://github.com/OCA/social/tree/17.0/mail_show_follower
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_show_follower
+    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-mail_show_follower
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module extends the functionality of mailing to show the document followers in head of the mails.
-In the cc, only appear when:
+This module extends the functionality of mailing to show the document
+followers in head of the mails. In the cc, only appear when:
 
-#. The followers only count if are contacts or external users (Inner Followers will be discriminated)
-#. The number of followers are more than 1.
+1. The followers only count if are contacts or external users (Inner
+   Followers will be discriminated)
+2. The number of followers are more than 1.
 
 **Table of contents**
 
@@ -44,19 +45,26 @@ Configuration
 
 To configure this module, you need to:
 
-#. Go General settings/Discuss/Show Followers on mails/Show Internal Users CC and set if want to show or not internal users in cc details.
-#. Go Settings/Users & Company select any user in 'Preferences' check or not the 'Show in CC' field if this user need to appear in the cc note.
-#. Go General settings/Discuss/Show Followers on mails/Text 'Sent to' and set the initial part of the message.
-#. Go General settings/Discuss/Show Followers on mails/Partner format and choose desired fields to show on CC recipients.
-#. Go General settings/Discuss/Show Followers on mails/Text 'Replies' and choose desired warn message
-#. Go General settings/Discuss/Show Followers in 'Models to exclude' enter the models you want to exclude from the CC note.
+1. Go General settings/Discuss/Show Followers on mails/Show Internal
+   Users CC and set if want to show or not internal users in cc details.
+2. Go Settings/Users & Company select any user in 'Preferences' check or
+   not the 'Show in CC' field if this user need to appear in the cc
+   note.
+3. Go General settings/Discuss/Show Followers on mails/Text 'Sent to'
+   and set the initial part of the message.
+4. Go General settings/Discuss/Show Followers on mails/Partner format
+   and choose desired fields to show on CC recipients.
+5. Go General settings/Discuss/Show Followers on mails/Text 'Replies'
+   and choose desired warn message
+6. Go General settings/Discuss/Show Followers in 'Models to exclude'
+   enter the models you want to exclude from the CC note.
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Send an email from any document of odoo.
+1. Send an email from any document of odoo.
 
 Bug Tracker
 ===========
@@ -64,7 +72,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_show_follower%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_show_follower%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -72,21 +80,21 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Sygel
 * Moduon
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Valentin Vinagre <valentin.vinagre@sygel.es>
-* Lorenzo Battistini
-* Eduardo de Miguel <edu@moduon.team>
-* Vincent Van Rossem <vincent.vanrossem@camptocamp.com>
+-  Valentin Vinagre <valentin.vinagre@sygel.es>
+-  Lorenzo Battistini
+-  Eduardo de Miguel <edu@moduon.team>
+-  Vincent Van Rossem <vincent.vanrossem@camptocamp.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -106,6 +114,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-yajo| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_show_follower>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/mail_show_follower>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
