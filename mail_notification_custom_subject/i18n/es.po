@@ -82,6 +82,11 @@ msgid "Model where this template applies"
 msgstr "Modelo al que se aplica esta plantilla"
 
 #. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__inside_replace
+msgid "Partial Replacement"
+msgstr ""
+
+#. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid "Position"
 msgstr "Posición"
@@ -110,18 +115,35 @@ msgid "Subject Template"
 msgstr "Tema Plantilla"
 
 #. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_to_replace
+msgid "Subject To Replace"
+msgstr ""
+
+#. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
 msgid "Template Name"
 msgstr "Nombre de Plantilla"
 
 #. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__subject_to_replace
+msgid ""
+"The text that will be replaced. You can use placeholders. E.g.: {{ object."
+"company_id.name }}"
+msgstr ""
+
+#. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
 msgid ""
-"Whether to replace, append at beggining or append at end to other templates "
-"that apply to a given context"
+"Whether to replace completely, partially, append at beginning or append at "
+"end to other templates that apply to a given context"
 msgstr ""
-"Si reemplazar, añadir al principio o añadir al final a otras plantillas que "
-"se aplican a un contexto determinado"
+
+#~ msgid ""
+#~ "Whether to replace, append at beggining or append at end to other "
+#~ "templates that apply to a given context"
+#~ msgstr ""
+#~ "Si reemplazar, añadir al principio o añadir al final a otras plantillas "
+#~ "que se aplican a un contexto determinado"
 
 #~ msgid "Last Modified on"
 #~ msgstr "Última Modificación el"
