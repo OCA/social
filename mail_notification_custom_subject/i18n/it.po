@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-07-09 09:58+0000\n"
+"PO-Revision-Date: 2025-02-03 22:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -84,7 +84,7 @@ msgstr "Modello dove si applica questo schema"
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__inside_replace
 msgid "Partial Replacement"
-msgstr ""
+msgstr "Sostituzione parziale"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__position
@@ -117,7 +117,7 @@ msgstr "Modello soggetto"
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_to_replace
 msgid "Subject To Replace"
-msgstr ""
+msgstr "Oggetto da sostituire"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
@@ -130,6 +130,8 @@ msgid ""
 "The text that will be replaced. You can use placeholders. E.g.: {{ object."
 "company_id.name }}"
 msgstr ""
+"Il testo che verrà sostituito. Si possono usare segnaposto. Es.: {{ "
+"object.company_id.name }}"
 
 #. module: mail_notification_custom_subject
 #: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
@@ -137,6 +139,8 @@ msgid ""
 "Whether to replace completely, partially, append at beginning or append at "
 "end to other templates that apply to a given context"
 msgstr ""
+"Se sostituire completamente, parzialmente, aggiungere all'inizio o alla fine "
+"di altri modelli che si applicano a un dato contesto"
 
 #~ msgid ""
 #~ "Whether to replace, append at beggining or append at end to other "
