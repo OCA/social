@@ -17,18 +17,19 @@ Base User Signature
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/base_user_signature
+    :target: https://github.com/OCA/social/tree/17.0/base_user_signature
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-base_user_signature
+    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-base_user_signature
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module provides a new field on users to store the user's digital signature
+This module provides a new field on users to store the user's digital
+signature
 
 **Table of contents**
 
@@ -38,9 +39,9 @@ This module provides a new field on users to store the user's digital signature
 Usage
 =====
 
-#. Go to *Settings > Users & Companies > Users*.
-#. Open one of the existing users.
-#. You can set a digital signature for it on the field "Signature".
+1. Go to *Settings > Users & Companies > Users*.
+2. Open one of the existing users.
+3. You can set a digital signature for it on the field "Signature".
 
 Bug Tracker
 ===========
@@ -48,7 +49,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20base_user_signature%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20base_user_signature%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -56,24 +57,24 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jay Vora <jay.vora@serpentcs.com>
-* Lorenzo Battistini <lorenzo.battistini@agilebg.com>
-* Pedro M. Baeza <pedro.baeza@gmail.com>
-* Vicent Cubells <vicent@vcubells.net>
-* Mayank Gosai <mgosai@opensourceintegrators.com>
-* Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
-* Italo LOPES <contact@ilopes.me>
-* Saran Lim. <saranl@ecosoft.co.th>
+- Jay Vora <jay.vora@serpentcs.com>
+- Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+- Pedro M. Baeza <pedro.baeza@gmail.com>
+- Vicent Cubells <vicent@vcubells.net>
+- Mayank Gosai <mgosai@opensourceintegrators.com>
+- Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+- Italo LOPES <contact@ilopes.me>
+- Saran Lim. <saranl@ecosoft.co.th>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -93,6 +94,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-imlopes| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/base_user_signature>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/base_user_signature>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
