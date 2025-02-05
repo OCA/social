@@ -11,7 +11,8 @@ class MailActivity(models.Model):
         original_user_id = self.user_id
         res = super()._onchange_activity_type_id()
         if (
-            original_user_id != self.env.user
+            original_user_id
+            and original_user_id != self.env.user
             and not self.activity_type_id.default_user_id
         ):
             # keep already set user
