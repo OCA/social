@@ -4,13 +4,19 @@
         <field name="model">mail.compose.message</field>
         <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
         <field name="arch" type="xml">
-            <xpath expr="//span[@name='document_followers_text']" position="before">
+            <xpath
+                expr="//widget[@name='mail_composer_recipient_list']"
+                position="before"
+            >
                 <field
                     name="notify_followers"
                     invisible="composition_mode == 'mass_mail'"
                 />
             </xpath>
-            <xpath expr="//span[@name='document_followers_text']" position="after">
+            <xpath
+                expr="//widget[@name='mail_composer_recipient_list']"
+                position="after"
+            >
                 <span
                     name="no_followers_text"
                     invisible="notify_followers"

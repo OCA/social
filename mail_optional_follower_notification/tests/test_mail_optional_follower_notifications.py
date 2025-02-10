@@ -1,10 +1,12 @@
 # Copyright 2019 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.fields import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestMailOptionalFollowernotifications(TransactionCase):
+class TestMailOptionalFollowernotifications(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -31,7 +33,7 @@ class TestMailOptionalFollowernotifications(TransactionCase):
         values = {
             "subject": "Your subject here",
             "body": "Your plain text body here",
-            "partner_ids": [(6, 0, recipients.ids)],
+            "partner_ids": [Command.set(recipients.ids)],
             "notify_followers": notify_followers,
         }
         composer = self.MailCompose.with_context(**self.mail_compose_context).create(
