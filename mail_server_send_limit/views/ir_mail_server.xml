@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="ir_mail_server_form" model="ir.ui.view">
+        <field name="model">ir.mail_server</field>
+        <field name="name">ir.mail.server.limit</field>
+        <field name="inherit_id" ref="base.ir_mail_server_form" />
+        <field name="arch" type="xml">
+            <field name="smtp_debug" position="after">
+                <field name="limit_per_hour" />
+            </field>
+        </field>
+    </record>
+
+</odoo>

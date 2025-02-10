@@ -1,0 +1,3 @@
+id,name,model_id/id,group_id/id,perm_read,perm_write,perm_create,perm_unlink
+access_mail_counter_user,mail_counter_user,model_mail_counter,,1,1,1,0
+access_mail_counter_manager,mail_counter_manager,model_mail_counter,base.group_system,1,1,1,1
