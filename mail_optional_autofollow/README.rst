@@ -24,7 +24,7 @@ To use this module, you need to use the autofollow recipients checkbox on
 mail.compose.message:
 
 Technically, this field is initialized to true if there is a
-'mail_post_autofollow' key in the current context 
+'mail_post_autofollow' key in the current context
 
 .. figure:: static/description/autofollow.png
    :alt: autofollow recipients checkbox
@@ -61,13 +61,6 @@ Contributors
 * Stéphane Bidoul <stephane.bidoul@acsone.eu>
 
 Do not contact contributors directly about support or help with technical issues.
-
-Funders
--------
-
-The development of this module has been financially supported by:
-
-* Acsone
 
 Maintainer
 ----------

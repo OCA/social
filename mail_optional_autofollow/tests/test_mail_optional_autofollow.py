@@ -1,10 +1,12 @@
 # Copyright 2016 ACSONE SA/NV (<http://acsone.eu>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo.tests import common
+from odoo.fields import Command
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAttachExistingAttachment(common.TransactionCase):
+class TestAttachExistingAttachment(BaseCommon):
     def setUp(self):
         super().setUp()
         self.partner_obj = self.env["res.partner"]
@@ -22,7 +24,7 @@ class TestAttachExistingAttachment(common.TransactionCase):
         )
         mail_compose = self.env["mail.compose.message"]
         values = {
-            "partner_ids": [(4, self.partner_02.id)],
+            "partner_ids": [Command.link(self.partner_02.id)],
             "composition_mode": "comment",
         }
         compose_id = mail_compose.with_context(**ctx).create(values)
