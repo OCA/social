@@ -19,8 +19,28 @@ msgstr ""
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "%(partner_email)s = Partner Email"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "%(partner_email_domain)s = Partner Email Domain"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "%(partner_name)s <%(partner_email)s>"
 msgstr "%(partner_name)s <%(partner_email)s>"
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "%(partner_name)s = Partner Name"
+msgstr ""
+
+#. module: mail_show_follower
+#: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
+msgid "<strong>Supported parameters:</strong>"
+msgstr ""
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_company
