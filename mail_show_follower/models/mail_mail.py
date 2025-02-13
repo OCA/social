@@ -64,6 +64,8 @@ class MailMail(models.Model):
         raise_exception=False,
         smtp_session=None,
         alias_domain_id=False,
+        mail_server=False,
+        post_send_callback=None,
     ):
         group_user = self.env.ref("base.group_user")
         models_to_exclude = (
@@ -102,4 +104,6 @@ class MailMail(models.Model):
             raise_exception=raise_exception,
             smtp_session=smtp_session,
             alias_domain_id=alias_domain_id,
+            mail_server=mail_server,
+            post_send_callback=post_send_callback,
         )
