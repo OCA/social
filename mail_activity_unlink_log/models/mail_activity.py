@@ -22,7 +22,7 @@ class MailActivity(models.Model):
                         "activity": activity,
                         "display_assignee": activity.user_id != self.env.user,
                     },
-                    subtype_id=self.env["ir.model.data"].xmlid_to_res_id(
+                    subtype_id=self.env["ir.model.data"]._xmlid_to_res_id(
                         "mail_activity_unlink_log.mt_activities_unlink"
                     ),
                     mail_activity_type_id=activity.activity_type_id.id,
