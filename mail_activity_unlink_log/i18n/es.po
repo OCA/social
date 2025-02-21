@@ -42,24 +42,15 @@ msgid "Activity Mixin"
 msgstr "Mezclador de Actividad"
 
 #. module: mail_activity_unlink_log
-#: model:ir.model.fields,field_description:mail_activity_unlink_log.field_mail_activity__display_name
-#: model:ir.model.fields,field_description:mail_activity_unlink_log.field_mail_activity_mixin__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: mail_activity_unlink_log
-#: model:ir.model.fields,field_description:mail_activity_unlink_log.field_mail_activity__id
-#: model:ir.model.fields,field_description:mail_activity_unlink_log.field_mail_activity_mixin__id
-msgid "ID"
-msgstr "ID"
-
-#. module: mail_activity_unlink_log
-#: model:ir.model.fields,field_description:mail_activity_unlink_log.field_mail_activity____last_update
-#: model:ir.model.fields,field_description:mail_activity_unlink_log.field_mail_activity_mixin____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación el"
-
-#. module: mail_activity_unlink_log
 #: model_terms:ir.ui.view,arch_db:mail_activity_unlink_log.message_activity_unlink
 msgid "deleted"
 msgstr "borrado"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación el"
