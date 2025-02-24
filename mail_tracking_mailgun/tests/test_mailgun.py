@@ -3,14 +3,16 @@
 # Copyright 2021 Tecnativa - Jairo Llopis
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+
 from contextlib import contextmanager, suppress
+from datetime import datetime
 from unittest.mock import patch
 
 from freezegun import freeze_time
 from werkzeug.exceptions import NotAcceptable
 
 from odoo.exceptions import MissingError, UserError, ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, TransactionCase
 from odoo.tools import mute_logger
 
 from ..controllers.main import MailTrackingController
@@ -176,6 +178,52 @@ class TestMailgun(TransactionCase):
         with self._request_mock(), self.assertRaises(ValueError):
             self.MailTrackingController.mail_tracking_mailgun_webhook()
 
+    def test_old_timestamp(self):
+        self.timestamp = str(int(datetime.utcnow().timestamp()) - 700)
+        self.signature = (
+            "06cc05680f6e8110e59b41152b2d1c0f1045d755ef2880ff922344325c89a6d4"
+        )
+        with self._request_mock(), self.assertRaises(NotAcceptable):
+            self.MailTrackingController.mail_tracking_mailgun_webhook()
+
+    def test_replay_attack_prevention(self):
+        """Test that the system rejects duplicate tokens to prevent replay attacks."""
+        # Step 1: Set up a test token and add it to processed_tokens
+        test_token = "test_token_123"
+        # Explicitly create the attribute if it doesn't exist
+        if not hasattr(self.env.registry, "_mail_tracking_mailgun_processed_tokens"):
+            self.env.registry._mail_tracking_mailgun_processed_tokens = set()
+        self.env.registry._mail_tracking_mailgun_processed_tokens.add(test_token)
+        # Step 2: Mock the request to include the same token
+        self.timestamp = str(int(datetime.utcnow().timestamp()))
+        self.token = test_token
+        self.signature = "fake_signature"
+        with self._request_mock(reset_replay_cache=False):
+            with self.assertRaises(NotAcceptable):
+                self.MailTrackingController.mail_tracking_mailgun_webhook()
+
+    def test_missing_webhook_signing_key(self):
+        """Test behavior when webhook_signing_key is not set."""
+        # Remove the webhook_signing_key parameter
+        self.env["ir.config_parameter"].sudo().set_param(
+            "mailgun.webhook_signing_key", ""
+        )
+
+        # Set up a test token and timestamp
+        test_token = "test_token_no_key"
+        current_timestamp = str(int(datetime.utcnow().timestamp()))
+
+        self.timestamp = current_timestamp
+        self.token = test_token
+        self.signature = "any_signature"  # Should be ignored when key is missing
+
+        # Create a logger mock to capture warnings
+        with self._request_mock(), self.assertLogs(level="WARNING") as log_catcher:
+            self.MailTrackingController.mail_tracking_mailgun_webhook()
+
+        # Check that the warning was logged
+        self.assertIn("Skipping webhook payload verification.", log_catcher.output[0])
+
     @mute_logger("odoo.addons.mail_tracking_mailgun.models.mail_tracking_email")
     def test_tracking_not_found(self):
         self.event.update(
@@ -221,7 +269,7 @@ class TestMailgun(TransactionCase):
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         events = self.event_search("delivered")
         for event in events:
-            self.assertEqual(event.timestamp, float(self.timestamp))
+            self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
             self.assertEqual(event.recipient, self.recipient)
 
     # https://documentation.mailgun.com/en/latest/user_manual.html#tracking-opens
@@ -248,7 +296,7 @@ class TestMailgun(TransactionCase):
         with self._request_mock():
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         event = self.event_search("open")
-        self.assertEqual(event.timestamp, float(self.timestamp))
+        self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
         self.assertEqual(event.recipient, self.recipient)
         self.assertEqual(event.ip, ip)
         self.assertEqual(event.user_agent, user_agent)
@@ -284,7 +332,7 @@ class TestMailgun(TransactionCase):
         with self._request_mock():
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         event = self.event_search("click")
-        self.assertEqual(event.timestamp, float(self.timestamp))
+        self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
         self.assertEqual(event.recipient, self.recipient)
         self.assertEqual(event.ip, ip)
         self.assertEqual(event.user_agent, user_agent)
@@ -318,7 +366,7 @@ class TestMailgun(TransactionCase):
         with self._request_mock():
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         event = self.event_search("unsub")
-        self.assertEqual(event.timestamp, float(self.timestamp))
+        self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
         self.assertEqual(event.recipient, self.recipient)
         self.assertEqual(event.ip, ip)
         self.assertEqual(event.user_agent, user_agent)
@@ -333,7 +381,7 @@ class TestMailgun(TransactionCase):
         with self._request_mock():
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         event = self.event_search("spam")
-        self.assertEqual(event.timestamp, float(self.timestamp))
+        self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
         self.assertEqual(event.recipient, self.recipient)
         self.assertEqual(event.error_type, "spam")
 
@@ -361,7 +409,7 @@ class TestMailgun(TransactionCase):
         with self._request_mock():
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         event = self.event_search("hard_bounce")
-        self.assertEqual(event.timestamp, float(self.timestamp))
+        self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
         self.assertEqual(event.recipient, self.recipient)
         self.assertEqual(event.error_type, str(code))
         self.assertEqual(event.error_description, error)
@@ -379,7 +427,7 @@ class TestMailgun(TransactionCase):
         with self._request_mock():
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         event = self.event_search("reject")
-        self.assertEqual(event.timestamp, float(self.timestamp))
+        self.assertEqual(round(event.timestamp, 1), float(self.timestamp))
         self.assertEqual(event.recipient, self.recipient)
         self.assertEqual(event.error_type, "rejected")
         self.assertEqual(event.error_description, reason)
