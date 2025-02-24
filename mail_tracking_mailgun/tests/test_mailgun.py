@@ -55,9 +55,9 @@ class TestMailgun(TransactionCase):
         cf.mail_tracking_mailgun_enabled = True
         cf.mail_tracking_mailgun_api_key = (
             cf.mail_tracking_mailgun_webhook_signing_key
-        ) = (
-            cf.mail_tracking_mailgun_validation_key
-        ) = "key-12345678901234567890123456789012"
+        ) = cf.mail_tracking_mailgun_validation_key = (
+            "key-12345678901234567890123456789012"
+        )
         cf.mail_tracking_mailgun_domain = False
         config = cf.save()
         # Done this way as `hr_expense` adds this field again as readonly, and thus Form
@@ -199,7 +199,7 @@ class TestMailgun(TransactionCase):
             self.MailTrackingController.mail_tracking_mailgun_webhook()
 
     def test_tracking_wrong_db(self):
-        self.event["user-variables"]["odoo_db"] = "%s_nope" % self.env.cr.dbname
+        self.event["user-variables"]["odoo_db"] = f"{self.env.cr.dbname}_nope"
         with self._request_mock(), self.assertLogs(level="ERROR") as log_catcher:
             self.MailTrackingController.mail_tracking_mailgun_webhook()
         self.assertIn(

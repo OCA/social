@@ -77,7 +77,7 @@ class ResConfigSettings(models.TransientModel):
         params = self.env["mail.tracking.email"]._mailgun_values()
         _logger.info("Getting current webhooks")
         webhooks = requests.get(
-            urljoin(params.api_url, "/v3/domains/%s/webhooks" % params.domain),
+            urljoin(params.api_url, f"/v3/domains/{params.domain}/webhooks"),
             auth=("api", params.api_key),
             timeout=self.env["ir.config_parameter"]
             .sudo()
@@ -111,11 +111,11 @@ class ResConfigSettings(models.TransientModel):
         for event in WEBHOOK_EVENTS:
             odoo_webhook = urljoin(
                 params.webhooks_domain,
-                "/mail/tracking/mailgun/all?db=%s" % self.env.cr.dbname,
+                f"/mail/tracking/mailgun/all?db={self.env.cr.dbname}",
             )
             _logger.info("Registering webhook. Event: %s. URL: %s", event, odoo_webhook)
             response = requests.post(
-                urljoin(params.api_url, "/v3/domains/%s/webhooks" % params.domain),
+                urljoin(params.api_url, f"/v3/domains/{params.domain}/webhooks"),
                 auth=("api", params.api_key),
                 data={"id": event, "url": [odoo_webhook]},
                 timeout=self.env["ir.config_parameter"]

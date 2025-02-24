@@ -78,7 +78,7 @@ class ResPartner(models.Model):
             ):
                 raise UserError(
                     _(
-                        "Error %s trying to check mail" % res.status_code
+                        f"Error {res.status_code} trying to check mail"
                         or "of connection"
                     )
                 )

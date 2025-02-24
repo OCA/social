@@ -152,11 +152,12 @@ class MailTrackingEmail(models.Model):
                 }
             )
         elif mailgun_event_type == "complained":
+            recipient = event.get("recipient", False)
             metadata.update(
                 {
                     "error_type": "spam",
-                    "error_description": "Recipient '%s' mark this email as spam"
-                    % event.get("recipient", False),
+                    "error_description": f"Recipient '{recipient}' "
+                    f"mark this email as spam",
                 }
             )
         return metadata
@@ -222,7 +223,7 @@ class MailTrackingEmail(models.Model):
         for tracking in self.filtered("message_id"):
             message_id = tracking.message_id.replace("<", "").replace(">", "")
             events = []
-            url = urljoin(api_url, "/v3/%s/events" % domain)
+            url = urljoin(api_url, f"/v3/{domain}/events")
             params = {
                 "begin": tracking.timestamp,
                 "ascending": "yes",
