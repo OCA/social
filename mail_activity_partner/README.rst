@@ -63,6 +63,9 @@ Contributors
 
 - Adrià Gil Sorribes (adria.gil@forgeflow.com)
 - Joan Mateu Jordi (joan.mateu@forgeflow.com)
+- `CorporateHub <https://corporatehub.eu/>`__
+
+  - Alexey Pelykh <alexey.pelykh@corphub.eu>
 
 Maintainers
 -----------
