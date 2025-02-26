@@ -70,7 +70,6 @@ class TestMailActivityPartner(TransactionCase):
         )
 
     def test_partner_for_activity(self):
-
         self.act1 = (
             self.env["mail.activity"]
             .sudo()
