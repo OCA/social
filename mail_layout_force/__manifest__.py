@@ -13,5 +13,10 @@
     "category": "Marketing",
     "depends": ["mail"],
     "demo": ["demo/mail_layout.xml"],
-    "data": ["data/mail_layout.xml", "views/mail_template.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "data/mail_layout.xml",
+        "views/ir_ui_views.xml",
+        "views/mail_template.xml",
+    ],
 }

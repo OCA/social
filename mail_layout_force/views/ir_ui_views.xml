@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_ir_ui_view_form_inherit" model="ir.ui.view">
+        <field name="name">ir.ui.view.form.inherit</field>
+        <field name="model">ir.ui.view</field>
+        <field name="inherit_id" ref="base.view_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='inherit_children']" position="after">
+                <page
+                    name="layout_mapping"
+                    string="Layout Mapping"
+                    attrs="{'invisible': [('type', '!=', 'qweb')]}"
+                >
+                    <field name="layout_mapping_line_ids" nolabel="1">
+                        <tree editable="bottom">
+                            <field name="substitute_layout_id" />
+                            <field name="model_ids" widget="many2many_tags" />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
