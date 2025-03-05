@@ -55,13 +55,9 @@ class ResPartnerGatewayChannel(models.Model):
     _description = "Technical data used to get the gateway author"
 
     name = fields.Char(related="gateway_id.name")
-    partner_id = fields.Many2one(
-        "res.partner", required=True, readonly=True, ondelete="cascade"
-    )
-    gateway_id = fields.Many2one(
-        "mail.gateway", required=True, readonly=True, ondelete="cascade"
-    )
-    gateway_token = fields.Char(readonly=True)
+    partner_id = fields.Many2one("res.partner", required=True, ondelete="cascade")
+    gateway_id = fields.Many2one("mail.gateway", required=True, ondelete="cascade")
+    gateway_token = fields.Char()
     company_id = fields.Many2one(
         "res.company", related="gateway_id.company_id", store=True
     )

@@ -17,13 +17,13 @@
                         string="Create new partner"
                         class="btn-primary"
                         type="object"
-                        attrs="{'invisible': [('partner_id', '!=', False)]}"
+                        invisible="partner_id"
                     />
                     <button
                         name="merge_partner"
                         string="Merge"
                         class="btn-primary"
-                        attrs="{'invisible': [('partner_id', '=', False)]}"
+                        invisible="not partner_id"
                         type="object"
                     />
                     <button string="Cancel" class="btn-default" special="cancel" />

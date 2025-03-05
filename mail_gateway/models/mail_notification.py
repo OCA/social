@@ -11,7 +11,7 @@ class MailNotification(models.Model):
     notification_type = fields.Selection(
         selection_add=[("gateway", "Gateway")], ondelete={"gateway": "cascade"}
     )
-    gateway_message_id = fields.Char(readonly=True)
+    gateway_message_id = fields.Char()
     gateway_failure_reason = fields.Text(
         readonly=1,
         help="Failure reason. This is usually the exception thrown by the"

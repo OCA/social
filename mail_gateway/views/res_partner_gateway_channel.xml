@@ -10,9 +10,9 @@
             <form>
                 <sheet>
                     <group>
-                        <field name="partner_id" />
-                        <field name="gateway_id" />
-                        <field name="gateway_token" />
+                        <field name="partner_id" readonly="1" />
+                        <field name="gateway_id" readonly="1" />
+                        <field name="gateway_token" readonly="1" />
                     </group>
                 </sheet>
             </form>

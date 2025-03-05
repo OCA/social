@@ -82,6 +82,9 @@ Contributors
 
 -  Enric Tobella
 -  Olga Marco
+-  [APSL-Nagarro](https://apsl.tech):
+
+   -  Antoni Marroig <amarroig@apsl.net>
 
 Other credits
 -------------

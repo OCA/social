@@ -16,7 +16,7 @@ class MailGateway(models.Model):
         comes from the desired source"""
     )
     integrated_webhook_state = fields.Selection(
-        [("pending", "Pending"), ("integrated", "Integrated")], readonly=True
+        [("pending", "Pending"), ("integrated", "Integrated")]
     )
     can_set_webhook = fields.Boolean(compute="_compute_webhook_checks")
     webhook_url = fields.Char(compute="_compute_webhook_url")
