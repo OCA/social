@@ -17,14 +17,10 @@
                 />
             </xpath>
             <xpath expr="//field[@name='template_id']" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('whatsapp_template_id', '!=', False)]}</attribute>
+                <attribute name="invisible">whatsapp_template_id</attribute>
             </xpath>
             <xpath expr="//field[@name='attachment_ids']" position="attributes">
-                <attribute
-                    name="attrs"
-                >{'invisible': [('whatsapp_template_id', '!=', False)]}</attribute>
+                <attribute name="invisible">whatsapp_template_id</attribute>
             </xpath>
         </field>
     </record>

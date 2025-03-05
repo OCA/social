@@ -27,7 +27,7 @@ class MailWhatsAppTemplate(models.Model):
         compute="_compute_template_name", store=True, copy=False
     )
     is_supported = fields.Boolean(copy=False)
-    template_uid = fields.Char(readonly=True, copy=False)
+    template_uid = fields.Char(copy=False)
     category = fields.Selection(
         [
             ("authentication", "Authentication"),
