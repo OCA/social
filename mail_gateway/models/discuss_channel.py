@@ -6,8 +6,8 @@ import base64
 from odoo import api, fields, models
 
 
-class MailChannel(models.Model):
-    _inherit = "mail.channel"
+class DiscussChannel(models.Model):
+    _inherit = "discuss.channel"
 
     gateway_channel_token = fields.Char()
     anonymous_name = fields.Char()  # Same field we will use on im_livechat

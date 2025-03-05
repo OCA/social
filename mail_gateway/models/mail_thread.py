@@ -58,7 +58,7 @@ class MailThread(models.AbstractModel):
 
     def _check_can_update_message_content(self, messages):
         # We can delete the messages comming from a gateway on not channels
-        if self._name != "mail.channel":
+        if self._name != "discuss.channel":
             new_messages = messages.filtered(lambda r: not r.gateway_message_ids)
         else:
             new_messages = messages

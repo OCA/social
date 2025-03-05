@@ -34,7 +34,6 @@ class MailComposeGatewayMessage(models.TransientModel):
         "wizard_id",
         "partner_id",
         "Additional Contacts",
-        domain=lambda r: r._partner_ids_domain(),
     )
     # Dummy compatibility with other OCA modules
     # OCA/mail_attach_existing_attachment

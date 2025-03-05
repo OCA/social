@@ -3,12 +3,12 @@
 
     <t
         t-name="mail_gateway.ChatterTopbar"
-        t-inherit="mail.ChatterTopbar"
+        t-inherit="mail.Chatter"
         t-inherit-mode="extension"
         owl="1"
     >
         <xpath
-            expr="//button[hasclass('o_ChatterTopbar_buttonSendMessage')]"
+            expr="//button[hasclass('o-mail-Chatter-sendMessage')]"
             position="attributes"
         >
             <attribute name="t-att-class">{
@@ -17,10 +17,7 @@
                 'btn-light': chatterTopbar.chatter.composerView and (chatterTopbar.chatter.composerView.composer.isLog or chatterTopbar.chatter.composerView.composer.isGateway),
             }</attribute>
         </xpath>
-        <xpath
-            expr="//button[hasclass('o_ChatterTopbar_buttonLogNote')]"
-            position="after"
-        >
+        <xpath expr="//button[hasclass('o-mail-Chatter-logNote')]" position="after">
             <button
                 class="o_ChatterTopbar_button o_ChatterTopbar_buttonLogWhatsapp btn text-nowrap btn-light"
                 type="button"

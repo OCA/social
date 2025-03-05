@@ -7,7 +7,7 @@ from odoo import fields, models
 class MailNotification(models.Model):
     _inherit = "mail.notification"
 
-    gateway_channel_id = fields.Many2one("mail.channel")
+    gateway_channel_id = fields.Many2one("discuss.channel")
     notification_type = fields.Selection(
         selection_add=[("gateway", "Gateway")], ondelete={"gateway": "cascade"}
     )

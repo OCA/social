@@ -30,13 +30,13 @@ class ResPartner(models.Model):
     def _get_channels_as_member(self):
         channels = super()._get_channels_as_member()
         if self.env.user.has_group("mail_gateway.gateway_user"):
-            channels |= self.env["mail.channel"].search(
+            channels |= self.env["discuss.channel"].search(
                 [
                     ("channel_type", "=", "gateway"),
                     (
                         "channel_member_ids",
                         "in",
-                        self.env["mail.channel.member"]
+                        self.env["discuss.channel.member"]
                         .sudo()
                         ._search(
                             [

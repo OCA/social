@@ -1,6 +1,6 @@
 from . import mail_message
 from . import mail_notification
-from . import mail_channel
+from . import discuss_channel
 from . import mail_gateway
 from . import ir_websocket
 from . import res_partner

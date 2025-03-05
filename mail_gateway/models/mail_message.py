@@ -89,7 +89,7 @@ class MailMessage(models.Model):
         chat_id = gateway_channel_id.gateway_id._get_channel_id(
             gateway_channel_id.gateway_token
         )
-        channel = self.env["mail.channel"].browse(chat_id)
+        channel = self.env["discuss.channel"].browse(chat_id)
         channel.message_post(**self._get_gateway_thread_message_vals())
         if not self.gateway_type:
             self.gateway_type = gateway_channel_id.gateway_id.gateway_type

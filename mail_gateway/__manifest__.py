@@ -22,18 +22,18 @@
         "views/res_partner_gateway_channel.xml",
     ],
     "assets": {
-        "mail.assets_messaging": [
-            "mail_gateway/static/src/models/**/*.js",
-        ],
-        "web.assets_backend": [
-            "mail_gateway/static/src/components/**/*.xml",
-            "mail_gateway/static/src/components/**/*.js",
-            "mail_gateway/static/src/components/**/*.scss",
-        ],
-        "mail.assets_discuss_public": [
-            "mail_gateway/static/src/components/**/*.xml",
-            "mail_gateway/static/src/components/**/*.js",
-            "mail_gateway/static/src/components/**/*.scss",
-        ],
+        # "mail.assets_messaging": [
+        #     "mail_gateway/static/src/models/**/*.js",
+        # ],
+        # "web.assets_backend": [
+        #     "mail_gateway/static/src/components/**/*.xml",
+        #     "mail_gateway/static/src/components/**/*.js",
+        #     "mail_gateway/static/src/components/**/*.scss",
+        # ],
+        # "mail.assets_public": [
+        #     "mail_gateway/static/src/components/**/*.xml",
+        #     "mail_gateway/static/src/components/**/*.js",
+        #     "mail_gateway/static/src/components/**/*.scss",
+        # ],
     },
 }
