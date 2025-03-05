@@ -8,7 +8,6 @@ from odoo.exceptions import UserError
 
 
 class WhatsappComposer(models.TransientModel):
-
     _name = "whatsapp.composer"
     _description = "Compose a whatsapp message"
 
@@ -99,7 +98,7 @@ class WhatsappComposer(models.TransientModel):
             return {
                 "type": "ir.actions.client",
                 "tag": "mail.action_discuss",
-                "params": {"active_id": "{}_{}".format(channel._name, channel.id)},
+                "params": {"active_id": f"{channel._name}_{channel.id}"},
             }
         return False
 

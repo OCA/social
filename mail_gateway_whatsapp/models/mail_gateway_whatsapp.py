@@ -88,8 +88,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 image_id = message.get(key).get("id")
                 if image_id:
                     image_info_request = requests.get(
-                        "https://graph.facebook.com/v%s/%s"
-                        % (
+                        "https://graph.facebook.com/v{}/{}".format(
                             chat.gateway_id.whatsapp_version,
                             image_id,
                         ),
@@ -127,8 +126,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
         if message.get("location"):
             body += (
                 '<a target="_blank" href="https://www.google.com/'
-                'maps/search/?api=1&query=%s,%s">Location</a>'
-                % (
+                'maps/search/?api=1&query={},{}">Location</a>'.format(
                     message["location"]["latitude"],
                     message["location"]["longitude"],
                 )
@@ -208,8 +206,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 )
 
                 response = requests.post(
-                    "https://graph.facebook.com/v%s/%s/media"
-                    % (
+                    "https://graph.facebook.com/v{}/{}/media".format(
                         gateway.whatsapp_version,
                         gateway.whatsapp_from_phone,
                     ),
@@ -223,8 +220,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 )
                 response.raise_for_status()
                 response = requests.post(
-                    "https://graph.facebook.com/v%s/%s/messages"
-                    % (
+                    "https://graph.facebook.com/v{}/{}/messages".format(
                         gateway.whatsapp_version,
                         gateway.whatsapp_from_phone,
                     ),
@@ -243,8 +239,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
             body = self._get_message_body(record)
             if body:
                 response = requests.post(
-                    "https://graph.facebook.com/v%s/%s/messages"
-                    % (
+                    "https://graph.facebook.com/v{}/{}/messages".format(
                         gateway.whatsapp_version,
                         gateway.whatsapp_from_phone,
                     ),
@@ -264,9 +259,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     _("Unable to send the whatsapp message")
                 ) from exc
             else:
-                _logger.warning(
-                    "Issue sending message with id {}: {}".format(record.id, exc)
-                )
+                _logger.warning(f"Issue sending message with id {record.id}: {exc}")
                 record.sudo().write(
                     {"notification_status": "exception", "failure_reason": exc}
                 )

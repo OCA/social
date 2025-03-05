@@ -166,7 +166,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
                 ).hexdigest()
             )
         self.url_open(
-            "/gateway/{}/{}/update".format(self.gateway.gateway_type, webhook),
+            f"/gateway/{self.gateway.gateway_type}/{webhook}/update",
             data=data,
             headers=headers_dict,
         )
@@ -233,7 +233,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             ),
         }
         self.url_open(
-            "/gateway/{}/{}/update".format(self.gateway.gateway_type, self.webhook),
+            f"/gateway/{self.gateway.gateway_type}/{self.webhook}/update",
             data=data,
             headers=headers,
         )
