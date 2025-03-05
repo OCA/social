@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class MailGuestManage(models.TransientModel):
-
     _name = "mail.guest.manage"
     _description = "Assign gateway guest to a partner"
 

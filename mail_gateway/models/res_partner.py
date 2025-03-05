@@ -78,9 +78,7 @@ class ResPartnerGatewayChannel(models.Model):
             result.append(
                 (
                     record.id,
-                    "{} ({})".format(
-                        record.partner_id.display_name, origin_dict[record.id]
-                    ),
+                    f"{record.partner_id.display_name} ({origin_dict[record.id]})",
                 )
             )
         return result

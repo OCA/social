@@ -61,7 +61,7 @@ class MailGateway(models.Model):
         )
 
     def _get_webhook_url(self):
-        return "%s/gateway/%s/%s/update" % (
+        return "{}/gateway/{}/{}/update".format(
             self.webhook_url
             or self.env["ir.config_parameter"].get_param("web.base.url"),
             self.gateway_type,
@@ -91,7 +91,7 @@ class MailGateway(models.Model):
         self.set_webhook()
 
     def write(self, vals):
-        res = super(MailGateway, self).write(vals)
+        res = super().write(vals)
         if (
             "webhook_key" in vals
             or "integrated_webhook_state" in vals
@@ -103,7 +103,7 @@ class MailGateway(models.Model):
 
     @api.model_create_multi
     def create(self, mvals):
-        res = super(MailGateway, self).create(mvals)
+        res = super().create(mvals)
         self.clear_caches()
         return res
 

@@ -63,7 +63,7 @@ class MailComposeGatewayMessage(models.TransientModel):
 
     def get_mail_values(self, res_ids):
         self.ensure_one()
-        res = super(MailComposeGatewayMessage, self).get_mail_values(res_ids)
+        res = super().get_mail_values(res_ids)
         res[res_ids[0]]["gateway_notifications"] = [
             {
                 "partner_id": channel.partner_id.id,

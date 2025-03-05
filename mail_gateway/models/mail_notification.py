@@ -26,7 +26,7 @@ class MailNotification(models.Model):
 
     def _notification_format(self):
         result = super()._notification_format()
-        for record, formatted_value in zip(self, result):
+        for record, formatted_value in zip(self, result, strict=True):
             formatted_value["gateway_type"] = record.gateway_type
             formatted_value["channel_name"] = record.gateway_channel_id.name
         return result

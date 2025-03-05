@@ -5,7 +5,6 @@ from odoo import api, fields, models
 
 
 class MailMessageGatewayLink(models.TransientModel):
-
     _name = "mail.message.gateway.link"
     _description = "Link message from gateway"
 

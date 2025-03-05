@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class MailMessage(models.Model):
-
     _inherit = "mail.message"
 
     gateway_type = fields.Selection(
@@ -49,15 +48,19 @@ class MailMessage(models.Model):
     def _compute_gateway_channel_ids(self):
         for record in self:
             if self.env.user.has_group("mail_gateway.gateway_user"):
-                channels = record.notification_ids.res_partner_id.gateway_channel_ids.filtered(
-                    lambda r: (r.gateway_token, r.gateway_id.id)
-                    not in [
-                        (
-                            notification.gateway_channel_id.gateway_channel_token,
-                            notification.gateway_channel_id.gateway_id.id,
-                        )
-                        for notification in record.gateway_message_ids.gateway_notification_ids
-                    ]
+                channels = (
+                    record.notification_ids.res_partner_id.gateway_channel_ids.filtered(
+                        lambda r, record=record: (r.gateway_token, r.gateway_id.id)
+                        not in [
+                            (
+                                notification.gateway_channel_id.gateway_channel_token,
+                                (notification.gateway_channel_id.gateway_id.id),
+                            )
+                            for notification in (
+                                record.gateway_message_ids.gateway_notification_ids
+                            )
+                        ]
+                    )
                 )
             else:
                 channels = self.env["res.partner.gateway.channel"]

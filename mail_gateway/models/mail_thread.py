@@ -79,7 +79,9 @@ class MailThread(models.AbstractModel):
                     "mail.message/insert",
                     {
                         "id": gateway_message.id,
-                        "gateway_thread_data": gateway_message.sudo().gateway_thread_data,
+                        "gateway_thread_data": (
+                            gateway_message.sudo().gateway_thread_data
+                        ),
                     },
                 )
         return result

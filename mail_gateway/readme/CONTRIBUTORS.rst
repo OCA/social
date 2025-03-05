@@ -1,2 +1,0 @@
-* Enric Tobella
-* Olga Marco
