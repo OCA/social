@@ -62,28 +62,23 @@ class ResPartner(models.Model):
     def _name_search(
         self, name, args=None, operator="ilike", limit=100, name_get_uid=None
     ):
+        args = args or []
         partners = super()._name_search(
             name, args, operator=operator, limit=limit, name_get_uid=name_get_uid
         )
         if self._context.get("show_mail_contact_types"):
-            # unfortunately odoo base overwrite _name_search and force an *AND* operator
-            # between domain provide by `args` and other searching pattern added
-            # by that base module so here we are running an extra request to return
-            # all partners with those matching the contact type keeping same order as base
-            fields = [
-                field
-                for field in self._get_name_search_order_by_fields().split(",")
-                if field
-            ]
-            fields.append("display_name")
-            partners = self.search(
-                expression.OR(
-                    [
-                        [("id", "in", partners)],
-                        [("mail_contact_type_ids", "=ilike", name)],
-                    ]
-                ),
-                limit=limit,
-                order=",".join(fields),
-            ).ids
+            extended_args = expression.AND(
+                [
+                    args,
+                    expression.OR(
+                        [
+                            [("id", "in", partners)],
+                            [("mail_contact_type_ids.name", "=ilike", name)],
+                        ]
+                    ),
+                ]
+            )
+            partners = self._search(
+                extended_args, limit=limit, access_rights_uid=name_get_uid
+            )
         return partners

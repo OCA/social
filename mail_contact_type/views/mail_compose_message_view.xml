@@ -12,12 +12,8 @@
         <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
         <field name="arch" type="xml">
             <field name="partner_ids" position="attributes">
-                <attribute
-                    name="context"
-                    operation="python_dict"
-                    key="show_mail_contact_types"
-                >
-                    1
+                <attribute name="context" operation="update">
+                    {"show_mail_contact_types": True}
                 </attribute>
             </field>
         </field>

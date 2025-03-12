@@ -13,5 +13,5 @@ class MailContactType(models.Model):
         ("code_uniq", "unique (code)", "The code must be unique"),
     ]
 
-    name = fields.Char(required=True, translate=True)
+    name = fields.Char(required=True, translate=True, unaccent=False)
     code = fields.Char(required=True)

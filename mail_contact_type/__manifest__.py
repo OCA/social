@@ -5,7 +5,7 @@
 {
     "name": "Mail Contact Type",
     "summary": "Mail Contact Type",
-    "version": "14.0.1.0.0",
+    "version": "16.0.1.0.0",
     "development_status": "Alpha",
     "category": "Productivity/Discuss",
     "website": "https://github.com/OCA/social",
