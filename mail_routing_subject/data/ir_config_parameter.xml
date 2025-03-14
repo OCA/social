@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<data noupdate="1">
+    <record id="parameter_prefixes" model="ir.config_parameter">
+        <field name="key">mail_routing_subject.prefixes</field>
+        <field name="value">Re: RE:</field>
+    </record>
+</data>

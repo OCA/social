@@ -1,0 +1,1 @@
+This module matches incoming mails by subject to existing mails, thereby easing the problems caused by broken mail clients that don't include the original mail's message id in a reply, which standard Odoo uses to match emails.
