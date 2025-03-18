@@ -264,9 +264,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     _("Unable to send the whatsapp message")
                 ) from exc
             else:
-                _logger.warning(
-                    "Issue sending message with id {}: {}".format(record.id, exc)
-                )
+                _logger.warning(f"Issue sending message with id {record.id}: {exc}")
                 record.sudo().write(
                     {"notification_status": "exception", "failure_reason": exc}
                 )

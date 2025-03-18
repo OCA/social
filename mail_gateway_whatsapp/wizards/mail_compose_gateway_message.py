@@ -25,6 +25,4 @@ class MailComposeGatewayMessage(models.TransientModel):
     def _action_send_mail(self, auto_commit=False):
         if self.whatsapp_template_id:
             self = self.with_context(whatsapp_template_id=self.whatsapp_template_id.id)
-        return super(MailComposeGatewayMessage, self)._action_send_mail(
-            auto_commit=auto_commit
-        )
+        return super()._action_send_mail(auto_commit=auto_commit)
