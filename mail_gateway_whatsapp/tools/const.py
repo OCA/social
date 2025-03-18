@@ -1,4 +1,4 @@
-# https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/supported-languages # noqa: B950
+# https://developers.facebook.com/docs/whatsapp/business-management-api/message-templates/supported-languages # noqa: B501 E501
 # res.lang not matching with supported languages(iso codes)
 supported_languages = [
     ("af", "Afrikaans"),

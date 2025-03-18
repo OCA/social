@@ -88,13 +88,10 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 image_id = message.get(key).get("id")
                 if image_id:
                     image_info_request = requests.get(
-                        "https://graph.facebook.com/v%s/%s"
-                        % (
-                            chat.gateway_id.whatsapp_version,
-                            image_id,
-                        ),
+                        f"https://graph.facebook.com/"
+                        f"v{chat.gateway_id.whatsapp_version}/{image_id}",
                         headers={
-                            "Authorization": "Bearer %s" % chat.gateway_id.token,
+                            "Authorization": f"Bearer {chat.gateway_id.token}",
                         },
                         timeout=10,
                         proxies=self._get_proxies(),
@@ -127,17 +124,19 @@ class MailGatewayWhatsappService(models.AbstractModel):
         if message.get("location"):
             body += (
                 '<a target="_blank" href="https://www.google.com/'
-                'maps/search/?api=1&query=%s,%s">Location</a>'
-                % (
-                    message["location"]["latitude"],
-                    message["location"]["longitude"],
-                )
+                f'maps/search/?api=1&query={message["location"]["latitude"]},'
+                f'{message["location"]["longitude"]}">Location</a>'
             )
         if message.get("contacts"):
             pass
         if len(body) > 0 or attachments:
             author = self._get_author(chat.gateway_id, value)
-            new_message = chat.message_post(
+            if author._name == "mail.guest":
+                chat = chat.with_user(self.env.ref("base.public_user").id).with_context(
+                    guest=author
+                )
+            # TODO: Check the sudo...
+            new_message = chat.sudo().message_post(
                 body=body,
                 author_id=author and author._name == "res.partner" and author.id,
                 gateway_type="whatsapp",
@@ -208,13 +207,10 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 )
 
                 response = requests.post(
-                    "https://graph.facebook.com/v%s/%s/media"
-                    % (
-                        gateway.whatsapp_version,
-                        gateway.whatsapp_from_phone,
-                    ),
+                    f"https://graph.facebook.com/"
+                    f"v{gateway.whatsapp_version}/{gateway.whatsapp_from_phone}/media",
                     headers={
-                        "Authorization": "Bearer %s" % gateway.token,
+                        "Authorization": f"Bearer {gateway.token}",
                         "content-type": m.content_type,
                     },
                     data=m,
@@ -223,12 +219,9 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 )
                 response.raise_for_status()
                 response = requests.post(
-                    "https://graph.facebook.com/v%s/%s/messages"
-                    % (
-                        gateway.whatsapp_version,
-                        gateway.whatsapp_from_phone,
-                    ),
-                    headers={"Authorization": "Bearer %s" % gateway.token},
+                    f"https://graph.facebook.com/"
+                    f"v{gateway.whatsapp_version}/{gateway.whatsapp_from_phone}/messages",
+                    headers={"Authorization": f"Bearer {gateway.token}"},
                     json=self._send_payload(
                         record.gateway_channel_id,
                         media_id=response.json()["id"],
@@ -243,12 +236,9 @@ class MailGatewayWhatsappService(models.AbstractModel):
             body = self._get_message_body(record)
             if body:
                 response = requests.post(
-                    "https://graph.facebook.com/v%s/%s/messages"
-                    % (
-                        gateway.whatsapp_version,
-                        gateway.whatsapp_from_phone,
-                    ),
-                    headers={"Authorization": "Bearer %s" % gateway.token},
+                    f"https://graph.facebook.com/"
+                    f"v{gateway.whatsapp_version}/{gateway.whatsapp_from_phone}/messages",
+                    headers={"Authorization": f"Bearer {gateway.token}"},
                     json=self._send_payload(record.gateway_channel_id, body=body),
                     timeout=10,
                     proxies=self._get_proxies(),

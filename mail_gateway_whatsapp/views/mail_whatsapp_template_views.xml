@@ -39,19 +39,19 @@
                         name="button_export_template"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('template_uid', '!=', False)]}"
+                        invisible="template_uid"
                     />
                     <button
                         string="Sync Template"
                         name="button_sync_template"
                         type="object"
-                        attrs="{'invisible': [('template_uid', '=', False)]}"
+                        invisible="not template_uid"
                     />
                     <button
                         string="Back to draft"
                         name="button_back2draft"
                         type="object"
-                        attrs="{'invisible': [('state', '=', 'draft')]}"
+                        invisible="state == 'draft'"
                     />
                     <field
                         name="state"
@@ -62,7 +62,7 @@
                 <div
                     class="alert alert-danger"
                     role="alert"
-                    attrs="{'invisible': ['|',('is_supported', '=', True), ('template_uid', '=', False)]}"
+                    invisible="is_supported or not template_uid"
                 >
                     This template is not supported because has <strong
                     >variables</strong> or <strong>buttons</strong>.
@@ -74,7 +74,7 @@
                             <field
                                 name="name"
                                 placeholder="Name"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                readonly="state != 'draft'"
                             />
                         </h1>
                     </div>
@@ -82,27 +82,15 @@
                         <group>
                             <field
                                 name="gateway_id"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
+                                readonly="state != 'draft'"
                                 options="{'no_create': True}"
                             />
-                            <field
-                                name="category"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
-                            />
-                            <field
-                                name="language"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
-                            />
+                            <field name="category" readonly="state != 'draft'" />
+                            <field name="language" readonly="state != 'draft'" />
                         </group>
                         <group>
-                            <field
-                                name="header"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
-                            />
-                            <field
-                                name="footer"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
-                            />
+                            <field name="header" readonly="state != 'draft'" />
+                            <field name="footer" readonly="state != 'draft'" />
                             <field name="template_name" />
                             <field name="template_uid" />
                             <field
@@ -115,10 +103,7 @@
                     </group>
                     <notebook>
                         <page name="body" string="Body">
-                            <field
-                                name="body"
-                                attrs="{'readonly': [('state', '!=', 'draft')]}"
-                            />
+                            <field name="body" readonly="state != 'draft'" />
                         </page>
                     </notebook>
                 </sheet>

@@ -59,28 +59,28 @@ Configure the gateway
 Once you have created the Meta App, you need to add the gateway and
 webhook. In order to make it you must follow this steps:
 
--  Access Settings > Emails > Mail Gateway
--  Create a Gateway of type WhatsApp
+- Access Settings > Emails > Mail Gateway
+- Create a Gateway of type WhatsApp
 
 ..
 
-   -  Use the Meta App authentication key as Token field
-   -  Use the Meta App Phone Number ID as Whatsapp from Phone field
-   -  Use the Meta Account Business ID as Whatsapp account field (only
-      if you need sync templates)
-   -  Write your own Webhook key
-   -  Use the Application Secret Key on Whatsapp Security Key. It will
-      be used in order to validate the data
-   -  Press the Integrate Webhook Key. In this case, it will not
-      integrate it, we need to make it manually
-   -  Copy the webhook URL
+   - Use the Meta App authentication key as Token field
+   - Use the Meta App Phone Number ID as Whatsapp from Phone field
+   - Use the Meta Account Business ID as Whatsapp account field (only if
+     you need sync templates)
+   - Write your own Webhook key
+   - Use the Application Secret Key on Whatsapp Security Key. It will be
+     used in order to validate the data
+   - Press the Integrate Webhook Key. In this case, it will not
+     integrate it, we need to make it manually
+   - Copy the webhook URL
 
--  Access `Facebook Apps
-   website <https://developers.facebook.com/apps/>`__
--  Access your App then Whatsapp > Configuration
--  Create your webhook using your URL and put the Whatsapp Security Key
-   as validation Key
--  Administer the Webhook and activate the messages webhook
+- Access `Facebook Apps
+  website <https://developers.facebook.com/apps/>`__
+- Access your App then Whatsapp > Configuration
+- Create your webhook using your URL and put the Whatsapp Security Key
+  as validation Key
+- Administer the Webhook and activate the messages webhook
 
 Usage
 =====
@@ -94,8 +94,8 @@ Known issues / Roadmap
 
 **WhatsApp templates**
 
--  Add support for Variables
--  Add support for Buttons
+- Add support for Variables
+- Add support for Buttons
 
 Bug Tracker
 ===========
@@ -119,13 +119,13 @@ Authors
 Contributors
 ------------
 
--  Olga Marco <olga.marco@creublanca.es>
+- Olga Marco <olga.marco@creublanca.es>
 
--  Enric Tobella <etobella@creublanca.es>
+- Enric Tobella <etobella@creublanca.es>
 
--  `Tecnativa <https://www.tecnativa.com>`__:
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-      -  Carlos Lopez
+     - Carlos Lopez
 
 Other credits
 -------------

@@ -4,8 +4,6 @@
 from odoo import _, models
 from odoo.exceptions import UserError
 
-from odoo.addons.phone_validation.tools import phone_validation
-
 
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
@@ -21,12 +19,11 @@ class MailThread(models.AbstractModel):
         return result
 
     def _whatsapp_get_channel(self, field_name, gateway):
-        phone = self[field_name]
-        sanitize_res = phone_validation.phone_sanitize_numbers_w_record([phone], self)
-        sanitized_number = sanitize_res[phone].get("sanitized")
+        sanitized_number = self._phone_format(number=self[field_name])
         if not sanitized_number:
             raise UserError(_("Phone cannot be sanitized"))
-        sanitized_number = sanitized_number[1:]
+        # Avoid the plus sign prefix to match the whatsapp token
+        sanitized_number = sanitized_number.replace("+", "")
         partner = self._whatsapp_get_partner()
         if not self.env["res.partner.gateway.channel"].search(
             [

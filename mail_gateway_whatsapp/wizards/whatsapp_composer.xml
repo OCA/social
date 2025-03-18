@@ -9,13 +9,10 @@
         <field name="arch" type="xml">
             <form string="Whatsapp Composer">
                 <group>
-                    <field
-                        name="gateway_id"
-                        attrs="{'invisible': [('find_gateway', '=', False)]}"
-                    />
-                    <field
+                    <field name="gateway_id" invisible="not find_gateway" />
+                     <field
                         name="template_id"
-                        attrs="{'required': [('is_required_template', '=', True)]}"
+                        required="is_required_template"
                         options="{'no_create': True, 'no_open': True}"
                     />
                     <field name="find_gateway" invisible="1" />
@@ -23,11 +20,7 @@
                     <field name="res_id" invisible="1" />
                     <field name="number_field_name" invisible="1" />
                     <field name="is_required_template" invisible="1" />
-                    <field
-                        name="body"
-                        attrs="{'readonly': [('template_id', '!=', False)]}"
-                        force_save="1"
-                    />
+                    <field name="body" readonly="template_id" force_save="1" />
                 </group>
                 <footer>
                     <button

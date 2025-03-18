@@ -12,7 +12,7 @@
                     type="object"
                     name="button_import_whatsapp_template"
                     string="Download Templates"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    invisible="gateway_type != 'whatsapp'"
                     icon="fa-download"
                 />
             </xpath>
@@ -20,7 +20,7 @@
                 <button
                     type="action"
                     name="%(mail_gateway_whatsapp.action_mail_whatsapp_template_gateway)d"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    invisible="gateway_type != 'whatsapp'"
                     class="oe_stat_button"
                     icon="fa-whatsapp"
                 >
@@ -34,26 +34,23 @@
             <field name="webhook_user_id" position="after">
                 <field
                     name="whatsapp_account_id"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    invisible="gateway_type != 'whatsapp'"
                 />
                 <field
                     name="whatsapp_security_key"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    invisible="gateway_type != 'whatsapp'"
                 />
                 <field
                     name="whatsapp_from_phone"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    invisible="gateway_type != 'whatsapp'"
                 />
-                <field
-                    name="whatsapp_version"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
-                />
+                <field name="whatsapp_version" invisible="gateway_type != 'whatsapp'" />
             </field>
             <notebook position="inside">
                 <page
                     name="whatsapp"
                     string="Whatsapp configuration info"
-                    attrs="{'invisible': [('gateway_type', '!=', 'whatsapp')]}"
+                    invisible="gateway_type != 'whatsapp'"
                 >
                     <div>
                         <h2>First steps</h2>

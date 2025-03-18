@@ -1,17 +1,17 @@
 /** @odoo-module **/
 
 import {useService} from "@web/core/utils/hooks";
-
+import {_t} from "@web/core/l10n/translation";
 const {Component, status} = owl;
 
 export class SendWhatsappButton extends Component {
     setup() {
         this.action = useService("action");
         this.user = useService("user");
-        this.title = this.env._t("Send Whatsapp Message");
+        this.title = _t("Send Whatsapp Message");
     }
     get phoneHref() {
-        return "sms:" + this.props.value.replace(/\s+/g, "");
+        return "sms:" + this.props.record.data[this.props.name].replace(/\s+/g, "");
     }
     async onClick() {
         await this.props.record.save();
