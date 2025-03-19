@@ -61,10 +61,13 @@ class MailComposeGatewayMessage(models.TransientModel):
         string="Bcc",
     )
 
-    def get_mail_values(self, res_ids):
+    def _partner_ids_domain(self):
+        return [("id", "in", self.env.context.get("default_partner_ids", []))]
+
+    def _prepare_mail_values_dynamic(self, res_ids):
         self.ensure_one()
-        res = super().get_mail_values(res_ids)
-        res[res_ids[0]]["gateway_notifications"] = [
+        values = super()._prepare_mail_values_dynamic(res_ids)
+        values[res_ids[0]]["gateway_notifications"] = [
             {
                 "partner_id": channel.partner_id.id,
                 "channel_type": "gateway",
@@ -72,4 +75,16 @@ class MailComposeGatewayMessage(models.TransientModel):
             }
             for channel in self.wizard_channel_ids
         ]
-        return res
+        return values
+
+    def _prepare_mail_values_static(self):
+        values = super()._prepare_mail_values_static()
+        values["gateway_notifications"] = [
+            {
+                "partner_id": channel.partner_id.id,
+                "channel_type": "gateway",
+                "gateway_channel_id": channel.id,
+            }
+            for channel in self.wizard_channel_ids
+        ]
+        return values

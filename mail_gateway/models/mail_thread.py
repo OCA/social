@@ -6,6 +6,18 @@ from odoo import models
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
+    def _get_message_create_valid_field_names(self):
+        # Add gateway fields
+        field_names = super()._get_message_create_valid_field_names()
+        field_names.update(
+            {"gateway_type", "gateway_notifications", "gateway_message_id"}
+        )
+        return field_names
+
+    def _get_notify_valid_parameters(self):
+        notify_valid_parameters = super()._get_notify_valid_parameters()
+        return notify_valid_parameters | {"gateway_notifications"}
+
     def _notify_thread_by_email(self, message, recipients_data, **kwargs):
         partners_data = [r for r in recipients_data if r["notif"] == "gateway"]
         if partners_data:
@@ -56,30 +68,50 @@ class MailThread(models.AbstractModel):
             return result
         return super()._notify_get_recipients(message, msg_vals, **kwargs)
 
+    def _get_mail_thread_data(self, request_list):
+        data = super()._get_mail_thread_data(request_list)
+        data["gateway_followers"] = [
+            f["partner"]
+            for f in data.get("followers", [])
+            if f["partner"]["gateway_channels"]
+        ]
+        return data
+
     def _check_can_update_message_content(self, messages):
         # We can delete the messages comming from a gateway on not channels
-        if self._name != "mail.channel":
+        if self._name != "discuss.channel":
             new_messages = messages.filtered(lambda r: not r.gateway_message_ids)
         else:
             new_messages = messages
         return super()._check_can_update_message_content(new_messages)
 
     def _message_update_content(
-        self, message, body, attachment_ids=None, strict=True, **kwargs
+        self,
+        message,
+        body,
+        attachment_ids=None,
+        partner_ids=None,
+        strict=True,
+        **kwargs,
     ):
         result = super()._message_update_content(
-            message, body, attachment_ids=attachment_ids, strict=strict, **kwargs
+            message=message,
+            body=body,
+            attachment_ids=attachment_ids,
+            partner_ids=partner_ids,
+            strict=strict,
+            **kwargs,
         )
         if body == "":
             # Unlink the message
-            for gateway_message in message.gateway_message_ids:
-                gateway_message.gateway_message_id = False
+            for gateway_msg in message.gateway_message_ids:
+                gateway_msg.gateway_message_id = False
                 self.env["bus.bus"]._sendone(
                     self.env.user.partner_id,
                     "mail.message/insert",
                     {
-                        "id": gateway_message.id,
-                        "gateway_thread_data": gateway_message.sudo().gateway_thread_data,
+                        "id": gateway_msg.id,
+                        "gateway_thread_data": gateway_msg.sudo().gateway_thread_data,
                     },
                 )
         return result

@@ -3,9 +3,8 @@
 
 {
     "name": "Mail Gateway",
-    "summary": """
-        Set a gateway""",
-    "version": "16.0.1.2.0",
+    "summary": "Base module for gateway communications",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "Creu Blanca,Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
@@ -20,20 +19,13 @@
         "security/ir.model.access.csv",
         "views/mail_gateway.xml",
         "views/res_partner_gateway_channel.xml",
+        "views/mail_guest_views.xml",
     ],
     "assets": {
-        "mail.assets_messaging": [
-            "mail_gateway/static/src/models/**/*.js",
-        ],
         "web.assets_backend": [
-            "mail_gateway/static/src/components/**/*.xml",
-            "mail_gateway/static/src/components/**/*.js",
-            "mail_gateway/static/src/components/**/*.scss",
-        ],
-        "mail.assets_discuss_public": [
-            "mail_gateway/static/src/components/**/*.xml",
-            "mail_gateway/static/src/components/**/*.js",
-            "mail_gateway/static/src/components/**/*.scss",
+            "mail_gateway/static/src/components/**/*",
+            "mail_gateway/static/src/core/**/*",
+            "mail_gateway/static/src/models/**/*",
         ],
     },
 }

@@ -49,7 +49,7 @@ class MailGateway(models.Model):
 
     def _get_channel_id(self, chat_token):
         return (
-            self.env["mail.channel"]
+            self.env["discuss.channel"]
             .search(
                 [
                     ("gateway_channel_token", "=", str(chat_token)),
@@ -61,7 +61,7 @@ class MailGateway(models.Model):
         )
 
     def _get_webhook_url(self):
-        return "%s/gateway/%s/%s/update" % (
+        return "{}/gateway/{}/{}/update".format(
             self.webhook_url
             or self.env["ir.config_parameter"].get_param("web.base.url"),
             self.gateway_type,

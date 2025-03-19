@@ -1,14 +1,22 @@
-/** @odoo-module **/
+/* @odoo-module */
+import {Record} from "@mail/core/common/record";
 
-import {attr, one} from "@mail/model/model_field";
-import {registerModel} from "@mail/model/model_core";
-
-registerModel({
-    name: "GatewayChannel",
-    fields: {
-        id: attr({identifying: true}),
-        name: attr(),
-        gateway: one("Gateway"),
-        partner: one("Partner", {inverse: "gateway_channels"}),
-    },
-});
+export class GatewayChannel extends Record {
+    static id = "id";
+    /** @type {Object.<number, import("models").GatewayChannel>} */
+    static records = {};
+    /** @returns {import("models").GatewayChannel} */
+    static get(data) {
+        return super.get(data);
+    }
+    /** @returns {import("models").GatewayChannel|import("models").GatewayChannel[]} */
+    static insert() {
+        return super.insert(...arguments);
+    }
+    /** @type {number} */
+    id;
+    /** @type {string} */
+    name;
+    gateway = Record.one("Gateway");
+}
+GatewayChannel.register();

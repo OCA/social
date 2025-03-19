@@ -6,6 +6,8 @@ import logging
 
 from odoo.http import Controller, request, route
 
+from odoo.addons.mail.models.discuss.mail_guest import add_guest_to_context
+
 _logger = logging.getLogger(__name__)
 
 
@@ -17,6 +19,7 @@ class GatewayController(Controller):
         methods=["GET", "POST"],
         csrf=False,
     )
+    @add_guest_to_context
     def post_update(self, usage, token, *args, **kwargs):
         if request.httprequest.method == "GET":
             bot_data = request.env["mail.gateway"]._get_gateway(

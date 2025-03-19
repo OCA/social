@@ -1,7 +1,7 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class ResPartner(models.Model):
@@ -30,13 +30,13 @@ class ResPartner(models.Model):
     def _get_channels_as_member(self):
         channels = super()._get_channels_as_member()
         if self.env.user.has_group("mail_gateway.gateway_user"):
-            channels |= self.env["mail.channel"].search(
+            channels |= self.env["discuss.channel"].search(
                 [
                     ("channel_type", "=", "gateway"),
                     (
                         "channel_member_ids",
                         "in",
-                        self.env["mail.channel.member"]
+                        self.env["discuss.channel.member"]
                         .sudo()
                         ._search(
                             [
@@ -66,22 +66,16 @@ class ResPartnerGatewayChannel(models.Model):
         "res.company", related="gateway_id.company_id", store=True
     )
 
-    def name_get(self):
+    @api.depends_context("mail_gateway_partner_info")
+    def _compute_display_name(self):
         # Be able to tell to which partner belongs the gateway partner channel
         # e.g.: picking it from a selector
-        result = []
-        origin = super().name_get()
-        if not self.env.context.get("mail_gateway_partner_info", False):
-            return origin
-        origin_dict = dict(origin)
-        for record in self:
-            result.append(
-                (
-                    record.id,
-                    f"{record.partner_id.display_name} ({origin_dict[record.id]})",
-                )
+        if not self.env.context.get("mail_gateway_partner_info"):
+            return super()._compute_display_name()
+        for gateway_channel in self:
+            gateway_channel.display_name = (
+                f"{gateway_channel.partner_id.display_name} ({gateway_channel.name})"
             )
-        return result
 
     _sql_constraints = [
         (

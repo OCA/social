@@ -1,16 +1,23 @@
 /** @odoo-module **/
+import {Record} from "@mail/core/common/record";
 
-import {attr, many} from "@mail/model/model_field";
-import {registerModel} from "@mail/model/model_core";
-
-registerModel({
-    name: "Gateway",
-    fields: {
-        id: attr({identifying: true}),
-        name: attr(),
-        type: attr(),
-        categories: many("DiscussSidebarCategory", {
-            inverse: "gateway",
-        }),
-    },
-});
+export class Gateway extends Record {
+    static id = "id";
+    /** @type {Object.<number, import("models").Gateway>} */
+    static records = {};
+    /** @returns {import("models").Gateway} */
+    static get(data) {
+        return super.get(data);
+    }
+    /** @returns {import("models").Gateway|import("models").Gateway[]} */
+    static insert() {
+        return super.insert(...arguments);
+    }
+    /** @type {number} */
+    id;
+    /** @type {string} */
+    type;
+    /** @type {string} */
+    name;
+}
+Gateway.register();

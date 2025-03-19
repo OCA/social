@@ -33,10 +33,10 @@ class MailGatewayAbstract(models.AbstractModel):
     def _get_channel(self, gateway, token, update, force_create=False):
         chat_id = gateway._get_channel_id(token)
         if chat_id:
-            return gateway.env["mail.channel"].browse(chat_id)
+            return gateway.env["discuss.channel"].browse(chat_id)
         if not force_create and gateway.has_new_channel_security:
             return False
-        channel = gateway.env["mail.channel"].create(
+        channel = gateway.env["discuss.channel"].create(
             self._get_channel_vals(gateway, token, update)
         )
         channel._broadcast(channel.channel_member_ids.mapped("partner_id").ids)

@@ -32,8 +32,7 @@
                 expr="//span[@name='document_followers_text']/.."
                 position="attributes"
             >
-                <attribute name="invisible">1</attribute>
-                <attribute name="attrs" />
+                <attribute name="invisible">True</attribute>
             </xpath>
         </field>
     </record>
