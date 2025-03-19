@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class ResUsers(models.Model):
-
     _inherit = "res.users"
 
     gateway_ids = fields.Many2many("mail.gateway")

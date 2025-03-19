@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class MailMessageGatewaySend(models.TransientModel):
-
     _name = "mail.message.gateway.send"
     _description = "Send Message through gateway"
 

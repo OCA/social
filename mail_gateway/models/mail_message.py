@@ -6,7 +6,6 @@ from odoo import api, fields, models
 
 
 class MailMessage(models.Model):
-
     _inherit = "mail.message"
 
     gateway_type = fields.Selection(
