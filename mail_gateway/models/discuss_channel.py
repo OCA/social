@@ -7,7 +7,7 @@ from odoo import api, fields, models
 
 
 class MailChannel(models.Model):
-    _inherit = "mail.channel"
+    _inherit = "discuss.channel"
 
     gateway_channel_token = fields.Char()
     anonymous_name = fields.Char()  # Same field we will use on im_livechat
@@ -26,9 +26,16 @@ class MailChannel(models.Model):
         required=False,
     )
 
-    def channel_info(self):
-        result = super().channel_info()
-        for record, item in zip(self, result):
+    def _compute_is_chat(self):
+        res = super()._compute_is_chat()
+        for record in self:
+            if record.channel_type == "gateway":
+                record.is_chat = True
+        return res
+
+    def _channel_info(self):
+        result = super()._channel_info()
+        for record, item in zip(self, result, strict=True):
             item["gateway"] = {
                 "id": record.gateway_id.id,
                 "name": record.gateway_id.name,
@@ -70,10 +77,25 @@ class MailChannel(models.Model):
             ).send_gateway()
         return message
 
-    def _message_update_content_after_hook(self, message):
-        self.ensure_one()
+    def _message_update_content(
+        self,
+        message,
+        body,
+        attachment_ids=None,
+        partner_ids=None,
+        strict=True,
+        **kwargs,
+    ):
+        res = super()._message_update_content(
+            message=message,
+            body=body,
+            attachment_ids=attachment_ids,
+            partner_ids=partner_ids,
+            strict=strict,
+            **kwargs,
+        )
         if self.channel_type == "gateway" and message.gateway_notification_ids:
             self.env[
                 f"mail.gateway.{self.gateway_id.gateway_type}"
             ]._update_content_after_hook(self, message)
-        return super()._message_update_content_after_hook(message=message)
+        return res

@@ -15,21 +15,21 @@
                             string="Integrate Webhook"
                             icon="fa-plug"
                             name="set_webhook"
-                            attrs="{'invisible': ['|', ('can_set_webhook', '=', False), ('integrated_webhook_state', '!=', False)]}"
+                            invisible="not can_set_webhook or integrated_webhook_state"
                         />
                         <button
                             type="object"
                             string="Update Webhook"
                             name="update_webhook"
                             icon="fa-refresh"
-                            attrs="{'invisible': ['|', ('can_set_webhook', '=', False), ('integrated_webhook_state', '!=', 'integrated')]}"
+                            invisible="not can_set_webhook or integrated_webhook_state != 'integrated'"
                         />
                         <button
                             type="object"
                             string="Remove Webhook"
                             name="remove_webhook"
                             icon="fa-remove"
-                            attrs="{'invisible': [('integrated_webhook_state', '=', False)]}"
+                            invisible="not integrated_webhook_state"
                         />
                     </div>
                     <field name="can_set_webhook" invisible="1" />
@@ -73,7 +73,7 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name" />
-                <field name="token" />
+                <field name="token" password="True" />
             </tree>
         </field>
     </record>

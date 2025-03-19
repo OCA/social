@@ -48,14 +48,18 @@ class MailMessage(models.Model):
     def _compute_gateway_channel_ids(self):
         for record in self:
             if self.env.user.has_group("mail_gateway.gateway_user"):
-                channels = record.notification_ids.res_partner_id.gateway_channel_ids.filtered(
-                    lambda r: (r.gateway_token, r.gateway_id.id)
+                partners = record.notification_ids.res_partner_id
+                channels = partners.gateway_channel_ids.filtered(
+                    lambda r, messages=record.gateway_message_ids: (
+                        r.gateway_token,
+                        r.gateway_id.id,
+                    )
                     not in [
                         (
                             notification.gateway_channel_id.gateway_channel_token,
                             notification.gateway_channel_id.gateway_id.id,
                         )
-                        for notification in record.gateway_message_ids.gateway_notification_ids
+                        for notification in messages.gateway_notification_ids
                     ]
                 )
             else:
@@ -76,16 +80,14 @@ class MailMessage(models.Model):
 
     def _get_message_format_fields(self):
         result = super()._get_message_format_fields()
-        result.append("gateway_type")
-        result.append("gateway_channel_data")
-        result.append("gateway_thread_data")
+        result += ["gateway_type", "gateway_channel_data", "gateway_thread_data"]
         return result
 
     def _send_to_gateway_thread(self, gateway_channel_id):
         chat_id = gateway_channel_id.gateway_id._get_channel_id(
             gateway_channel_id.gateway_token
         )
-        channel = self.env["mail.channel"].browse(chat_id)
+        channel = self.env["discuss.channel"].browse(chat_id)
         channel.message_post(**self._get_gateway_thread_message_vals())
         if not self.gateway_type:
             self.gateway_type = gateway_channel_id.gateway_id.gateway_type

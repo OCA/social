@@ -14,7 +14,7 @@ class IrWebsocket(models.AbstractModel):
         result = super()._build_bus_channel_list(channels)
         if req.session.uid:
             if req.env.user.has_group("mail_gateway.gateway_user"):
-                for channel in req.env["mail.channel"].search(
+                for channel in req.env["discuss.channel"].search(
                     [("channel_type", "=", "gateway")]
                 ):
                     result.append(channel)
