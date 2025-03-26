@@ -16,8 +16,8 @@ class MailThread(models.AbstractModel):
     def message_route(
         self, message, message_dict, model=None, thread_id=None, custom_values=None
     ):
-        """ Prepare message_dict by extending recipients
-            with found aliases mails base on alias and domain
+        """Prepare message_dict by extending recipients
+        with found aliases mails base on alias and domain
         """
         try:
             maching_aliases = self._find_alias_with_domain(message_dict)
