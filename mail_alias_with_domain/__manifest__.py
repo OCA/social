@@ -1,16 +1,17 @@
 # Copyright 2023 Solvti sp. z o.o. (https://solvti.pl)
+# Copyright 2025 Therp BV (https://therp.nl)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Mail Alias With Domain",
-    "summary": """
-        Extend alias fnctionality by giving possibility
-        to setup alias with custom domain""",
-    "author": "Solvti, Odoo Community Association (OCA)",
+    "summary": "Allow simple mail alias to be combined with a mail domain",
+    "author": "Solvti, Therp BV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
-    "version": "13.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
+    "post_init_hook": "init_alias_entry",
     "depends": ["mail"],
     "data": ["views/mail_alias_views.xml"],
 }
