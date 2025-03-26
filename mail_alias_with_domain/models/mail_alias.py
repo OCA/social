@@ -13,7 +13,10 @@ def generate_hash(value):
 class Alias(models.Model):
     _inherit = "mail.alias"
 
-    alias_domain = fields.Char(inverse="_inverse_alias_domain", store=True,)
+    alias_domain = fields.Char(
+        inverse="_inverse_alias_domain",
+        store=True,
+    )
     alias_display_name = fields.Char()
     alias_name = fields.Char(compute="_compute_alias_name_and_hash", store=True)
     alias_hash = fields.Char(compute="_compute_alias_name_and_hash", store=True)
