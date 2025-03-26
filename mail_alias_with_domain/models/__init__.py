@@ -1,4 +1,4 @@
-# Copyright 2023 Solvti sp. z o.o. (https://solvti.pl)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from . import mail_alias
 from . import mail_thread
