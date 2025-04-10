@@ -11,10 +11,9 @@ def migrate(env, version):
         env.cr,
         """
         INSERT INTO mailing_subscription_optout(id, name, is_feedback, sequence)
-        VALUES (
-            SELECT id, name, details_required, sequence
-            FROM mail_unsubscription_reason
-        )
+        SELECT id, name, details_required, sequence
+        FROM mail_unsubscription_reason
+
     """,
     )
     # For mailing lists, get the last unsubscription for every mail and create
@@ -26,7 +25,7 @@ def migrate(env, version):
             SELECT
                 mu.id,
                 CAST(SPLIT_PART(mu.unsubscriber_id, ',', 2) AS INTEGER) AS contact_id,
-                COALESCE(mu.mailing_list_id, rel.mailing_list_id) AS list_id,
+                COALESCE(mu.mass_mailing_id, rel.mailing_list_id) AS list_id,
                 mu.action,
                 mu.reason_id,
                 mu.create_uid,
@@ -39,7 +38,7 @@ def migrate(env, version):
                 ROW_NUMBER() OVER (
                     PARTITION BY
                         CAST(SPLIT_PART(mu.unsubscriber_id, ',', 2) AS INTEGER),
-                        COALESCE(mu.mailing_list_id, rel.mailing_list_id)
+                        COALESCE(mu.mass_mailing_id, rel.mailing_list_id)
                     ORDER BY mu.id DESC
                 ) AS rn
             FROM
@@ -49,7 +48,7 @@ def migrate(env, version):
             WHERE
                 mu.unsubscriber_id LIKE 'mailing.contact,%'
                 AND SPLIT_PART(mu.unsubscriber_id, ',', 2) ~ '^[0-9]+$'
-                AND (mu.mailing_list_id IS NOT NULL OR rel.mailing_list_id IS NOT NULL)
+                AND (mu.mass_mailing_id IS NOT NULL OR rel.mailing_list_id IS NOT NULL)
                 AND mu.action IN ('subscription', 'unsubscription')
         )
         INSERT INTO mailing_subscription (
