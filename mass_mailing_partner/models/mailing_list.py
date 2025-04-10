@@ -28,7 +28,20 @@ class MailingList(models.Model):
                 ["partner_id"],
                 ["partner_id"],
             )
-            if len(list(filter(lambda r: r["partner_id_count"] > 1, data))):
+            duplicates = list(filter(lambda r: r["partner_id_count"] > 1, data))
+            if len(duplicates):
+                duplicates_list = "\n".join(
+                    [
+                        f'({dup["partner_id_count"]}) [{dup["partner_id"][0]}] \
+                        {str(dup["partner_id"][1])}'
+                        for dup in duplicates
+                    ]
+                )
                 raise ValidationError(
-                    _("A partner cannot be multiple times " "in the same list")
+                    _(
+                        "A partner cannot be multiple times in the same list\n"
+                        "Duplicate contacts found:\n"
+                        "%s",
+                        duplicates_list,
+                    )
                 )
