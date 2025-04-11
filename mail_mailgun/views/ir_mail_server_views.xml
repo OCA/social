@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ForgeFlow
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="ir_mail_server_form" model="ir.ui.view">
+        <field name="name">ir.mail_server.view.form.inherit.mailgun</field>
+        <field name="model">ir.mail_server</field>
+        <field name="inherit_id" ref="base.ir_mail_server_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='connection']" position="inside">
+                <group
+                    string="Mailgun Configuration"
+                    attrs="{'invisible': [('smtp_authentication', '!=', 'mailgun')]}"
+                >
+                    <field name="mail_mailgun_api_key" password="True" />
+                    <field name="mail_mailgun_domain" />
+                    <field name="mail_mailgun_api_endpoint" />
+                </group>
+            </xpath>
+            <xpath expr="//button[@name='test_smtp_connection']" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': [('smtp_authentication', '=', 'mailgun')]}</attribute>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <button
+                    string="Test Mailgun Connection"
+                    type="object"
+                    name="test_mailgun_api_connection"
+                    class="btn-primary"
+                    attrs="{'invisible': [('smtp_authentication', '!=', 'mailgun')]}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
