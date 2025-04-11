@@ -1,9 +1,9 @@
 /** @odoo-module */
 
 import {ChatterTopbar} from "@mail/components/chatter_topbar/chatter_topbar";
-import {useService} from "@web/core/utils/hooks";
-const {Component, onWillStart} = owl;
+const {onWillStart} = owl;
 import {patch} from "web.utils";
+import {useService} from "@web/core/utils/hooks";
 
 patch(
     ChatterTopbar.prototype,

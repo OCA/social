@@ -15,7 +15,7 @@
     "data": ["security/res_groups.xml"],
     "assets": {
         "web.assets_backend": [
-            "mail_restrict_send_button/static/src/js/chatter.js",
+            "mail_restrict_send_button/static/src/js/chatter.esm.js",
             "mail_restrict_send_button/static/src/xml/chatter.xml",
         ],
     },
