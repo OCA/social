@@ -1,4 +1,3 @@
-/** @odoo-module **/
 /* Copyright 2016 Jairo Llopis <jairo.llopis@tecnativa.com>
  * License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). */
 import {registry} from "@web/core/registry";
@@ -11,24 +10,31 @@ registry
             {
                 content: "Confirm unsubscribe",
                 trigger: "button:contains('Unsubscribe')",
+                run: "click",
             },
             {
                 content: "Confirm unsubscribe",
-                extra_trigger: "p:contains('Successfully unsubscribed!')",
+                trigger: "p:contains('Successfully unsubscribed!')",
+            },
+            {
+                content: "Confirm unsubscribe",
                 trigger: "a:contains('Manage Subscriptions')",
+                run: "click",
             },
             {
                 content: "Choose 'Other' reason",
                 trigger: "fieldset label:contains('Other')",
+                run: "click",
             },
             {
                 content: "Write feedback reason",
                 trigger: "textarea[name='feedback']",
-                run: "text My feedback",
+                run: "edit My feedback",
             },
             {
                 content: "Send reason",
                 trigger: "button#button_feedback",
+                run: "click",
             },
             {
                 content: "Confirmation feedback is sent",

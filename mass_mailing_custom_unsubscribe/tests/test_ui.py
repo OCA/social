@@ -76,7 +76,7 @@ class UICase(HttpCase):
         """Test a partner that wants to unsubscribe."""
         # Change mailing to be sent to partner
         partner_id = self.env["res.partner"].name_create(
-            "Demo Partner <%s>" % self.email
+            f"Demo Partner <{self.email}>"
         )[0]
         self.mailing.mailing_model_id = self.env.ref("base.model_res_partner")
         self.mailing.mailing_domain = repr(
