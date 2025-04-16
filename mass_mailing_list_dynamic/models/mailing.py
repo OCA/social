@@ -8,9 +8,9 @@ from odoo import models
 class MassMailing(models.Model):
     _inherit = "mailing.mailing"
 
-    def _get_remaining_recipients(self):
-        """When evaluating remaining recipients we must resync the list in
-        advance to avoid missing recipients due to domain change or new
-        partners fitting into the conditions"""
+    def action_launch(self):
+        # Do the sync prior to putting the mailing in queue. Otherwise, if an error
+        # raises, the user won't be able to detect it and the Mass Mailing queue cron
+        # will be blocked forever.
         self.contact_list_ids.action_sync()
-        return super()._get_remaining_recipients()
+        return super().action_launch()
