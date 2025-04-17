@@ -22,9 +22,9 @@ class MailMessage(models.AbstractModel):
         # In that case there is no specific record implied, so no need to generate the
         # the message.
         record = self._messages_for_record(domain)
-        author = record.create_uid.partner_id
 
         if record and record._log_access:
+            author = record.create_uid.partner_id
             creation_message = record._creation_message()
             create_message_record = self.new(
                 {
