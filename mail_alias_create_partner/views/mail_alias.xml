@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Hunki Enterprises BV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl-3.0) -->
+<data>
+    <record id="view_mail_alias_form" model="ir.ui.view">
+        <field name="model">mail.alias</field>
+        <field name="inherit_id" ref="mail.view_mail_alias_form" />
+        <field name="arch" type="xml">
+                <group position="after">
+                    <group
+                    name="mail_alias_create_partner"
+                    string="Partner creation"
+                    attrs="{'invisible': [('alias_contact', '!=', 'everyone')]}"
+                >
+                        <field name="alias_create_partner" />
+                        <field
+                        name="alias_create_partner_defaults"
+                        attrs="{'invisible': [('alias_create_partner', '=', False)]}"
+                        placeholder="{'parent_id': 42, 'type': 'contact'}"
+                    />
+                    </group>
+                </group>
+        </field>
+    </record>
+</data>
