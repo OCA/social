@@ -11,12 +11,14 @@
                 <field
                     name="outgoing_mailserver_id"
                     groups="base.group_no_one"
-                    attrs="{'invisible': [('is_mail_thread', '=', False)], 'readonly': [('is_mail_thread', '=', False)]}"
+                    invisible="not is_mail_thread"
+                    readonly="not is_mail_thread"
                 />
                 <field
                     name="outgoing_email"
                     groups="base.group_no_one"
-                    attrs="{'invisible': [('is_mail_thread', '=', False)], 'readonly': [('is_mail_thread', '=', False)]}"
+                    invisible="not is_mail_thread"
+                    readonly="not is_mail_thread"
                 />
             </field>
         </field>

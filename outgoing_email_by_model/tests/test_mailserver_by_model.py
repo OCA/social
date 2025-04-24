@@ -72,7 +72,7 @@ class TestMailserverByModel(TransactionCase):
         composer = Form(
             self.env["mail.compose.message"].with_context(
                 default_model=record._name,
-                default_res_id=record.id,
+                default_res_ids=record.ids,
                 default_use_template=True,
                 default_template_id=self.mail_template.id,
                 default_composition_mode="comment",
