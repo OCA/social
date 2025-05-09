@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 {
@@ -9,20 +8,20 @@
     "category": "Social Network",
     "summary": "Let followers choose if they want to receive email "
     "notifications for a given subscription",
-    'website': 'https://github.com/OCA/social',
+    "website": "https://github.com/OCA/social",
     "depends": [
-        'mail',
+        "mail",
     ],
     "data": [
         "wizards/mail_subtype_assign_custom_notifications.xml",
         "views/mail_message_subtype.xml",
-        'views/templates.xml',
+        "views/templates.xml",
     ],
     "qweb": [
-        'static/src/xml/mail_follower_custom_notification.xml',
+        "static/src/xml/mail_follower_custom_notification.xml",
     ],
     "images": [
-        'images/mail_follower_custom_notification.png',
+        "images/mail_follower_custom_notification.png",
     ],
     "installable": True,
 }
