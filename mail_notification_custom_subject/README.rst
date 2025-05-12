@@ -39,31 +39,32 @@ the notification emails sent by Odoo
 Configuration
 =============
 
-- Activate access to **Technical Features** (debug mode).
+-  Activate access to **Technical Features** (debug mode).
 
-- Go to **Settings > Technical > Email > Subject Replacement Templates**
+-  Go to **Settings > Technical > Email > Subject Replacement
+   Templates**
 
-- Create a new template.
+-  Create a new template.
 
-     - The field **Model** specifies the model to which the subject
-       template should apply in the notification emails sent by Odoo.
-     - The field **Subject Template** accepts
-       `expressions <https://www.odoo.com/documentation/17.0/applications/general/companies/email_template.html#dynamic-placeholders>`__.
-     - The field **Subject to replace** accepts
-       `expressions <https://www.odoo.com/documentation/17.0/applications/general/companies/email_template.html#dynamic-placeholders>`__
-     - The field **Replace** specifies if the template should replace
-       existing content or append to it.
-     - The field **Partial Replacement** specifies if the template
-       should parcial replace existing content.
+      -  The field **Model** specifies the model to which the subject
+         template should apply in the notification emails sent by Odoo.
+      -  The field **Subject Template** accepts
+         `expressions <https://www.odoo.com/documentation/17.0/applications/general/companies/email_template.html#dynamic-placeholders>`__.
+      -  The field **Subject to replace** accepts
+         `expressions <https://www.odoo.com/documentation/17.0/applications/general/companies/email_template.html#dynamic-placeholders>`__
+      -  The field **Replace** specifies if the template should replace
+         existing content or append to it.
+      -  The field **Partial Replacement** specifies if the template
+         should parcial replace existing content.
 
 Usage
 =====
 
 To use this module, you need to:
 
-- Open the chatter in Odoo (e.g. Open an Invoice).
-- Send a message.
-- Observe the rendered Subject template.
+-  Open the chatter in Odoo (e.g. Open an Invoice).
+-  Send a message.
+-  Observe the rendered Subject template.
 
 Bug Tracker
 ===========
@@ -86,20 +87,20 @@ Authors
 Contributors
 ------------
 
-- Tecnativa <https://www.tecnativa.com>
+-  Tecnativa <https://www.tecnativa.com>
 
-     - Pedro M. Baeza
-     - João Marques
-     - Carlos Roca
-     - Víctor Martínez
+      -  Pedro M. Baeza
+      -  João Marques
+      -  Carlos Roca
+      -  Víctor Martínez
 
-- Versada <https://versada.eu>
+-  Versada <https://versada.eu>
 
-  - Naglis Jonaitis
+   -  Naglis Jonaitis
 
-- Moduon <https://www.moduon.team>
+-  Moduon <https://www.moduon.team>
 
-  - Eduardo de Miguel
+   -  Eduardo de Miguel
 
 Maintainers
 -----------
@@ -114,13 +115,16 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-.. |maintainer-yajo| image:: https://github.com/yajo.png?size=40px
-    :target: https://github.com/yajo
-    :alt: yajo
+.. |maintainer-victoralmau| image:: https://github.com/victoralmau.png?size=40px
+    :target: https://github.com/victoralmau
+    :alt: victoralmau
+.. |maintainer-sergio-teruel| image:: https://github.com/sergio-teruel.png?size=40px
+    :target: https://github.com/sergio-teruel
+    :alt: sergio-teruel
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-yajo| 
+|maintainer-victoralmau| |maintainer-sergio-teruel| 
 
 This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/mail_notification_custom_subject>`_ project on GitHub.
 
