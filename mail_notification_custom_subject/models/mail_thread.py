@@ -57,7 +57,7 @@ class MailThread(models.AbstractModel):
                     default_model=self._name,
                     default_res_id=self.id,
                 )._get_record_name({})
-            for template in custom_subjects:
+            for template in custom_subjects.sudo():
                 try:
                     rendered_subject_template = self.env[
                         "mail.template"
