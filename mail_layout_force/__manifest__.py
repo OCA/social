@@ -11,7 +11,7 @@
     "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "category": "Marketing",
-    "depends": ["mail"],
+    "depends": ["mail", "survey"],
     "demo": ["demo/mail_layout.xml"],
     "data": [
         "security/ir.model.access.csv",
