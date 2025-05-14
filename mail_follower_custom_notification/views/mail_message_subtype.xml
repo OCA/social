@@ -9,11 +9,10 @@
                     name="mail_follower_custom_notification"
                     string="Custom notifications"
                 >
-                    <field name="custom_notification_mail" />
-                    <field name="custom_notification_own" />
+                    <field name="mail_follower_custom_notification" />
                     <field
-                        name="custom_notification_model_ids"
-                        attrs="{'invisible': [('res_model', '!=', False)]}"
+                        name="mail_follower_custom_notification_model_ids"
+                        attrs="{'invisible': [('res_model', '!=', ''), ('res_model', '!=', False)]}"
                         widget="many2many_tags"
                     />
                 </group>

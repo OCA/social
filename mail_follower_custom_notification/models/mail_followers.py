@@ -1,50 +1,39 @@
 # Copyright 2015 Therp BV <http://therp.nl>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class MailFollowers(models.Model):
     _inherit = "mail.followers"
 
-    force_mail_subtype_ids = fields.Many2many(
-        "mail.message.subtype",
-        "mail_followers_force_mail_rel",
-        "mail_followers_id",
-        "mail_message_subtype_id",
-        string="Force mails from subtype",
-    )
+    mail_follower_custom_notification = fields.Json()
 
-    force_nomail_subtype_ids = fields.Many2many(
-        "mail.message.subtype",
-        "mail_followers_force_nomail_rel",
-        "mail_followers_id",
-        "mail_message_subtype_id",
-        string="Force no mails from subtype",
-    )
-
-    force_own_subtype_ids = fields.Many2many(
-        "mail.message.subtype",
-        "mail_followers_force_own_rel",
-        "mail_followers_id",
-        "mail_message_subtype_id",
-        string="Force own mails from subtype",
-    )
-
-    @api.model
-    def create(self, values):
-        this = super(MailFollowers, self).create(values)
-        for subtype in this.subtype_ids:
-            if (
-                not subtype.res_model
-                and subtype.custom_notification_model_ids
-                and this.res_model
-                not in subtype.custom_notification_model_ids.mapped("model")
+    def _get_recipient_data(self, records, message_type, subtype_id, pids=None):
+        result = super()._get_recipient_data(
+            records, message_type, subtype_id, pids=pids
+        )
+        if subtype_id:
+            subtype = self.env["mail.message.subtype"].browse(subtype_id)
+            subtype_notification_type = subtype.mail_follower_custom_notification
+            if subtype_notification_type and (
+                not subtype.mail_follower_custom_notification_model_ids
+                or records
+                and records._name
+                in subtype.mail_follower_custom_notification_model_ids.mapped("model")
             ):
-                continue
-            if subtype.custom_notification_mail == "force_yes":
-                this.force_mail_subtype_ids += subtype
-            if subtype.custom_notification_mail == "force_no":
-                this.force_nomail_subtype_ids += subtype
-            if subtype.custom_notification_own:
-                this.force_own_subtype_ids += subtype
-        return this
+                for followers in result.values():
+                    for follower_data in followers.values():
+                        follower_data["notif"] = subtype_notification_type
+        if records and subtype_id:
+            for record in records:
+                for follower in record.message_follower_ids:
+                    if not follower.mail_follower_custom_notification:
+                        continue
+                    custom_notification = (
+                        follower.mail_follower_custom_notification.get(str(subtype_id))
+                    )
+                    if custom_notification:
+                        result[record.id][follower.partner_id.id][
+                            "notif"
+                        ] = custom_notification
+        return result

@@ -6,20 +6,14 @@ from odoo import fields, models
 class MailMessageSubtype(models.Model):
     _inherit = "mail.message.subtype"
 
-    custom_notification_mail = fields.Selection(
-        [("force_yes", "Force yes"), ("force_no", "Force no")],
-        string="Send mail notification",
-        help="Leave empty to use the setting "
-        'on the partner\'s form, set to "Force yes" to always send messages '
-        'of this type via email, and "Force no" to never send messages of '
-        "type via email",
+    mail_follower_custom_notification = fields.Selection(
+        selection=lambda self: self.env["res.users"]
+        ._fields["notification_type"]
+        ._description_selection(self.env),
+        string="Custom notification",
+        help="Override users' default notification settings for this message type",
     )
-    custom_notification_own = fields.Boolean(
-        "Notify about own messages",
-        help="Check this to have notifications "
-        "generated and sent via email about own messages",
-    )
-    custom_notification_model_ids = fields.Many2many(
+    mail_follower_custom_notification_model_ids = fields.Many2many(
         "ir.model",
         string="Models",
         help="Choose for which models the "

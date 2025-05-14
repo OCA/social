@@ -17,23 +17,21 @@ Custom notification settings for followers
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/10.0/mail_follower_custom_notification
+    :target: https://github.com/OCA/social/tree/16.0/mail_follower_custom_notification
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-10-0/social-10-0-mail_follower_custom_notification
+    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_follower_custom_notification
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=10.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 In standard Odoo, receiving mail notifications is an all or nothing affair.
-This module allows users to decide per followed record if they want to
-receive emails or not. Further, they can choose to receive notifications about
-their own messages.
+This module allows users to decide if they want to receive emails, inbox notifications or both, as well globally as per followed record.
 
-You can also set defaults for this settings on the subtype in question.
+Administrators can also override this settings per message subtype.
 
 **Table of contents**
 
@@ -43,16 +41,17 @@ You can also set defaults for this settings on the subtype in question.
 Configuration
 =============
 
-When followers open their subscriptions, they will be offered the choice to
-override mail settings and to force being notified about their own messages.
+You can add defaults per message subtype for this settings in Settings /
+Technical / Email / Subtypes.
+
+Usage
+=====
+
+When followers edit their subscriptions, they will be offered the choice to
+override notification settings.
 
 Note subscriptions are only editable for users of the `Technical settings`
 group.
-
-You can add defaults per message subtype for this settings in Settings /
-Technical / Email / Subtypes. Here, you also have the opportunity to apply
-those defaults to existing subscriptions. Note that this overrides all
-customizations your users already have done.
 
 Bug Tracker
 ===========
@@ -60,7 +59,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_follower_custom_notification%0Aversion:%2010.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_follower_custom_notification%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -70,17 +69,13 @@ Credits
 Authors
 ~~~~~~~
 
+* Hunki Enterprises BV
 * Therp BV
 
 Contributors
 ~~~~~~~~~~~~
 
-* Holger Brunn <hbrunn@therp.nl>
-
-Other credits
-~~~~~~~~~~~~~
-
-* Odoo Community Association: `Icon <https://github.com/OCA/maintainer-tools/blob/master/template/module/static/description/icon.svg>`_.
+* Holger Brunn <mail@hunki-enterprises.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -95,6 +90,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/10.0/mail_follower_custom_notification>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_follower_custom_notification>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

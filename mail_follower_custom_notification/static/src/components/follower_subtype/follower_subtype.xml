@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t
+        t-name="mail_follower_custom_notification.FollowerSubtype"
+        t-inherit="mail.FollowerSubtype"
+        t-inherit-mode="extension"
+        owl="1"
+    >
+        <xpath expr="//div[@t-ref='root']" position="inside">
+            <label
+                class="o_FollowerNotificationType align-items-center ml4 d-flex flex-grow-1"
+            >
+                Notification:
+                <select
+                    class="form-select ml4"
+                    name="mail_follower_custom_notification"
+                    t-on-change="followerSubtypeView.onChangeCustomNotification"
+                >
+                    <option
+                        value=""
+                        t-att-selected="!followerSubtypeView.subtype.customNotification"
+                    >Default</option>
+                    <t
+                        t-foreach="this.messaging.notificationTypes"
+                        t-as="notification_type"
+                        t-key="notification_type"
+                    >
+                        <option
+                            t-att-value="notification_type"
+                            t-att-selected="followerSubtypeView.subtype.customNotification === notification_type"
+                        ><t t-out="notification_type_value" /></option>
+                    </t>
+                </select>
+            </label>
+        </xpath>
+    </t>
+</templates>

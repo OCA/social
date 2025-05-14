@@ -1,0 +1,5 @@
+div.o_FollowerSubtype
+    label.o_FollowerSubtype_label:has(input:not(:checked))
+    + label.o_FollowerNotificationType {
+    display: none !important;
+}
