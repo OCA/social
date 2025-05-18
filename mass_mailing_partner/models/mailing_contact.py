@@ -42,16 +42,19 @@ class MailingContact(models.Model):
                         + ": %s" % contact.partner_id.display_name
                     )
 
+    def update_fields_based_on_partner(self):
+        for rec in self.filtered("partner_id"):
+            rec.name = rec.partner_id.name
+            rec.email = rec.partner_id.email
+            rec.title_id = rec.partner_id.title
+            rec.company_name = (
+                rec.partner_id.company_id.name or rec.partner_id.company_name
+            )
+            rec.country_id = rec.partner_id.country_id
+
     @api.onchange("partner_id")
     def _onchange_partner_mass_mailing_partner(self):
-        if self.partner_id:
-            self.name = self.partner_id.name
-            self.email = self.partner_id.email
-            self.title_id = self.partner_id.title
-            self.company_name = (
-                self.partner_id.company_id.name or self.partner_id.company_name
-            )
-            self.country_id = self.partner_id.country_id
+        self.update_fields_based_on_partner()
 
     def _overwrite_partner(self, vals, creating=False):
         """Overwrite partner and update contact data if needed."""
@@ -63,19 +66,13 @@ class MailingContact(models.Model):
         if "partner_id" not in vals:
             _self._set_partner()
         if creating or prev_partner != _self.partner_id:
-            _self._onchange_partner_mass_mailing_partner()
+            _self.update_fields_based_on_partner()
 
     @api.model_create_multi
     def create(self, vals_list):
         result = super().create(vals_list)
         for contact, vals in zip(result, vals_list):
             contact._overwrite_partner(vals, True)
-        return result
-
-    def write(self, vals):
-        result = super().write(vals)
-        for contact in self:
-            contact._overwrite_partner(vals)
         return result
 
     def _get_categories(self):

@@ -106,7 +106,7 @@ class MailMassMailingContactCase(base.BaseCase):
         }
         partner = self.create_partner(partner_vals)
         contact.partner_id = partner
-        contact._onchange_partner_mass_mailing_partner()
+        contact.update_fields_based_on_partner()
         self.check_mailing_contact_partner(contact)
 
     def test_partners_merge(self):

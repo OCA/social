@@ -102,6 +102,10 @@ Contributors
 
     * Jairo Llopis
 
+* `Kencove <https://kencove.com>`_:
+
+    * Mohamed Alkobrosli
+
 Other credits
 ~~~~~~~~~~~~~
 
