@@ -30,31 +30,37 @@
                 <attribute
                     name="attrs"
                 >{'readonly': [('partner_id', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
             <field name="email" position="attributes">
                 <attribute
                     name="attrs"
                 >{'readonly': [('partner_id', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
             <field name="name" position="attributes">
                 <attribute
                     name="attrs"
                 >{'readonly': [('partner_id', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
             <field name="company_name" position="attributes">
                 <attribute
                     name="attrs"
                 >{'readonly': [('partner_id', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
             <field name="country_id" position="attributes">
                 <attribute
                     name="attrs"
                 >{'readonly': [('partner_id', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
             <field name="tag_ids" position="attributes">
                 <attribute
                     name="attrs"
                 >{'readonly': [('partner_id', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </field>
         </field>
     </record>

@@ -20,3 +20,7 @@
 * `Moduon <https://www.moduon.team>`_:
 
     * Jairo Llopis
+
+* `Kencove <https://kencove.com>`_:
+
+    * Mohamed Alkobrosli
