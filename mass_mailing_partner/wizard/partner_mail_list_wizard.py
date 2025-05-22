@@ -23,21 +23,29 @@ class PartnerMailListWizard(models.TransientModel):
         contact_obj = self.env["mailing.contact"]
         partners = self.partner_ids
 
-        add_list = partners.filtered("mass_mailing_contact_ids")
-        for partner in add_list:
-            self.mail_list_id.contact_ids = [
-                (4, partner.mass_mailing_contact_ids[0].id)
-            ]
+        # Step 1: Existing contacts → add to mailing list if needed
+        existing_partners = partners.filtered("mass_mailing_contact_ids")
+        for partner in existing_partners:
+            contact = partner.mass_mailing_contact_ids[0]
+            subscribed_list_ids = contact.subscription_list_ids.list_id.ids
+            if self.mail_list_id.id not in subscribed_list_ids:
+                contact.write({
+                    'subscription_list_ids': [(0, 0, {'list_id': self.mail_list_id.id})]
+                })
 
-        to_create = partners - add_list
-        for partner in to_create:
+        # Step 2: New contacts → let create() logic handle everything via default_list_ids
+        new_partners = partners - existing_partners
+        for partner in new_partners:
             if not partner.email:
                 raise UserError(_("Partner '%s' has no email.") % partner.name)
+
             contact_vals = {
                 "partner_id": partner.id,
-                "list_ids": [(4, self.mail_list_id.id)],
-                "title_id": partner.title.id or False,
-                "company_name": partner.company_id.name or False,
-                "country_id": partner.country_id.id or False,
+                "title_id": partner.title.id if partner.title else False,
+                "company_name": partner.company_id.name if partner.company_id else False,
+                "country_id": partner.country_id.id if partner.country_id else False,
+                "subscription_list_ids": [],  # triggers default_list_ids processing
             }
-            contact_obj.create(contact_vals)
+
+            # Pass default_list_ids in context
+            contact_obj.with_context(default_list_ids=[self.mail_list_id.id]).create(contact_vals)
