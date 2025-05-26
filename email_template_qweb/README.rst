@@ -69,7 +69,11 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Holger Brunn <hbrunn@therp.nl>
+* `Therp BV <https://www.therp.nl>`_:
+
+    * Holger Brunn <hbrunn@therp.nl>
+    * Ronald Portier <ronald@therp.nl>
+
 * Dave Lasley <dave@laslabs.com>
 * Carlos Lopez Mite <celm1990@gmail.com>
 * `Tecnativa <https://www.tecnativa.com>`_:

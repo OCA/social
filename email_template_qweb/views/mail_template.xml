@@ -10,13 +10,20 @@
             <field name="body_html" position="before">
                 <group attrs="{'invisible': [('body_type', '!=', 'qweb_view')]}">
                     <field
+                        name="edit_language"
+                        attrs="{'required': [('body_type', '=', 'qweb_view')]}"
+                    />
+                    <field
                         name="body_view_id"
                         attrs="{'required': [('body_type', '=', 'qweb_view')]}"
                     />
                     <field
                         name="body_view_arch"
                         widget="ace"
-                        attrs="{'required': [('body_type', '=', 'qweb_view')], 'invisible': [('body_view_id', '=', False)]}"
+                        context="{'lang': edit_language}"
+                        options="{'mode': 'xml'}"
+                        attrs="{'required': [('body_type', '=', 'qweb_view')],
+                        'invisible': [('body_view_id', '=', False)]}"
                     />
                 </group>
             </field>
