@@ -44,7 +44,7 @@ class MailTrackingEmail(models.Model):
         string="Date", readonly=True, compute="_compute_date", store=True
     )
     mail_message_id = fields.Many2one(
-        string="Message", comodel_name="mail.message", readonly=True, index=True
+        comodel_name="mail.message", readonly=True, index=True
     )
     message_id = fields.Char(compute="_compute_message_id")
     mail_id = fields.Many2one(string="Email", comodel_name="mail.mail", readonly=True)
