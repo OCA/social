@@ -5,7 +5,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 import logging
 
-from odoo import api, models
+from odoo import models
 
 _logger = logging.getLogger(__name__)
 
@@ -13,7 +13,6 @@ _logger = logging.getLogger(__name__)
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
 
-    @api.returns("mail.message", lambda value: value.id)
     def message_post(
         self,
         *,
@@ -53,10 +52,16 @@ class MailThread(models.AbstractModel):
                 .sudo(False)
             )
             if not subject:
-                subject = "Re: %s" % self.env["mail.message"].with_context(
-                    default_model=self._name,
-                    default_res_id=self.id,
-                )._get_record_name({})
+                record_name = (
+                    self.env["mail.message"]
+                    .with_context(
+                        default_model=self._name,
+                        default_res_id=self.id,
+                    )
+                    ._get_record_name({})
+                )
+                subject = f"Re: {record_name}"
+
             for template in custom_subjects.sudo():
                 try:
                     rendered_subject_template = self.env[
@@ -87,9 +92,9 @@ class MailThread(models.AbstractModel):
                                 rendered_subject_template,
                             )
                 except Exception:
-                    _logger.warning(
-                        f"There is an error with {self.display_name} in the mail "
-                        f"message custom subject {template.name}"
+                    _logger.debug(
+                        f"There was an error rendering mail.message.custom.subject "
+                        f"'{template.name}' on record {self.display_name}"
                     )
         return super().message_post(
             body=body,

@@ -4,6 +4,7 @@
   > - João Marques
   > - Carlos Roca
   > - Víctor Martínez
+  > - Vicent Castells
 
 - Versada \<<https://versada.eu>\>  
   - Naglis Jonaitis

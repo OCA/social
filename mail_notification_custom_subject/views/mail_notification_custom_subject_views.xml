@@ -30,31 +30,31 @@
             </form>
         </field>
     </record>
-    <record model="ir.ui.view" id="mail_notification_custom_subject_tree">
-        <field name="name">mail.message.custom.subject.tree</field>
+    <record model="ir.ui.view" id="mail_notification_custom_subject_list">
+        <field name="name">mail.message.custom.subject.list</field>
         <field name="model">mail.message.custom.subject</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="model_id" />
                 <field name="subtype_ids" />
                 <field name="subject_template" />
-            </tree>
+            </list>
         </field>
     </record>
     <record
         model="ir.actions.act_window"
-        id="action_mail_notification_custom_subject_tree_all"
+        id="action_mail_notification_custom_subject_list_all"
     >
         <field name="name">Subject Replacement Templates</field>
         <field name="res_model">mail.message.custom.subject</field>
-        <field name="view_mode">form,tree</field>
-        <field name="view_id" ref="mail_notification_custom_subject_tree" />
+        <field name="view_mode">form,list</field>
+        <field name="view_id" ref="mail_notification_custom_subject_list" />
     </record>
     <menuitem
         id="menu_mail_notification_custom_subject"
         parent="base.menu_email"
-        action="action_mail_notification_custom_subject_tree_all"
+        action="action_mail_notification_custom_subject_list_all"
         sequence="21"
     />
 </odoo>

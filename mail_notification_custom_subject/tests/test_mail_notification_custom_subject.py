@@ -203,11 +203,8 @@ class TestMailNotificationCustomSubject(BaseCommon):
         # No exception should be raised but subject should remain as original.
         self.assertEqual(mail_message_1.subject, "Test")
 
-    def test_no_template_default_result(self):
-        # Send message in partner
-        mail_message_1 = self.partner_1.message_post(
-            body="Test", subtype_xmlid="mail.mt_comment", subject="Test partner 1"
-        )
-        # Get message and check subject
-        # No exception should be raised but subject should remain as original.
-        self.assertEqual(mail_message_1.subject, "Test partner 1")
+    def test_default_subject_without_subtype(self):
+        # Enviar mensaje SIN subtype_xmlid para usar el note por defecto
+        mail_message = self.partner_1.message_post(body="Hola")
+        # Debe usar el subtipo note y generar "Re: Test partner 1"
+        self.assertEqual(mail_message.subject, f"Re: {self.partner_1.name}")
