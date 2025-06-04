@@ -35,12 +35,12 @@ addon | version | maintainers | summary
 [mail_attach_existing_attachment_account](mail_attach_existing_attachment_account/) | 13.0.1.0.0 |  | Module to use attach existing attachment for account module
 [mail_autosubscribe](mail_autosubscribe/) | 13.0.1.0.0 |  | Automatically subscribe partners to its company's business documents
 [mail_chatter_thread_colour](mail_chatter_thread_colour/) | 13.0.1.0.0 |  | Allow to change the colour of threads
-[mail_debrand](mail_debrand/) | 13.0.2.0.1 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Remove Odoo branding in sent emails
+[mail_debrand](mail_debrand/) | 13.0.2.0.1 | <a href='https://github.com/pedrobaeza'><img src='https://github.com/pedrobaeza.png' width='32' height='32' style='border-radius:50%;' alt='pedrobaeza'/></a> | Remove Odoo branding in sent emails
 [mail_drop_target](mail_drop_target/) | 13.0.1.0.1 |  | Attach emails to Odoo by dragging them from your desktop
 [mail_full_expand](mail_full_expand/) | 13.0.1.0.0 |  | Expand mail in a big window
 [mail_inline_css](mail_inline_css/) | 13.0.1.0.2 |  | Convert style tags in inline style in your mails
 [mail_layout_preview](mail_layout_preview/) | 13.0.1.0.0 |  | Preview email templates in the browser
-[mail_notification_custom_subject](mail_notification_custom_subject/) | 13.0.1.0.0 | [![joao-p-marques](https://github.com/joao-p-marques.png?size=30px)](https://github.com/joao-p-marques) | Apply a custom subject to mail notifications
+[mail_notification_custom_subject](mail_notification_custom_subject/) | 13.0.1.0.0 | <a href='https://github.com/joao-p-marques'><img src='https://github.com/joao-p-marques.png' width='32' height='32' style='border-radius:50%;' alt='joao-p-marques'/></a> | Apply a custom subject to mail notifications
 [mail_optional_autofollow](mail_optional_autofollow/) | 13.0.1.0.0 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
 [mail_optional_follower_notification](mail_optional_follower_notification/) | 13.0.1.1.0 |  | Choose to notify followers on mail.compose.message
 [mail_outbound_static](mail_outbound_static/) | 13.0.2.1.0 |  | Allows you to configure the from header for a mail server.
@@ -61,7 +61,7 @@ addon | version | maintainers | summary
 [mass_mailing_list_dynamic](mass_mailing_list_dynamic/) | 13.0.1.0.1 |  | Mass mailing lists that get autopopulated
 [mass_mailing_partner](mass_mailing_partner/) | 13.0.1.1.2 |  | Link partners with mass-mailing
 [mass_mailing_partner_contact_active](mass_mailing_partner_contact_active/) | 13.0.1.0.0 |  | Archive/unarchvice mailing list contact through partner
-[mass_mailing_resend](mass_mailing_resend/) | 13.0.1.0.0 | [![pedrobaeza](https://github.com/pedrobaeza.png?size=30px)](https://github.com/pedrobaeza) | Resend mass mailings
+[mass_mailing_resend](mass_mailing_resend/) | 13.0.1.0.0 | <a href='https://github.com/pedrobaeza'><img src='https://github.com/pedrobaeza.png' width='32' height='32' style='border-radius:50%;' alt='pedrobaeza'/></a> | Resend mass mailings
 
 [//]: # (end addons)
 
