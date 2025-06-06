@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [base_search_mail_content](base_search_mail_content/) | 17.0.1.1.0 |  | Base Search Mail Content
-[mail_activity_board](mail_activity_board/) | 17.0.1.1.0 |  | Add Activity Boards
+[mail_activity_board](mail_activity_board/) | 17.0.1.1.1 |  | Add Activity Boards
 [mail_activity_cancel_tracking](mail_activity_cancel_tracking/) | 17.0.1.0.1 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Mail Activity Cancel Tracking
 [mail_activity_done](mail_activity_done/) | 17.0.1.0.0 |  | Mail Activity Done
 [mail_activity_reminder](mail_activity_reminder/) | 17.0.1.0.0 |  | Reminder notifications about planned activities
