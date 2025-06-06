@@ -37,9 +37,20 @@ jobs:
         include:
           - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
             name: test with Odoo
+            exclude: "mail_send_confirmation"
           - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
             name: test with OCB
             makepot: "true"
+            exclude: "mail_send_confirmation"
+          - container: ghcr.io/oca/oca-ci/py3.10-odoo17.0:latest
+            name: test with Odoo
+            include: "mail_send_confirmation"
+          - container: ghcr.io/oca/oca-ci/py3.10-ocb17.0:latest
+            name: test with OCB
+            include: "mail_send_confirmation"
+    env:
+      INCLUDE: "${{ matrix.include }}"
+      EXCLUDE: "${{ matrix.exclude }}"
     services:
       postgres:
         image: postgres:12.0
