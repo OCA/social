@@ -98,3 +98,27 @@ class MailActivityMixin(models.AbstractModel):
                 ),
                 False,
             )
+
+    @api.model
+    def web_search_read(
+        self, domain, specification, offset=0, limit=None, order=None, count_limit=None
+    ):
+        # Intercept the queries from the systray widget and apply team search.
+        # This allows the frontend widget to direct the user to their team activities
+        # Late/Today/Future.
+        if self.env.context.get("team_activities"):
+            orig_domain = domain
+            domain = []
+            for clause in orig_domain:
+                if isinstance(clause, list | tuple) and clause[0] == "activity_user_id":
+                    domain.append(("activity_team_user_ids", clause[1], clause[2]))
+                else:
+                    domain.append(clause)
+        return super().web_search_read(
+            domain,
+            specification,
+            offset=offset,
+            limit=limit,
+            order=order,
+            count_limit=count_limit,
+        )
