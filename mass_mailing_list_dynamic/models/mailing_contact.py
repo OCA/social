@@ -12,7 +12,9 @@ class MassMailingContact(models.Model):
 
     @api.constrains("partner_id", "list_ids", "name", "email")
     def _check_no_manual_edits_on_fully_synced_lists(self):
-        if self.env.context.get("syncing"):
+        if self.env.context.get("syncing") or self.env.context.get(
+            "from_message_receive_bounce"
+        ):
             return
         full_synced_lists = self.mapped("list_ids").filtered(
             lambda x: x.dynamic and x.sync_method == "full"

@@ -1,6 +1,7 @@
 # Copyright 2017 Tecnativa - Jairo Llopis
 # Copyright 2020 Hibou Corp. - Jared Kipe
 # Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from unittest.mock import patch
 
@@ -39,6 +40,39 @@ class DynamicListCase(BaseCommon):
                 "contact_list_ids": [(4, cls.list.id, False)],
             }
         )
+
+    def test_message_receive_bounce_mailing_contact(self):
+        partner_0 = self.partners[0]
+        (self.partners - partner_0).category_id = False
+        partner_1 = self.partners[1]
+        self.list.write({"sync_method": "full"})
+        self.list.action_sync()
+        message = self.env["ir.mail_server"].build_email(
+            email_from=partner_0.email,
+            email_to=partner_1.email,
+            subject="subject",
+            body="body",
+            message_id="message_id",
+        )
+        message_dict = dict(message.items())
+        old_message = self.env["mail.message"].create(
+            {
+                "model": partner_0._name,
+                "res_id": partner_1.id,
+            }
+        )
+        message_dict.update(
+            email_from=partner_0.email,
+            to=partner_1.email,
+            message_id="message_id",
+            # message_parse_extract_bounce
+            bounced_email=partner_0.email,
+            bounced_partner=partner_0,
+            bounced_msg_ids=False,
+            bounced_message=old_message,
+            is_bounce=True,
+        )
+        partner_1.message_route(message, message_dict)
 
     def test_list_sync(self):
         """List is synced correctly."""
