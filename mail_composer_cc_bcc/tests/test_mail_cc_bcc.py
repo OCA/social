@@ -11,6 +11,7 @@ from odoo.addons.mail.tests.test_mail_composer import TestMailComposerForm
 from odoo.addons.mail.wizard.mail_compose_message import (
     MailComposer as MailComposer_upstream,
 )
+from odoo.addons.mail_composer_cc_bcc.models.mail_mail import format_emails
 
 VALID_HASHES = {
     "mail.template:_generate_template_recipients": ["73b0e20a018984841e454a57a86ee08d"],
@@ -28,6 +29,19 @@ class TestMailCcBcc(TestMailComposerForm):
         cls.partner_cc2 = env.ref("base.partner_demo_portal")
         cls.partner_cc3 = env.ref("base.res_partner_main1")
         cls.partner_bcc = env.ref("base.res_partner_main2")
+
+    def test_mail_format(self):
+        # Lowering email addresses is done in odoo standard.
+        # models.mail_mail.format_emails has to do the same.
+        partner_cap = self.partner
+        partner_cap.write(
+            {
+                "email": "CAPTAIN-PARTNER@oca.com",
+                "name": "Captain Partner",
+            }
+        )
+        expected_formatted_email = '"Captain Partner" <captain-partner@oca.com>'
+        self.assertEqual(format_emails(partner_cap), expected_formatted_email)
 
     def open_mail_composer_form(self):
         # Use form to populate data
