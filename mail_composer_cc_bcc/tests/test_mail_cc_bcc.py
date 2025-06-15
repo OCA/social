@@ -84,7 +84,7 @@ class TestMailCcBcc(TestMailComposerForm):
 
         # Verify data of mail.mail
         mail = message.mail_ids
-        expecting = ", ".join(
+        expecting = str(
             [
                 '"Marc Demo" <mark.brown23@example.com>',
                 '"Joel Willis" <joel.willis63@example.com>',
@@ -92,7 +92,7 @@ class TestMailCcBcc(TestMailComposerForm):
             ]
         )
         self.assertEqual(mail.email_cc, expecting)
-        expecting = '"Dwayne Newman" <dwayne.newman28@example.com>'
+        expecting = str(['"Dwayne Newman" <dwayne.newman28@example.com>'])
         self.assertEqual(mail.email_bcc, expecting)
 
     def test_template_cc_bcc(self):

@@ -8,17 +8,11 @@ from odoo.addons.base.models.ir_mail_server import extract_rfc2822_addresses
 
 
 def format_emails(partners):
-    emails = [
-        tools.formataddr((p.name or "", tools.email_normalize(p.email)))
-        for p in partners
-        if p.email
-    ]
-    return ", ".join(emails)
+    return [tools.formataddr((p.name or "", p.email)) for p in partners if p.email]
 
 
 def format_emails_raw(partners):
-    emails = [p.email for p in partners if p.email]
-    return ", ".join(emails)
+    return [p.email for p in partners if p.email]
 
 
 class MailMail(models.Model):
