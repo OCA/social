@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-02-26 01:46+0000\n"
-"PO-Revision-Date: 2025-02-18 11:06+0000\n"
+"PO-Revision-Date: 2025-06-16 09:27+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mass_mailing_list_dynamic
 #: model_terms:ir.ui.view,arch_db:mass_mailing_list_dynamic.mailing_list_view_form
@@ -153,7 +153,7 @@ msgstr "Carica filtro"
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mail_thread_blacklist
 msgid "Mail Blacklist mixin"
-msgstr ""
+msgstr "Mixin blacklist e-mail"
 
 #. module: mass_mailing_list_dynamic
 #: model:ir.model,name:mass_mailing_list_dynamic.model_mailing_contact
