@@ -175,6 +175,16 @@ class DynamicListCase(BaseCommon):
         # This shouldn't fail
         self.partners[:1].write({"email": "test_mass_mailing_list_dynamic@example.org"})
 
+    def test_same_contact_in_regular_and_dynamic_list(self):
+        self.list.sync_method = "full"
+        self.list.action_sync()
+        regular_list = self.env["mailing.list"].create(
+            {
+                "name": "regular list",
+            }
+        )
+        self.list.contact_ids[:1].list_ids |= regular_list
+
     def test_is_synced(self):
         self.list.dynamic = False
         self.list._onchange_dynamic()
