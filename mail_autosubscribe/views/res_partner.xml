@@ -5,7 +5,6 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="view_partner_form" model="ir.ui.view">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="base.view_partner_form" />
@@ -15,7 +14,7 @@
                     name="mail_autosubscribe_ids"
                     string="In copy of"
                     widget="many2many_checkboxes"
-                    attrs="{'invisible': [('email', '=', False)]}"
+                    invisible="not email"
                 />
             </xpath>
             <xpath
@@ -26,10 +25,9 @@
                     name="mail_autosubscribe_ids"
                     string="In copy of"
                     widget="many2many_checkboxes"
-                    attrs="{'invisible': [('email', '=', False)]}"
+                    invisible="not email"
                 />
             </xpath>
         </field>
     </record>
-
 </odoo>

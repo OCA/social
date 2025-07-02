@@ -45,9 +45,6 @@ msgstr "Creat el"
 
 #. module: mail_autosubscribe
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__display_name
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template__display_name
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_thread__display_name
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner__display_name
 msgid "Display Name"
 msgstr "Nom a mostrar"
 
@@ -63,9 +60,6 @@ msgstr "Fil de correus"
 
 #. module: mail_autosubscribe
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__id
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template__id
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_thread__id
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner__id
 msgid "ID"
 msgstr "ID"
 
@@ -73,14 +67,6 @@ msgstr "ID"
 #: model_terms:ir.ui.view,arch_db:mail_autosubscribe.view_partner_form
 msgid "In copy of"
 msgstr "En còpia de"
-
-#. module: mail_autosubscribe
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe____last_update
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template____last_update
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_thread____last_update
-#: model:ir.model.fields,field_description:mail_autosubscribe.field_res_partner____last_update
-msgid "Last Modified on"
-msgstr "Darrera modificació el"
 
 #. module: mail_autosubscribe
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_autosubscribe__write_uid
@@ -127,3 +113,6 @@ msgstr "Ja existeix una regla per a aquest model"
 #: model:ir.model.fields,field_description:mail_autosubscribe.field_mail_template__use_autosubscribe_followers
 msgid "Use Autosubscribe Followers"
 msgstr "Usar seguidors autosubscrits"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Darrera modificació el"

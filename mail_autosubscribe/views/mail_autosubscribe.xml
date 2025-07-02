@@ -5,7 +5,6 @@
     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 -->
 <odoo>
-
     <record id="view_mail_autosubscribe_form" model="ir.ui.view">
         <field name="model">mail.autosubscribe</field>
         <field name="arch" type="xml">
@@ -49,5 +48,4 @@
         parent="base.menu_automation"
         sequence="50"
     />
-
 </odoo>
