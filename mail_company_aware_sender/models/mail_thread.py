@@ -1,7 +1,6 @@
 # Copyright 2025 Therp BV <https://therp.nl>.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import models
-from odoo.tools import formataddr
 
 
 class MailThread(models.AbstractModel):
@@ -15,16 +14,11 @@ class MailThread(models.AbstractModel):
         Check for current company to see whether we should try to override
         the email_from domain.
         """
-        override_from = (not email_from) and self.env.company._override_email_domain()
+        email_passed = bool(email_from)
         author_id, email_from = super()._message_compute_author(
             author_id, email_from, raise_on_email=raise_on_email
         )
-        if override_from and author_id:
+        if (not email_passed) and author_id:
             author = self.env["res.partner"].browse(author_id)
-            before_at = author.email.split("@")[0]
-            after_at = self.env.company.email.split("@")[1]
-            email_from = f"{before_at}@{after_at}"
-            if self.env.company.format_email:
-                # formataddr wants a tuple with name (of False) and email.
-                email_from = formataddr((author.name, email_from))
+            email_from = author.company_aware_email(default_email=email_from)
         return author_id, email_from

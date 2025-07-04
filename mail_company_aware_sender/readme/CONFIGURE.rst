@@ -7,3 +7,6 @@ To send out mails with company aware from addresses, three things are needed:
 On the company you can also set whether email from should include the name
 of the sender or not. This will only affect emails that are modified to use
 the company address.
+
+For particular users/partners there can be an opt-out for using company aware
+emails. This can be configured right under the email field in the partner form.
