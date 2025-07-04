@@ -92,3 +92,8 @@ class TestCompanyAwareSender(TransactionCase):
         self.assertEqual(
             email_from, '"Charles Le Magne" <charlemagne@imperiumromanum.org>'
         )
+        # Now opt out for the override.
+        self.partner_charles.write({"fixed_email": True})
+        author_id, email_from = mail_thread._message_compute_author(None, None)
+        self.assertEqual(author_id, self.partner_charles.id)
+        self.assertEqual(email_from, '"Charles Le Magne" <charlemagne@therp.nl>')
