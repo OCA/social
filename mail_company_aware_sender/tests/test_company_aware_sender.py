@@ -51,6 +51,14 @@ class TestCompanyAwareSender(TransactionCase):
                 ],
             }
         )
+        cls.partner_himiltrude = cls.Partner.create(
+            {
+                "name": "Himiltrude",
+                "email": "himiltrude@therp.nl",
+                "user_id": cls.user_charles.id,
+                "company_id": cls.company_imperium.id,
+            }
+        )
 
     def test_nothing_changed(self):
         # Check with default user and author (current user).
@@ -97,3 +105,19 @@ class TestCompanyAwareSender(TransactionCase):
         author_id, email_from = mail_thread._message_compute_author(None, None)
         self.assertEqual(author_id, self.partner_charles.id)
         self.assertEqual(email_from, '"Charles Le Magne" <charlemagne@therp.nl>')
+
+    def test_get_sender_from_object(self):
+        # Whitelist domain.
+        self.mail_server.write(
+            {"domain_whitelist": "therp.nl,kingdom.fr,imperiumromanum.org"}
+        )
+        # Check with default user and author (current user).
+        main_company = self.env.ref("base.main_company")
+        himiltrude = self.partner_himiltrude.sudo().with_company(main_company)
+        # Make sure user and company from object used.
+        email_from = self.env.user.sudo().get_company_aware_email(himiltrude)
+        self.assertEqual(email_from, "charlemagne@imperiumromanum.org")
+
+    def test_disable_encapsulation(self):
+        email_from = self.mail_server._get_default_from_address()
+        self.assertEqual(email_from, None)
