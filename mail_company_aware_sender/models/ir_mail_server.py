@@ -35,3 +35,8 @@ class IrMailServer(models.Model):
                 )
             )
         return email_from, email_to
+
+    @api.model
+    def _get_default_from_address(self):
+        """Prevent overwrite of email_from."""
+        return None

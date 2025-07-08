@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
@@ -380,6 +379,8 @@ mail is sent, but also want to keep the name of the active user in the
 email from address, so when sending from the kingdom, the email from will
 be <a class="reference external" href="mailto:charlemagne&#64;kingdom.fr">charlemagne&#64;kingdom.fr</a>, but when sending from the empire, the email will
 be <a class="reference external" href="mailto:charlemagne&#64;imperiumromanum.org">charlemagne&#64;imperiumromanum.org</a>.</p>
+<p>Note that after installing this module the system parameter mail.default.from
+will no longer be used to set the from address.</p>
 <p>This module can also be used to send company aware emails from templates.
 For instance with this formula for the email_from field:
 {{ object.invoice_user_id.company_aware_email(company=object.company_id) }}
