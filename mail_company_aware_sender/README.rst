@@ -45,7 +45,7 @@ will no longer be used to set the from address.
 
 This module can also be used to send company aware emails from templates.
 For instance with this formula for the email_from field:
-{{ object.invoice_user_id.company_aware_email(company=object.company_id) }}
+{{ user.get_company_aware_email(object) }}
 In this example the company defined in the object will be used instead of the current
 company.
 
