@@ -15,6 +15,10 @@
                     name="format_email"
                     attrs="{'invisible': [('use_email_domain', '=', False)]}"
                 />
+                <field
+                    name="reply_to"
+                    attrs="{'invisible': [('use_email_domain', '=', False)]}"
+                />
             </field>
         </field>
     </record>
