@@ -16,6 +16,9 @@ class ResCompany(models.Model):
         help='Format email_from with name "John Smith" <john.smith@example.com>'
         " or use plain email address",
     )
+    reply_to = fields.Char(
+        help="reply_to address to use, if not filled, fallback to mail.default.from",
+    )
 
     def _override_email_domain(self):
         """Check whether company email domain can and should be used."""

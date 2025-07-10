@@ -36,7 +36,15 @@ class IrMailServer(models.Model):
             )
         return email_from, email_to
 
+    def build_email(self, *args, **kwargs):
+        """Provide a valid return address when using company aware From."""
+        if self.env.company.use_email_domain and self.env.company.reply_to:
+            kwargs["reply_to"] = self.env.company.reply_to
+        return super().build_email(*args, **kwargs)
+
     @api.model
     def _get_default_from_address(self):
-        """Prevent overwrite of email_from."""
-        return None
+        """Prevent overwrite of email_from if not desired for company."""
+        if self.env.company.use_email_domain:
+            return None
+        return super()._get_default_from_address()

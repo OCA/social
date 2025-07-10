@@ -41,5 +41,7 @@ class TestMailServer(CompanyAwareSenderCase):
             )._get_test_email_addresses()
 
     def test_disable_encapsulation(self):
-        email_from = self.mail_server._get_default_from_address()
+        email_from = self.mail_server.with_company(
+            self.company_imperium
+        )._get_default_from_address()
         self.assertEqual(email_from, None)
