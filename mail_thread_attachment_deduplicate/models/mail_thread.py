@@ -16,9 +16,9 @@ class MailThread(models.AbstractModel):
                 for r in Attachments.search_read(domain, fields=["checksum"])
             ]
             checksum = Attachments._compute_checksum
-            attachments = [
-                a for a in attachments if checksum(a.content) not in checksums
-            ]
+            # we use a[1] instead of a.content because some modules might use
+            # simple tuples instead of named tuples...
+            attachments = [a for a in attachments if checksum(a[1]) not in checksums]
         return attachments  # if it's None there's nothing to do
 
     @api.returns("mail.message", lambda value: value.id)
