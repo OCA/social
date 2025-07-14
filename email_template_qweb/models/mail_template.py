@@ -15,6 +15,7 @@ class MailTemplate(models.Model):
     body_view_id = fields.Many2one("ir.ui.view", domain=[("type", "=", "qweb")])
     body_view_arch = fields.Text(
         compute="_compute_body_view_arch",
+        compute_sudo=True,
         inverse="_inverse_body_view_arch",
         readonly=False,
     )
@@ -42,7 +43,7 @@ class MailTemplate(models.Model):
             ).arch
 
     def _inverse_body_view_arch(self):
-        for this in self:
+        for this in self.sudo():
             this.body_view_id.with_context(
                 lang=this.edit_language
             ).arch = this.body_view_arch
