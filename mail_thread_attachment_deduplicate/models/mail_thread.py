@@ -21,6 +21,24 @@ class MailThread(models.AbstractModel):
             attachments = [a for a in attachments if checksum(a[1]) not in checksums]
         return attachments  # if it's None there's nothing to do
 
+    def _message_deduplicate_attachment_ids(self, attachment_ids):
+        # we let the mail_attachment_upload function create a dup with a res_id 0
+        # for the pending message. Here we simply reuse an existing attachment,
+        # so the dup will be GCed like any attachment for an unsent message
+        res = []
+        if attachment_ids:
+            domain = [("res_id", "in", self.ids), ("res_model", "=", self._name)]
+            Attachments = self.env["ir.attachment"]
+            id_checksum_list = Attachments.search_read(domain, fields=["checksum"])
+            id_by_checksum = {r["checksum"]: r["id"] for r in id_checksum_list}
+            for attachment_id in attachment_ids:
+                checksum = Attachments.browse(attachment_id).checksum
+                if checksum in id_by_checksum:
+                    res.append(id_by_checksum[checksum])
+                else:
+                    res.append(attachment_id)
+        return res
+
     @api.returns("mail.message", lambda value: value.id)
     def message_post(
         self,
@@ -39,6 +57,7 @@ class MailThread(models.AbstractModel):
         **kwargs
     ):
         attachments = self._message_deduplicate_attachments(attachments)
+        attachment_ids = self._message_deduplicate_attachment_ids(attachment_ids)
         return super().message_post(
             body=body,
             subject=subject,
