@@ -17,26 +17,27 @@ Deferred Message Posting
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_post_defer
+    :target: https://github.com/OCA/social/tree/18.0/mail_post_defer
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_post_defer
+    :target: https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_post_defer
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module enhances mail threads by using the mail queue by default.
 
-Without this module, Odoo attempts to notify recipients of your message immediately.
-If your mail server is slow or you have many followers, this can mean a lot of time.
-Install this module and make Odoo more snappy!
+Without this module, Odoo attempts to notify recipients of your message
+immediately. If your mail server is slow or you have many followers,
+this can mean a lot of time. Install this module and make Odoo more
+snappy!
 
 All emails will be kept in the outgoing queue by at least 30 seconds,
-giving you some time to re-think what you wrote. During that time,
-you can still delete the message and start again.
+giving you some time to re-think what you wrote. During that time, you
+can still delete the message and start again.
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -51,47 +52,50 @@ you can still delete the message and start again.
 Configuration
 =============
 
-You need to do nothing. The module is configured appropriately out of the box.
+You need to do nothing. The module is configured appropriately out of
+the box.
 
-The mail queue processing is made by a cron job. This is normal Odoo behavior,
-not specific to this module. However, since you will start using that queue for
-every message posted by any user in any thread, this module configures that job
-to execute every minute by default.
+The mail queue processing is made by a cron job. This is normal Odoo
+behavior, not specific to this module. However, since you will start
+using that queue for every message posted by any user in any thread,
+this module configures that job to execute every minute by default.
 
-You can still change that cadence after installing the module (although it is
-not recommended). To do so:
+You can still change that cadence after installing the module (although
+it is not recommended). To do so:
 
-#. Log in with an administrator user.
-#. Activate developer mode.
-#. Go to *Settings > Technical > Automation > Scheduled Actions*.
-#. Edit the action named "Mail: Email Queue Manager".
-#. Lower down the frequency in the field *Execute Every*. Recommended: 1 minute.
+1. Log in with an administrator user.
+2. Activate developer mode.
+3. Go to *Settings > Technical > Automation > Scheduled Actions*.
+4. Edit the action named "Mail: Email Queue Manager".
+5. Lower down the frequency in the field *Execute Every*. Recommended: 1
+   minute.
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Go to the form view of any record that has a mail thread. It can be a partner, for example.
-#. Post a message.
+1. Go to the form view of any record that has a mail thread. It can be a
+   partner, for example.
+2. Post a message.
 
-The mail is now in the outgoing mail queue. It will be there for at least 30
-seconds. It will be really sent the next time the "Mail: Email Queue Manager"
-cron job is executed.
+The mail is now in the outgoing mail queue. It will be there for at
+least 30 seconds. It will be really sent the next time the "Mail: Email
+Queue Manager" cron job is executed.
 
 While the message has not been yet sent:
 
-#.  Hover over the little envelope. You will see a paper airplane icon,
-    indicating it is still outgoing.
-#.  Hover over the message and click on the little trash icon to delete it.
-    Mails will not be sent.
+1. Hover over the little envelope. You will see a paper airplane icon,
+   indicating it is still outgoing.
+2. Hover over the message and click on the little trash icon to delete
+   it. Mails will not be sent.
 
 Known issues / Roadmap
 ======================
 
-*   Add minimal deferring time configuration if it ever becomes necessary. See
-    https://github.com/OCA/social/pull/1001#issuecomment-1461581573 for the
-    rationale behind current hardcoded value of 30 seconds.
+- Add minimal deferring time configuration if it ever becomes necessary.
+  See https://github.com/OCA/social/pull/1001#issuecomment-1461581573
+  for the rationale behind current hardcoded value of 30 seconds.
 
 Bug Tracker
 ===========
@@ -99,7 +103,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_post_defer%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_post_defer%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -107,17 +111,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Moduon
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Jairo Llopis (https://www.moduon.team/)
+- Jairo Llopis (https://www.moduon.team/)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -137,6 +141,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-Yajo| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_post_defer>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/18.0/mail_post_defer>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
