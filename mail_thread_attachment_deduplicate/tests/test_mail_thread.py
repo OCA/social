@@ -37,3 +37,49 @@ class TestMailDeduplicate(TransactionCase):
 
         self.customer._compute_message_attachment_count()
         self.assertEqual(self.customer.message_attachment_count, 1)
+
+    def test_deduplicate_outgoing(self):
+        # it's not a very good test, since we're hard coding assumptions about
+        # how the code works, which could change in the future
+        # but the controller is called from the JS when adding a file to a message
+        # to be sent, so the alternative is a rube-goldberg test that isn't very
+        # interesting anyway.
+        vals_attachment = {
+            "name": "msg.txt",
+            "raw": b"Message binary data",
+            "res_id": 0,
+            "res_model": "mail.compose.message",
+        }
+        # mail_attachment_upload would create something like this
+        attachment = self.env["ir.attachment"].create(vals_attachment.copy())
+
+        vals_message = {
+            "body": "Message body",
+            "subject": None,
+            "message_type": "comment",
+            "email_from": None,
+            "author_id": None,
+            "parent_id": False,
+            "subtype_xmlid": "mail.mt_comment",
+            "subtype_id": False,
+            "partner_ids": [],
+            "attachments": None,
+        }
+        msg_count = len(self.customer.message_ids)
+        msg_1 = self.customer.message_post(
+            **vals_message.copy(), attachment_ids=[attachment.id]
+        )
+        self.assertEqual(len(self.customer.message_ids), msg_count + 1)
+        self.assertEqual(msg_1.attachment_ids, attachment)
+
+        self.assertEqual(self.customer.message_attachment_count, 1)
+
+        attachment_dup = self.env["ir.attachment"].create(vals_attachment)
+        msg_2 = self.customer.message_post(
+            **vals_message.copy(), attachment_ids=[attachment_dup.id]
+        )
+        self.assertEqual(len(self.customer.message_ids), msg_count + 2)
+
+        self.customer._compute_message_attachment_count()
+        self.assertEqual(self.customer.message_attachment_count, 1)
+        self.assertEqual(msg_2.attachment_ids, attachment)
