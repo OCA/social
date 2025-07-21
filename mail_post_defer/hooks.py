@@ -2,14 +2,11 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 import logging
 
-from odoo import SUPERUSER_ID, api
-
 _logger = logging.getLogger(__name__)
 
 
-def post_init_hook(cr, registry):
+def post_init_hook(env):
     """Increase cadence of mail queue cron."""
-    env = api.Environment(cr, SUPERUSER_ID, {})
     try:
         cron = env.ref("mail.ir_cron_mail_scheduler_action")
     except ValueError:

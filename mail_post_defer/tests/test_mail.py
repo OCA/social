@@ -1,6 +1,8 @@
 # Copyright 2022-2023 Moduon Team S.L. <info@moduon.team>
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
+from datetime import datetime
+
 import freezegun
 from lxml import html
 
@@ -14,6 +16,7 @@ class MailPostDeferCommon(MailCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.classPatch(cls.cr, "now", datetime.now)
         cls._create_portal_user()
         # Notify employee by email
         cls.user_employee.notification_type = "email"
@@ -168,6 +171,19 @@ class MessagePostCase(MailPostDeferCommon):
                 partner_ids=self.partner_employee.ids,
                 subtype_xmlid="mail.mt_comment",
             )
+            # We add tracking value to raise the userError in _message_update_content
+            field = self.env["ir.model.fields"]._get("mail.message", "body")
+            msg.tracking_value_ids = [
+                (
+                    0,
+                    0,
+                    {
+                        "field_id": field.id,
+                        "old_value_char": "test body",
+                        "new_value_char": "test body edited",
+                    },
+                )
+            ]
             # One minute later, the cron sends the mail
             with freezegun.freeze_time("2023-01-02 10:01:00"):
                 self.env["mail.message.schedule"]._send_notifications_cron()
@@ -187,9 +203,7 @@ class MessagePostCase(MailPostDeferCommon):
         """When models don't inherit from mail.thread, they still work."""
         self.partner_portal.email = "portal@example.com"
         with self.mock_mail_gateway():
-            self.env["mail.thread"].with_context(
-                mail_notify_author=True
-            ).message_notify(
+            self.env["mail.thread"].message_notify(
                 author_id=self.partner_employee.id,
                 body="test body",
                 model="res.country",
@@ -207,12 +221,9 @@ class MessagePostCase(MailPostDeferCommon):
                     author=self.partner_employee,
                     content="test body",
                 )
-                self.assertMailMail(
-                    self.partner_employee,
-                    "sent",
-                    author=self.partner_employee,
-                    content="test body",
-                )
+                # res.partner does not send mail because res.country does not inherit
+                # from mail.thread
+                self.assertNoMail(self.partner_employee)
         # Safety belt to avoid false positives in this test
         self.assertFalse(hasattr(self.env["res.country"], "_notify_thread"))
         self.assertTrue(hasattr(self.env["res.partner"], "_notify_thread"))

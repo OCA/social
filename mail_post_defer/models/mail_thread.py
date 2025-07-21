@@ -12,15 +12,8 @@ class MailThread(models.AbstractModel):
 
     def _notify_thread(self, message, msg_vals=False, **kwargs):
         """Defer emails by default."""
-        # Remember if the author should be notified when deferring
-        kwargs.setdefault(
-            "mail_post_defer_notify_author",
-            self.env.context.get("mail_notify_author", False),
-        )
-        _self = self.with_context(
-            mail_notify_author=kwargs["mail_post_defer_notify_author"]
-        )
         # Don't defer automatically if forcing send
+        _self = self
         if "mail_defer_seconds" not in _self.env.context:
             force_send = _self.env.context.get("mail_notify_force_send") or kwargs.get(
                 "force_send", False
