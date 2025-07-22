@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.MessageNotificationPopover" t-inherit-mode="extension">
+        <xpath expr="//span[@t-if='notification.persona']" position="after">
+            <span
+                t-elif="notification.notification_type == 'gateway'"
+                t-esc="notification.channel_name"
+            />
+        </xpath>
+    </t>
+</templates>

@@ -1,0 +1,12 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_gateway_channel_portal,res.partner.gateway.channel.portal,model_res_partner_gateway_channel,base.group_portal,1,0,0,0
+access_res_partner_gateway_channel_user,res.partner.gateway.channel,model_res_partner_gateway_channel,base.group_user,1,0,0,0
+manage_res_partner_gateway_channel_user,res.partner.gateway.channel,model_res_partner_gateway_channel,gateway_user,1,1,1,1
+access_mail_message_gateway_send_user,mail.message.gateway.send,model_mail_message_gateway_send,base.group_user,1,1,1,0
+access_mail_gateway_portal,mail.gateway.portal,model_mail_gateway,base.group_portal,1,0,0,0
+access_mail_gateway_public,mail.gateway.public,model_mail_gateway,base.group_public,1,0,0,0
+access_mail_gateway_user,mail.gateway.user,model_mail_gateway,base.group_user,1,0,0,0
+access_mail_guest_manage,mail.gateway.internal,model_mail_guest_manage,base.group_user,1,1,1,1
+access_mail_message_gateway_link,mail.message.link.all,model_mail_message_gateway_link,base.group_user,1,1,1,1
+access_mail_gateway_system,mail_gateway,model_mail_gateway,base.group_system,1,1,1,1
+access_mail_compose_gateway_message,access.mail.compose.gateway.message,model_mail_compose_gateway_message,base.group_user,1,1,1,0

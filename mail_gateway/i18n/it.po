@@ -1,0 +1,545 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_gateway
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-07-02 17:47+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__anonymous_name
+msgid "Anonymous Name"
+msgstr "Nome anonimo"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_guest_manage
+msgid "Assign gateway guest to a partner"
+msgstr "Assegna visitatore gateway ad un partner"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__can_set_webhook
+msgid "Can Set Webhook"
+msgstr "Può impostare webhook"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_guest_manage_form_view
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_link_form_view
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_send_form_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__channel_type
+msgid "Channel Type"
+msgstr "Tipo canale"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_channel__channel_type
+msgid ""
+"Chat is private and unique between 2 persons. Group is private among invited"
+" persons. Channel can be freely joined (depending on its configuration)."
+msgstr ""
+"Il dialogo è privato e unico tra due persone. Il gruppo è privato tra le "
+"persone invitate. Si può liberamente accedere al canale (in funzione della "
+"sua configurazione)."
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_message_ids
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_message_ids
+msgid "Child gateway messages"
+msgstr "Messaggi del gateway figlio"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__company_id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__company_id
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__company_id
+msgid "Company"
+msgstr "Azienda"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_guest_manage_form_view
+msgid "Create new partner"
+msgstr "Crea nuovo partner"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__create_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__create_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__create_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__create_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__create_date
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__create_date
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__create_date
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__create_date
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_channel
+msgid "Discussion Channel"
+msgstr "Canale discussione"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__display_name
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__display_name
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__display_name
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__display_name
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_thread
+msgid "Email Thread"
+msgstr "Discussione e-mail"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_notification__gateway_failure_reason
+msgid ""
+"Failure reason. This is usually the exception thrown by the email server, "
+"stored to ease the debugging of mailing issues."
+msgstr ""
+"Motivo guasto. Normalmente questa è l'eccezione generata dal server e-mail, "
+"salvata per semplificare la ricerca di errori dei problemi di invio."
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/models/discuss_sidebar_category.esm.js:0
+#, python-format
+msgid "Find a gateway channel..."
+msgstr "Trova un canale gateway..."
+
+#. module: mail_gateway
+#: model:ir.actions.act_window,name:mail_gateway.mail_gateway_act_window
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__gateway_id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest__gateway_id
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__gateway_id
+#: model:ir.model.fields,field_description:mail_gateway.field_res_users__gateway_ids
+#: model:ir.model.fields.selection,name:mail_gateway.selection__mail_channel__channel_type__gateway
+#: model:ir.model.fields.selection,name:mail_gateway.selection__mail_notification__notification_type__gateway
+#: model:ir.module.category,name:mail_gateway.module_category_gateway
+#: model:ir.ui.menu,name:mail_gateway.mail_gateway_menu
+msgid "Gateway"
+msgstr "Gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_channel_ids
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_channel_ids
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__gateway_channel_id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_channel_id
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner__gateway_channel_ids
+#: model:ir.model.fields,field_description:mail_gateway.field_res_users__gateway_channel_ids
+msgid "Gateway Channel"
+msgstr "Canale gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_channel_data
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_channel_data
+msgid "Gateway Channel Data"
+msgstr "Dati canale gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__gateway_channel_token
+msgid "Gateway Channel Token"
+msgstr "Token canale gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_failure_reason
+msgid "Gateway Failure Reason"
+msgstr "Motivo guasto gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__gateway_message_ids
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_message_id
+msgid "Gateway Message"
+msgstr "Messaggio gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_notification_ids
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_notification_ids
+msgid "Gateway Notification"
+msgstr "Notifica gateway"
+
+#. module: mail_gateway
+#: model:ir.actions.act_window,name:mail_gateway.res_partner_gateway_channel_act_window
+#: model:ir.ui.menu,name:mail_gateway.res_partner_gateway_channel_menu
+msgid "Gateway Partner Channels"
+msgstr "Canali partner gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_thread_data
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_thread_data
+msgid "Gateway Thread Data"
+msgstr "Dati discussione gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest__gateway_token
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__gateway_token
+msgid "Gateway Token"
+msgstr "Token gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__gateway_type
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_type
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_type
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_type
+msgid "Gateway Type"
+msgstr "Tipo gateway"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_gateway_abstract
+msgid "Gateway abstract for functions"
+msgstr "Riepilogo gateway per funzioni"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
+#, python-format
+msgid "Gateway message"
+msgstr "Messaggio gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__gateway_token
+msgid "Gateway related Token"
+msgstr "Token relativo al gateway"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_guest
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__guest_id
+msgid "Guest"
+msgstr "Ospite"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__has_new_channel_security
+msgid "Has New Channel Security"
+msgstr "Ha nuova sicurezza canale"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__id
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
+msgid "Integrate Webhook"
+msgstr "Integra webhook"
+
+#. module: mail_gateway
+#: model:ir.model.fields.selection,name:mail_gateway.selection__mail_gateway__integrated_webhook_state__integrated
+msgid "Integrated"
+msgstr "Integrato"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__integrated_webhook_state
+msgid "Integrated Webhook State"
+msgstr "Stato webhook integrato"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_channel__gateway_token
+#: model:ir.model.fields,help:mail_gateway.field_mail_gateway__token
+msgid "Key used for integration purposes"
+msgstr "Chiave utilizzata per motivi di integrazione"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_gateway__webhook_key
+msgid "Key used on the connection URL"
+msgstr "Chiave utilizzata nella connessione URL"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_gateway__webhook_secret
+msgid ""
+"Key used to ensure that the connection is secure and\n"
+"        comes from the desired source"
+msgstr ""
+"Chiave utilizzata per assicurare la sicurezza della connessione e\n"
+"        arriva dalla sorgente desiderata"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway____last_update
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage____last_update
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link____last_update
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send____last_update
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__write_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__write_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__write_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__write_uid
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__write_date
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__write_date
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__write_date
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__write_date
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_link_form_view
+msgid "Link"
+msgstr "Collega"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/models/message_action_view.esm.js:0
+#, python-format
+msgid "Link Message to thread"
+msgstr "Collega messaggio alla discussione"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_message_gateway_link
+msgid "Link message from gateway"
+msgstr "Collega messaggio dal gateway"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/models/message_action_view.esm.js:0
+#, python-format
+msgid "Link to thread"
+msgstr "Collega alla discussione"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_gateway
+msgid "Mail Gateway"
+msgstr "Gateway e-mail"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_link_form_view
+msgid "Mail Message Gateway Link"
+msgstr "Collegamento gateway messaggio e-mail"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_send_form_view
+msgid "Mail Message Gateway Send"
+msgstr "Invia messaggio e-mail gateway"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/models/channel_member_view.esm.js:0
+#, python-format
+msgid "Manage guest"
+msgstr "Gestione ospite"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__member_ids
+msgid "Member"
+msgstr "Membro"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
+msgid "Members"
+msgstr "Membri"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_guest_manage_form_view
+msgid "Merge"
+msgstr "Unisci"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_message
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__message_id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__message_id
+msgid "Message"
+msgstr "Messaggio"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_notification
+msgid "Message Notifications"
+msgstr "Notifiche messaggio"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__name
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/gateway_follower/gateway_follower.xml:0
+#, python-format
+msgid "Not selected"
+msgstr "Non selezionato"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__notification_type
+msgid "Notification Type"
+msgstr "Tipo notifica"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_message_id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_message_id
+msgid "Original gateway message"
+msgstr "Messaggio gateway originale"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__partner_id
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__partner_id
+#: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: mail_gateway
+#: model:ir.model.constraint,message:mail_gateway.constraint_res_partner_gateway_channel_unique_partner_gateway
+msgid "Partner can only have one configuration for each gateway."
+msgstr "Il partner può avere una sola configurazione per ogni gateway."
+
+#. module: mail_gateway
+#: model:ir.model.fields.selection,name:mail_gateway.selection__mail_gateway__integrated_webhook_state__pending
+msgid "Pending"
+msgstr "In attesa"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__resource_ref
+msgid "Record reference"
+msgstr "Riferimento record"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
+msgid "Remove Webhook"
+msgstr "Rimuovi webhook"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_send_form_view
+msgid "Send"
+msgstr "Invia"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_message_gateway_send
+msgid "Send Message through gateway"
+msgstr "Invia messaggio attraverso il gateway"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/models/message_action_view.esm.js:0
+#: code:addons/mail_gateway/static/src/models/message_action_view.esm.js:0
+#, python-format
+msgid "Send with gateway"
+msgstr "Invia con gateway"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_res_partner_gateway_channel
+msgid "Technical data used to get the gateway author"
+msgstr "Dati tecnici per avere l'autore del gateway"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/composer/composer.xml:0
+#, python-format
+msgid "To:"
+msgstr "A:"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__token
+msgid "Token"
+msgstr "Token"
+
+#. module: mail_gateway
+#: model:ir.model.constraint,message:mail_gateway.constraint_mail_gateway_mail_gateway_token
+msgid "Token must be unique"
+msgstr "Il token deve essere univoco"
+
+#. module: mail_gateway
+#: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
+msgid "Update Webhook"
+msgstr "Aggiorna webhook"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_res_users
+#: model:res.groups,name:mail_gateway.gateway_user
+msgid "User"
+msgstr "Utente"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_gateway__webhook_user_id
+msgid "User that will create the messages"
+msgstr "Utente che creerà il messaggio"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_key
+msgid "Webhook Key"
+msgstr "Chiave webhook"
+
+#. module: mail_gateway
+#: model:ir.model.constraint,message:mail_gateway.constraint_mail_gateway_mail_gateway_webhook_key
+msgid "Webhook Key must be unique"
+msgstr "La chiave webhook deve essere univoca"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_secret
+msgid "Webhook Secret"
+msgstr "Codice segreto webhook"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_url
+msgid "Webhook Url"
+msgstr "URL webhook"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_user_id
+msgid "Webhook User"
+msgstr "Utente webhook"
+
+#. module: mail_gateway
+#: model:ir.model.fields,help:mail_gateway.field_mail_gateway__has_new_channel_security
+msgid ""
+"When checked, channels are not created automatically. Usable on Telegram"
+msgstr ""
+"Quando selezionata, i canali non sono creati automaticamente. Utilizzabile "
+"in Telegram"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/message/message.xml:0
+#, python-format
+msgid "document"
+msgstr "documento"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
+#, python-format
+msgid "gateway"
+msgstr "gateway"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/message/message.xml:0
+#, python-format
+msgid "on"
+msgstr "su"
+
+#. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_ir_websocket
+msgid "websocket message handling"
+msgstr "gestione messaggio websocket"

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="mail_gateway.ChatterTopbar"
+        t-inherit="mail.Chatter"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//button[hasclass('o-mail-Chatter-logNote')]" position="after">
+            <button
+                class="o-mail-Chatter-gateway btn text-nowrap me-1"
+                type="button"
+                t-att-class="{
+                    'btn-primary active': state.composerType === 'gateway',
+                    'btn-secondary': state.composerType !== 'gateway',
+                    'my-2': !props.compactHeight
+                }"
+                t-on-click="() => this.toggleComposer('gateway')"
+                data-hotkey="shift+w"
+            >
+                <i class="fa fa-plane" role="img" aria-label="gateway" />
+                <span> Gateway message</span>
+            </button>
+        </xpath>
+        <xpath expr="//SuggestedRecipientsList" position="before">
+            <t
+                t-if="state.composerType === 'gateway' and state.thread.gateway_followers.length"
+            >
+                <div
+                    class="flex-shrink-0 px-3 pt-3 text-truncate small mb-2"
+                    style="margin-left:48px"
+                >
+                    <span class="fw-bold">To:</span>
+                    <t
+                        t-foreach="state.thread.gateway_followers"
+                        t-as="gateway_follower"
+                        t-key="gateway_follower.id"
+                    >
+                        <GatewayFollower
+                            follower="gateway_follower"
+                            composer="state.thread.composer"
+                        />
+                    </t>
+                </div>
+            </t>
+            <t t-set="type" t-value="type === 'gateway' ? 'gateway' : type" />
+        </xpath>
+        <xpath expr="//SuggestedRecipientsList" position="attributes">
+            <attribute
+                name="t-if"
+            >props.hasFollowers and state.composerType !== 'note' and state.composerType !== 'gateway'</attribute>
+        </xpath>
+    </t>
+</templates>
