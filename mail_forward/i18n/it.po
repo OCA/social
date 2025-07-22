@@ -24,11 +24,13 @@ msgid "---------- Forwarded message ---------"
 msgstr "---------- Messaggio inoltrato ---------"
 
 #. module: mail_forward
+#: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_gateway_message__forward_type__another_thread
 #: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_message__forward_type__another_thread
 msgid "Another thread"
 msgstr "Un'altra discussione"
 
 #. module: mail_forward
+#: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_gateway_message__forward_type__current_thread
 #: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_message__forward_type__current_thread
 msgid "Current thread"
 msgstr "Discussione attuale"
@@ -104,6 +106,7 @@ msgid "Forward Message Right"
 msgstr "Inoltra messaggio successivo"
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_compose_gateway_message__forward_type
 #: model:ir.model.fields,field_description:mail_forward.field_mail_compose_message__forward_type
 msgid "Forward Type"
 msgstr "Tipo inoltro"
@@ -147,6 +150,7 @@ msgid "Subject"
 msgstr "Oggetto"
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_compose_gateway_message__forward_thread
 #: model:ir.model.fields,field_description:mail_forward.field_mail_compose_message__forward_thread
 msgid "Thread to forward"
 msgstr "Discussione da inoltrare"

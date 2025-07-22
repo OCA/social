@@ -25,11 +25,13 @@ msgid "---------- Forwarded message ---------"
 msgstr "---------- Mensaje reenviado ---------"
 
 #. module: mail_forward
+#: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_gateway_message__forward_type__another_thread
 #: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_message__forward_type__another_thread
 msgid "Another thread"
 msgstr "Otro hilo"
 
 #. module: mail_forward
+#: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_gateway_message__forward_type__current_thread
 #: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_message__forward_type__current_thread
 msgid "Current thread"
 msgstr "Hilo actual"
@@ -105,6 +107,7 @@ msgid "Forward Message Right"
 msgstr ""
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_compose_gateway_message__forward_type
 #: model:ir.model.fields,field_description:mail_forward.field_mail_compose_message__forward_type
 msgid "Forward Type"
 msgstr "Tipo de reenvío"
@@ -148,6 +151,7 @@ msgid "Subject"
 msgstr "Asunto"
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_compose_gateway_message__forward_thread
 #: model:ir.model.fields,field_description:mail_forward.field_mail_compose_message__forward_thread
 msgid "Thread to forward"
 msgstr "Hilo a reenviar"

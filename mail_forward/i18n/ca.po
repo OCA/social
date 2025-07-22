@@ -24,11 +24,13 @@ msgid "---------- Forwarded message ---------"
 msgstr "---------- Missatge reenviat ---------"
 
 #. module: mail_forward
+#: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_gateway_message__forward_type__another_thread
 #: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_message__forward_type__another_thread
 msgid "Another thread"
 msgstr "Un altre fil"
 
 #. module: mail_forward
+#: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_gateway_message__forward_type__current_thread
 #: model:ir.model.fields.selection,name:mail_forward.selection__mail_compose_message__forward_type__current_thread
 msgid "Current thread"
 msgstr "Fil actual"
@@ -78,7 +80,6 @@ msgstr "Reenvia"
 #. odoo-python
 #: code:addons/mail_forward/models/mail_message.py:0
 #: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
-#: code:addons/mail_forward/static/src/components/forward_message/forward_message.xml:0
 #, python-format
 msgid "Forward Message"
 msgstr "Reenvia missatge"
@@ -105,6 +106,7 @@ msgid "Forward Message Right"
 msgstr ""
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_compose_gateway_message__forward_type
 #: model:ir.model.fields,field_description:mail_forward.field_mail_compose_message__forward_type
 msgid "Forward Type"
 msgstr "Tipus de reenviament"
@@ -148,6 +150,7 @@ msgid "Subject"
 msgstr "Assumpte"
 
 #. module: mail_forward
+#: model:ir.model.fields,field_description:mail_forward.field_mail_compose_gateway_message__forward_thread
 #: model:ir.model.fields,field_description:mail_forward.field_mail_compose_message__forward_thread
 msgid "Thread to forward"
 msgstr "Fil pel reenviament"
