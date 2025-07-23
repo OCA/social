@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-inherit="mail.Message.notification" t-inherit-mode="extension">
+        <xpath expr="//div" position="after">
+            <i
+                class="fa fa-whatsapp text-info"
+                t-if="message.gateway_type === 'whatsapp' and message.notifications.length === 0"
+            />
+        </xpath>
+    </t>
+</templates>

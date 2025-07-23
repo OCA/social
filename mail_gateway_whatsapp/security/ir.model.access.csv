@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_whatsapp_composer,access.whatsapp.composer,model_whatsapp_composer,base.group_user,1,1,1,0
+access_mail_whatsapp_template_group_system,mail_whatsapp_template_group_system,model_mail_whatsapp_template,base.group_system,1,1,1,1
+access_mail_whatsapp_template_group_user,mail_whatsapp_template_group_user,model_mail_whatsapp_template,base.group_user,1,0,0,0

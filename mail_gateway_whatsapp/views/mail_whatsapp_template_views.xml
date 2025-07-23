@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="view_mail_whatsapp_template_tree" model="ir.ui.view">
+        <field name="name">view.mail.whatsapp.template.tree</field>
+        <field name="model">mail.whatsapp.template</field>
+        <field name="arch" type="xml">
+            <tree decoration-danger="not is_supported and template_uid">
+                <field name="name" />
+                <field name="template_name" />
+                <field name="template_uid" optional="show" />
+                <field name="category" />
+                <field name="language" />
+                <field name="gateway_id" />
+                <field
+                    name="company_id"
+                    options="{'no_create': True}"
+                    groups="base.group_multi_company"
+                />
+                <field
+                    name="state"
+                    decoration-success="state == 'approved'"
+                    decoration-danger="state == 'rejected'"
+                    widget="badge"
+                />
+                <field name="is_supported" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_mail_whatsapp_template_form" model="ir.ui.view">
+        <field name="name">view.mail.whatsapp.template.form</field>
+        <field name="model">mail.whatsapp.template</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        string="Export Template"
+                        name="button_export_template"
+                        type="object"
+                        class="oe_highlight"
+                        invisible="template_uid"
+                    />
+                    <button
+                        string="Sync Template"
+                        name="button_sync_template"
+                        type="object"
+                        invisible="not template_uid"
+                    />
+                    <button
+                        string="Back to draft"
+                        name="button_back2draft"
+                        type="object"
+                        invisible="state == 'draft'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="draft,pending,approved"
+                    />
+                </header>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    invisible="is_supported or not template_uid"
+                >
+                    This template is not supported because has <strong
+                    >variables</strong> or <strong>buttons</strong>.
+                  </div>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="Name"
+                                readonly="state != 'draft'"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field
+                                name="gateway_id"
+                                readonly="state != 'draft'"
+                                options="{'no_create': True}"
+                            />
+                            <field name="category" readonly="state != 'draft'" />
+                            <field name="language" readonly="state != 'draft'" />
+                        </group>
+                        <group>
+                            <field name="header" readonly="state != 'draft'" />
+                            <field name="footer" readonly="state != 'draft'" />
+                            <field name="template_name" />
+                            <field name="template_uid" />
+                            <field
+                                name="company_id"
+                                options="{'no_create': True}"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="is_supported" invisible="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="body" string="Body">
+                            <field name="body" readonly="state != 'draft'" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_mail_whatsapp_template_search" model="ir.ui.view">
+        <field name="name">view.mail.whatsapp.template.search</field>
+        <field name="model">mail.whatsapp.template</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="gateway_id" />
+                <filter
+                    name="group_by_state"
+                    string="State"
+                    context="{'group_by': 'state'}"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mail_whatsapp_template_gateway" model="ir.actions.act_window">
+        <field name="name">WhatsApp Templates</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">mail.whatsapp.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('gateway_id', '=', active_id)]</field>
+        <field name="context">{'default_gateway_id': active_id}</field>
+    </record>
+
+</odoo>
