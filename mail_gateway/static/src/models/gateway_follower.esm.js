@@ -13,9 +13,9 @@ export class GatewayFollower extends Record {
     static insert() {
         return super.insert(...arguments);
     }
-    /** @type {number} */
+    /** @type {Number} */
     id;
-    /** @type {string} */
+    /** @type {String} */
     name;
     partner = Record.one("Persona");
     channel = Record.one("GatewayChannel");

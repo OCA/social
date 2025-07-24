@@ -2,7 +2,6 @@
 <!-- Copyright 2024 Dixmit
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
-
     <record model="ir.ui.view" id="view_res_partner_gateway_channel_form">
         <field name="name">Partner Gateway Channel Form</field>
         <field name="model">res.partner.gateway.channel</field>

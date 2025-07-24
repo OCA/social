@@ -13,11 +13,11 @@ export class Gateway extends Record {
     static insert() {
         return super.insert(...arguments);
     }
-    /** @type {number} */
+    /** @type {Number} */
     id;
-    /** @type {string} */
+    /** @type {String} */
     type;
-    /** @type {string} */
+    /** @type {String} */
     name;
 }
 Gateway.register();
