@@ -41,7 +41,7 @@ class IrAttachment(models.Model):
         if not res_obj:
             return False
 
-        handler = "_process_email_file_{}".format(file_extension)
+        handler = f"_process_email_file_{file_extension}"
         if not hasattr(self, handler):
             handler = "_process_email_file_default"
 

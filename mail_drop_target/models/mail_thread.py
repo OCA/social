@@ -137,7 +137,7 @@ class MailThread(models.AbstractModel):
         force_send=True,
         send_after_commit=True,  # email send
         subtitles=None,
-        **kwargs
+        **kwargs,
     ):
         if self.env.context.get("message_create_from_mail_mail", False):
             return

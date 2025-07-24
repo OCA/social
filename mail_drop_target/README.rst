@@ -17,24 +17,27 @@ Drag & drop emails to Odoo
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_drop_target
+    :target: https://github.com/OCA/social/tree/17.0/mail_drop_target
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_drop_target
+    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-mail_drop_target
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module was written to allow users to drag&drop emails from their desktop to Odoo.
+This module was written to allow users to drag&drop emails from their
+desktop to Odoo.
 
-It supports as well RFC822 .eml files as Outlook .msg (those only if `an extra library <https://github.com/mattgwwalker/msg-extractor>`_ is installed) files.
+It supports as well RFC822 .eml files as Outlook .msg (those only if `an
+extra library <https://github.com/mattgwwalker/msg-extractor>`__ is
+installed) files.
 
-When the mail is dropped to an odoo record, it will automatically send a notification
-of that new message that has been added to all the existing followers. It is possible
-to disable this notification.
+When the mail is dropped to an odoo record, it will automatically send a
+notification of that new message that has been added to all the existing
+followers. It is possible to disable this notification.
 
 **Table of contents**
 
@@ -46,14 +49,17 @@ Usage
 
 To use this module, you need to:
 
-#. save your emails on the desktop / somewhere in the file system
-#. drag them to your browser, and drop them on the chatter of the record you want to attach your email to
+1. save your emails on the desktop / somewhere in the file system
+2. drag them to your browser, and drop them on the chatter of the record
+   you want to attach your email to
 
 Known issues / Roadmap
 ======================
 
-* most mail clients won't allow you to drag mails directly from the mail client, you'll need some plugin for that
-* for corporate environments, it might be feasible to support imap URLs and get the mail in question on the server side
+- most mail clients won't allow you to drag mails directly from the mail
+  client, you'll need some plugin for that
+- for corporate environments, it might be feasible to support imap URLs
+  and get the mail in question on the server side
 
 Bug Tracker
 ===========
@@ -61,7 +67,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_drop_target%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_drop_target%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -69,25 +75,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Therp BV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Holger Brunn <hbrunn@therp.nl>
-* Enric Tobella <etobella@creublanca.es>
-* Lois Rilo <lois.rilo@forgeflow.com>
-* Nguyen Minh Chien <chien@trobz.com>
+- Holger Brunn <hbrunn@therp.nl>
+- Enric Tobella <etobella@creublanca.es>
+- Lois Rilo <lois.rilo@forgeflow.com>
+- Nguyen Minh Chien <chien@trobz.com>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-The migration of this module from 15.0 to 16.0 was financially supported by Camptocamp
+The migration of this module from 15.0 to 16.0 was financially supported
+by Camptocamp
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -99,6 +106,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_drop_target>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/mail_drop_target>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
