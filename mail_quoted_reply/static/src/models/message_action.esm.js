@@ -10,20 +10,29 @@ registerPatch({
             identifying: true,
             inverse: "replyMessage",
         }),
+        replyAllMessageAction: one("MessageActionList", {
+            identifying: true,
+            inverse: "replyAllMessage",
+        }),
 
         messageActionListOwner: {
             compute() {
                 if (this.replyMessageAction) {
                     return this.replyMessageAction;
+                } else if (this.replyAllMessageAction) {
+                    return this.replyAllMessageAction;
                 }
                 return this._super();
             },
         },
         sequence: {
             compute() {
-                return this.messageActionListOwner === this.replyMessageAction
-                    ? 1
-                    : this._super();
+                if (this.messageActionListOwner === this.replyMessageAction) {
+                    return 1;
+                } else if (this.messageActionListOwner === this.replyAllMessageAction) {
+                    return 2;
+                }
+                return this._super();
             },
         },
     },

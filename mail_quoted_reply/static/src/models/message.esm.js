@@ -8,13 +8,13 @@ registerPatch({
     name: "Message",
 
     recordMethods: {
-        messageReply() {
+        messageReply(reply_all = false) {
             var self = this,
                 msg_id = this.id;
             rpc.query({
                 model: "mail.message",
                 method: "reply_message",
-                args: [msg_id],
+                args: [msg_id, reply_all],
             }).then(function (result) {
                 return self.env.services.action.doAction(
                     result,

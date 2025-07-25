@@ -22,5 +22,14 @@ registerPatch({
             },
             inverse: "replyMessageAction",
         }),
+        replyAllMessage: one("MessageAction", {
+            compute() {
+                if (this.message && isMessageTypeValid(this.message.message_type)) {
+                    return {};
+                }
+                return clear();
+            },
+            inverse: "replyAllMessageAction",
+        }),
     },
 });

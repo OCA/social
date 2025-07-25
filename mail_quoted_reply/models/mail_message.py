@@ -40,10 +40,13 @@ class MailMessage(models.Model):
             str_from=_("From"),
         )
 
-    def _default_reply_partner(self):
-        return self.env["res.partner"].find_or_create(self.email_from).ids
+    def _default_reply_partner(self, reply_all: bool = False):
+        partners = self.env["res.partner"].find_or_create(self.email_from)
+        if reply_all:
+            partners = (partners | self.partner_ids) - self.env.user.partner_id
+        return partners.ids
 
-    def reply_message(self):
+    def reply_message(self, reply_all: bool = False):
         action = self.env["ir.actions.actions"]._for_xml_id(
             "mail.action_email_compose_message_wizard"
         )
@@ -57,7 +60,7 @@ class MailMessage(models.Model):
             "is_quoted_reply": True,
             "default_notify": True,
             "force_email": True,
-            "default_partner_ids": self._default_reply_partner(),
+            "default_partner_ids": self._default_reply_partner(reply_all=reply_all),
         }
 
         # If the original message had a subject, we use it as a base for the

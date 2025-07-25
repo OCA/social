@@ -11,6 +11,11 @@ registerPatch({
                 this.messageAction.replyMessageAction
             ) {
                 this.messageAction.messageActionListOwner.message.messageReply();
+            } else if (
+                this.messageAction.messageActionListOwner ===
+                this.messageAction.replyAllMessageAction
+            ) {
+                this.messageAction.messageActionListOwner.message.messageReply(true);
             } else {
                 this._super(ev);
             }
@@ -25,6 +30,11 @@ registerPatch({
                     this.messageAction.replyMessageAction
                 ) {
                     classNames += " fa fa-lg fa-reply";
+                } else if (
+                    this.messageAction.messageActionListOwner ===
+                    this.messageAction.replyAllMessageAction
+                ) {
+                    classNames += " fa fa-lg fa-reply-all";
                 }
                 return classNames;
             },
@@ -36,6 +46,11 @@ registerPatch({
                     this.messageAction.replyMessageAction
                 ) {
                     return this.env._t("Reply");
+                } else if (
+                    this.messageAction.messageActionListOwner ===
+                    this.messageAction.replyAllMessageAction
+                ) {
+                    return this.env._t("Reply All");
                 }
                 return this._super();
             },

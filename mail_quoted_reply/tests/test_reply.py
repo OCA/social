@@ -44,3 +44,56 @@ class TestMessageReply(TransactionCase):
         )
         self.assertTrue(new_message)
         self.assertEqual(1, len(new_message))
+
+    def test_reply_all(self):
+        partner_demo = self.env["res.partner"].create({"name": "demo partner"})
+        partner_sender = self.env["res.partner"].create(
+            {"name": "sender partner", "email": "test@mail.com"}
+        )
+        self.assertFalse(
+            partner_demo.message_ids.filtered(
+                lambda r: r.message_type != "notification"
+            )
+        )
+        self.assertFalse(
+            partner_sender.message_ids.filtered(
+                lambda r: r.message_type != "notification"
+            )
+        )
+        # pylint: disable=C8107
+        recipient = self.env.ref("base.partner_demo")
+        message = partner_demo.message_post(
+            body="demo message",
+            message_type="email",
+            partner_ids=recipient.ids,
+            author_id=partner_sender.id,
+        )
+        partner_demo.invalidate_recordset()
+        self.assertIn(
+            message,
+            partner_demo.message_ids.filtered(
+                lambda r: r.message_type != "notification"
+            ),
+        )
+        self.assertFalse(
+            partner_demo.message_ids.filtered(
+                lambda r: r.message_type != "notification" and r != message
+            )
+        )
+        action = message.reply_message(reply_all=True)
+        wizard = (
+            self.env[action["res_model"]].with_context(**action["context"]).create({})
+        )
+        self.assertTrue(wizard.partner_ids)
+        expected_partners = partner_sender | recipient
+        self.assertEqual(expected_partners, wizard.partner_ids)
+        # the onchange in the composer isn't triggered in tests, so we check for the
+        # correct quote in the context
+        email_quote = re.search("<p>.*?</p>", wizard._context["quote_body"]).group()
+        self.assertEqual("<p>demo message</p>", email_quote)
+        wizard.action_send_mail()
+        new_message = partner_demo.message_ids.filtered(
+            lambda r: r.message_type != "notification" and r != message
+        )
+        self.assertTrue(new_message)
+        self.assertEqual(1, len(new_message))
