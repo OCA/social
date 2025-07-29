@@ -1,25 +1,29 @@
-/** @odoo-module **/
+/* @odoo-module */
+import {Chatter} from "@mail/core/web/chatter";
+import {patch} from "@web/core/utils/patch";
+import {useAttachmentUploader} from "@mail/core/common/attachment_uploader_hook";
+import {AttachmentUploadService} from "@mail/core/common/attachment_upload_service";
 
-import {registerPatch} from "@mail/model/model_core";
-
-registerPatch({
-    name: "FileUploader",
-    recordMethods: {
-        /**
-         * @override
-         */
-        _onAttachmentUploaded({attachmentData}) {
-            if (attachmentData.email_upload) {
-                const chatter =
-                    this.chatterOwner ||
-                    (this.attachmentBoxView && this.attachmentBoxView.chatter) ||
-                    (this.activityView && this.activityView.activityBoxView.chatter);
-                if (chatter && chatter.exists()) {
-                    chatter.reloadParentView();
-                }
-                return;
+patch(AttachmentUploadService.prototype, {
+    async uploadFile(hooker, file, options) {
+        return super.uploadFile(hooker, file, options).then((result) => {
+            if (result?.email_upload === 1) {
+                hooker.onFileUploaded?.("email_upload");
             }
-            return this._super.apply(this, arguments);
-        },
+            return result;
+        });
+    },
+});
+
+patch(Chatter.prototype, {
+    setup() {
+        super.setup();
+        this.attachmentUploader = useAttachmentUploader(this.thread, {
+            onFileUploaded: (file) => {
+                if (file === "email_upload") {
+                    this.reloadParentView?.();
+                }
+            },
+        });
     },
 });

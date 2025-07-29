@@ -6,10 +6,10 @@ from odoo.exceptions import AccessError, UserError
 from odoo.http import request
 from odoo.tools.translate import _
 
-from odoo.addons.mail.controllers.discuss import DiscussController
+from odoo.addons.mail.controllers import attachment
 
 
-class DiscussControllerInherit(DiscussController):
+class AttachmentController(attachment.AttachmentController):
     @http.route("/mail/attachment/upload", methods=["POST"], type="http", auth="public")
     def mail_attachment_upload(
         self, ufile, thread_id, thread_model, is_pending=False, **kwargs
@@ -26,10 +26,10 @@ class DiscussControllerInherit(DiscussController):
         )
 
     def mail_attachment_upload_email(self, ufile, thread_id, thread_model):
-        channel_member = request.env["mail.channel.member"]
-        if thread_model == "mail.channel":
+        channel_member = request.env["discuss.channel.member"]
+        if thread_model == "discuss.channel":
             channel_member = request.env[
-                "mail.channel.member"
+                "discuss.channel.member"
             ]._get_as_sudo_from_request_or_raise(
                 request=request, channel_id=int(thread_id)
             )
