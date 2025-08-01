@@ -35,14 +35,18 @@ class MailActivity(models.Model):
     def create(self, vals_list):
         # Differently from the previous odoo version,
         # the create method is called from (mail.activity.mixin).activity_schedule()
-        # and on this method we are forcing the user_id to be the current user from
-        # odoo import api, fields, models the default one linked to the activity type.
+        # and on this method, if no user is provided, we are forcing the user_id to be
+        # the default one linked to the activity type or the current user.
         # We don't want this behavior because using the team_id, we want to assign the
-        # activity to the whole team.
+        # activity to the whole team, so if no user is provided we want to keep the
+        # field empty.
+        if not self.env.context.get("remove_user_id", False):
+            # If no context key, we keep the standard behavior
+            return super().create(vals_list)
         for vals in vals_list:
             # we need to be sure that we are in a context where the team_id is set,
             # and we don't want to use user_id
-            if "team_id" in vals:
+            if vals.get("team_id"):
                 # using team, we have user_id = team_user_id,
                 # so if we don't have a user_team_id we don't want user_id too
                 if "user_id" in vals and not vals.get("team_user_id", False):
