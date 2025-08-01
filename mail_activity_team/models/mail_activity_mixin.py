@@ -46,6 +46,7 @@ class MailActivityMixin(models.AbstractModel):
         """
         if self.env.context.get("force_activity_team"):
             act_values["team_id"] = self.env.context["force_activity_team"].id
+        user_id = act_values.get("user_id")
         if "team_id" not in act_values:
             if act_type_xmlid:
                 activity_type = self.sudo().env.ref(act_type_xmlid)
@@ -65,7 +66,6 @@ class MailActivityMixin(models.AbstractModel):
                         {"user_id": activity_type.default_team_id.member_ids[:1].id}
                     )
             else:
-                user_id = act_values.get("user_id")
                 if user_id:
                     team = (
                         self.env["mail.activity"]
@@ -75,6 +75,12 @@ class MailActivityMixin(models.AbstractModel):
                         ._get_default_team_id(user_id=user_id)
                     )
                     act_values.update({"team_id": team.id})
+        if not user_id:
+            # In standard, if no user_id is provided, a default one is set by this
+            # method. Here, the user_id is not required anymore, so we don't want to
+            # add a default user if none is set in `act_values`. We manage it by a
+            # context key, checked in the ``create`` method of the mail.activity
+            self = self.with_context(remove_user_id=True)
         return super().activity_schedule(
             act_type_xmlid=act_type_xmlid,
             date_deadline=date_deadline,
