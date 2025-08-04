@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-<!--
+    <!--
     VIEWS
 -->
 
@@ -58,7 +58,9 @@
                         nolabel="1"
                     >
                         <field name="res_name" invisible="1" />
-                        <h1><field name="related_model_instance" /></h1>
+                        <h1>
+                            <field name="related_model_instance" />
+                        </h1>
                     </button>
                     <field name="activity_category" invisible="1" />
                     <field name="res_model" invisible="1" />
@@ -95,7 +97,6 @@
                                 widget="many2one_avatar_user"
                                 options="{'no_open': True}"
                             />
-
                         </group>
                     </group>
                     <group
@@ -112,14 +113,13 @@
         </field>
     </record>
 
-
     <!-- TREE VIEW -->
     <record id="mail_activity_view_tree" model="ir.ui.view">
-        <field name="name">mail.activity.boards.view.tree</field>
+        <field name="name">mail.activity.boards.view.list</field>
         <field name="model">mail.activity</field>
         <field name="inherit_id" ref="mail.mail_activity_view_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="default_order" />
                 <attribute
                     name="decoration-danger"
@@ -140,13 +140,12 @@
         </field>
     </record>
 
-
     <!-- KANBAN VIEW -->
-     <record id="mail_activity_view_kanban" model="ir.ui.view">
-         <field name="name">mail.activity.boards.view.kanban</field>
-         <field name="model">mail.activity</field>
-         <field name="priority" eval="10" />
-         <field name="arch" type="xml">
+    <record id="mail_activity_view_kanban" model="ir.ui.view">
+        <field name="name">mail.activity.boards.view.kanban</field>
+        <field name="model">mail.activity</field>
+        <field name="priority" eval="10" />
+        <field name="arch" type="xml">
             <kanban
                 default_group_by="activity_type_id"
                 class="_kanban_small_column o_opportunity_kanban"
@@ -167,7 +166,7 @@
                 <field name="activity_type_id" />
                 <field name="activity_category" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div t-attf-class="oe_kanban_content oe_kanban_global_click">
                             <div class="oe_kanban_content">
                                 <div>
@@ -179,9 +178,9 @@
                                     </strong>
                                 </div>
                                 <div>
-                                    <strong class="o_kanban_record_title"><field
-                                            name="res_name"
-                                        /></strong>
+                                    <strong class="o_kanban_record_title">
+                                        <field name="res_name" />
+                                    </strong>
                                 </div>
 
                                 <div class="o_kanban_record_bottom">
@@ -191,10 +190,9 @@
                                             t-value="new Date(record.date_deadline.raw_value)"
                                         />
                                         <t t-if="act_date &lt; (new Date())">
-                                            <span t-attf-class="text-danger"><i
-                                                    title="date"
-                                                    class="fa fa-clock-o"
-                                                /></span>
+                                            <span t-attf-class="text-danger">
+                                                <i title="date" class="fa fa-clock-o" />
+                                            </span>
                                             <t
                                                 t-if="record.activity_category.raw_value!='meeting'"
                                             >
@@ -211,10 +209,9 @@
                                             </t>
                                         </t>
                                         <t t-else="">
-                                            <span><i
-                                                    title="date"
-                                                    class="fa fa-clock-o"
-                                                /></span>
+                                            <span>
+                                                <i title="date" class="fa fa-clock-o" />
+                                            </span>
                                             <t
                                                 t-if="record.activity_category.raw_value!='meeting'"
                                             >
@@ -228,13 +225,9 @@
                                         </t>
                                     </div>
                                     <div class="oe_kanban_bottom_right">
-                                        <img
-                                            t-att-src="kanban_image('res.users', 'avatar_128', record.user_id.raw_value)"
-                                            t-att-title="record.user_id.value"
-                                            t-att-alt="record.user_id.value"
-                                            width="24"
-                                            height="24"
-                                            class="oe_kanban_avatar"
+                                        <field
+                                            name="user_id"
+                                            widget="many2one_avatar_user"
                                         />
                                     </div>
                                 </div>
@@ -243,9 +236,8 @@
                     </t>
                 </templates>
             </kanban>
-         </field>
+        </field>
     </record>
-
 
     <!-- SEARCH VIEW -->
     <record id="mail_activity_view_search" model="ir.ui.view">
@@ -260,7 +252,7 @@
                 <field name="res_name" string="Origin" />
             </xpath>
 
-            <xpath expr='//filter[@name="activities_overdue"]' position='before'>
+            <xpath expr='//filter[@name="filter_date_deadline_past"]' position='before'>
                 <filter
                     string="Act. next month"
                     name="activities_month"
@@ -288,12 +280,10 @@
                     context="{'group_by': 'res_model_id'}"
                 />
             </xpath>
-
         </field>
     </record>
 
-
-<!--
+    <!--
     ACTION
 -->
     <record model="ir.actions.act_window" id="open_boards_activities">
@@ -306,7 +296,7 @@
             name="view_ids"
             eval="[(5, 0, 0),
                           (0, 0, {'view_mode': 'kanban', 'view_id': ref('mail_activity_view_kanban')}),
-                          (0, 0, {'view_mode': 'tree', 'view_id': ref('mail_activity_view_tree')}),
+                          (0, 0, {'view_mode': 'list', 'view_id': ref('mail_activity_view_tree')}),
                           (0, 0, {'view_mode': 'form', 'view_id': ref('mail_activity_view_form_board')}),
                           (0, 0, {'view_mode': 'calendar'}),
                           (0, 0, {'view_mode': 'pivot'}),
@@ -315,8 +305,7 @@
         <field name="search_view_id" ref="mail_activity_view_search" />
     </record>
 
-
-<!--
+    <!--
 Menus
 -->
     <menuitem
@@ -327,5 +316,4 @@ Menus
         groups="group_show_mail_activity_board"
         sequence="1"
     />
-
 </odoo>
