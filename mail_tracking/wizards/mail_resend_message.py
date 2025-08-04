@@ -28,6 +28,9 @@ class MailResendMessage(models.TransientModel):
                     [("notification_id", "=", notification.id)]
                 )
                 if existing_resend_partner:
+                    rec["partner_ids"].extend(
+                        [Command.link(existing_resend_partner.id)]
+                    )
                     continue
                 # Create only resends that mail.notification didn't prepare already
                 partner_values.append(
@@ -56,4 +59,23 @@ class MailResendMessage(models.TransientModel):
                     lambda x, to_send=to_send: x.partner_id in to_send
                 )
                 tracking_ids.sudo().write({"state": False})
-        return super().resend_mail_action()
+        res = super().resend_mail_action()
+        failed_states = self.env["mail.message"].get_failed_states()
+        for wizard in self:
+            to_send = wizard.partner_ids.filtered("resend").mapped("partner_id")
+            if to_send:
+                tracking_ids = wizard.mail_message_id.mail_tracking_ids.filtered(
+                    lambda x, to_send=to_send, failed_states=failed_states: x.partner_id
+                    in to_send
+                    and x.state in failed_states
+                )
+                # Send bus notifications to update Discuss
+                self.env["bus.bus"]._sendone(
+                    self.env.user.partner_id,
+                    "mail.tracking/toggle_tracking_status",
+                    {
+                        "message_ids": self.mail_message_id.ids,
+                        "still_failed": bool(tracking_ids),
+                    },
+                )
+        return res
