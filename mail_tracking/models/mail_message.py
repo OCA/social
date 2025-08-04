@@ -270,6 +270,11 @@ class MailMessage(models.Model):
         self.check_access_rule("read")
         self.mail_tracking_needs_action = False
         self._notify_message_notification_update()
+        self.env["bus.bus"]._sendone(
+            self.env.user.partner_id,
+            "mail.tracking/toggle_tracking_status",
+            {"message_ids": self.ids},
+        )
 
     @api.model
     def get_failed_count(self):
