@@ -277,6 +277,11 @@ class MailMessage(models.Model):
         )
 
     @api.model
+    def set_all_as_reviewed(self):
+        unreviewed_messages = self.search([("is_failed_message", "=", True)])
+        unreviewed_messages.set_need_action_done()
+
+    @api.model
     def get_failed_count(self):
         """Gets the number of failed messages used on discuss mailbox item"""
         return self.search_count([("is_failed_message", "=", True)])
