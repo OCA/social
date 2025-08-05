@@ -1,15 +1,13 @@
 # Copyright 2018 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestMailActivityPartner(TransactionCase):
+class TestMailActivityPartner(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # disable tracking test suite wise
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.user_model = cls.env["res.users"].with_context(no_reset_password=True)
+        cls.user_model = cls.env["res.users"]
 
         cls.user_admin = cls.env.ref("base.user_root")
 
@@ -70,7 +68,6 @@ class TestMailActivityPartner(TransactionCase):
         )
 
     def test_partner_for_activity(self):
-
         self.act1 = (
             self.env["mail.activity"]
             .sudo()
