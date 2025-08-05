@@ -19,17 +19,20 @@ class ThreadController(mail_thread.ThreadController):
         result = super().mail_thread_messages(
             thread_model, thread_id, search_term, before, after, around, limit
         )
-
-        result["data"].setdefault("mail.message", [])
-
         domain = [
             ("res_id", "=", int(thread_id)),
             ("model", "=", thread_model),
             ("message_type", "!=", "user_notification"),
         ]
-
-        message = request.env["mail.message"]._generate_messsage(domain)
-
+        result_data = result.get("data", {})
+        has_messages = request.env["mail.message"]._has_messages_in_record(domain)
+        if not result_data and has_messages:
+            return result
+        mail_messages = result_data.get("mail.message", [])
+        if len(mail_messages) == 1 and not mail_messages[0].get("body"):
+            return result
+        result["data"].setdefault("mail.message", [])
+        message = request.env["mail.message"]._generate_message(domain)
         if message:
             result["data"]["mail.message"].append(message)
             result["messages"].append(message["id"])

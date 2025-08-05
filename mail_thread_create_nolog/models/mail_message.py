@@ -17,7 +17,7 @@ class MailMessage(models.AbstractModel):
         ]
 
     @api.model
-    def _generate_messsage(self, domain):
+    def _generate_message(self, domain):
         # Generate a creation message only if messages are fetched for a record.
         # In that case there is no specific record implied, so no need to generate the
         # the message.
@@ -81,3 +81,7 @@ class MailMessage(models.AbstractModel):
         if model and res_id:
             return self.env[model].browse(res_id).exists()
         return self.browse()
+
+    @api.model
+    def _has_messages_in_record(self, domain):
+        return self.search_count(domain) > 0
