@@ -33,7 +33,7 @@ class GatewayController(Controller):
                     ],
                 )
             return (
-                request.env["mail.gateway.%s" % usage]
+                request.env[f"mail.gateway.{usage}"]
                 .with_user(bot_data["webhook_user_id"])
                 .with_company(bot_data["company_id"])
                 ._receive_get_update(bot_data, request, **kwargs)
@@ -55,7 +55,7 @@ class GatewayController(Controller):
             request.httprequest.get_data().decode(request.httprequest.charset)
         )
         dispatcher = (
-            request.env["mail.gateway.%s" % usage]
+            request.env[f"mail.gateway.{usage}"]
             .with_user(bot_data["webhook_user_id"])
             .with_context(no_gateway_notification=True)
         )

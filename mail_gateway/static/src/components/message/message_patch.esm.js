@@ -1,6 +1,5 @@
-/* @odoo-module */
-import {_t} from "@web/core/l10n/translation";
 import {Message} from "@mail/core/common/message";
+import {_t} from "@web/core/l10n/translation";
 import {patch} from "@web/core/utils/patch";
 
 patch(Message.prototype, {

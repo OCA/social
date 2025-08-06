@@ -79,11 +79,11 @@ class MailGateway(models.Model):
     def set_webhook(self):
         self.ensure_one()
         if self.can_set_webhook:
-            self.env["mail.gateway.%s" % self.gateway_type]._set_webhook(self)
+            self.env[f"mail.gateway.{self.gateway_type}"]._set_webhook(self)
 
     def remove_webhook(self):
         self.ensure_one()
-        self.env["mail.gateway.%s" % self.gateway_type]._remove_webhook(self)
+        self.env[f"mail.gateway.{self.gateway_type}"]._remove_webhook(self)
 
     def update_webhook(self):
         self.ensure_one()

@@ -1,7 +1,6 @@
-/** @odoo-module **/
-import {patch} from "@web/core/utils/patch";
 import {Composer} from "@mail/core/common/composer";
 import {_t} from "@web/core/l10n/translation";
+import {patch} from "@web/core/utils/patch";
 import {prettifyMessageContent} from "@mail/utils/common/format";
 
 patch(Composer.prototype, {
@@ -26,7 +25,7 @@ patch(Composer.prototype, {
         if (this.props.type !== "gateway") {
             return isSendButtonDisabled;
         }
-        return isSendButtonDisabled || !this.thread?.gateway_notifications.length;
+        return isSendButtonDisabled || !this.thread?.gateway_notifications?.length;
     },
     onFocusin() {
         super.onFocusin();
@@ -99,7 +98,7 @@ patch(Composer.prototype, {
                 this.clear();
                 this.props.messageToReplyTo?.cancel();
                 if (this.thread) {
-                    this.threadService.fetchNewMessages(this.thread);
+                    this.thread?.fetchNewMessages();
                 }
             },
         };

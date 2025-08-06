@@ -1,8 +1,7 @@
-/* @odoo-module */
 import {assignDefined, assignIn} from "@mail/utils/common/misc";
-import {patch} from "@web/core/utils/patch";
 import {Record} from "@mail/core/common/record";
 import {Thread} from "@mail/core/common/thread_model";
+import {patch} from "@web/core/utils/patch";
 import {url} from "@web/core/utils/urls";
 
 patch(Thread, {
@@ -25,24 +24,24 @@ patch(Thread.prototype, {
         this.gateway_followers = Record.many("Persona");
     },
     get isChatChannel() {
-        return this.type === "gateway" || super.isChatChannel;
+        return this.channel_type === "gateway" || super.isChatChannel;
     },
     get hasMemberList() {
-        return this.type === "gateway" || super.hasMemberList;
+        return this.channel_type === "gateway" || super.hasMemberList;
     },
-    get imgUrl() {
-        if (this.type !== "gateway") {
-            return super.imgUrl;
+    get avatarUrl() {
+        if (this.channel_type !== "gateway") {
+            return super.avatarUrl;
         }
         return url(
-            `/discuss/channel/${this.id}/avatar_128`,
+            `/web/image/discuss.channel/${this.id}/avatar_128`,
             assignDefined({}, {unique: this.avatarCacheKey})
         );
     },
     /** @param {Object} data */
     update(data) {
         super.update(data);
-        if ("gateway_id" in data && this.type === "gateway") {
+        if ("gateway_id" in data && this.channel_type === "gateway") {
             this.gateway = data.gateway_id;
         }
     },

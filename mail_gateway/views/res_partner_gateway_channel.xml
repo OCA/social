@@ -22,11 +22,11 @@
         <field name="name">Partner Gateway Channel Tree</field>
         <field name="model">res.partner.gateway.channel</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="partner_id" />
                 <field name="gateway_id" />
                 <field name="gateway_token" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -45,7 +45,7 @@
     <record model="ir.actions.act_window" id="res_partner_gateway_channel_act_window">
         <field name="name">Gateway Partner Channels</field>
         <field name="res_model">res.partner.gateway.channel</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>

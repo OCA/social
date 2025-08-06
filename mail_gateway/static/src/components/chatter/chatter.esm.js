@@ -1,7 +1,6 @@
-/** @odoo-module **/
-import {Chatter} from "@mail/core/web/chatter";
-import {patch} from "@web/core/utils/patch";
+import {Chatter} from "@mail/chatter/web_portal/chatter";
 import {GatewayFollower} from "../gateway_follower/gateway_follower.esm";
+import {patch} from "@web/core/utils/patch";
 
 patch(Chatter, {
     components: {...Chatter.components, GatewayFollower},

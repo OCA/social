@@ -1,4 +1,3 @@
-/* @odoo-module */
 import {Message} from "@mail/core/common/message_model";
 import {patch} from "@web/core/utils/patch";
 import {url} from "@web/core/utils/urls";

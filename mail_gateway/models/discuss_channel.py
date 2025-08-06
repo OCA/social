@@ -5,6 +5,8 @@ import base64
 
 from odoo import api, fields, models
 
+from odoo.addons.mail.tools.discuss import Store
+
 
 class MailChannel(models.Model):
     _inherit = "discuss.channel"
@@ -26,23 +28,23 @@ class MailChannel(models.Model):
         required=False,
     )
 
-    def _compute_is_chat(self):
-        res = super()._compute_is_chat()
+    def _to_store(self, store: Store):
+        result = super()._to_store(store)
+        if not self:
+            return result
         for record in self:
-            if record.channel_type == "gateway":
-                record.is_chat = True
-        return res
-
-    def _channel_info(self):
-        result = super()._channel_info()
-        for record, item in zip(self, result, strict=True):
-            item["gateway"] = {
-                "id": record.gateway_id.id,
-                "name": record.gateway_id.name,
-                "type": record.gateway_id.gateway_type,
-            }
-            item["gateway_name"] = record.gateway_id.name
-            item["gateway_id"] = record.gateway_id.id
+            store.add(
+                record,
+                {
+                    "gateway": {
+                        "id": record.gateway_id.id,
+                        "name": record.gateway_id.name,
+                        "type": record.gateway_id.gateway_type,
+                    },
+                    "gateway_name": record.gateway_id.name,
+                    "gateway_id": record.gateway_id.id,
+                },
+            )
         return result
 
     def _generate_avatar_gateway(self):
@@ -58,9 +60,13 @@ class MailChannel(models.Model):
         return base64.b64encode(avatar.encode())
 
     @api.returns("mail.message", lambda value: value.id)
-    def message_post(self, *args, gateway_type=False, **kwargs):
+    def message_post(
+        self, *, message_type="notification", gateway_type=False, **kwargs
+    ):
         message = super().message_post(
-            *args, gateway_type=gateway_type or self.gateway_id.gateway_type, **kwargs
+            message_type=message_type,
+            gateway_type=gateway_type or self.gateway_id.gateway_type,
+            **kwargs,
         )
         if (
             self.gateway_id

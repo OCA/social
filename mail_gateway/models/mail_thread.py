@@ -2,6 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import models
 
+from odoo.addons.mail.tools.discuss import Store
+
 
 class MailThread(models.AbstractModel):
     _inherit = "mail.thread"
@@ -68,14 +70,23 @@ class MailThread(models.AbstractModel):
             return result
         return super()._notify_get_recipients(message, msg_vals, **kwargs)
 
-    def _get_mail_thread_data(self, request_list):
-        data = super()._get_mail_thread_data(request_list)
-        data["gateway_followers"] = [
-            f["partner"]
-            for f in data.get("followers", [])
-            if f["partner"]["gateway_channels"]
-        ]
-        return data
+    def _thread_to_store(self, store: Store, /, *, fields=None, request_list=None):
+        res = super()._thread_to_store(store, fields=fields, request_list=request_list)
+        for record in self:
+            followers = record.message_get_followers()
+            if "mail.followers" in followers:
+                store.add(
+                    record,
+                    {
+                        "gateway_followers": [
+                            f["partner"]
+                            for f in followers["mail.followers"]
+                            if f["partner"]["gateway_channels"]
+                        ]
+                    },
+                    as_thread=True,
+                )
+        return res
 
     def _check_can_update_message_content(self, messages):
         # We can delete the messages comming from a gateway on not channels
@@ -114,4 +125,9 @@ class MailThread(models.AbstractModel):
                         "gateway_thread_data": gateway_msg.sudo().gateway_thread_data,
                     },
                 )
+        return result
+
+    def _get_allowed_message_post_params(self):
+        result = super()._get_allowed_message_post_params()
+        result.add("gateway_notifications")
         return result

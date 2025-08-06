@@ -28,7 +28,7 @@
                 <attribute name="required">0</attribute>
             </field>
             <xpath
-                expr="//span[@name='document_followers_text']/.."
+                expr="//widget[@name='mail_composer_recipient_list']/.."
                 position="attributes"
             >
                 <attribute name="invisible">True</attribute>

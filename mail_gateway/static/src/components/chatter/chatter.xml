@@ -22,7 +22,10 @@
                 <span> Gateway message</span>
             </button>
         </xpath>
-        <xpath expr="//SuggestedRecipientsList" position="before">
+        <xpath
+            expr="//t[@t-if='state.composerType']/SuggestedRecipientsList"
+            position="before"
+        >
             <t
                 t-if="state.composerType === 'gateway' and state.thread.gateway_followers.length"
             >
@@ -45,10 +48,13 @@
             </t>
             <t t-set="type" t-value="type === 'gateway' ? 'gateway' : type" />
         </xpath>
-        <xpath expr="//SuggestedRecipientsList" position="attributes">
+        <xpath
+            expr="//t[@t-if='state.composerType']/SuggestedRecipientsList"
+            position="attributes"
+        >
             <attribute
                 name="t-if"
-            >props.hasFollowers and state.composerType !== 'note' and state.composerType !== 'gateway'</attribute>
+            >state.composerType !== 'note' and state.thread.recipients.length > 0 and state.composerType !== 'gateway'</attribute>
         </xpath>
     </t>
 </templates>

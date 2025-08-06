@@ -3,6 +3,8 @@
 
 from odoo import fields, models
 
+from odoo.addons.mail.tools.discuss import Store
+
 
 class MailNotification(models.Model):
     _inherit = "mail.notification"
@@ -24,17 +26,22 @@ class MailNotification(models.Model):
     def _set_read_gateway(self):
         self.sudo().write({"is_read": True, "read_date": fields.Datetime.now()})
 
-    def _notification_format(self):
-        result = super()._notification_format()
-        for record, formatted_value in zip(self, result, strict=True):
-            formatted_value["gateway_type"] = record.gateway_type
-            formatted_value["channel_name"] = record.gateway_channel_id.name
+    def _to_store(self, store: Store, /):
+        result = super()._to_store(store)
+        for record in self:
+            store.add(
+                record,
+                {
+                    "gateway_type": record.gateway_type,
+                    "channel_name": record.gateway_channel_id.name,
+                },
+            )
         return result
 
     def send_gateway(self, auto_commit=False, raise_exception=False, parse_mode="HTML"):
         for record in self:
             gateway = record.gateway_channel_id.gateway_id
-            self.env["mail.gateway.%s" % gateway.gateway_type]._send(
+            self.env[f"mail.gateway.{gateway.gateway_type}"]._send(
                 gateway,
                 record,
                 auto_commit=auto_commit,
