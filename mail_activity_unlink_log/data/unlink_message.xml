@@ -13,20 +13,23 @@
             <div>
                 <p>
                     <span
-                        t-attf-class="fa #{activity.activity_type_id.icon} fa-fw"
-                    /><span t-field="activity.activity_type_id.name" /> deleted
+                    t-attf-class="fa #{activity.activity_type_id.icon} fa-fw"
+                /><span t-field="activity.activity_type_id.name" /> deleted
                     <t t-if="display_assignee"> (originally assigned to <span
-                            t-field="activity.user_id.name"
-                        />)</t>
+                    t-field="activity.user_id.name"
+                />)</t>
                     <span t-if="activity.summary">: </span><span
-                        t-if="activity.summary"
-                        t-field="activity.summary"
-                    />
+                    t-if="activity.summary"
+                    t-field="activity.summary"
+                />
                 </p>
                 <t
                     t-if="activity.note and activity.note != '&lt;p&gt;&lt;br&gt;&lt;/p&gt;'"
-                ><!-- <p></br></p> -->
-                    <div class="o_mail_note_title"><strong>Original note:</strong></div>
+                >
+                    <!-- <p></br></p> -->
+                    <div class="o_mail_note_title">
+                        <strong>Original note:</strong>
+                    </div>
                     <div t-field="activity.note" />
                 </t>
             </div>

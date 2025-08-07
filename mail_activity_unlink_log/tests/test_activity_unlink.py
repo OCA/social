@@ -1,14 +1,14 @@
 # Copyright 2023 CreuBlanca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestActivityUnlink(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.partner = self.env["res.partner"].create({"name": "Partner"})
-        self.unlink_subtype = self.env.ref(
+class TestActivityUnlink(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.unlink_subtype = cls.env.ref(
             "mail_activity_unlink_log.mt_activities_unlink"
         )
 

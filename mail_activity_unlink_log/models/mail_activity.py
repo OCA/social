@@ -16,9 +16,9 @@ class MailActivity(models.Model):
         if not self.env.context.get("activity_unlink_no_message"):
             for activity in self:
                 record = self.env[activity.res_model].browse(activity.res_id)
-                record.message_post_with_view(
+                record.message_post_with_source(
                     "mail_activity_unlink_log.message_activity_unlink",
-                    values={
+                    render_values={
                         "activity": activity,
                         "display_assignee": activity.user_id != self.env.user,
                     },
