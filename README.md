@@ -54,6 +54,7 @@ addon | version | maintainers | summary
 [mail_quoted_reply](mail_quoted_reply/) | 15.0.1.0.3 |  | Make a reply using a message
 [mail_restrict_follower_selection](mail_restrict_follower_selection/) | 15.0.1.0.0 |  | Define a domain from which followers can be selected
 [mail_save_as_template_security](mail_save_as_template_security/) | 15.0.1.0.0 | <a href='https://github.com/tisho99'><img src='https://github.com/tisho99.png' width='32' height='32' style='border-radius:50%;' alt='tisho99'/></a> | Restrict save as new template button from the send email wizard
+[mail_send_confirmation](mail_send_confirmation/) | 15.0.1.0.0 |  | Mail Send Confirmation
 [mail_send_copy](mail_send_copy/) | 15.0.1.0.1 |  | Send to you a copy of each mail sent by Odoo
 [mail_show_follower](mail_show_follower/) | 15.0.1.4.1 | <a href='https://github.com/yajo'><img src='https://github.com/yajo.png' width='32' height='32' style='border-radius:50%;' alt='yajo'/></a> | Show CC document followers in mails.
 [mail_tracking](mail_tracking/) | 15.0.3.1.0 |  | Email tracking system for all mails sent
