@@ -14,13 +14,13 @@ class TestBaseSearchMailContent(TransactionCase):
         cls.partner_test = cls.Partner.create({"name": "Test Partner"})
 
     def test_mail_message_get_views(self):
-        res = self.env["mail.channel"].get_views(
+        res = self.env["discuss.channel"].get_views(
             [[False, "search"]],
             {"load_fields": False, "load_filters": True, "toolbar": True},
         )
         self.assertIn(
             "message_search",
-            res["models"]["mail.channel"],
+            res["models"]["discuss.channel"],
             "message_search field was not detected",
         )
 
