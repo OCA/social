@@ -20,6 +20,7 @@
         "views/mail_gateway.xml",
         "views/res_partner_gateway_channel.xml",
         "views/mail_guest_views.xml",
+        "views/res_users_settings_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates>
     <t
-        t-name="mail_gateway.DiscussSidebarChannel"
+        t-name="mail_gateway.DiscussSidebarChannel.main"
         t-inherit="mail.DiscussSidebarChannel.main"
         t-inherit-mode="extension"
     >

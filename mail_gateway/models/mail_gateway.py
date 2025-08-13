@@ -98,13 +98,13 @@ class MailGateway(models.Model):
             or "webhook_secret" in vals
             or "webhook_user_id" in vals
         ):
-            self.clear_caches()
+            self.env.registry.clear_cache()
         return res
 
     @api.model_create_multi
     def create(self, mvals):
         res = super().create(mvals)
-        self.clear_caches()
+        self.env.registry.clear_cache()
         return res
 
     @api.model

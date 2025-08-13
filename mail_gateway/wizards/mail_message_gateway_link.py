@@ -31,11 +31,9 @@ class MailMessageGatewayLink(models.TransientModel):
             gateway_notifications=[],  # Avoid sending notifications
         )
         self.message_id.gateway_message_id = new_message
-        self.env["bus.bus"]._sendone(
-            self.env.user.partner_id,
-            "mail.message/insert",
+        self.message_id._bus_send_store(
+            self.message_id,
             {
-                "id": self.message_id.id,
                 "gateway_thread_data": self.message_id.sudo().gateway_thread_data,
             },
         )

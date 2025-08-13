@@ -58,6 +58,11 @@ the partner. To use this, we just need to use the
 It is recomended to enable chatter notification to all users that will
 receive messages from gateways.
 
+Known issues / Roadmap
+======================
+
+1. Make possible to schedule gateway messages.
+
 Bug Tracker
 ===========
 

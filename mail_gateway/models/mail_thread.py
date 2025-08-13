@@ -117,11 +117,9 @@ class MailThread(models.AbstractModel):
             # Unlink the message
             for gateway_msg in message.gateway_message_ids:
                 gateway_msg.gateway_message_id = False
-                self.env["bus.bus"]._sendone(
-                    self.env.user.partner_id,
-                    "mail.message/insert",
+                gateway_msg._bus_send_store(
+                    gateway_msg,
                     {
-                        "id": gateway_msg.id,
                         "gateway_thread_data": gateway_msg.sudo().gateway_thread_data,
                     },
                 )

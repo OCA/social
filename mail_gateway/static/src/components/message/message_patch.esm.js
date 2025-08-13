@@ -57,10 +57,11 @@ patch(Message.prototype, {
         });
     },
     openGatewayThreadRecord() {
-        const gateway_thread = this.threadService.getThread(
-            this.message.gateway_thread_data.model,
-            this.message.gateway_thread_data.id
-        );
-        this.threadService.open(gateway_thread);
+        this.store.env.services.action.doAction({
+            type: "ir.actions.act_window",
+            res_id: this.message.gateway_thread_data.id,
+            res_model: this.message.gateway_thread_data.model,
+            views: [[false, "form"]],
+        });
     },
 });

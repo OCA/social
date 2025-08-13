@@ -48,7 +48,7 @@ class MailGatewayAbstract(models.AbstractModel):
     def _get_channel_vals(self, gateway, token, update):
         author = self._get_author(gateway, update)
         members = [
-            Command.create({"partner_id": partner.id, "is_pinned": True})
+            Command.create({"partner_id": partner.id, "unpin_dt": False})
             for partner in gateway.member_ids.partner_id
         ]
         if author:

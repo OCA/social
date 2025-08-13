@@ -107,6 +107,7 @@ class MailMessage(models.Model):
                 {
                     "gateway_type": record.gateway_type,
                     "gateway_channel_data": record.gateway_channel_data,
+                    "gateway_thread_data": record.gateway_thread_data,
                 },
             )
         return result
@@ -128,17 +129,6 @@ class MailMessage(models.Model):
                 "gateway_type": gateway_channel_id.gateway_id.gateway_type,
             }
         )
-        # self.env["bus.bus"]._sendone(
-        #     self.env.user.partner_id,
-        #     "mail.message/insert",
-        #     {
-        #         "id": self.id,
-        #         "gateway_type": self.gateway_type,
-        #         "notifications": self.sudo()
-        #         .notification_ids._filtered_for_web_client()
-        #         ._notification_format(),
-        #     },
-        # )
         return {}
 
     def _get_gateway_thread_message_vals(self):

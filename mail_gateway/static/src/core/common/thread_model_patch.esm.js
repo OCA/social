@@ -45,4 +45,10 @@ patch(Thread.prototype, {
             this.gateway = data.gateway_id;
         }
     },
+    _computeDiscussAppCategory() {
+        if (this.channel_type === "gateway") {
+            return this.store.discuss.gateway;
+        }
+        return super._computeDiscussAppCategory(...arguments);
+    },
 });
