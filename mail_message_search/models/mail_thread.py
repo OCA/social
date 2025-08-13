@@ -26,8 +26,14 @@ class MailThread(models.AbstractModel):
                 word_domain_list.append(expression.OR(field_domain_list))
         word_domain = expression.AND(word_domain_list)
         domain = expression.AND([[("model", "=", self._name)], word_domain])
-        messages = self.env["mail.message"].search(domain)
-        return [("id", "in", messages.mapped("res_id"))]
+        limit_value = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("mail_message_search.message_limit")
+        )
+        limit = int(limit_value) if limit_value else None
+        messages = self.env["mail.message"]._search(domain, limit=limit)
+        return [("id", "in", messages.subselect("res_id"))]
 
     message_search = fields.Text(
         help="Message search, to be used only in searches",
