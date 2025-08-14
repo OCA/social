@@ -158,6 +158,7 @@ Contributors
   - Ernesto Tejeda
   - Rafael Blasco
   - Alexandre Díaz
+  - Carlos Roca
 
 - `Eezee-IT <https://www.eezee-it.com>`__:
 

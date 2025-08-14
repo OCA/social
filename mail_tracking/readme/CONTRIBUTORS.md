@@ -5,6 +5,7 @@
   - Ernesto Tejeda
   - Rafael Blasco
   - Alexandre Díaz
+  - Carlos Roca
 - [Eezee-IT](https://www.eezee-it.com):
   - Asma Elferkhsi
 - [Vauxoo](https://www.vauxoo.com):
