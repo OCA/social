@@ -207,6 +207,13 @@ msgid "Display Name"
 msgstr "Wyświetlana nazwa "
 
 #. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/core/discuss/thread_actions.esm.js:0
+#, python-format
+msgid "Do you really want to mark as reviewed all the failed messages?"
+msgstr ""
+
+#. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
 #: model_terms:ir.ui.view,arch_db:mail_tracking.view_mail_tracking_email_search
 msgid "Email"
@@ -495,6 +502,13 @@ msgstr ""
 #. module: mail_tracking
 #: model:ir.actions.act_window,name:mail_tracking.action_view_mail_tracking_event
 msgid "MailTracking events"
+msgstr ""
+
+#. module: mail_tracking
+#. odoo-javascript
+#: code:addons/mail_tracking/static/src/core/discuss/thread_actions.esm.js:0
+#, python-format
+msgid "Mark all as reviewed"
 msgstr ""
 
 #. module: mail_tracking
