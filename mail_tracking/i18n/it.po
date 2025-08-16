@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-12-01 02:19+0000\n"
-"PO-Revision-Date: 2024-11-25 11:06+0000\n"
+"PO-Revision-Date: 2025-08-16 14:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mail_tracking
 #: model:ir.model.fields,help:mail_tracking.field_mail_tracking_email__state
@@ -232,7 +232,7 @@ msgstr "Nome visualizzato"
 #: code:addons/mail_tracking/static/src/core/discuss/thread_actions.esm.js:0
 #, python-format
 msgid "Do you really want to mark as reviewed all the failed messages?"
-msgstr ""
+msgstr "Si vuole veramente marcare come revisionati tutti i messaggi falliti?"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_mail_tracking_email__mail_id
@@ -532,7 +532,7 @@ msgstr "Eventi tracciamento e-mail"
 #: code:addons/mail_tracking/static/src/core/discuss/thread_actions.esm.js:0
 #, python-format
 msgid "Mark all as reviewed"
-msgstr ""
+msgstr "Segna tutti come revisionati"
 
 #. module: mail_tracking
 #: model:ir.model.fields,field_description:mail_tracking.field_res_config_settings__mail_tracking_email_max_age_days
