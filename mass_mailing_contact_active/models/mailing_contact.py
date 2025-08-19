@@ -4,7 +4,6 @@ from odoo import fields, models
 
 
 class MailingContact(models.Model):
-
     _inherit = "mailing.contact"
 
     active = fields.Boolean(default=True)
