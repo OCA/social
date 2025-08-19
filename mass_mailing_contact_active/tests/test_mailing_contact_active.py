@@ -11,7 +11,7 @@ class TestMailingContactActive(TransactionCase):
 
     def test_archive_unarchive_mailing_contact(self):
         self.assertTrue(self.mailing_contact.active)
-        subscription = self.mailing_contact.subscription_list_ids
+        subscription = self.mailing_contact.subscription_ids
         self.assertTrue(subscription)
         self.assertTrue(subscription.active)
         self.mailing_contact.write({"active": False})
