@@ -39,7 +39,7 @@ class MailThread(models.AbstractModel):
             )
 
     def _notify_get_recipients(self, message, msg_vals, **kwargs):
-        if "gateway_notifications" in kwargs:
+        if kwargs.get("gateway_notifications"):
             result = []
             for notification in kwargs["gateway_notifications"]:
                 if not notification.get("channel_type"):
