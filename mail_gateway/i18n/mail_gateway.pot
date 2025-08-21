@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -73,11 +73,6 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__body_has_template_value
 msgid "Body content is the same as the template"
-msgstr ""
-
-#. module: mail_gateway
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__can_attach_attachment
-msgid "Can Attach Attachment"
 msgstr ""
 
 #. module: mail_gateway
@@ -161,7 +156,6 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-#, python-format
 msgid "Create partner"
 msgstr ""
 
@@ -206,11 +200,6 @@ msgid "Display Name"
 msgstr ""
 
 #. module: mail_gateway
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__display_object_attachment_ids
-msgid "Display Object Attachment"
-msgstr ""
-
-#. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__email_layout_xmlid
 msgid "Email Notification Layout"
 msgstr ""
@@ -251,7 +240,6 @@ msgstr ""
 #: model:ir.model.fields.selection,name:mail_gateway.selection__mail_notification__notification_type__gateway
 #: model:ir.module.category,name:mail_gateway.module_category_gateway
 #: model:ir.ui.menu,name:mail_gateway.mail_gateway_menu
-#, python-format
 msgid "Gateway"
 msgstr ""
 
@@ -333,7 +321,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
-#, python-format
 msgid "Gateway message"
 msgstr ""
 
@@ -366,13 +353,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__id
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__id
 msgid "ID"
-msgstr ""
-
-#. module: mail_gateway
-#: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__mass_mailing_name
-msgid ""
-"If set, a mass mailing will be created so that you can track its results in "
-"the Email Marketing app."
 msgstr ""
 
 #. module: mail_gateway
@@ -470,7 +450,6 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-#, python-format
 msgid "Link Message to thread"
 msgstr ""
 
@@ -482,7 +461,6 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/core/common/message_actions.esm.js:0
-#, python-format
 msgid "Link to thread"
 msgstr ""
 
@@ -512,11 +490,6 @@ msgid "Mail Message Gateway Send"
 msgstr ""
 
 #. module: mail_gateway
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mailing_list_ids
-msgid "Mailing List"
-msgstr ""
-
-#. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to_force_new
 msgid ""
 "Manage answers as new incoming emails instead of replies going to the same "
@@ -526,23 +499,7 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-#, python-format
 msgid "Manage guest"
-msgstr ""
-
-#. module: mail_gateway
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mass_mailing_id
-msgid "Mass Mailing"
-msgstr ""
-
-#. module: mail_gateway
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__campaign_id
-msgid "Mass Mailing Campaign"
-msgstr ""
-
-#. module: mail_gateway
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mass_mailing_name
-msgid "Mass Mailing Name"
 msgstr ""
 
 #. module: mail_gateway
@@ -588,7 +545,6 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/gateway_follower/gateway_follower.xml:0
-#, python-format
 msgid "Not selected"
 msgstr ""
 
@@ -712,7 +668,6 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/core/common/discuss_app_model_patch.esm.js:0
-#, python-format
 msgid "Search Gateway Channel"
 msgstr ""
 
@@ -729,14 +684,12 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
-#, python-format
 msgid "Send a message to a gateway..."
 msgstr ""
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
-#, python-format
 msgid "Send gateway"
 msgstr ""
 
@@ -749,7 +702,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
 #: code:addons/mail_gateway/static/src/core/common/message_actions.esm.js:0
-#, python-format
 msgid "Send with gateway"
 msgstr ""
 
@@ -766,6 +718,11 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_partner_gateway_channel
 msgid "Technical data used to get the gateway author"
+msgstr ""
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__template_name
+msgid "Template Name"
 msgstr ""
 
 #. module: mail_gateway
@@ -789,7 +746,6 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
-#, python-format
 msgid "To:"
 msgstr ""
 
@@ -883,14 +839,12 @@ msgstr ""
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
-#, python-format
 msgid "gateway"
 msgstr ""
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message.xml:0
-#, python-format
 msgid "on"
 msgstr ""
 
