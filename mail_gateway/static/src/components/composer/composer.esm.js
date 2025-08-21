@@ -29,7 +29,7 @@ patch(Composer.prototype, {
     },
     onFocusin() {
         super.onFocusin();
-        if (this.props.type !== "gateway") {
+        if (this.props.type !== "gateway" && this.thread) {
             this.thread.gateway_notifications = [];
         }
     },
