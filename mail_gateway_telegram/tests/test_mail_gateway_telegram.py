@@ -309,7 +309,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
 
     def set_message(self, message, webhook, timeout=12):
         self.url_open(
-            "/gateway/{}/{}/update".format(self.gateway.gateway_type, webhook),
+            f"/gateway/{self.gateway.gateway_type}/{webhook}/update",
             data=json.dumps(message),
             headers={"Content-Type": "application/json"},
             timeout=timeout,
@@ -317,7 +317,6 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         )
 
     def test_webhook_unsecure_channel(self):
-
         self.gateway.webhook_key = self.webhook
         self.gateway.flush_recordset()
         self.assertTrue(self.gateway.can_set_webhook)
@@ -334,7 +333,6 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         self.assertTrue(chat.message_ids)
 
     def test_webhook_unsecure_channel_start(self):
-
         self.gateway.webhook_key = self.webhook
         self.gateway.flush_recordset()
         self.assertTrue(self.gateway.can_set_webhook)
@@ -354,7 +352,6 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         self.assertTrue(chat.message_ids)
 
     def test_webhook_secure_channel(self):
-
         self.gateway.webhook_key = self.webhook
         self.gateway.flush_recordset()
         self.assertTrue(self.gateway.can_set_webhook)
@@ -687,7 +684,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         self.env["mail.message.gateway.link"].create(
             {
                 "message_id": channel.message_ids.id,
-                "resource_ref": "{},{}".format(self.partner._name, self.partner.id),
+                "resource_ref": f"{self.partner._name},{self.partner.id}",
             }
         ).link_message()
         self.assertTrue(self.partner.message_ids - messages)

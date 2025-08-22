@@ -369,12 +369,12 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:af1c94ea0f488bb9ab0d5b1a7a661f6edae5e0a798f600ef0a9473abc75cb5f7
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/16.0/mail_gateway_telegram"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_gateway_telegram"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=16.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/18.0/mail_gateway_telegram"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_gateway_telegram"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module allows to respond telegram chats as a telegram bot.</p>
-<p>This way, a group of users can respond customers or any other set
-of partners in an integrated way.</p>
-<p>It is not intended to be integrated on default chatter as users don’t need
-to review again when one has responded.</p>
+<p>This way, a group of users can respond customers or any other set of
+partners in an integrated way.</p>
+<p>It is not intended to be integrated on default chatter as users don’t
+need to review again when one has responded.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -409,28 +409,33 @@ to review again when one has responded.</p>
 <h2><a class="toc-backref" href="#toc-entry-3">Configure Odoo</a></h2>
 <ol class="arabic simple">
 <li>Access on debug mode</li>
-<li>Access <cite>Settings &gt; Technical Settings &gt; Email &gt; Mail Gateway</cite>.</li>
+<li>Access Settings &gt; Technical Settings &gt; Email &gt; Mail Gateway.</li>
 <li>Access Telegram and start a converstation with BotFather.</li>
-<li>Create a bot using the command /newbot. The system will ask for a bot name. Remember that it needs to end with the word bot.</li>
+<li>Create a bot using the command /newbot. The system will ask for a bot
+name. Remember that it needs to end with the word bot.</li>
 <li>Copy the token to access the HTTP API to the token field.</li>
-<li>Define Webhook key an webhook secret of your choice in its corresponding field, in order to secure the connection.</li>
+<li>Define Webhook key an webhook secret of your choice in its
+corresponding field, in order to secure the connection.</li>
 <li>Press save button and the integrate webhook smart button will appear.</li>
 <li>Press the Integrate webhook button.</li>
-<li>If you want to add an extra layer of security, you can check Has New Channel Security and define a Telegram security key. New chats will be created only with the command /start SECURITY_KEY.</li>
+<li>If you want to add an extra layer of security, you can check Has New
+Channel Security and define a Telegram security key. New chats will
+be created only with the command /start SECURITY_KEY.</li>
 </ol>
 </div>
 <div class="section" id="limitations">
 <h2><a class="toc-backref" href="#toc-entry-4">Limitations</a></h2>
-<p>The Webhook functionality can only be used if your system is accessible from website.
-On local installations it might be problematic as Telegram will not be able to contact
-your system. In that case, you might need to create a telegram bot that will send data
-to you on an external process with the following code.</p>
+<p>The Webhook functionality can only be used if your system is accessible
+from website. On local installations it might be problematic as Telegram
+will not be able to contact your system. In that case, you might need to
+create a telegram bot that will send data to you on an external process
+with the following code.</p>
 <pre class="code python literal-block">
-<span class="kn">from</span> <span class="nn">telegram.ext</span> <span class="kn">import</span> <span class="n">Filters</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">Updater</span><span class="w">
-</span><span class="kn">import</span> <span class="nn">requests</span><span class="w">
+<span class="kn">from</span><span class="w"> </span><span class="nn">telegram.ext</span><span class="w"> </span><span class="kn">import</span> <span class="n">Filters</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">Updater</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span><span class="w">
 </span><span class="n">dp</span> <span class="o">=</span> <span class="n">Updater</span><span class="p">(</span><span class="n">YOUR_TOKEN</span><span class="p">)</span><span class="w">
 
-</span><span class="k">def</span> <span class="nf">message_callback</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">_context</span><span class="p">):</span><span class="w">
+</span><span class="k">def</span><span class="w"> </span><span class="nf">message_callback</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">_context</span><span class="p">):</span><span class="w">
 </span>    <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">YOUR_CONTROLLER</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span><span class="w">
 
 
@@ -443,7 +448,7 @@ to you on an external process with the following code.</p>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-5">Usage</a></h1>
 <ol class="arabic simple">
-<li>Access <cite>Gateway</cite></li>
+<li>Access Gateway</li>
 <li>Wait until someone starts a conversation with your bot.</li>
 <li>Now you will be able to respond and receive messages to this person.</li>
 </ol>
@@ -453,7 +458,7 @@ to you on an external process with the following code.</p>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20mail_gateway_telegram%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20mail_gateway_telegram%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -474,7 +479,8 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 </div>
 <div class="section" id="other-credits">
 <h2><a class="toc-backref" href="#toc-entry-10">Other credits</a></h2>
-<p>This work has been funded by AEOdoo (Asociación Española de Odoo - <a class="reference external" href="https://www.aeodoo.org">https://www.aeodoo.org</a>)</p>
+<p>This work has been funded by AEOdoo (Asociación Española de Odoo -
+<a class="reference external" href="https://www.aeodoo.org">https://www.aeodoo.org</a>)</p>
 </div>
 <div class="section" id="maintainers">
 <h2><a class="toc-backref" href="#toc-entry-11">Maintainers</a></h2>
@@ -485,7 +491,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/16.0/mail_gateway_telegram">OCA/social</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/18.0/mail_gateway_telegram">OCA/social</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>

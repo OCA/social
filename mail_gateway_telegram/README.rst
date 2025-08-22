@@ -17,24 +17,24 @@ Mail Telegram Gateway
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_gateway_telegram
+    :target: https://github.com/OCA/social/tree/18.0/mail_gateway_telegram
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_gateway_telegram
+    :target: https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_gateway_telegram
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module allows to respond telegram chats as a telegram bot.
 
-This way, a group of users can respond customers or any other set
-of partners in an integrated way.
+This way, a group of users can respond customers or any other set of
+partners in an integrated way.
 
-It is not intended to be integrated on default chatter as users don't need
-to review again when one has responded.
+It is not intended to be integrated on default chatter as users don't
+need to review again when one has responded.
 
 **Table of contents**
 
@@ -45,52 +45,56 @@ Configuration
 =============
 
 Create the bot
-~~~~~~~~~~~~~~
+--------------
 
 1. Create a Bot on telegram https://core.telegram.org/bots
 2. Create a broker following the examples on
    https://github.com/tegin/telegram-broker with the TOKEN provided
 
-
 Configure Odoo
-~~~~~~~~~~~~~~
+--------------
 
 1. Access on debug mode
-2. Access `Settings > Technical Settings > Email > Mail Gateway`.
+2. Access Settings > Technical Settings > Email > Mail Gateway.
 3. Access Telegram and start a converstation with BotFather.
-4. Create a bot using the command /newbot. The system will ask for a bot name. Remember that it needs to end with the word bot.
+4. Create a bot using the command /newbot. The system will ask for a bot
+   name. Remember that it needs to end with the word bot.
 5. Copy the token to access the HTTP API to the token field.
-6. Define Webhook key an webhook secret of your choice in its corresponding field, in order to secure the connection.
+6. Define Webhook key an webhook secret of your choice in its
+   corresponding field, in order to secure the connection.
 7. Press save button and the integrate webhook smart button will appear.
 8. Press the Integrate webhook button.
-9. If you want to add an extra layer of security, you can check Has New Channel Security and define a Telegram security key. New chats will be created only with the command /start SECURITY_KEY.
+9. If you want to add an extra layer of security, you can check Has New
+   Channel Security and define a Telegram security key. New chats will
+   be created only with the command /start SECURITY_KEY.
 
 Limitations
-~~~~~~~~~~~
+-----------
 
-The Webhook functionality can only be used if your system is accessible from website.
-On local installations it might be problematic as Telegram will not be able to contact
-your system. In that case, you might need to create a telegram bot that will send data
-to you on an external process with the following code.
+The Webhook functionality can only be used if your system is accessible
+from website. On local installations it might be problematic as Telegram
+will not be able to contact your system. In that case, you might need to
+create a telegram bot that will send data to you on an external process
+with the following code.
 
-.. code-block:: python
+.. code:: python
 
-    from telegram.ext import Filters, MessageHandler, Updater
-    import requests
-    dp = Updater(YOUR_TOKEN)
+   from telegram.ext import Filters, MessageHandler, Updater
+   import requests
+   dp = Updater(YOUR_TOKEN)
 
-    def message_callback(update, _context):
-        requests.post(YOUR_CONTROLLER, json=update.to_dict())
+   def message_callback(update, _context):
+       requests.post(YOUR_CONTROLLER, json=update.to_dict())
 
 
-    dp.dispatcher.add_handler(MessageHandler(Filters.all, message_callback))
-    dp.start_polling()
-    dp.idle()
+   dp.dispatcher.add_handler(MessageHandler(Filters.all, message_callback))
+   dp.start_polling()
+   dp.idle()
 
 Usage
 =====
 
-1. Access `Gateway`
+1. Access Gateway
 2. Wait until someone starts a conversation with your bot.
 3. Now you will be able to respond and receive messages to this person.
 
@@ -100,7 +104,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_gateway_telegram%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_gateway_telegram%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -108,24 +112,25 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Creu Blanca
 * Dixmit
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Enric Tobella <etobella@creublanca.es>
-* Olga Marco <olga.marco@creublanca.es>
+- Enric Tobella <etobella@creublanca.es>
+- Olga Marco <olga.marco@creublanca.es>
 
 Other credits
-~~~~~~~~~~~~~
+-------------
 
-This work has been funded by AEOdoo (Asociación Española de Odoo - https://www.aeodoo.org)
+This work has been funded by AEOdoo (Asociación Española de Odoo -
+https://www.aeodoo.org)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -137,6 +142,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_gateway_telegram>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/18.0/mail_gateway_telegram>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
