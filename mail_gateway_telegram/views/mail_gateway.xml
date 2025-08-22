@@ -11,14 +11,15 @@
             <field name="has_new_channel_security" position="after">
                 <field
                     name="telegram_security_key"
-                    attrs="{'invisible': ['|', ('gateway_type', '!=', 'telegram'), ('has_new_channel_security', '=', False)], 'required': [('gateway_type', '=', 'telegram'), ('has_new_channel_security', '=', True)]}"
+                    invisible="gateway_type != 'telegram' or not has_new_channel_security"
+                    required="gateway_type == 'telegram' and has_new_channel_security"
                 />
             </field>
             <notebook position="inside">
                 <page
                     name="telegram"
                     string="Telegram configuration"
-                    attrs="{'invisible': [('gateway_type', '!=', 'telegram')]}"
+                    invisible="gateway_type != 'telegram'"
                 >
                     <div>
                         <ol>

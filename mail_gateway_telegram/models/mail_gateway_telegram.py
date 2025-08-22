@@ -83,14 +83,14 @@ class MailGatewayTelegramService(models.AbstractModel):
             if not entity.type == "bot_command":
                 continue
             command = update.message.parse_entity(entity).split("/")[1]
-            if hasattr(self, "_command_%s" % (command)):
-                return getattr(self, "_command_%s" % (command))(gateway, update)
+            if hasattr(self, f"_command_{command}"):
+                return getattr(self, f"_command_{command}")(gateway, update)
         return False
 
     def _command_start(self, gateway, update):
         if (
             not gateway.has_new_channel_security
-            or update.message.text == "/start %s" % gateway.telegram_security_key
+            or update.message.text == f"/start {gateway.telegram_security_key}"
         ):
             return self._get_channel(gateway, update.message.chat_id, update, True)
         return True
@@ -130,16 +130,15 @@ class MailGatewayTelegramService(models.AbstractModel):
     async def _process_telegram_attachment(self, attachment):
         if isinstance(attachment, tuple):
             attachment = attachment[-1]
-            # That might happen with images, we will get the last one as it is the bigger one.
+            # That might happen with images, we will get the last one as it is the
+            # bigger one.
         if isinstance(
             attachment,
-            (
-                telegram.Game,
-                telegram.Invoice,
-                telegram.Location,
-                telegram.SuccessfulPayment,
-                telegram.Venue,
-            ),
+            telegram.Game
+            | telegram.Invoice
+            | telegram.Location
+            | telegram.SuccessfulPayment
+            | telegram.Venue,
         ):
             return
         if isinstance(attachment, telegram.Contact):
@@ -190,12 +189,8 @@ class MailGatewayTelegramService(models.AbstractModel):
                 effective_attachment = current_attachment
             if isinstance(effective_attachment, telegram.Location):
                 body += (
-                    '<a target="_blank" href="https://www.google.com/'
-                    'maps/search/?api=1&query=%s,%s">Location</a>'
-                    % (
-                        effective_attachment.latitude,
-                        effective_attachment.longitude,
-                    )
+                    f'<a target="_blank" href="https://www.google.com/maps/search/?api=1&query='
+                    f'{effective_attachment.latitude},{effective_attachment.longitude}">Location</a>'
                 )
             attachment_data = asyncio.run(
                 self._process_telegram_attachment(effective_attachment)
