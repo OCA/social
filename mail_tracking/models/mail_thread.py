@@ -6,7 +6,7 @@ from email.utils import getaddresses
 from lxml import etree
 
 from odoo import _, api, fields, models
-from odoo.tools import email_split, email_split_and_format
+from odoo.tools import email_split_and_format
 
 
 class MailThread(models.AbstractModel):
@@ -81,16 +81,15 @@ class MailThread(models.AbstractModel):
             for email in emails_extra:
                 email_extra_formated_list.extend(email_split_and_format(email))
         email_extra_formated_list = set(email_extra_formated_list)
-        email_extra_list = [x[1] for x in getaddresses(email_extra_formated_list)]
-        partners_info = self.sudo()._message_partner_info_from_emails(email_extra_list)
-        for pinfo in partners_info:
+        for email_formated in email_extra_formated_list:
+            email = getaddresses([email_formated])[0][1]
+            pinfo = self.sudo()._message_partner_info_from_emails([email])[0]
+            email = email.lower()
             partner_id = pinfo["partner_id"]
-            email_formed = email_split(pinfo["full_name"])
-            email = email_formed and email_formed[0].lower()
             if not partner_id:
                 if email not in aliases:
                     self._message_add_suggested_recipient(
-                        suggestions, email=email, reason=reason
+                        suggestions, email=email_formated, reason=reason
                     )
             else:
                 partner = ResPartnerObj.browse(partner_id)
