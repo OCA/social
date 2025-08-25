@@ -223,7 +223,7 @@ class TestMailTracking(TransactionCase):
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
         suggested_mails = {email[1] for email in recipients[self.recipient.id]}
-        self.assertIn("unnamed@test.com", suggested_mails)
+        self.assertIn('"Dominique Pinon" <unnamed@test.com>', suggested_mails)
         self.assertEqual(len(recipients[self.recipient.id]), 3)
         # Repeated Cc recipients
         message = self.env["mail.message"].create(
@@ -277,7 +277,7 @@ class TestMailTracking(TransactionCase):
         # suggested recipients
         recipients = self.recipient._message_get_suggested_recipients()
         suggested_mails = {email[1] for email in recipients[self.recipient.id]}
-        self.assertIn("support+unnamed@test.com", suggested_mails)
+        self.assertIn('"Dominique Pinon" <support+unnamed@test.com>', suggested_mails)
         self.assertEqual(len(recipients[self.recipient.id]), 3)
         # Repeated To recipients
         message = self.env["mail.message"].create(
@@ -314,7 +314,9 @@ class TestMailTracking(TransactionCase):
         recipients = self.recipient._message_get_suggested_recipients()
         self.assertEqual(len(recipients[self.recipient.id]), 2)
         suggested_mails = {email[1] for email in recipients[self.recipient.id]}
-        self.assertNotIn("support+unnamed@test.com", suggested_mails)
+        self.assertNotIn(
+            '"Dominique Pinon" <support+unnamed@test.com>', suggested_mails
+        )
 
     def test_failed_message(self):
         MailMessageObj = self.env["mail.message"]
