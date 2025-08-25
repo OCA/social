@@ -343,3 +343,59 @@ class TestMailActivityTeam(TransactionCase):
         )
         self.assertEqual(partner, self.partner_client)
         self.assertEqual(partner.my_activity_date_deadline, today)
+
+    def _web_search_read_to_ids(self, domain, context=None):
+        """Return web_search_read results as a set of ids"""
+        if context is None:
+            context = {}
+        res = (
+            self.env["res.partner"]
+            .with_context(**context)
+            .web_search_read(
+                domain,
+                {"id": {}},
+            )
+        )
+        return set(record["id"] for record in res["records"])
+
+    def test_web_search_read(self):
+        """Test the domain mangling of web_search_read"""
+        # Create a non-team activity for our second employee, for a second partner
+        self.team1.member_ids |= self.employee2
+        partner2 = self.partner_client.copy()
+        self.employee2.groups_id += self.env.ref("base.group_partner_manager")
+
+        # Craft the activity without a team
+        act3 = (
+            self.env["mail.activity"]
+            .with_user(self.employee2)
+            .create(
+                {
+                    "activity_type_id": self.activity1.id,
+                    "note": "Partner activity 3.",
+                    "res_id": partner2.id,
+                    "res_model_id": self.partner_ir_model.id,
+                    "team_user_id": self.employee2.id,
+                    "user_id": self.employee2.id,
+                    "team_id": False,
+                }
+            )
+        )
+        self.assertFalse(act3.team_id)
+
+        # A regular search retrieves this activity
+        self.assertEqual(
+            self._web_search_read_to_ids(
+                [("activity_user_id", "=", self.employee2.id)]
+            ),
+            set(partner2.ids),
+        )
+
+        # Searching with magic context key retrieves team activities.
+        self.assertEqual(
+            self._web_search_read_to_ids(
+                [("activity_user_id", "=", self.employee2.id)],
+                {"team_activities": True},
+            ),
+            set(self.partner_client.ids),
+        )
