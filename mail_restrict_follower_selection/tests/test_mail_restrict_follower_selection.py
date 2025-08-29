@@ -30,9 +30,10 @@ class TestMailRestrictFollowerSelection(TransactionCase):
     def _use_ref_in_domain(self):
         """Change the general domain to test the safe_eval."""
         param = self.env.ref("mail_restrict_follower_selection.parameter_domain")
-        param.value = "[('country_id', '!=', ref('base.ch'))]"
+        country_id = self.env.ref("base.ch").id
+        param.value = f"[('country_id', '!=', {country_id})]"
 
-    def test_fields_view_get(self):
+    def test_get_view(self):
         result = self.env["mail.wizard.invite"].get_view(view_type="form")
         for field in etree.fromstring(result["arch"]).xpath(
             '//field[@name="partner_ids"]'
@@ -86,10 +87,10 @@ class TestMailRestrictFollowerSelection(TransactionCase):
         )._message_add_suggested_recipient({self.partner.id: []})
         self.assertFalse(new_res[self.partner.id][0][0])
 
-    def test_fields_view_get_eval(self):
+    def test_get_view_eval(self):
         """Check using safe_eval in field_view_get."""
         self._use_ref_in_domain()
-        result = self.env["mail.wizard.invite"].fields_view_get(view_type="form")
+        result = self.env["mail.wizard.invite"].get_view(view_type="form")
         for field in etree.fromstring(result["arch"]).xpath(
             '//field[@name="partner_ids"]'
         ):

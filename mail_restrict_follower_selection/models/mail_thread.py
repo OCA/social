@@ -23,7 +23,8 @@ class MailThread(models.AbstractModel):
             "mail.wizard.invite"
         ]._mail_restrict_follower_selection_get_domain()
         eval_domain = safe_eval(
-            domain, locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)}
+            str(domain),
+            locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)},
         )
         for key in result:
             items_to_remove = []

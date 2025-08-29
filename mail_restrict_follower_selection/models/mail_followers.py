@@ -38,7 +38,8 @@ class MailFollowers(models.Model):
         partners = self.env["res.partner"].search(
             [("id", "in", partner_ids)]
             + safe_eval(
-                domain, locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)}
+                str(domain),
+                locals_dict={"ref": lambda str_id: _id_get(self.env, str_id)},
             )
         )
         _res_ids = res_ids.copy() or [0]
