@@ -4,7 +4,7 @@
 {
     "name": "Chatter Attachment Deduplicate",
     "summary": "Chatter Attachment Deduplicate",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Uncategorized",
     "website": "https://github.com/OCA/social",
     "author": "Lambdao, Odoo Community Association (OCA)",
