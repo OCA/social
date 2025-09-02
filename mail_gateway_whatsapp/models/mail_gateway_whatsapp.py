@@ -76,6 +76,38 @@ class MailGatewayWhatsappService(models.AbstractModel):
                         if not chat:
                             continue
                         self._process_update(chat, message, change["value"])
+                    for status_info in change["value"].get("statuses", []):
+                        chat_id = gateway._get_channel_id(status_info["recipient_id"])
+                        if status_info.get("status", "") != "failed" or not chat_id:
+                            continue
+                        self._process_update_status(chat_id, status_info)
+
+    def _process_update_status(self, chat_id, status_info):
+        notification = (
+            self.env["mail.notification"]
+            .sudo()
+            .search(
+                [
+                    ("gateway_message_id", "=", status_info["id"]),
+                    ("gateway_channel_id", "=", chat_id),
+                ]
+            )
+        )
+        if not notification:
+            return
+        errors = [
+            f"[{error['code']}] {error['error_data']['details']}"
+            for error in status_info.get("errors", [])
+        ]
+        notification.write(
+            {
+                "failure_type": "unknown",
+                "notification_status": "exception",
+                "failure_reason": "\n".join(errors),
+            }
+        )
+        # notify user that we have a failure
+        notification.mail_message_id._notify_message_notification_update()
 
     def _process_update(self, chat, message, value):
         chat.ensure_one()
