@@ -15,12 +15,14 @@
         "wizards/mail_message_gateway_link.xml",
         "wizards/mail_message_gateway_send.xml",
         "wizards/mail_guest_manage.xml",
+        "wizards/mail_resend_message_views.xml",
         "security/security.xml",
         "security/ir.model.access.csv",
         "views/mail_gateway.xml",
         "views/res_partner_gateway_channel.xml",
         "views/mail_guest_views.xml",
         "views/res_users_settings_views.xml",
+        "views/mail_notification_views.xml",
     ],
     "assets": {
         "web.assets_backend": [

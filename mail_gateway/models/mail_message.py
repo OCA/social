@@ -3,6 +3,7 @@
 
 
 from odoo import api, fields, models
+from odoo.tests import RecordCapturer
 
 from odoo.addons.mail.tools.discuss import Store
 
@@ -117,18 +118,33 @@ class MailMessage(models.Model):
             gateway_channel_id.gateway_token
         )
         channel = self.env["discuss.channel"].browse(chat_id)
-        channel.message_post(**self._get_gateway_thread_message_vals())
+        with RecordCapturer(
+            self.env["mail.notification"], [("gateway_channel_id", "=", channel.id)]
+        ) as capt:
+            channel.message_post(**self._get_gateway_thread_message_vals())
         if not self.gateway_type:
             self.gateway_type = gateway_channel_id.gateway_id.gateway_type
-        self.env["mail.notification"].create(
-            {
-                "notification_status": "sent",
-                "mail_message_id": self.id,
-                "gateway_channel_id": channel.id,
-                "notification_type": "gateway",
-                "gateway_type": gateway_channel_id.gateway_id.gateway_type,
-            }
-        )
+        notification_vals = {
+            "notification_status": "sent",
+            "mail_message_id": self.id,
+            "gateway_channel_id": channel.id,
+            "notification_type": "gateway",
+            "gateway_type": gateway_channel_id.gateway_id.gateway_type,
+        }
+        notification = capt.records
+        if notification:
+            # Set the same gateway_message_id for both notifications.
+            # When the webhook is received, both notifications must be updated.
+            # For example, when a message is sent from a document(sale.order),
+            # one notification is linked to the document,
+            # and another notification is linked to the channel.
+            notification_vals["gateway_message_id"] = notification.gateway_message_id
+            # If there is a notification with status "exception", set failure details
+            if notification.failure_type == "unknown":
+                notification_vals["failure_type"] = "unknown"
+                notification_vals["notification_status"] = "exception"
+                notification_vals["failure_reason"] = notification.failure_reason
+        self.env["mail.notification"].create(notification_vals)
         return {}
 
     def _get_gateway_thread_message_vals(self):
