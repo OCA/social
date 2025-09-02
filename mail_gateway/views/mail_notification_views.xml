@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mail_notification_view_tree" model="ir.ui.view">
+        <field name="name">view.mail.notification.tree</field>
+        <field name="model">mail.notification</field>
+        <field name="inherit_id" ref="mail.mail_notification_view_tree" />
+        <field name="priority" eval="100" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='failure_type']" position="after">
+                <field name="failure_reason" />
+            </xpath>
+            <xpath expr="//field[@name='res_partner_id']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='is_read']" position="attributes">
+                <attribute name="column_invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
