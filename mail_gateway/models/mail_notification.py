@@ -48,3 +48,6 @@ class MailNotification(models.Model):
                 raise_exception=raise_exception,
                 parse_mode=parse_mode,
             )
+            # notify user that we have a failure
+            if record.failure_type == "unknown":
+                record.mail_message_id._notify_message_notification_update()
