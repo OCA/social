@@ -1,13 +1,13 @@
 # Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 from odoo.addons.test_mail.tests.test_mail_gateway import MAIL_TEMPLATE
 
 
-class FetchmailCase(TransactionCase):
+class FetchmailCase(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
