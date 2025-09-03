@@ -2,7 +2,6 @@
 <!-- Copyright 2017 Tecnativa - Jairo Llopis <jairo.llopis@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="demo_sink" model="mail.channel">
         <field name="name">mailsink</field>
         <field name="description">Unbounded email sink</field>
@@ -16,5 +15,4 @@
         <field name="default_thread_id" eval="'mail.channel,%d' % ref('demo_sink')" />
         <!-- <field name="default_thread_id">mail.channel,%(demo_sink)d</field> -->
     </record>
-
 </odoo>

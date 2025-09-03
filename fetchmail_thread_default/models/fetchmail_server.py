@@ -39,7 +39,7 @@ class FetchmailServer(models.Model):
         """Remove :attr:`default_thread_id` if there is :attr:`object_id`."""
         if self.object_id:
             self.default_thread_id = False
-        return super(FetchmailServer, self).onchange_server_type()
+        return super().onchange_server_type()
 
     @api.onchange("default_thread_id")
     def _onchange_remove_object_id(self):
