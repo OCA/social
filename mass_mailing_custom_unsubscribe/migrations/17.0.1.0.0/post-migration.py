@@ -21,36 +21,6 @@ def migrate(env, version):
     openupgrade.logged_query(
         env.cr,
         """
-        WITH latest_records AS (
-            SELECT
-                mu.id,
-                CAST(SPLIT_PART(mu.unsubscriber_id, ',', 2) AS INTEGER) AS contact_id,
-                COALESCE(mu.mass_mailing_id, rel.mailing_list_id) AS list_id,
-                mu.action,
-                mu.reason_id,
-                mu.create_uid,
-                mu.write_uid,
-                mu.date,
-                mu.create_date,
-                mu.write_date,
-                mu.metadata,
-                -- Window function to rank records for each contact-list pair
-                ROW_NUMBER() OVER (
-                    PARTITION BY
-                        CAST(SPLIT_PART(mu.unsubscriber_id, ',', 2) AS INTEGER),
-                        COALESCE(mu.mass_mailing_id, rel.mailing_list_id)
-                    ORDER BY mu.id DESC
-                ) AS rn
-            FROM
-                mail_unsubscription mu
-            LEFT JOIN
-                mail_unsubscription_mailing_list_rel rel ON mu.id = rel.mail_unsubscription_id
-            WHERE
-                mu.unsubscriber_id LIKE 'mailing.contact,%'
-                AND SPLIT_PART(mu.unsubscriber_id, ',', 2) ~ '^[0-9]+$'
-                AND (mu.mass_mailing_id IS NOT NULL OR rel.mailing_list_id IS NOT NULL)
-                AND mu.action IN ('subscription', 'unsubscription')
-        )
         INSERT INTO mailing_subscription (
             contact_id,
             list_id,
@@ -64,27 +34,32 @@ def migrate(env, version):
             metadata
         )
         SELECT
-            contact_id,
-            list_id,
-            reason_id AS opt_out_reason_id,
-            create_uid,
-            write_uid,
+            CAST(SPLIT_PART(mu.unsubscriber_id, ',', 2) AS INTEGER),
+            rel.mailing_list_id,
+            mu.reason_id,
+            mu.create_uid,
+            mu.write_uid,
             CASE
-                WHEN action = 'unsubscription' THEN TRUE
-                WHEN action = 'subscription' THEN FALSE
-            END AS opt_out,
+                WHEN mu.action = 'unsubscription' THEN TRUE
+                WHEN mu.action = 'subscription' THEN FALSE
+            END,
             CASE
-                WHEN action = 'unsubscription' THEN date
+                WHEN mu.action = 'unsubscription' THEN date
                 ELSE NULL
-            END AS opt_out_datetime,
-            create_date,
-            write_date,
-            metadata
-        FROM
-            latest_records
+            END,
+            mu.create_date,
+            mu.write_date,
+            mu.metadata
+        FROM mail_unsubscription mu
+        JOIN mail_unsubscription_mailing_list_rel rel
+            ON mu.id = rel.mail_unsubscription_id
         WHERE
-            rn = 1;  -- Only take the most recent record for each contact-list pair
-        """,  # noqa: E501
+            mu.unsubscriber_id LIKE 'mailing.contact,%'
+            AND SPLIT_PART(mu.unsubscriber_id, ',', 2) ~ '^[0-9]+$'
+            AND mu.action IN ('subscription', 'unsubscription')
+        ORDER BY mu.create_date desc
+        ON CONFLICT DO NOTHING
+        """,
     )
     # Blacklist metadata
     openupgrade.logged_query(
