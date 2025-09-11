@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 import requests
 
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests.common import tagged
 
@@ -121,7 +122,7 @@ class TestMailWhatsAppTemplate(MailGatewayTestCase):
         template_2 = self.gateway.whatsapp_template_ids.filtered(
             lambda t: t.template_uid == "0987654321"
         )
-        self.assertFalse(template_2.is_supported)
+        self.assertTrue(template_2.is_supported)
         self.assertEqual(template_2.template_name, "test_with_buttons")
         self.assertEqual(template_2.category, "marketing")
         self.assertEqual(template_2.language, "es")
@@ -129,7 +130,6 @@ class TestMailWhatsAppTemplate(MailGatewayTestCase):
         self.assertEqual(template_2.header, "Header 2")
         self.assertEqual(template_2.body, "Body 2")
         self.assertFalse(template_2.footer)
-        self.assertFalse(template_2.is_supported)
 
     def test_export_template(self):
         def _patch_request_post(url, *args, **kwargs):
@@ -168,3 +168,73 @@ class TestMailWhatsAppTemplate(MailGatewayTestCase):
         with patch.object(requests, "get", _patch_request_get):
             new_template.button_sync_template()
         self.assertEqual(new_template.footer, "Footer changed")
+
+    def test_prepare_values_template_send(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "Ada Lovelace",
+                "mobile": "+34900111222",
+            }
+        )
+        ctx = {
+            "default_res_model": partner._name,
+            "default_res_id": partner.id,
+        }
+        tmpl = self.env["mail.whatsapp.template"].create(
+            {
+                "name": "Test Render",
+                "category": "utility",
+                "language": "es",
+                "header": "Hi {{1}}",
+                "body": "Name: {{1}} · Tel: {{2}}",
+                "gateway_id": self.gateway.id,
+                "variable_ids": [Command.clear()],
+                "state": "approved",
+                "is_supported": True,
+                "model_id": self.env["ir.model"]._get("res.partner").id,
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{1}}",
+                "line_type": "header",
+                "template_id": tmpl.id,
+                "field_name": "name",
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{1}}",
+                "line_type": "body",
+                "template_id": tmpl.id,
+                "field_name": "name",
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{2}}",
+                "line_type": "body",
+                "template_id": tmpl.id,
+                "field_name": "mobile",
+            }
+        )
+        self.env["mail.whatsapp.template.button"].create(
+            {
+                "name": "mobile",
+                "button_type": "phone_number",
+                "template_id": tmpl.id,
+                "call_number": "+34666555444",
+            }
+        )
+        components = tmpl.with_context(**ctx).prepare_value_to_send()
+
+        header = next(c for c in components if c["type"].upper() == "HEADER")
+        self.assertEqual([p["type"] for p in header.get("parameters", [])], ["text"])
+        self.assertEqual(header["parameters"][0]["text"], partner.name)
+
+        body = next(c for c in components if c["type"].upper() == "BODY")
+        self.assertEqual(
+            [p["type"] for p in body.get("parameters", [])], ["text", "text"]
+        )
+        self.assertEqual(body["parameters"][0]["text"], partner.name)
+        self.assertEqual(body["parameters"][1]["text"], partner.mobile or "")

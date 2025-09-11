@@ -13,16 +13,22 @@ class MailComposeGatewayMessage(models.TransientModel):
         "mail.whatsapp.template",
         domain="""[
             ('state', '=', 'approved'),
-            ('is_supported', '=', True)
+            ('is_supported', '=', True),
+            ('model', '=', model)
         ]""",
     )
 
     @api.onchange("whatsapp_template_id")
     def onchange_whatsapp_template_id(self):
         if self.whatsapp_template_id:
-            self.body = markupsafe.Markup(self.whatsapp_template_id.body)
+            self.body = markupsafe.Markup(
+                self.whatsapp_template_id.render_body_message()
+            )
 
     def _action_send_mail(self, auto_commit=False):
         if self.whatsapp_template_id:
-            self = self.with_context(whatsapp_template_id=self.whatsapp_template_id.id)
+            self = self.with_context(
+                whatsapp_template_id=self.whatsapp_template_id.id,
+                res_id=int(self.res_ids.strip("[]")),
+            )
         return super()._action_send_mail(auto_commit=auto_commit)

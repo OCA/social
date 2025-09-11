@@ -323,6 +323,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                         "template": {
                             "name": whatsapp_template.template_name,
                             "language": {"code": whatsapp_template.language},
+                            "components": whatsapp_template.prepare_value_to_send(),
                         },
                     }
                 )

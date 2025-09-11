@@ -73,3 +73,5 @@ supported_languages = [
     ("vi", "Vietnamese"),
     ("zu", "Zulu"),
 ]
+
+REG_VARIABLE = r"{{[1-9][0-9]*}}"

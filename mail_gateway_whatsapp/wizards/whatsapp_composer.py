@@ -23,7 +23,8 @@ class WhatsappComposer(models.TransientModel):
         domain="""[
             ('gateway_id', '=', gateway_id),
             ('state', '=', 'approved'),
-            ('is_supported', '=', True)
+            ('is_supported', '=', True),
+            ('model', '=', res_model)
         ]""",
     )
     body = fields.Text("Message")
@@ -68,7 +69,7 @@ class WhatsappComposer(models.TransientModel):
     @api.onchange("template_id")
     def onchange_template_id(self):
         if self.template_id:
-            self.body = self.template_id.body
+            self.body = self.template_id.render_body_message()
 
     @api.model
     def default_get(self, fields):
