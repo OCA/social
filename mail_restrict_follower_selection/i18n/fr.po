@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mail_restrict_follower_selection
+#
+# Translators:
+# Quentin THEURET <odoo@kerpeo.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-07-22 09:45+0000\n"
+"PO-Revision-Date: 2018-06-18 09:40+0000\n"
+"Last-Translator: c2cdidier <didier.donze@camptocamp.com>\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.0.1\n"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.actions.act_window,name:mail_restrict_follower_selection.action_setup
+msgid "Configure the restriction on followers"
+msgstr "Configurer les restrictions sur les abonnés"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_followers
+msgid "Document Followers"
+msgstr "Suiveurs du document"
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_thread
+msgid "Email Thread"
+msgstr ""
+
+#. module: mail_restrict_follower_selection
+#: model:ir.model,name:mail_restrict_follower_selection.model_mail_wizard_invite
+msgid "Invite wizard"
+msgstr "Assistant d'invitation"
