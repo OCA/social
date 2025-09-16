@@ -9,7 +9,7 @@ class MailingTrace(models.Model):
     _inherit = "mailing.trace"
 
     partner_id = fields.Many2one(
-        string="Partner", comodel_name="res.partner", readonly=True
+        string="Partner", comodel_name="res.partner", readonly=True, index=True
     )
 
     @api.model

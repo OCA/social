@@ -16,3 +16,5 @@
 - [Trobz](https://trobz.com):
 
   > - Nguyễn Minh Chiến \<<chien@trobz.com>\>
+- [Stesi Consulting](https://www.stesi.consulting):
+  - Michele Di Croce \<<dicroce.m@stesi.consulting>\>

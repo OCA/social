@@ -99,6 +99,10 @@ Contributors
 
       -  Nguyễn Minh Chiến <chien@trobz.com>
 
+-  `Stesi Consulting <https://www.stesi.consulting>`__:
+
+   -  Michele Di Croce <dicroce.m@stesi.consulting>
+
 Other credits
 -------------
 
