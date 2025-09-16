@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="view_mail_mass_mailing_form">
+        <field name="name">mailing.mailing.form</field>
+        <field name="model">mailing.mailing</field>
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="template_id" invisible="1" />
+                <button
+                    name="action_view_template"
+                    type="object"
+                    string="Related Mail Template"
+                    class="oe_stat_button"
+                    attrs="{'invisible': [('template_id','=',False)]}"
+                />
+            </xpath>
+            <xpath expr="//button[@name='action_launch']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', 'in', ('in_queue',  'sending', 'done')), ('template_id', '!=', False)]}
+                </attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_schedule']" position="attributes">
+                <attribute name="attrs">
+                    {'invisible': ['|', ('state', 'in', ('in_queue',  'sending', 'done')), ('template_id', '!=', False)]}
+                </attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

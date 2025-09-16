@@ -13,10 +13,6 @@
     "depends": ["mail", "mass_mailing"],
     "data": [
         "views/mail_template_views.xml",
+        "views/mailing_mailing_views.xml",
     ],
-    "assets": {
-        "web.assets_backend": [
-            "mail_template_editor/static/src/js/mass_mailing_html_field.esm.js",
-        ],
-    },
 }
