@@ -2,7 +2,6 @@
 <!-- Copyright 2016 Tecnativa - Antonio Espinosa
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <record id="event_draft" model="event.registration.state">
         <field name="name">Unconfirmed</field>
         <field name="code">draft</field>
@@ -22,5 +21,4 @@
         <field name="name">Attended</field>
         <field name="code">done</field>
     </record>
-
 </odoo>
