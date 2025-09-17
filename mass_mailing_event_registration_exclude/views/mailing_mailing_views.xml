@@ -5,15 +5,12 @@
     <record model="ir.ui.view" id="view_mail_mass_mailing_form">
         <field name="name">Add event and exclude</field>
         <field name="model">mailing.mailing</field>
-        <field
-            name="inherit_id"
-            ref="mass_mailing.mailing_mailing_view_form_full_width"
-        />
+        <field name="inherit_id" ref="mass_mailing.view_mail_mass_mailing_form" />
         <field name="arch" type="xml">
             <field name="mailing_domain" position="attributes">
                 <attribute
                     name="context"
-                >{'search_default_not_opt_out': 1, 'exclude_mass_mailing': active_id}</attribute>
+                >{'search_default_not_opt_out': 1, 'exclude_mass_mailing': id}</attribute>
             </field>
             <notebook position="before">
                 <group>

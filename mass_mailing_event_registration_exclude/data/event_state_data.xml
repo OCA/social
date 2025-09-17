@@ -13,7 +13,7 @@
     </record>
 
     <record id="event_open" model="event.registration.state">
-        <field name="name">Confirmed</field>
+        <field name="name">Registered</field>
         <field name="code">open</field>
     </record>
 
