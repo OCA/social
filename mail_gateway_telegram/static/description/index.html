@@ -431,11 +431,11 @@ will not be able to contact your system. In that case, you might need to
 create a telegram bot that will send data to you on an external process
 with the following code.</p>
 <pre class="code python literal-block">
-<span class="kn">from</span> <span class="nn">telegram.ext</span> <span class="kn">import</span> <span class="n">Filters</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">Updater</span><span class="w">
-</span><span class="kn">import</span> <span class="nn">requests</span><span class="w">
+<span class="kn">from</span><span class="w"> </span><span class="nn">telegram.ext</span><span class="w"> </span><span class="kn">import</span> <span class="n">Filters</span><span class="p">,</span> <span class="n">MessageHandler</span><span class="p">,</span> <span class="n">Updater</span><span class="w">
+</span><span class="kn">import</span><span class="w"> </span><span class="nn">requests</span><span class="w">
 </span><span class="n">dp</span> <span class="o">=</span> <span class="n">Updater</span><span class="p">(</span><span class="n">YOUR_TOKEN</span><span class="p">)</span><span class="w">
 
-</span><span class="k">def</span> <span class="nf">message_callback</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">_context</span><span class="p">):</span><span class="w">
+</span><span class="k">def</span><span class="w"> </span><span class="nf">message_callback</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">_context</span><span class="p">):</span><span class="w">
 </span>    <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">YOUR_CONTROLLER</span><span class="p">,</span> <span class="n">json</span><span class="o">=</span><span class="n">update</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span><span class="w">
 
 

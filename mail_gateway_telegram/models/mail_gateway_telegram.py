@@ -130,15 +130,16 @@ class MailGatewayTelegramService(models.AbstractModel):
     async def _process_telegram_attachment(self, attachment):
         if isinstance(attachment, tuple):
             attachment = attachment[-1]
-            # That might happen with images, we will get the last one as it is the bigger one.
+            # That might happen with images, we will get the last one as it is the
+            # bigger one.
         if isinstance(
             attachment,
             (
-                telegram.Game,
-                telegram.Invoice,
-                telegram.Location,
-                telegram.SuccessfulPayment,
-                telegram.Venue,
+                telegram.Game
+                | telegram.Invoice
+                | telegram.Location
+                | telegram.SuccessfulPayment
+                | telegram.Venue
             ),
         ):
             return
@@ -190,12 +191,9 @@ class MailGatewayTelegramService(models.AbstractModel):
                 effective_attachment = current_attachment
             if isinstance(effective_attachment, telegram.Location):
                 body += (
-                    '<a target="_blank" href="https://www.google.com/'
-                    'maps/search/?api=1&query=%s,%s">Location</a>'
-                    % (
-                        effective_attachment.latitude,
-                        effective_attachment.longitude,
-                    )
+                    f'<a target="_blank" href="https://www.google.com/'
+                    f"maps/search/?api=1&query={effective_attachment.latitude},"
+                    f'{effective_attachment.longitude}">Location</a>'
                 )
             attachment_data = asyncio.run(
                 self._process_telegram_attachment(effective_attachment)
@@ -204,7 +202,12 @@ class MailGatewayTelegramService(models.AbstractModel):
                 attachments.append(attachment_data)
         if len(body) > 0 or attachments:
             author = self._get_author(chat.gateway_id, update)
-            new_message = chat.message_post(
+            if author._name == "mail.guest":
+                chat = chat.with_user(self.env.ref("base.public_user").id).with_context(
+                    guest=author
+                )
+            # TODO: Check the sudo...
+            new_message = chat.sudo().message_post(
                 body=body,
                 author_id=author._name == "res.partner" and author.id,
                 gateway_type="telegram",

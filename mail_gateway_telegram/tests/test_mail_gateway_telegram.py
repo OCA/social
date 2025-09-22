@@ -147,7 +147,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
                 },
                 "entities": [{"type": "bot_command", "offset": 0, "length": 6}],
                 "date": 1639666351,
-                "text": "/start %s%s" % (cls.password, cls.password),
+                "text": f"/start {cls.password}{cls.password}",
             },
         }
         cls.message_04 = {
@@ -318,12 +318,14 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch("telegram.Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
 
         with patch("telegram.Bot", ExtBot):
             self.set_message(self.message_01, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertTrue(chat)
         self.assertTrue(chat.message_ids)
 
@@ -334,11 +336,13 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch("telegram.Bot", ExtBot):
             self.set_message(self.message_02, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertTrue(chat)
         self.assertFalse(chat.message_ids)
         with patch("telegram.Bot", getMyBot()):
@@ -357,23 +361,31 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         )
         self.gateway.flush_recordset()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch("telegram.Bot", ExtBot):
             self.set_message(self.message_01, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertFalse(chat)
         with patch("telegram.Bot", ExtBot):
             self.set_message(self.message_02, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertFalse(chat)
         with patch("telegram.Bot", ExtBot):
             self.set_message(self.message_03, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertFalse(chat)
         with patch("telegram.Bot", ExtBot):
             self.set_message(self.message_04, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertTrue(chat)
         self.assertFalse(chat.message_ids)
         with patch("telegram.Bot", ExtBot):
@@ -383,11 +395,11 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
 
     def test_webhook_no_webhook(self):
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         self.set_message(self.message_01, self.webhook + self.webhook)
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
 
     def test_post_message(self):
@@ -397,11 +409,11 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -428,11 +440,11 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -459,11 +471,11 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -492,11 +504,11 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -523,11 +535,13 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch("telegram.Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch("telegram.Bot", getMyBot()):
             self.set_message(self.message_05, self.webhook)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertTrue(chat)
         self.assertTrue(chat.message_ids)
         self.assertTrue(chat.message_ids.attachment_ids)
@@ -539,14 +553,16 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch("telegram.Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch(
             "telegram.Bot",
             getMyBot(file="addons/mail_gateway_telegram/tests/sticker.tgs"),
         ):
             self.set_message(self.message_07, self.webhook, timeout=30)
-        chat = self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
         self.assertTrue(chat)
         self.assertTrue(chat.message_ids)
         self.assertTrue(chat.message_ids.attachment_ids)
@@ -560,7 +576,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
 
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -614,7 +630,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
 
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -672,7 +688,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_01, self.webhook)
         messages = self.partner.message_ids
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertTrue(channel.message_ids)
@@ -693,7 +709,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_01, self.webhook)
 
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -748,10 +764,10 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
 
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
-        channel_info = channel.channel_info()[0]
+        channel_info = channel._channel_info()[0]
         self.assertEqual(channel_info["gateway"]["id"], self.gateway.id)
         self.assertTrue(channel.avatar_128)
 
@@ -762,11 +778,11 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
-        channel = self.env["mail.channel"].search(
+        channel = self.env["discuss.channel"].search(
             [("gateway_id", "=", self.gateway.id)]
         )
         self.assertFalse(
@@ -791,7 +807,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         with patch.object(telegram, "Bot", getMyBot()):
             self.gateway.set_webhook()
         self.assertFalse(
-            self.env["mail.channel"].search([("gateway_id", "=", self.gateway.id)])
+            self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)

@@ -7,8 +7,8 @@ from odoo.modules.module import get_resource_path
 from odoo.addons.base.models.avatar_mixin import get_hsl_from_seed
 
 
-class MailChannel(models.Model):
-    _inherit = "mail.channel"
+class DiscussChannel(models.Model):
+    _inherit = "discuss.channel"
 
     def _generate_avatar_gateway(self):
         if self.gateway_id.gateway_type == "telegram":
