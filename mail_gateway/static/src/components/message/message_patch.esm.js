@@ -3,36 +3,6 @@ import {_t} from "@web/core/l10n/translation";
 import {patch} from "@web/core/utils/patch";
 
 patch(Message.prototype, {
-    hasAuthorClickable() {
-        if (
-            this.message.gateway_type &&
-            this.message.author?.type === "guest" &&
-            this.message.author.id
-        ) {
-            return true;
-        }
-        return super.hasAuthorClickable();
-    },
-    getAuthorText() {
-        if (this.hasAuthorClickable() && this.message.gateway_type) {
-            return _t("Create partner");
-        }
-        return super.getAuthorText();
-    },
-    onClickAuthor(ev) {
-        if (this.message.gateway_type && this.hasAuthorClickable()) {
-            ev.stopPropagation();
-            return this.env.services.action.doAction({
-                name: _t("Manage guest"),
-                type: "ir.actions.act_window",
-                res_model: "mail.guest.manage",
-                context: {default_guest_id: this.message.author.id},
-                views: [[false, "form"]],
-                target: "new",
-            });
-        }
-        return super.onClickAuthor(...arguments);
-    },
     onClickLinkGatewayToThread() {
         this.env.services.action.doAction({
             name: _t("Link Message to thread"),
