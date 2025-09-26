@@ -1,12 +1,11 @@
 from markupsafe import Markup
 
-from odoo import api, models, tools
+from odoo import models, tools
 
 
 class MailMail(models.Model):
     _inherit = "mail.mail"
 
-    @api.model
     def _build_cc_text(self, partners):
         if not partners:
             return ""
