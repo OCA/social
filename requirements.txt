@@ -2,4 +2,5 @@
 cairosvg
 lottie
 python-telegram-bot
+linkedin-api-client
 requests_toolbelt
