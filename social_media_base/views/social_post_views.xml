@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_network_post_form_view">
+        <field name="name">social.post.form</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        type="object"
+                        name="action_create_post_account"
+                        class="oe_highlight"
+                        string="Post"
+                        invisible="state not in ('draft','planned') or send_post == 'schedule'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
+                </header>
+                <sheet>
+                    <group invisible="state not in ('draft','planned')">
+                        <group>
+                            <field
+                                name="account_ids"
+                                widget="many2many_tags"
+                                options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                            />
+                            <field name="message" />
+                            <field
+                                name="image_ids"
+                                widget="many2many_binary"
+                                options="{'accepted_file_extensions': 'image/jpeg, image/png, image/jpg'}"
+                            />
+                            <field name="video_ids" widget="many2many_binary" />
+                            <field name="campaign_id" />
+                            <field name="send_post" />
+                            <field
+                                name="send_post_date"
+                                readonly="0"
+                                invisible="send_post == 'now'"
+                                required="send_post == 'schedule'"
+                            />
+                        </group>
+                        <group>
+                            <div class="post-preview">
+                                <field name="post_preview" nolabel="1" />
+                            </div>
+                        </group>
+                    </group>
+                    <div invisible="state in ('draft','planned')">
+                        <field name="message" readonly="1" />
+                    </div>
+                    <notebook invisible="state in ('draft','planned')">
+                        <page name="post_account_ids" string="Posts">
+                            <field name="post_account_ids" nolabel="1" readonly="1">
+                                <kanban js_class="social_kanban">
+                                    <field name="message" />
+                                    <field name="published_date" />
+                                    <field name="image_urls" />
+                                    <field name="comment_count" />
+                                    <field name="like_count" />
+                                    <field name="post_account_url" />
+                                    <field name="author" />
+                                    <field name="media_type" />
+                                    <field name="account_id" />
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div
+                                                t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                                            >
+                                                <t
+                                                    t-call="social_media_base.postAccountHeader"
+                                                />
+
+                                                <div class="oe_kanban_content">
+
+                                                    <t
+                                                        t-set="images"
+                                                        t-value="JSON.parse(record.image_urls.raw_value)"
+                                                    />
+                                                    <t
+                                                        t-call="social_media_base.postAccountMessageImages"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_network_post_tree_view">
+        <field name="name">social.post.tree</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-muted="state == 'draft'"
+                decoration-info="state in ('planned','publishing')"
+                decoration-success="state == 'published'"
+                decoration-danger="state == 'cancelled'"
+            >
+                <field name="message" />
+                <field name="account_ids" widget="many2many_tags" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_shares" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+                <field name="state" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_kanban_view">
+        <field name="name">social.post.kanban</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <kanban js_class="social_kanban">
+                <field name="id" />
+                <field name="account_ids" />
+                <field name="message" />
+                <field name="published_date" />
+                <field name="image_urls" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_impression" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click rounded">
+                            <div class="d-flex flex-column">
+                                <div
+                                    class="d-flex justify-content-between align-items-center"
+                                >
+                                    <field name="account_ids" widget="many2many_tags" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-muted="state == 'draft'"
+                                        decoration-info="state in ('planned','publishing')"
+                                        decoration-success="state == 'published'"
+                                        decoration-danger="state == 'cancelled'"
+                                    />
+                                </div>
+                                <hr />
+                                <div t-if="record.message">
+                                    <span
+                                        t-out="record.message.raw_value.substring(0,record.messageLength)"
+                                    />
+                                    <span
+                                        t-if="record.message.raw_value.length > record.messageLength"
+                                        class="cursor-pointer show-more-message"
+                                    >...see more</span>
+                                </div>
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value)"
+                                />
+                                <div
+                                    t-if="images.length > 2"
+                                    class="row h-auto social-all-images"
+                                >
+                                    <button class="btn btn-md active" role="button">
+                                        + <t t-esc="images.length - 2" />
+                                    </button>
+                                </div>
+                                <div
+                                    class="d-flex justify-content-between align-items-center mt-1"
+                                >
+                                    <t
+                                        t-foreach="images.slice(0,record.countShowImage)"
+                                        t-as="img"
+                                        t-key="img"
+                                    >
+                                        <img
+                                            t-att-src="img"
+                                            alt="Image"
+                                            class="img-fluid img-posts"
+                                        />
+                                    </t>
+                                </div>
+                                <hr />
+                                <span>Clicks: <t
+                                        t-esc="record.count_post_clicks.raw_value"
+                                    /></span>
+                                <span>Interactions: <t
+                                        t-esc="record.count_post_interactions.raw_value"
+                                    /></span>
+                                <span>Engagement: <t
+                                        t-esc="record.count_post_engagement.raw_value"
+                                    /></span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="social_post_view_search" model="ir.ui.view">
+        <field name="name">social.post.view.search</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <search>
+                <searchpanel>
+                    <field name="state" enable_counters="1" />
+                    <field
+                        name="account_ids"
+                        select="multi"
+                        icon="fa-share-alt"
+                        enable_counters="1"
+                        string="Social network"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_post_act_window_kanban">
+        <field name="name">Posts</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>
