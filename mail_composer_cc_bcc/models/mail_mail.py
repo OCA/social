@@ -17,16 +17,7 @@ _logger = logging.getLogger(__name__)
 
 
 def format_emails(partners):
-    emails = [
-        tools.formataddr(
-            (
-                p.name or "False",
-                p.email and tools.mail._normalize_email(p.email) or "False",
-            )
-        )
-        for p in partners
-    ]
-    return ", ".join(emails)
+    return [tools.formataddr((p.name or "", p.email)) for p in partners if p.email]
 
 
 class MailMail(models.Model):
