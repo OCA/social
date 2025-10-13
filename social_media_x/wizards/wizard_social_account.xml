@@ -12,7 +12,7 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='social_account_data']" position="inside">
-                <field name="media_type" invisible="1" />
+                <field name="media_type" invisible="True" />
                 <field
                     name="x_api_key"
                     required="media_type == 'x' or (update_keys and context.get('social_update_account', False))"

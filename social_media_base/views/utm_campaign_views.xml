@@ -9,7 +9,7 @@
         <field name="inherit_id" ref="utm.utm_campaign_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="allow_media_ids" invisible="1" />
+                <field name="allow_media_ids" invisible="True" />
                 <field name="campaign_group_id" required="1" />
                 <field name="media_id" required="1" />
                 <field
@@ -27,7 +27,7 @@
         <field name="inherit_id" ref="utm.utm_campaign_view_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
-                <field name="allow_media_ids" column_invisible="1" />
+                <field name="allow_media_ids" column_invisible="True" />
                 <field name="campaign_group_id" />
                 <field name="media_id" />
                 <field name="account_id" />
