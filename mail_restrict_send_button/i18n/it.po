@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-14 15:06+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,14 +14,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mail_restrict_send_button
 #. openerp-web
 #: code:addons/mail_restrict_send_button/static/src/js/chatter.js:0
 #, python-format
 msgid "Creating a new record..."
-msgstr ""
+msgstr "Creazione nuovo record..."
 
 #. module: mail_restrict_send_button
 #: model:ir.model.fields,field_description:mail_restrict_send_button.field_mail_followers__display_name
@@ -31,26 +31,26 @@ msgstr "Nome visualizzato"
 #. module: mail_restrict_send_button
 #: model:ir.model,name:mail_restrict_send_button.model_mail_followers
 msgid "Document Followers"
-msgstr ""
+msgstr "Chi segue il documento"
 
 #. module: mail_restrict_send_button
 #: model:ir.model.fields,field_description:mail_restrict_send_button.field_mail_followers__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_restrict_send_button
 #: model:ir.model.fields,field_description:mail_restrict_send_button.field_mail_followers____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mail_restrict_send_button
 #. openerp-web
 #: code:addons/mail_restrict_send_button/static/src/xml/chatter.xml:0
 #, python-format
 msgid "Send message"
-msgstr ""
+msgstr "Invia messaggio"
 
 #. module: mail_restrict_send_button
 #: model:res.groups,name:mail_restrict_send_button.group_show_send_message_button
 msgid "Show Send Message Button"
-msgstr ""
+msgstr "Visualizza pulsante invio messaggio"
