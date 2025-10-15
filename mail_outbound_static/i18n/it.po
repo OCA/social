@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-05-27 14:26+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -23,6 +23,8 @@ msgid ""
 "%s is not a valid domain. Please define a list of valid domains separated by"
 " comma"
 msgstr ""
+"%s non è un dominio valido. Definire una lista di domini validi separati da "
+"virgola"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__domain_whitelist
@@ -32,6 +34,10 @@ msgid ""
 "messages where the message 'From' email domain match with the domain "
 "whitelist."
 msgstr ""
+"Consente elenco domni separati da virgola. Se non è definito un server SMTP "
+"si potrà cercare l'appropriato server di posta da utilizzare per inviare "
+"messaggi nei quali il dominio del campo 'Da' corrisponde con un dominio "
+"autorizzato."
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__display_name
@@ -41,33 +47,33 @@ msgstr "Nome visualizzato"
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__domain_whitelist
 msgid "Domain Whitelist"
-msgstr ""
+msgstr "Elenco domini autorizzati"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__smtp_from
 msgid "Email From"
-msgstr ""
+msgstr "E-mail da"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,field_description:mail_outbound_static.field_ir_mail_server____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mail_outbound_static
 #: model:ir.model,name:mail_outbound_static.model_ir_mail_server
 msgid "Mail Server"
-msgstr ""
+msgstr "Server di posta"
 
 #. module: mail_outbound_static
 #: code:addons/mail_outbound_static/models/ir_mail_server.py:0
 #, python-format
 msgid "Not a valid Email From"
-msgstr ""
+msgstr "Campo e-mail Da non valido"
 
 #. module: mail_outbound_static
 #: model:ir.model.fields,help:mail_outbound_static.field_ir_mail_server__smtp_from
@@ -77,3 +83,7 @@ msgid ""
 "replaced with this value. If does match with the domain whitelist then the "
 "original message's 'From' will not change"
 msgstr ""
+"Impostare per inviare da un indirizzo specifico. Se il campo 'Da' originale "
+"del messaggio non corrisponde con il dominio della lista autorizzata allora "
+"è sostituito con questo valore. Se corrisponde ad un dominio autorizzato "
+"allora il campo 'Da' non cambierà"
