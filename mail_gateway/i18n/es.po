@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2024-05-28 16:26+0000\n"
 "Last-Translator: Anna Martínez <anna080678@gmail.com>\n"
@@ -131,17 +131,21 @@ msgid "Find a gateway channel..."
 msgstr ""
 
 #. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
+#: code:addons/mail_gateway/static/src/core/common/discuss_app_model_patch.esm.js:0
 #: model:ir.actions.act_window,name:mail_gateway.mail_gateway_act_window
-#: model:ir.model.fields,field_description:mail_gateway.field_mail_channel__gateway_id
+#: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__gateway_id
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest__gateway_id
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__gateway_id
 #: model:ir.model.fields,field_description:mail_gateway.field_res_users__gateway_ids
-#: model:ir.model.fields.selection,name:mail_gateway.selection__mail_channel__channel_type__gateway
+#: model:ir.model.fields.selection,name:mail_gateway.selection__discuss_channel__channel_type__gateway
 #: model:ir.model.fields.selection,name:mail_gateway.selection__mail_notification__notification_type__gateway
 #: model:ir.module.category,name:mail_gateway.module_category_gateway
 #: model:ir.ui.menu,name:mail_gateway.mail_gateway_menu
+#, python-format
 msgid "Gateway"
-msgstr ""
+msgstr "Pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_channel_ids
@@ -214,7 +218,7 @@ msgstr ""
 
 #. module: mail_gateway
 #. odoo-javascript
-#: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
+#: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
 #, python-format
 msgid "Gateway message"
 msgstr ""

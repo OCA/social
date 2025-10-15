@@ -19,7 +19,7 @@
                 data-hotkey="shift+w"
             >
                 <i class="fa fa-plane" role="img" aria-label="gateway" />
-                <span> Gateway message</span>
+                <span> Gateway</span>
             </button>
         </xpath>
         <xpath

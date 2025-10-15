@@ -230,6 +230,7 @@ msgstr ""
 
 #. module: mail_gateway
 #. odoo-javascript
+#: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
 #: code:addons/mail_gateway/static/src/core/common/discuss_app_model_patch.esm.js:0
 #: model:ir.actions.act_window,name:mail_gateway.mail_gateway_act_window
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__gateway_id
@@ -319,7 +320,6 @@ msgstr ""
 
 #. module: mail_gateway
 #. odoo-javascript
-#: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
 msgid "Gateway message"
 msgstr ""
