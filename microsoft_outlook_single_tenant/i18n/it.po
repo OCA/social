@@ -6,53 +6,57 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model,name:microsoft_outlook_single_tenant.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_res_config_settings__microsoft_outlook_directory_tenant_id
 msgid "Directory (tenant) ID"
-msgstr ""
+msgstr "Cartella (tenant) ID"
 
 #. module: microsoft_outlook_single_tenant
 #: model_terms:ir.ui.view,arch_db:microsoft_outlook_single_tenant.res_config_settings_view_form
 msgid "Directory Tenant ID"
-msgstr ""
+msgstr "ID tenant cartella"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_microsoft_outlook_mixin__display_name
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_microsoft_outlook_mixin__id
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_microsoft_outlook_mixin____last_update
 #: model:ir.model.fields,field_description:microsoft_outlook_single_tenant.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model,name:microsoft_outlook_single_tenant.model_microsoft_outlook_mixin
 msgid "Microsoft Outlook Mixin"
-msgstr ""
+msgstr "Mixin Microsoft Outlook"
 
 #. module: microsoft_outlook_single_tenant
 #: model:ir.model.fields,help:microsoft_outlook_single_tenant.field_res_config_settings__microsoft_outlook_directory_tenant_id
 msgid "Place here Tenant ID (or Application ID), if single-tenant application"
 msgstr ""
+"Inserire qui l'ID del tenane (o ID applicazione), se applicazione a tenant "
+"singolo"
