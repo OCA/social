@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+  <record id="social_post_form_view" model="ir.ui.view">
+    <field name="name">social.post.form.facebook</field>
+    <field name="model">social.post</field>
+    <field name="inherit_id" ref="social_media_base.social_network_post_form_view"/>
+    <field name="arch" type="xml">
+
+      <!-- Insert Facebook blocks inside the sheet -->
+      <xpath expr="//form//sheet" position="inside">
+
+        <!-- Details -->
+        <group string="Facebook Details" invisible="not fb_post_id">
+          <field name="fb_post_id" readonly="1"/>
+          <field name="fb_content_type" readonly="1"/>
+          <field name="permalink_url" widget="url" readonly="1"/>
+          <field name="created_time" readonly="1"/>
+          <field name="last_sync_at" readonly="1"/>
+          <field name="media_type" readonly="1"/>
+          <field name="media_url" widget="url" readonly="1"/>
+        </group>
+
+        <!-- Metrics -->
+        <group string="Facebook Metrics" invisible="not fb_post_id">
+          <group>
+            <field name="likes_count" readonly="1"/>
+            <field name="comments_count" readonly="1"/>
+            <field name="saves_count" readonly="1"/>
+            <field name="clicks_total" readonly="1"/>
+          </group>
+          <group>
+            <field name="plays_total" readonly="1"/>
+            <field name="plays_unique" readonly="1"/>
+            <field name="watch_time_sec" readonly="1"/>
+            <field name="avg_watch_time_sec" readonly="1"/>
+          </group>
+          <group>
+            <field name="completion_rate_pct" readonly="1"/>
+            <field name="engagement_rate_pct" readonly="1"/>
+            <field name="metrics_updated_at" readonly="1"/>
+          </group>
+        </group>
+
+        <!-- Ads -->
+        <group string="Ad Details" invisible="fb_content_type != 'ad'">
+          <group>
+            <field name="fb_ad_id" readonly="1"/>
+            <field name="fb_adset_id" readonly="1"/>
+            <field name="fb_campaign_id" readonly="1"/>
+            <field name="ad_name" readonly="1"/>
+          </group>
+          <group>
+            <field name="spend_amount" readonly="1"/>
+            <field name="ctr_pct" readonly="1"/>
+            <field name="leads_total" readonly="1"/>
+            <field name="conversions_total" readonly="1"/>
+            <field name="cpl_amount" readonly="1"/>
+            <field name="currency" readonly="1"/>
+          </group>
+        </group>
+
+      </xpath>
+
+    </field>
+  </record>
+</odoo>

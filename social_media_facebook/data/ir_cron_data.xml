@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <record id="ir_cron_sync_facebook_content" model="ir.cron">
+        <field name="name">Social Media: Sync Facebook Content</field>
+        <field name="model_id" ref="social_media_base.model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model._cron_sync_facebook_content()</field>
+        <field name="interval_number">6</field>
+        <field name="interval_type">hours</field>
+        <field name="active" eval="True" />
+        <field name="priority">1</field>
+    </record>
+
+</odoo>
