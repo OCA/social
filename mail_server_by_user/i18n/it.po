@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-14 15:06+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mail_server_by_user
 #: model:ir.model.fields,field_description:mail_server_by_user.field_ir_mail_server__display_name
@@ -26,31 +26,31 @@ msgstr "Nome visualizzato"
 #. module: mail_server_by_user
 #: model:ir.model,name:mail_server_by_user.model_mail_thread
 msgid "Email Thread"
-msgstr ""
+msgstr "Discussione e-mail"
 
 #. module: mail_server_by_user
 #: model:ir.model.fields,field_description:mail_server_by_user.field_ir_mail_server__id
 #: model:ir.model.fields,field_description:mail_server_by_user.field_mail_mail__id
 #: model:ir.model.fields,field_description:mail_server_by_user.field_mail_thread__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_server_by_user
 #: model:ir.model.fields,field_description:mail_server_by_user.field_ir_mail_server____last_update
 #: model:ir.model.fields,field_description:mail_server_by_user.field_mail_mail____last_update
 #: model:ir.model.fields,field_description:mail_server_by_user.field_mail_thread____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mail_server_by_user
 #: model:ir.model,name:mail_server_by_user.model_ir_mail_server
 msgid "Mail Server"
-msgstr ""
+msgstr "Server di posta"
 
 #. module: mail_server_by_user
 #: model:ir.model,name:mail_server_by_user.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "E-mail in uscita"
 
 #. module: mail_server_by_user
 #: code:addons/mail_server_by_user/tests/test_mail_server_by_user.py:0
@@ -58,4 +58,4 @@ msgstr ""
 #: code:addons/mail_server_by_user/tests/test_mail_server_by_user.py:0
 #, python-format
 msgid "Test"
-msgstr ""
+msgstr "Test"
