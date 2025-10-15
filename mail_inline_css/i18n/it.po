@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-01-16 03:47+0000\n"
-"PO-Revision-Date: 2025-03-14 15:06+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mail_inline_css
 #: model:mail.template,subject:mail_inline_css.email_template_demo
 msgid "Demo email inline styles"
-msgstr ""
+msgstr "Demo stili inline e-mail"
 
 #. module: mail_inline_css
 #: model:ir.model.fields,field_description:mail_inline_css.field_mail_template__display_name
@@ -37,17 +37,17 @@ msgstr "Modelli e-mail"
 #. module: mail_inline_css
 #: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "Hello"
-msgstr ""
+msgstr "Salve"
 
 #. module: mail_inline_css
 #: model:ir.model.fields,field_description:mail_inline_css.field_mail_template__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_inline_css
 #: model:ir.model.fields,field_description:mail_inline_css.field_mail_template____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mail_inline_css
 #: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
@@ -55,8 +55,10 @@ msgid ""
 "This e-mail styles are inline rendered although its template defines styles "
 "as embedded CSS!"
 msgstr ""
+"Questi stili e-mail sono resi inline anche se il loro modello definisce "
+"stili come CSS incorporati!"
 
 #. module: mail_inline_css
 #: model_terms:ir.ui.view,arch_db:mail_inline_css.demo_email_hello
 msgid "www.example.com"
-msgstr ""
+msgstr "www.example.com"
