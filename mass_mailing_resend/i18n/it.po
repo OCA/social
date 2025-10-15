@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-03-14 15:06+0000\n"
+"PO-Revision-Date: 2025-10-15 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mass_mailing_resend
 #: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
@@ -24,6 +24,10 @@ msgid ""
 " sent recipients, click on <b>Emails Sent</b> smart-button for removing the "
 "existing record(s)."
 msgstr ""
+"<i class=\"fa fa-info-circle\"/> Nuove spedizioni verranno fatte solo a "
+"destinatari senza spedizioni/nuovi. Se si vuole rispedire in massa "
+"nuovamente a destinatari con spedizioni, fare clic sul pulsante avanzato "
+"<b>E-mail inviata</b> per rimuovere i record esistenti."
 
 #. module: mass_mailing_resend
 #: model:ir.model.fields,field_description:mass_mailing_resend.field_mailing_mailing__display_name
@@ -33,25 +37,27 @@ msgstr "Nome visualizzato"
 #. module: mass_mailing_resend
 #: model:ir.model.fields,field_description:mass_mailing_resend.field_mailing_mailing__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mass_mailing_resend
 #: model:ir.model.fields,field_description:mass_mailing_resend.field_mailing_mailing____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: mass_mailing_resend
 #: model:ir.model,name:mass_mailing_resend.model_mailing_mailing
 msgid "Mass Mailing"
-msgstr ""
+msgstr "Spedizione di massa"
 
 #. module: mass_mailing_resend
 #: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
 msgid "Resend"
-msgstr ""
+msgstr "Reinvia"
 
 #. module: mass_mailing_resend
 #: code:addons/mass_mailing_resend/models/mailing_mailing.py:0
 #, python-format
 msgid "You can't resend a mass mailing that is being sent or in draft state."
 msgstr ""
+"Non si può rispedire una spedizione di massa che è già stata spedita o è in "
+"stato bozza."
