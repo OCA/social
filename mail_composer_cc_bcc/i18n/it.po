@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-04-09 09:24+0000\n"
+"PO-Revision-Date: 2025-10-16 11:42+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -22,13 +22,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_template__email_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_template_preview__email_bcc
 msgid "Bcc"
-msgstr "Bcc"
+msgstr "Ccn"
 
 #. module: mail_composer_cc_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_mail__recipient_bcc_ids
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_mail_message__recipient_bcc_ids
 msgid "Bcc (Partners)"
-msgstr "Bcc (partner)"
+msgstr "Ccn (partner)"
 
 #. module: mail_composer_cc_bcc
 #: model:ir.model.fields,help:mail_composer_cc_bcc.field_mail_template_preview__email_bcc
@@ -70,7 +70,7 @@ msgstr "Aziende"
 #. module: mail_composer_cc_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_res_company__default_partner_bcc_ids
 msgid "Default Bcc"
-msgstr "Bcc predefinito"
+msgstr "Ccn predefinito"
 
 #. module: mail_composer_cc_bcc
 #: model:ir.model.fields,field_description:mail_composer_cc_bcc.field_res_company__default_partner_cc_ids
