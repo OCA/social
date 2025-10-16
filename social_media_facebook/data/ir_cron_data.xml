@@ -3,15 +3,18 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
 
+    <!-- Manual sync action - Feature #9: Inactive by default, supports manual trigger with parameters -->
     <record id="ir_cron_sync_facebook_content" model="ir.cron">
-        <field name="name">Social Media: Sync Facebook Content</field>
+        <field name="name">Social Media: Sync Facebook Content (Manual Trigger)</field>
         <field name="model_id" ref="social_media_base.model_social_account" />
         <field name="state">code</field>
         <field name="code">model._cron_sync_facebook_content()</field>
         <field name="interval_number">6</field>
         <field name="interval_type">hours</field>
-        <field name="active" eval="True" />
+        <field name="active" eval="False" />
         <field name="priority">1</field>
+        <field name="doall" eval="False" />
+        <field name="numbercall">-1</field>
     </record>
 
 </odoo>

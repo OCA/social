@@ -1,3 +1,7 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
 access_wizard_fetch_pages,wizard_fetch_pages,model_wizard_fetch_pages,base.group_user,1,1,1,1
 access_wizard_fetch_pages_line,wizard_fetch_pages_line,model_wizard_fetch_pages_line,base.group_user,1,1,1,1
+access_social_comment_user,social_comment_user,model_social_comment,base.group_user,1,1,1,1
+access_social_lead_form_user,social_lead_form_user,model_social_lead_form,base.group_user,1,1,1,1
+access_social_lead_user,social_lead_user,model_social_lead,base.group_user,1,1,1,1
+access_social_lead_field_mapping_user,social_lead_field_mapping_user,model_social_lead_field_mapping,base.group_user,1,1,1,1

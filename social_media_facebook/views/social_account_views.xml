@@ -10,9 +10,14 @@
       <!-- Add Facebook controls inside the existing 'account_key_token' page -->
       <xpath expr="//page[@name='account_key_token']" position="inside">
 
-        <!-- Action button (only visible for Facebook accounts) -->
-        <div class="col-6 mb-3">
-          <button type="object" name="action_sync_facebook_content" string="Sync Content" class="btn-primary"/>
+        <!-- Action buttons (only visible for Facebook accounts) -->
+        <div class="row">
+          <div class="col-6 mb-3">
+            <button type="object" name="action_sync_facebook_content" string="Sync Content" class="btn-primary"/>
+          </div>
+          <div class="col-6 mb-3">
+            <button type="object" name="action_refresh_facebook_token" string="Refresh Token" class="btn-secondary"/>
+          </div>
         </div>
 
         <!-- App Credentials -->
@@ -20,6 +25,7 @@
           <field name="media_type" invisible="1"/>
           <field name="facebook_app_id" readonly="1"/>
           <field name="facebook_app_secret" widget="password" readonly="1"/>
+          <field name="fb_ad_account_id" placeholder="act_123456789"/>
         </group>
 
         <!-- Page Information -->
@@ -40,13 +46,6 @@
           <field name="last_ads_sync_at" readonly="1"/>
         </group>
 
-      </xpath>
-
-      <!-- Add smart button into the existing button_box -->
-      <xpath expr="//form/sheet" position="inside">
-        <div class="oe_button_box" name="button_box">
-          <button name="%(social_media_base.social_post_act_window_kanban)d" type="action" class="oe_stat_button" icon="fa-file-text-o" context="{'search_default_account_id': id, 'default_media_id': media_id}"/>
-        </div>
       </xpath>
 
     </field>

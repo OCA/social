@@ -12,9 +12,36 @@ _HEADERS_FACEBOOK = {
 }
 
 # Facebook OAuth Scopes
+# Base scopes for all features
 _SCOPE_FACEBOOK = [
-    "pages_manage_posts",
-    "pages_read_engagement",
-    "pages_show_list",
-    "public_profile",
+    "pages_show_list",           # Required: List available pages
+    "pages_read_engagement",     # Required: Read post metrics
+    "public_profile",            # Required: Basic profile info
 ]
+
+# Additional scopes enabled by feature
+_SCOPE_FACEBOOK_PUBLISHING = [
+    "pages_manage_posts",        # Feature #6: Publish content
+]
+
+_SCOPE_FACEBOOK_COMMENTS = [
+    "pages_read_user_content",   # Feature #4: Read comments
+    "pages_manage_engagement",   # Feature #4: Reply to comments
+]
+
+_SCOPE_FACEBOOK_LEADS = [
+    "leads_retrieval",           # Feature #5: Access lead ads data
+]
+
+_SCOPE_FACEBOOK_ADS = [
+    "ads_read",                  # Feature #2.2: Read ad insights
+]
+
+# Combined default scopes (enable all features)
+_SCOPE_FACEBOOK_ALL = (
+    _SCOPE_FACEBOOK +
+    _SCOPE_FACEBOOK_PUBLISHING +
+    _SCOPE_FACEBOOK_COMMENTS +
+    _SCOPE_FACEBOOK_LEADS +
+    _SCOPE_FACEBOOK_ADS
+)

@@ -108,6 +108,9 @@ class SocialPost(models.Model):
     watch_time_sec = fields.Integer(
         string="Watch Time (sec)", default=0, help="Total watch time in seconds"
     )
+    completed_views = fields.Integer(
+        string="Completed Views", default=0, help="Number of views that watched to completion"
+    )
     completion_rate_pct = fields.Float(
         string="Completion Rate %",
         compute="_compute_completion_rate_pct",
@@ -166,13 +169,14 @@ class SocialPost(models.Model):
             else:
                 record.cpl_amount = 0.0
 
-    @api.depends("plays_total")
+    @api.depends("plays_total", "completed_views")
     def _compute_completion_rate_pct(self):
         """Compute video completion rate with zero-guard"""
         for record in self:
-            # Requires completed_plays field from API - placeholder for now
-            # completion_rate = (completed_plays / plays_total) * 100
-            record.completion_rate_pct = 0.0
+            if record.plays_total > 0:
+                record.completion_rate_pct = (record.completed_views / record.plays_total) * 100
+            else:
+                record.completion_rate_pct = 0.0
 
     @api.depends("watch_time_sec", "plays_total")
     def _compute_avg_watch_time_sec(self):

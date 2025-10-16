@@ -10,7 +10,7 @@ from odoo.exceptions import UserError
 
 _logger = logging.getLogger(__name__)
 
-from ..social_facebook_utils import _SCOPE_FACEBOOK, _URL_AUTH_FACEBOOK
+from ..social_facebook_utils import _SCOPE_FACEBOOK_ALL, _URL_AUTH_FACEBOOK
 
 
 class WizardSocialAccount(models.TransientModel):
@@ -46,7 +46,7 @@ class WizardSocialAccount(models.TransientModel):
             params = {
                 "client_id": app_id,
                 "redirect_uri": redirect_url,
-                "scope": ",".join(_SCOPE_FACEBOOK),
+                "scope": ",".join(_SCOPE_FACEBOOK_ALL),
                 "response_type": "code",
             }
             url_auth = f"{_URL_AUTH_FACEBOOK}?{url_encode(params)}"

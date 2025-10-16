@@ -27,15 +27,31 @@ class WizardFetchPages(models.TransientModel):
         _logger.info("Wizard ID: %s", self.id)
         _logger.info("Total pages in wizard: %d", len(self.page_ids))
 
-        selected_page_ids = self.page_ids.filtered(lambda p: p.selected).mapped(
-            "page_id"
-        )
-        _logger.info("Selected pages count: %d", len(selected_page_ids))
-        _logger.info("Selected page IDs: %s", selected_page_ids)
+        selected_pages = self.page_ids.filtered(lambda p: p.selected)
+        _logger.info("Selected pages count: %d", len(selected_pages))
 
-        if selected_page_ids:
-            token = {"access_token": self.user_access_token}
-            self.env["social.account"].create_account_facebook(selected_page_ids, token)
+        if selected_pages:
+            # Prepare pages data from wizard lines (already have all needed data)
+            pages_data = []
+            for line in selected_pages:
+                pages_data.append({
+                    "id": line.page_id,
+                    "name": line.page_name,
+                    "access_token": line.page_access_token,
+                })
+                _logger.info("  - Will create account for: %s (ID: %s)", line.page_name, line.page_id)
+
+            # Get app credentials from wizard.social.account if available
+            wizard_social_account = self.env["wizard.social.account"].search(
+                [("media_type", "=", "facebook")], order="id desc", limit=1
+            )
+
+            # Create accounts using the data we already have
+            self.env["social.account"].create_account_facebook_from_wizard(
+                pages_data,
+                self.user_access_token,
+                wizard_social_account
+            )
             _logger.info("Account creation completed")
         else:
             _logger.warning("No pages selected!")
