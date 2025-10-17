@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ============
 Mail Gateway
 ============
@@ -17,7 +13,7 @@ Mail Gateway
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
@@ -50,6 +46,10 @@ When external messages are received, they will be directly sent to the discuss m
 Answering to these messages will send the answer to the external contact.
 We can assign this messages to any record using the message actions.
 Also, we can assign the sender to a partner using the followers menu and selecting the partner.
+
+**Auto Reply Messages**
+
+When a new discussion channel is created by a partner sending their first message, the system can automatically send a welcome or acknowledgment message if configured in the gateway settings. This feature helps ensure that customers know their message was received and that someone will respond shortly.
 
 On a standard record associated to a partner with external chat, we can send messages to the external contact directly selecting the methods of the partner.
 To use this, we just need to use the

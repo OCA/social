@@ -1,4 +1,5 @@
 - Access in development mode
 - Go to `Settings / Technical / Email / Gateway`
 - Create a gateway. Follow the instruction of the specific tab in order to integrate it.
+- Optionally, configure an automatic reply message in the "Auto Reply Message" field. This message will be sent automatically when a new discussion channel is created by a partner.
 - Start receiving notifications

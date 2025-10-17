@@ -32,6 +32,10 @@ class MailGateway(models.Model):
     company_id = fields.Many2one(
         "res.company", default=lambda self: self.env.company.id
     )
+    auto_reply_message = fields.Text(
+        help="Automatic message sent when a new channel is created by the partner",
+        translate=True,
+    )
 
     _sql_constraints = [
         ("mail_gateway_token", "unique(token)", "Token must be unique"),

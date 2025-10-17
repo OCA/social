@@ -49,6 +49,12 @@
                             groups="base.group_multi_company"
                         />
                     </group>
+                    <group>
+                        <field
+                            name="auto_reply_message"
+                            placeholder="Enter the auto-reply message that will be sent when a new channel is created..."
+                        />
+                    </group>
                     <notebook>
                         <page name="member" string="Members">
                             <field name="member_ids" />

@@ -80,3 +80,44 @@ class MailGatewayAbstract(models.AbstractModel):
 
     def _get_message_body(self, record):
         return record.mail_message_id.body
+
+    def _send_auto_reply_if_needed(self, chat):
+        """Send auto-reply message if configured and channel has only 1 guest message"""
+        if not chat.gateway_id.auto_reply_message:
+            return
+
+        # Count comment messages in the channel
+        message_count = self.env["mail.message"].search_count(
+            [
+                ("model", "=", "mail.channel"),
+                ("res_id", "=", chat.id),
+                ("message_type", "=", "comment"),
+            ]
+        )
+
+        # If only 1 message, check if it's from a guest
+        if message_count == 1:
+            first_message = self.env["mail.message"].search(
+                [
+                    ("model", "=", "mail.channel"),
+                    ("res_id", "=", chat.id),
+                    ("message_type", "=", "comment"),
+                    ("author_id", "!=", False),
+                ],
+                order="date asc",
+                limit=1,
+            )
+
+            # If the first (and only) message is from a guest, send auto-reply
+            if first_message and not first_message.author_id.user_id:
+                # Send auto-reply message with slightly later timestamp
+                from datetime import datetime, timedelta
+
+                auto_reply_date = datetime.now() + timedelta(seconds=1)
+
+                chat.with_context(no_gateway_notification=False).message_post(
+                    body=chat.gateway_id.auto_reply_message,
+                    message_type="comment",
+                    subtype_xmlid="mail.mt_comment",
+                    date=auto_reply_date,
+                )
