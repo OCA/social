@@ -246,6 +246,9 @@ class MailGatewayTelegramService(models.AbstractModel):
                     )
                     new_message.gateway_message_id = new_related_message
                     self._post_process_reply(related_message)
+
+            # Send auto-reply message after processing the contact's message
+            self._send_auto_reply_if_needed(chat)
             return new_message
 
     async def _send_telegram(
