@@ -180,6 +180,9 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     self._post_process_reply(related_message)
                     new_message.gateway_message_id = new_related_message
 
+            # Send auto-reply message after processing the contact's message
+            self._send_auto_reply_if_needed(chat)
+
     def _send(
         self,
         gateway,
