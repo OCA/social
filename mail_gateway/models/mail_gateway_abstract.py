@@ -1,5 +1,7 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+from datetime import datetime, timedelta
+
 from odoo import Command, models
 
 
@@ -110,9 +112,6 @@ class MailGatewayAbstract(models.AbstractModel):
 
             # If the first (and only) message is from a guest, send auto-reply
             if first_message and not first_message.author_id.user_id:
-                # Send auto-reply message with slightly later timestamp
-                from datetime import datetime, timedelta
-
                 auto_reply_date = datetime.now() + timedelta(seconds=1)
 
                 chat.with_context(no_gateway_notification=False).message_post(
