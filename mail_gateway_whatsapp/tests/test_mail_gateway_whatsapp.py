@@ -30,6 +30,8 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
                 "whatsapp_security_key": "key",
                 "webhook_secret": "MY-SECRET",
                 "member_ids": [(4, cls.env.user.id)],
+                "auto_reply_message": "<p>Hello! Thank you for contacting us via\
+                     WhatsApp. One of our agents will respond shortly.</p>",
             }
         )
         cls.ws_template = cls.env["mail.whatsapp.template"].create(
@@ -380,3 +382,29 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             post_mock.assert_called()
         channel.invalidate_recordset()
         self.assertTrue(channel.message_ids)
+
+    def test_auto_reply_message(self):
+        """Test that auto-reply message is sent when a WhatsApp channel is created"""
+        whatsapp_service = self.env["mail.gateway.whatsapp"]
+
+        # Create a channel simulating a received WhatsApp message
+        channel = whatsapp_service._get_channel(
+            self.gateway, "test_token_auto_reply", {}, force_create=True
+        )
+
+        # Check if the channel was created
+        self.assertTrue(channel, "Channel should have been created")
+
+        # Check if there are messages in the channel
+        messages = self.env["mail.message"].search(
+            [
+                ("model", "=", "mail.channel"),
+                ("res_id", "=", channel.id),
+            ]
+        )
+
+        # Check if the auto-reply message was sent
+        auto_reply_found = any(
+            self.gateway.auto_reply_message in msg.body for msg in messages
+        )
+        self.assertTrue(auto_reply_found, "Auto-reply message should have been sent")
