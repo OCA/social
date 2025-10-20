@@ -12,10 +12,13 @@
 
         <!-- Action buttons (only visible for Facebook accounts) -->
         <div class="row">
-          <div class="col-6 mb-3">
-            <button type="object" name="action_sync_facebook_content" string="Sync Content" class="btn-primary"/>
+          <div class="col-4 mb-3">
+            <button type="object" name="action_sync_facebook_content" string="Quick Sync" class="btn-primary"/>
           </div>
-          <div class="col-6 mb-3">
+          <div class="col-4 mb-3">
+            <button type="object" name="action_sync_with_date_range" string="Sync from Date..." class="btn-info"/>
+          </div>
+          <div class="col-4 mb-3">
             <button type="object" name="action_refresh_facebook_token" string="Refresh Token" class="btn-secondary"/>
           </div>
         </div>
@@ -35,8 +38,8 @@
           <field name="page_access_token" widget="password" readonly="1"/>
           <field name="token_expires_at" readonly="1"/>
           <field name="status"/>
-          <!-- Keep 'enviroment' only if your model uses that exact field name -->
-          <field name="enviroment" widget="boolean_toggle"/>
+          <!-- Environment: test or production -->
+          <field name="enviroment"/>
         </group>
 
         <!-- Sync Status -->

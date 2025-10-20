@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <!-- Inherit social.post.account kanban view to add Facebook-specific fields -->
+  <record id="social_post_account_kanban_view_facebook" model="ir.ui.view">
+    <field name="name">social.post.account.kanban.facebook</field>
+    <field name="model">social.post.account</field>
+    <field name="inherit_id" ref="social_media_base.social_post_account_kanban_view"/>
+    <field name="arch" type="xml">
+      <!-- Add Facebook-specific fields to kanban -->
+      <xpath expr="//field[@name='account_id']" position="after">
+        <field name="facebook_post_id"/>
+      </xpath>
+    </field>
+  </record>
+
+</odoo>

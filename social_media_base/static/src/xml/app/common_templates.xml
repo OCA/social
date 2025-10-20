@@ -1,26 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <!-- POST ACCOUNT FOOTER -->
+    <!-- POST ACCOUNT FOOTER - Match Odoo EE Design -->
     <t t-name="social_media_base.postAccountFooter">
+        <!-- Engagement metrics row - EE style: 👍😂 9,911  💬 75  88 Shares  87,618 Views -->
         <div class="row pt-2">
-            <div class="d-flex justify-content-between">
-                <div>
-                    <i class="fa fa-thumbs-o-up" aria-hidden="true" />
-                    <span class="mx-2" t-esc="record.like_count.value" />
+            <div class="d-flex justify-content-start align-items-center" style="gap: 16px;">
+                <!-- Reactions with emojis -->
+                <div class="social-reactions" t-if="record.like_count and record.like_count.value > 0">
+                    <span class="reaction-emoji">👍</span>
+                    <span class="reaction-emoji">😂</span>
+                    <span class="reaction-count" t-esc="record.like_count_formatted || record.like_count.value" />
                 </div>
-                <div>
-                    <span class="mx-1" t-esc="record.comment_count.value" />
-                    comments
+
+                <!-- Comments -->
+                <div class="social-comments" t-if="record.comment_count">
+                    <i class="fa fa-comment" aria-hidden="true" />
+                    <span t-esc="record.comment_count_formatted || record.comment_count.value" />
+                </div>
+
+                <!-- Shares -->
+                <div class="social-shares" t-if="record.share_count">
+                    <span t-esc="record.share_count_formatted || record.share_count.value" />
+                    <span> Shares</span>
+                </div>
+
+                <!-- Views -->
+                <div class="social-views" t-if="record.view_count">
+                    <span t-esc="record.view_count_formatted || record.view_count.value" />
+                    <span> Views</span>
                 </div>
             </div>
         </div>
-        <div t-if="record.post_account_url.value" class="row pt-2">
+
+        <!-- Action buttons (only show in dialog, not dashboard) -->
+        <div t-if="record.post_account_url.value and !isDashboard" class="row pt-2">
             <div class="d-flex justify-content-center">
                 <hr class="my-2 w-95" />
             </div>
         </div>
-        <div t-if="record.post_account_url.value" class="row pt-2">
+        <div t-if="record.post_account_url.value and !isDashboard" class="row pt-2">
             <div
                 t-attf-class="d-flex justify-content-#{ record.notAvailableLike.includes(record.media_type.raw_value) ? 'end' : 'between'} align-items-center"
             >

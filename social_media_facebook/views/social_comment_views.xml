@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <!-- List View -->
+  <record id="social_comment_tree_view" model="ir.ui.view">
+    <field name="name">social.comment.tree</field>
+    <field name="model">social.comment</field>
+    <field name="arch" type="xml">
+      <list string="Comments" decoration-danger="requires_action" decoration-muted="is_hidden">
+        <field name="created_time"/>
+        <field name="post_id"/>
+        <field name="author_name"/>
+        <field name="message"/>
+        <field name="is_replied" widget="boolean_toggle"/>
+        <field name="is_hidden" invisible="1"/>
+        <field name="requires_action" invisible="1"/>
+        <field name="reply_count"/>
+        <field name="sentiment" widget="badge" decoration-success="sentiment == 'positive'" decoration-warning="sentiment == 'neutral'" decoration-danger="sentiment == 'negative'"/>
+        <field name="assigned_to"/>
+      </list>
+    </field>
+  </record>
+
+  <!-- Form View -->
+  <record id="social_comment_form_view" model="ir.ui.view">
+    <field name="name">social.comment.form</field>
+    <field name="model">social.comment</field>
+    <field name="arch" type="xml">
+      <form string="Comment">
+        <header>
+          <button name="action_reply" string="Reply" type="object" class="btn-primary" invisible="is_replied"/>
+          <button name="action_hide" string="Hide" type="object" class="btn-warning" invisible="is_hidden"/>
+          <button name="action_mark_replied" string="Mark as Replied" type="object" invisible="is_replied"/>
+          <button name="action_assign_to_me" string="Assign to Me" type="object"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="post_id"/>
+              <field name="comment_id"/>
+              <field name="parent_id"/>
+            </group>
+            <group>
+              <field name="author_name"/>
+              <field name="author_id"/>
+              <field name="created_time"/>
+              <field name="last_sync_at"/>
+            </group>
+          </group>
+
+          <group>
+            <field name="message" widget="text"/>
+          </group>
+
+          <group string="Moderation">
+            <group>
+              <field name="is_replied"/>
+              <field name="is_hidden"/>
+              <field name="requires_action"/>
+            </group>
+            <group>
+              <field name="sentiment"/>
+              <field name="assigned_to"/>
+            </group>
+          </group>
+
+          <group string="Internal Notes">
+            <field name="notes" widget="text" placeholder="Add internal notes..."/>
+          </group>
+        </sheet>
+        <chatter/>
+      </form>
+    </field>
+  </record>
+
+  <!-- Search View -->
+  <record id="social_comment_search_view" model="ir.ui.view">
+    <field name="name">social.comment.search</field>
+    <field name="model">social.comment</field>
+    <field name="arch" type="xml">
+      <search string="Comments">
+        <field name="message"/>
+        <field name="author_name"/>
+        <field name="post_id"/>
+        <separator/>
+        <filter name="filter_unreplied" string="Unreplied" domain="[('is_replied', '=', False)]"/>
+        <filter name="filter_requires_action" string="Requires Action" domain="[('requires_action', '=', True)]"/>
+        <filter name="filter_assigned_to_me" string="Assigned to Me" domain="[('assigned_to', '=', uid)]"/>
+        <separator/>
+        <filter name="filter_positive" string="Positive" domain="[('sentiment', '=', 'positive')]"/>
+        <filter name="filter_negative" string="Negative" domain="[('sentiment', '=', 'negative')]"/>
+        <separator/>
+        <filter name="filter_recent" string="Last 7 Days" domain="[('created_time', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+        <separator/>
+        <group expand="0" string="Group By">
+          <filter name="group_by_post" string="Post" context="{'group_by': 'post_id'}"/>
+          <filter name="group_by_sentiment" string="Sentiment" context="{'group_by': 'sentiment'}"/>
+          <filter name="group_by_assigned" string="Assigned To" context="{'group_by': 'assigned_to'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <!-- Action -->
+  <record id="social_comment_action" model="ir.actions.act_window">
+    <field name="name">Comments</field>
+    <field name="res_model">social.comment</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{'search_default_filter_unreplied': 1}</field>
+  </record>
+
+  <!-- Menu -->
+  <menuitem id="menu_social_comment"
+            name="Comments"
+            parent="social_media_base.social_root_menu"
+            action="social_comment_action"
+            sequence="30"/>
+
+</odoo>

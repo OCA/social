@@ -93,13 +93,19 @@
                                 </kanban>
                             </field>
                         </page>
+                        <page name="images_videos" string="Images &amp; Videos" invisible="not image_ids and not video_ids">
+                            <group>
+                                <group string="Images" invisible="not image_ids">
+                                    <field name="image_ids" nolabel="1" widget="many2many_binary" readonly="1" options="{'accepted_file_extensions': 'image/*'}"/>
+                                </group>
+                                <group string="Videos" invisible="not video_ids">
+                                    <field name="video_ids" nolabel="1" widget="many2many_binary" readonly="1" options="{'accepted_file_extensions': 'video/*'}"/>
+                                </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter/>
             </form>
         </field>
     </record>

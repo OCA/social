@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <!-- Social Lead Form Views -->
+  <record id="social_lead_form_tree_view" model="ir.ui.view">
+    <field name="name">social.lead.form.tree</field>
+    <field name="model">social.lead.form</field>
+    <field name="arch" type="xml">
+      <list string="Facebook Lead Forms">
+        <field name="name"/>
+        <field name="account_id"/>
+        <field name="status" widget="badge" decoration-success="status == 'active'" decoration-muted="status == 'archived'"/>
+        <field name="leads_count"/>
+        <field name="webhook_enabled" widget="boolean_toggle"/>
+        <field name="created_time"/>
+        <field name="last_sync_at"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="social_lead_form_form_view" model="ir.ui.view">
+    <field name="name">social.lead.form.form</field>
+    <field name="model">social.lead.form</field>
+    <field name="arch" type="xml">
+      <form string="Facebook Lead Form">
+        <header>
+          <button name="action_sync_leads" string="Sync Leads" type="object" class="btn-primary"/>
+          <field name="status" widget="statusbar"/>
+        </header>
+        <sheet>
+          <div class="oe_button_box" name="button_box">
+            <button name="action_view_leads" type="object" class="oe_stat_button" icon="fa-user">
+              <field name="leads_count" widget="statinfo" string="Leads"/>
+            </button>
+          </div>
+
+          <group>
+            <group>
+              <field name="name"/>
+              <field name="fb_form_id" readonly="1"/>
+              <field name="account_id"/>
+              <field name="post_id"/>
+            </group>
+            <group>
+              <field name="created_time" readonly="1"/>
+              <field name="last_sync_at" readonly="1"/>
+              <field name="locale"/>
+              <field name="privacy_policy_url" widget="url"/>
+            </group>
+          </group>
+
+          <group string="Webhook Configuration">
+            <field name="webhook_enabled"/>
+          </group>
+
+          <group string="Form Questions">
+            <field name="questions" widget="text" placeholder='[{"name": "email", "type": "EMAIL"}, {"name": "full_name", "type": "FULL_NAME"}]'/>
+          </group>
+
+          <notebook>
+            <page string="Field Mappings" name="field_mappings">
+              <field name="field_mapping_ids">
+                <list editable="bottom">
+                  <field name="fb_field_name" placeholder="e.g., email, full_name, company_name"/>
+                  <field name="crm_field_name"/>
+                </list>
+              </field>
+            </page>
+          </notebook>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="social_lead_form_search_view" model="ir.ui.view">
+    <field name="name">social.lead.form.search</field>
+    <field name="model">social.lead.form</field>
+    <field name="arch" type="xml">
+      <search string="Lead Forms">
+        <field name="name"/>
+        <field name="fb_form_id"/>
+        <field name="account_id"/>
+        <separator/>
+        <filter name="filter_active" string="Active" domain="[('status', '=', 'active')]"/>
+        <filter name="filter_webhook_enabled" string="Webhook Enabled" domain="[('webhook_enabled', '=', True)]"/>
+        <separator/>
+        <group expand="0" string="Group By">
+          <filter name="group_by_account" string="Account" context="{'group_by': 'account_id'}"/>
+          <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="social_lead_form_action" model="ir.actions.act_window">
+    <field name="name">Lead Forms</field>
+    <field name="res_model">social.lead.form</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{'search_default_filter_active': 1}</field>
+  </record>
+
+  <!-- Social Lead Views -->
+  <record id="social_lead_tree_view" model="ir.ui.view">
+    <field name="name">social.lead.tree</field>
+    <field name="model">social.lead</field>
+    <field name="arch" type="xml">
+      <list string="Facebook Leads" decoration-success="status == 'converted'" decoration-danger="status == 'error'" decoration-info="status == 'new'">
+        <field name="created_time"/>
+        <field name="lead_form_id"/>
+        <field name="name"/>
+        <field name="email"/>
+        <field name="phone"/>
+        <field name="status" widget="badge" decoration-success="status == 'converted'" decoration-info="status == 'new'" decoration-danger="status == 'error'"/>
+        <field name="crm_lead_id"/>
+      </list>
+    </field>
+  </record>
+
+  <record id="social_lead_form_view" model="ir.ui.view">
+    <field name="name">social.lead.form</field>
+    <field name="model">social.lead</field>
+    <field name="arch" type="xml">
+      <form string="Facebook Lead">
+        <header>
+          <button name="action_create_crm_lead" string="Convert to CRM Lead" type="object" class="btn-primary" invisible="status == 'converted'"/>
+          <field name="status" widget="statusbar"/>
+        </header>
+        <sheet>
+          <group>
+            <group>
+              <field name="lead_form_id"/>
+              <field name="fb_lead_id" readonly="1"/>
+              <field name="created_time" readonly="1"/>
+            </group>
+            <group>
+              <field name="name"/>
+              <field name="email" widget="email"/>
+              <field name="phone" widget="phone"/>
+              <field name="crm_lead_id" readonly="1"/>
+            </group>
+          </group>
+
+          <group string="Raw Field Data">
+            <field name="field_data_json" widget="text" readonly="1"/>
+          </group>
+
+          <group string="Error Details" invisible="status != 'error'">
+            <field name="error_message" widget="text" readonly="1"/>
+          </group>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="social_lead_search_view" model="ir.ui.view">
+    <field name="name">social.lead.search</field>
+    <field name="model">social.lead</field>
+    <field name="arch" type="xml">
+      <search string="Facebook Leads">
+        <field name="name"/>
+        <field name="email"/>
+        <field name="phone"/>
+        <field name="lead_form_id"/>
+        <separator/>
+        <filter name="filter_new" string="New" domain="[('status', '=', 'new')]"/>
+        <filter name="filter_converted" string="Converted" domain="[('status', '=', 'converted')]"/>
+        <filter name="filter_error" string="Error" domain="[('status', '=', 'error')]"/>
+        <separator/>
+        <filter name="filter_last_7_days" string="Last 7 Days" domain="[('created_time', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"/>
+        <separator/>
+        <group expand="0" string="Group By">
+          <filter name="group_by_form" string="Lead Form" context="{'group_by': 'lead_form_id'}"/>
+          <filter name="group_by_status" string="Status" context="{'group_by': 'status'}"/>
+        </group>
+      </search>
+    </field>
+  </record>
+
+  <record id="social_lead_action" model="ir.actions.act_window">
+    <field name="name">Facebook Leads</field>
+    <field name="res_model">social.lead</field>
+    <field name="view_mode">list,form</field>
+    <field name="context">{'search_default_filter_new': 1}</field>
+  </record>
+
+  <!-- Menus -->
+  <menuitem id="menu_social_lead_form"
+            name="Lead Forms"
+            parent="social_media_base.social_root_menu"
+            action="social_lead_form_action"
+            sequence="40"/>
+
+  <menuitem id="menu_social_lead"
+            name="Facebook Leads"
+            parent="social_media_base.social_root_menu"
+            action="social_lead_action"
+            sequence="41"/>
+
+</odoo>

@@ -2,11 +2,8 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import json
-import logging
 
 from odoo import api, fields, models
-
-_logger = logging.getLogger(__name__)
 
 
 class SocialPost(models.Model):
@@ -22,15 +19,6 @@ class SocialPost(models.Model):
         string="Facebook Content ID",
         index=True,
         help="Unique identifier for FB content (post/reel/ad)",
-    )
-
-    # Common Facebook fields (legacy compatibility)
-    fb_post_id = fields.Char(
-        related="fb_content_id",
-        string="Facebook Post ID",
-        store=True,
-        readonly=False,
-        help="Legacy field - use fb_content_id",
     )
     permalink_url = fields.Char(string="Permalink URL", help="Direct URL to the post")
     created_time = fields.Datetime(
@@ -137,7 +125,21 @@ class SocialPost(models.Model):
         string="Metrics Updated At", help="When metrics_json was last updated"
     )
 
+    # Origin indicator (computed field for easier filtering)
+    is_synced_from_facebook = fields.Boolean(
+        string="Synced from Facebook",
+        compute="_compute_is_synced_from_facebook",
+        store=True,
+        help="True if this content was synced from Facebook, False if created in Odoo",
+    )
+
     # === COMPUTED FIELDS ===
+
+    @api.depends("fb_content_id")
+    def _compute_is_synced_from_facebook(self):
+        """Determine if content was synced from Facebook or created in Odoo"""
+        for record in self:
+            record.is_synced_from_facebook = bool(record.fb_content_id)
 
     @api.depends(
         "likes_count",
@@ -192,10 +194,21 @@ class SocialPost(models.Model):
     def write_metrics_snapshot(self, metrics_data):
         """Write metrics with timestamp and JSON snapshot"""
         self.ensure_one()
+        from datetime import datetime
+
         values = dict(metrics_data)
+
+        # Convert datetime objects to strings for JSON serialization
+        json_data = {}
+        for key, value in metrics_data.items():
+            if isinstance(value, datetime):
+                json_data[key] = value.isoformat() if value else None
+            else:
+                json_data[key] = value
+
         values.update(
             {
-                "metrics_json": json.dumps(metrics_data, indent=2),
+                "metrics_json": json.dumps(json_data, indent=2),
                 "metrics_updated_at": fields.Datetime.now(),
                 "last_sync_at": fields.Datetime.now(),
             }

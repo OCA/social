@@ -23,6 +23,8 @@
                 <field name="image_urls" />
                 <field name="comment_count" />
                 <field name="like_count" />
+                <field name="share_count" />
+                <field name="view_count" />
                 <field name="post_account_url" />
                 <field name="author" />
                 <field name="media_type" />

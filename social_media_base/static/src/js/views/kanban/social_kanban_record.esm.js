@@ -30,10 +30,16 @@ export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
                 );
             }
             if (this.record.published_date) {
-                this.record.published_date = luxon.DateTime.fromISO(
+                // Store both formatted date and relative time
+                const publishedDateTime = luxon.DateTime.fromISO(
                     this.record.published_date.raw_value
-                ).toFormat("d/M/y");
+                );
+                this.record.published_date_formatted = publishedDateTime.toFormat("d/M/y");
+                this.record.published_date_relative = this._getRelativeTime(publishedDateTime);
+                this.record.published_date = this.record.published_date_relative;
             }
+            // Format numbers with thousand separators
+            this._formatMetrics();
         });
 
         // Show all message
@@ -147,28 +153,101 @@ export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
      * Handles global click events on the kanban record.
      *
      * - Checks if the clicked element is within the social dashboard.
-     * - Verifies the existence of a post URL and checks if the post exists.
-     * - Opens the post URL in a new tab if the post exists; otherwise, displays a notification.
+     * - If post has external URL, opens it in new tab
+     * - If no external URL, opens the post form view in Odoo
      * - Calls the parent class's `onGlobalClick` method.
      *
      * @param {MouseEvent} ev - The global click event.
      */
     async onGlobalClick(ev) {
         const kanban_social = ev.target.closest("div.oe_kanban_social_dashboard");
-        // Checking if the post exists
-        if (kanban_social !== null && !this.record.post_account_url.value) {
-            this.messagePostNotExist();
-            this.env.model.load();
-        } else if (kanban_social !== null && this.record.post_account_url.raw_value) {
-            const post_exist = await this.validPostExist();
-            if (post_exist) {
-                window.open(this.record.post_account_url.value, "_blank");
+
+        if (kanban_social !== null) {
+            // If post has an external URL (Facebook/social media link), open it
+            if (this.record.post_account_url && this.record.post_account_url.raw_value) {
+                const post_exist = await this.validPostExist();
+                if (post_exist) {
+                    window.open(this.record.post_account_url.value, "_blank");
+                } else {
+                    this.messagePostNotExist();
+                    this.env.model.load();
+                }
             } else {
-                this.messagePostNotExist();
-                this.env.model.load();
+                // If no external URL, open the Odoo form view for this post
+                // This happens for draft posts or synced posts without URLs
+                ev.stopPropagation();
+                this.env.model.action.doAction({
+                    type: "ir.actions.act_window",
+                    res_model: this.props.record.resModel,
+                    res_id: this.props.record.resId,
+                    views: [[false, "form"]],
+                    target: "current",
+                });
+                return;
             }
         }
         return super.onGlobalClick(ev);
+    }
+
+    /**
+     * Get relative time string (e.g., "1 hour", "2 hours", "3 days")
+     *
+     * @param {luxon.DateTime} dateTime - The datetime to convert
+     * @returns {string} Relative time string
+     */
+    _getRelativeTime(dateTime) {
+        const now = luxon.DateTime.now();
+        const diff = now.diff(dateTime, ['years', 'months', 'days', 'hours', 'minutes']).toObject();
+
+        if (diff.years >= 1) {
+            const years = Math.floor(diff.years);
+            return years === 1 ? "1 year" : `${years} years`;
+        } else if (diff.months >= 1) {
+            const months = Math.floor(diff.months);
+            return months === 1 ? "1 month" : `${months} months`;
+        } else if (diff.days >= 1) {
+            const days = Math.floor(diff.days);
+            return days === 1 ? "1 day" : `${days} days`;
+        } else if (diff.hours >= 1) {
+            const hours = Math.floor(diff.hours);
+            return hours === 1 ? "1 hour" : `${hours} hours`;
+        } else if (diff.minutes >= 1) {
+            const minutes = Math.floor(diff.minutes);
+            return minutes === 1 ? "1 minute" : `${minutes} minutes`;
+        } else {
+            return "Just now";
+        }
+    }
+
+    /**
+     * Format numbers with thousand separators
+     * Formats: 9911 -> 9,911 | 87618 -> 87,618
+     */
+    _formatMetrics() {
+        const formatNumber = (num) => {
+            if (!num && num !== 0) return '0';
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        };
+
+        // Format like_count
+        if (this.record.like_count) {
+            this.record.like_count_formatted = formatNumber(this.record.like_count.value);
+        }
+
+        // Format comment_count
+        if (this.record.comment_count) {
+            this.record.comment_count_formatted = formatNumber(this.record.comment_count.value);
+        }
+
+        // Format share_count (if exists)
+        if (this.record.share_count) {
+            this.record.share_count_formatted = formatNumber(this.record.share_count.value);
+        }
+
+        // Format views (if exists)
+        if (this.record.view_count) {
+            this.record.view_count_formatted = formatNumber(this.record.view_count.value);
+        }
     }
 }
 

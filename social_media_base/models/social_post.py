@@ -5,6 +5,7 @@ import logging
 from datetime import datetime, timedelta
 
 from odoo import Command, _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -14,7 +15,9 @@ class SocialPost(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin", "social.post.mixin"]
     _description = "Social Post"
 
-    account_ids = fields.Many2many("social.account", required=True, ondelete="restrict")
+    account_ids = fields.Many2many(
+        "social.account", required=True, ondelete="restrict", string="Accounts"
+    )
     active = fields.Boolean(default=True)
     message = fields.Text(required=True, tracking=True)
     campaign_id = fields.Many2one("utm.campaign")
@@ -69,6 +72,8 @@ class SocialPost(models.Model):
         column2="image_id",
         ondelete="restrict",
         relation="social_network_post_image_rel",
+        string="Images",
+        help="Attach multiple images (up to 10). Cannot mix images and videos in the same post.",
     )
 
     video_ids = fields.Many2many(
@@ -77,9 +82,36 @@ class SocialPost(models.Model):
         column1="post_id",
         column2="video_id",
         ondelete="restrict",
+        string="Videos",
+        help="Attach a single video. Cannot mix images and videos in the same post. "
+             "Note: Only the first video will be used for Facebook posts.",
     )
 
     post_preview = fields.Html(compute="_compute_post_preview", store=True)
+
+    # mail.activity.mixin - Override to add groups for cleaner prefetch
+    activity_ids = fields.One2many(groups="base.group_user")
+    activity_state = fields.Selection(groups="base.group_user")
+    activity_user_id = fields.Many2one(groups="base.group_user")
+    activity_type_id = fields.Many2one(groups="base.group_user")
+    activity_type_icon = fields.Char(groups="base.group_user")
+    activity_date_deadline = fields.Date(groups="base.group_user")
+    my_activity_date_deadline = fields.Date(groups="base.group_user")
+    activity_summary = fields.Char(groups="base.group_user")
+    activity_exception_decoration = fields.Selection(groups="base.group_user")
+    activity_exception_icon = fields.Char(groups="base.group_user")
+
+    @api.constrains("image_ids", "video_ids")
+    def _check_media_exclusivity(self):
+        """Ensure that a post cannot have both images and videos"""
+        for post in self:
+            if post.image_ids and post.video_ids:
+                raise ValidationError(
+                    _(
+                        "You cannot attach both images and videos to the same post. "
+                        "Please choose either images or a video."
+                    )
+                )
 
     @api.depends("account_ids.media_id")
     def _compute_display_name(self):

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+  <record id="wizard_facebook_sync_form" model="ir.ui.view">
+    <field name="name">wizard.facebook.sync.form</field>
+    <field name="model">wizard.facebook.sync</field>
+    <field name="arch" type="xml">
+      <form string="Sync Facebook Content">
+        <group>
+          <group>
+            <field name="account_id" options="{'no_create': True}"/>
+            <field name="from_date"/>
+            <field name="to_date"/>
+          </group>
+          <group string="Content Types">
+            <field name="sync_posts"/>
+            <field name="sync_reels"/>
+            <field name="sync_ads"/>
+            <field name="sync_comments"/>
+            <field name="sync_leads"/>
+          </group>
+        </group>
+        <footer>
+          <button string="Sync Now" name="action_sync" type="object" class="btn-primary"/>
+          <button string="Cancel" class="btn-secondary" special="cancel"/>
+        </footer>
+      </form>
+    </field>
+  </record>
+
+</odoo>

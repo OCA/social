@@ -35,19 +35,14 @@ export class SocialCommentDialog extends Component {
         super.setup();
         this.dialogService = useService("dialog");
         this.socialService = useService("social_service");
-        this.threadService = useService("mail.thread");
+        // Note: mail.thread service removed - not available in Odoo 18
         this.notificationService = useService("notification");
         this.busService = this.env.services.bus_service;
         this.state = useState({
-            thread: undefined,
             comments: [],
             account_id: this.props.account.raw_value,
         });
         onWillStart(async () => {
-            this.state.thread = this.threadService.getThread(
-                "social.post.account",
-                this.props.post.id.value
-            );
             const result = await this.socialService.getComments(
                 this.props.post.id.raw_value
             );

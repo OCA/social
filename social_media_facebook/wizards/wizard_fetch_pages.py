@@ -1,11 +1,7 @@
 # Copyright 2025 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import logging
-
-from odoo import api, fields, models
-
-_logger = logging.getLogger(__name__)
+from odoo import fields, models
 
 
 class WizardFetchPages(models.TransientModel):
@@ -22,13 +18,15 @@ class WizardFetchPages(models.TransientModel):
 
     def action_create_accounts(self):
         """Create social.account records for selected pages"""
-        _logger.info("=" * 80)
-        _logger.info("Wizard: Creating accounts for selected pages...")
-        _logger.info("Wizard ID: %s", self.id)
-        _logger.info("Total pages in wizard: %d", len(self.page_ids))
+        print("=" * 80)
+        print("Wizard: Creating accounts for selected pages...")
+        print(f"Wizard ID: {self.id}")
+        print(f"Total pages in wizard: {len(self.page_ids)}")
 
         selected_pages = self.page_ids.filtered(lambda p: p.selected)
-        _logger.info("Selected pages count: %d", len(selected_pages))
+        print(f"Selected pages count: {len(selected_pages)}")
+
+        created_account_ids = []
 
         if selected_pages:
             # Prepare pages data from wizard lines (already have all needed data)
@@ -39,7 +37,7 @@ class WizardFetchPages(models.TransientModel):
                     "name": line.page_name,
                     "access_token": line.page_access_token,
                 })
-                _logger.info("  - Will create account for: %s (ID: %s)", line.page_name, line.page_id)
+                print(f"  - Will create account for: {line.page_name} (ID: {line.page_id})")
 
             # Get app credentials from wizard.social.account if available
             wizard_social_account = self.env["wizard.social.account"].search(
@@ -47,18 +45,30 @@ class WizardFetchPages(models.TransientModel):
             )
 
             # Create accounts using the data we already have
-            self.env["social.account"].create_account_facebook_from_wizard(
+            created_account_ids = self.env["social.account"].create_account_facebook_from_wizard(
                 pages_data,
                 self.user_access_token,
                 wizard_social_account
             )
-            _logger.info("Account creation completed")
+            print("Account creation completed")
         else:
-            _logger.warning("No pages selected!")
+            print("WARNING: No pages selected!")
 
-        _logger.info("Closing wizard...")
-        _logger.info("=" * 80)
-        return {"type": "ir.actions.act_window_close"}
+        print("Redirecting to Facebook accounts list...")
+        print("=" * 80)
+
+        # Redirect to the list of Facebook accounts with newly created ones highlighted
+        return {
+            "type": "ir.actions.act_window",
+            "name": "Facebook Accounts",
+            "res_model": "social.account",
+            "view_mode": "list,form",
+            "domain": [("media_type", "=", "facebook")],
+            "context": {
+                "search_default_filter_facebook": 1,
+            },
+            "target": "current",
+        }
 
 
 class WizardFetchPagesLine(models.TransientModel):

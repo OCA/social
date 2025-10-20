@@ -1,14 +1,9 @@
 # Copyright 2025 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-import logging
-
 from werkzeug.urls import url_encode, url_join
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
-
-_logger = logging.getLogger(__name__)
+from odoo import _, fields, models
 
 from ..social_facebook_utils import _SCOPE_FACEBOOK_ALL, _URL_AUTH_FACEBOOK
 
@@ -29,19 +24,19 @@ class WizardSocialAccount(models.TransientModel):
         result = super()._action_add_account()
         context = dict(self.env.context)
         if self.media_type == "facebook":
-            _logger.info("=" * 80)
-            _logger.info("Wizard: Starting Facebook OAuth flow...")
-            _logger.info("Wizard ID: %s", self.id)
+            print("=" * 80)
+            print("Wizard: Starting Facebook OAuth flow...")
+            print(f"Wizard ID: {self.id}")
 
             # Use wizard fields (like LinkedIn and X do)
             app_id = self.facebook_app_id
             app_secret = self.facebook_app_secret
 
-            _logger.info("App ID: %s", app_id)
-            _logger.info("App Secret configured: %s", bool(app_secret))
+            print(f"App ID: {app_id}")
+            print(f"App Secret configured: {bool(app_secret)}")
 
             redirect_url = self._get_url_redirect()
-            _logger.info("OAuth redirect URL: %s", redirect_url)
+            print(f"OAuth redirect URL: {redirect_url}")
 
             params = {
                 "client_id": app_id,
@@ -50,8 +45,8 @@ class WizardSocialAccount(models.TransientModel):
                 "response_type": "code",
             }
             url_auth = f"{_URL_AUTH_FACEBOOK}?{url_encode(params)}"
-            _logger.info("Facebook OAuth URL: %s", url_auth[:100] + "...")
-            _logger.info("=" * 80)
+            print(f"Facebook OAuth URL: {url_auth[:100]}...")
+            print("=" * 80)
 
             if not context.get("only_url", False):
                 return {

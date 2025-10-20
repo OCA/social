@@ -10,7 +10,7 @@ class SocialPostAccount(models.Model):
     _description = "Social Post Account"
     _rec_name = "message"
 
-    post_id = fields.Many2one("social.post", ondelete="restrict")
+    post_id = fields.Many2one("social.post", ondelete="cascade")
     active = fields.Boolean(default=True)
     account_id = fields.Many2one("social.account", ondelete="restrict", required=True)
     media_id = fields.Many2one(
@@ -35,6 +35,7 @@ class SocialPostAccount(models.Model):
     like_count = fields.Integer()
     click_count = fields.Integer()
     share_count = fields.Integer()
+    view_count = fields.Integer(string="Views", help="Number of views/impressions")
     impression_count = fields.Float()
     engagement = fields.Float()
 
@@ -43,15 +44,13 @@ class SocialPostAccount(models.Model):
         relation="social_post_account_video_rel",
         column1="post_id",
         column2="video_id",
-        ondelete="restrict",
     )
 
     image_ids = fields.Many2many(
         "ir.attachment",
+        relation="social_post_account_image_rel",
         column1="post_id",
         column2="image_id",
-        ondelete="restrict",
-        relation="social_post_account_image_rel",
     )
     failed_description = fields.Html()
     post_account_url = fields.Char()

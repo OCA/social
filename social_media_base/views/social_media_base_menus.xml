@@ -22,7 +22,7 @@
             sequence="2"
         />
         <menuitem
-            name="Post"
+            name="Posts"
             id="social_network_post_menu"
             sequence="3"
             action="social_post_act_window_kanban"

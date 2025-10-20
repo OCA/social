@@ -20,13 +20,17 @@
         "data/ir_cron_data.xml",
         "views/social_account_views.xml",
         "views/social_post_views.xml",
+        "views/social_post_account_views.xml",
         "views/social_comment_views.xml",
         "views/social_lead_views.xml",
+        "wizards/wizard_facebook_sync.xml",
         "wizards/wizard_fetch_pages.xml",
         "wizards/wizard_social_account.xml",
     ],
     "assets": {
         "web.assets_backend": [
+            # STYLES
+            "social_media_facebook/static/src/scss/facebook_dashboard.scss",
             # SERVICES
             "social_media_facebook/static/src/js/services/**/*.js",
             # KANBAN

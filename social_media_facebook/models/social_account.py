@@ -2,18 +2,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
-import logging
+import json
 from datetime import date, datetime, timedelta
 
 import requests
+from dateutil import parser as dateutil_parser
 from werkzeug.urls import url_join
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from ..social_facebook_utils import _URL_GRAPH_FACEBOOK
-
-_logger = logging.getLogger(__name__)
 
 
 class SocialAccount(models.Model):
@@ -27,19 +26,6 @@ class SocialAccount(models.Model):
         [("active", "Active"), ("expired", "Expired"), ("error", "Error")],
         string="Status",
         default="active",
-    )
-    # Keep legacy fields for backward compatibility during migration
-    facebook_page_id = fields.Char(
-        related="page_id", readonly=False, store=True, string="Page ID (Legacy)"
-    )
-    facebook_page_name = fields.Char(
-        related="page_name", readonly=False, store=True, string="Page Name (Legacy)"
-    )
-    facebook_page_token = fields.Char(
-        related="page_access_token",
-        readonly=False,
-        store=True,
-        string="Page Token (Legacy)",
     )
     facebook_user_token = fields.Char(string="User Access Token")
 
@@ -75,7 +61,7 @@ class SocialAccount(models.Model):
         for record in self:
             if record.media_type == "facebook" and record.page_id:
                 record.posts_count = self.env["social.post"].search_count(
-                    [("fb_post_id", "like", f"{record.page_id}_%")]
+                    [("fb_content_id", "like", f"{record.page_id}_%")]
                 )
             else:
                 record.posts_count = 0
@@ -165,11 +151,11 @@ class SocialAccount(models.Model):
         self, authorization_code, redirect_endpoint_uri, app_id, app_secret
     ):
         """Get access token from Facebook OAuth"""
-        _logger.info("Getting Facebook access token...")
-        _logger.info("App ID: %s", app_id)
+        print("Getting Facebook access token...")
+        print(f"App ID: {app_id}")
 
         redirect_url = url_join(self.get_base_url(), redirect_endpoint_uri)
-        _logger.info("Redirect URL: %s", redirect_url)
+        print(f"Redirect URL: {redirect_url}")
 
         params = {
             "client_id": app_id,
@@ -177,63 +163,62 @@ class SocialAccount(models.Model):
             "redirect_uri": redirect_url,
             "code": authorization_code,
         }
-        _logger.info("Calling Facebook API: oauth/access_token")
+        print("Calling Facebook API: oauth/access_token")
         response = self._request_facebook(endpoint="oauth/access_token", params=params)
-        _logger.info("Facebook token API response status: %s",
-                    response.status_code if hasattr(response, 'status_code') else 'success')
+        print(f"Facebook token API response status: {response.status_code if hasattr(response, 'status_code') else 'success'}")
         return response
 
     def get_pages_facebook(self, user_access_token):
-        _logger.info("Fetching Facebook pages from API...")
+        print("Fetching Facebook pages from API...")
         params = {
             "access_token": user_access_token,
         }
-        _logger.info("Calling Facebook API: me/accounts")
+        print("Calling Facebook API: me/accounts")
         response = self._request_facebook(endpoint="me/accounts", params=params)
-        _logger.info("Facebook pages API response type: %s", type(response))
+        print(f"Facebook pages API response type: {type(response)}")
 
         if isinstance(response, dict) and response.get("data"):
             pages = response.get("data", [])
-            _logger.info("Successfully retrieved %d pages", len(pages))
+            print(f"Successfully retrieved {len(pages)} pages")
             for page in pages:
-                _logger.info("  - Page: %s (ID: %s)", page.get("name"), page.get("id"))
+                print(f"  - Page: {page.get('name')} (ID: {page.get('id')})")
             return pages
         else:
-            _logger.warning("No pages data in response or error occurred: %s", response)
+            print(f"WARNING: No pages data in response or error occurred: {response}")
         return []
 
     def create_account_facebook(self, selected_page_ids, token):
         """Create Facebook accounts for selected pages only"""
-        _logger.info("=" * 80)
-        _logger.info("Creating Facebook accounts...")
-        _logger.info("Selected page IDs: %s", selected_page_ids)
+        print("=" * 80)
+        print("Creating Facebook accounts...")
+        print(f"Selected page IDs: {selected_page_ids}")
 
         if isinstance(token, dict):
             user_access_token = token.get("access_token", False)
             if user_access_token:
-                _logger.info("User access token: %s...", user_access_token[:20])
+                print(f"User access token: {user_access_token[:20]}...")
                 pages = self.get_pages_facebook(user_access_token)
                 # Calculate token expiration (Facebook page tokens don't expire)
                 token_expires = datetime.now() + timedelta(days=365 * 10)
-                _logger.info("Token expiration set to: %s", token_expires)
+                print(f"Token expiration set to: {token_expires}")
 
                 created_count = 0
                 updated_count = 0
                 skipped_count = 0
 
                 for page in pages:
-                    _logger.info("-" * 40)
+                    print("-" * 40)
                     page_id = page.get("id", "")
                     page_name = page.get("name", "")
-                    _logger.info("Processing page: %s (ID: %s)", page_name, page_id)
+                    print(f"Processing page: {page_name} (ID: {page_id})")
 
                     # Only create accounts for selected pages
                     if page_id not in selected_page_ids:
-                        _logger.info("  Skipped: Not in selected pages")
+                        print("  Skipped: Not in selected pages")
                         skipped_count += 1
                         continue
 
-                    _logger.info("  Checking for existing account...")
+                    print("  Checking for existing account...")
                     existing_account = self.search(
                         [
                             ("page_id", "=", page_id),
@@ -270,22 +255,22 @@ class SocialAccount(models.Model):
                         })
 
                     if not existing_account:
-                        _logger.info("  Creating new account...")
+                        print("  Creating new account...")
                         new_account = self.create(values_data)
-                        _logger.info("  ✓ Created account ID: %s", new_account.id)
+                        print(f"  ✓ Created account ID: {new_account.id}")
                         created_count += 1
                     else:
-                        _logger.info("  Updating existing account ID: %s", existing_account.id)
+                        print(f"  Updating existing account ID: {existing_account.id}")
                         existing_account.write(values_data)
-                        _logger.info("  ✓ Updated account")
+                        print("  ✓ Updated account")
                         updated_count += 1
 
-                _logger.info("=" * 80)
-                _logger.info("Account creation summary:")
-                _logger.info("  Created: %d", created_count)
-                _logger.info("  Updated: %d", updated_count)
-                _logger.info("  Skipped: %d", skipped_count)
-                _logger.info("=" * 80)
+                print("=" * 80)
+                print("Account creation summary:")
+                print(f"  Created: {created_count}")
+                print(f"  Updated: {updated_count}")
+                print(f"  Skipped: {skipped_count}")
+                print("=" * 80)
         else:
             message_error = f"Creating account: {token}"
             raise ValidationError(message_error)
@@ -297,25 +282,29 @@ class SocialAccount(models.Model):
             pages_data: List of dicts with page info [{"id": ..., "name": ..., "access_token": ...}]
             user_access_token: Facebook user access token
             wizard_social_account: wizard.social.account record with app credentials
+
+        Returns:
+            list: IDs of created/updated accounts
         """
-        _logger.info("=" * 80)
-        _logger.info("Creating Facebook accounts from wizard data...")
-        _logger.info("Pages to create: %d", len(pages_data))
+        print("=" * 80)
+        print("Creating Facebook accounts from wizard data...")
+        print(f"Pages to create: {len(pages_data)}")
 
         # Calculate token expiration (Facebook page tokens don't expire)
         token_expires = datetime.now() + timedelta(days=365 * 10)
 
         created_count = 0
         updated_count = 0
+        account_ids = []
 
         for page in pages_data:
-            _logger.info("-" * 40)
+            print("-" * 40)
             page_id = page.get("id", "")
             page_name = page.get("name", "")
-            _logger.info("Processing page: %s (ID: %s)", page_name, page_id)
+            print(f"Processing page: {page_name} (ID: {page_id})")
 
             # Check for existing account
-            _logger.info("  Checking for existing account...")
+            print("  Checking for existing account...")
             existing_account = self.search(
                 [
                     ("page_id", "=", page_id),
@@ -339,35 +328,46 @@ class SocialAccount(models.Model):
                 ).id,
             }
 
+            # Download and store Facebook page profile picture
+            print("  Downloading page profile picture...")
+            page_picture = self._download_facebook_page_picture(page_id, page.get("access_token", ""))
+            if page_picture:
+                values_data["image_1920"] = page_picture
+                print("  ✓ Page profile picture downloaded")
+
             # Store app credentials if from wizard
             if wizard_social_account:
                 values_data.update({
                     "facebook_app_id": wizard_social_account.facebook_app_id,
                     "facebook_app_secret": wizard_social_account.facebook_app_secret,
                 })
-                _logger.info("  Storing app credentials from wizard")
+                print("  Storing app credentials from wizard")
 
             if not existing_account:
-                _logger.info("  Creating new account...")
+                print("  Creating new account...")
                 new_account = self.create(values_data)
-                _logger.info("  ✓ Created account ID: %s", new_account.id)
+                print(f"  ✓ Created account ID: {new_account.id}")
+                account_ids.append(new_account.id)
                 created_count += 1
             else:
-                _logger.info("  Updating existing account ID: %s", existing_account.id)
+                print(f"  Updating existing account ID: {existing_account.id}")
                 existing_account.write(values_data)
-                _logger.info("  ✓ Updated account")
+                print("  ✓ Updated account")
+                account_ids.append(existing_account.id)
                 updated_count += 1
 
         # Delete the wizard_social_account after successful account creation
         if wizard_social_account:
-            _logger.info("Deleting wizard.social.account after successful creation")
+            print("Deleting wizard.social.account after successful creation")
             wizard_social_account.unlink()
 
-        _logger.info("=" * 80)
-        _logger.info("Account creation summary:")
-        _logger.info("  Created: %d", created_count)
-        _logger.info("  Updated: %d", updated_count)
-        _logger.info("=" * 80)
+        print("=" * 80)
+        print("Account creation summary:")
+        print(f"  Created: {created_count}")
+        print(f"  Updated: {updated_count}")
+        print("=" * 80)
+
+        return account_ids
 
     def validate_access_token(self):
         res = super().validate_access_token()
@@ -407,7 +407,7 @@ class SocialAccount(models.Model):
                 "Please re-authenticate by updating the account."
             ))
 
-        _logger.info("Refreshing token for Facebook account: %s", self.name)
+        print(f"Refreshing token for Facebook account: {self.name}")
 
         try:
             # Step 1: Exchange short-lived token for long-lived token
@@ -425,7 +425,7 @@ class SocialAccount(models.Model):
 
             if isinstance(response, dict) and response.get("access_token"):
                 new_user_token = response.get("access_token")
-                _logger.info("Successfully obtained new user access token")
+                print("Successfully obtained new user access token")
 
                 # Step 2: Get fresh page access token using new user token
                 pages = self.get_pages_facebook(new_user_token)
@@ -449,7 +449,7 @@ class SocialAccount(models.Model):
                         "status": "active",
                     })
 
-                    _logger.info("Token refreshed successfully for: %s", self.name)
+                    print(f"Token refreshed successfully for: {self.name}")
 
                     return {
                         "type": "ir.actions.client",
@@ -474,7 +474,7 @@ class SocialAccount(models.Model):
                 ) % response)
 
         except Exception as e:
-            _logger.error("Error refreshing token: %s", str(e), exc_info=True)
+            print(f"ERROR: Error refreshing token: {str(e)}")
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",
@@ -495,7 +495,7 @@ class SocialAccount(models.Model):
 
             # Handle multiple images (requires multi-step process)
             if image_ids and len(image_ids) > 1:
-                _logger.info("Publishing multi-photo post with %d images", len(image_ids))
+                print(f"Publishing multi-photo post with {len(image_ids)} images")
 
                 # Step 1: Upload all photos and collect their IDs
                 photo_ids = []
@@ -516,9 +516,9 @@ class SocialAccount(models.Model):
                         )
                         if isinstance(photo_response, dict) and photo_response.get("id"):
                             photo_ids.append(photo_response["id"])
-                            _logger.info("Uploaded photo ID: %s", photo_response["id"])
+                            print(f"Uploaded photo ID: {photo_response['id']}")
                     except Exception as e:
-                        _logger.error("Error uploading photo: %s", str(e))
+                        print(f"ERROR: Error uploading photo: {str(e)}")
                         continue
 
                 # Step 2: Create post with all photo IDs
@@ -538,12 +538,12 @@ class SocialAccount(models.Model):
                     )
 
                     if isinstance(response, dict) and response.get("id"):
-                        _logger.info("Multi-photo post created: %s", response["id"])
+                        print(f"Multi-photo post created: {response['id']}")
                         return response.get("id")
 
             # Handle single image
             elif image_ids and len(image_ids) == 1:
-                _logger.info("Publishing single photo post")
+                print("Publishing single photo post")
                 endpoint = f"{self.page_id}/photos"
                 params = base_params.copy()
                 params["message"] = message
@@ -559,11 +559,11 @@ class SocialAccount(models.Model):
                     if isinstance(response, dict) and response.get("post_id"):
                         return response.get("post_id")
                 except Exception as e:
-                    _logger.error("Error publishing photo: %s", str(e))
+                    print(f"ERROR: Error publishing photo: {str(e)}")
 
             # Handle video
             elif video_ids and len(video_ids) > 0:
-                _logger.info("Publishing video post")
+                print("Publishing video post")
                 endpoint = f"{self.page_id}/videos"
                 params = base_params.copy()
                 params["description"] = message
@@ -582,14 +582,14 @@ class SocialAccount(models.Model):
                     )
 
                     if isinstance(response, dict) and response.get("id"):
-                        _logger.info("Video post created: %s", response["id"])
+                        print(f"Video post created: {response['id']}")
                         return response.get("id")
                 except Exception as e:
-                    _logger.error("Error publishing video: %s", str(e))
+                    print(f"ERROR: Error publishing video: {str(e)}")
 
             # Handle link post
             elif link:
-                _logger.info("Publishing link post")
+                print("Publishing link post")
                 endpoint = f"{self.page_id}/feed"
                 params = base_params.copy()
                 params["message"] = message
@@ -602,12 +602,12 @@ class SocialAccount(models.Model):
                 )
 
                 if isinstance(response, dict) and response.get("id"):
-                    _logger.info("Link post created: %s", response["id"])
+                    print(f"Link post created: {response['id']}")
                     return response.get("id")
 
             # Handle text-only post
             else:
-                _logger.info("Publishing text-only post")
+                print("Publishing text-only post")
                 endpoint = f"{self.page_id}/feed"
                 params = base_params.copy()
                 params["message"] = message
@@ -619,7 +619,7 @@ class SocialAccount(models.Model):
                 )
 
                 if isinstance(response, dict) and response.get("id"):
-                    _logger.info("Text post created: %s", response["id"])
+                    print(f"Text post created: {response['id']}")
                     return response.get("id")
 
         return False
@@ -653,8 +653,8 @@ class SocialAccount(models.Model):
         if self.media_type != "facebook":
             return
 
-        _logger.info("=" * 80)
-        _logger.info("Manual sync started for account: %s", self.name)
+        print("=" * 80)
+        print(f"===== DEBUG: action_sync_facebook_content - Manual sync started for account: {self.name}")
 
         try:
             # Sync posts
@@ -664,8 +664,8 @@ class SocialAccount(models.Model):
             # Sync ads (if configured)
             self._sync_facebook_ads()
 
-            _logger.info("Manual sync completed successfully")
-            _logger.info("=" * 80)
+            print("Manual sync completed successfully")
+            print("=" * 80)
 
             return {
                 "type": "ir.actions.client",
@@ -678,7 +678,7 @@ class SocialAccount(models.Model):
                 },
             }
         except Exception as e:
-            _logger.error("Error during manual sync: %s", str(e), exc_info=True)
+            print(f"ERROR: Error during manual sync: {str(e)}")
             return {
                 "type": "ir.actions.client",
                 "tag": "display_notification",
@@ -689,6 +689,20 @@ class SocialAccount(models.Model):
                     "sticky": True,
                 },
             }
+
+    def action_sync_with_date_range(self):
+        """Open wizard to sync with custom date range"""
+        self.ensure_one()
+        return {
+            "name": "Sync from Custom Date Range",
+            "type": "ir.actions.act_window",
+            "res_model": "wizard.facebook.sync",
+            "view_mode": "form",
+            "target": "new",
+            "context": {
+                "default_account_id": self.id,
+            },
+        }
 
     def _sync_facebook_posts(self):
         """Sync posts from Facebook Page with detailed metrics
@@ -739,19 +753,17 @@ class SocialAccount(models.Model):
 
         # Check if ad account is configured
         if not self.fb_ad_account_id:
-            _logger.info("No ad account configured for page: %s. Skipping ad sync.", self.page_name)
+            print(f"No ad account configured for page: {self.page_name}. Skipping ad sync.")
             self.last_ads_sync_at = fields.Datetime.now()
             return
 
         if not self.page_access_token:
-            _logger.warning("No access token for account %s", self.name)
+            print(f"WARNING: No access token for account {self.name}")
             return
 
-        _logger.info("Syncing ads for page: %s (Ad Account: %s)", self.page_name, self.fb_ad_account_id)
+        print(f"Syncing ads for page: {self.page_name} (Ad Account: {self.fb_ad_account_id})")
 
         # Fetch ads from Marketing API
-        import json
-
         ad_fields = "id,name,status,creative"
         params = {
             "access_token": self.page_access_token,
@@ -772,7 +784,7 @@ class SocialAccount(models.Model):
 
         if isinstance(response, dict) and response.get("data"):
             ads_data = response.get("data", [])
-            _logger.info("Retrieved %d ads from Facebook", len(ads_data))
+            print(f"Retrieved {len(ads_data)} ads from Facebook")
 
             created_count = 0
             updated_count = 0
@@ -797,7 +809,7 @@ class SocialAccount(models.Model):
                     )
 
                     if not isinstance(insights_response, dict):
-                        _logger.warning("Failed to get insights for ad %s", fb_ad_id)
+                        print(f"WARNING: Failed to get insights for ad {fb_ad_id}")
                         continue
 
                     insights_data = insights_response.get("data", [{}])[0] if insights_response.get("data") else {}
@@ -817,7 +829,7 @@ class SocialAccount(models.Model):
 
                     # Build metrics data
                     metrics_data = {
-                        "name": ad_data.get("name", "")[:100] or f"Ad {fb_ad_id}",
+                        "message": ad_data.get("name", "") or f"Ad {fb_ad_id}",
                         "fb_content_id": fb_ad_id,
                         "fb_ad_id": fb_ad_id,
                         "fb_content_type": "ad",
@@ -830,7 +842,9 @@ class SocialAccount(models.Model):
                         "currency": insights_data.get("currency", "USD"),
                         "leads_total": leads_total,
                         "conversions_total": conversions_total,
-                        "media_id": self.media_id.id,
+                        "account_ids": [(6, 0, [self.id])],  # Required field
+                        "image_urls": "[]",  # Required by kanban template
+                        "state": "published",  # Ads synced from Facebook are already published
                     }
 
                     # Deduplication
@@ -852,12 +866,12 @@ class SocialAccount(models.Model):
                         created_count += 1
 
                 except Exception as e:
-                    _logger.error("Error processing ad %s: %s", ad_data.get("id"), str(e), exc_info=True)
+                    print(f"ERROR: Error processing ad {ad_data.get('id')}: {str(e)}")
                     continue
 
-            _logger.info("Ads sync completed: %d created, %d updated", created_count, updated_count)
+            print(f"Ads sync completed: {created_count} created, {updated_count} updated")
         else:
-            _logger.warning("No ads data in response: %s", response)
+            print(f"WARNING: No ads data in response: {response}")
 
         self.last_ads_sync_at = fields.Datetime.now()
 
@@ -870,10 +884,10 @@ class SocialAccount(models.Model):
         """
         self.ensure_one()
         if not self.page_id or not self.page_access_token:
-            _logger.warning("No page_id or access token for account %s", self.name)
+            print(f"WARNING: No page_id or access token for account {self.name}")
             return
 
-        _logger.info("Syncing comments for page: %s", self.page_name)
+        print(f"Syncing comments for page: {self.page_name}")
 
         # Get all Facebook posts for this account
         posts = self.env["social.post"].search([
@@ -904,7 +918,7 @@ class SocialAccount(models.Model):
 
                 if isinstance(response, dict) and response.get("data"):
                     comments_data = response.get("data", [])
-                    _logger.info("Retrieved %d comments for post %s", len(comments_data), post_id)
+                    print(f"Retrieved {len(comments_data)} comments for post {post_id}")
 
                     for comment_data in comments_data:
                         self._process_comment_data(comment_data, post.id)
@@ -915,10 +929,10 @@ class SocialAccount(models.Model):
                             self._sync_comment_replies(comment_data.get("id"), post.id)
 
             except Exception as e:
-                _logger.error("Error syncing comments for post %s: %s", post.fb_content_id, str(e), exc_info=True)
+                print(f"ERROR: Error syncing comments for post {post.fb_content_id}: {str(e)}")
                 continue
 
-        _logger.info("Comments sync completed: %d comments synced", total_comments_synced)
+        print(f"Comments sync completed: {total_comments_synced} comments synced")
 
     def _sync_comment_replies(self, parent_comment_id, post_id):
         """Sync replies to a comment"""
@@ -945,7 +959,7 @@ class SocialAccount(models.Model):
                     self._process_comment_data(reply_data, post_id, parent_comment.id if parent_comment else False)
 
         except Exception as e:
-            _logger.error("Error syncing replies for comment %s: %s", parent_comment_id, str(e))
+            print(f"ERROR: Error syncing replies for comment {parent_comment_id}: {str(e)}")
 
     def _process_comment_data(self, comment_data, post_id, parent_id=False):
         """Process and store comment data"""
@@ -965,7 +979,7 @@ class SocialAccount(models.Model):
             "message": comment_data.get("message", ""),
             "author_name": author_data.get("name"),
             "author_id": author_data.get("id"),
-            "created_time": comment_data.get("created_time"),
+            "created_time": self._parse_facebook_datetime(comment_data.get("created_time")),
             "last_sync_at": fields.Datetime.now(),
         }
 
@@ -1001,10 +1015,10 @@ class SocialAccount(models.Model):
         )
 
         if isinstance(response, dict) and response.get("id"):
-            _logger.info("Successfully replied to comment %s", comment_id)
+            print(f"Successfully replied to comment {comment_id}")
             return response
         else:
-            _logger.error("Failed to reply to comment %s: %s", comment_id, response)
+            print(f"ERROR: Failed to reply to comment {comment_id}: {response}")
             return False
 
     def _hide_facebook_comment(self, comment_id):
@@ -1033,11 +1047,93 @@ class SocialAccount(models.Model):
         )
 
         if isinstance(response, dict) and response.get("success"):
-            _logger.info("Successfully hid comment %s", comment_id)
+            print(f"Successfully hid comment {comment_id}")
             return True
         else:
-            _logger.error("Failed to hide comment %s: %s", comment_id, response)
+            print(f"ERROR: Failed to hide comment {comment_id}: {response}")
             return False
+
+    def _sync_facebook_leads(self, from_datetime=None, to_datetime=None):
+        """Feature #5: Sync leads from Facebook Lead Forms
+
+        This method syncs leads from all lead forms associated with this account.
+
+        Args:
+            from_datetime: Optional start datetime for filtering leads
+            to_datetime: Optional end datetime for filtering leads
+
+        API Endpoint:
+        - /{FORM_ID}/leads?fields=id,created_time,field_data
+        """
+        self.ensure_one()
+        if not self.page_id or not self.page_access_token:
+            print(f"WARNING: No page_id or access token for account {self.name}")
+            return
+
+        print(f"Syncing leads for page: {self.page_name}")
+
+        # Get all lead forms for this account
+        lead_forms = self.env["social.lead.form"].search([
+            ("account_id", "=", self.id)
+        ])
+
+        if not lead_forms:
+            print(f"No lead forms configured for account {self.name}")
+            return
+
+        total_leads_synced = 0
+
+        for lead_form in lead_forms:
+            try:
+                print(f"Syncing leads for form: {lead_form.name} (ID: {lead_form.fb_form_id})")
+
+                # Build params
+                params = {
+                    "access_token": self.page_access_token,
+                    "fields": "id,created_time,field_data",
+                    "limit": 100,
+                }
+
+                # Add date filters if provided
+                if from_datetime:
+                    params["filtering"] = json.dumps([{
+                        "field": "time_created",
+                        "operator": "GREATER_THAN",
+                        "value": int(from_datetime.timestamp()),
+                    }])
+                elif lead_form.last_sync_at:
+                    # Incremental sync using last sync time
+                    params["filtering"] = json.dumps([{
+                        "field": "time_created",
+                        "operator": "GREATER_THAN",
+                        "value": int(lead_form.last_sync_at.timestamp()),
+                    }])
+
+                endpoint = f"{lead_form.fb_form_id}/leads"
+                response = self._request_facebook(endpoint=endpoint, params=params)
+
+                if isinstance(response, dict) and response.get("data"):
+                    leads_data = response.get("data", [])
+                    print(f"Retrieved {len(leads_data)} leads for form {lead_form.name}")
+
+                    for lead_data in leads_data:
+                        try:
+                            lead_form._process_lead_data(lead_data)
+                            total_leads_synced += 1
+                        except Exception as e:
+                            print(f"ERROR: Error processing lead {lead_data.get('id')}: {str(e)}")
+                            continue
+
+                    # Update last sync time for this form
+                    lead_form.last_sync_at = fields.Datetime.now()
+                else:
+                    print(f"No new leads for form {lead_form.name}")
+
+            except Exception as e:
+                print(f"ERROR: Error syncing leads for form {lead_form.name}: {str(e)}")
+                continue
+
+        print(f"Leads sync completed: {total_leads_synced} leads synced")
 
     def _cron_sync_facebook_content(self, from_datetime=None, to_datetime=None, types=None):
         """Feature #9: Manual sync action with optional filters
@@ -1069,73 +1165,69 @@ class SocialAccount(models.Model):
             to_datetime = fields.Datetime.from_string(to_datetime)
 
         accounts = self.search([("media_type", "=", "facebook"), ("status", "=", "active")])
-        _logger.info("=" * 80)
-        _logger.info("Manual sync started for %d Facebook accounts", len(accounts))
-        _logger.info("Parameters: from=%s, to=%s, types=%s", from_datetime, to_datetime, types)
+        print("=" * 80)
+        print(f"Manual sync started for {len(accounts)} Facebook accounts")
+        print(f"Parameters: from={from_datetime}, to={to_datetime}, types={types}")
 
         for account in accounts:
             try:
-                _logger.info("Syncing account: %s (ID: %s)", account.name, account.id)
+                print(f"Syncing account: {account.name} (ID: {account.id})")
 
                 # Sync posts if requested
                 if 'posts' in types:
-                    _logger.info("  - Syncing posts...")
+                    print("  - Syncing posts...")
                     account._sync_facebook_posts_filtered(from_datetime, to_datetime)
 
                 # Sync reels if requested
                 if 'reels' in types:
-                    _logger.info("  - Syncing reels...")
+                    print("  - Syncing reels...")
                     account._sync_facebook_reels_filtered(from_datetime, to_datetime)
 
                 # Sync ads if requested
                 if 'ads' in types:
-                    _logger.info("  - Syncing ads...")
+                    print("  - Syncing ads...")
                     account._sync_facebook_ads()
 
-                # Sync comments if requested (will be implemented in Feature #4)
+                # Sync comments if requested (Feature #4: Comment Moderation System)
                 if 'comments' in types:
-                    _logger.info("  - Syncing comments...")
-                    if hasattr(account, '_sync_facebook_comments'):
-                        account._sync_facebook_comments(from_datetime, to_datetime)
-                    else:
-                        _logger.warning("  - Comments sync not yet implemented")
+                    print("  - Syncing comments...")
+                    account._sync_facebook_comments(from_datetime, to_datetime)
 
-                # Sync leads if requested (will be implemented in Feature #5)
+                # Sync leads if requested (Feature #5: Lead Ads Integration)
                 if 'leads' in types:
-                    _logger.info("  - Syncing leads...")
-                    if hasattr(account, '_sync_facebook_leads'):
-                        account._sync_facebook_leads(from_datetime, to_datetime)
-                    else:
-                        _logger.warning("  - Leads sync not yet implemented")
+                    print("  - Syncing leads...")
+                    account._sync_facebook_leads(from_datetime, to_datetime)
 
-                _logger.info("  ✓ Account sync completed")
+                print("  ✓ Account sync completed")
 
             except Exception as e:
-                _logger.error("Error syncing account %s: %s", account.name, str(e), exc_info=True)
+                print(f"ERROR: Error syncing account {account.name}: {str(e)}")
                 continue
 
-        _logger.info("Manual sync completed for all accounts")
-        _logger.info("=" * 80)
+        print("Manual sync completed for all accounts")
+        print("=" * 80)
 
     def _sync_facebook_posts_filtered(self, from_datetime=None, to_datetime=None):
         """Sync posts with optional date filters"""
+        print("=== DEBUG: _sync_facebook_posts_filtered called")
         self.ensure_one()
         if not self.page_id or not self.page_access_token:
+            print(f"=== WARNING: No page_id or access token for account {self.name}")
             return
 
-        _logger.info("Syncing posts for page: %s", self.page_name)
+        print(f"=== Syncing posts for page: {self.page_name}")
 
         # Build params with date filters
-        fields = (
+        fields_str = (
             "id,message,created_time,permalink_url,"
-            "attachments{media_type,media,url},"
+            "attachments{media_type,media,url,subattachments{media{image}}},"
             "likes.summary(true),comments.summary(true),shares,"
             "insights.metric(post_impressions,post_impressions_unique,"
             "post_reactions_by_type_total,post_clicks)"
         )
         params = {
             "access_token": self.page_access_token,
-            "fields": fields,
+            "fields": fields_str,
             "limit": 100,
         }
 
@@ -1151,12 +1243,13 @@ class SocialAccount(models.Model):
         # Call existing sync logic
         endpoint = f"{self.page_id}/posts"
         response = self._request_facebook(endpoint=endpoint, params=params)
-
+        print("=== DEBUG: Facebook posts response received")
+        print(f"=== DEBUG: Response: {response}")
         if isinstance(response, dict) and response.get("data"):
             self._process_posts_data(response.get("data", []))
             self.last_posts_sync_at = fields.Datetime.now()
         else:
-            _logger.warning("No posts data in response: %s", response)
+            print(f"=== WARNING: No posts data in response: {response}")
 
     def _sync_facebook_reels_filtered(self, from_datetime=None, to_datetime=None):
         """Sync reels/videos with optional date filters"""
@@ -1164,16 +1257,16 @@ class SocialAccount(models.Model):
         if not self.page_id or not self.page_access_token:
             return
 
-        _logger.info("Syncing reels for page: %s", self.page_name)
+        print(f"=== Syncing reels for page: {self.page_name}")
 
-        fields = (
+        fields_str = (
             "id,title,description,created_time,permalink_url,shares,"
             "video_insights.metric(total_video_views,total_video_views_unique,"
             "total_video_view_time,total_video_complete_views,avg_time_watched)"
         )
         params = {
             "access_token": self.page_access_token,
-            "fields": fields,
+            "fields": fields_str,
             "limit": 100,
         }
 
@@ -1193,7 +1286,118 @@ class SocialAccount(models.Model):
             self._process_reels_data(response.get("data", []))
             self.last_reels_sync_at = fields.Datetime.now()
         else:
-            _logger.warning("No videos data in response: %s", response)
+            print(f"=== WARNING: No videos data in response: {response}")
+
+    def _parse_facebook_datetime(self, datetime_str):
+        """Parse Facebook ISO 8601 datetime string to Python naive datetime
+
+        Args:
+            datetime_str: Facebook datetime string like '2025-10-17T07:43:52+0000'
+
+        Returns:
+            Naive datetime object (without timezone) or False if parsing fails
+        """
+        if not datetime_str:
+            return False
+        try:
+            # Parse datetime with timezone, then convert to naive for Odoo
+            # Facebook format: 2025-10-17T07:43:52+0000
+            dt = dateutil_parser.parse(datetime_str)
+            # Convert to naive datetime (remove timezone info) for Odoo
+            return dt.replace(tzinfo=None)
+        except:
+            try:
+                # Fallback: manual parsing (already naive)
+                return datetime.strptime(datetime_str[:19], "%Y-%m-%dT%H:%M:%S")
+            except:
+                return False
+
+    def _download_image_from_url(self, url, filename=None):
+        """Download image from URL and create ir.attachment record
+
+        Args:
+            url: Image URL from Facebook
+            filename: Optional filename for the attachment
+
+        Returns:
+            ir.attachment record or False if download fails
+        """
+        if not url:
+            return False
+
+        try:
+            # Download image from URL
+            response = requests.get(url, timeout=10)
+            if response.status_code != 200:
+                print(f"WARNING: Failed to download image from {url}, status: {response.status_code}")
+                return False
+
+            # Generate filename if not provided
+            if not filename:
+                # Extract filename from URL or generate one
+                from urllib.parse import urlparse
+                parsed_url = urlparse(url)
+                filename = parsed_url.path.split('/')[-1] or f"facebook_image_{fields.Datetime.now().timestamp()}.jpg"
+
+            # Create attachment
+            attachment = self.env["ir.attachment"].create({
+                "name": filename,
+                "type": "binary",
+                "datas": base64.b64encode(response.content),
+                "mimetype": response.headers.get('content-type', 'image/jpeg'),
+                "res_model": "social.post",
+                # res_id will be set later when linking to post
+            })
+
+            print(f"Downloaded image: {filename} (ID: {attachment.id})")
+            return attachment
+
+        except Exception as e:
+            print(f"ERROR: Failed to download image from {url}: {str(e)}")
+            return False
+
+    def _download_facebook_page_picture(self, page_id, access_token):
+        """Download Facebook page profile picture
+
+        Args:
+            page_id: Facebook page ID
+            access_token: Page or user access token
+
+        Returns:
+            base64 encoded image data or False if download fails
+        """
+        if not page_id or not access_token:
+            return False
+
+        try:
+            # Get page picture URL from Facebook API
+            # Request large picture (type=large gives ~200x200)
+            params = {
+                "access_token": access_token,
+                "redirect": "false",  # Get JSON response with URL instead of redirect
+                "type": "large",  # Options: small, normal, large, square
+            }
+            endpoint = f"{page_id}/picture"
+            response = self._request_facebook(endpoint=endpoint, params=params)
+
+            if isinstance(response, dict) and response.get("data", {}).get("url"):
+                picture_url = response["data"]["url"]
+                print(f"  Page picture URL: {picture_url[:80]}...")
+
+                # Download the image
+                img_response = requests.get(picture_url, timeout=10)
+                if img_response.status_code == 200:
+                    return base64.b64encode(img_response.content)
+                else:
+                    print(f"  WARNING: Failed to download page picture, status: {img_response.status_code}")
+                    return False
+            else:
+                print(f"  WARNING: No picture URL in response: {response}")
+                return False
+
+        except Exception as e:
+            print(f"  ERROR: Failed to download page picture: {str(e)}")
+            return False
 
     def _process_posts_data(self, posts_data):
         """Extract post processing logic for reuse"""
@@ -1205,24 +1409,44 @@ class SocialAccount(models.Model):
                 fb_content_id = post_data.get("id")
 
                 existing_post = self.env["social.post"].search(
-                    [
-                        ("fb_content_id", "=", fb_content_id),
-                        "|",
-                        ("fb_content_id", "=", fb_content_id),
-                        ("fb_post_id", "=", fb_content_id),
-                    ],
+                    [("fb_content_id", "=", fb_content_id)],
                     limit=1,
                 )
 
-                # Parse data (same as before)
+                # Parse data - Extract images from attachments
                 attachments = post_data.get("attachments", {}).get("data", [])
                 media_url = None
                 media_type_val = None
+                image_attachments = []  # List to store downloaded image attachments
+
                 if attachments:
                     first_attachment = attachments[0]
                     media_type_val = first_attachment.get("media_type")
-                    if "media" in first_attachment:
-                        media_url = first_attachment["media"].get("image", {}).get("src")
+
+                    # Handle album (multiple images)
+                    if media_type_val == "album":
+                        # Album contains multiple images in subattachments
+                        subattachments = first_attachment.get("subattachments", {}).get("data", [])
+                        for sub in subattachments:
+                            if "media" in sub and "image" in sub["media"]:
+                                img_url = sub["media"]["image"].get("src")
+                                if img_url:
+                                    # Download and create attachment
+                                    attachment = self._download_image_from_url(img_url)
+                                    if attachment:
+                                        image_attachments.append(attachment.id)
+                                    if not media_url:  # Store first image URL for preview
+                                        media_url = img_url
+
+                    # Handle single image
+                    elif "media" in first_attachment:
+                        if "image" in first_attachment["media"]:
+                            media_url = first_attachment["media"]["image"].get("src")
+                            if media_url:
+                                # Download and create attachment
+                                attachment = self._download_image_from_url(media_url)
+                                if attachment:
+                                    image_attachments.append(attachment.id)
 
                 likes_count = post_data.get("likes", {}).get("summary", {}).get("total_count", 0)
                 comments_count = post_data.get("comments", {}).get("summary", {}).get("total_count", 0)
@@ -1249,39 +1473,47 @@ class SocialAccount(models.Model):
                         elif metric_name == "post_clicks":
                             clicks_total = value
 
-                import json
                 metrics_data = {
-                    "name": post_data.get("message", "")[:100] or f"Post {fb_content_id}",
-                    "message": post_data.get("message", ""),
+                    "message": post_data.get("message", "") or f"Post {fb_content_id}",
                     "fb_content_id": fb_content_id,
                     "fb_content_type": "post",
                     "permalink_url": post_data.get("permalink_url"),
-                    "created_time": post_data.get("created_time"),
+                    "created_time": self._parse_facebook_datetime(post_data.get("created_time")),
                     "media_url": media_url,
                     "media_type": media_type_val,
                     "likes_count": likes_count,
-                    "reactions_by_type_json": json.dumps(reactions_by_type) if reactions_by_type else None,
+                    "reactions_by_type_json": json.dumps(reactions_by_type) if reactions_by_type else "{}",
                     "comments_count": comments_count,
                     "shares_count": shares_count,
                     "impressions_total": impressions_total,
                     "reach_unique": reach_unique,
                     "clicks_total": clicks_total,
-                    "media_id": self.media_id.id,
+                    "account_ids": [(6, 0, [self.id])],  # Required field
+                    "image_urls": "[]",  # Required by kanban template - empty array for now
+                    "state": "published",  # Posts synced from Facebook are already published
                 }
+
+                # Add downloaded images to the post
+                if image_attachments:
+                    metrics_data["image_ids"] = [(6, 0, image_attachments)]
 
                 if existing_post:
                     existing_post.write_metrics_snapshot(metrics_data)
                     updated_count += 1
+                    # Ensure post_account record exists for dashboard
+                    self._ensure_post_account_exists(existing_post, metrics_data, post_data)
                 else:
                     post = self.env["social.post"].create(metrics_data)
                     post.write_metrics_snapshot(metrics_data)
                     created_count += 1
+                    # Create post_account record for dashboard display
+                    self._ensure_post_account_exists(post, metrics_data, post_data)
 
             except Exception as e:
-                _logger.error("Error processing post %s: %s", post_data.get("id"), str(e), exc_info=True)
+                print(f"ERROR: Error processing post {post_data.get('id')}: {str(e)}")
                 continue
 
-        _logger.info("Posts processed: %d created, %d updated", created_count, updated_count)
+        print(f"Posts processed: {created_count} created, {updated_count} updated")
 
     def _process_reels_data(self, videos_data):
         """Extract reel processing logic for reuse"""
@@ -1293,11 +1525,7 @@ class SocialAccount(models.Model):
                 fb_content_id = video_data.get("id")
 
                 existing_post = self.env["social.post"].search(
-                    [
-                        "|",
-                        ("fb_content_id", "=", fb_content_id),
-                        ("fb_post_id", "=", fb_content_id),
-                    ],
+                    [("fb_content_id", "=", fb_content_id)],
                     limit=1,
                 )
 
@@ -1323,33 +1551,95 @@ class SocialAccount(models.Model):
 
                 shares_count = video_data.get("shares", {}).get("count", 0)
 
-                import json
                 metrics_data = {
-                    "name": video_data.get("title", "")[:100] or f"Video {fb_content_id}",
-                    "message": video_data.get("description", ""),
+                    "message": video_data.get("description", "") or video_data.get("title", "") or f"Video {fb_content_id}",
                     "fb_content_id": fb_content_id,
                     "fb_content_type": "reel",
                     "permalink_url": video_data.get("permalink_url"),
-                    "created_time": video_data.get("created_time"),
+                    "created_time": self._parse_facebook_datetime(video_data.get("created_time")),
                     "media_type": "video",
                     "plays_total": plays_total,
                     "plays_unique": plays_unique,
                     "watch_time_sec": watch_time_sec,
                     "completed_views": completed_views,
                     "shares_count": shares_count,
-                    "media_id": self.media_id.id,
+                    "account_ids": [(6, 0, [self.id])],  # Required field
+                    "image_urls": "[]",  # Required by kanban template
+                    "state": "published",  # Reels synced from Facebook are already published
                 }
 
                 if existing_post:
                     existing_post.write_metrics_snapshot(metrics_data)
                     updated_count += 1
+                    # Ensure post_account record exists for dashboard
+                    self._ensure_post_account_exists(existing_post, metrics_data, video_data)
                 else:
                     post = self.env["social.post"].create(metrics_data)
                     post.write_metrics_snapshot(metrics_data)
                     created_count += 1
+                    # Create post_account record for dashboard display
+                    self._ensure_post_account_exists(post, metrics_data, video_data)
 
             except Exception as e:
-                _logger.error("Error processing video %s: %s", video_data.get("id"), str(e), exc_info=True)
+                print(f"ERROR: Error processing video {video_data.get('id')}: {str(e)}")
                 continue
 
-        _logger.info("Reels processed: %d created, %d updated", created_count, updated_count)
+        print(f"Reels processed: {created_count} created, {updated_count} updated")
+
+    def _ensure_post_account_exists(self, post, metrics_data, fb_data):
+        """Ensure a social.post.account record exists for synced posts
+
+        This allows synced posts to appear in the Dashboard view.
+
+        Args:
+            post: social.post record
+            metrics_data: Dict with post metrics
+            fb_data: Original Facebook API response data
+        """
+        # Check if post_account already exists for this account
+        existing_post_account = self.env["social.post.account"].search([
+            ("post_id", "=", post.id),
+            ("account_id", "=", self.id),
+        ], limit=1)
+
+        if existing_post_account:
+            # Update existing record with latest metrics
+            existing_post_account.write({
+                "message": metrics_data.get("message", ""),
+                "published_date": metrics_data.get("created_time"),
+                "comment_count": metrics_data.get("comments_count", 0),
+                "like_count": metrics_data.get("likes_count", 0),
+                "share_count": metrics_data.get("shares_count", 0),
+                "view_count": metrics_data.get("plays_total", 0),  # For reels
+                "post_account_url": metrics_data.get("permalink_url", ""),
+            })
+            print(f"  Updated post_account ID: {existing_post_account.id}")
+        else:
+            # Create new post_account record for dashboard
+            # Convert image_ids from metrics_data format to Many2many format if present
+            image_ids_value = []
+            if "image_ids" in metrics_data and metrics_data["image_ids"]:
+                image_ids_value = metrics_data["image_ids"]
+
+            post_account_vals = {
+                "post_id": post.id,
+                "account_id": self.id,
+                "media_id": self.media_id.id,
+                "message": metrics_data.get("message", ""),
+                "published_date": metrics_data.get("created_time"),
+                "published": True,
+                "state": "posted",
+                "comment_count": metrics_data.get("comments_count", 0),
+                "like_count": metrics_data.get("likes_count", 0),
+                "share_count": metrics_data.get("shares_count", 0),
+                "view_count": metrics_data.get("plays_total", 0),  # For reels
+                "post_account_url": metrics_data.get("permalink_url", ""),
+                "image_urls": metrics_data.get("image_urls", "[]"),
+            }
+
+            # Add images if available
+            if image_ids_value:
+                post_account_vals["image_ids"] = image_ids_value
+
+            new_post_account = self.env["social.post.account"].create(post_account_vals)
+            print(f"  Created post_account ID: {new_post_account.id} for Dashboard display")

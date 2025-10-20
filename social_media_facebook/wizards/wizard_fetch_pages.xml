@@ -33,4 +33,12 @@
         </field>
     </record>
 
+    <record id="action_wizard_fetch_pages" model="ir.actions.act_window">
+        <field name="name">Select Facebook Pages</field>
+        <field name="res_model">wizard.fetch.pages</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_wizard_fetch_pages" />
+    </record>
+
 </odoo>
