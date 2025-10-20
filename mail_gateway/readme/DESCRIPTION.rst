@@ -3,3 +3,5 @@ It requires extra modules with the specific configuration of each chat system, l
 
 This way, a group of users can respond customers or any other set
 of partners within Odoo, but the messages will be sent through the external chat system.
+
+test
