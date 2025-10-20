@@ -239,6 +239,11 @@ msgstr ""
 "nell'elenco comunicazioni."
 
 #. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_resend_message
+msgid "Email resend wizard"
+msgstr ""
+
+#. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_notification__gateway_failure_reason
 msgid ""
 "Failure reason. This is usually the exception thrown by the email server, "
@@ -311,6 +316,11 @@ msgstr "Messaggio gateway"
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_notification_ids
 msgid "Gateway Notification"
 msgstr "Notifica gateway"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_resend_message__gateway_notification_ids
+msgid "Gateway Notifications"
+msgstr ""
 
 #. module: mail_gateway
 #: model:ir.actions.act_window,name:mail_gateway.res_partner_gateway_channel_act_window
@@ -436,8 +446,8 @@ msgstr "Mantieni copia messaggio"
 msgid ""
 "Keep a copy of the email content if emails are removed (mass mailing only)"
 msgstr ""
-"Conservare una copia del contenuto dell'e-mail se le e-mail vengono rimosse ("
-"solo per l'invio di massa)"
+"Conservare una copia del contenuto dell'e-mail se le e-mail vengono rimosse "
+"(solo per l'invio di massa)"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_discuss_channel__gateway_token
