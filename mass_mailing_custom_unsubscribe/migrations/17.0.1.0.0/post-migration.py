@@ -53,6 +53,8 @@ def migrate(env, version):
         FROM mail_unsubscription mu
         JOIN mail_unsubscription_mailing_list_rel rel
             ON mu.id = rel.mail_unsubscription_id
+        JOIN mailing_contact mc
+            ON mc.id = CAST(SPLIT_PART(mu.unsubscriber_id, ',', 2) AS INTEGER)
         WHERE
             mu.unsubscriber_id LIKE 'mailing.contact,%'
             AND SPLIT_PART(mu.unsubscriber_id, ',', 2) ~ '^[0-9]+$'
