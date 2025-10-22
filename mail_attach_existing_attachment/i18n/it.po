@@ -21,6 +21,11 @@ msgstr ""
 "X-Generator: Weblate 5.6.2\n"
 
 #. module: mail_attach_existing_attachment
+#: model:ir.model,name:mail_attach_existing_attachment.model_ir_attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: mail_attach_existing_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__can_attach_attachment
 msgid "Can Attach Attachment"
 msgstr "Può inserire allegati"

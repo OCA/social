@@ -21,6 +21,11 @@ msgstr ""
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
 #. module: mail_attach_existing_attachment
+#: model:ir.model,name:mail_attach_existing_attachment.model_ir_attachment
+msgid "Attachment"
+msgstr ""
+
+#. module: mail_attach_existing_attachment
 #: model:ir.model.fields,field_description:mail_attach_existing_attachment.field_mail_compose_message__can_attach_attachment
 msgid "Can Attach Attachment"
 msgstr "Može pridružiti privitak"
