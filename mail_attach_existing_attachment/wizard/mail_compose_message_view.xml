@@ -12,6 +12,7 @@
                     widget="many2many_checkboxes"
                     domain="[('id', 'in', display_object_attachment_ids)]"
                     invisible="not can_attach_attachment"
+                    context="{'display_full_attachment_name': True}"
                 />
             </xpath>
         </field>
