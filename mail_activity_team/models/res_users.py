@@ -31,7 +31,7 @@ class ResUsers(models.Model):
                         SELECT mail_activity_team_id
                         FROM mail_activity_team_users_rel
                         WHERE res_users_id = %(user_id)s
-                    )
+                    ) AND act.active = True
                     GROUP BY m.id, states, act.res_model, act.user_id;"""
         user = self.env.uid
         self.env.cr.execute(
