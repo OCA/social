@@ -247,11 +247,12 @@ class TestSocialAccountX(TestSocialCommonX):
         self.assertEqual(kwargs, {"client_api": False})
 
     def test_create_tweet_with_medias(self):
-        with patch.object(
-            type(self.SocialAccount), "get_client_api"
-        ) as mock_get_api, patch.object(
-            type(self.SocialAccount), "_prepare_medias_for_tweet"
-        ) as mock_prep:
+        with (
+            patch.object(type(self.SocialAccount), "get_client_api") as mock_get_api,
+            patch.object(
+                type(self.SocialAccount), "_prepare_medias_for_tweet"
+            ) as mock_prep,
+        ):
             fake_client = Mock()
             fake_client.create_tweet.return_value = type(
                 "Response", (), {"data": {"id": "123"}}
@@ -270,11 +271,12 @@ class TestSocialAccountX(TestSocialCommonX):
 
     @patch(PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client"))
     def test_create_tweet_without_medias(self, mock_notify):
-        with patch.object(
-            type(self.SocialAccount), "get_client_api"
-        ) as mock_get_api, patch.object(
-            type(self.SocialAccount), "_prepare_medias_for_tweet", return_value=[]
-        ) as mock_prep:
+        with (
+            patch.object(type(self.SocialAccount), "get_client_api") as mock_get_api,
+            patch.object(
+                type(self.SocialAccount), "_prepare_medias_for_tweet", return_value=[]
+            ) as mock_prep,
+        ):
             fake_client = Mock()
             fake_client.create_tweet.return_value = type(
                 "Response", (), {"data": {"id": "456"}}
@@ -356,13 +358,22 @@ class TestSocialAccountX(TestSocialCommonX):
         )
 
     def test_action_add_account(self):
-        with self._patch_super_action_add_account(
-            self.WizardAccountX,
-            return_value={"type": "ir.actions.act_url", "url": "https://auth.example"},
-        ) as mock_super, patch.object(
-            type(self.WizardAccountX),
-            "_get_url_authorize",
-            return_value={"type": "ir.actions.act_url", "url": "https://auth.example"},
+        with (
+            self._patch_super_action_add_account(
+                self.WizardAccountX,
+                return_value={
+                    "type": "ir.actions.act_url",
+                    "url": "https://auth.example",
+                },
+            ) as mock_super,
+            patch.object(
+                type(self.WizardAccountX),
+                "_get_url_authorize",
+                return_value={
+                    "type": "ir.actions.act_url",
+                    "url": "https://auth.example",
+                },
+            ),
         ):
             res = self.WizardAccountX._action_add_account()
         mock_super.assert_called_once_with()
@@ -424,19 +435,24 @@ class TestSocialAccountX(TestSocialCommonX):
             user_id="FAKE123456789", name="Same", username="same"
         )
 
-        with patch.object(
-            type(self.SocialAccount), "get_client_api", return_value=client
-        ), patch.object(
-            type(self.SocialAccount), "_get_access_token_oauth2", return_value="BT123"
-        ) as mock_o2, patch.object(
-            self.SocialAccount.env, "ref", return_value=SimpleNamespace(id=222)
-        ) as mock_ref, patch.object(
-            type(self.SocialAccount), "create"
-        ) as mock_create, patch.object(
-            type(self.SocialAccount), "write"
-        ) as mock_write, patch.object(
-            type(self.SocialAccount), "_notify_user_client"
-        ) as mock_notify:
+        with (
+            patch.object(
+                type(self.SocialAccount), "get_client_api", return_value=client
+            ),
+            patch.object(
+                type(self.SocialAccount),
+                "_get_access_token_oauth2",
+                return_value="BT123",
+            ) as mock_o2,
+            patch.object(
+                self.SocialAccount.env, "ref", return_value=SimpleNamespace(id=222)
+            ) as mock_ref,
+            patch.object(type(self.SocialAccount), "create") as mock_create,
+            patch.object(type(self.SocialAccount), "write") as mock_write,
+            patch.object(
+                type(self.SocialAccount), "_notify_user_client"
+            ) as mock_notify,
+        ):
             self.SocialAccount.create_account_x(
                 x_access_token_oauth1="AT",
                 x_access_secret_oauth1="AS",

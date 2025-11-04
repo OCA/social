@@ -46,13 +46,16 @@ class TestSocialPostAccountX(TestSocialCommonX):
 
     def test_create_x_comment(self):
         mock_client = MagicMock()
-        with patch.object(
-            type(self.SocialAccountX), "get_client_api", return_value=mock_client
-        ) as mock_get_client_api, patch.object(
-            type(self.SocialAccountX),
-            "_prepare_medias_for_tweet",
-            return_value=mock_client,
-        ) as mock_medias_for_tweet:
+        with (
+            patch.object(
+                type(self.SocialAccountX), "get_client_api", return_value=mock_client
+            ) as mock_get_client_api,
+            patch.object(
+                type(self.SocialAccountX),
+                "_prepare_medias_for_tweet",
+                return_value=mock_client,
+            ) as mock_medias_for_tweet,
+        ):
             post_data = {
                 "body": "Test Comment",
                 "attachment_ids": [1],
