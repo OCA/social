@@ -108,7 +108,7 @@
         <field name="name">social.post.tree</field>
         <field name="model">social.post</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-muted="state == 'draft'"
                 decoration-info="state in ('planned','publishing')"
                 decoration-success="state == 'published'"
@@ -122,8 +122,8 @@
                 <field name="count_post_shares" />
                 <field name="count_post_interactions" />
                 <field name="count_post_engagement" />
-                <field name="state" invisible="1" />
-            </tree>
+                <field name="state" invisible="True" />
+            </list>
         </field>
     </record>
 
@@ -237,7 +237,7 @@
     <record model="ir.actions.act_window" id="social_post_act_window_kanban">
         <field name="name">Posts</field>
         <field name="res_model">social.post</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="social_post_view_search" />
         <field name="domain">[]</field>
         <field name="context">{}</field>
