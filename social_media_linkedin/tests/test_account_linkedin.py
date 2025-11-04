@@ -657,14 +657,17 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertEqual(len(result), 10)
 
     def test_action_add_account(self):
-        with patch.object(
-            type(self.wizard_account_id),
-            "_get_url_redirect",
-            return_value=self.url_callback,
-        ), patch.object(
-            type(self.wizard_account_id),
-            "_generate_code",
-            return_value="fake-code-token",
+        with (
+            patch.object(
+                type(self.wizard_account_id),
+                "_get_url_redirect",
+                return_value=self.url_callback,
+            ),
+            patch.object(
+                type(self.wizard_account_id),
+                "_generate_code",
+                return_value="fake-code-token",
+            ),
         ):
             result = self.wizard_account_id._action_add_account()
             self.assertIn("fake-client-id", result["url"])

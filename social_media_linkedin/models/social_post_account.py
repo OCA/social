@@ -80,7 +80,7 @@ class SocialPostAccount(models.Model):
                 if total > 0:
                     elements = response.json().get("elements", [])
                     filter_test = False
-                    if self.account_id.enviroment == "test":
+                    if self.account_id.environment == "test":
                         filter_test = True
                     filter_account = list(
                         filter(lambda x: x.get("test", False) == filter_test, elements)
@@ -132,8 +132,8 @@ class SocialPostAccount(models.Model):
                         },
                         "status": "ACTIVE",
                         "totalBudget": {
-                            "amount": "{}".format(
-                                post_campaign_id.campaign_group_id.total_budget
+                            "amount": (
+                                f"{post_campaign_id.campaign_group_id.total_budget}"
                             ),
                             "currencyCode": post_campaign_id.currency_id.name,
                         },
@@ -150,17 +150,15 @@ class SocialPostAccount(models.Model):
                 else:
                     raise ValidationError(
                         _(
-                            "Error creating group campaign in Linkedin: {}".format(
-                                response.json()
-                            )
+                            f"Error creating group campaign "
+                            f"in Linkedin: {response.json()}"
                         )
                     )
             else:
                 raise ValidationError(
                     _(
-                        "Error creating group campaign in Linkedin: {}".format(
-                            group_campaign.json()
-                        )
+                        f"Error creating group campaign "
+                        f"in Linkedin: {group_campaign.json()}"
                     )
                 )
         return group_campaign
@@ -315,9 +313,7 @@ class SocialPostAccount(models.Model):
                     post_account.write(
                         {
                             "linkedin_post_account_urn": post_entity,
-                            "post_account_url": "https://www.linkedin.com/feed/update/urn:li:share:{}".format(
-                                post_entity
-                            ),
+                            "post_account_url": f"https://www.linkedin.com/feed/update/urn:li:share:{post_entity}",
                             "published_date": fields.Datetime.now(),
                             "creative_urn": post_account._action_campaign_post(
                                 post_entity
@@ -434,9 +430,8 @@ class SocialPostAccount(models.Model):
             )
             if response.status_code != 201:
                 return_message = response.json().get("message", "")
-                _logger.error(f"ERROR CREATE COMMENT LINKEDIN: {return_message}")
 
-                if not self.user_has_groups("base.group_no_one"):
+                if not self.env.user.has_group("base.group_no_one"):
                     return_message = _(
                         "An error occurred while commenting, please try again later."
                     )

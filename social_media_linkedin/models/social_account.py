@@ -57,9 +57,7 @@ class SocialAccount(models.Model):
         return super()._fields_account_url() + [
             (
                 "linkedin_account_urn",
-                "https://www.linkedin.com/company/{}/admin/dashboard/".format(
-                    self.linkedin_account_id
-                ),
+                f"https://www.linkedin.com/company/{self.linkedin_account_id}/admin/dashboard/",
             )
         ]
 
@@ -351,8 +349,12 @@ class SocialAccount(models.Model):
                     "client_secret": client_secret,
                 }
             )
-        return client_id, client_secret, self._request_linkedin(
-            endpoint="/accessToken", params=params, timeout=10, token=True
+        return (
+            client_id,
+            client_secret,
+            self._request_linkedin(
+                endpoint="/accessToken", params=params, timeout=10, token=True
+            ),
         )
 
     def get_account_linkedin(self, access_token):
@@ -936,9 +938,9 @@ class SocialAccount(models.Model):
         params_values_char_ignore = {"search": [{"all": ":"}]}
         if campaign_ids:
             search_campaign = param_values["search"].strip("()")
-            param_values[
-                "search"
-            ] = f"({search_campaign},campaigns:(values:List({','.join(campaign_ids)})))"
+            param_values["search"] = (
+                f"({search_campaign},campaigns:(values:List({','.join(campaign_ids)})))"
+            )
             params_values_char_ignore = {"search": [{"1,2,3,4,5,6,7": ":"}]}
         response = self._request_linkedin(
             endpoint="/adCampaignsV2",
@@ -964,10 +966,9 @@ class SocialAccount(models.Model):
             if not isinstance(start_date, str)
             else start_date
         )
-        parse_start_date = "(year:{},month:{},day:{})".format(
-            start_date[0],
-            int(start_date[1]),
-            int(start_date[2]),
+        parse_start_date = (
+            f"(year:{start_date[0]},month:{int(start_date[1])}"
+            f",day:{int(start_date[2])})"
         )
         end_date = (
             end_date.strftime(DEFAULT_SERVER_DATE_FORMAT).split("-")

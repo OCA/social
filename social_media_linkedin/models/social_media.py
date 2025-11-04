@@ -17,7 +17,7 @@ class SocialMedia(models.Model):
     def _get_linkedin_headers(self, access_token=None, content_type=None):
         headers = _HEADERS_LINKEDIN
         if access_token:
-            headers.update({"Authorization": "Bearer %s" % access_token})
+            headers.update({"Authorization": f"Bearer {access_token}"})
         if content_type:
             headers.update({"Content-Type": content_type})
         return headers
