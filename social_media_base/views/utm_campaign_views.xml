@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="utm_campaign_form_view_inherit">
         <field name="name">utm.campaign.view.form.inherit.social.media.base</field>
         <field name="model">utm.campaign</field>
@@ -10,12 +9,16 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='name']" position="after">
                 <field name="allow_media_ids" invisible="True" />
-                <field name="campaign_group_id" required="1" />
-                <field name="media_id" required="1" />
+                <field name="campaign_group_id" />
+                <field
+                    name="media_id"
+                    placeholder="Optional: Select platform for platform-specific campaigns"
+                />
                 <field
                     name="account_id"
-                    required="1"
+                    placeholder="Optional: Select account for platform-specific campaigns"
                     options="{'no_create_edit': True, 'no_create': True}"
+                    invisible="not media_id"
                 />
             </xpath>
         </field>
@@ -34,5 +37,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

@@ -1,4 +1,4 @@
-# Copyright 2025 Binhex <https://www.binhex.cloud>
+# Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Social Media Base",
@@ -18,6 +18,8 @@
         "views/social_account_views.xml",
         "views/social_post_views.xml",
         "views/social_post_account_views.xml",
+        "views/social_comment_views.xml",
+        "views/social_lead_views.xml",
         "views/utm_group_campaign_views.xml",
         "views/utm_campaign_views.xml",
         "views/social_action_client_views.xml",

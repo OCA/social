@@ -1,7 +1,7 @@
-/** @odoo-module **/
 import {onWillStart, useEffect, useRef} from "@odoo/owl";
 import {KanbanRecord} from "@web/views/kanban/kanban_record";
 import {SocialCommentDialog} from "@social_media_base/components/social_comment_dialog/social_comment_dialog.esm";
+import {SocialImageCarousel} from "@social_media_base/components/social_image_carousel/social_image_carousel.esm";
 import {SocialPostAccountMixin} from "@social_media_base/js/app/social_media_base_mixins.esm";
 import {_t} from "@web/core/l10n/translation";
 import {useService} from "@web/core/utils/hooks";
@@ -30,10 +30,18 @@ export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
                 );
             }
             if (this.record.published_date) {
-                this.record.published_date = luxon.DateTime.fromISO(
+                // Store both formatted date and relative time
+                const publishedDateTime = luxon.DateTime.fromISO(
                     this.record.published_date.raw_value
-                ).toFormat("d/M/y");
+                );
+                this.record.published_date_formatted =
+                    publishedDateTime.toFormat("d/M/y");
+                this.record.published_date_relative =
+                    this._getRelativeTime(publishedDateTime);
+                this.record.published_date = this.record.published_date_relative;
             }
+            // Format numbers with thousand separators
+            this._formatMetrics();
         });
 
         // Show all message
@@ -99,17 +107,18 @@ export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
     }
 
     /**
-     * Handles the click event on the "Post Comment" button.
+     * Handles the click event on the "Post Comment" button or comment count.
      *
      * - Stops the event propagation.
      * - Opens a dialog with the comment form and the post images.
      *
-     * @param {Event} ev - The click event on the "Post Comment" button.
+     * @param {Event} ev - The click event on the "Post Comment" button or comment count.
      */
     onPostComment(ev) {
         ev.stopPropagation();
+        ev.preventDefault();
         this.dialogService.add(SocialCommentDialog, {
-            title: _t("Post Comment"),
+            title: _t("Comments"),
             account: this.record.account_id,
             post: this.record,
             media_type: this.record.media_type,
@@ -147,28 +156,108 @@ export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
      * Handles global click events on the kanban record.
      *
      * - Checks if the clicked element is within the social dashboard.
-     * - Verifies the existence of a post URL and checks if the post exists.
-     * - Opens the post URL in a new tab if the post exists; otherwise, displays a notification.
-     * - Calls the parent class's `onGlobalClick` method.
+     * - Opens comment dialog popup inside Odoo
+     * - "Insights" link in header has click.stop to open Facebook URL instead
      *
      * @param {MouseEvent} ev - The global click event.
      */
     async onGlobalClick(ev) {
         const kanban_social = ev.target.closest("div.oe_kanban_social_dashboard");
-        // Checking if the post exists
-        if (kanban_social !== null && !this.record.post_account_url.value) {
-            this.messagePostNotExist();
-            this.env.model.load();
-        } else if (kanban_social !== null && this.record.post_account_url.raw_value) {
-            const post_exist = await this.validPostExist();
-            if (post_exist) {
-                window.open(this.record.post_account_url.value, "_blank");
-            } else {
-                this.messagePostNotExist();
-                this.env.model.load();
-            }
+
+        if (kanban_social !== null) {
+            // Open comment dialog in Odoo (don't redirect to Facebook)
+            // The "Insights" link in header has click.stop to open Facebook URL instead
+            this.onPostComment(ev);
+            return;
         }
         return super.onGlobalClick(ev);
+    }
+
+    /**
+     * Get relative time string (e.g., "1 hour ago", "2 hours ago", "3 days ago")
+     *
+     * @param {luxon.DateTime} dateTime - The datetime to convert
+     * @returns {String} Relative time string
+     */
+    _getRelativeTime(dateTime) {
+        const now = luxon.DateTime.now();
+        const diff = now
+            .diff(dateTime, ["years", "months", "days", "hours", "minutes"])
+            .toObject();
+
+        if (diff.years >= 1) {
+            const years = Math.floor(diff.years);
+            return years === 1 ? "1 year ago" : `${years} years ago`;
+        } else if (diff.months >= 1) {
+            const months = Math.floor(diff.months);
+            return months === 1 ? "1 month ago" : `${months} months ago`;
+        } else if (diff.days >= 1) {
+            const days = Math.floor(diff.days);
+            return days === 1 ? "1 day ago" : `${days} days ago`;
+        } else if (diff.hours >= 1) {
+            const hours = Math.floor(diff.hours);
+            return hours === 1 ? "1 hour ago" : `${hours} hours ago`;
+        } else if (diff.minutes >= 1) {
+            const minutes = Math.floor(diff.minutes);
+            return minutes === 1 ? "1 minute ago" : `${minutes} minutes ago`;
+        }
+        return "Just now";
+    }
+
+    /**
+     * Format numbers with thousand separators
+     * Formats: 9911 -> 9,911 | 87618 -> 87,618
+     */
+    _formatMetrics() {
+        const formatNumber = (num) => {
+            if (!num && num !== 0) return "0";
+            return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+        };
+
+        // Format like_count
+        if (this.record.like_count) {
+            this.record.like_count_formatted = formatNumber(
+                this.record.like_count.value
+            );
+        }
+
+        // Format comment_count
+        if (this.record.comment_count) {
+            this.record.comment_count_formatted = formatNumber(
+                this.record.comment_count.value
+            );
+        }
+
+        // Format share_count (if exists)
+        if (this.record.share_count) {
+            this.record.share_count_formatted = formatNumber(
+                this.record.share_count.value
+            );
+        }
+
+        // Format views (if exists)
+        if (this.record.view_count) {
+            this.record.view_count_formatted = formatNumber(
+                this.record.view_count.value
+            );
+        }
+    }
+
+    /**
+     * Opens image preview carousel
+     *
+     * @param {Number} startIndex - Index of the image to start from
+     * @param {Event} ev - Click event
+     */
+    openImagePreview(startIndex, ev) {
+        ev.stopPropagation();
+        ev.preventDefault();
+
+        const images = JSON.parse(this.record.image_urls.raw_value);
+        this.dialogService.add(SocialImageCarousel, {
+            images: images,
+            startIndex: startIndex,
+        });
     }
 }
 

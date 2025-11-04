@@ -4,40 +4,150 @@
     <t t-name="social_media_base.SocialComment">
         <t t-set="record" t-value="props.post" />
         <t t-set="actionMenuComment" t-value="true" />
-        <t t-set="published_time" t-value="props.socialComment.published_time" />
+        <t
+            t-set="published_time"
+            t-value="props.socialComment.created_time || props.socialComment.published_time"
+        />
         <t t-call="social_media_base.postAccountHeader" />
         <div class="d-flex flex-column social-text-justify">
-            <span t-esc="props.socialComment.text" />
+            <span t-esc="props.socialComment.message || props.socialComment.text" />
             <t
-                t-foreach="props.socialComment.images_url"
-                t-as="image_url"
-                t-key="image_url_index"
+                t-if="props.socialComment.images_url and props.socialComment.images_url.length"
             >
-                <img
-                    t-att-src="image_url"
-                    class="img imag-fluid shadow img-post-comment bg-white"
-                />
+                <t
+                    t-foreach="props.socialComment.images_url"
+                    t-as="image_url"
+                    t-key="image_url_index"
+                >
+                    <img
+                        t-att-src="image_url"
+                        class="img imag-fluid shadow img-post-comment bg-white"
+                    />
+                </t>
             </t>
         </div>
 
         <div class="row pt-2">
             <div class="d-flex justify-content-between align-items-center">
-
-                <span
-                    t-if="this.props.post.media_type.raw_value in this.mediaNotLikeEnable()"
-                    class="fs-6 cursor-pointer"
-                    t-on-click="onLikeComment"
-                >
-                        <i class="fa fa-thumbs-o-up" aria-hidden="true" />
-                        Recommend
-                </span>
-                <span class="fs-6 cursor-pointer d-none" t-on-click="onReplyComment">
-                    <i class="fa fa-comments" aria-hidden="true" />
-                    Comment
-                </span>
+                <div class="d-flex gap-3 small text-muted fw-semibold">
+                    <span
+                        t-if="this.props.post.media_type.raw_value in this.mediaNotLikeEnable()"
+                        class="cursor-pointer"
+                        t-on-click="onLikeComment"
+                    >
+                        Like
+                    </span>
+                    <span class="cursor-pointer" t-on-click="onReplyComment">
+                        Reply
+                    </span>
+                </div>
             </div>
         </div>
 
+        <!-- Reply count link (Facebook style - below action buttons) -->
+        <div
+            t-if="props.socialComment.replies and props.socialComment.replies.length > 0"
+            class="mt-2"
+        >
+            <span
+                class="small cursor-pointer text-primary fw-semibold d-inline-flex align-items-center gap-1"
+                t-on-click="toggleReplies"
+            >
+                <i
+                    t-attf-class="fa fa-chevron-{{state.showReplies ? 'up' : 'down'}}"
+                    aria-hidden="true"
+                    style="font-size: 0.85em;"
+                />
+                <t t-if="props.socialComment.replies.length == 1">1 Reply</t>
+                <t t-else="" t-esc="`${props.socialComment.replies.length} Replies`" />
+            </span>
+        </div>
 
+        <!-- Reply input (shown when replying) -->
+        <div t-if="state.showReplyInput" class="mt-3 ps-4">
+            <div class="d-flex gap-2 align-items-end">
+                <div class="flex-grow-1">
+                    <textarea
+                        class="form-control form-control-sm"
+                        placeholder="Write a reply..."
+                        t-model="state.replyMessage"
+                        rows="2"
+                    />
+                    <div class="d-flex gap-1 mt-1">
+                        <button
+                            t-ref="replyEmojiButton"
+                            class="btn btn-sm btn-light"
+                            title="Add emoji"
+                            type="button"
+                        >
+                            <i class="fa fa-smile-o" />
+                        </button>
+                    </div>
+                </div>
+                <div class="d-flex flex-column gap-1">
+                    <button
+                        class="btn btn-primary btn-sm"
+                        t-on-click="sendReply"
+                        t-att-disabled="!state.replyMessage || !state.replyMessage.trim()"
+                    >
+                        <i class="fa fa-send" />
+                    </button>
+                    <button
+                        class="btn btn-secondary btn-sm"
+                        t-on-click="() => this.state.showReplyInput = false"
+                    >
+                        <i class="fa fa-times" />
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nested replies (shown when state.showReplies is true) -->
+        <div
+            t-if="state.showReplies and props.socialComment.replies and props.socialComment.replies.length > 0"
+            class="mt-3 ps-4"
+        >
+            <t t-foreach="props.socialComment.replies" t-as="reply" t-key="reply.id">
+                <div class="mb-3">
+                    <div class="d-flex align-items-start gap-2">
+                        <img
+                            t-if="reply.author_image"
+                            t-att-src="reply.author_image"
+                            t-att-alt="reply.author"
+                            class="rounded-circle"
+                            width="32"
+                            height="32"
+                            style="object-fit: cover;"
+                        />
+                        <div
+                            t-else=""
+                            class="rounded-circle bg-secondary d-flex align-items-center justify-content-center text-white"
+                            style="width: 32px; height: 32px; min-width: 32px;"
+                        >
+                            <span
+                                t-esc="reply.author ? reply.author[0].toUpperCase() : '?'"
+                                class="fw-bold small"
+                            />
+                        </div>
+                        <div class="flex-grow-1">
+                            <div class="bg-light rounded p-2">
+                                <strong
+                                    t-esc="reply.author"
+                                    class="d-block mb-1 small"
+                                />
+                                <span t-esc="reply.message" class="small" />
+                            </div>
+                            <div
+                                class="d-flex gap-3 mt-1 ms-2 small text-muted fw-semibold"
+                            >
+                                <span class="cursor-pointer">Like</span>
+                                <span class="cursor-pointer">Reply</span>
+                                <span t-esc="reply.created_time" class="fw-normal" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
     </t>
 </templates>

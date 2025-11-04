@@ -1,10 +1,11 @@
-# Copyright 2025 Binhex <https://www.binhex.cloud>
+# Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import logging
 from datetime import datetime, timedelta
 
 from odoo import Command, _, api, fields, models
+from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -14,8 +15,25 @@ class SocialPost(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin", "social.post.mixin"]
     _description = "Social Post"
 
-    account_ids = fields.Many2many("social.account", required=True, ondelete="restrict")
+    account_ids = fields.Many2many(
+        "social.account", required=True, ondelete="restrict", string="Accounts"
+    )
     active = fields.Boolean(default=True)
+    content_type = fields.Selection(
+        [
+            ("post", "Post"),
+            ("reel", "Video"),
+            ("story", "Story"),
+            ("ad", "Ad"),
+        ],
+        default="post",
+        required=True,
+        tracking=True,
+        help=(
+            "Type of content: Post, Video, Story, Ad. "
+            "Platforms may support different types."
+        ),
+    )
     message = fields.Text(required=True, tracking=True)
     campaign_id = fields.Many2one("utm.campaign")
     send_post = fields.Selection(
@@ -25,7 +43,9 @@ class SocialPost(models.Model):
         tracking=True,
     )
     send_post_date = fields.Datetime(
-        string="Schedule date", compute="_compute_send_post_date", store=True
+        string="Schedule date",
+        # compute="_compute_send_post_date",
+        store=True,
     )
     published_date = fields.Datetime(tracking=True)
     state = fields.Selection(
@@ -69,6 +89,11 @@ class SocialPost(models.Model):
         column2="image_id",
         ondelete="restrict",
         relation="social_network_post_image_rel",
+        string="Images",
+        help=(
+            "Attach multiple images (up to 10). "
+            "Cannot mix images and videos in the same post."
+        ),
     )
 
     video_ids = fields.Many2many(
@@ -77,9 +102,36 @@ class SocialPost(models.Model):
         column1="post_id",
         column2="video_id",
         ondelete="restrict",
+        string="Videos",
+        help="Attach a single video. Cannot mix images and videos in the same post. "
+        "Note: Only the first video will be used for Facebook posts.",
     )
 
     post_preview = fields.Html(compute="_compute_post_preview", store=True)
+
+    # mail.activity.mixin - Override to add groups for cleaner prefetch
+    activity_ids = fields.One2many(groups="base.group_user")
+    activity_state = fields.Selection(groups="base.group_user")
+    activity_user_id = fields.Many2one(groups="base.group_user")
+    activity_type_id = fields.Many2one(groups="base.group_user")
+    activity_type_icon = fields.Char(groups="base.group_user")
+    activity_date_deadline = fields.Date(groups="base.group_user")
+    my_activity_date_deadline = fields.Date(groups="base.group_user")
+    activity_summary = fields.Char(groups="base.group_user")
+    activity_exception_decoration = fields.Selection(groups="base.group_user")
+    activity_exception_icon = fields.Char(groups="base.group_user")
+
+    @api.constrains("image_ids", "video_ids")
+    def _check_media_exclusivity(self):
+        """Ensure that a post cannot have both images and videos"""
+        for post in self:
+            if post.image_ids and post.video_ids:
+                raise ValidationError(
+                    _(
+                        "You cannot attach both images and videos to the same post. "
+                        "Please choose either images or a video."
+                    )
+                )
 
     @api.depends("account_ids.media_id")
     def _compute_display_name(self):
@@ -138,9 +190,7 @@ class SocialPost(models.Model):
             }
             try:
                 render_template += """\n\n""" + IrQweb._render(
-                    "social_media_{}.social_network_post_preview".format(
-                        account.media_id.media_type
-                    ),
+                    f"social_media_{account.media_id.media_type}.social_network_post_preview",
                     values | self._render_values_preview(),
                 )
             except ValueError:
@@ -186,6 +236,12 @@ class SocialPost(models.Model):
     def _prepare_post_account_values(self):
         posts_account = []
         for account in self.account_ids:
+            fb_video_url = None
+            if self.video_ids:
+                first_video = self.video_ids[0]
+                # Generate the URL for the video attachment
+                fb_video_url = f"/web/image/{first_video._name}/{first_video.id}/datas"
+
             posts_account.append(
                 Command.create(
                     {
@@ -193,6 +249,7 @@ class SocialPost(models.Model):
                         "account_id": account.id,
                         "state": "ready",
                         "message": self.message,
+                        "fb_video_url": fb_video_url,
                     }
                 )
             )
@@ -219,7 +276,7 @@ class SocialPost(models.Model):
             [
                 ("state", "=", "planned"),
                 ("send_post", "=", "schedule"),
-                ("send_post_date", "<=", datetime.now()),
+                ("send_post_date", "<=", fields.Datetime.now()),
             ]
         )
         post_accounts._action_create_post_account()

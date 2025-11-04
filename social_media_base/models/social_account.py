@@ -1,4 +1,4 @@
-# Copyright 2025 Binhex <https://www.binhex.cloud>
+# Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
@@ -34,6 +34,40 @@ class SocialAccount(models.Model):
         return base64.b64encode(file_open("base/static/img/avatar.png", "rb").read())
 
     image_1920 = fields.Image(default=_default_image)
+    # Use media platform icon for kanban group headers
+    # Override avatar_128 to show platform logo instead of account image
+    avatar_128 = fields.Image(
+        compute="_compute_avatar_128",
+        store=False,
+        help="Platform logo dynamically retrieved from social.media.image",
+    )
+    avatar_256 = fields.Image(
+        compute="_compute_avatar_256",
+        store=False,
+        help="Platform logo in 256x256 for better quality",
+    )
+
+    @api.depends("media_id", "media_id.image")
+    def _compute_avatar_128(self):
+        """Use platform logo as avatar for group headers"""
+        for account in self:
+            if account.media_id and account.media_id.image:
+                # Dynamically get platform logo from social.media
+                account.avatar_128 = account.media_id.image
+            else:
+                # Fallback to account image if no media linked
+                account.avatar_128 = account.image_128
+
+    @api.depends("media_id", "media_id.image")
+    def _compute_avatar_256(self):
+        """Use platform logo for higher resolution displays"""
+        for account in self:
+            if account.media_id and account.media_id.image:
+                # Dynamically get platform logo from social.media
+                account.avatar_256 = account.media_id.image
+            else:
+                # Fallback to account image
+                account.avatar_256 = account.image_256
 
     # STATISTICS
     comment_count = fields.Integer(default=0)
@@ -59,7 +93,7 @@ class SocialAccount(models.Model):
     engagement = fields.Float(default=0)
 
     account_url = fields.Char(compute="_compute_account_url", store=True)
-    enviroment = fields.Selection(
+    environment = fields.Selection(
         [("test", "Test"), ("production", "Production")], default="test"
     )
     need_update = fields.Boolean(default=False)
@@ -123,12 +157,12 @@ class SocialAccount(models.Model):
             )
 
     def _compute_display_name(self):
+        """Display clean account name - platform icon shown via avatar widget"""
         for account in self:
-            account.display_name = (
-                f"[{account.media_type.upper()}] {account.name}"
-                if account.media_type
-                else account.name
-            )
+            # Show just the account name - the platform logo/icon will be displayed
+            # via the many2one_avatar widget which uses avatar_128/avatar_256 fields
+            # that are computed to show media_id.image dynamically
+            account.display_name = account.name or "Unnamed Account"
 
     def _fields_account_url(self):
         return []

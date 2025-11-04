@@ -1,5 +1,3 @@
-/** @odoo-module */
-
 import {markup, useEffect} from "@odoo/owl";
 
 export const SocialMediaMixin = (T) =>

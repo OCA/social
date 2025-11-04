@@ -1,4 +1,3 @@
-/** @odoo-module **/
 import {Component, onWillStart} from "@odoo/owl";
 import {SocialChartAccount} from "@social_media_base/components/social_chart_account/social_chart_account.esm";
 import {registry} from "@web/core/registry";

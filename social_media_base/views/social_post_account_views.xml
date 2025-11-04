@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="social_post_account_kanban_view">
         <field name="name">social.network.stream.post.view.kanban</field>
         <field name="model">social.post.account</field>
@@ -21,12 +20,17 @@
                 <field name="message" />
                 <field name="published_date" />
                 <field name="image_urls" />
+                <field name="video_urls" />
+                <field name="content_type" />
                 <field name="comment_count" />
                 <field name="like_count" />
+                <field name="share_count" />
+                <field name="view_count" />
                 <field name="post_account_url" />
                 <field name="author" />
                 <field name="media_type" />
                 <field name="account_id" />
+                <field name="media_id" />
                 <templates>
                     <t t-name="kanban-menu">
                         <div class="p-1">
@@ -38,14 +42,18 @@
                             >Delete post</a>
                         </div>
                     </t>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div
-                            t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                            t-attf-class="rounded oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                            style="padding: 3px !important; border: none !important; box-shadow: none !important;"
                         >
                             <t t-set="isDashboard" t-value="true" />
                             <t t-call="social_media_base.postAccountHeader" />
 
-                            <div class="oe_kanban_content">
+                            <div
+                                class="oe_kanban_content"
+                                style="padding: 0 !important; margin: 0 !important;"
+                            >
                                 <t
                                     t-set="images"
                                     t-value="JSON.parse(record.image_urls.raw_value)"
@@ -54,7 +62,10 @@
                                     t-call="social_media_base.postAccountMessageImages"
                                 />
                             </div>
-                            <div class="oe_kanban_footer">
+                            <div
+                                class="oe_kanban_footer"
+                                style="padding: 0 !important; margin: 0 !important;"
+                            >
                                 <t t-call="social_media_base.postAccountFooter" />
                             </div>
                         </div>
@@ -69,12 +80,92 @@
         <field name="model">social.post.account</field>
         <field name="arch" type="xml">
             <search>
+                <!-- Search Fields -->
+                <field
+                    name="message"
+                    string="Message"
+                    filter_domain="[('message', 'ilike', self)]"
+                />
+                <field
+                    name="author"
+                    string="Author"
+                    filter_domain="[('author', 'ilike', self)]"
+                />
+                <field name="account_id" string="Account" />
+                <field name="media_type" string="Platform" />
+                <field name="content_type" string="Content Type" />
+
+                <!-- Filters -->
+                <separator />
+                <filter
+                    string="Posts"
+                    name="filter_posts"
+                    domain="[('content_type', '=', 'post')]"
+                />
+                <filter
+                    string="Reels/Videos"
+                    name="filter_reels"
+                    domain="[('content_type', '=', 'reel')]"
+                />
+                <filter
+                    string="Ads"
+                    name="filter_ads"
+                    domain="[('content_type', '=', 'ad')]"
+                />
+                <separator />
+                <filter
+                    string="Has Comments"
+                    name="filter_has_comments"
+                    domain="[('comment_count', '>', 0)]"
+                />
+                <filter
+                    string="High Engagement"
+                    name="filter_high_engagement"
+                    domain="['|', ('like_count', '>', 100), ('comment_count', '>', 50)]"
+                />
+                <separator />
+                <filter
+                    string="Published This Week"
+                    name="filter_this_week"
+                    domain="[('published_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    string="Published This Month"
+                    name="filter_this_month"
+                    domain="[('published_date', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"
+                />
+
+                <!-- Group By -->
                 <group expand="0" string="Group By">
                     <filter
-                        string="Accounts"
+                        string="Account"
                         name="group_by_account_id"
                         domain="[]"
                         context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        string="Platform"
+                        name="group_by_media_type"
+                        domain="[]"
+                        context="{'group_by': 'media_type'}"
+                    />
+                    <filter
+                        string="Content Type"
+                        name="group_by_content_type"
+                        domain="[]"
+                        context="{'group_by': 'content_type'}"
+                    />
+                    <filter
+                        string="Author"
+                        name="group_by_author"
+                        domain="[]"
+                        context="{'group_by': 'author'}"
+                    />
+                    <filter
+                        string="Published Date"
+                        name="group_by_published_date"
+                        domain="[]"
+                        context="{'group_by': 'published_date:month'}"
                     />
                 </group>
             </search>
@@ -124,5 +215,4 @@
             </div>
         </div>
     </template>
-
 </odoo>

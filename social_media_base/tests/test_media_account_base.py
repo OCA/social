@@ -1,6 +1,5 @@
-# Copyright 2025 Binhex <https://www.binhex.cloud>
+# Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
-
 
 from odoo.addons.social_media_base.tests.test_social_common import (
     TestSocialMediaBaseCommon,

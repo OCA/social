@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialImageCarousel">
+        <Dialog
+            size="'xl'"
+            contentClass="'p-0'"
+            title="'Image Preview'"
+            t-on-keydown="onKeydown"
+        >
+            <div
+                class="d-flex align-items-center justify-content-center position-relative"
+                style="min-height: 500px; background: #000;"
+            >
+                <!-- Previous button -->
+                <button
+                    t-if="hasPrevious"
+                    class="btn btn-light position-absolute start-0 ms-3"
+                    style="z-index: 10; opacity: 0.8;"
+                    t-on-click="previousImage"
+                >
+                    <i class="fa fa-chevron-left" />
+                </button>
+
+                <!-- Current image -->
+                <img
+                    t-att-src="currentImage"
+                    class="img-fluid"
+                    style="max-height: 80vh; max-width: 100%;"
+                    alt="Preview"
+                />
+
+                <!-- Next button -->
+                <button
+                    t-if="hasNext"
+                    class="btn btn-light position-absolute end-0 me-3"
+                    style="z-index: 10; opacity: 0.8;"
+                    t-on-click="nextImage"
+                >
+                    <i class="fa fa-chevron-right" />
+                </button>
+
+                <!-- Image counter -->
+                <div
+                    class="position-absolute bottom-0 start-50 translate-middle-x mb-3 px-3 py-1 bg-dark bg-opacity-75 text-white rounded"
+                >
+                    <t t-esc="state.currentIndex + 1" /> / <t
+                    t-esc="props.images.length"
+                />
+                </div>
+            </div>
+        </Dialog>
+    </t>
+
+</templates>

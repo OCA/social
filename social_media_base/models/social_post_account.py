@@ -1,4 +1,4 @@
-# Copyright 2025 Binhex <https://www.binhex.cloud>
+# Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import _, fields, models
@@ -10,13 +10,19 @@ class SocialPostAccount(models.Model):
     _description = "Social Post Account"
     _rec_name = "message"
 
-    post_id = fields.Many2one("social.post", ondelete="restrict")
+    post_id = fields.Many2one("social.post", ondelete="cascade")
     active = fields.Boolean(default=True)
     account_id = fields.Many2one("social.account", ondelete="restrict", required=True)
     media_id = fields.Many2one(
         "social.media", related="account_id.media_id", required=True
     )
     media_type = fields.Selection(related="media_id.media_type")
+    content_type = fields.Selection(
+        related="post_id.content_type",
+        store=True,
+        readonly=False,
+        help="Type of content - inherited from post but can be overridden per account",
+    )
 
     state = fields.Selection(
         [
@@ -35,6 +41,7 @@ class SocialPostAccount(models.Model):
     like_count = fields.Integer()
     click_count = fields.Integer()
     share_count = fields.Integer()
+    view_count = fields.Integer(string="Views", help="Number of views/impressions")
     impression_count = fields.Float()
     engagement = fields.Float()
 
@@ -43,16 +50,23 @@ class SocialPostAccount(models.Model):
         relation="social_post_account_video_rel",
         column1="post_id",
         column2="video_id",
-        ondelete="restrict",
     )
 
     image_ids = fields.Many2many(
         "ir.attachment",
+        relation="social_post_account_image_rel",
         column1="post_id",
         column2="image_id",
-        ondelete="restrict",
-        relation="social_post_account_image_rel",
     )
+
+    fb_video_url = fields.Char(
+        string="Facebook Video URL",
+        help=(
+            "URL to display video in template. "
+            "Generated from video_ids or synced from Facebook."
+        ),
+    )
+
     failed_description = fields.Html()
     post_account_url = fields.Char()
     author = fields.Char(related="account_id.name", store=True)

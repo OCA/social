@@ -1,4 +1,4 @@
-# Copyright 2025 Binhex <https://www.binhex.cloud>
+# Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import Command, api, fields, models
@@ -9,13 +9,16 @@ class UtmCampaign(models.Model):
 
     campaign_group_id = fields.Many2one("utm.group.campaign", string="Campaign group")
     allow_media_ids = fields.Many2many(
-        "social.media", string="Media", compute="_compute_media_id"
+        "social.media", string="Available Media", compute="_compute_media_id"
     )
     media_id = fields.Many2one(
-        "social.media", string="Media", domain="[('id','in',allow_media_ids)]"
+        "social.media", string="Social Media", domain="[('id','in',allow_media_ids)]"
     )
     account_id = fields.Many2one(
-        "social.account", string="Account", domain="[('media_id','in',allow_media_ids)]"
+        "social.account",
+        string="Account",
+        domain="[('media_id', '=', media_id)]",
+        help="Optional: Select a specific account for platform-specific campaigns",
     )
 
     @api.depends("media_id", "account_id")

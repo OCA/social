@@ -1,25 +1,24 @@
-/** @odoo-module **/
-
 import {
     Component,
     onMounted,
     onWillStart,
     onWillUnmount,
     useEffect,
+    useRef,
     useState,
 } from "@odoo/owl";
 import {useBus, useService} from "@web/core/utils/hooks";
-import {Composer} from "@mail/core/common/composer";
+import {browser} from "@web/core/browser/browser";
 import {Dialog} from "@web/core/dialog/dialog";
 import {SocialComment} from "../social_comment/social_comment.esm";
 import {SocialImageDialog} from "../social_image_dialog/social_image_dialog.esm";
 import {_t} from "@web/core/l10n/translation";
+import {useEmojiPicker} from "@web/core/emoji_picker/emoji_picker";
 
 export class SocialCommentDialog extends Component {
     static template = "social_media_base.SocialCommentDialog";
     static components = {
         Dialog,
-        Composer,
         SocialComment,
     };
     static props = {
@@ -35,19 +34,30 @@ export class SocialCommentDialog extends Component {
         super.setup();
         this.dialogService = useService("dialog");
         this.socialService = useService("social_service");
-        this.threadService = useService("mail.thread");
+        // Note: mail.thread service removed - not available in Odoo 18
         this.notificationService = useService("notification");
         this.busService = this.env.services.bus_service;
         this.state = useState({
-            thread: undefined,
             comments: [],
             account_id: this.props.account.raw_value,
+            // New comment composer state
+            newComment: "",
+            // Files to upload with comment
+            attachments: [],
         });
+
+        // Emoji picker for new comment
+        this.emojiButtonRef = useRef("emojiButton");
+        this.emojiPicker = useEmojiPicker(this.emojiButtonRef, {
+            onSelect: (emoji) => {
+                this.state.newComment += emoji;
+            },
+        });
+
+        // File input refs
+        this.fileInputRef = useRef("fileInput");
+        this.cameraInputRef = useRef("cameraInput");
         onWillStart(async () => {
-            this.state.thread = this.threadService.getThread(
-                "social.post.account",
-                this.props.post.id.value
-            );
             const result = await this.socialService.getComments(
                 this.props.post.id.raw_value
             );
@@ -69,13 +79,13 @@ export class SocialCommentDialog extends Component {
 
         // Refresh comments every 30 seconds
         onMounted(() => {
-            this.intervalRefreshComment = setInterval(() => {
+            this.intervalRefreshComment = browser.setInterval(() => {
                 this.updateListComments();
             }, 120000);
         });
 
         onWillUnmount(() => {
-            clearInterval(this.intervalRefreshComment);
+            browser.clearInterval(this.intervalRefreshComment);
         });
 
         const handleNotification = ({detail: notifications}) => {
@@ -166,5 +176,71 @@ export class SocialCommentDialog extends Component {
 
     get commentAllowUpload() {
         return this._commentAllowUpload();
+    }
+
+    /**
+     * Send a new comment (parent comment, not a reply)
+     *
+     * This method is overridden by platform-specific implementations
+     * to post the comment to the social platform.
+     */
+    async _sendNewComment() {
+        // Base implementation - to be overridden by subclasses
+        return {
+            success: false,
+            message: "Not implemented for this platform",
+        };
+    }
+
+    /**
+     * Handle file selection
+     */
+    onFileChange(ev) {
+        const files = Array.from(ev.target.files);
+        this.state.attachments = [...this.state.attachments, ...files];
+        // Reset input so same file can be selected again
+        ev.target.value = "";
+    }
+
+    /**
+     * Remove attachment from list
+     */
+    removeAttachment(index) {
+        this.state.attachments.splice(index, 1);
+    }
+
+    /**
+     * Send new comment button handler
+     *
+     * Posts a new parent comment to the social platform
+     */
+    async sendNewComment() {
+        if (!this.state.newComment || !this.state.newComment.trim()) {
+            return;
+        }
+
+        const result = await this._sendNewComment(
+            this.state.newComment,
+            this.state.attachments
+        );
+
+        if (result.success) {
+            this.notificationService.add(
+                result.message || _t("Comment posted successfully"),
+                {type: "success"}
+            );
+            this.state.newComment = "";
+            this.state.attachments = [];
+            await this.updateListComments();
+            // Trigger reload of the kanban view to update comment count
+            this.env.bus.trigger("SOCIAL:RELOAD_ORGANIZATION", {
+                reload: true,
+            });
+        } else {
+            this.notificationService.add(
+                result.message || _t("Failed to post comment"),
+                {type: "danger", sticky: true}
+            );
+        }
     }
 }

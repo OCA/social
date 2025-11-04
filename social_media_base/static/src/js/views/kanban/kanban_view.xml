@@ -10,4 +10,52 @@
         </xpath>
     </t>
 
+    <!-- Custom Kanban Header with Platform Icon at Beginning -->
+    <t
+        t-name="social_media_base.KanbanHeader"
+        t-inherit="web.KanbanHeader"
+        t-inherit-mode="primary"
+    >
+        <!-- Wrap the group name with flexbox container for proper alignment -->
+        <xpath
+            expr="//div[hasclass('o_column_title')]/span[@class='text-truncate']"
+            position="replace"
+        >
+            <div class="d-flex align-items-center gap-2">
+                <img
+                    t-if="this.groupImageUrl"
+                    t-att-src="this.groupImageUrl"
+                    class="me-2"
+                    width="20"
+                    height="20"
+                    style="object-fit: contain;"
+                    alt="Platform Icon"
+                />
+                <span class="text-truncate fw-bold" style="font-size: 18px;">
+                    <t t-esc="groupName" />
+                </span>
+            </div>
+        </xpath>
+        <!-- Wrap the folded group name with flexbox container -->
+        <xpath
+            expr="//div[hasclass('o_column_title')]/t[@t-esc='groupName']"
+            position="replace"
+        >
+            <div class="d-flex align-items-center gap-2">
+                <img
+                    t-if="this.groupImageUrl"
+                    t-att-src="this.groupImageUrl"
+                    class="me-2"
+                    width="20"
+                    height="20"
+                    style="object-fit: contain;"
+                    alt="Platform Icon"
+                />
+                <span class="fw-bold" style="font-size: 18px;">
+                    <t t-esc="groupName" />
+                </span>
+            </div>
+        </xpath>
+    </t>
+
 </templates>
