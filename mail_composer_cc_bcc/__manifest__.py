@@ -4,7 +4,7 @@
     "name": "Email CC and BCC",
     "summary": "This module enables sending mail to CC and BCC partners in mail composer form.",
     "version": "16.0.2.0.6",
-    "development_status": "Alpha",
+    "development_status": "Beta",
     "category": "Social",
     "website": "https://github.com/OCA/social",
     "author": "Camptocamp, Odoo Community Association (OCA)",
