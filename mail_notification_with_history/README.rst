@@ -42,8 +42,9 @@ Installation
 ============
 
 After installing the module its behaviour needs to be activated. This is
-done by going to Settings, Technical, Database Structure, Models and checking "Include Mail History", on the model that we would
-like to activate it.
+done by going to Settings -> Technical -> Database Structure -> Models
+and checking "Include Mail History", on the model that we would like to
+activate it.
 
 Bug Tracker
 ===========
@@ -66,10 +67,10 @@ Authors
 Contributors
 ------------
 
--  `Camptocamp <https://www.camptocamp.com>`__
+- `Camptocamp <https://www.camptocamp.com>`__
 
-      -  Thierry Ducrest <thierry.ducrest@camptocamp.com>
-      -  Tris Doan <tridm@trobz.com>
+     - Thierry Ducrest <thierry.ducrest@camptocamp.com>
+     - Tris Doan <tridm@trobz.com>
 
 Other credits
 -------------
