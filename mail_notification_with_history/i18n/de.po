@@ -45,4 +45,4 @@ msgstr "Modelle"
 #. module: mail_notification_with_history
 #: model_terms:ir.ui.view,arch_db:mail_notification_with_history.mail_notification_layout
 msgid "commented on"
-msgstr "kommentiert am"
+msgstr "kommentierte am"
