@@ -11,7 +11,7 @@
     "license": "AGPL-3",
     "installable": True,
     "depends": ["mail"],
-    "data": ["data/mail_data.xml"],
+    "data": ["data/mail_data.xml", "views/ir_model_views.xml"],
     "development_status": "Beta",
     "maintainers": ["TDu"],
 }
