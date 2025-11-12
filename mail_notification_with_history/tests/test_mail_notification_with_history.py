@@ -24,7 +24,9 @@ class TestMailNotificationWithHistory(SavepointCaseWithUserDemo):
         }
 
     def test_thread_history_is_included(self):
-        self.env['ir.model']._get(self.mail_message.model).write({'include_mail_history': True})
+        self.env["ir.model"]._get(self.mail_message.model).write(
+            {"include_mail_history": True}
+        )
         body = self.env["ir.qweb"]._render(
             "mail.mail_notification_layout",
             self.render_values,
@@ -70,7 +72,9 @@ class TestMailNotificationWithHistory(SavepointCaseWithUserDemo):
             }
         )
 
-        self.env['ir.model']._get(self.mail_message.model).write({'include_mail_history': True})
+        self.env["ir.model"]._get(self.mail_message.model).write(
+            {"include_mail_history": True}
+        )
         history = self.mail_message._get_notification_message_history()
         # So that is four message to include in history
         self.assertEqual(len(history), 4)

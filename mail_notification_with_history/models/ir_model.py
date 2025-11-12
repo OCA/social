@@ -1,6 +1,11 @@
-from odoo import models, fields
+from odoo import fields, models
+
 
 class IrModel(models.Model):
-    _inherit = 'ir.model'
+    _inherit = "ir.model"
 
-    include_mail_history = fields.Boolean(string='Include Mail History in Notifications', default=False, help='If enabled, email notifications for records of this model will include the previous chatter discussion.')
+    include_mail_history = fields.Boolean(
+        string="Include Mail History in Notifications",
+        default=False,
+        help="If enabled, email notifications for records of this model will include the previous chatter discussion.",
+    )
