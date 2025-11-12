@@ -8,5 +8,5 @@ class IrModel(models.Model):
         string="Include Mail History in Notifications",
         default=False,
         help="If enabled, email notifications for records "
-             "of this model will include the previous chatter discussion.",
+        "of this model will include the previous chatter discussion.",
     )
