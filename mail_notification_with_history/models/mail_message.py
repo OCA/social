@@ -23,7 +23,9 @@ class Message(models.Model):
 
         if hasattr(self.env[self.model], "_mail_notification_include_history"):
             _logger.warning(
-                "The model %s uses the deprecated attribute _mail_notification_include_history. Please use the field include_mail_history on ir.model instead.",
+                "The model %s uses the deprecated attribute "
+                "_mail_notification_include_history. "
+                "Please use the field include_mail_history on ir.model instead.",
                 self.model,
             )
 
