@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_account_kanban_view_inherit">
+        <field name="name">social.account.view.form.inherit.linkedin</field>
+        <field name="model">social.account</field>
+        <field name="inherit_id" ref="social_media_base.social_account_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='account_configuration']" position="inside">
+                <group>
+                    <field
+                        name="linkedin_client_id"
+                        readonly="1"
+                        required="media_type == 'linkedin'"
+                        invisible="media_type != 'linkedin'"
+                    />
+                    <field
+                        name="linkedin_secret"
+                        password="1"
+                        readonly="1"
+                        required="media_type == 'linkedin'"
+                        invisible="media_type != 'linkedin'"
+                    />
+                </group>
+                <group name="valid_token" invisible="media_type != 'linkedin'">
+                    <field
+                        name="access_token"
+                        readonly="1"
+                        groups="base.group_no_one"
+                    />
+                    <field
+                        name="expire_access_token_date"
+                        readonly="1"
+                        groups="base.group_no_one"
+                    />
+                    <field
+                        name="refresh_access_token"
+                        readonly="1"
+                        groups="base.group_no_one"
+                    />
+                    <field
+                        name="refresh_token_expires_in"
+                        readonly="1"
+                        groups="base.group_no_one"
+                    />
+                </group>
+                <div class="col-6 mb-3" invisible="media_type != 'linkedin'">
+                    <button
+                        type="object"
+                        name="validate_access_token"
+                        string="Validate token"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
