@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialAccount">
+     <div class="row d-flex flex-column justify-content-start flex-md-row w-100 px-4 ">
+         <div
+                t-if="state.needUpdate"
+                class="alert alert-info d-flex justify-content-center my-1"
+                role="alert"
+            >
+            New updates are available, press the <span
+                    class="fw-bold mx-1"
+                >Update</span> button to get them.
+         </div>
+
+         <div
+                class="col-12 col-md-3 shadow bg-white pt-2 cursor-pointer w-md-25 m-2 rounded "
+                t-foreach="props.socialAccounts"
+                t-key="social_account.id"
+                t-as="social_account"
+            >
+                <div class="d-flex justify-content-between">
+                    <div class="mx-1">
+                        <img
+                            class="me-2"
+                            height="50"
+                            t-attf-src="/web/image/social.account/{{social_account.id}}/image_1920"
+                            alt="Social Media"
+                        />
+                    </div>
+                    <span class="mx-1" t-esc="social_account.name" />
+                    <a
+                        t-if="social_account.account_url"
+                        t-att-href="social_account.account_url"
+                        target="_blank"
+                    >
+                        Go to account
+                    </a>
+                </div>
+             <div class="d-flex justify-content-between">
+                    <div class="d-flex justify-content-center">
+                        <i class="text-700 fa fa-eye px-1 pt-1" />
+                        <span
+                            class="fw-bold px-1"
+                            t-esc="social_account.impression_count"
+                        />
+                    </div>
+                 <div class="d-flex justify-content-center px-1">
+                        <i class="text-700 fa fa-hand-o-up px-1 pt-1" />
+                     <span
+                            class="fw-bold px-1"
+                            t-esc="social_account.interactions_count"
+                        />
+                    </div>
+                 <div class="d-flex justify-content-center">
+                        <i class="text-700 fa fa-star px-1 pt-1" />
+                     <span class="fw-bold px-1" t-esc="social_account.engagement" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>

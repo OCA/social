@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialComment">
+        <t t-set="record" t-value="props.post" />
+        <t t-set="actionMenuComment" t-value="true" />
+        <t t-set="published_time" t-value="props.socialComment.published_time" />
+        <t t-call="social_media_base.postAccountHeader" />
+        <div class="d-flex flex-column social-text-justify">
+            <span t-esc="props.socialComment.text" />
+            <t
+                t-foreach="props.socialComment.images_url"
+                t-as="image_url"
+                t-key="image_url_index"
+            >
+                <img
+                    t-att-src="image_url"
+                    class="img imag-fluid shadow img-post-comment bg-white"
+                />
+            </t>
+        </div>
+
+        <div class="row pt-2">
+            <div class="d-flex justify-content-between align-items-center">
+
+                <span
+                    t-if="this.props.post.media_type.raw_value in this.mediaNotLikeEnable()"
+                    class="fs-6 cursor-pointer"
+                    t-on-click="onLikeComment"
+                >
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" />
+                        Recommend
+                </span>
+                <span class="fs-6 cursor-pointer d-none" t-on-click="onReplyComment">
+                    <i class="fa fa-comments" aria-hidden="true" />
+                    Comment
+                </span>
+            </div>
+        </div>
+
+
+    </t>
+</templates>

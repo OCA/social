@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="social_media_base.SocialImageDialog">
+
+         <Dialog bodyClass="'bg-dark'">
+                 <div class="row d-flex justify-content-between">
+                     <div
+                    class="col-1 pt-5 align-content-center cursor-pointer"
+                    t-on-click="prevImage"
+                >
+                         <img
+                        src="social_media_base/static/src/img/prev.svg"
+                        alt="Prev"
+                        loading="lazy"
+                        class="bg-white rounded-circle"
+                    />
+                     </div>
+                     <div class="col-10 text-center">
+                        <img
+                        t-att-src="state.imageUrlActive"
+                        class="img img-fluid rounded"
+                        loading="lazy"
+                    />
+                     </div>
+                     <div
+                    class="col-1 pt-5 align-content-center cursor-pointer"
+                    t-on-click="nextImage"
+                >
+                         <img
+                        src="social_media_base/static/src/img/next.svg"
+                        alt="Next"
+                        loading="lazy"
+                        class="bg-white rounded-circle"
+                    />
+                     </div>
+                 </div>
+         </Dialog>
+
+    </t>
+</templates>
