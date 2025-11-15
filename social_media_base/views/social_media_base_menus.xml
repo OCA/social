@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <menuitem
+        name="Social Media"
+        id="social_root_menu"
+        sequence="5"
+        web_icon="social_media_base,static/description/icon.png"
+        groups="base.group_user"
+    >
+        <menuitem
+            name="Dashboard"
+            id="social_network_stream_post_menu"
+            action="social_post_account_act_window_kanban"
+            sequence="1"
+            groups="base.group_user"
+        />
+        <menuitem
+            name="Charts"
+            id="social_chart_account_action_client_menu"
+            action="social_chart_account_action_client"
+            sequence="2"
+        />
+        <menuitem
+            name="Posts"
+            id="social_network_post_menu"
+            sequence="3"
+            action="social_post_act_window_kanban"
+            groups="base.group_user"
+        />
+
+        <menuitem
+            name="Configuration"
+            id="social_configuration_menu"
+            sequence="100"
+            groups="base.group_user"
+        >
+            <menuitem
+                name="Accounts"
+                id="social_account_menu"
+                sequence="2"
+                action="social_account_act_window_tree"
+                groups="base.group_user"
+            />
+            <menuitem
+                name="Campaign group"
+                id="social_media_base_menu_utm_group_campaign_action"
+                action="social_media_base.utm_group_campaign_act_window_tree"
+                groups="base.group_user"
+                sequence="3"
+            />
+            <menuitem
+                id="social_media_base_menu_utm_campaign_action"
+                action="utm.utm_campaign_action"
+                sequence="4"
+            />
+            <menuitem
+                id="social_ads_account_action_client_menu"
+                action="social_ads_account_action_client"
+                sequence="5"
+            />
+
+            <menuitem
+                name="Social medias"
+                id="social_media_menu"
+                sequence="6"
+                action="social_media_act_window_kanban"
+                groups="base.group_user"
+            />
+        </menuitem>
+
+    </menuitem>
+
+</odoo>
