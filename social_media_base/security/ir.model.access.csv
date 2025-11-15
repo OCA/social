@@ -1,0 +1,7 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_social_media_admin,social_media_base_social_media,model_social_media,base.group_user,1,1,1,1
+access_social_account_admin,social_media_base_social_account,model_social_account,base.group_user,1,1,1,1
+access_social_network_post_admin,social_media_base_social_post,model_social_post,base.group_user,1,1,1,1
+access_social_post_account_admin,social_media_base_social_account,model_social_post_account,base.group_user,1,1,1,1
+access_utm_group_campaign_admin,social_media_base_utm_group_campaign,model_utm_group_campaign,base.group_user,1,1,1,1
+access_wizard_social_account_admin,social_media_base_wizard_social_account,model_wizard_social_account,base.group_user,1,1,1,1
