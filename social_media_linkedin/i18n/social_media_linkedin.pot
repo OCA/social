@@ -1,0 +1,247 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_linkedin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-12-07 06:02+0000\n"
+"PO-Revision-Date: 2025-12-07 06:02+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_group_campaign__total_budget
+msgid ""
+"\n"
+"        Maximum budget that the campaign can spend over its entire duration\n"
+"    "
+msgstr ""
+"\n"
+"Presupuesto máximo que la campaña puede gastar durante toda su duración\n"
+" "
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"An account with this information already exists; please also check archived "
+"accounts."
+msgstr ""
+"Ya existe una cuenta con esta información; por favor, revise también las cuentas archivadas."
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_post__campaign_id
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__campaign_ids
+msgid "Campaign"
+msgstr "Campaña"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_client_id
+#: model:ir.model.fields,field_description:social_media_linkedin.field_wizard_social_account__linkedin_client
+msgid "Client ID"
+msgstr "ID de cliente"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_secret
+#: model:ir.model.fields,field_description:social_media_linkedin.field_wizard_social_account__linkedin_secret
+msgid "Client Secret"
+msgstr "Llave secreta de cliente"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__unit_cost
+msgid "Cost per post"
+msgstr "Costo por publicación"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_post_account__creative_urn
+msgid "Creative Urn"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_wizard_social_account__csrf_state_token
+msgid "Csrf State Token"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__currency_id
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__daily_budget
+msgid "Daily Budget"
+msgstr "Presupuesto diario"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "ERROR NEDD UPDATE %(error)s"
+msgstr ""
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Error obtaining information from the organization"
+msgstr "Error al obtener información de la organización"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__refresh_token_expires_in
+msgid "Expire Refresh Token"
+msgstr "Fecha de expiración del token de actualización"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__social_media__media_type__linkedin
+msgid "Linkedin"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_account_id
+msgid "Linkedin Account"
+msgstr "Cuenta de Linkedin"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_account_urn
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_post_account__linkedin_account_urn
+msgid "Linkedin Account Urn"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_post_account__linkedin_post_account_urn
+msgid "Linkedin Post Account Urn"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__linkedin_urn
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__linkedin_urn
+msgid "Linkedin URN"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__daily_budget
+msgid "Maximum daily campaign spending"
+msgstr "Gasto máximo diario de campaña"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_media__media_type
+msgid "Media Type"
+msgstr "Tipo de red social"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "REFRESH TOKEN: %s"
+msgstr "Token de actualización: %s"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_account
+msgid "Social Account"
+msgstr "Cuenta de red social"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_media
+msgid "Social Media"
+msgstr "Red social"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_post
+msgid "Social Post"
+msgstr "Publicación de red social"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_post_account
+msgid "Social Post Account"
+msgstr "Publicación de red social"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid ""
+"The amount you want to add exceeds\n"
+"                        the campaign group limit."
+msgstr ""
+"La cantidad que desea agregar excede el límite del grupo de campañas."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "The token is %(token_valid)s valid."
+msgstr "El token es %(token_valid)s válido."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "The token is valid."
+msgstr "El token es válido."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/wizards/wizard_social_account.py:0
+#, python-format
+msgid "The token was updated successfully"
+msgstr "El token se actualizó correctamente"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__total_budget
+msgid "Total Budget"
+msgstr "Presupuesto total"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "UPLOADING VIDEO: %(error_video)s"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_utm_campaign
+msgid "UTM Campaign"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_utm_group_campaign
+msgid "UTM Group Campaign"
+msgstr ""
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__unit_cost
+msgid "Unit Cost"
+msgstr "Costo unitario"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.social_account_kanban_view_inherit
+msgid "Validate token"
+msgstr "Validar token"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post.py:0
+#, python-format
+msgid ""
+"You have selected images and videos for this post. However, the social media"
+" Linkedin does not allow combining both types of content in the same post. "
+"Therefore, only the images will be published. If you wish to publish a "
+"video, please remove the images from this post or create a separate post."
+msgstr ""
+"Has seleccionado imágenes y vídeos para esta publicación. Sin embargo, las red social "
+"Linkedin no permite combinar ambos tipos de contenido en la misma publicación."
+"Por lo tanto, solo se publicarán las imágenes. Si deseas publicar un vídeo, elimina las imágenes de esta publicación o crea una publicación aparte."
