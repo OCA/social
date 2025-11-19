@@ -10,9 +10,9 @@ Mail - Send Email Copy
    !! source digest: sha256:60a0e4b95442e035817471582351372a89c0c863900a2fb572386a6d3fee9ea9
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Beta
+    :alt: Production/Stable
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
@@ -57,6 +57,10 @@ Known issues / Roadmap
 
 - Add the possibility to select if the mail is sent in "Cc" or in "Bcc"
   mode.
+- ``mail.mail`` sends one email per recipient partner, so the sender
+  receives one copy per recipient.
+- No guard when the sender is the notifications or catchall address: the
+  copy goes back to the Odoo mailbox and may loop through fetchmail.
 
 Bug Tracker
 ===========
@@ -79,7 +83,8 @@ Authors
 Contributors
 ------------
 
-- Sylvain LE GAL (https://www.twitter.com/legalsylvain)
+- Sylvain LE GAL
+- Doan Minh Tri
 
 Maintainers
 -----------

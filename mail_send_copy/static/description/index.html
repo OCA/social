@@ -369,7 +369,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:60a0e4b95442e035817471582351372a89c0c863900a2fb572386a6d3fee9ea9
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/18.0/mail_send_copy"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_send_copy"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Production/Stable" src="https://img.shields.io/badge/maturity-Production%2FStable-green.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/18.0/mail_send_copy"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_send_copy"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module extends the functionality of Mail Module adding sender in
 BBC field to receive a copy of each mail sent by Odoo.</p>
 <div class="admonition warning">
@@ -400,6 +400,10 @@ mailbox manages thread by object</li>
 <ul class="simple">
 <li>Add the possibility to select if the mail is sent in “Cc” or in “Bcc”
 mode.</li>
+<li><tt class="docutils literal">mail.mail</tt> sends one email per recipient partner, so the sender
+receives one copy per recipient.</li>
+<li>No guard when the sender is the notifications or catchall address: the
+copy goes back to the Odoo mailbox and may loop through fetchmail.</li>
 </ul>
 </div>
 <div class="section" id="bug-tracker">
@@ -423,7 +427,8 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <div class="section" id="contributors">
 <h1>Contributors</h1>
 <ul class="simple">
-<li>Sylvain LE GAL (<a class="reference external" href="https://www.twitter.com/legalsylvain">https://www.twitter.com/legalsylvain</a>)</li>
+<li>Sylvain LE GAL</li>
+<li>Doan Minh Tri</li>
 </ul>
 </div>
 <div class="section" id="maintainers">

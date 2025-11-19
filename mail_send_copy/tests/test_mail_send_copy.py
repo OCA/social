@@ -1,22 +1,18 @@
 # Copyright from 2024: Alwinen GmbH (https://www.alwinen.de)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-# TODO: find a way to test sending email with existing BCC
+from email.message import EmailMessage
 
-from unittest.mock import patch
+from odoo import Command
 
-from odoo.tests import tagged
-
-from odoo.addons.mail.tests.test_mail_composer import TestMailComposer
+from odoo.addons.mail.tests.common import MailCommon
 
 
-class TestMailSendCopy(TestMailComposer):
+class TestMailSendCopyCommon(MailCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context={"testing": True})
-
-        # Create test partner
+        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.partner = cls.env["res.partner"].create(
             {
                 "name": "Test Partner",
@@ -24,82 +20,81 @@ class TestMailSendCopy(TestMailComposer):
             }
         )
 
-    def test_send_email_with_copy(self):
-        """Test that sender is added to BCC when sending email"""
-        composer = self.env["mail.compose.message"].create(
-            {
-                "partner_ids": [(6, 0, [self.partner.id])],
-                "subject": "Test Subject",
-                "body": "<p>Test Body</p>",
-                "email_from": "sender@example.com",
-            }
-        )
-
-        # Mock the send_email method
-        with patch(
-            "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
-        ) as mock_send_email:
-            composer._action_send_mail()
-            # Verify that send_email was called
-            self.assertTrue(mock_send_email.called)
-            # Get the arguments passed to send_email
-            call_args = mock_send_email.call_args[0]
-            # The message is the first argument
-            message = call_args[0]
-            # Check BCC in the email message
-            self.assertIn("sender@example.com", message["Bcc"])
-
-    def test_send_email_without_copy(self):
-        """Test that sender is not added to BCC when do_not_send_copy is True"""
+    def _send_composer_mail(self, email_from="sender@example.com", **context):
         composer = (
             self.env["mail.compose.message"]
-            .with_context(do_not_send_copy=True)
+            .with_context(**context)
             .create(
                 {
-                    "partner_ids": [(6, 0, [self.partner.id])],
-                    "subject": "Test Subject No Copy",
+                    "model": "res.partner",
+                    "res_ids": [self.partner.id],
+                    "partner_ids": [Command.set(self.partner.ids)],
+                    "subject": "Test Subject",
                     "body": "<p>Test Body</p>",
-                    "email_from": "sender@example.com",
+                    "email_from": email_from,
+                    "composition_mode": "comment",
                 }
             )
         )
-
-        with patch(
-            "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
-        ) as mock_send_email:
+        with self.mock_mail_gateway():
             composer._action_send_mail()
-            self.assertTrue(mock_send_email.called)
-            message = mock_send_email.call_args[0][0]
-            self.assertNotIn("Bcc", message)
+        return self.emails
+
+    def _send_message(self, message, **context):
+        with self.mock_smtplib_connection():
+            self.env["ir.mail_server"].with_context(**context).send_email(message)
+        return self.emails
 
 
-# Code contributed by @trisdoan
-@tagged("post_install", "-at_install")
-class TestMailSendWithBcc(TestMailSendCopy):
-    def test_send_email_with_existing_bcc(self):
-        if not self.env["ir.module.module"].search(
-            [("name", "=", "mail_composer_cc_bcc"), ("state", "=", "installed")]
-        ):
-            self.skipTest("mail_composer_cc_bcc module is required for this test")
-
-        partner_bcc = self.env.ref("base.res_partner_main2")
-        composer = self.env["mail.compose.message"].create(
-            {
-                "partner_ids": [(6, 0, [self.partner.id])],
-                "subject": "Test Subject",
-                "body": "<p>Test Body</p>",
-                "email_from": "sender@example.com",
-            }
+class TestMailSendCopy(TestMailSendCopyCommon):
+    def test_send_email_with_copy(self):
+        """The sender receives a copy of the email."""
+        emails = self._send_composer_mail()
+        self.assertEqual(len(emails), 1)
+        self.assertCountEqual(
+            emails[0]["smtp_to_list"], ["test@example.com", "sender@example.com"]
         )
-        composer.partner_bcc_ids = partner_bcc
 
-        with patch(
-            "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
-        ) as mock_send_email:
-            composer._action_send_mail()
-            # Verify that send_email was called
-            self.assertTrue(mock_send_email.called)
-            call_args = mock_send_email.call_args[0]
-            message = call_args[0]
-            # Check existing BCC in the email message
-            self.assertIn("dwayne.newman28@example.com", message["Bcc"])
+    def test_send_email_without_copy(self):
+        """The sender gets no copy when ``do_not_send_copy`` is set."""
+        emails = self._send_composer_mail(do_not_send_copy=True)
+        self.assertEqual(len(emails), 1)
+        self.assertEqual(emails[0]["smtp_to_list"], ["test@example.com"])
+
+    def test_send_email_with_existing_bcc(self):
+        """The sender is added to the existing Bcc recipients."""
+        message = EmailMessage()
+        message["From"] = "sender@example.com"
+        message["To"] = "test@example.com"
+        message["Bcc"] = "existing@example.com"
+        emails = self._send_message(message)
+        self.assertCountEqual(
+            emails[0]["smtp_to_list"],
+            ["test@example.com", "existing@example.com", "sender@example.com"],
+        )
+
+    def test_send_email_with_formatted_sender(self):
+        emails = self._send_composer_mail(email_from='"Bike@Home" <Sender@Example.com>')
+        self.assertCountEqual(
+            emails[0]["smtp_to_list"], ["test@example.com", "sender@example.com"]
+        )
+
+    def test_send_email_with_existing_bcc_and_validated_to(self):
+        message = EmailMessage()
+        message["From"] = "sender@example.com"
+        message["To"] = "test@example.com"
+        message["Bcc"] = "existing@example.com"
+        emails = self._send_message(
+            message, send_validated_to=["test@example.com", "existing@example.com"]
+        )
+        self.assertCountEqual(
+            emails[0]["smtp_to_list"],
+            ["test@example.com", "existing@example.com", "sender@example.com"],
+        )
+
+    def test_send_email_without_sender(self):
+        """No copy is added when the email has no sender."""
+        message = EmailMessage()
+        message["To"] = "test@example.com"
+        emails = self._send_message(message)
+        self.assertEqual(emails[0]["smtp_to_list"], ["test@example.com"])
