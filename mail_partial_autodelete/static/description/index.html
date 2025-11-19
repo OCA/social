@@ -389,8 +389,21 @@ to store sensitive content that was in the mail body.</p>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-1">Usage</a></h1>
-<p>Just install this module and if needed put context key force_autodelete
-for emails you don’t care about.</p>
+<p>By default, this module changes the behavior of the native
+<tt class="docutils literal">auto_delete</tt> flag:</p>
+<ul class="simple">
+<li>When <tt class="docutils literal">auto_delete</tt> is enabled, the email record is kept after
+sending.</li>
+<li>For non-notification emails, the content (<tt class="docutils literal">body</tt> and <tt class="docutils literal">body_html</tt>)
+is cleared.</li>
+<li>When <tt class="docutils literal">auto_delete</tt> is disabled, the email is kept without modifying
+its content.</li>
+</ul>
+<p>To keep the email content even when <tt class="docutils literal">auto_delete</tt> is enabled, set the
+following system parameter:</p>
+<ul class="simple">
+<li><tt class="docutils literal">mail_partial_autodelete_debugmode</tt> = <tt class="docutils literal">1</tt></li>
+</ul>
 </div>
 <div class="section" id="bug-tracker">
 <h1><a class="toc-backref" href="#toc-entry-2">Bug Tracker</a></h1>
