@@ -5,6 +5,7 @@
 
 from unittest.mock import patch
 
+from odoo import Command
 from odoo.tests import tagged
 
 from odoo.addons.mail.tests.test_mail_composer import TestMailComposer
@@ -28,13 +29,15 @@ class TestMailSendCopy(TestMailComposer):
         """Test that sender is added to BCC when sending email"""
         composer = self.env["mail.compose.message"].create(
             {
-                "partner_ids": [(6, 0, [self.partner.id])],
-                "subject": "Test Subject",
+                "model": "res.partner",
+                "res_ids": [self.partner.id],
+                "partner_ids": [Command.set(self.partner.ids)],
+                "subject": "Test Subject No Copy",
                 "body": "<p>Test Body</p>",
                 "email_from": "sender@example.com",
+                "composition_mode": "comment",
             }
         )
-
         # Mock the send_email method
         with patch(
             "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
@@ -56,10 +59,13 @@ class TestMailSendCopy(TestMailComposer):
             .with_context(do_not_send_copy=True)
             .create(
                 {
-                    "partner_ids": [(6, 0, [self.partner.id])],
+                    "model": "res.partner",
+                    "res_ids": [self.partner.id],
+                    "partner_ids": [Command.set(self.partner.ids)],
                     "subject": "Test Subject No Copy",
                     "body": "<p>Test Body</p>",
                     "email_from": "sender@example.com",
+                    "composition_mode": "comment",
                 }
             )
         )
@@ -85,10 +91,13 @@ class TestMailSendWithBcc(TestMailSendCopy):
         partner_bcc = self.env.ref("base.res_partner_main2")
         composer = self.env["mail.compose.message"].create(
             {
-                "partner_ids": [(6, 0, [self.partner.id])],
-                "subject": "Test Subject",
+                "model": "res.partner",
+                "res_ids": [self.partner.id],
+                "partner_ids": [Command.set(self.partner.ids)],
+                "subject": "Test Subject No Copy",
                 "body": "<p>Test Body</p>",
                 "email_from": "sender@example.com",
+                "composition_mode": "comment",
             }
         )
         composer.partner_bcc_ids = partner_bcc
