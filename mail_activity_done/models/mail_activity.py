@@ -92,7 +92,7 @@ class MailActivityMixin(models.AbstractModel):
 
         def execute(query, params=None, log_exceptions=True):
             # Convert to string according to query type
-            if hasattr(query, 'as_string'):
+            if hasattr(query, "as_string"):
                 # psycopg2 SQL object
                 try:
                     query_str = query.as_string(self._cr._cnx)
@@ -102,10 +102,10 @@ class MailActivityMixin(models.AbstractModel):
                 query_str = query
             else:
                 # Composite SQL object - leave as is if no pattern
-                query_str = str(query) if hasattr(query, '__str__') else query
-            
+                query_str = str(query) if hasattr(query, "__str__") else query
+
             original_where = "WHERE res_model = '{}'".format(self._name)
-            
+
             # Only modify if the pattern exists in the query
             if isinstance(query_str, str) and original_where in query_str:
                 replace_where = (
@@ -138,7 +138,7 @@ class MailActivityMixin(models.AbstractModel):
 
         def execute(query, params=None, log_exceptions=True):
             # Convert to string according to query type
-            if hasattr(query, 'as_string'):
+            if hasattr(query, "as_string"):
                 # psycopg2 SQL object
                 try:
                     query_str = query.as_string(self._cr._cnx)
@@ -148,10 +148,10 @@ class MailActivityMixin(models.AbstractModel):
                 query_str = query
             else:
                 # Composite SQL object - leave as is if no pattern
-                query_str = str(query) if hasattr(query, '__str__') else query
-            
+                query_str = str(query) if hasattr(query, "__str__") else query
+
             pattern = "WHERE mail_activity.res_model = %(res_model_table)s"
-            
+
             # Only modify if the pattern exists in the query
             if isinstance(query_str, str) and pattern in query_str:
                 modified_query = query_str.replace(
