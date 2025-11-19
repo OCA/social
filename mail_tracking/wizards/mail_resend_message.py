@@ -29,7 +29,10 @@ class MailResendMessage(models.TransientModel):
                 )
                 if existing_resend_partner:
                     rec["partner_ids"].extend(
-                        [Command.link(existing_resend_partner.id)]
+                        [
+                            Command.link(resend_partner.id)
+                            for resend_partner in existing_resend_partner
+                        ]
                     )
                     continue
                 # Create only resends that mail.notification didn't prepare already
