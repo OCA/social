@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {
     Component,
     onMounted,
@@ -14,6 +12,7 @@ import {Dialog} from "@web/core/dialog/dialog";
 import {SocialComment} from "../social_comment/social_comment.esm";
 import {SocialImageDialog} from "../social_image_dialog/social_image_dialog.esm";
 import {_t} from "@web/core/l10n/translation";
+const {setInterval, clearInterval, console} = globalThis;
 
 export class SocialCommentDialog extends Component {
     static template = "social_media_base.SocialCommentDialog";

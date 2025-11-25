@@ -87,7 +87,7 @@
                                     <field name="media_type" />
                                     <field name="account_id" />
                                     <templates>
-                                        <t t-name="kanban-box">
+                                        <t t-name="card">
                                             <div
                                                 t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
                                             >
@@ -121,20 +121,16 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
 
     <record model="ir.ui.view" id="social_network_post_tree_view">
-        <field name="name">social.post.tree</field>
+        <field name="name">social.post.list</field>
         <field name="model">social.post</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-muted="state == 'draft'"
                 decoration-info="state in ('planned','publishing')"
                 decoration-success="state == 'published'"
@@ -149,7 +145,7 @@
                 <field name="count_post_interactions" />
                 <field name="count_post_engagement" />
                 <field name="state" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -170,7 +166,7 @@
                 <field name="count_post_interactions" />
                 <field name="count_post_engagement" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click rounded">
                             <div class="d-flex flex-column">
                                 <div
@@ -263,7 +259,7 @@
     <record model="ir.actions.act_window" id="social_post_act_window_kanban">
         <field name="name">Posts</field>
         <field name="res_model">social.post</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="social_post_view_search" />
         <field name="domain">[]</field>
         <field name="context">{}</field>

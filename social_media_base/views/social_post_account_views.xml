@@ -28,7 +28,7 @@
                 <field name="media_type" />
                 <field name="account_id" />
                 <templates>
-                    <t t-name="kanban-menu">
+                    <t t-name="menu">
                         <div class="p-1">
                             <a
                                 role="menuitem"
@@ -38,7 +38,7 @@
                             >Delete post</a>
                         </div>
                     </t>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div
                             t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
                         >

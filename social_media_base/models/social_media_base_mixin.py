@@ -3,7 +3,7 @@
 
 from markupsafe import Markup
 
-from odoo import _, models
+from odoo import models
 
 
 class SocialMediaBaseMixin(models.AbstractModel):
@@ -42,7 +42,7 @@ class SocialMediaBaseMixin(models.AbstractModel):
                 media.upper() + " " + social_name if social_name else media.upper()
             )
             message = Markup(
-                _(
+                self.env._(
                     "Social Media %(social_media)s <b> "
                     "[%(account)s] </b> <br><br> %(message)s"
                 )

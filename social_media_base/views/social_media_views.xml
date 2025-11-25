@@ -11,22 +11,23 @@
                 <field name="description" />
                 <field name="image" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="d-flex rounded">
                             <t
                                 t-set="image_account"
-                                t-value="kanban_image('social.media', 'image', record.id.raw_value)"
+                                t-value="record.getImageUrl \
+                             ? record.getImageUrl('image') : '/web/static/img/placeholder.png'"
                             />
                             <img
-                                t-attf-src="#{image_account}"
+                                t-att-src="image_account"
                                 class="img img-fluid"
                                 height="50"
                                 width="100"
-                                t-att-alt="record.id.value"
+                                t-att-alt="record.name.value"
                             />
                             <div class="d-flex flex-column p-2">
-                                <h5 class="title" t-esc="record.name.raw_value" />
-                                <p class="text" t-esc="record.description.raw_value" />
+                                <h5 class="title" t-esc="record.name.value" />
+                                <p class="text" t-esc="record.description.value" />
                                 <button
                                     type="object"
                                     class="btn btn-primary"

@@ -1,10 +1,10 @@
-/** @odoo-module **/
 import {onWillStart, useEffect, useRef} from "@odoo/owl";
 import {KanbanRecord} from "@web/views/kanban/kanban_record";
 import {SocialCommentDialog} from "@social_media_base/components/social_comment_dialog/social_comment_dialog.esm";
 import {SocialPostAccountMixin} from "@social_media_base/js/app/social_media_base_mixins.esm";
 import {_t} from "@web/core/l10n/translation";
 import {useService} from "@web/core/utils/hooks";
+const {window} = globalThis;
 
 export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
     /**
