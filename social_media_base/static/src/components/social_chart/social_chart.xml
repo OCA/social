@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
     <t t-name="social_media_base.SocialChart">
-
         <div t-if="socialAccountStatistics.length > 0" class="social-chart px-2 mt-2">
-                    <SocialChartAccount
+            <SocialChartAccount
                 t-foreach="socialAccountStatistics"
                 t-as="chartAccount"
                 t-key="chartAccount.id"
@@ -11,18 +10,18 @@
             />
         </div>
         <div t-else="">
-             <div class="o_empty_state text-center py-5 px-3 bg-light rounded">
-    <img
+            <div class="o_empty_state text-center py-5 px-3 bg-light rounded">
+                <img
                     src="/web/static/img/smiling_face.svg"
                     class="img-fluid mb-3"
                     style="max-width: 300px;"
                     alt="No data"
                 />
-                 <h4 class="text-muted">No data to display</h4>
-                 <p
+                <h4 class="text-muted">No data to display</h4>
+                <p
                     class="text-muted"
                 >Once you have recorded information, you can view it here as a graph.</p>
-  </div>
+            </div>
         </div>
     </t>
 </templates>

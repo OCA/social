@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <menuitem
         name="Social Media"
         id="social_root_menu"
@@ -68,7 +67,5 @@
                 groups="base.group_user"
             />
         </menuitem>
-
     </menuitem>
-
 </odoo>

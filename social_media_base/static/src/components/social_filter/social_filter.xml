@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 	<t t-name="social_media_base.SocialFilter">
-		<div class="d-flex justify-content-between align-items-center social-network-filter">
-
+        <div
+            class="d-flex justify-content-between align-items-center social-network-filter"
+        >
             <div
                 t-if="props.searchEnable"
                 class="w-50 rounded d-flex justify-content-start align-items-center border-1 search-filter mx-4"
@@ -23,17 +24,17 @@
                 togglerClass="'btn btn-secondary'"
                 showCaret="true"
             >
-			<t t-set-slot="toggler">
-				<t t-esc="state.currentFilterType.name" />
-			</t>
+                <t t-set-slot="toggler">
+                    <t t-esc="state.currentFilterType.name" />
+                </t>
                 <t t-foreach="filter_types" t-as="flt" t-key="flt.id">
-				<DropdownItem
+                    <DropdownItem
                         onSelected="() => this.onSelectTypeRange(flt)"
                         t-esc="flt.name"
                         class="{selected : flt.id == state.currentFilterType.id }"
                     />
-			</t>
-		    </Dropdown>
+                </t>
+            </Dropdown>
 
             <div class="d-flex flex-column mx-1">
                 <input
@@ -61,7 +62,6 @@
                     onSelect.bind="onSelectEndDate"
                 />
             </div>
-
         </div>
-	</t>
+    </t>
 </templates>

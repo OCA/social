@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="social_post_account_kanban_view">
         <field name="name">social.media.stream.post.view.kanban</field>
         <field name="model">social.post.account</field>
@@ -125,5 +124,4 @@
             </div>
         </div>
     </template>
-
 </odoo>

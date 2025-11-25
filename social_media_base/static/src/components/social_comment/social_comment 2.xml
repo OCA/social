@@ -22,7 +22,6 @@
 
         <div class="row pt-2">
             <div class="d-flex justify-content-between align-items-center">
-
                 <span
                     t-if="this.props.post.media_type.raw_value in this.mediaNotLikeEnable()"
                     class="fs-6 cursor-pointer"
@@ -37,7 +36,5 @@
                 </span>
             </div>
         </div>
-
-
     </t>
 </templates>
