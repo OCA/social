@@ -211,9 +211,7 @@ class SocialPost(models.Model):
             }
             try:
                 render_template += """\n\n""" + IrQweb._render(
-                    "social_media_{}.social_media_post_preview".format(
-                        account.media_id.media_type
-                    ),
+                    f"social_media_{account.media_id.media_type}.social_media_post_preview",
                     values | self._render_values_preview(),
                 )
             except ValueError:
@@ -328,3 +326,4 @@ class SocialPost(models.Model):
                 "social_post_cron": True,
             }
         )._action_create_post_account()
+        

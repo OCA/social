@@ -2,8 +2,7 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
-    <record model="ir.ui.view" id="social_post_form_view">
+    <record model="ir.ui.view" id="social_network_post_form_view">
         <field name="name">social.post.form</field>
         <field name="model">social.post</field>
         <field name="arch" type="xml">
@@ -125,7 +124,6 @@
                                                 />
 
                                                 <div class="oe_kanban_content">
-
                                                     <t
                                                         t-set="images"
                                                         t-value="JSON.parse(record.image_urls.raw_value)"
@@ -246,14 +244,14 @@
                                 </div>
                                 <hr />
                                 <span>Clicks: <t
-                                        t-esc="record.count_post_clicks.raw_value"
-                                    /></span>
+                                    t-esc="record.count_post_clicks.raw_value"
+                                /></span>
                                 <span>Interactions: <t
-                                        t-esc="record.count_post_interactions.raw_value"
-                                    /></span>
+                                    t-esc="record.count_post_interactions.raw_value"
+                                /></span>
                                 <span>Engagement: <t
-                                        t-esc="record.count_post_engagement.raw_value"
-                                    /></span>
+                                    t-esc="record.count_post_engagement.raw_value"
+                                /></span>
                             </div>
                         </div>
                     </t>
@@ -289,5 +287,4 @@
         <field name="domain">[]</field>
         <field name="context">{}</field>
     </record>
-
 </odoo>

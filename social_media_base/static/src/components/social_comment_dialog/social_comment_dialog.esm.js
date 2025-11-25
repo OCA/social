@@ -38,7 +38,6 @@ export class SocialCommentDialog extends Component {
         this.threadService = useService("mail.thread");
         this.notificationService = useService("notification");
         this.busService = this.env.services.bus_service;
-        this.record = this.props.post;
         this.state = useState({
             thread: undefined,
             comments: [],
@@ -52,6 +51,8 @@ export class SocialCommentDialog extends Component {
             const result = await this.socialService.getComments(
                 this.props.post.id.raw_value
             );
+            console.warn(result.data);
+            console.warn(result.data.length);
             if (
                 result &&
                 "success" in result &&
@@ -173,15 +174,5 @@ export class SocialCommentDialog extends Component {
 
     get commentAllowUpload() {
         return this._commentAllowUpload();
-    }
-
-    get renderingContext() {
-        return {
-            luxon,
-            record: this.record,
-            images: this.props.images,
-            isDialog: true,
-            onShowAllImages: this.onShowAllImages.bind(this),
-        };
     }
 }

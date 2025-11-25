@@ -33,12 +33,8 @@
                     t-as="comment"
                     t-key="comment.id"
                 >
-                                    <SocialComment
-                        socialComment="comment"
-                        post="record"
-                    />
-                                </div>
-
+                    <SocialComment socialComment="comment" post="record" />
+                </div>
             </div>
         </Dialog>
     </t>

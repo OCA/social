@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo noupdate="1">
-
     <record id="social_post_account_rule_user" model="ir.rule">
         <field
             name="name"
@@ -10,5 +9,4 @@
         <field ref="model_social_post_account" name="model_id" />
         <field name="domain_force">[('account_id.create_uid', '=', user.id)]</field>
     </record>
-
 </odoo>

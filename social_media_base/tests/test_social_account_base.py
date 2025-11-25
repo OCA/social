@@ -142,3 +142,4 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         with patch.object(type(Bus), "_sendone", autospec=True) as patch_sendone:
             self.social_account_id._need_update()
             patch_sendone.assert_called_once()
+            
