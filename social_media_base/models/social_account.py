@@ -68,8 +68,8 @@ class SocialAccount(models.Model):
     )
     engagement = fields.Float(default=0, digits=(16, 2))
 
-    account_url = fields.Char(compute="_compute_account_url")
-    enviroment = fields.Selection(
+    account_url = fields.Char(compute="_compute_account_url", store=True)
+    environment = fields.Selection(
         [("test", "Test"), ("production", "Production")], default="test"
     )
     need_update = fields.Boolean(default=False)
@@ -137,6 +137,7 @@ class SocialAccount(models.Model):
                 }
             )
 
+    @api.depends("media_type", "name")
     def _compute_display_name(self):
         for account in self:
             account.display_name = (
@@ -155,10 +156,12 @@ class SocialAccount(models.Model):
                 if len(val_url) < 2:
                     account.account_url = ""
                     continue
-                if account.media_type and val_url[0].find(account.media_type) > -1:
-                    account.account_url = val_url[1]
+                if account.media_id.media_type:
+                    account.account_url = (
+                        val_url[1] if account.media_id.media_type in val_url[0] else ""
+                    )
+                else:
                     break
-                account.account_url = ""
 
     @api.depends("click_count", "like_count", "share_count", "comment_count")
     def _compute_interactions_count(self):
@@ -169,6 +172,24 @@ class SocialAccount(models.Model):
                 + account.share_count
                 + account.comment_count
             )
+            
+    def _filter_statistics(self, entity_statistics):
+        post_statistics = {
+            "click_count": 0,
+            "like_count": 0,
+            "comment_count": 0,
+            "share_count": 0,
+            "engagement": 0,
+            "impression_count": 0,
+        }
+        for __, statistics in entity_statistics.items():
+            post_statistics["click_count"] += statistics[0]
+            post_statistics["like_count"] += statistics[1]
+            post_statistics["comment_count"] += statistics[2]
+            post_statistics["share_count"] += statistics[3]
+            post_statistics["engagement"] += statistics[4]
+            post_statistics["impression_count"] += statistics[5]
+        return post_statistics
 
     def _filter_statistics(self, entity_statistics):
         post_statistics = {
@@ -250,95 +271,10 @@ class SocialAccount(models.Model):
         :rtype: bool
         """
         return False
-
+    
     def _need_update(self, need_update=True):
         self.env["bus.bus"]._sendone(
             self.env.user.partner_id,
             "social_need_update",
             {"need_update": need_update},
         )
-
-    def _get_default_filter_date(self, start_date, end_date, time_date=False, months=1):
-        start = start_date or (datetime.now() - relativedelta(months=months))
-        end = end_date or (datetime.now())
-        if time_date:
-            return _generate_timestamps(date_start=start, date_end=end)
-        return start, end
-
-    def _map_chart_statistics(self, account_statistics, **values):
-        data_chart = []
-        statistics_values = (
-            account_statistics.values()
-            if isinstance(account_statistics, dict)
-            else account_statistics
-        )
-        if statistics_values and self.media_type:
-            chart_weeks = get_weeks(
-                values.get(
-                    "start_date",
-                ),
-                values.get(
-                    "end_date",
-                ),
-                freq=values.get("freq", "W-MON"),
-            )
-
-            def map_chart_data(chart_statistics, label, key_data=0):
-                dataset = {
-                    "pointStyle": "circle",
-                    "pointRadius": 10,
-                    "pointHoverRadius": 15,
-                    "label": _(label),
-                    "data": [
-                        statistics[key_data]
-                        for statistics in chart_statistics
-                        if len(statistics) > key_data
-                    ],
-                }
-                return dataset
-
-            impression_count = sum(
-                [
-                    statistics[5]
-                    for statistics in statistics_values
-                    if len(statistics) > 5
-                ]
-            )
-            comment_count = sum(
-                [
-                    statistics[2]
-                    for statistics in statistics_values
-                    if len(statistics) > 2
-                ]
-            )
-            reaction_count = sum(
-                [
-                    statistics[1] + statistics[3]
-                    for statistics in statistics_values
-                    if len(statistics) > 1 and len(statistics) > 3
-                ]
-            )
-            data_chart.append(
-                {
-                    "id": self.id,
-                    "name": _(f"[{self.media_type.upper()}] {self.name}"),
-                    "impressionCount": impression_count,
-                    "commentCount": comment_count,
-                    "reactionCount": reaction_count,
-                    "chartLabel": _("Statistics"),
-                    "labels": [week for week in chart_weeks],
-                    "datasets": [
-                        map_chart_data(statistics_values, "Clicks", 0),
-                        map_chart_data(statistics_values, "Shares", 3),
-                        map_chart_data(statistics_values, "Likes", 1),
-                        map_chart_data(statistics_values, "Comments", 2),
-                        map_chart_data(
-                            statistics_values,
-                            "Impressions",
-                            5,
-                        ),
-                        map_chart_data(statistics_values, "Engagement", 4),
-                    ],
-                }
-            )
-        return data_chart

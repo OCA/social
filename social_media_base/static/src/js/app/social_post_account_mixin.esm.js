@@ -1,4 +1,3 @@
-/** @odoo-module */
 import {SocialImageDialog} from "../../components/social_image_dialog/social_image_dialog.esm";
 import {_t} from "@web/core/l10n/translation";
 

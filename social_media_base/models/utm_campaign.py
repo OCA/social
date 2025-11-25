@@ -12,7 +12,7 @@ class UtmCampaign(models.Model):
         "social.media", string="Media", compute="_compute_media_id"
     )
     media_id = fields.Many2one(
-        "social.media", string="Media", domain="[('id','in',allow_media_ids)]"
+        "social.media", string="Allow Media", domain="[('id','in',allow_media_ids)]"
     )
     account_id = fields.Many2one(
         "social.account", string="Account", domain="[('media_id','in',allow_media_ids)]"

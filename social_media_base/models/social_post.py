@@ -2,9 +2,9 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import logging
-from datetime import datetime, timedelta
+from datetime import timedelta
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -120,20 +120,22 @@ class SocialPost(models.Model):
     def _compute_message_info(self):
         pass
 
-    @api.depends("account_ids.media_id")
+    @api.depends("account_ids.media_id.name")
     def _compute_display_name(self):
         for acc in self:
-            acc.display_name = _("Post on %(posts)s") % {
-                "posts": ", ".join(acc.account_ids.mapped("media_id.name"))
-            }
+            media_names = sorted(set(acc.account_ids.mapped("media_id.name")))
+            acc.display_name = (
+                "Post on {}".format(", ".join(media_names))
+                if media_names
+                else "No Post Anywhere"
+            )
 
     @api.depends("send_post")
     def _compute_send_post_date(self):
         for post in self:
             if post.send_post == "schedule":
-                post.send_post_date = datetime.now() + timedelta(hours=1)
-            else:
-                post.send_post_date = None
+                post.send_post_date = fields.Datetime.now() + timedelta(hours=1)
+                post.state = "planned"
 
     @api.depends(
         "post_account_ids.like_count",
@@ -149,7 +151,9 @@ class SocialPost(models.Model):
             post.count_post_shares = sum(post.mapped("post_account_ids.share_count"))
             post.count_post_likes = sum(post.mapped("post_account_ids.like_count"))
             post.count_post_engagement = sum(post.mapped("post_account_ids.engagement"))
-            post.count_post_impression = sum(post.mapped("post_account_ids.engagement"))
+            post.count_post_impression = sum(
+                post.mapped("post_account_ids.impression_count")
+            )
             post.count_post_comments = sum(
                 post.mapped("post_account_ids.comment_count")
             )
@@ -159,6 +163,16 @@ class SocialPost(models.Model):
                 + post.count_post_comments
                 + post.count_post_shares
             )
+            
+    def filter_by_media_types(self, media_types, add_domain=None):
+        domain = [
+            ("media_type", "in", media_types),
+            ("post_id", "=", self.id),
+            ("state", "in", ("ready", "failed")),
+        ]
+        if add_domain:
+            domain += add_domain
+        return self.env["social.post.account"].search(domain)
 
     def filter_by_media_types(self, media_types, add_domain=None):
         domain = [
@@ -178,11 +192,11 @@ class SocialPost(models.Model):
         for post in self:
             if post.state in ("publishing", "published"):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "%(post)s: cannot be cancelled because it "
                         "is published or in the process of being published."
-                    )
-                    % {"post": post.display_name}
+                    ),
+                    post=post.display_name,
                 )
             post.state = "cancelled"
 
@@ -219,7 +233,9 @@ class SocialPost(models.Model):
                     "social_media_base.social_media_post_preview",
                     values | self._render_values_preview(),
                 )
-        return render_template if render_template else _("No preview available")
+        return (
+            render_template if render_template else self.env._("No preview available")
+        )
 
     @api.depends("account_ids", "message", "image_ids", "video_ids")
     def _compute_post_preview(self):
@@ -254,7 +270,7 @@ class SocialPost(models.Model):
         res = super().default_get(fields)
         account_ids = self._default_account_ids()
         if account_ids:
-            res["account_ids"] = [(6, 0, account_ids)]
+            res["account_ids"] = [Command.set(account_ids)]
         return res
 
     def action_create_post_account(self):
@@ -296,16 +312,11 @@ class SocialPost(models.Model):
                 }
             )
             SocialPostAccount._action_post(post_id=post)
-            if all(post_acc.state == "posted" for post_acc in post.post_account_ids):
-                post.write({"state": "published"})
-            elif all(post_acc.state == "failed" for post_acc in post.post_account_ids):
-                post.write({"state": "draft"})
-
-    def _message_error_post(self, message, media_id):
-        self.message_post(
-            body=_("Error Post Tweet [%(media)s]: %(error)s")
-            % {"error": message, "media": media_id},
-        )
+            post.write(
+                {
+                    "state": "published",
+                }
+            )
 
     def _run_send_post(self):
         """
@@ -318,7 +329,7 @@ class SocialPost(models.Model):
             [
                 ("state", "in", ("planned", "publishing")),
                 ("send_post", "=", "schedule"),
-                ("send_post_date", "<=", datetime.now()),
+                ("send_post_date", "<=", fields.Datetime.now()),
             ]
         )
         posts.with_context(

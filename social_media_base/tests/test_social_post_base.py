@@ -5,7 +5,6 @@ from datetime import datetime, timedelta
 from unittest.mock import patch
 
 from odoo.fields import Command
-from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
 from odoo.addons.social_media_base.tests.test_social_common import (
     TestSocialMediaBaseCommon,
@@ -59,7 +58,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 self.SocialPostAccount,
                 post_id=self.social_post_id,
             )
-            self.assertEqual(self.social_post_id.state, "publishing")
+            self.assertEqual(self.social_post_id.state, "published")
             self.assertEqual(len(self.social_post_id.post_account_ids), 2)
 
     def test_compute_display_name(self):

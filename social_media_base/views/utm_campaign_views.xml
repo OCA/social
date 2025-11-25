@@ -21,7 +21,7 @@
     </record>
 
     <record model="ir.ui.view" id="utm_campaign_view_tree_inherit">
-        <field name="name">utm.campaign.view.tree.inherit.social.media.base</field>
+        <field name="name">utm.campaign.view.list.inherit.social.media.base</field>
         <field name="model">utm.campaign</field>
         <field name="inherit_id" ref="utm.utm_campaign_view_tree" />
         <field name="arch" type="xml">

@@ -1,9 +1,9 @@
-/** @odoo-module **/
-
 import {Component, onMounted, useRef, useState} from "@odoo/owl";
+import {browser} from "@web/core/browser/browser";
 import {ControlPanel} from "@web/search/control_panel/control_panel";
 import {SocialFilter} from "../social_filter/social_filter.esm";
 import {useService} from "@web/core/utils/hooks";
+const {window} = globalThis;
 
 export class SocialChartAccount extends Component {
     static template = "social_media_base.SocialChartAccount";
@@ -68,7 +68,7 @@ export class SocialChartAccount extends Component {
     loadChart(labels, datasets) {
         if (this.chart) this.chart.destroy();
         this.updateTotals(this.chartAccount);
-        this.chart = new window.Chart(this.chartCtx.el, {
+        this.chart = new browser.window.Chart(this.chartCtx.el, {
             type: "line",
             data: {
                 labels: labels ? labels : this.chartAccount.labels,

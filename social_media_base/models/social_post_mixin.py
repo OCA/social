@@ -12,7 +12,7 @@ class SocialPostMixin(models.AbstractModel):
 
     image_urls = fields.Char(compute="_compute_image_urls", store=True)
 
-    @api.depends(lambda self: ["image_ids"])
+    @api.depends("image_ids")
     def _compute_image_urls(self):
         for post in self:
             post.image_urls = json.dumps(

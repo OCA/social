@@ -3,6 +3,7 @@
 
 import json
 from unittest.mock import patch
+from odoo.fields import Selection
 
 from odoo.addons.social_media_base.tests.test_social_common import (
     TestSocialMediaBaseCommon,
@@ -63,18 +64,16 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 "https://www.failed.com/company/id1234account/admin",
             )
         ]
-        field = self.social_media_id._fields["media_type"]
+        
         with patch.object(
             type(self.social_account_id),
             "_fields_account_url",
             autospec=True,
             return_value=fake_fields,
-        ), patch.object(
-            field,
-            "selection",
-            new=[("other_social", "Other social")],
         ):
-            self.social_media_id.write({"media_type": "other_social"})
+            self.social_media_id.media_type = "other_social"
+            self.social_account_id._compute_account_url()
+            
             self.assertEqual(
                 self.social_account_id.account_url,
                 "https://www.failed.com/company/id1234account/admin",
@@ -142,4 +141,3 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         with patch.object(type(Bus), "_sendone", autospec=True) as patch_sendone:
             self.social_account_id._need_update()
             patch_sendone.assert_called_once()
-            

@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {FormRenderer} from "@web/views/form/form_renderer";
 import {SocialMediaMixin} from "../../app/social_media_mixin.esm";
 import {useService} from "@web/core/utils/hooks";

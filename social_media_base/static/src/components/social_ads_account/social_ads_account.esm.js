@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {Component, onWillStart, useState} from "@odoo/owl";
 import {ControlPanel} from "@web/search/control_panel/control_panel";
 import {SocialAds} from "../social_ads/social_ads.esm";
