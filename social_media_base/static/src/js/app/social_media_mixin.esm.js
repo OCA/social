@@ -1,5 +1,3 @@
-/** @odoo-module */
-
 import {markup, useEffect} from "@odoo/owl";
 import {session} from "@web/session";
 

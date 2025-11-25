@@ -1,4 +1,3 @@
-/** @odoo-module **/
 import {Component, useRef, useState} from "@odoo/owl";
 import {DateTimePicker} from "@web/core/datetime/datetime_picker";
 import {DateTimePickerPopover} from "@web/core/datetime/datetime_picker_popover";

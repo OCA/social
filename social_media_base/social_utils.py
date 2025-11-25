@@ -7,6 +7,7 @@ from urllib.parse import quote
 import pytz
 from werkzeug.urls import url_encode, url_quote
 
+from odoo import fields
 from odoo.exceptions import ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.tools.date_utils import add
@@ -146,7 +147,7 @@ def _generate_timestamps(date_start=None, date_end=None):
     if date_start:
         date_start_time = date_start.timestamp() * 1000
     else:
-        date_start_time = datetime.now().timestamp() * 1000
+        date_start_time = fields.Datetime.now().timestamp() * 1000
 
     if date_end:
         date_end_time = date_start_time + date_end.timestamp() * 1000

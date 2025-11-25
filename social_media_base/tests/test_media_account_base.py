@@ -74,4 +74,3 @@ class TestSocialMediaBase(TestSocialMediaBaseCommon):
         self.assertEqual(result, None)
         result = self.WizardAccount._action_valid_add_account()
         self.assertTrue(result)
-        

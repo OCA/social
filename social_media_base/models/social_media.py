@@ -16,7 +16,7 @@ class SocialMedia(models.Model):
     name = fields.Char()
     description = fields.Text()
     media_type = fields.Selection(
-        [],
+        selection=[("other_social", "Other social")],
         readonly=True,
     )
     image = fields.Binary()

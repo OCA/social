@@ -1,9 +1,8 @@
-/** @odoo-module **/
-
 import {Component, onMounted, useRef, useState} from "@odoo/owl";
 import {ControlPanel} from "@web/search/control_panel/control_panel";
 import {SocialFilter} from "../social_filter/social_filter.esm";
 import {useService} from "@web/core/utils/hooks";
+const {window} = globalThis;
 
 export class SocialChartAccount extends Component {
     static template = "social_media_base.SocialChartAccount";

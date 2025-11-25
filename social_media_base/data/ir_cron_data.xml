@@ -7,7 +7,6 @@
         <field name="code">model._run_send_post()</field>
         <field name='interval_number'>5</field>
         <field name='interval_type'>minutes</field>
-        <field name="numbercall">-1</field>
         <field name="priority">1</field>
     </record>
 
@@ -18,7 +17,6 @@
         <field name="code">model._run_check_media_updates()</field>
         <field name='interval_number'>30</field>
         <field name='interval_type'>minutes</field>
-        <field name="numbercall">-1</field>
         <field name="priority">1</field>
     </record>
 </odoo>
