@@ -6,7 +6,7 @@
         model="ir.actions.act_window"
         id="social_media_base.social_post_act_window_kanban"
     >
-        <field name="view_mode">kanban,calendar,tree,form</field>
+        <field name="view_mode">kanban,calendar,list,form</field>
     </record>
 
     <record id="social_post_calendar_view" model="ir.ui.view">
@@ -42,5 +42,4 @@
             </calendar>
         </field>
     </record>
-
 </odoo>
