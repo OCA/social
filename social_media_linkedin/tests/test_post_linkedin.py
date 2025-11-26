@@ -191,6 +191,7 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
 
         mock_response = MagicMock()
         mock_response.status_code = 403
+        mock_response.json.return_value = {"message": "Unauthorized"}
         mock_request.return_value = mock_response
         post_data.update({"attachment_ids": []})
         result = self.SocialPostAccountLinkedin.create_linkedin_comment(post_data)
@@ -531,37 +532,43 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
 
     def test_action_post(self):
         self.SocialPostAccountLinkedin.write({"state": "ready"})
-        post_account_urn = "122809890045"
+        post_account_id = "122809890045"
+        expected_urn = f"urn:li:share:{post_account_id}"
         fake_response = MagicMock(return_value=[{"share_content": self.image_base64}])
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ) as mock_filter_by_media_types, patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "create_restclient_linkedin",
-            autospec=True,
-            return_value=post_account_urn,
-        ) as mock_create_restclient_linkedin, patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_get_posts",
-            autospec=True,
-            return_value=fake_response,
-        ) as mock_get_posts, patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_get_assets_save",
-            autospec=True,
-            return_value=[12],
-        ) as mock_get_assets_save:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ) as mock_filter_by_media_types,
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "create_restclient_linkedin",
+                autospec=True,
+                return_value=post_account_id,
+            ) as mock_create_restclient_linkedin,
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_get_posts",
+                autospec=True,
+                return_value=fake_response,
+            ) as mock_get_posts,
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_get_assets_save",
+                autospec=True,
+                return_value=[12],
+            ) as mock_get_assets_save,
+        ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             self.assertEqual(
                 self.SocialPostAccountLinkedin.linkedin_post_account_urn,
-                post_account_urn,
+                expected_urn,
             )
             self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
             self.assertIn(
-                post_account_urn,
+                expected_urn,
                 self.SocialPostAccountLinkedin.post_account_url,
             )
             mock_filter_by_media_types.assert_called_once()
@@ -571,17 +578,20 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
 
     def test_action_post_failed(self):
         self.SocialPostAccountLinkedin.write({"state": "ready"})
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ) as mock_filter_by_media_types, patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "create_restclient_linkedin",
-            autospec=True,
-            return_value=False,
-        ) as mock_create_restclient_linkedin:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ) as mock_filter_by_media_types,
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "create_restclient_linkedin",
+                autospec=True,
+                return_value=False,
+            ) as mock_create_restclient_linkedin,
+        ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             self.assertEqual(self.SocialPostAccountLinkedin.state, "failed")
             mock_filter_by_media_types.assert_called_once()

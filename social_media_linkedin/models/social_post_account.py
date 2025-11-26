@@ -5,7 +5,7 @@ import itertools
 import logging
 from urllib.parse import quote
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 from odoo.addons.social_media_base.social_utils import (
@@ -61,7 +61,7 @@ class SocialPostAccount(models.Model):
                 if total > 0:
                     elements = response.json().get("elements", [])
                     filter_test = False
-                    if self.account_id.enviroment == "test":
+                    if self.account_id.environment == "test":
                         filter_test = True
                     filter_account = list(
                         filter(lambda x: x.get("test", False) == filter_test, elements)
@@ -73,7 +73,10 @@ class SocialPostAccount(models.Model):
                     )
             else:
                 raise ValidationError(
-                    _(f"Error get advertising account in Linkedin: {response.json()}")
+                    self.env._(
+                        f"Error get advertising account in Linkedin: "
+                        f"{response.json()}"
+                    )
                 )
         return advertising_account_id
 
@@ -82,7 +85,6 @@ class SocialPostAccount(models.Model):
         group_campaign = False
         if advertising_account_id:
             campaign_id = self.post_id.campaign_id
-            message_error = "Error creating group campaign in Linkedin:"
             if campaign_id.campaign_group_id.linkedin_urn:
                 group_campaign = self.account_id._request_linkedin(
                     endpoint="/adCampaignGroupsV2/{}".format(
@@ -129,19 +131,17 @@ class SocialPostAccount(models.Model):
                     campaign_id.campaign_group_id.linkedin_urn = group_campaign
                 else:
                     raise ValidationError(
-                        _("%(message_error)s %(error_response)s")
-                        % {
-                            "message_error": message_error,
-                            "error_response": response.json(),
-                        }
+                        self.env._(
+                            f"Error creating group campaign in Linkedin: "
+                            f"{response.json()}"
+                        )
                     )
             else:
                 raise ValidationError(
-                    _("%(message_error)s %(error_response)s")
-                    % {
-                        "message_error": message_error,
-                        "error_response": group_campaign.json(),
-                    }
+                    self.env._(
+                        f"Error creating group campaign"
+                        f" in Linkedin: {group_campaign.json()}"
+                    )
                 )
         return group_campaign
 
@@ -149,7 +149,6 @@ class SocialPostAccount(models.Model):
         campaign_group_linkedin_urn = self._action_campaign_group()
         campaign = False
         if campaign_group_linkedin_urn:
-            message_error = "Error creating campaign in Linkedin:"
             campaign_id = self.post_id.campaign_id
             if campaign_id.linkedin_urn:
                 campaign = self.account_id._request_linkedin(
@@ -207,19 +206,17 @@ class SocialPostAccount(models.Model):
                     campaign_id.linkedin_urn = campaign
                 else:
                     raise ValidationError(
-                        _("%(message_error)s %(error_response)s")
-                        % {
-                            "message_error": message_error,
-                            "error_response": response.json(),
-                        }
+                        self.env._(
+                            f"Error creating campaign in Linkedin: "
+                            f"{response.json()}"
+                        )
                     )
             else:
                 raise ValidationError(
-                    _("%(message_error)s %(error_response)s")
-                    % {
-                        "message_error": message_error,
-                        "error_response": campaign.json(),
-                    }
+                    self.env._(
+                        f"""Error creating group campaign in Linkedin:
+                        {campaign.json()}"""
+                    )
                 )
 
         return campaign
@@ -259,14 +256,14 @@ class SocialPostAccount(models.Model):
                     res = response.headers.get("Location").split("/")[-1]
                 else:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             f"""Error creating campaign post in Linkedin:
                             {response.json()}"""
                         )
                     )
             else:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         """The campaign could not be generated for the post,
                         please try again later."""
                     )
@@ -298,10 +295,8 @@ class SocialPostAccount(models.Model):
                         )
                     post_account.write(
                         {
-                            "linkedin_post_account_urn": post_entity,
-                            "post_account_url": "https://www.linkedin.com/feed/update/urn:li:share:{}".format(
-                                post_entity
-                            ),
+                            "linkedin_post_account_urn": f"urn:li:share:{post_entity}",
+                            "post_account_url": f"https://www.linkedin.com/feed/update/urn:li:share:{post_entity}",
                             "creative_urn": post_account._action_campaign_post(
                                 post_entity
                             ),
@@ -342,9 +337,11 @@ class SocialPostAccount(models.Model):
             if response.status_code == 201:
                 like_ok = True
             elif response.status_code == 409:
-                message_like = _("You have already reacted to this post.")
+                message_like = self.env._("You have already reacted to this post.")
             elif response.status_code == 404:
-                message_like = _("The post does not exist or has been deleted.")
+                message_like = self.env._(
+                    "The post does not exist or has been deleted."
+                )
             else:
                 message_like = response.json().get("message", "")
             return {"success": like_ok, "message": message_like}
@@ -386,10 +383,10 @@ class SocialPostAccount(models.Model):
                     for comment in response_comments
                 ]
             else:
-                return_message = _("ERROR GET COMMENTS LINKEDIN: %(error)s") % {
-                    "error": response.json(),
-                }
-                _logger.error(return_message)
+                return_message = self.env._(
+                    "ERROR GET COMMENTS LINKEDIN: %(error)s",
+                    error=response.json(),
+                )
                 return {
                     "success": False,
                     "message": return_message,
@@ -418,10 +415,10 @@ class SocialPostAccount(models.Model):
                 linkedin_v2=True,
             )
             if response.status_code != 201:
-                return_message = _("ERROR CREATE COMMENT LINKEDIN: %(error)s") % {
-                    "error": response.json().get("message", ""),
-                }
-                _logger.error(return_message)
+                return_message = self.env._(
+                    "ERROR CREATE COMMENT LINKEDIN: %(error)s",
+                    error=response.json().get("message", ""),
+                )
                 return {
                     "success": False,
                     "message": return_message,
@@ -453,7 +450,7 @@ class SocialPostAccount(models.Model):
             if response.status_code != 204:
                 return {
                     "success": False,
-                    "message": _(
+                    "message": self.env._(
                         """
                         An error occurred while deleting the comment or
                         it no longer exists, please try again later.
@@ -493,12 +490,21 @@ class SocialPostAccount(models.Model):
             if delete_post.status_code != 204:
                 error_message = delete_post.json().get(
                     "message",
-                    _("The post could not be deleted, please try again later."),
+                    self.env._(
+                        "The post could not be deleted, please try again later."
+                    ),
                 )
-                raise ValidationError(
-                    _("ERROR DELETE POST X: %(error)s")
-                    % {
-                        "error": error_message,
-                    }
-                )
+                if delete_post.status_code != 200:
+                    error_message = delete_post.json().get(
+                        "message",
+                        self.env._(
+                            "The post could not be deleted, please try again later."
+                        ),
+                    )
+                    raise ValidationError(error_message)
         return super()._delete_post_account()
+
+    def _action_like_linkedin_comment(self, actor_urn):
+        if actor_urn:
+            pass
+        return {"success": False}

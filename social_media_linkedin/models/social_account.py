@@ -11,7 +11,7 @@ import requests
 from linkedin_api.clients.restli.client import RestliClient
 from werkzeug.urls import url_join, url_quote
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
@@ -55,9 +55,7 @@ class SocialAccount(models.Model):
         return super()._fields_account_url() + [
             (
                 "linkedin_account_urn",
-                "https://www.linkedin.com/company/{}/admin/dashboard/".format(
-                    self.linkedin_account_id
-                ),
+                f"https://www.linkedin.com/company/{self.linkedin_account_id}/admin/dashboard/",
             )
         ]
 
@@ -82,7 +80,7 @@ class SocialAccount(models.Model):
         )
         if account_count > 0:
             raise ValidationError(
-                _(
+                self.env._(
                     "An account with this information "
                     "already exists; please also check "
                     "archived accounts."
@@ -175,7 +173,7 @@ class SocialAccount(models.Model):
         if isinstance(response, dict):
             return response
         else:
-            raise ValidationError(_("REFRESH TOKEN: %s") % response.text)
+            raise ValidationError(self.env._("REFRESH TOKEN: %s") % response.text)
 
     def _prepare_url_upload_asset(self, feedshare="image"):
         try:
@@ -202,7 +200,8 @@ class SocialAccount(models.Model):
             )
             if not isinstance(asset, dict):
                 raise ValidationError(
-                    _("UPLOADING VIDEO: %(error_video)s") % {"error_video": asset.text}
+                    self.env._("UPLOADING VIDEO: %(error_video)s")
+                    % {"error_video": asset.text}
                 )
             else:
                 value_upload_asset = asset.get("value", {})
@@ -214,7 +213,7 @@ class SocialAccount(models.Model):
         except Exception as e:
             _logger.error(e)
             raise ValidationError(
-                _("UPLOADING VIDEO: %(error_video)s") % {"error_video": str(e)}
+                self.env._("UPLOADING VIDEO: %(error_video)s") % {"error_video": str(e)}
             ) from e
 
     def _prepare_url_upload_image(self):
@@ -347,8 +346,12 @@ class SocialAccount(models.Model):
                     "client_secret": client_secret,
                 }
             )
-        return client_id, client_secret, self._request_linkedin(
-            endpoint="/accessToken", params=params, timeout=10, token=True
+        return (
+            client_id,
+            client_secret,
+            self._request_linkedin(
+                endpoint="/accessToken", params=params, timeout=10, token=True
+            ),
         )
 
     def get_account_linkedin(self, access_token):
@@ -436,7 +439,7 @@ class SocialAccount(models.Model):
                 account_id.message_post(
                     body=response_organizations.json().get(
                         "message",
-                        _("Error obtaining information from the organization"),
+                        self.env._("Error obtaining information from the organization"),
                     ),
                 )
         return organizations_data
@@ -557,7 +560,7 @@ class SocialAccount(models.Model):
                         notif_type="social_form_success"
                         if is_valid_token_access
                         else "social_form_danger",
-                        notif_message=_("The token is %(token_valid)s valid.")
+                        notif_message=self.env._("The token is %(token_valid)s valid.")
                         % {"token_valid": "not " if not is_valid_token_access else ""},
                         media="linkedin",
                         account_name=self.name or "LINKEDIN",
@@ -565,7 +568,7 @@ class SocialAccount(models.Model):
             elif not ctx.get("not_notify", False):
                 self._notify_user_client(
                     notif_type="social_form_success",
-                    notif_message=_("The token is valid."),
+                    notif_message=self.env._("The token is valid."),
                     media="linkedin",
                     account_name=self.name or "LINKEDIN",
                 )
@@ -988,9 +991,9 @@ class SocialAccount(models.Model):
         params_values_char_ignore = {"search": [{"all": ":"}]}
         if campaign_ids:
             search_campaign = param_values["search"].strip("()")
-            param_values[
-                "search"
-            ] = f"({search_campaign},campaigns:(values:List({','.join(campaign_ids)})))"
+            param_values["search"] = (
+                f"({search_campaign},campaigns:(values:List({','.join(campaign_ids)})))"
+            )
             params_values_char_ignore = {"search": [{"1,2,3,4,5,6,7": ":"}]}
         response = self._request_linkedin(
             endpoint="/adCampaignsV2",
@@ -1016,10 +1019,9 @@ class SocialAccount(models.Model):
             if not isinstance(start_date, str)
             else start_date
         )
-        parse_start_date = "(year:{},month:{},day:{})".format(
-            start_date[0],
-            int(start_date[1]),
-            int(start_date[2]),
+        parse_start_date = (
+            f"(year:{start_date[0]},month:{int(start_date[1])},"
+            f"day:{int(start_date[2])})"
         )
         end_date = (
             end_date.strftime(DEFAULT_SERVER_DATE_FORMAT).split("-")
@@ -1252,5 +1254,5 @@ class SocialAccount(models.Model):
                                     account.need_update = True
                                     return self._need_update()
         except Exception as ex:
-            _logger.error(_("ERROR NEDD UPDATE %(error)s") % {"error": str(ex)})
+            _logger.error(self.env._("ERROR NEDD UPDATE %(error)s", error=str(ex)))
         return update

@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -12,7 +12,7 @@ _logger = logging.getLogger(__name__)
 class UtmCampaign(models.Model):
     _inherit = "utm.campaign"
 
-    linkedin_urn = fields.Char(string="Linkedin URN", copy=False)
+    linkedin_urn = fields.Char(copy=False)
     unit_cost = fields.Float(help="Cost per post")
     daily_budget = fields.Float(help="Maximum daily campaign spending")
     currency_id = fields.Many2one(
@@ -31,7 +31,7 @@ class UtmCampaign(models.Model):
                 campaign.campaign_group_id.campaign_ids.mapped("daily_budget")
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         """The amount you want to add exceeds
                         the campaign group limit."""
                     )

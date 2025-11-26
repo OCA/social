@@ -7,7 +7,7 @@ from odoo import fields, models
 class UtmGroupCampaign(models.Model):
     _inherit = "utm.group.campaign"
 
-    linkedin_urn = fields.Char(string="Linkedin URN")
+    linkedin_urn = fields.Char()
     currency_id = fields.Many2one("res.currency")
     campaign_ids = fields.One2many("utm.campaign", "campaign_group_id")
     total_budget = fields.Float(

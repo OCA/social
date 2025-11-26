@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 
 from werkzeug.urls import url_encode, url_join
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.tools import hmac
 
 from ..social_linkedin_utils import (
@@ -106,7 +106,9 @@ class WizardSocialAccount(models.TransientModel):
                     if not self.env.context.get("not_notify", False):
                         self._notify_user_client(
                             notif_type="social_form_success",
-                            notif_message=_("The token was updated successfully"),
+                            notif_message=self.env._(
+                                "The token was updated successfully"
+                            ),
                             media="linkedin",
                             account_name=self.account_id.name,
                         )
