@@ -690,14 +690,17 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertEqual(len(result), 10)
 
     def test_action_add_account(self):
-        with patch.object(
-            type(self.wizard_account_id),
-            "_get_url_redirect",
-            return_value=self.url_callback,
-        ), patch.object(
-            type(self.wizard_account_id),
-            "_generate_code",
-            return_value="fake-code-token",
+        with (
+            patch.object(
+                type(self.wizard_account_id),
+                "_get_url_redirect",
+                return_value=self.url_callback,
+            ),
+            patch.object(
+                type(self.wizard_account_id),
+                "_generate_code",
+                return_value="fake-code-token",
+            ),
         ):
             result = self.wizard_account_id._action_add_account()
             self.assertIn("fake-client-id", result["url"])
@@ -782,13 +785,16 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_csrf_state_token(self):
         fake_code_hmac = "fake-hmac-code"
-        with patch.object(
-            type(self.wizard_account_id), "_generate_code", autospec=True
-        ) as mock_fake_code, patch(
-            PATCH_WIZARD_ACCOUNT_LINKEDIN.format("hmac"),
-            autospec=True,
-            return_value=fake_code_hmac,
-        ) as mock_hmac:
+        with (
+            patch.object(
+                type(self.wizard_account_id), "_generate_code", autospec=True
+            ) as mock_fake_code,
+            patch(
+                PATCH_WIZARD_ACCOUNT_LINKEDIN.format("hmac"),
+                autospec=True,
+                return_value=fake_code_hmac,
+            ) as mock_hmac,
+        ):
             result = self.wizard_account_id._get_csrf_state_token()
             self.assertEqual(result, fake_code_hmac)
             mock_hmac.assert_called_once()
@@ -819,16 +825,19 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             "url": "https://test.example/redirect",
             "target": "self",
         }
-        with patch.object(
-            type(self.wizard_account_id),
-            "_action_valid_add_account",
-            autospec=True,
-        ) as mocked_valid, patch.object(
-            type(self.wizard_account_id),
-            "_action_add_account",
-            autospec=True,
-            return_value=action_fake_url,
-        ) as mocked_add:
+        with (
+            patch.object(
+                type(self.wizard_account_id),
+                "_action_valid_add_account",
+                autospec=True,
+            ) as mocked_valid,
+            patch.object(
+                type(self.wizard_account_id),
+                "_action_add_account",
+                autospec=True,
+                return_value=action_fake_url,
+            ) as mocked_add,
+        ):
             result = self.wizard_account_id.action_associate_social_account()
             mocked_valid.assert_called_once_with(self.wizard_account_id)
             mocked_add.assert_called_once_with(self.wizard_account_id)
@@ -891,14 +900,16 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.expire_access_token_date = (
             datetime.now() + timedelta(days=-10)
         ).date()
-        with patch(
-            PATCH_ACCOUNT.format("validate_access_token")
-        ) as mock_super, patch.object(
-            type(self.SocialAccount),
-            "validate_linkedin_access_token",
-            autospec=True,
-            return_value=True,
-        ) as mock_validate_token, patch_notify_user as mock_notify_user:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")) as mock_super,
+            patch.object(
+                type(self.SocialAccount),
+                "validate_linkedin_access_token",
+                autospec=True,
+                return_value=True,
+            ) as mock_validate_token,
+            patch_notify_user as mock_notify_user,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
             mock_super.assert_called_once()
             mock_validate_token.assert_called_once()
@@ -910,9 +921,10 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.refresh_token_expires_in = (
             datetime.now() + timedelta(days=1)
         ).date()
-        with patch(
-            PATCH_ACCOUNT.format("validate_access_token")
-        ) as mock_super_failed, patch_notify_user as mock_notify_user_failed:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")) as mock_super_failed,
+            patch_notify_user as mock_notify_user_failed,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
             mock_super_failed.assert_called_once()
             mock_notify_user_failed.assert_called_once()

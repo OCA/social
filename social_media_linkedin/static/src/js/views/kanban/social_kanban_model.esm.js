@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {SocialKanbanModel} from "@social_media_base/js/views/kanban/social_kanban_model.esm";
 import {patch} from "@web/core/utils/patch";
 

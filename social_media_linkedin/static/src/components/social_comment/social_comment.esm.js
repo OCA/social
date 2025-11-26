@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {SocialComment} from "@social_media_base/components/social_comment/social_comment.esm";
 import {patch} from "@web/core/utils/patch";
 import {useService} from "@web/core/utils/hooks";

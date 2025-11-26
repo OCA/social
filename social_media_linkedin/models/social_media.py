@@ -21,7 +21,7 @@ class SocialMedia(models.Model):
         if x_restli_method:
             headers.update({"X-RestLi-Method": x_restli_method})
         if access_token:
-            headers.update({"Authorization": "Bearer %s" % access_token})
+            headers.update({"Authorization": f"Bearer {access_token}"})
         if content_type:
             headers.update({"Content-Type": content_type})
         return headers
