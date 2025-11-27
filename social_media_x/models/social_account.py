@@ -13,7 +13,7 @@ import requests
 import tweepy
 from tweepy.errors import TooManyRequests
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 from ..social_x_utils import _get_oauth
 
@@ -160,7 +160,7 @@ class SocialAccount(models.Model):
         next_valid_request = limit_reset and datetime.fromtimestamp(
             limit_reset, tz=timezone
         ).replace(tzinfo=None)
-        message = _(
+        message = self.env._(
             """You have reached the limit of requests
             <b>%(endpoint)s</b> allowed according to your account plan.
             <br>\u2022\u2009<b>Total limit:</b> %(limit)s request(s)
@@ -242,8 +242,9 @@ class SocialAccount(models.Model):
                 wizard_social_account = (
                     self.env["wizard.social.account"]
                     .sudo()
-                    .search(
+                    .search_fetch(
                         [("oauth_token", "=", kwargs.get("oauth_token", False))],
+                        ["x_api_key", "x_api_secret"],
                         limit=1,
                     )
                 )
@@ -302,8 +303,10 @@ class SocialAccount(models.Model):
                 wizard_social_account = (
                     self.env["wizard.social.account"]
                     .sudo()
-                    .search(
-                        [("media_type", "=", "x")], limit=1, order="create_date desc"
+                    .search_fetch(
+                        [("oauth_token", "=", kwargs.get("oauth_token", False))],
+                        ["x_api_key", "x_api_secret"],
+                        limit=1,
                     )
                 )
                 media_content = requests.get(data.profile_image_url, timeout=10)
@@ -349,12 +352,10 @@ class SocialAccount(models.Model):
                         media="X",
                         account_name=self.name,
                     )
-                    _logger.error(message_error)
         except TooManyRequests as exManyRequest:
             self._get_message_many_requests(exManyRequest, endpoint="create_account")
         except Exception as e:
             message_error = f"Request Client Me: {e}"
-            _logger.error(message_error)
             self._notify_user_client(
                 notif_type="social_kanban_danger",
                 notif_message=message_error,
@@ -408,7 +409,6 @@ class SocialAccount(models.Model):
                 )
                 return False
         except Exception as ex:
-            _logger.error(f"Error Post Tweet: {str(ex)}")
             if not context.get("social_post_cron", False):
                 self._notify_user_client(
                     notif_type="social_form_danger",
@@ -471,11 +471,13 @@ class SocialAccount(models.Model):
 
     def _get_public_metrics(self, val_x):
         public_metrics = val_x.public_metrics
-        return public_metrics.get("like_count", 0), public_metrics.get(
-            "impression_count", 0
-        ), public_metrics.get("reply_count", 0), public_metrics.get(
-            "retweet_count", 0
-        ), public_metrics.get("quote_count", 0)
+        return (
+            public_metrics.get("like_count", 0),
+            public_metrics.get("impression_count", 0),
+            public_metrics.get("reply_count", 0),
+            public_metrics.get("retweet_count", 0),
+            public_metrics.get("quote_count", 0),
+        )
 
     def _update_posts_statistics(self, post_id, domain):
         statistics = super()._update_posts_statistics(post_id, domain)
@@ -484,7 +486,7 @@ class SocialAccount(models.Model):
             account_ids = self.search(
                 [
                     ("media_type", "=", "x"),
-                ]
+                ],
             )
         elif any(val.media_type == "x" for val in self):
             account_ids = self
@@ -619,7 +621,6 @@ class SocialAccount(models.Model):
                     media="X",
                     account_name=account.name,
                 )
-                _logger.error(f"Error Get Tweets: {e}")
         return self._get_statistics(statistics)
 
     def update_account(self):
@@ -682,7 +683,6 @@ class SocialAccount(models.Model):
                     media="X",
                     account_name=account.name,
                 )
-                _logger.error(f"Error Get Tweets: {e}")
             data_x += account._map_chart_statistics(
                 [
                     (
