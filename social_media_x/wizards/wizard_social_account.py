@@ -6,7 +6,7 @@ import logging
 import requests
 from werkzeug.urls import url_encode
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 from ..social_x_utils import _get_oauth
@@ -43,7 +43,7 @@ class WizardSocialAccount(models.TransientModel):
                 "tag": "display_notification",
                 "target": "new",
                 "params": {
-                    "message": _(
+                    "message": self.env._(
                         """
                         Account access could not be authorized.
                         Please check your settings or try again later.
@@ -76,7 +76,7 @@ class WizardSocialAccount(models.TransientModel):
                 > 0
             ):
                 raise ValidationError(
-                    _("An account with that information already exists.")
+                    self.env._("An account with that information already exists.")
                 )
         return result
 

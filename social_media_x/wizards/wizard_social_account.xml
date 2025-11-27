@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="wizard_social_account_view_form" model="ir.ui.view">
         <field name="name">Associate Social Account</field>
         <field name="model">wizard.social.account</field>

@@ -355,20 +355,24 @@ class TestSocialAccountX(TestSocialCommonX):
         fake_response = MagicMock()
         fake_response.status_code = 200
         fake_response.content = b"fake-image-bytes"
-        with patch.object(
-            type(self.social_account_id),
-            "get_client_api",
-            autospec=True,
-            return_value=fake_client,
-        ) as mock_get_client_api, patch(
-            PATCH_ACCOUNT_X.format("requests.get"),
-            autospec=True,
-            return_value=fake_response,
-        ) as mock_get, patch.object(
-            type(self.social_account_id),
-            "write",
-            autospec=True,
-        ) as mock_write:
+        with (
+            patch.object(
+                type(self.social_account_id),
+                "get_client_api",
+                autospec=True,
+                return_value=fake_client,
+            ) as mock_get_client_api,
+            patch(
+                PATCH_ACCOUNT_X.format("requests.get"),
+                autospec=True,
+                return_value=fake_response,
+            ) as mock_get,
+            patch.object(
+                type(self.social_account_id),
+                "write",
+                autospec=True,
+            ) as mock_write,
+        ):
             self.social_account_id._update_account_data()
             mock_get_client_api.assert_called_once()
             mock_get.assert_called_once()
@@ -382,11 +386,14 @@ class TestSocialAccountX(TestSocialCommonX):
             self.WizardAccount._update_account()
             mock_updt_account_super.assert_called_once()
 
-        with patch.object(
-            type(self.WizardAccountX.account_id), "_update_account_data"
-        ) as mock_update_account_data, patch(
-            PATCH_WIZARD_ACCOUNT.format("_update_account")
-        ) as mock_update_account_super:
+        with (
+            patch.object(
+                type(self.WizardAccountX.account_id), "_update_account_data"
+            ) as mock_update_account_data,
+            patch(
+                PATCH_WIZARD_ACCOUNT.format("_update_account")
+            ) as mock_update_account_super,
+        ):
             self.WizardAccountX._update_account()
             mock_update_account_data.assert_called_once()
             mock_update_account_super.assert_called_once()
@@ -519,17 +526,20 @@ class TestSocialAccountX(TestSocialCommonX):
     def test_action_add_account(self):
         wizard = self.WizardAccountX
         wizard.media_type = "x"
-        with patch(
-            "odoo.addons.social_media_x.wizards.wizard_social_account."
-            "WizardSocialAccount._get_url_authorize",
-            autospec=True,
-            return_value={"type": "ir.actions.act_url"},
-        ) as mock_get_url, patch(
-            "odoo.addons.social_media_base.wizards.wizard_social_account."
-            "WizardSocialAccount._action_add_account",
-            autospec=True,
-            return_value={"super": True},
-        ) as mock_super:
+        with (
+            patch(
+                "odoo.addons.social_media_x.wizards.wizard_social_account."
+                "WizardSocialAccount._get_url_authorize",
+                autospec=True,
+                return_value={"type": "ir.actions.act_url"},
+            ) as mock_get_url,
+            patch(
+                "odoo.addons.social_media_base.wizards.wizard_social_account."
+                "WizardSocialAccount._action_add_account",
+                autospec=True,
+                return_value={"super": True},
+            ) as mock_super,
+        ):
             result = wizard._action_add_account()
 
             mock_super.assert_called_once()
@@ -575,16 +585,20 @@ class TestSocialAccountX(TestSocialCommonX):
         patch_get_client_api = self.get_patch_exceptions_x(
             fake_client=fake_client, valid_time_request=False
         )
-        with patch_get_client_api as mock_get_client_api, patch(
-            PATCH_ACCOUNT_X.format("requests.get"),
-            autospec=True,
-            return_value=fake_response,
-        ) as mock_get, patch.object(
-            type(self.SocialAccount),
-            "_get_access_token_oauth2",
-            autospec=True,
-            return_value="fake_access_token_oauth2",
-        ) as mock_get_access_token_oauth2:
+        with (
+            patch_get_client_api as mock_get_client_api,
+            patch(
+                PATCH_ACCOUNT_X.format("requests.get"),
+                autospec=True,
+                return_value=fake_response,
+            ) as mock_get,
+            patch.object(
+                type(self.SocialAccount),
+                "_get_access_token_oauth2",
+                autospec=True,
+                return_value="fake_access_token_oauth2",
+            ) as mock_get_access_token_oauth2,
+        ):
             self.SocialAccount.create_account_x(
                 "x_access_token_oauth1", "x_access_secret_oauth1", {}
             )
@@ -595,21 +609,26 @@ class TestSocialAccountX(TestSocialCommonX):
         patch_get_client_api = self.get_patch_exceptions_x(
             fake_client=fake_client, valid_time_request=False
         )
-        with patch_get_client_api as mock_get_client_api, patch(
-            PATCH_ACCOUNT_X.format("requests.get"),
-            autospec=True,
-            return_value=fake_response,
-        ) as mock_get, patch.object(
-            type(self.SocialAccount),
-            "_get_access_token_oauth2",
-            autospec=True,
-            return_value=False,
-        ) as mock_get_access_token_oauth2, patch.object(
-            type(self.SocialAccount),
-            "_notify_user_client",
-            autospec=True,
-            return_value=False,
-        ) as mock_notify_user_client:
+        with (
+            patch_get_client_api as mock_get_client_api,
+            patch(
+                PATCH_ACCOUNT_X.format("requests.get"),
+                autospec=True,
+                return_value=fake_response,
+            ) as mock_get,
+            patch.object(
+                type(self.SocialAccount),
+                "_get_access_token_oauth2",
+                autospec=True,
+                return_value=False,
+            ) as mock_get_access_token_oauth2,
+            patch.object(
+                type(self.SocialAccount),
+                "_notify_user_client",
+                autospec=True,
+                return_value=False,
+            ) as mock_notify_user_client,
+        ):
             self.SocialAccount.create_account_x(
                 "x_access_token_oauth1", "x_access_secret_oauth1", {}
             )
@@ -640,12 +659,15 @@ class TestSocialAccountX(TestSocialCommonX):
         patch_get_client_api = self.get_patch_exceptions_x(
             fake_client=fake_client, valid_time_request=False
         )
-        with patch_get_client_api as mock_get_client_api, patch.object(
-            type(self.SocialAccount),
-            "_prepare_medias_for_tweet",
-            autospec=True,
-            return_value=[],
-        ) as mock_prepare_medias_for_tweet:
+        with (
+            patch_get_client_api as mock_get_client_api,
+            patch.object(
+                type(self.SocialAccount),
+                "_prepare_medias_for_tweet",
+                autospec=True,
+                return_value=[],
+            ) as mock_prepare_medias_for_tweet,
+        ):
             res = self.SocialAccount.create_tweet("Message Test", [], [], None, {})
             self.assertEqual(res, "tweet_idX")
             mock_get_client_api.assert_called_once()
@@ -796,7 +818,7 @@ class TestSocialAccountX(TestSocialCommonX):
             self.assertEqual(self.SocialAccountX.quote_count, 25)
 
             mock_update_posts_statistics_super.assert_called_once()
-            self.assertEqual(mock_search.call_count, 4)
+            self.assertEqual(mock_search.call_count, 2)
             mock_valid_time_request.assert_called_once()
             mock_get_users_tweets.assert_called_once()
             mock_get_assets_save_x.assert_called_once()
@@ -835,11 +857,14 @@ class TestSocialAccountX(TestSocialCommonX):
 
     def test_get_chart_account_statistics_empty(self):
         patch_super = patch(PATCH_ACCOUNT.format("_get_chart_account_statistics"))
-        with patch(
-            "odoo.models.BaseModel.search", autospec=True, return_value=[]
-        ) as mock_search, patch_super as mock_super:
+        with (
+            patch(
+                "odoo.models.BaseModel.search", autospec=True, return_value=[]
+            ) as mock_search,
+            patch_super as mock_super,
+        ):
             self.SocialAccount._get_chart_account_statistics(None, None, None)
-            self.assertEqual(mock_search.call_count, 2)
+            self.assertEqual(mock_search.call_count, 1)
             mock_super.assert_called_once()
 
     def test_get_chart_account_statistics(self):
@@ -877,9 +902,9 @@ class TestSocialAccountX(TestSocialCommonX):
             patch_get_users_tweets as mock_get_users_tweets,
         ):
             self.SocialAccount._get_chart_account_statistics(None, None, None)
-            self.assertEqual(mock_search.call_count, 2)
+            self.assertEqual(mock_search.call_count, 1)
             mock_map_chart_statistics.assert_called_once()
             mock_super.assert_called_once()
-            self.assertEqual(mock_get_default_filter_date.call_count, 3)
+            mock_get_default_filter_date.assert_called_once()
             mock_get_public_metrics.assert_called_once()
             mock_get_users_tweets.assert_called_once()

@@ -6,7 +6,7 @@ import logging
 
 from tweepy.errors import TooManyRequests
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 _logger = logging.getLogger(__name__)
@@ -114,10 +114,9 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="get_comments"
                 )
             except Exception as e:
-                return_message = _("Error Get Comments for Tweet: %(error)s)") % {
-                    "error": e,
-                }
-                _logger.error(return_message)
+                return_message = self.env._(
+                    "Error Get Comments for Tweet: %(error)s)", error=e
+                )
                 return {
                     "success": False,
                     "message": return_message,
@@ -157,10 +156,9 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="create_comment"
                 )
             except Exception as exp:
-                return_message = _("Error Comment Tweet: %(error)s)") % {
-                    "error": exp,
-                }
-                _logger.error(return_message)
+                return_message = self.env._(
+                    "Error Comment Tweet: %(error)s)", error=exp
+                )
                 return {
                     "success": False,
                     "message": return_message,
@@ -194,10 +192,7 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="get_post"
                 )
             except Exception as e:
-                message_error = _("Error Get Comment Post: %(error)s") % {
-                    "error": e,
-                }
-                _logger.error(message_error)
+                message_error = self.env._("Error Get Comment Post: %(error)s", error=e)
             if message_error:
                 raise ValidationError(message_error)
             return True
@@ -220,10 +215,7 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="delete_post"
                 )
             except Exception as e:
-                message_error = _("ERROR DELETE POST X: %(error)s") % {
-                    "error": e,
-                }
-                _logger.error(message_error)
+                message_error = self.env._("Error Delete Post X: %(error)s", error=e)
             if message_error:
                 raise ValidationError(message_error)
         return super()._delete_post_account()
