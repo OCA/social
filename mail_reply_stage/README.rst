@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 ================
 Mail Reply Stage
 ================
@@ -13,23 +17,23 @@ Mail Reply Stage
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/15.0/mail_reply_stage
+    :target: https://github.com/OCA/social/tree/19.0/mail_reply_stage
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-15-0/social-15-0-mail_reply_stage
+    :target: https://translation.odoo-community.org/projects/social-19-0/social-19-0-mail_reply_stage
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=15.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module provides a feature that automatically updates the stage of a record when a
-non-internal user sends a mail message to that record.
+This module provides a feature that automatically updates the stage of a
+record when a non-internal user sends a mail message to that record.
 
 **Table of contents**
 
@@ -39,90 +43,83 @@ non-internal user sends a mail message to that record.
 Configuration
 =============
 
-Go to **Settings > Technical > Email > Mail Reply Configurations** and create records
-according to your needs.
+Go to **Settings > Technical > Email > Mail Reply Configurations** and
+create records according to your needs.
 
 For each record:
 
-- **Model**: Choose a model (required).
-- **Parent Field**: Select the many2one field that links to the parent model.
-  For example, if you select the model `project.task`, choose `project_id` as the parent
-  field.
-- **Parent Stage Field**: Choose the many2many field from the model of Parent Field that defines
-  the allowed stages.The system will check whether the selected Reply Stage is
-  included in the value of this field.
-  If the Reply Stage is not present in the Parent Stage Field, it will not be assigned to
-  the record.
-- **domain**: Set a domain to filter which records this config applies to.
-  Example: ``[('project_id.name', '=', 'My Project')]``
-- **Reply Stage Field**: Choose the field (e.g., `stage_id`) to be updated when a
-  non-internal user replies. (required)
-- **Reply Stage**: Set the name of the stage to apply on reply. (required)
+-  **Model**: Choose a model (required).
+-  **Parent Field**: Select the many2one field that links to the parent
+   model. For example, if you select the model project.task, choose
+   project_id as the parent field.
+-  **Parent Stage Field**: Choose the many2many field from the model of
+   Parent Field that defines the allowed stages.The system will check
+   whether the selected Reply Stage is included in the value of this
+   field. If the Reply Stage is not present in the Parent Stage Field,
+   it will not be assigned to the record.
+-  **domain**: Set a domain to filter which records this config applies
+   to. Example: ``[('project_id.name', '=', 'My Project')]``
+-  **Reply Stage Field**: Choose the field (e.g., stage_id) to be
+   updated when a non-internal user replies. (required)
+-  **Reply Stage**: Set the name of the stage to apply on reply.
+   (required)
 
 Examples
-~~~~~~~~
+--------
 
 Example 1 – For "Office Design" Project
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------
 
 This rule applies to tasks under the **"Office Design"** project.
 
-+------------------------+-------------------------------------------------------------+
-| **Field**              | **Value**                                                   |
-+========================+=============================================================+
-| Model                  | Task (``project.task``)                                     |
-+------------------------+-------------------------------------------------------------+
-| Parent Field           | Project (``project_id``)                                    |
-+------------------------+-------------------------------------------------------------+
-| Parent Stage Field     | Task Stages (``project.task.type_ids``)                     |
-+------------------------+-------------------------------------------------------------+
-| Domain                 | ``[('project_id.name', '=', 'Office Design')]``             |
-+------------------------+-------------------------------------------------------------+
-| Reply Stage Field      | Stage (``stage_id``)                                        |
-+------------------------+-------------------------------------------------------------+
-| Reply Stage            | Reply to Customer                                           |
-+------------------------+-------------------------------------------------------------+
+================== ===============================================
+**Field**          **Value**
+================== ===============================================
+Model              Task (``project.task``)
+Parent Field       Project (``project_id``)
+Parent Stage Field Task Stages (``project.task.type_ids``)
+Domain             ``[('project_id.name', '=', 'Office Design')]``
+Reply Stage Field  Stage (``stage_id``)
+Reply Stage        Reply to Customer
+================== ===============================================
 
 Example 2 – Fallback for All Other Projects
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+-------------------------------------------
 
-This rule applies to all tasks that do **not** belong to the "Office Design" project.
+This rule applies to all tasks that do **not** belong to the "Office
+Design" project.
 
-+------------------------+-------------------------------------------------------------+
-| **Field**              | **Value**                                                   |
-+========================+=============================================================+
-| Model                  | Task (``project.task``)                                     |
-+------------------------+-------------------------------------------------------------+
-| Parent Field           | Project (``project_id``)                                    |
-+------------------------+-------------------------------------------------------------+
-| Parent Stage Field     | Task Stages (``project.task.type_ids``)                     |
-+------------------------+-------------------------------------------------------------+
-| Domain                 |                                                             |
-+------------------------+-------------------------------------------------------------+
-| Reply Stage Field      | Stage (``stage_id``)                                        |
-+------------------------+-------------------------------------------------------------+
-| Reply Stage            | Need Discussion                                             |
-+------------------------+-------------------------------------------------------------+
+================== =======================================
+**Field**          **Value**
+================== =======================================
+Model              Task (``project.task``)
+Parent Field       Project (``project_id``)
+Parent Stage Field Task Stages (``project.task.type_ids``)
+Domain             
+Reply Stage Field  Stage (``stage_id``)
+Reply Stage        Need Discussion
+================== =======================================
 
-Use the up/down arrows to prioritize the rules.
-The system evaluates rules from top to bottom and applies only the first matching one.
-Place more specific rules (with a domain) above general ones (e.g., fallback rules with an empty domain).
+Use the up/down arrows to prioritize the rules. The system evaluates
+rules from top to bottom and applies only the first matching one. Place
+more specific rules (with a domain) above general ones (e.g., fallback
+rules with an empty domain).
 
-Based on the two example configurations:
-For a task under the "Office Design" project, both rules match.
-However, the first rule at the top will be used.
+Based on the two example configurations: For a task under the "Office
+Design" project, both rules match. However, the first rule at the top
+will be used.
 
-Note: Make sure the selected reply stage exists in the parent record’s allowed stages,
-as defined by the **Parent Stage Field**.
+Note: Make sure the selected reply stage exists in the parent record’s
+allowed stages, as defined by the **Parent Stage Field**.
 
 Known issues / Roadmap
 ======================
 
-Due to a technical limitation, if you create a new stage after the reply stage
-configuration record has already been created and want to use this new stage as
-the Reply Stage, you must clear and reselect the Reply Stage Field to trigger the
-onchange. This will allow the newly created stage to appear in the Reply Stage
-selection.
+Due to a technical limitation, if you create a new stage after the reply
+stage configuration record has already been created and want to use this
+new stage as the Reply Stage, you must clear and reselect the Reply
+Stage Field to trigger the onchange. This will allow the newly created
+stage to appear in the Reply Stage selection.
 
 Bug Tracker
 ===========
@@ -130,7 +127,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_reply_stage%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_reply_stage%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -138,19 +135,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Quartile
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Quartile <https://www.quartile.co>`_
+-  `Quartile <https://www.quartile.co>`__
 
-  * Aung Ko Ko Lin
+   -  Aung Ko Ko Lin
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -162,6 +159,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/15.0/mail_reply_stage>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/19.0/mail_reply_stage>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

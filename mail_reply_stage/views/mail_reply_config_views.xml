@@ -29,7 +29,7 @@
                     name="parent_stage_field_id"
                     attrs="{'required': [('parent_field_id', '!=', False)], 'readonly': [('parent_field_id', '=', False)]}"
                 />
-                 <field name="domain" />
+                <field name="domain" />
                 <field name="reply_stage_field_id" />
                 <field
                     name="reply_stage_xml_id"
