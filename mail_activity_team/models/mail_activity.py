@@ -1,7 +1,7 @@
 # Copyright 2018-22 ForgeFlow S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import SUPERUSER_ID, _, api, fields, models
+from odoo import SUPERUSER_ID, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -92,7 +92,7 @@ class MailActivity(models.Model):
                 not in activity.team_id.with_context(active_test=False).member_ids
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The assigned user %(user_name)s is "
                         "not member of the team %(team_name)s.",
                         user_name=activity.user_id.name,

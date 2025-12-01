@@ -66,7 +66,7 @@ class ResUsers(models.Model):
                     "overdue_count": 0,
                     "planned_count": 0,
                 }
-            user_activities[activity["model"]]["%s_count" % activity["states"]] += (
+            user_activities[activity["model"]][f"{activity['states']}_count"] += (
                 activity["count"]
             )
             if (

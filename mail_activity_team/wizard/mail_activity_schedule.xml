@@ -6,11 +6,7 @@
         <field name="arch" type="xml">
             <field name="activity_user_id" position="attributes">
                 <attribute name="invisible">activity_team_id</attribute>
-                <attribute
-                    name="required"
-                    add="and not activity_team_id"
-                    separator=" "
-                />
+                <attribute name="required" add="not activity_team_id" separator="and" />
             </field>
             <field name="activity_user_id" position="after">
                 <field name="res_model_id" invisible="1" />

@@ -57,10 +57,10 @@
         <field name="name">mail.activity.team.view.tree</field>
         <field name="model">mail.activity.team</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="res_model_ids" widget="many2many_tags" />
-            </tree>
+            </list>
         </field>
     </record>
 
