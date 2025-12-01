@@ -66,9 +66,9 @@ class ResUsers(models.Model):
                     "overdue_count": 0,
                     "planned_count": 0,
                 }
-            user_activities[activity["model"]][
-                "%s_count" % activity["states"]
-            ] += activity["count"]
+            user_activities[activity["model"]]["%s_count" % activity["states"]] += (
+                activity["count"]
+            )
             if (
                 activity["states"] in ("today", "overdue")
                 and activity["user_id"] != user

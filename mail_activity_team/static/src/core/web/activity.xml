@@ -18,7 +18,6 @@
         >
             <attribute name="t-if">activity.user_id</attribute>
         </xpath>
-
     </t>
 
 </templates>
