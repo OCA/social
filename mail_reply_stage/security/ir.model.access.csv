@@ -1,3 +1,5 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_mail_reply_config_all,mail.reply.config.all,model_mail_reply_config,,1,0,0,0
+access_mail_reply_config_public,mail.reply.config.public,model_mail_reply_config,base.group_public,1,0,0,0
+access_mail_reply_config_portal,mail.reply.config.portal,model_mail_reply_config,base.group_portal,1,0,0,0
+access_mail_reply_config_user,mail.reply.config.user,model_mail_reply_config,base.group_user,1,0,0,0
 access_mail_reply_config_admin,mail.reply.config.admin,model_mail_reply_config,base.group_system,1,1,1,1

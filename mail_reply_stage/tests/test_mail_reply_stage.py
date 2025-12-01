@@ -1,9 +1,8 @@
 # Copyright 2025 Quartile (https://www.quartile.co)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo_test_helper import FakeModelLoader
-
 from odoo import Command
+from odoo.orm.model_classes import add_to_registry
 from odoo.tests.common import TransactionCase
 
 
@@ -11,14 +10,24 @@ class TestMailReplyStage(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.loader = FakeModelLoader(cls.env, cls.__module__)
-        cls.loader.backup_registry()
         from .test_models import TestMailReply, TestMailReplyParent, TestMailReplyStage
 
-        cls.loader.update_registry(
-            (TestMailReplyParent, TestMailReply, TestMailReplyStage)
+        add_to_registry(cls.registry, TestMailReply)
+        add_to_registry(cls.registry, TestMailReplyParent)
+        add_to_registry(cls.registry, TestMailReplyStage)
+        cls.registry._setup_models__(
+            cls.env.cr,
+            ["test.mail.reply", "test.mail.reply.stage", "test.mail.reply.parent"],
         )
-        cls.test_model = cls.env.ref("mail_reply_stage.model_test_mail_reply")
+        cls.registry.init_models(
+            cls.env.cr,
+            ["test.mail.reply", "test.mail.reply.stage", "test.mail.reply.parent"],
+            {"models_to_check": True},
+        )
+        cls.addClassCleanup(cls.registry.__delitem__, "test.mail.reply")
+        cls.addClassCleanup(cls.registry.__delitem__, "test.mail.reply.stage")
+        cls.addClassCleanup(cls.registry.__delitem__, "test.mail.reply.parent")
+        cls.test_model = cls.env["ir.model"]._get("test.mail.reply")
         cls.parent_stage_ids_field = cls.env["ir.model.fields"]._get(
             "test.mail.reply.parent", "stage_ids"
         )
@@ -90,7 +99,7 @@ class TestMailReplyStage(TransactionCase):
                     "name": "Non-Internal User",
                     "login": "test@example.com",
                     "email": "test@example.com",
-                    "groups_id": [Command.set([cls.env.ref("base.group_portal").id])],
+                    "group_ids": [Command.set([cls.env.ref("base.group_portal").id])],
                 }
             )
         )
@@ -103,11 +112,6 @@ class TestMailReplyStage(TransactionCase):
             [("model", "=", "test.mail.reply.stage"), ("res_id", "=", stage.id)]
         )
         return stage, xmlid
-
-    @classmethod
-    def tearDownClass(cls):
-        cls.loader.restore_registry()
-        super().tearDownClass()
 
     def test_mail_reply_stage_assigned(self):
         self.assertEqual(self.record_1.stage_id, self.stage_a)
