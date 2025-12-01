@@ -6,6 +6,7 @@ from odoo import fields, models
 
 class TestMailReplyParent(models.Model):
     _name = "test.mail.reply.parent"
+    _description = "Test Mail Reply Parent"
 
     name = fields.Char()
     stage_ids = fields.Many2many("test.mail.reply.stage")
@@ -14,6 +15,7 @@ class TestMailReplyParent(models.Model):
 class TestMailReply(models.Model):
     _name = "test.mail.reply"
     _inherit = ["mail.thread"]
+    _description = "Test Mail Reply"
 
     name = fields.Char()
     parent_id = fields.Many2one("test.mail.reply.parent")
@@ -22,5 +24,6 @@ class TestMailReply(models.Model):
 
 class TestMailReplyStage(models.Model):
     _name = "test.mail.reply.stage"
+    _description = "Test Mail Reply Stage"
 
     name = fields.Char()

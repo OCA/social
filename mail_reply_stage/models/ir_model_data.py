@@ -2,27 +2,32 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
+from odoo.fields import Domain
 
 
 class IrModelData(models.Model):
     _inherit = "ir.model.data"
 
     @api.model
-    def _name_search(
-        self, name, args=None, operator="ilike", limit=100, name_get_uid=None
+    @api.readonly
+    def name_search(
+        self,
+        name: str = "",
+        domain=None,
+        operator: str = "ilike",
+        limit: int = 100,
     ):
         stage_model = self.env.context.get("mail_reply_stage_model")
         if name and stage_model:
             stage_ids = self.env[stage_model]._search(
-                [("name", operator, name)], limit=limit, access_rights_uid=name_get_uid
+                [("name", operator, name)], limit=limit
             )
-            domain = [("model", "=", stage_model), ("res_id", "in", stage_ids)]
-            xml_ids = self._search(domain, limit=limit, access_rights_uid=name_get_uid)
-            return xml_ids
-        return super()._name_search(
-            name=name,
-            args=args,
-            operator=operator,
-            limit=limit,
-            name_get_uid=name_get_uid,
+            domain = [
+                ("model", "=", stage_model),
+                ("res_id", "in", stage_ids),
+            ]
+            records = self.search_fetch(Domain(domain), ["display_name"], limit=limit)
+            return [(rec.id, rec.display_name) for rec in records]
+        return super().name_search(
+            name=name, domain=domain, operator=operator, limit=limit
         )

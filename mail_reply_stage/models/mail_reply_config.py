@@ -26,7 +26,9 @@ class MailReplyConfig(models.Model):
     parent_stage_field_id = fields.Many2one(
         "ir.model.fields",
         string="Parent Stage Field",
-        domain="[('model_id.model', '=', parent_model_name), ('ttype', '=', 'many2many')]",
+        domain=(
+            "[('model_id.model', '=', parent_model_name), ('ttype', '=', 'many2many')]"
+        ),
         ondelete="cascade",
         help="A Many2Many field within the parent model that defines "
         "valid stages for this configuration.",
@@ -62,7 +64,7 @@ class MailReplyConfig(models.Model):
                 rec.reply_stage_xml_id_domain = []
                 continue
             Model = self.env[rec.reply_stage_model_name]
-            records = Model.search([])
+            records = Model.search([], limit=1000)
             xml_ids = self.env["ir.model.data"].search(
                 [
                     ("model", "=", rec.reply_stage_model_name),
