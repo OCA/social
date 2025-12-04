@@ -1,0 +1,1 @@
+odoo-addon-social_media_base @ git+https://github.com/OCA/social.git@refs/pull/1769/head#subdirectory=social_media_base
