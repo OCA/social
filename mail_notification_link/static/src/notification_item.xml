@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t
+        t-name="mail_notification_link.NotificationItem"
+        t-inherit="mail.NotificationItem"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//span[hasclass('o-mail-NotificationItem-name')]"
+            position="attributes"
+        >
+            <attribute name="t-on-click.stop">onClickDisplayName</attribute>
+            <attribute
+                name="t-att-class"
+            >{'cursor-pointer text-primary': props.resModel and props.resId}</attribute>
+            <attribute name="title">Open document</attribute>
+        </xpath>
+    </t>
+
+</templates>
