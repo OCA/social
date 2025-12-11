@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail.Chatter" t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath expr="//div[hasclass('o-mail-Chatter-content')]" position="before">
+            <div
+                t-if="props.hasMessageList and state.thread"
+                class="o-mail-ChatterSplit-tabs d-flex border-bottom px-3 py-2 bg-view"
+            >
+                <div
+                    class="btn-group btn-group-sm"
+                    role="group"
+                    aria-label="Chatter view toggle"
+                >
+                    <button
+                        type="button"
+                        class="btn"
+                        t-att-class="{
+                                'btn-primary': isViewAll,
+                                'btn-outline-secondary': !isViewAll
+                            }"
+                        t-on-click="() => this.setChatterView('all')"
+                    >
+                        <i class="fa fa-list-alt me-1" />
+                        All
+                    </button>
+                    <button
+                        type="button"
+                        class="btn"
+                        t-att-class="{
+                                'btn-primary': isViewMessages,
+                                'btn-outline-secondary': !isViewMessages
+                            }"
+                        t-on-click="() => this.setChatterView('messages')"
+                    >
+                        <i class="fa fa-comments me-1" />
+                        Messages
+                    </button>
+                    <button
+                        type="button"
+                        class="btn"
+                        t-att-class="{
+                                'btn-primary': isViewLogs,
+                                'btn-outline-secondary': !isViewLogs
+                            }"
+                        t-on-click="() => this.setChatterView('logs')"
+                    >
+                        <i class="fa fa-history me-1" />
+                        Logs
+                    </button>
+                    <button
+                        type="button"
+                        class="btn"
+                        t-att-class="{
+                                'btn-primary': isViewActivities,
+                                'btn-outline-secondary': !isViewActivities
+                            }"
+                        t-on-click="() => this.setChatterView('activities')"
+                    >
+                        <i class="fa fa-clock-o me-1" />
+                        Activities
+                    </button>
+                </div>
+            </div>
+        </xpath>
+    </t>
+</templates>

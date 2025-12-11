@@ -1,0 +1,11 @@
+.o-mail-ChatterSplit-tabs {
+    .btn-group {
+        .btn {
+            &.btn-outline-secondary {
+                &:hover {
+                    background-color: $o-gray-400;
+                }
+            }
+        }
+    }
+}

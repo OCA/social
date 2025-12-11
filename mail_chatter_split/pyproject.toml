@@ -1,0 +1,6 @@
+[project]
+name = "odoo-addon-mail_chatter_split"
+
+[build-system]
+requires = ["whool"]
+build-backend = "whool.buildapi"

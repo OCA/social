@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail.Chatter" t-inherit="mail.Chatter" t-inherit-mode="extension">
+        <xpath
+            expr="//t[@t-if='props.hasActivities and activities.length and !state.isSearchOpen']"
+            position="attributes"
+        >
+            <attribute
+                name="t-if"
+            >props.hasActivities and activities.length and !state.isSearchOpen and (state.chatterView === 'all' or state.chatterView === 'activities')</attribute>
+        </xpath>
+    </t>
+</templates>

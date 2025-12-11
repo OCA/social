@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail.Thread" t-inherit="mail.Thread" t-inherit-mode="extension">
+        <xpath expr="//t[@t-as='msg']" position="attributes">
+            <attribute
+                name="t-foreach"
+            >props.order === 'asc' ? this.getMessagesToDisplay() : [...this.getMessagesToDisplay()].reverse()</attribute>
+        </xpath>
+    </t>
+</templates>
