@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Add Smart Button and Facebook Metrics to Campaign Form -->
+    <record model="ir.ui.view" id="utm_campaign_form_view_facebook">
+        <field name="name">utm.campaign.view.form.facebook</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="arch" type="xml">
+            <!-- Add smart button -->
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    name="action_view_facebook_posts"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-facebook"
+                    invisible="fb_posts_count == 0"
+                >
+                    <field name="fb_posts_count" widget="statinfo" string="FB Posts" />
+                </button>
+            </xpath>
+
+            <!-- Add Facebook metrics group after top-group -->
+            <xpath expr="//group[@id='top-group']" position="after">
+                <group
+                    name="facebook_metrics"
+                    string="Facebook Metrics"
+                    invisible="fb_posts_count == 0"
+                >
+                    <group>
+                        <field name="fb_impressions_total" />
+                        <field name="fb_clicks_total" />
+                        <field name="fb_reach_total" />
+                        <field name="fb_engagement_total" />
+                    </group>
+                    <group>
+                        <field name="fb_spend_total" widget="monetary" />
+                        <field name="fb_leads_total" />
+                        <field name="fb_conversions_total" />
+                        <field name="fb_plays_total" />
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Add Facebook metrics to Campaign Tree View -->
+    <record model="ir.ui.view" id="utm_campaign_tree_view_facebook">
+        <field name="name">utm.campaign.view.tree.facebook</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="fb_posts_count" string="FB Posts" optional="show" />
+                <field
+                    name="fb_impressions_total"
+                    string="FB Impressions"
+                    optional="hide"
+                />
+                <field name="fb_clicks_total" string="FB Clicks" optional="hide" />
+                <field
+                    name="fb_spend_total"
+                    string="FB Spend"
+                    optional="hide"
+                    widget="monetary"
+                />
+                <field name="fb_leads_total" string="FB Leads" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
