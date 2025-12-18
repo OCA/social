@@ -1,0 +1,39 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* base_user_signature
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-06-24 11:57+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: base_user_signature
+#: model_terms:ir.ui.view,arch_db:base_user_signature.inherited_res_users_form
+#: model_terms:ir.ui.view,arch_db:base_user_signature.inherited_res_users_preferences_form
+msgid "Clear"
+msgstr "Pulisci"
+
+#. module: base_user_signature
+#: model:ir.model.fields,field_description:base_user_signature.field_res_users__digital_signature
+msgid "Digital Signature"
+msgstr "Firma digitale"
+
+#. module: base_user_signature
+#: model_terms:ir.ui.view,arch_db:base_user_signature.inherited_res_users_form
+#: model_terms:ir.ui.view,arch_db:base_user_signature.inherited_res_users_preferences_form
+msgid "Signature"
+msgstr "Firma"
+
+#. module: base_user_signature
+#: model:ir.model,name:base_user_signature.model_res_users
+msgid "User"
+msgstr "Utente"
