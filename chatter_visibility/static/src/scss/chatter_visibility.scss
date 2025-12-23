@@ -1,0 +1,15 @@
+.btn-show,
+.btn-hide {
+    border: 0px;
+    font-weight: bolder;
+    background: none;
+    padding: 5px;
+    cursor: pointer;
+}
+.custom-ovn-wrapper {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inherit the simple user form view to Add 'chatter_visibility' radio buttons after the 'email' field in the user form. -->
+    <record id="chatter_visibility_view_users_form_simple_modif" model="ir.ui.view">
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="chatter_visibility" widget="radio" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
