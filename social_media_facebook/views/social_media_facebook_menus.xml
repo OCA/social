@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Facebook menus removed - using content-type based menus instead -->
+    <!-- Lead Forms and Leads will be under Ads parent menu -->
+    <!-- See social_media_base/views/social_media_base_menus.xml for new structure -->
+
+    <!-- Facebook Analytics Menu under Reporting -->
+    <menuitem
+        name="Facebook Analytics"
+        id="menu_facebook_analytics"
+        parent="social_media_base.social_reporting_menu"
+        action="action_facebook_analytics"
+        sequence="20"
+        groups="base.group_user"
+    />
+</odoo>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit social.post.account kanban view to add Facebook-specific fields -->
+    <record id="social_post_account_kanban_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.account.kanban.facebook</field>
+        <field name="model">social.post.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_post_account_kanban_view"
+        />
+        <field name="arch" type="xml">
+            <!-- Add Facebook-specific fields to kanban -->
+            <xpath expr="//field[@name='account_id']" position="after">
+                <field name="fb_content_id" />
+                <field name="fb_video_url" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- List view for Facebook Analytics (Odoo 18: tree -> list) -->
+    <record id="social_post_account_list_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.account.list.facebook</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <list string="Facebook Analytics" create="false" edit="false">
+                <field name="account_id" />
+                <field name="author" />
+                <field name="message" optional="show" />
+                <field name="content_type" optional="show" />
+                <field name="published_date" />
+                <field name="likes_count" sum="Total Likes" />
+                <field name="comments_count" sum="Total Comments" />
+                <field name="shares_count" sum="Total Shares" />
+                <field
+                    name="impressions_total"
+                    sum="Total Impressions"
+                    optional="show"
+                />
+                <field name="reach_unique" sum="Total Reach" optional="show" />
+                <field name="clicks_total" sum="Total Clicks" optional="show" />
+                <field
+                    name="engagement_rate_pct"
+                    avg="Avg Engagement"
+                    optional="show"
+                />
+                <field name="spend_amount" sum="Total Spend" optional="hide" />
+                <field name="ctr_pct" avg="Avg CTR" optional="hide" />
+                <field name="leads_total" sum="Total Leads" optional="hide" />
+                <field
+                    name="conversions_total"
+                    sum="Total Conversions"
+                    optional="hide"
+                />
+                <field name="post_account_url" optional="hide" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form view for Facebook Analytics -->
+    <record id="social_post_account_form_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.account.form.facebook</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <form string="Facebook Post Analytics" create="false" edit="false">
+                <header>
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="ready,posting,posted,failed"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_open_external_post"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-external-link"
+                            invisible="not post_account_url"
+                        >
+                            <div class="o_field_widget o_stat_info">
+                                <span class="o_stat_text">View on</span>
+                                <span class="o_stat_text">Facebook</span>
+                            </div>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="author" string="Post Account" />
+                        <h1>
+                            <field name="author" readonly="1" />
+                        </h1>
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        invisible="state != 'failed'"
+                    >
+                        <strong>Post Failed!</strong>
+                        <field name="failed_description" readonly="1" />
+                    </div>
+
+                    <group>
+                        <group string="Post Information">
+                            <field name="account_id" />
+                            <field name="content_type" />
+                            <field name="published_date" />
+                            <field name="last_sync_at" />
+                        </group>
+                        <group string="Media">
+                            <field name="media_type" />
+                            <field name="fb_content_id" />
+                            <field name="permalink_url" widget="url" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Posts">
+                            <field name="message" widget="text" />
+                            <field name="image_urls" widget="text" />
+                        </page>
+
+                        <page string="Engagement Metrics">
+                            <group>
+                                <group string="Basic Engagement">
+                                    <field name="likes_count" />
+                                    <field name="comments_count" />
+                                    <field name="shares_count" />
+                                    <field
+                                        name="reactions_by_type_json"
+                                        widget="text"
+                                    />
+                                </group>
+                                <group string="Reach &amp; Impressions">
+                                    <field name="impressions_total" />
+                                    <field name="reach_unique" />
+                                    <field name="clicks_total" />
+                                    <field
+                                        name="engagement_rate_pct"
+                                        widget="percentage"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Ad Metrics" invisible="content_type != 'ad'">
+                            <group>
+                                <group string="Ad Info">
+                                    <field name="fb_ad_id" />
+                                    <field name="fb_adset_id" />
+                                    <field name="fb_campaign_id" />
+                                    <field name="ad_name" />
+                                </group>
+                                <group string="Ad Performance">
+                                    <field
+                                        name="spend_amount"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency'}"
+                                    />
+                                    <field name="currency" invisible="1" />
+                                    <field name="ctr_pct" widget="percentage" />
+                                    <field name="leads_total" />
+                                    <field name="conversions_total" />
+                                    <field
+                                        name="cpl_amount"
+                                        widget="monetary"
+                                        options="{'currency_field': 'currency'}"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+
+                        <page string="Video Metrics" invisible="content_type != 'reel'">
+                            <group>
+                                <group string="Views">
+                                    <field name="plays_total" />
+                                    <field name="plays_unique" />
+                                </group>
+                                <group string="Engagement">
+                                    <field name="watch_time_sec" />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Graph view for Facebook Analytics -->
+    <record id="social_post_account_graph_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.account.graph.facebook</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <graph string="Facebook Analytics" type="bar">
+                <field name="published_date" interval="day" />
+                <field name="likes_count" type="measure" />
+                <field name="comments_count" type="measure" />
+                <field name="shares_count" type="measure" />
+                <field name="impressions_total" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- Pivot view for Facebook Analytics -->
+    <record id="social_post_account_pivot_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.account.pivot.facebook</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <pivot string="Facebook Analytics">
+                <field name="account_id" type="row" />
+                <field name="content_type" type="col" />
+                <field name="likes_count" type="measure" />
+                <field name="comments_count" type="measure" />
+                <field name="shares_count" type="measure" />
+                <field name="impressions_total" type="measure" />
+                <field name="reach_unique" type="measure" />
+                <field name="engagement_rate_pct" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Action to open Facebook Analytics -->
+    <record id="action_facebook_analytics" model="ir.actions.act_window">
+        <field name="name">Facebook Analytics</field>
+        <field name="res_model">social.post.account</field>
+        <field name="view_mode">list,graph,pivot,form,kanban</field>
+        <field name="domain">[('media_type', '=', 'facebook')]</field>
+        <field name="context">{'default_media_type': 'facebook'}</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+      (0, 0, {'view_mode': 'list', 'view_id': ref('social_post_account_list_view_facebook')}),
+      (0, 0, {'view_mode': 'graph', 'view_id': ref('social_post_account_graph_view_facebook')}),
+      (0, 0, {'view_mode': 'pivot', 'view_id': ref('social_post_account_pivot_view_facebook')}),
+      (0, 0, {'view_mode': 'form', 'view_id': ref('social_post_account_form_view_facebook')}),
+      (0, 0, {'view_mode': 'kanban', 'view_id': ref('social_post_account_kanban_view_facebook')})]"
+        />
+    </record>
+</odoo>

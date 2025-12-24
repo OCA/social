@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="social_media_facebook_kanban_inherit" model="ir.ui.view">
+        <field name="name">social.media.facebook.kanban.inherit</field>
+        <field name="model">social.media</field>
+        <field name="inherit_id" ref="social_media_base.social_media_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='open_action_account']" position="after">
+                <button
+                    name="action_open_system_user_token_wizard"
+                    type="object"
+                    class="btn btn-secondary w-100 mt-2"
+                    invisible="media_type != 'facebook'"
+                >
+                    Set System User Token
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>

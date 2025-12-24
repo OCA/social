@@ -1,0 +1,22 @@
+<odoo>
+    <record id="view_wizard_facebook_system_user_form" model="ir.ui.view">
+        <field name="name">wizard.facebook.system.user.form</field>
+        <field name="model">wizard.facebook.system.user</field>
+        <field name="arch" type="xml">
+            <form string="System User Token">
+                <group>
+                    <field name="system_user_token" password="True" />
+                </group>
+                <footer>
+                    <button
+                        string="Associate"
+                        type="object"
+                        name="action_connect_system_user"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" special="cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

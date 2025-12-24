@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Facebook App Credentials Settings -->
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.social.media.facebook</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="inside">
+                <app
+                    data-string="Social Media"
+                    string="Social Media"
+                    name="social_media_base"
+                    logo="/social_media_base/static/description/icon.png"
+                >
+                    <!-- Facebook Section -->
+                    <block title="Facebook">
+                        <setting
+                            help="Configure your Facebook App credentials for OAuth authentication"
+                        >
+                            <div class="row mt32">
+                                <div class="col-lg-12">
+                                    <h4>Application (Meta Developers)</h4>
+                                    <field
+                                        name="use_app_login"
+                                        widget="boolean_toggle"
+                                        readonly="1"
+                                    />
+                                </div>
+                            </div>
+                            <div class="content-group">
+                                <div invisible="not use_app_login">
+                                    <div class="row mt16">
+                                        <label
+                                            for="facebook_app_id"
+                                            class="col-lg-3 o_light_label"
+                                            string="App ID"
+                                        />
+                                        <field
+                                            name="facebook_app_id"
+                                            placeholder="e.g., 1234567890123456"
+                                        />
+                                    </div>
+                                    <div class="row">
+                                        <label
+                                            for="facebook_app_secret"
+                                            class="col-lg-3 o_light_label"
+                                            string="App Secret"
+                                        />
+                                        <field
+                                            name="facebook_app_secret"
+                                            password="True"
+                                            placeholder="Enter your Facebook App Secret"
+                                        />
+                                    </div>
+                                    <div class="row">
+                                        <label
+                                            for="facebook_redirect_uri"
+                                            class="col-lg-3 o_light_label"
+                                            string="Redirect URI"
+                                        />
+                                        <field
+                                            name="facebook_redirect_uri"
+                                            readonly="1"
+                                            widget="CopyClipboardChar"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <div class="col-lg-12">
+                                            <div class="alert alert-info" role="alert">
+                                                <strong>Setup:</strong>
+                                                <ol class="mb-0">
+                                                    <li>Go to <a
+                                                        href="https://developers.facebook.com/apps/"
+                                                        target="_blank"
+                                                    >Facebook Developers</a>, create/select an app</li>
+                                                    <li>Add <b
+                                                    >Facebook Login</b> product</li>
+                                                    <li>Copy <b>App ID</b> and <b
+                                                    >App Secret</b> from Settings → Basic</li>
+                                                    <li>Add the <b
+                                                    >Redirect URI</b> above to Facebook Login → Settings → Valid OAuth Redirect URIs</li>
+                                                </ol>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- System User Token Section -->
+                                <div class="row mt32">
+                                    <div class="col-lg-12">
+                                        <h4>System User (Business Manager)</h4>
+                                        <field
+                                            name="use_system_user"
+                                            widget="boolean_toggle"
+                                            readonly="1"
+                                        />
+                                    </div>
+                                </div>
+
+                                <div class="row mt16" invisible="not use_system_user">
+                                    <div class="row">
+                                        <label
+                                            for="facebook_system_user_token"
+                                            class="col-lg-3 o_light_label"
+                                            string="System User Token"
+                                        />
+                                        <field
+                                            name="facebook_system_user_token"
+                                            password="True"
+                                            placeholder="Enter your System User Token"
+                                        />
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-info" role="alert">
+                                            <strong>What is a System User?</strong>
+                                            <p>A <b
+                                            >System User</b> is a non-login user created inside your <b
+                                            >Meta Business</b> for backend/API operations.
+                      It is the recommended method for server-to-server integrations and does <b
+                                            >not require real user login</b>.</p>
+
+                                            <strong
+                                            >How to create a System User:</strong>
+                                            <ol class="mb-0">
+                                                <li>Go to <a
+                                                    href="https://business.facebook.com/settings/system-users"
+                                                    target="_blank"
+                                                >Business Settings → System Users</a></li>
+                                                <li>Create a new <b
+                                                >System User</b> → assign role <b
+                                                >Admin</b> or <b>Employee</b></li>
+                                                <li>Add an <b>Asset</b> → select <b
+                                                >Pages</b> → grant permissions</li>
+                                                <li>Generate a <b
+                                                >System User Access Token</b> for your App</li>
+                                                <li
+                                                >Copy the token and paste into the field above</li>
+                                            </ol>
+
+                                            <p class="mb-0 mt-2">
+                                                <small>
+                        <b
+                                                >Tip:</b> System User Tokens do not expire quickly and are ideal for stable server integrations.
+                      </small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <button
+                                            type="object"
+                                            class="btn btn-primary"
+                                            name="action_open_system_user_token_wizard"
+                                        >
+                      Connect Using System User
+                    </button>
+                                    </div>
+                                </div>
+
+                                <!-- Lead Ads Webhook (Real-time Lead Sync) -->
+                                <div class="row mt32">
+                                    <div class="col-lg-12">
+                                        <h4>Lead Ads Webhook (Real-time Lead Sync)</h4>
+                                    </div>
+                                </div>
+                                <div class="row mt16">
+                                    <label
+                                        for="facebook_webhook_url"
+                                        class="col-lg-3 o_light_label"
+                                        string="Webhook URL"
+                                    />
+                                    <field
+                                        name="facebook_webhook_url"
+                                        readonly="1"
+                                        widget="CopyClipboardChar"
+                                    />
+                                </div>
+                                <div class="row">
+                                    <label
+                                        for="facebook_webhook_verify_token"
+                                        class="col-lg-3 o_light_label"
+                                        string="Verify Token"
+                                    />
+                                    <field
+                                        name="facebook_webhook_verify_token"
+                                        placeholder="Enter a secure random token"
+                                    />
+                                </div>
+                                <div class="row mt16">
+                                    <div class="col-lg-12">
+                                        <div class="alert alert-info" role="alert">
+                                            <strong>Webhook Setup:</strong>
+                                            <ol class="mb-0">
+                                                <li>In your Facebook App, add <b
+                                                >Webhooks</b> product</li>
+                                                <li>Subscribe to <b
+                                                >Page</b> object with the <b
+                                                >Webhook URL</b> and <b
+                                                >Verify Token</b> above</li>
+                                                <li>Subscribe to <b
+                                                >leadgen</b> field</li>
+                                            </ol>
+                                            <p class="mb-0 mt-2">
+                                                <small><b
+                                                >Note:</b> Requires HTTPS and a strong verify token for security.</small>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </setting>
+                    </block>
+                </app>
+            </xpath>
+        </field>
+    </record>
+</odoo>
