@@ -1,0 +1,262 @@
+// Facebook Dashboard Styling - Match Odoo 18 EE design
+// Clean card design with proper spacing and engagement metrics
+
+.o_kanban_view {
+    .o_kanban_group {
+        // Style for kanban groups (account columns)
+        .o_kanban_record {
+            // Each post card styling - match EE design
+            &:has(.oe_kanban_social_dashboard) {
+                background-color: #ffffff;
+                border: 1px solid #dee2e6;
+                border-radius: 8px;
+                box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+                margin-bottom: 16px !important;
+                padding: 16px;
+                transition:
+                    box-shadow 0.2s ease,
+                    border-color 0.2s ease;
+
+                &:hover {
+                    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+                    border-color: #cbd0d5;
+                }
+            }
+        }
+    }
+}
+
+// Facebook kanban card content - Match EE style
+.oe_kanban_social_dashboard {
+    background-color: transparent;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    // Header section - Account avatar + name + timestamp
+    > .d-flex:first-child {
+        align-items: center;
+        margin-bottom: 0;
+        padding-bottom: 0;
+
+        // Avatar styling
+        img {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            object-fit: cover;
+        }
+
+        // Account name
+        .col-5,
+        .col-md-7,
+        .col-lg-7 {
+            flex-grow: 1;
+            padding-left: 12px;
+
+            span {
+                font-weight: 600;
+                font-size: 14px;
+                color: #1c1e21;
+            }
+        }
+
+        // Timestamp (1 hour, 2 hours, etc.)
+        .col-5.col-md-3.col-lg-3 {
+            flex-shrink: 0;
+            color: #65676b;
+            font-size: 13px;
+            font-weight: 400;
+            text-align: right;
+        }
+    }
+
+    // Content area - Post message and images
+    .oe_kanban_content {
+        margin-bottom: 0;
+
+        .social-text-justify {
+            line-height: 1.4;
+            font-size: 14px;
+            color: #1c1e21;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+
+            // Style links in blue
+            a,
+            .o_link {
+                color: #385898;
+                text-decoration: none;
+
+                &:hover {
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        // Image preview styling
+        .social-post-images {
+            border-radius: 8px;
+            overflow: hidden;
+            max-height: 400px;
+            position: relative;
+
+            img {
+                width: 100%;
+                height: auto;
+                display: block;
+                border-radius: 8px;
+            }
+
+            // +N overlay for multiple images
+            .social-all-images {
+                position: absolute;
+                bottom: 12px;
+                right: 12px;
+                background: rgba(0, 0, 0, 0.6);
+                color: white;
+                padding: 8px 16px;
+                border-radius: 4px;
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    // Footer section - Engagement metrics (EE style)
+    .oe_kanban_footer {
+        border-top: none;
+        padding-top: 0;
+        margin-top: 0;
+
+        // Engagement metrics row - EE style: 👍😂 9,911  💬 75  88 Shares  87,618 Views
+        .row:first-child {
+            margin-bottom: 0;
+            font-size: 13px;
+            color: #65676b;
+
+            .d-flex {
+                gap: 16px;
+                align-items: center;
+
+                > div {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+
+                    i {
+                        font-size: 16px;
+                    }
+
+                    span {
+                        font-weight: 400;
+                    }
+                }
+            }
+        }
+
+        // Remove action buttons (not in EE dashboard view)
+        .row:nth-child(2),
+        .row:nth-child(3) {
+            display: none;
+        }
+
+        hr {
+            display: none;
+        }
+    }
+}
+
+// Engagement metrics styling - EE format
+.oe_kanban_social_dashboard {
+    .oe_kanban_footer {
+        // Emoji reactions styling - unified for all metrics
+        .social-reactions {
+            display: inline-flex;
+            align-items: center;
+            gap: 2px;
+
+            .reaction-emoji {
+                font-size: 16px;
+                line-height: 1;
+            }
+
+            .reaction-count {
+                margin-left: 4px;
+                font-weight: 400;
+                color: #65676b;
+            }
+        }
+    }
+}
+
+// Link styling in post content
+.oe_kanban_content .social-text-justify {
+    // Auto-detect and style URLs
+    .o_field_text {
+        a,
+        [href] {
+            color: #385898;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+}
+
+// Fix double border issue - Dashboard posts should not have nested borders
+.o_kanban_view {
+    // When grouped by accounts, the inner post card should not have borders
+    .o_kanban_group {
+        .o_kanban_record {
+            // This is the group column
+
+            .o_kanban_record {
+                // This is the nested post card - remove its border
+                border: none !important;
+                box-shadow: none !important;
+                padding: 0 !important;
+                margin-bottom: 0 !important;
+
+                // The social dashboard content inside should have no extra styling
+                .oe_kanban_social_dashboard {
+                    border: none !important;
+                    box-shadow: none !important;
+                }
+            }
+        }
+    }
+}
+
+// Responsive design for mobile
+@media (max-width: 768px) {
+    .oe_kanban_social_dashboard {
+        > .d-flex:first-child {
+            .col-2 img {
+                width: 32px;
+                height: 32px;
+            }
+
+            .col-5,
+            .col-md-7,
+            .col-lg-7 span {
+                font-size: 13px;
+            }
+
+            .col-5.col-md-3.col-lg-3 {
+                font-size: 12px;
+            }
+        }
+
+        .oe_kanban_content .social-text-justify {
+            font-size: 13px;
+        }
+
+        .oe_kanban_footer {
+            font-size: 12px;
+        }
+    }
+}

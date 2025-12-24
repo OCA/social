@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="social_media_facebook" model="social.media">
+        <field name="name">Facebook</field>
+        <field name="media_type">facebook</field>
+        <field name="description">Manage your Facebook page and schedule posts</field>
+        <field
+            name="image"
+            type="base64"
+            file="social_media_facebook/static/img/facebook.svg"
+        />
+    </record>
+</odoo>

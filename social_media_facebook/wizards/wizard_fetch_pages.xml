@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_fetch_pages_view_form" model="ir.ui.view">
+        <field name="name">wizard.fetch.pages.form</field>
+        <field name="model">wizard.fetch.pages</field>
+        <field name="arch" type="xml">
+            <form string="Fetch Facebook Pages">
+                <group>
+                    <field name="user_access_token" invisible="1" />
+                    <field name="page_ids" nolabel="1">
+                        <list editable="bottom">
+                            <field name="selected" />
+                            <field name="page_name" readonly="1" />
+                            <field name="page_id" readonly="1" />
+                            <field name="already_connected" readonly="1" />
+                            <!-- page_access_token is stored but not displayed for security -->
+                            <field name="page_access_token" column_invisible="True" />
+                        </list>
+                    </field>
+                </group>
+                <footer>
+                    <button
+                        name="action_create_accounts"
+                        string="Connect Selected Pages"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_wizard_fetch_pages" model="ir.actions.act_window">
+        <field name="name">Select Facebook Pages</field>
+        <field name="res_model">wizard.fetch.pages</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_wizard_fetch_pages" />
+    </record>
+</odoo>

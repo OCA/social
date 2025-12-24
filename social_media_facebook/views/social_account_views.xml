@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Inherit the Social Account form to add Facebook-specific UI -->
+    <record id="social_account_form_view_facebook" model="ir.ui.view">
+        <field name="name">social.account.form.facebook</field>
+        <field name="model">social.account</field>
+        <field name="inherit_id" ref="social_media_base.social_account_form_view" />
+        <field name="arch" type="xml">
+            <!-- Create button_box for smart buttons -->
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box">
+                    <button
+                        name="action_view_posts"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-file-text-o"
+                        invisible="media_type != 'facebook'"
+                    >
+                        <field name="posts_count" widget="statinfo" string="Posts" />
+                    </button>
+                    <button
+                        name="action_view_videos"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-video-camera"
+                        invisible="media_type != 'facebook'"
+                    >
+                        <field name="videos_count" widget="statinfo" string="Videos" />
+                    </button>
+                    <button
+                        name="action_view_ads"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-bullhorn"
+                        invisible="media_type != 'facebook'"
+                    >
+                        <field name="ads_count" widget="statinfo" string="Ads" />
+                    </button>
+                    <button
+                        name="action_view_dashboard_posts"
+                        type="object"
+                        class="oe_stat_button"
+                        icon="fa-dashboard"
+                        invisible="media_type != 'facebook'"
+                    >
+                        <div class="o_field_widget o_stat_info">
+                            <span class="o_stat_text">Dashboard</span>
+                        </div>
+                    </button>
+                </div>
+            </xpath>
+
+            <!-- Add Facebook controls inside the existing 'account_key_token' page -->
+            <xpath expr="//page[@name='account_key_token']" position="inside">
+                <!-- Action buttons (only visible for Facebook accounts) -->
+                <div class="row">
+                    <div class="col-3 mb-3">
+                        <button
+                            type="object"
+                            name="action_sync_facebook_content"
+                            string="Quick Sync"
+                            class="btn-primary"
+                        />
+                    </div>
+                    <div class="col-3 mb-3">
+                        <button
+                            type="object"
+                            name="action_sync_with_date_range"
+                            string="Sync from Date..."
+                            class="btn-info"
+                        />
+                    </div>
+                    <div class="col-3 mb-3">
+                        <button
+                            type="object"
+                            name="action_refresh_facebook_token"
+                            string="Refresh Token"
+                            class="btn-secondary"
+                        />
+                    </div>
+                    <div class="col-3 mb-3">
+                        <button
+                            type="object"
+                            name="action_diagnose_facebook_api"
+                            string="Diagnose API"
+                            class="btn-warning"
+                        />
+                    </div>
+                </div>
+
+                <!-- App Credentials -->
+                <group name="facebook_credentials" string="App Credentials">
+                    <field name="media_type" invisible="1" />
+                    <field name="facebook_app_id" readonly="1" />
+                    <field name="facebook_app_secret" password="True" readonly="1" />
+                    <field
+                        name="facebook_system_user_token"
+                        password="True"
+                        readonly="1"
+                    />
+                    <field name="fb_ad_account_id" placeholder="act_123456789" />
+                </group>
+
+                <!-- Page Information -->
+                <group name="facebook_page_info" string="Page Information">
+                    <field name="page_id" readonly="1" />
+                    <field name="page_name" readonly="1" />
+                    <field name="page_access_token" password="True" readonly="1" />
+                    <field name="token_expires_at" readonly="1" />
+                    <field name="status" />
+                    <!-- Environment: test or production -->
+                    <field name="environment" />
+                </group>
+
+                <!-- Sync Status -->
+                <group name="facebook_sync_status" string="Sync Status">
+                    <field name="last_posts_sync_at" readonly="1" />
+                    <field name="last_reels_sync_at" readonly="1" />
+                    <field name="last_ads_sync_at" readonly="1" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
