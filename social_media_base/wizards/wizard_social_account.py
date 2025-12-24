@@ -1,8 +1,7 @@
 # Copyright 2025 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
-from odoo.exceptions import ValidationError
+from odoo import fields, models
 
 
 class WizardSocialAccount(models.TransientModel):
@@ -47,7 +46,7 @@ class WizardSocialAccount(models.TransientModel):
         Call the method that generates a token state for use in the
         exchange of credentials and access token
         """
-        self._compute_csrf_state_token()
+        pass
 
     def _action_valid_add_account(self):
         """
@@ -66,13 +65,4 @@ class WizardSocialAccount(models.TransientModel):
         pass
 
     def update_account(self):
-        """
-        Method responsible for updating the data according to the selection.
-        """
-        try:
-            return self._update_account()
-        except Exception as ex:
-            raise ValidationError(
-                _("ERROR UPDATE ACCOUNT %(account)s: %(error)s")
-                % {"error": ex, "account": self.account_id.name}
-            ) from ex
+        return self._update_account()

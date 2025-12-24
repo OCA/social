@@ -4,37 +4,233 @@
     <t t-name="social_media_base.SocialCommentDialog">
         <Dialog size="'md'" contentClass="'dialog-post-comment'" title="'Comments'">
             <div class="container dialog-social-comment">
-                <t
-                    t-call="social_media_base.postAccountHeader"
-                    t-call-context="renderingContext"
-                />
-                <t
-                    t-call="social_media_base.postAccountMessageImages"
-                    t-call-context="renderingContext"
-                />
+                <t t-set="record" t-value="props.post" />
+                <t t-set="images" t-value="props.images" />
+                <t t-set="isDialog" t-value="true" />
 
-                <div class="d-flex justify-content-center">
-                    <hr class="my-2 w-95" />
+                <!-- Header with icon and name side by side -->
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <t
+                        t-if="record?.account_id"
+                        t-set="account_id"
+                        t-value="Array.isArray(record.account_id.raw_value) ? record.account_id.raw_value[0] : record.account_id.raw_value"
+                    />
+                    <img
+                        class="rounded flex-shrink-0"
+                        width="40"
+                        height="40"
+                        style="object-fit: contain;"
+                        t-attf-src="/web/image/social.account/{{account_id}}/image_1920"
+                        alt="Account"
+                    />
+                    <div class="d-flex align-items-center gap-2">
+                        <a
+                            t-if="record.post_account_url and record.post_account_url.value"
+                            t-att-href="record.post_account_url.value"
+                            target="_blank"
+                            class="text-primary text-decoration-none fs-5"
+                            style="font-weight: 600;"
+                            t-esc="record.author.raw_value"
+                        />
+                        <span
+                            t-else=""
+                            class="fs-5"
+                            style="font-weight: 600;"
+                            t-esc="record.author.raw_value"
+                        />
+                        <span class="text-muted">· <t
+                            t-esc="record.published_date"
+                        /></span>
+                    </div>
                 </div>
 
-                <Composer
-                    composer="state.thread.composer"
-                    autofocus="true"
-                    showFullComposer="false"
-                    className="'mt-2 composer-comment'"
-                    mode="'extended'"
-                    type="'comment'"
-                    allowUpload="commentAllowUpload"
-                />
-                <div
-                    t-if="comments.length > 0"
-                    class="shadow row mt-2 mx-1 p-1 rounded-5 post-comments "
-                    t-foreach="comments"
-                    t-as="comment"
-                    t-key="comment.id"
-                >
-                    <SocialComment socialComment="comment" post="record" />
+                <!-- Message and images aligned to left (no icon indent) -->
+                <t t-call="social_media_base.postAccountMessageImages" />
+
+                <!-- Engagement metrics bar (like Facebook) -->
+                <div class="row mt-3 mx-1">
+                    <div class="col-12">
+                        <div
+                            class="d-flex justify-content-between align-items-center py-2 border-top border-bottom"
+                        >
+                            <!-- Reactions breakdown -->
+                            <div class="d-flex align-items-center gap-2">
+                                <t
+                                    t-if="record.reactions_by_type_json and record.reactions_by_type_json.value"
+                                >
+                                    <t
+                                        t-set="reactions"
+                                        t-value="JSON.parse(record.reactions_by_type_json.value)"
+                                    />
+                                    <span t-if="reactions.LIKE" class="me-2">👍 <t
+                                        t-esc="reactions.LIKE"
+                                    /></span>
+                                    <span t-if="reactions.LOVE" class="me-2">❤️ <t
+                                        t-esc="reactions.LOVE"
+                                    /></span>
+                                    <span t-if="reactions.HAHA" class="me-2">😂 <t
+                                        t-esc="reactions.HAHA"
+                                    /></span>
+                                    <span t-if="reactions.WOW" class="me-2">😮 <t
+                                        t-esc="reactions.WOW"
+                                    /></span>
+                                    <span t-if="reactions.SAD" class="me-2">😢 <t
+                                        t-esc="reactions.SAD"
+                                    /></span>
+                                    <span t-if="reactions.ANGRY" class="me-2">😡 <t
+                                        t-esc="reactions.ANGRY"
+                                    /></span>
+                                </t>
+                                <t t-else="">
+                                    <span
+                                        t-if="record.like_count and record.like_count.value > 0"
+                                    >
+                                        <span class="reaction-emoji">👍</span>
+                                        <span class="reaction-emoji">😂</span>
+                                        <span t-esc="record.like_count.value" />
+                                    </span>
+                                </t>
+                            </div>
+
+                            <!-- Shares and Views -->
+                            <div class="d-flex align-items-center gap-3">
+                                <span
+                                    t-if="record.share_count and record.share_count.value > 0"
+                                    class="text-muted"
+                                >
+                                    <t t-esc="record.share_count.value" /> Shares
+                                </span>
+                                <span
+                                    t-if="record.view_count and record.view_count.value > 0"
+                                    class="text-muted"
+                                >
+                                    <t
+                                    t-esc="record.view_count_formatted || record.view_count.value"
+                                /> Views
+                                </span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+
+                <!-- New Comment Composer (at top) -->
+                <div class="row mt-3 mx-1">
+                    <div class="col-12">
+                        <div class="d-flex gap-2 align-items-start">
+                            <div class="flex-grow-1">
+                                <textarea
+                                    class="form-control"
+                                    placeholder="Write a comment..."
+                                    t-model="state.newComment"
+                                    rows="2"
+                                />
+                                <!-- Attachment previews -->
+                                <div
+                                    t-if="state.attachments.length > 0"
+                                    class="mt-2 d-flex flex-wrap gap-2"
+                                >
+                                    <t
+                                        t-foreach="state.attachments"
+                                        t-as="file"
+                                        t-key="file_index"
+                                    >
+                                        <div
+                                            class="position-relative border rounded p-2 d-flex align-items-center gap-2"
+                                        >
+                                            <i
+                                                t-if="file.type.startsWith('image/')"
+                                                class="fa fa-file-image-o text-primary"
+                                            />
+                                            <i
+                                                t-elif="file.type.startsWith('video/')"
+                                                class="fa fa-file-video-o text-info"
+                                            />
+                                            <i t-else="" class="fa fa-file-o" />
+                                            <span
+                                                class="small text-truncate"
+                                                style="max-width: 150px;"
+                                                t-esc="file.name"
+                                            />
+                                            <button
+                                                type="button"
+                                                class="btn-close btn-sm"
+                                                t-on-click="() => this.removeAttachment(file_index)"
+                                                style="font-size: 0.7em;"
+                                            />
+                                        </div>
+                                    </t>
+                                </div>
+
+                                <div class="d-flex gap-2 mt-1 align-items-center">
+                                    <button
+                                        t-ref="emojiButton"
+                                        class="btn btn-sm btn-light"
+                                        title="Add emoji"
+                                        type="button"
+                                    >
+                                        <i class="fa fa-smile-o" />
+                                    </button>
+                                    <label
+                                        class="btn btn-sm btn-light mb-0 cursor-pointer"
+                                        title="Attach file"
+                                    >
+                                        <i class="fa fa-paperclip" />
+                                        <input
+                                            t-ref="fileInput"
+                                            type="file"
+                                            class="d-none"
+                                            accept="image/*,video/*"
+                                            multiple="true"
+                                            t-on-change="onFileChange"
+                                        />
+                                    </label>
+                                    <label
+                                        class="btn btn-sm btn-light mb-0 cursor-pointer"
+                                        title="Take photo"
+                                    >
+                                        <i class="fa fa-camera" />
+                                        <input
+                                            t-ref="cameraInput"
+                                            type="file"
+                                            class="d-none"
+                                            accept="image/*"
+                                            capture="environment"
+                                            t-on-change="onFileChange"
+                                        />
+                                    </label>
+                                </div>
+                            </div>
+                            <button
+                                class="btn btn-primary"
+                                t-on-click="sendNewComment"
+                                t-att-disabled="!state.newComment || !state.newComment.trim()"
+                                title="Post comment"
+                            >
+                                <i class="fa fa-send" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comments List -->
+                <t t-if="state.comments.length > 0">
+                    <div
+                        class="row mt-2 mx-1 p-1 post-comments"
+                        t-foreach="state.comments"
+                        t-as="comment"
+                        t-key="comment.id"
+                    >
+                        <SocialComment socialComment="comment" post="record" />
+                    </div>
+                </t>
+
+                <!-- Empty state when no comments -->
+                <t t-else="">
+                    <div class="text-center text-muted py-4">
+                        <i class="fa fa-comments fa-3x mb-3" />
+                        <p>No comments yet. Be the first to comment!</p>
+                    </div>
+                </t>
             </div>
         </Dialog>
     </t>

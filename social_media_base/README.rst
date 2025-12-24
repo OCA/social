@@ -63,8 +63,8 @@ Generate campaign.
 - Fill in the required fields |CREATE_CAMPAIGN|
 - Save
 
-.. |CREATE_GROUP_CAMPAIGN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/CREATE_GROUP_CAMPAIGN.png
-.. |CREATE_CAMPAIGN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/CREATE_CAMPAIGN.png
+.. |CREATE_GROUP_CAMPAIGN| image:: https://raw.githubusercontent.com/social_media_base/static/img/readme/CREATE_GROUP_CAMPAIGN.png
+.. |CREATE_CAMPAIGN| image:: https://raw.githubusercontent.com/social_media_base/static/img/readme/CREATE_CAMPAIGN.png
 
 Bug Tracker
 ===========

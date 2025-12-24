@@ -21,6 +21,38 @@ div.o_kanban_record {
     }
 }
 
+// Fix double borders in grouped kanban view - native Odoo style
+// When kanban is grouped, Odoo adds border/shadow to o_kanban_record wrapper
+// So we remove border/shadow from inner card to prevent double borders
+.o_kanban_grouped {
+    div.oe_kanban_social_dashboard {
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+
+        // Very compact padding for tight layout (reduced by half)
+        padding: 3px !important;
+        background: transparent;
+
+        // Override Odoo's default content/footer padding
+        .oe_kanban_content {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+
+        .oe_kanban_footer {
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+    }
+
+    // The o_kanban_record wrapper already has border/shadow from Odoo
+    .o_kanban_record {
+        background: white;
+        // Odoo's default border and shadow will show here
+    }
+}
+
 .social-text-justify {
     text-align: justify !important;
 }
@@ -38,8 +70,78 @@ img.img-posts {
     }
 }
 
+// Horizontal image gallery styling (v18e style)
+.social-image-link,
+.social-image-more {
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.9;
+    }
+
+    img {
+        transition: transform 0.3s;
+    }
+
+    &:hover img {
+        transform: scale(1.05);
+    }
+}
+
+.social-image-more {
+    .position-absolute {
+        transition: background-color 0.2s;
+    }
+
+    &:hover .position-absolute {
+        background-color: rgba(0, 0, 0, 0.7) !important;
+    }
+}
+
+// Social metrics styling - clean text-based display
+.social-metric {
+    display: inline-flex;
+    align-items: baseline;
+    gap: 4px;
+
+    .fw-bold {
+        font-size: 15px;
+        color: $o-main-text-color;
+    }
+
+    .text-muted {
+        font-size: 13px;
+        color: $text-muted;
+    }
+}
+
+// Clickable comments in dashboard
+.social-comments.social-post-comment {
+    cursor: pointer;
+    transition: opacity 0.2s;
+
+    &:hover {
+        opacity: 0.7;
+    }
+}
+
 div.oe_kanban_social_dashboard,
 div.dialog-social-comment {
+    // Author link styling - external link appearance
+    a.text-primary {
+        transition:
+            opacity 0.2s,
+            text-decoration 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+            text-decoration: underline !important;
+        }
+    }
+
     span.social-like-post {
         border: none;
         font-size: 16px;

@@ -15,6 +15,7 @@
                     name="account_id"
                     required="1"
                     options="{'no_create_edit': True, 'no_create': True}"
+                    invisible="not media_id"
                 />
             </xpath>
         </field>

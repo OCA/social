@@ -7,7 +7,7 @@
     "license": "AGPL-3",
     "author": "BinhexTeam,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
-    "depends": ["base", "web", "mail", "utm"],
+    "depends": ["base", "web", "mail", "utm", "crm"],
     "data": [
         "security/ir.model.access.csv",
         "security/social_account_security.xml",
@@ -18,6 +18,8 @@
         "views/social_account_views.xml",
         "views/social_post_views.xml",
         "views/social_post_account_views.xml",
+        "views/social_comment_views.xml",
+        "views/social_lead_views.xml",
         "views/utm_group_campaign_views.xml",
         "views/utm_campaign_views.xml",
         "views/social_action_client_views.xml",

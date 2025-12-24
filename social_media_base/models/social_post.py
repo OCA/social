@@ -15,8 +15,25 @@ class SocialPost(models.Model):
     _inherit = ["mail.thread", "mail.activity.mixin", "social.post.mixin"]
     _description = "Social Post"
 
-    account_ids = fields.Many2many("social.account", required=True, ondelete="restrict")
+    account_ids = fields.Many2many(
+        "social.account", required=True, ondelete="restrict", string="Accounts"
+    )
     active = fields.Boolean(default=True)
+    content_type = fields.Selection(
+        [
+            ("post", "Post"),
+            ("reel", "Video"),
+            ("story", "Story"),
+            ("ad", "Ad"),
+        ],
+        default="post",
+        required=True,
+        tracking=True,
+        help=(
+            "Type of content: Post, Video, Story, Ad. "
+            "Platforms may support different types."
+        ),
+    )
     message = fields.Text(required=True, tracking=True)
     campaign_id = fields.Many2one("utm.campaign")
     send_post = fields.Selection(
@@ -26,7 +43,9 @@ class SocialPost(models.Model):
         tracking=True,
     )
     send_post_date = fields.Datetime(
-        string="Schedule date", compute="_compute_send_post_date", store=True
+        string="Schedule date",
+        # compute="_compute_send_post_date",
+        store=True,
     )
     published_date = fields.Datetime(tracking=True)
     state = fields.Selection(
@@ -41,6 +60,7 @@ class SocialPost(models.Model):
         tracking=True,
     )
     post_account_ids = fields.One2many("social.post.account", "post_id")
+
     count_post_likes = fields.Integer(
         compute="_compute_post_statistics", default=0, string="Likes"
     )
@@ -62,24 +82,47 @@ class SocialPost(models.Model):
     count_post_interactions = fields.Float(
         compute="_compute_post_statistics", default=0, string="Interactions"
     )
+
     image_ids = fields.Many2many(
         "ir.attachment",
         column1="post_id",
         column2="image_id",
         ondelete="restrict",
         relation="social_network_post_image_rel",
+        string="Images",
+        help=(
+            "Attach multiple images (up to 10). "
+            "Cannot mix images and videos in the same post."
+        ),
     )
+
     video_ids = fields.Many2many(
         "ir.attachment",
         relation="social_network_post_video_rel",
         column1="post_id",
         column2="video_id",
         ondelete="restrict",
+        string="Videos",
+        help="Attach a single video. Cannot mix images and videos in the same post. "
+        "Note: Only the first video will be used for Facebook posts.",
     )
+
     post_preview = fields.Html(compute="_compute_post_preview", store=True)
     message_info = fields.Text(compute="_compute_message_info")
     any_failed_post = fields.Boolean(compute="_compute_any_failed_post")
     hide_post = fields.Boolean(compute="_compute_hide_post")
+
+    # mail.activity.mixin - Override to add groups for cleaner prefetch
+    activity_ids = fields.One2many(groups="base.group_user")
+    activity_state = fields.Selection(groups="base.group_user")
+    activity_user_id = fields.Many2one(groups="base.group_user")
+    activity_type_id = fields.Many2one(groups="base.group_user")
+    activity_type_icon = fields.Char(groups="base.group_user")
+    activity_date_deadline = fields.Date(groups="base.group_user")
+    my_activity_date_deadline = fields.Date(groups="base.group_user")
+    activity_summary = fields.Char(groups="base.group_user")
+    activity_exception_decoration = fields.Selection(groups="base.group_user")
+    activity_exception_icon = fields.Char(groups="base.group_user")
 
     @api.model_create_multi
     def create(self, vals_list):
@@ -120,14 +163,11 @@ class SocialPost(models.Model):
     def _compute_message_info(self):
         pass
 
-    @api.depends("account_ids.media_id.name")
+    @api.depends("account_ids.media_id")
     def _compute_display_name(self):
         for acc in self:
-            media_names = sorted(set(acc.account_ids.mapped("media_id.name")))
-            acc.display_name = (
-                "Post on {}".format(", ".join(media_names))
-                if media_names
-                else "No Post Anywhere"
+            acc.display_name = "Post on {}".format(
+                ", ".join(acc.account_ids.mapped("media_id.name"))
             )
 
     @api.depends("send_post")
@@ -163,16 +203,6 @@ class SocialPost(models.Model):
                 + post.count_post_comments
                 + post.count_post_shares
             )
-            
-    def filter_by_media_types(self, media_types, add_domain=None):
-        domain = [
-            ("media_type", "in", media_types),
-            ("post_id", "=", self.id),
-            ("state", "in", ("ready", "failed")),
-        ]
-        if add_domain:
-            domain += add_domain
-        return self.env["social.post.account"].search(domain)
 
     def filter_by_media_types(self, media_types, add_domain=None):
         domain = [
@@ -194,16 +224,15 @@ class SocialPost(models.Model):
                 raise ValidationError(
                     self.env._(
                         "%(post)s: cannot be cancelled because it "
-                        "is published or in the process of being published."
-                    ),
-                    post=post.display_name,
+                        "is published or in the process of being published.",
+                        post=post.display_name,
+                    )
                 )
             post.state = "cancelled"
 
     def _render_values_preview(self):
         """
-         Add extra values dictionary for preview view, if necessary.
-        :rtype: dict
+        Add extra values dictionary for preview view, if necessary.
         """
         return {}
 
@@ -225,12 +254,12 @@ class SocialPost(models.Model):
             }
             try:
                 render_template += """\n\n""" + IrQweb._render(
-                    f"social_media_{account.media_id.media_type}.social_media_post_preview",
+                    f"social_media_{account.media_id.media_type}.social_network_post_preview",
                     values | self._render_values_preview(),
                 )
             except ValueError:
                 render_template += """\n\n""" + IrQweb._render(
-                    "social_media_base.social_media_post_preview",
+                    "social_media_base.social_network_post_preview",
                     values | self._render_values_preview(),
                 )
         return (
@@ -244,9 +273,9 @@ class SocialPost(models.Model):
         to preview the posts when they are created.
 
         Template ID format:
-         * social_media_{media_type}.social_media_post_preview
+         * social_media_{media_type}.social_network_post_preview
         Example:
-         * social_media_linkedin.social_media_post_preview
+         * social_media_linkedin.social_network_post_preview
 
         As many templates as there are media according to the accounts selected in
         the post will be rendered.
@@ -286,17 +315,23 @@ class SocialPost(models.Model):
         """
         posts_account = []
         for account in self.account_ids:
-            if account.id not in self.post_account_ids.mapped("account_id").ids:
-                posts_account.append(
-                    Command.create(
-                        {
-                            "post_id": self.id,
-                            "account_id": account.id,
-                            "state": "ready",
-                            "message": self.message,
-                        }
-                    )
+            fb_video_url = None
+            if self.video_ids:
+                first_video = self.video_ids[0]
+                # Generate the URL for the video attachment
+                fb_video_url = f"/web/image/{first_video._name}/{first_video.id}/datas"
+
+            posts_account.append(
+                Command.create(
+                    {
+                        "post_id": self.id,
+                        "account_id": account.id,
+                        "state": "ready",
+                        "message": self.message,
+                        "fb_video_url": fb_video_url,
+                    }
                 )
+            )
         return posts_account
 
     def _action_create_post_account(self):
@@ -308,6 +343,7 @@ class SocialPost(models.Model):
             post.write(
                 {
                     "state": "publishing",
+                    "published_date": fields.Datetime.now(),
                     "post_account_ids": post._prepare_post_account_values(),
                 }
             )
@@ -325,16 +361,11 @@ class SocialPost(models.Model):
         It looks for all the posts that are scheduled to be sent
         and sends them to social media.
         """
-        posts = self.env["social.post"].search(
+        post_accounts = self.env["social.post"].search(
             [
-                ("state", "in", ("planned", "publishing")),
+                ("state", "=", "planned"),
                 ("send_post", "=", "schedule"),
                 ("send_post_date", "<=", fields.Datetime.now()),
             ]
         )
-        posts.with_context(
-            **{
-                "social_post_cron": True,
-            }
-        )._action_create_post_account()
-        
+        post_accounts._action_create_post_account()
