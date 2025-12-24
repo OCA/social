@@ -10,6 +10,11 @@ class SocialMediaBaseMixin(models.AbstractModel):
     _name = "social.media.base.mixin"
     _description = "Social Media Base Mixin"
 
+    def _get_account_by_media(self):
+        if self:
+            return self.env["social.account"].search_count([("media_id", "=", self.id)])
+        return None
+
     def _notify_user_client(
         self,
         target=None,

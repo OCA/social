@@ -5,7 +5,7 @@ import base64
 from datetime import datetime
 from unittest.mock import MagicMock, patch
 
-from odoo.addons.base.tests.common import BaseCommon
+from odoo.tests.common import TransactionCase
 
 PATCH_SOCIAL_BASE_UTILS = "odoo.addons.social_media_base.social_utils.{}"
 PATCH_SOCIAL_BAS_MODELS = "odoo.addons.social_media_base.models"
@@ -26,7 +26,7 @@ PATCH_WIZARD_ACCOUNT = "{}.wizard_social_account.WizardSocialAccount.{}".format(
 )
 
 
-class TestSocialMediaBaseCommon(BaseCommon):
+class TestSocialMediaBaseCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

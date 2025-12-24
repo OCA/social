@@ -10,7 +10,7 @@ class SocialMedia(models.Model):
     _description = "Social Media"
 
     """
-        This model defines social medias.
+        This model defines social networks.
     """
 
     name = fields.Char()

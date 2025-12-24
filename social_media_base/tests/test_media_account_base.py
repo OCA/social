@@ -3,9 +3,6 @@
 
 from unittest.mock import patch
 
-from odoo.exceptions import ValidationError
-from odoo.fields import Command
-
 from odoo.addons.social_media_base.tests.test_social_common import (
     TestSocialMediaBaseCommon,
 )
@@ -34,36 +31,65 @@ class TestSocialMediaBase(TestSocialMediaBaseCommon):
             self.assertEqual(len(result), 1)
             mock_search.assert_called_once()
 
-    def test_action_cancel(self):
-        self.social_post_id.action_cancel()
-        self.assertEqual(self.social_post_id.state, "cancelled")
-        post_id = self.SocialPost.create(
-            {
-                "message": "Test",
-                "account_ids": [(6, 0, [self.social_account_id.id])],
-                "state": "publishing",
-            }
-        )
-        with self.assertRaises(ValidationError):
-            post_id.action_cancel()
+    def _patch_bus(self):
+        bus = self.env["bus.bus"]
+        self._calls = []
 
-    def test_prepare_post_account_values(self):
-        other_account_id = self.SocialAccount.create(
-            {
-                "name": "Other Linkedin",
-                "media_id": self.social_media_id.id,
-            }
+        def fake_sendone(self_rec, target, notif_type, payload):
+            self._calls.append((target, notif_type, payload))
+            return None
+
+        self._orig_sendone = type(bus)._sendone
+        type(bus)._sendone = fake_sendone
+
+    def _restore_bus(self):
+        type(self.env["bus.bus"])._sendone = self._orig_sendone
+
+    def setUp(self):
+        super().setUp()
+        self._patch_bus()
+
+    def tearDown(self):
+        self._restore_bus()
+        super().tearDown()
+
+    def test_notify_with_media_danger_includes_error_and_html(self):
+        self.SocialAccount._notify_user_client(
+            target="notif_channel",
+            notif_type="notif_danger",
+            notif_message="Error",
+            media="x",
+            social_name="My page",
         )
-        self.social_post_id.write(
-            {
-                "account_ids": [Command.link(other_account_id.id)],
-            }
+        self.assertEqual(len(self._calls), 1)
+        _, notif_type, payload = self._calls[0]
+        self.assertEqual(notif_type, "notif_danger")
+        self.assertEqual(payload.get("message_type"), "danger")
+        msg = str(payload.get("message"))
+        self.assertIn("X My page", msg)
+        self.assertIn("<b>ERROR:</b>", msg)
+        self.assertIn("Error", msg)
+
+    def test_notify_with_media_info_without_error_label(self):
+        self.SocialAccount._notify_user_client(
+            target="notif_channel",
+            notif_type="notif_info",
+            notif_message="Message info",
+            media="twitter",
+            social_name=False,
         )
-        result = self.social_post_id._prepare_post_account_values()
-        self.assertEqual(len(result), 1)
-        self.assertEqual(result[0][2]["account_id"], other_account_id.id)
+        self.assertEqual(len(self._calls), 1)
+        _, notif_type, payload = self._calls[0]
+        self.assertEqual(notif_type, "notif_info")
+        self.assertEqual(payload.get("message_type"), "info")
+        msg = str(payload.get("message"))
+        self.assertIn("TWITTER", msg)
+        self.assertNotIn("ERROR:", msg)
+        self.assertIn("Message info", msg)
 
     def test_get_result_none(self):
+        result = self.WizardAccount._get_csrf_state_token()
+        self.assertEqual(result, None)
         result = self.WizardAccount._get_url_redirect()
         self.assertEqual(result, None)
         result = self.WizardAccount._action_add_account()

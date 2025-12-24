@@ -45,6 +45,7 @@
                             <field name="username" readonly="1" />
                             <field name="media_id" readonly="1" />
                             <field name="account_url" readonly="0" />
+                            <field name="media_type" invisible="True" />
                         </group>
                         <group>
                             <field name="create_uid" readonly="1" />
@@ -53,18 +54,17 @@
                         </group>
                     </group>
                     <notebook>
-                        <page name="account_configuration" string="Configuration">
+                        <page name="account_key_token" string="Configuration">
                             <group>
-                                <field name="media_type" invisible="1" />
+                                <field name="media_type" invisible="True" />
+                                <field
+                                    name="show_post_calendar"
+                                    widget="boolean_toggle"
+                                />
                             </group>
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
             </form>
         </field>
     </record>

@@ -1,9 +1,9 @@
-import {Component, onMounted, useRef, useState} from "@odoo/owl";
-import {browser} from "@web/core/browser/browser";
+/* global Chart */
+import {Component, onMounted, onWillStart, useRef, useState} from "@odoo/owl";
+import {loadJS} from "@web/core/assets";
 import {ControlPanel} from "@web/search/control_panel/control_panel";
 import {SocialFilter} from "../social_filter/social_filter.esm";
 import {useService} from "@web/core/utils/hooks";
-const {window} = globalThis;
 
 export class SocialChartAccount extends Component {
     static template = "social_media_base.SocialChartAccount";
@@ -27,6 +27,9 @@ export class SocialChartAccount extends Component {
         this.ormService = useService("orm");
         this.chartCtx = useRef("chartAccount");
         this.chart = null;
+        onWillStart(async () => {
+            await loadJS("/web/static/lib/Chart/Chart.js");
+        });
         onMounted(this.loadChart);
         this.state = useState({
             impressionCount: 0,
@@ -41,7 +44,7 @@ export class SocialChartAccount extends Component {
      * This property is a shortcut to access the social chart account that has
      * been given as a prop to this component.
      *
-     * @note This property is read-only.
+     * This property is read-only.
      */
     get chartAccount() {
         return this.props.socialChartAccount;
@@ -68,7 +71,7 @@ export class SocialChartAccount extends Component {
     loadChart(labels, datasets) {
         if (this.chart) this.chart.destroy();
         this.updateTotals(this.chartAccount);
-        this.chart = new browser.window.Chart(this.chartCtx.el, {
+        this.chart = new Chart(this.chartCtx.el, {
             type: "line",
             data: {
                 labels: labels ? labels : this.chartAccount.labels,

@@ -13,88 +13,113 @@
                         name="action_create_post_account"
                         class="oe_highlight"
                         string="Post"
-                        invisible="hide_post"
+                        invisible="state not in ('draft','planned')"
                     />
-                    <button
-                        type="object"
-                        name="action_draft"
-                        string="Draft"
-                        invisible="state in ('draft','published','publishing')"
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options="{'clickable': '0'}"
+                        statusbar_visible="draft,planned,posted"
                     />
-                    <button
-                        type="object"
-                        name="action_cancel"
-                        string="Cancel"
-                        invisible="state in ('draft','cancelled','published','publishing')"
-                    />
-                    <field name="state" widget="statusbar" />
                 </header>
-                <div
-                    invisible="not message_info or state not in ('draft','planned')"
-                    class="alert alert-info"
-                    role="alert"
-                >
-                    <field name="message_info" readonly="1" />
-                </div>
-                <div
-                    invisible="not any_failed_post"
-                    class="alert alert-info"
-                    role="alert"
-                >
-                    Press the publish button to retry sending failed posts.
-                </div>
                 <sheet>
-                    <group>
-                        <group>
-                            <field name="hide_post" invisible="1" />
-                            <field name="any_failed_post" invisible="1" />
+                    <div class="oe_title mb-3">
+                        <h1>YOUR POST</h1>
+                    </div>
+
+                    <!-- Draft/Planned state form -->
+                    <group
+                        invisible="state not in ('draft','planned')"
+                        class="oe_social_post_form"
+                    >
+                        <group class="col-6">
+                            <label for="account_ids" string="Post on" />
                             <field
                                 name="account_ids"
-                                widget="many2many_tags"
-                                readonly="state != 'draft'"
-                                options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                widget="many2many_checkboxes"
+                                nolabel="1"
+                                options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True}"
                             />
-                            <field name="message" readonly="state != 'draft'" />
+
+                            <label for="message" string="Message" />
+                            <field
+                                name="message"
+                                nolabel="1"
+                                placeholder="Write a message or upload an image"
+                            />
+
+                            <label
+                                for="image_ids"
+                                string="Attach Images"
+                                invisible="video_ids"
+                            />
                             <field
                                 name="image_ids"
+                                readonly="state == 'cancelled'"
                                 widget="many2many_binary"
+                                nolabel="1"
+                                invisible="video_ids"
                                 options="{'accepted_file_extensions': 'image/jpeg, image/png, image/jpg'}"
-                                readonly="state != 'draft'"
+                            />
+
+                            <label
+                                for="video_ids"
+                                string="Attach Videos"
+                                invisible="image_ids"
                             />
                             <field
                                 name="video_ids"
                                 widget="many2many_binary"
-                                readonly="state != 'draft'"
+                                nolabel="1"
+                                invisible="image_ids"
+                                options="{'accepted_file_extensions': 'video/*'}"
                             />
-                            <field name="campaign_id" readonly="state != 'draft'" />
+
+                            <label for="campaign_id" string="Campaign" />
                             <field
-                                name="send_post"
-                                readonly="state != 'draft'"
-                                invisible="not message"
+                                name="campaign_id"
+                                nolabel="1"
+                                placeholder="Select campaign (optional)"
                             />
-                            <field
-                                name="send_post_date"
-                                readonly="send_post != 'schedule' or state != 'draft'"
-                                invisible="send_post != 'schedule'"
-                                required="send_post == 'schedule'"
-                            />
+
+                            <label for="send_post" string="When" />
+                            <div class="d-flex flex-column">
+                                <div>
+                                    <field
+                                        name="send_post"
+                                        widget="radio"
+                                        nolabel="1"
+                                    />
+                                </div>
+                                <group class="row">
+                                    <field
+                                        name="send_post_date"
+                                        readonly="0"
+                                        invisible="send_post == 'now'"
+                                        required="send_post == 'schedule'"
+                                        class="mt-2"
+                                    />
+                                </group>
+                            </div>
                         </group>
-                        <group invisible="state not in ('draft','planned','cancelled')">
+
+                        <!-- Preview on the right -->
+                        <group class="col-6">
                             <div class="post-preview">
                                 <field name="post_preview" nolabel="1" />
                             </div>
                         </group>
                     </group>
-                    <notebook
-                        invisible="state in ('draft','planned','cancelled') and (post_account_ids and not any_failed_post)"
-                    >
-                        <page
-                            name="post_account_ids"
-                            string="Posts"
-                            invisible="not post_account_ids"
-                        >
+
+                    <!-- Published state view -->
+                    <div invisible="state in ('draft','planned')">
+                        <field name="message" readonly="1" />
+                    </div>
+
+                    <notebook invisible="state in ('draft','planned')">
+                        <page name="post_account_ids" string="Posts">
                             <field name="post_account_ids" nolabel="1" readonly="1">
-                                <kanban js_class="social_kanban">
+                                <kanban js_class="social_kanban" open="open_full_view">
                                     <field name="message" />
                                     <field name="published_date" />
                                     <field name="image_urls" />
@@ -104,21 +129,13 @@
                                     <field name="author" />
                                     <field name="state" />
                                     <field name="media_type" />
+                                    <field name="media_id" />
                                     <field name="account_id" />
                                     <templates>
                                         <t t-name="card">
                                             <div
-                                                t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                                                t-attf-class="rounded oe_kanban_global_click oe_kanban_social_dashboard d-flex flex-column justify-content-between"
                                             >
-                                                <div class="d-flex justify-content-end">
-                                                    <field
-                                                        name="state"
-                                                        widget="badge"
-                                                        decoration-muted="state == 'ready'"
-                                                        decoration-success="state == 'posted'"
-                                                        decoration-danger="state == 'failed'"
-                                                    />
-                                                </div>
                                                 <t
                                                     t-call="social_media_base.postAccountHeader"
                                                 />
@@ -137,6 +154,32 @@
                                     </templates>
                                 </kanban>
                             </field>
+                        </page>
+                        <page
+                            name="images_videos"
+                            string="Images &amp; Videos"
+                            invisible="not image_ids and not video_ids"
+                        >
+                            <group>
+                                <group string="Images" invisible="not image_ids">
+                                    <field
+                                        name="image_ids"
+                                        nolabel="1"
+                                        widget="many2many_binary"
+                                        readonly="1"
+                                        options="{'accepted_file_extensions': 'image/*'}"
+                                    />
+                                </group>
+                                <group string="Videos" invisible="not video_ids">
+                                    <field
+                                        name="video_ids"
+                                        nolabel="1"
+                                        widget="many2many_binary"
+                                        readonly="1"
+                                        options="{'accepted_file_extensions': 'video/*'}"
+                                    />
+                                </group>
+                            </group>
                         </page>
                     </notebook>
                 </sheet>
@@ -261,6 +304,95 @@
         <field name="model">social.post</field>
         <field name="arch" type="xml">
             <search>
+                <!-- Search Fields -->
+                <field name="message" string="Message" />
+                <field name="account_ids" string="Account" />
+                <field name="campaign_id" string="Campaign" />
+                <field name="content_type" />
+
+                <!-- Content Type Filters -->
+                <filter
+                    name="filter_posts"
+                    string="Posts Only"
+                    domain="[('content_type', '=', 'post')]"
+                />
+                <filter
+                    name="filter_videos"
+                    string="Videos Only"
+                    domain="[('content_type', '=', 'reel')]"
+                />
+                <filter
+                    name="filter_ads"
+                    string="Ads Only"
+                    domain="[('content_type', '=', 'ad')]"
+                />
+                <separator />
+
+                <!-- State Filters -->
+                <filter
+                    name="filter_draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="filter_planned"
+                    string="Planned"
+                    domain="[('state', '=', 'planned')]"
+                />
+                <filter
+                    name="filter_published"
+                    string="Published"
+                    domain="[('state', '=', 'published')]"
+                />
+                <separator />
+
+                <!-- Date Filters -->
+                <filter
+                    name="filter_today"
+                    string="Today"
+                    domain="[('create_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_this_week"
+                    string="This Week"
+                    domain="[('create_date', '&gt;=', (context_today() - relativedelta(weeks=1)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_this_month"
+                    string="This Month"
+                    domain="[('create_date', '&gt;=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-%d'))]"
+                />
+                <separator />
+
+                <!-- Group By -->
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_campaign"
+                        string="Campaign"
+                        context="{'group_by': 'campaign_id'}"
+                    />
+                    <filter
+                        name="group_by_content_type"
+                        string="Content Type"
+                        context="{'group_by': 'content_type'}"
+                    />
+                    <filter
+                        name="group_by_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_by_create_date"
+                        string="Creation Date"
+                        context="{'group_by': 'create_date:month'}"
+                    />
+                    <filter
+                        name="group_by_send_post_date"
+                        string="Scheduled Date"
+                        context="{'group_by': 'send_post_date:day'}"
+                    />
+                </group>
+
                 <searchpanel>
                     <field name="state" enable_counters="1" />
                     <field
@@ -280,7 +412,27 @@
         <field name="res_model">social.post</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="social_post_view_search" />
-        <field name="domain">[]</field>
-        <field name="context">{}</field>
+        <field name="domain">[('content_type', 'in', ['post', 'reel'])]</field>
+        <field name="context">{'default_content_type': 'post'}</field>
+    </record>
+
+    <!-- Reels Action (content_type = 'reel') -->
+    <record model="ir.actions.act_window" id="social_reels_act_window_kanban">
+        <field name="name">Reels</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[('content_type', '=', 'reel')]</field>
+        <field name="context">{'default_content_type': 'reel'}</field>
+    </record>
+
+    <!-- Ads Action (content_type = 'ad') -->
+    <record model="ir.actions.act_window" id="social_ads_act_window_kanban">
+        <field name="name">Ads</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[('content_type', '=', 'ad')]</field>
+        <field name="context">{'default_content_type': 'ad'}</field>
     </record>
 </odoo>

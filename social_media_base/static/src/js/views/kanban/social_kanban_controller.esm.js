@@ -3,7 +3,6 @@ import {useBus, useService} from "@web/core/utils/hooks";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
 import {SocialAccount} from "@social_media_base/components/social_account/social_account.esm";
 import {_t} from "@web/core/l10n/translation";
-import {session} from "@web/session";
 
 export class SocialKanbanController extends KanbanController {
     /**
@@ -77,12 +76,11 @@ export class SocialKanbanController extends KanbanController {
     async _onUpdatePostsAndStatistics() {
         this.model.SyncPosts = true;
         await this._updatePostsAndStatistics();
-        if (this.socialAccounts.length > 0 && !session.social_error)
+        this.model.SyncPosts = false;
+        if (this.socialAccounts.length > 0)
             this.notificationService.add(_t("The data was updated successfully."), {
                 type: "info",
             });
-        this.model.SyncPosts = false;
-        session.social_error = false;
         this.env.bus.trigger("SOCIAL:NEED-UPDATE", {
             needUpdate: false,
         });

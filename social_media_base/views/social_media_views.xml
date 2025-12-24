@@ -12,28 +12,39 @@
                 <field name="image" />
                 <templates>
                     <t t-name="card">
-                        <div class="d-flex rounded">
-                            <t
-                                t-set="image_account"
-                                t-value="record.image.value ? '/web/image/social.media/' + record.id.raw_value + '/image' : '/web/static/img/placeholder.png'"
-                            />
-                            <img
-                                t-att-src="image_account"
-                                class="img img-fluid"
-                                height="50"
-                                width="100"
-                                t-att-alt="record.name.value"
-                            />
-                            <div class="d-flex flex-column p-2">
-                                <h5 class="title" t-esc="record.name.value" />
-                                <p class="text" t-esc="record.description.value" />
-                                <button
-                                    type="object"
-                                    class="btn btn-primary"
-                                    name="open_action_account"
-                                >Associate account
-                                </button>
+                        <div class="oe_kanban_card d-flex flex-column p-3">
+                            <!-- Top section: Icon + Content in 2 columns -->
+                            <div class="d-flex align-items-start mb-3">
+                                <!-- Icon column -->
+                                <div class="flex-shrink-0 me-3">
+                                    <img
+                                        t-att-src="record.image.value ? '/web/image/social.media/' + record.id.raw_value + '/image' : '/social_media_base/static/description/icon.png'"
+                                        class="rounded"
+                                        style="width: 80px; height: 80px; object-fit: contain;"
+                                        t-att-alt="record.name.raw_value"
+                                    />
+                                </div>
+
+                                <!-- Content column -->
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <h5
+                                        class="mb-1 fw-bold"
+                                        t-esc="record.name.raw_value"
+                                    />
+                                    <p
+                                        class="text-muted mb-0 small"
+                                        t-esc="record.description.raw_value"
+                                    />
+                                </div>
                             </div>
+
+                            <!-- Bottom section: Full-width button -->
+                            <button
+                                type="object"
+                                class="btn btn-primary w-100 mt-auto"
+                                name="open_action_account"
+                            >Link account
+                            </button>
                         </div>
                     </t>
                 </templates>

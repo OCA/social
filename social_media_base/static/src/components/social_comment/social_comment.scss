@@ -9,6 +9,11 @@ div.dialog-social-comment {
         }
         background-color: rgba(0, 0, 0, 0.03) !important;
         @include border-radius(2rem);
+
+        // Reply textbox - white background for editability indication
+        textarea.form-control {
+            background-color: white !important;
+        }
     }
 
     div.o-dropdown {
