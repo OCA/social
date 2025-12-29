@@ -3,3 +3,4 @@
 
 - [Tecnativa](https://tecnativa.com)
   - Carlos Roca
+  - Eduardo Ezerouali
