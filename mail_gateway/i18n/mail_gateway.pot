@@ -154,12 +154,6 @@ msgid "Create new partner"
 msgstr ""
 
 #. module: mail_gateway
-#. odoo-javascript
-#: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-msgid "Create partner"
-msgstr ""
-
-#. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__create_uid
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__create_uid
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__create_uid
@@ -497,12 +491,6 @@ msgid ""
 msgstr ""
 
 #. module: mail_gateway
-#. odoo-javascript
-#: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-msgid "Manage guest"
-msgstr ""
-
-#. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__member_ids
 msgid "Member"
 msgstr ""
@@ -544,6 +532,12 @@ msgstr ""
 
 #. module: mail_gateway
 #. odoo-javascript
+#: code:addons/mail_gateway/static/src/core/common/thread_actions.esm.js:0
+msgid "New Partner"
+msgstr ""
+
+#. module: mail_gateway
+#. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/gateway_follower/gateway_follower.xml:0
 msgid "Not selected"
 msgstr ""
@@ -556,6 +550,12 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__object_attachment_ids
 msgid "Object Attachments"
+msgstr ""
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/core/common/thread_actions.esm.js:0
+msgid "Open Contact"
 msgstr ""
 
 #. module: mail_gateway
