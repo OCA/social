@@ -6,35 +6,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-05-28 16:26+0000\n"
-"Last-Translator: Anna Martínez <anna080678@gmail.com>\n"
+"PO-Revision-Date: 2025-12-30 18:43+0000\n"
+"Last-Translator: \"Pedro M. Baeza\" <pedro.baeza@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__res_domain
 msgid "Active domain"
-msgstr ""
+msgstr "Dominio activo"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__email_add_signature
 msgid "Add signature"
-msgstr ""
+msgstr "Añadir firma"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__partner_ids
 msgid "Additional Contacts"
-msgstr ""
+msgstr "Contactos adicionales"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__record_alias_domain_id
 msgid "Alias Domain"
-msgstr ""
+msgstr "Dominio del alias"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__anonymous_name
@@ -44,17 +44,17 @@ msgstr "Nombre anónimo"
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_guest_manage
 msgid "Assign gateway guest to a partner"
-msgstr ""
+msgstr "Asignar invitado de la pasarela a un contacto"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__attachment_ids
 msgid "Attachments"
-msgstr ""
+msgstr "Adjuntos"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__author_id
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__author_id
@@ -62,26 +62,28 @@ msgid ""
 "Author of the message. If not set, email_from may hold an email address that "
 "did not match any partner."
 msgstr ""
+"Autor del mensaje. Si no está establecido, email_from contendrá la dirección "
+"de correo que no se ha casado con ningún contacto."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__composition_batch
 msgid "Batch composition"
-msgstr ""
+msgstr "Composición en lote"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__partner_bcc_ids
 msgid "Bcc"
-msgstr ""
+msgstr "CCO"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__body_has_template_value
 msgid "Body content is the same as the template"
-msgstr ""
+msgstr "El contenido del cuerpo es el mismo que la plantilla"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__can_edit_body
 msgid "Can Edit Body"
-msgstr ""
+msgstr "Puede editar el cuerpo"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__can_set_webhook
@@ -98,7 +100,7 @@ msgstr "Cancelar"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__partner_cc_ids
 msgid "Cc"
-msgstr ""
+msgstr "CC"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__channel_type
@@ -118,13 +120,13 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__use_exclusion_list
 msgid "Check Exclusion List"
-msgstr ""
+msgstr "Comprobar lista de exclusión"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_message_ids
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_message_ids
 msgid "Child gateway messages"
-msgstr ""
+msgstr "Mensajes de pasarela hijos"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__company_id
@@ -137,12 +139,12 @@ msgstr "Compañía"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__composition_mode
 msgid "Composition mode"
-msgstr ""
+msgstr "Modo de composición"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__reply_to_force_new
 msgid "Considers answers as new thread"
-msgstr ""
+msgstr "Considerar respuestas como nuevo hilo"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_partner
@@ -152,7 +154,7 @@ msgstr "Contacto"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__body
 msgid "Contents"
-msgstr ""
+msgstr "Contenido"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_guest_manage_form_view
@@ -182,7 +184,7 @@ msgstr "Creado el"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__auto_delete
 msgid "Delete Emails"
-msgstr ""
+msgstr "Borrar correos"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_discuss_channel
@@ -202,7 +204,7 @@ msgstr "Mostrar Nombre"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__email_layout_xmlid
 msgid "Email Notification Layout"
-msgstr ""
+msgstr "Disposición de la notificación de correo"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_thread
@@ -215,6 +217,8 @@ msgid ""
 "Email address of the sender. This field is set when no matching partner is "
 "found and replaces the author_id field in the chatter."
 msgstr ""
+"Dirección de correo electrónico del emisor. Este campo se establece cuando "
+"no se encuentra ningún contacto, y reemplaza al campo Autor en el chatter."
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_notification__gateway_failure_reason
@@ -229,7 +233,7 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__email_from
 msgid "From"
-msgstr ""
+msgstr "De"
 
 #. module: mail_gateway
 #. odoo-javascript
@@ -250,7 +254,7 @@ msgstr "Pasarela"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_res_users_settings__is_discuss_sidebar_category_gateway_open
 msgid "Gateway Category Open"
-msgstr ""
+msgstr "Abrir categoría de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_channel_ids
@@ -260,53 +264,53 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner__gateway_channel_ids
 #: model:ir.model.fields,field_description:mail_gateway.field_res_users__gateway_channel_ids
 msgid "Gateway Channel"
-msgstr ""
+msgstr "Canal de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_channel_data
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_channel_data
 msgid "Gateway Channel Data"
-msgstr ""
+msgstr "Datos de canal de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__gateway_channel_token
 msgid "Gateway Channel Token"
-msgstr ""
+msgstr "Token de canal de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_failure_reason
 msgid "Gateway Failure Reason"
-msgstr ""
+msgstr "Razón de fallo de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__gateway_message_ids
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_message_id
 msgid "Gateway Message"
-msgstr ""
+msgstr "Mensaje de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_notification_ids
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_notification_ids
 msgid "Gateway Notification"
-msgstr ""
+msgstr "Notificación de pasarela"
 
 #. module: mail_gateway
 #: model:ir.actions.act_window,name:mail_gateway.res_partner_gateway_channel_act_window
 #: model:ir.ui.menu,name:mail_gateway.res_partner_gateway_channel_menu
 msgid "Gateway Partner Channels"
-msgstr ""
+msgstr "Canales de contacto de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_thread_data
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_thread_data
 msgid "Gateway Thread Data"
-msgstr ""
+msgstr "Datos de hilo de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest__gateway_token
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__gateway_token
 msgid "Gateway Token"
-msgstr ""
+msgstr "Token de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__gateway_type
@@ -314,39 +318,39 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_type
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__gateway_type
 msgid "Gateway Type"
-msgstr ""
+msgstr "Tipo de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_gateway_abstract
 msgid "Gateway abstract for functions"
-msgstr ""
+msgstr "Pasarela abstracta para funciones"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
 msgid "Gateway message"
-msgstr ""
+msgstr "Mensaje de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_discuss_channel__gateway_token
 msgid "Gateway related Token"
-msgstr ""
+msgstr "Token relacionado de pasarela"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_compose_gateway_message_form_view
 msgid "Gateways"
-msgstr ""
+msgstr "Pasarelas"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_guest
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__guest_id
 msgid "Guest"
-msgstr ""
+msgstr "Invitado"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__has_new_channel_security
 msgid "Has New Channel Security"
-msgstr ""
+msgstr "Canales con seguridad extendida"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__id
@@ -356,7 +360,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__id
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__scheduled_date
@@ -365,53 +369,59 @@ msgid ""
 "if sent, send emails after that date. This date is considered as being in "
 "UTC timezone."
 msgstr ""
+"En modo comentario: si está establecido, se pospone el envío de "
+"notificaciones. En modo envío masivo: si está establecido, se envían los "
+"correos después de esa fecha. Esta fecha se considera establecido en zona de "
+"tiempo UTC."
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
 msgid "Integrate Webhook"
-msgstr ""
+msgstr "Integrar webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields.selection,name:mail_gateway.selection__mail_gateway__integrated_webhook_state__integrated
 msgid "Integrated"
-msgstr ""
+msgstr "Integrada"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__integrated_webhook_state
 msgid "Integrated Webhook State"
-msgstr ""
+msgstr "Estado de integración del webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__is_mail_template_editor
 msgid "Is Editor"
-msgstr ""
+msgstr "Es editor"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__subtype_is_log
 msgid "Is a log"
-msgstr ""
+msgstr "Es una nota"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__auto_delete_keep_log
 msgid "Keep Message Copy"
-msgstr ""
+msgstr "Mantener copia del mensaje"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__auto_delete_keep_log
 msgid ""
 "Keep a copy of the email content if emails are removed (mass mailing only)"
 msgstr ""
+"Mantener una copia del contenido del correo si los correos son eliminados ("
+"solo para envíos masivos)"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_discuss_channel__gateway_token
 #: model:ir.model.fields,help:mail_gateway.field_mail_gateway__token
 msgid "Key used for integration purposes"
-msgstr ""
+msgstr "Clave usada para propósitos de integración"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_gateway__webhook_key
 msgid "Key used on the connection URL"
-msgstr ""
+msgstr "Clave usada en la URL de conexión"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_gateway__webhook_secret
@@ -419,11 +429,13 @@ msgid ""
 "Key used to ensure that the connection is secure and\n"
 "        comes from the desired source"
 msgstr ""
+"Clave usada para asegurar que la conexión es segura y\n"
+"        viene de una fuente deseada"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__lang
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__write_uid
@@ -433,7 +445,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__write_uid
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__write_date
@@ -443,54 +455,54 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__write_date
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última actualización el"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_link_form_view
 msgid "Link"
-msgstr ""
+msgstr "Enlace"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
 msgid "Link Message to thread"
-msgstr ""
+msgstr "Enlazar mensaje a hilo"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_message_gateway_link
 msgid "Link message from gateway"
-msgstr ""
+msgstr "Enlazar mensaje desde pasarela"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/core/common/message_actions.esm.js:0
 msgid "Link to thread"
-msgstr ""
+msgstr "Enlazar a hilo"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mail_activity_type_id
 msgid "Mail Activity Type"
-msgstr ""
+msgstr "Tipo de actividad de correo"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_compose_gateway_message
 msgid "Mail Compose Gateway Message"
-msgstr ""
+msgstr "Compositor de correos de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_gateway
 msgid "Mail Gateway"
-msgstr ""
+msgstr "Pasarela de mensajes"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_link_form_view
 msgid "Mail Message Gateway Link"
-msgstr ""
+msgstr "Enlace de mensaje de pasarela"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_send_form_view
 msgid "Mail Message Gateway Send"
-msgstr ""
+msgstr "Envío de mensaje de pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to_force_new
@@ -498,33 +510,35 @@ msgid ""
 "Manage answers as new incoming emails instead of replies going to the same "
 "thread."
 msgstr ""
+"Administrar respuestas como nuevos correos en lugar de respuestas yendo al "
+"mismo hilo."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__member_ids
 msgid "Member"
-msgstr ""
+msgstr "Miembro"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
 msgid "Members"
-msgstr ""
+msgstr "Miembros"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_guest_manage_form_view
 msgid "Merge"
-msgstr ""
+msgstr "Fusionar"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_message
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__message_id
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__message_id
 msgid "Message"
-msgstr ""
+msgstr "Mensaje"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_notification
 msgid "Message Notifications"
-msgstr ""
+msgstr "Notificaciones de mensaje"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__message_type
@@ -532,12 +546,14 @@ msgid ""
 "Message type: email for email message, notification for system message, "
 "comment for other messages such as user replies"
 msgstr ""
+"Tipo de mensaje: email para mensaje de correo, notification para mensaje de "
+"sistema, comment para otros mensajes tales como respuestas de usuarios"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__name
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: mail_gateway
 #. odoo-javascript
@@ -549,17 +565,17 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/gateway_follower/gateway_follower.xml:0
 msgid "Not selected"
-msgstr ""
+msgstr "No seleccionado"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_notification__notification_type
 msgid "Notification Type"
-msgstr ""
+msgstr "Tipo de notificación"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__object_attachment_ids
 msgid "Object Attachments"
-msgstr ""
+msgstr "Adjuntos de objeto"
 
 #. module: mail_gateway
 #. odoo-javascript
@@ -575,6 +591,10 @@ msgid ""
 "a placeholder expression that provides the appropriate language, e.g. "
 "{{ object.partner_id.lang }}."
 msgstr ""
+"Idioma de traducción opcional (código ISO) para seleccionar cuando se envía "
+"un correo. Si no está establecido, se usará la versión inglesa. Esto suele "
+"ser normalmente una expresión que provee el idioma apropiado, p. e. {{ "
+"object.partner_id.lang }}."
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to_mode
@@ -585,79 +605,85 @@ msgid ""
 "tracking message-id instead of original document discussion thread. \n"
 " This has an impact on the generated message-id."
 msgstr ""
+"Discusión original: Las respuestas van en el hilo de discusión del documento "
+"original. \n"
+" Otra dirección de correo: Las respuestas van a la dirección de correo "
+"electrónico mencionada en el message-id rastreado en lugar de en el hilo de "
+"discusión del documento original. \n"
+" Esto tiene un impacto en el message-id generado."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_mail__gateway_message_id
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_message_id
 msgid "Original gateway message"
-msgstr ""
+msgstr "Mensaje de pasarela original"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__mail_server_id
 msgid "Outgoing mail server"
-msgstr ""
+msgstr "Servido de correo saliente"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__parent_id
 msgid "Parent Message"
-msgstr ""
+msgstr "Mensaje padre"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__partner_id
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_send__partner_id
 #: model:ir.model.fields,field_description:mail_gateway.field_res_partner_gateway_channel__partner_id
 msgid "Partner"
-msgstr ""
+msgstr "Contacto"
 
 #. module: mail_gateway
 #: model:ir.model.constraint,message:mail_gateway.constraint_res_partner_gateway_channel_unique_partner_gateway
 msgid "Partner can only have one configuration for each gateway."
-msgstr ""
+msgstr "El contacto solo puede tener una configuración para cada pasarela."
 
 #. module: mail_gateway
 #: model:ir.model.fields.selection,name:mail_gateway.selection__mail_gateway__integrated_webhook_state__pending
 msgid "Pending"
-msgstr ""
+msgstr "Pendiente"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__record_name
 msgid "Record Name"
-msgstr ""
+msgstr "Nombre del registro"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message_gateway_link__resource_ref
 msgid "Record reference"
-msgstr ""
+msgstr "Referencia al registro"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__res_ids
 msgid "Related Document IDs"
-msgstr ""
+msgstr "IDs de los documentos relacionados"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__model
 msgid "Related Document Model"
-msgstr ""
+msgstr "Modelo del documento relacionado"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
 msgid "Remove Webhook"
-msgstr ""
+msgstr "Eliminar webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__render_model
 msgid "Rendering Model"
-msgstr ""
+msgstr "Modelo para renderizado"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__reply_to_mode
 msgid "Replies"
-msgstr ""
+msgstr "Respuestas"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__reply_to
 msgid "Reply To"
-msgstr ""
+msgstr "Responder a"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to
@@ -665,81 +691,83 @@ msgid ""
 "Reply email address. Setting the reply_to bypasses the automatic thread "
 "creation."
 msgstr ""
+"Dirección de correo electrónico de respuesta. Estableciendo este dato, se "
+"evita la creación automática de hilos."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__res_domain_user_id
 msgid "Responsible"
-msgstr ""
+msgstr "Responsable"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__scheduled_date
 msgid "Scheduled Date"
-msgstr ""
+msgstr "Fecha planificada"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/core/common/discuss_app_model_patch.esm.js:0
 msgid "Search Gateway Channel"
-msgstr ""
+msgstr "Buscar canal de pasarela"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_message_gateway_send_form_view
 msgid "Send"
-msgstr ""
+msgstr "Enviar"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_message_gateway_send
 msgid "Send Message through gateway"
-msgstr ""
+msgstr "Enviar mensaje a través de la pasarela"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
 msgid "Send a message to a gateway..."
-msgstr ""
+msgstr "Enviar un mensaje a una pasarela..."
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/composer/composer.esm.js:0
 msgid "Send gateway"
-msgstr ""
+msgstr "Enviar a pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__force_send
 msgid "Send mailing or notifications directly"
-msgstr ""
+msgstr "Enviar correos o notificaciones directamente"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
 #: code:addons/mail_gateway/static/src/core/common/message_actions.esm.js:0
 msgid "Send with gateway"
-msgstr ""
+msgstr "Enviar con pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__subject
 msgid "Subject"
-msgstr ""
+msgstr "Asunto"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__subtype_id
 msgid "Subtype"
-msgstr ""
+msgstr "Subtipo"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_partner_gateway_channel
 msgid "Technical data used to get the gateway author"
-msgstr ""
+msgstr "Datos técnicos usados para obtener el autor de la pasarela"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__template_name
 msgid "Template Name"
-msgstr ""
+msgstr "Nombre del plantilla"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_res_users_settings__is_discuss_sidebar_category_gateway_open
 msgid "The gateway category in the sidebar will be open"
-msgstr ""
+msgstr "La categoría de pasarela en la barra lateral será abierta"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__auto_delete
@@ -748,118 +776,124 @@ msgid ""
 "including from the Technical menu in the Settings, in order to preserve "
 "storage space of your Odoo database."
 msgstr ""
+"Esta opción elimina permanentemente cualquier rastro de correo después de "
+"que es enviado, incluyendo el menú Técnico dentro de Ajustes, con la "
+"finalidad de preservar espacio de almacenamientos en su base de datos de "
+"Odoo."
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__model_is_thread
 msgid "Thread-Enabled"
-msgstr ""
+msgstr "Hilo habilitado"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
 msgid "To:"
-msgstr ""
+msgstr "A:"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__token
 msgid "Token"
-msgstr ""
+msgstr "Token"
 
 #. module: mail_gateway
 #: model:ir.model.constraint,message:mail_gateway.constraint_mail_gateway_mail_gateway_token
 msgid "Token must be unique"
-msgstr ""
+msgstr "El token debe ser único"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__message_type
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #. module: mail_gateway
 #: model_terms:ir.ui.view,arch_db:mail_gateway.mail_gateway_form_view
 msgid "Update Webhook"
-msgstr ""
+msgstr "Actualizar webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__template_id
 msgid "Use template"
-msgstr ""
+msgstr "Usar plantilla"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__res_domain_user_id
 msgid "Used as context used to evaluate composer domain"
-msgstr ""
+msgstr "Contexto usado para evaluar el dominio del compositor"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_users
 #: model:res.groups,name:mail_gateway.gateway_user
 msgid "User"
-msgstr ""
+msgstr "Usuario"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_res_users_settings
 msgid "User Settings"
-msgstr ""
+msgstr "Configuración del usuario"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_gateway__webhook_user_id
 msgid "User that will create the messages"
-msgstr ""
+msgstr "Usuario que creará los mensajes"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_key
 msgid "Webhook Key"
-msgstr ""
+msgstr "Clave de webhook"
 
 #. module: mail_gateway
 #: model:ir.model.constraint,message:mail_gateway.constraint_mail_gateway_mail_gateway_webhook_key
 msgid "Webhook Key must be unique"
-msgstr ""
+msgstr "La clave de webhook debe ser única"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_secret
 msgid "Webhook Secret"
-msgstr ""
+msgstr "Secreto de webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_url
 msgid "Webhook Url"
-msgstr ""
+msgstr "URL de webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__webhook_user_id
 msgid "Webhook User"
-msgstr ""
+msgstr "Usuario de webhook"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_gateway__has_new_channel_security
 msgid ""
 "When checked, channels are not created automatically. Usable on Telegram"
 msgstr ""
+"Cuando está marcado, los canales no se crean automáticamente. Utilizable en "
+"Telegram"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__wizard_channel_ids
 msgid "Wizard Channel"
-msgstr ""
+msgstr "Asistente de canal"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__wizard_partner_ids
 msgid "Wizard Partner"
-msgstr ""
+msgstr "Asistente de contacto"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/chatter/chatter.xml:0
 msgid "gateway"
-msgstr ""
+msgstr "pasarela"
 
 #. module: mail_gateway
 #. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/message/message.xml:0
 msgid "on"
-msgstr ""
+msgstr "en"
 
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_ir_websocket
 msgid "websocket message handling"
-msgstr ""
+msgstr "manipulación de mensaje websocket"
