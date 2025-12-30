@@ -162,12 +162,6 @@ msgid "Create new partner"
 msgstr "Crea nuovo partner"
 
 #. module: mail_gateway
-#. odoo-javascript
-#: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-msgid "Create partner"
-msgstr "Crea partner"
-
-#. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__create_uid
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__create_uid
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_guest_manage__create_uid
@@ -414,8 +408,8 @@ msgstr "Mantieni copia messaggio"
 msgid ""
 "Keep a copy of the email content if emails are removed (mass mailing only)"
 msgstr ""
-"Conservare una copia del contenuto dell'e-mail se le e-mail vengono rimosse ("
-"solo per l'invio di massa)"
+"Conservare una copia del contenuto dell'e-mail se le e-mail vengono rimosse "
+"(solo per l'invio di massa)"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_discuss_channel__gateway_token
@@ -519,12 +513,6 @@ msgstr ""
 "inviate alla stessa discussione."
 
 #. module: mail_gateway
-#. odoo-javascript
-#: code:addons/mail_gateway/static/src/components/message/message_patch.esm.js:0
-msgid "Manage guest"
-msgstr "Gestione ospite"
-
-#. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_gateway__member_ids
 msgid "Member"
 msgstr "Membro"
@@ -568,6 +556,12 @@ msgstr "Nome"
 
 #. module: mail_gateway
 #. odoo-javascript
+#: code:addons/mail_gateway/static/src/core/common/thread_actions.esm.js:0
+msgid "New Partner"
+msgstr ""
+
+#. module: mail_gateway
+#. odoo-javascript
 #: code:addons/mail_gateway/static/src/components/gateway_follower/gateway_follower.xml:0
 msgid "Not selected"
 msgstr "Non selezionato"
@@ -581,6 +575,12 @@ msgstr "Tipo notifica"
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__object_attachment_ids
 msgid "Object Attachments"
 msgstr "Allegati oggetto"
+
+#. module: mail_gateway
+#. odoo-javascript
+#: code:addons/mail_gateway/static/src/core/common/thread_actions.esm.js:0
+msgid "Open Contact"
+msgstr ""
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__lang
@@ -895,6 +895,12 @@ msgstr "su"
 #: model:ir.model,name:mail_gateway.model_ir_websocket
 msgid "websocket message handling"
 msgstr "gestione messaggio websocket"
+
+#~ msgid "Create partner"
+#~ msgstr "Crea partner"
+
+#~ msgid "Manage guest"
+#~ msgstr "Gestione ospite"
 
 #, python-format
 #~ msgid "Find a gateway channel..."
