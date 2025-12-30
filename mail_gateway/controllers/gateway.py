@@ -51,9 +51,12 @@ class GatewayController(Controller):
                     ("Content-Type", "application/json"),
                 ],
             )
-        jsonrequest = json.loads(
-            request.httprequest.get_data().decode(request.httprequest.charset)
+        charset = (
+            hasattr(request.httprequest, "charset")
+            and request.httprequest.charset
+            or "utf-8"
         )
+        jsonrequest = json.loads(request.httprequest.get_data().decode(charset))
         dispatcher = (
             request.env[f"mail.gateway.{usage}"]
             .with_user(bot_data["webhook_user_id"])
