@@ -23,8 +23,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 "name": "User 1",
                 "login": "user_1_test",
                 "email": "user1@test.example.com",
-                "password": "test1234",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("base.group_user").id])],
             }
         )
 

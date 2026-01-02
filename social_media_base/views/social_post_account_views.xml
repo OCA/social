@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record model="ir.ui.view" id="social_post_account_kanban_view">
         <field name="name">social.network.stream.post.view.kanban</field>
@@ -116,12 +114,12 @@
                 <filter
                     string="Has Comments"
                     name="filter_has_comments"
-                    domain="[('comment_count', '>', 0)]"
+                    domain="[('comment_count', '&gt;', 0)]"
                 />
                 <filter
                     string="High Engagement"
                     name="filter_high_engagement"
-                    domain="['|', ('like_count', '>', 100), ('comment_count', '>', 50)]"
+                    domain="['|', ('like_count', '&gt;', 100), ('comment_count', '&gt;', 50)]"
                 />
                 <separator />
                 <filter
@@ -136,7 +134,7 @@
                 />
 
                 <!-- Group By -->
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Account"
                         name="group_by_account_id"

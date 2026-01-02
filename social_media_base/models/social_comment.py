@@ -87,13 +87,10 @@ class SocialComment(models.Model):
     activity_exception_decoration = fields.Selection(groups="base.group_user")
     activity_exception_icon = fields.Char(groups="base.group_user")
 
-    _sql_constraints = [
-        (
-            "comment_id_unique",
-            "unique(comment_id)",
-            "This comment has already been synced!",
-        ),
-    ]
+    _comment_id_unique = models.Constraint(
+        "unique(comment_id)",
+        "This comment has already been synced!",
+    )
 
     @api.depends("reply_ids")
     def _compute_reply_count(self):

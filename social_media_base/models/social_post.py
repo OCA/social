@@ -5,7 +5,7 @@ import logging
 from datetime import timedelta
 
 from odoo import Command, api, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import MissingError, ValidationError
 
 _logger = logging.getLogger(__name__)
 
@@ -243,28 +243,41 @@ class SocialPost(models.Model):
         :return: A string containing the rendered templates.
         :rtype: str
         """
+        self.ensure_one()
+
+        qweb = self.env["ir.qweb"]
         render_template = ""
-        IrQweb = self.env["ir.qweb"]
+
         for account in self.account_ids:
+            media = account.media_id
+            media_type = media.media_type if media else False
+
             values = {
-                "media_id": account.media_id,
+                "media_id": media,
                 "author": account.name,
                 "message": self.message,
-                "image_ids": self.image_ids[0:2],
-            }
+                "image_ids": self.image_ids[:2],
+            } | self._render_values_preview()
+
+            if media_type:
+                template = f"social_media_{media_type}.social_network_post_preview"
+                try:
+                    render_template += "\n\n" + qweb._render(template, values)
+                    continue
+                except MissingError:
+                    _logger.debug(
+                        "Template %s not found, falling back to base template", template
+                    )
+
             try:
-                render_template += """\n\n""" + IrQweb._render(
-                    f"social_media_{account.media_id.media_type}.social_network_post_preview",
-                    values | self._render_values_preview(),
-                )
-            except ValueError:
-                render_template += """\n\n""" + IrQweb._render(
+                render_template += "\n\n" + qweb._render(
                     "social_media_base.social_network_post_preview",
-                    values | self._render_values_preview(),
+                    values,
                 )
-        return (
-            render_template if render_template else self.env._("No preview available")
-        )
+            except MissingError:
+                continue
+
+        return render_template or self.env._("No preview available")
 
     @api.depends("account_ids", "message", "image_ids", "video_ids")
     def _compute_post_preview(self):

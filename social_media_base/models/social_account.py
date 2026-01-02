@@ -38,7 +38,7 @@ class SocialAccount(models.Model):
     def _default_image(self):
         return base64.b64encode(file_open("base/static/img/avatar.png", "rb").read())
 
-    image_1920 = fields.Image(default=_default_image)
+    image_1920 = fields.Image(default=lambda self: self._default_image())
     # Use media platform icon for kanban group headers
     # Override avatar_128 to show platform logo instead of account image
     avatar_128 = fields.Image(
@@ -156,13 +156,8 @@ class SocialAccount(models.Model):
                 }
             )
             post_ids = SocialPost.search([("account_ids", "in", account.id)])
-            for post in post_ids:
-                if len(post.account_ids) == 1:
-                    post.write(
-                        {
-                            "active": False,
-                        }
-                    )
+            posts_to_archive = post_ids.filtered(lambda p: len(p.account_ids) == 1)
+            posts_to_archive.write({"active": False})
             account.write(
                 {
                     "active": False,
@@ -357,7 +352,11 @@ class SocialAccount(models.Model):
             data_chart.append(
                 {
                     "id": self.id,
-                    "name": self.env._(f"[{self.media_type.upper()}] {self.name}"),
+                    "name": self.env._(
+                        "[{media}] {name}",
+                        media=self.media_type.upper(),
+                        name=self.name,
+                    ),
                     "impressionCount": impression_count,
                     "commentCount": comment_count,
                     "reactionCount": reaction_count,

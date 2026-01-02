@@ -7,8 +7,6 @@ from unittest.mock import patch
 import pytz
 from dateutil.relativedelta import relativedelta
 
-from odoo.exceptions import ValidationError
-
 from odoo.addons.social_media_base.social_utils import (
     _generate_timestamps,
     convert_date_in_time,
@@ -114,7 +112,7 @@ class TestUtilsBase(TestSocialMediaBaseCommon):
         self.assertEqual(result[1], 3474057600000)
 
     def test_get_weeks(self):
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(ValueError):
             get_weeks(start_date=self.date_start, end_date=self.date_end, freq="W-MONN")
 
         result = get_weeks(start_date=self.date_start, end_date=self.date_end, freq="D")

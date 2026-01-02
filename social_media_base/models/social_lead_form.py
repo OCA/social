@@ -1,6 +1,8 @@
 # Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import json
+
 from odoo import api, fields, models
 
 
@@ -167,7 +169,6 @@ class SocialLead(models.Model):
             }
 
         # Default CRM lead creation
-        import json
 
         field_data = json.loads(self.field_data_json or "[]")
         field_dict = {}
@@ -272,10 +273,7 @@ class SocialLeadFieldMapping(models.Model):
         help="Target field in Odoo CRM lead",
     )
 
-    _sql_constraints = [
-        (
-            "unique_platform_field_per_form",
-            "unique(lead_form_id, platform_field_name)",
-            "Each platform field can only be mapped once per form!",
-        )
-    ]
+    _unique_platform_field_per_form = models.Constraint(
+        "unique(lead_form_id, platform_field_name)",
+        "Each platform field can only be mapped once per form!",
+    )

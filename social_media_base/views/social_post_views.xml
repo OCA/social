@@ -1,6 +1,4 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record model="ir.ui.view" id="social_network_post_form_view">
         <field name="name">social.post.form</field>
@@ -250,7 +248,7 @@
                                         t-out="record.message.raw_value.substring(0,record.messageLength)"
                                     />
                                     <span
-                                        t-if="record.message.raw_value.length > record.messageLength"
+                                        t-if="record.message.raw_value.length &gt; record.messageLength"
                                         class="cursor-pointer show-more-message"
                                     >...see more</span>
                                 </div>
@@ -259,7 +257,7 @@
                                     t-value="JSON.parse(record.image_urls.raw_value)"
                                 />
                                 <div
-                                    t-if="images.length > 2"
+                                    t-if="images.length &gt; 2"
                                     class="row h-auto social-all-images"
                                 >
                                     <button class="btn btn-md active" role="button">
@@ -365,7 +363,7 @@
                 <separator />
 
                 <!-- Group By -->
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_by_campaign"
                         string="Campaign"

@@ -49,14 +49,12 @@ class SocialMediaBaseMixin(models.AbstractModel):
             message = Markup(
                 self.env._(
                     "Social Media %(social_media)s <b> "
-                    "[%(account)s] </b> <br><br> %(message)s"
-                )
-                % {
-                    "social_media": social_media_name,
-                    "account": social_media_name if not account_name else account_name,
-                    "message": f"<b>{'ERROR:' if message_type == 'danger' else ''}"
+                    "[%(account)s] </b> <br><br> %(message)s",
+                    social_media=social_media_name,
+                    account=social_media_name if not account_name else account_name,
+                    message=f"<b>{'ERROR:' if message_type == 'danger' else ''}"
                     f"</b> {notif_message}",
-                }
+                )
             )
 
         # Notifying the user

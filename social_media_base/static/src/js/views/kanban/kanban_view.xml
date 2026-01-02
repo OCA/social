@@ -38,21 +38,12 @@
         </xpath>
         <!-- Wrap the folded group name with flexbox container -->
         <xpath
-            expr="//div[hasclass('o_column_title')]/t[@t-esc='groupName']"
+            expr="//div[hasclass('o_column_title')]//t[@t-esc='groupName']"
             position="replace"
         >
             <div class="d-flex align-items-center gap-2">
-                <img
-                    t-if="this.groupImageUrl"
-                    t-att-src="this.groupImageUrl"
-                    class="me-2"
-                    width="20"
-                    height="20"
-                    style="object-fit: contain;"
-                    alt="Platform Icon"
-                />
                 <span class="fw-bold" style="font-size: 18px;">
-                    <t t-esc="groupName" />
+                    <t t-esc="group.displayName" />
                 </span>
             </div>
         </xpath>

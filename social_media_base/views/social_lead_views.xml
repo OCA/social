@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <!-- Social Lead Form Views -->
     <record id="social_lead_form_tree_view" model="ir.ui.view">
@@ -76,7 +76,7 @@
                         <field
                             name="questions"
                             widget="text"
-                            placeholder='[{"name": "email", "type": "EMAIL"}, {"name": "full_name", "type": "FULL_NAME"}]'
+                            placeholder="[{&quot;name&quot;: &quot;email&quot;, &quot;type&quot;: &quot;EMAIL&quot;}, {&quot;name&quot;: &quot;full_name&quot;, &quot;type&quot;: &quot;FULL_NAME&quot;}]"
                         />
                     </group>
 
@@ -129,7 +129,7 @@
                     domain="[('platform', '=', 'linkedin')]"
                 />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_by_platform"
                         string="Platform"
@@ -272,7 +272,7 @@
                     domain="[('created_time', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
                 />
                 <separator />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_by_platform"
                         string="Platform"

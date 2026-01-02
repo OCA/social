@@ -8,7 +8,6 @@ import pytz
 from werkzeug.urls import url_encode, url_quote
 
 from odoo import fields
-from odoo.exceptions import ValidationError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.tools.date_utils import add
 
@@ -188,6 +187,6 @@ def get_weeks(start_date, end_date, freq="W-MON"):
             current += timedelta(weeks=1)
 
     else:
-        raise ValidationError(f"Unsupported frequency: {freq}")
+        raise ValueError(f"Unsupported frequency: {freq}")
 
     return result
