@@ -105,10 +105,16 @@ class SocialAccount(models.Model):
             ).id
 
     def _get_group_account_username(self):
-        account_repeat = self.read_group(
-            domain=[("id", "in", self.ids)], fields=["username"], groupby=["username"]
+        result = self._read_group(
+            domain=[("id", "in", self.ids)],
+            groupby=["username"],
+            aggregates=["__count"],
         )
-        return account_repeat
+
+        return [
+            {"username": username, "username_count": count}
+            for username, count in result
+        ]
 
     def _fields_account_url(self):
         return super()._fields_account_url() + [
@@ -170,18 +176,17 @@ class SocialAccount(models.Model):
             Please try again after that time (Next request).<br>
             For more information, see the
             <a href='%(rate_limit_url)s' target='_blank'>rate limits</a>.
-        """
-        ) % {
-            "limit": self.rate_limit_endpoint.get(endpoint, {}).get(
+        """,
+            limit=self.rate_limit_endpoint.get(endpoint, {}).get(
                 "x-rate-limit-limit", 0
             ),
-            "remaining": self.rate_limit_endpoint.get(endpoint, {}).get(
+            remaining=self.rate_limit_endpoint.get(endpoint, {}).get(
                 "x-rate-limit-remaining", 0
             ),
-            "next_request": next_valid_request,
-            "endpoint": endpoint.replace("_", " ").capitalize(),
-            "rate_limit_url": "https://docs.x.com/x-api/fundamentals/rate-limits",
-        }
+            next_request=next_valid_request,
+            endpoint=endpoint.replace("_", " ").capitalize(),
+            rate_limit_url="https://docs.x.com/x-api/fundamentals/rate-limits",
+        )
         _logger.info(message)
         self._notify_user_client(
             notif_type=f"social_{view_type}_info",
@@ -212,7 +217,11 @@ class SocialAccount(models.Model):
         wizard_social_account = (
             self.env["wizard.social.account"]
             .sudo()
-            .search([("oauth_token", "=", kwargs.get("oauth_token", False))], limit=1)
+            .search_fetch(
+                [("oauth_token", "=", kwargs.get("oauth_token", False))],
+                ["x_api_key", "x_api_secret"],
+                limit=1,
+            )
         )
         auth = _get_oauth(
             wizard_social_account.x_api_key or self.x_api_key,

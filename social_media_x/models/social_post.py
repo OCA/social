@@ -35,8 +35,8 @@ class SocialPost(models.Model):
                 raise ValidationError(
                     self.env._(
                         "There are X accounts with the "
-                        f"same username ({account_repeat[0]['username']}),"
-                        " please check to avoid spam errors."
+                        "same username (%s), please check to avoid spam errors.",
+                        account_repeat[0]["username"],
                     )
                 )
 
