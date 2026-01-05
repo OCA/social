@@ -35,8 +35,9 @@ class SocialMediaFacebookController(http.Controller):
             wizard_social_account = (
                 request.env["wizard.social.account"]
                 .sudo()
-                .search(
+                .search_fetch(
                     [("media_type", "=", "facebook")],
+                    ["facebook_app_id", "facebook_app_secret"],
                     order="id desc",
                     limit=1,
                 )

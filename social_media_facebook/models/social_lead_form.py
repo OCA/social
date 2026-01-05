@@ -21,13 +21,10 @@ class SocialLeadForm(models.Model):
         help="Unique Facebook form identifier",
     )
 
-    _sql_constraints = [
-        (
-            "fb_form_id_unique",
-            "unique(fb_form_id)",
-            "This Facebook lead form is already synced!",
-        )
-    ]
+    _fb_form_id_unique = models.Constraint(
+        "unique(fb_form_id)",
+        "This Facebook lead form is already synced!",
+    )
 
     def action_sync_leads(self):
         """Override: Sync leads from Facebook for this form"""
@@ -201,13 +198,10 @@ class SocialLead(models.Model):
         help="Unique Facebook lead identifier",
     )
 
-    _sql_constraints = [
-        (
-            "fb_lead_id_unique",
-            "unique(fb_lead_id)",
-            "This Facebook lead is already synced!",
-        )
-    ]
+    _fb_lead_id_unique = models.Constraint(
+        "unique(fb_lead_id)",
+        "This Facebook lead is already synced!",
+    )
 
     def action_create_crm_lead(self):
         """Override: Add Facebook-specific logic for CRM lead creation"""

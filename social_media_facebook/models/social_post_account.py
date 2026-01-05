@@ -4,9 +4,9 @@
 import json
 import logging
 import re
+from datetime import datetime
 
 from odoo import api, fields, models
-from datetime import datetime
 
 _logger = logging.getLogger(__name__)
 
@@ -220,13 +220,10 @@ class SocialPostAccount(models.Model):
                 record.avg_watch_time_sec = 0.0
 
     # === SQL CONSTRAINTS ===
-    _sql_constraints = [
-        (
-            "fb_content_unique",
-            "unique(fb_content_id)",
-            "This Facebook content has already been synced!",
-        ),
-    ]
+    _fb_content_unique = models.Constraint(
+        "unique(fb_content_id)",
+        "This Facebook content has already been synced!",
+    )
 
     def _action_post(self):
         """Publish post to Facebook and sync back metadata"""
@@ -242,12 +239,14 @@ class SocialPostAccount(models.Model):
         if self.image_ids:
             for i, image in enumerate(self.image_ids):
                 _logger.debug(
-                    f"Image {i+1}: {image.name}, ID: {image.id}, "
+                    f"Image {i + 1}: {image.name}, ID: {image.id}, "
                     f"Data: {'Yes' if image.datas else 'No'}"
                 )
 
-        _logger.debug(f"Starting _action_post for {self.id} - Account: \
-            {self.account_id.name}, Media: {self.account_id.media_type}")
+        _logger.debug(
+            f"Starting _action_post for {self.id} - Account: \
+            {self.account_id.name}, Media: {self.account_id.media_type}"
+        )
 
         if self.account_id.media_type == "facebook":
             try:
@@ -256,7 +255,7 @@ class SocialPostAccount(models.Model):
                 _logger.debug(
                     "State set successfully. Now calling account._action_post()"
                 )
-                
+
                 URL_REGEX = r"(https?://[^\s]+)"
 
                 match = re.search(URL_REGEX, self.message or "")
@@ -272,8 +271,10 @@ class SocialPostAccount(models.Model):
                 _logger.debug(f"account._action_post() returned post_id: {post_id}")
 
                 if post_id:
-                    _logger.debug(f"Successfully got post_id {post_id}, \
-                        updating state to 'posted'")
+                    _logger.debug(
+                        f"Successfully got post_id {post_id}, \
+                        updating state to 'posted'"
+                    )
                     # Write basic post info first
                     self.write(
                         {
@@ -315,7 +316,7 @@ class SocialPostAccount(models.Model):
                     {
                         "state": "failed",
                         "failed_description": (
-                            f"<p><strong>Error:</strong>" f" {error_msg}</p>"
+                            f"<p><strong>Error:</strong> {error_msg}</p>"
                         ),
                     }
                 )

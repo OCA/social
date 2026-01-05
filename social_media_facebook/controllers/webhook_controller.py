@@ -176,7 +176,9 @@ class FacebookWebhookController(http.Controller):
 
         # Find the lead form in Odoo
         LeadForm = request.env["social.lead.form"].sudo()
-        lead_form = LeadForm.search([("fb_form_id", "=", form_id)], limit=1)
+        lead_form = LeadForm.search_fetch(
+            [("fb_form_id", "=", form_id), ["account_id"]], limit=1
+        )
 
         if not lead_form:
             _logger.warning(f"Lead form {form_id} not found in Odoo, skipping")

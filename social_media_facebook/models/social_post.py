@@ -103,8 +103,9 @@ class SocialPost(models.Model):
     def _search_is_synced_from_facebook(self, operator, value):
         """Search for posts that have synced post_accounts"""
         # Find post_accounts that are synced from Facebook
-        synced_accounts = self.env["social.post.account"].search(
-            [("is_synced_from_facebook", "=", True)]
+        synced_accounts = self.env["social.post.account"].search_fetch(
+            [("is_synced_from_facebook", "=", True)],
+            ["post_id"],
         )
         post_ids = synced_accounts.mapped("post_id").ids
 
@@ -137,7 +138,7 @@ class SocialPost(models.Model):
             )
             if post.image_ids:
                 for i, image in enumerate(post.image_ids):
-                    _logger.debug(f"Image {i+1}: {image.name}, ID: {image.id}")
+                    _logger.debug(f"Image {i + 1}: {image.name}, ID: {image.id}")
 
             post.write(
                 {

@@ -1,7 +1,7 @@
 # Copyright 2025 Kencove (https://www.kencove.com/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import api, fields, models
 
 
 class SocialComment(models.Model):
@@ -68,48 +68,47 @@ class SocialComment(models.Model):
         if not message:
             return super().action_reply()
 
-        # Post reply to Facebook
-        for account in self.post_id.account_ids:
-            if account.media_type == "facebook" and hasattr(
-                account, "_reply_to_facebook_comment"
-            ):
-                result = account._reply_to_facebook_comment(self.comment_id, message)
-                if result and isinstance(result, dict) and result.get("id"):
-                    # Mark parent as replied
-                    self.write({"is_replied": True})
+        fb_account = next(
+            (
+                acc
+                for acc in self.post_id.account_ids
+                if acc.media_type == "facebook"
+                and callable(getattr(acc, "_reply_to_facebook_comment", None))
+            ),
+            None,
+        )
+        if not fb_account:
+            return {
+                "success": False,
+                "message": "No Facebook account found for this post",
+            }
 
-                    # Create the reply comment record in Odoo
-                    from datetime import datetime
+        result = fb_account._reply_to_facebook_comment(self.comment_id, message)
+        fb_comment_id = result.get("id") if isinstance(result, dict) else None
+        if not fb_comment_id:
+            return {"success": False, "message": "Failed to post reply to Facebook"}
 
-                    reply_comment = self.env["social.comment"].create(
-                        {
-                            "post_id": self.post_id.id,
-                            "comment_id": result.get("id"),
-                            "parent_id": self.id,
-                            "message": message,
-                            "author_name": self.env.user.name,
-                            "author_id": str(account.page_id or ""),
-                            "created_time": datetime.now(),
-                            "is_replied": False,
-                            "is_hidden": False,
-                        }
-                    )
+        self.is_replied = True
 
-                    return {
-                        "success": True,
-                        "message": "Reply posted successfully",
-                        "comment_id": result.get("id"),
-                        "reply_record_id": reply_comment.id,
-                    }
-                else:
-                    return {
-                        "success": False,
-                        "message": "Failed to post reply to Facebook",
-                    }
+        reply_comment = self.env["social.comment"].create(
+            {
+                "post_id": self.post_id.id,
+                "comment_id": fb_comment_id,
+                "parent_id": self.id,
+                "message": message,
+                "author_name": self.env.user.name,
+                "author_id": str(fb_account.page_id or ""),
+                "created_time": fields.Datetime.now(),
+                "is_replied": False,
+                "is_hidden": False,
+            }
+        )
 
         return {
-            "success": False,
-            "message": "No Facebook account found for this post",
+            "success": True,
+            "message": "Reply posted successfully",
+            "comment_id": fb_comment_id,
+            "reply_record_id": reply_comment.id,
         }
 
     def action_hide(self):
@@ -121,54 +120,63 @@ class SocialComment(models.Model):
         """
         self.ensure_one()
 
-        # Hide comment on Facebook
-        for account in self.post_id.account_ids:
-            if account.media_type == "facebook" and hasattr(
-                account, "_hide_facebook_comment"
-            ):
-                result = account._hide_facebook_comment(self.comment_id)
+        fb_account = next(
+            (
+                acc
+                for acc in self.post_id.account_ids
+                if acc.media_type == "facebook"
+                and callable(getattr(acc, "_hide_facebook_comment", None))
+            ),
+            None,
+        )
+        if not fb_account:
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Error",
+                    "message": "No Facebook account found for this post",
+                    "type": "warning",
+                    "sticky": False,
+                },
+            }
 
-                # Check if result is a dict with success status
-                if isinstance(result, dict):
-                    if result.get("success"):
-                        # Mark as hidden in Odoo
-                        self.write({"is_hidden": True})
-                        return {
-                            "type": "ir.actions.client",
-                            "tag": "display_notification",
-                            "params": {
-                                "title": "Success",
-                                "message": result.get(
-                                    "message", "Comment hidden successfully"
-                                ),
-                                "type": "success",
-                                "sticky": False,
-                            },
-                        }
-                    else:
-                        # Return detailed error message from Facebook
-                        error_msg = result.get(
-                            "message", "Failed to hide comment on Facebook"
-                        )
-                        error_code = result.get("error_code", "UNKNOWN")
-                        return {
-                            "type": "ir.actions.client",
-                            "tag": "display_notification",
-                            "params": {
-                                "title": f"Failed to Hide Comment ({error_code})",
-                                "message": error_msg,
-                                "type": "danger",
-                                "sticky": True,
-                            },
-                        }
+        result = fb_account._hide_facebook_comment(self.comment_id)
+
+        if not isinstance(result, dict):
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Failed to Hide Comment",
+                    "message": "Failed to hide comment on Facebook",
+                    "type": "danger",
+                    "sticky": True,
+                },
+            }
+
+        if result.get("success"):
+            self.is_hidden = True
+            return {
+                "type": "ir.actions.client",
+                "tag": "display_notification",
+                "params": {
+                    "title": "Success",
+                    "message": result.get("message", "Comment hidden successfully"),
+                    "type": "success",
+                    "sticky": False,
+                },
+            }
 
         return {
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": "Error",
-                "message": "No Facebook account found for this post",
-                "type": "warning",
-                "sticky": False,
+                "title": (
+                    f"Failed to Hide Comment ({result.get('error_code', 'UNKNOWN')})"
+                ),
+                "message": result.get("message", "Failed to hide comment on Facebook"),
+                "type": "danger",
+                "sticky": True,
             },
         }

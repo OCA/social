@@ -4,7 +4,7 @@
 import logging
 from datetime import datetime, timedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -70,8 +70,10 @@ class WizardFacebookSync(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("No Account Selected"),
-                    "message": _("Please select at least one Facebook account to sync"),
+                    "title": self.env._("No Account Selected"),
+                    "message": self.env._(
+                        "Please select at least one Facebook account to sync"
+                    ),
                     "type": "warning",
                     "sticky": False,
                 },
@@ -93,8 +95,10 @@ class WizardFacebookSync(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("No Content Selected"),
-                    "message": _("Please select at least one content type to sync"),
+                    "title": self.env._("No Content Selected"),
+                    "message": self.env._(
+                        "Please select at least one content type to sync"
+                    ),
                     "type": "warning",
                     "sticky": False,
                 },
@@ -114,14 +118,12 @@ class WizardFacebookSync(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Sync Complete"),
-                    "message": _(
-                        "Successfully synced %(count)s account(s): %(accounts)s"
-                    )
-                    % {
-                        "count": len(self.account_ids),
-                        "accounts": account_names,
-                    },
+                    "title": self.env._("Sync Complete"),
+                    "message": self.env._(
+                        "Successfully synced %(count)s account(s): %(accounts)s",
+                        count=len(self.account_ids),
+                        accounts=account_names,
+                    ),
                     "type": "success",
                     "sticky": False,
                     "next": {"type": "ir.actions.act_window_close"},
@@ -139,8 +141,8 @@ class WizardFacebookSync(models.TransientModel):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Sync Failed"),
-                    "message": _("Error: %s") % str(e),
+                    "title": self.env._("Sync Failed"),
+                    "message": self.env._("Error: %s", str(e)),
                     "type": "danger",
                     "sticky": True,
                     "next": {"type": "ir.actions.act_window_close"},

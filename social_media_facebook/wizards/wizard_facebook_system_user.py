@@ -42,14 +42,14 @@ class WizardFacebookSystemUser(models.TransientModel):
         except Exception as e:
             raise ValidationError(
                 self.env._(
-                    "Failed to fetch pages using the provided " "System User Token."
+                    "Failed to fetch pages using the provided System User Token."
                 )
             ) from e
 
         if not pages:
             raise ValidationError(
                 self.env._(
-                    "No Facebook pages found for the provided " "System User Token."
+                    "No Facebook pages found for the provided System User Token."
                 )
             )
 
@@ -132,8 +132,11 @@ class WizardFacebookSystemUser(models.TransientModel):
 
         if failed:
             msg = self.env._(
-                f"Created : {len(created)}, Updated : {len(updated)}, "
-                f"Failed : {len(failed)} accounts."
+                "Created : %(created)s, Updated : %(updated)s,"
+                " Failed : %(failed)s accounts.",
+                created=len(created),
+                updated=len(updated),
+                failed=len(failed),
             )
             raise ValidationError(msg)
 

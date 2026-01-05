@@ -5,7 +5,7 @@ import logging
 
 from werkzeug.urls import url_encode, url_join
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 from ..social_facebook_utils import _SCOPE_FACEBOOK_ALL, _URL_AUTH_FACEBOOK
 
@@ -98,7 +98,7 @@ class WizardSocialAccount(models.TransientModel):
                 # Just refresh account info
                 self._notify_user_client(
                     notif_type="social_form_success",
-                    notif_message=_("The account was updated successfully"),
+                    notif_message=self.env._("The account was updated successfully"),
                     media="facebook",
                     account_name=self.account_id.name,
                 )

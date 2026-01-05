@@ -4,7 +4,7 @@
 {
     "name": "Social Media Facebook",
     "summary": """Integration of the Facebook social network.""",
-    "version": "18.0.1.0.0",
+    "version": "19.0.1.0.0",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",

@@ -341,52 +341,48 @@
         <field name="model">social.post</field>
         <field name="inherit_id" ref="social_media_base.social_post_view_search" />
         <field name="arch" type="xml">
-            <xpath expr="//search" position="inside">
-                <!-- Content Type Filters -->
+            <xpath expr="//filter[@name='filter_ads']" position="after">
+                <separator />
                 <filter
-                    name="filter_fb_posts"
-                    string="Posts"
+                    name="filter_fb_posts_specific"
+                    string="FB: Posts"
                     domain="[('content_type', '=', 'post')]"
                     help="Show only Facebook posts"
                 />
                 <filter
-                    name="filter_fb_videos"
-                    string="Videos"
+                    name="filter_fb_videos_specific"
+                    string="FB: Videos"
                     domain="[('content_type', '=', 'reel')]"
                     help="Show only Facebook videos"
                 />
                 <filter
-                    name="filter_fb_ads"
-                    string="Ads"
+                    name="filter_fb_ads_specific"
+                    string="FB: Ads"
                     domain="[('content_type', '=', 'ad')]"
                     help="Show only Facebook ads"
                 />
+            </xpath>
+
+            <xpath expr="//filter[@name='filter_this_month']" position="after">
                 <separator />
-                <!-- Origin Filters -->
                 <filter
                     name="filter_synced_from_facebook"
                     string="Synced from Facebook"
                     domain="[('is_synced_from_facebook', '=', True)]"
-                    help="Content synced from Facebook"
                 />
                 <filter
                     name="filter_created_in_odoo"
                     string="Created in Odoo"
                     domain="[('is_synced_from_facebook', '=', False)]"
-                    help="Content created in Odoo"
                 />
-                <separator />
-                <!-- Search Fields -->
-                <field name="content_type" />
-                <separator />
-                <!-- Group By -->
-                <group expand="0" string="Group By">
-                    <filter
-                        name="group_by_content_type"
-                        string="Content Type"
-                        context="{'group_by': 'content_type'}"
-                    />
-                </group>
+            </xpath>
+
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="group_by_fb_content_type"
+                    string="FB Content Type"
+                    context="{'group_by': 'content_type'}"
+                />
             </xpath>
         </field>
     </record>

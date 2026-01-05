@@ -49,8 +49,11 @@ class WizardFetchPages(models.TransientModel):
                 )
 
             # Get app credentials from wizard.social.account if available
-            wizard_social_account = self.env["wizard.social.account"].search(
-                [("media_type", "=", "facebook")], order="id desc", limit=1
+            wizard_social_account = self.env["wizard.social.account"].search_fetch(
+                [("media_type", "=", "facebook")],
+                ["facebook_app_id", "facebook_app_secret"],
+                order="id desc",
+                limit=1,
             )
 
             # Save app credentials to system settings for reuse

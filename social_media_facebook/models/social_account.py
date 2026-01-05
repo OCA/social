@@ -2,16 +2,17 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import base64
+import io
 import json
 import logging
 from datetime import date, datetime, timedelta
-import io
+from urllib.parse import urlparse
 
 import requests
 from dateutil import parser as dateutil_parser
 from werkzeug.urls import url_join
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from ..social_facebook_utils import _URL_GRAPH_FACEBOOK
@@ -129,7 +130,7 @@ class SocialAccount(models.Model):
         """Smart button action: View all synced posts for this account"""
         self.ensure_one()
         return {
-            "name": _("Synced Posts"),
+            "name": self.env._("Synced Posts"),
             "type": "ir.actions.act_window",
             "res_model": "social.post.account",
             "view_mode": "kanban,list,form",
@@ -143,7 +144,7 @@ class SocialAccount(models.Model):
         """Smart button action: View dashboard posts for this account"""
         self.ensure_one()
         return {
-            "name": _("Dashboard Posts"),
+            "name": self.env._("Dashboard Posts"),
             "type": "ir.actions.act_window",
             "res_model": "social.post.account",
             "view_mode": "kanban,list,form",
@@ -155,7 +156,7 @@ class SocialAccount(models.Model):
         """Smart button action: View posts only (content_type = 'post')"""
         self.ensure_one()
         return {
-            "name": _("Posts"),
+            "name": self.env._("Posts"),
             "type": "ir.actions.act_window",
             "res_model": "social.post",
             "view_mode": "kanban,list,form",
@@ -170,7 +171,7 @@ class SocialAccount(models.Model):
         """Smart button action: View videos only (content_type = 'reel')"""
         self.ensure_one()
         return {
-            "name": _("Videos"),
+            "name": self.env._("Videos"),
             "type": "ir.actions.act_window",
             "res_model": "social.post",
             "view_mode": "kanban,list,form",
@@ -185,7 +186,7 @@ class SocialAccount(models.Model):
         """Smart button action: View ads only (content_type = 'ad')"""
         self.ensure_one()
         return {
-            "name": _("Ads"),
+            "name": self.env._("Ads"),
             "type": "ir.actions.act_window",
             "res_model": "social.post",
             "view_mode": "kanban,list,form",
@@ -200,7 +201,9 @@ class SocialAccount(models.Model):
         """Diagnostic tool: Test Facebook API endpoints and permissions"""
         self.ensure_one()
         if not self.fb_ad_account_id:
-            raise UserError(_("No ad account configured for this Facebook page."))
+            raise UserError(
+                self.env._("No ad account configured for this Facebook page.")
+            )
 
         _logger.debug("=" * 80)
         _logger.debug("FACEBOOK API DIAGNOSTIC")
@@ -237,8 +240,8 @@ class SocialAccount(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Diagnostic Complete"),
-                "message": _(
+                "title": self.env._("Diagnostic Complete"),
+                "message": self.env._(
                     "Check the server console for detailed diagnostic results."
                 ),
                 "type": "info",
@@ -463,11 +466,11 @@ class SocialAccount(models.Model):
                 )
                 if existing:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "A Facebook page with ID '%s' is already linked"
-                            " to this company!"
+                            " to this company!",
+                            record.page_id,
                         )
-                        % record.page_id
                     )
 
     def unique_account(self, page_id=None):
@@ -481,7 +484,7 @@ class SocialAccount(models.Model):
         )
         if account_count > 0:
             raise ValidationError(
-                _(
+                self.env._(
                     "An account with this information "
                     "already exists; please also check "
                     "archived accounts."
@@ -633,8 +636,11 @@ class SocialAccount(models.Model):
                     )
 
                     # Get app credentials from wizard if available
-                    wizard = self.env["wizard.social.account"].search(
-                        [("media_type", "=", "facebook")], order="id desc", limit=1
+                    wizard = self.env["wizard.social.account"].search_fetch(
+                        [("media_type", "=", "facebook")],
+                        ["facebook_app_id", "facebook_app_secret"],
+                        order="id desc",
+                        limit=1,
                     )
 
                     values_data = {
@@ -717,11 +723,12 @@ class SocialAccount(models.Model):
 
             # Check for existing account
             _logger.debug("  Checking for existing account...")
-            existing_account = self.search(
+            existing_account = self.search_fetch(
                 [
                     ("page_id", "=", page_id),
                     ("media_type", "=", "facebook"),
                 ],
+                ["facebook_system_user_token"],
                 limit=1,
             )
 
@@ -803,7 +810,9 @@ class SocialAccount(models.Model):
                 self.status = "expired"
                 self._notify_user_client(
                     notif_type="social_form_danger",
-                    notif_message=_("The access token has expired. Please renew it."),
+                    notif_message=self.env._(
+                        "The access token has expired. Please renew it."
+                    ),
                     media="facebook",
                     account_name=self.name or "FACEBOOK",
                 )
@@ -824,7 +833,7 @@ class SocialAccount(models.Model):
 
         if not app_id or not app_secret:
             raise UserError(
-                _(
+                self.env._(
                     "App credentials not configured. "
                     "Please configure Facebook App ID and App Secret in Settings"
                     " → Facebook Integration."
@@ -833,7 +842,7 @@ class SocialAccount(models.Model):
 
         if not self.facebook_user_token:
             raise UserError(
-                _(
+                self.env._(
                     "No user access token available. "
                     "Please re-authenticate by updating the account."
                 )
@@ -888,8 +897,8 @@ class SocialAccount(models.Model):
                         "type": "ir.actions.client",
                         "tag": "display_notification",
                         "params": {
-                            "title": _("Token Refreshed"),
-                            "message": _(
+                            "title": self.env._("Token Refreshed"),
+                            "message": self.env._(
                                 "Access token has been successfully refreshed."
                             ),
                             "type": "success",
@@ -898,20 +907,20 @@ class SocialAccount(models.Model):
                     }
                 else:
                     raise UserError(
-                        _(
+                        self.env._(
                             "Could not find page %s in the list of accessible pages. "
-                            "You may need to re-authenticate."
+                            "You may need to re-authenticate.",
+                            self.page_name,
                         )
-                        % self.page_name
                     )
 
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Failed to refresh token. Response: %s. "
-                        "You may need to re-authenticate by updating the account."
+                        "You may need to re-authenticate by updating the account.",
+                        response,
                     )
-                    % response
                 )
 
         except Exception as e:
@@ -920,8 +929,10 @@ class SocialAccount(models.Model):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Token Refresh Failed"),
-                    "message": _("Error: %s. Please try re-authenticating.") % str(e),
+                    "title": self.env._("Token Refresh Failed"),
+                    "message": self.env._(
+                        "Error: %s. Please try re-authenticating.", str(e)
+                    ),
                     "type": "danger",
                     "sticky": True,
                 },
@@ -986,7 +997,6 @@ class SocialAccount(models.Model):
         return False
 
     def _post_single_image(self, message, image, base_params):
-
         _logger.debug("Posting single image to Facebook")
 
         if not image.datas:
@@ -1033,8 +1043,6 @@ class SocialAccount(models.Model):
         return self._post_text_only_fallback(message, base_params)
 
     def _post_multiple_images(self, message, image_ids, base_params):
-        import io
-
         _logger.debug(f"Posting {len(image_ids)} images to Facebook")
 
         photo_ids = []
@@ -1065,18 +1073,18 @@ class SocialAccount(models.Model):
                     if isinstance(upload_response, dict) and upload_response.get("id"):
                         photo_ids.append(upload_response["id"])
                         _logger.debug(
-                            f"Uploaded image {i+1}/{len(image_ids)}: "
+                            f"Uploaded image {i + 1}/{len(image_ids)}: "
                             f"{upload_response['id']}"
                         )
                     else:
                         _logger.warning(
                             f"Failed to upload image "
-                            f"{i+1}/{len(image_ids)}: {upload_response}"
+                            f"{i + 1}/{len(image_ids)}: {upload_response}"
                         )
                 else:
-                    _logger.warning(f"Image {i+1} has no data")
+                    _logger.warning(f"Image {i + 1} has no data")
             except Exception as e:
-                _logger.error(f"Error uploading image {i+1}: {str(e)}")
+                _logger.error(f"Error uploading image {i + 1}: {str(e)}")
                 continue
 
         if photo_ids:
@@ -1100,8 +1108,6 @@ class SocialAccount(models.Model):
         return self._post_text_only_fallback(message, base_params)
 
     def _post_video(self, message, video, base_params):
-        import io
-
         _logger.debug("Posting video to Facebook")
 
         if not video.datas:
@@ -1216,9 +1222,11 @@ class SocialAccount(models.Model):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Sync Complete"),
-                    "message": _(
-                        f"Successfully synced {new_posts} new posts for {self.name}"
+                    "title": self.env._("Sync Complete"),
+                    "message": self.env._(
+                        "Successfully synced %(count)s new posts for %(name)s",
+                        count=new_posts,
+                        name=self.name,
                     ),
                     "type": "success",
                     "sticky": False,
@@ -1238,8 +1246,8 @@ class SocialAccount(models.Model):
                 "type": "ir.actions.client",
                 "tag": "display_notification",
                 "params": {
-                    "title": _("Sync Failed"),
-                    "message": _("Error syncing content: %s") % str(e),
+                    "title": self.env._("Sync Failed"),
+                    "message": self.env._("Error syncing content: %s", str(e)),
                     "type": "danger",
                     "sticky": True,
                 },
@@ -1594,8 +1602,7 @@ class SocialAccount(models.Model):
 
     def _fetch_ad_insights(self, fb_ad_id):
         fields = (
-            "impressions,reach,clicks,ctr,spend,currency,"
-            "actions,cost_per_action_type"
+            "impressions,reach,clicks,ctr,spend,currency,actions,cost_per_action_type"
         )
 
         response = self._request_facebook(
@@ -1742,7 +1749,7 @@ class SocialAccount(models.Model):
         creative_params = {
             "access_token": self.page_access_token,
             "fields": (
-                "id,name,object_story_spec,title,body," "image_url,video_id,status"
+                "id,name,object_story_spec,title,body,image_url,video_id,status"
             ),
             "limit": 100,
         }
@@ -1753,7 +1760,7 @@ class SocialAccount(models.Model):
 
         if hasattr(creative_response, "status_code"):
             _logger.error(
-                f"AdCreatives API returned status " f"{creative_response.status_code}"
+                f"AdCreatives API returned status {creative_response.status_code}"
             )
             if hasattr(creative_response, "text"):
                 _logger.error(f"Error details: {creative_response.text}")
@@ -1886,8 +1893,7 @@ class SocialAccount(models.Model):
         params = {
             "access_token": self.page_access_token,
             "fields": (
-                "id,name,status,leads_count,questions,"
-                "privacy_policy_url,created_time"
+                "id,name,status,leads_count,questions,privacy_policy_url,created_time"
             ),
             "limit": 100,
         }
@@ -2692,7 +2698,6 @@ class SocialAccount(models.Model):
             # Generate filename if not provided
             if not filename:
                 # Extract filename from URL or generate one
-                from urllib.parse import urlparse
 
                 parsed_url = urlparse(url)
                 filename = (
@@ -2739,7 +2744,7 @@ class SocialAccount(models.Model):
         # Download images
         for idx, url in enumerate(media_urls):
             if url:
-                filename = f"ad_image_{idx+1}_{post.id}.jpg"
+                filename = f"ad_image_{idx + 1}_{post.id}.jpg"
                 attachment = self._download_image_from_url(url, filename=filename)
                 if attachment:
                     attachment.write({"res_id": post.id})
@@ -2876,8 +2881,9 @@ class SocialAccount(models.Model):
 
         # Search for existing post via social.post.account
         # (where fb_content_id is stored)
-        existing_post_account = self.env["social.post.account"].search(
+        existing_post_account = self.env["social.post.account"].search_fetch(
             [("fb_content_id", "=", fb_content_id)],
+            ["post_id"],
             limit=1,
         )
         existing_post = (
