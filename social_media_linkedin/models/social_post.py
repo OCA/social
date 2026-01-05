@@ -3,7 +3,7 @@
 
 import itertools
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class SocialPost(models.Model):
@@ -31,7 +31,7 @@ class SocialPost(models.Model):
                 and post.video_ids
                 and "linkedin" in post.account_ids.mapped("media_type")
             ):
-                message_info = _(
+                message_info = self.env._(
                     "You have selected images and videos for this post. "
                     "However, the social media Linkedin does not allow "
                     "combining both types of content in the same post. Therefore, "

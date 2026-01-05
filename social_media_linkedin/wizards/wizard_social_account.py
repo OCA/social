@@ -26,8 +26,7 @@ class WizardSocialAccount(models.TransientModel):
     def _get_url_redirect(self):
         if self.media_type == "linkedin":
             return url_join(self.get_base_url(), "/linkedin/callback")
-        else:
-            return super()._get_url_redirect()
+        return super()._get_url_redirect()
 
     def _generate_code(self, length=10):
         caracteres = string.ascii_letters + string.digits
@@ -62,8 +61,7 @@ class WizardSocialAccount(models.TransientModel):
                     "target": "self",
                 }
             return url_aut
-        else:
-            return result
+        return result
 
     def _action_valid_add_account(self):
         result = super()._action_valid_add_account()
@@ -71,7 +69,8 @@ class WizardSocialAccount(models.TransientModel):
             self.env["social.account"].sudo().unique_account(
                 self.linkedin_client, self.linkedin_secret
             )
-        return result
+        else:
+            return result
 
     def _update_account(self):
         if self.media_type == "linkedin":

@@ -172,8 +172,7 @@ class SocialAccount(models.Model):
         )
         if isinstance(response, dict):
             return response
-        else:
-            raise ValidationError(self.env._("REFRESH TOKEN: %s") % response.text)
+        raise ValidationError(self.env._("REFRESH TOKEN: %s", response.text))
 
     def _prepare_url_upload_asset(self, feedshare="image"):
         try:
@@ -200,20 +199,20 @@ class SocialAccount(models.Model):
             )
             if not isinstance(asset, dict):
                 raise ValidationError(
-                    self.env._("UPLOADING VIDEO: %(error_video)s")
-                    % {"error_video": asset.text}
+                    self.env._(
+                        "UPLOADING VIDEO: %(error_video)s", error_video=asset.text
+                    )
                 )
-            else:
-                value_upload_asset = asset.get("value", {})
-                return value_upload_asset.get("asset", {}), value_upload_asset.get(
-                    "uploadMechanism", {}
-                ).get(
-                    "com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest", {}
-                ).get("uploadUrl", {})
+            value_upload_asset = asset.get("value", {})
+            return value_upload_asset.get("asset", {}), value_upload_asset.get(
+                "uploadMechanism", {}
+            ).get("com.linkedin.digitalmedia.uploading.MediaUploadHttpRequest", {}).get(
+                "uploadUrl", {}
+            )
         except Exception as e:
             _logger.error(e)
             raise ValidationError(
-                self.env._("UPLOADING VIDEO: %(error_video)s") % {"error_video": str(e)}
+                self.env._("UPLOADING VIDEO: %(error_video)s", error_video=str(e))
             ) from e
 
     def _prepare_url_upload_image(self):
@@ -328,7 +327,11 @@ class SocialAccount(models.Model):
         wizard_social_account = (
             self.env["wizard.social.account"]
             .sudo()
-            .search([("csrf_state_token", "=", kwargs.get("state", ""))])
+            .search_fetch(
+                [("csrf_state_token", "=", kwargs.get("state", ""))],
+                ["linkedin_client", "linkedin_secret"],
+                limit=1,
+            )
         )
         params = {
             "grant_type": "authorization_code",
@@ -556,12 +559,15 @@ class SocialAccount(models.Model):
                     ).with_context(**ctx)._update_account()
                 elif not ctx.get("not_notify", False):
                     # Notifying the user
+                    token_valid = "not " if not is_valid_token_access else ""
                     self._notify_user_client(
                         notif_type="social_form_success"
                         if is_valid_token_access
                         else "social_form_danger",
-                        notif_message=self.env._("The token is %(token_valid)s valid.")
-                        % {"token_valid": "not " if not is_valid_token_access else ""},
+                        notif_message=self.env._(
+                            "The token is %(token_valid)s valid.",
+                            token_valid=token_valid,
+                        ),
                         media="linkedin",
                         account_name=self.name or "LINKEDIN",
                     )
@@ -612,9 +618,8 @@ class SocialAccount(models.Model):
                     }
                     for post in response_ugc_posts.get("elements", [])
                 ]
-        else:
-            raise ValidationError(f"GET UGC POSTS: {response.json()}")
-        return ugc_posts
+            return ugc_posts
+        raise ValidationError(self.env._("GET UGC POSTS: %s", response.json()))
 
     def get_share_statistics(
         self,
@@ -684,7 +689,9 @@ class SocialAccount(models.Model):
                 }
 
             else:
-                raise ValidationError(f"GET SHARE POSTS STATISTICS: {response.json()}")
+                raise ValidationError(
+                    self.env._("GET SHARE POSTS STATISTICS: %s", response.json())
+                )
         return data
 
     def get_ugc_posts_statistics(
@@ -744,7 +751,9 @@ class SocialAccount(models.Model):
                     for urn_id, post_reaction in post_reactions.items()
                 }
             else:
-                raise ValidationError(f"GET UGC POSTS STATISTICS: {response.json()}")
+                raise ValidationError(
+                    self.env._("GET UGC POSTS STATISTICS: %s", response.json())
+                )
         return data
 
     def get_entity_statistics(
@@ -1008,9 +1017,8 @@ class SocialAccount(models.Model):
 
         if response.status_code == 200:
             campaigns = response.json().get("elements", [])
-        else:
-            raise ValidationError(f"GET CAMPAIGNS: {response.json()}")
-        return campaigns
+            return campaigns
+        raise ValidationError(self.env._("GET CAMPAIGNS: %s", response.json()))
 
     def _get_statistics(self, ads_ids=None, start_date=None, end_date=None):
         start_date, end_date = self._get_default_filter_date(start_date, end_date)
@@ -1072,9 +1080,10 @@ class SocialAccount(models.Model):
 
         if response.status_code == 200:
             statistics = response.json().get("elements", [])
-        else:
-            raise ValidationError(f"GET CAMPAIGNS STATISTICS: {response.json()}")
-        return statistics
+            return statistics
+        raise ValidationError(
+            self.env._("GET CAMPAIGNS STATISTICS: %s", response.json())
+        )
 
     def _get_statistics_ads(self, ads_ids, start_date, end_date):
         return self._get_statistics(
@@ -1102,7 +1111,7 @@ class SocialAccount(models.Model):
         if response.status_code == 200:
             ads = response.json().get("elements", [])
         else:
-            raise ValidationError(f"GET ADS: {response.json()}")
+            raise ValidationError(self.env._("GET ADS: %s", response.json()))
 
         # STATISTICS
         ads_parse = []
@@ -1186,73 +1195,75 @@ class SocialAccount(models.Model):
 
     def _run_check_media_updates(self):
         update = super()._run_check_media_updates()
-        try:
-            if not update:
-                account_ids = self.search([("media_type", "=", "linkedin")])
-                PostAccount = self.env["social.post.account"]
-                for account in account_ids:
-                    post_ids = account._get_posts(
-                        params_fields=["sortBy"],
-                        params_values={"sortBy": "LAST_MODIFIED"},
-                        add_values=True,
-                    )
-                    if post_ids:
-                        count_post = PostAccount.search_count(
-                            [
-                                (
-                                    "linkedin_post_account_urn",
-                                    "=",
-                                    post_ids[0]["id"],
-                                ),
-                                ("linkedin_post_account_urn", "!=", False),
-                                ("account_id", "=", account.id),
-                            ],
-                            limit=1,
-                        )
-                        if count_post == 0:
-                            account.need_update = True
-                            return self._need_update()
-                        else:
-                            post_reactions = account.get_entity_statistics(
-                                posts=post_ids
-                            )
-                            for post, statistic in post_reactions.items():
-                                post_account = PostAccount.search_count(
-                                    [
-                                        "&",
-                                        (
-                                            "linkedin_post_account_urn",
-                                            "=",
-                                            post,
-                                        ),
-                                        "|",
-                                        (
-                                            "click_count",
-                                            "!=",
-                                            statistic[0],
-                                        ),
-                                        "|",
-                                        (
-                                            "like_count",
-                                            "!=",
-                                            statistic[1],
-                                        ),
-                                        "|",
-                                        (
-                                            "comment_count",
-                                            "!=",
-                                            statistic[2],
-                                        ),
-                                        (
-                                            "share_count",
-                                            "!=",
-                                            statistic[3],
-                                        ),
-                                    ]
-                                )
-                                if post_account:
-                                    account.need_update = True
-                                    return self._need_update()
-        except Exception as ex:
-            _logger.error(self.env._("ERROR NEDD UPDATE %(error)s", error=str(ex)))
+
+        if update:
+            return update
+
+        account_ids = self.search([("media_type", "=", "linkedin")])
+        PostAccount = self.env["social.post.account"]
+
+        for account in account_ids:
+            post_ids = account._get_posts(
+                params_fields=["sortBy"],
+                params_values={"sortBy": "LAST_MODIFIED"},
+                add_values=True,
+            )
+            if not post_ids:
+                continue
+            latest_urn = post_ids[0].get("id")
+            if not latest_urn:
+                continue
+            exists = bool(
+                PostAccount.search(
+                    [
+                        ("account_id", "=", account.id),
+                        ("linkedin_post_account_urn", "=", latest_urn),
+                    ],
+                    limit=1,
+                )
+            )
+            if not exists:
+                account.need_update = True
+                return self._need_update()
+            post_reactions = account._get_entity_share_statistics(posts=post_ids)
+            share_urns = [
+                post_reaction.get("share", "-")
+                for post_reaction in post_reactions
+                if post_reaction.get("share")
+            ]
+            if not share_urns:
+                continue
+            post_accounts = PostAccount.search_fetch(
+                [
+                    ("linkedin_post_account_urn", "in", share_urns),
+                    ("account_id", "=", account.id),
+                ],
+                [
+                    "linkedin_post_account_urn",
+                    "comment_count",
+                    "like_count",
+                    "click_count",
+                    "share_count",
+                ],
+            )
+            post_account_by_urn = {
+                rec.linkedin_post_account_urn: rec for rec in post_accounts
+            }
+
+            for post_reaction in post_reactions:
+                statistic = post_reaction.get("totalShareStatistics", {})
+                if not statistic:
+                    continue
+                share_urn = post_reaction.get("share", "-")
+                post_account = post_account_by_urn.get(share_urn)
+                if not post_account:
+                    continue
+                if (
+                    post_account.comment_count != statistic.get("commentCount", 0)
+                    or post_account.like_count != statistic.get("likeCount", 0)
+                    or post_account.click_count != statistic.get("clickCount", 0)
+                    or post_account.share_count != statistic.get("shareCount", 0)
+                ):
+                    account.need_update = True
+                    return self._need_update()
         return update

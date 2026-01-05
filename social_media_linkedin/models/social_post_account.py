@@ -26,7 +26,16 @@ class SocialPostAccount(models.Model):
     def _get_assets_save(self, share_content):
         medias = share_content.get("media", [])
         media_ids = [val.get("media", "") for val in medias]
-        medias_exist = self._get_medias_account(media_ids)
+        medias_exist = (
+            self.env["ir.attachment"]
+            .search_fetch(
+                [
+                    ("name", "in", media_ids),
+                ],
+                ["name"],
+            )
+            .mapped("name")
+        )
         attachments = []
         for media in medias:
             if media.get("media", False) not in medias_exist and media.get(
@@ -44,41 +53,43 @@ class SocialPostAccount(models.Model):
 
     def _linkedin_advertising_accounts(self):
         advertising_account_id = self.account_id.advertising_account_id
-        if not advertising_account_id:
-            response = self.account_id._request_linkedin(
-                endpoint="/adAccountsV2",
-                headers=self.account_id.media_id._get_linkedin_headers(
-                    self.account_id.access_token
-                ),
-                params_fields=["q", "fields"],
-                params_values={"q": "search", "fields": "id,test"},
-                token=True,
-                return_json=False,
-                linkedin_v2=True,
-            )
-            if response.status_code == 200:
-                total = response.json().get("paging", {}).get("total", 0)
-                if total > 0:
-                    elements = response.json().get("elements", [])
-                    filter_test = False
-                    if self.account_id.environment == "test":
-                        filter_test = True
-                    filter_account = list(
-                        filter(lambda x: x.get("test", False) == filter_test, elements)
-                    )
-                    advertising_account_id = (
-                        "urn:li:sponsoredAccount:{}".format(filter_account[0]["id"])
-                        if filter_account
-                        else False
-                    )
-            else:
-                raise ValidationError(
-                    self.env._(
-                        f"Error get advertising account in Linkedin: "
-                        f"{response.json()}"
-                    )
+        if advertising_account_id:
+            return advertising_account_id
+
+        response = self.account_id._request_linkedin(
+            endpoint="/adAccountsV2",
+            headers=self.account_id.media_id._get_linkedin_headers(
+                self.account_id.access_token
+            ),
+            params_fields=["q", "fields"],
+            params_values={"q": "search", "fields": "id,test"},
+            token=True,
+            return_json=False,
+            linkedin_v2=True,
+        )
+
+        if response.status_code == 200:
+            total = response.json().get("paging", {}).get("total", 0)
+            if total > 0:
+                elements = response.json().get("elements", [])
+
+                filter_test = False
+                if self.account_id.environment == "test":
+                    filter_test = True
+
+                filter_account = list(
+                    filter(lambda x: x.get("test", False) == filter_test, elements)
                 )
-        return advertising_account_id
+                advertising_account_id = (
+                    "urn:li:sponsoredAccount:{}".format(filter_account[0]["id"])
+                    if filter_account
+                    else False
+                )
+            return advertising_account_id
+
+        raise ValidationError(
+            self.env._("Error get advertising account in Linkedin: %s", response.json())
+        )
 
     def _action_campaign_group(self):
         advertising_account_id = self._linkedin_advertising_accounts()
@@ -132,15 +143,15 @@ class SocialPostAccount(models.Model):
                 else:
                     raise ValidationError(
                         self.env._(
-                            f"Error creating group campaign in Linkedin: "
-                            f"{response.json()}"
+                            "Error creating group campaign in Linkedin: %s",
+                            response.json(),
                         )
                     )
             else:
                 raise ValidationError(
                     self.env._(
-                        f"Error creating group campaign"
-                        f" in Linkedin: {group_campaign.json()}"
+                        "Error creating group campaign in Linkedin: %s",
+                        group_campaign.json(),
                     )
                 )
         return group_campaign
@@ -207,15 +218,14 @@ class SocialPostAccount(models.Model):
                 else:
                     raise ValidationError(
                         self.env._(
-                            f"Error creating campaign in Linkedin: "
-                            f"{response.json()}"
+                            "Error creating campaign in Linkedin: %s", response.json()
                         )
                     )
             else:
                 raise ValidationError(
                     self.env._(
-                        f"""Error creating group campaign in Linkedin:
-                        {campaign.json()}"""
+                        "Error creating group campaign in Linkedin: %s",
+                        campaign.json(),
                     )
                 )
 
@@ -257,8 +267,8 @@ class SocialPostAccount(models.Model):
                 else:
                     raise ValidationError(
                         self.env._(
-                            f"""Error creating campaign post in Linkedin:
-                            {response.json()}"""
+                            "Error creating campaign post in Linkedin: %s",
+                            response.json(),
                         )
                     )
             else:
@@ -430,8 +440,7 @@ class SocialPostAccount(models.Model):
     def create_comment(self, post_data, context=None):
         if "linkedin" == self.account_id.media_type:
             return self.create_linkedin_comment(post_data)
-        else:
-            return super().create_comment(post_data, context)
+        return super().create_comment(post_data, context)
 
     def delete_linkedin_comment(self, comment_id, actor_urn):
         if "linkedin" == self.account_id.media_type:

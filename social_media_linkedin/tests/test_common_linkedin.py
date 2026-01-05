@@ -19,8 +19,7 @@ PATCH_ACCOUNT_LINKEDIN = (
     "odoo.addons.social_media_linkedin.models.social_account.SocialAccount.{}"
 )
 PATCH_POST_ACCOUNT_LINKEDIN = (
-    "odoo.addons.social_media_linkedin.models."
-    "social_post_account.SocialPostAccount.{}"
+    "odoo.addons.social_media_linkedin.models.social_post_account.SocialPostAccount.{}"
 )
 PATCH_CONTROLLER_LINKEDIN = (
     "odoo.addons.social_media_linkedin.controllers."
