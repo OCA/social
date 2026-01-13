@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Form view for Facebook posts - Match v17 design -->
+    <record id="social_post_form_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.form.facebook</field>
+        <field name="model">social.post</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_network_post_form_view"
+        />
+        <field name="arch" type="xml">
+            <!-- Add help text for images and videos -->
+            <xpath expr="//field[@name='image_ids']" position="attributes">
+                <attribute name="invisible">video_ids</attribute>
+                <attribute
+                    name="help"
+                >Attach images to your post. Note: You cannot mix images and videos in the same post.</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='video_ids']" position="attributes">
+                <attribute name="invisible">image_ids</attribute>
+                <attribute
+                    name="help"
+                >Attach videos to your post. Note: You cannot mix images and videos in the same post.</attribute>
+            </xpath>
+
+            <!-- Add content type field in draft form - after account selection -->
+            <xpath expr="//field[@name='account_ids']" position="after">
+                <label
+                    for="content_type"
+                    string="Content Type"
+                    invisible="state not in ('draft','planned')"
+                />
+                <field
+                    name="content_type"
+                    nolabel="1"
+                    invisible="state not in ('draft','planned')"
+                    widget="radio"
+                    options="{'horizontal': true}"
+                    help="Select the type of content to publish: Post, Video, or Ad"
+                />
+            </xpath>
+
+            <!-- Add warning message for published posts -->
+            <xpath expr="//sheet" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="state != 'published'"
+                >
+          <strong
+                >Note:</strong> Social media platforms do not allow editing published posts via API.
+          To make changes, edit the post on the respective platform and then re-sync to Odoo.
+        </div>
+            </xpath>
+
+            <!-- Remove old Analytics tab - analytics are now shown per account in Posts tab -->
+        </field>
+    </record>
+
+    <!-- Facebook-specific social.post.account form view with Analytics -->
+    <record id="social_post_form_view_facebook_inherit_social_posts" model="ir.ui.view">
+        <field name="name">social.post.account.form.facebook</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="post_id" />
+                        <field name="account_id" />
+                        <field name="state" />
+                        <field name="published_date" />
+                    </group>
+
+                    <!-- Facebook Analytics Notebook - only show for Facebook accounts with fb_content_id -->
+                    <notebook
+                        invisible="account_id.media_type != 'facebook' or not fb_content_id"
+                    >
+                        <page name="facebook_analytics" string="Facebook Analytics">
+                            <group>
+                                <group string="Post Information">
+                                    <field name="content_type" readonly="1" />
+                                    <field name="fb_content_id" readonly="1" />
+                                    <field
+                                        name="permalink_url"
+                                        widget="url"
+                                        readonly="1"
+                                    />
+                                    <field name="created_time" readonly="1" />
+                                    <field
+                                        name="is_synced_from_facebook"
+                                        readonly="1"
+                                    />
+                                </group>
+                                <group string="Sync Status">
+                                    <field name="last_sync_at" readonly="1" />
+                                    <field name="metrics_updated_at" readonly="1" />
+                                </group>
+                            </group>
+
+                            <group string="Engagement Metrics">
+                                <group>
+                                    <field name="likes_count" readonly="1" />
+                                    <field name="comments_count" readonly="1" />
+                                    <field name="shares_count" readonly="1" />
+                                    <field
+                                        name="saves_count"
+                                        readonly="1"
+                                        invisible="content_type != 'reel'"
+                                    />
+                                </group>
+                                <group>
+                                    <field name="impressions_total" readonly="1" />
+                                    <field name="reach_unique" readonly="1" />
+                                    <field name="clicks_total" readonly="1" />
+                                    <field name="engagement_rate_pct" readonly="1" />
+                                </group>
+                            </group>
+
+                            <!-- Video Metrics -->
+                            <group
+                                string="Video Metrics"
+                                invisible="content_type != 'reel'"
+                            >
+                                <group>
+                                    <field name="plays_total" readonly="1" />
+                                    <field name="plays_unique" readonly="1" />
+                                    <field name="completed_views" readonly="1" />
+                                    <field name="completion_rate_pct" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="watch_time_sec" readonly="1" />
+                                    <field name="avg_watch_time_sec" readonly="1" />
+                                </group>
+                            </group>
+
+                            <!-- Ad Metrics -->
+                            <group
+                                string="Ad Performance"
+                                invisible="content_type != 'ad'"
+                            >
+                                <group>
+                                    <field name="spend_amount" readonly="1" />
+                                    <field name="ctr_pct" readonly="1" />
+                                    <field name="leads_total" readonly="1" />
+                                    <field name="cpl_amount" readonly="1" />
+                                </group>
+                                <group>
+                                    <field name="conversions_total" readonly="1" />
+                                    <field name="currency" readonly="1" />
+                                </group>
+                            </group>
+
+                            <!-- Raw metrics data for debugging -->
+                            <group string="Raw Metrics Data" groups="base.group_no_one">
+                                <field
+                                    name="metrics_json"
+                                    readonly="1"
+                                    widget="text"
+                                    nolabel="1"
+                                />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Facebook-specific post preview template -->
+    <template id="social_network_post_preview" name="Facebook Post Preview">
+        <div class="mb-2 p-3 shadow social-text-justify">
+            <div class="d-flex justify-content-start align-items-center mb-2">
+                <!-- Show account avatar if available, otherwise Facebook logo -->
+                <img
+                    t-if="account_image"
+                    width="40"
+                    height="40"
+                    t-attf-src="data:image/png;base64,{{account_image}}"
+                    class="img img-fluid rounded-circle me-2"
+                    loading="lazy"
+                    alt="Page Avatar"
+                />
+                <img
+                    t-else=""
+                    width="40"
+                    height="40"
+                    t-attf-src="/social_media_facebook/static/img/facebook.svg"
+                    class="img img-fluid rounded-circle me-2"
+                    loading="lazy"
+                    alt="Facebook"
+                />
+                <div>
+                    <strong t-esc="author or 'Facebook Page'" />
+                    <div class="text-muted small">Just now</div>
+                </div>
+            </div>
+
+            <!-- Post message -->
+            <div class="mb-2 p-2" t-if="message">
+                <div class="o_social_message_preview" t-esc="message" />
+            </div>
+
+            <!-- Images preview -->
+            <div t-if="image_ids" class="mb-2">
+                <div class="d-flex justify-content-center flex-wrap gap-2 p-2">
+                    <t t-foreach="image_ids" t-as="image_id">
+                        <img
+                            t-attf-src="/web/image/#{image_id.id}"
+                            class="img-fluid rounded"
+                            style="max-width: 200px; max-height: 200px; object-fit: cover;"
+                            alt="Post image"
+                        />
+                    </t>
+                </div>
+            </div>
+
+            <!-- Video preview -->
+            <div t-if="video_ids" class="mb-2">
+                <div class="d-flex justify-content-center flex-wrap gap-2 p-2">
+                    <t t-foreach="video_ids" t-as="video_id">
+                        <div class="position-relative" style="max-width: 300px;">
+                            <video
+                                t-attf-src="/web/content/#{video_id.id}"
+                                class="img-fluid rounded"
+                                style="max-width: 300px; max-height: 300px;"
+                                controls="controls"
+                            />
+                        </div>
+                    </t>
+                </div>
+            </div>
+
+            <!-- Facebook-style engagement buttons -->
+            <div
+                class="d-flex justify-content-around align-items-center border-top pt-2 mt-2"
+            >
+                <button class="btn btn-link text-muted">
+          <i class="fa fa-thumbs-up" /> Like
+        </button>
+                <button class="btn btn-link text-muted">
+          <i class="fa fa-comment" /> Comment
+        </button>
+                <button class="btn btn-link text-muted">
+          <i class="fa fa-share" /> Share
+        </button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Kanban view with visual indicators -->
+    <record id="social_post_kanban_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.kanban.facebook</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_kanban_view" />
+        <field name="arch" type="xml">
+            <!-- Add Facebook-specific fields -->
+            <xpath expr="//field[@name='account_ids']" position="after">
+                <field name="content_type" />
+                <field name="is_synced_from_facebook" />
+            </xpath>
+
+            <!-- Add visual badges in kanban header (only for Facebook posts) -->
+            <xpath
+                expr="(//div[hasclass('d-flex', 'justify-content-between', 'align-items-center')])[1]"
+                position="inside"
+            >
+                <div
+                    t-if="record.content_type.raw_value"
+                    class="d-flex gap-1 align-items-center"
+                >
+                    <!-- Content Type Badge -->
+                    <span
+                        class="badge"
+                        t-attf-class="badge {{ record.content_type.raw_value == 'post' ? 'text-bg-info' : record.content_type.raw_value == 'reel' ? 'text-bg-warning' : 'text-bg-danger' }}"
+                    >
+                        <t t-if="record.content_type.raw_value == 'post'">
+              <i class="fa fa-file-text-o" /> Post
+            </t>
+                        <t t-if="record.content_type.raw_value == 'reel'">
+              <i class="fa fa-video-camera" /> Video
+            </t>
+                        <t t-if="record.content_type.raw_value == 'ad'">
+              <i class="fa fa-bullhorn" /> Ad
+            </t>
+                    </span>
+                    <!-- Origin Badge -->
+                    <span
+                        t-if="record.is_synced_from_facebook.raw_value"
+                        class="badge text-bg-secondary"
+                        title="Synced from Facebook"
+                    >
+            <i class="fa fa-facebook" /> FB
+          </span>
+                    <span
+                        t-if="!record.is_synced_from_facebook.raw_value"
+                        class="badge text-bg-success"
+                        title="Created in Odoo"
+                    >
+            <i class="fa fa-pencil" /> Odoo
+          </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- List view with visual indicators -->
+    <record id="social_post_tree_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.tree.facebook</field>
+        <field name="model">social.post</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_network_post_tree_view"
+        />
+        <field name="arch" type="xml">
+            <!-- Add Facebook-specific fields before message (only show for Facebook posts) -->
+            <xpath expr="//field[@name='message']" position="before">
+                <field
+                    name="content_type"
+                    string="FB Type"
+                    widget="badge"
+                    decoration-info="content_type == 'post'"
+                    decoration-warning="content_type == 'reel'"
+                    decoration-danger="content_type == 'ad'"
+                    column_invisible="context.get('default_media_type') != 'facebook'"
+                    optional="hide"
+                />
+                <field
+                    name="is_synced_from_facebook"
+                    string="FB Origin"
+                    column_invisible="context.get('default_media_type') != 'facebook'"
+                    optional="hide"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Search view with filters - Feature #2.1 -->
+    <record id="social_post_search_view_facebook" model="ir.ui.view">
+        <field name="name">social.post.search.facebook</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_ads']" position="after">
+                <separator />
+                <filter
+                    name="filter_fb_posts_specific"
+                    string="FB: Posts"
+                    domain="[('content_type', '=', 'post')]"
+                    help="Show only Facebook posts"
+                />
+                <filter
+                    name="filter_fb_videos_specific"
+                    string="FB: Videos"
+                    domain="[('content_type', '=', 'reel')]"
+                    help="Show only Facebook videos"
+                />
+                <filter
+                    name="filter_fb_ads_specific"
+                    string="FB: Ads"
+                    domain="[('content_type', '=', 'ad')]"
+                    help="Show only Facebook ads"
+                />
+            </xpath>
+
+            <xpath expr="//filter[@name='filter_this_month']" position="after">
+                <separator />
+                <filter
+                    name="filter_synced_from_facebook"
+                    string="Synced from Facebook"
+                    domain="[('is_synced_from_facebook', '=', True)]"
+                />
+                <filter
+                    name="filter_created_in_odoo"
+                    string="Created in Odoo"
+                    domain="[('is_synced_from_facebook', '=', False)]"
+                />
+            </xpath>
+
+            <xpath expr="//group" position="inside">
+                <filter
+                    name="group_by_fb_content_type"
+                    string="FB Content Type"
+                    context="{'group_by': 'content_type'}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

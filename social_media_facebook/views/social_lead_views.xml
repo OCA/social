@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Extend Lead Form view to show Facebook-specific fields -->
+    <record id="social_lead_form_form_view_facebook" model="ir.ui.view">
+        <field name="name">social.lead.form.form.facebook</field>
+        <field name="model">social.lead.form</field>
+        <field name="inherit_id" ref="social_media_base.social_lead_form_form_view" />
+        <field name="arch" type="xml">
+            <field name="platform" position="after">
+                <field
+                    name="fb_form_id"
+                    readonly="1"
+                    invisible="platform != 'facebook'"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- Extend Lead view to show Facebook-specific fields -->
+    <record id="social_lead_form_view_facebook" model="ir.ui.view">
+        <field name="name">social.lead.form.facebook</field>
+        <field name="model">social.lead</field>
+        <field name="inherit_id" ref="social_media_base.social_lead_form_view" />
+        <field name="arch" type="xml">
+            <field name="lead_form_id" position="after">
+                <field
+                    name="fb_lead_id"
+                    readonly="1"
+                    invisible="platform != 'facebook'"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- Menus removed - will be under Ads parent menu instead -->
+</odoo>
