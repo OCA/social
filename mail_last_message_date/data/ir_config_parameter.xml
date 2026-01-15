@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="message_types" model="ir.config_parameter">
+        <field name="key">mail_last_message_date.message_types</field>
+        <field name="value">email,comment</field>
+    </record>
+</odoo>
