@@ -1,5 +1,0 @@
-- [Tecnativa](https://www.tecnativa.com):
-  - Pedro M. Baeza
-  - Ernesto Tejeda
-- [Trobz](https://trobz.com):
-  - nguyenhk \<<nguyenhk@trobz.com>\>

@@ -7,7 +7,7 @@
             <field name="state" position="before">
                 <button
                     string="Resend"
-                    invisible='state != "done"'
+                    invisible="state != 'done'"
                     name="button_draft"
                     type="object"
                 />
@@ -19,29 +19,15 @@
                 >
                     <p>
                         <i
-                            class="fa fa-info-circle"
-                        /> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, click on <b
-                        >Sent</b> smart-button for removing the existing record(s).
+                        class="fa fa-info-circle"
+                    /> New sending will be done only to not sent/new recipients. If you want to resend again the mass mailing to already sent recipients, click on <b
+                    >Sent</b> smart-button for removing the existing record(s).
                     </p>
                 </div>
             </header>
             <div name="button_box" position="attributes">
                 <attribute name="invisible">sent == 0</attribute>
             </div>
-        </field>
-    </record>
-    <record id="mailing_mailing_view_form_full_width" model="ir.ui.view">
-        <field name="model">mailing.mailing</field>
-        <field
-            name="inherit_id"
-            ref="mass_mailing.mailing_mailing_view_form_full_width"
-        />
-        <field name="arch" type="xml">
-            <button name="action_view_traces_sent" position="attributes">
-                <attribute
-                    name="invisible"
-                >state in ('draft','test') and sent == 0</attribute>
-            </button>
         </field>
     </record>
 </odoo>
