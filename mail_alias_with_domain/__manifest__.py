@@ -1,5 +1,5 @@
 # Copyright 2023 Solvti sp. z o.o. (https://solvti.pl)
-# Copyright 2025 Therp BV (https://therp.nl)
+# Copyright 2025-2026 Therp BV (https://therp.nl)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {

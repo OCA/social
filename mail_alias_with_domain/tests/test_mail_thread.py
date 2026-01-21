@@ -80,6 +80,28 @@ class TestMailThread(TransactionCase):
         self.assertEqual(self.mail_alias_no_domain.alias_name, "test_alias")
         self.assertEqual(self.mail_alias_no_domain.alias_domain, "fsf.org")
 
+    def test_write_alias_by_alias_entry(self):
+        self.assertEqual(
+            self.mail_alias_with_domain.alias_name, "test_alias_entry__at__example.com"
+        )
+        self.mail_alias_with_domain.write({"alias_entry": "test_new_name@example.org"})
+        self.mail_alias_with_domain.flush_recordset()
+        self.assertEqual(
+            self.mail_alias_with_domain.alias_name, "test_new_name__at__example.org"
+        )
+        # New domain should have been computed as well.
+        self.assertEqual(self.mail_alias_with_domain.alias_domain, "example.org")
+
+    def test_clear_alias_name(self):
+        # Clearing the alias_name should also clear the alias_entry.
+        self.assertEqual(
+            self.mail_alias_with_domain.alias_name, "test_alias_entry__at__example.com"
+        )
+        self.mail_alias_with_domain.write({"alias_name": False})
+        self.assertEqual(self.mail_alias_with_domain.alias_entry, False)
+        # Domain should have been reset to default.
+        self.assertEqual(self.mail_alias_with_domain.alias_domain, "fsf.org")
+
     def test_create_alias_by_alias_name(self):
         alias_with_domain = self.Alias.create(
             {
