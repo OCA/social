@@ -1,5 +1,5 @@
 # Copyright 2023 Solvti sp. z o.o. (https://solvti.pl).
-# Copyright 2025 Therp BV (https://therp.nl).
+# Copyright 2025-2026 Therp BV (https://therp.nl).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, fields, models
@@ -23,6 +23,10 @@ class Alias(models.Model):
     alias_entry = fields.Char(
         help="This will be used to enter an email, complete with domain",
     )
+
+    _sql_constraints = [
+        ("unique_alias_entry", "UNIQUE(alias_entry)", "Alias entry must be unique!")
+    ]
 
     @api.model
     def search(self, domain, **kwargs):

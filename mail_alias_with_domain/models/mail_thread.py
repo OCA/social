@@ -1,5 +1,5 @@
 # Copyright 2023 Solvti sp. z o.o. (https://solvti.pl)
-# Copyright 2025 Therp BV (https://therp.nl)
+# Copyright 2025-2026 Therp BV (https://therp.nl)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from odoo import api, models, tools
 
@@ -38,12 +38,9 @@ class MailThread(models.AbstractModel):
     def _find_alias_with_domain(self, message_dict):
         """Find all aliasses that match."""
         Alias = self.env["mail.alias"]
-        emails = {email for email in (tools.email_split(message_dict["recipients"]))}
-        alias_names = []
-        for email in emails:
-            clean_email = Alias.get_clean_email(email)
-            if not clean_email:
-                continue
-            alias_name = clean_email.replace("@", "__at__")
-            alias_names.append(alias_name)
+        alias_names = [
+            email.replace("@", "__at__")
+            # tools.email_split only returns clean email addresses (no names).
+            for email in tools.email_split(message_dict["recipients"])
+        ]
         return Alias.search([("alias_name", "in", alias_names)])
