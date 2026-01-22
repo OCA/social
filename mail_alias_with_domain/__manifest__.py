@@ -7,7 +7,7 @@
     "summary": "Allow simple mail alias to be combined with a mail domain",
     "author": "Solvti, Therp BV, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
-    "version": "16.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "application": False,
     "installable": True,

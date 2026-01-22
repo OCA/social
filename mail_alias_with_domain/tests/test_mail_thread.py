@@ -1,13 +1,14 @@
+# flake8: noqa: E222,E231,E711
 # Copyright 2023 Solvti sp. z o.o. (https://solvti.pl)
 # Copyright 2025 Therp BV (https://therp.nl)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from email.message import EmailMessage
 
-from odoo.tests import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestMailThread(TransactionCase):
+class TestMailThread(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -164,7 +165,9 @@ class TestMailThread(TransactionCase):
         self.message.replace_header("To", f"{email_to_1}, {email_to_2}")
         self.message_dict.update(
             {
-                "recipients": f'"{email_to_1}" <{email_to_1}>, "{email_to_2}" <{email_to_2}>',
+                "recipients": (
+                    f'"{email_to_1}" <{email_to_1}>, "{email_to_2}" <{email_to_2}>'
+                ),
                 "to": (
                     f'"{email_to_1}" <{email_to_1}>, "{email_to_2}" <{email_to_2}>,'
                     '"abc@abc.com" <abc@abc.com>'
