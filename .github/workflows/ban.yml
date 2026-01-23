@@ -4,6 +4,7 @@ on:
     inputs:
       base_ref:
         required: true
+        type: string
       pr_number:
         default: 0
         type: number
