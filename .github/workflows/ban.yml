@@ -1,0 +1,63 @@
+name: Enforce .banned.txt
+on:
+  workflow_call:
+    inputs:
+      base_ref:
+        required: true
+      pr_number:
+        default: 0
+        type: number
+jobs:
+  enforce_banned:
+    name: Enforce .banned.txt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.base_ref }}
+          sparse-checkout: |
+            .banned.txt
+          sparse-checkout-cone-mode: false
+      - run: pip install PyGithub
+      - shell: python
+        run: |
+          import sys
+          from github import Auth, Github
+
+          auth = Auth.Token("${{ github.token }}")
+          gh = Github(auth=auth)
+
+          ignore = [
+          ]
+
+          banned_handles = []
+
+          with open(".banned.txt") as banned_file:
+            for banned_handle in banned_file:
+              banned_handle = banned_handle.strip()
+              if banned_handle.startswith("#"):
+                continue
+              if banned_handle in ignore:
+                continue
+              banned_handles.append(banned_handle)
+
+          print(banned_handles)
+          if not banned_handles:
+            sys.exit(0)
+
+          repo = gh.get_repo("${{ github.repository }}")
+          pr_number = ${{ inputs.pr_number }}
+          if pr_number:
+            prs = [repo.get_pull(pr_number)]
+          else:
+            prs = repo.get_pulls(
+              state="open", sort="created", base="${{ github.base_ref || github.ref_name }}"
+            )
+
+          print(prs)
+
+          for pr in prs:
+            if pr.user.login in banned_handles:
+              issue = repo.get_issue(number=pr.number)
+              issue.create_comment(f"@{pr.user.login} has been banned, closing PR")
+              issue.edit(state='closed')
