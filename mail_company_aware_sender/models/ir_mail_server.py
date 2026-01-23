@@ -21,18 +21,18 @@ class IrMailServer(models.Model):
 
     def _get_test_email_addresses(self):
         self.ensure_one()
-        if self.from_filter or not self.env.user.email:
-            return super()._get_test_email_addresses()
         email_to = "noreply@odoo.com"
+        # if server forces a sender, use it.
+        if self.smtp_from:
+            return self.smtp_from, email_to
+        if not self.env.user.email:
+            return super()._get_test_email_addresses()
         email_from = self.env.user.company_aware_email()
         email_domain = email_domain_extract(email_from)
         valid_domains = self._get_domain_whitelist(self.domain_whitelist)
         if email_domain not in valid_domains:
             raise ValidationError(
-                _(
-                    "Domain %s not whitelisted on this server",
-                    email_domain,
-                )
+                _("Domain %s not whitelisted on this server") % email_domain
             )
         return email_from, email_to
 

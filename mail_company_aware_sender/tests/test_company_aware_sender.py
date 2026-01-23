@@ -1,9 +1,18 @@
 # Copyright 2025 Therp BV <https://therp.nl>.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from email.utils import parseaddr
+
 from .common import CompanyAwareSenderCase
 
 
 class TestCompanyAwareSender(CompanyAwareSenderCase):
+    def _assert_email(self, email_from, expected_email, expected_name=None):
+        """Assert email_from matches expected parts, tolerant to quoting differences."""
+        name, email = parseaddr(email_from or "")
+        self.assertEqual(email, expected_email)
+        if expected_name is not None:
+            self.assertEqual(name, expected_name)
+
     def test_nothing_changed(self):
         # Check with default user and author (current user).
         mail_thread = (
@@ -13,12 +22,12 @@ class TestCompanyAwareSender(CompanyAwareSenderCase):
         )
         author_id, email_from = mail_thread._message_compute_author(None, None)
         self.assertEqual(author_id, self.partner_charles.id)
-        self.assertEqual(email_from, '"Charles Le Magne" <charlemagne@therp.nl>')
+        self._assert_email(email_from, "charlemagne@therp.nl", "Charles Le Magne")
         author_id, email_from = mail_thread._message_compute_author(
             None, '"Unknown Person" <unknown.person@example.com>'
         )
         self.assertEqual(author_id, False)
-        self.assertEqual(email_from, '"Unknown Person" <unknown.person@example.com>')
+        self._assert_email(email_from, "unknown.person@example.com", "Unknown Person")
 
     def test_company_overwrite(self):
         # Check with default user and author (current user).
@@ -30,25 +39,25 @@ class TestCompanyAwareSender(CompanyAwareSenderCase):
         # Should not work if domain not whitelisted.
         author_id, email_from = mail_thread._message_compute_author(None, None)
         self.assertEqual(author_id, self.partner_charles.id)
-        self.assertEqual(email_from, '"Charles Le Magne" <charlemagne@therp.nl>')
+        self._assert_email(email_from, "charlemagne@therp.nl", "Charles Le Magne")
         # Whitelist domain.
         self.mail_server.write(
             {"domain_whitelist": "therp.nl,kingdom.fr,imperiumromanum.org"}
         )
         author_id, email_from = mail_thread._message_compute_author(None, None)
         self.assertEqual(author_id, self.partner_charles.id)
-        self.assertEqual(email_from, "charlemagne@imperiumromanum.org")
+        self._assert_email(email_from, "charlemagne@imperiumromanum.org")
         self.company_imperium.write({"format_email": True})
         author_id, email_from = mail_thread._message_compute_author(None, None)
         self.assertEqual(author_id, self.partner_charles.id)
-        self.assertEqual(
-            email_from, '"Charles Le Magne" <charlemagne@imperiumromanum.org>'
+        self._assert_email(
+            email_from, "charlemagne@imperiumromanum.org", "Charles Le Magne"
         )
         # Now opt out for the override.
         self.partner_charles.write({"fixed_email": True})
         author_id, email_from = mail_thread._message_compute_author(None, None)
         self.assertEqual(author_id, self.partner_charles.id)
-        self.assertEqual(email_from, '"Charles Le Magne" <charlemagne@therp.nl>')
+        self._assert_email(email_from, "charlemagne@therp.nl", "Charles Le Magne")
 
     def test_get_sender_from_object(self):
         # Whitelist domain.
@@ -60,4 +69,4 @@ class TestCompanyAwareSender(CompanyAwareSenderCase):
         himiltrude = self.partner_himiltrude.sudo().with_company(main_company)
         # Make sure user and company from object used.
         email_from = self.env.user.sudo().get_company_aware_email(himiltrude)
-        self.assertEqual(email_from, "charlemagne@imperiumromanum.org")
+        self._assert_email(email_from, "charlemagne@imperiumromanum.org")

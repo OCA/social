@@ -4,7 +4,7 @@
 {
     "name": "Mail Sender Company Aware",
     "summary": "Send emails with company specific mail domain",
-    "version": "16.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": ("Therp BV, " "Odoo Community Association (OCA)"),

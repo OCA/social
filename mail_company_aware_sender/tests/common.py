@@ -1,10 +1,9 @@
 # Copyright 2025 Therp BV <https://therp.nl>.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import Command
-from odoo.tests import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class CompanyAwareSenderCase(TransactionCase):
+class CompanyAwareSenderCase(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -47,7 +46,7 @@ class CompanyAwareSenderCase(TransactionCase):
                 "email": "charlemagne@therp.nl",
                 "company_id": cls.company_kingdom.id,
                 "company_ids": [
-                    Command.set([cls.company_kingdom.id, cls.company_imperium.id]),
+                    (6, 0, [cls.company_kingdom.id, cls.company_imperium.id]),
                 ],
             }
         )
