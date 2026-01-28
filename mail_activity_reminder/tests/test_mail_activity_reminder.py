@@ -31,9 +31,7 @@ class TestMailActivityReminder(common.TransactionCase):
         cls.model_res_partner = cls.env["ir.model"].search(
             [("model", "=", "res.partner")], limit=1
         )
-        cls.partner_DecoAddict = cls.env["res.partner"].search(
-            [("name", "ilike", "Deco Addict")], limit=1
-        )
+        cls.partner_DecoAddict = cls.env["res.partner"].create({"name": "Deco Addict"})
 
     def test_none_reminders(self):
         activity_type = self.MailActivityType.create({"name": "Activity Type"})
