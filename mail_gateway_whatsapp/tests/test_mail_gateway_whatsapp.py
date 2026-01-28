@@ -8,6 +8,7 @@ from unittest.mock import MagicMock, patch
 
 from markupsafe import Markup
 
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests import Form, RecordCapturer
 from odoo.tests.common import tagged
@@ -380,5 +381,164 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             post_mock.return_value = MagicMock()
             composer.action_send_whatsapp()
             post_mock.assert_called()
+        channel.invalidate_recordset()
+        self.assertTrue(channel.message_ids)
+
+    def test_send_message_with_variable(self):
+        ctx = {
+            "default_res_model": self.partner._name,
+            "default_res_id": self.partner.id,
+            "default_number_field_name": "mobile",
+            "default_composition_mode": "comment",
+            "default_gateway_id": self.gateway.id,
+        }
+        tmpl_with_vars = self.env["mail.whatsapp.template"].create(
+            {
+                "name": "Partner Vars",
+                "category": "utility",
+                "language": "es",
+                "header": "Hi {{1}}",
+                "body": "Name: {{1}} · Tel: {{2}}",
+                "gateway_id": self.gateway.id,
+                "variable_ids": [Command.clear()],
+                "state": "approved",
+                "is_supported": True,
+                "model_id": self.env["ir.model"]._get("res.partner").id,
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{1}}",
+                "line_type": "header",
+                "template_id": tmpl_with_vars.id,
+                "field_name": "name",
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{1}}",
+                "line_type": "body",
+                "template_id": tmpl_with_vars.id,
+                "field_name": "name",
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{2}}",
+                "line_type": "body",
+                "template_id": tmpl_with_vars.id,
+                "field_name": "mobile",
+            }
+        )
+        self.env["mail.whatsapp.template.button"].create(
+            {
+                "name": "mobile",
+                "button_type": "phone_number",
+                "template_id": tmpl_with_vars.id,
+                "call_number": "+34666555444",
+            }
+        )
+        self.assertEqual(len(tmpl_with_vars.variable_ids), 3)
+        self.assertEqual(len(tmpl_with_vars.button_ids), 1)
+        self.gateway.whatsapp_account_id = "123456"
+        form_composer = Form(self.env["whatsapp.composer"].with_context(**ctx))
+        form_composer.template_id = tmpl_with_vars
+        self.assertTrue(form_composer.is_required_template)
+        self.assertTrue(form_composer._get_modifier("template_id", "required"))
+        composer = form_composer.save()
+        channel = self.partner._whatsapp_get_channel(
+            composer.number_field_name, composer.gateway_id
+        )
+        message_domain = [
+            ("gateway_type", "=", "whatsapp"),
+            ("model", "=", channel._name),
+            ("res_id", "=", channel.id),
+        ]
+        with RecordCapturer(self.env["mail.message"], message_domain) as capture, patch(
+            "requests.post"
+        ) as post_mock:
+            post_mock.return_value = MagicMock()
+            composer.action_send_whatsapp()
+        # Assertions
+        self.assertEqual(len(capture.records), 1)
+        channel.invalidate_recordset()
+        self.assertTrue(channel.message_ids)
+
+    def test_send_message_with_dynamic_button(self):
+        ctx = {
+            "default_res_model": self.partner._name,
+            "default_res_id": self.partner.id,
+            "default_number_field_name": "mobile",
+            "default_composition_mode": "comment",
+            "default_gateway_id": self.gateway.id,
+        }
+        tmpl_with_vars_dynamic = self.env["mail.whatsapp.template"].create(
+            {
+                "name": "Dynamic Button",
+                "category": "utility",
+                "language": "es",
+                "body": "Name: {{1}} · Tel: {{2}}",
+                "gateway_id": self.gateway.id,
+                "variable_ids": [Command.clear()],
+                "state": "approved",
+                "is_supported": True,
+                "model_id": self.env["ir.model"]._get("res.partner").id,
+            }
+        )
+        self.assertEqual(len(tmpl_with_vars_dynamic.variable_ids), 0)
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{1}}",
+                "line_type": "body",
+                "template_id": tmpl_with_vars_dynamic.id,
+                "field_name": "name",
+            }
+        )
+        self.env["mail.whatsapp.template.variable"].create(
+            {
+                "name": "{{2}}",
+                "line_type": "body",
+                "template_id": tmpl_with_vars_dynamic.id,
+                "field_name": "mobile",
+            }
+        )
+        self.env["mail.whatsapp.template.button"].create(
+            {
+                "name": "1",
+                "button_type": "url",
+                "url_type": "dynamic",
+                "template_id": tmpl_with_vars_dynamic.id,
+                "website_url": "https://www.odoo.com",
+            }
+        )
+        self.assertEqual(len(tmpl_with_vars_dynamic.variable_ids), 3)
+        button = tmpl_with_vars_dynamic.variable_ids.search(
+            [
+                ("line_type", "=", "button"),
+                ("template_id", "=", tmpl_with_vars_dynamic.id),
+            ]
+        )
+        button.field_name = "name"
+        self.gateway.whatsapp_account_id = "123456"
+        form_composer = Form(self.env["whatsapp.composer"].with_context(**ctx))
+        form_composer.template_id = tmpl_with_vars_dynamic
+        self.assertTrue(form_composer.is_required_template)
+        self.assertTrue(form_composer._get_modifier("template_id", "required"))
+        composer = form_composer.save()
+        channel = self.partner._whatsapp_get_channel(
+            composer.number_field_name, composer.gateway_id
+        )
+        message_domain = [
+            ("gateway_type", "=", "whatsapp"),
+            ("model", "=", channel._name),
+            ("res_id", "=", channel.id),
+        ]
+        with RecordCapturer(self.env["mail.message"], message_domain) as capture, patch(
+            "requests.post"
+        ) as post_mock:
+            post_mock.return_value = MagicMock()
+            composer.action_send_whatsapp()
+        # Assertions
+        self.assertEqual(len(capture.records), 1)
         channel.invalidate_recordset()
         self.assertTrue(channel.message_ids)
