@@ -20,7 +20,11 @@
                         title="Clear"
                         aria-label="Clear"
                     />
-                    <field name="digital_signature" widget="signature" />
+                    <field
+                        name="digital_signature"
+                        widget="signature"
+                        options="{'full_name': 'name'}"
+                    />
                 </h2>
             </xpath>
         </field>
@@ -45,7 +49,12 @@
                         title="Clear"
                         aria-label="Clear"
                     />
-                    <field name="digital_signature" widget="signature" readonly="0" />
+                    <field
+                        name="digital_signature"
+                        widget="signature"
+                        options="{'full_name': 'name'}"
+                        readonly="0"
+                    />
                 </h2>
             </xpath>
         </field>
