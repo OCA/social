@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_email_layout_mapping_all,email.layout.mapping.all,model_email_layout_mapping,,1,0,0,0
+access_email_layout_mapping_admin,email.layout.mapping.admin,model_email_layout_mapping,base.group_system,1,1,1,1
