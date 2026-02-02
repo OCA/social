@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-social"
-version = "17.0.20251218.0"
+version = "17.0.20260202.0"
 dependencies = [
     "odoo-addon-base_search_mail_content>=17.0dev,<17.1dev",
     "odoo-addon-base_user_signature>=17.0dev,<17.1dev",
@@ -21,6 +21,7 @@ dependencies = [
     "odoo-addon-mail_gateway>=17.0dev,<17.1dev",
     "odoo-addon-mail_gateway_whatsapp>=17.0dev,<17.1dev",
     "odoo-addon-mail_history_mark_unread>=17.0dev,<17.1dev",
+    "odoo-addon-mail_layout_force>=17.0dev,<17.1dev",
     "odoo-addon-mail_layout_preview>=17.0dev,<17.1dev",
     "odoo-addon-mail_no_user_assign_notification>=17.0dev,<17.1dev",
     "odoo-addon-mail_notification_custom_subject>=17.0dev,<17.1dev",
