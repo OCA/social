@@ -288,7 +288,11 @@ class MailGatewayWhatsappService(models.AbstractModel):
             else:
                 _logger.warning(f"Issue sending message with id {record.id}: {exc}")
                 record.sudo().write(
-                    {"notification_status": "exception", "failure_reason": exc}
+                    {
+                        "notification_status": "exception",
+                        "failure_reason": exc,
+                        "failure_type": "unknown",
+                    }
                 )
         if message:
             record.sudo().write(
