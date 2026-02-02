@@ -221,6 +221,11 @@ msgstr ""
 "no se encuentra ningún contacto, y reemplaza al campo Autor en el chatter."
 
 #. module: mail_gateway
+#: model:ir.model,name:mail_gateway.model_mail_resend_message
+msgid "Email resend wizard"
+msgstr ""
+
+#. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_notification__gateway_failure_reason
 msgid ""
 "Failure reason. This is usually the exception thrown by the email server, "
@@ -293,6 +298,11 @@ msgstr "Mensaje de pasarela"
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_message__gateway_notification_ids
 msgid "Gateway Notification"
 msgstr "Notificación de pasarela"
+
+#. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_resend_message__gateway_notification_ids
+msgid "Gateway Notifications"
+msgstr ""
 
 #. module: mail_gateway
 #: model:ir.actions.act_window,name:mail_gateway.res_partner_gateway_channel_act_window
@@ -409,8 +419,8 @@ msgstr "Mantener copia del mensaje"
 msgid ""
 "Keep a copy of the email content if emails are removed (mass mailing only)"
 msgstr ""
-"Mantener una copia del contenido del correo si los correos son eliminados ("
-"solo para envíos masivos)"
+"Mantener una copia del contenido del correo si los correos son eliminados "
+"(solo para envíos masivos)"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_discuss_channel__gateway_token
@@ -593,8 +603,8 @@ msgid ""
 msgstr ""
 "Idioma de traducción opcional (código ISO) para seleccionar cuando se envía "
 "un correo. Si no está establecido, se usará la versión inglesa. Esto suele "
-"ser normalmente una expresión que provee el idioma apropiado, p. e. {{ "
-"object.partner_id.lang }}."
+"ser normalmente una expresión que provee el idioma apropiado, p. e. "
+"{{ object.partner_id.lang }}."
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_compose_gateway_message__reply_to_mode
