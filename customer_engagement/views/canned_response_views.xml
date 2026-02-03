@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Search View -->
+    <record id="support_canned_response_view_search" model="ir.ui.view">
+        <field name="name">support.canned.response.view.search</field>
+        <field name="model">support.canned.response</field>
+        <field name="arch" type="xml">
+            <search string="Search Canned Responses">
+                <field name="name" />
+                <field name="shortcut" />
+                <field name="content" />
+                <filter
+                    string="Greetings"
+                    name="greeting"
+                    domain="[('category', '=', 'greeting')]"
+                />
+                <filter
+                    string="Closings"
+                    name="closing"
+                    domain="[('category', '=', 'closing')]"
+                />
+                <filter
+                    string="Information"
+                    name="info"
+                    domain="[('category', '=', 'info')]"
+                />
+                <filter
+                    string="Apologies"
+                    name="apology"
+                    domain="[('category', '=', 'apology')]"
+                />
+                <filter
+                    string="Follow-ups"
+                    name="followup"
+                    domain="[('category', '=', 'followup')]"
+                />
+                <separator />
+                <filter
+                    string="My Responses"
+                    name="mine"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <filter
+                    string="Shared"
+                    name="shared"
+                    domain="[('user_id', '=', False)]"
+                />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Category"
+                        name="group_category"
+                        context="{'group_by': 'category'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="support_canned_response_view_tree" model="ir.ui.view">
+        <field name="name">support.canned.response.view.tree</field>
+        <field name="model">support.canned.response</field>
+        <field name="arch" type="xml">
+            <list string="Canned Responses">
+                <field name="sequence" widget="handle" />
+                <field name="shortcut" />
+                <field name="name" />
+                <field name="category" />
+                <field name="plain_content" optional="show" />
+                <field name="usage_count" />
+                <field name="user_id" widget="many2one_avatar_user" optional="hide" />
+                <field name="active" widget="boolean_toggle" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="support_canned_response_view_form" model="ir.ui.view">
+        <field name="name">support.canned.response.view.form</field>
+        <field name="model">support.canned.response</field>
+        <field name="arch" type="xml">
+            <form string="Canned Response">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Response title" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <label for="shortcut" />
+                            <div class="d-flex align-items-center gap-2">
+                                <span class="text-muted">/</span>
+                                <field
+                                    name="shortcut"
+                                    placeholder="greeting"
+                                    class="flex-grow-1"
+                                />
+                            </div>
+                            <field name="category" />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <field name="user_id" />
+                            <field name="usage_count" readonly="1" />
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Content" name="content">
+                            <field
+                                name="content"
+                                placeholder="Type your response template here..."
+                            />
+                        </page>
+                        <page string="Restrictions" name="restrictions">
+                            <group>
+                                <group string="Channel Restrictions">
+                                    <field
+                                        name="channel_types"
+                                        placeholder="whatsapp,email (leave empty for all)"
+                                    />
+                                    <div class="alert alert-info" role="alert">
+                                        Leave empty to show this response on all channels.
+                                        Separate multiple channels with commas.
+                                    </div>
+                                </group>
+                                <group string="Team Restrictions">
+                                    <field name="team_ids" widget="many2many_tags" />
+                                    <div class="alert alert-info" role="alert">
+                                        Leave empty to show this response to all teams.
+                                    </div>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="support_canned_response_view_kanban" model="ir.ui.view">
+        <field name="name">support.canned.response.view.kanban</field>
+        <field name="model">support.canned.response</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="category">
+                <templates>
+                    <t t-name="kanban-card">
+                        <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_content">
+                                <div
+                                    class="d-flex justify-content-between align-items-center"
+                                >
+                                    <strong>/<field name="shortcut" /></strong>
+                                    <span class="badge bg-secondary">
+                                        <field name="usage_count" /> uses
+                                    </span>
+                                </div>
+                                <div class="text-muted mt-1">
+                                    <field name="name" />
+                                </div>
+                                <div
+                                    class="mt-2 small text-truncate"
+                                    style="max-height: 40px; overflow: hidden;"
+                                >
+                                    <field name="plain_content" />
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_support_canned_response" model="ir.actions.act_window">
+        <field name="name">Canned Responses</field>
+        <field name="res_model">support.canned.response</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="support_canned_response_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first canned response
+            </p>
+            <p>
+                Canned responses allow agents to quickly insert pre-written messages
+                by typing / followed by the shortcut.
+            </p>
+        </field>
+    </record>
+</odoo>

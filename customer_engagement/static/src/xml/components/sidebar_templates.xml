@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Main Sidebar Template -->
+    <t t-name="customer_engagement.SupportSidebar">
+        <div t-attf-class="o_support_sidebar #{props.collapsed ? 'collapsed' : ''}">
+            <!-- Header -->
+            <div
+                class="o_support_sidebar_header d-flex align-items-center justify-content-between px-3 py-3"
+            >
+                <h5 class="mb-0 fw-bold" t-if="!props.collapsed">Support</h5>
+                <button
+                    t-if="props.onToggleCollapse"
+                    class="btn btn-sm btn-link text-muted p-0"
+                    t-on-click="props.onToggleCollapse"
+                >
+                    <i
+                        t-attf-class="fa #{props.collapsed ? 'fa-chevron-right' : 'fa-chevron-left'}"
+                    />
+                </button>
+            </div>
+
+            <div class="o_support_sidebar_content">
+                <!-- Main Filters Section -->
+                <div class="o_support_sidebar_section">
+                    <div
+                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        t-on-click="() => state.expandedSections.conversations = !state.expandedSections.conversations"
+                    >
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa fa-inbox text-muted small" />
+                            <span
+                                class="fw-semibold small text-uppercase text-muted"
+                            >Conversations</span>
+                        </div>
+                        <i
+                            t-attf-class="fa fa-chevron-#{state.expandedSections.conversations ? 'down' : 'right'} text-muted small"
+                        />
+                    </div>
+                    <div
+                        t-if="state.expandedSections.conversations"
+                        class="o_support_sidebar_section_content"
+                    >
+                        <div
+                            t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('all') ? 'active' : ''}"
+                            t-on-click="() => this.onMainFilterClick('all')"
+                        >
+                            <i
+                                class="fa fa-inbox"
+                                style="width: 16px; text-align: center;"
+                            />
+                            <span class="flex-grow-1 text-truncate">All Open</span>
+                            <span
+                                class="badge rounded-pill bg-secondary"
+                                t-esc="props.counts.all || 0"
+                            />
+                        </div>
+                        <div
+                            t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('mine') ? 'active' : ''}"
+                            t-on-click="() => this.onMainFilterClick('mine')"
+                        >
+                            <i
+                                class="fa fa-user"
+                                style="width: 16px; text-align: center;"
+                            />
+                            <span
+                                class="flex-grow-1 text-truncate"
+                            >Assigned to Me</span>
+                            <span
+                                class="badge rounded-pill bg-secondary"
+                                t-esc="props.counts.mine || 0"
+                            />
+                        </div>
+                        <div
+                            t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('unassigned') ? 'active' : ''}"
+                            t-on-click="() => this.onMainFilterClick('unassigned')"
+                        >
+                            <i
+                                class="fa fa-question-circle"
+                                style="width: 16px; text-align: center;"
+                            />
+                            <span class="flex-grow-1 text-truncate">Unassigned</span>
+                            <span
+                                class="badge rounded-pill bg-secondary"
+                                t-esc="props.counts.unassigned || 0"
+                            />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Folders Section -->
+                <div class="o_support_sidebar_section">
+                    <div
+                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        t-on-click="() => state.expandedSections.folders = !state.expandedSections.folders"
+                    >
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa fa-folder text-muted small" />
+                            <span
+                                class="fw-semibold small text-uppercase text-muted"
+                            >Folders</span>
+                        </div>
+                        <i
+                            t-attf-class="fa fa-chevron-#{state.expandedSections.folders ? 'down' : 'right'} text-muted small"
+                        />
+                    </div>
+                    <div
+                        t-if="state.expandedSections.folders"
+                        class="o_support_sidebar_section_content"
+                    >
+                        <t t-foreach="systemFolders" t-as="folder" t-key="folder.id">
+                            <div
+                                t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFolder(folder) ? 'active' : ''}"
+                                t-on-click="() => this.onFolderClick(folder)"
+                            >
+                                <i
+                                    t-attf-class="fa #{folder.icon || 'fa-folder'}"
+                                    style="width: 16px; text-align: center;"
+                                />
+                                <span
+                                    class="flex-grow-1 text-truncate"
+                                    t-esc="folder.name"
+                                />
+                                <span
+                                    t-if="folder.conversation_count !== undefined"
+                                    class="badge rounded-pill bg-secondary"
+                                    t-esc="folder.conversation_count"
+                                />
+                            </div>
+                        </t>
+                        <t t-if="customFolders.length > 0">
+                            <div class="border-top my-2 mx-3" />
+                            <t
+                                t-foreach="customFolders"
+                                t-as="folder"
+                                t-key="folder.id"
+                            >
+                                <div
+                                    t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFolder(folder) ? 'active' : ''}"
+                                    t-on-click="() => this.onFolderClick(folder)"
+                                >
+                                    <i
+                                        t-attf-class="fa #{folder.icon || 'fa-folder-o'}"
+                                        style="width: 16px; text-align: center;"
+                                    />
+                                    <span
+                                        class="flex-grow-1 text-truncate"
+                                        t-esc="folder.name"
+                                    />
+                                    <span
+                                        t-if="folder.conversation_count !== undefined"
+                                        class="badge rounded-pill bg-secondary"
+                                        t-esc="folder.conversation_count"
+                                    />
+                                </div>
+                            </t>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Teams Section -->
+                <div class="o_support_sidebar_section">
+                    <div
+                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        t-on-click="() => state.expandedSections.teams = !state.expandedSections.teams"
+                    >
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa fa-users text-muted small" />
+                            <span
+                                class="fw-semibold small text-uppercase text-muted"
+                            >Teams</span>
+                        </div>
+                        <i
+                            t-attf-class="fa fa-chevron-#{state.expandedSections.teams ? 'down' : 'right'} text-muted small"
+                        />
+                    </div>
+                    <div
+                        t-if="state.expandedSections.teams"
+                        class="o_support_sidebar_section_content"
+                    >
+                        <t t-foreach="state.teams" t-as="team" t-key="team.id">
+                            <div
+                                class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
+                                t-on-click="() => this.onTeamClick(team)"
+                            >
+                                <i
+                                    class="fa fa-users"
+                                    style="width: 16px; text-align: center;"
+                                />
+                                <span
+                                    class="flex-grow-1 text-truncate"
+                                    t-esc="team.name"
+                                />
+                                <span
+                                    t-if="team.conversation_count !== undefined"
+                                    class="badge rounded-pill bg-secondary"
+                                    t-esc="team.conversation_count"
+                                />
+                            </div>
+                        </t>
+                        <div
+                            t-if="state.teams.length === 0"
+                            class="px-3 py-2 text-muted small"
+                        >
+                            No teams configured
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Channels Section -->
+                <div class="o_support_sidebar_section">
+                    <div
+                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        t-on-click="() => state.expandedSections.channels = !state.expandedSections.channels"
+                    >
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa fa-plug text-muted small" />
+                            <span
+                                class="fw-semibold small text-uppercase text-muted"
+                            >Channels</span>
+                        </div>
+                        <i
+                            t-attf-class="fa fa-chevron-#{state.expandedSections.channels ? 'down' : 'right'} text-muted small"
+                        />
+                    </div>
+                    <div
+                        t-if="state.expandedSections.channels"
+                        class="o_support_sidebar_section_content"
+                    >
+                        <t
+                            t-foreach="state.channels"
+                            t-as="channel"
+                            t-key="channel.code"
+                        >
+                            <div
+                                class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
+                                t-on-click="() => this.onChannelClick(channel)"
+                            >
+                                <i
+                                    t-attf-class="fa #{channel.icon} text-#{channel.color}"
+                                    style="width: 16px; text-align: center;"
+                                />
+                                <span
+                                    class="flex-grow-1 text-truncate"
+                                    t-esc="channel.name"
+                                />
+                            </div>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Labels Section -->
+                <div class="o_support_sidebar_section">
+                    <div
+                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        t-on-click="() => state.expandedSections.labels = !state.expandedSections.labels"
+                    >
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fa fa-tags text-muted small" />
+                            <span
+                                class="fw-semibold small text-uppercase text-muted"
+                            >Labels</span>
+                        </div>
+                        <i
+                            t-attf-class="fa fa-chevron-#{state.expandedSections.labels ? 'down' : 'right'} text-muted small"
+                        />
+                    </div>
+                    <div
+                        t-if="state.expandedSections.labels"
+                        class="o_support_sidebar_section_content"
+                    >
+                        <t t-foreach="state.labels" t-as="label" t-key="label.id">
+                            <div
+                                class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
+                                t-on-click="() => this.onLabelClick(label)"
+                            >
+                                <i
+                                    t-attf-class="fa fa-tag o_tag_color_#{label.color || 0}"
+                                    style="width: 16px; text-align: center;"
+                                />
+                                <span
+                                    class="flex-grow-1 text-truncate"
+                                    t-esc="label.name"
+                                />
+                                <span
+                                    t-if="label.conversation_count !== undefined"
+                                    class="badge rounded-pill bg-secondary"
+                                    t-esc="label.conversation_count"
+                                />
+                            </div>
+                        </t>
+                        <div
+                            t-if="state.labels.length === 0"
+                            class="px-3 py-2 text-muted small"
+                        >
+                            No labels configured
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Sidebar Section Template (kept for compatibility) -->
+    <t t-name="customer_engagement.SidebarSection">
+        <div class="o_support_sidebar_section">
+            <div
+                class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                t-on-click="toggle"
+            >
+                <div class="d-flex align-items-center gap-2">
+                    <i
+                        t-if="props.icon"
+                        t-attf-class="fa #{props.icon} text-muted small"
+                    />
+                    <span class="fw-semibold small text-uppercase text-muted">
+                        <t t-esc="props.title" />
+                    </span>
+                </div>
+                <i
+                    t-attf-class="fa fa-chevron-#{props.expanded ? 'down' : 'right'} text-muted small"
+                />
+            </div>
+            <div t-if="props.expanded" class="o_support_sidebar_section_content">
+                <t t-slot="default" />
+            </div>
+        </div>
+    </t>
+
+    <!-- Sidebar Item Template (kept for compatibility) -->
+    <t t-name="customer_engagement.SidebarItem">
+        <div t-att-class="itemClass" t-on-click="onClick">
+            <i
+                t-att-class="iconClass + ' ' + colorClass"
+                style="width: 16px; text-align: center;"
+            />
+            <span class="flex-grow-1 text-truncate" t-esc="props.label" />
+            <span
+                t-if="props.count !== undefined"
+                class="badge rounded-pill bg-secondary"
+            >
+                <t t-esc="props.count" />
+            </span>
+            <span
+                t-if="props.badge"
+                t-att-class="'badge ' + (props.badgeClass || 'bg-primary text-white')"
+            >
+                <t t-esc="props.badge" />
+            </span>
+        </div>
+    </t>
+
+</templates>

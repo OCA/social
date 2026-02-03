@@ -1,0 +1,151 @@
+// Sidebar Component Styles
+
+.o_support_sidebar {
+    width: 220px;
+    min-width: 220px;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6; // Fallback for --bs-border-color
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    transition:
+        width 0.15s ease,
+        min-width 0.15s ease;
+    color: #212529 !important; // Ensure text is dark
+
+    // Collapsed state
+    &.collapsed {
+        width: 60px;
+        min-width: 60px;
+
+        .o_support_sidebar_header h5,
+        .o_support_sidebar_section_header span,
+        .o_support_sidebar_item span:not(.badge),
+        .o_sidebar_item_count {
+            display: none;
+        }
+
+        .o_support_sidebar_item {
+            justify-content: center;
+            padding: 0.75rem;
+
+            i {
+                margin: 0;
+            }
+        }
+    }
+
+    // Header
+    .o_support_sidebar_header {
+        flex-shrink: 0;
+        border-bottom: 1px solid #dee2e6;
+
+        h5 {
+            color: #212529;
+            font-size: 1rem;
+        }
+    }
+
+    // Content area with scrolling
+    .o_support_sidebar_content {
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+    }
+
+    // Section styling
+    .o_support_sidebar_section {
+        margin-bottom: 0.5rem;
+
+        .o_support_sidebar_section_header {
+            user-select: none;
+            color: #6c757d; // Muted text color for headers
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+
+            span {
+                font-size: 0.7rem;
+                letter-spacing: 0.05em;
+                color: #6c757d; // Explicit muted color
+            }
+
+            i {
+                color: #6c757d; // Explicit muted color for icons
+            }
+        }
+
+        .o_support_sidebar_section_content {
+            // Animation disabled to prevent potential rendering issues
+            // animation: slideDown 0.15s ease-out;
+        }
+    }
+
+    // Item styling
+    .o_support_sidebar_item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.5rem 0.75rem;
+        margin: 0 0.5rem;
+        cursor: pointer;
+        border-radius: 0.25rem;
+        transition: background-color 0.15s ease;
+        color: #212529; // Ensure text is dark
+
+        &:hover {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+
+        &.active {
+            background-color: var(--bs-primary, #0d6efd);
+            color: white !important;
+
+            i,
+            span {
+                color: white !important;
+            }
+
+            .badge {
+                background-color: white !important;
+                color: var(--bs-primary, #0d6efd) !important;
+            }
+        }
+
+        i {
+            width: 16px;
+            text-align: center;
+            color: #6c757d; // Muted icon color
+        }
+
+        .badge {
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
+    }
+}
+
+// Animation for section expand
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

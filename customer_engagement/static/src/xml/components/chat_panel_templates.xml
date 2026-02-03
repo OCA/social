@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Chat Panel Template -->
+    <t t-name="customer_engagement.ChatPanel">
+        <div class="o_support_chat_panel d-flex flex-column h-100">
+            <t t-if="!hasConversation">
+                <div
+                    class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
+                >
+                    <i class="fa fa-comments fa-4x mb-3" />
+                    <h5>Select a conversation</h5>
+                    <p
+                        class="text-center"
+                    >Choose a conversation from the list to start chatting</p>
+                </div>
+            </t>
+            <t t-else="">
+                <!-- Header -->
+                <ChatHeader
+                    conversation="props.conversation"
+                    isAssignedToMe="isAssignedToMe"
+                    isUnassigned="isUnassigned"
+                    onAssign="props.onAssign"
+                    onStatusChange="props.onStatusChange"
+                    onOpenForm="props.onOpenForm"
+                    onAddLabel="props.onAddLabel"
+                />
+
+                <!-- Message List -->
+                <div
+                    class="o_support_messages flex-grow-1 overflow-auto p-3"
+                    t-ref="messageList"
+                >
+                    <MessageList
+                        timeline="combinedTimeline"
+                        currentUserId="props.currentUserId"
+                        isLoading="props.isLoading"
+                    />
+                </div>
+
+                <!-- Composer -->
+                <div class="o_support_composer_container border-top bg-white">
+                    <RichComposer
+                        mode="state.composerMode"
+                        conversationId="props.conversation.id"
+                        channelType="props.conversation.channel_type"
+                        onSend="(content, attachments) => this.onSend(content, attachments)"
+                        onModeChange="(mode) => this.setComposerMode(mode)"
+                        showEmojiPicker="state.showEmojiPicker"
+                        showCannedPicker="state.showCannedPicker"
+                        onToggleEmoji="() => this.toggleEmojiPicker()"
+                        onToggleCanned="() => this.toggleCannedPicker()"
+                        onClosePickers="() => this.closePickers()"
+                    />
+                </div>
+            </t>
+        </div>
+    </t>
+
+    <!-- Chat Header Template -->
+    <t t-name="customer_engagement.ChatHeader">
+        <div
+            class="o_support_chat_header d-flex align-items-center justify-content-between p-3 border-bottom bg-white"
+        >
+            <div class="d-flex align-items-center gap-3">
+                <!-- Channel Icon -->
+                <i t-attf-class="fa #{channelIcon} fa-lg" />
+
+                <!-- Partner Info -->
+                <div>
+                    <div class="fw-semibold" t-esc="partnerName" />
+                    <div class="text-muted small">
+                        <span t-esc="props.conversation.uuid" class="font-monospace" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center gap-2">
+                <!-- Assign Button -->
+                <button
+                    t-if="props.isUnassigned"
+                    class="btn btn-sm btn-outline-primary"
+                    t-on-click="onAssignClick"
+                >
+                    <i class="fa fa-user-plus me-1" />
+                    Assign to Me
+                </button>
+
+                <!-- Status Dropdown -->
+                <div class="dropdown">
+                    <button
+                        class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                        t-on-click="toggleStatusMenu"
+                    >
+                        <i class="fa fa-exchange me-1" />
+                        Status
+                    </button>
+                    <div
+                        t-if="state.showStatusMenu"
+                        class="dropdown-menu show"
+                        style="right: 0;"
+                    >
+                        <t t-foreach="statusOptions" t-as="option" t-key="option.code">
+                            <button
+                                class="dropdown-item d-flex align-items-center gap-2"
+                                t-on-click="() => this.onStatusClick(option.code)"
+                            >
+                                <i
+                                    t-attf-class="fa #{option.icon} text-#{option.color}"
+                                />
+                                <t t-esc="option.label" />
+                            </button>
+                        </t>
+                    </div>
+                </div>
+
+                <!-- Quick Resolve Button -->
+                <button
+                    class="btn btn-sm btn-success"
+                    t-on-click="() => this.onStatusClick('resolved')"
+                >
+                    <i class="fa fa-check me-1" />
+                    Resolve
+                </button>
+
+                <!-- More Menu -->
+                <div class="dropdown">
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        t-on-click="toggleMoreMenu"
+                    >
+                        <i class="fa fa-ellipsis-v" />
+                    </button>
+                    <div
+                        t-if="state.showMoreMenu"
+                        class="dropdown-menu show"
+                        style="right: 0;"
+                    >
+                        <button class="dropdown-item" t-on-click="onAddLabelClick">
+                            <i class="fa fa-tag me-2" />
+                            Add Label
+                        </button>
+                        <button class="dropdown-item" t-on-click="onOpenFormClick">
+                            <i class="fa fa-external-link me-2" />
+                            Open Full View
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Message List Template -->
+    <t t-name="customer_engagement.MessageList">
+        <div class="o_support_message_list" t-ref="container">
+            <t t-if="props.isLoading">
+                <div class="d-flex align-items-center justify-content-center p-4">
+                    <div class="spinner-border text-primary" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                    </div>
+                </div>
+            </t>
+            <t t-elif="props.timeline.length === 0">
+                <div
+                    class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
+                >
+                    <i class="fa fa-comment-o fa-3x mb-3" />
+                    <p>No messages yet</p>
+                </div>
+            </t>
+            <t t-else="">
+                <t t-foreach="props.timeline" t-as="item" t-key="item_index">
+                    <!-- Date Separator -->
+                    <div
+                        t-if="shouldShowDateSeparator(item, item_index)"
+                        class="o_date_separator d-flex align-items-center gap-3 my-3"
+                    >
+                        <hr class="flex-grow-1" />
+                        <span class="text-muted small" t-esc="formatDate(item.date)" />
+                        <hr class="flex-grow-1" />
+                    </div>
+
+                    <!-- Message or Note -->
+                    <t t-if="item.type === 'message'">
+                        <MessageBubble
+                            message="item.data"
+                            isOutgoing="isOutgoing(item.data)"
+                        />
+                    </t>
+                    <t t-elif="item.type === 'note'">
+                        <NoteBubble note="item.data" />
+                    </t>
+                    <t t-elif="item.type === 'event'">
+                        <TimelineEvent event="item.data" />
+                    </t>
+                </t>
+            </t>
+        </div>
+    </t>
+
+    <!-- Message Bubble Template -->
+    <t t-name="customer_engagement.MessageBubble">
+        <div
+            t-att-class="bubbleClass + ' d-flex gap-2 mb-3 ' + (props.isOutgoing ? 'flex-row-reverse' : '')"
+        >
+            <!-- Avatar -->
+            <div class="o_message_avatar flex-shrink-0" t-if="!props.isOutgoing">
+                <div
+                    class="rounded-circle d-flex align-items-center justify-content-center bg-secondary text-white"
+                    style="width: 32px; height: 32px; font-size: 12px;"
+                >
+                    <t t-esc="authorInitials" />
+                </div>
+            </div>
+
+            <!-- Content -->
+            <div
+                t-attf-class="o_message_content #{props.isOutgoing ? 'bg-primary text-white' : 'bg-light'} rounded-3 p-2 px-3"
+                style="max-width: 70%;"
+            >
+                <div
+                    t-if="!props.isOutgoing"
+                    class="fw-semibold small mb-1"
+                    t-esc="authorName"
+                />
+                <div class="o_message_body" t-raw="props.message.body" />
+
+                <!-- Attachments -->
+                <div t-if="hasAttachments" class="o_message_attachments mt-2">
+                    <t t-foreach="attachments" t-as="attachment" t-key="attachment.id">
+                        <div
+                            class="o_attachment d-flex align-items-center gap-2 p-2 bg-white bg-opacity-25 rounded mb-1"
+                        >
+                            <t t-if="isImageAttachment(attachment)">
+                                <img
+                                    t-att-src="attachment.url"
+                                    class="rounded"
+                                    style="max-width: 200px; max-height: 150px;"
+                                />
+                            </t>
+                            <t t-else="">
+                                <i t-attf-class="fa #{getAttachmentIcon(attachment)}" />
+                                <span class="text-truncate" t-esc="attachment.name" />
+                            </t>
+                        </div>
+                    </t>
+                </div>
+
+                <div
+                    t-attf-class="text-end small #{props.isOutgoing ? 'text-white-50' : 'text-muted'}"
+                    t-esc="formattedTime"
+                />
+            </div>
+        </div>
+    </t>
+
+    <!-- Note Bubble Template -->
+    <t t-name="customer_engagement.NoteBubble">
+        <div class="o_note_bubble d-flex gap-2 mb-3 mx-4">
+            <div
+                class="o_note_content flex-grow-1 bg-warning bg-opacity-25 border border-warning rounded-3 p-3"
+            >
+                <div class="d-flex align-items-center justify-content-between mb-2">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa fa-sticky-note text-warning" />
+                        <span class="fw-semibold small">Private Note</span>
+                        <span class="text-muted small">by <t
+                            t-esc="authorName"
+                        /></span>
+                    </div>
+                    <div class="d-flex align-items-center gap-1">
+                        <button
+                            t-if="props.onPin"
+                            class="btn btn-sm btn-link text-muted p-0"
+                            t-on-click="onPinClick"
+                            t-att-title="isPinned ? 'Unpin' : 'Pin'"
+                        >
+                            <i
+                                t-attf-class="fa #{isPinned ? 'fa-thumb-tack text-primary' : 'fa-thumb-tack'}"
+                            />
+                        </button>
+                        <span class="text-muted small" t-esc="formattedTime" />
+                    </div>
+                </div>
+                <div class="o_note_body" t-raw="props.note.content" />
+            </div>
+        </div>
+    </t>
+
+    <!-- Timeline Event Template -->
+    <t t-name="customer_engagement.TimelineEvent">
+        <div
+            class="o_timeline_event d-flex align-items-center justify-content-center gap-2 my-2 text-muted small"
+        >
+            <i t-att-class="'fa ' + eventIcon" />
+            <span t-esc="props.event.description" />
+            <span t-esc="formattedTime" />
+        </div>
+    </t>
+
+    <!-- Rich Composer Template -->
+    <t t-name="customer_engagement.RichComposer">
+        <div class="o_support_rich_composer p-3">
+            <!-- Mode Tabs -->
+            <div class="d-flex gap-2 mb-2">
+                <button
+                    t-attf-class="btn btn-sm #{props.mode === 'message' ? 'btn-primary' : 'btn-outline-secondary'}"
+                    t-on-click="() => this.setMode('message')"
+                >
+                    <i class="fa fa-comment me-1" />
+                    Reply
+                </button>
+                <button
+                    t-attf-class="btn btn-sm #{props.mode === 'note' ? 'btn-warning' : 'btn-outline-secondary'}"
+                    t-on-click="() => this.setMode('note')"
+                >
+                    <i class="fa fa-sticky-note me-1" />
+                    Private Note
+                </button>
+            </div>
+
+            <!-- Canned Response Suggestions -->
+            <div
+                t-if="state.cannedSuggestions.length > 0"
+                class="o_canned_suggestions mb-2 border rounded"
+            >
+                <t
+                    t-foreach="state.cannedSuggestions"
+                    t-as="response"
+                    t-key="response.id"
+                >
+                    <div
+                        class="o_canned_suggestion p-2 border-bottom cursor-pointer"
+                        t-on-click="() => this.onCannedSelect(response)"
+                    >
+                        <div class="d-flex align-items-center gap-2">
+                            <span class="fw-semibold text-primary">/<t
+                                t-esc="response.shortcut"
+                            /></span>
+                            <span class="text-muted">-</span>
+                            <span t-esc="response.name" />
+                        </div>
+                        <div
+                            class="text-muted small text-truncate"
+                            t-esc="response.plain_content"
+                        />
+                    </div>
+                </t>
+            </div>
+
+            <!-- Attachments Preview -->
+            <AttachmentUploader
+                t-if="state.attachments.length > 0 or state.isUploading"
+                attachments="state.attachments"
+                onAdd="(att) => this.onAttachmentAdd(att)"
+                onRemove="(att) => this.onAttachmentRemove(att)"
+            />
+
+            <!-- Textarea -->
+            <div class="d-flex gap-2">
+                <div class="flex-grow-1 position-relative">
+                    <textarea
+                        t-ref="textarea"
+                        class="form-control"
+                        rows="2"
+                        t-att-placeholder="placeholder"
+                        t-att-value="state.content"
+                        t-on-input="onInput"
+                        t-on-keydown="onKeyDown"
+                        t-attf-style="#{isNote ? 'background-color: #fff3cd;' : ''}"
+                    />
+                </div>
+                <div class="d-flex flex-column gap-1">
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        t-on-click="props.onToggleEmoji"
+                        title="Emoji"
+                    >
+                        <i class="fa fa-smile-o" />
+                    </button>
+                    <button
+                        class="btn btn-sm btn-outline-secondary"
+                        t-on-click="props.onToggleCanned"
+                        title="Canned Responses"
+                    >
+                        <i class="fa fa-bolt" />
+                    </button>
+                    <button
+                        t-att-class="'btn btn-sm ' + sendButtonClass"
+                        t-att-disabled="!canSend"
+                        t-on-click="send"
+                        title="Send"
+                    >
+                        <i class="fa fa-paper-plane" />
+                    </button>
+                </div>
+            </div>
+
+            <!-- Pickers -->
+            <EmojiPicker
+                t-if="props.showEmojiPicker"
+                onSelect="(emoji) => this.onEmojiSelect(emoji)"
+                onClose="props.onClosePickers"
+            />
+
+            <CannedResponsePicker
+                t-if="props.showCannedPicker"
+                channelType="props.channelType"
+                onSelect="(response) => this.onCannedSelect(response)"
+                onClose="props.onClosePickers"
+            />
+        </div>
+    </t>
+
+    <!-- Emoji Picker Template -->
+    <t t-name="customer_engagement.EmojiPicker">
+        <div
+            class="o_emoji_picker position-absolute bottom-100 end-0 mb-2 bg-white border rounded shadow"
+            style="width: 320px; z-index: 1000;"
+        >
+            <div class="p-2 border-bottom">
+                <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Search emoji..."
+                    t-on-input="onSearchInput"
+                />
+            </div>
+            <div class="d-flex border-bottom">
+                <t t-foreach="categories" t-as="cat" t-key="cat.key">
+                    <button
+                        t-attf-class="btn btn-sm flex-fill rounded-0 border-0 #{state.activeCategory === cat.key ? 'bg-light' : ''}"
+                        t-on-click="() => this.setCategory(cat.key)"
+                        t-att-title="cat.label"
+                    >
+                        <t t-esc="cat.icon" />
+                    </button>
+                </t>
+            </div>
+            <div class="p-2" style="max-height: 200px; overflow-y: auto;">
+                <div class="d-flex flex-wrap gap-1">
+                    <t t-foreach="emojis" t-as="emoji" t-key="emoji_index">
+                        <button
+                            class="btn btn-sm btn-light p-1"
+                            style="font-size: 18px; line-height: 1;"
+                            t-on-click="() => this.onEmojiClick(emoji)"
+                        >
+                            <t t-esc="emoji" />
+                        </button>
+                    </t>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Canned Response Picker Template -->
+    <t t-name="customer_engagement.CannedResponsePicker">
+        <div
+            class="o_canned_picker position-absolute bottom-100 end-0 mb-2 bg-white border rounded shadow"
+            style="width: 400px; z-index: 1000;"
+        >
+            <div
+                class="p-2 border-bottom d-flex align-items-center justify-content-between"
+            >
+                <span class="fw-semibold">Quick Replies</span>
+                <button class="btn btn-sm btn-link text-muted p-0" t-on-click="onClose">
+                    <i class="fa fa-times" />
+                </button>
+            </div>
+            <div class="p-2 border-bottom">
+                <input
+                    type="text"
+                    class="form-control form-control-sm"
+                    placeholder="Search responses..."
+                    t-on-input="onSearchInput"
+                />
+            </div>
+            <div class="d-flex flex-wrap gap-1 p-2 border-bottom">
+                <t t-foreach="categories" t-as="cat" t-key="cat.key">
+                    <button
+                        t-attf-class="btn btn-sm #{state.activeCategory === cat.key ? 'btn-primary' : 'btn-outline-secondary'}"
+                        t-on-click="() => this.setCategory(cat.key)"
+                    >
+                        <t t-esc="cat.label" />
+                    </button>
+                </t>
+            </div>
+            <div style="max-height: 250px; overflow-y: auto;">
+                <t t-if="state.isLoading">
+                    <div class="d-flex align-items-center justify-content-center p-4">
+                        <div class="spinner-border spinner-border-sm text-primary" />
+                    </div>
+                </t>
+                <t t-elif="state.filteredResponses.length === 0">
+                    <div class="text-center text-muted p-4">
+                        No responses found
+                    </div>
+                </t>
+                <t t-else="">
+                    <t
+                        t-foreach="state.filteredResponses"
+                        t-as="response"
+                        t-key="response.id"
+                    >
+                        <div
+                            class="o_canned_item p-2 border-bottom cursor-pointer"
+                            t-on-click="() => this.onResponseClick(response)"
+                        >
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <span
+                                    class="badge bg-primary text-white font-monospace"
+                                >/<t t-esc="response.shortcut" /></span>
+                                <span class="fw-semibold" t-esc="response.name" />
+                            </div>
+                            <div
+                                class="text-muted small"
+                                t-esc="truncateContent(response.plain_content)"
+                            />
+                        </div>
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <!-- Attachment Uploader Template -->
+    <t t-name="customer_engagement.AttachmentUploader">
+        <div class="o_attachment_uploader mb-2">
+            <!-- Drop Zone (hidden file input) -->
+            <input
+                type="file"
+                t-ref="fileInput"
+                class="d-none"
+                multiple="multiple"
+                t-att-accept="acceptTypes"
+                t-on-change="onFileChange"
+            />
+
+            <!-- Attachment List -->
+            <div
+                t-if="props.attachments.length > 0"
+                class="d-flex flex-wrap gap-2 mb-2"
+            >
+                <t
+                    t-foreach="props.attachments"
+                    t-as="attachment"
+                    t-key="attachment_index"
+                >
+                    <div
+                        class="o_attachment_preview d-flex align-items-center gap-2 p-2 border rounded bg-light"
+                    >
+                        <t t-if="isImage(attachment)">
+                            <img
+                                t-att-src="attachment.url"
+                                class="rounded"
+                                style="width: 40px; height: 40px; object-fit: cover;"
+                            />
+                        </t>
+                        <t t-else="">
+                            <i
+                                t-attf-class="fa #{getFileIcon(attachment)} fa-lg text-muted"
+                            />
+                        </t>
+                        <div class="flex-grow-1 min-width-0">
+                            <div class="text-truncate small" t-esc="attachment.name" />
+                            <div
+                                class="text-muted small"
+                                t-esc="formatSize(attachment.size)"
+                            />
+                        </div>
+                        <button
+                            class="btn btn-sm btn-link text-danger p-0"
+                            t-on-click="() => this.onRemoveClick(attachment)"
+                        >
+                            <i class="fa fa-times" />
+                        </button>
+                    </div>
+                </t>
+            </div>
+
+            <!-- Add Attachment Button -->
+            <button
+                class="btn btn-sm btn-outline-secondary"
+                t-on-click="onFileInputClick"
+                t-att-disabled="state.isUploading"
+            >
+                <t t-if="state.isUploading">
+                    <span class="spinner-border spinner-border-sm me-1" />
+                    Uploading...
+                </t>
+                <t t-else="">
+                    <i class="fa fa-paperclip me-1" />
+                    Attach File
+                </t>
+            </button>
+        </div>
+    </t>
+
+</templates>

@@ -1,0 +1,129 @@
+// Message Bubbles Component Styles
+
+// Message bubble base
+.o_message_bubble {
+    animation: fadeInUp 0.2s ease-out;
+
+    .o_message_avatar {
+        width: 32px;
+        height: 32px;
+        font-size: 12px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+    }
+
+    .o_message_content {
+        max-width: 70%;
+        padding: 0.5rem 1rem;
+        border-radius: 18px;
+        word-wrap: break-word;
+        position: relative;
+
+        .o_message_body {
+            word-wrap: break-word;
+            word-break: break-word;
+
+            // Reset some HTML styles
+            p {
+                margin-bottom: 0.25rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+
+            a {
+                color: inherit;
+                text-decoration: underline;
+            }
+
+            img {
+                max-width: 100%;
+                border-radius: 0.5rem;
+            }
+        }
+    }
+
+    // Outgoing messages (from agent)
+    &.outgoing {
+        .o_message_content {
+            background-color: #0066cc;
+            color: white;
+            border-radius: 18px 18px 4px 18px;
+
+            a {
+                color: rgba(255, 255, 255, 0.9);
+            }
+        }
+    }
+
+    // Incoming messages (from customer)
+    &.incoming {
+        .o_message_content {
+            background-color: #e8e8e8;
+            border-radius: 18px 18px 18px 4px;
+        }
+    }
+}
+
+// Note bubble
+.o_note_bubble {
+    animation: fadeInUp 0.2s ease-out;
+
+    .o_note_content {
+        background-color: #fff3cd !important;
+        border-color: var(--bs-warning) !important;
+
+        .o_note_body {
+            word-wrap: break-word;
+
+            p {
+                margin-bottom: 0.25rem;
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// Timeline event
+.o_timeline_event {
+    opacity: 0.8;
+
+    i {
+        font-size: 0.85rem;
+    }
+}
+
+// Attachments in messages
+.o_message_attachments {
+    .o_attachment {
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.3) !important;
+        }
+
+        img {
+            cursor: pointer;
+        }
+    }
+}
+
+// Animation
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Conversation List Template -->
+    <t t-name="customer_engagement.ConversationList">
+        <div class="o_support_conversation_list d-flex flex-column h-100">
+            <!-- Search Bar -->
+            <div class="o_support_conversation_search p-3 border-bottom">
+                <div class="input-group input-group-sm">
+                    <span class="input-group-text bg-transparent border-end-0">
+                        <i class="fa fa-search text-muted" />
+                    </span>
+                    <input
+                        type="text"
+                        class="form-control border-start-0"
+                        placeholder="Search conversations..."
+                        t-att-value="state.searchQuery"
+                        t-on-input="onSearchInput"
+                    />
+                </div>
+            </div>
+
+            <!-- Tabs -->
+            <div class="o_support_conversation_tabs d-flex border-bottom">
+                <t t-foreach="tabs" t-as="tab" t-key="tab.key">
+                    <button
+                        t-attf-class="btn btn-sm flex-fill rounded-0 border-0 py-2 #{isActiveTab(tab.key) ? 'active text-primary border-bottom border-primary border-2' : 'text-muted'}"
+                        t-on-click="() => this.onTabClick(tab.key)"
+                    >
+                        <t t-esc="tab.label" />
+                    </button>
+                </t>
+            </div>
+
+            <!-- Conversation Items -->
+            <div class="o_support_conversation_items flex-grow-1 overflow-auto">
+                <t t-if="props.isLoading">
+                    <div class="d-flex align-items-center justify-content-center h-100">
+                        <div class="spinner-border text-primary" role="status">
+                            <span class="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                </t>
+                <t t-elif="filteredConversations.length === 0">
+                    <div
+                        class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
+                    >
+                        <i class="fa fa-inbox fa-3x mb-3" />
+                        <p class="mb-0">No conversations found</p>
+                        <small
+                            t-if="state.searchQuery"
+                        >Try adjusting your search</small>
+                    </div>
+                </t>
+                <t t-else="">
+                    <t
+                        t-foreach="filteredConversations"
+                        t-as="conversation"
+                        t-key="conversation.id"
+                    >
+                        <ConversationCard
+                            conversation="conversation"
+                            selected="isSelected(conversation)"
+                            onClick="() => this.onConversationSelect(conversation)"
+                        />
+                    </t>
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <!-- Conversation Card Template -->
+    <t t-name="customer_engagement.ConversationCard">
+        <div t-att-class="cardClass + ' ' + priorityClass" t-on-click="onClick">
+            <div class="o_conversation_card_content d-flex gap-3 p-3">
+                <!-- Avatar -->
+                <div class="o_conversation_avatar flex-shrink-0">
+                    <div
+                        class="o_avatar rounded-circle d-flex align-items-center justify-content-center bg-primary text-white"
+                        style="width: 40px; height: 40px; font-size: 14px;"
+                    >
+                        <t t-esc="partnerInitials" />
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="o_conversation_info flex-grow-1 min-width-0">
+                    <!-- Header Row -->
+                    <div
+                        class="d-flex align-items-center justify-content-between gap-2 mb-1"
+                    >
+                        <span class="fw-semibold text-truncate" t-esc="partnerName" />
+                        <RelativeTime
+                            datetime="props.conversation.write_date or props.conversation.create_date"
+                            format="'short'"
+                        />
+                    </div>
+
+                    <!-- Subject Row -->
+                    <div class="d-flex align-items-center gap-2 mb-1">
+                        <ChannelBadge
+                            channel="props.conversation.channel_type"
+                            size="'sm'"
+                        />
+                        <span class="text-truncate small" t-esc="subject" />
+                    </div>
+
+                    <!-- Meta Row -->
+                    <div
+                        class="d-flex align-items-center justify-content-between gap-2"
+                    >
+                        <div class="d-flex align-items-center gap-1">
+                            <PriorityIndicator
+                                t-if="props.conversation.priority and props.conversation.priority !== '1'"
+                                priority="props.conversation.priority"
+                            />
+                            <span
+                                class="badge bg-secondary small"
+                                t-if="stageName"
+                                t-esc="stageName"
+                            />
+                        </div>
+                        <div class="d-flex align-items-center gap-1">
+                            <!-- Labels count badge (simplified) -->
+                            <span
+                                t-if="props.conversation.label_ids and props.conversation.label_ids.length"
+                                class="badge bg-info small"
+                            >
+                                <i class="fa fa-tags me-1" />
+                                <t t-esc="props.conversation.label_ids.length" />
+                            </span>
+                            <span
+                                t-if="props.conversation.unread_message_count and props.conversation.unread_message_count > 0"
+                                class="badge rounded-pill bg-success"
+                            >
+                                <t t-esc="props.conversation.unread_message_count" />
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Agent Row -->
+                    <div
+                        t-if="assignedAgent"
+                        class="mt-1 d-flex align-items-center gap-1 text-muted small"
+                    >
+                        <i class="fa fa-user-o" />
+                        <span t-esc="assignedAgent" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+
+    <!-- Channel Badge Template -->
+    <t t-name="customer_engagement.ChannelBadge">
+        <span t-att-class="badgeClass" t-att-title="tooltip">
+            <i t-att-class="iconClass" />
+        </span>
+    </t>
+
+    <!-- Label Pills Template -->
+    <t t-name="customer_engagement.LabelPills">
+        <div class="o_label_pills d-flex align-items-center gap-1">
+            <t t-foreach="visibleLabels" t-as="label" t-key="label.id">
+                <span
+                    t-att-class="getLabelClass(label)"
+                    style="font-size: 10px; padding: 2px 6px;"
+                >
+                    <t t-esc="label.name" />
+                    <i
+                        t-if="props.onRemove"
+                        class="fa fa-times ms-1 cursor-pointer"
+                        t-on-click="(ev) => this.onRemoveClick(label, ev)"
+                    />
+                </span>
+            </t>
+            <span
+                t-if="hiddenCount > 0"
+                class="badge bg-secondary"
+                style="font-size: 10px;"
+            >
+                +<t t-esc="hiddenCount" />
+            </span>
+        </div>
+    </t>
+
+    <!-- Priority Indicator Template -->
+    <t t-name="customer_engagement.PriorityIndicator">
+        <span t-att-class="indicatorClass" t-att-title="priorityConfig.label">
+            <i t-att-class="iconClass" />
+            <span t-if="props.showLabel" class="ms-1" t-esc="priorityConfig.label" />
+        </span>
+    </t>
+
+    <!-- Relative Time Template -->
+    <t t-name="customer_engagement.RelativeTime">
+        <span class="o_relative_time text-muted small" t-att-title="fullDateTime">
+            <t t-esc="state.displayText" />
+        </span>
+    </t>
+
+</templates>

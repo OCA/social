@@ -1,0 +1,17 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_conversation_user,support.conversation.user,model_support_conversation,group_support_user,1,1,1,0
+access_conversation_manager,support.conversation.manager,model_support_conversation,group_support_manager,1,1,1,1
+access_conversation_stage_all,support.conversation.stage.all,model_support_conversation_stage,base.group_user,1,0,0,0
+access_conversation_stage_manager,support.conversation.stage.manager,model_support_conversation_stage,group_support_manager,1,1,1,1
+access_conversation_history_user,support.conversation.history.user,model_support_conversation_history,group_support_user,1,0,0,0
+access_conversation_history_manager,support.conversation.history.manager,model_support_conversation_history,group_support_manager,1,1,1,1
+access_conversation_label_user,support.conversation.label.user,model_support_conversation_label,group_support_user,1,0,0,0
+access_conversation_label_manager,support.conversation.label.manager,model_support_conversation_label,group_support_manager,1,1,1,1
+access_support_team_user,support.team.user,model_support_team,group_support_user,1,0,0,0
+access_support_team_manager,support.team.manager,model_support_team,group_support_manager,1,1,1,1
+access_support_folder_user,support.folder.user,model_support_folder,group_support_user,1,0,0,0
+access_support_folder_manager,support.folder.manager,model_support_folder,group_support_manager,1,1,1,1
+access_canned_response_user,support.canned.response.user,model_support_canned_response,group_support_user,1,0,0,0
+access_canned_response_manager,support.canned.response.manager,model_support_canned_response,group_support_manager,1,1,1,1
+access_conversation_note_user,support.conversation.note.user,model_support_conversation_note,group_support_user,1,1,1,0
+access_conversation_note_manager,support.conversation.note.manager,model_support_conversation_note,group_support_manager,1,1,1,1

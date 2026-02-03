@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Tree View -->
+    <record id="support_folder_view_tree" model="ir.ui.view">
+        <field name="name">support.folder.view.tree</field>
+        <field name="model">support.folder</field>
+        <field name="arch" type="xml">
+            <list string="Folders">
+                <field name="sequence" widget="handle" />
+                <field name="icon" />
+                <field name="name" />
+                <field name="code" />
+                <field name="folder_type" />
+                <field name="conversation_count" />
+                <field name="is_system" />
+                <field name="active" widget="boolean_toggle" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="support_folder_view_form" model="ir.ui.view">
+        <field name="name">support.folder.view.form</field>
+        <field name="model">support.folder</field>
+        <field name="arch" type="xml">
+            <form string="Folder">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <widget
+                        name="web_ribbon"
+                        title="System"
+                        bg_color="text-bg-info"
+                        invisible="not is_system"
+                    />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Folder name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="code" />
+                            <field name="icon" placeholder="fa-folder" />
+                            <field name="color" widget="color_picker" />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <field name="folder_type" />
+                            <field name="user_id" />
+                            <field name="conversation_count" />
+                            <field name="active" />
+                            <field name="is_system" readonly="1" />
+                        </group>
+                    </group>
+                    <group
+                        string="Smart Folder Filter"
+                        invisible="folder_type != 'smart'"
+                    >
+                        <field name="domain" placeholder="[('priority', '=', '3')]" />
+                        <div class="alert alert-info" role="alert">
+                            Use Odoo domain syntax to define the filter criteria.
+                            Example: [('priority', '=', '3'), ('closed', '=', False)]
+                        </div>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Folder description..." />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="support_folder_view_kanban" model="ir.ui.view">
+        <field name="name">support.folder.view.kanban</field>
+        <field name="model">support.folder</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="color" />
+                <field name="icon" />
+                <templates>
+                    <t t-name="kanban-card">
+                        <div
+                            t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_global_click"
+                        >
+                            <div class="oe_kanban_content">
+                                <div class="d-flex align-items-center gap-2">
+                                    <i
+                                        t-attf-class="fa #{record.icon.value or 'fa-folder'}"
+                                    />
+                                    <strong>
+                                        <field name="name" />
+                                    </strong>
+                                </div>
+                                <div class="text-muted mt-1">
+                                    <span><field
+                                        name="conversation_count"
+                                    /> conversations</span>
+                                </div>
+                                <div class="mt-1">
+                                    <span
+                                        class="badge"
+                                        t-att-class="record.folder_type.raw_value == 'smart' ? 'bg-info' : 'bg-secondary'"
+                                    >
+                                        <field name="folder_type" />
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_support_folder" model="ir.actions.act_window">
+        <field name="name">Folders</field>
+        <field name="res_model">support.folder</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first folder
+            </p>
+            <p>
+                Folders help organize conversations by topic or project.
+                Smart folders automatically filter conversations based on criteria.
+            </p>
+        </field>
+    </record>
+</odoo>

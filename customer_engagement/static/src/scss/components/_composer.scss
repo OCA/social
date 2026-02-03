@@ -1,0 +1,149 @@
+// Composer Component Styles
+
+.o_support_rich_composer {
+    position: relative;
+
+    // Mode toggle buttons
+    .btn-group-toggle {
+        .btn {
+            font-size: 0.85rem;
+        }
+    }
+
+    // Textarea
+    textarea.form-control {
+        resize: none;
+        border-radius: 0.5rem;
+        transition:
+            background-color 0.15s ease,
+            border-color 0.15s ease;
+
+        &:focus {
+            border-color: #0066cc;
+            box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+        }
+
+        // Note mode styling
+        &[style*="background-color: #fff3cd"] {
+            border-color: var(--bs-warning);
+
+            &:focus {
+                box-shadow: 0 0 0 0.2rem rgba(var(--bs-warning-rgb), 0.25);
+            }
+        }
+    }
+
+    // Action buttons
+    .btn-outline-secondary {
+        border-color: var(--bs-border-color);
+
+        &:hover {
+            background-color: var(--bs-gray-100);
+            border-color: var(--bs-gray-400);
+        }
+    }
+}
+
+// Canned Response Suggestions (inline)
+.o_canned_suggestions {
+    background-color: white;
+    max-height: 200px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+    &::-webkit-scrollbar {
+        width: 6px;
+    }
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+
+    .o_canned_suggestion {
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--bs-gray-100);
+        }
+
+        &:last-child {
+            border-bottom: none !important;
+        }
+    }
+}
+
+// Emoji Picker
+.o_emoji_picker {
+    animation: fadeIn 0.15s ease-out;
+
+    .btn {
+        transition: transform 0.1s ease;
+
+        &:hover {
+            transform: scale(1.2);
+        }
+
+        &:active {
+            transform: scale(1.1);
+        }
+    }
+}
+
+// Canned Response Picker
+.o_canned_picker {
+    animation: fadeIn 0.15s ease-out;
+
+    .o_canned_item {
+        transition: background-color 0.15s ease;
+
+        &:hover {
+            background-color: var(--bs-gray-100);
+        }
+
+        &:last-child {
+            border-bottom: none !important;
+        }
+    }
+}
+
+// Attachment Uploader
+.o_attachment_uploader {
+    .o_attachment_preview {
+        max-width: 200px;
+        animation: fadeIn 0.15s ease-out;
+
+        img {
+            object-fit: cover;
+        }
+
+        .btn-link {
+            opacity: 0.5;
+            transition: opacity 0.15s ease;
+
+            &:hover {
+                opacity: 1;
+            }
+        }
+    }
+
+    // Drag and drop zone
+    &.drag-over {
+        background-color: rgba(0, 102, 204, 0.1);
+        border: 2px dashed #0066cc;
+        border-radius: 0.5rem;
+    }
+}
+
+// Animation
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inbox Client Action -->
+    <record id="action_support_inbox" model="ir.actions.client">
+        <field name="name">Inbox</field>
+        <field name="tag">support_inbox</field>
+    </record>
+
+    <!-- Main Menu -->
+    <menuitem
+        id="menu_support_root"
+        name="Support"
+        sequence="10"
+        web_icon="customer_engagement,static/description/icon.png"
+    />
+
+    <!-- Inbox Menu -->
+    <menuitem
+        id="menu_support_inbox"
+        name="Inbox"
+        parent="menu_support_root"
+        action="action_support_inbox"
+        sequence="1"
+    />
+
+    <!-- Conversations Menu -->
+    <menuitem
+        id="menu_support_conversations"
+        name="Conversations"
+        parent="menu_support_root"
+        action="action_support_conversation"
+        sequence="2"
+    />
+
+    <!-- Configuration Menu -->
+    <menuitem
+        id="menu_support_config"
+        name="Configuration"
+        parent="menu_support_root"
+        sequence="100"
+        groups="group_support_manager"
+    />
+
+    <!-- Stages Menu -->
+    <menuitem
+        id="menu_support_stages"
+        name="Stages"
+        parent="menu_support_config"
+        action="action_support_conversation_stage"
+        sequence="10"
+    />
+
+    <!-- Teams Menu -->
+    <menuitem
+        id="menu_support_teams"
+        name="Teams"
+        parent="menu_support_config"
+        action="action_support_team"
+        sequence="20"
+    />
+
+    <!-- Labels Menu -->
+    <menuitem
+        id="menu_support_labels"
+        name="Labels"
+        parent="menu_support_config"
+        action="action_support_conversation_label"
+        sequence="30"
+    />
+
+    <!-- Folders Menu -->
+    <menuitem
+        id="menu_support_folders"
+        name="Folders"
+        parent="menu_support_config"
+        action="action_support_folder"
+        sequence="40"
+    />
+
+    <!-- Canned Responses Menu -->
+    <menuitem
+        id="menu_support_canned_responses"
+        name="Canned Responses"
+        parent="menu_support_config"
+        action="action_support_canned_response"
+        sequence="50"
+    />
+</odoo>

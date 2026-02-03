@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Contact Panel Template -->
+    <t t-name="customer_engagement.ContactPanel">
+        <div
+            t-attf-class="o_support_contact_panel #{props.collapsed ? 'collapsed' : ''} d-flex flex-column h-100 border-start bg-white"
+        >
+            <t t-if="!props.conversation">
+                <div
+                    class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
+                >
+                    <i class="fa fa-user-o fa-3x mb-3" />
+                    <p
+                        class="text-center"
+                    >Select a conversation to view contact details</p>
+                </div>
+            </t>
+            <t t-elif="state.isLoading">
+                <div class="d-flex align-items-center justify-content-center h-100">
+                    <div class="spinner-border text-primary" />
+                </div>
+            </t>
+            <t t-else="">
+                <!-- Header -->
+                <div class="o_contact_header p-3 border-bottom">
+                    <div class="d-flex align-items-center gap-3">
+                        <!-- Avatar -->
+                        <div class="o_contact_avatar flex-shrink-0">
+                            <t t-if="partnerImage">
+                                <img
+                                    t-att-src="partnerImage"
+                                    class="rounded-circle"
+                                    style="width: 56px; height: 56px; object-fit: cover;"
+                                />
+                            </t>
+                            <t t-else="">
+                                <div
+                                    class="rounded-circle d-flex align-items-center justify-content-center bg-primary text-white"
+                                    style="width: 56px; height: 56px; font-size: 20px;"
+                                >
+                                    <t t-esc="partnerInitials" />
+                                </div>
+                            </t>
+                        </div>
+
+                        <!-- Name & Actions -->
+                        <div class="flex-grow-1 min-width-0">
+                            <h6 class="mb-1 text-truncate" t-esc="partnerName" />
+                            <div
+                                t-if="state.partner?.company_name"
+                                class="text-muted small text-truncate"
+                            >
+                                <t t-esc="state.partner.company_name" />
+                            </div>
+                        </div>
+
+                        <!-- Open Partner Button -->
+                        <button
+                            t-if="hasPartner"
+                            class="btn btn-sm btn-outline-secondary"
+                            t-on-click="onOpenPartnerClick"
+                            title="Open Contact"
+                        >
+                            <i class="fa fa-external-link" />
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Content -->
+                <div class="o_contact_content flex-grow-1 overflow-auto">
+                    <!-- Contact Information Section -->
+                    <div class="o_contact_section border-bottom">
+                        <div
+                            class="o_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                            t-on-click="() => this.toggleSection('contact')"
+                        >
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-address-card text-muted" />
+                                <span class="fw-semibold small">Contact Info</span>
+                            </div>
+                            <i
+                                t-attf-class="fa fa-chevron-#{state.expandedSections.contact ? 'down' : 'right'} text-muted small"
+                            />
+                        </div>
+                        <div
+                            t-if="state.expandedSections.contact"
+                            class="o_section_content px-3 pb-3"
+                        >
+                            <t t-if="contactInfo.length === 0">
+                                <p
+                                    class="text-muted small mb-0"
+                                >No contact information available</p>
+                            </t>
+                            <t t-else="">
+                                <t
+                                    t-foreach="contactInfo"
+                                    t-as="info"
+                                    t-key="info_index"
+                                >
+                                    <div class="d-flex align-items-start gap-2 mb-2">
+                                        <i
+                                            t-attf-class="fa #{info.icon} text-muted mt-1"
+                                            style="width: 16px;"
+                                        />
+                                        <div class="min-width-0">
+                                            <div
+                                                class="text-muted small"
+                                                t-esc="info.label"
+                                            />
+                                            <div class="text-break">
+                                                <t t-if="info.type === 'email'">
+                                                    <a
+                                                        t-att-href="'mailto:' + info.value"
+                                                        t-esc="info.value"
+                                                    />
+                                                </t>
+                                                <t t-elif="info.type === 'phone'">
+                                                    <a
+                                                        t-att-href="'tel:' + info.value"
+                                                        t-esc="info.value"
+                                                    />
+                                                </t>
+                                                <t t-elif="info.type === 'url'">
+                                                    <a
+                                                        t-att-href="info.value"
+                                                        target="_blank"
+                                                        t-esc="info.value"
+                                                    />
+                                                </t>
+                                                <t t-else="">
+                                                    <span t-esc="info.value" />
+                                                </t>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </t>
+
+                                <!-- Address -->
+                                <div
+                                    t-if="address"
+                                    class="d-flex align-items-start gap-2 mb-2"
+                                >
+                                    <i
+                                        class="fa fa-map-marker text-muted mt-1"
+                                        style="width: 16px;"
+                                    />
+                                    <div class="min-width-0">
+                                        <div class="text-muted small">Address</div>
+                                        <div class="text-break" t-esc="address" />
+                                    </div>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Channel Links Section -->
+                    <div class="o_contact_section border-bottom">
+                        <div
+                            class="o_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                            t-on-click="() => this.toggleSection('channels')"
+                        >
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-plug text-muted" />
+                                <span class="fw-semibold small">Channels</span>
+                            </div>
+                            <i
+                                t-attf-class="fa fa-chevron-#{state.expandedSections.channels ? 'down' : 'right'} text-muted small"
+                            />
+                        </div>
+                        <div
+                            t-if="state.expandedSections.channels"
+                            class="o_section_content px-3 pb-3"
+                        >
+                            <t t-if="channelInfo.length === 0">
+                                <p
+                                    class="text-muted small mb-0"
+                                >No channel information available</p>
+                            </t>
+                            <t t-else="">
+                                <t
+                                    t-foreach="channelInfo"
+                                    t-as="channel"
+                                    t-key="channel_index"
+                                >
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i
+                                            t-attf-class="fa #{channel.icon} text-#{channel.color}"
+                                        />
+                                        <div class="min-width-0">
+                                            <div
+                                                class="text-muted small"
+                                                t-esc="channel.label"
+                                            />
+                                            <div
+                                                class="text-break"
+                                                t-esc="channel.value"
+                                            />
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Conversation History Section -->
+                    <div class="o_contact_section border-bottom">
+                        <div
+                            class="o_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                            t-on-click="() => this.toggleSection('history')"
+                        >
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-history text-muted" />
+                                <span
+                                    class="fw-semibold small"
+                                >Previous Conversations</span>
+                                <span
+                                    t-if="state.conversationHistory.length"
+                                    class="badge rounded-pill bg-secondary"
+                                >
+                                    <t t-esc="state.conversationHistory.length" />
+                                </span>
+                            </div>
+                            <i
+                                t-attf-class="fa fa-chevron-#{state.expandedSections.history ? 'down' : 'right'} text-muted small"
+                            />
+                        </div>
+                        <div
+                            t-if="state.expandedSections.history"
+                            class="o_section_content px-3 pb-3"
+                        >
+                            <t t-if="state.conversationHistory.length === 0">
+                                <p
+                                    class="text-muted small mb-0"
+                                >No previous conversations</p>
+                            </t>
+                            <t t-else="">
+                                <t
+                                    t-foreach="state.conversationHistory"
+                                    t-as="conv"
+                                    t-key="conv.id"
+                                >
+                                    <div
+                                        class="o_history_item p-2 rounded border mb-2 cursor-pointer"
+                                        t-on-click="() => this.onConversationClick(conv)"
+                                    >
+                                        <div
+                                            class="d-flex align-items-center gap-2 mb-1"
+                                        >
+                                            <i
+                                                t-att-class="'fa ' + getChannelIcon(conv.channel_type)"
+                                            />
+                                            <span
+                                                class="small text-truncate flex-grow-1"
+                                                t-esc="conv.display_name"
+                                            />
+                                        </div>
+                                        <div
+                                            class="d-flex align-items-center justify-content-between text-muted small"
+                                        >
+                                            <span
+                                                t-esc="formatDate(conv.create_date)"
+                                            />
+                                            <span
+                                                t-if="conv.stage_id"
+                                                class="badge bg-secondary"
+                                                t-esc="conv.stage_id[1]"
+                                            />
+                                        </div>
+                                    </div>
+                                </t>
+                            </t>
+                        </div>
+                    </div>
+
+                    <!-- Notes Section -->
+                    <div class="o_contact_section">
+                        <div
+                            class="o_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                            t-on-click="() => this.toggleSection('notes')"
+                        >
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa fa-sticky-note text-muted" />
+                                <span class="fw-semibold small">Contact Notes</span>
+                            </div>
+                            <i
+                                t-attf-class="fa fa-chevron-#{state.expandedSections.notes ? 'down' : 'right'} text-muted small"
+                            />
+                        </div>
+                        <div
+                            t-if="state.expandedSections.notes"
+                            class="o_section_content px-3 pb-3"
+                        >
+                            <t t-if="state.partner?.comment">
+                                <div
+                                    class="p-2 rounded bg-light small"
+                                    t-esc="state.partner.comment"
+                                />
+                            </t>
+                            <t t-else="">
+                                <p
+                                    class="text-muted small mb-0"
+                                >No notes for this contact</p>
+                            </t>
+                        </div>
+                    </div>
+                </div>
+            </t>
+        </div>
+    </t>
+
+</templates>

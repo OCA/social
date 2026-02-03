@@ -1,0 +1,130 @@
+// Contact Panel Component Styles
+
+.o_support_contact_panel {
+    width: 300px;
+    min-width: 300px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    transition:
+        width 0.15s ease,
+        min-width 0.15s ease;
+    color: #212529 !important; // Ensure text is dark
+
+    // Collapsed state
+    &.collapsed {
+        width: 60px;
+        min-width: 60px;
+
+        .o_contact_header,
+        .o_contact_content {
+            display: none;
+        }
+    }
+
+    // Header
+    .o_contact_header {
+        flex-shrink: 0;
+        color: #212529;
+
+        .o_contact_avatar {
+            img {
+                border: 2px solid #dee2e6;
+            }
+        }
+
+        h6 {
+            color: #212529;
+        }
+    }
+
+    // Content
+    .o_contact_content {
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+    }
+
+    // Sections
+    .o_contact_section {
+        .o_section_header {
+            user-select: none;
+            transition: background-color 0.15s ease;
+            color: #212529;
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+
+            span {
+                color: #212529;
+            }
+
+            i {
+                color: #6c757d;
+            }
+        }
+
+        .o_section_content {
+            color: #212529;
+            // Animation disabled
+            // animation: slideDown 0.15s ease-out;
+        }
+    }
+
+    // Contact info items
+    .o_contact_info_item {
+        color: #212529;
+
+        a {
+            color: #0066cc;
+            text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // Conversation history items
+    .o_history_item {
+        transition:
+            background-color 0.15s ease,
+            border-color 0.15s ease;
+        color: #212529;
+
+        &:hover {
+            background-color: #f8f9fa;
+            border-color: #adb5bd;
+        }
+    }
+
+    // Text muted override
+    .text-muted {
+        color: #6c757d !important;
+    }
+}
+
+// Animation for section expand (shared with sidebar)
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

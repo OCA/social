@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <!-- Tree View -->
+    <record id="support_conversation_label_view_tree" model="ir.ui.view">
+        <field name="name">support.conversation.label.view.tree</field>
+        <field name="model">support.conversation.label</field>
+        <field name="arch" type="xml">
+            <list string="Labels" editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="color" widget="color_picker" />
+                <field name="conversation_count" />
+                <field name="active" widget="boolean_toggle" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="support_conversation_label_view_form" model="ir.ui.view">
+        <field name="name">support.conversation.label.view.form</field>
+        <field name="model">support.conversation.label</field>
+        <field name="arch" type="xml">
+            <form string="Label">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="Label name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="color" widget="color_picker" />
+                            <field name="sequence" />
+                        </group>
+                        <group>
+                            <field name="conversation_count" />
+                            <field name="active" />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="description" placeholder="Optional description" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="support_conversation_label_view_kanban" model="ir.ui.view">
+        <field name="name">support.conversation.label.view.kanban</field>
+        <field name="model">support.conversation.label</field>
+        <field name="arch" type="xml">
+            <kanban>
+                <field name="color" />
+                <templates>
+                    <t t-name="kanban-card">
+                        <div
+                            t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_global_click"
+                        >
+                            <div class="oe_kanban_content">
+                                <strong>
+                                    <field name="name" />
+                                </strong>
+                                <div class="text-muted mt-1">
+                                    <span><field
+                                        name="conversation_count"
+                                    /> conversations</span>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Action -->
+    <record id="action_support_conversation_label" model="ir.actions.act_window">
+        <field name="name">Labels</field>
+        <field name="res_model">support.conversation.label</field>
+        <field name="view_mode">list,kanban,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first label
+            </p>
+            <p>
+                Labels help categorize and filter conversations.
+            </p>
+        </field>
+    </record>
+</odoo>
