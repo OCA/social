@@ -45,7 +45,7 @@ export class CannedResponsePicker extends Component {
         const domain = [["active", "=", true]];
 
         const responses = await this.orm.searchRead(
-            "support.canned.response",
+            "engage.canned.response",
             domain,
             ["shortcut", "name", "content", "plain_content", "category", "usage_count"],
             {order: "usage_count desc, sequence"}

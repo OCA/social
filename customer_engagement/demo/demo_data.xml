@@ -32,7 +32,7 @@
     </record>
 
     <!-- Demo Conversations - New -->
-    <record id="demo_conv_1" model="support.conversation">
+    <record id="demo_conv_1" model="engage.conversation">
         <field name="subject">Problema com pedido #12345</field>
         <field name="channel_type">whatsapp</field>
         <field name="partner_id" ref="demo_partner_joao" />
@@ -40,7 +40,7 @@
         <field name="stage_id" ref="stage_new" />
     </record>
 
-    <record id="demo_conv_2" model="support.conversation">
+    <record id="demo_conv_2" model="engage.conversation">
         <field name="subject">Dúvida sobre prazo de entrega</field>
         <field name="channel_type">email</field>
         <field name="partner_id" ref="demo_partner_maria" />
@@ -49,7 +49,7 @@
     </record>
 
     <!-- Demo Conversations - Open -->
-    <record id="demo_conv_3" model="support.conversation">
+    <record id="demo_conv_3" model="engage.conversation">
         <field name="subject">Solicitação de troca de produto</field>
         <field name="channel_type">instagram</field>
         <field name="partner_id" ref="demo_partner_pedro" />
@@ -58,7 +58,7 @@
         <field name="user_id" ref="base.user_admin" />
     </record>
 
-    <record id="demo_conv_4" model="support.conversation">
+    <record id="demo_conv_4" model="engage.conversation">
         <field name="subject">Não recebi o código de rastreio</field>
         <field name="channel_type">whatsapp</field>
         <field name="partner_id" ref="demo_partner_ana" />
@@ -68,7 +68,7 @@
     </record>
 
     <!-- Demo Conversations - Pending -->
-    <record id="demo_conv_5" model="support.conversation">
+    <record id="demo_conv_5" model="engage.conversation">
         <field name="subject">Aguardando envio de documentos</field>
         <field name="channel_type">email</field>
         <field name="partner_id" ref="demo_partner_carlos" />
@@ -77,7 +77,7 @@
         <field name="user_id" ref="base.user_admin" />
     </record>
 
-    <record id="demo_conv_6" model="support.conversation">
+    <record id="demo_conv_6" model="engage.conversation">
         <field name="subject">Problema técnico - aguardando retorno</field>
         <field name="channel_type">telegram</field>
         <field name="partner_id" ref="demo_partner_joao" />
@@ -87,7 +87,7 @@
     </record>
 
     <!-- Demo Conversations - Unassigned -->
-    <record id="demo_conv_7" model="support.conversation">
+    <record id="demo_conv_7" model="engage.conversation">
         <field name="subject">Informações sobre garantia</field>
         <field name="channel_type">livechat</field>
         <field name="partner_id" ref="demo_partner_maria" />
@@ -95,7 +95,7 @@
         <field name="stage_id" ref="stage_new" />
     </record>
 
-    <record id="demo_conv_8" model="support.conversation">
+    <record id="demo_conv_8" model="engage.conversation">
         <field name="subject">Cancelamento de pedido</field>
         <field name="channel_type">messenger</field>
         <field name="partner_id" ref="demo_partner_pedro" />
@@ -104,7 +104,7 @@
     </record>
 
     <!-- Demo Conversations - Resolved -->
-    <record id="demo_conv_9" model="support.conversation">
+    <record id="demo_conv_9" model="engage.conversation">
         <field name="subject">Dúvida sobre formas de pagamento</field>
         <field name="channel_type">whatsapp</field>
         <field name="partner_id" ref="demo_partner_ana" />
@@ -113,7 +113,7 @@
         <field name="user_id" ref="base.user_admin" />
     </record>
 
-    <record id="demo_conv_10" model="support.conversation">
+    <record id="demo_conv_10" model="engage.conversation">
         <field name="subject">Atualização de cadastro</field>
         <field name="channel_type">email</field>
         <field name="partner_id" ref="demo_partner_carlos" />

@@ -6,12 +6,12 @@ from odoo import fields, models
 class ConversationNote(models.Model):
     """Private notes attached to conversations (not visible to customers)."""
 
-    _name = "support.conversation.note"
+    _name = "engage.conversation.note"
     _description = "Conversation Note"
     _order = "create_date desc"
 
     conversation_id = fields.Many2one(
-        comodel_name="support.conversation",
+        comodel_name="engage.conversation",
         string="Conversation",
         required=True,
         ondelete="cascade",
@@ -34,14 +34,14 @@ class ConversationNote(models.Model):
     )
     attachment_ids = fields.Many2many(
         comodel_name="ir.attachment",
-        relation="conversation_note_attachment_rel",
+        relation="engage_conversation_note_attachment_rel",
         column1="note_id",
         column2="attachment_id",
         string="Attachments",
     )
     mentioned_user_ids = fields.Many2many(
         comodel_name="res.users",
-        relation="conversation_note_mention_rel",
+        relation="engage_conversation_note_mention_rel",
         column1="note_id",
         column2="user_id",
         string="Mentioned Users",

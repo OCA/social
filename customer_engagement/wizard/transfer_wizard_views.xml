@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Transfer Wizard Form View -->
+    <record id="view_engage_transfer_wizard_form" model="ir.ui.view">
+        <field name="name">engage.transfer.wizard.form</field>
+        <field name="model">engage.transfer.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Transfer Conversation">
+                <group>
+                    <group string="Current Assignment">
+                        <field name="conversation_id" invisible="1" />
+                        <field name="conversation_uuid" />
+                        <field name="current_user_id" />
+                        <field name="current_team_id" />
+                    </group>
+                    <group string="Transfer To">
+                        <field name="transfer_type" widget="radio" />
+                        <field
+                            name="user_id"
+                            invisible="transfer_type != 'agent'"
+                            required="transfer_type == 'agent'"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="team_id"
+                            invisible="transfer_type != 'team'"
+                            required="transfer_type == 'team'"
+                            options="{'no_create': True}"
+                        />
+                        <field
+                            name="keep_in_team"
+                            invisible="transfer_type != 'agent'"
+                        />
+                    </group>
+                </group>
+                <group string="Transfer Details">
+                    <field
+                        name="reason"
+                        placeholder="Why is this transfer necessary?"
+                    />
+                </group>
+                <group string="Internal Note">
+                    <field name="add_internal_note" />
+                    <field
+                        name="note_content"
+                        placeholder="Add context or instructions for the new assignee..."
+                        invisible="not add_internal_note"
+                    />
+                </group>
+                <footer>
+                    <button
+                        name="action_transfer"
+                        string="Transfer"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- Transfer Wizard Action - Must be defined before the inherited view that uses it -->
+    <record id="action_engage_transfer_wizard" model="ir.actions.act_window">
+        <field name="name">Transfer Conversation</field>
+        <field name="res_model">engage.transfer.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="model_engage_conversation" />
+        <field name="binding_view_types">form</field>
+    </record>
+
+    <!-- Add Transfer Button to Conversation Form -->
+    <record id="engage_conversation_view_form_transfer_button" model="ir.ui.view">
+        <field name="name">engage.conversation.form.transfer.button</field>
+        <field name="model">engage.conversation</field>
+        <field name="inherit_id" ref="engage_conversation_view_form" />
+        <field name="priority">20</field>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_close']" position="after">
+                <button
+                    name="%(action_engage_transfer_wizard)d"
+                    string="Transfer"
+                    type="action"
+                    invisible="closed"
+                    class="btn-secondary"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

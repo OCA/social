@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- User Form View Extension -->
+    <record id="view_users_form_engage" model="ir.ui.view">
+        <field name="name">res.users.form.engage</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <page name="preferences" position="after">
+                <page string="Engagement" name="engagement">
+                    <group>
+                        <group string="Status &amp; Capacity">
+                            <field
+                                name="engage_status"
+                                widget="radio"
+                                options="{'horizontal': true}"
+                            />
+                            <field name="engage_max_conversations" />
+                            <field name="engage_active_count" />
+                            <field name="engage_is_available" />
+                            <field name="engage_today_resolved" />
+                        </group>
+                        <group string="Preferences">
+                            <field name="engage_sound_notifications" />
+                            <field name="engage_desktop_notifications" />
+                            <field name="engage_auto_accept" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Teams">
+                            <field
+                                name="engage_team_ids"
+                                widget="many2many_tags"
+                                options="{'color_field': 'color'}"
+                            />
+                        </group>
+                        <group string="Skills">
+                            <field
+                                name="engage_skill_ids"
+                                widget="many2many_tags"
+                                options="{'color_field': 'color'}"
+                            />
+                        </group>
+                    </group>
+                    <group string="Signature">
+                        <field
+                            name="engage_signature"
+                            nolabel="1"
+                            placeholder="Your signature for messages..."
+                        />
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <!-- Simple status change action buttons for users -->
+    <record id="action_engage_go_online" model="ir.actions.server">
+        <field name="name">Go Online</field>
+        <field name="model_id" ref="base.model_res_users" />
+        <field name="binding_model_id" ref="base.model_res_users" />
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">
+            if record:
+                record.action_go_online()
+        </field>
+    </record>
+
+    <record id="action_engage_go_offline" model="ir.actions.server">
+        <field name="name">Go Offline</field>
+        <field name="model_id" ref="base.model_res_users" />
+        <field name="binding_model_id" ref="base.model_res_users" />
+        <field name="binding_view_types">form</field>
+        <field name="state">code</field>
+        <field name="code">
+            if record:
+                record.action_go_offline()
+        </field>
+    </record>
+</odoo>

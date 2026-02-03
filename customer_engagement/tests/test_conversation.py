@@ -14,7 +14,7 @@ class TestConversation(TransactionCase):
 
     def test_create_conversation(self):
         """Test conversation creation with default stage."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "whatsapp",
                 "subject": "Test conversation",
@@ -27,7 +27,7 @@ class TestConversation(TransactionCase):
 
     def test_display_name_with_subject(self):
         """Test display name computation with subject."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
                 "subject": "Help needed",
@@ -39,7 +39,7 @@ class TestConversation(TransactionCase):
     def test_display_name_with_partner(self):
         """Test display name computation with partner."""
         partner = self.env["res.partner"].create({"name": "John Doe"})
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
                 "partner_id": partner.id,
@@ -49,7 +49,7 @@ class TestConversation(TransactionCase):
 
     def test_display_name_without_subject_or_partner(self):
         """Test display name computation without subject or partner."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "whatsapp",
             }
@@ -58,7 +58,7 @@ class TestConversation(TransactionCase):
 
     def test_valid_transition_new_to_open(self):
         """Test valid transition from new to open."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -68,7 +68,7 @@ class TestConversation(TransactionCase):
 
     def test_valid_transition_open_to_pending(self):
         """Test valid transition from open to pending."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -79,7 +79,7 @@ class TestConversation(TransactionCase):
 
     def test_valid_transition_open_to_resolved(self):
         """Test valid transition from open to resolved."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -90,7 +90,7 @@ class TestConversation(TransactionCase):
 
     def test_valid_transition_pending_to_open(self):
         """Test valid transition from pending back to open."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -102,7 +102,7 @@ class TestConversation(TransactionCase):
 
     def test_valid_transition_resolved_to_closed(self):
         """Test valid transition from resolved to closed."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -115,7 +115,7 @@ class TestConversation(TransactionCase):
 
     def test_valid_transition_closed_to_open_reopen(self):
         """Test valid transition from closed to open (reopen)."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -129,7 +129,7 @@ class TestConversation(TransactionCase):
 
     def test_invalid_transition_new_to_closed(self):
         """Test invalid transition from new to closed."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -139,7 +139,7 @@ class TestConversation(TransactionCase):
 
     def test_invalid_transition_new_to_pending(self):
         """Test invalid transition from new to pending."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -149,7 +149,7 @@ class TestConversation(TransactionCase):
 
     def test_invalid_transition_new_to_resolved(self):
         """Test invalid transition from new to resolved."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -159,7 +159,7 @@ class TestConversation(TransactionCase):
 
     def test_invalid_transition_open_to_closed(self):
         """Test invalid transition from open to closed (must resolve first)."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -170,13 +170,13 @@ class TestConversation(TransactionCase):
 
     def test_transition_history(self):
         """Test that transitions are recorded in history."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "whatsapp",
             }
         )
         conv.action_open()
-        history = self.env["support.conversation.history"].search(
+        history = self.env["engage.conversation.history"].search(
             [("conversation_id", "=", conv.id)]
         )
         self.assertEqual(len(history), 1)
@@ -185,7 +185,7 @@ class TestConversation(TransactionCase):
 
     def test_multiple_transitions_history(self):
         """Test multiple transitions are recorded in history."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -194,7 +194,7 @@ class TestConversation(TransactionCase):
         conv.action_resolve()
         conv.action_close()
 
-        history = self.env["support.conversation.history"].search(
+        history = self.env["engage.conversation.history"].search(
             [("conversation_id", "=", conv.id)], order="create_date asc"
         )
 
@@ -205,7 +205,7 @@ class TestConversation(TransactionCase):
 
     def test_first_response_timestamp(self):
         """Test first_response_at is set on first open."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -216,7 +216,7 @@ class TestConversation(TransactionCase):
 
     def test_first_response_timestamp_not_updated_on_reopen(self):
         """Test first_response_at is not updated on reopen."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -229,7 +229,7 @@ class TestConversation(TransactionCase):
 
     def test_resolved_timestamp(self):
         """Test resolved_at is set on resolve."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -241,7 +241,7 @@ class TestConversation(TransactionCase):
 
     def test_resolved_timestamp_cleared_on_reopen(self):
         """Test resolved_at is cleared on reopen."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -264,7 +264,7 @@ class TestConversation(TransactionCase):
             "api",
         ]
         for channel in channel_types:
-            conv = self.env["support.conversation"].create(
+            conv = self.env["engage.conversation"].create(
                 {
                     "channel_type": channel,
                 }
@@ -274,7 +274,7 @@ class TestConversation(TransactionCase):
     def test_priority_levels(self):
         """Test all priority levels."""
         for priority in ["0", "1", "2", "3"]:
-            conv = self.env["support.conversation"].create(
+            conv = self.env["engage.conversation"].create(
                 {
                     "channel_type": "email",
                     "priority": priority,
@@ -284,7 +284,7 @@ class TestConversation(TransactionCase):
 
     def test_default_priority(self):
         """Test default priority is Normal (1)."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -293,7 +293,7 @@ class TestConversation(TransactionCase):
 
     def test_same_stage_transition_allowed(self):
         """Test that transitioning to the same stage is allowed."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
@@ -307,13 +307,13 @@ class TestConversation(TransactionCase):
 class TestConversationStage(TransactionCase):
     def test_stage_sequence(self):
         """Test that stages have correct sequence ordering."""
-        stages = self.env["support.conversation.stage"].search([], order="sequence")
+        stages = self.env["engage.conversation.stage"].search([], order="sequence")
         codes = [s.code for s in stages]
         self.assertEqual(codes, ["new", "open", "pending", "resolved", "closed"])
 
     def test_stage_closed_flag(self):
         """Test that only 'closed' stage has closed=True."""
-        closed_stages = self.env["support.conversation.stage"].search(
+        closed_stages = self.env["engage.conversation.stage"].search(
             [("closed", "=", True)]
         )
         self.assertEqual(len(closed_stages), 1)
@@ -323,14 +323,14 @@ class TestConversationStage(TransactionCase):
 class TestConversationHistory(TransactionCase):
     def test_history_creation(self):
         """Test history record creation."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
         )
         stage_open = self.env.ref("customer_engagement.stage_open")
 
-        history = self.env["support.conversation.history"].create(
+        history = self.env["engage.conversation.history"].create(
             {
                 "conversation_id": conv.id,
                 "from_stage_id": conv.stage_id.id,
@@ -344,14 +344,14 @@ class TestConversationHistory(TransactionCase):
 
     def test_history_cascade_delete(self):
         """Test history is deleted when conversation is deleted."""
-        conv = self.env["support.conversation"].create(
+        conv = self.env["engage.conversation"].create(
             {
                 "channel_type": "email",
             }
         )
         conv.action_open()
 
-        history_count = self.env["support.conversation.history"].search_count(
+        history_count = self.env["engage.conversation.history"].search_count(
             [("conversation_id", "=", conv.id)]
         )
         self.assertGreater(history_count, 0)
@@ -359,7 +359,7 @@ class TestConversationHistory(TransactionCase):
         conv_id = conv.id
         conv.unlink()
 
-        history_count = self.env["support.conversation.history"].search_count(
+        history_count = self.env["engage.conversation.history"].search_count(
             [("conversation_id", "=", conv_id)]
         )
         self.assertEqual(history_count, 0)

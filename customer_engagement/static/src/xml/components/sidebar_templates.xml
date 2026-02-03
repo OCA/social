@@ -2,13 +2,13 @@
 <templates xml:space="preserve">
 
     <!-- Main Sidebar Template -->
-    <t t-name="customer_engagement.SupportSidebar">
-        <div t-attf-class="o_support_sidebar #{props.collapsed ? 'collapsed' : ''}">
+    <t t-name="customer_engagement.EngageSidebar">
+        <div t-attf-class="o_engage_sidebar #{props.collapsed ? 'collapsed' : ''}">
             <!-- Header -->
             <div
-                class="o_support_sidebar_header d-flex align-items-center justify-content-between px-3 py-3"
+                class="o_engage_sidebar_header d-flex align-items-center justify-content-between px-3 py-3"
             >
-                <h5 class="mb-0 fw-bold" t-if="!props.collapsed">Support</h5>
+                <h5 class="mb-0 fw-bold" t-if="!props.collapsed">Engage</h5>
                 <button
                     t-if="props.onToggleCollapse"
                     class="btn btn-sm btn-link text-muted p-0"
@@ -20,11 +20,11 @@
                 </button>
             </div>
 
-            <div class="o_support_sidebar_content">
+            <div class="o_engage_sidebar_content">
                 <!-- Main Filters Section -->
-                <div class="o_support_sidebar_section">
+                <div class="o_engage_sidebar_section">
                     <div
-                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        class="o_engage_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
                         t-on-click="() => state.expandedSections.conversations = !state.expandedSections.conversations"
                     >
                         <div class="d-flex align-items-center gap-2">
@@ -39,10 +39,10 @@
                     </div>
                     <div
                         t-if="state.expandedSections.conversations"
-                        class="o_support_sidebar_section_content"
+                        class="o_engage_sidebar_section_content"
                     >
                         <div
-                            t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('all') ? 'active' : ''}"
+                            t-attf-class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('all') ? 'active' : ''}"
                             t-on-click="() => this.onMainFilterClick('all')"
                         >
                             <i
@@ -56,7 +56,7 @@
                             />
                         </div>
                         <div
-                            t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('mine') ? 'active' : ''}"
+                            t-attf-class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('mine') ? 'active' : ''}"
                             t-on-click="() => this.onMainFilterClick('mine')"
                         >
                             <i
@@ -72,7 +72,7 @@
                             />
                         </div>
                         <div
-                            t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('unassigned') ? 'active' : ''}"
+                            t-attf-class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFilter('unassigned') ? 'active' : ''}"
                             t-on-click="() => this.onMainFilterClick('unassigned')"
                         >
                             <i
@@ -89,9 +89,9 @@
                 </div>
 
                 <!-- Folders Section -->
-                <div class="o_support_sidebar_section">
+                <div class="o_engage_sidebar_section">
                     <div
-                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        class="o_engage_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
                         t-on-click="() => state.expandedSections.folders = !state.expandedSections.folders"
                     >
                         <div class="d-flex align-items-center gap-2">
@@ -106,11 +106,11 @@
                     </div>
                     <div
                         t-if="state.expandedSections.folders"
-                        class="o_support_sidebar_section_content"
+                        class="o_engage_sidebar_section_content"
                     >
                         <t t-foreach="systemFolders" t-as="folder" t-key="folder.id">
                             <div
-                                t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFolder(folder) ? 'active' : ''}"
+                                t-attf-class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFolder(folder) ? 'active' : ''}"
                                 t-on-click="() => this.onFolderClick(folder)"
                             >
                                 <i
@@ -136,7 +136,7 @@
                                 t-key="folder.id"
                             >
                                 <div
-                                    t-attf-class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFolder(folder) ? 'active' : ''}"
+                                    t-attf-class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer #{isActiveFolder(folder) ? 'active' : ''}"
                                     t-on-click="() => this.onFolderClick(folder)"
                                 >
                                     <i
@@ -159,9 +159,9 @@
                 </div>
 
                 <!-- Teams Section -->
-                <div class="o_support_sidebar_section">
+                <div class="o_engage_sidebar_section">
                     <div
-                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        class="o_engage_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
                         t-on-click="() => state.expandedSections.teams = !state.expandedSections.teams"
                     >
                         <div class="d-flex align-items-center gap-2">
@@ -176,11 +176,11 @@
                     </div>
                     <div
                         t-if="state.expandedSections.teams"
-                        class="o_support_sidebar_section_content"
+                        class="o_engage_sidebar_section_content"
                     >
                         <t t-foreach="state.teams" t-as="team" t-key="team.id">
                             <div
-                                class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
+                                class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
                                 t-on-click="() => this.onTeamClick(team)"
                             >
                                 <i
@@ -208,9 +208,9 @@
                 </div>
 
                 <!-- Channels Section -->
-                <div class="o_support_sidebar_section">
+                <div class="o_engage_sidebar_section">
                     <div
-                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        class="o_engage_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
                         t-on-click="() => state.expandedSections.channels = !state.expandedSections.channels"
                     >
                         <div class="d-flex align-items-center gap-2">
@@ -225,7 +225,7 @@
                     </div>
                     <div
                         t-if="state.expandedSections.channels"
-                        class="o_support_sidebar_section_content"
+                        class="o_engage_sidebar_section_content"
                     >
                         <t
                             t-foreach="state.channels"
@@ -233,7 +233,7 @@
                             t-key="channel.code"
                         >
                             <div
-                                class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
+                                class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
                                 t-on-click="() => this.onChannelClick(channel)"
                             >
                                 <i
@@ -250,9 +250,9 @@
                 </div>
 
                 <!-- Labels Section -->
-                <div class="o_support_sidebar_section">
+                <div class="o_engage_sidebar_section">
                     <div
-                        class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                        class="o_engage_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
                         t-on-click="() => state.expandedSections.labels = !state.expandedSections.labels"
                     >
                         <div class="d-flex align-items-center gap-2">
@@ -267,11 +267,11 @@
                     </div>
                     <div
                         t-if="state.expandedSections.labels"
-                        class="o_support_sidebar_section_content"
+                        class="o_engage_sidebar_section_content"
                     >
                         <t t-foreach="state.labels" t-as="label" t-key="label.id">
                             <div
-                                class="o_support_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
+                                class="o_engage_sidebar_item d-flex align-items-center gap-2 px-3 py-2 cursor-pointer"
                                 t-on-click="() => this.onLabelClick(label)"
                             >
                                 <i
@@ -303,9 +303,9 @@
 
     <!-- Sidebar Section Template (kept for compatibility) -->
     <t t-name="customer_engagement.SidebarSection">
-        <div class="o_support_sidebar_section">
+        <div class="o_engage_sidebar_section">
             <div
-                class="o_support_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
+                class="o_engage_sidebar_section_header d-flex align-items-center justify-content-between px-3 py-2 cursor-pointer"
                 t-on-click="toggle"
             >
                 <div class="d-flex align-items-center gap-2">
@@ -321,7 +321,7 @@
                     t-attf-class="fa fa-chevron-#{props.expanded ? 'down' : 'right'} text-muted small"
                 />
             </div>
-            <div t-if="props.expanded" class="o_support_sidebar_section_content">
+            <div t-if="props.expanded" class="o_engage_sidebar_section_content">
                 <t t-slot="default" />
             </div>
         </div>

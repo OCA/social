@@ -60,7 +60,7 @@ export class ConversationCard extends Component {
     }
 
     get cardClass() {
-        const classes = ["o_support_conversation_card"];
+        const classes = ["o_engage_conversation_card"];
         if (this.props.selected) {
             classes.push("selected");
         }

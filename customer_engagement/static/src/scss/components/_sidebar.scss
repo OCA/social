@@ -1,6 +1,6 @@
 // Sidebar Component Styles
 
-.o_support_sidebar {
+.o_engage_sidebar {
     width: 220px;
     min-width: 220px;
     background-color: #f8f9fa;
@@ -18,14 +18,14 @@
         width: 60px;
         min-width: 60px;
 
-        .o_support_sidebar_header h5,
-        .o_support_sidebar_section_header span,
-        .o_support_sidebar_item span:not(.badge),
+        .o_engage_sidebar_header h5,
+        .o_engage_sidebar_section_header span,
+        .o_engage_sidebar_item span:not(.badge),
         .o_sidebar_item_count {
             display: none;
         }
 
-        .o_support_sidebar_item {
+        .o_engage_sidebar_item {
             justify-content: center;
             padding: 0.75rem;
 
@@ -36,7 +36,7 @@
     }
 
     // Header
-    .o_support_sidebar_header {
+    .o_engage_sidebar_header {
         flex-shrink: 0;
         border-bottom: 1px solid #dee2e6;
 
@@ -47,7 +47,7 @@
     }
 
     // Content area with scrolling
-    .o_support_sidebar_content {
+    .o_engage_sidebar_content {
         flex: 1;
         overflow-y: auto;
         scrollbar-width: thin;
@@ -66,10 +66,10 @@
     }
 
     // Section styling
-    .o_support_sidebar_section {
+    .o_engage_sidebar_section {
         margin-bottom: 0.5rem;
 
-        .o_support_sidebar_section_header {
+        .o_engage_sidebar_section_header {
             user-select: none;
             color: #6c757d; // Muted text color for headers
 
@@ -88,14 +88,14 @@
             }
         }
 
-        .o_support_sidebar_section_content {
+        .o_engage_sidebar_section_content {
             // Animation disabled to prevent potential rendering issues
             // animation: slideDown 0.15s ease-out;
         }
     }
 
     // Item styling
-    .o_support_sidebar_item {
+    .o_engage_sidebar_item {
         display: flex;
         align-items: center;
         gap: 0.5rem;

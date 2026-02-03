@@ -2,7 +2,7 @@
 <odoo noupdate="1">
     <!-- Greeting Responses -->
 
-    <record id="canned_greeting_hello" model="support.canned.response">
+    <record id="canned_greeting_hello" model="engage.canned.response">
         <field name="name">Hello Greeting</field>
         <field name="shortcut">hello</field>
         <field name="category">greeting</field>
@@ -15,7 +15,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_greeting_welcome" model="support.canned.response">
+    <record id="canned_greeting_welcome" model="engage.canned.response">
         <field name="name">Welcome Back</field>
         <field name="shortcut">welcome</field>
         <field name="category">greeting</field>
@@ -28,7 +28,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_greeting_morning" model="support.canned.response">
+    <record id="canned_greeting_morning" model="engage.canned.response">
         <field name="name">Good Morning</field>
         <field name="shortcut">bomdia</field>
         <field name="category">greeting</field>
@@ -43,7 +43,7 @@
 
     <!-- Closing Responses -->
 
-    <record id="canned_closing_thanks" model="support.canned.response">
+    <record id="canned_closing_thanks" model="engage.canned.response">
         <field name="name">Thank You Closing</field>
         <field name="shortcut">thanks</field>
         <field name="category">closing</field>
@@ -57,7 +57,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_closing_resolved" model="support.canned.response">
+    <record id="canned_closing_resolved" model="engage.canned.response">
         <field name="name">Issue Resolved</field>
         <field name="shortcut">resolved</field>
         <field name="category">closing</field>
@@ -71,7 +71,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_closing_feedback" model="support.canned.response">
+    <record id="canned_closing_feedback" model="engage.canned.response">
         <field name="name">Request Feedback</field>
         <field name="shortcut">feedback</field>
         <field name="category">closing</field>
@@ -87,7 +87,7 @@
 
     <!-- Information Responses -->
 
-    <record id="canned_info_wait" model="support.canned.response">
+    <record id="canned_info_wait" model="engage.canned.response">
         <field name="name">Please Wait</field>
         <field name="shortcut">wait</field>
         <field name="category">info</field>
@@ -100,7 +100,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_info_checking" model="support.canned.response">
+    <record id="canned_info_checking" model="engage.canned.response">
         <field name="name">Checking Information</field>
         <field name="shortcut">checking</field>
         <field name="category">info</field>
@@ -113,7 +113,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_info_hours" model="support.canned.response">
+    <record id="canned_info_hours" model="engage.canned.response">
         <field name="name">Business Hours</field>
         <field name="shortcut">horario</field>
         <field name="category">info</field>
@@ -132,7 +132,7 @@
 
     <!-- Apology Responses -->
 
-    <record id="canned_apology_delay" model="support.canned.response">
+    <record id="canned_apology_delay" model="engage.canned.response">
         <field name="name">Apology for Delay</field>
         <field name="shortcut">sorry</field>
         <field name="category">apology</field>
@@ -145,7 +145,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_apology_inconvenience" model="support.canned.response">
+    <record id="canned_apology_inconvenience" model="engage.canned.response">
         <field name="name">Apology for Inconvenience</field>
         <field name="shortcut">desculpa</field>
         <field name="category">apology</field>
@@ -161,7 +161,7 @@
 
     <!-- Follow-up Responses -->
 
-    <record id="canned_followup_update" model="support.canned.response">
+    <record id="canned_followup_update" model="engage.canned.response">
         <field name="name">Status Update</field>
         <field name="shortcut">update</field>
         <field name="category">followup</field>
@@ -175,7 +175,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_followup_needinfo" model="support.canned.response">
+    <record id="canned_followup_needinfo" model="engage.canned.response">
         <field name="name">Need More Information</field>
         <field name="shortcut">needinfo</field>
         <field name="category">followup</field>
@@ -191,7 +191,7 @@
         ]]></field>
     </record>
 
-    <record id="canned_followup_reminder" model="support.canned.response">
+    <record id="canned_followup_reminder" model="engage.canned.response">
         <field name="name">Friendly Reminder</field>
         <field name="shortcut">reminder</field>
         <field name="category">followup</field>

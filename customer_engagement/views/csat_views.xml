@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- CSAT Tree View -->
+    <record id="view_engage_csat_tree" model="ir.ui.view">
+        <field name="name">engage.csat.tree</field>
+        <field name="model">engage.csat</field>
+        <field name="arch" type="xml">
+            <list
+                string="CSAT Surveys"
+                decoration-success="state == 'answered' and rating_value >= 4"
+                decoration-warning="state == 'answered' and rating_value == 3"
+                decoration-danger="state == 'answered' and rating_value &lt;= 2"
+                decoration-muted="state in ('expired', 'pending')"
+            >
+                <field name="conversation_id" />
+                <field name="partner_id" />
+                <field name="user_id" />
+                <field name="team_id" optional="hide" />
+                <field name="sent_at" />
+                <field name="answered_at" />
+                <field name="rating" />
+                <field name="rating_value" invisible="1" />
+                <field name="resolved_satisfactorily" optional="show" />
+                <field name="agent_helpful" optional="show" />
+                <field name="would_recommend" optional="show" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'answered'"
+                    decoration-warning="state == 'sent'"
+                    decoration-danger="state == 'expired'"
+                    decoration-muted="state == 'pending'"
+                />
+            </list>
+        </field>
+    </record>
+
+    <!-- CSAT Form View -->
+    <record id="view_engage_csat_form" model="ir.ui.view">
+        <field name="name">engage.csat.form</field>
+        <field name="model">engage.csat</field>
+        <field name="arch" type="xml">
+            <form string="CSAT Survey">
+                <header>
+                    <button
+                        name="action_send"
+                        string="Send Survey"
+                        type="object"
+                        class="btn-primary"
+                        invisible="state != 'pending'"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="pending,sent,answered"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="conversation_id" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Survey Details">
+                            <field name="partner_id" />
+                            <field name="user_id" />
+                            <field name="team_id" />
+                            <field name="access_url" widget="url" readonly="1" />
+                        </group>
+                        <group string="Timing">
+                            <field name="sent_at" />
+                            <field name="expires_at" />
+                            <field name="answered_at" />
+                            <field name="response_time" />
+                            <field name="expiry_days" />
+                        </group>
+                    </group>
+                    <group string="Response" invisible="state != 'answered'">
+                        <group>
+                            <field name="rating" />
+                            <field name="resolved_satisfactorily" />
+                            <field name="agent_helpful" />
+                            <field name="would_recommend" />
+                        </group>
+                        <group>
+                            <field name="feedback" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- CSAT Search View -->
+    <record id="view_engage_csat_search" model="ir.ui.view">
+        <field name="name">engage.csat.search</field>
+        <field name="model">engage.csat</field>
+        <field name="arch" type="xml">
+            <search string="CSAT Surveys">
+                <field name="conversation_id" />
+                <field name="partner_id" />
+                <field name="user_id" />
+                <field name="team_id" />
+                <separator />
+                <filter
+                    name="filter_pending"
+                    string="Pending"
+                    domain="[('state', '=', 'pending')]"
+                />
+                <filter
+                    name="filter_sent"
+                    string="Sent"
+                    domain="[('state', '=', 'sent')]"
+                />
+                <filter
+                    name="filter_answered"
+                    string="Answered"
+                    domain="[('state', '=', 'answered')]"
+                />
+                <filter
+                    name="filter_expired"
+                    string="Expired"
+                    domain="[('state', '=', 'expired')]"
+                />
+                <separator />
+                <filter
+                    name="filter_positive"
+                    string="Positive (4-5)"
+                    domain="[('rating', 'in', ['4', '5'])]"
+                />
+                <filter
+                    name="filter_neutral"
+                    string="Neutral (3)"
+                    domain="[('rating', '=', '3')]"
+                />
+                <filter
+                    name="filter_negative"
+                    string="Negative (1-2)"
+                    domain="[('rating', 'in', ['1', '2'])]"
+                />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_rating"
+                        string="Rating"
+                        context="{'group_by': 'rating'}"
+                    />
+                    <filter
+                        name="group_agent"
+                        string="Agent"
+                        context="{'group_by': 'user_id'}"
+                    />
+                    <filter
+                        name="group_team"
+                        string="Team"
+                        context="{'group_by': 'team_id'}"
+                    />
+                    <filter
+                        name="group_date"
+                        string="Date"
+                        context="{'group_by': 'sent_at:month'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- CSAT Pivot View -->
+    <record id="view_engage_csat_pivot" model="ir.ui.view">
+        <field name="name">engage.csat.pivot</field>
+        <field name="model">engage.csat</field>
+        <field name="arch" type="xml">
+            <pivot string="CSAT Analysis">
+                <field name="user_id" type="row" />
+                <field name="rating_value" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- CSAT Graph View -->
+    <record id="view_engage_csat_graph" model="ir.ui.view">
+        <field name="name">engage.csat.graph</field>
+        <field name="model">engage.csat</field>
+        <field name="arch" type="xml">
+            <graph string="CSAT Overview" type="bar">
+                <field name="rating" />
+                <field name="rating_value" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- CSAT Action -->
+    <record id="action_engage_csat" model="ir.actions.act_window">
+        <field name="name">Satisfaction Surveys</field>
+        <field name="res_model">engage.csat</field>
+        <field name="view_mode">list,form,pivot,graph</field>
+        <field name="search_view_id" ref="view_engage_csat_search" />
+        <field name="context">{'search_default_filter_answered': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No satisfaction surveys yet
+            </p>
+            <p>
+                CSAT surveys are automatically sent when conversations are resolved.
+            </p>
+        </field>
+    </record>
+</odoo>

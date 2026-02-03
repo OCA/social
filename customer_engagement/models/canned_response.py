@@ -6,7 +6,7 @@ from odoo import fields, models
 class CannedResponse(models.Model):
     """Pre-defined responses for quick replies."""
 
-    _name = "support.canned.response"
+    _name = "engage.canned.response"
     _description = "Canned Response"
     _order = "sequence, shortcut"
 
@@ -53,8 +53,8 @@ class CannedResponse(models.Model):
         help="Comma-separated channel types, empty = all channels",
     )
     team_ids = fields.Many2many(
-        comodel_name="support.team",
-        relation="canned_response_team_rel",
+        comodel_name="engage.team",
+        relation="engage_canned_response_team_rel",
         column1="response_id",
         column2="team_id",
         string="Teams",
@@ -113,7 +113,7 @@ class CannedResponse(models.Model):
 
         # Filter by team if specified
         if team_id:
-            team = self.env["support.team"].browse(team_id)
+            team = self.env["engage.team"].browse(team_id)
             responses = responses.filtered(
                 lambda r: not r.team_ids or team in r.team_ids
             )

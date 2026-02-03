@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- API Key Form View -->
+    <record id="view_engage_api_key_form" model="ir.ui.view">
+        <field name="name">engage.api.key.form</field>
+        <field name="model">engage.api.key</field>
+        <field name="arch" type="xml">
+            <form string="API Key">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_regenerate_key"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-refresh"
+                            confirm="This will invalidate the current key. Continue?"
+                        >
+                            <span>Regenerate</span>
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" string="API Key Name" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g., WhatsApp Integration"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Identification">
+                            <field name="key_prefix" readonly="1" />
+                            <field name="active" />
+                            <field name="expires_at" />
+                        </group>
+                        <group string="Association">
+                            <field name="team_id" />
+                            <field name="channel_types" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Permissions" name="permissions">
+                            <group>
+                                <group>
+                                    <field name="can_read" />
+                                    <field name="can_write" />
+                                    <field name="can_receive_webhooks" />
+                                </group>
+                                <group>
+                                    <field name="rate_limit_per_minute" />
+                                    <field name="rate_limit_per_day" />
+                                </group>
+                            </group>
+                        </page>
+                        <page string="Webhook" name="webhook">
+                            <group>
+                                <field name="webhook_url" />
+                                <field name="webhook_secret" password="True" />
+                            </group>
+                        </page>
+                        <page string="Statistics" name="stats">
+                            <group>
+                                <field name="last_used_at" readonly="1" />
+                                <field name="total_requests" readonly="1" />
+                                <field name="requests_today" readonly="1" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- API Key Tree View -->
+    <record id="view_engage_api_key_tree" model="ir.ui.view">
+        <field name="name">engage.api.key.tree</field>
+        <field name="model">engage.api.key</field>
+        <field name="arch" type="xml">
+            <list string="API Keys">
+                <field name="name" />
+                <field name="key_prefix" />
+                <field name="channel_types" />
+                <field name="team_id" optional="show" />
+                <field name="can_read" />
+                <field name="can_write" />
+                <field name="can_receive_webhooks" />
+                <field name="last_used_at" />
+                <field name="total_requests" />
+                <field name="expires_at" optional="show" />
+                <field name="active" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+
+    <!-- API Key Search View -->
+    <record id="view_engage_api_key_search" model="ir.ui.view">
+        <field name="name">engage.api.key.search</field>
+        <field name="model">engage.api.key</field>
+        <field name="arch" type="xml">
+            <search string="API Keys">
+                <field name="name" />
+                <field name="key_prefix" />
+                <field name="team_id" />
+                <filter
+                    name="active"
+                    string="Active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="can_webhook"
+                    string="Webhook Enabled"
+                    domain="[('can_receive_webhooks', '=', True)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_channel"
+                        string="Channel"
+                        context="{'group_by': 'channel_types'}"
+                    />
+                    <filter
+                        name="group_team"
+                        string="Team"
+                        context="{'group_by': 'team_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- API Key Action -->
+    <record id="action_engage_api_key" model="ir.actions.act_window">
+        <field name="name">API Keys</field>
+        <field name="res_model">engage.api.key</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first API Key
+            </p>
+            <p>
+                API Keys are used to authenticate external integrations
+                like WhatsApp, Telegram, and other messaging platforms.
+            </p>
+        </field>
+    </record>
+
+    <!-- API Key Wizard Form -->
+    <record id="view_engage_api_key_wizard_form" model="ir.ui.view">
+        <field name="name">engage.api.key.wizard.form</field>
+        <field name="model">engage.api.key.wizard</field>
+        <field name="arch" type="xml">
+            <form string="API Key Generated">
+                <div class="alert alert-warning" role="alert">
+                    <strong>Important:</strong> Copy this API key now.
+                    You will not be able to see it again!
+                </div>
+                <group>
+                    <field name="api_key_id" readonly="1" />
+                    <field name="plain_key" readonly="1" widget="CopyClipboardChar" />
+                </group>
+                <footer>
+                    <button
+                        name="action_close"
+                        string="Close"
+                        type="object"
+                        class="btn-primary"
+                    />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

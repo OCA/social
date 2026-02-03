@@ -1,13 +1,13 @@
-"""Support Folder Model."""
+"""Engage Folder Model."""
 
 from odoo import api, fields, models
 
 
-class SupportFolder(models.Model):
+class EngageFolder(models.Model):
     """Custom folders for organizing conversations."""
 
-    _name = "support.folder"
-    _description = "Support Folder"
+    _name = "engage.folder"
+    _description = "Engage Folder"
     _order = "sequence, name"
 
     name = fields.Char(
@@ -64,7 +64,7 @@ class SupportFolder(models.Model):
     @api.depends("folder_type", "domain")
     def _compute_conversation_count(self):
         """Count conversations in this folder."""
-        Conversation = self.env["support.conversation"]
+        Conversation = self.env["engage.conversation"]
         for folder in self:
             if folder.folder_type == "smart" and folder.domain:
                 try:

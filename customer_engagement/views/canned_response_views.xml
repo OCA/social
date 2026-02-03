@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Search View -->
-    <record id="support_canned_response_view_search" model="ir.ui.view">
-        <field name="name">support.canned.response.view.search</field>
-        <field name="model">support.canned.response</field>
+    <record id="engage_canned_response_view_search" model="ir.ui.view">
+        <field name="name">engage.canned.response.view.search</field>
+        <field name="model">engage.canned.response</field>
         <field name="arch" type="xml">
             <search string="Search Canned Responses">
                 <field name="name" />
@@ -63,9 +63,9 @@
     </record>
 
     <!-- Tree View -->
-    <record id="support_canned_response_view_tree" model="ir.ui.view">
-        <field name="name">support.canned.response.view.tree</field>
-        <field name="model">support.canned.response</field>
+    <record id="engage_canned_response_view_tree" model="ir.ui.view">
+        <field name="name">engage.canned.response.view.tree</field>
+        <field name="model">engage.canned.response</field>
         <field name="arch" type="xml">
             <list string="Canned Responses">
                 <field name="sequence" widget="handle" />
@@ -81,9 +81,9 @@
     </record>
 
     <!-- Form View -->
-    <record id="support_canned_response_view_form" model="ir.ui.view">
-        <field name="name">support.canned.response.view.form</field>
-        <field name="model">support.canned.response</field>
+    <record id="engage_canned_response_view_form" model="ir.ui.view">
+        <field name="name">engage.canned.response.view.form</field>
+        <field name="model">engage.canned.response</field>
         <field name="arch" type="xml">
             <form string="Canned Response">
                 <sheet>
@@ -153,33 +153,27 @@
     </record>
 
     <!-- Kanban View -->
-    <record id="support_canned_response_view_kanban" model="ir.ui.view">
-        <field name="name">support.canned.response.view.kanban</field>
-        <field name="model">support.canned.response</field>
+    <record id="engage_canned_response_view_kanban" model="ir.ui.view">
+        <field name="name">engage.canned.response.view.kanban</field>
+        <field name="model">engage.canned.response</field>
         <field name="arch" type="xml">
             <kanban default_group_by="category">
                 <templates>
-                    <t t-name="kanban-card">
-                        <div class="oe_kanban_global_click">
-                            <div class="oe_kanban_content">
-                                <div
-                                    class="d-flex justify-content-between align-items-center"
-                                >
-                                    <strong>/<field name="shortcut" /></strong>
-                                    <span class="badge bg-secondary">
-                                        <field name="usage_count" /> uses
-                                    </span>
-                                </div>
-                                <div class="text-muted mt-1">
-                                    <field name="name" />
-                                </div>
-                                <div
-                                    class="mt-2 small text-truncate"
-                                    style="max-height: 40px; overflow: hidden;"
-                                >
-                                    <field name="plain_content" />
-                                </div>
-                            </div>
+                    <t t-name="card">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <strong>/<field name="shortcut" /></strong>
+                            <span class="badge bg-secondary">
+                                <field name="usage_count" /> uses
+                            </span>
+                        </div>
+                        <div class="text-muted mt-1">
+                            <field name="name" />
+                        </div>
+                        <div
+                            class="mt-2 small text-truncate"
+                            style="max-height: 40px; overflow: hidden;"
+                        >
+                            <field name="plain_content" />
                         </div>
                     </t>
                 </templates>
@@ -188,11 +182,11 @@
     </record>
 
     <!-- Action -->
-    <record id="action_support_canned_response" model="ir.actions.act_window">
+    <record id="action_engage_canned_response" model="ir.actions.act_window">
         <field name="name">Canned Responses</field>
-        <field name="res_model">support.canned.response</field>
+        <field name="res_model">engage.canned.response</field>
         <field name="view_mode">kanban,list,form</field>
-        <field name="search_view_id" ref="support_canned_response_view_search" />
+        <field name="search_view_id" ref="engage_canned_response_view_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Create your first canned response

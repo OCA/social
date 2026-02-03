@@ -14,8 +14,8 @@ VALID_TRANSITIONS = {
 
 
 class Conversation(models.Model):
-    _name = "support.conversation"
-    _description = "Support Conversation"
+    _name = "engage.conversation"
+    _description = "Engagement Conversation"
     _inherit = ["mail.thread", "mail.activity.mixin"]
     _order = "priority desc, create_date desc"
     _rec_name = "display_name"
@@ -47,10 +47,24 @@ class Conversation(models.Model):
         index=True,
         tracking=True,
     )
+    channel_identifier = fields.Char(
+        string="Channel Identifier",
+        index=True,
+        help="External identifier on the channel (phone number, email, user ID, etc.)",
+    )
+    channel_conversation_id = fields.Char(
+        string="External Conversation ID",
+        index=True,
+        help="Conversation ID from the external channel",
+    )
+    channel_metadata = fields.Json(
+        string="Channel Metadata",
+        help="Additional channel-specific metadata (JSON format)",
+    )
 
     # Stage (state machine)
     stage_id = fields.Many2one(
-        comodel_name="support.conversation.stage",
+        comodel_name="engage.conversation.stage",
         string="Stage",
         tracking=True,
         index=True,
@@ -90,21 +104,58 @@ class Conversation(models.Model):
     # Timestamps
     first_response_at = fields.Datetime(string="First Response", readonly=True)
     resolved_at = fields.Datetime(readonly=True)
+    closed_date = fields.Datetime(string="Closed Date", readonly=True)
+
+    # Computed time metrics
+    response_time_seconds = fields.Integer(
+        compute="_compute_time_metrics",
+        store=True,
+        string="Response Time (seconds)",
+        help="Time from creation to first response",
+    )
+    resolution_time_seconds = fields.Integer(
+        compute="_compute_time_metrics",
+        store=True,
+        string="Resolution Time (seconds)",
+        help="Time from creation to resolution",
+    )
+
+    # Waiting status
+    is_waiting_customer = fields.Boolean(
+        compute="_compute_waiting_status",
+        store=True,
+        string="Waiting for Customer",
+    )
+    is_waiting_agent = fields.Boolean(
+        compute="_compute_waiting_status",
+        store=True,
+        string="Waiting for Agent",
+    )
+    last_customer_message_date = fields.Datetime(
+        compute="_compute_last_messages",
+        store=True,
+        string="Last Customer Message",
+    )
+    last_agent_message_date = fields.Datetime(
+        compute="_compute_last_messages",
+        store=True,
+        string="Last Agent Message",
+    )
 
     # Color for Kanban
     color = fields.Integer(string="Color Index")
 
     # History
     history_ids = fields.One2many(
-        comodel_name="support.conversation.history",
+        comodel_name="engage.conversation.history",
         inverse_name="conversation_id",
         string="History",
     )
 
     # Labels (tags)
     label_ids = fields.Many2many(
-        comodel_name="support.conversation.label",
-        relation="support_conversation_label_rel",
+        comodel_name="engage.conversation.label",
+        relation="engage_conversation_label_rel",
         column1="conversation_id",
         column2="label_id",
         string="Labels",
@@ -112,7 +163,7 @@ class Conversation(models.Model):
 
     # Team assignment
     team_id = fields.Many2one(
-        comodel_name="support.team",
+        comodel_name="engage.team",
         string="Team",
         index=True,
         tracking=True,
@@ -120,8 +171,8 @@ class Conversation(models.Model):
 
     # Folders
     folder_ids = fields.Many2many(
-        comodel_name="support.folder",
-        relation="support_conversation_folder_rel",
+        comodel_name="engage.folder",
+        relation="engage_conversation_folder_rel",
         column1="conversation_id",
         column2="folder_id",
         string="Folders",
@@ -129,7 +180,7 @@ class Conversation(models.Model):
 
     # Private notes
     note_ids = fields.One2many(
-        comodel_name="support.conversation.note",
+        comodel_name="engage.conversation.note",
         inverse_name="conversation_id",
         string="Notes",
     )
@@ -162,7 +213,7 @@ class Conversation(models.Model):
             # author_id is res.partner, check if it has no linked user
             messages = self.env["mail.message"].search_count(
                 [
-                    ("model", "=", "support.conversation"),
+                    ("model", "=", "engage.conversation"),
                     ("res_id", "=", rec.id),
                     ("message_type", "in", ["comment", "email"]),
                     (
@@ -179,7 +230,7 @@ class Conversation(models.Model):
         for rec in self:
             last_message = self.env["mail.message"].search(
                 [
-                    ("model", "=", "support.conversation"),
+                    ("model", "=", "engage.conversation"),
                     ("res_id", "=", rec.id),
                     ("message_type", "in", ["comment", "email"]),
                 ],
@@ -203,6 +254,75 @@ class Conversation(models.Model):
         for rec in self:
             rec.note_count = len(rec.note_ids)
 
+    @api.depends("first_response_at", "resolved_at", "create_date")
+    def _compute_time_metrics(self):
+        """Compute response and resolution time in seconds."""
+        for rec in self:
+            if rec.first_response_at and rec.create_date:
+                delta = rec.first_response_at - rec.create_date
+                rec.response_time_seconds = int(delta.total_seconds())
+            else:
+                rec.response_time_seconds = 0
+
+            if rec.resolved_at and rec.create_date:
+                delta = rec.resolved_at - rec.create_date
+                rec.resolution_time_seconds = int(delta.total_seconds())
+            else:
+                rec.resolution_time_seconds = 0
+
+    def _compute_last_messages(self):
+        """Compute last message dates for customer and agent."""
+        for rec in self:
+            messages = self.env["mail.message"].search(
+                [
+                    ("model", "=", "engage.conversation"),
+                    ("res_id", "=", rec.id),
+                    ("message_type", "in", ["comment", "email"]),
+                ],
+                order="date desc",
+            )
+
+            rec.last_customer_message_date = False
+            rec.last_agent_message_date = False
+
+            for msg in messages:
+                # Check if author is internal (has linked user)
+                is_internal = msg.author_id and msg.author_id.user_ids
+                if is_internal and not rec.last_agent_message_date:
+                    rec.last_agent_message_date = msg.date
+                elif not is_internal and not rec.last_customer_message_date:
+                    rec.last_customer_message_date = msg.date
+                if rec.last_customer_message_date and rec.last_agent_message_date:
+                    break
+
+    @api.depends("last_customer_message_date", "last_agent_message_date", "closed")
+    def _compute_waiting_status(self):
+        """Compute who is waiting based on last messages."""
+        for rec in self:
+            if rec.closed:
+                rec.is_waiting_customer = False
+                rec.is_waiting_agent = False
+            elif not rec.last_customer_message_date and not rec.last_agent_message_date:
+                # New conversation, waiting for agent
+                rec.is_waiting_customer = False
+                rec.is_waiting_agent = True
+            elif not rec.last_agent_message_date:
+                # Only customer messages, waiting for agent
+                rec.is_waiting_customer = False
+                rec.is_waiting_agent = True
+            elif not rec.last_customer_message_date:
+                # Only agent messages, waiting for customer
+                rec.is_waiting_customer = True
+                rec.is_waiting_agent = False
+            elif rec.last_customer_message_date > rec.last_agent_message_date:
+                # Customer sent last, waiting for agent
+                rec.is_waiting_customer = False
+                rec.is_waiting_agent = True
+            else:
+                # Agent sent last, waiting for customer
+                rec.is_waiting_customer = True
+                rec.is_waiting_agent = False
+
     # Computed
     @api.depends("uuid", "subject", "partner_id")
     def _compute_display_name(self):
@@ -215,17 +335,17 @@ class Conversation(models.Model):
                 rec.display_name = f"[{rec.uuid[:8]}]"
 
     def _default_stage(self):
-        return self.env["support.conversation.stage"].search(
+        return self.env["engage.conversation.stage"].search(
             [("code", "=", "new")], limit=1
         )
 
     @api.model
     def _read_group_stage_ids(self, stages, domain):
-        return self.env["support.conversation.stage"].search([])
+        return self.env["engage.conversation.stage"].search([])
 
     def write(self, vals):
         if "stage_id" in vals:
-            new_stage = self.env["support.conversation.stage"].browse(vals["stage_id"])
+            new_stage = self.env["engage.conversation.stage"].browse(vals["stage_id"])
             for rec in self:
                 if rec.stage_id:
                     rec._validate_transition(rec.stage_id.code, new_stage.code)
@@ -246,7 +366,7 @@ class Conversation(models.Model):
 
     def _record_transition(self, new_stage):
         """Record transition in history."""
-        self.env["support.conversation.history"].create(
+        self.env["engage.conversation.history"].create(
             {
                 "conversation_id": self.id,
                 "from_stage_id": self.stage_id.id if self.stage_id else False,
@@ -262,9 +382,14 @@ class Conversation(models.Model):
             vals["first_response_at"] = fields.Datetime.now()
         if new_stage.code == "resolved" and not self.resolved_at:
             vals["resolved_at"] = fields.Datetime.now()
-        if new_stage.code == "open" and self.resolved_at:
-            # Reopening - clear resolved timestamp
-            vals["resolved_at"] = False
+        if new_stage.code == "closed" and not self.closed_date:
+            vals["closed_date"] = fields.Datetime.now()
+        if new_stage.code == "open":
+            # Reopening - clear resolved and closed timestamps
+            if self.resolved_at:
+                vals["resolved_at"] = False
+            if self.closed_date:
+                vals["closed_date"] = False
         if vals:
             return super().write(vals)
         return True
@@ -272,28 +397,28 @@ class Conversation(models.Model):
     # Action buttons
     def action_open(self):
         """Move to open stage."""
-        stage = self.env["support.conversation.stage"].search(
+        stage = self.env["engage.conversation.stage"].search(
             [("code", "=", "open")], limit=1
         )
         self.write({"stage_id": stage.id})
 
     def action_resolve(self):
         """Move to resolved stage."""
-        stage = self.env["support.conversation.stage"].search(
+        stage = self.env["engage.conversation.stage"].search(
             [("code", "=", "resolved")], limit=1
         )
         self.write({"stage_id": stage.id})
 
     def action_close(self):
         """Move to closed stage."""
-        stage = self.env["support.conversation.stage"].search(
+        stage = self.env["engage.conversation.stage"].search(
             [("code", "=", "closed")], limit=1
         )
         self.write({"stage_id": stage.id})
 
     def action_pending(self):
         """Move to pending stage."""
-        stage = self.env["support.conversation.stage"].search(
+        stage = self.env["engage.conversation.stage"].search(
             [("code", "=", "pending")], limit=1
         )
         self.write({"stage_id": stage.id})
@@ -304,7 +429,7 @@ class Conversation(models.Model):
 
     def action_add_note(self, content):
         """Add a private note to the conversation."""
-        self.env["support.conversation.note"].create(
+        self.env["engage.conversation.note"].create(
             {
                 "conversation_id": self.id,
                 "author_id": self.env.uid,
@@ -322,10 +447,10 @@ class Conversation(models.Model):
 
     def action_assign_team(self, team_id):
         """Assign conversation to a team."""
-        team = self.env["support.team"].browse(team_id)
+        team = self.env["engage.team"].browse(team_id)
         vals = {"team_id": team_id}
         if team.auto_assign:
-            agent = team.get_available_agent()
+            agent = team.get_available_agent(conversation=self)
             if agent:
                 vals["user_id"] = agent.id
         self.write(vals)
@@ -342,18 +467,18 @@ class Conversation(models.Model):
         """Create database indexes for performance."""
         self.env.cr.execute(
             """
-            CREATE INDEX IF NOT EXISTS support_conversation_stage_user_idx
-            ON support_conversation (stage_id, user_id)
+            CREATE INDEX IF NOT EXISTS engage_conversation_stage_user_idx
+            ON engage_conversation (stage_id, user_id)
             WHERE user_id IS NOT NULL;
 
-            CREATE INDEX IF NOT EXISTS support_conversation_channel_stage_idx
-            ON support_conversation (channel_type, stage_id);
+            CREATE INDEX IF NOT EXISTS engage_conversation_channel_stage_idx
+            ON engage_conversation (channel_type, stage_id);
 
-            CREATE INDEX IF NOT EXISTS support_conversation_partner_idx
-            ON support_conversation (partner_id)
+            CREATE INDEX IF NOT EXISTS engage_conversation_partner_idx
+            ON engage_conversation (partner_id)
             WHERE partner_id IS NOT NULL;
 
-            CREATE INDEX IF NOT EXISTS support_conversation_create_date_idx
-            ON support_conversation (create_date DESC);
+            CREATE INDEX IF NOT EXISTS engage_conversation_create_date_idx
+            ON engage_conversation (create_date DESC);
         """
         )

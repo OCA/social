@@ -2,7 +2,7 @@ from odoo import fields, models
 
 
 class ConversationStage(models.Model):
-    _name = "support.conversation.stage"
+    _name = "engage.conversation.stage"
     _description = "Conversation Stage"
     _order = "sequence, id"
 
@@ -30,7 +30,7 @@ class ConversationStage(models.Model):
     mail_template_id = fields.Many2one(
         comodel_name="mail.template",
         string="Email Template",
-        domain="[('model', '=', 'support.conversation')]",
+        domain="[('model', '=', 'engage.conversation')]",
         help="Email sent when conversation enters this stage",
     )
 

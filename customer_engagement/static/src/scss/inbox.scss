@@ -2,7 +2,7 @@
 // Main entry point - component styles are loaded via manifest
 
 // Main Inbox Container
-.o_support_inbox {
+.o_engage_inbox {
     height: calc(100vh - 46px);
     background: var(--o-view-background-color, #f8f9fa);
     display: flex;
@@ -71,7 +71,7 @@
 }
 
 // Global scrollbar styling for the inbox
-.o_support_inbox {
+.o_engage_inbox {
     * {
         // Firefox scrollbar
         scrollbar-width: thin;
@@ -98,7 +98,7 @@
 }
 
 // Focus states for accessibility
-.o_support_inbox {
+.o_engage_inbox {
     .btn:focus,
     .form-control:focus,
     textarea:focus {
@@ -114,18 +114,18 @@
 
 // Print styles
 @media print {
-    .o_support_inbox {
-        .o_support_sidebar,
-        .o_support_conversation_list,
-        .o_support_composer_container {
+    .o_engage_inbox {
+        .o_engage_sidebar,
+        .o_engage_conversation_list,
+        .o_engage_composer_container {
             display: none !important;
         }
 
-        .o_support_chat_panel {
+        .o_engage_chat_panel {
             width: 100% !important;
         }
 
-        .o_support_messages {
+        .o_engage_messages {
             overflow: visible !important;
             height: auto !important;
         }

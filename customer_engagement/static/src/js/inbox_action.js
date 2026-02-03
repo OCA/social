@@ -7,16 +7,16 @@ import {Layout} from "@web/search/layout";
 import {session} from "@web/session";
 
 // Import new components
-import {SupportSidebar} from "./components/sidebar/support_sidebar";
+import {EngageSidebar} from "./components/sidebar/engage_sidebar";
 import {ConversationList} from "./components/conversation_list/conversation_list";
 import {ChatPanel} from "./components/chat_panel/chat_panel";
 import {ContactPanel} from "./components/contact_panel/contact_panel";
 
-class SupportInbox extends Component {
-    static template = "customer_engagement.SupportInbox";
+class EngageInbox extends Component {
+    static template = "customer_engagement.EngageInbox";
     static components = {
         Layout,
-        SupportSidebar,
+        EngageSidebar,
         ConversationList,
         ChatPanel,
         ContactPanel,
@@ -111,7 +111,7 @@ class SupportInbox extends Component {
     subscribeToBusNotifications() {
         // Subscribe to conversation updates
         try {
-            this.bus.subscribe("support.conversation", (payload) => {
+            this.bus.subscribe("engage.conversation", (payload) => {
                 if (
                     payload.type === "new_message" &&
                     this.state.selectedConversation?.id === payload.conversation_id
@@ -135,7 +135,7 @@ class SupportInbox extends Component {
 
         try {
             this.state.conversations = await this.orm.searchRead(
-                "support.conversation",
+                "engage.conversation",
                 domain,
                 [
                     "uuid",
@@ -176,7 +176,7 @@ class SupportInbox extends Component {
         if (stageIds.length === 0) return;
 
         const stages = await this.orm.searchRead(
-            "support.conversation.stage",
+            "engage.conversation.stage",
             [["id", "in", stageIds]],
             ["id", "code"]
         );
@@ -197,12 +197,12 @@ class SupportInbox extends Component {
         try {
             const userId = this.userId;
             const [allCount, mineCount, unassignedCount] = await Promise.all([
-                this.orm.searchCount("support.conversation", [["closed", "=", false]]),
-                this.orm.searchCount("support.conversation", [
+                this.orm.searchCount("engage.conversation", [["closed", "=", false]]),
+                this.orm.searchCount("engage.conversation", [
                     ["closed", "=", false],
                     ["user_id", "=", userId],
                 ]),
-                this.orm.searchCount("support.conversation", [
+                this.orm.searchCount("engage.conversation", [
                     ["closed", "=", false],
                     ["user_id", "=", false],
                 ]),
@@ -273,7 +273,7 @@ class SupportInbox extends Component {
                     "mail.message",
                     [
                         ["res_id", "=", conversationId],
-                        ["model", "=", "support.conversation"],
+                        ["model", "=", "engage.conversation"],
                     ],
                     [
                         "body",
@@ -286,7 +286,7 @@ class SupportInbox extends Component {
                     {order: "date asc"}
                 ),
                 this.orm.searchRead(
-                    "support.conversation.note",
+                    "engage.conversation.note",
                     [["conversation_id", "=", conversationId]],
                     [
                         "content",
@@ -408,7 +408,7 @@ class SupportInbox extends Component {
                     {
                         name: att.name,
                         datas: att.data,
-                        res_model: "support.conversation",
+                        res_model: "engage.conversation",
                         res_id: this.state.selectedConversation.id,
                     },
                 ]);
@@ -416,7 +416,7 @@ class SupportInbox extends Component {
             }
 
             await this.orm.call(
-                "support.conversation",
+                "engage.conversation",
                 "message_post",
                 [this.state.selectedConversation.id],
                 {
@@ -438,7 +438,7 @@ class SupportInbox extends Component {
         if (!this.state.selectedConversation || !content.trim()) return;
 
         try {
-            await this.orm.call("support.conversation", "action_add_note", [
+            await this.orm.call("engage.conversation", "action_add_note", [
                 this.state.selectedConversation.id,
                 content,
             ]);
@@ -453,7 +453,7 @@ class SupportInbox extends Component {
         if (!this.state.selectedConversation) return;
 
         try {
-            await this.orm.call("support.conversation", "action_assign_to_me", [
+            await this.orm.call("engage.conversation", "action_assign_to_me", [
                 this.state.selectedConversation.id,
             ]);
             this.state.selectedConversation.user_id = [this.userId, this.userName];
@@ -479,7 +479,7 @@ class SupportInbox extends Component {
 
             const method = actionMap[stageCode];
             if (method) {
-                await this.orm.call("support.conversation", method, [
+                await this.orm.call("engage.conversation", method, [
                     this.state.selectedConversation.id,
                 ]);
                 await this.loadConversations();
@@ -501,7 +501,7 @@ class SupportInbox extends Component {
         if (!this.state.selectedConversation) return;
         this.action.doAction({
             type: "ir.actions.act_window",
-            res_model: "support.conversation",
+            res_model: "engage.conversation",
             res_id: this.state.selectedConversation.id,
             views: [[false, "form"]],
             target: "current",
@@ -538,7 +538,7 @@ class SupportInbox extends Component {
     // ==================== Computed Properties ====================
 
     get inboxClass() {
-        const classes = ["o_support_inbox", "d-flex"];
+        const classes = ["o_engage_inbox", "d-flex"];
         if (this.state.selectedConversation) {
             classes.push("conversation-selected");
         }
@@ -549,4 +549,4 @@ class SupportInbox extends Component {
     }
 }
 
-registry.category("actions").add("support_inbox", SupportInbox);
+registry.category("actions").add("engage_inbox", EngageInbox);

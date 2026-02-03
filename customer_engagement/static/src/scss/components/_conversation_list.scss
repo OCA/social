@@ -1,6 +1,6 @@
 // Conversation List Component Styles
 
-.o_support_conversation_list {
+.o_engage_conversation_list {
     width: 320px;
     min-width: 320px;
     background-color: white;
@@ -8,7 +8,7 @@
     color: #212529 !important; // Ensure text is dark
 
     // Search input
-    .o_support_conversation_search {
+    .o_engage_conversation_search {
         .input-group {
             .input-group-text {
                 border-color: #dee2e6;
@@ -33,7 +33,7 @@
     }
 
     // Tab buttons
-    .o_support_conversation_tabs {
+    .o_engage_conversation_tabs {
         background-color: #f8f9fa;
 
         button {
@@ -57,7 +57,7 @@
     }
 
     // Conversation items container
-    .o_support_conversation_items {
+    .o_engage_conversation_items {
         scrollbar-width: thin;
         scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
 
@@ -75,7 +75,7 @@
 }
 
 // Conversation Card
-.o_support_conversation_card {
+.o_engage_conversation_card {
     border-bottom: 1px solid #dee2e6;
     cursor: pointer;
     transition: background-color 0.15s ease;

@@ -3,9 +3,9 @@
 
     <!-- Conversation List Template -->
     <t t-name="customer_engagement.ConversationList">
-        <div class="o_support_conversation_list d-flex flex-column h-100">
+        <div class="o_engage_conversation_list d-flex flex-column h-100">
             <!-- Search Bar -->
-            <div class="o_support_conversation_search p-3 border-bottom">
+            <div class="o_engage_conversation_search p-3 border-bottom">
                 <div class="input-group input-group-sm">
                     <span class="input-group-text bg-transparent border-end-0">
                         <i class="fa fa-search text-muted" />
@@ -21,7 +21,7 @@
             </div>
 
             <!-- Tabs -->
-            <div class="o_support_conversation_tabs d-flex border-bottom">
+            <div class="o_engage_conversation_tabs d-flex border-bottom">
                 <t t-foreach="tabs" t-as="tab" t-key="tab.key">
                     <button
                         t-attf-class="btn btn-sm flex-fill rounded-0 border-0 py-2 #{isActiveTab(tab.key) ? 'active text-primary border-bottom border-primary border-2' : 'text-muted'}"
@@ -33,7 +33,7 @@
             </div>
 
             <!-- Conversation Items -->
-            <div class="o_support_conversation_items flex-grow-1 overflow-auto">
+            <div class="o_engage_conversation_items flex-grow-1 overflow-auto">
                 <t t-if="props.isLoading">
                     <div class="d-flex align-items-center justify-content-center h-100">
                         <div class="spinner-border text-primary" role="status">

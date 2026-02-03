@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Tree View -->
-    <record id="support_conversation_label_view_tree" model="ir.ui.view">
-        <field name="name">support.conversation.label.view.tree</field>
-        <field name="model">support.conversation.label</field>
+    <record id="engage_conversation_label_view_tree" model="ir.ui.view">
+        <field name="name">engage.conversation.label.view.tree</field>
+        <field name="model">engage.conversation.label</field>
         <field name="arch" type="xml">
             <list string="Labels" editable="bottom">
                 <field name="sequence" widget="handle" />
@@ -16,9 +16,9 @@
     </record>
 
     <!-- Form View -->
-    <record id="support_conversation_label_view_form" model="ir.ui.view">
-        <field name="name">support.conversation.label.view.form</field>
-        <field name="model">support.conversation.label</field>
+    <record id="engage_conversation_label_view_form" model="ir.ui.view">
+        <field name="name">engage.conversation.label.view.form</field>
+        <field name="model">engage.conversation.label</field>
         <field name="arch" type="xml">
             <form string="Label">
                 <sheet>
@@ -53,27 +53,21 @@
     </record>
 
     <!-- Kanban View -->
-    <record id="support_conversation_label_view_kanban" model="ir.ui.view">
-        <field name="name">support.conversation.label.view.kanban</field>
-        <field name="model">support.conversation.label</field>
+    <record id="engage_conversation_label_view_kanban" model="ir.ui.view">
+        <field name="name">engage.conversation.label.view.kanban</field>
+        <field name="model">engage.conversation.label</field>
         <field name="arch" type="xml">
             <kanban>
                 <field name="color" />
                 <templates>
-                    <t t-name="kanban-card">
-                        <div
-                            t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_global_click"
-                        >
-                            <div class="oe_kanban_content">
-                                <strong>
-                                    <field name="name" />
-                                </strong>
-                                <div class="text-muted mt-1">
-                                    <span><field
-                                        name="conversation_count"
-                                    /> conversations</span>
-                                </div>
-                            </div>
+                    <t t-name="card">
+                        <strong>
+                            <field name="name" />
+                        </strong>
+                        <div class="text-muted mt-1">
+                            <span><field
+                                name="conversation_count"
+                            /> conversations</span>
                         </div>
                     </t>
                 </templates>
@@ -82,9 +76,9 @@
     </record>
 
     <!-- Action -->
-    <record id="action_support_conversation_label" model="ir.actions.act_window">
+    <record id="action_engage_conversation_label" model="ir.actions.act_window">
         <field name="name">Labels</field>
-        <field name="res_model">support.conversation.label</field>
+        <field name="res_model">engage.conversation.label</field>
         <field name="view_mode">list,kanban,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

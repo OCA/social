@@ -3,7 +3,7 @@
 
     <!-- Chat Panel Template -->
     <t t-name="customer_engagement.ChatPanel">
-        <div class="o_support_chat_panel d-flex flex-column h-100">
+        <div class="o_engage_chat_panel d-flex flex-column h-100">
             <t t-if="!hasConversation">
                 <div
                     class="d-flex flex-column align-items-center justify-content-center h-100 text-muted p-4"
@@ -29,7 +29,7 @@
 
                 <!-- Message List -->
                 <div
-                    class="o_support_messages flex-grow-1 overflow-auto p-3"
+                    class="o_engage_messages flex-grow-1 overflow-auto p-3"
                     t-ref="messageList"
                 >
                     <MessageList
@@ -40,7 +40,7 @@
                 </div>
 
                 <!-- Composer -->
-                <div class="o_support_composer_container border-top bg-white">
+                <div class="o_engage_composer_container border-top bg-white">
                     <RichComposer
                         mode="state.composerMode"
                         conversationId="props.conversation.id"
@@ -61,7 +61,7 @@
     <!-- Chat Header Template -->
     <t t-name="customer_engagement.ChatHeader">
         <div
-            class="o_support_chat_header d-flex align-items-center justify-content-between p-3 border-bottom bg-white"
+            class="o_engage_chat_header d-flex align-items-center justify-content-between p-3 border-bottom bg-white"
         >
             <div class="d-flex align-items-center gap-3">
                 <!-- Channel Icon -->
@@ -153,7 +153,7 @@
 
     <!-- Message List Template -->
     <t t-name="customer_engagement.MessageList">
-        <div class="o_support_message_list" t-ref="container">
+        <div class="o_engage_message_list" t-ref="container">
             <t t-if="props.isLoading">
                 <div class="d-flex align-items-center justify-content-center p-4">
                     <div class="spinner-border text-primary" role="status">
@@ -224,6 +224,16 @@
                     class="fw-semibold small mb-1"
                     t-esc="authorName"
                 />
+
+                <!-- Reply-to reference -->
+                <div
+                    t-if="hasReplyTo"
+                    class="o_reply_to border-start border-2 border-white-50 ps-2 mb-2 small opacity-75"
+                >
+                    <i class="fa fa-reply me-1" />
+                    <span t-esc="replyToPreview" />
+                </div>
+
                 <div class="o_message_body" t-raw="props.message.body" />
 
                 <!-- Attachments -->
@@ -247,10 +257,40 @@
                     </t>
                 </div>
 
+                <!-- Time and Delivery Status -->
                 <div
-                    t-attf-class="text-end small #{props.isOutgoing ? 'text-white-50' : 'text-muted'}"
-                    t-esc="formattedTime"
-                />
+                    t-attf-class="d-flex align-items-center justify-content-end gap-1 small #{props.isOutgoing ? 'text-white-50' : 'text-muted'}"
+                >
+                    <span t-esc="formattedTime" />
+                    <!-- Delivery status for outgoing messages -->
+                    <t t-if="props.isOutgoing and deliveryStatus">
+                        <span
+                            class="o_delivery_status ms-1"
+                            t-att-title="deliveryStatusTitle"
+                        >
+                            <t t-if="isDoubleCheck">
+                                <!-- Double check mark for delivered/read -->
+                                <span t-attf-class="#{isRead ? 'text-info' : ''}">
+                                    <i
+                                        class="fa fa-check"
+                                        style="margin-right: -4px;"
+                                    />
+                                    <i class="fa fa-check" />
+                                </span>
+                            </t>
+                            <t t-elif="deliveryStatus === 'pending'">
+                                <i class="fa fa-clock-o" />
+                            </t>
+                            <t t-elif="deliveryStatus === 'failed'">
+                                <i class="fa fa-exclamation-circle text-danger" />
+                            </t>
+                            <t t-else="">
+                                <!-- Single check for sent -->
+                                <i class="fa fa-check" />
+                            </t>
+                        </span>
+                    </t>
+                </div>
             </div>
         </div>
     </t>
@@ -301,7 +341,7 @@
 
     <!-- Rich Composer Template -->
     <t t-name="customer_engagement.RichComposer">
-        <div class="o_support_rich_composer p-3">
+        <div class="o_engage_rich_composer p-3">
             <!-- Mode Tabs -->
             <div class="d-flex gap-2 mb-2">
                 <button

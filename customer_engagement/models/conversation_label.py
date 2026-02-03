@@ -1,12 +1,12 @@
-"""Support Conversation Label Model."""
+"""Engage Conversation Label Model."""
 
 from odoo import fields, models
 
 
 class ConversationLabel(models.Model):
-    """Labels/tags for categorizing support conversations."""
+    """Labels/tags for categorizing conversations."""
 
-    _name = "support.conversation.label"
+    _name = "engage.conversation.label"
     _description = "Conversation Label"
     _order = "sequence, name"
 
@@ -36,6 +36,6 @@ class ConversationLabel(models.Model):
     def _compute_conversation_count(self):
         """Count conversations using this label."""
         for label in self:
-            label.conversation_count = self.env["support.conversation"].search_count(
+            label.conversation_count = self.env["engage.conversation"].search_count(
                 [("label_ids", "in", label.id)]
             )

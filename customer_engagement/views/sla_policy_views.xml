@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- SLA Policy Form View -->
+    <record id="view_engage_sla_policy_form" model="ir.ui.view">
+        <field name="name">engage.sla.policy.form</field>
+        <field name="model">engage.sla.policy</field>
+        <field name="arch" type="xml">
+            <form string="SLA Policy">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" string="Policy Name" />
+                        <h1>
+                            <field name="name" placeholder="e.g., Standard SLA" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Time Targets">
+                            <field name="first_response_time" />
+                            <field name="resolution_time" />
+                            <field name="business_hours_only" />
+                        </group>
+                        <group string="Thresholds">
+                            <field name="warning_threshold" />
+                            <field name="critical_threshold" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Conditions" name="conditions">
+                            <group>
+                                <group string="Filter By">
+                                    <field name="priority" />
+                                    <field name="channel_type" />
+                                    <field name="vip_only" />
+                                </group>
+                                <group string="Teams">
+                                    <field
+                                        name="team_ids"
+                                        widget="many2many_tags"
+                                        options="{'color_field': 'color'}"
+                                    />
+                                </group>
+                            </group>
+                            <group string="Description">
+                                <field
+                                    name="description"
+                                    nolabel="1"
+                                    placeholder="Describe when this policy applies..."
+                                />
+                            </group>
+                        </page>
+                        <page string="Statistics" name="stats">
+                            <group>
+                                <field name="conversation_count" />
+                                <field name="achieved_rate" widget="percentage" />
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- SLA Policy Tree View -->
+    <record id="view_engage_sla_policy_tree" model="ir.ui.view">
+        <field name="name">engage.sla.policy.tree</field>
+        <field name="model">engage.sla.policy</field>
+        <field name="arch" type="xml">
+            <list string="SLA Policies">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="first_response_time" />
+                <field name="resolution_time" />
+                <field name="priority" optional="show" />
+                <field name="channel_type" optional="show" />
+                <field name="team_ids" widget="many2many_tags" optional="show" />
+                <field name="conversation_count" />
+                <field name="achieved_rate" widget="percentage" />
+                <field name="active" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+
+    <!-- SLA Policy Search View -->
+    <record id="view_engage_sla_policy_search" model="ir.ui.view">
+        <field name="name">engage.sla.policy.search</field>
+        <field name="model">engage.sla.policy</field>
+        <field name="arch" type="xml">
+            <search string="SLA Policies">
+                <field name="name" />
+                <filter
+                    name="active"
+                    string="Active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="vip"
+                    string="VIP Only"
+                    domain="[('vip_only', '=', True)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_priority"
+                        string="Priority"
+                        context="{'group_by': 'priority'}"
+                    />
+                    <filter
+                        name="group_channel"
+                        string="Channel"
+                        context="{'group_by': 'channel_type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- SLA Policy Action -->
+    <record id="action_engage_sla_policy" model="ir.actions.act_window">
+        <field name="name">SLA Policies</field>
+        <field name="res_model">engage.sla.policy</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first SLA Policy
+            </p>
+            <p>
+                SLA policies define response and resolution time targets
+                for different types of conversations.
+            </p>
+        </field>
+    </record>
+
+    <!-- Conversation Form - SLA fields -->
+    <record id="view_engage_conversation_form_sla" model="ir.ui.view">
+        <field name="name">engage.conversation.form.sla</field>
+        <field name="model">engage.conversation</field>
+        <field
+            name="inherit_id"
+            ref="customer_engagement.engage_conversation_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="team_id" position="after">
+                <field name="sla_policy_id" />
+                <field
+                    name="sla_status"
+                    widget="badge"
+                    decoration-success="sla_status == 'achieved'"
+                    decoration-info="sla_status == 'ok'"
+                    decoration-warning="sla_status == 'warning'"
+                    decoration-danger="sla_status in ('critical', 'breached')"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- Conversation Tree - SLA column -->
+    <record id="view_engage_conversation_tree_sla" model="ir.ui.view">
+        <field name="name">engage.conversation.tree.sla</field>
+        <field name="model">engage.conversation</field>
+        <field
+            name="inherit_id"
+            ref="customer_engagement.engage_conversation_view_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="priority" position="after">
+                <field
+                    name="sla_status"
+                    widget="badge"
+                    decoration-success="sla_status == 'achieved'"
+                    decoration-info="sla_status == 'ok'"
+                    decoration-warning="sla_status == 'warning'"
+                    decoration-danger="sla_status in ('critical', 'breached')"
+                    optional="show"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -94,7 +94,7 @@ export class RichComposer extends Component {
         }
 
         const responses = await this.orm.searchRead(
-            "support.canned.response",
+            "engage.canned.response",
             [
                 ["shortcut", "ilike", query],
                 ["active", "=", true],
@@ -126,7 +126,7 @@ export class RichComposer extends Component {
         this.props.onClosePickers();
 
         // Increment usage count
-        this.orm.call("support.canned.response", "increment_usage", [[response.id]]);
+        this.orm.call("engage.canned.response", "increment_usage", [[response.id]]);
 
         this.focusTextarea();
     }

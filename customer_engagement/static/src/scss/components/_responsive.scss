@@ -2,17 +2,17 @@
 
 // Large screens (default desktop)
 @media (min-width: 1200px) {
-    .o_support_inbox {
+    .o_engage_inbox {
         // Full 4-column layout on large screens
-        .o_support_sidebar {
+        .o_engage_sidebar {
             width: 220px;
         }
 
-        .o_support_conversation_list {
+        .o_engage_conversation_list {
             width: 350px;
         }
 
-        .o_support_contact_panel {
+        .o_engage_contact_panel {
             width: 300px;
         }
     }
@@ -20,18 +20,18 @@
 
 // Medium-large screens (small desktop / large tablet)
 @media (min-width: 992px) and (max-width: 1199.98px) {
-    .o_support_inbox {
-        .o_support_sidebar {
+    .o_engage_inbox {
+        .o_engage_sidebar {
             width: 200px;
             min-width: 200px;
         }
 
-        .o_support_conversation_list {
+        .o_engage_conversation_list {
             width: 280px;
             min-width: 280px;
         }
 
-        .o_support_contact_panel {
+        .o_engage_contact_panel {
             width: 260px;
             min-width: 260px;
         }
@@ -40,31 +40,31 @@
 
 // Medium screens (tablet landscape)
 @media (min-width: 768px) and (max-width: 991.98px) {
-    .o_support_inbox {
+    .o_engage_inbox {
         // Collapse sidebar to icons only
-        .o_support_sidebar {
+        .o_engage_sidebar {
             width: 60px;
             min-width: 60px;
 
-            .o_support_sidebar_header h5,
-            .o_support_sidebar_section_header span,
-            .o_support_sidebar_item span:not(.badge) {
+            .o_engage_sidebar_header h5,
+            .o_engage_sidebar_section_header span,
+            .o_engage_sidebar_item span:not(.badge) {
                 display: none;
             }
 
-            .o_support_sidebar_item {
+            .o_engage_sidebar_item {
                 justify-content: center;
                 padding: 0.75rem;
             }
         }
 
-        .o_support_conversation_list {
+        .o_engage_conversation_list {
             width: 300px;
             min-width: 300px;
         }
 
         // Hide contact panel by default, show on demand
-        .o_support_contact_panel {
+        .o_engage_contact_panel {
             position: absolute;
             right: 0;
             top: 0;
@@ -83,9 +83,9 @@
 
 // Small screens (tablet portrait / large phone)
 @media (min-width: 576px) and (max-width: 767.98px) {
-    .o_support_inbox {
+    .o_engage_inbox {
         // Hide sidebar completely
-        .o_support_sidebar {
+        .o_engage_sidebar {
             position: fixed;
             left: 0;
             top: 0;
@@ -101,7 +101,7 @@
         }
 
         // Full width conversation list when no conversation selected
-        .o_support_conversation_list {
+        .o_engage_conversation_list {
             width: 100%;
             min-width: 100%;
             flex: 1;
@@ -112,7 +112,7 @@
         }
 
         // Full width chat panel
-        .o_support_chat_panel {
+        .o_engage_chat_panel {
             position: absolute;
             left: 0;
             right: 0;
@@ -127,7 +127,7 @@
         }
 
         // Hide contact panel
-        .o_support_contact_panel {
+        .o_engage_contact_panel {
             display: none;
         }
     }
@@ -135,11 +135,11 @@
 
 // Extra small screens (phone)
 @media (max-width: 575.98px) {
-    .o_support_inbox {
+    .o_engage_inbox {
         // Mobile-first: single panel at a time
         position: relative;
 
-        .o_support_sidebar {
+        .o_engage_sidebar {
             position: fixed;
             left: 0;
             top: 0;
@@ -155,7 +155,7 @@
             }
         }
 
-        .o_support_conversation_list {
+        .o_engage_conversation_list {
             width: 100%;
             min-width: 100%;
             flex: 1;
@@ -165,7 +165,7 @@
             }
         }
 
-        .o_support_chat_panel {
+        .o_engage_chat_panel {
             position: absolute;
             left: 0;
             right: 0;
@@ -179,14 +179,14 @@
             }
 
             // Add back button for mobile
-            .o_support_chat_header {
+            .o_engage_chat_header {
                 .o_mobile_back_btn {
                     display: block;
                 }
             }
         }
 
-        .o_support_contact_panel {
+        .o_engage_contact_panel {
             position: fixed;
             right: 0;
             top: 0;
@@ -203,13 +203,13 @@
     }
 
     // Mobile-specific adjustments
-    .o_support_conversation_card {
+    .o_engage_conversation_card {
         .o_conversation_card_content {
             padding: 0.75rem;
         }
     }
 
-    .o_support_chat_header {
+    .o_engage_chat_header {
         padding: 0.75rem !important;
 
         .btn {
@@ -217,7 +217,7 @@
         }
     }
 
-    .o_support_rich_composer {
+    .o_engage_rich_composer {
         padding: 0.75rem !important;
     }
 }
@@ -253,8 +253,8 @@
 
 // Touch-friendly adjustments
 @media (hover: none) and (pointer: coarse) {
-    .o_support_sidebar_item,
-    .o_support_conversation_card,
+    .o_engage_sidebar_item,
+    .o_engage_conversation_card,
     .o_canned_item,
     .o_history_item {
         // Larger touch targets
@@ -267,8 +267,8 @@
     }
 
     // Disable hover effects on touch devices
-    .o_support_sidebar_item:hover,
-    .o_support_conversation_card:hover,
+    .o_engage_sidebar_item:hover,
+    .o_engage_conversation_card:hover,
     .o_canned_item:hover {
         background-color: transparent;
     }

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="module_category_support" model="ir.module.category">
-        <field name="name">Support Center</field>
+    <record id="module_category_engage" model="ir.module.category">
+        <field name="name">Engagement Center</field>
         <field name="sequence">10</field>
     </record>
 
-    <record id="group_support_user" model="res.groups">
+    <record id="group_engage_user" model="res.groups">
         <field name="name">Agent</field>
-        <field name="category_id" ref="module_category_support" />
+        <field name="category_id" ref="module_category_engage" />
     </record>
 
-    <record id="group_support_manager" model="res.groups">
+    <record id="group_engage_manager" model="res.groups">
         <field name="name">Manager</field>
-        <field name="category_id" ref="module_category_support" />
-        <field name="implied_ids" eval="[(4, ref('group_support_user'))]" />
+        <field name="category_id" ref="module_category_engage" />
+        <field name="implied_ids" eval="[(4, ref('group_engage_user'))]" />
     </record>
 </odoo>

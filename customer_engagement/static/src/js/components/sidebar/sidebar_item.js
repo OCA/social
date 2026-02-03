@@ -28,7 +28,7 @@ export class SidebarItem extends Component {
 
     get itemClass() {
         const classes = [
-            "o_support_sidebar_item",
+            "o_engage_sidebar_item",
             "d-flex",
             "align-items-center",
             "gap-2",

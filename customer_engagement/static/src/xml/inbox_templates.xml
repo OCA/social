@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <!-- Main Support Inbox Template -->
-    <t t-name="customer_engagement.SupportInbox">
+    <!-- Main Engage Inbox Template -->
+    <t t-name="customer_engagement.EngageInbox">
         <Layout display="display">
             <div t-att-class="inboxClass">
                 <!-- Sidebar Component -->
-                <SupportSidebar
+                <EngageSidebar
                     collapsed="state.sidebarCollapsed"
                     activeFilter="state.filter"
                     activeFolder="state.activeFolder"

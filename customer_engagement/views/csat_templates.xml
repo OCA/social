@@ -1,0 +1,360 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- CSAT Survey Form Template -->
+    <template id="csat_form" name="CSAT Survey Form">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card shadow">
+                            <div class="card-header bg-primary text-white text-center">
+                                <h3 class="mb-0">How was your experience?</h3>
+                            </div>
+                            <div class="card-body p-4">
+                                <t t-if="error">
+                                    <div class="alert alert-danger" role="alert">
+                                        <t t-esc="error" />
+                                    </div>
+                                </t>
+
+                                <p class="text-center text-muted mb-4">
+                                    We'd love to hear your feedback about your recent conversation
+                                    <t t-if="agent">
+                                        with <strong t-esc="agent.name" />
+                                    </t>
+                                </p>
+
+                                <form
+                                    method="POST"
+                                    t-attf-action="/csat/#{survey.token}/submit"
+                                >
+                                    <input
+                                        type="hidden"
+                                        name="csrf_token"
+                                        t-att-value="request.csrf_token()"
+                                    />
+
+                                    <!-- Star Rating -->
+                                    <div class="mb-4 text-center">
+                                        <label
+                                            class="form-label fw-bold"
+                                        >Rate your experience</label>
+                                        <div
+                                            class="d-flex justify-content-center gap-2 my-3"
+                                        >
+                                            <t t-foreach="[1, 2, 3, 4, 5]" t-as="star">
+                                                <label
+                                                    class="btn btn-outline-warning fs-3"
+                                                    style="width: 60px; height: 60px;"
+                                                >
+                                                    <input
+                                                        type="radio"
+                                                        name="rating"
+                                                        t-att-value="star"
+                                                        class="d-none"
+                                                        required="required"
+                                                    />
+                                                    <span>★</span>
+                                                </label>
+                                            </t>
+                                        </div>
+                                        <div
+                                            class="d-flex justify-content-between text-muted small"
+                                        >
+                                            <span>Very Unsatisfied</span>
+                                            <span>Very Satisfied</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Additional Questions -->
+                                    <div class="mb-4">
+                                        <div class="form-check mb-2">
+                                            <input
+                                                type="checkbox"
+                                                class="form-check-input"
+                                                id="resolved"
+                                                name="resolved"
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="resolved"
+                                            >
+                                                My issue was resolved satisfactorily
+                                            </label>
+                                        </div>
+                                        <div class="form-check mb-2">
+                                            <input
+                                                type="checkbox"
+                                                class="form-check-input"
+                                                id="helpful"
+                                                name="helpful"
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="helpful"
+                                            >
+                                                The agent was helpful and professional
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input
+                                                type="checkbox"
+                                                class="form-check-input"
+                                                id="recommend"
+                                                name="recommend"
+                                            />
+                                            <label
+                                                class="form-check-label"
+                                                for="recommend"
+                                            >
+                                                I would recommend this service
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Feedback -->
+                                    <div class="mb-4">
+                                        <label
+                                            for="feedback"
+                                            class="form-label"
+                                        >Additional comments (optional)</label>
+                                        <textarea
+                                            class="form-control"
+                                            id="feedback"
+                                            name="feedback"
+                                            rows="4"
+                                            placeholder="Tell us more about your experience..."
+                                        />
+                                    </div>
+
+                                    <!-- Submit -->
+                                    <div class="d-grid">
+                                        <button
+                                            type="submit"
+                                            class="btn btn-primary btn-lg"
+                                        >Submit Feedback</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Star Rating Style -->
+            <style>
+                .btn-outline-warning:has(input:checked) {
+                    background-color: #ffc107;
+                    color: white;
+                }
+                .btn-outline-warning:hover {
+                    background-color: #ffca2c;
+                    color: white;
+                }
+            </style>
+        </t>
+    </template>
+
+    <!-- CSAT Thank You Template -->
+    <template id="csat_thank_you" name="CSAT Thank You">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card shadow text-center">
+                            <div class="card-body p-5">
+                                <div class="mb-4">
+                                    <t t-if="int(rating) >= 4">
+                                        <i
+                                            class="fa fa-smile-o text-success"
+                                            style="font-size: 5rem;"
+                                        />
+                                    </t>
+                                    <t t-elif="int(rating) == 3">
+                                        <i
+                                            class="fa fa-meh-o text-warning"
+                                            style="font-size: 5rem;"
+                                        />
+                                    </t>
+                                    <t t-else="">
+                                        <i
+                                            class="fa fa-frown-o text-danger"
+                                            style="font-size: 5rem;"
+                                        />
+                                    </t>
+                                </div>
+                                <h2 class="mb-3">Thank You!</h2>
+                                <p class="text-muted mb-4">
+                                    We appreciate your feedback. Your response helps us improve our service.
+                                </p>
+                                <t t-if="int(rating) &lt;= 2">
+                                    <p class="text-muted">
+                                        We're sorry to hear you had a less than satisfactory experience.
+                                        Our team will review your feedback and work to improve.
+                                    </p>
+                                </t>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- CSAT Already Answered Template -->
+    <template id="csat_already_answered" name="CSAT Already Answered">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card shadow text-center">
+                            <div class="card-body p-5">
+                                <div class="mb-4">
+                                    <i
+                                        class="fa fa-check-circle text-success"
+                                        style="font-size: 5rem;"
+                                    />
+                                </div>
+                                <h2 class="mb-3">Already Submitted</h2>
+                                <p class="text-muted">
+                                    You have already submitted your feedback for this conversation.
+                                    Thank you for your response!
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- CSAT Expired Template -->
+    <template id="csat_expired" name="CSAT Expired">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card shadow text-center">
+                            <div class="card-body p-5">
+                                <div class="mb-4">
+                                    <i
+                                        class="fa fa-clock-o text-muted"
+                                        style="font-size: 5rem;"
+                                    />
+                                </div>
+                                <h2 class="mb-3">Survey Expired</h2>
+                                <p class="text-muted">
+                                    This survey has expired and is no longer accepting responses.
+                                    We apologize for any inconvenience.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- CSAT Not Found Template -->
+    <template id="csat_not_found" name="CSAT Not Found">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5">
+                <div class="row justify-content-center">
+                    <div class="col-md-8 col-lg-6">
+                        <div class="card shadow text-center">
+                            <div class="card-body p-5">
+                                <div class="mb-4">
+                                    <i
+                                        class="fa fa-question-circle text-muted"
+                                        style="font-size: 5rem;"
+                                    />
+                                </div>
+                                <h2 class="mb-3">Survey Not Found</h2>
+                                <p class="text-muted">
+                                    The survey you're looking for could not be found.
+                                    Please check the link and try again.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+
+    <!-- CSAT Email Template -->
+    <record id="email_template_csat_survey" model="mail.template">
+        <field name="name">CSAT Survey Request</field>
+        <field name="model_id" ref="model_engage_csat" />
+        <field name="subject">How was your experience? - Your feedback matters</field>
+        <field
+            name="email_from"
+        >{{ (object.conversation_id.team_id.alias_id.display_name or object.env.company.email) }}</field>
+        <field name="email_to">{{ object.partner_id.email }}</field>
+        <field name="body_html" type="html">
+            <div style="margin: 0px; padding: 0px; font-family: Arial, sans-serif;">
+                <table
+                    border="0"
+                    cellpadding="0"
+                    cellspacing="0"
+                    style="padding-top: 16px; background-color: #F1F1F1; width: 100%;"
+                >
+                    <tr>
+                        <td align="center">
+                            <table
+                                border="0"
+                                cellpadding="0"
+                                cellspacing="0"
+                                width="590"
+                                style="background-color: white; padding: 20px;"
+                            >
+                                <tr>
+                                    <td align="center" style="padding: 20px;">
+                                        <h1
+                                            style="color: #333;"
+                                        >How was your experience?</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding: 20px; text-align: center;">
+                                        <p style="font-size: 16px; color: #555;">
+                                Dear <t t-out="object.partner_id.name or 'Customer'" />,
+                            </p>
+                                        <p style="font-size: 16px; color: #555;">
+                                Your recent conversation has been resolved. We'd love to hear your feedback!
+                            </p>
+                                        <p style="font-size: 16px; color: #555;">
+                                Please take a moment to rate your experience:
+                            </p>
+                                        <p style="margin: 30px 0;">
+                                            <a
+                                                href="{{ object.access_url }}"
+                                                style="background-color: #875A7B; padding: 15px 30px; text-decoration: none; color: white; border-radius: 5px; font-size: 18px;"
+                                            >
+                                    Rate Your Experience
+                                </a>
+                                        </p>
+                                        <p style="font-size: 14px; color: #888;">
+                                This survey will expire in <t
+                                            t-out="object.expiry_days"
+                                        /> days.
+                            </p>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td
+                                        style="padding: 20px; text-align: center; border-top: 1px solid #eee;"
+                                    >
+                                        <p style="font-size: 12px; color: #888;">
+                                Thank you for choosing our service.
+                            </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </field>
+    </record>
+</odoo>

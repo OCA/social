@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <!-- Tree View -->
-    <record id="support_folder_view_tree" model="ir.ui.view">
-        <field name="name">support.folder.view.tree</field>
-        <field name="model">support.folder</field>
+    <record id="engage_folder_view_tree" model="ir.ui.view">
+        <field name="name">engage.folder.view.tree</field>
+        <field name="model">engage.folder</field>
         <field name="arch" type="xml">
             <list string="Folders">
                 <field name="sequence" widget="handle" />
@@ -19,9 +19,9 @@
     </record>
 
     <!-- Form View -->
-    <record id="support_folder_view_form" model="ir.ui.view">
-        <field name="name">support.folder.view.form</field>
-        <field name="model">support.folder</field>
+    <record id="engage_folder_view_form" model="ir.ui.view">
+        <field name="name">engage.folder.view.form</field>
+        <field name="model">engage.folder</field>
         <field name="arch" type="xml">
             <form string="Folder">
                 <sheet>
@@ -77,41 +77,33 @@
     </record>
 
     <!-- Kanban View -->
-    <record id="support_folder_view_kanban" model="ir.ui.view">
-        <field name="name">support.folder.view.kanban</field>
-        <field name="model">support.folder</field>
+    <record id="engage_folder_view_kanban" model="ir.ui.view">
+        <field name="name">engage.folder.view.kanban</field>
+        <field name="model">engage.folder</field>
         <field name="arch" type="xml">
             <kanban>
                 <field name="color" />
                 <field name="icon" />
                 <templates>
-                    <t t-name="kanban-card">
-                        <div
-                            t-attf-class="oe_kanban_color_#{record.color.raw_value} oe_kanban_global_click"
-                        >
-                            <div class="oe_kanban_content">
-                                <div class="d-flex align-items-center gap-2">
-                                    <i
-                                        t-attf-class="fa #{record.icon.value or 'fa-folder'}"
-                                    />
-                                    <strong>
-                                        <field name="name" />
-                                    </strong>
-                                </div>
-                                <div class="text-muted mt-1">
-                                    <span><field
-                                        name="conversation_count"
-                                    /> conversations</span>
-                                </div>
-                                <div class="mt-1">
-                                    <span
-                                        class="badge"
-                                        t-att-class="record.folder_type.raw_value == 'smart' ? 'bg-info' : 'bg-secondary'"
-                                    >
-                                        <field name="folder_type" />
-                                    </span>
-                                </div>
-                            </div>
+                    <t t-name="card">
+                        <div class="d-flex align-items-center gap-2">
+                            <i t-attf-class="fa #{record.icon.value or 'fa-folder'}" />
+                            <strong>
+                                <field name="name" />
+                            </strong>
+                        </div>
+                        <div class="text-muted mt-1">
+                            <span><field
+                                name="conversation_count"
+                            /> conversations</span>
+                        </div>
+                        <div class="mt-1">
+                            <span
+                                class="badge"
+                                t-att-class="record.folder_type.raw_value == 'smart' ? 'bg-info' : 'bg-secondary'"
+                            >
+                                <field name="folder_type" />
+                            </span>
                         </div>
                     </t>
                 </templates>
@@ -120,9 +112,9 @@
     </record>
 
     <!-- Action -->
-    <record id="action_support_folder" model="ir.actions.act_window">
+    <record id="action_engage_folder" model="ir.actions.act_window">
         <field name="name">Folders</field>
-        <field name="res_model">support.folder</field>
+        <field name="res_model">engage.folder</field>
         <field name="view_mode">kanban,list,form</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

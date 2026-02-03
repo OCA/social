@@ -4,7 +4,7 @@
     <!-- Contact Panel Template -->
     <t t-name="customer_engagement.ContactPanel">
         <div
-            t-attf-class="o_support_contact_panel #{props.collapsed ? 'collapsed' : ''} d-flex flex-column h-100 border-start bg-white"
+            t-attf-class="o_engage_contact_panel #{props.collapsed ? 'collapsed' : ''} d-flex flex-column h-100 border-start bg-white"
         >
             <t t-if="!props.conversation">
                 <div

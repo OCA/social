@@ -3,7 +3,7 @@
     <!-- System Folders - Cannot be deleted -->
 
     <!-- Inbox folder (all open conversations) -->
-    <record id="folder_inbox" model="support.folder">
+    <record id="folder_inbox" model="engage.folder">
         <field name="name">Inbox</field>
         <field name="code">inbox</field>
         <field name="icon">fa-inbox</field>
@@ -14,7 +14,7 @@
     </record>
 
     <!-- Assigned to me -->
-    <record id="folder_mine" model="support.folder">
+    <record id="folder_mine" model="engage.folder">
         <field name="name">Assigned to me</field>
         <field name="code">mine</field>
         <field name="icon">fa-user</field>
@@ -25,7 +25,7 @@
     </record>
 
     <!-- Unassigned -->
-    <record id="folder_unassigned" model="support.folder">
+    <record id="folder_unassigned" model="engage.folder">
         <field name="name">Unassigned</field>
         <field name="code">unassigned</field>
         <field name="icon">fa-question-circle</field>
@@ -36,7 +36,7 @@
     </record>
 
     <!-- Urgent -->
-    <record id="folder_urgent" model="support.folder">
+    <record id="folder_urgent" model="engage.folder">
         <field name="name">Urgent</field>
         <field name="code">urgent</field>
         <field name="icon">fa-exclamation-triangle</field>
@@ -48,7 +48,7 @@
     </record>
 
     <!-- Starred / Important -->
-    <record id="folder_starred" model="support.folder">
+    <record id="folder_starred" model="engage.folder">
         <field name="name">Starred</field>
         <field name="code">starred</field>
         <field name="icon">fa-star</field>
@@ -62,7 +62,7 @@
     </record>
 
     <!-- Pending -->
-    <record id="folder_pending" model="support.folder">
+    <record id="folder_pending" model="engage.folder">
         <field name="name">Pending</field>
         <field name="code">pending</field>
         <field name="icon">fa-clock-o</field>
@@ -73,7 +73,7 @@
     </record>
 
     <!-- Resolved -->
-    <record id="folder_resolved" model="support.folder">
+    <record id="folder_resolved" model="engage.folder">
         <field name="name">Resolved</field>
         <field name="code">resolved</field>
         <field name="icon">fa-check</field>
@@ -85,7 +85,7 @@
     </record>
 
     <!-- All Conversations -->
-    <record id="folder_all" model="support.folder">
+    <record id="folder_all" model="engage.folder">
         <field name="name">All Conversations</field>
         <field name="code">all</field>
         <field name="icon">fa-comments</field>

@@ -5,8 +5,8 @@ import {useService} from "@web/core/utils/hooks";
 import {SidebarSection} from "./sidebar_section";
 import {SidebarItem} from "./sidebar_item";
 
-export class SupportSidebar extends Component {
-    static template = "customer_engagement.SupportSidebar";
+export class EngageSidebar extends Component {
+    static template = "customer_engagement.EngageSidebar";
     static components = {SidebarSection, SidebarItem};
     static props = {
         collapsed: {type: Boolean, optional: true},
@@ -42,7 +42,7 @@ export class SupportSidebar extends Component {
     async loadSidebarData() {
         const [folders, teams, labels] = await Promise.all([
             this.orm.searchRead(
-                "support.folder",
+                "engage.folder",
                 [["active", "=", true]],
                 [
                     "name",
@@ -56,13 +56,13 @@ export class SupportSidebar extends Component {
                 {order: "sequence, name"}
             ),
             this.orm.searchRead(
-                "support.team",
+                "engage.team",
                 [["active", "=", true]],
                 ["name", "color", "conversation_count", "member_count"],
                 {order: "sequence, name"}
             ),
             this.orm.searchRead(
-                "support.conversation.label",
+                "engage.conversation.label",
                 [["active", "=", true]],
                 ["name", "color", "conversation_count"],
                 {order: "sequence, name"}

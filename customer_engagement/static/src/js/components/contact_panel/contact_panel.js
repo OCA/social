@@ -75,7 +75,7 @@ export class ContactPanel extends Component {
 
         // Load conversation history with this partner
         const history = await this.orm.searchRead(
-            "support.conversation",
+            "engage.conversation",
             [
                 ["partner_id", "=", partnerId],
                 ["id", "!=", conversation.id],
@@ -267,7 +267,7 @@ export class ContactPanel extends Component {
     onConversationClick(conversation) {
         this.action.doAction({
             type: "ir.actions.act_window",
-            res_model: "support.conversation",
+            res_model: "engage.conversation",
             res_id: conversation.id,
             views: [[false, "form"]],
             target: "current",
