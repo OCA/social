@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-01-05 20:43+0000\n"
+"PO-Revision-Date: 2026-02-04 10:09+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.10.4\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__res_domain
@@ -224,7 +224,7 @@ msgstr ""
 #. module: mail_gateway
 #: model:ir.model,name:mail_gateway.model_mail_resend_message
 msgid "Email resend wizard"
-msgstr ""
+msgstr "Procedura reinvio email"
 
 #. module: mail_gateway
 #: model:ir.model.fields,help:mail_gateway.field_mail_notification__gateway_failure_reason
@@ -302,7 +302,7 @@ msgstr "Notifica gateway"
 #. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_resend_message__gateway_notification_ids
 msgid "Gateway Notifications"
-msgstr ""
+msgstr "Notifiche gateway"
 
 #. module: mail_gateway
 #: model:ir.actions.act_window,name:mail_gateway.res_partner_gateway_channel_act_window
