@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2026 nurefexc (https://nurefexc.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
@@ -29,7 +28,7 @@ class MailThread(models.AbstractModel):
 
         queue_vals = [{
             "res_user_id": user.id,
-            "title": f"{message.author_id.name or "Odoo"}: {message.record_name or self._description}",
+            "title": f"{message.author_id.name or 'Odoo'}: {message.record_name or self._description}",
             "body": body_text[:250],
             "click_url": link,
         } for user in ntfy_users]
