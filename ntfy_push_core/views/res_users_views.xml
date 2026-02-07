@@ -8,13 +8,20 @@
             <xpath expr="//field[@name='notification_type']" position="after">
                 <label for="ntfy_topic_url" invisible="notification_type != 'ntfy'"/>
                 <div class="d-flex" invisible="notification_type != 'ntfy'">
-                    <field name="ntfy_topic_url" widget="url" readonly="1" class="oe_inline"/>
-                    <button name="action_generate_ntfy_url"
-                            type="object"
-                            class="btn btn-link o_row_helper"
-                            icon="fa-refresh"
-                            title="Regenerate Subscription URL"
-                            confirm="Regenerating will break your existing mobile subscription. Continue?"/>
+                    <field
+                        name="ntfy_topic_url"
+                        widget="url"
+                        readonly="1"
+                        class="oe_inline"
+                    />
+                    <button
+                        name="action_generate_ntfy_url"
+                        type="object"
+                        class="btn btn-link o_row_helper"
+                        icon="fa-refresh"
+                        title="Regenerate Subscription URL"
+                        confirm="Regenerating will break your existing mobile subscription. Continue?"
+                    />
                 </div>
             </xpath>
         </field>
@@ -26,15 +33,25 @@
         <field name="inherit_id" ref="base.view_users_form_simple_modif"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='notification_type']" position="after">
-                <label for="ntfy_topic_url" invisible="notification_type != 'ntfy'"/>
+                <label
+                    for="ntfy_topic_url"
+                    invisible="notification_type != 'ntfy'"
+                />
                 <div class="d-flex" invisible="notification_type != 'ntfy'">
-                    <field name="ntfy_topic_url" widget="url" readonly="1" class="oe_inline"/>
-                    <button name="action_generate_ntfy_url"
-                            type="object"
-                            class="btn btn-link"
-                            icon="fa-refresh"
-                            title="Regenerate Subscription URL"
-                            confirm="Are you sure you want to change your topic ID?"/>
+                    <field
+                        name="ntfy_topic_url"
+                        widget="url"
+                        readonly="1"
+                        class="oe_inline"
+                    />
+                    <button
+                        name="action_generate_ntfy_url"
+                        type="object"
+                        class="btn btn-link"
+                        icon="fa-refresh"
+                        title="Regenerate Subscription URL"
+                        confirm="Are you sure you want to change your topic ID?"
+                    />
                 </div>
             </xpath>
         </field>

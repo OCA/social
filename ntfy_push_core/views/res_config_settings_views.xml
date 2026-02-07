@@ -9,8 +9,11 @@
                 <block title="ntfy.sh Push Notifications" name="ntfy_config_block">
                     <setting help="Global server URL for push notifications.">
                         <div class="content-group">
-                            <label for="ntfy_server_url" string="ntfy Server URL"/>
-                            <field name="ntfy_server_url" placeholder="https://ntfy.sh"/>
+                            <label for="ntfy_server_url" string="ntfy Server URL" />
+                            <field
+                                name="ntfy_server_url"
+                                placeholder="https://ntfy.sh"
+                            />
                         </div>
                     </setting>
                 </block>
