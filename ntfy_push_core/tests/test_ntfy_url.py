@@ -5,7 +5,6 @@ from odoo.tests.common import TransactionCase
 
 
 class TestNtfyUrl(TransactionCase):
-
     def setUp(self):
         super().setUp()
         # Create a test user to verify notification settings
@@ -46,7 +45,8 @@ class TestNtfyUrl(TransactionCase):
 
         # Ensure the URL has changed (due to the time-based seed)
         self.assertNotEqual(
-            first_url, second_url,
+            first_url,
+            second_url,
             "The URL must change after calling the regeneration action.",
         )
 
