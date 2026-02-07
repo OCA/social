@@ -12,7 +12,7 @@ class ResUsers(models.Model):
 
     notification_type = fields.Selection(
         selection_add=[("ntfy", "ntfy.sh (Push Notification)")],
-        ondelete={"ntfy": "set default"}
+        ondelete={"ntfy": "set default"},
     )
 
     ntfy_topic_url = fields.Char(
@@ -44,9 +44,7 @@ class ResUsers(models.Model):
         """Generates the secure SHA224 hashed topic URL"""
         self.ensure_one()
         config = self.env["ir.config_parameter"].sudo()
-        base_url = (
-            config.get_param("ntfy.server_url", "https://ntfy.sh").rstrip("/")
-        )
+        base_url = config.get_param("ntfy.server_url", "https://ntfy.sh").rstrip("/")
         db_uuid = config.get_param("database.uuid", "shared")
 
         seed = f"{db_uuid}-{self.id}-{time.time()}"
