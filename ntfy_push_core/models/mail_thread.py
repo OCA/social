@@ -6,7 +6,7 @@ from odoo import models, api, tools
 
 
 class MailThread(models.AbstractModel):
-    _inherit = 'mail.thread'
+    _inherit = "mail.thread"
 
     def _message_post_after_hook(self, message, msg_vals):
         res = super(MailThread, self)._message_post_after_hook(message, msg_vals)
@@ -16,22 +16,22 @@ class MailThread(models.AbstractModel):
     def _enqueue_ntfy_notification(self, message):
         """ Minimalist queueing with fixed high priority """
         ntfy_users = message.partner_ids.user_ids.filtered(
-            lambda u: u.notification_type == 'ntfy' and u.id != self.env.uid
+            lambda u: u.notification_type == "ntfy" and u.id != self.env.uid
         )
         if not ntfy_users:
             return
 
         ntfy_users._check_ntfy_url_consistency()
 
-        body_text = tools.html2plaintext(message.body or '')
-        base_url = self.env['ir.config_parameter'].sudo().get_param('web.base.url')
+        body_text = tools.html2plaintext(message.body or "")
+        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url")
         link = f"{base_url}/web#model={self._name}&id={self.id}"
 
         queue_vals = [{
-            'res_user_id': user.id,
-            'title': f"{message.author_id.name or 'Odoo'}: {message.record_name or self._description}",
-            'body': body_text[:250],
-            'click_url': link,
+            "res_user_id": user.id,
+            "title": f"{message.author_id.name or "Odoo"}: {message.record_name or self._description}",
+            "body": body_text[:250],
+            "click_url": link,
         } for user in ntfy_users]
 
-        self.env['ntfy.notification.queue'].create(queue_vals)
+        self.env["ntfy.notification.queue"].create(queue_vals)
