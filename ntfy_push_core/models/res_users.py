@@ -10,9 +10,10 @@ from odoo import api, fields, models
 class ResUsers(models.Model):
     _inherit = "res.users"
 
-    notification_type = fields.Selection(selection_add=[
-        ("ntfy", "ntfy.sh (Push Notification)")
-    ], ondelete={"ntfy": "set default"})
+    notification_type = fields.Selection(
+        selection_add=[("ntfy", "ntfy.sh (Push Notification)")],
+        ondelete={"ntfy": "set default"}
+    )
 
     ntfy_topic_url = fields.Char(
         string="ntfy Topic URL",
@@ -44,9 +45,7 @@ class ResUsers(models.Model):
         self.ensure_one()
         config = self.env["ir.config_parameter"].sudo()
         base_url = (
-            config
-            .get_param("ntfy.server_url", "https://ntfy.sh")
-            .rstrip("/")
+            config.get_param("ntfy.server_url", "https://ntfy.sh").rstrip("/")
         )
         db_uuid = config.get_param("database.uuid", "shared")
 
@@ -63,8 +62,12 @@ class ResUsers(models.Model):
 
     def _check_ntfy_url_consistency(self):
         """Auto-sync when server config changes."""
-        current_base = self.env["ir.config_parameter"].sudo().get_param("ntfy.server_url", "https://ntfy.sh").rstrip(
-            "/")
+        current_base = (
+            self.env["ir.config_parameter"]
+            .sudo()
+            .get_param("ntfy.server_url", "https://ntfy.sh")
+            .rstrip("/")
+        )
         for user in self:
             if user.notification_type == "ntfy":
                 if not user.ntfy_topic_url or user.ntfy_last_server_url != current_base:

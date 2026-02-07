@@ -29,8 +29,10 @@ class NtfyNotificationQueue(models.Model):
 
     @api.model
     def cron_process_ntfy_queue(self, batch_limit=100):
-        """ Processes queue with high priority """
-        records = self.search([("state", "in", ["pending", "error"])], limit=batch_limit)
+        """Processes queue with high priority"""
+        records = self.search(
+            [("state", "in", ["pending", "error"])], limit=batch_limit
+        )
 
         for record in records:
             user = record.res_user_id
