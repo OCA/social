@@ -19,7 +19,7 @@ class NtfyNotificationQueue(models.Model):
         "res.users", string="Recipient", required=True, ondelete="cascade"
     )
     title = fields.Char(required=True)
-    body = fields.Text("Body")
+    body = fields.Text()
     click_url = fields.Char("Action URL")
     state = fields.Selection(
         [("pending", "Pending"), ("sent", "Sent"), ("error", "Error")],
