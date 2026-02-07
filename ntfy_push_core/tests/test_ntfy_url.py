@@ -8,43 +8,62 @@ class TestNtfyUrl(TransactionCase):
 
     def setUp(self):
         super(TestNtfyUrl, self).setUp()
-        # Létrehozunk egy teszt felhasználót
+        # Create a test user to verify notification settings
         self.test_user = self.env['res.users'].create({
             'name': 'Test Ntfy User',
             'login': 'test_ntfy_user',
             'email': 'test@nurefexc.com',
-            'notification_type': 'inbox',  # Alapértelmezett
+            'notification_type': 'inbox',  # Default Odoo setting
         })
-        # Alapértelmezett ntfy szerver beállítása
-        self.env['ir.config_parameter'].sudo().set_param('ntfy.server_url', 'https://ntfy.sh')
+        # Set a default ntfy server URL in system parameters
+        self.env['ir.config_parameter'].sudo().set_param(
+            'ntfy.server_url', 'https://ntfy.sh'
+        )
 
     def test_01_url_generation_on_write(self):
-        """Teszteljük, hogy az URL legenerálódik, ha átváltunk ntfy-ra"""
+        """Test if the subscription URL is generated when switching to ntfy"""
         self.test_user.write({'notification_type': 'ntfy'})
 
-        self.assertTrue(self.test_user.ntfy_topic_url, "Az URL-nek nem szabadna üresnek lennie!")
+        # Verify that the URL field is populated
+        self.assertTrue(
+            self.test_user.ntfy_topic_url,
+            "The ntfy subscription URL should not be empty after activation."
+        )
+        # Check if it contains the correct server and user reference
         self.assertIn('https://ntfy.sh', self.test_user.ntfy_topic_url)
         self.assertIn(str(self.test_user.id), self.test_user.ntfy_topic_url)
 
     def test_02_action_regenerate_url(self):
-        """Teszteljük a manuális regenerálást (Reset gomb)"""
+        """Test the manual regeneration action (Reset button)"""
         self.test_user.write({'notification_type': 'ntfy'})
         first_url = self.test_user.ntfy_topic_url
 
-        # Akció meghívása (mintha a frissítés ikonra kattintanánk)
+        # Call the manual generation method
         self.test_user.action_generate_ntfy_url()
         second_url = self.test_user.ntfy_topic_url
 
-        self.assertNotEqual(first_url, second_url, "Az URL-nek meg kellene változnia regenerálás után!")
+        # Ensure the URL has changed (due to the time-based seed)
+        self.assertNotEqual(
+            first_url, second_url,
+            "The URL must change after calling the regeneration action."
+        )
 
     def test_03_server_url_change_sync(self):
-        """Teszteljük, hogy a rendszer észreveszi-e a szervercím változását"""
+        """Test if the system detects server URL changes and updates user topics"""
         self.test_user.write({'notification_type': 'ntfy'})
 
-        # Szervercím módosítása a rendszerbeállításokban
-        self.env['ir.config_parameter'].sudo().set_param('ntfy.server_url', 'https://ntfy.nurefexc.com')
+        # Change the global server URL in settings
+        new_server = 'https://ntfy.nurefexc.com'
+        self.env['ir.config_parameter'].sudo().set_param(
+            'ntfy.server_url', new_server
+        )
 
-        # A mail_thread hook vagy a consistency check meghívása
+        # Trigger the consistency check
         self.test_user._check_ntfy_url_consistency()
 
-        self.assertIn('https://ntfy.nurefexc.com', self.test_user.ntfy_topic_url)
+        # Verify the user's URL was updated to the new server
+        self.assertIn(
+            new_server,
+            self.test_user.ntfy_topic_url,
+            "The user topic URL should reflect the updated server URL."
+        )
