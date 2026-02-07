@@ -4,7 +4,7 @@
     "name": "ntfy.sh Push Notifications",
     "version": "17.0.1.0.0",
     "summary": "Asynchronous push notifications via ntfy.sh protocol",
-    "author": "nurefexc",
+    "author": "nurefexc, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "category": "Technical/Communication",
     "depends": ["mail"],

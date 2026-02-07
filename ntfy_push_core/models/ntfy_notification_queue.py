@@ -18,15 +18,15 @@ class NtfyNotificationQueue(models.Model):
     res_user_id = fields.Many2one(
         "res.users", string="Recipient", required=True, ondelete="cascade"
     )
-    title = fields.Char(string="Title", required=True)
-    body = fields.Text(string="Body")
-    click_url = fields.Char(string="Action URL")
+    title = fields.Char("Title", required=True)
+    body = fields.Text("Body")
+    click_url = fields.Char("Action URL")
     state = fields.Selection(
         [("pending", "Pending"), ("sent", "Sent"), ("error", "Error")],
         default="pending",
         index=True,
     )
-    error_log = fields.Text(string="Error Log", readonly=True)
+    error_log = fields.Text("Error Log", readonly=True)
 
     @api.model
     def cron_process_ntfy_queue(self, batch_limit=100):
