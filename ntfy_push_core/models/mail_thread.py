@@ -27,11 +27,14 @@ class MailThread(models.AbstractModel):
             self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
         )
         link = f"{base_url}/web#model={self._name}&id={self.id}"
-
+        title = (
+            f"{message.author_id.name or 'Odoo'}:"
+            "{message.record_name or self._description}"
+        )
         queue_vals = [
             {
                 "res_user_id": user.id,
-                "title": f"{message.author_id.name or 'Odoo'}: {message.record_name or self._description}",
+                "title": title,
                 "body": body_text[:250],
                 "click_url": link,
             }
