@@ -3,7 +3,8 @@
 
 import hashlib
 import time
-from odoo import models, fields, api
+
+from odoo import api, fields, models
 
 
 class ResUsers(models.Model):
@@ -13,7 +14,12 @@ class ResUsers(models.Model):
         ("ntfy", "ntfy.sh (Push Notification)")
     ], ondelete={"ntfy": "set default"})
 
-    ntfy_topic_url = fields.Char(string="ntfy Topic URL", readonly=True, copy=False, help="Paste this URL into your ntfy mobile app.")
+    ntfy_topic_url = fields.Char(
+        string="ntfy Topic URL",
+        readonly=True,
+        copy=False,
+        help="Paste this URL into your ntfy mobile app.",
+    )
     ntfy_last_server_url = fields.Char(string="Last ntfy Server", readonly=True)
 
     @api.model_create_multi
@@ -37,7 +43,11 @@ class ResUsers(models.Model):
         """Generates the secure SHA224 hashed topic URL"""
         self.ensure_one()
         config = self.env["ir.config_parameter"].sudo()
-        base_url = config.get_param("ntfy.server_url", "https://ntfy.sh").rstrip("/")
+        base_url = (
+            config
+            .get_param("ntfy.server_url", "https://ntfy.sh")
+            .rstrip("/")
+        )
         db_uuid = config.get_param("database.uuid", "shared")
 
         seed = f"{db_uuid}-{self.id}-{time.time()}"

@@ -4,7 +4,7 @@
 import logging
 import requests
 
-from odoo import models, fields, api
+from odoo import api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -20,11 +20,11 @@ class NtfyNotificationQueue(models.Model):
     title = fields.Char(string="Title", required=True)
     body = fields.Text(string="Body")
     click_url = fields.Char(string="Action URL")
-    state = fields.Selection([
-        ("pending", "Pending"),
-        ("sent", "Sent"),
-        ("error", "Error")
-    ], default="pending", index=True)
+    state = fields.Selection(
+        [("pending", "Pending"), ("sent", "Sent"), ("error", "Error")],
+        default="pending",
+        index=True,
+    )
     error_log = fields.Text(string="Error Log", readonly=True)
 
     @api.model
@@ -54,6 +54,8 @@ class NtfyNotificationQueue(models.Model):
                 if response.status_code == 200:
                     record.state = "sent"
                 else:
-                    record.write({"state": "error", "error_log": f"HTTP {response.status_code}"})
+                    record.write(
+                        {"state": "error", "error_log": f"HTTP {response.status_code}"}
+                    )
             except Exception as e:
                 record.write({"state": "error", "error_log": str(e)})

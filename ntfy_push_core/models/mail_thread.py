@@ -23,12 +23,7 @@ class MailThread(models.AbstractModel):
         ntfy_users._check_ntfy_url_consistency()
 
         body_text = tools.html2plaintext(message.body or "")
-        base_url = (
-            self.env["ir.config_parameter"]
-            .sudo()
-            .get_param("web.base.url")
-            .rstrip("/")
-        )
+        base_url = self.env["ir.config_parameter"].sudo().get_param("web.base.url").rstrip("/")
         link = f"{base_url}/web#model={self._name}&id={self.id}"
 
         queue_vals = [
