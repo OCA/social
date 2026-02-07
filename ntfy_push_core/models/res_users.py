@@ -26,7 +26,7 @@ class ResUsers(models.Model):
 
     def write(self, vals):
         res = super().write(vals)
-        # Ha átvált ntfy-ra és nincs URL, vagy ha módosult valami, ami miatt kell
+        # If switching to ntfy and no URL, or if something changed that requires it
         if "notification_type" in vals and vals["notification_type"] == "ntfy":
             for user in self:
                 if not user.ntfy_topic_url:
@@ -34,7 +34,7 @@ class ResUsers(models.Model):
         return res
 
     def action_generate_ntfy_url(self):
-        """ Generates the secure SHA256 hashed topic URL """
+        """Generates the secure SHA224 hashed topic URL"""
         self.ensure_one()
         config = self.env["ir.config_parameter"].sudo()
         base_url = config.get_param("ntfy.server_url", "https://ntfy.sh").rstrip("/")
@@ -44,10 +44,12 @@ class ResUsers(models.Model):
         secure_hash = hashlib.sha224(seed.encode()).hexdigest()
         topic_id = f"odoo-{self.id}-{secure_hash}"
 
-        self.write({
-            "ntfy_topic_url": f"{base_url}/{topic_id}",
-            "ntfy_last_server_url": base_url
-        })
+        self.write(
+            {
+                "ntfy_topic_url": f"{base_url}/{topic_id}",
+                "ntfy_last_server_url": base_url,
+            }
+        )
 
     def _check_ntfy_url_consistency(self):
         """Auto-sync when server config changes."""

@@ -1,8 +1,9 @@
 # Copyright 2026 nurefexc (https://nurefexc.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0).
 
-import requests
 import logging
+import requests
+
 from odoo import models, fields, api
 
 _logger = logging.getLogger(__name__)
@@ -13,7 +14,9 @@ class NtfyNotificationQueue(models.Model):
     _description = "ntfy Queue"
     _order = "create_date desc"
 
-    res_user_id = fields.Many2one("res.users", string="Recipient", required=True, ondelete="cascade")
+    res_user_id = fields.Many2one(
+        "res.users", string="Recipient", required=True, ondelete="cascade"
+    )
     title = fields.Char(string="Title", required=True)
     body = fields.Text(string="Body")
     click_url = fields.Char(string="Action URL")
@@ -38,7 +41,7 @@ class NtfyNotificationQueue(models.Model):
                 "Title": record.title.encode("utf-8"),
                 "Priority": "4",
                 "Tags": "odoo,bell",
-                "Click": record.click_url
+                "Click": record.click_url,
             }
 
             try:
@@ -46,7 +49,7 @@ class NtfyNotificationQueue(models.Model):
                     user.ntfy_topic_url,
                     data=record.body.encode("utf-8"),
                     headers=headers,
-                    timeout=5
+                    timeout=5,
                 )
                 if response.status_code == 200:
                     record.state = "sent"
