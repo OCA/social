@@ -1,0 +1,6 @@
+- [Open Source Integrators](https://opensourceintegrators.com).
+  - Chandresh Thakkar \<cthakkar@opensourceintegrators.com\>
+  - Daniel Reis \<dreis@opensourceintegrators.com\>
+  - Sandip Vyas \<svyas@opensourceintegrators.com\>
+- [Therp BV](https://therp.nl).
+  - Ronald Portier \<ronald@therp.nl\>

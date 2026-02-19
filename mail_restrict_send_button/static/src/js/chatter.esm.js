@@ -1,22 +1,15 @@
-/** @odoo-module */
+import {Chatter} from "@mail/chatter/web_portal/chatter";
+import {onWillStart} from "@odoo/owl";
+import {patch} from "@web/core/utils/patch";
+import {user} from "@web/core/user";
 
-import {ChatterTopbar} from "@mail/components/chatter_topbar/chatter_topbar";
-const {onWillStart} = owl;
-import {patch} from "web.utils";
-import {useService} from "@web/core/utils/hooks";
-
-patch(
-    ChatterTopbar.prototype,
-    "mail/static/src/components/chatter_topbar/chatter_topbar.js",
-    {
-        setup() {
-            this._super();
-            this.user = useService("user");
-            onWillStart(async () => {
-                this.isSendMessage = await this.user.hasGroup(
-                    "mail_restrict_send_button.group_show_send_message_button"
-                );
-            });
-        },
-    }
-);
+patch(Chatter.prototype, {
+    setup() {
+        super.setup(...arguments);
+        onWillStart(async () => {
+            this.isSendMessage = await user.hasGroup(
+                "mail_restrict_send_button.group_show_send_message_button"
+            );
+        });
+    },
+});
