@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+    <record id="view_whatsapp_composer_form" model="ir.ui.view">
+        <field name="name">whatsapp.composer.form</field>
+        <field name="model">whatsapp.composer</field>
+        <field name="arch" type="xml">
+            <form string="Send WhatsApp">
+                <group>
+                    <field name="res_model" invisible="1" />
+                    <field name="res_ids" invisible="1" />
+                    <field name="template_id" />
+                    <field name="phone" placeholder="+1234567890" />
+                    <field name="body" widget="text" placeholder="Message content..." />
+                </group>
+                <footer>
+                    <button
+                        string="Send"
+                        name="action_send_whatsapp"
+                        type="object"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    </data>
+</odoo>
