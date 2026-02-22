@@ -22,20 +22,6 @@
             <form string="WhatsApp Template">
                 <header>
                     <button
-                        name="action_create_sidebar_action"
-                        string="Add Context Action"
-                        type="object"
-                        attrs="{'invisible': [('sidebar_action_id', '!=', False)]}"
-                        help="Add a contextual action on the related model to open a whatsapp composer with this template"
-                    />
-                    <button
-                        name="action_unlink_sidebar_action"
-                        string="Remove Context Action"
-                        type="object"
-                        attrs="{'invisible': [('sidebar_action_id', '=', False)]}"
-                        help="Remove the contextual action of the related model"
-                    />
-                    <button
                         name="action_sync_templates"
                         string="Sync from Meta"
                         type="object"
@@ -44,6 +30,30 @@
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_create_sidebar_action"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-plus-square"
+                            attrs="{'invisible': [('sidebar_action_id', '!=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Add Context</span>
+                                <span class="o_stat_text">Action</span>
+                            </div>
+                        </button>
+                        <button
+                            name="action_unlink_sidebar_action"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-minus-square"
+                            attrs="{'invisible': [('sidebar_action_id', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Remove Context</span>
+                                <span class="o_stat_text">Action</span>
+                            </div>
+                        </button>
                         <button
                             name="%(meta_whatsapp.whatsapp_preview_action)d"
                             icon="fa-search-plus"
