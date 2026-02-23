@@ -1,5 +1,7 @@
 # Copyright 2025 Therp BV <https://therp.nl>.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+from email.utils import parseaddr
+
 from odoo.tests.common import SavepointCase
 
 
@@ -17,6 +19,7 @@ class CompanyAwareSenderCase(SavepointCase):
                 "name": "localhost",
                 "smtp_host": "localhost",
                 "domain_whitelist": "therp.nl",
+                "sequence": 99,
             }
         )
         cls.company_kingdom = cls.Company.create(
@@ -58,3 +61,10 @@ class CompanyAwareSenderCase(SavepointCase):
                 "company_id": cls.company_imperium.id,
             }
         )
+
+    def _assert_email(self, email_from, expected_email, expected_name=None):
+        """Assert email_from matches expected parts, tolerant to quoting differences."""
+        name, email = parseaddr(email_from or "")
+        self.assertEqual(email, expected_email)
+        if expected_name is not None:
+            self.assertEqual(name, expected_name)
