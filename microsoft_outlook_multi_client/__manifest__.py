@@ -9,6 +9,7 @@
     "website": "https://github.com/OCA/social",
     "depends": [
         "microsoft_outlook",
+        "base_preset_param",
     ],
     "data": ["views/ir_mail_server_views.xml"],
     "installable": True,
