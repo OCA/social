@@ -23,3 +23,7 @@ class ResConfigSettings(models.TransientModel):
     meta_waba_id = fields.Char(
         string="WhatsApp Business Account ID", config_parameter="meta_whatsapp.waba_id",
     )
+
+    def action_sync_whatsapp_templates(self):
+        """Bridge method to sync templates from settings."""
+        return self.env["whatsapp.template"].action_sync_templates()

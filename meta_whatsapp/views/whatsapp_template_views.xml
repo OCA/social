@@ -21,12 +21,6 @@
         <field name="arch" type="xml">
             <form string="WhatsApp Template">
                 <header>
-                    <button
-                        name="action_sync_templates"
-                        string="Sync from Meta"
-                        type="object"
-                        class="oe_highlight"
-                    />
                 </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box">

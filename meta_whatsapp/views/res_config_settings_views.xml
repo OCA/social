@@ -60,6 +60,18 @@
                                         />
                                         <field name="meta_waba_id" />
                                     </div>
+                                    <div class="row mt32">
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-8">
+                                            <button
+                                                name="action_sync_whatsapp_templates"
+                                                string="Sync Templates Now"
+                                                type="object"
+                                                class="oe_highlight"
+                                                icon="fa-refresh"
+                                            />
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
