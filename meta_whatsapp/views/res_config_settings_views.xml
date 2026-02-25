@@ -91,17 +91,10 @@
 
     <menuitem
         id="menu_whatsapp_configuration"
-        name="Configuration"
+        name="WhatsApp Accounts"
         parent="menu_whatsapp_root"
-        sequence="100"
-    />
-
-    <menuitem
-        id="menu_whatsapp_settings"
-        name="Settings"
-        parent="menu_whatsapp_configuration"
         action="action_whatsapp_configuration"
-        sequence="1"
+        sequence="100"
     />
     </data>
 </odoo>

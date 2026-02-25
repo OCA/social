@@ -153,7 +153,8 @@
     <menuitem
         id="menu_whatsapp_root"
         name="WhatsApp"
-        sequence="40"
+        parent="base.menu_custom"
+        sequence="50"
     />
 
     <menuitem
