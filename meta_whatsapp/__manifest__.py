@@ -1,6 +1,6 @@
 {
     "name": "Meta WhatsApp Connector",
-    "version": "13.0.1.1.0",
+    "version": "13.0.1.1.1",
     "category": "Marketing/WhatsApp",
     "summary": "Send WhatsApp messages using Meta API v25.0",
     "author": "Odoo Community Association (OCA)",

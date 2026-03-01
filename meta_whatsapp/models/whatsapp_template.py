@@ -223,8 +223,12 @@ class WhatsAppTemplate(models.Model):
                 # Create new record with correct language context
                 template = self.with_context(ctx).create(vals)
 
-            # Sync buttons
+            # Sync buttons (Replace All strategy)
             template.button_ids.unlink()
+            
+            # Keep track of valid variables to remove orphans later
+            valid_variable_ids = []
+
             for i, btn_vals in enumerate(buttons_data):
                 btn_vals["template_id"] = template.id
                 btn_vals["sequence"] = i
@@ -242,7 +246,7 @@ class WhatsAppTemplate(models.Model):
                         ("button_index", "=", i)
                     ])
                     if not existing_var:
-                         self.env["whatsapp.template.variable"].create({
+                         existing_var = self.env["whatsapp.template.variable"].create({
                             "template_id": template.id,
                             "name": var_name,
                             "sequence": i, # Button index
@@ -251,6 +255,7 @@ class WhatsAppTemplate(models.Model):
                             "field_type": "field",
                             "field_name": "id",
                         })
+                    valid_variable_ids.append(existing_var.id)
 
             # Automatically extract variables {{1}}, {{2}}... from body and header
             if header_text:
@@ -258,10 +263,14 @@ class WhatsAppTemplate(models.Model):
                 for var_num in h_vars:
                     var_name = "{{%s}}" % var_num
                     existing_var = self.env["whatsapp.template.variable"].search(
-                        [("template_id", "=", template.id), ("name", "=", var_name)]
+                        [
+                            ("template_id", "=", template.id),
+                            ("name", "=", var_name),
+                            ("location", "=", "header")
+                        ]
                     )
                     if not existing_var:
-                        self.env["whatsapp.template.variable"].create(
+                        existing_var = self.env["whatsapp.template.variable"].create(
                             {
                                 "template_id": template.id,
                                 "name": var_name,
@@ -271,18 +280,19 @@ class WhatsAppTemplate(models.Model):
                                 "field_name": "id",
                             }
                         )
+                    valid_variable_ids.append(existing_var.id)
 
             if body_text:
                 b_vars = re.findall(r"\{\{(\d+)\}\}", body_text)
                 for var_num in b_vars:
                     var_name = "{{%s}}" % var_num
-                    # Check if already created in header (some templates share numbers, but unusual)
                     existing_var = self.env["whatsapp.template.variable"].search([
                         ("template_id", "=", template.id),
-                        ("name", "=", var_name)
+                        ("name", "=", var_name),
+                        ("location", "=", "body")
                     ])
                     if not existing_var:
-                        self.env["whatsapp.template.variable"].create(
+                        existing_var = self.env["whatsapp.template.variable"].create(
                             {
                                 "template_id": template.id,
                                 "name": var_name,
@@ -292,6 +302,14 @@ class WhatsAppTemplate(models.Model):
                                 "field_name": "id",
                             }
                         )
+                    valid_variable_ids.append(existing_var.id)
+            
+            # Remove orphan variables (those that are no longer in the template)
+            if valid_variable_ids:
+                template.variable_ids.filtered(lambda v: v.id not in valid_variable_ids).unlink()
+            else:
+                # If no variables found at all, remove all existing ones
+                template.variable_ids.unlink()
 
         return {
             "type": "ir.actions.client",
