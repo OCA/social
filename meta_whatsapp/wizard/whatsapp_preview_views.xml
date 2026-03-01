@@ -30,6 +30,9 @@
                         >
                             <field name="header_text" nolabel="1" />
                         </div>
+                        <div attrs="{'invisible': [('header_media_url', '=', False)]}">
+                            <img attrs="{'src': [('header_media_url', '!=', False)]}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;"/>
+                        </div>
                         <div style="white-space: pre-wrap;">
                             <field name="body" nolabel="1" />
                         </div>
@@ -39,6 +42,14 @@
                         >
                             <field name="footer_text" nolabel="1" />
                         </div>
+                        <div style="margin-top: 15px;">
+                            <field name="preview_button_ids" nolabel="1">
+                                <tree no_open="1">
+                                    <field name="text"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </div>
                     </div>
                 </sheet>
                 <footer>

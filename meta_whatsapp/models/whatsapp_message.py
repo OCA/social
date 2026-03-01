@@ -111,7 +111,7 @@ class WhatsAppMessage(models.Model):
         for msg in self:
             msg._send_message(url, headers)
 
-    def _prepare_template_parameters(self, location="body"):
+    def _prepare_template_parameters(self, location="body", button_index=0):
         self.ensure_one()
         parameters = []
         if not self.template_id:
@@ -123,7 +123,7 @@ class WhatsAppMessage(models.Model):
 
         # Filter variables by location and sort them
         vars_to_process = self.template_id.variable_ids.filtered(
-            lambda v: v.location == location
+            lambda v: v.location == location and (location != "button" or v.button_index == button_index)
         ).sorted("sequence")
 
         for variable in vars_to_process:
@@ -150,6 +150,7 @@ class WhatsAppMessage(models.Model):
             if not value:
                 value = " "
 
+            # Button variables are always type 'text' (for URL suffix)
             parameters.append({"type": "text", "text": value})
         return parameters
 
@@ -170,18 +171,37 @@ class WhatsAppMessage(models.Model):
         rendered_body = self.template_id.body
         rendered_header = self.template_id.header_text
 
-        # Check for Header parameters
-        header_params = self._prepare_template_parameters(location="header")
+        # Check for Header parameters (Text or Media)
+        header_params = []
+        if self.template_id.header_type == "TEXT":
+            header_params = self._prepare_template_parameters(location="header")
+        elif self.template_id.header_type in ["IMAGE", "VIDEO", "DOCUMENT"]:
+            # If media header, we need to provide the media URL or handle
+            # For now, we use the sample URL or handle we synced if available
+            media_type = self.template_id.header_type.lower()
+            media_vals = {}
+            if self.template_id.header_media_url:
+                media_vals = {"link": self.template_id.header_media_url}
+            elif self.template_id.header_media_handle:
+                media_vals = {"id": self.template_id.header_media_handle}
+            
+            if media_vals:
+                header_params.append({
+                    "type": media_type,
+                    media_type: media_vals
+                })
+
         if header_params:
             components.append({
                 "type": "header",
                 "parameters": header_params
             })
-            # Replace variables in header preview
-            for i, p in enumerate(header_params, 1):
-                placeholder = "{{%s}}" % i
-                if rendered_header:
-                    rendered_header = rendered_header.replace(placeholder, p["text"])
+            # Replace variables in header preview (only for text)
+            if self.template_id.header_type == "TEXT":
+                for i, p in enumerate(header_params, 1):
+                    placeholder = "{{%s}}" % i
+                    if rendered_header:
+                        rendered_header = rendered_header.replace(placeholder, p.get("text", ""))
 
         # Check for Body parameters
         body_params = self._prepare_template_parameters(location="body")
@@ -191,19 +211,45 @@ class WhatsAppMessage(models.Model):
                 "parameters": body_params
             })
             # Replace variables in body preview
-            # Note: body variables usually start from 1 or continue from header
-            # We need to find all variables to replace them correctly
-            all_params = header_params + body_params
-            for i, p in enumerate(all_params, 1):
+            for i, p in enumerate(body_params, 1):
                 placeholder = "{{%s}}" % i
                 if rendered_body:
-                    rendered_body = rendered_body.replace(placeholder, p["text"])
+                    rendered_body = rendered_body.replace(placeholder, p.get("text", ""))
+
+        # Check for Button parameters (Dynamic URL buttons)
+        for i, button in enumerate(self.template_id.button_ids):
+            if button.url_type == "DYNAMIC":
+                btn_params = self._prepare_template_parameters(location="button", button_index=i)
+                if btn_params:
+                    components.append({
+                        "type": "button",
+                        "sub_type": "url",
+                        "index": i,
+                        "parameters": btn_params
+                    })
 
         # Final rendered text for internal Odoo logs
         full_rendered_text = ""
         if rendered_header:
             full_rendered_text += rendered_header + "\n"
         full_rendered_text += rendered_body
+        
+        if self.template_id.footer_text:
+            full_rendered_text += "\n\n" + self.template_id.footer_text
+
+        for i, button in enumerate(self.template_id.button_ids):
+            btn_text = button.text
+            if button.url_type == "DYNAMIC":
+                btn_params = self._prepare_template_parameters(location="button", button_index=i)
+                if btn_params:
+                    # In preview, show the first parameter appended to URL
+                    btn_text += " (%s%s)" % (button.website_url or "", btn_params[0].get("text", ""))
+            elif button.type == "URL":
+                btn_text += " (%s)" % (button.website_url or "")
+            elif button.type == "PHONE_NUMBER":
+                btn_text += " (%s)" % (button.phone_number or "")
+            
+            full_rendered_text += "\n\n[Button: %s]" % btn_text
 
         payload = {
             "messaging_product": "whatsapp",

@@ -228,7 +228,29 @@ class WhatsAppTemplate(models.Model):
             for i, btn_vals in enumerate(buttons_data):
                 btn_vals["template_id"] = template.id
                 btn_vals["sequence"] = i
-                self.env["whatsapp.template.button"].create(btn_vals)
+                btn_obj = self.env["whatsapp.template.button"].create(btn_vals)
+                
+                # If dynamic URL, create a variable for it
+                if btn_vals.get("url_type") == "DYNAMIC":
+                    # For dynamic URLs, the {{1}} is always at the end of the URL
+                    # Meta usually provides it as {{1}} in the text or URL
+                    var_name = "{{1}}" # Always 1 for each button
+                    existing_var = self.env["whatsapp.template.variable"].search([
+                        ("template_id", "=", template.id),
+                        ("name", "=", var_name),
+                        ("location", "=", "button"),
+                        ("button_index", "=", i)
+                    ])
+                    if not existing_var:
+                         self.env["whatsapp.template.variable"].create({
+                            "template_id": template.id,
+                            "name": var_name,
+                            "sequence": i, # Button index
+                            "location": "button",
+                            "button_index": i,
+                            "field_type": "field",
+                            "field_name": "id",
+                        })
 
             # Automatically extract variables {{1}}, {{2}}... from body and header
             if header_text:
@@ -323,11 +345,12 @@ class WhatsAppTemplateVariable(models.Model):
         required=True,
     )
     location = fields.Selection(
-        [("header", "Header"), ("body", "Body")],
+        [("header", "Header"), ("body", "Body"), ("button", "Button")],
         string="Location",
         default="body",
         required=True,
     )
+    button_index = fields.Integer(string="Button Index", default=0)
     field_name = fields.Char(
         string="Field / Text",
         required=True,

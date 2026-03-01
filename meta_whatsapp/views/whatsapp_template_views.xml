@@ -111,6 +111,7 @@
                                     <field name="sequence" widget="handle" />
                                     <field name="name" />
                                     <field name="location" />
+                                    <field name="button_index" attrs="{'invisible': [('location', '!=', 'button')]}" />
                                     <field name="field_type" />
                                     <field name="field_name" />
                                     <field name="demo_value" />
