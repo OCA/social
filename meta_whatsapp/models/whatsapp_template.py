@@ -9,6 +9,14 @@ class WhatsAppTemplate(models.Model):
     _name = "whatsapp.template"
     _description = "WhatsApp Template"
 
+    _sql_constraints = [
+        (
+            "name_lang_unique",
+            "unique(name, language)",
+            "Template name and language must be unique!",
+        )
+    ]
+
     name = fields.Char(string="Name", required=True)
     status = fields.Selection(
         [
@@ -175,8 +183,6 @@ class WhatsAppTemplate(models.Model):
                 # Update existing record with correct language context
                 existing.with_context(ctx).write(vals)
                 template = existing
-                # Optional: Clear old variables to re-sync them
-                template.variable_ids.unlink()
             else:
                 # Create new record with correct language context
                 template = self.with_context(ctx).create(vals)
@@ -186,16 +192,20 @@ class WhatsAppTemplate(models.Model):
                 h_vars = re.findall(r"\{\{(\d+)\}\}", header_text)
                 for var_num in h_vars:
                     var_name = "{{%s}}" % var_num
-                    self.env["whatsapp.template.variable"].create(
-                        {
-                            "template_id": template.id,
-                            "name": var_name,
-                            "sequence": int(var_num),
-                            "location": "header",
-                            "field_type": "field",
-                            "field_name": "id",
-                        }
+                    existing_var = self.env["whatsapp.template.variable"].search(
+                        [("template_id", "=", template.id), ("name", "=", var_name)]
                     )
+                    if not existing_var:
+                        self.env["whatsapp.template.variable"].create(
+                            {
+                                "template_id": template.id,
+                                "name": var_name,
+                                "sequence": int(var_num),
+                                "location": "header",
+                                "field_type": "field",
+                                "field_name": "id",
+                            }
+                        )
 
             if body_text:
                 b_vars = re.findall(r"\{\{(\d+)\}\}", body_text)
