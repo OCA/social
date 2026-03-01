@@ -56,7 +56,13 @@ class WhatsAppTemplate(models.Model):
         default="NONE",
     )
     header_text = fields.Char(string="Header Text")
+    header_media_handle = fields.Char(string="Header Media Handle")
+    header_media_url = fields.Char(string="Header Media URL")
     footer_text = fields.Char(string="Footer Text")
+
+    button_ids = fields.One2many(
+        "whatsapp.template.button", "template_id", string="Buttons"
+    )
 
     model_id = fields.Many2one(
         "ir.model",
@@ -149,12 +155,16 @@ class WhatsAppTemplate(models.Model):
                 "header_text": False,
                 "footer_text": False,
                 "header_type": "NONE",
+                "header_media_handle": False,
+                "header_media_url": False,
             }
 
             # Extended parsing of components to update body/header/footer
             body_text = ""
             header_text = ""
             footer_text = ""
+            buttons_data = []
+
             for component in tmpl_data.get("components", []):
                 ctype = component.get("type", "").upper()
                 if ctype == "BODY":
@@ -165,9 +175,35 @@ class WhatsAppTemplate(models.Model):
                     if vals["header_type"] == "TEXT":
                         header_text = component.get("text", "")
                         vals["header_text"] = header_text
+                    elif vals["header_type"] in ["IMAGE", "VIDEO", "DOCUMENT"]:
+                        example = component.get("example", {})
+                        header_handles = example.get("header_handle", [])
+                        if header_handles:
+                            vals["header_media_handle"] = header_handles[0]
+                        header_urls = example.get("header_url", [])
+                        if header_urls:
+                             vals["header_media_url"] = header_urls[0]
+
                 elif ctype == "FOOTER":
                     footer_text = component.get("text", "")
                     vals["footer_text"] = footer_text
+                elif ctype == "BUTTONS":
+                    for btn in component.get("buttons", []):
+                        btn_type = btn.get("type", "").upper()
+                        btn_vals = {
+                            "type": btn_type,
+                            "text": btn.get("text", ""),
+                        }
+                        if btn_type == "URL":
+                            btn_vals["website_url"] = btn.get("url", "")
+                            if "{{" in btn_vals["website_url"]:
+                                btn_vals["url_type"] = "DYNAMIC"
+                            else:
+                                btn_vals["url_type"] = "STATIC"
+                        elif btn_type == "PHONE_NUMBER":
+                            btn_vals["phone_number"] = btn.get("phone_number", "")
+
+                        buttons_data.append(btn_vals)
 
             # Set context language if it is active in Odoo, else use current context
             lang_code = tmpl_data["language"]
@@ -186,6 +222,13 @@ class WhatsAppTemplate(models.Model):
             else:
                 # Create new record with correct language context
                 template = self.with_context(ctx).create(vals)
+
+            # Sync buttons
+            template.button_ids.unlink()
+            for i, btn_vals in enumerate(buttons_data):
+                btn_vals["template_id"] = template.id
+                btn_vals["sequence"] = i
+                self.env["whatsapp.template.button"].create(btn_vals)
 
             # Automatically extract variables {{1}}, {{2}}... from body and header
             if header_text:
@@ -292,3 +335,32 @@ class WhatsAppTemplateVariable(models.Model):
     )
 
     demo_value = fields.Char(string="Demo Value", help="Value used for preview/testing")
+
+
+class WhatsAppTemplateButton(models.Model):
+    _name = "whatsapp.template.button"
+    _description = "WhatsApp Template Button"
+    _order = "sequence, id"
+
+    template_id = fields.Many2one(
+        "whatsapp.template", string="Template", required=True, ondelete="cascade"
+    )
+    type = fields.Selection(
+        [
+            ("PHONE_NUMBER", "Phone Number"),
+            ("URL", "URL"),
+            ("QUICK_REPLY", "Quick Reply"),
+            ("COPY_CODE", "Copy Code"),
+        ],
+        string="Type",
+        required=True,
+    )
+    text = fields.Char(string="Button Text", required=True)
+    url_type = fields.Selection(
+        [("STATIC", "Static"), ("DYNAMIC", "Dynamic")],
+        string="URL Type",
+        default="STATIC",
+    )
+    website_url = fields.Char(string="Website URL")
+    phone_number = fields.Char(string="Phone Number")
+    sequence = fields.Integer(string="Sequence", default=10)

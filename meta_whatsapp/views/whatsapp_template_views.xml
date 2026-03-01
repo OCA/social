@@ -81,9 +81,29 @@
                                     name="header_text"
                                     attrs="{'invisible': [('header_type', '!=', 'TEXT')]}"
                                 />
+                                <field
+                                    name="header_media_handle"
+                                    attrs="{'invisible': [('header_type', 'not in', ('IMAGE', 'VIDEO', 'DOCUMENT'))]}"
+                                />
+                                <field
+                                    name="header_media_url"
+                                    attrs="{'invisible': [('header_type', 'not in', ('IMAGE', 'VIDEO', 'DOCUMENT'))]}"
+                                />
                                 <field name="body" />
                                 <field name="footer_text" />
                             </group>
+                        </page>
+                        <page string="Buttons">
+                            <field name="button_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="type"/>
+                                    <field name="text"/>
+                                    <field name="url_type" attrs="{'invisible': [('type', '!=', 'URL')]}"/>
+                                    <field name="website_url" attrs="{'invisible': [('type', '!=', 'URL')]}"/>
+                                    <field name="phone_number" attrs="{'invisible': [('type', '!=', 'PHONE_NUMBER')]}"/>
+                                </tree>
+                            </field>
                         </page>
                         <page string="Variables">
                             <field name="variable_ids">
