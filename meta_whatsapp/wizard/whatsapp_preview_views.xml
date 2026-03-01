@@ -50,7 +50,6 @@
                             </field>
                         </div>
                     </div>
-                    </div>
                 </sheet>
                 <footer>
                     <button string="Discard" class="btn-secondary" special="cancel" />
