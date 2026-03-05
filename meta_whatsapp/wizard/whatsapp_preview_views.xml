@@ -9,6 +9,7 @@
                     <group>
                         <field name="template_id" invisible="1" />
                         <field name="no_record" invisible="1" />
+                        <field name="header_media_url" invisible="1" />
                         <field
                             name="res_id"
                             string="Preview of"
