@@ -327,6 +327,7 @@ class MailWhatsAppTemplate(models.Model):
             "gateway_id": gateway.id,
         }
         is_supported = True
+        template = self.search( [("template_uid","=", json_data.get("id"))])
         for component in json_data.get("components", []):
             if component["type"] == "HEADER" and component["format"] == "TEXT":
                 vals["header"] = component["text"]
@@ -345,7 +346,7 @@ class MailWhatsAppTemplate(models.Model):
                             "website_url": button.get("url"),
                         }
                         vals.setdefault("button_ids", [])
-                        button = self.button_ids.filtered(
+                        button = template.button_ids.filtered(
                             lambda btn, button=button: btn.name == button["text"]
                         )
                         if button:
