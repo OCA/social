@@ -327,7 +327,7 @@ class MailWhatsAppTemplate(models.Model):
             "gateway_id": gateway.id,
         }
         is_supported = True
-        template = self.search([("template_uid","=", json_data.get("id"))])
+        template = self.search([("template_uid", "=", json_data.get("id"))])
         for component in json_data.get("components", []):
             if component["type"] == "HEADER" and component["format"] == "TEXT":
                 vals["header"] = component["text"]
