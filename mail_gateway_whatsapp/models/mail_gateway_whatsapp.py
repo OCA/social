@@ -167,19 +167,9 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 chat = chat.with_user(self.env.ref("base.public_user").id).with_context(
                     guest=author
                 )
-            # TODO: Check the sudo...
-            new_message = chat.sudo().message_post(
-                body=body,
-                author_id=author and author._name == "res.partner" and author.id,
-                gateway_type="whatsapp",
-                date=datetime.fromtimestamp(int(message["timestamp"])),
-                # message_id=update.message.message_id,
-                subtype_xmlid="mail.mt_comment",
-                message_type="comment",
-                attachments=attachments,
-            )
-            self._post_process_message(new_message, chat)
+            
             related_message_id = message.get("context", {}).get("id", False)
+            related_message = False
             if related_message_id:
                 related_message = (
                     self.env["mail.notification"]
@@ -191,25 +181,39 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     )
                     .mail_message_id
                 )
-                if related_message and related_message.gateway_message_id:
-                    new_related_message = (
-                        self.env[related_message.gateway_message_id.model]
-                        .browse(related_message.gateway_message_id.res_id)
-                        .message_post(
-                            body=body,
-                            author_id=author
-                            and author._name == "res.partner"
-                            and author.id,
-                            gateway_type="whatsapp",
-                            date=datetime.fromtimestamp(int(message["timestamp"])),
-                            # message_id=update.message.message_id,
-                            subtype_xmlid="mail.mt_comment",
-                            message_type="comment",
-                            attachments=attachments,
-                        )
+            
+            # TODO: Check the sudo...
+            new_message = chat.sudo().message_post(
+                body=body,
+                author_id=author and author._name == "res.partner" and author.id,
+                gateway_type="whatsapp",
+                date=datetime.fromtimestamp(int(message["timestamp"])),
+                # message_id=update.message.message_id,
+                subtype_xmlid="mail.mt_comment",
+                message_type="comment",
+                attachments=attachments,
+                parent_id=related_message and related_message.id
+            )
+            self._post_process_message(new_message, chat)
+            if related_message and related_message.gateway_message_id:
+                new_related_message = (
+                    self.env[related_message.gateway_message_id.model]
+                    .browse(related_message.gateway_message_id.res_id)
+                    .message_post(
+                        body=body,
+                        author_id=author
+                        and author._name == "res.partner"
+                        and author.id,
+                        gateway_type="whatsapp",
+                        date=datetime.fromtimestamp(int(message["timestamp"])),
+                        # message_id=update.message.message_id,
+                        subtype_xmlid="mail.mt_comment",
+                        message_type="comment",
+                        attachments=attachments,
                     )
-                    self._post_process_reply(related_message)
-                    new_message.gateway_message_id = new_related_message
+                )
+                self._post_process_reply(related_message)
+                new_message.gateway_message_id = new_related_message
 
     def _send(
         self,
