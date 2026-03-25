@@ -5,7 +5,7 @@
     "name": "Mail Whatsapp Gateway",
     "summary": """
         Set a gateway for whatsapp""",
-    "version": "17.0.1.1.2",
+    "version": "17.0.1.1.3",
     "license": "AGPL-3",
     "author": "Creu Blanca, Dixmit, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
