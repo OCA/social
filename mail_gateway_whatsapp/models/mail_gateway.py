@@ -56,7 +56,7 @@ class MailGateway(models.Model):
             ws_template = templates_by_id.get(template_data["id"])
             if ws_template:
                 ws_template.write(
-                    WhatsappTemplate._prepare_values_to_import(self, template_data)
+                    ws_template._prepare_values_to_import(self, template_data)
                 )
             else:
                 create_vals.append(
