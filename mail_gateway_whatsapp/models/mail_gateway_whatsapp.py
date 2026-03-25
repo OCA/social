@@ -167,7 +167,6 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 chat = chat.with_user(self.env.ref("base.public_user").id).with_context(
                     guest=author
                 )
-            
             related_message_id = message.get("context", {}).get("id", False)
             related_message = False
             if related_message_id:
@@ -181,7 +180,6 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     )
                     .mail_message_id
                 )
-            
             # TODO: Check the sudo...
             new_message = chat.sudo().message_post(
                 body=body,
@@ -192,7 +190,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 subtype_xmlid="mail.mt_comment",
                 message_type="comment",
                 attachments=attachments,
-                parent_id=related_message and related_message.id
+                parent_id=related_message and related_message.id,
             )
             self._post_process_message(new_message, chat)
             if related_message and related_message.gateway_message_id:
