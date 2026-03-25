@@ -16,6 +16,7 @@
                 <group>
                     <field name="partner_mandatory" />
                     <field name="partner_category" />
+                    <field name="partner_unique" />
                 </group>
             </group>
         </xpath>
