@@ -4,7 +4,7 @@
 {
     "name": "Mute Notification User Autosubscribe",
     "summary": "Do not send notifications to users autosubcribed through user_id field",
-    "version": "17.0.1.0.0",
+    "version": "19.0.1.0.0",
     "category": "Social",
     "website": "https://github.com/OCA/social",
     "author": "Sygel,Odoo Community Association (OCA)",

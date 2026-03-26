@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import models
+from odoo.fields import Domain
 
 
 class ResUsers(models.Model):
@@ -11,7 +12,7 @@ class ResUsers(models.Model):
         self.ensure_one()
         muted = False
         user_autosubscribe_mute = self.env["user.autosubscribe.mute"].search(
-            [("model_id", "=", model.id)], limit=1
+            Domain("model_id", "in", [model.id]), limit=1
         )
         if user_autosubscribe_mute:
             groups = (
@@ -19,7 +20,7 @@ class ResUsers(models.Model):
                 or ""
             )
             if self.id in user_autosubscribe_mute.user_ids.ids or (
-                groups and self.user_has_groups(groups)
+                groups and self.has_groups(groups)
             ):
                 muted = True
         return muted

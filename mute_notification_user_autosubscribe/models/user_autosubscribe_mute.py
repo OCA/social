@@ -1,7 +1,8 @@
 # Copyright 2024 Manuel Regidor <manuel.regidor@sygel.es>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
+from odoo.fields import Domain
 
 
 class UserAutosubscribeMute(models.Model):
@@ -9,18 +10,17 @@ class UserAutosubscribeMute(models.Model):
     _description = "User Autosubscribe Mute"
 
     def _get_user_models_domain(self):
-        models = (
-            self.env["ir.model.fields"]
-            .search([("name", "=", "user_id"), ("relation", "=", "res.users")])
-            .mapped("model_id")
+        domain = Domain("name", "in", ["user_id"]) & Domain(
+            "relation", "in", ["res.users"]
         )
-        return f"[('id', 'in', {models.ids})]"
+        user_models = self.env["ir.model.fields"].search(domain).mapped("model_id")
+        return Domain("id", "in", user_models.ids)
 
     name = fields.Char(required=True)
     active = fields.Boolean(default=True)
     model_id = fields.Many2one(
         comodel_name="ir.model",
-        domain=_get_user_models_domain,
+        domain=lambda self: self._get_user_models_domain(),
         ondelete="cascade",
         required=True,
     )
@@ -28,10 +28,6 @@ class UserAutosubscribeMute(models.Model):
     group_ids = fields.Many2many(comodel_name="res.groups", string="Groups")
     notes = fields.Text()
 
-    _sql_constraints = [
-        (
-            "unique_model_id",
-            "UNIQUE(model_id)",
-            _("Model must be unique in User Autosubscribe Mute instances."),
-        )
-    ]
+    _unique_model = models.Constraint(
+        "unique(model_id)", "Model must be unique in User Autosubscribe Mute instances."
+    )

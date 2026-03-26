@@ -49,21 +49,21 @@
         </field>
     </record>
     <record id="user_autosubscribe_mute_tree_view" model="ir.ui.view">
-        <field name="name">user.autosubscribe.mute.tree.view</field>
+        <field name="name">user.autosubscribe.mute.list.view</field>
         <field name="model">user.autosubscribe.mute</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
                 <field name="model_id" />
                 <field name="user_ids" />
                 <field name="group_ids" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="user_autosubscribe_mute_action" model="ir.actions.act_window">
         <field name="name">User Autosubscribe Mute</field>
         <field name="res_model">user.autosubscribe.mute</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
     </record>
     <menuitem
         parent="mail.mail_menu_technical"
