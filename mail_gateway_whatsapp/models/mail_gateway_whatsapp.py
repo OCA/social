@@ -108,6 +108,16 @@ class MailGatewayWhatsappService(models.AbstractModel):
         chat.ensure_one()
         body = ""
         attachments = []
+        
+        if message.get("button"):
+            choice = message["button"].get("text")
+            body = f"Opción elegida: {choice}"
+        elif message.get("list_reply"):
+            choice = message["list_reply"].get("title")
+            body = f"Opción elegida: {choice}"
+        elif message.get("text"):
+            body = message.get("text").get("body")
+
         if message.get("text"):
             body = message.get("text").get("body")
         for key in ["image", "audio", "video", "document", "sticker"]:
