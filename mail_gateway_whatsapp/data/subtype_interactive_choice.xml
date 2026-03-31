@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="mail_message_subtype_interactive_choice" model="mail.message.subtype">
+            <field name="name">Interactive Choice</field>
+            <field name="description">Mensaje interactivo con opciones</field>
+            <field name="internal">True</field>
+        </record>
+    </data>
+</odoo>

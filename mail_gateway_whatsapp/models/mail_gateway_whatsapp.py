@@ -321,6 +321,34 @@ class MailGatewayWhatsappService(models.AbstractModel):
             whatsapp_template = self.env["mail.whatsapp.template"].browse(
                 self.env.context.get("whatsapp_template_id")
             )
+
+        # --- NUEVO: detección de subtipo interactivo ---
+        if (
+            body
+            and hasattr(body, "subtype_id")
+            and body.subtype_id.xml_id == "mail_gateway_whatsapp.mail_message_subtype_interactive_choice"
+        ):
+            payload_json = json.loads(body.body or "{}")
+            options = payload_json.get("options", [])
+            buttons = []
+            for opt in options[:3]:  # WhatsApp permite máximo 3 botones
+                buttons.append({
+                    "type": "reply",
+                    "reply": {"id": opt.lower(), "title": opt}
+                })
+            return {
+                "messaging_product": "whatsapp",
+                "recipient_type": "individual",
+                "to": channel.gateway_channel_token,
+                "type": "interactive",
+                "interactive": {
+                    "type": "button",
+                    "body": {"text": payload_json.get("question", "Seleccione una opción")},
+                    "action": {"buttons": buttons}
+                }
+            }
+
+        # --- Lógica existente para texto/plantilla ---
         if body:
             payload = {
                 "messaging_product": "whatsapp",
@@ -346,6 +374,8 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     }
                 )
             return payload
+
+        # --- Lógica existente para adjuntos ---
         if media_id:
             media_data = {"id": media_id}
             if media_type == "document":
@@ -357,7 +387,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 "type": media_type,
                 media_type: media_data,
             }
-
+    
     def _get_whatsapp_mimetype_kind(self):
         return {
             "text/plain": "document",

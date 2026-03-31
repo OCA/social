@@ -18,6 +18,7 @@
         "wizards/mail_compose_gateway_message.xml",
         "views/mail_whatsapp_template_views.xml",
         "views/mail_gateway.xml",
+        "data/subtype_interactive_choice.xml",
     ],
     "assets": {
         "web.assets_backend": [
