@@ -336,7 +336,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
         if (
             body
             and hasattr(body, "subtype_id")
-            and body.subtype_id.xml_id == "mail_gateway_whatsapp.mail_message_subtype_interactive_choice"
+            and body.subtype_id.xml_id == "odoo_botpress_connector.mt_interactive_choice"
         ):
             payload_json = json.loads(body.body or "{}")
             options = payload_json.get("options", [])
