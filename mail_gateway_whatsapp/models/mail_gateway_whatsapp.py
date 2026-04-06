@@ -352,36 +352,6 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 self.env.context.get("whatsapp_template_id")
             )
     
-        # --- BLOQUE HARDCODEADO DE PRUEBA ---
-        if True:  # cambiar a True para activar
-            return {
-                "messaging_product": "whatsapp",
-                "recipient_type": "individual",
-                "to": channel.gateway_channel_token,
-                "type": "interactive",
-                "interactive": {
-                    "type": "button",
-                    "body": {"text": "Seleccioná una opción de prueba:"},
-                    "action": {
-                        "buttons": [
-                            {
-                                "type": "reply",
-                                "reply": {"id": "opt1", "title": "Opción A"}
-                            },
-                            {
-                                "type": "reply",
-                                "reply": {"id": "opt2", "title": "Opción B"}
-                            },
-                            {
-                                "type": "reply",
-                                "reply": {"id": "opt3", "title": "Opción C"}
-                            },
-                        ]
-                    },
-                },
-            }
-        # --- FIN BLOQUE DE PRUEBA ---
-    
         if body:
             payload = {
                 "messaging_product": "whatsapp",
@@ -420,7 +390,6 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 media_type: media_data,
             }
                 
-
     def _get_whatsapp_mimetype_kind(self):
         return {
             "text/plain": "document",
