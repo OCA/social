@@ -103,23 +103,42 @@ class MailGatewayWhatsappService(models.AbstractModel):
         )
         # notify user that we have a failure
         notification.mail_message_id._notify_message_notification_update()
+        
+        
 
     def _process_update(self, chat, message, value):
         chat.ensure_one()
         body = ""
         attachments = []
         
-        if message.get("button"):
-            choice = message["button"].get("text")
-            body = f"Opción elegida: {choice}"
-        elif message.get("list_reply"):
-            choice = message["list_reply"].get("title")
-            body = f"Opción elegida: {choice}"
-        elif message.get("text"):
-            body = message.get("text").get("body")
+    # --- NUEVO: respuestas interactivas ---
+    
+        if message.get("interactive"):
+          interactive = message["interactive"]
+          if interactive.get("type") == "button_reply":
+              reply = interactive.get("button_reply", {})
+              choice = reply.get("title")
+              opt_id = reply.get("id")
+              body = f"Opción elegida: {choice} [{opt_id}]"
+              
+          elif interactive.get("type") == "list_reply":
+              reply = interactive.get("list_reply", {})
+              choice = reply.get("title")
+              opt_id = reply.get("id")
+              body = f"Opción elegida: {choice} [{opt_id}]"
 
-        if message.get("text"):
-            body = message.get("text").get("body")
+        elif message.get("contacts"):
+            contact = message["contacts"][0]
+            name = contact.get("name", {}).get("formatted_name", "")
+            phones = ", ".join([p.get("phone") for p in contact.get("phones", [])])
+            body = f"Contacto recibido:\n{name} ({phones})"
+
+        elif message.get("text"):
+            body = message["text"].get("body")
+
+        # --- Adjuntos (image, audio, video, etc.) ---
+            
+            
         for key in ["image", "audio", "video", "document", "sticker"]:
             if message.get(key):
                 image_id = message.get(key).get("id")
@@ -323,6 +342,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
             # pylint: disable=invalid-commit
             self.env.cr.commit()
 
+
     def _send_payload(
         self, channel, body=False, media_id=False, media_type=False, media_name=False
     ):
@@ -331,21 +351,9 @@ class MailGatewayWhatsappService(models.AbstractModel):
             whatsapp_template = self.env["mail.whatsapp.template"].browse(
                 self.env.context.get("whatsapp_template_id")
             )
-
-        # --- NUEVO: detección de subtipo interactivo ---
-        if (
-            body
-            and hasattr(body, "subtype_id")
-            and body.subtype_id.xml_id == "odoo_botpress_connector.mt_interactive_choice"
-        ):
-            payload_json = json.loads(body.body or "{}")
-            options = payload_json.get("options", [])
-            buttons = []
-            for opt in options[:3]:  # WhatsApp permite máximo 3 botones
-                buttons.append({
-                    "type": "reply",
-                    "reply": {"id": opt.lower(), "title": opt}
-                })
+    
+        # --- BLOQUE HARDCODEADO DE PRUEBA ---
+        if True:  # cambiar a True para activar
             return {
                 "messaging_product": "whatsapp",
                 "recipient_type": "individual",
@@ -353,12 +361,27 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 "type": "interactive",
                 "interactive": {
                     "type": "button",
-                    "body": {"text": payload_json.get("question", "Seleccione una opción")},
-                    "action": {"buttons": buttons}
-                }
+                    "body": {"text": "Seleccioná una opción de prueba:"},
+                    "action": {
+                        "buttons": [
+                            {
+                                "type": "reply",
+                                "reply": {"id": "opt1", "title": "Opción A"}
+                            },
+                            {
+                                "type": "reply",
+                                "reply": {"id": "opt2", "title": "Opción B"}
+                            },
+                            {
+                                "type": "reply",
+                                "reply": {"id": "opt3", "title": "Opción C"}
+                            },
+                        ]
+                    },
+                },
             }
-
-        # --- Lógica existente para texto/plantilla ---
+        # --- FIN BLOQUE DE PRUEBA ---
+    
         if body:
             payload = {
                 "messaging_product": "whatsapp",
@@ -384,8 +407,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     }
                 )
             return payload
-
-        # --- Lógica existente para adjuntos ---
+    
         if media_id:
             media_data = {"id": media_id}
             if media_type == "document":
@@ -397,7 +419,8 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 "type": media_type,
                 media_type: media_data,
             }
-    
+                
+
     def _get_whatsapp_mimetype_kind(self):
         return {
             "text/plain": "document",
