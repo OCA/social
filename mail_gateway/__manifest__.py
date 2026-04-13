@@ -4,7 +4,7 @@
 {
     "name": "Mail Gateway",
     "summary": "Base module for gateway communications",
-    "version": "18.0.1.0.7",
+    "version": "18.0.1.0.8",
     "license": "AGPL-3",
     "author": "Creu Blanca,Dixmit,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
