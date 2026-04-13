@@ -28,7 +28,7 @@ patch(Composer.prototype, {
         return isSendButtonDisabled || !this.thread?.gateway_notifications?.length;
     },
     onFocusin() {
-        super.onFocusin();
+        super.onFocusin(...arguments);
         if (this.props.type !== "gateway" && this.thread) {
             this.thread.gateway_notifications = [];
         }
