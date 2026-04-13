@@ -10,6 +10,7 @@
             <button
                 class="o-mail-Chatter-gateway btn text-nowrap me-1"
                 type="button"
+                t-if="hasGatewayGroup"
                 t-att-class="{
                     'btn-primary active': state.composerType === 'gateway',
                     'btn-secondary': state.composerType !== 'gateway',
