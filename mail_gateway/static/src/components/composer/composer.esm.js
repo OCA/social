@@ -28,8 +28,8 @@ patch(Composer.prototype, {
         }
         return isSendButtonDisabled || !this.thread?.gateway_notifications.length;
     },
-    onFocusin() {
-        super.onFocusin();
+    onFocusin(ev) {
+        super.onFocusin(ev);
         if (this.props.type !== "gateway" && this.thread) {
             this.thread.gateway_notifications = [];
         }
