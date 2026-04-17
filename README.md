@@ -37,7 +37,7 @@ addon | version | maintainers | summary
 [mail_debrand](mail_debrand/) | 17.0.1.0.1 | <a href='https://github.com/pedrobaeza'><img src='https://github.com/pedrobaeza.png' width='32' height='32' style='border-radius:50%;' alt='pedrobaeza'/></a> <a href='https://github.com/joao-p-marques'><img src='https://github.com/joao-p-marques.png' width='32' height='32' style='border-radius:50%;' alt='joao-p-marques'/></a> | Remove Odoo branding in sent emails Removes anchor <a href odoo.com togheder with it's parent ( for powerd by) form all the templates removes any 'odoo' that are in tempalte texts > 20characters
 [mail_disable_follower_notification](mail_disable_follower_notification/) | 17.0.1.0.0 |  | Don't send emails by default when adding followers to records
 [mail_forward](mail_forward/) | 17.0.2.0.1 | <a href='https://github.com/carlos-lopez-tecnativa'><img src='https://github.com/carlos-lopez-tecnativa.png' width='32' height='32' style='border-radius:50%;' alt='carlos-lopez-tecnativa'/></a> | Forward messages from the chatter of any document to other users.
-[mail_gateway](mail_gateway/) | 17.0.1.0.8 |  | Base module for gateway communications
+[mail_gateway](mail_gateway/) | 17.0.1.0.9 |  | Base module for gateway communications
 [mail_gateway_whatsapp](mail_gateway_whatsapp/) | 17.0.1.1.3 |  | Set a gateway for whatsapp
 [mail_history_mark_unread](mail_history_mark_unread/) | 17.0.1.0.0 |  | Add 'Mark as Unread' action to messages in History mailbox
 [mail_layout_force](mail_layout_force/) | 17.0.1.0.1 | <a href='https://github.com/ivantodorovich'><img src='https://github.com/ivantodorovich.png' width='32' height='32' style='border-radius:50%;' alt='ivantodorovich'/></a> | Force a mail layout on selected email templates
