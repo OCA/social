@@ -40,14 +40,22 @@ class MailMessage(models.Model):
 
     @api.model
     def _message_read_dict_postprocess(self, messages, message_tree):
-        res = super(MailMessage, self)._message_read_dict_postprocess(
-            messages, message_tree
-        )
+        parent = super()
+        if hasattr(parent, "_message_read_dict_postprocess"):
+            res = parent._message_read_dict_postprocess(messages, message_tree)
+        else:
+            res = messages
+
+        is_superuser = self.env.user.has_group("mail_edit.group_mail_edit_superuser")
+        user_partner = self.env.user.partner_id
+
         for message_dict in messages:
-            # Check if current user is a superuser
-            if self.env.user.has_group("mail_edit.group_mail_edit_superuser"):
+            if is_superuser:
                 message_dict["is_superuser"] = True
+
+            author_id = message_dict.get("author_id")
             message_dict["is_author"] = (
-                self.env.user.partner_id.id == message_dict["author_id"][0]
+                bool(author_id) and user_partner.id == author_id[0]
             )
+
         return res

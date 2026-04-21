@@ -14,6 +14,8 @@
     "depends": [
         "mail",
         "web",
+        "web_tour",
+        "contacts",
     ],
     "data": [
         "security/mail_edit_security.xml",
@@ -21,12 +23,14 @@
     ],
     "demo": ["demo/data.xml"],
     "assets": {
-        "web.assets_backend": [
-            "mail_edit/static/src/components/message/mail_edit.js",
-            "mail_edit/static/src/js/tour.js",
+        "mail.assets_messaging": [
+            "mail_edit/static/src/components/message/mail_edit.esm.js",
         ],
-        "web.assets_qweb": [
-            "mail_edit/static/src/components/message/mail_edit.xml",
+        "web.assets_tests": [
+            "mail_edit/static/src/tests/tours/*.esm.js",
+        ],
+        "web.qunit_suite_tests": [
+            "mail_edit/static/src/tests/qunit_suite_tests/*.esm.js",
         ],
     },
 }
