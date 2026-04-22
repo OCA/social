@@ -69,6 +69,30 @@ class MessagePostCase(MailCommon):
                 fields_values={"scheduled_date": False},
             )
 
+    def test_forced_context_with_template(self):
+        """A forced send via context is sent directly when using a template."""
+        with self.mock_mail_gateway():
+            mail_template = self.env["mail.template"].create(
+                {
+                    "model_id": self.env.ref("base.model_res_partner").id,
+                    "body_html": "<p>test body</p>",
+                    "partner_to": f"{self.partner_employee.id}",
+                }
+            )
+            self.partner_portal.with_context(
+                force_send=True
+            ).message_post_with_template(
+                mail_template.id,
+                composition_mode="comment",
+            )
+            self.assertMailMail(
+                self.partner_employee,
+                "sent",
+                author=self.env.user.partner_id,
+                content="test body",
+                fields_values={"scheduled_date": False},
+            )
+
     def test_no_msg_edit(self):
         """Cannot update messages.
 
