@@ -4,7 +4,7 @@
 from odoo.tests.common import TransactionCase
 from odoo.tools import mute_logger
 
-from odoo.addons.test_mail.tests.test_mail_gateway import MAIL_TEMPLATE
+from odoo.addons.test_mail.data.test_mail_data import MAIL_TEMPLATE
 
 
 class FetchmailCase(TransactionCase):
