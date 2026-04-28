@@ -1,0 +1,1 @@
+In case a user that has been automatically applied the "Mute" message subtype in a subscription through one of the rules provided in this module needs to be sent notifications in a specific document, just edit the subscription and select the subtypes for which the user has to be sent notifications.

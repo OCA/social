@@ -1,0 +1,5 @@
+- Manuel Regidor \<<manuel.regidor@sygel.es>\>
+- Valentín Vinagre \<<valentin.vinagre@sygel.es>\>
+- Harald Panten \<<harald.panten@sygel.es>\>
+- `Studio73 <https://www.studio73.es>`__:
+  - Pablo Cortés
