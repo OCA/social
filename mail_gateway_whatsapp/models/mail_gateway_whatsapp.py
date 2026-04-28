@@ -29,10 +29,16 @@ class MailGatewayWhatsappService(models.AbstractModel):
     def _receive_get_update(self, bot_data, req, **kwargs):
         self._verify_update(bot_data, {})
         gateway = self.env["mail.gateway"].browse(bot_data["id"])
+
         if kwargs.get("hub.verify_token") != gateway.whatsapp_security_key:
-            return None
+            return request.make_response("Unauthorized", status=403)
+
         gateway.sudo().integrated_webhook_state = "integrated"
-        response = request.make_response(kwargs.get("hub.challenge"))
+
+        # ✅ CORREÇÃO: Retornar o challenge com content-type correto
+        challenge = kwargs.get("hub.challenge")
+        response = request.make_response(challenge)
+        response.headers['Content-Type'] = 'text/plain'
         response.status_code = 200
         return response
 
