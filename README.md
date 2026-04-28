@@ -17,7 +17,11 @@ social
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[mute_notification_user_autosubscribe](mute_notification_user_autosubscribe/) | 19.0.1.0.0 |  | Do not send notifications to users autosubcribed through user_id field
 
 [//]: # (end addons)
 
