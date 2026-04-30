@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="mt_whatsapp" model="mail.message.subtype">
+            <field name="name">WhatsApp</field>
+            <field name="sequence">200</field>
+            <field name="internal" eval="False"/>
+            <field name="res_model" eval="False"/>
+        </record>
+    </data>
+</odoo>

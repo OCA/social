@@ -1,0 +1,13 @@
+.o_Composer {
+    .o_whatsapp_button {
+        background-color: #25D366;
+        color: white;
+    }
+}
+
+.o_Message {
+    &.o_whatsapp {
+        border-left: 4px solid #25D366;
+        background-color: #e8f5e8;
+    }
+}

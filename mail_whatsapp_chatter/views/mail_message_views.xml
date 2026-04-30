@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_message_tree_whatsapp" model="ir.ui.view">
+            <field name="name">mail.message.tree.whatsapp</field>
+            <field name="model">mail.message</field>
+            <field name="inherit_id" ref="mail.view_message_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='subject']" position="after">
+                    <field name="whatsapp_phone" optional="hide"/>
+                    <field name="is_whatsapp" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_message_form_whatsapp" model="ir.ui.view">
+            <field name="name">mail.message.form.whatsapp</field>
+            <field name="model">mail.message</field>
+            <field name="inherit_id" ref="mail.mail_message_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='body']" position="after">
+                    <field name="whatsapp_phone"/>
+                    <field name="whatsapp_message_id"/>
+                    <field name="is_whatsapp"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="action_mail_gateway_whatsapp" model="ir.actions.server">
+            <field name="name">Send via WhatsApp Gateway</field>
+            <field name="model_id" ref="mail.model_mail_message"/>
+            <field name="state">code</field>
+            <field name="code">
+                # Quando uma mensagem é marcada para envio via gateway,
+                # redirecionar para WhatsApp se o destinatário tem mobile
+                if records:
+                    for record in records:
+                        # Obter o partner relacionado
+                        partner = record.model_id and record.res_id and record.model_id.model == 'res.partner' and env[record.model_id.model].browse(record.res_id)
+
+                        if partner and partner.mobile:
+                            # Chamar método de envio WhatsApp
+                            partner.send_whatsapp_message(record.body)
+                            # Marcar como enviado
+            record.write({'message_type': 'whatsapp'})
+            </field>
+        </record>
+    </data>
+</odoo>
