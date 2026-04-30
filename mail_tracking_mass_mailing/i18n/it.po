@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-07-22 00:51+0000\n"
-"PO-Revision-Date: 2023-12-11 15:34+0000\n"
+"PO-Revision-Date: 2026-04-30 10:45+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: mail_tracking_mass_mailing
 #: model_terms:ir.ui.view,arch_db:mail_tracking_mass_mailing.mailing_trace_view_form
@@ -43,7 +43,7 @@ msgstr "Punteggio e-mail"
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_email_menu
 msgid "Emails"
-msgstr "Email"
+msgstr "E-mail"
 
 #. module: mail_tracking_mass_mailing
 #: model:ir.ui.menu,name:mail_tracking_mass_mailing.mail_tracking_event_menu
