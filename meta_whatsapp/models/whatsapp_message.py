@@ -49,6 +49,8 @@ class WhatsAppMessage(models.Model):
 
     res_model = fields.Char(string="Related Model")
     res_id = fields.Integer(string="Related Record ID")
+    
+    components_json = fields.Text(string="Components JSON Override", help="If provided, overrides the automatically generated components list for the template.")
 
     @api.onchange("template_id")
     def _onchange_template_id(self):
@@ -170,63 +172,65 @@ class WhatsAppMessage(models.Model):
         components = []
         rendered_body = self.template_id.body
         rendered_header = self.template_id.header_text
-
-        # Check for Header parameters (Text or Media)
-        header_params = []
-        if self.template_id.header_type == "TEXT":
-            header_params = self._prepare_template_parameters(location="header")
-        elif self.template_id.header_type in ["IMAGE", "VIDEO", "DOCUMENT"]:
-            # If media header, we need to provide the media URL or handle
-            # For now, we use the sample URL or handle we synced if available
-            media_type = self.template_id.header_type.lower()
-            media_vals = {}
-            if self.template_id.header_media_url:
-                media_vals = {"link": self.template_id.header_media_url}
-            elif self.template_id.header_media_handle:
-                media_vals = {"id": self.template_id.header_media_handle}
-            
-            if media_vals:
-                header_params.append({
-                    "type": media_type,
-                    media_type: media_vals
-                })
-
-        if header_params:
-            components.append({
-                "type": "header",
-                "parameters": header_params
-            })
-            # Replace variables in header preview (only for text)
+        import json
+        if self.components_json:
+            try:
+                components = json.loads(self.components_json)
+            except Exception as e:
+                _logger.error("Failed to parse components_json: %s", e)
+        else:
+            # Check for Header parameters (Text or Media)
+            header_params = []
             if self.template_id.header_type == "TEXT":
-                for i, p in enumerate(header_params, 1):
-                    placeholder = "{{%s}}" % i
-                    if rendered_header:
-                        rendered_header = rendered_header.replace(placeholder, p.get("text", ""))
-
-        # Check for Body parameters
-        body_params = self._prepare_template_parameters(location="body")
-        if body_params:
-            components.append({
-                "type": "body",
-                "parameters": body_params
-            })
-            # Replace variables in body preview
-            for i, p in enumerate(body_params, 1):
-                placeholder = "{{%s}}" % i
-                if rendered_body:
-                    rendered_body = rendered_body.replace(placeholder, p.get("text", ""))
-
-        # Check for Button parameters (Dynamic URL buttons)
-        for i, button in enumerate(self.template_id.button_ids):
-            if button.url_type == "DYNAMIC":
-                btn_params = self._prepare_template_parameters(location="button", button_index=i)
-                if btn_params:
-                    components.append({
-                        "type": "button",
-                        "sub_type": "url",
-                        "index": i,
-                        "parameters": btn_params
+                header_params = self._prepare_template_parameters(location="header")
+            elif self.template_id.header_type in ["IMAGE", "VIDEO", "DOCUMENT"]:
+                media_type = self.template_id.header_type.lower()
+                media_vals = {}
+                if self.template_id.header_media_url:
+                    media_vals = {"link": self.template_id.header_media_url}
+                elif self.template_id.header_media_handle:
+                    media_vals = {"id": self.template_id.header_media_handle}
+                
+                if media_vals:
+                    header_params.append({
+                        "type": media_type,
+                        media_type: media_vals
                     })
+
+            if header_params:
+                components.append({
+                    "type": "header",
+                    "parameters": header_params
+                })
+                if self.template_id.header_type == "TEXT":
+                    for i, p in enumerate(header_params, 1):
+                        placeholder = "{{%s}}" % i
+                        if rendered_header:
+                            rendered_header = rendered_header.replace(placeholder, p.get("text", ""))
+
+            # Check for Body parameters
+            body_params = self._prepare_template_parameters(location="body")
+            if body_params:
+                components.append({
+                    "type": "body",
+                    "parameters": body_params
+                })
+                for i, p in enumerate(body_params, 1):
+                    placeholder = "{{%s}}" % i
+                    if rendered_body:
+                        rendered_body = rendered_body.replace(placeholder, p.get("text", ""))
+
+            # Check for Button parameters (Dynamic URL buttons)
+            for i, button in enumerate(self.template_id.button_ids):
+                if button.url_type == "DYNAMIC":
+                    btn_params = self._prepare_template_parameters(location="button", button_index=i)
+                    if btn_params:
+                        components.append({
+                            "type": "button",
+                            "sub_type": "url",
+                            "index": i,
+                            "parameters": btn_params
+                        })
 
         # Final rendered text for internal Odoo logs
         full_rendered_text = ""
