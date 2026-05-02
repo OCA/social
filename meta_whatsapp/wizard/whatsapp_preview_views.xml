@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="whatsapp_preview_view_form" model="ir.ui.view">
+        <field name="name">whatsapp.preview.view.form</field>
+        <field name="model">whatsapp.preview</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp Preview">
+                <sheet>
+                    <group>
+                        <field name="template_id" invisible="1" />
+                        <field name="no_record" invisible="1" />
+                        <field name="header_media_url" invisible="1" />
+                        <field
+                            name="res_id"
+                            string="Preview of"
+                            required="1"
+                            attrs="{'invisible': [('no_record', '=', True)]}"
+                        />
+                        <span
+                            class="text-warning"
+                            attrs="{'invisible': [('no_record', '=', False)]}"
+                        >No records found for this model.</span>
+                        <field name="lang" placeholder="Choose a language..." />
+                    </group>
+                    <div
+                        style="border: 1px solid #ccc; padding: 15px; border-radius: 10px; background-color: #e2f1ff; margin-top: 10px; font-family: sans-serif;"
+                    >
+                        <div
+                            attrs="{'invisible': [('header_text', '=', False)]}"
+                            style="font-weight: bold; margin-bottom: 5px;"
+                        >
+                            <field name="header_text" nolabel="1" />
+                        </div>
+                        <div attrs="{'invisible': [('header_media_url', '=', False)]}">
+                            <img attrs="{'src': [('header_media_url', '!=', False)]}" style="max-width: 100%; border-radius: 5px; margin-bottom: 10px;"/>
+                        </div>
+                        <div style="white-space: pre-wrap;">
+                            <field name="body" nolabel="1" />
+                        </div>
+                        <div
+                            attrs="{'invisible': [('footer_text', '=', False)]}"
+                            style="color: grey; font-size: 0.9em; margin-top: 5px;"
+                        >
+                            <field name="footer_text" nolabel="1" />
+                        </div>
+                        <div style="margin-top: 15px;">
+                            <field name="preview_button_ids" nolabel="1">
+                                <tree no_open="1">
+                                    <field name="text"/>
+                                </tree>
+                            </field>
+                        </div>
+                    </div>
+                </sheet>
+                <footer>
+                    <button string="Discard" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="whatsapp_preview_action" model="ir.actions.act_window">
+        <field name="name">Template Preview</field>
+        <field name="res_model">whatsapp.preview</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">{'default_template_id': active_id}</field>
+    </record>
+</odoo>

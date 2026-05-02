@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+    <record id="res_config_settings_view_form_whatsapp" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.meta.whatsapp</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[hasclass('settings')]" position="inside">
+                <div
+                    class="app_settings_block"
+                    data-string="Meta WhatsApp"
+                    string="Meta WhatsApp"
+                    data-key="meta_whatsapp"
+                >
+                    <h2>Meta WhatsApp Settings</h2>
+                    <div class="row mt16 o_settings_container">
+                        <div class="col-12 col-lg-6 o_setting_box">
+                            <div class="o_setting_right_pane">
+                                <span class="o_form_label">API Configuration</span>
+                                <div class="text-muted">
+                                    Configure your Meta WhatsApp API credentials.
+                                </div>
+                                <div class="content-group">
+                                    <div class="row mt16">
+                                        <label
+                                            for="meta_api_url"
+                                            class="col-lg-4 o_light_label"
+                                        />
+                                        <field name="meta_api_url" />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="meta_api_version"
+                                            class="col-lg-4 o_light_label"
+                                        />
+                                        <field name="meta_api_version" />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="meta_access_token"
+                                            class="col-lg-4 o_light_label"
+                                        />
+                                        <field
+                                            name="meta_access_token"
+                                            password="True"
+                                        />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="meta_phone_number_id"
+                                            class="col-lg-4 o_light_label"
+                                        />
+                                        <field name="meta_phone_number_id" />
+                                    </div>
+                                    <div class="row mt16">
+                                        <label
+                                            for="meta_waba_id"
+                                            class="col-lg-4 o_light_label"
+                                        />
+                                        <field name="meta_waba_id" />
+                                    </div>
+                                    <div class="row mt32">
+                                        <div class="col-lg-4"></div>
+                                        <div class="col-lg-8">
+                                            <button
+                                                name="action_sync_whatsapp_templates"
+                                                string="Sync Templates Now"
+                                                type="object"
+                                                class="oe_highlight"
+                                                icon="fa-refresh"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_configuration" model="ir.actions.act_window">
+        <field name="name">Settings</field>
+        <field name="res_model">res.config.settings</field>
+        <field name="view_mode">form</field>
+        <field name="target">inline</field>
+        <field name="context">{'module': 'meta_whatsapp'}</field>
+    </record>
+
+    <menuitem
+        id="menu_whatsapp_configuration"
+        name="WhatsApp Accounts"
+        parent="menu_whatsapp_root"
+        action="action_whatsapp_configuration"
+        sequence="100"
+    />
+    </data>
+</odoo>

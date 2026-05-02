@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+    <record id="view_whatsapp_message_tree" model="ir.ui.view">
+        <field name="name">whatsapp.message.tree</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <tree
+                string="WhatsApp Messages"
+                decoration-info="status == 'draft'"
+                decoration-muted="status == 'canceled'"
+                decoration-danger="status == 'failed'"
+                decoration-success="status == 'sent'"
+            >
+                <field name="create_date" />
+                <field name="mobile_number" />
+                <field name="partner_id" />
+                <field name="template_id" />
+                <field name="status" />
+                <field name="failure_type" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_message_form" model="ir.ui.view">
+        <field name="name">whatsapp.message.form</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp Message">
+                <header>
+                    <button
+                        name="action_send"
+                        string="Send Now"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('status', 'not in', ('draft', 'failed'))]}"
+                    />
+                    <button
+                        name="action_retry"
+                        string="Retry"
+                        type="object"
+                        attrs="{'invisible': [('status', '!=', 'failed')]}"
+                    />
+                    <button
+                        name="action_cancel"
+                        string="Cancel"
+                        type="object"
+                        attrs="{'invisible': [('status', 'not in', ('draft', 'failed'))]}"
+                    />
+                    <field name="status" widget="statusbar" />
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="mobile_number" />
+                            <field name="template_id" />
+                        </group>
+                        <group>
+                            <field name="msg_id" />
+                            <field
+                                name="failure_type"
+                                attrs="{'invisible': [('failure_type', '=', False)]}"
+                            />
+                            <field
+                                name="failure_reason"
+                                attrs="{'invisible': [('failure_reason', '=', False)]}"
+                            />
+                            <field name="create_date" readonly="1" />
+                        </group>
+                    </group>
+                    <group string="Content">
+                        <field name="body" nolabel="1" readonly="1" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_message_search" model="ir.ui.view">
+        <field name="name">whatsapp.message.search</field>
+        <field name="model">whatsapp.message</field>
+        <field name="arch" type="xml">
+            <search string="WhatsApp Messages">
+                <field name="mobile_number" />
+                <field name="partner_id" />
+                <field name="template_id" />
+                <field name="status" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Partner"
+                        name="partner_id"
+                        context="{'group_by':'partner_id'}"
+                    />
+                    <filter
+                        string="Status"
+                        name="status"
+                        context="{'group_by':'status'}"
+                    />
+                    <filter
+                        string="Template"
+                        name="template_id"
+                        context="{'group_by':'template_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_message" model="ir.actions.act_window">
+        <field name="name">WhatsApp Messages</field>
+        <field name="res_model">whatsapp.message</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem
+        id="menu_whatsapp_messages"
+        name="Messages"
+        parent="menu_whatsapp_root"
+        action="action_whatsapp_message"
+        sequence="20"
+    />
+
+    </data>
+</odoo>

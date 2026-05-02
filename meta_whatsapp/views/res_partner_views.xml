@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+    <record id="action_whatsapp_composer_partner" model="ir.actions.act_window">
+        <field name="name">Send WhatsApp</field>
+        <field name="res_model">whatsapp.composer</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="base.model_res_partner" />
+        <field name="binding_view_types">form</field>
+    </record>
+
+    <record id="view_partner_form_whatsapp" model="ir.ui.view">
+        <field name="name">res.partner.view.form.inherit.meta.whatsapp</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mobile']" position="after">
+                <button
+                    name="%(meta_whatsapp.action_whatsapp_composer_partner)d"
+                    type="action"
+                    string="WhatsApp"
+                    icon="fa-whatsapp"
+                    class="oe_link"
+                    context="{'default_res_model': 'res.partner', 'default_res_ids': active_ids}"
+                    attrs="{'invisible': [('mobile', '=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    </data>
+</odoo>

@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_whatsapp_template,whatsapp.template,model_whatsapp_template,base.group_user,1,1,1,1
+access_whatsapp_message,whatsapp.message,model_whatsapp_message,base.group_user,1,1,1,1
+access_whatsapp_template_variable,whatsapp.template.variable,model_whatsapp_template_variable,base.group_user,1,1,1,1
+access_whatsapp_composer,whatsapp.composer,model_whatsapp_composer,base.group_user,1,1,1,1
+access_whatsapp_template_button,whatsapp.template.button,model_whatsapp_template_button,base.group_user,1,1,1,1
+access_whatsapp_preview,whatsapp.preview,model_whatsapp_preview,base.group_user,1,1,1,1
+access_whatsapp_preview_button,whatsapp.preview.button,model_whatsapp_preview_button,base.group_user,1,1,1,1

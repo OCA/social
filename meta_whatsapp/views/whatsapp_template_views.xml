@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+    <record id="view_whatsapp_template_tree" model="ir.ui.view">
+        <field name="name">whatsapp.template.tree</field>
+        <field name="model">whatsapp.template</field>
+        <field name="arch" type="xml">
+            <tree string="WhatsApp Templates">
+                <field name="name" />
+                <field name="language" />
+                <field name="status" />
+                <field name="category" />
+                <field name="model_id" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_template_form" model="ir.ui.view">
+        <field name="name">whatsapp.template.form</field>
+        <field name="model">whatsapp.template</field>
+        <field name="arch" type="xml">
+            <form string="WhatsApp Template">
+                <header>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_create_sidebar_action"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-plus-square"
+                            attrs="{'invisible': [('sidebar_action_id', '!=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Add Context</span>
+                                <span class="o_stat_text">Action</span>
+                            </div>
+                        </button>
+                        <button
+                            name="action_unlink_sidebar_action"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-minus-square"
+                            attrs="{'invisible': [('sidebar_action_id', '=', False)]}"
+                        >
+                            <div class="o_stat_info">
+                                <span class="o_stat_text">Remove Context</span>
+                                <span class="o_stat_text">Action</span>
+                            </div>
+                        </button>
+                        <button
+                            name="%(meta_whatsapp.whatsapp_preview_action)d"
+                            icon="fa-search-plus"
+                            type="action"
+                            class="oe_stat_button"
+                            context="{'default_template_id': active_id}"
+                        >
+                            <span class="o_stat_text">Preview</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1><field name="name" placeholder="e.g. order_confirmation" /></h1>
+                    </div>
+                    <group>
+                        <field
+                            name="model_id"
+                            options="{'no_create': True, 'no_open': True}"
+                        />
+                        <field name="model_model" invisible="1" />
+                        <field name="language" />
+                        <field name="category" />
+                        <field name="status" />
+                        <field name="header_type" />
+                        <field name="sidebar_action_id" invisible="1" />
+                    </group>
+                    <notebook>
+                        <page string="Content">
+                            <group>
+                                <field
+                                    name="header_text"
+                                    attrs="{'invisible': [('header_type', '!=', 'TEXT')]}"
+                                />
+                                <field
+                                    name="header_media_handle"
+                                    attrs="{'invisible': [('header_type', 'not in', ('IMAGE', 'VIDEO', 'DOCUMENT'))]}"
+                                />
+                                <field
+                                    name="header_media_url"
+                                    attrs="{'invisible': [('header_type', 'not in', ('IMAGE', 'VIDEO', 'DOCUMENT'))]}"
+                                />
+                                <field name="body" />
+                                <field name="footer_text" />
+                            </group>
+                        </page>
+                        <page string="Buttons">
+                            <field name="button_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="type"/>
+                                    <field name="text"/>
+                                    <field name="url_type" attrs="{'invisible': [('type', '!=', 'URL')]}"/>
+                                    <field name="website_url" attrs="{'invisible': [('type', '!=', 'URL')]}"/>
+                                    <field name="phone_number" attrs="{'invisible': [('type', '!=', 'PHONE_NUMBER')]}"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Variables">
+                            <field name="variable_ids">
+                                <tree editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="name" />
+                                    <field name="location" />
+                                    <field name="button_index" attrs="{'invisible': [('location', '!=', 'button')]}" />
+                                    <field name="field_type" />
+                                    <field name="field_name" />
+                                    <field name="demo_value" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_whatsapp_template_search" model="ir.ui.view">
+        <field name="name">whatsapp.template.search</field>
+        <field name="model">whatsapp.template</field>
+        <field name="arch" type="xml">
+            <search string="WhatsApp Templates">
+                <field name="name" />
+                <field name="model_id" />
+                <field name="category" />
+                <field name="status" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Model"
+                        name="model_id"
+                        context="{'group_by':'model_id'}"
+                    />
+                    <filter
+                        string="Status"
+                        name="status"
+                        context="{'group_by':'status'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_whatsapp_template" model="ir.actions.act_window">
+        <field name="name">WhatsApp Templates</field>
+        <field name="res_model">whatsapp.template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create a new WhatsApp template
+            </p>
+        </field>
+    </record>
+
+    <record id="action_sync_whatsapp_templates_server" model="ir.actions.server">
+        <field name="name">Sync from Meta</field>
+        <field name="model_id" ref="meta_whatsapp.model_whatsapp_template"/>
+        <field name="binding_model_id" ref="meta_whatsapp.model_whatsapp_template"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">
+            action = model.action_sync_templates()
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_whatsapp_root"
+        name="WhatsApp"
+        parent="base.menu_custom"
+        sequence="50"
+    />
+
+    <menuitem
+        id="menu_whatsapp_templates"
+        name="Templates"
+        parent="menu_whatsapp_root"
+        action="action_whatsapp_template"
+        sequence="10"
+    />
+    </data>
+</odoo>
