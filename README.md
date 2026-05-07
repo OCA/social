@@ -41,6 +41,7 @@ addon | version | maintainers | summary
 [mail_improved_tracking_value](mail_improved_tracking_value/) | 15.0.1.0.0 |  | Improves tracking changed values for certain type of fields.Adds a user-friendly view to consult them.
 [mail_layout_force](mail_layout_force/) | 15.0.2.0.1 | <a href='https://github.com/ivantodorovich'><img src='https://github.com/ivantodorovich.png' width='32' height='32' style='border-radius:50%;' alt='ivantodorovich'/></a> | Force a mail layout on selected email templates
 [mail_layout_preview](mail_layout_preview/) | 15.0.0.1.0 |  | Preview email templates in the browser
+[mail_message_restrict](mail_message_restrict/) | 15.0.1.0.0 |  | Mail Message Restrict
 [mail_no_user_assign_notification](mail_no_user_assign_notification/) | 15.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Mail No user Assign Notification
 [mail_notification_custom_subject](mail_notification_custom_subject/) | 15.0.1.0.2 | <a href='https://github.com/yajo'><img src='https://github.com/yajo.png' width='32' height='32' style='border-radius:50%;' alt='yajo'/></a> | Apply a custom subject to mail notifications
 [mail_optional_autofollow](mail_optional_autofollow/) | 15.0.1.0.0 |  | Choose if you want to automatically add new recipients as followers on mail.compose.message
