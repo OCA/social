@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+   <record model="ir.ui.view" id="view_mail_message_subtype_form">
+        <field name="name">mail.message.subtype.form</field>
+        <field name="model">mail.message.subtype</field>
+        <field name="inherit_id" ref="mail.view_mail_message_subtype_form" />
+        <field name="arch" type="xml">
+            <field name="res_model" position="after">
+                <field name="hide_allow_send_model" invisible="1" />
+                <field
+                    name="allow_send_model_ids"
+                    widget="many2many_tags"
+                    attrs="{'invisible': [('hide_allow_send_model','=',True)]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
