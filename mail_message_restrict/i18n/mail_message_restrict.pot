@@ -4,13 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0+e\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-06-27 04:46+0000\n"
-"PO-Revision-Date: 2023-06-27 04:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -19,7 +16,7 @@ msgstr ""
 #. module: mail_message_restrict
 #: model:ir.model.fields,field_description:mail_message_restrict.field_mail_message_subtype__allow_send_model_ids
 msgid "Allow Send Model"
-msgstr "メール送信可モデル"
+msgstr ""
 
 #. module: mail_message_restrict
 #: code:addons/mail_message_restrict/models/mail_message.py:0
@@ -28,20 +25,18 @@ msgid ""
 "Creating a message in this model is blocked.Please contact the system "
 "administrator as necessary."
 msgstr ""
-"こちらのモデルよりメッセージを作成するには許可されません。必要に応じて、シス"
-"テム管理者にお問い合わせください。"
 
 #. module: mail_message_restrict
 #: model:ir.model.fields,field_description:mail_message_restrict.field_mail_message_subtype__hide_allow_send_model
 msgid "Hide Allow Send Model"
-msgstr "メール送信可モデル非表示"
+msgstr ""
 
 #. module: mail_message_restrict
 #: model:ir.model,name:mail_message_restrict.model_mail_message
 msgid "Message"
-msgstr "メッセージ"
+msgstr ""
 
 #. module: mail_message_restrict
 #: model:ir.model,name:mail_message_restrict.model_mail_message_subtype
 msgid "Message subtypes"
-msgstr "メッセージのサブタイプ"
+msgstr ""
