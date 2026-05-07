@@ -3,7 +3,7 @@
     "name": "Mail History Mark as Unread",
     "summary": """Add 'Mark as Unread' action to messages in History mailbox
     and Search results""",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.1.0",
     "category": "Social Network",
     "website": "https://github.com/OCA/social",
     "author": "Odoo Community Association (OCA)",
