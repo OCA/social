@@ -73,6 +73,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: mass_mailing_partner
+#: model:ir.model.fields,help:mass_mailing_partner.field_mailing_list__partner_unique
+msgid "If is checked, multiple contacts cannot be linked to the same partner"
+msgstr ""
+
+#. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_partner_mail_list_wizard__write_uid
 msgid "Last Updated by"
 msgstr "Naposled upraveno"
@@ -159,6 +164,11 @@ msgstr ""
 #. module: mass_mailing_partner
 #: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_category
 msgid "Partner Tag"
+msgstr ""
+
+#. module: mass_mailing_partner
+#: model:ir.model.fields,field_description:mass_mailing_partner.field_mailing_list__partner_unique
+msgid "Partner unique?"
 msgstr ""
 
 #. module: mass_mailing_partner
