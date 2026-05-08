@@ -15,11 +15,16 @@ class MailingList(models.Model):
     partner_category = fields.Many2one(
         comodel_name="res.partner.category", string="Partner Tag"
     )
+    partner_unique = fields.Boolean(
+        string="Partner unique?",
+        help="If is checked, multiple contacts cannot be linked to the same partner",
+        default=True,
+    )
 
-    @api.constrains("contact_ids")
+    @api.constrains("partner_unique", "contact_ids")
     def _check_contact_ids_partner_id(self):
         contact_obj = self.env["mailing.contact"]
-        for mailing_list in self:
+        for mailing_list in self.filtered("partner_unique"):
             data = contact_obj.read_group(
                 [
                     ("id", "in", mailing_list.contact_ids.ids),

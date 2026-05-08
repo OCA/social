@@ -20,3 +20,21 @@ class MailMassMailingListContactRelCase(base.BaseCase):
         )
         with self.assertRaises(ValidationError):
             list_3.contact_ids = [(4, contact_test_2.id)]
+
+    def test_create_mass_mailing_list_not_partner_unique(self):
+        contact_test_1 = self.create_mailing_contact(
+            {"name": "Contact test 1", "partner_id": self.partner.id}
+        )
+        contact_test_2 = self.create_mailing_contact(
+            {"name": "Contact test 2", "partner_id": self.partner.id}
+        )
+        list_3 = self.create_mailing_list(
+            {
+                "name": "List test 3",
+                "partner_unique": False,
+                "contact_ids": [(4, contact_test_1.id)],
+            }
+        )
+        list_3.contact_ids = [(4, contact_test_2.id)]
+        with self.assertRaises(ValidationError):
+            list_3.partner_unique = True
