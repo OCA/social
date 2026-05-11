@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-04-12 13:10+0000\n"
+"PO-Revision-Date: 2026-05-07 19:36+0000\n"
 "Last-Translator: Ed-Spain <eduamoros@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -29,7 +29,7 @@ msgstr ""
 "<span>Escriba los valores en los campo <b>Clave Webhook</b> y <b>Clave de "
 "seguridad de Whatsapp</b>\n"
 "                                                               Deberá poner "
-"los valores de su elección en estos campos\n"
+"los valores de su elección en estos campos.\n"
 "                                                               Asegúrese de "
 "que Facebook podrá contactar con su servidor."
 
@@ -250,7 +250,7 @@ msgstr "Chino (TAI)"
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Click on <b>Edit Button</b> on the webhook area."
-msgstr "Pulsa en <b>Editar</b>  en el área del webhook."
+msgstr "Pulsa en <b>Editar</b>en el área del webhook."
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_mail_whatsapp_template__company_id
