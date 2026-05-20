@@ -1,0 +1,46 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * fetchmail_thread_default
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0c\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-06-10 02:46+0000\n"
+"PO-Revision-Date: 2017-06-10 02:46+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Portuguese (Portugal) (https://www.transifex.com/oca/"
+"teams/23907/pt_PT/)\n"
+"Language: pt_PT\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: fetchmail_thread_default
+#: model:ir.model.fields,field_description:fetchmail_thread_default.field_fetchmail_server_default_thread_id
+msgid "Default mail thread"
+msgstr ""
+
+#. module: fetchmail_thread_default
+#: model:ir.model,name:fetchmail_thread_default.model_mail_thread
+msgid "Email Thread"
+msgstr "Tópico de Email"
+
+#. module: fetchmail_thread_default
+#: model:ir.model.fields,help:fetchmail_thread_default.field_fetchmail_server_default_thread_id
+msgid ""
+"Messages with no clear route will be posted as a new message to this thread."
+msgstr ""
+
+#. module: fetchmail_thread_default
+#: model:ir.model,name:fetchmail_thread_default.model_fetchmail_server
+msgid "POP/IMAP Server"
+msgstr ""
+
+#. module: fetchmail_thread_default
+#: model:mail.channel,name:fetchmail_thread_default.demo_sink
+msgid "mailsink"
+msgstr ""
