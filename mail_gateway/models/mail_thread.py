@@ -39,6 +39,10 @@ class MailThread(models.AbstractModel):
             )
 
     def _notify_get_recipients(self, message, msg_vals, **kwargs):
+        if self.env.context.get("link_gateway_message"):
+            # When we have the context link_gateway_message we want to avoid
+            # notify the followers thread.
+            return []
         if kwargs.get("gateway_notifications"):
             result = []
             for notification in kwargs["gateway_notifications"]:
