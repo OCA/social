@@ -4,9 +4,9 @@
 {
     "name": "Default Thread For Unbounded Emails",
     "summary": "Post unkonwn messages to an existing thread",
-    "version": "9.0.1.0.0",
+    "version": "10.0.1.0.0",
     "category": "Discuss",
-    "website": "https://www.tecnativa.com/",
+    "website": "https://www.github.com/social",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
