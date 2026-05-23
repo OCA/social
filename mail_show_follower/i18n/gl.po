@@ -6,28 +6,30 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 18:47+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "%(partner_name)s <%(partner_email)s>"
-msgstr ""
+msgstr "%(partner_name)s <%(partner_email)s>"
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Configuración de Axustes"
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_partner
@@ -37,7 +39,7 @@ msgstr ""
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_preview
 msgid "Message preview"
-msgstr ""
+msgstr "Vista previa da mensaxe"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
@@ -48,17 +50,19 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "Notice: Replies to this email will be sent to all recipients."
 msgstr ""
+"Aviso: As respostas a este correo electrónico enviaranse a todos os "
+"destinatarios."
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_mail_mail
 msgid "Outgoing Mails"
-msgstr ""
+msgstr "Correos Saíntes"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_partner_format
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_partner_format
 msgid "Partner format"
-msgstr ""
+msgstr "Formato socio"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_models_to_exclude
@@ -68,23 +72,23 @@ msgstr ""
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "Show Followers on mails"
-msgstr ""
+msgstr "Mostrar Seguidores en mails"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_internal_users_cc
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_internal_users_cc
 msgid "Show Internal Users CC"
-msgstr ""
+msgstr "Mostrar usuarios internos CC"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "Show Internal Users on CC"
-msgstr ""
+msgstr "Mostrar usuarios internos en CC"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_users__show_in_cc
 msgid "Show in CC"
-msgstr ""
+msgstr "Mostrar en CC"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,help:mail_show_follower.field_res_company__show_followers_partner_format
@@ -95,6 +99,10 @@ msgid ""
 "%(partner_email)s = Partner Email\n"
 "%(partner_email_domain)s = Partner Email Domain"
 msgstr ""
+"Parámetros admitidos:\n"
+"%(partner_name)s = Nome do socio\n"
+"%(partner_email)s = Correo electrónico do socio\n"
+"%(partner_email_domain)s = Dominio de correo electrónico do socio"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,help:mail_show_follower.field_res_config_settings__show_followers_models_to_exclude
@@ -105,23 +113,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_response_warning
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_response_warning
 msgid "Text 'Replies'"
-msgstr ""
+msgstr "Texto 'Respostas'"
 
 #. module: mail_show_follower
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_company__show_followers_message_sent_to
 #: model:ir.model.fields,field_description:mail_show_follower.field_res_config_settings__show_followers_message_sent_to
 msgid "Text 'Sent to'"
-msgstr ""
+msgstr "Texto 'Enviado a'"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
 msgid "This message has been sent to"
-msgstr ""
+msgstr "Esta mensaxe foi enviado a"
 
 #. module: mail_show_follower
 #: model:ir.model,name:mail_show_follower.model_res_users
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #. module: mail_show_follower
 #: model_terms:ir.ui.view,arch_db:mail_show_follower.res_config_settings_view_form
