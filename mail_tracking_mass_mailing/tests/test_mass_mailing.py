@@ -36,7 +36,7 @@ class TestMassMailing(TransactionCase):
                 "mailing_model_id": cls.env.ref(
                     "mass_mailing.model_mailing_contact"
                 ).id,
-                "mailing_domain": "[('list_ids', 'in', %d)]" % cls.list.id,
+                "mailing_domain": f"[('list_ids', 'in', {cls.list.id})]",
                 "contact_list_ids": [(6, False, [cls.list.id])],
                 "body_html": "<p>Test email body</p>",
                 "reply_to_mode": "new",
