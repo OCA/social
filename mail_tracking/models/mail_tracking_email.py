@@ -199,14 +199,16 @@ class MailTrackingEmail(models.Model):
         if not disallowed_ids:
             return
         raise AccessError(
-            "The requested operation cannot be completed due to security "
-            "restrictions. Please contact your system administrator.\n\n"
-            f"(Document type: {self.env._(self._description)}, Operation: {self.env._(operation)})"
-            + " - ({} {}, {} {})".format(
-                self.env._("Records:"),
-                list(disallowed_ids),
-                self.env._("User:"),
-                self.env.uid,
+            self.env._(
+                "The requested operation cannot be completed due to security "
+                "restrictions. Please contact your system administrator.\n\n"
+                f"(Document type: {self.env._(self._description)}, Operation: {self.env._(operation)})"
+                + " - ({} {}, {} {})".format(
+                    self.env._("Records:"),
+                    list(disallowed_ids),
+                    self.env._("User:"),
+                    self.env.uid,
+                )
             )
         )
 
