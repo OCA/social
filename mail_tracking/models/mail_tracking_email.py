@@ -206,12 +206,6 @@ class MailTrackingEmail(models.Model):
             ).format(
                 desc=self.env._(self._description), operation=self.env._(operation)
             )
-            + " - ({} {}, {} {})".format(
-                self.env._("Records:"),
-                list(disallowed_ids),
-                self.env._("User:"),
-                self.env.uid,
-            )
         )
 
     def read(self, fields=None, load="_classic_read"):
