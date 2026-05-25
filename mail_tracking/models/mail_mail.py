@@ -19,7 +19,7 @@ class MailMail(models.Model):
         email_to = COMMASPACE.join(email_to_list)
         return {
             "name": self.subject,
-            "timestamp": "%.6f" % ts,
+            "timestamp": f"{ts:.6f}",
             "time": fields.Datetime.to_string(dt),
             "mail_id": self.id,
             "mail_message_id": self.mail_message_id.id,

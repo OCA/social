@@ -1,4 +1,4 @@
-/** @odoo-module **/
+/* @odoo-module */
 const {Component, useState} = owl;
 
 export class MessageTracking extends Component {

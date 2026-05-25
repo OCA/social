@@ -1,7 +1,7 @@
-/** @odoo-module */
-import {Messaging} from "@mail/core/common/messaging_service";
-import {patch} from "@web/core/utils/patch";
-import {_t} from "@web/core/l10n/translation";
+/* @odoo-module */
+import { Messaging } from "@mail/core/common/messaging_service";
+import { _t } from "@web/core/l10n/translation";
+import { patch } from "@web/core/utils/patch";
 
 /** @type {import("@mail/core/common/messaging_service").Messaging} */
 const MessagingPatch = {

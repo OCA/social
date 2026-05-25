@@ -2,9 +2,11 @@
 # Copyright 2019 Alexandre Díaz
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+
 from email.utils import getaddresses
 
 from odoo import _, api, fields, models
+from odoo.osv import expression
 from odoo.tools import email_split
 
 
@@ -160,7 +162,7 @@ class MailMessage(models.Model):
                     "recipient": recipient,
                     "partner_id": tracking.partner_id.id,
                     "isCc": False,
-                    "tracking_delta": "%i-%i" % (self.id, tracking_delta),
+                    "tracking_delta": f"{self.id}-{tracking_delta}",
                 }
             )
             if tracking.partner_id:
@@ -201,7 +203,7 @@ class MailMessage(models.Model):
                     "recipient": partner.name,
                     "partner_id": partner.id,
                     "isCc": isCc,
-                    "tracking_delta": "%i-%i" % (self.id, tracking_delta),
+                    "tracking_delta": f"{self.id}-{tracking_delta}",
                 }
             )
             partner_trackings.append(tracking_status)
@@ -215,7 +217,7 @@ class MailMessage(models.Model):
                         "recipient": email,
                         "partner_id": False,
                         "isCc": cc,
-                        "tracking_delta": "%i-%i" % (self.id, tracking_delta),
+                        "tracking_delta": f"{self.id}-{tracking_delta}",
                     }
                 )
                 partner_trackings.append(tracking_status)

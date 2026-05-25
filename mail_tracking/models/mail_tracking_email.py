@@ -400,7 +400,7 @@ class MailTrackingEmail(models.Model):
         self.sudo().write({"state": "sent"})
         return {
             "recipient": message["To"],
-            "timestamp": "%.6f" % ts,
+            "timestamp": f"{ts:.6f}",
             "time": fields.Datetime.to_string(dt),
             "tracking_email_id": self.id,
             "event_type": "sent",
