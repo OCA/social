@@ -198,19 +198,20 @@ class MailTrackingEmail(models.Model):
         disallowed_ids = set(self.exists().ids).difference(set(allowed_ids))
         if not disallowed_ids:
             return
-        raise AccessError(
-            self.env._(
-                "The requested operation cannot be completed due to security "
-                "restrictions. Please contact your system administrator.\n\n"
-                f"(Document type: {self.env._(self._description)}, Operation: {self.env._(operation)})"
-                + " - ({records} {disallowed_ids}, {user} {uuid})".format(
-                    records=self.env._("Records:"),
-                    disallowed_ids=list(disallowed_ids),
-                    user=self.env._("User:"),
-                    uuid=self.env.uid,
-                )
-            )
+        main_msg = self.env._(
+            "The requested operation cannot be completed due to security "
+            "restrictions. Please contact your system administrator.\n\n"
+            "(Document type: {desc}, Operation: {operation})"
+        ).format(desc=self._description, operation=operation)
+
+        extra = " - ({} {}, {} {})".format(
+            self.env._("Records:"),
+            list(disallowed_ids),
+            self.env._("User:"),
+            self.env.uid,
         )
+
+        raise AccessError(main_msg + extra)
 
     def read(self, fields=None, load="_classic_read"):
         """Override to explicitly call check_access_rule, that is not called
