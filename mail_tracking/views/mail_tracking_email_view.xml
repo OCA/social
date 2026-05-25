@@ -2,7 +2,6 @@
 <!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
-
     <record model="ir.ui.view" id="view_mail_tracking_email_form">
         <field name="name">mail.tracking.email.form</field>
         <field name="model">mail.tracking.email</field>
@@ -168,7 +167,6 @@
         </field>
     </record>
 
-
     <record id="action_view_mail_tracking_email" model="ir.actions.act_window">
         <field name="name">MailTracking emails</field>
         <field name="res_model">mail.tracking.email</field>
@@ -183,5 +181,4 @@
         parent="base.menu_email"
         action="action_view_mail_tracking_email"
     />
-
 </odoo>

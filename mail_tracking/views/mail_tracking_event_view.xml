@@ -2,7 +2,6 @@
 <!-- Copyright 2016 Antonio Espinosa - <antonio.espinosa@tecnativa.com>
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
 <odoo>
-
     <record model="ir.ui.view" id="view_mail_tracking_event_form">
         <field name="name">mail.tracking.event.form</field>
         <field name="model">mail.tracking.event</field>
@@ -199,6 +198,4 @@
         parent="base.menu_email"
         action="action_view_mail_tracking_event"
     />
-
-
 </odoo>

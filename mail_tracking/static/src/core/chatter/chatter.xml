@@ -16,7 +16,9 @@
                     <span
                         t-if="!state.showFailedMessageList"
                         class="badge rounded-pill ms-2 text-bg-danger"
-                    ><t t-esc="failed_messages.length" /></span>
+                    >
+                        <t t-esc="failed_messages.length" />
+                    </span>
                 </div>
                 <hr class="flex-grow-1 fe-3" />
             </div>

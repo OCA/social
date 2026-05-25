@@ -2,8 +2,8 @@
 <templates xml:space="preserve">
 
 <t t-name="mail_tracking.FailedMessageReview">
-    <span>
-        <a
+        <span>
+            <a
                 href="#"
                 class="btn btn-link btn-success text-muted p-0 me-3"
                 role="button"
@@ -12,7 +12,7 @@
             <i class="fa fa-check" role="img" aria-label="Set As Reviewed" />
             Set as Reviewed
         </a>
-        <a
+            <a
                 href="#"
                 class="btn btn-link btn-success text-muted p-0 me-3"
                 role="button"
@@ -21,7 +21,7 @@
             <i class="fa fa-retweet" role="img" aria-label="Retry" />
             Retry
         </a>
-    </span>
-</t>
+        </span>
+    </t>
 
 </templates>

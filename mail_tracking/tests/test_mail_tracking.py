@@ -13,7 +13,7 @@ from odoo.tools import mute_logger
 
 from odoo.addons.mail_tracking.controllers.main import BLANK, MailTrackingController
 
-mock_send_email = "odoo.addons.base.models.ir_mail_server." "IrMailServer.send_email"
+mock_send_email = "odoo.addons.base.models.ir_mail_server.IrMailServer.send_email"
 
 
 class FakeUserAgent:
@@ -480,9 +480,10 @@ class TestMailTracking(TransactionCase):
         db = self.env.cr.dbname
         controller = MailTrackingController()
         # Cast Cursor to Mock object to avoid raising 'Cursor not closed explicitly' log
-        with patch("odoo.sql_db.db_connect"), patch(
-            "odoo.http.db_filter"
-        ) as mock_client:
+        with (
+            patch("odoo.sql_db.db_connect"),
+            patch("odoo.http.db_filter") as mock_client,
+        ):
             mock_client.return_value = True
             mail, tracking = self.mail_send(self.recipient.email)
             response = controller.mail_tracking_open(db, tracking.id, False)

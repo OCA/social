@@ -14,7 +14,7 @@ class MailMessage(models.Model):
 
     # Recipients
     email_cc = fields.Char(
-        "Cc", help="Additional recipients that receive a " '"Carbon Copy" of the e-mail'
+        "Cc", help='Additional recipients that receive a "Carbon Copy" of the e-mail'
     )
     email_to = fields.Char("To", help="Raw TO recipients")
     mail_tracking_ids = fields.One2many(
