@@ -202,9 +202,8 @@ class MailTrackingEmail(models.Model):
             self.env._(
                 "The requested operation cannot be completed due to security "
                 "restrictions. Please contact your system administrator.\n\n"
-                "(Document type: %(desc)s, Operation: %(operation)s)"
-            )
-            % {"desc": self._description, "operation": operation}
+                "(Document type: {desc}, Operation: {operation})"
+            ).format(desc=self._description, operation=operation)
             + " - ({} {}, {} {})".format(
                 self.env._("Records:"),
                 list(disallowed_ids),
