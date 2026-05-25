@@ -206,9 +206,9 @@ class MailTrackingEmail(models.Model):
 
         extra = " - ({records} {disallowed_ids}, {user} {uuid})".format(
             records=self.env._("Records:"),
-            disallowed_ids=list(disallowed_ids),
+            disallowed_ids=self.env._(list(disallowed_ids)),
             user=self.env._("User:"),
-            uuid=self.env.uid,
+            uuid=self.env._(self.env.uid),
         )
 
         raise AccessError(main_msg + extra)
