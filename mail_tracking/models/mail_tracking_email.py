@@ -202,7 +202,7 @@ class MailTrackingEmail(models.Model):
             "The requested operation cannot be completed due to security "
             "restrictions. Please contact your system administrator.\n\n"
             "(Document type: {desc}, Operation: {operation})"
-        ).format(desc=self._description, operation=operation)
+        ).format(desc=self.env._(self._description), operation=self.env._(operation))
 
         extra = " - ({records} {disallowed_ids}, {user} {uuid})".format(
             records=self.env._("Records:"),
