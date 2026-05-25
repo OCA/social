@@ -8,7 +8,7 @@ import urllib.parse
 import uuid
 from datetime import datetime, timezone
 
-from odoo import _, api, fields, models, tools
+from odoo import api, fields, models, tools
 from odoo.exceptions import AccessError
 from odoo.fields import Command
 from odoo.tools import email_split
@@ -199,14 +199,17 @@ class MailTrackingEmail(models.Model):
         if not disallowed_ids:
             return
         raise AccessError(
-            _(
+            self.env._(
                 "The requested operation cannot be completed due to security "
                 "restrictions. Please contact your system administrator.\n\n"
                 "(Document type: %(desc)s, Operation: %(operation)s)"
             )
             % {"desc": self._description, "operation": operation}
             + " - ({} {}, {} {})".format(
-                _("Records:"), list(disallowed_ids), _("User:"), self.env.uid
+                self.env._("Records:"),
+                list(disallowed_ids),
+                self.env._("User:"),
+                self.env.uid,
             )
         )
 
