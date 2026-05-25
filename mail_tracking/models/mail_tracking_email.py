@@ -204,11 +204,11 @@ class MailTrackingEmail(models.Model):
             "(Document type: {desc}, Operation: {operation})"
         ).format(desc=self._description, operation=operation)
 
-        extra = " - ({} {}, {} {})".format(
-            self.env._("Records:"),
-            list(disallowed_ids),
-            self.env._("User:"),
-            self.env.uid,
+        extra = " - ({records} {disallowed_ids}, {user} {uuid})".format(
+            records=self.env._("Records:"),
+            disallowed_ids=list(disallowed_ids),
+            user=self.env._("User:"),
+            uuid=self.env.uid,
         )
 
         raise AccessError(main_msg + extra)
