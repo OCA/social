@@ -202,7 +202,8 @@ class MailTrackingEmail(models.Model):
             "The requested operation cannot be completed due to security "
             "restrictions. Please contact your system administrator.\n\n"
         )
-        detail = f"(Document type: {self.env._(self._description)}, Operation: {self.env._(operation)})"
+        document_type = f"(Document type: {self.env._(self._description)})"
+        operation_name = f", Operation: {self.env._(operation)}"
 
         extra = " - ({records} {disallowed_ids}, {user} {uuid})".format(
             records=self.env._("Records:"),
@@ -211,7 +212,7 @@ class MailTrackingEmail(models.Model):
             uuid=self.env._(self.env.uid),
         )
 
-        raise AccessError(main_msg + detail + extra)
+        raise AccessError(main_msg + document_type, operation_name + extra)
 
     def read(self, fields=None, load="_classic_read"):
         """Override to explicitly call check_access_rule, that is not called
