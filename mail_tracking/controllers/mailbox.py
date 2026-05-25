@@ -6,7 +6,7 @@ from odoo.addons.mail.controllers.mailbox import MailboxController
 
 
 class MailTrackingMailBoxController(MailboxController):
-    @route("/mail/failed/messages", methods=["POST"], type="json", auth="user")
+    @route("/mail/failed/messages", methods=["POST"], type="jsonrpc", auth="user")
     def discuss_failed_messages(
         self, search_term=None, before=None, after=None, limit=30, around=None
     ):

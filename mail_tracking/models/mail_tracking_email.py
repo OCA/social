@@ -145,14 +145,14 @@ class MailTrackingEmail(models.Model):
         if not self.ids or self.env.user.has_group("base.group_system"):
             return self.ids
         # Override ORM to get the values directly
-        self._cr.execute(
+        self.env.cr.execute(
             """
             SELECT id, mail_message_id, partner_id
             FROM mail_tracking_email WHERE id IN %s
             """,
             (tuple(self.ids),),
         )
-        msg_linked = self._cr.fetchall()
+        msg_linked = self.env.cr.fetchall()
         if not msg_linked:
             return []
         _, msg_ids, partner_ids = zip(*msg_linked, strict=True)
@@ -206,7 +206,7 @@ class MailTrackingEmail(models.Model):
             )
             % {"desc": self._description, "operation": operation}
             + " - ({} {}, {} {})".format(
-                _("Records:"), list(disallowed_ids), _("User:"), self._uid
+                _("Records:"), list(disallowed_ids), _("User:"), self.env.uid
             )
         )
 
@@ -353,9 +353,9 @@ class MailTrackingEmail(models.Model):
         else:
             values.update(
                 {
-                    "error_smtp_server": tools.ustr(smtp_server),
+                    "error_smtp_server": smtp_server,
                     "error_type": exception.__class__.__name__,
-                    "error_description": tools.ustr(exception),
+                    "error_description": exception,
                 }
             )
             self.sudo()._partners_email_bounced_set("error")

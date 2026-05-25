@@ -5,7 +5,7 @@
 from email.utils import getaddresses
 
 from odoo import _, api, fields, models
-from odoo.osv import expression
+from odoo.fields import Domain
 from odoo.tools import email_split
 
 
@@ -20,7 +20,7 @@ class MailMessage(models.Model):
     mail_tracking_ids = fields.One2many(
         comodel_name="mail.tracking.email",
         inverse_name="mail_message_id",
-        auto_join=True,
+        bypass_search_access=True,
         string="Mail Trackings",
     )
     mail_tracking_needs_action = fields.Boolean(

@@ -10,7 +10,7 @@ class MailResendMessage(models.TransientModel):
     @api.model
     def default_get(self, fields):
         rec = super().default_get(fields)
-        message_id = self._context.get("mail_message_to_resend")
+        message_id = self.env.context.get("mail_message_to_resend")
         if not message_id:
             return rec
         mail_message = self.env["mail.message"].browse(message_id)
