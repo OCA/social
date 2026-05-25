@@ -5,7 +5,7 @@
 
 from email.utils import getaddresses
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.osv import expression
 from odoo.tools import email_split
 
@@ -113,19 +113,21 @@ class MailMessage(models.Model):
     def _partner_tracking_status_human_get(self, status):
         """Translations for tracking statuses to be used on qweb"""
         statuses = {
-            "waiting": _("Waiting"),
-            "error": _("Error"),
-            "sent": _("Sent"),
-            "delivered": _("Delivered"),
-            "opened": _("Opened"),
-            "unknown": _("Unknown"),
+            "waiting": self.env._("Waiting"),
+            "error": self.env._("Error"),
+            "sent": self.env._("Sent"),
+            "delivered": self.env._("Delivered"),
+            "opened": self.env._("Opened"),
+            "unknown": self.env._("Unknown"),
         }
-        return _("Status: %s") % statuses[status]
+        return self.env._("Status: %s") % statuses[status]
 
     @api.model
     def _get_error_description(self, tracking):
         """Translations for error descriptions to be used on qweb"""
-        descriptions = {"no_recipient": _("The partner doesn't have a defined email")}
+        descriptions = {
+            "no_recipient": self.env._("The partner doesn't have a defined email")
+        }
         return descriptions.get(tracking.error_type, tracking.error_description)
 
     def tracking_status(self):
