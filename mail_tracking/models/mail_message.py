@@ -5,7 +5,6 @@
 from email.utils import getaddresses
 
 from odoo import _, api, fields, models
-from odoo.fields import Domain
 from odoo.tools import email_split
 
 
