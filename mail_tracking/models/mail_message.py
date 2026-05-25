@@ -121,7 +121,7 @@ class MailMessage(models.Model):
             "unknown": self.env._("Unknown"),
         }
         status = statuses[status]
-        return "Status: {status}".format(self.env._(status))
+        return f"Status: {self.env._(status)}"
 
     @api.model
     def _get_error_description(self, tracking):
