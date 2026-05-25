@@ -414,7 +414,7 @@ class MailTrackingEmail(models.Model):
         if method and callable(method):
             return method(self, metadata)
         else:  # pragma: no cover
-            _logger.info("Unknown event type: %s" % event_type)
+            _logger.info(f"Unknown event type: {event_type}")
         return False
 
     def _concurrent_events(self, event_type, metadata):

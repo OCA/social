@@ -1,7 +1,7 @@
 /* @odoo-module */
 
-import { ThreadService } from "@mail/core/common/thread_service";
-import { patch } from "@web/core/utils/patch";
+import {ThreadService} from "@mail/core/common/thread_service";
+import {patch} from "@web/core/utils/patch";
 
 // As in the original
 const FETCH_LIMIT = 30;

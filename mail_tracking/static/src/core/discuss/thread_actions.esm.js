@@ -1,8 +1,8 @@
 /* @odoo-module */
 
-import {_t} from "@web/core/l10n/translation";
-import {ConfirmationDialog} from "@web/core/confirmation_dialog/confirmation_dialog";
 import {threadActionsRegistry} from "@mail/core/common/thread_actions";
+import {ConfirmationDialog} from "@web/core/confirmation_dialog/confirmation_dialog";
+import {_t} from "@web/core/l10n/translation";
 
 threadActionsRegistry.add("mark-failed-all-reviewed", {
     condition(component) {
