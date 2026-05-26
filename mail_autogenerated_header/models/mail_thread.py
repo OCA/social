@@ -42,5 +42,5 @@ class MailThread(models.AbstractModel):
             and message["Auto-Submitted"] != "no"
             or message["X-Auto-Response-Suppress"]
             and set(message["X-Auto-Response-Suppress"].split(", "))
-            & set(["AutoReply", "All"])
+            & {"AutoReply", "All"}
         )
