@@ -23,10 +23,7 @@
                 <span> Gateway</span>
             </button>
         </xpath>
-        <xpath
-            expr="//t[@t-if='state.composerType']/SuggestedRecipientsList"
-            position="before"
-        >
+        <xpath expr="//t[@t-if='state.composerType']/Composer" position="before">
             <t
                 t-if="state.composerType === 'gateway' and state.thread.gateway_followers.length"
             >
@@ -47,15 +44,6 @@
                     </t>
                 </div>
             </t>
-            <t t-set="type" t-value="type === 'gateway' ? 'gateway' : type" />
-        </xpath>
-        <xpath
-            expr="//t[@t-if='state.composerType']/SuggestedRecipientsList"
-            position="attributes"
-        >
-            <attribute
-                name="t-if"
-            >state.composerType !== 'note' and state.thread.recipients.length > 0 and state.composerType !== 'gateway'</attribute>
         </xpath>
     </t>
 </templates>

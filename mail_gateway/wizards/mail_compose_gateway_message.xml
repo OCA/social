@@ -27,11 +27,8 @@
                 <attribute name="invisible">1</attribute>
                 <attribute name="required">0</attribute>
             </field>
-            <xpath
-                expr="//widget[@name='mail_composer_recipient_list']/.."
-                position="attributes"
-            >
-                <attribute name="invisible">True</attribute>
+            <xpath expr="//field[@name='partner_ids'][1]/.." position="attributes">
+                <attribute name="invisible">1</attribute>
             </xpath>
         </field>
     </record>

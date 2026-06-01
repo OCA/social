@@ -26,17 +26,17 @@ class MailNotification(models.Model):
     def _set_read_gateway(self):
         self.sudo().write({"is_read": True, "read_date": fields.Datetime.now()})
 
-    def _to_store(self, store: Store, /):
-        result = super()._to_store(store)
-        for record in self:
-            store.add(
-                record,
-                {
-                    "gateway_type": record.gateway_type,
-                    "channel_name": record.gateway_channel_id.name,
-                },
-            )
-        return result
+    def _to_store_defaults(self, target):
+        return super()._to_store_defaults(target) + [
+            "gateway_type",
+            Store.One(
+                "gateway_channel_id",
+                [
+                    "name",
+                    Store.Attr("display_name", predicate=lambda p: not p.name),
+                ],
+            ),
+        ]
 
     def send_gateway(self, auto_commit=False, raise_exception=False, parse_mode="HTML"):
         for record in self:

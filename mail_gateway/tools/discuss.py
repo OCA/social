@@ -3,14 +3,18 @@
 
 from odoo.addons.mail.tools.discuss import Store
 
-original_one_id = Store.one_id
+original_get_id = Store.One._get_id
 
 
-def extended_one_id(record, /, *, as_thread=False):
-    result = original_one_id(record, as_thread=as_thread)
-    if result and record._name == "res.partner":
-        result["gateway_channels"] = record.sudo().gateway_channel_ids.mail_format()
+def extended_get_id(self):
+    result = original_get_id(self)
+    if self.records and self.records._name == "res.partner":
+        if isinstance(result, int):
+            result = {"id": result}
+        result["gateway_channels"] = (
+            self.records.sudo().gateway_channel_ids.mail_format()
+        )
     return result
 
 
-Store.one_id = staticmethod(extended_one_id)
+Store.One._get_id = extended_get_id

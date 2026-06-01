@@ -6,9 +6,9 @@ patch(ChannelMemberList.prototype, {
         if (!this.canOpenChatWith(member)) {
             return;
         }
-        if (!this.avatarCard.isOpen && member.persona.userId) {
+        if (!this.avatarCard.isOpen && member.partner_id.main_user_id?.id) {
             this.avatarCard.open(ev.currentTarget, {
-                id: member.persona.userId,
+                id: member.partner_id.main_user_id.id,
             });
         }
     },

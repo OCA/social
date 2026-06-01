@@ -3,9 +3,6 @@
 
 
 from odoo import api, fields, models
-from odoo.tests import RecordCapturer
-
-from odoo.addons.mail.tools.discuss import Store
 
 
 class MailMessage(models.Model):
@@ -81,47 +78,53 @@ class MailMessage(models.Model):
                     0
                 ].gateway_channel_id
 
-    def _to_store(
-        self,
-        store: Store,
-        /,
-        *,
-        fields=None,
-        format_reply=True,
-        msg_vals=None,
-        for_current_user=False,
-        add_followers=False,
-        followers=None,
-    ):
-        result = super()._to_store(
-            store,
-            fields=fields,
-            format_reply=format_reply,
-            msg_vals=msg_vals,
-            for_current_user=for_current_user,
-            add_followers=add_followers,
-            followers=followers,
-        )
-        for record in self:
-            store.add(
-                record,
-                {
-                    "gateway_type": record.gateway_type,
-                    "gateway_channel_data": record.gateway_channel_data,
-                    "gateway_thread_data": record.gateway_thread_data,
-                },
-            )
-        return result
+    # def _to_store(
+    #     self,
+    #     store,
+    #     fields,
+    #     *,
+    #     format_reply=True,
+    #     msg_vals=False,
+    #     add_followers=False,
+    #     followers=None,
+    # ):
+    #     result = super()._to_store(
+    #         store,
+    #         fields,
+    #         format_reply=format_reply,
+    #         msg_vals=msg_vals,
+    #         add_followers=add_followers,
+    #         followers=followers,
+    #     )
+    #
+    #     extra_fields = {
+    #         "gateway_type",
+    #         "gateway_channel_data",
+    #         "gateway_thread_data",
+    #     }
+    #
+    #     for message in self:
+    #         values = {}
+    #         if "gateway_type" in extra_fields:
+    #             values["gateway_type"] = message.gateway_type
+    #         if "gateway_channel_data" in extra_fields:
+    #             values["gateway_channel_data"] = message.gateway_channel_data
+    #         if "gateway_thread_data" in extra_fields:
+    #             values["gateway_thread_data"] = message.gateway_thread_data
+    #
+    #         store.add(message, values)
+    #
+    #     return result
 
     def _send_to_gateway_thread(self, gateway_channel_id):
         chat_id = gateway_channel_id.gateway_id._get_channel_id(
             gateway_channel_id.gateway_token
         )
         channel = self.env["discuss.channel"].browse(chat_id)
-        with RecordCapturer(
-            self.env["mail.notification"], [("gateway_channel_id", "=", channel.id)]
-        ) as capt:
-            channel.message_post(**self._get_gateway_thread_message_vals())
+        messages = channel.message_post(**self._get_gateway_thread_message_vals())
+        notification = messages.notification_ids.filtered(
+            lambda n: n.gateway_channel_id == channel
+        )
         if not self.gateway_type:
             self.gateway_type = gateway_channel_id.gateway_id.gateway_type
         notification_vals = {
@@ -131,7 +134,6 @@ class MailMessage(models.Model):
             "notification_type": "gateway",
             "gateway_type": gateway_channel_id.gateway_id.gateway_type,
         }
-        notification = capt.records
         if notification:
             # Set the same gateway_message_id for both notifications.
             # When the webhook is received, both notifications must be updated.

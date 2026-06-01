@@ -11,5 +11,5 @@ class ResUsers(models.Model):
 
     def _init_messaging(self, store):
         result = super()._init_messaging(store)
-        store.add({"gateways": self.gateway_ids.gateway_info()})
+        store.add_global_values(gateways=self.gateway_ids.gateway_info())
         return result

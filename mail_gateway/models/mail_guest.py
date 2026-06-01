@@ -12,9 +12,5 @@ class MailGuest(models.Model):
     gateway_id = fields.Many2one("mail.gateway")
     gateway_token = fields.Char()
 
-    def _to_store(self, store: Store, /, *, fields=None):
-        result = super()._to_store(store, fields=fields)
-        if not fields or "gateway_id" in fields:
-            for record in self:
-                store.add(record, {"gateway": {"id": record.gateway_id.id}})
-        return result
+    def _to_store_defaults(self, target):
+        return super()._to_store_defaults(target) + [Store.One("gateway_id")]

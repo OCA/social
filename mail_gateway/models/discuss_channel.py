@@ -3,9 +3,7 @@
 
 import base64
 
-from odoo import api, fields, models
-
-from odoo.addons.mail.tools.discuss import Store
+from odoo import fields, models
 
 
 class MailChannel(models.Model):
@@ -28,24 +26,28 @@ class MailChannel(models.Model):
         required=False,
     )
 
-    def _to_store(self, store: Store):
-        result = super()._to_store(store)
-        if not self:
-            return result
-        for record in self:
-            store.add(
-                record,
-                {
-                    "gateway": {
-                        "id": record.gateway_id.id,
-                        "name": record.gateway_id.name,
-                        "type": record.gateway_id.gateway_type,
-                    },
-                    "gateway_name": record.gateway_id.name,
-                    "gateway_id": record.gateway_id.id,
-                },
-            )
-        return result
+    # def _to_store(self, store: Store, fields):
+    #     super()._to_store(store, fields)
+    #     if not self:
+    #         return
+    #
+    #     for record in self:
+    #         gateway = record.gateway_id
+    #         if not gateway:
+    #             continue
+    #
+    #         store.add(
+    #             record,
+    #             {
+    #                 "gateway": {
+    #                     "id": gateway.id,
+    #                     "name": gateway.name,
+    #                     "type": gateway.gateway_type,
+    #                 },
+    #                 "gateway_name": gateway.name,
+    #                 "gateway_id": gateway.id,
+    #             },
+    #         )
 
     def _generate_avatar_gateway(self):
         # We will use this function to set a default avatar on each module
@@ -59,7 +61,6 @@ class MailChannel(models.Model):
             return False
         return base64.b64encode(avatar.encode())
 
-    @api.returns("mail.message", lambda value: value.id)
     def message_post(
         self, *, message_type="notification", gateway_type=False, **kwargs
     ):

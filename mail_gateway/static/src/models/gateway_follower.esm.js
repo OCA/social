@@ -1,4 +1,4 @@
-import {Record} from "@mail/core/common/record";
+import {Record, fields} from "@mail/core/common/record";
 
 export class GatewayFollower extends Record {
     static id = "id";
@@ -16,8 +16,8 @@ export class GatewayFollower extends Record {
     id;
     /** @type {String} */
     name;
-    partner = Record.one("Persona");
-    channel = Record.one("GatewayChannel");
+    partner = fields.One("res.partner");
+    channel = fields.One("GatewayChannel");
 }
 
 GatewayFollower.register();

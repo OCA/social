@@ -6,7 +6,7 @@ import logging
 
 from odoo.http import Controller, request, route
 
-from odoo.addons.mail.models.discuss.mail_guest import add_guest_to_context
+from odoo.addons.mail.tools.discuss import add_guest_to_context
 
 _logger = logging.getLogger(__name__)
 

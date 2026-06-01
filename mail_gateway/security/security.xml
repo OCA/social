@@ -3,11 +3,14 @@
     <record model="ir.module.category" id="module_category_gateway">
         <field name="name">Gateway</field>
     </record>
+    <record model="res.groups.privilege" id="gateway_privilege">
+        <field name="name">Gateway</field>
+        <field name="category_id" ref="module_category_gateway" />
+    </record>
     <record model="res.groups" id="gateway_user">
         <field name="name">User</field>
-        <field name="category_id" ref="module_category_gateway" />
         <field
-            name="users"
+            name="user_ids"
             eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
         />
     </record>

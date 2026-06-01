@@ -1,10 +1,10 @@
-import {Persona} from "@mail/core/common/persona_model";
-import {Record} from "@mail/core/common/record";
+import {ResPartner} from "@mail/core/common/res_partner_model";
+import {fields} from "@mail/core/common/record";
 import {patch} from "@web/core/utils/patch";
 
-patch(Persona.prototype, {
+patch(ResPartner.prototype, {
     setup() {
         super.setup();
-        this.gateway_channels = Record.many("GatewayChannel");
+        this.gateway_channels = fields.Many("GatewayChannel");
     },
 });

@@ -63,13 +63,10 @@ class ResPartnerGatewayChannel(models.Model):
                 f"{gateway_channel.partner_id.display_name} ({gateway_channel.name})"
             )
 
-    _sql_constraints = [
-        (
-            "unique_partner_gateway",
-            "UNIQUE(partner_id, gateway_id)",
-            "Partner can only have one configuration for each gateway.",
-        ),
-    ]
+    _unique_partner_gateway = models.Constraint(
+        "UNIQUE(partner_id, gateway_id)",
+        "Partner can only have one configuration for each gateway.",
+    )
 
     def mail_format(self):
         return [r._mail_format() for r in self]

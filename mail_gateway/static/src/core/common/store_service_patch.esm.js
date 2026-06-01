@@ -1,12 +1,18 @@
 import {Store} from "@mail/core/common/store_service";
+import {Thread} from "@mail/core/common/thread_model";
 import {patch} from "@web/core/utils/patch";
 
-patch(Store.prototype, {
-    async fetchData(thread, ...args) {
-        const result = await super.fetchData(thread, ...args);
-        thread.gateway_followers = result.gateway_followers;
+patch(Thread.prototype, {
+    async fetchThreadData() {
+        const result = await super.fetchThreadData(...arguments);
+        if (result?.gateway_followers !== undefined) {
+            this.gateway_followers = result.gateway_followers;
+        }
         return result;
     },
+});
+
+patch(Store.prototype, {
     async getMessagePostParams(params) {
         const post_params = await super.getMessagePostParams(...arguments);
         if (params.thread.gateway_notifications) {
