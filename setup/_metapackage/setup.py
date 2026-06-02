@@ -32,6 +32,7 @@ setuptools.setup(
         'odoo-addon-mail_disable_follower_notification>=16.0dev,<16.1dev',
         'odoo-addon-mail_discuss_security>=16.0dev,<16.1dev',
         'odoo-addon-mail_drop_target>=16.0dev,<16.1dev',
+        'odoo-addon-mail_edit>=16.0dev,<16.1dev',
         'odoo-addon-mail_gateway>=16.0dev,<16.1dev',
         'odoo-addon-mail_gateway_telegram>=16.0dev,<16.1dev',
         'odoo-addon-mail_gateway_whatsapp>=16.0dev,<16.1dev',
