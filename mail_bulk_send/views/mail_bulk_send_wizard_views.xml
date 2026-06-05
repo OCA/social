@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mail_bulk_send_wizard_view_form" model="ir.ui.view">
+        <field name="name">mail.bulk.send.wizard.form</field>
+        <field name="model">mail.bulk.send.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Send Emails in Bulk">
+                <field name="active_model" invisible="1" />
+                <field name="template_locked" invisible="1" />
+                <field name="active_ids_json" invisible="1" />
+                <group>
+                    <field
+                        name="template_id"
+                        domain="[('model', '=', active_model)]"
+                        attrs="{'readonly': [('template_locked', '=', True)]}"
+                    />
+                    <field name="record_count" string="Records to Send" />
+                </group>
+                <footer>
+                    <button
+                        name="action_send"
+                        type="object"
+                        string="Send Emails"
+                        class="btn-primary"
+                    />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
