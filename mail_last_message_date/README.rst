@@ -101,6 +101,14 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
+.. |maintainer-nobuQuartile| image:: https://github.com/nobuQuartile.png?size=40px
+    :target: https://github.com/nobuQuartile
+    :alt: nobuQuartile
+
+Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+
+|maintainer-nobuQuartile| 
+
 This module is part of the `OCA/social <https://github.com/OCA/social/tree/15.0/mail_last_message_date>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

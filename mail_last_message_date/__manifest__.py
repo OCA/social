@@ -7,6 +7,7 @@
     "category": "Mail",
     "summary": "Track last message date on models using the mixin",
     "author": "Quartile, Odoo Community Association (OCA)",
+    "maintainers": ["nobuQuartile"],
     "website": "https://github.com/OCA/social",
     "license": "AGPL-3",
     "depends": ["mail"],
