@@ -16,6 +16,14 @@ def migrate(env, version):
 
     """,
     )
+    # Adjust sequence
+    env.cr.execute("SELECT max(id) FROM mailing_subscription_optout")
+    maxid = env.cr.fetchone()[0]
+    openupgrade.logged_query(
+        env.cr,
+        "SELECT setval('mailing_subscription_optout_id_seq', %s, true)",
+        (maxid,),
+    )
     # For mailing lists, get the last unsubscription for every mail and create
     # a proper mailing.subscription record
     openupgrade.logged_query(
