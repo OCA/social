@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.attachment_mimetype</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mail.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='emails']" position="inside">
+                <div class="col-12 col-lg-6 o_setting_box">
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <label
+                            for="attachment_allowed_mimetypes"
+                            string="Allowed Attachment Types"
+                        />
+                        <div class="text-muted">
+                            Allow only specific MIME types to be uploaded as attachments.
+                            Leave empty to allow all file types.
+                        </div>
+                        <div class="content-group">
+                            <div class="mt16">
+                                <field
+                                    name="attachment_allowed_mimetypes"
+                                    placeholder="e.g., image/png,application/pdf (leave empty to allow all)"
+                                    class="o_light_label"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

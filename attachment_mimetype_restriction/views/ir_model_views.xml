@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_model_form_inherit_attachment_mimetype" model="ir.ui.view">
+        <field name="name">ir.model.form.inherit.attachment.mimetype</field>
+        <field name="model">ir.model</field>
+        <field name="inherit_id" ref="base.view_model_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet/group" position="after">
+                <group
+                    string="Attachment Validation"
+                    name="attachment_validation"
+                    attrs="{'invisible': [('transient', '=', True)]}"
+                >
+                    <field
+                        name="attachment_allowed_mimetypes"
+                        placeholder="e.g., image/png,application/pdf (leave empty to use global config)"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
