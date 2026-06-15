@@ -14,7 +14,8 @@ class TestMailEmbedImage(common.TransactionCase):
         super(TestMailEmbedImage, cls).setUpClass()
         cls.company = cls.env.ref("base.main_company")
         base_url = cls.env["ir.config_parameter"].get_param("web.base.url")
-        cls.image_url = base_url + "/mail_embed_image/static/description/icon.png"
+        cls.image_relative_url = "/mail_embed_image/static/description/icon.png"
+        cls.image_url = base_url + cls.image_relative_url
         cls.image_content = get(cls.image_url, timeout=10).content
         cls.email_from = "test@example.com"
         cls.email_to = "test@example.com"
@@ -33,12 +34,14 @@ class TestMailEmbedImage(common.TransactionCase):
             this is an email
             <img src="base64: %s"></img>
             <img src="%s"></img>
+            <img src="%s"></img>
             </div>"""
                 % (
                     # won't be hit because we ignore embedded images
                     base64.b64encode(self.image_content).decode("utf-8"),
-                    # dito, not uploaded content
+                    # ditto, not uploaded content
                     self.image_url,
+                    self.image_relative_url,
                 )
             )
         )
@@ -101,16 +104,16 @@ class TestMailEmbedImage(common.TransactionCase):
                         "//img[starts-with(@src, 'cid:')]"
                     )
                 )
-        # verify 1 replaced image
-        self.assertEqual(images_in_mail, 1)
-        # verify 1 attachment present
+        # verify 2 replaced image
+        self.assertEqual(images_in_mail, 2)
+        # verify 2 attachments present
         self.assertEqual(
             [
                 x.get_content_type()
                 for x in res.walk()
                 if x.get_content_type().startswith("image/")
             ],
-            ["image/png"],
+            ["image/png", "image/png"],
         )
 
     def test_mail_embed_image_option_data(self):
@@ -131,7 +134,7 @@ class TestMailEmbedImage(common.TransactionCase):
                     )
                 )
         # verify 2 replaced image
-        self.assertEqual(images_in_mail, 1)
+        self.assertEqual(images_in_mail, 2)
         # verify 0 attachment present
         self.assertEqual(
             [

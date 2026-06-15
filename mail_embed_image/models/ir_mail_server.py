@@ -119,9 +119,11 @@ class IrMailServer(models.Model):
         # image injections
         for img in root.xpath(
             ".//img[starts-with(@src, '%s')]"
-            "| .//img[starts-with(@src, '/web/image')]" % (base_url)
+            "| .//img[starts-with(@src, '/')]" % (base_url)
         ):
             image_path = img.get("src")
+            if image_path.startswith("/"):
+                image_path = base_url + image_path
             try:
                 response = requests.get(image_path, timeout=10)
                 _logger.debug("Fetching image from %s", image_path)
