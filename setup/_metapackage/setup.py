@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-social Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-attachment_mimetype_restriction>=15.0dev,<15.1dev',
         'odoo-addon-base_search_mail_content>=15.0dev,<15.1dev',
         'odoo-addon-base_user_signature>=15.0dev,<15.1dev',
         'odoo-addon-email_template_qweb>=15.0dev,<15.1dev',
