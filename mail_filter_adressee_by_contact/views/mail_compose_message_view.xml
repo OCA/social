@@ -14,6 +14,9 @@
                     />
                 </div>
             </field>
+            <field name="partner_ids" position="attributes">
+                <attribute name="domain">partner_ids_domain</attribute>
+            </field>
         </field>
     </record>
 </odoo>

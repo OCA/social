@@ -28,9 +28,13 @@ Mail filter adressee by partner contacts and users
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-Filter adresses by partner contacts and users. It will be applied on
-mails from the following models : - account.move - sale.order -
-purchase.order - stock.picking
+Filter addresses by partner contacts and users. It will be applied on
+mails from the following models :
+
+-  account.move
+-  sale.order
+-  purchase.order
+-  stock.picking
 
 **Table of contents**
 
