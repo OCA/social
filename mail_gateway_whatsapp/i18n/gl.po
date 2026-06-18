@@ -19,9 +19,12 @@ msgstr ""
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid ""
-"<span>Define the values of the fields <b>Webhook Key</b> and <b>Whatsapp Security Key</b>.\n"
-"                            You should set some random value of your choice for this fields.\n"
-"                            Ensure that facebook will be able to comunicate with your server.</span>"
+"<span>Define the values of the fields <b>Webhook Key</b> and <b>Whatsapp "
+"Security Key</b>.\n"
+"                            You should set some random value of your choice "
+"for this fields.\n"
+"                            Ensure that facebook will be able to comunicate "
+"with your server.</span>"
 msgstr ""
 "<span>Escriba os valores nos campo <b>Clave Webhook</b> e <b>Clave de "
 "seguridade de Whatsapp</b>\n"
@@ -88,6 +91,11 @@ msgstr ""
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields.selection,name:mail_gateway_whatsapp.selection__mail_whatsapp_template__state__archived
 msgid "Archived"
+msgstr ""
+
+#. module: mail_gateway_whatsapp
+#: model:ir.model,name:mail_gateway_whatsapp.model_mail_guest_manage
+msgid "Assign gateway guest to a partner"
 msgstr ""
 
 #. module: mail_gateway_whatsapp
@@ -201,8 +209,8 @@ msgstr "Copia a versión da API no campo<b>Versión de Whatsapp</b>."
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid ""
-"Copy the phone identification number to the field <b>Whastapp From phone</b>"
-" field."
+"Copy the phone identification number to the field <b>Whastapp From phone</b> "
+"field."
 msgstr ""
 "Copie o identificador do número de teléfono no campo <b>Whatsapp desde o "
 "teléfono</b>."
@@ -482,9 +490,12 @@ msgstr "Se está marcado, algunhas mensaxes teñen un erro de envío."
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid ""
-"If no error is raised, refresh this gateway data, and you should see that it is integrated.\n"
-"                                You should be able to receive and send messages.\n"
-"                                If an error is raised, check that the fields are filled properly and that facebook server is able to access your server."
+"If no error is raised, refresh this gateway data, and you should see that it "
+"is integrated.\n"
+"                                You should be able to receive and send "
+"messages.\n"
+"                                If an error is raised, check that the fields "
+"are filled properly and that facebook server is able to access your server."
 msgstr ""
 "Se non se produce ningún erro, actualice os datos do Gateway e verá que está "
 "integrada. \n"
@@ -496,8 +507,8 @@ msgstr ""
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__phone_sanitized_blacklisted
 msgid ""
-"If the sanitized phone number is on the blacklist, the contact won't receive"
-" mass mailing sms anymore, from any list"
+"If the sanitized phone number is on the blacklist, the contact won't receive "
+"mass mailing sms anymore, from any list"
 msgstr ""
 "Se o número de teléfono saneado está na blacklist, o contacto non recibirá o "
 "envío masivo de sms nunca mñas, de ningunha lista"
@@ -773,8 +784,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid ""
 "On the wizard, fill the URL field with <b>Webhook URL</b> field of the "
-"gateway. For the verification identifier, use the <b>Whatsapp Security "
-"Key</b> field."
+"gateway. For the verification identifier, use the <b>Whatsapp Security Key</"
+"b> field."
 msgstr ""
 "No wizard, encha o campo URL co campo <b>Webhook URL</b> do Gateway. Para a "
 "verificación de identidade, use <b>o campo crave de seguridade de Whatsapp</"
@@ -893,7 +904,8 @@ msgstr ""
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid "Select the Whatsapp API on the products of the application"
-msgstr "Seleccione os produtos da aplicación en Whatsapp > Configuración da API"
+msgstr ""
+"Seleccione os produtos da aplicación en Whatsapp > Configuración da API"
 
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
@@ -931,8 +943,8 @@ msgstr "Mostrar chat"
 #. module: mail_gateway_whatsapp
 #: model_terms:ir.ui.view,arch_db:mail_gateway_whatsapp.mail_gateway_form_view
 msgid ""
-"Show the secret key of the application and copy it to the <b>Webhook "
-"secret</b> field."
+"Show the secret key of the application and copy it to the <b>Webhook secret</"
+"b> field."
 msgstr ""
 "Pulse en clave secreta da aplicación e copiela no campo<b>Webhook secret</b>."
 
