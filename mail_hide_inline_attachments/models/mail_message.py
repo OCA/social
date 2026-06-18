@@ -48,14 +48,14 @@ class MailMessage(models.Model):
 
         return inline_attachment_ids
 
-    def _message_format(self, fnames, format_reply=True, legacy=False):
+    def _message_format(self, fnames, format_reply=True):
         """Override para filtrar anexos inline do campo attachment_ids.
 
         Anexos que são referenciados inline no body (imagens) não devem
         aparecer na lista de anexos do mail.message.
         """
         vals_list = super()._message_format(
-            fnames, format_reply=format_reply, legacy=legacy
+            fnames, format_reply=format_reply
         )
 
         # Processa em batch para melhor performance
