@@ -5,6 +5,7 @@ import logging
 import re
 
 import lxml.html
+from lxml import etree
 
 from odoo import models
 from odoo.tools import ustr
@@ -16,75 +17,57 @@ class MailMessage(models.Model):
     _inherit = "mail.message"
 
     def _get_inline_attachment_ids(self):
-        """Identifica IDs de anexos que são referenciados inline no body.
+        """Return the ids of attachments rendered inline in the body.
 
-        Retorna um set com os IDs dos anexos que aparecem como imagens
-        inline no body da mensagem (referências /web/image/{id}).
+        Inline images are rendered through ``/web/image/<id>`` URLs, so the
+        attachments behind those URLs are considered inline. The substring
+        guard avoids parsing the body when no inline image can be present.
         """
         self.ensure_one()
         inline_attachment_ids = set()
 
-        if not self.body:
+        if not self.body or "/web/image/" not in self.body:
             return inline_attachment_ids
 
         try:
             root = lxml.html.fromstring(ustr(self.body))
-            for node in root.iter("img"):
-                src = node.get("src", "")
-                # Pattern matches:
-                # - /web/image/{id}
-                # - /web/image/{id}?access_token=...
-                # - /web/image/{id}/...
-                matches = re.findall(r"/web/image/(\d+)", src)
-                for mid in matches:
-                    inline_attachment_ids.add(int(mid))
-        except Exception as e:
+        except (etree.ParserError, etree.XMLSyntaxError, ValueError) as error:
             _logger.warning(
-                "Erro ao processar body para detectar anexos inline "
-                "na mensagem %d: %s",
+                "Could not parse body of message %s for inline images: %s",
                 self.id,
-                e,
+                error,
             )
+            return inline_attachment_ids
+
+        for node in root.iter("img"):
+            src = node.get("src", "")
+            for attachment_id in re.findall(r"/web/image/(\d+)", src):
+                inline_attachment_ids.add(int(attachment_id))
 
         return inline_attachment_ids
 
     def _message_format(self, fnames, format_reply=True):
-        """Override para filtrar anexos inline do campo attachment_ids.
+        """Drop inline attachments from the formatted attachment list.
 
-        Anexos que são referenciados inline no body (imagens) não devem
-        aparecer na lista de anexos do mail.message.
+        Attachments referenced inline in the body are already rendered in the
+        body and must not show up as attachment chips. Messages without
+        attachment chips are skipped to avoid needless body parsing.
         """
-        vals_list = super()._message_format(
-            fnames, format_reply=format_reply
-        )
-
-        # Processa em batch para melhor performance
-        message_ids = [vals["id"] for vals in vals_list]
-        messages = self.browse(message_ids)
+        vals_list = super()._message_format(fnames, format_reply=format_reply)
 
         for vals in vals_list:
-            message_id = vals["id"]
-            message = messages.filtered(lambda m, mid=message_id: m.id == mid)
-            if not message:
+            formatted_attachments = vals.get("attachment_ids")
+            if not formatted_attachments:
                 continue
 
-            inline_attachment_ids = message._get_inline_attachment_ids()
+            inline_attachment_ids = self.browse(vals["id"])._get_inline_attachment_ids()
+            if not inline_attachment_ids:
+                continue
 
-            if inline_attachment_ids and vals.get("attachment_ids"):
-                # Filtra anexos inline da lista de anexos formatados
-                filtered_attachments = [
-                    att
-                    for att in vals["attachment_ids"]
-                    if att.get("id") not in inline_attachment_ids
-                ]
-                vals["attachment_ids"] = filtered_attachments
-                _logger.debug(
-                    "Filtrados %d anexos inline da mensagem %d "
-                    "(IDs: %s). Restaram %d anexos.",
-                    len(inline_attachment_ids),
-                    message.id,
-                    sorted(inline_attachment_ids),
-                    len(filtered_attachments),
-                )
+            vals["attachment_ids"] = [
+                attachment
+                for attachment in formatted_attachments
+                if attachment.get("id") not in inline_attachment_ids
+            ]
 
         return vals_list

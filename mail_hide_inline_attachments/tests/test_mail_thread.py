@@ -189,3 +189,47 @@ class TestMailThreadInlineAttachments(TransactionCase):
         self.assertFalse(inline2.res_id)
         self.assertEqual(regular.res_model, "res.partner")
         self.assertEqual(regular.res_id, self.partner.id)
+
+    def test_message_format_hides_inline_attachment(self):
+        """message_format must not list attachments rendered inline.
+
+        Also a regression guard: message_format exercises _message_format,
+        which previously crashed by forwarding an unsupported `legacy` kwarg.
+        """
+        message = self.partner.message_post(
+            body='<p>Inline image: <img src="cid:fmt_cid"/></p>',
+            message_type="comment",
+            attachments=[("inline.png", self.png_data, {"cid": "fmt_cid"})],
+        )
+        inline_attachment = message.attachment_ids.filtered(
+            lambda a: a.name == "inline.png"
+        )
+        self.assertTrue(inline_attachment, "Inline attachment should exist")
+
+        formatted = message.message_format()
+        formatted_ids = [att["id"] for att in formatted[0]["attachment_ids"]]
+        self.assertNotIn(
+            inline_attachment.id,
+            formatted_ids,
+            "Inline attachment must not be listed by message_format",
+        )
+
+    def test_message_format_keeps_regular_attachment(self):
+        """message_format must still list regular attachments."""
+        message = self.partner.message_post(
+            body="<p>Regular attachment</p>",
+            message_type="comment",
+            attachments=[("regular.pdf", self.pdf_data)],
+        )
+        regular_attachment = message.attachment_ids.filtered(
+            lambda a: a.name == "regular.pdf"
+        )
+        self.assertTrue(regular_attachment, "Regular attachment should exist")
+
+        formatted = message.message_format()
+        formatted_ids = [att["id"] for att in formatted[0]["attachment_ids"]]
+        self.assertIn(
+            regular_attachment.id,
+            formatted_ids,
+            "Regular attachment must be listed by message_format",
+        )
