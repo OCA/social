@@ -6,12 +6,17 @@ class TestMailActivityDefaultAssignee(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.todo_act_type = cls.env.ref("mail.mail_activity_data_todo")
         create_uid = cls.env["ir.model.fields"].search(
             [("name", "=", "create_uid"), ("model", "=", "res.partner")], limit=1
         )
-        cls.todo_act_type.res_model = "res.partner"
-        cls.todo_act_type.default_user_field_id = create_uid.id
+        cls.todo_act_type = cls.env["mail.activity.type"].create(
+            {
+                "name": "Custom To-Do",
+                "category": "default",
+                "res_model": "res.partner",
+                "default_user_field_id": create_uid.id,
+            }
+        )
 
     def test_mail_activity_default_assignee(self):
         odoobot = self.env.ref("base.user_root")
