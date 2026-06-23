@@ -17,33 +17,30 @@ Make emails for to, cc and bcc visible
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/16.0/mail_visible_email
+    :target: https://github.com/OCA/social/tree/18.0/mail_visible_email
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-16-0/social-16-0-mail_visible_email
+    :target: https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_visible_email
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-In Odoo mails it is often unclear who where the other recipients of mails
-received, or what the actual mail addresses where of mails sent.
+In Odoo mails it is often unclear who where the other recipients of
+mails received, or what the actual mail addresses where of mails sent.
 
-This module adds the following fields to mail_message:
-- email_to
-- email_cc
-- email_bcc
+This module adds the following fields to mail_message: - email_to -
+email_cc - email_bcc
 
-For both incoming and outgoing mails, the actual to and cc headers
-from the mails will be stored here. For outgoing mails also the bcc
-header.
+For both incoming and outgoing mails, the actual to and cc headers from
+the mails will be stored here. For outgoing mails also the bcc header.
 
 In case we receive a mail because we received it on an address that was
 in the bcc of the email sent, the address will actually be shown on the
-email_to field. This is because there is no bcc header in an incoming mail,
-we will have the address in the Delivered-To header.
+email_to field. This is because there is no bcc header in an incoming
+mail, we will have the address in the Delivered-To header.
 
 Note that we will only store the unadorned email (without partner name),
 as this will be the relevant part, and the partner names are visible on
@@ -51,11 +48,11 @@ other fields.
 
 For technical reasons this module depends on mail_composer_cc_bcc:
 
-* We need the email_bcc field on mail.mail;
-* The module mail_composer_bcc fundamentally changes the workings of the _send()
-  method on mail.mail. In order not to have to support both methods depending
-  on whether mail_composer_bcc is installed or not, it is easier to just make sure
-  it is installed.
+-  We need the email_bcc field on mail.mail;
+-  The module mail_composer_bcc fundamentally changes the workings of
+   the \_send() method on mail.mail. In order not to have to support
+   both methods depending on whether mail_composer_bcc is installed or
+   not, it is easier to just make sure it is installed.
 
 .. IMPORTANT::
    This is an alpha version, the data model and design can change at any time without warning.
@@ -78,7 +75,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_visible_email%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20mail_visible_email%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -86,19 +83,19 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Therp BV
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Therp BV <https://therp.nl>`_:
+-  `Therp BV <https://therp.nl>`__:
 
-    * Ronald Portier <ronald@therp.nl>
+      -  Ronald Portier <ronald@therp.nl>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -118,6 +115,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-NL66278| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/16.0/mail_visible_email>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/18.0/mail_visible_email>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
