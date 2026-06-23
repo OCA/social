@@ -370,10 +370,14 @@ ul.auto-toc {
 !! source digest: sha256:53373ba10ebe61d982a5d796725296eee83924dc9d4d6aa7e54e0ec9839f59a5
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
 <p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Alpha" src="https://img.shields.io/badge/maturity-Alpha-red.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/18.0/mail_visible_email"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_visible_email"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
-<p>In Odoo mails it is often unclear who where the other recipients of
-mails received, or what the actual mail addresses where of mails sent.</p>
-<p>This module adds the following fields to mail_message: - email_to -
-email_cc - email_bcc</p>
+<p>In Odoo mails it is often unclear who were the other recipients of mails
+received, or what the actual mail addresses were of mails sent.</p>
+<p>This module adds the following fields to mail_message:</p>
+<ul class="simple">
+<li>email_to</li>
+<li>email_cc</li>
+<li>email_bcc</li>
+</ul>
 <p>For both incoming and outgoing mails, the actual to and cc headers from
 the mails will be stored here. For outgoing mails also the bcc header.</p>
 <p>In case we receive a mail because we received it on an address that was
@@ -383,14 +387,10 @@ mail, we will have the address in the Delivered-To header.</p>
 <p>Note that we will only store the unadorned email (without partner name),
 as this will be the relevant part, and the partner names are visible on
 other fields.</p>
-<p>For technical reasons this module depends on mail_composer_cc_bcc:</p>
-<ul class="simple">
-<li>We need the email_bcc field on mail.mail;</li>
-<li>The module mail_composer_bcc fundamentally changes the workings of
-the _send() method on mail.mail. In order not to have to support
-both methods depending on whether mail_composer_bcc is installed or
-not, it is easier to just make sure it is installed.</li>
-</ul>
+<p>As of Odoo 18, <tt class="docutils literal">email_to</tt> and <tt class="docutils literal">email_cc</tt> are native fields on
+<tt class="docutils literal">mail.mail</tt>, so this module no longer depends on
+<tt class="docutils literal">mail_composer_cc_bcc</tt>. The <tt class="docutils literal">email_bcc</tt> field is added to
+<tt class="docutils literal">mail.mail</tt> by this module itself.</p>
 <div class="admonition important">
 <p class="first admonition-title">Important</p>
 <p class="last">This is an alpha version, the data model and design can change at any time without warning.
