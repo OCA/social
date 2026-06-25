@@ -12,8 +12,10 @@ class MailThread(models.AbstractModel):
     def message_post(self, **kwargs):
         """Post messages using queue by default."""
         _self = self
-        force_send = self.env.context.get("mail_notify_force_send") or kwargs.get(
-            "force_send", False
+        force_send = (
+            self.env.context.get("mail_notify_force_send")
+            or self.env.context.get("force_send")
+            or kwargs.get("force_send", False)
         )
         kwargs.setdefault("force_send", force_send)
         if not force_send:
