@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2022 Camptocamp SA (https://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@camptocamp.com>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.activities-list-group-item" t-inherit-mode="extension" owl="1">
+        <xpath expr="//a[hasclass('o_mark_as_done')]" position="replace">
+            <t t-if="log.user_can_mark_as_done">
+                <t>$0</t>
+            </t>
+        </xpath>
+
+        <xpath expr="//button[hasclass('o_edit_button')]" position="replace">
+            <t t-if="log.user_can_edit">
+                <t>$0</t>
+            </t>
+        </xpath>
+
+    </t>
+
+</templates>
