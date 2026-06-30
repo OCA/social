@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="param_iap_mail_domain_blacklist" model="ir.config_parameter">
+        <field name="key">iap_mail_domain_blacklist.mail_domain_blacklist</field>
+        <field name="value">replace_this_with_real_domains</field>
+    </record>
+</odoo>
