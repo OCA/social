@@ -1,0 +1,3 @@
+- In some cases, other OWL session cached users can appear in your suggestions. The searchPartnerSuggestions js function has been inherited to fix that.
+- Potential improvement: Add more mail_mention_suggestion_options, or an option to configure directly a domain.
+- Potential improvement: Simplify the loop of the get_mention_suggestions() function using the itertools library.
