@@ -19,16 +19,16 @@ class MailMessageGatewayLink(models.TransientModel):
         return [(model.model, model.name) for model in models]
 
     def link_message(self):
-        new_message = self.resource_ref.message_post(
+        new_message = self.resource_ref.with_context(
+            link_gateway_message=True
+        ).message_post(
             body=self.message_id.body,
             author_id=self.message_id.author_id.id,
             gateway_type=self.message_id.gateway_type,
             date=self.message_id.date,
-            # message_id=update.message.message_id,
             subtype_xmlid="mail.mt_comment",
             message_type="comment",
             attachment_ids=self.message_id.attachment_ids.ids,
-            gateway_notifications=[],  # Avoid sending notifications
         )
         self.message_id.gateway_message_id = new_message
         self.message_id._bus_send_store(

@@ -1,0 +1,122 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_gateway_telegram_standalone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid "<b>Success!</b> Connection from Odoo to <i>%s</i> is working."
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_mail_gateway__telegram_chat_ids
+msgid "Authorized Chats"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__chat_id
+msgid "Chat"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram_standalone.mail_gateway_view_form_inherit_mail_gateway_telegram_standalone
+msgid "Fetch Chats"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,help:mail_gateway_telegram_standalone.field_telegram_chat__name
+msgid "Friendly name for the chat (e.g. Admin Group)"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model,name:mail_gateway_telegram_standalone.model_mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__gateway_id
+msgid "Mail Gateway"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__name
+msgid "Name"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,help:mail_gateway_telegram_standalone.field_telegram_chat__chat_id
+msgid "Numeric ID from Telegram"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid "Please add or fetch at least one Chat ID first."
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model,name:mail_gateway_telegram_standalone.model_telegram_chat
+msgid "Telegram Chat"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram_standalone.mail_gateway_view_form_inherit_mail_gateway_telegram_standalone
+msgid "Telegram Chats"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid ""
+"Telegram does not allow fetching updates manually while a Webhook is active."
+" Please disable the Webhook before using 'Fetch Chats'."
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram_standalone.mail_gateway_view_form_inherit_mail_gateway_telegram_standalone
+msgid "Test Connection"
+msgstr ""
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid "Test messages sent!"
+msgstr ""

@@ -5,6 +5,6 @@
 -->
 <odoo>
     <record id="base.main_company" model="res.company">
-        <field name="social_mastodon">https://pouet.chapril.org/@oca_france</field>
+        <field name="social_mastodon">https://fosstodon.org/@oca</field>
     </record>
 </odoo>

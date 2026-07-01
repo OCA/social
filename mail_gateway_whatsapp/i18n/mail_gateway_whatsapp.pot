@@ -111,6 +111,11 @@ msgid "Archived"
 msgstr ""
 
 #. module: mail_gateway_whatsapp
+#: model:ir.model,name:mail_gateway_whatsapp.model_mail_guest_manage
+msgid "Assign gateway guest to a partner"
+msgstr ""
+
+#. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__message_attachment_count
 msgid "Attachment Count"
 msgstr ""

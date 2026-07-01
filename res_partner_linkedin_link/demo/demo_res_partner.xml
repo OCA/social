@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2025 - Today: Sylvain LE GAL (http://www.grap.coop)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="res_partner_psf" model="res.partner">
+        <field name="name">Python Software Foundation</field>
+        <field name="email">psf@python.org</field>
+        <field name="website">https://www.python.org/psf/</field>
+        <field name="is_company" eval="True" />
+        <field name="country_id" ref="base.us" />
+        <field name="social_linkedin">https://www.linkedin.com/company/thepsf/</field>
+        <field
+            name="image_1920"
+            type="base64"
+            file="res_partner_linkedin_link/static/demo/res_partner_psf.png"
+        />
+    </record>
+</odoo>

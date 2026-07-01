@@ -1,0 +1,47 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* res_partner_mastodon_link
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-06-17 21:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: res_partner_mastodon_link
+#: model_terms:ir.ui.view,arch_db:res_partner_mastodon_link.view_res_partner_kanban
+msgid ""
+"<i class=\"fa fa-mastodon me-1\" role=\"img\" aria-label=\"Mastodon "
+"Account\" title=\"Mastodon Account\"/>"
+msgstr ""
+"<i class=\"fa fa-mastodon me-1\" role=\"img\" aria-label=\"Account "
+"Mastodon\" title=\"Account Mastodon\"/>"
+
+#. module: res_partner_mastodon_link
+#: model:ir.model,name:res_partner_mastodon_link.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: res_partner_mastodon_link
+#: model_terms:ir.ui.view,arch_db:res_partner_mastodon_link.contact
+msgid "Mastodon"
+msgstr "Mastodon"
+
+#. module: res_partner_mastodon_link
+#: model:ir.model.fields,field_description:res_partner_mastodon_link.field_res_partner__social_mastodon
+#: model:ir.model.fields,field_description:res_partner_mastodon_link.field_res_users__social_mastodon
+msgid "Mastodon Account"
+msgstr "Account Mastodon"
+
+#. module: res_partner_mastodon_link
+#: model_terms:ir.ui.view,arch_db:res_partner_mastodon_link.view_res_partner_form
+msgid "e.g. https://fosstodon.org/@oca"
+msgstr "es. https://fosstodon.org/@oca"

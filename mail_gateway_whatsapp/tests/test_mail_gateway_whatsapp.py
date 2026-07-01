@@ -221,6 +221,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
     def test_receive_message_01(self):
         message = self.receive_message(self.message_01)
         self.assertFalse(message.author_id)
+        self.assertFalse(message.parent_id)
 
     def test_receive_message_02(self):
         # Check that the partner is assigned automatically
@@ -229,6 +230,62 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
         )
         message = self.receive_message(self.message_01)
         self.assertEqual(message.author_id, partner)
+        self.assertFalse(message.parent_id)
+
+    def test_receive_related_message(self):
+        """
+        Send outgoing message, and then receive a reply message
+        with reference to the original.
+        """
+        # Send outgoing
+        partner = self.env["res.partner"].create(
+            {"name": "DEMO", "phone": "+34699999999"}
+        )
+        ctx = {
+            "default_res_model": partner._name,
+            "default_res_id": partner.id,
+            "default_number_field_name": "mobile",
+            "default_composition_mode": "comment",
+            "default_gateway_id": self.gateway.id,
+        }
+        self.gateway.whatsapp_account_id = "123456"
+        form_composer = Form(self.env["whatsapp.composer"].with_context(**ctx))
+        form_composer.body = "Body test"
+        form_composer.template_id = self.ws_template
+        composer = form_composer.save()
+        channel = partner._whatsapp_get_channel(
+            composer.number_field_name, composer.gateway_id
+        )
+        message_domain = [
+            ("gateway_type", "=", "whatsapp"),
+            ("model", "=", channel._name),
+            ("res_id", "=", channel.id),
+        ]
+        ID_WHATSAPP = "wamid.TEST_UNIQUE_ID_123"
+        with (
+            RecordCapturer(self.env["mail.message"], message_domain) as capture,
+            patch("requests.post") as post_mock,
+        ):
+            response_mock = MagicMock()
+            response_mock.status_code = 200
+            # Mock the response of whatsapp to include an assigned ID
+            response_mock.json.return_value = {"messages": [{"id": ID_WHATSAPP}]}
+            post_mock.return_value = response_mock
+            composer.action_send_whatsapp()
+        message = capture.records
+        # Check that the sent message notification contains the received Whatsapp ID
+        self.assertTrue(
+            message.notification_ids.filtered(
+                lambda msg: msg.gateway_message_id == ID_WHATSAPP
+            )
+        )
+        # Receive message 01 with related id set.
+        reply_message = self.message_01
+        reply_message["entry"][0]["changes"][0]["value"]["messages"][0]["context"] = {
+            "id": ID_WHATSAPP
+        }
+        received_reply = self.receive_message(reply_message)
+        self.assertEqual(message.id, received_reply.parent_id.id)
 
     def test_receive_message_03(self):
         class GetImageResponse:
@@ -242,7 +299,8 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
 
         with patch("requests.get") as get_mock:
             get_mock.return_value = GetImageResponse()
-            self.receive_message(self.message_02)
+            message = self.receive_message(self.message_02)
+            self.assertEqual(message.body, "<p>CAPTION</p>")
 
     def test_receive_audio_message(self):
         class GetAudioResponse:

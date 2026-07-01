@@ -172,6 +172,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 if "audio/" in image_info["mime_type"]:
                     # Tell discuss to treat this attachment as voice.
                     attachment_info["voice"] = True
+                body += message.get(key).get("caption", "")
                 attachments.append(
                     (
                         "{}{}".format(
@@ -220,6 +221,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     )
                     .mail_message_id
                 )
+                new_message.parent_id = related_message.id
                 if related_message and related_message.gateway_message_id:
                     new_related_message = (
                         self.env[related_message.gateway_message_id.model]
