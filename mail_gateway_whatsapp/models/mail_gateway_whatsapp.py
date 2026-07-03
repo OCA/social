@@ -443,6 +443,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
         if author_id:
             contact_profile = self._get_contact_profile(update, author_id)
             wa_id = self._get_contact_wa_id(update, author_id)
+            self._log_first_inbound_profile(gateway, author_id, wa_id, contact_profile)
 
             # Main identifier for inbound contacts: WhatsApp profile user_id.
             partner = self._get_partner_by_whatsapp_user_id(contact_profile)
@@ -484,6 +485,41 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 return self.env["mail.guest"].create(author_vals)
 
         return False
+
+    def _log_first_inbound_profile(self, gateway, author_id, wa_id, contact_profile):
+        if not gateway or not author_id or not contact_profile:
+            return
+
+        token = str(author_id)
+        has_mapping = bool(
+            self.env["res.partner.gateway.channel"].sudo().search_count(
+                [
+                    ("gateway_id", "=", gateway.id),
+                    ("gateway_token", "=", token),
+                ]
+            )
+        )
+        has_guest = bool(
+            self.env["mail.guest"].sudo().search_count(
+                [
+                    ("gateway_id", "=", gateway.id),
+                    ("gateway_token", "=", token),
+                ]
+            )
+        )
+        if has_mapping or has_guest:
+            return
+
+        _logger.info(
+            "First inbound WhatsApp profile received | gateway_id=%s token=%s wa_id=%s "
+            "user_id=%s username=%s profile=%s",
+            gateway.id,
+            token,
+            wa_id,
+            contact_profile.get("user_id"),
+            contact_profile.get("username"),
+            contact_profile,
+        )
 
     def _get_contact_profile(self, update, author_id):
         for contact in update.get("contacts", []):
