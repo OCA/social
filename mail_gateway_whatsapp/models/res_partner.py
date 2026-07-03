@@ -1,12 +1,15 @@
 # Copyright 2024 Dixmit
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import models
+from odoo import fields, models
 
 
 class ResPartner(models.Model):
     _name = "res.partner"
     _inherit = ["mail.thread.phone", "res.partner"]
+
+    whatsapp_user_id = fields.Char(index=True)
+    whatsapp_username = fields.Char(string="Whatsapp User Name")
 
     def _whatsapp_get_partner(self):
         return self

@@ -19,6 +19,9 @@ class MailGateway(models.Model):
     whatsapp_from_phone = fields.Char()
     whatsapp_version = fields.Char(default="23.0")
     whatsapp_account_id = fields.Char()
+    whatsapp_phone_prefix = fields.Char(
+        help="Country phone prefix that WhatsApp may add for some countries."
+    )
     whatsapp_template_ids = fields.One2many("mail.whatsapp.template", "gateway_id")
     whatsapp_template_count = fields.Integer(compute="_compute_whatsapp_template_count")
 

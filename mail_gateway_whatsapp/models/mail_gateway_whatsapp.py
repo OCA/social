@@ -4,6 +4,7 @@ import hashlib
 import hmac
 import logging
 import mimetypes
+import re
 import traceback
 from datetime import datetime
 from io import StringIO
@@ -53,7 +54,8 @@ class MailGatewayWhatsappService(models.AbstractModel):
     def _get_channel_vals(self, gateway, token, update):
         result = super()._get_channel_vals(gateway, token, update)
         for contact in update.get("contacts", []):
-            if contact["wa_id"] == token:
+            profile = contact.get("profile", {})
+            if contact.get("wa_id") == token or profile.get("user_id") == token:
                 result["name"] = contact["profile"]["name"]
                 continue
         return result
@@ -420,6 +422,24 @@ class MailGatewayWhatsappService(models.AbstractModel):
     def _get_author(self, gateway, update):
         author_id = update.get("messages")[0].get("from")
         if author_id:
+            contact_profile = self._get_contact_profile(update, author_id)
+            wa_id = self._get_contact_wa_id(update, author_id)
+
+            # Main identifier for inbound contacts: WhatsApp profile user_id.
+            partner = self._get_partner_by_whatsapp_user_id(contact_profile)
+            if partner:
+                self._sync_partner_mobile_from_wa_id(partner, wa_id)
+                self._sync_partner_whatsapp_profile(partner, contact_profile)
+                self._ensure_gateway_partner_mapping(gateway, author_id, partner)
+                return partner
+
+            # Fallback identifier: wa_id against partner phone/mobile fields.
+            partner = self._get_partner_by_wa_id_phone_mobile(gateway, wa_id)
+            if partner:
+                self._sync_partner_whatsapp_profile(partner, contact_profile)
+                self._ensure_gateway_partner_mapping(gateway, author_id, partner)
+                return partner
+
             gateway_partner = self.env["res.partner.gateway.channel"].search(
                 [
                     ("gateway_id", "=", gateway.id),
@@ -427,20 +447,11 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 ]
             )
             if gateway_partner:
-                return gateway_partner.partner_id
-            partner = self.env["res.partner"].search(
-                [("phone_sanitized", "=", "+" + str(author_id))], limit=1
-            )
-            if partner:
-                self.env["res.partner.gateway.channel"].create(
-                    {
-                        "name": gateway.name,
-                        "partner_id": partner.id,
-                        "gateway_id": gateway.id,
-                        "gateway_token": str(author_id),
-                    }
+                self._sync_partner_whatsapp_profile(
+                    gateway_partner.partner_id,
+                    contact_profile,
                 )
-                return partner
+                return gateway_partner.partner_id
             guest = self.env["mail.guest"].search(
                 [
                     ("gateway_id", "=", gateway.id),
@@ -455,14 +466,156 @@ class MailGatewayWhatsappService(models.AbstractModel):
 
         return False
 
+    def _get_contact_profile(self, update, author_id):
+        for contact in update.get("contacts", []):
+            if contact.get("wa_id") == author_id:
+                return contact.get("profile", {})
+        # Some webhook payloads omit contact.wa_id but still include profile.
+        contacts = update.get("contacts", [])
+        if contacts:
+            return contacts[0].get("profile", {})
+        return {}
+
+    def _get_contact_wa_id(self, update, author_id):
+        for contact in update.get("contacts", []):
+            wa_id = contact.get("wa_id")
+            if wa_id:
+                return str(wa_id)
+        return str(author_id or "")
+
+    def _get_partner_by_whatsapp_user_id(self, contact_profile):
+        user_id = (contact_profile or {}).get("user_id")
+        if not user_id:
+            return self.env["res.partner"]
+        return self.env["res.partner"].search(
+            [("whatsapp_user_id", "=", str(user_id))],
+            limit=1,
+        )
+
+    def _get_partner_by_wa_id_phone_mobile(self, gateway, wa_id):
+        wa_id = str(wa_id or "")
+        if not wa_id:
+            return self.env["res.partner"]
+
+        # Exact match against raw phone/mobile fields first.
+        raw_candidates = self._get_wa_id_search_candidates(gateway, wa_id)
+        exact_candidates = list({value for value in raw_candidates if value and value != "+"})
+        partner = self.env["res.partner"].search(
+            [
+                "|",
+                ("phone", "in", exact_candidates),
+                ("mobile", "in", exact_candidates),
+            ],
+            limit=1,
+        )
+        if partner:
+            return partner
+
+        # Fallback to normalized digit comparison for formatting differences.
+        wa_digits_set = {re.sub(r"\D", "", value) for value in raw_candidates if value}
+        wa_digits_set.discard("")
+        if not wa_digits_set:
+            return self.env["res.partner"]
+        sample_digits = next(iter(wa_digits_set))
+        tail = sample_digits[-7:] if len(sample_digits) >= 7 else sample_digits
+        partners = self.env["res.partner"].search(
+            [
+                "|",
+                ("phone", "ilike", tail),
+                ("mobile", "ilike", tail),
+            ]
+        )
+        for partner in partners:
+            phone_digits = re.sub(r"\D", "", partner.phone or "")
+            mobile_digits = re.sub(r"\D", "", partner.mobile or "")
+            if wa_digits_set & {phone_digits, mobile_digits}:
+                return partner
+
+        return self.env["res.partner"]
+
+    def _get_wa_id_search_candidates(self, gateway, wa_id):
+        wa_digits = re.sub(r"\D", "", str(wa_id or ""))
+        if not wa_digits:
+            return []
+
+        candidates = {wa_digits, "+" + wa_digits}
+        prefix = re.sub(r"\D", "", str(getattr(gateway, "whatsapp_phone_prefix", "") or ""))
+        if not prefix:
+            return list(candidates)
+
+        # Try prefix insert/remove after likely country-code lengths (1..4).
+        for cc_len in range(1, 5):
+            if len(wa_digits) <= cc_len:
+                continue
+            country = wa_digits[:cc_len]
+            local = wa_digits[cc_len:]
+            with_prefix = country + prefix + local
+            candidates.update({with_prefix, "+" + with_prefix})
+            if local.startswith(prefix):
+                without_prefix = country + local[len(prefix):]
+                candidates.update({without_prefix, "+" + without_prefix})
+
+        return list(candidates)
+
+    def _sync_partner_mobile_from_wa_id(self, partner, wa_id):
+        if not partner or partner.mobile or not wa_id:
+            return
+        wa_digits = re.sub(r"\D", "", str(wa_id))
+        if not wa_digits:
+            return
+        partner.write({"mobile": "+" + wa_digits})
+
+    def _sync_partner_whatsapp_profile(self, partner, contact_profile):
+        if not partner or not contact_profile:
+            return
+        updates = {}
+        user_id = contact_profile.get("user_id")
+        username = contact_profile.get("username")
+        if user_id and partner.whatsapp_user_id != str(user_id):
+            updates["whatsapp_user_id"] = str(user_id)
+        if username and partner.whatsapp_username != username:
+            updates["whatsapp_username"] = username
+        if updates:
+            partner.write(updates)
+
+    def _ensure_gateway_partner_mapping(self, gateway, author_id, partner):
+        GatewayChannel = self.env["res.partner.gateway.channel"]
+        token = str(author_id)
+        mapping = GatewayChannel.search(
+            [
+                ("gateway_id", "=", gateway.id),
+                ("gateway_token", "=", token),
+            ],
+            limit=1,
+        )
+        if mapping:
+            if mapping.partner_id != partner:
+                mapping.write({"partner_id": partner.id})
+            return mapping
+        return GatewayChannel.create(
+            {
+                "name": gateway.name,
+                "partner_id": partner.id,
+                "gateway_id": gateway.id,
+                "gateway_token": token,
+            }
+        )
+
     def _get_author_vals(self, gateway, author_id, update):
         for contact in update.get("contacts", []):
-            if contact["wa_id"] == author_id:
+            if contact.get("wa_id") == author_id:
                 return {
                     "name": contact.get("profile", {}).get("name", "Anonymous"),
                     "gateway_id": gateway.id,
                     "gateway_token": str(author_id),
                 }
+        contacts = update.get("contacts", [])
+        if contacts:
+            return {
+                "name": contacts[0].get("profile", {}).get("name", "Anonymous"),
+                "gateway_id": gateway.id,
+                "gateway_token": str(author_id),
+            }
 
     def _get_proxies(self):
         # This hook has been created in order to add a proxy if needed.

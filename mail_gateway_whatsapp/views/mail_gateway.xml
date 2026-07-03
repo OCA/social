@@ -45,6 +45,10 @@
                     invisible="gateway_type != 'whatsapp'"
                 />
                 <field name="whatsapp_version" invisible="gateway_type != 'whatsapp'" />
+                <field
+                    name="whatsapp_phone_prefix"
+                    invisible="gateway_type != 'whatsapp'"
+                />
             </field>
             <notebook position="inside">
                 <page

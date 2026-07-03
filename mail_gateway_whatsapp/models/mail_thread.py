@@ -25,11 +25,12 @@ class MailThread(models.AbstractModel):
         # Avoid the plus sign prefix to match the whatsapp token
         sanitized_number = sanitized_number.replace("+", "")
         partner = self._whatsapp_get_partner()
+        token = partner.whatsapp_user_id or sanitized_number
         if not self.env["res.partner.gateway.channel"].search(
             [
                 ("partner_id", "=", partner.id),
                 ("gateway_id", "=", gateway.id),
-                ("gateway_token", "=", sanitized_number),
+                ("gateway_token", "=", token),
             ]
         ):
             self.env["res.partner.gateway.channel"].create(
@@ -37,20 +38,24 @@ class MailThread(models.AbstractModel):
                     "name": gateway.name,
                     "partner_id": partner.id,
                     "gateway_id": gateway.id,
-                    "gateway_token": sanitized_number,
+                    "gateway_token": token,
                 }
             )
         return self.env["mail.gateway.whatsapp"]._get_channel(
             gateway,
-            sanitized_number,
+            token,
             {
                 "contacts": [
                     {
                         "wa_id": sanitized_number,
-                        "profile": {"name": partner.display_name},
+                        "profile": {
+                            "name": partner.display_name,
+                            "user_id": partner.whatsapp_user_id,
+                            "username": partner.whatsapp_username,
+                        },
                     }
                 ],
-                "messages": [{"from": sanitized_number}],
+                "messages": [{"from": token}],
             },
             force_create=True,
         )

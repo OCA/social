@@ -232,6 +232,110 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
         self.assertEqual(message.author_id, partner)
         self.assertFalse(message.parent_id)
 
+    def test_receive_message_uses_profile_user_id_first(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "By User ID",
+                "phone": "+34111111111",
+                "whatsapp_user_id": "wa-user-001",
+            }
+        )
+        message_with_profile_id = json.loads(json.dumps(self.message_01))
+        message_with_profile_id["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "profile"
+        ] = {
+            "name": "NAME",
+            "user_id": "wa-user-001",
+            "username": "john_whatsapp",
+        }
+        # Different wa_id/phone from partner: should still resolve by profile.user_id.
+        message_with_profile_id["entry"][0]["changes"][0]["value"]["messages"][0][
+            "from"
+        ] = "34999999999"
+        message_with_profile_id["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "wa_id"
+        ] = "34999999999"
+
+        message = self.receive_message(message_with_profile_id)
+        partner = self.env["res.partner"].browse(partner.id)
+        self.assertEqual(message.author_id, partner)
+        self.assertEqual(partner.whatsapp_username, "john_whatsapp")
+
+    def test_receive_message_user_id_match_fills_mobile_from_wa_id(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "By User ID No Mobile",
+                "whatsapp_user_id": "wa-user-fill-mobile",
+            }
+        )
+        message_with_profile_id = json.loads(json.dumps(self.message_01))
+        message_with_profile_id["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "profile"
+        ] = {
+            "name": "NAME",
+            "user_id": "wa-user-fill-mobile",
+        }
+        message_with_profile_id["entry"][0]["changes"][0]["value"]["messages"][0][
+            "from"
+        ] = "34911111111"
+        message_with_profile_id["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "wa_id"
+        ] = "34911111111"
+
+        message = self.receive_message(message_with_profile_id)
+        partner = self.env["res.partner"].browse(partner.id)
+        self.assertEqual(message.author_id, partner)
+        self.assertEqual(partner.mobile, "+34911111111")
+
+    def test_receive_message_phone_fallback_updates_whatsapp_profile(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "By Phone Fallback",
+                "mobile": "+34699999999",
+            }
+        )
+        message_with_profile = json.loads(json.dumps(self.message_01))
+        message_with_profile["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "profile"
+        ] = {
+            "name": "NAME",
+            "user_id": "wa-user-phone-fallback",
+            "username": "fallback_username",
+        }
+
+        message = self.receive_message(message_with_profile)
+        partner = self.env["res.partner"].browse(partner.id)
+        self.assertEqual(message.author_id, partner)
+        self.assertEqual(partner.whatsapp_user_id, "wa-user-phone-fallback")
+        self.assertEqual(partner.whatsapp_username, "fallback_username")
+
+    def test_receive_message_phone_fallback_with_gateway_prefix(self):
+        self.gateway.whatsapp_phone_prefix = "9"
+        partner = self.env["res.partner"].create(
+            {
+                "name": "By Phone Prefix",
+                "mobile": "+541122334455",
+            }
+        )
+        message_with_prefixed_wa_id = json.loads(json.dumps(self.message_01))
+        message_with_prefixed_wa_id["entry"][0]["changes"][0]["value"]["messages"][0][
+            "from"
+        ] = "5491122334455"
+        message_with_prefixed_wa_id["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "wa_id"
+        ] = "5491122334455"
+        message_with_prefixed_wa_id["entry"][0]["changes"][0]["value"]["contacts"][0][
+            "profile"
+        ] = {
+            "name": "NAME",
+            "user_id": "wa-user-prefix",
+        }
+
+        message = self.receive_message(message_with_prefixed_wa_id)
+        partner = self.env["res.partner"].browse(partner.id)
+        self.assertEqual(message.author_id, partner)
+        self.assertEqual(partner.whatsapp_user_id, "wa-user-prefix")
+
     def test_receive_related_message(self):
         """
         Send outgoing message, and then receive a reply message
@@ -493,6 +597,18 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             post_mock.assert_called()
         channel.invalidate_recordset()
         self.assertTrue(channel.message_ids)
+
+    def test_send_payload_prioritizes_whatsapp_user_id(self):
+        self.partner.whatsapp_user_id = "wa-user-outbound-001"
+        channel = self.partner._whatsapp_get_channel("mobile", self.gateway)
+        payload = self.env["mail.gateway.whatsapp"]._send_payload(channel, body="Body")
+        self.assertEqual(payload["to"], "wa-user-outbound-001")
+
+    def test_send_payload_fallbacks_to_wa_id(self):
+        self.partner.whatsapp_user_id = False
+        channel = self.partner._whatsapp_get_channel("mobile", self.gateway)
+        payload = self.env["mail.gateway.whatsapp"]._send_payload(channel, body="Body")
+        self.assertEqual(payload["to"], "34600000000")
 
     def test_send_message_with_variable(self):
         ctx = {
