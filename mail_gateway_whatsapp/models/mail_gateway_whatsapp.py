@@ -372,6 +372,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 error_payload = response.json()
             except Exception:
                 error_payload = {"raw": response.text}
+            graph_error = self._extract_graph_error(error_payload)
 
             _logger.warning(
                 "WhatsApp API send error | gateway_id=%s status=%s payload=%s",
@@ -380,8 +381,10 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 error_payload,
             )
 
-            if not self._can_retry_outbound_with_wa_id(gateway, channel, response):
-                raise
+            if not self._can_retry_outbound_with_wa_id(
+                gateway, channel, response, graph_error
+            ):
+                raise UserError(self._build_graph_error_message(graph_error, response))
 
             token = str(getattr(channel, "gateway_channel_token", "") or "")
             retry_payload = dict(original_payload or {})
@@ -402,11 +405,38 @@ class MailGatewayWhatsappService(models.AbstractModel):
             )
             return retry_response.json()
 
-    def _can_retry_outbound_with_wa_id(self, gateway, channel, response):
+    def _extract_graph_error(self, error_payload):
+        payload_error = (error_payload or {}).get("error", {})
+        error_data = payload_error.get("error_data", {})
+        return {
+            "message": payload_error.get("message"),
+            "type": payload_error.get("type"),
+            "code": payload_error.get("code"),
+            "subcode": payload_error.get("error_subcode"),
+            "details": error_data.get("details"),
+            "fbtrace_id": payload_error.get("fbtrace_id"),
+        }
+
+    def _build_graph_error_message(self, graph_error, response):
+        return (
+            "WhatsApp API error "
+            f"status={response.status_code} "
+            f"code={graph_error.get('code')} "
+            f"subcode={graph_error.get('subcode')} "
+            f"type={graph_error.get('type')} "
+            f"details={graph_error.get('details') or graph_error.get('message')} "
+            f"fbtrace_id={graph_error.get('fbtrace_id')}"
+        )
+
+    def _can_retry_outbound_with_wa_id(self, gateway, channel, response, graph_error):
         if not gateway or not gateway.whatsapp_use_user_id_outbound:
             return False
         token = str(getattr(channel, "gateway_channel_token", "") or "")
         if not token:
+            return False
+        if graph_error.get("type") == "OAuthException":
+            return False
+        if graph_error.get("code") in (10, 190, 200):
             return False
         request_body = response.request.body or b""
         if isinstance(request_body, bytes):
