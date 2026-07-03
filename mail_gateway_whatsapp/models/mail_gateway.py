@@ -22,6 +22,16 @@ class MailGateway(models.Model):
     whatsapp_phone_prefix = fields.Char(
         help="Country phone prefix that WhatsApp may add for some countries."
     )
+    whatsapp_use_user_id_outbound = fields.Boolean(
+        string="Use WhatsApp User ID For Outbound (Experimental)",
+        default=False,
+        help=(
+            "Migration switch. Enable only if your Meta account is validated for "
+            "BSUID/user_id outbound usage. When enabled, outbound messages try "
+            "partner.whatsapp_user_id as recipient. If unavailable, it falls back "
+            "to wa_id (phone token)."
+        ),
+    )
     whatsapp_template_ids = fields.One2many("mail.whatsapp.template", "gateway_id")
     whatsapp_template_count = fields.Integer(compute="_compute_whatsapp_template_count")
 

@@ -350,6 +350,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
     def _send_payload(
         self, channel, body=False, media_id=False, media_type=False, media_name=False
     ):
+        recipient = self._get_outbound_recipient(channel)
         whatsapp_template = self.env["mail.whatsapp.template"]
         if self.env.context.get("whatsapp_template_id"):
             whatsapp_template = self.env["mail.whatsapp.template"].browse(
@@ -360,7 +361,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
             payload = {
                 "messaging_product": "whatsapp",
                 "recipient_type": "individual",
-                "to": channel.gateway_channel_token,
+                "to": recipient,
             }
             if whatsapp_template:
                 payload.update(
@@ -389,10 +390,28 @@ class MailGatewayWhatsappService(models.AbstractModel):
             return {
                 "messaging_product": "whatsapp",
                 "recipient_type": "individual",
-                "to": channel.gateway_channel_token,
+                "to": recipient,
                 "type": media_type,
                 media_type: media_data,
             }
+
+    def _get_outbound_recipient(self, channel):
+        token = str(getattr(channel, "gateway_channel_token", "") or "")
+        gateway = getattr(channel, "gateway_id", self.env["mail.gateway"])
+        if not gateway or not gateway.whatsapp_use_user_id_outbound:
+            return token
+
+        partner_mapping = self.env["res.partner.gateway.channel"].search(
+            [
+                ("gateway_id", "=", gateway.id),
+                ("gateway_token", "=", token),
+            ],
+            limit=1,
+        )
+        partner = partner_mapping.partner_id
+        if partner and partner.whatsapp_user_id:
+            return partner.whatsapp_user_id
+        return token
                 
     def _get_whatsapp_mimetype_kind(self):
         return {

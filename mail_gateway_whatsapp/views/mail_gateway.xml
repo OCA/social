@@ -49,6 +49,14 @@
                     name="whatsapp_phone_prefix"
                     invisible="gateway_type != 'whatsapp'"
                 />
+                <field
+                    name="whatsapp_use_user_id_outbound"
+                    invisible="gateway_type != 'whatsapp'"
+                />
+                <div class="alert alert-warning" invisible="gateway_type != 'whatsapp'">
+                    Experimental migration option. Keep disabled unless Meta confirms
+                    outbound recipient user_id (BSUID) is enabled for this account.
+                </div>
             </field>
             <notebook position="inside">
                 <page

@@ -29,7 +29,9 @@ class MailThread(models.AbstractModel):
         if not sanitized_number:
             raise UserError(self.env._("Phone cannot be sanitized"))
         partner = self._whatsapp_get_partner()
-        token = partner.whatsapp_user_id or sanitized_number
+        # WhatsApp Cloud API expects recipient phone number in `to`.
+        # Keep gateway token based on wa_id (phone digits) for outbound messages.
+        token = sanitized_number
         if not self.env["res.partner.gateway.channel"].search(
             [
                 ("partner_id", "=", partner.id),

@@ -598,13 +598,27 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
         channel.invalidate_recordset()
         self.assertTrue(channel.message_ids)
 
-    def test_send_payload_prioritizes_whatsapp_user_id(self):
+    def test_send_payload_uses_wa_id_even_if_whatsapp_user_id_exists(self):
+        self.partner.whatsapp_user_id = "wa-user-outbound-001"
+        channel = self.partner._whatsapp_get_channel("mobile", self.gateway)
+        payload = self.env["mail.gateway.whatsapp"]._send_payload(channel, body="Body")
+        self.assertEqual(payload["to"], "34600000000")
+
+    def test_send_payload_fallbacks_to_wa_id(self):
+        self.partner.whatsapp_user_id = False
+        channel = self.partner._whatsapp_get_channel("mobile", self.gateway)
+        payload = self.env["mail.gateway.whatsapp"]._send_payload(channel, body="Body")
+        self.assertEqual(payload["to"], "34600000000")
+
+    def test_send_payload_uses_user_id_when_switch_enabled(self):
+        self.gateway.whatsapp_use_user_id_outbound = True
         self.partner.whatsapp_user_id = "wa-user-outbound-001"
         channel = self.partner._whatsapp_get_channel("mobile", self.gateway)
         payload = self.env["mail.gateway.whatsapp"]._send_payload(channel, body="Body")
         self.assertEqual(payload["to"], "wa-user-outbound-001")
 
-    def test_send_payload_fallbacks_to_wa_id(self):
+    def test_send_payload_switch_enabled_fallbacks_to_wa_id(self):
+        self.gateway.whatsapp_use_user_id_outbound = True
         self.partner.whatsapp_user_id = False
         channel = self.partner._whatsapp_get_channel("mobile", self.gateway)
         payload = self.env["mail.gateway.whatsapp"]._send_payload(channel, body="Body")
