@@ -290,33 +290,43 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     proxies=self._get_proxies(),
                 )
                 response.raise_for_status()
+                json_payload = self._send_payload(
+                    record.gateway_channel_id,
+                    media_id=response.json()["id"],
+                    media_type=attachment_type,
+                    media_name=attachment.name,
+                )
                 response = requests.post(
                     f"https://graph.facebook.com/"
                     f"v{gateway.whatsapp_version}/{gateway.whatsapp_from_phone}/messages",
                     headers={"Authorization": f"Bearer {gateway.token}"},
-                    json=self._send_payload(
-                        record.gateway_channel_id,
-                        media_id=response.json()["id"],
-                        media_type=attachment_type,
-                        media_name=attachment.name,
-                    ),
+                    json=json_payload,
                     timeout=10,
                     proxies=self._get_proxies(),
                 )
-                response.raise_for_status()
-                message = response.json()
+                message = self._handle_message_send_response(
+                    response,
+                    gateway,
+                    record.gateway_channel_id,
+                    original_payload=json_payload,
+                )
             body = self._get_message_body(record)
             if body:
+                json_payload = self._send_payload(record.gateway_channel_id, body=body)
                 response = requests.post(
                     f"https://graph.facebook.com/"
                     f"v{gateway.whatsapp_version}/{gateway.whatsapp_from_phone}/messages",
                     headers={"Authorization": f"Bearer {gateway.token}"},
-                    json=self._send_payload(record.gateway_channel_id, body=body),
+                    json=json_payload,
                     timeout=10,
                     proxies=self._get_proxies(),
                 )
-                response.raise_for_status()
-                message = response.json()
+                message = self._handle_message_send_response(
+                    response,
+                    gateway,
+                    record.gateway_channel_id,
+                    original_payload=json_payload,
+                )
         except Exception as exc:
             buff = StringIO()
             traceback.print_exc(file=buff)
@@ -345,6 +355,63 @@ class MailGatewayWhatsappService(models.AbstractModel):
         if auto_commit is True:
             # pylint: disable=invalid-commit
             self.env.cr.commit()
+
+    def _handle_message_send_response(
+        self,
+        response,
+        gateway,
+        channel,
+        original_payload,
+    ):
+        try:
+            response.raise_for_status()
+            return response.json()
+        except requests.exceptions.HTTPError:
+            error_payload = {}
+            try:
+                error_payload = response.json()
+            except Exception:
+                error_payload = {"raw": response.text}
+
+            _logger.warning(
+                "WhatsApp API send error | gateway_id=%s status=%s payload=%s",
+                gateway.id,
+                response.status_code,
+                error_payload,
+            )
+
+            if not self._can_retry_outbound_with_wa_id(gateway, channel, response):
+                raise
+
+            token = str(getattr(channel, "gateway_channel_token", "") or "")
+            retry_payload = dict(original_payload or {})
+            retry_payload["to"] = token
+            retry_response = requests.post(
+                f"https://graph.facebook.com/"
+                f"v{gateway.whatsapp_version}/{gateway.whatsapp_from_phone}/messages",
+                headers={"Authorization": f"Bearer {gateway.token}"},
+                json=retry_payload,
+                timeout=10,
+                proxies=self._get_proxies(),
+            )
+            retry_response.raise_for_status()
+            _logger.info(
+                "WhatsApp API send retried successfully with wa_id | gateway_id=%s token=%s",
+                gateway.id,
+                token,
+            )
+            return retry_response.json()
+
+    def _can_retry_outbound_with_wa_id(self, gateway, channel, response):
+        if not gateway or not gateway.whatsapp_use_user_id_outbound:
+            return False
+        token = str(getattr(channel, "gateway_channel_token", "") or "")
+        if not token:
+            return False
+        request_body = response.request.body or b""
+        if isinstance(request_body, bytes):
+            request_body = request_body.decode("utf-8", errors="ignore")
+        return response.status_code == 400 and token not in str(request_body)
 
 
     def _send_payload(
