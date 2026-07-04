@@ -6,9 +6,11 @@
         <field name="inherit_id" ref="base.view_partner_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='mobile']" position="after">
-                <label for="whatsapp_username" string="Whatsapp User Name"/>
-                <field name="whatsapp_username"/>
-                <field name="whatsapp_user_id" invisible="1"/>
+                <group>
+                    <label for="whatsapp_username" string="Whatsapp User Name"/>
+                    <field name="whatsapp_username"/>
+                    <field name="whatsapp_user_id" invisible="1"/>
+                </group>
             </xpath>
         </field>
     </record>
