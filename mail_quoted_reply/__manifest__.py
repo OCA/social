@@ -10,7 +10,9 @@
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/social",
     "depends": ["mail"],
-    "data": [],
+    "data": [
+        "views/mail_compose_message_views.xml",
+    ],
     "assets": {
         "web.assets_backend": [
             "/mail_quoted_reply/static/src/*.js",
