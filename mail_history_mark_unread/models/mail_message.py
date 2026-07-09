@@ -18,26 +18,27 @@ class MailMessage(models.Model):
         notifications = (
             self.env["mail.notification"]
             .sudo()
-            .search(
+            .search_fetch(
                 [
                     ("mail_message_id", "in", self.ids),
                     ("res_partner_id", "=", partner_id.id),
                     ("is_read", "=", True),
-                ]
+                ],
+                ["mail_message_id"],
             )
         )
 
         if not notifications:
-            return
+            return False
 
         notifications.write({"is_read": False})
 
-        counter = self.env.user.partner_id._get_needaction_count()
-        self.env["bus.bus"]._sendone(
-            partner_id,
+        counter = partner_id._get_needaction_count()
+        self.env.user._bus_send(
             "mail.message/mark_as_unread",
             {
                 "message_ids": notifications.mail_message_id.ids,
                 "needaction_inbox_counter": counter,
             },
         )
+        return True
