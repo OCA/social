@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <!-- Override MessageCardList to enable actions for search mode -->
+    <t t-inherit="mail.MessageCardList" t-inherit-mode="extension">
+        <xpath expr="//Message" position="attributes">
+            <attribute name="hasActions">props.mode === 'search'</attribute>
+        </xpath>
+    </t>
+</templates>
