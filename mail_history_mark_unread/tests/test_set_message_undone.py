@@ -2,10 +2,10 @@
 
 from unittest.mock import patch
 
-from odoo.addons.base.tests.common import SavepointCaseWithUserDemo
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestSetMessageUndone(SavepointCaseWithUserDemo):
+class TestSetMessageUndone(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -33,17 +33,16 @@ class TestSetMessageUndone(SavepointCaseWithUserDemo):
         self.assertTrue(notification.is_read)
 
         with patch.object(
-            type(self.env["bus.bus"]), "_sendone", autospec=True
-        ) as mocked_sendone:
+            type(self.env.user), "_bus_send", autospec=True
+        ) as mocked_bus_send:
             message.set_message_undone()
 
             notification.invalidate_recordset(["is_read"])
             self.assertFalse(notification.is_read)
 
             expected_counter = self.env.user.partner_id._get_needaction_count()
-            mocked_sendone.assert_called_once()
-            _self, target, notification_type, payload = mocked_sendone.call_args.args
-            self.assertEqual(target, self.env.user.partner_id)
+            mocked_bus_send.assert_called_once()
+            _self, notification_type, payload = mocked_bus_send.call_args.args
             self.assertEqual(notification_type, "mail.message/mark_as_unread")
             self.assertEqual(payload.get("message_ids"), [message.id])
             self.assertEqual(payload.get("needaction_inbox_counter"), expected_counter)
@@ -70,7 +69,7 @@ class TestSetMessageUndone(SavepointCaseWithUserDemo):
         )
 
         with patch.object(
-            type(self.env["bus.bus"]), "_sendone", autospec=True
-        ) as mocked_sendone:
+            type(self.env.user), "_bus_send", autospec=True
+        ) as mocked_bus_send:
             message.set_message_undone()
-            mocked_sendone.assert_not_called()
+            mocked_bus_send.assert_not_called()

@@ -32,9 +32,8 @@ class MailMessage(models.Model):
 
         notifications.write({"is_read": False})
 
-        counter = self.env.user.partner_id._get_needaction_count()
-        self.env["bus.bus"]._sendone(
-            partner_id,
+        counter = partner_id._get_needaction_count()
+        self.env.user._bus_send(
             "mail.message/mark_as_unread",
             {
                 "message_ids": notifications.mail_message_id.ids,
