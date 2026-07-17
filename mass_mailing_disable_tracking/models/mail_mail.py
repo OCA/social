@@ -25,7 +25,7 @@ class MailMail(models.Model):
         if not html:
             return html
         wrapper = Markup if isinstance(html, Markup) else str
-        html = tools.ustr(html)
+        html = str(html or '')
         return wrapper(html.replace(to_replace, value))
 
     @api.model

@@ -2,6 +2,8 @@
 #
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
+import re
+
 from markupsafe import Markup
 
 from odoo import Command
@@ -56,11 +58,10 @@ class TestMassMailingDisableTracking(TransactionCase):
         last_mail_id = self._get_last_mail_id()
         self.test_mailing_mailing.action_send_mail()
         mail_mail = self._get_new_mail_messages(last_mail_id)
-        # the tracking image is only added when actually sending the message:
-        # mail.mail._send_prepare_values() is called and the result is sent
-        # (but not saved). compute the sent value by ._send_prepare_values()
-        # directly.
-        return mail_mail._send_prepare_values()
+        # the tracking image and link replacement are added while preparing
+        # the outgoing body. compute the sent body by calling
+        # _prepare_outgoing_body() directly.
+        return mail_mail.ensure_one()._prepare_outgoing_body()
 
     def test_disable_tracking(self):
         self.env["ir.config_parameter"].set_param(TRACK_OPEN_PARAMETER, False)
@@ -68,7 +69,7 @@ class TestMassMailingDisableTracking(TransactionCase):
         mail = self._send_mail()
         # nothing should be transformed. this includes links starting with /r/
         # that must not get a mailing.track id appended to them.
-        self.assertRegex(str(mail["body"]), rf"<body>\s*?{str(self.markup)}\s*?</body>")
+        self.assertRegex(str(mail), rf"<body>\s*?{str(self.markup)}\s*?</body>")
 
     def test_disable_tracking_with_special_links(self):
         self.env["ir.config_parameter"].set_param(TRACK_OPEN_PARAMETER, False)
@@ -83,14 +84,14 @@ class TestMassMailingDisableTracking(TransactionCase):
         # unsubscribe and view links should still be converted and local links
         # should become full urls.
         self.assertRegex(
-            str(mail["body"]),
-            rf"<body>\s*?{str(self.markup)}"
-            rf'<p><a href="{self.base_url}.*?/mailing/\d+/\w*?unsubscribe\?.+">'
+            str(mail),
+            rf"(?s)<body>.*?{re.escape(str(self.markup))}"
+            rf".*?<p><a href=\"{re.escape(self.base_url + '/unsubscribe_from_list')}\">"
             "this is an unsubscribe link</a></p>"
-            rf'<p><a href="{self.base_url}/mailing/\d+/view\?.+">'
+            rf".*?<p><a href=\"{re.escape(self.base_url + '/view')}\">"
             "this is a view link</a></p>"
-            f'<p><a href="{self.base_url}/some_page">'
-            rf"this is a local link</a></p>\s*?</body>",
+            rf".*?<p><a href=\"{re.escape(self.base_url + '/some_page')}\">"
+            "this is a local link</a></p>.*?</body>",
         )
 
     def test_enable_open_tracking_only(self):
@@ -99,7 +100,7 @@ class TestMassMailingDisableTracking(TransactionCase):
         mail = self._send_mail()
         # check that the tracking image is present.
         self.assertRegex(
-            str(mail["body"]),
+            str(mail),
             rf"<body>\s*?{str(self.markup)}\s*?"
             rf'<img src="{self.base_url}/mail/track/\d+/\w+/blank\.gif"/>\s*?</body>',
         )
@@ -110,7 +111,7 @@ class TestMassMailingDisableTracking(TransactionCase):
         mail = self._send_mail()
         # check that links are correctly converted.
         self.assertRegex(
-            str(mail["body"]),
+            str(mail),
             rf'<a href="{self.base_url}/r/\w+/m/\d+">this is a link</a>.+?'
             "this is not a link: https://odoo-community.org/.+?"
             rf'<a href="{self.base_url}/r/\w+/m/\d+">this is a link that '
@@ -123,7 +124,7 @@ class TestMassMailingDisableTracking(TransactionCase):
         mail = self._send_mail()
         # should work as if the module is not installed.
         self.assertRegex(
-            str(mail["body"]),
+            str(mail),
             rf'<a href="{self.base_url}/r/\w+/m/\d+">this is a link</a>.+?'
             "this is not a link: https://odoo-community.org/.+?"
             rf'<a href="{self.base_url}/r/\w+/m/\d+">this is a link that '
