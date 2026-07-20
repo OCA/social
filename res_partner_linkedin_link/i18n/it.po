@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-30 10:46+0000\n"
+"PO-Revision-Date: 2026-07-20 09:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -38,9 +38,8 @@ msgstr "Linkedin"
 #. module: res_partner_linkedin_link
 #: model:ir.model.fields,field_description:res_partner_linkedin_link.field_res_partner__social_linkedin
 #: model:ir.model.fields,field_description:res_partner_linkedin_link.field_res_users__social_linkedin
-#, fuzzy
 msgid "LinkedIn Account"
-msgstr "Account Mastodon"
+msgstr "Account LinkedIn"
 
 #. module: res_partner_linkedin_link
 #: model_terms:ir.ui.view,arch_db:res_partner_linkedin_link.view_res_partner_form
