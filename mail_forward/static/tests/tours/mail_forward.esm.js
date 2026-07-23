@@ -29,7 +29,8 @@ const contact_steps = [
     },
     {
         content: "Open contact",
-        trigger: ".o_list_table .o_data_cell[name='display_name']:contains('Test Forward')",
+        trigger:
+            ".o_list_table .o_data_cell[name='display_name']:contains('Test Forward')",
         run: "click",
     },
 ];

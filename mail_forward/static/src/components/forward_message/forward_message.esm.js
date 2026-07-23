@@ -10,7 +10,8 @@ export class ForwardMessage extends Component {
     }
     async onClickForwardMessage() {
         const thread =
-            this.props.message.originThread?.composer?.thread ?? this.props.message.thread;
+            this.props.message.originThread?.composer?.thread ??
+            this.props.message.thread;
         const action = await this.env.services.orm.call(
             "mail.message",
             "action_wizard_forward",

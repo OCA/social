@@ -9,25 +9,25 @@
             t-on-click="onClickForwardMessage"
         >
             <span class="fa-stack" style="width: 1.5em">
-                <i
-                    class="fa fa-lg fa-share fa-stack-1x"
-                    style="margin-left:1px"
-                    role="img"
-                    aria-label="Forward Message Left"
-                />
-                <i
-                    class="fa fa-lg fa-share fa-inverse fa-stack-1x"
-                    style="margin-left:-2px;"
-                    role="img"
-                    aria-label="Forward Message Center"
-                />
-                <i
-                    class="fa fa-lg fa-share fa-stack-1x"
-                    style="margin-left:-3px"
-                    role="img"
-                    aria-label="Forward Message Right"
-                />
-            </span>
+            <i
+                class="fa fa-lg fa-share fa-stack-1x"
+                style="margin-left:1px"
+                role="img"
+                aria-label="Forward Message Left"
+            />
+            <i
+                class="fa fa-lg fa-share fa-inverse fa-stack-1x"
+                style="margin-left:-2px;"
+                role="img"
+                aria-label="Forward Message Center"
+            />
+            <i
+                class="fa fa-lg fa-share fa-stack-1x"
+                style="margin-left:-3px"
+                role="img"
+                aria-label="Forward Message Right"
+            />
+        </span>
             Forward
         </div>
     </t>

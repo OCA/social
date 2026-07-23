@@ -27,7 +27,10 @@
             <xpath expr="//label[@for='partner_ids']" position="attributes">
                 <attribute name="string">Followers to notify</attribute>
             </xpath>
-            <xpath expr="//widget[@name='mail_composer_recipient_list']" position="attributes">
+            <xpath
+                expr="//widget[@name='mail_composer_recipient_list']"
+                position="attributes"
+            >
                 <attribute name="invisible">1</attribute>
             </xpath>
             <xpath expr="//field[@name='template_id']" position="attributes">

@@ -3,6 +3,7 @@
 from odoo import _, models
 from odoo.tools import format_datetime
 
+
 class MailMessage(models.Model):
     _inherit = "mail.message"
 
