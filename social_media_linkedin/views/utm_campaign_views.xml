@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="utm_campaign_view_form_inherit">
+        <field name="name">utm.campaign.view.form.inherit.linkedin</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='title']" position="attributes">
+                <attribute
+                    name="readonly"
+                >linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')</attribute>
+            </xpath>
+            <xpath expr="//field[@name='campaign_group_id']" position="attributes">
+                <attribute
+                    name="readonly"
+                >linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')</attribute>
+            </xpath>
+            <xpath expr="//group[@name='social_media_general']" position="after">
+                <group
+                    name="social_media_linkedin"
+                    string="LinkedIn"
+                    invisible="media_type != 'linkedin'"
+                >
+                    <field
+                        name="unit_cost"
+                        required="media_id != False"
+                        readonly="linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                    />
+                    <field
+                        name="daily_budget"
+                        required="media_id != False"
+                        readonly="linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                    />
+                    <field name="currency_id" />
+                    <field
+                        name="linkedin_format"
+                        required="media_id != False"
+                        readonly="remote_ref != False"
+                    />
+                    <field
+                        name="linkedin_objective"
+                        required="linkedin_format == 'SINGLE_VIDEO'"
+                        readonly="remote_ref != False"
+                    />
+                    <field name="linkedin_is_test" invisible="not remote_ref" />
+                    <field name="remote_ref" readonly="1" groups="base.group_no_one" />
+                </group>
+            </xpath>
+            <xpath expr="//header" position="inside">
+                <field name="media_type" invisible="1" />
+                <field name="remote_ref" invisible="1" />
+                <field name="linkedin_needs_update" invisible="1" />
+                <field
+                    name="linkedin_status"
+                    widget="statusbar"
+                    invisible="not context.get('from_social_media', False) or media_type != 'linkedin' or not linkedin_status"
+                />
+                <button
+                    name="action_publish_linkedin"
+                    type="object"
+                    string="Create in LinkedIn"
+                    class="btn-primary"
+                    invisible="media_type != 'linkedin' or remote_ref"
+                    confirm="The campaign group and the campaign will be created on LinkedIn in draft status. Continue?"
+                />
+                <button
+                    name="action_update_linkedin"
+                    type="object"
+                    string="Update in LinkedIn"
+                    class="btn-primary"
+                    invisible="not context.get('from_social_media', False) or media_type != 'linkedin' or not remote_ref or not linkedin_needs_update or linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                    confirm="Do you want to update the values on LinkedIn?"
+                />
+                <button
+                    name="action_archive_linkedin"
+                    type="object"
+                    string="Archive in LinkedIn"
+                    invisible="not context.get('from_social_media', False) or media_type != 'linkedin' or not remote_ref or linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                    title="Stops the campaign on LinkedIn and takes it out of the Campaign Manager lists. LinkedIn does not allow deleting a campaign, archiving is the only way to end it. The campaign is kept in Odoo with its performance data, and it can no longer be modified."
+                    confirm="The campaign will be archived on LinkedIn and will stop running. It cannot be reactivated from Odoo. It stays in Odoo with its performance data. Continue?"
+                />
+            </xpath>
+            <xpath expr="//widget[@name='web_ribbon']" position="after">
+                <widget
+                    name="web_ribbon"
+                    title="Not synced"
+                    tooltip="The local changes have not been pushed to LinkedIn yet"
+                    bg_color="text-bg-warning"
+                    invisible="not context.get('from_social_media', False) or not linkedin_needs_update"
+                />
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="not context.get('from_social_media', False) or not linkedin_needs_update or linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                >
+                    The campaign has local changes that are not synchronized
+                    with LinkedIn. Use the <b>Update in LinkedIn</b> button to
+                    push them.
+                </div>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    invisible="not context.get('from_social_media', False) or linkedin_status not in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                >
+                    The LinkedIn status of this campaign does not allow
+                    modifications.
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="utm_campaign_view_tree_inherit">
+        <field name="name">utm.campaign.view.tree.inherit.linkedin</field>
+        <field name="model">utm.campaign</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.utm_campaign_social_view_tree"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-warning">linkedin_needs_update</attribute>
+            </xpath>
+            <xpath expr="//field[@name='account_id']" position="after">
+                <field name="unit_cost" required="media_id != False" />
+                <field name="daily_budget" required="media_id != False" />
+                <field name="currency_id" />
+                <field
+                    name="linkedin_status"
+                    optional="show"
+                    widget="badge"
+                    decoration-success="linkedin_status == 'active'"
+                    decoration-warning="linkedin_status == 'paused'"
+                    decoration-info="linkedin_status == 'draft'"
+                    decoration-danger="linkedin_status in ('canceled', 'pending_deletion', 'removed')"
+                />
+                <field name="linkedin_needs_update" column_invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
