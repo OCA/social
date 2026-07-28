@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.actions.act_window" id="social_media_base.social_post_action">
+        <field name="view_mode">kanban,calendar,tree,form</field>
+    </record>
+
+    <record id="social_post_view_calendar" model="ir.ui.view">
+        <field name="name">social.post.view.calendar</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <calendar
+                string="Social Posts"
+                mode="month"
+                hide_time="True"
+                date_start="date_calendar"
+                color="color"
+                event_open_popup="true"
+                delete="0"
+            >
+                <field name="account_ids" widget="many2many_tags" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-muted="state == 'draft'"
+                    decoration-info="state in ('planned','publishing')"
+                    decoration-success="state == 'published'"
+                    decoration-danger="state == 'cancelled'"
+                />
+                <field name="send_post_date" invisible="not send_post_date" />
+                <field name="image_ids" invisible="not image_ids" />
+                <field name="video_ids" invisible="not video_ids" />
+                <field
+                    name="published_date"
+                    invisible="not published_date"
+                    widget="datetime"
+                />
+            </calendar>
+        </field>
+    </record>
+
+</odoo>
