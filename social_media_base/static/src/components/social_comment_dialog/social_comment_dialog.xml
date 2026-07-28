@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialCommentDialog">
+        <Dialog size="'md'" contentClass="'dialog-post-comment'" title="'Comments'">
+            <div class="container dialog-social-comment">
+                <t
+                    t-call="social_media_base.postAccountHeader"
+                    t-call-context="renderingContext"
+                />
+                <t
+                    t-call="social_media_base.postAccountMessageImages"
+                    t-call-context="renderingContext"
+                />
+
+                <div class="d-flex justify-content-center">
+                    <hr class="my-2 w-95" />
+                </div>
+
+                <Composer
+                    composer="state.thread.composer"
+                    autofocus="true"
+                    showFullComposer="false"
+                    className="'mt-2 composer-comment'"
+                    mode="'extended'"
+                    type="'comment'"
+                    allowUpload="commentAllowUpload"
+                />
+                <div
+                    t-if="comments.length > 0"
+                    class="shadow row mt-2 mx-1 p-1 rounded-5 post-comments "
+                    t-foreach="comments"
+                    t-as="comment"
+                    t-key="comment.id"
+                >
+                                    <SocialComment
+                        socialComment="comment"
+                        post="record"
+                    />
+                                </div>
+
+            </div>
+        </Dialog>
+    </t>
+</templates>

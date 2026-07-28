@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_post_view_form">
+        <field name="name">social.post.form</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <form js_class="social_form">
+                <header>
+                    <button
+                        type="object"
+                        name="action_create_post_account"
+                        class="oe_highlight"
+                        string="Post"
+                        invisible="hide_post"
+                    />
+                    <button
+                        type="object"
+                        name="action_draft"
+                        string="Draft"
+                        invisible="state in ('draft','published','publishing')"
+                    />
+                    <button
+                        type="object"
+                        name="action_cancel"
+                        string="Cancel"
+                        invisible="state in ('draft','cancelled','published','publishing')"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <div
+                    invisible="not message_info or state not in ('draft','planned')"
+                    class="alert alert-info"
+                    role="alert"
+                >
+                    <field name="message_info" readonly="1" />
+                </div>
+                <div
+                    invisible="not any_failed_post"
+                    class="alert alert-info"
+                    role="alert"
+                >
+                    Press the publish button to retry sending failed posts.
+                </div>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="hide_post" invisible="1" />
+                            <field name="any_failed_post" invisible="1" />
+                            <field
+                                name="account_ids"
+                                widget="many2many_tags"
+                                readonly="state != 'draft'"
+                                options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                            />
+                            <field name="message" readonly="state != 'draft'" />
+                            <field
+                                name="image_ids"
+                                widget="many2many_binary"
+                                options="{'accepted_file_extensions': 'image/jpeg, image/png, image/jpg'}"
+                                readonly="state != 'draft'"
+                            />
+                            <field
+                                name="video_ids"
+                                widget="many2many_binary"
+                                readonly="state != 'draft'"
+                            />
+                            <field name="allow_campaign_ids" invisible="1" />
+                            <field
+                                name="campaign_id"
+                                readonly="state != 'draft'"
+                                domain="[('id', 'in', allow_campaign_ids)]"
+                            />
+                            <field
+                                name="send_post"
+                                readonly="state != 'draft'"
+                                invisible="not message"
+                            />
+                            <field
+                                name="send_post_date"
+                                readonly="send_post != 'schedule' or state != 'draft'"
+                                invisible="send_post != 'schedule'"
+                                required="send_post == 'schedule'"
+                            />
+                            <field
+                                name="user_id"
+                                readonly="1"
+                                groups="!social_media_base.group_social_media_manager"
+                            />
+                            <field
+                                name="user_id"
+                                groups="social_media_base.group_social_media_manager"
+                            />
+                        </group>
+                        <group invisible="state not in ('draft','planned','cancelled')">
+                            <div class="post-preview">
+                                <field name="post_preview" nolabel="1" />
+                            </div>
+                        </group>
+                    </group>
+                    <notebook
+                        invisible="state in ('draft','planned','cancelled') and (post_account_ids and not any_failed_post)"
+                    >
+                        <page
+                            name="post_account_ids"
+                            string="Posts"
+                            invisible="not post_account_ids"
+                        >
+                            <field name="post_account_ids" nolabel="1" readonly="1">
+                                <kanban js_class="social_kanban">
+                                    <field name="message" />
+                                    <field name="published_date" />
+                                    <field name="image_urls" />
+                                    <field name="comment_count" />
+                                    <field name="like_count" />
+                                    <field name="post_account_url" />
+                                    <field name="author" />
+                                    <field name="state" />
+                                    <field name="media_type" />
+                                    <field name="account_id" />
+                                    <templates>
+                                        <t t-name="kanban-box">
+                                            <div
+                                                t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                                            >
+                                                <div class="d-flex justify-content-end">
+                                                    <field
+                                                        name="state"
+                                                        widget="badge"
+                                                        decoration-muted="state == 'ready'"
+                                                        decoration-success="state == 'posted'"
+                                                        decoration-danger="state in ('failed', 'deleted')"
+                                                    />
+                                                </div>
+                                                <t
+                                                    t-call="social_media_base.postAccountHeader"
+                                                />
+
+                                                <div class="oe_kanban_content">
+
+                                                    <t
+                                                        t-set="images"
+                                                        t-value="JSON.parse(record.image_urls.raw_value)"
+                                                    />
+                                                    <t
+                                                        t-call="social_media_base.postAccountMessageImages"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_view_tree">
+        <field name="name">social.post.tree</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-muted="state == 'draft'"
+                decoration-info="state in ('planned','publishing')"
+                decoration-success="state == 'published'"
+                decoration-danger="state == 'cancelled'"
+            >
+                <field name="message" />
+                <field name="account_ids" widget="many2many_tags" />
+                <field name="user_id" optional="show" />
+                <field name="campaign_id" optional="show" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_shares" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+                <field name="state" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_view_kanban">
+        <field name="name">social.post.kanban</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <kanban js_class="social_kanban">
+                <field name="id" />
+                <field name="account_ids" />
+                <field name="campaign_id" />
+                <field name="message" />
+                <field name="published_date" />
+                <field name="image_urls" />
+                <field name="video_ids" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_impression" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click rounded">
+                            <div class="d-flex flex-column">
+                                <div
+                                    class="d-flex justify-content-between align-items-center"
+                                >
+                                    <field name="account_ids" widget="many2many_tags" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-muted="state == 'draft'"
+                                        decoration-info="state in ('planned','publishing')"
+                                        decoration-success="state == 'published'"
+                                        decoration-danger="state == 'cancelled'"
+                                    />
+                                </div>
+                                <hr />
+                                <div t-if="record.message">
+                                    <span
+                                        t-out="record.message.raw_value.substring(0,record.messageLength)"
+                                    />
+                                    <span
+                                        t-if="record.message.raw_value.length > record.messageLength"
+                                        class="cursor-pointer show-more-message"
+                                    >...see more</span>
+                                </div>
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value)"
+                                />
+                                <div
+                                    t-if="images.length > record.countShowImage"
+                                    class="row h-auto social-all-images"
+                                >
+                                    <button class="btn btn-md active" role="button">
+                                        + <t
+                                            t-esc="images.length - record.countShowImage"
+                                        />
+                                    </button>
+                                </div>
+                                <div
+                                    class="d-flex justify-content-between align-items-center mt-1"
+                                >
+                                    <t
+                                        t-foreach="images.slice(0,record.countShowImage)"
+                                        t-as="img"
+                                        t-key="img"
+                                    >
+                                        <img
+                                            t-att-src="img"
+                                            alt="Image"
+                                            class="img-fluid img-posts"
+                                        />
+                                    </t>
+                                </div>
+                                <div
+                                    t-if="record.video_ids.raw_value.length"
+                                    class="d-flex align-items-center gap-2 mt-1"
+                                >
+                                    <i class="fa fa-video-camera" aria-hidden="true" />
+                                    <span>Video (<t
+                                            t-esc="record.video_ids.raw_value.length"
+                                        />)</span>
+                                </div>
+                                <hr />
+                                <span>Clicks: <t
+                                        t-esc="record.count_post_clicks.raw_value"
+                                    /></span>
+                                <span>Interactions: <t
+                                        t-esc="record.count_post_interactions.raw_value"
+                                    /></span>
+                                <span>Engagement: <t
+                                        t-esc="record.count_post_engagement.value"
+                                    /></span>
+                                <t
+                                    t-set="campaignId"
+                                    t-value="Array.isArray(record.campaign_id.raw_value) ? record.campaign_id.raw_value[0] : record.campaign_id.raw_value"
+                                />
+                                <div
+                                    t-if="record.campaign_id.value"
+                                    class="mt-1 d-flex"
+                                >
+                                    <a
+                                        class="badge text-bg-info social-campaign-badge"
+                                        t-att-title="record.campaign_id.value"
+                                        t-attf-href="/web#action=social_media_base.utm_campaign_social_action&amp;id=#{campaignId}&amp;model=utm.campaign&amp;view_type=form"
+                                        onclick="event.stopPropagation()"
+                                    >
+                                        <i
+                                            class="fa fa-bullhorn me-1"
+                                            aria-hidden="true"
+                                        />
+                                        <t t-esc="record.campaign_id.value" />
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="social_post_view_search" model="ir.ui.view">
+        <field name="name">social.post.view.search</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="user_id" />
+                <filter
+                    string="My Posts"
+                    name="my_posts"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Responsible"
+                        name="group_by_user"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+                <searchpanel>
+                    <field name="state" enable_counters="1" />
+                    <field
+                        name="account_ids"
+                        select="multi"
+                        icon="fa-share-alt"
+                        enable_counters="1"
+                        string="Social network"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_post_action">
+        <field name="name">Posts</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first post
+            </p>
+            <p>
+                Write once and publish it to every connected social account.
+                You can schedule it for later or send it right away.
+            </p>
+        </field>
+    </record>
+
+</odoo>

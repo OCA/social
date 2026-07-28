@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="utm_group_campaign_view_tree">
+        <field name="name">utm.group.campaign.tree</field>
+        <field name="model">utm.group.campaign</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="utm_group_campaign_view_form">
+        <field name="name">utm.group.campaign.form</field>
+        <field name="model">utm.group.campaign</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_campaigns"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bullhorn"
+                        >
+                            <field
+                                name="campaign_count"
+                                widget="statinfo"
+                                string="Campaigns"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Winter Campaigns" />
+                        </h1>
+                    </div>
+                    <group name="main" />
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="utm_group_campaign_action">
+        <field name="name">Campaign group</field>
+        <field name="res_model">utm.group.campaign</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first campaign group
+            </p>
+            <p>
+                Campaign groups let you share a total budget across several
+                LinkedIn campaigns and manage them as a unit.
+            </p>
+        </field>
+    </record>
+
+</odoo>

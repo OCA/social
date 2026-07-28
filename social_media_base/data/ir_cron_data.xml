@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="send_post_schedule_job" model="ir.cron">
+        <field name="name">Social Post: Send post schedule</field>
+        <field name="model_id" ref="model_social_post" />
+        <field name="state">code</field>
+        <field name="code">model._run_send_post()</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">1</field>
+    </record>
+
+    <record id="webhook_schedule_job" model="ir.cron">
+        <field name="name">Social: Checking social media updates</field>
+        <field name="model_id" ref="model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model._run_check_media_updates()</field>
+        <field name="interval_number">30</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">1</field>
+    </record>
+
+    <record id="initial_sync_account_job" model="ir.cron">
+        <field name="name">Social: Sync posts statistics</field>
+        <field name="model_id" ref="model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model.update_posts_statistics()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">5</field>
+    </record>
+</odoo>
