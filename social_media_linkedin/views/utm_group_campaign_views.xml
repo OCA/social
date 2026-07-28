@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="utm_group_campaign_view_tree_inherit">
+        <field name="name">utm.group.campaign.view.tree.inherit.linkedin</field>
+        <field name="model">utm.group.campaign</field>
+        <field name="inherit_id" ref="social_media_base.utm_group_campaign_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-warning">linkedin_needs_update</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="total_budget" required="1" />
+                <field name="currency_id" required="1" />
+                <field
+                    name="linkedin_status"
+                    optional="show"
+                    widget="badge"
+                    decoration-success="linkedin_status == 'active'"
+                    decoration-warning="linkedin_status == 'paused'"
+                    decoration-info="linkedin_status == 'draft'"
+                    decoration-danger="linkedin_status in ('canceled', 'pending_deletion', 'removed')"
+                />
+                <field name="linkedin_needs_update" column_invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="utm_group_campaign_view_form_inherit">
+        <field name="name">utm.group.campaign.view.form.inherit.linkedin</field>
+        <field name="model">utm.group.campaign</field>
+        <field name="inherit_id" ref="social_media_base.utm_group_campaign_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="remote_ref" invisible="1" />
+                    <field name="linkedin_needs_update" invisible="1" />
+                    <field
+                        name="linkedin_status"
+                        widget="statusbar"
+                        invisible="not linkedin_status"
+                    />
+                    <button
+                        name="action_publish_linkedin"
+                        type="object"
+                        string="Create in LinkedIn"
+                        class="btn-primary"
+                        invisible="remote_ref"
+                        confirm="The campaign group will be created on LinkedIn in draft status. Continue?"
+                    />
+                    <button
+                        name="action_update_linkedin"
+                        type="object"
+                        string="Update in LinkedIn"
+                        class="btn-primary"
+                        invisible="not remote_ref or not linkedin_needs_update or linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                        confirm="Do you want to update the values on LinkedIn?"
+                    />
+                    <button
+                        name="action_archive_linkedin"
+                        type="object"
+                        string="Archive in LinkedIn"
+                        invisible="not remote_ref or linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                        title="Stops the campaign group on LinkedIn and takes it out of the Campaign Manager lists. LinkedIn does not allow deleting a campaign group, archiving is the only way to end it. LinkedIn applies the same status to all the campaigns of the group, so run Import campaigns afterwards to refresh them in Odoo."
+                        confirm="The campaign group will be archived on LinkedIn, and LinkedIn will archive all its campaigns too. It cannot be reactivated from Odoo. Continue?"
+                    />
+                </header>
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="not linkedin_needs_update or linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                >
+                    The campaign group has local changes that are not
+                    synchronized with LinkedIn. Use the <b>Update in
+                    LinkedIn</b> button to push them.
+                </div>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    invisible="linkedin_status not in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                >
+                    The LinkedIn status of this campaign group does not allow
+                    modifications.
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="after">
+                <widget
+                    name="web_ribbon"
+                    title="Not synced"
+                    tooltip="The local changes have not been pushed to LinkedIn yet"
+                    bg_color="text-bg-warning"
+                    invisible="not linkedin_needs_update"
+                />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute
+                    name="readonly"
+                >linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')</attribute>
+            </xpath>
+            <xpath expr="//group[@name='main']" position="inside">
+                <field
+                    name="total_budget"
+                    required="1"
+                    readonly="linkedin_status in ('archived', 'canceled', 'pending_deletion', 'removed')"
+                />
+                <field
+                    name="currency_id"
+                    required="1"
+                    options="{'no_create_edit': True, 'no_create': True}"
+                />
+                <field name="remote_ref" readonly="1" groups="base.group_no_one" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

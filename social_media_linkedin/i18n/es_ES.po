@@ -1,0 +1,1048 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_linkedin
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-28 01:58+0000\n"
+"PO-Revision-Date: 2026-07-27 22:25+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"%(groups)s campaign group(s), %(campaigns)s campaign(s) and %(ads)s "
+"sponsored post(s) imported from LinkedIn."
+msgstr ""
+"%(groups)s grupo(s) de campaña, %(campaigns)s campaña(s) y %(ads)s "
+"publicación(es) patrocinada(s) importadas de LinkedIn."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "%(message_error)s %(error_response)s"
+msgstr "%(message_error)s %(error_response)s"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__active
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__active
+msgid "Active"
+msgstr "Activa"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"An account with this information already exists; please also check archived "
+"accounts."
+msgstr ""
+"Ya existe una cuenta con esta información; por favor, revise también las "
+"cuentas archivadas."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid ""
+"An error occurred while deleting the comment or it no longer exists, please "
+"try again later."
+msgstr ""
+"Ha ocurrido un error al eliminar el comentario o ya no existe, inténtelo de "
+"nuevo más tarde."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_wizard_social_account__csrf_state_token
+msgid "Anti-CSRF state token used during the OAuth flow."
+msgstr "Token de estado anti-CSRF usado durante el flujo OAuth."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid "Archive in LinkedIn"
+msgstr "Archivar en LinkedIn"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__archived
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__archived
+msgid "Archived"
+msgstr "Archivada"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__unit_cost
+msgid ""
+"Bid amount per click, impression or other event depending on the pricing "
+"model. LinkedIn only applies it with manual, target cost or cost cap "
+"bidding; with automatic bidding it is ignored."
+msgstr ""
+"Importe de la puja por clic, impresión u otro evento según el modelo de "
+"precios. LinkedIn solo la aplica con puja manual, target cost o cost cap; "
+"con puja automática se ignora."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_post__campaign_id
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__campaign_ids
+msgid "Campaign"
+msgstr "Campaña"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "Campaign archived on LinkedIn."
+msgstr "Campaña archivada en LinkedIn."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "Campaign created on LinkedIn in draft status."
+msgstr "Campaña creada en LinkedIn en estado borrador."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "Campaign group archived on LinkedIn."
+msgstr "Grupo de campañas archivado en LinkedIn."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "Campaign group created on LinkedIn in draft status."
+msgstr "Grupo de campañas creado en LinkedIn en estado borrador."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "Campaign group updated on LinkedIn."
+msgstr "Grupo de campañas actualizado en LinkedIn."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.social_account_view_form_inherit
+msgid ""
+"Campaign groups and campaigns of the advertising account will be imported "
+"from LinkedIn. Continue?"
+msgstr ""
+"Se importarán desde LinkedIn los grupos de campañas y las campañas de la "
+"cuenta publicitaria. ¿Continuar?"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "Campaign updated on LinkedIn."
+msgstr "Campaña actualizada en LinkedIn."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__canceled
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__canceled
+msgid "Canceled"
+msgstr "Cancelada"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_client_id
+#: model:ir.model.fields,field_description:social_media_linkedin.field_wizard_social_account__linkedin_client
+msgid "Client ID"
+msgstr "ID de cliente"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_secret
+#: model:ir.model.fields,field_description:social_media_linkedin.field_wizard_social_account__linkedin_secret
+msgid "Client Secret"
+msgstr "Llave secreta de cliente"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__completed
+msgid "Completed"
+msgstr "Completada"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid "Create in LinkedIn"
+msgstr "Crear en LinkedIn"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Creating account: %(error)s"
+msgstr "Error al crear la cuenta: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Creating account: LinkedIn answered without an access token. %(error)s"
+msgstr ""
+"Error al crear la cuenta: LinkedIn respondió sin token de acceso. %(error)s"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_post_account__creative_urn
+msgid "Creative Urn"
+msgstr "URN de la creatividad"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_wizard_social_account__csrf_state_token
+msgid "Csrf State Token"
+msgstr "Token de estado CSRF"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__currency_id
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__daily_budget
+msgid "Daily Budget"
+msgstr "Presupuesto diario"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid "Do you want to update the values on LinkedIn?"
+msgstr "¿Desea actualizar los valores en LinkedIn?"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__draft
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__draft
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "ERROR CREATE COMMENT LINKEDIN: %(error)s"
+msgstr "ERROR AL CREAR COMENTARIO EN LINKEDIN: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "ERROR GET COMMENTS LINKEDIN: %(error)s"
+msgstr "ERROR AL OBTENER COMENTARIOS DE LINKEDIN: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "Error archiving campaign group in Linkedin: %(error)s"
+msgstr "Error al archivar el grupo de campañas en LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "Error archiving campaign in Linkedin: %(error)s"
+msgstr "Error al archivar la campaña en LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Error connecting to LinkedIn: %(error)s"
+msgstr "Error al conectar con LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "Error creating campaign post in Linkedin: %(error)s"
+msgstr "Error al crear el post de campaña en LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "Error creating group campaign in Linkedin: %(error)s"
+msgstr "Error al crear el grupo de campañas en LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "Error deleting LinkedIn post: %(error)s"
+msgstr "Error al eliminar el post de LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Error get advertising account in Linkedin: %(error)s"
+msgstr "Error al obtener la cuenta publicitaria de LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Error getting campaigns from Linkedin: %(error)s"
+msgstr "Error al obtener las campañas de LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "Error obtaining information from the organization"
+msgstr "Error al obtener información de la organización"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "Error updating campaign group in Linkedin: %(error)s"
+msgstr "Error al actualizar el grupo de campañas en LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "Error updating campaign in Linkedin: %(error)s"
+msgstr "Error al actualizar la campaña en LinkedIn: %(error)s"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__refresh_token_expires_in
+msgid "Expire Refresh Token"
+msgstr "Fecha de expiración del token de actualización"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "GET ADS: %(error)s"
+msgstr "GET ADS: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "GET CAMPAIGNS STATISTICS: %(error)s"
+msgstr "GET CAMPAIGNS STATISTICS: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "GET CAMPAIGNS: %(error)s"
+msgstr "GET CAMPAIGNS: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "GET SHARE POSTS STATISTICS: %(error)s"
+msgstr "GET SHARE POSTS STATISTICS: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "GET UGC POSTS STATISTICS: %(error)s"
+msgstr "GET UGC POSTS STATISTICS: %(error)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "GET UGC POSTS: %(error)s"
+msgstr "GET UGC POSTS: %(error)s"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_group_campaign__remote_ref
+msgid ""
+"Identifier of this campaign group on the social network. It is set by the "
+"connector module of each social media."
+msgstr ""
+"Identificador de este grupo de campañas en la red social. Lo establece el "
+"módulo conector de cada red social."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__remote_ref
+msgid ""
+"Identifier of this campaign on the social network. It is set by the "
+"connector module of each social media."
+msgstr ""
+"Identificador de esta campaña en la red social. Lo establece el módulo "
+"conector de cada red social."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.social_account_view_form_inherit
+msgid "Import campaigns"
+msgstr "Importar campañas"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"Import kept the local pending changes. LinkedIn values: name: %(name)s, "
+"total budget: %(total_budget)s %(currency)s"
+msgstr ""
+"La importación conservó los cambios locales pendientes. Valores de LinkedIn: "
+"nombre: %(name)s, presupuesto total: %(total_budget)s %(currency)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"Import kept the local pending changes. LinkedIn values: name: %(name)s, unit "
+"cost: %(unit_cost)s, daily budget: %(daily_budget)s, campaign group: "
+"%(group)s"
+msgstr ""
+"La importación conservó los cambios locales pendientes. Valores de LinkedIn: "
+"nombre: %(name)s, coste unitario: %(unit_cost)s, presupuesto diario: "
+"%(daily_budget)s, grupo de campañas: %(group)s"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"Invalid OAuth state token. Please restart the account association process."
+msgstr ""
+"Token de estado OAuth no válido. Reinicie el proceso de asociación de la "
+"cuenta."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__social_media__media_type__linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+msgid "LinkedIn"
+msgstr "LinkedIn"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__linkedin_needs_update
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__linkedin_needs_update
+msgid "LinkedIn Pending Changes"
+msgstr "Cambios pendientes de LinkedIn"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__linkedin_status
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__linkedin_status
+msgid "LinkedIn Status"
+msgstr "Estado de LinkedIn"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__linkedin_is_test
+msgid "LinkedIn Test Campaign"
+msgstr "Campaña de prueba de LinkedIn"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"LinkedIn rejected the credentials of the App. Check the Client ID and the "
+"Client Secret of your LinkedIn App."
+msgstr ""
+"LinkedIn ha rechazado las credenciales de la App. Revise el Client ID y el "
+"Client Secret de su App de LinkedIn."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_account__linkedin_account_id
+msgid "Linkedin Account"
+msgstr "Cuenta de Linkedin"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__remote_ref
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__remote_ref
+msgid "Linkedin URN"
+msgstr "URN de LinkedIn"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_group_campaign__total_budget
+msgid ""
+"Maximum amount to spend across all the campaigns and creatives of this group "
+"for its entire duration. It cannot be lower than the daily budgets of its "
+"campaigns."
+msgstr ""
+"Importe máximo a gastar entre todas las campañas y creatividades de este "
+"grupo durante toda su duración. No puede ser inferior a los presupuestos "
+"diarios de sus campañas."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__daily_budget
+msgid ""
+"Maximum amount to spend on this campaign per day. The campaign group total "
+"budget limits the overall spending."
+msgstr ""
+"Importe máximo a gastar en esta campaña por día. El presupuesto total del "
+"grupo de campañas limita el gasto global."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_social_media__media_type
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__media_type
+msgid "Media Type"
+msgstr "Tipo de red social"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid ""
+"No LinkedIn advertising account is available for the account %(account)s."
+msgstr ""
+"No hay ninguna cuenta publicitaria de LinkedIn disponible para la cuenta "
+"%(account)s."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "No LinkedIn social account is available to archive the group."
+msgstr ""
+"No hay ninguna cuenta social de LinkedIn disponible para archivar el grupo."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "No LinkedIn social account is available to create the group."
+msgstr ""
+"No hay ninguna cuenta social de LinkedIn disponible para crear el grupo."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "No LinkedIn social account is available to update the group."
+msgstr ""
+"No hay ninguna cuenta social de LinkedIn disponible para actualizar el grupo."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid "Not synced"
+msgstr "Sin sincronizar"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__paused
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__paused
+msgid "Paused"
+msgstr "Pausada"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__pending_deletion
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__pending_deletion
+msgid "Pending deletion"
+msgstr "Pendiente de eliminación"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "REFRESH TOKEN: %(error)s"
+msgstr "Token de actualización: %(error)s"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_group_campaign__linkedin_status
+msgid ""
+"Real status of the campaign group on LinkedIn. It is set when the group is "
+"created from Odoo and refreshed when campaigns are imported from LinkedIn."
+msgstr ""
+"Estado real del grupo de campañas en LinkedIn. Se establece al crear el "
+"grupo desde Odoo y se actualiza al importar las campañas desde LinkedIn."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__linkedin_status
+msgid ""
+"Real status of the campaign on LinkedIn. It is set when the campaign is "
+"created from Odoo and refreshed when campaigns are imported from LinkedIn."
+msgstr ""
+"Estado real de la campaña en LinkedIn. Se establece al crear la campaña "
+"desde Odoo y se actualiza al importar las campañas desde LinkedIn."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_campaign__linkedin_status__removed
+#: model:ir.model.fields.selection,name:social_media_linkedin.selection__utm_group_campaign__linkedin_status__removed
+msgid "Removed"
+msgstr "Eliminada"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_account
+msgid "Social Account"
+msgstr "Cuenta de red social"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_media
+msgid "Social Media"
+msgstr "Red social"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_post
+msgid "Social Post"
+msgstr "Publicación de red social"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_social_post_account
+msgid "Social Post Account"
+msgstr "Publicación de red social"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid ""
+"Stops the campaign group on LinkedIn and takes it out of the Campaign "
+"Manager lists. LinkedIn does not allow deleting a campaign group, archiving "
+"is the only way to end it. LinkedIn applies the same status to all the "
+"campaigns of the group, so run Import campaigns afterwards to refresh them "
+"in Odoo."
+msgstr ""
+"Detiene el grupo de campañas en LinkedIn y lo saca de las listas del "
+"Campaign Manager. LinkedIn no permite eliminar un grupo de campañas, "
+"archivarlo es la única forma de terminarlo. LinkedIn aplica el mismo estado "
+"a todas las campañas del grupo, así que ejecute Importar campañas después "
+"para actualizarlas en Odoo."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+msgid ""
+"Stops the campaign on LinkedIn and takes it out of the Campaign Manager "
+"lists. LinkedIn does not allow deleting a campaign, archiving is the only "
+"way to end it. The campaign is kept in Odoo with its performance data, and "
+"it can no longer be modified."
+msgstr ""
+"Detiene la campaña en LinkedIn y la saca de las listas del Campaign Manager. "
+"LinkedIn no permite eliminar una campaña, archivarla es la única forma de "
+"terminarla. La campaña se conserva en Odoo con sus datos de rendimiento y ya "
+"no se puede modificar."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+msgid ""
+"The LinkedIn status of this campaign does not allow\n"
+"                    modifications."
+msgstr "El estado en LinkedIn de esta campaña no permite modificaciones."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid ""
+"The LinkedIn status of this campaign group does not allow\n"
+"                    modifications."
+msgstr ""
+"El estado en LinkedIn de este grupo de campañas no permite modificaciones."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"The access token of LinkedIn was revoked. Update the account to authorize it "
+"again."
+msgstr ""
+"El token de acceso de LinkedIn ha sido revocado. Actualice la cuenta para "
+"volver a autorizarla."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The amount you want to add exceeds the campaign group limit."
+msgstr "La cantidad que desea agregar excede el límite del grupo de campañas."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"The authorization of LinkedIn is no longer valid. Please restart the account "
+"association process."
+msgstr ""
+"La autorización de LinkedIn ya no es válida. Reinicie el proceso de "
+"asociación de la cuenta."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The campaign %(campaign)s has not been created on LinkedIn yet. Use the "
+"'Create in LinkedIn' button on the campaign before posting."
+msgstr ""
+"La campaña %(campaign)s aún no se ha creado en LinkedIn. Use el botón 'Crear "
+"en LinkedIn' de la campaña antes de publicar."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid ""
+"The campaign %(names)s cannot be modified because of its LinkedIn status "
+"(%(status)s)."
+msgstr ""
+"La campaña %(names)s no se puede modificar por su estado en LinkedIn "
+"(%(status)s)."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid ""
+"The campaign cannot be archived because of its LinkedIn status (%(status)s)."
+msgstr ""
+"La campaña no se puede archivar por su estado en LinkedIn (%(status)s)."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid ""
+"The campaign cannot be updated because of its LinkedIn status (%(status)s)."
+msgstr ""
+"La campaña no se puede actualizar por su estado en LinkedIn (%(status)s)."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The campaign could not be generated for the post, please try again later."
+msgstr ""
+"La campaña no se pudo generar para el post, inténtelo de nuevo más tarde."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign daily budget must be positive."
+msgstr "El presupuesto diario de la campaña debe ser positivo."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign does not exist on LinkedIn yet."
+msgstr "La campaña aún no existe en LinkedIn."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid ""
+"The campaign group %(group)s does not exist on LinkedIn. Create or import it "
+"before updating the campaign."
+msgstr ""
+"El grupo de campañas %(group)s no existe en LinkedIn. Créelo o impórtelo "
+"antes de actualizar la campaña."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid ""
+"The campaign group %(names)s cannot be modified because of its LinkedIn "
+"status (%(status)s)."
+msgstr ""
+"El grupo de campañas %(names)s no se puede modificar por su estado en "
+"LinkedIn (%(status)s)."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "The campaign group already exists on LinkedIn."
+msgstr "El grupo de campañas ya existe en LinkedIn."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+msgid ""
+"The campaign group and the campaign will be created on LinkedIn in draft "
+"status. Continue?"
+msgstr ""
+"El grupo de campañas y la campaña se crearán en LinkedIn en estado borrador. "
+"¿Continuar?"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid ""
+"The campaign group cannot be archived because of its LinkedIn status "
+"(%(status)s)."
+msgstr ""
+"El grupo de campañas no se puede archivar por su estado en LinkedIn "
+"(%(status)s)."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid ""
+"The campaign group cannot be updated because of its LinkedIn status "
+"(%(status)s)."
+msgstr ""
+"El grupo de campañas no se puede actualizar por su estado en LinkedIn "
+"(%(status)s)."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "The campaign group does not exist on LinkedIn yet."
+msgstr "El grupo de campañas aún no existe en LinkedIn."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid ""
+"The campaign group has local changes that are not\n"
+"                    synchronized with LinkedIn. Use the <b>Update in\n"
+"                    LinkedIn</b> button to push them."
+msgstr ""
+"El grupo de campañas tiene cambios locales que no están sincronizados con "
+"LinkedIn. Use el botón <b>Actualizar en LinkedIn</b> para enviarlos."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "The campaign group must have a currency."
+msgstr "El grupo de campañas debe tener una moneda."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#: code:addons/social_media_linkedin/models/utm_group_campaign.py:0
+#, python-format
+msgid "The campaign group total budget must be positive."
+msgstr "El presupuesto total del grupo de campañas debe ser positivo."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_group_campaign__linkedin_needs_update
+msgid ""
+"The campaign group was modified in Odoo after being synchronized with "
+"LinkedIn. Use the 'Update in LinkedIn' button to push the local values."
+msgstr ""
+"El grupo de campañas se modificó en Odoo después de sincronizarse con "
+"LinkedIn. Use el botón 'Actualizar en LinkedIn' para enviar los valores "
+"locales."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid ""
+"The campaign group will be archived on LinkedIn, and LinkedIn will archive "
+"all its campaigns too. It cannot be reactivated from Odoo. Continue?"
+msgstr ""
+"El grupo de campañas se archivará en LinkedIn, y LinkedIn archivará también "
+"todas sus campañas. No se puede reactivar desde Odoo. ¿Continuar?"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid ""
+"The campaign group will be created on LinkedIn in draft status. Continue?"
+msgstr ""
+"El grupo de campañas se creará en LinkedIn en estado borrador. ¿Continuar?"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+msgid ""
+"The campaign has local changes that are not synchronized\n"
+"                    with LinkedIn. Use the <b>Update in LinkedIn</b> button "
+"to\n"
+"                    push them."
+msgstr ""
+"La campaña tiene cambios locales que no están sincronizados con LinkedIn. "
+"Use el botón <b>Actualizar en LinkedIn</b> para enviarlos."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign media must be LinkedIn."
+msgstr "El medio de la campaña debe ser LinkedIn."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign must belong to a campaign group."
+msgstr "La campaña debe pertenecer a un grupo de campañas."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign must have a social account and a currency."
+msgstr "La campaña debe tener una cuenta social y una moneda."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign must have a social account."
+msgstr "La campaña debe tener una cuenta social."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/utm_campaign.py:0
+#, python-format
+msgid "The campaign unit cost must be positive."
+msgstr "El coste unitario de la campaña debe ser positivo."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__linkedin_needs_update
+msgid ""
+"The campaign was modified in Odoo after being synchronized with LinkedIn. "
+"Use the 'Update in LinkedIn' button to push the local values."
+msgstr ""
+"La campaña se modificó en Odoo después de sincronizarse con LinkedIn. Use el "
+"botón 'Actualizar en LinkedIn' para enviar los valores locales."
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+msgid ""
+"The campaign will be archived on LinkedIn and will stop running. It cannot "
+"be reactivated from Odoo. It stays in Odoo with its performance data. "
+"Continue?"
+msgstr ""
+"La campaña se archivará en LinkedIn y dejará de ejecutarse. No se puede "
+"reactivar desde Odoo. Se mantiene en Odoo con sus datos de rendimiento. "
+"¿Continuar?"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "The post could not be deleted, please try again later."
+msgstr "El post no se pudo eliminar, inténtelo de nuevo más tarde."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "The post does not exist or has been deleted."
+msgstr "El post no existe o ha sido eliminado."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The post was published on LinkedIn but the campaign creative could not be "
+"created. Check the Ads permissions of the account."
+msgstr ""
+"El post se publicó en LinkedIn pero la creatividad de la campaña no se pudo "
+"crear. Revise los permisos de Ads de la cuenta."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "The token is valid."
+msgstr "El token es válido."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/wizards/wizard_social_account.py:0
+#, python-format
+msgid "The token was updated successfully"
+msgstr "El token se actualizó correctamente"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"This campaign group was deleted on LinkedIn. It is kept in Odoo as history "
+"because LinkedIn still returns it with its performance data."
+msgstr ""
+"Este grupo de campañas se eliminó en LinkedIn. Se conserva en Odoo como "
+"histórico porque LinkedIn lo sigue devolviendo con sus datos de rendimiento."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid ""
+"This campaign was deleted on LinkedIn. It is kept in Odoo as history because "
+"LinkedIn still returns it with its performance data."
+msgstr ""
+"Esta campaña se eliminó en LinkedIn. Se conserva en Odoo como histórico "
+"porque LinkedIn la sigue devolviendo con sus datos de rendimiento."
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_group_campaign__total_budget
+msgid "Total Budget"
+msgstr "Presupuesto total"
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_account.py:0
+#, python-format
+msgid "UPLOADING MEDIA: %(error_media)s"
+msgstr "ERROR AL SUBIR EL ARCHIVO: %(error_media)s"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_utm_campaign
+msgid "UTM Campaign"
+msgstr "Campaña UTM"
+
+#. module: social_media_linkedin
+#: model:ir.model,name:social_media_linkedin.model_utm_group_campaign
+msgid "UTM Group Campaign"
+msgstr "Grupo de campañas UTM"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,field_description:social_media_linkedin.field_utm_campaign__unit_cost
+msgid "Unit Cost"
+msgstr "Costo unitario"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_campaign_view_form_inherit
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.utm_group_campaign_view_form_inherit
+msgid "Update in LinkedIn"
+msgstr "Actualizar en LinkedIn"
+
+#. module: social_media_linkedin
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin.social_account_view_form_inherit
+msgid "Validate token"
+msgstr "Validar token"
+
+#. module: social_media_linkedin
+#: model:ir.model.fields,help:social_media_linkedin.field_utm_campaign__linkedin_is_test
+msgid "Whether LinkedIn flags this campaign as a test campaign."
+msgstr "Indica si LinkedIn marca esta campaña como campaña de prueba."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post_account.py:0
+#, python-format
+msgid "You have already reacted to this post."
+msgstr "Ya ha reaccionado a este post."
+
+#. module: social_media_linkedin
+#. odoo-python
+#: code:addons/social_media_linkedin/models/social_post.py:0
+#, python-format
+msgid ""
+"You have selected images and videos for this post. However, the social media "
+"LinkedIn does not allow combining both types of content in the same post. "
+"Therefore, only the images will be published. If you wish to publish a "
+"video, please remove the images from this post or create a separate post."
+msgstr ""
+"Has seleccionado imágenes y vídeos para esta publicación. Sin embargo, la "
+"red social LinkedIn no permite combinar ambos tipos de contenido en la misma "
+"publicación. Por lo tanto, solo se publicarán las imágenes. Si deseas "
+"publicar un vídeo, elimina las imágenes de esta publicación o crea una "
+"publicación aparte."

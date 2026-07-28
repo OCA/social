@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="social_media_linkedin" model="social.media">
+        <field name="name">LinkedIn</field>
+        <field name="media_type">linkedin</field>
+        <field
+            name="description"
+        >Manage your LinkedIn account and schedule posts</field>
+        <field
+            name="image"
+            type="base64"
+            file="social_media_linkedin/static/description/icon.png"
+        />
+    </record>
+</odoo>
