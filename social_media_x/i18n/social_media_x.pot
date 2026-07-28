@@ -1,0 +1,283 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_x
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-07-27 23:05+0000\n"
+"PO-Revision-Date: 2026-07-27 23:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_api_key
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__x_api_key
+msgid "API Key"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_api_secret
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__x_api_secret
+msgid "API Secret"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/wizards/wizard_social_account.py:0
+#, python-format
+msgid ""
+"Account access could not be authorized. Please check your settings or try "
+"again later."
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/wizards/wizard_social_account.py:0
+#, python-format
+msgid "An account with that information already exists."
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid "ERROR DELETE POST X: %(error)s"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__enable_since
+msgid "Enable Since"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__engagement
+msgid "Engagement"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid "Error Comment Tweet: %(error)s)"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid "Error Get Comment Post: %(error)s"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid "Error Get Comments for Tweet: %(error)s)"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid "Error getting X access token: %(error)s"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"Invalid X callback: the request token is missing. Please restart the account"
+" association process."
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"Invalid X request token. Please restart the account association process."
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__last_post_id
+msgid "Last Post"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_media__media_type
+msgid "Media Type"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__oauth_token
+msgid "Oauth Token"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__post_since_id
+msgid "Post Since"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__x_access_token_oauth1
+msgid "Post, like, comment, answer"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__quote_count
+#: model:ir.model.fields,field_description:social_media_x.field_social_post_account__quote_count
+msgid "Quote Count"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__rate_limit_endpoint
+msgid "Rate Limit Endpoint"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__enable_since
+msgid ""
+"Read only the posts published after the last one already synchronized, to "
+"consume fewer API requests. The metrics of the previous posts are no longer "
+"updated while this option is on."
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__x_access_token_oauth2
+msgid "Read tweets"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__retweet_count
+#: model:ir.model.fields,field_description:social_media_x.field_social_post_account__retweet_count
+msgid "Retweet Count"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_account
+msgid "Social Account"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_media
+msgid "Social Media"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_post
+msgid "Social Post"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_post_account
+msgid "Social Post Account"
+msgstr ""
+
+#. module: social_media_x
+#: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
+msgid ""
+"The X API no longer has a free access tier. The developer\n"
+"                    App must belong to a Project and be enrolled in a paid\n"
+"                    plan, otherwise X rejects every request of this module.\n"
+"                    See the"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"The account was not created: the OAuth2 access token could not be obtained."
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"There are X accounts with the same username (%(username)s), please check to "
+"avoid spam errors."
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__post_since_id
+msgid "This post is updated with each request with the latest one."
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_token_oauth2
+msgid "Token for read"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_token_oauth1
+msgid "Token for write"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid "Unexpected response from X: %(error)s"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__username
+msgid "Username"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields.selection,name:social_media_x.selection__social_media__media_type__x
+msgid "X"
+msgstr ""
+
+#. module: social_media_x
+#: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
+msgid "X API pricing"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_secret_oauth1
+msgid "X Access Secret Oauth1"
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_post_account__x_post_url
+msgid "X Post Url"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"X rejected the request because the developer App is not enrolled in a paid "
+"plan. The X API no longer has a free access tier: attach the App to a "
+"Project and subscribe a plan at <a href='%(pricing_url)s' target='_blank'>X "
+"API pricing</a>, then try again."
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"You have reached the limit of requests <b>%(endpoint)s</b> allowed according"
+" to your account plan.<br>• <b>Total limit:</b> %(limit)s request(s) per "
+"window or period<br>• <b>Remaining:</b> %(remaining)s<br>• <b>Next "
+"request:</b> %(next_request)s<br>Please try again after that time (Next "
+"request).<br>For more information, see the <a href='%(rate_limit_url)s' "
+"target='_blank'>rate limits</a>."
+msgstr ""
