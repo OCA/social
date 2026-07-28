@@ -1,0 +1,6 @@
+.dialog-post-comment {
+    @include border-radius(1.5rem);
+    .composer-comment {
+        padding: 0 !important;
+    }
+}

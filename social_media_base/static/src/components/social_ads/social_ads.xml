@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="social_media_base.SocialAds">
+        <div class="social-network-ads p-2 cursor-pointer" t-on-click="onAdsClick">
+            <div class="d-flex justify-content-between">
+                <img
+                    t-if="ads.media_type"
+                    t-attf-src="/social_media_#{ads.media_type}/static/img/#{ads.media_type}.png"
+                    t-att-alt="ads.media_type"
+                    class="o_object_fit_cover rounded"
+                    width="40"
+                    height="40"
+                />
+                <span t-if="post.name" class="text-dark" t-esc="post.name" />
+                <span t-else="" class="text-dark">No post available</span>
+                <span class="text-dark rounded h-25" t-esc="ads.created" />
+            </div>
+            <div class="d-flex justify-content-between pt-2">
+                <span class="text-dark"><t t-esc="campaign.name" /></span>
+                <span
+                    t-if="ads.status"
+                    t-attf-class="badge text-white p-2 bg-{{ ads.status_level or 'secondary' }}"
+                    t-att-title="ads.status_detail"
+                    t-esc="ads.status"
+                />
+            </div>
+            <div class="d-flex justify-content-around pt-2">
+                <span class="text-dark">
+                    Impressions: <t
+                        t-esc="statistic.impressions > 0 ? statistic.impressions : '0'"
+                    />
+                </span>
+                <span class="text-dark">
+                    Clicks: <t t-esc="statistic.clicks > 0 ? statistic.clicks : '0'" />
+                </span>
+            </div>
+        </div>
+    </t>
+</templates>

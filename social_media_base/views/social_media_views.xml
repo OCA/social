@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_media_view_kanban">
+        <field name="name">social.media.kanban</field>
+        <field name="model">social.media</field>
+        <field name="arch" type="xml">
+            <kanban create="0" edit="0" delete="0" js_class="social_kanban">
+                <field name="name" />
+                <field name="description" />
+                <field name="image" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="d-flex rounded">
+                            <t
+                                t-set="image_account"
+                                t-value="kanban_image('social.media', 'image', record.id.raw_value)"
+                            />
+                            <img
+                                t-attf-src="#{image_account}"
+                                class="img img-fluid"
+                                height="50"
+                                width="100"
+                                t-att-alt="record.id.value"
+                            />
+                            <div class="d-flex flex-column p-2">
+                                <h5 class="title" t-esc="record.name.raw_value" />
+                                <p class="text" t-esc="record.description.raw_value" />
+                                <button
+                                    type="object"
+                                    class="btn btn-primary"
+                                    name="open_action_account"
+                                >Associate account
+                                </button>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_media_action">
+        <field name="name">Social Media</field>
+        <field name="res_model">social.media</field>
+        <field name="view_mode">kanban</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+
+</odoo>
