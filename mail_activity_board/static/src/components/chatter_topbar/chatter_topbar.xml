@@ -6,7 +6,7 @@
         t-inherit-mode="extension"
         owl="1"
     >
-        <t t-if="chatterTopbar.chatter.hasActivities" position="after">
+        <t t-if="chatterTopbar.chatter.hasActivities" position="inside">
             <button
                 class="btn btn-link o_ChatterTopbar_button"
                 type="button"
