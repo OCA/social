@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Routing Rule Form View -->
+    <record id="view_engage_routing_rule_form" model="ir.ui.view">
+        <field name="name">engage.routing.rule.form</field>
+        <field name="model">engage.routing.rule</field>
+        <field name="arch" type="xml">
+            <form string="Routing Rule">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" string="Rule Name" />
+                        <h1>
+                            <field
+                                name="name"
+                                placeholder="e.g., VIP to Premium Team"
+                            />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sequence" />
+                            <field name="active" />
+                        </group>
+                        <group>
+                            <field name="match_count" readonly="1" />
+                            <field name="last_match_date" readonly="1" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Conditions" name="conditions">
+                            <group string="Channel Condition">
+                                <field name="channel_type" />
+                                <field name="time_condition" />
+                            </group>
+                            <group string="Customer Conditions">
+                                <field name="partner_vip" />
+                                <field
+                                    name="partner_tag_ids"
+                                    widget="many2many_tags"
+                                    options="{'color_field': 'color'}"
+                                />
+                                <field
+                                    name="partner_country_ids"
+                                    widget="many2many_tags"
+                                />
+                            </group>
+                            <group string="Content Conditions">
+                                <field
+                                    name="keyword_match"
+                                    placeholder="urgent, help, complaint"
+                                />
+                                <field
+                                    name="keyword_match_mode"
+                                    invisible="not keyword_match"
+                                />
+                            </group>
+                            <group string="Source">
+                                <field name="source_team_id" />
+                            </group>
+                        </page>
+
+                        <page string="Actions" name="actions">
+                            <group string="Assignment">
+                                <field name="target_team_id" />
+                                <field
+                                    name="use_team_assignment"
+                                    invisible="not target_team_id"
+                                />
+                                <field name="target_user_id" />
+                            </group>
+                            <group string="Properties">
+                                <field name="set_priority" />
+                                <field
+                                    name="add_label_ids"
+                                    widget="many2many_tags"
+                                    options="{'color_field': 'color'}"
+                                />
+                            </group>
+                            <group string="Auto-Response" col="1">
+                                <field
+                                    name="auto_message"
+                                    placeholder="Hi! Thanks for contacting us. An agent will be with you shortly."
+                                />
+                                <field
+                                    name="auto_message_delay"
+                                    invisible="not auto_message"
+                                />
+                            </group>
+                        </page>
+
+                        <page string="Description" name="description">
+                            <field
+                                name="description"
+                                nolabel="1"
+                                placeholder="Describe what this rule does and when it should apply..."
+                            />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Routing Rule Tree View -->
+    <record id="view_engage_routing_rule_tree" model="ir.ui.view">
+        <field name="name">engage.routing.rule.tree</field>
+        <field name="model">engage.routing.rule</field>
+        <field name="arch" type="xml">
+            <list string="Routing Rules">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="channel_type" optional="show" />
+                <field name="partner_vip" optional="show" />
+                <field name="target_team_id" />
+                <field name="target_user_id" optional="show" />
+                <field name="set_priority" optional="show" />
+                <field name="match_count" />
+                <field name="last_match_date" optional="show" />
+                <field name="active" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Routing Rule Search View -->
+    <record id="view_engage_routing_rule_search" model="ir.ui.view">
+        <field name="name">engage.routing.rule.search</field>
+        <field name="model">engage.routing.rule</field>
+        <field name="arch" type="xml">
+            <search string="Routing Rules">
+                <field name="name" />
+                <field name="target_team_id" />
+                <field name="target_user_id" />
+                <filter
+                    name="active"
+                    string="Active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="vip_rules"
+                    string="VIP Rules"
+                    domain="[('partner_vip', '=', True)]"
+                />
+                <filter
+                    name="with_auto_message"
+                    string="With Auto-Response"
+                    domain="[('auto_message', '!=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_channel"
+                        string="Channel"
+                        context="{'group_by': 'channel_type'}"
+                    />
+                    <filter
+                        name="group_team"
+                        string="Target Team"
+                        context="{'group_by': 'target_team_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Routing Rule Action -->
+    <record id="action_engage_routing_rule" model="ir.actions.act_window">
+        <field name="name">Routing Rules</field>
+        <field name="res_model">engage.routing.rule</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Routing Rule
+            </p>
+            <p>
+                Routing rules automatically assign conversations to teams
+                or agents based on conditions like channel, customer type, and keywords.
+            </p>
+        </field>
+    </record>
+
+    <!-- Conversation Form - Routing Rule field -->
+    <record id="view_engage_conversation_form_routing" model="ir.ui.view">
+        <field name="name">engage.conversation.form.routing</field>
+        <field name="model">engage.conversation</field>
+        <field
+            name="inherit_id"
+            ref="customer_engagement.engage_conversation_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="team_id" position="after">
+                <field name="routing_rule_id" readonly="1" />
+            </field>
+        </field>
+    </record>
+</odoo>

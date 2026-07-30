@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <!-- Greeting Responses -->
+
+    <record id="canned_greeting_hello" model="engage.canned.response">
+        <field name="name">Hello Greeting</field>
+        <field name="shortcut">hello</field>
+        <field name="category">greeting</field>
+        <field name="sequence">1</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Olá! 👋</p>
+            <p>Obrigado por entrar em contato conosco. Como posso ajudá-lo hoje?</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_greeting_welcome" model="engage.canned.response">
+        <field name="name">Welcome Back</field>
+        <field name="shortcut">welcome</field>
+        <field name="category">greeting</field>
+        <field name="sequence">2</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Olá, seja bem-vindo de volta!</p>
+            <p>Fico feliz em atendê-lo novamente. Em que posso ajudar?</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_greeting_morning" model="engage.canned.response">
+        <field name="name">Good Morning</field>
+        <field name="shortcut">bomdia</field>
+        <field name="category">greeting</field>
+        <field name="sequence">3</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Bom dia! ☀️</p>
+            <p>Obrigado por entrar em contato. Como posso ajudá-lo?</p>
+        ]]></field>
+    </record>
+
+    <!-- Closing Responses -->
+
+    <record id="canned_closing_thanks" model="engage.canned.response">
+        <field name="name">Thank You Closing</field>
+        <field name="shortcut">thanks</field>
+        <field name="category">closing</field>
+        <field name="sequence">10</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Obrigado pelo contato!</p>
+            <p>Se tiver mais alguma dúvida, estamos à disposição.</p>
+            <p>Tenha um ótimo dia! 😊</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_closing_resolved" model="engage.canned.response">
+        <field name="name">Issue Resolved</field>
+        <field name="shortcut">resolved</field>
+        <field name="category">closing</field>
+        <field name="sequence">11</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Fico feliz em saber que o problema foi resolvido! ✅</p>
+            <p>Caso precise de mais alguma coisa, não hesite em nos contatar.</p>
+            <p>Obrigado pela preferência!</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_closing_feedback" model="engage.canned.response">
+        <field name="name">Request Feedback</field>
+        <field name="shortcut">feedback</field>
+        <field name="category">closing</field>
+        <field name="sequence">12</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Espero que tenha conseguido ajudá-lo!</p>
+            <p>Se puder, nos dê um feedback sobre o atendimento. Sua opinião é muito importante para melhorarmos nossos serviços.</p>
+            <p>Obrigado!</p>
+        ]]></field>
+    </record>
+
+    <!-- Information Responses -->
+
+    <record id="canned_info_wait" model="engage.canned.response">
+        <field name="name">Please Wait</field>
+        <field name="shortcut">wait</field>
+        <field name="category">info</field>
+        <field name="sequence">20</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Um momento, por favor. ⏳</p>
+            <p>Estou verificando as informações para você.</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_info_checking" model="engage.canned.response">
+        <field name="name">Checking Information</field>
+        <field name="shortcut">checking</field>
+        <field name="category">info</field>
+        <field name="sequence">21</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Estou consultando nosso sistema para obter as informações necessárias.</p>
+            <p>Retorno em breve com uma resposta. 🔍</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_info_hours" model="engage.canned.response">
+        <field name="name">Business Hours</field>
+        <field name="shortcut">horario</field>
+        <field name="category">info</field>
+        <field name="sequence">22</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Nosso horário de atendimento é:</p>
+            <ul>
+                <li>Segunda a Sexta: 8h às 18h</li>
+                <li>Sábado: 8h às 12h</li>
+            </ul>
+            <p>Fora deste horário, deixe sua mensagem que retornaremos assim que possível.</p>
+        ]]></field>
+    </record>
+
+    <!-- Apology Responses -->
+
+    <record id="canned_apology_delay" model="engage.canned.response">
+        <field name="name">Apology for Delay</field>
+        <field name="shortcut">sorry</field>
+        <field name="category">apology</field>
+        <field name="sequence">30</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Pedimos desculpas pela demora no retorno. 🙏</p>
+            <p>Estamos trabalhando para resolver sua solicitação o mais rápido possível.</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_apology_inconvenience" model="engage.canned.response">
+        <field name="name">Apology for Inconvenience</field>
+        <field name="shortcut">desculpa</field>
+        <field name="category">apology</field>
+        <field name="sequence">31</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Lamentamos pelo transtorno causado.</p>
+            <p>Estamos empenhados em resolver essa situação para você.</p>
+            <p>Agradecemos sua compreensão.</p>
+        ]]></field>
+    </record>
+
+    <!-- Follow-up Responses -->
+
+    <record id="canned_followup_update" model="engage.canned.response">
+        <field name="name">Status Update</field>
+        <field name="shortcut">update</field>
+        <field name="category">followup</field>
+        <field name="sequence">40</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Olá! Passando aqui para dar um retorno sobre sua solicitação.</p>
+            <p>[Adicione o status atual aqui]</p>
+            <p>Se tiver alguma dúvida, é só responder esta mensagem.</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_followup_needinfo" model="engage.canned.response">
+        <field name="name">Need More Information</field>
+        <field name="shortcut">needinfo</field>
+        <field name="category">followup</field>
+        <field name="sequence">41</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Para prosseguir com seu atendimento, precisamos de algumas informações adicionais:</p>
+            <ul>
+                <li>[Liste as informações necessárias]</li>
+            </ul>
+            <p>Aguardamos seu retorno.</p>
+        ]]></field>
+    </record>
+
+    <record id="canned_followup_reminder" model="engage.canned.response">
+        <field name="name">Friendly Reminder</field>
+        <field name="shortcut">reminder</field>
+        <field name="category">followup</field>
+        <field name="sequence">42</field>
+        <field
+            name="content"
+        ><![CDATA[
+            <p>Olá! 👋</p>
+            <p>Gostaríamos de verificar se ainda precisa de ajuda com sua solicitação.</p>
+            <p>Caso já tenha sido resolvido, por favor nos avise para que possamos fechar este atendimento.</p>
+            <p>Estamos à disposição!</p>
+        ]]></field>
+    </record>
+</odoo>

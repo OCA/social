@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Automation Form View -->
+    <record id="view_engage_automation_form" model="ir.ui.view">
+        <field name="name">engage.automation.form</field>
+        <field name="model">engage.automation</field>
+        <field name="arch" type="xml">
+            <form string="Automation">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" string="Automation Name" />
+                        <h1>
+                            <field name="name" placeholder="e.g., Welcome Message" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group string="Trigger">
+                            <field name="trigger_event" />
+                            <field name="trigger_delay" />
+                            <field
+                                name="idle_minutes"
+                                invisible="trigger_event != 'conversation_idle'"
+                            />
+                        </group>
+                        <group string="Status">
+                            <field name="sequence" />
+                            <field name="active" />
+                            <field name="execution_count" />
+                            <field name="last_execution" />
+                            <field name="error_count" />
+                        </group>
+                    </group>
+
+                    <notebook>
+                        <page string="Conditions" name="conditions">
+                            <group>
+                                <group string="Channel &amp; Priority">
+                                    <field name="channel_type" />
+                                    <field name="priority_filter" />
+                                </group>
+                                <group string="Assignment">
+                                    <field
+                                        name="team_ids"
+                                        widget="many2many_tags"
+                                        options="{'color_field': 'color'}"
+                                    />
+                                    <field name="stage_ids" widget="many2many_tags" />
+                                </group>
+                            </group>
+                            <group string="Description">
+                                <field
+                                    name="description"
+                                    nolabel="1"
+                                    placeholder="Describe what this automation does..."
+                                />
+                            </group>
+                        </page>
+
+                        <page string="Actions" name="actions">
+                            <field name="action_ids">
+                                <list editable="bottom">
+                                    <field name="sequence" widget="handle" />
+                                    <field name="action_type" />
+                                    <field
+                                        name="message_content"
+                                        column_invisible="True"
+                                    />
+                                    <field name="team_id" optional="hide" />
+                                    <field name="user_id" optional="hide" />
+                                    <field name="stage_id" optional="hide" />
+                                    <field name="priority" optional="hide" />
+                                    <field
+                                        name="label_ids"
+                                        widget="many2many_tags"
+                                        optional="hide"
+                                    />
+                                </list>
+                                <form string="Action">
+                                    <group>
+                                        <field name="sequence" />
+                                        <field name="action_type" />
+                                    </group>
+                                    <notebook>
+                                        <page
+                                            string="Message"
+                                            name="message"
+                                            invisible="action_type not in ('send_message', 'add_note')"
+                                        >
+                                            <group>
+                                                <field
+                                                    name="message_is_note"
+                                                    invisible="action_type != 'send_message'"
+                                                />
+                                                <field
+                                                    name="message_content"
+                                                    widget="html"
+                                                    nolabel="1"
+                                                />
+                                            </group>
+                                            <div class="alert alert-info" role="status">
+                                                <strong>Available placeholders:</strong>
+                                                {partner_name}, {agent_name}, {conversation_id}, {channel}, {subject}
+                                            </div>
+                                        </page>
+                                        <page
+                                            string="Labels"
+                                            name="labels"
+                                            invisible="action_type not in ('add_label', 'remove_label')"
+                                        >
+                                            <field
+                                                name="label_ids"
+                                                widget="many2many_tags"
+                                                options="{'color_field': 'color'}"
+                                            />
+                                        </page>
+                                        <page
+                                            string="Assignment"
+                                            name="assignment"
+                                            invisible="action_type not in ('assign_team', 'assign_user')"
+                                        >
+                                            <group>
+                                                <field name="team_id" />
+                                                <field
+                                                    name="use_team_assignment"
+                                                    invisible="not team_id"
+                                                />
+                                                <field name="user_id" />
+                                            </group>
+                                        </page>
+                                        <page
+                                            string="Stage"
+                                            name="stage"
+                                            invisible="action_type != 'change_stage'"
+                                        >
+                                            <group>
+                                                <field name="stage_id" />
+                                            </group>
+                                        </page>
+                                        <page
+                                            string="Priority"
+                                            name="priority"
+                                            invisible="action_type != 'set_priority'"
+                                        >
+                                            <group>
+                                                <field name="priority" />
+                                            </group>
+                                        </page>
+                                        <page
+                                            string="Notification"
+                                            name="notification"
+                                            invisible="action_type not in ('notify_user', 'notify_team')"
+                                        >
+                                            <group>
+                                                <field
+                                                    name="notify_user_ids"
+                                                    widget="many2many_tags"
+                                                    invisible="action_type != 'notify_user'"
+                                                />
+                                                <field
+                                                    name="team_id"
+                                                    invisible="action_type != 'notify_team'"
+                                                />
+                                                <field name="notification_message" />
+                                            </group>
+                                        </page>
+                                        <page
+                                            string="Webhook"
+                                            name="webhook"
+                                            invisible="action_type != 'webhook'"
+                                        >
+                                            <group>
+                                                <field name="webhook_url" />
+                                                <field name="webhook_method" />
+                                            </group>
+                                        </page>
+                                    </notebook>
+                                </form>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Automation Tree View -->
+    <record id="view_engage_automation_tree" model="ir.ui.view">
+        <field name="name">engage.automation.tree</field>
+        <field name="model">engage.automation</field>
+        <field name="arch" type="xml">
+            <list string="Automations">
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="trigger_event" />
+                <field name="channel_type" optional="show" />
+                <field name="execution_count" />
+                <field name="last_execution" optional="show" />
+                <field name="error_count" optional="show" />
+                <field name="active" column_invisible="True" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Automation Search View -->
+    <record id="view_engage_automation_search" model="ir.ui.view">
+        <field name="name">engage.automation.search</field>
+        <field name="model">engage.automation</field>
+        <field name="arch" type="xml">
+            <search string="Automations">
+                <field name="name" />
+                <filter
+                    name="active"
+                    string="Active"
+                    domain="[('active', '=', True)]"
+                />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <separator />
+                <filter
+                    name="has_errors"
+                    string="Has Errors"
+                    domain="[('error_count', '>', 0)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_trigger"
+                        string="Trigger Event"
+                        context="{'group_by': 'trigger_event'}"
+                    />
+                    <filter
+                        name="group_channel"
+                        string="Channel"
+                        context="{'group_by': 'channel_type'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Automation Action -->
+    <record id="action_engage_automation" model="ir.actions.act_window">
+        <field name="name">Automations</field>
+        <field name="res_model">engage.automation</field>
+        <field name="view_mode">list,form</field>
+        <field name="context">{'search_default_active': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first Automation
+            </p>
+            <p>
+                Automations let you automatically perform actions when
+                specific events occur, like sending welcome messages
+                or notifying agents.
+            </p>
+        </field>
+    </record>
+</odoo>

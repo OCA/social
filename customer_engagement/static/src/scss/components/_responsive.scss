@@ -1,0 +1,275 @@
+// Responsive Styles for Omnichannel Support
+
+// Large screens (default desktop)
+@media (min-width: 1200px) {
+    .o_engage_inbox {
+        // Full 4-column layout on large screens
+        .o_engage_sidebar {
+            width: 220px;
+        }
+
+        .o_engage_conversation_list {
+            width: 350px;
+        }
+
+        .o_engage_contact_panel {
+            width: 300px;
+        }
+    }
+}
+
+// Medium-large screens (small desktop / large tablet)
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .o_engage_inbox {
+        .o_engage_sidebar {
+            width: 200px;
+            min-width: 200px;
+        }
+
+        .o_engage_conversation_list {
+            width: 280px;
+            min-width: 280px;
+        }
+
+        .o_engage_contact_panel {
+            width: 260px;
+            min-width: 260px;
+        }
+    }
+}
+
+// Medium screens (tablet landscape)
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .o_engage_inbox {
+        // Collapse sidebar to icons only
+        .o_engage_sidebar {
+            width: 60px;
+            min-width: 60px;
+
+            .o_engage_sidebar_header h5,
+            .o_engage_sidebar_section_header span,
+            .o_engage_sidebar_item span:not(.badge) {
+                display: none;
+            }
+
+            .o_engage_sidebar_item {
+                justify-content: center;
+                padding: 0.75rem;
+            }
+        }
+
+        .o_engage_conversation_list {
+            width: 300px;
+            min-width: 300px;
+        }
+
+        // Hide contact panel by default, show on demand
+        .o_engage_contact_panel {
+            position: absolute;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 100;
+            box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+
+            &.visible {
+                transform: translateX(0);
+            }
+        }
+    }
+}
+
+// Small screens (tablet portrait / large phone)
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .o_engage_inbox {
+        // Hide sidebar completely
+        .o_engage_sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+
+            &.visible {
+                transform: translateX(0);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        // Full width conversation list when no conversation selected
+        .o_engage_conversation_list {
+            width: 100%;
+            min-width: 100%;
+            flex: 1;
+
+            &.hidden {
+                display: none;
+            }
+        }
+
+        // Full width chat panel
+        .o_engage_chat_panel {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 50;
+            display: none;
+
+            &.visible {
+                display: flex;
+            }
+        }
+
+        // Hide contact panel
+        .o_engage_contact_panel {
+            display: none;
+        }
+    }
+}
+
+// Extra small screens (phone)
+@media (max-width: 575.98px) {
+    .o_engage_inbox {
+        // Mobile-first: single panel at a time
+        position: relative;
+
+        .o_engage_sidebar {
+            position: fixed;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+            width: 280px;
+            transform: translateX(-100%);
+            transition: transform 0.3s ease;
+
+            &.visible {
+                transform: translateX(0);
+                box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+            }
+        }
+
+        .o_engage_conversation_list {
+            width: 100%;
+            min-width: 100%;
+            flex: 1;
+
+            &.hidden {
+                display: none;
+            }
+        }
+
+        .o_engage_chat_panel {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 50;
+            display: none;
+
+            &.visible {
+                display: flex;
+            }
+
+            // Add back button for mobile
+            .o_engage_chat_header {
+                .o_mobile_back_btn {
+                    display: block;
+                }
+            }
+        }
+
+        .o_engage_contact_panel {
+            position: fixed;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 1000;
+            width: 100%;
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+
+            &.visible {
+                transform: translateX(0);
+            }
+        }
+    }
+
+    // Mobile-specific adjustments
+    .o_engage_conversation_card {
+        .o_conversation_card_content {
+            padding: 0.75rem;
+        }
+    }
+
+    .o_engage_chat_header {
+        padding: 0.75rem !important;
+
+        .btn {
+            padding: 0.25rem 0.5rem;
+        }
+    }
+
+    .o_engage_rich_composer {
+        padding: 0.75rem !important;
+    }
+}
+
+// Overlay for mobile sidebar/panels
+// Only visible on small screens (< 768px)
+.o_mobile_overlay {
+    display: none; // Hidden by default on desktop
+
+    @media (max-width: 767.98px) {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 999;
+        opacity: 0;
+        visibility: hidden;
+        transition:
+            opacity 0.3s ease,
+            visibility 0.3s ease;
+        pointer-events: none;
+
+        &.visible {
+            opacity: 1;
+            visibility: visible;
+            pointer-events: auto;
+        }
+    }
+}
+
+// Touch-friendly adjustments
+@media (hover: none) and (pointer: coarse) {
+    .o_engage_sidebar_item,
+    .o_engage_conversation_card,
+    .o_canned_item,
+    .o_history_item {
+        // Larger touch targets
+        min-height: 44px;
+    }
+
+    .btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+
+    // Disable hover effects on touch devices
+    .o_engage_sidebar_item:hover,
+    .o_engage_conversation_card:hover,
+    .o_canned_item:hover {
+        background-color: transparent;
+    }
+}

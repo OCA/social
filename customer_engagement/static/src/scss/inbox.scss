@@ -1,0 +1,133 @@
+// Support Inbox Styles (Chatwoot/Zendesk-inspired)
+// Main entry point - component styles are loaded via manifest
+
+// Main Inbox Container
+.o_engage_inbox {
+    height: calc(100vh - 46px);
+    background: var(--o-view-background-color, #f8f9fa);
+    display: flex;
+    overflow: hidden;
+    position: relative;
+    color: #212529; // Ensure text is dark by default
+}
+
+// Global Utilities
+.min-width-0 {
+    min-width: 0;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+// Tag Colors (matching Odoo's color palette)
+.o_tag_color_0 {
+    background-color: #f0f0f0;
+    color: #4c4c4c;
+}
+.o_tag_color_1 {
+    background-color: #f57b7b;
+    color: white;
+}
+.o_tag_color_2 {
+    background-color: #f4a460;
+    color: white;
+}
+.o_tag_color_3 {
+    background-color: #f0e68c;
+    color: #4c4c4c;
+}
+.o_tag_color_4 {
+    background-color: #90ee90;
+    color: #4c4c4c;
+}
+.o_tag_color_5 {
+    background-color: #87ceeb;
+    color: #4c4c4c;
+}
+.o_tag_color_6 {
+    background-color: #add8e6;
+    color: #4c4c4c;
+}
+.o_tag_color_7 {
+    background-color: #9370db;
+    color: white;
+}
+.o_tag_color_8 {
+    background-color: #dda0dd;
+    color: #4c4c4c;
+}
+.o_tag_color_9 {
+    background-color: #ffc0cb;
+    color: #4c4c4c;
+}
+.o_tag_color_10 {
+    background-color: #28a745;
+    color: white;
+}
+.o_tag_color_11 {
+    background-color: #6c757d;
+    color: white;
+}
+
+// Global scrollbar styling for the inbox
+.o_engage_inbox {
+    * {
+        // Firefox scrollbar
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+    }
+
+    *::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+
+        &:hover {
+            background: rgba(0, 0, 0, 0.3);
+        }
+    }
+}
+
+// Focus states for accessibility
+.o_engage_inbox {
+    .btn:focus,
+    .form-control:focus,
+    textarea:focus {
+        outline: none;
+        box-shadow: 0 0 0 0.2rem rgba(#0066cc, 0.25);
+    }
+
+    // Focus visible only for keyboard navigation
+    .btn:focus:not(:focus-visible) {
+        box-shadow: none;
+    }
+}
+
+// Print styles
+@media print {
+    .o_engage_inbox {
+        .o_engage_sidebar,
+        .o_engage_conversation_list,
+        .o_engage_composer_container {
+            display: none !important;
+        }
+
+        .o_engage_chat_panel {
+            width: 100% !important;
+        }
+
+        .o_engage_messages {
+            overflow: visible !important;
+            height: auto !important;
+        }
+    }
+}

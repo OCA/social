@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Extend Conversation Form with Integration Smart Buttons -->
+    <record id="engage_conversation_view_form_integrations" model="ir.ui.view">
+        <field name="name">engage.conversation.form.integrations</field>
+        <field name="model">engage.conversation</field>
+        <field name="inherit_id" ref="engage_conversation_view_form" />
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <!-- Add smart buttons for integrations -->
+            <xpath expr="//div[hasclass('oe_button_box')]" position="inside">
+                <!-- Sales Orders Button -->
+                <button
+                    name="action_view_sale_orders"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-shopping-cart"
+                    invisible="sale_order_count == 0"
+                >
+                    <field name="sale_order_count" widget="statinfo" string="Orders" />
+                </button>
+                <!-- Helpdesk Tickets Button -->
+                <button
+                    name="action_view_helpdesk_tickets"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-ticket"
+                    invisible="helpdesk_ticket_count == 0"
+                >
+                    <field
+                        name="helpdesk_ticket_count"
+                        widget="statinfo"
+                        string="Tickets"
+                    />
+                </button>
+                <!-- CRM Leads Button -->
+                <button
+                    name="action_view_crm_leads"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-handshake-o"
+                    invisible="crm_lead_count == 0"
+                >
+                    <field
+                        name="crm_lead_count"
+                        widget="statinfo"
+                        string="Opportunities"
+                    />
+                </button>
+                <!-- CSAT Button -->
+                <button
+                    name="action_view_csat"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-star"
+                >
+                    <field name="csat_rating" widget="statinfo" string="CSAT" />
+                </button>
+            </xpath>
+
+            <!-- Add integration fields (hidden for computation) -->
+            <xpath expr="//field[@name='team_id']" position="after">
+                <field name="sale_order_ids" invisible="1" />
+                <field name="total_sales_amount" invisible="1" />
+                <field name="company_currency_id" invisible="1" />
+                <field name="helpdesk_ticket_ids" invisible="1" />
+                <field name="open_ticket_count" invisible="1" />
+                <field name="crm_lead_ids" invisible="1" />
+                <field name="open_opportunity_count" invisible="1" />
+                <field name="expected_revenue" invisible="1" />
+                <field name="csat_ids" invisible="1" />
+                <field name="csat_sent" invisible="1" />
+                <field name="csat_feedback" invisible="1" />
+            </xpath>
+
+            <!-- Add integration actions in header -->
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_create_sale_order"
+                    string="Create Order"
+                    type="object"
+                    class="btn-secondary"
+                />
+                <button
+                    name="action_create_helpdesk_ticket"
+                    string="Create Ticket"
+                    type="object"
+                    class="btn-secondary"
+                />
+                <button
+                    name="action_create_opportunity"
+                    string="Create Opportunity"
+                    type="object"
+                    class="btn-secondary"
+                />
+                <button
+                    name="action_send_csat"
+                    string="Send Survey"
+                    type="object"
+                    class="btn-secondary"
+                    invisible="csat_sent or not closed"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Extend Conversation Tree with Integration Columns -->
+    <record id="engage_conversation_view_tree_integrations" model="ir.ui.view">
+        <field name="name">engage.conversation.tree.integrations</field>
+        <field name="model">engage.conversation</field>
+        <field name="inherit_id" ref="engage_conversation_view_tree" />
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='stage_id']" position="after">
+                <field name="csat_rating" optional="hide" />
+                <field name="sale_order_count" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Customer Info in Contact Panel - Partner Integration Fields -->
+    <record id="view_res_partner_form_engage_integrations" model="ir.ui.view">
+        <field name="name">res.partner.form.engage.integrations</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="view_partner_form_engage" />
+        <field name="priority">50</field>
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='engagement']" position="after">
+                <page name="engage_summary" string="Engagement Summary">
+                    <group>
+                        <group string="Statistics">
+                            <field name="engage_conversation_count" />
+                            <field name="open_conversation_count" />
+                            <field name="last_conversation_date" />
+                        </group>
+                        <group string="Quality">
+                            <field name="avg_resolution_time" widget="float_time" />
+                            <field name="satisfaction_score" />
+                        </group>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

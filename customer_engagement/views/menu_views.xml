@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Inbox Client Action -->
+    <record id="action_engage_inbox" model="ir.actions.client">
+        <field name="name">Inbox</field>
+        <field name="tag">engage_inbox</field>
+    </record>
+
+    <!-- Main Menu -->
+    <menuitem
+        id="menu_engage_root"
+        name="Engagement"
+        sequence="10"
+        web_icon="customer_engagement,static/description/icon.png"
+    />
+
+    <!-- Inbox Menu -->
+    <menuitem
+        id="menu_engage_inbox"
+        name="Inbox"
+        parent="menu_engage_root"
+        action="action_engage_inbox"
+        sequence="1"
+    />
+
+    <!-- Conversations Menu -->
+    <menuitem
+        id="menu_engage_conversations"
+        name="Conversations"
+        parent="menu_engage_root"
+        action="action_engage_conversation"
+        sequence="2"
+    />
+
+    <!-- Configuration Menu -->
+    <menuitem
+        id="menu_engage_config"
+        name="Configuration"
+        parent="menu_engage_root"
+        sequence="100"
+        groups="group_engage_manager"
+    />
+
+    <!-- Stages Menu -->
+    <menuitem
+        id="menu_engage_stages"
+        name="Stages"
+        parent="menu_engage_config"
+        action="action_engage_conversation_stage"
+        sequence="10"
+    />
+
+    <!-- Teams Menu -->
+    <menuitem
+        id="menu_engage_teams"
+        name="Teams"
+        parent="menu_engage_config"
+        action="action_engage_team"
+        sequence="20"
+    />
+
+    <!-- Labels Menu -->
+    <menuitem
+        id="menu_engage_labels"
+        name="Labels"
+        parent="menu_engage_config"
+        action="action_engage_conversation_label"
+        sequence="30"
+    />
+
+    <!-- Folders Menu -->
+    <menuitem
+        id="menu_engage_folders"
+        name="Folders"
+        parent="menu_engage_config"
+        action="action_engage_folder"
+        sequence="40"
+    />
+
+    <!-- Canned Responses Menu -->
+    <menuitem
+        id="menu_engage_canned_responses"
+        name="Canned Responses"
+        parent="menu_engage_config"
+        action="action_engage_canned_response"
+        sequence="50"
+    />
+
+    <!-- API Keys Menu -->
+    <menuitem
+        id="menu_engage_api_keys"
+        name="API Keys"
+        parent="menu_engage_config"
+        action="action_engage_api_key"
+        sequence="60"
+    />
+
+    <!-- SLA Policies Menu -->
+    <menuitem
+        id="menu_engage_sla_policies"
+        name="SLA Policies"
+        parent="menu_engage_config"
+        action="action_engage_sla_policy"
+        sequence="70"
+    />
+
+    <!-- Routing Rules Menu -->
+    <menuitem
+        id="menu_engage_routing_rules"
+        name="Routing Rules"
+        parent="menu_engage_config"
+        action="action_engage_routing_rule"
+        sequence="80"
+    />
+
+    <!-- Automations Menu -->
+    <menuitem
+        id="menu_engage_automations"
+        name="Automations"
+        parent="menu_engage_config"
+        action="action_engage_automation"
+        sequence="90"
+    />
+
+    <!-- Reports Menu -->
+    <menuitem
+        id="menu_engage_reports"
+        name="Reports"
+        parent="menu_engage_root"
+        sequence="50"
+        groups="group_engage_manager"
+    />
+
+    <!-- Metrics Menu -->
+    <menuitem
+        id="menu_engage_metrics"
+        name="Metrics Dashboard"
+        parent="menu_engage_reports"
+        action="action_engage_metrics"
+        sequence="10"
+    />
+
+    <!-- Agent Performance Menu -->
+    <menuitem
+        id="menu_engage_metrics_agent"
+        name="Agent Performance"
+        parent="menu_engage_reports"
+        action="action_engage_metrics_agent"
+        sequence="20"
+    />
+
+    <!-- Channel Performance Menu -->
+    <menuitem
+        id="menu_engage_metrics_channel"
+        name="Channel Performance"
+        parent="menu_engage_reports"
+        action="action_engage_metrics_channel"
+        sequence="30"
+    />
+
+    <!-- CSAT Menu -->
+    <menuitem
+        id="menu_engage_csat"
+        name="Satisfaction Surveys"
+        parent="menu_engage_reports"
+        action="action_engage_csat"
+        sequence="40"
+    />
+</odoo>

@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Search View -->
+    <record id="engage_conversation_view_search" model="ir.ui.view">
+        <field name="name">engage.conversation.search</field>
+        <field name="model">engage.conversation</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Search fields -->
+                <field
+                    name="subject"
+                    filter_domain="['|',('subject','ilike',self),('uuid','ilike',self)]"
+                />
+                <field name="partner_id" />
+                <field name="user_id" />
+
+                <!-- Status filters -->
+                <filter
+                    string="New"
+                    name="new"
+                    domain="[('stage_id.code','=','new')]"
+                />
+                <filter
+                    string="Open"
+                    name="open"
+                    domain="[('stage_id.code','=','open')]"
+                />
+                <filter
+                    string="Pending"
+                    name="pending"
+                    domain="[('stage_id.code','=','pending')]"
+                />
+                <filter
+                    string="Resolved"
+                    name="resolved"
+                    domain="[('stage_id.code','=','resolved')]"
+                />
+                <filter
+                    string="Not Closed"
+                    name="not_closed"
+                    domain="[('closed','=',False)]"
+                />
+
+                <!-- Channel filters -->
+                <separator />
+                <filter
+                    string="WhatsApp"
+                    name="whatsapp"
+                    domain="[('channel_type','=','whatsapp')]"
+                />
+                <filter
+                    string="Email"
+                    name="email"
+                    domain="[('channel_type','=','email')]"
+                />
+                <filter
+                    string="Instagram"
+                    name="instagram"
+                    domain="[('channel_type','=','instagram')]"
+                />
+                <filter
+                    string="Messenger"
+                    name="messenger"
+                    domain="[('channel_type','=','messenger')]"
+                />
+                <filter
+                    string="Telegram"
+                    name="telegram"
+                    domain="[('channel_type','=','telegram')]"
+                />
+                <filter
+                    string="Live Chat"
+                    name="livechat"
+                    domain="[('channel_type','=','livechat')]"
+                />
+
+                <!-- Assignment filters -->
+                <separator />
+                <filter
+                    string="My Conversations"
+                    name="mine"
+                    domain="[('user_id','=',uid)]"
+                />
+                <filter
+                    string="Unassigned"
+                    name="unassigned"
+                    domain="[('user_id','=',False)]"
+                />
+
+                <!-- Priority filters -->
+                <separator />
+                <filter string="Urgent" name="urgent" domain="[('priority','=','3')]" />
+                <filter
+                    string="High Priority"
+                    name="high"
+                    domain="[('priority','in',['2','3'])]"
+                />
+
+                <!-- Waiting status filters -->
+                <separator />
+                <filter
+                    string="Waiting for Agent"
+                    name="waiting_agent"
+                    domain="[('is_waiting_agent','=',True),('closed','=',False)]"
+                />
+                <filter
+                    string="Waiting for Customer"
+                    name="waiting_customer"
+                    domain="[('is_waiting_customer','=',True),('closed','=',False)]"
+                />
+
+                <!-- Date filters -->
+                <separator />
+                <filter
+                    string="Created Today"
+                    name="today"
+                    domain="[('create_date','&gt;=',context_today().strftime('%%Y-%%m-%%d'))]"
+                />
+                <filter
+                    string="Created This Week"
+                    name="this_week"
+                    domain="[('create_date','&gt;=',(context_today() - datetime.timedelta(days=7)).strftime('%%Y-%%m-%%d'))]"
+                />
+
+                <!-- Group by -->
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Stage"
+                        name="group_stage"
+                        context="{'group_by':'stage_id'}"
+                    />
+                    <filter
+                        string="Channel"
+                        name="group_channel"
+                        context="{'group_by':'channel_type'}"
+                    />
+                    <filter
+                        string="Agent"
+                        name="group_user"
+                        context="{'group_by':'user_id'}"
+                    />
+                    <filter
+                        string="Priority"
+                        name="group_priority"
+                        context="{'group_by':'priority'}"
+                    />
+                    <filter
+                        string="Created Date"
+                        name="group_create"
+                        context="{'group_by':'create_date:day'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Tree View -->
+    <record id="engage_conversation_view_tree" model="ir.ui.view">
+        <field name="name">engage.conversation.tree</field>
+        <field name="model">engage.conversation</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-danger="priority=='3'"
+                decoration-warning="priority=='2'"
+                decoration-info="is_waiting_agent and not closed"
+            >
+                <field name="uuid" string="ID" column_invisible="True" />
+                <field name="display_name" string="Conversation" />
+                <field name="subject" optional="hide" />
+                <field name="partner_id" />
+                <field name="channel_type" />
+                <field name="stage_id" />
+                <field name="user_id" />
+                <field name="team_id" optional="hide" />
+                <field name="priority" />
+                <field name="is_waiting_agent" string="Waiting" optional="show" />
+                <field
+                    name="response_time_seconds"
+                    widget="float_time"
+                    string="Response Time"
+                    optional="hide"
+                />
+                <field name="create_date" />
+                <field name="closed" invisible="1" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="engage_conversation_view_form" model="ir.ui.view">
+        <field name="name">engage.conversation.form</field>
+        <field name="model">engage.conversation</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button
+                        name="action_open"
+                        string="Open"
+                        type="object"
+                        invisible="stage_id.code not in ['new', 'pending', 'closed']"
+                    />
+                    <button
+                        name="action_pending"
+                        string="Pending"
+                        type="object"
+                        invisible="stage_id.code != 'open'"
+                    />
+                    <button
+                        name="action_resolve"
+                        string="Resolve"
+                        type="object"
+                        invisible="stage_id.code not in ['open', 'pending']"
+                        class="oe_highlight"
+                    />
+                    <button
+                        name="action_close"
+                        string="Close"
+                        type="object"
+                        invisible="stage_id.code != 'resolved'"
+                    />
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': '1', 'fold_field': 'fold'}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box" />
+                    <div class="oe_title">
+                        <h1>
+                            <field name="display_name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="uuid" readonly="1" />
+                            <field name="subject" />
+                            <field name="channel_type" />
+                            <field name="priority" widget="priority" />
+                        </group>
+                        <group>
+                            <field name="partner_id" />
+                            <field name="user_id" />
+                            <field name="team_id" />
+                        </group>
+                    </group>
+                    <group>
+                        <group string="Timestamps">
+                            <field name="create_date" readonly="1" />
+                            <field name="first_response_at" readonly="1" />
+                            <field name="resolved_at" readonly="1" />
+                            <field name="closed_date" readonly="1" />
+                        </group>
+                        <group string="Metrics">
+                            <field
+                                name="response_time_seconds"
+                                widget="float_time"
+                                readonly="1"
+                            />
+                            <field
+                                name="resolution_time_seconds"
+                                widget="float_time"
+                                readonly="1"
+                            />
+                            <field name="is_waiting_customer" readonly="1" />
+                            <field name="is_waiting_agent" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="History" name="history">
+                            <field name="history_ids" readonly="1">
+                                <list>
+                                    <field name="create_date" string="Date" />
+                                    <field name="event_type" />
+                                    <field
+                                        name="from_stage_id"
+                                        invisible="event_type != 'stage_change'"
+                                    />
+                                    <field
+                                        name="to_stage_id"
+                                        invisible="event_type != 'stage_change'"
+                                    />
+                                    <field
+                                        name="old_value"
+                                        invisible="event_type == 'stage_change'"
+                                    />
+                                    <field
+                                        name="new_value"
+                                        invisible="event_type == 'stage_change'"
+                                    />
+                                    <field name="user_id" />
+                                    <field name="notes" />
+                                </list>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="engage_conversation_view_kanban" model="ir.ui.view">
+        <field name="name">engage.conversation.kanban</field>
+        <field name="model">engage.conversation</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="stage_id" class="o_kanban_small_column">
+                <field name="stage_id" />
+                <field name="priority" />
+                <field name="partner_id" />
+                <field name="user_id" />
+                <field name="channel_type" />
+                <field name="color" />
+                <templates>
+                    <t t-name="card">
+                        <field name="priority" widget="priority" />
+                        <div class="oe_kanban_details">
+                            <strong>
+                                <field name="display_name" />
+                            </strong>
+                            <div>
+                                <field name="partner_id" />
+                            </div>
+                            <div class="text-muted">
+                                <field name="channel_type" />
+                            </div>
+                        </div>
+                        <footer>
+                            <field name="user_id" widget="many2one_avatar_user" />
+                        </footer>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- Conversation Action -->
+    <record id="action_engage_conversation" model="ir.actions.act_window">
+        <field name="name">Conversations</field>
+        <field name="res_model">engage.conversation</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="engage_conversation_view_search" />
+        <field name="context">{'search_default_not_closed': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No conversations yet
+            </p>
+            <p>
+                Conversations will appear here when customers contact you through any channel.
+            </p>
+        </field>
+    </record>
+</odoo>

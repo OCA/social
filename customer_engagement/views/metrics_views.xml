@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- ==================== Main Metrics View ==================== -->
+
+    <!-- Metrics Pivot View -->
+    <record id="view_engage_metrics_pivot" model="ir.ui.view">
+        <field name="name">engage.metrics.pivot</field>
+        <field name="model">engage.metrics</field>
+        <field name="arch" type="xml">
+            <pivot string="Engagement Metrics">
+                <field name="date" type="row" interval="day" />
+                <field name="channel_type" type="col" />
+                <field name="conversation_count" type="measure" />
+                <field name="resolved_count" type="measure" />
+                <field name="avg_first_response" type="measure" />
+                <field name="avg_resolution_time" type="measure" />
+                <field name="sla_rate" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Metrics Graph View -->
+    <record id="view_engage_metrics_graph" model="ir.ui.view">
+        <field name="name">engage.metrics.graph</field>
+        <field name="model">engage.metrics</field>
+        <field name="arch" type="xml">
+            <graph string="Engagement Metrics" type="line">
+                <field name="date" interval="day" />
+                <field name="conversation_count" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- Metrics Tree View -->
+    <record id="view_engage_metrics_tree" model="ir.ui.view">
+        <field name="name">engage.metrics.tree</field>
+        <field name="model">engage.metrics</field>
+        <field name="arch" type="xml">
+            <list
+                string="Engagement Metrics"
+                create="false"
+                edit="false"
+                delete="false"
+            >
+                <field name="date" />
+                <field name="channel_type" />
+                <field name="team_id" />
+                <field name="user_id" />
+                <field name="conversation_count" sum="Total" />
+                <field name="resolved_count" sum="Total" />
+                <field name="avg_first_response" avg="Avg" widget="float_time" />
+                <field name="avg_resolution_time" avg="Avg" widget="float_time" />
+                <field name="sla_achieved_count" sum="Total" />
+                <field name="sla_breached_count" sum="Total" />
+                <field name="sla_rate" avg="Avg" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Metrics Search View -->
+    <record id="view_engage_metrics_search" model="ir.ui.view">
+        <field name="name">engage.metrics.search</field>
+        <field name="model">engage.metrics</field>
+        <field name="arch" type="xml">
+            <search string="Metrics">
+                <field name="team_id" />
+                <field name="user_id" />
+                <filter
+                    name="today"
+                    string="Today"
+                    domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="this_week"
+                    string="This Week"
+                    domain="[('date', '>=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="this_month"
+                    string="This Month"
+                    domain="[('date', '>=', context_today().strftime('%Y-%m-01'))]"
+                />
+                <separator />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_date"
+                        string="Date"
+                        context="{'group_by': 'date:day'}"
+                    />
+                    <filter
+                        name="group_week"
+                        string="Week"
+                        context="{'group_by': 'date:week'}"
+                    />
+                    <filter
+                        name="group_month"
+                        string="Month"
+                        context="{'group_by': 'date:month'}"
+                    />
+                    <filter
+                        name="group_channel"
+                        string="Channel"
+                        context="{'group_by': 'channel_type'}"
+                    />
+                    <filter
+                        name="group_team"
+                        string="Team"
+                        context="{'group_by': 'team_id'}"
+                    />
+                    <filter
+                        name="group_user"
+                        string="Agent"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Metrics Action -->
+    <record id="action_engage_metrics" model="ir.actions.act_window">
+        <field name="name">Metrics</field>
+        <field name="res_model">engage.metrics</field>
+        <field name="view_mode">pivot,graph,list</field>
+        <field name="context">{
+            'search_default_this_month': 1,
+            'search_default_group_date': 1,
+        }</field>
+    </record>
+
+    <!-- ==================== Agent Metrics ==================== -->
+
+    <!-- Agent Metrics Pivot View -->
+    <record id="view_engage_metrics_agent_pivot" model="ir.ui.view">
+        <field name="name">engage.metrics.agent.pivot</field>
+        <field name="model">engage.metrics.agent</field>
+        <field name="arch" type="xml">
+            <pivot string="Agent Performance">
+                <field name="user_id" type="row" />
+                <field name="date" type="col" interval="week" />
+                <field name="conversations_handled" type="measure" />
+                <field name="conversations_resolved" type="measure" />
+                <field name="avg_first_response" type="measure" />
+                <field name="sla_rate" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <!-- Agent Metrics Tree View -->
+    <record id="view_engage_metrics_agent_tree" model="ir.ui.view">
+        <field name="name">engage.metrics.agent.tree</field>
+        <field name="model">engage.metrics.agent</field>
+        <field name="arch" type="xml">
+            <list string="Agent Performance" create="false" edit="false" delete="false">
+                <field name="date" />
+                <field name="user_id" />
+                <field name="conversations_handled" sum="Total" />
+                <field name="conversations_resolved" sum="Total" />
+                <field name="avg_first_response" avg="Avg" />
+                <field name="avg_resolution_time" avg="Avg" />
+                <field name="sla_achieved" sum="Total" />
+                <field name="sla_breached" sum="Total" />
+                <field name="sla_rate" avg="Avg" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Agent Metrics Search View -->
+    <record id="view_engage_metrics_agent_search" model="ir.ui.view">
+        <field name="name">engage.metrics.agent.search</field>
+        <field name="model">engage.metrics.agent</field>
+        <field name="arch" type="xml">
+            <search string="Agent Metrics">
+                <field name="user_id" />
+                <filter
+                    name="today"
+                    string="Today"
+                    domain="[('date', '=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="this_week"
+                    string="This Week"
+                    domain="[('date', '>=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="this_month"
+                    string="This Month"
+                    domain="[('date', '>=', context_today().strftime('%Y-%m-01'))]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_user"
+                        string="Agent"
+                        context="{'group_by': 'user_id'}"
+                    />
+                    <filter
+                        name="group_date"
+                        string="Date"
+                        context="{'group_by': 'date:day'}"
+                    />
+                    <filter
+                        name="group_week"
+                        string="Week"
+                        context="{'group_by': 'date:week'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Agent Metrics Action -->
+    <record id="action_engage_metrics_agent" model="ir.actions.act_window">
+        <field name="name">Agent Performance</field>
+        <field name="res_model">engage.metrics.agent</field>
+        <field name="view_mode">pivot,list</field>
+        <field name="context">{
+            'search_default_this_month': 1,
+            'search_default_group_user': 1,
+        }</field>
+    </record>
+
+    <!-- ==================== Channel Metrics ==================== -->
+
+    <!-- Channel Metrics Graph View -->
+    <record id="view_engage_metrics_channel_graph" model="ir.ui.view">
+        <field name="name">engage.metrics.channel.graph</field>
+        <field name="model">engage.metrics.channel</field>
+        <field name="arch" type="xml">
+            <graph string="Channel Performance" type="bar">
+                <field name="channel_type" />
+                <field name="conversation_count" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <!-- Channel Metrics Tree View -->
+    <record id="view_engage_metrics_channel_tree" model="ir.ui.view">
+        <field name="name">engage.metrics.channel.tree</field>
+        <field name="model">engage.metrics.channel</field>
+        <field name="arch" type="xml">
+            <list
+                string="Channel Performance"
+                create="false"
+                edit="false"
+                delete="false"
+            >
+                <field name="date" />
+                <field name="channel_type" />
+                <field name="conversation_count" sum="Total" />
+                <field name="resolved_count" sum="Total" />
+                <field name="avg_resolution_time" avg="Avg" />
+                <field name="sla_rate" avg="Avg" />
+            </list>
+        </field>
+    </record>
+
+    <!-- Channel Metrics Search View -->
+    <record id="view_engage_metrics_channel_search" model="ir.ui.view">
+        <field name="name">engage.metrics.channel.search</field>
+        <field name="model">engage.metrics.channel</field>
+        <field name="arch" type="xml">
+            <search string="Channel Metrics">
+                <field name="channel_type" />
+                <filter
+                    name="this_month"
+                    string="This Month"
+                    domain="[('date', '>=', context_today().strftime('%Y-%m-01'))]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_channel"
+                        string="Channel"
+                        context="{'group_by': 'channel_type'}"
+                    />
+                    <filter
+                        name="group_date"
+                        string="Date"
+                        context="{'group_by': 'date:day'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <!-- Channel Metrics Action -->
+    <record id="action_engage_metrics_channel" model="ir.actions.act_window">
+        <field name="name">Channel Performance</field>
+        <field name="res_model">engage.metrics.channel</field>
+        <field name="view_mode">graph,list</field>
+        <field name="context">{
+            'search_default_this_month': 1,
+            'search_default_group_channel': 1,
+        }</field>
+    </record>
+</odoo>

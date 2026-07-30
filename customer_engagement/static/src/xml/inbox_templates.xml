@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- Main Engage Inbox Template -->
+    <t t-name="customer_engagement.EngageInbox">
+        <Layout display="display">
+            <div t-att-class="inboxClass">
+                <!-- Sidebar Component -->
+                <EngageSidebar
+                    collapsed="state.sidebarCollapsed"
+                    activeFilter="state.filter"
+                    activeFolder="state.activeFolder"
+                    counts="state.counts"
+                    onFilterChange="(filter, value) => this.onFilterChange(filter, value)"
+                    onFolderSelect="(folder) => this.onFolderSelect(folder)"
+                    onToggleCollapse="() => this.toggleSidebarCollapse()"
+                />
+
+                <!-- Conversation List Component -->
+                <ConversationList
+                    conversations="state.conversations"
+                    selectedId="state.selectedConversation?.id"
+                    isLoading="state.isLoading"
+                    filter="state.filter"
+                    onSelect="(conv) => this.onConversationSelect(conv)"
+                    onFilterChange="(filter) => this.onListFilterChange(filter)"
+                    onSearch="(query) => this.onSearch(query)"
+                />
+
+                <!-- Chat Panel Component -->
+                <ChatPanel
+                    conversation="state.selectedConversation"
+                    messages="state.messages"
+                    notes="state.notes"
+                    isLoading="state.isLoadingMessages"
+                    currentUserId="userId"
+                    onSendMessage="(content, attachments) => this.onSendMessage(content, attachments)"
+                    onSendNote="(content) => this.onSendNote(content)"
+                    onAssign="() => this.onAssign()"
+                    onStatusChange="(status) => this.onStatusChange(status)"
+                    onOpenForm="() => this.onOpenForm()"
+                    onAddLabel="() => this.onAddLabel()"
+                />
+
+                <!-- Contact Panel Component -->
+                <ContactPanel
+                    conversation="state.selectedConversation"
+                    collapsed="state.contactPanelCollapsed"
+                    onToggleCollapse="() => this.toggleContactPanelCollapse()"
+                    onOpenPartner="(partnerId) => this.onOpenPartner(partnerId)"
+                />
+
+                <!-- Mobile overlay for sidebar/panels -->
+                <div
+                    t-attf-class="o_mobile_overlay #{state.sidebarCollapsed ? '' : 'visible'}"
+                    t-on-click="() => this.toggleSidebarCollapse()"
+                />
+            </div>
+        </Layout>
+    </t>
+
+</templates>

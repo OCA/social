@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo noupdate="1">
+    <!-- System Folders - Cannot be deleted -->
+
+    <!-- Inbox folder (all open conversations) -->
+    <record id="folder_inbox" model="engage.folder">
+        <field name="name">Inbox</field>
+        <field name="code">inbox</field>
+        <field name="icon">fa-inbox</field>
+        <field name="sequence">1</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[('closed', '=', False)]</field>
+    </record>
+
+    <!-- Assigned to me -->
+    <record id="folder_mine" model="engage.folder">
+        <field name="name">Assigned to me</field>
+        <field name="code">mine</field>
+        <field name="icon">fa-user</field>
+        <field name="sequence">2</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[('user_id', '=', uid), ('closed', '=', False)]</field>
+    </record>
+
+    <!-- Unassigned -->
+    <record id="folder_unassigned" model="engage.folder">
+        <field name="name">Unassigned</field>
+        <field name="code">unassigned</field>
+        <field name="icon">fa-question-circle</field>
+        <field name="sequence">3</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[('user_id', '=', False), ('closed', '=', False)]</field>
+    </record>
+
+    <!-- Urgent -->
+    <record id="folder_urgent" model="engage.folder">
+        <field name="name">Urgent</field>
+        <field name="code">urgent</field>
+        <field name="icon">fa-exclamation-triangle</field>
+        <field name="sequence">4</field>
+        <field name="color">1</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[('priority', '=', '3'), ('closed', '=', False)]</field>
+    </record>
+
+    <!-- Starred / Important -->
+    <record id="folder_starred" model="engage.folder">
+        <field name="name">Starred</field>
+        <field name="code">starred</field>
+        <field name="icon">fa-star</field>
+        <field name="sequence">5</field>
+        <field name="color">3</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field
+            name="domain"
+        >[('priority', 'in', ['2', '3']), ('closed', '=', False)]</field>
+    </record>
+
+    <!-- Pending -->
+    <record id="folder_pending" model="engage.folder">
+        <field name="name">Pending</field>
+        <field name="code">pending</field>
+        <field name="icon">fa-clock-o</field>
+        <field name="sequence">6</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[('stage_id.code', '=', 'pending')]</field>
+    </record>
+
+    <!-- Resolved -->
+    <record id="folder_resolved" model="engage.folder">
+        <field name="name">Resolved</field>
+        <field name="code">resolved</field>
+        <field name="icon">fa-check</field>
+        <field name="sequence">7</field>
+        <field name="color">10</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[('stage_id.code', '=', 'resolved')]</field>
+    </record>
+
+    <!-- All Conversations -->
+    <record id="folder_all" model="engage.folder">
+        <field name="name">All Conversations</field>
+        <field name="code">all</field>
+        <field name="icon">fa-comments</field>
+        <field name="sequence">99</field>
+        <field name="is_system">True</field>
+        <field name="folder_type">smart</field>
+        <field name="domain">[]</field>
+    </record>
+</odoo>

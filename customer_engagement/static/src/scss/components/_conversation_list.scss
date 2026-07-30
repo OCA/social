@@ -1,0 +1,179 @@
+// Conversation List Component Styles
+
+.o_engage_conversation_list {
+    width: 320px;
+    min-width: 320px;
+    background-color: white;
+    border-right: 1px solid #dee2e6;
+    color: #212529 !important; // Ensure text is dark
+
+    // Search input
+    .o_engage_conversation_search {
+        .input-group {
+            .input-group-text {
+                border-color: #dee2e6;
+                background-color: #f8f9fa;
+                color: #6c757d;
+            }
+
+            .form-control {
+                border-color: #dee2e6;
+                color: #212529;
+
+                &:focus {
+                    border-color: #0066cc;
+                    box-shadow: 0 0 0 0.2rem rgba(0, 102, 204, 0.25);
+                }
+
+                &::placeholder {
+                    color: #6c757d;
+                }
+            }
+        }
+    }
+
+    // Tab buttons
+    .o_engage_conversation_tabs {
+        background-color: #f8f9fa;
+
+        button {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #6c757d;
+            transition:
+                color 0.15s ease,
+                border-color 0.15s ease;
+
+            &.active {
+                background-color: white;
+                font-weight: 600;
+                color: #0066cc;
+            }
+
+            &:hover:not(.active) {
+                background-color: rgba(0, 0, 0, 0.03);
+            }
+        }
+    }
+
+    // Conversation items container
+    .o_engage_conversation_items {
+        scrollbar-width: thin;
+        scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
+        &::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 3px;
+        }
+    }
+}
+
+// Conversation Card
+.o_engage_conversation_card {
+    border-bottom: 1px solid #dee2e6;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    color: #212529 !important; // Ensure text is dark
+
+    &:hover {
+        background-color: #f8f9fa;
+    }
+
+    &.selected {
+        background-color: rgba(0, 102, 204, 0.1);
+        border-left: 3px solid #0066cc;
+
+        .o_conversation_card_content {
+            padding-left: calc(1rem - 3px);
+        }
+    }
+
+    &.unread {
+        background-color: rgba(0, 102, 204, 0.05);
+
+        .fw-semibold {
+            font-weight: 700 !important;
+        }
+    }
+
+    // Priority indicators via border
+    &.priority-urgent {
+        border-left: 3px solid #dc3545 !important;
+    }
+
+    &.priority-high {
+        border-left: 3px solid #ffc107 !important;
+    }
+
+    // Avatar
+    .o_avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 14px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        flex-shrink: 0;
+        background-color: #0066cc;
+        color: white;
+    }
+
+    // Content area
+    .o_conversation_info {
+        min-width: 0; // Allow text truncation in flex
+        color: #212529;
+
+        .text-truncate {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .text-muted {
+            color: #6c757d !important;
+        }
+    }
+
+    // Channel badge
+    .o_channel_badge {
+        font-size: 0.85rem;
+
+        &.badge-sm {
+            font-size: 0.75rem;
+        }
+    }
+}
+
+// Label Pills
+.o_label_pills {
+    .o_tag {
+        font-size: 0.65rem;
+        padding: 2px 6px;
+        border-radius: 0.25rem;
+    }
+}
+
+// Priority Indicator
+.o_priority_indicator {
+    display: inline-flex;
+    align-items: center;
+
+    i {
+        font-size: 0.75rem;
+    }
+}
+
+// Relative Time
+.o_relative_time {
+    white-space: nowrap;
+    font-size: 0.75rem;
+    color: #6c757d;
+}

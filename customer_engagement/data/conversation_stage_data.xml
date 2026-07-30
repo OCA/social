@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Add admin to Engage Manager group -->
+    <record id="base.user_admin" model="res.users">
+        <field name="groups_id" eval="[(4, ref('group_engage_manager'))]" />
+    </record>
+
+    <record id="stage_new" model="engage.conversation.stage">
+        <field name="name">New</field>
+        <field name="code">new</field>
+        <field name="sequence">10</field>
+        <field name="closed">False</field>
+    </record>
+
+    <record id="stage_open" model="engage.conversation.stage">
+        <field name="name">Open</field>
+        <field name="code">open</field>
+        <field name="sequence">20</field>
+        <field name="closed">False</field>
+    </record>
+
+    <record id="stage_pending" model="engage.conversation.stage">
+        <field name="name">Pending</field>
+        <field name="code">pending</field>
+        <field name="sequence">30</field>
+        <field name="closed">False</field>
+    </record>
+
+    <record id="stage_resolved" model="engage.conversation.stage">
+        <field name="name">Resolved</field>
+        <field name="code">resolved</field>
+        <field name="sequence">40</field>
+        <field name="closed">False</field>
+        <field name="fold">True</field>
+    </record>
+
+    <record id="stage_closed" model="engage.conversation.stage">
+        <field name="name">Closed</field>
+        <field name="code">closed</field>
+        <field name="sequence">50</field>
+        <field name="closed">True</field>
+        <field name="fold">True</field>
+    </record>
+</odoo>

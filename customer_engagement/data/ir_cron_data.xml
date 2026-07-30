@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Cron: Check idle conversations for automation triggers -->
+    <record id="ir_cron_engage_check_idle" model="ir.cron">
+        <field name="name">Engage: Check Idle Conversations</field>
+        <field name="model_id" ref="model_engage_automation" />
+        <field name="state">code</field>
+        <field name="code">model._cron_check_idle_conversations()</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Cron: Process delayed automation queue -->
+    <record id="ir_cron_engage_process_queue" model="ir.cron">
+        <field name="name">Engage: Process Automation Queue</field>
+        <field name="model_id" ref="model_engage_automation" />
+        <field name="state">code</field>
+        <field name="code">model._cron_process_queue()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Cron: Update SLA status for open conversations -->
+    <record id="ir_cron_engage_update_sla" model="ir.cron">
+        <field name="name">Engage: Update SLA Status</field>
+        <field name="model_id" ref="model_engage_conversation" />
+        <field name="state">code</field>
+        <field name="code">
+# Recompute SLA status for open conversations
+conversations = model.search([('closed', '=', False), ('sla_policy_id', '!=', False)])
+for conv in conversations:
+    conv._compute_sla_status()
+        </field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="active">True</field>
+    </record>
+
+    <!-- Cron: Check expired CSAT surveys -->
+    <record id="ir_cron_engage_check_csat_expired" model="ir.cron">
+        <field name="name">Engage: Check Expired CSAT Surveys</field>
+        <field name="model_id" ref="model_engage_csat" />
+        <field name="state">code</field>
+        <field name="code">model._cron_check_expired()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

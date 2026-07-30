@@ -1,0 +1,90 @@
+// Chat Panel Component Styles
+
+.o_engage_chat_panel {
+    flex: 1;
+    min-width: 0;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    color: #212529 !important; // Ensure text is dark
+
+    // Chat header
+    .o_engage_chat_header {
+        flex-shrink: 0;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        z-index: 10;
+        background-color: white;
+        color: #212529;
+
+        .dropdown-menu {
+            min-width: 150px;
+            color: #212529;
+
+            &.show {
+                display: block;
+            }
+        }
+
+        .dropdown-item {
+            cursor: pointer;
+            color: #212529;
+
+            &:hover {
+                background-color: #f8f9fa;
+            }
+        }
+    }
+
+    // Messages area
+    .o_engage_messages {
+        flex: 1;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        scrollbar-color: #adb5bd #e9ecef;
+
+        &::-webkit-scrollbar {
+            width: 8px;
+        }
+        &::-webkit-scrollbar-track {
+            background: #e9ecef;
+        }
+        &::-webkit-scrollbar-thumb {
+            background: #adb5bd;
+            border-radius: 4px;
+        }
+    }
+
+    // Composer container
+    .o_engage_composer_container {
+        flex-shrink: 0;
+        box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+        background-color: white;
+    }
+
+    // Placeholder text
+    .text-muted {
+        color: #6c757d !important;
+    }
+}
+
+// Message List
+.o_engage_message_list {
+    padding: 0.5rem 0;
+    color: #212529;
+
+    // Date separator
+    .o_date_separator {
+        hr {
+            flex: 1;
+            border: none;
+            border-top: 1px solid #dee2e6;
+            margin: 0;
+        }
+
+        span {
+            background-color: #f8f9fa;
+            padding: 0 0.5rem;
+            color: #6c757d;
+        }
+    }
+}

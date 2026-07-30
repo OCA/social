@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Partner Form View Extension -->
+    <record id="view_partner_form_engage" model="ir.ui.view">
+        <field name="name">res.partner.form.engage</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <!-- Add button box for conversations -->
+            <div name="button_box" position="inside">
+                <button
+                    name="action_view_conversations"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-comments"
+                    invisible="engage_conversation_count == 0"
+                >
+                    <field
+                        name="engage_conversation_count"
+                        widget="statinfo"
+                        string="Conversations"
+                    />
+                </button>
+            </div>
+
+            <!-- Add Engagement tab -->
+            <page name="internal_notes" position="after">
+                <page string="Engagement" name="engagement">
+                    <group>
+                        <group string="Channel Identifiers">
+                            <field name="whatsapp_number" />
+                            <field name="telegram_id" />
+                            <field name="instagram_id" />
+                            <field name="messenger_id" />
+                        </group>
+                        <group string="Preferences">
+                            <field name="preferred_channel" />
+                            <field name="vip_customer" />
+                            <field name="engage_blocked" />
+                        </group>
+                    </group>
+                    <group string="Agent Notes">
+                        <field
+                            name="notes_for_agents"
+                            nolabel="1"
+                            placeholder="Notes visible to support agents..."
+                        />
+                    </group>
+                    <group
+                        string="Engagement Metrics"
+                        invisible="engage_conversation_count == 0"
+                    >
+                        <group>
+                            <field name="open_conversation_count" />
+                            <field name="last_conversation_date" />
+                        </group>
+                        <group>
+                            <field name="avg_resolution_time" />
+                            <field name="total_messages_received" />
+                        </group>
+                    </group>
+                </page>
+            </page>
+        </field>
+    </record>
+
+    <!-- Partner Tree View Extension (optional columns) -->
+    <record id="view_partner_tree_engage" model="ir.ui.view">
+        <field name="name">res.partner.tree.engage</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="phone" position="after">
+                <field name="whatsapp_number" optional="hide" />
+                <field name="vip_customer" optional="hide" />
+                <field
+                    name="engage_conversation_count"
+                    optional="hide"
+                    string="Conversations"
+                />
+            </field>
+        </field>
+    </record>
+
+    <!-- Partner Search View Extension -->
+    <record id="view_partner_search_engage" model="ir.ui.view">
+        <field name="name">res.partner.search.engage</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_res_partner_filter" />
+        <field name="arch" type="xml">
+            <!-- Add filters at the end of the search view -->
+            <xpath expr="//search" position="inside">
+                <separator />
+                <filter
+                    name="vip_customers"
+                    string="VIP Customers"
+                    domain="[('vip_customer', '=', True)]"
+                />
+                <filter
+                    name="has_conversations"
+                    string="Has Conversations"
+                    domain="[('engage_conversation_count', '>', 0)]"
+                />
+                <filter
+                    name="open_conversations"
+                    string="Open Conversations"
+                    domain="[('open_conversation_count', '>', 0)]"
+                />
+                <filter
+                    name="blocked"
+                    string="Blocked"
+                    domain="[('engage_blocked', '=', True)]"
+                />
+            </xpath>
+            <!-- Add search fields -->
+            <xpath expr="//field[@name='email']" position="after">
+                <field name="whatsapp_number" />
+                <field name="telegram_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
