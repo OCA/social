@@ -16,9 +16,7 @@ class FetchmailCase(TransactionCase):
         cls.server = cls.env["fetchmail.server"].create(
             {"name": "Default thread test server", "server_type": "local"}
         )
-        cls.sink = cls.env["res.partner"].create(
-            {"name": "Fallback thread", "email": "sink@example.com"}
-        )
+        cls.sink = cls.env["discuss.channel"].create({"name": "Fallback thread"})
         cls.server.default_thread_id = cls.sink
 
     @staticmethod
@@ -37,7 +35,7 @@ class FetchmailCase(TransactionCase):
     def test_available_models(self):
         """Only concrete models supporting chatter appear."""
         available_models = dict(self.server._get_thread_models())
-        self.assertIn("res.partner", available_models)
+        self.assertIn("discuss.channel", available_models)
         self.assertNotIn("mail.message", available_models)
         for model_name in available_models:
             self.assertTrue(self.env[model_name]._auto)
@@ -45,13 +43,13 @@ class FetchmailCase(TransactionCase):
 
     def test_emptying_default_thread(self):
         """Choosing an ``object_id`` empties ``default_thread_id``."""
-        self.server.object_id = self.env["ir.model"]._get("res.partner")
+        self.server.object_id = self.env["ir.model"]._get("discuss.channel")
         self.server.onchange_server_type()
         self.assertFalse(self.server.default_thread_id)
 
     def test_emptying_object(self):
         """Choosing a ``default_thread_id`` empties ``object_id``."""
-        self.server.object_id = self.env["ir.model"]._get("res.partner")
+        self.server.object_id = self.env["ir.model"]._get("discuss.channel")
         self.server.default_thread_id = self.sink
         self.server._onchange_remove_object_id()
         self.assertFalse(self.server.object_id)
@@ -60,6 +58,7 @@ class FetchmailCase(TransactionCase):
     def test_unbound_incoming_email(self):
         """An unbound incoming email gets posted to the sink."""
         subject = "Post this message on the configured fallback thread"
+        followers_before = self.sink.message_partner_ids
         result = self.MailThread.with_context(
             default_fetchmail_server_id=self.server.id
         ).message_process(
@@ -72,7 +71,7 @@ class FetchmailCase(TransactionCase):
         )
         self.assertEqual(self.server.default_thread_id, self.sink)
         self.assertEqual(result, self.sink.id)
-        self.assertFalse(self.sink.message_partner_ids)
+        self.assertEqual(self.sink.message_partner_ids, followers_before)
         incoming_message = self.env["mail.message"].search(
             [
                 ("model", "=", self.sink._name),
@@ -85,9 +84,7 @@ class FetchmailCase(TransactionCase):
     @mute_logger("odoo.addons.mail.models.mail_thread", "odoo.models")
     def test_normal_reply_routing_wins_over_default_thread(self):
         """A reply reference is routed normally instead of to the fallback."""
-        target = self.env["res.partner"].create(
-            {"name": "Normal route target", "email": "target@example.com"}
-        )
+        target = self.env["discuss.channel"].create({"name": "Normal route target"})
         parent = target.message_post(body="Original message")
         result = self.MailThread.with_context(
             default_fetchmail_server_id=self.server.id
