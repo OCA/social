@@ -24,7 +24,11 @@ class MailThread(models.AbstractModel):
             model = server.default_thread_id._name
             thread_id = server.default_thread_id.id
         return super(
-            MailThread, self.with_context(mail_create_nosubscribe=True)
+            MailThread,
+            self.with_context(
+                mail_create_nosubscribe=True,
+                mail_post_autofollow_author_skip=True,
+            ),
         ).message_process(
             model, message, custom_values, save_original, strip_attachments, thread_id
         )

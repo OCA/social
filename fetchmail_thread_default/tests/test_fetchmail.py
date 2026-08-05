@@ -18,6 +18,9 @@ class FetchmailCase(TransactionCase):
             {"name": "Default thread test server", "server_type": "local"}
         )
         cls.sink = cls.env["discuss.channel"].create({"name": "Fallback thread"})
+        cls.sender = cls.env["res.partner"].create(
+            {"name": "Incoming sender", "email": "sender@example.com"}
+        )
         cls.server.default_thread_id = cls.sink
 
     @staticmethod
@@ -73,6 +76,7 @@ class FetchmailCase(TransactionCase):
         self.assertEqual(self.server.default_thread_id, self.sink)
         self.assertEqual(result, self.sink.id)
         self.assertEqual(self.sink.message_partner_ids, followers_before)
+        self.assertNotIn(self.sender, self.sink.message_partner_ids)
         incoming_message = self.env["mail.message"].search(
             [
                 ("model", "=", self.sink._name),
