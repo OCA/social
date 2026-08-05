@@ -706,3 +706,45 @@ class TestMailTracking(TransactionCase):
             self.assertEqual(
                 "data-odoo-tracking-email not found", tracking.error_description
             )
+
+    def test_message_partners_check_missing_notification(self):
+        """Regression: a tracked recipient with no notification must not abort
+        the transaction, or the mail queue re-sends the mail on every cron run
+        and never leaves the `outgoing` state.
+        """
+        follower = self.env["res.partner"].create(
+            {"name": "Test follower", "email": "follower@example.com"}
+        )
+        message = self.env["mail.message"].create(
+            {
+                "subject": "Message without notification",
+                "author_id": self.sender.id,
+                "email_from": self.sender.email,
+                "message_type": "comment",
+                "subtype_id": self.env.ref("mail.mt_comment").id,
+                "model": "res.partner",
+                "res_id": self.recipient.id,
+                "partner_ids": [Command.link(self.recipient.id)],
+                "body": "<p>This is a test message</p>",
+            }
+        )
+        # The state left behind when a notification goes missing: the tracked
+        # partner is neither an explicit recipient nor a notified partner.
+        self.assertNotIn(follower, message.partner_ids | message.notified_partner_ids)
+        tracking_email = self.env["mail.tracking.email"].create(
+            {
+                "name": message.subject,
+                "mail_message_id": message.id,
+                "partner_id": follower.id,
+                "recipient": follower.email,
+            }
+        )
+        tracking_email._message_partners_check(None, None)
+        notification = self.env["mail.notification"].search(
+            [
+                ("mail_message_id", "=", message.id),
+                ("res_partner_id", "=", follower.id),
+            ]
+        )
+        self.assertEqual(notification.notification_type, "email")
+        self.assertIn(follower, message.notified_partner_ids)

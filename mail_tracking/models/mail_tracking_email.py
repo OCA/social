@@ -383,8 +383,20 @@ class MailTrackingEmail(models.Model):
             # If mail_message haven't tracking partner, then
             # add it in order to see his tracking status in chatter
             if mail_message.subtype_id:
-                mail_message.sudo().write(
-                    {"notified_partner_ids": [Command.link(self.partner_id.id)]}
+                # `notified_partner_ids` is a m2m over `mail_notification`, a
+                # table with its own mandatory columns, so linking it emits an
+                # INSERT with no `notification_type` and hits its NOT NULL
+                # constraint. Create the notification explicitly instead: an
+                # IntegrityError here aborts the whole transaction, which in
+                # the mail queue means the mail is re-sent on every cron run
+                # and never leaves the `outgoing` state.
+                self.env["mail.notification"].sudo().create(
+                    {
+                        "mail_message_id": mail_message.id,
+                        "res_partner_id": self.partner_id.id,
+                        "notification_type": "email",
+                        "notification_status": "sent",
+                    }
                 )
             else:
                 mail_message.sudo().write(
