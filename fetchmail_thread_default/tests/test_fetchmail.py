@@ -12,7 +12,8 @@ class FetchmailCase(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.MailThread = cls.env["mail.thread"]
+        # Incoming mail is processed with administrative rights by fetchmail.
+        cls.MailThread = cls.env["mail.thread"].sudo()
         cls.server = cls.env["fetchmail.server"].create(
             {"name": "Default thread test server", "server_type": "local"}
         )
