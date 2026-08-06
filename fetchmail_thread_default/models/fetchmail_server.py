@@ -27,11 +27,13 @@ class FetchmailServer(models.Model):
             .search([("name", "=", "message_partner_ids")])
             .mapped("model_id")
         )
-        # Exclude AbstractModel
+        mail_thread_model = self.env.registry["mail.thread"]
         return [
-            (m.model, m.name)
-            for m in models
-            if m.model in self.env and self.env[m.model]._auto
+            (model.model, model.name)
+            for model in models
+            if model.model in self.env
+            and self.env[model.model]._auto
+            and isinstance(self.env[model.model], mail_thread_model)
         ]
 
     @api.onchange("server_type", "is_ssl", "object_id")

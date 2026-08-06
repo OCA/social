@@ -41,9 +41,14 @@ class FetchmailCase(TransactionCase):
         available_models = dict(self.server._get_thread_models())
         self.assertIn("discuss.channel", available_models)
         self.assertNotIn("mail.message", available_models)
+        mail_thread_model = self.env.registry["mail.thread"]
         for model_name in available_models:
-            self.assertTrue(self.env[model_name]._auto)
-            self.assertTrue(hasattr(self.env[model_name], "message_post"))
+            with self.subTest(model=model_name):
+                model = self.env[model_name]
+                self.assertTrue(model._auto)
+                self.assertIsInstance(model, mail_thread_model)
+                self.assertTrue(hasattr(model, "message_post"))
+                self.assertTrue(hasattr(model, "message_update"))
 
     def test_emptying_default_thread(self):
         """Choosing an ``object_id`` empties ``default_thread_id``."""
