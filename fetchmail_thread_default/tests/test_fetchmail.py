@@ -55,6 +55,10 @@ class FetchmailCase(TransactionCase):
         self.server.object_id = self.env["ir.model"]._get("discuss.channel")
         self.server.onchange_server_type()
         self.assertFalse(self.server.default_thread_id)
+        self.server.default_thread_id = self.sink
+        self.server.object_id = False
+        self.server.onchange_server_type()
+        self.assertEqual(self.server.default_thread_id, self.sink)
 
     def test_emptying_object(self):
         """Choosing a ``default_thread_id`` empties ``object_id``."""
@@ -62,6 +66,10 @@ class FetchmailCase(TransactionCase):
         self.server.default_thread_id = self.sink
         self.server._onchange_remove_object_id()
         self.assertFalse(self.server.object_id)
+        self.server.object_id = self.env["ir.model"]._get("discuss.channel")
+        self.server.default_thread_id = False
+        self.server._onchange_remove_object_id()
+        self.assertTrue(self.server.object_id)
 
     @mute_logger("odoo.addons.mail.models.mail_thread", "odoo.models")
     def test_unbound_incoming_email(self):
@@ -90,6 +98,41 @@ class FetchmailCase(TransactionCase):
             ]
         )
         self.assertEqual(len(incoming_message), 1)
+
+    @mute_logger("odoo.addons.mail.models.mail_thread", "odoo.models")
+    def test_resolved_thread_wins_over_default_thread(self):
+        """An explicitly resolved thread is not replaced by the default."""
+        target = self.env["discuss.channel"].create({"name": "Resolved target"})
+        subject = "Post this message on the resolved thread"
+        result = self.MailThread.with_context(
+            default_fetchmail_server_id=self.server.id
+        ).message_process(
+            model=target._name,
+            thread_id=target.id,
+            message=self._raw_email(
+                subject, "<fetchmail-thread-default-resolved@example.com>"
+            ),
+        )
+
+        self.assertEqual(result, target.id)
+        self.assertTrue(
+            self.env["mail.message"].search_count(
+                [
+                    ("model", "=", target._name),
+                    ("res_id", "=", target.id),
+                    ("subject", "=", subject),
+                ]
+            )
+        )
+        self.assertFalse(
+            self.env["mail.message"].search_count(
+                [
+                    ("model", "=", self.sink._name),
+                    ("res_id", "=", self.sink.id),
+                    ("subject", "=", subject),
+                ]
+            )
+        )
 
     @mute_logger("odoo.addons.mail.models.mail_thread", "odoo.models")
     def test_normal_reply_routing_wins_over_default_thread(self):
