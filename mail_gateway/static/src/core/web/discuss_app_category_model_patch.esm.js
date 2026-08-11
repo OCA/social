@@ -10,8 +10,7 @@ patch(DiscussAppCategory.prototype, {
     sortThreads(t1, t2) {
         if (this.id === "gateway") {
             return (
-                compareDatetime(t2.lastInterestDateTime, t1.lastInterestDateTime) ||
-                t2.id - t1.id
+                compareDatetime(t2.lastInterestDt, t1.lastInterestDt) || t2.id - t1.id
             );
         }
         return super.sortThreads(t1, t2);
