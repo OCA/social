@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 
 from odoo.addons.social_media_base.social_utils import _generate_timestamps
@@ -121,7 +121,7 @@ class UtmCampaign(models.Model):
             )
             if locked:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign %(names)s cannot be modified because of "
                         "its LinkedIn status (%(status)s).",
                         names=", ".join(locked.mapped("display_name")),
@@ -180,7 +180,7 @@ class UtmCampaign(models.Model):
                 )
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "%(message_error)s %(error_response)s",
                         message_error=message_error,
                         error_response=self.env[
@@ -211,7 +211,7 @@ class UtmCampaign(models.Model):
         elif campaign.status_code == 404:
             return False
         raise UserError(
-            _(
+            self.env._(
                 "%(message_error)s %(error_response)s",
                 message_error="Error creating campaign in Linkedin:",
                 error_response=self.env["social.account"]._linkedin_error_message(
@@ -287,7 +287,7 @@ class UtmCampaign(models.Model):
                 self.write({"remote_ref": campaign, "linkedin_status": "draft"})
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "%(message_error)s %(error_response)s",
                         message_error=message_error,
                         error_response=self.env[
@@ -321,21 +321,25 @@ class UtmCampaign(models.Model):
         self.ensure_one()
         errors = []
         if self.media_id.media_type != "linkedin":
-            errors.append(_("The campaign media must be LinkedIn."))
+            errors.append(self.env._("The campaign media must be LinkedIn."))
         if not self.campaign_group_id:
-            errors.append(_("The campaign must belong to a campaign group."))
+            errors.append(self.env._("The campaign must belong to a campaign group."))
         if not self.account_id:
-            errors.append(_("The campaign must have a social account."))
+            errors.append(self.env._("The campaign must have a social account."))
         if not self.currency_id:
-            errors.append(_("The campaign group must have a currency."))
+            errors.append(self.env._("The campaign group must have a currency."))
         if self.campaign_group_id and self.campaign_group_id.total_budget <= 0:
-            errors.append(_("The campaign group total budget must be positive."))
+            errors.append(
+                self.env._("The campaign group total budget must be positive.")
+            )
         if self.unit_cost <= 0:
-            errors.append(_("The campaign unit cost must be positive."))
+            errors.append(self.env._("The campaign unit cost must be positive."))
         if self.daily_budget <= 0:
-            errors.append(_("The campaign daily budget must be positive."))
+            errors.append(self.env._("The campaign daily budget must be positive."))
         if self.linkedin_format == "SINGLE_VIDEO" and not self.linkedin_objective:
-            errors.append(_("LinkedIn requires an objective for the video format."))
+            errors.append(
+                self.env._("LinkedIn requires an objective for the video format.")
+            )
         if errors:
             raise UserError("\n".join(errors))
 
@@ -350,7 +354,7 @@ class UtmCampaign(models.Model):
         advertising_account_id = self.account_id._get_linkedin_advertising_account()
         if not advertising_account_id:
             raise UserError(
-                _(
+                self.env._(
                     "No LinkedIn advertising account is available for the "
                     "account %(account)s.",
                     account=self.account_id.display_name,
@@ -362,17 +366,19 @@ class UtmCampaign(models.Model):
         self._linkedin_publish_campaign(
             self.account_id, advertising_account_id, group_urn
         )
-        self.message_post(body=_("Campaign created on LinkedIn in draft status."))
+        self.message_post(
+            body=self.env._("Campaign created on LinkedIn in draft status.")
+        )
         return True
 
     def action_update_linkedin(self):
         """Push the local name, unit cost and daily budget to LinkedIn."""
         self.ensure_one()
         if not self.remote_ref:
-            raise UserError(_("The campaign does not exist on LinkedIn yet."))
+            raise UserError(self.env._("The campaign does not exist on LinkedIn yet."))
         if self.linkedin_status in LINKEDIN_LOCKED_STATUSES:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign cannot be updated because of its LinkedIn "
                     "status (%(status)s).",
                     status=self.linkedin_status,
@@ -380,11 +386,11 @@ class UtmCampaign(models.Model):
             )
         if not self.account_id or not self.currency_id:
             raise UserError(
-                _("The campaign must have a social account and a currency.")
+                self.env._("The campaign must have a social account and a currency.")
             )
         if self.campaign_group_id and not self.campaign_group_id.remote_ref:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign group %(group)s does not exist on LinkedIn. "
                     "Create or import it before updating the campaign.",
                     group=self.campaign_group_id.display_name,
@@ -420,10 +426,10 @@ class UtmCampaign(models.Model):
             self.with_context(skip_linkedin_needs_update=True).write(
                 {"linkedin_needs_update": False}
             )
-            self.message_post(body=_("Campaign updated on LinkedIn."))
+            self.message_post(body=self.env._("Campaign updated on LinkedIn."))
         else:
             raise UserError(
-                _(
+                self.env._(
                     "Error updating campaign in Linkedin: %(error)s",
                     error=self.env["social.account"]._linkedin_error_message(response),
                 )
@@ -438,10 +444,10 @@ class UtmCampaign(models.Model):
         """
         self.ensure_one()
         if not self.remote_ref:
-            raise UserError(_("The campaign does not exist on LinkedIn yet."))
+            raise UserError(self.env._("The campaign does not exist on LinkedIn yet."))
         if self.linkedin_status in LINKEDIN_LOCKED_STATUSES:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign cannot be archived because of its LinkedIn "
                     "status (%(status)s).",
                     status=self.linkedin_status,
@@ -449,7 +455,7 @@ class UtmCampaign(models.Model):
             )
         account = self.account_id
         if not account:
-            raise UserError(_("The campaign must have a social account."))
+            raise UserError(self.env._("The campaign must have a social account."))
         response = account._request_linkedin(
             method="POST",
             endpoint=f"/adCampaignsV2/{self.remote_ref.split(':')[-1]}",
@@ -464,7 +470,7 @@ class UtmCampaign(models.Model):
         )
         if response.status_code not in (200, 204):
             raise UserError(
-                _(
+                self.env._(
                     "Error archiving campaign in Linkedin: %(error)s",
                     error=self.env["social.account"]._linkedin_error_message(response),
                 )
@@ -472,7 +478,7 @@ class UtmCampaign(models.Model):
         self.with_context(skip_linkedin_needs_update=True).write(
             {"linkedin_status": "archived", "linkedin_needs_update": False}
         )
-        self.message_post(body=_("Campaign archived on LinkedIn."))
+        self.message_post(body=self.env._("Campaign archived on LinkedIn."))
         return True
 
     @api.constrains("daily_budget")
@@ -482,5 +488,7 @@ class UtmCampaign(models.Model):
                 campaign.campaign_group_id.campaign_ids.mapped("daily_budget")
             ):
                 raise ValidationError(
-                    _("The amount you want to add exceeds the campaign " "group limit.")
+                    self.env._(
+                        "The amount you want to add exceeds the campaign group limit."
+                    )
                 )

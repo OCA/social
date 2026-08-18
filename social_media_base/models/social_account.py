@@ -7,7 +7,7 @@ import logging
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import AccessError
 from odoo.tools import file_open
 
@@ -58,7 +58,7 @@ class SocialAccount(models.Model):
     advertising_account_id = fields.Char()
     last_update_account = fields.Datetime()
     post_account_ids = fields.One2many("social.post.account", "account_id")
-    image_1920 = fields.Image(default=_default_image)
+    image_1920 = fields.Image(default=lambda self: self._default_image())
 
     comment_count = fields.Integer(default=0)
     like_count = fields.Integer(default=0)
@@ -68,8 +68,7 @@ class SocialAccount(models.Model):
         compute="_compute_interactions_count",
         store=True,
         default=0,
-        help="Interactions with the publication: clicks, likes, comments and "
-        "shares.",
+        help="Interactions with the publication: clicks, likes, comments and shares.",
     )
     impression_count = fields.Integer(
         default=0,
@@ -181,7 +180,7 @@ class SocialAccount(models.Model):
             and account_sudo.company_id not in self.env.companies
         ):
             raise AccessError(
-                _(
+                self.env._(
                     "The account %(account)s belongs to another company.",
                     account=account_sudo.display_name,
                 )
@@ -190,7 +189,7 @@ class SocialAccount(models.Model):
             return
         if account_sudo.user_id != self.env.user:
             raise AccessError(
-                _(
+                self.env._(
                     "The account %(account)s is already associated with "
                     "another user. Ask its responsible user or a social "
                     "media administrator to relink it.",
@@ -209,7 +208,7 @@ class SocialAccount(models.Model):
         """
         if not self.env.user.has_group("social_media_base.group_social_media_manager"):
             raise AccessError(
-                _("Only a social media administrator can delete an account.")
+                self.env._("Only a social media administrator can delete an account.")
             )
         accounts = self.with_context(active_test=False)
         post_accounts = accounts.post_account_ids
@@ -387,9 +386,10 @@ class SocialAccount(models.Model):
         return []
 
     def get_chart_account_statistics(
-        self, start_date=None, end_date=None, granularity="WEEK"
+        self, account_id=None, start_date=None, end_date=None, granularity="WEEK"
     ):
-        return self._get_chart_account_statistics(start_date, end_date, granularity)
+        account = self.browse(account_id) if account_id else self
+        return account._get_chart_account_statistics(start_date, end_date, granularity)
 
     def _update_posts_statistics(self, post_id, domain):
         """Update the posts and their statistics.
@@ -417,7 +417,9 @@ class SocialAccount(models.Model):
         self.ensure_one()
         return {
             "success": False,
-            "message": _("Importing campaigns is not available for this social media."),
+            "message": self.env._(
+                "Importing campaigns is not available for this social media."
+            ),
             "groups": 0,
             "campaigns": 0,
             "ads": 0,
@@ -510,6 +512,7 @@ class SocialAccount(models.Model):
                     "end_date",
                 ),
                 freq=values.get("freq", "W-MON"),
+                env=self.env,
             )
 
             def map_chart_data(chart_statistics, label, key_data=0):
@@ -554,19 +557,19 @@ class SocialAccount(models.Model):
                     "impressionCount": impression_count,
                     "commentCount": comment_count,
                     "reactionCount": reaction_count,
-                    "chartLabel": _("Statistics"),
+                    "chartLabel": self.env._("Statistics"),
                     "labels": [week for week in chart_weeks],
                     "datasets": [
-                        map_chart_data(statistics_values, _("Clicks"), 0),
-                        map_chart_data(statistics_values, _("Shares"), 3),
-                        map_chart_data(statistics_values, _("Likes"), 1),
-                        map_chart_data(statistics_values, _("Comments"), 2),
+                        map_chart_data(statistics_values, self.env._("Clicks"), 0),
+                        map_chart_data(statistics_values, self.env._("Shares"), 3),
+                        map_chart_data(statistics_values, self.env._("Likes"), 1),
+                        map_chart_data(statistics_values, self.env._("Comments"), 2),
                         map_chart_data(
                             statistics_values,
-                            _("Impressions"),
+                            self.env._("Impressions"),
                             5,
                         ),
-                        map_chart_data(statistics_values, _("Engagement"), 4),
+                        map_chart_data(statistics_values, self.env._("Engagement"), 4),
                     ],
                 }
             )

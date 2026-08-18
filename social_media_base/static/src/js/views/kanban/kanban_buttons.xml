@@ -1,41 +1,39 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <div t-name="SocialKanbanView.buttons" t-inherit="web.KanbanView.Buttons">
-        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
-            <button
-                type="button"
-                class="btn btn-primary o__kanban_new_account me-1"
-                t-on-click.prevent="_onAddAccount"
-                t-if="!isViewPostNetwork"
-            >
-                Add account
-            </button>
-            <button
-                type="button"
-                class="btn btn-primary o_kanban_new_post me-1"
-                t-on-click.prevent="_onAddPost"
-                t-if="!isViewPostNetwork"
-            >
-                Add Post
-            </button>
-            <button
-                type="button"
-                class="btn btn-primary o_kanban_statistics_refresh_now"
-                t-on-click.prevent="_onUpdatePostsAndStatistics"
-                t-if="!isViewPostNetwork"
-            >
-                <span t-if="!isViewPostNetwork">
+    <div t-name="SocialKanbanView.buttons">
+        <button
+            type="button"
+            class="btn btn-primary o__kanban_new_account me-1"
+            t-on-click.prevent="_onAddAccount"
+            t-if="!isViewPostNetwork"
+        >
+            Add account
+        </button>
+        <button
+            type="button"
+            class="btn btn-primary o_kanban_new_post me-1"
+            t-on-click.prevent="_onAddPost"
+            t-if="!isViewPostNetwork"
+        >
+            Add Post
+        </button>
+        <button
+            type="button"
+            class="btn btn-primary o_kanban_statistics_refresh_now"
+            t-on-click.prevent="_onUpdatePostsAndStatistics"
+            t-if="!isViewPostNetwork"
+        >
+            <span t-if="!isViewPostNetwork">
                 <i
-                        t-if="!model.SyncPosts"
-                        class="fa fa-refresh px-1"
-                        aria-hidden="true"
-                    />
-                    <span class="social-loader" t-if="model.SyncPosts" />
-                    Update
-                </span>
-            </button>
-        </xpath>
+                t-if="!model.SyncPosts"
+                class="fa fa-refresh px-1"
+                aria-hidden="true"
+            />
+                <span class="social-loader" t-if="model.SyncPosts" />
+                Update
+            </span>
+        </button>
     </div>
 
 </templates>

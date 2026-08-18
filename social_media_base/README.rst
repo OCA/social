@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =================
 Social Media Base
 =================
@@ -13,17 +17,17 @@ Social Media Base
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/17.0/social_media_base
+    :target: https://github.com/OCA/social/tree/19.0/social_media_base
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_base
+    :target: https://translation.odoo-community.org/projects/social-19-0/social-19-0-social_media_base
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -218,13 +222,13 @@ Campaign badge.
   status on the social network and its history are one click away from
   the post.
 
-.. |CREATE_GROUP_CAMPAIGN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/CREATE_GROUP_CAMPAIGN.png
-.. |CREATE_CAMPAIGN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/CREATE_CAMPAIGN.png
-.. |DASHBOARD| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/DASHBOARD.png
-.. |POSTS_KANBAN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/POSTS_KANBAN.png
-.. |CHARTS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/CHARTS.png
-.. |ADS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/ADS.png
-.. |ACCOUNT_FORM| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_base/static/img/readme/ACCOUNT_FORM.png
+.. |CREATE_GROUP_CAMPAIGN| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/CREATE_GROUP_CAMPAIGN.png
+.. |CREATE_CAMPAIGN| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/CREATE_CAMPAIGN.png
+.. |DASHBOARD| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/DASHBOARD.png
+.. |POSTS_KANBAN| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/POSTS_KANBAN.png
+.. |CHARTS| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/CHARTS.png
+.. |ADS| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/ADS.png
+.. |ACCOUNT_FORM| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_base/static/img/readme/ACCOUNT_FORM.png
 
 Bug Tracker
 ===========
@@ -232,7 +236,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_base%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_base%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -272,6 +276,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-edescalona| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/social_media_base>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/19.0/social_media_base>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

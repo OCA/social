@@ -6,7 +6,6 @@ from urllib.parse import quote, urlencode
 
 import pytz
 
-from odoo import _
 from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 from odoo.tools.date_utils import add
@@ -153,7 +152,7 @@ def _generate_timestamps(date_start=None, date_end=None):
     return int(date_start_time), int(date_end_time)
 
 
-def get_weeks(start_date, end_date, freq="W-MON"):
+def get_weeks(start_date, end_date, freq="W-MON", env=None):
     if isinstance(start_date, str):
         start_date = datetime.fromisoformat(start_date)
     if isinstance(end_date, str):
@@ -184,6 +183,6 @@ def get_weeks(start_date, end_date, freq="W-MON"):
             current += timedelta(weeks=1)
 
     else:
-        raise UserError(_("Unsupported frequency: %(freq)s", freq=freq))
+        raise UserError(env._("Unsupported frequency: %(freq)s", freq=freq))
 
     return result

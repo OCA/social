@@ -24,7 +24,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 "login": "user_1_test",
                 "email": "user1@test.example.com",
                 "password": "test1234",
-                "groups_id": [(6, 0, [cls.env.ref("base.group_user").id])],
+                "group_ids": [(6, 0, [cls.env.ref("base.group_user").id])],
             }
         )
 
@@ -63,7 +63,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
             {
                 "name": "Social user",
                 "login": "social_user_test",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -83,7 +83,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
             {
                 "name": "Social manager",
                 "login": "social_manager_test",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -236,7 +236,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
 
     def test_remove_social_media(self):
         field = self.social_media_id._fields["media_type"]
-        with patch.object(field, "selection", new=[("other_social", "Other social")]):
+        with patch.object(field, "_selection", new={"other_social": "Other social"}):
             self.social_media_id.write({"media_type": "other_social"})
             self.social_account_id.write(
                 {
@@ -264,7 +264,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
 
     def test_remove_social_media_other_media_untouched(self):
         field = self.social_media_id._fields["media_type"]
-        with patch.object(field, "selection", new=[("other_social", "Other social")]):
+        with patch.object(field, "_selection", new={"other_social": "Other social"}):
             self.social_media_id.write({"media_type": "other_social"})
             self.social_account_id.write({"access_token": "token"})
             self.SocialAccount._remove_social_media("not_this_media")
@@ -301,15 +301,18 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
             )
         ]
         field = self.social_media_id._fields["media_type"]
-        with patch.object(
-            type(self.social_account_id),
-            "_fields_account_url",
-            autospec=True,
-            return_value=fake_fields,
-        ), patch.object(
-            field,
-            "selection",
-            new=[("other_social", "Other social")],
+        with (
+            patch.object(
+                type(self.social_account_id),
+                "_fields_account_url",
+                autospec=True,
+                return_value=fake_fields,
+            ),
+            patch.object(
+                field,
+                "_selection",
+                new={"other_social": "Other social"},
+            ),
         ):
             self.social_media_id.write({"media_type": "other_social"})
             self.assertEqual(

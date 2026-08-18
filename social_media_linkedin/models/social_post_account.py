@@ -5,7 +5,7 @@ import itertools
 import logging
 from urllib.parse import quote
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 from odoo.addons.social_media_base.social_utils import convert_date_in_time
@@ -45,7 +45,7 @@ class SocialPostAccount(models.Model):
         account = account or self.account_id
         download_urls = account._get_linkedin_images_download_url(image_urns)
         return [
-            self._map_medias_account(**{"name": urn, "url": download_urls[urn]})
+            self._map_medias_account(name=urn, url=download_urls[urn])
             for urn in image_urns
             if download_urls.get(urn)
         ]
@@ -105,7 +105,7 @@ class SocialPostAccount(models.Model):
         is_video_campaign = campaign.linkedin_format == "SINGLE_VIDEO"
         if not has_video and len(self.post_id.image_ids) > 1:
             raise UserError(
-                _(
+                self.env._(
                     "LinkedIn does not sponsor posts with several images, so "
                     "this post cannot be linked to the campaign %(campaign)s. "
                     "Publish it with a single image or without a campaign.",
@@ -114,7 +114,7 @@ class SocialPostAccount(models.Model):
             )
         if has_video and not is_video_campaign:
             raise UserError(
-                _(
+                self.env._(
                     "The post contains a video, so it needs a campaign of the "
                     "'Single video' format. The campaign %(campaign)s uses the "
                     "'Standard update' format and LinkedIn does not allow "
@@ -124,7 +124,7 @@ class SocialPostAccount(models.Model):
             )
         if is_video_campaign and not has_video:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign %(campaign)s uses the 'Single video' format, "
                     "so it only accepts posts containing a video.",
                     campaign=campaign.display_name,
@@ -137,7 +137,7 @@ class SocialPostAccount(models.Model):
             campaign_linkedin_urn = self.post_id.campaign_id.remote_ref
             if not campaign_linkedin_urn:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign %(campaign)s has not been created on "
                         "LinkedIn yet. Use the 'Create in LinkedIn' button "
                         "on the campaign before posting.",
@@ -148,7 +148,7 @@ class SocialPostAccount(models.Model):
                 ad_account_id = self.account_id._get_linkedin_ad_account_id()
                 if not ad_account_id:
                     raise UserError(
-                        _(
+                        self.env._(
                             "No LinkedIn advertising account is available for "
                             "the account %(account)s.",
                             account=self.account_id.display_name,
@@ -174,14 +174,14 @@ class SocialPostAccount(models.Model):
                     res = response.headers.get("x-restli-id")
                 else:
                     raise UserError(
-                        _(
+                        self.env._(
                             "Error creating campaign post in Linkedin: %(error)s",
                             error=self.account_id._linkedin_error_message(response),
                         )
                     )
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign could not be generated for the post, "
                         "please try again later."
                     )
@@ -196,7 +196,7 @@ class SocialPostAccount(models.Model):
                 if post_account._requires_campaign_post():
                     if not post_account.post_id.campaign_id.remote_ref:
                         raise UserError(
-                            _(
+                            self.env._(
                                 "The campaign %(campaign)s has not been "
                                 "created on LinkedIn yet. Use the 'Create in "
                                 "LinkedIn' button on the campaign before "
@@ -213,10 +213,7 @@ class SocialPostAccount(models.Model):
                 )
                 if post_entity:
                     ugc_post = post_account.account_id._get_posts(
-                        **{
-                            "params_fields": ["ids"],
-                            "params_values": {"ids": [post_entity]},
-                        }
+                        params_fields=["ids"], params_values={"ids": [post_entity]}
                     )
                     attach_images = None
                     if ugc_post and ugc_post[0].get("content", False):
@@ -228,12 +225,11 @@ class SocialPostAccount(models.Model):
                         creative_urn = post_account._action_campaign_post(post_entity)
                     except UserError:
                         _logger.exception(
-                            "Error creating the LinkedIn campaign creative "
-                            "for post %s",
+                            "Error creating the LinkedIn campaign creative for post %s",
                             post_entity,
                         )
                         post_account.post_id.message_post(
-                            body=_(
+                            body=self.env._(
                                 "The post was published on LinkedIn but the "
                                 "campaign creative could not be created. "
                                 "Check the Ads permissions of the account."
@@ -284,9 +280,11 @@ class SocialPostAccount(models.Model):
             if response.status_code == 201:
                 like_ok = True
             elif response.status_code == 409:
-                message_like = _("You have already reacted to this post.")
+                message_like = self.env._("You have already reacted to this post.")
             elif response.status_code == 404:
-                message_like = _("The post does not exist or has been deleted.")
+                message_like = self.env._(
+                    "The post does not exist or has been deleted."
+                )
             else:
                 message_like = self.account_id._linkedin_error_message(response)
             return {"success": like_ok, "message": message_like}
@@ -328,7 +326,7 @@ class SocialPostAccount(models.Model):
                     for comment in response_comments
                 ]
             else:
-                return_message = _(
+                return_message = self.env._(
                     "ERROR GET COMMENTS LINKEDIN: %(error)s",
                     error=self.account_id._linkedin_error_message(response),
                 )
@@ -361,7 +359,7 @@ class SocialPostAccount(models.Model):
                 linkedin_v2=True,
             )
             if response.status_code != 201:
-                return_message = _(
+                return_message = self.env._(
                     "ERROR CREATE COMMENT LINKEDIN: %(error)s",
                     error=self.account_id._linkedin_error_message(response),
                 )
@@ -397,7 +395,7 @@ class SocialPostAccount(models.Model):
             if response.status_code != 204:
                 return {
                     "success": False,
-                    "message": _(
+                    "message": self.env._(
                         "An error occurred while deleting the comment or it "
                         "no longer exists, please try again later."
                     ),
@@ -435,8 +433,12 @@ class SocialPostAccount(models.Model):
             if delete_post.status_code != 204:
                 error_message = self.account_id._linkedin_error_message(
                     delete_post
-                ) or _("The post could not be deleted, please try again later.")
+                ) or self.env._(
+                    "The post could not be deleted, please try again later."
+                )
                 raise UserError(
-                    _("Error deleting LinkedIn post: %(error)s", error=error_message)
+                    self.env._(
+                        "Error deleting LinkedIn post: %(error)s", error=error_message
+                    )
                 )
         return super()._delete_post_account()

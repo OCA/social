@@ -16,7 +16,9 @@
                 <span class="text-dark rounded h-25" t-esc="ads.created" />
             </div>
             <div class="d-flex justify-content-between pt-2">
-                <span class="text-dark"><t t-esc="campaign.name" /></span>
+                <span class="text-dark">
+                    <t t-esc="campaign.name" />
+                </span>
                 <span
                     t-if="ads.status"
                     t-attf-class="badge text-white p-2 bg-{{ ads.status_level or 'secondary' }}"
@@ -27,8 +29,8 @@
             <div class="d-flex justify-content-around pt-2">
                 <span class="text-dark">
                     Impressions: <t
-                        t-esc="statistic.impressions > 0 ? statistic.impressions : '0'"
-                    />
+                    t-esc="statistic.impressions > 0 ? statistic.impressions : '0'"
+                />
                 </span>
                 <span class="text-dark">
                     Clicks: <t t-esc="statistic.clicks > 0 ? statistic.clicks : '0'" />

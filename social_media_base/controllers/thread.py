@@ -4,7 +4,7 @@
 from odoo.http import request, route
 
 from odoo.addons.mail.controllers.thread import ThreadController
-from odoo.addons.mail.models.discuss.mail_guest import add_guest_to_context
+from odoo.addons.mail.tools.discuss import add_guest_to_context
 
 
 class ThreadControllerSocial(ThreadController):
@@ -22,7 +22,7 @@ class ThreadControllerSocial(ThreadController):
             }
         }
 
-    @route("/mail/message/post", methods=["POST"], type="json", auth="public")
+    @route("/mail/message/post", methods=["POST"], type="jsonrpc", auth="public")
     @add_guest_to_context
     def mail_message_post(self, thread_model, thread_id, post_data, context=None):
         if thread_model == "social.post.account" and thread_id:

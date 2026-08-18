@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="wizard_social_account_view_form_inherit" model="ir.ui.view">
         <field name="name">wizard.social.account.view.form.inherit.x</field>
         <field name="model">wizard.social.account</field>
@@ -22,9 +21,9 @@
                     plan, otherwise X rejects every request of this module.
                     See the
                     <a
-                        href="https://docs.x.com/x-api/getting-started/pricing"
-                        target="_blank"
-                    >X API pricing</a>.
+                    href="https://docs.x.com/x-api/getting-started/pricing"
+                    target="_blank"
+                >X API pricing</a>.
                 </div>
             </xpath>
             <xpath expr="//group[@name='social_account_data']" position="inside">

@@ -12,7 +12,7 @@ from urllib.parse import quote, urljoin
 import pytz
 import requests
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
@@ -100,7 +100,7 @@ class SocialAccount(models.Model):
         )
         if account_count > 0:
             raise UserError(
-                _(
+                self.env._(
                     "An account with this information "
                     "already exists; please also check "
                     "archived accounts."
@@ -166,7 +166,7 @@ class SocialAccount(models.Model):
             return response
         except requests.exceptions.RequestException as ex:
             raise UserError(
-                _("Error connecting to LinkedIn: %(error)s", error=ex)
+                self.env._("Error connecting to LinkedIn: %(error)s", error=ex)
             ) from ex
 
     @api.model
@@ -182,17 +182,17 @@ class SocialAccount(models.Model):
         """
         code = _linkedin_error_code(error)
         if code == "invalid_client":
-            return _(
+            return self.env._(
                 "LinkedIn rejected the credentials of the App. Check the "
                 "Client ID and the Client Secret of your LinkedIn App."
             )
         if code in ("invalid_grant", "invalid_request"):
-            return _(
+            return self.env._(
                 "The authorization of LinkedIn is no longer valid. Please "
                 "restart the account association process."
             )
         if code == "REVOKED_ACCESS_TOKEN":
-            return _(
+            return self.env._(
                 "The access token of LinkedIn was revoked. Update the "
                 "account to authorize it again."
             )
@@ -231,7 +231,7 @@ class SocialAccount(models.Model):
             return response
         else:
             raise UserError(
-                _(
+                self.env._(
                     "REFRESH TOKEN: %(error)s",
                     error=self._linkedin_error_message(response),
                 )
@@ -256,7 +256,7 @@ class SocialAccount(models.Model):
         )
         if not isinstance(image, dict):
             raise UserError(
-                _(
+                self.env._(
                     "UPLOADING IMAGE: %(error)s",
                     error=self._linkedin_error_message(image),
                 )
@@ -288,7 +288,7 @@ class SocialAccount(models.Model):
             )
             if upload_image.status_code not in (200, 201):
                 raise UserError(
-                    _(
+                    self.env._(
                         "UPLOADING IMAGE: %(error)s",
                         error=self._linkedin_error_message(upload_image),
                     )
@@ -322,7 +322,7 @@ class SocialAccount(models.Model):
         )
         if not isinstance(video, dict):
             raise UserError(
-                _(
+                self.env._(
                     "UPLOADING VIDEO: %(error)s",
                     error=self._linkedin_error_message(video),
                 )
@@ -359,7 +359,7 @@ class SocialAccount(models.Model):
             )
             if upload_part.status_code not in (200, 201):
                 raise UserError(
-                    _(
+                    self.env._(
                         "UPLOADING VIDEO: %(error)s",
                         error=self._linkedin_error_message(upload_part),
                     )
@@ -386,7 +386,7 @@ class SocialAccount(models.Model):
         )
         if finalize_video.status_code not in (200, 201):
             raise UserError(
-                _(
+                self.env._(
                     "UPLOADING VIDEO: %(error)s",
                     error=self._linkedin_error_message(finalize_video),
                 )
@@ -433,7 +433,7 @@ class SocialAccount(models.Model):
             )
             if response.status_code != 200:
                 raise UserError(
-                    _(
+                    self.env._(
                         "GET VIDEO STATUS: %(error)s",
                         error=self._linkedin_error_message(response),
                     )
@@ -444,7 +444,7 @@ class SocialAccount(models.Model):
                 return True
             if status == "PROCESSING_FAILED":
                 raise UserError(
-                    _(
+                    self.env._(
                         "LinkedIn could not process the video: %(reason)s",
                         reason=video.get("processingFailureReason", status),
                     )
@@ -452,7 +452,7 @@ class SocialAccount(models.Model):
             if attempt < attempts - 1:
                 time.sleep(delay)
         raise UserError(
-            _(
+            self.env._(
                 "LinkedIn is still processing the video after %(seconds)s "
                 "seconds. Please try to publish the post again later.",
                 seconds=int(attempts * delay),
@@ -528,7 +528,7 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 201:
             raise UserError(
-                _(
+                self.env._(
                     "CREATING POST: %(error)s",
                     error=self._linkedin_error_message(response),
                 )
@@ -573,7 +573,7 @@ class SocialAccount(models.Model):
         wizard_social_account = self._get_linkedin_oauth_wizard(kwargs.get("state", ""))
         if not wizard_social_account:
             raise UserError(
-                _(
+                self.env._(
                     "Invalid OAuth state token. Please restart the "
                     "account association process."
                 )
@@ -587,8 +587,12 @@ class SocialAccount(models.Model):
             "client_id": client_id,
             "client_secret": client_secret,
         }
-        return client_id, client_secret, self._request_linkedin(
-            endpoint="/accessToken", params=params, timeout=10, token=True
+        return (
+            client_id,
+            client_secret,
+            self._request_linkedin(
+                endpoint="/accessToken", params=params, timeout=10, token=True
+            ),
         )
 
     def get_account_linkedin(self, access_token):
@@ -679,7 +683,7 @@ class SocialAccount(models.Model):
                 )
                 account_id.message_post(
                     body=self._linkedin_error_message(response_organizations)
-                    or _("Error obtaining information from the organization"),
+                    or self.env._("Error obtaining information from the organization"),
                 )
         return organizations_data
 
@@ -755,7 +759,7 @@ class SocialAccount(models.Model):
                 self._trigger_initial_sync()
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Creating account: LinkedIn answered without an "
                         "access token. %(error)s",
                         error=self._linkedin_error_message(token),
@@ -763,7 +767,7 @@ class SocialAccount(models.Model):
                 )
         else:
             raise UserError(
-                _(
+                self.env._(
                     "Creating account: %(error)s",
                     error=self._linkedin_error_message(token),
                 )
@@ -804,7 +808,7 @@ class SocialAccount(models.Model):
                     )
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Error get advertising account in Linkedin: %(error)s",
                         error=self._linkedin_error_message(response),
                     )
@@ -862,7 +866,7 @@ class SocialAccount(models.Model):
             )
             if response.status_code != 200:
                 raise UserError(
-                    _(
+                    self.env._(
                         "GET ADS: %(error)s",
                         error=self._linkedin_error_message(response),
                     )
@@ -901,7 +905,7 @@ class SocialAccount(models.Model):
             )
             if response.status_code != 200:
                 raise UserError(
-                    _(
+                    self.env._(
                         "Error getting campaigns from Linkedin: %(error)s",
                         error=self._linkedin_error_message(response),
                     )
@@ -950,7 +954,7 @@ class SocialAccount(models.Model):
             if group:
                 if group.linkedin_needs_update:
                     group.message_post(
-                        body=_(
+                        body=self.env._(
                             "Import kept the local pending changes. "
                             "LinkedIn values: name: %(name)s, "
                             "total budget: %(total_budget)s %(currency)s",
@@ -968,7 +972,7 @@ class SocialAccount(models.Model):
                     and group.linkedin_status in DELETED_LINKEDIN_STATUSES
                 ):
                     group.message_post(
-                        body=_(
+                        body=self.env._(
                             "This campaign group was deleted on LinkedIn. It "
                             "is kept in Odoo as history because LinkedIn "
                             "still returns it with its performance data."
@@ -1014,7 +1018,7 @@ class SocialAccount(models.Model):
                     vals.pop("name")
                 if campaign.linkedin_needs_update:
                     campaign.message_post(
-                        body=_(
+                        body=self.env._(
                             "Import kept the local pending changes. "
                             "LinkedIn values: name: %(name)s, "
                             "unit cost: %(unit_cost)s, "
@@ -1040,7 +1044,7 @@ class SocialAccount(models.Model):
                     and campaign.linkedin_status in DELETED_LINKEDIN_STATUSES
                 ):
                     campaign.message_post(
-                        body=_(
+                        body=self.env._(
                             "This campaign was deleted on LinkedIn. It is "
                             "kept in Odoo as history because LinkedIn still "
                             "returns it with its performance data."
@@ -1086,7 +1090,7 @@ class SocialAccount(models.Model):
             if not advertising_account_id:
                 return {
                     "success": False,
-                    "message": _(
+                    "message": self.env._(
                         "No LinkedIn advertising account is available for "
                         "the account %(account)s.",
                         account=self.display_name,
@@ -1121,7 +1125,7 @@ class SocialAccount(models.Model):
         counts["ads"] = self._link_linkedin_creatives(creatives)
         return {
             "success": True,
-            "message": _(
+            "message": self.env._(
                 "%(groups)s campaign group(s), %(campaigns)s campaign(s) "
                 "and %(ads)s sponsored post(s) imported from LinkedIn.",
                 **counts,
@@ -1182,14 +1186,14 @@ class SocialAccount(models.Model):
                 elif not ctx.get("not_notify", False):
                     self._notify_user_client(
                         notif_type="social_form_success",
-                        notif_message=_("The token is valid."),
+                        notif_message=self.env._("The token is valid."),
                         media="linkedin",
                         account_name=self.name or "LINKEDIN",
                     )
             elif not ctx.get("not_notify", False):
                 self._notify_user_client(
                     notif_type="social_form_success",
-                    notif_message=_("The token is valid."),
+                    notif_message=self.env._("The token is valid."),
                     media="linkedin",
                     account_name=self.name or "LINKEDIN",
                 )
@@ -1231,7 +1235,7 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 200:
             raise UserError(
-                _(
+                self.env._(
                     "GET POSTS: %(error)s",
                     error=self._linkedin_error_message(response),
                 )
@@ -1352,7 +1356,7 @@ class SocialAccount(models.Model):
 
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "GET SHARE POSTS STATISTICS: %(error)s",
                         error=self._linkedin_error_message(response),
                     )
@@ -1411,7 +1415,7 @@ class SocialAccount(models.Model):
                 }
             else:
                 raise UserError(
-                    _(
+                    self.env._(
                         "GET UGC POSTS STATISTICS: %(error)s",
                         error=self._linkedin_error_message(response),
                     )
@@ -1491,10 +1495,7 @@ class SocialAccount(models.Model):
                 if account.linkedin_account_id:
                     if post_id:
                         ugc_posts = account._get_posts(
-                            **{
-                                "params_fields": ["ids"],
-                                "params_values": {"ids": [post_id]},
-                            }
+                            params_fields=["ids"], params_values={"ids": [post_id]}
                         )
                     else:
                         ugc_posts = account._get_posts()
@@ -1665,7 +1666,9 @@ class SocialAccount(models.Model):
             if account_statistics:
                 data_linkedin += account._map_chart_statistics(
                     account_statistics,
-                    **{"freq": freq, "start_date": start_date, "end_date": end_date},
+                    freq=freq,
+                    start_date=start_date,
+                    end_date=end_date,
                 )
         return list(itertools.chain(data, data_linkedin))
 
@@ -1681,9 +1684,9 @@ class SocialAccount(models.Model):
         params_values_char_ignore = {"search": [{"all": ":"}]}
         if campaign_ids:
             search_campaign = param_values["search"].strip("()")
-            param_values[
-                "search"
-            ] = f"({search_campaign},campaigns:(values:List({','.join(campaign_ids)})))"
+            param_values["search"] = (
+                f"({search_campaign},campaigns:(values:List({','.join(campaign_ids)})))"
+            )
             params_values_char_ignore = {"search": [{"1,2,3,4,5,6,7": ":"}]}
         response = self._request_linkedin(
             endpoint="/adCampaignsV2",
@@ -1700,7 +1703,7 @@ class SocialAccount(models.Model):
             campaigns = response.json().get("elements", [])
         else:
             raise UserError(
-                _(
+                self.env._(
                     "GET CAMPAIGNS: %(error)s",
                     error=self._linkedin_error_message(response),
                 )
@@ -1767,7 +1770,7 @@ class SocialAccount(models.Model):
             statistics = response.json().get("elements", [])
         else:
             raise UserError(
-                _(
+                self.env._(
                     "GET CAMPAIGNS STATISTICS: %(error)s",
                     error=self._linkedin_error_message(response),
                 )

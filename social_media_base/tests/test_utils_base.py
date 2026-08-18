@@ -128,18 +128,30 @@ class TestUtilsBase(TestSocialMediaBaseCommon):
 
     def test_get_weeks(self):
         with self.assertRaises(UserError):
-            get_weeks(start_date=self.date_start, end_date=self.date_end, freq="W-MONN")
+            get_weeks(
+                start_date=self.date_start,
+                end_date=self.date_end,
+                freq="W-MONN",
+                env=self.env,
+            )
 
-        result = get_weeks(start_date=self.date_start, end_date=self.date_end, freq="D")
+        result = get_weeks(
+            start_date=self.date_start, end_date=self.date_end, freq="D", env=self.env
+        )
         self.assertEqual(len(result), 32)
         self.assertIsInstance(result, list)
 
-        result = get_weeks(start_date=self.date_start, end_date=self.date_end)
+        result = get_weeks(
+            start_date=self.date_start, end_date=self.date_end, env=self.env
+        )
         self.assertEqual(len(result), 4)
         self.assertIsInstance(result, list)
 
         result = get_weeks(
-            start_date=self.date_start, end_date=self.date_end, freq="ME"
+            start_date=self.date_start,
+            end_date=self.date_end,
+            freq="ME",
+            env=self.env,
         )
         self.assertEqual(len(result), 1)
         self.assertIsInstance(result, list)

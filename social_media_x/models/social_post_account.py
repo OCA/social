@@ -6,7 +6,7 @@ import logging
 
 from tweepy.errors import TooManyRequests
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 from ..social_x_utils import _URL_X
@@ -133,7 +133,9 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="get_comments"
                 )
             except Exception as e:
-                return_message = _("Error Get Comments for Tweet: %(error)s)", error=e)
+                return_message = self.env._(
+                    "Error Get Comments for Tweet: %(error)s)", error=e
+                )
                 _logger.exception(return_message)
                 return {
                     "success": False,
@@ -178,7 +180,9 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="create_comment"
                 )
             except Exception as exp:
-                return_message = _("Error Comment Tweet: %(error)s)", error=exp)
+                return_message = self.env._(
+                    "Error Comment Tweet: %(error)s)", error=exp
+                )
                 _logger.exception(return_message)
                 return {
                     "success": False,
@@ -217,7 +221,7 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="get_post"
                 )
             except Exception as e:
-                message_error = _("Error Get Comment Post: %(error)s", error=e)
+                message_error = self.env._("Error Get Comment Post: %(error)s", error=e)
                 _logger.exception(message_error)
             if message_error:
                 raise UserError(message_error)
@@ -241,7 +245,7 @@ class SocialPostAccount(models.Model):
                     exManyRequest, endpoint="delete_post"
                 )
             except Exception as e:
-                message_error = _("ERROR DELETE POST X: %(error)s", error=e)
+                message_error = self.env._("ERROR DELETE POST X: %(error)s", error=e)
                 _logger.exception(message_error)
             if message_error:
                 raise UserError(message_error)
@@ -262,7 +266,8 @@ class SocialPostAccount(models.Model):
             ):
                 attachments.append(
                     self._map_medias_account(
-                        **{"name": media, "url": media_map.get(media, False)[1]},
+                        name=media,
+                        url=media_map.get(media, False)[1],
                     )
                 )
         return attachments

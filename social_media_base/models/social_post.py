@@ -3,8 +3,8 @@
 
 from datetime import timedelta
 
-from odoo import Command, _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import Command, api, fields, models
+from odoo.exceptions import MissingError, UserError
 
 
 class SocialPost(models.Model):
@@ -163,7 +163,7 @@ class SocialPost(models.Model):
     @api.depends("account_ids.media_id")
     def _compute_display_name(self):
         for post in self:
-            post.display_name = _(
+            post.display_name = self.env._(
                 "Post on %(posts)s",
                 posts=", ".join(post.account_ids.mapped("media_id.name")),
             )
@@ -221,7 +221,7 @@ class SocialPost(models.Model):
         for post in self:
             if post.state in ("publishing", "published"):
                 raise UserError(
-                    _(
+                    self.env._(
                         "%(post)s: cannot be cancelled because it "
                         "is published or in the process of being published.",
                         post=post.display_name,
@@ -256,12 +256,14 @@ class SocialPost(models.Model):
                     ".social_media_post_preview",
                     values | self._render_values_preview(),
                 )
-            except ValueError:
+            except (ValueError, MissingError):
                 render_template += """\n\n""" + IrQweb._render(
                     "social_media_base.social_media_post_preview",
                     values | self._render_values_preview(),
                 )
-        return render_template if render_template else _("No preview available")
+        return (
+            render_template if render_template else self.env._("No preview available")
+        )
 
     @api.depends("account_ids", "message", "image_ids", "video_ids")
     def _compute_post_preview(self):
@@ -331,7 +333,7 @@ class SocialPost(models.Model):
 
     def _message_error_post(self, message, media_id):
         self.message_post(
-            body=_(
+            body=self.env._(
                 "Error posting on [%(media)s]: %(error)s",
                 media=media_id,
                 error=message,
@@ -347,8 +349,4 @@ class SocialPost(models.Model):
                 ("send_post_date", "<=", fields.Datetime.now()),
             ]
         )
-        posts.with_context(
-            **{
-                "social_post_cron": True,
-            }
-        )._action_create_post_account()
+        posts.with_context(social_post_cron=True)._action_create_post_account()

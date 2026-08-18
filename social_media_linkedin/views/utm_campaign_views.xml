@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="utm_campaign_view_form_inherit">
         <field name="name">utm.campaign.view.form.inherit.linkedin</field>
         <field name="model">utm.campaign</field>
@@ -122,7 +121,7 @@
             ref="social_media_base.utm_campaign_social_view_tree"
         />
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="decoration-warning">linkedin_needs_update</attribute>
             </xpath>
             <xpath expr="//field[@name='account_id']" position="after">
@@ -142,5 +141,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

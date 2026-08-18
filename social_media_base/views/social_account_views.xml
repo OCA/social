@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="social_account_view_form">
         <field name="name">social.account.form</field>
         <field name="model">social.account</field>
@@ -82,11 +81,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -95,13 +90,13 @@
         <field name="name">social.account.tree</field>
         <field name="model">social.account</field>
         <field name="arch" type="xml">
-            <tree create="0" edit="0" delete="0">
+            <list create="0" edit="0" delete="0">
                 <field name="name" />
                 <field name="username" />
                 <field name="media_id" />
                 <field name="user_id" />
                 <field name="create_date" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -125,7 +120,7 @@
                     name="inactive"
                     domain="[('active', '=', False)]"
                 />
-                <group expand="0" string="Group By">
+                <group name="group_by">
                     <filter
                         string="Media"
                         name="group_by_media"
@@ -144,7 +139,7 @@
     <record model="ir.actions.act_window" id="social_account_action">
         <field name="name">Accounts</field>
         <field name="res_model">social.account</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="social_account_view_search" />
         <field name="domain">[]</field>
         <field name="context">{}</field>
@@ -158,5 +153,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

@@ -689,27 +689,32 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
                 "content": {"media": {"id": "urn:li:image:1"}},
             }
         ]
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ) as mock_filter_by_media_types, patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-            return_value=post_account_urn,
-        ) as mock_linkedin_create_post, patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_get_posts",
-            autospec=True,
-            return_value=fake_response,
-        ) as mock_get_posts, patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_get_assets_save",
-            autospec=True,
-            return_value=[attachment.id],
-        ) as mock_get_assets_save:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ) as mock_filter_by_media_types,
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+                return_value=post_account_urn,
+            ) as mock_linkedin_create_post,
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_get_posts",
+                autospec=True,
+                return_value=fake_response,
+            ) as mock_get_posts,
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_get_assets_save",
+                autospec=True,
+                return_value=[attachment.id],
+            ) as mock_get_assets_save,
+        ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             self.assertEqual(
                 self.SocialPostAccountLinkedin.remote_ref,
@@ -738,26 +743,31 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
                 "content": {"media": {"id": "urn:li:image:1"}},
             }
         ]
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-            return_value=post_account_urn,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_get_posts",
-            autospec=True,
-            return_value=fake_response,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_get_assets_save",
-            autospec=True,
-            return_value=[],
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+                return_value=post_account_urn,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_get_posts",
+                autospec=True,
+                return_value=fake_response,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_get_assets_save",
+                autospec=True,
+                return_value=[],
+            ),
         ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
@@ -780,21 +790,25 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
     def test_action_post_campaign_precheck_blocks_publish(self):
         self.SocialPostAccountLinkedin.write({"state": "ready"})
         self._set_linkedin_campaign()
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_linkedin_advertising_accounts",
-            autospec=True,
-            side_effect=UserError("Ads access denied"),
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-        ) as mock_linkedin_create_post:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_linkedin_advertising_accounts",
+                autospec=True,
+                side_effect=UserError("Ads access denied"),
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+            ) as mock_linkedin_create_post,
+        ):
             with self.assertRaises(UserError):
                 self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             mock_linkedin_create_post.assert_not_called()
@@ -811,36 +825,43 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
                 "content": {"media": {"id": "urn:li:image:1"}},
             }
         ]
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_linkedin_advertising_accounts",
-            autospec=True,
-            return_value="urn:li:sponsoredAccount:123",
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-            return_value=post_account_urn,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_get_posts",
-            autospec=True,
-            return_value=fake_response,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_get_assets_save",
-            autospec=True,
-            return_value=[],
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_action_campaign_post",
-            autospec=True,
-            side_effect=UserError("Creative error"),
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_linkedin_advertising_accounts",
+                autospec=True,
+                return_value="urn:li:sponsoredAccount:123",
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+                return_value=post_account_urn,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_get_posts",
+                autospec=True,
+                return_value=fake_response,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_get_assets_save",
+                autospec=True,
+                return_value=[],
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_action_campaign_post",
+                autospec=True,
+                side_effect=UserError("Creative error"),
+            ),
         ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
@@ -893,17 +914,20 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
 
     def test_action_post_failed(self):
         self.SocialPostAccountLinkedin.write({"state": "ready"})
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ) as mock_filter_by_media_types, patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-            return_value=False,
-        ) as mock_linkedin_create_post:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ) as mock_filter_by_media_types,
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+                return_value=False,
+            ) as mock_linkedin_create_post,
+        ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             self.assertEqual(self.SocialPostAccountLinkedin.state, "failed")
             mock_filter_by_media_types.assert_called_once()

@@ -360,17 +360,20 @@ class TestSocialPostAccountX(TestSocialCommonX):
 
     def test_action_post(self):
         self.SocialPostAccountX.write({"state": "ready"})
-        with patch.object(
-            type(self.SocialPostX),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountX,
-        ) as mock_filter_by_media_types, patch.object(
-            type(self.SocialPostAccountX.account_id),
-            "create_tweet",
-            autospec=True,
-            return_value="122809890045",
-        ) as mock_create_tweet:
+        with (
+            patch.object(
+                type(self.SocialPostX),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountX,
+            ) as mock_filter_by_media_types,
+            patch.object(
+                type(self.SocialPostAccountX.account_id),
+                "create_tweet",
+                autospec=True,
+                return_value="122809890045",
+            ) as mock_create_tweet,
+        ):
             self.SocialPostAccountX._action_post(self.SocialPostX)
             self.assertEqual(self.SocialPostAccountX.remote_ref, "122809890045")
             self.assertEqual(self.SocialPostAccountX.state, "posted")
@@ -383,17 +386,20 @@ class TestSocialPostAccountX(TestSocialCommonX):
 
     def test_action_post_failed(self):
         self.SocialPostAccountX.write({"state": "ready"})
-        with patch.object(
-            type(self.SocialPostX),
-            "filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountX,
-        ) as mock_filter_by_media_types, patch.object(
-            type(self.SocialPostAccountX.account_id),
-            "create_tweet",
-            autospec=True,
-            return_value=False,
-        ) as mock_create_tweet:
+        with (
+            patch.object(
+                type(self.SocialPostX),
+                "filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountX,
+            ) as mock_filter_by_media_types,
+            patch.object(
+                type(self.SocialPostAccountX.account_id),
+                "create_tweet",
+                autospec=True,
+                return_value=False,
+            ) as mock_create_tweet,
+        ):
             self.SocialPostAccountX._action_post(self.SocialPostX)
             self.assertEqual(self.SocialPostAccountX.state, "failed")
             mock_filter_by_media_types.assert_called_once()

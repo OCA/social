@@ -1,7 +1,7 @@
 # Copyright 2025 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 
@@ -79,7 +79,7 @@ class WizardSocialAccount(models.TransientModel):
             return self._update_account()
         except Exception as ex:
             raise UserError(
-                _(
+                self.env._(
                     "ERROR UPDATE ACCOUNT %(account)s: %(error)s",
                     account=self.account_id.name,
                     error=ex,

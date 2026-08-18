@@ -44,16 +44,19 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 }
             )
         ]
-        with patch.object(
-            type(self.social_post_id),
-            "_prepare_post_account_values",
-            autospec=True,
-            return_value=fake_post_account,
-        ), patch.object(
-            type(self.social_post_account_id),
-            "_action_post",
-            autospec=True,
-        ) as mock_action_post:
+        with (
+            patch.object(
+                type(self.social_post_id),
+                "_prepare_post_account_values",
+                autospec=True,
+                return_value=fake_post_account,
+            ),
+            patch.object(
+                type(self.social_post_account_id),
+                "_action_post",
+                autospec=True,
+            ) as mock_action_post,
+        ):
             self.social_post_id._action_create_post_account()
             mock_action_post.assert_called_once_with(
                 self.SocialPostAccount,
@@ -165,16 +168,19 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             post_id.post_account_ids[0].state = "posted"
             post_id.post_account_ids[1].state = "failed"
 
-        with patch.object(
-            type(post),
-            "_prepare_post_account_values",
-            autospec=True,
-            return_value=fake_post_accounts,
-        ), patch.object(
-            type(self.social_post_account_id),
-            "_action_post",
-            autospec=True,
-            side_effect=fake_action_post,
+        with (
+            patch.object(
+                type(post),
+                "_prepare_post_account_values",
+                autospec=True,
+                return_value=fake_post_accounts,
+            ),
+            patch.object(
+                type(self.social_post_account_id),
+                "_action_post",
+                autospec=True,
+                side_effect=fake_action_post,
+            ),
         ):
             post._action_create_post_account()
         self.assertEqual(post.state, "publishing")
@@ -243,7 +249,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             {
                 "name": "Other social user",
                 "login": "other_media_user_test",
-                "groups_id": [
+                "group_ids": [
                     Command.set(
                         [
                             self.env.ref("base.group_user").id,

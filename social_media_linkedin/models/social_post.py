@@ -3,8 +3,8 @@
 
 import itertools
 
-from odoo import _, api, fields, models
-from odoo.osv import expression
+from odoo import api, fields, models
+from odoo.fields import Domain
 
 
 class SocialPost(models.Model):
@@ -16,15 +16,19 @@ class SocialPost(models.Model):
 
     def _get_allow_campaign_domain(self):
         domain = super()._get_allow_campaign_domain()
-        return expression.AND(
-            [
-                domain,
+        return list(
+            Domain.AND(
                 [
-                    "|",
-                    ("media_id.media_type", "!=", "linkedin"),
-                    ("remote_ref", "!=", False),
-                ],
-            ]
+                    Domain(domain),
+                    Domain(
+                        [
+                            "|",
+                            ("media_id.media_type", "!=", "linkedin"),
+                            ("remote_ref", "!=", False),
+                        ]
+                    ),
+                ]
+            )
         )
 
     def _default_account_ids(self):
@@ -47,7 +51,7 @@ class SocialPost(models.Model):
                 and post.video_ids
                 and "linkedin" in post.account_ids.mapped("media_type")
             ):
-                message_info = _(
+                message_info = self.env._(
                     "You have selected images and videos for this post. "
                     "However, the social media LinkedIn does not allow "
                     "combining both types of content in the same post. Therefore, "

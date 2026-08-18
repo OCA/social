@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="social_post_view_form">
         <field name="name">social.post.form</field>
         <field name="model">social.post</field>
@@ -121,7 +120,7 @@
                                     <field name="media_type" />
                                     <field name="account_id" />
                                     <templates>
-                                        <t t-name="kanban-box">
+                                        <t t-name="card">
                                             <div
                                                 t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
                                             >
@@ -139,7 +138,6 @@
                                                 />
 
                                                 <div class="oe_kanban_content">
-
                                                     <t
                                                         t-set="images"
                                                         t-value="JSON.parse(record.image_urls.raw_value)"
@@ -156,11 +154,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -169,7 +163,7 @@
         <field name="name">social.post.tree</field>
         <field name="model">social.post</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-muted="state == 'draft'"
                 decoration-info="state in ('planned','publishing')"
                 decoration-success="state == 'published'"
@@ -186,7 +180,7 @@
                 <field name="count_post_interactions" />
                 <field name="count_post_engagement" />
                 <field name="state" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -209,7 +203,7 @@
                 <field name="count_post_interactions" />
                 <field name="count_post_engagement" />
                 <templates>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div class="oe_kanban_global_click rounded">
                             <div class="d-flex flex-column">
                                 <div
@@ -245,8 +239,8 @@
                                 >
                                     <button class="btn btn-md active" role="button">
                                         + <t
-                                            t-esc="images.length - record.countShowImage"
-                                        />
+                                        t-esc="images.length - record.countShowImage"
+                                    />
                                     </button>
                                 </div>
                                 <div
@@ -270,19 +264,19 @@
                                 >
                                     <i class="fa fa-video-camera" aria-hidden="true" />
                                     <span>Video (<t
-                                            t-esc="record.video_ids.raw_value.length"
-                                        />)</span>
+                                        t-esc="record.video_ids.raw_value.length"
+                                    />)</span>
                                 </div>
                                 <hr />
                                 <span>Clicks: <t
-                                        t-esc="record.count_post_clicks.raw_value"
-                                    /></span>
+                                    t-esc="record.count_post_clicks.raw_value"
+                                /></span>
                                 <span>Interactions: <t
-                                        t-esc="record.count_post_interactions.raw_value"
-                                    /></span>
+                                    t-esc="record.count_post_interactions.raw_value"
+                                /></span>
                                 <span>Engagement: <t
-                                        t-esc="record.count_post_engagement.value"
-                                    /></span>
+                                    t-esc="record.count_post_engagement.value"
+                                /></span>
                                 <t
                                     t-set="campaignId"
                                     t-value="Array.isArray(record.campaign_id.raw_value) ? record.campaign_id.raw_value[0] : record.campaign_id.raw_value"
@@ -323,7 +317,7 @@
                     name="my_posts"
                     domain="[('user_id', '=', uid)]"
                 />
-                <group expand="0" string="Group By">
+                <group name="group_by">
                     <filter
                         string="Responsible"
                         name="group_by_user"
@@ -347,7 +341,7 @@
     <record model="ir.actions.act_window" id="social_post_action">
         <field name="name">Posts</field>
         <field name="res_model">social.post</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="social_post_view_search" />
         <field name="domain">[]</field>
         <field name="context">{}</field>
@@ -361,5 +355,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

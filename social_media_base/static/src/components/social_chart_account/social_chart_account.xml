@@ -5,14 +5,14 @@
         <div class="d-flex flex-column pt-2 h-100">
             <ControlPanel display="layoutActions">
                 <t t-set-slot="control-panel-navigation-additional">
-                                <SocialFilter
+                    <SocialFilter
                         filter.bind="onFilterChart"
                         clearFilter.bind="clearFilterChart"
                         filterGranularity="true"
                         objectId="chartAccount.id"
                     />
                 </t>
-			</ControlPanel>
+            </ControlPanel>
             <div class="d-flex h-100 flex-column justify-content-start">
                 <div
                     class="d-flex h-auto flex-column mt-2 px-4 py-2 w-100 bg-white social-chart-header"
@@ -55,7 +55,7 @@
                     </div>
                 </div>
                 <div class="mt-2 h-75 px-4 py-1 w-100 social-chart-body bg-white">
-                  <canvas t-ref="chartAccount" />
+                    <canvas t-ref="chartAccount" />
                 </div>
             </div>
         </div>

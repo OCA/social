@@ -61,7 +61,7 @@ export class SocialChart extends SocialMediaMixin(Component) {
             this.social_state.statistics = await this.ormService.call(
                 "social.account",
                 "get_chart_account_statistics",
-                [[]]
+                []
             );
         } finally {
             this.social_state.loaderChart = false;

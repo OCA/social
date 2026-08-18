@@ -5,7 +5,7 @@ import base64
 
 import requests
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 
 
 class SocialPostAccount(models.Model):
@@ -130,9 +130,11 @@ class SocialPostAccount(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Post deleted [%(account)s]", account=account_id.name),
+                "title": self.env._(
+                    "Post deleted [%(account)s]", account=account_id.name
+                ),
                 "type": "success",
-                "message": _("The post was successfully deleted."),
+                "message": self.env._("The post was successfully deleted."),
                 "next": {"type": "ir.actions.client", "tag": "reload"},
             },
         }

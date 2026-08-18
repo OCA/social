@@ -61,7 +61,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_prepare_url_upload_image_error(self):
         """An answer that is not the registered upload stops the publication."""
-        mock_response = self.generate_magic_mock(**{"status_code": 403})
+        mock_response = self.generate_magic_mock(status_code=403)
         with self.get_patch_exceptions_linkedin(mock_response):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._prepare_url_upload_image()
@@ -77,10 +77,11 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
                 "https://fake.upload/image",
             ),
         )
-        mock_response = self.generate_magic_mock(**{"status_code": 201})
-        with patch_upload_url, self.get_patch_exceptions_linkedin(
-            mock_response
-        ) as mock_request:
+        mock_response = self.generate_magic_mock(status_code=201)
+        with (
+            patch_upload_url,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             images = self.SocialAccountLinkedin._prepare_images_for_post(
                 image_ids=[self.image_base64]
             )
@@ -100,10 +101,11 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
                 "https://fake.upload/image",
             ),
         )
-        mock_response = self.generate_magic_mock(**{"status_code": 201})
-        with patch_upload_url, self.get_patch_exceptions_linkedin(
-            mock_response
-        ) as mock_request:
+        mock_response = self.generate_magic_mock(status_code=201)
+        with (
+            patch_upload_url,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             images = self.SocialAccountLinkedin._prepare_images_for_post(
                 image_datas=f"data:image/png;base64,{self.image_base64}"
             )
@@ -119,7 +121,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
                 "https://fake.upload/image",
             ),
         )
-        mock_response = self.generate_magic_mock(**{"status_code": 400})
+        mock_response = self.generate_magic_mock(status_code=400)
         with patch_upload_url, self.get_patch_exceptions_linkedin(mock_response):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._prepare_images_for_post(
@@ -154,7 +156,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertEqual(json_data["initializeUploadRequest"]["fileSizeBytes"], 4)
 
     def test_initialize_video_upload_error(self):
-        mock_response = self.generate_magic_mock(**{"status_code": 400})
+        mock_response = self.generate_magic_mock(status_code=400)
         with self.get_patch_exceptions_linkedin(mock_response):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_initialize_video_upload(4)
@@ -166,9 +168,9 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             {"uploadUrl": "https://fake.upload/video/1", "firstByte": 0, "lastByte": 3},
             {"uploadUrl": "https://fake.upload/video/2", "firstByte": 4, "lastByte": 8},
         ]
-        first_part = self.generate_magic_mock(**{"status_code": 201})
+        first_part = self.generate_magic_mock(status_code=201)
         first_part.headers = {"etag": '"etag-1"'}
-        second_part = self.generate_magic_mock(**{"status_code": 201})
+        second_part = self.generate_magic_mock(status_code=201)
         second_part.headers = {"etag": '"etag-2"'}
         patch_request = self.get_patch_exceptions_linkedin(
             side_effect=[first_part, second_part]
@@ -185,7 +187,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         instructions = [
             {"uploadUrl": "https://fake.upload/video/1", "firstByte": 0, "lastByte": 3}
         ]
-        mock_response = self.generate_magic_mock(**{"status_code": 400})
+        mock_response = self.generate_magic_mock(status_code=400)
         with self.get_patch_exceptions_linkedin(mock_response):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_upload_video_parts(
@@ -194,7 +196,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertIn("UPLOADING VIDEO", str(context.exception))
 
     def test_finalize_video_upload(self):
-        mock_response = self.generate_magic_mock(**{"status_code": 200})
+        mock_response = self.generate_magic_mock(status_code=200)
         with self.get_patch_exceptions_linkedin(mock_response) as mock_request:
             self.SocialAccountLinkedin._linkedin_finalize_video_upload(
                 self.mediaVideo.format("VID123"), "token-123", ["etag-1"]
@@ -205,7 +207,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         )
 
     def test_finalize_video_upload_error(self):
-        mock_response = self.generate_magic_mock(**{"status_code": 400})
+        mock_response = self.generate_magic_mock(status_code=400)
         with self.get_patch_exceptions_linkedin(mock_response):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_finalize_video_upload(
@@ -216,17 +218,18 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
     def test_wait_video_available(self):
         """The video is polled until LinkedIn finishes processing it."""
         processing = self.generate_magic_mock(
-            **{"status_code": 200, "json_return_value": {"status": "PROCESSING"}}
+            status_code=200, json_return_value={"status": "PROCESSING"}
         )
         available = self.generate_magic_mock(
-            **{"status_code": 200, "json_return_value": {"status": "AVAILABLE"}}
+            status_code=200, json_return_value={"status": "AVAILABLE"}
         )
         patch_request = self.get_patch_exceptions_linkedin(
             side_effect=[processing, available]
         )
-        with patch_request as mock_request, patch(
-            f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep"
-        ) as mock_sleep:
+        with (
+            patch_request as mock_request,
+            patch(f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep") as mock_sleep,
+        ):
             self.assertTrue(
                 self.SocialAccountLinkedin._linkedin_wait_video_available(
                     self.mediaVideo.format("VID123")
@@ -237,13 +240,11 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_wait_video_available_processing_failed(self):
         failed = self.generate_magic_mock(
-            **{
-                "status_code": 200,
-                "json_return_value": {
-                    "status": "PROCESSING_FAILED",
-                    "processingFailureReason": "UNSUPPORTED_FORMAT",
-                },
-            }
+            status_code=200,
+            json_return_value={
+                "status": "PROCESSING_FAILED",
+                "processingFailureReason": "UNSUPPORTED_FORMAT",
+            },
         )
         with self.get_patch_exceptions_linkedin(failed):
             with self.assertRaises(UserError) as context:
@@ -261,10 +262,11 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             "social_media_linkedin.video_poll_delay", "0"
         )
         processing = self.generate_magic_mock(
-            **{"status_code": 200, "json_return_value": {"status": "PROCESSING"}}
+            status_code=200, json_return_value={"status": "PROCESSING"}
         )
-        with self.get_patch_exceptions_linkedin(processing) as mock_request, patch(
-            f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep"
+        with (
+            self.get_patch_exceptions_linkedin(processing) as mock_request,
+            patch(f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep"),
         ):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_wait_video_available(
@@ -274,7 +276,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertIn("still processing the video", str(context.exception))
 
     def test_wait_video_available_error(self):
-        mock_response = self.generate_magic_mock(**{"status_code": 404})
+        mock_response = self.generate_magic_mock(status_code=404)
         with self.get_patch_exceptions_linkedin(mock_response):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_wait_video_available(
@@ -338,11 +340,13 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
     def _linkedin_create_post_payload(self, image_urns=None, video_urns=None):
         """Publish a post and return the body sent to the Posts API."""
         patch_images, patch_videos = self._patch_media_uploads(image_urns, video_urns)
-        mock_response = self.generate_magic_mock(**{"status_code": 201})
+        mock_response = self.generate_magic_mock(status_code=201)
         mock_response.headers = {"x-restli-id": "urn:li:share:1"}
-        with patch_images, patch_videos, self.get_patch_exceptions_linkedin(
-            mock_response
-        ) as mock_request:
+        with (
+            patch_images,
+            patch_videos,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             post_urn = self.SocialAccountLinkedin._linkedin_create_post(
                 message="Hello", image_ids=[], video_ids=[]
             )
@@ -386,11 +390,13 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         patch_images, patch_videos = self._patch_media_uploads(
             video_urns=[self.mediaVideo.format("1")]
         )
-        mock_response = self.generate_magic_mock(**{"status_code": 201})
+        mock_response = self.generate_magic_mock(status_code=201)
         mock_response.headers = {"x-restli-id": "urn:li:ugcPost:1"}
-        with patch_images as mock_images, patch_videos, (
-            self.get_patch_exceptions_linkedin(mock_response)
-        ) as mock_request:
+        with (
+            patch_images as mock_images,
+            patch_videos,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             self.SocialAccountLinkedin._linkedin_create_post(
                 message="Hello", image_ids=[1], video_ids=[2]
             )
@@ -402,12 +408,14 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_linkedin_create_post_error(self):
         patch_images, patch_videos = self._patch_media_uploads()
-        mock_response = self.generate_magic_mock(**{"status_code": 422})
-        with patch_images, patch_videos, self.get_patch_exceptions_linkedin(
-            mock_response
+        mock_response = self.generate_magic_mock(status_code=422)
+        with (
+            patch_images,
+            patch_videos,
+            self.get_patch_exceptions_linkedin(mock_response),
+            self.assertRaises(UserError) as context,
         ):
-            with self.assertRaises(UserError) as context:
-                self.SocialAccountLinkedin._linkedin_create_post(message="Hello")
+            self.SocialAccountLinkedin._linkedin_create_post(message="Hello")
         self.assertIn("CREATING POST", str(context.exception))
 
     def test_linkedin_create_post_without_access_token(self):
@@ -418,15 +426,13 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_posts(self):
         mock_response = self.generate_magic_mock(
-            **{
-                "status_code": 200,
-                "json_return_value": {
-                    "elements": [
-                        {"id": "123", "commentary": "Post 1"},
-                        {"id": "456", "commentary": "Post 2"},
-                    ]
-                },
-            }
+            status_code=200,
+            json_return_value={
+                "elements": [
+                    {"id": "123", "commentary": "Post 1"},
+                    {"id": "456", "commentary": "Post 2"},
+                ]
+            },
         )
 
         patch_request_linkedin = self.get_patch_exceptions_linkedin(mock_response)
@@ -447,7 +453,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             )
             self.assertEqual(call_kwargs["headers"]["X-RestLi-Method"], "FINDER")
 
-        mock_response_failed = self.generate_magic_mock(**{"status_code": 400})
+        mock_response_failed = self.generate_magic_mock(status_code=400)
         patch_request_linkedin_failed = self.get_patch_exceptions_linkedin(
             mock_response_failed
         )
@@ -458,23 +464,21 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_posts_by_ids(self):
         mock_response = self.generate_magic_mock(
-            **{
-                "status_code": 200,
-                "json_return_value": {
-                    "results": {
-                        "urn:li:share:1": {
-                            "id": "urn:li:share:1",
-                            "commentary": "Post by id",
-                            "content": {"media": {"id": "urn:li:image:1"}},
-                            "author": "urn:li:organization:123456",
-                            "publishedAt": 1735689600000,
-                            "createdAt": 1735689600000,
-                        }
-                    },
-                    "statuses": {},
-                    "errors": {},
+            status_code=200,
+            json_return_value={
+                "results": {
+                    "urn:li:share:1": {
+                        "id": "urn:li:share:1",
+                        "commentary": "Post by id",
+                        "content": {"media": {"id": "urn:li:image:1"}},
+                        "author": "urn:li:organization:123456",
+                        "publishedAt": 1735689600000,
+                        "createdAt": 1735689600000,
+                    }
                 },
-            }
+                "statuses": {},
+                "errors": {},
+            },
         )
         patch_request_linkedin = self.get_patch_exceptions_linkedin(mock_response)
         with patch_request_linkedin as mock_request_linkedin:
@@ -496,7 +500,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
     def test_get_posts_merges_the_author_params(self):
         """``add_values`` keeps the given params and adds the author finder."""
         mock_response = self.generate_magic_mock(
-            **{"status_code": 200, "json_return_value": {"elements": []}}
+            status_code=200, json_return_value={"elements": []}
         )
         with self.get_patch_exceptions_linkedin(mock_response) as mock_request_linkedin:
             self.SocialAccountLinkedin._get_posts(
@@ -513,15 +517,13 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_linkedin_images_download_url(self):
         mock_response = self.generate_magic_mock(
-            **{
-                "status_code": 200,
-                "json_return_value": {
-                    "results": {
-                        "urn:li:image:1": {"downloadUrl": "https://fake/1.png"},
-                        "urn:li:image:2": {},
-                    }
-                },
-            }
+            status_code=200,
+            json_return_value={
+                "results": {
+                    "urn:li:image:1": {"downloadUrl": "https://fake/1.png"},
+                    "urn:li:image:2": {},
+                }
+            },
         )
         with self.get_patch_exceptions_linkedin(mock_response) as mock_request:
             urls = self.SocialAccountLinkedin._get_linkedin_images_download_url(
@@ -535,7 +537,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
     @mute_logger(LOGGER_ACCOUNT_LINKEDIN)
     def test_get_linkedin_images_download_url_error_is_not_fatal(self):
         """A failure reading the images does not stop the statistics pass."""
-        mock_response = self.generate_magic_mock(**{"status_code": 403})
+        mock_response = self.generate_magic_mock(status_code=403)
         with self.get_patch_exceptions_linkedin(mock_response):
             urls = self.SocialAccountLinkedin._get_linkedin_images_download_url(
                 ["urn:li:image:1"]
@@ -548,34 +550,20 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
     def _generate_update_posts_statistics_patches(self, ugc_posts):
         return (
             self.generate_patch(
-                **{
-                    "model_patch": PATCH_ACCOUNT_LINKEDIN.format(
-                        "validate_access_token"
-                    ),
-                    "return_value": True,
-                }
+                model_patch=PATCH_ACCOUNT_LINKEDIN.format("validate_access_token"),
+                return_value=True,
             ),
             self.generate_patch(
-                **{
-                    "model_patch": PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-                    "return_value": ugc_posts,
-                }
+                model_patch=PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                return_value=ugc_posts,
             ),
             self.generate_patch(
-                **{
-                    "model_patch": PATCH_ACCOUNT_LINKEDIN.format(
-                        "get_entity_statistics"
-                    ),
-                    "side_effect": lambda *args, **kwargs: {},
-                }
+                model_patch=PATCH_ACCOUNT_LINKEDIN.format("get_entity_statistics"),
+                side_effect=lambda *args, **kwargs: {},
             ),
             self.generate_patch(
-                **{
-                    "model_patch": PATCH_POST_ACCOUNT_LINKEDIN.format(
-                        "_get_assets_save"
-                    ),
-                    "side_effect": lambda *args, **kwargs: None,
-                }
+                model_patch=PATCH_POST_ACCOUNT_LINKEDIN.format("_get_assets_save"),
+                side_effect=lambda *args, **kwargs: None,
             ),
         )
 
@@ -595,8 +583,11 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             patch_entity,
             patch_assets,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts as mock_get_posts, patch_entity, (
-            patch_assets
+        with (
+            patch_validate,
+            patch_get_posts as mock_get_posts,
+            patch_entity,
+            patch_assets,
         ):
             self.SocialAccountLinkedin._update_posts_statistics(
                 "urn:li:share:new", None
@@ -641,26 +632,22 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_chart_account_statistics(self):
         patch_get_default_filter_date = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_get_default_filter_date",
-                "return_value": (
-                    "2025-01-01T00:00:00",
-                    "2025-01-07T23:59:59",
-                ),
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_get_default_filter_date",
+            return_value=(
+                "2025-01-01T00:00:00",
+                "2025-01-07T23:59:59",
+            ),
         )
         patch_get_entity_statistics = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "get_entity_statistics",
-                "return_value": {
-                    "urn:li:ugcPost:0119424": (100, 30, 50, 0, 0, 0),
-                    "urn:li:ugcPost:0115624": (200, 70, 100, 0, 0, 0),
-                },
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="get_entity_statistics",
+            return_value={
+                "urn:li:ugcPost:0119424": (100, 30, 50, 0, 0, 0),
+                "urn:li:ugcPost:0115624": (200, 70, 100, 0, 0, 0),
+            },
         )
 
         with patch_get_default_filter_date, patch_get_entity_statistics:
@@ -677,24 +664,20 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_campaigns(self):
         mock_response = self.generate_magic_mock(
-            **{
-                "status_code": 200,
-                "json_return_value": {
-                    "elements": [
-                        {"id": "123", "name": "Campaign A"},
-                        {"id": "456", "name": "Campaign B"},
-                    ]
-                },
-            }
+            status_code=200,
+            json_return_value={
+                "elements": [
+                    {"id": "123", "name": "Campaign A"},
+                    {"id": "456", "name": "Campaign B"},
+                ]
+            },
         )
 
         patch_request_linkedin = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "return_value": mock_response,
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            return_value=mock_response,
         )
 
         with patch_request_linkedin as mock_request_linkedin:
@@ -709,16 +692,10 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             mock_request_linkedin.assert_called_once()
 
         patch_request_linkedin_failed = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "return_value": self.generate_magic_mock(
-                    **{
-                        "status_code": 403,
-                    }
-                ),
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            return_value=self.generate_magic_mock(status_code=403),
         )
         with patch_request_linkedin_failed as mock_request_linkedin_failed:
             with self.assertRaises(UserError):
@@ -731,29 +708,25 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_statistics(self):
         mock_response = self.generate_magic_mock(
-            **{
-                "status_code": 200,
-                "json_return_value": {
-                    "elements": [
-                        {
-                            "campaign": "123",
-                            "statistics": {"clickCount": 100, "impressionCount": 500},
-                        },
-                        {
-                            "campaign": "456",
-                            "statistics": {"clickCount": 200, "impressionCount": 600},
-                        },
-                    ]
-                },
-            }
+            status_code=200,
+            json_return_value={
+                "elements": [
+                    {
+                        "campaign": "123",
+                        "statistics": {"clickCount": 100, "impressionCount": 500},
+                    },
+                    {
+                        "campaign": "456",
+                        "statistics": {"clickCount": 200, "impressionCount": 600},
+                    },
+                ]
+            },
         )
         patch_request_linkedin = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "return_value": mock_response,
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            return_value=mock_response,
         )
         with patch_request_linkedin as mock_request_linkedin:
             result = self.SocialAccountLinkedin._get_statistics(
@@ -767,16 +740,10 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             mock_request_linkedin.assert_called_once()
 
         patch_request_linkedin_failed = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "return_value": self.generate_magic_mock(
-                    **{
-                        "status_code": 403,
-                    }
-                ),
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            return_value=self.generate_magic_mock(status_code=403),
         )
         with patch_request_linkedin_failed as mock_request_linkedin_failed:
             with self.assertRaises(UserError):
@@ -791,12 +758,10 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         ads_ids = [123, 456]
         expected_result = [{"mock": "data"}]
         patch_get_statistics = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccount,
-                "method_patch": "_get_statistics",
-                "return_value": expected_result,
-            }
+            type_object=True,
+            model_patch=self.SocialAccount,
+            method_patch="_get_statistics",
+            return_value=expected_result,
         )
 
         with patch_get_statistics as mock_get_statistics:
@@ -808,88 +773,72 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_load_ads(self):
         patch_request_linkedin = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "side_effect": [
-                    self.generate_magic_mock(
-                        **{
-                            "status_code": 200,
-                            "json_return_value": {
-                                "elements": [
-                                    {
-                                        "id": "urn:li:sponsoredCreative:1",
-                                        "content": {"reference": "ref1"},
-                                        "campaign": "urn:li:sponsoredCampaign:123",
-                                        "createdAt": 1735689600000,
-                                        "intendedStatus": "DRAFT",
-                                        "servingHoldReasons": ["UNDER_REVIEW"],
-                                        "isTest": True,
-                                    }
-                                ]
-                            },
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            side_effect=[
+                self.generate_magic_mock(
+                    status_code=200,
+                    json_return_value={
+                        "elements": [
+                            {
+                                "id": "urn:li:sponsoredCreative:1",
+                                "content": {"reference": "ref1"},
+                                "campaign": "urn:li:sponsoredCampaign:123",
+                                "createdAt": 1735689600000,
+                                "intendedStatus": "DRAFT",
+                                "servingHoldReasons": ["UNDER_REVIEW"],
+                                "isTest": True,
+                            }
+                        ]
+                    },
+                ),
+                self.generate_magic_mock(
+                    status_code=200,
+                    json_return_value={
+                        "results": {
+                            "ref1": {
+                                "id": "ref1",
+                                "commentary": "Test post",
+                            }
                         }
-                    ),
-                    self.generate_magic_mock(
-                        **{
-                            "status_code": 200,
-                            "json_return_value": {
-                                "results": {
-                                    "ref1": {
-                                        "id": "ref1",
-                                        "commentary": "Test post",
-                                    }
-                                }
-                            },
-                        }
-                    ),
-                ],
-            }
+                    },
+                ),
+            ],
         )
         patch_get_campaigns = self.generate_patch(
-            **{
-                "model_patch": PATCH_ACCOUNT_LINKEDIN.format("_get_campaigns"),
-                "return_value": [
-                    {
-                        "id": 123,
-                        "account": "urn:li:sponsoredAccount:999",
-                    }
-                ],
-            }
+            model_patch=PATCH_ACCOUNT_LINKEDIN.format("_get_campaigns"),
+            return_value=[
+                {
+                    "id": 123,
+                    "account": "urn:li:sponsoredAccount:999",
+                }
+            ],
         )
         patch_get_statistics_ads = self.generate_patch(
-            **{
-                "model_patch": PATCH_ACCOUNT_LINKEDIN.format("_get_statistics_ads"),
-                "return_value": [
-                    {
-                        "pivotValues": ["urn:li:sponsoredCreative:1"],
-                        "clicks": 10,
-                    }
-                ],
-            }
+            model_patch=PATCH_ACCOUNT_LINKEDIN.format("_get_statistics_ads"),
+            return_value=[
+                {
+                    "pivotValues": ["urn:li:sponsoredCreative:1"],
+                    "clicks": 10,
+                }
+            ],
         )
         patch_get_default_filter_date = self.generate_patch(
-            **{
-                "model_patch": PATCH_ACCOUNT.format("_get_default_filter_date"),
-                "method_patch": "_get_default_filter_date",
-                "side_effect": (
-                    lambda s, e, time_date=False: (
-                        self.start_datetime,
-                        self.end_datetime,
-                    )
-                    if not time_date
-                    else (self.start_datetime, self.end_datetime)
-                ),
-            }
+            model_patch=PATCH_ACCOUNT.format("_get_default_filter_date"),
+            method_patch="_get_default_filter_date",
+            side_effect=(
+                lambda s, e, time_date=False: (
+                    self.start_datetime,
+                    self.end_datetime,
+                )
+                if not time_date
+                else (self.start_datetime, self.end_datetime)
+            ),
         )
         patch_ad_account = self.generate_patch(
-            **{
-                "model_patch": PATCH_ACCOUNT_LINKEDIN.format(
-                    "_get_linkedin_ad_account_id"
-                ),
-                "return_value": "999",
-            }
+            model_patch=PATCH_ACCOUNT_LINKEDIN.format("_get_linkedin_ad_account_id"),
+            return_value="999",
         )
         with (
             patch_request_linkedin as mock_request_linkedin,
@@ -918,12 +867,10 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             mock_get_default_filter_date.assert_called_once()
 
         patch_request_linkedin_failed = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "return_value": self.generate_magic_mock(**{"status_code": 403}),
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            return_value=self.generate_magic_mock(status_code=403),
         )
         with patch_request_linkedin_failed as mock_request_linkedin_failed:
             with self.assertRaises(UserError):
@@ -934,27 +881,23 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_load_ads_without_matching_campaign(self):
         patch_request_linkedin = self.generate_patch(
-            **{
-                "type_object": True,
-                "model_patch": self.SocialAccountLinkedin,
-                "method_patch": "_request_linkedin",
-                "return_value": self.generate_magic_mock(
-                    **{
-                        "status_code": 200,
-                        "json_return_value": {
-                            "elements": [
-                                {
-                                    "id": "urn:li:sponsoredCreative:1",
-                                    "campaign": "urn:li:sponsoredCampaign:123",
-                                    "createdAt": 1735689600000,
-                                    "servingHoldReasons": ["STOPPED"],
-                                    "isTest": True,
-                                }
-                            ]
-                        },
-                    }
-                ),
-            }
+            type_object=True,
+            model_patch=self.SocialAccountLinkedin,
+            method_patch="_request_linkedin",
+            return_value=self.generate_magic_mock(
+                status_code=200,
+                json_return_value={
+                    "elements": [
+                        {
+                            "id": "urn:li:sponsoredCreative:1",
+                            "campaign": "urn:li:sponsoredCampaign:123",
+                            "createdAt": 1735689600000,
+                            "servingHoldReasons": ["STOPPED"],
+                            "isTest": True,
+                        }
+                    ]
+                },
+            ),
         )
         patch_get_campaigns = patch(
             PATCH_ACCOUNT_LINKEDIN.format("_get_campaigns"),
@@ -967,19 +910,13 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             return_value=[],
         )
         patch_get_default_filter_date = self.generate_patch(
-            **{
-                "model_patch": PATCH_ACCOUNT.format("_get_default_filter_date"),
-                "method_patch": "_get_default_filter_date",
-                "return_value": (self.start_datetime, self.end_datetime),
-            }
+            model_patch=PATCH_ACCOUNT.format("_get_default_filter_date"),
+            method_patch="_get_default_filter_date",
+            return_value=(self.start_datetime, self.end_datetime),
         )
         patch_ad_account = self.generate_patch(
-            **{
-                "model_patch": PATCH_ACCOUNT_LINKEDIN.format(
-                    "_get_linkedin_ad_account_id"
-                ),
-                "return_value": "999",
-            }
+            model_patch=PATCH_ACCOUNT_LINKEDIN.format("_get_linkedin_ad_account_id"),
+            return_value="999",
         )
         with (
             patch_request_linkedin as mock_request_linkedin,
@@ -1579,14 +1516,17 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertEqual(len(result), 10)
 
     def test_action_add_account(self):
-        with patch.object(
-            type(self.wizard_account_id),
-            "_get_url_redirect",
-            return_value=self.url_callback,
-        ), patch.object(
-            type(self.wizard_account_id),
-            "_generate_code",
-            return_value="fake-code-token",
+        with (
+            patch.object(
+                type(self.wizard_account_id),
+                "_get_url_redirect",
+                return_value=self.url_callback,
+            ),
+            patch.object(
+                type(self.wizard_account_id),
+                "_generate_code",
+                return_value="fake-code-token",
+            ),
         ):
             result = self.wizard_account_id._action_add_account()
             self.assertIn("fake-client-id", result["url"])
@@ -1671,13 +1611,16 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_get_csrf_state_token(self):
         fake_code_hmac = "fake-hmac-code"
-        with patch.object(
-            type(self.wizard_account_id), "_generate_code", autospec=True
-        ) as mock_fake_code, patch(
-            PATCH_WIZARD_ACCOUNT_LINKEDIN.format("hmac"),
-            autospec=True,
-            return_value=fake_code_hmac,
-        ) as mock_hmac:
+        with (
+            patch.object(
+                type(self.wizard_account_id), "_generate_code", autospec=True
+            ) as mock_fake_code,
+            patch(
+                PATCH_WIZARD_ACCOUNT_LINKEDIN.format("hmac"),
+                autospec=True,
+                return_value=fake_code_hmac,
+            ) as mock_hmac,
+        ):
             result = self.wizard_account_id._get_csrf_state_token()
             self.assertEqual(result, fake_code_hmac)
             mock_hmac.assert_called_once()
@@ -1708,16 +1651,19 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             "url": "https://test.example/redirect",
             "target": "self",
         }
-        with patch.object(
-            type(self.wizard_account_id),
-            "_action_valid_add_account",
-            autospec=True,
-        ) as mocked_valid, patch.object(
-            type(self.wizard_account_id),
-            "_action_add_account",
-            autospec=True,
-            return_value=action_fake_url,
-        ) as mocked_add:
+        with (
+            patch.object(
+                type(self.wizard_account_id),
+                "_action_valid_add_account",
+                autospec=True,
+            ) as mocked_valid,
+            patch.object(
+                type(self.wizard_account_id),
+                "_action_add_account",
+                autospec=True,
+                return_value=action_fake_url,
+            ) as mocked_add,
+        ):
             result = self.wizard_account_id.action_associate_social_account()
             mocked_valid.assert_called_once_with(self.wizard_account_id)
             mocked_add.assert_called_once_with(self.wizard_account_id)
@@ -1786,10 +1732,8 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
 
     def test_create_account_linkedin(self):
         fake_organization = self.generate_magic_mock(
-            **{
-                "return_value": {
-                    "vanityName": "Vanity X",
-                }
+            return_value={
+                "vanityName": "Vanity X",
             }
         )
 
@@ -1879,14 +1823,16 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.expire_access_token_date = (
             datetime.now() + timedelta(days=-10)
         ).date()
-        with patch(
-            PATCH_ACCOUNT.format("validate_access_token")
-        ) as mock_super, patch.object(
-            type(self.SocialAccount),
-            "validate_linkedin_access_token",
-            autospec=True,
-            return_value=True,
-        ) as mock_validate_token, patch_notify_user as mock_notify_user:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")) as mock_super,
+            patch.object(
+                type(self.SocialAccount),
+                "validate_linkedin_access_token",
+                autospec=True,
+                return_value=True,
+            ) as mock_validate_token,
+            patch_notify_user as mock_notify_user,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
             mock_super.assert_called_once()
             mock_validate_token.assert_called_once()
@@ -1898,9 +1844,10 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.refresh_token_expires_in = (
             datetime.now() + timedelta(days=1)
         ).date()
-        with patch(
-            PATCH_ACCOUNT.format("validate_access_token")
-        ) as mock_super_failed, patch_notify_user as mock_notify_user_failed:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")) as mock_super_failed,
+            patch_notify_user as mock_notify_user_failed,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
             mock_super_failed.assert_called_once()
             mock_notify_user_failed.assert_called_once()
@@ -1909,14 +1856,18 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.expire_access_token_date = (
             datetime.now() + timedelta(days=-10)
         ).date()
-        with patch(PATCH_ACCOUNT.format("validate_access_token")), patch.object(
-            type(self.SocialAccount),
-            "validate_linkedin_access_token",
-            autospec=True,
-            return_value=True,
-        ), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")
-        ) as mock_notify_user:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")),
+            patch.object(
+                type(self.SocialAccount),
+                "validate_linkedin_access_token",
+                autospec=True,
+                return_value=True,
+            ),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")
+            ) as mock_notify_user,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
         self.assertEqual(
             mock_notify_user.call_args.kwargs["notif_message"], "The token is valid."
@@ -1970,7 +1921,7 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             {
                 "name": "Other social user",
                 "login": "other_social_user_test",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -1999,14 +1950,17 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
             "q": "organizationalEntity",
             "organizationalEntity": "urn:li:organization:123456",
         }
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("get_share_statistics"),
-            autospec=True,
-            return_value={},
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("get_ugc_posts_statistics"),
-            autospec=True,
-            return_value={},
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("get_share_statistics"),
+                autospec=True,
+                return_value={},
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("get_ugc_posts_statistics"),
+                autospec=True,
+                return_value={},
+            ),
         ):
             self.SocialAccountLinkedin.get_entity_statistics(
                 posts=[{"id": "urn:li:ugcPost:1"}],
@@ -2070,17 +2024,19 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         )
         error_response = MagicMock(status_code=400)
         error_response.json.return_value = {"message": "Invalid share urn"}
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
-            autospec=True,
-            return_value=error_response,
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
+                autospec=True,
+                return_value=error_response,
+            ),
+            self.assertRaises(UserError),
         ):
-            with self.assertRaises(UserError):
-                self.SocialAccountLinkedin.get_share_statistics(
-                    posts=[{"id": "urn:li:share:1"}],
-                    params_fields=["q"],
-                    params_values={"q": "organizationalEntity"},
-                )
+            self.SocialAccountLinkedin.get_share_statistics(
+                posts=[{"id": "urn:li:share:1"}],
+                params_fields=["q"],
+                params_values={"q": "organizationalEntity"},
+            )
 
     def test_get_ugc_posts_statistics(self):
         self.assertEqual(self.SocialAccountLinkedin.get_ugc_posts_statistics(), {})
@@ -2120,17 +2076,19 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         self.assertEqual(mock_request.call_args.kwargs["endpoint"], "/socialActions")
         error_response = MagicMock(status_code=400)
         error_response.json.return_value = {"message": "Invalid ugc post urn"}
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
-            autospec=True,
-            return_value=error_response,
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
+                autospec=True,
+                return_value=error_response,
+            ),
+            self.assertRaises(UserError),
         ):
-            with self.assertRaises(UserError):
-                self.SocialAccountLinkedin.get_ugc_posts_statistics(
-                    posts=[{"id": "urn:li:ugcPost:1"}],
-                    params_fields=["q"],
-                    params_values={"q": "organizationalEntity"},
-                )
+            self.SocialAccountLinkedin.get_ugc_posts_statistics(
+                posts=[{"id": "urn:li:ugcPost:1"}],
+                params_fields=["q"],
+                params_values={"q": "organizationalEntity"},
+            )
 
     def _isolate_linkedin_account(self):
         """Leave ``SocialAccountLinkedin`` as the only LinkedIn account.
@@ -2178,25 +2136,31 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
                 "share_count": 0,
             }
         )
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": remote_ref}],
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("get_entity_statistics"),
-            autospec=True,
-            return_value={remote_ref: (0, 0, 0, 0, 0, 0)},
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": remote_ref}],
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("get_entity_statistics"),
+                autospec=True,
+                return_value={remote_ref: (0, 0, 0, 0, 0, 0)},
+            ),
         ):
             self.SocialAccount._run_check_media_updates()
         self.assertFalse(self.SocialAccountLinkedin.need_update)
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": remote_ref}],
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("get_entity_statistics"),
-            autospec=True,
-            return_value={remote_ref: (1, 2, 3, 4, 5, 6)},
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": remote_ref}],
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("get_entity_statistics"),
+                autospec=True,
+                return_value={remote_ref: (1, 2, 3, 4, 5, 6)},
+            ),
         ):
             self.SocialAccount._run_check_media_updates()
         self.assertTrue(self.SocialAccountLinkedin.need_update)
@@ -2291,14 +2255,16 @@ class TestSocialLinkedin(LinkedinMockMixin, TestSocialCommonLinkedin):
         with self.assertRaises(UserError):
             group.action_archive_linkedin()
         group.write({"remote_ref": "urn:li:sponsoredCampaignGroup:457"})
-        with patch(
-            "odoo.addons.social_media_linkedin.models.utm_group_campaign."
-            "UtmGroupCampaign._get_linkedin_account",
-            autospec=True,
-            return_value=self.env["social.account"],
+        with (
+            patch(
+                "odoo.addons.social_media_linkedin.models.utm_group_campaign."
+                "UtmGroupCampaign._get_linkedin_account",
+                autospec=True,
+                return_value=self.env["social.account"],
+            ),
+            self.assertRaises(UserError),
         ):
-            with self.assertRaises(UserError):
-                group.action_archive_linkedin()
+            group.action_archive_linkedin()
         error_response = MagicMock(status_code=400)
         error_response.json.return_value = {"message": "Cannot archive"}
         with self._mock_linkedin(error_response, self.SocialAccountLinkedin):

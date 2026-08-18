@@ -2,13 +2,12 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="utm_group_campaign_view_tree_inherit">
         <field name="name">utm.group.campaign.view.tree.inherit.linkedin</field>
         <field name="model">utm.group.campaign</field>
         <field name="inherit_id" ref="social_media_base.utm_group_campaign_view_tree" />
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="decoration-warning">linkedin_needs_update</attribute>
             </xpath>
             <xpath expr="//field[@name='name']" position="after">
@@ -114,5 +113,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

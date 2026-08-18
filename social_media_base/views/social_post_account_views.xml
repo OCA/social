@@ -2,7 +2,6 @@
 <!-- Copyright 2025 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="social_post_account_view_kanban">
         <field name="name">social.media.stream.post.view.kanban</field>
         <field name="model">social.post.account</field>
@@ -34,7 +33,7 @@
                 <field name="remote_ref" />
                 <field name="account_remote_ref" />
                 <templates>
-                    <t t-name="kanban-menu">
+                    <t t-name="menu">
                         <div class="p-1">
                             <a
                                 role="menuitem"
@@ -44,7 +43,7 @@
                             >Delete post</a>
                         </div>
                     </t>
-                    <t t-name="kanban-box">
+                    <t t-name="card">
                         <div
                             t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
                         >
@@ -94,7 +93,7 @@
         <field name="model">social.post.account</field>
         <field name="arch" type="xml">
             <search>
-                <group expand="0" string="Group By">
+                <group name="group_by">
                     <filter
                         string="Accounts"
                         name="group_by_account_id"
@@ -158,5 +157,4 @@
             </div>
         </div>
     </template>
-
 </odoo>

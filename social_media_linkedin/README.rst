@@ -1,3 +1,7 @@
+.. image:: https://odoo-community.org/readme-banner-image
+   :target: https://odoo-community.org/get-involved?utm_source=readme
+   :alt: Odoo Community Association
+
 =====================
 Social Media Linkedin
 =====================
@@ -13,17 +17,17 @@ Social Media Linkedin
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/17.0/social_media_linkedin
+    :target: https://github.com/OCA/social/tree/19.0/social_media_linkedin
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_linkedin
+    :target: https://translation.odoo-community.org/projects/social-19-0/social-19-0-social_media_linkedin
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -57,7 +61,7 @@ Statistics account
 
    |STATISTICS_ACCOUNT|
 
-.. |STATISTICS_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/STATISTICS_ACCOUNT.png
+.. |STATISTICS_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/STATISTICS_ACCOUNT.png
 
 **Table of contents**
 
@@ -178,13 +182,13 @@ Registering the Client ID and Client Secret. Integration of a user account.
   overwritten: only the responsible user of the account and the *Social
   Media / Administrator* group can relink it.
 
-.. |BUTTON_CREATE_APP| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/BUTTON_CREATE_APP.png
-.. |FORM_CREATE_APP| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/FORM_CREATE_APP.png
-.. |PRODUCTS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/PRODUCTS.png
-.. |CONFIGURE_URL_CALLBACK| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/CONFIGURE_URL_CALLBACK.png
-.. |ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/ASSOCIATE_ACCOUNT.png
-.. |WIZARD_ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/WIZARD_ASSOCIATE_ACCOUNT.png
-.. |AUTHORIZE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/AUTHORIZE_ACCOUNT.png
+.. |BUTTON_CREATE_APP| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/BUTTON_CREATE_APP.png
+.. |FORM_CREATE_APP| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/FORM_CREATE_APP.png
+.. |PRODUCTS| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/PRODUCTS.png
+.. |CONFIGURE_URL_CALLBACK| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/CONFIGURE_URL_CALLBACK.png
+.. |ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/ASSOCIATE_ACCOUNT.png
+.. |WIZARD_ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/WIZARD_ASSOCIATE_ACCOUNT.png
+.. |AUTHORIZE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/AUTHORIZE_ACCOUNT.png
 
 Usage
 =====
@@ -410,14 +414,14 @@ their publication history:
   again reactivates the archived history and updates it, instead of
   importing everything as duplicated records.
 
-.. |CREATE_POST| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/CREATE_POST.png
-.. |CAMPAIGN_NOT_SYNCED| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/CAMPAIGN_NOT_SYNCED.png
-.. |CAMPAIGN_ARCHIVE| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/CAMPAIGN_ARCHIVE.png
-.. |BUTTON_UPDATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/BUTTON_UPDATE_ACCOUNT.png
-.. |UPDATE_KEYS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/UPDATE_KEYS.png
-.. |UPDATE_TOKEN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/UPDATE_TOKEN.png
-.. |VALIDATE_TOKEN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/VALIDATE_TOKEN.png
-.. |ARCHIVE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_linkedin/static/img/readme/ARCHIVE_ACCOUNT.png
+.. |CREATE_POST| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/CREATE_POST.png
+.. |CAMPAIGN_NOT_SYNCED| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/CAMPAIGN_NOT_SYNCED.png
+.. |CAMPAIGN_ARCHIVE| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/CAMPAIGN_ARCHIVE.png
+.. |BUTTON_UPDATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/BUTTON_UPDATE_ACCOUNT.png
+.. |UPDATE_KEYS| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/UPDATE_KEYS.png
+.. |UPDATE_TOKEN| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/UPDATE_TOKEN.png
+.. |VALIDATE_TOKEN| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/VALIDATE_TOKEN.png
+.. |ARCHIVE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/19.0/social_media_linkedin/static/img/readme/ARCHIVE_ACCOUNT.png
 
 Known issues / Roadmap
 ======================
@@ -491,7 +495,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_linkedin%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_linkedin%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -531,6 +535,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-edescalona| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/social_media_linkedin>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/19.0/social_media_linkedin>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

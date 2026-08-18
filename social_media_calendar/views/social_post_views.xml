@@ -3,7 +3,7 @@
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
     <record model="ir.actions.act_window" id="social_media_base.social_post_action">
-        <field name="view_mode">kanban,calendar,tree,form</field>
+        <field name="view_mode">kanban,calendar,list,form</field>
     </record>
 
     <record id="social_post_view_calendar" model="ir.ui.view">
@@ -39,5 +39,4 @@
             </calendar>
         </field>
     </record>
-
 </odoo>

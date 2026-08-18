@@ -3,7 +3,7 @@
 
 import itertools
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 
 
@@ -30,7 +30,7 @@ class SocialPost(models.Model):
             for username, count in post.account_ids._get_group_account_username():
                 if count > 1:
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "There are X accounts with the same username "
                             "(%(username)s), please check to avoid spam errors.",
                             username=username,

@@ -6,7 +6,7 @@ from urllib.parse import urlencode
 
 import requests
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 
 from ..social_x_utils import (
@@ -55,9 +55,9 @@ class WizardSocialAccount(models.TransientModel):
                 message = self.env["social.account"]._x_error_message(
                     e, pricing_link="%s"
                 )
-                links = [{"url": _URL_PRICING_X, "label": _("X API pricing")}]
+                links = [{"url": _URL_PRICING_X, "label": self.env._("X API pricing")}]
             else:
-                message = _(
+                message = self.env._(
                     "Account access could not be authorized. Please check "
                     "your settings or try again later."
                 )
@@ -97,7 +97,9 @@ class WizardSocialAccount(models.TransientModel):
                 )
                 > 0
             ):
-                raise UserError(_("An account with that information already exists."))
+                raise UserError(
+                    self.env._("An account with that information already exists.")
+                )
         return result
 
     def _update_account(self):

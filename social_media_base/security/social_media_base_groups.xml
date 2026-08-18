@@ -1,39 +1,31 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
-     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
-    <record id="module_category_social_media" model="ir.module.category">
+    <!-- Category for social media groups (UI grouping) -->
+    <record model="ir.module.category" id="module_category_social_media">
         <field name="name">Social Media</field>
-        <field
-            name="description"
-        >Manage social media accounts, posts and campaigns.</field>
-        <field name="sequence">20</field>
+        <field name="sequence">17</field>
     </record>
 
+    <!-- Privilege for social media groups -->
+    <record id="privilege_social_media" model="res.groups.privilege">
+        <field name="name">Social Media</field>
+        <field name="category_id" ref="base.module_category_human_resources" />
+    </record>
+
+    <!-- Social Media User Group -->
     <record id="group_social_media_user" model="res.groups">
-        <field name="name">User: Own Accounts</field>
-        <field name="category_id" ref="module_category_social_media" />
-        <field
-            name="comment"
-        >The user is only able to see the social media accounts and posts he is responsible for.</field>
+        <field name="name">User</field>
+        <field name="privilege_id" ref="privilege_social_media" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
     </record>
 
+    <!-- Social Media Manager Group -->
     <record id="group_social_media_manager" model="res.groups">
-        <field name="name">Administrator</field>
-        <field name="category_id" ref="module_category_social_media" />
+        <field name="name">Manager</field>
+        <field name="privilege_id" ref="privilege_social_media" />
         <field name="implied_ids" eval="[(4, ref('group_social_media_user'))]" />
         <field
-            name="comment"
-        >The user is able to see every social media account and post of the companies he has access to, and to configure the available social medias.</field>
+            name="user_ids"
+            eval="[(4, ref('base.user_root')), (4, ref('base.user_admin'))]"
+        />
     </record>
-
-    <record id="base.user_root" model="res.users">
-        <field name="groups_id" eval="[(4, ref('group_social_media_manager'))]" />
-    </record>
-
-    <record id="base.user_admin" model="res.users">
-        <field name="groups_id" eval="[(4, ref('group_social_media_manager'))]" />
-    </record>
-
 </odoo>

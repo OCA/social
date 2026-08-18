@@ -14,7 +14,7 @@ import tweepy
 from markupsafe import Markup, escape
 from tweepy.errors import TooManyRequests
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import AccessError, UserError
 
 from ..social_x_utils import (
@@ -206,7 +206,7 @@ class SocialAccount(models.Model):
         # are escaped into plain strings on purpose: a ``Markup`` argument
         # makes the translation escape the whole message.
         message = Markup(
-            _(
+            self.env._(
                 "You have reached the limit of requests <b>%(endpoint)s</b> "
                 "allowed according to your account plan."
                 "<br>\u2022\u2009<b>Total limit:</b> %(limit)s request(s) per "
@@ -283,10 +283,10 @@ class SocialAccount(models.Model):
                 # translation escape the whole message.
                 pricing_link = str(
                     Markup("<a href='%s' target='_blank'>%s</a>")
-                    % (_URL_PRICING_X, _("X API pricing"))
+                    % (_URL_PRICING_X, self.env._("X API pricing"))
                 )
             return Markup(
-                _(
+                self.env._(
                     "X rejected the request because the developer App is not "
                     "enrolled in a paid plan. The X API no longer has a free "
                     "access tier: attach the App to a Project and subscribe a "
@@ -308,7 +308,7 @@ class SocialAccount(models.Model):
         oauth_token = (kwargs or {}).get("oauth_token", False)
         if not oauth_token:
             raise UserError(
-                _(
+                self.env._(
                     "Invalid X callback: the request token is missing. "
                     "Please restart the account association process."
                 )
@@ -326,7 +326,7 @@ class SocialAccount(models.Model):
         )
         if not wizard_social_account:
             raise UserError(
-                _(
+                self.env._(
                     "Invalid X request token. Please restart the account "
                     "association process."
                 )
@@ -348,14 +348,16 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 200:
             raise UserError(
-                _("Error getting X access token: %(error)s", error=response.text)
+                self.env._(
+                    "Error getting X access token: %(error)s", error=response.text
+                )
             )
         try:
             access_tokens = dict(x.split("=") for x in response.text.split("&"))
             return access_tokens["oauth_token"], access_tokens["oauth_token_secret"]
         except (ValueError, KeyError) as ex:
             raise UserError(
-                _("Unexpected response from X: %(error)s", error=response.text)
+                self.env._("Unexpected response from X: %(error)s", error=response.text)
             ) from ex
 
     def get_client_api(
@@ -472,7 +474,7 @@ class SocialAccount(models.Model):
                         acc_count.sudo().write(values)
                     self._trigger_initial_sync()
                 else:
-                    message_error = _(
+                    message_error = self.env._(
                         "The account was not created: the OAuth2 access "
                         "token could not be obtained."
                     )
@@ -618,11 +620,13 @@ class SocialAccount(models.Model):
         :rtype: tuple
         """
         public_metrics = val_x.public_metrics
-        return public_metrics.get("like_count", 0), public_metrics.get(
-            "impression_count", 0
-        ), public_metrics.get("reply_count", 0), public_metrics.get(
-            "retweet_count", 0
-        ), public_metrics.get("quote_count", 0)
+        return (
+            public_metrics.get("like_count", 0),
+            public_metrics.get("impression_count", 0),
+            public_metrics.get("reply_count", 0),
+            public_metrics.get("retweet_count", 0),
+            public_metrics.get("quote_count", 0),
+        )
 
     def _get_post_accounts_by_tweet(self, tweet_ids):
         """Prefetch post accounts by tweet id to avoid per-tweet searches."""
@@ -832,7 +836,8 @@ class SocialAccount(models.Model):
                                 account.impression_count,
                             )
                         ],
-                        **{"start_date": start_date, "end_date": end_date},
+                        start_date=start_date,
+                        end_date=end_date,
                     )
                     continue
                 response = account._get_users_tweets()
@@ -879,6 +884,7 @@ class SocialAccount(models.Model):
                         account.impression_count,
                     )
                 ],
-                **{"start_date": start_date, "end_date": end_date},
+                start_date=start_date,
+                end_date=end_date,
             )
         return list(itertools.chain(data, data_x))
