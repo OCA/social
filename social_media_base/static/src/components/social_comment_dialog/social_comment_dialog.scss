@@ -1,0 +1,11 @@
+.dialog-post-comment {
+    @include border-radius(1.5rem);
+    .composer-comment {
+        padding: 0 !important;
+    }
+
+    // Main comment textbox - white background for editability indication
+    textarea.form-control {
+        background-color: white !important;
+    }
+}

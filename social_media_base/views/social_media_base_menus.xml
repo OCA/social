@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Main Menu -->
+    <menuitem
+        name="Social Media"
+        id="social_root_menu"
+        sequence="5"
+        web_icon="social_media_base,static/description/icon.png"
+        groups="base.group_user"
+    />
+
+    <!-- Dashboard -->
+    <menuitem
+        name="Dashboard"
+        id="social_network_stream_post_menu"
+        parent="social_root_menu"
+        action="social_post_account_act_window_kanban"
+        sequence="10"
+        groups="base.group_user"
+    />
+
+    <!-- Posts (content_type = 'post') -->
+    <menuitem
+        name="Posts"
+        id="social_network_post_menu"
+        parent="social_root_menu"
+        action="social_post_act_window_kanban"
+        sequence="20"
+        groups="base.group_user"
+    />
+
+    <!-- Videos menu removed - unified with Posts menu -->
+    <!-- Videos (content_type = 'reel') are now shown in Posts menu -->
+    <!-- Use filter "Videos" in search view to show only videos -->
+
+    <!-- Comments -->
+    <menuitem
+        name="Comments"
+        id="menu_social_comment"
+        parent="social_root_menu"
+        action="social_comment_action"
+        sequence="45"
+        groups="base.group_user"
+    />
+
+    <!-- Ads Parent Menu (content_type = 'ad') -->
+    <menuitem
+        name="Ads"
+        id="social_ads_menu"
+        parent="social_root_menu"
+        sequence="40"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Ads"
+        id="social_ads_campaigns_menu"
+        parent="social_ads_menu"
+        action="social_ads_act_window_kanban"
+        sequence="10"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Lead Forms"
+        id="social_lead_forms_menu"
+        parent="social_ads_menu"
+        action="social_lead_form_action"
+        sequence="20"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Leads"
+        id="social_leads_menu"
+        parent="social_ads_menu"
+        action="social_lead_action"
+        sequence="30"
+        groups="base.group_user"
+    />
+
+    <!-- Reporting -->
+    <menuitem
+        name="Reporting"
+        id="social_reporting_menu"
+        parent="social_root_menu"
+        sequence="80"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Charts"
+        id="social_chart_account_action_client_menu"
+        parent="social_reporting_menu"
+        action="social_chart_account_action_client"
+        sequence="10"
+        groups="base.group_user"
+    />
+
+    <!-- Configuration -->
+    <menuitem
+        name="Configuration"
+        id="social_configuration_menu"
+        parent="social_root_menu"
+        sequence="90"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Social Media"
+        id="social_media_menu"
+        parent="social_configuration_menu"
+        action="social_media_act_window_kanban"
+        sequence="10"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Social Accounts"
+        id="social_account_menu"
+        parent="social_configuration_menu"
+        action="social_account_act_window_tree"
+        sequence="20"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Campaigns"
+        id="social_media_base_menu_utm_campaign_action"
+        parent="social_configuration_menu"
+        action="utm.utm_campaign_action"
+        sequence="30"
+        groups="base.group_user"
+    />
+
+    <menuitem
+        name="Campaign Groups"
+        id="social_media_base_menu_utm_group_campaign_action"
+        parent="social_configuration_menu"
+        action="social_media_base.utm_group_campaign_act_window_tree"
+        sequence="40"
+        groups="base.group_user"
+    />
+
+    <!-- Settings (Debug mode only) -->
+    <record id="action_social_media_settings" model="ir.actions.act_url">
+        <field name="name">Settings</field>
+        <field name="url">/odoo/settings#social_media_base</field>
+        <field name="target">self</field>
+    </record>
+
+    <menuitem
+        name="Settings"
+        id="social_media_settings_menu"
+        parent="social_configuration_menu"
+        action="action_social_media_settings"
+        sequence="0"
+        groups="base.group_no_one"
+    />
+</odoo>

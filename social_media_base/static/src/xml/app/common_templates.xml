@@ -1,0 +1,448 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <!-- POST ACCOUNT FOOTER - Match Odoo EE Design -->
+    <t t-name="social_media_base.postAccountFooter">
+        <!-- Engagement metrics row - EE style: 👍😂 9,911  💬 75  88 Shares  87,618 Views -->
+        <div class="row" style="padding-top: 2px;">
+            <div class="d-flex justify-content-start align-items-center">
+                <!-- Reactions with emojis -->
+                <div
+                    class="social-reactions me-3"
+                    t-if="record.like_count and record.like_count.value > 0"
+                    title="Reactions"
+                >
+                    <span class="reaction-emoji">👍</span>
+                    <span class="reaction-emoji">😂</span>
+                    <span
+                        class="reaction-count"
+                        t-esc="record.like_count_formatted || record.like_count.value"
+                    />
+                </div>
+
+                <!-- Comments - clickable in dashboard to open comment dialog -->
+                <div
+                    t-attf-class="social-reactions me-3 {{isDashboard ? 'social-post-comment cursor-pointer' : ''}}"
+                    t-if="record.comment_count"
+                    title="Comments"
+                >
+                    <span class="reaction-emoji">💬</span>
+                    <span
+                        class="reaction-count"
+                        t-esc="record.comment_count_formatted || record.comment_count.value"
+                    />
+                </div>
+
+                <!-- Shares -->
+                <div
+                    class="social-reactions me-3"
+                    t-if="record.share_count"
+                    title="Shares"
+                >
+                    <span class="reaction-emoji">🔄</span>
+                    <span
+                        class="reaction-count"
+                        t-esc="record.share_count_formatted || record.share_count.value"
+                    />
+                </div>
+
+                <!-- Views -->
+                <div class="social-reactions" t-if="record.view_count" title="Views">
+                    <span class="reaction-emoji">👁️</span>
+                    <span
+                        class="reaction-count"
+                        t-esc="record.view_count_formatted || record.view_count.value"
+                    />
+                </div>
+            </div>
+        </div>
+
+        <!-- Action buttons (only show in dialog, not dashboard) -->
+        <div t-if="record.post_account_url.value and !isDashboard" class="row pt-2">
+            <div class="d-flex justify-content-center">
+                <hr class="my-2 w-95" />
+            </div>
+        </div>
+        <div t-if="record.post_account_url.value and !isDashboard" class="row pt-2">
+            <div
+                t-attf-class="d-flex justify-content-#{ record.notAvailableLike.includes(record.media_type.raw_value) ? 'end' : 'between'} align-items-center"
+            >
+                <button
+                    class="btn btn-link text-muted"
+                    t-if="!record.notAvailableLike.includes(record.media_type.raw_value)"
+                >
+                    Recommend
+                </button>
+                <button class="btn btn-link text-muted">
+                    Comment
+                </button>
+            </div>
+        </div>
+    </t>
+
+    <!-- POST ACCOUNT HEADER -->
+    <t t-name="social_media_base.postAccountHeader">
+        <div
+            class="d-flex align-items-center justify-content-between"
+            style="margin-bottom: 2px;"
+        >
+            <!-- Header with clickable author link -->
+            <t
+                t-set="hasPostUrl"
+                t-value="isDialog and record.post_account_url and record.post_account_url.value"
+            />
+
+            <!-- Case 1: Dashboard kanban card (isDashboard = true) -->
+            <div class="d-flex align-items-center gap-2" t-if="isDashboard">
+                <t
+                    t-if="record?.account_id"
+                    t-set="account_id"
+                    t-value="Array.isArray(record.account_id.raw_value) ? record.account_id.raw_value[0] : record.account_id.raw_value"
+                />
+                <!-- Account avatar - 16px for dashboard cards (smaller) -->
+                <img
+                    t-att-alt="record?.author.raw_value"
+                    class="rounded flex-shrink-0 me-2"
+                    style="width: 30px !important; height: 30px !important; object-fit: contain;"
+                    t-attf-src="/web/image/social.account/{{account_id}}/image_1920"
+                />
+                <!-- Author name -->
+                <a
+                    t-if="record.post_account_url and record.post_account_url.value"
+                    t-att-href="record.post_account_url.value"
+                    target="_blank"
+                    class="text-primary text-decoration-none"
+                    style="font-weight: 500;"
+                    t-esc="record.author.raw_value"
+                />
+                <span
+                    t-else=""
+                    style="font-weight: 500;"
+                    t-esc="record.author.raw_value"
+                />
+                <!-- Published time shown elsewhere, not duplicated here -->
+                <!-- Status Badge -->
+                <span
+                    t-if="record.state"
+                    t-attf-class="badge rounded-pill ms-2 {{
+                        record.state.raw_value == 'posted' ? 'text-bg-success' :
+                        record.state.raw_value == 'failed' ? 'text-bg-danger' :
+                        record.state.raw_value == 'posting' ? 'text-bg-warning' :
+                        'text-bg-secondary'
+                    }}"
+                    t-esc="
+                        record.state.raw_value == 'posted' ? 'Posted' :
+                        record.state.raw_value == 'failed' ? 'Failed' :
+                        record.state.raw_value == 'posting' ? 'Posting' :
+                        'Ready'
+                    "
+                />
+            </div>
+
+            <!-- Case 2: Dialog with post URL -->
+            <div class="d-flex align-items-start gap-2" t-elif="hasPostUrl">
+                <t
+                    t-if="record?.account_id"
+                    t-set="account_id"
+                    t-value="Array.isArray(record.account_id.raw_value) ? record.account_id.raw_value[0] : record.account_id.raw_value"
+                />
+                <t
+                    t-elif="state?.account_id"
+                    t-set="account_id"
+                    t-value="state.account_id.id"
+                />
+                <!-- Account avatar - larger in dialog (40px) -->
+                <img
+                    t-if="props and props.socialComment and props.socialComment.author_image"
+                    t-att-alt="props.socialComment.author"
+                    class="rounded flex-shrink-0 me-2"
+                    width="40"
+                    height="40"
+                    style="object-fit: contain;"
+                    t-att-src="props.socialComment.author_image"
+                />
+                <img
+                    t-else=""
+                    t-att-alt="record?.author.raw_value"
+                    class="rounded flex-shrink-0 me-2"
+                    width="40"
+                    height="40"
+                    style="object-fit: contain;"
+                    t-attf-src="/web/image/social.account/{{account_id}}/image_1920"
+                />
+                <!-- Author name and message - vertical layout for dialog -->
+                <div class="d-flex flex-column flex-grow-1">
+                    <a
+                        t-att-href="record.post_account_url.value"
+                        target="_blank"
+                        class="text-primary text-decoration-none fs-5"
+                        style="font-weight: 600; line-height: 1.2;"
+                        t-esc="props?.socialComment?.author || record.author.raw_value"
+                    />
+                    <span
+                        class="text-muted small"
+                        t-esc="record.message.raw_value"
+                        style="line-height: 1.3;"
+                    />
+                </div>
+                <!-- Status Badge (text only, no icon) - right aligned -->
+                <span
+                    t-if="record.state"
+                    t-attf-class="badge rounded-pill ms-auto {{
+                        record.state.raw_value == 'posted' ? 'text-bg-success' :
+                        record.state.raw_value == 'failed' ? 'text-bg-danger' :
+                        record.state.raw_value == 'posting' ? 'text-bg-warning' :
+                        'text-bg-secondary'
+                    }}"
+                    t-esc="
+                        record.state.raw_value == 'posted' ? 'Posted' :
+                        record.state.raw_value == 'failed' ? 'Failed' :
+                        record.state.raw_value == 'posting' ? 'Posting' :
+                        'Ready'
+                    "
+                />
+            </div>
+            <div t-else="" class="d-flex align-items-center gap-2">
+                <t
+                    t-if="record?.account_id"
+                    t-set="account_id"
+                    t-value="Array.isArray(record.account_id.raw_value) ? record.account_id.raw_value[0] : record.account_id.raw_value"
+                />
+                <t
+                    t-elif="state?.account_id"
+                    t-set="account_id"
+                    t-value="state.account_id.id"
+                />
+                <!-- Account avatar - 20px to match header card -->
+                <img
+                    t-if="props and props.socialComment and props.socialComment.author_image"
+                    t-att-alt="props.socialComment.author"
+                    class="rounded flex-shrink-0 me-2"
+                    width="20"
+                    height="20"
+                    style="object-fit: contain;"
+                    t-att-src="props.socialComment.author_image"
+                />
+                <img
+                    t-else=""
+                    t-att-alt="record?.author.raw_value"
+                    class="rounded flex-shrink-0 me-2"
+                    width="20"
+                    height="20"
+                    style="object-fit: contain;"
+                    t-attf-src="/web/image/social.account/{{account_id}}/image_1920"
+                />
+                <!-- Author name as clickable link (if URL exists) or plain text - same size as message text -->
+                <a
+                    t-if="record.post_account_url and record.post_account_url.value"
+                    t-att-href="record.post_account_url.value"
+                    target="_blank"
+                    class="text-primary text-decoration-none"
+                    style="font-weight: 500;"
+                    t-esc="props?.socialComment?.author || record.author.raw_value"
+                />
+                <span
+                    t-else=""
+                    style="font-weight: 500;"
+                    t-esc="props?.socialComment?.author || record.author.raw_value"
+                />
+                <!-- Status Badge (text only, no icon) - right aligned -->
+                <span
+                    t-if="record.state"
+                    t-attf-class="badge rounded-pill ms-auto {{
+                        record.state.raw_value == 'posted' ? 'text-bg-success' :
+                        record.state.raw_value == 'failed' ? 'text-bg-danger' :
+                        record.state.raw_value == 'posting' ? 'text-bg-warning' :
+                        'text-bg-secondary'
+                    }}"
+                    t-esc="
+                        record.state.raw_value == 'posted' ? 'Posted' :
+                        record.state.raw_value == 'failed' ? 'Failed' :
+                        record.state.raw_value == 'posting' ? 'Posting' :
+                        'Ready'
+                    "
+                />
+            </div>
+            <div class="d-flex align-items-center gap-3">
+                <!-- Dashboard: show relative time (e.g., "1 day ago") -->
+                <t t-if="isDashboard and record.published_date">
+                    <span class="text-muted" t-esc="record.published_date" />
+                </t>
+                <!-- Comment view: show time from props -->
+                <t t-elif="published_time">
+                    <span class="text-muted" t-esc="published_time" />
+                </t>
+                <!-- Me Post view: hide date/time completely (no display) -->
+                <Dropdown t-if="actionMenuComment" position="'bottom-end'">
+                    <button class="btn btn-sm btn-link text-muted p-0">
+                        <i class="fa fa-ellipsis-v" aria-hidden="true" />
+                    </button>
+                    <t t-set-slot="content">
+                        <DropdownItem onSelected="() => this.onDeleteComment()">
+                            Hide
+                        </DropdownItem>
+                    </t>
+                </Dropdown>
+            </div>
+        </div>
+    </t>
+
+    <!-- IMAGES - Horizontal Gallery (max 2 visible, v18e style) -->
+    <t t-name="social_media_base.Images">
+        <t t-if="images and images.length > 0">
+            <div class="d-flex gap-1 overflow-hidden">
+                <t
+                    t-set="displayImages"
+                    t-value="images.length > 2 ? images.slice(0, 2) : images"
+                />
+                <t t-foreach="displayImages" t-as="img" t-key="img_index">
+                    <!-- Regular image -->
+                    <a
+                        t-if="!(img_index == 1 and images.length > 2)"
+                        class="flex-fill position-relative d-flex social-image-link"
+                        t-attf-class="#{img_index > 0 ? 'ms-1' : ''}"
+                        href="#"
+                        t-on-click.prevent="(ev) => __comp__ &amp;&amp; __comp__.openImagePreview ? __comp__.openImagePreview(img_index, ev) : null"
+                    >
+                        <img
+                            t-att-src="img"
+                            class="w-100"
+                            style="object-fit: cover; max-height: 300px;"
+                            t-att-alt="'Image ' + (img_index + 1)"
+                        />
+                    </a>
+                    <!-- Image with +N overlay (v18e style) -->
+                    <a
+                        t-if="img_index == 1 and images.length > 2"
+                        class="flex-fill position-relative d-flex ms-1 social-image-more"
+                        href="#"
+                        t-on-click.prevent="(ev) => __comp__ &amp;&amp; __comp__.openImagePreview ? __comp__.openImagePreview(img_index, ev) : null"
+                    >
+                        <img
+                            t-att-src="images[1]"
+                            class="w-100"
+                            style="object-fit: cover; max-height: 300px;"
+                            alt="Post Image"
+                        />
+                        <div
+                            class="position-absolute top-0 start-0 w-100 h-100 d-flex align-items-center justify-content-center text-white h1 m-0"
+                            style="background-color: rgba(0, 0, 0, 0.6); user-select: none;"
+                        >
+                            +<t t-esc="images.length - 2" />
+                        </div>
+                    </a>
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="social_media_base.postAccountImages">
+        <div
+            t-if="images and images.length > 0"
+            style="margin-top: 3px; margin-bottom: 3px;"
+        >
+            <t t-call="social_media_base.Images" />
+            <!-- Separator line after images -->
+            <hr style="margin-top: 2px; margin-bottom: 2px;" />
+        </div>
+
+        <!-- Separator line when no images (to separate message from metrics) -->
+        <hr
+            t-if="!images || images.length == 0"
+            style="margin-top: 2px; margin-bottom: 2px;"
+        />
+    </t>
+
+    <t t-name="social_media_base.postDialogAccountImages">
+        <div
+            t-on-click="onShowAllImages"
+            t-if="images.length > record.countShowImage"
+            class="row h-auto social-all-images"
+        >
+            <span class="btn btn-md active" role="button">
+                                        +                <t
+                t-esc="images.length - record.countShowImage"
+            />
+            </span>
+        </div>
+
+        <div class="row pt-2 h-auto">
+            <div
+                t-on-click="onShowAllImages"
+                t-attf-class="col-12 social-post-images pointer-cursor"
+            >
+                <t t-call="social_media_base.Images" />
+            </div>
+        </div>
+    </t>
+
+    <!-- POST ACCOUNT MESSAGES AND IMAGES -->
+    <t t-name="social_media_base.postAccountMessageImages">
+        <!-- 1. Message text first (Facebook UI order) -->
+        <div class="row h-auto" style="margin-bottom: 3px;">
+            <div t-if="!isDialog" class="col-12 social-text-justify">
+                <span
+                    t-out="record.message.raw_value.substring(0,record.messageLength)"
+                />
+                <span
+                    t-if="record.message.raw_value.length > record.messageLength"
+                    class="cursor-pointer show-more-message"
+                >...see more</span>
+            </div>
+            <div t-else="" class="col-12">
+                <span t-esc="record.message.raw_value" />
+            </div>
+        </div>
+
+        <!-- 2. Images (below message) -->
+        <t t-if="!isDialog" t-call="social_media_base.postAccountImages" />
+        <t t-if="isDialog" t-call="social_media_base.postDialogAccountImages" />
+
+        <!-- DEBUG: Always log video data for debugging -->
+        <t
+            t-set="_debug_all"
+            t-value="console.log('DEBUG Post Card:', {
+            content_type: record.content_type ? record.content_type.value : 'NO content_type field',
+            fb_video_url: record.fb_video_url ? record.fb_video_url.value : 'NO fb_video_url field',
+            has_fb_video_url: record.fb_video_url ? true : false
+        })"
+        />
+
+        <!-- 3. Video player (for Facebook videos) -->
+        <t t-if="record.fb_video_url and record.fb_video_url.value">
+            <t
+                t-set="_debug_video"
+                t-value="console.log('DEBUG Video Display:', {
+                content_type: record.content_type ? record.content_type.value : 'N/A',
+                fb_video_url: record.fb_video_url.value
+            })"
+            />
+            <div style="margin-top: 3px; margin-bottom: 3px;">
+                <video
+                    controls=""
+                    preload="metadata"
+                    class="w-100"
+                    style="max-height: 400px; object-fit: contain; background: #000;"
+                    t-att-src="record.fb_video_url.value"
+                >
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            <!-- Separator line after video -->
+            <hr style="margin-top: 2px; margin-bottom: 2px;" />
+        </t>
+
+        <!-- Edit post button (only in dialog) -->
+        <div t-if="isDialog and record.post_id" class="row mt-2">
+            <div class="col-12 text-center">
+                <button
+                    class="btn btn-sm btn-outline-primary"
+                    t-on-click="() => this.env.model.root.actionService.doAction({type: 'ir.actions.act_window', res_model: 'social.post', res_id: record.post_id.raw_value, views: [[false, 'form']], target: 'current'})"
+                >
+                    <i class="fa fa-edit" /> Edit post
+                </button>
+            </div>
+        </div>
+    </t>
+
+</templates>
