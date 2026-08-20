@@ -3,3 +3,4 @@ cairosvg
 lottie
 python-telegram-bot
 requests_toolbelt
+tweepy
