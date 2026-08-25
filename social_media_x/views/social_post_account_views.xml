@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_post_account_view_search">
+        <field
+            name="name"
+        >social.post.account.view.search.inherit.social.media.x</field>
+        <field name="model">social.post.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_post_account_view_search"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='with_impressions']" position="after">
+                <filter
+                    string="With Reposts"
+                    name="with_reposts"
+                    domain="[('retweet_count', '&gt;', 0)]"
+                />
+                <filter
+                    string="With Quotes"
+                    name="with_quotes"
+                    domain="[('quote_count', '&gt;', 0)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
