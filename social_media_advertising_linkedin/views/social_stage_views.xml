@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.actions.act_window" id="social_stage_linkedin_action">
+        <field name="name">LinkedIn</field>
+        <field name="res_model">social.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="search_view_id"
+            ref="social_media_advertising.social_stage_view_search"
+        />
+        <field name="domain">[('media_id.media_type', '=', 'linkedin')]</field>
+        <field
+            name="context"
+            eval="{'default_media_id': ref('social_media_linkedin.social_media_linkedin')}"
+        />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first LinkedIn stage
+            </p>
+            <p>
+                Stages mirror the statuses LinkedIn gives to a campaign, a
+                campaign group or an ad. The code is the value returned by
+                LinkedIn.
+            </p>
+        </field>
+    </record>
+
+</odoo>
