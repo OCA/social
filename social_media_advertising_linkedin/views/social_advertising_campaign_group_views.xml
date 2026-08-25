@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_advertising_campaign_group_view_tree_inherit">
+        <field
+            name="name"
+        >social.advertising.campaign.group.view.tree.inherit.advertising.linkedin</field>
+        <field name="model">social.advertising.campaign.group</field>
+        <field
+            name="inherit_id"
+            ref="social_media_advertising.social_advertising_campaign_group_view_tree"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="decoration-warning">linkedin_needs_update</attribute>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="total_budget" />
+                <field name="currency_id" optional="show" />
+                <field name="linkedin_needs_update" column_invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_campaign_group_view_form_inherit">
+        <field
+            name="name"
+        >social.advertising.campaign.group.view.form.inherit.advertising.linkedin</field>
+        <field name="model">social.advertising.campaign.group</field>
+        <field
+            name="inherit_id"
+            ref="social_media_advertising.social_advertising_campaign_group_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <header>
+                    <field name="media_type" invisible="1" />
+                    <field name="remote_ref" invisible="1" />
+                    <field name="linkedin_needs_update" invisible="1" />
+                    <field name="linkedin_locked" invisible="1" />
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{}"
+                        readonly="media_type == 'linkedin'"
+                    />
+                    <button
+                        name="action_publish_linkedin"
+                        type="object"
+                        string="Create in LinkedIn"
+                        class="btn-primary"
+                        invisible="media_type != 'linkedin' or remote_ref or linkedin_locked"
+                        confirm="The campaign group will be created on LinkedIn in draft status. Continue?"
+                    />
+                    <button
+                        name="action_update_linkedin"
+                        type="object"
+                        string="Update in LinkedIn"
+                        class="btn-primary"
+                        invisible="media_type != 'linkedin' or not remote_ref or not linkedin_needs_update or linkedin_locked"
+                        confirm="Do you want to update the values on LinkedIn?"
+                    />
+                    <button
+                        name="action_archive_linkedin"
+                        type="object"
+                        string="Archive in LinkedIn"
+                        invisible="media_type != 'linkedin' or not remote_ref or linkedin_locked"
+                        title="Stops the campaign group on LinkedIn and takes it out of the Campaign Manager lists. LinkedIn does not allow deleting a campaign group, archiving is the only way to end it. LinkedIn applies the same status to the campaigns of the group, except the ones still in draft, so run Fetch campaigns afterwards to refresh them in Odoo."
+                        confirm="The campaign group will be archived on LinkedIn, and LinkedIn will archive its campaigns too, except the ones still in draft status. It cannot be reactivated from Odoo. Continue?"
+                    />
+                </header>
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="media_type != 'linkedin' or not linkedin_needs_update or linkedin_locked"
+                >
+                    The campaign group has local changes that are not
+                    synchronized with LinkedIn. Use the <b>Update in
+                    LinkedIn</b> button to push them.
+                </div>
+                <div
+                    class="alert alert-danger"
+                    role="alert"
+                    invisible="media_type != 'linkedin' or not linkedin_locked"
+                >
+                    The LinkedIn status of this campaign group does not allow
+                    modifications.
+                </div>
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="after">
+                <widget
+                    name="web_ribbon"
+                    title="Pending changes"
+                    tooltip="The local changes have not been pushed to LinkedIn yet"
+                    bg_color="text-bg-warning"
+                    invisible="media_type != 'linkedin' or not linkedin_needs_update"
+                />
+            </xpath>
+            <xpath expr="//field[@name='name']" position="attributes">
+                <attribute name="readonly">linkedin_locked</attribute>
+            </xpath>
+            <xpath expr="//group[@name='main']" position="inside">
+                <field
+                    name="total_budget"
+                    required="media_type == 'linkedin'"
+                    readonly="linkedin_locked"
+                />
+                <field
+                    name="currency_id"
+                    required="media_type == 'linkedin'"
+                    readonly="linkedin_locked"
+                    options="{'no_create_edit': True, 'no_create': True}"
+                />
+            </xpath>
+            <xpath
+                expr="//group[@name='main']/field[@name='stage_id']"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record
+        model="ir.actions.act_window"
+        id="social_advertising_campaign_group_linkedin_action"
+    >
+        <field name="name">Campaign Groups</field>
+        <field name="res_model">social.advertising.campaign.group</field>
+        <field name="view_mode">tree,form</field>
+        <field
+            name="search_view_id"
+            ref="social_media_advertising.social_advertising_campaign_group_view_search"
+        />
+        <field name="domain">[('media_id.media_type', '=', 'linkedin')]</field>
+        <field
+            name="context"
+            eval="{'default_media_id': ref('social_media_linkedin.social_media_linkedin')}"
+        />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first LinkedIn campaign group
+            </p>
+            <p>
+                Campaign groups let you share a total budget across several
+                LinkedIn campaigns and manage them as a unit.
+            </p>
+        </field>
+    </record>
+
+</odoo>

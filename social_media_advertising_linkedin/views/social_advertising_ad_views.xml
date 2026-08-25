@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_advertising_ad_view_form_inherit">
+        <field
+            name="name"
+        >social.advertising.ad.view.form.inherit.advertising.linkedin</field>
+        <field name="model">social.advertising.ad</field>
+        <field
+            name="inherit_id"
+            ref="social_media_advertising.social_advertising_ad_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="before">
+                <field name="active" invisible="1" />
+                <field name="media_type" invisible="1" />
+                <field name="stage_code" invisible="1" />
+                <!-- The statuses LinkedIn accepts no action on: the ribbon
+                     says at a glance why the ad cannot be deleted and why it
+                     is not being served, without reading the status field.
+                     The ones an ad can still be acted upon (draft, active,
+                     paused) carry no ribbon: the status field says it and a
+                     ribbon on every ad says nothing. -->
+                <widget
+                    name="web_ribbon"
+                    title="Pending deletion"
+                    tooltip="LinkedIn took the deletion request and is processing it"
+                    bg_color="text-bg-danger"
+                    invisible="not active or media_type != 'linkedin' or stage_code != 'PENDING_DELETION'"
+                />
+                <widget
+                    name="web_ribbon"
+                    title="Removed"
+                    tooltip="The ad was deleted on LinkedIn and is kept here as history"
+                    bg_color="text-bg-danger"
+                    invisible="not active or media_type != 'linkedin' or stage_code != 'REMOVED'"
+                />
+                <widget
+                    name="web_ribbon"
+                    title="Canceled"
+                    tooltip="LinkedIn accepts no change on a canceled ad"
+                    bg_color="text-bg-danger"
+                    invisible="not active or media_type != 'linkedin' or stage_code != 'CANCELED'"
+                />
+                <widget
+                    name="web_ribbon"
+                    title="Archived"
+                    tooltip="LinkedIn accepts no change on an archived ad"
+                    bg_color="text-bg-secondary"
+                    invisible="not active or media_type != 'linkedin' or stage_code != 'ARCHIVED'"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_advertising_ad_linkedin_action">
+        <field name="name">Ads</field>
+        <field name="res_model">social.advertising.ad</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field
+            name="search_view_id"
+            ref="social_media_advertising.social_advertising_ad_view_search"
+        />
+        <field name="domain">[('media_id.media_type', '=', 'linkedin')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No LinkedIn ads yet
+            </p>
+            <p>
+                The ads served by your LinkedIn accounts are shown here once
+                you synchronize them with the <b>Sync ads</b> button.
+            </p></field>
+    </record>
+
+</odoo>

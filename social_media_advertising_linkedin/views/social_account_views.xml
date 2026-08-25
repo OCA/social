@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_account_view_form_inherit">
+        <field name="name">social.account.view.form.inherit.advertising.linkedin</field>
+        <field name="model">social.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_advertising.social_account_view_form_inherit"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='account_advertising']/group" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="media_type != 'linkedin' or not linkedin_missing_ads_scopes"
+                >
+                    LinkedIn did not grant this account the Advertising API
+                    scopes (<field
+                        name="linkedin_missing_ads_scopes"
+                        class="oe_inline"
+                        readonly="1"
+                        nolabel="1"
+                    />), so the Ads API refuses its calls. Add the
+                    <b>Advertising API</b> product to the LinkedIn application,
+                    then press <b>Update account</b> with <b>Update keys</b>
+                    checked to authorize this account again: refreshing the
+                    token alone keeps the scopes it already has.
+                </div>
+            </xpath>
+            <xpath
+                expr="//page[@name='account_advertising']//button[@name='action_sync_advertising_accounts_notify']"
+                position="after"
+            >
+                <button
+                    type="object"
+                    name="action_import_campaigns_notify"
+                    string="Fetch campaigns"
+                    class="oe_highlight mb-3 ms-2"
+                    invisible="media_type != 'linkedin'"
+                    confirm="Campaign groups and campaigns of the advertising account will be fetched from LinkedIn. Continue?"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

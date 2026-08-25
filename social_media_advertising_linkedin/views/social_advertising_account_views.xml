@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record
+        model="ir.ui.view"
+        id="social_account_view_form_advertising_account_inherit"
+    >
+        <field
+            name="name"
+        >social.account.view.form.advertising.account.inherit.advertising.linkedin</field>
+        <field name="model">social.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_advertising.social_account_view_form_inherit"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='advertising_account_ids']/tree/field[@name='currency_id']"
+                position="after"
+            >
+                <field name="linkedin_status" optional="show" />
+                <field name="linkedin_serving_status" optional="show" />
+                <field name="linkedin_type" optional="hide" />
+                <field name="linkedin_reference" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <record
+        model="ir.actions.act_window"
+        id="social_advertising_account_linkedin_action"
+    >
+        <field name="name">Advertising accounts</field>
+        <field name="res_model">social.advertising.account</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('media_id.media_type', '=', 'linkedin')]</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No LinkedIn advertising account yet
+            </p>
+            <p>
+                Open a LinkedIn account, go to its Advertising tab and click
+                Fetch advertising accounts to bring them from LinkedIn.
+            </p>
+        </field>
+    </record>
+
+</odoo>
