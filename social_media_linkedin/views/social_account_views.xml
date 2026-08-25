@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_account_view_form_inherit">
+        <field name="name">social.account.view.form.inherit.linkedin</field>
+        <field name="model">social.account</field>
+        <field name="inherit_id" ref="social_media_base.social_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    type="object"
+                    name="action_full_resync"
+                    string="Full resync"
+                    invisible="media_type != 'linkedin' or not can_manage_account or not active"
+                    confirm="The whole feed of the page will be read again, which costs one call per hundred publications against the daily quota of LinkedIn. Continue?"
+                    help="Read the whole feed again and mark as deleted what is no longer on LinkedIn. The Update button of the dashboard already refreshes the statistics, so this is only needed to notice the publications deleted on LinkedIn, and the scheduled action does it weekly on its own."
+                />
+            </xpath>
+            <xpath expr="//page[@name='account_configuration']" position="inside">
+                <group>
+                    <!-- Both keys are written by the association flow and by
+                         the update wizard, never from this form, so they are
+                         only readonly: a required attribute would block the
+                         save of an account whose keys are still empty. -->
+                    <field
+                        name="linkedin_client_id"
+                        readonly="1"
+                        invisible="media_type != 'linkedin'"
+                    />
+                    <field
+                        name="linkedin_secret"
+                        password="1"
+                        readonly="1"
+                        invisible="media_type != 'linkedin'"
+                    />
+                    <!-- Unlike the keys, this one is written by hand: it is
+                         how the scopes of a product enabled on LinkedIn
+                         after the association reach the authorization. -->
+                    <field
+                        name="linkedin_granted_scopes"
+                        invisible="media_type != 'linkedin'"
+                    />
+                </group>
+                <group name="valid_token" invisible="media_type != 'linkedin'">
+                    <field
+                        name="expire_access_token_date"
+                        readonly="1"
+                        groups="base.group_no_one"
+                    />
+                    <field
+                        name="refresh_token_expires_in"
+                        readonly="1"
+                        groups="base.group_no_one"
+                    />
+                </group>
+                <div class="col-6 mb-3" invisible="media_type != 'linkedin'">
+                    <button
+                        type="object"
+                        name="action_validate_access_token"
+                        string="Validate token"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
