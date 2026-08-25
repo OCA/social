@@ -1,0 +1,883 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>Social Media X</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="social-media-x">
+<h1 class="title">Social Media X</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:dce4cef08fdfe08eb3cbdc63e90942bd6f44b8b7090045d2fef34b660c0b71d5
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/17.0/social_media_x"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_x"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module provides the necessary functionality for basic interaction
+with the X social media.</p>
+<p>Main features:</p>
+<ul class="simple">
+<li>User account integration.</li>
+<li>Post creation.</li>
+<li>Comments of a publication, read from the dashboard: X answers the
+whole conversation at once, so the replies of a comment are nested
+from what was already read instead of being asked for apart. A comment
+answers the publication, and answering a comment answers that comment,
+which on X is a post like any other.</li>
+<li>Reports with agnostic metrics, on the account form.</li>
+<li>What X will not publish, shown on the post while it is written. The
+message is checked against <strong>280 characters</strong>, and the medias against
+<strong>4 images</strong> of at most <strong>5 MB</strong> each — <strong>15 MB</strong> for a GIF — in JPG,
+PNG, WEBP or GIF, and <strong>one video</strong> of at most <strong>512 MB</strong> in MP4. X
+takes images or a video, never both in the same post, so a post mixing
+them is refused instead of warned about. The same checks refuse the
+publication if the post reaches it anyway, through an import or an RPC
+call.</li>
+</ul>
+<p><em>Recommend</em> is not offered on X, neither on a publication nor on a
+comment. X does serve the endpoints — <tt class="docutils literal">POST <span class="pre">/2/users/:id/likes</span></tt> and
+<tt class="docutils literal">DELETE <span class="pre">/2/users/:id/likes/:tweet_id</span></tt>, and a comment is a post like
+any other, so both would be the same call — but it <a class="reference external" href="https://devcommunity.x.com/t/update-to-x-api-free-tier-removal-of-like-and-follow-endpoints/247646">withdrew their
+access from the Free
+tier</a>.
+This connector does not implement them, and until it does the button is
+not rendered for the X publications. The roadmap says the rest.</p>
+<div class="section" id="statistics-account">
+<h1>Statistics account</h1>
+<p>In the case of X statistics, only current posts are taken into account;
+if some are deleted, the metrics also decrease, that is, it is not a
+history of the account’s posts.</p>
+<p>The metrics are computed on the <strong>100 most recent publications</strong> X
+answers in a single request, and only on original publications:
+retweets, replies and quotes are discarded both when importing and when
+computing. The publications older than those 100 are not counted,
+because the timeline (<tt class="docutils literal">GET <span class="pre">/2/users/:id/tweets</span></tt>) is read once and not
+paginated, in order to spare the requests of the plan.</p>
+<ol class="arabic">
+<li><p class="first">The eye icon: Total number of views, which may include multiple views
+by the same user.</p>
+</li>
+<li><p class="first">The hand icon: means the interactions (likes, comments, retweets and
+quotes) of current posts. They are the
+<a class="reference external" href="https://docs.x.com/x-api/fundamentals/metrics">metrics</a> X returns
+for a post.</p>
+</li>
+<li><p class="first">The star icon: means the value of the engagement of the publications,
+it is a calculation similar to (interactions / impressions) * 100.</p>
+<p><img alt="STATISTICS_ACCOUNT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/STATISTICS_ACCOUNT.png" /></p>
+</li>
+</ol>
+<p>If the X API <a class="reference external" href="https://docs.x.com/x-api/fundamentals/rate-limits">rate
+limit</a> is reached
+while refreshing the statistics, the last metrics stored on the account
+are kept instead of failing.</p>
+<p><strong>An X account draws nothing in Social Media &gt; Statistics.</strong> That screen
+reads a history per day, and the
+<a class="reference external" href="https://docs.x.com/x-api/fundamentals/metrics">metrics</a> the API v2
+answers are the current lifetime counters of each post, with no way of
+asking for them grouped by day. Repeating a lifetime counter on every
+day would draw a curve that is a modelling fiction, not a measurement,
+so nothing is written: an account of X shows the standard empty view
+there, and its figures live on the account form, which is where they
+mean something.</p>
+<p><strong>Table of contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="toc-entry-1">Installation</a></li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-2">Configuration</a></li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h2><a class="toc-backref" href="#toc-entry-1">Installation</a></h2>
+<p>This module requires the following Python libraries:</p>
+<ul class="simple">
+<li><tt class="docutils literal">tweepy</tt> 4.0 or above, because the module uses the client of the <a class="reference external" href="https://docs.x.com/x-api/getting-started/about-x-api">X
+API v2</a>
+(<tt class="docutils literal">tweepy.Client</tt>) besides the v1.1 client for the media upload.</li>
+<li><tt class="docutils literal">requests_oauthlib</tt></li>
+</ul>
+<p>You can install them with:</p>
+<pre class="literal-block">
+pip install tweepy requests_oauthlib
+</pre>
+</div>
+<div class="section" id="configuration">
+<h2><a class="toc-backref" href="#toc-entry-2">Configuration</a></h2>
+</div>
+</div>
+<div class="section" id="to-configure-this-module-you-need-to">
+<h1>To configure this module, you need to:</h1>
+<p>Please note that you must have a developer account.</p>
+<p><strong>Important:</strong> the X API v2 endpoints used by this module require a
+developer App <strong>attached to a Project</strong> and a <strong>paid plan</strong> (Pay Per
+Use, or a legacy Basic/Pro subscription), see <a class="reference external" href="https://docs.x.com/x-api/getting-started/about-x-api">about the X
+API</a>. Since
+February 2026 the Free access tier no longer grants general access to
+the API, so the account cannot be associated with a Free-tier App. The
+association wizard shows this warning, and when X rejects the request
+for this reason the module replaces the raw error with a message
+pointing to the pricing page. Note that the authorization screen of X is
+still shown with a Free-tier App: the rejection only happens afterwards,
+when the module reads the authorized user, and the message is then
+displayed on the Dashboard.</p>
+<p>A call made with a Free-tier account answers <tt class="docutils literal">403 Forbidden</tt>, either
+with <tt class="docutils literal">&quot;reason&quot;: <span class="pre">&quot;client-not-enrolled&quot;</span></tt> or asking for an App attached
+to a Project, since only a paid App can belong to one. Every endpoint
+this module uses is affected: reading posts, publishing, comments and
+statistics.</p>
+<p><img alt="FREE_PLAN_DEPRECATED" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/FREE_PLAN_DEPRECATED.png" /></p>
+<ul class="simple">
+<li>X API pricing and plans:
+<a class="reference external" href="https://docs.x.com/x-api/getting-started/pricing">https://docs.x.com/x-api/getting-started/pricing</a></li>
+<li>Rate limits according to plan:
+<a class="reference external" href="https://docs.x.com/x-api/fundamentals/rate-limits">https://docs.x.com/x-api/fundamentals/rate-limits</a></li>
+<li>How to get access to the API:
+<a class="reference external" href="https://docs.x.com/x-api/getting-started/getting-access">https://docs.x.com/x-api/getting-started/getting-access</a></li>
+</ul>
+<p>The steps required for using it are defined below:</p>
+<ul>
+<li><p class="first">Go to <a class="reference external" href="https://developer.twitter.com/en/portal/dashboard">https://developer.twitter.com/en/portal/dashboard</a></p>
+</li>
+<li><p class="first">Create a developer account.</p>
+</li>
+<li><p class="first">Once the account is created, go to Projects and APPS -&gt; Default
+Project and select it.</p>
+<p><img alt="PROJECT_DEFAULT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/PROJECT_DEFAULT.png" /></p>
+</li>
+<li><p class="first">Then scroll to the bottom of the page and press the Edit button.</p>
+<p><img alt="CONFIGURATION_ACCOUNT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CONFIGURATION_ACCOUNT.png" /></p>
+</li>
+<li><p class="first">Once on the page, in the App Permissions section, select the Read and
+Write and Direct Messages.</p>
+<p><img alt="APP_PERMISIONS" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/APP_PERMISIONS.png" /></p>
+</li>
+<li><p class="first">Go to the App Type section and select Web App, Automated App or Bot.</p>
+<p><img alt="TYPE_APP" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/TYPE_APP.png" /></p>
+</li>
+<li><p class="first">Then, in the Callback URI / Redirect URL section, add a new address.
+Here are the steps to get that URL in Odoo:</p>
+<ul class="simple">
+<li>Go to <em>Configuration</em> &gt; <em>Technical</em> &gt; System Parameters.</li>
+<li>Search for web.base.url</li>
+<li>Copy the base URL and concatenate it with the endpoint. Example:
+web.base.url: <a class="reference external" href="http://192.168.1.7:8017">http://192.168.1.7:8017</a> endpoint: /social_x/callback
+(this value is fixed) callback_url:
+<a class="reference external" href="http://192.168.1.7:8017/social_x/callback">http://192.168.1.7:8017/social_x/callback</a></li>
+</ul>
+</li>
+<li><p class="first">Then go to the Website URL section and add your X profile address.</p>
+<p>Example: <a class="reference external" href="https://x.com/AccountTest">https://x.com/AccountTest</a></p>
+<p><img alt="CALLBACK_URI_WEBSITE_URL" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CALLBACK_URI_WEBSITE_URL.png" /></p>
+</li>
+<li><p class="first">Finally, go to Projects and APPS -&gt; Default Project -&gt; Keys and
+Tokens, press the Regenerate button, and then in the window that
+appears, confirm the generation of the API Key and API Key Secret
+values.</p>
+<p><img alt="KEYS_AND_TOKENS" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/KEYS_AND_TOKENS.png" /></p>
+<p><img alt="GENERATE_NEW_KEY_SECRET" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/GENERATE_NEW_KEY_SECRET.png" /></p>
+</li>
+</ul>
+<p>Learn more at <a class="reference external" href="https://developer.twitter.com">X Developer Portal</a></p>
+</div>
+<div class="section" id="registering-the-api-key-and-api-key-secret-integration-of-a-user-account">
+<h1>Registering the API Key and API Key Secret. Integration of a user account.</h1>
+<ul>
+<li><p class="first">Go to <em>Social Media</em> &gt; Configuration &gt; Social medias</p>
+</li>
+<li><p class="first">Click on the <em>Associate Account</em> button for the desired social media.</p>
+<p><img alt="ASSOCIATE_ACCOUNT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/ASSOCIATE_ACCOUNT.png" /></p>
+</li>
+<li><p class="first">A wizard will open for you to add the API Key and API Key Secret
+obtained from your developer account.</p>
+<p><img alt="WIZARD_ASSOCIATE_ACCOUNT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/WIZARD_ASSOCIATE_ACCOUNT.png" /></p>
+</li>
+<li><p class="first">By clicking the <em>Associate</em> button here, you’ll be taken to a X
+authentication page. Once you validate your information, you’ll be
+taken to the system and the Dashboard view, where you’ll see your
+posts.</p>
+<p><img alt="AUTHORIZE_ACCOUNT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/AUTHORIZE_ACCOUNT.png" /></p>
+</li>
+<li><p class="first">Once you have completed these steps and everything is working
+correctly, you can see your account in <em>Social Media</em> &gt; Configuration
+&gt; Accounts</p>
+</li>
+<li><p class="first">After the account is associated, an initial synchronization of its
+posts and statistics is triggered automatically.</p>
+</li>
+<li><p class="first">Note that the account credentials (API Key, API Secret and tokens) are
+only visible to users with administration rights (<em>Settings</em>). The
+account form shows the API Key in read-only mode and the API Secret
+masked; the tokens are never displayed.</p>
+</li>
+<li><p class="first">The authorization flow is bound to the session that started it: the
+request token returned by X only works for the user who opened the
+wizard. A callback without a request token, or with the request token
+of another user, is refused without creating or modifying anything;
+the user gets the generic notice <em>The account could not be associated.
+Check the server log for details.</em> and the exact reason is kept in the
+server log, so the raw answer of the provider is never exposed.</p>
+</li>
+<li><p class="first">Each X account has to be associated with its own pair of credentials:
+if an account already exists (even archived) with the same <em>API Key</em>
+and <em>API Secret</em>, the association is refused with <em>An account with
+that information already exists.</em> Create a different developer App for
+that account.</p>
+</li>
+<li><p class="first">Besides the OAuth 1.0a authorization of the user, the module obtains
+an application-only <em>bearer token</em> (OAuth 2.0 <em>client credentials</em>)
+from the same API Key and API Secret; that is the one used to read
+publications, comments and statistics, see <a class="reference external" href="https://docs.x.com/x-api/getting-started/about-x-api">about the X
+API</a>. If X
+does not deliver it, the account is not created and the notice <em>The
+account was not created: the OAuth2 access token could not be
+obtained.</em> is shown. In the same way, if X does not answer the access
+token correctly when closing the authorization, the account is not
+created and the user gets the same generic notice, the reason returned
+by X being kept in the server log.</p>
+</li>
+<li><p class="first">Publishing with images or video uses the <a class="reference external" href="https://docs.x.com/x-api/media/upload-media">media
+upload</a> endpoint of
+the X API v1.1 besides the v2 endpoints. The App has to have access to
+both: on a plan without that access, the publications with attachments
+fail even though the text-only ones work.</p>
+</li>
+<li><p class="first">The X account being authorized has to be active and not protected, and
+the App needs read and write permission. Odoo does not check it
+beforehand: if X refuses, the error returned by X is displayed on the
+Dashboard and the account is not associated.</p>
+</li>
+<li><p class="first">If the X account is already linked to an account of another Odoo user,
+the association is refused and nothing is overwritten: only the
+responsible user of the account and the <em>Social Media / Administrator</em>
+group can relink it.</p>
+</li>
+</ul>
+<div class="section" id="usage">
+<h2>Usage</h2>
+</div>
+</div>
+<div class="section" id="list-of-posts-generated-from-odoo">
+<h1>List of posts generated from Odoo.</h1>
+<p>Only posts generated using Odoo are displayed.</p>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Post</li>
+</ul>
+</div>
+<div class="section" id="generate-a-post">
+<h1>Generate a post.</h1>
+<p>This feature acts as a template for generating multiple posts from a
+single view, depending on the selected accounts.</p>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Post &gt; New or Go to <em>Social Media</em> &gt; Dashboard
+&gt; Add Post</li>
+<li>Fill in the required fields</li>
+<li>When the post is created, every X account of the active company is
+selected by default in <em>Accounts</em>; review the list and remove the ones
+you do not want to use before saving.</li>
+<li>Save</li>
+<li>Click on the <em>Post</em> button</li>
+</ul>
+</div>
+<div class="section" id="update-token-api-key-api-secret-and-account-data">
+<h1>Update token, API Key, API Secret and account data</h1>
+<ul>
+<li><p class="first">Go to <em>Social Media</em> &gt; Configuration &gt; Accounts</p>
+</li>
+<li><p class="first">Select the account</p>
+</li>
+<li><p class="first">Click on the <em>Update account</em> button</p>
+<p><img alt="BUTTON_UPDATE_ACCOUNT" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/BUTTON_UPDATE_ACCOUNT.png" /></p>
+</li>
+<li><p class="first">In the wizard that appears, if none of the checkboxes are selected and
+the <em>Update</em> button is pressed, the system will update only the
+account’s data.</p>
+</li>
+<li><p class="first">If the <em>Update keys</em> checkbox is selected, the current API Key and API
+Secret values will be displayed by default. Modify any of these values
+and authentication will be performed again through X to update these
+values and the token.</p>
+<p><img alt="UPDATE_KEYS" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/UPDATE_KEYS.png" /></p>
+</li>
+<li><p class="first">Selecting the <em>Update token</em> checkbox will update the current token.</p>
+<p><img alt="UPDATE_TOKEN" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/UPDATE_TOKEN.png" /></p>
+</li>
+</ul>
+</div>
+<div class="section" id="archive-account-x">
+<h1>Archive Account X</h1>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Configuration &gt; Accounts</li>
+<li>Select the account</li>
+<li>Click on the <em>Archive account</em> button</li>
+<li>Please note that all data associated with this account will be
+archived.</li>
+<li>To use an archived account again, open it in <em>Social Media</em> &gt;
+Configuration &gt; Accounts (<em>Archived</em> filter) and press <em>Unarchive
+account</em>: the account and its data are restored instead of creating a
+duplicate. <em>Update account</em> only reactivates it when <em>Update keys</em> or
+<em>Update token</em> is ticked, because those are the options that send the
+user back to X to authorize again. The <em>Associate Account</em> wizard is
+not the way to do it when the same API Key and API Secret are reused,
+because it refuses the keys already registered on another account,
+archived ones included.</li>
+<li>An archived account can be deleted permanently with the <em>Delete
+permanently</em> button, only available to a social media administrator.
+The X publications stay online, only the Odoo history is removed.</li>
+</ul>
+</div>
+<div class="section" id="enable-since">
+<h1>Enable since</h1>
+<ul>
+<li><p class="first">Go to <em>Social Media</em> &gt; Configuration &gt; Accounts</p>
+</li>
+<li><p class="first">Select the account</p>
+</li>
+<li><p class="first">Select <em>Enable since</em></p>
+</li>
+<li><p class="first">The <em>Post since</em> field is then enabled, allowing you to select the
+post to start the search for in the next post retrieval. Note that
+metrics for older posts will not be updated if this option is
+selected.</p>
+<p><img alt="ENABLE_SINCE" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/ENABLE_SINCE.png" /></p>
+</li>
+</ul>
+</div>
+<div class="section" id="x-limits-and-validations">
+<h1>X limits and validations</h1>
+<p>The module does not enforce the content limits of X: they are applied by
+X when the publication is sent, so the failure is only seen at that
+moment.</p>
+<ul class="simple">
+<li>Odoo does not check the length of the message: X limits a publication
+to 280 characters (more if the account has X Premium), see the
+<a class="reference external" href="https://docs.x.com/x-api/posts/creation-of-a-post">creation of a
+post</a>. If it is
+exceeded, the line is left as <em>Failed</em> with the error returned by X.</li>
+<li>X accepts at most <strong>4 images or 1 video</strong> per publication and does not
+allow mixing images and video in the same message, see the <a class="reference external" href="https://docs.x.com/x-api/media/upload-media">media
+upload</a> documentation.
+Odoo does not validate it: if the post does not respect it, X refuses
+the publication and the reason is kept on the failed line.</li>
+<li>The size of the files is not checked either: the limits of X apply
+(about 5 MB per image, and 512 MB / 140 seconds per video). A bigger
+file makes the upload fail and the publication is left as <em>Failed</em>.</li>
+<li>Odoo does not filter the file picker by image or video format: it
+accepts any file of type <tt class="docutils literal">image/*</tt> or <tt class="docutils literal">video/*</tt>. The actual
+formats X accepts are the ones described in the <a class="reference external" href="https://docs.x.com/x-api/media/upload-media">media
+upload</a> documentation;
+a file X does not support is refused by X instead.</li>
+<li>A post is refused when it selects <strong>two X accounts with the same
+username</strong>: <em>There are X accounts with the same username (…), please
+check to avoid spam errors.</em> X rejects the same content sent twice
+from the same account for spam reasons, see the <a class="reference external" href="https://docs.x.com/x-api/posts/creation-of-a-post">creation of a
+post</a>, so the
+post is stopped in Odoo instead of failing halfway through.</li>
+</ul>
+</div>
+<div class="section" id="rate-limits">
+<h1>Rate limits</h1>
+<ul class="simple">
+<li>The <a class="reference external" href="https://docs.x.com/x-api/fundamentals/rate-limits">rate limit</a>
+is tracked per endpoint (reading publications, publishing, comments
+and deletion). When X answers that it is exhausted, Odoo stores the
+window it returns and does not call that endpoint again until it
+expires: a notice is shown with the limit of the plan, the remaining
+requests and the time of the next attempt. If X does not say when the
+window resets, 60 seconds are assumed.</li>
+<li>If X refuses a publication because the requests of the plan are
+exhausted, the line is left as <em>Failed</em> with the message <em>X did not
+accept the post. The account may have reached the limit of requests of
+its plan: check the account and try again later.</em> It is not a content
+error: wait for the window to end and press <em>Post</em> again, which only
+sends the failed accounts.</li>
+<li>The X accounts are left out of the automatic check for updates that
+runs every 2 hours, to spare the requests of the plan. Their
+statistics are refreshed when the account is linked, with the <em>Update</em>
+button of the dashboard and with the weekly full resync.</li>
+</ul>
+</div>
+<div class="section" id="comments-and-dashboard-actions">
+<h1>Comments and dashboard actions</h1>
+<ul class="simple">
+<li>The comments of a publication are read with the <a class="reference external" href="https://docs.x.com/x-api/posts/recent-search">recent
+search</a> endpoint of
+X, which only covers the <strong>last 7 days</strong>: the replies to older
+publications are not shown on the dashboard even though the post has
+them. Retweets and quotes are excluded as well, only the replies are
+listed.</li>
+<li>Before acting on a publication from the dashboard, Odoo checks on X
+that the post still exists. If it was deleted directly on X, the
+action stops, the publication is marked as <em>Deleted</em> in Odoo and the
+notice <em>The post does not exist or has been deleted.</em> is shown.</li>
+<li>Deleting a publication from the dashboard deletes the post on X first.
+If X refuses the deletion, the operation is cancelled with the error
+returned by X and the publication keeps existing both on X and in
+Odoo.</li>
+<li>The direct calls to X made while linking the account (token requests
+and download of the profile image) have a timeout of 10 seconds. If
+the connection or X take longer, the association fails and has to be
+repeated.</li>
+</ul>
+</div>
+<div class="section" id="x-credentials">
+<h1>X credentials</h1>
+<p>The <a class="reference external" href="https://docs.x.com/resources/fundamentals/authentication/oauth-1-0a/api-key-and-secret">OAuth
+1.0a</a>
+tokens of X do not expire, so there is nothing to renew: they only stop
+working when the access is revoked from the X application or the keys
+are changed. When that happens X refuses the publication, the reason is
+kept on the failed publication and the account is marked as needing an
+update. Odoo cannot renew it by itself: associate the account again from
+<em>Update account</em>.</p>
+</div>
+<div class="section" id="uninstalling-the-module">
+<h1>Uninstalling the module</h1>
+<p>Uninstalling <em>Social Media X</em> does not delete the accounts nor their
+publication history:</p>
+<ul class="simple">
+<li>The access tokens are cleared, so no credential outlives the module.</li>
+<li>The X accounts are archived, together with their posts.</li>
+<li>The X specific data is lost, because Odoo drops the columns of an
+uninstalled module: the API Key, the API Secret and the OAuth 1
+tokens.</li>
+<li>The identifier of each account and publication on X is kept, so
+installing the module back and associating the account again
+reactivates the archived history and updates it, instead of importing
+everything as duplicated records.</li>
+</ul>
+<div class="section" id="known-issues-roadmap">
+<h2>Known issues / Roadmap</h2>
+<ul class="simple">
+<li>Recommending a publication or a comment is not implemented. X does
+offer the endpoints, <tt class="docutils literal">POST <span class="pre">/2/users/:id/likes</span></tt> and
+<tt class="docutils literal">DELETE <span class="pre">/2/users/:id/likes/:tweet_id</span></tt>, and a comment on X is a post
+like any other, so both would be the same call; what X withdrew is
+their access from the <strong>Free tier</strong>, and this module requires a paid
+plan anyway. Until the connector implements them the button is not
+shown for the X publications, neither on the publication nor on its
+comments.<ul>
+<li>Likes endpoints: <a class="reference external" href="https://docs.x.com/x-api/posts/likes/introduction">https://docs.x.com/x-api/posts/likes/introduction</a></li>
+</ul>
+</li>
+<li>An X account has no time series, so it draws nothing in <em>Social Media</em>
+&gt; Statistics. The API v2 only answers the lifetime counters of the
+account, with no way of asking for them grouped by day. Giving X a
+series means either repeating the lifetime counter on every day, which
+draws a cumulative curve of a different shape than the other social
+media in the same graph, or storing the delta between two readings,
+which is false for any day the cron did not run. Neither is a
+measurement. If X ever published figures per day, implementing
+<tt class="docutils literal">_snapshot_statistics</tt> in this connector is all it would take.</li>
+<li>The message of a post is checked against <strong>280 characters</strong>, the limit
+of the free X account. X Premium raises it to 25 000, so an account on
+that plan reads a warning about a post it could publish perfectly
+well. The plan is not in <tt class="docutils literal">social.account</tt>, and X does not answer it
+with the user: it can only be deduced from what the API replies, which
+is what the connector already does after the fact in
+<tt class="docutils literal">_is_app_without_paid_plan</tt>. Once the plan can be told apart before
+publishing, <tt class="docutils literal">_get_post_errors</tt> already receives the account and the
+limit becomes per account. Meanwhile the check never blocks saving, so
+the post is still written and published.</li>
+</ul>
+</div>
+<div class="section" id="bug-tracker">
+<h2>Bug Tracker</h2>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20social_media_x%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h2>Credits</h2>
+</div>
+</div>
+<div class="section" id="authors">
+<h1>Authors</h1>
+<ul class="simple">
+<li>Binhex</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h1>Contributors</h1>
+<ul class="simple">
+<li><a class="reference external" href="https://www.binhex.cloud">Binhex</a>:<ul>
+<li>Edilio Escalona Almira <a class="reference external" href="mailto:e.escalona&#64;binhex.cloud">e.escalona&#64;binhex.cloud</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h1>Maintainers</h1>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
+<p><a class="reference external image-reference" href="https://github.com/edescalona"><img alt="edescalona" src="https://github.com/edescalona.png?size=40px" /></a></p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/17.0/social_media_x">OCA/social</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</body>
+</html>
