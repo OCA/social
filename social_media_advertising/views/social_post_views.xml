@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_post_view_form_inherit">
+        <field
+            name="name"
+        >social.post.view.form.inherit.social.media.advertising</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='campaign_id']" position="after">
+                <field name="allow_social_campaign_ids" invisible="1" />
+                <field
+                    name="social_campaign_id"
+                    readonly="state != 'draft' or content_locked"
+                    domain="[('id', 'in', allow_social_campaign_ids)]"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_view_tree_inherit">
+        <field
+            name="name"
+        >social.post.view.tree.inherit.social.media.advertising</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='campaign_id']" position="after">
+                <field name="social_campaign_id" optional="hide" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_view_search_inherit">
+        <field
+            name="name"
+        >social.post.view.search.inherit.social.media.advertising</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='campaign_id']" position="after">
+                <field name="social_campaign_id" />
+            </xpath>
+            <xpath expr="//filter[@name='group_by_campaign_id']" position="after">
+                <filter
+                    string="Social Campaign"
+                    name="group_by_social_campaign_id"
+                    context="{'group_by': 'social_campaign_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

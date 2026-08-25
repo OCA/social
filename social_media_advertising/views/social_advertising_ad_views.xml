@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_advertising_ad_view_kanban">
+        <field name="name">social.advertising.ad.kanban</field>
+        <field name="model">social.advertising.ad</field>
+        <field name="arch" type="xml">
+            <kanban
+                js_class="social_ads_kanban"
+                create="0"
+                edit="0"
+                delete="0"
+                group_create="0"
+                group_edit="0"
+                group_delete="0"
+            >
+                <field name="name" />
+                <field name="created_date" />
+                <field name="media_id" />
+                <field name="media_type" />
+                <field name="stage_level" />
+                <field name="url" />
+                <field name="advertising_account_is_current" />
+                <field name="advertising_account_id" />
+                <field name="campaign_id" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div
+                            class="oe_kanban_global_click p-2 d-flex flex-column h-100"
+                        >
+                            <div class="d-flex align-items-center">
+                                <img
+                                    t-if="record.media_id.raw_value"
+                                    t-attf-src="/web/image/social.media/#{record.media_id.raw_value}/image/40x40"
+                                    t-att-alt="record.media_type.value"
+                                    class="o_object_fit_cover rounded me-2"
+                                    width="40"
+                                    height="40"
+                                />
+                                <div class="flex-grow-1 min-w-0 ps-1">
+                                    <div
+                                        class="text-truncate"
+                                        t-att-title="record.advertising_account_id.value"
+                                        t-out="record.advertising_account_id.value"
+                                    />
+                                    <!-- Only the day: the hour of the creation
+                                         is of no use on a card and it pushes
+                                         the name of the advertising account
+                                         out of the line. -->
+                                    <small
+                                        class="text-muted"
+                                        t-out="(record.created_date.value or '').split(' ')[0]"
+                                    />
+                                </div>
+                            </div>
+                            <div
+                                t-if="!record.advertising_account_is_current.raw_value"
+                                class="pt-1"
+                            >
+                                <span
+                                    class="badge text-bg-secondary"
+                                    title="This ad was fetched from an advertising account the social media account no longer works with."
+                                >Advertising account not in use</span>
+                            </div>
+                            <!-- The text of the promoted post is cut the same
+                                 way the message of a publication is on the
+                                 dashboard, so a long one does not stretch its
+                                 card past the others. -->
+                            <div class="pt-2 flex-grow-1">
+                                <field
+                                    name="name"
+                                    widget="social_message"
+                                    class="social-text-justify"
+                                />
+                            </div>
+                            <div class="d-flex justify-content-between pt-2">
+                                <span t-out="record.campaign_id.value" />
+                                <field
+                                    name="stage_id"
+                                    widget="badge"
+                                    decoration-success="stage_level == 'success'"
+                                    decoration-info="stage_level == 'info'"
+                                    decoration-warning="stage_level == 'warning'"
+                                    decoration-danger="stage_level == 'danger'"
+                                />
+                            </div>
+                            <div class="d-flex justify-content-around pt-2">
+                                <span>Impressions: <field
+                                        name="impression_count"
+                                    /></span>
+                                <span>Clicks: <field name="click_count" /></span>
+                            </div>
+                            <div class="text-muted small pt-2">
+                                <span>Statistics from </span>
+                                <field name="statistics_date_from" />
+                                <span> to </span>
+                                <field name="statistics_date_to" />
+                            </div>
+                            <div class="text-muted small">
+                                <span>Last fetch: </span>
+                                <field name="last_sync_date" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_ad_view_tree">
+        <field name="name">social.advertising.ad.tree</field>
+        <field name="model">social.advertising.ad</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" delete="0">
+                <field name="created_date" />
+                <field name="name" />
+                <field name="campaign_id" />
+                <field name="account_id" optional="show" />
+                <field name="advertising_account_id" optional="show" />
+                <field name="advertising_account_is_current" optional="hide" />
+                <field name="stage_level" column_invisible="1" />
+                <field
+                    name="stage_id"
+                    widget="badge"
+                    decoration-success="stage_level == 'success'"
+                    decoration-info="stage_level == 'info'"
+                    decoration-warning="stage_level == 'warning'"
+                    decoration-danger="stage_level == 'danger'"
+                />
+                <field name="impression_count" sum="Impressions" />
+                <field name="click_count" sum="Clicks" />
+                <field name="cost" sum="Cost" optional="show" />
+                <field name="currency_id" column_invisible="1" />
+                <field name="statistics_date_from" optional="hide" />
+                <field name="statistics_date_to" optional="hide" />
+                <field name="last_sync_date" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_ad_view_form">
+        <field name="name">social.advertising.ad.form</field>
+        <field name="model">social.advertising.ad</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <header>
+                    <!-- The ad is deleted on the social media, not in Odoo:
+                         the standard delete of the form stays disabled, and
+                         this is the only way out for a record that mirrors
+                         something still being served. -->
+                    <button
+                        type="object"
+                        name="action_delete_remote_ad"
+                        string="Delete ad"
+                        invisible="not can_delete_remote_ad"
+                        title="Delete the ad on the social media."
+                        confirm="This deletes the ad on the social media and cannot be undone. An ad that is already being served is not deleted right away: the social media only takes the request and processes it afterwards."
+                    />
+                    <!-- The way out for the ads the social media stopped
+                         serving: they are kept as history, and this is what
+                         removes that history when it is not wanted. -->
+                    <button
+                        type="object"
+                        name="action_purge_ad"
+                        string="Delete permanently"
+                        invisible="active"
+                        groups="social_media_base.group_social_media_manager"
+                        title="Delete the ad and its history from Odoo."
+                        confirm="This deletes the ad and its history in Odoo: cost, impressions, clicks and the window they cover. Nothing is deleted on the social media, which no longer serves this ad anyway. This cannot be undone."
+                    />
+                    <field name="active" invisible="1" />
+                </header>
+                <sheet>
+                    <field name="can_delete_remote_ad" invisible="1" />
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        tooltip="The social media does not serve this ad anymore. It is kept here for its statistics."
+                        bg_color="text-bg-secondary"
+                        invisible="active"
+                    />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_open_post_account"
+                            class="oe_stat_button"
+                            icon="fa-comment-o"
+                            string="Publication"
+                            invisible="not post_account_id"
+                        />
+                        <button
+                            type="object"
+                            name="action_open_url"
+                            class="oe_stat_button"
+                            icon="fa-external-link"
+                            string="Open ad"
+                            invisible="not url"
+                        />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="account_id" />
+                            <field name="advertising_account_id" />
+                            <field name="advertising_account_is_current" />
+                            <field name="campaign_id" />
+                            <field name="post_account_id" />
+                            <field name="media_id" invisible="1" />
+                            <field name="stage_level" invisible="1" />
+                            <field name="stage_id" />
+                            <field name="status_detail" invisible="not status_detail" />
+                        </group>
+                        <group>
+                            <field name="created_date" />
+                            <field name="remote_ref" groups="base.group_no_one" />
+                            <field name="url" widget="url" />
+                            <field name="last_sync_date" />
+                        </group>
+                    </group>
+                    <group string="Statistics">
+                        <group>
+                            <field name="statistics_date_from" />
+                            <field name="statistics_date_to" />
+                            <field name="currency_id" invisible="1" />
+                            <field name="cost" />
+                        </group>
+                        <group>
+                            <field name="impression_count" />
+                            <field name="click_count" />
+                            <field name="action_click_count" />
+                            <field name="ad_unit_click_count" />
+                            <field name="conversion_count" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_ad_view_search">
+        <field name="name">social.advertising.ad.search</field>
+        <field name="model">social.advertising.ad</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="campaign_id" />
+                <field name="account_id" />
+                <field name="advertising_account_id" />
+                <field name="stage_id" />
+                <filter name="created_date" string="Created On" date="created_date" />
+                <separator />
+                <filter
+                    name="my_ads"
+                    string="My Ads"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <filter
+                    name="current_advertising_account"
+                    string="Advertising account in use"
+                    domain="[('advertising_account_is_current', '=', True)]"
+                />
+                <separator />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_account_id"
+                        string="Account"
+                        context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        name="group_advertising_account_id"
+                        string="Advertising account"
+                        context="{'group_by': 'advertising_account_id'}"
+                    />
+                    <filter
+                        name="group_campaign_id"
+                        string="Campaign"
+                        context="{'group_by': 'campaign_id'}"
+                    />
+                    <filter
+                        name="group_stage_id"
+                        string="Status"
+                        context="{'group_by': 'stage_id'}"
+                    />
+                    <filter
+                        name="group_created_date"
+                        string="Created On"
+                        context="{'group_by': 'created_date'}"
+                    />
+                </group>
+                <searchpanel>
+                    <field name="stage_id" enable_counters="1" icon="fa-tasks" />
+                    <field
+                        name="account_id"
+                        select="multi"
+                        icon="fa-share-alt"
+                        enable_counters="1"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_advertising_ad_action">
+        <field name="name">Ads</field>
+        <field name="res_model">social.advertising.ad</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="search_view_id" ref="social_advertising_ad_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No ads yet
+            </p>
+            <p>
+                The ads served by your social media accounts are shown here
+                once you synchronize them with the <b>Sync ads</b> button.
+            </p></field>
+    </record>
+
+</odoo>

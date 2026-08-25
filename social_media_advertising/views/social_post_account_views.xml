@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_post_account_view_search_inherit">
+        <field
+            name="name"
+        >social.post.account.view.search.inherit.social.media.advertising</field>
+        <field name="model">social.post.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_post_account_view_search"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='campaign_id']" position="after">
+                <field name="social_campaign_id" />
+            </xpath>
+            <xpath expr="//filter[@name='group_by_campaign_id']" position="after">
+                <filter
+                    string="Social Campaign"
+                    name="group_by_social_campaign_id"
+                    domain="[]"
+                    context="{'group_by': 'social_campaign_id'}"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_account_view_form_inherit">
+        <field
+            name="name"
+        >social.post.account.view.form.inherit.social.media.advertising</field>
+        <field name="model">social.post.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_post_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='campaign_id']" position="after">
+                <field name="social_campaign_id" />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
