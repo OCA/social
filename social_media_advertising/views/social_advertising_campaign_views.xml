@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_advertising_campaign_view_tree">
+        <field name="name">social.advertising.campaign.tree</field>
+        <field name="model">social.advertising.campaign</field>
+        <field name="arch" type="xml">
+            <tree multi_edit="1">
+                <field name="allow_media_ids" column_invisible="1" />
+                <field name="name" />
+                <field name="campaign_group_id" />
+                <field name="media_id" />
+                <field name="account_ids" widget="many2many_tags" />
+                <field name="user_id" widget="many2one_avatar_user" />
+                <field name="stage_level" column_invisible="1" />
+                <field
+                    name="stage_id"
+                    widget="badge"
+                    decoration-success="stage_level == 'success'"
+                    decoration-info="stage_level == 'info'"
+                    decoration-warning="stage_level == 'warning'"
+                    decoration-danger="stage_level == 'danger'"
+                    optional="show"
+                />
+                <field name="tag_ids" widget="many2many_tags" />
+                <field name="advertising_account_id" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_campaign_view_form">
+        <field name="name">social.advertising.campaign.form</field>
+        <field name="model">social.advertising.campaign</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field
+                        name="stage_id"
+                        widget="statusbar"
+                        options="{'clickable': '1'}"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Black Friday 2026" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="social_media_general" string="General">
+                            <field name="allow_media_ids" invisible="1" />
+                            <field
+                                name="media_id"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                            <field
+                                name="campaign_group_id"
+                                required="media_id != False"
+                                options="{'no_quick_create': True}"
+                            />
+                            <field
+                                name="account_ids"
+                                widget="many2many_tags"
+                                required="media_id != False"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                            <field name="user_id" widget="many2one_avatar_user" />
+                            <field name="tag_ids" widget="many2many_tags" />
+                            <field
+                                name="advertising_account_id"
+                                invisible="not advertising_account_id"
+                            />
+                            <field
+                                name="remote_ref"
+                                readonly="1"
+                                invisible="not remote_ref"
+                            />
+                            <field name="active" invisible="1" />
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_campaign_view_search">
+        <field name="name">social.advertising.campaign.search</field>
+        <field name="model">social.advertising.campaign</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="campaign_group_id" />
+                <field name="media_id" />
+                <field name="account_ids" />
+                <field name="tag_ids" />
+                <field name="user_id" />
+                <filter
+                    name="my_campaigns"
+                    string="My Campaigns"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <separator />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_campaign_group_id"
+                        string="Campaign Group"
+                        context="{'group_by': 'campaign_group_id'}"
+                    />
+                    <filter
+                        name="group_media_id"
+                        string="Media"
+                        context="{'group_by': 'media_id'}"
+                    />
+                    <filter
+                        name="group_stage_id"
+                        string="Stage"
+                        context="{'group_by': 'stage_id'}"
+                    />
+                    <filter
+                        name="group_user_id"
+                        string="Responsible"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_advertising_campaign_action">
+        <field name="name">Campaigns</field>
+        <field name="res_model">social.advertising.campaign</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="social_advertising_campaign_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first campaign
+            </p>
+            <p>
+                Campaigns hold the budget and bidding settings used to promote
+                your posts on social media.
+            </p>
+        </field>
+    </record>
+
+</odoo>

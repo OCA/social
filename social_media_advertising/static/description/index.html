@@ -1,0 +1,878 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>Social Media Advertising</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="social-media-advertising">
+<h1 class="title">Social Media Advertising</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:3632642d0729a63b90d04c1db5acbfee0b88ba75d86b3aa044879229cdb7332b
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/17.0/social_media_advertising"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_advertising"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module adds the advertising layer on top of <em>Social Media Base</em>:
+the campaigns used to promote the posts, the groups that manage several
+campaigns as a unit, the tags that classify them and the view of the ads
+served by the social media.</p>
+<p>Everything is generic, so it works with any social media. Each connector
+module plugs its own social media through the extension hooks, and
+contributes its own submenu under <em>Advertising</em>: campaign groups,
+campaigns and ads belong to a single social media, so they are never
+listed mixed together.</p>
+<p>Main features:</p>
+<ul class="simple">
+<li>Campaign groups and campaigns, linked to a social media, to its
+accounts and to the posts they promote.</li>
+<li>A second campaign field on a post, next to the Odoo marketing campaign
+(<tt class="docutils literal">utm.campaign</tt>) that <em>Social Media Base</em> provides: the campaign of
+the social media itself, which holds the budget and the remote
+reference. The two are independent.</li>
+<li>Tags to classify the campaigns.</li>
+<li>Stages declared per social media, so every social media keeps its own
+status vocabulary for campaigns, campaign groups and ads instead of a
+hardcoded list.</li>
+<li>Ads view listing the sponsored creatives of the connected accounts
+with their status, their campaign and the post they promote.</li>
+<li>An extensible hook so each social media module can import its
+campaigns.</li>
+</ul>
+<p><strong>Table of contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
+<li><a class="reference internal" href="#security-groups" id="toc-entry-2">Security groups.</a></li>
+<li><a class="reference internal" href="#advertising-environment" id="toc-entry-3">Advertising environment.</a></li>
+<li><a class="reference internal" href="#stages" id="toc-entry-4">Stages.</a></li>
+<li><a class="reference internal" href="#connector-modules" id="toc-entry-5">Connector modules.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-6">Usage</a><ul>
+<li><a class="reference internal" href="#choose-the-advertising-account" id="toc-entry-7">Choose the advertising account.</a></li>
+<li><a class="reference internal" href="#stat-buttons-of-the-account" id="toc-entry-8">Stat buttons of the account.</a></li>
+<li><a class="reference internal" href="#generate-a-campaign-group" id="toc-entry-9">Generate a campaign group.</a></li>
+<li><a class="reference internal" href="#generate-a-campaign" id="toc-entry-10">Generate a campaign.</a></li>
+<li><a class="reference internal" href="#campaign-and-campaign-group-stages" id="toc-entry-11">Campaign and campaign group stages.</a></li>
+<li><a class="reference internal" href="#link-the-campaigns-to-a-post" id="toc-entry-12">Link the campaigns to a post.</a></li>
+<li><a class="reference internal" href="#ads" id="toc-entry-13">Ads.</a></li>
+<li><a class="reference internal" href="#fetch-campaigns" id="toc-entry-14">Fetch campaigns.</a></li>
+<li><a class="reference internal" href="#archiving" id="toc-entry-15">Archiving.</a></li>
+<li><a class="reference internal" href="#campaign-ownership" id="toc-entry-16">Campaign ownership.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-17">Known issues / Roadmap</a><ul>
+<li><a class="reference internal" href="#kanban-view-of-the-campaigns" id="toc-entry-18">Kanban view of the campaigns.</a></li>
+<li><a class="reference internal" href="#tags-without-colour" id="toc-entry-19">Tags without colour.</a></li>
+<li><a class="reference internal" href="#campaign-groups-and-tags-are-shared-data" id="toc-entry-20">Campaign groups and tags are shared data.</a></li>
+<li><a class="reference internal" href="#campaign-visibility-of-a-shared-post" id="toc-entry-21">Campaign visibility of a shared post.</a></li>
+<li><a class="reference internal" href="#statistics-of-a-single-window" id="toc-entry-22">Statistics of a single window.</a></li>
+<li><a class="reference internal" href="#remote-ref-is-writable-through-rpc" id="toc-entry-23"><tt class="docutils literal">remote_ref</tt> is writable through RPC.</a></li>
+<li><a class="reference internal" href="#connector-modules-without-an-advertising-layer" id="toc-entry-24">Connector modules without an advertising layer.</a></li>
+<li><a class="reference internal" href="#records-without-a-social-media-are-out-of-every-menu" id="toc-entry-25">Records without a social media are out of every menu.</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-26">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-27">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-28">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-29">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-30">Maintainers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
+<div class="section" id="security-groups">
+<h2><a class="toc-backref" href="#toc-entry-2">Security groups.</a></h2>
+<ul class="simple">
+<li>The module reuses the groups of <em>Social Media Base</em>.</li>
+<li><em>Social Media / User: Own Accounts</em> sees only the campaigns he is
+responsible for, and can create campaign groups and tags but not
+delete them.</li>
+<li><em>Social Media / Administrator</em> sees every campaign and is the only
+group that manages the stages.</li>
+</ul>
+</div>
+<div class="section" id="advertising-environment">
+<h2><a class="toc-backref" href="#toc-entry-3">Advertising environment.</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Configuration &gt; Accounts, open an account and
+its <em>Advertising</em> tab.</li>
+<li><em>Environment</em>, in the <em>Advertising</em> tab, tells the advertising API of
+the social media which entities it must answer for this account.<ul>
+<li><em>Test</em> only sees the test advertising accounts of the application,
+their campaigns and their ads. Nothing is ever served to a real
+audience and nothing is ever billed, which is why it is the default.</li>
+<li><em>Production</em> sees the real advertising accounts. A campaign created
+from Odoo in this environment spends a real budget once it is
+activated in the campaign manager of the social media.</li>
+</ul>
+</li>
+<li><strong>The environment does not affect the publication of posts.</strong> A post
+published from an account set to <em>Test</em> is a real post on the social
+media, visible to everybody. The setting only governs the advertising
+features.</li>
+<li>The two environments never share an advertising account, so changing
+the environment drops the advertising account in use.</li>
+<li>The tab only shows up when an advertising connector module is
+installed for the social media of the account.</li>
+</ul>
+</div>
+<div class="section" id="stages">
+<h2><a class="toc-backref" href="#toc-entry-4">Stages.</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Configuration &gt; Stages &gt; <tt class="docutils literal">&lt;social media&gt;</tt>, a
+menu every connector module contributes for its own social media.</li>
+<li>A stage mirrors a status the social media gives to a campaign, a
+campaign group or an ad. It belongs to one social media and one scope,
+set in the <em>Applies To</em> field.</li>
+<li><em>Code</em> is the value the social media returns, for example <tt class="docutils literal">ACTIVE</tt>
+or <tt class="docutils literal">PENDING_DELETION</tt>. It is what the connector module matches when
+it imports, so it must be written exactly as the social media sends
+it.</li>
+<li><em>Level</em> is the colour of the badge showing the stage.</li>
+<li>This module ships <strong>no</strong> stage: each connector module declares the
+stages of its own social media in its <tt class="docutils literal">data/</tt> folder. Until a
+connector is installed, the <em>Stage</em> field has no option to choose
+from.</li>
+</ul>
+</div>
+<div class="section" id="connector-modules">
+<h2><a class="toc-backref" href="#toc-entry-5">Connector modules.</a></h2>
+<ul class="simple">
+<li>To resolve a remote status, call
+<tt class="docutils literal"><span class="pre">self.env[&quot;social.stage&quot;]._get_stage(media_type,</span> applies_to, code)</tt>.
+It returns the stage, or an empty recordset when the connector has not
+declared that code.</li>
+<li>To make a social media selectable on the campaigns, extend
+<tt class="docutils literal">social.advertising.campaign._available_campaign()</tt> and append your
+own media type.</li>
+<li>To restrict the social media campaigns that can be linked to a post,
+extend <tt class="docutils literal">social.post._get_allow_social_campaign_domain()</tt>.</li>
+<li>To freeze another field of the post once it is published, extend
+<tt class="docutils literal">social.post._get_locked_content_fields()</tt>, as this module does with
+the social media campaign.</li>
+<li>To list the advertising accounts of a social media, extend
+<tt class="docutils literal">social.account._advertising_media_types()</tt> with your own media
+type, which is what makes the <em>Advertising</em> tab show up, and implement
+<tt class="docutils literal">social.account._fetch_advertising_accounts()</tt> returning one dict of
+values per advertising account, with <tt class="docutils literal">remote_ref</tt>, <tt class="docutils literal">name</tt> and
+<tt class="docutils literal">environment</tt>. The generic module takes care of creating, updating
+and dropping the <tt class="docutils literal">social.advertising.account</tt> records, and of
+keeping the one in use.</li>
+<li>To add what only your social media reports, inherit
+<tt class="docutils literal">social.advertising.account</tt> and declare your own fields, as <em>Social
+Media Advertising Linkedin</em> does with the serving status.</li>
+<li>To show your records, contribute a menu named after your social media
+under <tt class="docutils literal">social_media_advertising.social_advertising_menu</tt>, with one
+<tt class="docutils literal">ir.actions.act_window</tt> per model filtered on
+<tt class="docutils literal"><span class="pre">[(&quot;media_id.media_type&quot;,</span> <span class="pre">&quot;=&quot;,</span> &quot;&lt;your media <span class="pre">type&gt;&quot;)]</span></tt>, and another
+one under <tt class="docutils literal">social_media_advertising.social_stage_root_menu</tt> for your
+stages. Both menus of this module are only containers: they hold
+nothing until a connector fills them, and Odoo hides them meanwhile.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="usage">
+<h1><a class="toc-backref" href="#toc-entry-6">Usage</a></h1>
+<div class="section" id="choose-the-advertising-account">
+<h2><a class="toc-backref" href="#toc-entry-7">Choose the advertising account.</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Configuration &gt; Accounts, open an account and
+its <em>Advertising</em> tab.</li>
+<li>Click <em>Fetch advertising accounts</em>. The advertising accounts the
+authorized member may reach are brought from the social media and
+listed read-only: they mirror the social media and are never pushed
+back.</li>
+<li>Only the advertising accounts of the current environment can be used,
+so check the <em>Environment</em> first.</li>
+<li>Click <em>Use this account</em> on the row you want the campaigns and the ads
+to belong to. It is highlighted and marked <em>In Use</em>, and any other one
+is unmarked: <strong>one advertising account at a time per social media
+account</strong>.</li>
+<li><strong>Nothing works until one is marked.</strong> When the environment leaves
+exactly one candidate, it is marked <em>In Use</em> automatically, both when
+the advertising accounts are fetched and when the environment changes.
+With several candidates none is chosen and you have to pick one:
+campaigns, campaign groups and ads all belong to a single advertising
+account on the social media, so guessing one would silently work
+against the wrong advertiser. A choice already made is never replaced.
+While none is in use, importing and creating campaigns is refused with
+a message saying so, and no ad is fetched.</li>
+<li>Fetching again refreshes the list without changing your choice. An
+advertising account that no longer exists on the social media is
+dropped from the list, unless the social media returns no account at
+all: in that case nothing is removed, because an empty answer cannot
+be told apart from a temporary failure.</li>
+<li>Go to <em>Social Media</em> &gt; Advertising &gt; <tt class="docutils literal">&lt;social media&gt;</tt> &gt; Ad accounts
+for the list of the advertising accounts of that social media, with
+filters by environment and by the one in use. Open one to see its
+details and its <em>Campaigns</em> and <em>Campaign Groups</em> stat buttons.</li>
+<li>A campaign and a campaign group record the advertising account they
+belong to when they are created on the social media or imported from
+it, and it never changes afterwards, except when the advertising
+account itself disappears from the social media on a <em>Fetch
+advertising accounts</em>: it is then dropped and the campaigns and the
+campaign groups are left without a link. Choosing another advertising
+account therefore does not move the campaigns already created: the
+stat buttons keep showing the history as it happened. A campaign or a
+campaign group holding no advertising account is linked on the next
+<em>Fetch campaigns</em>.</li>
+</ul>
+</div>
+<div class="section" id="stat-buttons-of-the-account">
+<h2><a class="toc-backref" href="#toc-entry-8">Stat buttons of the account.</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Configuration &gt; Accounts and open an account.</li>
+<li><em>Campaigns</em> and <em>Campaign Groups</em> cover every advertising account of
+the social media account, not only the one in use.</li>
+<li><em>Ads</em> opens the ads of that account with the standard search bar, so
+they can still be filtered by date, grouped and saved as a favourite.</li>
+<li>All three are only shown for a social media whose connector module
+manages advertising. The <em>Marketing Campaigns</em> button next to them
+comes from <em>Social Media Base</em> and is always shown: a marketing
+campaign needs no advertising connector.</li>
+</ul>
+</div>
+<div class="section" id="generate-a-campaign-group">
+<h2><a class="toc-backref" href="#toc-entry-9">Generate a campaign group.</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Advertising &gt; <tt class="docutils literal">&lt;social media&gt;</tt> &gt; Campaign
+group &gt; New</li>
+<li>A form view opens; fill in the required fields <img alt="CREATE_GROUP_CAMPAIGN" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_advertising/static/img/readme/CREATE_GROUP_CAMPAIGN.png" /></li>
+<li>Save</li>
+<li>The <em>Campaigns</em> stat button on the form shows the number of campaigns
+of the group and navigates to them.</li>
+</ul>
+</div>
+<div class="section" id="generate-a-campaign">
+<h2><a class="toc-backref" href="#toc-entry-10">Generate a campaign.</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Advertising &gt; <tt class="docutils literal">&lt;social media&gt;</tt> &gt; Campaigns &gt;
+New</li>
+<li>Fill in the fields. The social media is optional; when a social media
+is selected, the campaign group and the accounts become required.
+<img alt="CREATE_CAMPAIGN" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_advertising/static/img/readme/CREATE_CAMPAIGN.png" /></li>
+<li>Save</li>
+<li>Changes on the main campaign fields are logged in the chatter.</li>
+<li>A campaign can target several accounts of the same social media. A
+connector module may restrict it: LinkedIn campaigns accept a single
+account, because the campaign belongs to one advertising account
+there.</li>
+</ul>
+</div>
+<div class="section" id="campaign-and-campaign-group-stages">
+<h2><a class="toc-backref" href="#toc-entry-11">Campaign and campaign group stages.</a></h2>
+<ul class="simple">
+<li>The status bar of the campaign form and the <em>Stage</em> field of the
+campaign group show the status the social media gives to the record.</li>
+<li>Only the stages of the social media selected on the campaign are
+offered, and only those whose <em>Applies To</em> matches the record.</li>
+<li>The stages are declared by each connector module, see the
+configuration section.</li>
+</ul>
+</div>
+<div class="section" id="link-the-campaigns-to-a-post">
+<h2><a class="toc-backref" href="#toc-entry-12">Link the campaigns to a post.</a></h2>
+<p>A post carries two independent campaigns, and both are optional:</p>
+<ul class="simple">
+<li><em>Campaign</em> is the Odoo marketing campaign (<tt class="docutils literal">utm.campaign</tt>), the same
+one used by the mailings, the leads and the UTM tracking. Any of them
+can be selected.</li>
+<li><em>Social campaign</em> is the campaign of the social media, the one holding
+the budget, the campaign group and the reference used to publish a
+sponsored post. Only social campaigns whose social media matches the
+accounts selected on the post can be chosen. A connector module
+narrows the list further with the rules of its social media, so what
+is offered are the campaigns that can actually sponsor <strong>this</strong> post:
+see the LinkedIn ad formats in <em>Social Media Advertising LinkedIn</em>.</li>
+<li>Editing the content of the post can invalidate the social campaign
+already chosen. When that happens the field is cleared as soon as the
+content changes, instead of letting the post fail when it is
+published. Pick another campaign among the ones then offered.</li>
+</ul>
+<p>Both are propagated to the publications of the post. A publication
+imported from the social media keeps whatever its connector was able to
+resolve.</p>
+<p>Both are frozen, like the rest of the content of the post, as soon as
+one of its accounts publishes: they decide how the post goes out, so
+changing them afterwards would no longer describe what is online.</p>
+<p><img alt="PUBLICATION_CAMPAIGNS" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_advertising/static/img/readme/PUBLICATION_CAMPAIGNS.png" /></p>
+</div>
+<div class="section" id="ads">
+<h2><a class="toc-backref" href="#toc-entry-13">Ads.</a></h2>
+<ul>
+<li><p class="first">Go to <em>Social Media</em> &gt; Advertising &gt; <tt class="docutils literal">&lt;social media&gt;</tt> &gt; Ads</p>
+</li>
+<li><p class="first">The view is empty until the first synchronization. The <em>Sync ads</em>
+button brings the sponsored creatives of every account the user is
+responsible for, and it is the only thing that does: the view shows
+the picture of the last synchronization, not what the social media
+serves right now. Each ad carries the moment it was last fetched.</p>
+</li>
+<li><p class="first">An ad is named after the text of the post it promotes, which is what
+it is recognized by. An ad promoting a post this database does not
+know is named <em>Post not available</em>.</p>
+</li>
+<li><p class="first">Every ad shows its status, its campaign, the publication it promotes
+and its statistics. The cards carry no image, so they all keep the
+same shape whether the promoted post has one or not: the images are
+shown on the publication, which the <em>Publication</em> button opens. The
+<em>Open ad</em> button opens the ad itself on the social media, not the
+campaign it belongs to. The status is the one set by the advertiser on
+the social media, with the name and the colour of the matching stage;
+the reason why the social media is serving the ad or not is only shown
+on the form of the ad.</p>
+</li>
+<li><p class="first">The statistics cover the window shown next to them. They are not the
+figures of the whole life of the ad.</p>
+</li>
+<li><p class="first">The search bar is the standard one: filter by creation date, group by
+account, advertising account, campaign or status, and save a
+favourite. The panel on the side filters by status and by account.</p>
+</li>
+<li><p class="first">Only the ads of the advertising account in use are fetched. The ones
+of the other advertising accounts stay as they were last synchronized
+and are marked <em>Advertising account not in use</em>; the <em>Advertising
+account in use</em> filter leaves them out.</p>
+</li>
+<li><p class="first">Deleting an account permanently takes with it what only that account
+could reach: its advertising accounts, its ads, and the campaigns and
+campaign groups that exist on the social media. What was written here
+and never published is kept, and only loses the account that is going
+away; so is a campaign shared with an account that stays, and a group
+that still holds a campaign of somebody else.</p>
+</li>
+<li><p class="first">An ad the social media stops answering is archived, never deleted: its
+statistics are the only trace left of what it did, and the connector
+leaves on it the status its social media gives a deleted ad. The
+<em>Delete permanently</em> button, reserved to the administrators and to the
+archived ads, is what removes that history from Odoo when it is not
+wanted; the confirmation says what is lost. Nothing is deleted on the
+social media, which no longer serves that ad anyway.</p>
+</li>
+<li><p class="first">The <em>Delete ad</em> button deletes the ad <strong>on the social media</strong>, not
+only in Odoo, and it cannot be undone. It is only shown for the social
+media whose connector deletes an ad, and only the responsible user of
+the account and the social media administrators may press it. What the
+social media answers decides what is left in Odoo: an ad the social
+media deletes on the spot loses its record here as well, along with
+its statistics, while one that is only taken for deletion keeps its
+record with the status the social media reports until it is processed.</p>
+</li>
+<li><p class="first">An ad the social media stops serving is archived, never deleted, so
+its statistics survive. Archiving an account archives its ads too;
+deleting it deletes them.</p>
+</li>
+<li><p class="first">A cron checks every six hours whether the social media serves ads this
+database does not know yet. No ad is fetched: it only raises a flag on
+the account. The responsible user gets a notice on the ads view, and
+the <em>New ads available</em> badge stays there across reloads until the ads
+are synchronized, so the user decides when to press <em>Sync ads</em>.</p>
+<p><img alt="ADS" src="https://raw.githubusercontent.com/OCA/social/17.0/social_media_advertising/static/img/readme/ADS.png" /></p>
+</li>
+</ul>
+</div>
+<div class="section" id="fetch-campaigns">
+<h2><a class="toc-backref" href="#toc-entry-14">Fetch campaigns.</a></h2>
+<ul class="simple">
+<li>The account form provides a <em>Fetch campaigns</em> button when the
+connector module adds it. Each social media module implements the
+actual import; a notification shows the result.</li>
+<li>The import can also link the publications already brought from the
+social media with the campaign they belong to, when the connector is
+able to resolve it.</li>
+</ul>
+</div>
+<div class="section" id="archiving">
+<h2><a class="toc-backref" href="#toc-entry-15">Archiving.</a></h2>
+<ul class="simple">
+<li>Archiving an account also archives its campaigns and their campaign
+groups.</li>
+<li>A campaign shared by several accounts is only archived when all of its
+accounts are, whether they are archived together or one by one, and a
+campaign group is only archived when it has no active campaign left.</li>
+<li>Unarchiving the account restores everything.</li>
+<li>Deleting an account permanently deletes the campaigns and the campaign
+groups that exist on the social media, the same way the <em>Delete</em>
+button of a campaign does. A campaign that was only written in Odoo
+and never reached the social media is kept, and it only loses the link
+to the account; a campaign group is kept as long as it still has a
+campaign.</li>
+</ul>
+</div>
+<div class="section" id="campaign-ownership">
+<h2><a class="toc-backref" href="#toc-entry-16">Campaign ownership.</a></h2>
+<ul class="simple">
+<li>Every campaign has a <em>Responsible</em> user, set to whoever created it. A
+regular user of the <em>Social Media / User: Own Accounts</em> group only
+sees the campaigns he is responsible for; the <em>Social Media /
+Administrator</em> group sees all of them.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="known-issues-roadmap">
+<h1><a class="toc-backref" href="#toc-entry-17">Known issues / Roadmap</a></h1>
+<div class="section" id="kanban-view-of-the-campaigns">
+<h2><a class="toc-backref" href="#toc-entry-18">Kanban view of the campaigns.</a></h2>
+<p>The <tt class="docutils literal">fold</tt> field of <tt class="docutils literal">social.stage</tt> is meant for a kanban of the
+campaigns grouped by stage, which is not implemented yet. Until then the
+field has no visible effect.</p>
+</div>
+<div class="section" id="tags-without-colour">
+<h2><a class="toc-backref" href="#toc-entry-19">Tags without colour.</a></h2>
+<p><tt class="docutils literal">social.tag</tt> only has a name: it has neither a colour field for the
+<tt class="docutils literal">many2many_tags</tt> widget nor a uniqueness constraint on the name, so
+two tags can share it.</p>
+</div>
+<div class="section" id="campaign-groups-and-tags-are-shared-data">
+<h2><a class="toc-backref" href="#toc-entry-20">Campaign groups and tags are shared data.</a></h2>
+<p><tt class="docutils literal">social.advertising.campaign.group</tt> and <tt class="docutils literal">social.tag</tt> have no
+responsible and no record rule, so every social media user sees and
+edits all of them, unlike the advertising accounts, the campaigns and
+the ads, which are restricted to their responsible. Scoping them is left
+for a later version.</p>
+</div>
+<div class="section" id="campaign-visibility-of-a-shared-post">
+<h2><a class="toc-backref" href="#toc-entry-21">Campaign visibility of a shared post.</a></h2>
+<p>The record rule of <tt class="docutils literal">social.advertising.campaign</tt> restricts a user to
+the campaigns he is responsible for. If an administrator assigns a post
+to a user and that post is linked to a campaign of somebody else, the
+badge is empty for that user. A finer rule, for instance sharing the
+campaigns of a campaign group, is left for a later version.</p>
+</div>
+<div class="section" id="statistics-of-a-single-window">
+<h2><a class="toc-backref" href="#toc-entry-22">Statistics of a single window.</a></h2>
+<p>There is no history per day, so the evolution of an ad cannot be
+charted: a new synchronization replaces the statistics of the previous
+one. Charting it needs a table of facts per day, the way
+<tt class="docutils literal">social_media_base</tt> already keeps one for the accounts in
+<tt class="docutils literal">social.account.statistics</tt>, and giving the advertising models the
+same treatment is a feature of its own.</p>
+</div>
+<div class="section" id="remote-ref-is-writable-through-rpc">
+<h2><a class="toc-backref" href="#toc-entry-23"><tt class="docutils literal">remote_ref</tt> is writable through RPC.</a></h2>
+<p>The form views render <tt class="docutils literal">remote_ref</tt> readonly, and on the ads and the
+advertising accounts the ACL backs it: a social media user only reads
+them. The campaigns and the campaign groups are the ones he writes, so
+on those two he can still change or empty the field through RPC and
+orphan the record on the social media. Restricting the field is a
+hardening candidate for a later version.</p>
+</div>
+<div class="section" id="connector-modules-without-an-advertising-layer">
+<h2><a class="toc-backref" href="#toc-entry-24">Connector modules without an advertising layer.</a></h2>
+<p>Only LinkedIn has its advertising connector, <em>Social Media Advertising
+LinkedIn</em>. The other connectors of the family, such as
+<tt class="docutils literal">social_media_x</tt>, have no advertising module yet: their accounts
+publish posts but do not manage campaigns.</p>
+</div>
+<div class="section" id="records-without-a-social-media-are-out-of-every-menu">
+<h2><a class="toc-backref" href="#toc-entry-25">Records without a social media are out of every menu.</a></h2>
+<p>The lists of campaign groups, campaigns and ads are filtered on the
+social media they belong to. A campaign saved without one, or a campaign
+group whose campaigns mix social medias, which empties its media, is
+therefore reachable only through a stat button or a saved filter.</p>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1><a class="toc-backref" href="#toc-entry-26">Bug Tracker</a></h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20social_media_advertising%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1><a class="toc-backref" href="#toc-entry-27">Credits</a></h1>
+<div class="section" id="authors">
+<h2><a class="toc-backref" href="#toc-entry-28">Authors</a></h2>
+<ul class="simple">
+<li>Binhex</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2><a class="toc-backref" href="#toc-entry-29">Contributors</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.binhex.cloud">Binhex</a>:<ul>
+<li>Edilio Escalona Almira <a class="reference external" href="mailto:e.escalona&#64;binhex.cloud">e.escalona&#64;binhex.cloud</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2><a class="toc-backref" href="#toc-entry-30">Maintainers</a></h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
+<p><a class="reference external image-reference" href="https://github.com/edescalona"><img alt="edescalona" src="https://github.com/edescalona.png?size=40px" /></a></p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/17.0/social_media_advertising">OCA/social</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>

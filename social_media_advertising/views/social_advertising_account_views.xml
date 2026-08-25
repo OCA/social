@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_advertising_account_view_tree">
+        <field name="name">social.advertising.account.tree</field>
+        <field name="model">social.advertising.account</field>
+        <field name="arch" type="xml">
+            <tree
+                create="0"
+                edit="0"
+                delete="0"
+                decoration-bf="is_current"
+                decoration-success="is_current"
+            >
+                <field name="is_current" widget="boolean_toggle" readonly="1" />
+                <field name="name" />
+                <field name="account_id" />
+                <field name="media_id" optional="hide" />
+                <field name="remote_ref" />
+                <field name="environment" />
+                <field name="currency_id" optional="show" />
+                <field name="last_sync_date" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_account_view_form">
+        <field name="name">social.advertising.account.form</field>
+        <field name="model">social.advertising.account</field>
+        <field name="arch" type="xml">
+            <form create="0" edit="0" delete="0">
+                <header>
+                    <button
+                        type="object"
+                        name="action_set_current"
+                        string="Use this account"
+                        class="btn-primary"
+                        invisible="is_current"
+                    />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="In use"
+                        bg_color="text-bg-success"
+                        invisible="not is_current"
+                    />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_open_campaigns"
+                            class="oe_stat_button"
+                            icon="fa-bullhorn"
+                        >
+                            <field
+                                name="campaign_count"
+                                widget="statinfo"
+                                string="Campaigns"
+                            />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_open_campaign_groups"
+                            class="oe_stat_button"
+                            icon="fa-folder-open-o"
+                        >
+                            <field
+                                name="campaign_group_count"
+                                widget="statinfo"
+                                string="Campaign Groups"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="name" readonly="1" /></h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="account_id" readonly="1" />
+                            <field name="media_id" readonly="1" />
+                            <field name="remote_ref" readonly="1" />
+                            <field name="is_current" readonly="1" />
+                        </group>
+                        <group>
+                            <field name="environment" readonly="1" />
+                            <field name="currency_id" readonly="1" />
+                            <field name="web_url" widget="url" readonly="1" />
+                            <field name="last_sync_date" readonly="1" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_advertising_account_view_search">
+        <field name="name">social.advertising.account.search</field>
+        <field name="model">social.advertising.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="remote_ref" />
+                <field name="account_id" />
+                <filter
+                    name="in_use"
+                    string="In Use"
+                    domain="[('is_current', '=', True)]"
+                />
+                <separator />
+                <filter
+                    name="test"
+                    string="Test"
+                    domain="[('environment', '=', 'test')]"
+                />
+                <filter
+                    name="production"
+                    string="Production"
+                    domain="[('environment', '=', 'production')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_account_id"
+                        string="Account"
+                        context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        name="group_media_id"
+                        string="Media"
+                        context="{'group_by': 'media_id'}"
+                    />
+                    <filter
+                        name="group_environment"
+                        string="Environment"
+                        context="{'group_by': 'environment'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_advertising_account_action">
+        <field name="name">Advertising accounts</field>
+        <field name="res_model">social.advertising.account</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No advertising account yet
+            </p>
+            <p>
+                Open a social media account, go to its Advertising tab and
+                click Fetch advertising accounts to bring them from the
+                social media.
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_account_view_form_inherit">
+        <field name="name">social.account.view.form.inherit.advertising</field>
+        <field name="model">social.account</field>
+        <field name="inherit_id" ref="social_media_base.social_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <field name="can_sync_advertising_accounts" invisible="1" />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    type="object"
+                    name="action_open_campaigns"
+                    class="oe_stat_button"
+                    icon="fa-bullhorn"
+                    invisible="not can_sync_advertising_accounts"
+                >
+                    <field name="campaign_count" widget="statinfo" string="Campaigns" />
+                </button>
+                <button
+                    type="object"
+                    name="action_open_campaign_groups"
+                    class="oe_stat_button"
+                    icon="fa-folder-open-o"
+                    invisible="not can_sync_advertising_accounts"
+                >
+                    <field
+                        name="campaign_group_count"
+                        widget="statinfo"
+                        string="Campaign Groups"
+                    />
+                </button>
+                <button
+                    type="object"
+                    name="action_open_ads"
+                    class="oe_stat_button"
+                    icon="fa-picture-o"
+                    invisible="not can_sync_advertising_accounts"
+                >
+                    <field name="ad_count" widget="statinfo" string="Ads" />
+                </button>
+            </xpath>
+            <xpath expr="//page[@name='account_configuration']" position="after">
+                <page
+                    name="account_advertising"
+                    string="Advertising"
+                    invisible="not can_sync_advertising_accounts"
+                >
+                    <group>
+                        <group>
+                            <field
+                                name="environment"
+                                widget="radio"
+                                options="{'horizontal': True}"
+                            />
+                            <field name="advertising_account_urn" readonly="1" />
+                        </group>
+                    </group>
+                    <button
+                        type="object"
+                        name="action_sync_advertising_accounts_notify"
+                        string="Fetch advertising accounts"
+                        class="oe_highlight mb-3"
+                    />
+                    <field name="advertising_account_ids" readonly="1" nolabel="1">
+                        <tree
+                            create="0"
+                            edit="0"
+                            delete="0"
+                            decoration-bf="is_current"
+                            decoration-success="is_current"
+                        >
+                            <field
+                                name="is_current"
+                                widget="boolean_toggle"
+                                readonly="1"
+                            />
+                            <field name="name" />
+                            <field name="remote_ref" />
+                            <field name="environment" />
+                            <field name="currency_id" optional="show" />
+                            <field name="web_url" widget="url" optional="hide" />
+                            <field name="last_sync_date" optional="hide" />
+                            <button
+                                type="object"
+                                name="action_set_current"
+                                string="Use this account"
+                                icon="fa-check-circle"
+                                invisible="is_current"
+                            />
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

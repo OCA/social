@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_stage_view_tree">
+        <field name="name">social.stage.tree</field>
+        <field name="model">social.stage</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="sequence" widget="handle" />
+                <field name="media_id" />
+                <field name="applies_to" />
+                <field name="name" />
+                <field name="code" />
+                <field name="level" />
+                <field name="fold" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_stage_view_form">
+        <field name="name">social.stage.form</field>
+        <field name="model">social.stage</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Active" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group name="scope" string="Scope">
+                            <field name="media_id" />
+                            <field name="applies_to" />
+                            <field name="code" placeholder="e.g. ACTIVE" />
+                        </group>
+                        <group name="display" string="Display">
+                            <field name="sequence" />
+                            <field name="level" />
+                            <field name="fold" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_stage_view_search">
+        <field name="name">social.stage.search</field>
+        <field name="model">social.stage</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="code" />
+                <field name="media_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_media_id"
+                        string="Media"
+                        context="{'group_by': 'media_id'}"
+                    />
+                    <filter
+                        name="group_applies_to"
+                        string="Applies To"
+                        context="{'group_by': 'applies_to'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_stage_action">
+        <field name="name">Stages</field>
+        <field name="res_model">social.stage</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="social_stage_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first stage
+            </p>
+            <p>
+                Stages mirror the statuses a social media gives to a campaign,
+                a campaign group or an ad. Each social media module declares its
+                own, and the code is the value returned by the social media.
+            </p>
+        </field>
+    </record>
+
+</odoo>

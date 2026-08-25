@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t
+        t-name="social_media_advertising.AdsKanbanView.Buttons"
+        t-inherit="web.KanbanView.Buttons"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
+            <button
+                type="button"
+                class="btn btn-primary o_kanban_sync_ads me-1"
+                t-on-click.prevent="onSyncAds"
+            >
+                <i
+                    t-if="!adsState.syncing"
+                    class="fa fa-refresh px-1"
+                    aria-hidden="true"
+                />
+                <span class="social-loader" t-if="adsState.syncing" />
+                Sync ads
+            </button>
+            <span
+                t-if="adsState.needUpdate"
+                class="badge text-bg-warning align-self-center"
+                title="The social media is serving ads this database does not know yet. Synchronize to bring them in."
+            >
+                New ads available
+            </span>
+        </xpath>
+    </t>
+
+</templates>
