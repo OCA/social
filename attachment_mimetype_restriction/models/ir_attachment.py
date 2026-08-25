@@ -43,6 +43,8 @@ class IrAttachment(models.Model):
     def _validate_mimetype_from_vals(self, vals):
         if self.env.context.get("install_mode"):
             return
+        if vals.get("res_field"):
+            return
         # Skip framework-generated assets: compiled bundles (detected at create
         # by res_model='ir.ui.view' + public=True, since their /web/assets/ url
         # is only set in a later write) and customized scss/js overrides (which
@@ -51,13 +53,13 @@ class IrAttachment(models.Model):
             "url"
         ):
             return
-        mimetype = self._compute_mimetype(vals)
         res_model = vals.get("res_model")
         company_id = self._resolve_attachment_company_id(vals)
         allowed_mimetypes = self._get_allowed_mimetypes(company_id, res_model)
         if not allowed_mimetypes:
             return
-        if mimetype.lower() not in allowed_mimetypes:
+        mimetype = self._compute_mimetype(vals)
+        if mimetype not in allowed_mimetypes:
             message = _("File type '%s' is not allowed.") % mimetype
             if request:
                 request.mimetype_error = message
@@ -72,18 +74,22 @@ class IrAttachment(models.Model):
     def write(self, vals):
         fields_to_check = ["datas", "raw", "mimetype", "res_model", "company_id"]
         if any(key in vals for key in fields_to_check):
+            has_new_content = "datas" in vals or "raw" in vals
             for record in self:
                 check_vals = {
                     "datas": vals.get("datas"),
                     "raw": vals.get("raw"),
-                    "mimetype": vals.get("mimetype", record.mimetype),
+                    "name": vals.get("name", record.name),
                     "res_model": vals.get("res_model", record.res_model),
                     "res_id": vals.get("res_id", record.res_id),
+                    "res_field": vals.get("res_field", record.res_field),
                     "url": vals.get("url", record.url),
                     "company_id": vals.get(
                         "company_id",
                         record.company_id.id if record.company_id else False,
                     ),
                 }
+                if not has_new_content:
+                    check_vals["mimetype"] = vals.get("mimetype", record.mimetype)
                 self._validate_mimetype_from_vals(check_vals)
         return super().write(vals)
