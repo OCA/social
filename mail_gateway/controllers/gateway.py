@@ -57,10 +57,11 @@ class GatewayController(Controller):
             or "utf-8"
         )
         jsonrequest = json.loads(request.httprequest.get_data().decode(charset))
-        dispatcher = (
-            request.env[f"mail.gateway.{usage}"]
-            .with_user(bot_data["webhook_user_id"])
-            .with_context(no_gateway_notification=True)
+        # Do not set no_gateway_notification on this env: inbound posts
+        # pass that flag on message_post so later replies in this request
+        # (automations, AI) can still be sent to the gateway.
+        dispatcher = request.env[f"mail.gateway.{usage}"].with_user(
+            bot_data["webhook_user_id"]
         )
         if not dispatcher._verify_update(bot_data, jsonrequest):
             _logger.warning(

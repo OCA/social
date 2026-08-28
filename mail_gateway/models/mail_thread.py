@@ -18,7 +18,13 @@ class MailThread(models.AbstractModel):
 
     def _get_notify_valid_parameters(self):
         notify_valid_parameters = super()._get_notify_valid_parameters()
-        return notify_valid_parameters | {"gateway_notifications"}
+        # Incoming replies linked to a document call message_post on
+        # mail.thread, not discuss.channel. Accept the per-post skip flag
+        # so notify kwargs are not rejected.
+        return notify_valid_parameters | {
+            "gateway_notifications",
+            "no_gateway_notification",
+        }
 
     def _notify_thread_by_email(self, message, recipients_data, **kwargs):
         partners_data = [r for r in recipients_data if r["notif"] == "gateway"]
@@ -131,5 +137,5 @@ class MailThread(models.AbstractModel):
 
     def _get_allowed_message_post_params(self):
         result = super()._get_allowed_message_post_params()
-        result.add("gateway_notifications")
+        result.update({"gateway_notifications", "no_gateway_notification"})
         return result

@@ -61,16 +61,28 @@ class MailChannel(models.Model):
 
     @api.returns("mail.message", lambda value: value.id)
     def message_post(
-        self, *, message_type="notification", gateway_type=False, **kwargs
+        self,
+        *,
+        message_type="notification",
+        gateway_type=False,
+        no_gateway_notification=False,
+        **kwargs,
     ):
         message = super().message_post(
             message_type=message_type,
             gateway_type=gateway_type or self.gateway_id.gateway_type,
             **kwargs,
         )
+        # Incoming webhook posts pass no_gateway_notification to avoid an
+        # echo. The flag is per call: later message_post in the same request
+        # (automations, AI replies) must still reach the gateway.
+        # Context is kept for backward compatibility.
+        skip_gateway = no_gateway_notification or self.env.context.get(
+            "no_gateway_notification", False
+        )
         if (
             self.gateway_id
-            and not self.env.context.get("no_gateway_notification", False)
+            and not skip_gateway
             and message.message_type != "notification"
         ):
             self.env["mail.notification"].create(
