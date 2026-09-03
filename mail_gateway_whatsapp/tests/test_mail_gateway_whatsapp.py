@@ -157,6 +157,37 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             ],
         }
 
+        cls.echo_message = {
+            "object": "whatsapp_business_account",
+            "entry": [
+                {
+                    "id": "WHATSAPP_BUSINESS_ACCOUNT_ID",
+                    "changes": [
+                        {
+                            "value": {
+                                "messaging_product": "whatsapp",
+                                "metadata": {
+                                    "display_phone_number": "1234",
+                                    "phone_number_id": "1234",
+                                },
+                                "message_echoes": [
+                                    {
+                                        "from": "1234",
+                                        "to": "34699999999",
+                                        "id": "wamid.ECHO_ID",
+                                        "timestamp": "1234",
+                                        "type": "text",
+                                        "text": {"body": "ECHO_BODY"},
+                                    }
+                                ],
+                            },
+                            "field": "smb_message_echoes",
+                        }
+                    ],
+                }
+            ],
+        }
+
     def test_webhook_management(self):
         self.gateway.webhook_key = self.webhook
         self.assertTrue(self.gateway.can_set_webhook)
@@ -231,6 +262,27 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
         message = self.receive_message(self.message_01)
         self.assertEqual(message.author_id, partner)
         self.assertFalse(message.parent_id)
+
+    def test_receive_message_echo(self):
+        """Messages answered outside Odoo are pushed as smb_message_echoes."""
+        partner = self.env["res.partner"].create(
+            {"name": "DEMO", "phone": "+34699999999"}
+        )
+        messages = self.receive_message(self.echo_message)
+        self.assertEqual(len(messages), 1)
+        self.assertEqual(messages.body, Markup("<p>ECHO_BODY</p>"))
+        self.assertEqual(messages.author_id, self.gateway.company_id.partner_id)
+        self.assertNotEqual(messages.author_id, partner)
+        self.assertEqual(messages.notification_ids.gateway_message_id, "wamid.ECHO_ID")
+
+    def test_receive_message_echo_no_duplicates(self):
+        """Meta echoes our own messages back and may redeliver webhooks."""
+        messages = self.receive_message(self.echo_message)
+        chat = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
+        self.set_message(self.echo_message, self.webhook)
+        self.assertEqual(chat.message_ids, messages)
 
     def test_receive_related_message(self):
         """

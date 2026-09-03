@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =====================
 Mail Whatsapp Gateway
 =====================
@@ -17,7 +13,7 @@ Mail Whatsapp Gateway
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
@@ -86,6 +82,17 @@ webhook. In order to make it you must follow this steps:
   as validation Key
 - Administer the Webhook and activate the messages webhook
 
+Messages answered outside Odoo
+------------------------------
+
+If the same phone number is also used from the WhatsApp Business app
+(coexistence mode), Meta pushes the messages your agents write there on
+a dedicated webhook field. Activate the ``smb_message_echoes`` webhook
+next to ``messages`` so those replies are also stored in the Odoo
+conversation.
+
+Echoes are never sent back to the customer, they are only recorded.
+
 Usage
 =====
 
@@ -130,6 +137,10 @@ Contributors
 - `Tecnativa <https://www.tecnativa.com>`__:
 
      - Carlos Lopez
+
+- `Grupo Isonor <https://www.grupoisonor.es>`__:
+
+     - David Palanca
 
 Other credits
 -------------

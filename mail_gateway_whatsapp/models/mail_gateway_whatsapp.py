@@ -56,26 +56,101 @@ class MailGatewayWhatsappService(models.AbstractModel):
             if contact["wa_id"] == token:
                 result["name"] = contact["profile"]["name"]
                 continue
+        if not result.get("name"):
+            # Echo payloads carry no contact profile
+            author = self._get_author(gateway, update)
+            result["name"] = author.name if author else token
         return result
 
     def _receive_update(self, gateway, update):
-        if update:
-            for entry in update["entry"]:
-                for change in entry["changes"]:
-                    if change["field"] != "messages":
-                        continue
-                    for message in change["value"].get("messages", []):
-                        chat = self._get_channel(
-                            gateway, message["from"], change["value"], force_create=True
-                        )
-                        if not chat:
-                            continue
-                        self._process_update(chat, message, change["value"])
-                    for status_info in change["value"].get("statuses", []):
-                        chat_id = gateway._get_channel_id(status_info["recipient_id"])
-                        if status_info.get("status", "") != "failed" or not chat_id:
-                            continue
-                        self._process_update_status(chat_id, status_info)
+        if not update:
+            return
+        for entry in update.get("entry", []):
+            for change in entry.get("changes", []):
+                field = change.get("field")
+                if field == "messages":
+                    self._receive_messages(gateway, change.get("value", {}))
+                elif field == "smb_message_echoes":
+                    self._receive_message_echoes(gateway, change.get("value", {}))
+
+    def _receive_messages(self, gateway, value):
+        for message in value.get("messages", []):
+            chat = self._get_channel(gateway, message["from"], value, force_create=True)
+            if not chat:
+                continue
+            self._process_update(chat, message, value)
+        for status_info in value.get("statuses", []):
+            chat_id = gateway._get_channel_id(status_info["recipient_id"])
+            if status_info.get("status", "") != "failed" or not chat_id:
+                continue
+            self._process_update_status(chat_id, status_info)
+
+    def _receive_message_echoes(self, gateway, value):
+        """Process messages sent to the customer outside Odoo.
+
+        Meta pushes them on the ``smb_message_echoes`` field when the number is
+        also used from the WhatsApp Business app. On an echo, ``from`` is the
+        business number and ``to`` the customer one.
+        """
+        for message in value.get("message_echoes", []):
+            if self._get_gateway_notification(gateway, message["id"]):
+                # Echoes are also sent for messages we posted through the API,
+                # and Meta may redeliver the same webhook more than once.
+                continue
+            chat = self._get_channel(gateway, message["to"], value, force_create=True)
+            if not chat:
+                continue
+            self._process_echo(chat, message, value)
+
+    def _get_gateway_notification(self, gateway, gateway_message_id):
+        return (
+            self.env["mail.notification"]
+            .sudo()
+            .search(
+                [
+                    ("gateway_message_id", "=", gateway_message_id),
+                    ("gateway_channel_id.gateway_id", "=", gateway.id),
+                ],
+                limit=1,
+            )
+        )
+
+    def _get_echo_author(self, gateway, message, value):
+        # Meta does not tell which agent wrote from the WhatsApp Business app.
+        return gateway.company_id.partner_id
+
+    def _process_echo(self, chat, message, value):
+        chat.ensure_one()
+        body, attachments = self._get_message_content(chat, message)
+        if not body and not attachments:
+            return False
+        author = self._get_echo_author(chat.gateway_id, message, value)
+        # The message was already delivered by Meta, never send it back
+        new_message = (
+            chat.sudo()
+            .with_context(no_gateway_notification=True)
+            .message_post(
+                body=body,
+                author_id=author.id,
+                gateway_type="whatsapp",
+                date=datetime.fromtimestamp(int(message["timestamp"])),
+                subtype_xmlid="mail.mt_comment",
+                message_type="comment",
+                attachments=attachments,
+            )
+        )
+        self.env["mail.notification"].sudo().create(
+            {
+                "mail_message_id": new_message.id,
+                "gateway_channel_id": chat.id,
+                "notification_type": "gateway",
+                "gateway_type": "whatsapp",
+                "notification_status": "sent",
+                "gateway_message_id": message["id"],
+            }
+        )
+        self._post_process_message(new_message, chat)
+        return new_message
 
     def _process_update_status(self, chat_id, status_info):
         notification = (
@@ -104,8 +179,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
         # notify user that we have a failure
         notification.mail_message_id._notify_message_notification_update()
 
-    def _process_update(self, chat, message, value):
-        chat.ensure_one()
+    def _get_message_content(self, chat, message):
         body = ""
         attachments = []
         if message.get("text"):
@@ -162,6 +236,11 @@ class MailGatewayWhatsappService(models.AbstractModel):
             )
         if message.get("contacts"):
             pass
+        return body, attachments
+
+    def _process_update(self, chat, message, value):
+        chat.ensure_one()
+        body, attachments = self._get_message_content(chat, message)
         if len(body) > 0 or attachments:
             author = self._get_author(chat.gateway_id, value)
             if author._name == "mail.guest":
@@ -385,8 +464,16 @@ class MailGatewayWhatsappService(models.AbstractModel):
             "image/webp": "sticker",
         }
 
+    def _get_author_token(self, update):
+        for message in update.get("messages") or []:
+            return message.get("from")
+        for message in update.get("message_echoes") or []:
+            # On an echo we are the sender, the counterpart is the recipient
+            return message.get("to")
+        return False
+
     def _get_author(self, gateway, update):
-        author_id = update.get("messages")[0].get("from")
+        author_id = self._get_author_token(update)
         if author_id:
             gateway_partner = self.env["res.partner.gateway.channel"].search(
                 [
@@ -433,6 +520,13 @@ class MailGatewayWhatsappService(models.AbstractModel):
                     "gateway_id": gateway.id,
                     "gateway_token": str(author_id),
                 }
+        if update.get("message_echoes"):
+            # Echo payloads carry no contact profile
+            return {
+                "name": str(author_id),
+                "gateway_id": gateway.id,
+                "gateway_token": str(author_id),
+            }
 
     def _get_proxies(self):
         # This hook has been created in order to add a proxy if needed.

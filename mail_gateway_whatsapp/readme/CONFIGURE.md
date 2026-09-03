@@ -33,3 +33,12 @@ webhook. In order to make it you must follow this steps:
 - Create your webhook using your URL and put the Whatsapp Security Key
   as validation Key
 - Administer the Webhook and activate the messages webhook
+
+## Messages answered outside Odoo
+
+If the same phone number is also used from the WhatsApp Business app
+(coexistence mode), Meta pushes the messages your agents write there on a
+dedicated webhook field. Activate the `smb_message_echoes` webhook next to
+`messages` so those replies are also stored in the Odoo conversation.
+
+Echoes are never sent back to the customer, they are only recorded.
