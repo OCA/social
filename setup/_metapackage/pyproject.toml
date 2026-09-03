@@ -1,11 +1,12 @@
 [project]
 name = "odoo-addons-oca-social"
-version = "18.0.20260709.0"
+version = "18.0.20260903.0"
 dependencies = [
     "odoo-addon-fetchmail_thread_default==18.0.*",
     "odoo-addon-mail_activity_cancel_tracking==18.0.*",
     "odoo-addon-mail_activity_unlink_log==18.0.*",
     "odoo-addon-mail_gateway==18.0.*",
+    "odoo-addon-mail_gateway_instagram==18.0.*",
     "odoo-addon-mail_gateway_telegram==18.0.*",
     "odoo-addon-mail_gateway_telegram_standalone==18.0.*",
     "odoo-addon-mail_gateway_whatsapp==18.0.*",
