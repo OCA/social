@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialCommentDialog">
+        <!-- `footer="false"`: the default footer of the dialog is an `Ok`
+             button, and the `control+enter` hotkey of `Dialog` clicks the
+             first visible one. The composer publishes with that same
+             shortcut, so the comment was posted and the dialog closed. -->
+        <Dialog
+            size="'lg'"
+            contentClass="'o_social_comment_dialog'"
+            title="props.title"
+            footer="false"
+        >
+            <div class="o_social_comment_dialog_body">
+                <div class="pb-3 mb-2 border-bottom">
+                    <t
+                        t-call="social_media_base.postAccountHeader"
+                        t-call-context="renderingContext"
+                    />
+                    <t
+                        t-call="social_media_base.postAccountMessageImages"
+                        t-call-context="renderingContext"
+                    />
+                </div>
+
+                <Composer
+                    composer="state.thread.composer"
+                    placeholder="composerPlaceholder"
+                    autofocus="true"
+                    showFullComposer="false"
+                    className="'mt-2'"
+                    mode="'extended'"
+                    type="'comment'"
+                    allowUpload="commentAllowUpload"
+                />
+
+                <div
+                    t-if="comments.length > 0"
+                    class="o_social_comment_thread d-flex flex-column gap-3 pt-3"
+                >
+                    <SocialComment
+                        t-foreach="comments"
+                        t-as="comment"
+                        t-key="comment.id"
+                        socialComment="comment"
+                        post="record"
+                        replies="repliesOf(comment)"
+                    />
+                </div>
+                <div t-else="" class="text-muted fst-italic text-center py-4">
+                    There are no comments yet.
+                </div>
+            </div>
+        </Dialog>
+    </t>
+</templates>

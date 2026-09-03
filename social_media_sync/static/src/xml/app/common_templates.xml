@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <!-- The counters of the footer are base's; the two entries that talk to
+         the social media are not, so they are added here instead of being
+         drawn and left dead without this module. -->
+    <t
+        t-name="social_media_sync.postAccountFooter"
+        t-inherit="social_media_base.postAccountFooter"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//t[@t-call='social_media_base.campaignBadge']" position="after">
+            <div t-if="record.post_account_url.value" class="row pt-2">
+                <div class="d-flex justify-content-center">
+                    <hr class="my-2 w-95" />
+                </div>
+            </div>
+            <div t-if="record.post_account_url.value" class="row pt-2">
+                <div
+                    t-attf-class="d-flex justify-content-#{ record.notAvailableLike.includes(record.media_type.raw_value) ? 'end' : 'between'} align-items-center"
+                >
+                    <span
+                        class="fs-6 social-like-post"
+                        t-if="!record.notAvailableLike.includes(record.media_type.raw_value)"
+                    >
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" />
+                        Recommend
+                    </span>
+                    <span class="fs-6 social-post-comment">
+                        <i class="fa fa-comments" aria-hidden="true" />
+                        Comment
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>
