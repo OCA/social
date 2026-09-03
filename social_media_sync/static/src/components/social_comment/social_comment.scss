@@ -1,0 +1,12 @@
+// The comment reuses the layout classes of `mail`, so what is left here is
+// only what the chatter does not have to solve: the indentation of a reply
+// and the size of the images the social media returns.
+.o_social_comment_replies {
+    // The reply lines up under the body of its parent, the way the chatter
+    // aligns a message under its author.
+    padding-left: $o-mail-Message-sidebarWidth;
+}
+
+img.o_social_comment_image {
+    max-height: 200px;
+}

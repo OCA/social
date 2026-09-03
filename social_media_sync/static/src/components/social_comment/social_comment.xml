@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <!-- The comment borrows the layout of a chatter message: the classes come
+         from `mail`, the component does not. Nothing here instantiates
+         `mail.Message`, which only renders `mail.message` records. -->
+    <t t-name="social_media_base.SocialComment">
+        <div class="o-mail-Message o_social_comment position-relative">
+            <div class="o-mail-Message-core position-relative d-flex">
+                <div class="o-mail-Message-sidebar d-flex flex-shrink-0">
+                    <div
+                        class="o-mail-Message-avatarContainer position-relative bg-view"
+                    >
+                        <img
+                            class="o-mail-Message-avatar w-100 h-100 rounded"
+                            t-att-src="authorAvatarUrl"
+                            t-att-alt="authorName"
+                            loading="lazy"
+                        />
+                    </div>
+                </div>
+                <div class="w-100 o-min-width-0">
+
+                    <div
+                        class="o-mail-Message-header d-flex flex-wrap align-items-baseline mb-1 lh-1"
+                    >
+                        <span class="o-mail-Message-author">
+                            <strong class="me-1" t-esc="authorName" />
+                        </span>
+                        <small
+                            t-if="props.socialComment.published_time"
+                            class="o-mail-Message-date text-muted opacity-75 text-nowrap"
+                        >- <t t-esc="props.socialComment.published_time" /></small>
+                        <div
+                            t-if="canDeleteComment() and !props.isReply"
+                            class="ms-auto"
+                        >
+                            <Dropdown
+                                position="'bottom-end'"
+                                togglerClass="'btn btn-link btn-sm p-0 text-muted o-no-caret'"
+                            >
+                                <t t-set-slot="toggler">
+                                    <i class="fa fa-ellipsis-v" aria-hidden="true" />
+                                </t>
+                                <DropdownItem
+                                    onSelected.bind="onDeleteComment"
+                                >Delete</DropdownItem>
+                            </Dropdown>
+                        </div>
+                    </div>
+
+                    <div class="o-mail-Message-body position-relative text-break">
+                        <span class="text-prewrap" t-esc="props.socialComment.text" />
+                        <div
+                            t-if="props.socialComment.images_url.length"
+                            class="d-flex flex-wrap gap-2 mt-2"
+                        >
+                            <img
+                                t-foreach="props.socialComment.images_url"
+                                t-as="image_url"
+                                t-key="image_url_index"
+                                t-att-src="image_url"
+                                class="img-fluid rounded border o_social_comment_image"
+                                loading="lazy"
+                            />
+                        </div>
+                    </div>
+
+                    <!-- The actions stay visible instead of appearing on hover
+                         as `mail` does: the hover bar of core has no touch
+                         fallback, and there is no ActionSwiper here to give
+                         it one. -->
+                    <div
+                        class="o_social_comment_actions d-flex align-items-center gap-3 mt-1"
+                    >
+                        <button
+                            t-if="canLikeComment()"
+                            type="button"
+                            class="btn btn-link btn-sm p-0 text-muted"
+                            t-on-click="onLikeComment"
+                        >
+                            <i class="fa fa-thumbs-o-up me-1" aria-hidden="true" />
+                            Recommend
+                        </button>
+                        <button
+                            t-if="!props.isReply"
+                            type="button"
+                            class="btn btn-link btn-sm p-0 text-muted"
+                            t-att-class="{'fw-bold text-primary': isReplyTarget}"
+                            t-att-aria-pressed="isReplyTarget"
+                            t-on-click="onReplyComment"
+                        >
+                            <i class="fa fa-comments me-1" aria-hidden="true" />
+                            <t t-if="isReplyTarget">
+                                Replying
+                            </t>
+                            <t t-else="">
+                                Reply
+                            </t>
+                        </button>
+                        <button
+                            t-if="canExpandReplies"
+                            type="button"
+                            class="btn btn-link btn-sm p-0 text-muted"
+                            t-on-click="onToggleReplies"
+                        >
+                            <i
+                                t-attf-class="fa me-1 {{ state.loading ? 'fa-spinner fa-spin' : state.expanded ? 'fa-chevron-up' : 'fa-chevron-down' }}"
+                                aria-hidden="true"
+                            />
+                            <t t-if="state.expanded">
+                                Hide replies (<t t-esc="repliesCount" />)
+                            </t>
+                            <t t-else="">
+                                View replies
+                            </t>
+                        </button>
+                    </div>
+
+                    <div
+                        t-if="state.expanded"
+                        class="o_social_comment_replies mt-2 d-flex flex-column gap-2"
+                    >
+                        <SocialComment
+                            t-foreach="replies"
+                            t-as="reply"
+                            t-key="reply.id"
+                            socialComment="reply"
+                            post="props.post"
+                            isReply="true"
+                        />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </t>
+</templates>

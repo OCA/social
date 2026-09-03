@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="initial_sync_account_job" model="ir.cron">
+        <field name="name">Social: Initial sync of the new accounts</field>
+        <field name="model_id" ref="model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model._run_initial_sync()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">months</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">5</field>
+    </record>
+
+    <record id="full_resync_account_job" model="ir.cron">
+        <field name="name">Social: Full resync of the accounts</field>
+        <field name="model_id" ref="model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model._run_full_resync()</field>
+        <!-- The only pass that notices what was deleted on the social media,
+             and the most expensive one: it reads every publication of every
+             account, one call per page. It runs weekly because the ordinary
+             refresh covers everything else, and a deletion showing up a few
+             days late is cheaper than paying for this on every refresh. -->
+        <field name="interval_number">1</field>
+        <field name="interval_type">weeks</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">10</field>
+    </record>
+</odoo>

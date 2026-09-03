@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t
+        t-name="social_media_sync.SocialAccount"
+        t-inherit="social_media_base.SocialAccount"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//div[@t-if='state.accountsNeedingUpdate.length']"
+            position="before"
+        >
+            <!-- Same shape as the warning of base: the wrapper takes the
+                 whole row so the notice never shares it with the cards, and
+                 the notice itself is only as wide as its own text. -->
+            <div t-if="state.syncing" class="w-100 d-flex justify-content-center">
+                <div
+                    class="alert alert-info d-flex align-items-center w-auto my-1 py-2"
+                    role="alert"
+                >
+                    <span class="social-loader social-loader-muted me-2" />
+                    The posts of the account are being imported in the
+                    background, they will show up here as soon as they are
+                    ready.
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>
