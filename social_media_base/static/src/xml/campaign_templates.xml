@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.campaignBadge">
+        <t
+            t-set="campaignId"
+            t-value="Array.isArray(record.campaign_id?.raw_value) ? record.campaign_id.raw_value[0] : record.campaign_id?.raw_value"
+        />
+        <div
+            t-if="record.campaign_id?.value"
+            t-attf-class="#{campaignWrapperClass or 'row pt-2'}"
+        >
+            <div class="d-flex">
+                <a
+                    class="badge text-bg-info social-campaign-badge mw-100 text-truncate align-bottom"
+                    t-att-title="record.campaign_id.value"
+                    t-attf-href="/web#action=utm.utm_campaign_action&amp;id=#{campaignId}&amp;model=utm.campaign&amp;view_type=form"
+                    t-on-click.stop="() => {}"
+                >
+                    <i class="fa fa-bullhorn me-1" aria-hidden="true" />
+                    <t t-esc="record.campaign_id.value" />
+                </a>
+            </div>
+        </div>
+    </t>
+
+</templates>

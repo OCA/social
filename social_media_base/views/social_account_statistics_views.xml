@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_account_statistics_view_graph">
+        <field name="name">social.account.statistics.graph</field>
+        <field name="model">social.account.statistics</field>
+        <field name="arch" type="xml">
+            <!-- A graph draws one measure at a time, so the impressions are
+                 the one it opens on and the others are one click away in the
+                 measure selector. The pivot is where they are read together. -->
+            <graph type="line" sample="1">
+                <field name="date" interval="day" />
+                <field name="account_id" />
+                <field name="impression_count" type="measure" />
+            </graph>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_account_statistics_view_pivot">
+        <field name="name">social.account.statistics.pivot</field>
+        <field name="model">social.account.statistics</field>
+        <field name="arch" type="xml">
+            <pivot sample="1">
+                <field name="date" type="row" interval="day" />
+                <field name="account_id" type="col" />
+                <field name="impression_count" type="measure" />
+                <field name="click_count" type="measure" />
+                <field name="like_count" type="measure" />
+                <field name="comment_count" type="measure" />
+                <field name="share_count" type="measure" />
+                <field name="engagement" type="measure" />
+            </pivot>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_account_statistics_view_search">
+        <field name="name">social.account.statistics.search</field>
+        <field name="model">social.account.statistics</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="account_id" />
+                <field name="media_id" />
+                <field name="user_id" />
+                <filter
+                    string="My Accounts"
+                    name="my_accounts"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <separator />
+                <filter string="Date" name="filter_date" date="date" />
+                <separator />
+                <filter
+                    string="With Impressions"
+                    name="with_impressions"
+                    domain="[('impression_count', '&gt;', 0)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Accounts"
+                        name="group_by_account_id"
+                        domain="[]"
+                        context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        string="Social Media"
+                        name="group_by_media_id"
+                        domain="[]"
+                        context="{'group_by': 'media_id'}"
+                    />
+                    <filter
+                        string="Responsible"
+                        name="group_by_user"
+                        context="{'group_by': 'user_id'}"
+                    />
+                    <filter
+                        string="Date"
+                        name="group_by_date"
+                        context="{'group_by': 'date'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_account_statistics_action">
+        <field name="name">Statistics</field>
+        <field name="res_model">social.account.statistics</field>
+        <field name="view_mode">graph,pivot</field>
+        <field name="search_view_id" ref="social_account_statistics_view_search" />
+        <field name="domain">[]</field>
+        <!-- No ``search_default`` group by on purpose. A group by activated
+             from the search panel REPLACES the one of the arch instead of
+             adding to it (``graph_model.js`` ``_buildMetaData``), so a
+             default on the account alone would drop the date and draw the
+             accounts on the axis instead of the days. The grouping the view
+             opens on is the one its arch declares. -->
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No statistics yet
+            </p>
+            <p>
+                The figures are written by the automatic checks and by the
+                <b>Update statistics</b> button of an account. Only the social
+                media reporting figures by day have a history to draw.
+            </p>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_social_media_user,social.media user,model_social_media,social_media_base.group_social_media_user,1,0,0,0
+access_social_media_manager,social.media manager,model_social_media,social_media_base.group_social_media_manager,1,1,1,1
+access_social_account_user,social.account user,model_social_account,social_media_base.group_social_media_user,1,1,1,0
+access_social_account_manager,social.account manager,model_social_account,social_media_base.group_social_media_manager,1,1,1,1
+access_social_account_statistics_user,social.account.statistics user,model_social_account_statistics,social_media_base.group_social_media_user,1,0,0,0
+access_social_account_statistics_manager,social.account.statistics manager,model_social_account_statistics,social_media_base.group_social_media_manager,1,1,1,1
+access_social_post_user,social.post user,model_social_post,social_media_base.group_social_media_user,1,1,1,1
+access_social_post_manager,social.post manager,model_social_post,social_media_base.group_social_media_manager,1,1,1,1
+access_social_post_account_user,social.post.account user,model_social_post_account,social_media_base.group_social_media_user,1,1,1,1
+access_social_post_account_manager,social.post.account manager,model_social_post_account,social_media_base.group_social_media_manager,1,1,1,1
+access_wizard_social_account_user,wizard.social.account user,model_wizard_social_account,social_media_base.group_social_media_user,1,1,1,1
+access_wizard_social_account_manager,wizard.social.account manager,model_wizard_social_account,social_media_base.group_social_media_manager,1,1,1,1
+access_link_tracker_social_media_user,link.tracker social media user,link_tracker.model_link_tracker,social_media_base.group_social_media_user,1,1,1,0
+access_link_tracker_social_media_manager,link.tracker social media manager,link_tracker.model_link_tracker,social_media_base.group_social_media_manager,1,1,1,0

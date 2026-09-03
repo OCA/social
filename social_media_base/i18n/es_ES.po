@@ -1,0 +1,1615 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-14 18:36+0000\n"
+"PO-Revision-Date: 2026-08-10 16:20+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"%(name)s (%(mimetype)s) is not a video and cannot be added to the videos of "
+"the post."
+msgstr ""
+"%(name)s (%(mimetype)s) no es un vídeo y no se puede añadir a los vídeos de "
+"la publicación."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"%(post)s has no active account: restore the account before publishing it."
+msgstr ""
+"%(post)s no tiene ninguna cuenta activa: restaure la cuenta antes de "
+"publicarla."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"%(post)s: cannot be cancelled because it is published or in the process of "
+"being published."
+msgstr ""
+"%(post)s: no se puede cancelar porque está publicada o en proceso de "
+"publicación."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"%(posts)s cannot be modified because it is already published on "
+"%(accounts)s. Create a new post instead."
+msgstr ""
+"%(posts)s no se puede modificar porque ya está publicada en %(accounts)s. "
+"Cree una publicación nueva en su lugar."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__state
+msgid ""
+"'Deleted' means the publication no longer exists on the social media "
+"although it is kept in Odoo for history."
+msgstr ""
+"«Eliminada» significa que la publicación ya no existe en la red social, "
+"aunque se conserva en Odoo como histórico."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+msgid "<i class=\"fa fa-calendar me-1\" title=\"Date\" role=\"img\"/>"
+msgstr "<i class=\"fa fa-calendar me-1\" title=\"Fecha\" role=\"img\"/>"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
+msgid ""
+"<i class=\"fa fa-trash-o\" aria-hidden=\"true\"/>\n"
+"                                    Deleted on"
+msgstr ""
+"<i class=\"fa fa-trash-o\" aria-hidden=\"true\"/>\n"
+"                                    Eliminada el"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
+msgid ""
+"<i class=\"fa fa-video-camera\" aria-hidden=\"true\"/>\n"
+"                                    <span>Video</span>"
+msgstr ""
+"<i class=\"fa fa-video-camera\" aria-hidden=\"true\"/>\n"
+"                                    <span>Vídeo</span>"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_media_post_preview
+msgid "<span class=\"cursor-pointer show-more-message d-none\">see more</span>"
+msgstr "<span class=\"cursor-pointer show-more-message d-none\">ver más</span>"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__access_token
+msgid "Access Token"
+msgstr "Token de acceso"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__account_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__account_id
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__account_id
+msgid "Account"
+msgstr "Cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__account_remote_ref
+msgid "Account Remote Reference"
+msgstr "Referencia remota de la cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__account_url
+msgid "Account Url"
+msgstr "URL de la cuenta"
+#. module: social_media_base
+#: model:ir.actions.act_window,name:social_media_base.social_account_action
+#: model:ir.ui.menu,name:social_media_base.social_account_menu
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "Accounts"
+msgstr "Cuentas"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+msgid "Accounts:"
+msgstr "Cuentas:"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_needaction
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_needaction
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_needaction
+msgid "Action Needed"
+msgstr "Acción necesaria"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__active
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__active
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__active
+msgid "Active"
+msgstr "Activo"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_ids
+msgid "Activities"
+msgstr "Actividades"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_exception_decoration
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr "Decoración de la actividad de excepción"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_state
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_state
+msgid "Activity State"
+msgstr "Estado de la actividad"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_type_icon
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_type_icon
+msgid "Activity Type Icon"
+msgstr "Icono del tipo de actividad"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__actor_urn
+msgid "Actor Urn"
+msgstr "URN del actor"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
+#, python-format
+msgid "Add Post"
+msgstr "Añadir publicación"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
+#, python-format
+msgid "Add account"
+msgstr "Añadir cuenta"
+#. module: social_media_base
+#: model:res.groups,name:social_media_base.group_social_media_manager
+msgid "Administrator"
+msgstr "Administrador"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
+#: code:addons/social_media_base/static/src/js/app/social_post_account_mixin.esm.js:0
+#, python-format
+msgid "All Images"
+msgstr "Todas las imágenes"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_wizard_social_account__csrf_state_token
+msgid "Anti-CSRF state token used during the OAuth flow."
+msgstr "Token de estado anti-CSRF utilizado durante el flujo de OAuth."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__any_failed_post
+msgid "Any Failed Post"
+msgstr "Alguna publicación fallida"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Archive account"
+msgstr "Archivar cuenta"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Archived"
+msgstr "Archivado"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid ""
+"Archiving the account only from the system does not delete the account on "
+"the social media."
+msgstr ""
+"Archivar la cuenta solo en el sistema no elimina la cuenta en la red social."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid ""
+"Are you sure you want to archive the account? Please note that all data "
+"associated with this account will be archived."
+msgstr ""
+"¿Seguro que desea archivar la cuenta? Tenga en cuenta que se archivarán "
+"todos los datos asociados a esta cuenta."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
+msgid "Are you sure you want to delete this post?"
+msgstr "¿Seguro que desea eliminar esta publicación?"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.wizard_social_account_view_form
+msgid "Associate"
+msgstr "Asociar"
+#. module: social_media_base
+#: model:ir.model,name:social_media_base.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_media_view_kanban
+msgid "Associate account"
+msgstr "Asociar cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_attachment_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_attachment_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de archivos adjuntos"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__avatar_1920
+msgid "Avatar"
+msgstr "Avatar"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__avatar_1024
+msgid "Avatar 1024"
+msgstr "Avatar 1024"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__avatar_128
+msgid "Avatar 128"
+msgstr "Avatar 128"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__avatar_256
+msgid "Avatar 256"
+msgstr "Avatar 256"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__avatar_512
+msgid "Avatar 512"
+msgstr "Avatar 512"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__campaign_id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__campaign_id
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Campaign"
+msgstr "Campaña"
+#. module: social_media_base
+#: model:ir.ui.menu,name:social_media_base.utm_campaign_menu
+msgid "Campaigns"
+msgstr "Campañas"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__can_manage_account
+msgid "Can Manage Account"
+msgstr "Puede gestionar la cuenta"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_comment/social_comment.esm.js:0
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.wizard_social_account_view_form
+#, python-format
+msgid "Cancel"
+msgstr "Cancelar"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__state__cancelled
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Cancelled"
+msgstr "Cancelada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__click_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__click_count
+msgid "Click Count"
+msgstr "Número de clics"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_clicks
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+#, python-format
+msgid "Clicks"
+msgstr "Clics"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post__link_click_count
+msgid ""
+"Clicks Odoo registered on the tracked links of the publications of this "
+"post. Different from 'Clicks', which is the figure the social media report."
+msgstr ""
+"Clics que Odoo registró en los enlaces rastreados de las publicaciones de "
+"esta publicación. Distinto de «Clics», que es la cifra que reportan las "
+"redes sociales."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__link_click_count
+msgid ""
+"Clicks Odoo registered on the tracked links of this publication. Different "
+"from 'Clicks', which is the figure the social media reports for the "
+"publication itself."
+msgstr ""
+"Clics que Odoo registró en los enlaces rastreados de esta publicación. "
+"Distinto de «Clics», que es la cifra que la red social reporta para la "
+"publicación en sí."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_kanban
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+msgid "Clicks:"
+msgstr "Clics:"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+msgid "Close"
+msgstr "Cerrar"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__comment_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__comment_count
+msgid "Comment Count"
+msgstr "Número de comentarios"
+#. module: social_media_base
+#. odoo-javascript
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: code:addons/social_media_base/static/src/components/social_chart_account/social_chart_account.xml:0
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_comments
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+#, python-format
+msgid "Comments"
+msgstr "Comentarios"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__company_id
+msgid "Company"
+msgstr "Compañía"
+#. module: social_media_base
+#: model:ir.ui.menu,name:social_media_base.social_configuration_menu
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Configuration"
+msgstr "Configuración"
+#. module: social_media_base
+#: model_terms:ir.actions.act_window,help:social_media_base.social_post_account_action
+msgid ""
+"Connect a social account and publish your first post. Published\n"
+"                posts and their statistics will show up here."
+msgstr ""
+"Conecte una cuenta social y publique su primera publicación. Aquí\n"
+"                aparecerán las publicaciones y sus estadísticas."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__content_locked
+msgid "Content Locked"
+msgstr "Contenido bloqueado"
+#. module: social_media_base
+#: model_terms:ir.actions.act_window,help:social_media_base.social_post_action
+msgid "Create your first post"
+msgstr "Cree su primera publicación"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__create_uid
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__create_uid
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__create_uid
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__create_uid
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__create_uid
+msgid "Created by"
+msgstr "Creado por"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__create_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__create_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__create_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__create_date
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__create_date
+msgid "Created on"
+msgstr "Creado el"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__source_id
+msgid ""
+"Created when the publication is sent, so that every publication of the same "
+"post owns its own tracked links."
+msgstr ""
+"Se crea al enviar la publicación, para que cada publicación de la misma "
+"entrada tenga sus propios enlaces rastreados."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__csrf_state_token
+msgid "Csrf State Token"
+msgstr "Token de estado CSRF"
+#. module: social_media_base
+#: model:ir.actions.act_window,name:social_media_base.social_post_account_action
+#: model:ir.ui.menu,name:social_media_base.social_dashboard_menu
+msgid "Dashboard"
+msgstr "Tablero"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__effective_date
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+msgid "Date"
+msgstr "Fecha"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post__send_post_date
+msgid ""
+"Date the post is sent to the social media. Switching to 'Schedule' proposes "
+"one hour from now, and it can be changed."
+msgstr ""
+"Fecha en la que la publicación se envía a la red social. Al cambiar a "
+"«Programar» se propone dentro de una hora, y se puede modificar."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Delete permanently"
+msgstr "Eliminar definitivamente"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
+msgid "Delete post"
+msgstr "Eliminar publicación"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Delete the account and its publication history from Odoo."
+msgstr "Elimina de Odoo la cuenta y su histórico de publicaciones."
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post_account__state__deleted
+msgid "Deleted"
+msgstr "Eliminada"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_media__utm_medium_id
+msgid ""
+"Delivery method reported to the marketing campaigns for the links published "
+"on this social media. The connector module of each social media provides a "
+"default one."
+msgstr ""
+"Método de entrega que se reporta a las campañas de marketing para los "
+"enlaces publicados en esta red social. El módulo conector de cada red social "
+"proporciona uno por defecto."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__description
+msgid "Description"
+msgstr "Descripción"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__display_name
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__display_name
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__display_name
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__display_name
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__state__draft
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Draft"
+msgstr "Borrador"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__engagement
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_engagement
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__engagement
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+#, python-format
+msgid "Engagement"
+msgstr "Interacción"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_kanban
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+msgid "Engagement:"
+msgstr "Interacción:"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid "Error posting on [%(media)s]: %(error)s"
+msgstr "Error al publicar en [%(media)s]: %(error)s"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__expire_access_token_date
+msgid "Expire Access Token"
+msgstr "Caducidad del token de acceso"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post_account__state__failed
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "Failed"
+msgstr "Fallida"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__failed_description
+msgid "Failed Description"
+msgstr "Descripción del fallo"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_follower_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_follower_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_partner_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_partner_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (contactos)"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__activity_type_icon
+#: model:ir.model.fields,help:social_media_base.field_social_post__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr "Icono de Font Awesome, por ejemplo fa-tasks"
+#. module: social_media_base
+#: model_terms:ir.actions.act_window,help:social_media_base.social_account_action
+msgid ""
+"Go to Configuration &gt; Social Media and use\n"
+"                <b>Associate account</b> to link your LinkedIn or X account."
+msgstr ""
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
+#, python-format
+msgid "Go to account"
+msgstr "Ir a la cuenta"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Group By"
+msgstr "Agrupar por"
+#. module: social_media_base
+#: model:ir.model,name:social_media_base.model_ir_http
+msgid "HTTP Routing"
+msgstr "Enrutamiento HTTP"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__has_message
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__has_message
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__has_message
+msgid "Has Message"
+msgstr "Tiene un mensaje"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__has_video
+msgid "Has Video"
+msgstr "Tiene vídeo"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__hide_post
+msgid "Hide Post"
+msgstr "Ocultar publicación"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__id
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__id
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__id
+msgid "ID"
+msgstr "ID"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_exception_icon
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_exception_icon
+msgid "Icon"
+msgstr "Icono"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__activity_exception_icon
+#: model:ir.model.fields,help:social_media_base.field_social_post__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr "Icono para indicar una actividad de excepción."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__remote_ref
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__account_remote_ref
+msgid ""
+"Identifier of this account on the social media. It is set by the connector "
+"module of each social media."
+msgstr ""
+"Identificador de esta cuenta en la red social. Lo establece el módulo "
+"conector de cada red social."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__remote_ref
+msgid ""
+"Identifier of this publication on the social media. It is set by the "
+"connector module of each social media."
+msgstr ""
+"Identificador de esta publicación en la red social. Lo establece el módulo "
+"conector de cada red social."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__message_needaction
+#: model:ir.model.fields,help:social_media_base.field_social_post__message_needaction
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__message_has_error
+#: model:ir.model.fields,help:social_media_base.field_social_post__message_has_error
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__image_1920
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__image
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__image_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__image_ids
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__image
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_kanban
+msgid "Image"
+msgstr "Imagen"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__image_1024
+msgid "Image 1024"
+msgstr "Imagen 1024"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__image_128
+msgid "Image 128"
+msgstr "Imagen 128"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__image_256
+msgid "Image 256"
+msgstr "Imagen 256"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__image_512
+msgid "Image 512"
+msgstr "Imagen 512"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__image_urls
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__image_urls
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_mixin__image_urls
+msgid "Image Urls"
+msgstr "URL de las imágenes"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+msgid "Images"
+msgstr "Imágenes"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_impression
+msgid "Impression"
+msgstr "Impresión"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__impression_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__impression_count
+msgid "Impression Count"
+msgstr "Número de impresiones"
+#. module: social_media_base
+#. odoo-javascript
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: code:addons/social_media_base/static/src/components/social_chart_account/social_chart_account.xml:0
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+#, python-format
+msgid "Impressions"
+msgstr "Impresiones"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__has_video
+msgid "Indicates that the published post has at least one video attached."
+msgstr "Indica que la publicación tiene al menos un vídeo adjunto."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_interactions
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+msgid "Interactions"
+msgstr "Interacciones"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__interactions_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__interactions_count
+msgid "Interactions Count"
+msgstr "Número de interacciones"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__interactions_count
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__interactions_count
+msgid "Interactions with the publication: clicks, likes, comments and shares."
+msgstr ""
+"Interacciones con la publicación: clics, me gusta, comentarios y "
+"comparticiones."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_kanban
+msgid "Interactions:"
+msgstr "Interacciones:"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_is_follower
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_is_follower
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__last_update_account
+msgid "Last Update Account"
+msgstr "Última actualización de la cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__write_uid
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__write_uid
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__write_uid
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__write_uid
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__write_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__write_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__write_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__write_date
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__like_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__like_count
+msgid "Like Count"
+msgstr "Número de me gusta"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_likes
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+#, python-format
+msgid "Likes"
+msgstr "Me gusta"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_model.esm.js:0
+#, python-format
+msgid "Likes are not available for this social media."
+msgstr "Los me gusta no están disponibles para esta red social."
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/fields/social_message_field.esm.js:0
+#, python-format
+msgid "Lines"
+msgstr "Líneas"
+#. module: social_media_base
+#: model:ir.model,name:social_media_base.model_link_tracker
+msgid "Link Tracker"
+msgstr "Rastreador de enlaces"
+#. module: social_media_base
+#: model:ir.model,name:social_media_base.model_link_tracker_click
+msgid "Link Tracker Click"
+msgstr "Clic del rastreador de enlaces"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "LinkedIn refused the post"
+msgstr "LinkedIn ha rechazado la publicación"
+#. module: social_media_base
+#: model:ir.module.category,description:social_media_base.module_category_social_media
+msgid "Manage social media accounts and posts."
+msgstr "Gestione las cuentas y las publicaciones de redes sociales."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+#, python-format
+msgid "Marketing Campaigns"
+msgstr "Campañas de marketing"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__campaign_id
+msgid ""
+"Marketing campaign of the parent post. A publication imported from the "
+"social media has no parent post, so its campaign is written on the imported "
+"publication itself."
+msgstr ""
+"Campaña de marketing de la entrada padre. Una publicación importada de la "
+"red social no tiene entrada padre, así que su campaña se escribe en la "
+"propia publicación importada."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__media_id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__media_id
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__media_id
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_search
+msgid "Media"
+msgstr "Red social"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__media_type
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__media_type
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__media_type
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__media_type
+msgid "Media Type"
+msgstr "Tipo de red social"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__medium_id
+msgid "Medium"
+msgstr "Medio"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+msgid "Message"
+msgstr "Mensaje"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_has_error
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_has_error
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega del mensaje"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_info
+msgid "Message Info"
+msgstr "Información del mensaje"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_search
+msgid "My Accounts"
+msgstr "Mis cuentas"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__my_activity_date_deadline
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr "Fecha límite de mi actividad"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "My Posts"
+msgstr "Mis publicaciones"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "My Publications"
+msgstr "Mis publicaciones"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__name
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__name
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__author
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Name"
+msgstr "Nombre"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__need_update
+msgid "Need Update"
+msgstr "Necesita actualización"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
+#: model:ir.actions.act_window,name:social_media_base.social_post_action_from_campaign
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+#, python-format
+msgid "New Post"
+msgstr "Nueva publicación"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_image_dialog/social_image_dialog.xml:0
+#, python-format
+msgid "Next"
+msgstr "Siguiente"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_date_deadline
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr "Fecha límite de la siguiente actividad"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_summary
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_summary
+msgid "Next Activity Summary"
+msgstr "Resumen de la siguiente actividad"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_type_id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_type_id
+msgid "Next Activity Type"
+msgstr "Tipo de la siguiente actividad"
+#. module: social_media_base
+#: model_terms:ir.actions.act_window,help:social_media_base.social_account_action
+msgid "No account connected yet"
+msgstr "Todavía no hay ninguna cuenta conectada"
+#. module: social_media_base
+#: model_terms:ir.actions.act_window,help:social_media_base.social_post_account_action
+msgid "No posts published yet"
+msgstr "Todavía no hay ninguna publicación publicada"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid "No preview available"
+msgstr "No hay vista previa disponible"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__send_post__now
+msgid "Now"
+msgstr "Ahora"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_needaction_counter
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_needaction_counter
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_has_error_counter
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_has_error_counter
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/fields/social_message_field.esm.js:0
+#, python-format
+msgid "Number of lines shown before the message is cut."
+msgstr "Número de líneas que se muestran antes de cortar el mensaje."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__message_needaction_counter
+#: model:ir.model.fields,help:social_media_base.field_social_post__message_needaction_counter
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren una acción"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__message_has_error_counter
+#: model:ir.model.fields,help:social_media_base.field_social_post__message_has_error_counter
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#, python-format
+msgid "Only a social media administrator can delete an account."
+msgstr "Solo un administrador de redes sociales puede eliminar una cuenta."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_wizard_social_account__update_token
+msgid ""
+"Only enable this field if the access token has expired and has to be "
+"requested again"
+msgstr ""
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_wizard_social_account__update_keys
+msgid "Only enable this field if your credentials have changed"
+msgstr "Active este campo solo si sus credenciales han cambiado"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+msgid "Open publication"
+msgstr "Abrir publicación"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__state__partially_published
+msgid "Partially Published"
+msgstr "Publicada parcialmente"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__state__planned
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Planned"
+msgstr "Planificada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__post_id
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+msgid "Post"
+msgstr "Publicación"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__post_account_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__post_account_ids
+msgid "Post Account"
+msgstr "Publicación por cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__post_account_url
+msgid "Post Account Url"
+msgstr "URL de la publicación en la cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__post_count
+msgid "Post Count"
+msgstr "Número de publicaciones"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__post_preview
+msgid "Post Preview"
+msgstr "Vista previa de la publicación"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post_account.py:0
+#, python-format
+msgid "Post deleted [%(account)s]"
+msgstr "Publicación eliminada [%(account)s]"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid "Post on %(posts)s"
+msgstr "Publicar en %(posts)s"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post_account__state__posted
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "Posted"
+msgstr "Publicada"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: model:ir.actions.act_window,name:social_media_base.social_post_action
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__post_ids
+#: model:ir.ui.menu,name:social_media_base.social_post_menu
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_kanban
+#, python-format
+msgid "Posts"
+msgstr "Publicaciones"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__post_ids
+msgid ""
+"Posts that target this account. Inverse of the accounts of a post, it is "
+"what keeps the counter up to date."
+msgstr ""
+"Publicaciones dirigidas a esta cuenta. Es el inverso de las cuentas de una "
+"publicación y lo que mantiene el contador actualizado."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+msgid "Press the publish button to retry sending failed posts."
+msgstr ""
+"Pulse el botón de publicar para reintentar el envío de las publicaciones "
+"fallidas."
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_image_dialog/social_image_dialog.xml:0
+#, python-format
+msgid "Prev"
+msgstr "Anterior"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__effective_date
+msgid ""
+"Publication date, or the date the post is scheduled for while it is not "
+"published yet."
+msgstr ""
+"Fecha de publicación o, mientras no esté publicada, la fecha para la que "
+"está programada."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+msgid "Publication image"
+msgstr "Imagen de la publicación"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_link_tracker_click__social_post_account_id
+msgid "Publication the clicked link was published in."
+msgstr "Publicación en la que se publicó el enlace en el que se hizo clic."
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_link_tracker__social_post_account_id
+msgid "Publication the tracked link was published in."
+msgstr "Publicación en la que se publicó el enlace rastreado."
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__state__published
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Published"
+msgstr "Publicada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__published_date
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__published_date
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Published Date"
+msgstr "Fecha de publicación"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__state__publishing
+msgid "Publishing"
+msgstr "Publicando"
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post_account__state__ready
+msgid "Ready"
+msgstr "Preparada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__refresh_access_token
+msgid "Refresh Access Token"
+msgstr "Token de actualización del acceso"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__remote_ref
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__remote_ref
+msgid "Remote Reference"
+msgstr "Referencia remota"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__user_id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__user_id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__user_id
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Responsible"
+msgstr "Responsable"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_user_id
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_user_id
+msgid "Responsible User"
+msgstr "Usuario responsable"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Restore the account and everything archived with it."
+msgstr "Restaura la cuenta y todo lo que se archivó con ella."
+#. module: social_media_base
+#: model:ir.model.fields.selection,name:social_media_base.selection__social_post__send_post__schedule
+msgid "Schedule"
+msgstr "Programar"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Schedule Date"
+msgstr "Fecha programada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__send_post_date
+msgid "Schedule date"
+msgstr "Fecha programada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__is_scheduled
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "Scheduled"
+msgstr "Programada"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__send_post
+msgid "Send Post"
+msgstr "Enviar publicación"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__share_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__share_count
+msgid "Share Count"
+msgstr "Número de comparticiones"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__count_post_shares
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+#, python-format
+msgid "Shares"
+msgstr "Comparticiones"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
+#: model:ir.actions.act_window,name:social_media_base.social_media_action
+#: model:ir.model,name:social_media_base.model_social_media
+#: model:ir.module.category,name:social_media_base.module_category_social_media
+#: model:ir.ui.menu,name:social_media_base.social_media_menu
+#: model:ir.ui.menu,name:social_media_base.social_root_menu
+#: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
+#, python-format
+msgid "Social Media"
+msgstr "Redes sociales"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_media_base_mixin.py:0
+#, python-format
+msgid ""
+"Social Media %(social_media)s <b> [%(account)s] </b> <br><br> %(message)s"
+msgstr ""
+"Red social %(social_media)s <b> [%(account)s] </b> <br><br> %(message)s"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_click_count
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+msgid "Social Media Clicks"
+msgstr "Clics en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_comment_count
+msgid "Social Media Comments"
+msgstr "Comentarios en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_engagement
+msgid "Social Media Engagement"
+msgstr "Interacción en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_impression_count
+msgid "Social Media Impressions"
+msgstr "Impresiones en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_interactions_count
+msgid "Social Media Interactions"
+msgstr "Interacciones en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_like_count
+msgid "Social Media Likes"
+msgstr "Me gusta en redes sociales"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/utm_campaign.py:0
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_post_ids
+#, python-format
+msgid "Social Media Posts"
+msgstr "Publicaciones de redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_post_count
+msgid "Social Media Posts Count"
+msgstr "Número de publicaciones de redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_link_tracker__social_post_account_id
+#: model:ir.model.fields,field_description:social_media_base.field_link_tracker_click__social_post_account_id
+msgid "Social Media Publication"
+msgstr "Publicación en red social"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_post_account_ids
+msgid "Social Media Publications"
+msgstr "Publicaciones en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_share_count
+msgid "Social Media Shares"
+msgstr "Compartidos en redes sociales"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_link_click_count
+msgid "Social Media Tracked Clicks"
+msgstr "Clics rastreados en redes sociales"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/fields/social_message_field.esm.js:0
+#, python-format
+msgid "Social Message"
+msgstr "Mensaje social"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/fields/social_post_preview_field.esm.js:0
+#, python-format
+msgid "Social Post Preview"
+msgstr "Vista previa de la publicación"
+#. module: social_media_base
+#: model:ir.actions.server,name:social_media_base.send_post_schedule_job_ir_actions_server
+msgid "Social Post: Send post schedule"
+msgstr "Publicación social: enviar las publicaciones programadas"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Social media"
+msgstr "Red social"
+#. module: social_media_base
+#: model:ir.actions.server,name:social_media_base.webhook_schedule_job_ir_actions_server
+msgid "Social: Checking social media updates"
+msgstr "Social: comprobación de novedades en las redes sociales"
+#. module: social_media_base
+#: model:ir.actions.server,name:social_media_base.full_resync_account_job_ir_actions_server
+msgid "Social: Full resync of the accounts"
+msgstr "Social: resincronización completa de las cuentas"
+#. module: social_media_base
+#: model:ir.actions.server,name:social_media_base.initial_sync_account_job_ir_actions_server
+msgid "Social: Initial sync of the new accounts"
+msgstr "Social: sincronización inicial de las cuentas nuevas"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__source_id
+msgid "Source"
+msgstr "Origen"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__state
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__state
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "State"
+msgstr "Estado"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: code:addons/social_media_base/models/social_post_account.py:0
+#: model:ir.ui.menu,name:social_media_base.social_statistics_menu
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
+#, python-format
+msgid "Statistics"
+msgstr "Estadísticas"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__activity_state
+#: model:ir.model.fields,help:social_media_base.field_social_post__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+"Estado basado en las actividades\n"
+"Vencida: la fecha límite ya ha pasado\n"
+"Hoy: la fecha de la actividad es hoy\n"
+"Planificada: actividades futuras."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/utm_medium.py:0
+#, python-format
+msgid ""
+"The UTM medium '%s' cannot be deleted as it is the one reported for the "
+"publications of a social media that declares no medium of its own."
+msgstr ""
+"No se puede eliminar el medio UTM «%s» porque es el que se reporta para las "
+"publicaciones de una red social que no declara un medio propio."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "The access token expired"
+msgstr "El token de acceso ha caducado"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "The access token was revoked"
+msgstr "El token de acceso ha sido revocado"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#, python-format
+msgid "The account %(account)s belongs to another company."
+msgstr "La cuenta %(account)s pertenece a otra compañía."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/wizards/wizard_social_account.py:0
+#, python-format
+msgid "The account %(account)s could not be updated: %(error)s"
+msgstr "No se ha podido actualizar la cuenta %(account)s: %(error)s"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#, python-format
+msgid ""
+"The account %(account)s is already associated with another user. Ask its "
+"responsible user or a social media administrator to relink it."
+msgstr ""
+"La cuenta %(account)s ya está asociada a otro usuario. Pida a su usuario "
+"responsable o a un administrador de redes sociales que la vuelva a vincular."
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
+#, python-format
+msgid "The data was updated successfully."
+msgstr "Los datos se han actualizado correctamente."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "The message is too long"
+msgstr "El mensaje es demasiado largo"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"The post %(posts)s cannot be deleted because it is still published on "
+"%(accounts)s. Delete the publication from the dashboard, which removes it "
+"from the social media as well, or archive the post to keep its history."
+msgstr ""
+"La publicación %(posts)s no se puede eliminar porque sigue publicada en "
+"%(accounts)s. Elimine la publicación desde el tablero, lo que también la "
+"quita de la red social, o archívela para conservar su histórico."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "The post could not be sent"
+msgstr "No se ha podido enviar la publicación"
+#. module: social_media_base
+#. odoo-javascript
+#. odoo-python
+#: code:addons/social_media_base/models/social_post_account.py:0
+#: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_record.esm.js:0
+#, python-format
+msgid "The post does not exist or has been deleted."
+msgstr "La publicación no existe o ha sido eliminada."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "The post is locked"
+msgstr "La publicación está bloqueada"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post_account__is_scheduled
+msgid "The post of this publication is scheduled and not published yet."
+msgstr ""
+"La publicación de la que procede está programada y todavía no se ha "
+"publicado."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The post was deleted on the social media, but its Odoo record could not be "
+"removed: %(error)s"
+msgstr ""
+"La publicación se ha eliminado en la red social, pero no se ha podido "
+"eliminar su registro en Odoo: %(error)s"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"The post was published on %(published)s but failed on %(failed)s. It is not "
+"sent again automatically: solve the problem and press Post to retry the "
+"accounts that failed."
+msgstr ""
+"La publicación se ha publicado en %(published)s pero ha fallado en "
+"%(failed)s. No se vuelve a enviar automáticamente: resuelva el problema y "
+"pulse Publicar para reintentar las cuentas que han fallado."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"The post was set back to draft: its scheduled date (%(date)s) had already "
+"passed when it was unarchived. Reschedule it to publish it."
+msgstr ""
+"La publicación ha vuelto a borrador: su fecha programada (%(date)s) ya había "
+"pasado cuando se desarchivó. Vuelva a programarla para publicarla."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post_account.py:0
+#, python-format
+msgid "The post was successfully deleted."
+msgstr "La publicación se ha eliminado correctamente."
+#. module: social_media_base
+#. odoo-javascript
+#. odoo-python
+#: code:addons/social_media_base/models/social_account.py:0
+#: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
+#, python-format
+msgid "The posts of the account were updated."
+msgstr "Se han actualizado las publicaciones de la cuenta."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"The schedule date of %(post)s (%(date)s) is already past. Choose a date in "
+"the future to plan the post."
+msgstr ""
+"La fecha programada de %(post)s (%(date)s) ya ha pasado. Elija una fecha "
+"futura para planificar la publicación."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"The scheduled publication failed and the post was set back to draft: "
+"%(error)s"
+msgstr "La publicación programada ha fallado y ha vuelto a borrador: %(error)s"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post.py:0
+#, python-format
+msgid ""
+"The scheduled publication failed, the post stays planned and will be "
+"retried: %(error)s"
+msgstr ""
+"La publicación programada ha fallado; sigue planificada y se reintentará: "
+"%(error)s"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#, python-format
+msgid "The token could not be renewed"
+msgstr "No se ha podido renovar el token"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/tests/test_social_account_base.py:0
+#, python-format
+msgid "The token was revoked"
+msgstr "El token ha sido revocado"
+#. module: social_media_base
+#: model:res.groups,comment:social_media_base.group_social_media_user
+msgid ""
+"The user is only able to see the social media accounts and posts he is "
+"responsible for."
+msgstr ""
+"El usuario solo puede ver las cuentas y publicaciones de redes sociales de "
+"las que es responsable."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid ""
+"This permanently deletes the account and its publication history in Odoo: "
+"posts, metrics and comments. Nothing is deleted from the social media. This "
+"cannot be undone."
+msgstr ""
+"Esto elimina definitivamente la cuenta y su histórico de publicaciones en "
+"Odoo: publicaciones, métricas y comentarios. No se elimina nada de la red "
+"social. Esta acción no se puede deshacer."
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
+msgid "This publication no longer exists on the social media"
+msgstr "Esta publicación ya no existe en la red social"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__impression_count
+msgid ""
+"Total number of views, which may include multiple views by the same user."
+msgstr ""
+"Número total de visualizaciones, que puede incluir varias visualizaciones "
+"del mismo usuario."
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__link_click_count
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__link_click_count
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form_statistics
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_tree
+msgid "Tracked Clicks"
+msgstr "Clics rastreados"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_account__activity_exception_decoration
+#: model:ir.model.fields,help:social_media_base.field_social_post__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr "Tipo de actividad de excepción en el registro."
+#. module: social_media_base
+#: model:ir.model,name:social_media_base.model_utm_campaign
+msgid "UTM Campaign"
+msgstr "Campaña UTM"
+#. module: social_media_base
+#: model:ir.model,name:social_media_base.model_utm_medium
+#: model:ir.model.fields,field_description:social_media_base.field_social_media__utm_medium_id
+msgid "UTM Medium"
+msgstr "Medio UTM"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
+msgid "Unarchive"
+msgstr "Desarchivar"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Unarchive account"
+msgstr "Desarchivar cuenta"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
+#: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
+#: model_terms:ir.ui.view,arch_db:social_media_base.wizard_social_account_view_form
+#, python-format
+msgid "Update"
+msgstr "Actualizar"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__update_keys
+msgid "Update Keys"
+msgstr "Actualizar claves"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_wizard_social_account__update_token
+msgid "Update Token"
+msgstr "Actualizar token"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
+msgid "Update account"
+msgstr "Actualizar cuenta"
+#. module: social_media_base
+#: model:ir.model.fields,help:social_media_base.field_social_post__user_id
+msgid ""
+"User this post belongs to. Only the responsible user and the social media "
+"administrators can see it."
+msgstr ""
+"Usuario al que pertenece esta publicación. Solo el usuario responsable y los "
+"administradores de redes sociales pueden verla."
+#. module: social_media_base
+#: model:res.groups,name:social_media_base.group_social_media_user
+msgid "User: Own Accounts"
+msgstr "Usuario: cuentas propias"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__username
+msgid "Username"
+msgstr "Nombre de usuario"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_account__utm_campaign_count
+msgid "Utm Campaign Count"
+msgstr "Número de campañas UTM"
+#. module: social_media_base
+#: model:ir.model.fields,field_description:social_media_base.field_social_post__video_ids
+#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__video_ids
+msgid "Video"
+msgstr "Vídeo"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_kanban
+msgid "Video ("
+msgstr "Vídeo ("
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
+msgid "Videos"
+msgstr "Vídeos"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "With Campaign"
+msgstr "Con campaña"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "With Clicks"
+msgstr "Con clics"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "With Comments"
+msgstr "Con comentarios"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "With Impressions"
+msgstr "Con impresiones"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "With Likes"
+msgstr "Con me gusta"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+msgid "With Shares"
+msgstr "Con comparticiones"
+#. module: social_media_base
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_search
+#: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_search
+msgid "Without Campaign"
+msgstr "Sin campaña"
+#. module: social_media_base
+#: model_terms:ir.actions.act_window,help:social_media_base.social_post_action
+msgid ""
+"Write once and publish it to every connected social account.\n"
+"                You can schedule it for later or send it right away."
+msgstr ""
+"Escriba una vez y publique en todas las cuentas sociales conectadas.\n"
+"                Puede programarlo para más tarde o enviarlo ahora mismo."
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_comment/social_comment.esm.js:0
+#: code:addons/social_media_base/static/src/js/app/social_post_account_mixin.esm.js:0
+#, python-format
+msgid "You have liked the post."
+msgstr "Le ha dado me gusta a la publicación."
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post_account.py:0
+#, python-format
+msgid "[%(media)s] %(account)s"
+msgstr "[%(media)s] %(account)s"
+#. module: social_media_base
+#. odoo-python
+#: code:addons/social_media_base/models/social_post_account.py:0
+#, python-format
+msgid "[%(media)s] %(account)s - %(content)s"
+msgstr "[%(media)s] %(account)s - %(content)s"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/xml/app/common_templates.xml:0
+#, python-format
+msgid "comment"
+msgstr "comentario"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/xml/app/common_templates.xml:0
+#, python-format
+msgid "comments"
+msgstr "comentarios"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_message/social_message.esm.js:0
+#, python-format
+msgid "see less"
+msgstr "ver menos"
+#. module: social_media_base
+#. odoo-javascript
+#: code:addons/social_media_base/static/src/components/social_message/social_message.esm.js:0
+#, python-format
+msgid "see more"
+msgstr "ver más"
