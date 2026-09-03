@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.postAccountFooter">
+        <div class="row pt-2" name="likes">
+            <div class="d-flex justify-content-between">
+                <div>
+                    <i class="fa fa-thumbs-o-up" aria-hidden="true" />
+                    <span class="mx-2" t-esc="record.like_count.value" />
+                </div>
+                <div>
+                    <span class="mx-1" t-esc="record.comment_count.value" />
+                    <span t-if="record.comment_count.raw_value === 1">comment</span>
+                    <span t-else="">comments</span>
+                </div>
+            </div>
+        </div>
+        <t t-call="social_media_base.campaignBadge" />
+    </t>
+
+    <t t-name="social_media_base.postAccountHeader">
+        <div class="d-flex align-items-center gap-2">
+            <div class="flex-shrink-0">
+                <t
+                    t-if="record?.account_id"
+                    t-set="account_id"
+                    t-value="record.account_id.raw_value"
+                />
+                <t
+                    t-elif="state?.account_id"
+                    t-set="account_id"
+                    t-value="state.account_id.id"
+                />
+                <img
+                    t-att-alt="record?.author.raw_value"
+                    class="o_object_fit_cover rounded"
+                    width="40"
+                    height="40"
+                    loading="lazy"
+                    t-attf-src="/web/image/social.account/{{account_id}}/image_128"
+                />
+            </div>
+            <div class="flex-grow-1 text-truncate">
+                <span t-esc="record.author.raw_value" />
+            </div>
+            <div class="flex-shrink-0 text-nowrap">
+                <t t-if="record.published_date.raw_value and luxon">
+                    <span
+                        t-esc='luxon.DateTime.fromISO(record.published_date.raw_value).toFormat("dd/MM/yyyy")'
+                    />
+                </t>
+            </div>
+        </div>
+    </t>
+
+    <t t-name="social_media_base.Images">
+        <t t-set="countShowImage" t-value="record.countShowImage" />
+        <t t-if="images">
+            <div class="d-flex justify-content-center flex-wrap gap-3 h-75">
+                <t t-foreach="images.slice(0,countShowImage)" t-as="img" t-key="img">
+                    <img t-att-src="img" class="img-fluid img-posts" loading="lazy" />
+                </t>
+            </div>
+        </t>
+    </t>
+
+    <t t-name="social_media_base.postAccountImages">
+        <div
+            t-if="images.length > record.countShowImage"
+            class="row h-auto social-all-images"
+        >
+            <span class="btn btn-md active" role="button">
+                                        +                <t
+                    t-esc="images.length - record.countShowImage"
+                />
+            </span>
+        </div>
+
+        <div class="row pt-2 h-auto">
+            <div
+                t-attf-class="col-12 social-post-images  cursor-pointer
+                                    #{images.length > record.countShowImage ? 'social-all-images' : ''}"
+            >
+                <t t-call="social_media_base.Images" />
+            </div>
+        </div>
+    </t>
+
+    <t t-name="social_media_base.postDialogAccountImages">
+        <div
+            t-on-click="onShowAllImages"
+            t-if="images.length > record.countShowImage"
+            class="row h-auto social-all-images"
+        >
+            <span class="btn btn-md active" role="button">
+                                        +                <t
+                    t-esc="images.length - record.countShowImage"
+                />
+            </span>
+        </div>
+
+        <div class="row pt-2 h-auto">
+            <div
+                t-on-click="onShowAllImages"
+                t-attf-class="col-12 social-post-images cursor-pointer"
+            >
+                <t t-call="social_media_base.Images" />
+            </div>
+        </div>
+    </t>
+
+    <t t-name="social_media_base.postAccountMessageImages">
+        <div class="row h-auto">
+            <div t-if="!isDialog" class="col-12">
+                <SocialMessage
+                    text="record.message.raw_value or ''"
+                    className="'social-text-justify'"
+                />
+            </div>
+            <div t-else="" class="col-12 social-text-justify">
+                <span class="text-prewrap" t-esc="record.message.raw_value" />
+            </div>
+        </div>
+
+        <t t-if="!isDialog" t-call="social_media_base.postAccountImages" />
+        <t t-if="isDialog" t-call="social_media_base.postDialogAccountImages" />
+
+
+    </t>
+
+</templates>

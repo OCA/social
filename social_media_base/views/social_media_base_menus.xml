@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        name="Social Media"
+        id="social_root_menu"
+        sequence="5"
+        web_icon="social_media_base,static/description/icon.png"
+        groups="social_media_base.group_social_media_user"
+    >
+        <menuitem
+            name="Dashboard"
+            id="social_dashboard_menu"
+            action="social_post_account_action"
+            sequence="1"
+            groups="social_media_base.group_social_media_user"
+        />
+        <menuitem
+            name="Statistics"
+            id="social_statistics_menu"
+            action="social_account_statistics_action"
+            sequence="2"
+            groups="social_media_base.group_social_media_user"
+        />
+        <menuitem
+            name="Posts"
+            id="social_post_menu"
+            sequence="3"
+            action="social_post_action"
+            groups="social_media_base.group_social_media_user"
+        />
+        <menuitem
+            name="Campaigns"
+            id="utm_campaign_menu"
+            action="utm.utm_campaign_action"
+            sequence="4"
+            groups="social_media_base.group_social_media_user"
+        />
+
+        <menuitem
+            name="Configuration"
+            id="social_configuration_menu"
+            sequence="100"
+            groups="social_media_base.group_social_media_user"
+        >
+            <menuitem
+                name="Accounts"
+                id="social_account_menu"
+                sequence="2"
+                action="social_account_action"
+                groups="social_media_base.group_social_media_user"
+            />
+            <menuitem
+                name="Social Media"
+                id="social_media_menu"
+                sequence="6"
+                action="social_media_action"
+                groups="social_media_base.group_social_media_user"
+            />
+        </menuitem>
+
+    </menuitem>
+
+</odoo>

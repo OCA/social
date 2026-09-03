@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialMessageField">
+        <SocialMessage text="message" lines="props.lines" />
+    </t>
+
+</templates>

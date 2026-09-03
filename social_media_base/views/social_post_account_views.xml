@@ -1,0 +1,541 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_post_account_view_kanban">
+        <field name="name">social.post.account.kanban</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <kanban
+                create="0"
+                edit="0"
+                delete="0"
+                quick_create="0"
+                js_class="social_kanban"
+                default_group_by="account_id"
+                group_create="false"
+                group_delete="false"
+                group_edit="false"
+                default_order="published_date desc"
+            >
+                <field name="message" />
+                <field name="published_date" />
+                <field name="image_urls" />
+                <field name="comment_count" />
+                <field name="like_count" />
+                <field name="post_account_url" />
+                <field name="author" />
+                <field name="media_type" />
+                <field name="account_id" />
+                <field name="has_video" />
+                <field name="campaign_id" />
+                <field name="state" />
+                <field name="remote_ref" />
+                <field name="account_remote_ref" />
+                <templates>
+                    <t t-name="kanban-menu">
+                        <div class="p-1">
+                            <a
+                                role="menuitem"
+                                type="object"
+                                name="action_open_statistics"
+                            >Statistics</a>
+                        </div>
+                        <div class="p-1">
+                            <a
+                                role="menuitem"
+                                type="object"
+                                confirm="Are you sure you want to delete this post?"
+                                name="action_delete_post_account"
+                            >Delete post</a>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div
+                            t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                        >
+                            <t t-set="isDashboard" t-value="true" />
+                            <t t-call="social_media_base.postAccountHeader" />
+                            <div
+                                t-if="record.state.raw_value == 'deleted'"
+                                class="pt-1"
+                            >
+                                <span
+                                    class="badge text-bg-danger"
+                                    title="This publication no longer exists on the social media"
+                                >
+                                    <i class="fa fa-trash-o" aria-hidden="true" />
+                                    Deleted on <t t-out="record.media_type.value" />
+                                </span>
+                            </div>
+
+                            <div class="oe_kanban_content">
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value)"
+                                />
+                                <t
+                                    t-call="social_media_base.postAccountMessageImages"
+                                />
+                                <div
+                                    t-if="record.has_video.raw_value"
+                                    class="d-flex align-items-center gap-2 pt-2"
+                                >
+                                    <i class="fa fa-video-camera" aria-hidden="true" />
+                                    <span>Video</span>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_footer">
+                                <t t-call="social_media_base.postAccountFooter" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_account_view_tree">
+        <field name="name">social.post.account.tree</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <!-- A publication mirrors the social media, like the kanban of
+                 the dashboard it shares its action with: it is listed, never
+                 written from here. -->
+            <tree
+                create="0"
+                edit="0"
+                delete="0"
+                decoration-muted="state == 'deleted'"
+                decoration-info="state == 'ready'"
+                decoration-success="state == 'posted'"
+                decoration-danger="state == 'failed'"
+                default_order="effective_date desc"
+            >
+                <field name="effective_date" string="Date" />
+                <field name="is_scheduled" />
+                <field name="account_id" />
+                <field name="media_id" optional="hide" />
+                <field name="message" optional="hide" />
+                <field name="user_id" />
+                <field name="campaign_id" optional="show" />
+                <field name="medium_id" groups="base.group_no_one" optional="hide" />
+                <field name="source_id" groups="base.group_no_one" optional="hide" />
+                <field
+                    name="link_click_count"
+                    string="Tracked Clicks"
+                    optional="show"
+                />
+                <field name="click_count" string="Social Media Clicks" />
+                <field name="like_count" string="Likes" />
+                <field name="comment_count" string="Comments" />
+                <field name="interactions_count" string="Interactions" />
+                <field name="engagement" string="Engagement" />
+                <field name="share_count" string="Shares" optional="hide" />
+                <field name="impression_count" string="Impressions" optional="hide" />
+                <field name="state" widget="badge" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_account_view_form">
+        <field name="name">social.post.account.form</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <!-- A publication mirrors the social media, so it is only read
+                 here. Without this view every link to a publication opens the
+                 one Odoo generates, which exposes the technical fields of the
+                 mail mixins. -->
+            <form create="0" edit="0" delete="0">
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <!-- The address is cleared when the publication is
+                             known to be gone, so it is the sign that the
+                             publication is on the social media. `remote_ref`
+                             cannot be used in the condition: it is restricted
+                             to the developers, and a field the user may not
+                             read is not loaded. The state is checked too
+                             because a deleted publication keeps its remote
+                             reference, and the button asks the social media before
+                             opening anything anyway. -->
+                        <button
+                            type="object"
+                            name="action_open_post_account_url"
+                            class="oe_stat_button"
+                            icon="fa-external-link"
+                            string="Open publication"
+                            invisible="not post_account_url or state == 'deleted'"
+                        />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="post_account_url" invisible="1" />
+                            <field name="account_id" />
+                            <field name="media_id" />
+                            <field name="post_id" />
+                            <field name="campaign_id" />
+                            <field name="medium_id" groups="base.group_no_one" />
+                            <field name="source_id" groups="base.group_no_one" />
+                            <field name="user_id" />
+                        </group>
+                        <group>
+                            <field name="state" widget="badge" />
+                            <field name="published_date" />
+                            <field name="is_scheduled" />
+                            <field name="remote_ref" groups="base.group_no_one" />
+                        </group>
+                    </group>
+                    <group string="Message">
+                        <field name="message" nolabel="1" colspan="2" />
+                    </group>
+                    <group string="Images" invisible="not image_ids">
+                        <!-- An inline kanban instead of `many2many_binary`:
+                             the attachments are named after the reference of
+                             the social media, without an extension, so the
+                             widget lists them as plain files and shows no
+                             thumbnail. -->
+                        <field
+                            name="image_ids"
+                            nolabel="1"
+                            colspan="2"
+                            class="o_social_gallery"
+                        >
+                            <kanban create="0" delete="0">
+                                <field name="id" />
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="border-0">
+                                            <img
+                                                t-attf-src="/web/image/#{record.id.raw_value}"
+                                                class="img-fluid rounded"
+                                                alt="Publication image"
+                                            />
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </group>
+                    <group string="Videos" invisible="not video_ids and not has_video">
+                        <field name="has_video" invisible="1" />
+                        <!-- A publication imported from the social media only
+                             carries the flag: the video itself stays on the
+                             social media and is never downloaded. -->
+                        <div
+                            colspan="2"
+                            class="text-muted"
+                            invisible="video_ids or not has_video"
+                        >
+                            <i class="fa fa-video-camera me-1" aria-hidden="true" />
+                            <span>This publication has a video on the social
+                                media. It was not downloaded, so it can only be
+                                watched there.</span>
+                        </div>
+                        <field
+                            name="video_ids"
+                            nolabel="1"
+                            colspan="2"
+                            class="o_social_gallery"
+                            invisible="not video_ids"
+                        >
+                            <kanban create="0" delete="0">
+                                <field name="id" />
+                                <field name="mimetype" />
+                                <templates>
+                                    <t t-name="kanban-box">
+                                        <div class="border-0">
+                                            <video
+                                                controls="controls"
+                                                preload="metadata"
+                                                class="img-fluid rounded"
+                                            >
+                                                <source
+                                                    t-attf-src="/web/content/#{record.id.raw_value}"
+                                                    t-att-type="record.mimetype.raw_value"
+                                                />
+                                            </video>
+                                        </div>
+                                    </t>
+                                </templates>
+                            </kanban>
+                        </field>
+                    </group>
+                    <group string="Statistics">
+                        <group>
+                            <field name="impression_count" />
+                            <field name="link_click_count" />
+                            <field name="click_count" string="Social Media Clicks" />
+                            <field name="share_count" />
+                        </group>
+                        <group>
+                            <field name="like_count" />
+                            <field name="comment_count" />
+                            <field name="interactions_count" />
+                            <field name="engagement" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_account_view_form_statistics">
+        <field name="name">social.post.account.form.statistics</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <!-- Opened as a dialog from the card of the dashboard, where the
+                 figures the synchronization brings from the social media had
+                 nowhere to be read. It shows what is stored in Odoo: the
+                 social media is only asked again by Update. Every figure sits
+                 in a cell of its own named after its field, so a connector
+                 adds its own with an xpath and no guessing of positions. -->
+            <form create="0" edit="0" delete="0">
+                <div class="o_social_statistics row text-center">
+                    <div class="col-4 py-3" name="impression_count">
+                        <!-- Declared as a float while the same figure is an
+                             integer on the account, so the decimals are
+                             dropped here instead of showing 537.00. -->
+                        <field
+                            name="impression_count"
+                            widget="statinfo"
+                            string="Impressions"
+                            digits="[16,0]"
+                        />
+                    </div>
+                    <div class="col-4 py-3" name="link_click_count">
+                        <field
+                            name="link_click_count"
+                            widget="statinfo"
+                            string="Tracked Clicks"
+                        />
+                    </div>
+                    <div class="col-4 py-3" name="click_count">
+                        <field
+                            name="click_count"
+                            widget="statinfo"
+                            string="Social Media Clicks"
+                        />
+                    </div>
+                    <div class="col-4 py-3" name="share_count">
+                        <field name="share_count" widget="statinfo" string="Shares" />
+                    </div>
+                    <div class="col-4 py-3" name="like_count">
+                        <field name="like_count" widget="statinfo" string="Likes" />
+                    </div>
+                    <div class="col-4 py-3" name="comment_count">
+                        <field
+                            name="comment_count"
+                            widget="statinfo"
+                            string="Comments"
+                        />
+                    </div>
+                    <div class="col-4 py-3" name="interactions_count">
+                        <field
+                            name="interactions_count"
+                            widget="statinfo"
+                            string="Interactions"
+                        />
+                    </div>
+                    <div class="col-4 py-3" name="engagement">
+                        <field
+                            name="engagement"
+                            widget="statinfo"
+                            string="Engagement"
+                        />
+                    </div>
+                </div>
+                <footer>
+                    <button string="Close" special="cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_account_view_search">
+        <field name="name">social.post.account.search</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="message" />
+                <field name="account_id" />
+                <field name="author" />
+                <field name="media_id" />
+                <field name="user_id" />
+                <field name="campaign_id" />
+                <filter
+                    string="My Publications"
+                    name="my_publications"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <separator />
+                <filter
+                    string="Posted"
+                    name="posted"
+                    domain="[('state', '=', 'posted')]"
+                />
+                <filter
+                    string="Failed"
+                    name="failed"
+                    domain="[('state', '=', 'failed')]"
+                />
+                <filter
+                    string="Scheduled"
+                    name="scheduled"
+                    domain="[('is_scheduled', '=', True)]"
+                />
+                <separator />
+                <filter
+                    string="With Likes"
+                    name="with_likes"
+                    domain="[('like_count', '&gt;', 0)]"
+                />
+                <filter
+                    string="With Comments"
+                    name="with_comments"
+                    domain="[('comment_count', '&gt;', 0)]"
+                />
+                <filter
+                    string="With Shares"
+                    name="with_shares"
+                    domain="[('share_count', '&gt;', 0)]"
+                />
+                <filter
+                    string="With Clicks"
+                    name="with_clicks"
+                    domain="[('click_count', '&gt;', 0)]"
+                />
+                <filter
+                    string="With Impressions"
+                    name="with_impressions"
+                    domain="[('impression_count', '&gt;', 0)]"
+                />
+                <separator />
+                <filter
+                    string="Published Date"
+                    name="filter_published_date"
+                    date="published_date"
+                />
+                <separator />
+                <filter
+                    string="With Campaign"
+                    name="with_campaign"
+                    domain="[('campaign_id', '!=', False)]"
+                />
+                <filter
+                    string="Without Campaign"
+                    name="without_campaign"
+                    domain="[('campaign_id', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Accounts"
+                        name="group_by_account_id"
+                        domain="[]"
+                        context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        string="Campaign"
+                        name="group_by_campaign_id"
+                        domain="[]"
+                        context="{'group_by': 'campaign_id'}"
+                    />
+                    <filter
+                        string="State"
+                        name="group_by_state"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        string="Responsible"
+                        name="group_by_user"
+                        context="{'group_by': 'user_id'}"
+                    />
+                    <filter
+                        string="Published Date"
+                        name="group_by_published_date"
+                        context="{'group_by': 'published_date'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_post_account_action">
+        <field name="name">Dashboard</field>
+        <field name="res_model">social.post.account</field>
+        <field name="view_mode">kanban,tree</field>
+        <field name="domain">[('remote_ref', '!=', False)]</field>
+        <field name="context">{'search_default_group_by_account_id': 1}</field>
+        <field name="search_view_id" ref="social_post_account_view_search" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No posts published yet
+            </p>
+            <p>
+                Connect a social account and publish your first post. Published
+                posts and their statistics will show up here.
+            </p>
+        </field>
+    </record>
+
+    <template id="social_media_post_preview">
+        <div class="mb-2 p-3 border rounded bg-view social-text-justify">
+            <div class="d-flex justify-content-start align-items-center">
+                <img
+                    t-if="media_id.image"
+                    width="40"
+                    height="40"
+                    t-attf-src="/web/image/social.media/#{media_id.id}/image/40x40"
+                    t-att-alt="media_id.name"
+                    class="img img-fluid rounded me-2"
+                    loading="lazy"
+                />
+                <t t-out="author" />
+            </div>
+            <!-- The message is cut to a few lines, like the one of a card:
+                 the preview answers what the post will look like, and a long
+                 one would otherwise push the images and the videos it is
+                 also meant to show out of sight. The link that unfolds it is
+                 drawn hidden and the widget of the field shows it if the
+                 text really does not fit, which depends on the width the
+                 preview ends up with. -->
+            <div class="d-flex flex-column p-2">
+                <div class="o_social_message" t-out="message" />
+                <span class="cursor-pointer show-more-message d-none">see more</span>
+            </div>
+            <div
+                t-if="image_ids"
+                class="d-flex justify-content-center align-items-center p-2"
+            >
+                <div
+                    class="d-flex justify-content-center flex-wrap gap-3 h-75 p-sm-1 p-lg-3 social-preview-images"
+                >
+                    <t t-foreach="image_ids" t-as="image_id">
+                        <img
+                            t-attf-src="/web/image/#{image_id._origin.id or image_id.id}"
+                            width="150"
+                            height="130"
+                            class="img-fluid img-posts"
+                        />
+                    </t>
+                    <span
+                        t-if="hidden_image_count"
+                        class="badge text-bg-secondary align-self-center"
+                    >+<t t-out="hidden_image_count" /></span>
+                </div>
+            </div>
+            <div t-if="video_ids" class="d-flex flex-column p-2 gap-1">
+                <t t-foreach="video_ids" t-as="video_id">
+                    <div class="d-flex align-items-center gap-2">
+                        <i class="fa fa-video-camera" />
+                        <t t-out="video_id.name" />
+                    </div>
+                </t>
+                <span t-if="hidden_video_count" class="badge text-bg-secondary">+<t
+                        t-out="hidden_video_count"
+                    /></span>
+            </div>
+        </div>
+    </template>
+
+</odoo>

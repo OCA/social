@@ -1,0 +1,6 @@
+// The badge is laid out with Bootstrap utilities in `campaignBadge`; what is
+// left here is the underline on hover, which the backend removes globally
+// ($link-hover-decoration: none) and has no utility with a hover variant.
+.social-campaign-badge:hover {
+    text-decoration: underline;
+}

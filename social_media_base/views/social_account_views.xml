@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="social_account_view_form">
+        <field name="name">social.account.form</field>
+        <field name="model">social.account</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0" js_class="social_form">
+                <header>
+                    <field name="can_manage_account" invisible="1" />
+                    <button
+                        string="Update account"
+                        class="oe_highlight"
+                        type="object"
+                        invisible="not can_manage_account"
+                        name="action_update_account"
+                        title="Update account"
+                    />
+                    <button
+                        string="Update statistics"
+                        type="object"
+                        invisible="not can_manage_account"
+                        name="action_refresh_statistics"
+                        title="Ask the social media again for the figures of the last days, instead of waiting for the next automatic pass."
+                    />
+                    <button
+                        string="Archive account"
+                        class="oe_highlight"
+                        confirm="Are you sure you want to archive the account? Please note that all data associated with this account will be archived."
+                        type="object"
+                        invisible="not can_manage_account or not active"
+                        name="action_archive_account"
+                        title="Archiving the account only from the system does not delete the account on the social media."
+                    />
+                    <button
+                        string="Unarchive account"
+                        class="oe_highlight"
+                        type="object"
+                        invisible="not can_manage_account or active"
+                        name="action_unarchive_account"
+                        title="Restore the account and everything archived with it."
+                    />
+                    <button
+                        string="Delete permanently"
+                        confirm="This permanently deletes the account and its publication history in Odoo: posts, metrics and comments. Nothing is deleted from the social media. This cannot be undone."
+                        type="object"
+                        groups="social_media_base.group_social_media_manager"
+                        name="action_purge_account"
+                        title="Delete the account and its publication history from Odoo."
+                    />
+                    <field name="active" invisible="1" />
+                </header>
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            type="object"
+                            name="action_open_posts"
+                            class="oe_stat_button"
+                            icon="fa-paper-plane"
+                        >
+                            <field name="post_count" widget="statinfo" string="Posts" />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_open_utm_campaigns"
+                            class="oe_stat_button"
+                            icon="fa-line-chart"
+                        >
+                            <field
+                                name="utm_campaign_count"
+                                widget="statinfo"
+                                string="Marketing Campaigns"
+                            />
+                        </button>
+                    </div>
+                    <field
+                        name="image_1920"
+                        widget="image"
+                        class="oe_avatar"
+                        options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"
+                    />
+                    <div class="oe_title mb24">
+                        <h1>
+                            <field name="name" string="Name" readonly="1" />
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group>
+                            <field name="username" readonly="1" />
+                            <field name="media_id" readonly="1" />
+                            <field name="account_url" widget="url" />
+                            <field name="media_type" invisible="1" />
+                        </group>
+                        <group>
+                            <field
+                                name="user_id"
+                                readonly="1"
+                                groups="!social_media_base.group_social_media_manager"
+                            />
+                            <field
+                                name="user_id"
+                                groups="social_media_base.group_social_media_manager"
+                            />
+                            <field name="create_uid" readonly="1" />
+                            <field name="create_date" readonly="1" />
+                            <field name="last_update_account" readonly="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="account_configuration" string="Configuration">
+                            <group name="account_configuration" />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" groups="base.group_user" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_account_view_tree">
+        <field name="name">social.account.tree</field>
+        <field name="model">social.account</field>
+        <field name="arch" type="xml">
+            <tree create="0" edit="0" delete="0">
+                <field name="name" />
+                <field name="username" />
+                <field name="media_id" />
+                <field name="user_id" />
+                <field name="create_date" />
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_account_view_search">
+        <field name="name">social.account.view.search</field>
+        <field name="model">social.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="username" />
+                <field name="user_id" />
+                <separator />
+                <filter
+                    string="My Accounts"
+                    name="my_accounts"
+                    domain="[('user_id', '=', uid)]"
+                />
+                <separator />
+                <filter
+                    string="Archived"
+                    name="inactive"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Media"
+                        name="group_by_media"
+                        context="{'group_by': 'media_id'}"
+                    />
+                    <filter
+                        string="Responsible"
+                        name="group_by_user"
+                        context="{'group_by': 'user_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_account_action">
+        <field name="name">Accounts</field>
+        <field name="res_model">social.account</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="social_account_view_search" />
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No account connected yet
+            </p>
+            <p>
+                Go to Configuration &gt; Social Media and use
+                <b>Associate account</b> to link your LinkedIn or X account.
+            </p>
+        </field>
+    </record>
+
+</odoo>

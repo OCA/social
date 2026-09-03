@@ -1,0 +1,152 @@
+.w-95 {
+    width: 95% !important;
+}
+
+div.post-preview {
+    // The card is as wide as a kanban one, so the post reads the same in both
+    // views.
+    width: 330px !important;
+    // The message is an anonymous flex item: without this, a single long word
+    // without spaces overflows the card.
+    overflow-wrap: anywhere;
+}
+
+div.o_kanban_record {
+    &:has(div.oe_kanban_social_dashboard) {
+        @include media-breakpoint-down(sm) {
+            margin-bottom: 10px !important;
+        }
+    }
+}
+
+.social-text-justify {
+    text-align: justify !important;
+    overflow-wrap: break-word;
+    word-break: break-word;
+}
+
+div.social-all-images:not(.social-post-images) {
+    margin: 0 0 0 85% !important;
+
+    @include span-social-images;
+}
+
+img.img-posts {
+    width: 150px !important;
+    @include media-breakpoint-down(sm) {
+        width: 130px !important;
+    }
+}
+
+div.oe_kanban_social_dashboard {
+    .social-post-images > div {
+        @include social-images-row;
+    }
+}
+
+// The preview is drawn in a column narrower than the images, so it needs the
+// same treatment as the dashboard card.
+.social-preview-images {
+    @include social-images-row;
+}
+
+div.oe_kanban_social_dashboard {
+    span.social-like-post {
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background 0.3s;
+    }
+
+    span.social-like-post:active {
+        background-color: $o-community-color;
+    }
+}
+
+.social-loader {
+    width: 15px;
+    height: 15px;
+    border: 2px solid #fff;
+    border-bottom-color: transparent;
+    border-radius: 50%;
+    display: inline-block;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+}
+
+.show-more-message {
+    color: $o-community-color;
+    cursor: pointer;
+}
+
+// The loader is white so it shows on the primary buttons: on a light
+// background it has to take the color of the text around it.
+.social-loader.social-loader-muted {
+    border-color: currentColor;
+    border-bottom-color: transparent;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+// The images and the videos of a publication are shown with an inline kanban,
+// which is the only way to render them in a form view. Its cards are stripped
+// of the kanban chrome so the gallery reads as a gallery: the borders and the
+// empty placeholder cards it lays out to fill the row are what would show up
+// as stray lines around the pictures.
+.o_social_gallery {
+    &.o_field_x2many,
+    .o_kanban_view,
+    .o_kanban_renderer {
+        border: 0;
+        background-color: transparent;
+    }
+
+    .o_kanban_renderer {
+        gap: 0.5rem;
+    }
+
+    .o_kanban_record {
+        border: 0;
+        padding: 0;
+        min-height: 0;
+        box-shadow: none;
+        background-color: transparent;
+
+        img,
+        video {
+            max-height: 320px;
+        }
+    }
+
+    .o_kanban_record.o_kanban_ghost {
+        display: none;
+    }
+}
+
+// The statistics dialog lays its figures out with the `statinfo` widget,
+// whose two spans are only given a size by web inside a stat button. On
+// their own they come out as plain text, so the value is what has to read
+// as the figure and the label as its caption.
+.o_social_statistics {
+    .o_stat_value {
+        display: block;
+        font-size: 1.5rem;
+        font-weight: 500;
+        line-height: 1.2;
+    }
+
+    .o_stat_text {
+        display: block;
+        font-size: 0.8rem;
+        text-transform: uppercase;
+        color: var(--o-gray-600, #6c757d);
+    }
+}

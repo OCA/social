@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record model="ir.ui.view" id="utm_campaign_view_form">
+        <field name="name">utm.campaign.view.form.inherit.social.media.base</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button
+                    name="%(social_media_base.social_post_action_from_campaign)d"
+                    type="action"
+                    class="oe_highlight"
+                    string="New Post"
+                    groups="social_media_base.group_social_media_user"
+                />
+            </xpath>
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <!-- The `order-N` slot keeps the buttons of every application
+                     in a stable order: sale 1 and 2, crm 3, mass_mailing 9,
+                     mass_mailing_sms 11, link_tracker 12. -->
+                <button
+                    name="action_view_social_posts"
+                    type="object"
+                    class="oe_stat_button order-13"
+                    icon="fa-share-alt"
+                    invisible="social_post_count == 0"
+                    groups="social_media_base.group_social_media_user"
+                >
+                    <field name="social_post_count" widget="statinfo" string="Posts" />
+                </button>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Social Media"
+                    name="social_media"
+                    invisible="social_post_count == 0"
+                    groups="social_media_base.group_social_media_user"
+                >
+                    <!-- The campaign answers "how much did this move", not
+                         "what did each social media do": only the clicks Odoo
+                         tracked and the engagement. The rest of the figures
+                         are read on the social dashboard or by opening the
+                         post, which is where they already live. -->
+                    <group class="o_group_social_campaign_totals">
+                        <group>
+                            <field name="social_link_click_count" string="Clicks" />
+                        </group>
+                        <group>
+                            <!-- A total of the publications, the same way the
+                                 card of a post totals its own. -->
+                            <field name="social_engagement" string="Engagement" />
+                        </group>
+                    </group>
+                    <!-- The posts of a campaign are listed, never curated from
+                         here: a post carries its own campaign. They are shown
+                         whatever their state, so the campaign also shows the
+                         work still planned. -->
+                    <field name="social_post_ids" nolabel="1" readonly="1">
+                        <!-- Inline and without `js_class`: the kanban views of
+                             `social.post` under `static/src/js/views/kanban/`
+                             are meant for the full action, not for an x2many. -->
+                        <kanban create="0" edit="0" delete="0">
+                            <field name="message" />
+                            <field name="state" />
+                            <field name="account_ids" />
+                            <field name="send_post_date" />
+                            <field name="published_date" />
+                            <field name="link_click_count" />
+                            <field name="count_post_engagement" />
+                            <field name="user_id" />
+                            <templates>
+                                <t t-name="kanban-box">
+                                    <!-- Every block is delimited by a rule so
+                                         that state, message, figures and date
+                                         read as separate things instead of as
+                                         one blank area. `p-0` drops the
+                                         padding of the record, which would
+                                         otherwise keep the rules from reaching
+                                         the sides of the card. -->
+                                    <div
+                                        class="oe_kanban_global_click p-0 d-flex flex-column"
+                                    >
+                                        <div
+                                            class="d-flex justify-content-end p-2 border-bottom"
+                                        >
+                                            <field
+                                                name="state"
+                                                widget="badge"
+                                                decoration-muted="state == 'draft'"
+                                                decoration-info="state in ('planned', 'publishing')"
+                                                decoration-warning="state == 'partially_published'"
+                                                decoration-success="state == 'published'"
+                                                decoration-danger="state == 'cancelled'"
+                                            />
+                                        </div>
+                                        <!-- The message takes whatever height
+                                             the card has left over, so every
+                                             card of a row ends up the same
+                                             height without the figures or the
+                                             footer being stretched. The
+                                             widget cuts it to a few lines so
+                                             a long post does not stretch the
+                                             card past the others, and offers
+                                             the link that shows it whole. -->
+                                        <div
+                                            class="flex-grow-1 p-2 border-bottom fw-bold"
+                                        >
+                                            <field
+                                                name="message"
+                                                widget="social_message"
+                                            />
+                                        </div>
+                                        <!-- The block is tinted as a whole so
+                                             that the figures read apart from
+                                             the message and the footer. Done
+                                             by hand and not with
+                                             `table-striped`: inside a kanban
+                                             card the latter leaves the
+                                             Bootstrap variable it paints with
+                                             unset, so it renders nothing. -->
+                                        <table
+                                            class="table table-sm align-middle mb-0 bg-100 o_social_post_figures"
+                                        >
+                                            <tbody>
+                                                <tr>
+                                                    <td class="ps-2">Clicks:</td>
+                                                    <td class="text-end pe-2">
+                                                        <field
+                                                            name="link_click_count"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ps-2">Engagement:</td>
+                                                    <td class="text-end pe-2">
+                                                        <field
+                                                            name="count_post_engagement"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="ps-2">Accounts:</td>
+                                                    <!-- Avatars and not names:
+                                                         they collapse into a
+                                                         `+N` counter, so a
+                                                         post published to
+                                                         twenty accounts takes
+                                                         the same single line
+                                                         as one published to
+                                                         two. The name shows
+                                                         on hover. -->
+                                                    <td class="text-end pe-2">
+                                                        <field
+                                                            name="account_ids"
+                                                            widget="many2many_tags_avatar"
+                                                        />
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <!-- `mt-auto` pins the footer to the
+                                             bottom at its own height: without
+                                             it the last block absorbs whatever
+                                             space the card has left over and
+                                             the date sits alone in a tall
+                                             box. -->
+                                        <div
+                                            class="d-flex justify-content-between align-items-center mt-auto p-2 border-top"
+                                        >
+                                            <!-- A draft post has neither date,
+                                                 and then the calendar icon
+                                                 goes away with it instead of
+                                                 being left with nothing next
+                                                 to it. The responsible is
+                                                 required, so it always shows
+                                                 and the footer never empties.
+                                                 -->
+                                            <div>
+                                                <t
+                                                    t-if="record.published_date.raw_value or record.send_post_date.raw_value"
+                                                >
+                                                    <i
+                                                        class="fa fa-calendar me-1"
+                                                        title="Date"
+                                                        role="img"
+                                                    />
+                                                    <field
+                                                        name="published_date"
+                                                        invisible="not published_date"
+                                                    />
+                                                    <field
+                                                        name="send_post_date"
+                                                        invisible="published_date"
+                                                    />
+                                                </t>
+                                            </div>
+                                            <field
+                                                name="user_id"
+                                                widget="many2one_avatar_user"
+                                            />
+                                        </div>
+                                    </div>
+                                </t>
+                            </templates>
+                        </kanban>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="utm_campaign_view_kanban">
+        <field name="name">utm.campaign.view.kanban.inherit.social.media.base</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='user_id']" position="after">
+                <field
+                    name="social_post_count"
+                    groups="social_media_base.group_social_media_user"
+                />
+            </xpath>
+            <!-- The count field is read instead of the posts themselves: they
+                 carry a group and loading them would fetch every post of every
+                 campaign of the kanban. -->
+            <xpath expr="//ul[@id='o_utm_actions']" position="inside">
+                <a
+                    name="action_view_social_posts"
+                    type="object"
+                    t-attf-class="list-group-item border-0 p-0 order-13 #{record.social_post_count.raw_value === 0 ? 'text-muted' : ''}"
+                    groups="social_media_base.group_social_media_user"
+                >
+                    <t t-out="record.social_post_count.raw_value" />
+                    <t> Posts</t>
+                </a>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

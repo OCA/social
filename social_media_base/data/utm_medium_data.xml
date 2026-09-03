@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+
+    <!-- Delivery method reported for a social media that declares none of its
+         own. A connector points its social media at the medium of the social media
+         instead, `utm` already ships one for the usual ones. -->
+    <record model="utm.medium" id="utm_medium_social_media">
+        <field name="name">Social Media</field>
+    </record>
+
+</odoo>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="send_post_schedule_job" model="ir.cron">
+        <field name="name">Social Post: Send post schedule</field>
+        <field name="model_id" ref="model_social_post" />
+        <field name="state">code</field>
+        <field name="code">model._run_send_post()</field>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">1</field>
+    </record>
+
+    <record id="webhook_schedule_job" model="ir.cron">
+        <field name="name">Social: Checking social media updates</field>
+        <field name="model_id" ref="model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model._run_check_media_updates()</field>
+        <!-- Every run costs API calls against quotas counted per day, so the
+             interval is what bounds what the check spends when nobody is
+             using Odoo. Two hours is the delay the notice of new updates may
+             take to show up on the dashboard. -->
+        <field name="interval_number">2</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">1</field>
+    </record>
+</odoo>

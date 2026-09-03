@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t
+        t-name="social_media_base.KanbanView.Buttons"
+        t-inherit="web.KanbanView.Buttons"
+        t-inherit-mode="primary"
+    >
+        <xpath expr="//div[hasclass('o_cp_buttons')]" position="inside">
+            <button
+                type="button"
+                class="btn btn-primary o__kanban_new_account me-1"
+                t-on-click.prevent="_onAddAccount"
+                t-if="!isAccountPanelHidden"
+            >
+                Add account
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary o_kanban_new_post me-1"
+                t-on-click.prevent="_onAddPost"
+                t-if="!isAccountPanelHidden"
+            >
+                Add Post
+            </button>
+            <button
+                type="button"
+                class="btn btn-primary o_kanban_statistics_refresh_now"
+                t-on-click.prevent="_onUpdatePostsAndStatistics"
+                t-if="!isAccountPanelHidden"
+            >
+                <span>
+                <i
+                        t-if="!socialState.syncPosts"
+                        class="fa fa-refresh px-1"
+                        aria-hidden="true"
+                    />
+                    <span class="social-loader" t-if="socialState.syncPosts" />
+                    Update
+                </span>
+            </button>
+        </xpath>
+    </t>
+
+</templates>
