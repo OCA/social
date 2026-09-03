@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Cetmix OÜ
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_gateway_form_view">
+        <field name="name">mail.gateway.form (in mail_gateway_instagram)</field>
+        <field name="model">mail.gateway</field>
+        <field name="inherit_id" ref="mail_gateway.mail_gateway_form_view" />
+        <field name="arch" type="xml">
+            <field name="webhook_user_id" position="after">
+                <field
+                    name="instagram_security_key"
+                    invisible="gateway_type != 'instagram'"
+                />
+                <field
+                    name="instagram_account_id"
+                    invisible="gateway_type != 'instagram'"
+                />
+                <field
+                    name="instagram_version"
+                    invisible="gateway_type != 'instagram'"
+                />
+            </field>
+            <notebook position="inside">
+                <page
+                    name="instagram"
+                    string="Instagram configuration"
+                    invisible="gateway_type != 'instagram'"
+                >
+                    <group>
+                        <field name="webhook_url" />
+                    </group>
+                    <div>
+                        <ol>
+                            <li>Use an Instagram professional (Business or Creator)
+                                account and a Meta app with Instagram Login.</li>
+                            <li>Copy the access token into <b>Token</b>, the Meta
+                                app secret into <b>Webhook Secret</b>, a verify
+                                token of your choice into <b>Instagram Security Key</b>,
+                                and the professional account IGID into <b
+                            >Instagram Account</b>.</li>
+                            <li>Set <b>Webhook Key</b> and <b>Webhook User</b>,
+                                save, then press <b>Integrate Webhook</b>.</li>
+                            <li>Open this tab, copy <b>Webhook URL</b> into the
+                                Meta app callback URL. Use <b>Instagram Security
+                                Key</b> as the verify token. Subscribe the
+                                <b>messages</b> field only. Meta calls GET
+                                verification and the state becomes Integrated.</li>
+                        </ol>
+                    </div>
+                </page>
+            </notebook>
+        </field>
+    </record>
+</odoo>

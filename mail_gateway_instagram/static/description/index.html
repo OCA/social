@@ -1,0 +1,539 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>Mail Instagram Gateway</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="mail-instagram-gateway">
+<h1 class="title">Mail Instagram Gateway</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:c7fbb88780b38dc9a36c36d6251b3765cab2b90bc66f323d0360b1d2c986cd90
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/18.0/mail_gateway_instagram"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-18-0/social-18-0-mail_gateway_instagram"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=18.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module connects Odoo Discuss to Instagram Direct Messages through
+OCA <tt class="docutils literal">mail_gateway</tt>. Incoming DMs become gateway channels; replies from
+Discuss are sent back as Instagram text messages.</p>
+<p><strong>Table of contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#configuration" id="toc-entry-1">Configuration</a><ul>
+<li><a class="reference internal" href="#meta-app" id="toc-entry-2">Meta app</a></li>
+<li><a class="reference internal" href="#odoo-gateway" id="toc-entry-3">Odoo gateway</a></li>
+<li><a class="reference internal" href="#meta-webhook" id="toc-entry-4">Meta webhook</a></li>
+<li><a class="reference internal" href="#hour-messaging-window" id="toc-entry-5">24-hour messaging window</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-6">Usage</a></li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-7">Known issues / Roadmap</a></li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-8">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-9">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-10">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-11">Contributors</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-12">Maintainers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#toc-entry-1">Configuration</a></h1>
+<p>The connector uses the Instagram API with Instagram Login
+(<tt class="docutils literal">graph.instagram.com</tt>). Facebook-Login / Page-scoped Instagram is not
+supported.</p>
+<div class="section" id="meta-app">
+<h2><a class="toc-backref" href="#toc-entry-2">Meta app</a></h2>
+<ol class="arabic simple">
+<li>Use an Instagram <strong>professional</strong> account (Business or Creator).</li>
+<li>Create a Meta app at
+<a class="reference external" href="https://developers.facebook.com/apps/">developers.facebook.com/apps</a>
+and add the <strong>Instagram Login</strong> product.</li>
+<li>Request <tt class="docutils literal">instagram_business_basic</tt> and
+<tt class="docutils literal">instagram_business_manage_messages</tt>. Advanced Access is required
+to serve Instagram accounts the app does not own.</li>
+</ol>
+</div>
+<div class="section" id="odoo-gateway">
+<h2><a class="toc-backref" href="#toc-entry-3">Odoo gateway</a></h2>
+<ol class="arabic simple">
+<li>Enable developer mode, then go to Settings &gt; Technical &gt; Email &gt;
+Gateway. (Technical is visible only in the developer mode.)</li>
+<li>Create a gateway of type <strong>Instagram</strong>.</li>
+<li>Fill in:<ul>
+<li><strong>Token</strong>: Instagram user access token (sent as
+<tt class="docutils literal">Authorization: Bearer</tt>).</li>
+<li><strong>Webhook Secret</strong>: Meta <strong>app secret</strong> (HMAC key for
+<tt class="docutils literal"><span class="pre">X-Hub-Signature-256</span></tt>). Copy it from the Meta app Settings &gt;
+Basic &gt; App Secret.</li>
+<li><strong>Instagram Security Key</strong>: a string you choose. You will enter the
+same value in Meta as the webhook <strong>verify token</strong>
+(<tt class="docutils literal">hub.verify_token</tt>).</li>
+<li><strong>Instagram Account</strong>: professional account IGID used in the send
+URL.</li>
+<li><strong>Instagram Version</strong>: Graph API version without the <tt class="docutils literal">v</tt> prefix
+(default <tt class="docutils literal">26.0</tt>).</li>
+<li><strong>Webhook Key</strong>: URL path segment of your choice. It becomes part
+of the webhook URL.</li>
+<li><strong>Webhook User</strong>: user that creates inbound messages.</li>
+<li><strong>Members</strong>: Discuss users who join new conversations.</li>
+</ul>
+</li>
+<li>Save. <strong>Webhook Key</strong> and <strong>Webhook User</strong> must be set or the
+<strong>Integrate Webhook</strong> button stays hidden.</li>
+<li>Press <strong>Integrate Webhook</strong> on the gateway form (header). The state
+becomes <tt class="docutils literal">pending</tt>. Meta’s verification GET is only accepted in this
+state.</li>
+<li>Open the <strong>Instagram configuration</strong> tab on the same form. Copy
+<strong>Webhook URL</strong>. Odoo builds it as
+<tt class="docutils literal"><span class="pre">https://&lt;your-odoo-host&gt;/gateway/instagram/&lt;webhook_key&gt;/update</span></tt>.
+You do not get this URL from Meta.</li>
+</ol>
+<p>The same <strong>Webhook URL</strong> field on the main form group is visible only in
+the developer mode. Use the tab; that copy is for operators.</p>
+</div>
+<div class="section" id="meta-webhook">
+<h2><a class="toc-backref" href="#toc-entry-4">Meta webhook</a></h2>
+<ol class="arabic simple">
+<li>In the Meta app, open the Instagram Login product’s webhook /
+callback settings.</li>
+<li>Callback URL: paste the <strong>Webhook URL</strong> copied from Odoo.</li>
+<li>Verify token: paste the same string as <strong>Instagram Security Key</strong>.</li>
+<li>Subscribe the <strong>``messages``</strong> field only.</li>
+<li>Meta sends a GET to Odoo. On success the gateway state becomes
+<tt class="docutils literal">integrated</tt>.</li>
+</ol>
+<p>The webhook endpoint must be publicly reachable over HTTPS. Self-signed
+certificates are not accepted by Meta.</p>
+</div>
+<div class="section" id="hour-messaging-window">
+<h2><a class="toc-backref" href="#toc-entry-5">24-hour messaging window</a></h2>
+<p>Instagram only allows the professional account to message a user
+<strong>after</strong> that user has messaged it, and only for <strong>24 hours</strong> after the
+user’s last message. Replies from Discuss outside that window are
+rejected by Meta. Anything that must be sent later has to go through
+another channel. A human-agent tag that extends the window is listed on
+the module roadmap and is not implemented here.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h1><a class="toc-backref" href="#toc-entry-6">Usage</a></h1>
+<p>Incoming Instagram Direct Messages appear as Discuss channels of type
+<tt class="docutils literal">gateway</tt>. The sender is a <tt class="docutils literal">mail.guest</tt> until a user promotes them
+to a partner from the followers menu.</p>
+<p>Replies typed in that Discuss channel are delivered as Instagram DMs
+(text only). Messages the professional account sends from the Instagram
+app are not duplicated into the channel.</p>
+<p>Shares, story mentions and reels arrive as links in the message body,
+not as downloaded files. Images, videos, audio and files are downloaded
+and attached to the Discuss message.</p>
+</div>
+<div class="section" id="known-issues-roadmap">
+<h1><a class="toc-backref" href="#toc-entry-7">Known issues / Roadmap</a></h1>
+<ul class="simple">
+<li>Outbound attachments / media upload.</li>
+<li>Quick replies, icebreakers and the persistent menu.</li>
+<li>HUMAN_AGENT tagging to reply after the 24-hour window: send
+<tt class="docutils literal">messaging_type=MESSAGE_TAG</tt> with <tt class="docutils literal">tag=HUMAN_AGENT</tt>. Meta
+documents this on the Page Messages API; only <tt class="docutils literal">HUMAN_AGENT</tt> is
+available for Instagram Messaging, and the message may be sent within
+7 days of the customer’s last message. Not implemented in 1.0.</li>
+<li>Message reactions, read receipts, and the standby / handover protocol.</li>
+<li>Facebook-Login Instagram (<tt class="docutils literal">graph.facebook.com</tt>).</li>
+</ul>
+</div>
+<div class="section" id="bug-tracker">
+<h1><a class="toc-backref" href="#toc-entry-8">Bug Tracker</a></h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20mail_gateway_instagram%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1><a class="toc-backref" href="#toc-entry-9">Credits</a></h1>
+<div class="section" id="authors">
+<h2><a class="toc-backref" href="#toc-entry-10">Authors</a></h2>
+<ul class="simple">
+<li>Cetmix</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2><a class="toc-backref" href="#toc-entry-11">Contributors</a></h2>
+<ul class="simple">
+<li>Cetmix OÜ <a class="reference external" href="https://cetmix.com">https://cetmix.com</a></li>
+</ul>
+</div>
+<div class="section" id="maintainers">
+<h2><a class="toc-backref" href="#toc-entry-12">Maintainers</a></h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/18.0/mail_gateway_instagram">OCA/social</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
