@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="demo_campaign_upcoming" model="utm.campaign">
+        <field name="title">Summer Launch (Upcoming)</field>
+        <field
+            name="start_date"
+            eval="(datetime.now() + relativedelta(days=7)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="end_date"
+            eval="(datetime.now() + relativedelta(days=30)).strftime('%Y-%m-%d')"
+        />
+    </record>
+
+    <record id="demo_campaign_running" model="utm.campaign">
+        <field name="title">Spring Promotion (Running)</field>
+        <field
+            name="start_date"
+            eval="(datetime.now() - relativedelta(days=1)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="end_date"
+            eval="(datetime.now() + relativedelta(days=14)).strftime('%Y-%m-%d')"
+        />
+    </record>
+
+    <record id="demo_campaign_finished" model="utm.campaign">
+        <field name="title">Winter Sale (Finished)</field>
+        <field
+            name="start_date"
+            eval="(datetime.now() - relativedelta(days=20)).strftime('%Y-%m-%d')"
+        />
+        <field
+            name="end_date"
+            eval="(datetime.now() - relativedelta(days=1)).strftime('%Y-%m-%d')"
+        />
+    </record>
+</odoo>
