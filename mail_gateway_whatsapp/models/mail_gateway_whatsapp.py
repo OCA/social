@@ -4,21 +4,37 @@ import hashlib
 import hmac
 import logging
 import mimetypes
+import re
 import traceback
 from datetime import datetime
 from io import StringIO
 
 import requests
 import requests_toolbelt
+from markupsafe import Markup
 
 from odoo import models
 from odoo.exceptions import UserError
 from odoo.http import request
-from odoo.tools import html2plaintext
+from odoo.tools import html2plaintext, plaintext2html
 
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
 
 _logger = logging.getLogger(__name__)
+
+# Text formatting of the whatsapp clients, and its html counterpart.
+WHATSAPP_MARKERS = {"*": "strong", "_": "em", "~": "s", "```": "code"}
+HTML_TAGS = {
+    "b": "*",
+    "strong": "*",
+    "i": "_",
+    "em": "_",
+    "s": "~",
+    "del": "~",
+    "code": "```",
+}
+MARKED_TEXT = r"(?<!\w){0}(\S(?:.*?\S)?){0}(?!\w)"
+HTML_TAG = re.compile(r"(<a\b[^>]*>.*?</a>|<[^>]+>)", re.DOTALL)
 
 
 class MailGatewayWhatsappService(models.AbstractModel):
@@ -104,6 +120,19 @@ class MailGatewayWhatsappService(models.AbstractModel):
         # notify user that we have a failure
         notification.mail_message_id._notify_message_notification_update()
 
+    def _whatsapp_to_html(self, body):
+        """Turn the text markers of an incoming body into html tags."""
+        parts = HTML_TAG.split(plaintext2html(body))
+        for index in range(0, len(parts), 2):
+            for marker, tag in WHATSAPP_MARKERS.items():
+                parts[index] = re.sub(
+                    MARKED_TEXT.format(re.escape(marker)),
+                    rf"<{tag}>\1</{tag}>",
+                    parts[index],
+                    flags=re.DOTALL,
+                )
+        return Markup("".join(parts))
+
     def _process_update(self, chat, message, value):
         chat.ensure_one()
         body = ""
@@ -154,12 +183,12 @@ class MailGatewayWhatsappService(models.AbstractModel):
                         attachment_info,
                     )
                 )
+        body = self._whatsapp_to_html(body) if body else Markup()
         if message.get("location"):
-            body += (
+            body += Markup(
                 '<a target="_blank" href="https://www.google.com/'
-                f'maps/search/?api=1&query={message["location"]["latitude"]},'
-                f'{message["location"]["longitude"]}">Location</a>'
-            )
+                'maps/search/?api=1&query=%s,%s">Location</a>'
+            ) % (message["location"]["latitude"], message["location"]["longitude"])
         if message.get("contacts"):
             pass
         if len(body) > 0 or attachments:
@@ -315,6 +344,13 @@ class MailGatewayWhatsappService(models.AbstractModel):
             # pylint: disable=invalid-commit
             self.env.cr.commit()
 
+    def _html_to_whatsapp(self, body):
+        """Turn the html formatting of an outgoing body into text markers."""
+        pattern = rf"</?({'|'.join(HTML_TAGS)})\b[^>]*>"
+        return html2plaintext(
+            re.sub(pattern, lambda tag: HTML_TAGS[tag.group(1).lower()], body)
+        )
+
     def _send_payload(
         self, channel, body=False, media_id=False, media_type=False, media_name=False
     ):
@@ -344,7 +380,10 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 payload.update(
                     {
                         "type": "text",
-                        "text": {"preview_url": False, "body": html2plaintext(body)},
+                        "text": {
+                            "preview_url": False,
+                            "body": self._html_to_whatsapp(body),
+                        },
                     }
                 )
             return payload
