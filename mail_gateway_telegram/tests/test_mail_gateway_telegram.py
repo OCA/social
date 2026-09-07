@@ -816,6 +816,15 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
             channel._message_update_content(message, "New message")
         self.assertRegex(message.body, ".*New message.*")
 
+    def _get_partner_store_info(self):
+        """Partner data as the web client receives it."""
+        result = Store(self.partner).get_result()
+        return next(
+            item
+            for item in result.get("res.partner", [])
+            if item["id"] == self.partner.id
+        )
+
     def test_messaging(self):
         self.gateway.webhook_key = self.webhook
         self.gateway.flush_recordset()
@@ -835,8 +844,8 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         self.assertTrue(result["gateways"])
         self.assertEqual(1, len(result["gateways"]))
         self.assertEqual(self.gateway.id, result["gateways"][0]["id"])
-        # Validate that partner has no gateway_channels yet via one_id
-        partner_info = Store.one_id(self.partner)
+        # Validate that partner has no gateway_channels yet
+        partner_info = self._get_partner_store_info()
         self.assertIn("gateway_channels", partner_info)
         self.assertEqual(0, len(partner_info["gateway_channels"]))
         # Assign the partner to the channel
@@ -855,6 +864,6 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         ).merge_partner()
         # Ensure gateway_channel_ids are now assigned
         self.assertTrue(self.partner.gateway_channel_ids)
-        partner_info = Store.one_id(self.partner)
+        partner_info = self._get_partner_store_info()
         self.assertIn("gateway_channels", partner_info)
         self.assertEqual(1, len(partner_info["gateway_channels"]))
