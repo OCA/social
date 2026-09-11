@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="social_advertising_campaign_group_rule_user" model="ir.rule">
+        <field
+            name="name"
+        >Campaign groups: only the ones of the campaigns or the accounts the user is responsible for</field>
+        <field ref="model_social_advertising_campaign_group" name="model_id" />
+        <field
+            name="domain_force"
+        >['|', ('campaign_ids.user_id', '=', user.id), ('advertising_account_id.account_id.user_id', '=', user.id)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('social_media_base.group_social_media_user'))]"
+        />
+    </record>
+
+    <record id="social_advertising_campaign_group_rule_manager" model="ir.rule">
+        <field name="name">Campaign groups: all</field>
+        <field ref="model_social_advertising_campaign_group" name="model_id" />
+        <field name="domain_force">[(1, '=', 1)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('social_media_base.group_social_media_manager'))]"
+        />
+    </record>
+
+
+</odoo>
