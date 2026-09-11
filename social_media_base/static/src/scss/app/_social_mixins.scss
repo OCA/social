@@ -1,0 +1,40 @@
+// Row of images of a post, in a container narrower than the images.
+// Without this the fixed width of `img-posts` wraps them one per line
+// instead of showing them side by side with the "+N" badge.
+@mixin social-images-row {
+    // The images share the width of the container instead of stacking, and
+    // the row grows with its content instead of being squeezed by the
+    // template height.
+    flex-wrap: nowrap !important;
+    height: auto !important;
+
+    // A single image takes the whole width without being cropped: it is
+    // capped in height so a square picture does not take over the card.
+    img.img-posts:only-child {
+        width: 100% !important;
+        height: auto;
+        max-height: 250px;
+        object-fit: contain;
+    }
+
+    // Several images split the width evenly and are cropped to a common
+    // height, so the row reads as one block.
+    img.img-posts:not(:only-child) {
+        flex: 1 1 0;
+        min-width: 0;
+        width: auto !important;
+        height: 150px;
+        object-fit: cover;
+    }
+}
+
+@mixin span-social-images {
+    span {
+        background-color: lightgrey !important;
+
+        &:hover {
+            background-color: #71639e !important;
+            color: white !important;
+        }
+    }
+}

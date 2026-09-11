@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="wizard_social_account_rule_own" model="ir.rule">
+        <field name="name">Social media account wizard: own records only</field>
+        <field ref="model_wizard_social_account" name="model_id" />
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+    </record>
+
+</odoo>
