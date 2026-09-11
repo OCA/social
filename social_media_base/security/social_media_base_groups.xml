@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="module_category_social_media" model="ir.module.category">
+        <field name="name">Social Media</field>
+        <field name="description">Manage social media accounts and posts.</field>
+        <field name="sequence">20</field>
+    </record>
+
+    <record id="group_social_media_user" model="res.groups">
+        <field name="name">User: Own Accounts</field>
+        <field name="category_id" ref="module_category_social_media" />
+        <field
+            name="comment"
+        >The user is only able to see the social media accounts and posts he is responsible for.</field>
+    </record>
+
+    <record id="group_social_media_manager" model="res.groups">
+        <field name="name">Administrator</field>
+        <field name="category_id" ref="module_category_social_media" />
+        <field name="implied_ids" eval="[(4, ref('group_social_media_user'))]" />
+        <field
+            name="comment"
+        >The user is able to see every social media account and post of the companies he has access to, and to configure the available social medias.</field>
+    </record>
+
+    <!-- The administrator may revoke these grants, so they must not be
+         reapplied on every module update. -->
+    <data noupdate="1">
+
+        <record id="base.user_root" model="res.users">
+            <field name="groups_id" eval="[(4, ref('group_social_media_manager'))]" />
+        </record>
+
+        <record id="base.user_admin" model="res.users">
+            <field name="groups_id" eval="[(4, ref('group_social_media_manager'))]" />
+        </record>
+
+    </data>
+
+</odoo>
