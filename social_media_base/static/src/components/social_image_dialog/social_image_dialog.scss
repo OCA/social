@@ -1,0 +1,7 @@
+// Here the image is the content of the dialog and not a thumbnail of a card,
+// so it gets its own cap instead of the one the cards share: it grows as
+// large as the window allows and stops there, whole.
+.social-image-dialog-image {
+    max-height: 80vh;
+    object-fit: contain;
+}
