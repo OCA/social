@@ -1,6 +1,7 @@
 # Copyright 2022 CreuBlanca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import copy
 import hashlib
 import hmac
 import json
@@ -318,6 +319,34 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             # Check that the attachment is marked as voice
             self.assertTrue(message.attachment_ids.voice_ids)
 
+    def test_receive_message_keeps_layout(self):
+        """Text keeps its layout, markup stays literal, location stays a link."""
+        message = copy.deepcopy(self.message_01)
+        content = message["entry"][0]["changes"][0]["value"]["messages"][0]
+        # Plain text, brackets included: what a sender typing "<b>" really sends.
+        content["text"] = {
+            "body": "Line 1\n<b>bold</b>\n\nSection 2 https://example.com/track"
+        }
+        content["location"] = {"latitude": "41.3851", "longitude": "2.1734"}
+        body = self.receive_message(message).body
+        self.assertIn("Line 1<br", body)
+        self.assertIn("</p><p>", body)
+        self.assertIn('href="https://example.com/track"', body)
+        self.assertIn("&lt;b&gt;bold&lt;/b&gt;", body)
+        self.assertIn("41.3851,2.1734", body)
+        self.assertNotIn("&lt;a", body)
+
+    def test_receive_message_formatting(self):
+        """Whatsapp text markers are rendered as html."""
+        message = copy.deepcopy(self.message_01)
+        content = message["entry"][0]["changes"][0]["value"]["messages"][0]
+        content["text"] = {"body": "*bold* _italic_ https://example.com/a_b_c"}
+        body = self.receive_message(message).body
+        self.assertIn("<strong>bold</strong>", body)
+        self.assertIn("<em>italic</em>", body)
+        # The markers of a link belong to the link.
+        self.assertIn('href="https://example.com/a_b_c"', body)
+
     @mute_logger("odoo.addons.mail_gateway.controllers.gateway")
     def test_post_no_signature_no_message(self):
         self.gateway.webhook_key = self.webhook
@@ -378,6 +407,33 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             )
             post_mock.assert_called()
             self.assertEqual(post_mock.call_count, 2)
+
+    def test_send_message_formatting(self):
+        """Html formatting is sent as whatsapp text markers."""
+        self.gateway.webhook_key = self.webhook
+        self.gateway.set_webhook()
+        self.integrate_webhook()
+        composer = self.env["whatsapp.composer"].create(
+            {
+                "res_model": self.partner._name,
+                "res_id": self.partner.id,
+                "number_field_name": "mobile",
+                "gateway_id": self.gateway.id,
+            }
+        )
+        composer.action_view_whatsapp()
+        channel = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
+        with patch("requests.post") as post_mock:
+            post_mock.return_value = MagicMock()
+            channel.message_post(
+                body=Markup("<p><strong>bold</strong> and <em>italic</em></p>"),
+                subtype_xmlid="mail.mt_comment",
+                message_type="comment",
+            )
+        payload = post_mock.call_args.kwargs["json"]
+        self.assertEqual(payload["text"]["body"], "*bold* and _italic_")
 
     def test_send_document_error(self):
         self.gateway.webhook_key = self.webhook
