@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_mail_whatsapp_template_tree" model="ir.ui.view">
-        <field name="name">view.mail.whatsapp.template.tree</field>
+    <record id="view_mail_whatsapp_template_list" model="ir.ui.view">
+        <field name="name">view.mail.whatsapp.template.list</field>
         <field name="model">mail.whatsapp.template</field>
         <field name="arch" type="xml">
-            <list decoration-danger="not is_supported and template_uid">
+            <list>
                 <field name="name" />
-                <field name="template_name" />
-                <field name="template_uid" optional="show" />
-                <field name="category" />
-                <field name="language" />
                 <field name="gateway_id" />
+                <field name="template_name" />
+                <field name="model_id" optional="show" />
+                <field name="category" optional="show" />
+                <field name="language" optional="show" />
                 <field
                     name="company_id"
-                    options="{'no_create': True}"
+                    optional="hide"
                     groups="base.group_multi_company"
                 />
                 <field
                     name="state"
+                    decoration-info="state == 'pending'"
                     decoration-success="state == 'approved'"
                     decoration-danger="state == 'rejected'"
                     widget="badge"
@@ -85,6 +86,7 @@
                                 options="{'no_create': True}"
                             />
                             <field name="model_id" />
+                            <field name="report_template_id" readonly="state != 'draft'" />
                             <field name="category" readonly="state != 'draft'" />
                             <field name="language" readonly="state != 'draft'" />
                         </group>
@@ -144,15 +146,17 @@
                                         required="1"
                                         options="{'model': 'model'}"
                                     />
-                                    <field name="model" column_invisible="True" />
+                                    <field name="model" column_invisible="True" widget="char" />
                                     <field
                                         name="line_type"
                                         column_invisible="True"
+                                        widget="char"
                                         force_save="1"
                                     />
                                     <field
                                         name="name"
                                         column_invisible="True"
+                                        widget="char"
                                         force_save="1"
                                     />
                                 </list>
