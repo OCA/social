@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex Cloud
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="utm_campaign_view_form_inherit_budget" model="ir.ui.view">
+        <field name="name">utm.campaign.form.inherit.budget</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='top-group']" position="after">
+                <group string="Budget" groups="sales_team.group_sale_salesman">
+                    <field name="currency_id" invisible="1" />
+                    <field name="campaign_budget_amount" />
+                    <field name="actual_cost" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
