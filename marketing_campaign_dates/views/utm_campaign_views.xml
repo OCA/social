@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex Cloud
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="utm_campaign_view_list_inherit" model="ir.ui.view">
+        <field name="name">utm.campaign.list.inherit.dates</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='tag_ids']" position="after">
+                <field name="start_date" />
+                <field name="end_date" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="utm_campaign_view_form_inherit" model="ir.ui.view">
+        <field name="name">utm.campaign.form.inherit.dates</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@id='top-group']" position="after">
+                <group string="Time Management">
+                    <field name="start_date" />
+                    <field name="end_date" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="utm_campaign_view_search_inherit" model="ir.ui.view">
+        <field name="name">utm.campaign.search.inherit.dates</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.view_utm_campaign_view_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='filter_inactive']" position="after">
+                <separator />
+                <filter
+                    name="running"
+                    string="Running"
+                    domain="['&amp;',
+                            '|',('start_date','=',False),('start_date','&lt;=',context_today().strftime('%Y-%m-%d')),
+                            '|',('end_date','=',False),('end_date','&gt;=',context_today().strftime('%Y-%m-%d'))]"
+                    help="Campaigns with no start date, or a start date on or before today, that are not yet finished"
+                />
+                <filter
+                    name="upcoming"
+                    string="Upcoming"
+                    domain="[('start_date','&gt;',context_today().strftime('%Y-%m-%d'))]"
+                    help="Campaigns that will start in the future"
+                />
+                <filter
+                    name="finished"
+                    string="Finished"
+                    domain="[('end_date','&lt;',context_today().strftime('%Y-%m-%d'))]"
+                    help="Campaigns that have already ended"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
