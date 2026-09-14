@@ -17,6 +17,12 @@ registerPatch({
     recordMethods: {
         close() {
             const _super = this._super.bind(this);
+            // The core menu calls close() for every click outside of it, even when
+            // the dropdown is not open. Only reset the filter (and refetch the
+            // activities) when the menu was actually open.
+            if (!this.isOpen) {
+                return _super();
+            }
             this.activateFilter($(".my_activities"));
             return _super();
         },
