@@ -178,6 +178,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 subtype_xmlid="mail.mt_comment",
                 message_type="comment",
                 attachments=attachments,
+                no_gateway_notification=True,
             )
             self._post_process_message(new_message, chat)
             related_message_id = message.get("context", {}).get("id", False)
@@ -208,6 +209,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                             subtype_xmlid="mail.mt_comment",
                             message_type="comment",
                             attachments=attachments,
+                            no_gateway_notification=True,
                         )
                     )
                     self._post_process_reply(related_message)
