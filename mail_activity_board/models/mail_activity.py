@@ -1,7 +1,7 @@
 # Copyright 2018 David Juaneda - <djuaneda@sdi.es>
 # Copyright 2018 ForgeFlow S.L.  <https://www.forgeflow.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo import api, fields, models
+from odoo import api, fields, models, tools
 
 
 class MailActivity(models.Model):
@@ -32,7 +32,11 @@ class MailActivity(models.Model):
             record.related_model_instance = ref
 
     @api.model
+    @tools.ormcache("self.env.lang")
     def _selection_related_model_instance(self):
+        # Called for every compute batch of related_model_instance (list views,
+        # dashboards): the set of activity-capable models only changes with the
+        # registry, so cache it per language.
         models = self.env["ir.model"].sudo().search([("is_mail_activity", "=", True)])
         return [(model.model, model.name) for model in models]
 
