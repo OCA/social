@@ -291,6 +291,21 @@ class TestUtmCampaign(TestSocialMediaBaseCommon):
         self.utm_campaign_id.invalidate_recordset()
         self.assertAlmostEqual(self.utm_campaign_id.social_engagement, 6.0)
 
+    def test_social_engagement_keeps_the_precision_of_the_publications(self):
+        """A rate below a hundredth reaches the campaign instead of rounding to zero.
+
+        A social media reporting the engagement as a ratio over the
+        impressions, as LinkedIn does, answers figures of four decimals for an
+        account of ordinary size. Two decimals would show those as no
+        engagement at all.
+        """
+        self._set_statistics(self.social_post_account_id, engagement=0.0303)
+        self.utm_campaign_id.invalidate_recordset()
+        self.assertEqual(self.utm_campaign_id.social_engagement, 0.0303)
+        self.assertEqual(
+            self.social_post_account_id.post_id.count_post_engagement, 0.0303
+        )
+
     def test_social_statistics_of_a_campaign_without_publications(self):
         campaign = self.UtmCampaign.create({"name": "Empty campaign"})
         self.assertEqual(campaign.social_click_count, 0)
