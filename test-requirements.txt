@@ -1,1 +1,3 @@
 odoo-test-helper
+odoo-addon-social_media_sync @ git+https://github.com/OCA/social.git@refs/pull/1910/head#subdirectory=social_media_sync
+odoo-addon-social_media_linkedin @ git+https://github.com/OCA/social.git@refs/pull/1890/head#subdirectory=social_media_linkedin
