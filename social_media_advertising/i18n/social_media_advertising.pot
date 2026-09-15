@@ -570,6 +570,12 @@ msgid ""
 msgstr ""
 
 #. module: social_media_advertising
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__failed_message_ids
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__failed_message_ids
+msgid "Failed Messages"
+msgstr ""
+
+#. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Fetch advertising accounts"
 msgstr ""
@@ -803,9 +809,21 @@ msgid "Media Type"
 msgstr ""
 
 #. module: social_media_advertising
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_content
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_content
+msgid "Message Content"
+msgstr ""
+
+#. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_has_error
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_has_error
 msgid "Message Delivery error"
+msgstr ""
+
+#. module: social_media_advertising
+#: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_content
+#: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_content
+msgid "Message content, to be used only in searches"
 msgstr ""
 
 #. module: social_media_advertising
@@ -850,6 +868,12 @@ msgstr ""
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
 #, python-format
 msgid "New ads available"
+msgstr ""
+
+#. module: social_media_advertising
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_calendar_event_id
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_calendar_event_id
+msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: social_media_advertising
@@ -1330,6 +1354,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__web_url
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__web_url
 msgid "Web URL"
+msgstr ""
+
+#. module: social_media_advertising
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__website_message_ids
+#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: social_media_advertising
+#: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__website_message_ids
+#: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__website_message_ids
+msgid "Website communication history"
 msgstr ""
 
 #. module: social_media_advertising
