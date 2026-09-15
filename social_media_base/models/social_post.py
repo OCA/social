@@ -99,7 +99,10 @@ class SocialPost(models.Model):
         compute="_compute_post_statistics", default=0, string="Impression"
     )
     count_post_engagement = fields.Float(
-        compute="_compute_post_statistics", default=0, string="Engagement"
+        compute="_compute_post_statistics",
+        default=0,
+        string="Engagement",
+        digits=(16, 4),
     )
     count_post_interactions = fields.Integer(
         compute="_compute_post_statistics", default=0, string="Interactions"
