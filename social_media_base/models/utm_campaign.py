@@ -85,6 +85,7 @@ class UtmCampaign(models.Model):
         string="Social Media Engagement",
         compute="_compute_social_statistics",
         groups=_SOCIAL_GROUPS,
+        digits=(16, 4),
     )
 
     @api.depends("social_post_ids")
