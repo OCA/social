@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+  <!-- Written so that the parameter is there to be found, and never
+       overwritten once an administrator has put a number in it. Zero is what
+       the module ships with: no retention at all. -->
+  <record id="media_max_age_days" model="ir.config_parameter">
+    <field name="key">social_media_sync.media_max_age_days</field>
+    <field name="value">0</field>
+  </record>
+</odoo>
