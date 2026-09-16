@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- A post adds up what its publications carry, and the import of this
+         module is what writes those counters, so the totals are drawn where
+         the user reads a post only once this module is installed. Without it
+         the columns and the card would be there showing a zero nobody can
+         turn into a number. -->
+
+    <record id="social_post_view_tree_inherit" model="ir.ui.view">
+        <field name="name">social.post.view.tree.inherit.social.media.sync</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='link_click_count']" position="before">
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+            </xpath>
+            <xpath expr="//field[@name='link_click_count']" position="after">
+                <field name="count_post_clicks" />
+                <field name="count_post_shares" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="social_post_view_kanban_inherit" model="ir.ui.view">
+        <field name="name">social.post.view.kanban.inherit.social.media.sync</field>
+        <field name="model">social.post</field>
+        <field name="inherit_id" ref="social_media_base.social_post_view_kanban" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='video_urls']" position="after">
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_impression" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+            </xpath>
+            <xpath expr="//t[@t-set='campaignWrapperClass']" position="before">
+                <hr />
+                <span>Clicks: <t t-esc="record.count_post_clicks.raw_value" /></span>
+                <span>Interactions: <t
+                        t-esc="record.count_post_interactions.raw_value"
+                    /></span>
+                <span>Engagement: <t
+                        t-esc="record.count_post_engagement.value"
+                    /></span>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
