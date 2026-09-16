@@ -1,0 +1,125 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_x_sync
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_x_sync
+#: model:ir.model,name:social_media_x_sync.model_social_account
+msgid "Account Linked to a Social Media"
+msgstr "Cuenta vinculada a una red social"
+
+#. module: social_media_x_sync
+#: model:ir.model.fields,field_description:social_media_x_sync.field_social_account__enable_since
+msgid "Enable Since"
+msgstr "Activar lectura incremental"
+
+#. module: social_media_x_sync
+#. odoo-python
+#: code:addons/social_media_x_sync/models/social_post_account.py:0
+#, python-format
+msgid "Error Comment Tweet: %(error)s"
+msgstr "Error al comentar el tweet: %(error)s"
+
+#. module: social_media_x_sync
+#. odoo-python
+#: code:addons/social_media_x_sync/models/social_post_account.py:0
+#, python-format
+msgid "Error Get Comments for Tweet: %(error)s"
+msgstr "Error al obtener los comentarios del tweet: %(error)s"
+
+#. module: social_media_x_sync
+#: model:ir.model.fields,field_description:social_media_x_sync.field_social_account__last_post_ref
+msgid "Last Post"
+msgstr "Última publicación"
+
+#. module: social_media_x_sync
+#: model:ir.model.fields,field_description:social_media_x_sync.field_social_account__post_since_id
+msgid "Post Since"
+msgstr "Publicación desde"
+
+#. module: social_media_x_sync
+#: model:ir.model,name:social_media_x_sync.model_social_post_account
+msgid "Publication of a Post on a Social Account"
+msgstr "Publicación de una entrada en una cuenta social"
+
+#. module: social_media_x_sync
+#: model:ir.model.fields,help:social_media_x_sync.field_social_account__enable_since
+msgid ""
+"Read only the posts published after the last one already synchronized, to "
+"consume fewer API requests. The metrics of the previous posts are no longer "
+"updated while this option is on."
+msgstr ""
+"Lee solo las publicaciones posteriores a la última ya sincronizada, para "
+"consumir menos peticiones de la API. Mientras esta opción esté activa, las "
+"métricas de las publicaciones anteriores dejan de actualizarse."
+
+#. module: social_media_x_sync
+#: model:ir.model.fields,help:social_media_x_sync.field_social_account__last_post_ref
+msgid ""
+"Reference of the newest tweet read from X, used to ask only for the ones "
+"published after it."
+msgstr ""
+"Referencia del tweet más reciente leído de X, que se usa para pedir solo los "
+"publicados después de él."
+
+#. module: social_media_x_sync
+#. odoo-python
+#: code:addons/social_media_x_sync/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The comment could not be published on X. The account may have reached the "
+"limit of requests of its plan."
+msgstr ""
+"No se ha podido publicar el comentario en X. Puede que la cuenta haya "
+"alcanzado el límite de peticiones de su plan."
+
+#. module: social_media_x_sync
+#. odoo-python
+#: code:addons/social_media_x_sync/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The comments could not be read from X. The account may have reached the "
+"limit of requests of its plan."
+msgstr ""
+"No se han podido leer los comentarios de X. Puede que la cuenta haya "
+"alcanzado el límite de peticiones de su plan."
+
+#. module: social_media_x_sync
+#. odoo-python
+#: code:addons/social_media_x_sync/models/social_post_account.py:0
+#, python-format
+msgid "The post does not exist or has been deleted."
+msgstr "La publicación no existe o ha sido eliminada."
+
+#. module: social_media_x_sync
+#: model:ir.model.fields,help:social_media_x_sync.field_social_account__post_since_id
+msgid "This post is updated with each request with the latest one."
+msgstr "Esta publicación se actualiza en cada petición con la más reciente."
+
+#. module: social_media_x_sync
+#: model_terms:ir.ui.view,arch_db:social_media_x_sync.social_post_account_view_search_inherit
+msgid "With Quotes"
+msgstr "Con citas"
+
+#. module: social_media_x_sync
+#: model_terms:ir.ui.view,arch_db:social_media_x_sync.social_post_account_view_search_inherit
+msgid "With Reposts"
+msgstr "Con reposts"
+
+#. module: social_media_x_sync
+#. odoo-python
+#: code:addons/social_media_x_sync/tests/test_sync_account_x.py:0
+#, python-format
+msgid "X refused the timeline"
+msgstr "X ha rechazado la cronología"
