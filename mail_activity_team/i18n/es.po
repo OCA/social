@@ -213,6 +213,8 @@ msgstr "Usuario"
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_partner_bank__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_res_users__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_social_account__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_social_advertising_campaign__activity_team_user_ids
+#: model:ir.model.fields,field_description:mail_activity_team.field_social_advertising_campaign_group__activity_team_user_ids
 #: model:ir.model.fields,field_description:mail_activity_team.field_social_post__activity_team_user_ids
 msgid "test field"
 msgstr "campo de prueba"
