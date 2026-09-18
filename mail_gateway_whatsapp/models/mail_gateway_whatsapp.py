@@ -10,11 +10,12 @@ from io import StringIO
 
 import requests
 import requests_toolbelt
+from markupsafe import Markup
 
 from odoo import models
 from odoo.exceptions import UserError
 from odoo.http import request
-from odoo.tools import html2plaintext
+from odoo.tools import html2plaintext, plaintext2html
 
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
 
@@ -154,12 +155,12 @@ class MailGatewayWhatsappService(models.AbstractModel):
                         attachment_info,
                     )
                 )
+        body = plaintext2html(body) if body else Markup()
         if message.get("location"):
-            body += (
+            body += Markup(
                 '<a target="_blank" href="https://www.google.com/'
-                f'maps/search/?api=1&query={message["location"]["latitude"]},'
-                f'{message["location"]["longitude"]}">Location</a>'
-            )
+                'maps/search/?api=1&query=%s,%s">Location</a>'
+            ) % (message["location"]["latitude"], message["location"]["longitude"])
         if message.get("contacts"):
             pass
         if len(body) > 0 or attachments:

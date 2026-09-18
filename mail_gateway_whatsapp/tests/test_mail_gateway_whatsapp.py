@@ -1,6 +1,7 @@
 # Copyright 2022 CreuBlanca
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import copy
 import hashlib
 import hmac
 import json
@@ -317,6 +318,23 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             message = self.receive_message(self.audio_message)
             # Check that the attachment is marked as voice
             self.assertTrue(message.attachment_ids.voice_ids)
+
+    def test_receive_message_keeps_layout(self):
+        """Text keeps its layout, markup stays literal, location stays a link."""
+        message = copy.deepcopy(self.message_01)
+        content = message["entry"][0]["changes"][0]["value"]["messages"][0]
+        # Plain text, brackets included: what a sender typing "<b>" really sends.
+        content["text"] = {
+            "body": "Line 1\n<b>bold</b>\n\nSection 2 https://example.com/track"
+        }
+        content["location"] = {"latitude": "41.3851", "longitude": "2.1734"}
+        body = self.receive_message(message).body
+        self.assertIn("Line 1<br", body)
+        self.assertIn("</p><p>", body)
+        self.assertIn('href="https://example.com/track"', body)
+        self.assertIn("&lt;b&gt;bold&lt;/b&gt;", body)
+        self.assertIn("41.3851,2.1734", body)
+        self.assertNotIn("&lt;a", body)
 
     @mute_logger("odoo.addons.mail_gateway.controllers.gateway")
     def test_post_no_signature_no_message(self):
