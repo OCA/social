@@ -208,6 +208,7 @@ class MailGatewayTelegramService(models.AbstractModel):
                 subtype_xmlid="mail.mt_comment",
                 message_type="comment",
                 attachments=attachments,
+                no_gateway_notification=True,
             )
             self._post_process_message(new_message, chat)
             related_message_id = (
@@ -237,6 +238,7 @@ class MailGatewayTelegramService(models.AbstractModel):
                             subtype_xmlid="mail.mt_comment",
                             message_type="comment",
                             attachments=attachments,
+                            no_gateway_notification=True,
                         )
                     )
                     new_message.gateway_message_id = new_related_message
