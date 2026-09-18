@@ -7,6 +7,8 @@ from odoo.tools import SQL
 
 from odoo.addons.mail.tools.discuss import Store
 
+from odoo.addons.mail.tools.discuss import Store
+
 
 class ResPartner(models.Model):
     """Update of res.partner class to take into account the gateway."""
@@ -80,6 +82,21 @@ class ResPartner(models.Model):
                 ]
             )
         return channels
+
+    def _to_store(self, store: Store, /, *, fields=None, **kwargs):
+        """Override to add the gateway channels the partner can be reached on."""
+        super()._to_store(store, fields=fields, **kwargs)
+        if fields is None:
+            fields = ["gateway_channels"]
+        if "gateway_channels" not in fields:
+            return
+        # sudo: res.partner.gateway.channel - technical data needed by the web
+        # client, not meant to be restricted by the reader's access rights
+        for partner in self.sudo():
+            store.add(
+                partner,
+                {"gateway_channels": partner.gateway_channel_ids.mail_format()},
+            )
 
 
 class ResPartnerGatewayChannel(models.Model):
