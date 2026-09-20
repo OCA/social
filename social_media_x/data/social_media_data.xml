@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="social_media_x" model="social.media">
+        <field name="name">X</field>
+        <field name="media_type">x</field>
+        <field name="description">Manage your X account and schedule posts
+        </field>
+        <field
+            name="image"
+            type="base64"
+            file="social_media_x/static/description/icon.png"
+        />
+    </record>
+</odoo>
