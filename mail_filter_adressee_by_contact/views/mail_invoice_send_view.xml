@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_invoice_send_wizard_form" model="ir.ui.view">
+        <field name="name">Send Invoice</field>
+        <field name="model">account.move.send.wizard</field>
+        <field name="inherit_id" ref="account.account_move_send_wizard_form" />
+        <field name="arch" type="xml">
+            <field name="mail_partner_ids" position="before">
+                <div>
+                    <field
+                        name="apply_filter"
+                        widget="radio"
+                        options="{'horizontal': True}"
+                    />
+                </div>
+            </field>
+            <field name="mail_partner_ids" position="attributes">
+                <attribute name="domain">partner_ids_domain</attribute>
+            </field>
+        </field>
+    </record>
+</odoo>
