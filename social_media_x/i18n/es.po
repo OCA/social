@@ -1,0 +1,415 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_x
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_api_key
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__x_api_key
+msgid "API Key"
+msgstr "Clave de API"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_api_secret
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__x_api_secret
+msgid "API Secret"
+msgstr "Secreto de API"
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_account
+msgid "Account Linked to a Social Media"
+msgstr "Cuenta vinculada a una red social"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/wizards/wizard_social_account.py:0
+#, python-format
+msgid ""
+"Account access could not be authorized. Please check your settings or try "
+"again later."
+msgstr ""
+"No se ha podido autorizar el acceso a la cuenta. Revise su configuración o "
+"inténtelo de nuevo más tarde."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/wizards/wizard_social_account.py:0
+#, python-format
+msgid "An account with that information already exists."
+msgstr "Ya existe una cuenta con esa información."
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__x_access_token_oauth2
+msgid ""
+"App-only bearer token, obtained from the API Key and the API Secret. It "
+"authorizes what is asked in the name of the App and not of a user."
+msgstr ""
+"Token bearer de solo aplicación, obtenido a partir de la API Key y el API "
+"Secret. Autoriza lo que se pide en nombre de la aplicación y no de un "
+"usuario."
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_post
+msgid "Content to Publish on Social Media"
+msgstr "Contenido para publicar en redes sociales"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid "ERROR DELETE POST X: %(error)s"
+msgstr "ERROR AL ELIMINAR LA PUBLICACIÓN EN X: %(error)s"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid "Error getting X access token: %(error)s"
+msgstr "Error al obtener el token de acceso de X: %(error)s"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"Invalid X callback: the request token is missing. Please restart the account "
+"association process."
+msgstr ""
+"Respuesta de X no válida: falta el token de solicitud. Reinicie el proceso "
+"de asociación de la cuenta."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"Invalid X request token. Please restart the account association process."
+msgstr ""
+"Token de solicitud de X no válido. Reinicie el proceso de asociación de la "
+"cuenta."
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_media__media_type
+msgid "Media Type"
+msgstr "Tipo de red social"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__oauth_token
+msgid "Oauth Token"
+msgstr "Token de OAuth"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid "PUBLISHING ON X: %(error)s"
+msgstr "PUBLICANDO EN X: %(error)s"
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__x_access_token_oauth1
+msgid "Post and delete"
+msgstr "Publicar y eliminar"
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_post_account
+msgid "Publication of a Post on a Social Account"
+msgstr "Publicación de una entrada en una cuenta social"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__quote_count
+#: model:ir.model.fields,field_description:social_media_x.field_social_post_account__quote_count
+#: model:ir.model.fields,field_description:social_media_x.field_social_statistics_mixin__quote_count
+msgid "Quote Count"
+msgstr "Número de citas"
+
+#. module: social_media_x
+#: model_terms:ir.ui.view,arch_db:social_media_x.social_post_account_view_form_statistics_inherit
+msgid "Quotes"
+msgstr "Citas"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__rate_limit_endpoint
+msgid "Rate Limit Endpoint"
+msgstr "Endpoint con límite alcanzado"
+
+#. module: social_media_x
+#: model_terms:ir.ui.view,arch_db:social_media_x.social_post_account_view_form_statistics_inherit
+msgid "Reposts"
+msgstr "Reposts"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__retweet_count
+#: model:ir.model.fields,field_description:social_media_x.field_social_post_account__retweet_count
+#: model:ir.model.fields,field_description:social_media_x.field_social_statistics_mixin__retweet_count
+msgid "Retweet Count"
+msgstr "Número de retweets"
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_statistics_mixin
+msgid "Social Media Interaction Counters"
+msgstr "Contadores de interacción en redes sociales"
+
+#. module: social_media_x
+#: model:ir.model,name:social_media_x.model_social_media
+msgid "Social Media Supported by the System"
+msgstr "Red social admitida por el sistema"
+
+#. module: social_media_x
+#: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
+msgid ""
+"The X API no longer has a free access tier. The developer\n"
+"                    App must belong to a Project and be enrolled in a paid\n"
+"                    plan, otherwise X rejects every request of this module.\n"
+"                    See the"
+msgstr ""
+"La API de X ya no dispone de un nivel de acceso gratuito. La App\n"
+"                    de desarrollador debe pertenecer a un Proyecto y estar\n"
+"                    suscrita a un plan de pago; de lo contrario, X rechaza\n"
+"                    todas las peticiones de este módulo. Consulte los"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"The account was not created: the OAuth2 access token could not be obtained."
+msgstr ""
+"La cuenta no se ha creado: no se ha podido obtener el token de acceso OAuth2."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid ""
+"The post could not be deleted on X. The account may have reached the limit "
+"of requests of its plan: check the account and try again later."
+msgstr ""
+"No se ha podido eliminar la publicación en X. Es posible que la cuenta haya "
+"alcanzado el límite de peticiones de su plan: revise la cuenta e inténtelo "
+"de nuevo más tarde."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"There are X accounts with the same username (%(username)s), please check to "
+"avoid spam errors."
+msgstr ""
+"Hay varias cuentas de X con el mismo nombre de usuario (%(username)s), "
+"revíselo para evitar errores por spam."
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_token_oauth2
+msgid "Token for read"
+msgstr "Token de lectura"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_token_oauth1
+msgid "Token for write"
+msgstr "Token de escritura"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid "Unexpected response from X: %(error)s"
+msgstr "Respuesta inesperada de X: %(error)s"
+
+#. module: social_media_x
+#: model:ir.model.fields,help:social_media_x.field_social_account__x_premium
+msgid ""
+"Whether this account holds an X Premium subscription, which raises the "
+"message of a post from 280 to 25 000 characters. Left off, a post longer "
+"than 280 characters is refused before it is sent. Turned on for an account "
+"that does not hold the subscription, the post is sent and X refuses it, and "
+"the publication fails with the reason X gives."
+msgstr ""
+
+#. module: social_media_x
+#: model:ir.model.fields.selection,name:social_media_x.selection__social_media__media_type__x
+msgid "X"
+msgstr "X"
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#: code:addons/social_media_x/wizards/wizard_social_account.py:0
+#: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
+#, python-format
+msgid "X API pricing"
+msgstr "precios de la API de X"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_secret_oauth1
+msgid "X Access Secret Oauth1"
+msgstr "Secreto de acceso OAuth1 de X"
+
+#. module: social_media_x
+#: model:ir.model.fields,field_description:social_media_x.field_social_account__x_premium
+msgid "X Premium"
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post_account.py:0
+#, python-format
+msgid ""
+"X did not accept the post. The account may have reached the limit of "
+"requests of its plan: check the account and try again later."
+msgstr ""
+"X no ha aceptado la publicación. Es posible que la cuenta haya alcanzado el "
+"límite de peticiones de su plan: revise la cuenta e inténtelo de nuevo más "
+"tarde."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X only publishes JPG, PNG, WEBP and GIF images, so %(names)s cannot be "
+"published. Convert them or remove them from the post."
+msgstr ""
+"X solo publica imágenes JPG, PNG, WEBP y GIF, por lo que %(names)s no se "
+"pueden publicar. Conviértalas o quítelas de la publicación."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X only publishes MP4 videos, so %(names)s cannot be published. Convert them "
+"to MP4 or remove them from the post."
+msgstr ""
+"X solo publica vídeos MP4, por lo que %(names)s no se pueden publicar. "
+"Conviértalos a MP4 o quítelos de la publicación."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X publishes a single video per post, so this post carrying %(videos)s videos "
+"cannot be published. Leave one video or create a separate post for each of "
+"them."
+msgstr ""
+"X publica un único vídeo por publicación, por lo que esta publicación, que "
+"lleva %(videos)s vídeos, no se puede publicar. Deje un solo vídeo o cree una "
+"publicación aparte para cada uno de ellos."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X publishes at most %(limit)s characters per post, and this one has "
+"%(length)s. Shorten the message to publish it."
+msgstr ""
+"X publica como máximo %(limit)s caracteres por publicación, y esta tiene "
+"%(length)s. Acorte el mensaje para poder publicarla."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X publishes at most %(limit)s images per post, and this one carries "
+"%(images)s. Remove some of them or create a separate post."
+msgstr ""
+"X publica como máximo %(limit)s imágenes por publicación, y esta lleva "
+"%(images)s. Quite algunas o cree una publicación aparte."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X publishes either images or a video, not both in the same post. Leave one "
+"kind of media or create a separate post for each of them."
+msgstr ""
+"X publica imágenes o un vídeo, pero no ambos en la misma publicación. Deje "
+"un solo tipo de archivo multimedia o cree una publicación aparte para cada "
+"uno."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X publishes images of at most %(limit)s, %(gif_limit)s for a GIF, so "
+"%(names)s cannot be published. Reduce their size or remove them from the "
+"post."
+msgstr ""
+"X publica imágenes de %(limit)s como máximo, %(gif_limit)s en el caso de un "
+"GIF, por lo que %(names)s no se pueden publicar. Reduzca su tamaño o "
+"quítelas de la publicación."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_post.py:0
+#, python-format
+msgid ""
+"X publishes videos of at most %(limit)s, so %(names)s cannot be published. "
+"Reduce their size or remove them from the post."
+msgstr ""
+"X publica vídeos de %(limit)s como máximo, por lo que %(names)s no se pueden "
+"publicar. Reduzca su tamaño o quítelos de la publicación."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"X refused the post of %(account)s: %(error)s. What an account may publish "
+"depends on its plan, so check the X Premium setting of the account before "
+"trying again."
+msgstr ""
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"X rejected the request because the developer App is not enrolled in a paid "
+"plan. The X API no longer has a free access tier: attach the App to a "
+"Project and subscribe a plan at %(pricing_link)s, then try again."
+msgstr ""
+"X ha rechazado la petición porque la App de desarrollador no está suscrita a "
+"un plan de pago. La API de X ya no dispone de un nivel de acceso gratuito: "
+"asocie la App a un Proyecto y contrate un plan en %(pricing_link)s, y vuelva "
+"a intentarlo."
+
+#. module: social_media_x
+#. odoo-python
+#: code:addons/social_media_x/models/social_account.py:0
+#, python-format
+msgid ""
+"You have reached the limit of requests <b>%(endpoint)s</b> allowed according "
+"to your account plan.<br>• <b>Total limit:</b> %(limit)s request(s) per "
+"window or period<br>• <b>Remaining:</b> %(remaining)s<br>• <b>Next request:</"
+"b> %(next_request)s<br>Please try again after that time (Next request)."
+"<br>For more information, see the <a href='%(rate_limit_url)s' "
+"target='_blank'>rate limits</a>."
+msgstr ""
+"Ha alcanzado el límite de peticiones <b>%(endpoint)s</b> permitido según el "
+"plan de su cuenta.<br>• <b>Límite total:</b> %(limit)s petición(es) por "
+"ventana o periodo<br>• <b>Restantes:</b> %(remaining)s<br>• <b>Siguiente "
+"petición:</b> %(next_request)s<br>Inténtelo de nuevo después de esa hora "
+"(Siguiente petición).<br>Para más información, consulte los <a "
+"href='%(rate_limit_url)s' target='_blank'>límites de peticiones</a>."
