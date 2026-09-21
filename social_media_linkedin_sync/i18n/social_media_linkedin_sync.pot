@@ -1,0 +1,240 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_linkedin_sync
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_linkedin_sync
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
+msgid ""
+"), so it refuses to serve its publications. Enable the\n"
+"                    matching product on the LinkedIn application, then press\n"
+"                    <b>Update account</b> with <b>Update keys</b> checked to\n"
+"                    authorize this account again: refreshing the token alone\n"
+"                    keeps the scopes it already has."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model,name:social_media_linkedin_sync.model_social_account
+msgid "Account Linked to a Social Media"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid ""
+"An error occurred while deleting the comment or it no longer exists, please "
+"try again later."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
+msgid "Full resync"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
+msgid ""
+"LinkedIn did not grant this account the permission the\n"
+"                    import of its history needs ("
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "LinkedIn member"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "LinkedIn page"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
+#, python-format
+msgid "LinkedIn refused the feed"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
+#: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
+#, python-format
+msgid "LinkedIn refused the page statistics"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
+#, python-format
+msgid "LinkedIn refused the statistics"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model.fields,field_description:social_media_linkedin_sync.field_social_account__linkedin_missing_sync_scopes
+msgid "Linkedin Missing Sync Scopes"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model.fields,field_description:social_media_linkedin_sync.field_social_account__linkedin_sync_scopes_notified
+msgid "Linkedin Sync Scopes Notified"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model,name:social_media_linkedin_sync.model_social_post_account
+msgid "Publication of a Post on a Social Account"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
+msgid ""
+"Read the whole feed again and mark as deleted what is no longer on LinkedIn."
+" This is the only action that notices the publications deleted there, and "
+"the scheduled action already does it weekly on its own."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model.fields,field_description:social_media_linkedin_sync.field_social_account__linkedin_statistics_checkpoint
+msgid "Statistics Checkpoint"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "The comment cannot be recommended on LinkedIn."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "The comment could not be published on LinkedIn: %(error)s"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "The comment does not exist or has been deleted."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "The comments could not be read from LinkedIn: %(error)s"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model.fields,help:social_media_linkedin_sync.field_social_account__linkedin_statistics_checkpoint
+msgid ""
+"The daily figures LinkedIn reported for the whole page over the last days, "
+"as of the last time the publications were imported. The check for updates "
+"compares the page against it instead of reading the statistics of every "
+"publication."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "The post does not exist or has been deleted."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "The replies could not be read from LinkedIn: %(error)s"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model.fields,help:social_media_linkedin_sync.field_social_account__linkedin_missing_sync_scopes
+msgid ""
+"The scopes the token of this account was not granted and the import of its "
+"history needs. A token keeps the scopes it was issued with, so an account "
+"associated before this module was installed has to be authorized again."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_account.py:0
+#, python-format
+msgid ""
+"The token of this account was not granted %(scopes)s, so LinkedIn refuses to"
+" serve its publications and they cannot be imported. Enable the matching "
+"product on the LinkedIn application, then press Update account with Update "
+"keys checked to authorize this account again: refreshing the token alone "
+"keeps the scopes it already has."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
+msgid ""
+"The whole feed of the page will be read again, which costs one call per "
+"hundred publications against the daily quota of LinkedIn. Continue?"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#: model:ir.model.fields,help:social_media_linkedin_sync.field_social_account__linkedin_sync_scopes_notified
+msgid ""
+"Whether the responsible user was already told that this account has to be "
+"authorized again before its history can be imported. Kept so the check that "
+"runs every two hours warns once and not on every pass."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "You had no reaction on this comment."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "You had no reaction on this post."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "You have already reacted to this comment."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
+#, python-format
+msgid "You have already reacted to this post."
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
+#, python-format
+msgid "history unavailable"
+msgstr ""
