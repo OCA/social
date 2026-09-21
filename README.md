@@ -24,9 +24,9 @@ addon | version | maintainers | summary
 [fetchmail_thread_default](fetchmail_thread_default/) | 18.0.1.0.0 |  | Post unkonwn messages to an existing thread
 [mail_activity_cancel_tracking](mail_activity_cancel_tracking/) | 18.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Mail Activity Cancel Tracking
 [mail_activity_unlink_log](mail_activity_unlink_log/) | 18.0.1.0.0 |  | Leave a message when an activity is unlinked
-[mail_gateway](mail_gateway/) | 18.0.1.1.0 |  | Base module for gateway communications
+[mail_gateway](mail_gateway/) | 18.0.1.1.1 |  | Base module for gateway communications
 [mail_gateway_instagram](mail_gateway_instagram/) | 18.0.1.0.0 |  | Set a gateway for Instagram Direct Messages
-[mail_gateway_telegram](mail_gateway_telegram/) | 18.0.1.0.0 |  | Set a gateway for telegram
+[mail_gateway_telegram](mail_gateway_telegram/) | 18.0.1.0.1 |  | Set a gateway for telegram
 [mail_gateway_telegram_standalone](mail_gateway_telegram_standalone/) | 18.0.1.0.0 |  | Generic Telegram API connector
 [mail_gateway_whatsapp](mail_gateway_whatsapp/) | 18.0.2.1.7 |  | Set a gateway for WhatsApp
 [mail_mention_suggestion_config](mail_mention_suggestion_config/) | 18.0.1.0.0 |  | Configure your partner mention suggestions in chatter messages
