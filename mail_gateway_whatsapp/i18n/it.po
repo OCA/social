@@ -1349,9 +1349,19 @@ msgid "We were not able to fetch value of field: %(field)s"
 msgstr "Non si è riusciti a ottenere il valore del campo: %(field)s"
 
 #. module: mail_gateway_whatsapp
+#: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_res_partner__website_message_ids
+msgid "Website Messages"
+msgstr "Messaggi sito web"
+
+#. module: mail_gateway_whatsapp
 #: model:ir.model.fields,field_description:mail_gateway_whatsapp.field_mail_whatsapp_template_button__website_url
 msgid "Website Url"
 msgstr "URL sito web"
+
+#. module: mail_gateway_whatsapp
+#: model:ir.model.fields,help:mail_gateway_whatsapp.field_res_partner__website_message_ids
+msgid "Website communication history"
+msgstr "Cronologia comunicazioni sito web"
 
 #. module: mail_gateway_whatsapp
 #: model:ir.model.fields.selection,name:mail_gateway_whatsapp.selection__mail_gateway__gateway_type__whatsapp
@@ -1490,9 +1500,3 @@ msgstr "sito meta business."
 
 #~ msgid "Message content, to be used only in searches"
 #~ msgstr "Contenuto messaggio, da utilizzare solo nelle ricerche"
-
-#~ msgid "Website Messages"
-#~ msgstr "Messaggi sito web"
-
-#~ msgid "Website communication history"
-#~ msgstr "Cronologia comunicazioni sito web"
