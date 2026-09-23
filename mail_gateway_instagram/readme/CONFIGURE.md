@@ -40,6 +40,12 @@ own.
      URL.
    - **Instagram Version**: Graph API version without the `v` prefix
      (default `26.0`).
+   - **Show Own Messages**: when enabled, messages the professional
+     account sends from the Instagram app are posted in the Discuss
+     gateway channel. Default is off, so existing databases keep
+     ignoring those echoes until an operator turns it on. Echoed
+     messages are authored as **Webhook User**, which defaults to
+     OdooBot (`base.user_root`).
    - **Webhook Key**: URL path segment of your choice. It becomes part
      of the webhook URL.
    - **Webhook User**: user that creates inbound messages.
@@ -56,6 +62,51 @@ own.
 
 The same **Webhook URL** field on the main form group is visible only
 in the developer mode. Use the tab; that copy is for operators.
+
+## Outbound media
+
+Sending an image, audio, video or PDF from Discuss needs a **public**
+`web.base.url` that Meta's media fetcher can download **while the send
+is still running**. Instagram Login only accepts `payload.url` (Meta
+GETs the file); there is no multipart upload on that API. A localhost
+URL will fail. Graph error 2018007 (`Upload failed` /
+`Upload fehlgeschlagen` / `Caricamento non riuscito`) means that fetch
+did not return the file.
+
+Outbound media uses
+`/mail_gateway_instagram/content/<id>/<token>/<filename>` (token in the
+path, no query string). Core Odoo `robots.txt` is `Disallow: /`; this
+module lists `Allow: /mail_gateway_instagram/content` first (including
+for `facebookexternalhit`) so Meta's crawler is not blocked. If the
+**Website** app is installed and its robots.txt still disallows the
+path, add the same Allow line there. Graph's error body is stored on
+the Discuss notification.
+
+### Host reachability (2018007 with a working URL)
+
+A browser (or your own curl) returning HTTP 200 for the media URL is
+**not** enough. Meta's media fetcher is a separate service from the
+webhook client:
+
+- Webhooks can POST successfully to the same host while media GETs
+  still fail with 2018007.
+- When the hostname resolves to a bare datacenter IP (for example a
+  Hetzner VPS with Cloudflare DNS-only / grey cloud), Meta often
+  **never opens a TCP connection** to that host. Access logs show no
+  GET from Meta, and Graph fails in under a second. Cloudflare "AI bot
+  access" / robots settings do not apply on grey-cloud traffic.
+- The same Graph token and recipient can send images whose
+  `payload.url` points at a public CDN (Cloudflare, GitHub raw,
+  httpbin, and similar) while URLs on the Odoo host keep failing.
+
+Mitigations: put the media hostname behind a CDN or Cloudflare
+**proxied** (orange cloud) record, or serve outbound files from object
+storage / a CDN base URL that Meta will fetch. Changing only the Odoo
+path shape will not fix a host Meta refuses to contact.
+
+Each send publishes a **permanent unauthenticated** tokenized media
+URL (`access_token` on `ir.attachment`) until an operator clears that
+token. Do not treat those URLs as private.
 
 ## Meta webhook
 
