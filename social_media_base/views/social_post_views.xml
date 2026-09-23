@@ -1,0 +1,438 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="social_network_post_form_view">
+        <field name="name">social.post.form</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <form js_class="social_form">
+                <header>
+                    <button
+                        type="object"
+                        name="action_create_post_account"
+                        class="oe_highlight"
+                        string="Post"
+                        invisible="state not in ('draft','planned')"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options="{'clickable': '0'}"
+                        statusbar_visible="draft,planned,posted"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_title mb-3">
+                        <h1>YOUR POST</h1>
+                    </div>
+
+                    <!-- Draft/Planned state form -->
+                    <group
+                        invisible="state not in ('draft','planned')"
+                        class="oe_social_post_form"
+                    >
+                        <group class="col-6">
+                            <label for="account_ids" string="Post on" />
+                            <field
+                                name="account_ids"
+                                widget="many2many_checkboxes"
+                                nolabel="1"
+                                options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True}"
+                            />
+
+                            <label for="message" string="Message" />
+                            <field
+                                name="message"
+                                nolabel="1"
+                                placeholder="Write a message or upload an image"
+                            />
+
+                            <label
+                                for="image_ids"
+                                string="Attach Images"
+                                invisible="video_ids"
+                            />
+                            <field
+                                name="image_ids"
+                                readonly="state == 'cancelled'"
+                                widget="many2many_binary"
+                                nolabel="1"
+                                invisible="video_ids"
+                                options="{'accepted_file_extensions': 'image/jpeg, image/png, image/jpg'}"
+                            />
+
+                            <label
+                                for="video_ids"
+                                string="Attach Videos"
+                                invisible="image_ids"
+                            />
+                            <field
+                                name="video_ids"
+                                widget="many2many_binary"
+                                nolabel="1"
+                                invisible="image_ids"
+                                options="{'accepted_file_extensions': 'video/*'}"
+                            />
+
+                            <label for="campaign_id" string="Campaign" />
+                            <field
+                                name="campaign_id"
+                                nolabel="1"
+                                placeholder="Select campaign (optional)"
+                            />
+
+                            <label for="send_post" string="When" />
+                            <div class="d-flex flex-column">
+                                <div>
+                                    <field
+                                        name="send_post"
+                                        widget="radio"
+                                        nolabel="1"
+                                    />
+                                </div>
+                                <group class="row">
+                                    <field
+                                        name="send_post_date"
+                                        readonly="0"
+                                        invisible="send_post == 'now'"
+                                        required="send_post == 'schedule'"
+                                        class="mt-2"
+                                    />
+                                </group>
+                            </div>
+                        </group>
+
+                        <!-- Preview on the right -->
+                        <group class="col-6">
+                            <div class="post-preview">
+                                <field name="post_preview" nolabel="1" />
+                            </div>
+                        </group>
+                    </group>
+
+                    <!-- Published state view -->
+                    <div invisible="state in ('draft','planned')">
+                        <field name="message" readonly="1" />
+                    </div>
+
+                    <notebook invisible="state in ('draft','planned')">
+                        <page name="post_account_ids" string="Posts">
+                            <field name="post_account_ids" nolabel="1" readonly="1">
+                                <kanban js_class="social_kanban" open="open_full_view">
+                                    <field name="message" />
+                                    <field name="published_date" />
+                                    <field name="image_urls" />
+                                    <field name="comment_count" />
+                                    <field name="like_count" />
+                                    <field name="post_account_url" />
+                                    <field name="author" />
+                                    <field name="state" />
+                                    <field name="media_type" />
+                                    <field name="media_id" />
+                                    <field name="account_id" />
+                                    <templates>
+                                        <t t-name="card">
+                                            <div
+                                                t-attf-class="rounded oe_kanban_global_click oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                                            >
+                                                <t
+                                                    t-call="social_media_base.postAccountHeader"
+                                                />
+
+                                                <div class="oe_kanban_content">
+                                                    <t
+                                                        t-set="images"
+                                                        t-value="JSON.parse(record.image_urls.raw_value)"
+                                                    />
+                                                    <t
+                                                        t-call="social_media_base.postAccountMessageImages"
+                                                    />
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </templates>
+                                </kanban>
+                            </field>
+                        </page>
+                        <page
+                            name="images_videos"
+                            string="Images &amp; Videos"
+                            invisible="not image_ids and not video_ids"
+                        >
+                            <group>
+                                <group string="Images" invisible="not image_ids">
+                                    <field
+                                        name="image_ids"
+                                        nolabel="1"
+                                        widget="many2many_binary"
+                                        readonly="1"
+                                        options="{'accepted_file_extensions': 'image/*'}"
+                                    />
+                                </group>
+                                <group string="Videos" invisible="not video_ids">
+                                    <field
+                                        name="video_ids"
+                                        nolabel="1"
+                                        widget="many2many_binary"
+                                        readonly="1"
+                                        options="{'accepted_file_extensions': 'video/*'}"
+                                    />
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <chatter />
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_network_post_tree_view">
+        <field name="name">social.post.list</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <list
+                decoration-muted="state == 'draft'"
+                decoration-info="state in ('planned','publishing')"
+                decoration-success="state == 'published'"
+                decoration-danger="state == 'cancelled'"
+            >
+                <field name="message" />
+                <field name="account_ids" widget="many2many_tags" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_shares" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+                <field name="state" invisible="1" />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_kanban_view">
+        <field name="name">social.post.kanban</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <kanban js_class="social_kanban">
+                <field name="id" />
+                <field name="account_ids" />
+                <field name="message" />
+                <field name="published_date" />
+                <field name="image_urls" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_clicks" />
+                <field name="count_post_impression" />
+                <field name="count_post_interactions" />
+                <field name="count_post_engagement" />
+                <templates>
+                    <t t-name="card">
+                        <div class="oe_kanban_global_click rounded">
+                            <div class="d-flex flex-column">
+                                <div
+                                    class="d-flex justify-content-between align-items-center"
+                                >
+                                    <field name="account_ids" widget="many2many_tags" />
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-muted="state == 'draft'"
+                                        decoration-info="state in ('planned','publishing')"
+                                        decoration-success="state == 'published'"
+                                        decoration-danger="state == 'cancelled'"
+                                    />
+                                </div>
+                                <hr />
+                                <div t-if="record.message">
+                                    <span
+                                        t-out="record.message.raw_value.substring(0,record.messageLength)"
+                                    />
+                                    <span
+                                        t-if="record.message.raw_value.length > record.messageLength"
+                                        class="cursor-pointer show-more-message"
+                                    >...see more</span>
+                                </div>
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value)"
+                                />
+                                <div
+                                    t-if="images.length > 2"
+                                    class="row h-auto social-all-images"
+                                >
+                                    <button class="btn btn-md active" role="button">
+                                        + <t t-esc="images.length - 2" />
+                                    </button>
+                                </div>
+                                <div
+                                    class="d-flex justify-content-between align-items-center mt-1"
+                                >
+                                    <t
+                                        t-foreach="images.slice(0,record.countShowImage)"
+                                        t-as="img"
+                                        t-key="img"
+                                    >
+                                        <img
+                                            t-att-src="img"
+                                            alt="Image"
+                                            class="img-fluid img-posts"
+                                        />
+                                    </t>
+                                </div>
+                                <hr />
+                                <span>Clicks: <t
+                                    t-esc="record.count_post_clicks.raw_value"
+                                /></span>
+                                <span>Interactions: <t
+                                    t-esc="record.count_post_interactions.raw_value"
+                                /></span>
+                                <span>Engagement: <t
+                                    t-esc="record.count_post_engagement.raw_value"
+                                /></span>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="social_post_view_search" model="ir.ui.view">
+        <field name="name">social.post.view.search</field>
+        <field name="model">social.post</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Search Fields -->
+                <field name="message" string="Message" />
+                <field name="account_ids" string="Account" />
+                <field name="campaign_id" string="Campaign" />
+                <field name="content_type" />
+
+                <!-- Content Type Filters -->
+                <filter
+                    name="filter_posts"
+                    string="Posts Only"
+                    domain="[('content_type', '=', 'post')]"
+                />
+                <filter
+                    name="filter_videos"
+                    string="Videos Only"
+                    domain="[('content_type', '=', 'reel')]"
+                />
+                <filter
+                    name="filter_ads"
+                    string="Ads Only"
+                    domain="[('content_type', '=', 'ad')]"
+                />
+                <separator />
+
+                <!-- State Filters -->
+                <filter
+                    name="filter_draft"
+                    string="Draft"
+                    domain="[('state', '=', 'draft')]"
+                />
+                <filter
+                    name="filter_planned"
+                    string="Planned"
+                    domain="[('state', '=', 'planned')]"
+                />
+                <filter
+                    name="filter_published"
+                    string="Published"
+                    domain="[('state', '=', 'published')]"
+                />
+                <separator />
+
+                <!-- Date Filters -->
+                <filter
+                    name="filter_today"
+                    string="Today"
+                    domain="[('create_date', '&gt;=', context_today().strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_this_week"
+                    string="This Week"
+                    domain="[('create_date', '&gt;=', (context_today() - relativedelta(weeks=1)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    name="filter_this_month"
+                    string="This Month"
+                    domain="[('create_date', '&gt;=', (context_today() - relativedelta(months=1)).strftime('%Y-%m-%d'))]"
+                />
+                <separator />
+
+                <!-- Group By -->
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_by_campaign"
+                        string="Campaign"
+                        context="{'group_by': 'campaign_id'}"
+                    />
+                    <filter
+                        name="group_by_content_type"
+                        string="Content Type"
+                        context="{'group_by': 'content_type'}"
+                    />
+                    <filter
+                        name="group_by_state"
+                        string="State"
+                        context="{'group_by': 'state'}"
+                    />
+                    <filter
+                        name="group_by_create_date"
+                        string="Creation Date"
+                        context="{'group_by': 'create_date:month'}"
+                    />
+                    <filter
+                        name="group_by_send_post_date"
+                        string="Scheduled Date"
+                        context="{'group_by': 'send_post_date:day'}"
+                    />
+                </group>
+
+                <searchpanel>
+                    <field name="state" enable_counters="1" />
+                    <field
+                        name="account_ids"
+                        select="multi"
+                        icon="fa-share-alt"
+                        enable_counters="1"
+                        string="Social network"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_post_act_window_kanban">
+        <field name="name">Posts</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[('content_type', 'in', ['post', 'reel'])]</field>
+        <field name="context">{'default_content_type': 'post'}</field>
+    </record>
+
+    <!-- Reels Action (content_type = 'reel') -->
+    <record model="ir.actions.act_window" id="social_reels_act_window_kanban">
+        <field name="name">Reels</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[('content_type', '=', 'reel')]</field>
+        <field name="context">{'default_content_type': 'reel'}</field>
+    </record>
+
+    <!-- Ads Action (content_type = 'ad') -->
+    <record model="ir.actions.act_window" id="social_ads_act_window_kanban">
+        <field name="name">Ads</field>
+        <field name="res_model">social.post</field>
+        <field name="view_mode">kanban,list,form</field>
+        <field name="search_view_id" ref="social_post_view_search" />
+        <field name="domain">[('content_type', '=', 'ad')]</field>
+        <field name="context">{'default_content_type': 'ad'}</field>
+    </record>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="social_media_base.SocialAdsAccount">
+        <div class="social-network-ads-account">
+            <div class="d-flex flex-column">
+                <ControlPanel>
+                    <t t-set-slot="control-panel-create-button">
+                        <button
+                            class="btn btn-primary mx-2"
+                            t-on-click="onUpdateAllAds"
+                        >
+                    <i
+                            t-if="!social_state.loaderAds"
+                            class="fa fa-refresh px-1"
+                            aria-hidden="true"
+                        />
+                    <span
+                            class="social-loader"
+                            t-if="social_state.loaderAds"
+                        /> Sync ads
+                </button>
+                    </t>
+
+                    <t t-set-slot="control-panel-navigation-additional">
+                        <SocialFilter filter.bind="onFilterAds" searchEnable="true" />
+                    </t>
+                </ControlPanel>
+            </div>
+
+            <div t-if="ads and ads.length > 0" class="row p-lg-3 p-1 social-ads">
+                <div
+                    class="px-2 col-12 col-lg-3"
+                    t-foreach="ads"
+                    t-as="ad"
+                    t-key="ad.id"
+                >
+                    <SocialAds socialAds="ad" />
+                </div>
+            </div>
+
+            <div t-else="">
+                <div class="o_empty_state text-center py-5 px-3 bg-light rounded">
+                    <img
+                        src="/web/static/img/smiling_face.svg"
+                        class="img-fluid mb-3"
+                        style="max-width: 300px;"
+                        alt="No data"
+                    />
+                    <h4 class="text-muted">No data to display</h4>
+                    <p
+                        class="text-muted"
+                    >Once you have ads registered in your accounts, you can view them here.</p>
+                </div>
+            </div>
+        </div>
+    </t>
+    </templates>

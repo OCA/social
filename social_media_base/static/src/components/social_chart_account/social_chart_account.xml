@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialChartAccount">
+        <div class="d-flex flex-column pt-2 h-100">
+            <ControlPanel display="layoutActions">
+                <t t-set-slot="control-panel-navigation-additional">
+                    <SocialFilter
+                        filter.bind="onFilterChart"
+                        clearFilter.bind="clearFilterChart"
+                        filterGranularity="true"
+                        objectId="chartAccount.id"
+                    />
+                </t>
+            </ControlPanel>
+            <div class="d-flex h-100 flex-column justify-content-start">
+                <div
+                    class="d-flex h-auto flex-column mt-2 px-4 py-2 w-100 bg-white social-chart-header"
+                >
+                    <div class="d-flex align-items-center justify-content-center">
+                        <img
+                            t-att-alt="props.socialChartAccount?.name"
+                            class="o_object_fit_cover rounded"
+                            width="40"
+                            height="40"
+                            t-attf-src="/web/image/social.account/{{props.socialChartAccount?.id}}/image_1920"
+                        />
+                        <span
+                            class="fw-bold fs-4 mx-2"
+                            t-esc="props.socialChartAccount?.name"
+                        />
+                    </div>
+                    <div class="mt-2 d-flex justify-content-between">
+                        <div class="d-flex flex-column">
+                            <span
+                                class="text-muted fs-3 fw-bold"
+                                t-esc="state.impressionCount"
+                            />
+                            <span class="text-muted fs-5">Impressions</span>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span
+                                class="text-muted fs-3 fw-bold"
+                                t-esc="state.reactionCount"
+                            />
+                            <span class="text-muted fs-5">Reactions</span>
+                        </div>
+                        <div class="d-flex flex-column">
+                            <span
+                                class="text-muted fs-3 fw-bold"
+                                t-esc="state.commentCount"
+                            />
+                            <span class="text-muted fs-5">Comments</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 h-75 px-4 py-1 w-100 social-chart-body bg-white">
+                    <canvas t-ref="chartAccount" />
+                </div>
+            </div>
+        </div>
+    </t>
+
+</templates>
