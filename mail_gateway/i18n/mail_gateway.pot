@@ -582,6 +582,11 @@ msgid "Notify followers of the document (mass post only)"
 msgstr ""
 
 #. module: mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__partner_count
+msgid "Number of partners"
+msgstr ""
+
+#. module: mail_gateway
 #: model:ir.model.fields,field_description:mail_gateway.field_mail_compose_gateway_message__object_attachment_ids
 msgid "Object Attachments"
 msgstr ""
