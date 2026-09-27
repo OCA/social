@@ -216,4 +216,4 @@ class MailMassMailingContactCase(base.BaseCase):
             [("id", "in", (contact_1 + contact_2).ids)]
         )
         self.assertEqual(len(contact), 1)
-        self.assertEqual(contact.list_ids.ids, (list_1 + list_2).ids)
+        self.assertEqual(set(contact.list_ids.ids), set((list_1 + list_2).ids))
