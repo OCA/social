@@ -19,9 +19,12 @@ class MailActivity(models.Model):
             self.user_id = original_user_id
         return res
 
-    def action_feedback_schedule_next(self, feedback=False):
+    def action_feedback_schedule_next(self, feedback=False, attachment_ids=None):
+        # Capture before super(): core unlinks the activity inside _action_done.
         create_uid = self.create_uid.id
-        action = super().action_feedback_schedule_next(feedback)
+        action = super().action_feedback_schedule_next(
+            feedback=feedback, attachment_ids=attachment_ids
+        )
         if action:
             action["context"]["source_activity_create_uid"] = create_uid
         return action

@@ -1,6 +1,6 @@
 # Copyright 2023 Ooops404
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, new_test_user
 
 
 class TestMailActivityReplyCreator(TransactionCase):
@@ -9,11 +9,16 @@ class TestMailActivityReplyCreator(TransactionCase):
         super().setUpClass()
         # disable tracking test suite wise
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
-        cls.user_model = cls.env["res.users"].with_context(no_reset_password=True)
-        cls.user_admin = cls.env.ref("base.user_root")
-        cls.user_2 = cls.env["res.users"].search([])[-1]
+        # Internal users cannot write partners in 18.0; activity create
+        # requires write (or mail_post_access) on the related document.
+        cls.user_2 = new_test_user(
+            cls.env,
+            login="activity_assignee",
+            groups="base.group_user,base.group_partner_manager",
+            context={"no_reset_password": True, "tracking_disable": True},
+        )
         cls.partner_ir_model = cls.env["ir.model"]._get("res.partner")
-        cls.partner_01 = cls.env.ref("base.res_partner_1")
+        cls.partner_01 = cls.env["res.partner"].create({"name": "Activity Partner"})
         activity_type_model = cls.env["mail.activity.type"]
         cls.activity_type_1 = activity_type_model.create(
             {
