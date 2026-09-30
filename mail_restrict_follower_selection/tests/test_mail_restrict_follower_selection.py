@@ -79,3 +79,30 @@ class TestMailRestrictFollowerSelection(TransactionCase):
             test_restrict_follower=True
         )._message_add_suggested_recipient({self.partner.id: []})
         self.assertFalse(new_res[self.partner.id][0][0])
+
+    def test_message_get_suggested_recipients_model_domain(self):
+        """Suggested recipients follow the domain of the record's model"""
+        self.env["ir.config_parameter"].set_param(
+            "mail_restrict_follower_selection.domain",
+            "[('category_id.name', '=', 'Employees')]",
+        )
+        self.param.value = "[('category_id', '=', False)]"
+        res = self.partner.with_context(
+            test_restrict_follower=True
+        )._message_get_suggested_recipients()
+        self.assertFalse(res[self.partner.id])
+
+    def test_message_add_suggested_recipient_remove_all(self):
+        """Every suggestion not meeting the domain is removed"""
+        other_partners = self.env["res.partner"].create(
+            [{"name": "Other 1"}, {"name": "Other 2"}]
+        )
+        suggestions = [
+            (partner.id, partner.name, False, "") for partner in other_partners
+        ]
+        res = self.partner.with_context(
+            test_restrict_follower=True
+        )._message_add_suggested_recipient(
+            {self.partner.id: suggestions}, partner=self.partner
+        )
+        self.assertEqual([item[0] for item in res[self.partner.id]], self.partner.ids)
