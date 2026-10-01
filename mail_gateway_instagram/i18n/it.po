@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-10-01 15:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: mail_gateway_instagram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_instagram.mail_gateway_form_view
@@ -22,61 +24,69 @@ msgid ""
 "                                token of your choice into <b>Instagram Security Key</b>,\n"
 "                                and the professional account IGID into <b>Instagram Account</b>."
 msgstr ""
+"Copia il token di accesso in <b>Token</b>, \n"
+"                                il segreto dell'app Meta in <b>Webhook "
+"Secret</b>, \n"
+"                                un token di verifica a tua scelta in <b>"
+"Instagram Security Key</b> \n"
+"                                e l'IGID dell'account professionale in <b>"
+"Instagram Account</b>."
 
 #. module: mail_gateway_instagram
 #: model:ir.model,name:mail_gateway_instagram.model_discuss_channel
 msgid "Discussion Channel"
-msgstr ""
+msgstr "Canale discussione"
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,field_description:mail_gateway_instagram.field_mail_gateway__gateway_type
 msgid "Gateway Type"
-msgstr ""
+msgstr "Tipo gateway"
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,help:mail_gateway_instagram.field_mail_gateway__instagram_version
 msgid "Graph API version without the v prefix, for example 26.0."
-msgstr ""
+msgstr "Versione della API grafica senza il prefisso \"v\", ad esempio 26.0."
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields.selection,name:mail_gateway_instagram.selection__mail_gateway__gateway_type__instagram
 msgid "Instagram"
-msgstr ""
+msgstr "Instagram"
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,field_description:mail_gateway_instagram.field_mail_gateway__instagram_account_id
 msgid "Instagram Account"
-msgstr ""
+msgstr "Account Instagram"
 
 #. module: mail_gateway_instagram
 #: model:ir.model,name:mail_gateway_instagram.model_mail_gateway_instagram
 msgid "Instagram Gateway services"
-msgstr ""
+msgstr "Servizi gateway Instagram"
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,field_description:mail_gateway_instagram.field_mail_gateway__instagram_security_key
 msgid "Instagram Security Key"
-msgstr ""
+msgstr "Chiave sicurezza Instagram"
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,field_description:mail_gateway_instagram.field_mail_gateway__instagram_version
 msgid "Instagram Version"
-msgstr ""
+msgstr "Versione Instagram"
 
 #. module: mail_gateway_instagram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_instagram.mail_gateway_form_view
 msgid "Instagram configuration"
-msgstr ""
+msgstr "Configurazione Instagram"
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,help:mail_gateway_instagram.field_mail_gateway__instagram_account_id
 msgid "Instagram professional account ID (IGID) used in the send URL."
 msgstr ""
+"ID account professionale Instagram (IGID) utilizzato nell'URL di spedizione."
 
 #. module: mail_gateway_instagram
 #: model:ir.model,name:mail_gateway_instagram.model_mail_gateway
 msgid "Mail Gateway"
-msgstr ""
+msgstr "Gateway e-mail"
 
 #. module: mail_gateway_instagram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_instagram.mail_gateway_form_view
@@ -87,6 +97,14 @@ msgid ""
 "                                <b>messages</b> field only. Meta calls GET\n"
 "                                verification and the state becomes Integrated."
 msgstr ""
+"Apri questa scheda e copia l'<b>URL del webhook</b> \n"
+"                                nell'URL di callback dell'app Meta. \n"
+"                                Usa la <b>chiave di sicurezza di Instagram</"
+"b> \n"
+"                                come token di verifica. Sottoscrivi solo il "
+"campo <b>messages</b>. \n"
+"                                Meta effettua la verifica GET e lo stato "
+"passa a \"Integrato\"."
 
 #. module: mail_gateway_instagram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_instagram.mail_gateway_form_view
@@ -94,12 +112,14 @@ msgid ""
 "Set <b>Webhook Key</b> and <b>Webhook User</b>,\n"
 "                                save, then press <b>Integrate Webhook</b>."
 msgstr ""
+"Imposta <b>Chiave webhook</b> e <b>Utente webhook</b>,\n"
+"                                salva, quindi premi <b>Integra webhook</b>."
 
 #. module: mail_gateway_instagram
 #. odoo-python
 #: code:addons/mail_gateway_instagram/models/mail_gateway_instagram.py:0
 msgid "Unable to send the Instagram message"
-msgstr ""
+msgstr "Impossibile inviare il messaggio Instagram"
 
 #. module: mail_gateway_instagram
 #: model_terms:ir.ui.view,arch_db:mail_gateway_instagram.mail_gateway_form_view
@@ -107,8 +127,12 @@ msgid ""
 "Use an Instagram professional (Business or Creator)\n"
 "                                account and a Meta app with Instagram Login."
 msgstr ""
+"Utilizza un account Instagram professionale (Business o Creator)\n"
+"                                e un'app Meta con accesso tramite Instagram."
 
 #. module: mail_gateway_instagram
 #: model:ir.model.fields,help:mail_gateway_instagram.field_mail_gateway__instagram_security_key
 msgid "Verify token Meta sends as hub.verify_token during webhook setup."
 msgstr ""
+"Verifica il token che Meta invia come hub.verify_token durante la "
+"configurazione del webhook."
