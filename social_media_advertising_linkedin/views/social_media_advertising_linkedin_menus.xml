@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <menuitem
+        name="LinkedIn"
+        id="social_advertising_linkedin_menu"
+        parent="social_media_advertising.social_advertising_menu"
+        sequence="10"
+        groups="social_media_base.group_social_media_user"
+    >
+        <menuitem
+            name="Advertising accounts"
+            id="social_advertising_account_linkedin_menu"
+            action="social_advertising_account_linkedin_action"
+            sequence="10"
+            groups="social_media_base.group_social_media_user"
+        />
+        <menuitem
+            name="Campaign Groups"
+            id="social_advertising_campaign_group_linkedin_menu"
+            action="social_advertising_campaign_group_linkedin_action"
+            sequence="20"
+            groups="social_media_base.group_social_media_user"
+        />
+        <menuitem
+            name="Campaigns"
+            id="social_advertising_campaign_linkedin_menu"
+            action="social_advertising_campaign_linkedin_action"
+            sequence="30"
+            groups="social_media_base.group_social_media_user"
+        />
+        <menuitem
+            name="Ads"
+            id="social_advertising_ad_linkedin_menu"
+            action="social_advertising_ad_linkedin_action"
+            sequence="40"
+            groups="social_media_base.group_social_media_user"
+        />
+    </menuitem>
+
+    <menuitem
+        name="LinkedIn"
+        id="social_stage_linkedin_menu"
+        parent="social_media_advertising.social_stage_root_menu"
+        action="social_stage_linkedin_action"
+        sequence="10"
+        groups="social_media_base.group_social_media_manager"
+    />
+
+</odoo>
