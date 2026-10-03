@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="social_account_view_form_inherit_sync_linkedin" model="ir.ui.view">
+        <field name="name">social.account.view.form.inherit.sync.linkedin</field>
+        <field name="model">social.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_linkedin.social_account_view_form_inherit"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <div
+                    class="alert alert-warning"
+                    role="alert"
+                    invisible="media_type != 'linkedin' or not linkedin_missing_sync_scopes"
+                >
+                    LinkedIn did not grant this account the permission the
+                    import of its history needs (<field
+                        name="linkedin_missing_sync_scopes"
+                        class="oe_inline"
+                        readonly="1"
+                        nolabel="1"
+                    />), so it refuses to serve its publications. Enable the
+                    matching product on the LinkedIn application, then press
+                    <b>Update account</b> with <b>Update keys</b> checked to
+                    authorize this account again: refreshing the token alone
+                    keeps the scopes it already has.
+                </div>
+            </xpath>
+            <!-- Placed before *Delete permanently*, which stays last in the
+                 header: appending to it would leave the deletion in the
+                 middle of the ordinary actions. -->
+            <xpath
+                expr="//header/button[@name='action_rebuild_statistics_history']"
+                position="after"
+            >
+                <button
+                    type="object"
+                    name="action_full_resync"
+                    string="Full resync"
+                    invisible="media_type != 'linkedin' or not can_manage_account or not active"
+                    confirm="The whole feed of the page will be read again, which costs one call per hundred publications against the daily quota of LinkedIn. Continue?"
+                    title="Read the whole feed again and mark as deleted what is no longer on LinkedIn. This is the only action that notices the publications deleted there, and the scheduled action already does it weekly on its own."
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
