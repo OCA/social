@@ -1,0 +1,931 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
+<title>Social Media LinkedIn Sync</title>
+<style type="text/css">
+
+/*
+:Author: David Goodger (goodger@python.org)
+:Id: $Id: html4css1.css 9511 2024-01-13 09:50:07Z milde $
+:Copyright: This stylesheet has been placed in the public domain.
+
+Default cascading style sheet for the HTML output of Docutils.
+Despite the name, some widely supported CSS2 features are used.
+
+See https://docutils.sourceforge.io/docs/howto/html-stylesheets.html for how to
+customize this style sheet.
+*/
+
+/* used to remove borders from tables and images */
+.borderless, table.borderless td, table.borderless th {
+  border: 0 }
+
+table.borderless td, table.borderless th {
+  /* Override padding for "table.docutils td" with "! important".
+     The right padding separates the table cells. */
+  padding: 0 0.5em 0 0 ! important }
+
+.first {
+  /* Override more specific margin styles with "! important". */
+  margin-top: 0 ! important }
+
+.last, .with-subtitle {
+  margin-bottom: 0 ! important }
+
+.hidden {
+  display: none }
+
+.subscript {
+  vertical-align: sub;
+  font-size: smaller }
+
+.superscript {
+  vertical-align: super;
+  font-size: smaller }
+
+a.toc-backref {
+  text-decoration: none ;
+  color: black }
+
+blockquote.epigraph {
+  margin: 2em 5em ; }
+
+dl.docutils dd {
+  margin-bottom: 0.5em }
+
+object[type="image/svg+xml"], object[type="application/x-shockwave-flash"] {
+  overflow: hidden;
+}
+
+/* Uncomment (and remove this text!) to get bold-faced definition list terms
+dl.docutils dt {
+  font-weight: bold }
+*/
+
+div.abstract {
+  margin: 2em 5em }
+
+div.abstract p.topic-title {
+  font-weight: bold ;
+  text-align: center }
+
+div.admonition, div.attention, div.caution, div.danger, div.error,
+div.hint, div.important, div.note, div.tip, div.warning {
+  margin: 2em ;
+  border: medium outset ;
+  padding: 1em }
+
+div.admonition p.admonition-title, div.hint p.admonition-title,
+div.important p.admonition-title, div.note p.admonition-title,
+div.tip p.admonition-title {
+  font-weight: bold ;
+  font-family: sans-serif }
+
+div.attention p.admonition-title, div.caution p.admonition-title,
+div.danger p.admonition-title, div.error p.admonition-title,
+div.warning p.admonition-title, .code .error {
+  color: red ;
+  font-weight: bold ;
+  font-family: sans-serif }
+
+/* Uncomment (and remove this text!) to get reduced vertical space in
+   compound paragraphs.
+div.compound .compound-first, div.compound .compound-middle {
+  margin-bottom: 0.5em }
+
+div.compound .compound-last, div.compound .compound-middle {
+  margin-top: 0.5em }
+*/
+
+div.dedication {
+  margin: 2em 5em ;
+  text-align: center ;
+  font-style: italic }
+
+div.dedication p.topic-title {
+  font-weight: bold ;
+  font-style: normal }
+
+div.figure {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+div.footer, div.header {
+  clear: both;
+  font-size: smaller }
+
+div.line-block {
+  display: block ;
+  margin-top: 1em ;
+  margin-bottom: 1em }
+
+div.line-block div.line-block {
+  margin-top: 0 ;
+  margin-bottom: 0 ;
+  margin-left: 1.5em }
+
+div.sidebar {
+  margin: 0 0 0.5em 1em ;
+  border: medium outset ;
+  padding: 1em ;
+  background-color: #ffffee ;
+  width: 40% ;
+  float: right ;
+  clear: right }
+
+div.sidebar p.rubric {
+  font-family: sans-serif ;
+  font-size: medium }
+
+div.system-messages {
+  margin: 5em }
+
+div.system-messages h1 {
+  color: red }
+
+div.system-message {
+  border: medium outset ;
+  padding: 1em }
+
+div.system-message p.system-message-title {
+  color: red ;
+  font-weight: bold }
+
+div.topic {
+  margin: 2em }
+
+h1.section-subtitle, h2.section-subtitle, h3.section-subtitle,
+h4.section-subtitle, h5.section-subtitle, h6.section-subtitle {
+  margin-top: 0.4em }
+
+h1.title {
+  text-align: center }
+
+h2.subtitle {
+  text-align: center }
+
+hr.docutils {
+  width: 75% }
+
+img.align-left, .figure.align-left, object.align-left, table.align-left {
+  clear: left ;
+  float: left ;
+  margin-right: 1em }
+
+img.align-right, .figure.align-right, object.align-right, table.align-right {
+  clear: right ;
+  float: right ;
+  margin-left: 1em }
+
+img.align-center, .figure.align-center, object.align-center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+table.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.align-left {
+  text-align: left }
+
+.align-center {
+  clear: both ;
+  text-align: center }
+
+.align-right {
+  text-align: right }
+
+/* reset inner alignment in figures */
+div.align-right {
+  text-align: inherit }
+
+/* div.align-center * { */
+/*   text-align: left } */
+
+.align-top    {
+  vertical-align: top }
+
+.align-middle {
+  vertical-align: middle }
+
+.align-bottom {
+  vertical-align: bottom }
+
+ol.simple, ul.simple {
+  margin-bottom: 1em }
+
+ol.arabic {
+  list-style: decimal }
+
+ol.loweralpha {
+  list-style: lower-alpha }
+
+ol.upperalpha {
+  list-style: upper-alpha }
+
+ol.lowerroman {
+  list-style: lower-roman }
+
+ol.upperroman {
+  list-style: upper-roman }
+
+p.attribution {
+  text-align: right ;
+  margin-left: 50% }
+
+p.caption {
+  font-style: italic }
+
+p.credits {
+  font-style: italic ;
+  font-size: smaller }
+
+p.label {
+  white-space: nowrap }
+
+p.rubric {
+  font-weight: bold ;
+  font-size: larger ;
+  color: maroon ;
+  text-align: center }
+
+p.sidebar-title {
+  font-family: sans-serif ;
+  font-weight: bold ;
+  font-size: larger }
+
+p.sidebar-subtitle {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+p.topic-title {
+  font-weight: bold }
+
+pre.address {
+  margin-bottom: 0 ;
+  margin-top: 0 ;
+  font: inherit }
+
+pre.literal-block, pre.doctest-block, pre.math, pre.code {
+  margin-left: 2em ;
+  margin-right: 2em }
+
+pre.code .ln { color: gray; } /* line numbers */
+pre.code, code { background-color: #eeeeee }
+pre.code .comment, code .comment { color: #5C6576 }
+pre.code .keyword, code .keyword { color: #3B0D06; font-weight: bold }
+pre.code .literal.string, code .literal.string { color: #0C5404 }
+pre.code .name.builtin, code .name.builtin { color: #352B84 }
+pre.code .deleted, code .deleted { background-color: #DEB0A1}
+pre.code .inserted, code .inserted { background-color: #A3D289}
+
+span.classifier {
+  font-family: sans-serif ;
+  font-style: oblique }
+
+span.classifier-delimiter {
+  font-family: sans-serif ;
+  font-weight: bold }
+
+span.interpreted {
+  font-family: sans-serif }
+
+span.option {
+  white-space: nowrap }
+
+span.pre {
+  white-space: pre }
+
+span.problematic, pre.problematic {
+  color: red }
+
+span.section-subtitle {
+  /* font-size relative to parent (h1..h6 element) */
+  font-size: 80% }
+
+table.citation {
+  border-left: solid 1px gray;
+  margin-left: 1px }
+
+table.docinfo {
+  margin: 2em 4em }
+
+table.docutils {
+  margin-top: 0.5em ;
+  margin-bottom: 0.5em }
+
+table.footnote {
+  border-left: solid 1px black;
+  margin-left: 1px }
+
+table.docutils td, table.docutils th,
+table.docinfo td, table.docinfo th {
+  padding-left: 0.5em ;
+  padding-right: 0.5em ;
+  vertical-align: top }
+
+table.docutils th.field-name, table.docinfo th.docinfo-name {
+  font-weight: bold ;
+  text-align: left ;
+  white-space: nowrap ;
+  padding-left: 0 }
+
+/* "booktabs" style (no vertical lines) */
+table.docutils.booktabs {
+  border: 0px;
+  border-top: 2px solid;
+  border-bottom: 2px solid;
+  border-collapse: collapse;
+}
+table.docutils.booktabs * {
+  border: 0px;
+}
+table.docutils.booktabs th {
+  border-bottom: thin solid;
+  text-align: left;
+}
+
+h1 tt.docutils, h2 tt.docutils, h3 tt.docutils,
+h4 tt.docutils, h5 tt.docutils, h6 tt.docutils {
+  font-size: 100% }
+
+ul.auto-toc {
+  list-style-type: none }
+
+</style>
+</head>
+<body>
+<div class="document" id="social-media-linkedin-sync">
+<h1 class="title">Social Media LinkedIn Sync</h1>
+
+<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! This file is generated by oca-gen-addon-readme !!
+!! changes will be overwritten.                   !!
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+!! source digest: sha256:d12dcb5a6a565cbf779569d40f415ccca2ca6e354acc5da3a221a934913c0fa9
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/licence-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/social/tree/17.0/social_media_linkedin_sync"><img alt="OCA/social" src="https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_linkedin_sync"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/social&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p>This module brings back into Odoo what a LinkedIn page already
+published: the posts themselves, the figures each of them collected, and
+their comments and reactions.</p>
+<p>It is the LinkedIn half of <em>Social Media Sync</em>, split from <em>Social Media
+Linkedin</em> along the same line: what a call costs. The connector asks
+LinkedIn for a fixed number of things per account — publish, delete, the
+daily figures of the whole page — and that number does not change
+whether the page published once or ten thousand times. Everything whose
+cost grows with the history of the page lives here: reading the feed one
+page at a time, asking LinkedIn about the publications missing from it a
+hundred URNs at a time, and one call per comment thread. The figures of
+the publications are read by <em>Social Media Linkedin</em>, in as many calls
+as the 4 KB limit of the query string needs, whoever hands it the
+identifiers.</p>
+<p>An Odoo that only publishes on LinkedIn installs <em>Social Media Linkedin</em>
+alone and pays for none of it.</p>
+<p>Main features:</p>
+<ul class="simple">
+<li>Import of the publications of the page and of the statistics each of
+them collected, on demand and through the scheduled actions of <em>Social
+Media Sync</em>.</li>
+<li>Full resynchronization of a page, the only pass that notices a
+publication deleted on LinkedIn. Missing from the feed never marks
+anything on its own: LinkedIn is asked about each suspect by its URN,
+one call per hundred of them, and only a <tt class="docutils literal">404</tt> writes the deletion.
+The <a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/posts-api">Posts
+API</a>
+publishes asynchronously (<tt class="docutils literal">PUBLISH_REQUESTED</tt>), answers the author
+finder in reader context, and states that a page returning fewer
+results than asked is not the end of the feed — so a publication that
+is alive can be absent from a listing read whole.</li>
+<li>Publications deleted on LinkedIn recognised while the dashboard is
+being used: a reaction or a comment answered with a <tt class="docutils literal">404</tt> makes Odoo
+ask LinkedIn about the publication itself, and only its confirmation
+marks the line as deleted.</li>
+<li>Comment threads read from the dashboard, with their replies, and
+<em>Recommend</em> on a publication and on each of its comments, which also
+withdraws the reaction it made.</li>
+<li>Detection of pages that moved since the last import, which puts a
+notice on the dashboard inviting the user to press <em>Update</em>. It costs
+at most two calls per account, and reuses the daily figures the
+connector already read on the same pass instead of asking LinkedIn for
+the same days twice.</li>
+</ul>
+<p><strong>Table of contents</strong></p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#installation" id="toc-entry-1">Installation</a><ul>
+<li><a class="reference internal" href="#the-mark-the-update-check-compares-against" id="toc-entry-2">The mark the update check compares against</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#configuration" id="toc-entry-3">Configuration</a><ul>
+<li><a class="reference internal" href="#system-parameters" id="toc-entry-4">System parameters</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#usage" id="toc-entry-5">Usage</a><ul>
+<li><a class="reference internal" href="#importing-what-a-page-already-published" id="toc-entry-6">Importing what a page already published.</a></li>
+<li><a class="reference internal" href="#comments-and-reactions" id="toc-entry-7">Comments and reactions.</a></li>
+<li><a class="reference internal" href="#publications-deleted-on-linkedin" id="toc-entry-8">Publications deleted on LinkedIn.</a></li>
+<li><a class="reference internal" href="#full-resync-of-a-page" id="toc-entry-9">Full resync of a page</a></li>
+<li><a class="reference internal" href="#how-the-synchronization-spends-the-linkedin-quota" id="toc-entry-10">How the synchronization spends the LinkedIn quota</a></li>
+<li><a class="reference internal" href="#what-the-check-for-updates-does-and-does-not-notice" id="toc-entry-11">What the check for updates does and does not notice</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#known-issues-roadmap" id="toc-entry-12">Known issues / Roadmap</a><ul>
+<li><a class="reference internal" href="#one-definition-per-symbol" id="toc-entry-13">One definition per symbol</a></li>
+<li><a class="reference internal" href="#where-the-daily-series-is-filled" id="toc-entry-14">Where the daily series is filled</a></li>
+<li><a class="reference internal" href="#who-wrote-a-comment" id="toc-entry-15">Who wrote a comment</a></li>
+<li><a class="reference internal" href="#media-in-the-comments" id="toc-entry-16">Media in the comments</a></li>
+<li><a class="reference internal" href="#the-weekly-full-resync-is-not-spread-over-the-days" id="toc-entry-17">The weekly full resync is not spread over the days</a></li>
+<li><a class="reference internal" href="#asking-linkedin-only-for-what-changed" id="toc-entry-18">Asking LinkedIn only for what changed</a></li>
+<li><a class="reference internal" href="#reactions-other-than-like" id="toc-entry-19">Reactions other than Like</a></li>
+<li><a class="reference internal" href="#video-of-a-publication" id="toc-entry-20">Video of a publication</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#bug-tracker" id="toc-entry-21">Bug Tracker</a></li>
+<li><a class="reference internal" href="#credits" id="toc-entry-22">Credits</a><ul>
+<li><a class="reference internal" href="#authors" id="toc-entry-23">Authors</a></li>
+<li><a class="reference internal" href="#contributors" id="toc-entry-24">Contributors</a></li>
+<li><a class="reference internal" href="#other-credits" id="toc-entry-25">Other credits</a></li>
+<li><a class="reference internal" href="#maintainers" id="toc-entry-26">Maintainers</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="installation">
+<h1><a class="toc-backref" href="#toc-entry-1">Installation</a></h1>
+<p>This module is installed on its own as soon as <em>Social Media Sync</em> and
+<em>Social Media Linkedin</em> are both present, which is what a bridge module
+is for: the choice to synchronize was already made by whoever installed
+<em>Social Media Sync</em>, and this only keeps a LinkedIn page from being left
+without the half that belongs to it.</p>
+<p>Installing <em>Social Media Linkedin</em> alone is a valid installation: the
+account is linked, publishes, deletes and shows the daily figures of its
+page.</p>
+<div class="section" id="the-mark-the-update-check-compares-against">
+<h2><a class="toc-backref" href="#toc-entry-2">The mark the update check compares against</a></h2>
+<p><tt class="docutils literal">social.account.linkedin_statistics_checkpoint</tt> is stored by this
+module and holds the daily figures LinkedIn reported for the whole page
+as of the last import. An account that has no mark yet is given one on
+the first pass of the bihourly check and announced as having nothing to
+import, so installing this module on a database that already publishes
+on LinkedIn does not put the notice up on every account at once.</p>
+</div>
+</div>
+<div class="section" id="configuration">
+<h1><a class="toc-backref" href="#toc-entry-3">Configuration</a></h1>
+<p>Nothing has to be configured for this module to work: it uses the
+LinkedIn accounts and credentials of <em>Social Media Linkedin</em>, and the
+scheduled actions of <em>Social Media Sync</em>.</p>
+<p>It asks LinkedIn for nothing the connector does not already ask for.
+Reading the feed of a page, its comments and its reactions travels on
+<tt class="docutils literal">r_organization_social</tt>, which <em>Social Media Linkedin</em> requests on its
+own, granted by the Community Management API product that connector
+already needs.</p>
+<p>What does not follow on its own is the accounts already associated. <strong>An
+access token keeps the scopes it was issued with</strong>, so an account
+authorized before that permission was requested does not hold it and its
+history cannot be imported until it is authorized again. Refreshing the
+token is not enough: open the account, press <em>Update account</em> with
+<strong>Update keys</strong> ticked and authorize on LinkedIn again.</p>
+<p>The accounts concerned say so themselves, so nothing has to be looked
+up: a warning is drawn on the account form for as long as the permission
+is missing, the responsible user is notified by the check that runs
+every two hours, and the import refuses with the name of the missing
+permission instead of the bare error LinkedIn answers.</p>
+<div class="section" id="system-parameters">
+<h2><a class="toc-backref" href="#toc-entry-4">System parameters</a></h2>
+<p>One key is worth knowing about, and it is only written by hand in
+<em>Settings</em> &gt; <em>Technical</em> &gt; <em>Parameters</em> &gt; <em>System Parameters</em>: until
+then the module uses the default the code carries. It is bounded when it
+is read, so a value outside its range is brought back into it.</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="53%" />
+<col width="10%" />
+<col width="26%" />
+<col width="11%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Default</th>
+<th class="head">Unit</th>
+<th class="head">Bounds</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td><tt class="docutils literal">social_media_linkedin_sync.posts_max_pages</tt></td>
+<td>50</td>
+<td>pages of 100
+publications</td>
+<td>1 to 500</td>
+</tr>
+</tbody>
+</table>
+<p>It is how far into the feed of a page one pass reads. The default covers
+five thousand publications, and it is not a limit of LinkedIn: it is
+what keeps a feed that never ends from looping forever.</p>
+<p><strong>A page with a longer history has to raise it.</strong> A feed read short
+comes back partial, and the weekly full resync — the only pass that
+notices a publication deleted on LinkedIn — does not look for deletions
+in a feed it could not read whole. Nothing breaks and nothing is said
+beyond a warning in the log naming the number of pages, so the symptom
+is publications that stay <em>posted</em> in Odoo after being deleted on
+LinkedIn.</p>
+<p>Raising it costs calls: each page is one call against the Posts API, so
+500 pages are 500 calls per pass of every account, plus what reading
+their figures adds. That is why the ceiling exists.</p>
+</div>
+</div>
+<div class="section" id="usage">
+<h1><a class="toc-backref" href="#toc-entry-5">Usage</a></h1>
+<div class="section" id="importing-what-a-page-already-published">
+<h2><a class="toc-backref" href="#toc-entry-6">Importing what a page already published.</a></h2>
+<ul class="simple">
+<li>The <em>Update</em> button of the dashboard imports the publications of the
+pages. Without this module that button refreshes the daily series of
+the page and the figures of the publications of the last 30 days; with
+it, it also brings in the publications Odoo does not have yet and the
+figures of the ones older than that window.</li>
+<li>The import discovers the publications three ways: one publication by
+its reference, the whole feed page by page, or — the ordinary path —
+the first page of the feed sorted by last modification, which is what
+catches what changed since the previous pass.</li>
+<li>It also downloads the medias of the publications created outside of
+Odoo, so those images appear on the dashboard only after the import.</li>
+<li>The publication mirrors what is online: an image removed from the post
+on LinkedIn is dropped from the dashboard card on the next import.
+Only the medias downloaded from LinkedIn are managed this way, so a
+file attached by hand in Odoo is never removed.</li>
+<li>An import of the whole page leaves a mark with the figures of the last
+watched days. The bihourly check compares against that mark, which is
+why importing is what takes the notice down; refreshing a single
+publication takes it down too but leaves the mark alone, since one
+publication says nothing about the rest of the page.</li>
+<li>The first import asks for the time series again on an account whose
+association could not read it, which is the retry of a backfill that
+failed and not a repetition of it. How far back the series goes is the
+connector’s business: <em>Social Media Linkedin</em> fills it as far back as
+LinkedIn answers by day the moment the account is linked, and rebuilds
+it from the <em>Rebuild statistics history</em> button of the account form.</li>
+</ul>
+</div>
+<div class="section" id="comments-and-reactions">
+<h2><a class="toc-backref" href="#toc-entry-7">Comments and reactions.</a></h2>
+<ul class="simple">
+<li>The comment thread of a publication is read from the dashboard, and
+its replies with it: LinkedIn serves the replies of a comment apart,
+so they are asked for when the thread is opened.</li>
+<li>A comment and a reply are written under the organization, and the
+thread offers to delete a comment: LinkedIn is the one deciding
+whether the organization may, and its refusal is reported instead of
+removing it here.</li>
+<li><em>Recommend</em> is offered on the publication and on each of its comments,
+sent under the organization. LinkedIn holds one reaction per account
+and only <tt class="docutils literal">LIKE</tt> is sent, so the entry is a toggle: it shows a filled
+thumb on what the organization already recommended, and pressing it
+there withdraws the reaction. What LinkedIn holds is read back on
+every import, so a reaction made or withdrawn from LinkedIn itself
+reaches the dashboard on the next pass.</li>
+<li>LinkedIn does not accept an image in a comment, so the composer offers
+no upload on a LinkedIn thread.</li>
+</ul>
+</div>
+<div class="section" id="publications-deleted-on-linkedin">
+<h2><a class="toc-backref" href="#toc-entry-8">Publications deleted on LinkedIn.</a></h2>
+<ul class="simple">
+<li>Posts deleted directly on LinkedIn are marked as <em>Deleted on LinkedIn</em>
+in Odoo, so the dashboard keeps their history. Only the <em>Full resync</em>
+button and the weekly scheduled action notice them, not the ordinary
+import, so a deletion can take up to a week to be reported.</li>
+<li>Opening a publication asks LinkedIn first, so one deleted there is
+reported and marked right away instead of waiting for the weekly pass.</li>
+</ul>
+</div>
+<div class="section" id="full-resync-of-a-page">
+<h2><a class="toc-backref" href="#toc-entry-9">Full resync of a page</a></h2>
+<ul class="simple">
+<li>Go to <em>Social Media</em> &gt; Configuration &gt; Accounts, select the account
+and click on the <em>Full resync</em> button of the header.</li>
+<li>The <em>Update</em> button of the dashboard reads one page of the feed, the
+one sorted by last modification, and refreshes the figures of every
+publication by its identifier. That is enough for everything except
+one thing: it cannot notice that a publication was <strong>deleted</strong> on
+LinkedIn, because a publication missing from the page it read is not
+necessarily gone.</li>
+<li><em>Full resync</em> is what reads the whole feed and marks as <em>Deleted on
+LinkedIn</em> what is no longer there. It is also the expensive pass, one
+call per hundred publications against the daily quota, so it asks for
+confirmation.</li>
+<li>The scheduled action <em>Social: Full resync of the accounts</em> does the
+same weekly for every account, so pressing the button is only needed
+to see a deletion reported sooner.</li>
+<li>A publication edited on LinkedIn long enough ago to have fallen off
+that first page keeps the text Odoo already had until a full resync.
+Its figures are refreshed all the same.</li>
+</ul>
+</div>
+<div class="section" id="how-the-synchronization-spends-the-linkedin-quota">
+<h2><a class="toc-backref" href="#toc-entry-10">How the synchronization spends the LinkedIn quota</a></h2>
+<p>The <a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/shared/api-guide/concepts/rate-limits">throttle
+limits</a>
+of LinkedIn are counted per day, per application and <strong>per endpoint</strong>,
+so what matters is not the total number of calls but how they spread.</p>
+<ul>
+<li><p class="first">The scheduled action checking for updates costs <strong>two calls per
+account and run</strong>, whatever the number of publications, one when it
+does find something, and only one for an account already announcing
+publications to import or for one whose credentials expired: the daily
+series of the page is written for them all the same, and what is
+skipped is the second call, the peek at the feed that could only
+confirm what the dashboard already says or fail on a token known to be
+dead. No call at all is spent on an account with no organization
+linked, since the finder is addressed by organization and there is
+nothing to ask. It reads the figures LinkedIn reports for the whole
+page day by day and compares them against the ones the last import
+left: no publication is read one by one to decide whether the
+dashboard should announce updates. Running every two hours, that is
+around 24 calls a day per account.</p>
+</li>
+<li><p class="first">The <strong>Update</strong> button does not walk the feed. The statistics are asked
+for by publication identifier, and those identifiers are already
+stored in Odoo, so one page of the feed is enough: the one sorted by
+last modification, which is what brings the publications created or
+edited on LinkedIn. That is one call instead of one per hundred
+publications.</p>
+</li>
+<li><p class="first">The figures of the publications are not read here: the import hands
+the identifiers to <em>Social Media Linkedin</em>, which is where that
+reading lives, so the same three calls answer the page whether they
+are asked for by this import or by the daily refresh of the connector.</p>
+</li>
+<li><p class="first">Those figures are asked in as many calls as the 4 KB limit of the
+query string needs, since those endpoints take every identifier in the
+URL and none of them paginates. Around a hundred publications fit in
+one call, so a full feed takes several.</p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/organizations/share-statistics">https://learn.microsoft.com/en-us/linkedin/marketing/community-management/organizations/share-statistics</a></p>
+</li>
+<li><p class="first"><em>Full resync</em> is the expensive pass, one call per hundred
+publications. The button does it for the account it is pressed on; the
+weekly scheduled action does it for every account of the database. It
+walks the feed page by page (<tt class="docutils literal">count=100</tt>) up to as many pages as
+<tt class="docutils literal">social_media_linkedin_sync.posts_max_pages</tt> allows, <strong>fifty by
+default</strong>, that is 5000 publications, and a page is only taken as the
+last one when it comes back empty, because LinkedIn documents that a
+page may carry fewer publications than asked while more are left. On
+an account whose feed is longer than that, the answer is incomplete
+and the sweep that marks as <em>Deleted</em> what is no longer on LinkedIn is
+skipped for that run: reporting nothing is preferable to marking a
+publication that is still online.</p>
+</li>
+</ul>
+</div>
+<div class="section" id="what-the-check-for-updates-does-and-does-not-notice">
+<h2><a class="toc-backref" href="#toc-entry-11">What the check for updates does and does not notice</a></h2>
+<ul class="simple">
+<li>It only tells that <em>something</em> on the page moved, not which
+publication moved. It does not need to: the only thing it decides is
+whether the dashboard shows the notice inviting to synchronize. A
+change that cancels itself out between two runs, a reaction removed
+and another one added, leaves the figures of the page where they were
+and goes unnoticed until the next synchronization.</li>
+<li>It watches the <strong>daily</strong> figures of the page, over a window of the
+last seven days, and not the lifetime totals the same endpoint answers
+when no time interval is given. The two are two separate reads of
+LinkedIn’s own data, so they are not guaranteed to agree at every
+instant; this module only relies on the daily buckets. One consequence
+worth knowing: activity older than the seven-day window is not
+announced. It is imported all the same when the user synchronizes,
+because the import reads the publications themselves and not this
+window.</li>
+<li>The engagement is not compared. It is a ratio of the clicks,
+reactions, comments and shares over the impressions, so it cannot move
+without one of those moving, and it is the only non-integer figure of
+the set.</li>
+<li>The statistics endpoint only answers activity of the <strong>last 12
+months</strong>, on a rolling window. A publication older than that stops
+being counted, which can move the figures of the page on its own, with
+nobody having interacted with anything. The check announces updates
+once when that happens and the next import reconciles it.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="known-issues-roadmap">
+<h1><a class="toc-backref" href="#toc-entry-12">Known issues / Roadmap</a></h1>
+<div class="section" id="one-definition-per-symbol">
+<h2><a class="toc-backref" href="#toc-entry-13">One definition per symbol</a></h2>
+<p>The calls of this module cross towards <em>Social Media Linkedin</em>, never
+the other way around: <tt class="docutils literal">_request_linkedin</tt>, <tt class="docutils literal">_get_posts</tt>,
+<tt class="docutils literal">_linkedin_statistics_values</tt>, <tt class="docutils literal">_get_linkedin_daily_statistics</tt>,
+<tt class="docutils literal">_refresh_post_statistics</tt> with the reading by URN behind it —
+<tt class="docutils literal">_get_entity_statistics</tt>, <tt class="docutils literal">_get_entity_share_statistics</tt>,
+<tt class="docutils literal">_get_ugc_posts_statistics</tt>, <tt class="docutils literal">_parse_share_statistics</tt>,
+<tt class="docutils literal">_filter_urns</tt> — and the constants of <tt class="docutils literal">social_linkedin_utils.py</tt> are
+asked for where the connector defines them. The import does not read the
+figures of a publication either: it hands the page it discovered, plus
+the publications the page did not bring, to <tt class="docutils literal">_refresh_post_statistics</tt>
+and lets the connector spend the calls. Copying one of them here would
+be the failure that shows in nothing: the two copies drift apart with
+the first change, and the daily series and the import mark stop speaking
+the same language.</p>
+<p>Where the connector needs something only this module knows how to do, it
+declares an empty hook — <tt class="docutils literal">_linkedin_check_updates</tt> — and this module
+overrides it.</p>
+</div>
+<div class="section" id="where-the-daily-series-is-filled">
+<h2><a class="toc-backref" href="#toc-entry-14">Where the daily series is filled</a></h2>
+<p><tt class="docutils literal">_backfill_statistics</tt> is the empty hook of <em>Social Media Base</em> and
+<em>Social Media Linkedin</em> implements it, so neither the method nor the
+calls it spends belong to this module. Base asks for it the moment an
+account is associated, the <em>Rebuild statistics history</em> button of the
+account form asks for it again with <tt class="docutils literal">force=True</tt>, and the initial
+synchronization of <em>Social Media Sync</em> asks for it once more, which on
+an account that already holds its series is the retry of an association
+whose history could not be read rather than a repetition of it.</p>
+<p>They are the figures of the whole page –what the finder answers without
+a list of URNs counts what was published before Odoo and outside of it–
+so what this module changes is when the series is asked for again, not
+what is being counted.</p>
+<p><tt class="docutils literal">_snapshot_statistics</tt>, <tt class="docutils literal">_linkedin_backfill_window</tt> and
+<tt class="docutils literal">_STATISTICS_HISTORY_MONTHS_LINKEDIN</tt> stay in the connector, and so do
+the calls that use them: <tt class="docutils literal">_backfill_statistics</tt> is the only caller of
+the three. This module asks for none of them.</p>
+</div>
+<div class="section" id="who-wrote-a-comment">
+<h2><a class="toc-backref" href="#toc-entry-15">Who wrote a comment</a></h2>
+<ul class="simple">
+<li><strong>A person cannot be named.</strong> <tt class="docutils literal">GET <span class="pre">/v2/socialActions/{urn}/comments</span></tt>
+identifies the author of a comment by a URN and nothing else, and no
+public endpoint turns a <tt class="docutils literal">urn:li:person:</tt> into a name: the <a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/shared/integrations/people/profile-api">Profile
+API</a>
+answers for the authenticated member alone,
+<tt class="docutils literal">r_1st_connections_profile</tt> was retired, and the token the connector
+holds belongs to the page and not to a person. The website shows the
+name because it reads endpoints of its own that are not exposed.
+Reading it needs the Partner Program, an access level of the
+application.</li>
+<li>What the module does with that limit is resolve what can be resolved
+and say nothing where it cannot. The account itself is named from
+Odoo, an organization is read with <tt class="docutils literal">GET <span class="pre">/v2/organizations/{id}</span></tt>, and
+everything else is drawn as <em>LinkedIn member</em> or <em>LinkedIn page</em>. A
+comment is never signed with the name of the page that did not write
+it.</li>
+<li>An organization the account does not administer may answer <tt class="docutils literal">403</tt>.
+The thread keeps loading, that comment falls back to the neutral label
+and the refusal is only logged: a name is not worth a thread.</li>
+<li>The names are resolved once per thread and not kept. A cache of actors
+would save the calls a reopened dialog repeats, and it would need its
+own expiry and its own security; it is not implemented.</li>
+</ul>
+</div>
+<div class="section" id="media-in-the-comments">
+<h2><a class="toc-backref" href="#toc-entry-16">Media in the comments</a></h2>
+<ul class="simple">
+<li>A comment is published with its text alone: the connector sends
+<tt class="docutils literal">actor</tt>, <tt class="docutils literal">message</tt> and <tt class="docutils literal">object</tt>, never <tt class="docutils literal">content</tt>, and the
+comment composer offers no attachment for a LinkedIn publication.</li>
+<li>The <a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/comments-api">Comments
+API</a>
+documents an example carrying media, and it is not what an ordinary
+application gets. Measured against a real page on 2026-08-24, with an
+image already uploaded through the Images API, the two ways of sending
+it answer:<ul>
+<li><tt class="docutils literal">POST <span class="pre">/rest/socialActions/{urn}/comments</span></tt> — <tt class="docutils literal">403 ACCESS_DENIED</tt>,
+<em>“Not enough permissions to access:
+partnerApiSocialActions.CREATE”</em>. The versioned resource belongs to
+the Partner Program, which is an access level of the application and
+not something a paid plan buys.</li>
+<li><tt class="docutils literal">POST <span class="pre">/v2/socialActions/{urn}/comments</span></tt>, the endpoint the
+connector talks to, with the same payload plus <tt class="docutils literal">content</tt> —
+<tt class="docutils literal">500 Internal Server Error</tt>, while the very same call without
+<tt class="docutils literal">content</tt> publishes the comment.</li>
+</ul>
+</li>
+<li>So the media stays out until LinkedIn grants that access to the
+application: the endpoint that would take it is refused, and the one
+that answers does not accept the field.</li>
+</ul>
+</div>
+<div class="section" id="the-weekly-full-resync-is-not-spread-over-the-days">
+<h2><a class="toc-backref" href="#toc-entry-17">The weekly full resync is not spread over the days</a></h2>
+<ul class="simple">
+<li>The <em>Full resync</em> button reconciles <strong>one account</strong>, the one it is
+pressed on. The scheduled action does not: it walks every account of
+the database in the same weekly run, each in its own savepoint, and
+that is the expensive pass, one call per hundred publications of each
+account.</li>
+<li>On a database with several large pages that single run could exhaust
+the daily quota and make the manual refresh fail with it. Spreading
+the accounts over the days of the week is the way out and is not
+implemented.</li>
+</ul>
+</div>
+<div class="section" id="asking-linkedin-only-for-what-changed">
+<h2><a class="toc-backref" href="#toc-entry-18">Asking LinkedIn only for what changed</a></h2>
+<ul>
+<li><p class="first"><strong>It is not possible with these endpoints</strong>, so the statistics cost
+one call per batch of identifiers whatever moved:</p>
+<ul class="simple">
+<li>The <tt class="docutils literal">/posts</tt> finder takes <tt class="docutils literal">author</tt>, <tt class="docutils literal">start</tt>, <tt class="docutils literal">count</tt>,
+<tt class="docutils literal">sortBy</tt> and <tt class="docutils literal">viewContext</tt>. There is no <tt class="docutils literal">since</tt> of any kind,
+so there is no equivalent to what the X connector does with
+<tt class="docutils literal">since_id</tt>.</li>
+<li>The statistics of specific publications cannot be restricted to a
+period: <em>“Time-bound statistics is not supported for specific share
+queries”</em>.</li>
+<li>The daily figures of the page say that something moved, not which
+publication moved.</li>
+</ul>
+</li>
+<li><p class="first">There <strong>is</strong> a stream of engagement events, and it is not used. It
+would tell which publication changed, and with it the refresh could
+ask about that one alone. It is not implemented because of three
+limits worth weighing first: it only reports reactions, comments and
+reshares, never impressions or clicks, which would still need the
+ordinary refresh; the publication it points at comes as an
+<tt class="docutils literal">urn:li:activity:</tt> and only the webhook payload carries the matching
+<tt class="docutils literal">urn:li:share:</tt>, the pull finder does not, so pulling alone cannot
+attribute an event to a publication; and the webhook needs a publicly
+reachable HTTPS URL validated by LinkedIn plus a subscription per
+member and organization. The permission it needs,
+<tt class="docutils literal">rw_organization_admin</tt>, is already requested by <em>Social Media
+Linkedin</em>.</p>
+<p><a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/organizations/organization-social-action-notifications">https://learn.microsoft.com/en-us/linkedin/marketing/community-management/organizations/organization-social-action-notifications</a></p>
+</li>
+</ul>
+</div>
+<div class="section" id="reactions-other-than-like">
+<h2><a class="toc-backref" href="#toc-entry-19">Reactions other than Like</a></h2>
+<ul class="simple">
+<li>Only <tt class="docutils literal">LIKE</tt> is sent, both on a publication and on a comment. The
+<a class="reference external" href="https://learn.microsoft.com/en-us/linkedin/marketing/community-management/shares/reactions-api">Reactions
+API</a>
+also takes <tt class="docutils literal">PRAISE</tt>, <tt class="docutils literal">EMPATHY</tt>, <tt class="docutils literal">INTEREST</tt>, <tt class="docutils literal">APPRECIATION</tt> and
+<tt class="docutils literal">ENTERTAINMENT</tt>. Nothing on the LinkedIn side holds them back — the
+same endpoint and the same permissions serve them — so offering them
+is a matter of choosing the reaction on the dashboard, and of drawing
+an entry that is no longer one thumb with two states.</li>
+</ul>
+</div>
+<div class="section" id="video-of-a-publication">
+<h2><a class="toc-backref" href="#toc-entry-20">Video of a publication</a></h2>
+<ul class="simple">
+<li>The video of a published post is not attached to the publication
+imported from LinkedIn: only the <em>has video</em> flag is kept. Bringing
+the file over means downloading it from LinkedIn on every
+synchronization, which is not implemented.</li>
+</ul>
+</div>
+</div>
+<div class="section" id="bug-tracker">
+<h1><a class="toc-backref" href="#toc-entry-21">Bug Tracker</a></h1>
+<p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/social/issues">GitHub Issues</a>.
+In case of trouble, please check there if your issue has already been reported.
+If you spotted it first, help us to smash it by providing a detailed and welcomed
+<a class="reference external" href="https://github.com/OCA/social/issues/new?body=module:%20social_media_linkedin_sync%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<p>Do not contact contributors directly about support or help with technical issues.</p>
+</div>
+<div class="section" id="credits">
+<h1><a class="toc-backref" href="#toc-entry-22">Credits</a></h1>
+<div class="section" id="authors">
+<h2><a class="toc-backref" href="#toc-entry-23">Authors</a></h2>
+<ul class="simple">
+<li>Binhex</li>
+</ul>
+</div>
+<div class="section" id="contributors">
+<h2><a class="toc-backref" href="#toc-entry-24">Contributors</a></h2>
+<ul class="simple">
+<li><a class="reference external" href="https://www.binhex.cloud">Binhex</a>:<ul>
+<li>Edilio Escalona Almira <a class="reference external" href="mailto:e.escalona&#64;binhex.cloud">e.escalona&#64;binhex.cloud</a></li>
+<li>Jorge Elena Poblet <a class="reference external" href="mailto:j.elena&#64;binhex.cloud">j.elena&#64;binhex.cloud</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="other-credits">
+<h2><a class="toc-backref" href="#toc-entry-25">Other credits</a></h2>
+<p>This work has been funded by AEOdoo (Asociación Española de Odoo -
+<a class="reference external" href="https://www.aeodoo.org">https://www.aeodoo.org</a>)</p>
+</div>
+<div class="section" id="maintainers">
+<h2><a class="toc-backref" href="#toc-entry-26">Maintainers</a></h2>
+<p>This module is maintained by the OCA.</p>
+<a class="reference external image-reference" href="https://odoo-community.org">
+<img alt="Odoo Community Association" src="https://odoo-community.org/logo.png" />
+</a>
+<p>OCA, or the Odoo Community Association, is a nonprofit organization whose
+mission is to support the collaborative development of Odoo features and
+promote its widespread use.</p>
+<p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
+<p><a class="reference external image-reference" href="https://github.com/edescalona"><img alt="edescalona" src="https://github.com/edescalona.png?size=40px" /></a></p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/social/tree/17.0/social_media_linkedin_sync">OCA/social</a> project on GitHub.</p>
+<p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
+</div>
+</div>
+</div>
+</body>
+</html>
