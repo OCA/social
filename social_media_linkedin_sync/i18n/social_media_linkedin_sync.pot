@@ -72,10 +72,24 @@ msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
+#: code:addons/social_media_linkedin_sync/tests/test_sync_actors_linkedin.py:0
+#, python-format
+msgid "LinkedIn refused the organization"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
 #: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
 #, python-format
 msgid "LinkedIn refused the page statistics"
+msgstr ""
+
+#. module: social_media_linkedin_sync
+#. odoo-python
+#: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
+#, python-format
+msgid "LinkedIn refused the reactions"
 msgstr ""
 
 #. module: social_media_linkedin_sync
