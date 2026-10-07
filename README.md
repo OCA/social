@@ -51,7 +51,7 @@ addon | version | maintainers | summary
 [mail_outbound_static](mail_outbound_static/) | 15.0.1.0.1 |  | Allows you to configure the from header for a mail server.
 [mail_parent_recipient](mail_parent_recipient/) | 15.0.1.0.0 |  | Send email to parent partner if partner's email is empty
 [mail_partner_opt_out](mail_partner_opt_out/) | 15.0.1.0.0 |  | Add the partner's email to the blackmailed list
-[mail_post_defer](mail_post_defer/) | 15.0.1.0.0 | <a href='https://github.com/Yajo'><img src='https://github.com/Yajo.png' width='32' height='32' style='border-radius:50%;' alt='Yajo'/></a> | Faster and cancellable outgoing messages
+[mail_post_defer](mail_post_defer/) | 15.0.1.0.1 | <a href='https://github.com/Yajo'><img src='https://github.com/Yajo.png' width='32' height='32' style='border-radius:50%;' alt='Yajo'/></a> | Faster and cancellable outgoing messages
 [mail_preview_audio](mail_preview_audio/) | 15.0.1.0.0 |  | Allow to preview audio files
 [mail_preview_base](mail_preview_base/) | 15.0.1.0.0 |  | Base to add more previewing options
 [mail_print](mail_print/) | 15.0.1.1.0 |  | Print messages from the chatter of any document.
