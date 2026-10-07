@@ -79,7 +79,7 @@ Credits
 Authors
 -------
 
-* Binhex Cloud
+* Binhex
 
 Contributors
 ------------
