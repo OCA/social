@@ -2,6 +2,7 @@
 # Copyright 2018 ForgeFlow S.L.  <https://www.forgeflow.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 from odoo import api, fields, models
+from odoo.exceptions import AccessError
 
 
 class MailActivity(models.Model):
@@ -26,10 +27,16 @@ class MailActivity(models.Model):
     @api.depends("res_id", "res_model")
     def _compute_related_model_instance(self):
         for record in self:
-            ref = False
-            if record.res_id:
-                ref = f"{record.res_model},{record.res_id}"
-            record.related_model_instance = ref
+            if record.res_id and record.res_model:
+                try:
+                    self.env[record.res_model].check_access_rights("read")
+                    record.related_model_instance = (
+                        f"{record.res_model},{record.res_id}"
+                    )
+                except (ValueError, AccessError, KeyError):
+                    record.related_model_instance = False
+            else:
+                record.related_model_instance = False
 
     @api.model
     def _selection_related_model_instance(self):
