@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="social_post_account_kanban_view_inherit">
+        <field name="name">social.network.stream.post.view.kanban.inherit</field>
+        <field name="model">social.post.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_post_account_kanban_view"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="inside">
+                <field name="linkedin_account_urn" />
+                <field name="linkedin_post_account_urn" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

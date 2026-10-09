@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="utm_campaign_form_view_inherit">
+        <field name="name">utm.campaign.view.form.inherit.social.media.linkedin</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='title']" position="after">
+                <field name="unit_cost" required="1" />
+                <field name="daily_budget" required="1" />
+                <field name="currency_id" required="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="utm_campaign_view_tree_inherit">
+        <field name="name">utm.campaign.view.list.inherit.social.media.linkedin</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="unit_cost" required="1" />
+                <field name="daily_budget" required="1" />
+                <field name="currency_id" required="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

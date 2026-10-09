@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="utm_group_campaign_tree_view">
+        <field name="name">utm.group.campaign.list.social.media.linkedin</field>
+        <field name="model">utm.group.campaign</field>
+        <field name="inherit_id" ref="social_media_base.utm_group_campaign_tree_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="total_budget" required="1" />
+                <field name="currency_id" required="1" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="wizard_social_account_view_form" model="ir.ui.view">
+        <field name="name">Associate Social Account</field>
+        <field name="model">wizard.social.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.wizard_social_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='social_account_data']" position="inside">
+                <field name="media_type" invisible="1" />
+                <field
+                    name="linkedin_client"
+                    readonly="0"
+                    required="media_type == 'linkedin' or (update_keys and context.get('social_update_account', False))"
+                    invisible="media_type != 'linkedin' or (not update_keys and context.get('social_update_account', False))"
+                />
+                <field
+                    name="linkedin_secret"
+                    readonly="0"
+                    password="True"
+                    required="media_type == 'linkedin' or (update_keys and context.get('social_update_account', False))"
+                    invisible="media_type != 'linkedin' or (not update_keys and context.get('social_update_account', False))"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
