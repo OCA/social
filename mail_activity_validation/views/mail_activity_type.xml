@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2022 Camptocamp SA (https://www.camptocamp.com)
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="mail_activity_type_view_form" model="ir.ui.view">
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
+        <field name="arch" type="xml">
+            <sheet position="inside">
+                <div name="activities_validators" invisible="category != 'validation'">
+                    <label for="validator_group_ids" />
+                    <field name="validator_group_ids" nolabel="1" />
+                </div>
+            </sheet>
+        </field>
+    </record>
+
+</odoo>
