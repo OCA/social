@@ -1,0 +1,55 @@
+<?xml version="1.0" ?>
+<!--
+    Copyright 2022 Camptocamp SA (https://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@camptocamp.com>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+
+    <record id="mail_activity_type_view_form" model="ir.ui.view">
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_form" />
+        <field name="arch" type="xml">
+            <group name="activity_planning" position="after">
+                <group name="activity_security" string="Security">
+                    <p
+                        name="activity_security_info"
+                        class="text-muted mt-2 mb-2"
+                        colspan="2"
+                    >
+                        Control who can interact with the activities.
+                        <ul>
+                            <li><strong
+                                >Creator</strong>: The person who created the activity.</li>
+                            <li><strong
+                                >User</strong>: The person assigned to the activity.</li>
+                            <li><strong
+                                >Anyone</strong>: Anyone with write access to the record (default).</li>
+                        </ul>
+                    </p>
+                    <field name="security_done" string="Mark as done" />
+                    <field name="security_edit" string="Edit" />
+                    <field name="security_cancel" string="Cancel" />
+                    <field
+                        name="security_group_ids"
+                        string="Management Groups"
+                        widget="many2many_tags"
+                    />
+                </group>
+            </group>
+        </field>
+    </record>
+
+    <record id="mail_activity_type_view_tree" model="ir.ui.view">
+        <field name="model">mail.activity.type</field>
+        <field name="inherit_id" ref="mail.mail_activity_type_view_tree" />
+        <field name="arch" type="xml">
+            <tree position="inside">
+                <field name="security_done" optional="hide" />
+                <field name="security_edit" optional="hide" />
+                <field name="security_cancel" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

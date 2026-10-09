@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2022 Camptocamp SA (https://www.camptocamp.com).
+    @author Iván Todorovich <ivan.todorovich@camptocamp.com>
+    License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
+-->
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.Activity" t-inherit-mode="extension" owl="1">
+        <Popover title="MARK_DONE" position="replace">
+            <t t-if="activity.canMarkAsDone">
+                <t>$0</t>
+            </t>
+        </Popover>
+        <button t-on-click="_onClickEdit" position="replace">
+            <t t-if="activity.canEdit">
+                <t>$0</t>
+            </t>
+        </button>
+        <button t-on-click="_onClickCancel" position="replace">
+            <t t-if="activity.canCancel">
+                <t>$0</t>
+            </t>
+        </button>
+    </t>
+
+</templates>
