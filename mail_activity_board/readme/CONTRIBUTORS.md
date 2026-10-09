@@ -6,3 +6,4 @@
   - Pedro Gonzalez (<pedro.gonzalez@pesol.es>)
 - [ACSONE SA/NV](https://www.acsone.eu)
   - Laurent Mignon \<<laurent.mignon@acsone.eu>\>
+- Andrius Laukavičius (<dev@timefordev.com>)
