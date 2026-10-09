@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="view_company_form">
+        <field name="name">res.company.form - mail_sender_company_aware</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form" />
+        <field name="arch" type="xml">
+            <field name="email" position="after">
+                <field
+                    name="use_email_domain"
+                    attrs="{'invisible': [('email', '=', False)]}"
+                />
+                <field
+                    name="format_email"
+                    attrs="{'invisible': [('use_email_domain', '=', False)]}"
+                />
+                <field
+                    name="reply_to"
+                    attrs="{'invisible': [('use_email_domain', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+
+</odoo>
