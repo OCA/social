@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_res_config_settings_giphy" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.giphy</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="base_setup.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//setting[@id='tenor_api_key']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//setting[@id='tenor_content_filter']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//setting[@id='tenor_gif_limit']" position="attributes">
+                <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath expr="//setting[@id='tenor_api_key']" position="after">
+                <setting
+                    string="GIPHY API Key"
+                    help="Add a GIPHY GIF API key to enable GIFs support."
+                    documentation="https://developers.giphy.com/docs/api/#quick-start-guide"
+                >
+                    <field
+                        name="giphy_api_key"
+                        password="True"
+                        placeholder="Paste your API key"
+                    />
+                </setting>
+                <setting
+                    string="GIPHY GIF Limits"
+                    help="Fetch up to the specified number of GIF."
+                >
+                    <field name="giphy_gif_limit" />
+                </setting>
+                <setting
+                    string="GIPHY Rating"
+                    help="Select the content filter used for filtering GIFs."
+                    documentation="https://developers.giphy.com/docs/optional-settings/#rating"
+                >
+                    <field name="giphy_rating" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

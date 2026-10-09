@@ -1,0 +1,1 @@
+This module changes the tenor API for Giphy to use it con discuss channels
