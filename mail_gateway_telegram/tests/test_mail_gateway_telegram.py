@@ -13,6 +13,7 @@ from odoo.tests.common import tagged
 from odoo.tools import file_open, mute_logger
 
 from odoo.addons.mail.tools.discuss import Store
+from odoo.addons.mail_gateway.models.discuss_channel import MailChannel
 from odoo.addons.mail_gateway.tests.common import MailGatewayTestCase
 
 
@@ -434,6 +435,91 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
                 subtype_xmlid="mail.mt_comment",
                 message_type="comment",
             )
+        self.assertTrue(
+            self.env["mail.notification"].search(
+                [("gateway_channel_id", "=", channel.id)]
+            )
+        )
+
+    def test_no_gateway_notification_is_per_post(self):
+        self.gateway.webhook_key = self.webhook
+        self.gateway.flush_recordset()
+        with patch.object(telegram, "Bot", getMyBot()):
+            self.gateway.set_webhook()
+        with patch.object(telegram, "Bot", getMyBot()):
+            self.set_message(self.message_02, self.webhook)
+        channel = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
+        self.assertFalse(
+            self.env["mail.notification"].search(
+                [("gateway_channel_id", "=", channel.id)]
+            )
+        )
+        with patch.object(telegram, "Bot", getMyBot()):
+            channel.message_post(
+                body="Inbound echo must be skipped",
+                subtype_xmlid="mail.mt_comment",
+                message_type="comment",
+                no_gateway_notification=True,
+            )
+        self.assertFalse(
+            self.env["mail.notification"].search(
+                [("gateway_channel_id", "=", channel.id)]
+            )
+        )
+        with patch.object(telegram, "Bot", getMyBot()):
+            channel.message_post(
+                body="Follow-up must be sent",
+                subtype_xmlid="mail.mt_comment",
+                message_type="comment",
+            )
+        self.assertTrue(
+            self.env["mail.notification"].search(
+                [("gateway_channel_id", "=", channel.id)]
+            )
+        )
+
+    def test_webhook_followup_is_sent(self):
+        """Replies posted during webhook handling must still be sent.
+
+        Incoming updates skip the echo with a per-call flag. Automations
+        that reply in the same request (for example AI) must reach Telegram.
+        """
+        self.gateway.webhook_key = self.webhook
+        self.gateway.flush_recordset()
+        with patch.object(telegram, "Bot", getMyBot()):
+            self.gateway.set_webhook()
+        with patch.object(telegram, "Bot", getMyBot()):
+            self.set_message(self.message_02, self.webhook)
+        channel = self.env["discuss.channel"].search(
+            [("gateway_id", "=", self.gateway.id)]
+        )
+        self.assertFalse(
+            self.env["mail.notification"].search(
+                [("gateway_channel_id", "=", channel.id)]
+            )
+        )
+
+        original = MailChannel.message_post
+
+        def message_post_with_followup(self, **kwargs):
+            message = original(self, **kwargs)
+            if self.env.context.get("mail_gateway_test_followup"):
+                return message
+            if self.gateway_id and kwargs.get("no_gateway_notification"):
+                self.with_context(mail_gateway_test_followup=True).message_post(
+                    body="Automated reply",
+                    subtype_xmlid="mail.mt_comment",
+                    message_type="comment",
+                )
+            return message
+
+        with (
+            patch.object(telegram, "Bot", getMyBot()),
+            patch.object(MailChannel, "message_post", message_post_with_followup),
+        ):
+            self.set_message(self.message_01, self.webhook)
         self.assertTrue(
             self.env["mail.notification"].search(
                 [("gateway_channel_id", "=", channel.id)]
