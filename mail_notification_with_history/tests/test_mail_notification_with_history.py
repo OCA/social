@@ -1,8 +1,6 @@
 # Copyright 2022 Camptocamp SA
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html)
 
-from unittest.mock import Mock, patch
-
 from odoo.addons.base.tests.common import SavepointCaseWithUserDemo
 
 
@@ -26,19 +24,15 @@ class TestMailNotificationWithHistory(SavepointCaseWithUserDemo):
         }
 
     def test_thread_history_is_included(self):
-        with patch(
-            (
-                "odoo.addons.mail_notification_with_history.models.mail_thread."
-                "MailThread._mail_notification_include_history"
-            ),
-            new=Mock(return_value=True),
-        ):
-            body = self.env["ir.qweb"]._render(
-                "mail.mail_notification_layout",
-                self.render_values,
-                minimal_qcontext=True,
-            )
-            self.assertTrue(body.find("Discussion") >= 0)
+        self.env["ir.model"]._get(self.mail_message.model).write(
+            {"include_mail_history": True}
+        )
+        body = self.env["ir.qweb"]._render(
+            "mail.mail_notification_layout",
+            self.render_values,
+            minimal_qcontext=True,
+        )
+        self.assertTrue(body.find("Discussion") >= 0)
 
     def test_thread_history_is_not_included(self):
         body = self.env["ir.qweb"]._render(
@@ -77,13 +71,10 @@ class TestMailNotificationWithHistory(SavepointCaseWithUserDemo):
                 "subtype_id": self.env.ref("mail.mt_note").id,
             }
         )
-        with patch(
-            (
-                "odoo.addons.mail_notification_with_history.models.mail_thread."
-                "MailThread._mail_notification_include_history"
-            ),
-            new=Mock(return_value=True),
-        ):
-            history = self.mail_message._get_notification_message_history()
+
+        self.env["ir.model"]._get(self.mail_message.model).write(
+            {"include_mail_history": True}
+        )
+        history = self.mail_message._get_notification_message_history()
         # So that is four message to include in history
         self.assertEqual(len(history), 4)
