@@ -1,0 +1,99 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* marketing_campaign_dates
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "Campaigns that have already ended"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "Campaigns that will start in the future"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid ""
+"Campaigns with no start date, or a start date on or before today, that are "
+"not yet finished"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:ir.model.fields,help:marketing_campaign_dates.field_utm_campaign__end_date
+msgid "Date when the campaign ends."
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:ir.model.fields,help:marketing_campaign_dates.field_utm_campaign__start_date
+msgid "Date when the campaign starts."
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:ir.model.fields,field_description:marketing_campaign_dates.field_utm_campaign__end_date
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "End Date"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "Finished"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "Running"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:utm.campaign,title:marketing_campaign_dates.demo_campaign_running
+msgid "Spring Promotion (Running)"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:ir.model.fields,field_description:marketing_campaign_dates.field_utm_campaign__start_date
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "Start Date"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:utm.campaign,title:marketing_campaign_dates.demo_campaign_upcoming
+msgid "Summer Launch (Upcoming)"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:ir.model.constraint,message:marketing_campaign_dates.constraint_utm_campaign_end_date_after_start_date
+msgid "The end date cannot be earlier than the start date."
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_form_inherit
+msgid "Time Management"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:ir.model,name:marketing_campaign_dates.model_utm_campaign
+msgid "UTM Campaign"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_dates.utm_campaign_view_search_inherit
+msgid "Upcoming"
+msgstr ""
+
+#. module: marketing_campaign_dates
+#: model:utm.campaign,title:marketing_campaign_dates.demo_campaign_finished
+msgid "Winter Sale (Finished)"
+msgstr ""
