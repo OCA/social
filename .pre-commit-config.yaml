@@ -22,7 +22,7 @@ exclude: |
   (LICENSE.*|COPYING.*)
 default_language_version:
   python: python3
-  node: "16.17.0"
+  node: system
 repos:
   - repo: local
     hooks:

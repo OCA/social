@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="mail_discuss_channel_hide_sidebar.DiscussSidebarChannel"
+        t-inherit="mail.DiscussSidebarChannel"
+        t-inherit-mode="extension"
+    >
+        <xpath
+            expr="//div[contains(@class, 'o-mail-DiscussSidebarChannel-commands')]/*[contains(@class, 'fa-times')][1]"
+            position="before"
+        >
+            <div
+                t-if="thread.type === 'channel' and !thread.message_unread_counter and !thread.message_needaction_counter"
+                t-attf-class="fa fa-eye-slash ms-1 {{ hover_class }}"
+                t-on-click.stop="() => this.hideChannel(thread)"
+                title="Hide from list"
+                role="img"
+            />
+        </xpath>
+    </t>
+</templates>
