@@ -91,33 +91,64 @@ registry.category("web_tour.tours").add("social_media_sync.account_notices_both"
 });
 
 /**
- * The *Update* button when it refreshed the figures and found no account to
- * import from. Announcing publications it did not bring in is what would make
- * the button look broken the next time an account really is behind.
+ * The steps of a tour that presses *Update* and waits for its notice.
+ *
+ * @param {String} notice the text the notification has to carry.
+ * @returns {Function} the steps of the tour.
+ */
+function updateSteps(notice) {
+    return () => [
+        {
+            content: "The card of the account is drawn",
+            trigger: CARD,
+            isCheck: true,
+        },
+        {
+            content: "The user asks for an update",
+            trigger: "button.o_kanban_statistics_refresh_now",
+        },
+        {
+            content: "And is told what the update brought",
+            trigger: `.o_notification .o_notification_content:contains('${notice}')`,
+            isCheck: true,
+        },
+    ];
+}
+
+/**
+ * The *Update* button when the import read the account and brought
+ * publications in: the notice says so, without saying how many.
+ */
+registry
+    .category("web_tour.tours")
+    .add("social_media_sync.update_with_new_publications", {
+        test: true,
+        url: "/web#action=social_media_base.social_post_account_action",
+        steps: updateSteps("The data was updated. New publications were imported."),
+    });
+
+/**
+ * The *Update* button when the import read the account and found nothing new.
+ * Announcing publications it did not bring in is what would make the button
+ * look broken the next time an account really is behind.
  */
 registry
     .category("web_tour.tours")
     .add("social_media_sync.update_without_new_publications", {
         test: true,
         url: "/web#action=social_media_base.social_post_account_action",
-        steps: () => [
-            {
-                content: "The card of the account is drawn",
-                trigger: CARD,
-                isCheck: true,
-            },
-            {
-                content: "The user asks for an update",
-                trigger: "button.o_kanban_statistics_refresh_now",
-            },
-            {
-                content: "And is told that the figures moved and the feed did not",
-                trigger:
-                    ".o_notification .o_notification_content:contains('The data was updated. No new publications.')",
-                isCheck: true,
-            },
-        ],
+        steps: updateSteps("The data was updated. No new publications."),
     });
+
+/**
+ * The *Update* button when no account was left to import: only the figures
+ * moved, and the notice is the one base words from them.
+ */
+registry.category("web_tour.tours").add("social_media_sync.update_without_import", {
+    test: true,
+    url: "/web#action=social_media_base.social_post_account_action",
+    steps: updateSteps("The data was updated successfully."),
+});
 
 /** Neither: an account nothing is pending on carries no notice at all. */
 registry.category("web_tour.tours").add("social_media_sync.account_notices_none", {

@@ -120,6 +120,51 @@ class SocialAccount(models.Model):
     def update_posts_statistics(self, post_id=None, domain=None):
         """Refresh the posts and the statistics of the accounts.
 
+        What the crons, the full resync and the connectors call. The import
+        itself is :meth:`_update_posts`; this answers only the figures it
+        read back.
+
+        :param post_id: post to update, all of them when not set.
+        :param domain: additional domain on the posts.
+        :rtype: list
+        """
+        statistics, _imported_accounts = self._update_posts(post_id, domain)
+        return statistics
+
+    def update_dashboard_posts(self, post_id=None, domain=None):
+        """Import the posts from the *Update* button and say what came in.
+
+        The figures :meth:`update_posts_statistics` answers come out the same
+        whether an account was read or not, and whether the read brought
+        anything new or not, so they cannot word the notice of the button.
+        This answers the two things the notice is worded from: whether the
+        social media of any account was read, and how many publications are
+        in Odoo now that were not before.
+
+        The publications are counted from outside, before and after the
+        import, so the connectors do not have to report what they created.
+        The count reaches the archived ones too, so a publication archived
+        during the import does not take one off the new ones.
+
+        :param post_id: post to update, all of them when not set.
+        :param domain: additional domain on the posts.
+        :return: ``read``, whether any account was read, and ``imported``, the
+            number of publications created.
+        :rtype: dict
+        """
+        accounts = self or self.search([])
+        post_accounts = (
+            self.env["social.post.account"].sudo().with_context(active_test=False)
+        )
+        account_domain = [("account_id", "in", accounts.ids)]
+        before = post_accounts.search_count(account_domain)
+        _statistics, imported_accounts = self._update_posts(post_id, domain)
+        after = post_accounts.search_count(account_domain)
+        return {"read": bool(imported_accounts), "imported": after - before}
+
+    def _update_posts(self, post_id, domain):
+        """Import the posts of the accounts and close what the import resolves.
+
         An account read here does not need its initial sync any more: this is
         the very import the cron was going to run, so the flag is cleared and
         the dashboard stops announcing a background import. It is also what
@@ -145,19 +190,24 @@ class SocialAccount(models.Model):
 
         An empty recordset is every account as far as the connectors are
         concerned, so a narrowing that keeps nothing has to stop here instead
-        of handing them one. The empty answer is what the dashboard reads to
-        tell that run from one that really imported something, and word the
-        button accordingly.
+        of handing them one, and no account is reported as read.
+
+        The card of an account reads figures aggregated on the account, which
+        nothing recomputes after an import on its own: the accounts read here
+        are recomputed last, from what the import just stored. The others are
+        left alone, nothing moved on them.
 
         :param post_id: post to update, all of them when not set.
         :param domain: additional domain on the posts.
-        :rtype: list
+        :return: the figures the connectors answered, and the accounts they
+            read.
+        :rtype: tuple
         """
         accounts = self or self.search([])
         if not self:
             accounts = accounts._accounts_to_import()
             if not accounts:
-                return []
+                return [], accounts
         imported = set()
         statistics = accounts._update_posts_statistics(post_id, domain, imported)
         imported_accounts = accounts.filtered(lambda account: account.id in imported)
@@ -166,7 +216,8 @@ class SocialAccount(models.Model):
             pending.sudo().write({"pending_initial_sync": False})
         # ``_clear_posts_need_import`` keeps the ones actually flagged.
         imported_accounts._clear_posts_need_import()
-        return statistics
+        imported_accounts._refresh_account_statistics()
+        return statistics, imported_accounts
 
     def _full_resync(self):
         """Hook for the connectors to read everything again and reconcile it.
@@ -191,9 +242,15 @@ class SocialAccount(models.Model):
         return self.update_posts_statistics()
 
     def action_full_resync(self):
-        """Read everything again from the social media, from the account form."""
+        """Read everything again from the social media, from the account form.
+
+        A connector is free to reconcile the feed without going through
+        :meth:`update_posts_statistics`, so the card is recomputed here, once
+        the reconciliation is over.
+        """
         self.ensure_one()
         self._full_resync()
+        self._refresh_account_statistics()
 
     @api.model
     def _run_full_resync(self):
@@ -213,10 +270,15 @@ class SocialAccount(models.Model):
         sibling crons do. The accounts waiting for their initial sync are left
         out: that import is this very pass, and the two would fight over the
         same rows.
+
+        The card of each account is recomputed inside its savepoint, like
+        :meth:`action_full_resync` does: the reconciliation may not have gone
+        through :meth:`update_posts_statistics`.
         """
         for account in self.sudo().search([("pending_initial_sync", "=", False)]):
             with account._account_guard("Error on the full resync of the account %s"):
                 account._full_resync()
+                account._refresh_account_statistics()
 
     def _trigger_initial_sync(self):
         """Run the posts-statistics sync now so the dashboard is populated
@@ -352,6 +414,11 @@ class SocialAccount(models.Model):
                         account.id,
                     )
                     account._register_backfill_failure(backfill_error)
+                else:
+                    # The card of an account with a daily series is drawn from
+                    # it, and the series was only written now: the recompute
+                    # the import did came too early for it.
+                    account._refresh_account_statistics()
             account._close_initial_sync(error)
             # An account still pending was skipped, not imported: the quota of
             # the social media was spent, or the connector had nothing to read
@@ -477,7 +544,9 @@ class SocialAccount(models.Model):
         self._notify_accounts_by_partner("social_posts_need_import", need_update)
 
     @api.model
-    def _import_command(self, post_account, values, attachments, media_refs):
+    def _import_command(
+        self, post_account, values, attachments, media_refs, videos=None
+    ):
         """Return the command that writes one imported publication.
 
         The medias go in the same write as the rest of the publication, so a
@@ -486,12 +555,17 @@ class SocialAccount(models.Model):
         nothing over the new ones: what this pass read is what the social
         media says today.
 
+        The references are merged whenever a media of either kind arrives: a
+        publication with a video and no image still has to keep the
+        reference of its video.
+
         :param post_account: the line already in Odoo, an empty recordset when
             the publication has never been imported.
         :param values: the fields read from the social media.
-        :param attachments: the medias downloaded in this pass.
-        :param media_refs: the reference of each downloaded media, keyed by
-            its identifier.
+        :param attachments: the images downloaded in this pass.
+        :param media_refs: the reference of each image and video downloaded
+            in this pass, keyed by its identifier.
+        :param videos: the videos downloaded in this pass.
         :rtype: tuple
         """
         if attachments:
@@ -500,6 +574,15 @@ class SocialAccount(models.Model):
                 "image_ids": [
                     Command.link(attachment.id) for attachment in attachments
                 ],
+            }
+        if videos:
+            values = {
+                **values,
+                "video_ids": [Command.link(video.id) for video in videos],
+            }
+        if attachments or videos:
+            values = {
+                **values,
                 "media_refs": {**(post_account.media_refs or {}), **media_refs},
             }
         if not post_account:

@@ -8,6 +8,7 @@ from .test_social_sync_common import TestSocialMediaSyncCommon, media_download_r
 
 LOGGER_SYNC_POST_ACCOUNT = "odoo.addons.social_media_sync.models.social_post_account"
 MEDIA_MAX_SIZE_PARAM = "social_media_sync.media_max_size_mb"
+DOWNLOAD_VIDEOS_PARAM = "social_media_sync.download_videos"
 MEGABYTE = 1024 * 1024
 
 
@@ -115,3 +116,48 @@ class TestMediaDownloadSync(TestSocialMediaSyncCommon):
         """A negative size caps nothing, the same as zero."""
         self._set_max_size("-5")
         self.assertEqual(self.SocialPostAccount._media_max_size_bytes(), 0)
+
+
+class TestDownloadVideosParameterSync(TestSocialMediaSyncCommon):
+    """The system parameter that turns the downloads of videos on and off."""
+
+    def _set_download_videos(self, value):
+        """Write the parameter as an administrator would."""
+        self.env["ir.config_parameter"].sudo().set_param(DOWNLOAD_VIDEOS_PARAM, value)
+
+    def test_the_parameter_ships_on(self):
+        """The module writes the parameter so that it can be found."""
+        self.assertEqual(
+            self.env["ir.config_parameter"].sudo().get_param(DOWNLOAD_VIDEOS_PARAM),
+            "True",
+        )
+        self.assertTrue(self.SocialPostAccount._download_videos_enabled())
+
+    def test_false_or_zero_turn_the_downloads_off(self):
+        """The case and the surrounding spaces do not matter."""
+        for value in ("False", "false", "FALSE", " False ", "0"):
+            with self.subTest(value=value):
+                self._set_download_videos(value)
+                self.assertFalse(self.SocialPostAccount._download_videos_enabled())
+
+    def test_true_or_one_keep_the_downloads_on(self):
+        for value in ("True", "1"):
+            with self.subTest(value=value):
+                self._set_download_videos(value)
+                with self.assertNoLogs(LOGGER_SYNC_POST_ACCOUNT, "WARNING"):
+                    self.assertTrue(self.SocialPostAccount._download_videos_enabled())
+
+    def test_no_parameter_row_downloads(self):
+        """A deleted parameter is read as the value the module ships."""
+        self.env["ir.config_parameter"].sudo().search(
+            [("key", "=", DOWNLOAD_VIDEOS_PARAM)]
+        ).unlink()
+        with self.assertNoLogs(LOGGER_SYNC_POST_ACCOUNT, "WARNING"):
+            self.assertTrue(self.SocialPostAccount._download_videos_enabled())
+
+    def test_a_value_that_cannot_be_read_downloads_and_says_so(self):
+        """A typo does not stop the downloads without a word."""
+        self._set_download_videos("nope")
+        with self.assertLogs(LOGGER_SYNC_POST_ACCOUNT, "WARNING") as logs:
+            self.assertTrue(self.SocialPostAccount._download_videos_enabled())
+        self.assertIn("nope", logs.output[0])

@@ -299,6 +299,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
 #, python-format
+msgid "The data was updated. New publications were imported."
+msgstr ""
+
+#. module: social_media_sync
+#. odoo-javascript
+#: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
+#, python-format
 msgid "The data was updated. No new publications."
 msgstr ""
 
@@ -337,6 +344,7 @@ msgstr ""
 
 #. module: social_media_sync
 #. odoo-python
+#: code:addons/social_media_sync/tests/test_social_account_sync.py:0
 #: code:addons/social_media_sync/tests/test_social_account_sync.py:0
 #, python-format
 msgid "The social media refused the feed"

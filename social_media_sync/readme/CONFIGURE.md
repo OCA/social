@@ -69,3 +69,34 @@ parameter that was deleted:
 every media is downloaded whatever its size, and nothing is logged. A value
 that cannot be read as a whole number of megabytes — a word, a decimal — does
 not remove the cap: it is taken as `100` and leaves a warning in the log.
+
+Whether the videos are downloaded at all is a third system parameter, in the
+same place: `social_media_sync.download_videos`. The module installs it at
+`True`, and an update of the module does not overwrite what an administrator
+wrote in it. It covers every video the synchronization downloads, the
+animated GIFs of X included, since X serves them as videos. The images are
+downloaded whatever it says, and the videos of a post published from Odoo
+belong to the post and are never downloaded, so it does not reach them.
+
+Written as `False`, no video is downloaded from then on. The publication is
+imported all the same and is still marked as having a video, and its form
+says that the video was not downloaded, so it can only be watched on the
+social media. On LinkedIn it also spares a call per video: the Videos API,
+which only answers where a video is to be downloaded from, is not asked.
+
+Turning it off frees nothing. The videos already downloaded are kept, and
+what releases them is `social_media_sync.media_max_age_days`, along with the
+images, for the imported publications older than its number of days.
+
+No reference is kept for a video that was not downloaded, so written back to
+`True` it needs nothing else: the next synchronization pass that reads a
+publication still missing its video downloads it. The full resync is the
+pass that reads every publication of an account, so on an account with a long
+history it is the one that brings in, in a single run, every video left out
+meanwhile, each of them held to the size cap above.
+
+Only `False` and `0` turn the downloads off, in any case and with any spaces
+around them; `True`, `1` and a parameter that was deleted download. A value
+that cannot be read as either —a word, a typo— does not stop the downloads:
+it is taken as `True` and leaves a warning in the log naming the value it
+read.

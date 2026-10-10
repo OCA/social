@@ -15,4 +15,10 @@
     <field name="key">social_media_sync.media_max_size_mb</field>
     <field name="value">100</field>
   </record>
+  <!-- Whether the synchronization downloads the videos and animated GIFs of
+       the imported publications. Only False or 0 turns it off. -->
+  <record id="download_videos" model="ir.config_parameter">
+    <field name="key">social_media_sync.download_videos</field>
+    <field name="value">True</field>
+  </record>
 </odoo>
