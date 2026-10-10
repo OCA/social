@@ -211,8 +211,8 @@ msgstr ""
 #: model:ir.model.fields,help:social_media_sync.field_social_post_account__actor_urn
 msgid ""
 "Reference of the author of the publication on the social media, as the "
-"import read it. It is what the social media answers about whoever published,"
-" which is not always the account that imported it: a page publishes as the "
+"import read it. It is what the social media answers about whoever published, "
+"which is not always the account that imported it: a page publishes as the "
 "page and a person as the person."
 msgstr ""
 
@@ -294,6 +294,13 @@ msgstr ""
 #, python-format
 msgid ""
 "The daily statistics history of the account could not be filled: %(error)s."
+msgstr ""
+
+#. module: social_media_sync
+#. odoo-javascript
+#: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
+#, python-format
+msgid "The data was updated. New publications were imported."
 msgstr ""
 
 #. module: social_media_sync
