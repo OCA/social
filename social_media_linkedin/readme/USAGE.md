@@ -165,6 +165,15 @@ Figures of a publication
 - A publication missing from the answer is one nobody interacted with: the
   finder leaves out the entities with no activity at all, so its figures are
   written as zeros and its date as read all the same.
+- A publication deleted on LinkedIn does not leave the others of the account
+  without figures. LinkedIn refuses the whole batch with a `4xx` when one of
+  its publications is gone, so Odoo then asks LinkedIn which publications of
+  the batch no longer exist: the ones it confirms with a `404` are marked as
+  *Deleted*, the same as when a publication is opened, and the others are
+  asked for once more. If none is confirmed, or the second reading fails as
+  well, the account is reported and skipped like any other refusal. An error
+  on LinkedIn's side (`5xx`) or a timeout says nothing about the publications
+  and is reported straight away.
 - No new permission is needed: the figures of a publication come from
   `organizationalEntityShareStatistics` and `socialActions`, which the scopes
   already requested when the account was associated cover, so an account
@@ -266,8 +275,12 @@ Video upload
 - The publication shares the video of its post the same way it shares its
   images, and what LinkedIn made of it is recorded in its media references.
   The camera icon without a count is the fallback drawn for a publication
-  that carries only the *has video* flag — one imported from LinkedIn, whose
-  video was never downloaded and can only be watched there.
+  that carries only the *has video* flag — one imported from LinkedIn whose
+  video was not downloaded, so it can only be watched there. *Social Media
+  LinkedIn Sync* downloads the videos it imports, and leaves one out when it
+  is above the size cap, LinkedIn is still processing it, the download
+  fails, or the system parameter `social_media_sync.download_videos` is
+  `False`.
 
 Publishing options
 ---------------

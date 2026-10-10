@@ -461,7 +461,7 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
     def test_get_post_errors_leaves_the_other_media_alone(self):
         """A rule of LinkedIn says nothing about a post published elsewhere."""
         post = self._draft_post(message="x" * (_MAX_MESSAGE_LENGTH_LINKEDIN + 1))
-        self.assertFalse(post._get_post_errors("x"))
+        self.assertFalse(post._get_post_errors("other_media"))
 
     def test_get_post_errors_message_too_long(self):
         post = self._draft_post(message="x" * (_MAX_MESSAGE_LENGTH_LINKEDIN + 1))

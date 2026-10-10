@@ -4,7 +4,7 @@
 {
     "name": "Social Media Linkedin",
     "summary": "Publish on the LinkedIn pages you administrate, with daily figures",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",
