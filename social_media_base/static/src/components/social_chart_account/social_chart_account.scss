@@ -1,0 +1,19 @@
+div.social-chart {
+    .social-chart-header {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem !important;
+        box-sizing: border-box;
+        div {
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            white-space: normal;
+        }
+    }
+    //
+    .social-chart-body {
+        border: 1px solid #dee2e6;
+        border-radius: 0.5rem !important;
+        box-sizing: border-box;
+    }
+}

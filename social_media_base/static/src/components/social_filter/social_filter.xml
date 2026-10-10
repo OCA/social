@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+	<t t-name="social_media_base.SocialFilter">
+        <div
+            class="d-flex justify-content-between align-items-center social-network-filter"
+        >
+            <div
+                t-if="props.searchEnable"
+                class="w-50 rounded d-flex justify-content-start align-items-center border-1 search-filter mx-4"
+            >
+                <span class="fa fa-search p-2" />
+                <input
+                    type="text"
+                    class="form-control border-0"
+                    placeholder="Search..."
+                    t-on-keydown="onInputSearch"
+                    t-ref="inputSearch"
+                />
+            </div>
+
+            <Dropdown
+                t-if="props.filterGranularity"
+                class="'btn-group flex-grow-1 flex-md-grow-0 mx-1'"
+                togglerClass="'btn btn-secondary'"
+                showCaret="true"
+            >
+                <t t-set-slot="toggler">
+                    <t t-esc="state.currentFilterType.name" />
+                </t>
+                <t t-foreach="filter_types" t-as="flt" t-key="flt.id">
+                    <DropdownItem
+                        onSelected="() => this.onSelectTypeRange(flt)"
+                        t-esc="flt.name"
+                        class="{selected : flt.id == state.currentFilterType.id }"
+                    />
+                </t>
+            </Dropdown>
+
+            <div class="d-flex flex-column mx-1">
+                <input
+                    t-on-click="() => this.onSelectShowDate('start')"
+                    type="text"
+                    class="form-control cursor-pointer"
+                    t-att-value="state.currentStartDate"
+                />
+                <DateTimePicker
+                    t-if="state.showStartDate"
+                    type="'date'"
+                    onSelect.bind="onSelectStartDate"
+                />
+            </div>
+            <div class="d-flex flex-column">
+                <input
+                    t-on-click="() => this.onSelectShowDate('end')"
+                    type="text"
+                    class="form-control cursor-pointer"
+                    t-att-value="state.currentEndDate"
+                />
+                <DateTimePicker
+                    t-if="state.showEndDate"
+                    type="'date'"
+                    onSelect.bind="onSelectEndDate"
+                />
+            </div>
+        </div>
+    </t>
+</templates>

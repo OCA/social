@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialAccount">
+        <section
+            class="d-flex flex-nowrap border-bottom bg-view"
+            style="margin-bottom: -1px;"
+        >
+            <div
+                t-if="state.needUpdate"
+                class="alert alert-info d-flex justify-content-center w-100 mb-2"
+                role="alert"
+                style="position: absolute; top: 0; left: 0; right: 0; z-index: 101;"
+            >
+                New updates are available, press the <span
+                class="fw-bold mx-1"
+            >Update</span> button to get them.
+            </div>
+
+            <div
+                t-foreach="props.socialAccounts"
+                t-key="social_account.id"
+                t-as="social_account"
+                class="flex-shrink-0 w-auto d-flex flex-column bg-view border-bottom border-end cursor-pointer"
+            >
+                <!-- Account header -->
+                <div class="pt-3 pb-2 px-4 d-flex justify-content-between">
+                    <div class="d-flex align-items-center">
+                        <img
+                            t-if="social_account.media_id"
+                            class="me-2"
+                            height="20"
+                            t-attf-src="/web/image/social.media/{{social_account.media_id[0]}}/image/20x20"
+                            alt="Platform"
+                        />
+                        <span
+                            class="d-block text-truncate m-0 fw-bold"
+                            style="font-size: 18px;"
+                            t-esc="social_account.name"
+                            t-att-title="social_account.name"
+                        />
+                    </div>
+                    <div class="d-flex align-items-center ms-4">
+                        <a
+                            t-if="social_account.account_url"
+                            t-att-href="social_account.account_url"
+                            target="_blank"
+                            class="small"
+                        >
+                            Insights
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Stats section - icon only with tooltips -->
+                <div class="d-flex flex-nowrap flex-grow-1 px-4 pt-2 pb-3">
+                    <!-- Views -->
+                    <t
+                        t-set="views_content"
+                    >Number of times your posts have been viewed</t>
+                    <div
+                        class="d-flex align-items-center gap-1 me-3"
+                        data-bs-toggle="popover"
+                        title="Views"
+                        t-att-data-bs-content="views_content"
+                    >
+                        <i class="fa fa-eye text-muted" />
+                        <span class="fw-bold" t-esc="social_account.impression_count" />
+                    </div>
+                    <!-- Interactions -->
+                    <t
+                        t-set="interactions_content"
+                    >Number of times people have engaged with your posts (likes, comments, shares...)</t>
+                    <div
+                        class="d-flex align-items-center gap-1 me-3"
+                        data-bs-toggle="popover"
+                        title="Interactions"
+                        t-att-data-bs-content="interactions_content"
+                    >
+                        <i class="fa fa-heart text-muted" />
+                        <span
+                            class="fw-bold"
+                            t-esc="social_account.interactions_count"
+                        />
+                    </div>
+                    <!-- Engagement -->
+                    <t
+                        t-set="engagement_content"
+                    >Engagement rate showing how actively your audience interacts with your content</t>
+                    <div
+                        class="d-flex align-items-center gap-1"
+                        data-bs-toggle="popover"
+                        title="Engagement"
+                        t-att-data-bs-content="engagement_content"
+                    >
+                        <i class="fa fa-fire text-muted" />
+                        <span class="fw-bold" t-esc="social_account.engagement" />
+                    </div>
+                </div>
+            </div>
+        </section>
+    </t>
+
+</templates>
