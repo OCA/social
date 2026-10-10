@@ -312,6 +312,13 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
 #, python-format
+msgid "The data was updated. New publications were imported."
+msgstr "Se han actualizado los datos. Se han importado publicaciones nuevas."
+
+#. module: social_media_sync
+#. odoo-javascript
+#: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
+#, python-format
 msgid "The data was updated. No new publications."
 msgstr "Se han actualizado los datos. No hay publicaciones nuevas."
 

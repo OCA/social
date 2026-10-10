@@ -12,7 +12,8 @@ starts using or drops.
 Storage of the imported medias
 ---------------
 
-The import downloads the medias of every publication it brings in and stores
+The import downloads the medias of every publication it brings in, the videos
+too unless `social_media_sync.download_videos` is `False`, and stores
 them as ordinary `ir.attachment` records, so the filestore grows with the
 history of the accounts and not with what is published from Odoo: an account
 importing years of publications brings in years of images.
