@@ -1,6 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+from contextlib import ExitStack
 from datetime import datetime
 from unittest.mock import MagicMock, patch
 from urllib.parse import quote
@@ -8,10 +9,13 @@ from urllib.parse import quote
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
 
-from odoo import _
+from odoo import Command, _
 from odoo.exceptions import UserError
 from odoo.tools import mute_logger
 
+from odoo.addons.social_media_linkedin.social_linkedin_utils import (
+    _BATCH_GET_MAX_IDS_LINKEDIN,
+)
 from odoo.addons.social_media_linkedin.tests.test_common_linkedin import (
     PATCH_ACCOUNT_LINKEDIN,
     RECENT_STATISTICS_LINKEDIN,
@@ -19,6 +23,7 @@ from odoo.addons.social_media_linkedin.tests.test_common_linkedin import (
 )
 from odoo.addons.social_media_sync.tests.test_social_sync_common import (
     PATCH_SYNC_ACCOUNT,
+    media_download_response,
 )
 
 from ..models.social_account import SocialAccount as SocialAccountLinkedinSync
@@ -156,6 +161,86 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             self.SocialAccountLinkedin._get_linkedin_images_download_url([]), {}
         )
 
+    def _videos_response(self, results, status_code=200):
+        """Answer of the Videos API to a ``BATCH_GET``."""
+        return self.generate_magic_mock(
+            **{"status_code": status_code, "json_return_value": {"results": results}}
+        )
+
+    def test_get_linkedin_videos_download_url(self):
+        """Only the videos LinkedIn already processed answer a URL."""
+        response = self._videos_response(
+            {
+                "urn:li:video:ready": {
+                    "status": "AVAILABLE",
+                    "downloadUrl": "https://fake-url/ready",
+                },
+                "urn:li:video:processing": {"status": "PROCESSING"},
+            }
+        )
+        with self.get_patch_exceptions_linkedin(response) as mock_request:
+            urls = self.SocialAccountLinkedin._get_linkedin_videos_download_url(
+                ["urn:li:video:ready", "urn:li:video:processing"]
+            )
+        self.assertEqual(urls, {"urn:li:video:ready": "https://fake-url/ready"})
+        self.assertEqual(mock_request.call_args.kwargs["endpoint"], "/videos")
+        self.assertEqual(
+            self.SocialAccountLinkedin._get_linkedin_videos_download_url([]), {}
+        )
+
+    @mute_logger(LOGGER_ACCOUNT_LINKEDIN)
+    def test_get_linkedin_videos_download_url_error_is_not_fatal(self):
+        """A failure reading the videos is logged and does not stop the import."""
+        response = self._videos_response({}, status_code=500)
+        with self.get_patch_exceptions_linkedin(response), self.assertLogs(
+            LOGGER_ACCOUNT_SYNC_LINKEDIN, "WARNING"
+        ):
+            urls = self.SocialAccountLinkedin._get_linkedin_videos_download_url(
+                ["urn:li:video:1"]
+            )
+        self.assertEqual(urls, {})
+
+    def test_get_linkedin_videos_download_url_goes_in_batches(self):
+        """LinkedIn caps a ``BATCH_GET``, so a long list is asked in chunks."""
+        urns = [
+            f"urn:li:video:{number}"
+            for number in range(_BATCH_GET_MAX_IDS_LINKEDIN + 1)
+        ]
+        response = self._videos_response({})
+        with self.get_patch_exceptions_linkedin(response) as mock_request:
+            self.SocialAccountLinkedin._get_linkedin_videos_download_url(urns)
+        self.assertEqual(
+            [
+                call.kwargs["params_values"]["ids"]
+                for call in mock_request.call_args_list
+            ],
+            [urns[:_BATCH_GET_MAX_IDS_LINKEDIN], urns[_BATCH_GET_MAX_IDS_LINKEDIN:]],
+        )
+
+    def test_get_linkedin_videos_download_url_network_error_loses_its_batch(self):
+        """LinkedIn not being reached for a chunk only loses that chunk."""
+        urns = [
+            f"urn:li:video:{number}"
+            for number in range(_BATCH_GET_MAX_IDS_LINKEDIN + 1)
+        ]
+        last_urn = urns[-1]
+        response = self._videos_response(
+            {last_urn: {"status": "AVAILABLE", "downloadUrl": "https://fake/last"}}
+        )
+        network_error = UserError("Error connecting to LinkedIn: timed out")
+        with self.get_patch_exceptions_linkedin(
+            side_effect=[network_error, response]
+        ) as mock_request, self.assertLogs(
+            LOGGER_ACCOUNT_SYNC_LINKEDIN, "WARNING"
+        ) as logs:
+            urls = self.SocialAccountLinkedin._get_linkedin_videos_download_url(urns)
+        self.assertEqual(urls, {last_urn: "https://fake/last"})
+        self.assertEqual(mock_request.call_count, 2)
+        self.assertEqual(len(logs.records), 1)
+        message = logs.records[0].getMessage()
+        self.assertIn(self.SocialAccountLinkedin.name, message)
+        self.assertIn("timed out", message)
+
     def test_update_posts_statistics_single_post_preserves_urns(self):
         ugc_posts = [
             {
@@ -176,9 +261,14 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
         self.SocialAccountLinkedin.linkedin_statistics_checkpoint = "untouched"
+        patch_video_urls = patch.object(
+            type(self.SocialAccountLinkedin),
+            "_get_linkedin_videos_download_url",
+            return_value={},
+        )
         with patch_validate, patch_get_posts as mock_get_posts, patch_all_posts, (
             patch_entity
-        ), patch_assets, patch_page as mock_page, patch_reactions:
+        ), patch_assets, patch_page as mock_page, patch_reactions, patch_video_urls:
             self.SocialAccountLinkedin._update_posts_statistics(
                 "urn:li:share:new", None
             )
@@ -321,6 +411,293 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             "A key that is not an image of the publication is a reference "
             "nothing can act on",
         )
+
+    @staticmethod
+    def _video_post(post_urn, video_urn):
+        """A post of the feed whose media is a video."""
+        return {
+            "id": post_urn,
+            "commentary": "Imported with a video",
+            "content": {"media": {"id": video_urn}},
+            "publishedAt": 1735689600000,
+            "author": "urn:li:organization:123456",
+        }
+
+    def _import_feed(self, ugc_posts, download_urls=None, downloads=None):
+        """Import ``ugc_posts`` with the videos LinkedIn would serve.
+
+        :param download_urls: ``{video_urn: url}``, what the Videos API
+            answers; a video left out is one LinkedIn is still processing.
+        :param downloads: ``{url: response}``, what each download answers.
+        :return: the mock of the Videos API and the one of the downloads.
+        :rtype: tuple
+        """
+        download_urls = download_urls or {}
+        downloads = downloads or {}
+        with ExitStack() as stack:
+            for patcher in self._generate_update_posts_statistics_patches(ugc_posts):
+                stack.enter_context(patcher)
+            mock_urls = stack.enter_context(
+                patch.object(
+                    type(self.SocialAccountLinkedin),
+                    "_get_linkedin_videos_download_url",
+                    autospec=True,
+                    side_effect=lambda account, urns: {
+                        urn: download_urls[urn] for urn in urns if urn in download_urls
+                    },
+                )
+            )
+            mock_get = stack.enter_context(
+                patch("requests.get", side_effect=lambda url, **kwargs: downloads[url])
+            )
+            self.SocialAccountLinkedin._update_posts_statistics(None, None)
+        self.env.flush_all()
+        self.env.invalidate_all()
+        return mock_urls, mock_get
+
+    def _imported_line(self, post_urn):
+        """The publication of the account imported for ``post_urn``."""
+        return self.SocialPostAccount.with_context(active_test=False).search(
+            [
+                ("remote_ref", "=", post_urn),
+                ("account_id", "=", self.SocialAccountLinkedin.id),
+            ]
+        )
+
+    def test_import_a_post_with_a_video(self):
+        self._import_feed(
+            [self._video_post("urn:li:share:video", "urn:li:video:1")],
+            {"urn:li:video:1": "https://fake-url/1"},
+            {"https://fake-url/1": media_download_response([b"video"])},
+        )
+        post_account = self._imported_line("urn:li:share:video")
+        self.assertTrue(post_account.has_video)
+        self.assertEqual(post_account.video_ids.mapped("name"), ["urn:li:video:1"])
+        self.assertEqual(post_account.video_ids.mimetype, "video/mp4")
+        self.assertFalse(post_account.image_ids)
+        self.assertEqual(
+            post_account.media_refs,
+            {str(post_account.video_ids.id): "urn:li:video:1"},
+            "The URN of the video is kept although the post has no image",
+        )
+
+    @mute_logger("odoo.addons.social_media_sync.models.social_post_account")
+    def test_import_a_post_whose_video_is_not_downloaded(self):
+        """A failed download or a video still processing leaves the mark.
+
+        The rest of the feed is imported anyway.
+        """
+        self._import_feed(
+            [
+                self._video_post("urn:li:share:failed", "urn:li:video:failed"),
+                self._video_post("urn:li:share:processing", "urn:li:video:processing"),
+                self._video_post("urn:li:share:ok", "urn:li:video:ok"),
+            ],
+            {
+                "urn:li:video:failed": "https://fake-url/failed",
+                "urn:li:video:ok": "https://fake-url/ok",
+            },
+            {
+                "https://fake-url/failed": media_download_response(status_code=500),
+                "https://fake-url/ok": media_download_response([b"video"]),
+            },
+        )
+        for post_urn in ("urn:li:share:failed", "urn:li:share:processing"):
+            post_account = self._imported_line(post_urn)
+            self.assertEqual(len(post_account), 1, "The post is imported anyway")
+            self.assertTrue(
+                post_account.has_video,
+                "The publication tells it has a video although its file is missing",
+            )
+            self.assertFalse(post_account.video_ids)
+            self.assertFalse(post_account.media_refs)
+        self.assertEqual(
+            self._imported_line("urn:li:share:ok").video_ids.mapped("name"),
+            ["urn:li:video:ok"],
+        )
+
+    def test_import_survives_a_network_error_on_the_medias(self):
+        """LinkedIn not being reached for the medias keeps the import.
+
+        The images and the video are a complement of the post: the posts are
+        imported without them, the video one still tells it has a video, and
+        the guard of the account rolls nothing back.
+        """
+        ugc_posts = [
+            {
+                "id": "urn:li:share:image",
+                "commentary": "Imported with an image",
+                "content": {"media": {"id": "urn:li:image:1"}},
+                "publishedAt": 1735689600000,
+                "author": "urn:li:organization:123456",
+            },
+            self._video_post("urn:li:share:video", "urn:li:video:1"),
+        ]
+        network_error = UserError("Error connecting to LinkedIn: timed out")
+
+        def request_linkedin(account, *args, **kwargs):
+            endpoint = kwargs.get("endpoint")
+            if endpoint in ("/images", "/videos"):
+                raise network_error
+            raise AssertionError(f"Unexpected call to LinkedIn: {endpoint}")
+
+        # The download of the images is what is under test, so its patch is
+        # left out of the pass.
+        patches = [
+            patcher
+            for patcher in self._generate_update_posts_statistics_patches(ugc_posts)
+            if getattr(patcher, "attribute", None) != "_get_assets_save"
+        ]
+        with ExitStack() as stack:
+            for patcher in patches:
+                stack.enter_context(patcher)
+            mock_request = stack.enter_context(
+                self.get_patch_exceptions_linkedin(side_effect=request_linkedin)
+            )
+            logs = stack.enter_context(self.assertLogs("odoo", "WARNING"))
+            self.SocialAccountLinkedin._update_posts_statistics(None, None)
+        self.env.flush_all()
+        self.env.invalidate_all()
+        self.assertEqual(
+            sorted(call.kwargs["endpoint"] for call in mock_request.call_args_list),
+            ["/images", "/videos"],
+        )
+        self.assertFalse(
+            [record for record in logs.records if record.levelname == "ERROR"],
+            "A media lost on the network is not an error of the import",
+        )
+        self.assertEqual(
+            {record.name for record in logs.records},
+            {LOGGER_ACCOUNT_LINKEDIN, LOGGER_ACCOUNT_SYNC_LINKEDIN},
+        )
+        image_line = self._imported_line("urn:li:share:image")
+        video_line = self._imported_line("urn:li:share:video")
+        self.assertEqual(len(image_line), 1, "The post with an image is imported")
+        self.assertEqual(len(video_line), 1, "The post with a video is imported")
+        self.assertTrue(video_line.has_video)
+        self.assertFalse(image_line.has_video)
+        for line in image_line | video_line:
+            self.assertFalse(line.image_ids)
+            self.assertFalse(line.video_ids)
+            self.assertFalse(line.media_refs)
+
+    def test_import_adds_the_video_to_a_publication_already_imported(self):
+        """A video missing from a previous pass is downloaded by the next one."""
+        line = self.SocialPostAccountLinkedin
+        line.write({"remote_ref": "urn:li:share:video", "has_video": True})
+        self._import_feed(
+            [self._video_post("urn:li:share:video", "urn:li:video:1")],
+            {"urn:li:video:1": "https://fake-url/1"},
+            {"https://fake-url/1": media_download_response([b"video"])},
+        )
+        self.assertEqual(self._imported_line("urn:li:share:video"), line)
+        self.assertEqual(line.video_ids.mapped("name"), ["urn:li:video:1"])
+        self.assertEqual(line.media_refs, {str(line.video_ids.id): "urn:li:video:1"})
+
+    def test_import_does_not_download_a_video_twice(self):
+        ugc_posts = [self._video_post("urn:li:share:video", "urn:li:video:1")]
+        download_urls = {"urn:li:video:1": "https://fake-url/1"}
+        downloads = {"https://fake-url/1": media_download_response([b"video"])}
+        self._import_feed(ugc_posts, download_urls, downloads)
+        mock_urls, mock_get = self._import_feed(ugc_posts, download_urls, downloads)
+        mock_urls.assert_not_called()
+        mock_get.assert_not_called()
+        self.assertEqual(
+            self._imported_line("urn:li:share:video").video_ids.mapped("name"),
+            ["urn:li:video:1"],
+        )
+        self.assertEqual(
+            self.env["ir.attachment"].search_count([("name", "=", "urn:li:video:1")]),
+            1,
+        )
+
+    def test_import_leaves_the_video_published_from_odoo_alone(self):
+        """Publishing keeps the URN of the video, so nothing is downloaded."""
+        line = self.SocialPostAccountLinkedin
+        video = self.env["ir.attachment"].create(
+            {"name": "clip.mp4", "mimetype": "video/mp4", "raw": b"video"}
+        )
+        line.write(
+            {
+                "remote_ref": "urn:li:share:odoo",
+                "has_video": True,
+                "video_ids": [Command.set(video.ids)],
+                "media_refs": {str(video.id): "urn:li:video:odoo"},
+            }
+        )
+        mock_urls, mock_get = self._import_feed(
+            [self._video_post("urn:li:share:odoo", "urn:li:video:odoo")]
+        )
+        mock_urls.assert_not_called()
+        mock_get.assert_not_called()
+        self.assertEqual(line.video_ids, video)
+        self.assertEqual(line.media_refs, {str(video.id): "urn:li:video:odoo"})
+
+    def _set_download_videos(self, value):
+        """Write the parameter as an administrator would."""
+        self.env["ir.config_parameter"].sudo().set_param(
+            "social_media_sync.download_videos", value
+        )
+
+    def test_import_with_videos_off_marks_the_video_and_downloads_nothing(self):
+        """The post comes in with its mark, and LinkedIn is not asked."""
+        self._set_download_videos("False")
+        attachment_count = self.env["ir.attachment"].search_count([])
+        mock_urls, mock_get = self._import_feed(
+            [self._video_post("urn:li:share:video", "urn:li:video:1")],
+            {"urn:li:video:1": "https://fake-url/1"},
+            {"https://fake-url/1": media_download_response([b"video"])},
+        )
+        mock_urls.assert_not_called()
+        mock_get.assert_not_called()
+        post_account = self._imported_line("urn:li:share:video")
+        self.assertEqual(len(post_account), 1, "The post is imported anyway")
+        self.assertTrue(post_account.has_video)
+        self.assertFalse(post_account.video_ids)
+        self.assertNotIn("urn:li:video:1", (post_account.media_refs or {}).values())
+        self.assertEqual(self.env["ir.attachment"].search_count([]), attachment_count)
+
+    def test_import_downloads_the_video_once_videos_are_back_on(self):
+        """Nothing was written while off, so the next pass asks again."""
+        ugc_posts = [self._video_post("urn:li:share:video", "urn:li:video:1")]
+        download_urls = {"urn:li:video:1": "https://fake-url/1"}
+        self._set_download_videos("False")
+        self._import_feed(
+            ugc_posts,
+            download_urls,
+            {"https://fake-url/1": media_download_response([b"video"])},
+        )
+        self._set_download_videos("True")
+        mock_urls, mock_get = self._import_feed(
+            ugc_posts,
+            download_urls,
+            {"https://fake-url/1": media_download_response([b"video"])},
+        )
+        mock_urls.assert_called_once()
+        mock_get.assert_called_once()
+        post_account = self._imported_line("urn:li:share:video")
+        self.assertEqual(post_account.video_ids.mapped("name"), ["urn:li:video:1"])
+        self.assertEqual(
+            post_account.media_refs,
+            {str(post_account.video_ids.id): "urn:li:video:1"},
+        )
+
+    def test_import_with_videos_off_keeps_the_videos_already_downloaded(self):
+        """Turning the parameter off decides what comes, not what stays."""
+        ugc_posts = [self._video_post("urn:li:share:video", "urn:li:video:1")]
+        self._import_feed(
+            ugc_posts,
+            {"urn:li:video:1": "https://fake-url/1"},
+            {"https://fake-url/1": media_download_response([b"video"])},
+        )
+        post_account = self._imported_line("urn:li:share:video")
+        video = post_account.video_ids
+        self.assertTrue(video)
+        self._set_download_videos("False")
+        self._import_feed(ugc_posts)
+        self.assertEqual(post_account.video_ids, video)
+        self.assertEqual(post_account.media_refs, {str(video.id): "urn:li:video:1"})
+        self.assertTrue(video.exists())
 
     def test_update_posts_statistics_full_list_leaves_the_account_alone(self):
         """Even the whole feed writes rows and not the figures of the account.

@@ -6,9 +6,10 @@ from datetime import timedelta
 
 from odoo import Command, _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import is_list_of
+from odoo.tools import is_list_of, split_every
 
 from odoo.addons.social_media_linkedin.social_linkedin_utils import (
+    _BATCH_GET_MAX_IDS_LINKEDIN,
     _POSTS_PAGE_SIZE_LINKEDIN,
     _SCOPE_READ_POSTS_LINKEDIN,
     _UPDATE_CHECK_DAYS_LINKEDIN,
@@ -330,6 +331,65 @@ class SocialAccount(models.Model):
         identifiers = preferred[0].get("identifiers", [])
         return identifiers[0].get("identifier", False) if identifiers else False
 
+    def _get_linkedin_videos_download_url(self, video_urns):
+        """Return the download URL of each video.
+
+        The Posts API only answers the URN of the video of a post, so the
+        Videos API is asked for the URL to download it from. It is a
+        ``BATCH_GET``, capped by LinkedIn at ``_BATCH_GET_MAX_IDS_LINKEDIN``
+        elements, so the URNs go in chunks of that size. A video LinkedIn is
+        still processing answers no ``downloadUrl`` and is left out, so the
+        next pass asks for it again. A failure, be it an answer other than 200
+        or LinkedIn not being reached at all, is logged instead of raised, and
+        only loses its own chunk: the videos are a complement of the post and
+        must not stop the import.
+
+        The question costs one call per chunk of videos the publications do
+        not hold yet, which grows with the history of the account and is what
+        puts it here and not in the connector.
+
+        :param video_urns: The URNs of the videos to resolve.
+        :return: The download URL by video URN.
+        :rtype: dict
+        """
+        if not video_urns:
+            return {}
+        headers = self.media_id._get_linkedin_headers(
+            self.sudo().access_token, x_restli_method="BATCH_GET"
+        )
+        download_urls = {}
+        for batch in split_every(_BATCH_GET_MAX_IDS_LINKEDIN, video_urns, list):
+            try:
+                response = self._request_linkedin(
+                    endpoint="/videos",
+                    headers=headers,
+                    params_fields=["ids"],
+                    params_values={"ids": batch},
+                    return_json=False,
+                )
+            except UserError as error:
+                _logger.warning(
+                    "LinkedIn could not be reached for the videos of the "
+                    "account %s: %s",
+                    self.name,
+                    error,
+                )
+                continue
+            if response.status_code != 200:
+                _logger.warning(
+                    "Could not read the videos of LinkedIn: %s",
+                    self._linkedin_error_message(response),
+                )
+                continue
+            download_urls.update(
+                {
+                    urn: video.get("downloadUrl")
+                    for urn, video in response.json().get("results", {}).items()
+                    if video.get("downloadUrl")
+                }
+            )
+        return download_urls
+
     def _update_posts_statistics(self, post_id, domain, imported=None):
         statistics = super()._update_posts_statistics(post_id, domain, imported)
         account_ids = self._accounts_of_media("linkedin")
@@ -482,10 +542,19 @@ class SocialAccount(models.Model):
             attach_images, media_refs = post_account._get_assets_save(
                 content, account=self
             )
+            videos, video_refs = post_account._get_video_assets_save(
+                content, account=self
+            )
             if post_account:
                 post_account._remove_assets_deleted(content)
             post_accounts.append(
-                self._import_command(post_account, data, attach_images, media_refs)
+                self._import_command(
+                    post_account,
+                    data,
+                    attach_images,
+                    {**media_refs, **video_refs},
+                    videos=videos,
+                )
             )
         for line in stale_lines:
             post_accounts.append(

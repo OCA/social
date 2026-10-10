@@ -112,6 +112,104 @@ class TestSocialSyncPostLinkedin(TestSocialSyncCommonLinkedin):
             )
         mock_download_url.assert_not_called()
 
+    def test_get_video_assets_save(self):
+        """The video of a post is downloaded as an mp4 with its URN."""
+        videos_response = MagicMock()
+        videos_response.status_code = 200
+        videos_response.json.return_value = {
+            "results": {"urn:li:video:new": {"downloadUrl": "https://fake-url/new"}}
+        }
+        with patch.object(
+            type(self.SocialAccountLinkedin),
+            "_request_linkedin",
+            return_value=videos_response,
+        ) as mock_request_linkedin, patch(
+            "requests.get",
+            return_value=media_download_response(chunks=[b"fake video"]),
+        ) as mock_get:
+            videos, media_refs = self.SocialPostAccountLinkedin._get_video_assets_save(
+                {"media": {"id": "urn:li:video:new"}}
+            )
+        self.assertEqual(videos.name, "urn:li:video:new")
+        self.assertEqual(videos.mimetype, "video/mp4")
+        self.assertEqual(videos.datas, base64.b64encode(b"fake video"))
+        self.assertEqual(media_refs, {str(videos.id): "urn:li:video:new"})
+        self.assertEqual(mock_request_linkedin.call_args.kwargs["endpoint"], "/videos")
+        self.assertEqual(
+            mock_request_linkedin.call_args.kwargs["params_values"]["ids"],
+            ["urn:li:video:new"],
+        )
+        self.assertEqual(mock_get.call_args.args[0], "https://fake-url/new")
+
+    def test_get_video_assets_save_skips_a_video_already_stored(self):
+        """A video downloaded before or put online from Odoo costs no call."""
+        stored = self.create_attachment(attach_name="urn:li:video:exists")
+        self.SocialPostAccountLinkedin.write(
+            {
+                "video_ids": [Command.set(stored.ids)],
+                "media_refs": {str(stored.id): "urn:li:video:exists"},
+            }
+        )
+        with patch.object(
+            type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
+        ) as mock_download_url, patch("requests.get") as mock_get:
+            self.assertEqual(
+                self.SocialPostAccountLinkedin._get_video_assets_save(
+                    {"media": {"id": "urn:li:video:exists"}}
+                ),
+                (self.env["ir.attachment"], {}),
+            )
+        mock_download_url.assert_not_called()
+        mock_get.assert_not_called()
+
+    def test_get_video_assets_save_without_a_video(self):
+        """A post with an image or without media does not ask for any video."""
+        with patch.object(
+            type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
+        ) as mock_download_url:
+            for content in (
+                {"media": {"id": "urn:li:image:1"}},
+                {"multiImage": {"images": [{"id": "urn:li:image:1"}]}},
+                {},
+            ):
+                self.assertEqual(
+                    self.SocialPostAccountLinkedin._get_video_assets_save(content),
+                    (self.env["ir.attachment"], {}),
+                )
+        mock_download_url.assert_not_called()
+
+    def test_get_video_assets_save_asks_nothing_when_videos_are_off(self):
+        """The Videos API is not asked where to download a video left out."""
+        self.env["ir.config_parameter"].sudo().set_param(
+            "social_media_sync.download_videos", "False"
+        )
+        with patch.object(
+            type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
+        ) as mock_download_url, patch("requests.get") as mock_get:
+            self.assertEqual(
+                self.SocialPostAccountLinkedin._get_video_assets_save(
+                    {"media": {"id": "urn:li:video:new"}}
+                ),
+                (self.env["ir.attachment"], {}),
+            )
+        mock_download_url.assert_not_called()
+        mock_get.assert_not_called()
+
+    def test_get_video_assets_save_of_a_video_still_processing(self):
+        """A video LinkedIn answers no URL for is not downloaded."""
+        with patch.object(
+            type(self.SocialAccountLinkedin),
+            "_get_linkedin_videos_download_url",
+            return_value={},
+        ), patch("requests.get") as mock_get:
+            self.assertEqual(
+                self.SocialPostAccountLinkedin._get_video_assets_save(
+                    {"media": {"id": "urn:li:video:processing"}}
+                ),
+                (self.env["ir.attachment"], {}),
+            )
+        mock_get.assert_not_called()
+
     def test_remove_assets_deleted_drops_the_images_gone_from_linkedin(self):
         """An image deleted on LinkedIn leaves the publication as well."""
         kept = self.create_attachment(attach_name="kept.jpg")
