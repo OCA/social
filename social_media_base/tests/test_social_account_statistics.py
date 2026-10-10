@@ -358,13 +358,35 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
             self.account.compute_dashboard_statistics()
         mock_refresh.assert_not_called()
 
+    def _patch_refresh(self, series, window):
+        """Patch the two reads of the button with the answers given."""
+        return patch.object(
+            type(self.account),
+            "_refresh_statistics",
+            autospec=True,
+            return_value=series,
+        ), patch.object(
+            type(self.account),
+            "_refresh_window_statistics",
+            autospec=True,
+            return_value=window,
+        )
+
     def test_refreshing_asks_the_series_first_and_aggregates_after(self):
-        """The card is drawn from those rows, so the other order draws stale ones."""
+        """The card is drawn from those rows, so the other order draws stale ones.
+
+        The window is read even when the series answered: a social media with
+        a daily series keeps reading the figures of its publications.
+        """
         calls = []
 
         def refresh(accounts):
             calls.append("refresh")
             return True
+
+        def window(accounts):
+            calls.append("window")
+            return self.env["social.post.account"]
 
         def aggregate(accounts):
             calls.append("aggregate")
@@ -377,12 +399,31 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
             side_effect=refresh,
         ), patch.object(
             type(self.account),
+            "_refresh_window_statistics",
+            autospec=True,
+            side_effect=window,
+        ), patch.object(
+            type(self.account),
             "_refresh_account_statistics",
             autospec=True,
             side_effect=aggregate,
         ):
             self.assertTrue(self.account.refresh_dashboard_statistics())
-        self.assertEqual(calls, ["refresh", "aggregate"])
+        self.assertEqual(calls, ["refresh", "window", "aggregate"])
+
+    def test_refreshing_counts_the_window_as_an_update(self):
+        """A social media without a daily series updates through its posts."""
+        patch_series, patch_window = self._patch_refresh(False, self._publication())
+        with patch_series, patch_window:
+            self.assertTrue(self.account.refresh_dashboard_statistics())
+
+    def test_refreshing_counts_the_series_as_an_update(self):
+        """The series alone is an update, with no publication in the window."""
+        patch_series, patch_window = self._patch_refresh(
+            True, self.env["social.post.account"]
+        )
+        with patch_series, patch_window:
+            self.assertTrue(self.account.refresh_dashboard_statistics())
 
     def test_refreshing_says_when_nothing_came_back(self):
         """Without a connector no social media reports figures by day."""

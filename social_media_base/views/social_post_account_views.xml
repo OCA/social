@@ -215,9 +215,10 @@
                     </group>
                     <group string="Videos" invisible="not video_ids and not has_video">
                         <field name="has_video" invisible="1" />
-                        <!-- A publication imported from the social media only
-                             carries the flag: the video itself stays on the
-                             social media and is never downloaded. -->
+                        <!-- A publication imported from the social media carries
+                             the flag, and the video itself only arrives as
+                             video_ids when the module that imports it downloads
+                             it. Otherwise it stays on the social media. -->
                         <div
                             colspan="2"
                             class="text-muted"
