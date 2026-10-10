@@ -28,8 +28,8 @@ msgstr ""
 #: code:addons/social_media_base/models/social_post.py:0
 #, python-format
 msgid ""
-"%(name)s (%(mimetype)s) is not an image and cannot be added to the images of"
-" the post."
+"%(name)s (%(mimetype)s) is not an image and cannot be added to the images of "
+"the post."
 msgstr ""
 
 #. module: social_media_base
@@ -95,8 +95,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
 msgid ""
 "<i class=\"fa fa-video-camera me-1\" aria-hidden=\"true\"/>\n"
-"                            <span>This publication has a video on the social\n"
-"                                media. It was not downloaded, so it can only be\n"
+"                            <span>This publication has a video on the "
+"social\n"
+"                                media. It was not downloaded, so it can only "
+"be\n"
 "                                watched there.</span>"
 msgstr ""
 
@@ -289,15 +291,15 @@ msgstr ""
 #. module: social_media_base
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
 msgid ""
-"Authorize this account again and refresh the keys and the token it publishes"
-" with."
+"Authorize this account again and refresh the keys and the token it publishes "
+"with."
 msgstr ""
 
 #. module: social_media_base
 #: model_terms:ir.ui.view,arch_db:social_media_base.wizard_social_account_view_form
 msgid ""
-"Authorize this account again and refresh the keys and the token it publishes"
-" with. The account and its history are kept."
+"Authorize this account again and refresh the keys and the token it publishes "
+"with. The account and its history are kept."
 msgstr ""
 
 #. module: social_media_base
@@ -386,8 +388,8 @@ msgstr ""
 #. module: social_media_base
 #: model:ir.model.fields,help:social_media_base.field_utm_campaign__social_link_click_count
 msgid ""
-"Clicks Odoo registered on the tracked links of the social media publications"
-" of this campaign. Part of the clicks of the campaign, not something to add "
+"Clicks Odoo registered on the tracked links of the social media publications "
+"of this campaign. Part of the clicks of the campaign, not something to add "
 "to them."
 msgstr ""
 
@@ -535,9 +537,8 @@ msgstr ""
 #. module: social_media_base
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
 msgid ""
-"Delete the account and its publication history from Odoo: posts, metrics and"
-" comments. Nothing is deleted from the social media, and it cannot be "
-"undone."
+"Delete the account and its publication history from Odoo: posts, metrics and "
+"comments. Nothing is deleted from the social media, and it cannot be undone."
 msgstr ""
 
 #. module: social_media_base
@@ -549,8 +550,8 @@ msgstr ""
 #: model:ir.model.fields,help:social_media_base.field_social_post_account__medium_id
 msgid ""
 "Delivery method reported to the marketing campaign. It lives on the "
-"publication and not on the post because a post is spread over several social"
-" media."
+"publication and not on the post because a post is spread over several social "
+"media."
 msgstr ""
 
 #. module: social_media_base
@@ -921,7 +922,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
 #, python-format
 msgid "LinkedIn refused the post"
 msgstr ""
@@ -1247,8 +1247,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#: code:addons/social_media_base/models/social_post_account.py:0
-#: code:addons/social_media_base/models/social_post_account.py:0
 #, python-format
 msgid "Post deleted [%(account)s]"
 msgstr ""
@@ -1340,8 +1338,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
 msgid ""
 "Publish the post right away on the selected accounts, without waiting for "
-"the planned date. Only the publications still pending are sent: what already"
-" reached the social media is not sent twice."
+"the planned date. Only the publications still pending are sent: what already "
+"reached the social media is not sent twice."
 msgstr ""
 
 #. module: social_media_base
@@ -1694,13 +1692,12 @@ msgstr ""
 #: code:addons/social_media_base/models/social_post_account.py:0
 #, python-format
 msgid ""
-"The campaign of a publication is the one of its post. Change the campaign on"
-" %(post)s instead."
+"The campaign of a publication is the one of its post. Change the campaign on "
+"%(post)s instead."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
-#: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
 #: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
 #, python-format
 msgid "The credentials of"
@@ -1711,16 +1708,16 @@ msgstr ""
 #: code:addons/social_media_base/models/social_account.py:0
 #, python-format
 msgid ""
-"The credentials of the account are no longer valid and could not be renewed:"
-" %(error)s. Update the account to authorize it again."
+"The credentials of the account are no longer valid and could not be renewed: "
+"%(error)s. Update the account to authorize it again."
 msgstr ""
 
 #. module: social_media_base
 #: model:ir.model.fields,help:social_media_base.field_social_account__need_update
 msgid ""
-"The credentials of the account expired and it has to be authorized again. It"
-" means that and nothing else; an account with publications left to import is"
-" marked with posts_need_import, in the synchronization module."
+"The credentials of the account expired and it has to be authorized again. It "
+"means that and nothing else; an account with publications left to import is "
+"marked with posts_need_import, in the synchronization module."
 msgstr ""
 
 #. module: social_media_base
@@ -1734,7 +1731,8 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:social_media_base.social_account_statistics_action
 msgid ""
 "The figures are written by the automatic checks and by the\n"
-"                <b>Update statistics</b> button of an account. Only the social\n"
+"                <b>Update statistics</b> button of an account. Only the "
+"social\n"
 "                media reporting figures by day have a history to draw."
 msgstr ""
 
@@ -1757,7 +1755,6 @@ msgstr ""
 
 #. module: social_media_base
 #. odoo-python
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
 #, python-format
 msgid "The post could not be sent"
@@ -1787,8 +1784,8 @@ msgstr ""
 #. module: social_media_base
 #: model:ir.model.fields,help:social_media_base.field_social_post__content_locked
 msgid ""
-"The post reached at least one social media, so what it says can no longer be"
-" changed."
+"The post reached at least one social media, so what it says can no longer be "
+"changed."
 msgstr ""
 
 #. module: social_media_base
@@ -1884,8 +1881,8 @@ msgstr ""
 #. module: social_media_base
 #: model:res.groups,comment:social_media_base.group_social_media_manager
 msgid ""
-"The user is able to see every social media account and post of the companies"
-" he has access to, and to configure the available social medias."
+"The user is able to see every social media account and post of the companies "
+"he has access to, and to configure the available social medias."
 msgstr ""
 
 #. module: social_media_base
@@ -1919,7 +1916,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
 msgid ""
 "This post is already published on at least one social\n"
-"                    media, so its content can no longer be changed. Create a\n"
+"                    media, so its content can no longer be changed. Create "
+"a\n"
 "                    new post to publish something different."
 msgstr ""
 
@@ -2020,8 +2018,8 @@ msgstr ""
 #: model:ir.model.fields,help:social_media_base.field_social_account_statistics__user_id
 #: model:ir.model.fields,help:social_media_base.field_social_post_account__user_id
 msgid ""
-"User this account belongs to. Only the responsible user and the social media"
-" administrators can see it."
+"User this account belongs to. Only the responsible user and the social media "
+"administrators can see it."
 msgstr ""
 
 #. module: social_media_base
@@ -2095,16 +2093,16 @@ msgstr ""
 #. module: social_media_base
 #: model:ir.model.fields,help:social_media_base.field_social_post__message_info
 msgid ""
-"What a social media of the post is going to publish differently from what is"
-" written here. It does not stop anything: the post is published, changed by "
+"What a social media of the post is going to publish differently from what is "
+"written here. It does not stop anything: the post is published, changed by "
 "the social media."
 msgstr ""
 
 #. module: social_media_base
 #: model:ir.model.fields,help:social_media_base.field_social_post__message_error
 msgid ""
-"What no social media of the post will be able to publish as the post stands."
-" It does not block saving, so the post can be finished later, but the "
+"What no social media of the post will be able to publish as the post stands. "
+"It does not block saving, so the post can be finished later, but the "
 "publication is refused until it is fixed."
 msgstr ""
 
@@ -2118,8 +2116,8 @@ msgstr ""
 #. module: social_media_base
 #: model:ir.model.fields,help:social_media_base.field_social_account__can_manage_account
 msgid ""
-"Whether the current user may update or archive this account: its responsible"
-" user and the social media administrators."
+"Whether the current user may update or archive this account: its responsible "
+"user and the social media administrators."
 msgstr ""
 
 #. module: social_media_base
