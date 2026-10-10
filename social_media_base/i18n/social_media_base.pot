@@ -1654,6 +1654,11 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
 #, python-format
 msgid "The access token was revoked"
 msgstr ""
@@ -1739,6 +1744,7 @@ msgstr ""
 
 #. module: social_media_base
 #. odoo-python
+#: code:addons/social_media_base/tests/test_social_post_base.py:0
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
 #, python-format
 msgid "The message is too long"

@@ -13,7 +13,7 @@ from psycopg2 import errorcodes
 from odoo import _, fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Command
-from odoo.tests.common import tagged
+from odoo.tests.common import new_test_user, tagged
 from odoo.tools import mute_logger
 
 from odoo.addons.social_media_base.exceptions import SocialCredentialsError
@@ -304,25 +304,22 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         self.assertEqual(calls, [{"message": "Hello"}, {"message": "Hello"}])
 
     def test_publish_attempt_flags_the_account_it_cannot_renew(self):
-        """The error is caught by hand: ``assertRaises`` would undo the flag."""
+        """The flag survives the rollback of the guard the connectors use."""
         post_account = self.social_post_account_id
         account = self.social_account_id
 
         def publish(**kwargs):
             raise SocialCredentialsError(_("The access token was revoked"))
 
-        refused = False
-        with patch.object(
+        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
             type(account),
             "_refresh_credentials",
             autospec=True,
             return_value=False,
-        ):
-            try:
-                post_account._publish_attempt(publish)
-            except SocialCredentialsError:
-                refused = True
-        self.assertTrue(refused)
+        ), post_account._publish_guard():
+            post_account._publish_attempt(publish)
+        self.assertEqual(post_account.state, "failed")
+        self.assertIn("The access token was revoked", post_account.failed_description)
         self.assertTrue(account.need_update)
         self.assertTrue(
             account.message_ids.filtered(
@@ -330,6 +327,166 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 and account.user_id.partner_id in message.partner_ids
             )
         )
+
+    def _credentials_notes(self, account):
+        """Return the notes that ask the user to authorize ``account`` again."""
+        return account.message_ids.filtered(
+            lambda message: "are no longer valid" in (message.body or "")
+        )
+
+    def test_publish_attempt_flags_the_account_a_renewed_token_fails_on(self):
+        """The renewed token refused as well is a failure of its own."""
+        post_account = self.social_post_account_id
+        account = self.social_account_id
+        calls = []
+
+        def publish(**kwargs):
+            calls.append(kwargs)
+            raise SocialCredentialsError(_("The access token was revoked"))
+
+        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
+            type(account),
+            "_refresh_credentials",
+            autospec=True,
+            return_value=True,
+        ), post_account._publish_guard():
+            post_account._publish_attempt(publish)
+        self.assertEqual(len(calls), 2)
+        self.assertEqual(post_account.state, "failed")
+        self.assertTrue(account.need_update)
+        self.assertEqual(len(self._credentials_notes(account)), 1)
+
+    def test_publish_attempt_flags_the_account_its_token_check_refuses(self):
+        """Credentials refused before publishing flag the account all the same."""
+        post_account = self.social_post_account_id
+        account = self.social_account_id
+        calls = []
+        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
+            type(account),
+            "validate_access_token",
+            autospec=True,
+            side_effect=SocialCredentialsError(_("The access token was revoked")),
+        ), post_account._publish_guard():
+            post_account._publish_attempt(lambda **kwargs: calls.append(kwargs))
+        self.assertFalse(calls, "Nothing must be sent without valid credentials")
+        self.assertEqual(post_account.state, "failed")
+        self.assertTrue(account.need_update)
+        self.assertEqual(len(self._credentials_notes(account)), 1)
+
+    def test_publish_attempt_does_not_flag_the_account_on_another_error(self):
+        post_account = self.social_post_account_id
+        account = self.social_account_id
+
+        def publish(**kwargs):
+            raise UserError(_("The message is too long"))
+
+        with mute_logger(LOGGER_POST_ACCOUNT), post_account._publish_guard():
+            post_account._publish_attempt(publish)
+        self.assertEqual(post_account.state, "failed")
+        self.assertIn("The message is too long", post_account.failed_description)
+        self.assertFalse(account.need_update)
+        self.assertFalse(self._credentials_notes(account))
+
+    def test_publish_guard_flags_only_the_account_whose_credentials_fail(self):
+        """The publication already sent keeps its reference.
+
+        Each line runs in its own guard, as the connectors loop over them, so
+        flagging the account that failed must not touch the one before it.
+        """
+        published_line = self.SocialPostAccount.create(
+            {
+                "post_id": self.social_post_id.id,
+                "account_id": self.other_account_id.id,
+                "message": "Test message",
+            }
+        )
+        failed_line = self.social_post_account_id
+
+        def publish_ok(**kwargs):
+            return "urn:li:share:1"
+
+        def publish_revoked(**kwargs):
+            raise SocialCredentialsError(_("The access token was revoked"))
+
+        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
+            type(self.social_account_id),
+            "_refresh_credentials",
+            autospec=True,
+            return_value=False,
+        ):
+            for line, publish in (
+                (published_line, publish_ok),
+                (failed_line, publish_revoked),
+            ):
+                with line._publish_guard():
+                    remote_ref = line._publish_attempt(publish)
+                    line._register_publish_success(
+                        remote_ref, "https://example.com/1", {}, False
+                    )
+        self.assertEqual(published_line.state, "posted")
+        self.assertEqual(published_line.remote_ref, "urn:li:share:1")
+        self.assertFalse(self.other_account_id.need_update)
+        self.assertFalse(self._credentials_notes(self.other_account_id))
+        self.assertEqual(failed_line.state, "failed")
+        self.assertTrue(self.social_account_id.need_update)
+        self.assertEqual(len(self._credentials_notes(self.social_account_id)), 1)
+
+    def test_publish_guard_flags_the_account_of_another_user(self):
+        """Whoever publishes, the note reaches the user in charge."""
+        manager = new_test_user(
+            self.env,
+            login="social_manager_publishing",
+            groups="base.group_user,social_media_base.group_social_media_manager",
+        )
+        account = self.social_account_id
+        self.assertNotEqual(account.user_id, manager)
+        post_account = self.social_post_account_id.with_user(manager)
+
+        def publish(**kwargs):
+            raise SocialCredentialsError(_("The access token was revoked"))
+
+        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
+            type(account),
+            "_refresh_credentials",
+            autospec=True,
+            return_value=False,
+        ), post_account._publish_guard():
+            post_account._publish_attempt(publish)
+        self.assertEqual(post_account.state, "failed")
+        self.assertTrue(account.need_update)
+        notes = self._credentials_notes(account)
+        self.assertEqual(len(notes), 1)
+        self.assertIn(account.user_id.partner_id, notes.partner_ids)
+        self.assertEqual(notes.author_id, manager.partner_id)
+
+    def test_publish_guard_notifies_the_flag_once_but_notes_every_failure(self):
+        """An account already flagged is not announced again, but is noted."""
+        account = self.social_account_id
+        second_line = self.SocialPostAccount.create(
+            {
+                "post_id": self.social_post_id.id,
+                "account_id": account.id,
+                "message": "Test message",
+            }
+        )
+
+        def publish(**kwargs):
+            raise SocialCredentialsError(_("The access token was revoked"))
+
+        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
+            type(account),
+            "_refresh_credentials",
+            autospec=True,
+            return_value=False,
+        ), patch.object(
+            type(account), "_need_update", autospec=True
+        ) as mock_need_update:
+            for line in (self.social_post_account_id, second_line):
+                with line._publish_guard():
+                    line._publish_attempt(publish)
+        mock_need_update.assert_called_once()
+        self.assertTrue(account.need_update)
+        self.assertEqual(len(self._credentials_notes(account)), 2)
 
     def test_publish_attempt_does_not_retry_another_error(self):
         post_account = self.social_post_account_id
