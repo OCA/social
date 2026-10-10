@@ -18,9 +18,9 @@ alone and pays for none of it.
 
 Main features:
 
-- Import of the publications of the page and of the statistics each of them
-  collected, on demand and through the scheduled actions of *Social Media
-  Sync*.
+- Import of the publications of the page, with their images and their video,
+  and of the statistics each of them collected, on demand and through the
+  scheduled actions of *Social Media Sync*.
 - Full resynchronization of a page, the only pass that notices a publication
   deleted on LinkedIn. Missing from the feed never marks anything on its own:
   LinkedIn is asked about each suspect by its URN, one call per hundred of

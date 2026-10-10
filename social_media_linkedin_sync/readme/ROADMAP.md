@@ -135,12 +135,3 @@ Reactions other than Like
   endpoint and the same permissions serve them — so offering them is a matter
   of choosing the reaction on the dashboard, and of drawing an entry that is
   no longer one thumb with two states.
-
-
-Video of a publication
-----------------------
-
-- The video of a published post is not attached to the publication imported
-  from LinkedIn: only the *has video* flag is kept. Bringing the file over
-  means downloading it from LinkedIn on every synchronization, which is not
-  implemented.
