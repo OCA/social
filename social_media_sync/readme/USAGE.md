@@ -39,8 +39,20 @@ Importing what an account already published.
   because they cost a fixed number of calls and they move without anything
   being published; it is the import whose cost grows with the history of the
   account.
-- When nothing needed importing, the button says so —*The data was updated. No
-  new publications.*— instead of announcing publications it did not bring in.
+- The notice of the button tells what the import found. When the social media
+  of an account was read and answered publications Odoo did not hold yet, it
+  says *The data was updated. New publications were imported.*; when it was
+  read and there was nothing new, *The data was updated. No new
+  publications.* Reading an account is an update even when none of its
+  figures moved. When no account was read —none of them was behind, or the
+  social media did not let the import run— the notice is the one of *Social
+  Media Base*, worded from the figures alone.
+- Every import ends by adding up again the figures of the card of each account
+  it read, from what it has just stored: the *Update* button, the first import
+  —once more at its end, after the daily series, since the card of an account
+  with one is drawn from it— and the full resync. After *Update* and after the
+  first import the dashboard draws the new figures as soon as it is over,
+  without being reloaded.
 - The figures imported for a publication — impressions, social media clicks,
   shares, likes, comments, interactions and engagement — are added by this
   module to the list of publications and to their form, which span the whole

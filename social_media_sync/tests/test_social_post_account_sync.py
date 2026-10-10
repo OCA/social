@@ -277,6 +277,109 @@ class TestSocialPostAccountSync(TestSocialMediaSyncCommon):
                 **{"name": "urn:li:image:local", "datas": self.image_base64}
             )
 
+    def test_store_remote_videos_keeps_each_video_with_its_reference(self):
+        """The videos come out in order, typed, and with their reference."""
+        responses = [
+            media_download_response(chunks=[b"first video"]),
+            media_download_response(chunks=[b"second video"]),
+        ]
+        with patch("requests.get", side_effect=responses):
+            videos, media_refs = self.social_post_account_id._store_remote_videos(
+                {
+                    "urn:li:video:1": "https://fake/1.mp4",
+                    "urn:li:video:2": "https://fake/2.mp4",
+                }
+            )
+        self.assertEqual(videos.mapped("name"), ["urn:li:video:1", "urn:li:video:2"])
+        self.assertEqual(set(videos.mapped("mimetype")), {"video/mp4"})
+        self.assertEqual(
+            media_refs,
+            {
+                str(videos[0].id): "urn:li:video:1",
+                str(videos[1].id): "urn:li:video:2",
+            },
+        )
+
+    def test_store_remote_videos_takes_the_mimetype_it_is_given(self):
+        with patch(
+            "requests.get",
+            return_value=media_download_response(chunks=[b"fake video"]),
+        ):
+            videos, _media_refs = self.social_post_account_id._store_remote_videos(
+                {"3_1": "https://fake/1.webm"}, mimetype="video/webm"
+            )
+        self.assertEqual(videos.mimetype, "video/webm")
+
+    def test_store_remote_videos_skips_a_video_without_url(self):
+        """A video the social media reported without a URL is not asked for."""
+        with patch("requests.get") as mock_get:
+            videos, media_refs = self.social_post_account_id._store_remote_videos(
+                {"urn:li:video:1": None}
+            )
+        mock_get.assert_not_called()
+        self.assertFalse(videos)
+        self.assertEqual(media_refs, {})
+
+    def test_store_remote_videos_keeps_nothing_when_the_download_fails(self):
+        response = patch(
+            "requests.get", return_value=media_download_response(status_code=500)
+        )
+        with mute_logger(LOGGER_SYNC_POST_ACCOUNT), response:
+            videos, media_refs = self.social_post_account_id._store_remote_videos(
+                {"urn:li:video:1": "https://fake/1.mp4"}
+            )
+        self.assertFalse(videos)
+        self.assertEqual(media_refs, {})
+
+    def test_store_remote_videos_leaves_out_a_video_above_the_cap(self):
+        """The cap of the downloads applies to the videos too."""
+        self.env["ir.config_parameter"].sudo().set_param(
+            "social_media_sync.media_max_size_mb", "1"
+        )
+        response = media_download_response(
+            chunks=[b"never read"], headers={"Content-Length": str(2 * 1024 * 1024)}
+        )
+        with mute_logger(LOGGER_SYNC_POST_ACCOUNT), patch(
+            "requests.get", return_value=response
+        ):
+            videos, media_refs = self.social_post_account_id._store_remote_videos(
+                {"urn:li:video:1": "https://fake/1.mp4"}
+            )
+        self.assertFalse(videos)
+        self.assertEqual(media_refs, {})
+
+    def test_store_remote_videos_downloads_nothing_when_videos_are_off(self):
+        """The parameter stops the download before any request is made."""
+        self.env["ir.config_parameter"].sudo().set_param(
+            "social_media_sync.download_videos", "False"
+        )
+        attachment_count = self.env["ir.attachment"].search_count([])
+        with patch("requests.get") as mock_get:
+            videos, media_refs = self.social_post_account_id._store_remote_videos(
+                {"urn:li:video:1": "https://fake/1.mp4"}
+            )
+        mock_get.assert_not_called()
+        self.assertFalse(videos)
+        self.assertEqual(videos._name, "ir.attachment")
+        self.assertEqual(media_refs, {})
+        self.assertEqual(self.env["ir.attachment"].search_count([]), attachment_count)
+
+    def test_store_remote_medias_still_downloads_when_videos_are_off(self):
+        """The parameter is about the videos: the images keep coming."""
+        self.env["ir.config_parameter"].sudo().set_param(
+            "social_media_sync.download_videos", "False"
+        )
+        with patch(
+            "requests.get",
+            return_value=media_download_response(chunks=[b"fake image"]),
+        ) as mock_get:
+            images, media_refs = self.social_post_account_id._store_remote_medias(
+                {"urn:li:image:1": "https://fake/1.jpg"}
+            )
+        mock_get.assert_called_once()
+        self.assertEqual(images.name, "urn:li:image:1")
+        self.assertEqual(media_refs, {str(images.id): "urn:li:image:1"})
+
     def test_get_medias_account_of_an_empty_recordset(self):
         """The import asks before the publication exists."""
         self.assertEqual(

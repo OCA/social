@@ -90,23 +90,71 @@ class TestAccountNoticesSync(HttpCase, TestSocialMediaSyncCommon):
             login="admin",
         )
 
+    def _update_reads_the_account(self, account, created):
+        """Patch the import of *Update* to read ``account`` only.
+
+        The figures are refreshed all the same, and the publications of the
+        window answer nothing: what the tour asserts must not depend on the
+        accounts the database it runs against holds.
+
+        :param account: the account the import reads.
+        :param created: how many publications the import brings in.
+        """
+        SocialAccount = type(self.SocialAccount)
+
+        def import_publications(accounts, post_id, domain, imported=None):
+            for index in range(created):
+                accounts.env["social.post.account"].create(
+                    {
+                        "account_id": account.id,
+                        "message": "Imported publication %s" % index,
+                    }
+                )
+            if imported is not None:
+                imported.add(account.id)
+            return []
+
+        self.patch(SocialAccount, "_update_posts_statistics", import_publications)
+        self.patch(SocialAccount, "_refresh_statistics", lambda self: True)
+        self.patch(SocialAccount, "_refresh_window_statistics", lambda self: False)
+
+    def test_update_says_new_publications_were_imported(self):
+        """The import read the account and brought publications in."""
+        account = self._account_of_the_notices()
+        self._update_reads_the_account(account, created=1)
+        self.start_tour(
+            DASHBOARD_URL,
+            "social_media_sync.update_with_new_publications",
+            login="admin",
+        )
+
     def test_update_says_nothing_was_imported(self):
-        """The button refreshed the figures and had no account to read.
+        """The import read the account and found nothing new.
 
         Announcing publications it did not bring in is what would make the
         button look broken the next time an account really is behind.
         """
-        self._account_of_the_notices()
-        # Every connector can tell what moved, and nothing moved: the
-        # narrowing keeps no account and the import is never asked for. The
-        # figures are refreshed all the same, which is the case under test —
-        # they cost a fixed number of calls and move on their own.
-        self.patch(
-            type(self.SocialAccount), "_detects_pending_posts", lambda self: True
-        )
-        self.patch(type(self.SocialAccount), "_refresh_statistics", lambda self: True)
+        account = self._account_of_the_notices()
+        self._update_reads_the_account(account, created=0)
         self.start_tour(
             DASHBOARD_URL,
             "social_media_sync.update_without_new_publications",
+            login="admin",
+        )
+
+    def test_update_without_import_words_the_figures(self):
+        """No account to import: the notice is the one of the figures."""
+        self._account_of_the_notices()
+        # Every connector can tell what moved, and nothing moved: the
+        # narrowing keeps no account and the import is never asked for. The
+        # figures are refreshed all the same — they cost a fixed number of
+        # calls and move on their own.
+        SocialAccount = type(self.SocialAccount)
+        self.patch(SocialAccount, "_detects_pending_posts", lambda self: True)
+        self.patch(SocialAccount, "_refresh_statistics", lambda self: True)
+        self.patch(SocialAccount, "_refresh_window_statistics", lambda self: False)
+        self.start_tour(
+            DASHBOARD_URL,
+            "social_media_sync.update_without_import",
             login="admin",
         )

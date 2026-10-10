@@ -50,21 +50,20 @@ patch(SocialKanbanModel.prototype, {
      * — because it is what the notification is written from; the imported
      * records reach the cards through the reload the controller does anyway.
      *
-     * What the import answered is kept aside instead of thrown away: an empty
-     * answer is the server saying that no account needed importing, which is
-     * neither of the two cases base knows how to word.
+     * What the import reports is kept aside for the notification: whether the
+     * social media of any account was read, and how many publications it
+     * brought in. Neither is something base knows how to word.
      *
      * @override
      */
     async onUpdatePostsAndStatistics(accountId = null, postId = null) {
         const refreshed = await super.onUpdatePostsAndStatistics(accountId);
         const account = accountId ? [accountId] : [];
-        const imported = await this.orm.silent.call(
+        this.postsReport = await this.orm.silent.call(
             "social.account",
-            "update_posts_statistics",
+            "update_dashboard_posts",
             [account, postId, this._getDomainSocialAccount()]
         );
-        this.postsImported = Boolean((imported || []).length);
         return refreshed;
     },
 
