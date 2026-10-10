@@ -19,6 +19,7 @@ from odoo.tools import split_every
 
 from odoo.addons.social_media_base.exceptions import SocialCredentialsError
 
+from ..exceptions import LinkedinRequestRejectedError
 from ..social_linkedin_utils import (
     _BATCH_GET_MAX_IDS_LINKEDIN,
     _ENDPOINT_POSTS_LINKEDIN,
@@ -1229,7 +1230,8 @@ class SocialAccount(models.Model):
         The Posts API only answers the URN of the images of a post, so the
         Images API is asked for the URL to download them from. It is a
         ``BATCH_GET``, capped by LinkedIn at ``_BATCH_GET_MAX_IDS_LINKEDIN``
-        elements, so the URNs go in chunks of that size. A failure is logged
+        elements, so the URNs go in chunks of that size. A failure, be it an
+        answer other than 200 or LinkedIn not being reached at all, is logged
         instead of raised, and only loses its own chunk: the images are a
         complement of the post and must not stop the statistics pass.
 
@@ -1244,13 +1246,22 @@ class SocialAccount(models.Model):
         )
         download_urls = {}
         for batch in split_every(_BATCH_GET_MAX_IDS_LINKEDIN, image_urns, list):
-            response = self._request_linkedin(
-                endpoint="/images",
-                headers=headers,
-                params_fields=["ids"],
-                params_values={"ids": batch},
-                return_json=False,
-            )
+            try:
+                response = self._request_linkedin(
+                    endpoint="/images",
+                    headers=headers,
+                    params_fields=["ids"],
+                    params_values={"ids": batch},
+                    return_json=False,
+                )
+            except UserError as error:
+                _logger.warning(
+                    "LinkedIn could not be reached for the images of the "
+                    "account %s: %s",
+                    self.name,
+                    error,
+                )
+                continue
             if response.status_code != 200:
                 _logger.warning(
                     "Could not read the images of LinkedIn: %s",
@@ -1630,9 +1641,84 @@ class SocialAccount(models.Model):
         for account, lines in linkedin.grouped("account_id").items():
             if not account.linkedin_account_id:
                 continue
-            with account._statistics_guard():
-                refreshed |= account._linkedin_write_post_statistics(lines)
+            refreshed |= account._linkedin_refresh_post_statistics_recovering(lines)
         return refreshed
+
+    def _linkedin_refresh_post_statistics_recovering(self, post_accounts):
+        """Read the figures of these publications, past a deleted one.
+
+        LinkedIn refuses the whole batch with a ``4xx`` as soon as one of its
+        publications was deleted there, so one deleted publication would
+        leave every other one of the account without figures. On such a
+        refusal LinkedIn is asked which publications are gone, the ones it
+        confirms are marked as deleted, and the others are asked for once
+        more. Nothing confirmed,
+        or the second reading failing too, is answered as any other failure:
+        the account is rolled back and its responsible user told.
+
+        The marks go in a savepoint of their own, outside the guard of both
+        readings, so a second reading that fails does not undo them and the
+        next pass does not pay for the check again.
+
+        :param post_accounts: the lines of this account to read.
+        :return: the lines whose figures were written, never the ones marked.
+        :rtype: recordset
+        """
+        self.ensure_one()
+        refreshed = post_accounts.browse()
+        rejection = None
+        with self._statistics_guard():
+            try:
+                refreshed = self._linkedin_write_post_statistics(post_accounts)
+            except LinkedinRequestRejectedError as error:
+                # Nothing to roll back: the batch is read before anything is
+                # written. Kept to be told only if no publication explains it.
+                rejection = error
+        if rejection is None:
+            return refreshed
+        gone = self._linkedin_confirm_posts_gone(post_accounts)
+        if not gone:
+            with self._statistics_guard():
+                raise rejection
+            return refreshed
+        _logger.info(
+            "LinkedIn refused the figures of the account %(account)s, "
+            "%(count)s of its publications are gone and marked as deleted: "
+            "%(error)s",
+            {"account": self.name, "count": len(gone), "error": rejection.args[0]},
+        )
+        remaining = post_accounts - gone
+        if remaining:
+            with self._statistics_guard():
+                refreshed = self._linkedin_write_post_statistics(remaining)
+        return refreshed
+
+    def _linkedin_confirm_posts_gone(self, post_accounts):
+        """Mark as deleted the publications LinkedIn confirms are gone.
+
+        Fail open: a check that fails for whatever reason --a scope the token
+        lacks, a request that did not go through, a concurrent update of the
+        lines-- confirms nothing, so the refusal it was made to explain is
+        told as it is. Unlike the guards of the account, not even the
+        concurrency error of PostgreSQL is raised again: the savepoint undoes
+        the marks, and the refusal is answered as if no check had been made.
+        The error of the check goes to the log, not to the user.
+
+        :param post_accounts: the lines of this account LinkedIn refused.
+        :return: the lines marked as deleted.
+        :rtype: recordset
+        """
+        self.ensure_one()
+        try:
+            with self.env.cr.savepoint():
+                return post_accounts._register_remote_posts_gone()
+        except Exception:  # noqa: BLE001 - a failed check confirms nothing
+            _logger.exception(
+                "Error checking which publications of the LinkedIn account %s "
+                "are gone, none of them is marked",
+                self.name,
+            )
+            return post_accounts.browse()
 
     def _linkedin_write_post_statistics(self, post_accounts):
         """Ask LinkedIn for these publications and write what it answers.
@@ -1710,6 +1796,24 @@ class SocialAccount(models.Model):
             )
         return statistics
 
+    @api.model
+    def _linkedin_statistics_error(self, response, message):
+        """Return the error to raise for a call of figures LinkedIn refused.
+
+        A ``4xx`` is LinkedIn refusing the request itself, which for a batch
+        of figures may well be one publication of it deleted on LinkedIn, so
+        it is raised as :class:`LinkedinRequestRejectedError` for the caller
+        to look into. Any other status says nothing about the publications
+        asked for and stays a plain ``UserError``.
+
+        :param response: the answer of LinkedIn, anything but a ``200``.
+        :param message: what to tell the user, the same for both.
+        :rtype: UserError
+        """
+        if 400 <= response.status_code < 500:
+            return LinkedinRequestRejectedError(message, response.status_code)
+        return UserError(message)
+
     def _get_entity_share_statistics(
         self,
         urns,
@@ -1750,12 +1854,13 @@ class SocialAccount(models.Model):
                 return_json=False,
             )
             if response.status_code != 200:
-                raise UserError(
+                raise self._linkedin_statistics_error(
+                    response,
                     _(
                         "%(label)s: %(error)s",
                         label=error_label,
                         error=self._linkedin_error_message(response),
-                    )
+                    ),
                 )
             data.update(self._parse_share_statistics(response.json(), urn_key))
         return data
@@ -1797,12 +1902,13 @@ class SocialAccount(models.Model):
                 linkedin_v2=True,
             )
             if response.status_code != 200:
-                raise UserError(
+                raise self._linkedin_statistics_error(
+                    response,
                     _(
                         "The likes and the comments of the publications could not be "
                         "read: %(error)s",
                         error=self._linkedin_error_message(response),
-                    )
+                    ),
                 )
             data.update(
                 {
