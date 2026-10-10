@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==========================
 Social Media LinkedIn Sync
 ==========================
@@ -17,7 +13,7 @@ Social Media LinkedIn Sync
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
@@ -53,9 +49,9 @@ alone and pays for none of it.
 
 Main features:
 
-- Import of the publications of the page and of the statistics each of
-  them collected, on demand and through the scheduled actions of *Social
-  Media Sync*.
+- Import of the publications of the page, with their images and their
+  video, and of the statistics each of them collected, on demand and
+  through the scheduled actions of *Social Media Sync*.
 - Full resynchronization of a page, the only pass that notices a
   publication deleted on LinkedIn. Missing from the feed never marks
   anything on its own: LinkedIn is asked about each suspect by its URN,
@@ -133,6 +129,16 @@ is missing, the responsible user is notified by the check that runs
 every two hours, and the import refuses with the name of the missing
 permission instead of the bare error LinkedIn answers.
 
+The video of a post is downloaded whole, and the file is held to the
+size cap of *Social Media Sync*, the system parameter
+``social_media_sync.media_max_size_mb``, installed at ``100`` megabytes.
+LinkedIn takes videos of up to 500 MB, so a page publishing long videos
+is the one to raise it for. Leaving the videos out of Odoo altogether is
+what ``social_media_sync.download_videos`` written as ``False`` does: no
+video is downloaded and LinkedIn is not even asked where to download one
+from, while the images still are. See the configuration of *Social Media
+Sync* for both.
+
 System parameters
 -----------------
 
@@ -181,6 +187,26 @@ Importing what a page already published.
   catches what changed since the previous pass.
 - It also downloads the medias of the publications created outside of
   Odoo, so those images appear on the dashboard only after the import.
+  An image LinkedIn could not say where to download from, or whose
+  download fails, is not stored, and the next pass that reads the
+  publication tries again.
+- The video of a post is downloaded too, and only once: a video the
+  publication already holds, including the one of a post published from
+  Odoo, is not asked for again. The card of the publication counts it,
+  and its form plays it.
+- A video above the size cap of *Social Media Sync*, one LinkedIn is
+  still processing, or one whose download fails is not stored. The
+  publication is still marked as having a video, its form says that the
+  video was not downloaded, and the next pass that reads the publication
+  tries again.
+- No video is downloaded while the system parameter
+  ``social_media_sync.download_videos`` is ``False``, and LinkedIn is
+  not asked where to download it from either; the images still are. The
+  publication is still marked as having a video and its form says that
+  the video was not downloaded. The videos already downloaded stay, and
+  once the parameter is back to ``True`` the next pass that reads a
+  publication still missing its video downloads it; the *Full resync* is
+  the pass that reads them all.
 - The publication mirrors what is online: an image removed from the post
   on LinkedIn is dropped from the dashboard card on the next import.
   Only the medias downloaded from LinkedIn are managed this way, so a
@@ -488,14 +514,6 @@ Reactions other than Like
   same endpoint and the same permissions serve them — so offering them
   is a matter of choosing the reaction on the dashboard, and of drawing
   an entry that is no longer one thumb with two states.
-
-Video of a publication
-----------------------
-
-- The video of a published post is not attached to the publication
-  imported from LinkedIn: only the *has video* flag is kept. Bringing
-  the file over means downloading it from LinkedIn on every
-  synchronization, which is not implemented.
 
 Bug Tracker
 ===========
