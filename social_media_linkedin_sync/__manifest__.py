@@ -3,7 +3,7 @@
 {
     "name": "Social Media LinkedIn Sync",
     "summary": "Import LinkedIn publications, their figures, comments and reactions",
-    "version": "17.0.1.0.0",
+    "version": "17.0.1.0.1",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",

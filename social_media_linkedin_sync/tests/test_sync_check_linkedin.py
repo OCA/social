@@ -31,6 +31,7 @@ from .test_sync_linkedin_common import (
 )
 
 LOGGER_ACCOUNT_LINKEDIN = "odoo.addons.social_media_linkedin.models.social_account"
+LOGGER_ACCOUNT_BASE = "odoo.addons.social_media_base.models.social_account"
 LOGGER_ACCOUNT_SYNC_LINKEDIN = (
     "odoo.addons.social_media_linkedin_sync.models.social_account"
 )
@@ -591,7 +592,9 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         """LinkedIn says the page moved without the publications being read."""
         self.assertTrue(self.SocialAccountLinkedin._detects_pending_posts())
 
-    @mute_logger(LOGGER_ACCOUNT_LINKEDIN, LOGGER_ACCOUNT_SYNC_LINKEDIN)
+    @mute_logger(
+        LOGGER_ACCOUNT_LINKEDIN, LOGGER_ACCOUNT_BASE, LOGGER_ACCOUNT_SYNC_LINKEDIN
+    )
     def test_run_check_media_updates_exception(self):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
