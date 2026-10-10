@@ -464,7 +464,10 @@ class SocialPostAccount(models.Model):
         account must not roll back the reference of this one. Connectors wrap
         the body of their per-account loop with this guard so a failure is
         recorded on its own line, the accounts already published keep their
-        ``remote_ref`` and the retry only targets the failed ones.
+        ``remote_ref`` and the retry only targets the failed ones. Whatever
+        the failure has to leave on the account, such as the flag of expired
+        credentials, is written after the rollback, by
+        :meth:`_register_publish_failure`.
         """
         self.ensure_one()
         try:
@@ -491,7 +494,9 @@ class SocialPostAccount(models.Model):
 
         Called from inside :meth:`_publish_guard`, so an account whose
         credentials cannot be renewed fails its own line, with the reason on
-        it, and the other accounts of the post go out as usual.
+        it, and the other accounts of the post go out as usual. That refusal
+        is only raised again: the guard is what flags the account, because a
+        flag written here would go away with the rollback of its savepoint.
 
         :param publish: the bound method that publishes on the social media.
         :param kwargs: the arguments of that method.
@@ -501,9 +506,8 @@ class SocialPostAccount(models.Model):
         self.account_id.with_context(not_notify=True).validate_access_token()
         try:
             return publish(**kwargs)
-        except SocialCredentialsError as error:
+        except SocialCredentialsError:
             if not self.account_id._refresh_credentials():
-                self.account_id._flag_credentials_expired(str(error))
                 raise
             _logger.info(
                 "Credentials renewed while publishing on %(media)s for account "
@@ -561,6 +565,12 @@ class SocialPostAccount(models.Model):
         Called from the ``except`` block of :meth:`_publish_guard`, once the
         savepoint has been rolled back and the ORM cache cleared.
 
+        Credentials the social media refused and Odoo could not renew also
+        flag the account and leave the note to the user in charge. This is
+        the only place that runs for every connector outside the savepoint of
+        the publication, so it is the only one where the flag, the note and
+        the warning on the dashboard are kept.
+
         :param error: the exception raised while publishing.
         """
         _logger.exception(
@@ -573,6 +583,8 @@ class SocialPostAccount(models.Model):
                 "failed_description": plaintext2html(str(error)),
             }
         )
+        if isinstance(error, SocialCredentialsError):
+            self.account_id._flag_credentials_expired(str(error))
         if self.post_id:
             self.post_id._message_error_post(str(error), self.media_type)
 

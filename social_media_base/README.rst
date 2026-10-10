@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =================
 Social Media Base
 =================
@@ -17,7 +13,7 @@ Social Media Base
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
@@ -190,8 +186,9 @@ Posts on the dashboard.
 
 - A publication imported from the social media is the only one that
   keeps medias of its own, because it has no post to share them with. It
-  only carries the flag saying it has a video, never the file: the video
-  is watched on the social media.
+  carries the video itself when the module that imports it downloads it.
+  Otherwise it only carries the flag saying it has a video, and the
+  video is watched on the social media.
 
 - Posts deleted directly on the social media are marked as *Deleted on
   <media>* and kept in the dashboard as history. Opening one is what
@@ -617,10 +614,13 @@ Statistics of the accounts.
   dashboard that costs a call per account, and it is meant to: a person
   asked for it. The same press also reads back the figures of the
   publications of the last 30 days, and opening a card costs the one
-  call that asks whether that publication is still online. If no account
-  of the dashboard reports figures by day, the *Update* button says
-  there is nothing to bring in rather than announcing an update that did
-  not happen.
+  call that asks whether that publication is still online. The dashboard
+  counts as updated when the social media answered for the figures by
+  day or for any publication of those 30 days, so an account whose
+  social media reports no figures by day is updated through its
+  publications. Only when the social media answered for neither does the
+  *Update* button say there is nothing to bring in, rather than
+  announcing an update that did not happen.
 - Opening the dashboard itself costs nothing at all. There is no
   throttle on the *Update* button for that reason: there is nothing to
   protect.

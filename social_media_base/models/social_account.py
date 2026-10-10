@@ -612,14 +612,23 @@ class SocialAccount(models.Model):
         pressing the button, and a button that answers with the same figures
         looks broken — which is exactly what it is there to fix.
 
-        :return: whether anything was refreshed.
+        The dashboard counts as updated when the social media answered for
+        the daily series or for any publication of the window, and the button
+        only says there is nothing to bring in when it answered for neither:
+        a social media that reports nothing by day still updates the card
+        through its publications. The window is read even when the series
+        already answered, so a social media with a daily series keeps reading
+        the figures of its publications.
+
+        :return: whether the social media answered for the daily series or
+            for any publication of the window.
         :rtype: bool
         """
         accounts = self or self.sudo().search([])
         refreshed = accounts._refresh_statistics()
-        accounts._refresh_window_statistics()
+        answered = accounts._refresh_window_statistics()
         accounts._refresh_account_statistics()
-        return refreshed
+        return bool(refreshed or answered)
 
     def _refresh_account_statistics(self):
         """Recompute the figures of the account from what Odoo already stores.
