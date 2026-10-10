@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="social_account_view_form_inherit_sync_x" model="ir.ui.view">
+        <field name="name">social.account.view.form.inherit.sync.x</field>
+        <field name="model">social.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_x.social_account_view_form_inherit"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='x_api_secret']" position="after">
+                <field
+                    name="enable_since"
+                    widget="boolean_toggle"
+                    invisible="media_type != 'x'"
+                />
+                <field
+                    name="post_since_id"
+                    invisible="not enable_since or media_type != 'x'"
+                    readonly="0"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
