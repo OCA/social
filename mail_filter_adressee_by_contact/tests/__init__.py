@@ -1,0 +1,1 @@
+from . import test_mail_filter_adressee_by_contact
