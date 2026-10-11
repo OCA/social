@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+SPDX-FileCopyrightText: 2025 hugues de keyzer
+
+SPDX-License-Identifier: AGPL-3.0-or-later
+-->
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field
+            name="name"
+        >res.config.settings.view.form.inherit.mass.mailing.disable.tracking</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="mass_mailing.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//app[@name='mass_mailing']/block[@name='managa_mail_campaigns_setting_container']"
+                position="inside"
+            >
+                <div class="col-lg-6 o_setting_box col-12" name="track_open">
+                    <div class="o_setting_left_pane">
+                        <field name="mailing_track_open" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="mailing_track_open" />
+                        <div class="text-muted">
+                            Add an invisible tracking image to mass mailing messages to track their opening by the recipient
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 o_setting_box col-12" name="track_links">
+                    <div class="o_setting_left_pane">
+                        <field name="mailing_track_links" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <label for="mailing_track_links" />
+                        <div class="text-muted">
+                            Convert links in mass mailing messages to track link clicks by the recipient
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
