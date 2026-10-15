@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ======================
 Mail Instagram Gateway
 ======================
@@ -17,7 +13,7 @@ Mail Instagram Gateway
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
@@ -34,7 +30,7 @@ Mail Instagram Gateway
 
 This module connects Odoo Discuss to Instagram Direct Messages through
 OCA ``mail_gateway``. Incoming DMs become gateway channels; replies from
-Discuss are sent back as Instagram text messages.
+Discuss are sent back as Instagram text and supported media.
 
 **Table of contents**
 
@@ -90,6 +86,12 @@ Odoo gateway
      URL.
    - **Instagram Version**: Graph API version without the ``v`` prefix
      (default ``26.0``).
+   - **Show Own Messages**: when enabled, messages the professional
+     account sends from the Instagram app are posted in the Discuss
+     gateway channel. Default is off, so existing databases keep
+     ignoring those echoes until an operator turns it on. Echoed
+     messages are authored as **Webhook User**, which defaults to
+     OdooBot (``base.user_root``).
    - **Webhook Key**: URL path segment of your choice. It becomes part
      of the webhook URL.
    - **Webhook User**: user that creates inbound messages.
@@ -107,6 +109,26 @@ Odoo gateway
 
 The same **Webhook URL** field on the main form group is visible only in
 the developer mode. Use the tab; that copy is for operators.
+
+Outbound media
+--------------
+
+Sending an image, audio, video or PDF from Discuss needs a **public**
+``web.base.url`` that Meta's servers can fetch **while the send is still
+running**. A localhost URL will fail Meta's download. Graph error
+2018007 (``Upload failed`` / ``Upload fehlgeschlagen``) means that fetch
+did not return the file. Outbound media uses
+``/mail_gateway_instagram/content/<id>/<token>/<filename>`` (token in
+the path, no query string). Core Odoo ``robots.txt`` is ``Disallow: /``;
+this module lists ``Allow: /mail_gateway_instagram/content`` first
+(including for ``facebookexternalhit``) so Meta's crawler is not
+blocked. If the **Website** app is installed and its robots.txt still
+disallows the path, add the same Allow line there. Graph's error body is
+stored on the Discuss notification.
+
+Each send publishes a **permanent unauthenticated** tokenized media URL
+(``access_token`` on ``ir.attachment``) until an operator clears that
+token. Do not treat those URLs as private.
 
 Meta webhook
 ------------
@@ -140,17 +162,29 @@ Incoming Instagram Direct Messages appear as Discuss channels of type
 to a partner from the followers menu.
 
 Replies typed in that Discuss channel are delivered as Instagram DMs
-(text only). Messages the professional account sends from the Instagram
-app are not duplicated into the channel.
+(text and supported attachments). Messages the professional account
+sends from the Instagram app are not duplicated into the channel unless
+**Show Own Messages** is enabled on the gateway. When that setting is
+on, those Instagram-app messages appear in the customer's gateway
+channel, authored as **Webhook User**.
 
 Shares, story mentions and reels arrive as links in the message body,
 not as downloaded files. Images, videos, audio and files are downloaded
 and attached to the Discuss message.
 
+Outbound attachments from Discuss are sent as Instagram media when the
+filename (or, if the suffix is not recognised, the stored mimetype)
+matches Meta's Send Messages formats: png and jpeg images (8 MB); aac,
+m4a and wav audio (25 MB); mp4, ogg, ogv, avi, mov and webm video (25
+MB); pdf files (25 MB). Unsupported types, URL attachments, and files
+over those limits are rejected before any Graph request. Plaintext
+longer than 1000 UTF-8 bytes (Meta's Send Messages cap, not a character
+count) is also rejected before any Graph request. A message can be
+media-only (no text) or text-only.
+
 Known issues / Roadmap
 ======================
 
-- Outbound attachments / media upload.
 - Quick replies, icebreakers and the persistent menu.
 - HUMAN_AGENT tagging to reply after the 24-hour window: send
   ``messaging_type=MESSAGE_TAG`` with ``tag=HUMAN_AGENT``. Meta

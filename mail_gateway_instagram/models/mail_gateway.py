@@ -20,3 +20,9 @@ class MailGateway(models.Model):
         default="26.0",
         help="Graph API version without the v prefix, for example 26.0.",
     )
+    instagram_show_own_messages = fields.Boolean(
+        string="Show Own Messages",
+        help="When enabled, messages the professional account sends from the "
+        "Instagram app are posted in the Discuss gateway channel. They are "
+        "authored as Webhook User (OdooBot until that user is changed).",
+    )

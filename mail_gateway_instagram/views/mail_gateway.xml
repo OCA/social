@@ -20,6 +20,10 @@
                     name="instagram_version"
                     invisible="gateway_type != 'instagram'"
                 />
+                <field
+                    name="instagram_show_own_messages"
+                    invisible="gateway_type != 'instagram'"
+                />
             </field>
             <notebook position="inside">
                 <page
