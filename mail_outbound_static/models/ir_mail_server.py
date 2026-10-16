@@ -140,7 +140,10 @@ class IrMailServer(models.Model):
         return super().create(vals_list)
 
     def write(self, values):
-        self.env.registry.clear_cache()
+        # Only these fields affect _get_mail_sever; other writes (e.g. an OAuth
+        # token refresh) must not clear every worker's caches.
+        if {"domain_whitelist", "sequence", "active"} & values.keys():
+            self.env.registry.clear_cache()
         return super().write(values)
 
     def unlink(self):
