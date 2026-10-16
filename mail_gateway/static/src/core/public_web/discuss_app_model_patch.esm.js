@@ -7,7 +7,7 @@ import {patch} from "@web/core/utils/patch";
 patch(DiscussApp.prototype, {
     setup() {
         super.setup(...arguments);
-        this.gateway = fields.One("DiscussAppCategory", {
+        this.gateway = fields.One("discuss.category", {
             compute() {
                 return {
                     canView: false,
