@@ -22,6 +22,7 @@ from odoo.addons.social_media_base.tests.test_social_common import (
     PATCH_WIZARD_ACCOUNT,
 )
 from odoo.addons.social_media_linkedin.social_linkedin_utils import (
+    _BATCH_GET_MAX_IDS_LINKEDIN,
     _STATISTICS_HISTORY_MONTHS_LINKEDIN,
     _STATISTICS_MAX_BUCKETS_LINKEDIN,
     _TOKEN_MARGIN_DAYS_LINKEDIN,
@@ -640,6 +641,33 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         self.assertEqual(
             mock_request.call_args.kwargs["headers"]["X-RestLi-Method"], "BATCH_GET"
         )
+
+    def test_get_linkedin_images_download_url_network_error_loses_its_batch(self):
+        """LinkedIn not being reached for a chunk only loses that chunk."""
+        urns = [
+            f"urn:li:image:{number}"
+            for number in range(_BATCH_GET_MAX_IDS_LINKEDIN + 1)
+        ]
+        last_urn = urns[-1]
+        response = self.generate_magic_mock(
+            **{
+                "status_code": 200,
+                "json_return_value": {
+                    "results": {last_urn: {"downloadUrl": "https://fake/last.png"}}
+                },
+            }
+        )
+        network_error = UserError("Error connecting to LinkedIn: timed out")
+        with self.get_patch_exceptions_linkedin(
+            side_effect=[network_error, response]
+        ) as mock_request, self.assertLogs(LOGGER_ACCOUNT_LINKEDIN, "WARNING") as logs:
+            urls = self.SocialAccountLinkedin._get_linkedin_images_download_url(urns)
+        self.assertEqual(urls, {last_urn: "https://fake/last.png"})
+        self.assertEqual(mock_request.call_count, 2)
+        self.assertEqual(len(logs.records), 1)
+        message = logs.records[0].getMessage()
+        self.assertIn(self.SocialAccountLinkedin.name, message)
+        self.assertIn("timed out", message)
 
     def _patch_daily_statistics(self, elements):
         """Patch the finder answering one bucket per day.
