@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =================
 Social Media Sync
 =================
@@ -17,7 +13,7 @@ Social Media Sync
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
@@ -184,6 +180,41 @@ size, and nothing is logged. A value that cannot be read as a whole
 number of megabytes — a word, a decimal — does not remove the cap: it is
 taken as ``100`` and leaves a warning in the log.
 
+Whether the videos are downloaded at all is a third system parameter, in
+the same place: ``social_media_sync.download_videos``. The module
+installs it at ``True``, and an update of the module does not overwrite
+what an administrator wrote in it. It covers every video the
+synchronization downloads, the animated GIFs of X included, since X
+serves them as videos. The images are downloaded whatever it says, and
+the videos of a post published from Odoo belong to the post and are
+never downloaded, so it does not reach them.
+
+Written as ``False``, no video is downloaded from then on. The
+publication is imported all the same and is still marked as having a
+video, and its form says that the video was not downloaded, so it can
+only be watched on the social media. On LinkedIn it also spares a call
+per video: the Videos API, which only answers where a video is to be
+downloaded from, is not asked.
+
+Turning it off frees nothing. The videos already downloaded are kept,
+and what releases them is ``social_media_sync.media_max_age_days``,
+along with the images, for the imported publications older than its
+number of days.
+
+No reference is kept for a video that was not downloaded, so written
+back to ``True`` it needs nothing else: the next synchronization pass
+that reads a publication still missing its video downloads it. The full
+resync is the pass that reads every publication of an account, so on an
+account with a long history it is the one that brings in, in a single
+run, every video left out meanwhile, each of them held to the size cap
+above.
+
+Only ``False`` and ``0`` turn the downloads off, in any case and with
+any spaces around them; ``True``, ``1`` and a parameter that was deleted
+download. A value that cannot be read as either —a word, a typo— does
+not stop the downloads: it is taken as ``True`` and leaves a warning in
+the log naming the value it read.
+
 Usage
 =====
 
@@ -231,9 +262,20 @@ Importing what an account already published.
   account are refreshed either way, because they cost a fixed number of
   calls and they move without anything being published; it is the import
   whose cost grows with the history of the account.
-- When nothing needed importing, the button says so —*The data was
-  updated. No new publications.*— instead of announcing publications it
-  did not bring in.
+- The notice of the button tells what the import found. When the social
+  media of an account was read and answered publications Odoo did not
+  hold yet, it says *The data was updated. New publications were
+  imported.*; when it was read and there was nothing new, *The data was
+  updated. No new publications.* Reading an account is an update even
+  when none of its figures moved. When no account was read —none of them
+  was behind, or the social media did not let the import run— the notice
+  is the one of *Social Media Base*, worded from the figures alone.
+- Every import ends by adding up again the figures of the card of each
+  account it read, from what it has just stored: the *Update* button,
+  the first import —once more at its end, after the daily series, since
+  the card of an account with one is drawn from it— and the full resync.
+  After *Update* and after the first import the dashboard draws the new
+  figures as soon as it is over, without being reloaded.
 - The figures imported for a publication — impressions, social media
   clicks, shares, likes, comments, interactions and engagement — are
   added by this module to the list of publications and to their form,
@@ -335,8 +377,9 @@ of field the family either starts using or drops.
 Storage of the imported medias
 ------------------------------
 
-The import downloads the medias of every publication it brings in and
-stores them as ordinary ``ir.attachment`` records, so the filestore
+The import downloads the medias of every publication it brings in, the
+videos too unless ``social_media_sync.download_videos`` is ``False``,
+and stores them as ordinary ``ir.attachment`` records, so the filestore
 grows with the history of the accounts and not with what is published
 from Odoo: an account importing years of publications brings in years of
 images.

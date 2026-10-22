@@ -21,19 +21,24 @@ patch(SocialKanbanController.prototype, {
     },
 
     /**
-     * The third thing the button can answer: it refreshed the figures and
-     * found no account with publications to import.
+     * What the button answers once the import reported what it read.
      *
-     * Base has only two answers because base imports nothing. Announcing an
-     * update that brought publications in, when the only accounts that could
-     * have moved were left out on purpose, is what would make the button look
-     * broken the next time one of them really is behind.
+     * Base has only two answers because base imports nothing. An account
+     * whose social media was read is an update, whatever the figures said,
+     * and the notice tells a read that brought publications in from one that
+     * found none: announcing publications that did not come is what would
+     * make the button look broken the next time an account really is behind.
+     * When no account was read, the figures are all there is to word, and
+     * base words them.
      *
      * @override
      */
     _updateStatisticsMessage(refreshed) {
-        if (refreshed && !this.model.postsImported) {
-            return _t("The data was updated. No new publications.");
+        const report = this.model.postsReport || {};
+        if (report.read) {
+            return report.imported
+                ? _t("The data was updated. New publications were imported.")
+                : _t("The data was updated. No new publications.");
         }
         return super._updateStatisticsMessage(refreshed);
     },
