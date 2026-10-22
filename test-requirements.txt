@@ -1,1 +1,2 @@
 odoo-test-helper
+odoo-addon-social_media_x @ git+https://github.com/oca/social.git@refs/pull/1891/head#subdirectory=social_media_x
