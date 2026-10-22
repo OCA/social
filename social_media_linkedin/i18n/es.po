@@ -153,6 +153,13 @@ msgstr "Permisos concedidos"
 
 #. module: social_media_linkedin
 #. odoo-python
+#: code:addons/social_media_linkedin/tests/test_account_statistics_linkedin.py:0
+#, python-format
+msgid "Internal error"
+msgstr ""
+
+#. module: social_media_linkedin
+#. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
 #, python-format
 msgid ""
