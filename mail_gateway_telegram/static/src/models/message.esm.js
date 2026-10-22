@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {registerPatch} from "@mail/model/model_core";
 
 registerPatch({
