@@ -14,6 +14,7 @@ from odoo.addons.social_media_linkedin.social_linkedin_utils import (
 from ..social_linkedin_sync_utils import (
     _URN_COMMENT_LINKEDIN,
     _URN_PERSON_LINKEDIN,
+    _URN_VIDEO_LINKEDIN,
     linkedin_reaction_id,
 )
 
@@ -60,6 +61,40 @@ class SocialPostAccount(models.Model):
         return self._store_remote_medias(
             {urn: download_urls.get(urn) for urn in image_urns}
         )
+
+    def _get_video_assets_save(self, content, account=None):
+        """Download the video of a post when it is not stored yet.
+
+        A LinkedIn post holds one video at most. The publication answers
+        whether it already has it before the Videos API is asked for where to
+        download it from, because that question is a call: a video downloaded
+        by a previous pass, or put online from Odoo, which keeps its URN in
+        ``media_refs``, costs nothing.
+
+        Whether the post has a video is told by the import itself, which
+        marks the publication even when the download fails.
+
+        When the system parameter ``social_media_sync.download_videos`` turns
+        the videos off, nothing is asked: the Videos API would only answer
+        where to download a video that is not going to be downloaded.
+
+        :param content: The ``content`` of the post answered by the Posts API.
+        :param account: The account to ask LinkedIn with, needed when the post
+            does not exist in Odoo yet.
+        :return: The videos created and the URN of each one, keyed by its
+            identifier.
+        :rtype: tuple
+        """
+        video_urn = str(((content or {}).get("media") or {}).get("id", ""))
+        if not video_urn.startswith(_URN_VIDEO_LINKEDIN) or self._get_medias_account(
+            [video_urn]
+        ):
+            return self.env["ir.attachment"], {}
+        if not self._download_videos_enabled():
+            return self.env["ir.attachment"], {}
+        account = account or self.account_id
+        download_urls = account._get_linkedin_videos_download_url([video_urn])
+        return self._store_remote_videos({video_urn: download_urls.get(video_urn)})
 
     def _remove_assets_deleted(self, content):
         """Drop the images that are no longer on the LinkedIn post.
