@@ -9,7 +9,7 @@ from unittest.mock import patch
 import telegram
 from telegram.ext import ExtBot
 
-from odoo.tests.common import tagged
+from odoo.tests.common import HttpCase, tagged
 from odoo.tools import file_open, mute_logger
 
 from odoo.addons.mail.tools.discuss import Store
@@ -76,7 +76,7 @@ def getMyBot(message_id=1234, file=False):
 
 
 @tagged("-at_install", "post_install")
-class TestMailGatewayTelegram(MailGatewayTestCase):
+class TestMailGatewayTelegram(MailGatewayTestCase, HttpCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -776,7 +776,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         )
         self.assertTrue(channel)
         store = Store()
-        channel._to_store(store)
+        store.add(channel)
         result = store.get_result()
         # Look up the discuss.channel entry that matches our channel's ID
         channel_info_list = result.get("discuss.channel", [])
@@ -813,12 +813,12 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
                 message_type="comment",
             )
         with patch.object(telegram, "Bot", getMyBot()):
-            channel._message_update_content(message, "New message")
+            channel._message_update_content(message, body="New message")
         self.assertRegex(message.body, ".*New message.*")
 
     def _get_partner_store_info(self):
         """Partner data as the web client receives it."""
-        result = Store(self.partner).get_result()
+        result = Store().add(self.partner).get_result()
         return next(
             item
             for item in result.get("res.partner", [])

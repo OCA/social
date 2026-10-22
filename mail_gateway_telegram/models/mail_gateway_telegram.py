@@ -6,7 +6,7 @@ import mimetypes
 import traceback
 from io import BytesIO, StringIO
 
-from odoo import _, models
+from odoo import models
 from odoo.http import request
 from odoo.tools import html2plaintext
 from odoo.tools.mimetypes import guess_mimetype
@@ -299,7 +299,7 @@ class MailGatewayTelegramService(models.AbstractModel):
             _logger.error(buff.getvalue())
             if raise_exception:
                 raise MailDeliveryException(
-                    _("Unable to send the telegram message"), exc
+                    self.env._("Unable to send the telegram message"), exc
                 ) from None
             else:
                 _logger.warning(f"Issue sending message with id {record.id}: {exc}")
