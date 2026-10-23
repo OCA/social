@@ -250,15 +250,18 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
             "other_social": "https://www.failed.com/company/id1234account/admin"
         }
         field = self.social_media_id._fields["media_type"]
-        with patch.object(
-            type(self.social_account_id),
-            "_fields_account_url",
-            autospec=True,
-            return_value=fake_fields,
-        ), patch.object(
-            field,
-            "selection",
-            new=[("other_social", "Other social")],
+        with (
+            patch.object(
+                type(self.social_account_id),
+                "_fields_account_url",
+                autospec=True,
+                return_value=fake_fields,
+            ),
+            patch.object(
+                field,
+                "selection",
+                new=[("other_social", "Other social")],
+            ),
         ):
             self.social_media_id.write({"media_type": "other_social"})
             self.assertEqual(
@@ -406,11 +409,14 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 "account_id": self.social_account_id.id,
             }
         )
-        with patch(
-            PATCH_WIZARD_ACCOUNT.format("_update_account"),
-            autospec=True,
-            side_effect=ValueError("boom"),
-        ), self.assertRaises(UserError):
+        with (
+            patch(
+                PATCH_WIZARD_ACCOUNT.format("_update_account"),
+                autospec=True,
+                side_effect=ValueError("boom"),
+            ),
+            self.assertRaises(UserError),
+        ):
             wizard.action_update_account()
         self.assertTrue(self.social_account_id.need_update)
 
@@ -421,11 +427,14 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 "account_id": self.social_account_id.id,
             }
         )
-        with patch(
-            PATCH_WIZARD_ACCOUNT.format("_update_account"),
-            autospec=True,
-            side_effect=ValueError("boom"),
-        ), self.assertRaises(UserError) as capture:
+        with (
+            patch(
+                PATCH_WIZARD_ACCOUNT.format("_update_account"),
+                autospec=True,
+                side_effect=ValueError("boom"),
+            ),
+            self.assertRaises(UserError) as capture,
+        ):
             wizard.action_update_account()
         self.assertIn("boom", str(capture.exception))
 

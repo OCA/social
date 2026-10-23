@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="module_category_social_media" model="ir.module.category">
         <field name="name">Social Media</field>
         <field name="description">Manage social media accounts and posts.</field>
@@ -29,7 +28,6 @@
     <!-- The administrator may revoke these grants, so they must not be
          reapplied on every module update. -->
     <data noupdate="1">
-
         <record id="base.user_root" model="res.users">
             <field name="groups_id" eval="[(4, ref('group_social_media_manager'))]" />
         </record>
@@ -37,7 +35,5 @@
         <record id="base.user_admin" model="res.users">
             <field name="groups_id" eval="[(4, ref('group_social_media_manager'))]" />
         </record>
-
     </data>
-
 </odoo>
