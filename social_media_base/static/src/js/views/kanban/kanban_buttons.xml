@@ -36,10 +36,10 @@
             >
                 <span>
                 <i
-                        t-if="!socialState.syncPosts"
-                        class="fa fa-refresh px-1"
-                        aria-hidden="true"
-                    />
+                    t-if="!socialState.syncPosts"
+                    class="fa fa-refresh px-1"
+                    aria-hidden="true"
+                />
                     <span class="social-loader" t-if="socialState.syncPosts" />
                     Update
                 </span>

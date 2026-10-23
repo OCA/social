@@ -65,8 +65,8 @@
         >
             <span class="btn btn-md active" role="button">
                                         +                <t
-                    t-esc="images.length - record.countShowImage"
-                />
+                t-esc="images.length - record.countShowImage"
+            />
             </span>
         </div>
 
@@ -100,8 +100,6 @@
 
         <t t-if="!isDialog" t-call="social_media_base.postAccountImages" />
         <t t-if="isDialog" t-call="social_media_base.postDialogAccountImages" />
-
-
     </t>
 
 </templates>

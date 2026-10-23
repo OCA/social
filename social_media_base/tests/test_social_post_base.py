@@ -164,11 +164,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
     def test_run_send_post_only_sends_the_due_scheduled_posts(self):
         due_post = self._create_scheduled_post()
         not_due_post = self._create_scheduled_post(minutes=60)
-        with freeze_time(fields.Datetime.now() + timedelta(minutes=10)), patch.object(
-            type(self.social_post_id),
-            "_action_create_post_account",
-            autospec=True,
-        ) as mock_create:
+        with (
+            freeze_time(fields.Datetime.now() + timedelta(minutes=10)),
+            patch.object(
+                type(self.social_post_id),
+                "_action_create_post_account",
+                autospec=True,
+            ) as mock_create,
+        ):
             self.SocialPost._run_send_post()
         self.assertEqual(mock_create.call_count, 1)
         sent_post = mock_create.call_args[0][0]
@@ -187,12 +190,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 raise UserError(_("The post could not be sent"))
             sent_ids.append(post.id)
 
-        with freeze_time(fields.Datetime.now() + timedelta(minutes=10)), patch.object(
-            type(self.social_post_id),
-            "_action_create_post_account",
-            autospec=True,
-            side_effect=_publish,
-        ), mute_logger(LOGGER_POST):
+        with (
+            freeze_time(fields.Datetime.now() + timedelta(minutes=10)),
+            patch.object(
+                type(self.social_post_id),
+                "_action_create_post_account",
+                autospec=True,
+                side_effect=_publish,
+            ),
+            mute_logger(LOGGER_POST),
+        ):
             self.SocialPost._run_send_post()
         self.assertEqual(sent_ids, [other_post.id])
         self.assertEqual(failing_post.state, "draft")
@@ -209,12 +216,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def _publish(post):
             raise ValueError("LinkedIn is unreachable")
 
-        with freeze_time(fields.Datetime.now() + timedelta(minutes=10)), patch.object(
-            type(self.social_post_id),
-            "_action_create_post_account",
-            autospec=True,
-            side_effect=_publish,
-        ), mute_logger(LOGGER_POST):
+        with (
+            freeze_time(fields.Datetime.now() + timedelta(minutes=10)),
+            patch.object(
+                type(self.social_post_id),
+                "_action_create_post_account",
+                autospec=True,
+                side_effect=_publish,
+            ),
+            mute_logger(LOGGER_POST),
+        ):
             self.SocialPost._run_send_post()
         self.assertEqual(failing_post.state, "planned")
         self.assertTrue(
@@ -246,9 +257,10 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         post.write({"state": "publishing"})
         self.assertFalse(post.any_failed_post)
         self.assertTrue(post.hide_post)
-        with mute_logger(
-            LOGGER_POST_ACCOUNT
-        ), self.social_post_account_id._publish_guard():
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            self.social_post_account_id._publish_guard(),
+        ):
             raise UserError(_("LinkedIn refused the post"))
         self.assertTrue(post.any_failed_post)
         self.assertFalse(post.hide_post)
@@ -271,12 +283,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
     def test_publish_attempt_fails_the_line_when_the_token_cannot_be_renewed(self):
         post_account = self.social_post_account_id
         calls = []
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(self.social_account_id),
-            "validate_access_token",
-            autospec=True,
-            side_effect=UserError(_("The token could not be renewed")),
-        ), post_account._publish_guard():
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(self.social_account_id),
+                "validate_access_token",
+                autospec=True,
+                side_effect=UserError(_("The token could not be renewed")),
+            ),
+            post_account._publish_guard(),
+        ):
             post_account._publish_attempt(lambda **kwargs: calls.append(kwargs))
         self.assertFalse(calls, "Nothing must be sent without valid credentials")
         self.assertEqual(post_account.state, "failed")
@@ -311,12 +327,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def publish(**kwargs):
             raise SocialCredentialsError(_("The access token was revoked"))
 
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(account),
-            "_refresh_credentials",
-            autospec=True,
-            return_value=False,
-        ), post_account._publish_guard():
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(account),
+                "_refresh_credentials",
+                autospec=True,
+                return_value=False,
+            ),
+            post_account._publish_guard(),
+        ):
             post_account._publish_attempt(publish)
         self.assertEqual(post_account.state, "failed")
         self.assertIn("The access token was revoked", post_account.failed_description)
@@ -344,12 +364,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             calls.append(kwargs)
             raise SocialCredentialsError(_("The access token was revoked"))
 
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(account),
-            "_refresh_credentials",
-            autospec=True,
-            return_value=True,
-        ), post_account._publish_guard():
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(account),
+                "_refresh_credentials",
+                autospec=True,
+                return_value=True,
+            ),
+            post_account._publish_guard(),
+        ):
             post_account._publish_attempt(publish)
         self.assertEqual(len(calls), 2)
         self.assertEqual(post_account.state, "failed")
@@ -361,12 +385,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         post_account = self.social_post_account_id
         account = self.social_account_id
         calls = []
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(account),
-            "validate_access_token",
-            autospec=True,
-            side_effect=SocialCredentialsError(_("The access token was revoked")),
-        ), post_account._publish_guard():
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(account),
+                "validate_access_token",
+                autospec=True,
+                side_effect=SocialCredentialsError(_("The access token was revoked")),
+            ),
+            post_account._publish_guard(),
+        ):
             post_account._publish_attempt(lambda **kwargs: calls.append(kwargs))
         self.assertFalse(calls, "Nothing must be sent without valid credentials")
         self.assertEqual(post_account.state, "failed")
@@ -408,11 +436,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def publish_revoked(**kwargs):
             raise SocialCredentialsError(_("The access token was revoked"))
 
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(self.social_account_id),
-            "_refresh_credentials",
-            autospec=True,
-            return_value=False,
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(self.social_account_id),
+                "_refresh_credentials",
+                autospec=True,
+                return_value=False,
+            ),
         ):
             for line, publish in (
                 (published_line, publish_ok),
@@ -445,12 +476,16 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def publish(**kwargs):
             raise SocialCredentialsError(_("The access token was revoked"))
 
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(account),
-            "_refresh_credentials",
-            autospec=True,
-            return_value=False,
-        ), post_account._publish_guard():
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(account),
+                "_refresh_credentials",
+                autospec=True,
+                return_value=False,
+            ),
+            post_account._publish_guard(),
+        ):
             post_account._publish_attempt(publish)
         self.assertEqual(post_account.state, "failed")
         self.assertTrue(account.need_update)
@@ -473,14 +508,18 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def publish(**kwargs):
             raise SocialCredentialsError(_("The access token was revoked"))
 
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(account),
-            "_refresh_credentials",
-            autospec=True,
-            return_value=False,
-        ), patch.object(
-            type(account), "_need_update", autospec=True
-        ) as mock_need_update:
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(
+                type(account),
+                "_refresh_credentials",
+                autospec=True,
+                return_value=False,
+            ),
+            patch.object(
+                type(account), "_need_update", autospec=True
+            ) as mock_need_update,
+        ):
             for line in (self.social_post_account_id, second_line):
                 with line._publish_guard():
                     line._publish_attempt(publish)
@@ -496,11 +535,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             calls.append(kwargs)
             raise UserError(_("The message is too long"))
 
-        with self.assertRaises(UserError), patch.object(
-            type(self.social_account_id),
-            "_refresh_credentials",
-            autospec=True,
-        ) as mock_refresh:
+        with (
+            self.assertRaises(UserError),
+            patch.object(
+                type(self.social_account_id),
+                "_refresh_credentials",
+                autospec=True,
+            ) as mock_refresh,
+        ):
             post_account._publish_attempt(publish)
         mock_refresh.assert_not_called()
         self.assertEqual(len(calls), 1)
@@ -520,9 +562,10 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             pgcode = errorcodes.SERIALIZATION_FAILURE
 
         post_account = self.social_post_account_id
-        with self.assertRaises(
-            psycopg2.OperationalError
-        ), post_account._publish_guard():
+        with (
+            self.assertRaises(psycopg2.OperationalError),
+            post_account._publish_guard(),
+        ):
             raise ConcurrencyError("serialization conflict")
         self.assertNotEqual(post_account.state, "failed")
 
@@ -552,16 +595,19 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 }
             )
         ]
-        with patch.object(
-            type(self.social_post_id),
-            "_prepare_post_account_values",
-            autospec=True,
-            return_value=fake_post_account,
-        ), patch.object(
-            type(self.social_post_account_id),
-            "_action_post",
-            autospec=True,
-        ) as mock_action_post:
+        with (
+            patch.object(
+                type(self.social_post_id),
+                "_prepare_post_account_values",
+                autospec=True,
+                return_value=fake_post_account,
+            ),
+            patch.object(
+                type(self.social_post_account_id),
+                "_action_post",
+                autospec=True,
+            ) as mock_action_post,
+        ):
             self.social_post_id._action_create_post_account()
             mock_action_post.assert_called_once_with(
                 self.SocialPostAccount,
@@ -712,10 +758,12 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 "state": "posted",
             }
         )
-        with mute_logger(LOGGER_POST_ACCOUNT), patch.object(
-            type(post_account), "_delete_post_account", autospec=True
-        ), patch.object(
-            type(post), "unlink", side_effect=UserError(_("The post is locked"))
+        with (
+            mute_logger(LOGGER_POST_ACCOUNT),
+            patch.object(type(post_account), "_delete_post_account", autospec=True),
+            patch.object(
+                type(post), "unlink", side_effect=UserError(_("The post is locked"))
+            ),
         ):
             action = post_account.action_delete_post_account()
         self.assertTrue(self.SocialPostAccount.browse(post_account.id).exists())
@@ -741,10 +789,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 "post_id": post.id,
             }
         )
-        with self.assertRaises(psycopg2.OperationalError), patch.object(
-            type(post_account), "_delete_post_account", autospec=True
-        ), patch.object(
-            type(post), "unlink", side_effect=ConcurrencyError("serialization conflict")
+        with (
+            self.assertRaises(psycopg2.OperationalError),
+            patch.object(type(post_account), "_delete_post_account", autospec=True),
+            patch.object(
+                type(post),
+                "unlink",
+                side_effect=ConcurrencyError("serialization conflict"),
+            ),
         ):
             post_account.action_delete_post_account()
 
@@ -804,11 +856,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
     def test_partially_published_post_is_retried_only_by_hand(self):
         post, failed_line = self._create_partially_published_post(scheduled=True)
-        with freeze_time(fields.Datetime.now() + timedelta(minutes=10)), patch.object(
-            type(self.social_post_id),
-            "_action_create_post_account",
-            autospec=True,
-        ) as mock_create:
+        with (
+            freeze_time(fields.Datetime.now() + timedelta(minutes=10)),
+            patch.object(
+                type(self.social_post_id),
+                "_action_create_post_account",
+                autospec=True,
+            ) as mock_create,
+        ):
             self.SocialPost._run_send_post()
         mock_create.assert_not_called()
 
@@ -974,16 +1029,20 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 ]
             }
         )
-        with self._fake_media_types(alpha=self.social_media_id), patch.object(
-            type(self.social_post_id),
-            "_get_post_errors",
-            autospec=True,
-            return_value=["Refused"],
-        ) as mock_errors, patch.object(
-            type(self.social_post_id),
-            "_get_post_warnings",
-            autospec=True,
-            return_value=["Changed"],
+        with (
+            self._fake_media_types(alpha=self.social_media_id),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_errors",
+                autospec=True,
+                return_value=["Refused"],
+            ) as mock_errors,
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_warnings",
+                autospec=True,
+                return_value=["Changed"],
+            ),
         ):
             self.social_post_id.invalidate_recordset(["message_error", "message_info"])
             self.assertEqual(self.social_post_id.message_error, "Refused")
@@ -1003,13 +1062,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def one_message_per_media(post, media_type, account=None):
             return [f"{media_type} refuses this post"]
 
-        with self._fake_media_types(
-            alpha=self.social_media_id, beta=media_beta
-        ), patch.object(
-            type(self.social_post_id),
-            "_get_post_errors",
-            autospec=True,
-            side_effect=one_message_per_media,
+        with (
+            self._fake_media_types(alpha=self.social_media_id, beta=media_beta),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_errors",
+                autospec=True,
+                side_effect=one_message_per_media,
+            ),
         ):
             messages = []
             for _unused in range(3):
@@ -1031,12 +1091,15 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         self.social_post_id.write(
             {"account_ids": [Command.set((self.social_account_id | account_beta).ids)]}
         )
-        with self._fake_media_types(beta=media_beta), patch.object(
-            type(self.social_post_id),
-            "_get_post_errors",
-            autospec=True,
-            return_value=["Refused"],
-        ) as mock_errors:
+        with (
+            self._fake_media_types(beta=media_beta),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_errors",
+                autospec=True,
+                return_value=["Refused"],
+            ) as mock_errors,
+        ):
             self.social_post_id.invalidate_recordset(["message_error"])
             self.assertEqual(self.social_post_id.message_error, "Refused")
             self.assertEqual(mock_errors.call_count, 1)
@@ -1044,11 +1107,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
     def test_post_check_messages_never_block_saving(self):
         """A post nothing can publish is still saved: it is finished later."""
-        with self._fake_media_types(alpha=self.social_media_id), patch.object(
-            type(self.social_post_id),
-            "_get_post_errors",
-            autospec=True,
-            return_value=["Refused"],
+        with (
+            self._fake_media_types(alpha=self.social_media_id),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_errors",
+                autospec=True,
+                return_value=["Refused"],
+            ),
         ):
             self.social_post_id.write({"message": "Still a draft"})
             self.assertEqual(self.social_post_id.message, "Still a draft")
@@ -1056,12 +1122,15 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
     def test_check_publishable_raises_what_the_form_shows(self):
         """The publication and the form read the same hook, with the account."""
-        with self._fake_media_types(alpha=self.social_media_id), patch.object(
-            type(self.social_post_id),
-            "_get_post_errors",
-            autospec=True,
-            return_value=["Refused", "And also refused"],
-        ) as mock_errors:
+        with (
+            self._fake_media_types(alpha=self.social_media_id),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_errors",
+                autospec=True,
+                return_value=["Refused", "And also refused"],
+            ) as mock_errors,
+        ):
             with self.assertRaises(UserError) as error:
                 self.social_post_account_id._check_publishable()
             self.assertEqual(
@@ -1071,12 +1140,15 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
     def test_check_publishable_says_nothing_about_the_warnings(self):
         """A warning never stops a publication, so it is not read here."""
-        with self._fake_media_types(alpha=self.social_media_id), patch.object(
-            type(self.social_post_id),
-            "_get_post_warnings",
-            autospec=True,
-            return_value=["Changed"],
-        ) as mock_warnings:
+        with (
+            self._fake_media_types(alpha=self.social_media_id),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_warnings",
+                autospec=True,
+                return_value=["Changed"],
+            ) as mock_warnings,
+        ):
             self.social_post_account_id._check_publishable()
         mock_warnings.assert_not_called()
 
@@ -1116,11 +1188,14 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 return []
             return [f"{len(message)} characters is over the limit of {limit}."]
 
-        with self._fake_media_types(alpha=self.social_media_id), patch.object(
-            type(self.social_post_id),
-            "_get_post_errors",
-            autospec=True,
-            side_effect=refuse_a_message_over_the_limit,
+        with (
+            self._fake_media_types(alpha=self.social_media_id),
+            patch.object(
+                type(self.social_post_id),
+                "_get_post_errors",
+                autospec=True,
+                side_effect=refuse_a_message_over_the_limit,
+            ),
         ):
             self.social_post_id.invalidate_recordset(["message_error"])
             self.assertFalse(
