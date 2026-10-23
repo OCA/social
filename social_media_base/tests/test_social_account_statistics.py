@@ -392,21 +392,25 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
             calls.append("aggregate")
             return True
 
-        with patch.object(
-            type(self.account),
-            "_refresh_statistics",
-            autospec=True,
-            side_effect=refresh,
-        ), patch.object(
-            type(self.account),
-            "_refresh_window_statistics",
-            autospec=True,
-            side_effect=window,
-        ), patch.object(
-            type(self.account),
-            "_refresh_account_statistics",
-            autospec=True,
-            side_effect=aggregate,
+        with (
+            patch.object(
+                type(self.account),
+                "_refresh_statistics",
+                autospec=True,
+                side_effect=refresh,
+            ),
+            patch.object(
+                type(self.account),
+                "_refresh_window_statistics",
+                autospec=True,
+                side_effect=window,
+            ),
+            patch.object(
+                type(self.account),
+                "_refresh_account_statistics",
+                autospec=True,
+                side_effect=aggregate,
+            ),
         ):
             self.assertTrue(self.account.refresh_dashboard_statistics())
         self.assertEqual(calls, ["refresh", "window", "aggregate"])
@@ -448,21 +452,25 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
         """The card is drawn from those rows, so the other order draws none."""
         calls = []
 
-        with patch.object(
-            type(self.account),
-            "_refresh_statistics",
-            autospec=True,
-            side_effect=lambda accounts: calls.append("refresh"),
-        ), patch.object(
-            type(self.account),
-            "_backfill_statistics",
-            autospec=True,
-            side_effect=lambda accounts: calls.append("backfill"),
-        ), patch.object(
-            type(self.account),
-            "_refresh_account_statistics",
-            autospec=True,
-            side_effect=lambda accounts: calls.append("aggregate"),
+        with (
+            patch.object(
+                type(self.account),
+                "_refresh_statistics",
+                autospec=True,
+                side_effect=lambda accounts: calls.append("refresh"),
+            ),
+            patch.object(
+                type(self.account),
+                "_backfill_statistics",
+                autospec=True,
+                side_effect=lambda accounts: calls.append("backfill"),
+            ),
+            patch.object(
+                type(self.account),
+                "_refresh_account_statistics",
+                autospec=True,
+                side_effect=lambda accounts: calls.append("aggregate"),
+            ),
         ):
             self.account._on_account_associated()
         self.assertEqual(calls, ["refresh", "backfill", "aggregate"])

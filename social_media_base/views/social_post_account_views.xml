@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_post_account_view_kanban" model="ir.ui.view">
         <field name="name">social.post.account.kanban</field>
         <field name="model">social.post.account</field>
@@ -86,8 +85,8 @@
                                 >
                                     <i class="fa fa-video-camera" aria-hidden="true" />
                                     <span t-if="videos.length">Video (<t
-                                            t-esc="videos.length"
-                                        />)</span>
+                                        t-esc="videos.length"
+                                    />)</span>
                                     <span t-else="">Video</span>
                                 </div>
                             </div>
@@ -509,10 +508,9 @@
                     </div>
                 </t>
                 <span t-if="hidden_video_count" class="badge text-bg-secondary">+<t
-                        t-out="hidden_video_count"
-                    /></span>
+                    t-out="hidden_video_count"
+                /></span>
             </div>
         </div>
     </template>
-
 </odoo>

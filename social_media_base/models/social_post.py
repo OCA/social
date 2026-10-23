@@ -51,7 +51,6 @@ class SocialPost(models.Model):
     message = fields.Text(required=True, tracking=True)
     campaign_id = fields.Many2one(
         "utm.campaign",
-        string="Campaign",
         index="btree_not_null",
         ondelete="set null",
     )

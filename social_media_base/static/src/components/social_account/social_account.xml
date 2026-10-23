@@ -4,38 +4,40 @@
 <templates xml:space="preserve">
 
     <t t-name="social_media_base.SocialAccount">
-     <div class="row d-flex flex-column justify-content-start flex-md-row w-100 px-4 ">
-         <!-- One warning naming every flagged account, not one warning per
+        <div
+            class="row d-flex flex-column justify-content-start flex-md-row w-100 px-4 "
+        >
+            <!-- One warning naming every flagged account, not one warning per
               account: the user has to know which ones to authorize again, and
               *Update* is not what fixes it. The wrapper takes the whole row so
               the warning never shares it with the cards, while the warning
               itself is only as wide as its own text. -->
-         <div
+            <div
                 t-if="state.accountsNeedingUpdate.length"
                 class="w-100 d-flex justify-content-center"
             >
-             <div
+                <div
                     class="alert alert-warning d-flex align-items-center w-auto my-1 py-2"
                     role="alert"
                 >
-                 <t t-if="state.accountsNeedingUpdate.length === 1">
+                    <t t-if="state.accountsNeedingUpdate.length === 1">
                     The credentials of <span
-                            class="fw-bold mx-1"
-                            t-esc="accountsNeedingUpdateLabel"
-                        /> are no longer valid. Update the account to authorize
+                        class="fw-bold mx-1"
+                        t-esc="accountsNeedingUpdateLabel"
+                    /> are no longer valid. Update the account to authorize
                     it again.
                  </t>
-                 <t t-else="">
+                    <t t-else="">
                     The credentials of <span
-                            class="fw-bold mx-1"
-                            t-esc="accountsNeedingUpdateLabel"
-                        /> are no longer valid. Update each account to authorize
+                        class="fw-bold mx-1"
+                        t-esc="accountsNeedingUpdateLabel"
+                    /> are no longer valid. Update each account to authorize
                     it again.
                  </t>
-             </div>
-         </div>
+                </div>
+            </div>
 
-         <div
+            <div
                 class="col-12 col-md-3 shadow bg-white pt-2 cursor-pointer w-md-25 m-2 rounded "
                 t-foreach="props.socialAccounts"
                 t-key="social_account.id"
@@ -52,19 +54,19 @@
                     </div>
                     <div class="d-flex justify-content-center justify-content-between">
                         [<span t-esc="social_account.media_id[1]" />]<span
-                            class="mx-1"
-                            t-esc="social_account.name"
-                        />
+                        class="mx-1"
+                        t-esc="social_account.name"
+                    />
                         <a
-                            t-if="social_account.web_url"
-                            t-att-href="social_account.web_url"
-                            target="_blank"
-                        >
+                        t-if="social_account.web_url"
+                        t-att-href="social_account.web_url"
+                        target="_blank"
+                    >
                         Go to account
                     </a>
                     </div>
                 </div>
-             <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between">
                     <div class="d-flex justify-content-center">
                         <i class="text-700 fa fa-eye px-1 pt-1" />
                         <span
@@ -72,16 +74,16 @@
                             t-esc="social_account.impression_count"
                         />
                     </div>
-                 <div class="d-flex justify-content-center px-1">
+                    <div class="d-flex justify-content-center px-1">
                         <i class="text-700 fa fa-hand-o-up px-1 pt-1" />
-                     <span
+                        <span
                             class="fw-bold px-1"
                             t-esc="social_account.interactions_count"
                         />
                     </div>
-                 <div class="d-flex justify-content-center">
+                    <div class="d-flex justify-content-center">
                         <i class="text-700 fa fa-star px-1 pt-1" />
-                     <span
+                        <span
                             class="fw-bold px-1"
                             t-esc="formatEngagement(social_account.engagement)"
                         />

@@ -124,7 +124,6 @@ class SocialPostAccount(models.Model):
     author = fields.Char(related="account_id.name", store=True)
     campaign_id = fields.Many2one(
         "utm.campaign",
-        string="Campaign",
         compute="_compute_campaign_id",
         store=True,
         readonly=False,
@@ -136,7 +135,6 @@ class SocialPostAccount(models.Model):
     )
     medium_id = fields.Many2one(
         "utm.medium",
-        string="Medium",
         compute="_compute_medium_id",
         store=True,
         readonly=False,
@@ -148,7 +146,6 @@ class SocialPostAccount(models.Model):
     )
     source_id = fields.Many2one(
         "utm.source",
-        string="Source",
         readonly=True,
         copy=False,
         index="btree_not_null",

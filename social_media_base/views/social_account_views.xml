@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_account_view_form" model="ir.ui.view">
         <field name="name">social.account.form</field>
         <field name="model">social.account</field>
@@ -194,5 +193,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

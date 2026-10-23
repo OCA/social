@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="utm_campaign_view_form" model="ir.ui.view">
         <field name="name">utm.campaign.view.form.inherit.social.media.base</field>
         <field name="model">utm.campaign</field>
@@ -240,5 +239,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

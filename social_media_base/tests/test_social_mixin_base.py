@@ -103,9 +103,12 @@ class TestSocialMediaBaseMixin(TestSocialMediaBaseCommon):
     def test_notify_user_takes_the_session_on_an_oauth_callback(self):
         """The redirect of a callback outruns the bus, so nothing goes there."""
         mock_request = MagicMock(session={})
-        with patch(PATCH_MIXIN_REQUEST, new=mock_request), patch.object(
-            type(self.env["bus.bus"]), "_sendone", autospec=True
-        ) as mock_sendone:
+        with (
+            patch(PATCH_MIXIN_REQUEST, new=mock_request),
+            patch.object(
+                type(self.env["bus.bus"]), "_sendone", autospec=True
+            ) as mock_sendone,
+        ):
             self.SocialMediaBaseMixin.with_context(
                 social_media_oauth_callback=True
             )._notify_user(
@@ -122,11 +125,16 @@ class TestSocialMediaBaseMixin(TestSocialMediaBaseCommon):
     def test_notify_user_takes_the_bus_without_the_callback_mark(self):
         mock_request = MagicMock(session={})
         sent = []
-        with patch(PATCH_MIXIN_REQUEST, new=mock_request), patch.object(
-            type(self.env["bus.bus"]),
-            "_sendone",
-            autospec=True,
-            side_effect=lambda bus, channel, notif_type, message: sent.append(message),
+        with (
+            patch(PATCH_MIXIN_REQUEST, new=mock_request),
+            patch.object(
+                type(self.env["bus.bus"]),
+                "_sendone",
+                autospec=True,
+                side_effect=lambda bus, channel, notif_type, message: sent.append(
+                    message
+                ),
+            ),
         ):
             self.SocialMediaBaseMixin._notify_user(
                 notif_type="social_kanban_danger",
