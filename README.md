@@ -75,6 +75,7 @@ addon | version | maintainers | summary
 [social_media_linkedin](social_media_linkedin/) | 17.0.1.0.1 | <a href='https://github.com/edescalona'><img src='https://github.com/edescalona.png' width='32' height='32' style='border-radius:50%;' alt='edescalona'/></a> | Publish on the LinkedIn pages you administrate, with daily figures
 [social_media_linkedin_sync](social_media_linkedin_sync/) | 17.0.1.0.1 | <a href='https://github.com/edescalona'><img src='https://github.com/edescalona.png' width='32' height='32' style='border-radius:50%;' alt='edescalona'/></a> | Import LinkedIn publications, their figures, comments and reactions
 [social_media_sync](social_media_sync/) | 17.0.1.0.1 | <a href='https://github.com/edescalona'><img src='https://github.com/edescalona.png' width='32' height='32' style='border-radius:50%;' alt='edescalona'/></a> | Import posts, figures, comments and reactions from the social media
+[social_media_x](social_media_x/) | 17.0.1.0.0 | <a href='https://github.com/edescalona'><img src='https://github.com/edescalona.png' width='32' height='32' style='border-radius:50%;' alt='edescalona'/></a> | Publish on X, with the figures of the account and of the posts sent
 
 [//]: # (end addons)
 
