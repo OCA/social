@@ -9,7 +9,7 @@ from unittest.mock import patch
 import telegram
 from telegram.ext import ExtBot
 
-from odoo.tests.common import tagged
+from odoo.tests.common import new_test_user, tagged
 from odoo.tools import file_open, mute_logger
 
 from odoo.addons.mail_gateway.tests.common import MailGatewayTestCase
@@ -80,12 +80,21 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.webhook = "demo_hook"
+        cls.user = new_test_user(
+            cls.env,
+            login="gateway_test_user",
+            groups="base.group_user,mail_gateway.gateway_user",
+        )
+        cls.webhook_user = new_test_user(
+            cls.env, login="webhook_test_user", groups="base.group_user"
+        )
         cls.gateway = cls.env["mail.gateway"].create(
             {
                 "name": "gateway",
                 "gateway_type": "telegram",
                 "token": "token",
-                "member_ids": [(4, cls.env.user.id)],
+                "webhook_user_id": cls.webhook_user.id,
+                "member_ids": [(4, cls.user.id)],
             }
         )
         cls.password = "my_new_password"
@@ -314,7 +323,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
             headers={"Content-Type": "application/json"},
             timeout=timeout,
             # We need to increase the timeout to avoid the test to fail on sticker....
-        )
+        ).raise_for_status()
 
     def test_webhook_unsecure_channel(self):
 
@@ -803,7 +812,7 @@ class TestMailGatewayTelegram(MailGatewayTestCase):
         )
         with patch.object(telegram, "Bot", getMyBot()):
             self.set_message(self.message_02, self.webhook)
-        messaging = self.env.user._init_messaging()
+        messaging = self.user._init_messaging()
         self.assertTrue(messaging["gateways"])
         self.assertEqual(1, len(messaging["gateways"]))
         self.assertEqual(self.gateway.id, messaging["gateways"][0]["id"])
