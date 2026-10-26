@@ -12,7 +12,7 @@ from markupsafe import Markup
 from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests import Form, RecordCapturer
-from odoo.tests.common import tagged
+from odoo.tests.common import new_test_user, tagged
 from odoo.tools import mute_logger
 
 from odoo.addons.mail_gateway.tests.common import MailGatewayTestCase
@@ -24,6 +24,14 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.webhook = "demo_hook"
+        cls.user = new_test_user(
+            cls.env,
+            login="gateway_test_user",
+            groups="base.group_user,mail_gateway.gateway_user",
+        )
+        cls.webhook_user = new_test_user(
+            cls.env, login="webhook_test_user", groups="base.group_user"
+        )
         cls.gateway = cls.env["mail.gateway"].create(
             {
                 "name": "gateway",
@@ -31,7 +39,8 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
                 "token": "token",
                 "whatsapp_security_key": "key",
                 "webhook_secret": "MY-SECRET",
-                "member_ids": [(4, cls.env.user.id)],
+                "webhook_user_id": cls.user.id,
+                "member_ids": [(4, cls.user.id)],
             }
         )
         cls.ws_template = cls.env["mail.whatsapp.template"].create(
@@ -174,7 +183,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
                 self.gateway.whatsapp_security_key + "12",
                 "22",
             ),
-        )
+        ).raise_for_status()
         self.assertEqual(self.gateway.integrated_webhook_state, "pending")
         self.integrate_webhook()
         self.assertEqual(self.gateway.integrated_webhook_state, "integrated")
@@ -189,7 +198,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
                 self.gateway.whatsapp_security_key,
                 "22",
             ),
-        )
+        ).raise_for_status()
 
     def set_message(self, message, webhook, headers=True):
         data = json.dumps(message)
@@ -205,7 +214,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             f"/gateway/{self.gateway.gateway_type}/{webhook}/update",
             data=data,
             headers=headers_dict,
-        )
+        ).raise_for_status()
 
     def receive_message(self, message):
         self.gateway.webhook_key = self.webhook
@@ -376,7 +385,7 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
             f"/gateway/{self.gateway.gateway_type}/{self.webhook}/update",
             data=data,
             headers=headers,
-        )
+        ).raise_for_status()
         self.assertFalse(
             self.env["discuss.channel"].search([("gateway_id", "=", self.gateway.id)])
         )

@@ -6,27 +6,32 @@ from unittest.mock import patch
 import requests
 
 from odoo.exceptions import UserError
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, new_test_user
 from odoo.tools import mute_logger
 
 
 class TestTelegramBot(TransactionCase):
-    def setUp(self):
-        super().setUp()
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
         # Create a test bot
-        self.bot = self.env["mail.gateway"].create(
+        cls.webhook_user = new_test_user(
+            cls.env, login="webhook_user", groups="base.group_user"
+        )
+        cls.bot = cls.env["mail.gateway"].create(
             {
                 "name": "Test Bot",
                 "gateway_type": "telegram",
+                "webhook_user_id": cls.webhook_user.id,
                 "token": "123456:ABC-DEF1234ghIkl-zyx57W2v1u123ew11",
             }
         )
         # Create a test chat linked to the bot
-        self.chat = self.env["telegram.chat"].create(
+        cls.chat = cls.env["telegram.chat"].create(
             {
                 "name": "Test Chat",
                 "chat_id": "1856618864",
-                "gateway_id": self.bot.id,
+                "gateway_id": cls.bot.id,
             }
         )
 

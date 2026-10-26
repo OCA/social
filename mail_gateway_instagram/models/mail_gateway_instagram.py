@@ -109,11 +109,15 @@ class MailGatewayInstagramService(models.AbstractModel):
         if not author_id:
             return False
         author_token = str(author_id)
-        gateway_partner = self.env["res.partner.gateway.channel"].search(
-            [
-                ("gateway_id", "=", gateway.id),
-                ("gateway_token", "=", author_token),
-            ]
+        gateway_partner = (
+            self.env["res.partner.gateway.channel"]
+            .sudo()
+            .search(
+                [
+                    ("gateway_id", "=", gateway.id),
+                    ("gateway_token", "=", author_token),
+                ]
+            )
         )
         if gateway_partner:
             return gateway_partner.partner_id
@@ -125,7 +129,11 @@ class MailGatewayInstagramService(models.AbstractModel):
         )
         if guest:
             return guest
-        return self.env["mail.guest"].create(self._get_author_vals(gateway, author_id))
+        return (
+            self.env["mail.guest"]
+            .sudo()
+            .create(self._get_author_vals(gateway, author_id))
+        )
 
     def _get_author_vals(self, gateway, author_id):
         return {

@@ -9,7 +9,7 @@ from unittest.mock import MagicMock, patch
 
 import requests
 
-from odoo.tests.common import tagged
+from odoo.tests.common import new_test_user, tagged
 from odoo.tools import mute_logger
 
 from odoo.addons.base.models.ir_mail_server import MailDeliveryException
@@ -30,6 +30,9 @@ class TestMailGatewayInstagram(MailGatewayTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.new_test_user = new_test_user(
+            cls.env, login="webhook_user", groups="base.group_user"
+        )
         cls.gateway = cls.env["mail.gateway"].create(
             {
                 "name": "Instagram",
@@ -38,6 +41,7 @@ class TestMailGatewayInstagram(MailGatewayTestCase):
                 "instagram_security_key": "verify-token",
                 "instagram_account_id": IGID,
                 "webhook_secret": "APP-SECRET",
+                "webhook_user_id": cls.new_test_user.id,
                 "member_ids": [(4, cls.env.user.id)],
             }
         )

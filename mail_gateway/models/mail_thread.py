@@ -33,9 +33,9 @@ class MailThread(models.AbstractModel):
             ):
                 continue
             message._send_to_gateway_thread(
-                self.env["res.partner.gateway.channel"].browse(
-                    partner_data.get("gateway_channel_id")
-                )
+                self.env["res.partner.gateway.channel"]
+                .sudo()
+                .browse(partner_data.get("gateway_channel_id"))
             )
 
     def _notify_get_recipients(self, message, msg_vals, **kwargs):

@@ -44,10 +44,10 @@ class MailGatewayWhatsappService(models.AbstractModel):
 
     def _receive_get_update(self, bot_data, req, **kwargs):
         self._verify_update(bot_data, {})
-        gateway = self.env["mail.gateway"].browse(bot_data["id"])
+        gateway = self.env["mail.gateway"].sudo().browse(bot_data["id"])
         if kwargs.get("hub.verify_token") != gateway.whatsapp_security_key:
             return None
-        gateway.sudo().integrated_webhook_state = "integrated"
+        gateway.integrated_webhook_state = "integrated"
         response = request.make_response(kwargs.get("hub.challenge"))
         response.status_code = 200
         return response
@@ -427,12 +427,16 @@ class MailGatewayWhatsappService(models.AbstractModel):
     def _get_author(self, gateway, update):
         author_id = update.get("messages")[0].get("from")
         if author_id:
-            gateway_partner = self.env["res.partner.gateway.channel"].search(
-                [
-                    ("gateway_id", "=", gateway.id),
-                    ("gateway_token", "=", str(author_id)),
-                ],
-                limit=1,
+            gateway_partner = (
+                self.env["res.partner.gateway.channel"]
+                .sudo()
+                .search(
+                    [
+                        ("gateway_id", "=", gateway.id),
+                        ("gateway_token", "=", str(author_id)),
+                    ],
+                    limit=1,
+                )
             )
             if gateway_partner:
                 return gateway_partner.partner_id
@@ -460,7 +464,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 return guest
             author_vals = self._get_author_vals(gateway, author_id, update)
             if author_vals:
-                return self.env["mail.guest"].create(author_vals)
+                return self.env["mail.guest"].sudo().create(author_vals)
 
         return False
 
