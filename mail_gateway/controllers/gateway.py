@@ -22,8 +22,10 @@ class GatewayController(Controller):
     @add_guest_to_context
     def post_update(self, usage, token, *args, **kwargs):
         if request.httprequest.method == "GET":
-            bot_data = request.env["mail.gateway"]._get_gateway(
-                token, gateway_type=usage, state="pending"
+            bot_data = (
+                request.env["mail.gateway"]
+                .sudo()
+                ._get_gateway(token, gateway_type=usage, state="pending")
             )
             if not bot_data:
                 return request.make_response(
@@ -38,8 +40,10 @@ class GatewayController(Controller):
                 .with_company(bot_data["company_id"])
                 ._receive_get_update(bot_data, request, **kwargs)
             )
-        bot_data = request.env["mail.gateway"]._get_gateway(
-            token, gateway_type=usage, state="integrated"
+        bot_data = (
+            request.env["mail.gateway"]
+            .sudo()
+            ._get_gateway(token, gateway_type=usage, state="integrated")
         )
         if not bot_data:
             _logger.warning(
@@ -78,7 +82,7 @@ class GatewayController(Controller):
             usage,
             json.dumps(jsonrequest),
         )
-        gateway = dispatcher.env["mail.gateway"].browse(bot_data["id"])
+        gateway = dispatcher.env["mail.gateway"].sudo().browse(bot_data["id"])
         dispatcher._receive_update(gateway, jsonrequest)
         return request.make_response(
             json.dumps({}),
