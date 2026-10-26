@@ -47,9 +47,9 @@ addon | version | maintainers | summary
 [mail_discuss_security](mail_discuss_security/) | 16.0.1.0.0 | <a href='https://github.com/legalsylvain'><img src='https://github.com/legalsylvain.png' width='32' height='32' style='border-radius:50%;' alt='legalsylvain'/></a> | Add a group to display 'Discuss' Application menu entry
 [mail_drop_target](mail_drop_target/) | 16.0.1.1.0 |  | Attach emails to Odoo by dragging them from your desktop
 [mail_edit](mail_edit/) | 16.0.1.0.0 |  | Edit, Delete or Move messages to any model
-[mail_gateway](mail_gateway/) | 16.0.1.3.4 |  | Set a gateway
-[mail_gateway_telegram](mail_gateway_telegram/) | 16.0.1.1.0 |  | Set a gateway for telegram
-[mail_gateway_whatsapp](mail_gateway_whatsapp/) | 16.0.1.1.3 |  | Set a gateway for whatsapp
+[mail_gateway](mail_gateway/) | 16.0.1.4.0 |  | Set a gateway
+[mail_gateway_telegram](mail_gateway_telegram/) | 16.0.1.2.0 |  | Set a gateway for telegram
+[mail_gateway_whatsapp](mail_gateway_whatsapp/) | 16.0.1.2.0 |  | Set a gateway for whatsapp
 [mail_improved_tracking_value](mail_improved_tracking_value/) | 16.0.1.0.0 |  | Improves tracking changed values for certain type of fields.Adds a user-friendly view to consult them.
 [mail_inline_css](mail_inline_css/) | 16.0.0.1.0 |  | Convert style tags in inline style in your mails
 [mail_layout_force](mail_layout_force/) | 16.0.2.0.0 | <a href='https://github.com/ivantodorovich'><img src='https://github.com/ivantodorovich.png' width='32' height='32' style='border-radius:50%;' alt='ivantodorovich'/></a> | Force a mail layout on selected email templates
