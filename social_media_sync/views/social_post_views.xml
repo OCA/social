@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- A post adds up what its publications carry, and the import of this
          module is what writes those counters, so the totals are drawn where
          the user reads a post only once this module is installed. Without it
@@ -44,13 +43,12 @@
                 <hr />
                 <span>Clicks: <t t-esc="record.count_post_clicks.raw_value" /></span>
                 <span>Interactions: <t
-                        t-esc="record.count_post_interactions.raw_value"
-                    /></span>
+                    t-esc="record.count_post_interactions.raw_value"
+                /></span>
                 <span>Engagement: <t
-                        t-esc="record.count_post_engagement.value"
-                    /></span>
+                    t-esc="record.count_post_engagement.value"
+                /></span>
             </xpath>
         </field>
     </record>
-
 </odoo>

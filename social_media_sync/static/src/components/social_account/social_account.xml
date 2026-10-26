@@ -40,15 +40,15 @@
                 >
                     <t t-if="state.accountsNeedingImport.length === 1">
                         The account <span
-                            class="fw-bold mx-1"
-                            t-esc="accountsNeedingImportLabel"
-                        /> has new publications. Press Update to import them.
+                        class="fw-bold mx-1"
+                        t-esc="accountsNeedingImportLabel"
+                    /> has new publications. Press Update to import them.
                     </t>
                     <t t-else="">
                         The accounts <span
-                            class="fw-bold mx-1"
-                            t-esc="accountsNeedingImportLabel"
-                        /> have new publications. Press Update to import them.
+                        class="fw-bold mx-1"
+                        t-esc="accountsNeedingImportLabel"
+                    /> have new publications. Press Update to import them.
                     </t>
                 </div>
             </div>

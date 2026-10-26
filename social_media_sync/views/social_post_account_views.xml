@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- The dialog of the statistics is drawn by ``social_media_base``, which
          reads the figures of the recent publications on its own. What this
          module adds are the views that go through the whole history —the list,
@@ -126,5 +125,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
