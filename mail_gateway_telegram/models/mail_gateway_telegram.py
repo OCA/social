@@ -199,7 +199,7 @@ class MailGatewayTelegramService(models.AbstractModel):
                 attachments.append(attachment_data)
         if len(body) > 0 or attachments:
             author = self._get_author(chat.gateway_id, update)
-            new_message = chat.message_post(
+            new_message = chat.sudo().message_post(
                 body=body,
                 author_id=author._name == "res.partner" and author.id,
                 gateway_type="telegram",
@@ -228,6 +228,7 @@ class MailGatewayTelegramService(models.AbstractModel):
                     new_related_message = (
                         self.env[related_message.gateway_message_id.model]
                         .browse(related_message.gateway_message_id.res_id)
+                        .sudo()
                         .message_post(
                             body=body,
                             author_id=author._name == "res.partner" and author.id,
@@ -348,11 +349,15 @@ class MailGatewayTelegramService(models.AbstractModel):
     def _get_author(self, gateway, update):
         author_id = update.message.from_user.id
         if author_id:
-            gateway_partner = self.env["res.partner.gateway.channel"].search(
-                [
-                    ("gateway_id", "=", gateway.id),
-                    ("gateway_token", "=", str(author_id)),
-                ]
+            gateway_partner = (
+                self.env["res.partner.gateway.channel"]
+                .sudo()
+                .search(
+                    [
+                        ("gateway_id", "=", gateway.id),
+                        ("gateway_token", "=", str(author_id)),
+                    ]
+                )
             )
             if gateway_partner:
                 return gateway_partner.partner_id
@@ -364,7 +369,11 @@ class MailGatewayTelegramService(models.AbstractModel):
             )
             if guest:
                 return guest
-            return self.env["mail.guest"].create(self._get_author_vals(gateway, update))
+            return (
+                self.env["mail.guest"]
+                .sudo()
+                .create(self._get_author_vals(gateway, update))
+            )
 
         return super()._get_author(gateway, update)
 
