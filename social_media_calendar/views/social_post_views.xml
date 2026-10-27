@@ -61,5 +61,4 @@
         <field name="view_id" ref="social_post_view_calendar" />
         <field name="act_window_id" ref="social_media_base.social_post_action" />
     </record>
-
 </odoo>
