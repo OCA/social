@@ -3,7 +3,7 @@
 {
     "name": "Social Media Calendar",
     "summary": "Calendar view of the posts, placed on their date and coloured by state",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",
