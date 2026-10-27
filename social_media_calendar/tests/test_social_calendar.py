@@ -7,12 +7,14 @@ from lxml import etree
 
 from odoo import fields
 from odoo.fields import Command
+from odoo.tests.common import tagged
 
 from odoo.addons.social_media_base.tests.test_social_common import (
     TestSocialMediaBaseCommon,
 )
 
 
+@tagged("post_install", "-at_install")
 class TestSocialMediaCalendar(TestSocialMediaBaseCommon):
     def test_compute_color(self):
         mapping = {
@@ -115,7 +117,7 @@ class TestSocialMediaCalendar(TestSocialMediaBaseCommon):
         action = self.env.ref("social_media_base.social_post_action")
         self.assertEqual(
             [mode for __, mode in action.views],
-            ["kanban", "calendar", "tree", "form"],
+            ["kanban", "calendar", "list", "form"],
             msg="The calendar must be offered right after the kanban, which "
             "stays the default view of the action.",
         )
@@ -127,7 +129,7 @@ class TestSocialMediaCalendar(TestSocialMediaBaseCommon):
         time that module is updated on its own.
         """
         action = self.env.ref("social_media_base.social_post_action")
-        action.view_mode = "kanban,tree,form"
+        action.view_mode = "kanban,list,form"
         self.assertIn(
             "calendar",
             [mode for __, mode in action.views],
