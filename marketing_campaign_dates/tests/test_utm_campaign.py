@@ -11,14 +11,17 @@ from odoo.tools.safe_eval import safe_eval
 
 
 class TestUtmCampaign(TransactionCase):
+    freeze_time = "2026-10-27 23:30:00"
+
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        cls.env = cls.env(context=dict(cls.env.context, tz="Europe/Brussels"))
         cls.campaign_model = cls.env["utm.campaign"]
         cls.search_view = cls.env.ref(
             "marketing_campaign_dates.utm_campaign_view_search_inherit"
         )
-        today = fields.Date.today()
+        today = fields.Date.context_today(cls.campaign_model)
 
         cls.campaign_no_dates = cls.campaign_model.create(
             {"name": "No dates"},
