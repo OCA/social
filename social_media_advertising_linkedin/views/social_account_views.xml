@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_account_view_form_inherit" model="ir.ui.view">
         <field name="name">social.account.view.form.inherit.advertising.linkedin</field>
         <field name="model">social.account</field>
@@ -19,11 +18,11 @@
                 >
                     LinkedIn did not grant this account the Advertising API
                     scopes (<field
-                        name="linkedin_missing_ads_scopes"
-                        class="oe_inline"
-                        readonly="1"
-                        nolabel="1"
-                    />), so the Ads API refuses its calls. Add the
+                    name="linkedin_missing_ads_scopes"
+                    class="oe_inline"
+                    readonly="1"
+                    nolabel="1"
+                />), so the Ads API refuses its calls. Add the
                     <b>Advertising API</b> product to the LinkedIn application,
                     then press <b>Update account</b> with <b>Update keys</b>
                     checked to authorize this account again: refreshing the

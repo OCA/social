@@ -234,16 +234,19 @@ class TestSocialPostAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
         """
         self.SocialPostAccountLinkedin.write({"state": "ready", "remote_ref": False})
         self._set_linkedin_campaign()
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "_filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-        ) as mock_linkedin_create_post:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "_filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+            ) as mock_linkedin_create_post,
+        ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             mock_linkedin_create_post.assert_not_called()
         self.assertEqual(self.SocialPostAccountLinkedin.state, "failed")
@@ -269,16 +272,19 @@ class TestSocialPostAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
                 ]
             }
         )
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "_filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-        ) as mock_linkedin_create_post:
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "_filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+            ) as mock_linkedin_create_post,
+        ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
             mock_linkedin_create_post.assert_not_called()
         self.assertEqual(self.SocialPostAccountLinkedin.state, "failed")
@@ -297,26 +303,31 @@ class TestSocialPostAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
                 "content": {"media": {"id": "urn:li:image:1"}},
             }
         ]
-        with patch.object(
-            type(self.SocialPostLinkedin),
-            "_filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountLinkedin,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_linkedin_create_post",
-            autospec=True,
-            return_value=(post_account_urn, {}),
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin.account_id),
-            "_get_posts",
-            autospec=True,
-            return_value=fake_response,
-        ), patch.object(
-            type(self.SocialPostAccountLinkedin),
-            "_action_campaign_post",
-            autospec=True,
-            side_effect=UserError("Creative error"),
+        with (
+            patch.object(
+                type(self.SocialPostLinkedin),
+                "_filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountLinkedin,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_linkedin_create_post",
+                autospec=True,
+                return_value=(post_account_urn, {}),
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin.account_id),
+                "_get_posts",
+                autospec=True,
+                return_value=fake_response,
+            ),
+            patch.object(
+                type(self.SocialPostAccountLinkedin),
+                "_action_campaign_post",
+                autospec=True,
+                side_effect=UserError("Creative error"),
+            ),
         ):
             self.SocialPostAccountLinkedin._action_post(self.SocialPostLinkedin)
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")

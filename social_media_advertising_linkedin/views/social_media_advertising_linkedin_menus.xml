@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <menuitem
         name="LinkedIn"
         id="social_advertising_linkedin_menu"
@@ -48,5 +47,4 @@
         sequence="10"
         groups="social_media_base.group_social_media_manager"
     />
-
 </odoo>
