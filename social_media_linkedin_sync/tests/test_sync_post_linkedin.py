@@ -119,14 +119,17 @@ class TestSocialSyncPostLinkedin(TestSocialSyncCommonLinkedin):
         videos_response.json.return_value = {
             "results": {"urn:li:video:new": {"downloadUrl": "https://fake-url/new"}}
         }
-        with patch.object(
-            type(self.SocialAccountLinkedin),
-            "_request_linkedin",
-            return_value=videos_response,
-        ) as mock_request_linkedin, patch(
-            "requests.get",
-            return_value=media_download_response(chunks=[b"fake video"]),
-        ) as mock_get:
+        with (
+            patch.object(
+                type(self.SocialAccountLinkedin),
+                "_request_linkedin",
+                return_value=videos_response,
+            ) as mock_request_linkedin,
+            patch(
+                "requests.get",
+                return_value=media_download_response(chunks=[b"fake video"]),
+            ) as mock_get,
+        ):
             videos, media_refs = self.SocialPostAccountLinkedin._get_video_assets_save(
                 {"media": {"id": "urn:li:video:new"}}
             )
@@ -150,9 +153,12 @@ class TestSocialSyncPostLinkedin(TestSocialSyncCommonLinkedin):
                 "media_refs": {str(stored.id): "urn:li:video:exists"},
             }
         )
-        with patch.object(
-            type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
-        ) as mock_download_url, patch("requests.get") as mock_get:
+        with (
+            patch.object(
+                type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
+            ) as mock_download_url,
+            patch("requests.get") as mock_get,
+        ):
             self.assertEqual(
                 self.SocialPostAccountLinkedin._get_video_assets_save(
                     {"media": {"id": "urn:li:video:exists"}}
@@ -183,9 +189,12 @@ class TestSocialSyncPostLinkedin(TestSocialSyncCommonLinkedin):
         self.env["ir.config_parameter"].sudo().set_param(
             "social_media_sync.download_videos", "False"
         )
-        with patch.object(
-            type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
-        ) as mock_download_url, patch("requests.get") as mock_get:
+        with (
+            patch.object(
+                type(self.SocialAccountLinkedin), "_get_linkedin_videos_download_url"
+            ) as mock_download_url,
+            patch("requests.get") as mock_get,
+        ):
             self.assertEqual(
                 self.SocialPostAccountLinkedin._get_video_assets_save(
                     {"media": {"id": "urn:li:video:new"}}
@@ -197,11 +206,14 @@ class TestSocialSyncPostLinkedin(TestSocialSyncCommonLinkedin):
 
     def test_get_video_assets_save_of_a_video_still_processing(self):
         """A video LinkedIn answers no URL for is not downloaded."""
-        with patch.object(
-            type(self.SocialAccountLinkedin),
-            "_get_linkedin_videos_download_url",
-            return_value={},
-        ), patch("requests.get") as mock_get:
+        with (
+            patch.object(
+                type(self.SocialAccountLinkedin),
+                "_get_linkedin_videos_download_url",
+                return_value={},
+            ),
+            patch("requests.get") as mock_get,
+        ):
             self.assertEqual(
                 self.SocialPostAccountLinkedin._get_video_assets_save(
                     {"media": {"id": "urn:li:video:processing"}}

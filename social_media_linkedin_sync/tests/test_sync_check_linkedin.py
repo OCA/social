@@ -138,9 +138,12 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         """An account with no mark yet gets one, and announces nothing."""
         self._isolate_linkedin_account()
         self.SocialAccountLinkedin.linkedin_statistics_checkpoint = False
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertEqual(
             self.SocialAccountLinkedin.linkedin_statistics_checkpoint,
@@ -174,11 +177,14 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
             msg="The move changed the stored form of a checkpoint.",
         )
         self.SocialAccountLinkedin.linkedin_statistics_checkpoint = stored
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[],
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[],
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertTrue(
             mock_get_posts.called,
@@ -198,9 +204,12 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self.SocialAccountLinkedin.linkedin_statistics_checkpoint = (
             '{"clickCount": 25, "likeCount": 12}'
         )
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertEqual(
             self.SocialAccountLinkedin.linkedin_statistics_checkpoint,
@@ -217,9 +226,12 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._mark_the_page_as_imported()
         mark = self.SocialAccountLinkedin.linkedin_statistics_checkpoint
         moved = {**RECENT_STATISTICS_LINKEDIN, _linkedin_day(1): (0, 2, 0, 0, 0)}
-        with self._patch_recent_statistics(moved), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(moved),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertTrue(self.SocialAccount._run_check_media_updates())
         self.assertTrue(self.SocialAccountLinkedin.posts_need_import)
         mock_get_posts.assert_not_called()
@@ -253,10 +265,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
         quiet = {**RECENT_STATISTICS_LINKEDIN, _linkedin_day(0): (0, 0, 0, 0, 0)}
-        with self._patch_recent_statistics(quiet), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+        with (
+            self._patch_recent_statistics(quiet),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)
@@ -270,10 +285,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
             for period, figures in RECENT_STATISTICS_LINKEDIN.items()
             if period != _linkedin_day(3)
         }
-        with self._patch_recent_statistics(slid), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+        with (
+            self._patch_recent_statistics(slid),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)
@@ -281,11 +299,14 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
     def test_run_check_media_updates_without_posts(self):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[],
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[],
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertTrue(mock_get_posts.called)
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)
@@ -294,10 +315,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         """Same figures and nothing new published: nothing to announce."""
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)
@@ -307,16 +331,19 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
         self.SocialPostAccountLinkedin.active = False
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[
-                {
-                    "id": self.SocialPostAccountLinkedin.with_context(
-                        active_test=False
-                    ).remote_ref
-                }
-            ],
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[
+                    {
+                        "id": self.SocialPostAccountLinkedin.with_context(
+                            active_test=False
+                        ).remote_ref
+                    }
+                ],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)
@@ -325,10 +352,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         """A publication posted outside Odoo moves no figure of its own."""
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": "urn:li:share:not-imported-yet"}],
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": "urn:li:share:not-imported-yet"}],
+            ),
         ):
             self.SocialAccount._run_check_media_updates()
         self.assertTrue(self.SocialAccountLinkedin.posts_need_import)
@@ -338,11 +368,16 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
         self.SocialAccountLinkedin.posts_need_import = True
-        with self._patch_recent_statistics() as mock_reader, patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_check_linkedin_updates"), autospec=True
-        ) as mock_check, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics() as mock_reader,
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_check_linkedin_updates"),
+                autospec=True,
+            ) as mock_check,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         mock_check.assert_not_called()
         mock_get_posts.assert_not_called()
@@ -359,9 +394,12 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._mark_the_page_as_imported()
         self.SocialAccountLinkedin.remote_ref = False
         self.assertFalse(self.SocialAccountLinkedin.linkedin_account_id)
-        with self._patch_recent_statistics() as mock_statistics, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics() as mock_statistics,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         mock_statistics.assert_not_called()
         mock_get_posts.assert_not_called()
@@ -430,11 +468,15 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
         Bus = self.env["bus.bus"]
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": "urn:li:share:not-imported-yet"}],
-        ), patch.object(type(Bus), "_sendone", autospec=True) as patch_sendone:
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": "urn:li:share:not-imported-yet"}],
+            ),
+            patch.object(type(Bus), "_sendone", autospec=True) as patch_sendone,
+        ):
             self.SocialAccount._run_check_media_updates()
         patch_sendone.assert_called_once()
         self.assertEqual(
@@ -446,10 +488,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         """The check compares what the sweep of the same pass already read."""
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
-        with self._patch_recent_statistics() as mock_reader, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+        with (
+            self._patch_recent_statistics() as mock_reader,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertEqual(
@@ -472,10 +517,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
                 }
             )
         self._mark_the_page_as_imported(accounts)
-        with self._patch_recent_statistics() as mock_reader, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[],
+        with (
+            self._patch_recent_statistics() as mock_reader,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertEqual(mock_reader.call_count, len(accounts))
@@ -485,11 +533,14 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         """An account whose reading failed is not asked twice to fail twice."""
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
-        with self._patch_recent_statistics(
-            side_effect=UserError(_("LinkedIn refused the page statistics"))
-        ) as mock_reader, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(
+                side_effect=UserError(_("LinkedIn refused the page statistics"))
+            ) as mock_reader,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertEqual(mock_reader.call_count, 1)
         mock_get_posts.assert_not_called()
@@ -510,12 +561,15 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         eighth_day = (
             fields.Date.today() - timedelta(days=_UPDATE_CHECK_DAYS_LINKEDIN)
         ).isoformat()
-        with self._patch_recent_statistics(
-            {**RECENT_STATISTICS_LINKEDIN, eighth_day: (7, 7, 7, 7, 77)}
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+        with (
+            self._patch_recent_statistics(
+                {**RECENT_STATISTICS_LINKEDIN, eighth_day: (7, 7, 7, 7, 77)}
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                return_value=[{"id": self.SocialPostAccountLinkedin.remote_ref}],
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)
@@ -578,11 +632,16 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._mark_the_page_as_imported()
         self.SocialAccountLinkedin.need_update = True
         moved = {**RECENT_STATISTICS_LINKEDIN, _linkedin_day(1): (0, 2, 0, 0, 0)}
-        with self._patch_recent_statistics(moved), patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_check_linkedin_updates"), autospec=True
-        ) as mock_check, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(moved),
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_check_linkedin_updates"),
+                autospec=True,
+            ) as mock_check,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         mock_check.assert_not_called()
         mock_get_posts.assert_not_called()
@@ -598,10 +657,13 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
     def test_run_check_media_updates_exception(self):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
-            autospec=True,
-            side_effect=Exception("Error Check Media Updates"),
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"),
+                autospec=True,
+                side_effect=Exception("Error Check Media Updates"),
+            ),
         ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         self.assertFalse(self.SocialAccountLinkedin.posts_need_import)

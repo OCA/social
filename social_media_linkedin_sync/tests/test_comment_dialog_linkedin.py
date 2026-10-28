@@ -74,15 +74,19 @@ class TestCommentDialogLinkedin(HttpCase, TestSocialSyncCommonLinkedin):
         # dispatcher of a call from the client refuses a method whose
         # ``_api_private`` is set, and a mock answers every attribute
         # (``odoo/service/model.py``).
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_refresh_statistics"),
-            return_value=False,
-        ), patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_update_posts_statistics"),
-            return_value=[],
-        ), patch(
-            PATCH_SYNC_POST_ACCOUNT_LINKEDIN.format("get_comments"),
-            lambda post_account: {"success": True, "data": CONVERSATION},
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_refresh_statistics"),
+                return_value=False,
+            ),
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_update_posts_statistics"),
+                return_value=[],
+            ),
+            patch(
+                PATCH_SYNC_POST_ACCOUNT_LINKEDIN.format("get_comments"),
+                lambda post_account: {"success": True, "data": CONVERSATION},
+            ),
         ):
             self.start_tour(
                 DASHBOARD_URL, "social_media_sync.comment_dialog", login="admin"

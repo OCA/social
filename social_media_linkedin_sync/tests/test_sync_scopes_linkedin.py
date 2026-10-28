@@ -83,9 +83,12 @@ class TestSocialSyncScopesLinkedin(TestSocialSyncCommonLinkedin):
         self._mark_the_page_as_imported()
         account.sudo().linkedin_granted_scopes = GRANTED_LINKEDIN
         before = self._messages_of(account)
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts:
+        with (
+            self._patch_recent_statistics(),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+        ):
             self.assertFalse(self.SocialAccount._run_check_media_updates())
         mock_get_posts.assert_not_called()
         message = self._messages_of(account) - before
@@ -106,8 +109,9 @@ class TestSocialSyncScopesLinkedin(TestSocialSyncCommonLinkedin):
         self._mark_the_page_as_imported()
         account.sudo().linkedin_granted_scopes = GRANTED_LINKEDIN
         account.posts_need_import = False
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+        with (
+            self._patch_recent_statistics(),
+            patch(PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True),
         ):
             self.SocialAccount._run_check_media_updates()
         self.assertFalse(account.posts_need_import)
@@ -118,8 +122,9 @@ class TestSocialSyncScopesLinkedin(TestSocialSyncCommonLinkedin):
         self._isolate_linkedin_account()
         self._mark_the_page_as_imported()
         account.sudo().linkedin_granted_scopes = GRANTED_LINKEDIN
-        with self._patch_recent_statistics(), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+        with (
+            self._patch_recent_statistics(),
+            patch(PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True),
         ):
             self.SocialAccount._run_check_media_updates()
             before = self._messages_of(account)
