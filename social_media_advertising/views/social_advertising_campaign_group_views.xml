@@ -6,9 +6,8 @@
         <field name="name">social.advertising.campaign.group.tree</field>
         <field name="model">social.advertising.campaign.group</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="name" />
-                <field name="stage_level" column_invisible="1" />
                 <field
                     name="stage_id"
                     widget="badge"
@@ -20,7 +19,7 @@
                 />
                 <field name="campaign_count" string="Campaigns" />
                 <field name="advertising_account_id" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -70,16 +69,10 @@
                             name="advertising_account_id"
                             invisible="not advertising_account_id"
                         />
-                        <field name="remote_ref" invisible="1" />
-                        <field name="web_url" invisible="1" />
                         <field name="active" invisible="1" />
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>

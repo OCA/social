@@ -37,7 +37,10 @@ class TestSocialStage(TestSocialAdvertisingCommon):
         """
         field = self.env["social.media"]._fields["media_type"]
         selection = [(value, value) for value in media_types.values()]
-        with patch.object(field, "selection", new=selection):
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
+        ):
             for record_name, media_type in media_types.items():
                 getattr(self, record_name).write({"media_type": media_type})
             yield

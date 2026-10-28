@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import AccessError, UserError
 
 from ..social_advertising_utils import _advertising_notification
@@ -169,7 +169,7 @@ class SocialAdvertisingAd(models.Model):
         """
         for ad in self:
             message = (ad.post_account_id.message or "").strip()
-            ad.name = message or _("Post not available")
+            ad.name = message or self.env._("Post not available")
 
     def _compute_can_delete_remote_ad(self):
         """Whether this ad can be deleted, answered by each connector.
@@ -194,7 +194,7 @@ class SocialAdvertisingAd(models.Model):
         self.ensure_one()
         if not self.account_id.can_manage_account:
             raise AccessError(
-                _(
+                self.env._(
                     "Only the responsible user of the account %(account)s and "
                     "the social media administrators may delete its ads.",
                     account=self.account_id.display_name,
@@ -208,7 +208,9 @@ class SocialAdvertisingAd(models.Model):
         :return: a notification describing what the social media did.
         :rtype: dict
         """
-        raise UserError(_("Deleting an ad is not available for this social media."))
+        raise UserError(
+            self.env._("Deleting an ad is not available for this social media.")
+        )
 
     def _register_remote_ad_gone(self):
         """Record that the social media does not answer these ads anymore.
@@ -233,7 +235,7 @@ class SocialAdvertisingAd(models.Model):
         self.ensure_one()
         if self.active:
             raise UserError(
-                _(
+                self.env._(
                     "Only an ad the social media no longer serves can be "
                     "deleted here. This one is still answered, so the next "
                     "synchronization would create it again."
@@ -288,7 +290,7 @@ class SocialAdvertisingAd(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Publication"),
+            "name": self.env._("Publication"),
             "res_model": "social.post.account",
             "res_id": self.post_account_id.id,
             "view_mode": "form",

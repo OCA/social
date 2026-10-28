@@ -1,7 +1,5 @@
-/** @odoo-module **/
-
-import {onWillStart, useState} from "@odoo/owl";
-import {useBus, useService} from "@web/core/utils/hooks";
+import {onWillStart, onWillUnmount, useState} from "@odoo/owl";
+import {useService} from "@web/core/utils/hooks";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
 
 export class SocialAdsKanbanController extends KanbanController {
@@ -14,13 +12,13 @@ export class SocialAdsKanbanController extends KanbanController {
         // makes `useService` fail on it.
         this.busService = this.env.services.bus_service;
         this.adsState = useState({syncing: false, needUpdate: false});
-        useBus(this.busService, "notification", ({detail: notifications}) => {
-            (notifications || []).forEach(({payload, type}) => {
-                if (type === "social_ads_need_update") {
-                    this.adsState.needUpdate = Boolean(payload?.need_update);
-                }
-            });
-        });
+        const onAdsNeedUpdate = (payload) => {
+            this.adsState.needUpdate = Boolean(payload?.need_update);
+        };
+        this.busService.subscribe("social_ads_need_update", onAdsNeedUpdate);
+        onWillUnmount(() =>
+            this.busService.unsubscribe("social_ads_need_update", onAdsNeedUpdate)
+        );
         // The bus only carries the notification of a running cron: the flag
         // it stored has to be read back, or the badge is lost on every reload.
         onWillStart(async () => {

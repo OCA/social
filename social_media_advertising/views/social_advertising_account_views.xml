@@ -6,7 +6,7 @@
         <field name="name">social.advertising.account.tree</field>
         <field name="model">social.advertising.account</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 create="0"
                 edit="0"
                 delete="0"
@@ -17,11 +17,10 @@
                 <field name="name" />
                 <field name="account_id" />
                 <field name="media_id" optional="hide" />
-                <field name="remote_ref" column_invisible="1" />
                 <field name="environment" />
                 <field name="currency_id" optional="show" />
                 <field name="last_sync_date" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -93,8 +92,6 @@
                         <group>
                             <field name="account_id" readonly="1" />
                             <field name="media_id" readonly="1" />
-                            <field name="remote_ref" invisible="1" />
-                            <field name="web_url" invisible="1" />
                             <field name="is_current" readonly="1" />
                         </group>
                         <group>

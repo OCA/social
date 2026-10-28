@@ -325,7 +325,7 @@ class TestSocialAdvertisingAd(TestSocialAdvertisingAdCommon):
             self.env["social.account"]._run_check_ads_updates()
         self.assertTrue(self.social_account_id.ads_need_update)
 
-    @mute_logger("odoo.addons.social_media_advertising.models.social_account")
+    @mute_logger("odoo.addons.social_media_base.models.social_account")
     def test_run_check_ads_updates_survives_a_failing_account(self):
         with (
             self._patch_connector(),

@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {SocialAdsKanbanController} from "./social_ads_kanban_controller.esm";
 import {kanbanView} from "@web/views/kanban/kanban_view";
 import {registry} from "@web/core/registry";

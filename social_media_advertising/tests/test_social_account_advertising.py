@@ -148,7 +148,11 @@ class TestSocialAccountAdvertising(TestSocialAdvertisingCommon):
 
     def test_remove_social_media_archives_campaigns(self):
         field = self.social_media_id._fields["media_type"]
-        with patch.object(field, "selection", new=[("other_social", "Other social")]):
+        selection = [("other_social", "Other social")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
+        ):
             self.social_media_id.write({"media_type": "other_social"})
             self.SocialAccount._remove_social_media("other_social")
         self.assertFalse(self.campaign_id.active)

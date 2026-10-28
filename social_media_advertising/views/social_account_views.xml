@@ -7,9 +7,6 @@
         <field name="model">social.account</field>
         <field name="inherit_id" ref="social_media_base.social_account_view_form" />
         <field name="arch" type="xml">
-            <xpath expr="//header" position="inside">
-                <field name="can_sync_advertising_accounts" invisible="1" />
-            </xpath>
             <xpath expr="//div[@name='button_box']" position="inside">
                 <button
                     type="object"
@@ -70,7 +67,7 @@
                         title="Ask the social media which advertising accounts this account may work with. It brings in no campaign and no ad: choose one of them afterwards to work with it."
                     />
                     <field name="advertising_account_ids" readonly="1" nolabel="1">
-                        <tree
+                        <list
                             create="0"
                             edit="0"
                             delete="0"
@@ -83,7 +80,6 @@
                                 readonly="1"
                             />
                             <field name="name" />
-                            <field name="remote_ref" column_invisible="1" />
                             <field name="environment" />
                             <field name="currency_id" optional="show" />
                             <field name="web_url" widget="url" optional="hide" />
@@ -96,7 +92,7 @@
                                 invisible="is_current"
                                 title="Work with this advertising account: its campaigns, its ads and their figures are the ones read from the social media."
                             />
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>

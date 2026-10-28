@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import AccessError, ValidationError
 
 from ..social_advertising_utils import ADVERTISING_ENVIRONMENTS
@@ -108,9 +108,9 @@ class SocialAdvertisingAccount(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Campaigns"),
+            "name": self.env._("Campaigns"),
             "res_model": "social.advertising.campaign",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("advertising_account_id", "=", self.id)],
             "context": {"default_advertising_account_id": self.id},
         }
@@ -120,9 +120,9 @@ class SocialAdvertisingAccount(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Campaign Groups"),
+            "name": self.env._("Campaign Groups"),
             "res_model": "social.advertising.campaign.group",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("advertising_account_id", "=", self.id)],
             "context": {"default_advertising_account_id": self.id},
         }
@@ -179,7 +179,7 @@ class SocialAdvertisingAccount(models.Model):
             account = advertising_account.account_id
             if advertising_account.environment != account.environment:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The advertising account %(advertising_account)s "
                         "belongs to the %(advertising_environment)s "
                         "environment, while the account %(account)s is set "
@@ -194,7 +194,7 @@ class SocialAdvertisingAccount(models.Model):
                 )
             if in_use.get(account, 0) > 1:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The account %(account)s can only work with one "
                         "advertising account at a time.",
                         account=account.display_name,
@@ -224,7 +224,7 @@ class SocialAdvertisingAccount(models.Model):
         self.ensure_one()
         if not self.account_id.can_manage_account:
             raise AccessError(
-                _(
+                self.env._(
                     "Only the responsible user of the account %(account)s and "
                     "the social media administrators may choose its "
                     "advertising account.",

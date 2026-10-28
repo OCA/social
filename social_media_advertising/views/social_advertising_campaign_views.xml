@@ -6,14 +6,12 @@
         <field name="name">social.advertising.campaign.tree</field>
         <field name="model">social.advertising.campaign</field>
         <field name="arch" type="xml">
-            <tree multi_edit="1">
-                <field name="allow_media_ids" column_invisible="1" />
+            <list multi_edit="1">
                 <field name="name" />
                 <field name="campaign_group_id" />
                 <field name="media_id" />
                 <field name="account_ids" widget="many2many_tags" />
                 <field name="user_id" widget="many2one_avatar_user" />
-                <field name="stage_level" column_invisible="1" />
                 <field
                     name="stage_id"
                     widget="badge"
@@ -25,7 +23,7 @@
                 />
                 <field name="tag_ids" widget="many2many_tags" />
                 <field name="advertising_account_id" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -61,7 +59,6 @@
                     </div>
                     <group>
                         <group name="social_media_general" string="General">
-                            <field name="allow_media_ids" invisible="1" />
                             <field
                                 name="media_id"
                                 options="{'no_create_edit': True, 'no_create': True}"
@@ -83,17 +80,11 @@
                                 name="advertising_account_id"
                                 invisible="not advertising_account_id"
                             />
-                            <field name="remote_ref" invisible="1" />
-                            <field name="web_url" invisible="1" />
                             <field name="active" invisible="1" />
                         </group>
                     </group>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>

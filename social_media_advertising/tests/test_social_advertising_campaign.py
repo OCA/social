@@ -28,7 +28,11 @@ class TestSocialAdvertisingCampaign(TestSocialAdvertisingCommon):
 
     def test_compute_display_name_with_media(self):
         field = self.env["social.media"]._fields["media_type"]
-        with patch.object(field, "selection", new=[("linkedin", "Linkedin")]):
+        selection = [("linkedin", "Linkedin")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
+        ):
             self.social_media_id.write({"media_type": "linkedin"})
             self.campaign_id.write({"media_id": self.social_media_id.id})
             self.campaign_id.invalidate_recordset()
@@ -37,7 +41,11 @@ class TestSocialAdvertisingCampaign(TestSocialAdvertisingCommon):
     def test_compute_display_name_without_name(self):
         """A campaign being created shows no media prefix on its own."""
         field = self.env["social.media"]._fields["media_type"]
-        with patch.object(field, "selection", new=[("linkedin", "Linkedin")]):
+        selection = [("linkedin", "Linkedin")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
+        ):
             self.social_media_id.write({"media_type": "linkedin"})
             campaign = self.SocialAdvertisingCampaign.new(
                 {"media_id": self.social_media_id.id}
@@ -67,7 +75,11 @@ class TestSocialAdvertisingCampaign(TestSocialAdvertisingCommon):
 
     def test_compute_allow_media_ids_with_connector(self):
         field = self.env["social.media"]._fields["media_type"]
-        with patch.object(field, "selection", new=[("linkedin", "Linkedin")]):
+        selection = [("linkedin", "Linkedin")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
+        ):
             self.social_media_id.write({"media_type": "linkedin"})
             with patch(
                 PATCH_ADVERTISING_CAMPAIGN.format("_available_campaign"),

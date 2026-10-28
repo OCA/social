@@ -4,7 +4,7 @@
 from unittest.mock import patch
 
 from odoo.exceptions import UserError
-from odoo.tests.common import Form
+from odoo.tests import Form
 
 from .test_social_advertising_common import TestSocialAdvertisingCommon
 
@@ -37,7 +37,11 @@ class TestSocialPostAdvertising(TestSocialAdvertisingCommon):
         installed: connectors AND their own clauses to the domain, so only
         the presence of the media clause is asserted, not the whole domain."""
         field = self.env["social.media"]._fields["media_type"]
-        with patch.object(field, "selection", new=[("faketype", "Fake type")]):
+        selection = [("faketype", "Fake type")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
+        ):
             self.social_media_id.write({"media_type": "faketype"})
             domain = self.social_post_id._get_allow_social_campaign_domain()
             self.assertIn(("media_id.media_type", "in", ["faketype"]), domain)
@@ -45,8 +49,10 @@ class TestSocialPostAdvertising(TestSocialAdvertisingCommon):
     def test_compute_allow_social_campaign_ids_matches_the_post_media(self):
         field = self.env["social.media"]._fields["media_type"]
         other_media = self.SocialMedia.create({"name": "Other media"})
-        with patch.object(
-            field, "selection", new=[("faketype", "Fake type"), ("otherfake", "Other")]
+        selection = [("faketype", "Fake type"), ("otherfake", "Other")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
         ):
             self.social_media_id.write({"media_type": "faketype"})
             other_media.write({"media_type": "otherfake"})
@@ -62,8 +68,10 @@ class TestSocialPostAdvertising(TestSocialAdvertisingCommon):
     def test_allow_social_campaign_ids_recomputes_on_account_change(self):
         field = self.env["social.media"]._fields["media_type"]
         other_media = self.SocialMedia.create({"name": "Other media"})
-        with patch.object(
-            field, "selection", new=[("faketype", "Fake type"), ("otherfake", "Other")]
+        selection = [("faketype", "Fake type"), ("otherfake", "Other")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
         ):
             self.social_media_id.write({"media_type": "faketype"})
             other_media.write({"media_type": "otherfake"})
@@ -80,8 +88,10 @@ class TestSocialPostAdvertising(TestSocialAdvertisingCommon):
         """A campaign the post no longer accepts is dropped in the form."""
         field = self.env["social.media"]._fields["media_type"]
         other_media = self.SocialMedia.create({"name": "Other media"})
-        with patch.object(
-            field, "selection", new=[("faketype", "Fake type"), ("otherfake", "Other")]
+        selection = [("faketype", "Fake type"), ("otherfake", "Other")]
+        with (
+            patch.object(field, "selection", new=selection),
+            patch.object(field, "_selection", new=dict(selection)),
         ):
             self.social_media_id.write({"media_type": "faketype"})
             other_media.write({"media_type": "otherfake"})

@@ -6,7 +6,7 @@
         <field name="name">social.stage.tree</field>
         <field name="model">social.stage</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="sequence" widget="handle" />
                 <field name="media_id" />
                 <field name="applies_to" />
@@ -14,7 +14,7 @@
                 <field name="code" />
                 <field name="level" />
                 <field name="fold" optional="hide" />
-            </tree>
+            </list>
         </field>
     </record>
 
