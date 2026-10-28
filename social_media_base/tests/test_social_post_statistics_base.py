@@ -151,7 +151,6 @@ class TestSocialPostStatisticsBase(TestSocialMediaBaseCommon):
         cron = self.env.ref("social_media_base.refresh_post_statistics_job")
         self.assertEqual(cron.interval_number, 1)
         self.assertEqual(cron.interval_type, "days")
-        self.assertEqual(cron.numbercall, -1)
         self.assertTrue(cron.active)
         self.assertEqual(cron.model_id.model, "social.account")
 

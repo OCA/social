@@ -31,7 +31,7 @@ class SocialAccountStatistics(models.Model):
     engagement = fields.Float(
         default=0,
         digits=(16, 4),
-        group_operator="avg",
+        aggregator="avg",
         help="Engagement rate as the social media reports it. It is a ratio, "
         "so periods are averaged instead of added up.",
     )

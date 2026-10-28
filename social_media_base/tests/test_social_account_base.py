@@ -6,7 +6,7 @@ from unittest.mock import patch
 
 from freezegun import freeze_time
 
-from odoo import _, fields
+from odoo import fields
 from odoo.exceptions import AccessError, UserError
 from odoo.fields import Command
 from odoo.tests.common import tagged
@@ -129,9 +129,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         self.assertEqual(shared_post.account_ids, other_account)
 
     def test_remove_social_media(self):
-        field = self.social_media_id._fields["media_type"]
-        with patch.object(field, "selection", new=[("other_social", "Other social")]):
-            self.social_media_id.write({"media_type": "other_social"})
+        with self._fake_media_types(other_social=self.social_media_id):
             self.social_account_id.write(
                 {
                     "remote_ref": "remote-account-1",
@@ -148,9 +146,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         self.assertEqual(self.social_account_id.remote_ref, "remote-account-1")
 
     def test_remove_social_media_other_media_untouched(self):
-        field = self.social_media_id._fields["media_type"]
-        with patch.object(field, "selection", new=[("other_social", "Other social")]):
-            self.social_media_id.write({"media_type": "other_social"})
+        with self._fake_media_types(other_social=self.social_media_id):
             self.social_account_id.write({"access_token": "token"})
             self.SocialAccount._remove_social_media("not_this_media")
         self.assertTrue(self.social_account_id.active)
@@ -249,7 +245,6 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         fake_fields = {
             "other_social": "https://www.failed.com/company/id1234account/admin"
         }
-        field = self.social_media_id._fields["media_type"]
         with (
             patch.object(
                 type(self.social_account_id),
@@ -257,13 +252,8 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 autospec=True,
                 return_value=fake_fields,
             ),
-            patch.object(
-                field,
-                "selection",
-                new=[("other_social", "Other social")],
-            ),
+            self._fake_media_types(other_social=self.social_media_id),
         ):
-            self.social_media_id.write({"media_type": "other_social"})
             self.assertEqual(
                 self.social_account_id.web_url,
                 "https://www.failed.com/company/id1234account/admin",
@@ -509,7 +499,7 @@ class TestSocialAccountBaseCredentials(TestSocialMediaBaseCommon):
     @mute_logger(LOGGER_ACCOUNT)
     def test_run_check_media_updates_flags_the_account_it_cannot_renew(self):
         self._run_check_media_updates_failing_on_the_account(
-            SocialCredentialsError(_("The token was revoked"))
+            SocialCredentialsError(self.env._("The token was revoked"))
         )
         self.assertTrue(self.social_account_id.need_update)
         self.assertTrue(

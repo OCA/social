@@ -7,10 +7,11 @@ from contextlib import contextmanager
 
 import psycopg2
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
-from odoo.tools import TEXT_URL_REGEX, plaintext2html
+from odoo.tools import plaintext2html
+from odoo.tools.mail import TEXT_URL_REGEX
 
 from ..exceptions import SocialCredentialsError
 
@@ -212,7 +213,7 @@ class SocialPostAccount(models.Model):
         for post_account in self.filtered("post_id"):
             if post_account.campaign_id != post_account.post_id.campaign_id:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The campaign of a publication is the one of its "
                         "post. Change the campaign on %(post)s instead.",
                         post=post_account.post_id.display_name,
@@ -259,7 +260,7 @@ class SocialPostAccount(models.Model):
             }
             if dangling:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "%(publication)s references medias it does not have: "
                         "%(medias)s.",
                         publication=post_account.display_name,
@@ -268,7 +269,7 @@ class SocialPostAccount(models.Model):
                 )
             if len(set(refs.values())) != len(refs):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "%(publication)s has the same media stored twice.",
                         publication=post_account.display_name,
                     )
@@ -338,12 +339,12 @@ class SocialPostAccount(models.Model):
         if len(content) >= 24:
             content = f"{content[:20]}..."
         if not content:
-            return _(
+            return self.env._(
                 "[%(media)s] %(account)s",
                 media=self.media_id.name,
                 account=self.account_id.name,
             )
-        return _(
+        return self.env._(
             "[%(media)s] %(account)s - %(content)s",
             media=self.media_id.name,
             account=self.account_id.name,
@@ -628,9 +629,11 @@ class SocialPostAccount(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Post deleted [%(account)s]", account=self.account_id.name),
+                "title": self.env._(
+                    "Post deleted [%(account)s]", account=self.account_id.name
+                ),
                 "type": "danger",
-                "message": _(
+                "message": self.env._(
                     "The post was deleted on the social media, but its Odoo "
                     "record could not be removed: %(error)s",
                     error=str(error),
@@ -757,9 +760,11 @@ class SocialPostAccount(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Post deleted [%(account)s]", account=self.account_id.name),
+                "title": self.env._(
+                    "Post deleted [%(account)s]", account=self.account_id.name
+                ),
                 "type": "warning",
-                "message": _("The post does not exist or has been deleted."),
+                "message": self.env._("The post does not exist or has been deleted."),
                 "next": {"type": "ir.actions.client", "tag": "reload"},
             },
         }
@@ -784,9 +789,11 @@ class SocialPostAccount(models.Model):
             "type": "ir.actions.client",
             "tag": "display_notification",
             "params": {
-                "title": _("Post deleted [%(account)s]", account=account_id.name),
+                "title": self.env._(
+                    "Post deleted [%(account)s]", account=account_id.name
+                ),
                 "type": "success",
-                "message": _("The post was successfully deleted."),
+                "message": self.env._("The post was successfully deleted."),
                 "next": {"type": "ir.actions.client", "tag": "reload"},
             },
         }
@@ -807,7 +814,7 @@ class SocialPostAccount(models.Model):
         )
         return {
             "type": "ir.actions.act_window",
-            "name": _("Statistics"),
+            "name": self.env._("Statistics"),
             "res_model": self._name,
             "res_id": self.id,
             "view_mode": "form",

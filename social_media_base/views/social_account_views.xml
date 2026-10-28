@@ -8,7 +8,6 @@
         <field name="arch" type="xml">
             <form create="0" delete="0">
                 <header>
-                    <field name="can_manage_account" invisible="1" />
                     <!-- ``active`` is what enables the Archive and Unarchive
                          entries of the Actions menu, which is where they live:
                          a header button for them would only repeat what the
@@ -94,8 +93,6 @@
                         <group>
                             <field name="username" readonly="1" />
                             <field name="media_id" readonly="1" />
-                            <field name="web_url" invisible="1" />
-                            <field name="media_type" invisible="1" />
                         </group>
                         <group>
                             <field
@@ -118,11 +115,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -131,13 +124,13 @@
         <field name="name">social.account.tree</field>
         <field name="model">social.account</field>
         <field name="arch" type="xml">
-            <tree create="0" edit="0" delete="0">
+            <list create="0" edit="0" delete="0">
                 <field name="name" />
                 <field name="username" />
                 <field name="media_id" />
                 <field name="user_id" />
                 <field name="create_date" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -179,8 +172,9 @@
 
     <record id="social_account_action" model="ir.actions.act_window">
         <field name="name">Accounts</field>
+        <field name="path">social-accounts</field>
         <field name="res_model">social.account</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="search_view_id" ref="social_account_view_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

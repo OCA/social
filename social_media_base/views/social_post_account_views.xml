@@ -32,7 +32,7 @@
                 <field name="remote_ref" />
                 <field name="account_remote_ref" />
                 <templates>
-                    <t t-name="kanban-menu">
+                    <t t-name="menu">
                         <div class="p-1">
                             <a
                                 role="menuitem"
@@ -49,50 +49,44 @@
                             >Delete post</a>
                         </div>
                     </t>
-                    <t t-name="kanban-box">
-                        <div
-                            t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
-                        >
-                            <t t-call="social_media_base.postAccountHeader" />
-                            <div
-                                t-if="record.state.raw_value == 'deleted'"
-                                class="pt-1"
+                    <t
+                        t-name="card"
+                        class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                    >
+                        <t t-call="social_media_base.postAccountHeader" />
+                        <div t-if="record.state.raw_value == 'deleted'" class="pt-1">
+                            <span
+                                class="badge text-bg-danger"
+                                title="This publication no longer exists on the social media"
                             >
-                                <span
-                                    class="badge text-bg-danger"
-                                    title="This publication no longer exists on the social media"
-                                >
-                                    <i class="fa fa-trash-o" aria-hidden="true" />
-                                    Deleted on <t t-out="record.media_type.value" />
-                                </span>
-                            </div>
+                                <i class="fa fa-trash-o" aria-hidden="true" />
+                                Deleted on <t t-out="record.media_type.value" />
+                            </span>
+                        </div>
 
-                            <div class="oe_kanban_content">
-                                <t
-                                    t-set="images"
-                                    t-value="JSON.parse(record.image_urls.raw_value)"
-                                />
-                                <t
-                                    t-call="social_media_base.postAccountMessageImages"
-                                />
-                                <t
-                                    t-set="videos"
-                                    t-value="JSON.parse(record.video_urls.raw_value)"
-                                />
-                                <div
-                                    t-if="videos.length or record.has_video.raw_value"
-                                    class="d-flex align-items-center gap-2 pt-2"
-                                >
-                                    <i class="fa fa-video-camera" aria-hidden="true" />
-                                    <span t-if="videos.length">Video (<t
-                                        t-esc="videos.length"
-                                    />)</span>
-                                    <span t-else="">Video</span>
-                                </div>
+                        <div class="oe_kanban_content">
+                            <t
+                                t-set="images"
+                                t-value="JSON.parse(record.image_urls.raw_value)"
+                            />
+                            <t t-call="social_media_base.postAccountMessageImages" />
+                            <t
+                                t-set="videos"
+                                t-value="JSON.parse(record.video_urls.raw_value)"
+                            />
+                            <div
+                                t-if="videos.length or record.has_video.raw_value"
+                                class="d-flex align-items-center gap-2 pt-2"
+                            >
+                                <i class="fa fa-video-camera" aria-hidden="true" />
+                                <span t-if="videos.length">Video (<t
+                                    t-esc="videos.length"
+                                />)</span>
+                                <span t-else="">Video</span>
                             </div>
-                            <div class="oe_kanban_footer">
-                                <t t-call="social_media_base.postAccountFooter" />
-                            </div>
+                        </div>
+                        <div class="oe_kanban_footer">
+                            <t t-call="social_media_base.postAccountFooter" />
                         </div>
                     </t>
                 </templates>
@@ -107,7 +101,7 @@
             <!-- A publication mirrors the social media, like the kanban of
                  the dashboard it shares its action with: it is listed, never
                  written from here. -->
-            <tree
+            <list
                 create="0"
                 edit="0"
                 delete="0"
@@ -132,7 +126,7 @@
                     optional="show"
                 />
                 <field name="state" widget="badge" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -165,7 +159,6 @@
                     </div>
                     <group>
                         <group>
-                            <field name="post_account_url" invisible="1" />
                             <field name="account_id" />
                             <field name="media_id" />
                             <field name="post_id" />
@@ -178,7 +171,6 @@
                             <field name="state" widget="badge" />
                             <field name="published_date" />
                             <field name="is_scheduled" />
-                            <field name="remote_ref" invisible="1" />
                         </group>
                     </group>
                     <group string="Message">
@@ -196,11 +188,14 @@
                             colspan="2"
                             class="o_social_gallery"
                         >
-                            <kanban create="0" delete="0">
+                            <kanban create="0" delete="0" can_open="0">
                                 <field name="id" />
                                 <templates>
-                                    <t t-name="kanban-box">
-                                        <div class="border-0">
+                                    <t t-name="card" class="border-0">
+                                        <!-- The card lays its children out
+                                             in a flex column, which stretches
+                                             an image to its whole width. -->
+                                        <div>
                                             <img
                                                 t-attf-src="/web/image/#{record.id.raw_value}"
                                                 class="img-fluid rounded"
@@ -213,7 +208,6 @@
                         </field>
                     </group>
                     <group string="Videos" invisible="not video_ids and not has_video">
-                        <field name="has_video" invisible="1" />
                         <!-- A publication imported from the social media carries
                              the flag, and the video itself only arrives as
                              video_ids when the module that imports it downloads
@@ -235,24 +229,22 @@
                             class="o_social_gallery"
                             invisible="not video_ids"
                         >
-                            <kanban create="0" delete="0">
+                            <kanban create="0" delete="0" can_open="0">
                                 <field name="id" />
                                 <field name="mimetype" />
                                 <field name="checksum" />
                                 <templates>
-                                    <t t-name="kanban-box">
-                                        <div class="border-0">
-                                            <video
-                                                controls="controls"
-                                                preload="metadata"
-                                                class="img-fluid rounded"
-                                            >
-                                                <source
-                                                    t-attf-src="/web/content/#{record.id.raw_value}?unique=#{record.checksum.raw_value}"
-                                                    t-att-type="record.mimetype.raw_value"
-                                                />
-                                            </video>
-                                        </div>
+                                    <t t-name="card" class="border-0">
+                                        <video
+                                            controls="controls"
+                                            preload="metadata"
+                                            class="img-fluid rounded"
+                                        >
+                                            <source
+                                                t-attf-src="/web/content/#{record.id.raw_value}?unique=#{record.checksum.raw_value}"
+                                                t-att-type="record.mimetype.raw_value"
+                                            />
+                                        </video>
                                     </t>
                                 </templates>
                             </kanban>
@@ -438,8 +430,9 @@
 
     <record id="social_post_account_action" model="ir.actions.act_window">
         <field name="name">Dashboard</field>
+        <field name="path">social-dashboard</field>
         <field name="res_model">social.post.account</field>
-        <field name="view_mode">kanban,tree</field>
+        <field name="view_mode">kanban,list</field>
         <field name="domain">[('remote_ref', '!=', False)]</field>
         <field name="context">{'search_default_group_by_account_id': 1}</field>
         <field name="search_view_id" ref="social_post_account_view_search" />

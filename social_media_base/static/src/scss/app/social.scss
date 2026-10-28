@@ -11,8 +11,8 @@ div.post-preview {
     overflow-wrap: anywhere;
 }
 
-div.o_kanban_record {
-    &:has(div.oe_kanban_social_dashboard) {
+.o_kanban_record {
+    &.oe_kanban_social_dashboard {
         @include media-breakpoint-down(sm) {
             margin-bottom: 10px !important;
         }
@@ -60,7 +60,7 @@ img.img-posts {
     @include social-images-row;
 }
 
-div.oe_kanban_social_dashboard {
+.oe_kanban_social_dashboard {
     span.social-like-post {
         border: none;
         font-size: 16px;

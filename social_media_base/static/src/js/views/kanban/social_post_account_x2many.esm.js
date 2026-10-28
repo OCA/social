@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {X2ManyField, x2ManyField} from "@web/views/fields/x2many/x2many_field";
 import {KanbanRecord} from "@web/views/kanban/kanban_record";
 import {KanbanRenderer} from "@web/views/kanban/kanban_renderer";

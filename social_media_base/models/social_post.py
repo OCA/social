@@ -4,7 +4,7 @@
 import logging
 from datetime import timedelta
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import format_datetime
 
@@ -216,7 +216,7 @@ class SocialPost(models.Model):
         )
         if online:
             raise UserError(
-                _(
+                self.env._(
                     "The post %(posts)s cannot be deleted because it is still "
                     "published on %(accounts)s. Delete the publication from "
                     "the dashboard, which removes it from the social media "
@@ -255,7 +255,7 @@ class SocialPost(models.Model):
         locked = self.filtered("content_locked")
         if locked:
             raise UserError(
-                _(
+                self.env._(
                     "%(posts)s cannot be modified because it is already "
                     "published on %(accounts)s. Create a new post instead.",
                     posts=", ".join(locked.mapped("display_name")),
@@ -300,7 +300,7 @@ class SocialPost(models.Model):
                 and post.send_post_date < now
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The schedule date of %(post)s (%(date)s) is already "
                         "past. Choose a date in the future to plan the post.",
                         post=post.display_name,
@@ -323,7 +323,7 @@ class SocialPost(models.Model):
             for attachment in post.image_ids:
                 if not (attachment.mimetype or "").startswith("image/"):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "%(name)s (%(mimetype)s) is not an image and cannot "
                             "be added to the images of the post.",
                             name=attachment.name,
@@ -333,7 +333,7 @@ class SocialPost(models.Model):
             for attachment in post.video_ids:
                 if not (attachment.mimetype or "").startswith("video/"):
                     raise ValidationError(
-                        _(
+                        self.env._(
                             "%(name)s (%(mimetype)s) is not a video and cannot "
                             "be added to the videos of the post.",
                             name=attachment.name,
@@ -469,7 +469,7 @@ class SocialPost(models.Model):
     @api.depends("account_ids.media_id")
     def _compute_display_name(self):
         for post in self:
-            post.display_name = _(
+            post.display_name = self.env._(
                 "Post on %(posts)s",
                 posts=", ".join(post.account_ids.mapped("media_id.name")),
             )
@@ -561,7 +561,7 @@ class SocialPost(models.Model):
         for post in self:
             if post.state in ("publishing", "partially_published", "published"):
                 raise UserError(
-                    _(
+                    self.env._(
                         "%(post)s: cannot be cancelled because it "
                         "is published or in the process of being published.",
                         post=post.display_name,
@@ -629,7 +629,9 @@ class SocialPost(models.Model):
                     "social_media_base.social_media_post_preview",
                     values,
                 )
-        return render_template if render_template else _("No preview available")
+        return (
+            render_template if render_template else self.env._("No preview available")
+        )
 
     @api.depends("account_ids.media_id", "message", "image_ids", "video_ids")
     def _compute_post_preview(self):
@@ -763,7 +765,7 @@ class SocialPost(models.Model):
         for post in self:
             if not post.account_ids:
                 raise UserError(
-                    _(
+                    self.env._(
                         "%(post)s has no active account: restore the account "
                         "before publishing it.",
                         post=post.display_name,
@@ -827,7 +829,7 @@ class SocialPost(models.Model):
             return
         partners = failed_lines.account_id.user_id.partner_id
         self.message_post(
-            body=_(
+            body=self.env._(
                 "The post was published on %(published)s but failed on "
                 "%(failed)s. It is not sent again automatically: solve the "
                 "problem and press Post to retry the accounts that failed.",
@@ -843,7 +845,7 @@ class SocialPost(models.Model):
 
     def _message_error_post(self, message, media_type):
         self.message_post(
-            body=_(
+            body=self.env._(
                 "Error posting on [%(media)s]: %(error)s",
                 media=media_type,
                 error=message,
@@ -863,13 +865,13 @@ class SocialPost(models.Model):
         try:
             if back_to_draft:
                 self.write({"state": "draft"})
-                body = _(
+                body = self.env._(
                     "The scheduled publication failed and the post was set "
                     "back to draft: %(error)s",
                     error=str(error),
                 )
             else:
-                body = _(
+                body = self.env._(
                     "The scheduled publication failed, the post stays planned "
                     "and will be retried: %(error)s",
                     error=str(error),
@@ -904,7 +906,7 @@ class SocialPost(models.Model):
         overdue.write({"state": "draft"})
         for post in overdue:
             post.message_post(
-                body=_(
+                body=self.env._(
                     "The post was set back to draft: its scheduled date "
                     "(%(date)s) had already passed when it was unarchived. "
                     "Reschedule it to publish it.",

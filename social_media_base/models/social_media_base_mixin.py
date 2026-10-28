@@ -3,7 +3,7 @@
 
 from markupsafe import Markup, escape
 
-from odoo import _, models
+from odoo import models
 from odoo.http import request
 
 
@@ -126,7 +126,7 @@ class SocialMediaBaseMixin(models.AbstractModel):
         """
         self._notify_user_session(
             self._format_user_notification(
-                _(
+                self.env._(
                     "The account could not be associated. "
                     "Check the server log for details."
                 ),
@@ -192,7 +192,7 @@ class SocialMediaBaseMixin(models.AbstractModel):
             # every other message otherwise.
             message = Markup("<b>ERROR:</b> %s") % message
         return Markup(
-            _(
+            self.env._(
                 "Social Media %(social_media)s <b> "
                 "[%(account)s] </b> <br><br> %(message)s"
             )
