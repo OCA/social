@@ -30,14 +30,17 @@ class TestSocialController(HttpCase, TestSocialCommonLinkedin):
 
     def test_callback_with_access_token_still_requires_exchange(self):
         token = "ACCESS_TOKEN"
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
-            autospec=True,
-            return_value=("CID", "CSEC", "EXCHANGED_TOKEN"),
-        ) as mocked_exchange, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
-            autospec=True,
-        ) as mocked_create:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
+                autospec=True,
+                return_value=("CID", "CSEC", "EXCHANGED_TOKEN"),
+            ) as mocked_exchange,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
+                autospec=True,
+            ) as mocked_create,
+        ):
             resp = self.url_open(f"/linkedin/callback?access_token={token}")
             mocked_exchange.assert_called_once()
             mocked_create.assert_called_once()
@@ -53,14 +56,17 @@ class TestSocialController(HttpCase, TestSocialCommonLinkedin):
         client_id = "CID"
         client_secret = "CSEC"
         token = "NEW_TOKEN"
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
-            autospec=True,
-            return_value=(client_id, client_secret, token),
-        ) as mocked_exchange, patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
-            autospec=True,
-        ) as mocked_create:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
+                autospec=True,
+                return_value=(client_id, client_secret, token),
+            ) as mocked_exchange,
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
+                autospec=True,
+            ) as mocked_create,
+        ):
             resp = self.url_open(f"/linkedin/callback?code={code}")
             mocked_exchange.assert_called_once()
             mocked_create.assert_called_once()
@@ -74,13 +80,16 @@ class TestSocialController(HttpCase, TestSocialCommonLinkedin):
     def test_callback_success_lands_on_the_dashboard(self):
         """The account is linked and its figures refreshed right after the
         association, so the user has to land where the card is shown."""
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
-            autospec=True,
-            return_value=("CID", "CSEC", "TOKEN"),
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
-            autospec=True,
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
+                autospec=True,
+                return_value=("CID", "CSEC", "TOKEN"),
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
+                autospec=True,
+            ),
         ):
             resp = self.url_open("/linkedin/callback?code=ANY", allow_redirects=False)
 
@@ -92,17 +101,21 @@ class TestSocialController(HttpCase, TestSocialCommonLinkedin):
 
     def test_callback_success_notifies_user(self):
         """The association answers a redirect, so it reports through the session."""
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
-            autospec=True,
-            return_value=("CID", "CSEC", "TOKEN"),
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
-            autospec=True,
-        ), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
-            autospec=True,
-        ) as mocked_notify:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
+                autospec=True,
+                return_value=("CID", "CSEC", "TOKEN"),
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_create_account_linkedin"),
+                autospec=True,
+            ),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
+                autospec=True,
+            ) as mocked_notify,
+        ):
             resp = self.url_open("/linkedin/callback?code=ANY")
 
         mocked_notify.assert_called_once()
@@ -115,17 +128,21 @@ class TestSocialController(HttpCase, TestSocialCommonLinkedin):
     def test_callback_user_error_reaches_the_user(self):
         """A UserError explains what to fix, so it must not be hidden."""
         message = "The account Binhex belongs to another company."
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
-            autospec=True,
-            side_effect=UserError(message),
-        ), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
-            autospec=True,
-        ) as mocked_notify, patch(
-            "odoo.addons.social_media_linkedin.controllers.social_media_linkedin._logger",
-            autospec=True,
-        ) as mocked_logger:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
+                autospec=True,
+                side_effect=UserError(message),
+            ),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
+                autospec=True,
+            ) as mocked_notify,
+            patch(
+                "odoo.addons.social_media_linkedin.controllers.social_media_linkedin._logger",
+                autospec=True,
+            ) as mocked_logger,
+        ):
             resp = self.url_open("/linkedin/callback?code=ANY")
 
             mocked_notify.assert_called_once()
@@ -138,17 +155,21 @@ class TestSocialController(HttpCase, TestSocialCommonLinkedin):
             self.assertIn("/web", resp.url)
 
     def test_callback_exception_notifies_user_and_redirects(self):
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
-            autospec=True,
-            side_effect=Exception("boom"),
-        ), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
-            autospec=True,
-        ) as mocked_notify, patch(
-            "odoo.addons.social_media_linkedin.controllers.social_media_linkedin._logger",
-            autospec=True,
-        ) as mocked_logger:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_access_token_linkedin"),
+                autospec=True,
+                side_effect=Exception("boom"),
+            ),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
+                autospec=True,
+            ) as mocked_notify,
+            patch(
+                "odoo.addons.social_media_linkedin.controllers.social_media_linkedin._logger",
+                autospec=True,
+            ) as mocked_logger,
+        ):
             resp = self.url_open("/linkedin/callback?code=ANY")
 
             mocked_notify.assert_called_once()

@@ -112,9 +112,10 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
             ),
         )
         mock_response = self.generate_magic_mock(**{"status_code": 201})
-        with patch_upload_url, self.get_patch_exceptions_linkedin(
-            mock_response
-        ) as mock_request:
+        with (
+            patch_upload_url,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             images = self.SocialAccountLinkedin._linkedin_prepare_images_for_post(
                 image_ids=[self.image_mock]
             )
@@ -287,9 +288,10 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         patch_request = self.get_patch_exceptions_linkedin(
             side_effect=[processing, available]
         )
-        with patch_request as mock_request, patch(
-            f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep"
-        ) as mock_sleep:
+        with (
+            patch_request as mock_request,
+            patch(f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep") as mock_sleep,
+        ):
             self.assertTrue(
                 self.SocialAccountLinkedin._linkedin_wait_video_available(
                     self.media_video.format("VID123")
@@ -327,8 +329,9 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         processing = self.generate_magic_mock(
             **{"status_code": 200, "json_return_value": {"status": "PROCESSING"}}
         )
-        with self.get_patch_exceptions_linkedin(processing) as mock_request, patch(
-            f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep"
+        with (
+            self.get_patch_exceptions_linkedin(processing) as mock_request,
+            patch(f"{LOGGER_ACCOUNT_LINKEDIN}.time.sleep"),
         ):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_wait_video_available(
@@ -440,9 +443,11 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         patch_images, patch_videos = self._patch_media_uploads(image_urns, video_urns)
         mock_response = self.generate_magic_mock(**{"status_code": 201})
         mock_response.headers = {"x-restli-id": "urn:li:share:1"}
-        with patch_images, patch_videos, self.get_patch_exceptions_linkedin(
-            mock_response
-        ) as mock_request:
+        with (
+            patch_images,
+            patch_videos,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             post_urn, media_refs = self.SocialAccountLinkedin._linkedin_create_post(
                 message="Hello", image_ids=[], video_ids=[]
             )
@@ -489,9 +494,11 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         )
         mock_response = self.generate_magic_mock(**{"status_code": 201})
         mock_response.headers = {"x-restli-id": "urn:li:ugcPost:1"}
-        with patch_images as mock_images, patch_videos, (
-            self.get_patch_exceptions_linkedin(mock_response)
-        ) as mock_request:
+        with (
+            patch_images as mock_images,
+            patch_videos,
+            self.get_patch_exceptions_linkedin(mock_response) as mock_request,
+        ):
             (
                 _post_urn,
                 media_refs,
@@ -512,8 +519,10 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
     def test_linkedin_create_post_error(self):
         patch_images, patch_videos = self._patch_media_uploads()
         mock_response = self.generate_magic_mock(**{"status_code": 422})
-        with patch_images, patch_videos, self.get_patch_exceptions_linkedin(
-            mock_response
+        with (
+            patch_images,
+            patch_videos,
+            self.get_patch_exceptions_linkedin(mock_response),
         ):
             with self.assertRaises(UserError) as context:
                 self.SocialAccountLinkedin._linkedin_create_post(message="Hello")
@@ -658,9 +667,12 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
             }
         )
         network_error = UserError("Error connecting to LinkedIn: timed out")
-        with self.get_patch_exceptions_linkedin(
-            side_effect=[network_error, response]
-        ) as mock_request, self.assertLogs(LOGGER_ACCOUNT_LINKEDIN, "WARNING") as logs:
+        with (
+            self.get_patch_exceptions_linkedin(
+                side_effect=[network_error, response]
+            ) as mock_request,
+            self.assertLogs(LOGGER_ACCOUNT_LINKEDIN, "WARNING") as logs,
+        ):
             urls = self.SocialAccountLinkedin._get_linkedin_images_download_url(urns)
         self.assertEqual(urls, {last_urn: "https://fake/last.png"})
         self.assertEqual(mock_request.call_count, 2)
@@ -846,8 +858,9 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
                 raise UserError(_("403 forbidden"))
             return {"2025-01-01": (0, 0, 0, 0, 0.0, 10)}
 
-        with self._patch_reader(side_effect=refuse_the_second), mute_logger(
-            "odoo.addons.social_media_linkedin.models.social_account"
+        with (
+            self._patch_reader(side_effect=refuse_the_second),
+            mute_logger("odoo.addons.social_media_linkedin.models.social_account"),
         ):
             (self.SocialAccountLinkedin | other)._snapshot_statistics(
                 date(2025, 1, 1), date(2025, 1, 1)
@@ -1041,8 +1054,9 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
 
     def test_a_failed_backfill_leaves_the_account_associated(self):
         """The association cannot be lost to a history that would not read."""
-        with self._patch_reader(side_effect=UserError(_("403 forbidden"))), mute_logger(
-            LOGGER_ACCOUNT_LINKEDIN
+        with (
+            self._patch_reader(side_effect=UserError(_("403 forbidden"))),
+            mute_logger(LOGGER_ACCOUNT_LINKEDIN),
         ):
             self.SocialAccountLinkedin._on_account_associated()
         self.assertTrue(self.SocialAccountLinkedin.exists())
@@ -1066,14 +1080,15 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         """The card is drawn from those rows, so the other order draws stale ones."""
         rows_when_added_up = []
         start = self.SocialAccountLinkedin._linkedin_backfill_window()[0]
-        with self._patch_reader(
-            {start.isoformat(): (0, 0, 0, 0, 0.0, 42)}
-        ), patch.object(
-            type(self.SocialAccountLinkedin),
-            "_refresh_account_statistics",
-            autospec=True,
-            side_effect=lambda accounts: rows_when_added_up.append(
-                len(self._statistics_of(accounts))
+        with (
+            self._patch_reader({start.isoformat(): (0, 0, 0, 0, 0.0, 42)}),
+            patch.object(
+                type(self.SocialAccountLinkedin),
+                "_refresh_account_statistics",
+                autospec=True,
+                side_effect=lambda accounts: rows_when_added_up.append(
+                    len(self._statistics_of(accounts))
+                ),
             ),
         ):
             self.SocialAccountLinkedin.action_rebuild_statistics_history()
@@ -1103,9 +1118,10 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         """The button of the account form goes through the very same path."""
         today = fields.Date.today()
         Bus = self.env["bus.bus"]
-        with self._patch_reader(
-            {today.isoformat(): (0, 0, 0, 0, 0.0, 42)}
-        ), patch.object(type(Bus), "_sendone", autospec=True) as mock_sendone:
+        with (
+            self._patch_reader({today.isoformat(): (0, 0, 0, 0, 0.0, 42)}),
+            patch.object(type(Bus), "_sendone", autospec=True) as mock_sendone,
+        ):
             self.SocialAccountLinkedin.action_refresh_statistics()
         rows = self._statistics_of(self.SocialAccountLinkedin)
         self.assertEqual(rows.impression_count, 42)
@@ -1317,11 +1333,14 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         account.write({"linkedin_account_id": "123456"})
         error_response = MagicMock(status_code=403)
         error_response.text = '{"message": "Not enough permissions"}'
-        with patch.object(
-            type(self.SocialAccount),
-            "_request_linkedin",
-            return_value=error_response,
-        ), self.assertRaises(UserError) as error:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_request_linkedin",
+                return_value=error_response,
+            ),
+            self.assertRaises(UserError) as error,
+        ):
             account._get_account_linkedin("fake-access-token")
         self.assertIn("Not enough permissions", str(error.exception))
 
@@ -1639,16 +1658,19 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
             "url": "https://test.example/redirect",
             "target": "self",
         }
-        with patch.object(
-            type(self.wizard_account_id),
-            "_action_valid_add_account",
-            autospec=True,
-        ) as mocked_valid, patch.object(
-            type(self.wizard_account_id),
-            "_action_add_account",
-            autospec=True,
-            return_value=action_fake_url,
-        ) as mocked_add:
+        with (
+            patch.object(
+                type(self.wizard_account_id),
+                "_action_valid_add_account",
+                autospec=True,
+            ) as mocked_valid,
+            patch.object(
+                type(self.wizard_account_id),
+                "_action_add_account",
+                autospec=True,
+                return_value=action_fake_url,
+            ) as mocked_add,
+        ):
             result = self.wizard_account_id.action_associate_social_account()
             mocked_valid.assert_called_once_with(self.wizard_account_id)
             mocked_add.assert_called_once_with(self.wizard_account_id)
@@ -1864,14 +1886,16 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.expire_access_token_date = (
             datetime.now() + timedelta(days=-10)
         ).date()
-        with patch(
-            PATCH_ACCOUNT.format("validate_access_token")
-        ) as mock_super, patch.object(
-            type(self.SocialAccount),
-            "_validate_linkedin_access_token",
-            autospec=True,
-            return_value=True,
-        ) as mock_validate_token, patch_notify_user as mock_notify_user:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")) as mock_super,
+            patch.object(
+                type(self.SocialAccount),
+                "_validate_linkedin_access_token",
+                autospec=True,
+                return_value=True,
+            ) as mock_validate_token,
+            patch_notify_user as mock_notify_user,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
             mock_super.assert_called_once()
             mock_validate_token.assert_called_once()
@@ -1883,9 +1907,10 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.refresh_token_expires_in = (
             datetime.now() + timedelta(days=30)
         ).date()
-        with patch(
-            PATCH_ACCOUNT.format("validate_access_token")
-        ) as mock_super_failed, patch_notify_user as mock_notify_user_failed:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")) as mock_super_failed,
+            patch_notify_user as mock_notify_user_failed,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
             mock_super_failed.assert_called_once()
             mock_notify_user_failed.assert_called_once()
@@ -1898,13 +1923,15 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.refresh_token_expires_in = (
             datetime.now() + timedelta(days=200)
         ).date()
-        with patch(PATCH_ACCOUNT.format("validate_access_token")), patch.object(
-            type(self.SocialAccount),
-            "_validate_linkedin_access_token",
-            autospec=True,
-            return_value=True,
-        ) as mock_validate_token, patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")),
+            patch.object(
+                type(self.SocialAccount),
+                "_validate_linkedin_access_token",
+                autospec=True,
+                return_value=True,
+            ) as mock_validate_token,
+            patch(PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")),
         ):
             self.SocialAccountLinkedin.validate_access_token()
         mock_validate_token.assert_called_once()
@@ -1913,14 +1940,18 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         self.SocialAccountLinkedin.expire_access_token_date = (
             datetime.now() + timedelta(days=-10)
         ).date()
-        with patch(PATCH_ACCOUNT.format("validate_access_token")), patch.object(
-            type(self.SocialAccount),
-            "_validate_linkedin_access_token",
-            autospec=True,
-            return_value=True,
-        ), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")
-        ) as mock_notify_user:
+        with (
+            patch(PATCH_ACCOUNT.format("validate_access_token")),
+            patch.object(
+                type(self.SocialAccount),
+                "_validate_linkedin_access_token",
+                autospec=True,
+                return_value=True,
+            ),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")
+            ) as mock_notify_user,
+        ):
             self.SocialAccountLinkedin.validate_access_token()
         self.assertEqual(
             mock_notify_user.call_args.kwargs["notif_message"], "The token is valid."
@@ -1975,13 +2006,14 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
                 ).date(),
             }
         )
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_validate_linkedin_access_token"),
-            autospec=True,
-            return_value=True,
-        ) as mock_validate, patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")
-        ) as mock_notify:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_validate_linkedin_access_token"),
+                autospec=True,
+                return_value=True,
+            ) as mock_validate,
+            patch(PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_client")) as mock_notify,
+        ):
             self.SocialAccountLinkedin.action_validate_access_token()
         mock_validate.assert_called_once()
         self.assertEqual(
@@ -1999,13 +2031,16 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
                 ).date(),
             }
         )
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_validate_linkedin_access_token"),
-            autospec=True,
-            return_value=False,
-        ), patch.object(
-            type(self.wizard_account_id), "_update_account", autospec=True
-        ) as mock_update:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_validate_linkedin_access_token"),
+                autospec=True,
+                return_value=False,
+            ),
+            patch.object(
+                type(self.wizard_account_id), "_update_account", autospec=True
+            ) as mock_update,
+        ):
             self.SocialAccountLinkedin.action_validate_access_token()
         mock_update.assert_called_once()
 
@@ -2059,11 +2094,14 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
 
     def test_refresh_token_keeps_the_credentials_on_a_json_error(self):
         """LinkedIn answers its errors as JSON too: a dict proves nothing."""
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
-            autospec=True,
-            return_value={"error": "invalid_grant", "error_description": "expired"},
-        ), self.assertRaises(UserError):
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
+                autospec=True,
+                return_value={"error": "invalid_grant", "error_description": "expired"},
+            ),
+            self.assertRaises(UserError),
+        ):
             self.SocialAccountLinkedin._refresh_token()
         self.assertEqual(self.SocialAccountLinkedin.sudo().access_token, "fake-token")
 
@@ -2124,9 +2162,12 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
             social_media_oauth_callback=True
         )
         mock_request = MagicMock(session={})
-        with patch(PATCH_MIXIN_REQUEST, new=mock_request), patch.object(
-            type(self.env["bus.bus"]), "_sendone", autospec=True
-        ) as mock_sendone:
+        with (
+            patch(PATCH_MIXIN_REQUEST, new=mock_request),
+            patch.object(
+                type(self.env["bus.bus"]), "_sendone", autospec=True
+            ) as mock_sendone,
+        ):
             with account._statistics_guard():
                 raise UserError(_("The page role was lost"))
         mock_sendone.assert_not_called()
@@ -2139,11 +2180,16 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
         """Nothing redirects the sweep, so the user is told right away."""
         mock_request = MagicMock(session={})
         sent = []
-        with patch(PATCH_MIXIN_REQUEST, new=mock_request), patch.object(
-            type(self.env["bus.bus"]),
-            "_sendone",
-            autospec=True,
-            side_effect=lambda bus, channel, notif_type, message: sent.append(message),
+        with (
+            patch(PATCH_MIXIN_REQUEST, new=mock_request),
+            patch.object(
+                type(self.env["bus.bus"]),
+                "_sendone",
+                autospec=True,
+                side_effect=lambda bus, channel, notif_type, message: sent.append(
+                    message
+                ),
+            ),
         ):
             with self.SocialAccountLinkedin._statistics_guard():
                 raise UserError(_("The page role was lost"))

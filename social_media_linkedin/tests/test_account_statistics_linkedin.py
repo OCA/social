@@ -48,14 +48,17 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             "q": "organizationalEntity",
             "organizationalEntity": "urn:li:organization:123456",
         }
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_share_statistics"),
-            autospec=True,
-            return_value={},
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_ugc_posts_statistics"),
-            autospec=True,
-            return_value={},
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_share_statistics"),
+                autospec=True,
+                return_value={},
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_ugc_posts_statistics"),
+                autospec=True,
+                return_value={},
+            ),
         ):
             self.SocialAccountLinkedin._get_entity_statistics(
                 posts=[{"id": "urn:li:ugcPost:1"}],
@@ -408,17 +411,20 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             "shares": {"urn:li:share:1": (1, 2, 3, 4, 0.5, 6)},
             "ugcPosts": {"urn:li:ugcPost:1": (9, 0, 0, 3, 0.25, 40)},
         }
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_share_statistics"),
-            autospec=True,
-            side_effect=lambda account, urns, param_field, *args, **kwargs: (
-                entity_answers[param_field]
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_share_statistics"),
+                autospec=True,
+                side_effect=lambda account, urns, param_field, *args, **kwargs: (
+                    entity_answers[param_field]
+                ),
             ),
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_ugc_posts_statistics"),
-            autospec=True,
-            return_value={"urn:li:ugcPost:1": (7, 8), "urn:li:ugcPost:2": (1, 2)},
-        ) as mock_social_actions:
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_ugc_posts_statistics"),
+                autospec=True,
+                return_value={"urn:li:ugcPost:1": (7, 8), "urn:li:ugcPost:2": (1, 2)},
+            ) as mock_social_actions,
+        ):
             data = self.SocialAccountLinkedin._get_entity_statistics(
                 posts=[{"id": "urn:li:share:1"}, {"id": "urn:li:ugcPost:1"}]
             )
@@ -641,15 +647,16 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
         batches, statistics = self._refuse_first_batches(
             1, {"urn:li:share:2": (1, 6, 0, 0, 0.5, 30)}
         )
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), self._patch_posts_gone(
-            ["urn:li:share:1"]
-        ) as mock_gone, self._patch_notify_user() as mock_notify, self.assertLogs(
-            LOGGER_ACCOUNT_LINKEDIN, "INFO"
-        ) as logs:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            self._patch_posts_gone(["urn:li:share:1"]) as mock_gone,
+            self._patch_notify_user() as mock_notify,
+            self.assertLogs(LOGGER_ACCOUNT_LINKEDIN, "INFO") as logs,
+        ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(
                 gone + alive
             )
@@ -679,11 +686,15 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
         first = self._linkedin_publication("urn:li:share:1", like_count=4)
         second = self._linkedin_publication("urn:li:share:2")
         batches, statistics = self._refuse_first_batches(1, {})
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), self._patch_posts_gone([]), self._patch_notify_user() as mock_notify:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            self._patch_posts_gone([]),
+            self._patch_notify_user() as mock_notify,
+        ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(
                 first + second
             )
@@ -704,13 +715,15 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
         batches, statistics = self._refuse_first_batches(
             2, {"urn:li:share:2": (0, 6, 0, 0, 0, 0)}
         )
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), self._patch_posts_gone(
-            ["urn:li:share:1"]
-        ), self._patch_notify_user() as mock_notify:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            self._patch_posts_gone(["urn:li:share:1"]),
+            self._patch_notify_user() as mock_notify,
+        ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(
                 gone + alive
             )
@@ -727,14 +740,15 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             "urn:li:share:1"
         ) + self._linkedin_publication("urn:li:share:2")
         batches, statistics = self._refuse_first_batches(1, {})
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), self._patch_posts_gone(
-            ["urn:li:share:1", "urn:li:share:2"]
-        ), self._patch_notify_user() as mock_notify, mute_logger(
-            LOGGER_ACCOUNT_LINKEDIN
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            self._patch_posts_gone(["urn:li:share:1", "urn:li:share:2"]),
+            self._patch_notify_user() as mock_notify,
+            mute_logger(LOGGER_ACCOUNT_LINKEDIN),
         ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(lines)
         self.assertEqual(lines.mapped("state"), ["deleted", "deleted"])
@@ -746,13 +760,15 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
     def test_a_failure_other_than_a_4xx_is_not_looked_into(self):
         """A 5xx says nothing about the publications, so none is asked about."""
         line = self._linkedin_publication("urn:li:share:1")
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=UserError(_("Internal error")),
-        ), self._patch_posts_gone(
-            ["urn:li:share:1"]
-        ) as mock_gone, self._patch_notify_user() as mock_notify:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=UserError(_("Internal error")),
+            ),
+            self._patch_posts_gone(["urn:li:share:1"]) as mock_gone,
+            self._patch_notify_user() as mock_notify,
+        ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(line)
         mock_gone.assert_not_called()
         self.assertEqual(line.state, "posted")
@@ -765,15 +781,16 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
         first = self._linkedin_publication("urn:li:share:1")
         second = self._linkedin_publication("urn:li:share:2")
         batches, statistics = self._refuse_first_batches(1, {})
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), self._patch_posts_gone(
-            ["urn:li:share:1"]
-        ) as mock_gone, self._patch_notify_user() as mock_notify, self.assertLogs(
-            LOGGER_ACCOUNT_LINKEDIN, "ERROR"
-        ) as logs:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            self._patch_posts_gone(["urn:li:share:1"]) as mock_gone,
+            self._patch_notify_user() as mock_notify,
+            self.assertLogs(LOGGER_ACCOUNT_LINKEDIN, "ERROR") as logs,
+        ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(
                 first + second
             )
@@ -799,17 +816,20 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
         first = self._linkedin_publication("urn:li:share:1")
         second = self._linkedin_publication("urn:li:share:2")
         batches, statistics = self._refuse_first_batches(1, {})
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), patch(
-            PATCH_POST_ACCOUNT_LINKEDIN.format("_check_remote_posts_exist"),
-            autospec=True,
-            side_effect=ConcurrencyError("serialization conflict"),
-        ), self._patch_notify_user() as mock_notify, self.assertLogs(
-            LOGGER_ACCOUNT_LINKEDIN, "ERROR"
-        ) as logs:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            patch(
+                PATCH_POST_ACCOUNT_LINKEDIN.format("_check_remote_posts_exist"),
+                autospec=True,
+                side_effect=ConcurrencyError("serialization conflict"),
+            ),
+            self._patch_notify_user() as mock_notify,
+            self.assertLogs(LOGGER_ACCOUNT_LINKEDIN, "ERROR") as logs,
+        ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(
                 first + second
             )
@@ -848,14 +868,15 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             }
             return response
 
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
-            autospec=True,
-            side_effect=request,
-        ), self._patch_posts_gone(
-            ["urn:li:ugcPost:1"]
-        ), self._patch_notify_user() as mock_notify, mute_logger(
-            LOGGER_ACCOUNT_LINKEDIN
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"),
+                autospec=True,
+                side_effect=request,
+            ),
+            self._patch_posts_gone(["urn:li:ugcPost:1"]),
+            self._patch_notify_user() as mock_notify,
+            mute_logger(LOGGER_ACCOUNT_LINKEDIN),
         ):
             refreshed = self.SocialAccountLinkedin._refresh_post_statistics(
                 gone + alive
@@ -890,14 +911,15 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             }
 
         accounts = self.SocialAccountLinkedin + self.SocialAccountLinkedinData
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
-            autospec=True,
-            side_effect=statistics,
-        ), self._patch_posts_gone(
-            ["urn:li:share:1"]
-        ), self._patch_notify_user() as mock_notify, mute_logger(
-            LOGGER_ACCOUNT_LINKEDIN
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
+                autospec=True,
+                side_effect=statistics,
+            ),
+            self._patch_posts_gone(["urn:li:share:1"]),
+            self._patch_notify_user() as mock_notify,
+            mute_logger(LOGGER_ACCOUNT_LINKEDIN),
         ):
             refreshed = accounts._refresh_post_statistics(gone + alive + other)
         self.assertEqual(gone.state, "deleted")
