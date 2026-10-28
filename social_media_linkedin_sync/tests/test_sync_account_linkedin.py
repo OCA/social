@@ -135,15 +135,18 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
     @mute_logger(LOGGER_ACCOUNT_LINKEDIN, LOGGER_ACCOUNT_SYNC_LINKEDIN)
     def test_get_all_posts_reads_the_parameter_once(self):
         """The cap is read before the loop, not on every page."""
-        with patch.object(
-            type(self.SocialAccountLinkedin),
-            "_linkedin_posts_max_pages",
-            return_value=3,
-        ) as mock_max_pages, patch.object(
-            type(self.SocialAccountLinkedin),
-            "_get_posts",
-            return_value=[{"id": "urn:li:share:1"}],
-        ) as mock_get_posts:
+        with (
+            patch.object(
+                type(self.SocialAccountLinkedin),
+                "_linkedin_posts_max_pages",
+                return_value=3,
+            ) as mock_max_pages,
+            patch.object(
+                type(self.SocialAccountLinkedin),
+                "_get_posts",
+                return_value=[{"id": "urn:li:share:1"}],
+            ) as mock_get_posts,
+        ):
             self.SocialAccountLinkedin._get_all_posts()
         self.assertEqual(mock_get_posts.call_count, 3)
         self.assertEqual(mock_max_pages.call_count, 1)
@@ -192,8 +195,9 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
     def test_get_linkedin_videos_download_url_error_is_not_fatal(self):
         """A failure reading the videos is logged and does not stop the import."""
         response = self._videos_response({}, status_code=500)
-        with self.get_patch_exceptions_linkedin(response), self.assertLogs(
-            LOGGER_ACCOUNT_SYNC_LINKEDIN, "WARNING"
+        with (
+            self.get_patch_exceptions_linkedin(response),
+            self.assertLogs(LOGGER_ACCOUNT_SYNC_LINKEDIN, "WARNING"),
         ):
             urls = self.SocialAccountLinkedin._get_linkedin_videos_download_url(
                 ["urn:li:video:1"]
@@ -228,11 +232,12 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             {last_urn: {"status": "AVAILABLE", "downloadUrl": "https://fake/last"}}
         )
         network_error = UserError("Error connecting to LinkedIn: timed out")
-        with self.get_patch_exceptions_linkedin(
-            side_effect=[network_error, response]
-        ) as mock_request, self.assertLogs(
-            LOGGER_ACCOUNT_SYNC_LINKEDIN, "WARNING"
-        ) as logs:
+        with (
+            self.get_patch_exceptions_linkedin(
+                side_effect=[network_error, response]
+            ) as mock_request,
+            self.assertLogs(LOGGER_ACCOUNT_SYNC_LINKEDIN, "WARNING") as logs,
+        ):
             urls = self.SocialAccountLinkedin._get_linkedin_videos_download_url(urns)
         self.assertEqual(urls, {last_urn: "https://fake/last"})
         self.assertEqual(mock_request.call_count, 2)
@@ -266,9 +271,16 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             "_get_linkedin_videos_download_url",
             return_value={},
         )
-        with patch_validate, patch_get_posts as mock_get_posts, patch_all_posts, (
-            patch_entity
-        ), patch_assets, patch_page as mock_page, patch_reactions, patch_video_urls:
+        with (
+            patch_validate,
+            patch_get_posts as mock_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page as mock_page,
+            patch_reactions,
+            patch_video_urls,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(
                 "urn:li:share:new", None
             )
@@ -330,9 +342,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 "return_value": {"urn:li:share:new": (0, 1, 0, 0, 0, 0)},
             }
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             account._update_posts_statistics("urn:li:share:new", None)
         self.assertEqual(account.like_count, 17)
         self.assertEqual(account.impression_count, 346)
@@ -393,9 +411,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 ),
             }
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             account._update_posts_statistics(None, None)
         imported = self.SocialPostAccount.search(
             [("remote_ref", "=", "urn:li:share:imported")]
@@ -733,9 +757,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 "return_value": {"urn:li:share:new": (0, 1, 0, 0, 0, 12)},
             }
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             account._update_posts_statistics(False, None)
         self.assertEqual(account.like_count, 17)
         self.assertEqual(account.impression_count, 346)
@@ -827,9 +857,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             account._update_posts_statistics(False, None)
         self.assertEqual(
             account.linkedin_statistics_checkpoint,
@@ -858,11 +894,16 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions, self._patch_posts_gone(
-            [remote_ref]
-        ) as mock_gone:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+            self._patch_posts_gone([remote_ref]) as mock_gone,
+        ):
             self.SocialAccountLinkedin._full_resync()
         self.assertFalse(self.SocialPostAccountLinkedin.post_account_url)
         self.assertEqual(self.SocialPostAccountLinkedin.state, "deleted")
@@ -897,9 +938,16 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions, self._patch_posts_gone() as mock_gone:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+            self._patch_posts_gone() as mock_gone,
+        ):
             self.SocialAccountLinkedin._full_resync()
         self.assertEqual(list(mock_gone.call_args.args[1]), [remote_ref])
         self.assertEqual(post_account.state, "posted")
@@ -927,9 +975,16 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
         ) = self._generate_update_posts_statistics_patches(
             ugc_posts, feed_is_complete=False
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions, self._patch_posts_gone() as mock_gone:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+            self._patch_posts_gone() as mock_gone,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None)
         mock_gone.assert_not_called()
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
@@ -954,9 +1009,16 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions, self._patch_posts_gone() as mock_gone:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+            self._patch_posts_gone() as mock_gone,
+        ):
             self.SocialAccountLinkedin._full_resync()
         mock_gone.assert_not_called()
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
@@ -1001,9 +1063,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts as mock_get_posts, (
-            patch_all_posts
-        ) as mock_all_posts, patch_entity, patch_assets, patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts as mock_get_posts,
+            patch_all_posts as mock_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None)
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
         mock_all_posts.assert_not_called()
@@ -1047,9 +1115,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             autospec=True,
             return_value=statistics,
         )
-        with patch_validate, patch_get_posts, patch_all_posts, (
-            patch_entity
-        ) as mock_entity, patch_assets, patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity as mock_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None)
         asked = [post["id"] for post in mock_entity.call_args.kwargs.get("posts") or []]
         self.assertIn(
@@ -1087,9 +1161,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
         ) = self._generate_update_posts_statistics_patches(
             ugc_posts, feed_is_complete=False
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None)
         self.assertEqual(self.SocialPostAccountLinkedin.state, "posted")
         self.assertEqual(self.SocialPostAccountLinkedin.remote_ref, "1234567890")
@@ -1116,9 +1196,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None)
         self.assertEqual(post_account.state, "posted")
         self.assertTrue(post_account.post_account_url)
@@ -1126,10 +1212,12 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
     def test_the_initial_sync_backfills_the_account(self):
         self._isolate_linkedin_account()
         self.SocialAccountLinkedin.write({"pending_initial_sync": True})
-        with self._patch_reader(
-            {"2025-01-01": (0, 0, 0, 0, 0.0, 3)}
-        ) as mock_reader, patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"), autospec=True
+        with (
+            self._patch_reader({"2025-01-01": (0, 0, 0, 0, 0.0, 3)}) as mock_reader,
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"),
+                autospec=True,
+            ),
         ):
             self.SocialAccount._run_initial_sync()
         self.assertEqual(
@@ -1148,10 +1236,13 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
         """The history costs its own calls, so it gets its own savepoint."""
         self._isolate_linkedin_account()
         self.SocialAccountLinkedin.write({"pending_initial_sync": True})
-        with self._patch_reader(side_effect=UserError(_("history unavailable"))), patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"), autospec=True
-        ) as mock_refresh, mute_logger(
-            "odoo.addons.social_media_linkedin.models.social_account"
+        with (
+            self._patch_reader(side_effect=UserError(_("history unavailable"))),
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"),
+                autospec=True,
+            ) as mock_refresh,
+            mute_logger("odoo.addons.social_media_linkedin.models.social_account"),
         ):
             self.SocialAccount._run_initial_sync()
         mock_refresh.assert_called_once()
@@ -1170,8 +1261,12 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 "impression_count": 10,
             }
         )
-        with self._patch_reader() as mock_reader, patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"), autospec=True
+        with (
+            self._patch_reader() as mock_reader,
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"),
+                autospec=True,
+            ),
         ):
             self.SocialAccount._run_initial_sync()
         mock_reader.assert_not_called()
@@ -1188,8 +1283,12 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 "impression_count": 10,
             }
         )
-        with self._patch_reader() as mock_reader, patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"), autospec=True
+        with (
+            self._patch_reader() as mock_reader,
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"),
+                autospec=True,
+            ),
         ):
             self.SocialAccount._run_initial_sync()
         self.assertTrue(mock_reader.called)
@@ -1230,9 +1329,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 "side_effect": entity_statistics,
             }
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             (failing | working)._update_posts_statistics(False, None)
         self.env.invalidate_all()
         self.assertEqual(
@@ -1421,9 +1526,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_page, patch_reactions:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None)
         self.assertEqual(
             self.SocialPostAccount.search_count(
@@ -1564,11 +1675,16 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             patch_page,
             patch_reactions,
         ) = self._generate_update_posts_statistics_patches(ugc_posts)
-        with freeze_time(
-            "2026-01-15 10:00:00"
-        ), patch_validate, patch_get_posts, (
-            patch_all_posts
-        ), patch_entity, patch_assets, patch_page, patch_reactions:
+        with (
+            freeze_time("2026-01-15 10:00:00"),
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_page,
+            patch_reactions,
+        ):
             self.SocialAccountLinkedin._update_posts_statistics(
                 "urn:li:share:undated", None
             )
@@ -1589,12 +1705,15 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
         rebuilt from a feed nobody read.
         """
         statistics = [{"id": 1, "message": "Read by another connector"}]
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
-            return_value=statistics,
-        ), patch.object(
-            type(self.SocialAccount), "_import_linkedin_posts", autospec=True
-        ) as mock_import:
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
+                return_value=statistics,
+            ),
+            patch.object(
+                type(self.SocialAccount), "_import_linkedin_posts", autospec=True
+            ) as mock_import,
+        ):
             self.assertEqual(
                 self.social_account_id._update_posts_statistics(False, None),
                 statistics,
@@ -1605,13 +1724,17 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
         """The feed is addressed by page, so there is nothing to read."""
         account = self.SocialAccountLinkedin
         account.remote_ref = False
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("validate_access_token"), autospec=True
-        ), patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
-        ) as mock_get_posts, patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_get_all_posts"), autospec=True
-        ) as mock_all_posts:
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("validate_access_token"), autospec=True
+            ),
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
+            ) as mock_get_posts,
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_get_all_posts"), autospec=True
+            ) as mock_all_posts,
+        ):
             account._import_linkedin_posts()
         mock_get_posts.assert_not_called()
         mock_all_posts.assert_not_called()
@@ -1644,12 +1767,18 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
                 }
             ]
         )
-        with patch_validate, patch_get_posts, patch_all_posts, patch_entity, (
-            patch_assets
-        ), patch_reactions, patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_linkedin_read_watched_figures"),
-            autospec=True,
-        ) as mock_reader:
+        with (
+            patch_validate,
+            patch_get_posts,
+            patch_all_posts,
+            patch_entity,
+            patch_assets,
+            patch_reactions,
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_linkedin_read_watched_figures"),
+                autospec=True,
+            ) as mock_reader,
+        ):
             account._import_linkedin_posts(
                 buckets=_linkedin_buckets(RECENT_STATISTICS_LINKEDIN)
             )

@@ -575,9 +575,9 @@ class SocialAccount(models.Model):
                 buckets = self._linkedin_read_watched_figures()
             else:
                 buckets = self._linkedin_watched_figures(buckets)
-            update_account_data[
-                "linkedin_statistics_checkpoint"
-            ] = self._linkedin_statistics_checkpoint(buckets)
+            update_account_data["linkedin_statistics_checkpoint"] = (
+                self._linkedin_statistics_checkpoint(buckets)
+            )
         self.write(update_account_data)
         # The figures are asked to the connector, in one batch for the whole
         # page plus the publications it did not bring: reading them by URN is

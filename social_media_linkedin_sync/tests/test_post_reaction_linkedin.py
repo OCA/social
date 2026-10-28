@@ -46,18 +46,23 @@ class TestPostReactionLinkedin(HttpCase, TestSocialSyncCommonLinkedin):
 
         # The dashboard refreshes itself after every reaction, and neither
         # half of that refresh is what is under test here.
-        with patch(
-            PATCH_ACCOUNT_LINKEDIN.format("_refresh_statistics"),
-            return_value=False,
-        ), patch(
-            PATCH_SYNC_ACCOUNT_LINKEDIN.format("_update_posts_statistics"),
-            return_value=[],
-        ), patch(
-            PATCH_SYNC_POST_ACCOUNT_LINKEDIN.format("_react_linkedin"),
-            side_effect=_react,
-        ), patch(
-            PATCH_SYNC_POST_ACCOUNT_LINKEDIN.format("_unreact_linkedin"),
-            side_effect=_unreact,
+        with (
+            patch(
+                PATCH_ACCOUNT_LINKEDIN.format("_refresh_statistics"),
+                return_value=False,
+            ),
+            patch(
+                PATCH_SYNC_ACCOUNT_LINKEDIN.format("_update_posts_statistics"),
+                return_value=[],
+            ),
+            patch(
+                PATCH_SYNC_POST_ACCOUNT_LINKEDIN.format("_react_linkedin"),
+                side_effect=_react,
+            ),
+            patch(
+                PATCH_SYNC_POST_ACCOUNT_LINKEDIN.format("_unreact_linkedin"),
+                side_effect=_unreact,
+            ),
         ):
             self.start_tour(
                 DASHBOARD_URL,
