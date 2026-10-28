@@ -16,10 +16,10 @@
                 title="Ask the social media again for the ads of every account and the figures it reports for them, instead of waiting for the next automatic pass."
             >
                 <i
-                    t-if="!adsState.syncing"
-                    class="fa fa-refresh px-1"
-                    aria-hidden="true"
-                />
+                t-if="!adsState.syncing"
+                class="fa fa-refresh px-1"
+                aria-hidden="true"
+            />
                 <span class="social-loader" t-if="adsState.syncing" />
                 Sync ads
             </button>

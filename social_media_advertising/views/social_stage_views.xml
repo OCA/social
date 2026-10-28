@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_stage_view_tree" model="ir.ui.view">
         <field name="name">social.stage.tree</field>
         <field name="model">social.stage</field>
@@ -71,5 +70,4 @@
             </search>
         </field>
     </record>
-
 </odoo>
