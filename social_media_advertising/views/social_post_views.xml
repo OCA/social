@@ -10,7 +10,6 @@
         <field name="inherit_id" ref="social_media_base.social_post_view_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='campaign_id']" position="after">
-                <field name="allow_social_campaign_ids" invisible="1" />
                 <field
                     name="social_campaign_id"
                     readonly="state != 'draft' or content_locked"

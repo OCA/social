@@ -6,9 +6,9 @@
         <field name="name">social.tag.tree</field>
         <field name="model">social.tag</field>
         <field name="arch" type="xml">
-            <tree editable="bottom">
+            <list editable="bottom">
                 <field name="name" />
-            </tree>
+            </list>
         </field>
     </record>
 

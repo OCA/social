@@ -9,7 +9,6 @@
         <field name="code">model._run_check_ads_updates()</field>
         <field name="interval_number">6</field>
         <field name="interval_type">hours</field>
-        <field name="numbercall">-1</field>
         <field name="priority">5</field>
     </record>
 </odoo>

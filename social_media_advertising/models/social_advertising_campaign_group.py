@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class SocialAdvertisingCampaignGroup(models.Model):
@@ -108,9 +108,9 @@ class SocialAdvertisingCampaignGroup(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Campaigns"),
+            "name": self.env._("Campaigns"),
             "res_model": "social.advertising.campaign",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("campaign_group_id", "=", self.id)],
             "context": {"default_campaign_group_id": self.id},
         }

@@ -3,7 +3,7 @@
 {
     "name": "Social Media Advertising",
     "summary": "Campaigns, campaign groups, ads, stages and tags for social media",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",

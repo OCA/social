@@ -4,7 +4,7 @@
 import logging
 from contextlib import contextmanager
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 
 from ..social_advertising_utils import (
@@ -173,9 +173,9 @@ class SocialAccount(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Campaigns"),
+            "name": self.env._("Campaigns"),
             "res_model": "social.advertising.campaign",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [
                 ("advertising_account_id", "in", self.advertising_account_ids.ids)
             ],
@@ -188,9 +188,9 @@ class SocialAccount(models.Model):
         current = self.advertising_account_ids.filtered("is_current")[:1]
         return {
             "type": "ir.actions.act_window",
-            "name": _("Campaign Groups"),
+            "name": self.env._("Campaign Groups"),
             "res_model": "social.advertising.campaign.group",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [
                 ("advertising_account_id", "in", self.advertising_account_ids.ids)
             ],
@@ -356,7 +356,7 @@ class SocialAccount(models.Model):
         if not self.can_sync_advertising_accounts:
             return {
                 "success": False,
-                "message": _(
+                "message": self.env._(
                     "Listing the advertising accounts is not available for "
                     "this social media."
                 ),
@@ -368,7 +368,7 @@ class SocialAccount(models.Model):
             return {"success": False, "message": str(error), "accounts": 0}
         return {
             "success": True,
-            "message": _(
+            "message": self.env._(
                 "%(accounts)s advertising account(s) available.",
                 accounts=len(advertising_accounts),
             ),
@@ -472,7 +472,9 @@ class SocialAccount(models.Model):
         if not self.can_sync_advertising_accounts:
             return {
                 "success": False,
-                "message": _("Listing the ads is not available for this social media."),
+                "message": self.env._(
+                    "Listing the ads is not available for this social media."
+                ),
                 "ads": 0,
             }
         try:
@@ -481,7 +483,7 @@ class SocialAccount(models.Model):
             return {"success": False, "message": str(error), "ads": 0}
         return {
             "success": True,
-            "message": _("%(ads)s ad(s) available.", ads=len(ads)),
+            "message": self.env._("%(ads)s ad(s) available.", ads=len(ads)),
             "ads": len(ads),
         }
 
@@ -545,16 +547,16 @@ class SocialAccount(models.Model):
             else:
                 ads += state["res"].get("ads", 0)
         if not accounts:
-            message = _("No account of yours can serve ads.")
+            message = self.env._("No account of yours can serve ads.")
         elif failures:
-            message = _(
+            message = self.env._(
                 "%(ads)s ad(s) available. The ads of these accounts could not "
                 "be fetched: %(accounts)s.",
                 ads=ads,
                 accounts=", ".join(failures),
             )
         else:
-            message = _("%(ads)s ad(s) available.", ads=ads)
+            message = self.env._("%(ads)s ad(s) available.", ads=ads)
         return _advertising_notification(message, success=not failures)
 
     def _fetch_ad_refs(self):
@@ -645,7 +647,9 @@ class SocialAccount(models.Model):
         self.ensure_one()
         return {
             "success": False,
-            "message": _("Importing campaigns is not available for this social media."),
+            "message": self.env._(
+                "Importing campaigns is not available for this social media."
+            ),
             "groups": 0,
             "campaigns": 0,
             "ads": 0,

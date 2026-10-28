@@ -61,7 +61,7 @@ class TestSocialAdvertisingCampaignGroup(TestSocialAdvertisingCommon):
     def test_action_view_campaigns(self):
         action = self.campaign_group_id.action_view_campaigns()
         self.assertEqual(action["res_model"], "social.advertising.campaign")
-        self.assertEqual(action["view_mode"], "tree,form")
+        self.assertEqual(action["view_mode"], "list,form")
         self.assertEqual(
             action["domain"], [("campaign_group_id", "=", self.campaign_group_id.id)]
         )
