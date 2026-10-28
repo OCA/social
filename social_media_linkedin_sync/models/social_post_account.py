@@ -4,7 +4,7 @@
 import logging
 from urllib.parse import quote
 
-from odoo import Command, _, models
+from odoo import Command, models
 
 from odoo.addons.social_media_linkedin.social_linkedin_utils import (
     _SCOPE_READ_POSTS_LINKEDIN,
@@ -203,11 +203,11 @@ class SocialPostAccount(models.Model):
                 # stale. Answering it as reacted is what puts the two back in
                 # step, and the next press withdraws it.
                 liked = True
-                message_like = _("You have already reacted to this post.")
+                message_like = self.env._("You have already reacted to this post.")
             elif response.status_code == 404:
                 post_deleted = self._remote_post_gone_on_action()
                 message_like = (
-                    _("The post does not exist or has been deleted.")
+                    self.env._("The post does not exist or has been deleted.")
                     if post_deleted
                     else self.account_id._linkedin_error_message(response)
                 )
@@ -239,10 +239,12 @@ class SocialPostAccount(models.Model):
                 # so the two are told apart by asking about the publication.
                 post_deleted = self._remote_post_gone_on_action()
                 if post_deleted:
-                    message_unlike = _("The post does not exist or has been deleted.")
+                    message_unlike = self.env._(
+                        "The post does not exist or has been deleted."
+                    )
                 else:
                     liked = False
-                    message_unlike = _("You had no reaction on this post.")
+                    message_unlike = self.env._("You had no reaction on this post.")
             else:
                 message_unlike = self.account_id._linkedin_error_message(response)
             self._store_liked_by_account(liked)
@@ -278,7 +280,9 @@ class SocialPostAccount(models.Model):
                 # The comment carries no URN, so there is nothing to react to.
                 return {
                     "success": False,
-                    "message": _("The comment cannot be recommended on LinkedIn."),
+                    "message": self.env._(
+                        "The comment cannot be recommended on LinkedIn."
+                    ),
                     "post_deleted": False,
                     "liked": None,
                 }
@@ -288,16 +292,16 @@ class SocialPostAccount(models.Model):
                 liked = True
             elif response.status_code == 409:
                 liked = True
-                message_like = _("You have already reacted to this comment.")
+                message_like = self.env._("You have already reacted to this comment.")
             elif response.status_code == 404:
                 # A comment answers ``404`` on its own, but it also does when
                 # the publication holding it is gone, so the two are told
                 # apart by asking about the publication.
                 post_deleted = self._remote_post_gone_on_action()
                 message_like = (
-                    _("The post does not exist or has been deleted.")
+                    self.env._("The post does not exist or has been deleted.")
                     if post_deleted
-                    else _("The comment does not exist or has been deleted.")
+                    else self.env._("The comment does not exist or has been deleted.")
                 )
             else:
                 message_like = self.account_id._linkedin_error_message(response)
@@ -319,7 +323,9 @@ class SocialPostAccount(models.Model):
             if not comment_ref:
                 return {
                     "success": False,
-                    "message": _("The comment cannot be recommended on LinkedIn."),
+                    "message": self.env._(
+                        "The comment cannot be recommended on LinkedIn."
+                    ),
                     "post_deleted": False,
                     "liked": None,
                 }
@@ -333,10 +339,12 @@ class SocialPostAccount(models.Model):
                 # publication holding the comment is gone.
                 post_deleted = self._remote_post_gone_on_action()
                 if post_deleted:
-                    message_unlike = _("The post does not exist or has been deleted.")
+                    message_unlike = self.env._(
+                        "The post does not exist or has been deleted."
+                    )
                 else:
                     liked = False
-                    message_unlike = _("You had no reaction on this comment.")
+                    message_unlike = self.env._("You had no reaction on this comment.")
             else:
                 message_unlike = self.account_id._linkedin_error_message(response)
             return {
@@ -524,8 +532,8 @@ class SocialPostAccount(models.Model):
         if actor:
             return actor["name"], actor.get("image", False)
         if isinstance(urn, str) and urn.startswith(_URN_PERSON_LINKEDIN):
-            return _("LinkedIn member"), False
-        return _("LinkedIn page"), False
+            return self.env._("LinkedIn member"), False
+        return self.env._("LinkedIn page"), False
 
     def _read_linkedin_comments(self, target):
         """Ask LinkedIn for the comments hanging from an entity.
@@ -575,7 +583,7 @@ class SocialPostAccount(models.Model):
                     response.json().get("elements", [])
                 )
             else:
-                return_message = _(
+                return_message = self.env._(
                     "The comments could not be read from LinkedIn: %(error)s",
                     error=self.account_id._linkedin_error_message(response),
                 )
@@ -598,7 +606,7 @@ class SocialPostAccount(models.Model):
             self.account_id._check_linkedin_scopes(_SCOPE_READ_POSTS_LINKEDIN)
             response = self._read_linkedin_comments(comment_ref)
             if response.status_code != 200:
-                return_message = _(
+                return_message = self.env._(
                     "The replies could not be read from LinkedIn: %(error)s",
                     error=self.account_id._linkedin_error_message(response),
                 )
@@ -654,9 +662,9 @@ class SocialPostAccount(models.Model):
                     response.status_code == 404 and self._remote_post_gone_on_action()
                 )
                 return_message = (
-                    _("The post does not exist or has been deleted.")
+                    self.env._("The post does not exist or has been deleted.")
                     if post_deleted
-                    else _(
+                    else self.env._(
                         "The comment could not be published on LinkedIn: %(error)s",
                         error=self.account_id._linkedin_error_message(response),
                     )
@@ -748,7 +756,7 @@ class SocialPostAccount(models.Model):
         if response.status_code != 204:
             return {
                 "success": False,
-                "message": _(
+                "message": self.env._(
                     "An error occurred while deleting the comment or it "
                     "no longer exists, please try again later."
                 ),

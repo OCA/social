@@ -3,7 +3,6 @@
 
 from unittest.mock import MagicMock, patch
 
-from odoo import _
 from odoo.exceptions import UserError
 from odoo.tools import mute_logger
 
@@ -254,7 +253,9 @@ class TestSocialSyncActorsLinkedin(TestSocialSyncCommonLinkedin):
     @patch(PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"))
     def test_get_linkedin_actors_survives_an_unreachable_linkedin(self, mock_request):
         """A name is never worth a thread, nor an import."""
-        mock_request.side_effect = UserError(_("LinkedIn refused the organization"))
+        mock_request.side_effect = UserError(
+            self.env._("LinkedIn refused the organization")
+        )
         self.assertEqual(
             self.SocialAccountLinkedin._get_linkedin_actors([ORGANIZATION_URN]), {}
         )

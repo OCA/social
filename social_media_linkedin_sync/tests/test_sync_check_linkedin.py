@@ -7,7 +7,7 @@ from unittest.mock import patch
 import psycopg2
 from psycopg2 import errorcodes
 
-from odoo import _, fields
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.tools import mute_logger
 
@@ -437,7 +437,7 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
 
         def recent_statistics(account):
             if account.id == failing.id:
-                raise UserError(_("LinkedIn refused the page statistics"))
+                raise UserError(self.env._("LinkedIn refused the page statistics"))
             return {**RECENT_STATISTICS_LINKEDIN, _linkedin_day(1): (0, 2, 0, 0, 0)}
 
         with self._patch_recent_statistics(side_effect=recent_statistics):
@@ -535,7 +535,9 @@ class TestSocialSyncCheckLinkedin(TestSocialSyncCommonLinkedin):
         self._mark_the_page_as_imported()
         with (
             self._patch_recent_statistics(
-                side_effect=UserError(_("LinkedIn refused the page statistics"))
+                side_effect=UserError(
+                    self.env._("LinkedIn refused the page statistics")
+                )
             ) as mock_reader,
             patch(
                 PATCH_ACCOUNT_LINKEDIN.format("_get_posts"), autospec=True
