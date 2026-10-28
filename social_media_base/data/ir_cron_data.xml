@@ -9,7 +9,6 @@
         <field name="code">model._run_send_post()</field>
         <field name="interval_number">5</field>
         <field name="interval_type">minutes</field>
-        <field name="numbercall">-1</field>
         <field name="priority">1</field>
     </record>
 
@@ -24,7 +23,6 @@
              take to show up on the dashboard. -->
         <field name="interval_number">2</field>
         <field name="interval_type">hours</field>
-        <field name="numbercall">-1</field>
         <field name="priority">1</field>
     </record>
 
@@ -41,7 +39,6 @@
              runs there are. -->
         <field name="interval_number">1</field>
         <field name="interval_type">days</field>
-        <field name="numbercall">-1</field>
         <field name="priority">1</field>
     </record>
 </odoo>

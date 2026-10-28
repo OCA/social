@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import UserError
 
 
@@ -19,7 +19,7 @@ class UtmMedium(models.Model):
         )
         if utm_medium_social_media and utm_medium_social_media in self:
             raise UserError(
-                _(
+                self.env._(
                     "The UTM medium '%s' cannot be deleted as it is the one "
                     "reported for the publications of a social media that "
                     "declares no medium of its own.",

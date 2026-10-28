@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import AccessError, UserError, ValidationError
 
 
@@ -93,7 +93,7 @@ class WizardSocialAccount(models.TransientModel):
             raise
         except Exception as ex:  # noqa: BLE001 - the API may fail in any way
             raise UserError(
-                _(
+                self.env._(
                     "The account %(account)s could not be updated: %(error)s",
                     account=self.account_id.name,
                     error=ex,

@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {Component, onWillStart, onWillUpdateProps, useState} from "@odoo/owl";
 import {formatFloat} from "@web/views/fields/formatters";
 import {useBus} from "@web/core/utils/hooks";

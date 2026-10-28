@@ -42,12 +42,7 @@
                         invisible="not context.get('social_update_account', False)"
                     />
                 </group>
-                <group name="social_account_data">
-                    <!-- Declared once here: every connector aims its own
-                         fields at this group and reads media_type in their
-                         invisible and required expressions. -->
-                    <field name="media_type" invisible="1" />
-                </group>
+                <group name="social_account_data" />
                 <footer>
                     <button
                         name="action_associate_social_account"

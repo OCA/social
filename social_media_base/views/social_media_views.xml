@@ -11,30 +11,22 @@
                 <field name="description" />
                 <field name="image" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="d-flex rounded">
-                            <t
-                                t-set="image_account"
-                                t-value="kanban_image('social.media', 'image', record.id.raw_value)"
-                            />
-                            <img
-                                t-attf-src="#{image_account}"
-                                class="img img-fluid"
-                                height="50"
-                                width="100"
-                                t-att-alt="record.name.raw_value"
-                            />
-                            <div class="d-flex flex-column p-2">
-                                <h5 class="title" t-esc="record.name.raw_value" />
-                                <p class="text" t-esc="record.description.raw_value" />
-                                <button
-                                    type="object"
-                                    class="btn btn-primary"
-                                    name="action_open_account"
-                                    title="Authorize Odoo on this social media and link one of its accounts. It opens the association wizard of the social media."
-                                >Associate account
-                                </button>
-                            </div>
+                    <t t-name="card" class="flex-row rounded">
+                        <field
+                            name="image"
+                            widget="image"
+                            options="{'size': [100, 0]}"
+                        />
+                        <div class="d-flex flex-column p-2">
+                            <h5 class="title" t-esc="record.name.raw_value" />
+                            <p class="text" t-esc="record.description.raw_value" />
+                            <button
+                                type="object"
+                                class="btn btn-primary"
+                                name="action_open_account"
+                                title="Authorize Odoo on this social media and link one of its accounts. It opens the association wizard of the social media."
+                            >Associate account
+                            </button>
                         </div>
                     </t>
                 </templates>
@@ -44,6 +36,7 @@
 
     <record id="social_media_action" model="ir.actions.act_window">
         <field name="name">Social Media</field>
+        <field name="path">social-media</field>
         <field name="res_model">social.media</field>
         <field name="view_mode">kanban</field>
     </record>

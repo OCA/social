@@ -73,135 +73,129 @@
                             <field name="count_post_engagement" />
                             <field name="user_id" />
                             <templates>
-                                <t t-name="kanban-box">
-                                    <!-- Every block is delimited by a rule so
-                                         that state, message, figures and date
-                                         read as separate things instead of as
-                                         one blank area. `p-0` drops the
-                                         padding of the record, which would
-                                         otherwise keep the rules from reaching
-                                         the sides of the card. -->
+                                <!-- Every block is delimited by a rule so
+                                     that state, message, figures and date
+                                     read as separate things instead of as
+                                     one blank area. `p-0` drops the
+                                     padding of the record, which would
+                                     otherwise keep the rules from reaching
+                                     the sides of the card. -->
+                                <t t-name="card" class="p-0 d-flex flex-column">
                                     <div
-                                        class="oe_kanban_global_click p-0 d-flex flex-column"
+                                        class="d-flex justify-content-end p-2 border-bottom"
                                     >
-                                        <div
-                                            class="d-flex justify-content-end p-2 border-bottom"
-                                        >
-                                            <field
-                                                name="state"
-                                                widget="badge"
-                                                decoration-muted="state == 'draft'"
-                                                decoration-info="state in ('planned', 'publishing')"
-                                                decoration-warning="state == 'partially_published'"
-                                                decoration-success="state == 'published'"
-                                                decoration-danger="state == 'cancelled'"
-                                            />
-                                        </div>
-                                        <!-- The message takes whatever height
-                                             the card has left over, so every
-                                             card of a row ends up the same
-                                             height without the figures or the
-                                             footer being stretched. The
-                                             widget cuts it to a few lines so
-                                             a long post does not stretch the
-                                             card past the others, and offers
-                                             the link that shows it whole. -->
-                                        <div class="flex-grow-1 p-2 border-bottom">
-                                            <field
-                                                name="message"
-                                                widget="social_message"
-                                                class="social-text-justify"
-                                            />
-                                        </div>
-                                        <!-- The block is tinted as a whole so
-                                             that the figures read apart from
-                                             the message and the footer. Done
-                                             by hand and not with
-                                             `table-striped`: inside a kanban
-                                             card the latter leaves the
-                                             Bootstrap variable it paints with
-                                             unset, so it renders nothing. -->
-                                        <table
-                                            class="table table-sm align-middle mb-0 bg-100 o_social_post_figures"
-                                        >
-                                            <tbody>
-                                                <tr>
-                                                    <td class="ps-2">Clicks:</td>
-                                                    <td class="text-end pe-2">
-                                                        <field
-                                                            name="link_click_count"
-                                                        />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ps-2">Engagement:</td>
-                                                    <td class="text-end pe-2">
-                                                        <field
-                                                            name="count_post_engagement"
-                                                        />
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="ps-2">Accounts:</td>
-                                                    <!-- Avatars and not names:
-                                                         they collapse into a
-                                                         `+N` counter, so a
-                                                         post published to
-                                                         twenty accounts takes
-                                                         the same single line
-                                                         as one published to
-                                                         two. The name shows
-                                                         on hover. -->
-                                                    <td class="text-end pe-2">
-                                                        <field
-                                                            name="account_ids"
-                                                            widget="many2many_tags_avatar"
-                                                        />
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                        <!-- `mt-auto` pins the footer to the
-                                             bottom at its own height: without
-                                             it the last block absorbs whatever
-                                             space the card has left over and
-                                             the date sits alone in a tall
-                                             box. -->
-                                        <div
-                                            class="d-flex justify-content-between align-items-center mt-auto p-2 border-top"
-                                        >
-                                            <!-- A draft post has neither date,
-                                                 and then the calendar icon
-                                                 goes away with it instead of
-                                                 being left with nothing next
-                                                 to it. The responsible is
-                                                 required, so it always shows
-                                                 and the footer never empties.
-                                                 -->
-                                            <div>
-                                                <t
-                                                    t-if="record.published_date.raw_value or record.send_post_date.raw_value"
-                                                >
-                                                    <i
-                                                        class="fa fa-calendar me-1"
-                                                        title="Date"
-                                                        role="img"
-                                                    />
+                                        <field
+                                            name="state"
+                                            widget="badge"
+                                            decoration-muted="state == 'draft'"
+                                            decoration-info="state in ('planned', 'publishing')"
+                                            decoration-warning="state == 'partially_published'"
+                                            decoration-success="state == 'published'"
+                                            decoration-danger="state == 'cancelled'"
+                                        />
+                                    </div>
+                                    <!-- The message takes whatever height
+                                         the card has left over, so every
+                                         card of a row ends up the same
+                                         height without the figures or the
+                                         footer being stretched. The
+                                         widget cuts it to a few lines so
+                                         a long post does not stretch the
+                                         card past the others, and offers
+                                         the link that shows it whole. -->
+                                    <div class="flex-grow-1 p-2 border-bottom">
+                                        <field
+                                            name="message"
+                                            widget="social_message"
+                                            class="social-text-justify"
+                                        />
+                                    </div>
+                                    <!-- The block is tinted as a whole so
+                                         that the figures read apart from
+                                         the message and the footer. Done
+                                         by hand and not with
+                                         `table-striped`: inside a kanban
+                                         card the latter leaves the
+                                         Bootstrap variable it paints with
+                                         unset, so it renders nothing. -->
+                                    <table
+                                        class="table table-sm align-middle mb-0 bg-100 o_social_post_figures"
+                                    >
+                                        <tbody>
+                                            <tr>
+                                                <td class="ps-2">Clicks:</td>
+                                                <td class="text-end pe-2">
+                                                    <field name="link_click_count" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-2">Engagement:</td>
+                                                <td class="text-end pe-2">
                                                     <field
-                                                        name="published_date"
-                                                        invisible="not published_date"
+                                                        name="count_post_engagement"
                                                     />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="ps-2">Accounts:</td>
+                                                <!-- Avatars and not names:
+                                                     they collapse into a
+                                                     `+N` counter, so a
+                                                     post published to
+                                                     twenty accounts takes
+                                                     the same single line
+                                                     as one published to
+                                                     two. The name shows
+                                                     on hover. -->
+                                                <td class="text-end pe-2">
                                                     <field
-                                                        name="send_post_date"
-                                                        invisible="published_date"
+                                                        name="account_ids"
+                                                        widget="many2many_tags_avatar"
                                                     />
-                                                </t>
-                                            </div>
-                                            <field
-                                                name="user_id"
-                                                widget="many2one_avatar_user"
-                                            />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- `mt-auto` pins the footer to the
+                                         bottom at its own height: without
+                                         it the last block absorbs whatever
+                                         space the card has left over and
+                                         the date sits alone in a tall
+                                         box. -->
+                                    <div
+                                        class="d-flex justify-content-between align-items-center mt-auto p-2 border-top"
+                                    >
+                                        <!-- A draft post has neither date,
+                                             and then the calendar icon
+                                             goes away with it instead of
+                                             being left with nothing next
+                                             to it. The responsible is
+                                             required, so it always shows
+                                             and the footer never empties.
+                                             -->
+                                        <div>
+                                            <t
+                                                t-if="record.published_date.raw_value or record.send_post_date.raw_value"
+                                            >
+                                                <i
+                                                    class="fa fa-calendar me-1"
+                                                    title="Date"
+                                                    role="img"
+                                                />
+                                                <field
+                                                    name="published_date"
+                                                    invisible="not published_date"
+                                                />
+                                                <field
+                                                    name="send_post_date"
+                                                    invisible="published_date"
+                                                />
+                                            </t>
                                         </div>
+                                        <field
+                                            name="user_id"
+                                            widget="many2one_avatar_user"
+                                        />
                                     </div>
                                 </t>
                             </templates>

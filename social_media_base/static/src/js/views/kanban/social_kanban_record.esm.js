@@ -1,8 +1,8 @@
-/** @odoo-module **/
 import {KanbanRecord} from "@web/views/kanban/kanban_record";
 import {SocialMessage} from "@social_media_base/components/social_message/social_message.esm";
 import {SocialPostAccountMixin} from "@social_media_base/js/app/social_post_account_mixin.esm";
 import {_t} from "@web/core/l10n/translation";
+import {browser} from "@web/core/browser/browser";
 import {useService} from "@web/core/utils/hooks";
 
 export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
@@ -42,14 +42,14 @@ export class SocialKanbanRecord extends SocialPostAccountMixin(KanbanRecord) {
 
     /** @override */
     async onGlobalClick(ev) {
-        const kanbanSocial = ev.target.closest("div.oe_kanban_social_dashboard");
+        const kanbanSocial = ev.target.closest(".oe_kanban_social_dashboard");
         if (kanbanSocial !== null && !this.record.post_account_url.value) {
             this.messagePostNotExist();
             this.env.model.load();
         } else if (kanbanSocial !== null && this.record.post_account_url.raw_value) {
             const postExist = await this.validPostExist();
             if (postExist) {
-                window.open(this.record.post_account_url.value, "_blank");
+                browser.open(this.record.post_account_url.value, "_blank");
             } else {
                 this.messagePostNotExist();
                 this.env.model.load();

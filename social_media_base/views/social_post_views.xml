@@ -79,9 +79,6 @@
                     />
                     <group>
                         <group>
-                            <field name="hide_post" invisible="1" />
-                            <field name="any_failed_post" invisible="1" />
-                            <field name="content_locked" invisible="1" />
                             <field
                                 name="account_ids"
                                 widget="many2many_tags"
@@ -154,7 +151,7 @@
                                 readonly="1"
                                 widget="social_post_account_kanban"
                             >
-                                <kanban>
+                                <kanban can_open="0">
                                     <field name="message" />
                                     <field name="published_date" />
                                     <field name="image_urls" />
@@ -168,55 +165,54 @@
                                     <field name="account_id" />
                                     <field name="failed_description" />
                                     <templates>
-                                        <t t-name="kanban-box">
-                                            <div
-                                                t-attf-class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
-                                            >
-                                                <div class="d-flex justify-content-end">
-                                                    <field
-                                                        name="state"
-                                                        widget="badge"
-                                                        decoration-muted="state == 'ready'"
-                                                        decoration-success="state == 'posted'"
-                                                        decoration-danger="state in ('failed', 'deleted')"
-                                                    />
-                                                </div>
-                                                <t
-                                                    t-call="social_media_base.postAccountHeader"
+                                        <t
+                                            t-name="card"
+                                            class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                                        >
+                                            <div class="d-flex justify-content-end">
+                                                <field
+                                                    name="state"
+                                                    widget="badge"
+                                                    decoration-muted="state == 'ready'"
+                                                    decoration-success="state == 'posted'"
+                                                    decoration-danger="state in ('failed', 'deleted')"
                                                 />
+                                            </div>
+                                            <t
+                                                t-call="social_media_base.postAccountHeader"
+                                            />
 
-                                                <div class="oe_kanban_content">
-                                                    <t
-                                                        t-set="images"
-                                                        t-value="JSON.parse(record.image_urls.raw_value)"
-                                                    />
-                                                    <t
-                                                        t-call="social_media_base.postAccountMessageImages"
-                                                    />
-                                                    <t
-                                                        t-set="videos"
-                                                        t-value="JSON.parse(record.video_urls.raw_value)"
-                                                    />
-                                                    <div
-                                                        t-if="videos.length"
-                                                        class="d-flex align-items-center gap-2 pt-2"
-                                                    >
-                                                        <i
-                                                            class="fa fa-video-camera"
-                                                            aria-hidden="true"
-                                                        />
-                                                        <span>Video (<t
-                                                            t-esc="videos.length"
-                                                        />)</span>
-                                                    </div>
-                                                </div>
+                                            <div class="oe_kanban_content">
+                                                <t
+                                                    t-set="images"
+                                                    t-value="JSON.parse(record.image_urls.raw_value)"
+                                                />
+                                                <t
+                                                    t-call="social_media_base.postAccountMessageImages"
+                                                />
+                                                <t
+                                                    t-set="videos"
+                                                    t-value="JSON.parse(record.video_urls.raw_value)"
+                                                />
                                                 <div
-                                                    t-if="record.state.raw_value == 'failed' and record.failed_description.raw_value"
-                                                    class="alert alert-danger mt-2 mb-0 p-2"
-                                                    role="alert"
+                                                    t-if="videos.length"
+                                                    class="d-flex align-items-center gap-2 pt-2"
                                                 >
-                                                    <field name="failed_description" />
+                                                    <i
+                                                        class="fa fa-video-camera"
+                                                        aria-hidden="true"
+                                                    />
+                                                    <span>Video (<t
+                                                        t-esc="videos.length"
+                                                    />)</span>
                                                 </div>
+                                            </div>
+                                            <div
+                                                t-if="record.state.raw_value == 'failed' and record.failed_description.raw_value"
+                                                class="alert alert-danger mt-2 mb-0 p-2"
+                                                role="alert"
+                                            >
+                                                <field name="failed_description" />
                                             </div>
                                         </t>
                                     </templates>
@@ -225,11 +221,7 @@
                         </page>
                     </notebook>
                 </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids" groups="base.group_user" />
-                    <field name="activity_ids" />
-                    <field name="message_ids" />
-                </div>
+                <chatter />
             </form>
         </field>
     </record>
@@ -238,7 +230,7 @@
         <field name="name">social.post.tree</field>
         <field name="model">social.post</field>
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-muted="state == 'draft'"
                 decoration-info="state in ('planned','publishing')"
                 decoration-warning="state == 'partially_published'"
@@ -256,8 +248,7 @@
                      social media report. Switched on from the column
                      selector. -->
                 <field name="link_click_count" optional="hide" />
-                <field name="state" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
 
@@ -274,80 +265,71 @@
                 <field name="image_urls" />
                 <field name="video_urls" />
                 <templates>
-                    <t t-name="kanban-box">
-                        <div class="oe_kanban_global_click rounded">
-                            <div class="d-flex flex-column">
-                                <div
-                                    class="d-flex justify-content-between align-items-center o_social_post_card_header"
-                                >
-                                    <field name="account_ids" widget="many2many_tags" />
-                                    <field
-                                        name="state"
-                                        widget="badge"
-                                        decoration-muted="state == 'draft'"
-                                        decoration-info="state in ('planned','publishing')"
-                                        decoration-warning="state == 'partially_published'"
-                                        decoration-success="state == 'published'"
-                                        decoration-danger="state == 'cancelled'"
-                                    />
-                                </div>
-                                <hr />
-                                <div t-if="record.message.raw_value">
-                                    <field
-                                        name="message"
-                                        widget="social_message"
-                                        class="social-text-justify"
-                                    />
-                                </div>
+                    <t t-name="card" class="rounded">
+                        <div
+                            class="d-flex justify-content-between align-items-center o_social_post_card_header"
+                        >
+                            <field name="account_ids" widget="many2many_tags" />
+                            <field
+                                name="state"
+                                widget="badge"
+                                decoration-muted="state == 'draft'"
+                                decoration-info="state in ('planned','publishing')"
+                                decoration-warning="state == 'partially_published'"
+                                decoration-success="state == 'published'"
+                                decoration-danger="state == 'cancelled'"
+                            />
+                        </div>
+                        <hr />
+                        <div t-if="record.message.raw_value">
+                            <field
+                                name="message"
+                                widget="social_message"
+                                class="social-text-justify"
+                            />
+                        </div>
+                        <t
+                            t-set="images"
+                            t-value="JSON.parse(record.image_urls.raw_value)"
+                        />
+                        <div
+                            t-if="images.length > record.countShowImage"
+                            class="row h-auto social-all-images"
+                        >
+                            <button class="btn btn-md active" role="button">
+                                + <t t-esc="images.length - record.countShowImage" />
+                            </button>
+                        </div>
+                        <div class="social-post-images">
+                            <div
+                                class="d-flex justify-content-center align-items-center gap-2 mt-1"
+                            >
                                 <t
-                                    t-set="images"
-                                    t-value="JSON.parse(record.image_urls.raw_value)"
-                                />
-                                <div
-                                    t-if="images.length > record.countShowImage"
-                                    class="row h-auto social-all-images"
+                                    t-foreach="images.slice(0,record.countShowImage)"
+                                    t-as="img"
+                                    t-key="img"
                                 >
-                                    <button class="btn btn-md active" role="button">
-                                        + <t
-                                        t-esc="images.length - record.countShowImage"
+                                    <img
+                                        t-att-src="img"
+                                        alt="Image"
+                                        class="img-fluid img-posts"
                                     />
-                                    </button>
-                                </div>
-                                <div class="social-post-images">
-                                    <div
-                                        class="d-flex justify-content-center align-items-center gap-2 mt-1"
-                                    >
-                                        <t
-                                            t-foreach="images.slice(0,record.countShowImage)"
-                                            t-as="img"
-                                            t-key="img"
-                                        >
-                                            <img
-                                                t-att-src="img"
-                                                alt="Image"
-                                                class="img-fluid img-posts"
-                                            />
-                                        </t>
-                                    </div>
-                                </div>
-                                <t
-                                    t-set="videos"
-                                    t-value="JSON.parse(record.video_urls.raw_value)"
-                                />
-                                <div
-                                    t-if="videos.length"
-                                    class="d-flex align-items-center gap-2 mt-1"
-                                >
-                                    <i class="fa fa-video-camera" aria-hidden="true" />
-                                    <span>Video (<t t-esc="videos.length" />)</span>
-                                </div>
-                                <t
-                                    t-set="campaignWrapperClass"
-                                    t-value="'mt-1 d-flex'"
-                                />
-                                <t t-call="social_media_base.campaignBadge" />
+                                </t>
                             </div>
                         </div>
+                        <t
+                            t-set="videos"
+                            t-value="JSON.parse(record.video_urls.raw_value)"
+                        />
+                        <div
+                            t-if="videos.length"
+                            class="d-flex align-items-center gap-2 mt-1"
+                        >
+                            <i class="fa fa-video-camera" aria-hidden="true" />
+                            <span>Video (<t t-esc="videos.length" />)</span>
+                        </div>
+                        <t t-set="campaignWrapperClass" t-value="'mt-1 d-flex'" />
+                        <t t-call="social_media_base.campaignBadge" />
                     </t>
                 </templates>
             </kanban>
@@ -455,8 +437,9 @@
 
     <record id="social_post_action" model="ir.actions.act_window">
         <field name="name">Posts</field>
+        <field name="path">social-posts</field>
         <field name="res_model">social.post</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field name="search_view_id" ref="social_post_view_search" />
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
@@ -475,7 +458,7 @@
     <record id="social_post_action_from_campaign" model="ir.actions.act_window">
         <field name="name">New Post</field>
         <field name="res_model">social.post</field>
-        <field name="view_mode">form,kanban,tree</field>
+        <field name="view_mode">form,kanban,list</field>
         <field name="search_view_id" ref="social_post_view_search" />
         <field
             name="context"
