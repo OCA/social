@@ -123,7 +123,7 @@ class TestSocialPostAccountSync(TestSocialMediaSyncCommon):
         for xml_id, view_type in (
             ("social_post_account_view_form_statistics", "form"),
             ("social_post_account_view_form", "form"),
-            ("social_post_account_view_tree", "tree"),
+            ("social_post_account_view_tree", "list"),
         ):
             view = self.env.ref(f"social_media_base.{xml_id}")
             arch = self.env["social.post.account"].get_view(view.id, view_type)["arch"]

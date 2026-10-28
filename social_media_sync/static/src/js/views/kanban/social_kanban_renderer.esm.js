@@ -1,6 +1,5 @@
-/** @odoo-module **/
-
 import {SocialKanbanRenderer} from "@social_media_base/js/views/kanban/social_kanban_renderer.esm";
+import {onWillUnmount} from "@odoo/owl";
 import {patch} from "@web/core/utils/patch";
 
 /**
@@ -12,6 +11,19 @@ import {patch} from "@web/core/utils/patch";
  * message are this module's.
  */
 patch(SocialKanbanRenderer.prototype, {
+    /** @override */
+    setup() {
+        super.setup();
+        // The bus only delivers a message to the callbacks subscribed to its
+        // type, and base subscribes to its own types only.
+        const onPostsNeedImport = (payload) =>
+            this.handleSocialViewNotification("social_posts_need_import", payload);
+        this.busService.subscribe("social_posts_need_import", onPostsNeedImport);
+        onWillUnmount(() =>
+            this.busService.unsubscribe("social_posts_need_import", onPostsNeedImport)
+        );
+    },
+
     /** @override */
     handleSocialViewNotification(type, payload) {
         super.handleSocialViewNotification(type, payload);

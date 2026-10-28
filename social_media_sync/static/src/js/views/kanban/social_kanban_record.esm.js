@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {SocialCommentDialog} from "@social_media_sync/components/social_comment_dialog/social_comment_dialog.esm";
 import {SocialKanbanRecord} from "@social_media_base/js/views/kanban/social_kanban_record.esm";
 import {_t} from "@web/core/l10n/translation";

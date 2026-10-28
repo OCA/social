@@ -2,10 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from odoo import Command, fields
+from odoo.tools import mute_logger
 
 from .test_social_sync_common import TestSocialMediaSyncCommon
 
 MEDIA_MAX_AGE_PARAM = "social_media_sync.media_max_age_days"
+LOGGER_POST_ACCOUNT = "odoo.addons.social_media_sync.models.social_post_account"
 
 
 class TestMediaRetentionParameterSync(TestSocialMediaSyncCommon):
@@ -28,6 +30,7 @@ class TestMediaRetentionParameterSync(TestSocialMediaSyncCommon):
         self.env["ir.config_parameter"].sudo().set_param(MEDIA_MAX_AGE_PARAM, "30")
         self.assertEqual(self.SocialPostAccount._media_retention_days(), 30)
 
+    @mute_logger(LOGGER_POST_ACCOUNT)
     def test_a_parameter_that_is_not_a_number_is_no_retention(self):
         """What cannot be read as a number is read as no policy, not as a crash."""
         self.env["ir.config_parameter"].sudo().set_param(
@@ -123,6 +126,7 @@ class TestMediaRetentionSync(TestSocialMediaSyncCommon):
         self.SocialPostAccount._gc_aged_post_medias()
         self.assertEqual(post_account.image_ids, attachments)
 
+    @mute_logger(LOGGER_POST_ACCOUNT)
     def test_the_pass_does_nothing_with_a_value_that_is_not_a_number(self):
         """A parameter written by hand is read as no policy, not as a crash."""
         self._set_max_age("every other tuesday")

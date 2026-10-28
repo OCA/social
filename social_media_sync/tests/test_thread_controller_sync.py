@@ -6,6 +6,7 @@ from unittest.mock import patch
 
 import odoo
 from odoo.tests.common import HttpCase, tagged
+from odoo.tools import mute_logger
 
 from .test_social_sync_common import TestSocialMediaSyncCommon
 
@@ -35,6 +36,7 @@ class TestThreadControllerSocial(HttpCase, TestSocialMediaSyncCommon):
         )
         return response.json()
 
+    @mute_logger("odoo.http")
     def test_public_user_cannot_comment(self):
         result = self._call_message_post(self.social_post_account_id.id)
         self.assertIn("error", result)
@@ -74,17 +76,43 @@ class TestThreadControllerSocial(HttpCase, TestSocialMediaSyncCommon):
         result = self._call_message_post(
             self.social_post_id.id, thread_model="social.post"
         )
-        message = result["result"]
+        (message,) = result["result"]["mail.message"]
         self.assertEqual(message["model"], "social.post")
         self.assertEqual(message["res_id"], self.social_post_id.id)
 
+    def _call_message_post_to_connector(self, post_data):
+        """Post on the publication and return what its connector received."""
+        with patch.object(
+            type(self.social_post_account_id),
+            "create_comment",
+            autospec=True,
+            return_value={"success": True},
+        ) as mock_create:
+            result = self._call_message_post(
+                self.social_post_account_id.id, post_data=post_data
+            )
+        mock_create.assert_called_once()
+        return result, mock_create.call_args.args[1]
+
     def test_manager_can_comment(self):
+        """The comment is not a mail.message, so the answer carries none.
+
+        The dialog draws the comment it hears on the bus, and an empty answer
+        is what keeps the web client from painting it in the thread of mail.
+        """
         self._authenticate_social_manager()
-        result = self._call_message_post(self.social_post_account_id.id)
+        result, post_data = self._call_message_post_to_connector({"body": "Comment"})
         self.assertNotIn("error", result)
-        author = result["result"]["author"]
-        self.assertEqual(author["type"], "partner")
-        self.assertTrue(author["user"]["isInternalUser"])
+        self.assertIsNone(result.get("result"))
+        self.assertEqual(post_data, {"body": "Comment"})
+
+    def test_a_reply_reaches_the_connector_with_its_parent(self):
+        """The comment being answered travels untouched to the connector."""
+        self._authenticate_social_manager()
+        sent = {"body": "Reply", "social_parent_ref": "remote-comment-42"}
+        result, post_data = self._call_message_post_to_connector(dict(sent))
+        self.assertNotIn("error", result)
+        self.assertEqual(post_data, sent)
 
     def test_the_notification_says_which_publication_it_is_about(self):
         """The bus channel is the partner, so the payload names the post.

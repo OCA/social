@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {SocialAccount} from "@social_media_base/components/social_account/social_account.esm";
 import {patch} from "@web/core/utils/patch";
 import {useBus} from "@web/core/utils/hooks";
