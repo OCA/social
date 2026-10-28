@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_stage_linkedin_action" model="ir.actions.act_window">
         <field name="name">LinkedIn</field>
         <field name="res_model">social.stage</field>
@@ -27,5 +26,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

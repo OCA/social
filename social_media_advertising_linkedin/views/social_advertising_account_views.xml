@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record
         id="social_account_view_form_advertising_account_inherit"
         model="ir.ui.view"
@@ -46,5 +45,4 @@
             </p>
         </field>
     </record>
-
 </odoo>

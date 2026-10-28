@@ -369,13 +369,16 @@ class TestSocialAdvertisingCampaignLinkedin(TestSocialCommonAdvertisingLinkedin)
                 ),
             ]
         )
-        with patch(
-            PATCH_ADVERTISING_LINKEDIN.format(
-                "social_advertising_campaign_group.run_schedule_window_linkedin"
+        with (
+            patch(
+                PATCH_ADVERTISING_LINKEDIN.format(
+                    "social_advertising_campaign_group.run_schedule_window_linkedin"
+                ),
+                autospec=True,
+                return_value=(111111, 222222),
             ),
-            autospec=True,
-            return_value=(111111, 222222),
-        ), patch_request as mock_request:
+            patch_request as mock_request,
+        ):
             urn = (
                 self.SocialAdvertisingCampaignLinkedin._linkedin_publish_campaign_group(
                     self.SocialAccountLinkedin, ADVERTISING_ACCOUNT_URN

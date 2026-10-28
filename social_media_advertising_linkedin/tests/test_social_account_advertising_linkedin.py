@@ -1012,9 +1012,10 @@ class TestSocialAccountAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
                 "costInUsd": "12.5",
             }
         ]
-        with self._patch_fetch_creatives(
-            [self._creative_element()]
-        ), self._patch_statistics_ads(statistics):
+        with (
+            self._patch_fetch_creatives([self._creative_element()]),
+            self._patch_statistics_ads(statistics),
+        ):
             values = self.SocialAccountLinkedin._fetch_linkedin_ads(
                 self.start_datetime, self.end_datetime
             )
@@ -1054,9 +1055,10 @@ class TestSocialAccountAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
 
     def test_fetch_linkedin_ads_created_date_is_stored_in_utc(self):
         """The moment is stored in UTC so every user reads it in his own zone."""
-        with self._patch_fetch_creatives(
-            [self._creative_element()]
-        ), self._patch_statistics_ads([]):
+        with (
+            self._patch_fetch_creatives([self._creative_element()]),
+            self._patch_statistics_ads([]),
+        ):
             values = self.SocialAccountLinkedin._fetch_linkedin_ads(
                 self.start_datetime, self.end_datetime
             )
@@ -1069,9 +1071,12 @@ class TestSocialAccountAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
 
     def test_fetch_linkedin_ads_without_a_known_post(self):
         """A creative promoting an unknown post is kept, without publication."""
-        with self._patch_fetch_creatives(
-            [self._creative_element(content={"reference": "urn:li:ugcPost:404"})]
-        ), self._patch_statistics_ads([]):
+        with (
+            self._patch_fetch_creatives(
+                [self._creative_element(content={"reference": "urn:li:ugcPost:404"})]
+            ),
+            self._patch_statistics_ads([]),
+        ):
             values = self.SocialAccountLinkedin._fetch_linkedin_ads(
                 self.start_datetime, self.end_datetime
             )
@@ -1089,9 +1094,10 @@ class TestSocialAccountAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
 
     def test_fetch_ads_keeps_the_hook_signature(self):
         """The framework calls the hook without arguments, as the base does."""
-        with self._patch_fetch_creatives(
-            [self._creative_element()]
-        ), self._patch_statistics_ads([]):
+        with (
+            self._patch_fetch_creatives([self._creative_element()]),
+            self._patch_statistics_ads([]),
+        ):
             values = self.SocialAccountLinkedin._fetch_ads()
         self.assertEqual(len(values), 1)
         start_date, end_date = default_statistics_window(None, None)
@@ -1100,9 +1106,10 @@ class TestSocialAccountAdvertisingLinkedin(TestSocialCommonAdvertisingLinkedin):
 
     def test_fetch_ad_refs(self):
         """The check only lists the creatives, it asks for nothing else."""
-        with self._patch_fetch_creatives(
-            [self._creative_element()]
-        ), self._patch_statistics_ads([]) as mock_statistics:
+        with (
+            self._patch_fetch_creatives([self._creative_element()]),
+            self._patch_statistics_ads([]) as mock_statistics,
+        ):
             refs = self.SocialAccountLinkedin._fetch_ad_refs()
         self.assertEqual(refs, {"urn:li:sponsoredCreative:1"})
         mock_statistics.assert_not_called()

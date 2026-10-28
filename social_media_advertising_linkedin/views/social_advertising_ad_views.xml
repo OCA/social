@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_advertising_ad_view_form_inherit" model="ir.ui.view">
         <field
             name="name"
@@ -71,7 +70,7 @@
             <p>
                 The ads served by your LinkedIn accounts are shown here once
                 you synchronize them with the <b>Sync ads</b> button.
-            </p></field>
+            </p>
+        </field>
     </record>
-
 </odoo>
