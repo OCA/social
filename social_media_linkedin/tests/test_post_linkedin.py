@@ -366,6 +366,7 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
             self.SocialPostAccountLinkedin._check_publishable()
         self.assertIn("JPG, PNG and GIF", self.SocialPostLinkedin.message_error)
 
+    @mute_logger(LOGGER_POST_ACCOUNT_BASE)
     def test_action_post_fails_only_the_line_with_the_wrong_format(self):
         """The format is checked before anything is uploaded to LinkedIn."""
         self.SocialPostAccountLinkedin.write({"state": "ready", "remote_ref": False})
@@ -1213,7 +1214,7 @@ class TestSocialPostLinkedin(TestSocialCommonLinkedin):
         """Confirming costs one call per hundred suspects, not one each."""
         count = 2 * _BATCH_GET_MAX_IDS_LINKEDIN + 50
         lines = self._linkedin_suspects(
-            ["urn:batch:%s" % index for index in range(count)]
+            [f"urn:batch:{index}" for index in range(count)]
         )
         mock_request.return_value = self._batch_get_response()
         self.assertFalse(lines._check_remote_posts_exist())

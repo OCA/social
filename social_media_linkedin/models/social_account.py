@@ -12,7 +12,7 @@ import psycopg2
 import pytz
 import requests
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import split_every
@@ -123,7 +123,7 @@ class SocialAccount(models.Model):
                     linkedin_secret or account_sudo.linkedin_secret,
                 ),
             ],
-            _(
+            self.env._(
                 "An account with this information "
                 "already exists; please also check "
                 "archived accounts."
@@ -180,7 +180,7 @@ class SocialAccount(models.Model):
             return response
         except requests.exceptions.RequestException as ex:
             raise UserError(
-                _("Error connecting to LinkedIn: %(error)s", error=ex)
+                self.env._("Error connecting to LinkedIn: %(error)s", error=ex)
             ) from ex
 
     @api.model
@@ -196,17 +196,17 @@ class SocialAccount(models.Model):
         """
         code = _linkedin_error_code(error)
         if code == "invalid_client":
-            return _(
+            return self.env._(
                 "LinkedIn rejected the credentials of the App. Check the "
                 "Client ID and the Client Secret of your LinkedIn App."
             )
         if code in ("invalid_grant", "invalid_request"):
-            return _(
+            return self.env._(
                 "The authorization of LinkedIn is no longer valid. Please "
                 "restart the account association process."
             )
         if code == "REVOKED_ACCESS_TOKEN":
-            return _(
+            return self.env._(
                 "The access token of LinkedIn was revoked. Update the "
                 "account to authorize it again."
             )
@@ -223,7 +223,7 @@ class SocialAccount(models.Model):
         :param prefix: what was being done, shown before the reason.
         :param response: what LinkedIn answered.
         """
-        message = _(
+        message = self.env._(
             "%(prefix)s: %(error)s",
             prefix=prefix,
             error=self._linkedin_error_message(response),
@@ -294,7 +294,7 @@ class SocialAccount(models.Model):
         if isinstance(response, dict) and response.get("access_token"):
             return response
         self._linkedin_raise_error(
-            _("The LinkedIn token could not be refreshed"), response
+            self.env._("The LinkedIn token could not be refreshed"), response
         )
 
     def _linkedin_store_refreshed_token(self):
@@ -382,7 +382,7 @@ class SocialAccount(models.Model):
         )
         if not isinstance(image, dict):
             self._linkedin_raise_error(
-                _("The image could not be uploaded to LinkedIn"), image
+                self.env._("The image could not be uploaded to LinkedIn"), image
             )
         value_upload_image = image.get("value", {})
         return value_upload_image.get("image", {}), value_upload_image.get("uploadUrl")
@@ -400,7 +400,10 @@ class SocialAccount(models.Model):
             image_urn, url_upload_image = self._linkedin_prepare_url_upload_image()
             if not image_urn:
                 raise UserError(
-                    _("LinkedIn did not return the reference of the " "uploaded image.")
+                    self.env._(
+                        "LinkedIn did not return the reference of the "
+                        "uploaded image."
+                    )
                 )
             upload_image = self._request_linkedin(
                 method="PUT",
@@ -413,7 +416,8 @@ class SocialAccount(models.Model):
             )
             if upload_image.status_code not in (200, 201):
                 self._linkedin_raise_error(
-                    _("The image could not be uploaded to LinkedIn"), upload_image
+                    self.env._("The image could not be uploaded to LinkedIn"),
+                    upload_image,
                 )
             images_upload[str(image.id)] = image_urn
         return images_upload
@@ -444,7 +448,7 @@ class SocialAccount(models.Model):
         )
         if not isinstance(video, dict):
             self._linkedin_raise_error(
-                _("The video could not be uploaded to LinkedIn"), video
+                self.env._("The video could not be uploaded to LinkedIn"), video
             )
         value_upload_video = video.get("value", {})
         return (
@@ -478,12 +482,13 @@ class SocialAccount(models.Model):
             )
             if upload_part.status_code not in (200, 201):
                 self._linkedin_raise_error(
-                    _("The video could not be uploaded to LinkedIn"), upload_part
+                    self.env._("The video could not be uploaded to LinkedIn"),
+                    upload_part,
                 )
             etag = upload_part.headers.get("etag", "").strip('"')
             if not etag:
                 raise UserError(
-                    _(
+                    self.env._(
                         "LinkedIn did not return the identifier of the part "
                         "%(part)s of %(total)s, so the upload of the video "
                         "cannot be finalized.",
@@ -513,7 +518,8 @@ class SocialAccount(models.Model):
         )
         if finalize_video.status_code not in (200, 201):
             self._linkedin_raise_error(
-                _("The video could not be uploaded to LinkedIn"), finalize_video
+                self.env._("The video could not be uploaded to LinkedIn"),
+                finalize_video,
             )
 
     def _linkedin_video_poll_settings(self):
@@ -566,7 +572,7 @@ class SocialAccount(models.Model):
             )
             if response.status_code != 200:
                 self._linkedin_raise_error(
-                    _("The status of the video could not be read"), response
+                    self.env._("The status of the video could not be read"), response
                 )
             video = response.json()
             status = video.get("status", "")
@@ -574,7 +580,7 @@ class SocialAccount(models.Model):
                 return True
             if status == "PROCESSING_FAILED":
                 raise UserError(
-                    _(
+                    self.env._(
                         "LinkedIn could not process the video: %(reason)s",
                         reason=video.get("processingFailureReason", status),
                     )
@@ -582,7 +588,7 @@ class SocialAccount(models.Model):
             if attempt < attempts - 1:
                 time.sleep(delay)
         raise UserError(
-            _(
+            self.env._(
                 "LinkedIn is still processing the video after %(seconds)s "
                 "seconds. Please try to publish the post again later.",
                 seconds=int(attempts * delay),
@@ -664,7 +670,7 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 201:
             self._linkedin_raise_error(
-                _("The post could not be published on LinkedIn"), response
+                self.env._("The post could not be published on LinkedIn"), response
             )
         return response.headers.get("x-restli-id"), {**video_refs, **image_refs}
 
@@ -709,7 +715,7 @@ class SocialAccount(models.Model):
         wizard_social_account = self._get_linkedin_oauth_wizard(kwargs.get("state", ""))
         if not wizard_social_account:
             raise UserError(
-                _(
+                self.env._(
                     "Invalid OAuth state token. Please restart the "
                     "account association process."
                 )
@@ -828,7 +834,7 @@ class SocialAccount(models.Model):
             else:
                 error_message = self._linkedin_error_message(
                     response_organizations
-                ) or _("Error obtaining information from the organization")
+                ) or self.env._("Error obtaining information from the organization")
                 account = (
                     self.env["social.account"]
                     .sudo()
@@ -859,7 +865,7 @@ class SocialAccount(models.Model):
         """
         if not isinstance(token, dict):
             raise UserError(
-                _(
+                self.env._(
                     "Creating account: %(error)s",
                     error=self._linkedin_error_message(token),
                 )
@@ -867,7 +873,7 @@ class SocialAccount(models.Model):
         access_token = token.get("access_token", False)
         if not access_token:
             raise UserError(
-                _(
+                self.env._(
                     "Creating account: LinkedIn answered without an "
                     "access token. %(error)s",
                     error=self._linkedin_error_message(token),
@@ -1012,7 +1018,7 @@ class SocialAccount(models.Model):
         missing = self._missing_linkedin_scopes(scopes)
         if missing:
             raise UserError(
-                _(
+                self.env._(
                     "The LinkedIn account %(account)s was not authorized for "
                     "%(scopes)s. Enable the matching product on the LinkedIn "
                     "application and associate the account again.",
@@ -1095,7 +1101,7 @@ class SocialAccount(models.Model):
     def _notify_valid_token_linkedin(self):
         self._notify_user_client(
             notif_type="social_form_success",
-            notif_message=_("The token is valid."),
+            notif_message=self.env._("The token is valid."),
             media="linkedin",
             account_name=self.name or "LinkedIn",
         )
@@ -1135,7 +1141,7 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 200:
             raise UserError(
-                _(
+                self.env._(
                     "The publications could not be read from LinkedIn: %(error)s",
                     error=self._linkedin_error_message(response),
                 )
@@ -1856,7 +1862,7 @@ class SocialAccount(models.Model):
             if response.status_code != 200:
                 raise self._linkedin_statistics_error(
                     response,
-                    _(
+                    self.env._(
                         "%(label)s: %(error)s",
                         label=error_label,
                         error=self._linkedin_error_message(response),
@@ -1904,7 +1910,7 @@ class SocialAccount(models.Model):
             if response.status_code != 200:
                 raise self._linkedin_statistics_error(
                     response,
-                    _(
+                    self.env._(
                         "The likes and the comments of the publications could not be "
                         "read: %(error)s",
                         error=self._linkedin_error_message(response),
@@ -1963,8 +1969,12 @@ class SocialAccount(models.Model):
         # the comments come from ``socialActions`` below, which is the source
         # LinkedIn documents as the up-to-date one.
         errors_by_field = {
-            "shares": _("The statistics of the shared publications could not be read"),
-            "ugcPosts": _("The statistics of the publications could not be read"),
+            "shares": self.env._(
+                "The statistics of the shared publications could not be read"
+            ),
+            "ugcPosts": self.env._(
+                "The statistics of the publications could not be read"
+            ),
         }
         data = {}
         for urn_prefix, param_field, urn_key in _ENTITY_STATISTICS_LINKEDIN:
@@ -2035,7 +2045,7 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 200:
             raise UserError(
-                _(
+                self.env._(
                     "Error reading the statistics of the LinkedIn account: "
                     "%(error)s",
                     error=self._linkedin_error_message(response),

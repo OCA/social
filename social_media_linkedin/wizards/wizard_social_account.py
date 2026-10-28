@@ -4,7 +4,7 @@
 import secrets
 from urllib.parse import urlencode, urljoin
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 from ..social_linkedin_utils import _URL_AUTH_V2_LINKEDIN
 
@@ -92,7 +92,9 @@ class WizardSocialAccount(models.TransientModel):
                     if not self.env.context.get("not_notify", False):
                         self._notify_user_client(
                             notif_type="social_form_success",
-                            notif_message=_("The token was updated successfully"),
+                            notif_message=self.env._(
+                                "The token was updated successfully"
+                            ),
                             media="linkedin",
                             account_name=self.account_id.name,
                         )

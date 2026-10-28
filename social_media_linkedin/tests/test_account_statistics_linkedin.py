@@ -7,7 +7,6 @@ from unittest.mock import MagicMock, patch
 import psycopg2
 from psycopg2 import errorcodes
 
-from odoo import _
 from odoo.exceptions import UserError
 from odoo.tests.common import tagged
 from odoo.tools import mute_logger
@@ -592,7 +591,7 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
 
         def statistics(account, posts=None, **kwargs):
             if account == self.SocialAccountLinkedin:
-                raise UserError(_("LinkedIn refused the statistics"))
+                raise UserError(self.env._("LinkedIn refused the statistics"))
             return {"urn:li:share:2": (0, 2, 0, 0, 0, 0)}
 
         with patch(
@@ -618,7 +617,7 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
         def statistics(account, posts=None, **kwargs):
             batches.append([post["id"] for post in posts])
             if len(batches) <= refusals:
-                raise LinkedinRequestRejectedError(_(REJECTION_LINKEDIN), 400)
+                raise LinkedinRequestRejectedError(self.env._(REJECTION_LINKEDIN), 400)
             return answer
 
         return batches, statistics
@@ -764,7 +763,7 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             patch(
                 PATCH_ACCOUNT_LINKEDIN.format("_get_entity_statistics"),
                 autospec=True,
-                side_effect=UserError(_("Internal error")),
+                side_effect=UserError(self.env._("Internal error")),
             ),
             self._patch_posts_gone(["urn:li:share:1"]) as mock_gone,
             self._patch_notify_user() as mock_notify,
@@ -904,7 +903,7 @@ class TestLinkedinPostStatistics(TestSocialCommonLinkedin):
             asked = batches.setdefault(account, [])
             asked.append([post["id"] for post in posts])
             if account == self.SocialAccountLinkedin and len(asked) == 1:
-                raise LinkedinRequestRejectedError(_(REJECTION_LINKEDIN), 400)
+                raise LinkedinRequestRejectedError(self.env._(REJECTION_LINKEDIN), 400)
             return {
                 "urn:li:share:2": (0, 6, 0, 0, 0, 0),
                 "urn:li:share:3": (0, 9, 0, 0, 0, 0),

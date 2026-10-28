@@ -6,7 +6,7 @@ from urllib.parse import quote
 
 import psycopg2
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import split_every
@@ -88,13 +88,13 @@ class SocialPostAccount(models.Model):
                         post_account._linkedin_enrich_published_post(post_entity)
                     else:
                         post_account._register_publish_refused(
-                            _(
+                            self.env._(
                                 "The account has no LinkedIn access token. "
                                 "Update the account to authorize it again."
                             )
                         )
                         post_account.account_id._flag_credentials_expired(
-                            _("the account has no access token")
+                            self.env._("the account has no access token")
                         )
         return res
 
@@ -219,8 +219,12 @@ class SocialPostAccount(models.Model):
             if delete_post.status_code != 204:
                 error_message = self.account_id._linkedin_error_message(
                     delete_post
-                ) or _("The post could not be deleted, please try again later.")
+                ) or self.env._(
+                    "The post could not be deleted, please try again later."
+                )
                 raise UserError(
-                    _("Error deleting LinkedIn post: %(error)s", error=error_message)
+                    self.env._(
+                        "Error deleting LinkedIn post: %(error)s", error=error_message
+                    )
                 )
         return super()._delete_post_account()

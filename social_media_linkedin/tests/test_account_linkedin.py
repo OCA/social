@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, Mock, patch
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, fields
+from odoo import fields
 from odoo.exceptions import UserError
 from odoo.fields import Command
 from odoo.tests.common import tagged
@@ -855,7 +855,7 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
 
         def refuse_the_second(account, start_time, end_time, granularity):
             if account.linkedin_account_id == "654321":
-                raise UserError(_("403 forbidden"))
+                raise UserError(self.env._("403 forbidden"))
             return {"2025-01-01": (0, 0, 0, 0, 0.0, 10)}
 
         with (
@@ -1055,7 +1055,7 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
     def test_a_failed_backfill_leaves_the_account_associated(self):
         """The association cannot be lost to a history that would not read."""
         with (
-            self._patch_reader(side_effect=UserError(_("403 forbidden"))),
+            self._patch_reader(side_effect=UserError(self.env._("403 forbidden"))),
             mute_logger(LOGGER_ACCOUNT_LINKEDIN),
         ):
             self.SocialAccountLinkedin._on_account_associated()
@@ -2169,7 +2169,7 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
             ) as mock_sendone,
         ):
             with account._statistics_guard():
-                raise UserError(_("The page role was lost"))
+                raise UserError(self.env._("The page role was lost"))
         mock_sendone.assert_not_called()
         kept = mock_request.session["social_media_notification"]
         self.assertEqual(len(kept), 1)
@@ -2192,7 +2192,7 @@ class TestSocialLinkedin(TestSocialCommonLinkedin):
             ),
         ):
             with self.SocialAccountLinkedin._statistics_guard():
-                raise UserError(_("The page role was lost"))
+                raise UserError(self.env._("The page role was lost"))
         self.assertEqual(len(sent), 1)
         self.assertIn("The page role was lost", sent[0]["message"])
         self.assertNotIn("social_media_notification", mock_request.session)

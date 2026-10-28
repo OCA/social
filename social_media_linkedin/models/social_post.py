@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 from odoo.tools import human_size
 
 from ..social_linkedin_utils import (
@@ -62,7 +62,7 @@ class SocialPost(models.Model):
         message = self._get_checked_message()
         if len(message) > _MAX_MESSAGE_LENGTH_LINKEDIN:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn publishes at most %(limit)s characters per post, "
                     "and this one has %(length)s. Shorten the message to "
                     "publish it.",
@@ -72,7 +72,7 @@ class SocialPost(models.Model):
             )
         if len(self.video_ids) > _MAX_VIDEOS_LINKEDIN:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn publishes a single video per post, so this post "
                     "carrying %(videos)s videos cannot be published. Leave one "
                     "video or create a separate post for each of them.",
@@ -84,7 +84,7 @@ class SocialPost(models.Model):
         )
         if wrong_videos:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn only publishes MP4 videos, so %(names)s cannot "
                     "be published. Convert them to MP4 or remove them from the "
                     "post.",
@@ -93,7 +93,7 @@ class SocialPost(models.Model):
             )
         if large_videos:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn publishes videos of at most %(limit)s, so "
                     "%(names)s cannot be published. Reduce their size or "
                     "remove them from the post.",
@@ -105,7 +105,7 @@ class SocialPost(models.Model):
             return errors
         if len(self.image_ids) > _MAX_IMAGES_LINKEDIN:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn publishes at most %(limit)s images per post, and "
                     "this one carries %(images)s. Remove some of them or "
                     "create a separate post.",
@@ -118,7 +118,7 @@ class SocialPost(models.Model):
         )
         if wrong_images:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn only publishes JPG, PNG and GIF images, so "
                     "%(names)s cannot be published. Convert them or remove "
                     "them from the post.",
@@ -127,7 +127,7 @@ class SocialPost(models.Model):
             )
         if large_images:
             errors.append(
-                _(
+                self.env._(
                     "LinkedIn publishes images of at most %(limit)s, so "
                     "%(names)s cannot be published. Reduce their size or "
                     "remove them from the post.",
@@ -144,7 +144,7 @@ class SocialPost(models.Model):
             return warnings
         if self.image_ids and self.video_ids:
             warnings.append(
-                _(
+                self.env._(
                     "LinkedIn does not combine images and a video in the same "
                     "post, so only the video will be published. Remove the "
                     "video to publish the images, or create a separate post "
