@@ -916,11 +916,13 @@ class SocialAccount(models.Model):
         :rtype: tuple
         """
         public_metrics = val_x.public_metrics
-        return public_metrics.get("like_count", 0), public_metrics.get(
-            "impression_count", 0
-        ), public_metrics.get("reply_count", 0), public_metrics.get(
-            "retweet_count", 0
-        ), public_metrics.get("quote_count", 0)
+        return (
+            public_metrics.get("like_count", 0),
+            public_metrics.get("impression_count", 0),
+            public_metrics.get("reply_count", 0),
+            public_metrics.get("retweet_count", 0),
+            public_metrics.get("quote_count", 0),
+        )
 
     @api.model
     def _x_statistics_values(self, public_metrics):

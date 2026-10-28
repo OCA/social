@@ -168,17 +168,20 @@ class TestXPostStatistics(TestSocialCommonX):
         """
         line = self._post("1", like_count=4)
         client = self._fake_client([self._fake_post("1", like_count=9)])
-        with patch.object(
-            type(self.SocialAccountX),
-            "get_client_api",
-            autospec=True,
-            return_value=client,
-        ), patch.object(
-            type(self.SocialAccountX),
-            "_valid_time_request",
-            autospec=True,
-            return_value=False,
-        ) as mock_valid:
+        with (
+            patch.object(
+                type(self.SocialAccountX),
+                "get_client_api",
+                autospec=True,
+                return_value=client,
+            ),
+            patch.object(
+                type(self.SocialAccountX),
+                "_valid_time_request",
+                autospec=True,
+                return_value=False,
+            ) as mock_valid,
+        ):
             refreshed = self.SocialAccountX._refresh_post_statistics(line)
         client.get_tweets.assert_not_called()
         self.assertEqual(mock_valid.call_args.kwargs["endpoint"], "get_posts")
@@ -201,17 +204,20 @@ class TestXPostStatistics(TestSocialCommonX):
             MagicMock(data=[self._fake_post("0", like_count=3)]),
             self.get_exception_manyrequests(),
         ]
-        with patch.object(
-            type(self.SocialAccountX),
-            "get_client_api",
-            autospec=True,
-            return_value=client,
-        ), patch.object(
-            type(self.SocialAccountX),
-            "_get_message_many_requests",
-            autospec=True,
-            return_value=False,
-        ) as mock_warning:
+        with (
+            patch.object(
+                type(self.SocialAccountX),
+                "get_client_api",
+                autospec=True,
+                return_value=client,
+            ),
+            patch.object(
+                type(self.SocialAccountX),
+                "_get_message_many_requests",
+                autospec=True,
+                return_value=False,
+            ) as mock_warning,
+        ):
             refreshed = self.SocialAccountX._refresh_post_statistics(lines)
         self.assertEqual(refreshed.mapped("remote_ref"), ["0"])
         self.assertEqual(mock_warning.call_args.kwargs["endpoint"], "get_posts")
@@ -342,12 +348,15 @@ class TestXDashboardUpdate(TestSocialCommonX):
     def test_another_media_goes_through_base_and_x_is_read_once(self):
         """The other social media answers for its series, and X is read once."""
         self._window_post("1")
-        with self._patch_read_of_x(answer=False) as mock_read, patch.object(
-            type(self.SocialAccountX),
-            "_refresh_statistics",
-            autospec=True,
-            return_value=True,
-        ) as mock_series:
+        with (
+            self._patch_read_of_x(answer=False) as mock_read,
+            patch.object(
+                type(self.SocialAccountX),
+                "_refresh_statistics",
+                autospec=True,
+                return_value=True,
+            ) as mock_series,
+        ):
             accounts = self.social_account_id + self.SocialAccountX
             self.assertTrue(accounts.refresh_dashboard_statistics())
         mock_series.assert_called_once()
@@ -358,16 +367,19 @@ class TestXDashboardUpdate(TestSocialCommonX):
         """The figures of the card come from the lines just written."""
         self._window_post("1")
         steps = []
-        with patch.object(
-            type(self.SocialAccountX),
-            "_write_posts_metrics",
-            autospec=True,
-            side_effect=lambda account, lines: steps.append("read") or lines,
-        ), patch.object(
-            type(self.SocialAccountX),
-            "_refresh_account_statistics",
-            autospec=True,
-            side_effect=lambda accounts: steps.append(accounts) or True,
+        with (
+            patch.object(
+                type(self.SocialAccountX),
+                "_write_posts_metrics",
+                autospec=True,
+                side_effect=lambda account, lines: steps.append("read") or lines,
+            ),
+            patch.object(
+                type(self.SocialAccountX),
+                "_refresh_account_statistics",
+                autospec=True,
+                side_effect=lambda accounts: steps.append(accounts) or True,
+            ),
         ):
             self.SocialAccountX.refresh_dashboard_statistics()
         self.assertEqual(steps, ["read", self.SocialAccountX])
