@@ -5,7 +5,7 @@ import logging
 
 import psycopg2
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import UserError
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 
@@ -57,7 +57,7 @@ class SocialPostAccount(models.Model):
             campaign_linkedin_urn = self.social_campaign_id.remote_ref
             if not campaign_linkedin_urn:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign %(campaign)s has not been created on "
                         "LinkedIn yet. Use the 'Create in LinkedIn' button "
                         "on the campaign before posting.",
@@ -66,7 +66,7 @@ class SocialPostAccount(models.Model):
                 )
             if not post_id:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign could not be generated for the post, "
                         "please try again later."
                     )
@@ -91,7 +91,7 @@ class SocialPostAccount(models.Model):
             )
             if response.status_code != 201:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The sponsored creative could not be created on "
                         "LinkedIn: %(error)s",
                         error=self.account_id._linkedin_error_message(response),
@@ -115,7 +115,7 @@ class SocialPostAccount(models.Model):
         )
         if self.post_id:
             self.post_id.message_post(
-                body=_(
+                body=self.env._(
                     "The post was published on LinkedIn but the campaign "
                     "creative could not be created. Check the Ads permissions "
                     "of the account."

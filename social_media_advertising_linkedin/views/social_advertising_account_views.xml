@@ -16,7 +16,7 @@
         />
         <field name="arch" type="xml">
             <xpath
-                expr="//field[@name='advertising_account_ids']/tree/field[@name='currency_id']"
+                expr="//field[@name='advertising_account_ids']/list/field[@name='currency_id']"
                 position="after"
             >
                 <field name="linkedin_status" optional="show" />
@@ -32,8 +32,9 @@
         model="ir.actions.act_window"
     >
         <field name="name">Advertising accounts</field>
+        <field name="path">social-linkedin-ad-accounts</field>
         <field name="res_model">social.advertising.account</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('media_id.media_type', '=', 'linkedin')]</field>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

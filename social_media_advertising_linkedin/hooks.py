@@ -3,8 +3,6 @@
 
 import logging
 
-from odoo import _
-
 _logger = logging.getLogger(__name__)
 
 
@@ -29,7 +27,7 @@ def post_init_hook(env):
     )
     for account in concerned:
         account.message_post(
-            body=_(
+            body=env._(
                 "The Advertising module for LinkedIn was installed. The token "
                 "of this account was not granted %(scopes)s, so LinkedIn "
                 "refuses the advertising calls. Add the Advertising API "

@@ -13,9 +13,6 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//div[@name='button_box']" position="before">
-                <field name="active" invisible="1" />
-                <field name="media_type" invisible="1" />
-                <field name="stage_code" invisible="1" />
                 <!-- The statuses LinkedIn accepts no action on: the ribbon
                      says at a glance why the ad cannot be deleted and why it
                      is not being served, without reading the status field.
@@ -56,8 +53,9 @@
 
     <record id="social_advertising_ad_linkedin_action" model="ir.actions.act_window">
         <field name="name">Ads</field>
+        <field name="path">social-linkedin-ads</field>
         <field name="res_model">social.advertising.ad</field>
-        <field name="view_mode">kanban,tree,form</field>
+        <field name="view_mode">kanban,list,form</field>
         <field
             name="search_view_id"
             ref="social_media_advertising.social_advertising_ad_view_search"

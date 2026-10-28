@@ -8,7 +8,8 @@ from psycopg2 import errorcodes
 
 from odoo import Command
 from odoo.exceptions import UserError
-from odoo.tests.common import Form, tagged
+from odoo.tests import Form
+from odoo.tests.common import tagged
 from odoo.tools import mute_logger
 
 from odoo.addons.link_tracker.models.link_tracker import LinkTracker

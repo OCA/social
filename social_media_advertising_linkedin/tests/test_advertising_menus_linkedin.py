@@ -112,7 +112,7 @@ class TestAdvertisingMenusLinkedin(TestSocialCommonAdvertisingLinkedin):
     def test_ad_action_keeps_the_kanban_and_the_search_view(self):
         """The filtered list of ads is the generic one, only narrowed."""
         action = self.env.ref(f"{MODULE}.social_advertising_ad_linkedin_action")
-        self.assertEqual(action.view_mode, "kanban,tree,form")
+        self.assertEqual(action.view_mode, "kanban,list,form")
         self.assertEqual(
             action.search_view_id,
             self.env.ref("social_media_advertising.social_advertising_ad_view_search"),

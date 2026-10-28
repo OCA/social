@@ -132,7 +132,7 @@ post, and publishing one never creates the campaign it points at.
   and archived in the advertising account stored on it.
 - The language and the country of the campaign (its locale) are taken from the
   form of the user who presses *Create in LinkedIn*: their language and the
-  country of their company or contact. When the user has no country, `US` is
+  country of their contact. When the user has no country, `US` is
   sent. Check the user form before creating campaigns, because LinkedIn fixes
   that value when the campaign is created.
 - The LinkedIn stages are installed as data of the module and listed in
