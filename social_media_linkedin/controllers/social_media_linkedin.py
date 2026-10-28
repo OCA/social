@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import _, http
+from odoo import http
 from odoo.exceptions import AccessError, UserError
 from odoo.http import request, route
 
@@ -38,7 +38,7 @@ class SocialMediaLinkedin(http.Controller):
             )
             SocialAccount._notify_user_session(
                 SocialAccount._format_user_notification(
-                    _("The account was associated successfully"),
+                    request.env._("The account was associated successfully"),
                     media="linkedin",
                     message_type="success",
                 ),
