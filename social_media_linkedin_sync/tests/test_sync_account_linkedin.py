@@ -9,7 +9,7 @@ from urllib.parse import quote
 from dateutil.relativedelta import relativedelta
 from freezegun import freeze_time
 
-from odoo import Command, _
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tools import mute_logger
 
@@ -825,7 +825,7 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             type(self.SocialAccount),
             "_import_linkedin_posts",
             autospec=True,
-            side_effect=UserError(_("LinkedIn refused the feed")),
+            side_effect=UserError(self.env._("LinkedIn refused the feed")),
         ):
             self.SocialAccountLinkedin._update_posts_statistics(False, None, reported)
         self.assertFalse(reported)
@@ -1237,7 +1237,9 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
         self._isolate_linkedin_account()
         self.SocialAccountLinkedin.write({"pending_initial_sync": True})
         with (
-            self._patch_reader(side_effect=UserError(_("history unavailable"))),
+            self._patch_reader(
+                side_effect=UserError(self.env._("history unavailable"))
+            ),
             patch(
                 PATCH_SYNC_ACCOUNT_LINKEDIN.format("_import_linkedin_posts"),
                 autospec=True,
@@ -1320,7 +1322,7 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
 
         def entity_statistics(account, *args, **kwargs):
             if account.id == failing.id:
-                raise UserError(_("LinkedIn refused the statistics"))
+                raise UserError(self.env._("LinkedIn refused the statistics"))
             return {}
 
         patch_entity = self.generate_patch(
@@ -1467,6 +1469,7 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
             msg="The entities without a reaction are asked about all the same.",
         )
 
+    @mute_logger(LOGGER_ACCOUNT_SYNC_LINKEDIN)
     @patch(PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"))
     def test_get_reactions_unreadable(self, mock_request):
         """Not knowing is not the same as not having reacted."""
@@ -1586,7 +1589,9 @@ class TestSocialSyncAccountLinkedin(TestSocialSyncCommonLinkedin):
     @patch(PATCH_ACCOUNT_LINKEDIN.format("_request_linkedin"))
     def test_get_reactions_unreachable(self, mock_request):
         """LinkedIn out of reach is not knowing, and not knowing is ``None``."""
-        mock_request.side_effect = UserError(_("LinkedIn refused the reactions"))
+        mock_request.side_effect = UserError(
+            self.env._("LinkedIn refused the reactions")
+        )
         self.assertIsNone(
             self.SocialAccountLinkedin._get_reactions(["urn:li:ugcPost:1"]),
             msg="An import is never lost over the reactions of the account.",

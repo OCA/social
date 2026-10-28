@@ -4,7 +4,7 @@
 import logging
 from datetime import timedelta
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import is_list_of, split_every
 
@@ -841,7 +841,7 @@ class SocialAccount(models.Model):
             return
         self.sudo().write({"linkedin_sync_scopes_notified": True})
         self.message_post(
-            body=_(
+            body=self.env._(
                 "The token of this account was not granted %(scopes)s, so "
                 "LinkedIn refuses to serve its publications and they cannot "
                 "be imported. Enable the matching product on the LinkedIn "
