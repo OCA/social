@@ -26,14 +26,17 @@ class TestSociaXlController(HttpCase):
     def test_callback_creates_account_when_tokens_present(self):
         access_token = "tok"
         access_secret = "sec"
-        with patch(
-            PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
-            autospec=True,
-            return_value=(access_token, access_secret),
-        ) as mocked_get_token, patch(
-            PATCH_SOCIAL_ACCOUNT.format("create_account_x"),
-            autospec=True,
-        ) as mocked_create:
+        with (
+            patch(
+                PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
+                autospec=True,
+                return_value=(access_token, access_secret),
+            ) as mocked_get_token,
+            patch(
+                PATCH_SOCIAL_ACCOUNT.format("create_account_x"),
+                autospec=True,
+            ) as mocked_create,
+        ):
             resp = self.url_open("/social_x/callback?oauth_token=1&oauth_verifier=2")
             mocked_get_token.assert_called_once()
             mocked_create.assert_called_once()
@@ -54,30 +57,37 @@ class TestSociaXlController(HttpCase):
         data.profile_image_url = "https://example.com/img_url"
         wizard = SimpleNamespace(x_api_key="KEY", x_api_secret="SECRET")
         SocialAccount = type(self.env["social.account"])
-        with patch(
-            PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
-            autospec=True,
-            return_value=("tok", "sec"),
-        ), patch.object(
-            SocialAccount, "get_client_api", autospec=True, return_value=fake_client
-        ), patch.object(
-            SocialAccount, "_get_x_oauth_wizard", autospec=True, return_value=wizard
-        ), patch.object(
-            SocialAccount,
-            "_get_access_token_oauth2",
-            autospec=True,
-            return_value="oauth2-token",
-        ), patch.object(
-            SocialAccount,
-            "_x_download_profile_image",
-            autospec=True,
-            return_value=False,
-        ), patch.object(
-            SocialAccount, "_x_refresh_credit_balance", autospec=True
-        ), patch.object(SocialAccount, "_on_account_associated", autospec=True), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
-            autospec=True,
-        ) as mocked_notify:
+        with (
+            patch(
+                PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
+                autospec=True,
+                return_value=("tok", "sec"),
+            ),
+            patch.object(
+                SocialAccount, "get_client_api", autospec=True, return_value=fake_client
+            ),
+            patch.object(
+                SocialAccount, "_get_x_oauth_wizard", autospec=True, return_value=wizard
+            ),
+            patch.object(
+                SocialAccount,
+                "_get_access_token_oauth2",
+                autospec=True,
+                return_value="oauth2-token",
+            ),
+            patch.object(
+                SocialAccount,
+                "_x_download_profile_image",
+                autospec=True,
+                return_value=False,
+            ),
+            patch.object(SocialAccount, "_x_refresh_credit_balance", autospec=True),
+            patch.object(SocialAccount, "_on_account_associated", autospec=True),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
+                autospec=True,
+            ) as mocked_notify,
+        ):
             resp = self.url_open("/social_x/callback?oauth_token=1&oauth_verifier=2")
 
         mocked_notify.assert_called_once()
@@ -88,14 +98,17 @@ class TestSociaXlController(HttpCase):
         self.assertEqual(resp.status_code, 200)
 
     def test_callback_does_not_create_account_when_tokens_missing(self):
-        with patch(
-            PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
-            autospec=True,
-            return_value=(None, None),
-        ) as mocked_get_token, patch(
-            PATCH_SOCIAL_ACCOUNT.format("create_account_x"),
-            autospec=True,
-        ) as mocked_create:
+        with (
+            patch(
+                PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
+                autospec=True,
+                return_value=(None, None),
+            ) as mocked_get_token,
+            patch(
+                PATCH_SOCIAL_ACCOUNT.format("create_account_x"),
+                autospec=True,
+            ) as mocked_create,
+        ):
             resp = self.url_open("/social_x/callback?oauth_token=1&oauth_verifier=2")
             mocked_get_token.assert_called_once()
             mocked_create.assert_not_called()
@@ -103,17 +116,21 @@ class TestSociaXlController(HttpCase):
             self.assertIn("/web", resp.url)
 
     def test_callback_logs_error_on_exception_and_redirects(self):
-        with patch(
-            PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
-            autospec=True,
-            side_effect=Exception("exception_error"),
-        ), patch(
-            PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
-            autospec=True,
-        ) as mocked_notify, patch(
-            "odoo.addons.social_media_x.controllers.social_media_x._logger",
-            autospec=True,
-        ) as mocked_logger:
+        with (
+            patch(
+                PATCH_SOCIAL_ACCOUNT.format("_get_access_token"),
+                autospec=True,
+                side_effect=Exception("exception_error"),
+            ),
+            patch(
+                PATCH_SOCIAL_BASE_MIXIN.format("_notify_user_session"),
+                autospec=True,
+            ) as mocked_notify,
+            patch(
+                "odoo.addons.social_media_x.controllers.social_media_x._logger",
+                autospec=True,
+            ) as mocked_logger,
+        ):
             resp = self.url_open("/social_x/callback?oauth_token=1&oauth_verifier=2")
             mocked_notify.assert_called_once()
             _, args, _kwargs = mocked_notify.mock_calls[0]

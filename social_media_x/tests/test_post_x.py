@@ -346,11 +346,14 @@ class TestSocialPostX(TestSocialCommonX):
             if "_render_values_preview" in cls.__dict__
         )
         values_below = {"image_ids": post.image_ids, "hidden_image_count": 0}
-        with self._fake_media_types(linkedin=self.social_media_id), patch.object(
-            parent_cls,
-            "_render_values_preview",
-            autospec=True,
-            return_value=values_below,
+        with (
+            self._fake_media_types(linkedin=self.social_media_id),
+            patch.object(
+                parent_cls,
+                "_render_values_preview",
+                autospec=True,
+                return_value=values_below,
+            ),
         ):
             values = SocialPostX._render_values_preview(post, self.social_media_id)
         self.assertEqual(values, values_below)
@@ -388,16 +391,19 @@ class TestSocialPostX(TestSocialCommonX):
             {"state": "ready", "remote_ref": False, "message": message}
         )
         self.SocialPostX.write({"message": message})
-        with patch.object(
-            type(self.SocialPostX),
-            "_filter_by_media_types",
-            autospec=True,
-            return_value=self.SocialPostAccountX,
-        ), patch.object(
-            type(self.SocialPostAccountX.account_id),
-            "create_tweet",
-            autospec=True,
-        ) as mock_create_tweet:
+        with (
+            patch.object(
+                type(self.SocialPostX),
+                "_filter_by_media_types",
+                autospec=True,
+                return_value=self.SocialPostAccountX,
+            ),
+            patch.object(
+                type(self.SocialPostAccountX.account_id),
+                "create_tweet",
+                autospec=True,
+            ) as mock_create_tweet,
+        ):
             self.SocialPostAccountX._action_post(self.SocialPostX)
             mock_create_tweet.assert_not_called()
         self.assertEqual(self.SocialPostAccountX.state, "failed")
@@ -448,13 +454,16 @@ class TestSocialPostX(TestSocialCommonX):
         fake_client.create_tweet.side_effect = self.get_x_refusal(
             Forbidden, 403, "You are not permitted to perform this action."
         )
-        with self.get_patch_exceptions_x(
-            fake_client=fake_client, valid_time_request=False
-        ), patch.object(
-            type(self.SocialAccountX),
-            "_flag_credentials_expired",
-            autospec=True,
-        ) as mock_flag:
+        with (
+            self.get_patch_exceptions_x(
+                fake_client=fake_client, valid_time_request=False
+            ),
+            patch.object(
+                type(self.SocialAccountX),
+                "_flag_credentials_expired",
+                autospec=True,
+            ) as mock_flag,
+        ):
             post._action_create_post_account()
         line = post.post_account_ids
         self.assertEqual(line.state, "failed")

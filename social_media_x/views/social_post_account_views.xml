@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- Reposts and quotes are figures only X reports, so they are drawn by
          its connector and not by the generic dialog. The refresh of the recent
          publications fills them, which is why they are here and not in the
@@ -27,5 +26,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>
