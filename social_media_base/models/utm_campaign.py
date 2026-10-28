@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 _SOCIAL_GROUPS = "social_media_base.group_social_media_user"
 
@@ -188,9 +188,9 @@ class UtmCampaign(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Social Media Posts"),
+            "name": self.env._("Social Media Posts"),
             "res_model": "social.post",
-            "view_mode": "kanban,tree,form",
+            "view_mode": "kanban,list,form",
             "domain": [("campaign_id", "=", self.id)],
             "context": {"default_campaign_id": self.id},
         }

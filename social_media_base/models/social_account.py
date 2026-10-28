@@ -9,7 +9,7 @@ from datetime import timedelta
 
 import psycopg2
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import AccessError, UserError
 from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import file_open
@@ -144,9 +144,9 @@ class SocialAccount(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Posts"),
+            "name": self.env._("Posts"),
             "res_model": "social.post",
-            "view_mode": "kanban,tree,form",
+            "view_mode": "kanban,list,form",
             "domain": [("account_ids", "in", self.ids)],
             "context": {"default_account_ids": [Command.set(self.ids)]},
         }
@@ -211,9 +211,9 @@ class SocialAccount(models.Model):
         self.ensure_one()
         return {
             "type": "ir.actions.act_window",
-            "name": _("Marketing Campaigns"),
+            "name": self.env._("Marketing Campaigns"),
             "res_model": "utm.campaign",
-            "view_mode": "tree,form",
+            "view_mode": "list,form",
             "domain": [("id", "in", self._get_utm_campaigns().ids)],
         }
 
@@ -264,14 +264,14 @@ class SocialAccount(models.Model):
         if refreshed_series:
             self._notify_user_client(
                 notif_type="social_form_success",
-                notif_message=_("The statistics of the account were updated."),
+                notif_message=self.env._("The statistics of the account were updated."),
                 media=media,
                 account_name=self.name,
             )
         else:
             self._notify_user_client(
                 notif_type="social_form_info",
-                notif_message=_(
+                notif_message=self.env._(
                     "This social media does not report statistics by day, so "
                     "there is no history to update."
                 ),
@@ -378,7 +378,7 @@ class SocialAccount(models.Model):
             and account_sudo.company_id not in self.env.companies
         ):
             raise AccessError(
-                _(
+                self.env._(
                     "The account %(account)s belongs to another company.",
                     account=account_sudo.display_name,
                 )
@@ -387,7 +387,7 @@ class SocialAccount(models.Model):
             return
         if account_sudo.user_id != self.env.user:
             raise AccessError(
-                _(
+                self.env._(
                     "The account %(account)s is already associated with "
                     "another user. Ask its responsible user or a social "
                     "media administrator to relink it.",
@@ -425,7 +425,7 @@ class SocialAccount(models.Model):
         """
         if not self.env.user.has_group("social_media_base.group_social_media_manager"):
             raise AccessError(
-                _("Only a social media administrator can delete an account.")
+                self.env._("Only a social media administrator can delete an account.")
             )
         accounts = self.with_context(active_test=False)
         post_accounts = accounts.post_account_ids
@@ -937,7 +937,7 @@ class SocialAccount(models.Model):
             self.sudo().write({"need_update": True})
             self._need_update()
         self.message_post(
-            body=_(
+            body=self.env._(
                 "The credentials of the account are no longer valid and could "
                 "not be renewed: %(error)s. Update the account to authorize "
                 "it again.",

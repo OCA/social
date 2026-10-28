@@ -1,8 +1,5 @@
-/** @odoo-module */
-
-import {markup} from "@odoo/owl";
+import {markup, onWillUnmount} from "@odoo/owl";
 import {session} from "@web/session";
-import {useBus} from "@web/core/utils/hooks";
 
 export const SocialMediaMixin = (T) =>
     class extends T {
@@ -37,24 +34,38 @@ export const SocialMediaMixin = (T) =>
                 `social_${view}_success`,
                 `social_${view}_info`,
             ];
-            useBus(this.busService, "notification", ({detail: notifications}) => {
-                for (const {payload, type} of notifications || []) {
-                    const message =
-                        payload && toastTypes.includes(type)
-                            ? markup(payload.message)
-                            : null;
-                    if (message !== null && type === dangerType) {
-                        session.social_error = true;
-                    }
+            const onNotification = (payload, type) => {
+                const message =
+                    payload && toastTypes.includes(type)
+                        ? markup(payload.message)
+                        : null;
+                if (message !== null && type === dangerType) {
+                    session.social_error = true;
+                }
 
-                    this.handleSocialViewNotification(type, payload);
+                this.handleSocialViewNotification(type, payload);
 
-                    if (type && message !== null) {
-                        this.notificationService.add(message, {
-                            type: payload.message_type,
-                            sticky: false,
-                        });
-                    }
+                if (message !== null) {
+                    this.notificationService.add(message, {
+                        type: payload.message_type,
+                        sticky: false,
+                    });
+                }
+            };
+            // The bus only delivers a message to the callbacks subscribed to
+            // its type, and keeps one wrapper per callback, so every type
+            // gets its own callback to be unsubscribed on its own.
+            const subscriptions = [
+                ...toastTypes,
+                "social_need_update",
+                "social_posts_updated",
+            ].map((type) => [type, (payload) => onNotification(payload, type)]);
+            for (const [type, callback] of subscriptions) {
+                this.busService.subscribe(type, callback);
+            }
+            onWillUnmount(() => {
+                for (const [type, callback] of subscriptions) {
+                    this.busService.unsubscribe(type, callback);
                 }
             });
         }

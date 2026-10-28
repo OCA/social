@@ -85,6 +85,7 @@
 
     <record id="social_account_statistics_action" model="ir.actions.act_window">
         <field name="name">Statistics</field>
+        <field name="path">social-statistics</field>
         <field name="res_model">social.account.statistics</field>
         <field name="view_mode">graph,pivot</field>
         <field name="search_view_id" ref="social_account_statistics_view_search" />

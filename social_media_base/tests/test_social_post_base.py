@@ -10,7 +10,7 @@ import psycopg2
 from freezegun import freeze_time
 from psycopg2 import errorcodes
 
-from odoo import _, fields
+from odoo import fields
 from odoo.exceptions import UserError, ValidationError
 from odoo.fields import Command
 from odoo.tests.common import new_test_user, tagged
@@ -187,7 +187,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
         def _publish(post):
             if post.id == failing_post.id:
-                raise UserError(_("The post could not be sent"))
+                raise UserError(self.env._("The post could not be sent"))
             sent_ids.append(post.id)
 
         with (
@@ -237,7 +237,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
     def test_publish_guard_marks_the_line_as_failed(self):
         post_account = self.social_post_account_id
         with mute_logger(LOGGER_POST_ACCOUNT), post_account._publish_guard():
-            raise UserError(_("LinkedIn refused the post"))
+            raise UserError(self.env._("LinkedIn refused the post"))
         self.assertEqual(post_account.state, "failed")
         self.assertIn("LinkedIn refused the post", post_account.failed_description)
         self.assertTrue(
@@ -261,7 +261,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             mute_logger(LOGGER_POST_ACCOUNT),
             self.social_post_account_id._publish_guard(),
         ):
-            raise UserError(_("LinkedIn refused the post"))
+            raise UserError(self.env._("LinkedIn refused the post"))
         self.assertTrue(post.any_failed_post)
         self.assertFalse(post.hide_post)
 
@@ -289,7 +289,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 type(self.social_account_id),
                 "validate_access_token",
                 autospec=True,
-                side_effect=UserError(_("The token could not be renewed")),
+                side_effect=UserError(self.env._("The token could not be renewed")),
             ),
             post_account._publish_guard(),
         ):
@@ -305,7 +305,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         def publish(**kwargs):
             calls.append(kwargs)
             if len(calls) == 1:
-                raise SocialCredentialsError(_("The access token expired"))
+                raise SocialCredentialsError(self.env._("The access token expired"))
             return "urn:li:share:1"
 
         with patch.object(
@@ -325,7 +325,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         account = self.social_account_id
 
         def publish(**kwargs):
-            raise SocialCredentialsError(_("The access token was revoked"))
+            raise SocialCredentialsError(self.env._("The access token was revoked"))
 
         with (
             mute_logger(LOGGER_POST_ACCOUNT),
@@ -362,7 +362,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
         def publish(**kwargs):
             calls.append(kwargs)
-            raise SocialCredentialsError(_("The access token was revoked"))
+            raise SocialCredentialsError(self.env._("The access token was revoked"))
 
         with (
             mute_logger(LOGGER_POST_ACCOUNT),
@@ -391,7 +391,9 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
                 type(account),
                 "validate_access_token",
                 autospec=True,
-                side_effect=SocialCredentialsError(_("The access token was revoked")),
+                side_effect=SocialCredentialsError(
+                    self.env._("The access token was revoked")
+                ),
             ),
             post_account._publish_guard(),
         ):
@@ -406,7 +408,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         account = self.social_account_id
 
         def publish(**kwargs):
-            raise UserError(_("The message is too long"))
+            raise UserError(self.env._("The message is too long"))
 
         with mute_logger(LOGGER_POST_ACCOUNT), post_account._publish_guard():
             post_account._publish_attempt(publish)
@@ -434,7 +436,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             return "urn:li:share:1"
 
         def publish_revoked(**kwargs):
-            raise SocialCredentialsError(_("The access token was revoked"))
+            raise SocialCredentialsError(self.env._("The access token was revoked"))
 
         with (
             mute_logger(LOGGER_POST_ACCOUNT),
@@ -474,7 +476,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         post_account = self.social_post_account_id.with_user(manager)
 
         def publish(**kwargs):
-            raise SocialCredentialsError(_("The access token was revoked"))
+            raise SocialCredentialsError(self.env._("The access token was revoked"))
 
         with (
             mute_logger(LOGGER_POST_ACCOUNT),
@@ -506,7 +508,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         )
 
         def publish(**kwargs):
-            raise SocialCredentialsError(_("The access token was revoked"))
+            raise SocialCredentialsError(self.env._("The access token was revoked"))
 
         with (
             mute_logger(LOGGER_POST_ACCOUNT),
@@ -533,7 +535,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
 
         def publish(**kwargs):
             calls.append(kwargs)
-            raise UserError(_("The message is too long"))
+            raise UserError(self.env._("The message is too long"))
 
         with (
             self.assertRaises(UserError),
@@ -551,7 +553,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         post_account = self.social_post_account_id
         with mute_logger(LOGGER_POST_ACCOUNT), post_account._publish_guard():
             post_account.remote_ref = "urn:li:share:1"
-            raise UserError(_("The post could not be sent"))
+            raise UserError(self.env._("The post could not be sent"))
         self.assertFalse(post_account.remote_ref)
         self.assertEqual(post_account.state, "failed")
 
@@ -762,7 +764,9 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
             mute_logger(LOGGER_POST_ACCOUNT),
             patch.object(type(post_account), "_delete_post_account", autospec=True),
             patch.object(
-                type(post), "unlink", side_effect=UserError(_("The post is locked"))
+                type(post),
+                "unlink",
+                side_effect=UserError(self.env._("The post is locked")),
             ),
         ):
             action = post_account.action_delete_post_account()
@@ -2332,9 +2336,9 @@ class TestSocialPostBaseUsers(TestSocialMediaBaseCommon):
         for index in range(count):
             account = self.SocialAccount.create(
                 {
-                    "name": "Linkedin batch %s" % index,
+                    "name": f"Linkedin batch {index}",
                     "media_id": self.social_media_id.id,
-                    "username": "linkedin_batch_%s" % index,
+                    "username": f"linkedin_batch_{index}",
                 }
             )
             lines |= self.SocialPostAccount.create(
@@ -2342,8 +2346,8 @@ class TestSocialPostBaseUsers(TestSocialMediaBaseCommon):
                     "post_id": self.social_post_id.id,
                     "account_id": account.id,
                     "message": "Test message",
-                    "remote_ref": "urn:li:share:%s" % index,
-                    "post_account_url": "https://example.test/post/%s" % index,
+                    "remote_ref": f"urn:li:share:{index}",
+                    "post_account_url": f"https://example.test/post/{index}",
                     "state": "posted",
                 }
             )

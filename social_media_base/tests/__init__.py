@@ -10,4 +10,5 @@ from . import test_utm_campaign
 from . import test_social_post_account_link_tracker
 from . import test_social_post_statistics_base
 from . import test_card_footer_matrix
+from . import test_kanban_cards
 from . import test_social_menus_base
