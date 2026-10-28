@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record id="social_advertising_account_view_tree" model="ir.ui.view">
         <field name="name">social.advertising.account.tree</field>
         <field name="model">social.advertising.account</field>
@@ -86,7 +85,9 @@
                         />
                     </div>
                     <div class="oe_title">
-                        <h1><field name="name" readonly="1" /></h1>
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
                     </div>
                     <group>
                         <group>
@@ -150,5 +151,4 @@
             </search>
         </field>
     </record>
-
 </odoo>

@@ -193,24 +193,30 @@ class TestSocialAdvertisingAccount(TestSocialAdvertisingCommon):
         self.assertEqual(res["params"]["type"], "danger")
 
     def test_action_sync_notify_success(self):
-        with patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_advertising_media_types"),
-            autospec=True,
-            return_value=[self.social_account_id.media_type],
-        ), self._patch_fetch([self._values("urn:ad:1")]):
+        with (
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_advertising_media_types"),
+                autospec=True,
+                return_value=[self.social_account_id.media_type],
+            ),
+            self._patch_fetch([self._values("urn:ad:1")]),
+        ):
             self.social_account_id.invalidate_recordset()
             res = self.social_account_id.action_sync_advertising_accounts_notify()
         self.assertEqual(res["params"]["type"], "success")
 
     def test_action_sync_reports_the_error(self):
-        with patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_advertising_media_types"),
-            autospec=True,
-            return_value=[self.social_account_id.media_type],
-        ), patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_fetch_advertising_accounts"),
-            autospec=True,
-            side_effect=UserError("Boom"),
+        with (
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_advertising_media_types"),
+                autospec=True,
+                return_value=[self.social_account_id.media_type],
+            ),
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_fetch_advertising_accounts"),
+                autospec=True,
+                side_effect=UserError("Boom"),
+            ),
         ):
             self.social_account_id.invalidate_recordset()
             res = self.social_account_id.action_sync_advertising_accounts_notify()

@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- Both menus below are only containers: every list they hold belongs to
          a single social media, so each connector module contributes its own
          submenu with actions filtered on its media. While no connector is
@@ -22,5 +21,4 @@
         sequence="8"
         groups="social_media_base.group_social_media_manager"
     />
-
 </odoo>

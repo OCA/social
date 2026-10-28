@@ -202,10 +202,13 @@ class TestSocialAdvertisingAd(TestSocialAdvertisingAdCommon):
         self.assertEqual(res["ads"], 1)
 
     def test_action_sync_ads_reports_the_error(self):
-        with self._patch_connector(), patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_fetch_ads"),
-            autospec=True,
-            side_effect=UserError("Token revoked"),
+        with (
+            self._patch_connector(),
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_fetch_ads"),
+                autospec=True,
+                side_effect=UserError("Token revoked"),
+            ),
         ):
             self.social_account_id.invalidate_recordset()
             res = self.social_account_id.action_sync_ads()
@@ -226,10 +229,13 @@ class TestSocialAdvertisingAd(TestSocialAdvertisingAdCommon):
     @mute_logger("odoo.addons.social_media_advertising.models.social_account")
     def test_action_sync_all_ads_notify_survives_a_failing_account(self):
         """One account the social media refuses must not stop the others."""
-        with self._patch_connector(), patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_fetch_ads"),
-            autospec=True,
-            side_effect=ValueError("boom"),
+        with (
+            self._patch_connector(),
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_fetch_ads"),
+                autospec=True,
+                side_effect=ValueError("boom"),
+            ),
         ):
             self.social_account_id.invalidate_recordset()
             res = self.env["social.account"].action_sync_all_ads_notify()
@@ -308,20 +314,26 @@ class TestSocialAdvertisingAd(TestSocialAdvertisingAdCommon):
         self.assertFalse(self.social_account_id.ads_need_update)
 
     def test_run_check_ads_updates_flags_the_accounts(self):
-        with self._patch_connector(), patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_fetch_ad_refs"),
-            autospec=True,
-            return_value={"urn:ad:creative:1"},
+        with (
+            self._patch_connector(),
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_fetch_ad_refs"),
+                autospec=True,
+                return_value={"urn:ad:creative:1"},
+            ),
         ):
             self.env["social.account"]._run_check_ads_updates()
         self.assertTrue(self.social_account_id.ads_need_update)
 
     @mute_logger("odoo.addons.social_media_advertising.models.social_account")
     def test_run_check_ads_updates_survives_a_failing_account(self):
-        with self._patch_connector(), patch(
-            PATCH_ADVERTISING_ACCOUNT.format("_fetch_ad_refs"),
-            autospec=True,
-            side_effect=ValueError("boom"),
+        with (
+            self._patch_connector(),
+            patch(
+                PATCH_ADVERTISING_ACCOUNT.format("_fetch_ad_refs"),
+                autospec=True,
+                side_effect=ValueError("boom"),
+            ),
         ):
             self.env["social.account"]._run_check_ads_updates()
         self.assertFalse(self.social_account_id.ads_need_update)
