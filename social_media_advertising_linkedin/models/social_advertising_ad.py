@@ -4,7 +4,7 @@
 import logging
 from urllib.parse import quote
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import UserError
 
 from odoo.addons.social_media_linkedin.social_linkedin_utils import (
@@ -103,7 +103,7 @@ class SocialAdvertisingAd(models.Model):
         account._check_linkedin_scopes(["rw_ads"])
         endpoint = self._linkedin_creative_endpoint()
         if self._linkedin_is_deletable() and self._linkedin_delete_creative(endpoint):
-            message = _("The ad was deleted on LinkedIn.")
+            message = self.env._("The ad was deleted on LinkedIn.")
             self.sudo().unlink()
             return self._notify_remote_ad_deleted(
                 message, gone=True, media_type=media_type
@@ -113,7 +113,7 @@ class SocialAdvertisingAd(models.Model):
         self._linkedin_apply_deletion_status(status)
         if status:
             return self._notify_remote_ad_deleted(
-                _(
+                self.env._(
                     "LinkedIn does not delete an ad that is being served "
                     "right away. The deletion was requested and is now "
                     "pending: the ad disappears once LinkedIn processes it."
@@ -121,7 +121,7 @@ class SocialAdvertisingAd(models.Model):
                 gone=False,
             )
         return self._notify_remote_ad_deleted(
-            _(
+            self.env._(
                 "The ad was deleted on LinkedIn. It is kept here as history, "
                 "archived and with its statistics."
             ),
@@ -214,7 +214,7 @@ class SocialAdvertisingAd(models.Model):
         )
         if response.status_code not in (200, 204):
             raise UserError(
-                _(
+                self.env._(
                     "Error deleting the LinkedIn ad: %(error)s",
                     error=account._linkedin_error_message(response),
                 )

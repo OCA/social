@@ -3,7 +3,7 @@
 {
     "name": "Social Media Advertising LinkedIn",
     "summary": "LinkedIn Ads campaigns, campaign groups and sponsored creatives",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",

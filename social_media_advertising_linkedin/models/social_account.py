@@ -3,7 +3,7 @@
 
 import logging
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import split_every
 
@@ -171,7 +171,7 @@ class SocialAccount(models.Model):
             )
             if response.status_code != 200:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The advertising accounts could not be read from LinkedIn: "
                         "%(error)s",
                         error=self._linkedin_error_message(response),
@@ -204,7 +204,7 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 200:
             raise UserError(
-                _(
+                self.env._(
                     "The advertising accounts could not be read from LinkedIn: "
                     "%(error)s",
                     error=self._linkedin_error_message(response),
@@ -231,7 +231,7 @@ class SocialAccount(models.Model):
 
         :rtype: str
         """
-        return _(
+        return self.env._(
             "No LinkedIn advertising account is in use for the "
             "account %(account)s. Open its Advertising tab, "
             "fetch the advertising accounts and choose one.",
@@ -267,7 +267,7 @@ class SocialAccount(models.Model):
             return advertising_account_urn
         if record.remote_ref:
             raise UserError(
-                _(
+                self.env._(
                     "The advertising account of %(record)s is no longer "
                     "available on LinkedIn.",
                     record=record.display_name,
@@ -330,7 +330,7 @@ class SocialAccount(models.Model):
             _ENDPOINT_AD_CREATIVES_LINKEDIN % ad_account_id,
             params_fields,
             params_values,
-            _("The ads could not be read from LinkedIn: %(error)s"),
+            self.env._("The ads could not be read from LinkedIn: %(error)s"),
         )
         # The creatives are filtered by the environment of the account: a
         # production account must never see the test entities of the
@@ -415,7 +415,7 @@ class SocialAccount(models.Model):
             endpoint,
             params_fields,
             params_values,
-            _("The campaigns could not be read from LinkedIn: %(error)s"),
+            self.env._("The campaigns could not be read from LinkedIn: %(error)s"),
         )
 
     def _prefetch_linkedin_upsert(
@@ -501,7 +501,7 @@ class SocialAccount(models.Model):
                 continue
             if group.linkedin_needs_update:
                 group.message_post(
-                    body=_(
+                    body=self.env._(
                         "Import kept the local pending changes. "
                         "LinkedIn values: name: %(name)s, "
                         "total budget: %(total_budget)s %(currency)s",
@@ -516,7 +516,7 @@ class SocialAccount(models.Model):
             group.with_context(skip_linkedin_needs_update=True).write(vals)
             if not was_deleted and group.stage_id.code in LINKEDIN_DELETED_CODES:
                 group.message_post(
-                    body=_(
+                    body=self.env._(
                         "This campaign group was deleted on LinkedIn. It "
                         "is kept in Odoo as history because LinkedIn "
                         "still returns it with its performance data."
@@ -634,7 +634,7 @@ class SocialAccount(models.Model):
                         vals.get("linkedin_political_intent"), ""
                     )
                     campaign.message_post(
-                        body=_(
+                        body=self.env._(
                             "Import kept the local pending changes. "
                             "LinkedIn values: name: %(name)s, "
                             "unit cost: %(unit_cost)s, "
@@ -660,7 +660,7 @@ class SocialAccount(models.Model):
                 campaign.with_context(skip_linkedin_needs_update=True).write(vals)
                 if not was_deleted and campaign.stage_id.code in LINKEDIN_DELETED_CODES:
                     campaign.message_post(
-                        body=_(
+                        body=self.env._(
                             "This campaign was deleted on LinkedIn. It is "
                             "kept in Odoo as history because LinkedIn still "
                             "returns it with its performance data."
@@ -780,7 +780,7 @@ class SocialAccount(models.Model):
         counts["ads"] = self._link_linkedin_creatives(creatives)
         return {
             "success": True,
-            "message": _(
+            "message": self.env._(
                 "%(groups)s campaign group(s), %(campaigns)s campaign(s) "
                 "and %(ads)s sponsored post(s) imported from LinkedIn.",
                 **counts,
@@ -831,7 +831,7 @@ class SocialAccount(models.Model):
             statistics = response.json().get("elements", [])
         else:
             raise UserError(
-                _(
+                self.env._(
                     "The statistics of the ads could not be read from LinkedIn: "
                     "%(error)s",
                     error=self._linkedin_error_message(response),

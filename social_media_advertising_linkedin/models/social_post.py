@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.osv import expression
 
 
@@ -91,7 +91,7 @@ class SocialPost(models.Model):
         campaign = self.social_campaign_id
         if not campaign.remote_ref:
             errors.append(
-                _(
+                self.env._(
                     "The campaign %(campaign)s has not been created on "
                     "LinkedIn yet. Use the 'Create in LinkedIn' button on the "
                     "campaign before posting.",
@@ -120,7 +120,7 @@ class SocialPost(models.Model):
         is_video_campaign = campaign.linkedin_format == "SINGLE_VIDEO"
         if not has_video and len(self.image_ids) > 1:
             return [
-                _(
+                self.env._(
                     "LinkedIn does not sponsor posts with several images: they "
                     "are published as a multi-image post, a format its API "
                     "cannot turn into an ad, so this post cannot be linked to "
@@ -133,7 +133,7 @@ class SocialPost(models.Model):
             ]
         if has_video and not is_video_campaign:
             return [
-                _(
+                self.env._(
                     "LinkedIn only sponsors a post carrying a video through a "
                     "campaign of the 'Single video' format. The campaign "
                     "%(campaign)s uses 'Standard update', and LinkedIn does "
@@ -143,7 +143,7 @@ class SocialPost(models.Model):
             ]
         if is_video_campaign and not has_video:
             return [
-                _(
+                self.env._(
                     "LinkedIn campaign %(campaign)s uses the 'Single video' "
                     "format, so it only accepts posts containing a video.",
                     campaign=campaign.display_name,

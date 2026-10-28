@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 
 
@@ -27,7 +27,7 @@ class SocialStage(models.Model):
         if not stage:
             scopes = dict(self._fields["applies_to"]._description_selection(self.env))
             raise UserError(
-                _(
+                self.env._(
                     "The LinkedIn stage with code %(code)s for %(scope)s is "
                     "missing. The LinkedIn stages are module data declared "
                     "noupdate: upgrading social_media_advertising_linkedin "

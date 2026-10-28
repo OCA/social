@@ -13,10 +13,6 @@
         />
         <field name="arch" type="xml">
             <xpath expr="//header" position="inside">
-                <field name="media_type" invisible="1" />
-                <field name="remote_ref" invisible="1" />
-                <field name="linkedin_needs_update" invisible="1" />
-                <field name="linkedin_locked" invisible="1" />
                 <button
                     name="action_publish_linkedin"
                     type="object"
@@ -136,7 +132,7 @@
             ref="social_media_advertising.social_advertising_campaign_view_tree"
         />
         <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
+            <xpath expr="//list" position="attributes">
                 <attribute name="decoration-warning">linkedin_needs_update</attribute>
             </xpath>
             <xpath expr="//field[@name='account_ids']" position="after">
@@ -153,8 +149,9 @@
         model="ir.actions.act_window"
     >
         <field name="name">Campaigns</field>
+        <field name="path">social-linkedin-campaigns</field>
         <field name="res_model">social.advertising.campaign</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field
             name="search_view_id"
             ref="social_media_advertising.social_advertising_campaign_view_search"

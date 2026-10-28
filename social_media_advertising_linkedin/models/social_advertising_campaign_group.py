@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_compare
 
@@ -68,7 +68,7 @@ class SocialAdvertisingCampaignGroup(models.Model):
             locked = self.filtered("linkedin_locked")
             if locked:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign group %(names)s cannot be modified "
                         "because of its LinkedIn status (%(status)s).",
                         names=", ".join(locked.mapped("display_name")),
@@ -117,7 +117,7 @@ class SocialAdvertisingCampaignGroup(models.Model):
                 < 0
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "The daily budgets of the campaigns of the group "
                         "%(group)s add up to %(daily_budgets)s, which exceeds "
                         "its total budget of %(total_budget)s.",
@@ -164,7 +164,7 @@ class SocialAdvertisingCampaignGroup(models.Model):
             )
             if len(accounts) > 1:
                 raise UserError(
-                    _(
+                    self.env._(
                         "The campaign group %(group)s is not linked to any "
                         "LinkedIn account and the database holds several of "
                         "them. Set the account on one of its campaigns to "
@@ -174,7 +174,7 @@ class SocialAdvertisingCampaignGroup(models.Model):
                 )
         elif len(accounts) > 1:
             raise UserError(
-                _(
+                self.env._(
                     "The campaigns of the group %(group)s point to several "
                     "LinkedIn accounts (%(accounts)s). Leave a single one so "
                     "the advertising account to use is unambiguous.",
@@ -222,7 +222,7 @@ class SocialAdvertisingCampaignGroup(models.Model):
         )
         if response.status_code != 201:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign group could not be created on LinkedIn: %(error)s",
                     error=self.env["social.account"]._linkedin_error_message(response),
                 )
@@ -268,43 +268,55 @@ class SocialAdvertisingCampaignGroup(models.Model):
         """
         self.ensure_one()
         if self.remote_ref:
-            raise UserError(_("The campaign group already exists on LinkedIn."))
+            raise UserError(
+                self.env._("The campaign group already exists on LinkedIn.")
+            )
         errors = []
         if not self.currency_id:
-            errors.append(_("The campaign group must have a currency."))
+            errors.append(self.env._("The campaign group must have a currency."))
         if self.total_budget <= 0:
-            errors.append(_("The campaign group total budget must be positive."))
+            errors.append(
+                self.env._("The campaign group total budget must be positive.")
+            )
         if errors:
             raise UserError("\n".join(errors))
         account = self._get_linkedin_account()
         if not account:
             raise UserError(
-                _("No LinkedIn social account is available to create the group.")
+                self.env._(
+                    "No LinkedIn social account is available to create the group."
+                )
             )
         advertising_account_urn = account._require_linkedin_advertising_account()
         self._linkedin_create_group(account, advertising_account_urn)
-        self.message_post(body=_("Campaign group created on LinkedIn in draft status."))
+        self.message_post(
+            body=self.env._("Campaign group created on LinkedIn in draft status.")
+        )
         return True
 
     def action_update_linkedin(self):
         """Push the local name and total budget to LinkedIn."""
         self.ensure_one()
         if not self.remote_ref:
-            raise UserError(_("The campaign group does not exist on LinkedIn yet."))
+            raise UserError(
+                self.env._("The campaign group does not exist on LinkedIn yet.")
+            )
         if self.linkedin_locked:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign group cannot be updated because of its "
                     "LinkedIn status (%(status)s).",
                     status=self.stage_id.name,
                 )
             )
         if not self.currency_id:
-            raise UserError(_("The campaign group must have a currency."))
+            raise UserError(self.env._("The campaign group must have a currency."))
         account = self._get_linkedin_account()
         if not account:
             raise UserError(
-                _("No LinkedIn social account is available to update the group.")
+                self.env._(
+                    "No LinkedIn social account is available to update the group."
+                )
             )
         ad_account_id = linkedin_urn_id(
             account._require_linkedin_advertising_account_of(self)
@@ -325,10 +337,10 @@ class SocialAdvertisingCampaignGroup(models.Model):
             self.with_context(skip_linkedin_needs_update=True).write(
                 {"linkedin_needs_update": False}
             )
-            self.message_post(body=_("Campaign group updated on LinkedIn."))
+            self.message_post(body=self.env._("Campaign group updated on LinkedIn."))
         else:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign group could not be updated on LinkedIn: %(error)s",
                     error=self.env["social.account"]._linkedin_error_message(response),
                 )
@@ -343,10 +355,12 @@ class SocialAdvertisingCampaignGroup(models.Model):
         """
         self.ensure_one()
         if not self.remote_ref:
-            raise UserError(_("The campaign group does not exist on LinkedIn yet."))
+            raise UserError(
+                self.env._("The campaign group does not exist on LinkedIn yet.")
+            )
         if self.linkedin_locked:
             raise UserError(
-                _(
+                self.env._(
                     "The campaign group cannot be archived because of its "
                     "LinkedIn status (%(status)s).",
                     status=self.stage_id.name,
@@ -355,7 +369,9 @@ class SocialAdvertisingCampaignGroup(models.Model):
         account = self._get_linkedin_account()
         if not account:
             raise UserError(
-                _("No LinkedIn social account is available to archive the group.")
+                self.env._(
+                    "No LinkedIn social account is available to archive the group."
+                )
             )
         stage = self.env["social.stage"]._require_linkedin_stage("group", "ARCHIVED")
         ad_account_id = linkedin_urn_id(
@@ -368,7 +384,7 @@ class SocialAdvertisingCampaignGroup(models.Model):
         )
         if response.status_code not in (200, 204):
             raise UserError(
-                _(
+                self.env._(
                     "The campaign group could not be archived on LinkedIn: %(error)s",
                     error=self.env["social.account"]._linkedin_error_message(response),
                 )
@@ -376,5 +392,5 @@ class SocialAdvertisingCampaignGroup(models.Model):
         self.with_context(skip_linkedin_needs_update=True).write(
             {"stage_id": stage.id, "linkedin_needs_update": False}
         )
-        self.message_post(body=_("Campaign group archived on LinkedIn."))
+        self.message_post(body=self.env._("Campaign group archived on LinkedIn."))
         return True
