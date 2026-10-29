@@ -11,7 +11,7 @@ from odoo.tests import Form
 from odoo.addons.mail.models.mail_mail import MailMail as upstream
 from odoo.addons.mail.tests.test_mail_composer import TestMailComposer
 
-# When Odoo upstream function _send in the mall.mail model, that has been fully
+# When Odoo upstream function _send in the mail.mail model, that has been fully
 # overwritten in this module changes, we might have to reflect those changes
 # in our version. The change is detected by computing the hash on the upstream code.
 # To check what needs to be done, look at the commits in Odoo:
@@ -23,8 +23,9 @@ VALID_HASHES = [
     "46172c91183f2cb50b22a6b3b5e3869b",
     "8f26c4084cc7fc300e64d19ccdc944fe",
     "db6cc0d3513a0c85bd716e4cb0a4d09c",
-    "458982c6cb3a347b13008f7d8130f633",  # 2025-04-08, odoo commit 3af276804101
+    "458982c6cb3a347b13008f7d8130f633",  # odoo commit 3af276804101
     "2e0c730330ae3bdf00c6bfd956b0527b",
+    "172e9656a6089deab948fe43d4bb31de",  # odoo commit 465f907835be
 ]
 
 
@@ -57,7 +58,8 @@ class TestMailCcBcc(TestMailComposer):
         """Test that copied upstream function hasn't received fixes"""
         func = inspect.getsource(upstream._send).encode()
         func_hash = hashlib.md5(func).hexdigest()
-        if func_hash not in VALID_HASHES:
+        if func_hash not in VALID_HASHES:  # pragma: no cover
+            logging.info("New hash: %(hash)s", func_hash)
             logging.error(
                 "mail.mail#_send has changed in upstream, "
                 "please adapt the override and add the new hash above",
