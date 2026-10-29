@@ -3,7 +3,7 @@
 
 from odoo import models
 
-from .mail_mail import format_emails
+from .mail_mail import format_emails_str
 
 
 class MailThread(models.AbstractModel):
@@ -32,10 +32,10 @@ class MailThread(models.AbstractModel):
         )
         partners_cc = context.get("partner_cc_ids", None)
         if partners_cc:
-            res["email_cc"] = format_emails(partners_cc)
+            res["email_cc"] = format_emails_str(partners_cc)
         partners_bcc = context.get("partner_bcc_ids", None)
         if partners_bcc:
-            res["email_bcc"] = format_emails(partners_bcc)
+            res["email_bcc"] = format_emails_str(partners_bcc)
         return res
 
     def _notify_get_recipients(self, message, msg_vals, **kwargs):

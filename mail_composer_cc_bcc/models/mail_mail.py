@@ -17,16 +17,15 @@ _logger = logging.getLogger(__name__)
 
 
 def format_emails(partners):
-    emails = [
-        tools.formataddr(
-            (
-                p.name or "False",
-                p.email and tools.mail._normalize_email(p.email) or "False",
-            )
-        )
+    return [
+        tools.formataddr((p.name or "", tools.mail._normalize_email(p.email)))
         for p in partners
+        if p.email
     ]
-    return ", ".join(emails)
+
+
+def format_emails_str(partners):
+    return ", ".join(format_emails(partners))
 
 
 class MailMail(models.Model):
@@ -294,10 +293,12 @@ class MailMail(models.Model):
         partner_to_ids = [r.id for r in self.recipient_ids if r not in partners_cc_bcc]
         partner_to = self.env["res.partner"].browse(partner_to_ids)
         res["email_to"] = format_emails(partner_to)
-        res["email_cc"] = format_emails(self.recipient_cc_ids)
-        res["email_bcc"] = format_emails(self.recipient_bcc_ids)
+        res["email_cc"] = format_emails_str(self.recipient_cc_ids)
+        res["email_bcc"] = format_emails_str(self.recipient_bcc_ids)
         if res.get("email_to"):
-            res["email_to_normalized"] += tools.email_normalize_all(res["email_to"])
+            res["email_to_normalized"] += tools.email_normalize_all(
+                format_emails_str(partner_to)
+            )
         if res.get("email_cc"):
             res["email_to_normalized"] += tools.email_normalize_all(res["email_cc"])
         if res.get("email_bcc"):
