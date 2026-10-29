@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mail_quoted_reply_composer_view_form" model="ir.ui.view">
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='body']" position="after">
+                <field name="is_separate_body" invisible="1" />
+                <field
+                    name="reply_body"
+                    readonly="is_reply_readonly"
+                    invisible="not is_separate_body"
+                    force_save="1"
+                />
+                <label for="is_reply_readonly" invisible="not is_separate_body" />
+                <field
+                    name="is_reply_readonly"
+                    widget="boolean_toggle"
+                    invisible="not is_separate_body"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
