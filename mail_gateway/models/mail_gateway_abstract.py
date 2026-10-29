@@ -47,16 +47,26 @@ class MailGatewayAbstract(models.AbstractModel):
 
     def _get_channel_vals(self, gateway, token, update):
         author = self._get_author(gateway, update)
+        member_pids = set(gateway.member_ids.mapped("partner_id").ids)
         members = [
-            Command.create({"partner_id": partner.id, "unpin_dt": False})
-            for partner in gateway.member_ids.partner_id
+            Command.create({"partner_id": partner_id, "unpin_dt": False})
+            for partner_id in member_pids
         ]
-        if author:
+        if author and author._name == "res.partner" and author.id not in member_pids:
             members.append(
                 Command.create(
                     {
-                        "partner_id": author._name == "res.partner" and author.id,
-                        "guest_id": author._name == "mail.guest" and author.id,
+                        "partner_id": author.id,
+                        "guest_id": False,
+                    }
+                )
+            )
+        elif author and author._name == "mail.guest":
+            members.append(
+                Command.create(
+                    {
+                        "partner_id": False,
+                        "guest_id": author.id,
                     }
                 )
             )
