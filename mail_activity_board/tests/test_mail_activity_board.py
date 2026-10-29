@@ -214,3 +214,98 @@ class TestMailActivityBoardMethods(TransactionCase):
         self.assertEqual(self.act3.related_model_instance, self.partner_client)
         self.act3.write({"res_id": False, "res_model": False})
         self.assertFalse(self.act3.related_model_instance)
+
+    def test_related_model_instance_access_error(self):
+        """Test that computing related_model_instance handles restricted access."""
+
+        # Ensure employee2 does not have read access to res.partner
+        has_access = (
+            self.env["ir.model.access"]
+            .with_user(self.employee2)
+            .check("res.partner", "read", raise_exception=False)
+        )
+        self.assertFalse(
+            has_access,
+            "Employee2 should not have read access to res.partner.",
+        )
+
+        # Create an in-memory record using .new()
+        # This bypasses the ir.rule that blocks reading the activity
+        activity = (
+            self.env["mail.activity"]
+            .with_user(self.employee2)
+            .new(
+                {
+                    "res_model": "res.partner",
+                    "res_id": self.partner_client.id,
+                }
+            )
+        )
+
+        # Trigger the compute method
+        activity._compute_related_model_instance()
+
+        # The access check forces it to fall back to False.
+        self.assertFalse(activity.related_model_instance)
+
+    def test_related_model_instance_invalid_model_valueerror(self):
+        """Computing related_model_instance avoids ValueError on unallowed models."""
+        # Retrieve the allowed models list directly from the selection method
+        allowed_models = [
+            m[0] for m in self.env["mail.activity"]._selection_related_model_instance()
+        ]
+
+        # Use model outside the allowed selection.
+        self.assertNotIn("calendar.event", allowed_models)
+
+        model_class = self.env.get("calendar.event")
+        self.assertIsNotNone(model_class)
+        self.assertFalse(model_class._abstract)
+        self.assertFalse(model_class._transient)
+
+        unallowed_record = model_class.search([], limit=1)
+        self.assertTrue(
+            unallowed_record,
+            "Test requires model to have at least one record.",
+        )
+
+        unallowed_model = "calendar.event"
+        unallowed_res_id = unallowed_record.id
+        self.assertTrue(
+            unallowed_res_id,
+        )
+
+        # Create an in-memory activity linked to the unallowed model
+        activity = self.env["mail.activity"].new(
+            {
+                "res_model": unallowed_model,
+                "res_id": unallowed_res_id,
+            }
+        )
+
+        # Trigger the compute method by reading the property.
+        result = activity.related_model_instance
+        self.assertFalse(
+            result,
+            "Field should compute to False for models not in the selection list.",
+        )
+
+    def test_related_model_instance_keyerror(self):
+        """Computing related_model_instance handles non-existent models."""
+
+        # Create an in-memory activity linked to a fake model name
+        activity = self.env["mail.activity"].new(
+            {
+                "res_model": "some.completely.fake.model",
+                "res_id": 99,
+            }
+        )
+
+        # Trigger the compute method by reading the property
+        result = activity.related_model_instance
+
+        # Assert that the field defaults to False
+        self.assertFalse(
+            result,
+            "Field should compute to False for models that do not exist.",
+        )
