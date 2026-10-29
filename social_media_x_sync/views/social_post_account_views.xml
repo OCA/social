@@ -2,7 +2,6 @@
 <!-- Copyright 2026 Binhex <https://www.binhex.cloud>
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <!-- Reposts and quotes are figures the import of this module writes, and
          they are searched where they are imported. -->
     <record id="social_post_account_view_search_inherit" model="ir.ui.view">
@@ -51,5 +50,4 @@
             </xpath>
         </field>
     </record>
-
 </odoo>

@@ -1001,19 +1001,23 @@ class TestSocialSyncAccountX(TestSocialSyncCommonX):
         tests of its own.
         """
         accounts_x = self.SocialAccountX + self.SocialAccountCredentialX
-        with patch.object(
-            type(self.SocialAccount),
-            "_get_check_media_updates_domain",
-            autospec=True,
-            return_value=[("id", "in", accounts_x.ids)],
-        ), patch.object(
-            type(self.SocialAccount), "_x_refresh_credit_balance", autospec=True
-        ), patch.object(
-            type(self.SocialAccount),
-            "_update_posts_statistics",
-            autospec=True,
-            side_effect=self._report_imported,
-        ) as mock_import:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_get_check_media_updates_domain",
+                autospec=True,
+                return_value=[("id", "in", accounts_x.ids)],
+            ),
+            patch.object(
+                type(self.SocialAccount), "_x_refresh_credit_balance", autospec=True
+            ),
+            patch.object(
+                type(self.SocialAccount),
+                "_update_posts_statistics",
+                autospec=True,
+                side_effect=self._report_imported,
+            ) as mock_import,
+        ):
             self.assertTrue(self.SocialAccount._run_check_media_updates())
         self.assertEqual(mock_import.call_count, len(accounts_x))
         imported = self.SocialAccount.browse()
@@ -1141,12 +1145,15 @@ class TestSocialSyncAccountX(TestSocialSyncCommonX):
         class ConcurrencyError(psycopg2.OperationalError):
             pgcode = errorcodes.SERIALIZATION_FAILURE
 
-        with patch.object(
-            type(self.SocialAccount),
-            "_update_posts_statistics",
-            autospec=True,
-            side_effect=ConcurrencyError("serialization conflict"),
-        ), self.assertRaises(psycopg2.OperationalError):
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_update_posts_statistics",
+                autospec=True,
+                side_effect=ConcurrencyError("serialization conflict"),
+            ),
+            self.assertRaises(psycopg2.OperationalError),
+        ):
             self.SocialAccountX._x_check_updates()
 
     def test_the_bridge_does_not_read_the_metrics_itself(self):
@@ -1408,9 +1415,12 @@ class TestSocialSyncAccountX(TestSocialSyncCommonX):
         account = self.SocialAccountX
         error = self.get_x_refusal(Forbidden, 403, "client-not-enrolled")
         reported = set()
-        with self._patch_timeline_import_x(error), patch.object(
-            type(self.SocialAccount), "_notify_user_client", autospec=True
-        ) as mock_notify:
+        with (
+            self._patch_timeline_import_x(error),
+            patch.object(
+                type(self.SocialAccount), "_notify_user_client", autospec=True
+            ) as mock_notify,
+        ):
             account._update_posts_statistics(None, [], reported)
         self.assertFalse(
             account.need_update,
@@ -1435,9 +1445,10 @@ class TestSocialSyncAccountX(TestSocialSyncCommonX):
         class ConcurrencyError(psycopg2.OperationalError):
             pgcode = errorcodes.SERIALIZATION_FAILURE
 
-        with self._patch_timeline_import_x(
-            ConcurrencyError("serialization conflict")
-        ), self.assertRaises(psycopg2.OperationalError):
+        with (
+            self._patch_timeline_import_x(ConcurrencyError("serialization conflict")),
+            self.assertRaises(psycopg2.OperationalError),
+        ):
             self.SocialAccountX._update_posts_statistics(None, [], set())
 
 
