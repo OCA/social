@@ -4,7 +4,7 @@
 {
     "name": "Social Media X",
     "summary": "Publish on X, with the figures of the account and of the posts sent",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",

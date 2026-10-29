@@ -5,7 +5,7 @@ import logging
 
 from tweepy.errors import Forbidden, TooManyRequests, Unauthorized
 
-from odoo import _, models
+from odoo import models
 from odoo.exceptions import UserError
 
 from odoo.addons.social_media_base.exceptions import SocialCredentialsError
@@ -49,7 +49,7 @@ class SocialPostAccount(models.Model):
                         )
                     else:
                         post_account._register_publish_refused(
-                            _(
+                            self.env._(
                                 "X did not accept the post. The account may "
                                 "have reached the limit of requests of its "
                                 "plan: check the account and try again later."
@@ -74,7 +74,7 @@ class SocialPostAccount(models.Model):
         """
         if self.media_id.media_type == "x":
             message_error = ""
-            quota_error = _(
+            quota_error = self.env._(
                 "The post could not be deleted on X. The account may have "
                 "reached the limit of requests of its plan: check the account "
                 "and try again later."
@@ -110,10 +110,10 @@ class SocialPostAccount(models.Model):
             except (Unauthorized, Forbidden) as error:
                 self.account_id._flag_credentials_expired(str(error))
                 raise SocialCredentialsError(
-                    _("DELETING POST ON X: %(error)s", error=error)
+                    self.env._("DELETING POST ON X: %(error)s", error=error)
                 ) from error
             except Exception as e:  # noqa: BLE001 - tweepy may fail in any way
-                message_error = _("ERROR DELETE POST X: %(error)s", error=e)
+                message_error = self.env._("ERROR DELETE POST X: %(error)s", error=e)
                 _logger.exception("Error deleting tweet %s", self.remote_ref)
             if message_error:
                 raise UserError(message_error)

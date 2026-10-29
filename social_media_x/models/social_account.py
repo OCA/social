@@ -15,7 +15,7 @@ from markupsafe import Markup, escape
 from requests_oauthlib import OAuth1
 from tweepy.errors import BadRequest, Forbidden, TooManyRequests, Unauthorized
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import AccessError, UserError
 from odoo.tools import float_compare, float_is_zero, split_every
 
@@ -208,7 +208,7 @@ class SocialAccount(models.Model):
             limit_reset, tz=timezone
         ).replace(tzinfo=None)
         message = Markup(
-            _(
+            self.env._(
                 "You have reached the limit of requests <b>%(endpoint)s</b> "
                 "allowed according to your account plan."
                 "<br>\u2022\u2009<b>Total limit:</b> %(limit)s request(s) per "
@@ -392,17 +392,17 @@ class SocialAccount(models.Model):
                 previous_balance, precision_digits=2
             ):
                 notif_type = "social_form_danger"
-                message = _(
+                message = self.env._(
                     "The X API credit balance of this App is used up. X blocks "
                     "every call until credits are bought in the Developer Console."
                 )
         elif below and not self.x_credit_warned:
             notif_type = "social_form_info"
-            # Formatted apart: an f-string among the arguments of ``_()``
+            # Formatted apart: an f-string among the arguments of ``self.env._()``
             # stops the extraction of the terms that follow it.
             balance_text = f"{balance:.2f}"
             threshold_text = f"{self.x_credit_warning:.2f}"
-            message = _(
+            message = self.env._(
                 "The X API credit balance of this App is down to USD "
                 "%(balance)s, under the warning threshold of USD %(threshold)s.",
                 balance=balance_text,
@@ -477,10 +477,10 @@ class SocialAccount(models.Model):
             if pricing_link is None:
                 pricing_link = str(
                     Markup("<a href='%s' target='_blank'>%s</a>")
-                    % (_URL_PRICING_X, _("X API pricing"))
+                    % (_URL_PRICING_X, self.env._("X API pricing"))
                 )
             return Markup(
-                _(
+                self.env._(
                     "X rejected the request because the developer App cannot "
                     "spend against the API. Connect the App to a Pay Per Use "
                     "project in Project Access > Manage, not the Default "
@@ -518,7 +518,7 @@ class SocialAccount(models.Model):
             return str(self._x_error_message(error, pricing_link=_URL_PRICING_X))
         reason = str(error).rstrip().rstrip(".")
         if self.x_premium and len(message or "") > _MAX_MESSAGE_LENGTH_X:
-            return _(
+            return self.env._(
                 "X refused the post of %(account)s: %(error)s. What an "
                 "account may publish depends on its plan, and X reported X "
                 "Premium for this account when it was last read. Press Update "
@@ -526,7 +526,7 @@ class SocialAccount(models.Model):
                 account=self.display_name,
                 error=reason,
             )
-        return _(
+        return self.env._(
             "X refused the post of %(account)s: %(error)s.",
             account=self.display_name,
             error=reason,
@@ -544,7 +544,7 @@ class SocialAccount(models.Model):
         oauth_token = (kwargs or {}).get("oauth_token", False)
         if not oauth_token:
             raise UserError(
-                _(
+                self.env._(
                     "Invalid X callback: the request token is missing. "
                     "Please restart the account association process."
                 )
@@ -562,7 +562,7 @@ class SocialAccount(models.Model):
         )
         if not wizard_social_account:
             raise UserError(
-                _(
+                self.env._(
                     "Invalid X request token. Please restart the account "
                     "association process."
                 )
@@ -585,14 +585,16 @@ class SocialAccount(models.Model):
         )
         if response.status_code != 200:
             raise UserError(
-                _("Error getting X access token: %(error)s", error=response.text)
+                self.env._(
+                    "Error getting X access token: %(error)s", error=response.text
+                )
             )
         try:
             access_tokens = dict(parse_qsl(response.text))
             return access_tokens["oauth_token"], access_tokens["oauth_token_secret"]
         except (ValueError, KeyError) as ex:
             raise UserError(
-                _("Unexpected response from X: %(error)s", error=response.text)
+                self.env._("Unexpected response from X: %(error)s", error=response.text)
             ) from ex
 
     def get_client_api(
@@ -743,7 +745,7 @@ class SocialAccount(models.Model):
                     # associated.
                     self._notify_user_session(
                         self._format_user_notification(
-                            _("The account was associated successfully"),
+                            self.env._("The account was associated successfully"),
                             media="X",
                             message_type="success",
                         ),
@@ -755,7 +757,7 @@ class SocialAccount(models.Model):
                     account._x_refresh_credit_balance()
                     account._on_account_associated()
                 else:
-                    message_error = _(
+                    message_error = self.env._(
                         "The account was not created: the OAuth2 access "
                         "token could not be obtained."
                     )
@@ -860,7 +862,7 @@ class SocialAccount(models.Model):
             return False, media_refs
         except Unauthorized as error:
             raise SocialCredentialsError(
-                _("PUBLISHING ON X: %(error)s", error=error)
+                self.env._("PUBLISHING ON X: %(error)s", error=error)
             ) from error
         except (BadRequest, Forbidden) as error:
             raise UserError(self._x_refused_post_message(error, message)) from error

@@ -36,19 +36,19 @@ Update token, API Key, API Secret and account data
   its X Premium plan included, see *X Premium plan of the account* below, and
   read the credit balance of the App again, see *Credit balance of the
   App* below.
-- If the *Update keys* checkbox is selected, the current API Key and API Secret
+- If the *Update Keys* checkbox is selected, the current API Key and API Secret
   values will be displayed by default. Modify any of these values and authentication
   will be performed again through X to update these values and the token.
 
   ![UPDATE_KEYS](../static/img/readme/UPDATE_KEYS.png)
 
-- Selecting the *Update token* checkbox will update the current token.
+- Selecting the *Update Token* checkbox will update the current token.
 
   ![UPDATE_TOKEN](../static/img/readme/UPDATE_TOKEN.png)
 
 - Associating the account and updating it end with a success notice and
   stamp the date of *Last Update Account* on the account form. Associating it,
-  associating it again, *Update token* and *Update keys* show *The account was
+  associating it again, *Update Token* and *Update Keys* show *The account was
   associated successfully* on the Dashboard once X sends the user back; *Update*
   with no checkbox selected shows *The account was updated successfully*. If X
   refuses the figures of the account right after associating it, its error is
@@ -68,7 +68,7 @@ with it. Odoo reads that plan from X, it is not set by hand.
 
   ![X_PREMIUM](../static/img/readme/X_PREMIUM.png)
 - The plan is read from X when the account is associated, when it is
-  associated again from *Update account* with *Update keys* or *Update token*,
+  associated again from *Update account* with *Update Keys* or *Update Token*,
   and by *Update account* with no checkbox selected. The switch is on when X
   reports any plan of X Premium, whatever its level (Basic, Premium or
   Premium+), and off when X reports that the user has no subscription. If X
@@ -139,9 +139,9 @@ Archive Account X
   *Accounts* (*Archived* filter) and use the standard *Actions* > *Unarchive*
   entry: the account and its data are restored instead of creating a
   duplicate. *Update account* only
-  reactivates it when *Update keys* or *Update token* is ticked, because those
+  reactivates it when *Update Keys* or *Update Token* is ticked, because those
   are the options that send the user back to X to authorize again. The
-  *Associate Account* wizard is not the way to do it when the same API Key and
+  *Associate account* wizard is not the way to do it when the same API Key and
   API Secret are reused, because it refuses the keys already registered on
   another account, archived ones included.
 - An archived account can be deleted permanently with the *Delete

@@ -7,7 +7,7 @@ from urllib.parse import parse_qsl, urlencode
 import requests
 from requests_oauthlib import OAuth1
 
-from odoo import _, fields, models
+from odoo import fields, models
 
 from ..social_x_utils import (
     _URL_OAUTH_X,
@@ -67,9 +67,9 @@ class WizardSocialAccount(models.TransientModel):
                 message = self.env["social.account"]._x_error_message(
                     e, pricing_link="%s"
                 )
-                links = [{"url": _URL_PRICING_X, "label": _("X API pricing")}]
+                links = [{"url": _URL_PRICING_X, "label": self.env._("X API pricing")}]
             else:
-                message = _(
+                message = self.env._(
                     "Account access could not be authorized. Please check "
                     "your settings or try again later."
                 )
@@ -102,7 +102,7 @@ class WizardSocialAccount(models.TransientModel):
                     ("x_api_key", "=", self.x_api_key),
                     ("x_api_secret", "=", self.x_api_secret),
                 ],
-                _("An account with that information already exists."),
+                self.env._("An account with that information already exists."),
             )
         return result
 
@@ -117,7 +117,9 @@ class WizardSocialAccount(models.TransientModel):
                 if not self.env.context.get("not_notify"):
                     self._notify_user_client(
                         notif_type="social_form_success",
-                        notif_message=_("The account was updated successfully"),
+                        notif_message=self.env._(
+                            "The account was updated successfully"
+                        ),
                         media="x",
                         account_name=self.account_id.name,
                     )
