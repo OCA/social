@@ -1,0 +1,9 @@
+.mail-template-search-container {
+    .mail-template-search-input {
+        font-size: 0.85rem;
+        &::placeholder {
+            color: #999;
+            font-style: italic;
+        }
+    }
+}
