@@ -1,4 +1,3 @@
-- Outbound attachments / media upload.
 - Quick replies, icebreakers and the persistent menu.
 - HUMAN_AGENT tagging to reply after the 24-hour window: send
   `messaging_type=MESSAGE_TAG` with `tag=HUMAN_AGENT`. Meta documents
