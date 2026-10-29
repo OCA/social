@@ -1185,10 +1185,10 @@ class TestSocialSyncPostAccountX(TestSocialSyncCommonX):
         arch = etree.fromstring(
             self.SocialPostAccount.get_view(
                 self.env.ref("social_media_base.social_post_account_view_tree").id,
-                "tree",
+                "list",
             )["arch"]
         )
-        names = [field.get("name") for field in arch.xpath("/tree/field")]
+        names = [field.get("name") for field in arch.xpath("/list/field")]
         share_index = names.index("share_count")
         self.assertEqual(
             names[share_index + 1 : share_index + 3],
@@ -1196,7 +1196,7 @@ class TestSocialSyncPostAccountX(TestSocialSyncCommonX):
         )
         for name in ("retweet_count", "quote_count"):
             self.assertEqual(
-                arch.xpath(f"/tree/field[@name='{name}']")[0].get("optional"),
+                arch.xpath(f"/list/field[@name='{name}']")[0].get("optional"),
                 "hide",
             )
 
