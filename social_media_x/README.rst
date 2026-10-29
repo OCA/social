@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ==============
 Social Media X
 ==============
@@ -17,17 +13,17 @@ Social Media X
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/17.0/social_media_x
+    :target: https://github.com/OCA/social/tree/18.0/social_media_x
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_x
+    :target: https://translation.odoo-community.org/projects/social-18-0/social-18-0-social_media_x
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -323,7 +319,7 @@ Registering the API Key and API Key Secret. Integration of a user account.
 
 - Go to *Social Media* > *Configuration* > *Social Media*
 
-- Click on the *Associate Account* button for the desired social media.
+- Click on the *Associate account* button for the desired social media.
 
   |ASSOCIATE_ACCOUNT|
 
@@ -407,25 +403,25 @@ Registering the API Key and API Key Secret. Integration of a user account.
   responsible user of the account and the *Social Media / Administrator*
   group can relink it.
 
-.. |START_BUILDING| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/START_BUILDING.png
-.. |CREATE_PROJECT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CREATE_PROJECT.png
-.. |CREATE_APP| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CREATE_APP.png
-.. |BILLING_INFORMATION| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/BILLING_INFORMATION.png
-.. |BUY_CREDITS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/BUY_CREDITS.png
-.. |CREDITS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CREDITS.png
-.. |PROJECT_DEFAULT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/PROJECT_DEFAULT.png
-.. |PROJECT_ACCESS_MANAGE| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/PROJECT_ACCESS_MANAGE.png
-.. |PROJECT_PAY_PER_USE| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/PROJECT_PAY_PER_USE.png
-.. |CONFIGURATION_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CONFIGURATION_ACCOUNT.png
-.. |APP_PERMISIONS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/APP_PERMISIONS.png
-.. |TYPE_APP| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/TYPE_APP.png
-.. |CALLBACK_URI_WEBSITE_URL| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/CALLBACK_URI_WEBSITE_URL.png
-.. |KEYS_AND_TOKENS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/KEYS_AND_TOKENS.png
-.. |GENERATE_NEW_KEY_SECRET| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/GENERATE_NEW_KEY_SECRET.png
-.. |ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/ASSOCIATE_ACCOUNT.png
-.. |WIZARD_ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/WIZARD_ASSOCIATE_ACCOUNT.png
-.. |AUTHORIZE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/AUTHORIZE_ACCOUNT.png
-.. |NO_CREDITS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/NO_CREDITS.png
+.. |START_BUILDING| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/START_BUILDING.png
+.. |CREATE_PROJECT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/CREATE_PROJECT.png
+.. |CREATE_APP| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/CREATE_APP.png
+.. |BILLING_INFORMATION| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/BILLING_INFORMATION.png
+.. |BUY_CREDITS| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/BUY_CREDITS.png
+.. |CREDITS| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/CREDITS.png
+.. |PROJECT_DEFAULT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/PROJECT_DEFAULT.png
+.. |PROJECT_ACCESS_MANAGE| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/PROJECT_ACCESS_MANAGE.png
+.. |PROJECT_PAY_PER_USE| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/PROJECT_PAY_PER_USE.png
+.. |CONFIGURATION_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/CONFIGURATION_ACCOUNT.png
+.. |APP_PERMISIONS| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/APP_PERMISIONS.png
+.. |TYPE_APP| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/TYPE_APP.png
+.. |CALLBACK_URI_WEBSITE_URL| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/CALLBACK_URI_WEBSITE_URL.png
+.. |KEYS_AND_TOKENS| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/KEYS_AND_TOKENS.png
+.. |GENERATE_NEW_KEY_SECRET| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/GENERATE_NEW_KEY_SECRET.png
+.. |ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/ASSOCIATE_ACCOUNT.png
+.. |WIZARD_ASSOCIATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/WIZARD_ASSOCIATE_ACCOUNT.png
+.. |AUTHORIZE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/AUTHORIZE_ACCOUNT.png
+.. |NO_CREDITS| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/NO_CREDITS.png
 
 Usage
 =====
@@ -472,20 +468,20 @@ Update token, API Key, API Secret and account data
   the account* below, and read the credit balance of the App again, see
   *Credit balance of the App* below.
 
-- If the *Update keys* checkbox is selected, the current API Key and API
+- If the *Update Keys* checkbox is selected, the current API Key and API
   Secret values will be displayed by default. Modify any of these values
   and authentication will be performed again through X to update these
   values and the token.
 
   |UPDATE_KEYS|
 
-- Selecting the *Update token* checkbox will update the current token.
+- Selecting the *Update Token* checkbox will update the current token.
 
   |UPDATE_TOKEN|
 
 - Associating the account and updating it end with a success notice and
   stamp the date of *Last Update Account* on the account form.
-  Associating it, associating it again, *Update token* and *Update keys*
+  Associating it, associating it again, *Update Token* and *Update Keys*
   show *The account was associated successfully* on the Dashboard once X
   sends the user back; *Update* with no checkbox selected shows *The
   account was updated successfully*. If X refuses the figures of the
@@ -507,8 +503,8 @@ who authorized the account: **280** characters without X Premium and
   |X_PREMIUM|
 
 - The plan is read from X when the account is associated, when it is
-  associated again from *Update account* with *Update keys* or *Update
-  token*, and by *Update account* with no checkbox selected. The switch
+  associated again from *Update account* with *Update Keys* or *Update
+  Token*, and by *Update account* with no checkbox selected. The switch
   is on when X reports any plan of X Premium, whatever its level (Basic,
   Premium or Premium+), and off when X reports that the user has no
   subscription. If X does not report the plan, the switch keeps the
@@ -597,9 +593,9 @@ Archive Account X
   *Configuration* > *Accounts* (*Archived* filter) and use the standard
   *Actions* > *Unarchive* entry: the account and its data are restored
   instead of creating a duplicate. *Update account* only reactivates it
-  when *Update keys* or *Update token* is ticked, because those are the
+  when *Update Keys* or *Update Token* is ticked, because those are the
   options that send the user back to X to authorize again. The
-  *Associate Account* wizard is not the way to do it when the same API
+  *Associate account* wizard is not the way to do it when the same API
   Key and API Secret are reused, because it refuses the keys already
   registered on another account, archived ones included.
 - An archived account can be deleted permanently with the *Delete
@@ -828,12 +824,12 @@ publication history:
   record instead of creating a second one, and the new association
   recover the history.
 
-.. |BUTTON_UPDATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/BUTTON_UPDATE_ACCOUNT.png
-.. |UPDATE_KEYS| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/UPDATE_KEYS.png
-.. |UPDATE_TOKEN| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/UPDATE_TOKEN.png
-.. |X_PREMIUM| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/X_PREMIUM.png
-.. |X_PREMIUM_MENU| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/X_PREMIUM_MENU.png
-.. |X_CREDIT_BALANCE| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x/static/img/readme/X_CREDIT_BALANCE.png
+.. |BUTTON_UPDATE_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/BUTTON_UPDATE_ACCOUNT.png
+.. |UPDATE_KEYS| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/UPDATE_KEYS.png
+.. |UPDATE_TOKEN| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/UPDATE_TOKEN.png
+.. |X_PREMIUM| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/X_PREMIUM.png
+.. |X_PREMIUM_MENU| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/X_PREMIUM_MENU.png
+.. |X_CREDIT_BALANCE| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x/static/img/readme/X_CREDIT_BALANCE.png
 
 Bug Tracker
 ===========
@@ -841,7 +837,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_x%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_x%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -892,6 +888,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-edescalona| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/social_media_x>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/18.0/social_media_x>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

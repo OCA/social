@@ -1,7 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, models
+from odoo import api, models
 from odoo.exceptions import ValidationError
 from odoo.tools import human_size
 
@@ -38,7 +38,7 @@ class SocialPost(models.Model):
             duplicates = post.account_ids._get_group_account_username()
             if duplicates:
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "There are X accounts with the same username "
                         "(%(username)s), please check to avoid spam errors.",
                         username=duplicates[0][0],
@@ -83,7 +83,7 @@ class SocialPost(models.Model):
         )
         if len(message) > limit:
             errors.append(
-                _(
+                self.env._(
                     "X publishes at most %(limit)s characters per post, and "
                     "this one has %(length)s. Shorten the message to publish "
                     "it.",
@@ -93,7 +93,7 @@ class SocialPost(models.Model):
             )
         if self.image_ids and self.video_ids:
             errors.append(
-                _(
+                self.env._(
                     "X publishes either images or a video, not both in the "
                     "same post. Leave one kind of media or create a separate "
                     "post for each of them."
@@ -101,7 +101,7 @@ class SocialPost(models.Model):
             )
         if len(self.image_ids) > _MAX_IMAGES_X:
             errors.append(
-                _(
+                self.env._(
                     "X publishes at most %(limit)s images per post, and this "
                     "one carries %(images)s. Remove some of them or create a "
                     "separate post.",
@@ -111,7 +111,7 @@ class SocialPost(models.Model):
             )
         if len(self.video_ids) > _MAX_VIDEOS_X:
             errors.append(
-                _(
+                self.env._(
                     "X publishes a single video per post, so this post "
                     "carrying %(videos)s videos cannot be published. Leave one "
                     "video or create a separate post for each of them.",
@@ -123,7 +123,7 @@ class SocialPost(models.Model):
         )
         if wrong_images:
             errors.append(
-                _(
+                self.env._(
                     "X only publishes JPG, PNG, WEBP and GIF images, so "
                     "%(names)s cannot be published. Convert them or remove "
                     "them from the post.",
@@ -135,7 +135,7 @@ class SocialPost(models.Model):
         )
         if large_images:
             errors.append(
-                _(
+                self.env._(
                     "X publishes images of at most %(limit)s, %(gif_limit)s "
                     "for a GIF, so %(names)s cannot be published. Reduce their "
                     "size or remove them from the post.",
@@ -149,7 +149,7 @@ class SocialPost(models.Model):
         )
         if wrong_videos:
             errors.append(
-                _(
+                self.env._(
                     "X only publishes MP4 videos, so %(names)s cannot be "
                     "published. Convert them to MP4 or remove them from the "
                     "post.",
@@ -161,7 +161,7 @@ class SocialPost(models.Model):
         )
         if large_videos:
             errors.append(
-                _(
+                self.env._(
                     "X publishes videos of at most %(limit)s, so %(names)s "
                     "cannot be published. Reduce their size or remove them "
                     "from the post.",

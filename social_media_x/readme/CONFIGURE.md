@@ -194,7 +194,7 @@ Registering the API Key and API Key Secret. Integration of a user account.
 ---------------
 
 - Go to *Social Media* > *Configuration* > *Social Media*
-- Click on  the *Associate Account* button for the desired social media.
+- Click on  the *Associate account* button for the desired social media.
 
   ![ASSOCIATE_ACCOUNT](../static/img/readme/ASSOCIATE_ACCOUNT.png)
 
