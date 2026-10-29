@@ -1,0 +1,14 @@
+@mixin shadow-card-post($shadow: 0 2px 5px rgba(0, 0, 0, 0.1)) {
+    box-shadow: $shadow;
+}
+
+@mixin span-social-images {
+    span {
+        background-color: lightgrey !important;
+
+        &:hover {
+            background-color: #71639e !important;
+            color: white !important;
+        }
+    }
+}

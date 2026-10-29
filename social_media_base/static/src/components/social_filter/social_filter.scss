@@ -1,0 +1,25 @@
+div.social-network-filter {
+    div.o_datetime_picker {
+        position: absolute;
+        left: 68% !important;
+        top: 10% !important;
+        z-index: 1300 !important;
+        border: 1px solid #ccc !important;
+        background-color: white !important;
+        -webkit-border-radius: 0.2rem !important;
+        -moz-border-radius: 0.2rem !important;
+        border-radius: 0.2rem !important;
+    }
+
+    div.search-filter {
+        border: 1px solid #ccc !important;
+
+        &:hover {
+            border: 2px solid #ccc !important;
+        }
+
+        input:hover {
+            box-shadow: none !important;
+        }
+    }
+}

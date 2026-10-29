@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="social_account_rule_user" model="ir.rule">
+        <field
+            name="name"
+        >Social media accounts, the one who created it is the logged-in user.</field>
+        <field ref="model_social_account" name="model_id" />
+        <field name="domain_force">[('create_uid', '=', user.id)]</field>
+    </record>
+</odoo>

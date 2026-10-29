@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="social_post_account_kanban_view">
+        <field name="name">social.network.stream.post.view.kanban</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <kanban
+                create="0"
+                edit="0"
+                delete="0"
+                quick_create="0"
+                js_class="social_kanban"
+                group_by="account_id"
+                group_create="false"
+                group_delete="false"
+                group_edit="false"
+            >
+                <field name="message" />
+                <field name="published_date" />
+                <field name="image_urls" />
+                <field name="video_urls" />
+                <field name="content_type" />
+                <field name="comment_count" />
+                <field name="like_count" />
+                <field name="share_count" />
+                <field name="view_count" />
+                <field name="post_account_url" />
+                <field name="author" />
+                <field name="media_type" />
+                <field name="account_id" />
+                <field name="media_id" />
+                <templates>
+                    <t t-name="kanban-menu">
+                        <div class="p-1">
+                            <a
+                                role="menuitem"
+                                type="object"
+                                confirm="Are you sure you want to delete this post?"
+                                name="delete_post_account"
+                            >Delete post</a>
+                        </div>
+                    </t>
+                    <t t-name="card">
+                        <div
+                            t-attf-class="rounded oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                            style="padding: 3px !important; border: none !important; box-shadow: none !important;"
+                        >
+                            <t t-set="isDashboard" t-value="true" />
+                            <t t-call="social_media_base.postAccountHeader" />
+
+                            <div
+                                class="oe_kanban_content"
+                                style="padding: 0 !important; margin: 0 !important;"
+                            >
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value)"
+                                />
+                                <t
+                                    t-call="social_media_base.postAccountMessageImages"
+                                />
+                            </div>
+                            <div
+                                class="oe_kanban_footer"
+                                style="padding: 0 !important; margin: 0 !important;"
+                            >
+                                <t t-call="social_media_base.postAccountFooter" />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="social_post_account_view_search">
+        <field name="name">Search field and group by</field>
+        <field name="model">social.post.account</field>
+        <field name="arch" type="xml">
+            <search>
+                <!-- Search Fields -->
+                <field
+                    name="message"
+                    string="Message"
+                    filter_domain="[('message', 'ilike', self)]"
+                />
+                <field
+                    name="author"
+                    string="Author"
+                    filter_domain="[('author', 'ilike', self)]"
+                />
+                <field name="account_id" string="Account" />
+                <field name="media_type" string="Platform" />
+                <field name="content_type" string="Content Type" />
+
+                <!-- Filters -->
+                <separator />
+                <filter
+                    string="Posts"
+                    name="filter_posts"
+                    domain="[('content_type', '=', 'post')]"
+                />
+                <filter
+                    string="Reels/Videos"
+                    name="filter_reels"
+                    domain="[('content_type', '=', 'reel')]"
+                />
+                <filter
+                    string="Ads"
+                    name="filter_ads"
+                    domain="[('content_type', '=', 'ad')]"
+                />
+                <separator />
+                <filter
+                    string="Has Comments"
+                    name="filter_has_comments"
+                    domain="[('comment_count', '>', 0)]"
+                />
+                <filter
+                    string="High Engagement"
+                    name="filter_high_engagement"
+                    domain="['|', ('like_count', '>', 100), ('comment_count', '>', 50)]"
+                />
+                <separator />
+                <filter
+                    string="Published This Week"
+                    name="filter_this_week"
+                    domain="[('published_date', '&gt;=', (context_today() - datetime.timedelta(days=7)).strftime('%Y-%m-%d'))]"
+                />
+                <filter
+                    string="Published This Month"
+                    name="filter_this_month"
+                    domain="[('published_date', '&gt;=', (context_today() - datetime.timedelta(days=30)).strftime('%Y-%m-%d'))]"
+                />
+
+                <!-- Group By -->
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Account"
+                        name="group_by_account_id"
+                        domain="[]"
+                        context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        string="Platform"
+                        name="group_by_media_type"
+                        domain="[]"
+                        context="{'group_by': 'media_type'}"
+                    />
+                    <filter
+                        string="Content Type"
+                        name="group_by_content_type"
+                        domain="[]"
+                        context="{'group_by': 'content_type'}"
+                    />
+                    <filter
+                        string="Author"
+                        name="group_by_author"
+                        domain="[]"
+                        context="{'group_by': 'author'}"
+                    />
+                    <filter
+                        string="Published Date"
+                        name="group_by_published_date"
+                        domain="[]"
+                        context="{'group_by': 'published_date:month'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="social_post_account_act_window_kanban">
+        <field name="name">Dashboard</field>
+        <field name="res_model">social.post.account</field>
+        <field name="view_mode">kanban</field>
+        <field name="context">{'search_default_group_by_account_id': 1}</field>
+        <field name="search_view_id" ref="social_post_account_view_search" />
+    </record>
+
+    <template id="social_media_base.social_network_post_preview">
+        <div class="mb-2 p-3 shadow social-text-justify ">
+            <div class="d-flex justify-content-start align-items-center">
+                <img
+                    t-if="media_id.image"
+                    width="40"
+                    height="40"
+                    t-attf-src="social_media_#{media_id.media_type}/static/img/#{media_id.media_type}.png"
+                    class="img img-fluid rounded"
+                    loading="lazy"
+                />
+                <t t-out="author" />
+            </div>
+            <div class="d-flex  p-2">
+                <t t-out="message" />
+            </div>
+            <div
+                t-if="image_ids"
+                class="d-flex justify-content-between align-items-center  p-2"
+            >
+                <div
+                    class="d-flex justify-content-center flex-wrap gap-3 h-75 p-sm-1 p-lg-3"
+                >
+                    <t t-foreach="image_ids" t-as="image_id">
+                        <img
+                            t-attf-src="/web/image/#{image_id.id}"
+                            width="150"
+                            height="130"
+                            class="img-fluid img-posts"
+                        />
+                    </t>
+                </div>
+            </div>
+        </div>
+    </template>
+</odoo>
