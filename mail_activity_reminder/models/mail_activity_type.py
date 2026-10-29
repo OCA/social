@@ -16,6 +16,11 @@ class MailActivityType(models.Model):
             ' 5 means "5 calendar days before the deadline".'
         ),
     )
+    reminder_mail_template_id = fields.Many2one(
+        comodel_name="ir.ui.view",
+        string="Reminder eMail Template",
+        help="Optional reminder email template to use for this activity type",
+    )
 
     def _get_reminder_offsets(self):
         """Hook for extensions"""

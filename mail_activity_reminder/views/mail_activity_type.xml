@@ -12,6 +12,7 @@
         <field name="arch" type="xml">
             <field name="summary" position="after">
                 <field name="reminders" />
+                <field name="reminder_mail_template_id" />
             </field>
         </field>
     </record>
