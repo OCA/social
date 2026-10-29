@@ -18,13 +18,17 @@ class MailThread(models.AbstractModel):
             return result
         domain = self.env[
             "mail.wizard.invite"
-        ]._mail_restrict_follower_selection_get_domain()
+        ]._mail_restrict_follower_selection_get_domain(res_model=self._name)
         for key in result:
-            for partner_id, email, lang, reason in result[key]:
+            items_to_remove = []
+            for item in result[key]:
+                partner_id = item[0]
                 if partner_id:
                     partner = self.env["res.partner"].search_count(
                         [("id", "=", partner_id)] + domain
                     )
                     if not partner:
-                        result[key].remove((partner_id, email, lang, reason))
+                        items_to_remove.append(item)
+            for item in items_to_remove:
+                result[key].remove(item)
         return result
