@@ -10,7 +10,7 @@ import pytz
 from psycopg2 import errorcodes
 from tweepy.errors import Forbidden, Unauthorized
 
-from odoo import Command, _
+from odoo import Command
 from odoo.exceptions import UserError
 from odoo.tests import tagged
 from odoo.tools import mute_logger
@@ -1125,7 +1125,7 @@ class TestSocialSyncAccountX(TestSocialSyncCommonX):
 
         def import_posts(account, post_id, domain, reported):
             if account.id == failing.id:
-                raise UserError(_("X refused the timeline"))
+                raise UserError(self.env._("X refused the timeline"))
             imported.append(account.id)
             reported.add(account.id)
 
@@ -1377,7 +1377,7 @@ class TestSocialSyncAccountX(TestSocialSyncCommonX):
         )
         return stack
 
-    @mute_logger(LOGGER_ACCOUNT_X_SYNC)
+    @mute_logger(LOGGER_ACCOUNT_X_SYNC, "odoo.sql_db")
     def test_update_posts_statistics_isolates_each_account(self):
         """A database error on one account does not take down the others.
 

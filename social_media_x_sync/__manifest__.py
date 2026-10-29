@@ -3,7 +3,7 @@
 {
     "name": "Social Media X Sync",
     "summary": "Import the X timeline, its figures and the conversation of each post",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Social Network",
     "development_status": "Beta",
     "license": "AGPL-3",

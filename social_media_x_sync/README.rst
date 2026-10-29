@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 ===================
 Social Media X Sync
 ===================
@@ -17,17 +13,17 @@ Social Media X Sync
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Fsocial-lightgray.png?logo=github
-    :target: https://github.com/OCA/social/tree/17.0/social_media_x_sync
+    :target: https://github.com/OCA/social/tree/18.0/social_media_x_sync
     :alt: OCA/social
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/social-17-0/social-17-0-social_media_x_sync
+    :target: https://translation.odoo-community.org/projects/social-18-0/social-18-0-social_media_x_sync
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=17.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/social&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -111,7 +107,7 @@ limit <https://docs.x.com/x-api/fundamentals/rate-limits>`__ is reached
 while refreshing the statistics, the last metrics stored on the account
 are kept instead of failing.
 
-.. |STATISTICS_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/STATISTICS_ACCOUNT.png
+.. |STATISTICS_ACCOUNT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/STATISTICS_ACCOUNT.png
 
 **Table of contents**
 
@@ -213,14 +209,15 @@ refresh of the figures of the recent publications.
   moved — the only endpoint that knows is the timeline, and reading it
   is already the import — so this pass imports instead of flagging the
   account.
-- *Initial sync of the new accounts*, monthly, imports the timeline of
-  an account that was just linked. Linking one triggers this action
-  immediately as well, so its card is filled from the first moment.
-- *Full resync*, weekly, reads the timeline of an X account exactly as
-  the ordinary import does, so it notices nothing that was deleted
-  there. A publication deleted on X is marked *Deleted* when someone
-  opens it from the dashboard or from its form, which is a check of
-  *Social Media X*.
+- *Social: Initial sync of the new accounts*, monthly, imports the
+  timeline of an account that was just linked. Linking one triggers this
+  action immediately as well, so its card is filled from the first
+  moment.
+- *Social: Full resync of the accounts*, weekly, reads the timeline of
+  an X account exactly as the ordinary import does, so it notices
+  nothing that was deleted there. A publication deleted on X is marked
+  *Deleted* when someone opens it from the dashboard or from its form,
+  which is a check of *Social Media X*.
 - *Social: Refresh the statistics of the recent publications*, daily,
   reads the publications of the last 30 days by identifier, which is a
   call of *Social Media X* and not of this module.
@@ -229,7 +226,7 @@ An account whose first import has not run yet is left out of the
 bihourly check, because that check and the initial import write the same
 row from two threads.
 
-.. |ENABLE_SINCE| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/ENABLE_SINCE.png
+.. |ENABLE_SINCE| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/ENABLE_SINCE.png
 
 Usage
 =====
@@ -459,11 +456,11 @@ Uninstalling this module leaves the account linked and able to publish.
 What goes with it is the checkpoint of the import: *Enable since*, *Post
 since* and the reference of the last publication read.
 
-.. |VIDEO_POST| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/VIDEO_POST.png
-.. |COMMENT_VIDEO_COVER| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/COMMENT_VIDEO_COVER.png
-.. |RECOMMEND_POST| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/RECOMMEND_POST.png
-.. |RECOMMEND_COMMENT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/RECOMMEND_COMMENT.png
-.. |DELETE_COMMENT| image:: https://raw.githubusercontent.com/OCA/social/17.0/social_media_x_sync/static/img/readme/DELETE_COMMENT.png
+.. |VIDEO_POST| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/VIDEO_POST.png
+.. |COMMENT_VIDEO_COVER| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/COMMENT_VIDEO_COVER.png
+.. |RECOMMEND_POST| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/RECOMMEND_POST.png
+.. |RECOMMEND_COMMENT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/RECOMMEND_COMMENT.png
+.. |DELETE_COMMENT| image:: https://raw.githubusercontent.com/OCA/social/18.0/social_media_x_sync/static/img/readme/DELETE_COMMENT.png
 
 Known issues / Roadmap
 ======================
@@ -513,7 +510,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/social/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_x_sync%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/social/issues/new?body=module:%20social_media_x_sync%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -564,6 +561,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-edescalona| 
 
-This module is part of the `OCA/social <https://github.com/OCA/social/tree/17.0/social_media_x_sync>`_ project on GitHub.
+This module is part of the `OCA/social <https://github.com/OCA/social/tree/18.0/social_media_x_sync>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

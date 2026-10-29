@@ -6,7 +6,7 @@ from collections import Counter
 
 from tweepy.errors import Forbidden, NotFound, TooManyRequests, Unauthorized
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 from odoo.addons.social_media_x.social_x_utils import _URL_PRICING_X
 
@@ -66,7 +66,7 @@ class SocialPostAccount(models.Model):
         """
         return {
             "success": False,
-            "message": _(
+            "message": self.env._(
                 "The comments could not be read from X. The account may have "
                 "reached the limit of requests of its plan."
             ),
@@ -84,7 +84,7 @@ class SocialPostAccount(models.Model):
         """
         return {
             "success": False,
-            "message": _(
+            "message": self.env._(
                 "The comment could not be published on X. The account may "
                 "have reached the limit of requests of its plan."
             ),
@@ -292,7 +292,9 @@ class SocialPostAccount(models.Model):
                 )
                 return self._x_comments_quota_answer()
             except Exception as e:  # noqa: BLE001 - tweepy may fail in any way
-                return_message = _("Error Get Comments for Tweet: %(error)s", error=e)
+                return_message = self.env._(
+                    "Error Get Comments for Tweet: %(error)s", error=e
+                )
                 _logger.exception(
                     "Error getting the comments of tweet %s", self.remote_ref
                 )
@@ -358,9 +360,9 @@ class SocialPostAccount(models.Model):
                 # itself is asked about instead of reading the error.
                 post_deleted = self._remote_post_gone_on_action()
                 return_message = (
-                    _("The post does not exist or has been deleted.")
+                    self.env._("The post does not exist or has been deleted.")
                     if post_deleted
-                    else _("Error Comment Tweet: %(error)s", error=exp)
+                    else self.env._("Error Comment Tweet: %(error)s", error=exp)
                 )
                 _logger.exception("Error replying to tweet %s", self.remote_ref)
                 return {
@@ -434,7 +436,7 @@ class SocialPostAccount(models.Model):
         :rtype: str
         """
         self.account_id._flag_credentials_expired(str(error))
-        return _(
+        return self.env._(
             "X refused the credentials of %(account)s. Update the account "
             "to authorize it again.",
             account=self.account_id.display_name,
@@ -500,7 +502,7 @@ class SocialPostAccount(models.Model):
             "post_deleted": False,
             "liked": liked,
         }
-        quota_message = _(
+        quota_message = self.env._(
             "The recommendation could not be sent to X. The account may have "
             "reached the limit of requests of its plan."
         )
@@ -522,9 +524,9 @@ class SocialPostAccount(models.Model):
             # itself is asked about instead of reading the error.
             answer["post_deleted"] = self._remote_post_gone_on_action()
             answer["message"] = (
-                _("The post does not exist or has been deleted.")
+                self.env._("The post does not exist or has been deleted.")
                 if answer["post_deleted"]
-                else _("Error Recommend Tweet: %(error)s", error=exp)
+                else self.env._("Error Recommend Tweet: %(error)s", error=exp)
             )
             _logger.exception("Error reacting to tweet %s", tweet_ref)
             return answer
@@ -564,7 +566,7 @@ class SocialPostAccount(models.Model):
         if not comment_ref:
             return {
                 "success": False,
-                "message": _("The comment cannot be recommended on X."),
+                "message": self.env._("The comment cannot be recommended on X."),
                 "post_deleted": False,
                 "liked": None,
             }
@@ -621,13 +623,13 @@ class SocialPostAccount(models.Model):
         ):
             return {
                 "success": False,
-                "message": _(
+                "message": self.env._(
                     "A publication of the account cannot be deleted as a comment."
                 ),
             }
         quota_answer = {
             "success": False,
-            "message": _(
+            "message": self.env._(
                 "The comment could not be deleted on X. The account may have "
                 "reached the limit of requests of its plan."
             ),
@@ -655,7 +657,7 @@ class SocialPostAccount(models.Model):
             _logger.exception("Error deleting the comment %s on X", comment_ref)
             return {
                 "success": False,
-                "message": _("Error Delete Comment: %(error)s", error=exp),
+                "message": self.env._("Error Delete Comment: %(error)s", error=exp),
             }
         data = getattr(response, "data", None) or {}
         if data.get("deleted") or self._is_x_not_found(response):
@@ -666,7 +668,7 @@ class SocialPostAccount(models.Model):
         )
         return {
             "success": False,
-            "message": _(
+            "message": self.env._(
                 "X did not delete the comment: %(errors)s",
                 errors=", ".join(str(error) for error in response.errors or []),
             ),

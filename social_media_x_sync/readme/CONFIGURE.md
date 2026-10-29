@@ -65,13 +65,14 @@ the figures of the recent publications.
   of every X account. X has no cheap answer to whether anything moved — the
   only endpoint that knows is the timeline, and reading it is already the
   import — so this pass imports instead of flagging the account.
-- *Initial sync of the new accounts*, monthly, imports the timeline of an
-  account that was just linked. Linking one triggers this action immediately
-  as well, so its card is filled from the first moment.
-- *Full resync*, weekly, reads the timeline of an X account exactly as the
-  ordinary import does, so it notices nothing that was deleted there. A
-  publication deleted on X is marked *Deleted* when someone opens it from the
-  dashboard or from its form, which is a check of *Social Media X*.
+- *Social: Initial sync of the new accounts*, monthly, imports the timeline
+  of an account that was just linked. Linking one triggers this action
+  immediately as well, so its card is filled from the first moment.
+- *Social: Full resync of the accounts*, weekly, reads the timeline of an X
+  account exactly as the ordinary import does, so it notices nothing that was
+  deleted there. A publication deleted on X is marked *Deleted* when someone
+  opens it from the dashboard or from its form, which is a check of *Social
+  Media X*.
 - *Social: Refresh the statistics of the recent publications*, daily, reads
   the publications of the last 30 days by identifier, which is a call of
   *Social Media X* and not of this module.
