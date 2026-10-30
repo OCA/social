@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="50"
+   height="50"
+   viewBox="0 0 50 50"
+   version="1.1"
+   id="svg8"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <!-- Social media artwork, reused from social_media_base, scaled down to
+       leave room for the advertising badge. -->
+  <g id="social-media" transform="scale(0.78)">
+    <rect
+       style="fill:#4fbe91;stroke-width:5.45008"
+       id="rect462"
+       width="18.406645"
+       height="5.9229307"
+       x="-5.6903386"
+       y="39.966179"
+       transform="rotate(-33.372578)" />
+    <rect
+       style="fill:#4fbe91;stroke-width:5.45008"
+       id="rect462-0"
+       width="18.406645"
+       height="5.9229307"
+       x="-39.162098"
+       y="-2.758431"
+       transform="matrix(-0.83511123,-0.55008112,-0.55008112,0.83511123,0,0)" />
+    <ellipse
+       style="fill:#4fbe91;stroke-width:5.45008"
+       id="path364"
+       cx="39.897404"
+       cy="25.425014"
+       rx="9.4716492"
+       ry="9.3427839" />
+    <ellipse
+       style="fill:#2ebcfa;fill-opacity:1;stroke-width:5.45008"
+       id="path364-9"
+       cx="13.11997"
+       cy="9.5367565"
+       rx="9.4716492"
+       ry="9.3427839" />
+    <ellipse
+       style="fill:#fc868b;stroke-width:5.45008;fill-opacity:1"
+       id="path364-9-8"
+       cx="13.157714"
+       cy="40.60704"
+       rx="9.4716492"
+       ry="9.3427839" />
+  </g>
+  <!-- Advertising badge: megaphone over a white disc, bottom right corner. -->
+  <g id="advertising-badge">
+    <circle
+       id="badge-disc"
+       cx="38"
+       cy="38"
+       r="11.5"
+       style="fill:#ffffff" />
+    <g
+       id="megaphone"
+       transform="translate(31.12,31.12) scale(0.86) rotate(-20,8,8)"
+       style="fill:#f5a623">
+      <path
+         id="megaphone-horn"
+         d="M 2,5.4 L 14.2,0.4 L 15.5,1.3 L 15.5,14.7 L 14.2,15.6 L 2,10.6 Z" />
+      <rect
+         id="megaphone-back"
+         x="-1"
+         y="5.4"
+         width="3.2"
+         height="5.2"
+         rx="1.2" />
+      <path
+         id="megaphone-handle"
+         d="M 2.4,10 H 5 v 3.6 a 1.3,1.3 0 0 1 -2.6,0 z" />
+    </g>
+  </g>
+</svg>
