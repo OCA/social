@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright (C) 2025 - Today: Sylvain LE GAL (http://www.grap.coop)
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo>
+    <record id="view_res_partner_tree" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree" />
+        <field name="arch" type="xml">
+            <field name="category_id" position="after">
+                <field name="social_linkedin" widget="url" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_form" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form" />
+        <field name="arch" type="xml">
+            <field name="website" position="after">
+                <field
+                    name="social_linkedin"
+                    widget="url"
+                    placeholder="e.g. https://www.linkedin.com/company/oca-odoo-community-association/"
+                />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_res_partner_kanban" model="ir.ui.view">
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view" />
+        <field name="arch" type="xml">
+            <field name="is_company" position="after">
+                <field name="social_linkedin" />
+            </field>
+            <xpath expr="//footer/div" position="inside">
+                <t t-if="record.social_linkedin.raw_value">
+                    <a
+                        t-att-href="record.social_linkedin.value"
+                        target="_blank"
+                        class="btn btn-sm btn-link"
+                        role="button"
+                    >
+                        <i
+                            class="fa fa-linkedin me-1"
+                            role="img"
+                            aria-label="LinkedIn Account"
+                            title="LinkedIn Account"
+                        />
+                    </a>
+                </t>
+            </xpath>
+        </field>
+    </record>
+</odoo>

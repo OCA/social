@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record
+        id="mail_gateway_view_form_inherit_mail_gateway_telegram_standalone"
+        model="ir.ui.view"
+    >
+        <field
+            name="name"
+        >mail.gateway.view.form.inherit.mail.gateway.telegram.standalone</field>
+        <field name="model">mail.gateway</field>
+        <field name="inherit_id" ref="mail_gateway.mail_gateway_form_view" />
+        <field name="arch" type="xml">
+            <!-- Add buttons to header -->
+            <xpath expr="//header" position="inside">
+                <button
+                    name="action_fetch_chats"
+                    string="Fetch Chats"
+                    type="object"
+                    invisible="gateway_type != 'telegram'"
+                />
+                <button
+                    name="action_test_connection"
+                    string="Test Connection"
+                    type="object"
+                    class="oe_highlight"
+                    invisible="gateway_type != 'telegram'"
+                />
+            </xpath>
+
+            <!-- Add notebook page for Telegram specific simple chat IDs -->
+            <xpath expr="//notebook" position="inside">
+                <page
+                    string="Telegram Chats"
+                    name="telegram_chats"
+                    invisible="gateway_type != 'telegram'"
+                >
+                    <field name="telegram_chat_ids">
+                        <list editable="bottom">
+                            <field name="name" />
+                            <field name="chat_id" />
+                        </list>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

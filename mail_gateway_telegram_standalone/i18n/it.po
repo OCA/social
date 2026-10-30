@@ -1,0 +1,127 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_gateway_telegram_standalone
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-03-31 10:43+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid "<b>Success!</b> Connection from Odoo to <i>%s</i> is working."
+msgstr "<b>Successo!</b> La connessione da Odoo a <i>%s</i> funziona."
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_mail_gateway__telegram_chat_ids
+msgid "Authorized Chats"
+msgstr "Discussioni autorizzate"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__chat_id
+msgid "Chat"
+msgstr "Discussione"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: mail_gateway_telegram_standalone
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram_standalone.mail_gateway_view_form_inherit_mail_gateway_telegram_standalone
+msgid "Fetch Chats"
+msgstr "Scarica discussioni"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,help:mail_gateway_telegram_standalone.field_telegram_chat__name
+msgid "Friendly name for the chat (e.g. Admin Group)"
+msgstr "Nome semplice per la discussione (es. Gruppo amministratori)"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model,name:mail_gateway_telegram_standalone.model_mail_gateway
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__gateway_id
+msgid "Mail Gateway"
+msgstr "Gateway e-mail"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,field_description:mail_gateway_telegram_standalone.field_telegram_chat__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model.fields,help:mail_gateway_telegram_standalone.field_telegram_chat__chat_id
+msgid "Numeric ID from Telegram"
+msgstr "ID numerico per Telegram"
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid "Please add or fetch at least one Chat ID first."
+msgstr "Prima aggiungere o scaricare almeno un ID discussione."
+
+#. module: mail_gateway_telegram_standalone
+#: model:ir.model,name:mail_gateway_telegram_standalone.model_telegram_chat
+msgid "Telegram Chat"
+msgstr "Discussione Telegram"
+
+#. module: mail_gateway_telegram_standalone
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram_standalone.mail_gateway_view_form_inherit_mail_gateway_telegram_standalone
+msgid "Telegram Chats"
+msgstr "Discussioni Telegram"
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid ""
+"Telegram does not allow fetching updates manually while a Webhook is active."
+" Please disable the Webhook before using 'Fetch Chats'."
+msgstr ""
+"Telegram non consente di scaricare manualmente gli aggiornamenti quando un "
+"webhook è attivo. Disabilita il webhook prima di utilizzare la funzione "
+"\"Scarica chat\"."
+
+#. module: mail_gateway_telegram_standalone
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram_standalone.mail_gateway_view_form_inherit_mail_gateway_telegram_standalone
+msgid "Test Connection"
+msgstr "Prova connessione"
+
+#. module: mail_gateway_telegram_standalone
+#. odoo-python
+#: code:addons/mail_gateway_telegram_standalone/models/mail_gateway.py:0
+msgid "Test messages sent!"
+msgstr "Messaggi di prova inviati!"

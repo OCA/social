@@ -1,0 +1,120 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_gateway_telegram
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-06-16 22:42+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid "Access Telegram and start a converstation with"
+msgstr "Accedi a Telegram e inizia una conversazione con"
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid "BotFather"
+msgstr "BotFather"
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid ""
+"Copy the <b>token given by BotFather to access the HTTP API</b> to the token"
+" field."
+msgstr ""
+"Copia il <b>token fornito da BotFather per accedere l'API HTTP</b> nel campo "
+"token."
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid ""
+"Create a bot using the command /newbot. The system will ask for a bot name. "
+"Remember that it needs to end with the word bot."
+msgstr ""
+"Creare un bot utilizzando il comando /newbot. Il sistema chiederà un nome "
+"per il bot. Ricordarsi che deve finire con la parola bot."
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid ""
+"Define a Webhook key and a webhook secret of your choice in its "
+"corresponding field, in order to secure the connection."
+msgstr ""
+"Definire una chiave webhook e un codice segreto webhook a scelta nel campo "
+"corrispondente, per rendere sicura la connessione."
+
+#. module: mail_gateway_telegram
+#: model:ir.model,name:mail_gateway_telegram.model_mail_channel
+msgid "Discussion Channel"
+msgstr "Canale discussione"
+
+#. module: mail_gateway_telegram
+#: model:ir.model.fields,field_description:mail_gateway_telegram.field_mail_gateway__gateway_type
+msgid "Gateway Type"
+msgstr "Tipo gateway"
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid ""
+"If you want to add an extra layer of security, you can check <b>Has New Channel Security</b>\n"
+"                        and define a <b>Telegram security key</b>.\n"
+"                        New chats will be created only with the command <b>/start SECURITY_KEY</b>."
+msgstr ""
+"Se si vuole aggiungere un livello aggiuntivo di sicurezza, si può "
+"selezionare <b>Ha una nuova sicurezza canale</b>\n"
+"                        e definire una <b>Chiave di sicurezza Telegram</b>.\n"
+"                        Le nuove discussioni verranno create solo con il "
+"comando <b>/start CHIAVE_SICUREZZA</b>."
+
+#. module: mail_gateway_telegram
+#: model:ir.model,name:mail_gateway_telegram.model_mail_gateway
+msgid "Mail Gateway"
+msgstr "Gateway e-mail"
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid "Press the Integrate webhook button."
+msgstr "Fare clic sul pulsante Integra webhook."
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid ""
+"Press the save button and the integrate webhook smart button will appear."
+msgstr "Fare clic sul pulsante salva e il pulsante integra webhook apparirà."
+
+#. module: mail_gateway_telegram
+#: model:ir.model.fields.selection,name:mail_gateway_telegram.selection__mail_gateway__gateway_type__telegram
+msgid "Telegram"
+msgstr "Telegram"
+
+#. module: mail_gateway_telegram
+#: model:ir.model,name:mail_gateway_telegram.model_mail_gateway_telegram
+msgid "Telegram Gateway services"
+msgstr "Servizio gateway Telegram"
+
+#. module: mail_gateway_telegram
+#: model:ir.model.fields,field_description:mail_gateway_telegram.field_mail_gateway__telegram_security_key
+msgid "Telegram Security Key"
+msgstr "Chiave di sicurezza Telegram"
+
+#. module: mail_gateway_telegram
+#: model_terms:ir.ui.view,arch_db:mail_gateway_telegram.mail_gateway_form_view
+msgid "Telegram configuration"
+msgstr "Configurazione Telegram"
+
+#. module: mail_gateway_telegram
+#. odoo-python
+#: code:addons/mail_gateway_telegram/models/mail_gateway_telegram.py:0
+#, python-format
+msgid "Unable to send the telegram message"
+msgstr "Impossibile inviare il messaggio Telegram"

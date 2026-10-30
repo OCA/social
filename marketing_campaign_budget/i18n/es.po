@@ -1,0 +1,58 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* marketing_campaign_budget
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-20 11:41+0000\n"
+"PO-Revision-Date: 2026-08-20 12:43+0100\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#. module: marketing_campaign_budget
+#: model:ir.model.fields,field_description:marketing_campaign_budget.field_utm_campaign__actual_cost
+msgid "Actual Cost"
+msgstr "Coste real"
+
+#. module: marketing_campaign_budget
+#: model_terms:ir.ui.view,arch_db:marketing_campaign_budget.utm_campaign_view_form_inherit_budget
+msgid "Budget"
+msgstr "Presupuesto"
+
+#. module: marketing_campaign_budget
+#: model:ir.model.fields,field_description:marketing_campaign_budget.field_utm_campaign__budget_amount
+msgid "Budget Amount"
+msgstr "Importe del presupuesto"
+
+#. module: marketing_campaign_budget
+#: model:ir.model.fields,help:marketing_campaign_budget.field_utm_campaign__budget_amount
+msgid "Planned budget for this campaign."
+msgstr "Presupuesto previsto para esta campaña."
+
+#. module: marketing_campaign_budget
+#: model:ir.model.fields,help:marketing_campaign_budget.field_utm_campaign__actual_cost
+msgid "Real cost spent on this campaign."
+msgstr "Coste real invertido en esta campaña."
+
+#. module: marketing_campaign_budget
+#: model:ir.model.constraint,message:marketing_campaign_budget.constraint_utm_campaign_actual_cost_non_negative
+msgid "The actual cost cannot be negative."
+msgstr "El coste real no puede ser negativo."
+
+#. module: marketing_campaign_budget
+#: model:ir.model.constraint,message:marketing_campaign_budget.constraint_utm_campaign_budget_amount_non_negative
+msgid "The budget amount cannot be negative."
+msgstr "El importe del presupuesto no puede ser negativo."
+
+#. module: marketing_campaign_budget
+#: model:ir.model,name:marketing_campaign_budget.model_utm_campaign
+msgid "UTM Campaign"
+msgstr "Campaña UTM"

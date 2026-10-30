@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-inherit="mail.Message" t-inherit-mode="extension">
+        <xpath
+            expr="//small[@t-if='isPersistentMessageFromAnotherThread']"
+            position="after"
+        >
+            <small
+                t-if="message.gateway_thread_data"
+                t-on-click.prevent="openGatewayThreadRecord"
+                class="ms-1 text-500"
+            >
+                <t t-if="message.gateway_thread_data.model !== 'discuss.channel'">
+                    on <a t-att-href="message.resUrl">
+                    <t t-esc="message.gateway_thread_data?.name" />
+                </a>
+                </t>
+            </small>
+        </xpath>
+    </t>
+</templates>

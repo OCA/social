@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). -->
+<odoo>
+    <record model="ir.ui.view" id="view_res_partner_gateway_channel_form">
+        <field name="name">Partner Gateway Channel Form</field>
+        <field name="model">res.partner.gateway.channel</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="partner_id" />
+                        <field name="gateway_id" />
+                        <field name="gateway_token" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_partner_gateway_channel_tree">
+        <field name="name">Partner Gateway Channel Tree</field>
+        <field name="model">res.partner.gateway.channel</field>
+        <field name="arch" type="xml">
+            <list>
+                <field name="partner_id" />
+                <field name="gateway_id" />
+                <field name="gateway_token" />
+            </list>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_res_partner_gateway_channel_search">
+        <field name="name">Partner Gateway Channel Tree</field>
+        <field name="model">res.partner.gateway.channel</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="partner_id" />
+                <field name="gateway_id" />
+                <field name="gateway_token" />
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="res_partner_gateway_channel_act_window">
+        <field name="name">Gateway Partner Channels</field>
+        <field name="res_model">res.partner.gateway.channel</field>
+        <field name="view_mode">list,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+    </record>
+    <record model="ir.ui.menu" id="res_partner_gateway_channel_menu">
+        <field name="name">Gateway Partner Channels</field>
+        <field name="parent_id" ref="base.menu_email" />
+        <field name="action" ref="res_partner_gateway_channel_act_window" />
+        <field name="sequence" eval="16" />
+    </record>
+</odoo>

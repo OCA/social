@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_message_gateway_send_form_view">
+        <field name="model">mail.message.gateway.send</field>
+        <field name="arch" type="xml">
+            <form string="Mail Message Gateway Send">
+                <!-- TODO -->
+                <group>
+                    <field name="message_id" invisible="1" />
+                    <field
+                        name="partner_id"
+                        domain="[('id', 'in', context.get('partners'))]"
+                        options="{'no_open': 1, 'no_create': 1}"
+                    />
+                    <field
+                        name="gateway_channel_id"
+                        domain="[('id', 'in', context.get('channels')), ('partner_id', '=', partner_id)]"
+                        options="{'no_open': 1, 'no_create': 1}"
+                    />
+                </group>
+                <footer>
+                    <button
+                        name="send"
+                        string="Send"
+                        class="btn-primary"
+                        type="object"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

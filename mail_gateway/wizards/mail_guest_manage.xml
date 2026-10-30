@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_guest_manage_form_view">
+        <field name="model">mail.guest.manage</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <field name="guest_id" force_save="1" readonly="1" />
+                    <field name="partner_id" />
+                </group>
+                <footer>
+                    <button
+                        name="create_partner"
+                        string="Create new partner"
+                        class="btn-primary"
+                        type="object"
+                        invisible="partner_id"
+                    />
+                    <button
+                        name="merge_partner"
+                        string="Merge"
+                        class="btn-primary"
+                        invisible="not partner_id"
+                        type="object"
+                    />
+                    <button string="Cancel" class="btn-default" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

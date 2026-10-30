@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+<t t-inherit="mail.MailComposerSendDropdown" t-inherit-mode="extension">
+        <xpath expr="//Dropdown" position="attributes">
+            <!--Disable the dropdown to send later because the behavior
+        needs to be adapted to accept gateway messages. To be removed
+        when implemented.
+        -->
+            <attribute
+                name="t-if"
+            >env.model.config.resModel === "mail.compose.message"</attribute>
+        </xpath>
+    </t>
+</templates>

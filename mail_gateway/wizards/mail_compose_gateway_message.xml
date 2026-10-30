@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Dixmit
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="mail_compose_gateway_message_form_view">
+        <field name="model">mail.compose.gateway.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="mode">primary</field>
+        <field name="arch" type="xml">
+            <label for="partner_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </label>
+            <field name="partner_ids" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="subject" position="before">
+                <field name="wizard_partner_ids" invisible="1" />
+                <field
+                    name="wizard_channel_ids"
+                    string="Gateways"
+                    widget="many2many_tags"
+                    context="{'mail_gateway_partner_info': 1}"
+                    domain="[('partner_id', 'in', wizard_partner_ids)]"
+                />
+            </field>
+            <field name="subject" position="attributes">
+                <attribute name="invisible">1</attribute>
+                <attribute name="required">0</attribute>
+            </field>
+            <xpath
+                expr="//widget[@name='mail_composer_recipient_list']/.."
+                position="attributes"
+            >
+                <attribute name="invisible">True</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
