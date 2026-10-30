@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <!-- Message with CC -->
+        <record id="mail_message_cc" model="mail.message">
+            <field name="model">res.partner</field>
+            <field name="res_id" ref="base.partner_demo" />
+            <field name="message_type">comment</field>
+            <field name="subtype_id" ref="mail.mt_comment" />
+            <field
+            name="email_cc"
+        >acc@testmail.com,wood.corner26@example.com,toni.rhodes11@example.com</field>
+            <field name="mail_tracking_needs_action">1</field>
+            <field name="body"><![CDATA[<p>This is a message with CC</p>]]></field>
+            <field name="email_from">wood.corner26@example.com</field>
+            <field name="author_id" ref="base.res_partner_1" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
+            <field name="subject">Message with CC</field>
+        </record>
+
+        <record id="mail_tracking_email_cc" model="mail.tracking.email">
+            <field name="name">Message with CC</field>
+            <field name="mail_message_id" ref="mail_message_cc" />
+            <field name="partner_id" ref="base.res_partner_1" />
+            <field name="recipient">demo@yourcompany.example.com</field>
+            <field name="sender">wood.corner26@example.com</field>
+            <field name="state">sent</field>
+            <field name="time" eval="DateTime.today().strftime('%Y-%m-%d %H:%M')" />
+        </record>
+
+        <!-- Failed Message A -->
+        <record id="mail_message_failed" model="mail.message">
+            <field name="model">res.partner</field>
+            <field name="res_id" ref="base.partner_demo" />
+            <field name="message_type">comment</field>
+            <field name="subtype_id" ref="mail.mt_comment" />
+            <field name="mail_tracking_needs_action">1</field>
+            <field name="body"><![CDATA[<p>This is a failed message</p>]]></field>
+            <field name="email_from">wood.corner26@example.com</field>
+            <field name="author_id" ref="base.res_partner_1" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
+            <field
+            name="notification_ids"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')}),Command.create({'res_partner_id': ref('base.res_partner_1'), 'notification_status': 'exception'})]"
+        />
+            <field name="subject">Failed Message</field>
+        </record>
+
+        <record id="mail_tracking_email_failed" model="mail.tracking.email">
+            <field name="name">Failed Message</field>
+            <field name="mail_message_id" ref="mail_message_failed" />
+            <field name="partner_id" ref="base.res_partner_1" />
+            <field name="recipient">demo@yourcompany.example.com</field>
+            <field name="sender">wood.corner26@example.com</field>
+            <field name="state">error</field>
+            <field name="time" eval="DateTime.today().strftime('%Y-%m-%d %H:%M')" />
+        </record>
+
+        <!-- Failed Message B -->
+        <record id="mail_message_failed_b" model="mail.message">
+            <field name="model">res.partner</field>
+            <field name="res_id" ref="base.partner_demo" />
+            <field name="message_type">comment</field>
+            <field name="subtype_id" ref="mail.mt_comment" />
+            <field name="mail_tracking_needs_action">1</field>
+            <field name="body"><![CDATA[<p>This is another failed message</p>]]></field>
+            <field name="email_from">jackson.group82@example.com</field>
+            <field name="author_id" ref="base.res_partner_10" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
+            <field
+            name="notification_ids"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')}),Command.create({'res_partner_id': ref('base.res_partner_10'), 'notification_status': 'bounce'})]"
+        />
+            <field name="subject">Failed Message</field>
+        </record>
+
+        <record id="mail_tracking_email_failed_b" model="mail.tracking.email">
+            <field name="name">Failed Message</field>
+            <field name="mail_message_id" ref="mail_message_failed_b" />
+            <field name="partner_id" ref="base.res_partner_10" />
+            <field name="recipient">demo@yourcompany.example.com</field>
+            <field name="sender">jackson.group82@example.com</field>
+            <field name="state">error</field>
+            <field name="time" eval="DateTime.today().strftime('%Y-%m-%d %H:%M')" />
+        </record>
+
+        <!-- Failed Message C -->
+        <record id="mail_message_failed_c" model="mail.message">
+            <field name="model">res.partner</field>
+            <field name="res_id" ref="base.partner_demo" />
+            <field name="message_type">comment</field>
+            <field name="subtype_id" ref="mail.mt_comment" />
+            <field name="mail_tracking_needs_action">1</field>
+            <field name="body"><![CDATA[<p>This is another failed message</p>]]></field>
+            <field name="email_from">admin@example.com</field>
+            <field name="author_id" ref="base.partner_admin" />
+            <field
+            name="partner_ids"
+            eval="[Command.set([ref('base.partner_demo')])]"
+        />
+            <field
+            name="notification_ids"
+            eval="[Command.create({'res_partner_id': ref('base.partner_demo')}),Command.create({'res_partner_id': ref('base.partner_admin'), 'notification_status': 'exception'})]"
+        />
+            <field name="subject">Failed Message</field>
+        </record>
+
+        <record id="mail_tracking_email_failed_c" model="mail.tracking.email">
+            <field name="name">Failed Message</field>
+            <field name="mail_message_id" ref="mail_message_failed_c" />
+            <field name="partner_id" ref="base.partner_admin" />
+            <field name="recipient">demo@yourcompany.example.com</field>
+            <field name="sender">admin@example.com</field>
+            <field name="state">error</field>
+            <field name="time" eval="DateTime.today().strftime('%Y-%m-%d %H:%M')" />
+        </record>
+</odoo>

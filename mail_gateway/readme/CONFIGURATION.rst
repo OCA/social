@@ -1,0 +1,4 @@
+- Access in development mode
+- Go to `Settings / Technical / Email / Gateway`
+- Create a gateway. Follow the instruction of the specific tab in order to integrate it.
+- Start receiving notifications

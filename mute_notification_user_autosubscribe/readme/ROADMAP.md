@@ -1,0 +1,1 @@
+- If a and "Auto Subscribe Mute" rule is modified, created or deleted, changes will not affect existing documents, so their users subtypes will keep the current configuration.

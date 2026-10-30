@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="mail_compose_message_forward_form">
+        <field name="name">mail.compose.message.form.forward</field>
+        <field name="model">mail.compose.message</field>
+        <field name="mode">primary</field>
+        <field name="priority" eval="100" />
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_from']" position="before">
+                <field
+                    name="forward_type"
+                    widget="radio"
+                    options="{'horizontal': true}"
+                    required="1"
+                />
+                <field
+                    name="forward_thread"
+                    options="{'no_create': True}"
+                    required="forward_type == 'another_thread'"
+                    invisible="forward_type != 'another_thread'"
+                />
+            </xpath>
+            <xpath expr="//field[@name='partner_ids']" position="attributes">
+                <attribute name="required">forward_type == 'current_thread'</attribute>
+            </xpath>
+            <xpath expr="//label[@for='partner_ids']" position="attributes">
+                <attribute name="string">Followers to notify</attribute>
+            </xpath>
+            <xpath expr="//span[@name='document_followers_text']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='template_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath
+                expr="//button[@name='open_template_creation_wizard']"
+                position="attributes"
+            >
+                <attribute name="invisible">1</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>

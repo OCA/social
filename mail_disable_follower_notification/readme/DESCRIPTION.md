@@ -1,0 +1,1 @@
+This module disables, by default, the option to send a notification email when adding followers to a record in the chatter.

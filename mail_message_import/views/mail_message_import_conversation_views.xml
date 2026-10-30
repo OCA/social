@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_conversation_view_list" model="ir.ui.view">
+        <field name="name">mail.message.import.conversation.list</field>
+        <field name="model">mail.message.import.conversation</field>
+        <field name="arch" type="xml">
+            <tree
+                create="false"
+                decoration-danger="state == 'error'"
+                decoration-muted="state == 'cancelled'"
+            >
+                <field name="name" />
+                <field name="sender_id" />
+                <field name="sender_address" />
+                <field name="channel_id" optional="show" />
+                <field name="first_message_date" />
+                <field name="last_message_date" optional="hide" />
+                <field name="message_count" string="Messages" />
+                <field name="attempt_count" optional="hide" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-info="state in ('open', 'processing')"
+                    decoration-success="state == 'done'"
+                    decoration-danger="state == 'error'"
+                    decoration-muted="state == 'cancelled'"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mail_message_import_conversation_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.conversation.form</field>
+        <field name="model">mail.message.import.conversation</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header>
+                    <button
+                        name="action_process_now"
+                        type="object"
+                        string="Process now"
+                        class="oe_highlight"
+                        invisible="state != 'open'"
+                    />
+                    <button
+                        name="action_retry"
+                        type="object"
+                        string="Retry"
+                        class="oe_highlight"
+                        invisible="state not in ('error', 'cancelled')"
+                    />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        statusbar_visible="open,processing,done"
+                    />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_incidents"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-exclamation-triangle"
+                        >
+                            <field
+                                name="open_incident_count"
+                                widget="statinfo"
+                                string="Incidents"
+                            />
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <div
+                        class="alert alert-info"
+                        role="status"
+                        invisible="state != 'open'"
+                    >
+                        Waiting for more messages of the sender: the whole conversation is
+                        processed at <field name="process_after" class="oe_inline" />.
+                        Press <strong>Process now</strong> not to wait.
+                    </div>
+                    <div
+                        class="alert alert-danger"
+                        role="alert"
+                        invisible="not last_error"
+                    >
+                        <field name="last_error" />
+                    </div>
+                    <group>
+                        <group>
+                            <field name="sender_id" />
+                            <field name="origin_display" />
+                            <field name="channel_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="first_message_date" />
+                            <field name="last_message_date" />
+                            <field name="processed_date" />
+                            <field name="attempt_count" invisible="state != 'error'" />
+                            <field
+                                name="next_attempt_date"
+                                invisible="not next_attempt_date"
+                            />
+                            <field name="processing_ref" groups="base.group_no_one" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Messages" name="messages">
+                            <field name="message_ids">
+                                <tree>
+                                    <field name="message_date" />
+                                    <field name="message_type" />
+                                    <field name="body" />
+                                    <field name="attachment_count" string="Files" />
+                                    <field name="state" widget="badge" />
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_import_conversation_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.conversation.search</field>
+        <field name="model">mail.message.import.conversation</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="sender_id" />
+                <field name="sender_address" />
+                <filter
+                    name="waiting"
+                    string="Being processed"
+                    domain="[('state', 'in', ('open', 'processing'))]"
+                />
+                <filter
+                    name="error"
+                    string="Error"
+                    domain="[('state', '=', 'error')]"
+                />
+                <filter
+                    name="done"
+                    string="Processed"
+                    domain="[('state', '=', 'done')]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_channel_id"
+                        string="Receiving channel"
+                        context="{'group_by': 'channel_id'}"
+                    />
+                    <filter
+                        name="group_sender"
+                        string="Sender"
+                        context="{'group_by': 'sender_id'}"
+                    />
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+                <searchpanel>
+                    <field
+                        name="channel_id"
+                        string="Receiving channel"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="authorized_address_id"
+                        string="Sent from"
+                        enable_counters="1"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mail_message_import_conversation" model="ir.actions.act_window">
+        <field name="name">Conversations</field>
+        <field name="res_model">mail.message.import.conversation</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No conversation yet</p>
+            <p>
+                The consecutive messages of a sender are grouped and processed
+                together after some minutes without new messages.
+            </p>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Manuel Regidor <manuel.regidor@sygel.es>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="user_autosubscribe_mute_form_view" model="ir.ui.view">
+        <field name="name">user.autosubscribe.mute.form.view</field>
+        <field name="model">user.autosubscribe.mute</field>
+        <field name="arch" type="xml">
+            <form string="User Autosubscribe Mute">
+                <sheet>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div class="oe_title">
+                        <label for="name" class="oe_edit_only" />
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="active" invisible="1" />
+                            <field
+                                name="model_id"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                        </group>
+                        <group>
+                            <field
+                                name="user_ids"
+                                widget="many2many_tags"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                            <field
+                                name="group_ids"
+                                widget="many2many_tags"
+                                options="{'no_create_edit': True, 'no_create': True}"
+                            />
+                        </group>
+                    </group>
+                    <group>
+                        <field name="notes" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+    <record id="user_autosubscribe_mute_tree_view" model="ir.ui.view">
+        <field name="name">user.autosubscribe.mute.tree.view</field>
+        <field name="model">user.autosubscribe.mute</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="model_id" />
+                <field name="user_ids" />
+                <field name="group_ids" />
+            </tree>
+        </field>
+    </record>
+    <record id="user_autosubscribe_mute_action" model="ir.actions.act_window">
+        <field name="name">User Autosubscribe Mute</field>
+        <field name="res_model">user.autosubscribe.mute</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    <menuitem
+        parent="mail.mail_menu_technical"
+        id="menu_user_autosubscribe_mute"
+        name="User Autosubscribe Mute"
+        action="user_autosubscribe_mute_action"
+        groups="base.group_system"
+    />
+</odoo>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="email_compose_message_wizard_inherit_form">
+        <field name="name">mail.compose.message.form (mail_optional_autofollow)</field>
+        <field name="model">mail.compose.message</field>
+        <field name="inherit_id" ref="mail.email_compose_message_wizard_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[field[@name='partner_ids']]" position="after">
+                <field
+                    name="autofollow_recipients"
+                    invisible="composition_mode == 'mass_mail'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="mail_resend_message_view_form" model="ir.ui.view">
+        <field name="name">view.mail.resend.message.form</field>
+        <field name="model">mail.resend.message</field>
+        <field name="inherit_id" ref="mail.mail_resend_message_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_ids']" position="before">
+                <field
+                    name="gateway_notification_ids"
+                    context="{'tree_view_ref': 'mail_gateway.mail_notification_view_tree'}"
+                    invisible="not gateway_notification_ids"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

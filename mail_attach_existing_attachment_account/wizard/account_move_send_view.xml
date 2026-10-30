@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+    Copyright 2019 Thore Baden
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<odoo>
+    <record id="account_move_send_form" model="ir.ui.view">
+        <field name="name">Send Invoice</field>
+        <field name="model">account.move.send</field>
+        <field name="inherit_id" ref="account.account_move_send_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='mail_attachments_widget']" position="after">
+                <field name="can_attach_attachment" invisible="1" />
+                <field
+                    name="object_attachment_ids"
+                    widget="many2many_checkboxes"
+                    domain="[('res_model', '=', 'account.move'), ('res_id', 'in', move_ids)]"
+                    invisible="not can_attach_attachment"
+                    context="{'skip_res_field_check': True}"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>

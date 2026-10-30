@@ -1,0 +1,15 @@
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.mail</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority" eval="100" />
+        <field name="inherit_id" ref="mail.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//block[@id='emails']" position="inside">
+                <setting help="Default notify followers when the user sending email">
+                    <field name="notify_followers" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</odoo>

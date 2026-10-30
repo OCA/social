@@ -1,0 +1,530 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_custom_unsubscribe
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+# enjolras <yo@miguelrevilla.com>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-26 01:46+0000\n"
+"PO-Revision-Date: 2023-10-28 13:30+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mailing_list_ids
+msgid "(Un)subscribed mass mailing lists, if any."
+msgstr "Listas de correo dadas de baja (si las hubiera)."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__unsubscriber_id
+msgid "(Un)subscriber"
+msgstr "(Des)abonado"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.actions.act_window,name:mass_mailing_custom_unsubscribe.mail_unsubscription_action
+#: model:ir.ui.menu,name:mass_mailing_custom_unsubscribe.mail_unsubscription_menu
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_graph
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_pivot
+msgid "(Un)subscriptions"
+msgstr "(Des)abonados"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__action
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Action"
+msgstr "Acción"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_needaction
+msgid "Action Needed"
+msgstr "Necesita Acción"
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "An error occured. Please try again later or contact us."
+msgstr ""
+"Ha ocurrido un error. Por favor, pruebe de nuevo o póngase en contacto con "
+"nosotros."
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "An error occurred. Please try again later or contact us."
+msgstr ""
+"Se ha producido un error. Vuelva a intentarlo más tarde o póngase en "
+"contacto con nosotros."
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "An error occurred. Your changes have not been saved, try again later."
+msgstr ""
+"Ha ocurrido un error. Los cambios no se han guardado, inténtelo de nuevo más "
+"tarde."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_attachment_count
+msgid "Attachment Count"
+msgstr "Recuento de Archivos Adjuntos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__blacklist_add
+msgid "Blacklisting"
+msgstr "Añadir a la lista negra"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__details_required
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__details_required
+msgid "Check to ask for more details when this reason is selected."
+msgstr "Marcar para pedir más detalles cuando se selecciona este motivo."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__create_uid
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__create_date
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__date
+msgid "Date"
+msgstr "Fecha"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__blacklist_rm
+msgid "De-blacklisting"
+msgstr "Sacar de la lista negra"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__details
+msgid "Details"
+msgstr "Detalles"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__details_required
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__details_required
+msgid "Details Required"
+msgstr "Detalles Requeridos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__display_name
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__display_name
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__email
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Email"
+msgstr "Emai"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__failed_message_ids
+msgid "Failed Messages"
+msgstr "Mensajes Fallidos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores/as (Socios)"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Group by"
+msgstr "Agrupar por"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__metadata
+msgid "HTTP request metadata used when creating this record."
+msgstr "Metadatos de la petición HTTP utilizados cuando se creó este registro."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_requested
+msgid "I did not request this"
+msgstr "No lo solicité"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_too_many
+msgid "I get too many emails"
+msgstr "Recibo demasiados correos electrónicos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_not_interested
+msgid "I'm not interested"
+msgstr "No estoy interesado"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__id
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_needaction
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, nuevos mensajes requieren de su atención."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "si está marcada, algunos mensajes tienen un error de entrega."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mailing_list__not_cross_unsubscriptable
+msgid ""
+"If you mark this field, this list won't be shown when unsubscribing from "
+"other mailing list, in the section: 'Is there any other mailing list you "
+"want to leave?'"
+msgstr ""
+"Si marca esta casilla, esta lista no será mostrada cuando se dé de baja de "
+"otra lista de correo, en la sección: '¿Hay alguna otra lista de correo que "
+"quiera dejar?'"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_is_follower
+msgid "Is Follower"
+msgstr "Es Seguidor"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription____last_update
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason____last_update
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__write_uid
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__write_date
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__write_date
+msgid "Last Updated on"
+msgstr "Última actualización el"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_blacklist
+msgid "Mail Blacklist"
+msgstr "Lista negra de correo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription
+msgid "Mail unsubscription"
+msgstr "Cancelación de la suscripción por correo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mail_unsubscription_reason
+msgid "Mail unsubscription reason"
+msgstr "Motivo de cancelación de la suscripción de correo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mailing_list
+msgid "Mailing List"
+msgstr "Lista de correo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mailing_list_ids
+msgid "Mailing lists"
+msgstr "Listas de correo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunto Principal"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model,name:mass_mailing_custom_unsubscribe.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr "Envío masivo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mass_mailing_id
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Mass mailing"
+msgstr "Envío masivo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__mass_mailing_id
+msgid "Mass mailing from which he was unsubscribed."
+msgstr "Envío masivo del que ha sido dado de baja."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_content
+msgid "Message Content"
+msgstr "Contenido del mensaje"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_error
+msgid "Message Delivery error"
+msgstr "Error en entrega de mensaje"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_content
+msgid "Message content, to be used only in searches"
+msgstr "Contenido del mensaje, para usarse en búsquedas"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__metadata
+msgid "Metadata"
+msgstr "Metadatos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Month"
+msgstr "Mes"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__details
+msgid "More details on why the unsubscription was made."
+msgstr "Más detalles de por qué se dio de baja."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__name
+msgid "Name"
+msgstr "Nombre"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mailing_list__not_cross_unsubscriptable
+msgid "Not cross unsubscriptable"
+msgstr "Sin baja cruzada"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de Acciones"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Número de mensajes no leídos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:mail.unsubscription.reason,name:mass_mailing_custom_unsubscribe.reason_other
+msgid "Other reason"
+msgstr "Otro motivo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:0
+#, python-format
+msgid "Please indicate why are you unsubscribing."
+msgstr ""
+"Por favor, indique más detalles acerca de la razón de su baja de la "
+"suscripción."
+
+#. module: mass_mailing_custom_unsubscribe
+#: code:addons/mass_mailing_custom_unsubscribe/models/mail_unsubscription.py:0
+#, python-format
+msgid "Please provide details on why you are unsubscribing."
+msgstr "Por favor, indique más detalles de por qué se da de baja."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__sequence
+msgid "Position of the reason in the list."
+msgstr "Posición del motivo en la lista."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__reason_id
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Reason"
+msgstr "Motivo"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription_reason__sequence
+msgid "Sequence"
+msgstr "Secuencia"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__subscription
+msgid "Subscription"
+msgstr "Suscripción"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
+msgid "Thank you!"
+msgstr "¡Gracias!"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_unread
+msgid "Unread Messages"
+msgstr "Mensajes no leídos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Contador de Mensajes no leídos"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason_form
+msgid "Unsubscribe now"
+msgstr "Darse de baja ahora"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields.selection,name:mass_mailing_custom_unsubscribe.selection__mail_unsubscription__action__unsubscription
+msgid "Unsubscription"
+msgstr "Desuscripción"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.actions.act_window,name:mass_mailing_custom_unsubscribe.mail_unsubscription_reason_action
+#: model:ir.ui.menu,name:mass_mailing_custom_unsubscribe.mail_unsubscription_reason_menu
+msgid "Unsubscription Reasons"
+msgstr "Motivos de la baja"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.reason
+msgid ""
+"We would appreciate if you provide feedback about why you updated<br/>your "
+"subscriptions"
+msgstr ""
+"Agradeceríamos que nos proporcionase la razón por la cuál ha actualizado<br/"
+">sus subscripciones"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,field_description:mass_mailing_custom_unsubscribe.field_mail_unsubscription__website_message_ids
+msgid "Website Messages"
+msgstr "Mensajes de la página web"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de la comunicación en la web"
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__action
+msgid "What did the (un)subscriber choose to do."
+msgstr "Qué decidió hacer el (des)abonado."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__unsubscriber_id
+msgid "Who was subscribed or unsubscribed."
+msgstr "Quién se suscribió o se dio de baja."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model:ir.model.fields,help:mass_mailing_custom_unsubscribe.field_mail_unsubscription__reason_id
+msgid "Why the unsubscription was made."
+msgstr "Por qué se dio de baja."
+
+#. module: mass_mailing_custom_unsubscribe
+#: model_terms:ir.ui.view,arch_db:mass_mailing_custom_unsubscribe.mail_unsubscription_view_search
+msgid "Year"
+msgstr "Año"
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "You are not authorized to do this!"
+msgstr "¡No está autorizado a hacer esto!"
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "You have been <strong>successfully unsubscribed from %s</strong>."
+msgstr "Se ha dado <strong>de baja con éxito de %s</strong>."
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "You have been <strong>successfully unsubscribed</strong>."
+msgstr "Se ha <strong>dado de baja con éxito</strong>."
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid ""
+"You have been successfully <strong>added to our blacklist</strong>. You will "
+"not be contacted anymore by our services."
+msgstr ""
+"Ha sido <strong>añadido a nuestra lista negra</strong> con éxito. Nuestros "
+"servicios ya no se pondrán en contacto con usted."
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid ""
+"You have been successfully <strong>removed from our blacklist</strong>. You "
+"are now able to be contacted by our services."
+msgstr ""
+"Ha sido <strong>eliminado de nuestra lista negra</strong> con éxito. Ahora "
+"puede ser contactado por nuestros servicios."
+
+#. module: mass_mailing_custom_unsubscribe
+#. openerp-web
+#: code:addons/mass_mailing_custom_unsubscribe/static/src/js/unsubscribe.js:0
+#, python-format
+msgid "Your changes have been saved."
+msgstr "Se han guardado los cambios."
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error de Entrega SMS"
+
+#~ msgid ""
+#~ "Before unsubscribing, could you please tell us why do you want to "
+#~ "unsubscribe?"
+#~ msgstr "Antes de darse de baja, ¿podría indicarnos el motivo?"
+
+#~ msgid "Don't show this list in the other unsubscriptions"
+#~ msgstr "No mostrar esta lista en las otras bajas"
+
+#~ msgid "I am unsubscribing because..."
+#~ msgstr "Me doy de baja porque..."
+
+#~ msgid "Mailing Unsubscription"
+#~ msgstr "Baja de lista de correo"
+
+#~ msgid "Outgoing Mails"
+#~ msgstr "Correos salientes"

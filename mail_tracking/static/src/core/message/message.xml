@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t
+        t-name="mail_tracking.Message"
+        t-inherit="mail.Message"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//div[hasclass('o-mail-Message-header')]" position="after">
+            <t
+                t-set="has_partner_trackings"
+                t-value="props.message.partner_trackings?.length"
+            />
+            <t
+                t-if="((env.inDiscussApp and props.thread?.id === 'failed') or props.messageSearch) and failed_recipients?.length"
+            >
+                <p class="o_mail_tracking mb-0">
+                    <FailedMessageReview message="props.message" />
+                </p>
+                <div class="o-mail-Activity-info lh-1">
+                    <strong class="text-danger">Failed Recipients: </strong>
+                    <MessageTracking
+                        partner_trackings="failed_recipients"
+                        message="props.message"
+                        skip_track_links="true"
+                    />
+                </div>
+            </t>
+            <p
+                t-if="props.message.partner_trackings?.length and !props.messageSearch"
+                class="o_mail_tracking mb-0"
+            >
+                <strong>To: </strong>
+                <MessageTracking
+                    partner_trackings="props.message.partner_trackings"
+                    message="props.message"
+                />
+            </p>
+        </xpath>
+    </t>
+
+</templates>

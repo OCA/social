@@ -1,0 +1,60 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_resend
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+# Quentin THEURET <odoo@kerpeo.com>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-02-26 01:46+0000\n"
+"PO-Revision-Date: 2018-02-26 01:46+0000\n"
+"Last-Translator: Quentin THEURET <odoo@kerpeo.com>, 2018\n"
+"Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: mass_mailing_resend
+#: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+msgid ""
+"<i class=\"fa fa-info-circle\"/> New sending will be done only to not sent/"
+"new recipients. If you want to resend again the mass mailing to already sent "
+"recipients, click on <b>Sent</b> smart-button for removing the existing "
+"record(s)."
+msgstr ""
+
+#. module: mass_mailing_resend
+#: model:ir.model,name:mass_mailing_resend.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr "Publipostage"
+
+#. module: mass_mailing_resend
+#: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+msgid "Resend"
+msgstr "Renvoyer"
+
+#. module: mass_mailing_resend
+#. odoo-python
+#: code:addons/mass_mailing_resend/models/mailing_mailing.py:0
+#, python-format
+msgid "You can't resend a mass mailing that is being sent or in draft state."
+msgstr ""
+"Vous ne pouvez pas renvoyer un publipostage qui est déjà envoyé ou dans un "
+"état brouillon."
+
+#~ msgid ""
+#~ "<i class=\"fa fa-info-circle\"/> New sending will be done only to not "
+#~ "sent/new recipients. If you want to resend again the mass mailing to "
+#~ "already sent recipients, click on <b>Emails Sent</b> smart-button for "
+#~ "removing the existing record(s)."
+#~ msgstr ""
+#~ "<i class=\"fa fa-info-circle\"/>Un nouvel envoi sera effectué uniquement "
+#~ "aux nouveaux destinataires ou à ceux qui ne l'ont pas encore reçu. Si "
+#~ "vous souhaitez envoyer à nouveau le publipostage à tous les "
+#~ "destinataires, cliquez sur le bouton <b>Courriels envoyés</b>pour "
+#~ "supprimer le(s) enregistrement(s) existant(s)."

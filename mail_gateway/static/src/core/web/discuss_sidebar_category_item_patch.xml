@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t
+        t-name="mail_gateway.DiscussSidebarChannel"
+        t-inherit="mail.DiscussSidebarChannel"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//ThreadIcon" position="attributes">
+            <attribute name="t-if" add="or thread.type === 'gateway'" separator=" " />
+        </xpath>
+    </t>
+</templates>

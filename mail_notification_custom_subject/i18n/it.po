@@ -1,0 +1,150 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_notification_custom_subject
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-02-03 22:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_after
+msgid "Append After"
+msgstr "Appendi dopo"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__append_before
+msgid "Append Before"
+msgstr "Appendi prima"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subtype_ids
+msgid "Applied Subtypes"
+msgstr "Sotto tipi applicati"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model,name:mail_notification_custom_subject.model_mail_thread
+msgid "Email Thread"
+msgstr "Discussione e-mail"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model,name:mail_notification_custom_subject.model_mail_message_custom_subject
+msgid "Mail Message Custom Subject"
+msgstr "Oggetto perconalizzato messaggio e-mail"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
+msgid "Model"
+msgstr "Modello"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__model_id
+msgid "Model where this template applies"
+msgstr "Modello dove si applica questo schema"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__inside_replace
+msgid "Partial Replacement"
+msgstr "Sostituzione parziale"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__position
+msgid "Position"
+msgstr "Posizione"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields.selection,name:mail_notification_custom_subject.selection__mail_message_custom_subject__position__replace
+msgid "Replace"
+msgstr "Sostituisce"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
+msgid "Subject (placeholders may be used here)"
+msgstr "Oggetto (qui si può usare un segnaposto)"
+
+#. module: mail_notification_custom_subject
+#: model:ir.actions.act_window,name:mail_notification_custom_subject.action_mail_notification_custom_subject_tree_all
+#: model:ir.ui.menu,name:mail_notification_custom_subject.menu_mail_notification_custom_subject
+#: model_terms:ir.ui.view,arch_db:mail_notification_custom_subject.mail_notification_custom_subject_form
+msgid "Subject Replacement Templates"
+msgstr "Modelli sostituzione oggetto"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_template
+msgid "Subject Template"
+msgstr "Modello soggetto"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__subject_to_replace
+msgid "Subject To Replace"
+msgstr "Oggetto da sostituire"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,field_description:mail_notification_custom_subject.field_mail_message_custom_subject__name
+msgid "Template Name"
+msgstr "Nome modello"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__subject_to_replace
+msgid ""
+"The text that will be replaced. You can use placeholders. E.g.: {{ object."
+"company_id.name }}"
+msgstr ""
+"Il testo che verrà sostituito. Si possono usare segnaposto. Es.: {{ "
+"object.company_id.name }}"
+
+#. module: mail_notification_custom_subject
+#: model:ir.model.fields,help:mail_notification_custom_subject.field_mail_message_custom_subject__position
+msgid ""
+"Whether to replace completely, partially, append at beginning or append at "
+"end to other templates that apply to a given context"
+msgstr ""
+"Se sostituire completamente, parzialmente, aggiungere all'inizio o alla fine "
+"di altri modelli che si applicano a un dato contesto"
+
+#~ msgid ""
+#~ "Whether to replace, append at beggining or append at end to other "
+#~ "templates that apply to a given context"
+#~ msgstr ""
+#~ "Se si applica ad un dato contesto la sostituzione, l'aggiunta all'inizio "
+#~ "o l'aggiunta alla fine ad altri modelli"

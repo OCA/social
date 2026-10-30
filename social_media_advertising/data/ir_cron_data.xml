@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="check_ads_updates_job" model="ir.cron">
+        <field name="name">Social Advertising: Checking for new ads</field>
+        <field name="model_id" ref="model_social_account" />
+        <field name="state">code</field>
+        <field name="code">model._run_check_ads_updates()</field>
+        <field name="interval_number">6</field>
+        <field name="interval_type">hours</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">5</field>
+    </record>
+</odoo>

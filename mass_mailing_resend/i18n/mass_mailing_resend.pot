@@ -1,0 +1,40 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mass_mailing_resend
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mass_mailing_resend
+#: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+msgid ""
+"<i class=\"fa fa-info-circle\"/> New sending will be done only to not "
+"sent/new recipients. If you want to resend again the mass mailing to already"
+" sent recipients, click on <b>Sent</b> smart-button for removing the "
+"existing record(s)."
+msgstr ""
+
+#. module: mass_mailing_resend
+#: model:ir.model,name:mass_mailing_resend.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr ""
+
+#. module: mass_mailing_resend
+#: model_terms:ir.ui.view,arch_db:mass_mailing_resend.view_mail_mass_mailing_form
+msgid "Resend"
+msgstr ""
+
+#. module: mass_mailing_resend
+#. odoo-python
+#: code:addons/mass_mailing_resend/models/mailing_mailing.py:0
+#, python-format
+msgid "You can't resend a mass mailing that is being sent or in draft state."
+msgstr ""

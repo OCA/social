@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates>
+    <t
+        t-name="ActivityMenuView"
+        t-inherit="mail.ActivityMenu"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//div[1]" position="before">
+            <div class="o_mail_systray_dropdown_top">
+                <ul class="nav nav-pills">
+                    <li class="nav-item cursor-pointer">
+                        <a
+                            class="my_activities o_filter_nav_item nav-link active"
+                            data-filter='my'
+                            t-on-click="() => this.onClickActivityFilter('my_activities')"
+                        >
+                            My Activities
+                        </a>
+                    </li>
+                    <li class="nav-item cursor-pointer">
+                        <a
+                            class="team_activities o_filter_nav_item nav-link"
+                            data-filter='team'
+                            t-on-click="() => this.onClickActivityFilter('team_activities')"
+                        >
+                            Team Activities
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </xpath>
+    </t>
+</templates>

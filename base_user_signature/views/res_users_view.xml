@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="inherited_res_users_form" model="ir.ui.view">
+        <field name="name">inherited.res.users.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signature']" position="after">
+                <label
+                    for="digital_signature"
+                    string="Signature"
+                    class="oe_edit_only"
+                />
+                <h2>
+                    <button
+                        class="oe_right oe_edit_only fa fa-trash-o fa-lg float-right o_clear_file_button"
+                        type="object"
+                        name="clear_digital_signature"
+                        title="Clear"
+                        aria-label="Clear"
+                    />
+                    <field name="digital_signature" widget="signature" />
+                </h2>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="inherited_res_users_preferences_form" model="ir.ui.view">
+        <field name="name">inherited.res.users.preferences.form</field>
+        <field name="model">res.users</field>
+        <field name="inherit_id" ref="base.view_users_form_simple_modif" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='signature']" position="after">
+                <label
+                    for="digital_signature"
+                    string="Signature"
+                    class="oe_edit_only"
+                />
+                <h2>
+                    <button
+                        class="oe_right oe_edit_only fa fa-trash-o fa-lg float-right o_clear_file_button"
+                        type="object"
+                        name="clear_digital_signature"
+                        title="Clear"
+                        aria-label="Clear"
+                    />
+                    <field name="digital_signature" widget="signature" readonly="0" />
+                </h2>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

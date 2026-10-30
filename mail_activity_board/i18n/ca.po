@@ -1,0 +1,133 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_activity_board
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-07-25 17:06+0000\n"
+"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
+"Language-Team: none\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid "<i title=\"date\" class=\"fa fa-clock-o\"/>"
+msgstr "<i title=\"data\" class=\"fa fa-clock-o\"/>"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_kanban
+msgid "<span><i title=\"date\" class=\"fa fa-clock-o\"/></span>"
+msgstr "<span><i title=\"data\" class=\"fa fa-clock-o\"/></span>"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Act. next 6 months"
+msgstr "Act. pròxims 6 mesos"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Act. next month"
+msgstr "Act. mes pròxim"
+
+#. module: mail_activity_board
+#: model:ir.actions.act_window,name:mail_activity_board.open_boards_activities
+#: model:ir.ui.menu,name:mail_activity_board.board_menu_activities
+msgid "Activities"
+msgstr "Activitats"
+
+#. module: mail_activity_board
+#: model:ir.model,name:mail_activity_board.model_mail_activity
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Activity"
+msgstr "Activitat"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Activity Form"
+msgstr "Formulari d'activitat"
+
+#. module: mail_activity_board
+#: model:ir.model,name:mail_activity_board.model_mail_activity_mixin
+msgid "Activity Mixin"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_partner_ids
+msgid "Attendees"
+msgstr "Assistents"
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__related_model_instance
+msgid "Document"
+msgstr "Document"
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__duration
+msgid "Duration"
+msgstr "Durada"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Log a note..."
+msgstr "Enregistra una nota..."
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__res_model_id_name
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Origin"
+msgstr "Orígen"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Show activities scheduled for next 6 months."
+msgstr "Mostrar activitats programades pels propers 6 mesos."
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "Show activities scheduled for next month."
+msgstr "Mostrar activitats programades pel pròxim mes."
+
+#. module: mail_activity_board
+#: model:res.groups,name:mail_activity_board.group_show_mail_activity_board
+msgid "Show mail activity board"
+msgstr ""
+
+#. module: mail_activity_board
+#: model:ir.model.fields,field_description:mail_activity_board.field_mail_activity__calendar_event_id_start
+msgid "Start"
+msgstr "Inici"
+
+#. module: mail_activity_board
+#: model:ir.model.fields,help:mail_activity_board.field_mail_activity__calendar_event_id_start
+msgid "Start date of an event, without time for full days events"
+msgstr ""
+"Data inicial d'un esdeveniment, sense hora per a esdeveniments de tot el dia"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "Start meeting"
+msgstr "Comença reunió"
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_search
+msgid "User"
+msgstr "Usuari"
+
+#. module: mail_activity_board
+#. odoo-javascript
+#: code:addons/mail_activity_board/static/src/components/chatter/chatter.xml:0
+#, python-format
+msgid "View Activities"
+msgstr ""
+
+#. module: mail_activity_board
+#: model_terms:ir.ui.view,arch_db:mail_activity_board.mail_activity_view_form_board
+msgid "e.g. Discuss proposal"
+msgstr ""

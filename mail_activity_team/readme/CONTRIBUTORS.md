@@ -1,0 +1,16 @@
+- [ForgeFlow](https://www.forgeflow.com):
+  - Jordi Ballester Alomar (<jordi.ballester@forgeflow.com>)
+  - Miquel Raïch (<miquel.raich@forgeflow.com>)
+  - Bernat Puig Font (<bernat.puig@forgeflow.com>)
+- Pedro Gonzalez (<pedro.gonzalez@pesol.es>)
+- [Tecnativa](https://www.tecnativa.com):
+  - David Vidal
+- [Dynapps](https://www.dynapps.eu):
+  - Raf Ven
+- [Trobz] (https://trobz.com):
+  - Son Ho <sonhd@trobz.com>
+- [Camptocamp] (https://camptocamp.com):
+  - Vincent Van Rossem <vincent.vanrossem@camptocamp.com>
+  - Italo Lopes <italo.lopes@camptocamp.com>
+- [CorporateHub](https://corporatehub.eu/)
+  - Alexey Pelykh <alexey.pelykh@corphub.eu>

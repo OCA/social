@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <!-- Everything the footer says about the social media is drawn here: the
+         counters are written by the import of this module, and the two
+         entries below them talk to the social media. Without this module the
+         card would show a zero nobody can turn into a number and entries
+         nothing can serve.
+
+         What answers them for a given social media is its bridge, so each
+         half is drawn against what the bridge of the publication serves: an
+         installation with this module and no bridge for that social media
+         draws neither. -->
+    <t
+        t-name="social_media_sync.postAccountFooter"
+        t-inherit="social_media_base.postAccountFooter"
+        t-inherit-mode="extension"
+    >
+        <xpath expr="//t[@t-call='social_media_base.campaignBadge']" position="before">
+            <div
+                t-if="record.syncCapabilities.statistics.includes(record.media_type.raw_value)"
+                class="row pt-2"
+                name="likes"
+            >
+                <div class="d-flex justify-content-between">
+                    <div>
+                        <i class="fa fa-thumbs-o-up" aria-hidden="true" />
+                        <span class="mx-2" t-esc="record.like_count.value" />
+                    </div>
+                    <div>
+                        <span class="mx-1" t-esc="record.comment_count.value" />
+                        <span t-if="record.comment_count.raw_value === 1">comment</span>
+                        <span t-else="">comments</span>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+        <xpath expr="//t[@t-call='social_media_base.campaignBadge']" position="after">
+            <t
+                t-set="canLike"
+                t-value="record.syncCapabilities.reactions.includes(record.media_type.raw_value)"
+            />
+            <t
+                t-set="canComment"
+                t-value="record.syncCapabilities.comments.includes(record.media_type.raw_value)"
+            />
+            <t
+                t-set="showActions"
+                t-value="record.post_account_url.value and (canLike or canComment)"
+            />
+            <div t-if="showActions" class="row pt-2">
+                <div class="d-flex justify-content-center">
+                    <hr class="my-2 w-95" />
+                </div>
+            </div>
+            <div t-if="showActions" class="row pt-2">
+                <div
+                    t-attf-class="d-flex justify-content-#{ canLike and canComment ? 'between' : 'end'} align-items-center"
+                >
+                    <!-- One reaction per account, so the entry is a toggle:
+                         it says what pressing it does, and pressing it on a
+                         publication already recommended withdraws it. -->
+                    <span class="fs-6 social-like-post" t-if="canLike">
+                        <i
+                            t-attf-class="fa #{ record.liked_by_account.raw_value ? 'fa-thumbs-up' : 'fa-thumbs-o-up' }"
+                            aria-hidden="true"
+                        />
+                        <t t-if="record.liked_by_account.raw_value">
+                            Recommended
+                        </t>
+                        <t t-else="">
+                            Recommend
+                        </t>
+                    </span>
+                    <span class="fs-6 social-post-comment" t-if="canComment">
+                        <i class="fa fa-comments" aria-hidden="true" />
+                        Comment
+                    </span>
+                </div>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

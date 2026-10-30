@@ -1,0 +1,105 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * mass_mailing_event
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2017-12-01 02:19+0000\n"
+"PO-Revision-Date: 2017-12-01 02:19+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2017\n"
+"Language-Team: Catalan (https://www.transifex.com/oca/teams/23907/ca/)\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__code
+msgid "Code"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_res_partner
+msgid "Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__display_name
+msgid "Display Name"
+msgstr "Veure el nom"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration
+msgid "Event Registration"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_event_registration_state
+msgid "Event Registration State"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__event_id
+msgid "Event related"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_mailing_mailing__exclude_event_state_ids
+msgid "Exclude"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state____last_update
+msgid "Last Modified on"
+msgstr "Darrera modificació el"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_uid
+msgid "Last Updated by"
+msgstr "Darrera Actualització per"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__write_date
+msgid "Last Updated on"
+msgstr "Darrera Actualització el"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_contact
+msgid "Mailing Contact"
+msgstr ""
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model,name:mass_mailing_event_registration_exclude.model_mailing_mailing
+msgid "Mass Mailing"
+msgstr "Correu massiu"
+
+#. module: mass_mailing_event_registration_exclude
+#: model:ir.model.fields,field_description:mass_mailing_event_registration_exclude.field_event_registration_state__name
+msgid "Name"
+msgstr "Nom"
+
+#~ msgid "Mass Mailing Contact"
+#~ msgstr "Contactes del correu massiu"
+
+#~ msgid "Partner"
+#~ msgstr "Empresa"

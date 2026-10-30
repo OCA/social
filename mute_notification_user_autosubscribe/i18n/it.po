@@ -1,0 +1,115 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mute_notification_user_autosubscribe
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-10-29 12:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__active
+msgid "Active"
+msgstr "Attiva"
+
+#. module: mute_notification_user_autosubscribe
+#: model_terms:ir.ui.view,arch_db:mute_notification_user_autosubscribe.user_autosubscribe_mute_form_view
+msgid "Archived"
+msgstr "In archivio"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model,name:mute_notification_user_autosubscribe.model_mail_thread
+msgid "Email Thread"
+msgstr "Discussione e-mail"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__group_ids
+msgid "Groups"
+msgstr "Gruppi"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__id
+msgid "ID"
+msgstr "ID"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__model_id
+msgid "Model"
+msgstr "Modello"
+
+#. module: mute_notification_user_autosubscribe
+#. odoo-python
+#: code:addons/mute_notification_user_autosubscribe/models/user_autosubscribe_mute.py:0
+#: model:ir.model.constraint,message:mute_notification_user_autosubscribe.constraint_user_autosubscribe_mute_unique_model_id
+#, python-format
+msgid "Model must be unique in User Autosubscribe Mute instances."
+msgstr ""
+"Il modello deve essere univoco nelle istanze auto iscrizione silenziosa "
+"utente."
+
+#. module: mute_notification_user_autosubscribe
+#: model:mail.message.subtype,name:mute_notification_user_autosubscribe.muted
+msgid "Mute"
+msgstr "Silenzia"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__name
+msgid "Name"
+msgstr "Nome"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__notes
+msgid "Notes"
+msgstr "Note"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model,name:mute_notification_user_autosubscribe.model_res_users
+msgid "User"
+msgstr "Utente"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.actions.act_window,name:mute_notification_user_autosubscribe.user_autosubscribe_mute_action
+#: model:ir.model,name:mute_notification_user_autosubscribe.model_user_autosubscribe_mute
+#: model:ir.ui.menu,name:mute_notification_user_autosubscribe.menu_user_autosubscribe_mute
+#: model_terms:ir.ui.view,arch_db:mute_notification_user_autosubscribe.user_autosubscribe_mute_form_view
+msgid "User Autosubscribe Mute"
+msgstr "Auto iscrizione silenziosa utente"
+
+#. module: mute_notification_user_autosubscribe
+#: model:ir.model.fields,field_description:mute_notification_user_autosubscribe.field_user_autosubscribe_mute__user_ids
+msgid "Users"
+msgstr "Utenti"

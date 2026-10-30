@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <!-- Reposts and quotes are figures only X reports, so they are drawn by
+         its connector and not by the generic dialog. The refresh of the recent
+         publications fills them, which is why they are here and not in the
+         synchronization module: without it they are numbers all the same. -->
+    <record id="social_post_account_view_form_statistics_inherit" model="ir.ui.view">
+        <field
+            name="name"
+        >social.post.account.view.form.statistics.inherit.social.media.x</field>
+        <field name="model">social.post.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.social_post_account_view_form_statistics"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='interactions_count']" position="before">
+                <div class="col-4 py-3" name="retweet_count">
+                    <field name="retweet_count" widget="statinfo" string="Reposts" />
+                </div>
+                <div class="col-4 py-3" name="quote_count">
+                    <field name="quote_count" widget="statinfo" string="Quotes" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

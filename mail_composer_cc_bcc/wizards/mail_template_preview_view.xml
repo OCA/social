@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="mail_template_preview_view_form_inherited">
+        <field name="model">mail.template.preview</field>
+        <field name="inherit_id" ref="mail.mail_template_preview_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='email_cc']" position="after">
+                <field name="email_bcc" invisible="not email_bcc" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

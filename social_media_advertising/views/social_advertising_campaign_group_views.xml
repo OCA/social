@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+
+    <record id="social_advertising_campaign_group_view_tree" model="ir.ui.view">
+        <field name="name">social.advertising.campaign.group.tree</field>
+        <field name="model">social.advertising.campaign.group</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name" />
+                <field name="stage_level" column_invisible="1" />
+                <field
+                    name="stage_id"
+                    widget="badge"
+                    decoration-success="stage_level == 'success'"
+                    decoration-info="stage_level == 'info'"
+                    decoration-warning="stage_level == 'warning'"
+                    decoration-danger="stage_level == 'danger'"
+                    optional="show"
+                />
+                <field name="campaign_count" string="Campaigns" />
+                <field name="advertising_account_id" optional="hide" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="social_advertising_campaign_group_view_form" model="ir.ui.view">
+        <field name="name">social.advertising.campaign.group.form</field>
+        <field name="model">social.advertising.campaign.group</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_campaigns"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-bullhorn"
+                            title="Campaigns of this campaign group."
+                        >
+                            <field
+                                name="campaign_count"
+                                widget="statinfo"
+                                string="Campaigns"
+                            />
+                        </button>
+                        <button
+                            type="object"
+                            name="action_open_url"
+                            class="oe_stat_button"
+                            icon="fa-external-link"
+                            string="Open campaign group"
+                            invisible="not web_url"
+                            title="Open this campaign group on the social media, in a new tab."
+                        />
+                    </div>
+                    <div class="oe_title">
+                        <label for="name" />
+                        <h1>
+                            <field name="name" placeholder="e.g. Winter Campaigns" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <field
+                            name="media_id"
+                            options="{'no_create_edit': True, 'no_create': True}"
+                        />
+                        <field name="stage_id" />
+                        <field
+                            name="advertising_account_id"
+                            invisible="not advertising_account_id"
+                        />
+                        <field name="remote_ref" invisible="1" />
+                        <field name="web_url" invisible="1" />
+                        <field name="active" invisible="1" />
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="social_advertising_campaign_group_view_search" model="ir.ui.view">
+        <field name="name">social.advertising.campaign.group.search</field>
+        <field name="model">social.advertising.campaign.group</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="stage_id" />
+                <filter
+                    name="inactive"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_stage_id"
+                        string="Stage"
+                        context="{'group_by': 'stage_id'}"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,9 @@
+// The composer of `mail` pads itself horizontally to sit inside a chatter.
+// In this dialog it shares the body with the comment list, so it drops that
+// padding and both columns start on the same left edge.
+.o_social_comment_dialog {
+    .o-mail-Composer {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+}

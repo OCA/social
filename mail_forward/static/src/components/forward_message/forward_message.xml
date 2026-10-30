@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<templates xml:space="preserve">
+    <t t-name="mail_forward.ForwardMessage">
+        <div
+            class="mail_forward_message w-100"
+            title="Forward Message"
+            role="button"
+            aria-label="Forward Message"
+            t-on-click="onClickForwardMessage"
+        >
+            <span class="fa-stack" style="width: 1.5em">
+                <i
+                    class="fa fa-lg fa-share fa-stack-1x"
+                    style="margin-left:1px"
+                    role="img"
+                    aria-label="Forward Message Left"
+                />
+                <i
+                    class="fa fa-lg fa-share fa-inverse fa-stack-1x"
+                    style="margin-left:-2px;"
+                    role="img"
+                    aria-label="Forward Message Center"
+                />
+                <i
+                    class="fa fa-lg fa-share fa-stack-1x"
+                    style="margin-left:-3px"
+                    role="img"
+                    aria-label="Forward Message Right"
+                />
+            </span>
+            Forward
+        </div>
+    </t>
+</templates>

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="mail_message_report" model="ir.actions.report">
+        <field name="name">Message</field>
+        <field name="model">mail.message</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">mail_print.report_mail_message</field>
+        <field name="report_file">mail_print.report_mail_message</field>
+        <field name="print_report_name">(object.display_name)</field>
+        <field name="paperformat_id" ref="report_paperformat_mail_message" />
+    </record>
+
+</odoo>
