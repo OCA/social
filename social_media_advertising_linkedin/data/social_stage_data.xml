@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <record id="social_stage_linkedin_campaign_draft" model="social.stage">
+        <field name="name">Draft</field>
+        <field name="code">DRAFT</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">info</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="social_stage_linkedin_campaign_active" model="social.stage">
+        <field name="name">Active</field>
+        <field name="code">ACTIVE</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">success</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="social_stage_linkedin_campaign_paused" model="social.stage">
+        <field name="name">Paused</field>
+        <field name="code">PAUSED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">warning</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="social_stage_linkedin_campaign_completed" model="social.stage">
+        <field name="name">Completed</field>
+        <field name="code">COMPLETED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">secondary</field>
+        <field name="sequence">40</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_campaign_archived" model="social.stage">
+        <field name="name">Archived</field>
+        <field name="code">ARCHIVED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">secondary</field>
+        <field name="sequence">50</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_campaign_canceled" model="social.stage">
+        <field name="name">Canceled</field>
+        <field name="code">CANCELED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">danger</field>
+        <field name="sequence">60</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_campaign_pending_deletion" model="social.stage">
+        <field name="name">Pending deletion</field>
+        <field name="code">PENDING_DELETION</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">danger</field>
+        <field name="sequence">70</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_campaign_removed" model="social.stage">
+        <field name="name">Removed</field>
+        <field name="code">REMOVED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">campaign</field>
+        <field name="level">danger</field>
+        <field name="sequence">80</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_group_draft" model="social.stage">
+        <field name="name">Draft</field>
+        <field name="code">DRAFT</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">info</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="social_stage_linkedin_group_active" model="social.stage">
+        <field name="name">Active</field>
+        <field name="code">ACTIVE</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">success</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="social_stage_linkedin_group_paused" model="social.stage">
+        <field name="name">Paused</field>
+        <field name="code">PAUSED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">warning</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="social_stage_linkedin_group_archived" model="social.stage">
+        <field name="name">Archived</field>
+        <field name="code">ARCHIVED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">secondary</field>
+        <field name="sequence">40</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_group_canceled" model="social.stage">
+        <field name="name">Canceled</field>
+        <field name="code">CANCELED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">danger</field>
+        <field name="sequence">50</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_group_pending_deletion" model="social.stage">
+        <field name="name">Pending deletion</field>
+        <field name="code">PENDING_DELETION</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">danger</field>
+        <field name="sequence">60</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_group_removed" model="social.stage">
+        <field name="name">Removed</field>
+        <field name="code">REMOVED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">group</field>
+        <field name="level">danger</field>
+        <field name="sequence">70</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_ad_draft" model="social.stage">
+        <field name="name">Draft</field>
+        <field name="code">DRAFT</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">info</field>
+        <field name="sequence">10</field>
+    </record>
+    <record id="social_stage_linkedin_ad_active" model="social.stage">
+        <field name="name">Active</field>
+        <field name="code">ACTIVE</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">success</field>
+        <field name="sequence">20</field>
+    </record>
+    <record id="social_stage_linkedin_ad_paused" model="social.stage">
+        <field name="name">Paused</field>
+        <field name="code">PAUSED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">warning</field>
+        <field name="sequence">30</field>
+    </record>
+    <record id="social_stage_linkedin_ad_archived" model="social.stage">
+        <field name="name">Archived</field>
+        <field name="code">ARCHIVED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">secondary</field>
+        <field name="sequence">40</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_ad_canceled" model="social.stage">
+        <field name="name">Canceled</field>
+        <field name="code">CANCELED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">danger</field>
+        <field name="sequence">50</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_ad_pending_deletion" model="social.stage">
+        <field name="name">Pending deletion</field>
+        <field name="code">PENDING_DELETION</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">danger</field>
+        <field name="sequence">60</field>
+        <field name="fold" eval="True" />
+    </record>
+    <record id="social_stage_linkedin_ad_removed" model="social.stage">
+        <field name="name">Removed</field>
+        <field name="code">REMOVED</field>
+        <field name="media_id" ref="social_media_linkedin.social_media_linkedin" />
+        <field name="applies_to">ad</field>
+        <field name="level">danger</field>
+        <field name="sequence">70</field>
+        <field name="fold" eval="True" />
+    </record>
+</odoo>
