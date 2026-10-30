@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="module_category_mail_message_import" model="ir.module.category">
+        <field name="name">Message Import</field>
+        <field
+            name="description"
+        >Messages received by several channels (email, WhatsApp...), grouped by sender.</field>
+        <field name="sequence">36</field>
+    </record>
+
+    <record id="group_mail_message_import_manager" model="res.groups">
+        <field name="name">Message Import Manager</field>
+        <field name="category_id" ref="module_category_mail_message_import" />
+        <field name="implied_ids" eval="[(4, ref('base.group_user'))]" />
+        <field name="users" eval="[(4, ref('base.user_admin'))]" />
+    </record>
+
+    <!-- By company: the group of the application sees everything of its companies. -->
+    <record id="mail_message_import_channel_company_rule" model="ir.rule">
+        <field name="name">Receiving channels by company</field>
+        <field name="model_id" ref="model_mail_message_import_channel" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+
+    <record id="mail_message_import_config_company_rule" model="ir.rule">
+        <field name="name">Message Import settings by company</field>
+        <field name="model_id" ref="model_mail_message_import_config" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+
+    <record id="mail_message_import_sender_company_rule" model="ir.rule">
+        <field name="name">Senders by company</field>
+        <field name="model_id" ref="model_mail_message_import_sender" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+
+    <record id="mail_message_import_address_company_rule" model="ir.rule">
+        <field name="name">Authorized addresses by company</field>
+        <field name="model_id" ref="model_mail_message_import_address" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+
+    <record id="mail_message_import_message_company_rule" model="ir.rule">
+        <field name="name">Received messages by company</field>
+        <field name="model_id" ref="model_mail_message_import_message" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+
+    <record id="mail_message_import_conversation_company_rule" model="ir.rule">
+        <field name="name">Conversations by company</field>
+        <field name="model_id" ref="model_mail_message_import_conversation" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+
+    <record id="mail_message_import_incident_company_rule" model="ir.rule">
+        <field name="name">Incidents by company</field>
+        <field name="model_id" ref="model_mail_message_import_incident" />
+        <field name="domain_force">[('company_id', 'in', company_ids)]</field>
+        <field
+            name="groups"
+            eval="[(4, ref('mail_message_import.group_mail_message_import_manager'))]"
+        />
+    </record>
+</odoo>

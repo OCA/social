@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_config_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.config.form</field>
+        <field name="model">mail.message.import.config</field>
+        <field name="arch" type="xml">
+            <form create="false" delete="false">
+                <sheet>
+                    <div class="oe_title">
+                        <h1>Settings</h1>
+                        <field
+                            name="company_id"
+                            readonly="1"
+                            groups="base.group_multi_company"
+                        />
+                    </div>
+                    <group name="main">
+                        <group name="conversations" string="Conversations">
+                            <field name="inactivity_minutes" />
+                            <field name="max_attempts" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_mail_message_import_config" model="ir.actions.server">
+        <field name="name">Settings</field>
+        <field name="model_id" ref="model_mail_message_import_config" />
+        <field name="state">code</field>
+        <field name="code">action = model.action_open_company_config()</field>
+    </record>
+</odoo>
