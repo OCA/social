@@ -1,0 +1,29 @@
+// The message is cut to a number of lines, and not to a number of
+// characters: the line breaks of a post are published, so counting
+// characters leaves cards of very different heights. `-webkit-line-clamp` is
+// the only cut that reads in lines, and it needs the box to be a `-webkit-box`
+// for the browser to apply it.
+//
+// The same rules serve the cards, which draw the block with the OWL
+// component, and the preview of the form, whose HTML comes rendered from the
+// server: both end up with `.o_social_message`.
+.o_social_message {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: var(--o-social-message-lines, 6);
+    overflow: hidden;
+    // The message is a `Text` whose newlines the browser would collapse, and
+    // a post written in paragraphs would read as a single block, but those
+    // line breaks are part of what gets published.
+    white-space: pre-wrap;
+    // A single long word without spaces would otherwise widen the card.
+    overflow-wrap: anywhere;
+}
+
+// Unfolded, the block goes back to being a plain one: the clamp is dropped
+// instead of raised, so a message of any length shows whole.
+.o_social_message_expanded {
+    display: block;
+    -webkit-line-clamp: unset;
+    overflow: visible;
+}
