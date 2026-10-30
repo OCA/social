@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <!-- Four places: the panel of the receiving channels, what a person must
+         review, what was received and the configuration. -->
+    <menuitem
+        id="menu_mail_message_import_root"
+        name="Message Import"
+        web_icon="mail_message_import,static/description/icon.png"
+        groups="mail_message_import.group_mail_message_import_manager"
+        sequence="26"
+    />
+    <menuitem
+        id="menu_mail_message_import_panel"
+        name="Panel"
+        parent="menu_mail_message_import_root"
+        action="action_mail_message_import_panel"
+        sequence="10"
+    />
+
+    <menuitem
+        id="menu_mail_message_import_to_review"
+        name="To review"
+        parent="menu_mail_message_import_root"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_mail_message_import_incident"
+        name="Incidents"
+        parent="menu_mail_message_import_to_review"
+        action="action_mail_message_import_incident"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_mail_message_import_unknown"
+        name="Unknown senders"
+        parent="menu_mail_message_import_to_review"
+        action="action_mail_message_import_message_unknown"
+        sequence="30"
+    />
+
+    <menuitem
+        id="menu_mail_message_import_received"
+        name="Received"
+        parent="menu_mail_message_import_root"
+        sequence="40"
+    />
+    <menuitem
+        id="menu_mail_message_import_conversation"
+        name="Conversations"
+        parent="menu_mail_message_import_received"
+        action="action_mail_message_import_conversation"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_mail_message_import_message"
+        name="Received messages"
+        parent="menu_mail_message_import_received"
+        action="action_mail_message_import_message"
+        sequence="20"
+    />
+
+    <menuitem
+        id="menu_mail_message_import_config"
+        name="Configuration"
+        parent="menu_mail_message_import_root"
+        sequence="90"
+    />
+    <menuitem
+        id="menu_mail_message_import_sender"
+        name="Senders"
+        parent="menu_mail_message_import_config"
+        action="action_mail_message_import_sender"
+        sequence="10"
+    />
+    <menuitem
+        id="menu_mail_message_import_address"
+        name="Authorized addresses"
+        parent="menu_mail_message_import_config"
+        action="action_mail_message_import_address"
+        sequence="15"
+    />
+    <menuitem
+        id="menu_mail_message_import_channel"
+        name="Receiving channels"
+        parent="menu_mail_message_import_config"
+        action="action_mail_message_import_channel"
+        sequence="20"
+    />
+    <menuitem
+        id="menu_mail_message_import_settings"
+        name="Settings"
+        parent="menu_mail_message_import_config"
+        action="action_mail_message_import_config"
+        sequence="30"
+    />
+</odoo>
