@@ -3,13 +3,12 @@
 
 {
     "name": "Improved tracking value change",
-    "version": "16.0.1.0.0",
-    "summary": "Improves tracking changed values for certain type of fields."
-    "Adds a user-friendly view to consult them.",
+    "version": "20.0.1.0.0",
+    "summary": "Stores the ids of tracked many2many and one2many changes.",
     "author": "Camptocamp, Odoo Community Association (OCA)",
+    "maintainers": ["carlosrve"],
     "license": "AGPL-3",
     "category": "Tools",
     "website": "https://github.com/OCA/social",
-    "depends": ["base", "mail"],
-    "data": ["views/mail_tracking_value.xml"],
+    "depends": ["mail_tracking"],
 }
