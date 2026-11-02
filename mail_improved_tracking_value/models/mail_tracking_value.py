@@ -7,7 +7,6 @@ from odoo import api, fields, models
 
 
 class MailTrackingValue(models.Model):
-
     _inherit = "mail.tracking.value"
 
     new_value_formatted = fields.Char(
@@ -76,8 +75,8 @@ class MailTrackingValue(models.Model):
                     names = ""
                     json_ids = json.dumps([])
                 return {
-                    "{}_value_char".format(prefix): names,
-                    "{}_value_text".format(prefix): json_ids,
+                    f"{prefix}_value_char": names,
+                    f"{prefix}_value_text": json_ids,
                 }
 
             field = self.env["ir.model.fields"]._get(model_name, col_name)

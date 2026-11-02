@@ -6,7 +6,7 @@ class MailMessage(models.Model):
 
     @api.model
     def name_get(self):
-        res = super(MailMessage, self).name_get()
+        res = super().name_get()
         params = self.env.context.get("params")
         if params:
             model = params.get("model")

@@ -1,6 +1,5 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <record id="tracking_change_list" model="ir.ui.view">
         <field name="name">Tracking change list"</field>
         <field name="model">mail.tracking.value</field>
@@ -71,11 +70,10 @@
     </record>
 
     <menuitem
-        action="action_view_tracking_changes"
         id="menu_action_view_tracking_changes"
+        action="action_view_tracking_changes"
         name="Improved Tracking Values"
         parent="base.menu_email"
         sequence="10"
     />
-
 </odoo>
