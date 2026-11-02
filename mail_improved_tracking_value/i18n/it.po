@@ -1,0 +1,85 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_improved_tracking_value
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2023-12-07 12:35+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: mail_improved_tracking_value
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_form_view
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+msgid "Field changed"
+msgstr "Campo modificato"
+
+#. module: mail_improved_tracking_value
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_form_view
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+msgid "For"
+msgstr "Per"
+
+#. module: mail_improved_tracking_value
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
+msgid "Group By"
+msgstr "Raggruppa per"
+
+#. module: mail_improved_tracking_value
+#: model:ir.ui.menu,name:mail_improved_tracking_value.menu_action_view_tracking_changes
+msgid "Improved Tracking Values"
+msgstr "Valori tracciamento migliorati"
+
+#. module: mail_improved_tracking_value
+#: model:ir.model,name:mail_improved_tracking_value.model_mail_tracking_value
+msgid "Mail Tracking Value"
+msgstr "Valore tracciamento e-mail"
+
+#. module: mail_improved_tracking_value
+#: model:ir.model,name:mail_improved_tracking_value.model_mail_message
+msgid "Message"
+msgstr "Messaggio"
+
+#. module: mail_improved_tracking_value
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__record_name
+msgid "Message Record Name"
+msgstr "Nome record messaggio"
+
+#. module: mail_improved_tracking_value
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__model
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
+msgid "Model"
+msgstr "Modello"
+
+#. module: mail_improved_tracking_value
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__new_value_formatted
+msgid "New value"
+msgstr "Nuovo valore"
+
+#. module: mail_improved_tracking_value
+#: model:ir.model.fields,field_description:mail_improved_tracking_value.field_mail_tracking_value__old_value_formatted
+msgid "Old value"
+msgstr "Vecchio valore"
+
+#. module: mail_improved_tracking_value
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list
+msgid "On"
+msgstr "Al"
+
+#. module: mail_improved_tracking_value
+#: model_terms:ir.ui.view,arch_db:mail_improved_tracking_value.tracking_change_list_filter
+msgid "Search"
+msgstr "Cerca"
+
+#. module: mail_improved_tracking_value
+#: model:ir.actions.act_window,name:mail_improved_tracking_value.action_view_tracking_changes
+msgid "View last tracked changes"
+msgstr "Visualizza le ultime modifiche tracciate"
