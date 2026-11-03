@@ -11,7 +11,11 @@ class TestMailActivityCancelTracking(HttpCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
-        cls.user = new_test_user(cls.env, login="test-user")
+        cls.user = new_test_user(
+            cls.env,
+            login="test-user",
+            groups="base.group_user,base.group_partner_manager",
+        )
         cls.mail_activity = cls.partner.activity_schedule(
             user_id=cls.user.id,
             activity_type_id=cls.env.ref("mail.mail_activity_data_todo").id,
