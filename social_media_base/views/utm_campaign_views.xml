@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="utm_campaign_form_view_inherit">
+        <field name="name">utm.campaign.view.form.inherit.social.media.base</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="allow_media_ids" invisible="1" />
+                <field name="campaign_group_id" required="1" />
+                <field name="media_id" required="1" />
+                <field
+                    name="account_id"
+                    required="1"
+                    options="{'no_create_edit': True, 'no_create': True}"
+                    invisible="not media_id"
+                />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="utm_campaign_view_tree_inherit">
+        <field name="name">utm.campaign.view.list.inherit.social.media.base</field>
+        <field name="model">utm.campaign</field>
+        <field name="inherit_id" ref="utm.utm_campaign_view_tree" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="allow_media_ids" column_invisible="1" />
+                <field name="campaign_group_id" />
+                <field name="media_id" />
+                <field name="account_id" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

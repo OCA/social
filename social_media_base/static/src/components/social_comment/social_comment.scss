@@ -1,0 +1,25 @@
+div.dialog-social-comment {
+    @include media-breakpoint-down(sm) {
+        padding: 0 !important;
+    }
+
+    div.post-comments {
+        select:focus {
+            box-shadow: none !important;
+        }
+        background-color: rgba(0, 0, 0, 0.03) !important;
+        @include border-radius(2rem);
+
+        // Reply textbox - white background for editability indication
+        textarea.form-control {
+            background-color: white !important;
+        }
+    }
+
+    div.o-dropdown {
+        button.dropdown-toggle {
+            border: 0 !important;
+            background-color: transparent !important;
+        }
+    }
+}
