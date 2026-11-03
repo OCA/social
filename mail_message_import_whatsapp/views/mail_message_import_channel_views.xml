@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_channel_view_list" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.list.whatsapp</field>
+        <field name="model">mail.message.import.channel</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_channel_view_list"
+        />
+        <field name="arch" type="xml">
+            <field name="channel_type" position="after">
+                <field name="display_phone_number" optional="show" />
+                <field name="gateway_id" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_message_import_channel_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.form.whatsapp</field>
+        <field name="model">mail.message.import.channel</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_channel_view_form"
+        />
+        <field name="arch" type="xml">
+            <group name="channel" position="inside">
+                <field
+                    name="display_phone_number"
+                    invisible="channel_type != 'whatsapp'"
+                    placeholder="+34 600 000 000"
+                />
+                <field
+                    name="phone_number_id"
+                    invisible="channel_type != 'whatsapp'"
+                    required="channel_type == 'whatsapp'"
+                />
+                <field
+                    name="gateway_id"
+                    invisible="channel_type != 'whatsapp'"
+                    required="channel_type == 'whatsapp'"
+                />
+                <field
+                    name="whatsapp_account_id"
+                    invisible="channel_type != 'whatsapp'"
+                />
+                <field
+                    name="webhook_url"
+                    widget="CopyClipboardChar"
+                    invisible="channel_type != 'whatsapp'"
+                />
+                <button
+                    name="action_open_gateway"
+                    type="object"
+                    string="Configure the gateway"
+                    class="btn-link"
+                    icon="fa-arrow-right"
+                    groups="base.group_system"
+                    invisible="channel_type != 'whatsapp' or not gateway_id"
+                    colspan="2"
+                />
+            </group>
+        </field>
+    </record>
+
+    <record id="mail_message_import_channel_view_kanban" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.kanban.whatsapp</field>
+        <field name="model">mail.message.import.channel</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_channel_view_kanban"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[@name='channel_info']/field[@name='channel_type']"
+                position="attributes"
+            >
+                <attribute
+                    name="decoration-success"
+                >channel_type == 'whatsapp'</attribute>
+            </xpath>
+            <div name="channel_info" position="inside">
+                <field name="display_phone_number" class="ms-2" />
+            </div>
+        </field>
+    </record>
+
+    <record id="mail_message_import_channel_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.search.whatsapp</field>
+        <field name="model">mail.message.import.channel</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_channel_view_search"
+        />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="display_phone_number" />
+                <field name="gateway_id" />
+            </field>
+            <filter name="archived" position="before">
+                <filter
+                    name="whatsapp"
+                    string="WhatsApp"
+                    domain="[('channel_type', '=', 'whatsapp')]"
+                />
+                <separator />
+            </filter>
+        </field>
+    </record>
+</odoo>
