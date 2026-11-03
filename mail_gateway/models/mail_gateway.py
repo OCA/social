@@ -108,7 +108,7 @@ class MailGateway(models.Model):
         return res
 
     @api.model
-    @tools.ormcache()
+    @tools.ormcache("state", "gateway_type")
     def _get_gateway_map(self, state="integrated", gateway_type=False):
         result = {}
         for record in self.sudo().search(

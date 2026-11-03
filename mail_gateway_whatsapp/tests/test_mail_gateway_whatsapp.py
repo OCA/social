@@ -190,6 +190,23 @@ class TestMailGatewayWhatsApp(MailGatewayTestCase):
         self.gateway.remove_webhook()
         self.assertFalse(self.gateway.integrated_webhook_state)
 
+    def test_gateway_map_by_state(self):
+        self.gateway.webhook_key = self.webhook
+        self.gateway.integrated_webhook_state = "integrated"
+        gateway_model = self.env["mail.gateway"]
+        # A verification request looks for the pending gateways first...
+        self.assertFalse(
+            gateway_model._get_gateway(
+                self.webhook, state="pending", gateway_type="whatsapp"
+            )
+        )
+        # ...and the messages must still find the integrated gateway.
+        self.assertTrue(
+            gateway_model._get_gateway(
+                self.webhook, state="integrated", gateway_type="whatsapp"
+            )
+        )
+
     def integrate_webhook(self):
         self.url_open(
             "/gateway/{}/{}/update?hub.verify_token={}&hub.challenge={}".format(
