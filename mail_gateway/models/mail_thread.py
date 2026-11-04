@@ -77,7 +77,7 @@ class MailThread(models.AbstractModel):
         data["gateway_followers"] = [
             f["partner"]
             for f in data.get("followers", [])
-            if f["partner"]["gateway_channels"]
+            if f["partner"].get("gateway_channels")
         ]
         return data
 
