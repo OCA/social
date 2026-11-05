@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {Component, useState} from "@odoo/owl";
 import {useBus, useService} from "@web/core/utils/hooks";
 import {ConfirmationDialog} from "@web/core/confirmation_dialog/confirmation_dialog";

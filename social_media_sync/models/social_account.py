@@ -4,7 +4,7 @@
 import logging
 from datetime import timedelta
 
-from odoo import Command, _, api, fields, models
+from odoo import Command, api, fields, models
 
 _logger = logging.getLogger(__name__)
 
@@ -441,7 +441,7 @@ class SocialAccount(models.Model):
         """
         self.ensure_one()
         self.message_post(
-            body=_(
+            body=self.env._(
                 "The posts of the account could not be imported: %(error)s. "
                 "Press the Update button of the dashboard to import them "
                 "again.",
@@ -462,7 +462,7 @@ class SocialAccount(models.Model):
         """
         self.ensure_one()
         self.message_post(
-            body=_(
+            body=self.env._(
                 "The daily statistics history of the account could not be "
                 "filled: %(error)s.",
                 error=error,
@@ -482,7 +482,7 @@ class SocialAccount(models.Model):
             account._notify_user_client(
                 target=account.user_id.partner_id,
                 notif_type="social_form_info",
-                notif_message=_("The posts of the account were updated."),
+                notif_message=self.env._("The posts of the account were updated."),
                 media=account.media_type or account.media_id.name,
                 account_name=account.name,
                 # The dashboard reloads itself on this type, so it is not the

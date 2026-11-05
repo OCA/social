@@ -1,5 +1,3 @@
-/** @odoo-module **/
-
 import {Component, onMounted, onWillStart, onWillUnmount, useState} from "@odoo/owl";
 import {useBus, useService} from "@web/core/utils/hooks";
 import {Dialog} from "@web/core/dialog/dialog";
@@ -8,6 +6,7 @@ import {SocialComposer} from "../social_composer/social_composer.esm";
 import {SocialImageDialog} from "@social_media_base/components/social_image_dialog/social_image_dialog.esm";
 import {SocialMessage} from "@social_media_base/components/social_message/social_message.esm";
 import {_t} from "@web/core/l10n/translation";
+import {browser} from "@web/core/browser/browser";
 
 export class SocialCommentDialog extends Component {
     static template = "social_media_sync.SocialCommentDialog";
@@ -35,7 +34,7 @@ export class SocialCommentDialog extends Component {
         super.setup();
         this.dialogService = useService("dialog");
         this.socialService = useService("social_service");
-        this.threadService = useService("mail.thread");
+        this.store = useService("mail.store");
         this.notificationService = useService("notification");
         this.busService = this.env.services.bus_service;
         this.record = this.props.post;
@@ -63,10 +62,10 @@ export class SocialCommentDialog extends Component {
             posting: false,
         });
         onWillStart(async () => {
-            this.state.thread = this.threadService.getThread(
-                "social.post.account",
-                this.props.post.id.value
-            );
+            this.state.thread = this.store.Thread.insert({
+                model: "social.post.account",
+                id: this.props.post.id.value,
+            });
             const result = await this.socialService.getComments(
                 this.props.post.id.raw_value
             );
@@ -87,74 +86,71 @@ export class SocialCommentDialog extends Component {
         });
 
         onMounted(() => {
-            this.intervalRefreshComment = setInterval(() => {
+            this.intervalRefreshComment = browser.setInterval(() => {
                 this.updateListComments();
             }, 120000);
         });
 
         onWillUnmount(() => {
-            clearInterval(this.intervalRefreshComment);
+            browser.clearInterval(this.intervalRefreshComment);
+            this.busService.unsubscribe("comments", this.onCommentNotification);
             // A target left behind would greet the next dialog with a banner
             // for a comment that is no longer on screen.
             this.socialService.clearReplyTarget();
         });
 
-        useBus(this.busService, "notification", ({detail: notifications}) => {
-            if (notifications && notifications.length > 0) {
-                notifications.forEach((notif) => {
-                    const {payload, type} = notif;
-                    if (type !== "comments" || !payload) {
-                        return;
-                    }
-                    // The channel is the partner, so this dialog hears every
-                    // comment the user publishes, on this publication or on
-                    // any other one open at the same time. Only its own is
-                    // acted upon.
-                    if (
-                        payload.post_account_id !== undefined &&
-                        payload.post_account_id !== this.props.post.id.raw_value
-                    ) {
-                        return;
-                    }
-                    let message = payload.message;
-                    if (message === undefined) {
-                        message =
-                            payload.success === true
-                                ? _t("Comment created")
-                                : _t("The comment could not be published.");
-                    }
-                    const typeNotif = payload.success === true ? "success" : "danger";
-                    this.notificationService.add(message, {
-                        type: typeNotif,
-                    });
-                    if (payload.success === true) {
-                        this.lastReplyTarget = null;
-                        // The comment the social media answered is drawn from
-                        // what it already said, and only a connector that
-                        // could not shape it costs a second read of the
-                        // thread.
-                        if (!this.insertComment(payload.comment)) {
-                            this.env.bus.trigger("SOCIAL:RELOAD_COMMENTS");
-                        }
-                    } else {
-                        this.restoreReplyTarget();
-                        // Reading the comments of a publication the social
-                        // media just reported as gone would only fail again,
-                        // so the dialog closes instead of reloading them.
-                        if (!payload.post_deleted) {
-                            this.env.bus.trigger("SOCIAL:RELOAD_COMMENTS");
-                        }
-                    }
-                    this.env.bus.trigger("SOCIAL:RELOAD_ORGANIZATION", {
-                        account_id: this.props.account.raw_value,
-                        post_id: this.props.post.remote_ref.raw_value,
-                    });
-                    if (payload.post_deleted) {
-                        this.props.close();
-                    }
-                });
+        this.onCommentNotification = (payload) => {
+            if (!payload) {
+                return;
             }
-        });
+            // The channel is the partner, so this dialog hears every
+            // comment the user publishes, on this publication or on
+            // any other one open at the same time. Only its own is
+            // acted upon.
+            if (
+                payload.post_account_id !== undefined &&
+                payload.post_account_id !== this.props.post.id.raw_value
+            ) {
+                return;
+            }
+            let message = payload.message;
+            if (message === undefined) {
+                message =
+                    payload.success === true
+                        ? _t("Comment created")
+                        : _t("The comment could not be published.");
+            }
+            const typeNotif = payload.success === true ? "success" : "danger";
+            this.notificationService.add(message, {
+                type: typeNotif,
+            });
+            if (payload.success === true) {
+                this.lastReplyTarget = null;
+                // The comment the social media answered is drawn from
+                // what it already said, and only a connector that
+                // could not shape it costs a second read of the
+                // thread.
+                if (!this.insertComment(payload.comment)) {
+                    this.env.bus.trigger("SOCIAL:RELOAD_COMMENTS");
+                }
+            } else {
+                this.restoreReplyTarget();
+                // Reading the comments of a publication the social
+                // media just reported as gone would only fail again,
+                // so the dialog closes instead of reloading them.
+                if (!payload.post_deleted) {
+                    this.env.bus.trigger("SOCIAL:RELOAD_COMMENTS");
+                }
+            }
+            this.env.bus.trigger("SOCIAL:RELOAD_ORGANIZATION", {
+                account_id: this.props.account.raw_value,
+                post_id: this.props.post.remote_ref.raw_value,
+            });
+            if (payload.post_deleted) {
+                this.props.close();
+            }
+        };
+        this.busService.subscribe("comments", this.onCommentNotification);
     }
 
     /**

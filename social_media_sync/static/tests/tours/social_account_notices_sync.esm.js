@@ -1,6 +1,5 @@
-/** @odoo-module */
-
 import {registry} from "@web/core/registry";
+import {rpc} from "@web/core/network/rpc";
 
 const PANEL = ".o_content";
 // Asserted before every negative check: the account bar is loaded after the
@@ -17,23 +16,19 @@ const IMPORT = `${PANEL} .alert-info:contains('has new publications')`;
 registry
     .category("web_tour.tours")
     .add("social_media_sync.account_notices_credentials", {
-        test: true,
         url: "/web#action=social_media_base.social_post_account_action",
         steps: () => [
             {
                 content: "The card of the account is drawn",
                 trigger: CARD,
-                isCheck: true,
             },
             {
                 content: "The credentials are announced, naming the account",
                 trigger: `${CREDENTIALS}:contains('Notices account')`,
-                isCheck: true,
             },
             {
                 content: "And nothing announces an import",
                 trigger: `${PANEL}:not(:has(.alert-info))`,
-                isCheck: true,
             },
         ],
     });
@@ -43,49 +38,100 @@ registry
  * is the *Update* button and not an authorization.
  */
 registry.category("web_tour.tours").add("social_media_sync.account_notices_import", {
-    test: true,
     url: "/web#action=social_media_base.social_post_account_action",
     steps: () => [
         {
             content: "The card of the account is drawn",
             trigger: CARD,
-            isCheck: true,
         },
         {
             content: "The import is announced, naming the account",
             trigger: `${IMPORT}:contains('Notices account')`,
-            isCheck: true,
         },
         {
             content: "And nothing says the credentials expired",
             trigger: `${PANEL}:not(:has(.alert-warning))`,
-            isCheck: true,
         },
     ],
 });
+
+/**
+ * Run the full resync cron, as the scheduler would, while the dashboard is
+ * open: the page is not reloaded, so whatever the card shows afterwards
+ * reached it through the bus.
+ */
+async function runFullResync() {
+    const [cronId] = await rpc("/web/dataset/call_kw/ir.cron/search", {
+        model: "ir.cron",
+        method: "search",
+        args: [[["code", "=", "model._run_full_resync()"]]],
+        kwargs: {limit: 1},
+    });
+    await rpc("/web/dataset/call_kw/ir.cron/method_direct_trigger", {
+        model: "ir.cron",
+        method: "method_direct_trigger",
+        args: [[cronId]],
+        kwargs: {},
+    });
+}
+
+/**
+ * A check finds publications to import while the dashboard is open, and the
+ * import brings them in later: the notice goes up and comes down on its own,
+ * without the user reloading the page.
+ */
+registry
+    .category("web_tour.tours")
+    .add("social_media_sync.account_notices_import_live", {
+        url: "/web#action=social_media_base.social_post_account_action",
+        steps: () => [
+            {
+                content: "The card of the account is drawn",
+                trigger: CARD,
+            },
+            {
+                content: "Nothing is announced before the check runs",
+                trigger: `${PANEL}:not(:has(.alert-info))`,
+            },
+            {
+                content: "A check finds publications to import",
+                trigger: CARD,
+                run: runFullResync,
+            },
+            {
+                content: "The import is announced, naming the account",
+                trigger: `${IMPORT}:contains('Notices account')`,
+            },
+            {
+                content: "The import brings them in",
+                trigger: IMPORT,
+                run: runFullResync,
+            },
+            {
+                content: "And the notice comes down",
+                trigger: `${PANEL}:not(:has(.alert-info))`,
+            },
+        ],
+    });
 
 /**
  * Both at once: neither state implies the other, so the card says the two
  * things it has to say instead of choosing one.
  */
 registry.category("web_tour.tours").add("social_media_sync.account_notices_both", {
-    test: true,
     url: "/web#action=social_media_base.social_post_account_action",
     steps: () => [
         {
             content: "The card of the account is drawn",
             trigger: CARD,
-            isCheck: true,
         },
         {
             content: "The credentials are announced",
             trigger: CREDENTIALS,
-            isCheck: true,
         },
         {
             content: "And so is the import, with its own text",
             trigger: IMPORT,
-            isCheck: true,
         },
     ],
 });
@@ -101,16 +147,15 @@ function updateSteps(notice) {
         {
             content: "The card of the account is drawn",
             trigger: CARD,
-            isCheck: true,
         },
         {
             content: "The user asks for an update",
             trigger: "button.o_kanban_statistics_refresh_now",
+            run: "click",
         },
         {
             content: "And is told what the update brought",
             trigger: `.o_notification .o_notification_content:contains('${notice}')`,
-            isCheck: true,
         },
     ];
 }
@@ -122,7 +167,6 @@ function updateSteps(notice) {
 registry
     .category("web_tour.tours")
     .add("social_media_sync.update_with_new_publications", {
-        test: true,
         url: "/web#action=social_media_base.social_post_account_action",
         steps: updateSteps("The data was updated. New publications were imported."),
     });
@@ -135,7 +179,6 @@ registry
 registry
     .category("web_tour.tours")
     .add("social_media_sync.update_without_new_publications", {
-        test: true,
         url: "/web#action=social_media_base.social_post_account_action",
         steps: updateSteps("The data was updated. No new publications."),
     });
@@ -145,25 +188,21 @@ registry
  * moved, and the notice is the one base words from them.
  */
 registry.category("web_tour.tours").add("social_media_sync.update_without_import", {
-    test: true,
     url: "/web#action=social_media_base.social_post_account_action",
     steps: updateSteps("The data was updated successfully."),
 });
 
 /** Neither: an account nothing is pending on carries no notice at all. */
 registry.category("web_tour.tours").add("social_media_sync.account_notices_none", {
-    test: true,
     url: "/web#action=social_media_base.social_post_account_action",
     steps: () => [
         {
             content: "The card of the account is drawn",
             trigger: CARD,
-            isCheck: true,
         },
         {
             content: "And the dashboard announces nothing about it",
             trigger: `${PANEL}:not(:has(.alert-warning)):not(:has(.alert-info))`,
-            isCheck: true,
         },
     ],
 });

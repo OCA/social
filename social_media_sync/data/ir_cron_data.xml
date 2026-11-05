@@ -9,7 +9,6 @@
         <field name="code">model._run_initial_sync()</field>
         <field name="interval_number">1</field>
         <field name="interval_type">months</field>
-        <field name="numbercall">-1</field>
         <field name="priority">5</field>
     </record>
 
@@ -25,7 +24,6 @@
              days late is cheaper than paying for this on every refresh. -->
         <field name="interval_number">1</field>
         <field name="interval_type">weeks</field>
-        <field name="numbercall">-1</field>
         <field name="priority">10</field>
     </record>
 </odoo>

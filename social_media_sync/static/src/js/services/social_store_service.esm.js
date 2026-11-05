@@ -1,9 +1,7 @@
-/** @odoo-module **/
-
-import {ThreadService} from "@mail/core/common/thread_service";
+import {Store} from "@mail/core/common/store_service";
 import {patch} from "@web/core/utils/patch";
 
-patch(ThreadService.prototype, {
+patch(Store.prototype, {
     /**
      * Carry the comment being replied to down to the backend.
      *

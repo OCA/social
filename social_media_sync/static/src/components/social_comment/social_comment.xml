@@ -36,16 +36,18 @@
                             t-if="canDeleteComment() and !props.isReply and !props.posting"
                             class="ms-auto"
                         >
-                            <Dropdown
-                                position="'bottom-end'"
-                                togglerClass="'btn btn-link btn-sm p-0 text-muted o-no-caret'"
-                            >
-                                <t t-set-slot="toggler">
+                            <Dropdown position="'bottom-end'">
+                                <button
+                                    type="button"
+                                    class="btn btn-link btn-sm p-0 text-muted o-no-caret"
+                                >
                                     <i class="fa fa-ellipsis-v" aria-hidden="true" />
+                                </button>
+                                <t t-set-slot="content">
+                                    <DropdownItem
+                                        onSelected.bind="onDeleteComment"
+                                    >Delete</DropdownItem>
                                 </t>
-                                <DropdownItem
-                                    onSelected.bind="onDeleteComment"
-                                >Delete</DropdownItem>
                             </Dropdown>
                         </div>
                     </div>

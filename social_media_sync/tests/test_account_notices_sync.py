@@ -3,6 +3,9 @@
 
 from odoo.tests.common import HttpCase, tagged
 
+from odoo.addons.bus.models.bus import channel_with_db, dispatch, hashable
+from odoo.addons.bus.websocket import WebsocketConnectionHandler
+
 from .test_social_sync_common import TestSocialMediaSyncCommon
 
 DASHBOARD_URL = "/web#action=social_media_base.social_post_account_action"
@@ -90,6 +93,51 @@ class TestAccountNoticesSync(HttpCase, TestSocialMediaSyncCommon):
             login="admin",
         )
 
+    def _dispatch_to_browser(self, env, partner):
+        """Deliver to the open dashboard what the bus holds for ``partner``.
+
+        The test cursor drops the post-commit hooks, and with them the
+        ``NOTIFY`` that wakes the websockets up, so the dispatch is triggered
+        here the way ``WebsocketCase.trigger_notification_dispatching`` does.
+
+        :param env: the environment of the request that sent the messages.
+        :param partner: the partner the messages are addressed to.
+        """
+        env.cr.precommit.run()
+        channel = hashable(channel_with_db(env.cr.dbname, partner))
+        for websocket in list(dispatch._channels_to_ws.get(channel, [])):
+            websocket.trigger_notification_dispatching()
+
+    def test_account_notices_import_live(self):
+        """The notice follows the bus on a dashboard nobody reloads.
+
+        The check that finds publications to import and the import that
+        brings them in run in crons, so the open dashboard only learns about
+        either through the bus. Each run of the patched cron moves the flag
+        one way: the first raises the notice, the second takes it down.
+        """
+        account = self._account_of_the_notices()
+
+        def full_resync(model):
+            target = model.browse(account.id)
+            if target.posts_need_import:
+                target._clear_posts_need_import()
+            else:
+                target._flag_posts_need_import()
+            self._dispatch_to_browser(model.env, target.user_id.partner_id)
+
+        # The websocket is refused in test mode; the dashboard needs it open
+        # to hear the bus at all, as ``WebsocketCase`` does.
+        self.patch(
+            WebsocketConnectionHandler, "websocket_allowed", lambda request: True
+        )
+        self.patch(type(self.SocialAccount), "_run_full_resync", full_resync)
+        self.start_tour(
+            DASHBOARD_URL,
+            "social_media_sync.account_notices_import_live",
+            login="admin",
+        )
+
     def _update_reads_the_account(self, account, created):
         """Patch the import of *Update* to read ``account`` only.
 
@@ -107,7 +155,7 @@ class TestAccountNoticesSync(HttpCase, TestSocialMediaSyncCommon):
                 accounts.env["social.post.account"].create(
                     {
                         "account_id": account.id,
-                        "message": "Imported publication %s" % index,
+                        "message": f"Imported publication {index}",
                     }
                 )
             if imported is not None:

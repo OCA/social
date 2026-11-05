@@ -7,7 +7,7 @@ import psycopg2
 from freezegun import freeze_time
 from psycopg2 import errorcodes
 
-from odoo import Command, _, fields
+from odoo import Command, fields
 from odoo.exceptions import UserError
 from odoo.tests.common import tagged
 from odoo.tools import mute_logger
@@ -314,7 +314,7 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
 
         def resync(account):
             if account.id == failing.id:
-                raise UserError(_("The social media refused the feed"))
+                raise UserError(self.env._("The social media refused the feed"))
 
         with patch.object(
             type(failing), "_full_resync", autospec=True, side_effect=resync
@@ -367,7 +367,7 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
 
         def resync(account):
             if account == failing:
-                raise UserError(_("The social media refused the feed"))
+                raise UserError(self.env._("The social media refused the feed"))
 
         calls = []
         with (
@@ -994,7 +994,7 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
                 self.SocialPostAccount.create(
                     {
                         "account_id": accounts[0].id,
-                        "message": "Imported publication %s" % index,
+                        "message": f"Imported publication {index}",
                     }
                 )
             return self._report_imported(accounts, post_id, domain, imported)
