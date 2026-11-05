@@ -886,8 +886,7 @@ class SocialAccount(models.Model):
             if not lines:
                 continue
             with account._account_guard(
-                "Error refreshing the statistics of the publications of "
-                "the account %s"
+                "Error refreshing the statistics of the publications of the account %s"
             ):
                 refreshed |= account._refresh_post_statistics(lines)
         return refreshed

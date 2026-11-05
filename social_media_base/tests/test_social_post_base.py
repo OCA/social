@@ -1854,8 +1854,7 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         # or the next flush would write ``write_date`` back to now.
         self.env.flush_all()
         self.env.cr.execute(
-            "UPDATE ir_attachment SET create_date = %s, write_date = %s "
-            "WHERE id IN %s",
+            "UPDATE ir_attachment SET create_date = %s, write_date = %s WHERE id IN %s",
             (older, older, tuple(attachments.ids)),
         )
         attachments.invalidate_recordset(["create_date", "write_date"])
