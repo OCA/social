@@ -29,8 +29,7 @@ class SocialStatisticsMixin(models.AbstractModel):
         compute="_compute_interactions_count",
         store=True,
         default=0,
-        help="Interactions with the publication: clicks, likes, comments and "
-        "shares.",
+        help="Interactions with the publication: clicks, likes, comments and shares.",
     )
     impression_count = fields.Integer(
         default=0,

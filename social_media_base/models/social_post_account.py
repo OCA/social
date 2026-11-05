@@ -748,8 +748,7 @@ class SocialPostAccount(models.Model):
             return not self._check_remote_post_exists()
         except Exception:  # noqa: BLE001 - a failed check is not a deletion
             _logger.exception(
-                "Error checking whether the post %s still exists, it is left "
-                "untouched",
+                "Error checking whether the post %s still exists, it is left untouched",
                 self.remote_ref,
             )
             return False
