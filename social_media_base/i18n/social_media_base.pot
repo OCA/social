@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "%(name)s (%(mimetype)s) is not a video and cannot be added to the videos of "
 "the post."
@@ -25,7 +24,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "%(name)s (%(mimetype)s) is not an image and cannot be added to the images of"
 " the post."
@@ -34,7 +32,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "%(post)s has no active account: restore the account before publishing it."
 msgstr ""
@@ -42,7 +39,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "%(post)s: cannot be cancelled because it is published or in the process of "
 "being published."
@@ -51,7 +47,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "%(posts)s cannot be modified because it is already published on "
 "%(accounts)s. Create a new post instead."
@@ -60,14 +55,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid "%(publication)s has the same media stored twice."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid "%(publication)s references medias it does not have: %(medias)s."
 msgstr ""
 
@@ -87,7 +80,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
 msgid ""
 "<i class=\"fa fa-trash-o\" aria-hidden=\"true\"/>\n"
-"                                    Deleted on"
+"                                Deleted on"
 msgstr ""
 
 #. module: social_media_base
@@ -181,14 +174,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
-#, python-format
 msgid "Add Post"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
-#, python-format
 msgid "Add account"
 msgstr ""
 
@@ -206,7 +197,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/app/social_post_account_mixin.esm.js:0
-#, python-format
 msgid "All Images"
 msgstr ""
 
@@ -243,7 +233,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
-#, python-format
 msgid ""
 "Ask the social media again for the publications and the figures of these "
 "accounts, instead of waiting for the next automatic pass."
@@ -274,7 +263,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
-#, python-format
 msgid "Authorize Odoo on a social media and link one of its accounts."
 msgstr ""
 
@@ -607,7 +595,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid "Error posting on [%(media)s]: %(error)s"
 msgstr ""
 
@@ -625,13 +612,6 @@ msgstr ""
 #. module: social_media_base
 #: model:ir.model.fields,field_description:social_media_base.field_social_post_account__failed_description
 msgid "Failed Description"
-msgstr ""
-
-#. module: social_media_base
-#: model:ir.model.fields,field_description:social_media_base.field_social_account__failed_message_ids
-#: model:ir.model.fields,field_description:social_media_base.field_social_post__failed_message_ids
-#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__failed_message_ids
-msgid "Failed Messages"
 msgstr ""
 
 #. module: social_media_base
@@ -672,7 +652,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid "Go to account"
 msgstr ""
 
@@ -896,7 +875,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/fields/social_message_field.esm.js:0
-#, python-format
 msgid "Lines"
 msgstr ""
 
@@ -920,8 +898,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "LinkedIn refused the post"
 msgstr ""
 
@@ -934,7 +910,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_account_view_form
-#, python-format
 msgid "Marketing Campaigns"
 msgstr ""
 
@@ -992,13 +967,6 @@ msgid "Message"
 msgstr ""
 
 #. module: social_media_base
-#: model:ir.model.fields,field_description:social_media_base.field_social_account__message_content
-#: model:ir.model.fields,field_description:social_media_base.field_social_post__message_content
-#: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_content
-msgid "Message Content"
-msgstr ""
-
-#. module: social_media_base
 #: model:ir.model.fields,field_description:social_media_base.field_social_account__message_has_error
 #: model:ir.model.fields,field_description:social_media_base.field_social_post__message_has_error
 #: model:ir.model.fields,field_description:social_media_base.field_social_post_account__message_has_error
@@ -1013,13 +981,6 @@ msgstr ""
 #. module: social_media_base
 #: model:ir.model.fields,field_description:social_media_base.field_social_post__message_info
 msgid "Message Info"
-msgstr ""
-
-#. module: social_media_base
-#: model:ir.model.fields,help:social_media_base.field_social_account__message_content
-#: model:ir.model.fields,help:social_media_base.field_social_post__message_content
-#: model:ir.model.fields,help:social_media_base.field_social_post_account__message_content
-msgid "Message content, to be used only in searches"
 msgstr ""
 
 #. module: social_media_base
@@ -1069,21 +1030,13 @@ msgstr ""
 #: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
 #: model:ir.actions.act_window,name:social_media_base.social_post_action_from_campaign
 #: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
-#, python-format
 msgid "New Post"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_image_dialog/social_image_dialog.xml:0
-#, python-format
 msgid "Next"
-msgstr ""
-
-#. module: social_media_base
-#: model:ir.model.fields,field_description:social_media_base.field_social_account__activity_calendar_event_id
-#: model:ir.model.fields,field_description:social_media_base.field_social_post__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: social_media_base
@@ -1117,7 +1070,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid "No preview available"
 msgstr ""
 
@@ -1148,7 +1100,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/fields/social_message_field.esm.js:0
-#, python-format
 msgid "Number of lines shown before the message is cut."
 msgstr ""
 
@@ -1169,7 +1120,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
-#, python-format
 msgid "Only a social media administrator can delete an account."
 msgstr ""
 
@@ -1246,16 +1196,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#: code:addons/social_media_base/models/social_post_account.py:0
-#: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid "Post deleted [%(account)s]"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid "Post on %(posts)s"
 msgstr ""
 
@@ -1275,7 +1221,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_view_form
 #: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
 #: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_kanban
-#, python-format
 msgid "Posts"
 msgstr ""
 
@@ -1304,7 +1249,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_image_dialog/social_image_dialog.xml:0
-#, python-format
 msgid "Prev"
 msgstr ""
 
@@ -1453,14 +1397,12 @@ msgstr ""
 #: model:ir.ui.menu,name:social_media_base.social_root_menu
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_account_statistics_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_base.utm_campaign_view_form
-#, python-format
 msgid "Social Media"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_media_base_mixin.py:0
-#, python-format
 msgid ""
 "Social Media %(social_media)s <b> [%(account)s] </b> <br><br> %(message)s"
 msgstr ""
@@ -1505,7 +1447,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/social_media_base/models/utm_campaign.py:0
 #: model:ir.model.fields,field_description:social_media_base.field_utm_campaign__social_post_ids
-#, python-format
 msgid "Social Media Posts"
 msgstr ""
 
@@ -1548,14 +1489,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/fields/social_message_field.esm.js:0
-#, python-format
 msgid "Social Message"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/fields/social_post_preview_field.esm.js:0
-#, python-format
 msgid "Social Post Preview"
 msgstr ""
 
@@ -1599,7 +1538,6 @@ msgstr ""
 #: model:ir.ui.menu,name:social_media_base.social_statistics_menu
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_form
 #: model_terms:ir.ui.view,arch_db:social_media_base.social_post_account_view_kanban
-#, python-format
 msgid "Statistics"
 msgstr ""
 
@@ -1638,7 +1576,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/utm_medium.py:0
-#, python-format
 msgid ""
 "The UTM medium '%s' cannot be deleted as it is the one reported for the "
 "publications of a social media that declares no medium of its own."
@@ -1647,40 +1584,30 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "The access token expired"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "The access token was revoked"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
-#, python-format
 msgid "The account %(account)s belongs to another company."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/wizards/wizard_social_account.py:0
-#, python-format
 msgid "The account %(account)s could not be updated: %(error)s"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
-#, python-format
 msgid ""
 "The account %(account)s is already associated with another user. Ask its "
 "responsible user or a social media administrator to relink it."
@@ -1689,14 +1616,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_media_base_mixin.py:0
-#, python-format
 msgid "The account could not be associated. Check the server log for details."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The campaign of a publication is the one of its post. Change the campaign on"
 " %(post)s instead."
@@ -1705,15 +1630,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
-#: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid "The credentials of"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
-#, python-format
 msgid ""
 "The credentials of the account are no longer valid and could not be renewed:"
 " %(error)s. Update the account to authorize it again."
@@ -1730,7 +1652,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
-#, python-format
 msgid "The data was updated successfully."
 msgstr ""
 
@@ -1745,15 +1666,12 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "The message is too long"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "The post %(posts)s cannot be deleted because it is still published on "
 "%(accounts)s. Delete the publication from the dashboard, which removes it "
@@ -1763,8 +1681,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "The post could not be sent"
 msgstr ""
 
@@ -1773,14 +1689,12 @@ msgstr ""
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
 #: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_record.esm.js:0
-#, python-format
 msgid "The post does not exist or has been deleted."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "The post is locked"
 msgstr ""
 
@@ -1799,7 +1713,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The post was deleted on the social media, but its Odoo record could not be "
 "removed: %(error)s"
@@ -1808,7 +1721,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "The post was published on %(published)s but failed on %(failed)s. It is not "
 "sent again automatically: solve the problem and press Post to retry the "
@@ -1818,7 +1730,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "The post was set back to draft: its scheduled date (%(date)s) had already "
 "passed when it was unarchived. Reschedule it to publish it."
@@ -1827,21 +1738,18 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid "The post was successfully deleted."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
-#, python-format
 msgid "The posts of the account were updated."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "The schedule date of %(post)s (%(date)s) is already past. Choose a date in "
 "the future to plan the post."
@@ -1850,7 +1758,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "The scheduled publication failed and the post was set back to draft: "
 "%(error)s"
@@ -1859,7 +1766,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post.py:0
-#, python-format
 msgid ""
 "The scheduled publication failed, the post stays planned and will be "
 "retried: %(error)s"
@@ -1868,21 +1774,18 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
-#, python-format
 msgid "The statistics of the account were updated."
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_post_base.py:0
-#, python-format
 msgid "The token could not be renewed"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/tests/test_social_account_base.py:0
-#, python-format
 msgid "The token was revoked"
 msgstr ""
 
@@ -1903,7 +1806,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/social_kanban_controller.esm.js:0
-#, python-format
 msgid "There are no statistics to bring in for these accounts."
 msgstr ""
 
@@ -1936,7 +1838,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_account.py:0
-#, python-format
 msgid ""
 "This social media does not report statistics by day, so there is no history "
 "to update."
@@ -1991,7 +1892,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
 #: model_terms:ir.ui.view,arch_db:social_media_base.wizard_social_account_view_form
-#, python-format
 msgid "Update"
 msgstr ""
 
@@ -2147,7 +2047,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/js/views/kanban/kanban_buttons.xml:0
-#, python-format
 msgid "Write a new post and choose the accounts it goes to."
 msgstr ""
 
@@ -2161,21 +2060,18 @@ msgstr ""
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid "[%(media)s] %(account)s"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-python
 #: code:addons/social_media_base/models/social_post_account.py:0
-#, python-format
 msgid "[%(media)s] %(account)s - %(content)s"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid ""
 "are no longer valid. Update each account to authorize\n"
 "                    it again."
@@ -2184,7 +2080,6 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid ""
 "are no longer valid. Update the account to authorize\n"
 "                    it again."
@@ -2193,13 +2088,11 @@ msgstr ""
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_message/social_message.esm.js:0
-#, python-format
 msgid "see less"
 msgstr ""
 
 #. module: social_media_base
 #. odoo-javascript
 #: code:addons/social_media_base/static/src/components/social_message/social_message.esm.js:0
-#, python-format
 msgid "see more"
 msgstr ""
