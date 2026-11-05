@@ -231,9 +231,10 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
             )
 
         calls = []
-        with self._patch_in_order(
-            calls, "_update_posts_statistics", read_one
-        ), self._patch_in_order(calls, "_refresh_account_statistics"):
+        with (
+            self._patch_in_order(calls, "_update_posts_statistics", read_one),
+            self._patch_in_order(calls, "_refresh_account_statistics"),
+        ):
             (self.social_account_id | unread).update_posts_statistics()
         self.assertEqual(
             calls,
@@ -248,16 +249,20 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         self.SocialAccount.search([]).write(
             {"posts_need_import": False, "pending_initial_sync": False}
         )
-        with patch.object(
-            type(self.SocialAccount),
-            "_detects_pending_posts",
-            autospec=True,
-            return_value=True,
-        ), patch.object(
-            type(self.SocialAccount), "_update_posts_statistics", autospec=True
-        ), patch.object(
-            type(self.SocialAccount), "_refresh_account_statistics", autospec=True
-        ) as mock_refresh:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_detects_pending_posts",
+                autospec=True,
+                return_value=True,
+            ),
+            patch.object(
+                type(self.SocialAccount), "_update_posts_statistics", autospec=True
+            ),
+            patch.object(
+                type(self.SocialAccount), "_refresh_account_statistics", autospec=True
+            ) as mock_refresh,
+        ):
             self.SocialAccount.update_posts_statistics()
         mock_refresh.assert_not_called()
 
@@ -337,8 +342,9 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
     def test_action_full_resync_recomputes_after_the_resync(self):
         """A connector may reconcile without going through the ordinary import."""
         calls = []
-        with self._patch_in_order(calls, "_full_resync"), self._patch_in_order(
-            calls, "_refresh_account_statistics"
+        with (
+            self._patch_in_order(calls, "_full_resync"),
+            self._patch_in_order(calls, "_refresh_account_statistics"),
         ):
             self.social_account_id.action_full_resync()
         self.assertEqual(
@@ -364,8 +370,9 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
                 raise UserError(_("The social media refused the feed"))
 
         calls = []
-        with self._patch_in_order(calls, "_full_resync", resync), self._patch_in_order(
-            calls, "_refresh_account_statistics"
+        with (
+            self._patch_in_order(calls, "_full_resync", resync),
+            self._patch_in_order(calls, "_refresh_account_statistics"),
         ):
             self.SocialAccount._run_full_resync()
         position = calls.index(("_full_resync", working))
@@ -414,13 +421,16 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
 
     def test_run_initial_sync(self):
         self.social_account_id.pending_initial_sync = True
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
-            autospec=True,
-            side_effect=self._report_imported,
-        ) as patch_update, patch(
-            PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
-        ) as patch_notify:
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
+                autospec=True,
+                side_effect=self._report_imported,
+            ) as patch_update,
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
+            ) as patch_notify,
+        ):
             self.SocialAccount._run_initial_sync()
         patch_update.assert_called_once()
         patch_notify.assert_called_once()
@@ -436,15 +446,17 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         """
         self.social_account_id.pending_initial_sync = True
         before = len(self.social_account_id.message_ids)
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
-            autospec=True,
-            return_value=[],
-        ), patch(
-            PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
-        ), patch(
-            PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
-        ) as patch_reschedule:
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
+                autospec=True,
+                return_value=[],
+            ),
+            patch(PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True),
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
+            ) as patch_reschedule,
+        ):
             self.SocialAccount._run_initial_sync()
         self.assertTrue(self.social_account_id.pending_initial_sync)
         self.assertEqual(
@@ -469,13 +481,16 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         """
         self.social_account_id.pending_initial_sync = True
         before = len(self.social_account_id.message_ids)
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("update_posts_statistics"),
-            autospec=True,
-            side_effect=ValueError("boom"),
-        ), patch(
-            PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
-        ) as patch_notify:
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("update_posts_statistics"),
+                autospec=True,
+                side_effect=ValueError("boom"),
+            ),
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
+            ) as patch_notify,
+        ):
             self.SocialAccount._run_initial_sync()
         patch_notify.assert_called_once()
         self.assertFalse(self.social_account_id.pending_initial_sync)
@@ -500,15 +515,19 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
             pgcode = errorcodes.SERIALIZATION_FAILURE
 
         self.social_account_id.pending_initial_sync = True
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("update_posts_statistics"),
-            autospec=True,
-            side_effect=ConcurrencyError("serialization conflict"),
-        ), patch(
-            PATCH_SYNC_ACCOUNT.format("_close_initial_sync"), autospec=True
-        ) as patch_close, patch(
-            PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
-        ) as patch_reschedule:
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("update_posts_statistics"),
+                autospec=True,
+                side_effect=ConcurrencyError("serialization conflict"),
+            ),
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_close_initial_sync"), autospec=True
+            ) as patch_close,
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
+            ) as patch_reschedule,
+        ):
             self.SocialAccount._run_initial_sync()
         patch_close.assert_not_called()
         patch_reschedule.assert_called_once()
@@ -527,20 +546,26 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         """
         self.social_account_id.pending_initial_sync = True
         before = self.social_account_id.message_ids
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
-            autospec=True,
-            side_effect=self._report_imported,
-        ), patch.object(
-            type(self.SocialAccount),
-            "_backfill_statistics",
-            autospec=True,
-            side_effect=backfill_error,
-        ) as patch_backfill, patch(
-            PATCH_SYNC_ACCOUNT.format("_close_initial_sync"), autospec=True
-        ) as patch_close, patch(
-            PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
-        ) as patch_reschedule, mute_logger(LOGGER_ACCOUNT):
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
+                autospec=True,
+                side_effect=self._report_imported,
+            ),
+            patch.object(
+                type(self.SocialAccount),
+                "_backfill_statistics",
+                autospec=True,
+                side_effect=backfill_error,
+            ) as patch_backfill,
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_close_initial_sync"), autospec=True
+            ) as patch_close,
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
+            ) as patch_reschedule,
+            mute_logger(LOGGER_ACCOUNT),
+        ):
             self.SocialAccount._run_initial_sync()
         notes = self.social_account_id.message_ids - before
         return patch_backfill, patch_close, patch_reschedule, notes
@@ -591,14 +616,16 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         """Without the posts, the only note is the one of the import."""
         self.social_account_id.pending_initial_sync = True
         before = self.social_account_id.message_ids
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("update_posts_statistics"),
-            autospec=True,
-            side_effect=ValueError("boom"),
-        ), patch.object(
-            type(self.SocialAccount), "_backfill_statistics", autospec=True
-        ) as patch_backfill, patch(
-            PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("update_posts_statistics"),
+                autospec=True,
+                side_effect=ValueError("boom"),
+            ),
+            patch.object(
+                type(self.SocialAccount), "_backfill_statistics", autospec=True
+            ) as patch_backfill,
+            patch(PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True),
         ):
             self.SocialAccount._run_initial_sync()
         patch_backfill.assert_not_called()
@@ -608,15 +635,17 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
 
     def test_run_initial_sync_does_not_reschedule_what_it_imported(self):
         self.social_account_id.pending_initial_sync = True
-        with patch(
-            PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
-            autospec=True,
-            side_effect=self._report_imported,
-        ), patch(
-            PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True
-        ), patch(
-            PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
-        ) as patch_reschedule:
+        with (
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_update_posts_statistics"),
+                autospec=True,
+                side_effect=self._report_imported,
+            ),
+            patch(PATCH_SYNC_ACCOUNT.format("_notify_posts_updated"), autospec=True),
+            patch(
+                PATCH_SYNC_ACCOUNT.format("_reschedule_initial_sync"), autospec=True
+            ) as patch_reschedule,
+        ):
             self.SocialAccount._run_initial_sync()
         self.assertFalse(patch_reschedule.call_args[0][0])
 
@@ -628,14 +657,14 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         """
         self.social_account_id.pending_initial_sync = True
         calls = []
-        with self._patch_in_order(
-            calls, "_update_posts_statistics", self._report_imported
-        ), self._patch_in_order(
-            calls, "_backfill_statistics", backfill
-        ), self._patch_in_order(
-            calls, "_refresh_account_statistics"
-        ), self._patch_in_order(calls, "_notify_posts_updated"), mute_logger(
-            LOGGER_ACCOUNT
+        with (
+            self._patch_in_order(
+                calls, "_update_posts_statistics", self._report_imported
+            ),
+            self._patch_in_order(calls, "_backfill_statistics", backfill),
+            self._patch_in_order(calls, "_refresh_account_statistics"),
+            self._patch_in_order(calls, "_notify_posts_updated"),
+            mute_logger(LOGGER_ACCOUNT),
         ):
             self.SocialAccount._run_initial_sync()
         return [name for name, account in calls if account == self.social_account_id]
@@ -884,17 +913,20 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
             {"name": "Quiet account", "media_id": self.social_media_id.id}
         )
         self.social_account_id.posts_need_import = True
-        with patch.object(
-            type(self.SocialAccount),
-            "_detects_pending_posts",
-            autospec=True,
-            return_value=True,
-        ), patch.object(
-            type(self.SocialAccount),
-            "_update_posts_statistics",
-            autospec=True,
-            side_effect=self._report_imported,
-        ) as mock_update:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_detects_pending_posts",
+                autospec=True,
+                return_value=True,
+            ),
+            patch.object(
+                type(self.SocialAccount),
+                "_update_posts_statistics",
+                autospec=True,
+                side_effect=self._report_imported,
+            ) as mock_update,
+        ):
             self.SocialAccount.update_posts_statistics()
         self.assertEqual(mock_update.call_args[0][0], self.social_account_id)
         self.assertNotIn(quiet, mock_update.call_args[0][0])
@@ -908,17 +940,20 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         self.social_account_id.write(
             {"posts_need_import": False, "pending_initial_sync": False}
         )
-        with patch.object(
-            type(self.SocialAccount),
-            "_detects_pending_posts",
-            autospec=True,
-            return_value=True,
-        ), patch.object(
-            type(self.SocialAccount),
-            "_update_posts_statistics",
-            autospec=True,
-            side_effect=self._report_imported,
-        ) as mock_update:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_detects_pending_posts",
+                autospec=True,
+                return_value=True,
+            ),
+            patch.object(
+                type(self.SocialAccount),
+                "_update_posts_statistics",
+                autospec=True,
+                side_effect=self._report_imported,
+            ) as mock_update,
+        ):
             self.social_account_id.update_posts_statistics()
         self.assertEqual(mock_update.call_args[0][0], self.social_account_id)
 
@@ -931,16 +966,19 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         self.social_account_id.write(
             {"posts_need_import": False, "pending_initial_sync": False}
         )
-        with patch.object(
-            type(self.SocialAccount),
-            "_detects_pending_posts",
-            autospec=True,
-            return_value=True,
-        ), patch.object(
-            type(self.SocialAccount),
-            "_update_posts_statistics",
-            autospec=True,
-        ) as mock_update:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_detects_pending_posts",
+                autospec=True,
+                return_value=True,
+            ),
+            patch.object(
+                type(self.SocialAccount),
+                "_update_posts_statistics",
+                autospec=True,
+            ) as mock_update,
+        ):
             answer = self.SocialAccount.update_posts_statistics()
         mock_update.assert_not_called()
         self.assertEqual(answer, [])
@@ -989,14 +1027,17 @@ class TestSocialAccountSync(TestSocialMediaSyncCommon):
         self.SocialAccount.search([]).write(
             {"posts_need_import": False, "pending_initial_sync": False}
         )
-        with patch.object(
-            type(self.SocialAccount),
-            "_detects_pending_posts",
-            autospec=True,
-            return_value=True,
-        ), patch.object(
-            type(self.SocialAccount), "_update_posts_statistics", autospec=True
-        ) as mock_update:
+        with (
+            patch.object(
+                type(self.SocialAccount),
+                "_detects_pending_posts",
+                autospec=True,
+                return_value=True,
+            ),
+            patch.object(
+                type(self.SocialAccount), "_update_posts_statistics", autospec=True
+            ) as mock_update,
+        ):
             answer = self.SocialAccount.update_dashboard_posts()
         mock_update.assert_not_called()
         self.assertEqual(answer, {"read": False, "imported": 0})

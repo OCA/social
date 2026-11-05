@@ -261,8 +261,11 @@ class TestSocialPostAccountSync(TestSocialMediaSyncCommon):
         )
 
     def test_map_medias_account_survives_a_request_exception(self):
-        with mute_logger(LOGGER_SYNC_POST_ACCOUNT), patch(
-            "requests.get", side_effect=requests.exceptions.RequestException("boom")
+        with (
+            mute_logger(LOGGER_SYNC_POST_ACCOUNT),
+            patch(
+                "requests.get", side_effect=requests.exceptions.RequestException("boom")
+            ),
         ):
             self.assertFalse(
                 self.social_post_account_id._map_medias_account(
@@ -339,8 +342,9 @@ class TestSocialPostAccountSync(TestSocialMediaSyncCommon):
         response = media_download_response(
             chunks=[b"never read"], headers={"Content-Length": str(2 * 1024 * 1024)}
         )
-        with mute_logger(LOGGER_SYNC_POST_ACCOUNT), patch(
-            "requests.get", return_value=response
+        with (
+            mute_logger(LOGGER_SYNC_POST_ACCOUNT),
+            patch("requests.get", return_value=response),
         ):
             videos, media_refs = self.social_post_account_id._store_remote_videos(
                 {"urn:li:video:1": "https://fake/1.mp4"}
