@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -31,7 +31,6 @@ msgstr ""
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid ""
 "An error occurred while deleting the comment or it no longer exists, please "
 "try again later."
@@ -52,50 +51,42 @@ msgstr ""
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "LinkedIn member"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "LinkedIn page"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
-#, python-format
 msgid "LinkedIn refused the feed"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_actors_linkedin.py:0
-#, python-format
 msgid "LinkedIn refused the organization"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
-#: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
-#, python-format
 msgid "LinkedIn refused the page statistics"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
-#, python-format
 msgid "LinkedIn refused the reactions"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
-#, python-format
 msgid "LinkedIn refused the statistics"
 msgstr ""
 
@@ -130,29 +121,24 @@ msgstr ""
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "The comment cannot be recommended on LinkedIn."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "The comment could not be published on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "The comment does not exist or has been deleted."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "The comments could not be read from LinkedIn: %(error)s"
 msgstr ""
 
@@ -168,18 +154,12 @@ msgstr ""
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "The post does not exist or has been deleted."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "The replies could not be read from LinkedIn: %(error)s"
 msgstr ""
 
@@ -194,7 +174,6 @@ msgstr ""
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_account.py:0
-#, python-format
 msgid ""
 "The token of this account was not granted %(scopes)s, so LinkedIn refuses to"
 " serve its publications and they cannot be imported. Enable the matching "
@@ -221,34 +200,29 @@ msgstr ""
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "You had no reaction on this comment."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "You had no reaction on this post."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "You have already reacted to this comment."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
-#, python-format
 msgid "You have already reacted to this post."
 msgstr ""
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
-#, python-format
 msgid "history unavailable"
 msgstr ""
