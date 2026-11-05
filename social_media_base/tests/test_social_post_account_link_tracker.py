@@ -27,7 +27,7 @@ class TestSocialPostAccountLinkTracker(TestSocialMediaBaseCommon):
             {
                 "name": "Social user",
                 "login": login,
-                "groups_id": [
+                "group_ids": [
                     Command.set(
                         [
                             self.env.ref("base.group_user").id,
@@ -434,3 +434,8 @@ class TestSocialPostAccountUtm(TestSocialMediaBaseCommon):
     def test_deleting_the_generic_medium_raises(self):
         with self.assertRaises(UserError):
             self.utm_medium_social_media.unlink()
+
+    def test_deleting_another_medium_is_allowed(self):
+        medium = self.UtmMedium.create({"name": "Another medium"})
+        medium.unlink()
+        self.assertFalse(medium.exists())

@@ -5,8 +5,9 @@ from unittest.mock import MagicMock, patch
 
 from markupsafe import Markup
 
+import odoo
 from odoo.exceptions import AccessError
-from odoo.tests.common import tagged
+from odoo.tests.common import HttpCase, tagged
 
 from odoo.addons.mail.tests.common import mail_new_test_user
 from odoo.addons.social_media_base.tests.test_social_common import (
@@ -86,6 +87,10 @@ class TestSocialMediaBaseMixin(TestSocialMediaBaseCommon):
         self.assertEqual(stored["message"], "<b>ok</b>")
         self.assertEqual(stored["message_type"], "success")
 
+    def test_notify_user_session_without_request_keeps_nothing(self):
+        with patch(PATCH_MIXIN_REQUEST, new=None):
+            self.SocialMediaBaseMixin._notify_user_session("boom")
+
     def test_notify_user_session_keeps_every_message(self):
         """A callback reporting twice must not lose what it said first."""
         mock_request = MagicMock(session={})
@@ -157,6 +162,35 @@ class TestSocialMediaBaseMixin(TestSocialMediaBaseCommon):
         wizard = self.WizardAccount.create({"media_id": self.social_media_id.id})
         wizard._set_csrf_state_token()
         self.assertFalse(wizard.csrf_state_token)
+
+    def test_notify_association_failure_keeps_the_message_in_the_session(self):
+        mock_request = MagicMock(session={})
+        with patch(PATCH_MIXIN_REQUEST, new=mock_request):
+            self.SocialMediaBaseMixin._notify_association_failure("linkedin")
+        kept = mock_request.session["social_media_notification"]
+        self.assertEqual(len(kept), 1)
+        self.assertIn("could not be associated", kept[0]["message"])
+
+
+@tagged("post_install", "-at_install")
+class TestSocialMediaSession(HttpCase):
+    """The notification of a callback is delivered once, with the session."""
+
+    def test_session_info_delivers_the_pending_notification(self):
+        self.authenticate("admin", "admin")
+        notification = [{"message": "boom", "message_type": "danger"}]
+        self.session["social_media_notification"] = notification
+        odoo.http.root.session_store.save(self.session)
+        result = self.make_jsonrpc_request("/web/session/get_session_info")
+        self.assertEqual(result["social_media_notification"], notification)
+        result = self.make_jsonrpc_request("/web/session/get_session_info")
+        self.assertNotIn("social_media_notification", result)
+
+    def test_session_info_without_notification_keeps_the_answer(self):
+        self.authenticate("admin", "admin")
+        result = self.make_jsonrpc_request("/web/session/get_session_info")
+        self.assertNotIn("social_media_notification", result)
+        self.assertIn("uid", result)
 
 
 @tagged("post_install", "-at_install")

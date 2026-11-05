@@ -2198,6 +2198,112 @@ class TestSocialPostBase(TestSocialMediaBaseCommon):
         self.assertEqual(len(result), 1)
         self.assertEqual(result[0][2]["account_id"], self.other_account_id.id)
 
+    def test_action_draft_sets_the_post_back_to_draft(self):
+        self.social_post_id.state = "planned"
+        self.social_post_id.action_draft()
+        self.assertEqual(self.social_post_id.state, "draft")
+
+    def test_default_account_ids_for_media(self):
+        self.assertIn(
+            self.social_account_id.id,
+            self.SocialPost._default_account_ids_for_media(False),
+        )
+
+    def test_default_get_preselects_the_default_accounts(self):
+        with patch.object(
+            type(self.social_post_id),
+            "_default_account_ids",
+            autospec=True,
+            return_value=self.social_account_id.ids,
+        ):
+            values = self.SocialPost.default_get(["account_ids"])
+        self.assertEqual(
+            values["account_ids"], [Command.set(self.social_account_id.ids)]
+        )
+
+    def test_write_with_send_now_does_not_plan_the_post(self):
+        self.social_post_id.write({"send_post": "now"})
+        self.assertEqual(self.social_post_id.state, "draft")
+
+    def test_notify_publish_failure_without_failed_lines(self):
+        self.social_post_id._notify_partial_publication(self.SocialPostAccount)
+
+    @mute_logger(LOGGER_POST)
+    def test_register_cron_failure_survives_a_broken_chatter(self):
+        with patch.object(
+            type(self.social_post_id),
+            "message_post",
+            autospec=True,
+            side_effect=ValueError("chatter down"),
+        ):
+            self.social_post_id._register_cron_failure(ValueError("boom"))
+
+    def test_register_publish_refused_marks_the_line_as_failed(self):
+        self.social_post_account_id._register_publish_refused(
+            "The social media refused the publication"
+        )
+        self.assertEqual(self.social_post_account_id.state, "failed")
+        self.assertIn(
+            "refused the publication",
+            self.social_post_account_id.failed_description,
+        )
+
+    @mute_logger(LOGGER_POST_ACCOUNT)
+    def test_register_publish_failure_without_post_keeps_the_line(self):
+        line = self.SocialPostAccount.create(
+            {
+                "message": self.test_message,
+                "account_id": self.social_account_id.id,
+            }
+        )
+        line._register_publish_failure(ValueError("boom"))
+        self.assertEqual(line.state, "failed")
+
+    @mute_logger(LOGGER_POST_ACCOUNT)
+    def test_register_delete_failure_without_post_keeps_the_notification(self):
+        line = self.SocialPostAccount.create(
+            {
+                "message": self.test_message,
+                "account_id": self.social_account_id.id,
+            }
+        )
+        action = line._register_delete_failure(ValueError("boom"))
+        self.assertEqual(action["type"], "ir.actions.client")
+        self.assertEqual(action["params"]["type"], "danger")
+
+    @mute_logger(LOGGER_POST_ACCOUNT)
+    def test_delete_post_account_keeps_the_line_on_a_database_failure(self):
+        post = self.SocialPost.create(
+            {
+                "message": self.test_message,
+                "account_ids": [Command.set(self.social_account_id.ids)],
+            }
+        )
+        line = self.SocialPostAccount.create(
+            {
+                "message": self.test_message,
+                "account_id": self.social_account_id.id,
+                "post_id": post.id,
+            }
+        )
+
+        class DatabaseError(psycopg2.OperationalError):
+            pgcode = "08006"
+
+        with (
+            patch.object(type(line), "_delete_post_account", autospec=True),
+            patch.object(
+                type(post), "unlink", side_effect=DatabaseError("connection lost")
+            ),
+        ):
+            action = line.action_delete_post_account()
+        self.assertTrue(line.exists())
+        self.assertEqual(line.state, "failed")
+        self.assertEqual(action["params"]["type"], "danger")
+
+    def test_gc_lost_media_attachments_does_nothing_on_the_abstract_mixin(self):
+        self.env["social.post.mixin"]._gc_lost_media_attachments()
+
 
 @tagged("post_install", "-at_install")
 class TestSocialPostBaseUsers(TestSocialMediaBaseCommon):
@@ -2209,7 +2315,7 @@ class TestSocialPostBaseUsers(TestSocialMediaBaseCommon):
             {
                 "name": "Other responsible",
                 "login": "other_responsible_test",
-                "groups_id": [
+                "group_ids": [
                     Command.set(
                         [
                             self.env.ref("base.group_user").id,

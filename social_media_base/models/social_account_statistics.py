@@ -36,10 +36,7 @@ class SocialAccountStatistics(models.Model):
         "so periods are averaged instead of added up.",
     )
 
-    _sql_constraints = [
-        (
-            "unique_account_date",
-            "unique (account_id, date)",
-            "There can only be one statistics row per account and day.",
-        ),
-    ]
+    _unique_account_date = models.Constraint(
+        "unique (account_id, date)",
+        "There can only be one statistics row per account and day.",
+    )

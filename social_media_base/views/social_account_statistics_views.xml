@@ -55,7 +55,7 @@
                     name="with_impressions"
                     domain="[('impression_count', '&gt;', 0)]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Accounts"
                         name="group_by_account_id"

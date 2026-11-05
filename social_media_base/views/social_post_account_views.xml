@@ -395,7 +395,7 @@
                     name="without_campaign"
                     domain="[('campaign_id', '=', False)]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Accounts"
                         name="group_by_account_id"

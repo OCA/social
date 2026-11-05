@@ -5,7 +5,7 @@ import logging
 from datetime import timedelta
 
 from odoo import Command, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import MissingError, UserError, ValidationError
 from odoo.tools import format_datetime
 
 _logger = logging.getLogger(__name__)
@@ -193,22 +193,15 @@ class SocialPost(models.Model):
             self._release_media_attachments(released)
         return res
 
-    def unlink(self):
-        """Delete the posts together with the publications they created.
+    def _unlink_guard_not_published(self):
+        """Stop the deletion of a post still published on a social media.
 
         ``social.post.account.post_id`` is ``restrict`` on purpose, so that
         the history of what exists on the social media is never dropped by
         accident. The post is what knows whether that is the case: a
-        publication that never reached the social media, or one already gone from
-        it, is deleted with its post; a publication still online stops the
-        deletion with an explanation.
-
-        The medias go with it, and nothing here has to arrange that:
-        :meth:`_anchor_media_attachments` attaches every media to the record
-        that holds it, and ``unlink`` deletes the attachments of the records
-        it deletes, so the images of the post leave with the post and what a
-        publication downloaded leaves with the publication. The filestore
-        frees the files on its next collection.
+        publication that never reached the social media, or one already gone
+        from it, is deleted with its post; a publication still online stops
+        the deletion with an explanation.
         """
         lines = self.with_context(active_test=False).post_account_ids
         online = lines.filtered(
@@ -225,6 +218,19 @@ class SocialPost(models.Model):
                     accounts=", ".join(online.account_id.mapped("display_name")),
                 )
             )
+
+    def unlink(self):
+        """Delete the posts together with the publications they created.
+
+        The medias go with it, and nothing here has to arrange that:
+        :meth:`_anchor_media_attachments` attaches every media to the record
+        that holds it, and ``unlink`` deletes the attachments of the records
+        it deletes, so the images of the post leave with the post and what a
+        publication downloaded leaves with the publication. The filestore
+        frees the files on its next collection.
+        """
+        self._unlink_guard_not_published()
+        lines = self.with_context(active_test=False).post_account_ids
         lines.unlink()
         return super().unlink()
 
@@ -619,16 +625,19 @@ class SocialPost(models.Model):
                 "hidden_video_count": max(len(videos) - PREVIEW_MEDIA_LIMIT, 0),
             }
             values |= self._render_values_preview(media)
+            template = (
+                f"social_media_{media.media_type}.social_media_post_preview"
+                if media.media_type
+                else "social_media_base.social_media_post_preview"
+            )
             try:
-                render_template += """\n\n""" + IrQweb._render(
-                    f"social_media_{media.media_type}.social_media_post_preview",
-                    values,
-                )
-            except ValueError:
-                render_template += """\n\n""" + IrQweb._render(
+                rendered = IrQweb._render(template, values)
+            except (ValueError, MissingError):
+                rendered = IrQweb._render(
                     "social_media_base.social_media_post_preview",
                     values,
                 )
+            render_template += """\n\n""" + rendered
         return (
             render_template if render_template else self.env._("No preview available")
         )

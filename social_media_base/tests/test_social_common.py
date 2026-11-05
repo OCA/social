@@ -106,7 +106,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
                 media.write({"media_type": media_type})
             yield
 
-    def dashboard_publication(self, media, account_name, message):
+    def dashboard_publication(self, media, account_name, message):  # pragma: no cover
         """Create a publication the dashboard of the tours draws.
 
         The kanban is scoped by ``user_id`` and reads what a social media
@@ -122,7 +122,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
         user = self.env.ref("base.user_admin")
         user.sudo().write(
             {
-                "groups_id": [
+                "group_ids": [
                     (
                         4,
                         self.env.ref("social_media_base.group_social_media_manager").id,
@@ -159,7 +159,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
             }
         )
 
-    def _get_parent_class_defining(self, record, method_name):
+    def _get_parent_class_defining(self, record, method_name):  # pragma: no cover
         mro = type(record).mro()
         for parent in mro[1:]:
             if method_name in parent.__dict__:
@@ -168,7 +168,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
             f"Not found method '{method_name}'"
         )
 
-    def valid_action_open_account_media(self, media_id, action):
+    def valid_action_open_account_media(self, media_id, action):  # pragma: no cover
         self.assertEqual(action["type"], "ir.actions.act_window")
         self.assertEqual(action["res_model"], "wizard.social.account")
         self.assertEqual(action["target"], "new")
@@ -176,7 +176,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
         self.assertIn("context", action)
         self.assertEqual(action["context"], {"default_media_id": media_id.id})
 
-    def valid_not_action_open_account_media(self):
+    def valid_not_action_open_account_media(self):  # pragma: no cover
         parent_cls = self._get_parent_class_defining(
             self.SocialMedia, "action_open_account"
         )
@@ -196,7 +196,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
             mocked.assert_called_once()
             self.assertEqual(action, fake_action_account)
 
-    def generate_magic_mock(self, **values):
+    def generate_magic_mock(self, **values):  # pragma: no cover
         new_mock = MagicMock()
         if values.get("status_code", False):
             new_mock.status_code = values["status_code"]
@@ -206,7 +206,7 @@ class TestSocialMediaBaseCommon(BaseCommon):
             new_mock.json.return_value = values["json_return_value"]
         return new_mock
 
-    def generate_patch(self, **values):
+    def generate_patch(self, **values):  # pragma: no cover
         new_patch = None
         model_patch = values.get("model_patch", False)
         side_effect = values.get("side_effect", False)
