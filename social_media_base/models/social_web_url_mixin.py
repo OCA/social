@@ -31,7 +31,7 @@ class SocialWebUrlMixin(models.AbstractModel):
         for record in self:
             record.web_url = record._get_web_url()
 
-    def _get_web_url(self):
+    def _get_web_url(self):  # pragma: no cover
         """Return the address of this record on the social media.
 
         Pure hook: the generic module knows no social media, so it answers

@@ -333,7 +333,7 @@ class TestUtmCampaign(TestSocialMediaBaseCommon):
             {
                 "name": "Marketing user",
                 "login": "marketing_user_test",
-                "groups_id": [Command.set([self.env.ref("base.group_user").id])],
+                "group_ids": [Command.set([self.env.ref("base.group_user").id])],
             }
         )
         fields_get = self.UtmCampaign.with_user(user).fields_get()

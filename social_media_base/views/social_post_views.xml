@@ -32,7 +32,7 @@
                     />
                     <button
                         type="object"
-                        name="toggle_active"
+                        name="action_unarchive"
                         string="Unarchive"
                         invisible="active"
                         title="Bring the post back to the lists it was taken out of. It publishes nothing by itself."
@@ -399,7 +399,7 @@
                     name="inactive"
                     domain="[('active', '=', False)]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Responsible"
                         name="group_by_user"

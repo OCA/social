@@ -154,7 +154,7 @@
                     name="inactive"
                     domain="[('active', '=', False)]"
                 />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Media"
                         name="group_by_media"

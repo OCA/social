@@ -4,7 +4,9 @@
 from datetime import timedelta
 from unittest.mock import patch
 
+import psycopg2
 from freezegun import freeze_time
+from psycopg2 import errorcodes
 
 from odoo import fields
 from odoo.exceptions import AccessError, UserError
@@ -428,6 +430,164 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
             wizard.action_update_account()
         self.assertIn("boom", str(capture.exception))
 
+    def test_action_associate_social_account_runs_the_hooks(self):
+        wizard = self.WizardAccount.create(
+            {
+                "media_id": self.social_media_id.id,
+                "account_id": self.social_account_id.id,
+            }
+        )
+        with patch(
+            PATCH_WIZARD_ACCOUNT.format("_action_add_account"),
+            autospec=True,
+            return_value={"type": "ir.actions.act_url"},
+        ) as mock_add:
+            action = wizard.action_associate_social_account()
+        mock_add.assert_called_once_with(wizard)
+        self.assertEqual(action, {"type": "ir.actions.act_url"})
+
+    def test_action_associate_social_account_without_account(self):
+        wizard = self.WizardAccount.create({"media_id": self.social_media_id.id})
+        with patch(
+            PATCH_WIZARD_ACCOUNT.format("_action_add_account"),
+            autospec=True,
+            return_value=None,
+        ):
+            self.assertIsNone(wizard.action_associate_social_account())
+
+    def test_wizard_update_account_reraises_a_user_error(self):
+        wizard = self.WizardAccount.create(
+            {
+                "media_id": self.social_media_id.id,
+                "account_id": self.social_account_id.id,
+            }
+        )
+        with (
+            patch(
+                PATCH_WIZARD_ACCOUNT.format("_update_account"),
+                autospec=True,
+                side_effect=UserError("known problem"),
+            ),
+            self.assertRaises(UserError) as capture,
+        ):
+            wizard.action_update_account()
+        self.assertEqual(str(capture.exception), "known problem")
+
+    def test_action_update_account_opens_the_wizard(self):
+        action = self.social_account_id.action_update_account()
+        self.assertEqual(action["type"], "ir.actions.act_window")
+        self.assertEqual(action["res_model"], "wizard.social.account")
+        self.assertEqual(action["target"], "new")
+        self.assertEqual(
+            action["context"],
+            {
+                "default_account_id": self.social_account_id.id,
+                "default_media_id": self.social_media_id.id,
+                "social_update_account": True,
+            },
+        )
+
+    def test_check_unique_credentials_refuses_the_keys_of_another_account(self):
+        other = self.SocialAccount.create(
+            {"name": "Other account", "media_id": self.social_media_id.id}
+        )
+        with self.assertRaises(UserError):
+            self.social_account_id._check_unique_credentials(
+                [("name", "=", other.name)], "The keys are already taken"
+            )
+
+    def test_check_unique_credentials_accepts_the_keys_of_the_account_itself(self):
+        self.social_account_id._check_unique_credentials(
+            [("name", "=", self.social_account_id.name)],
+            "The keys are already taken",
+        )
+
+    def test_associate_account_creates_the_account_of_the_current_user(self):
+        account = self.SocialAccount._associate_account(
+            False,
+            "remote-new",
+            {
+                "name": "New account",
+                "media_id": self.social_media_id.id,
+                "remote_ref": "remote-new",
+            },
+            create_values={"username": "new_account"},
+        )
+        self.assertEqual(account.remote_ref, "remote-new")
+        self.assertEqual(account.username, "new_account")
+        self.assertEqual(account.user_id, self.env.user)
+
+    def test_associate_account_updates_and_reactivates_the_linked_one(self):
+        account = self.SocialAccount.create(
+            {
+                "name": "Linked account",
+                "media_id": self.social_media_id.id,
+                "remote_ref": "remote-linked",
+                "user_id": self.env.user.id,
+                "active": False,
+            }
+        )
+        linked = self.SocialAccount._associate_account(
+            False, "remote-linked", {"name": "Renamed account"}
+        )
+        self.assertEqual(linked, account)
+        self.assertTrue(linked.active)
+        self.assertEqual(linked.name, "Renamed account")
+
+    def test_associate_account_updates_an_active_account(self):
+        account = self.SocialAccount.create(
+            {
+                "name": "Active account",
+                "media_id": self.social_media_id.id,
+                "remote_ref": "remote-active",
+                "user_id": self.env.user.id,
+            }
+        )
+        linked = self.SocialAccount._associate_account(
+            False, "remote-active", {"name": "Renamed account"}
+        )
+        self.assertEqual(linked, account)
+        self.assertTrue(linked.active)
+        self.assertEqual(linked.name, "Renamed account")
+
+    def test_action_validate_access_token_checks_the_remote_token(self):
+        with patch.object(
+            type(self.social_account_id), "validate_access_token", autospec=True
+        ) as mock_validate:
+            self.social_account_id.action_validate_access_token()
+        self.assertTrue(
+            mock_validate.call_args[0][0].env.context.get("check_remote_token")
+        )
+
+    @mute_logger(LOGGER_ACCOUNT)
+    def test_account_guard_reraises_a_concurrency_error(self):
+        class ConcurrencyError(psycopg2.OperationalError):
+            pgcode = errorcodes.SERIALIZATION_FAILURE
+
+        with self.assertRaises(psycopg2.OperationalError):
+            with self.social_account_id._account_guard("Error on the account %s"):
+                raise ConcurrencyError("serialization conflict")
+
+    @mute_logger(LOGGER_ACCOUNT)
+    def test_account_guard_logs_the_error_and_carries_on(self):
+        with self.social_account_id._account_guard("Error on the account %s"):
+            raise ValueError("boom")
+
+    def test_account_guard_hands_the_error_to_the_caller(self):
+        received = []
+        with self.social_account_id._account_guard(on_error=received.append):
+            raise ValueError("boom")
+        self.assertEqual(len(received), 1)
+        self.assertIsInstance(received[0], ValueError)
+
+    def test_notify_accounts_by_partner_without_the_payload(self):
+        Bus = self.env["bus.bus"]
+        with patch.object(type(Bus), "_sendone", autospec=True) as mock_sendone:
+            self.social_account_id._notify_accounts_by_partner(
+                "social_need_update", payload_accounts=False
+            )
+        self.assertNotIn("accounts", mock_sendone.call_args[0][3])
+
 
 @tagged("post_install", "-at_install")
 class TestSocialAccountBaseCredentials(TestSocialMediaBaseCommon):
@@ -523,6 +683,24 @@ class TestSocialAccountBaseCredentials(TestSocialMediaBaseCommon):
             )
         )
 
+    @mute_logger(LOGGER_ACCOUNT)
+    def test_run_check_media_updates_logs_a_database_error_and_carries_on(self):
+        class DatabaseError(psycopg2.OperationalError):
+            pgcode = "08006"
+
+        self._run_check_media_updates_failing_on_the_account(
+            DatabaseError("connection lost")
+        )
+
+    def test_run_check_media_updates_reraises_a_concurrency_error(self):
+        class ConcurrencyError(psycopg2.OperationalError):
+            pgcode = errorcodes.SERIALIZATION_FAILURE
+
+        with self.assertRaises(psycopg2.OperationalError):
+            self._run_check_media_updates_failing_on_the_account(
+                ConcurrencyError("serialization conflict")
+            )
+
 
 @tagged("post_install", "-at_install")
 class TestSocialAccountBaseUsers(TestSocialMediaBaseCommon):
@@ -541,7 +719,7 @@ class TestSocialAccountBaseUsers(TestSocialMediaBaseCommon):
             {
                 "name": "Social user",
                 "login": "social_user_test",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -561,7 +739,7 @@ class TestSocialAccountBaseUsers(TestSocialMediaBaseCommon):
             {
                 "name": "Social manager",
                 "login": "social_manager_test",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,

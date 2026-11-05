@@ -78,7 +78,7 @@ class SocialAccount(models.Model):
         help="Posts that target this account. Inverse of the accounts of a "
         "post, it is what keeps the counter up to date.",
     )
-    image_1920 = fields.Image(default=_default_image)
+    image_1920 = fields.Image(default=lambda self: self._default_image())
 
     engagement = fields.Float(
         default=0,
@@ -583,7 +583,7 @@ class SocialAccount(models.Model):
         :return: whether anything was recomputed.
         :rtype: bool
         """
-        accounts = self or self.sudo().search([])
+        accounts = self or self.sudo().search([], limit=None)
         return accounts._refresh_account_statistics()
 
     def refresh_dashboard_statistics(self):
@@ -624,7 +624,7 @@ class SocialAccount(models.Model):
             for any publication of the window.
         :rtype: bool
         """
-        accounts = self or self.sudo().search([])
+        accounts = self or self.sudo().search([], limit=None)
         refreshed = accounts._refresh_statistics()
         answered = accounts._refresh_window_statistics()
         accounts._refresh_account_statistics()

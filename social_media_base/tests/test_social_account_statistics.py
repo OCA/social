@@ -134,13 +134,13 @@ class TestSocialAccountStatistics(TestSocialMediaBaseCommon):
                 date(2025, 1, 2): {"impression_count": 30, "engagement": 0.8},
             }
         )
-        groups = self.Statistics.read_group(
+        groups = self.Statistics.formatted_read_group(
             [("account_id", "=", self.social_account_id.id)],
-            ["impression_count", "engagement"],
             [],
+            ["impression_count:sum", "engagement:avg"],
         )
-        self.assertEqual(groups[0]["impression_count"], 40)
-        self.assertAlmostEqual(groups[0]["engagement"], 0.6)
+        self.assertEqual(groups[0]["impression_count:sum"], 40)
+        self.assertAlmostEqual(groups[0]["engagement:avg"], 0.6)
 
     def test_the_empty_periods_are_filled_by_the_core(self):
         """``fill_temporal`` draws the days with no row, no code of ours."""
@@ -150,11 +150,10 @@ class TestSocialAccountStatistics(TestSocialMediaBaseCommon):
                 date(2025, 1, 4): {"impression_count": 30},
             }
         )
-        groups = self.Statistics.with_context(fill_temporal=True).read_group(
+        groups = self.Statistics.with_context(fill_temporal=True).formatted_read_group(
             [("account_id", "=", self.social_account_id.id)],
-            ["impression_count"],
             ["date:day"],
-            lazy=False,
+            ["impression_count:sum"],
         )
         self.assertEqual(len(groups), 4)
 
@@ -174,6 +173,21 @@ class TestSocialAccountStatistics(TestSocialMediaBaseCommon):
             self.social_account_id.action_refresh_statistics()
         self.assertEqual(mock_sendone.call_args[0][2], "social_form_info")
 
+    def test_refresh_statistics_says_when_the_series_was_updated(self):
+        """A media that answered for the daily series says it was updated."""
+        Bus = self.env["bus.bus"]
+        with (
+            patch.object(
+                type(self.social_account_id),
+                "_refresh_statistics",
+                autospec=True,
+                return_value=True,
+            ),
+            patch.object(type(Bus), "_sendone", autospec=True) as mock_sendone,
+        ):
+            self.social_account_id.action_refresh_statistics()
+        self.assertEqual(mock_sendone.call_args[0][2], "social_form_success")
+
 
 @tagged("post_install", "-at_install")
 class TestSocialAccountStatisticsUsers(TestSocialMediaBaseCommon):
@@ -188,7 +202,7 @@ class TestSocialAccountStatisticsUsers(TestSocialMediaBaseCommon):
             {
                 "name": "Social user",
                 "login": "social_user_statistics",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -204,7 +218,7 @@ class TestSocialAccountStatisticsUsers(TestSocialMediaBaseCommon):
             {
                 "name": "Social manager",
                 "login": "social_manager_statistics",
-                "groups_id": [
+                "group_ids": [
                     (
                         6,
                         0,
@@ -241,8 +255,8 @@ class TestSocialAccountStatisticsUsers(TestSocialMediaBaseCommon):
 
     def test_the_rule_filters_the_aggregation_too(self):
         """A group by must not leak the figures the search hides."""
-        groups = self.Statistics.with_user(self.social_user).read_group(
-            [], ["impression_count"], ["account_id"], lazy=False
+        groups = self.Statistics.with_user(self.social_user).formatted_read_group(
+            [], ["account_id"], ["impression_count:sum"]
         )
         self.assertEqual(len(groups), 1)
         self.assertEqual(groups[0]["account_id"][0], self.own_account.id)

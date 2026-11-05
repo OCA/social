@@ -32,7 +32,7 @@ class TestSocialMenusBase(TestSocialMediaBaseCommon):
             {
                 "login": login,
                 "name": login,
-                "groups_id": [Command.set(groups)],
+                "group_ids": [Command.set(groups)],
             }
         )
 
@@ -47,7 +47,7 @@ class TestSocialMenusBase(TestSocialMediaBaseCommon):
         for xml_id in MENU_XML_IDS:
             menus |= self.env.ref(f"social_media_base.{xml_id}")
         root = self.env.ref("social_media_base.social_root_menu")
-        (menus - root).groups_id = [Command.clear()]
+        (menus - root).group_ids = [Command.clear()]
         return menus
 
     def _loaded_menu_ids(self, user):
