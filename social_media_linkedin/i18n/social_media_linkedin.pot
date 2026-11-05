@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,22 +16,18 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "%(label)s: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "%(prefix)s: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/tests/test_account_linkedin.py:0
-#: code:addons/social_media_linkedin/tests/test_account_linkedin.py:0
-#, python-format
 msgid "403 forbidden"
 msgstr ""
 
@@ -43,7 +39,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "An account with this information already exists; please also check archived "
 "accounts."
@@ -90,42 +85,36 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "Creating account: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "Creating account: LinkedIn answered without an access token. %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "Error connecting to LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post_account.py:0
-#, python-format
 msgid "Error deleting LinkedIn post: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "Error obtaining information from the organization"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "Error reading the statistics of the LinkedIn account: %(error)s"
 msgstr ""
 
@@ -142,14 +131,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/tests/test_account_statistics_linkedin.py:0
-#, python-format
 msgid "Internal error"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "Invalid OAuth state token. Please restart the account association process."
 msgstr ""
@@ -162,14 +149,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "LinkedIn could not process the video: %(reason)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "LinkedIn did not return the identifier of the part %(part)s of %(total)s, so"
 " the upload of the video cannot be finalized."
@@ -178,14 +163,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "LinkedIn did not return the reference of the uploaded image."
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn does not combine images and a video in the same post, so only the "
 "video will be published. Remove the video to publish the images, or create a"
@@ -195,7 +178,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "LinkedIn is still processing the video after %(seconds)s seconds. Please try"
 " to publish the post again later."
@@ -204,7 +186,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn only publishes JPG, PNG and GIF images, so %(names)s cannot be "
 "published. Convert them or remove them from the post."
@@ -213,7 +194,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn only publishes MP4 videos, so %(names)s cannot be published. "
 "Convert them to MP4 or remove them from the post."
@@ -222,7 +202,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn publishes a single video per post, so this post carrying %(videos)s"
 " videos cannot be published. Leave one video or create a separate post for "
@@ -232,7 +211,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn publishes at most %(limit)s characters per post, and this one has "
 "%(length)s. Shorten the message to publish it."
@@ -241,7 +219,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn publishes at most %(limit)s images per post, and this one carries "
 "%(images)s. Remove some of them or create a separate post."
@@ -250,7 +227,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn publishes images of at most %(limit)s, so %(names)s cannot be "
 "published. Reduce their size or remove them from the post."
@@ -259,7 +235,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn publishes videos of at most %(limit)s, so %(names)s cannot be "
 "published. Reduce their size or remove them from the post."
@@ -268,14 +243,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/tests/test_account_statistics_linkedin.py:0
-#, python-format
 msgid "LinkedIn refused the statistics"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "LinkedIn rejected the credentials of the App. Check the Client ID and the "
 "Client Secret of your LinkedIn App."
@@ -322,7 +295,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "The LinkedIn account %(account)s was not authorized for %(scopes)s. Enable "
 "the matching product on the LinkedIn application and associate the account "
@@ -332,14 +304,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The LinkedIn token could not be refreshed"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "The access token of LinkedIn was revoked. Update the account to authorize it"
 " again."
@@ -348,7 +318,6 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The account has no LinkedIn access token. Update the account to authorize it"
 " again."
@@ -357,14 +326,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/controllers/social_media_linkedin.py:0
-#, python-format
 msgid "The account was associated successfully"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "The authorization of LinkedIn is no longer valid. Please restart the account"
 " association process."
@@ -373,15 +340,12 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The image could not be uploaded to LinkedIn"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "The likes and the comments of the publications could not be read: %(error)s"
 msgstr ""
@@ -389,73 +353,60 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/tests/test_account_linkedin.py:0
-#: code:addons/social_media_linkedin/tests/test_account_linkedin.py:0
-#, python-format
 msgid "The page role was lost"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post_account.py:0
-#, python-format
 msgid "The post could not be deleted, please try again later."
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The post could not be published on LinkedIn"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The publications could not be read from LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The statistics of the publications could not be read"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The statistics of the shared publications could not be read"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The status of the video could not be read"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The token is valid."
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/wizards/wizard_social_account.py:0
-#, python-format
 msgid "The token was updated successfully"
 msgstr ""
 
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_account.py:0
-#: code:addons/social_media_linkedin/models/social_account.py:0
-#: code:addons/social_media_linkedin/models/social_account.py:0
-#, python-format
 msgid "The video could not be uploaded to LinkedIn"
 msgstr ""
 
@@ -467,6 +418,5 @@ msgstr ""
 #. module: social_media_linkedin
 #. odoo-python
 #: code:addons/social_media_linkedin/models/social_post_account.py:0
-#, python-format
 msgid "the account has no access token"
 msgstr ""
