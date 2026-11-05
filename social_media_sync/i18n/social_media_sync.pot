@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -21,21 +21,18 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
-#, python-format
 msgid "All Images"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/services/social_service.esm.js:0
-#, python-format
 msgid "An error occurred while liking the comment"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "Are you sure you want to delete this comment?"
 msgstr ""
 
@@ -47,7 +44,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "Cancel"
 msgstr ""
 
@@ -59,28 +55,24 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/xml/app/common_templates.xml:0
-#, python-format
 msgid "Comment"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
-#, python-format
 msgid "Comment as %(account)s…"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
-#, python-format
 msgid "Comment created"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "Comment deleted"
 msgstr ""
 
@@ -88,7 +80,6 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_record.esm.js:0
 #: model_terms:ir.ui.view,arch_db:social_media_sync.social_post_account_view_tree_inherit
-#, python-format
 msgid "Comments"
 msgstr ""
 
@@ -96,14 +87,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid "Delete"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "Delete comment"
 msgstr ""
 
@@ -120,21 +109,18 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
-#, python-format
 msgid "Error retrieving comments"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "Error retrieving replies"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid "Hide replies ("
 msgstr ""
 
@@ -161,7 +147,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_model.esm.js:0
-#, python-format
 msgid "Likes are not available for this social media."
 msgstr ""
 
@@ -184,14 +169,12 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
 #: code:addons/social_media_sync/static/src/xml/app/common_templates.xml:0
-#, python-format
 msgid "Recommend"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid ""
 "Recommend this comment on the social media, as the account that owns the "
 "publication. Pressing it again withdraws the reaction."
@@ -202,7 +185,6 @@ msgstr ""
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
 #: code:addons/social_media_sync/static/src/xml/app/common_templates.xml:0
 #: model:ir.model.fields,field_description:social_media_sync.field_social_post_account__liked_by_account
-#, python-format
 msgid "Recommended"
 msgstr ""
 
@@ -218,14 +200,12 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid "Reply"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid "Replying"
 msgstr ""
 
@@ -237,7 +217,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid ""
 "Show or hide the replies to this comment, asking the social media for them "
 "the first time."
@@ -262,7 +241,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid "The account"
 msgstr ""
 
@@ -276,21 +254,18 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid "The accounts"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
-#, python-format
 msgid "The comment could not be published."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-python
 #: code:addons/social_media_sync/models/social_account.py:0
-#, python-format
 msgid ""
 "The daily statistics history of the account could not be filled: %(error)s."
 msgstr ""
@@ -298,14 +273,12 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
-#, python-format
 msgid "The data was updated. New publications were imported."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_controller.esm.js:0
-#, python-format
 msgid "The data was updated. No new publications."
 msgstr ""
 
@@ -319,7 +292,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid ""
 "The posts of the account are being imported in the\n"
 "                    background, they will show up here as soon as they are\n"
@@ -329,7 +301,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-python
 #: code:addons/social_media_sync/models/social_account.py:0
-#, python-format
 msgid ""
 "The posts of the account could not be imported: %(error)s. Press the Update "
 "button of the dashboard to import them again."
@@ -338,36 +309,30 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-python
 #: code:addons/social_media_sync/models/social_account.py:0
-#, python-format
 msgid "The posts of the account were updated."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-python
 #: code:addons/social_media_sync/tests/test_social_account_sync.py:0
-#: code:addons/social_media_sync/tests/test_social_account_sync.py:0
-#, python-format
 msgid "The social media refused the feed"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.xml:0
-#, python-format
 msgid "There are no comments yet."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "Unknown author"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid "View replies"
 msgstr ""
 
@@ -407,7 +372,6 @@ msgstr ""
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.xml:0
-#, python-format
 msgid ""
 "Write a reply to this comment. It is published on the social media as the "
 "account that owns the publication."
@@ -417,21 +381,18 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
 #: code:addons/social_media_sync/static/src/components/social_comment_dialog/social_comment_dialog.esm.js:0
-#, python-format
 msgid "Write your reply…"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
-#, python-format
 msgid "You have liked the comment."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_record.esm.js:0
-#, python-format
 msgid "You have liked the post."
 msgstr ""
 
@@ -439,34 +400,29 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_comment/social_comment.esm.js:0
 #: code:addons/social_media_sync/static/src/js/views/kanban/social_kanban_record.esm.js:0
-#, python-format
 msgid "You have withdrawn your recommendation."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/xml/app/common_templates.xml:0
-#, python-format
 msgid "comment"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/xml/app/common_templates.xml:0
-#, python-format
 msgid "comments"
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid "has new publications. Press Update to import them."
 msgstr ""
 
 #. module: social_media_sync
 #. odoo-javascript
 #: code:addons/social_media_sync/static/src/components/social_account/social_account.xml:0
-#, python-format
 msgid "have new publications. Press Update to import them."
 msgstr ""
