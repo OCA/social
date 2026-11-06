@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_message_view_list" model="ir.ui.view">
+        <field name="name">mail.message.import.message.list.email</field>
+        <field name="model">mail.message.import.message</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_message_view_list"
+        />
+        <field name="arch" type="xml">
+            <field name="message_type" position="after">
+                <field name="email_subject" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_message_import_message_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.message.form.email</field>
+        <field name="model">mail.message.import.message</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_message_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="message_type" position="after">
+                <field name="email_subject" invisible="message_type != 'email'" />
+            </field>
+            <xpath expr="//sheet" position="after">
+                <chatter />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="mail_message_import_message_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.message.search.email</field>
+        <field name="model">mail.message.import.message</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_message_view_search"
+        />
+        <field name="arch" type="xml">
+            <field name="body" position="before">
+                <field name="email_subject" />
+            </field>
+            <filter name="with_files" position="before">
+                <filter
+                    name="email"
+                    string="Email"
+                    domain="[('channel_type', '=', 'email')]"
+                />
+                <separator />
+            </filter>
+        </field>
+    </record>
+</odoo>
