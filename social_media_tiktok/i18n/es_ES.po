@@ -1,0 +1,264 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_tiktok
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-19 09:35+0000\n"
+"PO-Revision-Date: 2026-08-19 09:35+0000\n"
+"Last-Translator: Domatix\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/wizards/wizard_social_account.py:0
+msgid ""
+"Account access could not be authorized. Please check your settings or try "
+"again later."
+msgstr ""
+"No se pudo autorizar el acceso a la cuenta. Revisa la configuración o "
+"inténtalo de nuevo más tarde."
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/wizards/wizard_social_account.py:0
+msgid "An account with that information already exists."
+msgstr "Ya existe una cuenta con esa información."
+
+#. module: social_media_tiktok
+#: model:ir.model,name:social_media_tiktok.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__display_name
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_media__display_name
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_post__display_name
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_post_account__display_name
+#: model:ir.model.fields,field_description:social_media_tiktok.field_wizard_social_account__display_name
+msgid "Display Name"
+msgstr "Nombre visible"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_post_account.py:0
+msgid "Error Comment TikTok: %(error)s"
+msgstr "Error al comentar en TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_post_account.py:0
+msgid "Error Delete Comment TikTok: %(error)s"
+msgstr "Error al borrar el comentario de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_post_account.py:0
+msgid "Error Get Comments for TikTok video: %(error)s"
+msgstr "Error al obtener los comentarios del vídeo de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__follower_count
+msgid "Follower Count"
+msgstr "Seguidores"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__following_count
+msgid "Following Count"
+msgstr "Siguiendo"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__id
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_media__id
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_post__id
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_post_account__id
+#: model:ir.model.fields,field_description:social_media_tiktok.field_wizard_social_account__id
+msgid "ID"
+msgstr "ID"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid ""
+"Invalid OAuth state token. Please restart the account association process."
+msgstr ""
+"Token de estado OAuth no válido. Reinicia el proceso de asociación de la "
+"cuenta."
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__likes_count
+msgid "Likes Count"
+msgstr "Me gusta"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_media__media_type
+msgid "Media Type"
+msgstr "Tipo de medio"
+
+#. module: social_media_tiktok
+#: model:ir.model,name:social_media_tiktok.model_social_account
+msgid "Social Account"
+msgstr "Cuenta social"
+
+#. module: social_media_tiktok
+#: model:ir.model,name:social_media_tiktok.model_social_media
+msgid "Social Media"
+msgstr "Red social"
+
+#. module: social_media_tiktok
+#: model:ir.model,name:social_media_tiktok.model_social_post
+msgid "Social Post"
+msgstr "Publicación"
+
+#. module: social_media_tiktok
+#: model:ir.model,name:social_media_tiktok.model_social_post_account
+msgid "Social Post Account"
+msgstr "Cuenta de la publicación"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields.selection,name:social_media_tiktok.selection__social_media__media_type__tiktok
+#: model_terms:ir.ui.view,arch_db:social_media_tiktok.social_account_view_form_inherit
+msgid "TikTok"
+msgstr "TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_client_key
+#: model:ir.model.fields,field_description:social_media_tiktok.field_wizard_social_account__tiktok_client_key
+msgid "TikTok Client Key"
+msgstr "Client Key de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_wizard_social_account__tiktok_client_secret
+msgid "TikTok Client Secret"
+msgstr "Client Secret de TikTok"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_post.py:0
+msgid ""
+"TikTok only supports video posts. Please add a video or remove the TikTok "
+"accounts from this post."
+msgstr ""
+"TikTok solo admite publicaciones de vídeo. Añade un vídeo o quita las "
+"cuentas de TikTok de esta publicación."
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok posts require a video."
+msgstr "Las publicaciones de TikTok requieren un vídeo."
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok returned no access token."
+msgstr "TikTok no devolvió un token de acceso."
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok token exchange failed: %(error)s"
+msgstr "Fallo al intercambiar el token de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok token refresh failed: %(error)s"
+msgstr "Fallo al refrescar el token de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok upload initiation failed: %(error)s"
+msgstr "Fallo al iniciar la subida a TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok upload initiation returned no upload URL."
+msgstr "La iniciación de la subida a TikTok no devolvió una URL de subida."
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok video deletion failed: %(error)s"
+msgstr "Fallo al borrar el vídeo de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok video publish failed: %(error)s"
+msgstr "Fallo al publicar el vídeo de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_account.py:0
+msgid "TikTok video upload failed: %(error)s"
+msgstr "Fallo al subir el vídeo de TikTok: %(error)s"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_access_token
+msgid "Tiktok Access Token"
+msgstr "Token de acceso de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_account_type
+msgid "Tiktok Account Type"
+msgstr "Tipo de cuenta de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_avatar_url
+msgid "Tiktok Avatar Url"
+msgstr "URL del avatar de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_client_secret
+msgid "Tiktok Client Secret"
+msgstr "Client Secret de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_wizard_social_account__tiktok_code_verifier
+msgid "Tiktok Code Verifier"
+msgstr "Code Verifier de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_open_id
+msgid "Tiktok Open"
+msgstr "TikTok Open"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_refresh_token
+msgid "Tiktok Refresh Token"
+msgstr "Refresh token de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_token_expiration_date
+msgid "Tiktok Token Expiration Date"
+msgstr "Fecha de expiración del token de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__tiktok_username
+msgid "Tiktok Username"
+msgstr "Usuario de TikTok"
+
+#. module: social_media_tiktok
+#: model:ir.model.fields,field_description:social_media_tiktok.field_social_account__video_count
+msgid "Video Count"
+msgstr "Nº de vídeos"
+
+#. module: social_media_tiktok
+#. odoo-python
+#: code:addons/social_media_tiktok/models/social_post.py:0
+msgid ""
+"You have selected images and videos for this post. TikTok only publishes "
+"videos, so the images will be ignored."
+msgstr ""
+"Has seleccionado imágenes y vídeos para esta publicación. TikTok solo "
+"publica vídeos, por lo que se ignorarán las imágenes."

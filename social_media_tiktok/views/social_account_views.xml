@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="social_account_view_form_inherit" model="ir.ui.view">
+        <field name="name">social.account.view.form.inherit.tiktok</field>
+        <field name="model">social.account</field>
+        <field name="inherit_id" ref="social_media_base.social_account_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='account_configuration']" position="inside">
+                <group string="TikTok">
+                    <field
+                        name="tiktok_client_key"
+                        invisible="media_type != 'tiktok'"
+                    />
+                    <field name="tiktok_open_id" invisible="media_type != 'tiktok'" />
+                    <field
+                        name="tiktok_account_type"
+                        invisible="media_type != 'tiktok'"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

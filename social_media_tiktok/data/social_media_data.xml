@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="social_media_tiktok" model="social.media">
+        <field name="name">TikTok</field>
+        <field name="media_type">tiktok</field>
+        <field name="description">Manage your TikTok account and schedule videos</field>
+        <field
+            name="image"
+            type="base64"
+            file="social_media_tiktok/static/description/icon.png"
+        />
+    </record>
+</odoo>
