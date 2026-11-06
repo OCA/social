@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {markup, onWillStart, useState, useSubEnv} from "@odoo/owl";
 import {useBus, useService} from "@web/core/utils/hooks";
 import {KanbanController} from "@web/views/kanban/kanban_controller";
@@ -100,15 +102,26 @@ export class SocialKanbanController extends KanbanController {
     }
 
     async _onUpdatePostsAndStatistics() {
-        this.socialState.syncPosts = true;
-        const refreshed = await this._updatePostsAndStatistics();
-        if (!session.social_error) {
-            this.notificationService.add(this._updateStatisticsMessage(refreshed), {
-                type: "info",
-            });
+        // The button stays clickable while the pass runs: every click spends
+        // one call per account against the social media, so the second click
+        // is dropped instead of paying twice.
+        if (this.socialState.syncPosts) {
+            return;
         }
-        this.socialState.syncPosts = false;
-        session.social_error = false;
+        this.socialState.syncPosts = true;
+        try {
+            const refreshed = await this._updatePostsAndStatistics();
+            if (!session.social_error) {
+                this.notificationService.add(this._updateStatisticsMessage(refreshed), {
+                    type: "info",
+                });
+            }
+        } finally {
+            // Reset even when the call failed: otherwise the spinner stays on
+            // and the button ignores every later click until a reload.
+            this.socialState.syncPosts = false;
+            session.social_error = false;
+        }
     }
 }
 

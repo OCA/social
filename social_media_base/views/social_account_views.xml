@@ -8,6 +8,7 @@
         <field name="arch" type="xml">
             <form create="0" delete="0">
                 <header>
+                    <field name="can_manage_account" invisible="1" />
                     <!-- ``active`` is what enables the Archive and Unarchive
                          entries of the Actions menu, which is where they live:
                          a header button for them would only repeat what the
@@ -93,6 +94,8 @@
                         <group>
                             <field name="username" readonly="1" />
                             <field name="media_id" readonly="1" />
+                            <field name="web_url" invisible="1" />
+                            <field name="media_type" invisible="1" />
                         </group>
                         <group>
                             <field

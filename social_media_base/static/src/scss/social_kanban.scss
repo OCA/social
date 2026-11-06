@@ -1,0 +1,297 @@
+// Shared look of the social kanbans.
+//
+// The card is the native kanban record: the modules only add a flat accent on
+// its left edge and style the inner elements. The surface, the border and the
+// typography come from the backend theme, so the cards read as part of Odoo.
+
+$o-social-network-colors: (
+    facebook: #1877f2,
+    instagram: #c13584,
+    youtube: #cc0000,
+    tiktok: #161823,
+    linkedin: #0a66c2,
+    x: #14171a,
+);
+
+// The accent of a card follows its network. Declared on the network class so
+// the record holding the card and any nested element can read it.
+.o_social_network_none {
+    --o-social-accent: #{$o-community-color};
+}
+
+@each $name, $color in $o-social-network-colors {
+    .o_social_network_#{$name} {
+        --o-social-accent: #{$color};
+    }
+}
+
+// The inner wrapper is only the layout of the card: the surface is the record.
+.o_social_card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-width: 0;
+    color: $o-main-text-color;
+}
+
+// The record holding a social card paints the accent on its left edge, inside
+// the border so the content does not move.
+.o_kanban_renderer .o_kanban_record:has(.o_social_card) {
+    --o-social-accent: #{$o-community-color};
+    box-shadow: inset 3px 0 0 var(--o-social-accent);
+
+    @each $name, $color in $o-social-network-colors {
+        &:has(.o_social_network_#{$name}) {
+            --o-social-accent: #{$color};
+        }
+    }
+}
+
+// The figures of a publication close the card with a rule of their own.
+.o_social_card .oe_kanban_footer {
+    margin-top: 0.5rem;
+    padding-top: 0.5rem;
+    border-top: 1px solid $border-color;
+}
+
+// The logo of a network, over the light tile the connectors' flat images need
+// to read on the card.
+.o_social_logo {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 3px;
+    object-fit: contain;
+    background-color: $o-gray-100;
+    border: 1px solid $o-gray-200;
+    border-radius: 0.5rem;
+}
+
+// The avatar of an account, with the logo of its network on the corner.
+.o_social_avatar {
+    width: 44px;
+    height: 44px;
+    flex-shrink: 0;
+    object-fit: cover;
+    background-color: $o-gray-100;
+    border: 1px solid $o-gray-300;
+    border-radius: 50%;
+}
+
+.o_social_avatar_wrap {
+    position: relative;
+
+    .o_social_network_badge {
+        position: absolute;
+        right: -3px;
+        bottom: -3px;
+        width: 18px;
+        height: 18px;
+        padding: 1px;
+        object-fit: contain;
+        background-color: #fff;
+        border: 1px solid $o-gray-300;
+        border-radius: 50%;
+    }
+}
+
+// The card of the Social Media kanban: the logo, the name, the description and
+// the action, with the button at the bottom whatever the description length.
+.o_social_media_card {
+    height: 100%;
+    min-height: 16rem;
+    text-align: center;
+
+    .o_social_media_cover {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem 0 0.75rem;
+    }
+
+    .o_social_media_logo {
+        width: 56px;
+        height: 56px;
+    }
+
+    .o_social_media_body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .o_social_media_name {
+        margin-bottom: 0.25rem;
+        font-size: 1rem;
+        font-weight: 600;
+        color: $o-main-text-color;
+    }
+
+    .o_social_media_description {
+        display: -webkit-box;
+        margin-bottom: 1rem;
+        overflow: hidden;
+        color: $o-main-color-muted;
+        font-size: 0.875rem;
+        line-height: 1.4;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 3;
+    }
+
+    .o_social_media_button {
+        width: 100%;
+    }
+}
+
+// The account card of the dashboard: a surface of its own, since it is drawn
+// outside a kanban record, with the same accent on the left edge.
+.o_social_account_card {
+    padding: 0.75rem 1rem;
+    color: $o-main-text-color;
+    background-color: $o-view-background-color;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    box-shadow: inset 3px 0 0 var(--o-social-accent, #{$o-community-color});
+
+    .o_social_account_header {
+        gap: 0.75rem;
+    }
+
+    .o_social_account_media {
+        color: $o-main-color-muted;
+        font-size: 0.75rem;
+        line-height: 1.2;
+    }
+
+    .o_social_account_name {
+        color: $o-main-text-color;
+        font-size: 0.95rem;
+        font-weight: 600;
+        line-height: 1.25;
+    }
+
+    .o_social_account_link {
+        color: $o-main-color-muted;
+
+        &:hover,
+        &:focus {
+            color: $o-community-color;
+        }
+    }
+
+    .o_social_account_metrics {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.75rem;
+        padding-top: 0.5rem;
+        border-top: 1px solid $border-color;
+        color: $o-main-color-muted;
+
+        .o_social_metric {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+            min-width: 0;
+
+            .o_social_metric_value {
+                display: flex;
+                align-items: center;
+                gap: 0.3rem;
+                color: $o-main-text-color;
+                font-size: 0.9rem;
+                font-weight: 600;
+
+                i {
+                    color: $o-main-color-muted;
+                }
+            }
+
+            .o_social_metric_label {
+                color: $o-main-color-muted;
+                font-size: 0.7rem;
+            }
+        }
+    }
+
+    .o_social_account_updated {
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        margin-top: 0.5rem;
+        color: $o-main-color-muted;
+        font-size: 0.72rem;
+    }
+}
+
+// Figures of a publication, in the footer of its card.
+.o_social_figures {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    color: $o-main-color-muted;
+    font-size: 0.8rem;
+
+    .o_social_figure {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.25rem;
+    }
+}
+
+// The comment count is the entry to the comments of the publication.
+.social-post-comment {
+    padding: 0;
+    color: $o-main-color-muted;
+    text-decoration: none;
+
+    &:hover,
+    &:focus {
+        color: $o-community-color;
+        text-decoration: none;
+    }
+}
+
+// Comments of a publication, in the dialog they are read and written in.
+.o_social_comments {
+    .o_social_comments_list {
+        max-height: 50vh;
+        overflow-y: auto;
+    }
+
+    .o_social_comment {
+        padding: 0.6rem 0;
+        border-bottom: 1px solid $border-color;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    .o_social_comment_meta {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        margin-bottom: 0.15rem;
+    }
+
+    .o_social_comment_author {
+        color: $o-main-text-color;
+        font-weight: 600;
+        font-size: 0.875rem;
+    }
+
+    .o_social_comment_date {
+        color: $o-main-color-muted;
+        font-size: 0.72rem;
+    }
+
+    .o_social_comment_text {
+        color: $o-main-text-color;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+    .o_social_comments_empty {
+        color: $o-main-color-muted;
+    }
+}

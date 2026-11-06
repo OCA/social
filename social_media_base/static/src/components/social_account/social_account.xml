@@ -5,7 +5,7 @@
 
     <t t-name="social_media_base.SocialAccount">
         <div
-            class="row d-flex flex-column justify-content-start flex-md-row w-100 px-4 "
+            class="row d-flex flex-column justify-content-start flex-md-row w-100 px-4 g-2"
         >
             <!-- One warning naming every flagged account, not one warning per
               account: the user has to know which ones to authorize again, and
@@ -38,56 +38,125 @@
             </div>
 
             <div
-                class="col-12 col-md-3 shadow bg-white pt-2 cursor-pointer w-md-25 m-2 rounded "
+                t-if="!props.socialAccounts.length"
+                class="w-100 text-center text-muted py-4"
+            >
+             <i class="fa fa-link me-1" aria-hidden="true" />
+             No accounts linked yet: link one from the Social Media page.
+         </div>
+
+            <div
+                t-attf-class="o_social_card o_social_account_card o_social_network_{{ social_account.media_type or 'none' }} col-12 col-sm-6 col-xl-3 cursor-pointer"
                 t-foreach="props.socialAccounts"
                 t-key="social_account.id"
                 t-as="social_account"
             >
-                <div class="d-flex justify-content-between">
-                    <div class="mx-1">
+                <div class="o_social_account_header">
+                    <div class="o_social_avatar_wrap position-relative flex-shrink-0">
                         <img
-                            class="me-2"
-                            height="50"
+                            class="o_social_avatar"
+                            width="44"
+                            height="44"
                             t-attf-src="/web/image/social.account/{{social_account.id}}/image_256"
-                            alt="Social Media"
+                            t-att-alt="social_account.name"
+                        />
+                        <img
+                            t-if="social_account.media_id"
+                            class="o_social_network_badge"
+                            t-attf-src="/web/image/social.media/{{social_account.media_id[0]}}/image"
+                            t-att-alt="social_account.media_id[1]"
                         />
                     </div>
-                    <div class="d-flex justify-content-center justify-content-between">
-                        [<span t-esc="social_account.media_id[1]" />]<span
-                        class="mx-1"
-                        t-esc="social_account.name"
-                    />
-                        <a
+                    <div class="o_social_account_title flex-grow-1 min-w-0">
+                        <div
+                            class="o_social_account_name text-truncate"
+                            t-esc="social_account.name"
+                        />
+                        <div class="o_social_account_handle text-truncate">
+                            <t t-if="social_account.username">
+                                @<t t-esc="social_account.username" />
+                            </t>
+                            <t
+                                t-if="social_account.username and social_account.media_id"
+                            >
+                                ·
+                            </t>
+                            <t t-if="social_account.media_id">
+                                <t t-esc="social_account.media_id[1]" />
+                            </t>
+                        </div>
+                    </div>
+                    <a
                         t-if="social_account.web_url"
                         t-att-href="social_account.web_url"
+                        class="o_social_account_link flex-shrink-0"
                         target="_blank"
+                        title="Go to account"
                     >
-                        Go to account
+                        <i class="fa fa-external-link" aria-label="Go to account" />
                     </a>
+                </div>
+                <div
+                    t-if="social_account.user_id or social_account.company_id"
+                    class="o_social_account_responsible"
+                >
+                    <img
+                        t-if="social_account.user_id"
+                        class="o_social_responsible_avatar"
+                        t-attf-src="/web/image/res.users/{{social_account.user_id[0]}}/avatar_128"
+                        t-att-alt="social_account.user_id[1]"
+                    />
+                    <span
+                        t-if="social_account.user_id"
+                        t-esc="social_account.user_id[1]"
+                    />
+                    <span
+                        t-if="social_account.user_id and social_account.company_id"
+                        class="o_social_dot"
+                    >·</span>
+                    <span
+                        t-if="social_account.company_id"
+                        t-esc="social_account.company_id[1]"
+                    />
+                </div>
+                <div class="o_social_account_metrics">
+                    <div class="o_social_metric" title="Followers">
+                        <span class="o_social_metric_value">
+                            <t t-esc="social_account.follower_count" />
+                        </span>
+                        <span class="o_social_metric_label">Followers</span>
+                    </div>
+                    <div class="o_social_metric" title="Posts">
+                        <span class="o_social_metric_value">
+                            <t t-esc="social_account.post_count" />
+                        </span>
+                        <span class="o_social_metric_label">Posts</span>
+                    </div>
+                    <div class="o_social_metric" title="Engagement">
+                        <span class="o_social_metric_value">
+                            <t t-esc="formatEngagement(social_account.engagement)" />
+                        </span>
+                        <span class="o_social_metric_label">Engagement</span>
                     </div>
                 </div>
-                <div class="d-flex justify-content-between">
-                    <div class="d-flex justify-content-center">
-                        <i class="text-700 fa fa-eye px-1 pt-1" />
-                        <span
-                            class="fw-bold px-1"
-                            t-esc="social_account.impression_count"
+                <div class="o_social_account_footer">
+                    <span
+                        t-if="social_account.last_update_account"
+                        class="o_social_account_updated"
+                    >
+                        <i class="fa fa-clock-o" aria-hidden="true" />
+                        <t
+                            t-esc="lastUpdateLabel(social_account.last_update_account)"
                         />
-                    </div>
-                    <div class="d-flex justify-content-center px-1">
-                        <i class="text-700 fa fa-hand-o-up px-1 pt-1" />
-                        <span
-                            class="fw-bold px-1"
-                            t-esc="social_account.interactions_count"
-                        />
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <i class="text-700 fa fa-star px-1 pt-1" />
-                        <span
-                            class="fw-bold px-1"
-                            t-esc="formatEngagement(social_account.engagement)"
-                        />
-                    </div>
+                    </span>
+                    <span
+                        t-if="social_account.need_update"
+                        class="o_social_reconnect"
+                        title="The credentials are no longer valid"
+                    >
+                        <i class="fa fa-exclamation-circle" aria-hidden="true" />
+                        Reconnect
+                    </span>
                 </div>
             </div>
         </div>

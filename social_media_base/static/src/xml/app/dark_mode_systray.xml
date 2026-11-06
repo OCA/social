@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="social_media_base.SocialDarkModeSystray">
+        <button
+            t-if="state.loaded"
+            type="button"
+            class="o_social_dark_toggle btn btn-link"
+            t-att-title="state.dark ? 'Use the light palette' : 'Use the dark palette'"
+            t-att-aria-pressed="state.dark"
+            t-on-click="toggle"
+        >
+            <i
+                t-att-class="state.dark ? 'fa fa-sun-o' : 'fa fa-moon-o'"
+                aria-hidden="true"
+            />
+        </button>
+    </t>
+</templates>

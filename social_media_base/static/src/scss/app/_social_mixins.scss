@@ -30,11 +30,13 @@
 
 @mixin span-social-images {
     span {
-        background-color: lightgrey !important;
+        color: $o-main-text-color !important;
+        background-color: $o-gray-200 !important;
 
         &:hover {
-            background-color: #71639e !important;
-            color: white !important;
+            background-color: $o-gray-300 !important;
         }
     }
 }
+
+// Kept for the modules that draw the counter with a span instead of a button.

@@ -1,0 +1,544 @@
+// Dark palette of the social media screens.
+//
+// It is opt-in, per user, and it only draws what the module itself paints:
+// the cards, the dashboard, the forms and the basic surfaces of the web
+// client they live in. The social media accents keep their colours, because
+// they are what identifies a network in either palette.
+
+$o-social-dark-bg: #111827;
+$o-social-dark-surface: #1f2937;
+$o-social-dark-surface-2: #273244;
+$o-social-dark-input: #0f172a;
+$o-social-dark-border: #374151;
+$o-social-dark-text: #e5e7eb;
+$o-social-dark-muted: #9ca3af;
+$o-social-dark-hover: #273244;
+
+body.o_social_dark {
+    --o-webclient-background-color: #{$o-social-dark-bg};
+    --o-view-background-color: #{$o-social-dark-surface};
+    --o-main-text-color: #{$o-social-dark-text};
+    --o-main-color-muted: #{$o-social-dark-muted};
+    --border-color: #{$o-social-dark-border};
+    --bs-body-bg: #{$o-social-dark-bg};
+    --bs-body-color: #{$o-social-dark-text};
+    --bs-border-color: #{$o-social-dark-border};
+
+    color: $o-social-dark-text;
+    background: $o-social-dark-bg;
+
+    .o_web_client,
+    .o_action_manager,
+    .o_content,
+    .o_form_view,
+    .o_kanban_view,
+    .o_list_view,
+    .o_calendar_view {
+        color: $o-social-dark-text;
+        background-color: $o-social-dark-bg;
+    }
+
+    .o_main_navbar {
+        background: $o-social-dark-surface !important;
+        background-image: none !important;
+        border-color: $o-social-dark-border;
+
+        .o_menu_brand,
+        .o_menu_sections a,
+        .o_menu_systray a,
+        .o_menu_systray button {
+            color: $o-social-dark-text;
+        }
+
+        .o_menu_sections a:hover,
+        .o_menu_systray a:hover,
+        .o_menu_systray button:hover {
+            background: $o-social-dark-hover;
+        }
+
+        .o_menu_sections,
+        .o_menu_brand,
+        .o_nav_entry,
+        .o_menu_systray {
+            color: $o-social-dark-text;
+            background-color: $o-social-dark-surface !important;
+            background-image: none !important;
+        }
+
+        .o_nav_entry.active,
+        .o_nav_entry:hover {
+            background-color: $o-social-dark-surface-2 !important;
+        }
+    }
+
+    .o_control_panel .o_breadcrumb,
+    .o_control_panel .breadcrumb {
+        color: $o-social-dark-text;
+        background: transparent !important;
+    }
+
+    .o_form_statusbar,
+    .o_statusbar_status,
+    .o_statusbar_buttons {
+        color: $o-social-dark-text !important;
+        background: $o-social-dark-bg !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_statusbar_status .o_arrow_button {
+        color: $o-social-dark-text !important;
+        background: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_statusbar_status .o_arrow_button.active {
+        color: $o-social-dark-text !important;
+        background: $o-social-dark-surface-2 !important;
+    }
+
+    .o_form_view .o_notebook .nav-tabs {
+        background: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_form_view .o_notebook .nav-tabs .nav-link,
+    .o_form_view .o_notebook .nav-tabs .nav-link.active {
+        color: $o-social-dark-text !important;
+        background: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .alert {
+        color: $o-social-dark-text !important;
+        background: $o-social-dark-surface-2 !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_kanban_record {
+        background: transparent !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_social_card .o_social_message,
+    .o_social_card .o_field_widget,
+    .o_social_card span:not(.badge),
+    .o_social_card small {
+        color: $o-social-dark-text !important;
+    }
+
+    .o_social_card .text-muted,
+    .o_social_card small.text-muted {
+        color: $o-social-dark-muted !important;
+    }
+
+    .o_notebook .o_list_renderer,
+    .o_notebook .o_list_table,
+    .o_notebook .o_list_table tbody tr,
+    .o_notebook .o_list_table tbody td {
+        color: $o-social-dark-text !important;
+        background: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_notebook .o_list_table thead th {
+        color: $o-social-dark-muted !important;
+        background: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_kanban_group_header,
+    .o_kanban_header,
+    .o_group_header,
+    .o_kanban_header * {
+        color: $o-social-dark-text !important;
+    }
+
+    .o_control_panel {
+        color: $o-social-dark-text;
+        background: $o-social-dark-bg;
+        border-color: $o-social-dark-border;
+
+        .breadcrumb,
+        .o_searchview_input,
+        .o_searchview_facet {
+            color: $o-social-dark-text;
+        }
+
+        .o_searchview {
+            background: $o-social-dark-surface;
+            border-color: $o-social-dark-border;
+        }
+
+        .btn-secondary,
+        .btn-light {
+            color: $o-social-dark-text;
+            background: $o-social-dark-surface;
+            border-color: $o-social-dark-border;
+        }
+    }
+
+    .o_form_sheet_bg {
+        background: $o-social-dark-bg;
+    }
+
+    .o_form_sheet {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_form_label,
+    .o_form_view label {
+        color: $o-social-dark-muted;
+    }
+
+    .o_input,
+    .o_field_widget input,
+    .o_field_widget textarea,
+    .o_field_widget select,
+    .o_searchview_input {
+        color: $o-social-dark-text;
+        background-color: $o-social-dark-input;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_notebook .nav-tabs {
+        border-color: $o-social-dark-border;
+
+        .nav-link {
+            color: $o-social-dark-muted;
+        }
+
+        .nav-link.active {
+            color: $o-social-dark-text;
+            background: $o-social-dark-surface;
+            border-color: $o-social-dark-border;
+        }
+    }
+
+    .o_kanban_renderer,
+    .o_kanban_group {
+        background: $o-social-dark-bg !important;
+    }
+
+    .o_kanban_group_header {
+        color: $o-social-dark-text;
+    }
+
+    .o_list_renderer {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+
+        .o_list_table {
+            color: $o-social-dark-text;
+
+            thead th {
+                color: $o-social-dark-muted;
+                background: $o-social-dark-surface;
+                border-color: $o-social-dark-border;
+            }
+
+            tbody td {
+                border-color: $o-social-dark-border;
+            }
+
+            tbody tr:hover {
+                background: $o-social-dark-hover;
+            }
+        }
+    }
+
+    .o_calendar_renderer {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+
+        .fc-col-header-cell,
+        .fc-daygrid-day,
+        .fc-timegrid-slot,
+        .fc-scrollgrid {
+            color: $o-social-dark-text;
+            background: $o-social-dark-surface;
+            border-color: $o-social-dark-border;
+        }
+
+        .fc-day-today {
+            background: $o-social-dark-hover;
+        }
+    }
+
+    .o-mail-Chatter,
+    .o-mail-Thread {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+    }
+
+    .o-mail-Message-content,
+    .o-mail-Message-header {
+        color: $o-social-dark-text;
+    }
+
+    .o_dialog .modal-content,
+    .modal-content {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+    }
+
+    .modal-header,
+    .modal-footer {
+        border-color: $o-social-dark-border;
+    }
+
+    .dropdown-menu {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+
+        .dropdown-item {
+            color: $o-social-dark-text;
+
+            &:hover,
+            &:focus {
+                background: $o-social-dark-hover;
+            }
+        }
+    }
+
+    // -----------------------------------------------------------------------
+    // The cards of the module
+    // -----------------------------------------------------------------------
+    .o_social_card,
+    .o_social_account_card,
+    .o_social_media_card,
+    .o_social_campaign_card,
+    .o_social_form_section,
+    .o_social_preview_card {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    }
+
+    .o_social_account_name,
+    .o_social_media_name,
+    .o_social_campaign_name,
+    .o_social_post_message,
+    .o_social_form_section h3,
+    .o_social_preview_title,
+    .o_social_kpi strong,
+    .o_social_card_header h2,
+    .o_social_statistics h1,
+    .o_social_media_body h5 {
+        color: $o-social-dark-text;
+    }
+
+    .o_social_account_handle,
+    .o_social_account_updated,
+    .o_social_metric_label,
+    .o_social_statistics_subtitle,
+    .o_social_card_hint,
+    .o_social_kpi_label,
+    .o_social_top_post_account,
+    .o_social_statistics_note,
+    .o_social_statistics_empty,
+    .o_social_statistics_loading,
+    .o_social_form_help,
+    .o_social_preview_hint,
+    .o_social_media_description,
+    .o_social_campaign_group,
+    .o_social_campaign_media,
+    .o_social_figure,
+    .o_social_responsible {
+        color: $o-social-dark-muted;
+    }
+
+    .o_social_metric_value {
+        color: $o-social-dark-text !important;
+    }
+
+    .o_social_account_metrics,
+    .o_social_form_section,
+    .o_social_top_posts_table th,
+    .o_social_top_posts_table td,
+    .o_social_post_card hr {
+        border-color: $o-social-dark-border;
+    }
+
+    .o_social_account_chip {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface-2;
+    }
+
+    .o_social_chip_network {
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_social_post_thumb,
+    .o_social_post_more {
+        background: $o-social-dark-surface-2;
+    }
+
+    .o_social_preview_card {
+        background: $o-social-dark-surface;
+
+        .o_social_post_video {
+            background: #000;
+        }
+    }
+
+    .o_social_statistics {
+        background: $o-social-dark-bg;
+    }
+
+    .o_social_kpi,
+    .o_social_chart_card,
+    .o_social_top_posts,
+    .o_social_breakdown,
+    .o_social_statistics_empty_card {
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_social_statistics_empty_card,
+    .o_social_statistics_empty_card p {
+        color: $o-social-dark-muted !important;
+    }
+
+    .o_social_period {
+        background: $o-social-dark-surface-2;
+
+        button {
+            color: $o-social-dark-muted;
+        }
+
+        button.active {
+            color: $o-social-dark-text;
+            background: $o-social-dark-surface;
+        }
+    }
+
+    .o_social_account_filter {
+        color: $o-social-dark-text;
+        background: $o-social-dark-input;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_social_chart_grid {
+        stroke: $o-social-dark-border;
+    }
+
+    .o_social_chart_axis {
+        fill: $o-social-dark-muted;
+    }
+
+    .o_social_top_posts_table th {
+        color: $o-social-dark-muted !important;
+    }
+
+    .o_social_top_posts_table td,
+    .o_social_top_posts_table td span,
+    .o_social_top_posts_table td a,
+    .o_social_breakdown_account span {
+        color: $o-social-dark-text !important;
+    }
+
+    .o_social_top_posts_table td .o_social_top_post_account,
+    .o_social_top_posts_table .o_social_top_post_account {
+        color: $o-social-dark-muted !important;
+    }
+
+    .o_social_breakdown_network {
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_social_comments,
+    .o_social_comment {
+        color: $o-social-dark-text;
+    }
+
+    .o_social_comment_author,
+    .o_social_comment_text {
+        color: $o-social-dark-text;
+    }
+
+    .o_social_comment_meta,
+    .o_social_comment_date,
+    .o_social_comments_empty {
+        color: $o-social-dark-muted;
+    }
+
+    .o_statusbar_status .btn {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_statusbar_status .btn.active {
+        background: $o-social-dark-surface-2;
+    }
+
+    .o_notebook .nav-tabs .nav-link,
+    .o_notebook .nav-tabs .nav-link.active {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_notebook .tab-pane,
+    .o_notebook .o_group,
+    .o_notebook .o_list_renderer {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface !important;
+    }
+
+    .o_field_many2many_binary,
+    .o_field_many2many_binary .o_attachment,
+    .o_attachment {
+        color: $o-social-dark-text;
+        background: $o-social-dark-surface-2 !important;
+        border-color: $o-social-dark-border;
+    }
+
+    .o_social_preview_card.bg-view,
+    .o_social_preview_card .bg-view {
+        color: $o-social-dark-text;
+        background-color: $o-social-dark-surface !important;
+        border-color: $o-social-dark-border !important;
+    }
+
+    .o_social_preview_card .text-muted,
+    .o_social_preview_card .text-secondary {
+        color: $o-social-dark-muted !important;
+    }
+
+    .o_social_preview_card .o_social_message,
+    .o_social_preview_card .social-text-justify {
+        color: $o-social-dark-text;
+    }
+
+    .alert-danger,
+    .alert-info,
+    .alert-warning {
+        border-width: 1px;
+    }
+
+    .alert-danger {
+        color: #fecdd3 !important;
+        background: #3b1d24 !important;
+        border-color: #7f1d1d !important;
+    }
+
+    .alert-info {
+        color: #bfdbfe !important;
+        background: #1e293b !important;
+        border-color: #1e40af !important;
+    }
+
+    .alert-warning {
+        color: #fde68a !important;
+        background: #3b2f1a !important;
+        border-color: #92400e !important;
+    }
+}

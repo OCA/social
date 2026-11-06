@@ -31,6 +31,10 @@
                 <field name="state" />
                 <field name="remote_ref" />
                 <field name="account_remote_ref" />
+                <field name="like_count" />
+                <field name="comment_count" />
+                <field name="comments_supported" />
+                <field name="impression_count" />
                 <templates>
                     <t t-name="menu">
                         <div class="p-1">
@@ -49,44 +53,129 @@
                             >Delete post</a>
                         </div>
                     </t>
-                    <t
-                        t-name="card"
-                        class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
-                    >
-                        <t t-call="social_media_base.postAccountHeader" />
-                        <div t-if="record.state.raw_value == 'deleted'" class="pt-1">
-                            <span
-                                class="badge text-bg-danger"
-                                title="This publication no longer exists on the social media"
-                            >
-                                <i class="fa fa-trash-o" aria-hidden="true" />
-                                Deleted on <t t-out="record.media_type.value" />
-                            </span>
-                        </div>
-
-                        <div class="oe_kanban_content">
-                            <t
-                                t-set="images"
-                                t-value="JSON.parse(record.image_urls.raw_value)"
-                            />
-                            <t t-call="social_media_base.postAccountMessageImages" />
-                            <t
-                                t-set="videos"
-                                t-value="JSON.parse(record.video_urls.raw_value)"
-                            />
+                    <t t-name="card">
+                        <div
+                            t-attf-class="o_social_card o_social_network_{{ record.media_type.raw_value or 'none' }} rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
+                        >
+                            <t t-call="social_media_base.postAccountHeader" />
                             <div
-                                t-if="videos.length or record.has_video.raw_value"
-                                class="d-flex align-items-center gap-2 pt-2"
+                                t-if="record.state.raw_value == 'deleted'"
+                                class="pt-1"
                             >
-                                <i class="fa fa-video-camera" aria-hidden="true" />
-                                <span t-if="videos.length">Video (<t
-                                    t-esc="videos.length"
-                                />)</span>
-                                <span t-else="">Video</span>
+                                <span
+                                    class="badge text-bg-danger"
+                                    title="This publication no longer exists on the social media"
+                                >
+                                    <i class="fa fa-trash-o" aria-hidden="true" />
+                                    Deleted on <t t-out="record.media_type.value" />
+                                </span>
                             </div>
-                        </div>
-                        <div class="oe_kanban_footer">
-                            <t t-call="social_media_base.postAccountFooter" />
+
+                            <div class="oe_kanban_content">
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value or '[]')"
+                                />
+                                <div
+                                    t-if="record.message.raw_value"
+                                    class="o_social_post_message"
+                                >
+                                    <t t-esc="record.message.raw_value" />
+                                </div>
+                                <div t-if="images.length" class="o_social_post_media">
+                                    <t
+                                        t-foreach="images.slice(0, 3)"
+                                        t-as="img"
+                                        t-key="img"
+                                    >
+                                        <div class="o_social_post_thumb">
+                                            <img t-att-src="img" alt="Image" />
+                                            <span
+                                                t-if="img_index == 2 and images.length > 3"
+                                                class="o_social_post_more"
+                                            >+<t t-esc="images.length - 3" /></span>
+                                        </div>
+                                    </t>
+                                </div>
+                                <t
+                                    t-set="videos"
+                                    t-value="JSON.parse(record.video_urls.raw_value or '[]')"
+                                />
+                                <div t-if="videos.length" class="o_social_post_video">
+                                    <video
+                                        t-att-src="videos[0]"
+                                        preload="metadata"
+                                        muted="muted"
+                                        playsinline="playsinline"
+                                    />
+                                    <i
+                                        class="fa fa-play-circle o_social_play"
+                                        aria-hidden="true"
+                                    />
+                                    <span
+                                        t-if="videos.length > 1"
+                                        class="o_social_post_more"
+                                    >+<t t-esc="videos.length - 1" /></span>
+                                </div>
+                                <div
+                                    t-elif="record.has_video.raw_value"
+                                    class="d-flex align-items-center gap-2 pt-2"
+                                >
+                                    <i class="fa fa-video-camera" aria-hidden="true" />
+                                    <span>Video</span>
+                                </div>
+                            </div>
+                            <div class="oe_kanban_footer">
+                                <div
+                                    class="d-flex align-items-center justify-content-between gap-2"
+                                >
+                                    <div
+                                        t-if="record.like_count.raw_value or record.comment_count.raw_value or record.impression_count.raw_value"
+                                        class="o_social_figures"
+                                    >
+                                        <span class="o_social_figure" title="Likes">
+                                            <i
+                                                class="fa fa-heart-o"
+                                                aria-hidden="true"
+                                            />
+                                            <t t-esc="record.like_count.raw_value" />
+                                        </span>
+                                        <button
+                                            t-if="record.comments_supported.raw_value"
+                                            type="button"
+                                            class="o_social_figure social-post-comment btn btn-link p-0"
+                                            title="Comments"
+                                        >
+                                            <i
+                                                class="fa fa-comments-o"
+                                                aria-hidden="true"
+                                            />
+                                            <t t-esc="record.comment_count.raw_value" />
+                                        </button>
+                                        <span
+                                            t-else=""
+                                            class="o_social_figure"
+                                            title="Comments"
+                                        >
+                                            <i
+                                                class="fa fa-comments-o"
+                                                aria-hidden="true"
+                                            />
+                                            <t t-esc="record.comment_count.raw_value" />
+                                        </span>
+                                        <span
+                                            class="o_social_figure"
+                                            title="Impressions"
+                                        >
+                                            <i class="fa fa-eye" aria-hidden="true" />
+                                            <t
+                                                t-esc="record.impression_count.raw_value"
+                                            />
+                                        </span>
+                                    </div>
+                                    <t t-call="social_media_base.postAccountFooter" />
+                                </div>
+                            </div>
                         </div>
                     </t>
                 </templates>
@@ -159,6 +248,7 @@
                     </div>
                     <group>
                         <group>
+                            <field name="post_account_url" invisible="1" />
                             <field name="account_id" />
                             <field name="media_id" />
                             <field name="post_id" />
@@ -171,6 +261,7 @@
                             <field name="state" widget="badge" />
                             <field name="published_date" />
                             <field name="is_scheduled" />
+                            <field name="remote_ref" invisible="1" />
                         </group>
                     </group>
                     <group string="Message">
@@ -191,11 +282,8 @@
                             <kanban create="0" delete="0" can_open="0">
                                 <field name="id" />
                                 <templates>
-                                    <t t-name="card" class="border-0">
-                                        <!-- The card lays its children out
-                                             in a flex column, which stretches
-                                             an image to its whole width. -->
-                                        <div>
+                                    <t t-name="card">
+                                        <div class="border-0">
                                             <img
                                                 t-attf-src="/web/image/#{record.id.raw_value}"
                                                 class="img-fluid rounded"
@@ -208,10 +296,10 @@
                         </field>
                     </group>
                     <group string="Videos" invisible="not video_ids and not has_video">
-                        <!-- A publication imported from the social media carries
-                             the flag, and the video itself only arrives as
-                             video_ids when the module that imports it downloads
-                             it. Otherwise it stays on the social media. -->
+                        <field name="has_video" invisible="1" />
+                        <!-- A publication imported from the social media only
+                             carries the flag: the video itself stays on the
+                             social media and is never downloaded. -->
                         <div
                             colspan="2"
                             class="text-muted"
@@ -234,17 +322,19 @@
                                 <field name="mimetype" />
                                 <field name="checksum" />
                                 <templates>
-                                    <t t-name="card" class="border-0">
-                                        <video
-                                            controls="controls"
-                                            preload="metadata"
-                                            class="img-fluid rounded"
-                                        >
-                                            <source
-                                                t-attf-src="/web/content/#{record.id.raw_value}?unique=#{record.checksum.raw_value}"
-                                                t-att-type="record.mimetype.raw_value"
-                                            />
-                                        </video>
+                                    <t t-name="card">
+                                        <div class="border-0">
+                                            <video
+                                                controls="controls"
+                                                preload="metadata"
+                                                class="img-fluid rounded"
+                                            >
+                                                <source
+                                                    t-attf-src="/web/content/#{record.id.raw_value}?unique=#{record.checksum.raw_value}"
+                                                    t-att-type="record.mimetype.raw_value"
+                                                />
+                                            </video>
+                                        </div>
                                     </t>
                                 </templates>
                             </kanban>
@@ -362,6 +452,16 @@
                     name="my_publications"
                     domain="[('user_id', '=', uid)]"
                 />
+                <filter
+                    string="My Accounts"
+                    name="my_accounts"
+                    domain="[('account_id.user_id', '=', uid)]"
+                />
+                <filter
+                    string="Needs Reconnection"
+                    name="needs_reconnection"
+                    domain="[('account_id.need_update', '=', True)]"
+                />
                 <separator />
                 <filter
                     string="Posted"
@@ -401,6 +501,12 @@
                         name="group_by_account_id"
                         domain="[]"
                         context="{'group_by': 'account_id'}"
+                    />
+                    <filter
+                        string="Social Media"
+                        name="group_by_media_id"
+                        domain="[]"
+                        context="{'group_by': 'media_id'}"
                     />
                     <filter
                         string="Campaign"
@@ -448,7 +554,9 @@
     </record>
 
     <template id="social_media_post_preview">
-        <div class="mb-2 p-3 border rounded bg-view social-text-justify">
+        <div
+            class="mb-2 p-3 border rounded bg-view social-text-justify o_social_preview_card"
+        >
             <div class="d-flex justify-content-start align-items-center">
                 <img
                     t-if="media_id.image"
@@ -493,11 +601,16 @@
                     >+<t t-out="hidden_image_count" /></span>
                 </div>
             </div>
-            <div t-if="video_ids" class="d-flex flex-column p-2 gap-1">
+            <div t-if="video_ids" class="d-flex flex-column p-2 gap-2">
                 <t t-foreach="video_ids" t-as="video_id">
-                    <div class="d-flex align-items-center gap-2">
-                        <i class="fa fa-video-camera" />
-                        <t t-out="video_id.name" />
+                    <div class="o_social_post_video">
+                        <video
+                            t-attf-src="/web/content/#{video_id.id}?download=false"
+                            preload="metadata"
+                            muted="muted"
+                            playsinline="playsinline"
+                        />
+                        <i class="fa fa-play-circle o_social_play" aria-hidden="true" />
                     </div>
                 </t>
                 <span t-if="hidden_video_count" class="badge text-bg-secondary">+<t

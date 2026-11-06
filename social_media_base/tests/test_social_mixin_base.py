@@ -87,10 +87,6 @@ class TestSocialMediaBaseMixin(TestSocialMediaBaseCommon):
         self.assertEqual(stored["message"], "<b>ok</b>")
         self.assertEqual(stored["message_type"], "success")
 
-    def test_notify_user_session_without_request_keeps_nothing(self):
-        with patch(PATCH_MIXIN_REQUEST, new=None):
-            self.SocialMediaBaseMixin._notify_user_session("boom")
-
     def test_notify_user_session_keeps_every_message(self):
         """A callback reporting twice must not lose what it said first."""
         mock_request = MagicMock(session={})
@@ -162,6 +158,10 @@ class TestSocialMediaBaseMixin(TestSocialMediaBaseCommon):
         wizard = self.WizardAccount.create({"media_id": self.social_media_id.id})
         wizard._set_csrf_state_token()
         self.assertFalse(wizard.csrf_state_token)
+
+    def test_notify_user_session_without_request_keeps_nothing(self):
+        with patch(PATCH_MIXIN_REQUEST, new=None):
+            self.SocialMediaBaseMixin._notify_user_session("boom")
 
     def test_notify_association_failure_keeps_the_message_in_the_session(self):
         mock_request = MagicMock(session={})

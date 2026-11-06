@@ -52,6 +52,15 @@ class WizardSocialAccount(models.TransientModel):
     def _get_url_redirect(self):
         """Return the OAuth callback URL, implemented by each connector."""
 
+    def _get_url_authorize(self):
+        """Return the action redirecting to the authorization page.
+
+        Extension point: a connector answers only for its own ``media_type``
+        and delegates to ``super()`` otherwise. It is what keeps the module
+        load order from deciding which social media is being authorized, since
+        every connector inherits this same wizard.
+        """
+
     def _action_add_account(self):
         """Redirect to the authorization page of the social media.
 

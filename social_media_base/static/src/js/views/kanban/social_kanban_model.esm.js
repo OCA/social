@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {RelationalModel} from "@web/model/relational_model/relational_model";
 
 export class SocialKanbanModel extends RelationalModel {
@@ -17,13 +19,19 @@ export class SocialKanbanModel extends RelationalModel {
         return [
             "id",
             "name",
+            "username",
             "company_id",
+            "user_id",
             "media_id",
+            "media_type",
             "web_url",
             "impression_count",
             "interactions_count",
+            "follower_count",
             "engagement",
+            "post_count",
             "need_update",
+            "last_update_account",
         ];
     }
 

@@ -6,6 +6,7 @@ from . import social_media_base_mixin
 from . import social_post_mixin
 from . import social_statistics_mixin
 from . import social_web_url_mixin
+from . import res_users
 from . import link_tracker
 from . import link_tracker_click
 from . import social_account

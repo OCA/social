@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 from . import test_social_common
+from . import test_tools_base
 from . import test_social_account_base
 from . import test_social_account_statistics
 from . import test_social_post_base

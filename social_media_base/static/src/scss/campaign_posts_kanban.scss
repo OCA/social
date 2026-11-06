@@ -8,9 +8,9 @@
 .o_field_widget[name="social_post_ids"] {
     .o_field_many2many_tags_avatar .o_tag {
         padding: 1px 6px 1px 1px;
-        border: 1px solid rgba(0, 0, 0, 0.12);
+        background-color: $o-view-background-color;
+        border: 1px solid $border-color;
         border-radius: 999px;
-        background-color: #fff;
     }
 
     // A long account name would otherwise widen its cell and, with it, the

@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {Component} from "@odoo/owl";
 import {SocialMessage} from "@social_media_base/components/social_message/social_message.esm";
 import {_t} from "@web/core/l10n/translation";

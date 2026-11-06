@@ -11,7 +11,7 @@
         <div class="d-flex align-items-center gap-2">
             <div class="flex-shrink-0">
                 <t
-                    t-if="record?.account_id"
+                    t-if="record.account_id.raw_value"
                     t-set="account_id"
                     t-value="record.account_id.raw_value"
                 />
@@ -22,9 +22,9 @@
                 />
                 <img
                     t-att-alt="record?.author.raw_value"
-                    class="o_object_fit_cover rounded"
-                    width="40"
-                    height="40"
+                    class="o_social_avatar"
+                    width="44"
+                    height="44"
                     loading="lazy"
                     t-attf-src="/web/image/social.account/{{account_id}}/image_128"
                 />

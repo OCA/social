@@ -29,7 +29,7 @@
                 <field name="like_count" type="measure" />
                 <field name="comment_count" type="measure" />
                 <field name="share_count" type="measure" />
-                <field name="engagement" type="measure" />
+                <field name="engagement_percent" type="measure" />
             </pivot>
         </field>
     </record>

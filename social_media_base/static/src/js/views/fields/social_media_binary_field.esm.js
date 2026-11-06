@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {
     Many2ManyBinaryField,
     many2ManyBinaryField,

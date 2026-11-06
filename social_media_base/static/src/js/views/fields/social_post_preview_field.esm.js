@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {Component, useEffect, useRef} from "@odoo/owl";
 import {
     MESSAGE_EXPANDED_CLASS,

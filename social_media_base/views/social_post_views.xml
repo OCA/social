@@ -37,23 +37,13 @@
                         invisible="active"
                         title="Bring the post back to the lists it was taken out of. It publishes nothing by itself."
                     />
-                    <field name="state" widget="statusbar" />
+                    <field
+                        name="state"
+                        widget="statusbar"
+                        options="{'clickable': false}"
+                    />
                     <field name="active" invisible="1" />
                 </header>
-                <div
-                    invisible="not message_error or state not in ('draft','planned')"
-                    class="alert alert-danger"
-                    role="alert"
-                >
-                    <field name="message_error" readonly="1" />
-                </div>
-                <div
-                    invisible="not message_info or state not in ('draft','planned')"
-                    class="alert alert-info"
-                    role="alert"
-                >
-                    <field name="message_info" readonly="1" />
-                </div>
                 <div
                     invisible="not any_failed_post"
                     class="alert alert-info"
@@ -77,66 +67,162 @@
                         bg_color="text-bg-danger"
                         invisible="active"
                     />
-                    <group>
-                        <group>
-                            <field
-                                name="account_ids"
-                                widget="many2many_tags"
-                                readonly="state != 'draft' or content_locked"
-                                options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True, 'no_open': True}"
-                            />
-                            <field
-                                name="message"
-                                readonly="state != 'draft' or content_locked"
-                            />
-                            <field
-                                name="image_ids"
-                                widget="social_media_binary"
-                                options="{'accepted_file_extensions': 'image/*'}"
-                                readonly="state != 'draft' or content_locked"
-                            />
-                            <field
-                                name="video_ids"
-                                widget="social_media_binary"
-                                options="{'accepted_file_extensions': 'video/*'}"
-                                readonly="state != 'draft' or content_locked"
-                            />
-                            <field
-                                name="campaign_id"
-                                readonly="state != 'draft' or content_locked"
-                            />
-                            <field
-                                name="send_post"
-                                readonly="state != 'draft' or content_locked"
-                                invisible="not message"
-                            />
-                            <field
-                                name="send_post_date"
-                                readonly="send_post != 'schedule' or state != 'draft' or content_locked"
-                                invisible="send_post != 'schedule'"
-                                required="send_post == 'schedule'"
-                                options="{'min_date': 'today'}"
-                            />
-                            <field
-                                name="user_id"
-                                readonly="1"
-                                groups="!social_media_base.group_social_media_manager"
-                            />
-                            <field
-                                name="user_id"
-                                groups="social_media_base.group_social_media_manager"
-                            />
-                        </group>
-                        <group invisible="state not in ('draft','planned','cancelled')">
-                            <div class="post-preview">
+                    <field name="hide_post" invisible="1" />
+                    <field name="any_failed_post" invisible="1" />
+                    <field name="content_locked" invisible="1" />
+                    <div class="o_social_form_layout">
+                        <div class="o_social_form_main">
+                            <section class="o_social_form_section">
+                                <h3>Accounts</h3>
+                                <field
+                                    name="account_ids"
+                                    widget="many2many_tags"
+                                    nolabel="1"
+                                    readonly="state != 'draft' or content_locked"
+                                    options="{'no_quick_create': True, 'no_create_edit': True, 'no_create': True, 'no_open': True}"
+                                />
+                                <p class="o_social_form_help">
+                                    A post can be sent to several accounts and
+                                    networks at once.
+                                </p>
+                            </section>
+                            <section class="o_social_form_section">
+                                <h3>Message</h3>
+                                <field
+                                    name="message"
+                                    nolabel="1"
+                                    readonly="state != 'draft' or content_locked"
+                                />
+                            </section>
+                            <section class="o_social_form_section">
+                                <h3>Media</h3>
+                                <div class="o_social_form_field mb-2">
+                                    <label
+                                        for="image_ids"
+                                        class="o_form_label"
+                                    >Images</label>
+                                    <field
+                                        name="image_ids"
+                                        nolabel="1"
+                                        widget="social_media_binary"
+                                        options="{'accepted_file_extensions': 'image/*'}"
+                                        readonly="state != 'draft' or content_locked"
+                                    />
+                                </div>
+                                <div class="o_social_form_field">
+                                    <label
+                                        for="video_ids"
+                                        class="o_form_label"
+                                    >Videos</label>
+                                    <field
+                                        name="video_ids"
+                                        nolabel="1"
+                                        widget="social_media_binary"
+                                        options="{'accepted_file_extensions': 'video/*'}"
+                                        readonly="state != 'draft' or content_locked"
+                                    />
+                                </div>
+                            </section>
+                            <section class="o_social_form_section">
+                                <h3>Publishing</h3>
+                                <div class="o_social_form_grid">
+                                    <div
+                                        class="o_social_form_field"
+                                        invisible="not message"
+                                    >
+                                        <label
+                                            for="send_post"
+                                            class="o_form_label"
+                                        >Send Post</label>
+                                        <field
+                                            name="send_post"
+                                            nolabel="1"
+                                            readonly="state != 'draft' or content_locked"
+                                        />
+                                    </div>
+                                    <div
+                                        class="o_social_form_field"
+                                        invisible="send_post != 'schedule'"
+                                    >
+                                        <label
+                                            for="send_post_date"
+                                            class="o_form_label"
+                                        >Send Post Date</label>
+                                        <field
+                                            name="send_post_date"
+                                            nolabel="1"
+                                            readonly="send_post != 'schedule' or state != 'draft' or content_locked"
+                                            required="send_post == 'schedule'"
+                                            options="{'min_date': 'today'}"
+                                        />
+                                    </div>
+                                    <div class="o_social_form_field">
+                                        <label
+                                            for="campaign_id"
+                                            class="o_form_label"
+                                        >Campaign</label>
+                                        <field
+                                            name="campaign_id"
+                                            nolabel="1"
+                                            readonly="state != 'draft' or content_locked"
+                                        />
+                                    </div>
+                                    <div class="o_social_form_field">
+                                        <label
+                                            for="user_id"
+                                            class="o_form_label"
+                                        >Responsible</label>
+                                        <field
+                                            name="user_id"
+                                            nolabel="1"
+                                            readonly="1"
+                                            groups="!social_media_base.group_social_media_manager"
+                                        />
+                                        <field
+                                            name="user_id"
+                                            nolabel="1"
+                                            groups="social_media_base.group_social_media_manager"
+                                        />
+                                    </div>
+                                </div>
+                            </section>
+                            <section
+                                class="o_social_form_section"
+                                invisible="not message_error and not message_info"
+                            >
+                                <h3>Validation</h3>
+                                <div
+                                    class="alert alert-danger mb-2"
+                                    role="alert"
+                                    invisible="not message_error"
+                                >
+                                    <field name="message_error" readonly="1" />
+                                </div>
+                                <div
+                                    class="alert alert-info mb-0"
+                                    role="alert"
+                                    invisible="not message_info"
+                                >
+                                    <field name="message_info" readonly="1" />
+                                </div>
+                            </section>
+                        </div>
+                        <aside class="o_social_form_preview">
+                            <section class="o_social_form_section">
+                                <div class="o_social_preview_header">
+                                    <span class="o_social_preview_title">Preview</span>
+                                    <span class="o_social_preview_hint">
+                                        How it will look on each network
+                                    </span>
+                                </div>
                                 <field
                                     name="post_preview"
                                     nolabel="1"
                                     widget="social_post_preview"
                                 />
-                            </div>
-                        </group>
-                    </group>
+                            </section>
+                        </aside>
+                    </div>
                     <notebook
                         invisible="state in ('draft','planned','cancelled') and (post_account_ids and not any_failed_post)"
                     >
@@ -157,7 +243,9 @@
                                     <field name="image_urls" />
                                     <field name="video_urls" />
                                     <field name="comment_count" />
+                                    <field name="comments_supported" />
                                     <field name="like_count" />
+                                    <field name="impression_count" />
                                     <field name="post_account_url" />
                                     <field name="author" />
                                     <field name="state" />
@@ -165,54 +253,113 @@
                                     <field name="account_id" />
                                     <field name="failed_description" />
                                     <templates>
-                                        <t
-                                            t-name="card"
-                                            class="rounded cursor-pointer oe_kanban_social_dashboard d-flex flex-column justify-content-between"
-                                        >
-                                            <div class="d-flex justify-content-end">
-                                                <field
-                                                    name="state"
-                                                    widget="badge"
-                                                    decoration-muted="state == 'ready'"
-                                                    decoration-success="state == 'posted'"
-                                                    decoration-danger="state in ('failed', 'deleted')"
-                                                />
-                                            </div>
-                                            <t
-                                                t-call="social_media_base.postAccountHeader"
-                                            />
-
-                                            <div class="oe_kanban_content">
-                                                <t
-                                                    t-set="images"
-                                                    t-value="JSON.parse(record.image_urls.raw_value)"
-                                                />
-                                                <t
-                                                    t-call="social_media_base.postAccountMessageImages"
-                                                />
-                                                <t
-                                                    t-set="videos"
-                                                    t-value="JSON.parse(record.video_urls.raw_value)"
-                                                />
-                                                <div
-                                                    t-if="videos.length"
-                                                    class="d-flex align-items-center gap-2 pt-2"
-                                                >
-                                                    <i
-                                                        class="fa fa-video-camera"
-                                                        aria-hidden="true"
-                                                    />
-                                                    <span>Video (<t
-                                                        t-esc="videos.length"
-                                                    />)</span>
-                                                </div>
-                                            </div>
+                                        <t t-name="card">
                                             <div
-                                                t-if="record.state.raw_value == 'failed' and record.failed_description.raw_value"
-                                                class="alert alert-danger mt-2 mb-0 p-2"
-                                                role="alert"
+                                                t-attf-class="o_social_card o_social_network_{{ record.media_type.raw_value or 'none' }} rounded oe_kanban_social_dashboard d-flex flex-column justify-content-between"
                                             >
-                                                <field name="failed_description" />
+                                                <div class="d-flex justify-content-end">
+                                                    <field
+                                                        name="state"
+                                                        widget="badge"
+                                                        decoration-muted="state == 'ready'"
+                                                        decoration-success="state == 'posted'"
+                                                        decoration-danger="state in ('failed', 'deleted')"
+                                                    />
+                                                </div>
+                                                <t
+                                                    t-call="social_media_base.postAccountHeader"
+                                                />
+
+                                                <div class="oe_kanban_content">
+                                                    <t
+                                                        t-set="images"
+                                                        t-value="JSON.parse(record.image_urls.raw_value or '[]')"
+                                                    />
+                                                    <t
+                                                        t-call="social_media_base.postAccountMessageImages"
+                                                    />
+                                                    <t
+                                                        t-set="videos"
+                                                        t-value="JSON.parse(record.video_urls.raw_value or '[]')"
+                                                    />
+                                                    <div
+                                                        t-if="videos.length"
+                                                        class="d-flex align-items-center gap-2 pt-2"
+                                                    >
+                                                        <i
+                                                            class="fa fa-video-camera"
+                                                            aria-hidden="true"
+                                                        />
+                                                        <span>Video (<t
+                                                            t-esc="videos.length"
+                                                        />)</span>
+                                                    </div>
+                                                </div>
+                                                <div
+                                                    t-if="record.state.raw_value == 'failed' and record.failed_description.raw_value"
+                                                    class="alert alert-danger mt-2 mb-0 p-2"
+                                                    role="alert"
+                                                >
+                                                    <field name="failed_description" />
+                                                </div>
+                                                <div class="oe_kanban_footer">
+                                                    <div
+                                                        t-if="record.like_count.raw_value or record.comment_count.raw_value or record.impression_count.raw_value"
+                                                        class="o_social_figures"
+                                                    >
+                                                        <span
+                                                            class="o_social_figure"
+                                                            title="Likes"
+                                                        >
+                                                            <i
+                                                                class="fa fa-heart-o"
+                                                                aria-hidden="true"
+                                                            />
+                                                            <t
+                                                                t-esc="record.like_count.raw_value"
+                                                            />
+                                                        </span>
+                                                        <button
+                                                            t-if="record.comments_supported.raw_value"
+                                                            type="button"
+                                                            class="o_social_figure social-post-comment btn btn-link p-0"
+                                                            title="Comments"
+                                                        >
+                                                            <i
+                                                                class="fa fa-comments-o"
+                                                                aria-hidden="true"
+                                                            />
+                                                            <t
+                                                                t-esc="record.comment_count.raw_value"
+                                                            />
+                                                        </button>
+                                                        <span
+                                                            t-else=""
+                                                            class="o_social_figure"
+                                                            title="Comments"
+                                                        >
+                                                            <i
+                                                                class="fa fa-comments-o"
+                                                                aria-hidden="true"
+                                                            />
+                                                            <t
+                                                                t-esc="record.comment_count.raw_value"
+                                                            />
+                                                        </span>
+                                                        <span
+                                                            class="o_social_figure"
+                                                            title="Impressions"
+                                                        >
+                                                            <i
+                                                                class="fa fa-eye"
+                                                                aria-hidden="true"
+                                                            />
+                                                            <t
+                                                                t-esc="record.impression_count.raw_value"
+                                                            />
+                                                        </span>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </t>
                                     </templates>
@@ -238,9 +385,14 @@
                 decoration-danger="state == 'cancelled'"
             >
                 <field name="message" />
-                <field name="account_ids" widget="many2many_tags" />
+                <field name="account_names" string="Accounts" />
+                <field name="published_date" optional="show" />
+                <field name="send_post_date" optional="hide" />
                 <field name="user_id" optional="show" />
                 <field name="campaign_id" optional="show" />
+                <field name="count_post_likes" optional="hide" />
+                <field name="count_post_comments" optional="hide" />
+                <field name="count_post_impression" optional="hide" />
                 <!-- The clicks Odoo counts on its own tracked links, the one
                      figure of a post base knows without asking a social
                      media. Hidden by default: it is the figure the campaign
@@ -248,6 +400,15 @@
                      social media report. Switched on from the column
                      selector. -->
                 <field name="link_click_count" optional="hide" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-muted="state == 'draft'"
+                    decoration-info="state in ('planned','publishing')"
+                    decoration-warning="state == 'partially_published'"
+                    decoration-success="state == 'published'"
+                    decoration-danger="state == 'cancelled'"
+                />
             </list>
         </field>
     </record>
@@ -259,77 +420,183 @@
             <kanban js_class="social_kanban">
                 <field name="id" />
                 <field name="account_ids" />
+                <field name="account_chips" />
                 <field name="campaign_id" />
                 <field name="message" />
                 <field name="published_date" />
+                <field name="send_post_date" />
+                <field name="count_post_likes" />
+                <field name="count_post_comments" />
+                <field name="count_post_impression" />
+                <field name="any_failed_post" />
                 <field name="image_urls" />
                 <field name="video_urls" />
                 <templates>
-                    <t t-name="card" class="rounded">
+                    <t t-name="card">
                         <div
-                            class="d-flex justify-content-between align-items-center o_social_post_card_header"
+                            class="o_social_card o_social_post_card oe_kanban_global_click rounded"
                         >
-                            <field name="account_ids" widget="many2many_tags" />
-                            <field
-                                name="state"
-                                widget="badge"
-                                decoration-muted="state == 'draft'"
-                                decoration-info="state in ('planned','publishing')"
-                                decoration-warning="state == 'partially_published'"
-                                decoration-success="state == 'published'"
-                                decoration-danger="state == 'cancelled'"
-                            />
-                        </div>
-                        <hr />
-                        <div t-if="record.message.raw_value">
-                            <field
-                                name="message"
-                                widget="social_message"
-                                class="social-text-justify"
-                            />
-                        </div>
-                        <t
-                            t-set="images"
-                            t-value="JSON.parse(record.image_urls.raw_value)"
-                        />
-                        <div
-                            t-if="images.length > record.countShowImage"
-                            class="row h-auto social-all-images"
-                        >
-                            <button class="btn btn-md active" role="button">
-                                + <t t-esc="images.length - record.countShowImage" />
-                            </button>
-                        </div>
-                        <div class="social-post-images">
-                            <div
-                                class="d-flex justify-content-center align-items-center gap-2 mt-1"
-                            >
-                                <t
-                                    t-foreach="images.slice(0,record.countShowImage)"
-                                    t-as="img"
-                                    t-key="img"
+                            <div class="d-flex flex-column">
+                                <div
+                                    class="d-flex justify-content-between align-items-center o_social_post_card_header"
                                 >
-                                    <img
-                                        t-att-src="img"
-                                        alt="Image"
-                                        class="img-fluid img-posts"
+                                    <t
+                                        t-set="chips"
+                                        t-value="JSON.parse(record.account_chips.raw_value or '[]')"
                                     />
-                                </t>
+                                    <div class="o_social_account_chips">
+                                        <t
+                                            t-foreach="chips"
+                                            t-as="chip"
+                                            t-key="chip.id"
+                                        >
+                                            <span class="o_social_account_chip">
+                                                <span class="o_social_chip_avatar_wrap">
+                                                    <img
+                                                        t-attf-src="/web/image/social.account/{{ chip.id }}/image_256"
+                                                        class="o_social_chip_avatar"
+                                                        t-att-alt="chip.name"
+                                                    />
+                                                    <img
+                                                        t-if="chip.media_id"
+                                                        t-attf-src="/web/image/social.media/{{ chip.media_id }}/image"
+                                                        class="o_social_chip_network"
+                                                        t-att-alt="chip.media_type"
+                                                    />
+                                                </span>
+                                                <span
+                                                    class="o_social_chip_name"
+                                                    t-esc="chip.name"
+                                                />
+                                            </span>
+                                        </t>
+                                    </div>
+                                    <field
+                                        name="state"
+                                        widget="badge"
+                                        decoration-muted="state == 'draft'"
+                                        decoration-info="state in ('planned','publishing')"
+                                        decoration-warning="state == 'partially_published'"
+                                        decoration-success="state == 'published'"
+                                        decoration-danger="state == 'cancelled'"
+                                    />
+                                </div>
+                                <hr />
+                                <div
+                                    t-if="record.message.raw_value"
+                                    class="o_social_post_message"
+                                >
+                                    <t t-esc="record.message.raw_value" />
+                                </div>
+                                <t
+                                    t-set="images"
+                                    t-value="JSON.parse(record.image_urls.raw_value or '[]')"
+                                />
+                                <div t-if="images.length" class="o_social_post_media">
+                                    <t
+                                        t-foreach="images.slice(0, 3)"
+                                        t-as="img"
+                                        t-key="img"
+                                    >
+                                        <div class="o_social_post_thumb">
+                                            <img t-att-src="img" alt="Image" />
+                                            <span
+                                                t-if="img_index == 2 and images.length > 3"
+                                                class="o_social_post_more"
+                                            >+<t t-esc="images.length - 3" /></span>
+                                        </div>
+                                    </t>
+                                </div>
+                                <t
+                                    t-set="videos"
+                                    t-value="JSON.parse(record.video_urls.raw_value or '[]')"
+                                />
+                                <div t-if="videos.length" class="o_social_post_video">
+                                    <video
+                                        t-att-src="videos[0]"
+                                        preload="metadata"
+                                        muted="muted"
+                                        playsinline="playsinline"
+                                    />
+                                    <i
+                                        class="fa fa-play-circle o_social_play"
+                                        aria-hidden="true"
+                                    />
+                                    <span
+                                        t-if="videos.length > 1"
+                                        class="o_social_post_more"
+                                    >+<t t-esc="videos.length - 1" /></span>
+                                </div>
+                                <t
+                                    t-set="campaignWrapperClass"
+                                    t-value="'mt-1 d-flex'"
+                                />
+                                <t t-call="social_media_base.campaignBadge" />
+                                <div
+                                    class="d-flex align-items-center justify-content-between gap-2 mt-1"
+                                >
+                                    <span
+                                        t-if="record.send_post_date.raw_value and record.state.raw_value in ('draft', 'planned')"
+                                        class="text-muted small"
+                                        title="Scheduled for"
+                                    >
+                                        <i class="fa fa-clock-o" aria-hidden="true" />
+                                        <field
+                                            name="send_post_date"
+                                            widget="datetime"
+                                            options="{'showSeconds': false}"
+                                        />
+                                    </span>
+                                    <span
+                                        t-if="record.state.raw_value == 'published' and record.published_date.raw_value"
+                                        class="text-muted small"
+                                        title="Published on"
+                                    >
+                                        <i
+                                            class="fa fa-calendar-check-o"
+                                            aria-hidden="true"
+                                        />
+                                        <field
+                                            name="published_date"
+                                            widget="datetime"
+                                            options="{'showSeconds': false}"
+                                        />
+                                    </span>
+                                    <span
+                                        t-if="record.any_failed_post.raw_value"
+                                        class="badge text-bg-danger o_social_post_error"
+                                        title="Some of the publications of this post failed"
+                                    >
+                                        <i
+                                        class="fa fa-exclamation-triangle"
+                                        aria-hidden="true"
+                                    />
+                                        Errors
+                                    </span>
+                                </div>
+                                <div
+                                    t-if="record.state.raw_value == 'published' or record.state.raw_value == 'partially_published'"
+                                    class="o_social_post_figures"
+                                >
+                                    <span title="Likes">
+                                        <i class="fa fa-heart-o" aria-hidden="true" />
+                                        <t t-esc="record.count_post_likes.raw_value" />
+                                    </span>
+                                    <span title="Comments">
+                                        <i class="fa fa-comment-o" aria-hidden="true" />
+                                        <t
+                                            t-esc="record.count_post_comments.raw_value"
+                                        />
+                                    </span>
+                                    <span title="Impressions">
+                                        <i class="fa fa-eye" aria-hidden="true" />
+                                        <t
+                                            t-esc="record.count_post_impression.raw_value"
+                                        />
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                        <t
-                            t-set="videos"
-                            t-value="JSON.parse(record.video_urls.raw_value)"
-                        />
-                        <div
-                            t-if="videos.length"
-                            class="d-flex align-items-center gap-2 mt-1"
-                        >
-                            <i class="fa fa-video-camera" aria-hidden="true" />
-                            <span>Video (<t t-esc="videos.length" />)</span>
-                        </div>
-                        <t t-set="campaignWrapperClass" t-value="'mt-1 d-flex'" />
-                        <t t-call="social_media_base.campaignBadge" />
                     </t>
                 </templates>
             </kanban>

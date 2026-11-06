@@ -1,6 +1,7 @@
 # Copyright 2026 Binhex <https://www.binhex.cloud>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
+import json
 import logging
 from datetime import timedelta
 
@@ -37,6 +38,8 @@ class SocialPost(models.Model):
     _description = "Content to Publish on Social Media"
 
     account_ids = fields.Many2many("social.account", required=True, ondelete="restrict")
+    account_chips = fields.Char(compute="_compute_account_chips")
+    account_names = fields.Char(compute="_compute_account_names")
     active = fields.Boolean(default=True)
     user_id = fields.Many2one(
         "res.users",
@@ -68,7 +71,7 @@ class SocialPost(models.Model):
         help="Date the post is sent to the social media. Switching to "
         "'Schedule' proposes one hour from now, and it can be changed.",
     )
-    published_date = fields.Datetime(tracking=True)
+    published_date = fields.Datetime(tracking=True, copy=False)
     state = fields.Selection(
         [
             ("draft", "Draft"),
@@ -81,7 +84,7 @@ class SocialPost(models.Model):
         default="draft",
         tracking=True,
     )
-    post_account_ids = fields.One2many("social.post.account", "post_id")
+    post_account_ids = fields.One2many("social.post.account", "post_id", copy=False)
     count_post_likes = fields.Integer(
         compute="_compute_post_statistics", default=0, string="Likes"
     )
@@ -127,7 +130,7 @@ class SocialPost(models.Model):
         column2="video_id",
         ondelete="restrict",
     )
-    post_preview = fields.Html(compute="_compute_post_preview", store=True)
+    post_preview = fields.Html(compute="_compute_post_preview")
     message_info = fields.Text(
         compute="_compute_post_check_messages",
         help="What a social media of the post is going to publish differently "
@@ -192,6 +195,7 @@ class SocialPost(models.Model):
             self._release_media_attachments(released)
         return res
 
+    @api.ondelete(at_uninstall=False)
     def _unlink_guard_not_published(self):
         """Stop the deletion of a post still published on a social media.
 
@@ -255,6 +259,11 @@ class SocialPost(models.Model):
 
         :param vals: the values about to be written.
         """
+        if self.env.context.get("social_purge_account"):
+            # Purging an account removes its publications from a post that
+            # keeps being published on the others: that is not editing the
+            # content of something online.
+            return
         if not any(field in vals for field in self._get_locked_content_fields()):
             return
         locked = self.filtered("content_locked")
@@ -278,8 +287,12 @@ class SocialPost(models.Model):
 
         :rtype: odoo.models.Model
         """
-        return self.with_context(active_test=False).post_account_ids.filtered(
-            lambda line: line.remote_ref or line.state == "posted"
+        return (
+            self.with_context(active_test=False)
+            .sudo()
+            .post_account_ids.filtered(
+                lambda line: line.remote_ref or line.state == "posted"
+            )
         )
 
     @api.depends("post_account_ids.remote_ref", "post_account_ids.state")
@@ -528,6 +541,19 @@ class SocialPost(models.Model):
                 counts.get(post_account.id, 0) for post_account in post.post_account_ids
             )
 
+    def copy_data(self, default=None):
+        """Copy the content of a post, never its history.
+
+        A duplicate is a new draft: the publications, the dates and the
+        figures of the original stay with it. ``post_account_ids`` is not
+        copied, so the duplicate is drawn from the accounts the user picks.
+        """
+        values = super().copy_data(default=default)
+        return [
+            dict(vals, state="draft", send_post="now", send_post_date=False)
+            for vals in values
+        ]
+
     def _get_media_types_domain(self, media_types):
         """Return the domain of the publications a connector has to send.
 
@@ -542,6 +568,7 @@ class SocialPost(models.Model):
         return [
             ("media_type", "in", media_types),
             ("post_id", "=", self.id),
+            ("account_id", "in", self.account_ids.ids),
             ("state", "in", ("ready", "failed")),
         ]
 
@@ -640,6 +667,33 @@ class SocialPost(models.Model):
         return (
             render_template if render_template else self.env._("No preview available")
         )
+
+    @api.depends("account_ids.name")
+    def _compute_account_names(self):
+        """The accounts of the post as one line, for the list view."""
+        for post in self:
+            post.account_names = ", ".join(post.account_ids.mapped("name"))
+
+    @api.depends("account_ids.name", "account_ids.media_id")
+    def _compute_account_chips(self):
+        """The avatars and network badges the cards draw, as plain JSON.
+
+        The kanban only receives the identifiers of the accounts; the avatar
+        and the badge are read from the records themselves when the card is
+        drawn.
+        """
+        for post in self:
+            post.account_chips = json.dumps(
+                [
+                    {
+                        "id": account.id,
+                        "name": account.name,
+                        "media_id": account.media_id.id,
+                        "media_type": account.media_id.media_type,
+                    }
+                    for account in post.account_ids
+                ]
+            )
 
     @api.depends("account_ids.media_id", "message", "image_ids", "video_ids")
     def _compute_post_preview(self):
@@ -768,9 +822,29 @@ class SocialPost(models.Model):
         pending._shorten_message_links()
 
     def _action_create_post_account(self):
-        """Send the posts to the social media and update their state."""
+        """Send the posts to the social media and update their state.
+
+        Publishing is an irreversible external effect and two actors can
+        meet here: the scheduled job and the button the user presses. The
+        post is locked before anything is prepared, and one that is already
+        being sent — or already sent while this transaction was looking at
+        it — is skipped instead of sending it twice.
+        """
         SocialPostAccount = self.env["social.post.account"]
-        for post in self:
+        for post in self.try_lock_for_update():
+            # A free row can mean the other transaction already committed,
+            # and a skipped one is being sent right now: only a state read
+            # under the lock tells the two apart.
+            post.invalidate_recordset()
+            if post.state in ("publishing", "published"):
+                continue
+            if not post.active:
+                raise UserError(
+                    self.env._(
+                        "%(post)s is archived: restore it before publishing it.",
+                        post=post.display_name,
+                    )
+                )
             if not post.account_ids:
                 raise UserError(
                     self.env._(
@@ -803,12 +877,10 @@ class SocialPost(models.Model):
         self.ensure_one()
         lines = self.post_account_ids
         if lines and all(line.state == "posted" for line in lines):
-            self.write(
-                {
-                    "state": "published",
-                    "published_date": fields.Datetime.now(),
-                }
-            )
+            values = {"state": "published"}
+            if not self.published_date:
+                values["published_date"] = fields.Datetime.now()
+            self.write(values)
         elif any(line.state == "posted" for line in lines):
             values = {"state": "partially_published"}
             if not self.published_date:
@@ -818,6 +890,11 @@ class SocialPost(models.Model):
                 lines.filtered(lambda line: line.state == "failed")
             )
         elif lines and all(line.state == "failed" for line in lines):
+            self.write({"state": "draft"})
+        else:
+            # Lines left in ``ready`` mean no connector answered for them: the
+            # post cannot stay in ``publishing``, where the cron skips it and
+            # the buttons are hidden.
             self.write({"state": "draft"})
 
     def _notify_partial_publication(self, failed_lines):

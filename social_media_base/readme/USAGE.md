@@ -9,8 +9,10 @@ Posts on the dashboard.
   and a failed one never got there, so neither of them is listed: they are
   followed from the *Posts* menu, on the post they belong to, and the
   scheduled ones also in the calendar.
-- Posts that contain a video display a video indicator on their card, and
-  the posts kanban shows a *Video (N)* counter.
+- The card of a post previews its media: up to three images in a grid, and
+  the first frame of a video with a play button. The same preview is drawn on
+  the publications of the dashboard and on the post form, which redraws it as
+  the message and the media change.
 - Opening a single publication shows it read-only, with its account, its
   state, its message, its images, its videos and its statistics. A
   publication mirrors the social media, so nothing is written from there.
@@ -25,10 +27,9 @@ Posts on the dashboard.
   exists — one that failed shows them just like one that went through — and a
   picture sent to several accounts is stored once, not once per account.
 - A publication imported from the social media is the only one that keeps
-  medias of its own, because it has no post to share them with. It carries
-  the video itself when the module that imports it downloads it. Otherwise it
-  only carries the flag saying it has a video, and the video is watched on the
-  social media.
+  medias of its own, because it has no post to share them with. It only
+  carries the flag saying it has a video, never the file: the video is watched
+  on the social media.
 - Posts deleted directly on the social media are marked as *Deleted on
   \<media\>* and kept in the dashboard as history. Opening one is what
   notices it here. Finding out on its own, without anybody opening anything,
@@ -48,11 +49,13 @@ Posts on the dashboard.
   too. To keep the history, archive the post instead of deleting its
   publications.
 
-- The figures of an account card — impressions, interactions, engagement —
-  are added up when the dashboard opens, from the daily series of the account
-  when it has one and from the counters of its publications otherwise. It
-  asks the social media for nothing, so opening the dashboard is free however
-  many publications the account has.
+- The figures of an account card are the followers it reports, the posts it
+  has, and the engagement of those posts; the followers come from the
+  connector, because only the social media knows them. The engagement is
+  added up when the dashboard opens, from the daily series of the account when
+  it has one and from the counters of its publications otherwise. It asks the
+  social media for nothing, so opening the dashboard is free however many
+  publications the account has.
 - The engagement of a card is **derived** from those totals: the interactions
   of the account over its impressions, shown as a percentage. It is not the
   average of the rates of the days or of the publications, which would give a
@@ -78,11 +81,18 @@ Posts on the dashboard.
 Statistics.
 ---------------
 
-- Go to *Social Media* > Statistics
-- The view is a standard Odoo graph over the daily statistics of the
-  accounts: one row per account and day, so the search panel, the group by,
-  the comparison against the previous period or year, the favourites and the
-  export all work as they do anywhere else in Odoo.
+- Go to *Social Media* > Statistics. It opens a dashboard with the period
+  (7, 30 or 90 days) and the account as filters, four figures — followers,
+  impressions, engagement and posts — and, for the period, the impressions
+  per day, the engagement rate per day, the posts with the most impressions
+  and a breakdown by account with its followers, impressions and engagement.
+- Every figure of the screen comes from the daily statistics of the accounts
+  and from the publications of the period; the screen stores nothing of its
+  own. A day or an account with no figure is drawn as a zero, never invented.
+- *Detailed view* opens the standard Odoo graph and pivot over the daily
+  statistics of the accounts: one row per account and day, so the search
+  panel, the group by, the comparison against the previous period or year,
+  the favourites and the export all work as they do anywhere else in Odoo.
 - The line drawn is the impressions, with one series per account. A graph
   draws one measure at a time, so picking *Likes*, *Comments*, *Shares*,
   *Clicks* or *Engagement* in the measure selector replaces it. The **pivot**
@@ -234,7 +244,8 @@ What the social media will refuse.
 Marketing campaigns.
 ---------------
 
-- The marketing campaigns are reached from *Social Media* > *Campaigns*, so
+- The marketing campaigns (`utm.campaign`) are reached from *Social Media* >
+  *Configuration* > *UTM Campaigns*, so
   they can be managed without leaving the application. It is the campaign
   list of the whole database, the same one the other applications feed, so it
   also shows the campaigns created for mailings or leads.
@@ -404,11 +415,8 @@ Statistics of the accounts.
   that costs a call per account, and it is meant to: a person asked for it.
   The same press also reads back the figures of the publications of the last
   30 days, and opening a card costs the one call that asks whether that
-  publication is still online. The dashboard counts as updated when the
-  social media answered for the figures by day or for any publication of
-  those 30 days, so an account whose social media reports no figures by day
-  is updated through its publications. Only when the social media answered
-  for neither does the *Update* button say there is nothing to bring in,
+  publication is still online. If no account of the dashboard reports
+  figures by day, the *Update* button says there is nothing to bring in
   rather than announcing an update that did not happen.
 - Opening the dashboard itself costs nothing at all. There is no throttle on
   the *Update* button for that reason: there is nothing to protect.

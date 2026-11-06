@@ -15,6 +15,7 @@ from odoo.service.model import PG_CONCURRENCY_ERRORS_TO_RETRY
 from odoo.tools import file_open
 
 from ..exceptions import SocialCredentialsError
+from ..tools import media_attachment_token
 
 _logger = logging.getLogger(__name__)
 
@@ -37,6 +38,23 @@ class SocialAccount(models.Model):
         "social.web.url.mixin",
     ]
     _description = "Account Linked to a Social Media"
+
+    def _media_public_url(self, route, attachment):
+        """Return the signed public URL of a media to hand to a social media.
+
+        The connector gives the social network this address so it can
+        download the image or the video while the post is being published.
+        The signature keeps the endpoint from serving any other attachment:
+        only the addresses the instance itself generated are answered.
+
+        :param str route: the connector's public route, without the id.
+        :param attachment: the ``ir.attachment`` to expose.
+        :rtype: str
+        """
+        token = media_attachment_token(self.env, attachment.id)
+        # Concatenated and not joined: a `urljoin` would drop the path of the
+        # base URL when the instance lives under a subpath.
+        return f"{self.get_base_url().rstrip('/')}{route}/{attachment.id}?token={token}"
 
     @api.model
     def _default_image(self):
@@ -65,6 +83,10 @@ class SocialAccount(models.Model):
         index=True,
         help="Identifier of this account on the social media. It is set by "
         "the connector module of each social media.",
+    )
+    _remote_ref_uniq = models.Constraint(
+        "unique(media_id, remote_ref)",
+        "The remote reference must be unique per social media.",
     )
     last_update_account = fields.Datetime()
     post_account_ids = fields.One2many("social.post.account", "account_id")
@@ -104,6 +126,10 @@ class SocialAccount(models.Model):
         "its responsible user and the social media administrators.",
     )
     post_count = fields.Integer(compute="_compute_post_count")
+    follower_count = fields.Integer(
+        default=0,
+        help="Followers reported by the social media, when it reports them.",
+    )
     utm_campaign_count = fields.Integer(compute="_compute_utm_campaign_count")
 
     @api.depends("post_ids")
@@ -227,6 +253,7 @@ class SocialAccount(models.Model):
             account.can_manage_account = is_manager or account.user_id == self.env.user
 
     def action_update_account(self):
+        self.ensure_one()
         return {
             "res_model": "wizard.social.account",
             "views": [[False, "form"]],
@@ -441,13 +468,13 @@ class SocialAccount(models.Model):
             self.env.user.login,
             accounts.mapped("display_name"),
         )
-        post_accounts.unlink()
+        post_accounts.with_context(social_delete_publication=True).unlink()
         posts.unlink()
         if shared_posts:
-            shared_posts.write(
+            shared_posts.with_context(social_purge_account=True).write(
                 {"account_ids": [Command.unlink(account.id) for account in accounts]}
             )
-        accounts._purge_linked_records()
+        accounts.with_context(social_purge_account=True)._purge_linked_records()
         accounts.unlink()
         action = self.env["ir.actions.act_window"]._for_xml_id(
             "social_media_base.social_account_action"
@@ -583,7 +610,7 @@ class SocialAccount(models.Model):
         :return: whether anything was recomputed.
         :rtype: bool
         """
-        accounts = self or self.sudo().search([], limit=None)
+        accounts = self or self.env["social.account"].search([], limit=None)
         return accounts._refresh_account_statistics()
 
     def refresh_dashboard_statistics(self):
@@ -612,23 +639,14 @@ class SocialAccount(models.Model):
         pressing the button, and a button that answers with the same figures
         looks broken — which is exactly what it is there to fix.
 
-        The dashboard counts as updated when the social media answered for
-        the daily series or for any publication of the window, and the button
-        only says there is nothing to bring in when it answered for neither:
-        a social media that reports nothing by day still updates the card
-        through its publications. The window is read even when the series
-        already answered, so a social media with a daily series keeps reading
-        the figures of its publications.
-
-        :return: whether the social media answered for the daily series or
-            for any publication of the window.
+        :return: whether anything was refreshed.
         :rtype: bool
         """
-        accounts = self or self.sudo().search([], limit=None)
+        accounts = self or self.env["social.account"].search([], limit=None)
         refreshed = accounts._refresh_statistics()
-        answered = accounts._refresh_window_statistics()
+        accounts._refresh_window_statistics()
         accounts._refresh_account_statistics()
-        return bool(refreshed or answered)
+        return refreshed
 
     def _refresh_account_statistics(self):
         """Recompute the figures of the account from what Odoo already stores.
@@ -921,6 +939,15 @@ class SocialAccount(models.Model):
         """
         return False
 
+    def _update_account_data(self):
+        """Refresh the name and the figure of the account from the social media.
+
+        Extension point: a connector answers only for its own ``media_type``
+        and delegates to ``super()`` otherwise. Every connector inherits this
+        same model, so without the guard the method of the first module loaded
+        would answer for the accounts of the others.
+        """
+
     def _flag_credentials_expired(self, message):
         """Record that this account needs the user to authorize it again.
 
@@ -1090,6 +1117,22 @@ class SocialAccount(models.Model):
         """
         domain = self._get_check_media_updates_domain() + [("need_update", "=", False)]
         return self.sudo().search(domain)._refresh_window_statistics()
+
+    def _trigger_initial_sync(self):
+        """Schedule the statistics refresh right after linking an account.
+
+        The figures of a freshly linked account are not read inline: the
+        refresh is a bounded pass over the recent publications, and what the
+        cron leaves is what the dashboard shows. Scheduling it here is what
+        makes the dashboard fill in on its own instead of waiting for the
+        next daily pass.
+        """
+        cron = self.env.ref(
+            "social_media_base.refresh_post_statistics_job",
+            raise_if_not_found=False,
+        )
+        if cron:
+            cron.sudo()._trigger()
 
     def _notify_accounts_by_partner(
         self, bus_type, need_update=True, payload_accounts=True

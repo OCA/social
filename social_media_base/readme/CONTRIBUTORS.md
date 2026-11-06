@@ -4,3 +4,6 @@
 
 - [Tecnativa](https://www.tecnativa.com):
   - Pedro M. Baeza <pedro.baeza@tecnativa.com>
+
+- [Domatix](https://www.domatix.cloud):
+  - Idris <idris@domatix.cloud>

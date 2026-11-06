@@ -6,14 +6,14 @@
         <field name="name">Associate Social Account</field>
         <field name="model">wizard.social.account</field>
         <field name="arch" type="xml">
-            <form>
+            <form class="o_social_wizard">
                 <field
                     name="image"
                     widget="image"
-                    class="oe_avatar"
+                    class="oe_avatar o_social_wizard_avatar"
                     invisible="context.get('social_update_account', False)"
                 />
-                <div class="oe_title mb24">
+                <div class="oe_title o_social_wizard_title mb24">
                     <h1>
                         <field
                             name="media_id"
@@ -42,7 +42,12 @@
                         invisible="not context.get('social_update_account', False)"
                     />
                 </group>
-                <group name="social_account_data" />
+                <group name="social_account_data" class="o_social_wizard_fields">
+                    <!-- Declared once here: every connector aims its own
+                         fields at this group and reads media_type in their
+                         invisible and required expressions. -->
+                    <field name="media_type" invisible="1" />
+                </group>
                 <footer>
                     <button
                         name="action_associate_social_account"

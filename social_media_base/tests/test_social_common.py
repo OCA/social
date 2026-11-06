@@ -95,13 +95,8 @@ class TestSocialMediaBaseCommon(BaseCommon):
         ``alpha=self.social_media_id`` writing ``"alpha"`` on that media.
         """
         field = self.SocialMedia._fields["media_type"]
-        selection = [(media_type, media_type) for media_type in media_by_type]
-        # ``_selection`` is what a write is validated against, and it is
-        # computed once when the field is set up, so both are faked.
-        with (
-            patch.object(field, "selection", new=selection),
-            patch.object(field, "_selection", new=dict(selection)),
-        ):
+        selection = {media_type: media_type for media_type in media_by_type}
+        with patch.object(field, "_selection", new=selection):
             for media_type, media in media_by_type.items():
                 media.write({"media_type": media_type})
             yield
