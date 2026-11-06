@@ -1,0 +1,179 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_facebook
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-19 09:35+0000\n"
+"PO-Revision-Date: 2026-08-19 09:35+0000\n"
+"Last-Translator: Domatix\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/wizards/wizard_social_account.py:0
+msgid ""
+"Account access could not be authorized. Please check your settings or try "
+"again later."
+msgstr ""
+"No se pudo autorizar el acceso a la cuenta. Revisa la configuración o "
+"inténtalo de nuevo más tarde."
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/wizards/wizard_social_account.py:0
+msgid "An account with that information already exists."
+msgstr "Ya existe una cuenta con esa información."
+
+#. module: social_media_facebook
+#: model:ir.model,name:social_media_facebook.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "Could not find any Facebook page to add."
+msgstr "No se encontró ninguna página de Facebook para añadir."
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_account__display_name
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_media__display_name
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_post__display_name
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_post_account__display_name
+#: model:ir.model.fields,field_description:social_media_facebook.field_wizard_social_account__display_name
+msgid "Display Name"
+msgstr "Nombre visible"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_post_account.py:0
+msgid "Error Comment Facebook: %(error)s"
+msgstr "Error al comentar en Facebook: %(error)s"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_post_account.py:0
+msgid "Error Delete Comment Facebook: %(error)s"
+msgstr "Error al borrar el comentario de Facebook: %(error)s"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_post_account.py:0
+msgid "Error Get Comments for Facebook post: %(error)s"
+msgstr ""
+"Error al obtener los comentarios de la publicación de Facebook: %(error)s"
+
+#. module: social_media_facebook
+#: model:ir.model.fields.selection,name:social_media_facebook.selection__social_media__media_type__facebook
+#: model_terms:ir.ui.view,arch_db:social_media_facebook.social_account_view_form_inherit
+msgid "Facebook"
+msgstr "Facebook"
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_account__facebook_access_token
+msgid "Facebook Access Token"
+msgstr "Token de acceso de Facebook"
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_account__facebook_account_id
+msgid "Facebook Account"
+msgstr "Cuenta de Facebook"
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_account__facebook_app_id
+#: model:ir.model.fields,field_description:social_media_facebook.field_wizard_social_account__facebook_app_id
+msgid "Facebook App ID"
+msgstr "App ID de Facebook"
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_account__facebook_app_secret
+#: model:ir.model.fields,field_description:social_media_facebook.field_wizard_social_account__facebook_app_secret
+msgid "Facebook App Secret"
+msgstr "App Secret de Facebook"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "Facebook album upload failed: %(error)s"
+msgstr "Fallo al subir el álbum de Facebook: %(error)s"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "Facebook page lookup failed: %(error)s"
+msgstr "Fallo al consultar las páginas de Facebook: %(error)s"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "Facebook post deletion failed: %(error)s"
+msgstr "Fallo al borrar la publicación de Facebook: %(error)s"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "Facebook publish failed: %(error)s"
+msgstr "Fallo al publicar en Facebook: %(error)s"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "Facebook token exchange failed: %(error)s"
+msgstr "Fallo al intercambiar el token de Facebook: %(error)s"
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_account__id
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_media__id
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_post__id
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_post_account__id
+#: model:ir.model.fields,field_description:social_media_facebook.field_wizard_social_account__id
+msgid "ID"
+msgstr "ID"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid ""
+"Invalid OAuth state token. Please restart the account association process."
+msgstr ""
+"Token de estado OAuth no válido. Reinicia el proceso de asociación de la "
+"cuenta."
+
+#. module: social_media_facebook
+#: model:ir.model.fields,field_description:social_media_facebook.field_social_media__media_type
+msgid "Media Type"
+msgstr "Tipo de medio"
+
+#. module: social_media_facebook
+#: model:ir.model,name:social_media_facebook.model_social_account
+msgid "Social Account"
+msgstr "Cuenta social"
+
+#. module: social_media_facebook
+#: model:ir.model,name:social_media_facebook.model_social_media
+msgid "Social Media"
+msgstr "Red social"
+
+#. module: social_media_facebook
+#: model:ir.model,name:social_media_facebook.model_social_post
+msgid "Social Post"
+msgstr "Publicación"
+
+#. module: social_media_facebook
+#: model:ir.model,name:social_media_facebook.model_social_post_account
+msgid "Social Post Account"
+msgstr "Cuenta de la publicación"
+
+#. module: social_media_facebook
+#. odoo-python
+#: code:addons/social_media_facebook/models/social_account.py:0
+msgid "You need to manage at least one Facebook page."
+msgstr "Debes administrar al menos una página de Facebook."
