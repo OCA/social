@@ -1,0 +1,231 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* social_media_instagram
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-08-19 09:35+0000\n"
+"PO-Revision-Date: 2026-08-19 09:35+0000\n"
+"Last-Translator: Domatix\n"
+"Language-Team: \n"
+"Language: es_ES\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/wizards/wizard_social_account.py:0
+msgid ""
+"Account access could not be authorized. Please check your settings or try "
+"again later."
+msgstr ""
+"No se pudo autorizar el acceso a la cuenta. Revisa la configuración o "
+"inténtalo de nuevo más tarde."
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/wizards/wizard_social_account.py:0
+msgid "An account with that information already exists."
+msgstr "Ya existe una cuenta con esa información."
+
+#. module: social_media_instagram
+#: model:ir.model,name:social_media_instagram.model_wizard_social_account
+msgid "Associate Social Media Account"
+msgstr "Asociar cuenta de red social"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_post.py:0
+msgid "At least one image or a video is required when posting on Instagram."
+msgstr "Se requiere al menos una imagen o un vídeo al publicar en Instagram."
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Could not find any Instagram account to add."
+msgstr "No se encontró ninguna cuenta de Instagram para añadir."
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__display_name
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_media__display_name
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_post__display_name
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_post_account__display_name
+#: model:ir.model.fields,field_description:social_media_instagram.field_wizard_social_account__display_name
+msgid "Display Name"
+msgstr "Nombre visible"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_post_account.py:0
+msgid "Error Comment Instagram: %(error)s"
+msgstr "Error al comentar en Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_post_account.py:0
+msgid "Error Delete Comment Instagram: %(error)s"
+msgstr "Error al borrar el comentario de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_post_account.py:0
+msgid "Error Get Comments for Instagram post: %(error)s"
+msgstr ""
+"Error al obtener los comentarios de la publicación de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__id
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_media__id
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_post__id
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_post_account__id
+#: model:ir.model.fields,field_description:social_media_instagram.field_wizard_social_account__id
+msgid "ID"
+msgstr "ID"
+
+#. module: social_media_instagram
+#: model:ir.model.fields.selection,name:social_media_instagram.selection__social_media__media_type__instagram
+#: model_terms:ir.ui.view,arch_db:social_media_instagram.social_account_view_form_inherit
+msgid "Instagram"
+msgstr "Instagram"
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__instagram_access_token
+msgid "Instagram Access Token"
+msgstr "Token de acceso de Instagram"
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__instagram_account_id
+msgid "Instagram Account"
+msgstr "Cuenta de Instagram"
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__instagram_app_id
+#: model:ir.model.fields,field_description:social_media_instagram.field_wizard_social_account__instagram_app_id
+msgid "Instagram App ID"
+msgstr "App ID de Instagram"
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__instagram_app_secret
+#: model:ir.model.fields,field_description:social_media_instagram.field_wizard_social_account__instagram_app_secret
+msgid "Instagram App Secret"
+msgstr "App Secret de Instagram"
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_account__instagram_facebook_account_id
+msgid "Instagram Facebook Account"
+msgstr "Cuenta de Facebook de Instagram"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram carousel container failed: %(error)s"
+msgstr "Fallo el contenedor del carrusel de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram container status failed: %(error)s"
+msgstr "Fallo al comprobar el estado del contenedor de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram media container failed to process (status %(status)s)."
+msgstr ""
+"El contenedor de medios de Instagram falló al procesarse (estado "
+"%(status)s)."
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram media container failed: %(error)s"
+msgstr "Fallo el contenedor de medios de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram media container timed out while processing."
+msgstr "El contenedor de medios de Instagram agotó el tiempo al procesarse."
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram media deletion failed: %(error)s"
+msgstr "Fallo al borrar el medio de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram page lookup failed: %(error)s"
+msgstr "Fallo al consultar las páginas de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram posts require at least one image."
+msgstr "Las publicaciones de Instagram requieren al menos una imagen."
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram publish failed: %(error)s"
+msgstr "Fallo al publicar en Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram reel container failed: %(error)s"
+msgstr "Fallo el contenedor del reel de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid "Instagram token exchange failed: %(error)s"
+msgstr "Fallo al intercambiar el token de Instagram: %(error)s"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid ""
+"Invalid OAuth state token. Please restart the account association process."
+msgstr ""
+"Token de estado OAuth no válido. Reinicia el proceso de asociación de la "
+"cuenta."
+
+#. module: social_media_instagram
+#: model:ir.model.fields,field_description:social_media_instagram.field_social_media__media_type
+msgid "Media Type"
+msgstr "Tipo de medio"
+
+#. module: social_media_instagram
+#: model:ir.model,name:social_media_instagram.model_social_account
+msgid "Social Account"
+msgstr "Cuenta social"
+
+#. module: social_media_instagram
+#: model:ir.model,name:social_media_instagram.model_social_media
+msgid "Social Media"
+msgstr "Red social"
+
+#. module: social_media_instagram
+#: model:ir.model,name:social_media_instagram.model_social_post
+msgid "Social Post"
+msgstr "Publicación"
+
+#. module: social_media_instagram
+#: model:ir.model,name:social_media_instagram.model_social_post_account
+msgid "Social Post Account"
+msgstr "Cuenta de la publicación"
+
+#. module: social_media_instagram
+#. odoo-python
+#: code:addons/social_media_instagram/models/social_account.py:0
+msgid ""
+"You need to link an Instagram Business account to a Facebook Page to add it."
+msgstr ""
+"Debes vincular una cuenta Business de Instagram a una página de Facebook "
+"para añadirla."

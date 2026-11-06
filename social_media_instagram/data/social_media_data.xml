@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="social_media_instagram" model="social.media">
+        <field name="name">Instagram</field>
+        <field name="media_type">instagram</field>
+        <field
+            name="description"
+        >Manage your Instagram account and schedule posts</field>
+        <field
+            name="image"
+            type="base64"
+            file="social_media_instagram/static/description/icon.png"
+        />
+    </record>
+</odoo>
