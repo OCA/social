@@ -1,0 +1,1 @@
+odoo-addon-social_media_advertising @ git+https://github.com/OCA/social.git@refs/pull/1946/head#subdirectory=social_media_advertising
