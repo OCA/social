@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo noupdate="1">
+    <!-- Triggered when the inactivity of a sender ends; the interval only
+         catches up after a restart. -->
+    <record id="ir_cron_process_conversations" model="ir.cron">
+        <field name="name">Message Import: process conversations</field>
+        <field name="model_id" ref="model_mail_message_import_conversation" />
+        <field name="state">code</field>
+        <field name="code">model._cron_process()</field>
+        <field name="user_id" ref="base.user_root" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">minutes</field>
+        <field name="priority">5</field>
+    </record>
+</odoo>
