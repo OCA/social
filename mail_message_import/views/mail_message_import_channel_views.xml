@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_channel_view_list" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.list</field>
+        <field name="model">mail.message.import.channel</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence" widget="handle" />
+                <field name="name" />
+                <field name="channel_type" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="last_message_date" />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-success="state == 'connected'"
+                    decoration-warning="state == 'pending'"
+                    decoration-danger="state == 'not_configured'"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mail_message_import_channel_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.form</field>
+        <field name="model">mail.message.import.channel</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_messages"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-comments"
+                        >
+                            <field
+                                name="message_count"
+                                widget="statinfo"
+                                string="Messages"
+                            />
+                        </button>
+                        <button
+                            name="action_view_conversations"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-commenting-o"
+                            string="Conversations"
+                        />
+                        <button
+                            name="action_view_incidents"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-exclamation-triangle"
+                        >
+                            <field
+                                name="open_incident_count"
+                                widget="statinfo"
+                                string="Incidents"
+                            />
+                        </button>
+                    </div>
+                    <widget
+                        name="web_ribbon"
+                        title="Archived"
+                        bg_color="text-bg-danger"
+                        invisible="active"
+                    />
+                    <div
+                        class="alert alert-warning"
+                        role="alert"
+                        invisible="not state_message"
+                    >
+                        <field name="state_message" />
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" placeholder="e.g. Orders by WhatsApp" />
+                        </h1>
+                    </div>
+                    <group name="main">
+                        <group name="reception" string="Reception">
+                            <field name="channel_type" required="1" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="company_id" invisible="1" />
+                            <field name="active" invisible="1" />
+                        </group>
+                        <group name="channel" />
+                    </group>
+                    <group>
+                        <field name="last_message_date" />
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_import_channel_view_kanban" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.kanban</field>
+        <field name="model">mail.message.import.channel</field>
+        <field name="arch" type="xml">
+            <kanban
+                class="o_kanban_dashboard o_mail_message_import_dashboard"
+                create="false"
+                records_draggable="0"
+                group_create="false"
+                sample="1"
+            >
+                <field name="state" />
+                <field name="state_message" />
+                <field name="unidentified_count" />
+                <field name="waiting_count" />
+                <field name="error_count" />
+                <field name="open_incident_count" />
+                <templates>
+                    <t t-name="kanban-menu">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6" name="menu_view">
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>View</span>
+                                    </h5>
+                                    <div role="menuitem">
+                                        <a
+                                            name="action_view_conversations"
+                                            type="object"
+                                        >Conversations</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="action_view_messages"
+                                            type="object"
+                                        >Messages</a>
+                                    </div>
+                                </div>
+                                <div class="col-6" name="menu_review">
+                                    <h5
+                                        role="menuitem"
+                                        class="o_kanban_card_manage_title"
+                                    >
+                                        <span>To review</span>
+                                    </h5>
+                                    <div role="menuitem">
+                                        <a
+                                            name="action_view_incidents"
+                                            type="object"
+                                        >Incidents</a>
+                                    </div>
+                                    <div role="menuitem">
+                                        <a
+                                            name="action_view_unidentified"
+                                            type="object"
+                                        >Unknown senders</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                t-if="widget.editable"
+                                class="o_kanban_card_manage_settings row"
+                            >
+                                <div class="col-12 text-end" role="menuitem">
+                                    <a
+                                        class="dropdown-item"
+                                        type="open"
+                                    >Configuration</a>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-name="kanban-box">
+                        <div>
+                            <div class="px-2">
+                                <a type="object" name="action_view_conversations">
+                                    <field name="name" class="fw-bold fs-4" />
+                                </a>
+                                <div class="text-muted" name="channel_info">
+                                    <field name="channel_type" widget="badge" />
+                                </div>
+                                <div
+                                    class="text-danger small mt-1"
+                                    t-if="record.state.raw_value != 'connected'"
+                                >
+                                    <field
+                                        t-if="record.state_message.raw_value"
+                                        name="state_message"
+                                    />
+                                    <field t-else="" name="state" />
+                                </div>
+                                <div class="row mt-3">
+                                    <div class="col-5" name="dashboard_main">
+                                        <button
+                                            t-if="record.unidentified_count.raw_value"
+                                            class="btn btn-primary"
+                                            name="action_view_unidentified"
+                                            type="object"
+                                        >
+                                            <field
+                                                name="unidentified_count"
+                                            /> Unknown senders
+                                        </button>
+                                        <button
+                                            t-else=""
+                                            class="btn btn-secondary"
+                                            name="action_view_messages"
+                                            type="object"
+                                        >
+                                            Messages
+                                        </button>
+                                    </div>
+                                    <div class="col-7" name="dashboard_links">
+                                        <a
+                                            t-if="record.open_incident_count.raw_value"
+                                            class="d-flex justify-content-between"
+                                            name="action_view_incidents"
+                                            type="object"
+                                        >
+                                            <span>Incidents</span>
+                                            <field name="open_incident_count" />
+                                        </a>
+                                        <a
+                                            t-if="record.error_count.raw_value"
+                                            class="d-flex justify-content-between"
+                                            name="action_view_errors"
+                                            type="object"
+                                        >
+                                            <span>With errors</span>
+                                            <field name="error_count" />
+                                        </a>
+                                        <a
+                                            t-if="record.waiting_count.raw_value"
+                                            class="d-flex justify-content-between"
+                                            name="action_view_waiting"
+                                            type="object"
+                                        >
+                                            <span>Being processed</span>
+                                            <field name="waiting_count" />
+                                        </a>
+                                    </div>
+                                </div>
+                                <field
+                                    name="dashboard_graph"
+                                    widget="dashboard_graph"
+                                    graph_type="bar"
+                                    class="mt-auto"
+                                />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="mail_message_import_channel_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.channel.search</field>
+        <field name="model">mail.message.import.channel</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <filter
+                    name="archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"
+                />
+                <filter
+                    name="group_channel_type"
+                    string="Channel"
+                    context="{'group_by': 'channel_type'}"
+                />
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mail_message_import_channel" model="ir.actions.act_window">
+        <field name="name">Receiving channels</field>
+        <field name="res_model">mail.message.import.channel</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Add a receiving channel</p>
+            <p>
+                A WhatsApp number, an email address...: where the senders send their
+                messages. Each channel is a module.
+            </p>
+        </field>
+    </record>
+
+    <record id="action_mail_message_import_panel" model="ir.actions.act_window">
+        <field name="name">Panel</field>
+        <field name="res_model">mail.message.import.channel</field>
+        <field name="view_mode">kanban,form</field>
+        <field name="view_id" ref="mail_message_import_channel_view_kanban" />
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No receiving channel yet</p>
+            <p>
+                Add in Configuration &gt; Receiving channels the WhatsApp number or the
+                email address that receives the messages: each one gets its card
+                here, with what is left to review.
+            </p>
+        </field>
+    </record>
+</odoo>
