@@ -1,5 +1,6 @@
 # generated from manifests external_dependencies
 cairosvg
 lottie
+phonenumbers
 python-telegram-bot
 requests_toolbelt
