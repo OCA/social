@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-08 17:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: social_media_linkedin_sync
 #: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
@@ -23,11 +25,19 @@ msgid ""
 "                    authorize this account again: refreshing the token alone\n"
 "                    keeps the scopes it already has."
 msgstr ""
+"), quindi rifiuta di fornire le sue pubblicazioni. Abilita il\n"
+"                    prodotto corrispondente nell’applicazione LinkedIn, "
+"quindi premi\n"
+"                    <b>Aggiorna account</b> con <b>Aggiorna chiavi</b> "
+"selezionato per\n"
+"                    autorizzare nuovamente questo account: il solo "
+"aggiornamento del token\n"
+"                    mantiene gli ambiti di autorizzazione già disponibili."
 
 #. module: social_media_linkedin_sync
 #: model:ir.model,name:social_media_linkedin_sync.model_social_account
 msgid "Account Linked to a Social Media"
-msgstr ""
+msgstr "Account collegato a un social media"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
@@ -37,11 +47,13 @@ msgid ""
 "An error occurred while deleting the comment or it no longer exists, please "
 "try again later."
 msgstr ""
+"Si è verificato un errore durante l’eliminazione del commento oppure il "
+"commento non esiste più. Riprova più tardi."
 
 #. module: social_media_linkedin_sync
 #: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
 msgid "Full resync"
-msgstr ""
+msgstr "Risincronizzazione completa"
 
 #. module: social_media_linkedin_sync
 #: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
@@ -49,34 +61,36 @@ msgid ""
 "LinkedIn did not grant this account the permission the\n"
 "                    import of its history needs ("
 msgstr ""
+"LinkedIn non ha concesso a questo account l’autorizzazione necessaria\n"
+"                    per importare la cronologia ("
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "LinkedIn member"
-msgstr ""
+msgstr "Membro di LinkedIn"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "LinkedIn page"
-msgstr ""
+msgstr "Pagina LinkedIn"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
 #, python-format
 msgid "LinkedIn refused the feed"
-msgstr ""
+msgstr "LinkedIn ha rifiutato il feed"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_actors_linkedin.py:0
 #, python-format
 msgid "LinkedIn refused the organization"
-msgstr ""
+msgstr "LinkedIn ha rifiutato l’organizzazione"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
@@ -84,36 +98,36 @@ msgstr ""
 #: code:addons/social_media_linkedin_sync/tests/test_sync_check_linkedin.py:0
 #, python-format
 msgid "LinkedIn refused the page statistics"
-msgstr ""
+msgstr "LinkedIn ha rifiutato le statistiche della pagina"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
 #, python-format
 msgid "LinkedIn refused the reactions"
-msgstr ""
+msgstr "LinkedIn ha rifiutato le reazioni"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
 #, python-format
 msgid "LinkedIn refused the statistics"
-msgstr ""
+msgstr "LinkedIn ha rifiutato le statistiche"
 
 #. module: social_media_linkedin_sync
 #: model:ir.model.fields,field_description:social_media_linkedin_sync.field_social_account__linkedin_missing_sync_scopes
 msgid "Linkedin Missing Sync Scopes"
-msgstr ""
+msgstr "Ambiti di sincronizzazione LinkedIn mancanti"
 
 #. module: social_media_linkedin_sync
 #: model:ir.model.fields,field_description:social_media_linkedin_sync.field_social_account__linkedin_sync_scopes_notified
 msgid "Linkedin Sync Scopes Notified"
-msgstr ""
+msgstr "Notifica degli ambiti di sincronizzazione LinkedIn inviata"
 
 #. module: social_media_linkedin_sync
 #: model:ir.model,name:social_media_linkedin_sync.model_social_post_account
 msgid "Publication of a Post on a Social Account"
-msgstr ""
+msgstr "Pubblicazione di un post su un account social"
 
 #. module: social_media_linkedin_sync
 #: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
@@ -122,11 +136,15 @@ msgid ""
 " This is the only action that notices the publications deleted there, and "
 "the scheduled action already does it weekly on its own."
 msgstr ""
+"Legge nuovamente l’intero feed e contrassegna come eliminate le "
+"pubblicazioni che non sono più presenti su LinkedIn. Questa è l’unica "
+"operazione che rileva le pubblicazioni eliminate su LinkedIn; l’azione "
+"pianificata la esegue già automaticamente ogni settimana."
 
 #. module: social_media_linkedin_sync
 #: model:ir.model.fields,field_description:social_media_linkedin_sync.field_social_account__linkedin_statistics_checkpoint
 msgid "Statistics Checkpoint"
-msgstr ""
+msgstr "Punto di controllo delle statistiche"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
@@ -134,28 +152,28 @@ msgstr ""
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "The comment cannot be recommended on LinkedIn."
-msgstr ""
+msgstr "Non è possibile consigliare il commento su LinkedIn."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "The comment could not be published on LinkedIn: %(error)s"
-msgstr ""
+msgstr "Non è stato possibile pubblicare il commento su LinkedIn: %(error)s"
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "The comment does not exist or has been deleted."
-msgstr ""
+msgstr "Il commento non esiste oppure è stato eliminato."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "The comments could not be read from LinkedIn: %(error)s"
-msgstr ""
+msgstr "Non è stato possibile leggere i commenti da LinkedIn: %(error)s"
 
 #. module: social_media_linkedin_sync
 #: model:ir.model.fields,help:social_media_linkedin_sync.field_social_account__linkedin_statistics_checkpoint
@@ -165,6 +183,10 @@ msgid ""
 "compares the page against it instead of reading the statistics of every "
 "publication."
 msgstr ""
+"I dati giornalieri relativi all’intera pagina comunicati da LinkedIn negli "
+"ultimi giorni, aggiornati all’ultima importazione delle pubblicazioni. Il "
+"controllo degli aggiornamenti confronta la pagina con questi dati invece di "
+"leggere le statistiche di ogni singola pubblicazione."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
@@ -175,14 +197,14 @@ msgstr ""
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "The post does not exist or has been deleted."
-msgstr ""
+msgstr "Il post non esiste oppure è stato eliminato."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "The replies could not be read from LinkedIn: %(error)s"
-msgstr ""
+msgstr "Non è stato possibile leggere le risposte da LinkedIn: %(error)s"
 
 #. module: social_media_linkedin_sync
 #: model:ir.model.fields,help:social_media_linkedin_sync.field_social_account__linkedin_missing_sync_scopes
@@ -191,6 +213,10 @@ msgid ""
 "history needs. A token keeps the scopes it was issued with, so an account "
 "associated before this module was installed has to be authorized again."
 msgstr ""
+"Gli ambiti di autorizzazione che non sono stati concessi al token di questo "
+"account e che sono necessari per importarne la cronologia. Un token mantiene "
+"gli ambiti con cui è stato rilasciato; pertanto, un account collegato prima "
+"dell’installazione di questo modulo deve essere autorizzato nuovamente."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
@@ -203,6 +229,12 @@ msgid ""
 "keys checked to authorize this account again: refreshing the token alone "
 "keeps the scopes it already has."
 msgstr ""
+"Al token di questo account non sono stati concessi gli ambiti %(scopes)s; "
+"LinkedIn rifiuta quindi di fornire le sue pubblicazioni e non è possibile "
+"importarle. Abilita il prodotto corrispondente nell’applicazione LinkedIn, "
+"quindi premi Aggiorna account con Aggiorna chiavi selezionato per "
+"autorizzare nuovamente questo account: il solo aggiornamento del token "
+"mantiene gli ambiti di autorizzazione già disponibili."
 
 #. module: social_media_linkedin_sync
 #: model_terms:ir.ui.view,arch_db:social_media_linkedin_sync.social_account_view_form_inherit_sync_linkedin
@@ -210,6 +242,9 @@ msgid ""
 "The whole feed of the page will be read again, which costs one call per "
 "hundred publications against the daily quota of LinkedIn. Continue?"
 msgstr ""
+"L’intero feed della pagina verrà letto nuovamente. Questa operazione consuma "
+"una chiamata ogni cento pubblicazioni dalla quota giornaliera di LinkedIn. "
+"Continuare?"
 
 #. module: social_media_linkedin_sync
 #: model:ir.model.fields,help:social_media_linkedin_sync.field_social_account__linkedin_sync_scopes_notified
@@ -218,38 +253,42 @@ msgid ""
 "authorized again before its history can be imported. Kept so the check that "
 "runs every two hours warns once and not on every pass."
 msgstr ""
+"Indica se l’utente responsabile è già stato informato che questo account "
+"deve essere autorizzato nuovamente prima di poterne importare la cronologia. "
+"Il valore viene mantenuto in modo che il controllo eseguito ogni due ore "
+"mostri l’avviso una sola volta e non a ogni esecuzione."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "You had no reaction on this comment."
-msgstr ""
+msgstr "Non avevi espresso alcuna reazione a questo commento."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "You had no reaction on this post."
-msgstr ""
+msgstr "Non avevi espresso alcuna reazione a questo post."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "You have already reacted to this comment."
-msgstr ""
+msgstr "Hai già reagito a questo commento."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/models/social_post_account.py:0
 #, python-format
 msgid "You have already reacted to this post."
-msgstr ""
+msgstr "Hai già reagito a questo post."
 
 #. module: social_media_linkedin_sync
 #. odoo-python
 #: code:addons/social_media_linkedin_sync/tests/test_sync_account_linkedin.py:0
 #, python-format
 msgid "history unavailable"
-msgstr ""
+msgstr "cronologia non disponibile"
