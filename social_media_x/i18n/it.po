@@ -6,35 +6,37 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-10 22:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: social_media_x
 #: model_terms:ir.ui.view,arch_db:social_media_x.social_account_view_form_inherit
 msgid "<span class=\"text-muted\">read on</span>"
-msgstr ""
+msgstr "<span class=\"text-muted\">letto il</span>"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_api_key
 #: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__x_api_key
 msgid "API Key"
-msgstr ""
+msgstr "Chiave API"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_api_secret
 #: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__x_api_secret
 msgid "API Secret"
-msgstr ""
+msgstr "Segreto API"
 
 #. module: social_media_x
 #: model:ir.model,name:social_media_x.model_social_account
 msgid "Account Linked to a Social Media"
-msgstr ""
+msgstr "Account collegato a un social media"
 
 #. module: social_media_x
 #. odoo-python
@@ -44,13 +46,15 @@ msgid ""
 "Account access could not be authorized. Please check your settings or try "
 "again later."
 msgstr ""
+"Impossibile autorizzare l'accesso all'account. Controllare le impostazioni o "
+"riprovare più tardi."
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/wizards/wizard_social_account.py:0
 #, python-format
 msgid "An account with that information already exists."
-msgstr ""
+msgstr "Esiste già un account con queste informazioni."
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_access_token_oauth2
@@ -58,52 +62,54 @@ msgid ""
 "App-only bearer token, obtained from the API Key and the API Secret. It "
 "authorizes what is asked in the name of the App and not of a user."
 msgstr ""
+"Bearer token solo-app, ottenuto dalla chiave API e dal segreto API. "
+"Autorizza ciò che viene richiesto a nome dell'App e non di un utente."
 
 #. module: social_media_x
 #: model:ir.model,name:social_media_x.model_wizard_social_account
 msgid "Associate Social Media Account"
-msgstr ""
+msgstr "Associa account social media"
 
 #. module: social_media_x
 #: model:ir.model,name:social_media_x.model_social_post
 msgid "Content to Publish on Social Media"
-msgstr ""
+msgstr "Contenuto da pubblicare sui social media"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_credit_balance
 msgid "Credit Balance (USD)"
-msgstr ""
+msgstr "Saldo credito (USD)"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_credit_balance_date
 msgid "Credit Balance Read On"
-msgstr ""
+msgstr "Saldo credito letto il"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_credit_warning
 msgid "Credit Warning (USD)"
-msgstr ""
+msgstr "Avviso credito (USD)"
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post_account.py:0
 #, python-format
 msgid "DELETING POST ON X: %(error)s"
-msgstr ""
+msgstr "ELIMINAZIONE POST SU X: %(error)s"
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post_account.py:0
 #, python-format
 msgid "ERROR DELETE POST X: %(error)s"
-msgstr ""
+msgstr "ERRORE ELIMINAZIONE POST X: %(error)s"
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
 #, python-format
 msgid "Error getting X access token: %(error)s"
-msgstr ""
+msgstr "Errore nell'ottenimento del token di accesso X: %(error)s"
 
 #. module: social_media_x
 #. odoo-python
@@ -113,6 +119,8 @@ msgid ""
 "Invalid X callback: the request token is missing. Please restart the account"
 " association process."
 msgstr ""
+"Callback X non valida: manca il token di richiesta. Riavviare la procedura "
+"di associazione dell'account."
 
 #. module: social_media_x
 #. odoo-python
@@ -121,72 +129,74 @@ msgstr ""
 msgid ""
 "Invalid X request token. Please restart the account association process."
 msgstr ""
+"Token di richiesta X non valido. Riavviare la procedura di associazione "
+"dell'account."
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_media__media_type
 msgid "Media Type"
-msgstr ""
+msgstr "Tipo di media"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_wizard_social_account__oauth_token
 msgid "Oauth Token"
-msgstr ""
+msgstr "Token OAuth"
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
 #, python-format
 msgid "PUBLISHING ON X: %(error)s"
-msgstr ""
+msgstr "PUBBLICAZIONE SU X: %(error)s"
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_access_token_oauth1
 msgid "Post and delete"
-msgstr ""
+msgstr "Pubblica ed elimina"
 
 #. module: social_media_x
 #: model:ir.model,name:social_media_x.model_social_post_account
 msgid "Publication of a Post on a Social Account"
-msgstr ""
+msgstr "Pubblicazione di un post su un account social"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__quote_count
 #: model:ir.model.fields,field_description:social_media_x.field_social_post_account__quote_count
 #: model:ir.model.fields,field_description:social_media_x.field_social_statistics_mixin__quote_count
 msgid "Quote Count"
-msgstr ""
+msgstr "Numero citazioni"
 
 #. module: social_media_x
 #: model_terms:ir.ui.view,arch_db:social_media_x.social_post_account_view_form_statistics_inherit
 msgid "Quotes"
-msgstr ""
+msgstr "Citazioni"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__rate_limit_endpoint
 msgid "Rate Limit Endpoint"
-msgstr ""
+msgstr "Endpoint limite di frequenza"
 
 #. module: social_media_x
 #: model_terms:ir.ui.view,arch_db:social_media_x.social_post_account_view_form_statistics_inherit
 msgid "Reposts"
-msgstr ""
+msgstr "Repost"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__retweet_count
 #: model:ir.model.fields,field_description:social_media_x.field_social_post_account__retweet_count
 #: model:ir.model.fields,field_description:social_media_x.field_social_statistics_mixin__retweet_count
 msgid "Retweet Count"
-msgstr ""
+msgstr "Numero retweet"
 
 #. module: social_media_x
 #: model:ir.model,name:social_media_x.model_social_statistics_mixin
 msgid "Social Media Interaction Counters"
-msgstr ""
+msgstr "Contatori interazioni social media"
 
 #. module: social_media_x
 #: model:ir.model,name:social_media_x.model_social_media
 msgid "Social Media Supported by the System"
-msgstr ""
+msgstr "Social media supportati dal sistema"
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_api_secret
@@ -196,6 +206,9 @@ msgid ""
 "only when the Consumer Key is generated. Regenerating it in the Console "
 "invalidates the one stored here."
 msgstr ""
+"Il segreto della chiave API della App sviluppatore, mostrato dalla X "
+"Developer Console solo quando viene generata la Consumer Key. Rigenerarlo "
+"nella Console invalida quello memorizzato qui."
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_api_key
@@ -205,6 +218,9 @@ msgid ""
 "OAuth 1.0 Keys as the Consumer Key. Regenerating it in the Console "
 "invalidates the one stored here."
 msgstr ""
+"La chiave API della App sviluppatore, che la X Developer Console elenca "
+"sotto OAuth 1.0 Keys come Consumer Key. Rigenerarla nella Console invalida "
+"quella memorizzata qui."
 
 #. module: social_media_x
 #. odoo-python
@@ -214,6 +230,8 @@ msgid ""
 "The X API credit balance of this App is down to USD %(balance)s, under the "
 "warning threshold of USD %(threshold)s."
 msgstr ""
+"Il saldo credito API X di questa App è sceso a USD %(balance)s, sotto la "
+"soglia di avviso di USD %(threshold)s."
 
 #. module: social_media_x
 #. odoo-python
@@ -223,6 +241,8 @@ msgid ""
 "The X API credit balance of this App is used up. X blocks every call until "
 "credits are bought in the Developer Console."
 msgstr ""
+"Il saldo credito API X di questa App è esaurito. X blocca ogni chiamata "
+"finché non vengono acquistati crediti nella Developer Console."
 
 #. module: social_media_x
 #: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
@@ -233,13 +253,20 @@ msgid ""
 "                    on the Default project (Standard Basic) is refused by X.\n"
 "                    See the"
 msgstr ""
+"L'API X non ha un livello di accesso gratuito. La App sviluppatore deve\n"
+"                    essere collegata, in Project Access nella Developer\n"
+"                    Console, a un progetto Pay Per Use con credito: una App "
+"lasciata\n"
+"                    sul progetto Default (Standard Basic) viene rifiutata da "
+"X.\n"
+"                    Vedere la"
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
 #, python-format
 msgid "The account was associated successfully"
-msgstr ""
+msgstr "L'account è stato associato con successo"
 
 #. module: social_media_x
 #. odoo-python
@@ -248,13 +275,15 @@ msgstr ""
 msgid ""
 "The account was not created: the OAuth2 access token could not be obtained."
 msgstr ""
+"L'account non è stato creato: impossibile ottenere il token di accesso "
+"OAuth2."
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/wizards/wizard_social_account.py:0
 #, python-format
 msgid "The account was updated successfully"
-msgstr ""
+msgstr "L'account è stato aggiornato con successo"
 
 #. module: social_media_x
 #. odoo-python
@@ -264,6 +293,9 @@ msgid ""
 "The post could not be deleted on X. The account may have reached the limit "
 "of requests of its plan: check the account and try again later."
 msgstr ""
+"Impossibile eliminare il post su X. L'account potrebbe aver raggiunto il "
+"limite di richieste del suo piano: controllare l'account e riprovare più "
+"tardi."
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_credit_warning
@@ -271,6 +303,8 @@ msgid ""
 "The responsible of the account is warned when the credit balance drops under"
 " this amount. At 0, only when it is used up."
 msgstr ""
+"Il responsabile dell'account viene avvisato quando il saldo credito scende "
+"sotto questo importo. A 0, solo quando è esaurito."
 
 #. module: social_media_x
 #. odoo-python
@@ -280,23 +314,25 @@ msgid ""
 "There are X accounts with the same username (%(username)s), please check to "
 "avoid spam errors."
 msgstr ""
+"Esistono account X con lo stesso nome utente (%(username)s), controllare per "
+"evitare errori di spam."
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_token_oauth2
 msgid "Token for read"
-msgstr ""
+msgstr "Token per lettura"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_token_oauth1
 msgid "Token for write"
-msgstr ""
+msgstr "Token per scrittura"
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
 #, python-format
 msgid "Unexpected response from X: %(error)s"
-msgstr ""
+msgstr "Risposta inattesa da X: %(error)s"
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_credit_balance
@@ -306,11 +342,16 @@ msgid ""
 "accounts holding the same API Key share it. It is read again every 2 hours "
 "and when the account is associated, updated or its statistics refreshed."
 msgstr ""
+"Ciò che resta dei crediti che la App sviluppatore ha acquistato per pagare "
+"le chiamate all'API X. È il saldo della App e non di questo account, quindi "
+"gli account con la stessa chiave API lo condividono. Viene riletto ogni 2 "
+"ore e quando l'account viene associato, aggiornato o le sue statistiche "
+"vengono aggiornate."
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_credit_balance_date
 msgid "When X last answered the credit balance."
-msgstr ""
+msgstr "Quando X ha risposto per l'ultima volta sul saldo credito."
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_premium
@@ -320,6 +361,10 @@ msgid ""
 " the account is associated and on Update account, so a subscription bought "
 "or cancelled later is seen after pressing Update account."
 msgstr ""
+"Indica se l'utente X di questo account ha un abbonamento X Premium, che "
+"porta il messaggio di un post da 280 a 25.000 caratteri. Letto da X quando "
+"l'account viene associato e su Aggiorna account, quindi un abbonamento "
+"acquistato o annullato in seguito si vede dopo aver premuto Aggiorna account."
 
 #. module: social_media_x
 #: model:ir.model.fields,help:social_media_x.field_social_account__x_credit_warned
@@ -328,11 +373,14 @@ msgid ""
 "the warning threshold. Cleared when the balance is read again at or over it,"
 " so the warning is given once per drop."
 msgstr ""
+"Indica se il responsabile è già stato avvisato che il saldo credito è sotto "
+"la soglia di avviso. Azzerato quando il saldo viene riletto pari o sopra di "
+"essa, quindi l'avviso viene dato una volta per ogni calo."
 
 #. module: social_media_x
 #: model:ir.model.fields.selection,name:social_media_x.selection__social_media__media_type__x
 msgid "X"
-msgstr ""
+msgstr "X"
 
 #. module: social_media_x
 #. odoo-python
@@ -341,22 +389,22 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
 #, python-format
 msgid "X API pricing"
-msgstr ""
+msgstr "Prezzi API X"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_access_secret_oauth1
 msgid "X Access Secret Oauth1"
-msgstr ""
+msgstr "Segreto di accesso X Oauth1"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_credit_warned
 msgid "X Credit Warned"
-msgstr ""
+msgstr "Avviso credito X inviato"
 
 #. module: social_media_x
 #: model:ir.model.fields,field_description:social_media_x.field_social_account__x_premium
 msgid "X Premium"
-msgstr ""
+msgstr "X Premium"
 
 #. module: social_media_x
 #. odoo-python
@@ -366,6 +414,8 @@ msgid ""
 "X did not accept the post. The account may have reached the limit of "
 "requests of its plan: check the account and try again later."
 msgstr ""
+"X non ha accettato il post. L'account potrebbe aver raggiunto il limite di "
+"richieste del suo piano: controllare l'account e riprovare più tardi."
 
 #. module: social_media_x
 #. odoo-python
@@ -375,6 +425,8 @@ msgid ""
 "X only publishes JPG, PNG, WEBP and GIF images, so %(names)s cannot be "
 "published. Convert them or remove them from the post."
 msgstr ""
+"X pubblica solo immagini JPG, PNG, WEBP e GIF, quindi %(names)s non può "
+"essere pubblicato. Convertirli o rimuoverli dal post."
 
 #. module: social_media_x
 #. odoo-python
@@ -384,6 +436,8 @@ msgid ""
 "X only publishes MP4 videos, so %(names)s cannot be published. Convert them "
 "to MP4 or remove them from the post."
 msgstr ""
+"X pubblica solo video MP4, quindi %(names)s non può essere pubblicato. "
+"Convertirli in MP4 o rimuoverli dal post."
 
 #. module: social_media_x
 #. odoo-python
@@ -394,6 +448,9 @@ msgid ""
 " cannot be published. Leave one video or create a separate post for each of "
 "them."
 msgstr ""
+"X pubblica un solo video per post, quindi questo post con %(videos)s video "
+"non può essere pubblicato. Lasciare un solo video o creare un post separato "
+"per ciascuno."
 
 #. module: social_media_x
 #. odoo-python
@@ -403,6 +460,8 @@ msgid ""
 "X publishes at most %(limit)s characters per post, and this one has "
 "%(length)s. Shorten the message to publish it."
 msgstr ""
+"X pubblica al massimo %(limit)s caratteri per post e questo ne ha %(length)"
+"s. Abbreviare il messaggio per pubblicarlo."
 
 #. module: social_media_x
 #. odoo-python
@@ -412,6 +471,8 @@ msgid ""
 "X publishes at most %(limit)s images per post, and this one carries "
 "%(images)s. Remove some of them or create a separate post."
 msgstr ""
+"X pubblica al massimo %(limit)s immagini per post e questo ne contiene %"
+"(images)s. Rimuoverne alcune o creare un post separato."
 
 #. module: social_media_x
 #. odoo-python
@@ -421,6 +482,8 @@ msgid ""
 "X publishes either images or a video, not both in the same post. Leave one "
 "kind of media or create a separate post for each of them."
 msgstr ""
+"X pubblica immagini oppure un video, non entrambi nello stesso post. "
+"Lasciare un solo tipo di media o creare un post separato per ciascuno."
 
 #. module: social_media_x
 #. odoo-python
@@ -431,6 +494,9 @@ msgid ""
 "%(names)s cannot be published. Reduce their size or remove them from the "
 "post."
 msgstr ""
+"X pubblica immagini di al massimo %(limit)s, %(gif_limit)s per una GIF, "
+"quindi %(names)s non può essere pubblicato. Ridurne le dimensioni o "
+"rimuoverle dal post."
 
 #. module: social_media_x
 #. odoo-python
@@ -440,13 +506,15 @@ msgid ""
 "X publishes videos of at most %(limit)s, so %(names)s cannot be published. "
 "Reduce their size or remove them from the post."
 msgstr ""
+"X pubblica video di al massimo %(limit)s, quindi %(names)s non può essere "
+"pubblicato. Ridurne le dimensioni o rimuoverli dal post."
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
 #, python-format
 msgid "X refused the post of %(account)s: %(error)s."
-msgstr ""
+msgstr "X ha rifiutato il post di %(account)s: %(error)s."
 
 #. module: social_media_x
 #. odoo-python
@@ -457,6 +525,10 @@ msgid ""
 "depends on its plan, and X reported X Premium for this account when it was "
 "last read. Press Update account to read the plan again before trying again."
 msgstr ""
+"X ha rifiutato il post di %(account)s: %(error)s. Ciò che un account può "
+"pubblicare dipende dal suo piano e X ha riportato X Premium per questo "
+"account all'ultima lettura. Premere Aggiorna account per rileggere il piano "
+"prima di riprovare."
 
 #. module: social_media_x
 #. odoo-python
@@ -468,6 +540,11 @@ msgid ""
 "not the Default project on Standard Basic, make sure the account has credit "
 "in the Developer Console, see %(pricing_link)s, then try again."
 msgstr ""
+"X ha rifiutato la richiesta perché la App sviluppatore non può spendere "
+"sull'API. Collegare la App a un progetto Pay Per Use in Project Access > "
+"Manage, non al progetto Default su Standard Basic, assicurarsi che l'account "
+"abbia credito nella Developer Console, vedere %(pricing_link)s, quindi "
+"riprovare."
 
 #. module: social_media_x
 #. odoo-python
@@ -481,3 +558,9 @@ msgid ""
 "request).<br>For more information, see the <a href='%(rate_limit_url)s' "
 "target='_blank'>rate limits</a>."
 msgstr ""
+"Hai raggiunto il limite di richieste <b>%(endpoint)s</b> consentite dal "
+"piano del tuo account.<br>• <b>Limite totale:</b> %(limit)s richieste per "
+"finestra o periodo<br>• <b>Rimanenti:</b> %(remaining)s<br>• <b>Prossima "
+"richiesta:</b> %(next_request)s<br>Riprovare dopo quel momento (Prossima "
+"richiesta).<br>Per maggiori informazioni, vedere i <a href='%(rate_limit_url)"
+"s' target='_blank'>limiti di frequenza</a>."
