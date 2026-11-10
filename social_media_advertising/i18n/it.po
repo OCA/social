@@ -6,20 +6,22 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-10 22:47+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
 #, python-format
 msgid "%(accounts)s advertising account(s) available."
-msgstr ""
+msgstr "%(accounts)s account pubblicitari disponibili."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -27,7 +29,7 @@ msgstr ""
 #: code:addons/social_media_advertising/models/social_account.py:0
 #, python-format
 msgid "%(ads)s ad(s) available."
-msgstr ""
+msgstr "%(ads)s annunci disponibili."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -37,6 +39,8 @@ msgid ""
 "%(ads)s ad(s) available. The ads of these accounts could not be fetched: "
 "%(accounts)s."
 msgstr ""
+"%(ads)s annunci disponibili. Gli annunci di questi account non sono stati "
+"recuperati: %(accounts)s."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_kanban
@@ -45,21 +49,24 @@ msgid ""
 "advertising account the social media account no longer works "
 "with.\">Advertising account not in use</span>"
 msgstr ""
+"<span class=\"badge text-bg-secondary\" title=\"Questo annuncio è stato "
+"recuperato da un account pubblicitario con cui l'account social media non "
+"lavora più.\">Account pubblicitario non in uso</span>"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_kanban
 msgid "<span> to </span>"
-msgstr ""
+msgstr "<span> a </span>"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_kanban
 msgid "<span>Last fetch: </span>"
-msgstr ""
+msgstr "<span>Ultimo recupero: </span>"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_kanban
 msgid "<span>Statistics from </span>"
-msgstr ""
+msgstr "<span>Statistiche dal </span>"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__account_id
@@ -67,79 +74,79 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "Account"
-msgstr ""
+msgstr "Account"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_account
 msgid "Account Linked to a Social Media"
-msgstr ""
+msgstr "Account collegato a un social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__account_ids
 msgid "Accounts"
-msgstr ""
+msgstr "Account"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__action_click_count
 msgid "Action Click Count"
-msgstr ""
+msgstr "Numero click azione"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_needaction
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Azione richiesta"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__active
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__active
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__active
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_ids
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_ids
 msgid "Activities"
-msgstr ""
+msgstr "Attività"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_exception_decoration
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_exception_decoration
 msgid "Activity Exception Decoration"
-msgstr ""
+msgstr "Decorazione eccezione attività"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_state
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_state
 msgid "Activity State"
-msgstr ""
+msgstr "Stato attività"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_type_icon
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_type_icon
 msgid "Activity Type Icon"
-msgstr ""
+msgstr "Icona tipo attività"
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__applies_to__ad
 msgid "Ad"
-msgstr ""
+msgstr "Annuncio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__ad_count
 msgid "Ad Count"
-msgstr ""
+msgstr "Numero annunci"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_ad
 msgid "Ad Served on a Social Media and its Statistics"
-msgstr ""
+msgstr "Annuncio pubblicato su un social media e relative statistiche"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__ad_unit_click_count
 msgid "Ad Unit Click Count"
-msgstr ""
+msgstr "Numero click unità annuncio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_account__web_url
@@ -147,19 +154,19 @@ msgstr ""
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__web_url
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__web_url
 msgid "Address of this record on the social media."
-msgstr ""
+msgstr "Indirizzo di questo record sul social media."
 
 #. module: social_media_advertising
 #: model:ir.actions.act_window,name:social_media_advertising.social_advertising_ad_action
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__ad_ids
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Ads"
-msgstr ""
+msgstr "Annunci"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__ads_need_update
 msgid "Ads Need Update"
-msgstr ""
+msgstr "Annunci da aggiornare"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__active
@@ -167,54 +174,56 @@ msgid ""
 "Ads that disappear from the social media are archived instead of deleted, so"
 " their statistics are not lost."
 msgstr ""
+"Gli annunci che scompaiono dal social media vengono archiviati anziché "
+"eliminati, in modo da non perderne le statistiche."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Ads the social media serves for this account."
-msgstr ""
+msgstr "Annunci pubblicati dal social media per questo account."
 
 #. module: social_media_advertising
 #: model:ir.ui.menu,name:social_media_advertising.social_advertising_menu
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Advertising"
-msgstr ""
+msgstr "Pubblicità"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__advertising_account_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__advertising_account_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__advertising_account_id
 msgid "Advertising Account"
-msgstr ""
+msgstr "Account pubblicitario"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__advertising_account_is_current
 msgid "Advertising Account In Use"
-msgstr ""
+msgstr "Account pubblicitario in uso"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_account
 msgid "Advertising Account Mirrored from a Social Media"
-msgstr ""
+msgstr "Account pubblicitario replicato da un social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__advertising_account_urn
 msgid "Advertising Account Reference"
-msgstr ""
+msgstr "Riferimento account pubblicitario"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__advertising_account_ids
 msgid "Advertising Accounts"
-msgstr ""
+msgstr "Account pubblicitari"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "Advertising account"
-msgstr ""
+msgstr "Account pubblicitario"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "Advertising account in use"
-msgstr ""
+msgstr "Account pubblicitario in uso"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_account__is_current
@@ -222,11 +231,13 @@ msgid ""
 "Advertising account the campaigns and the ads of this social media account "
 "work with. Only one at a time."
 msgstr ""
+"Account pubblicitario con cui lavorano le campagne e gli annunci di questo "
+"account social media. Uno solo alla volta."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__advertising_account_id
 msgid "Advertising account this ad was served from."
-msgstr ""
+msgstr "Account pubblicitario da cui è stato pubblicato questo annuncio."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__advertising_account_id
@@ -236,6 +247,11 @@ msgid ""
 "afterwards, except when the advertising account itself disappears from the "
 "social media: it is then dropped and this campaign is left without a link."
 msgstr ""
+"Account pubblicitario a cui appartiene questa campagna sul social media. "
+"Viene impostato quando la campagna viene creata lì o importata da lì e non "
+"cambia più in seguito, tranne quando l'account pubblicitario stesso scompare "
+"dal social media: in tal caso viene rimosso e la campagna resta senza "
+"collegamento."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__advertising_account_id
@@ -246,33 +262,41 @@ msgid ""
 "disappears from the social media: it is then dropped and this campaign group"
 " is left without a link."
 msgstr ""
+"Account pubblicitario a cui appartiene questo gruppo di campagne sul social "
+"media. Viene impostato quando il gruppo di campagne viene creato lì o "
+"importato da lì e non cambia più in seguito, tranne quando l'account "
+"pubblicitario stesso scompare dal social media: in tal caso viene rimosso e "
+"il gruppo di campagne resta senza collegamento."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_post__allow_social_campaign_ids
 msgid "Allow Social Campaign"
-msgstr ""
+msgstr "Consenti campagna social"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__allow_media_ids
 msgid "Allowed Media"
-msgstr ""
+msgstr "Media consentiti"
 
 #. module: social_media_advertising
 #: model:ir.model.constraint,message:social_media_advertising.constraint_social_advertising_ad_remote_ref_account_uniq
 msgid "An ad can only be linked once to a social media account."
 msgstr ""
+"Un annuncio può essere collegato una sola volta a un account social media."
 
 #. module: social_media_advertising
 #: model:ir.model.constraint,message:social_media_advertising.constraint_social_advertising_account_remote_ref_account_uniq
 msgid ""
 "An advertising account can only be linked once to a social media account."
 msgstr ""
+"Un account pubblicitario può essere collegato una sola volta a un account "
+"social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__applies_to
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_search
 msgid "Applies To"
-msgstr ""
+msgstr "Si applica a"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
@@ -280,7 +304,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 msgid "Archived"
-msgstr ""
+msgstr "Archiviato"
 
 #. module: social_media_advertising
 #. odoo-javascript
@@ -290,6 +314,8 @@ msgid ""
 "Ask the social media again for the ads of every account and the figures it "
 "reports for them, instead of waiting for the next automatic pass."
 msgstr ""
+"Chiede di nuovo al social media gli annunci di ogni account e i dati che "
+"riporta per essi, anziché attendere il successivo passaggio automatico."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
@@ -298,12 +324,15 @@ msgid ""
 "It brings in no campaign and no ad: choose one of them afterwards to work "
 "with it."
 msgstr ""
+"Chiede al social media con quali account pubblicitari può lavorare questo "
+"account. Non importa alcuna campagna né annuncio: sceglierne uno in seguito "
+"per lavorarci."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_attachment_count
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Numero allegati"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__campaign_ids
@@ -312,14 +341,14 @@ msgstr ""
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__applies_to__campaign
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "Campaign"
-msgstr ""
+msgstr "Campagna"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__campaign_count
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__campaign_count
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__campaign_count
 msgid "Campaign Count"
-msgstr ""
+msgstr "Numero campagne"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__campaign_group_ids
@@ -327,13 +356,13 @@ msgstr ""
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__applies_to__group
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 msgid "Campaign Group"
-msgstr ""
+msgstr "Gruppo di campagne"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__campaign_group_count
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__campaign_group_count
 msgid "Campaign Group Count"
-msgstr ""
+msgstr "Numero gruppi di campagne"
 
 #. module: social_media_advertising
 #. odoo-python
@@ -343,27 +372,27 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 #, python-format
 msgid "Campaign Groups"
-msgstr ""
+msgstr "Gruppi di campagne"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_campaign
 msgid "Campaign Promoting the Posts of a Social Media Account"
-msgstr ""
+msgstr "Campagna che promuove i post di un account social media"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Campaign groups of the advertising accounts of this account."
-msgstr ""
+msgstr "Gruppi di campagne degli account pubblicitari di questo account."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 msgid "Campaign groups of this advertising account."
-msgstr ""
+msgstr "Gruppi di campagne di questo account pubblicitario."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__campaign_id
 msgid "Campaign of the social media this ad belongs to."
-msgstr ""
+msgstr "Campagna del social media a cui appartiene questo annuncio."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -376,63 +405,63 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_tree
 #, python-format
 msgid "Campaigns"
-msgstr ""
+msgstr "Campagne"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Campaigns of the advertising accounts of this account."
-msgstr ""
+msgstr "Campagne degli account pubblicitari di questo account."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 msgid "Campaigns of this advertising account."
-msgstr ""
+msgstr "Campagne di questo account pubblicitario."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_form
 msgid "Campaigns of this campaign group."
-msgstr ""
+msgstr "Campagne di questo gruppo di campagne."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__can_delete_remote_ad
 msgid "Can Delete Remote Ad"
-msgstr ""
+msgstr "Può eliminare annuncio remoto"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__can_sync_advertising_accounts
 msgid "Can Sync Advertising Accounts"
-msgstr ""
+msgstr "Può sincronizzare account pubblicitari"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__click_count
 msgid "Click Count"
-msgstr ""
+msgstr "Numero click"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_tree
 msgid "Clicks"
-msgstr ""
+msgstr "Click"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__ad_unit_click_count
 msgid "Clicks anywhere on the ad unit itself."
-msgstr ""
+msgstr "Click ovunque sull'unità annuncio stessa."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__action_click_count
 msgid "Clicks on the call to action of the ad."
-msgstr ""
+msgstr "Click sulla call to action dell'annuncio."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_kanban
 msgid "Clicks:"
-msgstr ""
+msgstr "Click:"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__stage_code
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__code
 msgid "Code"
-msgstr ""
+msgstr "Codice"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__stage_level
@@ -440,35 +469,35 @@ msgstr ""
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__stage_level
 #: model:ir.model.fields,help:social_media_advertising.field_social_stage__level
 msgid "Colour of the badge showing this stage."
-msgstr ""
+msgstr "Colore del badge che mostra questa fase."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__company_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__company_id
 msgid "Company"
-msgstr ""
+msgstr "Azienda"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_post
 msgid "Content to Publish on Social Media"
-msgstr ""
+msgstr "Contenuto da pubblicare sui social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__conversion_count
 msgid "Conversion Count"
-msgstr ""
+msgstr "Numero conversioni"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__cost
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_tree
 msgid "Cost"
-msgstr ""
+msgstr "Costo"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__created_date
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "Created On"
-msgstr ""
+msgstr "Creato il"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__create_uid
@@ -478,7 +507,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__create_uid
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creato da"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__create_date
@@ -488,18 +517,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__create_date
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creato il"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__currency_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_account__currency_id
 msgid "Currency the budgets of this advertising account are denominated in."
-msgstr ""
+msgstr "Valuta in cui sono espressi i budget di questo account pubblicitario."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__currency_id
@@ -508,31 +537,34 @@ msgid ""
 "which is not necessarily the one the advertising account is billed in: "
 "LinkedIn, for instance, always answers in US dollars."
 msgstr ""
+"Valuta in cui è espresso il costo. È quella riportata dal social media, che "
+"non è necessariamente quella in cui è fatturato l'account pubblicitario: "
+"LinkedIn, ad esempio, risponde sempre in dollari USA."
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__level__danger
 msgid "Danger"
-msgstr ""
+msgstr "Pericolo"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Delete ad"
-msgstr ""
+msgstr "Elimina annuncio"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Delete permanently"
-msgstr ""
+msgstr "Elimina definitivamente"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Delete the ad and its history from Odoo."
-msgstr ""
+msgstr "Elimina l'annuncio e il suo storico da Odoo."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Delete the ad on the social media."
-msgstr ""
+msgstr "Elimina l'annuncio sul social media."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -540,11 +572,12 @@ msgstr ""
 #, python-format
 msgid "Deleting an ad is not available for this social media."
 msgstr ""
+"L'eliminazione di un annuncio non è disponibile per questo social media."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_form
 msgid "Display"
-msgstr ""
+msgstr "Visualizza"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__display_name
@@ -554,14 +587,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__display_name
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__environment
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__environment
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_search
 msgid "Environment"
-msgstr ""
+msgstr "Ambiente"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_account__environment
@@ -569,55 +602,58 @@ msgid ""
 "Environment this advertising account belongs to. A test advertising account "
 "is never served nor billed."
 msgstr ""
+"Ambiente a cui appartiene questo account pubblicitario. Un account "
+"pubblicitario di test non viene mai pubblicato né fatturato."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__failed_message_ids
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__failed_message_ids
 msgid "Failed Messages"
-msgstr ""
+msgstr "Messaggi non riusciti"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Fetch advertising accounts"
-msgstr ""
+msgstr "Recupera account pubblicitari"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__statistics_date_from
 msgid "First day of the window the statistics of this ad cover."
 msgstr ""
+"Primo giorno della finestra coperta dalle statistiche di questo annuncio."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__fold
 msgid "Fold"
-msgstr ""
+msgstr "Comprimi"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_stage__fold
 msgid "Fold the column of this stage in the kanban views."
-msgstr ""
+msgstr "Comprimi la colonna di questa fase nelle viste kanban."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_follower_ids
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Follower"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_partner_ids
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Follower (partner)"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__activity_type_icon
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__activity_type_icon
 msgid "Font awesome icon e.g. fa-tasks"
-msgstr ""
+msgstr "Icona Font Awesome es. fa-tasks"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_form
 msgid "General"
-msgstr ""
+msgstr "Generale"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_search
@@ -626,13 +662,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_search
 msgid "Group By"
-msgstr ""
+msgstr "Raggruppa per"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__has_message
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__has_message
 msgid "Has Message"
-msgstr ""
+msgstr "Ha un messaggio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__id
@@ -642,29 +678,29 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_exception_icon
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_exception_icon
 msgid "Icon"
-msgstr ""
+msgstr "Icona"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__activity_exception_icon
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__activity_exception_icon
 msgid "Icon to indicate an exception activity."
-msgstr ""
+msgstr "Icona per indicare un'attività eccezione."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_account__remote_ref
 msgid "Identifier of the advertising account on the social media."
-msgstr ""
+msgstr "Identificativo dell'account pubblicitario sul social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__remote_ref
 msgid "Identifier of this ad on the social media."
-msgstr ""
+msgstr "Identificativo di questo annuncio sul social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__remote_ref
@@ -672,6 +708,8 @@ msgid ""
 "Identifier of this campaign group on the social media. It is set by the "
 "connector module of each social media."
 msgstr ""
+"Identificativo di questo gruppo di campagne sul social media. Viene "
+"impostato dal modulo connettore di ogni social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__remote_ref
@@ -679,18 +717,20 @@ msgid ""
 "Identifier of this campaign on the social media. It is set by the connector "
 "module of each social media."
 msgstr ""
+"Identificativo di questa campagna sul social media. Viene impostato dal "
+"modulo connettore di ogni social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_needaction
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_needaction
 msgid "If checked, new messages require your attention."
-msgstr ""
+msgstr "Se selezionato, nuovi messaggi richiedono attenzione."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_has_error
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_has_error
 msgid "If checked, some messages have a delivery error."
-msgstr ""
+msgstr "Se selezionato, alcuni messaggi hanno un errore di consegna."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -698,49 +738,50 @@ msgstr ""
 #, python-format
 msgid "Importing campaigns is not available for this social media."
 msgstr ""
+"L'importazione delle campagne non è disponibile per questo social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__impression_count
 msgid "Impression Count"
-msgstr ""
+msgstr "Numero impression"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_tree
 msgid "Impressions"
-msgstr ""
+msgstr "Impression"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_kanban
 msgid "Impressions:"
-msgstr ""
+msgstr "Impression:"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__is_current
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_search
 msgid "In Use"
-msgstr ""
+msgstr "In uso"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 msgid "In use"
-msgstr ""
+msgstr "In uso"
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__level__info
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_is_follower
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "È un follower"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__last_sync_date
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__last_sync_date
 msgid "Last Fetch"
-msgstr ""
+msgstr "Ultimo recupero"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__write_uid
@@ -750,7 +791,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__write_uid
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultimo aggiornamento di"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__write_date
@@ -760,12 +801,13 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__write_date
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultimo aggiornamento il"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__statistics_date_to
 msgid "Last day of the window the statistics of this ad cover."
 msgstr ""
+"Ultimo giorno della finestra coperta dalle statistiche di questo annuncio."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__stage_level
@@ -773,14 +815,14 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__stage_level
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__level
 msgid "Level"
-msgstr ""
+msgstr "Livello"
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
 #, python-format
 msgid "Listing the ads is not available for this social media."
-msgstr ""
+msgstr "L'elenco degli annunci non è disponibile per questo social media."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -789,6 +831,8 @@ msgstr ""
 msgid ""
 "Listing the advertising accounts is not available for this social media."
 msgstr ""
+"L'elenco degli account pubblicitari non è disponibile per questo social "
+"media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__media_id
@@ -800,59 +844,59 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_search
 msgid "Media"
-msgstr ""
+msgstr "Media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__media_type
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__media_type
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__media_type
 msgid "Media Type"
-msgstr ""
+msgstr "Tipo di media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_content
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_content
 msgid "Message Content"
-msgstr ""
+msgstr "Contenuto messaggio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_has_error
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_has_error
 msgid "Message Delivery error"
-msgstr ""
+msgstr "Errore di consegna messaggio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_content
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_content
 msgid "Message content, to be used only in searches"
-msgstr ""
+msgstr "Contenuto del messaggio, da usare solo nelle ricerche"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_ids
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Messaggi"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__created_date
 msgid "Moment the ad was created on the social media."
-msgstr ""
+msgstr "Momento in cui l'annuncio è stato creato sul social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__my_activity_date_deadline
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__my_activity_date_deadline
 msgid "My Activity Deadline"
-msgstr ""
+msgstr "Scadenza mie attività"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "My Ads"
-msgstr ""
+msgstr "I miei annunci"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 msgid "My Campaigns"
-msgstr ""
+msgstr "Le mie campagne"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__name
@@ -862,74 +906,74 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__name
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_tag__name
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #. module: social_media_advertising
 #. odoo-javascript
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
 #, python-format
 msgid "New ads available"
-msgstr ""
+msgstr "Nuovi annunci disponibili"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_calendar_event_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_calendar_event_id
 msgid "Next Activity Calendar Event"
-msgstr ""
+msgstr "Evento calendario attività successiva"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_date_deadline
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_date_deadline
 msgid "Next Activity Deadline"
-msgstr ""
+msgstr "Scadenza attività successiva"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_summary
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_summary
 msgid "Next Activity Summary"
-msgstr ""
+msgstr "Riepilogo attività successiva"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_type_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_type_id
 msgid "Next Activity Type"
-msgstr ""
+msgstr "Tipo attività successiva"
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
 #, python-format
 msgid "No account of yours can serve ads."
-msgstr ""
+msgstr "Nessun tuo account può pubblicare annunci."
 
 #. module: social_media_advertising
 #: model_terms:ir.actions.act_window,help:social_media_advertising.social_advertising_ad_action
 msgid "No ads yet"
-msgstr ""
+msgstr "Ancora nessun annuncio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_needaction_counter
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Numero di azioni"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_has_error_counter
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Numero di errori"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_needaction_counter
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_needaction_counter
 msgid "Number of messages requiring action"
-msgstr ""
+msgstr "Numero di messaggi che richiedono un'azione"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_has_error_counter
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_has_error_counter
 msgid "Number of messages with delivery error"
-msgstr ""
+msgstr "Numero di messaggi con errore di consegna"
 
 #. module: social_media_advertising
 #. odoo-python
@@ -939,6 +983,8 @@ msgid ""
 "Only an ad the social media no longer serves can be deleted here. This one "
 "is still answered, so the next synchronization would create it again."
 msgstr ""
+"Qui si può eliminare solo un annuncio che il social media non pubblica più. "
+"Questo risponde ancora, quindi la prossima sincronizzazione lo ricreerebbe."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -948,6 +994,8 @@ msgid ""
 "Only the responsible user of the account %(account)s and the social media "
 "administrators may choose its advertising account."
 msgstr ""
+"Solo l'utente responsabile dell'account %(account)s e gli amministratori dei "
+"social media possono scegliere il suo account pubblicitario."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -957,65 +1005,68 @@ msgid ""
 "Only the responsible user of the account %(account)s and the social media "
 "administrators may delete its ads."
 msgstr ""
+"Solo l'utente responsabile dell'account %(account)s e gli amministratori dei "
+"social media possono eliminare i suoi annunci."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Open ad"
-msgstr ""
+msgstr "Apri annuncio"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 msgid "Open advertising account"
-msgstr ""
+msgstr "Apri account pubblicitario"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_form
 msgid "Open campaign"
-msgstr ""
+msgstr "Apri campagna"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_form
 msgid "Open campaign group"
-msgstr ""
+msgstr "Apri gruppo di campagne"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Open the publication this ad promotes."
-msgstr ""
+msgstr "Apri la pubblicazione promossa da questo annuncio."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Open this ad on the social media, in a new tab."
-msgstr ""
+msgstr "Apri questo annuncio sul social media, in una nuova scheda."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 msgid "Open this advertising account on the social media, in a new tab."
 msgstr ""
+"Apri questo account pubblicitario sul social media, in una nuova scheda."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_form
 msgid "Open this campaign group on the social media, in a new tab."
-msgstr ""
+msgstr "Apri questo gruppo di campagne sul social media, in una nuova scheda."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_form
 msgid "Open this campaign on the social media, in a new tab."
-msgstr ""
+msgstr "Apri questa campagna sul social media, in una nuova scheda."
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_ad.py:0
 #, python-format
 msgid "Post not available"
-msgstr ""
+msgstr "Post non disponibile"
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_account__environment__production
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_advertising_account__environment__production
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_search
 msgid "Production"
-msgstr ""
+msgstr "Produzione"
 
 #. module: social_media_advertising
 #. odoo-python
@@ -1024,12 +1075,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 #, python-format
 msgid "Publication"
-msgstr ""
+msgstr "Pubblicazione"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_post_account
 msgid "Publication of a Post on a Social Account"
-msgstr ""
+msgstr "Pubblicazione di un post su un account social"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__post_account_id
@@ -1037,16 +1088,18 @@ msgid ""
 "Publication this ad promotes. It is empty when the promoted post was not "
 "created nor imported into this database."
 msgstr ""
+"Pubblicazione promossa da questo annuncio. È vuota quando il post promosso "
+"non è stato creato né importato in questo database."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__status_detail
 msgid "Reason the social media gives for serving this ad or not."
-msgstr ""
+msgstr "Motivo per cui il social media pubblica o meno questo annuncio."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_stage__applies_to
 msgid "Records this stage can be set on."
-msgstr ""
+msgstr "Record su cui si può impostare questa fase."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__remote_ref
@@ -1054,7 +1107,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__remote_ref
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__remote_ref
 msgid "Remote Reference"
-msgstr ""
+msgstr "Riferimento remoto"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_account__advertising_account_urn
@@ -1062,19 +1115,21 @@ msgid ""
 "Remote reference of the advertising account in use, the value the connector "
 "modules send to the social media."
 msgstr ""
+"Riferimento remoto dell'account pubblicitario in uso, il valore che i moduli "
+"connettore inviano al social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__user_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__user_id
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 msgid "Responsible"
-msgstr ""
+msgstr "Responsabile"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_user_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_user_id
 msgid "Responsible User"
-msgstr ""
+msgstr "Utente responsabile"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__user_id
@@ -1082,31 +1137,33 @@ msgid ""
 "Responsible user of the account this ad belongs to. Only that user and the "
 "social media administrators can see it."
 msgstr ""
+"Utente responsabile dell'account a cui appartiene questo annuncio. Solo tale "
+"utente e gli amministratori dei social media possono vederlo."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_form
 msgid "Scope"
-msgstr ""
+msgstr "Ambito"
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__level__secondary
 msgid "Secondary"
-msgstr ""
+msgstr "Secondario"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_stage__sequence
 msgid "Sequence"
-msgstr ""
+msgstr "Sequenza"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_campaign_group
 msgid "Set of Campaigns Managed as a Unit on a Social Media"
-msgstr ""
+msgstr "Insieme di campagne gestite come un'unità su un social media"
 
 #. module: social_media_advertising
 #: model:ir.actions.server,name:social_media_advertising.check_ads_updates_job_ir_actions_server
 msgid "Social Advertising: Checking for new ads"
-msgstr ""
+msgstr "Social Advertising: verifica nuovi annunci"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_post__social_campaign_id
@@ -1114,7 +1171,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_post_account_view_search_inherit
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_post_view_search_inherit
 msgid "Social Campaign"
-msgstr ""
+msgstr "Campagna social"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_post_account__social_campaign_id
@@ -1123,11 +1180,14 @@ msgid ""
 "social media has no parent post, so its campaign is resolved by the "
 "connector module from the remote one."
 msgstr ""
+"Campagna social media del post padre. Una pubblicazione importata dal social "
+"media non ha un post padre, quindi la sua campagna viene risolta dal modulo "
+"connettore a partire da quella remota."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_post__allow_social_campaign_ids
 msgid "Social media campaigns that can be linked to this post."
-msgstr ""
+msgstr "Campagne social media che possono essere collegate a questo post."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__media_id
@@ -1136,6 +1196,9 @@ msgid ""
 "editable while the group has none, which is how a connector module knows the"
 " social media of a group created empty."
 msgstr ""
+"Social media delle campagne di questo gruppo. Dedotto dalle campagne; "
+"modificabile finché il gruppo non ne ha, ed è così che un modulo connettore "
+"conosce il social media di un gruppo creato vuoto."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__stage_id
@@ -1143,38 +1206,38 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 msgid "Stage"
-msgstr ""
+msgstr "Fase"
 
 #. module: social_media_advertising
 #: model:ir.ui.menu,name:social_media_advertising.social_stage_root_menu
 msgid "Stages"
-msgstr ""
+msgstr "Fasi"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiche"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__statistics_date_from
 msgid "Statistics From"
-msgstr ""
+msgstr "Statistiche dal"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__statistics_date_to
 msgid "Statistics To"
-msgstr ""
+msgstr "Statistiche al"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__stage_id
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_search
 msgid "Status"
-msgstr ""
+msgstr "Stato"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__status_detail
 msgid "Status Detail"
-msgstr ""
+msgstr "Dettaglio stato"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__activity_state
@@ -1185,6 +1248,10 @@ msgid ""
 "Today: Activity date is today\n"
 "Planned: Future activities."
 msgstr ""
+"Stato basato sulle attività\n"
+"Scaduto: la data di scadenza è già trascorsa\n"
+"Oggi: la data attività è oggi\n"
+"Pianificato: attività future."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__stage_code
@@ -1192,26 +1259,28 @@ msgid ""
 "Status code of the social media, used by the connector modules to tell their"
 " own statuses apart in the views."
 msgstr ""
+"Codice di stato del social media, usato dai moduli connettore per "
+"distinguere i propri stati nelle viste."
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_stage
 msgid "Status of a Campaign, a Campaign Group or an Ad"
-msgstr ""
+msgstr "Stato di una campagna, di un gruppo di campagne o di un annuncio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__stage_id
 msgid "Status of this ad on the social media."
-msgstr ""
+msgstr "Stato di questo annuncio sul social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__stage_id
 msgid "Status of this campaign group on the social media."
-msgstr ""
+msgstr "Stato di questo gruppo di campagne sul social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__stage_id
 msgid "Status of this campaign on the social media."
-msgstr ""
+msgstr "Stato di questa campagna sul social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_stage__code
@@ -1219,35 +1288,37 @@ msgid ""
 "Status value as returned by the social media, used by the connector module "
 "to map the remote status to this stage."
 msgstr ""
+"Valore di stato restituito dal social media, usato dal modulo connettore per "
+"associare lo stato remoto a questa fase."
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__level__success
 msgid "Success"
-msgstr ""
+msgstr "Successo"
 
 #. module: social_media_advertising
 #. odoo-javascript
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
 #, python-format
 msgid "Sync ads"
-msgstr ""
+msgstr "Sincronizza annunci"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_tag
 msgid "Tag Classifying the Social Media Campaigns"
-msgstr ""
+msgstr "Etichetta che classifica le campagne social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__tag_ids
 msgid "Tags"
-msgstr ""
+msgstr "Etichette"
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_account__environment__test
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_advertising_account__environment__test
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_search
 msgid "Test"
-msgstr ""
+msgstr "Test"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__name
@@ -1255,6 +1326,8 @@ msgid ""
 "Text of the promoted post, or a note saying it is not available when the ad "
 "promotes a post this database does not know."
 msgstr ""
+"Testo del post promosso, o una nota che indica che non è disponibile quando "
+"l'annuncio promuove un post che questo database non conosce."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -1264,6 +1337,8 @@ msgid ""
 "The account %(account)s can only work with one advertising account at a "
 "time."
 msgstr ""
+"L'account %(account)s può lavorare con un solo account pubblicitario alla "
+"volta."
 
 #. module: social_media_advertising
 #: model_terms:ir.actions.act_window,help:social_media_advertising.social_advertising_ad_action
@@ -1271,6 +1346,9 @@ msgid ""
 "The ads served by your social media accounts are shown here\n"
 "                once you synchronize them with the <b>Sync ads</b> button."
 msgstr ""
+"Gli annunci pubblicati dai tuoi account social media vengono mostrati qui\n"
+"                una volta sincronizzati con il pulsante <b>Sincronizza "
+"annunci</b>."
 
 #. module: social_media_advertising
 #. odoo-python
@@ -1281,12 +1359,15 @@ msgid ""
 "%(advertising_environment)s environment, while the account %(account)s is "
 "set to %(environment)s."
 msgstr ""
+"L'account pubblicitario %(advertising_account)s appartiene all'ambiente %"
+"(advertising_environment)s, mentre l'account %(account)s è impostato su %"
+"(environment)s."
 
 #. module: social_media_advertising
 #: model:ir.model.constraint,message:social_media_advertising.constraint_social_advertising_campaign_group_remote_ref_uniq
 #: model:ir.model.constraint,message:social_media_advertising.constraint_social_advertising_campaign_remote_ref_uniq
 msgid "The remote reference must be unique per social media."
-msgstr ""
+msgstr "Il riferimento remoto deve essere univoco per social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_account__ads_need_update
@@ -1294,6 +1375,9 @@ msgid ""
 "The social media has ads this account does not know about yet. It is raised "
 "by the cron checking for new ads and cleared by the next synchronization."
 msgstr ""
+"Il social media ha annunci che questo account non conosce ancora. Viene "
+"segnalato dal cron che verifica i nuovi annunci e azzerato dalla successiva "
+"sincronizzazione."
 
 #. module: social_media_advertising
 #. odoo-javascript
@@ -1303,11 +1387,13 @@ msgid ""
 "The social media is serving ads this database does not know yet. Synchronize"
 " to bring them in."
 msgstr ""
+"Il social media sta pubblicando annunci che questo database non conosce "
+"ancora. Sincronizzare per importarli."
 
 #. module: social_media_advertising
 #: model:ir.model.constraint,message:social_media_advertising.constraint_social_stage_code_uniq
 msgid "The stage code must be unique per social media and scope."
-msgstr ""
+msgstr "Il codice della fase deve essere univoco per social media e ambito."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
@@ -1316,6 +1402,10 @@ msgid ""
 "the window they cover. Nothing is deleted on the social media, which no "
 "longer serves this ad anyway. This cannot be undone."
 msgstr ""
+"Questo elimina l'annuncio e il suo storico in Odoo: costo, impression, click "
+"e la finestra che coprono. Nulla viene eliminato sul social media, che "
+"comunque non pubblica più questo annuncio. L'operazione non può essere "
+"annullata."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
@@ -1324,18 +1414,21 @@ msgid ""
 "already being served is not deleted right away: the social media only takes "
 "the request and processes it afterwards."
 msgstr ""
+"Questo elimina l'annuncio sul social media e non può essere annullato. Un "
+"annuncio già in pubblicazione non viene eliminato subito: il social media "
+"prende solo in carico la richiesta e la elabora in seguito."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__activity_exception_decoration
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__activity_exception_decoration
 msgid "Type of the exception activity on record."
-msgstr ""
+msgstr "Tipo di attività eccezione sul record."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 msgid "Use this account"
-msgstr ""
+msgstr "Usa questo account"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__user_id
@@ -1343,11 +1436,13 @@ msgid ""
 "User this campaign belongs to. Only the responsible user and the social "
 "media administrators can see it."
 msgstr ""
+"Utente a cui appartiene questa campagna. Solo l'utente responsabile e gli "
+"amministratori dei social media possono vederla."
 
 #. module: social_media_advertising
 #: model:ir.model.fields.selection,name:social_media_advertising.selection__social_stage__level__warning
 msgid "Warning"
-msgstr ""
+msgstr "Avviso"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__web_url
@@ -1355,19 +1450,19 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__web_url
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__web_url
 msgid "Web URL"
-msgstr ""
+msgstr "URL web"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__website_message_ids
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__website_message_ids
 msgid "Website Messages"
-msgstr ""
+msgstr "Messaggi sito web"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__website_message_ids
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__website_message_ids
 msgid "Website communication history"
-msgstr ""
+msgstr "Storico comunicazioni sito web"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_account__can_sync_advertising_accounts
@@ -1375,6 +1470,8 @@ msgid ""
 "Whether a connector module can list the advertising accounts of this social "
 "media."
 msgstr ""
+"Indica se un modulo connettore può elencare gli account pubblicitari di "
+"questo social media."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__advertising_account_is_current
@@ -1383,6 +1480,10 @@ msgid ""
 "media account works with right now. Ads of the other advertising accounts "
 "are kept as they were last synchronized."
 msgstr ""
+"Indica se l'account pubblicitario a cui appartiene questo annuncio è quello "
+"con cui l'account social media lavora in questo momento. Gli annunci degli "
+"altri account pubblicitari vengono mantenuti come all'ultima "
+"sincronizzazione."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__can_delete_remote_ad
@@ -1390,6 +1491,8 @@ msgid ""
 "Whether the connector module of this social media deletes an ad, and this "
 "one is not gone already."
 msgstr ""
+"Indica se il modulo connettore di questo social media elimina un annuncio, e "
+"questo non è già scomparso."
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_account__environment
@@ -1399,6 +1502,10 @@ msgid ""
 " their ads, which are never served nor billed. This setting does not affect "
 "the publication of posts."
 msgstr ""
+"Quali entità rispondono alle API pubblicitarie per questo account. In Test "
+"il social media restituisce solo gli account pubblicitari di test, le loro "
+"campagne e i loro annunci, che non vengono mai pubblicati né fatturati. "
+"Questa impostazione non influisce sulla pubblicazione dei post."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
@@ -1407,28 +1514,30 @@ msgid ""
 "Work with this advertising account: its campaigns, its ads and their figures"
 " are the ones read from the social media."
 msgstr ""
+"Lavora con questo account pubblicitario: le sue campagne, i suoi annunci e i "
+"loro dati sono quelli letti dal social media."
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_form
 msgid "e.g. ACTIVE"
-msgstr ""
+msgstr "es. ATTIVO"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_stage_view_form
 msgid "e.g. Active"
-msgstr ""
+msgstr "es. Attivo"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_tag_view_form
 msgid "e.g. Black Friday"
-msgstr ""
+msgstr "es. Black Friday"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_form
 msgid "e.g. Black Friday 2026"
-msgstr ""
+msgstr "es. Black Friday 2026"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_form
 msgid "e.g. Winter Campaigns"
-msgstr ""
+msgstr "es. Campagne invernali"
