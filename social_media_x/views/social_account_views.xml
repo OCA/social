@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="social_account_form_view_inherit">
+        <field name="name">social.account.view.form.inherit.x</field>
+        <field name="model">social.account</field>
+        <field name="inherit_id" ref="social_media_base.social_account_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//page[@name='account_key_token']" position="inside">
+                <group>
+                    <field
+                        name="x_api_key"
+                        readonly="1"
+                        required="media_type == 'x'"
+                        invisible="media_type != 'x'"
+                    />
+                    <field
+                        name="x_api_secret"
+                        password="1"
+                        readonly="1"
+                        required="media_type == 'x'"
+                        invisible="media_type != 'x'"
+                    />
+                    <field
+                        name="x_access_token_oauth2"
+                        readonly="1"
+                        required="media_type == 'x'"
+                        invisible="media_type != 'x'"
+                    />
+                    <field
+                        name="x_access_token_oauth1"
+                        readonly="1"
+                        required="media_type == 'x'"
+                        invisible="media_type != 'x'"
+                    />
+                    <field
+                        name="enable_since"
+                        widget="boolean_toggle"
+                        invisible="media_type != 'x'"
+                    />
+                    <field
+                        name="post_since_id"
+                        invisible="not enable_since or media_type != 'x'"
+                        readonly="0"
+                    />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
