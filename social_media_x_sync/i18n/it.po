@@ -6,78 +6,80 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-10 22:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "A publication of the account cannot be deleted as a comment."
-msgstr ""
+msgstr "Una pubblicazione dell'account non può essere eliminata come commento."
 
 #. module: social_media_x_sync
 #: model:ir.model,name:social_media_x_sync.model_social_account
 msgid "Account Linked to a Social Media"
-msgstr ""
+msgstr "Account collegato a un social media"
 
 #. module: social_media_x_sync
 #: model:ir.model.fields,field_description:social_media_x_sync.field_social_account__enable_since
 msgid "Enable Since"
-msgstr ""
+msgstr "Abilita \"da\""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "Error Comment Tweet: %(error)s"
-msgstr ""
+msgstr "Errore commento tweet: %(error)s"
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "Error Delete Comment: %(error)s"
-msgstr ""
+msgstr "Errore eliminazione commento: %(error)s"
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "Error Get Comments for Tweet: %(error)s"
-msgstr ""
+msgstr "Errore recupero commenti del tweet: %(error)s"
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "Error Recommend Tweet: %(error)s"
-msgstr ""
+msgstr "Errore raccomandazione tweet: %(error)s"
 
 #. module: social_media_x_sync
 #: model:ir.model.fields,field_description:social_media_x_sync.field_social_account__last_post_ref
 msgid "Last Post"
-msgstr ""
+msgstr "Ultimo post"
 
 #. module: social_media_x_sync
 #: model:ir.model.fields,field_description:social_media_x_sync.field_social_account__post_since_id
 msgid "Post Since"
-msgstr ""
+msgstr "Post da"
 
 #. module: social_media_x_sync
 #: model:ir.model,name:social_media_x_sync.model_social_post_account
 msgid "Publication of a Post on a Social Account"
-msgstr ""
+msgstr "Pubblicazione di un post su un account social"
 
 #. module: social_media_x_sync
 #: model_terms:ir.ui.view,arch_db:social_media_x_sync.social_post_account_view_tree_inherit
 msgid "Quotes"
-msgstr ""
+msgstr "Citazioni"
 
 #. module: social_media_x_sync
 #: model:ir.model.fields,help:social_media_x_sync.field_social_account__enable_since
@@ -86,6 +88,9 @@ msgid ""
 "consume fewer API requests. The metrics of the previous posts are no longer "
 "updated while this option is on."
 msgstr ""
+"Legge solo i post pubblicati dopo l'ultimo già sincronizzato, per consumare "
+"meno richieste API. Le metriche dei post precedenti non vengono più "
+"aggiornate mentre questa opzione è attiva."
 
 #. module: social_media_x_sync
 #: model:ir.model.fields,help:social_media_x_sync.field_social_account__last_post_ref
@@ -93,18 +98,20 @@ msgid ""
 "Reference of the newest tweet read from X, used to ask only for the ones "
 "published after it."
 msgstr ""
+"Riferimento del tweet più recente letto da X, usato per chiedere solo quelli "
+"pubblicati dopo di esso."
 
 #. module: social_media_x_sync
 #: model_terms:ir.ui.view,arch_db:social_media_x_sync.social_post_account_view_tree_inherit
 msgid "Reposts"
-msgstr ""
+msgstr "Repost"
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "The comment cannot be recommended on X."
-msgstr ""
+msgstr "Il commento non può essere raccomandato su X."
 
 #. module: social_media_x_sync
 #. odoo-python
@@ -114,6 +121,8 @@ msgid ""
 "The comment could not be deleted on X. The account may have reached the "
 "limit of requests of its plan."
 msgstr ""
+"Impossibile eliminare il commento su X. L'account potrebbe aver raggiunto il "
+"limite di richieste del suo piano."
 
 #. module: social_media_x_sync
 #. odoo-python
@@ -123,6 +132,8 @@ msgid ""
 "The comment could not be published on X. The account may have reached the "
 "limit of requests of its plan."
 msgstr ""
+"Impossibile pubblicare il commento su X. L'account potrebbe aver raggiunto "
+"il limite di richieste del suo piano."
 
 #. module: social_media_x_sync
 #. odoo-python
@@ -132,6 +143,8 @@ msgid ""
 "The comments could not be read from X. The account may have reached the "
 "limit of requests of its plan."
 msgstr ""
+"Impossibile leggere i commenti da X. L'account potrebbe aver raggiunto il "
+"limite di richieste del suo piano."
 
 #. module: social_media_x_sync
 #. odoo-python
@@ -139,7 +152,7 @@ msgstr ""
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "The post does not exist or has been deleted."
-msgstr ""
+msgstr "Il post non esiste o è stato eliminato."
 
 #. module: social_media_x_sync
 #. odoo-python
@@ -149,28 +162,30 @@ msgid ""
 "The recommendation could not be sent to X. The account may have reached the "
 "limit of requests of its plan."
 msgstr ""
+"Impossibile inviare la raccomandazione a X. L'account potrebbe aver "
+"raggiunto il limite di richieste del suo piano."
 
 #. module: social_media_x_sync
 #: model:ir.model.fields,help:social_media_x_sync.field_social_account__post_since_id
 msgid "This post is updated with each request with the latest one."
-msgstr ""
+msgstr "Questo post viene aggiornato a ogni richiesta con l'ultimo."
 
 #. module: social_media_x_sync
 #: model_terms:ir.ui.view,arch_db:social_media_x_sync.social_post_account_view_search_inherit
 msgid "With Quotes"
-msgstr ""
+msgstr "Con citazioni"
 
 #. module: social_media_x_sync
 #: model_terms:ir.ui.view,arch_db:social_media_x_sync.social_post_account_view_search_inherit
 msgid "With Reposts"
-msgstr ""
+msgstr "Con repost"
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
 #, python-format
 msgid "X did not delete the comment: %(errors)s"
-msgstr ""
+msgstr "X non ha eliminato il commento: %(errors)s"
 
 #. module: social_media_x_sync
 #. odoo-python
@@ -180,10 +195,12 @@ msgid ""
 "X refused the credentials of %(account)s. Update the account to authorize it"
 " again."
 msgstr ""
+"X ha rifiutato le credenziali di %(account)s. Aggiornare l'account per "
+"autorizzarlo di nuovo."
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/tests/test_sync_account_x.py:0
 #, python-format
 msgid "X refused the timeline"
-msgstr ""
+msgstr "X ha rifiutato la timeline"
