@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,22 +16,18 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid "%(accounts)s advertising account(s) available."
 msgstr ""
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid "%(ads)s ad(s) available."
 msgstr ""
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid ""
 "%(ads)s ad(s) available. The ads of these accounts could not be fetched: "
 "%(accounts)s."
@@ -284,7 +280,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-javascript
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
-#, python-format
 msgid ""
 "Ask the social media again for the ads of every account and the figures it "
 "reports for them, instead of waiting for the next automatic pass."
@@ -340,7 +335,6 @@ msgstr ""
 #: code:addons/social_media_advertising/models/social_advertising_account.py:0
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
-#, python-format
 msgid "Campaign Groups"
 msgstr ""
 
@@ -373,7 +367,6 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_form
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_tree
-#, python-format
 msgid "Campaigns"
 msgstr ""
 
@@ -536,7 +529,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_ad.py:0
-#, python-format
 msgid "Deleting an ad is not available for this social media."
 msgstr ""
 
@@ -567,12 +559,6 @@ msgstr ""
 msgid ""
 "Environment this advertising account belongs to. A test advertising account "
 "is never served nor billed."
-msgstr ""
-
-#. module: social_media_advertising
-#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__failed_message_ids
-#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__failed_message_ids
-msgid "Failed Messages"
 msgstr ""
 
 #. module: social_media_advertising
@@ -694,7 +680,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid "Importing campaigns is not available for this social media."
 msgstr ""
 
@@ -777,14 +762,12 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid "Listing the ads is not available for this social media."
 msgstr ""
 
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid ""
 "Listing the advertising accounts is not available for this social media."
 msgstr ""
@@ -809,21 +792,9 @@ msgid "Media Type"
 msgstr ""
 
 #. module: social_media_advertising
-#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_content
-#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_content
-msgid "Message Content"
-msgstr ""
-
-#. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__message_has_error
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__message_has_error
 msgid "Message Delivery error"
-msgstr ""
-
-#. module: social_media_advertising
-#: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign__message_content
-#: model:ir.model.fields,help:social_media_advertising.field_social_advertising_campaign_group__message_content
-msgid "Message content, to be used only in searches"
 msgstr ""
 
 #. module: social_media_advertising
@@ -866,14 +837,7 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-javascript
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
-#, python-format
 msgid "New ads available"
-msgstr ""
-
-#. module: social_media_advertising
-#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_calendar_event_id
-#: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__activity_calendar_event_id
-msgid "Next Activity Calendar Event"
 msgstr ""
 
 #. module: social_media_advertising
@@ -897,7 +861,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_account.py:0
-#, python-format
 msgid "No account of yours can serve ads."
 msgstr ""
 
@@ -933,7 +896,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_ad.py:0
-#, python-format
 msgid ""
 "Only an ad the social media no longer serves can be deleted here. This one "
 "is still answered, so the next synchronization would create it again."
@@ -942,7 +904,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_account.py:0
-#, python-format
 msgid ""
 "Only the responsible user of the account %(account)s and the social media "
 "administrators may choose its advertising account."
@@ -951,7 +912,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_ad.py:0
-#, python-format
 msgid ""
 "Only the responsible user of the account %(account)s and the social media "
 "administrators may delete its ads."
@@ -1005,7 +965,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_ad.py:0
-#, python-format
 msgid "Post not available"
 msgstr ""
 
@@ -1021,7 +980,6 @@ msgstr ""
 #: code:addons/social_media_advertising/models/social_advertising_ad.py:0
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__post_account_id
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_ad_view_form
-#, python-format
 msgid "Publication"
 msgstr ""
 
@@ -1227,7 +1185,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-javascript
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
-#, python-format
 msgid "Sync ads"
 msgstr ""
 
@@ -1258,7 +1215,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_account.py:0
-#, python-format
 msgid ""
 "The account %(account)s can only work with one advertising account at a "
 "time."
@@ -1274,7 +1230,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-python
 #: code:addons/social_media_advertising/models/social_advertising_account.py:0
-#, python-format
 msgid ""
 "The advertising account %(advertising_account)s belongs to the "
 "%(advertising_environment)s environment, while the account %(account)s is "
@@ -1297,7 +1252,6 @@ msgstr ""
 #. module: social_media_advertising
 #. odoo-javascript
 #: code:addons/social_media_advertising/static/src/js/views/kanban/ads_kanban_buttons.xml:0
-#, python-format
 msgid ""
 "The social media is serving ads this database does not know yet. Synchronize"
 " to bring them in."
