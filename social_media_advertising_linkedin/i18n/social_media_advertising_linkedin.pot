@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "%(groups)s campaign group(s), %(campaigns)s campaign(s) and %(ads)s "
 "sponsored post(s) imported from LinkedIn."
@@ -35,7 +34,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "A LinkedIn campaign can only have one LinkedIn account."
 msgstr ""
 
@@ -137,35 +135,30 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "Campaign archived on LinkedIn."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "Campaign created on LinkedIn in draft status."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "Campaign group archived on LinkedIn."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "Campaign group created on LinkedIn in draft status."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "Campaign group updated on LinkedIn."
 msgstr ""
 
@@ -186,14 +179,12 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "Campaign not created on LinkedIn"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "Campaign updated on LinkedIn."
 msgstr ""
 
@@ -334,7 +325,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_ad.py:0
-#, python-format
 msgid "Error deleting the LinkedIn ad: %(error)s"
 msgstr ""
 
@@ -357,7 +347,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "Import kept the local pending changes. LinkedIn values: name: %(name)s, "
 "total budget: %(total_budget)s %(currency)s"
@@ -366,7 +355,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "Import kept the local pending changes. LinkedIn values: name: %(name)s, unit"
 " cost: %(unit_cost)s, daily budget: %(daily_budget)s, campaign group: "
@@ -430,7 +418,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn campaign %(campaign)s uses the 'Single video' format, so it only "
 "accepts posts containing a video."
@@ -446,7 +433,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid ""
 "LinkedIn does not archive a campaign whose campaign group is still in draft "
 "status. Activate the group %(group)s in Campaign Manager first, or archive "
@@ -456,7 +442,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_ad.py:0
-#, python-format
 msgid ""
 "LinkedIn does not delete an ad that is being served right away. The deletion"
 " was requested and is now pending: the ad disappears once LinkedIn processes"
@@ -466,7 +451,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn does not sponsor posts with several images: they are published as a"
 " multi-image post, a format its API cannot turn into an ad, so this post "
@@ -484,7 +468,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post.py:0
-#, python-format
 msgid ""
 "LinkedIn only sponsors a post carrying a video through a campaign of the "
 "'Single video' format. The campaign %(campaign)s uses 'Standard update', and"
@@ -494,14 +477,12 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "LinkedIn requires an objective for the video format."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid ""
 "LinkedIn requires declaring whether the campaign is political advertising."
 msgstr ""
@@ -540,7 +521,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "No LinkedIn advertising account is in use for the account %(account)s. Open "
 "its Advertising tab, fetch the advertising accounts and choose one."
@@ -554,21 +534,18 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "No LinkedIn social account is available to archive the group."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "No LinkedIn social account is available to create the group."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "No LinkedIn social account is available to update the group."
 msgstr ""
 
@@ -719,7 +696,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/hooks.py:0
-#, python-format
 msgid ""
 "The Advertising module for LinkedIn was installed. The token of this account"
 " was not granted %(scopes)s, so LinkedIn refuses the advertising calls. Add "
@@ -731,7 +707,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_stage.py:0
-#, python-format
 msgid ""
 "The LinkedIn stage with code %(code)s for %(scope)s is missing. The LinkedIn"
 " stages are module data declared noupdate: upgrading "
@@ -756,14 +731,12 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_ad.py:0
-#, python-format
 msgid "The ad was deleted on LinkedIn."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_ad.py:0
-#, python-format
 msgid ""
 "The ad was deleted on LinkedIn. It is kept here as history, archived and "
 "with its statistics."
@@ -772,7 +745,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid "The ads could not be read from LinkedIn: %(error)s"
 msgstr ""
 
@@ -786,7 +758,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "The advertising account of %(record)s is no longer available on LinkedIn."
 msgstr ""
@@ -794,15 +765,12 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid "The advertising accounts could not be read from LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign %(campaign)s does not belong to a campaign group."
 msgstr ""
 
@@ -810,7 +778,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post.py:0
 #: code:addons/social_media_advertising_linkedin/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The campaign %(campaign)s has not been created on LinkedIn yet. Use the "
 "'Create in LinkedIn' button on the campaign before posting."
@@ -819,7 +786,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid ""
 "The campaign %(names)s cannot be modified because of its LinkedIn status "
 "(%(status)s)."
@@ -828,7 +794,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid ""
 "The campaign cannot be archived because of its LinkedIn status (%(status)s)."
 msgstr ""
@@ -836,7 +801,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid ""
 "The campaign cannot be updated because of its LinkedIn status (%(status)s)."
 msgstr ""
@@ -844,29 +808,24 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign could not be archived on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign could not be checked on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign could not be created on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The campaign could not be generated for the post, please try again later."
 msgstr ""
@@ -874,29 +833,24 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign could not be updated on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign daily budget must be positive."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign does not exist on LinkedIn yet."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid ""
 "The campaign group %(group)s does not exist on LinkedIn. Create or import it"
 " before updating the campaign."
@@ -905,7 +859,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid ""
 "The campaign group %(group)s is not linked to any LinkedIn account and the "
 "database holds several of them. Set the account on one of its campaigns to "
@@ -915,7 +868,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid ""
 "The campaign group %(names)s cannot be modified because of its LinkedIn "
 "status (%(status)s)."
@@ -924,7 +876,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group already exists on LinkedIn."
 msgstr ""
 
@@ -938,7 +889,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid ""
 "The campaign group cannot be archived because of its LinkedIn status "
 "(%(status)s)."
@@ -947,7 +897,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid ""
 "The campaign group cannot be updated because of its LinkedIn status "
 "(%(status)s)."
@@ -956,36 +905,30 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group could not be archived on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign group could not be checked on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group could not be created on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group could not be updated on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group does not exist on LinkedIn yet."
 msgstr ""
 
@@ -1001,8 +944,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group must have a currency."
 msgstr ""
 
@@ -1010,7 +951,6 @@ msgstr ""
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid "The campaign group total budget must be positive."
 msgstr ""
 
@@ -1046,36 +986,30 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign media must be LinkedIn."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign must belong to a campaign group."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign must have a social account and a currency."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign must have a social account."
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign.py:0
-#, python-format
 msgid "The campaign unit cost must be positive."
 msgstr ""
 
@@ -1097,14 +1031,12 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid "The campaigns could not be read from LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid ""
 "The campaigns of the group %(group)s point to several LinkedIn accounts "
 "(%(accounts)s). Leave a single one so the advertising account to use is "
@@ -1114,7 +1046,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_advertising_campaign_group.py:0
-#, python-format
 msgid ""
 "The daily budgets of the campaigns of the group %(group)s add up to "
 "%(daily_budgets)s, which exceeds its total budget of %(total_budget)s."
@@ -1123,7 +1054,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The post was published on LinkedIn but the campaign creative could not be "
 "created. Check the Ads permissions of the account."
@@ -1132,21 +1062,18 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_post_account.py:0
-#, python-format
 msgid "The sponsored creative could not be created on LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid "The statistics of the ads could not be read from LinkedIn: %(error)s"
 msgstr ""
 
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "This campaign group was deleted on LinkedIn. It is kept in Odoo as history "
 "because LinkedIn still returns it with its performance data."
@@ -1155,7 +1082,6 @@ msgstr ""
 #. module: social_media_advertising_linkedin
 #. odoo-python
 #: code:addons/social_media_advertising_linkedin/models/social_account.py:0
-#, python-format
 msgid ""
 "This campaign was deleted on LinkedIn. It is kept in Odoo as history because"
 " LinkedIn still returns it with its performance data."
