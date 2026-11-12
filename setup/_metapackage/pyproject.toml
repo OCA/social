@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-social"
-version = "18.0.20261111.0"
+version = "18.0.20261112.0"
 dependencies = [
     "odoo-addon-fetchmail_thread_default==18.0.*",
     "odoo-addon-mail_activity_cancel_tracking==18.0.*",
@@ -19,6 +19,7 @@ dependencies = [
     "odoo-addon-res_partner_linkedin_link==18.0.*",
     "odoo-addon-res_partner_mastodon_link==18.0.*",
     "odoo-addon-social_media_advertising==18.0.*",
+    "odoo-addon-social_media_advertising_linkedin==18.0.*",
     "odoo-addon-social_media_base==18.0.*",
     "odoo-addon-social_media_calendar==18.0.*",
     "odoo-addon-social_media_linkedin==18.0.*",
