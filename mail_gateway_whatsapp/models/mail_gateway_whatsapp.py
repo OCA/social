@@ -133,8 +133,7 @@ class MailGatewayWhatsappService(models.AbstractModel):
                 )
         return Markup("".join(parts))
 
-    def _process_update(self, chat, message, value):
-        chat.ensure_one()
+    def _get_message_content(self, chat, message):
         body = ""
         attachments = []
         if message.get("text"):
@@ -191,6 +190,11 @@ class MailGatewayWhatsappService(models.AbstractModel):
             ) % (message["location"]["latitude"], message["location"]["longitude"])
         if message.get("contacts"):
             pass
+        return body, attachments
+
+    def _process_update(self, chat, message, value):
+        chat.ensure_one()
+        body, attachments = self._get_message_content(chat, message)
         if len(body) > 0 or attachments:
             author = self._get_author(chat.gateway_id, value)
             if author._name == "mail.guest":
