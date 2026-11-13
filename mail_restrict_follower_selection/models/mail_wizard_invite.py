@@ -14,7 +14,9 @@ class MailWizardInvite(models.TransientModel):
     _inherit = "mail.wizard.invite"
 
     @api.model
-    def _mail_restrict_follower_selection_get_domain(self, res_model=None):
+    def _mail_restrict_follower_selection_get_domain(
+        self, res_model=None, wizard=False
+    ):
         if not res_model:
             res_model = self.env.context.get("default_res_model")
         parameter_name = "mail_restrict_follower_selection.domain"
@@ -28,9 +30,9 @@ class MailWizardInvite(models.TransientModel):
                 .get_param(parameter_name, default="[]"),
             )
         )
-        domain = expression.AND(
-            [safe_eval(parameter_domain), self._fields["partner_ids"].domain]
-        )
+        domain = safe_eval(parameter_domain)
+        if wizard:
+            domain = expression.AND([domain, self._fields["partner_ids"].domain])
         return domain
 
     @api.model
@@ -41,7 +43,7 @@ class MailWizardInvite(models.TransientModel):
         arch = etree.fromstring(result["arch"])
         for field in arch.xpath('//field[@name="partner_ids"]'):
             field.attrib["domain"] = str(
-                self._mail_restrict_follower_selection_get_domain()
+                self._mail_restrict_follower_selection_get_domain(wizard=True)
             )
         result["arch"] = etree.tostring(arch)
         return result
