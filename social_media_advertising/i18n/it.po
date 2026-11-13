@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-13 10:49+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: social_media_advertising
 #. odoo-python
@@ -72,7 +74,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_account
 msgid "Account Linked to a Social Media"
-msgstr ""
+msgstr "Account collegato a un social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__account_ids
@@ -95,7 +97,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__active
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign_group__active
 msgid "Active"
-msgstr ""
+msgstr "Attivo"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_campaign__activity_ids
@@ -134,7 +136,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_ad
 msgid "Ad Served on a Social Media and its Statistics"
-msgstr ""
+msgstr "Annuncio pubblicato su un social media e relative statistiche"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__ad_unit_click_count
@@ -154,7 +156,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__ad_ids
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
 msgid "Ads"
-msgstr ""
+msgstr "Annunci"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__ads_need_update
@@ -194,7 +196,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_account
 msgid "Advertising Account Mirrored from a Social Media"
-msgstr ""
+msgstr "Account pubblicitario replicato da un social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_account__advertising_account_urn
@@ -280,7 +282,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_search
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_view_search
 msgid "Archived"
-msgstr ""
+msgstr "In archivio"
 
 #. module: social_media_advertising
 #. odoo-javascript
@@ -343,12 +345,12 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_account_view_form
 #, python-format
 msgid "Campaign Groups"
-msgstr ""
+msgstr "Gruppi di campagne"
 
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_campaign
 msgid "Campaign Promoting the Posts of a Social Media Account"
-msgstr ""
+msgstr "Campagna che promuove i post di un account social media"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
@@ -376,7 +378,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_advertising_campaign_group_view_tree
 #, python-format
 msgid "Campaigns"
-msgstr ""
+msgstr "Campagne"
 
 #. module: social_media_advertising
 #: model_terms:ir.ui.view,arch_db:social_media_advertising.social_account_view_form_inherit
@@ -451,7 +453,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_post
 msgid "Content to Publish on Social Media"
-msgstr ""
+msgstr "Contenuto da pubblicare sui social media"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__conversion_count
@@ -494,7 +496,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_account__currency_id
 #: model:ir.model.fields,field_description:social_media_advertising.field_social_advertising_ad__currency_id
 msgid "Currency"
-msgstr ""
+msgstr "Valuta"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_account__currency_id
@@ -1029,7 +1031,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_post_account
 msgid "Publication of a Post on a Social Account"
-msgstr ""
+msgstr "Pubblicazione di un post su un account social"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__post_account_id
@@ -1101,7 +1103,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_advertising_campaign_group
 msgid "Set of Campaigns Managed as a Unit on a Social Media"
-msgstr ""
+msgstr "Insieme di campagne gestite come un'unica unità su un social media"
 
 #. module: social_media_advertising
 #: model:ir.actions.server,name:social_media_advertising.check_ads_updates_job_ir_actions_server
@@ -1196,7 +1198,7 @@ msgstr ""
 #. module: social_media_advertising
 #: model:ir.model,name:social_media_advertising.model_social_stage
 msgid "Status of a Campaign, a Campaign Group or an Ad"
-msgstr ""
+msgstr "Stato di una campagna, di un gruppo di campagne o di un annuncio"
 
 #. module: social_media_advertising
 #: model:ir.model.fields,help:social_media_advertising.field_social_advertising_ad__stage_id
