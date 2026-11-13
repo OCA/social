@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_assign_sender_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.assign.sender.form</field>
+        <field name="model">mail.message.import.assign.sender</field>
+        <field name="arch" type="xml">
+            <form>
+                <p>
+                    Assign the messages of
+                    <field name="sender_count" class="oe_inline" readonly="1" />
+                    unknown address(es) to a sender.
+                </p>
+                <group>
+                    <field name="sender_id" />
+                    <field name="authorize_address" />
+                    <field name="process_messages" />
+                    <field name="message_ids" invisible="1" />
+                </group>
+                <footer>
+                    <button
+                        name="action_assign"
+                        type="object"
+                        string="Assign"
+                        class="btn-primary"
+                    />
+                    <button special="cancel" string="Cancel" class="btn-secondary" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
