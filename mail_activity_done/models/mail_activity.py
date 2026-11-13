@@ -91,17 +91,41 @@ class MailActivityMixin(models.AbstractModel):
         execute_org = self._cr.execute
 
         def execute(query, params=None, log_exceptions=True):
+            # Convert to string according to query type
+            if hasattr(query, "as_string"):
+                # psycopg2 SQL object
+                try:
+                    query_str = query.as_string(self._cr._cnx)
+                except Exception:
+                    query_str = str(query)
+            elif isinstance(query, str):
+                query_str = query
+            else:
+                # Composite SQL object - leave as is if no pattern
+                query_str = str(query) if hasattr(query, "__str__") else query
+
             original_where = "WHERE res_model = '{}'".format(self._name)
-            replace_where = (
-                "WHERE res_model = '{}' AND mail_activity.done = FALSE".format(
-                    self._name
+
+            # Only modify if the pattern exists in the query
+            if isinstance(query_str, str) and original_where in query_str:
+                replace_where = (
+                    "WHERE res_model = '{}' AND mail_activity.done = FALSE".format(
+                        self._name
+                    )
                 )
-            )
-            return execute_org(
-                query.replace(original_where, replace_where),
-                params=params,
-                log_exceptions=log_exceptions,
-            )
+                modified_query = query_str.replace(original_where, replace_where)
+                return execute_org(
+                    modified_query,
+                    params=params,
+                    log_exceptions=log_exceptions,
+                )
+            else:
+                # Pass the original query without modification
+                return execute_org(
+                    query,
+                    params=params,
+                    log_exceptions=log_exceptions,
+                )
 
         self._cr.execute = execute
         try:
@@ -113,15 +137,40 @@ class MailActivityMixin(models.AbstractModel):
         execute_org = self._cr.execute
 
         def execute(query, params=None, log_exceptions=True):
-            return execute_org(
-                query.replace(
-                    "WHERE mail_activity.res_model = %(res_model_table)s",
+            # Convert to string according to query type
+            if hasattr(query, "as_string"):
+                # psycopg2 SQL object
+                try:
+                    query_str = query.as_string(self._cr._cnx)
+                except Exception:
+                    query_str = str(query)
+            elif isinstance(query, str):
+                query_str = query
+            else:
+                # Composite SQL object - leave as is if no pattern
+                query_str = str(query) if hasattr(query, "__str__") else query
+
+            pattern = "WHERE mail_activity.res_model = %(res_model_table)s"
+
+            # Only modify if the pattern exists in the query
+            if isinstance(query_str, str) and pattern in query_str:
+                modified_query = query_str.replace(
+                    pattern,
                     "WHERE mail_activity.res_model = %(res_model_table)s AND "
                     "mail_activity.done = FALSE",
-                ),
-                params=params,
-                log_exceptions=log_exceptions,
-            )
+                )
+                return execute_org(
+                    modified_query,
+                    params=params,
+                    log_exceptions=log_exceptions,
+                )
+            else:
+                # Pass the original query without modification
+                return execute_org(
+                    query,
+                    params=params,
+                    log_exceptions=log_exceptions,
+                )
 
         self._cr.execute = execute
         try:
