@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -38,7 +38,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/wizards/wizard_social_account.py:0
-#, python-format
 msgid ""
 "Account access could not be authorized. Please check your settings or try "
 "again later."
@@ -47,7 +46,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/wizards/wizard_social_account.py:0
-#, python-format
 msgid "An account with that information already exists."
 msgstr ""
 
@@ -86,28 +84,24 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post_account.py:0
-#, python-format
 msgid "DELETING POST ON X: %(error)s"
 msgstr ""
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post_account.py:0
-#, python-format
 msgid "ERROR DELETE POST X: %(error)s"
 msgstr ""
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid "Error getting X access token: %(error)s"
 msgstr ""
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "Invalid X callback: the request token is missing. Please restart the account"
 " association process."
@@ -116,7 +110,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "Invalid X request token. Please restart the account association process."
 msgstr ""
@@ -134,7 +127,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid "PUBLISHING ON X: %(error)s"
 msgstr ""
 
@@ -208,7 +200,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "The X API credit balance of this App is down to USD %(balance)s, under the "
 "warning threshold of USD %(threshold)s."
@@ -217,7 +208,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "The X API credit balance of this App is used up. X blocks every call until "
 "credits are bought in the Developer Console."
@@ -236,14 +226,12 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid "The account was associated successfully"
 msgstr ""
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "The account was not created: the OAuth2 access token could not be obtained."
 msgstr ""
@@ -251,14 +239,12 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/wizards/wizard_social_account.py:0
-#, python-format
 msgid "The account was updated successfully"
 msgstr ""
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The post could not be deleted on X. The account may have reached the limit "
 "of requests of its plan: check the account and try again later."
@@ -274,7 +260,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "There are X accounts with the same username (%(username)s), please check to "
 "avoid spam errors."
@@ -293,7 +278,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid "Unexpected response from X: %(error)s"
 msgstr ""
 
@@ -338,7 +322,6 @@ msgstr ""
 #: code:addons/social_media_x/models/social_account.py:0
 #: code:addons/social_media_x/wizards/wizard_social_account.py:0
 #: model_terms:ir.ui.view,arch_db:social_media_x.wizard_social_account_view_form_inherit
-#, python-format
 msgid "X API pricing"
 msgstr ""
 
@@ -360,7 +343,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post_account.py:0
-#, python-format
 msgid ""
 "X did not accept the post. The account may have reached the limit of "
 "requests of its plan: check the account and try again later."
@@ -369,7 +351,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X only publishes JPG, PNG, WEBP and GIF images, so %(names)s cannot be "
 "published. Convert them or remove them from the post."
@@ -378,7 +359,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X only publishes MP4 videos, so %(names)s cannot be published. Convert them "
 "to MP4 or remove them from the post."
@@ -387,7 +367,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X publishes a single video per post, so this post carrying %(videos)s videos"
 " cannot be published. Leave one video or create a separate post for each of "
@@ -397,7 +376,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X publishes at most %(limit)s characters per post, and this one has "
 "%(length)s. Shorten the message to publish it."
@@ -406,7 +384,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X publishes at most %(limit)s images per post, and this one carries "
 "%(images)s. Remove some of them or create a separate post."
@@ -415,7 +392,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X publishes either images or a video, not both in the same post. Leave one "
 "kind of media or create a separate post for each of them."
@@ -424,7 +400,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X publishes images of at most %(limit)s, %(gif_limit)s for a GIF, so "
 "%(names)s cannot be published. Reduce their size or remove them from the "
@@ -434,7 +409,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_post.py:0
-#, python-format
 msgid ""
 "X publishes videos of at most %(limit)s, so %(names)s cannot be published. "
 "Reduce their size or remove them from the post."
@@ -443,14 +417,12 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid "X refused the post of %(account)s: %(error)s."
 msgstr ""
 
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "X refused the post of %(account)s: %(error)s. What an account may publish "
 "depends on its plan, and X reported X Premium for this account when it was "
@@ -460,7 +432,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "X rejected the request because the developer App cannot spend against the "
 "API. Connect the App to a Pay Per Use project in Project Access > Manage, "
@@ -471,7 +442,6 @@ msgstr ""
 #. module: social_media_x
 #. odoo-python
 #: code:addons/social_media_x/models/social_account.py:0
-#, python-format
 msgid ""
 "You have reached the limit of requests <b>%(endpoint)s</b> allowed according"
 " to your account plan.<br>• <b>Total limit:</b> %(limit)s request(s) per "
