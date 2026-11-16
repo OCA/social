@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-social"
-version = "18.0.20261112.0"
+version = "18.0.20261116.0"
 dependencies = [
     "odoo-addon-fetchmail_thread_default==18.0.*",
     "odoo-addon-mail_activity_cancel_tracking==18.0.*",
@@ -25,6 +25,7 @@ dependencies = [
     "odoo-addon-social_media_linkedin==18.0.*",
     "odoo-addon-social_media_linkedin_sync==18.0.*",
     "odoo-addon-social_media_sync==18.0.*",
+    "odoo-addon-social_media_x==18.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
