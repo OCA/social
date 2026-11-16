@@ -1,0 +1,3 @@
+- Thierry Ducrest \<<thierry.ducrest@camptocamp.com>\>
+- [Vauxoo](https://www.vauxoo.com):
+  - Carlos Vásquez
