@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -16,7 +16,6 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "A publication of the account cannot be deleted as a comment."
 msgstr ""
 
@@ -33,28 +32,24 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "Error Comment Tweet: %(error)s"
 msgstr ""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "Error Delete Comment: %(error)s"
 msgstr ""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "Error Get Comments for Tweet: %(error)s"
 msgstr ""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "Error Recommend Tweet: %(error)s"
 msgstr ""
 
@@ -101,14 +96,12 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "The comment cannot be recommended on X."
 msgstr ""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The comment could not be deleted on X. The account may have reached the "
 "limit of requests of its plan."
@@ -117,7 +110,6 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The comment could not be published on X. The account may have reached the "
 "limit of requests of its plan."
@@ -126,7 +118,6 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The comments could not be read from X. The account may have reached the "
 "limit of requests of its plan."
@@ -135,15 +126,12 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "The post does not exist or has been deleted."
 msgstr ""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid ""
 "The recommendation could not be sent to X. The account may have reached the "
 "limit of requests of its plan."
@@ -167,14 +155,12 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid "X did not delete the comment: %(errors)s"
 msgstr ""
 
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/models/social_post_account.py:0
-#, python-format
 msgid ""
 "X refused the credentials of %(account)s. Update the account to authorize it"
 " again."
@@ -183,6 +169,5 @@ msgstr ""
 #. module: social_media_x_sync
 #. odoo-python
 #: code:addons/social_media_x_sync/tests/test_sync_account_x.py:0
-#, python-format
 msgid "X refused the timeline"
 msgstr ""
