@@ -1,10 +1,10 @@
 To use this module, you need to:
 
-1.  Access to the views from menu Boards.
+1.  Access to the views from menu Dashboards / Activities.
 
-A smartButton of activities is added in the mail thread from form view.
-From this smartButton is linked to the activity board, to the view tree,
-which shows the activities related to the opportunity.
+A "View Activities" button is added in the chatter of the form views.
+This button opens the activity board, showing only the activities
+related to the current record.
 
 From the form view of the activity you can navigate to the origin of the
 activity.

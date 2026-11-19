@@ -3,7 +3,7 @@
     <record model="res.groups" id="group_show_mail_activity_board">
         <field name="name">Show mail activity board</field>
         <field
-            name="users"
+            name="user_ids"
             eval="[Command.link(ref('base.user_root')), Command.link(ref('base.user_admin'))]"
         />
     </record>

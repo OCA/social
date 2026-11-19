@@ -24,11 +24,5 @@ class MailActivityMixin(models.AbstractModel):
         _id = kwargs.get("id")
         model = kwargs.get("model")
         action = self.env["mail.activity"].action_activities_board()
-        views = []
-        for v in action["views"]:
-            if v[1] == "tree":
-                v = (v[0], "list")
-            views.append(v)
-        action["views"] = views
-        action["domain"] = [("res_id", "=", _id), (("res_model", "=", model))]
+        action["domain"] = [("res_id", "=", _id), ("res_model", "=", model)]
         return action

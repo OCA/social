@@ -1,35 +1,30 @@
-/** @odoo-module **/
-import {Chatter} from "@mail/core/web/chatter";
+import {Chatter} from "@mail/chatter/web_portal/chatter";
 import {patch} from "@web/core/utils/patch";
+import {useService} from "@web/core/utils/hooks";
 
 patch(Chatter.prototype, {
-    // --------------------------------------------------------------------------
-    // Handlers
-    // --------------------------------------------------------------------------
+    setup() {
+        super.setup(...arguments);
+        this.actionService = useService("action");
+        this.ormService = useService("orm");
+    },
 
-    /**
-     * @private
-     * @param {MouseEvent} ev
-     */
-    // eslint-disable-next-line no-unused-vars
-    async _onListActivity(ev) {
-        if (this.state.thread) {
-            const thread = this.state.thread;
-            const action = await this.orm.call(
-                thread.model,
-                "redirect_to_activities",
-                [[]],
-                {
-                    id: this.state.thread.id,
-                    model: this.state.thread.model,
-                }
-            );
-            this.action.doAction(action, {
-                onClose: () => {
-                    thread.refreshActivities();
-                    thread.refresh();
-                },
-            });
+    async onClickListActivities() {
+        const thread = this.state.thread;
+        if (!thread?.id) {
+            return;
         }
+        const action = await this.ormService.call(
+            thread.model,
+            "redirect_to_activities",
+            [[]],
+            {
+                id: thread.id,
+                model: thread.model,
+            }
+        );
+        await this.actionService.doAction(action, {
+            onClose: () => this.load(thread, ["activities", "messages"]),
+        });
     },
 });
