@@ -67,8 +67,7 @@ class TestMailActivityBoardMethods(TransactionCase):
                 "name": "Celebrate the sale",
                 "delay_count": 3,
                 "delay_unit": "days",
-                "summary": "ACT 3 : "
-                "Beers for everyone because I am a good salesman !",
+                "summary": "ACT 3 : Beers for everyone because I am a good salesman !",
                 "res_model": partner_model.model,
             }
         )
