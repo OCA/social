@@ -4,6 +4,7 @@
 import logging
 import os
 from email import message_from_string
+from unittest.mock import patch
 
 import odoo.tools as tools
 from odoo.exceptions import ValidationError
@@ -377,3 +378,21 @@ class TestIrMailServer(TransactionCase, MockSmtplibCase):
             mail_server.smtp_from = "."
 
         mail_server.smtp_from = "notifications@test.com"
+
+    def test_11_unrelated_write_keeps_cache(self):
+        server = self.IrMailServer.search([], limit=1)
+        with patch.object(type(self.registry), "clear_cache") as clear_cache:
+            server.write({"smtp_user": "someone"})
+        clear_cache.assert_not_called()
+
+    def test_12_domain_whitelist_write_refreshes_lookup(self):
+        self._init_mail_server_domain_whilelist_based()
+        self.assertEqual(
+            self.IrMailServer._get_mail_sever("domainfour.com"),
+            self.mail_server_domainone.id,
+        )
+        self.mail_server_domaintwo.write({"domain_whitelist": "domainfour.com"})
+        self.assertEqual(
+            self.IrMailServer._get_mail_sever("domainfour.com"),
+            self.mail_server_domaintwo.id,
+        )
