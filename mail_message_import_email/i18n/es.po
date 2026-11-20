@@ -1,0 +1,239 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_message_import_email
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0-20261015\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-11-03 14:21+0000\n"
+"PO-Revision-Date: 2026-11-03 14:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_needaction
+msgid "Action Needed"
+msgstr "Acción requerida"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_channel__email_address
+msgid ""
+"Address the senders write or forward their messages to, e.g. "
+"orders@company.com. Its mailbox must be read only by this channel."
+msgstr ""
+"Dirección a la que los remitentes escriben o reenvían sus mensajes, p. ej. "
+"pedidos@empresa.com. Solo este canal debe leer su buzón."
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_attachment_count
+msgid "Attachment Count"
+msgstr "Número de archivos"
+
+#. module: mail_message_import_email
+#: model:ir.model,name:mail_message_import_email.model_mail_message_import_address
+msgid "Authorized Address"
+msgstr "Dirección autorizada"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_channel__channel_type
+msgid "Channel"
+msgstr "Canal"
+
+#. module: mail_message_import_email
+#: model_terms:ir.ui.view,arch_db:mail_message_import_email.mail_message_import_channel_view_form
+msgid "Configure the incoming mail server"
+msgstr "Configurar el servidor de correo entrante"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields.selection,name:mail_message_import_email.selection__mail_message_import_channel__channel_type__email
+#: model:ir.model.fields.selection,name:mail_message_import_email.selection__mail_message_import_message__message_type__email
+#: model_terms:ir.ui.view,arch_db:mail_message_import_email.mail_message_import_channel_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import_email.mail_message_import_message_view_search
+msgid "Email"
+msgstr "Correo"
+
+#. module: mail_message_import_email
+#: model:ir.model,name:mail_message_import_email.model_mail_thread
+msgid "Email Thread"
+msgstr "Hilo de correo electrónico"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_follower_ids
+msgid "Followers"
+msgstr "Seguidores"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (contactos)"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__has_message
+msgid "Has Message"
+msgstr "Tiene mensaje"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_channel__channel_type
+msgid "How the messages arrive. Each channel is a module."
+msgstr "Cómo llegan los mensajes. Cada canal es un módulo."
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_message__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr "Si está marcado, hay nuevos mensajes que requieren su atención."
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_message__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si está marcado, algunos mensajes tienen un error de entrega."
+
+#. module: mail_message_import_email
+#: model:ir.model,name:mail_message_import_email.model_fetchmail_server
+msgid "Incoming Mail Server"
+msgstr "Servidor de correo de entrada"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_channel__fetchmail_server_id
+msgid "Incoming mail server"
+msgstr "Servidor de correo entrante"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_is_follower
+msgid "Is Follower"
+msgstr "Es seguidor"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_has_error
+msgid "Message Delivery error"
+msgstr "Error de entrega del mensaje"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_ids
+msgid "Messages"
+msgstr "Mensajes"
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid "Missing: %(fields)s."
+msgstr "Falta: %(fields)s."
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Número de acciones"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_has_error_counter
+msgid "Number of errors"
+msgstr "Número de errores"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_message__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr "Número de mensajes que requieren una acción"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_message__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Número de mensajes con error de entrega"
+
+#. module: mail_message_import_email
+#: model:ir.model,name:mail_message_import_email.model_mail_message_import_message
+msgid "Received Message"
+msgstr "Mensaje recibido"
+
+#. module: mail_message_import_email
+#: model:ir.model,name:mail_message_import_email.model_mail_message_import_channel
+msgid "Receiving Channel"
+msgstr "Canal receptor"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_channel__email_address
+msgid "Receiving address"
+msgstr "Dirección receptora"
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,help:mail_message_import_email.field_mail_message_import_channel__fetchmail_server_id
+msgid ""
+"Server of Odoo that reads the mailbox of the address: each email becomes a "
+"received message of the channel."
+msgstr ""
+"Servidor de Odoo que lee el buzón de la dirección: cada correo se convierte "
+"en un mensaje recibido del canal."
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__email_subject
+msgid "Subject"
+msgstr "Asunto"
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid ""
+"Test and confirm the incoming mail server, and keep it active: until then no"
+" email is read."
+msgstr ""
+"Pruebe y confirme el servidor de correo entrante y manténgalo activo: hasta "
+"entonces no se lee ningún correo."
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid "The address %(email)s already receives messages in %(name)s."
+msgstr "La dirección %(email)s ya recibe mensajes en %(name)s."
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_address.py:0
+msgid "The address %(email)s is not a valid email address."
+msgstr "La dirección %(email)s no es una dirección de correo válida."
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid ""
+"The incoming mail server %(server)s must create received messages: set "
+"'Create a new record' to 'Received Message'."
+msgstr ""
+"El servidor de correo entrante %(server)s debe crear mensajes recibidos: "
+"ponga 'Crear un nuevo registro' a 'Mensaje recibido'."
+
+#. module: mail_message_import_email
+#: model:ir.model.constraint,message:mail_message_import_email.constraint_mail_message_import_channel_fetchmail_server_uniq
+msgid "This incoming mail server already reads another receiving channel."
+msgstr "Este servidor de correo entrante ya lee otro canal receptor."
+
+#. module: mail_message_import_email
+#: model:ir.model.fields,field_description:mail_message_import_email.field_mail_message_import_message__message_type
+msgid "Type"
+msgstr "Tipo"
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid "Write a valid receiving address, e.g. orders@company.com."
+msgstr "Escriba una dirección receptora válida, p. ej. pedidos@empresa.com."
+
+#. module: mail_message_import_email
+#: model_terms:ir.ui.view,arch_db:mail_message_import_email.mail_message_import_channel_view_form
+msgid "e.g. orders@company.com"
+msgstr "p. ej. pedidos@empresa.com"
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid "incoming mail server"
+msgstr "servidor de correo entrante"
+
+#. module: mail_message_import_email
+#. odoo-python
+#: code:addons/mail_message_import_email/models/mail_message_import_channel.py:0
+msgid "receiving address"
+msgstr "dirección receptora"
