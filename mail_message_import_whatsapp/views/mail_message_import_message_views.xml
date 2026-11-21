@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_message_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.message.form.whatsapp</field>
+        <field name="model">mail.message.import.message</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_message_view_form"
+        />
+        <field name="arch" type="xml">
+            <field name="reply_to_uid" position="after">
+                <field name="discuss_channel_id" invisible="not discuss_channel_id" />
+            </field>
+        </field>
+    </record>
+
+    <record id="mail_message_import_message_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.message.search.whatsapp</field>
+        <field name="model">mail.message.import.message</field>
+        <field
+            name="inherit_id"
+            ref="mail_message_import.mail_message_import_message_view_search"
+        />
+        <field name="arch" type="xml">
+            <filter name="with_files" position="before">
+                <filter
+                    name="whatsapp"
+                    string="WhatsApp"
+                    domain="[('channel_type', '=', 'whatsapp')]"
+                />
+                <separator />
+            </filter>
+        </field>
+    </record>
+</odoo>
