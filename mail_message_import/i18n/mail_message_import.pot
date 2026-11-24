@@ -1,0 +1,1446 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* mail_message_import
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0-20260908\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-10-30 15:21+0000\n"
+"PO-Revision-Date: 2026-10-30 15:21+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_conversation.py:0
+#, python-format
+msgid ""
+"%(attempts)s attempt(s) failed. Last error: %(error)s\n"
+"The messages are kept; retry once the cause is solved."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+msgid ""
+".\n"
+"                        Press <strong>Process now</strong> not to wait."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+msgid "<span>Being processed</span>"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+msgid "<span>Incidents</span>"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+msgid "<span>To review</span>"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+msgid "<span>View</span>"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+msgid "<span>With errors</span>"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+msgid ""
+"<strong>Nobody is allowed to send from this address yet.</strong>\n"
+"                            If you know who it is, assign the message to a sender: the\n"
+"                            address is allowed for the next messages and this one is\n"
+"                            processed."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_channel
+msgid ""
+"A WhatsApp number, an email address...: where the senders send their\n"
+"                messages. Each channel is a module."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_conversation__process_requested
+msgid "A person asked to process it without waiting for the inactivity."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_sender
+msgid ""
+"A sender sends messages from its authorized addresses, its phones or\n"
+"                its email addresses; usually it is the company itself or one of its\n"
+"                partners."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_needaction
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__active
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__active
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__active
+msgid "Active"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_ids
+msgid "Activities"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_exception_decoration
+msgid "Activity Exception Decoration"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_state
+msgid "Activity State"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_type_icon
+msgid "Activity Type Icon"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_channel
+msgid "Add a receiving channel"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_panel
+msgid ""
+"Add in Configuration &gt; Receiving channels the WhatsApp number or the\n"
+"                email address that receives the messages: each one gets its card\n"
+"                here, with what is left to review."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__address
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__sender_address
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__sender_address
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_search
+msgid "Address"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__address_count
+msgid "Address Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__sender_address
+msgid ""
+"Address that sent the message: the phone for WhatsApp, the email address for"
+" email..."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid "Allowed"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_search
+msgid "Archived"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_assign_sender_view_form
+msgid "Assign"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_assign_sender
+msgid "Assign Received Messages to a Sender"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_assign_sender_view_form
+msgid "Assign the messages of"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_message.py:0
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_list
+#, python-format
+msgid "Assign to a sender"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_attachment_count
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__attempt_count
+msgid "Attempt Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_config__max_attempts
+msgid "Attempts to process a conversation before it is left in error."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__message_type__audio
+msgid "Audio"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__authorize_address
+msgid "Authorize the address"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_address
+msgid "Authorized Address"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__authorized_date
+msgid "Authorized Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__authorized_address_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__authorized_address_id
+msgid "Authorized address"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_address
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__address_ids
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_address
+msgid "Authorized addresses"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+msgid "Being processed"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__can_retry
+msgid "Can Retry"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_assign_sender_view_form
+msgid "Cancel"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_conversation__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__category
+msgid "Category"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__channel_type
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__channel_type
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__channel_type
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_address_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Channel"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_channel.py:0
+#, python-format
+msgid ""
+"Choose how the messages arrive. Each channel (email, WhatsApp...) is a "
+"module."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+msgid "Closed"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__company_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__company_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__company_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__company_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__company_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__company_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__company_id
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_search
+msgid "Company"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_address__company_id
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_sender__company_id
+msgid "Company that receives the messages of the sender."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_config
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+msgid "Configuration"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_channel__state__connected
+msgid "Connected"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__partner_id
+msgid "Contact"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_sender__partner_id
+msgid "Contact of the sender in Odoo."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+msgid "Content"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_conversation
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__conversation_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__conversation_id
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+msgid "Conversation"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_conversation.py:0
+#, python-format
+msgid "Conversation %(conversation)s could not be processed"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__conversation_count
+msgid "Conversation Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_conversation
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_conversation
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_config_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid "Conversations"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__create_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__create_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__dashboard_graph
+msgid "Dashboard Graph"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_list
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__description
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Description"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_channel__state__disabled
+msgid "Disabled"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Dismiss"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__state__dismissed
+msgid "Dismissed"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__display_name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__message_type__document
+msgid "Document"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_conversation__state__error
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+msgid "Error"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__error_count
+msgid "Error Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_message_unknown
+msgid "Every sender is identified"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_message.py:0
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__attachment_ids
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_list
+#, python-format
+msgid "Files"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__media_pending
+msgid "Files to download"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__first_message_date
+msgid "First Message Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_follower_ids
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_partner_ids
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__activity_type_icon
+msgid "Font awesome icon e.g. fa-tasks"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Group By"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__has_message
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "How it was solved..."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_channel__channel_type
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__channel_type
+msgid "How the messages arrive. Each channel is a module."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__category__review
+msgid "Human assessment"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__id
+msgid "ID"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_exception_icon
+msgid "Icon"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__activity_exception_icon
+msgid "Icon to indicate an exception activity."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_conversation__processing_ref
+msgid "Identifier of the last attempt."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__message_uid
+msgid "Identifier of the message in its channel."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__reply_to_uid
+msgid "Identifier of the message it replies to, in its channel."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__message_needaction
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_sender__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__message_has_error
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_sender__message_has_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__state__ignored
+msgid "Ignored"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__message_type__image
+msgid "Image"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__inactivity_minutes
+msgid "Inactivity Minutes"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_incident
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__incident_ids
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_incident
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid "Incidents"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__category__incomplete
+msgid "Incomplete data"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_is_follower
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__media_pending
+msgid "Its files stay in its channel until the conversation is processed."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__name
+msgid "Label"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__last_error
+msgid "Last Error"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__last_message_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__last_message_date
+msgid "Last Message Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__write_uid
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__write_date
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_assign_sender__authorize_address
+msgid ""
+"Later messages of the address (the phone, the email address...) will be "
+"assigned to the sender directly."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Mark as resolved"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_config__max_attempts
+msgid "Maximum attempts"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_id
+msgid "Message"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__message_count
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__message_count
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_count
+msgid "Message Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_has_error
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__message_uid
+msgid "Message ID"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.module.category,name:mail_message_import.module_category_mail_message_import
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_root
+msgid "Message Import"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_incident
+msgid "Message Import Incident"
+msgstr ""
+
+#. module: mail_message_import
+#: model:res.groups,name:mail_message_import.group_mail_message_import_manager
+msgid "Message Import Manager"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_config
+msgid "Message Import Settings"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.server,name:mail_message_import.ir_cron_process_conversations_ir_actions_server
+msgid "Message Import: process conversations"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__message_ids
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__message_ids
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_ids
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_ids
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_list
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_graph
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_list
+msgid "Messages"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_channel.py:0
+#, python-format
+msgid "Messages received"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.module.category,description:mail_message_import.module_category_mail_message_import
+msgid ""
+"Messages received by several channels (email, WhatsApp...), grouped by "
+"sender."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_config__inactivity_minutes
+msgid ""
+"Minutes without new messages of a sender before its messages are processed "
+"together."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__my_activity_date_deadline
+msgid "My Activity Deadline"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__name
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__name
+msgid "Name"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_date_deadline
+msgid "Next Activity Deadline"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_summary
+msgid "Next Activity Summary"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_type_id
+msgid "Next Activity Type"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__next_attempt_date
+msgid "Next Attempt Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_address
+msgid "No authorized address yet"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_conversation
+msgid "No conversation yet"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_incident
+msgid "No incident to review"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_message
+msgid "No message received yet"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_panel
+msgid "No receiving channel yet"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__address_normalized
+msgid "Normalized address"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_channel__state__not_configured
+msgid "Not configured"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__note
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__note
+msgid "Note"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid "Notes"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_needaction_counter
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__message_has_error_counter
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__attachment_count
+msgid "Number of files"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__message_needaction_counter
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_sender__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__message_has_error_counter
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_sender__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__state__open
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+msgid "Open"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__open_incident_count
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__open_incident_count
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_sender__open_incident_count
+msgid "Open Incident Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_list
+msgid "Open incidents"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__raw_payload
+msgid "Original data"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__message_type__other
+msgid "Other"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_panel
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_panel
+msgid "Panel"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_channel__state__pending
+msgid "Pending verification"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_address__address
+msgid ""
+"Phone in international format for WhatsApp (+34 600 000 000), email address "
+"for email..."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid "Phones and email addresses"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_list
+msgid "Phones and emails"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__mail_message_id
+msgid "Posted message"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__process_after
+msgid "Process After"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+msgid "Process now"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Process the conversation again once the cause is corrected."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__process_messages
+msgid "Process the messages"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_assign_sender__process_messages
+msgid ""
+"Process the messages as a conversation of the sender; otherwise they are "
+"ignored."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_conversation__state__done
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__state__processed
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Processed"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__processed_date
+msgid "Processed Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__processing_ref
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_conversation__state__processing
+msgid "Processing"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__processing_start
+msgid "Processing Start"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__incident_type__processing_error
+msgid "Processing error"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__process_requested
+msgid "Processing requested"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_received
+msgid "Received"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_message
+msgid "Received Message"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__origin_display
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__origin_display
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__origin_display
+msgid "Received by"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_message
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_message
+msgid "Received messages"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__received_date
+msgid "Received on"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_channel
+msgid "Receiving Channel"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__channel_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__channel_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__channel_id
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Receiving channel"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_channel
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_channel
+msgid "Receiving channels"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+msgid "Reception"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_sender
+msgid "Register a sender"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Reopen"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__reply_to_uid
+msgid "Reply to"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Resolution"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__resolution_note
+msgid "Resolution Note"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__state__resolved
+msgid "Resolved"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__resolved_by_id
+msgid "Resolved By"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__resolved_date
+msgid "Resolved Date"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__activity_user_id
+msgid "Responsible User"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_conversation.py:0
+#, python-format
+msgid "Retried"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_form
+msgid "Retry"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_address_view_search
+msgid "Revoked"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/wizards/mail_message_import_assign_sender.py:0
+#, python-format
+msgid "Select messages of unidentified senders."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model,name:mail_message_import.model_mail_message_import_sender
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_address__sender_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__sender_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__sender_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__sender_id
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__sender_id
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_address_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Sender"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_assign_sender__sender_count
+msgid "Sender Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__sender_name
+msgid "Sender name"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_sender
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_sender
+msgid "Senders"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__authorized_address_id
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Sent from"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__message_date
+msgid "Sent on"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__sequence
+msgid "Sequence"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_config.py:0
+#: model:ir.actions.server,name:mail_message_import.action_mail_message_import_config
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_settings
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_config_view_form
+#, python-format
+msgid "Settings"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__state
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_conversation__state
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__state
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__state
+msgid "State"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__state_message
+msgid "State Message"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Status"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__activity_state
+msgid ""
+"Status based on activities\n"
+"Overdue: Due date is already passed\n"
+"Today: Activity date is today\n"
+"Planned: Future activities."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__name
+msgid "Summary"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_form
+msgid "Technical"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_incident__category__technical
+msgid "Technical error"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+msgid "Technical errors"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__body
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__message_type__text
+msgid "Text"
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_address.py:0
+#, python-format
+msgid ""
+"The address %(address)s is already authorized for another sender of the "
+"company. An address must identify a single sender."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_address.py:0
+#, python-format
+msgid "The address %(address)s is not valid."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_address__address_normalized
+msgid "The address as the channel identifies the senders."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_message.py:0
+#, python-format
+msgid "The address is authorized for several senders: %(senders)s."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_conversation__origin_display
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__origin_display
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__origin_display
+msgid "The channel and the phone or email address it came from."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.constraint,message:mail_message_import.constraint_mail_message_import_config_company_uniq
+msgid "The company already has settings."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_conversation
+msgid ""
+"The consecutive messages of a sender are grouped and processed\n"
+"                together after some minutes without new messages."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_message.py:0
+#, python-format
+msgid ""
+"The files of the message %(message)s cannot be downloaded: its channel is "
+"not installed."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_config.py:0
+#, python-format
+msgid "The inactivity must last between 1 and 1440 minutes."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_incident.py:0
+#, python-format
+msgid "The incident %(name)s cannot be retried."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_config.py:0
+#, python-format
+msgid "The limits must be positive."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_message__raw_payload
+msgid "The message as its channel delivered it."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_message_unknown
+msgid ""
+"The messages of phones or email addresses that are not allowed yet\n"
+"                wait here. Select them and press <strong>Assign to a sender</strong>:\n"
+"                the address is allowed and the messages are processed."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid ""
+"The messages sent from the phones and email addresses of the\n"
+"                        list are assigned to this sender. A message of any other\n"
+"                        address waits in <strong>To review &gt; Unknown senders</strong>."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_address
+msgid ""
+"The phones and email addresses allowed to send messages on behalf of\n"
+"                each sender."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/models/mail_message_import_conversation.py:0
+#, python-format
+msgid "The processing was interrupted."
+msgstr ""
+
+#. module: mail_message_import
+#. odoo-python
+#: code:addons/mail_message_import/wizards/mail_message_import_assign_sender.py:0
+#, python-format
+msgid "The sender %(sender)s may not send messages to %(channel)s."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.constraint,message:mail_message_import.constraint_mail_message_import_address_sender_address_uniq
+msgid "This address is already authorized for the sender."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.constraint,message:mail_message_import.constraint_mail_message_import_message_message_uid_uniq
+msgid "This message was already received."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_to_review
+msgid "To review"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_incident__incident_type
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_message__message_type
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_incident_view_search
+msgid "Type"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_incident__activity_exception_decoration
+msgid "Type of the exception activity on record."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__unidentified_count
+msgid "Unidentified Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__state__unidentified
+msgid "Unidentified sender"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.actions.act_window,name:mail_message_import.action_mail_message_import_message_unknown
+#: model:ir.ui.menu,name:mail_message_import.menu_mail_message_import_unknown
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_kanban
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Unknown senders"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__message_type__video
+msgid "Video"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_message__state__queued
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "Waiting"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,field_description:mail_message_import.field_mail_message_import_channel__waiting_count
+msgid "Waiting Count"
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields.selection,name:mail_message_import.selection__mail_message_import_conversation__state__open
+msgid "Waiting for messages"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_conversation_view_form
+msgid ""
+"Waiting for more messages of the sender: the whole conversation is\n"
+"                        processed at"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.actions.act_window,help:mail_message_import.action_mail_message_import_incident
+msgid ""
+"What could not be done or decided safely waits here for a person:\n"
+"                for example a conversation that could not be processed."
+msgstr ""
+
+#. module: mail_message_import
+#: model:ir.model.fields,help:mail_message_import.field_mail_message_import_address__name
+msgid "Who uses the address, e.g. 'Ana, buyer'."
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_message_view_search
+msgid "With files"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_sender_view_form
+msgid "e.g. My company"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_channel_view_form
+msgid "e.g. Orders by WhatsApp"
+msgstr ""
+
+#. module: mail_message_import
+#: model_terms:ir.ui.view,arch_db:mail_message_import.mail_message_import_assign_sender_view_form
+msgid "unknown address(es) to a sender."
+msgstr ""

@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_message_view_list" model="ir.ui.view">
+        <field name="name">mail.message.import.message.list</field>
+        <field name="model">mail.message.import.message</field>
+        <field name="arch" type="xml">
+            <tree create="false" decoration-info="state == 'unidentified'">
+                <header>
+                    <button
+                        name="action_assign_sender"
+                        type="object"
+                        string="Assign to a sender"
+                    />
+                </header>
+                <field name="message_date" />
+                <field name="sender_name" />
+                <field name="sender_address" />
+                <field name="sender_id" />
+                <field name="channel_type" optional="show" />
+                <field name="message_type" />
+                <field name="body" optional="show" />
+                <field name="attachment_count" string="Files" optional="show" />
+                <field name="channel_id" optional="hide" />
+                <field name="conversation_id" optional="hide" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-danger="state == 'unidentified'"
+                    decoration-info="state == 'queued'"
+                    decoration-success="state == 'processed'"
+                    decoration-muted="state == 'ignored'"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mail_message_import_message_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.message.form</field>
+        <field name="model">mail.message.import.message</field>
+        <field name="arch" type="xml">
+            <form create="false" edit="false">
+                <header>
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_view_attachments"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-paperclip"
+                            invisible="not attachment_count"
+                        >
+                            <field
+                                name="attachment_count"
+                                widget="statinfo"
+                                string="Files"
+                            />
+                        </button>
+                        <button
+                            name="action_view_conversation"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-commenting-o"
+                            string="Conversation"
+                            invisible="not conversation_id"
+                        />
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" />
+                        </h1>
+                    </div>
+                    <div
+                        class="alert alert-info d-flex align-items-start gap-3"
+                        role="alert"
+                        invisible="state != 'unidentified'"
+                    >
+                        <div class="flex-grow-1">
+                            <strong
+                            >Nobody is allowed to send from this address yet.</strong>
+                            If you know who it is, assign the message to a sender: the
+                            address is allowed for the next messages and this one is
+                            processed.
+                        </div>
+                        <button
+                            name="action_assign_sender"
+                            type="object"
+                            class="btn btn-primary text-nowrap"
+                            string="Assign to a sender"
+                        />
+                    </div>
+                    <div class="alert alert-warning" role="alert" invisible="not note">
+                        <field name="note" />
+                    </div>
+                    <group>
+                        <group string="Sender">
+                            <field name="sender_name" />
+                            <field name="sender_address" />
+                            <field name="sender_id" />
+                            <field name="authorized_address_id" />
+                        </group>
+                        <group string="Reception">
+                            <field name="channel_id" />
+                            <field name="channel_type" />
+                            <field name="message_date" />
+                            <field name="received_date" />
+                            <field name="message_type" />
+                            <field name="media_pending" invisible="not media_pending" />
+                            <field name="conversation_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Content" name="content">
+                            <field name="body" />
+                            <field name="attachment_ids" widget="many2many_binary" />
+                        </page>
+                        <page
+                            string="Technical"
+                            name="technical"
+                            groups="base.group_no_one"
+                        >
+                            <group>
+                                <field name="message_uid" />
+                                <field name="reply_to_uid" />
+                                <field
+                                    name="mail_message_id"
+                                    invisible="not mail_message_id"
+                                />
+                            </group>
+                            <field name="raw_payload" />
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_import_message_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.message.search</field>
+        <field name="model">mail.message.import.message</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="sender_address" />
+                <field name="sender_name" />
+                <field name="sender_id" />
+                <field name="body" />
+                <field name="conversation_id" />
+                <filter
+                    name="unidentified"
+                    string="Unknown senders"
+                    domain="[('state', '=', 'unidentified')]"
+                />
+                <filter
+                    name="queued"
+                    string="Waiting"
+                    domain="[('state', '=', 'queued')]"
+                />
+                <filter
+                    name="processed"
+                    string="Processed"
+                    domain="[('state', '=', 'processed')]"
+                />
+                <separator />
+                <filter
+                    name="with_files"
+                    string="With files"
+                    domain="[('attachment_ids', '!=', False)]"
+                />
+                <filter name="date" string="Date" date="message_date" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_sender"
+                        string="Sender"
+                        context="{'group_by': 'sender_id'}"
+                    />
+                    <filter
+                        name="group_address"
+                        string="Address"
+                        context="{'group_by': 'sender_address'}"
+                    />
+                    <filter
+                        name="group_channel_id"
+                        string="Receiving channel"
+                        context="{'group_by': 'channel_id'}"
+                    />
+                    <filter
+                        name="group_channel_type"
+                        string="Channel"
+                        context="{'group_by': 'channel_type'}"
+                    />
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+                <searchpanel>
+                    <field
+                        name="channel_id"
+                        string="Receiving channel"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="authorized_address_id"
+                        string="Sent from"
+                        enable_counters="1"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="mail_message_import_message_view_graph" model="ir.ui.view">
+        <field name="name">mail.message.import.message.graph</field>
+        <field name="model">mail.message.import.message</field>
+        <field name="arch" type="xml">
+            <graph string="Messages" type="bar" stacked="1">
+                <field name="message_date" interval="day" />
+                <field name="state" />
+            </graph>
+        </field>
+    </record>
+
+    <record id="action_mail_message_import_message" model="ir.actions.act_window">
+        <field name="name">Received messages</field>
+        <field name="res_model">mail.message.import.message</field>
+        <field name="view_mode">tree,form,graph</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_empty_folder">No message received yet</p>
+        </field>
+    </record>
+
+    <record
+        id="action_mail_message_import_message_unknown"
+        model="ir.actions.act_window"
+    >
+        <field name="name">Unknown senders</field>
+        <field name="res_model">mail.message.import.message</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_unidentified': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Every sender is identified</p>
+            <p>
+                The messages of phones or email addresses that are not allowed yet
+                wait here. Select them and press <strong>Assign to a sender</strong>:
+                the address is allowed and the messages are processed.
+            </p>
+        </field>
+    </record>
+</odoo>

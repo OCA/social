@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="mail_message_import_incident_view_list" model="ir.ui.view">
+        <field name="name">mail.message.import.incident.list</field>
+        <field name="model">mail.message.import.incident</field>
+        <field name="arch" type="xml">
+            <tree
+                create="false"
+                decoration-muted="state != 'open'"
+                decoration-danger="state == 'open' and category == 'technical'"
+            >
+                <field name="create_date" string="Date" />
+                <field name="name" />
+                <field name="incident_type" />
+                <field name="category" optional="show" />
+                <field name="sender_id" />
+                <field name="origin_display" optional="show" />
+                <field name="conversation_id" optional="hide" />
+                <field
+                    name="company_id"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field
+                    name="state"
+                    widget="badge"
+                    decoration-danger="state == 'open'"
+                    decoration-success="state == 'resolved'"
+                    decoration-muted="state == 'dismissed'"
+                />
+            </tree>
+        </field>
+    </record>
+
+    <record id="mail_message_import_incident_view_kanban" model="ir.ui.view">
+        <field name="name">mail.message.import.incident.kanban</field>
+        <field name="model">mail.message.import.incident</field>
+        <field name="arch" type="xml">
+            <kanban
+                create="false"
+                default_group_by="category"
+                group_create="false"
+                group_delete="false"
+                group_edit="false"
+                records_draggable="0"
+                quick_create="false"
+                sample="1"
+            >
+                <field name="state" />
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click">
+                            <div
+                                class="d-flex justify-content-between align-items-start gap-2"
+                            >
+                                <field name="name" class="fw-bold" />
+                                <field
+                                    name="state"
+                                    widget="badge"
+                                    decoration-warning="state == 'open'"
+                                    decoration-success="state == 'resolved'"
+                                    decoration-muted="state == 'dismissed'"
+                                />
+                            </div>
+                            <div class="text-muted small"><field
+                                    name="incident_type"
+                                /></div>
+                            <div class="text-muted small"><field
+                                    name="origin_display"
+                                /></div>
+                            <div class="small mt-1"><field
+                                    name="conversation_id"
+                                /></div>
+                            <div class="o_kanban_record_bottom pt-1">
+                                <field name="sender_id" class="small text-muted" />
+                                <field
+                                    name="create_date"
+                                    widget="date"
+                                    class="small text-muted ms-auto"
+                                />
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <record id="mail_message_import_incident_view_form" model="ir.ui.view">
+        <field name="name">mail.message.import.incident.form</field>
+        <field name="model">mail.message.import.incident</field>
+        <field name="arch" type="xml">
+            <form create="false">
+                <header>
+                    <button
+                        name="action_retry"
+                        type="object"
+                        string="Retry"
+                        class="oe_highlight"
+                        invisible="not can_retry"
+                        help="Process the conversation again once the cause is corrected."
+                    />
+                    <button
+                        name="action_resolve"
+                        type="object"
+                        string="Mark as resolved"
+                        invisible="state != 'open'"
+                    />
+                    <button
+                        name="action_dismiss"
+                        type="object"
+                        string="Dismiss"
+                        invisible="state != 'open'"
+                    />
+                    <button
+                        name="action_reopen"
+                        type="object"
+                        string="Reopen"
+                        invisible="state == 'open'"
+                    />
+                    <field name="state" widget="statusbar" />
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button
+                            name="action_open_conversation"
+                            type="object"
+                            class="oe_stat_button"
+                            icon="fa-commenting-o"
+                            string="Conversation"
+                            invisible="not conversation_id"
+                        />
+                    </div>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" readonly="1" />
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="incident_type" readonly="1" />
+                            <field name="category" />
+                            <field name="sender_id" />
+                            <field name="origin_display" />
+                        </group>
+                        <group>
+                            <field name="conversation_id" />
+                            <field name="message_id" invisible="not message_id" />
+                            <field name="channel_id" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                            <field name="can_retry" invisible="1" />
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Description" name="description">
+                            <field name="description" readonly="1" />
+                        </page>
+                        <page string="Resolution" name="resolution">
+                            <group>
+                                <field name="resolved_by_id" />
+                                <field name="resolved_date" />
+                            </group>
+                            <field
+                                name="resolution_note"
+                                placeholder="How it was solved..."
+                            />
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" />
+                    <field name="activity_ids" />
+                    <field name="message_ids" />
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="mail_message_import_incident_view_search" model="ir.ui.view">
+        <field name="name">mail.message.import.incident.search</field>
+        <field name="model">mail.message.import.incident</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" />
+                <field name="sender_id" />
+                <field name="conversation_id" />
+                <filter name="open" string="Open" domain="[('state', '=', 'open')]" />
+                <filter
+                    name="closed"
+                    string="Closed"
+                    domain="[('state', '!=', 'open')]"
+                />
+                <separator />
+                <filter
+                    name="technical"
+                    string="Technical errors"
+                    domain="[('category', '=', 'technical')]"
+                />
+                <filter name="date" string="Date" date="create_date" />
+                <group expand="0" string="Group By">
+                    <filter
+                        name="group_type"
+                        string="Type"
+                        context="{'group_by': 'incident_type'}"
+                    />
+                    <filter
+                        name="group_sender"
+                        string="Sender"
+                        context="{'group_by': 'sender_id'}"
+                    />
+                    <filter
+                        name="group_state"
+                        string="Status"
+                        context="{'group_by': 'state'}"
+                    />
+                </group>
+                <searchpanel>
+                    <field
+                        name="channel_id"
+                        string="Receiving channel"
+                        enable_counters="1"
+                    />
+                    <field
+                        name="authorized_address_id"
+                        string="Sent from"
+                        enable_counters="1"
+                    />
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_mail_message_import_incident" model="ir.actions.act_window">
+        <field name="name">Incidents</field>
+        <field name="res_model">mail.message.import.incident</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="context">{'search_default_open': 1}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">No incident to review</p>
+            <p>
+                What could not be done or decided safely waits here for a person:
+                for example a conversation that could not be processed.
+            </p>
+        </field>
+    </record>
+</odoo>
