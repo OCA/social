@@ -23,6 +23,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [mute_notification_user_autosubscribe](mute_notification_user_autosubscribe/) | 19.0.1.0.0 |  | Do not send notifications to users autosubcribed through user_id field
+[social_media_base](social_media_base/) | 19.0.1.0.0 | <a href='https://github.com/edescalona'><img src='https://github.com/edescalona.png' width='32' height='32' style='border-radius:50%;' alt='edescalona'/></a> | Accounts, scheduled posts and daily statistics for the connectors
 
 [//]: # (end addons)
 

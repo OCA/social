@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-social"
-version = "19.0.20260428.0"
+version = "19.0.20261125.0"
 dependencies = [
     "odoo-addon-mute_notification_user_autosubscribe==19.0.*",
+    "odoo-addon-social_media_base==19.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
