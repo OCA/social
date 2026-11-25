@@ -1,0 +1,68 @@
+// Accounts of a post, on the "Social Media" page of the campaign form.
+//
+// `many2many_tags_avatar` renders each account as an `.o_tag` carrying its
+// avatar, but it adds no `o_tag_color_N` class: that class is what gives a
+// plain tag its pill, and the avatar variant leaves it out because the avatar
+// is meant to replace the colour chip. Inside the card the result reads as
+// loose text, so the pill is drawn here.
+.o_field_widget[name="social_post_ids"] {
+    .o_field_many2many_tags_avatar .o_tag {
+        padding: 1px 6px 1px 1px;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+        border-radius: 999px;
+        background-color: #fff;
+    }
+
+    // A long account name would otherwise widen its cell and, with it, the
+    // whole table past the card: the tag already carries `text-truncate`, but
+    // an auto-layout table sizes its columns from the untruncated text, so
+    // nothing ever gets to shrink. Fixing the layout gives the cells a width
+    // that does not depend on their content and lets the truncation happen.
+    .o_social_post_figures {
+        table-layout: fixed;
+
+        td:first-child {
+            width: 40%;
+        }
+    }
+
+    // The field itself is laid out as an `inline-flex` with no maximum, so it
+    // takes the width of its tags and overflows the cell before the `mw-100`
+    // its own children carry has any width to be relative to.
+    .o_field_many2many_tags_avatar {
+        max-width: 100%;
+    }
+
+    // The accounts are kept on one line. Two of them do not fit side by side
+    // in the cell, so the second one wrapped: that gave the card a row a line
+    // taller than the card of a post published to a single account, and since
+    // the message above is what absorbs whatever height is left over, the
+    // figures and the footer of the two cards ended up at different heights.
+    //
+    // The rule lands on the flex container and not on the widget: they are two
+    // elements, and `o_field_many2many_tags_avatar` names the outer one, which
+    // is not a flex. `!important` is needed because the container carries the
+    // `flex-wrap` utility of Bootstrap, and those are generated `!important`.
+    // The container is also given the width of the cell. Laid out as an
+    // `inline-flex` it is as wide as its own tags, and a width the tags
+    // themselves decide is not one they can then be measured against.
+    .o_field_many2many_tags_avatar .many2many_tags_avatar_field_container {
+        flex-wrap: nowrap !important;
+        width: 100%;
+        justify-content: flex-end;
+    }
+
+    // Flex items refuse to shrink below their content unless told to, which
+    // would keep the truncation from ever kicking in. The avatar and the
+    // counter are the parts that must keep their size: they are the ones that
+    // say nothing once shrunk.
+    .o_field_many2many_tags_avatar .o_tag,
+    .o_field_many2many_tags_avatar .o_tag_badge_text {
+        min-width: 0;
+    }
+
+    .o_field_many2many_tags_avatar .o_m2m_avatar,
+    .o_field_many2many_tags_avatar .o_m2m_avatar_empty {
+        flex-shrink: 0;
+    }
+}

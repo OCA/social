@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+
+    <t t-name="social_media_base.SocialMessage">
+        <div class="o_social_message_block">
+            <div
+                t-ref="text"
+                t-attf-class="o_social_message {{ props.className }} {{ state.expanded ? expandedClass : '' }}"
+                t-attf-style="--o-social-message-lines: {{ props.lines }}"
+                t-esc="props.text"
+            />
+            <span
+                t-if="state.overflowing"
+                class="cursor-pointer show-more-message"
+                t-on-click.stop="onToggle"
+                t-esc="toggleLabel"
+            />
+        </div>
+    </t>
+
+</templates>
