@@ -1,0 +1,2 @@
+- Synchronize video statistics.
+- Support for image ("photo mode") posts.
