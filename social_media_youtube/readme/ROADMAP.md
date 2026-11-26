@@ -1,0 +1,2 @@
+- Support for resumable uploads of large videos.
+- Synchronize YouTube analytics.

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="social_media_youtube" model="social.media">
+        <field name="name">YouTube</field>
+        <field name="media_type">youtube</field>
+        <field
+            name="description"
+        >Manage your YouTube channel and schedule videos</field>
+        <field
+            name="image"
+            type="base64"
+            file="social_media_youtube/static/description/icon.png"
+        />
+    </record>
+</odoo>
