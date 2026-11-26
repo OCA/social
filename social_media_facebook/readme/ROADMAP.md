@@ -1,0 +1,2 @@
+- Support for GIF posts.
+- Synchronize Facebook insights.
