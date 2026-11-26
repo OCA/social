@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="wizard_social_account_view_form_inherit" model="ir.ui.view">
+        <field name="name">wizard.social.account.view.form.inherit.instagram</field>
+        <field name="model">wizard.social.account</field>
+        <field
+            name="inherit_id"
+            ref="social_media_base.wizard_social_account_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='social_account_data']" position="inside">
+                <field name="media_type" invisible="1" />
+                <field
+                    name="instagram_app_id"
+                    required="media_type == 'instagram'"
+                    invisible="media_type != 'instagram'"
+                />
+                <field
+                    name="instagram_app_secret"
+                    password="True"
+                    required="media_type == 'instagram'"
+                    invisible="media_type != 'instagram'"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
