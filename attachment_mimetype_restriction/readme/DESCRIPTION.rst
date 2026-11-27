@@ -1,5 +1,6 @@
-This module restricts attachment uploads to an explicit allowlist of MIME types
-using content-based detection rather than filename extensions. Only configured
+This module restricts attachment uploads to an explicit allowlist of MIME types,
+determined as Odoo does: the declared type, then the file name extension, and
+the content only when neither gives one. Only configured
 MIME types are accepted; everything else is rejected. Leaving the allowlist
 empty disables the restriction and allows all file types.
 

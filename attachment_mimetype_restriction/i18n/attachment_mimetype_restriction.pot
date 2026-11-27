@@ -14,6 +14,16 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: attachment_mimetype_restriction
+#: code:addons/attachment_mimetype_restriction/models/mail_thread.py:0
+#, python-format
+msgid ""
+"<div class=\"o_mail_notification\"><p><strong>⚠️ Security Notice: Blocked "
+"Attachments</strong></p><p>The following attachment(s) from the email above "
+"were blocked:</p><p>%s</p><p><em>These file types are not allowed by your "
+"organization's security policy.</em></p></div>"
+msgstr ""
+
+#. module: attachment_mimetype_restriction
 #: model_terms:ir.ui.view,arch_db:attachment_mimetype_restriction.res_config_settings_view_form
 msgid ""
 "Allow only specific MIME types to be uploaded as attachments.\n"

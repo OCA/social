@@ -9,7 +9,7 @@
     "website": "https://github.com/OCA/social",
     "author": "Quartile, Odoo Community Association (OCA)",
     "license": "AGPL-3",
-    "depends": ["base", "mail"],
+    "depends": ["base", "mail", "portal"],
     "data": [
         "views/ir_model_views.xml",
         "views/res_config_settings_views.xml",
