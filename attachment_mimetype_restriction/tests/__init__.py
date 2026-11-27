@@ -1,1 +1,2 @@
 from . import test_attachment_mimetype_restriction
+from . import test_upload_attachment_controller

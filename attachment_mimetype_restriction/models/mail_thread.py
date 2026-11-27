@@ -3,6 +3,7 @@
 
 import base64
 import logging
+from email.message import EmailMessage
 
 from markupsafe import escape
 
@@ -17,6 +18,13 @@ class MailThread(models.AbstractModel):
     def _evaluate_attachment_against_allowlist(
         self, name, content, info, model, res_id, company_id
     ):
+        allowed_mimetypes = self.env["ir.attachment"]._get_allowed_mimetypes(
+            company_id, model
+        )
+        if not allowed_mimetypes:
+            return None
+        if isinstance(content, EmailMessage):
+            content = content.as_bytes()
         try:
             if isinstance(content, str):
                 encoding = info and info.get("encoding")
@@ -40,9 +48,6 @@ class MailThread(models.AbstractModel):
                 "company_id": company_id,
             }
             mimetype = self.env["ir.attachment"]._compute_mimetype(temp_vals)
-            allowed_mimetypes = self.env["ir.attachment"]._get_allowed_mimetypes(
-                company_id, model
-            )
         except Exception as e:
             _logger.warning(
                 "Pre-validation failed for attachment '%s' (%s); blocking by default",
@@ -50,7 +55,7 @@ class MailThread(models.AbstractModel):
                 e,
             )
             return {"name": name, "mimetype": _("could not be analyzed")}
-        if mimetype and allowed_mimetypes and mimetype.lower() not in allowed_mimetypes:
+        if mimetype and mimetype.lower() not in allowed_mimetypes:
             return {"name": name, "mimetype": mimetype}
         return None
 
@@ -107,16 +112,16 @@ class MailThread(models.AbstractModel):
                     f"• <strong>{escape(blocked['name'])}</strong> "
                     f"({escape(blocked['mimetype'])})"
                 )
-            notification_body = (
+            notification_body = _(
                 '<div class="o_mail_notification">'
                 "<p><strong>⚠️ Security Notice: Blocked Attachments</strong></p>"
                 "<p>The following attachment(s) from the email above were "
                 "blocked:</p>"
-                "<p>" + "<br/>".join(blocked_list) + "</p>"
+                "<p>%s</p>"
                 "<p><em>These file types are not allowed by your organization's "
                 "security policy.</em></p>"
                 "</div>"
-            )
+            ) % "<br/>".join(blocked_list)
             try:
                 target_record.sudo().message_post(
                     body=notification_body,

@@ -8,6 +8,7 @@ from odoo.exceptions import ValidationError
 from odoo.http import request
 
 from odoo.addons.mail.controllers.discuss import DiscussController
+from odoo.addons.portal.controllers.portal import CustomerPortal
 from odoo.addons.web.controllers.main import Binary
 
 
@@ -33,6 +34,10 @@ class DiscussControllerExtended(DiscussController):
     def mail_attachment_upload(
         self, ufile, thread_id, thread_model, is_pending=False, **kwargs
     ):
+        request.context = dict(
+            request.context,
+            attachment_mimetype_target=(thread_model, int(thread_id)),
+        )
         try:
             return super().mail_attachment_upload(
                 ufile, thread_id, thread_model, is_pending, **kwargs
@@ -44,3 +49,15 @@ class DiscussControllerExtended(DiscussController):
                 data=json.dumps(attachmentData),
                 headers=[("Content-Type", "application/json")],
             )
+
+
+class CustomerPortalExtended(CustomerPortal):
+    @http.route()
+    def attachment_add(self, name, file, res_model, res_id, access_token=None, **kw):
+        request.context = dict(
+            request.context,
+            attachment_mimetype_target=(res_model, int(res_id)),
+        )
+        return super().attachment_add(
+            name, file, res_model, res_id, access_token=access_token, **kw
+        )
