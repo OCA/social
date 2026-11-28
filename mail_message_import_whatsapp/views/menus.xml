@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Binhex
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <menuitem
+        id="menu_mail_message_import_gateway"
+        name="Gateways"
+        parent="mail_message_import.menu_mail_message_import_config"
+        action="mail_gateway.mail_gateway_act_window"
+        groups="base.group_system"
+        sequence="50"
+    />
+</odoo>
