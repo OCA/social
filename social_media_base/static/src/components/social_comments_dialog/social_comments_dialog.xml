@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2026 Binhex <https://www.binhex.cloud>
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<templates xml:space="preserve">
+    <t t-name="social_media_base.SocialCommentsDialog">
+        <Dialog title="dialogTitle" footer="true" size="'md'">
+            <div class="o_social_comments">
+                <div t-if="state.loading" class="text-center text-muted py-4">
+                    <i class="fa fa-spinner fa-spin me-1" aria-hidden="true" />
+                    Loading…
+                </div>
+                <div t-elif="state.error" class="alert alert-warning mb-0" role="alert">
+                    <t t-esc="state.error" />
+                </div>
+                <div
+                    t-elif="!state.comments.length"
+                    class="o_social_comments_empty py-4 text-center"
+                >
+                    No comments yet.
+                </div>
+                <div t-else="" class="o_social_comments_list">
+                    <div
+                        t-foreach="state.comments"
+                        t-as="comment"
+                        t-key="comment.id"
+                        class="o_social_comment"
+                    >
+                        <div
+                            class="d-flex align-items-start justify-content-between gap-2"
+                        >
+                            <div class="flex-grow-1 min-w-0">
+                                <div class="o_social_comment_meta">
+                                    <span
+                                        class="o_social_comment_author"
+                                        t-esc="comment.actor or '—'"
+                                    />
+                                    <span
+                                        t-if="comment.published_time"
+                                        class="o_social_comment_date"
+                                        t-esc="formatCommentDate(comment.published_time)"
+                                    />
+                                </div>
+                                <div
+                                    class="o_social_comment_text"
+                                    t-esc="comment.text"
+                                />
+                            </div>
+                            <button
+                                type="button"
+                                class="btn btn-link btn-sm text-danger p-0 flex-shrink-0"
+                                title="Delete comment"
+                                t-on-click="() => this.deleteComment(comment)"
+                            >
+                                <i class="fa fa-trash-o" aria-hidden="true" />
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <t t-set-slot="footer">
+                <div class="d-flex gap-2 w-100">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Write a comment…"
+                        t-model="state.body"
+                        t-on-keydown="(ev) => ev.key === 'Enter' &amp;&amp; this.sendComment()"
+                    />
+                    <button
+                        type="button"
+                        class="btn btn-primary"
+                        t-att-disabled="state.sending or !state.body.trim()"
+                        t-on-click="sendComment"
+                    >
+                        Send
+                    </button>
+                </div>
+            </t>
+        </Dialog>
+    </t>
+</templates>

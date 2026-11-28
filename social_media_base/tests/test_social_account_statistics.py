@@ -2,11 +2,12 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
 import inspect
-from datetime import date
+from datetime import date, timedelta
 from unittest.mock import patch
 
 import psycopg2
 
+from odoo import fields
 from odoo.exceptions import AccessError
 from odoo.tests.common import tagged
 from odoo.tools import mute_logger
@@ -187,6 +188,21 @@ class TestSocialAccountStatistics(TestSocialMediaBaseCommon):
         ):
             self.social_account_id.action_refresh_statistics()
         self.assertEqual(mock_sendone.call_args[0][2], "social_form_success")
+
+    def test_top_posts_with_broken_image_urls_are_kept(self):
+        self.social_post_account_id.write(
+            {
+                "state": "posted",
+                "published_date": fields.Datetime.now(),
+                "impression_count": 10,
+            }
+        )
+        with patch(
+            "odoo.addons.social_media_base.models.social_account_statistics.json.loads",
+            side_effect=ValueError("bad json"),
+        ):
+            data = self.Statistics.get_dashboard_data()
+        self.assertTrue(all(post["image_url"] is False for post in data["top_posts"]))
 
 
 @tagged("post_install", "-at_install")
@@ -372,35 +388,13 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
             self.account.compute_dashboard_statistics()
         mock_refresh.assert_not_called()
 
-    def _patch_refresh(self, series, window):
-        """Patch the two reads of the button with the answers given."""
-        return patch.object(
-            type(self.account),
-            "_refresh_statistics",
-            autospec=True,
-            return_value=series,
-        ), patch.object(
-            type(self.account),
-            "_refresh_window_statistics",
-            autospec=True,
-            return_value=window,
-        )
-
     def test_refreshing_asks_the_series_first_and_aggregates_after(self):
-        """The card is drawn from those rows, so the other order draws stale ones.
-
-        The window is read even when the series answered: a social media with
-        a daily series keeps reading the figures of its publications.
-        """
+        """The card is drawn from those rows, so the other order draws stale ones."""
         calls = []
 
         def refresh(accounts):
             calls.append("refresh")
             return True
-
-        def window(accounts):
-            calls.append("window")
-            return self.env["social.post.account"]
 
         def aggregate(accounts):
             calls.append("aggregate")
@@ -415,33 +409,13 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
             ),
             patch.object(
                 type(self.account),
-                "_refresh_window_statistics",
-                autospec=True,
-                side_effect=window,
-            ),
-            patch.object(
-                type(self.account),
                 "_refresh_account_statistics",
                 autospec=True,
                 side_effect=aggregate,
             ),
         ):
             self.assertTrue(self.account.refresh_dashboard_statistics())
-        self.assertEqual(calls, ["refresh", "window", "aggregate"])
-
-    def test_refreshing_counts_the_window_as_an_update(self):
-        """A social media without a daily series updates through its posts."""
-        patch_series, patch_window = self._patch_refresh(False, self._publication())
-        with patch_series, patch_window:
-            self.assertTrue(self.account.refresh_dashboard_statistics())
-
-    def test_refreshing_counts_the_series_as_an_update(self):
-        """The series alone is an update, with no publication in the window."""
-        patch_series, patch_window = self._patch_refresh(
-            True, self.env["social.post.account"]
-        )
-        with patch_series, patch_window:
-            self.assertTrue(self.account.refresh_dashboard_statistics())
+        self.assertEqual(calls, ["refresh", "aggregate"])
 
     def test_refreshing_says_when_nothing_came_back(self):
         """Without a connector no social media reports figures by day."""
@@ -488,6 +462,49 @@ class TestSocialAccountDashboardStatistics(TestSocialMediaBaseCommon):
         ):
             self.account._on_account_associated()
         self.assertEqual(calls, ["refresh", "backfill", "aggregate"])
+
+    def test_the_screen_data_comes_from_the_rows_of_the_period(self):
+        """The dashboard is built from the rows, not from sample figures."""
+        today = fields.Date.context_today(self.Statistics)
+        self._series_row(today, impression_count=100, like_count=10, engagement=0.1)
+        self._series_row(
+            today - timedelta(days=1),
+            impression_count=50,
+            like_count=5,
+            engagement=0.1,
+        )
+        self._publication(
+            state="posted",
+            published_date=fields.Datetime.now(),
+            impression_count=30,
+            like_count=3,
+            post_account_url="https://example.com/post",
+        )
+        data = self.Statistics.get_dashboard_data(7)
+        self.assertEqual(data["period"], 7)
+        self.assertEqual(len(data["series"]), 7)
+        self.assertEqual(data["kpis"]["impressions"], 150)
+        self.assertEqual(data["kpis"]["engagement"], 10.0)
+        row = next(item for item in data["by_account"] if item["id"] == self.account.id)
+        self.assertEqual(row["impressions"], 150)
+        self.assertEqual(row["engagement"], 10.0)
+        self.assertEqual(row["name"], self.account.name)
+        self.assertEqual(len(data["top_posts"]), 1)
+        self.assertEqual(data["top_posts"][0]["message"], "Imported")
+        self.assertFalse(data["top_posts"][0]["image_url"])
+
+    def test_the_screen_data_can_be_narrowed_to_one_account(self):
+        today = fields.Date.context_today(self.Statistics)
+        other = self.SocialAccount.create(
+            {"name": "Another", "media_id": self.social_media_id.id}
+        )
+        self._series_row(today, impression_count=10)
+        self.Statistics.create(
+            {"account_id": other.id, "date": today, "impression_count": 90}
+        )
+        data = self.Statistics.get_dashboard_data(7, self.account.id)
+        self.assertEqual([item["id"] for item in data["by_account"]], [self.account.id])
+        self.assertEqual(data["kpis"]["impressions"], 10)
 
 
 @tagged("post_install", "-at_install")

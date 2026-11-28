@@ -10,23 +10,38 @@
                 <field name="name" />
                 <field name="description" />
                 <field name="image" />
+                <field name="media_type" />
                 <templates>
-                    <t t-name="card" class="flex-row rounded">
-                        <field
-                            name="image"
-                            widget="image"
-                            options="{'size': [100, 0]}"
-                        />
-                        <div class="d-flex flex-column p-2">
-                            <h5 class="title" t-esc="record.name.raw_value" />
-                            <p class="text" t-esc="record.description.raw_value" />
-                            <button
-                                type="object"
-                                class="btn btn-primary"
-                                name="action_open_account"
-                                title="Authorize Odoo on this social media and link one of its accounts. It opens the association wizard of the social media."
-                            >Associate account
-                            </button>
+                    <t t-name="card">
+                        <div
+                            t-attf-class="o_social_card o_social_media_card o_social_network_{{ record.media_type.raw_value or 'none' }} d-flex flex-column rounded"
+                        >
+                            <div class="o_social_media_cover">
+                                <img
+                                    t-attf-src="/web/image/social.media/{{ record.id.raw_value }}/image"
+                                    class="o_social_logo o_social_media_logo"
+                                    t-att-alt="record.name.raw_value"
+                                />
+                            </div>
+                            <div
+                                class="o_social_media_body d-flex flex-column flex-grow-1"
+                            >
+                                <h5
+                                    class="o_social_media_name"
+                                    t-esc="record.name.raw_value"
+                                />
+                                <p
+                                    class="o_social_media_description"
+                                    t-esc="record.description.raw_value"
+                                />
+                                <button
+                                    type="object"
+                                    class="o_social_media_button btn btn-primary mt-auto"
+                                    name="action_open_account"
+                                    title="Link one of the accounts of this social media."
+                                >Associate account
+                                </button>
+                            </div>
                         </div>
                     </t>
                 </templates>

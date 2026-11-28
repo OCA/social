@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {Component, useEffect, useRef, useState} from "@odoo/owl";
 import {_t} from "@web/core/l10n/translation";
 

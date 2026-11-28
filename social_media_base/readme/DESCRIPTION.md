@@ -30,11 +30,16 @@ Main features:
 - Integration of multiple user accounts.
 - Basic methods that can be extended and adapted to suit the social media.
 - Basic business structure.
-- Dashboard of published posts with video and deletion indicators.
-- A *Campaigns* menu inside the application, so the Odoo marketing campaigns
-  (`utm.campaign`) can be managed without installing another marketing
-  application. A post carries the campaign it belongs to, and the campaign
-  form opens a new post already attached to it.
+- Dashboard with one card per account — followers, posts and engagement —
+  and a feed of the publications of every account, with the images and a
+  preview of the video of each one.
+- A *Calendar* menu with the month of scheduled and published posts, coloured
+  by state, and the standard day, week, month and year scales.
+- The *Campaigns* menu of *Social Media Advertising* follows the advertising
+  campaigns by stage. The Odoo marketing campaigns (`utm.campaign`) remain
+  available from *Configuration* > *UTM Campaigns*: a post carries the
+  campaign it belongs to, and the campaign form opens a new post already
+  attached to it.
 - Campaign badge on the posts kanban and on the dashboard cards.
 - The posts of a marketing campaign, shown on the campaign from the moment
   they are drafted, with their consolidated figures and a stat button on the
@@ -49,9 +54,10 @@ Main features:
   which are installed with it. They are core modules that bring the marketing
   campaigns, the mediums, the sources and the short links, and they change
   nothing in the social media data.
-- Statistics stored as one row per account and day, so a native graph and a
-  pivot draw them with the search panel, the comparison and the export of
-  Odoo. Only the social media reporting figures by day fill it. A cron
+- A *Statistics* dashboard with the figures of the period, the impressions
+  and the engagement rate per day, the top posts and the breakdown by
+  account, followed by a native graph and pivot over the daily rows for the
+  search panel, the comparison and the export of Odoo. Only the social media reporting figures by day fill it. A cron
   rewrites the last days every two hours, because the social media revise
   figures already past, and the *Update* button of the dashboard rewrites the
   same window on demand.

@@ -8,4 +8,4 @@ access_social_account_statistics_manager,social.account.statistics manager,model
 access_social_post_user,social.post user,model_social_post,social_media_base.group_social_media_user,1,1,1,1
 access_social_post_account_user,social.post.account user,model_social_post_account,social_media_base.group_social_media_user,1,1,1,1
 access_wizard_social_account_user,wizard.social.account user,model_wizard_social_account,social_media_base.group_social_media_user,1,1,1,1
-access_link_tracker_social_media_user,link.tracker social media user,link_tracker.model_link_tracker,social_media_base.group_social_media_user,1,1,1,0
+access_link_tracker_social_media_user,link.tracker social media user,link_tracker.model_link_tracker,social_media_base.group_social_media_user,1,0,1,0

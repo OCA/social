@@ -30,27 +30,34 @@ async function noDialog() {
 /**
  * Every kanban card of the module, drawn from its `card` template: the social
  * media, the post, the publication of the dashboard and the post inside its
- * campaign. The publication has no address, so opening it says it is gone
+ * campaign. The publication has no address, so opening it says it has no link
  * instead of opening anything on the social media. The logo of the social
- * media keeps its proportions, and the cards of the publications of a post
- * open nothing.
+ * media comes from its image field, and the cards of the publications of a
+ * post open nothing.
  */
 registry.category("web_tour.tours").add("social_media_base.kanban_cards", {
     url: "/odoo/social-media",
     steps: () => [
         {
             content: "The card of the social media shows its image",
-            trigger: `${CARD}:contains('Media of the cards') .o_field_image img`,
+            trigger: `${CARD}:contains('Media of the cards') .o_social_media_logo`,
         },
         {
-            content: "The logo is as tall as the proportions of the image give",
-            trigger: `${CARD}:contains('Media of the cards') .o_field_image img`,
+            content: "The logo is the image of the social media",
+            trigger: `${CARD}:contains('Media of the cards') .o_social_media_logo`,
             async run() {
                 const img = this.anchor;
-                const height = await proportionalHeight(img);
-                if (img.offsetWidth !== 100 || img.offsetHeight !== height) {
+                if (!img.complete) {
+                    await new Promise((resolve) =>
+                        img.addEventListener("load", resolve, {once: true})
+                    );
+                }
+                if (!img.naturalWidth) {
+                    throw new Error("The logo did not load any image.");
+                }
+                if (!img.currentSrc.includes("/web/image/social.media/")) {
                     throw new Error(
-                        `The logo is drawn ${img.offsetWidth}x${img.offsetHeight}, not 100x${height}.`
+                        `The logo is drawn from ${img.currentSrc}, not from the image of the social media.`
                     );
                 }
             },
@@ -86,17 +93,17 @@ registry.category("web_tour.tours").add("social_media_base.kanban_cards", {
         },
         {
             content: "The card of the publication is drawn",
-            trigger: `${CARD}.oe_kanban_social_dashboard:contains('Publication of the cards')`,
+            trigger: `${CARD}:contains('Publication of the cards') .oe_kanban_social_dashboard`,
         },
         {
             content: "Open the publication, which has no address",
-            trigger: `${CARD}.oe_kanban_social_dashboard:contains('Publication of the cards')`,
+            trigger: `${CARD}:contains('Publication of the cards') .oe_kanban_social_dashboard`,
             run: "click",
         },
         {
-            content: "It says the publication is gone",
+            content: "It says the publication has no link",
             trigger:
-                ".o_notification:contains('The post does not exist or has been deleted.')",
+                ".o_notification:contains('This publication has no link on the social media.')",
         },
         {
             content: "Open the campaigns",

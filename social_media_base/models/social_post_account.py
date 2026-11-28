@@ -40,6 +40,7 @@ class SocialPostAccount(models.Model):
         "social.media", related="account_id.media_id", required=True
     )
     media_type = fields.Selection(related="media_id.media_type")
+    comments_supported = fields.Boolean(compute="_compute_comments_supported")
     user_id = fields.Many2one(
         related="account_id.user_id",
         string="Responsible",
@@ -245,11 +246,22 @@ class SocialPostAccount(models.Model):
                 continue
             medias = post_account.image_ids | post_account.video_ids
             missing = set(refs) - {str(media.id) for media in medias}
+            try:
+                missing_ids = [int(ref) for ref in missing]
+            except (TypeError, ValueError):
+                raise ValidationError(
+                    self.env._(
+                        "%(publication)s has a media reference that is not an "
+                        "attachment id: %(refs)s.",
+                        publication=post_account.display_name,
+                        refs=", ".join(sorted(missing)),
+                    )
+                ) from None
             dangling = {
                 str(attachment.id)
                 for attachment in self.env["ir.attachment"]
                 .sudo()
-                .browse(int(ref) for ref in missing)
+                .browse(missing_ids)
                 .exists()
                 if (attachment.res_model, attachment.res_id)
                 != (self._name, post_account.id)
@@ -462,10 +474,7 @@ class SocialPostAccount(models.Model):
         account must not roll back the reference of this one. Connectors wrap
         the body of their per-account loop with this guard so a failure is
         recorded on its own line, the accounts already published keep their
-        ``remote_ref`` and the retry only targets the failed ones. Whatever
-        the failure has to leave on the account, such as the flag of expired
-        credentials, is written after the rollback, by
-        :meth:`_register_publish_failure`.
+        ``remote_ref`` and the retry only targets the failed ones.
         """
         self.ensure_one()
         try:
@@ -477,6 +486,12 @@ class SocialPostAccount(models.Model):
             self._register_publish_failure(error)
         except Exception as error:  # noqa: BLE001 - external effect, see above
             self._register_publish_failure(error)
+            if isinstance(error, SocialCredentialsError):
+                # The savepoint has been rolled back, so the flag the attempt
+                # wrote inside it is gone: raising it again here, outside the
+                # savepoint, is what makes the dashboard ask for a new
+                # authorization.
+                self.account_id._flag_credentials_expired(str(error))
 
     def _publish_attempt(self, publish, **kwargs):
         """Publish, renewing the credentials of the account when needed.
@@ -492,9 +507,7 @@ class SocialPostAccount(models.Model):
 
         Called from inside :meth:`_publish_guard`, so an account whose
         credentials cannot be renewed fails its own line, with the reason on
-        it, and the other accounts of the post go out as usual. That refusal
-        is only raised again: the guard is what flags the account, because a
-        flag written here would go away with the rollback of its savepoint.
+        it, and the other accounts of the post go out as usual.
 
         :param publish: the bound method that publishes on the social media.
         :param kwargs: the arguments of that method.
@@ -504,8 +517,9 @@ class SocialPostAccount(models.Model):
         self.account_id.with_context(not_notify=True).validate_access_token()
         try:
             return publish(**kwargs)
-        except SocialCredentialsError:
+        except SocialCredentialsError as error:
             if not self.account_id._refresh_credentials():
+                self.account_id._flag_credentials_expired(str(error))
                 raise
             _logger.info(
                 "Credentials renewed while publishing on %(media)s for account "
@@ -563,12 +577,6 @@ class SocialPostAccount(models.Model):
         Called from the ``except`` block of :meth:`_publish_guard`, once the
         savepoint has been rolled back and the ORM cache cleared.
 
-        Credentials the social media refused and Odoo could not renew also
-        flag the account and leave the note to the user in charge. This is
-        the only place that runs for every connector outside the savepoint of
-        the publication, so it is the only one where the flag, the note and
-        the warning on the dashboard are kept.
-
         :param error: the exception raised while publishing.
         """
         _logger.exception(
@@ -581,8 +589,6 @@ class SocialPostAccount(models.Model):
                 "failed_description": plaintext2html(str(error)),
             }
         )
-        if isinstance(error, SocialCredentialsError):
-            self.account_id._flag_credentials_expired(str(error))
         if self.post_id:
             self.post_id._message_error_post(str(error), self.media_type)
 
@@ -592,6 +598,69 @@ class SocialPostAccount(models.Model):
         :return: ``success`` and ``message`` of the action.
         :rtype: dict
         """
+
+    def _supports_comments(self):
+        """Whether the connector of this social media implements comments.
+
+        Extension point: the connectors that can read and write comments
+        answer ``True`` for their own media, which is what shows the entry on
+        the card. The base answers ``False``.
+        """
+        return False
+
+    @api.depends("media_type")
+    def _compute_comments_supported(self):
+        for line in self:
+            line.comments_supported = line._supports_comments()
+
+    def get_comments(self):
+        """Read the comments of this publication, as the connector answers them.
+
+        Extension point: a connector returns
+        ``{"success": True, "data": [{"id", "text", "actor",
+        "published_time", "images_url"}]}``, or ``{"success": False,
+        "message": ...}`` with what the social media refused. The base refuses
+        the social media that do not implement it, so a caller always finds
+        the method.
+
+        :rtype: dict
+        """
+        raise UserError(
+            self.env._(
+                "Reading the comments of this publication is not supported by "
+                "its social media."
+            )
+        )
+
+    def create_comment(self, post_data, context=None):
+        """Post a comment on this publication.
+
+        Extension point, with the same contract as :meth:`get_comments`.
+
+        :param dict post_data: the comment, under the ``body`` key.
+        :rtype: dict
+        """
+        raise UserError(
+            self.env._("Commenting from Odoo is not supported by this social media.")
+        )
+
+    def delete_comment(self, comment_id):
+        """Delete a comment of this publication on the social media.
+
+        The connectors implement it under ``delete_<media_type>_comment``, so
+        the caller does not have to know which social media a publication
+        belongs to.
+
+        :param str comment_id: identifier of the comment on the social media.
+        :rtype: dict
+        """
+        self.ensure_one()
+        delete = getattr(self, f"delete_{self.media_type}_comment", None)
+        if not delete:
+            raise UserError(
+                self.env._("Deleting comments is not supported by this social media.")
+            )
+        return delete(comment_id)
 
     def _register_delete_failure(self, error):
         """Record that the remote publication is gone but the line survived.
@@ -765,14 +834,40 @@ class SocialPostAccount(models.Model):
             },
         }
 
+    @api.ondelete(at_uninstall=False)
+    def _check_remote_ref_before_unlink(self):
+        """Keep the local reference of a publication still online.
+
+        ``social.post.unlink`` already refuses the post, and the safe way to
+        drop a line is :meth:`action_delete_post_account`, which deletes it on
+        the social media first. This guards the direct unlink (RPC, a
+        ``Command.delete``) of a line that still points at something online.
+        """
+        if self.env.context.get("social_delete_publication"):
+            return
+        online = self.filtered(lambda line: line.remote_ref and line.state != "deleted")
+        if online:
+            raise UserError(
+                self.env._(
+                    "These publications are still online and cannot be deleted "
+                    "from here: %(publications)s. Delete them from the "
+                    "dashboard, which removes them from the social media as "
+                    "well.",
+                    publications=", ".join(online.mapped("display_name")),
+                )
+            )
+
     def action_delete_post_account(self):
         self.ensure_one()
-        self._delete_post_account()
+        if self.state != "deleted":
+            # A publication already gone from the social media has nothing to
+            # delete there: asking again only answers with an error.
+            self._delete_post_account()
         account_id = self.account_id
         post_id = self.post_id
         try:
             with self.env.cr.savepoint():
-                self.unlink()
+                self.with_context(social_delete_publication=True).unlink()
                 if not post_id.post_account_ids:
                     post_id.unlink()
         except psycopg2.OperationalError as error:

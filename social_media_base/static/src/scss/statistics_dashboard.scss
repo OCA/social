@@ -1,0 +1,352 @@
+// Dashboard of the statistics action.
+//
+// The screen is a client action: the cards, the chart and the table are its
+// own layout. The figures and the labels come from the server, never from
+// this file.
+
+$o-stat-border: $border-color;
+$o-stat-card: $o-view-background-color;
+$o-stat-text: $o-main-text-color;
+$o-stat-muted: $o-main-color-muted;
+$o-stat-brand: $o-community-color;
+$o-stat-accent: #0d9488;
+$o-stat-page: $o-webclient-background-color;
+$o-stat-radius: 0.625rem;
+$o-stat-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+
+.o_social_statistics {
+    box-sizing: border-box;
+    height: 100%;
+    min-height: 100%;
+    overflow-y: auto;
+    padding: 1.5rem 2rem;
+    color: $o-stat-text;
+    background: $o-stat-page;
+
+    .o_social_statistics_header {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    h1 {
+        margin: 0;
+        color: $o-stat-text;
+        font-size: 1.5rem;
+        font-weight: 600;
+    }
+
+    .o_social_statistics_subtitle {
+        margin: 0.25rem 0 0;
+        color: $o-stat-muted;
+        font-size: 0.875rem;
+    }
+
+    .o_social_statistics_controls {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .o_social_period {
+        display: inline-flex;
+        padding: 2px;
+        background: $o-gray-200;
+        border-radius: 0.5rem;
+
+        button {
+            padding: 0.375rem 0.75rem;
+            color: $o-stat-muted;
+            font-size: 0.8125rem;
+            background: transparent;
+            border: 0;
+            border-radius: 0.375rem;
+            cursor: pointer;
+
+            &.active {
+                color: $o-stat-text;
+                font-weight: 600;
+                background: $o-stat-card;
+                box-shadow: $o-stat-shadow;
+            }
+        }
+    }
+
+    .o_social_account_filter {
+        flex: none;
+        width: auto;
+        min-width: 12rem;
+        max-width: 16rem;
+    }
+
+    .o_social_kpis {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .o_social_kpi {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 1rem 1.25rem;
+        background: $o-stat-card;
+        border: 1px solid $o-stat-border;
+        border-radius: $o-stat-radius;
+        box-shadow: $o-stat-shadow;
+
+        .o_social_kpi_label {
+            color: $o-stat-muted;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        strong {
+            color: $o-stat-text;
+            font-size: 1.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+        }
+    }
+
+    .o_social_charts {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .o_social_statistics_grid {
+        display: grid;
+        grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+        gap: 1rem;
+    }
+
+    .o_social_chart_card,
+    .o_social_breakdown,
+    .o_social_top_posts {
+        padding: 1.25rem;
+        background: $o-stat-card;
+        border: 1px solid $o-stat-border;
+        border-radius: $o-stat-radius;
+        box-shadow: $o-stat-shadow;
+    }
+
+    .o_social_card_header {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
+
+        h2 {
+            margin: 0;
+            color: $o-stat-text;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .o_social_card_hint {
+            color: $o-stat-muted;
+            font-size: 0.75rem;
+        }
+    }
+
+    .o_social_chart {
+        width: 100%;
+        height: auto;
+    }
+
+    .o_social_chart_grid {
+        stroke: $o-stat-border;
+        stroke-width: 1;
+    }
+
+    .o_social_chart_axis {
+        fill: $o-stat-muted;
+        font-size: 10px;
+    }
+
+    .o_social_chart_area {
+        fill: rgba(113, 75, 103, 0.12);
+    }
+
+    .o_social_chart_line {
+        fill: none;
+        stroke: $o-stat-brand;
+        stroke-width: 2;
+        stroke-linejoin: round;
+    }
+
+    .o_social_chart_line_engagement {
+        stroke: $o-stat-accent;
+    }
+
+    .o_social_chart_area_engagement {
+        fill: rgba(13, 148, 136, 0.12);
+    }
+
+    .o_social_top_posts_table {
+        width: 100%;
+        font-size: 0.8125rem;
+        border-collapse: collapse;
+
+        th {
+            padding: 0.375rem 0.5rem 0.375rem 0;
+            color: $o-stat-muted;
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-align: left;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            border-bottom: 1px solid $o-stat-border;
+        }
+
+        td {
+            padding: 0.5rem 0.5rem 0.5rem 0;
+            vertical-align: top;
+            white-space: nowrap;
+            border-bottom: 1px solid $o-stat-border;
+        }
+
+        td:first-child,
+        th:first-child {
+            white-space: normal;
+        }
+
+        tr:last-child td {
+            border-bottom: 0;
+        }
+
+        td a {
+            color: $o-stat-text;
+            font-weight: 500;
+        }
+    }
+
+    .o_social_top_post {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.5rem;
+        min-width: 0;
+    }
+
+    .o_social_top_post_media {
+        width: 2.25rem;
+        height: 2.25rem;
+        flex: none;
+        object-fit: cover;
+        border-radius: 0.375rem;
+    }
+
+    .o_social_top_post_video {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-size: 0.875rem;
+        background: #111827;
+    }
+
+    .o_social_statistics_empty_card {
+        padding: 2rem 1.25rem;
+        margin-bottom: 1rem;
+        color: $o-stat-muted;
+        text-align: center;
+        background: $o-stat-card;
+        border: 1px solid $o-stat-border;
+        border-radius: $o-stat-radius;
+        box-shadow: $o-stat-shadow;
+
+        p {
+            margin: 0;
+        }
+    }
+
+    .o_social_breakdown_account {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        min-width: 0;
+    }
+
+    .o_social_breakdown_avatar {
+        position: relative;
+        width: 1.75rem;
+        height: 1.75rem;
+        flex: none;
+
+        img:first-child {
+            width: 1.75rem;
+            height: 1.75rem;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    }
+
+    .o_social_breakdown_network {
+        position: absolute;
+        right: -2px;
+        bottom: -2px;
+        width: 0.875rem;
+        height: 0.875rem;
+        padding: 1px;
+        object-fit: contain;
+        background: $o-stat-card;
+        border: 1px solid $o-stat-border;
+        border-radius: 50%;
+    }
+
+    .o_social_top_post_account {
+        display: block;
+        margin-top: 0.125rem;
+        color: $o-stat-muted;
+        font-size: 0.6875rem;
+    }
+
+    .o_social_statistics_empty,
+    .o_social_statistics_loading {
+        padding: 1.5rem 0;
+        color: $o-stat-muted;
+        font-size: 0.875rem;
+    }
+
+    .o_social_statistics_note {
+        margin-top: 1rem;
+        color: $o-stat-muted;
+        font-size: 0.75rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .o_social_statistics {
+        padding: 1rem;
+
+        .o_social_card_header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 0.125rem;
+        }
+    }
+}
+
+@media (max-width: 1100px) {
+    .o_social_statistics {
+        .o_social_statistics_grid,
+        .o_social_charts {
+            grid-template-columns: 1fr;
+        }
+
+        .o_social_kpis {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+}

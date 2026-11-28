@@ -1,4 +1,6 @@
-import {markup, onWillUnmount} from "@odoo/owl";
+/** @odoo-module */
+
+import {markup, onWillDestroy} from "@odoo/owl";
 import {session} from "@web/session";
 
 export const SocialMediaMixin = (T) =>
@@ -34,38 +36,42 @@ export const SocialMediaMixin = (T) =>
                 `social_${view}_success`,
                 `social_${view}_info`,
             ];
-            const onNotification = (payload, type) => {
-                const message =
-                    payload && toastTypes.includes(type)
-                        ? markup(payload.message)
-                        : null;
-                if (message !== null && type === dangerType) {
-                    session.social_error = true;
-                }
-
-                this.handleSocialViewNotification(type, payload);
-
-                if (message !== null) {
-                    this.notificationService.add(message, {
-                        type: payload.message_type,
-                        sticky: false,
-                    });
-                }
-            };
-            // The bus only delivers a message to the callbacks subscribed to
-            // its type, and keeps one wrapper per callback, so every type
-            // gets its own callback to be unsubscribed on its own.
-            const subscriptions = [
-                ...toastTypes,
-                "social_need_update",
-                "social_posts_updated",
-            ].map((type) => [type, (payload) => onNotification(payload, type)]);
-            for (const [type, callback] of subscriptions) {
-                this.busService.subscribe(type, callback);
+            // `bus_service.subscribe(type, callback)` is the Odoo 19 API for
+            // the notifications the server sends by type: the generic bus
+            // event never carries them.
+            const subscriptions = [];
+            for (const type of toastTypes) {
+                subscriptions.push(
+                    this.busService.subscribe(type, (payload) => {
+                        const message =
+                            payload && toastTypes.includes(type)
+                                ? markup(payload.message)
+                                : null;
+                        if (message !== null && type === dangerType) {
+                            session.social_error = true;
+                        }
+                        this.handleSocialViewNotification(type, payload);
+                        if (type && message !== null) {
+                            this.notificationService.add(message, {
+                                type: payload.message_type,
+                                sticky: false,
+                            });
+                        }
+                    })
+                );
             }
-            onWillUnmount(() => {
-                for (const [type, callback] of subscriptions) {
-                    this.busService.unsubscribe(type, callback);
+            for (const type of ["social_need_update", "social_posts_updated"]) {
+                subscriptions.push(
+                    this.busService.subscribe(type, (payload) => {
+                        this.handleSocialViewNotification(type, payload);
+                    })
+                );
+            }
+            onWillDestroy(() => {
+                for (const unsubscribe of subscriptions) {
+                    if (typeof unsubscribe === "function") {
+                        unsubscribe();
+                    }
                 }
             });
         }

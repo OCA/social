@@ -1,3 +1,5 @@
+/** @odoo-module **/
+
 import {KanbanRenderer} from "@web/views/kanban/kanban_renderer";
 import {SocialKanbanRecord} from "./social_kanban_record.esm";
 import {SocialMediaMixin} from "../../app/social_media_mixin.esm";

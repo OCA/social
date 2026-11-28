@@ -1,6 +1,12 @@
+/** @odoo-module **/
+
 import {Component, onWillStart, onWillUpdateProps, useState} from "@odoo/owl";
 import {formatFloat} from "@web/views/fields/formatters";
 import {useBus} from "@web/core/utils/hooks";
+import {_t} from "@web/core/l10n/translation";
+
+// Odoo 19 exposes luxon as a global, not as a module.
+const {DateTime} = window.luxon;
 
 export class SocialAccount extends Component {
     static template = "social_media_base.SocialAccount";
@@ -99,5 +105,25 @@ export class SocialAccount extends Component {
      */
     formatEngagement(value) {
         return `${formatFloat((value || 0) * 100, {digits: [16, 2]})} %`;
+    }
+
+    /**
+     * When the figures of the account were last read, in relative terms.
+     *
+     * Dates come from the search as ``YYYY-MM-DD HH:MM:SS`` in UTC, which is
+     * the format the database keeps.
+     *
+     * @param {String} value
+     * @returns {String}
+     */
+    lastUpdateLabel(value) {
+        if (!value) {
+            return "";
+        }
+        const date = DateTime.fromSQL(value, {zone: "utc"}).toLocal();
+        if (!date.isValid) {
+            return "";
+        }
+        return _t("Updated %(time)s", {time: date.toRelative()});
     }
 }

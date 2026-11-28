@@ -131,7 +131,9 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         self.assertEqual(shared_post.account_ids, other_account)
 
     def test_remove_social_media(self):
-        with self._fake_media_types(other_social=self.social_media_id):
+        field = self.social_media_id._fields["media_type"]
+        with patch.object(field, "_selection", new={"other_social": "Other social"}):
+            self.social_media_id.write({"media_type": "other_social"})
             self.social_account_id.write(
                 {
                     "remote_ref": "remote-account-1",
@@ -148,7 +150,9 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         self.assertEqual(self.social_account_id.remote_ref, "remote-account-1")
 
     def test_remove_social_media_other_media_untouched(self):
-        with self._fake_media_types(other_social=self.social_media_id):
+        field = self.social_media_id._fields["media_type"]
+        with patch.object(field, "_selection", new={"other_social": "Other social"}):
+            self.social_media_id.write({"media_type": "other_social"})
             self.social_account_id.write({"access_token": "token"})
             self.SocialAccount._remove_social_media("not_this_media")
         self.assertTrue(self.social_account_id.active)
@@ -247,6 +251,7 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
         fake_fields = {
             "other_social": "https://www.failed.com/company/id1234account/admin"
         }
+        field = self.social_media_id._fields["media_type"]
         with (
             patch.object(
                 type(self.social_account_id),
@@ -254,8 +259,13 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 autospec=True,
                 return_value=fake_fields,
             ),
-            self._fake_media_types(other_social=self.social_media_id),
+            patch.object(
+                field,
+                "_selection",
+                new={"other_social": "Other social"},
+            ),
         ):
+            self.social_media_id.write({"media_type": "other_social"})
             self.assertEqual(
                 self.social_account_id.web_url,
                 "https://www.failed.com/company/id1234account/admin",
@@ -587,6 +597,48 @@ class TestSocialAccountBase(TestSocialMediaBaseCommon):
                 "social_need_update", payload_accounts=False
             )
         self.assertNotIn("accounts", mock_sendone.call_args[0][3])
+
+    def test_media_public_url_signs_the_attachment(self):
+        post = self.SocialPost.create({"message": "Media"})
+        media = self.env["ir.attachment"].create(
+            {
+                "name": "photo.png",
+                "datas": "dGVzdA==",
+                "res_model": "social.post",
+                "res_id": post.id,
+            }
+        )
+        url = self.social_account_id._media_public_url(
+            "/social_facebook/get_image", media
+        )
+        base = self.social_account_id.get_base_url().rstrip("/")
+        self.assertTrue(
+            url.startswith(f"{base}/social_facebook/get_image/{media.id}?token=")
+        )
+
+    def test_trigger_initial_sync_triggers_the_cron(self):
+        cron = self.env.ref("social_media_base.refresh_post_statistics_job")
+        with patch.object(type(cron), "_trigger", autospec=True) as mock_trigger:
+            self.social_account_id._trigger_initial_sync()
+        mock_trigger.assert_called_once()
+
+    def test_flagging_the_credentials_twice_keeps_one_notice(self):
+        with patch.object(
+            type(self.social_account_id), "_need_update", autospec=True
+        ) as mock_need:
+            self.social_account_id._flag_credentials_expired("revoked")
+            self.social_account_id._flag_credentials_expired("revoked again")
+        mock_need.assert_called_once()
+
+    def test_dark_mode_preference_is_stored_per_user(self):
+        Users = self.env["res.users"]
+        self.assertFalse(Users.get_social_dark_mode())
+        self.assertTrue(Users.set_social_dark_mode(True))
+        self.assertTrue(Users.get_social_dark_mode())
+
+    def test_trigger_initial_sync_without_the_cron_does_nothing(self):
+        self.env.ref("social_media_base.refresh_post_statistics_job").unlink()
+        self.social_account_id._trigger_initial_sync()
 
 
 @tagged("post_install", "-at_install")
